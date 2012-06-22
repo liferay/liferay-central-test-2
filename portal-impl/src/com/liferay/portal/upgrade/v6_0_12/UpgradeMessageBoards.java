@@ -17,8 +17,10 @@ package com.liferay.portal.upgrade.v6_0_12;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.MBMessage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +28,7 @@ import java.sql.ResultSet;
 
 /**
  * @author Shuyang Zhou
+ * @author Kalman Vincze
  */
 public class UpgradeMessageBoards extends UpgradeProcess {
 
@@ -33,7 +36,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		updateMessage();
 		updateThread();
-		updateThumb();
+		updateRatings();
 	}
 
 	protected void updateMessage() throws Exception {
@@ -87,13 +90,52 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
+	protected void updateRatings() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		long newClassNameId = PortalUtil.getClassNameId(
+			MBDiscussion.class.getName());
+		long oldClassNameId = PortalUtil.getClassNameId(
+			MBMessage.class.getName());
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select MBMessage.messageId " +
+					"from MBMessage where MBMessage.categoryId = " +
+						MBCategoryConstants.DISCUSSION_CATEGORY_ID);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long classPK = rs.getLong("messageId");
+
+				runSQL(
+					"update RatingsStats set classNameId = " + newClassNameId +
+						" where classNameId = " + oldClassNameId +
+						" and classPK = " + classPK);
+
+				runSQL(
+					"update RatingsEntry set classNameId = " + newClassNameId +
+						" where classNameId = " + oldClassNameId +
+						" and classPK = " + classPK);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void updateThread() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select MBThread.threadId, MBMessage.companyId, " +
@@ -118,42 +160,4 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 	}
 
-	protected void updateThumb() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		long newClassNameId = ClassNameLocalServiceUtil.getClassNameId(
-			"com.liferay.portlet.messageboards.model.MBDiscussion");
-		long oldClassNameId = ClassNameLocalServiceUtil.getClassNameId(
-			"com.liferay.portlet.messageboards.model.MBMessage");
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select MBMessage.messageId" +
-					" from MBMessage where MBMessage.categoryId = " +
-						MBCategoryConstants.DISCUSSION_CATEGORY_ID);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long classPK = rs.getLong("messageId");
-
-				runSQL(
-					"update RatingsStats set classNameId = " + newClassNameId +
-						" where classNameId = " + oldClassNameId +
-							" and classPK = " + classPK);
-
-				runSQL(
-					"update RatingsEntry set classNameId = " + newClassNameId +
-						" where classNameId = " + oldClassNameId +
-							" and classPK = " + classPK);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
 }
