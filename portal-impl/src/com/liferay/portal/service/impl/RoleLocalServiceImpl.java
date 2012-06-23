@@ -40,7 +40,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ResourceAction;
-import com.liferay.portal.model.ResourceBlock;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
@@ -463,21 +462,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public List<Role> getResourceBlockRoles(
 			long resourceBlockId, String className, String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		ResourceBlock resourceBlock =
-			resourceBlockLocalService.getResourceBlock(resourceBlockId);
-
-		return roleFinder.findByC_R_C_A(
-			resourceBlock.getCompanyId(), resourceBlockId, className, actionId);
-	}
-
-	public List<Role> getResourceBlockRoles(
-			ResourceBlock resourceBlock, String className, String actionId)
-		throws PortalException, SystemException {
-
-		return getResourceBlockRoles(
-			resourceBlock.getResourceBlockId(), className, actionId);
+		return roleFinder.findByR_N_A(resourceBlockId, className, actionId);
 	}
 
 	/**
@@ -517,7 +504,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public List<Role> getResourceRoles(
 			long companyId, String name, int scope, String primKey,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return roleFinder.findByC_N_S_P_A(
 			companyId, name, scope, primKey, actionId);
