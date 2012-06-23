@@ -748,6 +748,34 @@ public class SourceFormatter {
 		return content;
 	}
 
+	private static String _fixDataAccessConnection(
+		String className, String content) {
+
+		int x = content.indexOf("package ");
+
+		int y = content.indexOf(CharPool.SEMICOLON, x);
+
+		if ((x == -1) || (y == -1)) {
+			return content;
+		}
+
+		String packageName = content.substring(x + 8, y);
+
+		if (!packageName.startsWith("com.liferay.portal.kernel.upgrade") &&
+			!packageName.startsWith("com.liferay.portal.kernel.verify") &&
+			!packageName.startsWith("com.liferay.portal.upgrade") &&
+			!packageName.startsWith("com.liferay.portal.verify")) {
+
+			return content;
+		}
+
+		content = StringUtil.replace(
+			content, "DataAccess.getConnection",
+			"DataAccess.getUpgradeOptimizedConnection");
+
+		return content;
+	}
+
 	private static void _formatAntXML() throws DocumentException, IOException {
 		String basedir = "./";
 
@@ -826,34 +854,6 @@ public class SourceFormatter {
 				_sourceFormatterHelper.printError(fileName, file);
 			}
 		}
-	}
-
-	private static String _fixDataAccessConnection(
-		String className, String content) {
-
-		int x = content.indexOf("package ");
-
-		int y = content.indexOf(CharPool.SEMICOLON, x);
-
-		if ((x == -1) || (y == -1)) {
-			return content;
-		}
-
-		String packageName = content.substring(x + 8, y);
-
-		if (!packageName.startsWith("com.liferay.portal.kernel.upgrade") &&
-			!packageName.startsWith("com.liferay.portal.upgrade") &&
-			!packageName.startsWith("com.liferay.portal.kernel.verify") &&
-			!packageName.startsWith("com.liferay.portal.verify")) {
-
-			return content;
-		}
-
-		content = StringUtil.replace(
-			content, "DataAccess.getConnection",
-			"DataAccess.getUpgradeOptimizedConnection");
-
-		return content;
 	}
 
 	private static String _formatDDLStructuresXML(String content)
