@@ -126,9 +126,12 @@ public class DataAccess {
 			return con;
 		}
 
-		return (Connection) ProxyUtil.newProxyInstance(
-			Thread.currentThread().getContextClassLoader(),
-			new Class[] { Connection.class },
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		return (Connection)ProxyUtil.newProxyInstance(
+			classLoader, new Class[] {Connection.class},
 			new UpgradeOptimizedConnectionHandler(con));
 	}
 

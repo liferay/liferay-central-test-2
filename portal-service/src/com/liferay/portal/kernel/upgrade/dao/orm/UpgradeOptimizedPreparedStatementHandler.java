@@ -31,9 +31,9 @@ public class UpgradeOptimizedPreparedStatementHandler
 	implements InvocationHandler {
 
 	public UpgradeOptimizedPreparedStatementHandler(
-		PreparedStatement statement) {
+		PreparedStatement preparedStatement) {
 
-		_statement = statement;
+		_preparedStatement = preparedStatement;
 	}
 
 	public Object invoke(Object proxy, Method method, Object[] arguments)
@@ -46,7 +46,7 @@ public class UpgradeOptimizedPreparedStatementHandler
 				return executeQuery();
 			}
 
-			return method.invoke(_statement, arguments);
+			return method.invoke(_preparedStatement, arguments);
 		}
 		catch (InvocationTargetException ite) {
 			throw ite.getTargetException();
@@ -54,14 +54,17 @@ public class UpgradeOptimizedPreparedStatementHandler
 	}
 
 	protected ResultSet executeQuery() throws SQLException {
-		ResultSet resultSet = _statement.executeQuery();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		ResultSet resultSet = _preparedStatement.executeQuery();
 
 		return (ResultSet) ProxyUtil.newProxyInstance(
-			Thread.currentThread().getContextClassLoader(),
-			new Class[] { ResultSet.class },
+			classLoader, new Class[] {ResultSet.class},
 			new UpgradeOptimizedResultSetHandler(resultSet));
 	}
 
-	private PreparedStatement _statement;
+	private PreparedStatement _preparedStatement;
 
 }

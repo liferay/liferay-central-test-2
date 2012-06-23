@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.upgrade.dao.orm;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -45,16 +43,14 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 
 		_columnNames.add(StringPool.BLANK);
 
-		ResultSetMetaData metaData = _resultSet.getMetaData();
+		ResultSetMetaData resultSetMetaData = _resultSet.getMetaData();
 
-		int columnCount = metaData.getColumnCount();
-
-		for (int i = 1; i <= columnCount; i++) {
-			int columnType = metaData.getColumnType(i);
+		for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+			int columnType = resultSetMetaData.getColumnType(i);
 
 			_columnTypes.put(i, columnType);
 
-			String columnName = metaData.getColumnName(i);
+			String columnName = resultSetMetaData.getColumnName(i);
 
 			_columnNames.add(columnName);
 
@@ -69,14 +65,19 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 
 		String methodName = method.getName();
 
-		if (methodName.equals("next")) {
+		if (methodName.equals("close")) {
+			_resultSet.close();
+
+			return null;
+		}
+		else if (methodName.equals("next")) {
 			if (_resultSet.isBeforeFirst()) {
 				_next = _resultSet.next();
 			}
 
 			Object returnValue = _next;
 
-			cacheColumnValues();
+			_cacheColumnValues();
 
 			if (_next) {
 				_next = _resultSet.next();
@@ -84,27 +85,20 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 
 			return returnValue;
 		}
-		else if (methodName.equals("close")) {
-			_resultSet.close();
-
-			return null;
-		}
 		else {
 			Object column = arguments[0];
 
 			if (column instanceof String) {
-				column = ((String) column).toLowerCase();
-			}
+				String columnString = (String)column;
 
-			if (column instanceof String) {
-				column = ((String) column).toLowerCase();
+				column = columnString.toLowerCase();
 			}
 
 			return _columnValues.get(column);
 		}
 	}
 
-	protected void cacheColumnValues() throws SQLException, UpgradeException {
+	private void _cacheColumnValues() throws Exception {
 		_columnValues.clear();
 
 		if (!_next) {
@@ -126,9 +120,7 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		}
 	}
 
-	private Object _getValue(String name, Integer type)
-		throws SQLException, UpgradeException {
-
+	private Object _getValue(String name, Integer type) throws Exception {
 		Object value = null;
 
 		int t = type.intValue();
@@ -171,13 +163,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		return value;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		UpgradeOptimizedResultSetHandler.class);
-
 	private List<String> _columnNames = new ArrayList<String>();
 	private Map<Object, Integer> _columnTypes = new HashMap<Object, Integer>();
 	private Map<Object, Object> _columnValues = new HashMap<Object, Object>();
-
 	private boolean _next;
 	private ResultSet _resultSet;
 
