@@ -30,9 +30,7 @@ import java.sql.SQLException;
  */
 public class UpgradeOptimizedConnectionHandler implements InvocationHandler {
 
-	public UpgradeOptimizedConnectionHandler(Connection connection)
-		throws SQLException {
-
+	public UpgradeOptimizedConnectionHandler(Connection connection) {
 		_connection = connection;
 	}
 
@@ -45,7 +43,7 @@ public class UpgradeOptimizedConnectionHandler implements InvocationHandler {
 			if (methodName.equals("prepareStatement") &&
 				(arguments.length == 1)) {
 
-				return prepareStatement((String) arguments[0]);
+				return prepareStatement((String)arguments[0]);
 			}
 
 			return method.invoke(_connection, arguments);
@@ -58,15 +56,16 @@ public class UpgradeOptimizedConnectionHandler implements InvocationHandler {
 	protected PreparedStatement prepareStatement(String sql)
 		throws SQLException {
 
-		PreparedStatement statement =
-			_connection.prepareStatement(
-				sql, ResultSet.TYPE_SCROLL_SENSITIVE,
-				ResultSet.CONCUR_UPDATABLE);
+		Thread currentThread = Thread.currentThread();
 
-		return (PreparedStatement) ProxyUtil.newProxyInstance(
-			Thread.currentThread().getContextClassLoader(),
-			new Class[] { PreparedStatement.class },
-			new UpgradeOptimizedPreparedStatementHandler(statement));
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		PreparedStatement preparedStatement = _connection.prepareStatement(
+			sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+		return (PreparedStatement)ProxyUtil.newProxyInstance(
+			classLoader, new Class[] {PreparedStatement.class},
+			new UpgradeOptimizedPreparedStatementHandler(preparedStatement));
 	}
 
 	private Connection _connection;
