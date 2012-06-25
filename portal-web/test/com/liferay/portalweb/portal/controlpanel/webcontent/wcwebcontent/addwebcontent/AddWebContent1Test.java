@@ -84,6 +84,22 @@ public class AddWebContent1Test extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isVisible("//a[@class='cke_button_source cke_on']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isVisible(
 							"//td[@id='cke_contents__15__15_structure_el_TextAreaField_content']/textarea")) {
 					break;
