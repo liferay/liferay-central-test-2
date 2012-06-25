@@ -951,11 +951,11 @@ public class StagingImpl implements Staging {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
+		lockGroup(userId, targetGroupId);
+
 		parameterMap.put(
 			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
 			new String[] {Boolean.TRUE.toString()});
-
-		lockGroup(userId, targetGroupId);
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,
@@ -1665,12 +1665,11 @@ public class StagingImpl implements Staging {
 
 			throw new DuplicateLockException(lock);
 		}
-		else {
-			LockLocalServiceUtil.lock(
-				userId, Staging.class.getName(), String.valueOf(targetGroupId),
-				StagingImpl.class.getName(), false,
-				StagingConstants.LOCK_EXPIRATION_TIME);
-		}
+
+		LockLocalServiceUtil.lock(
+			userId, Staging.class.getName(), String.valueOf(targetGroupId),
+			StagingImpl.class.getName(), false,
+			StagingConstants.LOCK_EXPIRATION_TIME);
 	}
 
 	protected void publishLayouts(
