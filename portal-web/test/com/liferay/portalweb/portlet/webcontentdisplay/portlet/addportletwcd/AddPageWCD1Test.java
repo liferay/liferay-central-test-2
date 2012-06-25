@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.webcontentdisplay.webcontent.addportletscopedefaultwcwebcontentwcd;
+package com.liferay.portalweb.portlet.webcontentdisplay.portlet.addportletwcd;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,12 +20,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPageWCD3Test extends BaseTestCase {
-	public void testAddPageWCD3() throws Exception {
+public class AddPageWCD1Test extends BaseTestCase {
+	public void testAddPageWCD1() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-		selenium.clickAt("//nav[@id='navigation']",
-			RuntimeVariables.replace("Navigation"));
+		selenium.clickAt("//div[@id='dockbar']",
+			RuntimeVariables.replace("Dockbar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -33,7 +33,8 @@ public class AddPageWCD3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//a[@id='addPage']")) {
+				if (selenium.isElementPresent(
+							"//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]")) {
 					break;
 				}
 			}
@@ -43,8 +44,29 @@ public class AddPageWCD3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//a[@id='addPage']",
-			RuntimeVariables.replace("Add Page"));
+		assertEquals(RuntimeVariables.replace("Add"),
+			selenium.getText("//li[@id='_145_addContent']/a/span"));
+		selenium.mouseOver("//li[@id='_145_addContent']/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//a[@id='addPage']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Page"),
+			selenium.getText("//a[@id='addPage']"));
+		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace("Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -63,7 +85,7 @@ public class AddPageWCD3Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@type='text']",
-			RuntimeVariables.replace("Web Content Display Test Page3"));
+			RuntimeVariables.replace("Web Content Display Test Page1"));
 		selenium.clickAt("//button[@id='save']",
 			RuntimeVariables.replace("Save"));
 
@@ -73,7 +95,7 @@ public class AddPageWCD3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Web Content Display Test Page3")) {
+				if (selenium.isVisible("link=Web Content Display Test Page1")) {
 					break;
 				}
 			}
@@ -83,8 +105,8 @@ public class AddPageWCD3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Web Content Display Test Page3",
-			RuntimeVariables.replace("Web Content Display Test Page3"));
+		selenium.clickAt("link=Web Content Display Test Page1",
+			RuntimeVariables.replace("Web Content Display Test Page1"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 	}
