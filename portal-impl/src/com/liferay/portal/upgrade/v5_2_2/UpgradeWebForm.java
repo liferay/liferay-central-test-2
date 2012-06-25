@@ -63,7 +63,7 @@ public class UpgradeWebForm extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select classNameId from ClassName_ where value = ?");

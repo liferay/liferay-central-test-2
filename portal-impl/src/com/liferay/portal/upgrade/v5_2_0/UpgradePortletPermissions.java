@@ -91,7 +91,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(_GET_LAYOUT);
 
@@ -122,7 +122,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBundler sb = new StringBundler(7);
 
@@ -199,7 +199,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBundler sb = new StringBundler(4 * actionIds.length + 7);
 

@@ -58,7 +58,7 @@ public class UpgradeTags extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"insert into TagsEntry (entryId, groupId, companyId, userId, " +
@@ -98,7 +98,7 @@ public class UpgradeTags extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"insert into TagsProperty (propertyId, companyId, userId, " +
@@ -231,7 +231,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -283,7 +283,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select * from TagsEntry where entryId = ?",
@@ -333,7 +333,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select * from TagsProperty where entryId = ?",
@@ -370,7 +370,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select entryId from TagsEntry where groupId = 0");
@@ -427,7 +427,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select vocabularyId from TagsVocabulary where groupId = ? " +
@@ -464,7 +464,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select resourcePrimKey from JournalArticle where approved " +
@@ -493,7 +493,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -543,7 +543,7 @@ public class UpgradeTags extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select TA.assetId, TA.groupId, TA_TE.entryId from " +

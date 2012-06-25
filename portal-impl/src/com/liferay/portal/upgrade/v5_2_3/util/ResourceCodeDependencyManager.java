@@ -54,7 +54,7 @@ public class ResourceCodeDependencyManager extends DependencyManager {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select resourceId from Resource_ where codeId = ?");

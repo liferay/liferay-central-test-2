@@ -45,7 +45,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"insert into Resource_ (resourceId, codeId, primKey) values " +
@@ -212,7 +212,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBundler sb = new StringBundler(8);
 

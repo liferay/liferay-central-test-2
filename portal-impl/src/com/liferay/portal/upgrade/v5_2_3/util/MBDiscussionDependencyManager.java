@@ -62,7 +62,7 @@ public class MBDiscussionDependencyManager extends DependencyManager {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select count(*) from MBDiscussion where threadId = ?");

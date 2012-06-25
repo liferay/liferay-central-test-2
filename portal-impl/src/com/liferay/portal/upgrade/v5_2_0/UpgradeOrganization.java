@@ -70,7 +70,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select codeId from ResourceCode where companyId = ? and " +

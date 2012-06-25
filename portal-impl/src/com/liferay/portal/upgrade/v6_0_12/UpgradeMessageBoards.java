@@ -39,7 +39,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select messageId, body from MBMessage where (body like " +
@@ -70,7 +70,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"update MBMessage set body = ? where messageId = " + messageId);
@@ -90,7 +90,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select MBThread.threadId, MBMessage.companyId, " +

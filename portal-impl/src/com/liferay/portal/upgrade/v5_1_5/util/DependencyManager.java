@@ -64,7 +64,7 @@ public abstract class DependencyManager {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -104,7 +104,7 @@ public abstract class DependencyManager {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBuilder sb = new StringBuilder();
 

@@ -137,7 +137,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select primKey from Resource_ where primKey like ?");

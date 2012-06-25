@@ -54,7 +54,7 @@ public class ResourceDependencyManager extends DependencyManager {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select permissionId from Permission_ where resourceId = ?");

@@ -87,7 +87,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select id_, content, structureId from JournalArticle");
@@ -126,7 +126,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"update JournalArticle set content = ? where id_ = ?");

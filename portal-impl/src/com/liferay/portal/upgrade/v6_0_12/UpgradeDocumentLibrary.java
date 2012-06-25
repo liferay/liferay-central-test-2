@@ -47,7 +47,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select fileEntryId from DLFileEntry where groupId = ? and " +
@@ -76,7 +76,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select fileEntryId, extension from DLFileEntry");
@@ -106,7 +106,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select fileVersionId, extension from DLFileVersion");
@@ -136,7 +136,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select lockId, key_ from Lock_ where className = ?");

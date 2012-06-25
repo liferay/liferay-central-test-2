@@ -89,7 +89,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(_GET_GROUP);
 
@@ -119,7 +119,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(_GET_LAYOUT);
 
@@ -146,7 +146,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select distinct(groupId) from SocialActivity where groupId " +

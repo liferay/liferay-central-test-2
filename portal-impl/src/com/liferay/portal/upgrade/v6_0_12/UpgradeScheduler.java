@@ -97,7 +97,7 @@ public class UpgradeScheduler extends UpgradeProcess {
 		List<Object[]> arrays = new ArrayList<Object[]>();
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select JOB_NAME, JOB_GROUP, JOB_DATA from QUARTZ_JOB_DETAILS");
@@ -204,7 +204,7 @@ public class UpgradeScheduler extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"update QUARTZ_JOB_DETAILS set JOB_DATA = ? where JOB_NAME = " +

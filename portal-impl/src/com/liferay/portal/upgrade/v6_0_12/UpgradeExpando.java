@@ -43,7 +43,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"update ExpandoColumn set typeSettings = ? where columnId = ?");
@@ -64,7 +64,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select columnId, type_, typeSettings from ExpandoColumn " +
@@ -123,7 +123,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select columnId, typeSettings from ExpandoColumn where " +

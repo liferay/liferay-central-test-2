@@ -356,7 +356,7 @@ public class UpgradeDuplicates extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBuilder sb = new StringBuilder();
 
