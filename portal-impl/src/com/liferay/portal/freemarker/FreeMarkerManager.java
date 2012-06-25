@@ -159,13 +159,14 @@ public class FreeMarkerManager implements TemplateManager {
 
 		_configuration = new Configuration();
 
-		TemplateCache templateCache = new LiferayTemplateCache(_configuration);
-
 		try {
-			Field cache = ReflectionUtil.getDeclaredField(
+			Field field = ReflectionUtil.getDeclaredField(
 				Configuration.class, "cache");
 
-			cache.set(_configuration, templateCache);
+			TemplateCache templateCache = new LiferayTemplateCache(
+				_configuration);
+
+			field.set(_configuration, templateCache);
 		}
 		catch (Exception e) {
 			throw new TemplateException(
@@ -181,10 +182,10 @@ public class FreeMarkerManager implements TemplateManager {
 
 		try {
 			_configuration.setSetting(
+				"auto_import", PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY);
+			_configuration.setSetting(
 				"template_exception_handler",
 				PropsValues.FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER);
-			_configuration.setSetting(
-				"auto_import", PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY);
 		}
 		catch (Exception e) {
 			throw new TemplateException("Unable to init freemarker manager", e);
