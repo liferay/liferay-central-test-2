@@ -92,7 +92,7 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe[@id='_33_']")) {
+				if (selenium.isVisible("//iframe[@id='_33_signInDialog']")) {
 					break;
 				}
 			}
@@ -102,7 +102,7 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id='_33_']");
+		selenium.selectFrame("//iframe[@id='_33_signInDialog']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
