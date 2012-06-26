@@ -88,13 +88,13 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
-		Set<String> modulePathSet = new HashSet<String>(modulePaths.length);
+		Set<String> modulePathsSet = new HashSet<String>(modulePaths.length);
 
 		for (String path : modulePaths) {
-			modulePathSet.add(path);
+			modulePathsSet.add(path);
 		}
 
-		modulePaths = modulePathSet.toArray(new String[modulePathSet.size()]);
+		modulePaths = modulePathsSet.toArray(new String[modulePathsSet.size()]);
 
 		Arrays.sort(modulePaths);
 
@@ -105,7 +105,8 @@ public class ComboServlet extends HttpServlet {
 		if (!PropsValues.COMBO_CHECK_TIMESTAMP) {
 			modulePathsString = Arrays.toString(modulePaths);
 
-			bytesArray = (byte[][])_byteArraysCache.get(modulePathsString);
+			bytesArray = (byte[][])_bytesArrayPortalCache.get(
+				modulePathsString);
 		}
 
 		String firstModulePath = modulePaths[0];
@@ -125,7 +126,7 @@ public class ComboServlet extends HttpServlet {
 				}
 			}
 
-			if (!minifierType.equals("js") && !minifierType.equals("css")) {
+			if (!minifierType.equals("css") && !minifierType.equals("js")) {
 				minifierType = "js";
 			}
 
@@ -135,11 +136,10 @@ public class ComboServlet extends HttpServlet {
 
 			for (String modulePath : modulePaths) {
 				if (!validateModuleExtension(modulePath)) {
-					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-
 					response.setHeader(
 						HttpHeaders.CACHE_CONTROL,
 						HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 					return;
 				}
@@ -151,11 +151,10 @@ public class ComboServlet extends HttpServlet {
 						p.concat(modulePath), contextPath, StringPool.BLANK);
 
 					if (getFile(modulePath) == null) {
-						response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-
 						response.setHeader(
 							HttpHeaders.CACHE_CONTROL,
 							HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
+						response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 						return;
 					}
@@ -170,7 +169,7 @@ public class ComboServlet extends HttpServlet {
 			if ((modulePathsString != null) &&
 				!PropsValues.COMBO_CHECK_TIMESTAMP) {
 
-				_byteArraysCache.put(modulePathsString, bytesArray);
+				_bytesArrayPortalCache.put(modulePathsString, bytesArray);
 			}
 		}
 
@@ -238,7 +237,7 @@ public class ComboServlet extends HttpServlet {
 			minifierType);
 
 		FileContentBag fileContentBag =
-			(FileContentBag)_fileContentBagCache.get(fileContentKey);
+			(FileContentBag)_fileContentBagPortalCache.get(fileContentKey);
 
 		if ((fileContentBag != null) && !PropsValues.COMBO_CHECK_TIMESTAMP) {
 			return fileContentBag._fileContent;
@@ -257,7 +256,7 @@ public class ComboServlet extends HttpServlet {
 				return fileContentBag._fileContent;
 			}
 			else {
-				_fileContentBagCache.remove(fileContentKey);
+				_fileContentBagPortalCache.remove(fileContentKey);
 			}
 		}
 
@@ -308,7 +307,7 @@ public class ComboServlet extends HttpServlet {
 			int timeToLive =
 				(int)(PropsValues.COMBO_CHECK_TIMESTAMP_INTERVAL / Time.SECOND);
 
-			_fileContentBagCache.put(
+			_fileContentBagPortalCache.put(
 				fileContentKey, fileContentBag, timeToLive);
 		}
 
@@ -349,9 +348,9 @@ public class ComboServlet extends HttpServlet {
 
 	private static Log _log = LogFactoryUtil.getLog(ComboServlet.class);
 
-	private PortalCache _byteArraysCache = SingleVMPoolUtil.getCache(
+	private PortalCache _bytesArrayPortalCache = SingleVMPoolUtil.getCache(
 		ComboServlet.class.getName());
-	private PortalCache _fileContentBagCache = SingleVMPoolUtil.getCache(
+	private PortalCache _fileContentBagPortalCache = SingleVMPoolUtil.getCache(
 		FileContentBag.class.getName());
 
 	private static class FileContentBag implements Serializable {
