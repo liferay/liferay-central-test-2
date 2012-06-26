@@ -1652,22 +1652,20 @@ public class StagingImpl implements Staging {
 			GetterUtil.getString(group.getTypeSettingsProperty(param)));
 	}
 
-	protected void lockGroup(long userId, long targetGroupId) throws Exception {
+	protected void lockGroup(long userId, long groupId) throws Exception {
 		if (!PropsValues.STAGING_LOCK_ENABLED) {
 			return;
 		}
 
-		if (LockLocalServiceUtil.isLocked(
-				Staging.class.getName(), targetGroupId)) {
-
+		if (LockLocalServiceUtil.isLocked(Staging.class.getName(), groupId)) {
 			Lock lock = LockLocalServiceUtil.getLock(
-				Staging.class.getName(), targetGroupId);
+				Staging.class.getName(), groupId);
 
 			throw new DuplicateLockException(lock);
 		}
 
 		LockLocalServiceUtil.lock(
-			userId, Staging.class.getName(), String.valueOf(targetGroupId),
+			userId, Staging.class.getName(), String.valueOf(groupId),
 			StagingImpl.class.getName(), false,
 			StagingConstants.LOCK_EXPIRATION_TIME);
 	}
@@ -2110,12 +2108,12 @@ public class StagingImpl implements Staging {
 		return remoteAddress;
 	}
 
-	protected void unlockGroup(long targetGroupId) throws SystemException {
+	protected void unlockGroup(long groupId) throws SystemException {
 		if (!PropsValues.STAGING_LOCK_ENABLED) {
 			return;
 		}
 
-		LockLocalServiceUtil.unlock(Staging.class.getName(), targetGroupId);
+		LockLocalServiceUtil.unlock(Staging.class.getName(), groupId);
 	}
 
 	protected void updateGroupTypeSettingsProperties(
