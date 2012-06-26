@@ -417,19 +417,18 @@ public class JournalArticleLocalServiceImpl
 
 		for (JournalArticle article : articles) {
 			if (PropsValues.JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS) {
-				List<JournalArticle> versionedArticles =
+				List<JournalArticle> currentArticles =
 					journalArticlePersistence.findByG_A(
 						article.getGroupId(), article.getArticleId(),
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 						new ArticleVersionComparator(true));
 
-				for (JournalArticle versionedArticle : versionedArticles) {
-					versionedArticle.setExpirationDate(
+				for (JournalArticle currentArticle : currentArticles) {
+					currentArticle.setExpirationDate(
 						article.getExpirationDate());
-					versionedArticle.setStatus(
-						WorkflowConstants.STATUS_EXPIRED);
+					currentArticle.setStatus(WorkflowConstants.STATUS_EXPIRED);
 
-					journalArticlePersistence.update(versionedArticle, false);
+					journalArticlePersistence.update(currentArticle, false);
 				}
 			}
 			else {
