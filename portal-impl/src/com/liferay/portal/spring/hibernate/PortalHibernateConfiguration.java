@@ -37,7 +37,6 @@ import javassist.util.proxy.ProxyFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-
 import org.hibernate.dialect.Dialect;
 
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
@@ -110,9 +109,9 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 				setDB(dialect);
 
-				String dialectName = dialect.getClass().getName();
+				Class<?> clazz = dialect.getClass();
 
-				configuration.setProperty("hibernate.dialect", dialectName);
+				configuration.setProperty("hibernate.dialect", clazz.getName());
 			}
 
 			DB db = DBFactoryUtil.getDB();
