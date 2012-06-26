@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
@@ -44,6 +45,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVStorage;
@@ -792,6 +794,34 @@ public class LayoutAction extends Action {
 			PermissionThreadLocal.getPermissionChecker();
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			if (!PortalUtil.isAllowAddPortletDefaultResource(
+					request, portlet)) {
+
+				String url = null;
+
+				LastPath lastPath = (LastPath)request.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					StringBundler sb = new StringBundler(3);
+
+					sb.append(PortalUtil.getPortalURL(request));
+					sb.append(lastPath.getContextPath());
+					sb.append(lastPath.getPath());
+
+					url = sb.toString();
+				}
+				else {
+					url = String.valueOf(request.getRequestURI());
+				}
+
+				_log.error(
+					"Reject processAction for " + url + " on " +
+						portlet.getPortletId());
+
+				return portlet;
+			}
+
 			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 				portlet, servletContext);
 
@@ -907,6 +937,34 @@ public class LayoutAction extends Action {
 		}
 
 		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			if (!PortalUtil.isAllowAddPortletDefaultResource(
+					request, portlet)) {
+
+				String url = null;
+
+				LastPath lastPath = (LastPath)request.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					StringBundler sb = new StringBundler(3);
+
+					sb.append(PortalUtil.getPortalURL(request));
+					sb.append(lastPath.getContextPath());
+					sb.append(lastPath.getPath());
+
+					url = sb.toString();
+				}
+				else {
+					url = String.valueOf(request.getRequestURI());
+				}
+
+				_log.error(
+					"Reject serveResource for " + url + " on " +
+						portlet.getPortletId());
+
+				return portlet;
+			}
+
 			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 				portlet, servletContext);
 
