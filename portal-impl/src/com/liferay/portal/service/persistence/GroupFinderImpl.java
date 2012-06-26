@@ -32,6 +32,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
+import com.liferay.portal.service.impl.GroupLocalServiceImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
@@ -411,11 +412,6 @@ public class GroupFinderImpl
 		if (sql == null) {
 			String findByC_C_SQL = CustomSQLUtil.get(FIND_BY_C_C);
 
-			if (obc instanceof GroupNameComparator) {
-				findByC_C_SQL = StringUtil.replace(
-					findByC_C_SQL, _GROUP_NAME_SQL, _REPLACE_GROUP_NAME_SQL);
-			}
-
 			if (params.get("active") == Boolean.TRUE) {
 				findByC_C_SQL = StringUtil.replace(
 					findByC_C_SQL, "(Group_.liveGroupId = 0) AND",
@@ -428,6 +424,7 @@ public class GroupFinderImpl
 					StringUtil.merge(
 						_getGroupOrganizationClassNameIds(),
 						" OR Group_.classNameId = ")));
+			findByC_C_SQL = replaceOrderBy(findByC_C_SQL, obc);
 
 			StringBundler sb = new StringBundler();
 
@@ -616,11 +613,6 @@ public class GroupFinderImpl
 		if (sql == null) {
 			String findByC_N_D_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
 
-			if (obc instanceof GroupNameComparator) {
-				findByC_N_D_SQL = StringUtil.replace(
-					findByC_N_D_SQL, _GROUP_NAME_SQL, _REPLACE_GROUP_NAME_SQL);
-			}
-
 			if (classNameIds == null) {
 				findByC_N_D_SQL = StringUtil.replace(
 					findByC_N_D_SQL, "AND (Group_.classNameId = ?)",
@@ -633,6 +625,8 @@ public class GroupFinderImpl
 						StringUtil.merge(
 							classNameIds, " OR Group_.classNameId = ")));
 			}
+
+			findByC_N_D_SQL = replaceOrderBy(findByC_N_D_SQL, obc);
 
 			StringBundler sb = new StringBundler();
 
@@ -929,6 +923,18 @@ public class GroupFinderImpl
 		}
 
 		return resultSQL;
+	}
+
+	protected String replaceOrderBy(String sql, OrderByComparator obc) {
+		if (obc instanceof GroupNameComparator) {
+			sql = StringUtil.replace(
+				sql, "Group_.name AS groupName",
+				"REPLACE(Group_.name, '" +
+					GroupLocalServiceImpl.ORGANIZATION_NAME_SUFFIX +
+						"', '') AS groupName");
+		}
+
+		return sql;
 	}
 
 	protected void setJoin(
@@ -1229,11 +1235,6 @@ public class GroupFinderImpl
 
 		return join;
 	}
-
-	private static final String _GROUP_NAME_SQL = "Group_.name AS groupName";
-
-	private static final String _REPLACE_GROUP_NAME_SQL =
-		"replace(Group_.name, 'LFR_ORGANIZATION', '') as groupName";
 
 	private LinkedHashMap<String, Object> _emptyLinkedHashMap =
 		new LinkedHashMap<String, Object>(0);
