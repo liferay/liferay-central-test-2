@@ -107,6 +107,11 @@ public interface AssetEntryService extends BaseService {
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #updateEntry(long, String, long, String, long, long[],
+	String[], boolean, Date, Date, Date, String, String, String,
+	String, String, String, int, int, Integer, boolean)}
+	*/
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String classUuid, long classTypeId, long[] categoryIds,

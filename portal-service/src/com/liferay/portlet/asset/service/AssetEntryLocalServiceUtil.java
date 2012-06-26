@@ -485,12 +485,9 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {
-	* @link #updateEntry(
-	long, long, String, long, String, long, long[], String[], boolean,
-	Date, Date, Date, String, String, String, String, String, String,
-	int, int, Integer, boolean)
-	}
+	* @deprecated {@link #updateEntry(long, long, String, long, String, long,
+	long[], String[], boolean, Date, Date, Date, String, String,
+	String, String, String, String, int, int, Integer, boolean)}
 	*/
 	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		long userId, long groupId, java.lang.String className, long classPK,
