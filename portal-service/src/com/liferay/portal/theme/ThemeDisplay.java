@@ -40,6 +40,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 
 import java.io.Serializable;
@@ -861,8 +862,17 @@ public class ThemeDisplay implements Serializable {
 
 			String host = getCDNHost();
 
+			String portalURL = null;
+
+			try {
+				portalURL = PortalUtil.getPortalURL(getLayout(), this);
+			}
+			catch (Exception e) {
+				portalURL = getPortalURL();
+			}
+
 			if (Validator.isNull(host)) {
-				host = getPortalURL();
+				host = portalURL;
 			}
 
 			setPathColorSchemeImages(
@@ -872,7 +882,7 @@ public class ThemeDisplay implements Serializable {
 			String dynamicResourcesHost = getCDNDynamicResourcesHost();
 
 			if (Validator.isNull(dynamicResourcesHost)) {
-				dynamicResourcesHost = getPortalURL();
+				dynamicResourcesHost = portalURL;
 			}
 
 			setPathThemeCss(
