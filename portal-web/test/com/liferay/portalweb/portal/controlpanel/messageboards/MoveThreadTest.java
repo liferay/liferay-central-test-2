@@ -119,7 +119,7 @@ public class MoveThreadTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//textarea[@id='_162_editor' and @style='display: none;']")) {
+									"//textarea[@id='_162_editor' and contains(@style,'display: none;')]")) {
 							break;
 						}
 					}
@@ -168,7 +168,7 @@ public class MoveThreadTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//textarea[@id='_162_editor' and @style='display: none;']")) {
+									"//textarea[@id='_162_editor' and contains(@style,'display: none;')]")) {
 							break;
 						}
 					}
