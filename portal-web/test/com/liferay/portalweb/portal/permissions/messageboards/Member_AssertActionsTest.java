@@ -48,8 +48,28 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
 		assertEquals(RuntimeVariables.replace("RSS"),
 			selenium.getText("//div[2]/div/span/a/span[1]"));
+		Thread.sleep(5000);
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Subscribe")
+										.equals(selenium.getText(
+								"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Subscribe"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
