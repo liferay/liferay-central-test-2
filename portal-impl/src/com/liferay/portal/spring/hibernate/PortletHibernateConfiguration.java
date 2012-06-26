@@ -27,11 +27,6 @@ public class PortletHibernateConfiguration
 	extends PortalHibernateConfiguration {
 
 	@Override
-	protected void setDB(Dialect dialect) {
-		// Plugins should not change the DB reference in the portal
-	}
-
-	@Override
 	protected ClassLoader getConfigurationClassLoader() {
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
@@ -48,6 +43,13 @@ public class PortletHibernateConfiguration
 	@Override
 	protected String[] getConfigurationResources() {
 		return new String[] {"META-INF/portlet-hbm.xml"};
+	}
+
+	@Override
+	protected void setDB(Dialect dialect) {
+
+		// Plugins should not update the default DB reference
+
 	}
 
 }
