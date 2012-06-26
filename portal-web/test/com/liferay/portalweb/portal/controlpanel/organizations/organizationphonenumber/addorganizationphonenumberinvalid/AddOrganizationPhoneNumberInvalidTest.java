@@ -128,7 +128,7 @@ public class AddOrganizationPhoneNumberInvalidTest extends BaseTestCase {
 		selenium.type("//input[@id='_125_phoneNumber0']",
 			RuntimeVariables.replace("Selenium"));
 		selenium.type("//input[@id='_125_phoneExtension0']",
-			RuntimeVariables.replace("321"));
+			RuntimeVariables.replace("test"));
 		selenium.select("//select[@id='_125_phoneTypeId0']",
 			RuntimeVariables.replace("label=Toll Free"));
 		selenium.clickAt("//input[@id='_125_phonePrimary0']",

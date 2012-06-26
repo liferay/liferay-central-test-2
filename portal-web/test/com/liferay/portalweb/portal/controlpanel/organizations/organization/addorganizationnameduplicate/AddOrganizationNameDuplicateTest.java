@@ -79,7 +79,7 @@ public class AddOrganizationNameDuplicateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_125_name']",
-			RuntimeVariables.replace("Selenium"));
+			RuntimeVariables.replace("Organization Name"));
 		selenium.select("//select[@id='_125_type']",
 			RuntimeVariables.replace("label=Regular Organization"));
 		selenium.clickAt("//input[@value='Save']",

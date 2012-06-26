@@ -35,12 +35,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Users and Organizations</td>
-	<td>Users and Organizations</td>
+	<td>link=Sites</td>
+	<td>Sites</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//input[@name='_125_keywords']</td>
+	<td>//input[@id='_134_name']</td>
 	<td>Selenium</td>
 </tr>
 <tr>
@@ -49,18 +49,18 @@
 	<td>Search</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Sites</td>
-	<td>Sites</td>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Selenium')]/td[1]/a</td>
+	<td>Selenium<br />Belongs to an organization of type Regular Organization.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>//tr[contains(.,'Selenium')]/td/span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>//tr[contains(.,'Selenium')]/td/span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>

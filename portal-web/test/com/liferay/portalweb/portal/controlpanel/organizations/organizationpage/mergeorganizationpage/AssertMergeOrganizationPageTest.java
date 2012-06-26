@@ -67,7 +67,7 @@ public class AssertMergeOrganizationPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Selenium')]")) {
 					break;
 				}
 			}
@@ -79,9 +79,9 @@ public class AssertMergeOrganizationPageTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Selenium"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Selenium')]"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Selenium')]"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 
