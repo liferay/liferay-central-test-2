@@ -76,16 +76,18 @@ public abstract class BaseWebDriverImpl
 		char[] chars = text.toCharArray();
 
 		for (char c : chars) {
-			boolean isDigit = false;
+			boolean digit = false;
 
 			if (Validator.isDigit(c)) {
 				sb.append(c);
 
-				isDigit = true;
+				digit = true;
 			}
 
-			if (Validator.isNotNull(sb.toString()) && (isDigit == false)) {
-				break;
+			String s = sb.toString();
+
+			if (Validator.isNotNull(s) && !digit) {
+				return s;
 			}
 		}
 
@@ -95,9 +97,7 @@ public abstract class BaseWebDriverImpl
 	public String getFirstNumberIncrement(String locator) {
 		String firstNumber = getFirstNumber(locator);
 
-		int firstNumberIncremented = GetterUtil.getInteger(firstNumber) + 1;
-
-		return StringUtil.valueOf(firstNumberIncremented);
+		return StringUtil.valueOf(GetterUtil.getInteger(firstNumber) + 1);
 	}
 
 	public boolean isPartialText(String locator, String value) {
