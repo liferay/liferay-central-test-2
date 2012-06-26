@@ -590,12 +590,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {
-	 * 	@link #updateEntry(
-	 * 		long, long, String, long, String, long, long[], String[], boolean,
-	 * 		Date, Date, Date, String, String, String, String, String, String,
-	 * 		int, int, Integer, boolean)
-	 * }
+	 * @deprecated {@link #updateEntry(long, long, String, long, String, long,
+	 *             long[], String[], boolean, Date, Date, Date, String, String,
+	 *             String, String, String, String, int, int, Integer, boolean)}
 	 */
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
@@ -834,28 +831,29 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public AssetEntry updateEntry(
-		String className, long classPK, Date publishDate, Date expirationDate,
-		boolean visible)
-	throws PortalException, SystemException {
+			String className, long classPK, Date publishDate,
+			Date expirationDate, boolean visible)
+		throws PortalException, SystemException {
 
-	long classNameId = PortalUtil.getClassNameId(className);
+		long classNameId = PortalUtil.getClassNameId(className);
 
-	AssetEntry entry = assetEntryPersistence.findByC_C(classNameId, classPK);
+		AssetEntry entry = assetEntryPersistence.findByC_C(
+			classNameId, classPK);
 
-	if (expirationDate != null) {
-		entry.setExpirationDate(expirationDate);
+		if (expirationDate != null) {
+			entry.setExpirationDate(expirationDate);
+		}
+
+		entry.setPublishDate(publishDate);
+
+		if (visible != entry.isVisible()) {
+			updateVisible(entry, visible);
+		}
+
+		assetEntryPersistence.update(entry, false);
+
+		return entry;
 	}
-
-	entry.setPublishDate(publishDate);
-
-	if (visible != entry.isVisible()) {
-		updateVisible(entry, visible);
-	}
-
-	assetEntryPersistence.update(entry, false);
-
-	return entry;
-}
 
 	public AssetEntry updateVisible(
 			String className, long classPK, boolean visible)
