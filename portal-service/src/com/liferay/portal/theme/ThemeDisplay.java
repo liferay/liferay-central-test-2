@@ -878,7 +878,7 @@ public class ThemeDisplay
 
 			String portalURL = getPortalURL();
 
-			if (this.getServerName() != null) {
+			if (getServerName() != null) {
 				try {
 					portalURL = PortalUtil.getPortalURL(getLayout(), this);
 				}
