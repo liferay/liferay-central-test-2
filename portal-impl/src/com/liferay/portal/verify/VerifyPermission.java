@@ -226,29 +226,16 @@ public class VerifyPermission
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(21);
+			StringBundler sb = new StringBundler(8);
 
-			sb.append("select ");
-			sb.append(		"Layout.companyId AS companyId, ");
-			sb.append(		"Layout.plid AS primKey, ");
-			sb.append(		"Role_.roleId AS ownerRoleId ");
-			sb.append(	"from ");
-			sb.append(		"Role_, Layout ");
-			sb.append(	"where ");
-			sb.append(		"Role_.name = ? and ");
-			sb.append(		"Role_.companyId = Layout.companyId and ");
-			sb.append(		"1 > (");
-			sb.append(			"select ");
-			sb.append(				"count(*) ");
-			sb.append(			"from ");
-			sb.append(				"ResourcePermission ");
-			sb.append(			"where ");
-			sb.append(				"ResourcePermission.companyId = ");
-			sb.append(					"Layout.companyId and ");
-			sb.append(				"ResourcePermission.roleId = ");
-			sb.append(					"Role_.roleId and ");
-			sb.append(				"ResourcePermission.primKey = Layout.plid");
-			sb.append(		")");
+			sb.append("select Layout.companyId as companyId, Layout.plid as ");
+			sb.append("primKey, Role_.roleId as ownerRoleId from Role_, ");
+			sb.append("Layout where Role_.name = ? and Role_.companyId = ");
+			sb.append("Layout.companyId and 1 > (select count(*) from ");
+			sb.append("ResourcePermission where ");
+			sb.append("ResourcePermission.companyId = Layout.companyId and ");
+			sb.append("ResourcePermission.roleId = Role_.roleId and ");
+			sb.append("ResourcePermission.primKey = Layout.plid)");
 
 			ps = con.prepareStatement(sb.toString());
 
