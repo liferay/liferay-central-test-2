@@ -173,8 +173,9 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.PREVIEW)) {
 			}
-			else if (!windowState.equals(LiferayWindowState.POP_UP) &&
-					!cmd.equals(Constants.MOVE_FROM_TRASH)) {
+			else if (!cmd.equals(Constants.MOVE_FROM_TRASH) &&
+					 !windowState.equals(LiferayWindowState.POP_UP)) {
+
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
@@ -632,13 +633,9 @@ public class EditFileEntryAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveFromTrash)
 		throws Exception {
 
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFileEntry.class.getName(), actionRequest);
-
 		long[] fileEntryIds = null;
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
 		if (fileEntryId > 0) {
 			fileEntryIds = new long[] {fileEntryId};
@@ -647,6 +644,11 @@ public class EditFileEntryAction extends PortletAction {
 			fileEntryIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
 		}
+
+		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFileEntry.class.getName(), actionRequest);
 
 		for (long moveFileEntryId : fileEntryIds) {
 			if (moveFromTrash) {
