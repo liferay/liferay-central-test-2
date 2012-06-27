@@ -1781,9 +1781,8 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
-		HttpPrincipal httpPrincipal, long userId, long groupId,
-		java.lang.String articleId, double version, int status,
-		java.lang.String articleURL,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		double version, int status, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1791,9 +1790,8 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"updateStatus", _updateStatusParameterTypes45);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					groupId, articleId, version, status, articleURL,
-					serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, status, articleURL, serviceContext);
 
 			Object returnObj = null;
 
@@ -2040,8 +2038,8 @@ public class JournalArticleServiceHttp {
 			java.lang.String.class
 		};
 	private static final Class<?>[] _updateStatusParameterTypes45 = new Class[] {
-			long.class, long.class, java.lang.String.class, double.class,
-			int.class, java.lang.String.class,
+			long.class, java.lang.String.class, double.class, int.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

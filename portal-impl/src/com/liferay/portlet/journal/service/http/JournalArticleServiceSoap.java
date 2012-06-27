@@ -769,14 +769,13 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap updateStatus(
-		long userId, long groupId, java.lang.String articleId, double version,
-		int status, java.lang.String articleURL,
+		long groupId, java.lang.String articleId, double version, int status,
+		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateStatus(userId,
-					groupId, articleId, version, status, articleURL,
-					serviceContext);
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateStatus(groupId,
+					articleId, version, status, articleURL, serviceContext);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
