@@ -246,7 +246,14 @@ if (!selectableTree) {
 				}
 			}
 
-			A.Array.each(node.get('children'), TreeUtil.restoreNodeState);
+			var children = node.get('children');
+			var paginator = node.get('paginator');
+
+			var limit = paginator.limit;
+
+			paginator.start = Math.max(children.length - limit, 0);
+
+			A.Array.each(children, TreeUtil.restoreNodeState);
 		},
 
 		updateLayout: function(data) {
