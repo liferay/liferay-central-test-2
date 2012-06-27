@@ -58,9 +58,6 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		RubyInstanceConfig rubyInstanceConfig =
 			localContextProvider.getRubyInstanceConfig();
 
-		rubyInstanceConfig.setLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
-
 		if (PropsValues.SCRIPTING_JRUBY_COMPILE_MODE.equals(
 				_COMPILE_MODE_FORCE)) {
 
@@ -74,6 +71,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		rubyInstanceConfig.setJitThreshold(
 			PropsValues.SCRIPTING_JRUBY_COMPILE_THRESHOLD);
+		rubyInstanceConfig.setLoader(
+			PACLClassLoaderUtil.getPortalClassLoader());
 
 		_basePath = PortalUtil.getPortalLibDir();
 
@@ -133,6 +132,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			RubyInstanceConfig rubyInstanceConfig =
 				localContextProvider.getRubyInstanceConfig();
 
+			rubyInstanceConfig.setCurrentDirectory(_basePath);
+
 			if ((classLoaders != null) && (classLoaders.length > 0)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
@@ -142,7 +143,6 @@ public class RubyExecutor extends BaseScriptingExecutor {
 				rubyInstanceConfig.setLoader(aggregateClassLoader);
 			}
 
-			rubyInstanceConfig.setCurrentDirectory(_basePath);
 			rubyInstanceConfig.setLoadPaths(_loadPaths);
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
