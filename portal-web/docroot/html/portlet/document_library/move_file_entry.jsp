@@ -19,13 +19,13 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
+String cmd = ParamUtil.getString(request, Constants.CMD);
+
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
-
-String cmd = ParamUtil.getString(request, Constants.CMD);
 
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
