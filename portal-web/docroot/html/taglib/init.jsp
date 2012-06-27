@@ -19,8 +19,6 @@
 <%@ page import="com.liferay.taglib.aui.AUIUtil" %><%@
 page import="com.liferay.taglib.util.InlineUtil" %>
 
-<%@ page import="java.net.URL" %>
-
 <%
 PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 

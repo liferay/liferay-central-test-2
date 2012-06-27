@@ -997,14 +997,12 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		return displayName;
 	}
 
-	public String getDynamicResourceServlet() {
+	public String getDynamicResourceServletContent() {
 		StringBundler sb = new StringBundler();
-
-		String servletName = "Dynamic Resource Servlet";
 
 		sb.append("<servlet>");
 		sb.append("<servlet-name>");
-		sb.append(servletName);
+		sb.append("Dynamic Resource Servlet");
 		sb.append("</servlet-name>");
 		sb.append("<servlet-class>");
 		sb.append(PortalClassLoaderServlet.class.getName());
@@ -1025,7 +1023,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 
 			sb.append("<servlet-mapping>");
 			sb.append("<servlet-name>");
-			sb.append(servletName);
+			sb.append("Dynamic Resource Servlet");
 			sb.append("</servlet-name>");
 			sb.append("<url-pattern>");
 			sb.append(allowedPath);
@@ -1065,6 +1063,8 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		sb.append("SerializableSessionAttributeListener");
 		sb.append("</listener-class>");
 		sb.append("</listener>");
+
+		sb.append(getDynamicResourceServletContent());
 
 		File serverConfigWsdd = new File(
 			srcFile + "/WEB-INF/server-config.wsdd");
@@ -1815,9 +1815,9 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 			String servletClass = GetterUtil.getString(
 				servletClassElement.getText());
 
-			if (servletClass.equals(PortletServlet.class.getName()) ||
-				servletClass.equals(
-					PortalClassLoaderServlet.class.getName())) {
+			if (servletClass.equals(
+					PortalClassLoaderServlet.class.getName()) ||
+				servletClass.equals(PortletServlet.class.getName())) {
 
 				continue;
 			}
@@ -1898,23 +1898,6 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	}
 
 	public void updateDeployDirectory(File srcFile) throws Exception {
-	}
-
-	public String updateDynamicResourceServlet(String webXmlContent)
-		throws Exception {
-
-		webXmlContent = WebXMLBuilder.organizeWebXML(webXmlContent);
-
-		int x = webXmlContent.indexOf("<jsp-config>") - 1;
-
-		String servletContent = getDynamicResourceServlet();
-
-		webXmlContent = webXmlContent.substring(0, x) + servletContent +
-			webXmlContent.substring(x);
-
-		webXmlContent = WebXMLBuilder.organizeWebXML(webXmlContent);
-
-		return webXmlContent;
 	}
 
 	public void updateGeronimoWebXml(
@@ -2101,10 +2084,6 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		// Update liferay-web.xml
 
 		newContent = updateLiferayWebXml(webXmlVersion, srcFile, newContent);
-
-		// Update with Dynamic Resource Servlet
-
-		newContent = updateDynamicResourceServlet(newContent);
 
 		// Update web.xml
 

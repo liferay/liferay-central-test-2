@@ -2134,10 +2134,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				_setSpriteImages(servletContext, portletApp, curResourcePath);
 			}
 			else if (curResourcePath.endsWith(".png")) {
-				URL resource = servletContext.getResource(curResourcePath);
+				URL imageURL = servletContext.getResource(curResourcePath);
 
-				if (resource != null) {
-					imageURLs.add(resource);
+				if (imageURL != null) {
+					imageURLs.add(imageURL);
 				}
 				else {
 					if (ServerDetector.isTomcat()) {

@@ -38,9 +38,8 @@ public class SpriteProcessorUtil {
 		throws IOException {
 
 		return getSpriteProcessor().generate(
-			servletContext, imageURLs, spriteFileName,
-			spritePropertiesFileName, spritePropertiesRootURL, maxHeight,
-			maxWidth, maxSize);
+			servletContext, imageURLs, spriteFileName, spritePropertiesFileName,
+			spritePropertiesRootURL, maxHeight, maxWidth, maxSize);
 	}
 
 	public static SpriteProcessor getSpriteProcessor() {

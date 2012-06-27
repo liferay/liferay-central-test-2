@@ -36,7 +36,9 @@ if (Validator.isNotNull(src) && themeDisplay.isThemeImagesFastLoad() && !auiImag
 		imageFileName = imageURL.getPath();
 	}
 
-	String imagesPath = theme.getContextPath().concat(theme.getImagesPath());
+	String contextPath = theme.getContextPath();
+
+	String imagesPath = contextPath.concat(theme.getImagesPath());
 
 	if (imageFileName.startsWith(imagesPath)) {
 		spriteImage = theme.getSpriteImage(imageFileName);
@@ -48,7 +50,9 @@ if (Validator.isNotNull(src) && themeDisplay.isThemeImagesFastLoad() && !auiImag
 				spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
 			}
 
-			spriteFileURL = themeDisplay.getCDNBaseURL().concat(spriteFileName);
+			String cndBaseURL = themeDisplay.getCDNBaseURL();
+
+			spriteFileURL = cndBaseURL.concat(spriteFileName);
 		}
 	}
 
@@ -71,13 +75,17 @@ if (Validator.isNotNull(src) && themeDisplay.isThemeImagesFastLoad() && !auiImag
 					spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
 				}
 
-				spriteFileURL = themeDisplay.getCDNBaseURL().concat(spriteFileName);
+				String cndBaseURL = themeDisplay.getCDNBaseURL();
+
+				spriteFileURL = cndBaseURL.concat(spriteFileName);
 			}
 		}
 	}
 
 	if (spriteImage != null) {
-		src = themeDisplay.getPathThemeImages().concat("/spacer.png");
+		String pathThemeImages = themeDisplay.getPathThemeImages();
+
+		src = pathThemeImages.concat("/spacer.png");
 
 		StringBundler sb = new StringBundler(10);
 

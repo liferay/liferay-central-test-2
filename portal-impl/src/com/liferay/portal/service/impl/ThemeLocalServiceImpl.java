@@ -742,10 +742,10 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				_setSpriteImages(servletContext, theme, curResourcePath);
 			}
 			else if (curResourcePath.endsWith(".png")) {
-				URL resource = servletContext.getResource(curResourcePath);
+				URL imageURL = servletContext.getResource(curResourcePath);
 
-				if (resource != null) {
-					imageURLs.add(resource);
+				if (imageURL != null) {
+					imageURLs.add(imageURL);
 				}
 				else {
 					if (ServerDetector.isTomcat()) {

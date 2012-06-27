@@ -57,8 +57,6 @@ import java.util.Properties;
 
 import javax.imageio.ImageIO;
 
-import javax.servlet.ServletContext;
-
 import javax.media.jai.LookupTableJAI;
 import javax.media.jai.PlanarImage;
 import javax.media.jai.RasterFactory;
@@ -66,6 +64,8 @@ import javax.media.jai.TiledImage;
 import javax.media.jai.operator.LookupDescriptor;
 import javax.media.jai.operator.MosaicDescriptor;
 import javax.media.jai.operator.TranslateDescriptor;
+
+import javax.servlet.ServletContext;
 
 import org.geotools.image.ImageWorker;
 
@@ -90,15 +90,16 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		File tempDir = (File)servletContext.getAttribute(
 			JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR);
 
-		File spriteRootDir = new File(
-			tempDir, SpriteProcessor.PATH);
+		File spriteRootDir = new File(tempDir, SpriteProcessor.PATH);
 
 		spriteRootDir.mkdirs();
 
 		File spritePropertiesFile = new File(
 			spriteRootDir, spritePropertiesFileName);
 
-		spritePropertiesFile.getParentFile().mkdirs();
+		File spritePropertiesParentFile = spritePropertiesFile.getParentFile();
+
+		spritePropertiesParentFile.mkdirs();
 
 		boolean build = false;
 
@@ -107,13 +108,13 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		if (spritePropertiesFile.exists()) {
 			lastModified = spritePropertiesFile.lastModified();
 
-			URLConnection connection = null;
+			URLConnection urlConnection = null;
 
 			for (URL imageURL : imageURLs) {
-				connection = imageURL.openConnection();
+				urlConnection = imageURL.openConnection();
 
-				if ((connection != null) &&
-					(connection.getLastModified() > lastModified)) {
+				if ((urlConnection != null) &&
+					(urlConnection.getLastModified() > lastModified)) {
 
 					build = true;
 
@@ -143,22 +144,20 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		float x = 0;
 		float y = 0;
 
-		String contextPath = ContextPathUtil.getContextPath(servletContext);
-
-		URLConnection connection = null;
+		URLConnection urlConnection = null;
 
 		for (URL imageURL : imageURLs) {
-			connection = imageURL.openConnection();
+			urlConnection = imageURL.openConnection();
 
-			if ((connection != null) &&
-				(connection.getContentLength() > maxSize)) {
+			if ((urlConnection != null) &&
+				(urlConnection.getContentLength() > maxSize)) {
 
 				continue;
 			}
 
 			try {
 				ImageBag imageBag = ImageToolUtil.read(
-					connection.getInputStream());
+					urlConnection.getInputStream());
 
 				RenderedImage renderedImage = imageBag.getRenderedImage();
 
@@ -177,6 +176,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 					key = key.substring(
 						spritePropertiesRootURL.getPath().length() - 1);
+
+					String contextPath = ContextPathUtil.getContextPath(
+						servletContext);
 
 					key = contextPath.concat(key);
 

@@ -88,26 +88,28 @@ public class ThemeDisplay
 	}
 
 	public String getCDNBaseURL() {
-		if (_cdnBaseURL == null) {
-			String host = getCDNHost();
-
-			String portalURL = getPortalURL();
-
-			if (getServerName() != null) {
-				try {
-					portalURL = PortalUtil.getPortalURL(getLayout(), this);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-
-			if (Validator.isNull(host)) {
-				host = portalURL;
-			}
-
-			_cdnBaseURL = host;
+		if (_cdnBaseURL != null) {
+			return _cdnBaseURL;
 		}
+
+		String host = getCDNHost();
+
+		String portalURL = getPortalURL();
+
+		if (getServerName() != null) {
+			try {
+				portalURL = PortalUtil.getPortalURL(getLayout(), this);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (Validator.isNull(host)) {
+			host = portalURL;
+		}
+
+		_cdnBaseURL = host;
 
 		return _cdnBaseURL;
 	}
@@ -933,10 +935,12 @@ public class ThemeDisplay
 			setPathThemeImages(
 				cdnBaseURL + themeStaticResourcePath + theme.getImagesPath());
 			setPathThemeJavaScript(
-				cdnBaseURL + themeStaticResourcePath + theme.getJavaScriptPath());
+				cdnBaseURL + themeStaticResourcePath +
+					theme.getJavaScriptPath());
 			setPathThemeRoot(themeStaticResourcePath + theme.getRootPath());
 			setPathThemeTemplates(
-				cdnBaseURL + themeStaticResourcePath + theme.getTemplatesPath());
+				cdnBaseURL + themeStaticResourcePath +
+					theme.getTemplatesPath());
 		}
 	}
 

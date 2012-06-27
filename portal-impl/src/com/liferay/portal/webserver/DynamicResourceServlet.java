@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -45,11 +46,13 @@ public class DynamicResourceServlet extends WebServerServlet {
 	}
 
 	@Override
-	public void service(HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException {
 
 		String servletPath = request.getServletPath();
-		String pathInfo = URLDecoder.decode(request.getPathInfo(), "UTF-8");
+		String pathInfo = URLDecoder.decode(
+			request.getPathInfo(), StringPool.UTF8);
 
 		String path = servletPath.concat(pathInfo);
 
@@ -61,9 +64,11 @@ public class DynamicResourceServlet extends WebServerServlet {
 
 		File file = new File(_tempDir, path);
 
+		String canonicalPath = file.getCanonicalPath();
+
 		if (!file.exists() || file.isDirectory() || !file.canRead() ||
-			file.isHidden() || !file.getCanonicalPath().startsWith(
-				_tempDir.getCanonicalPath())) {
+			file.isHidden() ||
+			!canonicalPath.startsWith(_tempDir.getCanonicalPath())) {
 
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
@@ -76,9 +81,7 @@ public class DynamicResourceServlet extends WebServerServlet {
 			long ifModifiedSince = request.getDateHeader(
 				HttpHeaders.IF_MODIFIED_SINCE);
 
-			if ((ifModifiedSince > 0) &&
-				(ifModifiedSince == lastModified)) {
-
+			if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
 				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 
 				return;
@@ -86,8 +89,7 @@ public class DynamicResourceServlet extends WebServerServlet {
 		}
 
 		if (lastModified > 0) {
-			response.setDateHeader(
-				HttpHeaders.LAST_MODIFIED, lastModified);
+			response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 		}
 
 		String fileName = file.getName();
