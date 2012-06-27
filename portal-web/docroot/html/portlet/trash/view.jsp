@@ -127,7 +127,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<liferay-ui:search-container-column-jsp
 				align="right"
-				path="/html/portlet/trash/trash_entry_actions.jsp"
+				path="/html/portlet/trash/entry_action.jsp"
 			/>
 		</liferay-ui:search-container-row>
 

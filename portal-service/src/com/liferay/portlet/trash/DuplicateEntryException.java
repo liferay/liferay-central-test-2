@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DuplicateTrashEntryException extends PortalException {
+public class DuplicateEntryException extends PortalException {
 
-	public DuplicateTrashEntryException() {
+	public DuplicateEntryException() {
 		super();
 	}
 
-	public DuplicateTrashEntryException(String msg) {
+	public DuplicateEntryException(String msg) {
 		super(msg);
 	}
 
-	public DuplicateTrashEntryException(String msg, Throwable cause) {
+	public DuplicateEntryException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public DuplicateTrashEntryException(Throwable cause) {
+	public DuplicateEntryException(Throwable cause) {
 		super(cause);
 	}
 

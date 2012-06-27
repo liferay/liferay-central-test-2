@@ -29,7 +29,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.trash.DuplicateTrashEntryException;
+import com.liferay.portlet.trash.DuplicateEntryException;
 import com.liferay.portlet.trash.model.TrashEntry;
 
 /**
@@ -41,10 +41,11 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 
 	public static final String CLASS_NAME = DLFolder.class.getName();
 
-	public void checkDuplicateEntry(TrashEntry entry, String newName)
+	@Override
+	public void checkDuplicateTrashEntry(TrashEntry trashEntry, String newName)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = getDLFolder(entry.getClassPK());
+		DLFolder dlFolder = getDLFolder(trashEntry.getClassPK());
 
 		String restoredTitle = dlFolder.getName();
 
@@ -63,14 +64,13 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 			dlFolder.getGroupId(), dlFolder.getParentFolderId(), originalTitle);
 
 		if (duplicatedFolder != null) {
-			DuplicateTrashEntryException dtee =
-				new DuplicateTrashEntryException();
+			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dtee.setDuplicateEntryId(duplicatedFolder.getFolderId());
-			dtee.setOldName(duplicatedFolder.getName());
-			dtee.setTrashEntryId(entry.getEntryId());
+			dee.setDuplicateEntryId(duplicatedFolder.getFolderId());
+			dee.setOldName(duplicatedFolder.getName());
+			dee.setTrashEntryId(trashEntry.getEntryId());
 
-			throw dtee;
+			throw dee;
 		}
 	}
 
@@ -130,7 +130,8 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 		}
 	}
 
-	public void updateEntryTitle(long classPK, String name)
+	@Override
+	public void updateTitle(long classPK, String name)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getDLFolder(classPK);
@@ -149,7 +150,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 		if (!(repository instanceof LiferayRepository)) {
 			throw new InvalidRepositoryException(
 				"Repository " + repository.getRepositoryId() +
-				" does not support trash operations");
+					" does not support trash operations");
 		}
 
 		Folder folder = repository.getFolder(classPK);

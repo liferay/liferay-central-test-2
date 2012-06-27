@@ -29,7 +29,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.portlet.trash.DuplicateTrashEntryException;
+import com.liferay.portlet.trash.DuplicateEntryException;
 import com.liferay.portlet.trash.model.TrashEntry;
 
 /**
@@ -42,10 +42,11 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 
 	public static final String CLASS_NAME = DLFileEntry.class.getName();
 
-	public void checkDuplicateEntry(TrashEntry entry, String newName)
+	@Override
+	public void checkDuplicateTrashEntry(TrashEntry trashEntry, String newName)
 		throws PortalException, SystemException {
 
-		DLFileEntry dlFileEntry = getDLFileEntry(entry.getClassPK());
+		DLFileEntry dlFileEntry = getDLFileEntry(trashEntry.getClassPK());
 
 		String restoredTitle = dlFileEntry.getTitle();
 
@@ -66,14 +67,13 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 				originalTitle);
 
 		if (duplicatedFileEntry != null) {
-			DuplicateTrashEntryException dtee =
-				new DuplicateTrashEntryException();
+			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dtee.setDuplicateEntryId(duplicatedFileEntry.getFileEntryId());
-			dtee.setOldName(duplicatedFileEntry.getTitle());
-			dtee.setTrashEntryId(entry.getEntryId());
+			dee.setDuplicateEntryId(duplicatedFileEntry.getFileEntryId());
+			dee.setOldName(duplicatedFileEntry.getTitle());
+			dee.setTrashEntryId(trashEntry.getEntryId());
 
-			throw dtee;
+			throw dee;
 		}
 	}
 
@@ -116,16 +116,20 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 		}
 	}
 
-	public void updateEntryTitle(long classPK, String name)
+	@Override
+	public void updateTitle(long classPK, String name)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = getDLFileEntry(classPK);
-		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
 		dlFileEntry.setTitle(name);
-		dlFileVersion.setTitle(name);
 
 		DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry, false);
+
+		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+
+		dlFileVersion.setTitle(name);
+
 		DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion, false);
 	}
 

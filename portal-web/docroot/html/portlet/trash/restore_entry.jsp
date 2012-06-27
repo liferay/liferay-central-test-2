@@ -17,14 +17,16 @@
 <%@ include file="/html/portlet/trash/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
+String trashEntryId = ParamUtil.getString(request, "trashEntryId");
+
 String duplicateEntryId = ParamUtil.getString(request, "duplicateEntryId");
 String oldName = ParamUtil.getString(request, "oldName");
-String redirect = ParamUtil.getString(request, "redirect");
-String trashEntryId = ParamUtil.getString(request, "trashEntryId");
 %>
 
 <div class="portlet-msg-alert" id="<portlet:namespace />messageContainer">
-	<liferay-ui:message arguments="<%= new String[]{oldName} %>" key="an-entry-with-name-x-already-exists" />
+	<liferay-ui:message arguments="<%= new String[] {oldName} %>" key="an-entry-with-name-x-already-exists" />
 </div>
 
 <portlet:actionURL var="editActionURL">
@@ -34,24 +36,21 @@ String trashEntryId = ParamUtil.getString(request, "trashEntryId");
 
 <aui:form action="<%= editActionURL %>" enctype="multipart/form-data" method="post" name="restoreTrashEntryFm" onSubmit="event.preventDefault();">
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="trashEntryId" type="hidden" value="<%= trashEntryId %>" />
 	<aui:input name="duplicateEntryId" type="hidden" value="<%= duplicateEntryId %>" />
 	<aui:input name="oldName" type="hidden" value="<%= oldName %>" />
-	<aui:input name="trashEntryId" type="hidden" value="<%= trashEntryId %>" />
 
 	<aui:fieldset>
 		<aui:input checked="<%= true %>" id="override" label="overwrite-the-existing-entry-with-the-one-from-the-recycle-bin" name="<%= Constants.CMD %>" type="radio" value="<%= Constants.OVERRIDE %>" />
 
 		<aui:input id="rename" label="keep-both-entries-and-rename-the-entry-from-the-recycle-bin-as" name="<%= Constants.CMD %>" type="radio" value="<%= Constants.RENAME %>" />
 
-		<%
-		String suggestedName = oldName + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + dateFormatDateTime.format(new Date()).replace('/', '.') + StringPool.CLOSE_PARENTHESIS;
-		%>
-
-		<aui:input cssClass="new-file-name" label="" name="newName" title="keep-both-entries-and-rename-the-entry-from-the-recycle-bin-as" value="<%= suggestedName %>" />
+		<aui:input cssClass="new-file-name" label="" name="newName" title="keep-both-entries-and-rename-the-entry-from-the-recycle-bin-as" value="<%= EditEntryAction.getNewName(themeDisplay, oldName) %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="cancel" value="cancel" />
+		<aui:button type="cancel" />
+
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>

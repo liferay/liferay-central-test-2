@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,7 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.trash.DuplicateTrashEntryException;
+import com.liferay.portlet.trash.DuplicateEntryException;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
 import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
@@ -53,6 +54,24 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditEntryAction extends PortletAction {
 
+	public static String getNewName(ThemeDisplay themeDisplay, String oldName) {
+		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
+			themeDisplay.getLocale(), themeDisplay.getTimeZone());
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(oldName);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(
+			StringUtil.replace(
+				dateFormatDateTime.format(new Date()), CharPool.SLASH,
+				CharPool.PERIOD));
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
+	}
+
 	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -62,10 +81,7 @@ public class EditEntryAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("checkEntry")) {
-				checkEntry(actionRequest, actionResponse);
-			}
-			else if (cmd.equals(Constants.DELETE)) {
+			if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.EMPTY_TRASH)) {
@@ -80,10 +96,13 @@ public class EditEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.OVERRIDE)) {
 				restoreOverride(actionRequest);
 			}
+			else if (cmd.equals("checkEntry")) {
+				checkEntry(actionRequest, actionResponse);
 
-			if (!cmd.equals("checkEntry")) {
-				sendRedirect(actionRequest, actionResponse);
+				return;
 			}
+
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			SessionErrors.add(actionRequest, e.getClass());
@@ -116,16 +135,15 @@ public class EditEntryAction extends PortletAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		try {
-			trashHandler.checkDuplicateEntry(entry, newName);
+			trashHandler.checkDuplicateTrashEntry(entry, newName);
 
 			jsonObject.put("success", true);
 		}
-		catch (DuplicateTrashEntryException dtee) {
-			jsonObject.put("duplicateEntryId", dtee.getDuplicateEntryId());
-			jsonObject.put("oldName", dtee.getOldName());
-			jsonObject.put("trashEntryId", dtee.getTrashEntryId());
-
+		catch (DuplicateEntryException dee) {
+			jsonObject.put("duplicateEntryId", dee.getDuplicateEntryId());
+			jsonObject.put("oldName", dee.getOldName());
 			jsonObject.put("success", false);
+			jsonObject.put("trashEntryId", dee.getTrashEntryId());
 		}
 
 		writeJSON(actionRequest, actionResponse, jsonObject);
@@ -187,7 +205,7 @@ public class EditEntryAction extends PortletAction {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			entry.getClassName());
 
-		trashHandler.checkDuplicateEntry(entry, StringPool.BLANK);
+		trashHandler.checkDuplicateTrashEntry(entry, StringPool.BLANK);
 
 		trashHandler.restoreTrashEntry(entry.getClassPK());
 	}
@@ -196,8 +214,6 @@ public class EditEntryAction extends PortletAction {
 		throws Exception {
 
 		long trashEntryId = ParamUtil.getLong(actionRequest, "trashEntryId");
-		long duplicateEntryId = ParamUtil.getLong(
-			actionRequest, "duplicateEntryId");
 
 		TrashEntry entry = TrashEntryLocalServiceUtil.getTrashEntry(
 			trashEntryId);
@@ -205,12 +221,18 @@ public class EditEntryAction extends PortletAction {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			entry.getClassName());
 
-		trashHandler.deleteTrashEntries(new long[]{duplicateEntryId});
+		long duplicateEntryId = ParamUtil.getLong(
+			actionRequest, "duplicateEntryId");
+
+		trashHandler.deleteTrashEntries(new long[] {duplicateEntryId});
 
 		trashHandler.restoreTrashEntry(entry.getClassPK());
 	}
 
 	protected void restoreRename(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long trashEntryId = ParamUtil.getLong(actionRequest, "trashEntryId");
 
 		TrashEntry entry = TrashEntryLocalServiceUtil.getTrashEntry(
@@ -219,29 +241,15 @@ public class EditEntryAction extends PortletAction {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			entry.getClassName());
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String newName = ParamUtil.getString(actionRequest, "newName");
 
 		if (Validator.isNull(newName)) {
 			String oldName = ParamUtil.getString(actionRequest, "oldName");
 
-			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
-				themeDisplay.getLocale(), themeDisplay.getTimeZone());
-
-			StringBundler sb = new StringBundler(5);
-
-			sb.append(oldName);
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(dateFormatDateTime.format(new Date()).replace('/', '.'));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			newName = sb.toString();
+			newName = getNewName(themeDisplay, oldName);
 		}
 
-		trashHandler.updateEntryTitle(entry.getClassPK(), newName);
+		trashHandler.updateTitle(entry.getClassPK(), newName);
 
 		trashHandler.restoreTrashEntry(entry.getClassPK());
 	}

@@ -52,7 +52,7 @@ import com.liferay.portlet.trash.model.TrashEntry;
  */
 public interface TrashHandler {
 
-	public void checkDuplicateEntry(TrashEntry entry, String newName)
+	public void checkDuplicateTrashEntry(TrashEntry trashEntry, String newName)
 		throws PortalException, SystemException;
 
 	/**
@@ -118,7 +118,7 @@ public interface TrashHandler {
 	public void restoreTrashEntry(long classPK)
 		throws PortalException, SystemException;
 
-	public void updateEntryTitle(long classPK, String title)
+	public void updateTitle(long classPK, String title)
 		throws PortalException, SystemException;
 
 }

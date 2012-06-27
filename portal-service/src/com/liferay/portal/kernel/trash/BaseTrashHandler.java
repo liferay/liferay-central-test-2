@@ -42,7 +42,8 @@ import com.liferay.portlet.trash.model.TrashEntry;
  */
 public abstract class BaseTrashHandler implements TrashHandler {
 
-	public void checkDuplicateEntry(TrashEntry entry, String newName)
+	@SuppressWarnings("unused")
+	public void checkDuplicateTrashEntry(TrashEntry trashEntry, String newName)
 		throws PortalException, SystemException {
 	}
 
@@ -75,7 +76,8 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		restoreTrashEntries(new long[] {classPK});
 	}
 
-	public void updateEntryTitle(long classPK, String title)
+	@SuppressWarnings("unused")
+	public void updateTitle(long classPK, String title)
 		throws PortalException, SystemException {
 	}
 

@@ -71,6 +71,6 @@
 		</finder>
 	</entity>
 	<exceptions>
-		<exception>DuplicateTrashEntry</exception>
+		<exception>DuplicateEntry</exception>
 	</exceptions>
 </service-builder>
