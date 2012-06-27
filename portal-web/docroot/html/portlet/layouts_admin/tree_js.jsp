@@ -141,8 +141,18 @@ if (!selectableTree) {
 			var output = [];
 
 			A.each(
-				json,
+				json.layouts,
 				function(node) {
+					var childLayouts = [];
+					var total = 0;
+
+					var nodeChildren = node.children;
+
+					if (nodeChildren) {
+						childLayouts = nodeChildren.layouts;
+						total = nodeChildren.total;
+					}
+
 					var newNode = {
 						<c:if test="<%= saveState %>">
 							after: {
@@ -161,10 +171,15 @@ if (!selectableTree) {
 							},
 						</c:if>
 						alwaysShowHitArea: node.hasChildren,
-						children: TreeUtil.formatJSONResults(node.children),
+						children: TreeUtil.formatJSONResults(childLayouts),
 						draggable: node.updateable,
-						expanded: (node.children && (node.children.length > 0)),
+						expanded: childLayouts.length > 0,
 						id: TreeUtil.createListItemId(node.groupId, node.layoutId, node.plid),
+						paginator: {
+							limit: TreeUtil.PAGINATION_LIMIT,
+							offsetParam: 'start',
+							total: total
+						},
 						type: '<%= selectableTree ? "task" : "io" %>'
 					};
 
@@ -231,14 +246,7 @@ if (!selectableTree) {
 				}
 			}
 
-			var children = node.get('children');
-			var paginator = node.get('paginator');
-
-			var limit = paginator.limit;
-
-			paginator.start = Math.max(children.length - limit, 0);
-
-			A.Array.each(children, TreeUtil.restoreNodeState);
+			A.Array.each(node.get('children'), TreeUtil.restoreNodeState);
 		},
 
 		updateLayout: function(data) {
@@ -352,7 +360,12 @@ if (!selectableTree) {
 			},
 
 			alwaysShowHitArea: true,
-			children: TreeUtil.formatJSONResults(<%= LayoutsTreeUtil.getLayoutsJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, StringUtil.split(openNodes, 0L)) %>),
+
+			<%
+			JSONObject layoutsJSON = JSONFactoryUtil.createJSONObject(LayoutsTreeUtil.getLayoutsJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, StringUtil.split(openNodes, 0L)));
+			%>
+
+			children: TreeUtil.formatJSONResults(<%= layoutsJSON %>),
 			draggable: false,
 
 			<%
@@ -362,7 +375,12 @@ if (!selectableTree) {
 			expanded: <%= rootNodeExpanded %>,
 			id: rootId,
 			label: rootLabel,
-			leaf: false
+			leaf: false,
+			paginator: {
+				limit: TreeUtil.PAGINATION_LIMIT,
+				offsetParam: 'start',
+				total: <%= layoutsJSON.getInt("total") %>
+			}
 		}
 	);
 
@@ -390,7 +408,26 @@ if (!selectableTree) {
 							selPlid: '<%= selPlid %>'
 						};
 					},
-					method: AUI.defaults.io.method
+					method: AUI.defaults.io.method,
+					on: {
+						success: function(event, id, xhr) {
+							var instance = this;
+
+							var paginator = instance.get('paginator');
+							var response;
+
+							try {
+								response = A.JSON.parse(xhr.responseText);
+							}
+							catch(e) {}
+
+							if (response) {
+								paginator.total = response.total;
+
+								instance.syncUI();
+							}
+						}
+					}
 				},
 				formatter: TreeUtil.formatJSONResults,
 				url: getLayoutsURL
@@ -423,10 +460,6 @@ if (!selectableTree) {
 						index
 					);
 				}
-			},
-			paginator: {
-				limit: <%= PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN %>,
-				offsetParam: 'start'
 			},
 			type: 'pages'
 		}
