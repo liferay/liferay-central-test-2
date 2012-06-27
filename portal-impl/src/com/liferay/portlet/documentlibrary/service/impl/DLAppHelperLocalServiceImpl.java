@@ -368,8 +368,6 @@ public class DLAppHelperLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long fileEntryId = fileEntry.getFileEntryId();
-
 		// File entry
 
 		List<DLFileVersion> dlFileVersions =
@@ -387,12 +385,12 @@ public class DLAppHelperLocalServiceImpl
 
 		// File rank
 
-		dlFileRankLocalService.enableFileRanks(fileEntryId);
+		dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
 
-		// Move from trash
+		// App helper
 
 		return dlAppService.moveFileEntry(
-			fileEntryId, newFolderId, serviceContext);
+			fileEntry.getFileEntryId(), newFolderId, serviceContext);
 	}
 
 	public FileEntry moveFileEntryToTrash(long userId, FileEntry fileEntry)
@@ -992,8 +990,8 @@ public class DLAppHelperLocalServiceImpl
 						SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 						StringPool.BLANK, 0);
 				}
-				else if(latestDlFileVersion.getStatus() ==
-					WorkflowConstants.STATUS_APPROVED) {
+				else if (latestDlFileVersion.getStatus() ==
+							WorkflowConstants.STATUS_APPROVED) {
 
 					socialActivityLocalService.addActivity(
 						user.getUserId(), dlFileEntry.getGroupId(),
