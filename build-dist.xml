@@ -753,8 +753,6 @@ know what you are doing as it can cause loss of data.
 
 		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
 
-		<antcall target="rename-dist-files" />
-
 		<if>
 			<isset property="dist.username" />
 			<then>
