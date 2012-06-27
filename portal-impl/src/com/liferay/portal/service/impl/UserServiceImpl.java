@@ -636,21 +636,25 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public List<User> getCompanyUsers(long companyId, int start, int end)
 		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().isCompanyAdmin(companyId)) {
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!permissionChecker.isCompanyAdmin(companyId)) {
 			throw new PrincipalException();
 		}
 
-		return userLocalService.getCompanyUsers(companyId, start, end);
+		return userPersistence.findByCompanyId(companyId, start, end);
 	}
 
 	public int getCompanyUsersCount(long companyId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().isCompanyAdmin(companyId)) {
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!permissionChecker.isCompanyAdmin(companyId)) {
 			throw new PrincipalException();
 		}
 
-		return userLocalService.getCompanyUsersCount(companyId);
+		return userPersistence.countByCompanyId(companyId);
 	}
 
 	/**
@@ -813,7 +817,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.VIEW_MEMBERS);
 
-		return userLocalService.getUserGroupUsers(userGroupId);
+		return userGroupPersistence.getUsers(userGroupId);
 	}
 
 	/**
