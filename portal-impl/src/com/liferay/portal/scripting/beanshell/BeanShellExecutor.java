@@ -46,6 +46,10 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 		try {
 			Interpreter interpreter = new Interpreter();
 
+			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+				interpreter.set(entry.getKey(), entry.getValue());
+			}
+
 			if ((classLoaders != null) && (classLoaders.length > 0)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
@@ -53,10 +57,6 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 						classLoaders);
 
 				interpreter.setClassLoader(aggregateClassLoader);
-			}
-
-			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
-				interpreter.set(entry.getKey(), entry.getValue());
 			}
 
 			interpreter.eval(script);

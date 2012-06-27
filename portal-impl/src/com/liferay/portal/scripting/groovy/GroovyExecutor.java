@@ -95,17 +95,16 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 	}
 
 	protected GroovyShell getGroovyShell(ClassLoader[] classLoaders) {
-
 		if ((classLoaders == null) || (classLoaders.length == 0)) {
-			if (_defaultGroovyShell == null) {
+			if (_groovyShell == null) {
 				synchronized (this) {
-					if (_defaultGroovyShell == null) {
-						_defaultGroovyShell = new GroovyShell();
+					if (_groovyShell == null) {
+						_groovyShell = new GroovyShell();
 					}
 				}
 			}
 
-			return _defaultGroovyShell;
+			return _groovyShell;
 		}
 
 		ClassLoader aggregateClassLoader =
@@ -117,7 +116,6 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 		if (!_groovyShells.containsKey(aggregateClassLoader)) {
 			synchronized (this) {
 				if (!_groovyShells.containsKey(aggregateClassLoader)) {
-
 					groovyShell = new GroovyShell(aggregateClassLoader);
 
 					_groovyShells.put(aggregateClassLoader, groovyShell);
@@ -132,8 +130,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 	private static final String _LANGUAGE = "groovy";
 
-	private volatile GroovyShell _defaultGroovyShell = new GroovyShell();
-
+	private volatile GroovyShell _groovyShell = new GroovyShell();
 	private volatile Map<ClassLoader, GroovyShell> _groovyShells =
 		new WeakHashMap<ClassLoader, GroovyShell>();
 
