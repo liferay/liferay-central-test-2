@@ -53,6 +53,11 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 	}
 
 	@Test
+	public void testTrashAndMoveFile() throws Exception {
+		testTrash(false, true, false, true);
+	}
+
+	@Test
 	public void testTrashAndRestore() throws Exception {
 		testTrash(false, false, false, false);
 	}
@@ -67,12 +72,8 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		testTrash(false, true, true, false);
 	}
 
-	@Test
-	public void testTrashAndMoveFile() throws Exception {
-		testTrash(false, true, false, true);
-	}
-
-	protected void testTrash(boolean delete, boolean file, boolean trashFile,
+	protected void testTrash(
+			boolean delete, boolean file, boolean trashFile,
 			boolean moveFileFromTrash)
 		throws Exception {
 
@@ -169,7 +170,6 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 				isAssetEntryVisible(
 					DLFileEntryConstants.getClassName(), fileEntryId));
 			Assert.assertEquals(1, getActiveFileRanksCount(fileEntryId));
-
 			Assert.assertEquals(
 				initialSearchFileEntriesCount + 1, searchFileEntriesCount());
 		}
@@ -212,7 +212,8 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 				initialTrashEntriesCount +1, getTrashEntriesCount());
 		}
 		else {
-			Assert.assertEquals(initialTrashEntriesCount, getTrashEntriesCount());
+			Assert.assertEquals(
+				initialTrashEntriesCount, getTrashEntriesCount());
 		}
 	}
 
