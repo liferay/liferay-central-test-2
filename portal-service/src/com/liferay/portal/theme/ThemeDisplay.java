@@ -864,7 +864,7 @@ public class ThemeDisplay implements Serializable {
 
 			String portalURL = getPortalURL();
 
-			if (this.getServerName() != null) {
+			if (getServerName() != null) {
 				try {
 					portalURL = PortalUtil.getPortalURL(getLayout(), this);
 				}
