@@ -12,18 +12,16 @@
  * details.
  */
 
-package com.liferay.portlet.displaytemplates.lar;
+package com.liferay.portlet.portletdisplaytemplates.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.template.PortletDisplayTemplateHandler;
 import com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.lar.DDMPortletDataHandlerImpl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
@@ -33,20 +31,19 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 
 /**
- *
  * @author Juan Fernández
  */
-public class DisplayTemplatePortletDataHandlerImpl
+public class PortletDisplayTemplatesPortletDataHandlerImpl
 	extends BasePortletDataHandler {
 
 	@Override
 	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {_displayTemplates};
+		return new PortletDataHandlerControl[] {_portletDisplayTemplates};
 	}
 
 	@Override
 	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {_displayTemplates};
+		return new PortletDataHandlerControl[] {_portletDisplayTemplates};
 	}
 
 	@Override
@@ -80,11 +77,12 @@ public class DisplayTemplatePortletDataHandlerImpl
 
 		Element rootElement = document.getRootElement();
 
-		List<Element> templateElements = rootElement.elements("template");
+		List<Element> ddmTemplateElements = rootElement.elements(
+			"ddm-template");
 
-		for (Element templateElement : templateElements) {
+		for (Element ddmTemplateElement : ddmTemplateElements) {
 			DDMPortletDataHandlerImpl.importTemplate(
-				portletDataContext, templateElement);
+				portletDataContext, ddmTemplateElement);
 		}
 
 		return null;
@@ -95,49 +93,27 @@ public class DisplayTemplatePortletDataHandlerImpl
 			Element applicationDisplayStylesElement)
 		throws Exception {
 
-		long[] classNameIds = getPortletDisplayTemplateClassNameIds();
+		long[] classNameIds =
+			PortletDisplayTemplateHandlerRegistryUtil.getClassNameIds();
 
-		for (int i = 0; i < classNameIds.length; i++) {
-			long classNameId = classNameIds[i];
-
-			List<DDMTemplate> templates =
+		for (long classNameId : classNameIds) {
+			List<DDMTemplate> ddmTemplates =
 				DDMTemplateLocalServiceUtil.getTemplates(
 					portletDataContext.getScopeGroupId(), classNameId);
 
-			for (DDMTemplate template : templates) {
+			for (DDMTemplate ddmTemplate : ddmTemplates) {
 				DDMPortletDataHandlerImpl.exportTemplate(
 					portletDataContext, applicationDisplayStylesElement,
-					template);
+					ddmTemplate);
 			}
 		}
 	}
 
-	protected long[] getPortletDisplayTemplateClassNameIds() {
-		List<PortletDisplayTemplateHandler> portletDisplayTemplateHandlers =
-			PortletDisplayTemplateHandlerRegistryUtil.
-				getPortletDisplayTemplateHandlers();
-
-		long[] classNameIds = new long[portletDisplayTemplateHandlers.size()];
-
-		int index = 0;
-
-		for (PortletDisplayTemplateHandler portletDisplayTemplateHandler :
-			portletDisplayTemplateHandlers) {
-
-			classNameIds[index] = PortalUtil.getClassNameId(
-				portletDisplayTemplateHandler.getClassName());
-
-			index++;
-		}
-
-		return classNameIds;
-	}
-
 	private static final boolean _ALWAYS_EXPORTABLE = true;
 
-	private static final String _NAMESPACE = "display_templates";
+	private static final String _NAMESPACE = "portlet_display_templates";
 
-	private static PortletDataHandlerBoolean _displayTemplates =
+	private static PortletDataHandlerBoolean _portletDisplayTemplates =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "application-display-templates");
 

@@ -21,6 +21,8 @@ import java.util.List;
  */
 public interface PortletDisplayTemplateHandlerRegistry {
 
+	public long[] getClassNameIds();
+
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
 		long classNameId);
 

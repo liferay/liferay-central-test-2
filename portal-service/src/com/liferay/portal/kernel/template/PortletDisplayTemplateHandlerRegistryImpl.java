@@ -27,6 +27,24 @@ import java.util.Map;
 public class PortletDisplayTemplateHandlerRegistryImpl implements
 	PortletDisplayTemplateHandlerRegistry {
 
+	public long[] getClassNameIds() {
+		long[] classNameIds = new long[_portletDisplayTemplateHandlers.size()];
+
+		int i = 0;
+
+		for (Map.Entry<String, PortletDisplayTemplateHandler> entry :
+				_portletDisplayTemplateHandlers.entrySet()) {
+
+			PortletDisplayTemplateHandler portletDisplayTemplateHandler =
+				entry.getValue();
+
+			classNameIds[i++] = PortalUtil.getClassNameId(
+				portletDisplayTemplateHandler.getClassName());
+		}
+
+		return classNameIds;
+	}
+
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
 		long classNameId) {
 

@@ -21,7 +21,7 @@ long[] searchClassNameIds = null;
 long searchClassPK = 0;
 
 if (portletName.equals(PortletKeys.APPLICATION_DISPLAY_STYLES)) {
-	searchClassNameIds = getPortletDisplayTemplateClassNameIds();
+	searchClassNameIds = PortletDisplayTemplateHandlerRegistryUtil.getClassNameIds();
 	searchClassPK = -1;
 }
 else {
@@ -40,20 +40,4 @@ else {
 
 pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
-%>
-
-<%!
-private long[] getPortletDisplayTemplateClassNameIds() {
-	List<PortletDisplayTemplateHandler> portletDisplayTemplateHandlers = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandlers();
-
-	long[] searchClassNameIds = new long[portletDisplayTemplateHandlers.size()];
-
-	for (int i = 0; i < portletDisplayTemplateHandlers.size(); i++) {
-		PortletDisplayTemplateHandler portletDisplayTemplateHandler = portletDisplayTemplateHandlers.get(i);
-
-		searchClassNameIds[i] = PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName());
-	}
-
-	return searchClassNameIds;
-}
 %>
