@@ -91,8 +91,8 @@ public class SearchTagsTest extends BaseTestCase {
 		assertTrue(selenium.isVisible("link=MessageA TagA TestA"));
 		assertTrue(selenium.isVisible("link=MessageB TagB TestB"));
 		assertTrue(selenium.isVisible("link=MessageC TagC TestC"));
-		assertTrue(selenium.isElementNotPresent("link=Message1 Tag1 Test1"));
-		assertTrue(selenium.isElementNotPresent("link=Message2 Tag2 Test2"));
-		assertTrue(selenium.isElementNotPresent("link=Message3 Tag3 Test3"));
+		assertTrue(selenium.isVisible("link=Message1 Tag1 Test1"));
+		assertTrue(selenium.isVisible("link=Message2 Tag2 Test2"));
+		assertTrue(selenium.isVisible("link=Message3 Tag3 Test3"));
 	}
 }
