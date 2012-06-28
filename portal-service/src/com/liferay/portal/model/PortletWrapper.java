@@ -567,24 +567,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Returns the name of the portlet display style class of the portlet.
-	*
-	* @return the name of the portlet display style class of the portlet
-	*/
-	public java.lang.String getPortletDisplayTemplateHandlerClass() {
-		return _portlet.getPortletDisplayTemplateHandlerClass();
-	}
-
-	/**
-	* Returns the portlet display style instance of the portlet.
-	*
-	* @return the portlet display style instance of the portlet
-	*/
-	public com.liferay.portal.kernel.template.PortletDisplayTemplateHandler getPortletDisplayTemplateHandlerInstance() {
-		return _portlet.getPortletDisplayTemplateHandlerInstance();
-	}
-
-	/**
 	* Returns expiration cache of the portlet.
 	*
 	* @return expiration cache of the portlet
@@ -982,6 +964,24 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance() {
 		return _portlet.getPortletDataHandlerInstance();
+	}
+
+	/**
+	* Returns the name of the portlet display style class of the portlet.
+	*
+	* @return the name of the portlet display style class of the portlet
+	*/
+	public java.lang.String getPortletDisplayTemplateHandlerClass() {
+		return _portlet.getPortletDisplayTemplateHandlerClass();
+	}
+
+	/**
+	* Returns the portlet display style instance of the portlet.
+	*
+	* @return the portlet display style instance of the portlet
+	*/
+	public com.liferay.portal.kernel.template.PortletDisplayTemplateHandler getPortletDisplayTemplateHandlerInstance() {
+		return _portlet.getPortletDisplayTemplateHandlerInstance();
 	}
 
 	/**
@@ -2105,17 +2105,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
-	* Sets the name of the portlet display style class of the portlet.
-	*
-	* @param portletDisplayTemplateHandlerClass the name of display style
-	handler class of the portlet
-	*/
-	public void setPortletDisplayTemplateHandlerClass(
-		java.lang.String portletDisplayTemplateHandlerClass) {
-		_portlet.setPortletDisplayTemplateHandlerClass(portletDisplayTemplateHandlerClass);
-	}
-
-	/**
 	* Sets expiration cache of the portlet.
 	*
 	* @param expCache expiration cache of the portlet
@@ -2446,6 +2435,18 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	public void setPortletDataHandlerClass(
 		java.lang.String portletDataHandlerClass) {
 		_portlet.setPortletDataHandlerClass(portletDataHandlerClass);
+	}
+
+	/**
+	* Sets the name of the portlet display template handler class of the
+	* portlet.
+	*
+	* @param portletDisplayTemplateHandlerClass the name of display template
+	handler class of the portlet
+	*/
+	public void setPortletDisplayTemplateHandlerClass(
+		java.lang.String portletDisplayTemplateHandlerClass) {
+		_portlet.setPortletDisplayTemplateHandlerClass(portletDisplayTemplateHandlerClass);
 	}
 
 	/**

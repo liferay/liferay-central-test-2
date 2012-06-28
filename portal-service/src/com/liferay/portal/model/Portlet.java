@@ -289,20 +289,6 @@ public interface Portlet extends PortletModel, PersistedModel {
 	public java.lang.String getDisplayName();
 
 	/**
-	* Returns the name of the portlet display style class of the portlet.
-	*
-	* @return the name of the portlet display style class of the portlet
-	*/
-	public java.lang.String getPortletDisplayTemplateHandlerClass();
-
-	/**
-	* Returns the portlet display style instance of the portlet.
-	*
-	* @return the portlet display style instance of the portlet
-	*/
-	public com.liferay.portal.kernel.template.PortletDisplayTemplateHandler getPortletDisplayTemplateHandlerInstance();
-
-	/**
 	* Returns expiration cache of the portlet.
 	*
 	* @return expiration cache of the portlet
@@ -619,6 +605,20 @@ public interface Portlet extends PortletModel, PersistedModel {
 	* @return the portlet data handler instance of the portlet
 	*/
 	public com.liferay.portal.kernel.lar.PortletDataHandler getPortletDataHandlerInstance();
+
+	/**
+	* Returns the name of the portlet display style class of the portlet.
+	*
+	* @return the name of the portlet display style class of the portlet
+	*/
+	public java.lang.String getPortletDisplayTemplateHandlerClass();
+
+	/**
+	* Returns the portlet display style instance of the portlet.
+	*
+	* @return the portlet display style instance of the portlet
+	*/
+	public com.liferay.portal.kernel.template.PortletDisplayTemplateHandler getPortletDisplayTemplateHandlerInstance();
 
 	/**
 	* Returns the filters of the portlet.
@@ -1521,15 +1521,6 @@ public interface Portlet extends PortletModel, PersistedModel {
 	public void setDisplayName(java.lang.String displayName);
 
 	/**
-	* Sets the name of the portlet display style class of the portlet.
-	*
-	* @param portletDisplayTemplateHandlerClass the name of display style
-	handler class of the portlet
-	*/
-	public void setPortletDisplayTemplateHandlerClass(
-		java.lang.String portletDisplayTemplateHandlerClass);
-
-	/**
 	* Sets expiration cache of the portlet.
 	*
 	* @param expCache expiration cache of the portlet
@@ -1799,6 +1790,16 @@ public interface Portlet extends PortletModel, PersistedModel {
 	*/
 	public void setPortletDataHandlerClass(
 		java.lang.String portletDataHandlerClass);
+
+	/**
+	* Sets the name of the portlet display template handler class of the
+	* portlet.
+	*
+	* @param portletDisplayTemplateHandlerClass the name of display template
+	handler class of the portlet
+	*/
+	public void setPortletDisplayTemplateHandlerClass(
+		java.lang.String portletDisplayTemplateHandlerClass);
 
 	/**
 	* Sets the filters of the portlet.
