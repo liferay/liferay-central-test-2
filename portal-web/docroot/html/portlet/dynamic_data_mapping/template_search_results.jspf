@@ -17,10 +17,10 @@
 <%
 TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-long[] searchClassNameIds;
-long searchClassPK;
+long[] searchClassNameIds = null;
+long searchClassPK = 0;
 
-if (portletName.equals(PortletKeys.DISPLAY_STYLES)) {
+if (portletName.equals(PortletKeys.APPLICATION_DISPLAY_STYLES)) {
 	searchClassNameIds = getPortletDisplayTemplateClassNameIds();
 	searchClassPK = -1;
 }
@@ -48,11 +48,10 @@ private long[] getPortletDisplayTemplateClassNameIds() {
 
 	long[] searchClassNameIds = new long[portletDisplayTemplateHandlers.size()];
 
-	int index = 0;
+	for (int i = 0; i < portletDisplayTemplateHandlers.size(); i++) {
+		PortletDisplayTemplateHandler portletDisplayTemplateHandler = portletDisplayTemplateHandlers.get(i);
 
-	for (PortletDisplayTemplateHandler portletDisplayTemplateHandler : portletDisplayTemplateHandlers) {
-		searchClassNameIds[index] = PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName());
-		index++;
+		searchClassNameIds[i] = PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName());
 	}
 
 	return searchClassNameIds;

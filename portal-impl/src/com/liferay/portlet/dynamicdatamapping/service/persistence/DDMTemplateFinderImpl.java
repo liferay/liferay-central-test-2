@@ -544,11 +544,11 @@ public class DDMTemplateFinderImpl
 
 			if (classNameIds.length == 0) {
 				sql = StringUtil.replace(
-					sql, "(classNameId IN ([$CLASSNAME_IDS$])) AND", "");
+					sql, "(classNameId IN ([$CLASSNAME_ID$])) AND", "");
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "[$CLASSNAME_IDS$]", StringUtil.merge(classNameIds));
+					sql, "[$CLASSNAME_ID$]", StringUtil.merge(classNameIds));
 			}
 
 			if (classPK < 0) {
@@ -643,11 +643,11 @@ public class DDMTemplateFinderImpl
 
 			if (classNameIds.length == 0) {
 				sql = StringUtil.replace(
-					sql, "(classNameId IN ([$CLASSNAME_IDS$])) AND", "");
+					sql, "(classNameId IN ([$CLASSNAME_ID$])) AND", "");
 			}
 			else {
 				sql = StringUtil.replace(
-					sql, "[$CLASSNAME_IDS$]", StringUtil.merge(classNameIds));
+					sql, "[$CLASSNAME_ID$]", StringUtil.merge(classNameIds));
 			}
 
 			if (classPK < 0) {

@@ -21,36 +21,12 @@ import java.util.Locale;
  */
 public interface PortletDisplayTemplateHandler {
 
-	/**
-	 * Returns the class name of the display style
-	 *
-	 * @return the the class name of the display style
-	 */
 	public String getClassName();
 
-	/**
-	 * Returns the location of the default template of the display style
-	 *
-	 * @return the location of the default template. This template will be shown
-	 * as the default information for the user when he firstly creates a new
-	 * display template
-	 */
 	public String getDefaultTemplateLocation();
 
-	/**
-	 * Returns the name of the display style
-	 *
-	 * @param  locale the locale of the display style name
-	 * @return the name of the display style
-	 */
 	public String getName(Locale locale);
 
-	/**
-	 * Returns the name of the resource the display style is associated with.
-	 * This will be used to check permissions when adding new display styles
-	 *
-	 * @return the name of the resource
-	 */
 	public String getResourceName();
 
 }

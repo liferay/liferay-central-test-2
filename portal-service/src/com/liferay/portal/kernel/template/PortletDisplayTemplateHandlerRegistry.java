@@ -21,48 +21,18 @@ import java.util.List;
  */
 public interface PortletDisplayTemplateHandlerRegistry {
 
-	/**
-	 * Returns the portlet display template handler associated with the class
-	 * name id.
-	 *
-	 * @param  classNameId class name id of the PortletDisplayTemplate
-	 * @return the display style handler associated with the class name
-	 */
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
 		long classNameId);
 
-	/**
-	 * Returns the display style handler associated with the class name.
-	 *
-	 * @param  className class name of the Portlet Display Template
-	 * @return the display style handler associated with the class name
-	 */
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
 		String className);
 
-	/**
-	 * Returns all of the portlet display template handlers.
-	 *
-	 * @return the display style handlers
-	 */
 	public List<PortletDisplayTemplateHandler>
 		getPortletDisplayTemplateHandlers();
 
-	/**
-	 * Registers the portlet display template handler.
-	 *
-	 * @param portletDisplayTemplateHandler the PortletDisplayTemplate to
-	 * register
-	 */
 	public void register(
 		PortletDisplayTemplateHandler portletDisplayTemplateHandler);
 
-	/**
-	 * Unregisters the portlet display template handler.
-	 *
-	 * @param portletDisplayTemplateHandler the display style handler to
-	 * unregister
-	 */
 	public void unregister(
 		PortletDisplayTemplateHandler portletDisplayTemplateHandler);
 

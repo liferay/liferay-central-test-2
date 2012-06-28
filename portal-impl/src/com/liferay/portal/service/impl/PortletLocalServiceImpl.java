@@ -1272,6 +1272,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("portlet-data-handler-class"),
 				portletModel.getPortletDataHandlerClass()));
+		portletModel.setPortletDisplayTemplateHandlerClass(
+			GetterUtil.getString(
+				portletElement.elementText("portlet-display-template-handler"),
+				portletModel.getPortletDisplayTemplateHandlerClass()));
 		portletModel.setPortletLayoutListenerClass(
 			GetterUtil.getString(
 				portletElement.elementText("portlet-layout-listener-class"),
@@ -1358,11 +1362,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("permission-propagator"),
 				portletModel.getPermissionPropagatorClass()));
-
-		portletModel.setPortletDisplayTemplateHandlerClass(
-			GetterUtil.getString(
-				portletElement.elementText("portlet-display-template-handler"),
-				portletModel.getPortletDisplayTemplateHandlerClass()));
 
 		List<String> trashHandlerClasses =
 			portletModel.getTrashHandlerClasses();

@@ -145,11 +145,6 @@
 			<bean class="com.liferay.portal.deploy.hot.HotDeployImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryUtil" class="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryUtil">
-		<property name="portletDisplayTemplateHandlerRegistry">
-			<bean class="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.facebook.FacebookConnectUtil" class="com.liferay.portal.kernel.facebook.FacebookConnectUtil">
 		<property name="facebookConnect">
 			<bean class="com.liferay.portal.facebook.FacebookConnectImpl" />
@@ -316,6 +311,11 @@
 	<bean id="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil" class="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil">
 		<property name="stagingPermission">
 			<bean class="com.liferay.portal.staging.permission.StagingPermissionImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryUtil" class="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryUtil">
+		<property name="portletDisplayTemplateHandlerRegistry">
+			<bean class="com.liferay.portal.kernel.template.PortletDisplayTemplateHandlerRegistryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.template.TemplateManagerUtil" class="com.liferay.portal.kernel.template.TemplateManagerUtil">

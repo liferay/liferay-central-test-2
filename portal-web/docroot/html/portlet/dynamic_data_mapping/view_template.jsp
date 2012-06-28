@@ -42,7 +42,7 @@ portletURL.setParameter("classPK", String.valueOf(classPK));
 
 String title = StringPool.BLANK;
 
-if (!portletName.equals(PortletKeys.DISPLAY_STYLES)) {
+if (!portletName.equals(PortletKeys.APPLICATION_DISPLAY_STYLES)) {
 	if (structure != null) {
 		title = LanguageUtil.format(pageContext, (Validator.isNull(templateHeaderTitle) ? "templates-for-structure-x" : templateHeaderTitle), structure.getName(locale), false);
 	}
@@ -54,7 +54,7 @@ if (!portletName.equals(PortletKeys.DISPLAY_STYLES)) {
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= title %>'
+	title="<%= title %>"
 />
 
 <liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">

@@ -60,9 +60,6 @@ public interface PortletBag extends Cloneable {
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances();
 
-	public PortletDisplayTemplateHandler
-		getPortletDisplayTemplateHandlerInstance();
-
 	public FriendlyURLMapper getFriendlyURLMapperInstance();
 
 	public List<Indexer> getIndexerInstances();
@@ -76,6 +73,9 @@ public interface PortletBag extends Cloneable {
 	public MessageListener getPopMessageListenerInstance();
 
 	public PortletDataHandler getPortletDataHandlerInstance();
+
+	public PortletDisplayTemplateHandler
+		getPortletDisplayTemplateHandlerInstance();
 
 	public Portlet getPortletInstance();
 

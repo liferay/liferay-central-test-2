@@ -149,6 +149,14 @@ public class PortletBagFactory {
 		PortletDataHandler portletDataHandlerInstance = newPortletDataHandler(
 			portlet);
 
+		PortletDisplayTemplateHandler portletDisplayTemplateHandlerInstance =
+			newPortletDisplayTemplateHandler(portlet);
+
+		if (portletDisplayTemplateHandlerInstance != null) {
+			PortletDisplayTemplateHandlerRegistryUtil.register(
+				portletDisplayTemplateHandlerInstance);
+		}
+
 		PortletLayoutListener portletLayoutListenerInstance =
 			newPortletLayoutListener(portlet);
 
@@ -232,14 +240,6 @@ public class PortletBagFactory {
 		PermissionPropagator permissionPropagatorInstance =
 			newPermissionPropagator(portlet);
 
-		PortletDisplayTemplateHandler portletDisplayTemplateHandlerInstance =
-			newPortletDisplayTemplateHandler(portlet);
-
-		if (portletDisplayTemplateHandlerInstance != null) {
-			PortletDisplayTemplateHandlerRegistryUtil.register(
-				portletDisplayTemplateHandlerInstance);
-		}
-
 		List<TrashHandler> trashHandlerInstances =
 			new ArrayList<TrashHandler>();
 
@@ -317,13 +317,13 @@ public class PortletBagFactory {
 			portlet.getPortletId(), _servletContext, portletInstance,
 			configurationActionInstance, indexerInstances, openSearchInstance,
 			friendlyURLMapperInstance, urlEncoderInstance,
-			portletDataHandlerInstance, portletLayoutListenerInstance,
-			pollerProcessorInstance, popMessageListenerInstance,
-			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
-			webDAVStorageInstance, xmlRpcMethodInstance,
-			controlPanelEntryInstance, assetRendererFactoryInstances,
-			atomCollectionAdapterInstances, customAttributesDisplayInstances,
-			permissionPropagatorInstance, portletDisplayTemplateHandlerInstance,
+			portletDataHandlerInstance, portletDisplayTemplateHandlerInstance,
+			portletLayoutListenerInstance, pollerProcessorInstance,
+			popMessageListenerInstance, socialActivityInterpreterInstance,
+			socialRequestInterpreterInstance, webDAVStorageInstance,
+			xmlRpcMethodInstance, controlPanelEntryInstance,
+			assetRendererFactoryInstances, atomCollectionAdapterInstances,
+			customAttributesDisplayInstances, permissionPropagatorInstance,
 			trashHandlerInstances, workflowHandlerInstances,
 			preferencesValidatorInstance, resourceBundles);
 

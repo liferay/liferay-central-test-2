@@ -61,6 +61,7 @@ public class PortletBagImpl implements PortletBag {
 		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
+		PortletDisplayTemplateHandler portletDisplayTemplateHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
 		PollerProcessor pollerProcessorInstance,
 		MessageListener popMessageListenerInstance,
@@ -72,7 +73,6 @@ public class PortletBagImpl implements PortletBag {
 		List<AtomCollectionAdapter<?>> atomCollectionAdapters,
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
 		PermissionPropagator permissionPropagatorInstance,
-		PortletDisplayTemplateHandler portletDisplayTemplateHandlerInstance,
 		List<TrashHandler> trashHandlerInstances,
 		List<WorkflowHandler> workflowHandlerInstances,
 		PreferencesValidator preferencesValidatorInstance,
@@ -87,6 +87,8 @@ public class PortletBagImpl implements PortletBag {
 		_friendlyURLMapperInstance = friendlyURLMapperInstance;
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
+		_portletDisplayTemplateHandlerInstance =
+			portletDisplayTemplateHandlerInstance;
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
 		_pollerProcessorInstance = pollerProcessorInstance;
 		_popMessageListenerInstance = popMessageListenerInstance;
@@ -99,8 +101,6 @@ public class PortletBagImpl implements PortletBag {
 		_atomCollectionAdapterInstances = atomCollectionAdapters;
 		_customAttributesDisplayInstances = customAttributesDisplayInstances;
 		_permissionPropagatorInstance = permissionPropagatorInstance;
-		_portletDisplayTemplateHandlerInstance =
-			portletDisplayTemplateHandlerInstance;
 		_trashHandlerInstances = trashHandlerInstances;
 		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
@@ -114,6 +114,7 @@ public class PortletBagImpl implements PortletBag {
 			getConfigurationActionInstance(), getIndexerInstances(),
 			getOpenSearchInstance(), getFriendlyURLMapperInstance(),
 			getURLEncoderInstance(), getPortletDataHandlerInstance(),
+			getPortletDisplayTemplateHandlerInstance(),
 			getPortletLayoutListenerInstance(), getPollerProcessorInstance(),
 			getPopMessageListenerInstance(),
 			getSocialActivityInterpreterInstance(),
@@ -122,10 +123,9 @@ public class PortletBagImpl implements PortletBag {
 			getAssetRendererFactoryInstances(),
 			getAtomCollectionAdapterInstances(),
 			getCustomAttributesDisplayInstances(),
-			getPermissionPropagatorInstance(),
-			getPortletDisplayTemplateHandlerInstance(),
-			getTrashHandlerInstances(), getWorkflowHandlerInstances(),
-			getPreferencesValidatorInstance(), getResourceBundles());
+			getPermissionPropagatorInstance(), getTrashHandlerInstances(),
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstance(),
+			getResourceBundles());
 	}
 
 	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
@@ -146,12 +146,6 @@ public class PortletBagImpl implements PortletBag {
 
 	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
 		return _customAttributesDisplayInstances;
-	}
-
-	public PortletDisplayTemplateHandler
-		getPortletDisplayTemplateHandlerInstance() {
-
-		return _portletDisplayTemplateHandlerInstance;
 	}
 
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
@@ -180,6 +174,12 @@ public class PortletBagImpl implements PortletBag {
 
 	public PortletDataHandler getPortletDataHandlerInstance() {
 		return _portletDataHandlerInstance;
+	}
+
+	public PortletDisplayTemplateHandler
+		getPortletDisplayTemplateHandlerInstance() {
+
+		return _portletDisplayTemplateHandlerInstance;
 	}
 
 	public Portlet getPortletInstance() {
@@ -263,8 +263,6 @@ public class PortletBagImpl implements PortletBag {
 	private ConfigurationAction _configurationActionInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private List<CustomAttributesDisplay> _customAttributesDisplayInstances;
-	private PortletDisplayTemplateHandler
-		_portletDisplayTemplateHandlerInstance;
 	private FriendlyURLMapper _friendlyURLMapperInstance;
 	private List<Indexer> _indexerInstances;
 	private OpenSearch _openSearchInstance;
@@ -272,6 +270,8 @@ public class PortletBagImpl implements PortletBag {
 	private PollerProcessor _pollerProcessorInstance;
 	private MessageListener _popMessageListenerInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
+	private PortletDisplayTemplateHandler
+		_portletDisplayTemplateHandlerInstance;
 	private Portlet _portletInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
 	private String _portletName;

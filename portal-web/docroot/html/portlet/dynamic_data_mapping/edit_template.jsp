@@ -102,13 +102,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 		if (classNameId > 0) {
 			PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(classNameId);
 
-			StringBundler sb = new StringBundler();
-
-			sb.append(LanguageUtil.get(pageContext, "new"));
-			sb.append(StringPool.SPACE);
-			sb.append(portletDisplayTemplateHandler.getName(locale));
-
-			title = sb.toString();
+			title = LanguageUtil.get(pageContext, "new") + StringPool.SPACE + portletDisplayTemplateHandler.getName(locale);
 		}
 		else {
 			title = LanguageUtil.get(pageContext, "new-application-display-template");

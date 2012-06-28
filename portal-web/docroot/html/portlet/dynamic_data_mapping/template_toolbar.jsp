@@ -90,9 +90,9 @@ long classPK = ParamUtil.getLong(request, "classPK");
 		<c:otherwise>
 
 			<%
-				List<PortletDisplayTemplateHandler> portletDisplayTemplateHandlers = getPortletDisplayTemplateHandlers(permissionChecker, scopeGroupId);
+			List<PortletDisplayTemplateHandler> portletDisplayTemplateHandlers = getPortletDisplayTemplateHandlers(permissionChecker, scopeGroupId);
 
-				if (portletDisplayTemplateHandlers.size() > 0) {
+			if (!portletDisplayTemplateHandlers.isEmpty()) {
 			%>
 
 				<liferay-ui:icon-menu align="left" cssClass='<%= "lfr-toolbar-button add-button " + (toolbarItem.equals("add") ? "current" : StringPool.BLANK) %>' direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add" showWhenSingleIcon="<%= true %>">
@@ -107,7 +107,6 @@ long classPK = ParamUtil.getLong(request, "classPK");
 
 					<%
 					for (PortletDisplayTemplateHandler portletDisplayTemplateHandler : portletDisplayTemplateHandlers) {
-
 						addPortletDisplayTemplateURL.setParameter("classNameId", String.valueOf(PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName())));
 						addPortletDisplayTemplateURL.setParameter("classPK", String.valueOf(0));
 						addPortletDisplayTemplateURL.setParameter("ddmResource", portletDisplayTemplateHandler.getResourceName());
@@ -137,6 +136,7 @@ long classPK = ParamUtil.getLong(request, "classPK");
 <%!
 public List<PortletDisplayTemplateHandler> getPortletDisplayTemplateHandlers(PermissionChecker permissionChecker, long scopeGroupId) {
 	List<PortletDisplayTemplateHandler> portletDisplayTemplateHandlers = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandlers();
+
 	List<PortletDisplayTemplateHandler> allowedPortletDisplayTemplateHandlers = new ArrayList<PortletDisplayTemplateHandler>();
 
 	for (PortletDisplayTemplateHandler portletDisplayTemplateHandler : portletDisplayTemplateHandlers) {

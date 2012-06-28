@@ -17,9 +17,9 @@ package com.liferay.portal.kernel.template;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.util.PortalUtil;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * @author Juan Fernández
@@ -30,8 +30,9 @@ public class PortletDisplayTemplateHandlerRegistryImpl implements
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
 		long classNameId) {
 
-		return _portletDisplayTemplateHandlers.get(
-			PortalUtil.getClassName(classNameId));
+		String className = PortalUtil.getClassName(classNameId);
+
+		return _portletDisplayTemplateHandlers.get(className);
 	}
 
 	public PortletDisplayTemplateHandler getPortletDisplayTemplateHandler(
@@ -63,6 +64,6 @@ public class PortletDisplayTemplateHandlerRegistryImpl implements
 
 	private Map<String, PortletDisplayTemplateHandler>
 		_portletDisplayTemplateHandlers =
-			new TreeMap<String, PortletDisplayTemplateHandler>();
+			new HashMap<String, PortletDisplayTemplateHandler>();
 
 }

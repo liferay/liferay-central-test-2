@@ -17,7 +17,6 @@ package com.liferay.portlet.assetpublisher.template;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.template.PortletDisplayTemplateHandler;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -29,7 +28,7 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class AssetPublisherDisplayTemplateHandler implements
+public class AssetPublisherPortletDisplayTemplateHandler implements
 	PortletDisplayTemplateHandler {
 
 	public String getClassName() {
@@ -42,14 +41,11 @@ public class AssetPublisherDisplayTemplateHandler implements
 	}
 
 	public String getName(Locale locale) {
-		StringBundler sb = new StringBundler();
+		String portletTitle = PortalUtil.getPortletTitle(
+			PortletKeys.ASSET_PUBLISHER, locale);
 
-		sb.append(
-			PortalUtil.getPortletTitle(PortletKeys.ASSET_PUBLISHER, locale));
-		sb.append(StringPool.SPACE);
-		sb.append(LanguageUtil.get(locale, "template"));
-
-		return sb.toString();
+		return portletTitle.concat(StringPool.SPACE).concat(
+			LanguageUtil.get(locale, "template"));
 	}
 
 	public String getResourceName() {

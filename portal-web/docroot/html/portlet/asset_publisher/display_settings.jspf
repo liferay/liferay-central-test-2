@@ -16,6 +16,7 @@
 
 <%
 PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(AssetEntry.class.getName());
+
 long portletDisplayTemplateClassNameId = PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName());
 %>
 
@@ -32,15 +33,15 @@ long portletDisplayTemplateClassNameId = PortalUtil.getClassNameId(portletDispla
 			<%
 			}
 
-			List<DDMTemplate> assetPublisherDisplayTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, portletDisplayTemplateClassNameId, 0);
+			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, assetPublisherDDMTemplateClassNameId, scopeGroupId);
 
-			for (DDMTemplate assetPublisherDisplayTemplate : assetPublisherDisplayTemplates) {
-				if (!DDMTemplatePermission.contains(permissionChecker, assetPublisherDisplayTemplate, ActionKeys.VIEW)) {
+			for (DDMTemplate curAssetPublisherDDMTemplate : assetPublisherDDMTemplates) {
+				if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
 					continue;
 				}
 			%>
 
-				<aui:option label="<%= assetPublisherDisplayTemplate.getName(locale) %>" selected="<%= (assetPublisherDDMTemplate != null) && (assetPublisherDisplayTemplate.getTemplateId() == assetPublisherDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + assetPublisherDisplayTemplate.getTemplateId() %>' />
+				<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (assetPublisherDDMTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == assetPublisherDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getTemplateId() %>' />
 
 			<%
 			}
