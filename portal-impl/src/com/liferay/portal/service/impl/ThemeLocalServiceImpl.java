@@ -170,7 +170,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				return null;
 			}
 
-			if (themeId.indexOf(PortletConstants.WAR_SEPARATOR) == -1) {
+			if (!themeId.contains(PortletConstants.WAR_SEPARATOR)) {
 				_log.error(
 					"No theme found for default theme id " + themeId +
 						". Returning a random theme.");
