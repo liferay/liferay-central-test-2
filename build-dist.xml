@@ -784,6 +784,7 @@ release was successful.</echo>
 
 	<target name="prepare-generated-files">
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
+		<ant dir="portal-impl" target="build-lib-versions" inheritAll="false" />
 		<ant dir="portal-impl" target="build-services" inheritAll="false" />
 		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
 
