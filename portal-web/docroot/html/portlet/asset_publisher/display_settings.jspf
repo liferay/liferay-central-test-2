@@ -33,7 +33,7 @@ long portletDisplayTemplateClassNameId = PortalUtil.getClassNameId(portletDispla
 			<%
 			}
 
-			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, assetPublisherDDMTemplateClassNameId, scopeGroupId);
+			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, portletDisplayTemplateClassNameId, scopeGroupId);
 
 			for (DDMTemplate curAssetPublisherDDMTemplate : assetPublisherDDMTemplates) {
 				if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
