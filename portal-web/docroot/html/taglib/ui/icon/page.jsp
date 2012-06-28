@@ -83,9 +83,9 @@ if (Validator.isNotNull(src) && themeDisplay.isThemeImagesFastLoad() && !auiImag
 	}
 
 	if (spriteImage != null) {
-		String pathThemeImages = themeDisplay.getPathThemeImages();
+		String themeImagesPath = themeDisplay.getPathThemeImages();
 
-		src = pathThemeImages.concat("/spacer.png");
+		src = themeImagesPath.concat("/spacer.png");
 
 		StringBundler sb = new StringBundler(10);
 
