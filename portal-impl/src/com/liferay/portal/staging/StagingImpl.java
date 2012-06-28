@@ -527,14 +527,14 @@ public class StagingImpl implements Staging {
 	public void enableRemoteStaging(
 			long userId, Group scopeGroup, Group liveGroup,
 			boolean branchingPublic, boolean branchingPrivate,
-			String remoteAddress, long remoteGroupId, String remotePathContext,
-			int remotePort, boolean secureConnection,
+			String remoteAddress, int remotePort, String remotePathContext,
+			boolean secureConnection, long remoteGroupId,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		validate(
-			remoteAddress, remoteGroupId, remotePathContext, remotePort,
-			secureConnection);
+			remoteAddress, remotePort, remotePathContext, secureConnection,
+			remoteGroupId);
 
 		if (liveGroup.hasStagingGroup()) {
 			disableStaging(scopeGroup, liveGroup, serviceContext);
@@ -1377,19 +1377,19 @@ public class StagingImpl implements Staging {
 
 			remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
 
-			long remoteGroupId = getLong(
-				portletRequest, liveGroup, "remoteGroupId");
-			String remotePathContext = getString(
-				portletRequest, liveGroup, "remotePathContext");
 			int remotePort = getInteger(
 				portletRequest, liveGroup, "remotePort");
+			String remotePathContext = getString(
+				portletRequest, liveGroup, "remotePathContext");
 			boolean secureConnection = getBoolean(
 				portletRequest, liveGroup, "secureConnection");
+			long remoteGroupId = getLong(
+				portletRequest, liveGroup, "remoteGroupId");
 
 			enableRemoteStaging(
 				userId, scopeGroup, liveGroup, branchingPublic,
-				branchingPrivate, remoteAddress, remoteGroupId,
-				remotePathContext,remotePort, secureConnection, serviceContext);
+				branchingPrivate, remoteAddress, remotePort, remotePathContext,
+				secureConnection, remoteGroupId, serviceContext);
 		}
 	}
 
@@ -1901,32 +1901,32 @@ public class StagingImpl implements Staging {
 
 		remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
 
-		long remoteGroupId = ParamUtil.getLong(
-			portletRequest, "remoteGroupId",
-			GetterUtil.getLong(
-				groupTypeSettingsProperties.getProperty("remoteGroupId")));
-		String remotePathContext = ParamUtil.getString(
-			portletRequest, "remotePathContext",
-			groupTypeSettingsProperties.getProperty("remotePathContext"));
 		int remotePort = ParamUtil.getInteger(
 			portletRequest, "remotePort",
 			GetterUtil.getInteger(
 				groupTypeSettingsProperties.getProperty("remotePort")));
-		boolean remotePrivateLayout = ParamUtil.getBoolean(
-			portletRequest, "remotePrivateLayout");
+		String remotePathContext = ParamUtil.getString(
+			portletRequest, "remotePathContext",
+			groupTypeSettingsProperties.getProperty("remotePathContext"));
 		boolean secureConnection = ParamUtil.getBoolean(
 			portletRequest, "secureConnection",
 			GetterUtil.getBoolean(
 				groupTypeSettingsProperties.getProperty("secureConnection")));
+		long remoteGroupId = ParamUtil.getLong(
+			portletRequest, "remoteGroupId",
+			GetterUtil.getLong(
+				groupTypeSettingsProperties.getProperty("remoteGroupId")));
+		boolean remotePrivateLayout = ParamUtil.getBoolean(
+			portletRequest, "remotePrivateLayout");
 
 		validate(
-			remoteAddress, remoteGroupId, remotePathContext, remotePort,
-			secureConnection);
+			remoteAddress, remotePort, remotePathContext, secureConnection,
+			remoteGroupId);
 
 		if (group.isCompany()) {
 			updateGroupTypeSettingsProperties(
-				group, remoteAddress, remoteGroupId, remotePathContext,
-				remotePort, secureConnection);
+				group, remoteAddress, remotePort, remotePathContext,
+				secureConnection, remoteGroupId);
 		}
 
 		String range = ParamUtil.getString(portletRequest, "range");
@@ -2134,8 +2134,9 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void updateGroupTypeSettingsProperties(
-			Group group, String remoteAddress, long remoteGroupId,
-			String remotePathContext, int remotePort, boolean secureConnection)
+			Group group, String remoteAddress, int remotePort,
+			String remotePathContext, boolean secureConnection,
+			long remoteGroupId)
 		throws Exception {
 
 		UnicodeProperties typeSettingsProperties =
@@ -2157,8 +2158,8 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void validate(
-			String remoteAddress, long remoteGroupId, String remotePathContext,
-			int remotePort, boolean secureConnection)
+			String remoteAddress, int remotePort, String remotePathContext,
+			boolean secureConnection, long remoteGroupId)
 		throws Exception {
 
 		RemoteOptionsException roe = null;

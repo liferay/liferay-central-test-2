@@ -39,8 +39,8 @@ public class LayoutsRemotePublisherRequest
 		_layoutIdMap = layoutIdMap;
 		_parameterMap = parameterMap;
 		_remoteAddress = remoteAddress;
-		_remotePathContext = remotePathContext;
 		_remotePort = remotePort;
+		_remotePathContext = remotePathContext;
 		_secureConnection = secureConnection;
 		_remoteGroupId = remoteGroupId;
 		_remotePrivateLayout = remotePrivateLayout;

@@ -140,15 +140,15 @@ public class StagingUtil {
 	public static void enableRemoteStaging(
 			long userId, Group scopeGroup, Group liveGroup,
 			boolean branchingPublic, boolean branchingPrivate,
-			String remoteAddress, long remoteGroupId, int remotePort,
-			String remotePathContext, boolean secureConnection,
+			String remoteAddress, int remotePort, String remotePathContext,
+			boolean secureConnection, long remoteGroupId,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		getStaging().enableRemoteStaging(
 			userId, scopeGroup, liveGroup, branchingPublic, branchingPrivate,
-			remoteAddress, remoteGroupId, remotePathContext, remotePort,
-			secureConnection, serviceContext);
+			remoteAddress, remotePort, remotePathContext, secureConnection,
+			remoteGroupId, serviceContext);
 	}
 
 	public static Group getLiveGroup(long groupId)
