@@ -1344,12 +1344,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-test-workflow" />
-			<param name="test.ant.script.plugin.portlets" value="test-workflow-portlet" />
-			<param name="test.ant.script.suite" value="PluginsTestWorkflowTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-today-in-christian-history" />
 			<param name="test.ant.script.plugin.portlets" value="tich-portlet" />
 			<param name="test.ant.script.suite" value="PluginsTodayinChristianHistoryTestSuite" />
