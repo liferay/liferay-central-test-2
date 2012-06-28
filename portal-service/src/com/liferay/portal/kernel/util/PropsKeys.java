@@ -385,7 +385,7 @@ public interface PropsKeys {
 
 	public static final String COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE = "company.security.auto.login.max.age";
 
-	public static final String COMPANY_SECURITY_HTML_AUTOCOMPLETE = "company.security.html.autocomplete";
+	public static final String COMPANY_SECURITY_HTML_LOGIN_AUTOCOMPLETE = "company.security.html.login.autocomplete";
 
 	public static final String COMPANY_SECURITY_SEND_PASSWORD = "company.security.send.password";
 
