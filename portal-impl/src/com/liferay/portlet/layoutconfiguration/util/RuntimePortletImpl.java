@@ -323,9 +323,13 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		ServletContext pluginServletContext = ServletContextPool.get(
 			pluginServletContextName);
 
-		ClassLoader pluginClassLoader =
-			(ClassLoader)pluginServletContext.getAttribute(
-				PluginContextListener.PLUGIN_CLASS_LOADER);
+		ClassLoader pluginClassLoader = null;
+
+		if (pluginServletContext != null) {
+			pluginClassLoader =
+				(ClassLoader)pluginServletContext.getAttribute(
+					PluginContextListener.PLUGIN_CLASS_LOADER);
+		}
 
 		ClassLoader contextClassLoader =
 			PACLClassLoaderUtil.getContextClassLoader();
