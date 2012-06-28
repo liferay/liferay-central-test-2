@@ -46,15 +46,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<aui:fieldset cssClass="checkBoxes">
 				<aui:column columnWidth="50">
-					<aui:input name="preferences--showCurrentGroup--" type="checkbox" value="<%= showCurrentGroup %>" />
-					<aui:input name="preferences--showCurrentPortlet--" type="checkbox" value="<%= showCurrentPortlet %>" />
-					<aui:input name="preferences--showGuestGroup--" type="checkbox" value="<%= showGuestGroup %>" />
+					<aui:input label="show-current-site" name="preferences--showCurrentGroup--" type="checkbox" value="<%= showCurrentGroup %>" />
+					<aui:input label="show-current-application" name="preferences--showCurrentPortlet--" type="checkbox" value="<%= showCurrentPortlet %>" />
+					<aui:input label="show-guest-site" name="preferences--showGuestGroup--" type="checkbox" value="<%= showGuestGroup %>" />
 				</aui:column>
 
 				<aui:column columnWidth="50">
-					<aui:input name="preferences--showLayout--" type="checkbox" value="<%= showLayout %>" />
-					<aui:input name="preferences--showParentGroups--" type="checkbox" value="<%= showParentGroups %>" />
-					<aui:input name="preferences--showPortletBreadcrumb--" type="checkbox" value="<%= showPortletBreadcrumb %>" />
+					<aui:input label="show-page" name="preferences--showLayout--" type="checkbox" value="<%= showLayout %>" />
+					<aui:input label="show-parent-sites" name="preferences--showParentGroups--" type="checkbox" value="<%= showParentGroups %>" />
+					<aui:input label="show-application-breadcrumb" name="preferences--showPortletBreadcrumb--" type="checkbox" value="<%= showPortletBreadcrumb %>" />
 				</aui:column>
 			</aui:fieldset>
 
