@@ -91,8 +91,8 @@ public interface Staging {
 	public void enableRemoteStaging(
 			long userId, Group scopeGroup, Group liveGroup,
 			boolean branchingPublic, boolean branchingPrivate,
-			String remoteAddress, long remoteGroupId, String remotePathContext,
-			int remotePort, boolean secureConnection,
+			String remoteAddress, int remotePort, String remotePathContext,
+			boolean secureConnection, long remoteGroupId,
 			ServiceContext serviceContext)
 		throws Exception;
 

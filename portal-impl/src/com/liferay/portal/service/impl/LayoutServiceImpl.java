@@ -822,8 +822,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			String remoteAddress, int remotePort, String remotePathContext,
 			boolean secureConnection, long remoteGroupId,
 			boolean remotePrivateLayout, Date startDate, Date endDate,
-			String groupName, String cronText,
-			Date schedulerStartDate, Date schedulerEndDate, String description)
+			String groupName, String cronText, Date schedulerStartDate,
+			Date schedulerEndDate, String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
