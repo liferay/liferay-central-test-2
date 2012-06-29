@@ -191,8 +191,9 @@ public class LDAPAuth implements Authenticator {
 					sb.append(StringPool.OPEN_CURLY_BRACE);
 					sb.append(algorithm);
 					sb.append(StringPool.CLOSE_CURLY_BRACE);
-					sb.append(PwdEncryptor.encrypt(
-						algorithm, password, ldapPassword));
+					sb.append(
+						PwdEncryptor.encrypt(
+							algorithm, password, ldapPassword));
 
 					encryptedPassword = sb.toString();
 				}

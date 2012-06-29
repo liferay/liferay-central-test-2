@@ -427,8 +427,9 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 				sb.append(PwdEncryptor.encrypt(algorithm, password, null));
 
 				password = sb.toString();
-			} catch (PwdEncryptorException e) {
-				throw new SystemException(e);
+			}
+			catch (PwdEncryptorException pee) {
+				throw new SystemException(pee);
 			}
 		}
 
