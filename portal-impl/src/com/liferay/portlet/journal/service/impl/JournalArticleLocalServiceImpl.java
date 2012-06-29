@@ -2490,6 +2490,7 @@ public class JournalArticleLocalServiceImpl
 				}
 
 				if (article.getClassNameId() == 0) {
+
 					// Get the earliest display date and latest expiration date
 					// among all article versions
 
