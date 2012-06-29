@@ -91,7 +91,7 @@ public class LayoutsTreeUtil {
 
 			layoutAncestors.add(selLayout);
 
-			String treeId = getScopedPaginationTreeId(request);
+			String treeId = _getScopedPaginationTreeId(request);
 
 			String paginationJSON = SessionClicks.get(
 				session, treeId, StringPool.BLANK);
@@ -114,6 +114,7 @@ public class LayoutsTreeUtil {
 		}
 
 		start = Math.max(0, Math.min(start, layouts.size()));
+
 		end = Math.min(end, layouts.size());
 
 		if (end < 0) {
@@ -216,14 +217,14 @@ public class LayoutsTreeUtil {
 		return responseJSONObject.toString();
 	}
 
-	protected static String getScopedPaginationTreeId(
+	private static String _getScopedPaginationTreeId(
 		HttpServletRequest request) {
 
 		String treeId = ParamUtil.getString(request, "treeId");
 		long groupId = ParamUtil.getLong(request, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(treeId);
 		sb.append(StringPool.COLON);
