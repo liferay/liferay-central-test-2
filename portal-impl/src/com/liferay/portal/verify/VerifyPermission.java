@@ -284,7 +284,7 @@ public class VerifyPermission
 				return;
 			}
 
-			long count = rs.getLong(1);
+			int count = rs.getInt(1);
 
 			if (count > 0) {
 				return;
