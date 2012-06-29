@@ -15,21 +15,21 @@
 --%>
 
 <%
-PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(AssetEntry.class.getName());
+PortletDisplayTemplateHandler portletDisplayDDMTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(AssetEntry.class.getName());
 
-long portletDisplayTemplateClassNameId = PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName());
+long portletDisplayDDMTemplateClassNameId = PortalUtil.getClassNameId(portletDisplayDDMTemplateHandler.getClassName());
 
 Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
 
-PortletURL portletDisplayTemplatesURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true), PortletRequest.RENDER_PHASE);
+PortletURL portletDisplayDDMTemplatesURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true), PortletRequest.RENDER_PHASE);
 
-portletDisplayTemplatesURL.setWindowState(LiferayWindowState.POP_UP);
-portletDisplayTemplatesURL.setPortletMode(PortletMode.VIEW);
-portletDisplayTemplatesURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
+portletDisplayDDMTemplatesURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
+portletDisplayDDMTemplatesURL.setPortletMode(PortletMode.VIEW);
+portletDisplayDDMTemplatesURL.setWindowState(LiferayWindowState.POP_UP);
 
-String portletDisplayTemplatesURLString = portletDisplayTemplatesURL.toString();
+String portletDisplayDDMTemplatesURLString = portletDisplayDDMTemplatesURL.toString();
 
-portletDisplayTemplatesURLString = HttpUtil.addParameter(portletDisplayTemplatesURLString, "doAsGroupId", scopeGroupId);
+portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTemplatesURLString, "doAsGroupId", scopeGroupId);
 %>
 
 <aui:fieldset cssClass="general-display-settings">
@@ -45,7 +45,7 @@ portletDisplayTemplatesURLString = HttpUtil.addParameter(portletDisplayTemplates
 			<%
 			}
 
-			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(displayTemplatesGroupId, portletDisplayTemplateClassNameId, 0);
+			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(portletDisplayDDMTemplateGroupId, portletDisplayDDMTemplateClassNameId, 0);
 
 			for (DDMTemplate curAssetPublisherDDMTemplate : assetPublisherDDMTemplates) {
 				if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
@@ -53,7 +53,7 @@ portletDisplayTemplatesURLString = HttpUtil.addParameter(portletDisplayTemplates
 				}
 			%>
 
-				<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == portletDisplayTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getUuid() %>' />
+				<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayDDMTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == portletDisplayDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getUuid() %>' />
 
 			<%
 			}
@@ -285,7 +285,7 @@ portletDisplayTemplatesURLString = HttpUtil.addParameter(portletDisplayTemplates
 						},
 						id: windowId,
 						title: '<%= UnicodeLanguageUtil.get(pageContext, "display-templates") %>',
-						uri: '<%= portletDisplayTemplatesURLString %>'
+						uri: '<%= portletDisplayDDMTemplatesURLString %>'
 					},
 					function (ddmPortletWindow) {
 						ddmPortletWindow.once(

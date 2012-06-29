@@ -26,8 +26,6 @@ String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.
 AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
 List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<AssetRendererFactory>();
-
-Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
