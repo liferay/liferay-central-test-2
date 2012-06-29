@@ -66,9 +66,7 @@ public abstract class BaseSeleniumImpl
 	}
 
 	public boolean isElementNotPresent(String locator) {
-		boolean isElementPresent = isElementPresent(locator);
-
-		return !isElementPresent;
+		return !isElementPresent(locator);
 	}
 
 	public boolean isPartialText(String locator, String value) {
