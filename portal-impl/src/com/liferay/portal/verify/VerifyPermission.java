@@ -221,9 +221,7 @@ public class VerifyPermission
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
 		ResultSet rs = null;
-		ResultSet rs2 = null;
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
@@ -232,57 +230,75 @@ public class VerifyPermission
 
 			sb.append("select Layout.companyId as companyId, Layout.plid as ");
 			sb.append("primKey, Role_.roleId as ownerRoleId from Role_, ");
-			sb.append("Layout where Role_.name = ? and Role_.companyId = ");
-			sb.append("Layout.companyId");
+			sb.append("Layout where Role_.companyId = Layout.companyId and ");
+			sb.append("Role_.name = ?");
 
 			ps = con.prepareStatement(sb.toString());
 
 			ps.setString(1, RoleConstants.OWNER);
 
-			sb = new StringBundler(4);
-
-			sb.append("select count(*) from ");
-			sb.append("ResourcePermission where ");
-			sb.append("ResourcePermission.companyId = ? and ");
-			sb.append("ResourcePermission.roleId = ? and ");
-			sb.append("ResourcePermission.primKey = ?");
-
-			ps2 = con.prepareStatement(sb.toString());
-
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long companyId = rs.getLong("companyId");
-				long ownerRoleId = rs.getLong("ownerRoleId");
 				String primKey = String.valueOf(rs.getLong("primKey"));
+				long ownerRoleId = rs.getLong("ownerRoleId");
 
-				ps2.setLong(1, companyId);
-				ps2.setLong(2, ownerRoleId);
-				ps2.setString(3, primKey);
-
-				rs2 = ps2.executeQuery();
-
-				if (rs2.next()) {
-					if (1 > rs2.getLong(1)) {
-						ResourcePermissionLocalServiceUtil.
-							setResourcePermissions(
-								companyId, Layout.class.getName(),
-								SCOPE_INDIVIDUAL, primKey,
-								ownerRoleId, actionIds);
-
-						ResourcePermissionLocalServiceUtil.
-							getResourcePermission(
-								companyId, Layout.class.getName(),
-								SCOPE_INDIVIDUAL, primKey,
-								ownerRoleId);
-					}
-				}
-
-				DataAccess.cleanUp(rs2);
+				fixLayoutRolePermissions_6(
+					companyId, primKey, ownerRoleId, actionIds);
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps2);
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void fixLayoutRolePermissions_6(
+			long companyId, String primKey, long ownerRoleId,
+			String[] actionIds)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select count(*) from ResourcePermission where ");
+			sb.append("ResourcePermission.companyId = ? and ");
+			sb.append("ResourcePermission.primKey = ? and ");
+			sb.append("ResourcePermission.roleId = ?");
+
+			ps = con.prepareStatement(sb.toString());
+
+			ps.setLong(1, companyId);
+			ps.setString(2, primKey);
+			ps.setLong(3, ownerRoleId);
+
+			rs = ps.executeQuery();
+
+			if (!rs.next()) {
+				return;
+			}
+
+			long count = rs.getLong(1);
+
+			if (count > 0) {
+				return;
+			}
+
+			ResourcePermissionLocalServiceUtil.setResourcePermissions(
+				companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
+				ownerRoleId, actionIds);
+
+			ResourcePermissionLocalServiceUtil.getResourcePermission(
+				companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
+				ownerRoleId);
+		}
+		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
