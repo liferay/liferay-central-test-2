@@ -7,7 +7,7 @@ AUI.add(
 		var TOKEN_SERIALIZE = 'serialize://';
 
 		var Store = function(key, value) {
-			var instance = this;
+			var instance = Store;
 
 			var method;
 
@@ -30,7 +30,7 @@ AUI.add(
 			}
 
 			if (method) {
-				instance[method].apply(instance, arguments);
+				instance[method].apply(Store, arguments);
 			}
 		};
 
@@ -124,36 +124,6 @@ AUI.add(
 		);
 
 		Liferay.Store = Store;
-
-		var Session = function() {
-			var instance = this;
-
-			Session.superclass.constructor.apply(Session, arguments);
-		};
-
-		A.extend(Session, Store)
-
-		A.mix(
-			Session,
-			{
-				_ioRequest: function(config) {
-					var instance = this;
-
-					A.mix(
-						config.data,
-						{
-							useHttpSession: true
-						}
-					);
-
-					Store._ioRequest.call(instance, config);
-				}
-			}
-		);
-
-		A.mix(Session, Store);
-
-		Liferay.Store.Session = Session;
 	},
 	'',
 	{

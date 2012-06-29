@@ -147,11 +147,13 @@ if (!selectableTree) {
 			A.each(
 				json.layouts,
 				function(node) {
+					var childLayouts = [];
 					var total = 0;
 
 					var nodeChildren = node.children;
 
 					if (nodeChildren) {
+						childLayouts = nodeChildren.layouts;
 						total = nodeChildren.total;
 					}
 
@@ -185,6 +187,7 @@ if (!selectableTree) {
 						paginator: {
 							limit: TreeUtil.PAGINATION_LIMIT,
 							offsetParam: 'start',
+							start: Math.max(childLayouts.length - TreeUtil.PAGINATION_LIMIT, 0),
 							total: total
 						},
 						type: '<%= selectableTree ? "task" : "io" %>'
@@ -294,7 +297,32 @@ if (!selectableTree) {
 		}
 
 		<c:if test="<%= saveState %>">
-			, updatePagination: function(node) {
+			, invokeSessionClick: function(data, callback) {
+				A.mix(
+					data,
+					{
+						useHttpSession: true
+					}
+				);
+
+				A.io.request(
+					themeDisplay.getPathMain() + '/portal/session_click',
+					{
+						after: {
+							success: function(event) {
+								var responseData = this.get('responseData');
+
+								if (callback && responseData) {
+									callback(responseData);
+								}
+							}
+						},
+						data: data
+					}
+				);
+			},
+
+			updatePagination: function(node) {
 				var paginationMap = {};
 
 				var updatePaginationMap = function(map, curNode) {
@@ -306,8 +334,11 @@ if (!selectableTree) {
 					}
 				}
 
-				Liferay.Store.Session.get(
-					'<%= HtmlUtil.escape(treeId) %>:<%= groupId %>:<%= privateLayout %>:Pagination',
+				TreeUtil.invokeSessionClick(
+					{
+						cmd: 'get',
+						key: '<%= HtmlUtil.escape(treeId) %>:<%= groupId %>:<%= privateLayout %>:Pagination'
+					},
 					function(value) {
 						try {
 							paginationMap = A.JSON.parse(value);
@@ -322,7 +353,11 @@ if (!selectableTree) {
 							}
 						);
 
-						Liferay.Store.Session('<%= HtmlUtil.escape(treeId) %>:<%= groupId %>:<%= privateLayout %>:Pagination', A.JSON.stringify(paginationMap));
+						TreeUtil.invokeSessionClick(
+							{
+								'<%= HtmlUtil.escape(treeId) %>:<%= groupId %>:<%= privateLayout %>:Pagination': A.JSON.stringify(paginationMap)
+							}
+						);
 					}
 				);
 			},
@@ -435,6 +470,7 @@ if (!selectableTree) {
 			paginator: {
 				limit: TreeUtil.PAGINATION_LIMIT,
 				offsetParam: 'start',
+				start: Math.max(<%= layoutsJSON.getJSONArray("layouts").length() %> - TreeUtil.PAGINATION_LIMIT, 0),
 				total: <%= layoutsJSON.getInt("total") %>
 			}
 		}
