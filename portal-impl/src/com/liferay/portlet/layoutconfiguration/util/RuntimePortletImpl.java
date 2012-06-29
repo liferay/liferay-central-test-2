@@ -323,7 +323,6 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			pageContext.getServletContext(), request, response, pageContext);
 	}
 
-
 	protected String doDispatch(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
