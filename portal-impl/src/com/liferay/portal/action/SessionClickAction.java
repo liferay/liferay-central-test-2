@@ -46,6 +46,7 @@ public class SessionClickAction extends Action {
 
 		try {
 			HttpSession session = request.getSession();
+
 			Enumeration<String> enu = request.getParameterNames();
 
 			boolean useHttpSession = ParamUtil.getBoolean(
@@ -88,6 +89,7 @@ public class SessionClickAction extends Action {
 		HttpSession session = request.getSession();
 
 		String cmd = ParamUtil.getString(request, "cmd");
+
 		boolean useHttpSession = ParamUtil.getBoolean(
 			request, "useHttpSession");
 
