@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -164,8 +165,13 @@ public abstract class FindAction extends Action {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				for (String curPortletId : layoutTypePortlet.getPortletIds()) {
-					if (curPortletId.startsWith(portletId)) {
+					String curRootPortletId = PortletConstants.getRootPortletId(
+						curPortletId);
+
+					if (portletId.equals(curRootPortletId)) {
 						portletId = curPortletId;
+
+						break;
 					}
 				}
 
