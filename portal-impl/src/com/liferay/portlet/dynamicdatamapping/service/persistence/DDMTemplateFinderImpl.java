@@ -122,8 +122,8 @@ public class DDMTemplateFinderImpl
 			String[] modes, String[] languages, boolean andOperator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {classNameId};
 		long[] groupIds = new long[] {groupId};
+		long[] classNameIds = new long[] {classNameId};
 
 		return doCountByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPK, names, descriptions,
@@ -233,8 +233,8 @@ public class DDMTemplateFinderImpl
 			String[] modes, String[] languages, boolean andOperator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {classNameId};
 		long[] groupIds = new long[] {groupId};
+		long[] classNameIds = new long[] {classNameId};
 
 		return filterCountByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPK, names, descriptions,
@@ -351,8 +351,8 @@ public class DDMTemplateFinderImpl
 			int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {classNameId};
 		long[] groupIds = new long[] {groupId};
+		long[] classNameIds = new long[] {classNameId};
 
 		return filterFindByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPK, names, descriptions,
@@ -474,8 +474,8 @@ public class DDMTemplateFinderImpl
 			int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {classNameId};
 		long[] groupIds = new long[] {groupId};
+		long[] classNameIds = new long[] {classNameId};
 
 		return doFindByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPK, names, descriptions,
