@@ -97,8 +97,8 @@ public class LayoutsTreeUtil {
 			session, treeId, StringPool.BLANK);
 
 		if (Validator.isNotNull(paginationJSON) && (end >= 0)) {
-			JSONObject paginationJSONObject =
-				JSONFactoryUtil.createJSONObject(paginationJSON);
+			JSONObject paginationJSONObject = JSONFactoryUtil.createJSONObject(
+				paginationJSON);
 
 			String key = String.valueOf(parentLayoutId);
 
