@@ -29,7 +29,7 @@ public interface PortletDisplayTemplateHandler {
 	public String getClassName();
 
 	/**
-	 * Returns the location of the default template of the portlet display
+	 * Returns the location of the default template of the portlet display.
 	 *
 	 * @return the location of the default template of the portlet display. This
 	 *         template will show the default information for the first portlet
