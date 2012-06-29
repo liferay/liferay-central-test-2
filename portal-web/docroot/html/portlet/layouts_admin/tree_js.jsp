@@ -154,6 +154,8 @@ if (!selectableTree) {
 						total = nodeChildren.total;
 					}
 
+					var expanded = (total > 0);
+
 					var newNode = {
 						<c:if test="<%= saveState %>">
 							after: {
@@ -173,7 +175,7 @@ if (!selectableTree) {
 						</c:if>
 						alwaysShowHitArea: node.hasChildren,
 						draggable: node.updateable,
-						expanded: total > 0,
+						expanded: expanded,
 						id: TreeUtil.createListItemId(node.groupId, node.layoutId, node.plid),
 						paginator: {
 							limit: TreeUtil.PAGINATION_LIMIT,
@@ -184,7 +186,7 @@ if (!selectableTree) {
 						type: '<%= selectableTree ? "task" : "io" %>'
 					};
 
-					if (nodeChildren && (total > 0)) {
+					if (nodeChildren && expanded) {
 						newNode.children = TreeUtil.formatJSONResults(nodeChildren);
 					}
 
@@ -312,10 +314,13 @@ if (!selectableTree) {
 
 				var updatePaginationMap = function(map, curNode) {
 					if (A.instanceOf(curNode, A.TreeNodeIO)) {
+						var paginationLimit = TreeUtil.PAGINATION_LIMIT;
+
 						var layoutId = TreeUtil.extractLayoutId(curNode);
+
 						var children = curNode.get('children');
 
-						map[layoutId] = Math.ceil(children.length / TreeUtil.PAGINATION_LIMIT) * TreeUtil.PAGINATION_LIMIT;
+						map[layoutId] = Math.ceil(children.length / paginationLimit) * paginationLimit;
 					}
 				}
 
@@ -324,11 +329,12 @@ if (!selectableTree) {
 						cmd: 'get',
 						key: '<%= HtmlUtil.escape(treeId) %>:<%= groupId %>:<%= privateLayout %>:Pagination'
 					},
-					function(value) {
+					function(responseData) {
 						try {
-							paginationMap = A.JSON.parse(value);
+							paginationMap = A.JSON.parse(responseData);
 						}
-						catch(e) {}
+						catch(e) {
+						}
 
 						updatePaginationMap(paginationMap, node)
 
