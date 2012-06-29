@@ -144,11 +144,13 @@ if (!selectableTree) {
 			A.each(
 				json.layouts,
 				function(node) {
+					var childLayouts = [];
 					var total = 0;
 
 					var nodeChildren = node.children;
 
 					if (nodeChildren) {
+						childLayouts = nodeChildren.layouts;
 						total = nodeChildren.total;
 					}
 
@@ -176,6 +178,7 @@ if (!selectableTree) {
 						paginator: {
 							limit: TreeUtil.PAGINATION_LIMIT,
 							offsetParam: 'start',
+							start: Math.max(childLayouts.length - TreeUtil.PAGINATION_LIMIT, 0),
 							total: total
 						},
 						type: '<%= selectableTree ? "task" : "io" %>'
@@ -446,6 +449,7 @@ if (!selectableTree) {
 			paginator: {
 				limit: TreeUtil.PAGINATION_LIMIT,
 				offsetParam: 'start',
+				start: Math.max(<%= layoutsJSON.getJSONArray("layouts").length() %> - TreeUtil.PAGINATION_LIMIT, 0),
 				total: <%= layoutsJSON.getInt("total") %>
 			}
 		}
