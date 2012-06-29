@@ -159,18 +159,19 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_deleteDirectory();
 
 		IndexReader indexReader = IndexReader.open(tempDirectory, false);
+
 		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 
 		try {
-			TopDocs allDocuments = indexSearcher.search(
+			TopDocs topDocs = indexSearcher.search(
 				new MatchAllDocsQuery(), indexReader.numDocs());
 
-			ScoreDoc[] allScoreDocs = allDocuments.scoreDocs;
+			ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 
-			for (ScoreDoc scoreDoc : allScoreDocs) {
-				Document doc = indexSearcher.doc(scoreDoc.doc);
+			for (ScoreDoc scoreDoc : scoreDocs) {
+				Document document = indexSearcher.doc(scoreDoc.doc);
 
-				addDocument(doc);
+				addDocument(document);
 			}
 		}
 		catch (IllegalArgumentException iae) {
@@ -254,10 +255,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private void _deleteFile() {
 		String path = _getPath();
 
-	 	try {
+		try {
 			_indexWriter.deleteAll();
 
-			// Making sure that all the changes has been applied to the index
+			// Ensuring that all the changes has been applied to the index
 
 			_indexWriter.commit();
 		}
