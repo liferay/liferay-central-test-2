@@ -465,7 +465,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	}
 
 	public void copyTomcatContextXml(File targetDir) throws Exception {
-		if (!appServerType.equals(ServerDetector.GERONIMO_ID)) {
+		if (!appServerType.equals(ServerDetector.TOMCAT_ID)) {
 			return;
 		}
 
