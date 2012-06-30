@@ -59,9 +59,7 @@ public class ThemeSandboxDeployListener
 
 		super.copyXmls(srcFile, displayName, pluginPackage);
 
-		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-			copyContextXml(srcFile);
-		}
+		copyTomcatContextXml(srcFile);
 	}
 
 	public void deploy(File dir) throws SandboxDeployException {

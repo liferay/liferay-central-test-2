@@ -103,9 +103,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		super.copyXmls(srcFile, displayName, pluginPackage);
 
-		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-			copyContextXml(srcFile);
-		}
+		copyTomcatContextXml(srcFile);
 
 		copyDependencyXml(
 			"_servlet_context_include.jsp", srcFile + "/WEB-INF/jsp");
