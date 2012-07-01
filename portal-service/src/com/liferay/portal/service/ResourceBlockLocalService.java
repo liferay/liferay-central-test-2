@@ -289,6 +289,10 @@ public interface ResourceBlockLocalService extends BaseLocalService,
 	*
 	* @param companyId the primary key of the resource block's company
 	* @param groupId the primary key of the resource block's group
+	* @param name the resource block's name
+	* @param permissionsHash the resource block's permission hash
+	* @param resourceBlockPermissionsContainer the resource block's
+	permissions container
 	* @return the new resource block
 	* @throws SystemException if a system exception occurred
 	*/
@@ -383,11 +387,12 @@ public interface ResourceBlockLocalService extends BaseLocalService,
 	* zero.
 	*
 	* @param resourceBlockId the primary key of the resource block
+	* @throws PortalException if a resource block with the primary key could
+	not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public void releaseResourceBlock(long resourceBlockId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Decrements the reference count of the resource block and updates it in
@@ -450,28 +455,6 @@ public interface ResourceBlockLocalService extends BaseLocalService,
 		java.lang.String name,
 		com.liferay.portal.model.PermissionedModel permissionedModel,
 		long roleId, long actionIdsLong)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Increments the reference count of the resource block and updates it in
-	* the database.
-	*
-	* @param resourceBlockId the primary key of the resource block
-	* @throws SystemException if a system exception occurred
-	*/
-	public void retainResourceBlock(long resourceBlockId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Increments the reference count of the resource block and updates it in
-	* the database.
-	*
-	* @param resourceBlock the resource block
-	* @throws SystemException if a system exception occurred
-	*/
-	public void retainResourceBlock(
-		com.liferay.portal.model.ResourceBlock resourceBlock)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setCompanyScopePermissions(long companyId,
