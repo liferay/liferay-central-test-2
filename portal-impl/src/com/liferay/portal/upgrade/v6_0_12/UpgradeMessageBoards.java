@@ -35,8 +35,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateMessage();
-		updateThread();
 		updateRatings();
+		updateThread();
 	}
 
 	protected void updateMessage() throws Exception {
@@ -95,11 +95,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long newClassNameId = PortalUtil.getClassNameId(
-			MBDiscussion.class.getName());
-		long oldClassNameId = PortalUtil.getClassNameId(
-			MBMessage.class.getName());
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
@@ -110,18 +105,23 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
+			long discussionClassNameId = PortalUtil.getClassNameId(
+				MBDiscussion.class);
+			long messageClassNameId = PortalUtil.getClassNameId(
+				MBMessage.class);
+
 			while (rs.next()) {
 				long classPK = rs.getLong("messageId");
 
 				runSQL(
-					"update RatingsStats set classNameId = " + newClassNameId +
-						" where classNameId = " + oldClassNameId +
-						" and classPK = " + classPK);
+					"update RatingsStats set classNameId = " +
+						discussionClassNameId + " where classNameId = " +
+							messageClassNameId + " and classPK = " + classPK);
 
 				runSQL(
-					"update RatingsEntry set classNameId = " + newClassNameId +
-						" where classNameId = " + oldClassNameId +
-						" and classPK = " + classPK);
+					"update RatingsEntry set classNameId = "
+						+ discussionClassNameId + " where classNameId = "
+							+ messageClassNameId + " and classPK = " + classPK);
 			}
 		}
 		finally {
