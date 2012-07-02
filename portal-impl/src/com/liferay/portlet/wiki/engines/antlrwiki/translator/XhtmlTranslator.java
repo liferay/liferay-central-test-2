@@ -228,7 +228,8 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 		String attachmentLink = searchLinkInAttachments(linkNode);
 
 		if (attachmentLink != null) {
-			// attachment links take precedence over pages
+
+			// Attachment links take precedence over pages
 
 			append(_attachmentURLPrefix + attachmentLink);
 
@@ -282,8 +283,9 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 			return null;
 		}
 
-		String link = StringPool.SLASH + _wikiPage.getAttachmentsDir() +
-			StringPool.SLASH + linkNode.getLink();
+		String link =
+			StringPool.SLASH + _wikiPage.getAttachmentsDir() +
+				StringPool.SLASH + linkNode.getLink();
 
 		for (String attachment : attachments) {
 			if (attachment.equals(link)) {
