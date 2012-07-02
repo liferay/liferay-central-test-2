@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet.filters.aggregate;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -29,6 +31,25 @@ public class FileAggregateContext implements AggregateContext {
 		_file = file.getParentFile();
 	}
 
+	public String getContent(String path) {
+		try {
+			File file = new File(_file, path);
+
+			return FileUtil.read(file);
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+
+		return null;
+	}
+
+	public String getFullPath(String path) {
+		String absolutePath = _file.getAbsolutePath();
+
+		return absolutePath.concat(path);
+	}
+
 	public void popPath(String path) {
 		if (Validator.isNotNull(path)) {
 			_file = _file.getParentFile();
@@ -41,22 +62,7 @@ public class FileAggregateContext implements AggregateContext {
 		}
 	}
 
-	public String getContent(String path) {
-		try {
-			File file = new File(_file, path);
-
-			return FileUtil.read(file);
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public String getFullPath(String path) {
-		return _file.getAbsolutePath().concat(path);
-	}
+	private static Log _log = LogFactoryUtil.getLog(FileAggregateContext.class);
 
 	private File _file;
 

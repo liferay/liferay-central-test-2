@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet.filters.aggregate;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,10 +36,10 @@ import javax.servlet.ServletContext;
 public class ServletAggregateContext implements AggregateContext {
 
 	public ServletAggregateContext(
-		ServletContext servletContext, URL resourceURL) throws IOException {
+			ServletContext servletContext, URL resourceURL)
+		throws IOException {
 
 		_servletContext = servletContext;
-		_stack = new Stack<String>();
 
 		String resourcePath = resourceURL.getPath();
 
@@ -58,6 +60,34 @@ public class ServletAggregateContext implements AggregateContext {
 		_stack.push(currentPath);
 	}
 
+	public String getContent(String path) {
+		try {
+			String stackPath = _generatePathFromStack();
+
+			URL resourceURL = _servletContext.getResource(
+				stackPath.concat(path));
+
+			if (resourceURL == null) {
+				return null;
+			}
+
+			URLConnection urlConnection = resourceURL.openConnection();
+
+			return StringUtil.read(urlConnection.getInputStream());
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+
+		return null;
+	}
+
+	public String getFullPath(String path) {
+		String stackPath = _generatePathFromStack();
+
+		return stackPath.concat(path);
+	}
+
 	public void popPath(String path) {
 		if (Validator.isNotNull(path)) {
 			_stack.pop();
@@ -70,37 +100,13 @@ public class ServletAggregateContext implements AggregateContext {
 		}
 	}
 
-	public String getContent(String path) {
-		try {
-			URL resourceURL = _servletContext.getResource(
-				generatePathFromStack().concat(path));
-
-			if (resourceURL == null) {
-				return null;
-			}
-
-			URLConnection urlConnection = resourceURL.openConnection();
-
-			return StringUtil.read(urlConnection.getInputStream());
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-
-		return null;
-	}
-
-	public String getFullPath(String path) {
-		return generatePathFromStack().concat(path);
-	}
-
-	private String generatePathFromStack() {
+	private String _generatePathFromStack() {
 		StringBundler sb = new StringBundler();
 
-		for (String item : _stack) {
-			sb.append(item);
+		for (String path : _stack) {
+			sb.append(path);
 
-			if (!item.endsWith(StringPool.SLASH)) {
+			if (!path.endsWith(StringPool.SLASH)) {
 				sb.append(StringPool.SLASH);
 			}
 		}
@@ -108,7 +114,10 @@ public class ServletAggregateContext implements AggregateContext {
 		return sb.toString();
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		ServletAggregateContext.class);
+
 	private ServletContext _servletContext;
-	private Stack<String> _stack;
+	private Stack<String> _stack = new Stack<String>();
 
 }

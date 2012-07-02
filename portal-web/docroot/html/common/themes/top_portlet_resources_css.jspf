@@ -34,7 +34,9 @@
 			}
 
 			if (!headerPortalCss.contains(Http.PROTOCOL_DELIMITER)) {
-				headerPortalCss = themeDisplay.getCDNBaseURL().concat(headerPortalCss);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				headerPortalCss = cdnBaseURL.concat(headerPortalCss);
 			}
 
 			if (!portletResourceStaticURLs.contains(headerPortalCss)) {
@@ -57,7 +59,9 @@
 			}
 
 			if (!headerPortletCss.contains(Http.PROTOCOL_DELIMITER)) {
-				headerPortletCss = themeDisplay.getCDNBaseURL().concat(headerPortletCss);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				headerPortletCss = cdnBaseURL.concat(headerPortletCss);
 			}
 
 			if (!portletResourceStaticURLs.contains(headerPortletCss)) {

@@ -19,12 +19,12 @@ package com.liferay.portal.servlet.filters.aggregate;
  */
 public interface AggregateContext {
 
-	public void popPath(String path);
-
-	public void pushPath(String path);
-
 	public String getContent(String path);
 
 	public String getFullPath(String path);
+
+	public void popPath(String path);
+
+	public void pushPath(String path);
 
 }

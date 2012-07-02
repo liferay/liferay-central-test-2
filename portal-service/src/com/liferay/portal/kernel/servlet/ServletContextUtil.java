@@ -77,8 +77,7 @@ public class ServletContextUtil {
 		Set<String> resourcePaths = null;
 
 		if (resourcePath.endsWith(StringPool.SLASH)) {
-			resourcePaths = servletContext.getResourcePaths(
-				resourcePath);
+			resourcePaths = servletContext.getResourcePaths(resourcePath);
 		}
 		else {
 			resourcePaths = new HashSet<String>();

@@ -33,7 +33,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
-import com.liferay.portal.servlet.filters.aggregate.AggregateFilter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.SassToCssBuilder;
 import com.liferay.portal.util.PortalUtil;
@@ -73,7 +72,7 @@ public class DynamicCSSUtil {
 	}
 
 	public static String parseSass(
-			HttpServletRequest request, ServletContext servletContext,
+			ServletContext servletContext, HttpServletRequest request,
 			String resourcePath, String content)
 		throws Exception {
 
@@ -101,7 +100,7 @@ public class DynamicCSSUtil {
 		Theme theme = null;
 
 		if (themeDisplay == null) {
-			theme = getTheme(request);
+			theme = _getTheme(request);
 
 			if (theme == null) {
 				String currentURL = PortalUtil.getCurrentURL(request);
@@ -116,30 +115,31 @@ public class DynamicCSSUtil {
 
 		String parsedContent = null;
 
-		boolean themeCssFastLoad = isThemeCssFastLoad(request, themeDisplay);
+		boolean themeCssFastLoad = _isThemeCssFastLoad(request, themeDisplay);
+
+		URLConnection resourceURLConnection = null;
 
 		URL resourceURL = servletContext.getResource(resourcePath);
 
-		URLConnection resourceConnection = null;
-		URLConnection cacheResourceConnection = null;
-
 		if (resourceURL != null) {
-			resourceConnection = resourceURL.openConnection();
+			resourceURLConnection = resourceURL.openConnection();
 		}
 
-		URL cacheResourceURL = getCacheResource(servletContext, resourcePath);
+		URLConnection cacheResourceURLConnection = null;
+
+		URL cacheResourceURL = _getCacheResource(servletContext, resourcePath);
 
 		if (cacheResourceURL != null) {
-			cacheResourceConnection = cacheResourceURL.openConnection();
+			cacheResourceURLConnection = cacheResourceURL.openConnection();
 		}
 
-		if (themeCssFastLoad && (cacheResourceConnection != null) &&
-			(resourceConnection != null) &&
-			(cacheResourceConnection.getLastModified() ==
-				resourceConnection.getLastModified())) {
+		if (themeCssFastLoad && (cacheResourceURLConnection != null) &&
+			(resourceURLConnection != null) &&
+			(cacheResourceURLConnection.getLastModified() ==
+				resourceURLConnection.getLastModified())) {
 
 			parsedContent = StringUtil.read(
-				cacheResourceConnection.getInputStream());
+				cacheResourceURLConnection.getInputStream());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
@@ -156,8 +156,8 @@ public class DynamicCSSUtil {
 				content = propagateQueryString(content, queryString);
 			}
 
-			parsedContent = parseSass(
-				request, servletContext, themeDisplay, theme, resourcePath,
+			parsedContent = _parseSass(
+				servletContext, request, themeDisplay, theme, resourcePath,
 				content);
 
 			if (_log.isDebugEnabled()) {
@@ -178,13 +178,13 @@ public class DynamicCSSUtil {
 			},
 			new String[] {
 				PortalUtil.getPathContext(),
-				getThemeImagesPath(request, themeDisplay, theme)
+				_getThemeImagesPath(request, themeDisplay, theme)
 			});
 
 		return parsedContent;
 	}
 
-	private static URL getCacheResource(
+	private static URL _getCacheResource(
 		ServletContext servletContext, String resourcePath) throws Exception {
 
 		int pos = resourcePath.lastIndexOf(StringPool.SLASH);
@@ -196,7 +196,7 @@ public class DynamicCSSUtil {
 		return servletContext.getResource(cacheFileName);
 	}
 
-	private static String getCssThemePath(
+	private static String _getCssThemePath(
 			HttpServletRequest request, ThemeDisplay themeDisplay, Theme theme)
 		throws Exception {
 
@@ -221,9 +221,8 @@ public class DynamicCSSUtil {
 		return cssThemePath;
 	}
 
-	private static File getSassTempDir(ServletContext servletContext) {
-		File sassTempDir = (File)servletContext.getAttribute(
-			_SASS_DIR_ATTRIBUTE);
+	private static File _getSassTempDir(ServletContext servletContext) {
+		File sassTempDir = (File)servletContext.getAttribute(_SASS_DIR_KEY);
 
 		if (sassTempDir != null) {
 			return sassTempDir;
@@ -236,12 +235,12 @@ public class DynamicCSSUtil {
 
 		sassTempDir.mkdirs();
 
-		servletContext.setAttribute(_SASS_DIR_ATTRIBUTE, sassTempDir);
+		servletContext.setAttribute(_SASS_DIR_KEY, sassTempDir);
 
 		return sassTempDir;
 	}
 
-	private static Theme getTheme(HttpServletRequest request)
+	private static Theme _getTheme(HttpServletRequest request)
 		throws Exception {
 
 		long companyId = PortalUtil.getCompanyId(request);
@@ -301,7 +300,7 @@ public class DynamicCSSUtil {
 		return null;
 	}
 
-	private static String getThemeImagesPath(
+	private static String _getThemeImagesPath(
 			HttpServletRequest request, ThemeDisplay themeDisplay, Theme theme)
 		throws Exception {
 
@@ -321,7 +320,7 @@ public class DynamicCSSUtil {
 		return themeImagesPath;
 	}
 
-	private static boolean isThemeCssFastLoad(
+	private static boolean _isThemeCssFastLoad(
 		HttpServletRequest request, ThemeDisplay themeDisplay) {
 
 		if (themeDisplay != null) {
@@ -332,20 +331,21 @@ public class DynamicCSSUtil {
 			request, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
 	}
 
-	private static String parseSass(
-			HttpServletRequest request, ServletContext servletContext,
+	private static String _parseSass(
+			ServletContext servletContext, HttpServletRequest request,
 			ThemeDisplay themeDisplay, Theme theme, String resourcePath,
 			String content)
 		throws Exception {
 
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 
-		File sassTempDir = getSassTempDir(servletContext);
-
 		inputObjects.put("content", content);
 		inputObjects.put("cssRealPath", resourcePath);
 		inputObjects.put(
-			"cssThemePath", getCssThemePath(request, themeDisplay, theme));
+			"cssThemePath", _getCssThemePath(request, themeDisplay, theme));
+
+		File sassTempDir = _getSassTempDir(servletContext);
+
 		inputObjects.put("sassCachePath", sassTempDir.getCanonicalPath());
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
@@ -401,8 +401,8 @@ public class DynamicCSSUtil {
 
 	private static final String _SASS_DIR = "sass";
 
-	private static final String _SASS_DIR_ATTRIBUTE =
-		DynamicCSSUtil.class.getName().concat("#sass");
+	private static final String _SASS_DIR_KEY =
+		DynamicCSSUtil.class.getName() + "#sass";
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSUtil.class);
 

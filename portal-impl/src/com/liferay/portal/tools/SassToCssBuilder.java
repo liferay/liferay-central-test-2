@@ -138,10 +138,8 @@ public class SassToCssBuilder {
 	private String _getContent(File file) throws Exception {
 		String content = FileUtil.read(file);
 
-		FileAggregateContext fileMinifierContext = new FileAggregateContext(
-			file);
-
-		content = AggregateFilter.aggregateCss(fileMinifierContext, content);
+		content = AggregateFilter.aggregateCss(
+			new FileAggregateContext(file), content);
 
 		return parseStaticTokens(content);
 	}

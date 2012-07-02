@@ -110,8 +110,9 @@ public class AggregateFilter extends BasePortalFilter {
 				if (importContent == null) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"File " + aggregateContext.getFullPath(
-								importFileName) + " does not exist");
+							"File " +
+								aggregateContext.getFullPath(importFileName) +
+									" does not exist");
 					}
 
 					importContent = StringPool.BLANK;
@@ -168,19 +169,18 @@ public class AggregateFilter extends BasePortalFilter {
 	}
 
 	public static String aggregateJavaScript(
-			AggregateContext aggregateContext, String[] fileNames)
-		throws IOException {
+		AggregateContext aggregateContext, String[] fileNames) {
 
 		StringBundler sb = new StringBundler(fileNames.length * 2);
 
 		for (String fileName : fileNames) {
-			String fileContent = aggregateContext.getContent(fileName);
+			String content = aggregateContext.getContent(fileName);
 
-			if (Validator.isNull(fileContent)) {
+			if (Validator.isNull(content)) {
 				continue;
 			}
 
-			sb.append(fileContent);
+			sb.append(content);
 			sb.append(StringPool.NEW_LINE);
 		}
 
@@ -212,20 +212,8 @@ public class AggregateFilter extends BasePortalFilter {
 		}
 	}
 
-	protected String getCacheFileName(HttpServletRequest request) {
-		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				AggregateFilter.class.getName());
-
-		cacheKeyGenerator.append(request.getRequestURI());
-
-		String queryString = request.getQueryString();
-
-		if (queryString != null) {
-			cacheKeyGenerator.append(sterilizeQueryString(queryString));
-		}
-
-		return String.valueOf(cacheKeyGenerator.finish());
+	protected static String getJavaScriptContent(String content) {
+		return MinifierUtil.minifyJavaScript(content);
 	}
 
 	protected Object getBundleContent(
@@ -255,8 +243,7 @@ public class AggregateFilter extends BasePortalFilter {
 
 		String cacheFileName = getCacheFileName(request);
 
-		String[] fileNames = JavaScriptBundleUtil.getFileNames(
-			bundleId);
+		String[] fileNames = JavaScriptBundleUtil.getFileNames(bundleId);
 
 		File cacheFile = new File(_tempDir, cacheFileName);
 
@@ -316,6 +303,22 @@ public class AggregateFilter extends BasePortalFilter {
 		FileUtil.write(cacheFile, content);
 
 		return content;
+	}
+
+	protected String getCacheFileName(HttpServletRequest request) {
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				AggregateFilter.class.getName());
+
+		cacheKeyGenerator.append(request.getRequestURI());
+
+		String queryString = request.getQueryString();
+
+		if (queryString != null) {
+			cacheKeyGenerator.append(sterilizeQueryString(queryString));
+		}
+
+		return String.valueOf(cacheKeyGenerator.finish());
 	}
 
 	protected Object getContent(
@@ -436,33 +439,15 @@ public class AggregateFilter extends BasePortalFilter {
 	}
 
 	protected String getCssContent(
-			HttpServletRequest request, HttpServletResponse response,
-			URL resourceURL, String resourcePath)
-		throws IOException {
-
-		URLConnection urlConnection = resourceURL.openConnection();
-
-		String content = StringUtil.read(urlConnection.getInputStream());
-
-		ServletAggregateContext servletMinifierContext =
-			new ServletAggregateContext(_servletContext, resourceURL);
-
-		content = aggregateCss(servletMinifierContext, content);
-
-		return getCssContent(request, response, resourcePath, content);
-	}
-
-	protected String getCssContent(
 		HttpServletRequest request, HttpServletResponse response,
 		String resourcePath, String content) {
 
 		try {
 			content = DynamicCSSUtil.parseSass(
-				request, _servletContext, resourcePath, content);
+				_servletContext, request, resourcePath, content);
 		}
 		catch (Exception e) {
-			_log.error(
-				"Unable to parse SASS on CSS " + resourcePath, e);
+			_log.error("Unable to parse SASS on CSS " + resourcePath, e);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(content);
@@ -484,6 +469,21 @@ public class AggregateFilter extends BasePortalFilter {
 		return MinifierUtil.minifyCss(content);
 	}
 
+	protected String getCssContent(
+			HttpServletRequest request, HttpServletResponse response,
+			URL resourceURL, String resourcePath)
+		throws IOException {
+
+		URLConnection urlConnection = resourceURL.openConnection();
+
+		String content = StringUtil.read(urlConnection.getInputStream());
+
+		content = aggregateCss(
+			new ServletAggregateContext(_servletContext, resourceURL), content);
+
+		return getCssContent(request, response, resourcePath, content);
+	}
+
 	protected String getJavaScriptContent(URL resourceURL) throws IOException {
 		URLConnection urlConnection = resourceURL.openConnection();
 
@@ -492,25 +492,21 @@ public class AggregateFilter extends BasePortalFilter {
 		return getJavaScriptContent(content);
 	}
 
-	protected static String getJavaScriptContent(String content) {
-		return MinifierUtil.minifyJavaScript(content);
-	}
-
 	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
-		Object minifiedContent = getContent(
-			request, response, filterChain);
+		Object minifiedContent = getContent(request, response, filterChain);
 
 		if (minifiedContent == null) {
 			minifiedContent = getBundleContent(request, response);
 		}
 
 		if (minifiedContent == null) {
-			processFilter(AggregateFilter.class, request, response, filterChain);
+			processFilter(
+				AggregateFilter.class, request, response, filterChain);
 		}
 		else {
 			if (minifiedContent instanceof File) {

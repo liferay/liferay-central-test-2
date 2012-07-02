@@ -750,7 +750,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				}
 				else {
 					_log.error(
-						"Resource url for " + curResourcePath + " is null");
+						"Resource URL for " + curResourcePath + " is null");
 				}
 			}
 		}

@@ -249,7 +249,7 @@ public class StripFilter extends BasePortalFilter {
 				if (PropsValues.STRIP_CSS_SASS_ENABLED) {
 					try {
 						content = DynamicCSSUtil.parseSass(
-							request, _servletContext, null, content);
+							_servletContext, request, null, content);
 					}
 					catch (ScriptingException se) {
 						_log.error("Unable to parse SASS on CSS " + key, se);

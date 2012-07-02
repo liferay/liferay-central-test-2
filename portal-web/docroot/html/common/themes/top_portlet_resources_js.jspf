@@ -34,7 +34,9 @@
 			}
 
 			if (!headerPortalJavaScript.contains(Http.PROTOCOL_DELIMITER)) {
-				headerPortalJavaScript = themeDisplay.getCDNBaseURL().concat(headerPortalJavaScript);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				headerPortalJavaScript = cdnBaseURL.concat(headerPortalJavaScript);
 			}
 
 			if (!portletResourceStaticURLs.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
@@ -57,7 +59,9 @@
 			}
 
 			if (!headerPortletJavaScript.contains(Http.PROTOCOL_DELIMITER)) {
-				headerPortletJavaScript = themeDisplay.getCDNBaseURL().concat(headerPortletJavaScript);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				headerPortletJavaScript = cdnBaseURL.concat(headerPortletJavaScript);
 			}
 
 			if (!portletResourceStaticURLs.contains(headerPortletJavaScript)) {

@@ -188,27 +188,6 @@ public class ComboServlet extends HttpServlet {
 		ServletResponseUtil.write(response, bytesArray);
 	}
 
-	protected URL getResourceURL(String path) throws IOException {
-		ServletContext servletContext = getServletContext();
-
-		URL resourceURL = servletContext.getResource(path);
-
-		if (resourceURL == null) {
-			return null;
-		}
-
-		URL rootResourceURL = servletContext.getResource(StringPool.SLASH);
-
-		String basePath = rootResourceURL.getPath().concat(_JAVASCRIPT_DIR);
-		String filePath = resourceURL.getPath();
-
-		if (filePath.indexOf(basePath) == 0) {
-			return resourceURL;
-		}
-
-		return null;
-	}
-
 	protected byte[] getResourceContent(
 			HttpServletRequest request, HttpServletResponse response,
 			URL resourceURL, String resourcePath, String minifierType)
@@ -253,12 +232,13 @@ public class ComboServlet extends HttpServlet {
 				urlConnection.getInputStream());
 
 			if (!StringUtil.endsWith(resourcePath, _CSS_MINIFIED_SUFFIX) &&
-				!StringUtil.endsWith(resourcePath, _JAVASCRIPT_MINIFIED_SUFFIX)) {
+				!StringUtil.endsWith(
+					resourcePath, _JAVASCRIPT_MINIFIED_SUFFIX)) {
 
 				if (minifierType.equals("css")) {
 					try {
 						stringFileContent = DynamicCSSUtil.parseSass(
-							request, getServletContext(), resourcePath,
+							getServletContext(), request, resourcePath,
 							stringFileContent);
 					}
 					catch (Exception e) {
@@ -298,6 +278,30 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		return fileContentBag._fileContent;
+	}
+
+	protected URL getResourceURL(String path) throws IOException {
+		ServletContext servletContext = getServletContext();
+
+		URL resourceURL = servletContext.getResource(path);
+
+		if (resourceURL == null) {
+			return null;
+		}
+
+		URL rootResourceURL = servletContext.getResource(StringPool.SLASH);
+
+		String basePath = rootResourceURL.getPath();
+
+		basePath = basePath.concat(_JAVASCRIPT_DIR);
+
+		String filePath = resourceURL.getPath();
+
+		if (filePath.startsWith(basePath)) {
+			return resourceURL;
+		}
+
+		return null;
 	}
 
 	protected boolean validateModuleExtension(String moduleName)

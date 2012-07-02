@@ -34,7 +34,9 @@
 			}
 
 			if (!footerPortalCss.contains(Http.PROTOCOL_DELIMITER)) {
-				footerPortalCss = themeDisplay.getCDNBaseURL().concat(footerPortalCss);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				footerPortalCss = cdnBaseURL.concat(footerPortalCss);
 			}
 
 			if (!portletResourceStaticURLs.contains(footerPortalCss)) {
@@ -57,7 +59,9 @@
 			}
 
 			if (!footerPortletCss.contains(Http.PROTOCOL_DELIMITER)) {
-				footerPortletCss = themeDisplay.getCDNBaseURL().concat(footerPortletCss);
+				String cdnBaseURL = themeDisplay.getCDNBaseURL();
+
+				footerPortletCss = cdnBaseURL.concat(footerPortletCss);
 			}
 
 			if (!portletResourceStaticURLs.contains(footerPortletCss)) {
