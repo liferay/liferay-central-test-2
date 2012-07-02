@@ -99,34 +99,37 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select MBMessage.messageId " +
-					"from MBMessage where MBMessage.categoryId = " +
+				"select MBMessage.messageId from MBMessage where " +
+					"MBMessage.categoryId = " +
 						MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 
 			rs = ps.executeQuery();
 
-			long discussionClassNameId = PortalUtil.getClassNameId(
-				MBDiscussion.class);
-			long messageClassNameId = PortalUtil.getClassNameId(
-				MBMessage.class);
-
 			while (rs.next()) {
-				long classPK = rs.getLong("messageId");
+				long messageId = rs.getLong("messageId");
 
-				runSQL(
-					"update RatingsStats set classNameId = " +
-						discussionClassNameId + " where classNameId = " +
-							messageClassNameId + " and classPK = " + classPK);
-
-				runSQL(
-					"update RatingsEntry set classNameId = "
-						+ discussionClassNameId + " where classNameId = "
-							+ messageClassNameId + " and classPK = " + classPK);
+				updateRatings(messageId);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void updateRatings(long classPK) throws Exception {
+		long discussionClassNameId = PortalUtil.getClassNameId(
+			MBDiscussion.class);
+		long messageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
+
+		runSQL(
+			"update RatingsStats set classNameId = " + discussionClassNameId +
+				" where classNameId = " + messageClassNameId +
+					" and classPK = " + classPK);
+
+		runSQL(
+			"update RatingsEntry set classNameId = " + discussionClassNameId +
+				" where classNameId = " + messageClassNameId +
+					" and classPK = " + classPK);
 	}
 
 	protected void updateThread() throws Exception {
@@ -135,7 +138,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select MBThread.threadId, MBMessage.companyId, " +
