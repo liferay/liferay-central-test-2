@@ -151,22 +151,25 @@ if (!portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES)) {
 				value="<%= LanguageUtil.get(pageContext, template.getName(locale)) %>"
 			/>
 
-			<%
-			String type = null;
-
-			if (portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES)) {
-				type = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(template.getClassNameId()).getName(locale);
-			}
-			else if (Validator.isNull(templateTypeValue)) {
-				type = LanguageUtil.get(pageContext, template.getType());
-			}
-			%>
-
 			<c:if test="<%= Validator.isNull(templateTypeValue) %>">
+
+				<%
+				String value = null;
+
+				if (portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES)) {
+					PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(template.getClassNameId());
+
+					value = portletDisplayTemplateHandler.getName(locale);
+				}
+				else if (Validator.isNull(templateTypeValue)) {
+					value = LanguageUtil.get(pageContext, template.getType());
+				}
+				%>
+
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="type"
-					value="<%= type %>"
+					value="<%= value %>"
 				/>
 			</c:if>
 
