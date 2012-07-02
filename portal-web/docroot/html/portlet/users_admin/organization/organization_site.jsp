@@ -66,8 +66,6 @@ if (organization != null) {
 		}
 	}
 }
-
-boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
 %>
 
 <h3><liferay-ui:message key="organization-site" /></h3>
@@ -83,6 +81,10 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 					<aui:input label="create-site" name="site" type="hidden" value="<%= site %>" />
 				</c:otherwise>
 			</c:choose>
+
+			<%
+			boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
+			%>
 
 			<div id="<portlet:namespace />siteTemplates">
 				<c:choose>
@@ -217,14 +219,14 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 		%>
 
 		<aui:script>
-			function <portlet:namespace />testVisibility(currentValue, value) {
+			function <portlet:namespace />isVisible(currentValue, value) {
 				return currentValue != '';
 			}
 
 			Liferay.Util.toggleBoxes('<portlet:namespace />siteCheckbox','<portlet:namespace />siteTemplates');
 
-			Liferay.Util.toggleSelectBox('<portlet:namespace />publicLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />publicLayoutSetPrototypeIdOptions');
-			Liferay.Util.toggleSelectBox('<portlet:namespace />privateLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />privateLayoutSetPrototypeIdOptions');
+			Liferay.Util.toggleSelectBox('<portlet:namespace />publicLayoutSetPrototypeId', <portlet:namespace />isVisible, '<portlet:namespace />publicLayoutSetPrototypeIdOptions');
+			Liferay.Util.toggleSelectBox('<portlet:namespace />privateLayoutSetPrototypeId', <portlet:namespace />isVisible, '<portlet:namespace />privateLayoutSetPrototypeIdOptions');
 		</aui:script>
 	</c:when>
 	<c:otherwise>
