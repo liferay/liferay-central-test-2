@@ -21,6 +21,7 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
 
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+
 FileVersion fileVersion = (FileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
 
 if (fileVersion == null) {
@@ -72,4 +73,3 @@ if (fileEntry.getVersion().equals(fileVersion.getVersion())) {
 		</c:choose>
 	</div>
 </c:if>
-
