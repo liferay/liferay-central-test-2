@@ -1408,7 +1408,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Social
 
 			if (!page.isMinorEdit() ||
-					PropsValues.WIKI_PAGE_ADD_ACTIVITY_ON_MINOR_EDIT) {
+				PropsValues.WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY) {
+
 				int activity = WikiActivityKeys.ADD_PAGE;
 
 				if (page.getVersion() > WikiPageConstants.VERSION_DEFAULT) {
@@ -1424,7 +1425,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			if (NotificationThreadLocal.isEnabled() &&
 				(!page.isMinorEdit() ||
-					PropsValues.WIKI_PAGE_SEND_EMAIL_ON_MINOR_EDIT)) {
+				 PropsValues.WIKI_PAGE_MINOR_EDIT_SEND_EMAIL)) {
+
 				boolean update = false;
 
 				if (page.getVersion() > WikiPageConstants.VERSION_DEFAULT) {

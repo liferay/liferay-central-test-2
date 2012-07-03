@@ -1520,9 +1520,9 @@ public class PropsValues {
 
 	public static final String USERS_EMAIL_ADDRESS_GENERATOR = PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR);
 
-	public static final String USERS_EMAIL_ADDRESS_VALIDATOR = PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_VALIDATOR);
-
 	public static boolean USERS_EMAIL_ADDRESS_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED));
+
+	public static final String USERS_EMAIL_ADDRESS_VALIDATOR = PropsUtil.get(PropsKeys.USERS_EMAIL_ADDRESS_VALIDATOR);
 
 	public static final String[] USERS_EXPORT_CSV_FIELDS = PropsUtil.getArray(PropsKeys.USERS_EXPORT_CSV_FIELDS);
 
@@ -1638,11 +1638,11 @@ public class PropsValues {
 
 	public static final String WIKI_INITIAL_NODE_NAME = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
-	public static final boolean WIKI_PAGE_ADD_ACTIVITY_ON_MINOR_EDIT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_ADD_ACTIVITY_ON_MINOR_EDIT));
-
-	public static final boolean WIKI_PAGE_SEND_EMAIL_ON_MINOR_EDIT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_SEND_EMAIL_ON_MINOR_EDIT));
-	
 	public static final boolean WIKI_PAGE_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_COMMENTS_ENABLED));
+
+	public static final boolean WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY));
+
+	public static final boolean WIKI_PAGE_MINOR_EDIT_SEND_EMAIL = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_MINOR_EDIT_SEND_EMAIL));
 
 	public static final boolean WIKI_PAGE_RATINGS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WIKI_PAGE_RATINGS_ENABLED));
 
