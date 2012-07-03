@@ -1272,6 +1272,15 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -1290,6 +1299,24 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -1301,6 +1328,15 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
 		}
 		else {
