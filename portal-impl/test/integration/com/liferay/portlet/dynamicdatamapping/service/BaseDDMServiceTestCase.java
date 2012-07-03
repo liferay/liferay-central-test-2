@@ -15,10 +15,8 @@
 package com.liferay.portlet.dynamicdatamapping.service;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
@@ -28,7 +26,6 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.HashMap;
@@ -43,42 +40,31 @@ public class BaseDDMServiceTestCase {
 	protected DDMTemplate addDetailTemplate(long classPK, String name)
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
-		String type = DDMTemplateConstants.TEMPLATE_TYPE_DETAIL;
-
-		String mode = DDMTemplateConstants.TEMPLATE_MODE_CREATE;
-
 		String language = "xsd";
 
-		String script = getTestTemplateScript(language);
-
 		return addTemplate(
-			classNameId, classPK, name, type, mode, language, script);
+			PortalUtil.getClassNameId(DDMStructure.class), classPK, name,
+			DDMTemplateConstants.TEMPLATE_TYPE_DETAIL,
+			DDMTemplateConstants.TEMPLATE_MODE_CREATE, language,
+			getTestTemplateScript(language));
 	}
 
 	protected DDMTemplate addListTemplate(
 			long classNameId, long classPK, String name)
 		throws Exception {
 
-		String type = DDMTemplateConstants.TEMPLATE_TYPE_LIST;
-
-		String mode = StringPool.BLANK;
-
 		String language = DDMTemplateConstants.LANG_TYPE_VM;
 
-		String script = getTestTemplateScript(language);
-
 		return addTemplate(
-			classNameId, classPK, name, type, mode, language, script);
+			classNameId, classPK, name, DDMTemplateConstants.TEMPLATE_TYPE_LIST,
+			StringPool.BLANK, language, getTestTemplateScript(language));
 	}
 
 	protected DDMTemplate addListTemplate(long classPK, String name)
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
-		return addListTemplate(classNameId, classPK, name);
+		return addListTemplate(
+			PortalUtil.getClassNameId(DDMStructure.class), classPK, name);
 	}
 
 	protected DDMStructure addStructure(long classNameId, String name)
@@ -86,11 +72,9 @@ public class BaseDDMServiceTestCase {
 
 		String storageType = StorageType.XML.getValue();
 
-		String xsd = getTestStructureXsd(storageType);
-
-		int type =  DDMStructureConstants.TYPE_DEFAULT;
-
-		return addStructure(classNameId, null, name, xsd, storageType, type);
+		return addStructure(
+			classNameId, null, name, getTestStructureXsd(storageType),
+			storageType, DDMStructureConstants.TYPE_DEFAULT);
 	}
 
 	protected DDMStructure addStructure(
@@ -98,17 +82,10 @@ public class BaseDDMServiceTestCase {
 			String storageType, int type)
 		throws Exception {
 
-		long userId = TestPropsValues.getUserId();
-
-		long groupId = TestPropsValues.getGroupId();
-
-		Map<Locale, String> nameMap = getDefaultLocaleMap(name);
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
 		return DDMStructureLocalServiceUtil.addStructure(
-			userId, groupId, classNameId, structureKey, nameMap, null, xsd,
-			storageType, type, serviceContext);
+			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			classNameId, structureKey, getDefaultLocaleMap(name), null, xsd,
+			storageType, type, ServiceTestUtil.getServiceContext());
 	}
 
 	protected DDMTemplate addTemplate(
@@ -125,44 +102,21 @@ public class BaseDDMServiceTestCase {
 			String type, String mode, String language, String script)
 		throws Exception {
 
-		long userId = TestPropsValues.getUserId();
-
-		long groupId = TestPropsValues.getGroupId();
-
-		Map<Locale, String> nameMap = getDefaultLocaleMap(name);
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
 		return DDMTemplateLocalServiceUtil.addTemplate(
-			userId, groupId, classNameId, classPK, templateKey, nameMap, null,
-			type, mode, language, script, serviceContext);
-	}
-
-	protected String readText(String filename) {
-		Class<?> clazz = getClass();
-
-		InputStream inputStream = clazz.getResourceAsStream(
-			"dependencies/" + filename);
-
-		String text = null;
-		try {
-			text = StringUtil.read(inputStream);
-		}
-		catch (IOException ioe) {
-			text = StringPool.BLANK;
-		}
-
-		return text;
+			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			classNameId, classPK, templateKey, getDefaultLocaleMap(name), null,
+			type, mode, language, script, ServiceTestUtil.getServiceContext());
 	}
 
 	protected Map<Locale, String> getDefaultLocaleMap(String defaultValue) {
 		Map<Locale, String> map = new HashMap<Locale, String>();
+
 		map.put(LocaleUtil.getDefault(), defaultValue);
 
 		return map;
 	}
 
-	protected String getTestStructureXsd(String storageType) {
+	protected String getTestStructureXsd(String storageType) throws Exception {
 		String text = StringPool.BLANK;
 
 		if (storageType.equals(StorageType.XML.getValue())) {
@@ -172,7 +126,7 @@ public class BaseDDMServiceTestCase {
 		return text;
 	}
 
-	protected String getTestTemplateScript(String language) {
+	protected String getTestTemplateScript(String language) throws Exception {
 		String text = StringPool.BLANK;
 
 		if (language.equals(DDMTemplateConstants.LANG_TYPE_VM)) {
@@ -183,6 +137,15 @@ public class BaseDDMServiceTestCase {
 		}
 
 		return text;
+	}
+
+	protected String readText(String fileName) throws Exception {
+		Class<?> clazz = getClass();
+
+		InputStream inputStream = clazz.getResourceAsStream(
+			"dependencies/" + fileName);
+
+		return StringUtil.read(inputStream);
 	}
 
 }
