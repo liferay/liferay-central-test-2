@@ -63,7 +63,7 @@ int depth = 0;
 for (int i = 0; i < messages.size(); i++) {
 	message = messages.get(i);
 
-	if (!MBUtil.isViewableMessage(message, message, themeDisplay)) {
+	if (!MBUtil.isViewableMessage(themeDisplay, message)) {
 		continue;
 	}
 

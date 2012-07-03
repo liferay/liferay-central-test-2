@@ -36,7 +36,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(message, message, themeDisplay) %>">
+<c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(themeDisplay, message) %>">
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 </c:if>
 
@@ -49,7 +49,7 @@ depth++;
 for (int i = range[0]; i < range[1]; i++) {
 	MBMessage curMessage = (MBMessage)messages.get(i);
 
-	if (!MBUtil.isViewableMessage(curMessage, message, themeDisplay)) {
+	if (!MBUtil.isViewableMessage(themeDisplay, curMessage, message)) {
 		continue;
 	}
 

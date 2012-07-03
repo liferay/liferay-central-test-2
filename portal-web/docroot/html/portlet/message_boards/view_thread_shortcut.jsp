@@ -45,7 +45,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(message, message, themeDisplay) %>">
+<c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(themeDisplay, message) %>">
 	<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 		<td style="padding-left: <%= depth > 0 ? depth * 10 : 5 %>px; width: 90%;" valign="middle">
 			<c:if test="<%= !message.isRoot() %>">
@@ -132,7 +132,7 @@ depth++;
 for (int i = range[0]; i < range[1]; i++) {
 	MBMessage curMessage = (MBMessage)messages.get(i);
 
-	if (!MBUtil.isViewableMessage(curMessage, message, themeDisplay)) {
+	if (!MBUtil.isViewableMessage(themeDisplay, curMessage, message)) {
 		continue;
 	}
 
