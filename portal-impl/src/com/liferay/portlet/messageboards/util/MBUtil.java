@@ -709,31 +709,36 @@ public class MBUtil {
 	}
 
 	public static boolean isViewableMessage(
-			MBMessage message, MBMessage selMessage, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, MBMessage message)
+		throws Exception {
+
+		return isViewableMessage(themeDisplay, message, message);
+	}
+
+	public static boolean isViewableMessage(
+			ThemeDisplay themeDisplay, MBMessage message,
+			MBMessage parentMessage)
 		throws Exception {
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
 		if (!MBMessagePermission.contains(
-				permissionChecker, selMessage, ActionKeys.VIEW)) {
+				permissionChecker, parentMessage, ActionKeys.VIEW)) {
 
 			return false;
 		}
 
-		if ((message.getMessageId() != selMessage.getMessageId()) &&
+		if ((message.getMessageId() != parentMessage.getMessageId()) &&
 			!MBMessagePermission.contains(
 				permissionChecker, message, ActionKeys.VIEW)) {
 
 			return false;
 		}
 
-		long userId = themeDisplay.getUserId();
-		long scopeGroupId = themeDisplay.getScopeGroupId();
-
 		if (!message.isApproved() &&
-			!Validator.equals(message.getUserId(), userId) &&
-			!permissionChecker.isGroupAdmin(scopeGroupId)) {
+			!Validator.equals(message.getUserId(), themeDisplay.getUserId()) &&
+			!permissionChecker.isGroupAdmin(themeDisplay.getScopeGroupId())) {
 
 			return false;
 		}
