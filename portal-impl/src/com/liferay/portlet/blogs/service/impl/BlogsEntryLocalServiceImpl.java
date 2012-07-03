@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -241,6 +242,41 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		addEntryResources(entry, groupPermissions, guestPermissions);
+	}
+
+	public void checkEntries() throws PortalException, SystemException {
+		Date now = new Date();
+
+		int entryCount = blogsEntryPersistence.countByLtD_S(
+			now, WorkflowConstants.STATUS_SCHEDULED);
+
+		if (entryCount == 0) {
+			return;
+		}
+
+		List<BlogsEntry> entries = blogsEntryPersistence.findByLtD_S(
+			now, WorkflowConstants.STATUS_SCHEDULED);
+
+		for (BlogsEntry entry : entries) {
+			ServiceContext serviceContext = new ServiceContext();
+
+			String[] trackbacks = StringUtil.split(entry.getTrackbacks());
+
+			serviceContext.setAttribute("trackbacks", trackbacks);
+
+			serviceContext.setCommand(Constants.UPDATE);
+
+			String layoutFullURL = PortalUtil.getLayoutFullURL(
+				entry.getGroupId(), PortletKeys.BLOGS);
+
+			serviceContext.setLayoutFullURL(layoutFullURL);
+
+			serviceContext.setScopeGroupId(entry.getGroupId());
+
+			updateStatus(
+				entry.getStatusByUserId(), entry.getEntryId(),
+				WorkflowConstants.STATUS_APPROVED, serviceContext);
+		}
 	}
 
 	public void deleteEntries(long groupId)
