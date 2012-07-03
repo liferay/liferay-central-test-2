@@ -229,8 +229,7 @@ public class ViewRecordTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("True"),
 			selenium.getText("//td[1]/div"));
-		assertEquals(RuntimeVariables.replace("1903-01-02"),
-			selenium.getText("//td[2]/div"));
+		assertTrue(selenium.isPartialText("//td[2]/div", "2003-01"));
 		assertEquals(RuntimeVariables.replace("1.23"),
 			selenium.getText("//td[3]/div"));
 		assertEquals(RuntimeVariables.replace("Document_1.txt"),

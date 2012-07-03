@@ -59,6 +59,11 @@
 	<td>List Name</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//span[@title='Actions']/ul/li/strong/a</td>
 	<td>Actions</td>
@@ -95,13 +100,33 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='aui-fieldset-content ']/div[2]/span/span/label</td>
+	<td>//div[@class='aui-fieldset-content ']/div[2]/div/label</td>
 	<td>Date</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>//div[@class='aui-fieldset-content ']/div[2]/span/span/span/input</td>
-	<td>08/09/10</td>
+	<td>waitForVisible</td>
+	<td>//div[@class='aui-datepicker-select-wrapper']/select</td>
+	<td>Month Drop Down</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@class='aui-datepicker-select-wrapper']/select</td>
+	<td>Month Drop Down</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@class='aui-datepicker-select-wrapper']/select</td>
+	<td>August</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@class='aui-datepicker-select-wrapper']/select[2]</td>
+	<td>9</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>//div[@class='aui-datepicker-select-wrapper']/select[3]</td>
+	<td>2010</td>
 </tr>
 <tr>
 	<td>assertText</td>

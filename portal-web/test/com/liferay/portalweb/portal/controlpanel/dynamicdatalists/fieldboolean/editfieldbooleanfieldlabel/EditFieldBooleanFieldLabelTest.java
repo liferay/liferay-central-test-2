@@ -169,6 +169,7 @@ public class EditFieldBooleanFieldLabelTest extends BaseTestCase {
 			selenium.getText("//tr[2]/td[2]/div"));
 		selenium.doubleClickAt("//tr[2]/td[2]/div",
 			RuntimeVariables.replace("Boolean"));
+		selenium.mouseOver("//button[@type='submit']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

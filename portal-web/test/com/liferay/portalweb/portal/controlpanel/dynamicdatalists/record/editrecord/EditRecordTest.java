@@ -64,6 +64,7 @@ public class EditRecordTest extends BaseTestCase {
 			RuntimeVariables.replace("List Name"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",
@@ -100,9 +101,33 @@ public class EditRecordTest extends BaseTestCase {
 			"//div[@class='aui-fieldset-content ']/div[1]/span/span/span/input[2]");
 		assertEquals(RuntimeVariables.replace("Date"),
 			selenium.getText(
-				"//div[@class='aui-fieldset-content ']/div[2]/span/span/label"));
-		selenium.type("//div[@class='aui-fieldset-content ']/div[2]/span/span/span/input",
-			RuntimeVariables.replace("08/09/10"));
+				"//div[@class='aui-fieldset-content ']/div[2]/div/label"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='aui-datepicker-select-wrapper']/select")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@class='aui-datepicker-select-wrapper']/select",
+			RuntimeVariables.replace("Month Drop Down"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select",
+			RuntimeVariables.replace("August"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select[2]",
+			RuntimeVariables.replace("9"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select[3]",
+			RuntimeVariables.replace("2010"));
 		assertEquals(RuntimeVariables.replace("Decimal"),
 			selenium.getText(
 				"//div[@class='aui-fieldset-content ']/div[3]/span/span/label"));

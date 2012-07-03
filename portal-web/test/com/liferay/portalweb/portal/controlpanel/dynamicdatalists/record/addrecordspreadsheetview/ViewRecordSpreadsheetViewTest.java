@@ -106,6 +106,7 @@ public class ViewRecordSpreadsheetViewTest extends BaseTestCase {
 			selenium.getText("//tr[1]/th[11]"));
 		assertEquals(RuntimeVariables.replace("Text\nBox"),
 			selenium.getText("//tr[3]/td[11]"));
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",
@@ -200,6 +201,7 @@ public class ViewRecordSpreadsheetViewTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("List Name"),
 			selenium.getText("//tr[3]/td[2]/a"));
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",

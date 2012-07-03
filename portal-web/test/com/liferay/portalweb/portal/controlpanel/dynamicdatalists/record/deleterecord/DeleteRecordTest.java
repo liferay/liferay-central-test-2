@@ -65,6 +65,7 @@ public class DeleteRecordTest extends BaseTestCase {
 			RuntimeVariables.replace("List Name"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",
