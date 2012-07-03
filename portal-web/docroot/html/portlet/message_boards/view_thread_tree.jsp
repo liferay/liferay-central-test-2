@@ -40,7 +40,7 @@ if (treeWalker.isOdd()) {
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
 
 	<%
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_VIEWABLE_THREAD, String.valueOf(Boolean.TRUE.toString()));
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_VIEWABLE_THREAD, Boolean.TRUE.toString());
 	%>
 
 </c:if>

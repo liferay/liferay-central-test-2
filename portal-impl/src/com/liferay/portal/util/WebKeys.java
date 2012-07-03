@@ -260,7 +260,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String MESSAGE_BOARDS_TREE_WALKER_THREAD_FLAG = "MESSAGE_BOARDS_TREE_WALKER_THREAD_FLAG";
 
-	public static final String MESSAGE_BOARDS_VIEWABLE_THREAD = "MESSAGE_BOARDS_VIEWABLE_THREAD";
+	public static final String MESSAGE_BOARDS_TREE_WALKER_VIEWABLE_THREAD = "MESSAGE_BOARDS_TREE_WALKER_VIEWABLE_THREAD";
 
 	public static final String MOBILE_DEVICE_RULES_RULE = "MOBILE_DEVICE_RULES_RULE";
 
