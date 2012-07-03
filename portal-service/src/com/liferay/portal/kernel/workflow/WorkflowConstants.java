@@ -69,6 +69,8 @@ public class WorkflowConstants {
 
 	public static final String LABEL_PENDING = "pending";
 
+	public static final String LABEL_SCHEDULED = "scheduled";
+
 	public static final int STATUS_ANY = -1;
 
 	public static final int STATUS_APPROVED = 0;
@@ -86,6 +88,8 @@ public class WorkflowConstants {
 	public static final int STATUS_INCOMPLETE = 6;
 
 	public static final int STATUS_PENDING = 1;
+
+	public static final int STATUS_SCHEDULED = 7;
 
 	public static String toLabel(int status) {
 		if (status == STATUS_ANY) {
@@ -111,6 +115,9 @@ public class WorkflowConstants {
 		}
 		else if (status == STATUS_PENDING) {
 			return LABEL_PENDING;
+		}
+		else if (status == STATUS_SCHEDULED) {
+			return LABEL_SCHEDULED;
 		}
 		else {
 			return LABEL_ANY;
@@ -141,6 +148,9 @@ public class WorkflowConstants {
 		}
 		else if (label.equals(LABEL_PENDING)) {
 			return STATUS_PENDING;
+		}
+		else if (label.equals(LABEL_SCHEDULED)) {
+			return STATUS_SCHEDULED;
 		}
 		else {
 			return STATUS_ANY;
