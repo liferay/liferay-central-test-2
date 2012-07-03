@@ -220,8 +220,9 @@ public class PortletContainerImpl implements PortletContainer {
 
 		for (LayoutTypePortlet layoutTypePortlet : layoutTypePortlets) {
 			if (layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
-				ownerLayout = layoutTypePortlet.getLayout();
 				ownerLayoutTypePortlet = layoutTypePortlet;
+
+				ownerLayout = layoutTypePortlet.getLayout();
 
 				break;
 			}
