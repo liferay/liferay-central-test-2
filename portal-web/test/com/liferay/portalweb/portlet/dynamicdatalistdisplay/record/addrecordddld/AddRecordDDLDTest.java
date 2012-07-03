@@ -25,24 +25,6 @@ public class AddRecordDDLDTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"link=Dynamic Data List Display Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Dynamic Data List Display Test Page",
 			RuntimeVariables.replace("Dynamic Data List Display Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -60,9 +42,33 @@ public class AddRecordDDLDTest extends BaseTestCase {
 			"//div[@class='aui-fieldset-content ']/div[1]/span/span/span/input[2]");
 		assertEquals(RuntimeVariables.replace("Date"),
 			selenium.getText(
-				"//div[@class='aui-fieldset-content ']/div[2]/span/span/label"));
-		selenium.type("//div[@class='aui-fieldset-content ']/div[2]/span/span/span/input",
-			RuntimeVariables.replace("01/02/03"));
+				"//div[@class='aui-fieldset-content ']/div[2]/div/label"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='aui-datepicker-select-wrapper']/select")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@class='aui-datepicker-select-wrapper']/select",
+			RuntimeVariables.replace("Month Drop Down"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select",
+			RuntimeVariables.replace("January"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select[2]",
+			RuntimeVariables.replace("2"));
+		selenium.select("//div[@class='aui-datepicker-select-wrapper']/select[3]",
+			RuntimeVariables.replace("2003"));
 		assertEquals(RuntimeVariables.replace("Decimal"),
 			selenium.getText(
 				"//div[@class='aui-fieldset-content ']/div[3]/span/span/label"));

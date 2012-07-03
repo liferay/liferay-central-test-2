@@ -35,7 +35,7 @@ public class AddRecordDDLDTests extends BaseTestSuite {
 		testSuite.addTestSuite(AddDMDocumentTest.class);
 		testSuite.addTestSuite(SelectListDDLDTest.class);
 		testSuite.addTestSuite(AddRecordDDLDTest.class);
-		testSuite.addTestSuite(ViewRecordTest.class);
+		testSuite.addTestSuite(ViewRecordDDLDTest.class);
 		testSuite.addTestSuite(TearDownListTest.class);
 		testSuite.addTestSuite(TearDownDataDefinitionTest.class);
 		testSuite.addTestSuite(TearDownDMContentTest.class);
