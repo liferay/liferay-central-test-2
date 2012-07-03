@@ -954,9 +954,12 @@ public class SitesUtil {
 		try {
 			Map<String, String[]> parameterMap = null;
 
+			long lastResetTime = GetterUtil.getLong(
+				settingsProperties.getProperty("last-reset-time"));
+
 			boolean importData = true;
 
-			if (lastMergeTime > 0) {
+			if ((lastMergeTime > 0) || (lastResetTime > 0)) {
 				importData = false;
 			}
 
@@ -1005,6 +1008,9 @@ public class SitesUtil {
 			layoutSet.getSettingsProperties();
 
 		settingsProperties.remove("last-merge-time");
+
+		settingsProperties.setProperty(
+			"last-reset-time", String.valueOf(System.currentTimeMillis()));
 
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
 	}
