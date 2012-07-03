@@ -247,10 +247,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void checkEntries() throws PortalException, SystemException {
 		Date now = new Date();
 
-		int entryCount = blogsEntryPersistence.countByLtD_S(
+		int count = blogsEntryPersistence.countByLtD_S(
 			now, WorkflowConstants.STATUS_SCHEDULED);
 
-		if (entryCount == 0) {
+		if (count == 0) {
 			return;
 		}
 
