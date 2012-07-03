@@ -1504,7 +1504,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected boolean isValidPath(String path) {
-		if (path.contains(StringPool.DOUBLE_PERIOD)) {
+		if (path != null && path.contains(StringPool.DOUBLE_PERIOD)) {
 			return false;
 		}
 
