@@ -22,12 +22,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
 
 if (Validator.isNull(redirect) && Validator.isNull(backURL)) {
-    PortletURL portletURL = renderResponse.createRenderURL();
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-    portletURL.setParameter("struts_action", "/mobile_device_rules/view");
-    portletURL.setParameter("groupId", String.valueOf(groupId));
+	portletURL.setParameter("struts_action", "/mobile_device_rules/view");
+	portletURL.setParameter("groupId", String.valueOf(groupId));
 
-    backURL = portletURL.toString();
+	backURL = portletURL.toString();
 }
 
 long ruleGroupId = ParamUtil.getLong(request, "ruleGroupId");
