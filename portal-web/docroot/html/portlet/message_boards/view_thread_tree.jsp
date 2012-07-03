@@ -38,6 +38,11 @@ if (treeWalker.isOdd()) {
 
 <c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(themeDisplay, message) %>">
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
+
+	<%
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_VIEWABLE_THREAD, String.valueOf(Boolean.TRUE.toString()));
+	%>
+
 </c:if>
 
 <%
