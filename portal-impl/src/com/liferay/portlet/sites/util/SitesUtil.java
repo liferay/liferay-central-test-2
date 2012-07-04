@@ -952,18 +952,17 @@ public class SitesUtil {
 		}
 
 		try {
-			Map<String, String[]> parameterMap = null;
+			boolean importData = true;
 
 			long lastResetTime = GetterUtil.getLong(
 				settingsProperties.getProperty("last-reset-time"));
-
-			boolean importData = true;
 
 			if ((lastMergeTime > 0) || (lastResetTime > 0)) {
 				importData = false;
 			}
 
-			parameterMap = getLayoutSetPrototypesParameters(importData);
+			Map<String, String[]> parameterMap =
+				getLayoutSetPrototypesParameters(importData);
 
 			importLayoutSetPrototype(
 				layoutSetPrototype, layoutSet.getGroupId(),
