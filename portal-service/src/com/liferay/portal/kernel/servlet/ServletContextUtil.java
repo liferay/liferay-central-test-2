@@ -39,8 +39,6 @@ import javax.servlet.ServletContext;
  */
 public class ServletContextUtil {
 
-	public static final String WEB_XML_PATH = "/WEB-INF/web.xml";
-
 	public static Set<String> getClassNames(ServletContext servletContext)
 		throws IOException {
 
@@ -145,11 +143,11 @@ public class ServletContextUtil {
 	public static String getRootPath(ServletContext servletContext)
 		throws MalformedURLException {
 
-		URL rootURL = servletContext.getResource(WEB_XML_PATH);
+		URL rootURL = servletContext.getResource(_PATH_WEB_XML);
 
 		String rootPath = rootURL.getPath();
 
-		int pos = rootPath.indexOf(WEB_XML_PATH);
+		int pos = rootPath.indexOf(_PATH_WEB_XML);
 
 		return rootPath.substring(0, pos);
 	}
@@ -232,6 +230,8 @@ public class ServletContextUtil {
 	private static final String _EXT_CLASS = ".class";
 
 	private static final String _EXT_JAR = ".jar";
+
+	private static final String _PATH_WEB_XML = "/WEB-INF/web.xml";
 
 	private static Log _log = LogFactoryUtil.getLog(ServletContextUtil.class);
 

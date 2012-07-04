@@ -73,8 +73,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 	public Properties generate(
 			ServletContext servletContext, List<URL> imageURLs,
 			String spriteFileName, String spritePropertiesFileName,
-			String rootPath, int maxHeight, int maxWidth,
-			int maxSize)
+			String rootPath, int maxHeight, int maxWidth, int maxSize)
 		throws IOException {
 
 		if (imageURLs.size() < 1) {

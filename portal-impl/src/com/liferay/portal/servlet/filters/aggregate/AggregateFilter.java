@@ -479,7 +479,8 @@ public class AggregateFilter extends BasePortalFilter {
 		String content = StringUtil.read(urlConnection.getInputStream());
 
 		content = aggregateCss(
-			new ServletAggregateContext(_servletContext, resourcePath), content);
+			new ServletAggregateContext(_servletContext, resourcePath),
+			content);
 
 		return getCssContent(request, response, resourcePath, content);
 	}

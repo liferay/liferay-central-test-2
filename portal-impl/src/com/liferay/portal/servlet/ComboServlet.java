@@ -116,6 +116,10 @@ public class ComboServlet extends HttpServlet {
 		String extension = FileUtil.getExtension(firstModulePath);
 
 		if (bytesArray == null) {
+			ServletContext servletContext = getServletContext();
+
+			String rootPath = ServletContextUtil.getRootPath(servletContext);
+
 			String p = ParamUtil.getString(request, "p");
 
 			String minifierType = ParamUtil.getString(request, "minifierType");
@@ -131,12 +135,6 @@ public class ComboServlet extends HttpServlet {
 			if (!minifierType.equals("css") && !minifierType.equals("js")) {
 				minifierType = "js";
 			}
-
-			// Avoid this call in the loop
-
-			ServletContext servletContext = getServletContext();
-
-			String rootPath = ServletContextUtil.getRootPath(servletContext);
 
 			int length = modulePaths.length;
 

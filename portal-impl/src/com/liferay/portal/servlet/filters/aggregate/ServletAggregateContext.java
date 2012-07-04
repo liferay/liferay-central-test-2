@@ -44,8 +44,7 @@ public class ServletAggregateContext implements AggregateContext {
 
 		String rootPath = ServletContextUtil.getRootPath(_servletContext);
 
-		int pos = resourcePath.lastIndexOf(
-			StringPool.SLASH);
+		int pos = resourcePath.lastIndexOf(StringPool.SLASH);
 
 		if (pos > 0) {
 			resourcePath = resourcePath.substring(0, resourcePath.length() - 1);
