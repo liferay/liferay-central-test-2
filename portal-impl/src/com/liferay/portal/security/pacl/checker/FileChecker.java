@@ -64,7 +64,9 @@ public class FileChecker extends BaseChecker {
 			_rootDir = WebDirDetector.getRootDir(getClassLoader());
 		}
 		catch (Exception e) {
-			// this means the WAR is probably not exploded
+
+			// This means the WAR is probably not exploded
+
 		}
 
 		if (_log.isDebugEnabled()) {
