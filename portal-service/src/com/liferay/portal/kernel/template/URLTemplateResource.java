@@ -54,20 +54,21 @@ public class URLTemplateResource implements TemplateResource {
 				JarURLConnection jarURLConnection =
 					(JarURLConnection)urlConnection;
 
-				URL jarFileURL = jarURLConnection.getJarFileURL();
+				URL url = jarURLConnection.getJarFileURL();
 
-				if (jarFileURL.getProtocol().equals("file")) {
-					return new File(jarFileURL.getFile()).lastModified();
+				String protocol = url.getProtocol();
+
+				if (protocol.equals("file")) {
+					return new File(url.getFile()).lastModified();
 				}
 				else {
-					urlConnection = jarFileURL.openConnection();
+					urlConnection = url.openConnection();
 				}
 			}
 
 			return urlConnection.getLastModified();
 		}
-
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 			_log.error(
 				"Unable to get last modified time for template " + _templateId,
 				ioe);
