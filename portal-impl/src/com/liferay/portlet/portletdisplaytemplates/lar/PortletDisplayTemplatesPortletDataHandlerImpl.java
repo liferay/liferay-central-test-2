@@ -61,10 +61,9 @@ public class PortletDisplayTemplatesPortletDataHandlerImpl
 
 		Document document = SAXReaderUtil.createDocument();
 
-		Element rootElement = document.addElement(
-			"application-display-templates");
+		Element rootElement = document.addElement("portlet-display-templates");
 
-		exportApplicationDisplayTemplates(portletDataContext, rootElement);
+		exportPortletDisplayTemplates(portletDataContext, rootElement);
 
 		return document.formattedString();
 	}
@@ -89,9 +88,9 @@ public class PortletDisplayTemplatesPortletDataHandlerImpl
 		return null;
 	}
 
-	protected void exportApplicationDisplayTemplates(
-		PortletDataContext portletDataContext,
-		Element applicationDisplayTemplatesElement)
+	protected void exportPortletDisplayTemplates(
+			PortletDataContext portletDataContext,
+			Element portletDisplayTemplatesElement)
 		throws Exception {
 
 		long[] classNameIds =
@@ -104,14 +103,14 @@ public class PortletDisplayTemplatesPortletDataHandlerImpl
 
 			for (DDMTemplate ddmTemplate : ddmTemplates) {
 				DDMPortletDataHandlerImpl.exportTemplate(
-					portletDataContext, applicationDisplayTemplatesElement,
-					ddmTemplate, getApplicationDisplayTemplatePath(
-						portletDataContext, ddmTemplate));
+					portletDataContext, portletDisplayTemplatesElement,
+					getTemplatePath(portletDataContext, ddmTemplate),
+					ddmTemplate);
 			}
 		}
 	}
 
-	protected String getApplicationDisplayTemplatePath(
+	protected String getTemplatePath(
 		PortletDataContext portletDataContext, DDMTemplate template) {
 
 		StringBundler sb = new StringBundler(4);

@@ -76,12 +76,12 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String path = getTemplatePath(portletDataContext, template);
 
-		exportTemplate(portletDataContext, templatesElement, template, path);
+		exportTemplate(portletDataContext, templatesElement, path, template);
 	}
 
 	public static void exportTemplate(
 			PortletDataContext portletDataContext, Element templatesElement,
-			DDMTemplate template, String path)
+			String path, DDMTemplate template)
 		throws Exception {
 
 		if (!portletDataContext.isPathNotProcessed(path)) {
