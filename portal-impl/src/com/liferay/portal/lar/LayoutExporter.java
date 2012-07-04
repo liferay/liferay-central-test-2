@@ -305,7 +305,6 @@ public class LayoutExporter {
 		headerElement.addAttribute(
 			"available-locales",
 			StringUtil.merge(LanguageUtil.getAvailableLocales()));
-
 		headerElement.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
 		headerElement.addAttribute("export-date", Time.getRFC822());

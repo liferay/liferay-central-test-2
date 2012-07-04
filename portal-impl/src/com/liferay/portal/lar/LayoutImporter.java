@@ -346,7 +346,7 @@ public class LayoutImporter {
 					"portal build number " + buildNumber);
 		}
 
-		// Type compatibility
+		// Type
 
 		String larType = headerElement.attributeValue("type");
 
@@ -358,24 +358,24 @@ public class LayoutImporter {
 				"Invalid type of LAR file (" + larType + ")");
 		}
 
-		// Available Locales compatibility
+		// Available locales
 
-		String sourceAvailableLocalesAttribute = headerElement.attributeValue(
-			"available-locales");
-
-		String[] sourceAvailableLocales = StringUtil.split(
-			sourceAvailableLocalesAttribute);
+		Locale[] sourceAvailableLocales = LocaleUtil.fromLanguageIds(
+			StringUtil.split(
+				headerElement.attributeValue("available-locales")));
 
 		Locale[] targetAvailableLocales = LanguageUtil.getAvailableLocales();
 
-		for (String sourceAvailableLocale : sourceAvailableLocales) {
+		for (Locale sourceAvailableLocale : sourceAvailableLocales) {
 			if (!ArrayUtil.contains(
-					targetAvailableLocales,
-					LocaleUtil.fromLanguageId(sourceAvailableLocale))) {
+					targetAvailableLocales, sourceAvailableLocale)) {
 
-				throw new LocaleException(
-					StringUtil.merge(sourceAvailableLocales),
-					StringUtil.merge(targetAvailableLocales));
+				LocaleException le = new LocaleException();
+
+				le.setSourceAvailableLocales(sourceAvailableLocales);
+				le.setTargetAvailableLocales(targetAvailableLocales);
+
+				throw le;
 			}
 		}
 
