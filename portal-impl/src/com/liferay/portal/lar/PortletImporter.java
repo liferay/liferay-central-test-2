@@ -330,7 +330,7 @@ public class PortletImporter {
 			throw new PortletIdException("Invalid portlet id " + rootPortletId);
 		}
 
-		// Available Locales compatibility
+		// Available locales
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			portletDataContext.getCompanyId(), portletId);
@@ -342,24 +342,24 @@ public class PortletImporter {
 			Element sourceAvailableLocalesElement = rootElement.element(
 				"locale");
 
-			String sourceAvailableLocalesAttribute =
-				sourceAvailableLocalesElement.attributeValue(
-					"available-locales");
-
-			String[] sourceAvailableLocales = StringUtil.split(
-				sourceAvailableLocalesAttribute);
+			Locale[] sourceAvailableLocales = LocaleUtil.fromLanguageIds(
+				StringUtil.split(
+					sourceAvailableLocalesElement.attributeValue(
+						"available-locales")));
 
 			Locale[] targetAvailableLocales =
 				LanguageUtil.getAvailableLocales();
 
-			for (String sourceAvailableLocale : sourceAvailableLocales) {
+			for (Locale sourceAvailableLocale : sourceAvailableLocales) {
 				if (!ArrayUtil.contains(
-						targetAvailableLocales,
-						LocaleUtil.fromLanguageId(sourceAvailableLocale))) {
+						targetAvailableLocales, sourceAvailableLocale)) {
 
-					throw new LocaleException(
-						StringUtil.merge(sourceAvailableLocales),
-						StringUtil.merge(targetAvailableLocales));
+					LocaleException le = new LocaleException();
+
+					le.setSourceAvailableLocales(sourceAvailableLocales);
+					le.setTargetAvailableLocales(targetAvailableLocales);
+
+					throw le;
 				}
 			}
 		}

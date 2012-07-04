@@ -297,9 +297,7 @@ public class ExportImportAction extends EditConfigurationAction {
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else if (e instanceof LocaleException) {
-				LocaleException le = (LocaleException)e;
-
-				SessionErrors.add(actionRequest, e.getClass(), le);
+				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				_log.error(e, e);

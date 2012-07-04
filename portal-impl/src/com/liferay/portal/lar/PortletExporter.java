@@ -932,8 +932,6 @@ public class PortletExporter {
 		element.addAttribute("layout-id", String.valueOf(layoutId));
 		element.addAttribute("path", path);
 
-		// Available Locales
-
 		Element availableLocalesElement = parentElement.addElement("locale");
 
 		availableLocalesElement.addAttribute(
