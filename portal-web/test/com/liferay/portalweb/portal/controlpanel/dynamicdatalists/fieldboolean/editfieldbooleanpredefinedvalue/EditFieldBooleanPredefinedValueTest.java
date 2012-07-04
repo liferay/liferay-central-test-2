@@ -178,7 +178,8 @@ public class EditFieldBooleanPredefinedValueTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@class='aui-celleditor-element']")) {
+				if (selenium.isVisible(
+							"//div[contains(@class,'aui-celleditor-element')]")) {
 					break;
 				}
 			}

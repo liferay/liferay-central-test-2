@@ -34,13 +34,13 @@ public class FieldBooleanTestPlan extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-//		testSuite.addTest(AddFieldBooleanTests.suite());
-//		testSuite.addTest(DeleteFieldBooleanTests.suite());
+		testSuite.addTest(AddFieldBooleanTests.suite());
+		testSuite.addTest(DeleteFieldBooleanTests.suite());
 		testSuite.addTest(EditFieldBooleanFieldLabelTests.suite());
-//		testSuite.addTest(EditFieldBooleanNameTests.suite());
-//		testSuite.addTest(EditFieldBooleanPredefinedValueTests.suite());
-//		testSuite.addTest(EditFieldBooleanShowLabelTests.suite());
-//		testSuite.addTest(EditFieldBooleanTipTests.suite());
+		testSuite.addTest(EditFieldBooleanNameTests.suite());
+		testSuite.addTest(EditFieldBooleanPredefinedValueTests.suite());
+		testSuite.addTest(EditFieldBooleanShowLabelTests.suite());
+		testSuite.addTest(EditFieldBooleanTipTests.suite());
 
 		return testSuite;
 	}

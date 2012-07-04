@@ -178,7 +178,7 @@ public class EditFieldBooleanTipTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//textarea[@class='aui-celleditor-element']")) {
+							"//textarea[contains(@class,'aui-celleditor-element')]")) {
 					break;
 				}
 			}

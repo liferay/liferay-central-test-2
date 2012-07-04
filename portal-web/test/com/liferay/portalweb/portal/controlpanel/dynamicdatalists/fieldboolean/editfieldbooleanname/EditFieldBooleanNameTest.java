@@ -176,7 +176,7 @@ public class EditFieldBooleanNameTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//input[@class='aui-celleditor-element']")) {
+							"//input[contains(@class,'aui-celleditor-element')]")) {
 					break;
 				}
 			}
@@ -186,7 +186,9 @@ public class EditFieldBooleanNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@class='aui-celleditor-element']",
+		selenium.clickAt("//input[contains(@class,'aui-celleditor-element')]",
+			RuntimeVariables.replace("cell editor"));
+		selenium.type("//input[contains(@class,'aui-celleditor-element')]",
 			RuntimeVariables.replace("booleannameedited"));
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
