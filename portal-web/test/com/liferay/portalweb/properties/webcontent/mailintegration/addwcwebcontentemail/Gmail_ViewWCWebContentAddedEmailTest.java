@@ -186,12 +186,12 @@ public class Gmail_ViewWCWebContentAddedEmailTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Sign out"),
-					selenium.getText("//td/a"));
-				selenium.clickAt("//td/a", RuntimeVariables.replace("Sign out"));
+					selenium.getText("//td[2]/a"));
+				selenium.clickAt("//td[2]/a",
+					RuntimeVariables.replace("Sign out"));
 
 			case 7:
-				Thread.sleep(5000);
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				selenium.close();
 				selenium.selectWindow("null");
 
