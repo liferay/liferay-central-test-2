@@ -29,18 +29,6 @@ import java.io.Reader;
  */
 public class LiferayTemplateLoader implements TemplateLoader {
 
-	public void closeTemplateSource(Object templateSource) throws IOException {
-		TemplateResource templateResource = (TemplateResource)templateSource;
-
-		try {
-			TemplateResourceLoaderUtil.clearCache(
-				TemplateManager.FREEMARKER, templateResource.getTemplateId());
-		}
-		catch (TemplateException te) {
-			throw new IOException(te);
-		}
-	}
-
 	public Object findTemplateSource(String templateId) throws IOException {
 		try {
 			return TemplateResourceLoaderUtil.getTemplateResource(
@@ -63,6 +51,18 @@ public class LiferayTemplateLoader implements TemplateLoader {
 		TemplateResource templateResource = (TemplateResource)templateSource;
 
 		return templateResource.getReader();
+	}
+
+	public void closeTemplateSource(Object templateSource) throws IOException {
+		TemplateResource templateResource = (TemplateResource)templateSource;
+
+		try {
+			TemplateResourceLoaderUtil.clearCache(
+				TemplateManager.FREEMARKER, templateResource.getTemplateId());
+		}
+		catch (TemplateException te) {
+			throw new IOException(te);
+		}
 	}
 
 }
