@@ -127,10 +127,10 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 				if (templateResource != null) {
 					if ((_modificationCheckInterval != 0) &&
 						(!_name.equals(TemplateManager.VELOCITY) ||
-							!templateId.contains(
+						 !templateId.contains(
 								SandboxHandler.SANDBOX_MARKER))) {
 
-						templateResource = new TemplateResourceCacheWrapper(
+						templateResource = new CacheTemplateResource(
 							templateResource);
 
 						_portalCache.put(templateId, templateResource);
@@ -162,10 +162,10 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		return false;
 	}
 
-	private static final Object _nullHolder = new Object();
-
 	private static Log _log = LogFactoryUtil.getLog(
 		DefaultTemplateResourceLoader.class);
+
+	private static Object _nullHolder = new Object();
 
 	private long _modificationCheckInterval;
 	private String _name;

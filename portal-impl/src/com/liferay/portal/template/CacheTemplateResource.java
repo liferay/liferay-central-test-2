@@ -26,11 +26,10 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * @author Tina Tian
  */
-public class TemplateResourceCacheWrapper implements TemplateResource {
+public class CacheTemplateResource implements TemplateResource {
 
-	public TemplateResourceCacheWrapper(TemplateResource templateResource) {
+	public CacheTemplateResource(TemplateResource templateResource) {
 		_templateResource = templateResource;
-		_lastModified = System.currentTimeMillis();
 	}
 
 	public long getLastModified() {
@@ -40,35 +39,37 @@ public class TemplateResourceCacheWrapper implements TemplateResource {
 	public Reader getReader() throws IOException {
 		String templateContent = _templateContent.get();
 
-		if (templateContent == null) {
-			Reader reader = null;
+		if (templateContent != null) {
+			return new UnsyncStringReader(templateContent);
+		}
 
-			try {
-				reader = _templateResource.getReader();
+		Reader reader = null;
 
-				if (reader == null) {
-					return null;
-				}
+		try {
+			reader = _templateResource.getReader();
 
-				char[] buffer = new char[1024];
-
-				int result = -1;
-
-				UnsyncCharArrayWriter unsyncCharArrayWriter =
-					new UnsyncCharArrayWriter();
-
-				while ((result = reader.read(buffer)) != -1) {
-					unsyncCharArrayWriter.write(buffer, 0, result);
-				}
-
-				templateContent = unsyncCharArrayWriter.toString();
-
-				_templateContent.set(templateContent);
+			if (reader == null) {
+				return null;
 			}
-			finally {
-				if (reader != null) {
-					reader.close();
-				}
+
+			char[] buffer = new char[1024];
+
+			int result = -1;
+
+			UnsyncCharArrayWriter unsyncCharArrayWriter =
+				new UnsyncCharArrayWriter();
+
+			while ((result = reader.read(buffer)) != -1) {
+				unsyncCharArrayWriter.write(buffer, 0, result);
+			}
+
+			templateContent = unsyncCharArrayWriter.toString();
+
+			_templateContent.set(templateContent);
+		}
+		finally {
+			if (reader != null) {
+				reader.close();
 			}
 		}
 
@@ -79,7 +80,7 @@ public class TemplateResourceCacheWrapper implements TemplateResource {
 		return _templateResource.getTemplateId();
 	}
 
-	private long _lastModified;
+	private long _lastModified = System.currentTimeMillis();
 	private AtomicReference<String> _templateContent =
 		new AtomicReference<String>();
 	private TemplateResource _templateResource;
