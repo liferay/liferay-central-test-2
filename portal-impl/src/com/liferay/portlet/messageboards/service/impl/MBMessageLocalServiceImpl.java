@@ -1985,7 +1985,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String messageBody = message.getBody();
 
-		if (htmlFormat) {
+		if (htmlFormat && message.isFormatBBCode()) {
 			try {
 				messageBody = BBCodeTranslatorUtil.getHTML(messageBody);
 			}
