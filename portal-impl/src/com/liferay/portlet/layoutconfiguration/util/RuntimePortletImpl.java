@@ -334,7 +334,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			 return null;
 		 }
 
-		LayoutTemplate layoutTemplate = getLayoutTemlpate(velocityTemplateId);
+		LayoutTemplate layoutTemplate = getLayoutTemplate(velocityTemplateId);
 
 		String pluginServletContextName = GetterUtil.getString(
 			layoutTemplate.getServletContextName());
@@ -520,7 +520,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		sb.writeTo(jspWriter);
 	}
 
-	protected LayoutTemplate getLayoutTemlpate(String velocityTemplateId) {
+	protected LayoutTemplate getLayoutTemplate(String velocityTemplateId) {
 		String separator = LayoutTemplateConstants.CUSTOM_SEPARATOR;
 		boolean standard = false;
 
