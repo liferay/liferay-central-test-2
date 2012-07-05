@@ -129,7 +129,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 	@Test
 	public void testDraftToScheduledByAdd() throws Exception {
-		GregorianCalendar displayDate = new GregorianCalendar();
+		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
@@ -161,7 +161,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 			getUserId(), blogsEntry.getEntryId(),
 			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
 
-		GregorianCalendar displayDate = new GregorianCalendar();
+		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
@@ -195,11 +195,12 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 	@Test
 	public void testScheduledByAddToApproved() throws Exception {
-		GregorianCalendar displayDate = new GregorianCalendar();
+		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
 		blogsEntry.setDisplayDate(displayDate.getTime());
+
 		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
 
 		blogsEntry = BlogsEntryLocalServiceUtil.updateStatus(
@@ -224,7 +225,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 			getUserId(), blogsEntry.getEntryId(),
 			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
 
-		GregorianCalendar displayDate = new GregorianCalendar();
+		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
@@ -242,6 +243,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 		displayDate.add(Calendar.DATE, -2);
 
 		blogsEntry.setDisplayDate(displayDate.getTime());
+
 		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
 
 		BlogsEntryLocalServiceUtil.checkEntries();
