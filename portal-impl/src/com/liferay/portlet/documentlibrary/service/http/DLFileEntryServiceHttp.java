@@ -607,15 +607,15 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		HttpPrincipal httpPrincipal, long groupId, long folderId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntries", _getFileEntriesParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, start, end, obc);
+					folderId, status, start, end, obc);
 
 			Object returnObj = null;
 
@@ -640,15 +640,15 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntries", _getFileEntriesParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, status, start, end, obc);
+					folderId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -1678,11 +1678,11 @@ public class DLFileEntryServiceHttp {
 			long.class, java.lang.String.class, boolean.class
 		};
 	private static final Class<?>[] _getFileEntriesParameterTypes15 = new Class[] {
-			long.class, long.class, int.class, int.class,
+			long.class, long.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFileEntriesParameterTypes16 = new Class[] {
-			long.class, long.class, int.class, int.class, int.class,
+			long.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFileEntriesParameterTypes17 = new Class[] {
