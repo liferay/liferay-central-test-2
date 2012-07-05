@@ -24,6 +24,9 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 	public void testDefineRoleWebContentEditorCP() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -31,7 +34,7 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}
@@ -75,6 +78,8 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Web Content"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//h3"));
 		assertFalse(selenium.isChecked(
 				"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalSUBSCRIBE']"));
 		selenium.check(
@@ -92,12 +97,12 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 			RuntimeVariables.replace("Define Permissions"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.typeKeys("//select[@id='_128_add-permissions']",
-			RuntimeVariables.replace("wwwwwwwww"));
-		selenium.keyPress("//select[@id='_128_add-permissions']",
-			RuntimeVariables.replace("\\13"));
+		selenium.select("//select[@id='_128_add-permissions']",
+			RuntimeVariables.replace("index=105"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//h3"));
 		assertFalse(selenium.isChecked(
 				"//input[@value='15ACCESS_IN_CONTROL_PANEL']"));
 		selenium.check("//input[@value='15ACCESS_IN_CONTROL_PANEL']");
@@ -113,11 +118,25 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"The role permissions were updated."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Subscribe"),
-			selenium.getText("//tr[5]/td[3]"));
-		assertEquals(RuntimeVariables.replace("View"),
-			selenium.getText("//tr[4]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//td/a"));
 		assertEquals(RuntimeVariables.replace("Access in Control Panel"),
 			selenium.getText("//tr[3]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Portal"),
+			selenium.getText("//tr[3]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//tr[4]/td/a"));
+		assertEquals(RuntimeVariables.replace("View"),
+			selenium.getText("//tr[4]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Portal"),
+			selenium.getText("//tr[4]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//tr[5]/td/a"));
+		assertEquals(RuntimeVariables.replace("Web Content Management"),
+			selenium.getText("//tr[5]/td[2]"));
+		assertEquals(RuntimeVariables.replace("Subscribe"),
+			selenium.getText("//tr[5]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Portal"),
+			selenium.getText("//tr[5]/td[4]"));
 	}
 }

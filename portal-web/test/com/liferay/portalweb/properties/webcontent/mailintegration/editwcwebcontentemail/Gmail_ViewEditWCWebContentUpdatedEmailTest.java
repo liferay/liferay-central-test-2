@@ -187,8 +187,9 @@ public class Gmail_ViewEditWCWebContentUpdatedEmailTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Sign out"),
-					selenium.getText("//td/a"));
-				selenium.clickAt("//td/a", RuntimeVariables.replace("Sign out"));
+					selenium.getText("//td[2]/a"));
+				selenium.clickAt("//td[2]/a",
+					RuntimeVariables.replace("Sign out"));
 
 			case 7:
 				Thread.sleep(10000);
