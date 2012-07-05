@@ -122,6 +122,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	 * @return the normal model instance
 	 */
 	public static DLFileVersion toModel(DLFileVersionSoap soapModel) {
+		if (soapModel == null) {
+			return null;
+		}
+
 		DLFileVersion model = new DLFileVersionImpl();
 
 		model.setUuid(soapModel.getUuid());
@@ -159,6 +163,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	 * @return the normal model instances
 	 */
 	public static List<DLFileVersion> toModels(DLFileVersionSoap[] soapModels) {
+		if (soapModels == null) {
+			return null;
+		}
+
 		List<DLFileVersion> models = new ArrayList<DLFileVersion>(soapModels.length);
 
 		for (DLFileVersionSoap soapModel : soapModels) {
