@@ -52,15 +52,15 @@ portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTem
 			<optgroup label="<liferay-ui:message key="global" />">
 
 				<%
-				List<DDMTemplate> globalAssetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(themeDisplay.getCompanyGroupId(), portletDisplayDDMTemplateClassNameId, 0);
+				List<DDMTemplate> companyAssetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(themeDisplay.getCompanyGroupId(), portletDisplayDDMTemplateClassNameId, 0);
 
-				for (DDMTemplate curAssetPublisherDDMTemplate : globalAssetPublisherDDMTemplates) {
-					if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
+				for (DDMTemplate companyAssetPublisherDDMTemplate : companyAssetPublisherDDMTemplates) {
+					if (!DDMTemplatePermission.contains(permissionChecker, companyAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
 						continue;
 					}
 				%>
 
-					<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayDDMTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == portletDisplayDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getUuid() %>' />
+					<aui:option label="<%= companyAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayDDMTemplate != null) && (companyAssetPublisherDDMTemplate.getTemplateId() == portletDisplayDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + companyAssetPublisherDDMTemplate.getUuid() %>' />
 
 				<%
 				}
@@ -70,15 +70,15 @@ portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTem
 			<optgroup label="<%= themeDisplay.getScopeGroupName() %>">
 
 				<%
-				List<DDMTemplate> localAssetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(portletDisplayDDMTemplateGroupId, portletDisplayDDMTemplateClassNameId, 0);
+				List<DDMTemplate> groupAssetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(portletDisplayDDMTemplateGroupId, portletDisplayDDMTemplateClassNameId, 0);
 
-				for (DDMTemplate curAssetPublisherDDMTemplate : localAssetPublisherDDMTemplates) {
-					if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
+				for (DDMTemplate groupAssetPublisherDDMTemplate : groupAssetPublisherDDMTemplates) {
+					if (!DDMTemplatePermission.contains(permissionChecker, groupAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
 						continue;
 					}
 				%>
 
-					<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayDDMTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == portletDisplayDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getUuid() %>' />
+					<aui:option label="<%= groupAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (portletDisplayDDMTemplate != null) && (groupAssetPublisherDDMTemplate.getTemplateId() == portletDisplayDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + groupAssetPublisherDDMTemplate.getUuid() %>' />
 
 				<%
 				}
