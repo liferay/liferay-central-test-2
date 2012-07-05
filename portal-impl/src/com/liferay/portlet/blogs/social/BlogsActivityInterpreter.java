@@ -84,6 +84,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
+		String displayDate = StringPool.BLANK;
+
 		if ((activityType == BlogsActivityKeys.ADD_COMMENT) ||
 			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
 
@@ -95,46 +97,41 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			if (Validator.isNull(groupName)) {
-				titlePattern = "activity-blogs-add-entry";
+			Date now = new Date();
+
+			if (now.before(entry.getDisplayDate())) {
+				if (Validator.isNull(groupName)) {
+					titlePattern = "activity-blogs-scheduled-entry";
+				}
+				else {
+					titlePattern = "activity-blogs-scheduled-entry-in";
+				}
+
+				Format dateFormatDate =
+					FastDateFormatFactoryUtil.getSimpleDateFormat(
+						"MMMM d", themeDisplay.getLocale(),
+						themeDisplay.getTimeZone());
+
+				displayDate = dateFormatDate.format(entry.getDisplayDate());
 			}
 			else {
-				titlePattern = "activity-blogs-add-entry-in";
+				if (Validator.isNull(groupName)) {
+					titlePattern = "activity-blogs-add-entry";
+				}
+				else {
+					titlePattern = "activity-blogs-add-entry-in";
+				}
 			}
 		}
 
-		Date now = new Date();
-		String entryTitle = null;
-		String scheduledText = null;
-
-		if (now.before(entry.getDisplayDate())) {
-			entryTitle = HtmlUtil.escape(entry.getTitle());
-
-			Format dateFormatDate =
-				FastDateFormatFactoryUtil.getSimpleDateFormat(
-					"MMMM d", themeDisplay.getLocale(),
-					themeDisplay.getTimeZone());
-
-			String displayDateString = dateFormatDate.format(
-				entry.getDisplayDate());
-
-			scheduledText = themeDisplay.translate(
-				"activity-blogs-entry-displayed-on",
-				new Object[] {displayDateString});
-		}
-		else {
-			entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
-		}
+		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
-			groupName, creatorUserName, receiverUserName, entryTitle
+			groupName, creatorUserName, receiverUserName, entryTitle,
+			displayDate
 		};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
-
-		if (Validator.isNotNull(scheduledText)) {
-			title = title + StringPool.SPACE + scheduledText;
-		}
 
 		// Body
 

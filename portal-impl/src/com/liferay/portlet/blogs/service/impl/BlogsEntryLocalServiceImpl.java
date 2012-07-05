@@ -1046,13 +1046,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsEntryPersistence.update(entry, false);
 
-		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
-			BlogsEntry.class.getName(), entryId);
-
-		if ((assetEntry == null) || (assetEntry.getPublishDate() == null)) {
-			serviceContext.setCommand(Constants.ADD);
-		}
-
 		// Statistics
 
 		blogsStatsUserLocalService.updateStatsUser(
@@ -1060,6 +1053,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			BlogsEntry.class);
+
+		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
+			BlogsEntry.class.getName(), entryId);
+
+		if ((assetEntry == null) || (assetEntry.getPublishDate() == null)) {
+			serviceContext.setCommand(Constants.ADD);
+		}
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
