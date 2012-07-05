@@ -274,7 +274,7 @@ public class DLAppHelperLocalServiceImpl
 
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByToFileEntryId(
-			fileEntry.getFileEntryId());
+				fileEntry.getFileEntryId());
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			assetEntryLocalService.incrementViewCounter(
