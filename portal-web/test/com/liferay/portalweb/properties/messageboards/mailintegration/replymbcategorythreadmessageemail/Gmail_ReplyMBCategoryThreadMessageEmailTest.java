@@ -141,7 +141,8 @@ public class Gmail_ReplyMBCategoryThreadMessageEmailTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("MB Message Subject")
+						if (RuntimeVariables.replace(
+									"[MB Category Name] MB Message Subject")
 												.equals(selenium.getText(
 										"//h1/span[1]"))) {
 							break;
@@ -153,7 +154,8 @@ public class Gmail_ReplyMBCategoryThreadMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				assertEquals(RuntimeVariables.replace("MB Message Subject"),
+				assertEquals(RuntimeVariables.replace(
+						"[MB Category Name] MB Message Subject"),
 					selenium.getText("//h1/span[1]"));
 				assertTrue(selenium.isPartialText(
 						"//div[contains(child::text(),'MB Message Body')]",
@@ -198,8 +200,9 @@ public class Gmail_ReplyMBCategoryThreadMessageEmailTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Sign out"),
-					selenium.getText("//td/a"));
-				selenium.clickAt("//td/a", RuntimeVariables.replace("Sign out"));
+					selenium.getText("//td[2]/a"));
+				selenium.clickAt("//td[2]/a",
+					RuntimeVariables.replace("Sign out"));
 
 			case 5:
 				Thread.sleep(10000);
