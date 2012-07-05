@@ -15,6 +15,7 @@
 package com.liferay.portalweb.properties.webcontent.mailintegration.editwcwebcontentemail;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.sites.site.addmemberssiteuser.AddMembersSiteUserTest;
 import com.liferay.portalweb.portal.controlpanel.sites.site.addsite.AddSiteTest;
 import com.liferay.portalweb.portal.controlpanel.sites.site.addsite.TearDownSiteTest;
 import com.liferay.portalweb.portal.controlpanel.users.user.adduser.TearDownUserTest;
@@ -34,7 +35,7 @@ public class EditWCWebContentEmailTests extends BaseTestSuite {
 		testSuite.addTestSuite(EditPortalInstanceMailDomainTest.class);
 		testSuite.addTestSuite(AddUserGmailTest.class);
 		testSuite.addTestSuite(AddSiteTest.class);
-		testSuite.addTestSuite(AssignMembersSiteUserTest.class);
+		testSuite.addTestSuite(AddMembersSiteUserTest.class);
 		testSuite.addTestSuite(ConfigureWCPortletEmailFromGmailServerCPTest.class);
 		testSuite.addTestSuite(ConfigureWCPortletWebContentAddedEmailCPTest.class);
 		testSuite.addTestSuite(ConfigureWCPortletWebContentUpdatedEmailCPTest.class);
