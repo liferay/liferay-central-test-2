@@ -201,7 +201,10 @@ public class LayoutsTreeUtil {
 	}
 
 	private static int _getLoadedLayoutsCount(
-		HttpServletRequest request, long layoutId) throws Exception {
+			HttpServletRequest request, long layoutId)
+		throws Exception {
+
+		HttpSession session = request.getSession();
 
 		String treeId = ParamUtil.getString(request, "treeId");
 		long groupId = ParamUtil.getLong(request, "groupId");
@@ -216,8 +219,6 @@ public class LayoutsTreeUtil {
 		sb.append(privateLayout);
 		sb.append(StringPool.COLON);
 		sb.append("Pagination");
-
-		HttpSession session = request.getSession();
 
 		String paginationJSON = SessionClicks.get(
 			session, sb.toString(), JSONFactoryUtil.getNullJSON());
