@@ -70,6 +70,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.FileExtensionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -931,7 +932,11 @@ public class WebServerServlet extends HttpServlet {
 			inputStream = fileVersion.getContentStream(true);
 			contentLength = fileVersion.getSize();
 
-			if (_isValidExtension(targetExtension)) {
+			if (Validator.isNotNull(targetExtension)) {
+				if (!_isValidExtension(targetExtension)) {
+					throw new FileExtensionException();
+				}
+
 				File convertedFile = DocumentConversionUtil.convert(
 					tempFileId, inputStream, extension, targetExtension);
 
@@ -1248,14 +1253,10 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private boolean _isValidExtension(String extension) {
-		if (Validator.isNull(extension)) {
-			return false;
-		}
+		if (extension.contains(StringPool.SLASH) ||
+			extension.contains(StringPool.BACK_SLASH)) {
 
-		for (char c : extension.trim().toCharArray()) {
-			if (!Validator.isChar(c) && !Validator.isDigit(c)) {
-				return false;
-			}
+			return false;
 		}
 
 		return true;
