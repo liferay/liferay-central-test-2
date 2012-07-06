@@ -796,16 +796,9 @@ public class WebServerServlet extends HttpServlet {
 
 		// Retrieve file details
 
-		FileEntry fileEntry = null;
+		FileEntry fileEntry = getFileEntry(pathArray);
 
-		try {
-			fileEntry = getFileEntry(pathArray);
-		}
-		catch (NoSuchFileEntryException nsfee) {
-			if (user.isDefaultUser()) {
-				throw new PrincipalException();
-			}
-
+		if (fileEntry == null) {
 			throw new NoSuchFileEntryException();
 		}
 
