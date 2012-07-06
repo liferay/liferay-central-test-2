@@ -2124,7 +2124,7 @@ public class SourceFormatter {
 		}
 	}
 
-	private static void _formatSQL() throws Exception {
+	private static void _formatSQL() throws IOException {
 		String basedir = "./";
 
 		DirectoryScanner directoryScanner = new DirectoryScanner();
@@ -2150,7 +2150,7 @@ public class SourceFormatter {
 		}
 	}
 
-	private static String _formatSQLContent(String content) throws Exception {
+	private static String _formatSQLContent(String content) throws IOException {
 		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
