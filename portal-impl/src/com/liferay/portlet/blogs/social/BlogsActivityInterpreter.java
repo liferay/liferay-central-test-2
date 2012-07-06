@@ -14,9 +14,14 @@
 
 package com.liferay.portlet.blogs.social;
 
+import java.text.Format;
+import java.util.Date;
+
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -76,25 +81,52 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
+		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
+		String displayDate = StringPool.BLANK;
+
 		String titlePattern = null;
 
 		if ((activityType == BlogsActivityKeys.ADD_COMMENT) ||
-			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
+				(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
 
-			titlePattern = "activity-blogs-add-comment";
-		}
-		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			titlePattern = "activity-blogs-add-entry";
-		}
+				if (Validator.isNull(groupName)) {
+					titlePattern = "activity-blogs-add-comment";
+				}
+				else {
+					titlePattern = "activity-blogs-add-comment-in";
+				}
+			}
+			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+				if (entry.getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+					if (Validator.isNull(groupName)) {
+						titlePattern = "activity-blogs-scheduled-entry";
+					}
+					else {
+						titlePattern = "activity-blogs-scheduled-entry-in";
+					}
 
-		if (Validator.isNotNull(groupName)) {
-			titlePattern += "-in";
-		}
+					Format dateFormatDate =
+						FastDateFormatFactoryUtil.getSimpleDateFormat(
+							"MMMM d", themeDisplay.getLocale(),
+							themeDisplay.getTimeZone());
 
-		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
+					displayDate = dateFormatDate.format(entry.getDisplayDate());
+
+					entryTitle = HtmlUtil.escape(entry.getTitle());
+				}
+				else {
+					if (Validator.isNull(groupName)) {
+						titlePattern = "activity-blogs-add-entry";
+					}
+					else {
+						titlePattern = "activity-blogs-add-entry-in";
+					}
+				}
+			}
 
 		Object[] titleArguments = new Object[] {
-			groupName, creatorUserName, receiverUserName, entryTitle
+			groupName, creatorUserName, receiverUserName, entryTitle,
+			displayDate
 		};
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
