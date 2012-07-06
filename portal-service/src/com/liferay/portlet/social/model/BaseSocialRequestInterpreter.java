@@ -35,8 +35,6 @@ public abstract class BaseSocialRequestInterpreter
 	implements SocialRequestInterpreter {
 
 	public String getUserName(long userId, ThemeDisplay themeDisplay) {
-		String userName = StringPool.BLANK;
-
 		try {
 			if (userId <= 0) {
 				return StringPool.BLANK;
@@ -48,7 +46,7 @@ public abstract class BaseSocialRequestInterpreter
 				return HtmlUtil.escape(user.getFirstName());
 			}
 
-			userName = user.getFullName();
+			String userName = user.getFullName();
 
 			Group group = user.getGroup();
 
@@ -58,20 +56,15 @@ public abstract class BaseSocialRequestInterpreter
 
 			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
-			userName =
-				"<a href=\"" + userDisplayURL + "\">" +
-					HtmlUtil.escape(userName) + "</a>";
+			return "<a href=\"" + userDisplayURL + "\">" +
+				HtmlUtil.escape(userName) + "</a>";
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;
 		}
-
-		return userName;
 	}
 
-    public String getUserNameLink(long userId, ThemeDisplay themeDisplay) {
-		String userName = StringPool.BLANK;
-
+	public String getUserNameLink(long userId, ThemeDisplay themeDisplay) {
 		try {
 			if (userId <= 0) {
 				return StringPool.BLANK;
@@ -79,19 +72,16 @@ public abstract class BaseSocialRequestInterpreter
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			userName = user.getFullName();
+			String userName = user.getFullName();
 
 			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
-			userName =
-				"<a href=\"" + userDisplayURL + "\">" +
+			return "<a href=\"" + userDisplayURL + "\">" +
 				HtmlUtil.escape(userName) + "</a>";
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;
 		}
-
-		return userName;
 	}
 
 	public SocialRequestFeedEntry interpret(
