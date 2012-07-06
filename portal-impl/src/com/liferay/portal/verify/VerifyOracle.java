@@ -53,8 +53,14 @@ public class VerifyOracle extends VerifyProcess {
 				String columnName = rs.getString(2);
 				int dataLength = rs.getInt(3);
 
-				if (dataLength != 4000) {
-					dataLength = dataLength / 4;
+				int buildNumber = getBuildNumber();
+
+				if ((buildNumber >= ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER) &&
+					(buildNumber < ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
+
+					if (dataLength != 4000) {
+						dataLength = dataLength / 4;
+					}
 				}
 
 				try {
@@ -98,13 +104,7 @@ public class VerifyOracle extends VerifyProcess {
 			return;
 		}
 
-		int buildNumber = getBuildNumber();
-
-		if ((buildNumber >= ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER) &&
-			(buildNumber < ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
-
-			alterColumns();
-		}
+		alterColumns();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyOracle.class);
