@@ -86,6 +86,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String displayDate = StringPool.BLANK;
 
+		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
+
 		if ((activityType == BlogsActivityKeys.ADD_COMMENT) ||
 			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
 
@@ -113,6 +115,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 						themeDisplay.getTimeZone());
 
 				displayDate = dateFormatDate.format(entry.getDisplayDate());
+
+				entryTitle = HtmlUtil.escape(entry.getTitle());
 			}
 			else {
 				if (Validator.isNull(groupName)) {
@@ -123,8 +127,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 				}
 			}
 		}
-
-		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle,
