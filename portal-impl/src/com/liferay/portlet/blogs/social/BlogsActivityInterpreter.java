@@ -82,11 +82,10 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String titlePattern = null;
-
+		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
 		String displayDate = StringPool.BLANK;
 
-		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
+		String titlePattern = null;
 
 		if ((activityType == BlogsActivityKeys.ADD_COMMENT) ||
 			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
@@ -102,12 +101,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			Date now = new Date();
 
 			if (now.before(entry.getDisplayDate())) {
-				if (Validator.isNull(groupName)) {
-					titlePattern = "activity-blogs-scheduled-entry";
-				}
-				else {
-					titlePattern = "activity-blogs-scheduled-entry-in";
-				}
+				entryTitle = HtmlUtil.escape(entry.getTitle());
 
 				Format dateFormatDate =
 					FastDateFormatFactoryUtil.getSimpleDateFormat(
@@ -116,7 +110,12 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 				displayDate = dateFormatDate.format(entry.getDisplayDate());
 
-				entryTitle = HtmlUtil.escape(entry.getTitle());
+				if (Validator.isNull(groupName)) {
+					titlePattern = "activity-blogs-scheduled-entry";
+				}
+				else {
+					titlePattern = "activity-blogs-scheduled-entry-in";
+				}
 			}
 			else {
 				if (Validator.isNull(groupName)) {
