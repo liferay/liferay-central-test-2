@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
@@ -32,30 +33,13 @@ import java.sql.SQLException;
  */
 public class VerifyOracle extends VerifyProcess {
 
-	@Override
-	protected void doVerify() throws Exception {
-		DB db = DBFactoryUtil.getDB();
-
-		String dbType = db.getType();
-
-		if (!dbType.equals(DB.TYPE_ORACLE)) {
-			return;
-		}
-
+	protected void alterColumns() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int buildNumber;
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement("select buildNumber from release_");
-
-			rs = ps.executeQuery();
-
-			rs.next();
-			buildNumber = rs.getInt(1);
 
 			ps = con.prepareStatement(
 				"select table_name, column_name, data_length from " +
@@ -70,12 +54,7 @@ public class VerifyOracle extends VerifyProcess {
 				int dataLength = rs.getInt(3);
 
 				if (dataLength != 4000) {
-
-					// LPS-26674
-
-					if ((buildNumber >= 6000) && (buildNumber < 6120)) {
-						dataLength = dataLength / 4;
-					}
+					dataLength = dataLength / 4;
 				}
 
 				try {
@@ -106,6 +85,25 @@ public class VerifyOracle extends VerifyProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	@Override
+	protected void doVerify() throws Exception {
+		DB db = DBFactoryUtil.getDB();
+
+		String dbType = db.getType();
+
+		if (!dbType.equals(DB.TYPE_ORACLE)) {
+			return;
+		}
+
+		int buildNumber = getBuildNumber();
+
+		if ((buildNumber >= ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER) &&
+			(buildNumber < ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
+
+			alterColumns();
 		}
 	}
 
