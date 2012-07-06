@@ -809,18 +809,6 @@ public class EditLayoutsAction extends PortletAction {
 		byte[] iconBytes = getIconBytes(uploadPortletRequest, "iconFileName");
 		long layoutPrototypeId = ParamUtil.getLong(
 			uploadPortletRequest, "layoutPrototypeId");
-		String layoutPrototypeLinkEnabled= ParamUtil.getString(
-			uploadPortletRequest, "layoutPrototypeLinkEnabled");
-
-		boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
-			uploadPortletRequest, "inheritFromParentLayoutId");
-
-		long copyLayoutId = ParamUtil.getLong(
-			uploadPortletRequest, "copyLayoutId");
-
-		String layoutTemplateId = ParamUtil.getString(
-			uploadPortletRequest, "layoutTemplateId",
-			PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
@@ -832,6 +820,9 @@ public class EditLayoutsAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
+
+			boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
+				uploadPortletRequest, "inheritFromParentLayoutId");
 
 			if (inheritFromParentLayoutId && (parentLayoutId > 0)) {
 				Layout parentLayout = LayoutLocalServiceUtil.getLayout(
@@ -858,6 +849,9 @@ public class EditLayoutsAction extends PortletAction {
 				LayoutPrototype layoutPrototype =
 					LayoutPrototypeServiceUtil.getLayoutPrototype(
 						layoutPrototypeId);
+
+				String layoutPrototypeLinkEnabled= ParamUtil.getString(
+					uploadPortletRequest, "layoutPrototypeLinkEnabled");
 
 				if (Validator.isNotNull(layoutPrototypeLinkEnabled)) {
 					serviceContext.setAttribute(
@@ -912,8 +906,15 @@ public class EditLayoutsAction extends PortletAction {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
+				String layoutTemplateId = ParamUtil.getString(
+					uploadPortletRequest, "layoutTemplateId",
+					PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
+
 				layoutTypePortlet.setLayoutTemplateId(
 					themeDisplay.getUserId(), layoutTemplateId);
+
+				long copyLayoutId = ParamUtil.getLong(
+					uploadPortletRequest, "copyLayoutId");
 
 				if ((copyLayoutId > 0) &&
 					(copyLayoutId != layout.getLayoutId())) {

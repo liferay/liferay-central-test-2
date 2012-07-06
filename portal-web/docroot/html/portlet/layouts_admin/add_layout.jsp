@@ -115,9 +115,11 @@ List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(compa
 
 		function showHiddenFields() {
 			var hiddenFields = A.one('#<portlet:namespace />hiddenFields');
-			var layoutPrototypeLinkOptions = A.one('#<portlet:namespace />layoutPrototypeLinkOptions');
 
 			hiddenFields.toggle(layoutPrototypeIdSelect && !layoutPrototypeIdSelect.val());
+
+			var layoutPrototypeLinkOptions = A.one('#<portlet:namespace />layoutPrototypeLinkOptions');
+
 			layoutPrototypeLinkOptions.toggle(layoutPrototypeIdSelect && layoutPrototypeIdSelect.val() != '');
 		}
 
