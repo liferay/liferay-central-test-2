@@ -933,9 +933,7 @@ public class WebServerServlet extends HttpServlet {
 			contentLength = fileVersion.getSize();
 
 			if (Validator.isNotNull(targetExtension)) {
-				if (!_isValidExtension(targetExtension)) {
-					throw new FileExtensionException();
-				}
+				validateExtension(targetExtension);
 
 				File convertedFile = DocumentConversionUtil.convert(
 					tempFileId, inputStream, extension, targetExtension);
@@ -1105,6 +1103,17 @@ public class WebServerServlet extends HttpServlet {
 		ServletResponseUtil.write(response, html);
 	}
 
+	protected void validateExtension(String extension)
+		throws FileExtensionException {
+
+		if (extension.contains(StringPool.SLASH) ||
+			extension.contains(StringPool.BACK_SLASH) ||
+			extension.contains(File.pathSeparator)) {
+
+			throw new FileExtensionException(extension);
+		}
+	}
+
 	protected void writeImage(
 		Image image, HttpServletRequest request, HttpServletResponse response) {
 
@@ -1250,16 +1259,6 @@ public class WebServerServlet extends HttpServlet {
 		}
 
 		return user;
-	}
-
-	private boolean _isValidExtension(String extension) {
-		if (extension.contains(StringPool.SLASH) ||
-			extension.contains(StringPool.BACK_SLASH)) {
-
-			return false;
-		}
-
-		return true;
 	}
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
