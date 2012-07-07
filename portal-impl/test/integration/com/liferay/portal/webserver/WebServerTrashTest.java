@@ -37,15 +37,12 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.webdav.methods.Method;
-
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,7 +55,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class WebServerTrashTest extends BaseWebServerTestCase {
 
-	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -78,12 +75,12 @@ public class WebServerTrashTest extends BaseWebServerTestCase {
 		ResourcePermissionLocalServiceUtil.addResourcePermission(
 			_user.getCompanyId(), PortletKeys.TRASH,
 			ResourceConstants.SCOPE_COMPANY,
-			String.valueOf(TestPropsValues.getCompanyId()),
-			_role.getRoleId(), ActionKeys.ACCESS_IN_CONTROL_PANEL);
+			String.valueOf(TestPropsValues.getCompanyId()), _role.getRoleId(),
+			ActionKeys.ACCESS_IN_CONTROL_PANEL);
 
 	}
 
-	@After
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 
@@ -95,39 +92,47 @@ public class WebServerTrashTest extends BaseWebServerTestCase {
 			RoleLocalServiceUtil.deleteRole(_role.getRoleId());
 		}
 	}
-	
+
 	@Test
 	public void testRequestFileInTrash() throws Exception {
-		FileEntry fileEntry = addFileEntry(false, "Trash-Test.txt");
+		FileEntry fileEntry = addFileEntry(false, "Test Trash.txt");
 
-		MockHttpServletResponse response = 
-			_testRequestFile(fileEntry, _user, false);
+		MockHttpServletResponse response =  testRequestFile(
+			fileEntry, _user, false);
 
 		Assert.assertEquals(
 			MockHttpServletResponse.SC_OK, response.getStatus());
 
 		DLAppServiceUtil.moveFileEntryToTrash(fileEntry.getFileEntryId());
 
-		response = _testRequestFile(fileEntry, _user, false);
+		response = testRequestFile(fileEntry, _user, false);
 
 		Assert.assertEquals(
 			MockHttpServletResponse.SC_NOT_FOUND, response.getStatus());
 
-		response = _testRequestFile(fileEntry, _user, true);
+		response = testRequestFile(fileEntry, _user, true);
 
 		Assert.assertEquals(
 			MockHttpServletResponse.SC_UNAUTHORIZED, response.getStatus());
 
-		_grantPermissionToManageTrash(_user);
+		RoleLocalServiceUtil.addUserRoles(
+			_user.getUserId(), new long[] {_role.getRoleId()});
 
-		response = _testRequestFile(fileEntry, _user, true);
+		response = testRequestFile(fileEntry, _user, true);
 
 		Assert.assertEquals(
 			MockHttpServletResponse.SC_OK, response.getStatus());
 	}
-	
-	private MockHttpServletResponse _testRequestFile (
-			FileEntry fileEntry, User user, boolean statusInTrash) 
+
+	protected void resetPermissionThreadLocal() throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(TestPropsValues.getUser());
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+	}
+
+	protected MockHttpServletResponse testRequestFile(
+			FileEntry fileEntry, User user, boolean statusInTrash)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(4);
@@ -140,7 +145,7 @@ public class WebServerTrashTest extends BaseWebServerTestCase {
 		String path = sb.toString();
 
 		Map<String, String> params = new HashMap<String, String>();
-		
+
 		if (statusInTrash) {
 			params.put(
 				"status", String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
@@ -149,28 +154,12 @@ public class WebServerTrashTest extends BaseWebServerTestCase {
 		MockHttpServletResponse response = service(
 			Method.GET, path, null, params, user, null);
 
-		_resetPermissionThreadLocal();
+		resetPermissionThreadLocal();
 
 		return response;
 	}
 
-	private void _grantPermissionToManageTrash(User user) throws Exception {
-		long[] roleIds = new long[] {_role.getRoleId()};
-		
-		RoleLocalServiceUtil.addUserRoles(
-			user.getUserId(), roleIds);
-	}
-	
-	private void _resetPermissionThreadLocal() throws Exception {
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(TestPropsValues.getUser());
-
-		PermissionThreadLocal.setPermissionChecker(permissionChecker);
-	}
-	
 	private Role _role;
 	private User _user;
-	
+
 }
-
-

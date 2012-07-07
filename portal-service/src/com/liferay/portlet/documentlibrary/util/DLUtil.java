@@ -463,9 +463,9 @@ public class DLUtil {
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 			if (portletDisplay != null) {
-				String portletName = portletDisplay.getPortletName();
+				String portletId = portletDisplay.getId();
 
-				if (portletName.equals(PortletKeys.TRASH)) {
+				if (portletId.equals(PortletKeys.TRASH)) {
 					sb.append("&status=");
 					sb.append(WorkflowConstants.STATUS_IN_TRASH);
 				}

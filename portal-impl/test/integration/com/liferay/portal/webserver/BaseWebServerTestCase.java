@@ -25,7 +25,7 @@ import com.liferay.portlet.documentlibrary.service.BaseDLAppTestCase;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.Servlet;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -39,10 +39,6 @@ public abstract class BaseWebServerTestCase extends BaseDLAppTestCase {
 			String method, String path, Map<String, String> headers,
 			Map<String, String> params, User user, byte[] data)
 		throws Exception {
-
-		MockHttpServletResponse response = new MockHttpServletResponse();
-
-		response.setCharacterEncoding(StringPool.UTF8);
 
 		if (headers == null) {
 			headers = new HashMap<String, String>();
@@ -88,12 +84,18 @@ public abstract class BaseWebServerTestCase extends BaseDLAppTestCase {
 			request.addHeader(key, value);
 		}
 
-		getServlet().service(request, response);
+		MockHttpServletResponse response = new MockHttpServletResponse();
+
+		response.setCharacterEncoding(StringPool.UTF8);
+
+		Servlet httpServlet = getServlet();
+
+		httpServlet.service(request, response);
 
 		return response;
 	}
 
-	protected HttpServlet getServlet() {
+	protected Servlet getServlet() {
 		return new WebServerServlet();
 	}
 
