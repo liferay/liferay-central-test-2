@@ -56,7 +56,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ThemeDisplay implements Serializable {
+public class ThemeDisplay implements Cloneable, Serializable {
 
 	public ThemeDisplay() {
 		if (_log.isDebugEnabled()) {
