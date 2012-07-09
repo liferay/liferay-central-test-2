@@ -14,9 +14,6 @@
 
 package com.liferay.portlet.blogs.social;
 
-import java.text.Format;
-import java.util.Date;
-
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,6 +29,8 @@ import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
+
+import java.text.Format;
 
 /**
  * @author Brian Wing Shun Chan
@@ -87,42 +86,42 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		String titlePattern = null;
 
 		if ((activityType == BlogsActivityKeys.ADD_COMMENT) ||
-				(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
+			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
 
+			if (Validator.isNull(groupName)) {
+				titlePattern = "activity-blogs-add-comment";
+			}
+			else {
+				titlePattern = "activity-blogs-add-comment-in";
+			}
+		}
+		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+			if (entry.getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 				if (Validator.isNull(groupName)) {
-					titlePattern = "activity-blogs-add-comment";
+					titlePattern = "activity-blogs-scheduled-entry";
 				}
 				else {
-					titlePattern = "activity-blogs-add-comment-in";
+					titlePattern = "activity-blogs-scheduled-entry-in";
 				}
+
+				Format dateFormatDate =
+					FastDateFormatFactoryUtil.getSimpleDateFormat(
+						"MMMM d", themeDisplay.getLocale(),
+						themeDisplay.getTimeZone());
+
+				displayDate = dateFormatDate.format(entry.getDisplayDate());
+
+				entryTitle = HtmlUtil.escape(entry.getTitle());
 			}
-			else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-				if (entry.getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
-					if (Validator.isNull(groupName)) {
-						titlePattern = "activity-blogs-scheduled-entry";
-					}
-					else {
-						titlePattern = "activity-blogs-scheduled-entry-in";
-					}
-
-					Format dateFormatDate =
-						FastDateFormatFactoryUtil.getSimpleDateFormat(
-							"MMMM d", themeDisplay.getLocale(),
-							themeDisplay.getTimeZone());
-
-					displayDate = dateFormatDate.format(entry.getDisplayDate());
-
-					entryTitle = HtmlUtil.escape(entry.getTitle());
+			else {
+				if (Validator.isNull(groupName)) {
+					titlePattern = "activity-blogs-add-entry";
 				}
 				else {
-					if (Validator.isNull(groupName)) {
-						titlePattern = "activity-blogs-add-entry";
-					}
-					else {
-						titlePattern = "activity-blogs-add-entry-in";
-					}
+					titlePattern = "activity-blogs-add-entry-in";
 				}
 			}
+		}
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle,
