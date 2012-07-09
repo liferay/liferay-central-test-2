@@ -43,14 +43,6 @@ public class DLFileShortcutTrashHandler extends BaseTrashHandler {
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTrashEntries(long[] classPKs)
-		throws PortalException, SystemException {
-
-		for (long classPK : classPKs) {
-			DLAppServiceUtil.deleteFileShortcut(classPK);
-		}
-	}
-
 	public void deleteTrashEntries(long[] classPKs, boolean checkPermission)
 		throws PortalException, SystemException {
 

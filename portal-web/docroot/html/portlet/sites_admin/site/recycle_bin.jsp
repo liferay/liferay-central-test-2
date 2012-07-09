@@ -28,25 +28,23 @@ else {
 	groupTypeSettings = new UnicodeProperties();
 }
 
-String enableRecycleBinProperty = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ENABLE_RECYCLE_BIN);
+boolean trashEnabled = true;
 
-boolean enableRecycleBin = true;
+int trashEnabledInt = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.TRASH_ENABLED);
 
-if (enableRecycleBinProperty.equals(TrashConstants.DISABLED) || enableRecycleBinProperty.equals(TrashConstants.DISABLED_BY_DEFAULT)) {
-	enableRecycleBin = false;
+if ((trashEnabledInt == TrashUtil.TRASH_DISABLED) || (trashEnabledInt == TrashUtil.TRASH_DISABLED_BY_DEFAULT)) {
+	trashEnabled = false;
 }
 
-enableRecycleBin = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "enableRecycleBin", enableRecycleBin);
+trashEnabled = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "trashEnabled", trashEnabled);
 
 int trashEntriesMaxAge = PropertiesParamUtil.getInteger(groupTypeSettings, request, "trashEntriesMaxAge", PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.TRASH_ENTRIES_MAX_AGE));
 %>
 
-<liferay-ui:error-marker key="errorSection" value="analytics" />
-
 <aui:fieldset>
-	<aui:input label="enable-recycle-bin" name="enableRecycleBin" type="checkbox" value="<%= enableRecycleBin %>" />
+	<aui:input label="enable-recycle-bin" name="trashEnabled" type="checkbox" value="<%= trashEnabled %>" />
 
-	<aui:input label="number-of-days-files-will-be-kept-in-the-recycle-bin" name="trashEntriesMaxAge" type="text" value="<%= trashEntriesMaxAge %>">
+	<aui:input label="number-of-days-that-files-will-be-kept-in-the-recycle-bin" name="trashEntriesMaxAge" type="text" value="<%= trashEntriesMaxAge %>">
 		<aui:validator name="number" />
 	</aui:input>
 </aui:fieldset>

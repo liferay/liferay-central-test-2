@@ -21,11 +21,11 @@ import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class CleanUpTrashEntriesMessageListener extends BaseMessageListener {
+public class CheckEntryMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		TrashEntryLocalServiceUtil.cleanUpEntries();
+		TrashEntryLocalServiceUtil.checkEntries();
 	}
 
 }

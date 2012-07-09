@@ -81,14 +81,6 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 	 * @throws PortalException if any one of the folders could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTrashEntries(long[] classPKs)
-		throws PortalException, SystemException {
-
-		for (long classPK : classPKs) {
-			DLAppServiceUtil.deleteFolder(classPK);
-		}
-	}
-
 	public void deleteTrashEntries(long[] classPKs, boolean checkPermission)
 		throws PortalException, SystemException {
 

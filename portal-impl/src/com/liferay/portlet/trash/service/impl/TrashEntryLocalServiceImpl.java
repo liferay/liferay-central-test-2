@@ -14,11 +14,11 @@
 
 package com.liferay.portlet.trash.service.impl;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -26,11 +26,8 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -116,34 +113,31 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashEntry;
 	}
 
-	public void cleanUpEntries() throws PortalException, SystemException {
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+	public void checkEntries() throws PortalException, SystemException {
+		int count = groupPersistence.countAll();
 
-		for (Company company : companies) {
-			List<Group> groups = GroupLocalServiceUtil.search(
-				company.getCompanyId(), null, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<Group> groups = groupPersistence.findAll(start, end);
 
 			for (Group group : groups) {
-				cleanUpEntries(group.getCompanyId(), group.getGroupId());
+				Date date = getMaxAge(group);
+
+				List<TrashEntry> entries = trashEntryPersistence.findByG_LtCD(
+					group.getGroupId(), date);
+
+				for (TrashEntry entry : entries) {
+					TrashHandler trashHandler =
+						TrashHandlerRegistryUtil.getTrashHandler(
+							entry.getClassName());
+
+					trashHandler.deleteTrashEntry(entry.getClassPK(), false);
+				}
 			}
-		}
-	}
-
-	public void cleanUpEntries(long companyId, long groupId)
-		throws PortalException, SystemException {
-
-		Date date = getCleanUpLimitDate(companyId, groupId);
-
-		List<TrashEntry> trashEntries = trashEntryPersistence.findByG_C_CD(
-			groupId, companyId, date);
-
-		for (TrashEntry trashEntry : trashEntries) {
-			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(
-					trashEntry.getClassName());
-
-			trashHandler.deleteTrashEntry(trashEntry.getClassPK(), false);
 		}
 	}
 
@@ -341,28 +335,25 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashVersionPersistence.findByC_C(classNameId, classPK);
 	}
 
-	protected Date getCleanUpLimitDate(long companyId, long groupId)
-		throws PortalException, SystemException {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
+	protected Date getMaxAge(Group group) throws SystemException {
 		int trashEntriesMaxAge = PrefsPropsUtil.getInteger(
-			companyId, PropsKeys.TRASH_ENTRIES_MAX_AGE,
+			group.getCompanyId(), PropsKeys.TRASH_ENTRIES_MAX_AGE,
 			PropsValues.TRASH_ENTRIES_MAX_AGE);
 
-		UnicodeProperties groupTypeSettings = group.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
 
 		trashEntriesMaxAge = GetterUtil.getInteger(
-			groupTypeSettings.getProperty("trashEntriesMaxAge"),
+			typeSettingsProperties.getProperty("trashEntriesMaxAge"),
 			trashEntriesMaxAge);
 
-		Calendar cal = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 
-		cal.setTime(new Date());
+		calendar.setTime(new Date());
 
-		cal.add(Calendar.DATE, -trashEntriesMaxAge);
+		calendar.add(Calendar.DATE, -trashEntriesMaxAge);
 
-		return cal.getTime();
+		return calendar.getTime();
 	}
 
 }

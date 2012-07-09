@@ -1921,10 +1921,10 @@
 		<icon>/html/icons/trash.png</icon>
 		<struts-path>trash</struts-path>
 		<scheduler-entry>
-			<scheduler-event-listener-class>com.liferay.portlet.trash.messaging.CleanUpTrashEntriesMessageListener</scheduler-event-listener-class>
+			<scheduler-event-listener-class>com.liferay.portlet.trash.messaging.CheckEntryMessageListener</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<property-key>trash.job.interval</property-key>
+					<property-key>trash.entry.check.interval</property-key>
 					<time-unit>day</time-unit>
 				</simple>
 			</trigger>

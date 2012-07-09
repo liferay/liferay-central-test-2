@@ -409,14 +409,6 @@ public class EditGroupAction extends PortletAction {
 		typeSettingsProperties.setProperty(
 			"customJspServletContextName", customJspServletContextName);
 
-		boolean enableRecycleBin = ParamUtil.getBoolean(
-			actionRequest, "enableRecycleBin",
-			GetterUtil.getBoolean(
-				typeSettingsProperties.getProperty("enableRecycleBin")));
-
-		typeSettingsProperties.setProperty(
-			"enableRecycleBin", String.valueOf(enableRecycleBin));
-
 		String googleAnalyticsId = ParamUtil.getString(
 			actionRequest, "googleAnalyticsId",
 			typeSettingsProperties.getProperty("googleAnalyticsId"));
@@ -433,6 +425,14 @@ public class EditGroupAction extends PortletAction {
 
 		typeSettingsProperties.setProperty("false-robots.txt", publicRobots);
 		typeSettingsProperties.setProperty("true-robots.txt", privateRobots);
+
+		boolean trashEnabled = ParamUtil.getBoolean(
+			actionRequest, "trashEnabled",
+			GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty("trashEnabled")));
+
+		typeSettingsProperties.setProperty(
+			"trashEnabled", String.valueOf(trashEnabled));
 
 		int trashEntriesMaxAgeSite = ParamUtil.getInteger(
 			actionRequest, "trashEntriesMaxAge",

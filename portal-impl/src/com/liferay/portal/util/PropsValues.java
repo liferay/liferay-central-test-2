@@ -574,8 +574,6 @@ public class PropsValues {
 
 	public static final boolean EHCACHE_STATISTICS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.EHCACHE_STATISTICS_ENABLED));
 
-	public static final int ENABLE_RECYCLE_BIN = GetterUtil.getInteger(PropsUtil.get(PropsKeys.ENABLE_RECYCLE_BIN));
-
 	public static final String FACEBOOK_CONNECT_APP_ID = PropsUtil.get(PropsKeys.FACEBOOK_CONNECT_APP_ID);
 
 	public static final String FACEBOOK_CONNECT_APP_SECRET = PropsUtil.get(PropsKeys.FACEBOOK_CONNECT_APP_SECRET);
@@ -1574,9 +1572,9 @@ public class PropsValues {
 
 	public static final boolean TRANSLATIONS_DISABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TRANSLATIONS_DISABLED));
 
-	public static final int TRASH_ENTRIES_MAX_AGE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRASH_ENTRIES_MAX_AGE));
+	public static final int TRASH_ENABLED = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRASH_ENABLED));
 
-	public static final int TRASH_JOB_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRASH_JOB_INTERVAL));
+	public static final int TRASH_ENTRIES_MAX_AGE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRASH_ENTRIES_MAX_AGE));
 
 	public static final int TRASH_SEARCH_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRASH_SEARCH_LIMIT));
 

@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/portal_settings/init.jsp" %>
 
 <%
-String enableRecycleBin = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ENABLE_RECYCLE_BIN);
+int trashEnabled = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.TRASH_ENABLED);
 
 int trashEntriesMaxAge = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.TRASH_ENTRIES_MAX_AGE);
 %>
@@ -25,13 +25,13 @@ int trashEntriesMaxAge = PrefsPropsUtil.getInteger(company.getCompanyId(), Props
 <h3><liferay-ui:message key="recycle-bin" /></h3>
 
 <aui:fieldset>
-	<aui:select label="enable-recycle-bin" name='<%= "settings--" + PropsKeys.ENABLE_RECYCLE_BIN + "--" %>'>
-		<aui:option label="enabled-by-default" selected="<%= enableRecycleBin.equals(TrashConstants.ENABLED_BY_DEFAULT) %>" value="<%= TrashConstants.ENABLED_BY_DEFAULT %>" />
-		<aui:option label="disabled-by-default" selected="<%= enableRecycleBin.equals(TrashConstants.DISABLED_BY_DEFAULT) %>" value="<%= TrashConstants.DISABLED_BY_DEFAULT %>" />
-		<aui:option label="disabled" selected="<%= enableRecycleBin.equals(TrashConstants.DISABLED) %>" value="<%= TrashConstants.DISABLED %>" />
+	<aui:select label="enable-recycle-bin" name='<%= "settings--" + PropsKeys.TRASH_ENABLED + "--" %>'>
+		<aui:option label="enabled-by-default" selected="<%= trashEnabled == TrashUtil.TRASH_ENABLED_BY_DEFAULT %>" value="<%= TrashUtil.TRASH_ENABLED_BY_DEFAULT %>" />
+		<aui:option label="disabled-by-default" selected="<%= trashEnabled == TrashUtil.TRASH_DISABLED_BY_DEFAULT %>" value="<%= TrashUtil.TRASH_DISABLED_BY_DEFAULT %>" />
+		<aui:option label="disabled" selected="<%= trashEnabled == TrashUtil.TRASH_DISABLED %>" value="<%= TrashUtil.TRASH_DISABLED %>" />
 	</aui:select>
 
-	<aui:input label="number-of-days-files-will-be-kept-in-the-recycle-bin" name='<%= "settings--" + PropsKeys.TRASH_ENTRIES_MAX_AGE + "--" %>' type="text" value="<%= trashEntriesMaxAge %>">
+	<aui:input label="number-of-days-that-files-will-be-kept-in-the-recycle-bin" name='<%= "settings--" + PropsKeys.TRASH_ENTRIES_MAX_AGE + "--" %>' type="text" value="<%= trashEntriesMaxAge %>">
 		<aui:validator name="number" />
 	</aui:input>
 </aui:fieldset>

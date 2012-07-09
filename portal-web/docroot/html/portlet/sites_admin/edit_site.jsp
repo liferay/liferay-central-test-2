@@ -84,10 +84,9 @@ if (group != null) {
 	miscellaneousSections = PropsValues.SITES_FORM_UPDATE_MISCELLANEOUS;
 }
 
+int trashEnabled = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.TRASH_ENABLED);
 
-String enableRecycleBin = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ENABLE_RECYCLE_BIN);
-
-if (enableRecycleBin.equals(TrashConstants.DISABLED) && ArrayUtil.contains(advancedSections, "recycle-bin")) {
+if ((trashEnabled == 0) && ArrayUtil.contains(advancedSections, "recycle-bin")) {
 	advancedSections = ArrayUtil.remove(advancedSections, "recycle-bin");
 }
 

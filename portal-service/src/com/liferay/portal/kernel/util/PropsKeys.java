@@ -703,8 +703,6 @@ public interface PropsKeys {
 
 	public static final String EHCACHE_STATISTICS_ENABLED = "ehcache.statistics.enabled";
 
-	public static final String ENABLE_RECYCLE_BIN = "enable.recycle.bin";
-
 	public static final String FACEBOOK_CONNECT_APP_ID = "facebook.connect.app.id";
 
 	public static final String FACEBOOK_CONNECT_APP_SECRET = "facebook.connect.app.secret";
@@ -2141,9 +2139,9 @@ public interface PropsKeys {
 
 	public static final String TRANSLATOR_LANGUAGES = "translator.languages";
 
-	public static final String TRASH_ENTRIES_MAX_AGE = "trash.entries.max.age";
+	public static final String TRASH_ENABLED = "trash.enabled";
 
-	public static final String TRASH_JOB_INTERVAL = "trash.job.interval";
+	public static final String TRASH_ENTRIES_MAX_AGE = "trash.entries.max.age";
 
 	public static final String TRASH_SEARCH_LIMIT = "trash.search.limit";
 
