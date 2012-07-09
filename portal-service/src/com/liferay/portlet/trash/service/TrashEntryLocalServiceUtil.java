@@ -293,16 +293,10 @@ public class TrashEntryLocalServiceUtil {
 			versions, typeSettingsProperties);
 	}
 
-	public static void cleanUpEntries()
+	public static void checkEntries()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().cleanUpEntries();
-	}
-
-	public static void cleanUpEntries(long companyId, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().cleanUpEntries(companyId, groupId);
+		getService().checkEntries();
 	}
 
 	/**
