@@ -32,8 +32,6 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 
 import java.text.Format;
 
-import java.util.Date;
-
 /**
  * @author Brian Wing Shun Chan
  * @author Ryan Park
