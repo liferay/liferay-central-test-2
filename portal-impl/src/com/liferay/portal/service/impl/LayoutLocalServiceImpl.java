@@ -1153,7 +1153,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		int count = layoutSet.getPageCount();
 
-		if (group.isUser()) {
+		if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
+			group.isUser()) {
+
 			List<UserGroup> userGroups = userPersistence.getUserGroups(
 				group.getClassPK());
 
@@ -1254,7 +1256,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return true;
 		}
 
-		if (group.isUser()) {
+		if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
+			group.isUser()) {
+
 			List<UserGroup> userGroups = userPersistence.getUserGroups(
 				group.getClassPK());
 
