@@ -3321,7 +3321,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordReset(true);
 
 			userPersistence.update(user, false);
-
 		}
 		else {
 			if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
