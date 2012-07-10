@@ -387,6 +387,11 @@ public class DLAppHelperLocalServiceImpl
 			userId, fileVersion.getFileVersionId(), fileVersion.getStatus(),
 			new HashMap<String, Serializable>(), serviceContext);
 
+		// File shortcut
+
+		dlFileShortcutLocalService.enableFileShortcuts(
+			fileEntry.getFileEntryId());
+
 		// File rank
 
 		dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
@@ -992,6 +997,17 @@ public class DLAppHelperLocalServiceImpl
 						WorkflowConstants.STATUS_IN_TRASH)) {
 
 					continue;
+				}
+
+				// File shortcut
+
+				if (status == WorkflowConstants.STATUS_APPROVED) {
+					dlFileShortcutLocalService.enableFileShortcuts(
+						dlFileEntry.getFileEntryId());
+				}
+				else {
+					dlFileShortcutLocalService.disableFileShortcuts(
+						dlFileEntry.getFileEntryId());
 				}
 
 				// Asset
