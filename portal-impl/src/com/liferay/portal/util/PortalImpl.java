@@ -1160,7 +1160,13 @@ public class PortalImpl implements Portal {
 			cdnHost = getCDNHostHttp(company.getCompanyId());
 		}
 
-		return ParamUtil.getString(request, "cdn_host", cdnHost);
+		cdnHost = ParamUtil.getString(request, "cdn_host", cdnHost);
+
+		if(Validator.isUrl(cdnHost)){
+			return cdnHost;
+		}
+
+		return StringPool.BLANK;
 	}
 
 	public String getCDNHostHttp(long companyId) {
@@ -1177,7 +1183,9 @@ public class PortalImpl implements Portal {
 		catch (Exception e) {
 		}
 
-		if ((cdnHostHttp == null) || cdnHostHttp.startsWith("${")) {
+		if ((cdnHostHttp == null) || cdnHostHttp.startsWith("${") ||
+			!Validator.isUrl(cdnHostHttp)) {
+
 			cdnHostHttp = StringPool.BLANK;
 		}
 
@@ -1201,7 +1209,9 @@ public class PortalImpl implements Portal {
 		catch (SystemException se) {
 		}
 
-		if ((cdnHostHttps == null) || cdnHostHttps.startsWith("${")) {
+		if ((cdnHostHttps == null) || cdnHostHttps.startsWith("${") ||
+			!Validator.isUrl(cdnHostHttps)) {
+
 			cdnHostHttps = StringPool.BLANK;
 		}
 
