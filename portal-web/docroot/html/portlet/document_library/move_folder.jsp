@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String cmd = ParamUtil.getString(request, Constants.CMD, Constants.MOVE);
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -25,8 +27,6 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
 long repositoryId = BeanParamUtil.getLong(folder, request, "repositoryId");
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-String cmd = ParamUtil.getString(request, Constants.CMD, Constants.MOVE);
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />

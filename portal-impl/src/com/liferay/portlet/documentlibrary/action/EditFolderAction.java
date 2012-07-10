@@ -176,14 +176,14 @@ public class EditFolderAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		for (long curFolderId : folderIds) {
+		for (long moveFolderId : folderIds) {
 			if (moveFromTrash) {
 				DLAppServiceUtil.moveFolderFromTrash(
-					curFolderId, parentFolderId, serviceContext);
+					moveFolderId, parentFolderId, serviceContext);
 			}
 			else {
 				DLAppServiceUtil.moveFolder(
-					curFolderId, parentFolderId, serviceContext);
+					moveFolderId, parentFolderId, serviceContext);
 			}
 		}
 	}

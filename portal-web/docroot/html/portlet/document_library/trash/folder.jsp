@@ -17,15 +17,6 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-int foldersPerPage = SearchContainer.DEFAULT_DELTA;
-int fileEntriesPerPage = SearchContainer.DEFAULT_DELTA;
-
-String[] folderColumns = new String[]{"name" ,"num-of-folders","num-of-documents","action"};
-String[] fileEntryColumns = new String[]{"name","size","locked","action"};
-
-boolean showSubfolders = true;
-boolean mergedView = false;
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -40,6 +31,13 @@ long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetTagName = ParamUtil.getString(request, "tag");
 
 boolean useAssetEntryQuery = (assetCategoryId > 0) || Validator.isNotNull(assetTagName);
+
+String[] folderColumns = new String[] {"name", "num-of-folders", "num-of-documents", "action"};
+int foldersPerPage = SearchContainer.DEFAULT_DELTA;
+String[] fileEntryColumns = new String[] {"name","size","locked","action"};
+int fileEntriesPerPage = SearchContainer.DEFAULT_DELTA;
+boolean mergedView = false;
+boolean showSubfolders = true;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
