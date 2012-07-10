@@ -1859,8 +1859,8 @@ public class DLAppServiceUtil {
 	}
 
 	/**
-	* Moves the folder with the primary key from the trash portlet
-	* to the new parent folder with the primary key
+	* Moves the folder with the primary key from the trash portlet to the new
+	* parent folder with the primary key.
 	*
 	* @param folderId the primary key of the folder
 	* @param parentFolderId the primary key of the new parent folder
