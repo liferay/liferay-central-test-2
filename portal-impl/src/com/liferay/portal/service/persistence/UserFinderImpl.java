@@ -848,9 +848,7 @@ public class UserFinderImpl
 				join = sb.toString();
 			}
 			else {
-				// EMPTY lists should appear in the query
-
-				join = "WHERE ( (Organization_.treePath LIKE ?) )";
+				join = "WHERE (Organization_.treePath LIKE ?)";
 			}
 		}
 		else if (key.equals("usersPasswordPolicies")) {
@@ -971,9 +969,6 @@ public class UserFinderImpl
 					}
 				}
 				else {
-
-					// EMPTY list should appear in the query
-
 					qPos.add("%/ /%");
 				}
 			}
