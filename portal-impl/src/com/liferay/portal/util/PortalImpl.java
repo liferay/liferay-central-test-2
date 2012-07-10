@@ -1162,7 +1162,7 @@ public class PortalImpl implements Portal {
 
 		cdnHost = ParamUtil.getString(request, "cdn_host", cdnHost);
 
-		if(Validator.isUrl(cdnHost)){
+		if (Validator.isUrl(cdnHost)) {
 			return cdnHost;
 		}
 
