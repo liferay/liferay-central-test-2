@@ -1433,7 +1433,7 @@ public class PortalImpl implements Portal {
 				themeDisplay.getScopeGroupId(), false,
 				PropsValues.COMPANY_SECURITY_STRANGERS_URL);
 
-			return PortalUtil.getLayoutURL(layout, themeDisplay);
+			return getLayoutURL(layout, themeDisplay);
 		}
 		catch (NoSuchLayoutException nsle) {
 		}
