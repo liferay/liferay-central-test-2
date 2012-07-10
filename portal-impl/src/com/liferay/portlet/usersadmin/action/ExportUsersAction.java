@@ -44,6 +44,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.usersadmin.search.UserSearch;
 import com.liferay.portlet.usersadmin.search.UserSearchTerms;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -144,7 +145,7 @@ public class ExportUsersAction extends PortletAction {
 				permissionChecker, PortletKeys.USERS_ADMIN,
 				ActionKeys.EXPORT_USER)) {
 
-			return null;
+			return Collections.emptyList();
 		}
 
 		PortletURL portletURL =
@@ -169,7 +170,7 @@ public class ExportUsersAction extends PortletAction {
 		else if (!exportAllUsers) {
 			User currentUser = themeDisplay.getUser();
 
-			long organizationIds[] = currentUser.getOrganizationIds(true);
+			long[] organizationIds = currentUser.getOrganizationIds(true);
 
 			if (organizationIds.length > 0) {
 				params.put("usersOrgs", organizationIds);
@@ -208,6 +209,12 @@ public class ExportUsersAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		List<User> users = getUsers(actionRequest, actionResponse);
+
+		if (users.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
 		String exportProgressId = ParamUtil.getString(
 			actionRequest, "exportProgressId");
 
@@ -215,12 +222,6 @@ public class ExportUsersAction extends PortletAction {
 			actionRequest, exportProgressId);
 
 		progressTracker.start();
-
-		List<User> users = getUsers(actionRequest, actionResponse);
-
-		if ((users == null) || users.isEmpty()) {
-			return StringPool.BLANK;
-		}
 
 		int percentage = 10;
 		int total = users.size();
