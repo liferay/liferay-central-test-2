@@ -1971,7 +1971,8 @@ public class HookHotDeployListener
 		}
 
 		filter = (Filter)ProxyUtil.newProxyInstance(
-			portletClassLoader, interfaces.toArray(new Class[0]),
+			portletClassLoader,
+			interfaces.toArray(new Class[interfaces.size()]),
 			new ClassLoaderBeanHandler(filter, portletClassLoader));
 
 		return filter;
