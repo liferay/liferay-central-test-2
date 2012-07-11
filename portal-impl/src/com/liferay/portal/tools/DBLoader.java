@@ -123,8 +123,8 @@ public class DBLoader {
 
 		try {
 			con = DriverManager.getConnection(
-				"jdbc:derby:" + _sqlDir + "/" + _databaseName + ";create=true", "",
-				"");
+				"jdbc:derby:" + _sqlDir + "/" + _databaseName + ";create=true",
+				"", "");
 
 			if (Validator.isNull(_fileName)) {
 				_loadDerby(con, _sqlDir + "/portal/portal-derby.sql");
@@ -212,7 +212,8 @@ public class DBLoader {
 
 		try {
 			con = DriverManager.getConnection(
-				"jdbc:hsqldb:" + _sqlDir + "/" + _databaseName + ";shutdown=true",
+				"jdbc:hsqldb:" + _sqlDir + "/" + _databaseName +
+					";shutdown=true",
 				"sa", "");
 
 			if (Validator.isNull(_fileName)) {

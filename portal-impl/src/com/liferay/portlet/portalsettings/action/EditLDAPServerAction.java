@@ -107,10 +107,9 @@ public class EditLDAPServerAction extends PortletAction {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
-		Set<String> propertiesKeys = properties.keySet();
+		Set<String> keysSet = properties.keySet();
 
-		String[] keys = propertiesKeys.toArray(
-			new String[propertiesKeys.size()]);
+		String[] keys = keysSet.toArray(new String[keysSet.size()]);
 
 		for (String key : keys) {
 			if (ArrayUtil.contains(defaultKeys, key)) {
