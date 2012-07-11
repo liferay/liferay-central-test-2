@@ -59,7 +59,6 @@ public class VideoProcessorUtil {
 	}
 
 	public static Set<String> getVideoMimeTypes() {
-
 		return getVideoProcessor().getVideoMimeTypes();
 	}
 

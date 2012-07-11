@@ -212,7 +212,6 @@ public class JSPWikiEngine implements WikiEngine {
 	}
 
 	private static String _encodeJSPWikiContent(String content) {
-
 		StringBundler encodedContent = new StringBundler();
 
 		Matcher commentMatcher = _wikiCommentPattern.matcher(content);
