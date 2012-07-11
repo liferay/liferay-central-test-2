@@ -259,7 +259,6 @@ public class RatingsEntryLocalServiceImpl
 		double maxScore = GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.RATINGS_MAX_SCORE, filter),
 			PropsValues.RATINGS_DEFAULT_NUMBER_OF_STARS);
-
 		double minScore = GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.RATINGS_MIN_SCORE, filter));
 
