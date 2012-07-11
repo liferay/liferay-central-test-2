@@ -88,4 +88,10 @@ public interface RuntimePortlet {
 			RuntimeLogic runtimeLogic)
 		throws Exception;
 
+	public String processXML(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String content)
+		throws Exception;
+
 }

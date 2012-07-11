@@ -135,6 +135,17 @@ public class RuntimePortletUtil {
 		return getRuntimePortlet().processXML(request, content, runtimeLogic);
 	}
 
+	public static String processXML(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String content)
+		throws Exception {
+
+		return getRuntimePortlet().processXML(
+			servletContext, request, response, renderRequest, renderResponse,
+			content);
+	}
+
 	public void setRuntimePortlet(RuntimePortlet runtimePortlet) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 

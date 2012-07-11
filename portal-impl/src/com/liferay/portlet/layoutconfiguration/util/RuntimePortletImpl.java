@@ -47,6 +47,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.velocity.CustomizationSettingsProcessor;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
+import com.liferay.portlet.layoutconfiguration.util.xml.ActionURLLogic;
+import com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic;
+import com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 import com.liferay.taglib.util.VelocityTaglib;
 
@@ -303,6 +306,26 @@ public class RuntimePortletImpl implements RuntimePortlet {
 					WebKeys.RENDER_PORTLET_RESOURCE, renderPortletResource);
 			}
 		}
+	}
+
+	public String processXML(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, RenderRequest renderRequest,
+			RenderResponse renderResponse, String content)
+		throws Exception {
+
+		RuntimeLogic portletLogic = new PortletLogic
+			(servletContext, request, response, renderRequest, renderResponse);
+		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
+		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
+
+		content = RuntimePortletUtil.processXML(request, content, portletLogic);
+		content = RuntimePortletUtil.processXML(
+			request, content, actionURLLogic);
+		content = RuntimePortletUtil.processXML(
+			request, content, renderURLLogic);
+
+		return content;
 	}
 
 	protected Object buildVelocityTaglib(
