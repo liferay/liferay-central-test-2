@@ -879,7 +879,7 @@ public class LayoutAction extends Action {
 					"Reject processAction for " + url + " on " +
 						portlet.getPortletId());
 
-				return portlet;
+				return null;
 			}
 
 			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
@@ -1020,7 +1020,7 @@ public class LayoutAction extends Action {
 					"Reject serveResource for " + url + " on " +
 						portlet.getPortletId());
 
-				return portlet;
+				return null;
 			}
 
 			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
