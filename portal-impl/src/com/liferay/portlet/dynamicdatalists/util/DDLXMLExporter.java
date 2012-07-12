@@ -82,18 +82,19 @@ public class DDLXMLExporter extends BaseDDLExporter {
 
 			DDLRecordVersion recordVersion = record.getRecordVersion();
 
-			Fields fieldsModel = StorageEngineUtil.getFields(
+			Fields fields = StorageEngineUtil.getFields(
 				recordVersion.getDDMStorageId());
 
-			for (Map<String, String> fields : fieldsMap.values()) {
-				String dataType = fields.get(FieldConstants.DATA_TYPE);
+			for (Map<String, String> fieldMap : fieldsMap.values()) {
+				String dataType = fieldMap.get(FieldConstants.DATA_TYPE);
 
-				String label = fields.get(FieldConstants.LABEL);
-				String name = fields.get(FieldConstants.NAME);
+				String label = fieldMap.get(FieldConstants.LABEL);
+				String name = fieldMap.get(FieldConstants.NAME);
+
 				String value = StringPool.BLANK;
 
-				if (fieldsModel.contains(name)) {
-					Field field = fieldsModel.get(name);
+				if (fields.contains(name)) {
+					Field field = fields.get(name);
 
 					value = field.getRenderedValue(getLocale());
 				}

@@ -74,7 +74,7 @@ public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 				e instanceof PrincipalException) {
 
 				return LanguageUtil.format(
-					locale, "is-temporarily-unavailable","content");
+					locale, "is-temporarily-unavailable", "content");
 			}
 		}
 
