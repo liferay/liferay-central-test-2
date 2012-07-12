@@ -274,7 +274,7 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 			}
 
 			if (aligned) {
-				 break;
+				break;
 			}
 
 			_highlightLines(
