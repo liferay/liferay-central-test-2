@@ -89,9 +89,7 @@ public class DDLXMLExporter extends BaseDDLExporter {
 				String dataType = fields.get(FieldConstants.DATA_TYPE);
 
 				String label = fields.get(FieldConstants.LABEL);
-
 				String name = fields.get(FieldConstants.NAME);
-
 				String value = StringPool.BLANK;
 
 				if (fieldsModel.contains(name)) {

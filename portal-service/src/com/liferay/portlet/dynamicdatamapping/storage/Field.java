@@ -73,7 +73,7 @@ public class Field implements Serializable {
 		FieldRenderer fieldrenderer = FieldRendererFactory.getFieldRenderer(
 			dataType);
 
-		return fieldrenderer.render(locale, this);
+		return fieldrenderer.render(this, locale);
 	}
 
 	public String getType() throws PortalException, SystemException {

@@ -79,9 +79,7 @@ public class DDLCSVExporter extends BaseDDLExporter {
 
 			for (Map<String, String> fields : fieldsMap.values()) {
 				String dataType = fields.get(FieldConstants.DATA_TYPE);
-
 				String name = fields.get(FieldConstants.NAME);
-
 				String value = StringPool.BLANK;
 
 				if (fieldsModel.contains(name)) {

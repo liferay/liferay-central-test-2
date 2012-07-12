@@ -31,7 +31,7 @@ import java.util.Locale;
 public class DateFieldRenderer extends BaseFieldRenderer {
 
 	@Override
-	protected String doRender(Locale locale, Field field) {
+	protected String doRender(Field field, Locale locale) {
 		Serializable value = field.getValue();
 
 		if (Validator.isNull(value)) {
