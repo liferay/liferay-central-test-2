@@ -966,6 +966,7 @@ release was successful.</echo>
 				<![CDATA[
 					<paths>
 						<path name="com/sun/image/codec/jpeg" />
+						<path name="com/sun/org/apache" />
 				]]>
 			</replacevalue>
 		</replace>
