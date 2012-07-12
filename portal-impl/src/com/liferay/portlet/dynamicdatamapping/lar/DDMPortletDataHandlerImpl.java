@@ -255,7 +255,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		DDMTemplate newTemplate = null;
 
 		try {
-			newTemplate = DDMTemplateLocalServiceUtil.addTemplate(
+			return DDMTemplateLocalServiceUtil.addTemplate(
 				userId, groupId, template.getClassNameId(), classPK,
 				template.getTemplateKey(), template.getNameMap(),
 				template.getDescriptionMap(), template.getType(),
@@ -271,7 +271,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"An article with the key " + template.getTemplateKey() +
+					"A template with the key " + template.getTemplateKey() +
 						" already exists. The new generated key is " +
 							newTemplate.getTemplateKey());
 			}
