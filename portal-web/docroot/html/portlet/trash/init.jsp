@@ -26,7 +26,6 @@ page import="com.liferay.portlet.documentlibrary.asset.DLFileEntryAssetRendererF
 page import="com.liferay.portlet.trash.action.EditEntryAction" %><%@
 page import="com.liferay.portlet.trash.model.TrashEntry" %><%@
 page import="com.liferay.portlet.trash.model.TrashEntryList" %><%@
-page import="com.liferay.portlet.trash.model.TrashEntrySoap" %><%@
 page import="com.liferay.portlet.trash.model.impl.TrashEntryImpl" %><%@
 page import="com.liferay.portlet.trash.search.EntrySearch" %><%@
 page import="com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil" %><%@

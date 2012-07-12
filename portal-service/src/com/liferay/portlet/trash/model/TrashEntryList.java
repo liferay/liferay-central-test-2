@@ -27,11 +27,11 @@ public class TrashEntryList implements Serializable {
 	public TrashEntrySoap[] getArray() {
 		return _array;
 	}
-	
+
 	public int getCount() {
 		return _count;
 	}
-	
+
 	public boolean isApproximate() {
 		return _approximate;
 	}
@@ -39,11 +39,11 @@ public class TrashEntryList implements Serializable {
 	public void setApproximate(boolean approximate) {
 		_approximate = approximate;
 	}
-	
+
 	public void setArray(TrashEntrySoap[] array) {
 		_array = array;
 	}
-	
+
 	public void setCount(int count) {
 		_count = count;
 	}
