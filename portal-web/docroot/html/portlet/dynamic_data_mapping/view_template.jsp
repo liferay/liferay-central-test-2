@@ -117,7 +117,7 @@ if (!portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES)) {
 				sb.append("']('");
 				sb.append(template.getTemplateId());
 				sb.append("', '");
-				sb.append(HtmlUtil.escapeJS(template.getName(locale)));
+				sb.append(template.getName(locale));
 				sb.append("', Liferay.Util.getWindow());");
 
 				rowHREF = sb.toString();
