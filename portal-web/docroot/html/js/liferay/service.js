@@ -561,13 +561,10 @@ Liferay.Service.registerClass(
 	{
 		getCompanyEntries: true,
 		getCompanyEntriesCount: true,
-		getCompanyEntryDisplays: true,
 		getEntries: true,
 		getEntriesCount: true,
 		getEntry: true,
 		incrementViewCounter: true,
-		searchEntryDisplays: true,
-		searchEntryDisplaysCount: true,
 		updateEntry: true
 	}
 );
