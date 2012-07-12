@@ -1655,7 +1655,7 @@ public interface DLAppService extends BaseService {
 	* @param fileShortcutId the primary key of the file shortcut
 	* @param newFolderId the primary key of the new folder
 	* @param serviceContext the service context to be applied
-	* @return the file entry
+	* @return the file shortcut
 	* @throws PortalException if the file entry or the new folder could not be
 	found
 	* @throws SystemException if a system exception occurred
@@ -1670,6 +1670,7 @@ public interface DLAppService extends BaseService {
 	* Moves the file shortcut with the primary key to the trash portlet.
 	*
 	* @param fileShortcutId the primary key of the file shortcut
+	* @return the file shortcut
 	* @throws PortalException if the file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/

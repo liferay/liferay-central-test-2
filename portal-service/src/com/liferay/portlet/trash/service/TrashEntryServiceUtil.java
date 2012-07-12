@@ -77,7 +77,8 @@ public class TrashEntryServiceUtil {
 	* @throws SystemException if a system exception occurred
 	* @throws PrincipalException if a principal exception occurred
 	*/
-	public static java.lang.Object[] getEntries(long groupId)
+	public static com.liferay.portlet.trash.model.TrashEntryList getEntries(
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portal.security.auth.PrincipalException {
 		return getService().getEntries(groupId);
@@ -97,8 +98,9 @@ public class TrashEntryServiceUtil {
 	* @throws SystemException if a system exception occurred
 	* @throws PrincipalException if a system exception occurred
 	*/
-	public static java.lang.Object[] getEntries(long groupId, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portlet.trash.model.TrashEntryList getEntries(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portal.security.auth.PrincipalException {
 		return getService().getEntries(groupId, start, end, obc);

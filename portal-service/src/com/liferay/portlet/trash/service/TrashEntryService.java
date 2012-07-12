@@ -80,7 +80,8 @@ public interface TrashEntryService extends BaseService {
 	* @throws PrincipalException if a principal exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.Object[] getEntries(long groupId)
+	public com.liferay.portlet.trash.model.TrashEntryList getEntries(
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portal.security.auth.PrincipalException;
 
@@ -99,7 +100,8 @@ public interface TrashEntryService extends BaseService {
 	* @throws PrincipalException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.Object[] getEntries(long groupId, int start, int end,
+	public com.liferay.portlet.trash.model.TrashEntryList getEntries(
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portal.security.auth.PrincipalException;
