@@ -25,9 +25,9 @@ import java.util.Locale;
  */
 public abstract class BaseFieldRenderer implements FieldRenderer {
 
-	public String render(Locale locale, Field field) {
+	public String render(Field field, Locale locale) {
 		try {
-			return doRender(locale, field);
+			return doRender(field, locale);
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
@@ -38,7 +38,7 @@ public abstract class BaseFieldRenderer implements FieldRenderer {
 		return null;
 	}
 
-	protected abstract String doRender(Locale locale, Field field)
+	protected abstract String doRender(Field field, Locale locale)
 		throws Exception;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseFieldRenderer.class);

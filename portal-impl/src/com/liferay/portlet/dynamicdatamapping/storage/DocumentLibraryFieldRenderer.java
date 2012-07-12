@@ -37,7 +37,7 @@ import java.util.Locale;
 public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 
 	@Override
-	protected String doRender(Locale locale, Field field) {
+	protected String doRender(Field field, Locale locale) {
 		Serializable fieldValue = field.getValue();
 
 		if (Validator.isNull(fieldValue) ||

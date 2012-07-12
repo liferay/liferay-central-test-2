@@ -21,6 +21,6 @@ import java.util.Locale;
  */
 public interface FieldRenderer {
 
-	public String render(Locale locale, Field field);
+	public String render(Field field, Locale locale);
 
 }

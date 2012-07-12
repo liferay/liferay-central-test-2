@@ -32,7 +32,7 @@ import java.util.Map;
 public class StringFieldRenderer extends BaseFieldRenderer {
 
 	@Override
-	protected String doRender(Locale locale, Field field) throws Exception {
+	protected String doRender(Field field, Locale locale) throws Exception {
 		String value = String.valueOf(field.getValue());
 
 		if (Validator.isNull(value)) {
