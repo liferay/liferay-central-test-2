@@ -39,6 +39,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
+import com.liferay.portlet.trash.model.TrashEntryList;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
 import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
 
@@ -135,9 +136,10 @@ public class BlogsEntryTrashHandlerTest {
 	}
 
 	protected int getTrashEntriesCount(long groupId) throws Exception {
-		Object[] result = TrashEntryServiceUtil.getEntries(groupId);
+		TrashEntryList trashEntryList = TrashEntryServiceUtil.getEntries(
+			groupId);
 
-		return (Integer)result[1];
+		return trashEntryList.getCount();
 	}
 
 	protected long getUserId() {

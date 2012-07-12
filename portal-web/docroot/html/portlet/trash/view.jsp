@@ -62,12 +62,12 @@ portletURL.setParameter("tabs1", tabs1);
 		<liferay-ui:search-container-results>
 
 			<%
-			Object[] entries = TrashEntryServiceUtil.getEntries(groupId, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			TrashEntryList trashEntryList = TrashEntryServiceUtil.getEntries(groupId, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-			pageContext.setAttribute("results", entries[0]);
-			pageContext.setAttribute("total", entries[1]);
+			pageContext.setAttribute("results", TrashEntryImpl.toModels(trashEntryList.getArray()));
+			pageContext.setAttribute("total", trashEntryList.getCount());
 
-			aproximate = (Boolean)entries[2];
+			aproximate = trashEntryList.isApproximate();
 			%>
 
 		</liferay-ui:search-container-results>

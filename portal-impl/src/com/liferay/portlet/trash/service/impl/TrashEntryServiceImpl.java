@@ -25,7 +25,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.trash.model.TrashEntryList;
 import com.liferay.portlet.trash.model.TrashEntry;
+import com.liferay.portlet.trash.model.TrashEntrySoap;
 import com.liferay.portlet.trash.service.base.TrashEntryServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -84,7 +86,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @throws PrincipalException if a principal exception occurred
 	 */
-	public Object[] getEntries(long groupId)
+	public TrashEntryList getEntries(long groupId)
 		throws PrincipalException, SystemException {
 
 		return getEntries(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -104,11 +106,17 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @throws PrincipalException if a system exception occurred
 	 */
-	public Object[] getEntries(
+	public TrashEntryList getEntries(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws PrincipalException, SystemException {
+		
+		TrashEntryList trashEntriesList = new TrashEntryList();
 
 		int entriesCount = trashEntryLocalService.getEntriesCount(groupId);
+
+		boolean approximate = entriesCount > PropsValues.TRASH_SEARCH_LIMIT;
+
+		trashEntriesList.setApproximate(approximate);
 
 		List<TrashEntry> entries = trashEntryLocalService.getEntries(
 			groupId, 0, end + PropsValues.TRASH_SEARCH_LIMIT, obc);
@@ -151,10 +159,11 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 			filteredEntries = filteredEntries.subList(start, end);
 		}
 
-		boolean approximate = entriesCount > PropsValues.TRASH_SEARCH_LIMIT;
-
-		return new Object[] {
-			filteredEntries, filteredEntriesCount, approximate};
+		trashEntriesList.setArray(
+			TrashEntrySoap.toSoapModels(filteredEntries));
+		trashEntriesList.setCount(filteredEntriesCount);
+		
+		return trashEntriesList;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
