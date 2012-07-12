@@ -387,14 +387,14 @@ public class DLAppHelperLocalServiceImpl
 			userId, fileVersion.getFileVersionId(), fileVersion.getStatus(),
 			new HashMap<String, Serializable>(), serviceContext);
 
+		// File rank
+
+		dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
+
 		// File shortcut
 
 		dlFileShortcutLocalService.enableFileShortcuts(
 			fileEntry.getFileEntryId());
-
-		// File rank
-
-		dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
 
 		// App helper
 
