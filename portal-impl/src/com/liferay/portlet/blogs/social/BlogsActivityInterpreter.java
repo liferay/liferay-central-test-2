@@ -79,7 +79,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Title
 
-		String entryTitle = wrapLink(link, getTitle(entry.getTitle()));
+		String entryTitle = wrapLink(
+			link, getTitle(activity.getExtraData(), entry.getTitle()));
 		String displayDate = StringPool.BLANK;
 
 		String titlePattern = null;
@@ -110,7 +111,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 				displayDate = dateFormatDate.format(entry.getDisplayDate());
 
-				entryTitle = getTitle(entry.getTitle());
+				entryTitle = getTitle(
+					activity.getExtraData(), entry.getTitle());
 			}
 			else {
 				if (Validator.isNull(groupName)) {

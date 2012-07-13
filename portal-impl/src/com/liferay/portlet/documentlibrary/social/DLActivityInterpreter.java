@@ -91,7 +91,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		String fileTitle = wrapLink(link, getTitle(fileEntry.getTitle()));
+		String fileTitle = wrapLink(
+			link, getTitle(activity.getExtraData(), fileEntry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, fileTitle

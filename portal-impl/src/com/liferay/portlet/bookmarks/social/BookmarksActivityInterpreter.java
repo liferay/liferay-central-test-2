@@ -87,7 +87,8 @@ public class BookmarksActivityInterpreter
 			titlePattern += "-in";
 		}
 
-		String entryTitle = wrapLink(link, getTitle(entry.getName()));
+		String entryTitle = wrapLink(
+			link, getTitle(activity.getExtraData(), entry.getName()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle
