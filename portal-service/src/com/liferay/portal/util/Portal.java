@@ -490,7 +490,7 @@ public interface Portal {
 	 * @param  month the month (0-based, meaning 0 for January)
 	 * @param  day the day of the month
 	 * @param  year the year
-	 * @param  clazz the exception Class to throw if the date is invalid. If
+	 * @param  clazz the exception class to throw if the date is invalid. If
 	 *         <code>null</code>, no exception will be thrown for an invalid
 	 *         date.
 	 * @return the date object, or <code>null</code> if the date is invalid and
@@ -512,7 +512,7 @@ public interface Portal {
 	 * @param  year the year
 	 * @param  hour the hour (0-24)
 	 * @param  min the minute of the hour
-	 * @param  clazz the exception Class to throw if the date is invalid. If
+	 * @param  clazz the exception class to throw if the date is invalid. If
 	 *         <code>null</code>, no exception will be thrown for an invalid
 	 *         date.
 	 * @return the date object, or <code>null</code> if the date is invalid and
@@ -535,7 +535,7 @@ public interface Portal {
 	 * @param  hour the hour (0-24)
 	 * @param  min the minute of the hour
 	 * @param  timeZone the time zone of the date
-	 * @param  clazz the exception Class to throw if the date is invalid. If
+	 * @param  clazz the exception class to throw if the date is invalid. If
 	 *         <code>null</code>, no exception will be thrown for an invalid
 	 *         date.
 	 * @return the date object, or <code>null</code> if the date is invalid and
@@ -556,7 +556,7 @@ public interface Portal {
 	 * @param  day the day of the month
 	 * @param  year the year
 	 * @param  timeZone the time zone of the date
-	 * @param  clazz the exception Class to throw if the date is invalid. If
+	 * @param  clazz the exception class to throw if the date is invalid. If
 	 *         <code>null</code>, no exception will be thrown for an invalid
 	 *         date.
 	 * @return the date object, or <code>null</code> if the date is invalid and
