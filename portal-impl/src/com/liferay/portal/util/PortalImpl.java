@@ -4574,10 +4574,10 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		String portletNamespace = getPortletNamespace(portletId);
+		String namespace = getPortletNamespace(portletId);
 
 		String strutsAction = ParamUtil.getString(
-			request, portletNamespace + "struts_action");
+			request, namespace + "struts_action");
 
 		if (Validator.isNull(strutsAction)) {
 			strutsAction = ParamUtil.getString(request, "struts_action");
