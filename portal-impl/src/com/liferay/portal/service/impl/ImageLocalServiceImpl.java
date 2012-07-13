@@ -233,7 +233,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to get image " + imageId + ": " +
-						e.getMessage());
+							e.getMessage());
 				}
 			}
 		}
