@@ -156,7 +156,7 @@ public class JournalArticleLocalServiceImpl
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, user.getTimeZone(),
-			new ArticleDisplayDateException());
+			ArticleDisplayDateException.class);
 
 		Date expirationDate = null;
 
@@ -164,7 +164,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDate = PortalUtil.getDate(
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, user.getTimeZone(),
-				new ArticleExpirationDateException());
+				ArticleExpirationDateException.class);
 		}
 
 		Date reviewDate = null;
@@ -173,7 +173,7 @@ public class JournalArticleLocalServiceImpl
 			reviewDate = PortalUtil.getDate(
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, user.getTimeZone(),
-				new ArticleReviewDateException());
+				ArticleReviewDateException.class);
 		}
 
 		byte[] smallImageBytes = null;
@@ -1933,7 +1933,7 @@ public class JournalArticleLocalServiceImpl
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, user.getTimeZone(),
-			new ArticleDisplayDateException());
+			ArticleDisplayDateException.class);
 
 		Date expirationDate = null;
 
@@ -1941,7 +1941,7 @@ public class JournalArticleLocalServiceImpl
 			expirationDate = PortalUtil.getDate(
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, user.getTimeZone(),
-				new ArticleExpirationDateException());
+				ArticleExpirationDateException.class);
 		}
 
 		Date now = new Date();
@@ -1958,7 +1958,7 @@ public class JournalArticleLocalServiceImpl
 			reviewDate = PortalUtil.getDate(
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, user.getTimeZone(),
-				new ArticleReviewDateException());
+				ArticleReviewDateException.class);
 		}
 
 		byte[] smallImageBytes = null;

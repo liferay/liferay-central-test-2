@@ -414,7 +414,7 @@ public class AnnouncementsEntryFinderImpl
 		try {
 			displayDate = PortalUtil.getDate(
 				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, new PortalException());
+				displayDateHour, displayDateMinute, null);
 		}
 		catch (PortalException pe) {
 			displayDate = new Date();
@@ -427,8 +427,7 @@ public class AnnouncementsEntryFinderImpl
 		try {
 			expirationDate = PortalUtil.getDate(
 				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute,
-				new PortalException());
+				expirationDateHour, expirationDateMinute, null);
 		}
 		catch (PortalException pe) {
 			expirationDate = new Date();

@@ -776,7 +776,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Date birthday = PortalUtil.getDate(
 			birthdayMonth, birthdayDay, birthdayYear,
-			new ContactBirthdayException());
+			ContactBirthdayException.class);
 
 		Contact contact = contactPersistence.create(user.getContactId());
 
@@ -3950,7 +3950,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			Date birthday = PortalUtil.getDate(
 				birthdayMonth, birthdayDay, birthdayYear,
-				new ContactBirthdayException());
+				ContactBirthdayException.class);
 
 			Contact contact = user.getContact();
 
@@ -4708,7 +4708,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Date birthday = PortalUtil.getDate(
 			birthdayMonth, birthdayDay, birthdayYear,
-			new ContactBirthdayException());
+			ContactBirthdayException.class);
 
 		long contactId = user.getContactId();
 
