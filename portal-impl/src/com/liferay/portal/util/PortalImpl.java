@@ -1512,7 +1512,8 @@ public class PortalImpl implements Portal {
 
 	public Date getDate(int month, int day, int year) {
 		try {
-			return getDate(month, day, year, null);
+			return getDate(
+				month, day, year, (Class<? extends PortalException>)null);
 		}
 		catch (PortalException pe) {
 			throw new RuntimeException();
@@ -1533,6 +1534,16 @@ public class PortalImpl implements Portal {
 		throws PortalException {
 
 		return getDate(month, day, year, hour, min, null, clazz);
+	}
+
+	/**
+	 * @deprecated {@link #getDate(int, int, int, int, int, Class)}
+	 */
+	public Date getDate(
+			int month, int day, int year, int hour, int min, PortalException pe)
+		throws PortalException {
+
+		return getDate(month, day, year, hour, min, null, pe);
 	}
 
 	public Date getDate(
@@ -1584,12 +1595,78 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #getDate(int, int, int, int, int, TimeZone, Class)}
+	 */
+	public Date getDate(
+			int month, int day, int year, int hour, int min, TimeZone timeZone,
+			PortalException pe)
+		throws PortalException {
+
+		if (!Validator.isGregorianDate(month, day, year)) {
+			if (pe != null) {
+				throw pe;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			Calendar cal = null;
+
+			if (timeZone == null) {
+				cal = CalendarFactoryUtil.getCalendar();
+			}
+			else {
+				cal = CalendarFactoryUtil.getCalendar(timeZone);
+			}
+
+			if ((hour == -1) || (min == -1)) {
+				cal.set(year, month, day, 0, 0, 0);
+			}
+			else {
+				cal.set(year, month, day, hour, min, 0);
+			}
+
+			cal.set(Calendar.MILLISECOND, 0);
+
+			Date date = cal.getTime();
+
+			/*if ((timeZone != null) &&
+				cal.before(CalendarFactoryUtil.getCalendar(timeZone))) {
+
+				throw pe;
+			}*/
+
+			return date;
+		}
+	}
+
+	/**
+	 * @deprecated {@link #getDate(int, int, int, Class)}
+	 */
+	public Date getDate(int month, int day, int year, PortalException pe)
+		throws PortalException {
+
+		return getDate(month, day, year, null, pe);
+	}
+
 	public Date getDate(
 			int month, int day, int year, TimeZone timeZone,
 			Class<? extends PortalException> clazz)
 		throws PortalException {
 
 		return getDate(month, day, year, -1, -1, timeZone, clazz);
+	}
+
+	/**
+	 * @deprecated {@link #getDate(int, int, int, TimeZone, Class)}
+	 */
+	public Date getDate(
+			int month, int day, int year, TimeZone timeZone, PortalException pe)
+		throws PortalException {
+
+		return getDate(month, day, year, -1, -1, timeZone, pe);
 	}
 
 	public long getDefaultCompanyId() {
