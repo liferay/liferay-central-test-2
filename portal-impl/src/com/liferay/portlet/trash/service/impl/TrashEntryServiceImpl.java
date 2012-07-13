@@ -170,36 +170,6 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		return trashEntriesList;
 	}
 
-	/**
-	 * Returns an ordered range of all the trash entries which match the
-	 * keywords and the group ID, using the indexer. It is preferable to use
-	 * this method instead of the non-indexed version whenever possible for
-	 * performance reasons.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances. <code>start</code> and <code>end</code> are not
-	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
-	 * refers to the first result in the set. Setting both <code>start</code>
-	 * and <code>end</code> to {@link
-	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
-	 * result set.
-	 * </p>
-	 *
-	 * @param  companyId the primary key of the company
-	 * @param  groupId the primary key of the group
-	 * @param  userId the primary key of the user
-	 * @param  keywords the keywords (space separated), which may occur in the
-	 *         user's first name, middle name, last name, screen name, or email
-	 *         address
-	 * @param  start the lower bound of the range of users
-	 * @param  end the upper bound of the range of users (not inclusive)
-	 * @param  sort the field and direction to sort by (optionally
-	 *         <code>null</code>)
-	 * @return the matching users
-	 * @throws SystemException if a system exception occurred
-	 * @see    com.liferay.portlet.usersadmin.util.UserIndexer
-	 */
 	public Hits search(
 			long companyId, long groupId, long userId, String keywords,
 			int start, int end, Sort sort)
@@ -208,18 +178,17 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		try {
 			SearchContext searchContext = new SearchContext();
 
-			searchContext.setEnd(end);
-			searchContext.setStart(start);
-
 			searchContext.setCompanyId(companyId);
-			searchContext.setUserId(userId);
-			searchContext.setGroupIds(new long[] {groupId});
-
+			searchContext.setEnd(end);
 			searchContext.setKeywords(keywords);
+			searchContext.setGroupIds(new long[] {groupId});
 
 			if (sort != null) {
 				searchContext.setSorts(new Sort[] {sort});
 			}
+
+			searchContext.setStart(start);
+			searchContext.setUserId(userId);
 
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				TrashEntry.class);

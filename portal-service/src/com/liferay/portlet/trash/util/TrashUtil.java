@@ -49,15 +49,14 @@ public class TrashUtil {
 
 	public static final int TRASH_ENABLED_BY_DEFAULT = 2;
 
-	public static List<TrashEntry> getEntries(Hits hits)
-		throws PortalException, SystemException {
-
+	public static List<TrashEntry> getEntries(Hits hits) {
 		List<TrashEntry> entries = new ArrayList<TrashEntry>();
 
-		for (Document doc : hits.getDocs()) {
+		for (Document document : hits.getDocs()) {
 			String entryClassName = GetterUtil.getString(
-				doc.get(Field.ENTRY_CLASS_NAME));
-			long classPK = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+				document.get(Field.ENTRY_CLASS_NAME));
+			long classPK = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			try {
 				TrashEntry entry = TrashEntryLocalServiceUtil.getEntry(
@@ -67,8 +66,9 @@ public class TrashUtil {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Can't find trash entry with the given classPK: "
-						+ classPK + " and className: " + entryClassName);
+					_log.warn(
+						"Unable to find trash entry for " + entryClassName +
+							" with primary key " + classPK);
 				}
 			}
 		}

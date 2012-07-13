@@ -105,7 +105,6 @@ public abstract class BaseDLAppTestCase {
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
 		serviceContext.setWorkflowAction(workflowAction);
 
 		return DLAppServiceUtil.addFileEntry(

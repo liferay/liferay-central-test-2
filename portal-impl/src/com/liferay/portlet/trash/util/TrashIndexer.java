@@ -127,10 +127,11 @@ public class TrashIndexer extends BaseIndexer {
 		}
 
 		addSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
+		addSearchTerm(
+			searchQuery, searchContext, Field.REMOVED_BY_USER_NAME, true);
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
-		addSearchTerm(searchQuery, searchContext, Field.REMOVED_BY, true);
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 	}
 
 	@Override
@@ -148,7 +149,7 @@ public class TrashIndexer extends BaseIndexer {
 			return Field.REMOVED_DATE;
 		}
 		else if (orderByCol.equals("removed-by")) {
-			return Field.REMOVED_BY;
+			return Field.REMOVED_BY_USER_NAME;
 		}
 		else {
 			return orderByCol;

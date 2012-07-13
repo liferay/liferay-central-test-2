@@ -30,7 +30,6 @@ page import="com.liferay.portlet.trash.action.EditEntryAction" %><%@
 page import="com.liferay.portlet.trash.model.TrashEntry" %><%@
 page import="com.liferay.portlet.trash.model.TrashEntryList" %><%@
 page import="com.liferay.portlet.trash.model.impl.TrashEntryImpl" %><%@
-page import="com.liferay.portlet.trash.search.EntryDisplayTerms" %><%@
 page import="com.liferay.portlet.trash.search.EntrySearch" %><%@
 page import="com.liferay.portlet.trash.search.EntrySearchTerms" %><%@
 page import="com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil" %><%@

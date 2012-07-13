@@ -90,22 +90,22 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext();
 
-		Hits results = indexer.search(searchContext);
+		Hits hits = indexer.search(searchContext);
 
-		return results.getLength();
+		return hits.getLength();
 	}
 
-	protected int searchTrashEntriesCount(
-		String keywords, ServiceContext serviceContext) throws Exception {
-
+	protected int searchTrashEntriesCount(String keywords) throws Exception {
 		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
-		Hits results = TrashEntryServiceUtil.search(
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		Hits hits = TrashEntryServiceUtil.search(
 			serviceContext.getCompanyId(), serviceContext.getScopeGroupId(),
 			serviceContext.getUserId(), keywords, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		return results.getLength();
+		return hits.getLength();
 	}
 
 }

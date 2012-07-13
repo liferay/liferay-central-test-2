@@ -750,10 +750,6 @@ public abstract class BaseIndexer implements Indexer {
 
 		boolean stagingGroup = false;
 
-		if (groupId < 0) {
-			groupId = -groupId;
-		}
-
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.isLayout()) {
@@ -771,17 +767,19 @@ public abstract class BaseIndexer implements Indexer {
 		Document document, String className, long classPK) {
 
 		try {
-			TrashEntry entry = TrashEntryLocalServiceUtil.getEntry(
+			TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
 				className, classPK);
 
 			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(entry.getClassName());
+				TrashHandlerRegistryUtil.getTrashHandler(
+					trashEntry.getClassName());
 
 			TrashRenderer trashRenderer = trashHandler.getTrashRenderer(
-				entry.getClassPK());
+				trashEntry.getClassPK());
 
-			document.addDate(Field.REMOVED_DATE, entry.getCreateDate());
-			document.addKeyword(Field.REMOVED_BY, entry.getUserName(), true);
+			document.addDate(Field.REMOVED_DATE, trashEntry.getCreateDate());
+			document.addKeyword(
+				Field.REMOVED_BY_USER_NAME, trashEntry.getUserName(), true);
 			document.addKeyword(Field.TYPE, trashRenderer.getType(), true);
 		}
 		catch (Exception e) {

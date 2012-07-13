@@ -112,11 +112,11 @@ public class BlogsIndexer extends BaseIndexer {
 
 		Property statusProperty = PropertyFactoryUtil.forName("status");
 
-		Integer[] indexableStatus = new Integer[] {
-			WorkflowConstants.STATUS_APPROVED,
-			WorkflowConstants.STATUS_IN_TRASH};
+		Integer[] statuses = {
+			WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_IN_TRASH
+		};
 
-		dynamicQuery.add(statusProperty.in(indexableStatus));
+		dynamicQuery.add(statusProperty.in(statuses));
 	}
 
 	@Override

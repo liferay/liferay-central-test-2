@@ -57,33 +57,29 @@ portletURL.setParameter("tabs1", tabs1);
 	>
 
 		<%
-		EntryDisplayTerms displayTerms = (EntryDisplayTerms)searchContainer.getDisplayTerms();
-		EntrySearchTerms searchTerms = (EntrySearchTerms)searchContainer.getSearchTerms();
 		boolean aproximate = false;
 		%>
 
 		<liferay-ui:search-container-results>
 
 			<%
-			if (Validator.isNotNull(searchTerms.getKeywords())) {
-				LinkedHashMap entryParams = new LinkedHashMap();
+			EntrySearchTerms searchTerms = (EntrySearchTerms)searchContainer.getSearchTerms();
 
+			if (Validator.isNotNull(searchTerms.getKeywords())) {
 				Sort sort = SortFactoryUtil.getSort(TrashEntry.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 				Hits hits = TrashEntryServiceUtil.search(company.getCompanyId(), groupId, user.getUserId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 
-				total = hits.getLength();
-
 				pageContext.setAttribute("results", TrashUtil.getEntries(hits));
-				pageContext.setAttribute("total", total);
+				pageContext.setAttribute("total", hits.getLength());
 			}
 			else {
-				Object[] entries = TrashEntryServiceUtil.getEntries(groupId, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				TrashEntryList trashEntryList = TrashEntryServiceUtil.getEntries(groupId, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-				pageContext.setAttribute("results", entries[0]);
-				pageContext.setAttribute("total", entries[1]);
+				pageContext.setAttribute("results", TrashEntryImpl.toModels(trashEntryList.getArray()));
+				pageContext.setAttribute("total", trashEntryList.getCount());
 
-				aproximate = (Boolean)entries[2];
+				aproximate = trashEntryList.isApproximate();
 			}
 
 			if ((total == 0) && Validator.isNotNull(searchTerms.getKeywords())) {

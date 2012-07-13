@@ -17,7 +17,6 @@ package com.liferay.portlet.trash;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
@@ -87,14 +86,12 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 			boolean leaveCheckedOut, boolean fileRank)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
 		int initialFileRanksCount = 0;
 		int initialNotInTrashCount = getNotInTrashCount();
 		int initialTrashEntriesCount = getTrashEntriesCount();
 		int initialSearchFileEntriesCount = searchFileEntriesCount();
 		int initialSearchTrashFileEntriesCount = searchTrashEntriesCount(
-			"Basic", serviceContext);
+			"Basic");
 
 		FileEntry fileEntry = null;
 
@@ -129,7 +126,6 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 			Assert.assertFalse(
 				isAssetEntryVisible(
 					DLFileEntryConstants.getClassName(), fileEntryId));
-
 			Assert.assertEquals(
 				initialSearchFileEntriesCount, searchFileEntriesCount());
 		}
@@ -137,14 +133,13 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 			Assert.assertTrue(
 				isAssetEntryVisible(
 					DLFileEntryConstants.getClassName(), fileEntryId));
-
 			Assert.assertEquals(
 				initialSearchFileEntriesCount + 1, searchFileEntriesCount());
 		}
 
 		Assert.assertEquals(
 			initialSearchTrashFileEntriesCount,
-			searchTrashEntriesCount("Basic", serviceContext));
+			searchTrashEntriesCount("Basic"));
 
 		DLAppServiceUtil.moveFileEntryToTrash(fileEntryId);
 
@@ -158,7 +153,7 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 			initialSearchFileEntriesCount, searchFileEntriesCount());
 		Assert.assertEquals(
 			initialSearchTrashFileEntriesCount + 1,
-			searchTrashEntriesCount("Basic", serviceContext));
+			searchTrashEntriesCount("Basic"));
 
 		if (fileRank) {
 			Assert.assertEquals(
@@ -207,7 +202,7 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		Assert.assertEquals(initialTrashEntriesCount, getTrashEntriesCount());
 		Assert.assertEquals(
 			initialSearchTrashFileEntriesCount,
-			searchTrashEntriesCount("Basic", serviceContext));
+			searchTrashEntriesCount("Basic"));
 	}
 
 }

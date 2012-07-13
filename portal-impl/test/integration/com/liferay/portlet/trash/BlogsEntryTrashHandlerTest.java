@@ -158,6 +158,7 @@ public class BlogsEntryTrashHandlerTest {
 		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+
 		SearchContext searchContext = ServiceTestUtil.getSearchContext();
 
 		searchContext.setGroupIds(new long[] {groupId});
@@ -168,7 +169,8 @@ public class BlogsEntryTrashHandlerTest {
 	}
 
 	protected int searchTrashEntriesCount(
-		String keywords, ServiceContext serviceContext) throws Exception {
+			String keywords, ServiceContext serviceContext)
+		throws Exception {
 
 		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
@@ -292,8 +294,6 @@ public class BlogsEntryTrashHandlerTest {
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount,
 				searchTrashEntriesCount("Title", serviceContext));
-
-			// clean up
 
 			trashHandler.deleteTrashEntry(blogsEntry.getEntryId());
 		}
