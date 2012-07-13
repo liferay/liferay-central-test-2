@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.bookmarks.social;
 
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -88,7 +87,7 @@ public class BookmarksActivityInterpreter
 			titlePattern += "-in";
 		}
 
-		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getName()));
+		String entryTitle = wrapLink(link, getTitle(entry.getName()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle
