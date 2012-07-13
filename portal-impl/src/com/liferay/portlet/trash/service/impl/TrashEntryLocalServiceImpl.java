@@ -335,13 +335,13 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	protected Date getMaxAge(Group group)
 		throws PortalException, SystemException {
 
-		int trashEntriesMaxAge = TrashUtil.getMaxAge(group);
-
 		Calendar calendar = Calendar.getInstance();
 
 		calendar.setTime(new Date());
 
-		calendar.add(Calendar.DATE, -trashEntriesMaxAge);
+		int maxAge = TrashUtil.getMaxAge(group);
+
+		calendar.add(Calendar.DATE, -maxAge);
 
 		return calendar.getTime();
 	}

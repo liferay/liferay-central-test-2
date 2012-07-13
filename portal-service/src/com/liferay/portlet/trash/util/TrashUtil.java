@@ -149,14 +149,13 @@ public class TrashUtil {
 			TRASH_DEFAULT_VALUE);
 
 		if ((trashEnabledGroup == TRASH_ENABLED) ||
-			((trashEnabledGroup == TRASH_DEFAULT_VALUE) &&
-			 	(trashEnabledCompany == TRASH_ENABLED_BY_DEFAULT))) {
+			((trashEnabledCompany == TRASH_ENABLED_BY_DEFAULT) &&
+			 (trashEnabledGroup == TRASH_DEFAULT_VALUE))) {
 
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TrashUtil.class);
