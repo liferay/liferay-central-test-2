@@ -204,8 +204,21 @@ public class DLFolderFinderImpl
 			}
 
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
+
 			qPos.add(groupId);
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
 
 			int count = 0;
 
@@ -328,8 +341,21 @@ public class DLFolderFinderImpl
 			}
 
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
+
 			qPos.add(groupId);
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
 
 			int count = 0;
 
@@ -403,9 +429,7 @@ public class DLFolderFinderImpl
 						sb.append(" OR");
 					}
 
-					sb.append(" DLFileEntry.mimeType = '");
-					sb.append(mimeTypes[i]);
-					sb.append("'");
+					sb.append(" DLFileEntry.mimeType = ?");
 				}
 
 				sb.append(StringPool.CLOSE_PARENTHESIS);
@@ -432,9 +456,7 @@ public class DLFolderFinderImpl
 						sb.append(" OR");
 					}
 
-					sb.append(" mimeType = '");
-					sb.append(mimeTypes[i]);
-					sb.append("'");
+					sb.append(" mimeType = ?");
 				}
 
 				sb.append(StringPool.CLOSE_PARENTHESIS);
@@ -484,8 +506,21 @@ public class DLFolderFinderImpl
 			}
 
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
+
 			qPos.add(groupId);
 			qPos.add(folderId);
+
+			if (mimeTypes != null) {
+				for (String mimeType : mimeTypes) {
+					qPos.add(mimeType);
+				}
+			}
 
 			List<Object> models = new ArrayList<Object>();
 
@@ -737,10 +772,7 @@ public class DLFolderFinderImpl
 
 		for (int i = 0; i < mimeTypes.length; i++) {
 			sb.append(table);
-
-			sb.append(".mimeType = '");
-			sb.append(mimeTypes[i]);
-			sb.append("'");
+			sb.append(".mimeType = ?");
 
 			if ((i + 1) != mimeTypes.length) {
 				sb.append(WHERE_OR);
