@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.io.ByteArrayFileInputStream;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -31,16 +30,16 @@ public class TempFileUtil {
 
 	public static String addTempFile(
 			long userId, String tempPathName, File file)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
-		String fileName = FileUtil.createTempFileName();
+		String tempFileName = FileUtil.createTempFileName();
 
-		return addTempFile(userId, fileName, tempPathName, file);
+		return addTempFile(userId, tempFileName, tempPathName, file);
 	}
 
 	public static String addTempFile(
 			long userId, String fileName, String tempPathName, File file)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		String tempFileName = getTempFileName(userId, fileName, tempPathName);
 
@@ -52,7 +51,7 @@ public class TempFileUtil {
 	public static String addTempFile(
 			long userId, String fileName, String tempPathName,
 			InputStream inputStream)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		File file = null;
 
@@ -78,14 +77,14 @@ public class TempFileUtil {
 	}
 
 	public static String addTempFile(String tempPathName, File file)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return addTempFile(_USER_ID, tempPathName, file);
 	}
 
 	public static String addTempFile(
 			String fileName, String tempPathName, File file)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return addTempFile(_USER_ID, fileName, tempPathName, file);
 	}
@@ -144,9 +143,7 @@ public class TempFileUtil {
 		}
 	}
 
-	public static String[] getTempFileEntryNames(String tempPathName)
-		throws PortalException {
-
+	public static String[] getTempFileEntryNames(String tempPathName) {
 		return getTempFileEntryNames(_USER_ID, tempPathName);
 	}
 
