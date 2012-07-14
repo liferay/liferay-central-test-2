@@ -51,7 +51,7 @@ public interface WebKeys {
 
 	public static final String INVOKER_FILTER_URI = "INVOKER_FILTER_URI";
 
-	public static final String JS_CONTEXT = "JS_CONTEXT";
+	public static final String JAVASCRIPT_CONTEXT = "JAVASCRIPT_CONTEXT";
 
 	public static final String JOURNAL_ARTICLE_DISPLAY = "JOURNAL_ARTICLE_DISPLAY";
 

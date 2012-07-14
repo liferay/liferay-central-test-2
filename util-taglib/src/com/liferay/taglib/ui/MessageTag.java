@@ -40,7 +40,7 @@ public class MessageTag extends TagSupport {
 				(HttpServletRequest)pageContext.getRequest();
 
 			boolean unicode = GetterUtil.getBoolean(
-				request.getAttribute(WebKeys.JS_CONTEXT));
+				request.getAttribute(WebKeys.JAVASCRIPT_CONTEXT));
 
 			if (unicode) {
 				_unicode = unicode;

@@ -166,7 +166,7 @@ public class ScriptTag extends BaseScriptTag {
 				cleanUp();
 			}
 
-			request.removeAttribute(WebKeys.JS_CONTEXT);
+			request.removeAttribute(WebKeys.JAVASCRIPT_CONTEXT);
 		}
 	}
 
@@ -175,7 +175,7 @@ public class ScriptTag extends BaseScriptTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		request.setAttribute(WebKeys.JS_CONTEXT, true);
+		request.setAttribute(WebKeys.JAVASCRIPT_CONTEXT, Boolean.TRUE);
 
 		return super.doStartTag();
 	}
