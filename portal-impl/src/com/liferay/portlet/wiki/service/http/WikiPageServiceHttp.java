@@ -241,8 +241,7 @@ public class WikiPageServiceHttp {
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String fileName,
 		java.lang.String tempFolderName, java.io.InputStream inputStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.io.IOException {
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"addTempPageAttachment",
@@ -263,10 +262,6 @@ public class WikiPageServiceHttp {
 
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
 					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				if (e instanceof java.io.IOException) {
-					throw (java.io.IOException)e;
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);

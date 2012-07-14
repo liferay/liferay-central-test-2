@@ -93,8 +93,7 @@ public interface WikiPageService extends BaseService {
 		java.lang.String fileName, java.lang.String tempFolderName,
 		java.io.InputStream inputStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.io.IOException;
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void changeParent(long nodeId, java.lang.String title,
 		java.lang.String newParentTitle,
