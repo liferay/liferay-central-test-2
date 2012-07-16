@@ -1079,7 +1079,7 @@ public class DLFileEntryLocalServiceImpl
 
 		String extraSettings = StringPool.BLANK;
 
-		if (fileEntryTypeId == 0) {
+		if (fileEntryTypeId == -1) {
 			fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
 		}
 
