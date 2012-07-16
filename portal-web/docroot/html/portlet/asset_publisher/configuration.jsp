@@ -360,7 +360,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 									<%
 									for (long classNameId : availableClassNameIdsSet) {
-										ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+										ClassName className = ClassNameLocalServiceUtil.getClassName(classNameId);
 
 										if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
 											typesRightList.add(new KeyValuePair(String.valueOf(classNameId), ResourceActionsUtil.getModelResource(locale, className.getValue())));
