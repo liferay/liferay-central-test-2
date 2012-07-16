@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -70,7 +69,7 @@ public class EditFolderAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFolders(
-					actionRequest, (LiferayPortletConfig)portletConfig, false);
+					(LiferayPortletConfig)portletConfig, actionRequest, false);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveFolders(actionRequest, false);
@@ -80,7 +79,7 @@ public class EditFolderAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteFolders(
-					actionRequest, (LiferayPortletConfig)portletConfig, true);
+					(LiferayPortletConfig)portletConfig, actionRequest, true);
 			}
 			else if (cmd.equals("updateWorkflowDefinitions")) {
 				updateWorkflowDefinitions(actionRequest);
@@ -135,8 +134,8 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void deleteFolders(
-			ActionRequest actionRequest, LiferayPortletConfig portletConfig,
-			boolean moveToTrash)
+			LiferayPortletConfig liferayPortletConfig,
+			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
 		long[] deleteFolderIds = null;
@@ -163,19 +162,19 @@ public class EditFolderAction extends PortletAction {
 				actionRequest, DLFileEntry.class.getName(), deleteFolderId);
 		}
 
-		if (moveToTrash && Validator.isNotNull(deleteFolderIds)) {
+		if (moveToTrash && (deleteFolderIds.length > 0)) {
 			Map<String, long[]> data = new HashMap<String, long[]>();
 
 			data.put("restoreFolderIds", deleteFolderIds);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletId() +
-					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS, data);
+				liferayPortletConfig.getPortletId() +
+					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletName() +
+				liferayPortletConfig.getPortletId() +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 		}
 	}

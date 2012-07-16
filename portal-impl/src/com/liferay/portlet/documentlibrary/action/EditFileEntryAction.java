@@ -141,7 +141,7 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, false);
+					(LiferayPortletConfig)portletConfig, actionRequest, false);
 			}
 			else if (cmd.equals(Constants.DELETE_TEMP)) {
 				deleteTempFileEntry(actionRequest, actionResponse);
@@ -163,7 +163,7 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteFileEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, true);
+					(LiferayPortletConfig)portletConfig, actionRequest, true);
 			}
 			else if (cmd.equals(Constants.REVERT)) {
 				revertFileEntry(actionRequest);
@@ -500,14 +500,14 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected void deleteFileEntries(
-			ActionRequest actionRequest, LiferayPortletConfig portletConfig,
-			boolean moveToTrash)
+			LiferayPortletConfig liferayPortletConfig,
+			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
+
+		long[] deleteFileEntryIds = null;
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		String version = ParamUtil.getString(actionRequest, "version");
-
-		long[] deleteFileEntryIds = null;
 
 		if ((fileEntryId > 0) && Validator.isNotNull(version)) {
 			DLAppServiceUtil.deleteFileVersion(fileEntryId, version);
@@ -532,19 +532,21 @@ public class EditFileEntryAction extends PortletAction {
 			}
 		}
 
-		if (moveToTrash && Validator.isNotNull(deleteFileEntryIds)) {
+		if (moveToTrash && (deleteFileEntryIds != null) &&
+			(deleteFileEntryIds.length > 0)) {
+
 			Map<String, long[]> data = new HashMap<String, long[]>();
 
 			data.put("restoreFileEntryIds", deleteFileEntryIds);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletId() +
-					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS, data);
+				liferayPortletConfig.getPortletId() +
+					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletName() +
+				liferayPortletConfig.getPortletId() +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 		}
 	}

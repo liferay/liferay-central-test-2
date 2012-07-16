@@ -18,60 +18,57 @@
 
 <%
 String portletURL = (String)request.getAttribute("liferay-ui:trash-undo:portletURL");
-%>
 
-<%
-if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMessages.KEY_SUFFIX_DELETE_SUCCESS)) {
-	Map<String, long[]> data = (HashMap<String, long[]>)SessionMessages.get(portletRequest, portletDisplay.getId() + SessionMessages.KEY_SUFFIX_DELETE_SUCCESS);
+if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA)) {
+	Map<String, long[]> data = (HashMap<String, long[]>)SessionMessages.get(portletRequest, portletDisplay.getId() + SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA);
 
 	if (data != null) {
-		int numberOfTrashedItems = 0;
+		int trashedEntriesCount = 0;
 
 		Set<String> keys = data.keySet();
 
 		for (String key : keys) {
-			long[] trashedIds = data.get(key);
+			long[] primaryKeys = data.get(key);
 
-			numberOfTrashedItems += trashedIds.length;
+			trashedEntriesCount += primaryKeys.length;
 		}
 %>
 
-	<div class="portlet-msg-success taglib-trash-undo">
-		<liferay-ui:message arguments='<%= numberOfTrashedItems %>' key='<%= numberOfTrashedItems > 1 ? "x-items-have-been-moved-to-the-recycle-bin" : "the-selected-item-has-been-moved-to-the-recycle-bin" %>' />
+		<div class="portlet-msg-success taglib-trash-undo">
+			<liferay-ui:message arguments='<%= trashedEntriesCount %>' key='<%= trashedEntriesCount > 1 ? "x-items-have-been-moved-to-the-recycle-bin" : "the-selected-item-has-been-moved-to-the-recycle-bin" %>' />
 
-		<a class="trash-undo-link" href="javascript:;" id="<%= namespace %>undo"><liferay-ui:message key="undo" /></a>
+			<a class="trash-undo-link" href="javascript:;" id="<%= namespace %>undo"><liferay-ui:message key="undo" /></a>
 
+			<aui:form action="<%= portletURL %>" cssClass="trash-undo-form" method="post" name="undoForm">
+				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
-		<aui:form action="<%= portletURL %>" cssClass="trash-undo-form" method="post" name="undoForm">
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+				<%
+				for (String key : keys) {
+					long[] primaryKeys = data.get(key);
+				%>
 
-			<%
-			for (String key : keys) {
-				long[] trashedIds = data.get(key);
-			%>
+					<aui:input name="<%= key %>" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
-				<aui:input name="<%= key %>" type="hidden" value="<%= StringUtil.merge(trashedIds) %>" />
-
-			<%
-			}
-			%>
-
-			<aui:button type="submit" value="undo" />
-		</aui:form>
-	</div>
-
-	<aui:script use="aui-base">
-		var undoLink = A.one('#<%= namespace %>undo');
-
-		if (undoLink) {
-			undoLink.on(
-				'click',
-				function(event) {
-					submitForm(document.<%= namespace %>undoForm);
+				<%
 				}
-			);
-		}
-	</aui:script>
+				%>
+
+				<aui:button type="submit" value="undo" />
+			</aui:form>
+		</div>
+
+		<aui:script use="aui-base">
+			var undoLink = A.one('#<%= namespace %>undo');
+
+			if (undoLink) {
+				undoLink.on(
+					'click',
+					function(event) {
+						submitForm(document.<%= namespace %>undoForm);
+					}
+				);
+			}
+		</aui:script>
 
 <%
 	}

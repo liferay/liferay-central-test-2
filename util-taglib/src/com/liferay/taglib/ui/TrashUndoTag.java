@@ -21,7 +21,7 @@ import javax.portlet.PortletURL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class TrashUndoTag extends IncludeTag {
 
@@ -36,6 +36,13 @@ public class TrashUndoTag extends IncludeTag {
 
 	public void setPortletURL(String portletURL) {
 		_portletURL = portletURL;
+	}
+
+	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_portletURL = null;
 	}
 
 	@Override

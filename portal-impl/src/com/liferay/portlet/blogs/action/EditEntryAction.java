@@ -103,11 +103,11 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, false);
+					(LiferayPortletConfig)portletConfig, actionRequest, false);
 			}
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, true);
+					(LiferayPortletConfig)portletConfig, actionRequest, true);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
 				subscribe(actionRequest);
@@ -264,8 +264,8 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void deleteEntries(
-			ActionRequest actionRequest, LiferayPortletConfig portletConfig,
-			boolean moveToTrash)
+			LiferayPortletConfig liferayPortletConfig,
+			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
 		long[] deleteEntryIds = null;
@@ -289,19 +289,19 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		if (moveToTrash && Validator.isNotNull(deleteEntryIds)) {
+		if (moveToTrash && (deleteEntryIds.length > 0)) {
 			Map<String, long[]> data = new HashMap<String, long[]>();
 
 			data.put("restoreEntryIds", deleteEntryIds);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletName() +
-					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS, data);
+				liferayPortletConfig.getPortletId() +
+					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletName() +
+				liferayPortletConfig.getPortletId() +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 		}
 	}
@@ -351,14 +351,12 @@ public class EditEntryAction extends PortletAction {
 		ThemeDisplay themeDislay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long userId = themeDislay.getUserId();
-
 		long[] restoreEntryIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "restoreEntryIds"), 0L);
 
 		for (long restoreEntryId : restoreEntryIds) {
 			BlogsEntryLocalServiceUtil.restoreEntryFromTrash(
-				userId, restoreEntryId);
+				themeDislay.getUserId(), restoreEntryId);
 		}
 	}
 

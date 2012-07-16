@@ -87,14 +87,14 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, false);
+					(LiferayPortletConfig)portletConfig, actionRequest, false);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE_TO_TRASH)) {
 				deleteEntries(
-					actionRequest, (LiferayPortletConfig)portletConfig, true);
+					(LiferayPortletConfig)portletConfig, actionRequest, true);
 			}
 			else if (cmd.equals(Constants.RESTORE)) {
 				restoreEntries(actionRequest);
@@ -228,8 +228,8 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void deleteEntries(
-			ActionRequest actionRequest, LiferayPortletConfig portletConfig,
-			boolean moveToTrash)
+			LiferayPortletConfig liferayPortletConfig,
+			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
 		long[] deleteFolderIds = StringUtil.split(
@@ -270,9 +270,10 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		if (moveToTrash && ((deleteFolderIds.length > 0) ||
-				(deleteFileShortcutIds.length > 0) ||
-				(deleteFileEntryIds.length > 0))) {
+		if (moveToTrash &&
+			((deleteFileEntryIds.length > 0) ||
+			 (deleteFileShortcutIds.length > 0) ||
+			 (deleteFolderIds.length > 0))) {
 
 			Map<String, long[]> data = new HashMap<String, long[]>();
 
@@ -282,12 +283,12 @@ public class EditEntryAction extends PortletAction {
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletId() +
-					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS, data);
+				liferayPortletConfig.getPortletId() +
+					SessionMessages.KEY_SUFFIX_DELETE_SUCCESS_DATA, data);
 
 			SessionMessages.add(
 				actionRequest,
-				portletConfig.getPortletName() +
+				liferayPortletConfig.getPortletId() +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 		}
 	}
