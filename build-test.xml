@@ -1300,7 +1300,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-test-dependecy" />
+			<param name="test.ant.script.command" value="plugins-test-dependency" />
 			<param name="test.ant.script.plugin.portlets" value="test-dependency-able-portlet,test-dependency-baker-portlet,test-dependency-charlie-portlet,test-dependency-dog-portlet,test-dependency-easy-portlet,test-dependency-fox-portlet" />
 			<param name="test.ant.script.suite" value="PluginsTestDependencyTestSuite" />
 		</antcall>
