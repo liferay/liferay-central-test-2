@@ -80,22 +80,13 @@ public class ClassNameLocalServiceImpl
 			return _nullClassName;
 		}
 
-		// Always cache the class name. This table exists to improve
-		// performance.
-
 		ClassName className = _classNames.get(value);
 
 		if (className == null) {
-			try {
-				className = classNamePersistence.fetchByValue(value);
+			className = classNamePersistence.fetchByValue(value);
 
-				if (className == null) {
-					return _nullClassName;
-				}
-			}
-			catch (SystemException e) {
-				throw new RuntimeException(
-					"Unable to get class name from value " + value, e);
+			if (className == null) {
+				return _nullClassName;
 			}
 
 			_classNames.put(value, className);
@@ -116,7 +107,7 @@ public class ClassNameLocalServiceImpl
 
 			return className.getClassNameId();
 		}
-		catch (SystemException e) {
+		catch (Exception e) {
 			throw new RuntimeException(
 				"Unable to get class name from value " + value, e);
 		}
