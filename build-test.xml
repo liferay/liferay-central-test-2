@@ -3709,7 +3709,7 @@ file.
 		</if>
 
 		<if>
-			<isset property="test.pacl" />
+			<equals arg1="${test.pacl}" arg2="true" />
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="portlets" />
