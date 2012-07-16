@@ -72,7 +72,7 @@ public class ServletResponseUtil {
 
 		if (!rangeString.matches(_RANGE_REGEX)) {
 			throw new IOException(
-				"Range header does not match regular expression:" +
+				"Range header does not match regular expression " +
 				rangeString);
 		}
 
@@ -81,9 +81,9 @@ public class ServletResponseUtil {
 		String[] rangeFields = StringUtil.split(rangeString.substring(6));
 
 		if (rangeFields.length > _MAX_RANGE_FIELDS) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(8);
 
-			sb.append("Request rangeString ");
+			sb.append("Request range ");
 			sb.append(rangeString);
 			sb.append(" with ");
 			sb.append(rangeFields.length);
