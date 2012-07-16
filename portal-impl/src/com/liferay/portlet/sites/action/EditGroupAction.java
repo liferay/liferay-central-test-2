@@ -26,6 +26,7 @@ import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.staging.StagingUtil;
@@ -122,9 +123,12 @@ public class EditGroupAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(closeRedirect)) {
+				LiferayPortletConfig liferayPortletConfig =
+					(LiferayPortletConfig)portletConfig;
+
 				SessionMessages.add(
 					actionRequest,
-					portletConfig.getPortletName() +
+					liferayPortletConfig.getPortletId() +
 						SessionMessages.KEY_SUFFIX_CLOSE_REDIRECT,
 					closeRedirect);
 			}
