@@ -22,18 +22,18 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageCon
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 
-String id = renderResponse.getNamespace() + "wikiEditorHelp";
+String toggleId = "toggle_id_wiki_editor_help";
 
-String clickValue = SessionClicks.get(request, id, null);
+String toggleValue = SessionClicks.get(request, toggleId, null);
 
-boolean showSyntaxHelp = ((clickValue != null) && clickValue.equals("block"));
+boolean showSyntaxHelp = ((toggleValue != null) && toggleValue.equals("block"));
 %>
 
 <div align="right">
 	<liferay-ui:toggle
 		defaultShowContent="<%= false %>"
 		hideMessage='<%= LanguageUtil.get(pageContext, "hide-syntax-help") + " &raquo;" %>'
-		id="<%= id %>"
+		id="<%= toggleId %>"
 		showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
 	/>
 </div>
@@ -76,7 +76,7 @@ boolean showSyntaxHelp = ((clickValue != null) && clickValue.equals("block"));
 			<aui:input name="content" type="hidden" />
 		</aui:column>
 
-		<aui:column cssClass="syntax-help" columnWidth="30" id="wikiEditorHelp" style='<%= showSyntaxHelp ? StringPool.BLANK : "display: none" %>'>
+		<aui:column columnWidth="30" cssClass="syntax-help" id="toggle_id_wiki_editor_help" style='<%= showSyntaxHelp ? StringPool.BLANK : "display: none" %>'>
 			<h3>
 				<liferay-ui:message key="syntax-help" />
 			</h3>
@@ -104,7 +104,7 @@ boolean showSyntaxHelp = ((clickValue != null) && clickValue.equals("block"));
 		function(event) {
 			var id = event.id;
 
-			if (id === '<%= id %>') {
+			if (id === '<%= toggleId %>') {
 				var state = event.state;
 
 				var classSrc = CSS_EDITOR_WIDTH;
