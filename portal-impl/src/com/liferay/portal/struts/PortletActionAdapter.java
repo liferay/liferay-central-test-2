@@ -111,6 +111,7 @@ public class PortletActionAdapter extends PortletAction {
 		_originalPortletAction = portletAction;
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		if (_originalPortletAction != null) {
 			return _originalPortletAction.isCheckMethodOnProcessAction();
