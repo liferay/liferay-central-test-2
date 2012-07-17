@@ -134,7 +134,7 @@ public class EditFileEntryAction extends PortletAction {
 				addTempFileEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFileEntries(actionRequest);
+				deleteFileEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE_TEMP)) {
 				deleteTempFileEntry(actionRequest, actionResponse);
@@ -483,27 +483,21 @@ public class EditFileEntryAction extends PortletAction {
 		}
 	}
 
-	protected void deleteFileEntries(ActionRequest actionRequest)
+	protected void deleteFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		String version = ParamUtil.getString(actionRequest, "version");
 
-		if ((fileEntryId > 0) && Validator.isNotNull(version)) {
+		if (fileEntryId == 0) {
+			return;
+		}
+
+		if (Validator.isNotNull(version)) {
 			DLAppServiceUtil.deleteFileVersion(fileEntryId, version);
 		}
 		else {
-			if (fileEntryId > 0) {
-				DLAppServiceUtil.deleteFileEntry(fileEntryId);
-			}
-			else {
-				long[] deleteFileEntryIds = StringUtil.split(
-					ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
-
-				for (int i = 0; i < deleteFileEntryIds.length; i++) {
-					DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
-				}
-			}
+			DLAppServiceUtil.deleteFileEntry(fileEntryId);
 		}
 	}
 
