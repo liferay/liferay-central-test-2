@@ -418,6 +418,9 @@ public class AnnouncementsEntryFinderImpl
 				(Class<? extends PortalException>)null);
 		}
 		catch (PortalException pe) {
+		}
+
+		if (displayDate == null) {
 			displayDate = new Date();
 		}
 
@@ -432,6 +435,9 @@ public class AnnouncementsEntryFinderImpl
 				(Class<? extends PortalException>)null);
 		}
 		catch (PortalException pe) {
+		}
+
+		if (expirationDate == null) {
 			expirationDate = new Date();
 		}
 
