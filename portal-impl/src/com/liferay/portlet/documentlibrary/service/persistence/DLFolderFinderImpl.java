@@ -206,18 +206,14 @@ public class DLFolderFinderImpl
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			qPos.add(groupId);
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			int count = 0;
@@ -343,18 +339,14 @@ public class DLFolderFinderImpl
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			qPos.add(groupId);
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			int count = 0;
@@ -508,18 +500,14 @@ public class DLFolderFinderImpl
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			qPos.add(groupId);
 			qPos.add(folderId);
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			List<Object> models = new ArrayList<Object>();

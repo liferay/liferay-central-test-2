@@ -207,9 +207,7 @@ public class DLFileEntryFinderImpl
 			}
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			Iterator<Long> itr = q.iterate();
@@ -472,9 +470,7 @@ public class DLFileEntryFinderImpl
 			}
 
 			if (mimeTypes != null) {
-				for (String mimeType : mimeTypes) {
-					qPos.add(mimeType);
-				}
+				qPos.add(mimeTypes);
 			}
 
 			return (List<DLFileEntry>)QueryUtil.list(
