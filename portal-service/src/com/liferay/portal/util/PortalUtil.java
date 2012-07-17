@@ -517,18 +517,6 @@ public class PortalUtil {
 			group, privateLayoutSet, themeDisplay);
 	}
 
-	public static long[] getGroupIds(long groupId)
-		throws PortalException, SystemException {
-
-		return getPortal().getGroupIds(groupId);
-	}
-
-	public static long[] getGroupIds(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getPortal().getGroupIds(themeDisplay);
-	}
-
 	public static String[] getGroupPermissions(HttpServletRequest request) {
 		return getPortal().getGroupPermissions(request);
 	}
@@ -1112,6 +1100,18 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getSelectedUser(portletRequest, checkPermission);
+	}
+
+	public static long[] getSiteAndCompanyGroupIds(long groupId)
+		throws PortalException, SystemException {
+
+		return getPortal().getSiteAndCompanyGroupIds(groupId);
+	}
+
+	public static long[] getSiteAndCompanyGroupIds(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getSiteAndCompanyGroupIds(themeDisplay);
 	}
 
 	public static String getSiteLoginURL(ThemeDisplay themeDisplay)

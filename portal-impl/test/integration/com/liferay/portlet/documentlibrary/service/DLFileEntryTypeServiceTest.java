@@ -70,7 +70,7 @@ public class DLFileEntryTypeServiceTest {
 				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
 
 		_dlFileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
-			PortalUtil.getGroupIds(TestPropsValues.getGroupId()));
+			PortalUtil.getSiteAndCompanyGroupIds(TestPropsValues.getGroupId()));
 
 		for (DLFileEntryType dlFileEntryType : _dlFileEntryTypes) {
 			String name = dlFileEntryType.getName();
