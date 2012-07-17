@@ -104,11 +104,13 @@ public class RatingsEntryFinderImpl
 		}
 		finally {
 			if (list == null) {
-				list = new ArrayList<RatingsEntry>();
+				FinderCacheUtil.removeResult(
+					FINDER_PATH_FIND_BY_U_C_C, finderArgs);
 			}
-
-			FinderCacheUtil.putResult(
-				FINDER_PATH_FIND_BY_U_C_C, finderArgs, list);
+			else {
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FIND_BY_U_C_C, finderArgs, list);
+			}
 
 			closeSession(session);
 		}

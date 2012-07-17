@@ -99,11 +99,13 @@ public class RatingsStatsFinderImpl
 		}
 		finally {
 			if (list == null) {
-				list = new ArrayList<RatingsStats>();
+				FinderCacheUtil.removeResult(
+					FINDER_PATH_FIND_BY_C_C, finderArgs);
 			}
-
-			FinderCacheUtil.putResult(
-				FINDER_PATH_FIND_BY_C_C, finderArgs, list);
+			else {
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FIND_BY_C_C, finderArgs, list);
+			}
 
 			closeSession(session);
 		}
