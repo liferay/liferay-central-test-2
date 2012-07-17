@@ -17,10 +17,12 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.MergeLayoutPrototypesThreadLocal;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -141,9 +143,14 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 					WorkflowThreadLocal.setEnabled(workflowEnabled);
 				}
 
-				if (PropsValues.
-						USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
-					group.isUser()) {
+				if (!PropsValues.
+						USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+
+					return layouts;
+				}
+
+				if (group.isUser()) {
+					_virtualLayoutTargetGroupId.set(group.getGroupId());
 
 					if (parentLayoutId ==
 							LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
@@ -153,6 +160,16 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 					}
 					else {
 						return addChildUserGroupLayouts(group, layouts);
+					}
+				}
+				else if (group.isUserGroup()) {
+					long targetGroupId = _virtualLayoutTargetGroupId.get();
+
+					if (targetGroupId != GroupConstants.DEFAULT_LIVE_GROUP_ID) {
+						Group targetGroup = GroupLocalServiceUtil.getGroup(
+							targetGroupId);
+
+						return addChildUserGroupLayouts(targetGroup, layouts);
 					}
 				}
 
@@ -232,5 +249,11 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LayoutLocalServiceVirtualLayoutsAdvice.class);
+
+	private static ThreadLocal<Long> _virtualLayoutTargetGroupId =
+		new AutoResetThreadLocal<Long>(
+			LayoutLocalServiceVirtualLayoutsAdvice.class +
+				"._virtualLayoutTargetGroupId",
+			GroupConstants.DEFAULT_LIVE_GROUP_ID);
 
 }
