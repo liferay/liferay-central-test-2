@@ -31,9 +31,21 @@ if (wikiPageResourcePrimKey > 0) {
 }
 %>
 
-CKEDITOR.config.disableObjectResizing=true;
+CKEDITOR.config.attachmentURLPrefix = '<%= HtmlUtil.escapeJS(attachmentURLPrefix) %>';
+
+CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
+
+CKEDITOR.config.decodeLinks = true;
+
+CKEDITOR.config.disableObjectResizing = true;
+
+CKEDITOR.config.extraPlugins = 'creole,wikilink';
+
+CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
 
 CKEDITOR.config.height = 265;
+
+CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
 
 CKEDITOR.config.removePlugins = [
 	'elementspath',
@@ -75,15 +87,3 @@ CKEDITOR.config.toolbar_creole = [
 	['Find','Replace','-','SelectAll','RemoveFormat'],
 	['Source']
 ];
-
-CKEDITOR.config.attachmentURLPrefix = '<%= HtmlUtil.escapeJS(attachmentURLPrefix) %>';
-
-CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
-
-CKEDITOR.config.decodeLinks = true;
-
-CKEDITOR.config.extraPlugins = 'creole,wikilink';
-
-CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
-
-CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
