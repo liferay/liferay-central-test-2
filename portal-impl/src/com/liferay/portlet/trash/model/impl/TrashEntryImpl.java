@@ -22,8 +22,8 @@ import com.liferay.portlet.trash.model.TrashEntry;
  */
 public class TrashEntryImpl extends TrashEntryBaseImpl {
 
-	public TrashEntry getRootTrashEntry() {
-		return _rootTrashEntry;
+	public TrashEntry getRootEntry() {
+		return _rootEntry;
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class TrashEntryImpl extends TrashEntryBaseImpl {
 		return typeSettingsProperties.getProperty(key, defaultValue);
 	}
 
-	public void setRootTrashEntry(TrashEntry rootTrashEntry) {
-		_rootTrashEntry = rootTrashEntry;
+	public void setRootEntry(TrashEntry rootEntry) {
+		_rootEntry = rootEntry;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class TrashEntryImpl extends TrashEntryBaseImpl {
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
-	private TrashEntry _rootTrashEntry;
+	private TrashEntry _rootEntry;
 	private UnicodeProperties _typeSettingsProperties;
 
 }

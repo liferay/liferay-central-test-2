@@ -249,9 +249,9 @@ public class DLFileEntryAssetRenderer
 		}
 	}
 
+	@Override
 	public String renderActions(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		return "/html/portlet/document_library/file_entry_action.jsp";
 	}

@@ -425,6 +425,10 @@ public class TrashEntryWrapper implements TrashEntry, ModelWrapper<TrashEntry> {
 		_trashEntry.persist();
 	}
 
+	public com.liferay.portlet.trash.model.TrashEntry getRootEntry() {
+		return _trashEntry.getRootEntry();
+	}
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
 		return _trashEntry.getTypeSettingsProperties();
 	}
@@ -438,18 +442,14 @@ public class TrashEntryWrapper implements TrashEntry, ModelWrapper<TrashEntry> {
 		return _trashEntry.getTypeSettingsProperty(key, defaultValue);
 	}
 
+	public void setRootEntry(
+		com.liferay.portlet.trash.model.TrashEntry rootEntry) {
+		_trashEntry.setRootEntry(rootEntry);
+	}
+
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_trashEntry.setTypeSettingsProperties(typeSettingsProperties);
-	}
-
-	public com.liferay.portlet.trash.model.TrashEntry getRootTrashEntry() {
-		return _trashEntry.getRootTrashEntry();
-	}
-
-	public void setRootTrashEntry(
-		com.liferay.portlet.trash.model.TrashEntry rootTrashEntry) {
-		_trashEntry.setRootTrashEntry(rootTrashEntry);
 	}
 
 	/**

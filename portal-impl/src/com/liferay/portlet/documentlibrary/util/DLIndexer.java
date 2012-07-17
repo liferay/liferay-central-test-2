@@ -361,29 +361,12 @@ public class DLIndexer extends BaseIndexer {
 				}
 			}
 
-			if (!dlFileVersion.isInTrash() && dlFileVersion.isInTrashFolder()) {
-				document.addKeyword(
-					Field.STATUS, WorkflowConstants.STATUS_IN_TRASH);
-
-				DLFolder trashedFolder = dlFileVersion.getTrashFolder();
-
-				addTrashFields(
-					document, DLFolder.class.getName(),
-					trashedFolder.getFolderId(),
-					DLFileEntryAssetRendererFactory.TYPE);
-
-				document.addKeyword(
-					Field.ROOT_ENTRY_CLASS_NAME, DLFolder.class.getName());
-				document.addKeyword(
-					Field.ROOT_ENTRY_CLASS_PK, trashedFolder.getFolderId());
-			}
-
 			document.addText(Field.DESCRIPTION, dlFileEntry.getDescription());
 			document.addKeyword(Field.FOLDER_ID, dlFileEntry.getFolderId());
 			document.addText(
 				Field.PROPERTIES, dlFileEntry.getLuceneProperties());
-
 			document.addText(Field.TITLE, dlFileEntry.getTitle());
+
 			document.addKeyword(
 				"dataRepositoryId", dlFileEntry.getDataRepositoryId());
 			document.addKeyword("extension", dlFileEntry.getExtension());
@@ -399,6 +382,22 @@ public class DLIndexer extends BaseIndexer {
 			ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 			addFileEntryTypeAttributes(document, dlFileVersion);
+
+			if (!dlFileVersion.isInTrash() && dlFileVersion.isInTrashFolder()) {
+				DLFolder trashedFolder = dlFileVersion.getTrashFolder();
+
+				addTrashFields(
+					document, DLFolder.class.getName(),
+					trashedFolder.getFolderId(),
+					DLFileEntryAssetRendererFactory.TYPE);
+
+				document.addKeyword(
+					Field.ROOT_ENTRY_CLASS_NAME, DLFolder.class.getName());
+				document.addKeyword(
+					Field.ROOT_ENTRY_CLASS_PK, trashedFolder.getFolderId());
+				document.addKeyword(
+					Field.STATUS, WorkflowConstants.STATUS_IN_TRASH);
+			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Document " + dlFileEntry + " indexed successfully");

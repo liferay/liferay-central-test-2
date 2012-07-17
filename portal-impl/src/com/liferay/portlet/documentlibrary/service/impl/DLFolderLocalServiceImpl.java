@@ -600,6 +600,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			getFoldersAndFileEntriesAndFileShortcuts(
 				dlFolder.getGroupId(), folderId, null, false, queryDefinition);
 
+		dlAppHelperLocalService.updateStatuses(
+			user, foldersAndFileEntriesAndFileShortcuts, status);
+
 		// Trash
 
 		if (status == WorkflowConstants.STATUS_IN_TRASH) {
@@ -608,9 +611,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				dlFolder.getFolderId(), WorkflowConstants.STATUS_APPROVED, null,
 				null);
 		}
-
-		dlAppHelperLocalService.updateStatuses(
-			user, foldersAndFileEntriesAndFileShortcuts, status);
 
 		return dlFolder;
 	}

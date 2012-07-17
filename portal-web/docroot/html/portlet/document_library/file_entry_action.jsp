@@ -41,18 +41,20 @@ if (row != null) {
 			fileShortcut = DLAppLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
 		}
 	}
-	if (result instanceof TrashEntry) {
+	else if (result instanceof FileEntry) {
+		fileEntry = (FileEntry)result;
+	}
+	else if (result instanceof TrashEntry) {
 		TrashEntry trashEntry = (TrashEntry)result;
 
-		if (trashEntry.getClassName().equals(DLFileEntryConstants.getClassName())) {
+		String className = trashEntry.getClassName();
+
+		if (className.equals(DLFileEntryConstants.getClassName())) {
 			fileEntry = DLAppLocalServiceUtil.getFileEntry(trashEntry.getClassPK());
 		}
 		else {
 			fileShortcut = DLAppLocalServiceUtil.getFileShortcut(trashEntry.getClassPK());
 		}
-	}
-	else if (result instanceof FileEntry) {
-		fileEntry = (FileEntry)result;
 	}
 	else {
 		fileShortcut = (DLFileShortcut)result;

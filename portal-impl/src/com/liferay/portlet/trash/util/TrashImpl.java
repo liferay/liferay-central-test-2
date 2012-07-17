@@ -46,9 +46,7 @@ import java.util.List;
  */
 public class TrashImpl implements Trash {
 
-	public List<TrashEntry> getEntries(Hits hits)
-		throws PortalException, SystemException {
-
+	public List<TrashEntry> getEntries(Hits hits) {
 		List<TrashEntry> entries = new ArrayList<TrashEntry>();
 
 		for (Document document : hits.getDocs()) {
@@ -85,7 +83,7 @@ public class TrashImpl implements Trash {
 							rootEntryClassName, rootEntryClassPK);
 
 					if (rootTrashEntry != null) {
-						entry.setRootTrashEntry(rootTrashEntry);
+						entry.setRootEntry(rootTrashEntry);
 					}
 				}
 
@@ -132,7 +130,7 @@ public class TrashImpl implements Trash {
 			group = group.getParentGroup();
 		}
 
-		int trashEntriesMaxAgeCompany = PrefsPropsUtil.getInteger(
+		int trashEntriesMaxAge = PrefsPropsUtil.getInteger(
 			group.getCompanyId(), PropsKeys.TRASH_ENTRIES_MAX_AGE,
 			GetterUtil.getInteger(
 				PropsUtil.get(PropsKeys.TRASH_ENTRIES_MAX_AGE)));
@@ -142,7 +140,7 @@ public class TrashImpl implements Trash {
 
 		return GetterUtil.getInteger(
 			typeSettingsProperties.getProperty("trashEntriesMaxAge"),
-			trashEntriesMaxAgeCompany);
+			trashEntriesMaxAge);
 	}
 
 	public boolean isTrashEnabled(long groupId)

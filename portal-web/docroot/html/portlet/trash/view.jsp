@@ -122,14 +122,14 @@ portletURL.setParameter("tabs1", tabs1);
 			>
 				<liferay-ui:icon label="<%= true %>" message="<%= trashRenderer.getTitle(locale) %>" src="<%= trashRenderer.getIconPath(renderRequest) %>" url="<%= viewContentURLString %>" />
 
-				<c:if test="<%= entry.getRootTrashEntry() != null %>">
+				<c:if test="<%= entry.getRootEntry() != null %>">
 
 					<%
-					TrashEntry rootTrashEntry = entry.getRootTrashEntry();
+					TrashEntry rootEntry = entry.getRootEntry();
 
-					TrashHandler rootTrashHandler = TrashHandlerRegistryUtil.getTrashHandler(rootTrashEntry.getClassName());
+					TrashHandler rootTrashHandler = TrashHandlerRegistryUtil.getTrashHandler(rootEntry.getClassName());
 
-					TrashRenderer rootTrashRenderer = rootTrashHandler.getTrashRenderer(rootTrashEntry.getClassPK());
+					TrashRenderer rootTrashRenderer = rootTrashHandler.getTrashRenderer(rootEntry.getClassPK());
 
 					String viewRootContentURLString = null;
 
@@ -138,7 +138,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						viewContentURL.setParameter("struts_action", "/trash/view_content");
 						viewContentURL.setParameter("redirect", currentURL);
-						viewContentURL.setParameter("entryId", String.valueOf(rootTrashEntry.getEntryId()));
+						viewContentURL.setParameter("entryId", String.valueOf(rootEntry.getEntryId()));
 						viewContentURL.setParameter("type", rootTrashRenderer.getType());
 						viewContentURL.setParameter("showActions", Boolean.FALSE.toString());
 						viewContentURL.setParameter("showAssetMetadata", Boolean.TRUE.toString());
@@ -148,11 +148,16 @@ portletURL.setParameter("tabs1", tabs1);
 					}
 					%>
 
-					<liferay-util:buffer var="rootTrashEntryLink">
-						<liferay-ui:icon label="<%= true %>" message="<%= rootTrashRenderer.getTitle(locale) %>" src="<%= rootTrashRenderer.getIconPath(renderRequest) %>" url="<%= viewRootContentURLString %>" />
+					<liferay-util:buffer var="rootEntryIcon">
+						<liferay-ui:icon
+							label="<%= true %>"
+							message="<%= rootTrashRenderer.getTitle(locale) %>"
+							src="<%= rootTrashRenderer.getIconPath(renderRequest) %>"
+							url="<%= viewRootContentURLString %>"
+						/>
 					</liferay-util:buffer>
 
-					<span class="trash-root-entry">(<liferay-ui:message arguments="<%= rootTrashEntryLink %>" key="deleted-in-x" />)</span>
+					<span class="trash-root-entry">(<liferay-ui:message arguments="<%= rootEntryIcon %>" key="deleted-in-x" />)</span>
 				</c:if>
 			</liferay-ui:search-container-column-text>
 
@@ -183,10 +188,10 @@ portletURL.setParameter("tabs1", tabs1);
 			/>
 
 			<c:choose>
-				<c:when test="<%= entry.getRootTrashEntry() == null || Validator.isNotNull(trashRenderer.renderActions(renderRequest, renderResponse)) %>">
+				<c:when test="<%= entry.getRootEntry() == null || Validator.isNotNull(trashRenderer.renderActions(renderRequest, renderResponse)) %>">
 					<liferay-ui:search-container-column-jsp
 						align="right"
-						path='<%= entry.getRootTrashEntry() == null ? "/html/portlet/trash/entry_action.jsp" : trashRenderer.renderActions(renderRequest, renderResponse) %>'
+						path='<%= entry.getRootEntry() == null ? "/html/portlet/trash/entry_action.jsp" : trashRenderer.renderActions(renderRequest, renderResponse) %>'
 					/>
 				</c:when>
 				<c:otherwise>
