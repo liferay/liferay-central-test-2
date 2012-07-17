@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.MergeLayoutPrototypesThreadLocal;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
@@ -32,7 +33,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.VirtualLayoutThreadLocal;
 import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.lang.reflect.Method;
@@ -150,8 +150,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				}
 
 				if (group.isUser()) {
-					VirtualLayoutThreadLocal.setTargetGroupId(
-						group.getGroupId());
+					_virtualLayoutTargetGroupId.set(group.getGroupId());
 
 					if (parentLayoutId ==
 							LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
@@ -164,15 +163,13 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 					}
 				}
 				else if (group.isUserGroup()) {
-					long targetGroupId =
-						VirtualLayoutThreadLocal.getTargetGroupId();
+					long targetGroupId = _virtualLayoutTargetGroupId.get();
 
 					if (targetGroupId != GroupConstants.DEFAULT_LIVE_GROUP_ID) {
 						Group targetGroup = GroupLocalServiceUtil.getGroup(
 							targetGroupId);
 
-						return addChildUserGroupLayouts(
-							targetGroup, (List<Layout>)layouts);
+						return addChildUserGroupLayouts(targetGroup, layouts);
 					}
 				}
 
@@ -252,5 +249,11 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LayoutLocalServiceVirtualLayoutsAdvice.class);
+
+	private static ThreadLocal<Long> _virtualLayoutTargetGroupId =
+		new AutoResetThreadLocal<Long>(
+			LayoutLocalServiceVirtualLayoutsAdvice.class +
+				"._virtualLayoutTargetGroupId",
+			GroupConstants.DEFAULT_LIVE_GROUP_ID);
 
 }
