@@ -42,11 +42,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 				'<portlet:namespace />navigation': '<%= HtmlUtil.escapeJS(navigation) %>',
 				'<portlet:namespace />folderId': '<%= folderId %>',
 				'<portlet:namespace />displayStyle': displayStyle,
+				'<portlet:namespace />saveDisplayStyle': <%= Boolean.TRUE.toString() %>,
+				'<portlet:namespace />searchType': <%= DLSearchConstants.FRAGMENT %>,
 				'<portlet:namespace />viewEntries': <%= Boolean.FALSE.toString() %>,
 				'<portlet:namespace />viewEntriesPage': <%= Boolean.TRUE.toString() %>,
-				'<portlet:namespace />viewFolders': <%= Boolean.FALSE.toString() %>,
-				'<portlet:namespace />searchType': <%= DLSearchConstants.FRAGMENT %>,
-				'<portlet:namespace />saveDisplayStyle': <%= Boolean.TRUE.toString() %>
+				'<portlet:namespace />viewFolders': <%= Boolean.FALSE.toString() %>
 			};
 
 			if (<%= Validator.isNull(keywords) %>) {

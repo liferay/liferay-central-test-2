@@ -53,26 +53,26 @@ public class PortletURLUtil {
 			LiferayPortletResponse liferayPortletResponse)
 		throws PortletException {
 
-		LiferayPortletURL newURLImpl =
+		LiferayPortletURL newLiferayPortletURL =
 			liferayPortletResponse.createLiferayPortletURL(lifecycle);
 
-		newURLImpl.setPortletId(liferayPortletURL.getPortletId());
+		newLiferayPortletURL.setPortletId(liferayPortletURL.getPortletId());
 
 		WindowState windowState = liferayPortletURL.getWindowState();
 
 		if (windowState != null) {
-			newURLImpl.setWindowState(windowState);
+			newLiferayPortletURL.setWindowState(windowState);
 		}
 
 		PortletMode portletMode = liferayPortletURL.getPortletMode();
 
 		if (portletMode != null) {
-			newURLImpl.setPortletMode(portletMode);
+			newLiferayPortletURL.setPortletMode(portletMode);
 		}
 
-		newURLImpl.setParameters(liferayPortletURL.getParameterMap());
+		newLiferayPortletURL.setParameters(liferayPortletURL.getParameterMap());
 
-		return newURLImpl;
+		return newLiferayPortletURL;
 	}
 
 	public static PortletURL clone(
