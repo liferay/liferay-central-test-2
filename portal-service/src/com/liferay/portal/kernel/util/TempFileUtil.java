@@ -141,7 +141,7 @@ public class TempFileUtil {
 			return fileNames;
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return new String[0];
 		}
@@ -218,21 +218,17 @@ public class TempFileUtil {
 			}
 
 			if (pos > 0) {
-				char charChecking = pathName.charAt(pos - 1);
+				char c = pathName.charAt(pos - 1);
 
-				if ((charChecking == CharPool.SLASH) ||
-					(charChecking == CharPool.BACK_SLASH)) {
-
+				if ((c == CharPool.BACK_SLASH) || (c == CharPool.SLASH)) {
 					throw new TempFileNameException();
 				}
 			}
 
 			if ((pos + 2) < pathName.length()) {
-				char charChecking = pathName.charAt(pos + 2);
+				char c = pathName.charAt(pos + 2);
 
-				if ((charChecking == CharPool.SLASH) ||
-					(charChecking == CharPool.BACK_SLASH)) {
-
+				if ((c == CharPool.BACK_SLASH) || (c == CharPool.SLASH)) {
 					throw new TempFileNameException();
 				}
 			}
