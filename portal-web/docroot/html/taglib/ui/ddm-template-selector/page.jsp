@@ -17,27 +17,23 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String classNameId = (String)request.getAttribute("liferay-ui:ddm-template-selector:classNameId");
-String icon = (String)request.getAttribute("liferay-ui:ddm-template-selector:icon");
+long classNameId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ddm-template-selector:classNameId"));
+String icon = GetterUtil.getString((String)request.getAttribute("liferay-ui:ddm-template-selector:icon"), "configuration");
 String message = (String)request.getAttribute("liferay-ui:ddm-template-selector:message");
 String refreshURL = (String)request.getAttribute("liferay-ui:ddm-template-selector:refreshURL");
 
-if (Validator.isNull(icon)) {
-	icon = "configuration";
-}
-
 Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
 
-PortletURL portletDisplayDDMTemplatesURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true), PortletRequest.RENDER_PHASE);
+LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true), PortletRequest.RENDER_PHASE);
 
-portletDisplayDDMTemplatesURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
-portletDisplayDDMTemplatesURL.setPortletMode(PortletMode.VIEW);
-portletDisplayDDMTemplatesURL.setWindowState(LiferayWindowState.POP_UP);
+liferayPortletURL.setDoAsGroupId(scopeGroupId);
+liferayPortletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
+liferayPortletURL.setPortletMode(PortletMode.VIEW);
+liferayPortletURL.setWindowState(LiferayWindowState.POP_UP);
 
-String portletDisplayDDMTemplatesURLString = portletDisplayDDMTemplatesURL.toString();
+String liferayPortletURLString = liferayPortletURL.toString();
 
-portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTemplatesURLString, "doAsGroupId", scopeGroupId);
-portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTemplatesURLString, "classNameId", classNameId);
+liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classNameId", classNameId);
 %>
 
 <liferay-ui:icon cssClass="manage-display-templates" id="selectDDMTemplate" image="<%= icon %>" label="<%= true %>" message="<%= message %>" url="javascript:;" />
@@ -59,7 +55,7 @@ portletDisplayDDMTemplatesURLString = HttpUtil.addParameter(portletDisplayDDMTem
 						},
 						id: windowId,
 						title: '<%= UnicodeLanguageUtil.get(pageContext, "application-display-templates") %>',
-						uri: '<%= portletDisplayDDMTemplatesURLString %>'
+						uri: '<%= liferayPortletURLString %>'
 					},
 					function (ddmPortletWindow) {
 						ddmPortletWindow.once(

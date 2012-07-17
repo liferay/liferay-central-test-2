@@ -84,19 +84,19 @@ double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
 boolean showSearch = true;
 boolean showEditEntryPermissions = true;
 
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-long portletDisplayDDMTemplateGroupId = PortletDisplayTemplatesUtil.getPortletDisplayDDMTemplateGroupId(themeDisplay);
 DDMTemplate portletDisplayDDMTemplate = null;
 long portletDisplayDDMTemplateId = 0;
+long portletDisplayDDMTemplateGroupId = PortletDisplayTemplatesUtil.getDDMTemplateGroupId(themeDisplay);
 
 if (pageDisplayStyle.startsWith("ddmTemplate_")) {
-	portletDisplayDDMTemplate = PortletDisplayTemplatesUtil.getPortletDisplayDDMTemplate(portletDisplayDDMTemplateGroupId, pageDisplayStyle);
+	portletDisplayDDMTemplate = PortletDisplayTemplatesUtil.fetchDDMTemplate(portletDisplayDDMTemplateGroupId, pageDisplayStyle);
 
 	if (portletDisplayDDMTemplate != null) {
 		portletDisplayDDMTemplateId = portletDisplayDDMTemplate.getTemplateId();
 	}
 }
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/blogs/init-ext.jsp" %>

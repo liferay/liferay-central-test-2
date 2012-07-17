@@ -67,7 +67,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 			Set<Group> groups = new HashSet<Group>();
 
 			groups.add(company.getGroup());
-			groups.add(scopeGroup);
+			groups.add(themeDisplay.getScopeGroup());
 
 			for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
 				if (curLayout.hasScopeGroup()) {

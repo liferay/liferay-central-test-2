@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DDMTemplateSelectorTag extends IncludeTag {
 
-	public void setClassNameId(String classNameId) {
+	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
@@ -41,7 +41,7 @@ public class DDMTemplateSelectorTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_classNameId = null;
+		_classNameId = 0;
 		_icon = null;
 		_message = null;
 		_refreshURL = null;
@@ -55,7 +55,8 @@ public class DDMTemplateSelectorTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:ddm-template-selector:classNameId", _classNameId);
+			"liferay-ui:ddm-template-selector:classNameId",
+			String.valueOf(_classNameId));
 		request.setAttribute("liferay-ui:ddm-template-selector:icon", _icon);
 		request.setAttribute(
 			"liferay-ui:ddm-template-selector:message", _message);
@@ -66,7 +67,7 @@ public class DDMTemplateSelectorTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/ddm-template-selector/page.jsp";
 
-	private String _classNameId;
+	private long _classNameId;
 	private String _icon;
 	private String _message;
 	private String _refreshURL;

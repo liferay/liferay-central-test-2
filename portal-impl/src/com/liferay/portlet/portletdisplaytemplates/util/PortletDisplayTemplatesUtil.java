@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.portletdisplaytemplates.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.templateparser.Transformer;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -37,53 +39,55 @@ import javax.portlet.RenderResponse;
 
 /**
  * @author Juan Fernández
+ * @author Brian Wing Shun Chan
  */
 public class PortletDisplayTemplatesUtil {
 
-	public static DDMTemplate getPortletDisplayDDMTemplate(
+	public static DDMTemplate fetchDDMTemplate(
 		long groupId, String displayStyle) {
-
-		DDMTemplate portletDisplayDDMTemplate = null;
 
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
 			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 				group.getCompanyId());
 
-			if (displayStyle.startsWith("ddmTemplate_")) {
-				String portletDisplayDDMTemplateUuid = displayStyle.substring(
-					"ddmTemplate_".length());
+			if (!displayStyle.startsWith("ddmTemplate_")) {
+				return null;
+			}
 
-				if (Validator.isNotNull(portletDisplayDDMTemplateUuid)) {
-					try {
-						portletDisplayDDMTemplate =
-							DDMTemplateLocalServiceUtil.
-								getDDMTemplateByUuidAndGroupId(
-									portletDisplayDDMTemplateUuid, groupId);
-					}
-					catch (NoSuchTemplateException nste1) {
-						try {
-							portletDisplayDDMTemplate =
-								DDMTemplateLocalServiceUtil.
-									getDDMTemplateByUuidAndGroupId(
-										portletDisplayDDMTemplateUuid,
-										companyGroup.getGroupId());
-						}
-						catch (NoSuchTemplateException nste2) {}
-					}
-				}
+			String uuid = displayStyle.substring(12);
+
+			if (Validator.isNull(uuid)) {
+				return null;
+			}
+
+			try {
+				return
+					DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
+						uuid, groupId);
+			}
+			catch (NoSuchTemplateException nste) {
+			}
+
+			try {
+				return
+					DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
+						uuid, companyGroup.getGroupId());
+			}
+			catch (NoSuchTemplateException nste) {
 			}
 		}
-		catch (Exception e) {}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
 
-		return portletDisplayDDMTemplate;
+		return null;
 	}
 
-	public static long getPortletDisplayDDMTemplateGroupId(
-		ThemeDisplay themeDisplay) {
-
-		long portletDisplayDDMTemplateGroupId = themeDisplay.getScopeGroupId();
-
+	public static long getDDMTemplateGroupId(ThemeDisplay themeDisplay) {
 		try {
 			Group scopeGroup = themeDisplay.getScopeGroup();
 
@@ -91,38 +95,38 @@ public class PortletDisplayTemplatesUtil {
 				Group stagingGroup = GroupLocalServiceUtil.getStagingGroup(
 					scopeGroup.getGroupId());
 
-				boolean staged = GetterUtil.getBoolean(
-					scopeGroup.getTypeSettingsProperty(
-						StagingConstants.STAGED_PORTLET +
-							PortletKeys.PORTLET_DISPLAY_TEMPLATES));
+				if (GetterUtil.getBoolean(
+						scopeGroup.getTypeSettingsProperty(
+							StagingConstants.STAGED_PORTLET +
+								PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
 
-				if (staged) {
-					portletDisplayDDMTemplateGroupId =
-						stagingGroup.getGroupId();
+					return stagingGroup.getGroupId();
 				}
 			}
 			else if (scopeGroup.getLiveGroupId() > 0) {
 				Group liveGroup = scopeGroup.getLiveGroup();
 
-				boolean staged = GetterUtil.getBoolean(
-					liveGroup.getTypeSettingsProperty(
-						StagingConstants.STAGED_PORTLET +
-							PortletKeys.PORTLET_DISPLAY_TEMPLATES));
+				if (!GetterUtil.getBoolean(
+						liveGroup.getTypeSettingsProperty(
+							StagingConstants.STAGED_PORTLET +
+								PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
 
-				if (!staged) {
-					portletDisplayDDMTemplateGroupId = liveGroup.getGroupId();
+					return liveGroup.getGroupId();
 				}
 			}
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
-		return portletDisplayDDMTemplateGroupId;
+		return themeDisplay.getScopeGroupId();
 	}
 
 	public static String renderDDMTemplate(
 			RenderRequest renderRequest, RenderResponse renderResponse,
-			long ddmTemplateId, List entries)
+			long ddmTemplateId, List<?> entries)
 		throws Exception {
 
 		Map<String, Object> contextObjects = new HashMap<String, Object>();
@@ -134,7 +138,7 @@ public class PortletDisplayTemplatesUtil {
 
 	public static String renderDDMTemplate(
 			RenderRequest renderRequest, RenderResponse renderResponse,
-			long ddmTemplateId, List entries,
+			long ddmTemplateId, List<?> entries,
 			Map<String, Object> contextObjects)
 		throws Exception {
 
@@ -144,6 +148,8 @@ public class PortletDisplayTemplatesUtil {
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 			ddmTemplateId);
 
+		contextObjects.put(
+			PortletDisplayTemplatesConstants.DDM_TEMPLATE_ID, ddmTemplateId);
 		contextObjects.put(PortletDisplayTemplatesConstants.ENTRIES, entries);
 
 		if (entries.size() == 1) {
@@ -152,26 +158,21 @@ public class PortletDisplayTemplatesUtil {
 		}
 
 		contextObjects.put(
-			PortletDisplayTemplatesConstants.DDM_TEMPLATE_ID, ddmTemplateId);
-
-		contextObjects.put(
 			PortletDisplayTemplatesConstants.LOCALE, renderRequest.getLocale());
-
 		contextObjects.put(
 			PortletDisplayTemplatesConstants.RENDER_REQUEST, renderRequest);
-
 		contextObjects.put(
 			PortletDisplayTemplatesConstants.RENDER_RESPONSE, renderResponse);
-
 		contextObjects.put(
 			PortletDisplayTemplatesConstants.THEME_DISPLAY, themeDisplay);
-
-		_transformer = new DDLTransformer();
 
 		return _transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(),
 			ddmTemplate.getLanguage());
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletDisplayTemplatesUtil.class);
 
 	private static Transformer _transformer = new DDLTransformer();
 

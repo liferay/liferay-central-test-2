@@ -66,7 +66,7 @@ page import="com.liferay.util.RSSUtil" %><%@
 page import="com.liferay.util.xml.DocUtil" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
+	PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
@@ -178,20 +178,6 @@ boolean mergeLayoutTags = GetterUtil.getBoolean(preferences.getValue("mergeLayou
 
 String displayStyle = GetterUtil.getString(preferences.getValue("displayStyle", "abstracts"));
 
-Group scopeGroup = themeDisplay.getScopeGroup();
-
-long portletDisplayDDMTemplateGroupId = PortletDisplayTemplatesUtil.getPortletDisplayDDMTemplateGroupId(themeDisplay);
-DDMTemplate portletDisplayDDMTemplate = null;
-long portletDisplayDDMTemplateId = 0;
-
-if (displayStyle.startsWith("ddmTemplate_")) {
-	portletDisplayDDMTemplate = PortletDisplayTemplatesUtil.getPortletDisplayDDMTemplate(portletDisplayDDMTemplateGroupId, displayStyle);
-
-	if (portletDisplayDDMTemplate != null) {
-		portletDisplayDDMTemplateId = portletDisplayDDMTemplate.getTemplateId();
-	}
-}
-
 boolean showAssetTitle = GetterUtil.getBoolean(preferences.getValue("showAssetTitle", null), true);
 boolean showContextLink = GetterUtil.getBoolean(preferences.getValue("showContextLink", null), true);
 int abstractLength = GetterUtil.getInteger(preferences.getValue("abstractLength", null), 200);
@@ -255,13 +241,21 @@ boolean showPortletWithNoResults = false;
 boolean groupByClass = (assetVocabularyId == -1);
 boolean allowEmptyResults = false;
 
+DDMTemplate portletDisplayDDMTemplate = null;
+long portletDisplayDDMTemplateId = 0;
+long portletDisplayDDMTemplateGroupId = PortletDisplayTemplatesUtil.getDDMTemplateGroupId(themeDisplay);
+
+if (displayStyle.startsWith("ddmTemplate_")) {
+	portletDisplayDDMTemplate = PortletDisplayTemplatesUtil.fetchDDMTemplate(portletDisplayDDMTemplateGroupId, displayStyle);
+
+	if (portletDisplayDDMTemplate != null) {
+		portletDisplayDDMTemplateId = portletDisplayDDMTemplate.getTemplateId();
+	}
+}
+
 Map<String, PortletURL> addPortletURLs = null;
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
-Map<String, Object> contextObjects = new HashMap<String, Object>();
-
-contextObjects.put(PortletDisplayTemplatesConstants.ASSET_PUBLISHER_HELPER, AssetPublisherHelperUtil.getAssetPublisherHelper());
 %>
 
 <%@ include file="/html/portlet/asset_publisher/init-ext.jsp" %>
