@@ -2383,7 +2383,7 @@
 	<library>
 		<file-name>portal/kxml2.jar</file-name>
 		<version>2.3.0</version>
-		<project-name>XmlPull API</project-name>
+		<project-name>kXML 2</project-name>
 		<project-url>http://kxml.sourceforge.net/kxml2</project-url>
 		<licenses>
 			<license>
@@ -3410,7 +3410,7 @@
 	</library>
 	<library>
 		<file-name>portal/xstream.jar</file-name>
-		<version>1.4.2</version>
+		<version>1.4.3</version>
 		<project-name>XStream</project-name>
 		<project-url>http://xstream.codehaus.org</project-url>
 		<licenses>
