@@ -439,8 +439,8 @@ public class Validator {
 
 		// LEP-1445
 
-		for (int i = 0; i < _EMAIL_ADDRESS_SPECIAL_CHAR.length; i++) {
-			if (c == _EMAIL_ADDRESS_SPECIAL_CHAR[i]) {
+		for (char specialChar : _EMAIL_ADDRESS_SPECIAL_CHAR) {
+			if (c == specialChar) {
 				return true;
 			}
 		}
