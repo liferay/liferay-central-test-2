@@ -449,7 +449,7 @@ public class Validator {
 	}
 
 	/**
-	 * Returns <code>true</code> if the file extension is valid
+	 * Returns <code>true</code> if the file extension is valid.
 	 *
 	 * @param  fileExtension file extension
 	 * @return <code>true</code> if the extension is valid; <code>false</code>
