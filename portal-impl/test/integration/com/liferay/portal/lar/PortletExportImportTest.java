@@ -67,30 +67,33 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 	@Before
 	public void setUp() throws Exception {
+
+		// Create site template
+
 		FinderCacheUtil.clearCache();
-
-		long userId = TestPropsValues.getUserId();
-
-		//Create site template
 
 		LayoutSetPrototype layoutSetPrototype =
 			ServiceTestUtil.addLayoutSetPrototype(
 				ServiceTestUtil.randomString());
 
-		_lspGroup = layoutSetPrototype.getGroup();
+		_layoutSetPrototypeGroup = layoutSetPrototype.getGroup();
 
-		_lspLayout = ServiceTestUtil.addLayout(
-			_lspGroup.getGroupId(), ServiceTestUtil.randomString(), true);
+		_layoutSetPrototypeLayout = ServiceTestUtil.addLayout(
+			_layoutSetPrototypeGroup.getGroupId(),
+			ServiceTestUtil.randomString(), true);
 
-		updateLayoutTemplateId(_lspLayout, "1_column");
+		updateLayoutTemplateId(_layoutSetPrototypeLayout, "1_column");
 
-		_lspArticle = addArticle(
-			_lspGroup.getGroupId(), 0, "Test Article", "Test Content");
+		_layoutSetPrototypeJournalArticle = addArticle(
+			_layoutSetPrototypeGroup.getGroupId(), 0, "Test Article",
+			"Test Content");
 
-		_lspJournalContentPortletId = addJournalContentPortletToLayout(
-			userId, _lspLayout, _lspArticle, "column-1");
+		_layoutSetPrototypeJournalContentPortletId =
+			addJournalContentPortletToLayout(
+				TestPropsValues.getUserId(), _layoutSetPrototypeLayout,
+				_layoutSetPrototypeJournalArticle, "column-1");
 
-		//Create site from site template
+		// Create site from site template
 
 		_group = ServiceTestUtil.addGroup(ServiceTestUtil.randomString());
 
@@ -106,26 +109,28 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 		// Check data after site creation
 
-		String initContent = _lspArticle.getContent();
+		String content = _layoutSetPrototypeJournalArticle.getContent();
 
-		JournalArticle article =
+		JournalArticle journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				_group.getGroupId(), _lspArticle.getUrlTitle());
+				_group.getGroupId(),
+				_layoutSetPrototypeJournalArticle.getUrlTitle());
 
-		Assert.assertEquals(initContent, article.getContent());
+		Assert.assertEquals(content, journalArticle.getContent());
 
 		// Update site template data
 
-		updateArticle(_lspArticle, "New Test Content");
+		updateArticle(_layoutSetPrototypeJournalArticle, "New Test Content");
 
 		// Check data after layout reset
 
 		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			_group.getGroupId(), false, _lspLayout.getFriendlyURL());
+			_group.getGroupId(), false,
+			_layoutSetPrototypeLayout.getFriendlyURL());
 
 		SitesUtil.resetPrototype(layout);
 
-		Assert.assertEquals(initContent, article.getContent());
+		Assert.assertEquals(content, journalArticle.getContent());
 	}
 
 	@Test
@@ -133,60 +138,64 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 		// Check preferences after site creation
 
-		JournalArticle article =
+		JournalArticle journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				_group.getGroupId(), _lspArticle.getUrlTitle());
+				_group.getGroupId(),
+				_layoutSetPrototypeJournalArticle.getUrlTitle());
 
 		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			_group.getGroupId(), false, _lspLayout.getFriendlyURL());
+			_group.getGroupId(), false,
+			_layoutSetPrototypeLayout.getFriendlyURL());
 
-		javax.portlet.PortletPreferences portletPreferences =
-			getPortletPreferences(
-				layout.getCompanyId(), layout.getPlid(),
-				_lspJournalContentPortletId);
-
-		Assert.assertEquals(
-			article.getArticleId(),
-			portletPreferences.getValue("articleId", StringPool.BLANK));
+		javax.portlet.PortletPreferences jxPreferences = getPortletPreferences(
+			layout.getCompanyId(), layout.getPlid(),
+			_layoutSetPrototypeJournalContentPortletId);
 
 		Assert.assertEquals(
-			String.valueOf(article.getGroupId()),
-			portletPreferences.getValue("groupId", StringPool.BLANK));
+			journalArticle.getArticleId(),
+			jxPreferences.getValue("articleId", StringPool.BLANK));
 
 		Assert.assertEquals(
-			String.valueOf(true), portletPreferences.getValue(
+			String.valueOf(journalArticle.getGroupId()),
+			jxPreferences.getValue("groupId", StringPool.BLANK));
+
+		Assert.assertEquals(
+			String.valueOf(true), jxPreferences.getValue(
 				"showAvailableLocales", StringPool.BLANK));
 
 		// Update site template preferences
 
-		javax.portlet.PortletPreferences prefs = getPortletPreferences(
-			_lspLayout.getCompanyId(), _lspLayout.getPlid(),
-			_lspJournalContentPortletId);
+		javax.portlet.PortletPreferences layoutSetprototypeJxPreferences =
+			getPortletPreferences(
+				_layoutSetPrototypeLayout.getCompanyId(),
+				_layoutSetPrototypeLayout.getPlid(),
+				_layoutSetPrototypeJournalContentPortletId);
 
-		prefs.setValue("showAvailableLocales", String.valueOf(false));
+		layoutSetprototypeJxPreferences.setValue(
+			"showAvailableLocales", String.valueOf(false));
 
 		updatePortletPreferences(
-			_lspLayout.getPlid(), _lspJournalContentPortletId, prefs);
+			_layoutSetPrototypeLayout.getPlid(),
+			_layoutSetPrototypeJournalContentPortletId,
+			layoutSetprototypeJxPreferences);
 
 		// Check preferences after layout reset
 
 		SitesUtil.resetPrototype(layout);
 
-		portletPreferences = getPortletPreferences(
+		jxPreferences = getPortletPreferences(
 			_group.getCompanyId(), layout.getPlid(),
-			_lspJournalContentPortletId);
+			_layoutSetPrototypeJournalContentPortletId);
 
 		Assert.assertEquals(
-			article.getArticleId(),
-			portletPreferences.getValue("articleId", StringPool.BLANK));
-
+			journalArticle.getArticleId(),
+			jxPreferences.getValue("articleId", StringPool.BLANK));
 		Assert.assertEquals(
-			String.valueOf(article.getGroupId()),
-			portletPreferences.getValue("groupId", StringPool.BLANK));
-
+			String.valueOf(journalArticle.getGroupId()),
+			jxPreferences.getValue("groupId", StringPool.BLANK));
 		Assert.assertEquals(
-			String.valueOf(false), portletPreferences.getValue(
-			"showAvailableLocales", StringPool.BLANK));
+			Boolean.FALSE.toString(),
+			jxPreferences.getValue("showAvailableLocales", StringPool.BLANK));
 
 	}
 
@@ -217,7 +226,8 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 	}
 
 	protected String addJournalContentPortletToLayout(
-			long userId, Layout layout, JournalArticle article, String columnId)
+			long userId, Layout layout, JournalArticle journalArticle,
+			String columnId)
 		throws Exception {
 
 		LayoutTypePortlet layoutTypePortlet =
@@ -233,9 +243,9 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 		javax.portlet.PortletPreferences prefs = getPortletPreferences(
 			layout.getCompanyId(), layout.getPlid(), journalPortletId);
 
-		prefs.setValue("articleId", article.getArticleId());
-		prefs.setValue("groupId", String.valueOf(article.getGroupId()));
-		prefs.setValue("showAvailableLocales", String.valueOf(true));
+		prefs.setValue("articleId", journalArticle.getArticleId());
+		prefs.setValue("groupId", String.valueOf(journalArticle.getGroupId()));
+		prefs.setValue("showAvailableLocales", Boolean.TRUE.toString());
 
 		updatePortletPreferences(layout.getPlid(), journalPortletId, prefs);
 
@@ -261,16 +271,13 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 			long companyId, long plid, String portletId)
 		throws Exception {
 
-		javax.portlet.PortletPreferences portletPreferences =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
-
-		return portletPreferences;
+		return PortletPreferencesLocalServiceUtil.getPreferences(
+			companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
 	}
 
 	protected JournalArticle updateArticle(
-		JournalArticle article, String content) throws Exception {
+		JournalArticle journalArticle, String content) throws Exception {
 
 		Locale locale = LocaleUtil.getDefault();
 
@@ -278,27 +285,29 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 		String xmlContent = getArticleContent(content, localeId);
 
-		_lspArticle.setContent(xmlContent);
+		_layoutSetPrototypeJournalArticle.setContent(xmlContent);
 
-		return JournalArticleUtil.update(article, true);
+		return JournalArticleUtil.update(journalArticle, true);
 	}
 
 	protected PortletPreferences updatePortletPreferences(
-			long plid, String portletId, javax.portlet.PortletPreferences prefs)
+			long plid, String portletId,
+			javax.portlet.PortletPreferences jxPreferences)
 		throws Exception {
 
-		PortletPreferences portletPrefs =
+		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId, prefs);
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId,
+				jxPreferences);
 
-		return portletPrefs;
+		return portletPreferences;
 	}
 
 	private Group _group;
-	private JournalArticle _lspArticle;
-	private Group _lspGroup;
-	private String _lspJournalContentPortletId;
-	private Layout _lspLayout;
+	private Group _layoutSetPrototypeGroup;
+	private JournalArticle _layoutSetPrototypeJournalArticle;
+	private String _layoutSetPrototypeJournalContentPortletId;
+	private Layout _layoutSetPrototypeLayout;
 
 }

@@ -50,8 +50,6 @@ public class BaseExportImportTestCase extends PowerMockito {
 		catch (NoSuchLayoutException nsle) {
 		}
 
-		String description = "This is a test page.";
-
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		serviceContext.setAttribute("layoutPrototypeLinkEnabled", linkEnabled);
@@ -60,8 +58,9 @@ public class BaseExportImportTestCase extends PowerMockito {
 
 		return LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), groupId, false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, null, description,
-			LayoutConstants.TYPE_PORTLET, false, friendlyURL, serviceContext);
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, null,
+			"This is a test page.", LayoutConstants.TYPE_PORTLET, false,
+			friendlyURL, serviceContext);
 	}
 
 	protected void propagateChanges(Group group) throws Exception {
