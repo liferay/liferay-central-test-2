@@ -590,6 +590,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				smallImagePath);
 
 			smallFile = FileUtil.createTempFile(article.getSmallImageType());
+
 			FileUtil.write(smallFile, bytes);
 		}
 
