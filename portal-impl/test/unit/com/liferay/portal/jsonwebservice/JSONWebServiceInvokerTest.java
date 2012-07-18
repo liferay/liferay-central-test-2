@@ -268,8 +268,7 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		result = invokerResult.getResult();
 
 		Assert.assertEquals("Welcome 173 to null", result);
-		Assert.assertEquals(
-			"\"Welcome 173 to null\"", toJSON(invokerResult));
+		Assert.assertEquals("\"Welcome 173 to null\"", toJSON(invokerResult));
 	}
 
 	protected JSONWebServiceAction prepareInvokerAction(String content)
