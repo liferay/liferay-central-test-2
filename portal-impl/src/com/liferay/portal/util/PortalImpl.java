@@ -95,7 +95,6 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -4583,9 +4582,8 @@ public class PortalImpl implements Portal {
 				return true;
 			}
 
-			String resourcePrimKey =
-				String.valueOf(themeDisplay.getPlid()).concat(
-				PortletConstants.LAYOUT_SEPARATOR).concat(portletId);
+			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+				themeDisplay.getPlid(), portletId);
 
 			if (ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(
 					themeDisplay.getCompanyId(), portlet.getPortletName(),
