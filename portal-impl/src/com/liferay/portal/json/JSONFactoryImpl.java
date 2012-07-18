@@ -277,6 +277,8 @@ public class JSONFactoryImpl implements JSONFactory {
 	}
 
 	public String serializeException(Exception exception) {
+		JSONObject jsonObject = createJSONObject();
+
 		String message = null;
 
 		if (exception instanceof InvocationTargetException) {
@@ -292,22 +294,19 @@ public class JSONFactoryImpl implements JSONFactory {
 			message = exception.toString();
 		}
 
-		JSONObject jsonObject = createJSONObject();
-
 		jsonObject.put("exception", message);
 
 		return jsonObject.toString();
 	}
 
 	public String serializeThrowable(Throwable throwable) {
-
 		if (throwable instanceof Exception) {
 			return serializeException((Exception)throwable);
 		}
 
-		String message = throwable.getMessage();
-
 		JSONObject jsonObject = createJSONObject();
+
+		String message = throwable.getMessage();
 
 		if (Validator.isNull(message)) {
 			message = throwable.toString();
