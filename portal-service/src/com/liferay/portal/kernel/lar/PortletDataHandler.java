@@ -66,9 +66,8 @@ public interface PortletDataHandler {
 		throws PortletDataException;
 
 	/**
-	 * Returns an array of the portlet preferences that reference to data.
-	 * These references should only be updated if the referenced data is
-	 * imported
+	 * Returns an array of the portlet preferences that reference data. These
+	 * preferences should only be updated if the referenced data is imported.
 	 *
 	 * @return A String array
 	 */
