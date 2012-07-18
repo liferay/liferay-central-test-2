@@ -28,6 +28,8 @@ create table PortalPreferences (
 
 alter table ResourcePermission add ownerId LONG;
 
+create unique index IX_4A1F4402 on ResourcePermission (companyId, name, scope, primKey, roleId, ownerId, actionIds);
+
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
 alter table Ticket add type_ INTEGER;
