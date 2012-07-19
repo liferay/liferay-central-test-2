@@ -57,14 +57,12 @@ public class LayoutsTreeUtil {
 		throws Exception {
 
 		return getLayoutsJSON(
-			request, groupId, privateLayout, parentLayoutId, null,
-			incomplete);
+			request, groupId, privateLayout, parentLayoutId, null, incomplete);
 	}
 
 	public static String getLayoutsJSON(
 			HttpServletRequest request, long groupId, boolean privateLayout,
-			long parentLayoutId, long[] expandedLayoutIds,
-			boolean incomplete)
+			long parentLayoutId, long[] expandedLayoutIds, boolean incomplete)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -130,8 +128,7 @@ public class LayoutsTreeUtil {
 				else {
 					childrenJSON = getLayoutsJSON(
 						request, groupId, layout.getPrivateLayout(),
-						layout.getLayoutId(), expandedLayoutIds,
-						incomplete);
+						layout.getLayoutId(), expandedLayoutIds, incomplete);
 				}
 
 				jsonObject.put(
