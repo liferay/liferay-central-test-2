@@ -84,8 +84,8 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 		updateLayoutTemplateId(_layoutSetPrototypeLayout, "1_column");
 
-		_layoutSetPrototypeJournalArticle = addArticle(
-			_layoutSetPrototypeGroup.getGroupId(), 0, "Test Article",
+		_layoutSetPrototypeJournalArticle = addJournalArticle(
+			_layoutSetPrototypeGroup.getGroupId(), "Test Article",
 			"Test Content");
 
 		_layoutSetPrototypeJournalContentPortletId =
@@ -199,8 +199,8 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 
 	}
 
-	protected JournalArticle addArticle(
-			long groupId, long folderId, String name, String content)
+	protected JournalArticle addJournalArticle(
+			long groupId, String name, String content)
 		throws Exception {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
@@ -218,11 +218,10 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 		String xmlContent = getArticleContent(content, localeId);
 
 		return JournalArticleLocalServiceUtil.addArticle(
-			TestPropsValues.getUserId(), groupId, folderId, 0, 0,
-			StringPool.BLANK, true, 1, titleMap, descriptionMap, xmlContent,
-			"general", null, null, null, 1, 1, 1965, 0, 0, 0, 0, 0, 0, 0, true,
-			0, 0, 0, 0, 0, true, false, false, null, null, null, null,
-			serviceContext);
+			TestPropsValues.getUserId(), groupId, 0, 0, StringPool.BLANK, true,
+			1, titleMap, descriptionMap, xmlContent, "general", null, null,
+			null, 1, 1, 1965, 0, 0, 0, 0, 0, 0, 0, true, 0, 0, 0, 0, 0, true,
+			false, false, null, null, null, null, serviceContext);
 	}
 
 	protected String addJournalContentPortletToLayout(
