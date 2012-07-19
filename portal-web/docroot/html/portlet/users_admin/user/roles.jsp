@@ -200,7 +200,7 @@ userGroupRoles.addAll(organizationRoles);
 			'.modify-link'
 		);
 	</aui:script>
-</c:if
+</c:if>
 
 <c:if test="<%= !organizations.isEmpty() && !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-ui:icon
