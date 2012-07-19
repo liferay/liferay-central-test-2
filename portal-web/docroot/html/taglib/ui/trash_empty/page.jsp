@@ -19,18 +19,14 @@
 <%@ page import="com.liferay.portlet.trash.util.TrashUtil" %>
 
 <%
-String portletURL = (String)request.getAttribute("liferay-ui:trash-empty:portletURL");
-
-String emptyMessage = (String)request.getAttribute("liferay-ui:trash-empty:emptyMessage");
 String confirmMessage = (String)request.getAttribute("liferay-ui:trash-empty:confirmMessage");
-
+String emptyMessage = (String)request.getAttribute("liferay-ui:trash-empty:emptyMessage");
+String portletURL = (String)request.getAttribute("liferay-ui:trash-empty:portletURL");
 int totalEntries = GetterUtil.getInteger(request.getAttribute("liferay-ui:trash-empty:totalEntries"));
-
-Group group = themeDisplay.getScopeGroup();
 %>
 
 <div class="lfr-message-info taglib-trash-empty">
-	<liferay-ui:message arguments="<%= TrashUtil.getMaxAge(group) %>" key="entries-that-have-been-in-recycle-bin-for-more-than-x-days-will-be-automatically-deleted" />
+	<liferay-ui:message arguments="<%= TrashUtil.getMaxAge(themeDisplay.getScopeGroup()) %>" key="entries-that-have-been-in-recycle-bin-for-more-than-x-days-will-be-automatically-deleted" />
 
 	<c:if test="<%= totalEntries > 0 %>">
 		<a class="trash-empty-link" href="javascript:;" id="<%= namespace %>empty"><liferay-ui:message key="<%= emptyMessage %>" /></a>

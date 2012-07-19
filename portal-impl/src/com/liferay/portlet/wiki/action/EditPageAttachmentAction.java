@@ -344,9 +344,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 		writeJSON(actionRequest, actionResponse, jsonObject);
 	}
 
-	protected void emptyTrash(ActionRequest actionRequest)
-		throws Exception {
-
+	protected void emptyTrash(ActionRequest actionRequest) throws Exception {
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 

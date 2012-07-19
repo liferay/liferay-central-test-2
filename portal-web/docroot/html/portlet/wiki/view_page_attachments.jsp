@@ -17,12 +17,12 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 boolean viewTrashAttachments = ParamUtil.getBoolean(request, "viewTrashAttachments");
+
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String[] attachments = null;
 
@@ -67,16 +67,16 @@ headerNames.add("file-name");
 headerNames.add("size");
 headerNames.add(StringPool.BLANK);
 
-String emptyMessage = null;
+String emptyResultsMessage = null;
 
 if (viewTrashAttachments) {
-	emptyMessage = "this-page-does-not-have-any-file-attachments-in-the-recycle-bin";
+	emptyResultsMessage = "this-page-does-not-have-any-file-attachments-in-the-recycle-bin";
 }
 else {
-	emptyMessage = "this-page-does-not-have-any-file-attachments";
+	emptyResultsMessage = "this-page-does-not-have-any-file-attachments";
 }
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, currentURLObj, headerNames, emptyMessage);
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, currentURLObj, headerNames, emptyResultsMessage);
 
 int total = attachments.length;
 
@@ -154,10 +154,10 @@ for (int i = 0; i < results.size(); i++) {
 		<c:otherwise>
 			<portlet:renderURL var="viewTrashAttachmentsURL">
 				<portlet:param name="struts_action" value="/wiki/view_page_attachments" />
+				<portlet:param name="tabs1" value="attachments" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 				<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-				<portlet:param name="tabs1" value="attachments" />
 				<portlet:param name="viewTrashAttachments" value="<%= Boolean.TRUE.toString() %>" />
 			</portlet:renderURL>
 

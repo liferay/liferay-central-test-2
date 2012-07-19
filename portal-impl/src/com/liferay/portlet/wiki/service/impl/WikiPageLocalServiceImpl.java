@@ -600,7 +600,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		long companyId = page.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
-
 		String deletedAttachmentsDir = page.getDeletedAttachmentsDir();
 
 		DLStoreUtil.deleteDirectory(
@@ -1137,20 +1136,24 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		long companyId = page.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
-
 		String attachmentsDir = page.getAttachmentsDir();
 
 		if (!DLStoreUtil.hasDirectory(
-			companyId, repositoryId, attachmentsDir)) {
+				companyId, repositoryId, attachmentsDir)) {
 
 			DLStoreUtil.addDirectory(companyId, repositoryId, attachmentsDir);
 		}
 
-		String fileName =
-			attachmentsDir + StringPool.FORWARD_SLASH +
-				DLAppUtil.stripTrashNamespace(
-					FileUtil.getShortFileName(deletedFileName),
-					StringPool.UNDERLINE);
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(attachmentsDir);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(
+			DLAppUtil.stripTrashNamespace(
+				FileUtil.getShortFileName(deletedFileName),
+				StringPool.UNDERLINE));
+
+		String fileName = sb.toString();
 
 		try {
 			DLStoreUtil.updateFile(
@@ -1172,20 +1175,24 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		long companyId = page.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
-
 		String deletedAttachmentsDir = page.getDeletedAttachmentsDir();
 
 		if (!DLStoreUtil.hasDirectory(
-			companyId, repositoryId, deletedAttachmentsDir)) {
+				companyId, repositoryId, deletedAttachmentsDir)) {
 
 			DLStoreUtil.addDirectory(
 				companyId, repositoryId, deletedAttachmentsDir);
 		}
 
-		String deletedFileName =
-			deletedAttachmentsDir + StringPool.FORWARD_SLASH +
-				DLAppUtil.appendTrashNamespace(
-					FileUtil.getShortFileName(fileName), StringPool.UNDERLINE);
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(deletedAttachmentsDir);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(
+			DLAppUtil.stripTrashNamespace(
+				FileUtil.getShortFileName(fileName), StringPool.UNDERLINE));
+
+		String deletedFileName = sb.toString()
 
 		try {
 			DLStoreUtil.updateFile(

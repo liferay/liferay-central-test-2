@@ -17,6 +17,7 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -53,7 +54,10 @@ public class TrashEmptyTag extends IncludeTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_confirmMessage = _CONFIRM_MESSAGE;
+		_emptyMessage = _EMPTY_MESSAGE;
 		_portletURL = null;
+		_totalEntries = 0;
 	}
 
 	@Override
@@ -79,11 +83,15 @@ public class TrashEmptyTag extends IncludeTag {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
+	private static final String _CONFIRM_MESSAGE =
+		"are-you-sure-you-want-to-empty-the-recycle-bin";
+
+	private static final String _EMPTY_MESSAGE = "empty-the-recycle-bin";
+
 	private static final String _PAGE = "/html/taglib/ui/trash_empty/page.jsp";
 
-	private String _confirmMessage =
-		"are-you-sure-you-want-to-empty-the-recycle-bin";
-	private String _emptyMessage = "empty-the-recycle-bin";
+	private String _confirmMessage = _CONFIRM_MESSAGE;
+	private String _emptyMessage = _EMPTY_MESSAGE;
 	private String _portletURL;
 	private int _totalEntries;
 
