@@ -188,11 +188,6 @@ public class OrganizationLocalServiceImpl
 		userGroupRoleLocalService.addUserGroupRoles(
 			userId, group.getGroupId(), new long[] {role.getRoleId()});
 
-		// User
-
-		userLocalService.addOrganizationUsers(
-			organizationId, new long[] {userId});
-
 		// Resources
 
 		addOrganizationResources(userId, organization);
