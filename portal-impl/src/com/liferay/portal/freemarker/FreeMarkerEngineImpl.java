@@ -155,7 +155,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_configuration.setTemplateUpdateDelay(
 			PropsValues.FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL);
 
-		_encoding = _configuration.getEncoding(_locale);
+		_encoding = _configuration.getEncoding(_configuration.getLocale());
 		_locale = _configuration.getLocale();
 
 		_restrictedToolsContext = new FreeMarkerContextImpl();
