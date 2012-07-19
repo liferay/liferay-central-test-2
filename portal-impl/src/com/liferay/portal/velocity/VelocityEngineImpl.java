@@ -57,7 +57,9 @@ public class VelocityEngineImpl implements VelocityEngine {
 		StringResourceRepository stringResourceRepository =
 			StringResourceLoader.getRepository();
 
-		stringResourceRepository.removeStringResource(velocityTemplateId);
+		if (stringResourceRepository != null) {
+			stringResourceRepository.removeStringResource(velocityTemplateId);
+		}
 
 		LiferayResourceCacheUtil.remove(
 			_getResourceCacheKey(velocityTemplateId));

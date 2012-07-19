@@ -169,19 +169,13 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_locale = _configuration.getLocale();
 		_encoding = _configuration.getEncoding(_locale);
 
-		Class[] classes = TemplateCache.class.getDeclaredClasses();
+		ClassLoader classLoader = TemplateCache.class.getClassLoader();
 
-		Class templateKeyClass = null;
+		Class templateKeyClass = classLoader.loadClass(
+			TemplateCache.class.getName().concat("$TemplateKey"));
 
-		for (Class clazz : classes) {
-			if (clazz.getName().contains("TemplateKey")) {
-				templateKeyClass = clazz;
-
-				break;
-			}
-		}
-
-		_templateKeyConstractor = templateKeyClass.getDeclaredConstructors()[0];
+		_templateKeyConstractor = templateKeyClass.getDeclaredConstructor(
+			String.class, Locale.class, String.class, boolean.class);
 
 		_templateKeyConstractor.setAccessible(true);
 	}
@@ -265,17 +259,6 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		}
 	}
 
-	protected boolean stringTemplateExists(String freeMarkerTemplateId) {
-		Object templateSource = _stringTemplateLoader.findTemplateSource(
-			freeMarkerTemplateId);
-
-		if (templateSource == null) {
-			return false;
-		}
-
-		return true;
-	}
-
 	private String _getResourceCacheKey(String freeMarkerTemplateId) {
 		try {
 			Object object = _templateKeyConstractor.newInstance(
@@ -284,9 +267,10 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			return object.toString();
 		}
 		catch (Exception e) {
+			throw new RuntimeException(
+				"Failed to build FreeMarker internal resource cache key for " +
+					"template id " + freeMarkerTemplateId, e);
 		}
-
-		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FreeMarkerEngineImpl.class);
