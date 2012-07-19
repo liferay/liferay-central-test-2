@@ -155,6 +155,9 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_configuration.setTemplateUpdateDelay(
 			PropsValues.FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL);
 
+		_encoding = _configuration.getEncoding(_locale);
+		_locale = _configuration.getLocale();
+
 		_restrictedToolsContext = new FreeMarkerContextImpl();
 
 		FreeMarkerVariablesUtil.insertHelperUtilities(
@@ -166,18 +169,15 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		FreeMarkerVariablesUtil.insertHelperUtilities(
 			_standardToolsContext, null);
 
-		_locale = _configuration.getLocale();
-		_encoding = _configuration.getEncoding(_locale);
-
 		ClassLoader classLoader = TemplateCache.class.getClassLoader();
 
-		Class templateKeyClass = classLoader.loadClass(
+		Class<?> templateKeyClass = classLoader.loadClass(
 			TemplateCache.class.getName().concat("$TemplateKey"));
 
-		_templateKeyConstractor = templateKeyClass.getDeclaredConstructor(
+		_templateKeyConstructor = templateKeyClass.getDeclaredConstructor(
 			String.class, Locale.class, String.class, boolean.class);
 
-		_templateKeyConstractor.setAccessible(true);
+		_templateKeyConstructor.setAccessible(true);
 	}
 
 	public boolean mergeTemplate(
@@ -261,7 +261,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
 	private String _getResourceCacheKey(String freeMarkerTemplateId) {
 		try {
-			Object object = _templateKeyConstractor.newInstance(
+			Object object = _templateKeyConstructor.newInstance(
 				freeMarkerTemplateId, _locale, _encoding, Boolean.TRUE);
 
 			return object.toString();
@@ -284,6 +284,6 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 	private FreeMarkerContextImpl _restrictedToolsContext;
 	private FreeMarkerContextImpl _standardToolsContext;
 	private StringTemplateLoader _stringTemplateLoader;
-	private Constructor _templateKeyConstractor;
+	private Constructor<?> _templateKeyConstructor;
 
 }
