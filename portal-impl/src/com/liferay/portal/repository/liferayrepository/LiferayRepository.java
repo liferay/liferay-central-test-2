@@ -541,20 +541,6 @@ public class LiferayRepository
 			getGroupId(), toFolderId(folderId), recurse);
 	}
 
-	public Lock lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		return dlFileEntryService.lockFileEntry(fileEntryId);
-	}
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		return dlFileEntryService.lockFileEntry(
-			fileEntryId, owner, expirationTime);
-	}
-
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -626,18 +612,6 @@ public class LiferayRepository
 		throws SearchException {
 
 		return SearchEngineUtil.search(searchContext, query);
-	}
-
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		dlFileEntryService.unlockFileEntry(fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		dlFileEntryService.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void unlockFolder(long folderId, String lockUuid)

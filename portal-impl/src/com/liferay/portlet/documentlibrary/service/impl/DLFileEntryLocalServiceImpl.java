@@ -925,33 +925,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public Lock lockFileEntry(long userId, long fileEntryId)
-		throws PortalException, SystemException {
-
-		return lockFileEntry(
-			userId, fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
-	}
-
-	public Lock lockFileEntry(
-			long userId, long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		if (hasFileEntryLock(userId, fileEntryId)) {
-			return lockLocalService.getLock(
-				DLFileEntry.class.getName(), fileEntryId);
-		}
-
-		if ((expirationTime <= 0) ||
-			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
-
-			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
-		}
-
-		return lockLocalService.lock(
-			userId, DLFileEntry.class.getName(), fileEntryId, owner, false,
-			expirationTime);
-	}
-
 	public DLFileEntry moveFileEntry(
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)
@@ -1031,37 +1004,6 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersion.getCompanyId(), dlFileVersion.getFileEntryTypeId(),
 			fileEntryId, newDlFileVersion.getFileVersionId(),
 			dlFileVersion.getFileVersionId(), serviceContext);
-	}
-
-	public void unlockFileEntry(long fileEntryId) throws SystemException {
-		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(lockUuid)) {
-			try {
-				Lock lock = lockLocalService.getLock(
-					DLFileEntry.class.getName(), fileEntryId);
-
-				if (!lock.getUuid().equals(lockUuid)) {
-					throw new InvalidLockException("UUIDs do not match");
-				}
-			}
-			catch (PortalException pe) {
-				if ((pe instanceof ExpiredLockException) ||
-					(pe instanceof NoSuchLockException)) {
-				}
-				else {
-					throw pe;
-				}
-			}
-		}
-
-		if (!isFileEntryCheckedOut(fileEntryId)) {
-			lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
-		}
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1540,6 +1482,33 @@ public class DLFileEntryLocalServiceImpl
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
+	protected Lock lockFileEntry(long userId, long fileEntryId)
+		throws PortalException, SystemException {
+
+		return lockFileEntry(
+			userId, fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+	}
+
+	protected Lock lockFileEntry(
+			long userId, long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		if (hasFileEntryLock(userId, fileEntryId)) {
+			return lockLocalService.getLock(
+				DLFileEntry.class.getName(), fileEntryId);
+		}
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		return lockLocalService.lock(
+			userId, DLFileEntry.class.getName(), fileEntryId, owner, false,
+			expirationTime);
+	}
+
 	protected DLFileEntry moveFileEntryImpl(
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)
@@ -1629,6 +1598,37 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(), userId,
 			DLFileEntry.class.getName(), dlFileVersion.getFileVersionId(),
 			dlFileVersion, serviceContext, workflowContext);
+	}
+
+	protected void unlockFileEntry(long fileEntryId) throws SystemException {
+		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
+	}
+
+	protected void unlockFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(lockUuid)) {
+			try {
+				Lock lock = lockLocalService.getLock(
+					DLFileEntry.class.getName(), fileEntryId);
+
+				if (!lock.getUuid().equals(lockUuid)) {
+					throw new InvalidLockException("UUIDs do not match");
+				}
+			}
+			catch (PortalException pe) {
+				if ((pe instanceof ExpiredLockException) ||
+					(pe instanceof NoSuchLockException)) {
+				}
+				else {
+					throw pe;
+				}
+			}
+		}
+
+		if (!isFileEntryCheckedOut(fileEntryId)) {
+			lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
+		}
 	}
 
 	protected DLFileEntry updateFileEntry(
