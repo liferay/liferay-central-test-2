@@ -245,7 +245,6 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		List<String> groupDefaultActions =
 			ResourceActionsUtil.getModelResourceGroupDefaultActions(name);
-
 		List<String> guestDefaultActions =
 			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
@@ -261,14 +260,12 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				continue;
 			}
 
-			Role siteMemberRole = rolePersistence.fetchByC_N(
-				companyId, RoleConstants.SITE_MEMBER);
-
 			Role guestRole = rolePersistence.fetchByC_N(
 				companyId, RoleConstants.GUEST);
-
 			Role ownerRole = rolePersistence.fetchByC_N(
 				companyId, RoleConstants.OWNER);
+			Role siteMemberRole = rolePersistence.fetchByC_N(
+				companyId, RoleConstants.SITE_MEMBER);
 
 			for (String actionId : actionIds) {
 				List<Resource> resources = resourceFinder.findByNoActions(
@@ -293,13 +290,6 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 					permissions.add(permission);
 				}
 
-				if ((siteMemberRole != null) &&
-					groupDefaultActions.contains(actionId)) {
-
-					rolePersistence.addPermissions(
-						siteMemberRole.getRoleId(), permissions);
-				}
-
 				if ((guestRole != null) &&
 					guestDefaultActions.contains(actionId)) {
 
@@ -312,8 +302,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 						ownerRole.getRoleId(), permissions);
 				}
 
+				if ((siteMemberRole != null) &&
+					groupDefaultActions.contains(actionId)) {
+
+					rolePersistence.addPermissions(
+						siteMemberRole.getRoleId(), permissions);
+				}
+
 				for (Resource resource : resources) {
-					SearchEngineUtil.updatePermissionFields(resource.getResourceId());
+					SearchEngineUtil.updatePermissionFields(
+						resource.getResourceId());
 				}
 			}
 		}
