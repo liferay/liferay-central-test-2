@@ -212,7 +212,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		File rubyDir = new File(tmpDir + "/liferay/ruby");
 
 		if (!rubyDir.exists() ||
-			rubyDir.lastModified() < rubyGemsJarFile.lastModified()) {
+			(rubyDir.lastModified() < rubyGemsJarFile.lastModified())) {
 
 			FileUtil.deltree(rubyDir);
 
