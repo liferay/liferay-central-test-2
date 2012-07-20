@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
@@ -46,7 +45,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -100,8 +98,6 @@ import com.liferay.portlet.social.util.SocialConfigurationUtil;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
@@ -120,8 +116,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
-
-import jodd.io.ZipUtil;
 
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionServlet;
@@ -230,17 +224,6 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			initServerDetector();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize Ruby");
-		}
-
-		try {
-			initRuby();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -984,31 +967,6 @@ public class MainServlet extends ActionServlet {
 						companyId, modelName);
 				}
 			}
-		}
-	}
-
-	protected void initRuby() throws Exception {
-		File rubyGemsJarFile = new File(
-			PropsValues.LIFERAY_LIB_PORTAL_DIR, "ruby-gems.jar");
-
-		if (!rubyGemsJarFile.exists()) {
-			throw new FileNotFoundException(rubyGemsJarFile.toString());
-		}
-
-		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
-
-		File rubyDir = new File(tmpDir + "/liferay/ruby");
-
-		if (!rubyDir.exists() ||
-			rubyDir.lastModified() < rubyGemsJarFile.lastModified()) {
-
-			FileUtil.deltree(rubyDir);
-
-			rubyDir.mkdirs();
-
-			ZipUtil.unzip(rubyGemsJarFile, rubyDir);
-
-			rubyDir.setLastModified(rubyGemsJarFile.lastModified());
 		}
 	}
 
