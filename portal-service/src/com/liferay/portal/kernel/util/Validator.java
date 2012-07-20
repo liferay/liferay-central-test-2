@@ -643,17 +643,18 @@ public class Validator {
 			int x = 0;
 
 			if (((i + 1) % 2) == 0) {
-				x = Integer.parseInt(number.substring(i, i + 1)) * 2;
+				x = GetterUtil.getInteger(number.substring(i, i + 1)) * 2;
 
 				if (x >= 10) {
 					String s = String.valueOf(x);
 
-					x = Integer.parseInt(s.substring(0, 1)) +
-						Integer.parseInt(s.substring(1, 2));
+					x =
+						GetterUtil.getInteger(s.substring(0, 1)) +
+							GetterUtil.getInteger(s.substring(1, 2));
 				}
 			}
 			else {
-				x = Integer.parseInt(number.substring(i, i + 1));
+				x = GetterUtil.getInteger(number.substring(i, i + 1));
 			}
 
 			total = total + x;
