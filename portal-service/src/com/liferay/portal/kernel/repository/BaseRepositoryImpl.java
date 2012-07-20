@@ -186,6 +186,8 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	public Object[] getRepositoryEntryIds(String objectId)
 		throws SystemException {
 
+		boolean newRepositoryEntry = false;
+
 		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByR_M(
 			getRepositoryId(), objectId);
 
@@ -199,10 +201,13 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 			repositoryEntry.setMappedId(objectId);
 
 			RepositoryEntryUtil.update(repositoryEntry, false);
+
+			newRepositoryEntry = true;
 		}
 
 		return new Object[] {
-			repositoryEntry.getRepositoryEntryId(), repositoryEntry.getUuid()
+			repositoryEntry.getRepositoryEntryId(), repositoryEntry.getUuid(),
+			newRepositoryEntry
 		};
 	}
 
