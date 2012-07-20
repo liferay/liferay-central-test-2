@@ -2685,7 +2685,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 	protected Repository getRepository(
 			long folderId, ServiceContext serviceContext)
-		throws PortalException, SystemException{
+		throws PortalException, SystemException {
 
 		Repository repository = null;
 
@@ -2702,7 +2702,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	protected FileEntry moveFileEntries(
 			long fileEntryId, long newFolderId, Repository fromRepository,
 			Repository toRepository, ServiceContext serviceContext)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		FileEntry sourceFileEntry = fromRepository.getFileEntry(fileEntryId);
 
@@ -2719,7 +2719,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	protected Folder moveFolders(
 			long folderId, long parentFolderId, Repository fromRepository,
 			Repository toRepository, ServiceContext serviceContext)
-		throws PortalException, SystemException{
+		throws PortalException, SystemException {
 
 		Folder folder = fromRepository.getFolder(folderId);
 

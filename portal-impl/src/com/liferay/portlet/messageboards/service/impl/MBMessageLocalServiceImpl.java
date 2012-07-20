@@ -1854,7 +1854,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if (message.isDiscussion()) {
-			try{
+			try {
 				notifyDiscussionSubscribers(message, serviceContext);
 			}
 			catch (Exception e) {

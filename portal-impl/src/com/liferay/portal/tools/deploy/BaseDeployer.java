@@ -141,9 +141,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		}
 	}
 
-	public void addExtJar(List<String> jars, String resource)
-		throws Exception {
-
+	public void addExtJar(List<String> jars, String resource) throws Exception {
 		Set<String> servletContextNames = ExtRegistry.getServletContextNames();
 
 		for (String servletContextName : servletContextNames) {

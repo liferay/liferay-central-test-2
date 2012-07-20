@@ -2456,9 +2456,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
 	}
 
-	protected void validateFirstLayout(String type)
-		throws PortalException {
-
+	protected void validateFirstLayout(String type) throws PortalException {
 		if (Validator.isNull(type) || !PortalUtil.isLayoutFirstPageable(type)) {
 			LayoutTypeException lte = new LayoutTypeException(
 				LayoutTypeException.FIRST_LAYOUT);

@@ -529,9 +529,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return StringUtil.replace(value, "\\,", "\\\\,");
 	}
 
-	protected User getUser(long companyId, LDAPUser ldapUser)
-		throws Exception {
-
+	protected User getUser(long companyId, LDAPUser ldapUser) throws Exception {
 		User user = null;
 
 		try {

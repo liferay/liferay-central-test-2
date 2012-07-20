@@ -1981,7 +1981,7 @@ public class ServicePreAction extends Action {
 		long mainJournalArticleId = ParamUtil.getLong(request, "p_j_a_id");
 
 		if (mainJournalArticleId > 0) {
-			try{
+			try {
 				JournalArticle mainJournalArticle =
 					JournalArticleServiceUtil.getArticle(mainJournalArticleId);
 

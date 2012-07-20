@@ -269,6 +269,7 @@ public class WikiUtil {
 				return node;
 			}
 		}
+
 		return null;
 	}
 

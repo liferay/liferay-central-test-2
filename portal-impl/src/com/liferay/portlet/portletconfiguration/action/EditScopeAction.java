@@ -135,9 +135,7 @@ public class EditScopeAction extends EditConfigurationAction {
 			renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
-	protected Tuple getNewScope(ActionRequest actionRequest)
-		throws Exception {
-
+	protected Tuple getNewScope(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
