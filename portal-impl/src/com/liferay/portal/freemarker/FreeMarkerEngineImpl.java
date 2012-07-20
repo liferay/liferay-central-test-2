@@ -56,6 +56,10 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 	}
 
 	public void flushTemplate(String freeMarkerTemplateId) {
+		if (_configuration == null) {
+			return;
+		}
+
 		if (_stringTemplateLoader != null) {
 			_stringTemplateLoader.removeTemplate(freeMarkerTemplateId);
 		}
