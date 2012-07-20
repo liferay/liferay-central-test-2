@@ -809,56 +809,50 @@ public class ResourceBlockLocalServiceImpl
 
 				break;
 			}
-			else {
-				Session session = resourceBlockPersistence.openSession();
 
-				try {
-					String sql = CustomSQLUtil.get(_RETAIN_RESOURCE_BLOCK);
+			Session session = resourceBlockPersistence.openSession();
 
-					SQLQuery sqlQuery = session.createSQLQuery(sql);
+			try {
+				String sql = CustomSQLUtil.get(_RETAIN_RESOURCE_BLOCK);
 
-					QueryPos qPos = QueryPos.getInstance(sqlQuery);
+				SQLQuery sqlQuery = session.createSQLQuery(sql);
 
-					qPos.add(resourceBlock.getResourceBlockId());
+				QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-					if (sqlQuery.executeUpdate() > 0) {
+				qPos.add(resourceBlock.getResourceBlockId());
 
-						// We currently use an "update set" SQL statement to
-						// increment the reference count in a discontinuous
-						// manner. We can change it to an "update where" SQL
-						// statement to guarantee continuous counts. We are
-						// using a SQL statement that allows for a discontinuous
-						// count since it is cheaper and continuity is not
-						// required.
+				if (sqlQuery.executeUpdate() > 0) {
 
-						resourceBlock.setReferenceCount(
-							resourceBlock.getReferenceCount() + 1);
+					// We currently use an "update set" SQL statement to
+					// increment the reference count in a discontinuous manner.
+					// We can change it to an "update where" SQL statement to
+					// guarantee continuous counts. We are using a SQL statement
+					// that allows for a discontinuous count since it is cheaper
+					// and continuity is not required.
 
-						break;
-					}
+					resourceBlock.setReferenceCount(
+						resourceBlock.getReferenceCount() + 1);
+
+					break;
 				}
-				catch (ORMException orme) {
-					if (_log.isWarnEnabled()) {
-						long resourceBlockId =
-							resourceBlock.getResourceBlockId();
-
-						_log.warn(
-							"Unable to increment reference count for " +
-								"resource block " + resourceBlockId +
-									". Retrying");
-					}
+			}
+			catch (ORMException orme) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to increment reference count for resource " +
+							"block " + resourceBlock.getResourceBlockId() +
+								". Retrying");
 				}
-				finally {
+			}
+			finally {
 
-					// Prevent Hibernate from automatically flushing out the
-					// first level cache since that will lead to a regular
-					// update that will overwrite the previous update causing a
-					// lost update.
+				// Prevent Hibernate from automatically flushing out the first
+				// level cache since that will lead to a regular update that
+				// will overwrite the previous update causing a lost update.
 
-					session.evict(resourceBlock);
+				session.evict(resourceBlock);
 
-					resourceBlockPersistence.closeSession(session);
-				}
+				resourceBlockPersistence.closeSession(session);
 			}
 		}
 
