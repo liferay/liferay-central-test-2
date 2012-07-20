@@ -1449,6 +1449,8 @@ public interface PropsKeys {
 
 	public static final String MIME_TYPES_CONTENT_DISPOSITION_INLINE = "mime.types.content.disposition.inline";
 
+	public static final String MIME_TYPES_WEB_IMAGES = "mime.types.web.images";
+
 	public static final String MINIFIER_ENABLED = "minifier.enabled";
 
 	public static final String MINIFIER_FILES_LIMIT = "minifier.files.limit";

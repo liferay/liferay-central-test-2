@@ -26,6 +26,7 @@ long maxFileSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<aui:script>
 			opener.<portlet:namespace />changeLogo('<%= selUser.getPortraitURL(themeDisplay) %>');
+
 			window.close();
 		</aui:script>
 	</c:when>

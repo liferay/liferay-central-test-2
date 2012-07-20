@@ -24,6 +24,7 @@ String logoURL = themeDisplay.getPathImage() + "/company_logo?img_id=" + company
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<aui:script>
 			opener.<portlet:namespace />changeLogo('<%= logoURL %>');
+
 			window.close();
 		</aui:script>
 	</c:when>

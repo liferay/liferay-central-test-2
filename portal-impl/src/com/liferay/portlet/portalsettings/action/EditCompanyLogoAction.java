@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.TempFileUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,7 +37,6 @@ import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
@@ -49,8 +47,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 
 import java.io.InputStream;
-
-import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -166,7 +162,7 @@ public class EditCompanyLogoAction extends PortletAction {
 
 			String mimeType = MimeTypesUtil.getContentType(inputStream, null);
 
-			if (!_imageMimeTypes.contains(mimeType)) {
+			if (!MimeTypesUtil.isWebImage(mimeType)) {
 				throw new ImageTypeException();
 			}
 
@@ -311,8 +307,5 @@ public class EditCompanyLogoAction extends PortletAction {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		EditCompanyLogoAction.class);
-
-	private static Set<String> _imageMimeTypes = SetUtil.fromArray(
-		PropsValues.DL_FILE_ENTRY_PREVIEW_IMAGE_MIME_TYPES);
 
 }
