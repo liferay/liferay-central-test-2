@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -235,7 +236,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize ruby");
+			_log.debug("Initialize Ruby");
 		}
 
 		try {
@@ -987,34 +988,27 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initRuby() throws Exception {
-		String liferayHome = PropsValues.LIFERAY_HOME;
+		File rubyGemsJarFile = new File(
+			PropsValues.LIFERAY_LIB_PORTAL_DIR, "ruby-gems.jar");
 
-		File rubyFolder = new File(liferayHome, "ruby");
-
-		if (!rubyFolder.exists()) {
-			rubyFolder.mkdirs();
+		if (!rubyGemsJarFile.exists()) {
+			throw new FileNotFoundException(rubyGemsJarFile.toString());
 		}
 
-		String liferayLibPortalDir = PropsValues.LIFERAY_LIB_PORTAL_DIR;
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
-		File rubyGemsJar = new File(liferayLibPortalDir, "ruby-gems.jar");
+		File rubyDir = new File(tmpDir + "/liferay/ruby");
 
-		if (!rubyGemsJar.exists()) {
-			throw new FileNotFoundException("ruby-gems.jar not found!");
-		}
+		if (!rubyDir.exists() ||
+			rubyDir.lastModified() < rubyGemsJarFile.lastModified()) {
 
-		File rubyGemsTouchFile = new File(rubyFolder, "ruby-gems");
+			FileUtil.deltree(rubyDir);
 
-		if (!rubyGemsTouchFile.exists() ||
-			rubyGemsTouchFile.lastModified() < rubyGemsJar.lastModified()) {
+			rubyDir.mkdirs();
 
-			FileUtil.deltree(rubyFolder);
+			ZipUtil.unzip(rubyGemsJarFile, rubyDir);
 
-			rubyFolder.mkdir();
-
-			ZipUtil.unzip(rubyGemsJar, rubyFolder);
-
-			FileUtil.touch(rubyGemsTouchFile);
+			rubyDir.setLastModified(rubyGemsJarFile.lastModified());
 		}
 	}
 
