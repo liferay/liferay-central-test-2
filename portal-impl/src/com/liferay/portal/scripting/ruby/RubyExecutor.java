@@ -204,7 +204,11 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			PropsValues.LIFERAY_LIB_PORTAL_DIR, "ruby-gems.jar");
 
 		if (!rubyGemsJarFile.exists()) {
-			throw new FileNotFoundException(rubyGemsJarFile.toString());
+			if (_log.isWarnEnabled()) {
+				_log.warn(rubyGemsJarFile + " does not exist");
+			}
+
+			return;
 		}
 
 		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
