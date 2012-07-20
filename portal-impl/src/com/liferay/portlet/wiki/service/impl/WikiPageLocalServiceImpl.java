@@ -1192,7 +1192,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			DLAppUtil.stripTrashNamespace(
 				FileUtil.getShortFileName(fileName), StringPool.UNDERLINE));
 
-		String deletedFileName = sb.toString()
+		String deletedFileName = sb.toString();
 
 		try {
 			DLStoreUtil.updateFile(
