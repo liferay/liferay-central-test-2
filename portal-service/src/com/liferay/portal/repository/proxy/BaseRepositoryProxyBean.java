@@ -471,7 +471,7 @@ public class BaseRepositoryProxyBean
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
@@ -482,7 +482,7 @@ public class BaseRepositoryProxyBean
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, String, long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)

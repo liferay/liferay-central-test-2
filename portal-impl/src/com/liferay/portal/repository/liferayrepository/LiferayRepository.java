@@ -559,10 +559,10 @@ public class LiferayRepository
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(long fileEntryId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		FileEntry fileEntry = checkOutFileEntry(
 			fileEntryId, new ServiceContext());
@@ -571,7 +571,7 @@ public class LiferayRepository
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, String, long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)

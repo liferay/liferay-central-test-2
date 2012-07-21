@@ -262,18 +262,20 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
 		checkOutFileEntry(fileEntryId, new ServiceContext());
 
-		return getFileEntry(fileEntryId).getLock();
+		FileEntry fileEntry = getFileEntry(fileEntryId);
+
+		return fileEntry.getLock();
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, String, long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
@@ -284,7 +286,6 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 
 		return fileEntry.getLock();
 	}
-
 
 	public Hits search(SearchContext searchContext) throws SearchException {
 		searchContext.setSearchEngineId(SearchEngineUtil.GENERIC_ENGINE_ID);
