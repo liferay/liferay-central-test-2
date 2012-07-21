@@ -1033,8 +1033,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			int type = expandoBridge.getAttributeType(name);
 
-			Serializable value = ExpandoConverterUtil.
-				getAttributeFromStringArray(type, expandoAttribute.getValue());
+			Serializable value =
+				ExpandoConverterUtil.getAttributeFromStringArray(
+					type, expandoAttribute.getValue());
 
 			try {
 				ExpandoValueLocalServiceUtil.addValue(

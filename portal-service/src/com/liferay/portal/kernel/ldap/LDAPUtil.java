@@ -160,20 +160,20 @@ public class LDAPUtil {
 			return null;
 		}
 
-		String[] data = new String[size];
+		String[] array = new String[size];
 
 		for (int i = 0; i < size; i++) {
 			Object object = attribute.get(i);
 
 			if (object == null) {
-				data[i] = StringPool.BLANK;
+				array[i] = StringPool.BLANK;
 			}
 			else {
-				data[i] = object.toString();
+				array[i] = object.toString();
 			}
 		}
 
-		return data;
+		return array;
 	}
 
 	public static String getFullProviderURL(String baseURL, String baseDN) {
