@@ -28,11 +28,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -296,6 +298,40 @@ public class LocalizationImpl implements Localization {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
 			map.put(locale, getLocalization(xml, languageId, false));
+		}
+
+		return map;
+	}
+
+	public Map<Locale, String> getLocalizationMap(
+		String bundleName, ClassLoader classLoader, String key) {
+
+		if (key == null) {
+			return null;
+		}
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String defaultValue = _getLocalization(
+			bundleName, defaultLocale, classLoader, key, key);
+
+		map.put(defaultLocale, defaultValue);
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			if (locale.equals(defaultLocale)) {
+				continue;
+			}
+
+			String value = _getLocalization(
+				bundleName, locale, classLoader, key, null);
+
+			if (Validator.isNotNull(value) && !value.equals(defaultValue)) {
+				map.put(locale, value);
+			}
 		}
 
 		return map;
@@ -790,6 +826,35 @@ public class LocalizationImpl implements Localization {
 			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
 
 			value = valueMap.get(subkey);
+		}
+
+		return value;
+	}
+
+	private String _getLocalization(
+		String bundleName, Locale locale, ClassLoader classLoader, String key,
+		String defaultValue) {
+
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(
+			bundleName, locale, classLoader);
+
+		String value = null;
+
+		try {
+			value = resourceBundle.getString(key);
+
+			value = new String(
+				value.getBytes(StringPool.ISO_8859_1), StringPool.UTF8);
+		}
+
+		catch (Exception e) {
+		}
+
+		if (Validator.isNotNull(value)) {
+			value = LanguageResources.fixValue(value);
+		}
+		else {
+			value = LanguageUtil.get(locale, key, defaultValue);
 		}
 
 		return value;

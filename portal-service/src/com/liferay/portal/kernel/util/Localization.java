@@ -132,6 +132,9 @@ public interface Localization {
 	 */
 	public Map<Locale, String> getLocalizationMap(String xml);
 
+	public Map<Locale, String> getLocalizationMap(
+		String bundleName, ClassLoader classLoader, String key);
+
 	/**
 	 * Returns a map of locales and localized strings for the given languageIds
 	 * and values.
