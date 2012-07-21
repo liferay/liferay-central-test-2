@@ -1871,18 +1871,20 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
 		checkOutFileEntry(fileEntryId, new ServiceContext());
 
-		return getFileEntry(fileEntryId).getLock();
+		FileEntry fileEntry = getFileEntry(fileEntryId);
+
+		return fileEntry.getLock();
 	}
 
 	/**
-	 * @deprecated Use {@link #checkOutFileEntry(long, String, long, ServiceContext)}.
+	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
