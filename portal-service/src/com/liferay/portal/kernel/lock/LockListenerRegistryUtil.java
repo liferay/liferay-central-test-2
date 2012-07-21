@@ -14,29 +14,36 @@
 
 package com.liferay.portal.kernel.lock;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 /**
  * @author Alexander Chow
  */
 public class LockListenerRegistryUtil {
 
 	public static LockListener getLockListener(String className) {
-		return _lockListenerRegistry.getLockListener(className);
+		return getLockListenerRegistry().getLockListener(className);
 	}
 
 	public static LockListenerRegistry getLockListenerRegistry() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			LockListenerRegistryUtil.class);
+
 		return _lockListenerRegistry;
 	}
 
 	public static void register(LockListener lockListener) {
-		_lockListenerRegistry.register(lockListener);
+		getLockListenerRegistry().register(lockListener);
 	}
 
 	public static void unregister(LockListener lockListener) {
-		_lockListenerRegistry.unregister(lockListener);
+		getLockListenerRegistry().unregister(lockListener);
 	}
 
 	public void setLockListenerRegistry(
 		LockListenerRegistry lockListenerRegistry) {
+
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_lockListenerRegistry = lockListenerRegistry;
 	}

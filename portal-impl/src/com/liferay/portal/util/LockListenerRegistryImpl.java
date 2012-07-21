@@ -16,7 +16,9 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.lock.LockListener;
 import com.liferay.portal.kernel.lock.LockListenerRegistry;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PropsKeys;
 
 import java.util.Map;
@@ -32,26 +34,35 @@ public class LockListenerRegistryImpl implements LockListenerRegistry {
 			PropsKeys.LOCK_LISTENERS);
 
 		for (String lockListenerClassName : lockListenerClassNames) {
-			LockListener lockListener = (LockListener)InstancePool.get(
-				lockListenerClassName);
+			try {
+				LockListener lockListener =
+					(LockListener)InstanceFactory.newInstance(
+						lockListenerClassName);
 
-			register(lockListener);
+				register(lockListener);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 	}
 
 	public LockListener getLockListener(String className) {
-		return _lockListenerMap.get(className);
+		return _lockListeners.get(className);
 	}
 
 	public void register(LockListener lockListener) {
-		_lockListenerMap.put(lockListener.getClassName(), lockListener);
+		_lockListeners.put(lockListener.getClassName(), lockListener);
 	}
 
 	public void unregister(LockListener lockListener) {
-		_lockListenerMap.remove(lockListener.getClassName());
+		_lockListeners.remove(lockListener.getClassName());
 	}
 
-	private Map<String, LockListener> _lockListenerMap =
+	private static Log _log = LogFactoryUtil.getLog(
+		LockListenerRegistryImpl.class);
+
+	private Map<String, LockListener> _lockListeners =
 		new ConcurrentHashMap<String, LockListener>();
 
 }
