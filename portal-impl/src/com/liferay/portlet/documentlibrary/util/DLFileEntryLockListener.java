@@ -18,9 +18,8 @@ import com.liferay.portal.kernel.lock.BaseLockListener;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 
@@ -38,15 +37,13 @@ public class DLFileEntryLockListener extends BaseLockListener {
 		long fileEntryId = GetterUtil.getLong(key);
 
 		try {
-			if (_DL_FILE_ENTRY_LOCK_POLICY == 1) {
+			if (PropsValues.DL_FILE_ENTRY_LOCK_POLICY == 1) {
 				DLFileEntryServiceUtil.checkInFileEntry(
 					fileEntryId, true, "Automatic timeout checkin",
 					new ServiceContext());
 
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Lock expired and automatically checked in " +
-							fileEntryId);
+					_log.debug("Lock expired and checked in " + fileEntryId);
 				}
 			}
 			else {
@@ -54,7 +51,7 @@ public class DLFileEntryLockListener extends BaseLockListener {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Lock expired and automatically canceled checkout of " +
+						"Lock expired and canceled check out of " +
 							fileEntryId);
 				}
 			}
@@ -63,9 +60,6 @@ public class DLFileEntryLockListener extends BaseLockListener {
 			_log.error(e, e);
 		}
 	}
-
-	private static final int _DL_FILE_ENTRY_LOCK_POLICY = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.DL_FILE_ENTRY_LOCK_POLICY));
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DLFileEntryLockListener.class);
