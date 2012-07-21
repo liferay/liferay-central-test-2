@@ -85,6 +85,13 @@ public class LocalizationUtil {
 	}
 
 	public static Map<Locale, String> getLocalizationMap(
+		String bundleName, ClassLoader classLoader, String key) {
+
+		return getLocalization().getLocalizationMap(
+			bundleName, classLoader, key);
+	}
+
+	public static Map<Locale, String> getLocalizationMap(
 		String[] languageIds, String[] values) {
 
 		return getLocalization().getLocalizationMap(languageIds, values);
