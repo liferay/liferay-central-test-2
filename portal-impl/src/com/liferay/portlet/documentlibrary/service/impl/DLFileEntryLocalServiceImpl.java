@@ -1352,8 +1352,7 @@ public class DLFileEntryLocalServiceImpl
 		if (((status == WorkflowConstants.STATUS_APPROVED) ||
 			(status == WorkflowConstants.STATUS_IN_TRASH) ||
 			(oldStatus == WorkflowConstants.STATUS_IN_TRASH)) &&
-			((serviceContext == null) ||
-				(serviceContext.isIndexingEnabled()))) {
+			((serviceContext == null) || serviceContext.isIndexingEnabled())) {
 
 			reindex(dlFileEntry);
 		}
@@ -1657,17 +1656,10 @@ public class DLFileEntryLocalServiceImpl
 			throw new DuplicateFileException(dlFileEntry.getName());
 		}
 
-		dlFileEntry.setFolderId(newFolderId);
 		dlFileEntry.setModifiedDate(serviceContext.getModifiedDate(null));
+		dlFileEntry.setFolderId(newFolderId);
 
 		dlFileEntryPersistence.update(dlFileEntry, false);
-
-		// Folder
-
-		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(newFolderId);
-		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
-
-		dlFolderPersistence.update(dlFolder, false);
 
 		// File version
 
@@ -1679,6 +1671,14 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileVersionPersistence.update(dlFileVersion, false);
 		}
+
+		// Folder
+
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(newFolderId);
+
+		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
+
+		dlFolderPersistence.update(dlFolder, false);
 
 		// File
 

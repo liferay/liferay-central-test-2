@@ -431,6 +431,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				try {
 					serviceContext.setIndexingEnabled(false);
+
 					if (!fileVersion.getUuid().equals(
 							latestExistingFileVersion.getUuid())) {
 
@@ -484,7 +485,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				finally {
 					serviceContext.setIndexingEnabled(indexEnabled);
 				}
-
 			}
 		}
 		else {
