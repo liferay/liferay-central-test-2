@@ -5,6 +5,11 @@
 -->
 
 <!--
+This file is now deprecated. Please upgrade to liferay-plugin-package.properties
+instead.
+-->
+
+<!--
 A boolean type is the string representation of a boolean (true or false)
 variable.
 -->
