@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.servlet.MainServlet;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -1020,9 +1021,6 @@ public class PluginPackageUtil {
 
 		String servletContextName = servletContext.getServletContextName();
 
-		String xml = HttpUtil.URLtoString(
-			servletContext.getResource("/WEB-INF/liferay-plugin-package.xml"));
-
 		if (_log.isInfoEnabled()) {
 			if (servletContextName == null) {
 				_log.info("Reading plugin package for the root context");
@@ -1034,46 +1032,65 @@ public class PluginPackageUtil {
 
 		PluginPackage pluginPackage = null;
 
-		if (xml == null) {
-			String propertiesString = HttpUtil.URLtoString(
-				servletContext.getResource(
-					"/WEB-INF/liferay-plugin-package.properties"));
+		String propertiesString = HttpUtil.URLtoString(
+			servletContext.getResource(
+				"/WEB-INF/liferay-plugin-package.properties"));
 
-			if (propertiesString != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Reading plugin package from " +
-							"liferay-plugin-package.properties");
-				}
-
-				Properties properties = PropertiesUtil.load(propertiesString);
-
-				String displayName = servletContextName;
-
-				if (displayName.startsWith(StringPool.SLASH)) {
-					displayName = displayName.substring(1);
-				}
-
-				pluginPackage = _readPluginPackageProperties(
-					displayName, properties);
-			}
-
-			if (pluginPackage == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Reading plugin package from MANIFEST.MF");
-				}
-
-				pluginPackage =_readPluginPackageServletManifest(
-					servletContext);
-			}
-		}
-		else {
+		if (propertiesString != null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Reading plugin package from liferay-plugin-package.xml");
+					"Reading plugin package from " +
+						"liferay-plugin-package.properties");
 			}
 
-			pluginPackage = _readPluginPackageXml(xml);
+			Properties properties = PropertiesUtil.load(propertiesString);
+
+			String displayName = servletContextName;
+
+			if (displayName.startsWith(StringPool.SLASH)) {
+				displayName = displayName.substring(1);
+			}
+
+			pluginPackage = _readPluginPackageProperties(
+				displayName, properties);
+		}
+
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource("/WEB-INF/liferay-plugin-package.xml"));
+
+		if ((pluginPackage != null) && (xml != null)) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Ignoring liferay-plugin-package.xml from " +
+						servletContextName + " because it duplicates " +
+							"liferay-plugin-package.properties");
+			}
+		}
+
+		if (pluginPackage == null) {
+			if (xml != null) {
+				Boolean mainServlet = (Boolean)servletContext.getAttribute(
+					MainServlet.class.getName());
+
+				if (((mainServlet == null) || !mainServlet) &&
+					_log.isWarnEnabled()) {
+
+					_log.warn(
+						"Please upgrade liferay-plugin-package.xml in " +
+							servletContextName +
+								" to liferay-plugin-package.properties");
+				}
+
+				pluginPackage = _readPluginPackageXml(xml);
+			}
+		}
+
+		if (pluginPackage == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Reading plugin package from MANIFEST.MF");
+			}
+
+			pluginPackage =_readPluginPackageServletManifest(servletContext);
 		}
 
 		pluginPackage.setContext(servletContextName);
@@ -1084,7 +1101,8 @@ public class PluginPackageUtil {
 	private PluginPackage _readPluginPackageServletManifest(
 			ServletContext servletContext)
 		throws IOException {
-			Attributes attributes = null;
+
+		Attributes attributes = null;
 
 		String servletContextName = servletContext.getServletContextName();
 
