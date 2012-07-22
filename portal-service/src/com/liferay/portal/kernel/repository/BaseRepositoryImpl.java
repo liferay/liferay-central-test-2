@@ -275,7 +275,8 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	}
 
 	/**
-	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
+	 * @deprecated {@link #checkOutFileEntry(long, String, long,
+	 *             ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)

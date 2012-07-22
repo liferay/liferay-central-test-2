@@ -1970,7 +1970,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
+	 * @deprecated {@link #checkOutFileEntry(long, String, long,
+	 *             ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
@@ -2456,7 +2457,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated Use {@link #checkInFileEntry(long, boolean, String, ServiceContext)}.
+	 * @deprecated Use {@link #checkInFileEntry(long, boolean, String,
+	 *             ServiceContext)}.
 	 */
 	public void unlockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
