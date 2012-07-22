@@ -387,8 +387,6 @@ public class ResourceBlockLocalServiceImpl
 	 * zero.
 	 *
 	 * @param  resourceBlockId the primary key of the resource block
-	 * @throws PortalException if a resource block with the primary key could
-	 *         not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Transactional(

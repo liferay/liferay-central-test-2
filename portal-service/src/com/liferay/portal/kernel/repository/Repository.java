@@ -215,7 +215,8 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
+	 * @deprecated {@link #checkOutFileEntry(long, String, long,
+	 *             ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)

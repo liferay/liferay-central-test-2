@@ -554,7 +554,8 @@ public class LiferayRepository
 	}
 
 	/**
-	 * @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
+	 * @deprecated {@link #checkOutFileEntry(long, String, long,
+	 *             ServiceContext)}
 	 */
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
