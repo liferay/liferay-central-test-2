@@ -1611,9 +1611,10 @@ public class CMISRepository extends BaseCmisRepository {
 		String queryString = CMISSearchQueryBuilderUtil.buildQuery(
 			searchContext, query);
 
-		if (repositoryInfo.getProductName().contains("Nuxeo") &&
-			repositoryInfo.getProductVersion().contains("5.4")) {
+		String productName = repositoryInfo.getProductName();
+		String productVersion = repositoryInfo.getProductVersion();
 
+		if (productName.contains("Nuxeo") && productVersion.contains("5.4")) {
 			queryString +=
 				" AND (" + PropertyIds.IS_LATEST_VERSION + " = true)";
 		}
@@ -1661,7 +1662,7 @@ public class CMISRepository extends BaseCmisRepository {
 				PropertyIds.OBJECT_ID);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Search result objectId " + objectId);
+				_log.debug("Search result object ID " + objectId);
 			}
 
 			FileEntry fileEntry = null;
@@ -1671,19 +1672,21 @@ public class CMISRepository extends BaseCmisRepository {
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
-					if ((e.getCause() != null) &&
-						(e.getCause().getCause() != null) &&
-						(e.getCause().getCause() instanceof
-							CmisObjectNotFoundException)) {
+					Throwable cause = e.getCause();
 
+					if (cause != null) {
+						cause = cause.getCause();
+					}
+
+					if (cause instanceof CmisObjectNotFoundException) {
 						_log.debug(
 							"Search result ignored for CMIS document which " +
-								"has a version with an invalid objectId " +
-									e.getCause().getCause().getMessage());
+								"has a version with an invalid object ID " +
+									cause.getMessage());
 					}
 					else {
 						_log.debug(
-							"Search result ignored for invalid objectId", e);
+							"Search result ignored for invalid object ID", e);
 					}
 				}
 
@@ -2157,7 +2160,8 @@ public class CMISRepository extends BaseCmisRepository {
 				if (e instanceof CmisObjectNotFoundException) {
 					throw new NoSuchFileVersionException(
 						"No CMIS file version with CMIS file entry {objectId=" +
-							document.getId() + "}", e);
+							document.getId() + "}",
+						e);
 				}
 				else if (e instanceof SystemException) {
 					throw (SystemException)e;
