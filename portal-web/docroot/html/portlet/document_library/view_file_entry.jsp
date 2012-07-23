@@ -170,7 +170,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 								<c:when test="<%= versionSpecific %>">
 									<%= fileVersion.getTitle() %>
 
-									(<liferay-ui:message key="version" /> <%= fileVersion.getVersion() %>)
+									(<liferay-ui:message key="version" /> <%= HtmlUtil.escape(fileVersion.getVersion()) %>)
 								</c:when>
 								<c:otherwise>
 									<%= title %>
