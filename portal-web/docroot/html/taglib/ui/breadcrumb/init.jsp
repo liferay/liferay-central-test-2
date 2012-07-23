@@ -108,7 +108,9 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, boo
 
 	if (selLayout.getParentLayoutId() != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 		if (selLayout instanceof VirtualLayout) {
-			Layout sourceLayout = ((VirtualLayout)selLayout).getSourceLayout();
+			VirtualLayout virtualLayout = (VirtualLayout)selLayout;
+
+			Layout sourceLayout = virtualLayout.getSourceLayout();
 
 			parentLayout = LayoutLocalServiceUtil.getLayout(sourceLayout.getGroupId(), sourceLayout.isPrivateLayout(), sourceLayout.getParentLayoutId());
 
