@@ -111,34 +111,22 @@ public class AssetEntryFinderImpl
 
 		for (int i = 0; i < categoryIds.length; i++) {
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				List<Long> treeCategoryIdArray =
-					AssetCategoryFinderUtil.getTreeCategoryIds(categoryIds[i]);
+				List<Long> treeCategoryIds = AssetCategoryFinderUtil.findByG_L(
+					categoryIds[i]);
 
-				if (treeCategoryIdArray.size() > 1) {
-					long[] treeCategoryIds =
-						new long[treeCategoryIdArray.size()];
-
-					for (int j = 0; j < treeCategoryIdArray.size(); j++) {
-						treeCategoryIds[j] = treeCategoryIdArray.get(j);
-					}
-
-					String categoryIdsString = StringUtil.merge(
-						treeCategoryIds);
-
-					String tempSQL = StringUtil.replace(
-						sql, "[$CATEGORY_IDS$]", categoryIdsString);
-
-					sb.append(tempSQL);
+				if (treeCategoryIds.size() > 1) {
+					sb.append(
+						StringUtil.replace(
+							sql, "[$CATEGORY_ID$]",
+							StringUtil.merge(treeCategoryIds)));
 
 					continue;
 				}
 			}
 
-			String tempSQL = StringUtil.replace(
-				sql, "IN ([$CATEGORY_IDS$])",
-				"= ".concat(String.valueOf(categoryIds[i])));
-
-			sb.append(tempSQL);
+			sb.append(
+				StringUtil.replace(
+					sql, " IN ([$CATEGORY_ID$])", " = " + categoryIds[i]));
 
 			if ((i + 1) < categoryIds.length) {
 				sb.append(" AND ");
@@ -176,31 +164,28 @@ public class AssetEntryFinderImpl
 	protected void buildAnyCategoriesSQL(long[] categoryIds, StringBundler sb)
 		throws SystemException {
 
-		String sql = CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS);
-
-		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-			List<Long> categoryIdArray = new ArrayList<Long>();
-
-			for (long categoryId : categoryIds) {
-				categoryIdArray.addAll(
-					AssetCategoryFinderUtil.getTreeCategoryIds(categoryId));
-			}
-
-			categoryIds = new long[categoryIdArray.size()];
-
-			for (int i = 0; i < categoryIdArray.size(); i++) {
-				categoryIds[i] = categoryIdArray.get(i);
-			}
-		}
-
 		sb.append(" AND (");
 
-		String categoryIdsString = StringUtil.merge(categoryIds);
+		String sql = CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS);
 
-		sql = StringUtil.replace(sql, "[$CATEGORY_IDS$]", categoryIdsString);
+		String categoryIdsString = null;
 
-		sb.append(sql);
+		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
+			List<Long> categoryIdsList = new ArrayList<Long>();
 
+			for (long categoryId : categoryIds) {
+				categoryIdsList.addAll(
+					AssetCategoryFinderUtil.findByG_L(categoryId));
+			}
+
+			categoryIdsString = StringUtil.merge(categoryIdsList);
+		}
+		else {
+			categoryIdsString = StringUtil.merge(categoryIds);
+		}
+
+		sb.append(
+			StringUtil.replace(sql, "[$CATEGORY_ID$]", categoryIdsString));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 	}
 
@@ -445,34 +430,22 @@ public class AssetEntryFinderImpl
 			sb.append("NOT ");
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				List<Long> treeCategoryIdArray =
-					AssetCategoryFinderUtil.getTreeCategoryIds(categoryIds[i]);
+				List<Long> treeCategoryIds = AssetCategoryFinderUtil.findByG_L(
+					categoryIds[i]);
 
-				if (treeCategoryIdArray.size() > 1) {
-					long[] treeCategoryIds =
-						new long[treeCategoryIdArray.size()];
-
-					for (int j = 0; j < treeCategoryIdArray.size(); j++) {
-						treeCategoryIds[j] = treeCategoryIdArray.get(j);
-					}
-
-					String categoryIdsString = StringUtil.merge(
-						treeCategoryIds);
-
-					String tempSQL = StringUtil.replace(
-						sql, "[$CATEGORY_IDS$]", categoryIdsString);
-
-					sb.append(tempSQL);
+				if (treeCategoryIds.size() > 1) {
+					sb.append(
+						StringUtil.replace(
+							sql, "[$CATEGORY_ID$]",
+							StringUtil.merge(treeCategoryIds)));
 
 					continue;
 				}
 			}
 
-			String tempSQL = StringUtil.replace(
-				sql, "IN ([$CATEGORY_IDS$])",
-				"= ".concat(String.valueOf(categoryIds[i])));
-
-			sb.append(tempSQL);
+			sb.append(
+				StringUtil.replace(
+					sql, " IN ([$CATEGORY_ID$])", " = " + categoryIds[i]));
 
 			if ((i + 1) < categoryIds.length) {
 				sb.append(" OR ");
@@ -490,33 +463,28 @@ public class AssetEntryFinderImpl
 			return;
 		}
 
-		String sql = CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS);
-
-		long[] categoryIds = notCategoryIds;
-
-		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-			List<Long> categoryIdArray = new ArrayList<Long>();
-
-			for (long categoryId : notCategoryIds) {
-				categoryIdArray.addAll(
-					AssetCategoryFinderUtil.getTreeCategoryIds(categoryId));
-			}
-
-			categoryIds = new long[categoryIdArray.size()];
-
-			for (int i = 0; i < categoryIdArray.size(); i++) {
-				categoryIds[i] = categoryIdArray.get(i);
-			}
-		}
-
 		sb.append(" AND (NOT ");
 
-		String categoryIdsString = StringUtil.merge(categoryIds);
+		String sql = CustomSQLUtil.get(FIND_BY_AND_CATEGORY_IDS);
 
-		sql = StringUtil.replace(sql, "[$CATEGORY_IDS$]", categoryIdsString);
+		String notCategoryIdsString = null;
 
-		sb.append(sql);
+		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
+			List<Long> notCategoryIdsList = new ArrayList<Long>();
 
+			for (long notCategoryId : notCategoryIds) {
+				notCategoryIdsList.addAll(
+					AssetCategoryFinderUtil.findByG_L(notCategoryId));
+			}
+
+			notCategoryIdsString = StringUtil.merge(notCategoryIdsList);
+		}
+		else {
+			notCategoryIdsString = StringUtil.merge(notCategoryIds);
+		}
+
+		sb.append(
+			StringUtil.replace(sql, "[$CATEGORY_ID$]", notCategoryIdsString));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 	}
 

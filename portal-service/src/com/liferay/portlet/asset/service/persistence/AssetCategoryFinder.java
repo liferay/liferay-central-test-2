@@ -43,6 +43,10 @@ public interface AssetCategoryFinder {
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<java.lang.Long> findByG_L(
+		java.lang.Long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.asset.model.AssetCategory findByG_N(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -65,9 +69,5 @@ public interface AssetCategoryFinder {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_N_P(
 		long groupId, java.lang.String name,
 		java.lang.String[] categoryProperties, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<java.lang.Long> getTreeCategoryIds(
-		java.lang.Long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

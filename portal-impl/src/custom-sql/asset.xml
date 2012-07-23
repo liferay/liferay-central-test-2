@@ -59,6 +59,17 @@
 					(AssetEntries_AssetCategories.entryId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_L">
+		<![CDATA[
+			SELECT
+				categoryId
+			FROM
+				AssetCategory
+			WHERE
+				(groupId = ?) AND
+				(leftCategoryId BETWEEN ? AND ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N">
 		<![CDATA[
 			SELECT
@@ -111,17 +122,6 @@
 				AssetCategory.name ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.getTreeCategoryIds">
-		<![CDATA[
-			SELECT
-				categoryId
-			FROM
-				AssetCategory
-			WHERE
-				(groupId = ?) AND
-				(leftcategoryId BETWEEN ? AND ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryPropertyFinder.countByG_K">
 		<![CDATA[
 			SELECT
@@ -162,7 +162,7 @@
 						AssetEntries_AssetCategories
 					WHERE
 						(AssetEntries_AssetCategories.entryId = AssetEntry.entryId) AND
-						(AssetEntries_AssetCategories.categoryId IN ([$CATEGORY_IDS$]))
+						(AssetEntries_AssetCategories.categoryId IN ([$CATEGORY_ID$]))
 				)
 		]]>
 	</sql>
@@ -329,7 +329,7 @@
 				(SocialActivityCounter.startPeriod + ? <= ?)
 			GROUP BY
 				AssetTag.tagId, AssetTag.name
-   		]]>
+		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagPropertyFinder.countByG_K">
 		<![CDATA[

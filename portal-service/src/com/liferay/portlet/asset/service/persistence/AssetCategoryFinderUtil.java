@@ -60,6 +60,12 @@ public class AssetCategoryFinderUtil {
 		return getFinder().findByEntryId(entryId);
 	}
 
+	public static java.util.List<java.lang.Long> findByG_L(
+		java.lang.Long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByG_L(parentCategoryId);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetCategory findByG_N(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -94,12 +100,6 @@ public class AssetCategoryFinderUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByG_N_P(groupId, name, categoryProperties, start, end);
-	}
-
-	public static java.util.List<java.lang.Long> getTreeCategoryIds(
-		java.lang.Long parentCategoryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().getTreeCategoryIds(parentCategoryId);
 	}
 
 	public static AssetCategoryFinder getFinder() {
