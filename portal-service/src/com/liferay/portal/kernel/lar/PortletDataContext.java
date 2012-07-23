@@ -75,11 +75,11 @@ public interface PortletDataContext extends Serializable {
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
 
+	public void addCompanyReference(Class<?> clazz, String key);
+
 	public void addExpando(
 			Element element, String path, ClassedModel classedModel)
 		throws PortalException, SystemException;
-
-	public void addGlobalReference(Class<?> clazz, String id);
 
 	public void addLocks(Class<?> clazz, String key)
 		throws PortalException, SystemException;
@@ -245,11 +245,11 @@ public interface PortletDataContext extends Serializable {
 			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
+	public boolean isCompanyReference(Class<?> clazz, String key);
+
 	public boolean isDataStrategyMirror();
 
 	public boolean isDataStrategyMirrorWithOverwriting();
-
-	public boolean isGlobalReference(Class<?> clazz, String uuid);
 
 	public boolean isPathNotProcessed(String path);
 
