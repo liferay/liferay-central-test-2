@@ -50,7 +50,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			serviceContext, "ddmResourceActionId");
 
 		if (Validator.isNull(ddmResourceActionId)) {
-			if (ddmResource.equals(DDL_CLASS_NAME)) {
+			if (ddmResource.equals(_DDL_CLASS_NAME)) {
 				ddmResourceActionId = ActionKeys.ADD_TEMPLATE;
 			}
 			else {
@@ -235,7 +235,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			serviceContext);
 	}
 
-	private final String DDL_CLASS_NAME =
+	private static final String _DDL_CLASS_NAME =
 		"com.liferay.portlet.dynamicdatalists";
 
 }
