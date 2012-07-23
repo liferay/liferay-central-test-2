@@ -81,8 +81,6 @@ public class JSONWebServiceServlet extends JSONServlet {
 			return;
 		}
 
-
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Servlet context " + request.getContextPath());
 		}
