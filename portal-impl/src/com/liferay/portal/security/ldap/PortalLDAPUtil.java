@@ -163,9 +163,8 @@ public class PortalLDAPUtil {
 
 				return binding;
 			}
-			else {
-				return null;
-			}
+
+			return null;
 		}
 		catch (Exception e) {
 			throw e;
@@ -348,8 +347,6 @@ public class PortalLDAPUtil {
 				break;
 			}
 
-			Attribute curAttribute = null;
-
 			NamingEnumeration<? extends Attribute> enu = null;
 
 			try {
@@ -359,7 +356,7 @@ public class PortalLDAPUtil {
 					break;
 				}
 
-				curAttribute = enu.nextElement();
+				Attribute curAttribute = enu.nextElement();
 
 				for (int i = 0; i < curAttribute.size(); i++) {
 					attribute.add(curAttribute.get(i));
@@ -495,9 +492,8 @@ public class PortalLDAPUtil {
 
 				return binding;
 			}
-			else {
-				return null;
-			}
+
+			return null;
 		}
 		catch (Exception e) {
 			throw e;
