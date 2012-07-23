@@ -46,7 +46,7 @@ if (Validator.isNull(script)) {
 	if (classNameId > 0) {
 		PortletDisplayTemplateHandler portletDislayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(classNameId);
 
-		if (Validator.isNotNull(portletDislayTemplateHandler)) {
+		if (portletDislayTemplateHandler != null) {
 			script = ContentUtil.get(portletDislayTemplateHandler.getDefaultTemplateLocation());
 		}
 	}
