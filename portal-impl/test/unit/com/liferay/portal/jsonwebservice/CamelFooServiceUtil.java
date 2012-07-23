@@ -18,5 +18,7 @@ package com.liferay.portal.jsonwebservice;
  * @author Igor Spasic
  */
 public class CamelFooServiceUtil extends CamelFooService {
-	// simple trick (for test purposes) to skip writing util methods
+
+	// Simple trick (for test purposes) to skip writing util methods
+
 }

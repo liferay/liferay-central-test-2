@@ -14,22 +14,27 @@
 
 package com.liferay.portal.jsonwebservice;
 
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.util.PortalImpl;
 import com.liferay.portal.util.PortalUtil;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -79,12 +84,11 @@ public class JSONWebServiceServiceActionTest
 
 		MockHttpServletRequest mockHttpServletRequest =
 			createInvokerHttpServletRequest(json);
-
 		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
-		json = _jsonWebServiceServiceAction.getJSON(new ActionMapping(),
-			new DynaActionForm(), mockHttpServletRequest,
+		json = _jsonWebServiceServiceAction.getJSON(
+			new ActionMapping(), new DynaActionForm(), mockHttpServletRequest,
 			mockHttpServletResponse);
 
 		assertEquals("{}", json);
@@ -105,7 +109,6 @@ public class JSONWebServiceServiceActionTest
 
 		MockHttpServletRequest mockHttpServletRequest =
 			createInvokerHttpServletRequest(json);
-
 		MockHttpServletResponse mockHttpServletResponse =
 			new MockHttpServletResponse();
 
@@ -123,10 +126,8 @@ public class JSONWebServiceServiceActionTest
 			"/invoke");
 
 		mockHttpServletRequest.setContent(content.getBytes());
-
+		mockHttpServletRequest.setMethod(HttpMethods.POST);
 		mockHttpServletRequest.setRemoteUser("root");
-
-		mockHttpServletRequest.setMethod("POST");
 
 		return mockHttpServletRequest;
 	}
