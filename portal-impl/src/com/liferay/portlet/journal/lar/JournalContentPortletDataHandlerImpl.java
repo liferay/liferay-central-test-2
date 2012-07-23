@@ -315,8 +315,8 @@ public class JournalContentPortletDataHandlerImpl
 			String importedArticleGroupId = String.valueOf(
 				portletDataContext.getScopeGroupId());
 
-			if (portletDataContext.isGlobalReference(
-				JournalArticle.class, articleId)) {
+			if (portletDataContext.isCompanyReference(
+					JournalArticle.class, articleId)) {
 
 				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 					portletDataContext.getCompanyId());

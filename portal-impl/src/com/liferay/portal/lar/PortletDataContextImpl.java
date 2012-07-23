@@ -370,6 +370,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
 	}
 
+	public void addCompanyReference(Class<?> clazz, String key) {
+		List<String> keys = _companyReferences.get(clazz.getName());
+
+		if (keys == null) {
+			keys = new ArrayList<String>();
+
+			_companyReferences.put(clazz.getName(), keys);
+		}
+
+		keys.add(key);
+	}
+
 	public void addExpando(
 			Element element, String path, ClassedModel classedModel)
 		throws PortalException, SystemException {
@@ -403,18 +415,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			addZipEntry(expandoPath, expandoBridgeAttributes);
 		}
-	}
-
-	public void addGlobalReference(Class<?> clazz, String id) {
-		List<String> values = _globalReferencesMap.get(clazz.getName());
-
-		if (values == null) {
-			values = new ArrayList<String>();
-
-			_globalReferencesMap.put(clazz.getName(), values);
-		}
-
-		values.add(id);
 	}
 
 	public void addLocks(Class<?> clazz, String key)
@@ -1209,6 +1209,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public boolean isCompanyReference(Class<?> clazz, String key) {
+		List<String> keys = _companyReferences.get(clazz.getName());
+
+		if ((keys != null) && keys.contains(key)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isDataStrategyMirror() {
 		if (_dataStrategy.equals(PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 			_dataStrategy.equals(
@@ -1230,16 +1240,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		else {
 			return false;
 		}
-	}
-
-	public boolean isGlobalReference(Class<?> clazz, String id) {
-		List<String> values = _globalReferencesMap.get(clazz.getName());
-
-		if ((values != null) && (values.contains(id))) {
-			return true;
-		}
-
-		return false;
 	}
 
 	public boolean isPathNotProcessed(String path) {
@@ -1579,12 +1579,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
 	private long _companyId;
+	private Map<String, List<String>> _companyReferences =
+		new HashMap<String, List<String>>();
 	private String _dataStrategy;
 	private Date _endDate;
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
 		new HashMap<String, List<ExpandoColumn>>();
-	private Map<String, List<String>> _globalReferencesMap =
-		new HashMap<String, List<String>>();
 	private long _groupId;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
