@@ -1555,11 +1555,14 @@ public class DLFileEntryLocalServiceImpl
 
 		// Folder
 
-		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(newFolderId);
+		if (newFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(
+				newFolderId);
 
-		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
+			dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
 
-		dlFolderPersistence.update(dlFolder, false);
+			dlFolderPersistence.update(dlFolder, false);
+		}
 
 		// File
 
