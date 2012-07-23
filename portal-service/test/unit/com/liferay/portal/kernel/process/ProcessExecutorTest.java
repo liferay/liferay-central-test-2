@@ -1147,8 +1147,11 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
-			return getClass().getSimpleName();
+			Class<?> clazz = getClass();
+
+			return clazz.getSimpleName();
 		}
 
 		private int _serverPort;
@@ -1356,9 +1359,10 @@ public class ProcessExecutorTest extends BaseTestCase {
 		public AttachParentProcessCallable(String className, int serverPort)
 			throws Exception {
 
-			_processCallableClass = (Class<ProcessCallable<?>>)Class.forName(
-				className);;
 			_serverPort = serverPort;
+
+			_processCallableClass = (Class<ProcessCallable<?>>)Class.forName(
+				className);
 		}
 
 		public Serializable call() throws ProcessException {
@@ -1397,10 +1401,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(7);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("className=");
 			sb.append(_processCallableClass.getSimpleName());
@@ -1455,9 +1463,13 @@ public class ProcessExecutorTest extends BaseTestCase {
 				DummyExceptionProcessCallable.class.getName());
 		}
 
+		@Override
 		public String toString() {
-			return getClass().getSimpleName();
+			Class<?> clazz = getClass();
+
+			return clazz.getSimpleName();
 		}
+
 	}
 
 	private static class DummyJob implements Callable<Void> {
@@ -1489,8 +1501,11 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return DummyReturnProcessCallable.class.getName();
 		}
 
+		@Override
 		public String toString() {
-			return getClass().getSimpleName();
+			Class<?> clazz = getClass();
+
+			return clazz.getSimpleName();
 		}
 
 	}
@@ -1508,10 +1523,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("exitCode=");
 			sb.append(_exitCode);
@@ -1560,10 +1579,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(7);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("leadingLog=");
 			sb.append(_leadingLog);
@@ -1611,10 +1634,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("logMessage=");
 			sb.append(_logMessage);
@@ -1678,10 +1705,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return System.getProperty(_propertyKey);
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("propertyKey=");
 			sb.append(_propertyKey);
@@ -1720,10 +1751,14 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return null;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(getClass().getSimpleName());
+			Class<?> clazz = getClass();
+
+			sb.append(clazz.getSimpleName());
+
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append("returnValue=");
 			sb.append(_returnValue);
@@ -1923,8 +1958,11 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return UnserializableProcessCallable.class.getName();
 		}
 
+		@Override
 		public String toString() {
-			return getClass().getSimpleName();
+			Class<?> clazz = getClass();
+
+			return clazz.getSimpleName();
 		}
 
 		@SuppressWarnings("unused")
