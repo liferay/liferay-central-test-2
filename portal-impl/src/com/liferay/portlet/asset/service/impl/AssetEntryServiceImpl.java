@@ -205,15 +205,17 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	}
 
 	protected Object[] filterEntryQuery(
-			AssetEntryQuery entryQuery, boolean returnEntryCountOnly)
+			AssetEntryQuery entryQuery, boolean returnEntriesCountOnly)
 		throws PortalException, SystemException {
 
 		ThreadLocalCache<Object[]> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
 
-		String key = entryQuery.toString().concat(StringPool.POUND).concat(
-			Boolean.toString(returnEntryCountOnly));
+		String key = entryQuery.toString();
+
+		key = key.concat(StringPool.POUND).concat(
+			Boolean.toString(returnEntriesCountOnly));
 
 		Object[] results = threadLocalCache.get(key);
 
@@ -221,7 +223,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			return results;
 		}
 
-		if (returnEntryCountOnly && !entryQuery.isEnablePermissions()) {
+		if (returnEntriesCountOnly && !entryQuery.isEnablePermissions()) {
 			int entriesCount = assetEntryLocalService.getEntriesCount(
 				entryQuery);
 
