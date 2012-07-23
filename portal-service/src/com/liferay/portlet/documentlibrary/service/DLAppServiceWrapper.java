@@ -1631,7 +1631,8 @@ public class DLAppServiceWrapper implements DLAppService,
 	}
 
 	/**
-	* @deprecated {@link #checkOutFileEntry(long, String, long, ServiceContext)}
+	* @deprecated {@link #checkOutFileEntry(long, String, long,
+	ServiceContext)}
 	*/
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
 		java.lang.String owner, long expirationTime)
@@ -1787,7 +1788,8 @@ public class DLAppServiceWrapper implements DLAppService,
 	}
 
 	/**
-	* @deprecated Use {@link #checkInFileEntry(long, boolean, String, ServiceContext)}.
+	* @deprecated Use {@link #checkInFileEntry(long, boolean, String,
+	ServiceContext)}.
 	*/
 	public void unlockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
