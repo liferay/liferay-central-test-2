@@ -236,28 +236,30 @@ public class HtmlImpl implements Html {
 		return escape(url, ESCAPE_MODE_URL);
 	}
 
-	public String escapeXPath(String xpath) {
-		if(Validator.isNull(xpath)){
-			return xpath;
+	public String escapeXPath(String xPath) {
+		if (Validator.isNull(xPath)) {
+			return xPath;
 		}
 
-		StringBuilder sb = new StringBuilder(xpath.length());
+		StringBuilder sb = new StringBuilder(xPath.length());
 
-		for (int i = 0; i < xpath.length(); i++) {
-			char c = xpath.charAt(i);
+		for (int i = 0; i < xPath.length(); i++) {
+			char c = xPath.charAt(i);
 
-			boolean isVulnerable = false;
+			boolean hasToken = false;
 
 			for (int j = 0; j < _XPATH_TOKENS.length; j++) {
-				if (c == _XPATH_TOKENS[j]){
-					isVulnerable = true;
+				if (c == _XPATH_TOKENS[j]) {
+					hasToken = true;
+
 					break;
 				}
 			}
 
-			if(isVulnerable){
+			if (hasToken) {
 				sb.append(StringPool.UNDERLINE);
-			} else {
+			}
+			else {
 				sb.append(c);
 			}
 		}
@@ -265,36 +267,23 @@ public class HtmlImpl implements Html {
 		return sb.toString();
 	}
 
-	public String escapeXPathAttribute(String xpathAttribute) {
-		boolean hasQuote = xpathAttribute.contains(StringPool.QUOTE);
-		boolean hasApostrophe = xpathAttribute.contains(StringPool.APOSTROPHE);
+	public String escapeXPathAttribute(String xPathAttribute) {
+		boolean hasApostrophe = xPathAttribute.contains(StringPool.APOSTROPHE);
+		boolean hasQuote = xPathAttribute.contains(StringPool.QUOTE);
 
-		StringBundler result = new StringBundler(3);
+		if (hasQuote && hasApostrophe) {
+			String[] parts = xPathAttribute.split(StringPool.APOSTROPHE);
 
-		if(hasQuote && hasApostrophe) {
-			String[] parts = xpathAttribute.split(StringPool.APOSTROPHE);
-			String delimiter = "', \"'\", '";
-
-			result.append("concat('");
-			result.append(StringUtil.merge(parts, delimiter));
-			result.append("')");
-
-			return result.toString();
+			return "concat('".concat(
+				StringUtil.merge(parts, "', \"'\", '")).concat("')");
 		}
 
-		if(hasQuote){
-			result.append(StringPool.APOSTROPHE);
-			result.append(xpathAttribute);
-			result.append(StringPool.APOSTROPHE);
-
-			return result.toString();
+		if (hasQuote) {
+			return StringPool.APOSTROPHE.concat(xPathAttribute).concat(
+				StringPool.APOSTROPHE);
 		}
 
-		result.append(StringPool.QUOTE);
-		result.append(xpathAttribute);
-		result.append(StringPool.QUOTE);
-
-		return result.toString();
+		return StringPool.QUOTE.concat(xPathAttribute).concat(StringPool.QUOTE);
 	}
 
 	public String extractText(String html) {
@@ -558,9 +547,10 @@ public class HtmlImpl implements Html {
 
 	private static final char[] _TAG_SCRIPT = {'s', 'c', 'r', 'i', 'p', 't'};
 
-	// see http://www.w3.org/TR/xpath20/#lexical-structure
+	// See http://www.w3.org/TR/xpath20/#lexical-structure
 
-	private static final char[] _XPATH_TOKENS = { 
+	private static final char[] _XPATH_TOKENS = {
 		'(', ')', '[', ']', '.', '@', ',', ':', '/', '|', '+', '-', '=', '!',
 		'<', '>', '*', '$', '"', '"', ' ', 9, 10, 13, 133, 8232};
+
 }
