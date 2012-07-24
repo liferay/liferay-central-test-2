@@ -286,23 +286,24 @@ if (workflowEnabled) {
 	</aui:fieldset>
 </aui:form>
 
-<c:if test="<%= workflowEnabled %>"> 
-	<liferay-util:buffer var="workflowDefinitionsBuffer">
-		<aui:select label="" name="LIFERAY_WORKFLOW_DEFINITION_FILE_ENTRY_TYPE"><aui:option label="no-workflow" value="" />
+<liferay-util:buffer var="workflowDefinitionsBuffer">
+	<c:if test="<%= workflowEnabled %>"> 
+		<aui:select label="" name="LIFERAY_WORKFLOW_DEFINITION_FILE_ENTRY_TYPE">
+			<aui:option label="no-workflow" value="" />
 
-		<%
-		for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
-		%>
+			<%
+			for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
+			%>
 
-			<aui:option label='<%= workflowDefinition.getName() + " (" + LanguageUtil.format(locale, "version-x", workflowDefinition.getVersion()) + ")" %>' selected='<% selected %>' value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
+				<aui:option label='<%= workflowDefinition.getName() + " (" + LanguageUtil.format(locale, "version-x", workflowDefinition.getVersion()) + ")" %>' selected='<% selected %>' value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
 
-		<%
-		}
-		%>
+			<%
+			}
+			%>
 
 		</aui:select>
-	</liferay-util:buffer>
-</c:if>
+	</c:if>
+</liferay-util:buffer>
 
 <aui:script>
 	var documentTypesChanged = false;
