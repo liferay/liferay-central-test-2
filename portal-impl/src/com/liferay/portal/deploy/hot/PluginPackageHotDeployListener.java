@@ -34,6 +34,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
+import com.liferay.util.portlet.PortletProps;
+
+import java.lang.reflect.Method;
 
 import java.net.URL;
 
@@ -115,6 +118,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
 
+		initPortletProps(classLoader);
+
 		initServiceComponent(servletContext, classLoader);
 
 		registerClpMessageListeners(servletContext, classLoader);
@@ -162,6 +167,14 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 				"Plugin package " + pluginPackage.getModuleId() +
 					" unregistered successfully");
 		}
+	}
+
+	protected void initPortletProps(ClassLoader classLoader) throws Exception {
+		Class<?> clazz = classLoader.loadClass(PortletProps.class.getName());
+
+		Method method = clazz.getMethod("get", String.class);
+
+		method.invoke(null, "init");
 	}
 
 	protected void initServiceComponent(
