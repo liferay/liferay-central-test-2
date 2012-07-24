@@ -55,7 +55,7 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 		}
 	}
 
-	public void autoDeploy(AutoDeploymentContext autoDeploymentContext)
+	public int autoDeploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		ZipFile zipFile = null;
@@ -125,6 +125,8 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 				MessageBusUtil.sendMessage(
 					DestinationNames.MARKETPLACE, message);
 			}
+
+			return AutoDeployer.CODE_DEFAULT;
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
