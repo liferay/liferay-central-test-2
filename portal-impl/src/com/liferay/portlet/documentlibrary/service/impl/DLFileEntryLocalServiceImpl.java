@@ -793,41 +793,36 @@ public class DLFileEntryLocalServiceImpl
 
 			return dlFileEntry;
 		}
-		else {
-			List<DLFileVersion> dlFileVersions =
-				dlFileVersionPersistence.findByG_F_T_V(
-					groupId, folderId, title,
-					DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
 
-			long userId = PrincipalThreadLocal.getUserId();
+		List<DLFileVersion> dlFileVersions =
+			dlFileVersionPersistence.findByG_F_T_V(
+				groupId, folderId, title,
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION);
 
-			for (DLFileVersion dlFileVersion : dlFileVersions) {
-				if (hasFileEntryLock(userId, dlFileVersion.getFileEntryId())) {
-					return dlFileVersion.getFileEntry();
-				}
+		long userId = PrincipalThreadLocal.getUserId();
+
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			if (hasFileEntryLock(userId, dlFileVersion.getFileEntryId())) {
+				return dlFileVersion.getFileEntry();
 			}
-
-			StringBundler msg = new StringBundler(8);
-
-			msg.append("No DLFileEntry exists with the key {");
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", title=");
-			msg.append(title);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchFileEntryException(msg.toString());
 		}
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append("No DLFileEntry exists with the key {");
+		sb.append("groupId=");
+		sb.append(groupId);
+		sb.append(", folderId=");
+		sb.append(folderId);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
+
+		if (_log.isWarnEnabled()) {
+			_log.warn(sb.toString());
+		}
+
+		throw new NoSuchFileEntryException(sb.toString());
 	}
 
 	public DLFileEntry getFileEntryByName(
