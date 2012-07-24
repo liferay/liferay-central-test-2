@@ -139,39 +139,35 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 		return sb.toString();
 	}
 
-	protected String _escapeQuote(String quote) {
-		if (quote.isEmpty()) {
-			return quote;
-		}
-
+	protected String escapeQuote(String quote) {
 		StringBuilder sb = new StringBuilder();
 
-		int pointer = 0;
+		int index = 0;
 
-		Matcher regexMatcher = _bbCodePattern.matcher(quote);
+		Matcher matcher = _bbCodePattern.matcher(quote);
 
-		Collection<String> entitiesValues = _bbCodeCharacters.values();
+		Collection<String> values = _bbCodeCharacters.values();
 
-		while (regexMatcher.find()) {
-			String match = regexMatcher.group();
+		while (matcher.find()) {
+			String match = matcher.group();
 
-			int matchStartIndex = regexMatcher.start();
+			int matchStartIndex = matcher.start();
 
 			int nextSemicolonIndex = quote.indexOf(
 				StringPool.SEMICOLON, matchStartIndex);
 
-			sb.append(quote.substring(pointer, matchStartIndex));
+			sb.append(quote.substring(index, matchStartIndex));
 
 			boolean entityFound = false;
 
 			if (nextSemicolonIndex >= 0) {
-				String entity = quote.substring(
+				String value = quote.substring(
 					matchStartIndex, nextSemicolonIndex + 1);
 
-				if (entitiesValues.contains(entity)) {
-					sb.append(entity);
+				if (values.contains(value)) {
+					sb.append(value);
 
-					pointer = matchStartIndex + entity.length();
+					index = matchStartIndex + value.length();
 
 					entityFound = true;
 				}
@@ -182,12 +178,12 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 				sb.append(escapedValue);
 
-				pointer = matchStartIndex + match.length();
+				index = matchStartIndex + match.length();
 			}
 		}
 
-		if (pointer < quote.length()) {
-			sb.append(quote.substring(pointer, quote.length()));
+		if (index < quote.length()) {
+			sb.append(quote.substring(index, quote.length()));
 		}
 
 		return sb.toString();
@@ -471,7 +467,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 		if ((quote != null) && (quote.length() > 0)) {
 			sb.append("<div class=\"quote-title\">");
-			sb.append(_escapeQuote(quote));
+			sb.append(escapeQuote(quote));
 			sb.append(":</div>");
 		}
 
