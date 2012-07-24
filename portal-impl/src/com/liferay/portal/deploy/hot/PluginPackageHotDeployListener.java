@@ -170,6 +170,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void initPortletProps(ClassLoader classLoader) throws Exception {
+		if (classLoader.getResourceAsStream("portlet.properties") == null) {
+			return;
+		}
+
 		Class<?> clazz = classLoader.loadClass(PortletProps.class.getName());
 
 		Method method = clazz.getMethod("get", String.class);
