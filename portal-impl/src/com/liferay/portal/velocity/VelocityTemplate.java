@@ -68,6 +68,7 @@ public class VelocityTemplate extends AbstractTemplate {
 		_velocityContext.put(key, value);
 	}
 
+	@Override
 	protected void handleException(Exception exception, Writer writer)
 		throws TemplateException {
 
@@ -98,6 +99,7 @@ public class VelocityTemplate extends AbstractTemplate {
 		}
 	}
 
+	@Override
 	protected void processTemplate(
 			TemplateResource templateResource, Writer writer)
 		throws Exception {

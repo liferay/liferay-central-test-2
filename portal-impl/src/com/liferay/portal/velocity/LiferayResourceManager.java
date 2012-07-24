@@ -45,9 +45,12 @@ import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 public class LiferayResourceManager extends ResourceManagerImpl {
 
 	public LiferayResourceManager() {
-		_portalCache = SingleVMPoolUtil.getCache(
-			TemplateResource.class.getName().concat(StringPool.POUND).concat(
-				TemplateManager.VELOCITY));
+		String cacheName = TemplateResource.class.getName();
+
+		cacheName = cacheName.concat(StringPool.POUND).concat(
+			TemplateManager.VELOCITY);
+
+		_portalCache = SingleVMPoolUtil.getCache(cacheName);
 	}
 
 	@Override
@@ -68,6 +71,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		}
 	}
 
+	@Override
 	public Resource getResource(
 			final String resourceName, final int resourceType,
 			final String encoding)
@@ -92,7 +96,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 		if (templateResource == null) {
 			throw new ResourceNotFoundException(
-				"Unable to find Velocity tempalte with Id " + resourceName);
+				"Unable to find Velocity template with ID " + resourceName);
 		}
 
 		Object object = _portalCache.get(templateResource);
@@ -160,7 +164,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			}
 			catch (Exception e) {
 				throw new ParseErrorException(
-					"Unable to parse Velocity tempalte");
+					"Unable to parse Velocity template");
 			}
 			finally {
 				if (_reader != null) {

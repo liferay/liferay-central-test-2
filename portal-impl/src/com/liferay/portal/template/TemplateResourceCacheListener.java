@@ -29,9 +29,12 @@ import java.io.Serializable;
 public class TemplateResourceCacheListener implements CacheListener {
 
 	public TemplateResourceCacheListener(String templateResourceLoaderName) {
-		_portalCache = SingleVMPoolUtil.getCache(
-			TemplateResource.class.getName().concat(StringPool.POUND).concat(
-				templateResourceLoaderName));
+		String cacheName = TemplateResource.class.getName();
+
+		cacheName = cacheName.concat(StringPool.POUND).concat(
+			templateResourceLoaderName);
+
+		_portalCache = SingleVMPoolUtil.getCache(cacheName);
 	}
 
 	public void notifyEntryEvicted(

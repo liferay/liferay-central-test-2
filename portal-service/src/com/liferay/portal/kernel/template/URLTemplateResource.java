@@ -57,7 +57,6 @@ public class URLTemplateResource implements TemplateResource {
 
 		URLTemplateResource urlTemplateResource = (URLTemplateResource)obj;
 
-		// No need to use Validator, as constructor ensures they are not null
 		if (_templateId.equals(urlTemplateResource._templateId) &&
 			_templateURL.equals(urlTemplateResource._templateURL)) {
 

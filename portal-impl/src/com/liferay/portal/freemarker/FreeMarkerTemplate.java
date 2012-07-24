@@ -50,8 +50,6 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 			TemplateManager.FREEMARKER,
 			PropsValues.FREEMARKER_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL);
 
-		// Template is always being used as stack local, no way it could be
-		// shared across threads, so the threadsafty protection is not needed.
 		_context = new HashMap<String, Object>();
 
 		if (context != null) {
@@ -75,6 +73,7 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 		_context.put(key, value);
 	}
 
+	@Override
 	protected void handleException(Exception exception, Writer writer)
 		throws TemplateException {
 
@@ -115,6 +114,7 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 		}
 	}
 
+	@Override
 	protected void processTemplate(
 			TemplateResource templateResource, Writer writer)
 		throws Exception {

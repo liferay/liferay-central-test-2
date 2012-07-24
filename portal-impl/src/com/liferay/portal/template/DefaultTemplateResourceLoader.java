@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.IOException;
 import java.io.Reader;
 
 import java.util.HashSet;
@@ -46,12 +45,12 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException(
-				"Name of TemplateResourceLoader is null");
+				"Template resource loader name is null");
 		}
 
 		if (templateResourceParserClassNames == null) {
 			throw new IllegalArgumentException(
-				"Class names of TemplateResourceParser is null");
+				"Template resource parser class names is null");
 		}
 
 		_name = name;
@@ -73,9 +72,9 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		_modificationCheckInterval = modificationCheckInterval;
 
-		//Different tempalte engine should use different portal cache.
-		String cacheName = TemplateResourceLoader.class.getName().concat(
-			StringPool.POUND).concat(name);
+		String cacheName = TemplateResourceLoader.class.getName();
+
+		cacheName = cacheName.concat(StringPool.POUND).concat(name);
 
 		_portalCache = MultiVMPoolUtil.getCache(cacheName);
 
@@ -229,7 +228,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 			return _lastModified;
 		}
 
-		public Reader getReader() throws IOException {
+		public Reader getReader() {
 			return null;
 		}
 

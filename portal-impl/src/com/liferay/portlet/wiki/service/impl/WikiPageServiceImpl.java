@@ -73,6 +73,18 @@ import java.util.Locale;
  */
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
+	public WikiPageServiceImpl() {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		String templateId = "com/liferay/portlet/wiki/dependencies/rss.vm";
+
+		URL url = classLoader.getResource(templateId);
+
+		_templateResource = new URLTemplateResource(templateId, url);
+	}
+
 	public WikiPage addPage(
 			long nodeId, String title, String content, String summary,
 			boolean minorEdit, ServiceContext serviceContext)
@@ -555,23 +567,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		}
 	}
 
-	private static TemplateResource _templateResource;
-
-	static {
-		try {
-			String templateId = "com/liferay/portlet/wiki/dependencies/rss.vm";
-
-			ClassLoader classLoader =
-				WikiPageServiceImpl.class.getClassLoader();
-
-			URL templateURL = classLoader.getResource(templateId);
-
-			_templateResource = new URLTemplateResource(
-				templateId, templateURL);
-		}
-		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private TemplateResource _templateResource;
 
 }

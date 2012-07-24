@@ -194,6 +194,17 @@ public class WebServerServlet extends HttpServlet {
 
 		_lastModified = GetterUtil.getBoolean(
 			servletConfig.getInitParameter("last_modified"), true);
+
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		String templateId =
+			"com/liferay/portal/webserver/dependencies/template.ftl";
+
+		URL url = classLoader.getResource(templateId);
+
+		_templateResource = new URLTemplateResource(templateId, url);
 	}
 
 	@Override
@@ -1298,25 +1309,7 @@ public class WebServerServlet extends HttpServlet {
 	private static Format _dateFormat =
 		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
 
-	private static TemplateResource _templateResource;
-
 	private boolean _lastModified = true;
-
-	static {
-		try {
-			String templateId =
-				"com/liferay/portal/webserver/dependencies/template.ftl";
-
-			ClassLoader classLoader = WebServerServlet.class.getClassLoader();
-
-			URL templateURL = classLoader.getResource(templateId);
-
-			_templateResource = new URLTemplateResource(
-				templateId, templateURL);
-		}
-		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private TemplateResource _templateResource;
 
 }

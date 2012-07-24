@@ -55,7 +55,6 @@ public class JournalTemplateResource implements TemplateResource {
 		JournalTemplateResource journalTemplateResource =
 			(JournalTemplateResource)obj;
 
-		// No need to use Validator, as constructor ensures they are not null
 		if (_templateId.equals(journalTemplateResource._templateId) &&
 			_journalTemplate.equals(journalTemplateResource._journalTemplate)) {
 

@@ -53,9 +53,12 @@ public class LiferayTemplateCache extends TemplateCache {
 			throw new TemplateException(e);
 		}
 
-		_portalCache = SingleVMPoolUtil.getCache(
-			TemplateResource.class.getName().concat(StringPool.POUND).concat(
-				TemplateManager.FREEMARKER));
+		String cacheName = TemplateResource.class.getName();
+
+		cacheName = cacheName.concat(StringPool.POUND).concat(
+			TemplateManager.FREEMARKER);
+
+		_portalCache = SingleVMPoolUtil.getCache(cacheName);
 	}
 
 	@Override
@@ -102,7 +105,7 @@ public class LiferayTemplateCache extends TemplateCache {
 
 		if (templateResource == null) {
 			throw new IOException(
-				"Unable to find Freemarker tempalte with Id " + templateId);
+				"Unable to find FreeMarker template with ID " + templateId);
 		}
 
 		Object object = _portalCache.get(templateResource);

@@ -78,6 +78,22 @@ import javax.servlet.jsp.PageContext;
  */
 public class DDMXSDImpl implements DDMXSD {
 
+	public DDMXSDImpl() {
+		String defaultTemplateId = _TPL_PATH + "alloy/text.ftl";
+
+		URL defaultTemplateURL = getResource(defaultTemplateId);
+
+		_defaultTemplateResource = new URLTemplateResource(
+			defaultTemplateId, defaultTemplateURL);
+
+		String defaultReadOnlyTemplateId = _TPL_PATH + "readonly/default.ftl";
+
+		URL defaultReadOnlyTemplateURL = getResource(defaultReadOnlyTemplateId);
+
+		_defaultReadOnlyTemplateResource = new URLTemplateResource(
+			defaultReadOnlyTemplateId, defaultReadOnlyTemplateURL);
+	}
+
 	public String getHTML(
 			PageContext pageContext, DDMStructure ddmStructure, Fields fields,
 			String namespace, boolean readOnly, Locale locale)
@@ -159,7 +175,7 @@ public class DDMXSDImpl implements DDMXSD {
 
 				fieldNamespace = _DEFAULT_READ_ONLY_NAMESPACE;
 
-				templateResource = _defaultReadonlyTemplateResource;
+				templateResource = _defaultReadOnlyTemplateResource;
 			}
 
 			String type = dynamicElementElement.attributeValue("type");
@@ -177,18 +193,15 @@ public class DDMXSDImpl implements DDMXSD {
 
 			String resource = resourcePath.toString();
 
-			ClassLoader classLoader = DDMXSDImpl.class.getClassLoader();
+			URL url = getResource(resource);
 
-			URL templateURL = classLoader.getResource(resource);
-
-			if (templateURL != null) {
-				templateResource = new URLTemplateResource(
-					resource, templateURL);
+			if (url != null) {
+				templateResource = new URLTemplateResource(resource, url);
 			}
 
 			if (templateResource == null) {
 				throw new Exception(
-					"Failed to load TemplateResource " + resource);
+					"Unable to load template resource " + resource);
 			}
 
 			Template template = TemplateManagerUtil.getTemplate(
@@ -414,6 +427,14 @@ public class DDMXSDImpl implements DDMXSD {
 		return freeMarkerContext;
 	}
 
+	protected URL getResource(String name) {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		return classLoader.getResource(name);
+	}
+
 	/**
 	 * @see com.liferay.taglib.util.ThemeUtil#includeFTL
 	 */
@@ -518,34 +539,7 @@ public class DDMXSDImpl implements DDMXSD {
 	private static final String _TPL_PATH =
 		"com/liferay/portlet/dynamicdatamapping/dependencies/";
 
-	private static TemplateResource _defaultReadonlyTemplateResource;
-	private static TemplateResource _defaultTemplateResource;
-
-	static {
-		try {
-			ClassLoader classLoader = DDMXSDImpl.class.getClassLoader();
-
-			String templateDefaultPath =
-				"com/liferay/portlet/dynamicdatamapping/dependencies/alloy/" +
-					"text.ftl";
-
-			URL templateURL = classLoader.getResource(templateDefaultPath);
-
-			_defaultTemplateResource = new URLTemplateResource(
-				templateDefaultPath, templateURL);
-
-			String templateDefaultReadonlyPath =
-				"com/liferay/portlet/dynamicdatamapping/dependencies/readonly" +
-					"/default.ftl";
-
-			templateURL = classLoader.getResource(templateDefaultReadonlyPath);
-
-			_defaultReadonlyTemplateResource = new URLTemplateResource(
-				templateDefaultReadonlyPath, templateURL);
-		}
-		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private TemplateResource _defaultReadOnlyTemplateResource;
+	private TemplateResource _defaultTemplateResource;
 
 }

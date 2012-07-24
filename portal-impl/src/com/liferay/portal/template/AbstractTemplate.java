@@ -43,20 +43,20 @@ public abstract class AbstractTemplate implements Template {
 		long interval) {
 
 		if (templateResource == null) {
-			throw new IllegalArgumentException("TemplateResource is null");
+			throw new IllegalArgumentException("Template resource is null");
 		}
 
 		if (templateContextHelper == null) {
-			throw new IllegalArgumentException("TemplateContextHelper is null");
+			throw new IllegalArgumentException(
+				"Template context helper is null");
+		}
+
+		if (templateManagerName == null) {
+			throw new IllegalArgumentException("Template manager name is null");
 		}
 
 		this.templateResource = templateResource;
 		this.errorTemplateResource = errorTemplateResource;
-
-		if (templateManagerName == null) {
-			throw new IllegalArgumentException(
-				"Name of TemplateResourceLoader is null");
-		}
 
 		_templateContextHelper = templateContextHelper;
 
@@ -136,22 +136,24 @@ public abstract class AbstractTemplate implements Template {
 	protected TemplateResource templateResource;
 
 	private void _cacheTemplateResource(String templateManagerName) {
+		String templateId = templateResource.getTemplateId();
 
 		if (templateManagerName.equals(TemplateManager.VELOCITY) &&
-			templateResource.getTemplateId().contains(
-				SandboxHandler.SANDBOX_MARKER)) {
+			templateId.contains(SandboxHandler.SANDBOX_MARKER)) {
 
 			return;
 		}
 
-		if (!(templateResource instanceof StringTemplateResource) &&
-			!(templateResource instanceof CacheTemplateResource)) {
+		if (!(templateResource instanceof CacheTemplateResource) &&
+			!(templateResource instanceof StringTemplateResource)) {
 
 			templateResource = new CacheTemplateResource(templateResource);
 		}
 
-		String cacheName = TemplateResourceLoader.class.getName().concat(
-			StringPool.POUND).concat(templateManagerName);
+		String cacheName = TemplateResourceLoader.class.getName();
+
+		cacheName = cacheName.concat(StringPool.POUND).concat(
+			templateManagerName);
 
 		PortalCache portalCache = MultiVMPoolUtil.getCache(cacheName);
 
@@ -165,15 +167,16 @@ public abstract class AbstractTemplate implements Template {
 			return;
 		}
 
+		String errorTemplateId = errorTemplateResource.getTemplateId();
+
 		if (templateManagerName.equals(TemplateManager.VELOCITY) &&
-			errorTemplateResource.getTemplateId().contains(
-				SandboxHandler.SANDBOX_MARKER)) {
+			errorTemplateId.contains(SandboxHandler.SANDBOX_MARKER)) {
 
 			return;
 		}
 
-		if (!(errorTemplateResource instanceof StringTemplateResource) &&
-			!(errorTemplateResource instanceof CacheTemplateResource)) {
+		if (!(errorTemplateResource instanceof CacheTemplateResource) &&
+			!(errorTemplateResource instanceof StringTemplateResource)) {
 
 			errorTemplateResource = new CacheTemplateResource(
 				errorTemplateResource);

@@ -30,7 +30,7 @@ public class CacheTemplateResource implements TemplateResource {
 
 	public CacheTemplateResource(TemplateResource templateResource) {
 		if (templateResource == null) {
-			throw new IllegalArgumentException("TemplateResource is null");
+			throw new IllegalArgumentException("Template resource is null");
 		}
 
 		_templateResource = templateResource;
@@ -49,9 +49,7 @@ public class CacheTemplateResource implements TemplateResource {
 		CacheTemplateResource cacheTemplateResource =
 			(CacheTemplateResource)obj;
 
-		// No need to use Validator, as constructor ensures it is not null
 		if (_templateResource.equals(cacheTemplateResource._templateResource)) {
-
 			return true;
 		}
 

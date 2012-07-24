@@ -470,7 +470,7 @@ public class ThemeUtil {
 
 		if (templateResource == null) {
 			throw new Exception(
-				"Failed to load TemplateResource " + resourcePath);
+				"Unable to load template resource " + resourcePath);
 		}
 
 		Template template = TemplateManagerUtil.getTemplate(

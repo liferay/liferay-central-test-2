@@ -50,7 +50,6 @@ public class StringTemplateResource implements TemplateResource {
 		StringTemplateResource stringTemplateResource =
 			(StringTemplateResource)obj;
 
-		// No need to use Validator, as constructor ensures they are not null
 		if (_templateId.equals(stringTemplateResource._templateId) &&
 			_templateContent.equals(stringTemplateResource._templateContent)) {
 

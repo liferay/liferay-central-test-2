@@ -125,11 +125,10 @@ public class RendererImpl implements Renderer {
 
 				ClassLoader classLoader = beanLocator.getClassLoader();
 
-				URL templateURL = classLoader.getResource(
+				URL url = classLoader.getResource(
 					PropsUtil.get(RENDERER_TEMPLATE_PREFIX + className));
 
-				templateResource = new URLTemplateResource(
-					className, templateURL);
+				templateResource = new URLTemplateResource(className, url);
 			}
 			catch (Exception e) {
 			}

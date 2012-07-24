@@ -52,14 +52,13 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 
 	protected TemplateResource getErrorTemplateResource() {
 		try {
-			ClassLoader classLoader =
-				VelocityTemplateParser.class.getClassLoader();
+			Class<?> clazz = getClass();
 
-			URL errorTempalteURL = classLoader.getResource(
-				getErrorTemplateId());
+			ClassLoader classLoader = clazz.getClassLoader();
 
-			return new URLTemplateResource(
-				getErrorTemplateId(), errorTempalteURL);
+			URL url = classLoader.getResource(getErrorTemplateId());
+
+			return new URLTemplateResource(getErrorTemplateId(), url);
 		}
 		catch (Exception e) {
 		}
@@ -111,14 +110,16 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 				data = dynamicContentElement.getText();
 			}
 
-			String name = dynamicElementElement.attributeValue("name", "");
+			String name = dynamicElementElement.attributeValue(
+				"name", StringPool.BLANK);
 
 			if (name.length() == 0) {
 				throw new TransformException(
 					"Element missing \"name\" attribute");
 			}
 
-			String type = dynamicElementElement.attributeValue("type", "");
+			String type = dynamicElementElement.attributeValue(
+				"type", StringPool.BLANK);
 
 			TemplateNode templateNode = new TemplateNode(
 				getThemeDisplay(), name, stripCDATA(data), type);
