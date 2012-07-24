@@ -103,7 +103,8 @@ public class ViewAction extends PortletAction {
 		// Send redirect
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
-		String urlParams = StringPool.BLANK;
+
+		String queryString = StringPool.BLANK;
 
 		int pos = redirect.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
@@ -112,7 +113,7 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (pos != -1) {
-			urlParams = redirect.substring(pos);
+			queryString = redirect.substring(pos);
 		}
 
 		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
@@ -129,7 +130,7 @@ public class ViewAction extends PortletAction {
 			redirect = layoutURL;
 		}
 
-		redirect = redirect + urlParams;
+		redirect = redirect + queryString;
 
 		actionResponse.sendRedirect(redirect);
 	}
