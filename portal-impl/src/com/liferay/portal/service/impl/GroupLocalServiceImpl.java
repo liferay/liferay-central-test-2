@@ -943,6 +943,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (group.isCompany()) {
 			name = LanguageUtil.get(locale, "global");
 		}
+		else if (group.isControlPanel()) {
+			name = LanguageUtil.get(locale, "control-panel");
+		}
 		else if (group.isLayout()) {
 			Layout layout = layoutLocalService.getLayout(group.getClassPK());
 
