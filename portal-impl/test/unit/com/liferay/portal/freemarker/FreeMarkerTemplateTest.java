@@ -67,7 +67,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 		}
 		catch (Exception e) {
 			throw new TemplateException(
-				"Unable to Initialize Freemarker manager");
+				"Unable to initialize FreeMarker manager");
 		}
 
 		_configuration.setLocalizedLookup(false);
