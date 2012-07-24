@@ -124,7 +124,7 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:name", _name);
 		request.setAttribute(
 			"liferay-ui:input-editor:onChangeMethod", _onChangeMethod);
-		request.setAttribute("" +
+		request.setAttribute(
 			"liferay-ui:input-editor:resizable", String.valueOf(_resizable));
 		request.setAttribute(
 			"liferay-ui:input-editor:skipEditorLoading",

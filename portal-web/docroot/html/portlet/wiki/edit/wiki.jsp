@@ -154,8 +154,9 @@ boolean showSyntaxHelp = ((toggleValue != null) && toggleValue.equals("block"));
 		}
 	);
 </aui:script>
-<%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit.creole.jsp";
 
+<%!
 public static final String EDITOR_SIMPLE_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit.mediawiki.jsp";
+
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.wiki.edit.creole.jsp";
 %>
