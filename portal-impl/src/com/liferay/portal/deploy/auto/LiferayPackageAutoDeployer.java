@@ -65,10 +65,10 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 
 			zipFile = new ZipFile(file);
 
-			Enumeration<? extends ZipEntry> enu = zipFile.entries();
-
-			String propertiesString = null;
 			List<String> fileNames = new ArrayList<String>(zipFile.size());
+			String propertiesString = null;
+
+			Enumeration<? extends ZipEntry> enu = zipFile.entries();
 
 			while (enu.hasMoreElements()) {
 				ZipEntry zipEntry = enu.nextElement();
@@ -118,11 +118,12 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 			if (propertiesString != null) {
 				Message message = new Message();
 
+				message.put("command", "deploy");
+				message.put("fileNames", fileNames);
 				message.put("properties", propertiesString);
-				message.put("fileNames", StringUtil.merge(fileNames));
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.MARKETPLACE_HOT_DEPLOY, message);
+					DestinationNames.MARKETPLACE, message);
 			}
 		}
 		catch (Exception e) {
