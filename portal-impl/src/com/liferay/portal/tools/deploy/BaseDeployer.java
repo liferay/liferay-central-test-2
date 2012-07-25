@@ -1621,6 +1621,11 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		return filterMap;
 	}
 
+	/**
+	 * @see {@link
+	 *      PluginPackageUtil#_readPluginPackageServletContext(
+	 *      javax.servlet.ServletContext)}
+	 */
 	public PluginPackage readPluginPackage(File file) {
 		if (!file.exists()) {
 			return null;
