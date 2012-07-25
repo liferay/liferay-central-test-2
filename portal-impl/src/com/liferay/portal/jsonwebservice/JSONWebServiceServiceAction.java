@@ -97,7 +97,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 			Throwable cause = ite.getCause();
 
 			if (cause instanceof SecurityException) {
-				throw (SecurityException) cause;
+				throw (SecurityException)cause;
 			}
 
 			_log.error(cause, cause);

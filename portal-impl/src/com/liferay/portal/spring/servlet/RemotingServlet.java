@@ -18,10 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.spring.context.TunnelApplicationContext;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -41,7 +37,7 @@ public class RemotingServlet extends DispatcherServlet {
 			return Class.forName(CONTEXT_CLASS);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return null;
@@ -50,19 +46,6 @@ public class RemotingServlet extends DispatcherServlet {
 	@Override
 	public String getContextConfigLocation() {
 		return CONTEXT_CONFIG_LOCATION;
-	}
-
-	@Override
-	public void service(
-			HttpServletRequest request, HttpServletResponse response)
-		throws ServletException {
-
-		try {
-			super.service(request, response);
-		}
-		catch (Exception e) {
-			throw new ServletException(e);
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RemotingServlet.class);

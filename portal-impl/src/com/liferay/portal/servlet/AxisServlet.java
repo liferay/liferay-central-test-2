@@ -14,8 +14,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PluginContextListener;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 
@@ -92,8 +90,6 @@ public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 			throw new ServletException(e);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AxisServlet.class);
 
 	private ClassLoader _pluginClassLoader;
 
