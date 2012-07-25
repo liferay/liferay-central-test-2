@@ -434,6 +434,7 @@ Liferay.Service.registerClass(
 		hasRoleUser: true,
 		setRoleUsers: true,
 		setUserGroupUsers: true,
+		unsetGroupTeamsUsers: true,
 		unsetGroupUsers: true,
 		unsetOrganizationUsers: true,
 		unsetPasswordPolicyUsers: true,
