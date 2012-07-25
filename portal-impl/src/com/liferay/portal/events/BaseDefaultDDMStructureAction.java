@@ -15,8 +15,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.xml.Attribute;
@@ -31,8 +29,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUt
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.util.ContentUtil;
 
-import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,8 +42,7 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 	protected void addDDMStructures(
 			long userId, long groupId, long classNameId, String fileName,
 			ServiceContext serviceContext)
-		throws DocumentException, IOException, PortalException,
-			SystemException {
+		throws Exception {
 
 		List<Element> structureElements = getDDMStructures(fileName);
 

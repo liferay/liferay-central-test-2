@@ -68,9 +68,9 @@ public class DDMXMLImpl implements DDMXML {
 			return xml;
 		}
 
-		Document xsd = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml);
 
-		Element rootElement = xsd.getRootElement();
+		Element rootElement = document.getRootElement();
 
 		Attribute availableLocalesAttribute = rootElement.attribute(
 			_AVAILABLE_LOCALES);
@@ -78,8 +78,11 @@ public class DDMXMLImpl implements DDMXML {
 		String contentNewDefaultLanguageId = LocaleUtil.toLanguageId(
 			contentNewDefaultLocale);
 
-		if (availableLocalesAttribute.getValue().indexOf(
-				contentNewDefaultLanguageId) == -1) {
+		String availableLocalesAttributeValue =
+			availableLocalesAttribute.getValue();
+
+		if (!availableLocalesAttributeValue.contains(
+				contentNewDefaultLanguageId)) {
 
 			StringBundler sb = new StringBundler(3);
 
@@ -95,25 +98,27 @@ public class DDMXMLImpl implements DDMXML {
 
 		defaultLocaleAttribute.setValue(contentNewDefaultLanguageId);
 
-		_fixElementsDefaultLocale(
+		fixElementsDefaultLocale(
 			rootElement, contentDefaultLocale, contentNewDefaultLocale);
 
-		return xsd.formattedString();
+		return document.formattedString();
 	}
 
-	private void _fixElementsDefaultLocale(
+	protected void fixElementsDefaultLocale(
 		Element element, Locale contentDefaultLocale,
 		Locale contentNewDefaultLocale) {
 
-		for (Element child : element.elements(_DYNAMIC_ELEMENT)) {
-			Element metaDataImportElement =
-				(Element) child.selectSingleNode(
+		for (Element dynamicElementElement :
+				element.elements(_DYNAMIC_ELEMENT)) {
+
+			Element importMetaDataElement =
+				(Element)dynamicElementElement.selectSingleNode(
 					"meta-data[@locale='" + contentNewDefaultLocale.toString() +
 						"']");
 
-			if (metaDataImportElement == null) {
+			if (importMetaDataElement == null) {
 				Element metaDataElement =
-					(Element) child.selectSingleNode(
+					(Element)dynamicElementElement.selectSingleNode(
 						"meta-data[@locale='" +
 							contentDefaultLocale.toString() + "']");
 
@@ -127,11 +132,12 @@ public class DDMXMLImpl implements DDMXML {
 
 				localeAttribute.setValue(contentNewDefaultLanguageId);
 
-				child.add(copiedMetadataElement);
+				dynamicElementElement.add(copiedMetadataElement);
 			}
 
-			_fixElementsDefaultLocale(
-				child, contentDefaultLocale, contentNewDefaultLocale);
+			fixElementsDefaultLocale(
+				dynamicElementElement, contentDefaultLocale,
+				contentNewDefaultLocale);
 		}
 	}
 

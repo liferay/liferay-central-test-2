@@ -54,7 +54,7 @@ public interface Localization {
 	public Object deserialize(JSONObject jsonObject);
 
 	/**
-	 * Returns the available locales from the localizations XML
+	 * Returns the available locales from the localizations XML.
 	 *
 	 * @param  xml the localizations XML
 	 * @return the language IDs of the available locales
@@ -62,7 +62,7 @@ public interface Localization {
 	public String[] getAvailableLocales(String xml);
 
 	/**
-	 * Returns a valid default locale for importing a localized entity
+	 * Returns a valid default locale for importing a localized entity.
 	 *
 	 * @param  className the class name of the entity
 	 * @param  classPK the primary keys of the entity
