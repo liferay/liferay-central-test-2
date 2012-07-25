@@ -101,7 +101,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getBoolean(returnValue);
 				}
 				else {
-					double doubleValue = ((Number) returnValue).doubleValue();
+					Number number = (Number)returnValue;
+
+					double doubleValue = number.doubleValue();
 
 					if (doubleValue == 0.0) {
 						return false;
@@ -116,7 +118,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getDouble(returnValue);
 				}
 				else {
-					return ((Number) returnValue).doubleValue();
+					Number number = (Number)returnValue;
+
+					return number.doubleValue();
 				}
 			}
 			else if (methodName.equals("getFloat")) {
@@ -124,7 +128,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getFloat(returnValue);
 				}
 				else {
-					return ((Number) returnValue).floatValue();
+					Number number = (Number)returnValue;
+
+					return number.floatValue();
 				}
 			}
 			else if (methodName.equals("getInt")) {
@@ -132,7 +138,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getInteger(returnValue);
 				}
 				else {
-					return ((Number) returnValue).intValue();
+					Number number = (Number)returnValue;
+
+					return number.intValue();
 				}
 			}
 			else if (methodName.equals("getLong")) {
@@ -140,7 +148,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getLong(returnValue);
 				}
 				else {
-					return ((Number) returnValue).longValue();
+					Number number = (Number)returnValue;
+
+					return number.longValue();
 				}
 			}
 			else if (methodName.equals("getShort")) {
@@ -148,7 +158,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return GetterUtil.getShort(returnValue);
 				}
 				else {
-					return ((Number) returnValue).shortValue();
+					Number number = (Number)returnValue;
+
+					return number.shortValue();
 				}
 			}
 			else if (methodName.equals("getString")) {
@@ -159,9 +171,8 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 					return String.valueOf(returnValue);
 				}
 			}
-			else {
-				return returnValue;
-			}
+
+			return returnValue;
 		}
 	}
 
