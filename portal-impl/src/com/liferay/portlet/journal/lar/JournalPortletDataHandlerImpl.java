@@ -2228,7 +2228,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void prepareLanguagesForImport(JournalArticle article)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		Locale articleDefaultLocale = LocaleUtil.fromLanguageId(
 			article.getDefaultLocale());

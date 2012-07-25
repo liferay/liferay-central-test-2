@@ -1388,9 +1388,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (cause instanceof LocaleException) {
 				throw (PortalException)cause;
 			}
-			else {
-				throw pe;
-			}
+
+			throw pe;
 		}
 		catch (SystemException se) {
 			throw se;
@@ -1467,9 +1466,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (cause instanceof LocaleException) {
 				throw (PortalException)cause;
 			}
-			else {
-				throw pe;
-			}
+
+			throw pe;
 		}
 		catch (SystemException se) {
 			throw se;

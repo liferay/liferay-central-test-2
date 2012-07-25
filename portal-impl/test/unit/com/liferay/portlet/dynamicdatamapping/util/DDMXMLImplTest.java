@@ -73,51 +73,56 @@ public class DDMXMLImplTest extends PowerMockito {
 
 	@Test
 	public void testUpdateContentDefaultLocale() {
-		updateContentDefaultLocale("dynamic-data-mapping-structures.xml");
+		updateContentDefaultLocale("dynamic-data-mapping-structures.xml", true);
 	}
 
 	@Test
 	public void testUpdateContentDefaultLocaleWrongFormat() {
 		updateContentDefaultLocale(
-			"dynamic-data-mapping-structures-wrong-format.xml");
+			"dynamic-data-mapping-structures-wrong-format.xml", false);
 	}
 
-	protected boolean checkElementLocale(Element parent, String newLocaleId) {
-		List<Node> children = parent.selectNodes("dynamic-element");
+	protected boolean checkElementLocale(Element element, String newLocaleId) {
+		List<Node> nodes = element.selectNodes("dynamic-element");
 
-		boolean result = true;
-
-		for (Node child : children) {
-			Element metadataElement = (Element)child.selectSingleNode(
+		for (Node node : nodes) {
+			Element metadataElement = (Element)node.selectSingleNode(
 				"meta-data[@locale='" + newLocaleId + "']");
 
 			if (metadataElement == null) {
 				return false;
 			}
 
-			result = checkElementLocale((Element) child, newLocaleId);
+			if (!checkElementLocale((Element)node, newLocaleId)) {
+				return false;
+			}
 		}
 
-		return result;
+		return true;
 	}
 
 	protected boolean checkLocale(Element rootElement, String newLocaleId) {
-		Attribute avaliableLocales = rootElement.attribute("available-locales");
+		Attribute avaliableLocalesAttribute = rootElement.attribute(
+			"available-locales");
 
-		if (avaliableLocales.getValue().indexOf(newLocaleId) == -1) {
+		String avaliableLocalesAttributeValue =
+			avaliableLocalesAttribute.getValue();
+
+		if (!avaliableLocalesAttributeValue.contains(newLocaleId)) {
 			return false;
 		}
 
-		Attribute defaultLocale = rootElement.attribute("default-locale");
+		Attribute defaultLocaleAttribute = rootElement.attribute(
+			"default-locale");
 
-		if (!newLocaleId.equals(defaultLocale.getValue())) {
+		if (!newLocaleId.equals(defaultLocaleAttribute.getValue())) {
 			return false;
 		}
 
 		return checkElementLocale(rootElement, newLocaleId);
 	}
 
-	protected String readText(String fileName) throws IOException {
+	protected String readXML(String fileName) throws IOException {
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
@@ -126,11 +131,11 @@ public class DDMXMLImplTest extends PowerMockito {
 		return StringUtil.read(inputStream);
 	}
 
-	protected void updateContentDefaultLocale(String fileName) {
-		boolean result = false;
+	protected void updateContentDefaultLocale(
+		String fileName, boolean expectedResult) {
 
 		try {
-			String xml = readText(fileName);
+			String xml = readXML(fileName);
 
 			Document document = SAXReaderUtil.read(xml);
 
@@ -163,21 +168,23 @@ public class DDMXMLImplTest extends PowerMockito {
 
 				rootElement = updatedXMLDocument.getRootElement();
 
-				result = checkLocale(
-					rootElement,
-					LocaleUtil.toLanguageId(availableDefaultLocale));
+				if (checkLocale(
+						rootElement,
+						LocaleUtil.toLanguageId(availableDefaultLocale))) {
+
+					Assert.assertTrue(expectedResult);
+
+					return;
+				}
 			}
 
-			Assert.assertTrue(result);
+			Assert.assertFalse(expectedResult);
 		}
 		catch (DocumentException de) {
-			Assert.fail(
-				"Test failed because the Document is not well-formed: " +
-					de.getMessage());
+			Assert.fail(de.getMessage());
 		}
 		catch (IOException ioe) {
-			Assert.fail(
-				"Test failed because an I/O error: " + ioe.getMessage());
+			Assert.fail(ioe.getMessage());
 		}
 	}
 

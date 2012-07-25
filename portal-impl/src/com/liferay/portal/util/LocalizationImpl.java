@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -98,31 +97,28 @@ public class LocalizationImpl implements Localization {
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		if (ArrayUtil.contains(
-				contentAvailableLocales, defaultLocale)) {
-
+		if (ArrayUtil.contains(contentAvailableLocales, defaultLocale)) {
 			return defaultLocale;
 		}
 
 		for (Locale contentAvailableLocale : contentAvailableLocales) {
-			if (ArrayUtil.contains(
-					availableLocales, contentAvailableLocale)) {
-
+			if (ArrayUtil.contains(availableLocales, contentAvailableLocale)) {
 				return contentAvailableLocale;
 			}
 		}
 
 		if (_log.isWarnEnabled()) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(9);
 
 			sb.append("Language ");
 			sb.append(LocaleUtil.toLanguageId(contentDefaultLocale));
 			sb.append(" is missing for ");
 			sb.append(className);
-			sb.append(" with primaryKey ");
+			sb.append(" with primary key ");
 			sb.append(classPK);
-			sb.append(", setting default language to ");
+			sb.append(". Setting default language to ");
 			sb.append(LocaleUtil.toLanguageId(defaultLocale));
+			sb.append(".");
 
 			_log.warn(sb.toString());
 		}

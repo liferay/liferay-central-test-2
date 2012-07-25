@@ -14,9 +14,7 @@
 
 package com.liferay.portlet.dynamicdatamapping.lar;
 
-import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -271,21 +269,20 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static void prepareLanguagesForImport(
-			DDMStructure ddmStructure)
-		throws PortalException, SystemException {
+	protected static void prepareLanguagesForImport(DDMStructure structure)
+		throws PortalException {
 
-		Locale ddmStructureDefaultLocale = LocaleUtil.fromLanguageId(
-			ddmStructure.getDefaultLocale());
+		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(
+			structure.getDefaultLocale());
 
-		Locale[] ddmStructureAvailableLocales = LocaleUtil.fromLanguageIds(
-			ddmStructure.getAvailableLocales());
+		Locale[] structureAvailableLocales = LocaleUtil.fromLanguageIds(
+			structure.getAvailableLocales());
 
 		Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(
-			DDMStructure.class.getName(), ddmStructure.getPrimaryKey(),
-			ddmStructureDefaultLocale, ddmStructureAvailableLocales);
+			DDMStructure.class.getName(), structure.getPrimaryKey(),
+			structureDefaultLocale, structureAvailableLocales);
 
-		ddmStructure.prepareLocalizedFieldsForImport(defaultImportLocale);
+		structure.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
 	@Override

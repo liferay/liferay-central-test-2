@@ -81,7 +81,7 @@ public class LocalizationImplUnitTest extends PowerMockito {
 
 	protected void verifyDefaultImportLocale(
 		String defaultContentLocale, String portalAvailableLocales,
-		String expectedLocale, boolean checkEquals) {
+		String expectedLocale, boolean expectedResult) {
 
 		spy(LocaleUtil.class);
 
@@ -120,11 +120,11 @@ public class LocalizationImplUnitTest extends PowerMockito {
 				"com.liferay.portal.className", 0L, contentDefaultLocale,
 				contentAvailableLocales);
 
-		if (checkEquals) {
-				Assert.assertTrue(
-					LocaleUtil.equals(
-						LocaleUtil.fromLanguageId(expectedLocale),
-						defaultImportLocale));
+		if (expectedResult) {
+			Assert.assertTrue(
+				LocaleUtil.equals(
+					LocaleUtil.fromLanguageId(expectedLocale),
+					defaultImportLocale));
 		}
 		else {
 			Assert.assertFalse(

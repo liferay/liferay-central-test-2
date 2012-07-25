@@ -35,15 +35,6 @@ if (Validator.isNotNull(script)) {
 }
 %>
 
-<liferay-ui:error exception="<%= LocaleException.class %>">
-
-	<%
-	LocaleException le = (LocaleException)errorException;
-	%>
-
-	<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales()), StringUtil.merge(le.getTargetAvailableLocales())} %>" key="the-default-language-x-does-not-match-the-portal's-available-languages-x" />
-</liferay-ui:error>
-
 <portlet:actionURL var="editStructureURL">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 </portlet:actionURL>
@@ -55,6 +46,15 @@ if (Validator.isNotNull(script)) {
 	<aui:input name="xsd" type="hidden" />
 	<aui:input name="saveCallback" type="hidden" value="<%= saveCallback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
+
+	<liferay-ui:error exception="<%= LocaleException.class %>">
+
+		<%
+		LocaleException le = (LocaleException)errorException;
+		%>
+
+		<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales()), StringUtil.merge(le.getTargetAvailableLocales())} %>" key="the-default-language-x-does-not-match-the-portal's-available-languages-x" />
+	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
 	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />

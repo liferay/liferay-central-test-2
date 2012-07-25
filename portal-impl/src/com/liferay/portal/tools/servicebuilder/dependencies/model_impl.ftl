@@ -26,9 +26,7 @@ import ${packagePath}.model.${entity.name}Soap;
 
 import ${packagePath}.service.${entity.name}LocalServiceUtil;
 
-<#if entity.hasLocalizedColumn()>
-	import com.liferay.portal.LocaleException;
-</#if>
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
@@ -723,15 +721,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 	</#if>
 
-	@Override
-	public ${entity.name} toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
-		}
-
-		return _escapedModelProxy;
-	}
-
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 		@Override
 		public ExpandoBridge getExpandoBridge() {
@@ -753,6 +742,27 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			expandoBridge.setAttributes(serviceContext);
 		}
 	</#if>
+
+	<#if entity.hasLocalizedColumn()>
+		@SuppressWarnings("unused")
+		public void prepareLocalizedFieldsForImport(Locale defaultImportLocale) throws LocaleException {
+
+			<#list entity.regularColList as column>
+				<#if column.localized>
+					set${column.methodName}(get${column.methodName}(defaultImportLocale), defaultImportLocale, defaultImportLocale);
+				</#if>
+			</#list>
+		}
+	</#if>
+
+	@Override
+	public ${entity.name} toEscapedModel() {
+		if (_escapedModelProxy == null) {
+			_escapedModelProxy = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
+		}
+
+		return _escapedModelProxy;
+	}
 
 	@Override
 	public Object clone() {
@@ -910,17 +920,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			${entity.varName}ModelImpl._columnBitmask = 0;
 		</#if>
 	}
-
-	<#if entity.hasLocalizedColumn()>
-		public void prepareLocalizedFieldsForImport(Locale defaultImportLocale) throws LocaleException {
-
-			<#list entity.regularColList as column>
-				<#if column.localized>
-					set${column.methodName}(get${column.methodName}(defaultImportLocale), defaultImportLocale, defaultImportLocale);
-				</#if>
-			</#list>
-		}
-	</#if>
 
 	@Override
 	public CacheModel<${entity.name}> toCacheModel() {
