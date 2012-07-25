@@ -46,7 +46,7 @@ public class DefaultScreenNameGenerator implements ScreenNameGenerator {
 				emailAddress, CharPool.AT).toLowerCase();
 
 			for (char c : screenName.toCharArray()) {
-				if (!Validator.isDigit(c) && !Validator.isChar(c) &&
+				if (!Validator.isChar(c) && !Validator.isDigit(c) &&
 					(c != CharPool.DASH) && (c != CharPool.PERIOD)) {
 
 					screenName = StringUtil.replace(
