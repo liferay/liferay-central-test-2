@@ -19,6 +19,7 @@ import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.kernel.dao.orm.Criterion;
@@ -1382,7 +1383,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				userId, groupId, privateLayout, parameterMap, file);
 		}
 		catch (PortalException pe) {
-			throw pe;
+			Throwable cause = pe.getCause();
+
+			if (cause instanceof LocaleException) {
+				throw (PortalException)cause;
+			}
+			else {
+				throw pe;
+			}
 		}
 		catch (SystemException se) {
 			throw se;
@@ -1454,7 +1462,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				userId, plid, groupId, portletId, parameterMap, file);
 		}
 		catch (PortalException pe) {
-			throw pe;
+			Throwable cause = pe.getCause();
+
+			if (cause instanceof LocaleException) {
+				throw (PortalException)cause;
+			}
+			else {
+				throw pe;
+			}
 		}
 		catch (SystemException se) {
 			throw se;
