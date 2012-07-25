@@ -1849,8 +1849,6 @@ AUI.add(
 
 						instance.editContainerContextPanel.set('trigger', editButton);
 						instance.editContainerContextPanel.show();
-
-						instance.renderEditFieldOptions(source);
 					},
 					instance._getNamespacedId('#structureTree') + ' div.journal-article-buttons .edit-button .aui-button-input'
 				);
@@ -2266,13 +2264,13 @@ AUI.add(
 							points: ['lc', 'rc']
 						},
 						bodyContent: editContainerWrapper,
-						trigger: instance._getNamespacedId('#structureTree') + ' div.journal-article-buttons .edit-button .aui-button-input'
+						trigger: new A.NodeList()
 					}
 				).render();
 
 				instance.editContainerContextPanel.addTarget(instance);
 
-				instance.after(
+				instance.on(
 					'overlaycontextpanel:visibleChange',
 					function(event) {
 						if (event.newVal == true) {
