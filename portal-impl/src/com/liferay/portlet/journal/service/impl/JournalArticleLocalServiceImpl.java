@@ -2199,7 +2199,8 @@ public class JournalArticleLocalServiceImpl
 
 		User user = userService.getUserById(oldArticle.getUserId());
 
-		if (!oldArticle.isDraft()) {
+		// LPS-28811
+		if (!oldArticle.isDraft() && !oldArticle.isPending()) {
 			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
 			long id = counterLocalService.increment();
