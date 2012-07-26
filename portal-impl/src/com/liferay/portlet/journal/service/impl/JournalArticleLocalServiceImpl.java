@@ -2181,8 +2181,6 @@ public class JournalArticleLocalServiceImpl
 
 		validateContent(content);
 
-		boolean incrementVersion = false;
-
 		JournalArticle oldArticle = getLatestArticle(
 			groupId, articleId, WorkflowConstants.STATUS_ANY);
 
@@ -2191,6 +2189,8 @@ public class JournalArticleLocalServiceImpl
 		if ((version > 0) && (version != oldVersion)) {
 			throw new ArticleVersionException();
 		}
+
+		boolean incrementVersion = false;
 
 		if (oldArticle.isApproved() || oldArticle.isExpired()) {
 			incrementVersion = true;
