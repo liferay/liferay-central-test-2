@@ -698,6 +698,11 @@ public class ServicePreAction extends Action {
 		// Scope
 
 		long scopeGroupId = PortalUtil.getScopeGroupId(request);
+
+		if ((scopeGroupId <= 0) && (doAsGroupId > 0)) {
+			scopeGroupId = doAsGroupId;
+		}
+
 		long parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
 
 		// Theme and color scheme
