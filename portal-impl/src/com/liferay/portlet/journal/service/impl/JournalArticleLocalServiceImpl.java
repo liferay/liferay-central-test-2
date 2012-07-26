@@ -2260,8 +2260,9 @@ public class JournalArticleLocalServiceImpl
 		article.setDescriptionMap(descriptionMap);
 
 		content = format(
-			user, groupId, articleId, version, !oldArticle.isDraft(), content,
-			oldArticle.getStructureId(), images);
+			user, groupId, articleId, article.getVersion(),
+			!oldArticle.isDraft(), content, oldArticle.getStructureId(),
+			images);
 
 		article.setContent(content);
 
