@@ -352,8 +352,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 
 		for (int ldapServerId = 0;; ldapServerId++) {
-			String postfix = LDAPSettingsUtil.getPropertyPostfix(
-				ldapServerId);
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 			String providerUrl = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
