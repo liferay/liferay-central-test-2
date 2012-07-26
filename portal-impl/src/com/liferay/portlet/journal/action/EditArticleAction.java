@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -505,6 +506,9 @@ public class EditArticleAction extends PortletAction {
 		UploadPortletRequest uploadPortletRequest =
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String cmd = ParamUtil.getString(uploadPortletRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
@@ -523,13 +527,10 @@ public class EditArticleAction extends PortletAction {
 		boolean localized = ParamUtil.getBoolean(
 			uploadPortletRequest, "localized");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)uploadPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		User user = themeDisplay.getUser();
 
 		String defaultLanguageId = ParamUtil.getString(
-			uploadPortletRequest, "defaultLanguageId",
-			themeDisplay.getUser().getLanguageId());
+			uploadPortletRequest, "defaultLanguageId", user.getLanguageId());
 
 		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
