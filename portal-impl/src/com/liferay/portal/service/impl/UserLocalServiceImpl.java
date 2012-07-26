@@ -377,6 +377,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		long[] userGroupIds = ArrayUtil.toArray(
 			userGroupIdSet.toArray(new Long[userGroupIdSet.size()]));
 
+		if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+			for (long userGroupId : userGroupIds) {
+				userGroupLocalService.copyUserGroupLayouts(userGroupId, userId);
+			}
+		}
+
 		userPersistence.addUserGroups(userId, userGroupIds);
 	}
 
@@ -569,6 +575,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	@SuppressWarnings("deprecation")
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
+
+		if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+			userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
+		}
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
@@ -839,6 +849,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User groups
 
 		if (userGroupIds != null) {
+			if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+				for (long userGroupId : userGroupIds) {
+					userGroupLocalService.copyUserGroupLayouts(
+						userGroupId, new long[] {userId});
+				}
+			}
+
 			userPersistence.setUserGroups(userId, userGroupIds);
 		}
 
@@ -3470,6 +3487,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
+		if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+			userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
+		}
+
 		userGroupPersistence.setUsers(userGroupId, userIds);
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
@@ -4845,6 +4866,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User groups
 
 		if (userGroupIds != null) {
+			if (PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE) {
+				userGroupLocalService.copyUserGroupLayouts(
+					userGroupIds, userId);
+			}
+
 			userPersistence.setUserGroups(userId, userGroupIds);
 		}
 
