@@ -216,12 +216,14 @@ public class PluginsSummaryBuilder {
 			Arrays.sort(screenshotsFileNames);
 
 			for (String screenshotsFileName : screenshotsFileNames) {
-				if (screenshotsFileName.equals("Thumbs.db")) {
+				if (screenshotsFileName.equals("Thumbs.db") ||
+					screenshotsFileName.endsWith(".png")) {
+
 					FileUtil.delete(
 						fullScreenshotsDirName + screenshotsFileName);
 				}
 
-				if (!screenshotsFileName.endsWith(".png")) {
+				if (!screenshotsFileName.endsWith(".jpg")) {
 					continue;
 				}
 
