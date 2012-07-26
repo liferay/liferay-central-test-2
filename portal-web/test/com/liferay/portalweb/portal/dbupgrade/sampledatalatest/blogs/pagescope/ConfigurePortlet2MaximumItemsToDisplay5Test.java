@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConfigurePortlet2MaximumItemsToDisplay1Test extends BaseTestCase {
-	public void testConfigurePortlet2MaximumItemsToDisplay1()
+public class ConfigurePortlet2MaximumItemsToDisplay5Test extends BaseTestCase {
+	public void testConfigurePortlet2MaximumItemsToDisplay5()
 		throws Exception {
 		selenium.open("/web/blogs-page-scope-community/");
 		loadRequiredJavaScriptModules();
@@ -100,6 +100,25 @@ public class ConfigurePortlet2MaximumItemsToDisplay1Test extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isVisible(
+							"//iframe[@id='_33_configurationIframeDialog']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame("//iframe[@id='_33_configurationIframeDialog']");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isVisible("link=Display Settings")) {
 					break;
 				}
@@ -132,7 +151,7 @@ public class ConfigurePortlet2MaximumItemsToDisplay1Test extends BaseTestCase {
 		}
 
 		selenium.select("//select[@id='_86_pageDelta']",
-			RuntimeVariables.replace("1"));
+			RuntimeVariables.replace("5"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
@@ -157,7 +176,8 @@ public class ConfigurePortlet2MaximumItemsToDisplay1Test extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals("1",
+		assertEquals("5",
 			selenium.getSelectedLabel("//select[@id='_86_pageDelta']"));
+		selenium.selectFrame("relative=top");
 	}
 }

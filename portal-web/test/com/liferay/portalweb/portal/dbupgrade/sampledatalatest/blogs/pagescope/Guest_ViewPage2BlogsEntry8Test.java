@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
-	public void testGuest_ViewPage2BlogsEntry4() throws Exception {
+public class Guest_ViewPage2BlogsEntry8Test extends BaseTestCase {
+	public void testGuest_ViewPage2BlogsEntry8() throws Exception {
 		selenium.open("/web/blogs-page-scope-community/");
 		loadRequiredJavaScriptModules();
 
@@ -67,8 +67,8 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Blogs"),
 			selenium.getText("//span[@class='portlet-title-text']"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -87,7 +87,7 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@id='_33_keywords']",
-			RuntimeVariables.replace("Entry4"));
+			RuntimeVariables.replace("Entry8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -126,10 +126,10 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Entry4."),
+				"No entries were found that matched the keywords: Entry8."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 		selenium.open("/web/blogs-page-scope-community/");
 		loadRequiredJavaScriptModules();
 
@@ -193,7 +193,7 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@id='_33_keywords']",
-			RuntimeVariables.replace("Entry4"));
+			RuntimeVariables.replace("Entry8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -215,8 +215,8 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -235,7 +235,7 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@id='_33_keywords']",
-			RuntimeVariables.replace("Entry4"));
+			RuntimeVariables.replace("Entry8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -274,10 +274,10 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Entry4."),
+				"No entries were found that matched the keywords: Entry8."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 		selenium.open("/web/blogs-page-scope-community/");
 		loadRequiredJavaScriptModules();
 
@@ -341,7 +341,7 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@id='_33_keywords']",
-			RuntimeVariables.replace("Entry4"));
+			RuntimeVariables.replace("Entry8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -363,8 +363,8 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -383,7 +383,7 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		selenium.type("//input[@id='_33_keywords']",
-			RuntimeVariables.replace("Entry4"));
+			RuntimeVariables.replace("Entry8"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -422,9 +422,9 @@ public class Guest_ViewPage2BlogsEntry4Test extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Entry4."),
+				"No entries were found that matched the keywords: Entry8."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry4 Content"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Title"));
+		assertFalse(selenium.isTextPresent("Blogs Entry8 Content"));
 	}
 }

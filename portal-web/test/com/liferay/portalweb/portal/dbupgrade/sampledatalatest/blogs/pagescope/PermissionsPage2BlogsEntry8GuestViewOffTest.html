@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>PermissionsPage2BlogsEntry4GuestViewOffTest</title>
+<title>PermissionsPage2BlogsEntry8GuestViewOffTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">PermissionsPage2BlogsEntry4GuestViewOffTest</td></tr>
+<tr><td rowspan="1" colspan="3">PermissionsPage2BlogsEntry8GuestViewOffTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -34,23 +34,48 @@
 	<td>Blogs (Blogs Test Page2)</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>xPath=(//div[@class='entry-title'])[1]/h2/a</td>
-	<td>Blogs Entry4 Title</td>
+	<td>waitForVisible</td>
+	<td>//input[@id='_33_keywords']</td>
+	<td>Search Field</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='_33_keywords']</td>
+	<td>Entry8</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td[2]/a</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>xPath=(//div[@class='entry-body'])[1]/p</td>
-	<td>Blogs Entry4 Content</td>
+	<td>//td[2]/a</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[2]/a</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/span/a/span</td>
+	<td>//span/a/span[.='Permissions']</td>
 	<td>Permissions</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//td[2]/span/a/span</td>
+	<td>//span/a/span[.='Permissions']</td>
 	<td>Permissions</td>
 </tr>
 <tr>
@@ -83,6 +108,7 @@
 	<td>//input[@name='16_ACTION_VIEW']</td>
 	<td>Guest View</td>
 </tr>
+
 
 </tbody></table>
 </body>

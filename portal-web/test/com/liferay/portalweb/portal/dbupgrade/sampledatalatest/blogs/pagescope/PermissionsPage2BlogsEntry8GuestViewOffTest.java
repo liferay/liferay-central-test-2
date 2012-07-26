@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
-	public void testPermissionsPage2BlogsEntry4GuestViewOff()
+public class PermissionsPage2BlogsEntry8GuestViewOffTest extends BaseTestCase {
+	public void testPermissionsPage2BlogsEntry8GuestViewOff()
 		throws Exception {
 		selenium.open("/web/blogs-page-scope-community/");
 		loadRequiredJavaScriptModules();
@@ -67,13 +67,72 @@ public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs Test Page2)"),
 			selenium.getText("//span[@class='portlet-title-text']"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry4 Title"),
-			selenium.getText("xPath=(//div[@class='entry-title'])[1]/h2/a"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry4 Content"),
-			selenium.getText("xPath=(//div[@class='entry-body'])[1]/p"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@id='_33_keywords']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input[@id='_33_keywords']",
+			RuntimeVariables.replace("Entry8"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Search']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Blogs Entry8 Title")
+										.equals(selenium.getText("//td[2]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Blogs Entry8 Title"),
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
+			RuntimeVariables.replace("Blogs Entry8 Title"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Permissions"),
-			selenium.getText("//td[2]/span/a/span"));
-		selenium.clickAt("//td[2]/span/a/span",
+			selenium.getText("//span/a/span[.='Permissions']"));
+		selenium.clickAt("//span/a/span[.='Permissions']",
 			RuntimeVariables.replace("Permissions"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();

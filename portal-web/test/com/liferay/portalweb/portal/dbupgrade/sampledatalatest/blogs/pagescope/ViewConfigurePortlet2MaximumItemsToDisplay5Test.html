@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewConfigurePortlet2MaximumItemsToDisplay1Test</title>
+<title>ViewConfigurePortlet2MaximumItemsToDisplay5Test</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewConfigurePortlet2MaximumItemsToDisplay1Test</td></tr>
+<tr><td rowspan="1" colspan="3">ViewConfigurePortlet2MaximumItemsToDisplay5Test</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -14,11 +14,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>link=Blogs Test Page2</td>
-	<td>Blogs Test Page2</td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Blogs Test Page2</td>
 	<td>Blogs Test Page2</td>
@@ -35,23 +30,63 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -80,78 +115,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
 	<td>Blogs Entry3 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
-</tr>
-<tr>
-	<td>selectAndWait</td>
-	<td>//select[@name='_33_page']</td>
-	<td>label=3</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -180,28 +175,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -230,78 +265,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
 	<td>Blogs Entry3 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -330,78 +325,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry3 Title</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry3 Title</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
-	<td>Blogs Entry3 Content</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -430,28 +415,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry3 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry3 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry3 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -480,28 +475,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -529,11 +564,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>link=Blogs Test Page3</td>
-	<td>Blogs Test Page3</td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Blogs Test Page3</td>
 	<td>Blogs Test Page3</td>
@@ -549,24 +579,69 @@
 	<td>Blogs (Blogs Test Page2)</td>
 </tr>
 <tr>
+	<td>waitForText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -595,78 +670,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
 	<td>Blogs Entry3 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
-</tr>
-<tr>
-	<td>selectAndWait</td>
-	<td>//select[@name='_33_page']</td>
-	<td>label=3</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -695,28 +730,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -745,78 +820,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
 	<td>Blogs Entry3 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
 	<td>Blogs Entry3 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -845,78 +880,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry3 Title</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry3 Title</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
-	<td>Blogs Entry3 Content</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='search-results']</td>
-	<td>Showing 2 - 2 of 3 results.</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='first']</td>
-	<td>First</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='next']</td>
-	<td>Next</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@class='last']</td>
-	<td>Last</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//a[@class='previous']</td>
-	<td>Previous</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -945,28 +970,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry3 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry3 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry3 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
 	<td>Blogs Entry2 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry2 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
 	<td>Blogs Entry2 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 3 - 3 of 3 results.</td>
+	<td>Showing 6 - 7 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -995,28 +1030,68 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td>Blogs Entry8 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[1]</td>
+	<td>Blogs Entry8 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td>Blogs Entry7 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[2]</td>
+	<td>Blogs Entry7 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td>Blogs Entry6 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[3]</td>
+	<td>Blogs Entry6 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[4]</td>
+	<td>Blogs Entry5 Title</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-body']/p)[4]</td>
+	<td>Blogs Entry5 Content</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='entry-title']/h2/a)[5]</td>
 	<td>Blogs Entry4 Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/h2/a</td>
-	<td>Blogs Entry4 Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
+	<td>xPath=(//div[@class='entry-body']/p)[5]</td>
 	<td>Blogs Entry4 Content</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='search-results']</td>
-	<td>Showing 1 - 1 of 3 results.</td>
+	<td>Showing 1 - 5 of 7 results.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='delta-selector']</td>
-	<td>Items per Page 1</td>
+	<td>Items per Page 5</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -1038,6 +1113,8 @@
 	<td>//a[@class='last']</td>
 	<td>Last</td>
 </tr>
+
+
 </tbody></table>
 </body>
 </html>
