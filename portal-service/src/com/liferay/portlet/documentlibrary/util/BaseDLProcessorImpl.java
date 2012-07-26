@@ -23,7 +23,9 @@ import com.liferay.portal.kernel.util.PropsUtil;
 public abstract class BaseDLProcessorImpl implements DLProcessor {
 
 	public boolean isEnabled() {
-		return _DL_FILE_ENTRY_PROCESSORS.contains(getClass().getName());
+		Class<?> clazz = getClass();
+
+		return _DL_FILE_ENTRY_PROCESSORS.contains(clazz.getName());
 	}
 
 	private static final String _DL_FILE_ENTRY_PROCESSORS = PropsUtil.get(
