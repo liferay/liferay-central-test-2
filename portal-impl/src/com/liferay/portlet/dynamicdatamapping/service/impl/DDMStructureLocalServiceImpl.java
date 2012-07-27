@@ -676,7 +676,9 @@ public class DDMStructureLocalServiceImpl
 			Map<Locale, String> nameMap, Locale contentDefaultLocale)
 		throws PortalException {
 
-		if (Validator.isNull(nameMap.get(contentDefaultLocale))) {
+		String name = nameMap.get(contentDefaultLocale);
+
+		if (Validator.isNull(name)) {
 			throw new StructureNameException();
 		}
 
