@@ -54,8 +54,8 @@ public class WrapPortletTag
 		// Portlet content
 
 		RequestDispatcher requestDispatcher =
-				DirectRequestDispatcherFactoryUtil.getRequestDispatcher(
-					servletContext, portletPage);
+			DirectRequestDispatcherFactoryUtil.getRequestDispatcher(
+				servletContext, portletPage);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
