@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.DynamicServletRequest;
+import com.liferay.portal.kernel.servlet.NonSerializableObjectRequestWrapper;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -43,6 +44,7 @@ import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -664,6 +666,10 @@ public class MainServlet extends ActionServlet {
 
 	protected HttpServletRequest encryptRequest(
 		HttpServletRequest request, long companyId) {
+
+		if (ServerDetector.isWebLogic()) {
+			request = new NonSerializableObjectRequestWrapper(request);
+		}
 
 		boolean encryptRequest = ParamUtil.getBoolean(request, WebKeys.ENCRYPT);
 
@@ -1296,6 +1302,10 @@ public class MainServlet extends ActionServlet {
 		// return the remote user for all threads associated with an
 		// authenticated user. We use ProtectedServletRequest to ensure we get
 		// similar behavior across all servers.
+
+		if (ServerDetector.isWebLogic()) {
+			request = new NonSerializableObjectRequestWrapper(request);
+		}
 
 		return new ProtectedServletRequest(request, remoteUser);
 	}
