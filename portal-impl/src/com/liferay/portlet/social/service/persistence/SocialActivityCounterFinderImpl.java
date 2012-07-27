@@ -81,8 +81,8 @@ public class SocialActivityCounterFinderImpl
 			qPos.add(groupId);
 			qPos.add(PortalUtil.getClassNameId(User.class.getName()));
 
-			if ((names != null) && (names.length > 0)){
-				for(String name : names){
+			if ((names != null) && (names.length > 0)) {
+				for (String name : names) {
 					qPos.add(name);
 				}
 			}
