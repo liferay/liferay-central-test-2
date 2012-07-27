@@ -2203,7 +2203,7 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = null;
 
-		User user = userService.getUserById(oldArticle.getUserId());
+		User user = userPersistence.findByPrimaryKey(oldArticle.getUserId());
 
 		if (incrementVersion) {
 			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
