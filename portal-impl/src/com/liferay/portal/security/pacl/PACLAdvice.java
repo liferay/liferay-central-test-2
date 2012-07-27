@@ -34,7 +34,7 @@ public class PACLAdvice extends ChainableMethodAdvice {
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (!PortalSecurityManagerThreadLocal.isEnabled()) {
 
-			// Do not remove the advice in this case.
+			// Proceed so that we do not remove the advice
 
 			try {
 				return methodInvocation.proceed();
