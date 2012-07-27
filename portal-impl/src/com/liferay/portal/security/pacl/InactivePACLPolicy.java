@@ -53,8 +53,4 @@ public class InactivePACLPolicy extends BasePACLPolicy {
 		return false;
 	}
 
-	@Override
-	protected void initCheckers() throws Exception {
-	}
-
 }
