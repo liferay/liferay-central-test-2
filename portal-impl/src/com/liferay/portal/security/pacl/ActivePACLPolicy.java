@@ -77,7 +77,7 @@ public class ActivePACLPolicy extends BasePACLPolicy {
 	}
 
 	@Override
-	protected void initCheckers() throws Exception {
+	protected void initCheckers() throws Exception 	{
 		Class<?> clazz = getClass();
 
 		ClassLoader classLoader = clazz.getClassLoader();
