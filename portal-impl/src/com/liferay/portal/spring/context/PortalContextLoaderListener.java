@@ -139,6 +139,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		PortalSecurityManagerThreadLocal.setEnabled(false);
+
 		InstancePool.reset();
 		MethodCache.reset();
 		PortletBagPool.reset();
