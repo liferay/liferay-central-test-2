@@ -316,6 +316,20 @@ public class JournalArticleLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
+		long userId, long groupId, long folderId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content, java.lang.String structureId,
+		java.lang.String templateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addArticle(userId, groupId, folderId, titleMap,
+			descriptionMap, content, structureId, templateId, serviceContext);
+	}
+
 	public static void addArticleResources(
 		com.liferay.portlet.journal.model.JournalArticle article,
 		boolean addGroupPermissions, boolean addGuestPermissions)
@@ -864,6 +878,12 @@ public class JournalArticleLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().isLatestVersion(groupId, articleId, version, status);
+	}
+
+	public static void moveArticle(long groupId, java.lang.String articleId,
+		long newFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().moveArticle(groupId, articleId, newFolderId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
