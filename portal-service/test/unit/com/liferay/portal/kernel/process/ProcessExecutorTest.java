@@ -671,9 +671,10 @@ public class ProcessExecutorTest extends BaseTestCase {
 	}
 
 	public void testLeadingLog() throws Exception {
-		boolean isCodeCoverageOn = Boolean.getBoolean("junit.code.coverage");
 
 		// Warn level
+
+		boolean junitCodeCoverage = Boolean.getBoolean("junit.code.coverage");
 
 		String leadingLog = "Test leading log.\n";
 		String bodyLog = "Test body log.\n";
@@ -704,7 +705,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			if (isCodeCoverageOn) {
+			if (junitCodeCoverage) {
 				assertEquals(2, logRecords.size());
 			}
 			else {
@@ -717,7 +718,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 				"Found corrupt leading log " + leadingLog,
 				logRecord.getMessage());
 
-			if (isCodeCoverageOn) {
+			if (junitCodeCoverage) {
 				logRecord = logRecords.get(1);
 
 				String message = logRecord.getMessage();
@@ -755,7 +756,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			if (isCodeCoverageOn) {
+			if (junitCodeCoverage) {
 				assertEquals(3, logRecords.size());
 			}
 			else {
@@ -774,7 +775,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			assertTrue(message.contains("Invoked generic process callable "));
 
-			if (isCodeCoverageOn) {
+			if (junitCodeCoverage) {
 				LogRecord logRecord3 = logRecords.get(2);
 
 				message = logRecord3.getMessage();
@@ -812,7 +813,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			if (isCodeCoverageOn) {
+			if (junitCodeCoverage) {
 				assertEquals(1, logRecords.size());
 
 				LogRecord logRecord = logRecords.get(0);
@@ -1034,17 +1035,15 @@ public class ProcessExecutorTest extends BaseTestCase {
 		int index = message.lastIndexOf(' ');
 
 		assertTrue(index != -1);
-
-		String prefix = message.substring(0, index);
-
 		assertEquals(
-			"Corrupted ObjectInputStream, dumping left content into", prefix);
+			"Dumping content of corrupted object input stream to",
+			message.substring(0, index));
 
-		File logFile = new File(message.substring(index + 1));
+		File file = new File(message.substring(index + 1));
 
-		assertTrue(logFile.exists());
+		assertTrue(file.exists());
 
-		logFile.delete();
+		file.delete();
 	}
 
 	private static List<String> _createArguments() {

@@ -572,21 +572,22 @@ public class ProcessExecutor {
 				}
 			}
 			catch (StreamCorruptedException sce) {
-				File dumpFile = File.createTempFile(
+				File file = File.createTempFile(
 					"corrupted-stream-dump-" + System.currentTimeMillis(),
 					".log");
 
 				_log.error(
-					"Corrupted ObjectInputStream, dumping left content into " +
-						dumpFile.getAbsolutePath(), sce);
+					"Dumping content of corrupted object input stream to " +
+						file.getAbsolutePath(),
+					sce);
 
-				FileOutputStream fileOutputStream = new FileOutputStream(
-					dumpFile);
+				FileOutputStream fileOutputStream = new FileOutputStream(file);
 
 				StreamUtil.transfer(
 					unsyncBufferedInputStream, fileOutputStream);
 
-				throw new ProcessException("Corrupted ObjectInputStream", sce);
+				throw new ProcessException(
+					"Corrupted object input stream", sce);
 			}
 			catch (EOFException eofe) {
 				throw new ProcessException(
