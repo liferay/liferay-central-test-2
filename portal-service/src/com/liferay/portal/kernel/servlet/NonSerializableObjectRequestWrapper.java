@@ -38,7 +38,6 @@ public class NonSerializableObjectRequestWrapper extends
 
 	@Override
 	public void setAttribute(String name, Object object) {
-
 		object = new NonSerializableObjectHandler(object);
 
 		super.setAttribute(name, object);

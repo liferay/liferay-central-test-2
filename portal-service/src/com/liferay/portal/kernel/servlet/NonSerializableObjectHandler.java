@@ -23,7 +23,10 @@ public final class NonSerializableObjectHandler implements Serializable {
 
 	public static Object getValue(Object value) {
 		if (value instanceof NonSerializableObjectHandler) {
-			value = ((NonSerializableObjectHandler) value).getValue();
+			NonSerializableObjectHandler nonSerializableObjectHandler =
+				(NonSerializableObjectHandler)value;
+
+			value = nonSerializableObjectHandler.getValue();
 		}
 
 		return value;
@@ -31,7 +34,10 @@ public final class NonSerializableObjectHandler implements Serializable {
 
 	public NonSerializableObjectHandler(Object value) {
 		while (value instanceof NonSerializableObjectHandler) {
-			value = ((NonSerializableObjectHandler)value).getValue();
+			NonSerializableObjectHandler nonSerializableObjectHandler =
+				(NonSerializableObjectHandler)value;
+
+			value = nonSerializableObjectHandler.getValue();
 		}
 
 		_value = value;
