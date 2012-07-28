@@ -43,8 +43,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -442,6 +442,12 @@ public class MainServlet extends ActionServlet {
 		checkTilesDefinitionsFactory();
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Handle non-serializable request");
+		}
+
+		request = handleNonSerializableRequest(request);
+
+		if (_log.isDebugEnabled()) {
 			_log.debug("Encrypt request");
 		}
 
@@ -667,10 +673,6 @@ public class MainServlet extends ActionServlet {
 	protected HttpServletRequest encryptRequest(
 		HttpServletRequest request, long companyId) {
 
-		if (ServerDetector.isWebLogic()) {
-			request = new NonSerializableObjectRequestWrapper(request);
-		}
-
 		boolean encryptRequest = ParamUtil.getBoolean(request, WebKeys.ENCRYPT);
 
 		if (!encryptRequest) {
@@ -754,6 +756,16 @@ public class MainServlet extends ActionServlet {
 
 	protected long getUserId(HttpServletRequest request) {
 		return PortalUtil.getUserId(request);
+	}
+
+	protected HttpServletRequest handleNonSerializableRequest(
+		HttpServletRequest request) {
+
+		if (ServerDetector.isWebLogic()) {
+			request = new NonSerializableObjectRequestWrapper(request);
+		}
+
+		return request;
 	}
 
 	protected boolean hasAbsoluteRedirect(HttpServletRequest request) {
@@ -1302,10 +1314,6 @@ public class MainServlet extends ActionServlet {
 		// return the remote user for all threads associated with an
 		// authenticated user. We use ProtectedServletRequest to ensure we get
 		// similar behavior across all servers.
-
-		if (ServerDetector.isWebLogic()) {
-			request = new NonSerializableObjectRequestWrapper(request);
-		}
 
 		return new ProtectedServletRequest(request, remoteUser);
 	}
