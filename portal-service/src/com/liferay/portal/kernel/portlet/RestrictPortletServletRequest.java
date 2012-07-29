@@ -47,7 +47,7 @@ public class RestrictPortletServletRequest
 	public Object getAttribute(String name) {
 		Object value = _attributes.get(name);
 
-		if (value == _NULL_VALUE) {
+		if (value == _nullValue) {
 			return null;
 		}
 
@@ -115,13 +115,13 @@ public class RestrictPortletServletRequest
 
 	@Override
 	public void removeAttribute(String name) {
-		_attributes.put(name, _NULL_VALUE);
+		_attributes.put(name, _nullValue);
 	}
 
 	@Override
 	public void setAttribute(String name, Object value) {
 		if (value == null) {
-			value = _NULL_VALUE;
+			value = _nullValue;
 		}
 
 		_attributes.put(name, value);
@@ -139,8 +139,8 @@ public class RestrictPortletServletRequest
 	protected void doMergeSharedAttributes(
 		ServletRequest servletRequest, String name, Object value) {
 
-		if (_isSharedRequestAttribute(name)) {
-			if (value == _NULL_VALUE) {
+		if (isSharedRequestAttribute(name)) {
+			if (value == _nullValue) {
 				servletRequest.removeAttribute(name);
 
 				if (_log.isDebugEnabled()) {
@@ -171,18 +171,15 @@ public class RestrictPortletServletRequest
 			}
 		}
 		else {
-			if ((value != _NULL_VALUE) && _log.isDebugEnabled()) {
+			if ((value != _nullValue) && _log.isDebugEnabled()) {
 				_log.debug("Ignore setting restricted attribute " + name);
 			}
 		}
 	}
 
-	private static boolean _isSharedRequestAttribute(
-		String requestAttributeName) {
-
-		for (String requestSharedAttributePrefix : _REQUEST_SHARED_ATTRIBUTES) {
-
-			if (requestAttributeName.startsWith(requestSharedAttributePrefix)) {
+	protected boolean isSharedRequestAttribute(String name) {
+		for (String requestSharedAttribute : _REQUEST_SHARED_ATTRIBUTES) {
+			if (name.startsWith(requestSharedAttribute)) {
 				return true;
 			}
 		}
@@ -190,13 +187,13 @@ public class RestrictPortletServletRequest
 		return false;
 	}
 
-	private static final Object _NULL_VALUE = new Object();
-
 	private static final String[] _REQUEST_SHARED_ATTRIBUTES =
 		PropsUtil.getArray(PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	private static Log _log = LogFactoryUtil.getLog(
 		RestrictPortletServletRequest.class);
+
+	private static Object _nullValue = new Object();
 
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
 
