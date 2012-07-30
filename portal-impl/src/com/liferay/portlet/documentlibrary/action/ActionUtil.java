@@ -28,7 +28,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
-import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
