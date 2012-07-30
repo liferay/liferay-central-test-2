@@ -20,8 +20,6 @@ import java.io.InputStream;
 import javax.servlet.ServletInputStream;
 
 /**
- * Adapt any InputStream to ServletInputStream
- *
  * @author Shuyang Zhou
  */
 public class ServletInputStreamAdapter extends ServletInputStream {
