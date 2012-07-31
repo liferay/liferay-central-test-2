@@ -19,9 +19,9 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "staging");
 
-String keywords = ParamUtil.getString(request, "keywords");
-
 String redirect = ParamUtil.getString(request, "redirect");
+
+String keywords = ParamUtil.getString(request, "keywords");
 
 long groupId = themeDisplay.getScopeGroupId();
 
