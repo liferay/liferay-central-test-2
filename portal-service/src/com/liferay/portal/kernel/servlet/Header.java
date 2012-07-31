@@ -27,10 +27,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Header implements Serializable {
 
-	private static enum Type {
-		COOKIE, DATE, INTEGER, STRING
-	}
-
 	public Header(Cookie cookie) {
 		_type = Type.COOKIE;
 
@@ -77,63 +73,59 @@ public class Header implements Serializable {
 	}
 
 	public void setToResponse(String key, HttpServletResponse response) {
-		switch (_type) {
-			case COOKIE :
-				response.addCookie(_cookieValue);
-
-				break;
-			case DATE :
-				response.setDateHeader(key, _dateValue);
-
-				break;
-			case INTEGER :
-				response.setIntHeader(key, _intValue);
-
-				break;
-			case STRING :
-				response.setHeader(key, _stringValue);
-
-				break;
+		if (_type == Type.COOKIE) {
+			response.addCookie(_cookieValue);
+		}
+		else if (_type == Type.DATE) {
+			response.setDateHeader(key, _dateValue);
+		}
+		else if (_type == Type.INTEGER) {
+			response.setIntHeader(key, _intValue);
+		}
+		else if (_type == Type.STRING) {
+			response.setHeader(key, _stringValue);
+		}
+		else {
+			throw new IllegalStateException("Invalid type " + _type);
 		}
 	}
 
 	@Override
 	public String toString() {
-		switch (_type) {
-			case COOKIE :
-				StringBundler sb = new StringBundler(17);
+		if (_type == Type.COOKIE) {
+			StringBundler sb = new StringBundler(17);
 
-				sb.append("{comment=");
-				sb.append(_cookieValue.getComment());
-				sb.append(", domain=");
-				sb.append(_cookieValue.getDomain());
-				sb.append(", maxAge=");
-				sb.append(_cookieValue.getMaxAge());
-				sb.append(", name=");
-				sb.append(_cookieValue.getName());
-				sb.append(", path=");
-				sb.append(_cookieValue.getPath());
-				sb.append(", secure=");
-				sb.append(_cookieValue.getSecure());
-				sb.append(", value=");
-				sb.append(_cookieValue.getValue());
-				sb.append(", version=");
-				sb.append(_cookieValue.getVersion());
-				sb.append("}");
+			sb.append("{comment=");
+			sb.append(_cookieValue.getComment());
+			sb.append(", domain=");
+			sb.append(_cookieValue.getDomain());
+			sb.append(", maxAge=");
+			sb.append(_cookieValue.getMaxAge());
+			sb.append(", name=");
+			sb.append(_cookieValue.getName());
+			sb.append(", path=");
+			sb.append(_cookieValue.getPath());
+			sb.append(", secure=");
+			sb.append(_cookieValue.getSecure());
+			sb.append(", value=");
+			sb.append(_cookieValue.getValue());
+			sb.append(", version=");
+			sb.append(_cookieValue.getVersion());
+			sb.append("}");
 
-				return sb.toString();
-
-			case DATE :
-				return String.valueOf(_dateValue);
-
-			case INTEGER :
-				return String.valueOf(_intValue);
-
-			case STRING :
-				return _stringValue;
-
-			default :
-				throw new IllegalStateException("Unknow Type " + _type);
+			return sb.toString();
+		}
+		else if (_type == Type.DATE) {
+			return String.valueOf(_dateValue);
+		}
+		else if (_type == Type.INTEGER) {
+			return String.valueOf(_intValue);
+		}
+		else if (_type == Type.STRING) {
+			return _stringValue;
+		}
+		else {
+			throw new IllegalStateException("Invalid type " + _type);
 		}
 	}
 
@@ -142,5 +134,9 @@ public class Header implements Serializable {
 	private int _intValue;
 	private String _stringValue;
 	private Type _type;
+
+	private static enum Type {
+		COOKIE, DATE, INTEGER, STRING
+	}
 
 }
