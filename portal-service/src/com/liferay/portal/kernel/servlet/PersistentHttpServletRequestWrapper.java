@@ -27,6 +27,7 @@ public class PersistentHttpServletRequestWrapper
 		super(request);
 	}
 
+	@Override
 	public PersistentHttpServletRequestWrapper clone() {
 		try {
 			return (PersistentHttpServletRequestWrapper)super.clone();
