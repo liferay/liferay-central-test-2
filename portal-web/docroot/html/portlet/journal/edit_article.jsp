@@ -91,7 +91,7 @@ if (Validator.isNotNull(toLanguageId)) {
 if ((article == null) && Validator.isNull(defaultLanguageId)) {
 	Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 
-	Locale defaultContentLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
+	Locale defaultContentLocale = LocaleUtil.fromLanguageId(languageId);
 
 	if (ArrayUtil.contains(availableLocales, defaultContentLocale)) {
 		defaultLanguageId = languageId;
