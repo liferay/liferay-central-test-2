@@ -159,9 +159,11 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		throws IOException {
 
 		GZIPOutputStream gzipOutputStream = new GZIPOutputStream(outputStream) {
+
 			{
 				def.setLevel(PropsValues.GZIP_COMPRESSION_LEVEL);
 			}
+
 		};
 
 		return new ServletOutputStreamAdapter(gzipOutputStream);
