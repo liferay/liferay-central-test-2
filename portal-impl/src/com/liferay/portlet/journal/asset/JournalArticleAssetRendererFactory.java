@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
@@ -170,8 +169,7 @@ public class JournalArticleAssetRendererFactory
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			request, PortletKeys.JOURNAL,
-			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
+			request, PortletKeys.JOURNAL, getControlPanelPlid(themeDisplay),
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");

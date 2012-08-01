@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 
 import javax.portlet.PortletRequest;
@@ -149,6 +150,19 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		throws Exception {
 
 		return null;
+	}
+
+	protected long getControlPanelPlid(
+			LiferayPortletRequest liferayPortletRequest)
+		throws PortalException, SystemException {
+
+		return PortalUtil.getControlPanelPlid(liferayPortletRequest);
+	}
+
+	protected long getControlPanelPlid(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

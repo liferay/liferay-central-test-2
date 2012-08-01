@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
@@ -72,8 +71,8 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			PortalUtil.getControlPanelPlid(liferayPortletRequest),
-			PortletKeys.BOOKMARKS, PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.BOOKMARKS,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		portletURL.setParameter(

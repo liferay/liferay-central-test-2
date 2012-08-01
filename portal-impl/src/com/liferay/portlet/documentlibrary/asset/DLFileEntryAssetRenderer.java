@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -134,7 +133,7 @@ public class DLFileEntryAssetRenderer
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			PortalUtil.getControlPanelPlid(liferayPortletRequest),
+			getControlPanelPlid(liferayPortletRequest),
 			PortletKeys.DOCUMENT_LIBRARY, PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(

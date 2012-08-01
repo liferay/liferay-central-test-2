@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.asset;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
@@ -56,8 +55,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 
 		PortletURL editPortletURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.MESSAGE_BOARDS,
-			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
-			PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter(
 			"struts_action", "/message_boards/edit_discussion");

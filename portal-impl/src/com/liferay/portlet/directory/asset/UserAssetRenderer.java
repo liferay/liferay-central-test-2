@@ -21,7 +21,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
@@ -75,8 +74,8 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			PortalUtil.getControlPanelPlid(liferayPortletRequest),
-			PortletKeys.USERS_ADMIN, PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.USERS_ADMIN,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/users_admin/edit_user");
 		portletURL.setParameter("p_u_i_d", String.valueOf(_user.getUserId()));

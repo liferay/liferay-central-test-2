@@ -120,6 +120,12 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		_portletId = portletId;
 	}
 
+	protected long getControlPanelPlid(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
+	}
+
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}

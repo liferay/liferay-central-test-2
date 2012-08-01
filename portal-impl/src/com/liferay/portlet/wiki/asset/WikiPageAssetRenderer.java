@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -101,8 +100,8 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			PortalUtil.getControlPanelPlid(liferayPortletRequest),
-			PortletKeys.WIKI, PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.WIKI,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));

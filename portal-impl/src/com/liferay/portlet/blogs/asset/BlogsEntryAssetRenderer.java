@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -103,8 +102,8 @@ public class BlogsEntryAssetRenderer
 		throws Exception {
 
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-			PortalUtil.getControlPanelPlid(liferayPortletRequest),
-			PortletKeys.BLOGS, PortletRequest.RENDER_PHASE);
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.BLOGS,
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/blogs/edit_entry");
 		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
