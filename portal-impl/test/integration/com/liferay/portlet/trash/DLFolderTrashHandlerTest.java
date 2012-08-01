@@ -230,8 +230,7 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		}
 
 		Assert.assertEquals(
-			initialSearchTrashEntriesCount,
-			searchTrashEntriesCount("File"));
+			initialSearchTrashEntriesCount, searchTrashEntriesCount("File"));
 
 		if (moveFileFromTrash) {
 			Assert.assertEquals(
