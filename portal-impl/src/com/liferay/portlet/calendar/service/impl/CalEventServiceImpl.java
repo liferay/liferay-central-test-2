@@ -79,16 +79,17 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		return calEventLocalService.exportEvent(getGuestOrUserId(), eventId);
 	}
 
-    public File exportEvents(List<CalEvent> events, String fileName)
-            throws PortalException, SystemException {
+	public File exportEvents(List<CalEvent> events, String fileName)
+		throws PortalException, SystemException {
 
-        for (CalEvent event : events) {
-            CalEventPermission.check(
-                getPermissionChecker(), event.getEventId(), ActionKeys.VIEW);
-        }
+		for (CalEvent event : events) {
+			CalEventPermission.check(
+				getPermissionChecker(), event.getEventId(), ActionKeys.VIEW);
+		}
 
-        return calEventLocalService.exportEvents(getGuestOrUserId(), events, fileName);
-    }
+		return calEventLocalService.exportEvents(
+			getGuestOrUserId(), events, fileName);
+	}
 
 	public File exportGroupEvents(long groupId, String fileName)
 		throws PortalException, SystemException {

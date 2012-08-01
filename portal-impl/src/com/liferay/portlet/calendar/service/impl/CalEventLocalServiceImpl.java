@@ -448,11 +448,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return exportEvents(userId, events, null);
 	}
 
-    public File exportEvents(long userId, List<CalEvent> events, String fileName)
-            throws PortalException, SystemException {
+	public File exportEvents(
+			long userId, List<CalEvent> events, String fileName)
+		throws PortalException, SystemException {
 
-        return exportICal4j(toICalCalendar(userId, events), fileName);
-    }
+		return exportICal4j(toICalCalendar(userId, events), fileName);
+	}
 
 	public File exportGroupEvents(long userId, long groupId, String fileName)
 		throws PortalException, SystemException {
