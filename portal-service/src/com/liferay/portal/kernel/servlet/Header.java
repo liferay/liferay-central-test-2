@@ -31,7 +31,7 @@ public class Header implements Serializable {
 
 	public Header(Cookie cookie) {
 		if (cookie == null) {
-			throw new IllegalArgumentException("cookie is null");
+			throw new IllegalArgumentException("Cookie is null");
 		}
 
 		_type = Type.COOKIE;
@@ -53,7 +53,7 @@ public class Header implements Serializable {
 
 	public Header(String string) {
 		if (string == null) {
-			throw new IllegalArgumentException("string is null");
+			throw new IllegalArgumentException("String is null");
 		}
 
 		_type = Type.STRING;
@@ -78,7 +78,7 @@ public class Header implements Serializable {
 		}
 
 		if (_type == Type.COOKIE) {
-			return _cookieEquals(_cookieValue, header._cookieValue);
+			return _equals(_cookieValue, header._cookieValue);
 		}
 		else if (_type == Type.DATE) {
 			return _dateValue == header._dateValue;
@@ -97,7 +97,7 @@ public class Header implements Serializable {
 	@Override
 	public int hashCode() {
 		if (_type == Type.COOKIE) {
-			return _cookieHashCode(_cookieValue);
+			return _hashCode(_cookieValue);
 		}
 		else if (_type == Type.DATE) {
 			return (int)(_dateValue ^ (_dateValue >>> 32));
@@ -170,47 +170,27 @@ public class Header implements Serializable {
 		}
 	}
 
-	private boolean _cookieEquals(Cookie cookie1, Cookie cookie2) {
+	private boolean _equals(Cookie cookie1, Cookie cookie2) {
 		if (cookie1 == cookie2) {
 			return true;
 		}
 
-		if (!Validator.equals(cookie1.getComment(), cookie2.getComment())) {
-			return false;
-		}
+		if (!Validator.equals(cookie1.getComment(), cookie2.getComment()) ||
+			!Validator.equals(cookie1.getDomain(), cookie2.getDomain()) ||
+			(cookie1.getMaxAge() != cookie2.getMaxAge()) ||
+			!Validator.equals(cookie1.getName(), cookie2.getName()) ||
+			!Validator.equals(cookie1.getPath(), cookie2.getPath()) ||
+			(cookie1.getSecure() != cookie2.getSecure()) ||
+			!Validator.equals(cookie1.getValue(), cookie2.getValue()) ||
+			(cookie1.getVersion() != cookie2.getVersion())) {
 
-		if (!Validator.equals(cookie1.getDomain(), cookie2.getDomain())) {
-			return false;
-		}
-
-		if (cookie1.getMaxAge() != cookie2.getMaxAge()) {
-			return false;
-		}
-
-		if (!Validator.equals(cookie1.getName(), cookie2.getName())) {
-			return false;
-		}
-
-		if (!Validator.equals(cookie1.getPath(), cookie2.getPath())) {
-			return false;
-		}
-
-		if (cookie1.getSecure() != cookie2.getSecure()) {
-			return false;
-		}
-
-		if (!Validator.equals(cookie1.getValue(), cookie2.getValue())) {
-			return false;
-		}
-
-		if (cookie1.getVersion() != cookie2.getVersion()) {
 			return false;
 		}
 
 		return true;
 	}
 
-	private int _cookieHashCode(Cookie cookie) {
+	private int _hashCode(Cookie cookie) {
 		int hashCode = HashUtil.hash(0, cookie.getComment());
 
 		hashCode = HashUtil.hash(hashCode, cookie.getDomain());
