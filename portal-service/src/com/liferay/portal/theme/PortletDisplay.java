@@ -46,6 +46,7 @@ public class PortletDisplay implements Serializable {
 		_content = master.getContent();
 		_customCSSClassName = master.getCustomCSSClassName();
 		_description = master.getDescription();
+		_focused = master.isFocused();
 		_id = master.getId();
 		_instanceId = master.getInstanceId();
 		_modeAbout = master.isModeAbout();
@@ -107,6 +108,7 @@ public class PortletDisplay implements Serializable {
 		slave.setContent(_content);
 		slave.setCustomCSSClassName(_customCSSClassName);
 		slave.setDescription(_description);
+		slave.setFocused(_focused);
 		slave.setId(_id);
 		slave.setInstanceId(_instanceId);
 		slave.setModeAbout(_modeAbout);
