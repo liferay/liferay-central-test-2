@@ -112,7 +112,8 @@ public class PortletRenderer {
 		PipingServletResponse pipingServletResponse =
 			new PipingServletResponse(response, unsyncStringWriter);
 
-		Object oldValue = request.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
+		Object portletParallelRender = request.getAttribute(
+			WebKeys.PORTLET_PARALLEL_RENDER);
 
 		request.setAttribute(WebKeys.PORTLET_PARALLEL_RENDER, Boolean.FALSE);
 
@@ -121,7 +122,8 @@ public class PortletRenderer {
 				request, pipingServletResponse, _portlet);
 		}
 		finally {
-			request.setAttribute(WebKeys.PORTLET_PARALLEL_RENDER, oldValue);
+			request.setAttribute(
+				WebKeys.PORTLET_PARALLEL_RENDER, portletParallelRender);
 		}
 
 		return unsyncStringWriter.getStringBundler();
