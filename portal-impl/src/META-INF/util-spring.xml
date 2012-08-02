@@ -686,6 +686,7 @@
 			<bean class="com.liferay.portal.util.PortletListerFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.util.PrefsPropsUtil" class="com.liferay.portal.util.PrefsPropsUtil" />
 	<bean id="com.liferay.portal.webserver.WebServerServletTokenUtil" class="com.liferay.portal.webserver.WebServerServletTokenUtil">
 		<property name="webServerServletToken">
 			<bean class="com.liferay.portal.webserver.WebServerServletTokenImpl">
