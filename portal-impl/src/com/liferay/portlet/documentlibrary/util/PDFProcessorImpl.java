@@ -65,16 +65,11 @@ import org.im4java.core.IMOperation;
 public class PDFProcessorImpl
 	extends DLPreviewableProcessor implements PDFProcessor {
 
-	public PDFProcessorImpl() {
-		try {
-			FileUtil.mkdirs(PREVIEW_TMP_PATH);
-			FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
+	public void afterPropertiesSet() throws Exception {
+		FileUtil.mkdirs(PREVIEW_TMP_PATH);
+		FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
 
-			ImageMagickUtil.reset();
-		}
-		catch (Exception e) {
-			_log.warn(e, e);
-		}
+		ImageMagickUtil.reset();
 	}
 
 	public void generateImages(

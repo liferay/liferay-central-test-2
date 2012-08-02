@@ -36,6 +36,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 
+	public void afterPropertiesSet() throws Exception {
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		for (String dlProcessorClassName : _DL_FILE_ENTRY_PROCESSORS) {
+			DLProcessor dlProcessor = (DLProcessor)InstanceFactory.newInstance(
+				classLoader, dlProcessorClassName);
+
+			dlProcessor.afterPropertiesSet();
+
+			register(dlProcessor);
+		}
+	}
+
 	public void cleanUp(FileEntry fileEntry) {
 		if (!DLProcessorThreadLocal.isEnabled()) {
 			return;
@@ -104,17 +117,6 @@ public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 					portletDataContext, fileEntry, importedFileEntry,
 					fileEntryElement);
 			}
-		}
-	}
-
-	public void init() throws Exception {
-		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
-		for (String dlProcessorClassName : _DL_FILE_ENTRY_PROCESSORS) {
-			DLProcessor dlProcessor = (DLProcessor)InstanceFactory.newInstance(
-				classLoader, dlProcessorClassName);
-
-			register(dlProcessor);
 		}
 	}
 

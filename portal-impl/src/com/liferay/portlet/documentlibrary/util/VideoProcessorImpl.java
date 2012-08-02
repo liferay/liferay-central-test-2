@@ -67,7 +67,7 @@ import org.apache.commons.lang.time.StopWatch;
 public class VideoProcessorImpl
 	extends DLPreviewableProcessor implements VideoProcessor {
 
-	public VideoProcessorImpl() {
+	public void afterPropertiesSet() {
 		boolean valid = true;
 
 		if ((_PREVIEW_TYPES.length == 0) || (_PREVIEW_TYPES.length > 2)) {

@@ -56,7 +56,7 @@ import java.util.Map;
 public class RawMetadataProcessorImpl
 	implements DLProcessor, RawMetadataProcessor {
 
-	public RawMetadataProcessorImpl() {
+	public void afterPropertiesSet() {
 	}
 
 	public void cleanUp(FileEntry fileEntry) {
