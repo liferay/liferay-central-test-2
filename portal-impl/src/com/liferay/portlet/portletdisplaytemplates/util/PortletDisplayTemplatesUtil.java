@@ -167,34 +167,39 @@ public class PortletDisplayTemplatesUtil {
 		contextObjects.put(
 			PortletDisplayTemplatesConstants.THEME_DISPLAY, themeDisplay);
 
-		contextObjects.putAll(getPortletPreferences(renderRequest));
+		contextObjects.putAll(_getPortletPreferences(renderRequest));
 
 		return _transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(),
 			ddmTemplate.getLanguage());
 	}
 
-	private static Map<String, Object> getPortletPreferences(
+	private static Map<String, Object> _getPortletPreferences(
 		RenderRequest renderRequest) {
 
-		Map<String, Object> contextPreferences = new HashMap<String, Object>();
-		PortletPreferences preferences = renderRequest.getPreferences();
+		Map<String, Object> contextObjects = new HashMap<String, Object>();
 
-		Map<String, String[]> preferencesMap = preferences.getMap();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		for (Map.Entry<String, String[]> preference :
-			preferencesMap.entrySet()) {
+		Map<String, String[]> map = portletPreferences.getMap();
 
-			if ((preference.getValue() != null) &&
-				(preference.getValue().length > 0) &&
-				(preference.getValue()[0] != null)) {
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+			String[] values = entry.getValue();
 
-				contextPreferences.put(
-					preference.getKey(), preference.getValue()[0]);
+			if ((values == null) || (values.length == 0)) {
+				continue;
 			}
+
+			String value = values[0];
+
+			if (value == null) {
+				continue;
+			}
+
+			contextObjects.put(entry.getKey(), value);
 		}
 
-		return contextPreferences;
+		return contextObjects;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
