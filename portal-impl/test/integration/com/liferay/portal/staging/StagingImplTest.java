@@ -69,7 +69,7 @@ public class StagingImplTest {
 		enableLocalStaging(false, true);
 	}
 
-	protected JournalArticle addArticle(
+	protected JournalArticle addJournalArticle(
 			long groupId, String name, String content)
 		throws Exception {
 
@@ -108,7 +108,7 @@ public class StagingImplTest {
 			serviceContext);
 	}
 
-	protected PollsChoice addChoice(String name, String description) {
+	protected PollsChoice addPollsChoice(String name, String description) {
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		for (Locale locale : _locales) {
@@ -116,15 +116,15 @@ public class StagingImplTest {
 				locale, description.concat(LocaleUtil.toLanguageId(locale)));
 		}
 
-		PollsChoice choice = PollsChoiceUtil.create(0);
+		PollsChoice pollsChoice = PollsChoiceUtil.create(0);
 
-		choice.setName(name);
-		choice.setDescriptionMap(descriptionMap);
+		pollsChoice.setName(name);
+		pollsChoice.setDescriptionMap(descriptionMap);
 
-		return choice;
+		return pollsChoice;
 	}
 
-	protected PollsQuestion addQuestion(
+	protected PollsQuestion addPollsQuestion(
 			long groupId, String title, String description)
 		throws Exception {
 
@@ -137,21 +137,21 @@ public class StagingImplTest {
 				locale, description.concat(LocaleUtil.toLanguageId(locale)));
 		}
 
-		List<PollsChoice> choices = new ArrayList<PollsChoice>();
+		List<PollsChoice> pollsChoices = new ArrayList<PollsChoice>();
 
-		choices.add(addChoice("optionA", "descriptionA"));
-		choices.add(addChoice("optionB", "descriptionB"));
+		pollsChoices.add(addPollsChoice("optionA", "descriptionA"));
+		pollsChoices.add(addPollsChoice("optionB", "descriptionB"));
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
 		serviceContext.setScopeGroupId(groupId);
 
 		return PollsQuestionLocalServiceUtil.addQuestion(
 			TestPropsValues.getUserId(), titleMap, descriptionMap, 0, 0, 0, 0,
-			0, true, choices, serviceContext);
+			0, true, pollsChoices, serviceContext);
 	}
 
-	protected void enableLocalStaging(
-			boolean stageJournal, boolean stagePolls)
+	protected void enableLocalStaging(boolean stageJournal, boolean stagePolls)
 		throws Exception {
 
 		Group group = ServiceTestUtil.addGroup(ServiceTestUtil.randomString());
@@ -162,12 +162,12 @@ public class StagingImplTest {
 		int initialPagesCount = LayoutLocalServiceUtil.getLayoutsCount(
 			group, false);
 
-		// Create Content
+		// Create content
 
-		JournalArticle article = addArticle(
+		JournalArticle journalArticle = addJournalArticle(
 			group.getGroupId(), "Title", "content");
 
-		PollsQuestion question = addQuestion(
+		PollsQuestion pollsQuestion = addPollsQuestion(
 			group.getGroupId(), "Question", "Description");
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
@@ -202,7 +202,7 @@ public class StagingImplTest {
 		serviceContext.setAttribute(
 			StagingConstants.STAGED_PORTLET + PortletKeys.POLLS, stagePolls);
 
-		// Enable Staging
+		// Enable staging
 
 		StagingUtil.enableLocalStaging(
 			TestPropsValues.getUserId(), group, group, false, false,
@@ -216,45 +216,47 @@ public class StagingImplTest {
 			LayoutLocalServiceUtil.getLayoutsCount(stagingGroup, false),
 			initialPagesCount);
 
-		// Update Content in Staging
+		// Update content in staging
 
-		JournalArticle stagingArticle =
+		JournalArticle stagingJournalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				stagingGroup.getGroupId(), article.getUrlTitle());
+				stagingGroup.getGroupId(), journalArticle.getUrlTitle());
 
-		stagingArticle = updateArticle(
-			stagingArticle, "Title2", stagingArticle.getContent());
+		stagingJournalArticle = updateJournalArticle(
+			stagingJournalArticle, "Title2",
+			stagingJournalArticle.getContent());
 
 		PollsQuestion stagingQuestion =
 			PollsQuestionLocalServiceUtil.getPollsQuestionByUuidAndGroupId(
-				question.getUuid(), stagingGroup.getGroupId());
+				pollsQuestion.getUuid(), stagingGroup.getGroupId());
 
-		stagingQuestion = updateQuestion(
+		stagingQuestion = updatePollsQuestion(
 			stagingQuestion, "Question2", "Description2");
 
-		// Publish to Live
+		// Publish to live
 
 		StagingUtil.publishLayouts(
 			TestPropsValues.getUserId(), stagingGroup.getGroupId(),
 			group.getGroupId(), false, parameters, null, null);
 
-		// Retrieve content from Live after publishing
+		// Retrieve content from live after publishing
 
-		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
-		question = PollsQuestionLocalServiceUtil.getQuestion(
-			question.getQuestionId());
+		journalArticle = JournalArticleLocalServiceUtil.getArticle(
+			journalArticle.getId());
+		pollsQuestion = PollsQuestionLocalServiceUtil.getQuestion(
+			pollsQuestion.getQuestionId());
 
 		if (stagePolls) {
 			for (Locale locale : _locales) {
 				Assert.assertEquals(
-					question.getTitle(locale),
+					pollsQuestion.getTitle(locale),
 					stagingQuestion.getTitle(locale));
 			}
 		}
 		else {
 			for (Locale locale : _locales) {
 				Assert.assertFalse(
-					question.getTitle(locale).equals(
+					pollsQuestion.getTitle(locale).equals(
 						stagingQuestion.getTitle(locale)));
 			}
 		}
@@ -262,20 +264,21 @@ public class StagingImplTest {
 		if (stageJournal) {
 			for (Locale locale : _locales) {
 				Assert.assertEquals(
-					article.getTitle(locale), stagingArticle.getTitle(locale));
+					journalArticle.getTitle(locale),
+					stagingJournalArticle.getTitle(locale));
 			}
 		}
 		else {
 			for (Locale locale : _locales) {
 				Assert.assertFalse(
-					article.getTitle(locale).equals(
-						stagingArticle.getTitle(locale)));
+					journalArticle.getTitle(locale).equals(
+						stagingJournalArticle.getTitle(locale)));
 			}
 		}
 	}
 
-	protected JournalArticle updateArticle(
-			JournalArticle article, String name, String content)
+	protected JournalArticle updateJournalArticle(
+			JournalArticle journalArticle, String name, String content)
 		throws Exception {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
@@ -285,14 +288,16 @@ public class StagingImplTest {
 		}
 
 		return JournalArticleLocalServiceUtil.updateArticle(
-			article.getUserId(), article.getGroupId(), article.getFolderId(),
-			article.getArticleId(), article.getVersion(), titleMap,
-			article.getDescriptionMap(), content, article.getLayoutUuid(),
+			journalArticle.getUserId(), journalArticle.getGroupId(),
+			journalArticle.getFolderId(), journalArticle.getArticleId(),
+			journalArticle.getVersion(), titleMap,
+			journalArticle.getDescriptionMap(), content,
+			journalArticle.getLayoutUuid(),
 			ServiceTestUtil.getServiceContext());
 	}
 
-	protected PollsQuestion updateQuestion(
-			PollsQuestion question, String title, String description)
+	protected PollsQuestion updatePollsQuestion(
+			PollsQuestion pollsQuestion, String title, String description)
 		throws Exception {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
@@ -300,19 +305,19 @@ public class StagingImplTest {
 
 		for (Locale locale : _locales) {
 			titleMap.put(locale, title.concat(LocaleUtil.toLanguageId(locale)));
-
 			descriptionMap.put(
 				locale, description.concat(LocaleUtil.toLanguageId(locale)));
 		}
 
 		return PollsQuestionLocalServiceUtil.updateQuestion(
-			question.getUserId(), question.getQuestionId(), titleMap,
-			descriptionMap, 0, 0, 0, 0, 0, true, question.getChoices(),
+			pollsQuestion.getUserId(), pollsQuestion.getQuestionId(), titleMap,
+			descriptionMap, 0, 0, 0, 0, 0, true, pollsQuestion.getChoices(),
 			ServiceTestUtil.getServiceContext());
 	}
 
-	private Locale[] _locales =  new Locale[] { 
-		new Locale("en", "US"), new Locale("es", "ES"), 
-		new Locale("de", "DE") };
+	private static Locale[] _locales = {
+		new Locale("en", "US"), new Locale("es", "ES"),
+		new Locale("de", "DE")
+	};
 
 }
