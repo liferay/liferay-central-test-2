@@ -30,16 +30,13 @@ import java.nio.charset.CharsetEncoder;
  */
 public class OutputStreamWriter extends Writer {
 
-	public static final String DEFAULT_CHARSET_NAME =
-		Charset.defaultCharset().name();
-
 	public OutputStreamWriter(OutputStream outputStream) {
-		this(outputStream, DEFAULT_CHARSET_NAME);
+		this(outputStream, _DEFAULT_CHARSET_NAME);
 	}
 
 	public OutputStreamWriter(OutputStream outputStream, String charsetName) {
 		if (charsetName == null) {
-			charsetName = DEFAULT_CHARSET_NAME;
+			charsetName = _DEFAULT_CHARSET_NAME;
 		}
 
 		_outputStream = outputStream;
@@ -86,6 +83,9 @@ public class OutputStreamWriter extends Writer {
 
 		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
+
+	private static final String _DEFAULT_CHARSET_NAME =
+		Charset.defaultCharset().name();
 
 	private CharsetEncoder _charsetEncoder;
 	private String _charsetName;

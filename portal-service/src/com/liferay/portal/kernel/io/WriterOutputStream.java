@@ -32,9 +32,6 @@ import java.nio.charset.CoderResult;
  */
 public class WriterOutputStream extends OutputStream {
 
-	public static final String DEFAULT_CHARSET_NAME =
-		Charset.defaultCharset().name();
-
 	public WriterOutputStream(Writer writer) {
 		this(
 			writer, StringPool.UTF8, _DEFAULT_INTPUT_BUFFER_SIZE,
@@ -78,7 +75,7 @@ public class WriterOutputStream extends OutputStream {
 		}
 
 		if (charsetName == null) {
-			charsetName = DEFAULT_CHARSET_NAME;
+			charsetName = _DEFAULT_CHARSET_NAME;
 		}
 
 		_writer = writer;
@@ -164,6 +161,9 @@ public class WriterOutputStream extends OutputStream {
 			_outputBuffer.rewind();
 		}
 	}
+
+	private static final String _DEFAULT_CHARSET_NAME =
+		Charset.defaultCharset().name();
 
 	private static final int _DEFAULT_INTPUT_BUFFER_SIZE = 128;
 
