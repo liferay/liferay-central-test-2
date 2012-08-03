@@ -188,7 +188,9 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 			}
 			catch (NoSuchFolderException nsfe) {
 				try {
-					if (!getLatestFileVersion(true).isInTrash()) {
+					DLFileVersion dlFileVersion = getLatestFileVersion(true);
+
+					if (!dlFileVersion.isInTrash()) {
 						_log.error(nsfe, nsfe);
 					}
 				}

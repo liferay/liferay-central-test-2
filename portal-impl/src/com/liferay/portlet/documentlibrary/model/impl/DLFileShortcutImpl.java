@@ -74,6 +74,7 @@ public class DLFileShortcutImpl extends DLFileShortcutBaseImpl {
 
 	public DLFolder getTrashFolder() {
 		Folder folder = getFolder();
+
 		DLFolder dlFolder = (DLFolder)folder.getModel();
 
 		if (dlFolder.isInTrash()) {

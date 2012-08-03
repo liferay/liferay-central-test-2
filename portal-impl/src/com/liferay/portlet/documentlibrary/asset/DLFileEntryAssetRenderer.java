@@ -104,9 +104,8 @@ public class DLFileEntryAssetRenderer
 		return assetRendererFactory.getPortletId();
 	}
 
-	public String getRestorePath(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
+	@Override
+	public String getRestorePath(RenderRequest renderRequest) {
 		DLFileEntry dlFileEntry = (DLFileEntry)_fileEntry.getModel();
 
 		if ((dlFileEntry != null) && dlFileEntry.isInTrashFolder()) {
@@ -118,9 +117,8 @@ public class DLFileEntryAssetRenderer
 			return
 				"/html/portlet/document_library/trash/file_entry_restore.jsp";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public String getSummary(Locale locale) {

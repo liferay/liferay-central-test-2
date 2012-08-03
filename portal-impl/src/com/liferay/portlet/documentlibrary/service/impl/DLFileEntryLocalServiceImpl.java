@@ -575,9 +575,10 @@ public class DLFileEntryLocalServiceImpl
 				groupId, folderId, start, end);
 
 			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				if (includeTrashedEntries ||
-					!dlFileEntry.getLatestFileVersion(true).isInTrash()) {
+				DLFileVersion dlFileVersion = dlFileEntry.getLatestFileVersion(
+					true);
 
+				if (includeTrashedEntries || !dlFileVersion.isInTrash()) {
 					dlAppHelperLocalService.deleteFileEntry(
 						new LiferayFileEntry(dlFileEntry));
 

@@ -81,9 +81,7 @@ public class DLFolderTrashRenderer extends BaseTrashRenderer {
 	}
 
 	@Override
-	public String getRestorePath(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
+	public String getRestorePath(RenderRequest renderRequest) {
 		DLFolder dlFolder = (DLFolder)_folder.getModel();
 
 		if ((dlFolder != null) && dlFolder.isInTrashFolder()) {
@@ -92,9 +90,8 @@ public class DLFolderTrashRenderer extends BaseTrashRenderer {
 
 			return "/html/portlet/document_library/trash/folder_restore.jsp";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public String getSummary(Locale locale) {

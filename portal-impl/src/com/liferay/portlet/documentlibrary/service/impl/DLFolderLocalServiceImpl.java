@@ -141,10 +141,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			deleteFolder(dlFolder);
 		}
 
-		dlFileShortcutLocalService.deleteFileShortcuts(
+		dlFileEntryLocalService.deleteFileEntries(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		dlFileEntryLocalService.deleteFileEntries(
+		dlFileShortcutLocalService.deleteFileShortcuts(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		try {
@@ -705,12 +705,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		webDAVPropsLocalService.deleteWebDAVProps(
 			DLFolder.class.getName(), dlFolder.getFolderId());
 
-		// File shortcuts
-
-		dlFileShortcutLocalService.deleteFileShortcuts(
-			dlFolder.getGroupId(), dlFolder.getFolderId(),
-			includeTrashedEntries);
-
 		// File entries
 
 		dlFileEntryLocalService.deleteFileEntries(
@@ -721,6 +715,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFileEntryTypeLocalService.unsetFolderFileEntryTypes(
 			dlFolder.getFolderId());
+
+		// File shortcuts
+
+		dlFileShortcutLocalService.deleteFileShortcuts(
+			dlFolder.getGroupId(), dlFolder.getFolderId(),
+			includeTrashedEntries);
 
 		// Expando
 

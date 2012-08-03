@@ -66,6 +66,10 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return getIconPath(themeDisplay);
 	}
 
+	public String getRestorePath(RenderRequest renderRequest) {
+		return null;
+	}
+
 	public String getURLDownload(ThemeDisplay themeDisplay) {
 		return null;
 	}

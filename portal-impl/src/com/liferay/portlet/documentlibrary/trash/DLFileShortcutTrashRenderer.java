@@ -62,9 +62,7 @@ public class DLFileShortcutTrashRenderer extends BaseTrashRenderer {
 	}
 
 	@Override
-	public String getRestorePath(RenderRequest renderRequest)
-		throws PortalException, SystemException {
-
+	public String getRestorePath(RenderRequest renderRequest) {
 		if (_fileShortcut.isInTrashFolder()) {
 			renderRequest.setAttribute(
 				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _fileEntry);
@@ -74,9 +72,8 @@ public class DLFileShortcutTrashRenderer extends BaseTrashRenderer {
 			return
 				"/html/portlet/document_library/trash/file_entry_restore.jsp";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public String getSummary(Locale locale) {
