@@ -79,7 +79,9 @@ public class NotificationEvent implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return getUuid().hashCode();
+		String uuid = getUuid();
+
+		return uuid.hashCode();
 	}
 
 	public boolean isArchived() {
