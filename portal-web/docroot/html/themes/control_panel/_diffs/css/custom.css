@@ -714,6 +714,10 @@ body.portal-popup:after, body.portal-popup:before {
 	}
 }
 
+.taglib-page-iterator .search-pages .page-links {
+	padding: 5px 0 0;
+}
+
 /*----- Extras -----*/
 
 input[type="text"], input[type="password"], select, textarea, .textarea, .aui-tagselector-content .aui-textboxlistentry-holder {
@@ -785,8 +789,4 @@ input[type="text"], input[type="password"], select, textarea, .textarea, #breadc
 .panel-page-menu .lfr-panel-content ul li.selected-portlet a {
 	@include filter-gradient(#427EAD, #154B75);
 	@include background-image(linear-gradient(#427EAD, #154B75));
-}
-
-.taglib-page-iterator .search-pages .page-links {
-	padding: 5px 0 0;
 }
