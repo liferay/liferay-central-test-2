@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String title = (String)request.getAttribute("liferay-ui:app_view_navigation:title");
+String title = (String)request.getAttribute("liferay-ui:app-view-navigation:title");
 %>
 
 <div class="app-view-navigation-taglib">

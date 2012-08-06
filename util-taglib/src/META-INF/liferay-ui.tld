@@ -14,17 +14,17 @@
 		<tag-class>com.liferay.taglib.ui.AppViewDisplayStyleTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
-			<name>requestParams</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>displayStyle</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
 			<name>displayStyles</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>requestParams</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -54,17 +54,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>isFolder</name>
+			<name>folder</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>isLocked</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
-			<name>isShortcut</name>
+			<name>locked</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -75,6 +70,11 @@
 		</attribute>
 		<attribute>
 			<name>rowCheckerName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>shortcut</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

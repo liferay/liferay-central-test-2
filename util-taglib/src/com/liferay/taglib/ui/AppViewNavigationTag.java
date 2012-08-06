@@ -45,7 +45,7 @@ public class AppViewNavigationTag extends TagSupport {
 				(HttpServletRequest)pageContext.getRequest();
 
 			request.setAttribute(
-				"liferay-ui:app_view_navigation:title", _title);
+				"liferay-ui:app-view-navigation:title", _title);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 

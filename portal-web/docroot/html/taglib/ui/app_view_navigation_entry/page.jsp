@@ -17,24 +17,18 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String entryTitle = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:entryTitle");
-
 String actionJsp = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:actionJsp");
-
+boolean browseUp = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-navigation-entry:browseUp"));
 String cssClassName = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:cssClassName");
-
-String iconImage = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:iconImage");
-String iconSrc = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:iconSrc");
-
-String viewURL = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:viewURL");
-String expandURL = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:expandURL");
-
 Map<String, Object> dataExpand = (Map<String, Object>)request.getAttribute("liferay-ui:app-view-navigation-entry:dataExpand");
 Map<String, Object> dataView = (Map<String, Object>)request.getAttribute("liferay-ui:app-view-navigation-entry:dataView");
-
-boolean browseUp = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-navigation-entry:browseUp"));
+String entryTitle = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:entryTitle");
+String expandURL = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:expandURL");
+String iconImage = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:iconImage");
+String iconSrc = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:iconSrc");
 boolean selected = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-navigation-entry:selected"));
 boolean showExpand = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-navigation-entry:showExpand"));
+String viewURL = (String)request.getAttribute("liferay-ui:app-view-navigation-entry:viewURL");
 
 String dataDirection = StringPool.BLANK;
 String dataExpandFolder = "data-expand-folder=\"" + Boolean.TRUE.toString() + "\"";

@@ -17,30 +17,22 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-boolean showCheckbox = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:showCheckbox"));
-
-String title = (String)request.getAttribute("liferay-ui:app-view-entry:title");
+String actionJsp = (String)request.getAttribute("liferay-ui:app-view-entry:actionJsp");
+Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:app-view-entry:data");
 String description = (String)request.getAttribute("liferay-ui:app-view-entry:description");
-
+String displayStyle = (String)request.getAttribute("liferay-ui:app-view-entry:displayStyle");
+boolean folder = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:folder"));
+boolean locked = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:locked"));
 String rowCheckerId = (String)request.getAttribute("liferay-ui:app-view-entry:rowCheckerId");
 String rowCheckerName = (String)request.getAttribute("liferay-ui:app-view-entry:rowCheckerName");
-
-String actionJsp = (String)request.getAttribute("liferay-ui:app-view-entry:actionJsp");
-
-boolean isFolder = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:isFolder"));
-boolean isShortcut = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:isShortcut"));
-boolean isLocked = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:isLocked"));
-
-String url = (String)request.getAttribute("liferay-ui:app-view-entry:url");
-
+boolean shortcut = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:shortcut"));
+boolean showCheckbox = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-entry:showCheckbox"));
 int status = GetterUtil.getInteger(request.getAttribute("liferay-ui:app-view-entry:status"));
-
+String thumbnailDivStyle = (String)request.getAttribute("liferay-ui:app-view-entry:thumbnailDivStyle");
 String thumbnailSrc = (String)request.getAttribute("liferay-ui:app-view-entry:thumbnailSrc");
 String thumbnailStyle = (String)request.getAttribute("liferay-ui:app-view-entry:thumbnailStyle");
-String thumbnailDivStyle = (String)request.getAttribute("liferay-ui:app-view-entry:thumbnailDivStyle");
-
-String displayStyle = (String)request.getAttribute("liferay-ui:app-view-entry:displayStyle");
-Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui:app-view-entry:data");
+String title = (String)request.getAttribute("liferay-ui:app-view-entry:title");
+String url = (String)request.getAttribute("liferay-ui:app-view-entry:url");
 %>
 
 <c:choose>
@@ -51,22 +43,22 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 			</c:if>
 
 			<%
-			if (!isFolder) {
+			if (!folder) {
 				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 			}
 			%>
 
 			<liferay-util:include page="<%= actionJsp %>" />
 
-			<a class="entry-link" data-folder="<%= isFolder ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" <%= isFolder ? "data-folder-id=\"" + rowCheckerId + "\"" : StringPool.BLANK %> href="<%= url %>" title="<%= HtmlUtil.escapeAttribute(HtmlUtil.unescape(title) + " - " + HtmlUtil.unescape(description)) %>">
+			<a class="entry-link" data-folder="<%= folder ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" <%= folder ? "data-folder-id=\"" + rowCheckerId + "\"" : StringPool.BLANK %> href="<%= url %>" title="<%= HtmlUtil.escapeAttribute(HtmlUtil.unescape(title) + " - " + HtmlUtil.unescape(description)) %>">
 				<div class="entry-thumbnail" style="<%= thumbnailDivStyle %>">
 					<img alt="" border="no" src="<%= thumbnailSrc %>" style="<%= thumbnailStyle %>" />
 
-					<c:if test="<%= isShortcut %>">
+					<c:if test="<%= shortcut %>">
 						<img alt="<liferay-ui:message key="shortcut" />" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_link.png" />
 					</c:if>
 
-					<c:if test="<%= isLocked %>">
+					<c:if test="<%= locked %>">
 						<img alt="<liferay-ui:message key="locked" />" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png" />
 					</c:if>
 
@@ -75,7 +67,7 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 				<span class="entry-title">
 					<%= StringUtil.shorten(title, 60) %>
 
-					<c:if test="<%= !isFolder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
+					<c:if test="<%= !folder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
 
 						<%
 						String statusLabel = WorkflowConstants.toLabel(status);
@@ -91,15 +83,15 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 	</c:when>
 	<c:when test='<%= displayStyle.equals("descriptive") %>'>
 		<div class="app-view-entry-taglib entry-display-style display-<%= displayStyle %> <%= showCheckbox ? "selectable" : StringPool.BLANK %>" data-draggable="<%= showCheckbox ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" data-title="<%= StringUtil.shorten(title, 60) %>">
-			<a class="entry-link" data-folder="<%= isFolder ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" data-folder-id="<%= rowCheckerId %>" href="<%= url %>" title="<%= HtmlUtil.escape(title) + " - " + HtmlUtil.escape(description) %>">
+			<a class="entry-link" data-folder="<%= folder ? Boolean.TRUE.toString() : Boolean.FALSE.toString() %>" data-folder-id="<%= rowCheckerId %>" href="<%= url %>" title="<%= HtmlUtil.escape(title) + " - " + HtmlUtil.escape(description) %>">
 				<div class="entry-thumbnail" style="<%= thumbnailDivStyle %>">
 					<img alt="" border="no" src="<%= thumbnailSrc %>" style="<%= thumbnailStyle %>" />
 
-					<c:if test="<%= isShortcut %>">
+					<c:if test="<%= shortcut %>">
 						<img alt="<liferay-ui:message key="shortcut" />" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_link.png" />
 					</c:if>
 
-					<c:if test="<%= isLocked %>">
+					<c:if test="<%= locked %>">
 						<img alt="<liferay-ui:message key="locked" />" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png" />
 					</c:if>
 				</div>
@@ -107,7 +99,7 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 				<span class="entry-title">
 					<%= HtmlUtil.escape(title) %>
 
-					<c:if test="<%= !isFolder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
+					<c:if test="<%= !folder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
 
 						<%
 						String statusLabel = WorkflowConstants.toLabel(status);
@@ -123,7 +115,7 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 			</a>
 
 			<%
-			if (!isFolder) {
+			if (!folder) {
 				request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 			}
 			%>
@@ -146,7 +138,7 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("liferay-ui
 			url="<%= url %>"
 		/>
 
-		<c:if test="<%= !isFolder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
+		<c:if test="<%= !folder && ((status == WorkflowConstants.STATUS_DRAFT) || (status == WorkflowConstants.STATUS_PENDING)) %>">
 
 			<%
 			String statusLabel = WorkflowConstants.toLabel(status);

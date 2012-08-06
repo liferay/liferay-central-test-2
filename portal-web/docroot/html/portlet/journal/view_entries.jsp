@@ -159,7 +159,7 @@ if (displayTerms.getNavigation().equals("recent")) {
 	searchContainer.setOrderByType(orderByType);
 }
 
-boolean advancedSearch = ParamUtil.getBoolean(request, displayTerms.ADVANCED_SEARCH, false);
+boolean advancedSearch = ParamUtil.getBoolean(request, displayTerms.ADVANCED_SEARCH);
 
 String keywords = ParamUtil.getString(request, "keywords");
 

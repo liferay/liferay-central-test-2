@@ -26,7 +26,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchFolderException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -60,10 +60,12 @@ public class ActionUtil {
 			ActionRequest actionRequest, String deleteArticleId)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
+		String articleId = deleteArticleId;
+		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
+		double version = 0;
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
@@ -71,15 +73,10 @@ public class ActionUtil {
 		int pos = deleteArticleId.lastIndexOf(
 			EditArticleAction.VERSION_SEPARATOR);
 
-		String articleId = deleteArticleId;
-
-		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
-
-		double version = 0;
-
 		if (pos == -1) {
 			JournalArticleServiceUtil.deleteArticle(
-				groupId, articleId, articleURL, serviceContext);
+				themeDisplay.getScopeGroupId(), articleId, articleURL,
+				serviceContext);
 		}
 		else {
 			articleId = articleId.substring(0, pos);
@@ -88,7 +85,8 @@ public class ActionUtil {
 					pos + EditArticleAction.VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.deleteArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+				themeDisplay.getScopeGroupId(), articleId, version, articleURL,
+				serviceContext);
 		}
 
 		JournalUtil.removeRecentArticle(actionRequest, articleId, version);
@@ -98,10 +96,12 @@ public class ActionUtil {
 			ActionRequest actionRequest, String expireArticleId)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
+		String articleId = expireArticleId;
+		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
+		double version = 0;
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
@@ -109,15 +109,10 @@ public class ActionUtil {
 		int pos = expireArticleId.lastIndexOf(
 			EditArticleAction.VERSION_SEPARATOR);
 
-		String articleId = expireArticleId;
-
-		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
-
-		double version = 0;
-
 		if (pos == -1) {
 			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, articleURL, serviceContext);
+				themeDisplay.getScopeGroupId(), articleId, articleURL,
+				serviceContext);
 		}
 		else {
 			articleId = articleId.substring(0, pos);
@@ -126,14 +121,15 @@ public class ActionUtil {
 					pos + EditArticleAction.VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+				themeDisplay.getScopeGroupId(), articleId, version, articleURL,
+				serviceContext);
 		}
 
 		JournalUtil.removeRecentArticle(actionRequest, articleId, version);
 	}
 
 	public static void expireFolder(
-		long groupId, long parentFolderId, ServiceContext serviceContext)
+			long groupId, long parentFolderId, ServiceContext serviceContext)
 		throws Exception {
 
 		List<JournalFolder> folders = JournalFolderServiceUtil.getFolders(
@@ -229,10 +225,8 @@ public class ActionUtil {
 	public static void getArticles(HttpServletRequest request)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		List<JournalArticle> articles = new ArrayList<JournalArticle>();
 
@@ -242,11 +236,11 @@ public class ActionUtil {
 		for (String articleId : articleIds) {
 			try {
 				JournalArticle article = JournalArticleServiceUtil.getArticle(
-					groupId, articleId);
+					themeDisplay.getScopeGroupId(), articleId);
 
 				articles.add(article);
 			}
-			catch (NoSuchFileEntryException nsfee) {
+			catch (NoSuchArticleException nsfee) {
 			}
 		}
 

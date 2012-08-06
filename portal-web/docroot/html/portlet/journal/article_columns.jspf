@@ -22,11 +22,11 @@ row.addText(curArticle.getArticleId());
 
 // Title
 
-TextSearchEntry articleTitleSearchEntry = new TextSearchEntry();
+TextSearchEntry articleTitleTextSearchEntry = new TextSearchEntry();
 
-articleTitleSearchEntry.setName(articleTitle);
+articleTitleTextSearchEntry.setName(articleTitle);
 
-row.addSearchEntry(articleTitleSearchEntry);
+row.addSearchEntry(articleTitleTextSearchEntry);
 
 // Status
 

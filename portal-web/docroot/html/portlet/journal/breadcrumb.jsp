@@ -22,4 +22,10 @@ JournalFolder folder = (JournalFolder)request.getAttribute("view.jsp-folder");
 JournalUtil.addPortletBreadcrumbEntries(folder, request, liferayPortletResponse);
 %>
 
-<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showCurrentPortlet="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
+<liferay-ui:breadcrumb
+	showCurrentGroup="<%= false %>"
+	showCurrentPortlet="<%= false %>"
+	showGuestGroup="<%= false %>"
+	showLayout="<%= false %>"
+	showParentGroups="<%= false %>"
+/>

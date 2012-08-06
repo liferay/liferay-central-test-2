@@ -142,7 +142,7 @@ for (JournalArticle curArticle : articles) {
 
 	<c:if test="<%= !validMoveArticles.isEmpty() %>">
 		<div class="move-list-info">
-			<h4><%= LanguageUtil.format(pageContext, "x-articles-ready-to-be-moved", validMoveArticles.size()) %></h4>
+			<h4><%= LanguageUtil.format(pageContext, "x-articles-are-ready-to-be-moved", validMoveArticles.size()) %></h4>
 		</div>
 
 		<div class="move-list">

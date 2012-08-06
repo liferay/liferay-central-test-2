@@ -78,7 +78,7 @@ else if ((searchType == JournalSearchConstants.SINGLE) && !ajaxRequest) {
 
 int total = 0;
 
-boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisplayTerms.ADVANCED_SEARCH, false);
+boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisplayTerms.ADVANCED_SEARCH);
 %>
 
 <c:if test="<%= showSearchInfo %>">
@@ -334,7 +334,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 					<div class="portlet-msg-info">
 
 						<%
-						String msgInfo = LanguageUtil.get(pageContext, "no-articles-were-found-that-matched-with-the-filters");
+						String msgInfo = LanguageUtil.get(pageContext, "no-articles-were-found-that-matched-the-specified-filters");
 
 						if (!advancedSearch) {
 							msgInfo = LanguageUtil.format(pageContext, "no-articles-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>");

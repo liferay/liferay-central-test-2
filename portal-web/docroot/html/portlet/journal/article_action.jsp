@@ -62,7 +62,7 @@ else {
 				image="submit"
 				message="move"
 				url="<%= moveURL %>"
-				/>
+			/>
 		</c:if>
 		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.PERMISSIONS) %>">
 			<liferay-security:permissionsURL

@@ -32,7 +32,11 @@ List<JournalStructure> structures = JournalStructureServiceUtil.getStructures(Po
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="folder" message='<%= (folder != null) ? "subfolder" : "folder" %>' url="<%= addFolderURL %>" />
+		<liferay-ui:icon
+			image="folder"
+			message='<%= (folder != null) ? "subfolder" : "folder" %>'
+			url="<%= addFolderURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ARTICLE) %>">
@@ -42,7 +46,11 @@ List<JournalStructure> structures = JournalStructureServiceUtil.getStructures(Po
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</liferay-portlet:renderURL>
 
-		<liferay-ui:icon message="basic-web-content" src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>' url="<%= addArticleURL.toString() %>" />
+		<liferay-ui:icon
+			message="basic-web-content"
+			src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>'
+			url="<%= addArticleURL.toString() %>"
+		/>
 
 		<%
 		for (JournalStructure structure : structures) {
@@ -63,7 +71,11 @@ List<JournalStructure> structures = JournalStructureServiceUtil.getStructures(Po
 			}
 			%>
 
-			<liferay-ui:icon message="<%= structureName %>" src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>' url="<%= addArticleURL.toString() %>" />
+			<liferay-ui:icon
+				message="<%= structureName %>"
+				src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>'
+				url="<%= addArticleURL.toString() %>"
+			/>
 
 		<%
 		}

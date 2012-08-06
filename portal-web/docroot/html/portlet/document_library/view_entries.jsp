@@ -407,7 +407,7 @@ for (int i = 0; i < results.size(); i++) {
 						<liferay-ui:app-view-entry
 							data="<%= data %>"
 							displayStyle="list"
-							isFolder="<%= true %>"
+							folder="<%= true %>"
 							showCheckbox="<%= false %>"
 							thumbnailSrc="<%= folderImage %>"
 							title="<%= curFolder.getName() %>"

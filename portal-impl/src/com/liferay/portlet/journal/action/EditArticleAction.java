@@ -398,17 +398,15 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected void moveArticles(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
 
 		if (Validator.isNotNull(articleId)) {
 			JournalArticleServiceUtil.moveArticle(
-				groupId, articleId, newFolderId);
+				themeDisplay.getScopeGroupId(), articleId, newFolderId);
 		}
 		else {
 			String[] articleIds = StringUtil.split(
@@ -416,7 +414,7 @@ public class EditArticleAction extends PortletAction {
 
 			for (int i = 0; i < articleIds.length; i++) {
 				JournalArticleServiceUtil.moveArticle(
-					groupId, articleIds[i], newFolderId);
+					themeDisplay.getScopeGroupId(), articleIds[i], newFolderId);
 			}
 		}
 	}

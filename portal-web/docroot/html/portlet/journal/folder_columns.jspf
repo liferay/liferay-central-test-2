@@ -22,11 +22,11 @@ row.addText(String.valueOf(curFolder.getFolderId()));
 
 // Title
 
-TextSearchEntry folderTitleSearchEntry = new TextSearchEntry();
+TextSearchEntry folderTitleTextSearchEntry = new TextSearchEntry();
 
-folderTitleSearchEntry.setName(folderTitle);
+folderTitleTextSearchEntry.setName(folderTitle);
 
-row.addSearchEntry(folderTitleSearchEntry);
+row.addSearchEntry(folderTitleTextSearchEntry);
 
 // Status
 

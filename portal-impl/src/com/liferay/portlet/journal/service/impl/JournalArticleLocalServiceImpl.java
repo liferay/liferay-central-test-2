@@ -133,41 +133,6 @@ public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
-		long userId, long groupId, long folderId, Map<Locale, String> titleMap,
-		Map<Locale, String> descriptionMap, String content,
-		ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addArticle(
-			userId, groupId, folderId, titleMap, descriptionMap, content, null,
-			null, serviceContext);
-	}
-
-	public JournalArticle addArticle(
-			long userId, long groupId, long folderId,
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			String content, String structureId, String templateId,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Calendar now = CalendarFactoryUtil.getCalendar();
-
-		int displayDateMonth = now.get(Calendar.MONTH);
-		int displayDateDay = now.get(Calendar.DAY_OF_MONTH);
-		int displayDateYear = now.get(Calendar.YEAR);
-
-		int displayDateHour = now.get(Calendar.HOUR_OF_DAY);
-		int displayDateMinute = now.get(Calendar.MINUTE);
-
-		return addArticle(
-			userId, groupId, folderId, 0, 0, StringPool.BLANK, true, 1,
-			titleMap, descriptionMap, content, "general", structureId,
-			templateId, null, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, 0, 0, 0, 0, 0, true, 0, 0, 0, 0,
-			0, true, true, false, null, null, null, null, serviceContext);
-	}
-
-	public JournalArticle addArticle(
 			long userId, long groupId, long folderId, long classNameId,
 			long classPK, String articleId, boolean autoArticleId,
 			double version, Map<Locale, String> titleMap,
@@ -374,6 +339,29 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	public JournalArticle addArticle(
+			long userId, long groupId, long folderId,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			String content, String structureId, String templateId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Calendar calendar = CalendarFactoryUtil.getCalendar();
+
+		int displayDateMonth = calendar.get(Calendar.MONTH);
+		int displayDateDay = calendar.get(Calendar.DAY_OF_MONTH);
+		int displayDateYear = calendar.get(Calendar.YEAR);
+		int displayDateHour = calendar.get(Calendar.HOUR_OF_DAY);
+		int displayDateMinute = calendar.get(Calendar.MINUTE);
+
+		return addArticle(
+			userId, groupId, folderId, 0, 0, StringPool.BLANK, true, 1,
+			titleMap, descriptionMap, content, "general", structureId,
+			templateId, null, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, 0, 0, 0, 0, 0, true, 0, 0, 0, 0,
+			0, true, true, false, null, null, null, null, serviceContext);
 	}
 
 	public void addArticleResources(
@@ -1664,7 +1652,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void moveArticle(long groupId, String articleId, long newFolderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
 			groupId, articleId);
@@ -1674,7 +1662,6 @@ public class JournalArticleLocalServiceImpl
 
 			journalArticlePersistence.update(article, false);
 		}
-
 	}
 
 	public JournalArticle removeArticleLocale(

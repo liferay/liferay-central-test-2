@@ -22,18 +22,16 @@ JournalFolder folder = (JournalFolder)request.getAttribute("view_entries.jsp-fol
 String folderImage = (String)request.getAttribute("view_entries.jsp-folderImage");
 
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
-
-boolean showCheckBox = JournalFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || JournalFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
 %>
 
 <liferay-ui:app-view-entry
 	actionJsp="/html/portlet/journal/folder_action.jsp"
 	description="<%= folder.getDescription() %>"
 	displayStyle="descriptive"
-	isFolder="<%= true %>"
+	folder="<%= true %>"
 	rowCheckerId="<%= String.valueOf(folder.getFolderId()) %>"
 	rowCheckerName="<%= JournalFolder.class.getSimpleName() %>"
-	showCheckbox="<%= showCheckBox %>"
+	showCheckbox="<%= JournalFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || JournalFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>"
 	thumbnailSrc='<%= themeDisplay.getPathThemeImages() + "/file_system/large/" + folderImage + ".png" %>'
 	thumbnailStyle="width: 128px"
 	title="<%= folder.getName() %>"

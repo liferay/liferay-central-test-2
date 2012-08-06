@@ -22,18 +22,16 @@ Folder folder = (Folder)request.getAttribute("view_entries.jsp-folder");
 String folderImage = (String)request.getAttribute("view_entries.jsp-folderImage");
 
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
-
-boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE);
 %>
 
 <liferay-ui:app-view-entry
 	actionJsp="/html/portlet/document_library/folder_action.jsp"
 	description="<%= folder.getDescription() %>"
 	displayStyle="descriptive"
-	isFolder="<%= true %>"
+	folder="<%= true %>"
 	rowCheckerId="<%= String.valueOf(folder.getFolderId()) %>"
 	rowCheckerName="<%= Folder.class.getSimpleName() %>"
-	showCheckbox="<%= showCheckBox %>"
+	showCheckbox="<%= DLFolderPermission.contains(permissionChecker, folder, ActionKeys.DELETE) || DLFolderPermission.contains(permissionChecker, folder, ActionKeys.UPDATE) %>"
 	thumbnailSrc='<%= themeDisplay.getPathThemeImages() + "/file_system/large/" + folderImage + ".png" %>'
 	thumbnailStyle='<%= "width: " + PrefsPropsUtil.getLong(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH) + "px" %>'
 	title="<%= folder.getName() %>"

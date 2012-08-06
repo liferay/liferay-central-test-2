@@ -45,9 +45,9 @@ if (Validator.isNull(keywords)) {
 	requestParams.put("viewEntries", Boolean.TRUE.toString());
 }
 else {
-	requestParams.put("viewEntries", Boolean.FALSE.toString());
 	requestParams.put("keywords", HtmlUtil.escapeJS(keywords));
 	requestParams.put("searchFolderId", String.valueOf(folderId));
+	requestParams.put("viewEntries", Boolean.FALSE.toString());
 }
 
 if (fileEntryTypeId != -1) {
@@ -55,4 +55,8 @@ if (fileEntryTypeId != -1) {
 }
 %>
 
-<liferay-ui:app-view-display-style displayStyle="<%= displayStyle %>" displayStyles="<%= displayViews %>" requestParams="<%= requestParams %>" />
+<liferay-ui:app-view-display-style
+	displayStyle="<%= displayStyle %>"
+	displayStyles="<%= displayViews %>"
+	requestParams="<%= requestParams %>"
+/>

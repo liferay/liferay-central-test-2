@@ -46,16 +46,12 @@ public class AppViewEntryTag extends IncludeTag {
 		_displayStyle = displayStyle;
 	}
 
-	public void setIsFolder(boolean isFolder) {
-		_isFolder = isFolder;
+	public void setFolder(boolean folder) {
+		_folder = folder;
 	}
 
-	public void setIsLocked(boolean isLocked) {
-		_isLocked = isLocked;
-	}
-
-	public void setIsShortcut(boolean isShortcut) {
-		_isShortcut = isShortcut;
+	public void setLocked(boolean locked) {
+		_locked = locked;
 	}
 
 	public void setRowCheckerId(String rowCheckerId) {
@@ -64,6 +60,10 @@ public class AppViewEntryTag extends IncludeTag {
 
 	public void setRowCheckerName(String rowCheckerName) {
 		_rowCheckerName = rowCheckerName;
+	}
+
+	public void setShortcut(boolean shortcut) {
+		_shortcut = shortcut;
 	}
 
 	public void setShowCheckbox(boolean showCheckbox) {
@@ -102,11 +102,11 @@ public class AppViewEntryTag extends IncludeTag {
 		_data = null;
 		_description = null;
 		_displayStyle = null;
-		_isFolder = false;
-		_isLocked = false;
-		_isShortcut = false;
+		_folder = false;
+		_locked = false;
 		_rowCheckerId = null;
 		_rowCheckerName = null;
+		_shortcut = false;
 		_showCheckbox = false;
 		_status = 0;
 		_thumbnailDivStyle = null;
@@ -134,14 +134,13 @@ public class AppViewEntryTag extends IncludeTag {
 			"liferay-ui:app-view-entry:description", _description);
 		request.setAttribute(
 			"liferay-ui:app-view-entry:displayStyle", _displayStyle);
-		request.setAttribute("liferay-ui:app-view-entry:isFolder", _isFolder);
-		request.setAttribute("liferay-ui:app-view-entry:isLocked", _isLocked);
-		request.setAttribute(
-			"liferay-ui:app-view-entry:isShortcut", _isShortcut);
+		request.setAttribute("liferay-ui:app-view-entry:folder", _folder);
+		request.setAttribute("liferay-ui:app-view-entry:locked", _locked);
 		request.setAttribute(
 			"liferay-ui:app-view-entry:rowCheckerId", _rowCheckerId);
 		request.setAttribute(
 			"liferay-ui:app-view-entry:rowCheckerName", _rowCheckerName);
+		request.setAttribute("liferay-ui:app-view-entry:shortcut", _shortcut);
 		request.setAttribute(
 			"liferay-ui:app-view-entry:showCheckbox", _showCheckbox);
 		request.setAttribute("liferay-ui:app-view-entry:status", _status);
@@ -164,11 +163,11 @@ public class AppViewEntryTag extends IncludeTag {
 	private Map<String, Object> _data;
 	private String _description;
 	private String _displayStyle;
-	private boolean _isFolder;
-	private boolean _isLocked;
-	private boolean _isShortcut;
+	private boolean _folder;
+	private boolean _locked;
 	private String _rowCheckerId;
 	private String _rowCheckerName;
+	private boolean _shortcut;
 	private boolean _showCheckbox = false;
 	private int _status = 0;
 	private String _thumbnailDivStyle;

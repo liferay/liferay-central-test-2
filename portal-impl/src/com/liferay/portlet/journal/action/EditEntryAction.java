@@ -105,7 +105,7 @@ public class EditEntryAction extends PortletAction {
 			else if (e instanceof AssetCategoryException ||
 					 e instanceof AssetTagException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				throw e;
@@ -158,10 +158,8 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void expireEntries(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long[] expireFolderIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "folderIds"), 0L);
@@ -170,7 +168,8 @@ public class EditEntryAction extends PortletAction {
 			JournalArticle.class.getName(), actionRequest);
 
 		for (long expireFolderId : expireFolderIds) {
-			ActionUtil.expireFolder(groupId, expireFolderId, serviceContext);
+			ActionUtil.expireFolder(
+				themeDisplay.getScopeGroupId(), expireFolderId, serviceContext);
 		}
 
 		String[] expireArticleIds = StringUtil.split(
@@ -182,15 +181,14 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected boolean hasArticle(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		try {
-			JournalArticleLocalServiceUtil.getArticle(groupId, articleId);
+			JournalArticleLocalServiceUtil.getArticle(
+				themeDisplay.getScopeGroupId(), articleId);
 		}
 		catch (NoSuchArticleException nsae) {
 			return true;
@@ -202,28 +200,26 @@ public class EditEntryAction extends PortletAction {
 	protected void moveEntries(ActionRequest actionRequest) throws Exception {
 		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalArticle.class.getName(), actionRequest);
-
 		long[] folderIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			JournalArticle.class.getName(), actionRequest);
 
 		for (long folderId : folderIds) {
 			JournalFolderServiceUtil.moveFolder(
 				folderId, newFolderId, serviceContext);
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String[] articleIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "articleIds"));
 
 		for (String articleId : articleIds) {
 			JournalArticleServiceUtil.moveArticle(
-				groupId, articleId, newFolderId);
+				themeDisplay.getScopeGroupId(), articleId, newFolderId);
 		}
 	}
 

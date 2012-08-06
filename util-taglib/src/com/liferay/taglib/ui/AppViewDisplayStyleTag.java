@@ -47,6 +47,7 @@ public class AppViewDisplayStyleTag extends IncludeTag {
 		super.cleanUp();
 
 		_displayStyle = null;
+		_displayStyles = null;
 		_requestParams = null;
 	}
 

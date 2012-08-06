@@ -28,7 +28,7 @@ ArticleSearch searchContainer = new ArticleSearch(liferayPortletRequest, portlet
 
 ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDisplayTerms();
 
-boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, displayTerms.ADVANCED_SEARCH, false);
+boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, displayTerms.ADVANCED_SEARCH);
 %>
 
 <div class='taglib-search-toggle taglib-search-toggle-advanced <%= advancedSearch ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />advancedSearch">

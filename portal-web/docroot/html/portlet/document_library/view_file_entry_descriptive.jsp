@@ -29,8 +29,6 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute("view_entries
 
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
 
-boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
-
 String rowCheckerName = FileEntry.class.getSimpleName();
 long rowCheckerId = fileEntry.getFileEntryId();
 
@@ -38,25 +36,21 @@ if (fileShortcut != null) {
 	rowCheckerName = DLFileShortcut.class.getSimpleName();
 	rowCheckerId = fileShortcut.getFileShortcutId();
 }
-
-String thumbnailDivStyle = DLUtil.getThumbnailStyle(false, 4);
-String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileShortcut, themeDisplay);
-String thumbnailStyle = DLUtil.getThumbnailStyle();
 %>
 
 <liferay-ui:app-view-entry
 	actionJsp="/html/portlet/document_library/file_entry_action.jsp"
 	description="<%= fileEntry.getDescription() %>"
 	displayStyle="descriptive"
-	isLocked="<%= fileEntry.isCheckedOut() %>"
-	isShortcut="<%= fileShortcut != null %>"
+	locked="<%= fileEntry.isCheckedOut() %>"
 	rowCheckerId="<%= String.valueOf(rowCheckerId) %>"
 	rowCheckerName="<%= rowCheckerName %>"
-	showCheckbox="<%= showCheckBox %>"
+	shortcut="<%= fileShortcut != null %>"
+	showCheckbox="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>"
 	status="<%= latestFileVersion.getStatus() %>"
-	thumbnailDivStyle="<%= thumbnailDivStyle %>"
-	thumbnailSrc="<%= thumbnailSrc %>"
-	thumbnailStyle="<%= thumbnailStyle %>"
+	thumbnailDivStyle="<%= DLUtil.getThumbnailStyle(false, 4) %>"
+	thumbnailSrc="<%= DLUtil.getThumbnailSrc(fileEntry, fileShortcut, themeDisplay) %>"
+	thumbnailStyle="<%= DLUtil.getThumbnailStyle() %>"
 	title="<%= fileEntry.getTitle() %>"
 	url="<%= tempRowURL.toString() %>"
 />

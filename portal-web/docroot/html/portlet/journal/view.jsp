@@ -93,7 +93,6 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 			<aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 				<aui:input name="<%= Constants.CMD %>" type="hidden" />
 				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-
 				<aui:input name="folderIds" type="hidden" />
 				<aui:input name="articleIds" type="hidden" />
 				<aui:input name="newFolderId" type="hidden" />
@@ -147,7 +146,7 @@ int foldersTotal = GetterUtil.getInteger((String)request.getAttribute("view_fold
 			displayStyle: '<%= HtmlUtil.escapeJS(displayStyle) %>',
 			folders: {
 				defaultParams: {
-					p_p_id: <%= portletId %>,
+					p_p_id: '<%= portletDisplay.getId() %>',
 					p_p_lifecycle: 0
 				},
 				defaultParentFolderId: '<%= JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID %>',
@@ -180,7 +179,7 @@ int foldersTotal = GetterUtil.getInteger((String)request.getAttribute("view_fold
 				foldersTotal: <%= foldersTotal %>
 			},
 			namespace: '<portlet:namespace />',
-			portletId: '<%= portletId %>',
+			portletId: '<%= portletDisplay.getId() %>',
 			rowIds: '<%= RowChecker.ROW_IDS %>',
 			select: {
 				displayViews: ['<%= StringUtil.merge(displayViews, "','") %>']

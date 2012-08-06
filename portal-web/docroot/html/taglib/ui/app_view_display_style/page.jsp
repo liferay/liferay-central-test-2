@@ -18,7 +18,7 @@
 
 <%
 String displayStyle = (String)request.getAttribute("liferay-ui:app-view-display-style:displayStyle");
-String displayStyles[] = (String[])request.getAttribute("liferay-ui:app-view-display-style:displayStyles");
+String[] displayStyles = (String[])request.getAttribute("liferay-ui:app-view-display-style:displayStyles");
 Map<String, String> requestParams = (Map<String, String>)request.getAttribute("liferay-ui:app-view-display-style:requestParams");
 %>
 
@@ -27,7 +27,6 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 		var buttonRow = A.one('#<portlet:namespace />displayStyleToolbar');
 
 		function onButtonClick(displayStyle) {
-
 			var config = {};
 
 			<%
