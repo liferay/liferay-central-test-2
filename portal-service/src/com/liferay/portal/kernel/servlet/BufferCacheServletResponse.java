@@ -41,8 +41,8 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 	}
 
 	/**
-	 * In char mode, this method is very expensive. Because it has to encode
-	 * char to byte in order to calculate the final byte size.
+	 * This method is very expensive when used in char mode because it has to
+	 * encode every char to byte in order to calculate the final byte size.
 	 *
 	 * @return used buffer size in byte.
 	 */
@@ -83,14 +83,11 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 	}
 
 	/**
-	 * In char mode, this method will do a char to byte encoding using charset
-	 * from {@link getCharacterEncoding()}.<p>
-	 * Generally this method should be called after the last text based
-	 * post-processing, otherwise later you may need to decode the byte back to
-	 * char again which will cause a lot of unnecessary cpu overhead.
-	 *
-	 * @return Buffered content output in ByteBuffer
-	 * @throws IOException Fail to flush out {@link ServletOutputStream}
+	 * In char mode, this method will encode every char to byte using the
+	 * character set from {@link #getCharacterEncoding()}. Generally, this
+	 * method should be called after the last text based post-processing.
+	 * Otherwise, you may need decode the byte back to char again which will
+	 * result in a lot of unnecessary CPU overhead.
 	 */
 	public ByteBuffer getByteBuffer() throws IOException {
 		if (_byteBuffer != null) {
@@ -114,21 +111,17 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 			return CharsetEncoderUtil.encode(getCharacterEncoding(), content);
 		}
 
-		return _EMPTY_BYTE_BUFFER;
+		return _emptyByteBuffer;
 	}
 
 	/**
-	 * In byte mode, this method will do a byte to char decoding using charset
-	 * from {@link getCharacterEncoding()}.<p>
-	 * Make sure the byte data is actually encoded chars, otherwise the decoding
-	 * will generate meaningless data, even worse, even encode the output back
-	 * in exact same charset may not able to retrieve the exact same byte data.
-	 * <p>
-	 * For example, decode an image byte data to char, then encode the chars
-	 * back to byte with same charset, most likely will create a corrupted image
-	 * data.
-	 * @return Buffered content output in CharBuffer
-	 * @throws IOException Fail to flush out {@link ServletOutputStream}
+	 * In char mode, this method will encode every byte to char using the
+	 * character set from {@link #getCharacterEncoding()}. Make sure the byte
+	 * data is actually encoded chars. Otherwise, the decoding will generate
+	 * meaningless data, or worse, even encode the output back and the exact
+	 * same character set may not able to retrieve the exact same byte data. For
+	 * example, decode an image byte data to char, then encode the chars back to
+	 * byte with same character set, will most likely create a corrupted image.
 	 */
 	public CharBuffer getCharBuffer() throws IOException {
 		if (_charBuffer != null) {
@@ -154,7 +147,7 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 				getCharacterEncoding(), byteBuffer);
 		}
 
-		return _EMPTY_CHAR_BUFFER;
+		return _emptyCharBuffer;
 	}
 
 	@Override
@@ -182,8 +175,6 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 
 	/**
 	 * @see #getCharBuffer()
-	 * @return Buffered content output in String
-	 * @throws IOException Fail to flush out {@link ServletOutputStream}
 	 */
 	public String getString() throws IOException {
 		if (_charBuffer != null) {
@@ -218,8 +209,6 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 
 	/**
 	 * @see #getCharBuffer()
-	 * @return Buffered content output in StringBundler
-	 * @throws IOException Fail to flush out {@link ServletOutputStream}
 	 */
 	public StringBundler getStringBundler() throws IOException {
 		if (_charBuffer != null) {
@@ -321,8 +310,9 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 			throw new IllegalStateException("Set buffer size after commit");
 		}
 
-		// Buffered response can not accept buffer size, because it has an
-		// internal auto-growing buffer.
+		// Buffered response cannot accept buffer size because it has an
+		// internal buffer that grows as needed
+
 	}
 
 	public void setByteBuffer(ByteBuffer byteBuffer) {
@@ -339,8 +329,10 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 
 	@Override
 	public void setContentLength(int contentLength) {
-		// Buffered response can not accept content length, because content post
-		// processing may cause length changing.
+
+		// Buffered response cannot accept content length because content post
+		// processing may cause length change
+
 	}
 
 	public void setString(String string) {
@@ -355,6 +347,7 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 		if (nullOutReferences) {
 			calledGetOutputStream = false;
 			calledGetWriter = false;
+
 			_printWriter = null;
 			_servletOutputStream = null;
 			_unsyncByteArrayOutputStream = null;
@@ -380,8 +373,8 @@ public class BufferCacheServletResponse extends MetaInfoCacheServletResponse {
 		}
 	}
 
-	private static final ByteBuffer _EMPTY_BYTE_BUFFER = ByteBuffer.allocate(0);
-	private static final CharBuffer _EMPTY_CHAR_BUFFER = CharBuffer.allocate(0);
+	private static ByteBuffer _emptyByteBuffer = ByteBuffer.allocate(0);
+	private static CharBuffer _emptyCharBuffer = CharBuffer.allocate(0);
 
 	private ByteBuffer _byteBuffer;
 	private CharBuffer _charBuffer;

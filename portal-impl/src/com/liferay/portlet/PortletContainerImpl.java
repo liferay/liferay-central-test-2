@@ -66,6 +66,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SerializableUtil;
 
 import java.io.Serializable;
+import java.io.Writer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -877,8 +878,9 @@ public class PortletContainerImpl implements PortletContainer {
 			}
 
 			if (writeOutput) {
-				response.getWriter().write(
-					bufferCacheServletResponse.getString());
+				Writer writer = response.getWriter();
+
+				writer.write(bufferCacheServletResponse.getString());
 			}
 		}
 		finally {

@@ -334,9 +334,12 @@ public class UpdateLayoutAction extends JSONAction {
 			renderPortletAction.execute(
 				mapping, form, dynamicRequest, bufferCacheServletResponse);
 
-			String content = bufferCacheServletResponse.getString().trim();
+			String portletHTML = bufferCacheServletResponse.getString();
 
-			populatePortletJSONObject(request, content, portlet, jsonObject);
+			portletHTML = portletHTML.trim();
+
+			populatePortletJSONObject(
+				request, portletHTML, portlet, jsonObject);
 
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
@@ -359,7 +362,7 @@ public class UpdateLayoutAction extends JSONAction {
 	}
 
 	protected void populatePortletJSONObject(
-			HttpServletRequest request, String content, Portlet portlet,
+			HttpServletRequest request, String portletHTML, Portlet portlet,
 			JSONObject jsonObject)
 		throws Exception {
 
@@ -369,8 +372,8 @@ public class UpdateLayoutAction extends JSONAction {
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
 
+		jsonObject.put("portletHTML", portletHTML);
 		jsonObject.put("refresh", !portlet.isAjaxable());
-		jsonObject.put("portletHTML", content);
 
 		Set<String> footerCssSet = new LinkedHashSet<String>();
 		Set<String> footerJavaScriptSet = new LinkedHashSet<String>();

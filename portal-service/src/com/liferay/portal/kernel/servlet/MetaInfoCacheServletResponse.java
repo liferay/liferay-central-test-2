@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
@@ -47,16 +48,17 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public void addCookie(Cookie cookie) {
-		// For cookies, the correct header name should be "Set-Cookie",
-		// otherwise containsHeader() won't able to detect cookies with right
+
+		// The correct header name should be "Set-Cookie". Otherwise, the method
+		// containsHeader will not able to detect cookies with the correct
 		// header name.
 
-		Set<Header> values = _headers.get("Set-Cookie");
+		Set<Header> values = _headers.get(HttpHeaders.SET_COOKIE);
 
 		if (values == null) {
 			values = new HashSet<Header>();
 
-			_headers.put("Set-Cookie", values);
+			_headers.put(HttpHeaders.SET_COOKIE, values);
 		}
 
 		Header header = new Header(cookie);
@@ -128,6 +130,7 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		return _headers.containsKey(name);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void finishResponse() throws IOException {
 		HttpServletResponse response = (HttpServletResponse)getResponse();
 
@@ -135,7 +138,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 			return;
 		}
 
-		// Add Headers for all cases
 		for (Map.Entry<String, Set<Header>> entry : _headers.entrySet()) {
 			String headerKey = entry.getKey();
 
@@ -156,20 +158,18 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_location != null) {
-			// sendRedirect()
-
 			response.sendRedirect(_location);
 		}
 		else if (_error) {
-			// sendError()
-
 			response.sendError(_status, _errorMessage);
 		}
 		else {
-			// Regular
-
 			if (_charsetName != null) {
 				response.setCharacterEncoding(_charsetName);
+			}
+
+			if (_contentLength != -1) {
+				response.setContentLength(_contentLength);
 			}
 
 			if (_contentType != null) {
@@ -178,10 +178,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 
 			if (_locale != null) {
 				response.setLocale(_locale);
-			}
-
-			if (_contentLength != -1) {
-				response.setContentLength(_contentLength);
 			}
 
 			if (_status != SC_OK) {
@@ -204,17 +200,17 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public String getCharacterEncoding() {
-		// According to the Servlet Spec, we suppose to default to ISO-8859-1,
-		// However most app-server honors the "file.encoding" system property.
-		// So using system default charset should have better app-server
-		// compatibility. If somehow you need to follow the servlet spec
-		// exactly, add system property file.encoding=ISO-8859-1
+
+		// We are supposed to default to ISO-8859-1 based on the Servlet
+		// specification. However, most application servers honors the system
+		// property "file.encoding". Using the system default character gives us
+		// better application server compatibility.
+
 		if (_charsetName == null) {
 			return StringPool.DEFAULT_CHARSET_NAME;
 		}
-		else {
-			return _charsetName;
-		}
+
+		return _charsetName;
 	}
 
 	@Override
@@ -222,7 +218,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		String contentType = _contentType;
 
 		if ((contentType != null) && (_charsetName != null)) {
-
 			contentType = contentType.concat("; charset=").concat(_charsetName);
 		}
 
@@ -230,12 +225,10 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	/**
-	 * Servlet 3.0 support
-	 *
-	 * Warning! When the header for this given name is Cookie, the return value
-	 * can not be used for Set-Cookie header. The String representation for
-	 * Cookie is app-server depended. The only safe way to add the header is to
-	 * call HttpServletResponse.addCookie().
+	 * When the header for this given name is "Cookie", the return value cannot
+	 * be used for the "Set-Cookie" header. The string representation for
+	 * "Cookie" is application server specific. The only safe way to add the
+	 * header is to call {@link HttpServletResponse#addCookie(Cookie)}.
 	 */
 	public String getHeader(String name) {
 		Set<Header> values = _headers.get(name);
@@ -249,9 +242,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		return header.toString();
 	}
 
-	/**
-	 * Servlet 3.0 support
-	 */
 	public Collection<String> getHeaderNames() {
 		return _headers.keySet();
 	}
@@ -261,11 +251,10 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	/**
-	 * Servlet 3.0 support
-	 * Warning! When the header for this given name is Cookie, the return values
-	 * can not be used for Set-Cookie header. The String representation for
-	 * Cookie is app-server depended. The only safe way to add the header is to
-	 * call HttpServletResponse.addCookie().
+	 * When the header for this given name is "Cookie", the return value cannot
+	 * be used for the "Set-Cookie" header. The string representation for
+	 * "Cookie" is application server specific. The only safe way to add the
+	 * header is to call {@link HttpServletResponse#addCookie(Cookie)}.
 	 */
 	public Collection<String> getHeaders(String name) {
 		Set<Header> values = _headers.get(name);
@@ -295,9 +284,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		return super.getOutputStream();
 	}
 
-	/**
-	 * Servlet 3.0 support
-	 */
 	public int getStatus() {
 		return _status;
 	}
@@ -311,7 +297,9 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public boolean isCommitted() {
-		return _committed || getResponse().isCommitted();
+		ServletResponse servletResponse = getResponse();
+
+		return _committed || servletResponse.isCommitted();
 	}
 
 	@Override
@@ -320,6 +308,9 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 			throw new IllegalStateException("Reset after commit");
 		}
 
+		// No need to reset _error, _errorMessage and _location, because setting
+		// them requires commit.
+
 		_charsetName = null;
 		_contentLength = -1;
 		_contentType = null;
@@ -327,9 +318,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		_locale = null;
 		_status = SC_OK;
 		_statusMessage = null;
-
-		// No need to reset _error, _errorMessage and _location, because setting
-		// them requires commit.
 
 		// calledGetOutputStream and calledGetWriter should be cleared by
 		// resetBuffer() in subclass.
@@ -359,9 +347,9 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 			throw new IllegalStateException("Send error after commit");
 		}
 
-		_status = status;
 		_error = true;
 		_errorMessage = errorMessage;
+		_status = status;
 
 		resetBuffer();
 
@@ -446,7 +434,9 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 			index = contentType.indexOf("charset=");
 
 			if (index != -1) {
-				String charsetName = contentType.substring(index + 8).trim();
+				String charsetName = contentType.substring(index + 8);
+
+				charsetName = charsetName.trim();
 
 				setCharacterEncoding(charsetName);
 			}
@@ -456,6 +446,7 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		}
 		else {
 			_contentType = contentType;
+
 			_charsetName = null;
 		}
 
@@ -537,44 +528,41 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{status=");
-		sb.append(_status);
-		sb.append(", headers=");
-		sb.append(_headers);
-		sb.append(", location=");
-		sb.append(_location);
+		sb.append("{bufferSize=");
+		sb.append(_bufferSize);
+		sb.append(", charsetName=");
+		sb.append(_charsetName);
+		sb.append(", committed=");
+		sb.append(_committed);
+		sb.append(", contentLength=");
+		sb.append(_contentLength);
+		sb.append(", contentType=");
+		sb.append(_contentType);
 		sb.append(", error=");
 		sb.append(_error);
 		sb.append(", errorMessage=");
 		sb.append(_errorMessage);
-		sb.append(", charsetName=");
-		sb.append(_charsetName);
-		sb.append(", contentType=");
-		sb.append(_contentType);
+		sb.append(", headers=");
+		sb.append(_headers);
+		sb.append(", location=");
+		sb.append(_location);
 		sb.append(", locale=");
 		sb.append(_locale);
-		sb.append(", bufferSize=");
-		sb.append(_bufferSize);
-		sb.append(", contentLength=");
-		sb.append(_contentLength);
-		sb.append(", committed=");
-		sb.append(_committed);
-		sb.append("||");
-		sb.append(getResponse().isCommitted());
+		sb.append(", status=");
+		sb.append(_status);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	/**
-	 * Stub method for subclass to provide buffer resetting logic. By default
-	 * delegating to super.
+	 * Stub method for subclass to provide buffer resetting logic.
 	 *
-	 * @param nullOutReferences Indicating whether to reset flags, not used
-	 *		  this class. Subclass with actual buffer may use this to behave
-	 *		  differently.
+	 * @param nullOutReferences whether to reset flags. It is not directly used
+	 *        by this class. Subclasses with an actual buffer may behave
+	 *        differently depending on the value of this parameter.
 	 */
 	protected void resetBuffer(boolean nullOutReferences) {
 		super.resetBuffer();

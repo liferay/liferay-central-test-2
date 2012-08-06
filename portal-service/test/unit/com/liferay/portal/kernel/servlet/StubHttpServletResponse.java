@@ -29,131 +29,137 @@ import javax.servlet.http.HttpServletResponse;
 public class StubHttpServletResponse implements HttpServletResponse {
 
 	public void addCookie(Cookie cookie) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void addDateHeader(String name, long value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void addHeader(String name, String value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void addIntHeader(String name, int value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean containsHeader(String name) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public String encodeRedirectURL(String url) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public String encodeRedirectUrl(String url) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
-	public String encodeURL(String string) {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public String encodeRedirectURL(String url) {
+		throw new UnsupportedOperationException();
 	}
 
 	public String encodeUrl(String string) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	public String encodeURL(String string) {
+		throw new UnsupportedOperationException();
+	}
+
+	@SuppressWarnings("unused")
 	public void flushBuffer() throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public int getBufferSize() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getCharacterEncoding() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getContentType() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Locale getLocale() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public ServletOutputStream getOutputStream() throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public PrintWriter getWriter() throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean isCommitted() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void reset() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void resetBuffer() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public void sendError(int status) throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public void sendError(int status, String errorMessage) throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public void sendRedirect(String location) throws IOException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setBufferSize(int bufferSzie) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setCharacterEncoding(String characterEncoding) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setContentLength(int contentLength) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setContentType(String contentType) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setDateHeader(String name, long value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setHeader(String name, String value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setIntHeader(String name, int value) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setLocale(Locale locale) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setStatus(int status) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void setStatus(int status, String message) {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

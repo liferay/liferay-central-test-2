@@ -38,6 +38,7 @@ import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -400,8 +401,11 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			}
 			else {
 				renderResponseImpl.setTitle(response.getTitle());
-				bufferCacheServletResponse.getWriter().print(
-					response.getContent());
+
+				PrintWriter printWriter =
+					bufferCacheServletResponse.getWriter();
+
+				printWriter.print(response.getContent());
 			}
 		}
 
