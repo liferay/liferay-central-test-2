@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.assetcategoryadmin.template;
+package com.liferay.portlet.assetcategoriesnavigation.template;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.template.PortletDisplayTemplateHandler;
@@ -28,7 +28,7 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class AssetCategoryPortletDisplayTemplateHandler implements
+public class AssetCategoriesNavigationPortletDisplayTemplateHandler implements
 	PortletDisplayTemplateHandler {
 
 	public String getClassName() {
@@ -50,7 +50,7 @@ public class AssetCategoryPortletDisplayTemplateHandler implements
 	}
 
 	public String getResourceName() {
-		return "com.liferay.portlet.tags.categories.navigation";
+		return "com.liferay.portlet.assetcategoriesnavigation";
 	}
 
 }
