@@ -48,22 +48,21 @@ public class DeviceServicePreAction extends Action {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-        Device device = null;
+		Device device = null;
 
-        if (PropsValues.MOBILE_DEVICE_SESSION_CACHE_ENABLED) {
-	        Object cachedDevice = session.getAttribute(WebKeys.DEVICE);
+		if (PropsValues.MOBILE_DEVICE_SESSION_CACHE_ENABLED) {
+			Object value = session.getAttribute(WebKeys.DEVICE);
 
-	        device = (Device)NonSerializableObjectHandler.getValue(
-		        cachedDevice);
-        }
+			device = (Device)NonSerializableObjectHandler.getValue(value);
+		}
 
 		if (device == null) {
 			device = DeviceDetectionUtil.detectDevice(request);
 
-            if (PropsValues.MOBILE_DEVICE_SESSION_CACHE_ENABLED) {
-    			session.setAttribute(
-				    WebKeys.DEVICE, new NonSerializableObjectHandler(device));
-            }
+			if (PropsValues.MOBILE_DEVICE_SESSION_CACHE_ENABLED) {
+				session.setAttribute(
+				WebKeys.DEVICE, new NonSerializableObjectHandler(device));
+			}
 		}
 
 		themeDisplay.setDevice(device);

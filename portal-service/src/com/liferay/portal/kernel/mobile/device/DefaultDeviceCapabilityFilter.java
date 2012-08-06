@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,8 +25,8 @@ import java.util.Set;
 public class DefaultDeviceCapabilityFilter implements DeviceCapabilityFilter {
 
 	public boolean accept(String capabilityName) {
-		if (_acceptableCapabilities.isEmpty() ||
-			_acceptableCapabilities.contains(capabilityName)) {
+		if (_acceptableCapabilityNames.isEmpty() ||
+			_acceptableCapabilityNames.contains(capabilityName)) {
 
 			return true;
 		}
@@ -35,9 +35,13 @@ public class DefaultDeviceCapabilityFilter implements DeviceCapabilityFilter {
 	}
 
 	public boolean accept(String capabilityName, String capabilityValue) {
-		if (Validator.isNull(capabilityValue) ||
-			capabilityValue.toLowerCase().equals("false")) {
+		if (Validator.isNull(capabilityValue)) {
+			return false;
+		}
 
+		capabilityValue = capabilityValue.toLowerCase();
+
+		if (capabilityValue.equals("false")) {
 			return false;
 		}
 
@@ -48,9 +52,12 @@ public class DefaultDeviceCapabilityFilter implements DeviceCapabilityFilter {
 		return true;
 	}
 
-	public void setAcceptableCapabilities(Set<String> acceptableCapabilities) {
-		_acceptableCapabilities.addAll(acceptableCapabilities);
+	public void setAcceptableCapabilityNames(
+		Set<String> acceptableCapabilityNames) {
+
+		_acceptableCapabilityNames.addAll(acceptableCapabilityNames);
 	}
 
-	private Set<String> _acceptableCapabilities = new HashSet<String>();
+	private Set<String> _acceptableCapabilityNames = new HashSet<String>();
+
 }

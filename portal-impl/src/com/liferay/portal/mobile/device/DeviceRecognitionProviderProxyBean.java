@@ -45,4 +45,5 @@ public class DeviceRecognitionProviderProxyBean
 
 		throw new UnsupportedOperationException();
 	}
+
 }
