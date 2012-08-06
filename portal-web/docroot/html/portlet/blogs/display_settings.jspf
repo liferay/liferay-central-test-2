@@ -16,12 +16,6 @@
 
 <%
 PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(BlogsEntry.class.getName());
-
-List<String> defaultDisplayStyles = new ArrayList<String>();
-
-defaultDisplayStyles.add(RSSUtil.DISPLAY_STYLE_ABSTRACT);
-defaultDisplayStyles.add(RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-defaultDisplayStyles.add(RSSUtil.DISPLAY_STYLE_TITLE);
 %>
 
 <div class="portlet-msg-info">
@@ -44,9 +38,18 @@ defaultDisplayStyles.add(RSSUtil.DISPLAY_STYLE_TITLE);
 	</aui:select>
 
 	<div class="display-template">
+
+		<%
+		List<String> displayStyles = new ArrayList<String>();
+
+		displayStyles.add(RSSUtil.DISPLAY_STYLE_ABSTRACT);
+		displayStyles.add(RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+		displayStyles.add(RSSUtil.DISPLAY_STYLE_TITLE);
+		%>
+
 		<liferay-ui:ddm-template-menu
 			classNameId="<%= PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName()) %>"
-			defaultOptions="<%= defaultDisplayStyles %>"
+			displayStyles="<%= displayStyles %>"
 			preferenceName="pageDisplayStyle"
 			preferenceValue="<%= pageDisplayStyle %>"
 		/>

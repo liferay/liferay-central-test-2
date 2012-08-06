@@ -429,7 +429,7 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>defaultOptions</name>
+            <name>displayStyles</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -449,7 +449,7 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>showDefaultOption</name>
+            <name>showDisplayStyle</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>

@@ -19,8 +19,24 @@
 <c:choose>
 	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">
 
-		<%= PortletDisplayTemplatesUtil.renderDDMTemplate(renderRequest, renderResponse, portletDisplayDDMTemplateId, templateVocabularies) %>
+		<%
+		List<AssetVocabulary> ddmTemplateAssetVocabularies = new ArrayList<AssetVocabulary>();
 
+		if (allAssetVocabularies) {
+			ddmTemplateAssetVocabularies = assetVocabularies;
+		}
+		else {
+			for (long assetVocabularyId : assetVocabularyIds) {
+				try {
+					ddmTemplateAssetVocabularies.add(AssetVocabularyServiceUtil.getVocabulary(assetVocabularyId));
+				}
+				catch (NoSuchVocabularyException nsve) {
+				}
+			}
+		}
+		%>
+
+		<%= PortletDisplayTemplatesUtil.renderDDMTemplate(renderRequest, renderResponse, portletDisplayDDMTemplateId, ddmTemplateAssetVocabularies) %>
 	</c:when>
 	<c:otherwise>
 		<c:choose>

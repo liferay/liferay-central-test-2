@@ -35,14 +35,14 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {scopeGroupId, themeDisplay.getCompanyGroupId()});
+List<AssetVocabulary> assetVocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {scopeGroupId, themeDisplay.getCompanyGroupId()});
 
-long[] availableAssetVocabularyIds = new long[vocabularies.size()];
+long[] availableAssetVocabularyIds = new long[assetVocabularies.size()];
 
-for (int i = 0; i < vocabularies.size(); i++) {
-	AssetVocabulary vocabulary = vocabularies.get(i);
+for (int i = 0; i < assetVocabularies.size(); i++) {
+	AssetVocabulary assetVocabulary = assetVocabularies.get(i);
 
-	availableAssetVocabularyIds[i] = vocabulary.getVocabularyId();
+	availableAssetVocabularyIds[i] = assetVocabulary.getVocabularyId();
 }
 
 boolean allAssetVocabularies = GetterUtil.getBoolean(preferences.getValue("allAssetVocabularies", Boolean.TRUE.toString()));
@@ -59,28 +59,11 @@ DDMTemplate portletDisplayDDMTemplate = null;
 long portletDisplayDDMTemplateId = 0;
 long portletDisplayDDMTemplateGroupId = PortletDisplayTemplatesUtil.getDDMTemplateGroupId(themeDisplay);
 
-List<AssetVocabulary> templateVocabularies = new ArrayList<AssetVocabulary>();
-
 if (displayTemplate.startsWith("ddmTemplate_")) {
 	portletDisplayDDMTemplate = PortletDisplayTemplatesUtil.fetchDDMTemplate(portletDisplayDDMTemplateGroupId, displayTemplate);
 
 	if (portletDisplayDDMTemplate != null) {
 		portletDisplayDDMTemplateId = portletDisplayDDMTemplate.getTemplateId();
-	}
-}
-
-if (portletDisplayDDMTemplateId > 0) {
-	if (allAssetVocabularies) {
-		templateVocabularies = vocabularies;
-	}
-	else {
-		for (long vocabularyId : assetVocabularyIds) {
-			try {
-				templateVocabularies.add(AssetVocabularyServiceUtil.getVocabulary(vocabularyId));
-			}
-			catch (NoSuchVocabularyException nsve) {
-			}
-		}
 	}
 }
 %>

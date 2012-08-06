@@ -29,8 +29,8 @@ public class DDMTemplateMenuTag extends IncludeTag {
 		_classNameId = classNameId;
 	}
 
-	public void setDefaultOptions(List<String> defaultOptions) {
-		_defaultOptions = defaultOptions;
+	public void setDisplayStyles(List<String> displayStyles) {
+		_displayStyles = displayStyles;
 	}
 
 	public void setLabel(String label) {
@@ -45,17 +45,18 @@ public class DDMTemplateMenuTag extends IncludeTag {
 		_preferenceValue = preferenceValue;
 	}
 
-	public void setShowDefaultOption(boolean showDefaultOption) {
-		_showDefaultOption = showDefaultOption;
+	public void setShowDisplayStyle(boolean showDisplayStyle) {
+		_showDisplayStyle = showDisplayStyle;
 	}
 
 	@Override
 	protected void cleanUp() {
 		_classNameId = 0;
-		_defaultOptions = null;
+		_displayStyles = null;
 		_label = "display-template";
 		_preferenceName = "displayStyle";
-		_showDefaultOption = false;
+		_preferenceValue = null;
+		_showDisplayStyle = false;
 	}
 
 	@Override
@@ -68,26 +69,26 @@ public class DDMTemplateMenuTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:ddm-template-menu:classNameId",
 			String.valueOf(_classNameId));
-		request.setAttribute("liferay-ui:ddm-template-menu:defaultOptions",
-			_defaultOptions);
+		request.setAttribute(
+			"liferay-ui:ddm-template-menu:displayStyles", _displayStyles);
 		request.setAttribute("liferay-ui:ddm-template-menu:label", _label);
 		request.setAttribute(
 			"liferay-ui:ddm-template-menu:preferenceName", _preferenceName);
 		request.setAttribute(
 			"liferay-ui:ddm-template-menu:preferenceValue", _preferenceValue);
 		request.setAttribute(
-			"liferay-ui:ddm-template-menu:showDefaultOption",
-			_showDefaultOption);
+			"liferay-ui:ddm-template-menu:showDisplayStyle",
+			String.valueOf(_showDisplayStyle));
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/ddm-template-menu/page.jsp";
 
 	private long _classNameId;
-	private List<String> _defaultOptions;
+	private List<String> _displayStyles;
 	private String _label = "display-template";
 	private String _preferenceName = "displayStyle";
 	private String _preferenceValue;
-	private boolean _showDefaultOption;
+	private boolean _showDisplayStyle;
 
 }

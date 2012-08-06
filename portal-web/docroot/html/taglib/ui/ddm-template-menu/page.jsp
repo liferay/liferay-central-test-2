@@ -23,38 +23,37 @@
 
 <%
 long classNameId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:ddm-template-menu:classNameId"));
-List<String> defaultOptions = (List<String>)request.getAttribute("liferay-ui:ddm-template-menu:defaultOptions");
+List<String> displayStyles = (List<String>)request.getAttribute("liferay-ui:ddm-template-menu:displayStyles");
 String label = (String)request.getAttribute("liferay-ui:ddm-template-menu:label");
 String preferenceName = (String)request.getAttribute("liferay-ui:ddm-template-menu:preferenceName");
 String preferenceValue = (String)request.getAttribute("liferay-ui:ddm-template-menu:preferenceValue");
-boolean showDefaultOption = (Boolean)request.getAttribute("liferay-ui:ddm-template-menu:showDefaultOption");
+boolean showDisplayStyle = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:ddm-template-menu:showDisplayStyle"));
 
-DDMTemplate template = null;
+DDMTemplate ddmTemplate = null;
 
-long templateGroupId = PortletDisplayTemplatesUtil.getDDMTemplateGroupId(themeDisplay);
+long ddmTemplateGroupId = PortletDisplayTemplatesUtil.getDDMTemplateGroupId(themeDisplay);
 
 if (preferenceValue.startsWith("ddmTemplate_")) {
-	template = PortletDisplayTemplatesUtil.fetchDDMTemplate(templateGroupId, preferenceValue);
+	ddmTemplate = PortletDisplayTemplatesUtil.fetchDDMTemplate(ddmTemplateGroupId, preferenceValue);
 }
 
 List<DDMTemplate> companyPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(themeDisplay.getCompanyGroupId(), classNameId, 0);
-
-List<DDMTemplate> groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(templateGroupId, classNameId, 0);
+List<DDMTemplate> groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(ddmTemplateGroupId, classNameId, 0);
 %>
 
 <aui:select id="displayStyle" label="<%= label %>" name='<%= "preferences--" + preferenceName + "--" %>'>
-	<c:if test="<%= showDefaultOption %>">
+	<c:if test="<%= showDisplayStyle %>">
 		<aui:option label="default" selected="<%= Validator.isNull(preferenceValue) %>" />
 	</c:if>
 
-	<c:if test="<%= (defaultOptions != null) && !defaultOptions.isEmpty() %>">
+	<c:if test="<%= (displayStyles != null) && !displayStyles.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="default" />">
 
 			<%
-			for (String curDisplayStyle : defaultOptions) {
+			for (String displayStyle : displayStyles) {
 			%>
 
-				<aui:option label="<%= HtmlUtil.escape(curDisplayStyle) %>" selected="<%= preferenceValue.equals(curDisplayStyle) %>" />
+				<aui:option label="<%= HtmlUtil.escape(displayStyle) %>" selected="<%= preferenceValue.equals(displayStyle) %>" />
 
 			<%
 			}
@@ -73,7 +72,7 @@ List<DDMTemplate> groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemp
 				}
 			%>
 
-				<aui:option label="<%= HtmlUtil.escape(companyPortletDDMTemplate.getName(locale)) %>" selected="<%= (template != null) && (companyPortletDDMTemplate.getTemplateId() == template.getTemplateId()) %>" value='<%= "ddmTemplate_" + companyPortletDDMTemplate.getUuid() %>' />
+				<aui:option label="<%= HtmlUtil.escape(companyPortletDDMTemplate.getName(locale)) %>" selected="<%= (ddmTemplate != null) && (companyPortletDDMTemplate.getTemplateId() == ddmTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + companyPortletDDMTemplate.getUuid() %>' />
 
 			<%
 			}
@@ -92,7 +91,7 @@ List<DDMTemplate> groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemp
 			}
 		%>
 
-			<aui:option label="<%= HtmlUtil.escape(groupPortletDDMTemplate.getName(locale)) %>" selected="<%= (template != null) && (groupPortletDDMTemplate.getTemplateId() == template.getTemplateId()) %>" value='<%= "ddmTemplate_" + groupPortletDDMTemplate.getUuid() %>' />
+			<aui:option label="<%= HtmlUtil.escape(groupPortletDDMTemplate.getName(locale)) %>" selected="<%= (ddmTemplate != null) && (groupPortletDDMTemplate.getTemplateId() == ddmTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + groupPortletDDMTemplate.getUuid() %>' />
 
 		<%
 		}
