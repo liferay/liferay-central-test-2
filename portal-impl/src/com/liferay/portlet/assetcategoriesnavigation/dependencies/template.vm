@@ -4,9 +4,9 @@
 ##
 ## A set of variables have been made available for the template developers:
 ##
-##  $entries: the list of vocabularies that are being shown in the portlet
-##
 ##  $ddmTemplateId: the current template id
+##
+##  $entries: the list of vocabularies that are being shown in the portlet
 ##
 ##  $locale: the locale of the site
 ##
@@ -19,12 +19,12 @@
 ## It is possible to use these variables to create advanced templates to display
 ## a list of assets in your asset publisher. Here's a simple template example:
 ##
-##    #foreach($entry in $entries)
-##        <h1 class="vocabulary-title">
-##            $entry.getTitle($locale)
-##        </h1>
+##  #foreach($entry in $entries)
+##    <h1 class="vocabulary-title">
+##      $entry.getTitle($locale)
+##    </h1>
 ##
-##        #foreach ($category in $entry.getCategories())
-##            - $category.getName()
-##        #end
+##    #foreach ($category in $entry.getCategories())
+##      - $category.getName()
 ##    #end
+##  #end

@@ -3,16 +3,16 @@
 ##
 ## A set of variables have been made available for the template developers:
 ##
-##  $entries: the list of entries that are being shown in the asset publisher
-##
-##  $entry: this is the asset entry when there's only ony asset entry
-##
 ##  $assetPublisherHelper: helper class available for developers. You can use it
 ##                         to get the asset view url by calling
 ##                         getAssetViewURL($renderRequest, $renderResponse,
 ##                         $assetEntry)
 ##
 ##  $ddmTemplateId: the current template id
+##
+##  $entries: the list of entries that are being shown in the asset publisher
+##
+##  $entry: this is the asset entry when there's only ony asset entry
 ##
 ##  $locale: the locale of the site
 ##
