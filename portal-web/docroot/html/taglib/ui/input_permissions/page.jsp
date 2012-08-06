@@ -163,16 +163,16 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 						}
 					}
 
-					String checkboxFieldName = null;
 					String checkboxFieldId = null;
+					String checkboxFieldName = null;
 
 					if (roleName.equals(RoleConstants.GUEST)) {
-						checkboxFieldName = namespace + "guestPermissions";
 						checkboxFieldId = uniqueNamespace + "guestPermissions";
+						checkboxFieldName = namespace + "guestPermissions";
 					}
 					else {
-						checkboxFieldName = namespace + "groupPermissions";
 						checkboxFieldId = uniqueNamespace + "groupPermissions";
+						checkboxFieldName = namespace + "groupPermissions";
 					}
 
 					checkboxFieldId = checkboxFieldId + StringPool.UNDERLINE + action;
