@@ -44,7 +44,8 @@ public class DLFileShortcutTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		trashDLFileShortcut(false);
 	}
 
-	protected long doAddSubEntry(long folderId1, long folderId2)
+	@Override
+	protected long addSubentry(long folderId1, long folderId2)
 		throws Exception {
 
 		FileEntry fileEntry = addFileEntry(folderId2, "Subentry.txt");
@@ -54,13 +55,15 @@ public class DLFileShortcutTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		return dlFileShortcut.getFileShortcutId();
 	}
 
-	protected void doMoveSubEntryFromTrash(long subEntryId) throws Exception {
+	@Override
+	protected void moveSubentryFromTrash(long subentryId) throws Exception {
 		DLAppServiceUtil.moveFileShortcutFromTrash(
-			subEntryId, parentFolder.getFolderId(), new ServiceContext());
+			subentryId, parentFolder.getFolderId(), new ServiceContext());
 	}
 
-	protected void doMoveSubEntryToTrash(long subEntryId) throws Exception {
-		DLAppServiceUtil.moveFileShortcutToTrash(subEntryId);
+	@Override
+	protected void moveSubentryToTrash(long subentryId) throws Exception {
+		DLAppServiceUtil.moveFileShortcutToTrash(subentryId);
 	}
 
 	protected void trashDLFileShortcut(boolean delete) throws Exception {

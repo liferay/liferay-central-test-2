@@ -65,16 +65,11 @@ public class DLTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		Assert.assertFalse(folder.getName().contains(StringPool.SLASH));
 	}
 
-	protected long doAddSubEntry(long folderId1, long folderId2)
+	@Override
+	protected long addSubentry(long folderId1, long folderId2)
 		throws Exception {
 
 		return 0;
-	}
-
-	protected void doMoveSubEntryFromTrash(long subEntryId) throws Exception {
-	}
-
-	protected void doMoveSubEntryToTrash(long subEntryId) throws Exception {
 	}
 
 	protected void checkDuplicate(
@@ -120,7 +115,15 @@ public class DLTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 	}
 
 	@Override
-	protected void trashSubEntry(boolean deleteFolder) throws Exception {
+	protected void moveSubentryFromTrash(long subentryId) throws Exception {
+	}
+
+	@Override
+	protected void moveSubentryToTrash(long subentryId) throws Exception {
+	}
+
+	@Override
+	protected void trashSubentry(boolean deleteFolder) throws Exception {
 	}
 
 	private static final String _NAME = "Test Name";

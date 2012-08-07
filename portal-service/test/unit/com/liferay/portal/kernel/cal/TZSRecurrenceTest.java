@@ -95,6 +95,60 @@ public class TZSRecurrenceTest extends RecurrenceTestCase {
 		assertEquals(expected, recurrence.isInRecurrence(calendar));
 	}
 
+	protected void checkWithinTSZRecurrence(
+		Calendar calendar, Duration duration, TZSRecurrence tszRecurrence) {
+
+		Calendar afterTSZRecurrenceCalendar = Calendar.getInstance();
+
+		afterTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + duration.getInterval() + Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			false, tszRecurrence, afterTSZRecurrenceCalendar);
+
+		Calendar beforeTSZRecurrenceCalendar = Calendar.getInstance();
+
+		beforeTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() - Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			false, tszRecurrence, beforeTSZRecurrenceCalendar);
+
+		Calendar endOfTSZRecurrenceCalendar = Calendar.getInstance();
+
+		endOfTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + duration.getInterval() - Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			true, tszRecurrence, endOfTSZRecurrenceCalendar);
+
+		Calendar startOfTSZRecurrenceCalendar = Calendar.getInstance();
+
+		startOfTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			true, tszRecurrence, startOfTSZRecurrenceCalendar);
+	}
+
+	protected void checkWithinTSZRecurrence(TimeZone timeZone) {
+		TZSRecurrence insideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
+			_insideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
+
+		Calendar insideDSTCalendar = getCalendar(2013, JULY, 7, 4, 0);
+
+		checkWithinTSZRecurrence(
+			insideDSTCalendar, _durationHour, insideDSTTSZRecurrence);
+
+		TZSRecurrence outsideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
+			_outsideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
+
+		Calendar outsideDSTCalendar = getCalendar(2013, JANUARY, 6, 5, 0);
+
+		checkWithinTSZRecurrence(
+			outsideDSTCalendar, _durationHour, outsideDSTTSZRecurrence);
+	}
+
 	protected TimeZone getIncompleteTimeZone() {
 
 		// An incomplete time zone is missing the daylight savings settings and
@@ -163,60 +217,6 @@ public class TZSRecurrenceTest extends RecurrenceTestCase {
 		// York (EST) but 5 am at Greenwich (UTC).
 
 		return getCalendar(2011, month, date, 5, 0);
-	}
-
-	protected void checkWithinTSZRecurrence(
-		Calendar calendar, Duration duration, TZSRecurrence tszRecurrence) {
-
-		Calendar afterTSZRecurrenceCalendar = Calendar.getInstance();
-
-		afterTSZRecurrenceCalendar.setTimeInMillis(
-			calendar.getTimeInMillis() + duration.getInterval() + Time.MINUTE);
-
-		assertTZSRecurrenceEquals(
-			false, tszRecurrence, afterTSZRecurrenceCalendar);
-
-		Calendar beforeTSZRecurrenceCalendar = Calendar.getInstance();
-
-		beforeTSZRecurrenceCalendar.setTimeInMillis(
-			calendar.getTimeInMillis() - Time.MINUTE);
-
-		assertTZSRecurrenceEquals(
-			false, tszRecurrence, beforeTSZRecurrenceCalendar);
-
-		Calendar endOfTSZRecurrenceCalendar = Calendar.getInstance();
-
-		endOfTSZRecurrenceCalendar.setTimeInMillis(
-			calendar.getTimeInMillis() + duration.getInterval() - Time.MINUTE);
-
-		assertTZSRecurrenceEquals(
-			true, tszRecurrence, endOfTSZRecurrenceCalendar);
-
-		Calendar startOfTSZRecurrenceCalendar = Calendar.getInstance();
-
-		startOfTSZRecurrenceCalendar.setTimeInMillis(
-			calendar.getTimeInMillis() + Time.MINUTE);
-
-		assertTZSRecurrenceEquals(
-			true, tszRecurrence, startOfTSZRecurrenceCalendar);
-	}
-
-	protected void checkWithinTSZRecurrence(TimeZone timeZone) {
-		TZSRecurrence insideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
-			_insideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
-
-		Calendar insideDSTCalendar = getCalendar(2013, JULY, 7, 4, 0);
-
-		checkWithinTSZRecurrence(
-			insideDSTCalendar, _durationHour, insideDSTTSZRecurrence);
-
-		TZSRecurrence outsideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
-			_outsideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
-
-		Calendar outsideDSTCalendar = getCalendar(2013, JANUARY, 6, 5, 0);
-
-		checkWithinTSZRecurrence(
-			outsideDSTCalendar, _durationHour, outsideDSTTSZRecurrence);
 	}
 
 	private Duration _durationHour = getDuration(0, 0, 1, 0, 0);

@@ -50,22 +50,16 @@ import org.junit.Test;
 public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 
 	@Test
-	public void testTrashSubEntryAndDeleteFolder() throws Exception {
-		trashSubEntry(true);
+	public void testTrashSubentryAndDeleteFolder() throws Exception {
+		trashSubentry(true);
 	}
 
 	@Test
-	public void testTrashSubEntryAndRestoreSubEntry() throws Exception {
-		trashSubEntry(false);
+	public void testTrashSubentryAndRestoreSubentry() throws Exception {
+		trashSubentry(false);
 	}
 
-	protected abstract long doAddSubEntry(long folderId1, long folderId2)
-		throws Exception;
-
-	protected abstract void doMoveSubEntryFromTrash(long subEntryId)
-		throws Exception;
-
-	protected abstract void doMoveSubEntryToTrash(long subEntryId)
+	protected abstract long addSubentry(long folderId1, long folderId2)
 		throws Exception;
 
 	protected AssetEntry fetchAssetEntry(String className, long classPK)
@@ -111,6 +105,12 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 		return assetEntry.isVisible();
 	}
 
+	protected abstract void moveSubentryFromTrash(long subentryId)
+		throws Exception;
+
+	protected abstract void moveSubentryToTrash(long subentryId)
+		throws Exception;
+
 	protected int searchFileEntriesCount() throws Exception {
 		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
@@ -136,20 +136,20 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 		return hits.getLength();
 	}
 
-	protected void trashSubEntry(boolean deleteFolder) throws Exception {
+	protected void trashSubentry(boolean deleteFolder) throws Exception {
 		int initialNotInTrashCount = getNotInTrashCount();
 		int initialTrashEntriesCount = getTrashEntriesCount();
 
 		Folder folder1 = addFolder(false, "Folder A1");
 		Folder folder2 = addFolder(false, "Folder A2");
 
-		long subEntryId = doAddSubEntry(
+		long subentryId = addSubentry(
 			folder1.getFolderId(), folder2.getFolderId());
 
 		Assert.assertEquals(initialNotInTrashCount + 2, getNotInTrashCount());
 		Assert.assertEquals(initialTrashEntriesCount, getTrashEntriesCount());
 
-		doMoveSubEntryToTrash(subEntryId);
+		moveSubentryToTrash(subentryId);
 
 		DLAppServiceUtil.moveFolderToTrash(folder1.getFolderId());
 
@@ -173,7 +173,7 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 				initialTrashEntriesCount + 1, getTrashEntriesCount());
 		}
 		else {
-			doMoveSubEntryFromTrash(subEntryId);
+			moveSubentryFromTrash(subentryId);
 
 			Assert.assertEquals(
 				initialNotInTrashCount + 2, getNotInTrashCount());

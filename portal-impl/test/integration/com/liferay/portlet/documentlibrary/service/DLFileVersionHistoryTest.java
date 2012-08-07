@@ -115,48 +115,6 @@ public class DLFileVersionHistoryTest extends BaseDLAppTestCase {
 		}
 	}
 
-	protected void failDeleteFileVersion(String version)
-		throws PortalException, SystemException {
-
-		try {
-			deleteFileVersion(version, null, true);
-
-			Assert.fail();
-		}
-		catch (InvalidFileVersionException ifve) {
-		}
-	}
-
-	protected void failRevertFileVersion(String version)
-		throws PortalException, SystemException {
-
-		try {
-			revertFileVersion(version, null);
-
-			Assert.fail();
-		}
-		catch (InvalidFileVersionException ifve) {
-		}
-	}
-
-	protected int getFileVersionsCount() throws SystemException {
-		List<FileVersion> fileVersions = _fileEntry.getFileVersions(
-			WorkflowConstants.STATUS_ANY);
-
-		return fileVersions.size();
-	}
-
-	protected void revertFileVersion(String version, String fileName)
-		throws PortalException, SystemException {
-
-		DLAppServiceUtil.revertFileEntry(
-			_fileEntry.getFileEntryId(), version, new ServiceContext());
-
-		if (fileName != null) {
-			assertLatestFileVersionTitle(fileName);
-		}
-	}
-
 	protected void deleteVersion(boolean versioned, boolean leaveCheckedOut)
 		throws Exception {
 
@@ -206,6 +164,48 @@ public class DLFileVersionHistoryTest extends BaseDLAppTestCase {
 			failDeleteFileVersion("1.0");
 
 			Assert.assertEquals(1, getFileVersionsCount());
+		}
+	}
+
+	protected void failDeleteFileVersion(String version)
+		throws PortalException, SystemException {
+
+		try {
+			deleteFileVersion(version, null, true);
+
+			Assert.fail();
+		}
+		catch (InvalidFileVersionException ifve) {
+		}
+	}
+
+	protected void failRevertFileVersion(String version)
+		throws PortalException, SystemException {
+
+		try {
+			revertFileVersion(version, null);
+
+			Assert.fail();
+		}
+		catch (InvalidFileVersionException ifve) {
+		}
+	}
+
+	protected int getFileVersionsCount() throws SystemException {
+		List<FileVersion> fileVersions = _fileEntry.getFileVersions(
+			WorkflowConstants.STATUS_ANY);
+
+		return fileVersions.size();
+	}
+
+	protected void revertFileVersion(String version, String fileName)
+		throws PortalException, SystemException {
+
+		DLAppServiceUtil.revertFileEntry(
+			_fileEntry.getFileEntryId(), version, new ServiceContext());
+
+		if (fileName != null) {
+			assertLatestFileVersionTitle(fileName);
 		}
 	}
 

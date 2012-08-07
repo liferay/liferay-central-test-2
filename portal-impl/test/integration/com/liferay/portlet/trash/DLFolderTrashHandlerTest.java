@@ -92,7 +92,8 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		trashDLFolder(false, true, true, false);
 	}
 
-	protected long doAddSubEntry(long folderId1, long folderId2)
+	@Override
+	protected long addSubentry(long folderId1, long folderId2)
 		throws Exception {
 
 		Folder folder = addFolder(folderId1, "Sub Folder");
@@ -100,13 +101,15 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 		return folder.getFolderId();
 	}
 
-	protected void doMoveSubEntryFromTrash(long subEntryId) throws Exception {
+	@Override
+	protected void moveSubentryFromTrash(long subentryId) throws Exception {
 		DLAppServiceUtil.moveFolderFromTrash(
-			subEntryId, parentFolder.getFolderId(), new ServiceContext());
+			subentryId, parentFolder.getFolderId(), new ServiceContext());
 	}
 
-	protected void doMoveSubEntryToTrash(long subEntryId) throws Exception {
-		DLAppServiceUtil.moveFolderToTrash(subEntryId);
+	@Override
+	protected void moveSubentryToTrash(long subentryId) throws Exception {
+		DLAppServiceUtil.moveFolderToTrash(subentryId);
 	}
 
 	protected void trashDLFolder(
