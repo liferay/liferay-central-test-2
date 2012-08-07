@@ -35,49 +35,49 @@
 	<aui:input name="preferences--hiddenNodes--" type="hidden" />
 
 	<%
-		Set<String> currentVisibleNodes = new HashSet<String>(allNodeNames);
+	Set<String> currentVisibleNodes = new HashSet<String>(allNodeNames);
 
-		// Left list
+	// Left list
 
-		List<KeyValuePair> leftList = new ArrayList<KeyValuePair>();
+	List<KeyValuePair> leftList = new ArrayList<KeyValuePair>();
 
-		for (String folderColumn : visibleNodes) {
-			if (currentVisibleNodes.contains(folderColumn)) {
-				leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+	for (String folderColumn : visibleNodes) {
+		if (currentVisibleNodes.contains(folderColumn)) {
+			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+		}
+	}
+
+	Arrays.sort(visibleNodes);
+	Arrays.sort(hiddenNodes);
+
+	for (String folderColumn : currentVisibleNodes) {
+		if ((Arrays.binarySearch(hiddenNodes, folderColumn) < 0) && (Arrays.binarySearch(visibleNodes, folderColumn) < 0)) {
+			leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+		}
+	}
+
+	// Right list
+
+	List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
+
+	for (String folderColumn : hiddenNodes) {
+		if (currentVisibleNodes.contains(folderColumn)) {
+			if (Arrays.binarySearch(visibleNodes, folderColumn) < 0) {
+				rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
 			}
 		}
+	}
 
-		Arrays.sort(visibleNodes);
-		Arrays.sort(hiddenNodes);
-
-		for (String folderColumn : currentVisibleNodes) {
-			if ((Arrays.binarySearch(hiddenNodes, folderColumn) < 0) && (Arrays.binarySearch(visibleNodes, folderColumn) < 0)) {
-				leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-			}
-		}
-
-		// Right list
-
-		List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
-
-		for (String folderColumn : hiddenNodes) {
-			if (currentVisibleNodes.contains(folderColumn)) {
-				if (Arrays.binarySearch(visibleNodes, folderColumn) < 0) {
-					rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
-				}
-			}
-		}
-
-		rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+	rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
 	%>
 
 	<liferay-ui:input-move-boxes
-			leftBoxName="currentVisibleNodes"
-			leftList="<%= leftList %>"
-			leftReorder="true"
-			leftTitle="visible"
-			rightBoxName="availableVisibleNodes"
-			rightList="<%= rightList %>"
-			rightTitle="hidden"
-			/>
+		leftBoxName="currentVisibleNodes"
+		leftList="<%= leftList %>"
+		leftReorder="true"
+		leftTitle="visible"
+		rightBoxName="availableVisibleNodes"
+		rightList="<%= rightList %>"
+		rightTitle="hidden"
+	/>
 </aui:fieldset>
