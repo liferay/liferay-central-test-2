@@ -50,6 +50,11 @@ if (assetRendererFactory != null) {
 	viewFullContentURL = _getViewFullContentURL(request, themeDisplay, PortletKeys.ASSET_PUBLISHER, document);
 
 	viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
+
+	if (Validator.isNotNull(returnToFullPageURL)) {
+		viewFullContentURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+	}
+
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
@@ -59,10 +64,6 @@ if (assetRendererFactory != null) {
 		}
 
 		viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
-	}
-
-	if (Validator.isNotNull(returnToFullPageURL)) {
-		viewFullContentURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 	}
 
 	if (viewInContext) {
