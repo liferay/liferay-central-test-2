@@ -2105,15 +2105,15 @@
 			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 		</action>
 
-		<action path="/wiki/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
-			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
-		</action>
-
 		<action path="/wiki/view_draft_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_draft_pages" />
+		</action>
+
+		<action path="/wiki/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
 		</action>
 
 		<action path="/wiki/view_nodes" forward="portlet.wiki.view_nodes">
@@ -2240,14 +2240,14 @@
 			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_categorized_pages" />
 		</action>
 
-		<action path="/wiki_admin/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
-			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
-		</action>
-
 		<action path="/wiki_admin/view_draft_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_draft_pages" />
+		</action>
+
+		<action path="/wiki_admin/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
 		</action>
 
 		<action path="/wiki_admin/view_nodes" forward="portlet.wiki.view_nodes" />
@@ -2351,14 +2351,14 @@
 			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_categorized_pages" />
 		</action>
 
-		<action path="/wiki_display/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
-			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
-		</action>
-
 		<action path="/wiki_display/view_draft_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_draft_pages" />
+		</action>
+
+		<action path="/wiki_display/view_node_deleted_attachments" type="com.liferay.portlet.wiki.action.EditNodeAttachmentAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_node_deleted_attachments" path="portlet.wiki.view_node_deleted_attachments" />
 		</action>
 
 		<action path="/wiki_display/view_orphan_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">

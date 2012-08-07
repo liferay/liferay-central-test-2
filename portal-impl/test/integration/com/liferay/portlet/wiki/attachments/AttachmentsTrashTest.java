@@ -70,7 +70,7 @@ public class AttachmentsTrashTest extends BaseDLTrashHandlerTestCase {
 		Class<?> clazz = getClass();
 
 		byte[] fileBytes = FileUtil.getBytes(
-			clazz.getResourceAsStream(_OFFICE_TEST_DOCX));
+			clazz.getResourceAsStream("dependencies/OSX_Test.docx"));
 
 		File file = null;
 
@@ -113,8 +113,5 @@ public class AttachmentsTrashTest extends BaseDLTrashHandlerTestCase {
 		Assert.assertEquals(
 			initialNotInTrashCount + 1, wikiPage.getAttachmentsFiles().length);
 	}
-
-	private static final String _OFFICE_TEST_DOCX =
-		"dependencies/OSX_Test.docx";
 
 }
