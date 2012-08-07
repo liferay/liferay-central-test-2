@@ -361,7 +361,7 @@ public class SetupWizardUtil {
 		ScreenNameGenerator screenNameGenerator =
 			ScreenNameGeneratorFactory.getInstance();
 
-		String screenName = GetterUtil.get(
+		String screenName = GetterUtil.getString(
 			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX, "test");
 
 		try {
@@ -430,13 +430,13 @@ public class SetupWizardUtil {
 			user = UserLocalServiceUtil.getUserByEmailAddress(
 				themeDisplay.getCompanyId(), emailAddress);
 
-			String defaultAdminEmail =
+			String defaultAdminEmailAddress =
 				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" +
 					PropsValues.COMPANY_DEFAULT_WEB_ID;
 
-			if (!emailAddress.equals(defaultAdminEmail)) {
+			if (!emailAddress.equals(defaultAdminEmailAddress)) {
 				User testUser = UserLocalServiceUtil.fetchUserByEmailAddress(
-					themeDisplay.getCompanyId(), defaultAdminEmail);
+					themeDisplay.getCompanyId(), defaultAdminEmailAddress);
 
 				if (testUser != null) {
 					UserLocalServiceUtil.updateStatus(
