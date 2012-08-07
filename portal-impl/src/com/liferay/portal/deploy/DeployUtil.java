@@ -150,10 +150,8 @@ public class DeployUtil {
 			String deployDirPath = deployDir.getAbsolutePath();
 
 			if (StringUtil.endsWith(deployDirPath, ".war")) {
-				int deployDirPathLen = deployDirPath.length();
-
 				deployDirPath = deployDirPath.substring(
-					0, deployDirPathLen - 4);
+					0, deployDirPath.length() - 4);
 			}
 			else {
 				deployDirPath = deployDirPath.concat(".war");
