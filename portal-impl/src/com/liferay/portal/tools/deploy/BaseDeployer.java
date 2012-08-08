@@ -235,8 +235,9 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 				appServerType + " is not a valid application server type");
 		}
 
-		if (appServerType.equals(ServerDetector.WEBSPHERE_ID) ||
-			appServerType.equals(ServerDetector.GLASSFISH_ID)) {
+		if (appServerType.equals(ServerDetector.GLASSFISH_ID) ||
+			appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
+
 			unpackWar = false;
 		}
 
