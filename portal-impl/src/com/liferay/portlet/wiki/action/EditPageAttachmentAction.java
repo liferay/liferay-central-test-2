@@ -331,12 +331,9 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 		if (moveToTrash && Validator.isNotNull(deletedFileName)) {
 			Map<String, String[]> data = new HashMap<String, String[]>();
 
-			String[] restoreAttachmentId =
-				new String[]{String.valueOf(nodeId), title, deletedFileName};
-
 			data.put(
 				"restoreAttachmentId",
-				new String[]{StringUtil.merge(restoreAttachmentId)});
+				new String[] {nodeId + "," + title + "," + deletedFileName});
 
 			SessionMessages.add(
 				actionRequest,
@@ -398,9 +395,11 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 			nodeId, title, attachment);
 	}
 
-	protected void restoreAttachment(ActionRequest actionRequest) throws Exception {
-		String[] restoreAttachmentId = StringUtil.split(ParamUtil.getString(
-			actionRequest, "restoreAttachmentId"));
+	protected void restoreAttachment(ActionRequest actionRequest)
+		throws Exception {
+
+		String[] restoreAttachmentId = StringUtil.split(
+			ParamUtil.getString(actionRequest, "restoreAttachmentId"));
 
 		long nodeId = GetterUtil.getLong(restoreAttachmentId[0], 0L);
 		String title = GetterUtil.getString(
