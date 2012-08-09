@@ -378,7 +378,7 @@ public interface Portal {
 	 * Returns the insecure (HTTP) content distribution network (CDN) host
 	 * address
 	 *
-	 * @param  companyId the company ID of a site TODO?
+	 * @param  companyId the company ID of a site
 	 * @return the CDN host address
 	 */
 	public String getCDNHostHttp(long companyId);
@@ -387,7 +387,7 @@ public interface Portal {
 	 * Returns the secure (HTTPS) content distribution network (CDN) host
 	 * address
 	 *
-	 * @param  companyId the company ID of a site TODO?
+	 * @param  companyId the company ID of a site
 	 * @return the CDN host address
 	 */
 	public String getCDNHostHttps(long companyId);
