@@ -1236,7 +1236,7 @@ public class PortalUtil {
 		return getPortal().getUserId(portletRequest);
 	}
 
-	public static String getUserName(BaseModel baseModel) {
+	public static String getUserName(BaseModel<?> baseModel) {
 		return getPortal().getUserName(baseModel);
 	}
 

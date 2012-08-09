@@ -4248,7 +4248,7 @@ public class PortalImpl implements Portal {
 		return getUserId(getHttpServletRequest(portletRequest));
 	}
 
-	public String getUserName(BaseModel baseModel) {
+	public String getUserName(BaseModel<?> baseModel) {
 		long userId = 0;
 		String userName = StringPool.BLANK;
 
