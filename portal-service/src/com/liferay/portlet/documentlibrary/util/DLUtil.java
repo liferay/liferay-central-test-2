@@ -320,10 +320,10 @@ public class DLUtil {
 		sb.append(themeDisplay.translate("home"));
 
 		for (int i = dlFolders.size() - 1; i >= 0; i--) {
-			DLFolder curFolder = dlFolders.get(i);
+			DLFolder curDLFolder = dlFolders.get(i);
 
 			sb.append(StringPool.SLASH);
-			sb.append(curFolder.getName());
+			sb.append(curDLFolder.getName());
 		}
 
 		sb.append(StringPool.SLASH);

@@ -137,20 +137,19 @@ public class EditEntryAction extends PortletAction {
 
 	protected void addRestoreData(
 			LiferayPortletConfig liferayPortletConfig,
-			ActionRequest actionRequest, TrashEntry[] trashEntries)
+			ActionRequest actionRequest, TrashEntry[] entries)
 		throws Exception {
 
-		if ((trashEntries == null) || (trashEntries.length <= 0)) {
+		if ((entries == null) || (entries.length <= 0)) {
 			return;
 		}
 
 		List<String> restoreLinks = new ArrayList<String>();
 		List<String> restoreMessages = new ArrayList<String>();
 
-		for (TrashEntry entry : trashEntries) {
+		for (TrashEntry entry : entries) {
 			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(
-					entry.getClassName());
+				TrashHandlerRegistryUtil.getTrashHandler(entry.getClassName());
 
 			String restoreLink = trashHandler.getRestoreLink(
 				actionRequest, entry.getClassPK());

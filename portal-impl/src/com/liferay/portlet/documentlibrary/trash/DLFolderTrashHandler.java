@@ -108,7 +108,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 	}
 
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getDLFolder(classPK);
 
@@ -117,7 +117,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 	}
 
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getDLFolder(classPK);
 
