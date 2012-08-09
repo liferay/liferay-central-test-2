@@ -356,12 +356,13 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 		}
 	}
 
-	private static final int _PRIORITY_BUFFER = 1000000;
-
-	private String _beanIdentifier;
 	@BeanReference(type = LayoutPersistence.class)
 	protected LayoutPersistence layoutPersistence;
 	@BeanReference(type = LayoutSetPersistence.class)
 	protected LayoutSetPersistence layoutSetPersistence;
+
+	private static final int _PRIORITY_BUFFER = 1000000;
+
+	private String _beanIdentifier;
 
 }

@@ -57,10 +57,7 @@ public class LayoutSetLocalServiceStagingAdvice
 			return methodInvocation.proceed();
 		}
 
-		Object[] arguments = methodInvocation.getArguments();
 		Method method = methodInvocation.getMethod();
-		Class<?>[] parameterTypes = method.getParameterTypes();
-		Object target = methodInvocation.getThis();
 
 		String methodName = method.getName();
 
@@ -72,17 +69,20 @@ public class LayoutSetLocalServiceStagingAdvice
 
 		Object returnValue = null;
 
+		Object thisObject = methodInvocation.getThis();
+		Object[] arguments = methodInvocation.getArguments();
+
 		if (methodName.equals("updateLayoutSetPrototypeLinkEnabled") &&
 			(arguments.length == 5)) {
 
 			updateLayoutSetPrototypeLinkEnabled(
-				(LayoutSetLocalService)target, (Long)arguments[0],
+				(LayoutSetLocalService)thisObject, (Long)arguments[0],
 				(Boolean)arguments[1], (Boolean)arguments[2],
 				(String)arguments[3]);
 		}
 		else if (methodName.equals("updateLogo") && (arguments.length == 5)) {
 			updateLogo(
-				(LayoutSetLocalService)target, (Long)arguments[0],
+				(LayoutSetLocalService)thisObject, (Long)arguments[0],
 				(Boolean)arguments[1], (Boolean)arguments[2],
 				(InputStream)arguments[3], (Boolean)arguments[4]);
 		}
@@ -90,29 +90,32 @@ public class LayoutSetLocalServiceStagingAdvice
 				(arguments.length == 6)) {
 
 			returnValue = updateLookAndFeel(
-				(LayoutSetLocalService)target, (Long)arguments[0],
+				(LayoutSetLocalService)thisObject, (Long)arguments[0],
 				(Boolean)arguments[1], (String)arguments[2],
 				(String)arguments[3], (String)arguments[4],
 				(Boolean)arguments[5]);
 		}
 		else if (methodName.equals("updateSettings")) {
 			returnValue = updateSettings(
-				(LayoutSetLocalService)target, (Long)arguments[0],
+				(LayoutSetLocalService)thisObject, (Long)arguments[0],
 				(Boolean)arguments[1], (String)arguments[2]);
 		}
 		else {
 			try {
 				Class<?> clazz = getClass();
 
-				arguments = ArrayUtil.append(new Object[] {target}, arguments);
-				parameterTypes = ArrayUtil.append(
+				Class<?>[] parameterTypes = ArrayUtil.append(
 					new Class<?>[] {LayoutSetLocalService.class},
-					parameterTypes);
+					method.getParameterTypes());
 
-				Method localMethod = clazz.getMethod(
-					methodName, method.getParameterTypes());
+				Method layoutSetLocalServiceStagingAdviceMethod =
+					clazz.getMethod(methodName, parameterTypes);
 
-				returnValue = localMethod.invoke(this, arguments);
+				arguments = ArrayUtil.append(
+					new Object[] {thisObject}, arguments);
+
+				returnValue = layoutSetLocalServiceStagingAdviceMethod.invoke(
+					this, arguments);
 			}
 			catch (InvocationTargetException ite) {
 				throw ite.getTargetException();
@@ -126,8 +129,8 @@ public class LayoutSetLocalServiceStagingAdvice
 	}
 
 	public void updateLayoutSetPrototypeLinkEnabled(
-			LayoutSetLocalService target, long groupId, boolean privateLayout,
-			boolean layoutSetPrototypeLinkEnabled,
+			LayoutSetLocalService layoutSetLocalService, long groupId,
+			boolean privateLayout, boolean layoutSetPrototypeLinkEnabled,
 			String layoutSetPrototypeUuid)
 		throws PortalException, SystemException {
 
@@ -140,7 +143,7 @@ public class LayoutSetLocalServiceStagingAdvice
 			layoutSet);
 
 		if (layoutSetBranch == null) {
-			target.updateLayoutSetPrototypeLinkEnabled(
+			layoutSetLocalService.updateLayoutSetPrototypeLinkEnabled(
 				groupId, privateLayout, layoutSetPrototypeLinkEnabled,
 				layoutSetPrototypeUuid);
 
@@ -168,8 +171,9 @@ public class LayoutSetLocalServiceStagingAdvice
 	}
 
 	public LayoutSet updateLogo(
-			LayoutSetLocalService target, long groupId, boolean privateLayout,
-			boolean logo, InputStream is, boolean cleanUpStream)
+			LayoutSetLocalService layoutSetLocalService, long groupId,
+			boolean privateLayout, boolean logo, InputStream is,
+			boolean cleanUpStream)
 		throws PortalException, SystemException {
 
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
@@ -181,7 +185,7 @@ public class LayoutSetLocalServiceStagingAdvice
 			layoutSet);
 
 		if (layoutSetBranch == null) {
-			return target.updateLogo(
+			return layoutSetLocalService.updateLogo(
 				groupId, privateLayout, logo, is, cleanUpStream);
 		}
 

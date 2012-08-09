@@ -33,30 +33,9 @@ public class BeanReferenceRefreshUtil {
 
 	public static void refresh(BeanFactory beanFactory) throws Exception {
 		for (Map.Entry<Object, List<RefreshPoint>> entry :
-			_registeredRefreshPoints.entrySet()) {
+				_registeredRefreshPoints.entrySet()) {
 
-			Object targetBean = entry.getKey();
-
-			for (RefreshPoint refreshPoint : entry.getValue()) {
-				Field field = refreshPoint._field;
-				String referencedBeanName = refreshPoint._referencedBeanName;
-
-				Object oldReferencedBean = field.get(targetBean);
-				Object newReferencedBean = beanFactory.getBean(
-					referencedBeanName);
-
-				if (oldReferencedBean != newReferencedBean) {
-					field.set(targetBean, newReferencedBean);
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Refreshed on bean : " + targetBean +
-							", field : " + field + ", old value : " +
-							oldReferencedBean + ", new value : " +
-							newReferencedBean);
-					}
-				}
-			}
+			_refresh(beanFactory, entry.getKey(), entry.getValue());
 		}
 
 		_registeredRefreshPoints.clear();
@@ -75,6 +54,43 @@ public class BeanReferenceRefreshUtil {
 		}
 
 		refreshPoints.add(new RefreshPoint(field, referencedBeanName));
+	}
+
+	private static void _refresh(
+			BeanFactory beanFactory, Object targetBean,
+			List<RefreshPoint> refreshPoints)
+		throws Exception {
+
+		for (RefreshPoint refreshPoint : refreshPoints) {
+			_refresh(beanFactory, targetBean, refreshPoint);
+		}
+	}
+
+	private static void _refresh(
+			BeanFactory beanFactory, Object targetBean,
+			RefreshPoint refreshPoint)
+		throws Exception {
+
+		Field field = refreshPoint._field;
+
+		Object oldReferenceBean = field.get(targetBean);
+
+		String referencedBeanName = refreshPoint._referencedBeanName;
+
+		Object newReferencedBean = beanFactory.getBean(referencedBeanName);
+
+		if (oldReferenceBean == newReferencedBean) {
+			return;
+		}
+
+		field.set(targetBean, newReferencedBean);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Refreshed field " + field + " with old value " +
+					oldReferenceBean + " with new value " + newReferencedBean +
+						" on bean " + targetBean);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
