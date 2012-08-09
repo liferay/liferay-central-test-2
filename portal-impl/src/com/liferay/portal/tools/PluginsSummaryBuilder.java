@@ -275,9 +275,9 @@ public class PluginsSummaryBuilder {
 
 		sb.append("<");
 		sb.append(name);
-		sb.append(">");
+		sb.append("><![CDATA[");
 		sb.append(value);
-		sb.append("</");
+		sb.append("]]></");
 		sb.append(name);
 		sb.append(">\n");
 	}
