@@ -107,6 +107,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
@@ -116,6 +117,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 			portletRequest, dlFolder.getParentFolderId());
 	}
 
+	@Override
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 

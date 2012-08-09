@@ -68,6 +68,7 @@ public class DLFileShortcutTrashHandler extends BaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
@@ -78,6 +79,7 @@ public class DLFileShortcutTrashHandler extends BaseTrashHandler {
 			portletRequest, fileShortcut.getFolderId());
 	}
 
+	@Override
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 

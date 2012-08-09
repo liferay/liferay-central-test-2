@@ -68,12 +68,14 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		deleteTrashEntries(new long[] {classPK}, checkPermission);
 	}
 
+	@SuppressWarnings("unused")
 	public String getRestoreLink(PortletRequest PortletRequest, long classPK)
 		throws PortalException, SystemException {
 
 		return StringPool.BLANK;
 	}
 
+	@SuppressWarnings("unused")
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
