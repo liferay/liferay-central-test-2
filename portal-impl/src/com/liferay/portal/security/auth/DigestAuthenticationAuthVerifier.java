@@ -12,12 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.verifier;
+package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.security.auth.AccessControlContext;
-import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Properties;
@@ -25,9 +23,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Verifies HTTP Digest authentication using
- * {@link PortalUtil#getDigestAuthUserId(HttpServletRequest)}.
- *
  * @author Tomas Polesovsky
  */
 public class DigestAuthenticationAuthVerifier implements AuthVerifier {
@@ -36,21 +31,21 @@ public class DigestAuthenticationAuthVerifier implements AuthVerifier {
 			AccessControlContext accessControlContext, Properties configuration)
 		throws AuthException {
 
-		AuthVerifierResult result = new AuthVerifierResult();
-
 		try {
-			HttpServletRequest request =
-				accessControlContext.getHttpServletRequest();
+			AuthVerifierResult authVerifierResult = new AuthVerifierResult();
+
+			HttpServletRequest request = accessControlContext.getRequest();
+
 			long userId = PortalUtil.getDigestAuthUserId(request);
 
 			if (userId == 0) {
-				return result;
+				return authVerifierResult;
 			}
 
-			result.setState(AuthVerifierResult.State.SUCCESS);
-			result.setUserId(userId);
+			authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
+			authVerifierResult.setUserId(userId);
 
-			return result;
+			return authVerifierResult;
 		}
 		catch (PortalException e) {
 			throw new AuthException(e);

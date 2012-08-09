@@ -134,6 +134,8 @@ public class PropsValues {
 
 	public static final String AUTH_TOKEN_SHARED_SECRET = PropsUtil.get(PropsKeys.AUTH_TOKEN_SHARED_SECRET);
 
+	public static final String[] AUTH_VERIFIER_PIPELINE = PropsUtil.getArray(PropsKeys.AUTH_VERIFIER_PIPELINE);
+
 	public static final int AUTO_DEPLOY_BLACKLIST_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD));
 
 	public static final boolean AUTO_DEPLOY_COPY_COMMONS_LOGGING = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTO_DEPLOY_COPY_COMMONS_LOGGING));
@@ -1285,8 +1287,6 @@ public class PropsValues {
 	public static final int POP_SERVER_NOTIFICATIONS_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.POP_SERVER_NOTIFICATIONS_INTERVAL));
 
 	public static final String POP_SERVER_SUBDOMAIN = PropsUtil.get(PropsKeys.POP_SERVER_SUBDOMAIN);
-
-	public static final String[] PORTAL_AUTHENTICATION_VERIFIER_PIPELINE = PropsUtil.getArray(PropsKeys.PORTAL_AUTHENTICATION_VERIFIER_PIPELINE);
 
 	public static final String PORTAL_CTX = PropsUtil.get(PropsKeys.PORTAL_CTX);
 

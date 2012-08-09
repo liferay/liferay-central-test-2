@@ -19,30 +19,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.AuthException;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.security.auth.AuthVerifierResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * AccessControlManager is responsible for creating authentication and
- * authorization contexts. It use AuthVerifierPipeline for fetching user from
- * servlet request. <br />
- * <br/>
- * Should be used in this order:
- * <ol><li>
- * {@link #initAccessControlContext(HttpServletRequest, HttpServletResponse)}
- * to create AuthenticationContext. AuthenticationContext is then accessible
- * from {@link #getAccessControlContext()}, internally saved as a ThreadLocal.
- * </li>
- *
- * <li>{@link #verifyRequest()} to obtain user from request and update
- * AuthenticationContext with verifier specific settings.</li>
- *
- * <li>{@link #initContextUser(long userId)} } to init all
- * authorization related ThreadLocals in the portal. Parameter userId
- * is available in {@link AccessControlContext#getVerificationResult()}</li>
- * </ol>
  * @author Tomas Polesovsky
  * @author Michael C. Han
  * @author Raymond Augé
@@ -58,7 +40,7 @@ public class AccessControlUtil {
 	}
 
 	public static AccessControlContext getAccessControlContext() {
-		return _accessControlContextThreadLocal.get();
+		return _accessControlContext.get();
 	}
 
 	public static void initAccessControlContext(
@@ -74,11 +56,11 @@ public class AccessControlUtil {
 	public static void setAccessControlContext(
 		AccessControlContext accessControlContext) {
 
-		_accessControlContextThreadLocal.set(accessControlContext);
+		_accessControlContext.set(accessControlContext);
 	}
 
 	public static AuthVerifierResult.State verifyRequest()
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		return getAccessControl().verifyRequest();
 	}
@@ -87,12 +69,9 @@ public class AccessControlUtil {
 		_accessControl = accessControl;
 	}
 
-	private static ThreadLocal<AccessControlContext>
-		_accessControlContextThreadLocal =
-			new AutoResetThreadLocal<AccessControlContext>(
-				AccessControlUtil.class +
-					"._accessControlContextThreadLocal");
-
 	private static AccessControl _accessControl;
+	private static ThreadLocal<AccessControlContext> _accessControlContext =
+		new AutoResetThreadLocal<AccessControlContext>(
+			AccessControlUtil.class + "._accessControlContext");
 
 }

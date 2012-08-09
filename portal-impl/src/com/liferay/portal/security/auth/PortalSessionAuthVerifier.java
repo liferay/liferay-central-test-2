@@ -12,13 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.verifier;
+package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.AccessControlContext;
-import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Properties;
@@ -26,32 +24,29 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * PortalSessionAuthVerifier returns authenticated user based on portal
- * session authentication (e.g. login portlet, AutoLogins, ...).
- *
  * @author Tomas Polesovsky
  */
 public class PortalSessionAuthVerifier implements AuthVerifier {
 
 	public AuthVerifierResult verify(
-			AccessControlContext accessControlContext, Properties configuration)
+			AccessControlContext accessControlContext, Properties properties)
 		throws AuthException {
 
-		AuthVerifierResult result = new AuthVerifierResult();
-
 		try {
-			HttpServletRequest request =
-				accessControlContext.getHttpServletRequest();
+			AuthVerifierResult authVerifierResult = new AuthVerifierResult();
+
+			HttpServletRequest request = accessControlContext.getRequest();
+
 			User user = PortalUtil.getUser(request);
 
 			if (user == null) {
-				return result;
+				return authVerifierResult;
 			}
 
-			result.setState(AuthVerifierResult.State.SUCCESS);
-			result.setUserId(user.getUserId());
+			authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
+			authVerifierResult.setUserId(user.getUserId());
 
-			return result;
+			return authVerifierResult;
 		}
 		catch (PortalException e) {
 			throw new AuthException(e);

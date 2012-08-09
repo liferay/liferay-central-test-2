@@ -86,8 +86,8 @@ public class SecureFilter extends BasePortalFilter {
 				PropsUtil.get(propertyPrefix + "https.required"));
 		}
 
-		for (String element : hostsAllowedArray) {
-			_hostsAllowed.add(element);
+		for (String host : hostsAllowedArray) {
+			_hostsAllowed.add(host);
 		}
 	}
 
@@ -279,11 +279,12 @@ public class SecureFilter extends BasePortalFilter {
 
 					processFilter(getClass(), request, response, filterChain);
 				}
+
 				catch(SecurityException se) {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-					if (_log.isErrorEnabled()) {
-						_log.error("Access denied: ", se);
+					if (_log.isWarnEnabled()) {
+						_log.warn("Deny access", se);
 					}
 				}
 				finally {

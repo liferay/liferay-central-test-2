@@ -14,11 +14,9 @@
 
 package com.liferay.portal.security.ac;
 
-
 import java.lang.reflect.Method;
 
 /**
- *
  * @author Michael C. Han
  * @author Raymond Augé
  */

@@ -18,13 +18,11 @@ import com.liferay.portal.atom.AtomProvider;
 import com.liferay.portal.atom.AtomUtil;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ac.AccessControlUtil;
 import com.liferay.portal.security.ac.AccessControlThreadLocal;
+import com.liferay.portal.security.ac.AccessControlUtil;
 import com.liferay.portal.security.auth.AccessControlContext;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.security.auth.AuthVerifierResult;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.List;
@@ -70,12 +68,11 @@ public class AtomServlet extends AbderaServlet {
 			AccessControlContext accessControlContext =
 				AccessControlUtil.getAccessControlContext();
 
-			AuthVerifierResult verificationResult =
-				accessControlContext.getVerificationResult();
+			AuthVerifierResult authVerifierResult =
+				accessControlContext.getAuthVerifierResult();
 
-			long userId = verificationResult.getUserId();
-
-			User user = UserLocalServiceUtil.getUser(userId);
+			User user = UserLocalServiceUtil.getUser(
+				authVerifierResult.getUserId());
 
 			AtomUtil.saveUserInRequest(request, user);
 
@@ -90,7 +87,5 @@ public class AtomServlet extends AbderaServlet {
 			AccessControlThreadLocal.setRemoteAccess(remoteAccess);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AtomServlet.class);
 
 }

@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.security.auth.verifier.AuthVerifier;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
 import com.liferay.portlet.login.util.LoginUtil;
 
 import java.util.Properties;
@@ -62,7 +60,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Tomas Polesovsky
  */
-public class BasicAuthHeaderAutoLogin implements AutoLogin, AuthVerifier {
+public class BasicAuthHeaderAutoLogin implements AuthVerifier, AutoLogin {
 
 	public String[] login(
 			HttpServletRequest request, HttpServletResponse response)
@@ -139,40 +137,28 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin, AuthVerifier {
 		}
 	}
 
-	/**
-	 * Reuse existing
-	 * {@link AutoLogin#login(HttpServletRequest, HttpServletResponse)}
-	 * implementation to obtain user from request based on provided
-	 * 'Authorization: Basic base64credentials' HTTP Header.
-	 *
-	 * @param accessControlContext Authentication context with
-	 *                             	request and response.
-	 * @param configuration Optional AuthVerifier configuration
-	 * @return
-	 * @throws AuthException with internal system exception
-	 */
 	public AuthVerifierResult verify(
-			AccessControlContext accessControlContext, Properties configuration)
+			AccessControlContext accessControlContext, Properties properties)
 		throws AuthException {
 
-		AuthVerifierResult result = new AuthVerifierResult();
-
 		try {
-			String[] loginResult = login(
-				accessControlContext.getHttpServletRequest(),
-				accessControlContext.getHttpServletResponse());
+			AuthVerifierResult authVerifierResult = new AuthVerifierResult();
 
-			if (loginResult != null) {
-				result.setState(AuthVerifierResult.State.SUCCESS);
-				result.setUserId(Long.valueOf(loginResult[0]));
-				result.setPassword(loginResult[1]);
+			String[] credentials = login(
+				accessControlContext.getRequest(),
+				accessControlContext.getResponse());
+
+			if (credentials != null) {
+				authVerifierResult.setPassword(credentials[1]);
+				authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
+				authVerifierResult.setUserId(Long.valueOf(credentials[0]));
 			}
+
+			return authVerifierResult;
 		}
 		catch (AutoLoginException e) {
 			throw new AuthException(e);
 		}
-
-		return result;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

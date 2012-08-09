@@ -43,8 +43,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
 </#if>
 
 <#if entity.hasRemoteService() && sessionTypeName != "Local">
-	@JSONWebService
 	@AccessControlled
+	@JSONWebService
 </#if>
 
 @Transactional(isolation = Isolation.PORTAL, rollbackFor = {PortalException.class, SystemException.class})

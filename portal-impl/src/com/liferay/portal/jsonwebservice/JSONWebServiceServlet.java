@@ -91,53 +91,54 @@ public class JSONWebServiceServlet extends JSONServlet {
 		try {
 			AccessControlThreadLocal.setRemoteAccess(true);
 
-		if (servletContext.getContext(PropsValues.PORTAL_CTX) != null) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-				apiPath);
+			if (servletContext.getContext(PropsValues.PORTAL_CTX) != null) {
+				RequestDispatcher requestDispatcher =
+					request.getRequestDispatcher(apiPath);
 
-			requestDispatcher.forward(request, response);
-		}
-		else {
-			String requestURI = request.getRequestURI();
-			String requestURL = String.valueOf(request.getRequestURL());
-
-			String serverURL = requestURL.substring(
-				0, requestURL.length() - requestURI.length());
-
-			String queryString = request.getQueryString();
-
-			if (Validator.isNull(queryString)) {
-				queryString = StringPool.BLANK;
+				requestDispatcher.forward(request, response);
 			}
 			else {
-				queryString += StringPool.AMPERSAND;
+				String requestURI = request.getRequestURI();
+				String requestURL = String.valueOf(request.getRequestURL());
+
+				String serverURL = requestURL.substring(
+					0, requestURL.length() - requestURI.length());
+
+				String queryString = request.getQueryString();
+
+				if (Validator.isNull(queryString)) {
+					queryString = StringPool.BLANK;
+				}
+				else {
+					queryString += StringPool.AMPERSAND;
+				}
+
+				String servletContextPath = ContextPathUtil.getContextPath(
+					servletContext);
+
+				queryString +=
+					"contextPath=" + HttpUtil.encodeURL(servletContextPath);
+
+				apiPath =
+					serverURL + apiPath + StringPool.QUESTION + queryString;
+
+				URL url = new URL(apiPath);
+
+				InputStream inputStream = null;
+
+				try {
+					inputStream = url.openStream();
+
+					OutputStream outputStream = response.getOutputStream();
+
+					StreamUtil.transfer(inputStream, outputStream);
+				}
+				finally {
+					StreamUtil.cleanUp(inputStream);
+
+					AccessControlThreadLocal.setRemoteAccess(remoteAccess);
+				}
 			}
-
-			String servletContextPath = ContextPathUtil.getContextPath(
-				servletContext);
-
-			queryString +=
-				"contextPath=" + HttpUtil.encodeURL(servletContextPath);
-
-			apiPath = serverURL + apiPath + StringPool.QUESTION + queryString;
-
-			URL url = new URL(apiPath);
-
-			InputStream inputStream = null;
-
-			try {
-				inputStream = url.openStream();
-
-				OutputStream outputStream = response.getOutputStream();
-
-				StreamUtil.transfer(inputStream, outputStream);
-			}
-			finally {
-				StreamUtil.cleanUp(inputStream);
-
-				AccessControlThreadLocal.setRemoteAccess(remoteAccess);
-			}
-		}
 		}
 		finally {
 			AccessControlThreadLocal.setRemoteAccess(remoteAccess);

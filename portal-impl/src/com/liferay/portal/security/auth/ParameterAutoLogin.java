@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.verifier.AuthVerifier;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -35,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Minhchau Dang
  * @author Tomas Polesovsky
  */
-public class ParameterAutoLogin implements AutoLogin, AuthVerifier {
+public class ParameterAutoLogin implements AuthVerifier, AutoLogin {
 
 	public String[] login(
 			HttpServletRequest request, HttpServletResponse response)
@@ -105,27 +103,27 @@ public class ParameterAutoLogin implements AutoLogin, AuthVerifier {
 	}
 
 	public AuthVerifierResult verify(
-			AccessControlContext accessControlContext, Properties configuration)
+			AccessControlContext accessControlContext, Properties properties)
 		throws AuthException {
 
-		AuthVerifierResult result = new AuthVerifierResult();
-
 		try {
-			String[] loginResult = login(
-				accessControlContext.getHttpServletRequest(),
-				accessControlContext.getHttpServletResponse());
+			AuthVerifierResult authVerifierResult = new AuthVerifierResult();
 
-			if (loginResult != null) {
-				result.setState(AuthVerifierResult.State.SUCCESS);
-				result.setUserId(Long.valueOf(loginResult[0]));
-				result.setPassword(loginResult[1]);
+			String[] credentials = login(
+				accessControlContext.getRequest(),
+				accessControlContext.getResponse());
+
+			if (credentials != null) {
+				authVerifierResult.setPassword(credentials[1]);
+				authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
+				authVerifierResult.setUserId(Long.valueOf(credentials[0]));
 			}
-		}
-		catch (AutoLoginException e) {
-			throw new AuthException(e);
-		}
 
-		return result;
+			return authVerifierResult;
+		}
+		catch (AutoLoginException ale) {
+			throw new AuthException(ale);
+		}
 	}
 
 	protected String getLoginParam() {

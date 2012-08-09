@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.auth.verifier;
+package com.liferay.portal.servlet.filters.authverifier;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.security.ac.AccessControlUtil;
 import com.liferay.portal.security.auth.AccessControlContext;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.security.auth.AuthVerifierResult;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.FilterChain;
@@ -27,11 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * See <a href="http://issues.liferay.com/browse/LPS-27888">LPS-27888</a>.<br />
- * The servlet filter tries to fetch user from request based on provided token
- * (if available). It uses {@link AccessControlUtil} to verify request and
- * to initialize authentication and authorization contexts for underlying
- * service calls.
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-27888.
+ * </p>
  *
  * @author Tomas Polesovsky
  * @author Raymond Augé
@@ -46,51 +44,41 @@ public class AuthVerifierFilter extends BasePortalFilter {
 
 		AccessControlUtil.initAccessControlContext(request, response);
 
-		AuthVerifierResult.State verificationState =
-			AccessControlUtil.verifyRequest();
+		AuthVerifierResult.State state = AccessControlUtil.verifyRequest();
 
 		AccessControlContext accessControlContext =
 			AccessControlUtil.getAccessControlContext();
 
-		AuthVerifierResult verificationResult =
-			accessControlContext.getVerificationResult();
+		AuthVerifierResult authVerifierResult =
+			accessControlContext.getAuthVerifierResult();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Verification result: " + verificationResult);
+			_log.debug("Auth verifier result " + authVerifierResult);
 		}
 
-		switch (verificationState) {
-			case INVALID_CREDENTIALS: {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Result state doesn't allow us to continue.");
-				}
-
-				return;
-			}
-			case NOT_APPLICABLE:
-			case SUCCESS: {
-				long userId = verificationResult.getUserId();
-
-				AccessControlUtil.initContextUser(userId);
-
-				HttpServletRequest protectedServletRequest =
-					new ProtectedServletRequest(
-						request, String.valueOf(userId));
-
-				accessControlContext.setRequest(protectedServletRequest);
-
-				processFilter(
-					getClass(), protectedServletRequest, response, filterChain);
-
-				return;
-			}
-			default: {
-				_log.error("Unimplemented state, returning.");
-
-				return;
+		if (state == AuthVerifierResult.State.INVALID_CREDENTIALS) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Result state doesn't allow us to continue.");
 			}
 		}
+		else if (state == AuthVerifierResult.State.NOT_APPLICABLE) {
+		}
+		else if (state == AuthVerifierResult.State.SUCCESS) {
+			long userId = authVerifierResult.getUserId();
 
+			AccessControlUtil.initContextUser(userId);
+
+			ProtectedServletRequest protectedServletRequest =
+				new ProtectedServletRequest(request, String.valueOf(userId));
+
+			accessControlContext.setRequest(protectedServletRequest);
+
+			processFilter(
+				getClass(), protectedServletRequest, response, filterChain);
+		}
+		else {
+			_log.error("Unimplemented state " + state);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

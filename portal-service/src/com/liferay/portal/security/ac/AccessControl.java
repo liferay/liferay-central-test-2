@@ -17,7 +17,7 @@ package com.liferay.portal.security.ac;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.auth.AuthException;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
+import com.liferay.portal.security.auth.AuthVerifierResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +33,6 @@ public interface AccessControl {
 	public void initContextUser(long userId) throws AuthException;
 
 	public AuthVerifierResult.State verifyRequest()
-		throws SystemException, PortalException;
+		throws PortalException, SystemException;
 
 }

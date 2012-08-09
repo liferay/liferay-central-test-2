@@ -12,24 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.security.ac;
+package com.liferay.portal.security.auth;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Properties;
 
 /**
- * @author Michael C. Han
- * @author Raymond Augé
+ * @author Tomas Polesovsky
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface AccessControlled {
+public interface AuthVerifier {
 
-	public AccessControlType accessControlType() default
-		AccessControlType.AUTHENTICATED;
+	public AuthVerifierResult verify(
+			AccessControlContext accessControlContext, Properties properties)
+		throws AuthException;
 
 }

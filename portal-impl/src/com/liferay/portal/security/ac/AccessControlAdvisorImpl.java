@@ -42,17 +42,17 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 
 		checkAllowedHosts();
 
-		AccessControlType remoteMethodAccessType =
+		AccessControlType accessControlType =
 			accessControlled.accessControlType();
 
-		if (remoteMethodAccessType == AccessControlType.AUTHENTICATED) {
+		if (accessControlType == AccessControlType.AUTHENTICATED) {
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			if ((permissionChecker == null) ||
 				!permissionChecker.isSignedIn()) {
 
-				throw new SecurityException("Authenticated access required.");
+				throw new SecurityException("Authenticated access required");
 			}
 		}
 	}
@@ -62,11 +62,10 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 			AccessControlUtil.getAccessControlContext();
 
 		if (accessControlContext == null) {
-
-			// TODO: AuthVerificationFilter is not mapped to all URLs!!!!
-
 			return;
 		}
+
+		HttpServletRequest request = accessControlContext.getRequest();
 
 		Map<String, Object> settings = accessControlContext.getSettings();
 
@@ -75,15 +74,9 @@ public class AccessControlAdvisorImpl implements AccessControlAdvisor {
 
 		Set<String> hostsAllowedSet = SetUtil.fromArray(hostsAllowed);
 
-		HttpServletRequest httpServletRequest =
-			accessControlContext.getHttpServletRequest();
-
-		boolean accessAllowed = AuthSettingsUtil.isAccessAllowed(
-			httpServletRequest, hostsAllowedSet);
-
-		if (!accessAllowed) {
+		if (!AuthSettingsUtil.isAccessAllowed(request, hostsAllowedSet)) {
 			throw new SecurityException(
-				"Access denied for " + httpServletRequest.getRemoteAddr());
+				"Access denied for " + request.getRemoteAddr());
 		}
 	}
 

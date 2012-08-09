@@ -12,32 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.verifier;
+package com.liferay.portal.security.auth;
 
 import java.util.Properties;
 
 /**
- * Bean for holding instance of AuthVerifier and its configuration object
  * @author Tomas Polesovsky
  */
 public class AuthVerifierConfiguration {
+
 	public AuthVerifier getAuthVerifier() {
 		return _authVerifier;
 	}
 
-	public Properties getConfiguration() {
-		return _configuration;
+	public Properties getProperties() {
+		return _properties;
 	}
 
 	public void setAuthVerifier(AuthVerifier authVerifier) {
-		this._authVerifier = authVerifier;
+		_authVerifier = authVerifier;
 	}
 
-	public void setConfiguration(Properties configuration) {
-		this._configuration = configuration;
+	public void setProperties(Properties properties) {
+		_properties = properties;
 	}
 
 	private AuthVerifier _authVerifier;
-	private Properties _configuration;
+	private Properties _properties;
 
 }

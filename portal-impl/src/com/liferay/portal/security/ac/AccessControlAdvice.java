@@ -22,8 +22,6 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- *
- *
  * @author Tomas Polesovsky
  * @author Igor Spasic
  * @author Michael C. Han
@@ -36,10 +34,11 @@ public class AccessControlAdvice extends
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		boolean remoteAccess = AccessControlThreadLocal.isRemoteAccess();
 
-		AccessControlled accessControlled = findAnnotation(methodInvocation);
-
 		if (remoteAccess) {
 			Method targetMethod = methodInvocation.getMethod();
+
+			AccessControlled accessControlled = findAnnotation(
+				methodInvocation);
 
 			_accessControlAdvisor.accept(targetMethod, accessControlled);
 		}

@@ -19,10 +19,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AccessControlContext;
 import com.liferay.portal.security.auth.AuthException;
+import com.liferay.portal.security.auth.AuthVerifierPipeline;
+import com.liferay.portal.security.auth.AuthVerifierResult;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.auth.verifier.AuthVerifierPipeline;
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
@@ -45,13 +45,8 @@ public class AccessControlImpl implements AccessControl {
 			AccessControlUtil.getAccessControlContext();
 
 		if (accessControlContext != null) {
-
-			// TODO: think of stack of authentication contexts
-			// for running subsequent calls under different privileges
-
 			throw new IllegalStateException(
-				"Authentication context is already initialized! " +
-					"Changing privileges is prohibited");
+				"Authentication context is already initialized");
 		}
 
 		accessControlContext = new AccessControlContext();
@@ -63,35 +58,19 @@ public class AccessControlImpl implements AccessControl {
 	}
 
 	public void initContextUser(long userId) throws AuthException {
-		// TODO: think of stack of authorization contexts (ServiceContext
-		// already use stack for this) for running calls under different
-		// privileges, the authorization stack should be bound to the
-		// authentication one = only one stack with authentication+authorization
-		// context? All services could easily have the whole context
-
 		try {
 			User user = UserLocalServiceUtil.getUser(userId);
 
 			CompanyThreadLocal.setCompanyId(user.getCompanyId());
+
+			PrincipalThreadLocal.setName(userId);
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			//TODO: Init ServiceContext?
-
-			//TODO: Verify if we need to init PrincipalThreadLocal.password
-
-			PrincipalThreadLocal.setName(userId);
-
-			// TODO: why we have so many ThreadLocals instead of one with whole
-			// context ???
-
 			AccessControlThreadLocal.setRemoteAccess(false);
-
-			//TODO: REFACTOR ServiceContext, PermissionThreadLocals,
-			// PrincipalThreadLocal and AuthenticationContext into one TL
 		}
 		catch (Exception e) {
 			throw new AuthException(e.getMessage(), e);
@@ -99,7 +78,7 @@ public class AccessControlImpl implements AccessControl {
 	}
 
 	public AuthVerifierResult.State verifyRequest()
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		AccessControlContext accessControlContext =
 			AccessControlUtil.getAccessControlContext();
@@ -107,17 +86,17 @@ public class AccessControlImpl implements AccessControl {
 		AuthVerifierResult authVerifierResult =
 			AuthVerifierPipeline.verifyRequest(accessControlContext);
 
-		Map<String, Object> authenticationSettings =
-			authVerifierResult.getAuthenticationSettings();
+		Map<String, Object> authVerifierResultSettings =
+			authVerifierResult.getSettings();
 
-		if (authenticationSettings != null) {
-			Map<String, Object> contextSettings =
+		if (authVerifierResultSettings != null) {
+			Map<String, Object> accessControlContextSettings =
 				accessControlContext.getSettings();
 
-			contextSettings.putAll(authenticationSettings);
+			accessControlContextSettings.putAll(authVerifierResultSettings);
 		}
 
-		accessControlContext.setVerificationResult(authVerifierResult);
+		accessControlContext.setAuthVerifierResult(authVerifierResult);
 
 		return authVerifierResult.getState();
 	}

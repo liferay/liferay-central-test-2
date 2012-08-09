@@ -100,6 +100,9 @@ import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.AuthToken;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.AuthTokenWrapper;
+import com.liferay.portal.security.auth.AuthVerifier;
+import com.liferay.portal.security.auth.AuthVerifierConfiguration;
+import com.liferay.portal.security.auth.AuthVerifierPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -115,9 +118,6 @@ import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
-import com.liferay.portal.security.auth.verifier.AuthVerifier;
-import com.liferay.portal.security.auth.verifier.AuthVerifierConfiguration;
-import com.liferay.portal.security.auth.verifier.AuthVerifierPipeline;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
@@ -1009,8 +1009,8 @@ public class HookHotDeployListener
 	}
 
 	protected void initAuthVerifiers(
-		String servletContextName, ClassLoader portletClassLoader,
-		Properties portalProperties)
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
 		throws Exception {
 
 		AuthVerifierConfigurationContainer authVerifierConfigurationContainer =
@@ -1020,8 +1020,7 @@ public class HookHotDeployListener
 			servletContextName, authVerifierConfigurationContainer);
 
 		String[] authVerifierClassNames = StringUtil.split(
-			portalProperties.getProperty(
-				PORTAL_AUTHENTICATION_VERIFIER_PIPELINE));
+			portalProperties.getProperty(AUTH_VERIFIER_PIPELINE));
 
 		for (String authVerifierClassName : authVerifierClassNames) {
 			AuthVerifierConfiguration authVerifierConfiguration =
@@ -1030,22 +1029,17 @@ public class HookHotDeployListener
 			AuthVerifier authVerifier = (AuthVerifier)newInstance(
 				portletClassLoader, AuthVerifier.class, authVerifierClassName);
 
-			String verifierSimpleName = null;
-			if (authVerifierClassName.indexOf('.')>-1) {
-				verifierSimpleName = authVerifierClassName.substring(
-					authVerifierClassName.lastIndexOf('.')+1);
-			} else {
-				verifierSimpleName = authVerifierClassName;
-			}
-
-			String verifierConfigPrefix = _PORTAL_AUTHENTICATION_VERIFIER +
-				verifierSimpleName + ".";
-
-			Properties verifierConfiguration = PropertiesUtil.getProperties(
-				portalProperties, verifierConfigPrefix, true);
-
 			authVerifierConfiguration.setAuthVerifier(authVerifier);
-			authVerifierConfiguration.setConfiguration(verifierConfiguration);
+
+			Class<?> authVerifierClass = authVerifier.getClass();
+
+			Properties properties = PropertiesUtil.getProperties(
+				portalProperties,
+				AUTH_VERIFIER + authVerifierClass.getSimpleName() +
+					StringPool.PERIOD,
+				true);
+
+			authVerifierConfiguration.setProperties(properties);
 
 			authVerifierConfigurationContainer.
 				registerAuthVerifierConfiguration(authVerifierConfiguration);
@@ -2525,9 +2519,6 @@ public class HookHotDeployListener
 			release.getReleaseId(), buildNumber, null, true);
 	}
 
-	private static final String _PORTAL_AUTHENTICATION_VERIFIER =
-		"portal.authentication.verifier.";
-
 	private static final String[] _PROPS_KEYS_EVENTS = {
 		LOGIN_EVENTS_POST, LOGIN_EVENTS_PRE, LOGOUT_EVENTS_POST,
 		LOGOUT_EVENTS_PRE, SERVLET_SERVICE_EVENTS_POST,
@@ -2628,7 +2619,7 @@ public class HookHotDeployListener
 		new HashMap<String, AuthPublicPathsContainer>();
 	private Map<String, AuthVerifierConfigurationContainer>
 		_authVerifierConfigurationContainerMap =
-		new HashMap<String, AuthVerifierConfigurationContainer>();
+			new HashMap<String, AuthVerifierConfigurationContainer>();
 	private Map<String, AutoDeployListenersContainer>
 		_autoDeployListenersContainerMap =
 			new HashMap<String, AutoDeployListenersContainer>();
@@ -2772,10 +2763,10 @@ public class HookHotDeployListener
 		}
 
 		public void unregisterConfigurations() {
-			for (AuthVerifierConfiguration entry :
-				_authVerifierConfigurations) {
+			for (AuthVerifierConfiguration authVerifierConfiguration :
+					_authVerifierConfigurations) {
 
-				AuthVerifierPipeline.unregister(entry);
+				AuthVerifierPipeline.unregister(authVerifierConfiguration);
 			}
 		}
 

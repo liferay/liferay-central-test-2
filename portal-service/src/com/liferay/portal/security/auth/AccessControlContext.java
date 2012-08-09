@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.security.auth.verifier.AuthVerifierResult;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,45 +21,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * AuthenticationContext holds all information bound with user authentication.
- * It's saved in PortalAAManager as a ThreadLocal.
- *
  * @author Tomas Polesovsky
  * @author Raymond Augé
  */
 public class AccessControlContext {
 
-	public HttpServletRequest getHttpServletRequest() {
-		return _httpServletRequest;
+	public AuthVerifierResult getAuthVerifierResult() {
+		return _authVerifierResult;
 	}
 
-	public HttpServletResponse getHttpServletResponse() {
-		return _httpServletResponse;
+	public HttpServletRequest getRequest() {
+		return _request;
+	}
+
+	public HttpServletResponse getResponse() {
+		return _response;
 	}
 
 	public Map<String, Object> getSettings() {
 		return _settings;
 	}
 
-	public AuthVerifierResult getVerificationResult() {
-		return _verificationResult;
+	public void setAuthVerifierResult(AuthVerifierResult authVerifierResult) {
+		_authVerifierResult = authVerifierResult;
 	}
 
 	public void setRequest(HttpServletRequest request) {
-		_httpServletRequest = request;
+		_request = request;
 	}
 
 	public void setResponse(HttpServletResponse response) {
-		_httpServletResponse = response;
+		_response = response;
 	}
 
-	public void setVerificationResult(AuthVerifierResult verificationResult) {
-		_verificationResult = verificationResult;
-	}
-
-	private HttpServletRequest _httpServletRequest;
-	private HttpServletResponse _httpServletResponse;
+	private AuthVerifierResult _authVerifierResult;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 	private Map<String, Object> _settings = new HashMap<String, Object>();
-	private AuthVerifierResult _verificationResult;
 
 }

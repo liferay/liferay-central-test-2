@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.auth.verifier;
+package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -20,38 +20,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Result of the verification. {@link AuthVerifier}s should set at
- * least:<ul>
- *     <li>{@link #setState(VerificationResult.State)} indicating the
- *     result state</li>
- *     <li>{@link #setUserId(long)} when user is authenticated - state is
- *     {@link State#SUCCESS}</li>
- * </ul>
- * Optionally can return other authentication specific settings using
- * {@link #setAuthenticationSettings(java.util.Map)}, these settings will be
- * then merged with {@link AuthVerifierConfiguration#getConfiguration()}
- * into
- * {@link com.liferay.portal.security.auth.AccessControlContext#getSettings()}
- *
  * @author Tomas Polesovsky
  */
 public class AuthVerifierResult {
 
-	public enum State {
-		/** Authentication has been successful */
-		SUCCESS,
-		/** Authentication token is invalid */
-		INVALID_CREDENTIALS,
-		/** Authentication cannot be applied */
-		NOT_APPLICABLE
-	}
-
-	public Map<String, Object> getAuthenticationSettings() {
-		return _authenticationSettings;
-	}
-
 	public String getPassword() {
 		return _password;
+	}
+
+	public Map<String, Object> getSettings() {
+		return _settings;
 	}
 
 	public State getState() {
@@ -62,12 +40,12 @@ public class AuthVerifierResult {
 		return _userId;
 	}
 
-	public void setAuthenticationSettings(Map<String, Object> settings) {
-		_authenticationSettings = settings;
-	}
-
 	public void setPassword(String password) {
 		_password = password;
+	}
+
+	public void setSettings(Map<String, Object> settings) {
+		_settings = settings;
 	}
 
 	public void setState(State state) {
@@ -82,8 +60,8 @@ public class AuthVerifierResult {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{authenticationSettings=");
-		sb.append(_authenticationSettings);
+		sb.append("{settings=");
+		sb.append(_settings);
 		sb.append(", state=");
 		sb.append(_state);
 		sb.append(", userId=");
@@ -93,10 +71,15 @@ public class AuthVerifierResult {
 		return sb.toString();
 	}
 
-	private Map<String, Object> _authenticationSettings =
-		new HashMap<String, Object>();
+	public enum State {
+
+		NOT_APPLICABLE, INVALID_CREDENTIALS, SUCCESS
+
+	}
+
 	private String _password;
+	private Map<String, Object> _settings = new HashMap<String, Object>();
 	private State _state = State.NOT_APPLICABLE;
-	private long _userId = 0;
+	private long _userId;
 
 }

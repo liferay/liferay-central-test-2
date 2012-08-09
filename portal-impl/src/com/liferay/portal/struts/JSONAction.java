@@ -135,8 +135,7 @@ public abstract class JSONAction extends Action {
 
 		String authType = GetterUtil.getString(request.getAuthType());
 
-		// support for an old JSON api that can be called using portal struts
-		// action url /c/porta/json_service
+		// Support for the legacy JSON API at /c/portal/json_service
 
 		if (AccessControlUtil.getAccessControlContext() == null) {
 			if (authType.equals(HttpServletRequest.BASIC_AUTH) ||
@@ -147,10 +146,10 @@ public abstract class JSONAction extends Action {
 		}
 		else {
 
-			// new web service verification - auth token should be checked only
-			// when user is authenticated using portal session cookies
+			// The new web service should only check auth tokens when the user
+			// is authenticated using portal session cookies
 
-			if (!"PortalSessionAuthVerifier".equals(authType)) {
+			if (!authType.equals("PortalSessionAuthVerifier")) {
 				return;
 			}
 		}
