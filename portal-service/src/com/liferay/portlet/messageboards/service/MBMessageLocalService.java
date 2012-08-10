@@ -329,12 +329,12 @@ public interface MBMessageLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void emptyMessageAttachments(long messageId)
+	public com.liferay.portlet.messageboards.model.MBMessage deleteMessage(
+		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.messageboards.model.MBMessage deleteMessage(
-		com.liferay.portlet.messageboards.model.MBMessage message)
+	public void deleteMessageAttachments(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

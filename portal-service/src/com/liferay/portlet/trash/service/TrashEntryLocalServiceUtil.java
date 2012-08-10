@@ -293,16 +293,16 @@ public class TrashEntryLocalServiceUtil {
 			versions, typeSettingsProperties);
 	}
 
-	public static void checkAttachments()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().checkAttachments();
-	}
-
 	public static void checkEntries()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().checkEntries();
+	}
+
+	public static void checkEntriesAttachments()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkEntriesAttachments();
 	}
 
 	/**

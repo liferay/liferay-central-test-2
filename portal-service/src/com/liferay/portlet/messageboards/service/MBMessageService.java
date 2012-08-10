@@ -98,6 +98,10 @@ public interface MBMessageService extends BaseService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteMessageAttachments(long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		long groupId, long categoryId, int status, int start, int end)
@@ -203,10 +207,6 @@ public interface MBMessageService extends BaseService {
 		long permissionOwnerId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void emptyMessageAttachments(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

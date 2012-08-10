@@ -382,17 +382,17 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService,
 		return _mbMessageLocalService.deleteMessage(messageId);
 	}
 
-	public void emptyMessageAttachments(long messageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_mbMessageLocalService.emptyMessageAttachments(messageId);
-	}
-
 	public com.liferay.portlet.messageboards.model.MBMessage deleteMessage(
 		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.deleteMessage(message);
+	}
+
+	public void deleteMessageAttachments(long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_mbMessageLocalService.deleteMessageAttachments(messageId);
 	}
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(

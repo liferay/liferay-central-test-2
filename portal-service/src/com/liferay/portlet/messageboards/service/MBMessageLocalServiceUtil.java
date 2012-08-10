@@ -392,17 +392,17 @@ public class MBMessageLocalServiceUtil {
 		return getService().deleteMessage(messageId);
 	}
 
-	public static void emptyMessageAttachments(long messageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().emptyMessageAttachments(messageId);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMessage deleteMessage(
 		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteMessage(message);
+	}
+
+	public static void deleteMessageAttachments(long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteMessageAttachments(messageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
