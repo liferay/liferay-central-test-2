@@ -54,7 +54,6 @@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %><
 page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %><%@
 page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %><%@
-page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %><%@
 page import="com.liferay.portlet.journal.model.JournalArticle" %><%@
 page import="com.liferay.portlet.journal.model.JournalStructure" %><%@
 page import="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" %><%@
@@ -238,8 +237,6 @@ boolean viewInContext = assetLinkBehavior.equals("viewInPortlet");
 boolean showPortletWithNoResults = false;
 boolean groupByClass = (assetVocabularyId == -1);
 boolean allowEmptyResults = false;
-
-long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
 
 Map<String, PortletURL> addPortletURLs = null;
 

@@ -18,9 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
-PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(AssetTag.class.getName());
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -44,6 +41,8 @@ PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemp
 							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
 							<%
+							List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+
 							for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
 							%>
 
@@ -63,6 +62,8 @@ PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemp
 					<div class="display-template">
 
 						<%
+						PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(AssetTag.class.getName());
+
 						List<String> displayStyles = new ArrayList<String>();
 
 						displayStyles.add("number");

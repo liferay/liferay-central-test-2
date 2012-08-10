@@ -27,8 +27,8 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class SiteMapPortletDisplayTemplateHandler implements
-	PortletDisplayTemplateHandler {
+public class SiteMapPortletDisplayTemplateHandler
+	implements PortletDisplayTemplateHandler {
 
 	public String getClassName() {
 		return LayoutSet.class.getName();

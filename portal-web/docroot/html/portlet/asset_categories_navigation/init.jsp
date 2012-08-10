@@ -23,7 +23,6 @@ page import="com.liferay.portlet.asset.model.AssetCategory" %><%@
 page import="com.liferay.portlet.asset.model.AssetVocabulary" %><%@
 page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %><%@
 page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %><%@
-page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %><%@
 page import="com.liferay.portlet.portletdisplaytemplates.util.PortletDisplayTemplatesUtil" %>
 
 <%

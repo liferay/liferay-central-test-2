@@ -118,6 +118,8 @@ if (!paginationType.equals("none")) {
 </c:if>
 
 <%
+long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
+
 Map<String, Object> contextObjects = new HashMap<String, Object>();
 
 contextObjects.put(PortletDisplayTemplatesConstants.ASSET_PUBLISHER_HELPER, AssetPublisherHelperUtil.getAssetPublisherHelper());

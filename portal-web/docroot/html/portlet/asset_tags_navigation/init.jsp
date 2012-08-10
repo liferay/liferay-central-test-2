@@ -23,9 +23,7 @@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %><%@
 page import="com.liferay.portlet.asset.model.AssetTag" %><%@
 page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %><%@
 page import="com.liferay.portlet.asset.util.comparator.AssetTagCountComparator" %><%@
-page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %><%@
-page import="com.liferay.portlet.portletdisplaytemplates.util.PortletDisplayTemplatesUtil" %><%@
-page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %>
+page import="com.liferay.portlet.portletdisplaytemplates.util.PortletDisplayTemplatesUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

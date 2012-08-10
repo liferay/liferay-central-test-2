@@ -17,8 +17,9 @@
 <%@ include file="/html/portlet/site_map/init.jsp" %>
 
 <%
-long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
 List<Layout> rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
+
+long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
 %>
 
 <c:choose>

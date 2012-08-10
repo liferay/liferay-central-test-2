@@ -115,8 +115,6 @@ if (wikiPage != null) {
 
 	request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, layoutAssetEntry);
 }
-
-long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
 %>
 
 <c:choose>
@@ -143,6 +141,10 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplay
 </c:choose>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+
+<%
+long portletDisplayDDMTemplateId = PortletDisplayTemplatesUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayStyle);
+%>
 
 <c:choose>
 	<c:when test="<%= portletDisplayDDMTemplateId > 0 %>">

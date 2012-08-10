@@ -27,8 +27,8 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class AssetTagsNavigationPortletDisplayTemplateHandler implements
-	PortletDisplayTemplateHandler {
+public class AssetTagsNavigationPortletDisplayTemplateHandler
+	implements PortletDisplayTemplateHandler {
 
 	public String getClassName() {
 		return AssetTag.class.getName();

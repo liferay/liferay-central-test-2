@@ -14,10 +14,6 @@
  */
 --%>
 
-<%
-PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(WikiPage.class.getName());
-%>
-
 <aui:fieldset>
 	<aui:input name="preferences--enableRelatedAssets--" type="checkbox" value="<%= enableRelatedAssets %>" />
 
@@ -36,6 +32,11 @@ PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemp
 
 <aui:fieldset>
 	<div class="display-template">
+
+		<%
+		PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(WikiPage.class.getName());
+		%>
+
 		<liferay-ui:ddm-template-menu
 			classNameId="<%= PortalUtil.getClassNameId(portletDisplayTemplateHandler.getClassName()) %>"
 			preferenceValue="<%= displayStyle %>"
