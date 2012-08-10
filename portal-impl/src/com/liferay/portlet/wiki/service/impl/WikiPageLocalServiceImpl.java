@@ -569,6 +569,26 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
+	public void deletePageAttachments(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPage page = getPage(nodeId, title);
+
+		long companyId = page.getCompanyId();
+		long repositoryId = CompanyConstants.SYSTEM;
+		String deletedAttachmentsDir = page.getDeletedAttachmentsDir();
+
+		try {
+			DLStoreUtil.deleteDirectory(
+				companyId, repositoryId, deletedAttachmentsDir);
+		}
+		catch (NoSuchDirectoryException nsde) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
+			}
+		}
+	}
+
 	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
@@ -592,27 +612,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		TempFileUtil.deleteTempFile(userId, fileName, tempFolderName);
-	}
-
-	public void emptyPageAttachments(long nodeId, String title)
-		throws PortalException, SystemException {
-
-		WikiPage page = getPage(nodeId, title);
-
-		long companyId = page.getCompanyId();
-		long repositoryId = CompanyConstants.SYSTEM;
-		String deletedAttachmentsDir = page.getDeletedAttachmentsDir();
-
-		try {
-			DLStoreUtil.deleteDirectory(
-				companyId, repositoryId, deletedAttachmentsDir);
-		}
-		catch (NoSuchDirectoryException nsde) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(nsde.getMessage());
-			}
-		}
-
 	}
 
 	public List<WikiPage> getChildren(
@@ -1141,7 +1140,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		TrashUtil.moveAttachmentFromTrash(
 			page.getCompanyId(), CompanyConstants.SYSTEM, deletedFileName,
-			page.getAttachmentsDir(), TrashUtil.TRASH_SEPARATOR);
+			page.getAttachmentsDir(), TrashUtil.TRASH_TIME_SEPARATOR);
 	}
 
 	public String movePageAttachmentToTrash(
@@ -1152,7 +1151,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return TrashUtil.moveAttachmentToTrash(
 			page.getCompanyId(), CompanyConstants.SYSTEM, fileName,
-			page.getDeletedAttachmentsDir(), TrashUtil.TRASH_SEPARATOR);
+			page.getDeletedAttachmentsDir(), TrashUtil.TRASH_TIME_SEPARATOR);
 	}
 
 	public WikiPage revertPage(

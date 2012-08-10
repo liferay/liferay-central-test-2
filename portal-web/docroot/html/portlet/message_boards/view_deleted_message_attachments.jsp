@@ -17,15 +17,15 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
 long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
 long categoryId = MBUtil.getCategoryId(request, message);
 
-String redirect = ParamUtil.getString(request, "redirect");
-
-String[] attachments = message.getDeletedAttachmentsFiles();
+List<String> attachments = ListUtil.fromArray(message.getDeletedAttachmentsFiles());
 
 MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
 
@@ -43,8 +43,6 @@ PortletURL iteratorURL = renderResponse.createRenderURL();
 iteratorURL.setParameter("struts_action", "/message_boards/view_deleted_message_attachments");
 iteratorURL.setParameter("redirect", currentURL);
 iteratorURL.setParameter("messageId", String.valueOf(messageId));
-
-List attachmentsList = ListUtil.fromArray(attachments);
 %>
 
 <liferay-ui:header
@@ -61,7 +59,7 @@ List attachmentsList = ListUtil.fromArray(attachments);
 	confirmMessage="are-you-sure-you-want-to-delete-the-attachments-for-this-message"
 	emptyMessage="delete-the-attachments-for-this-message"
 	portletURL="<%= emptyTrashURL.toString() %>"
-	totalEntries="<%= attachments.length %>"
+	totalEntries="<%= attachments.size() %>"
 />
 
 <liferay-ui:search-container
@@ -70,8 +68,8 @@ List attachmentsList = ListUtil.fromArray(attachments);
 >
 
 	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(attachmentsList, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= attachments.length %>"
+		results="<%= ListUtil.subList(attachments, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= attachments.size() %>"
 	/>
 
 	<liferay-ui:search-container-row

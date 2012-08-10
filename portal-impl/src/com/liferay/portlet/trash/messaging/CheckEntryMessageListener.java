@@ -26,7 +26,7 @@ public class CheckEntryMessageListener extends BaseMessageListener {
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		TrashEntryLocalServiceUtil.checkEntries();
-		TrashEntryLocalServiceUtil.checkAttachments();
+		TrashEntryLocalServiceUtil.checkEntriesAttachments();
 	}
 
 }

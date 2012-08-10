@@ -115,7 +115,7 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 	}
 
 	public String[] getDeletedAttachmentsFiles()
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		String[] fileNames = new String[0];
 
@@ -189,7 +189,6 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 	private static Log _log = LogFactoryUtil.getLog(MBMessageImpl.class);
 
 	private String _attachmentDirs;
-
 	private String _deletedAttachmentDirs;
 
 }

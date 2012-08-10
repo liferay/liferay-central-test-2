@@ -381,7 +381,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 
-		WikiPageServiceUtil.emptyPageAttachments(nodeId, title);
+		WikiPageServiceUtil.deletePageAttachments(nodeId, title);
 	}
 
 	protected void moveAttachmentFromTrash(ActionRequest actionRequest)

@@ -118,23 +118,6 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashEntry;
 	}
 
-	public void checkAttachments() throws PortalException, SystemException {
-		int count = groupPersistence.countAll();
-
-		int pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			List<Group> groups = groupPersistence.findAll(start, end);
-
-			for (Group group : groups) {
-				checkAttachments(group);
-			}
-		}
-	}
-
 	public void checkEntries() throws PortalException, SystemException {
 		int count = groupPersistence.countAll();
 
@@ -159,6 +142,25 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 
 					trashHandler.deleteTrashEntry(entry.getClassPK(), false);
 				}
+			}
+		}
+	}
+
+	public void checkEntriesAttachments()
+		throws PortalException, SystemException {
+
+		int count = groupPersistence.countAll();
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<Group> groups = groupPersistence.findAll(start, end);
+
+			for (Group group : groups) {
+				checkEntriesAttachments(group);
 			}
 		}
 	}
@@ -357,30 +359,30 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashVersionPersistence.findByC_C(classNameId, classPK);
 	}
 
-	protected void checkAttachments(Group group)
+	protected void checkEntriesAttachments(Group group)
 		throws PortalException, SystemException {
 
 		long companyId = group.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
 
-		Date maxAge = getMaxAge(group);
+		Date date = getMaxAge(group);
 
-		deleteMessageBoardAttachments(companyId, repositoryId, maxAge);
-		deleteWikiAttachments(companyId, repositoryId, maxAge);
+		deleteMessageBoardAttachments(companyId, repositoryId, date);
+		deleteWikiAttachments(companyId, repositoryId, date);
 	}
 
-	protected void deleteAttachments(
-			long companyId, long repositoryId, Date maxAge,
+	protected void deleteEntriesAttachments(
+			long companyId, long repositoryId, Date date,
 			String[] attachmentFileNames)
 		throws PortalException, SystemException {
 
 		for (String attachmentFileName : attachmentFileNames) {
 			String trashTime = DLAppUtil.getTrashTime(
-				attachmentFileName, TrashUtil.TRASH_SEPARATOR);
+				attachmentFileName, TrashUtil.TRASH_TIME_SEPARATOR);
 
-			long timeStamp = GetterUtil.getLong(trashTime);
+			long timestamp = GetterUtil.getLong(trashTime);
 
-			if (timeStamp < maxAge.getTime()) {
+			if (timestamp < date.getTime()) {
 				DLStoreUtil.deleteDirectory(
 					companyId, repositoryId, attachmentFileName);
 			}
@@ -388,7 +390,7 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	}
 
 	protected void deleteMessageBoardAttachments(
-			long companyId, long repositoryId, Date maxAge)
+			long companyId, long repositoryId, Date date)
 		throws PortalException, SystemException {
 
 		String[] threadFileNames = null;
@@ -418,18 +420,18 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 
 				if (fileTitle.startsWith(TrashUtil.TRASH_ATTACHMENTS_DIR)) {
 					String[] attachmentFileNames = DLStoreUtil.getFileNames(
-						companyId, repositoryId, threadFileName +
-							StringPool.FORWARD_SLASH + fileTitle);
+						companyId, repositoryId,
+						threadFileName + StringPool.FORWARD_SLASH + fileTitle);
 
-					deleteAttachments(
-						companyId, repositoryId, maxAge, attachmentFileNames);
+					deleteEntriesAttachments(
+						companyId, repositoryId, date, attachmentFileNames);
 				}
 			}
 		}
 	}
 
 	protected void deleteWikiAttachments(
-			long companyId, long repositoryId, Date maxAge)
+			long companyId, long repositoryId, Date date)
 		throws PortalException, SystemException {
 
 		String[] fileNames = null;
@@ -451,8 +453,8 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 					companyId, repositoryId,
 					WikiPageConstants.BASE_ATTACHMENTS_DIR + fileTitle);
 
-				deleteAttachments(
-					companyId, repositoryId, maxAge, attachmentFileNames);
+				deleteEntriesAttachments(
+					companyId, repositoryId, date, attachmentFileNames);
 			}
 		}
 	}

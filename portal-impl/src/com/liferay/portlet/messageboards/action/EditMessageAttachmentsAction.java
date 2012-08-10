@@ -57,11 +57,11 @@ public class EditMessageAttachmentsAction extends PortletAction {
 			if (cmd.equals(Constants.DELETE)) {
 				deleteAttachment(actionRequest);
 			}
-			else if (cmd.equals(Constants.MOVE_FROM_TRASH)) {
-				moveAttachmentFromTrash(actionRequest);
-			}
 			else if (cmd.equals(Constants.EMPTY_TRASH)) {
 				emptyTrash(actionRequest);
+			}
+			else if (cmd.equals(Constants.MOVE_FROM_TRASH)) {
+				moveAttachmentFromTrash(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -126,7 +126,7 @@ public class EditMessageAttachmentsAction extends PortletAction {
 	protected void emptyTrash(ActionRequest actionRequest) throws Exception {
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
-		MBMessageServiceUtil.emptyMessageAttachments(messageId);
+		MBMessageServiceUtil.deleteMessageAttachments(messageId);
 	}
 
 	protected void moveAttachmentFromTrash(ActionRequest actionRequest)

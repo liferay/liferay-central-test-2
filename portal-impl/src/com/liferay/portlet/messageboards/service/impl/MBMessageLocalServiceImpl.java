@@ -735,7 +735,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
-	public void emptyMessageAttachments(long messageId)
+	public void deleteMessageAttachments(long messageId)
 		throws PortalException, SystemException {
 
 		MBMessage message = getMessage(messageId);
