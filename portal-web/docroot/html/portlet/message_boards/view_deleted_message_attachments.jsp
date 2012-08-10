@@ -63,7 +63,7 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 />
 
 <liferay-ui:search-container
-	emptyResultsMessage="this-message-does-not-have-any-file-attachments-in-the-recycle-bin"
+	emptyResultsMessage="this-message-does-not-have-file-attachments-in-the-recycle-bin"
 	iteratorURL="<%= iteratorURL %>"
 >
 
