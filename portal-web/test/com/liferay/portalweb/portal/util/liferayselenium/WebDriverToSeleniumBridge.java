@@ -917,11 +917,11 @@ public class WebDriverToSeleniumBridge
 	public void selectFrame(String locator) {
 		WebDriver.TargetLocator targetLocator = switchTo();
 
-		if (locator.equals("relative=top")) {
-			targetLocator.defaultContent();
-		}
-		else if (locator.equals("relative=parent")) {
+		if (locator.equals("relative=parent")) {
 			targetLocator.window(_parentFrameHandle);
+		}
+		else if (locator.equals("relative=top")) {
+			targetLocator.defaultContent();
 		}
 		else {
 			_parentFrameHandle = getWindowHandle();
