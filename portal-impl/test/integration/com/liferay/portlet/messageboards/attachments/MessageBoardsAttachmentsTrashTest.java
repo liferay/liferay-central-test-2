@@ -84,22 +84,26 @@ public class MessageBoardsAttachmentsTrashTest {
 	private void trashMessageBoardsAttachments(boolean restore)
 		throws Exception {
 
+		User user = TestPropsValues.getUser();
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setScopeGroupId(TestPropsValues.getGroupId());
 
-		User user = TestPropsValues.getUser();
-
 		MBMessage message = MBMessageLocalServiceUtil.addMessage(
 			user.getUserId(), user.getFullName(), TestPropsValues.getGroupId(),
-			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, "Message Subject",
-			"Message Body", MBMessageConstants.DEFAULT_FORMAT,
+			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, "Subject", "Body",
+			MBMessageConstants.DEFAULT_FORMAT,
 			getInputStreamOVPs("company_logo.png"), false, 0, false,
 			serviceContext);
 
-		int initialNotInTrashCount = message.getAttachmentsFiles().length;
-		int initialTrashEntriesCount =
-			message.getDeletedAttachmentsFiles().length;
+		String[] attachmentsFiles = message.getAttachmentsFiles();
+
+		int initialNotInTrashCount = attachmentsFiles.length;
+
+		String[] deletedAttachmentsFiles = message.getDeletedAttachmentsFiles();
+
+		int initialTrashEntriesCount = deletedAttachmentsFiles.length;
 
 		String[] existingAttachments = DLStoreUtil.getFileNames(
 			message.getCompanyId(), CompanyConstants.SYSTEM,
@@ -112,42 +116,49 @@ public class MessageBoardsAttachmentsTrashTest {
 		}
 
 		message = MBMessageLocalServiceUtil.updateMessage(
-			user.getUserId(), message.getMessageId(), "Message Subject",
-			"Message Body", getInputStreamOVPs("OSX_Test.docx"), existingFiles,
-			0, false, serviceContext);
+			user.getUserId(), message.getMessageId(), "Subject", "Body",
+			getInputStreamOVPs("OSX_Test.docx"), existingFiles, 0, false,
+			serviceContext);
+
+		attachmentsFiles = message.getAttachmentsFiles();
 
 		Assert.assertEquals(
-			initialTrashEntriesCount,
-			message.getDeletedAttachmentsFiles().length);
+			initialNotInTrashCount + 1, attachmentsFiles.length);
+
+		deletedAttachmentsFiles = message.getDeletedAttachmentsFiles();
 
 		Assert.assertEquals(
-			initialNotInTrashCount + 1, message.getAttachmentsFiles().length);
+			initialTrashEntriesCount, deletedAttachmentsFiles.length);
 
-		String fileName = message.getAttachmentsFiles()[0];
+		String fileName = attachmentsFiles[0];
 
 		MBMessageLocalServiceUtil.moveMessageAttachmentToTrash(
 			message.getMessageId(), fileName);
 
-		Assert.assertEquals(
-			initialTrashEntriesCount + 1,
-			message.getDeletedAttachmentsFiles().length);
+		attachmentsFiles = message.getAttachmentsFiles();
+
+		Assert.assertEquals(initialNotInTrashCount, attachmentsFiles.length);
+
+		deletedAttachmentsFiles = message.getDeletedAttachmentsFiles();
 
 		Assert.assertEquals(
-			initialNotInTrashCount, message.getAttachmentsFiles().length);
+			initialTrashEntriesCount + 1, deletedAttachmentsFiles.length);
 
-		fileName = message.getDeletedAttachmentsFiles()[0];
+		fileName = deletedAttachmentsFiles[0];
 
 		if (restore) {
 			MBMessageLocalServiceUtil.moveMessageAttachmentFromTrash(
 				message.getMessageId(), fileName);
 
-			Assert.assertEquals(
-				initialTrashEntriesCount,
-				message.getDeletedAttachmentsFiles().length);
+			attachmentsFiles = message.getAttachmentsFiles();
 
 			Assert.assertEquals(
-				initialNotInTrashCount + 1,
-				message.getAttachmentsFiles().length);
+				initialNotInTrashCount + 1, attachmentsFiles.length);
+
+			deletedAttachmentsFiles = message.getDeletedAttachmentsFiles();
+
+			Assert.assertEquals(
+				initialTrashEntriesCount, deletedAttachmentsFiles.length);
 		}
 		else {
 			MBMessageLocalServiceUtil.deleteMessageAttachment(
