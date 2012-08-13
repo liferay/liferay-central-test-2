@@ -477,6 +477,7 @@ public class EditArticleAction extends PortletAction {
 		long classNameId = ParamUtil.getLong(
 			uploadPortletRequest, "classNameId");
 		long classPK = ParamUtil.getLong(uploadPortletRequest, "classPK");
+
 		String articleId = ParamUtil.getString(
 			uploadPortletRequest, "articleId");
 
