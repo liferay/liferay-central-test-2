@@ -415,7 +415,9 @@ String googleAnalyticsId = groupTypeSettings.getProperty("googleAnalyticsId");
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			ga.type = 'text/javascript';
 
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			var s = document.getElementsByTagName('script')[0];
+
+			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
 </c:if>
