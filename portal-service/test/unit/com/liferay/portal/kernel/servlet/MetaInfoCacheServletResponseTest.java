@@ -605,6 +605,7 @@ public class MetaInfoCacheServletResponseTest extends TestCase {
 		assertTrue(metaInfoCacheServletResponse.isCommitted());
 	}
 
+	@SuppressWarnings("cast")
 	public void testGetMetaInfoDataBag() {
 		StubHttpServletResponse stubHttpServletResponse =
 			new StubHttpServletResponse();
@@ -612,11 +613,11 @@ public class MetaInfoCacheServletResponseTest extends TestCase {
 		MetaInfoCacheServletResponse metaInfoCacheServletResponse =
 			new MetaInfoCacheServletResponse(stubHttpServletResponse);
 
-		MetaInfoCacheServletResponse.MetaInfoDataBag metaInfoDataBag =
-			metaInfoCacheServletResponse.getMetaInfoDataBag();
+		MetaInfoCacheServletResponse.MetaData metaData =
+			metaInfoCacheServletResponse.getMetaData();
 
-		assertNotNull(metaInfoDataBag);
-		assertTrue(metaInfoDataBag instanceof Serializable);
+		assertNotNull(metaData);
+		assertTrue(metaData instanceof Serializable);
 	}
 
 	public void testGetOutputStream() throws IOException {
