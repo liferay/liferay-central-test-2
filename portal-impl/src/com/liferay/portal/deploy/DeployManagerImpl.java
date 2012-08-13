@@ -62,7 +62,7 @@ public class DeployManagerImpl implements DeployManager {
 
 		try {
 			PortalSecurityManagerThreadLocal.setEnabled(false);
-		
+
 			return DeployUtil.getAutoDeployDestDir();
 		}
 		finally {
