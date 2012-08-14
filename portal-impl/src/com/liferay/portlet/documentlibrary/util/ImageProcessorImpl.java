@@ -177,6 +177,7 @@ public class ImageProcessorImpl
 			custom2ImageId, is, type);
 	}
 
+	@Override
 	public void trigger(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
@@ -281,10 +282,10 @@ public class ImageProcessorImpl
 					return;
 				}
 
-				String processIdentity = Long.toString(
+				String processIdentity = String.valueOf(
 					destinationFileVersion.getFileVersionId());
 
-				managedProcesses.put(processIdentity, future);
+				futures.put(processIdentity, future);
 
 				RenderedImage convertedRenderedImage = future.get();
 

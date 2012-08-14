@@ -15,11 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
-import com.liferay.portal.kernel.process.OutputProcessor;
-import com.liferay.portal.kernel.process.ProcessException;
-import com.liferay.portal.kernel.process.ProcessUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * @author Brian Wing Shun Chan
@@ -74,13 +69,12 @@ public class PluginsGitSvnSyncer {
 	}
 
 	private String[] _exec(String cmd) throws Exception {
-		Future<ObjectValuePair<String[], String[]>> future =
-			ProcessUtil.execute(new LineSpliterOutputProcessor(), cmd);
+		Runtime runtime = Runtime.getRuntime();
 
-		ObjectValuePair<String[], String[]> results = future.get();
+		Process process = runtime.exec(cmd);
 
-		String[] stdout = results.getKey();
-		String[] stderr = results.getValue();
+		String[] stdout = _getExecOutput(process.getInputStream());
+		String[] stderr = _getExecOutput(process.getErrorStream());
 
 		if (stderr.length > 0) {
 			StringBundler sb = new StringBundler(stderr.length * 3 + 3);
@@ -99,6 +93,40 @@ public class PluginsGitSvnSyncer {
 		}
 
 		return stdout;
+	}
+
+	private String[] _getExecOutput(InputStream is) throws IOException {
+		List<String> list = new ArrayList<String>();
+
+		UnsyncBufferedReader unsyncBufferedReader = null;
+
+		try {
+			unsyncBufferedReader = new UnsyncBufferedReader(
+				new InputStreamReader(is));
+
+			String line = unsyncBufferedReader.readLine();
+
+			while (line != null) {
+				line = line.trim();
+
+				if (Validator.isNotNull(line)) {
+					list.add(line);
+				}
+
+				line = unsyncBufferedReader.readLine();
+			}
+		}
+		finally {
+			if (unsyncBufferedReader != null) {
+				try {
+					unsyncBufferedReader.close();
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+
+		return list.toArray(new String[list.size()]);
 	}
 
 	private void _updateGitIgnores(String srcDirName, String destDirName)
@@ -296,60 +324,5 @@ public class PluginsGitSvnSyncer {
 	private static final String _SVN_SET_IGNORES = "svn propset svn:ignore ";
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-
-	private static class LineSpliterOutputProcessor
-		implements OutputProcessor<String[], String[]> {
-
-		public String[] processStdErr(InputStream stdErrInputStream)
-			throws ProcessException {
-
-			return _splitLines(stdErrInputStream);
-		}
-
-		public String[] processStdOut(InputStream stdOutInputStream)
-			throws ProcessException {
-
-			return _splitLines(stdOutInputStream);
-		}
-
-		private String[] _splitLines(InputStream inputStream)
-			throws ProcessException {
-
-			List<String> list = new ArrayList<String>();
-
-			UnsyncBufferedReader unsyncBufferedReader = null;
-
-			try {
-				unsyncBufferedReader = new UnsyncBufferedReader(
-					new InputStreamReader(inputStream));
-
-				String line = unsyncBufferedReader.readLine();
-
-				while (line != null) {
-					line = line.trim();
-
-					if (Validator.isNotNull(line)) {
-						list.add(line);
-					}
-
-					line = unsyncBufferedReader.readLine();
-				}
-			}
-			catch (IOException ioe) {
-				throw new ProcessException(ioe);
-			}
-			finally {
-				if (unsyncBufferedReader != null) {
-					try {
-						unsyncBufferedReader.close();
-					}
-					catch (Exception e) {
-					}
-				}
-			}
-
-			return list.toArray(new String[list.size()]);
-		}
-	}
 
 }

@@ -38,6 +38,7 @@ public class ProcessUtil {
 
 	public static final ConsumerOutputProcessor CONSUMER_OUTPUT_PROCESSOR =
 		new ConsumerOutputProcessor();
+
 	public static final LoggingOutputProcessor LOGGING_OUTPUT_PROCESSOR =
 		new LoggingOutputProcessor();
 
@@ -46,7 +47,7 @@ public class ProcessUtil {
 		throws ProcessException {
 
 		if (outputProcessor == null) {
-			throw new NullPointerException("OutputProcessor is null");
+			throw new NullPointerException("Output processor is null");
 		}
 
 		if (arguments == null) {
@@ -61,14 +62,14 @@ public class ProcessUtil {
 			ExecutorService executorService = _getExecutorService();
 
 			try {
-				Future<O> stdoutFuture = executorService.submit(
+				Future<O> stdOutFuture = executorService.submit(
 					new ProcessStdOutCallable<O>(outputProcessor, process));
 
 				Future<E> stdErrFuture = executorService.submit(
 					new ProcessStdErrCallable<E>(outputProcessor, process));
 
 				return new BindedFuture<O, E>(
-					stdoutFuture, stdErrFuture, process);
+					stdOutFuture, stdErrFuture, process);
 			}
 			catch (RejectedExecutionException ree) {
 				process.destroy();
@@ -126,39 +127,32 @@ public class ProcessUtil {
 		implements Future<ObjectValuePair<O, E>> {
 
 		public BindedFuture(
-			Future<O> stdoutFuture, Future<E> stderrFuture, Process process) {
-			_stdoutFuture = stdoutFuture;
-			_stderrFuture = stderrFuture;
+			Future<O> stdOutFuture, Future<E> stdErrFuture, Process process) {
+
+			_stdOutFuture = stdOutFuture;
+			_stdErrFuture = stdErrFuture;
 			_process = process;
 		}
 
 		public boolean cancel(boolean mayInterruptIfRunning) {
-			if (_stdoutFuture.isCancelled() || _stdoutFuture.isDone()) {
+			if (_stdOutFuture.isCancelled() || _stdOutFuture.isDone()) {
 				return false;
 			}
 
-			_stderrFuture.cancel(true);
-			_stdoutFuture.cancel(true);
+			_stdErrFuture.cancel(true);
+			_stdOutFuture.cancel(true);
 			_process.destroy();
 
 			return true;
 		}
 
-		public boolean isCancelled() {
-			return _stdoutFuture.isCancelled();
-		}
-
-		public boolean isDone() {
-			return _stdoutFuture.isDone();
-		}
-
 		public ObjectValuePair<O, E> get()
 			throws ExecutionException, InterruptedException {
 
-			E stderrResult = _stderrFuture.get();
-			O stdoutResult = _stdoutFuture.get();
+			E stdErrResult = _stdErrFuture.get();
+			O stdOutResult = _stdOutFuture.get();
 
-			return new ObjectValuePair<O, E>(stdoutResult, stderrResult);
+			return new ObjectValuePair<O, E>(stdOutResult, stdErrResult);
 		}
 
 		public ObjectValuePair<O, E> get(long timeout, TimeUnit unit)
@@ -166,20 +160,28 @@ public class ProcessUtil {
 
 			long startTime = System.currentTimeMillis();
 
-			E stderrResult = _stderrFuture.get(timeout, unit);
+			E stdErrResult = _stdErrFuture.get(timeout, unit);
 
 			long elapseTime = System.currentTimeMillis() - startTime;
 
-			long secondTimeout = timeout - unit.convert(
-				elapseTime, TimeUnit.MILLISECONDS);
+			long secondTimeout =
+				timeout - unit.convert(elapseTime, TimeUnit.MILLISECONDS);
 
-			O stdoutResult = _stdoutFuture.get(secondTimeout, unit);
+			O stdOutResult = _stdOutFuture.get(secondTimeout, unit);
 
-			return new ObjectValuePair<O, E>(stdoutResult, stderrResult);
+			return new ObjectValuePair<O, E>(stdOutResult, stdErrResult);
 		}
 
-		private final Future<O> _stdoutFuture;
-		private final Future<E> _stderrFuture;
+		public boolean isCancelled() {
+			return _stdOutFuture.isCancelled();
+		}
+
+		public boolean isDone() {
+			return _stdOutFuture.isDone();
+		}
+
+		private final Future<E> _stdErrFuture;
+		private final Future<O> _stdOutFuture;
 		private final Process _process;
 
 	}
@@ -199,6 +201,7 @@ public class ProcessUtil {
 
 		private final OutputProcessor<?, T> _outputProcessor;
 		private final Process _process;
+
 	}
 
 	private static class ProcessStdOutCallable<T> implements Callable<T> {
@@ -235,6 +238,7 @@ public class ProcessUtil {
 
 		private final OutputProcessor<T, ?> _outputProcessor;
 		private final Process _process;
+
 	}
 
 }

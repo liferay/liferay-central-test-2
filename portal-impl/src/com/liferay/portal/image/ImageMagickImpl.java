@@ -48,20 +48,20 @@ public class ImageMagickImpl implements ImageMagick {
 		return _instance;
 	}
 
-	public Future convert(List<String> arguments) throws Exception {
+	public Future<?> convert(List<String> arguments) throws Exception {
 		if (!isEnabled()) {
 			throw new IllegalStateException(
 				"Cannot call \"convert\" when ImageMagick is disabled");
 		}
 
-		ProcessExecutor exec = _getProcessExecutor();
+		ProcessExecutor processExecutor = _getProcessExecutor();
 
-		LiferayConvertCmd convertCmd = new LiferayConvertCmd();
+		LiferayConvertCmd liferayConvertCmd = new LiferayConvertCmd();
 
-		ProcessTask processTask = convertCmd.getProcessTask(
+		ProcessTask processTask = liferayConvertCmd.getProcessTask(
 			_globalSearchPath, getResourceLimits(), arguments);
 
-		exec.execute(processTask);
+		processExecutor.execute(processTask);
 
 		return processTask;
 	}
@@ -122,30 +122,29 @@ public class ImageMagickImpl implements ImageMagick {
 				"Cannot call \"identify\" when ImageMagick is disabled");
 		}
 
-		ProcessExecutor exec = _getProcessExecutor();
+		ProcessExecutor processExecutor = _getProcessExecutor();
 
-		LiferayIdentifyCmd identifyCmd = new LiferayIdentifyCmd();
+		LiferayIdentifyCmd liferayIdentifyCmd = new LiferayIdentifyCmd();
 
 		ArrayListOutputConsumer arrayListOutputConsumer =
 			new ArrayListOutputConsumer();
 
-		identifyCmd.setOutputConsumer(arrayListOutputConsumer);
+		liferayIdentifyCmd.setOutputConsumer(arrayListOutputConsumer);
 
-		ProcessTask processTask = identifyCmd.getProcessTask(
+		ProcessTask processTask = liferayIdentifyCmd.getProcessTask(
 			_globalSearchPath, getResourceLimits(), arguments);
 
-		exec.execute(processTask);
+		processExecutor.execute(processTask);
 
 		processTask.get();
 
 		List<String> output = arrayListOutputConsumer.getOutput();
 
 		if (output != null) {
-			return output.toArray(new String[0]);
+			return output.toArray(new String[output.size()]);
 		}
-		else {
-			return new String[0];
-		}
+
+		return new String[0];
 	}
 
 	public boolean isEnabled() {
@@ -162,8 +161,8 @@ public class ImageMagickImpl implements ImageMagick {
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("Liferay is not configured to use ImageMagick and ");
-			sb.append("GhostScript. For better quality document and image ");
-			sb.append("previews, install ImageMagick and GhostScript. Enable ");
+			sb.append("Ghostscript. For better quality document and image ");
+			sb.append("previews, install ImageMagick and Ghostscript. Enable ");
 			sb.append("ImageMagick in portal-ext.properties or in the Server ");
 			sb.append("Administration control panel at: ");
 			sb.append("http://<server>/group/control_panel/manage/-/server/");
@@ -236,11 +235,8 @@ public class ImageMagickImpl implements ImageMagick {
 	private static ImageMagickImpl _instance = new ImageMagickImpl();
 
 	private String _globalSearchPath;
-
 	private volatile ProcessExecutor _processExecutor;
-
 	private Properties _resourceLimitsProperties;
-
 	private boolean _warned;
 
 }

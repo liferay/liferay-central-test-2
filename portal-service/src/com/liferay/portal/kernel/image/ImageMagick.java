@@ -24,7 +24,7 @@ import java.util.concurrent.Future;
  */
 public interface ImageMagick {
 
-	public Future convert(List<String> arguments) throws Exception;
+	public Future<?> convert(List<String> arguments) throws Exception;
 
 	public void destroy();
 

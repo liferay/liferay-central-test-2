@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.log.LogWrapper;
 import com.liferay.portal.kernel.test.TestCase;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -31,6 +29,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -102,7 +101,6 @@ public class ProcessUtilTest extends TestCase {
 
 		assertSame(executorService, atomicReference.get());
 
-		// Get after get, satisfy code coverage
 		_invokeGetExecutorService();
 	}
 
@@ -203,14 +201,11 @@ public class ProcessUtilTest extends TestCase {
 		logger.addHandler(captureHandler);
 
 		try {
-			String[] arguments = _buildArguments(Echo.class, "2");
-
 			Future<?> future = ProcessUtil.execute(
-				ProcessUtil.LOGGING_OUTPUT_PROCESSOR, arguments);
+				ProcessUtil.LOGGING_OUTPUT_PROCESSOR,
+				_buildArguments(Echo.class, "2"));
 
 			future.get();
-
-			// Cancel after finish, satisfy code coverage
 
 			future.cancel(true);
 
@@ -222,14 +217,18 @@ public class ProcessUtilTest extends TestCase {
 				messageRecords.add(logRecord.getMessage());
 			}
 
-			assertTrue(messageRecords.contains(
-				"[stdout]{stdout}" + Echo.class.getName() + "0"));
-			assertTrue(messageRecords.contains(
-				"[stdout]{stdout}" + Echo.class.getName() + "1"));
-			assertTrue(messageRecords.contains(
-				"[stderr]{stderr}" + Echo.class.getName() + "0"));
-			assertTrue(messageRecords.contains(
-				"[stderr]{stderr}" + Echo.class.getName() + "1"));
+			assertTrue(
+				messageRecords.contains(
+					"{stdErr}" + Echo.class.getName() + "0"));
+			assertTrue(
+				messageRecords.contains(
+					"{stdErr}" + Echo.class.getName() + "1"));
+			assertTrue(
+				messageRecords.contains(
+					"{stdOut}" + Echo.class.getName() + "0"));
+			assertTrue(
+				messageRecords.contains(
+					"{stdOut}" + Echo.class.getName() + "1"));
 		}
 		finally {
 			logger.removeHandler(captureHandler);
@@ -239,10 +238,9 @@ public class ProcessUtilTest extends TestCase {
 	}
 
 	public void testErrorExit() throws Exception {
-		String[] arguments = _buildArguments(ErrorExit.class);
-
 		Future<?> future = ProcessUtil.execute(
-			ProcessUtil.CONSUMER_OUTPUT_PROCESSOR, arguments);
+			ProcessUtil.CONSUMER_OUTPUT_PROCESSOR,
+			_buildArguments(ErrorExit.class));
 
 		try {
 			future.get();
@@ -302,11 +300,10 @@ public class ProcessUtilTest extends TestCase {
 
 		executorService.shutdown();
 
-		String[] arguments = _buildArguments(Echo.class, "2");
-
 		try {
 			ProcessUtil.execute(
-				ProcessUtil.LOGGING_OUTPUT_PROCESSOR, arguments);
+				ProcessUtil.LOGGING_OUTPUT_PROCESSOR,
+				_buildArguments(Echo.class, "2"));
 
 			fail();
 		}
@@ -320,9 +317,11 @@ public class ProcessUtilTest extends TestCase {
 	}
 
 	public void testFuture() throws Exception {
+
+		// Time out on standard error processing
+
 		String[] arguments = _buildArguments(Pause.class);
 
-		// Timeout on stderr processing
 		Future<?> future = ProcessUtil.execute(
 			ProcessUtil.CONSUMER_OUTPUT_PROCESSOR, arguments);
 
@@ -339,21 +338,18 @@ public class ProcessUtilTest extends TestCase {
 
 		future.cancel(true);
 
-		// Cancel after cancel, satisfy code coverage
-		future.cancel(true);
+		// Time out on standard out processing
 
-		// Timeout on stdout processing
 		future = ProcessUtil.execute(
 			new ConsumerOutputProcessor() {
 
 				@Override
-				public Void processStdErr(InputStream stdOutInputStream)
-					throws ProcessException {
-
+				public Void processStdErr(InputStream stdOutInputStream) {
 					return null;
 				}
 
-			}, arguments);
+			},
+			arguments);
 
 		assertFalse(future.isCancelled());
 		assertFalse(future.isDone());
@@ -368,43 +364,27 @@ public class ProcessUtilTest extends TestCase {
 
 		future.cancel(true);
 
-		// Success timeout get
-		arguments = _buildArguments(Echo.class, "0");
+		// Success time out get
 
 		future = ProcessUtil.execute(
-			ProcessUtil.CONSUMER_OUTPUT_PROCESSOR, arguments);
+			ProcessUtil.CONSUMER_OUTPUT_PROCESSOR,
+			_buildArguments(Echo.class, "0"));
 
 		future.get(1, TimeUnit.SECONDS);
 	}
 
 	public void testInterruptPause() throws Exception {
-		String[] arguments = _buildArguments(Pause.class);
-
-		final Future<?> future = ProcessUtil.execute(
-			new OutputProcessor<Void, Void>() {
-
-			public Void processStdErr(InputStream stdErrInputStream)
-				throws ProcessException {
-
-				return null;
-			}
-
-			public Void processStdOut(InputStream stdOutInputStream)
-				throws ProcessException {
-
-				return null;
-			}
-		}, arguments);
-
 		final Thread mainThread = Thread.currentThread();
 
 		Thread interruptThread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					while (mainThread.getState() != State.WAITING);
 
 					ExecutorService executorService = _getExecutorService();
+
 					executorService.shutdownNow();
 				}
 				catch (Exception e) {
@@ -415,6 +395,19 @@ public class ProcessUtilTest extends TestCase {
 		};
 
 		interruptThread.start();
+
+		final Future<?> future = ProcessUtil.execute(
+			new OutputProcessor<Void, Void>() {
+
+				public Void processStdErr(InputStream stdErrInputStream) {
+					return null;
+				}
+
+				public Void processStdOut(InputStream stdOutInputStream) {
+					return null;
+				}
+			},
+			_buildArguments(Pause.class));
 
 		try {
 			future.get();
@@ -438,7 +431,7 @@ public class ProcessUtilTest extends TestCase {
 			fail();
 		}
 		catch (NullPointerException npe) {
-			assertEquals("OutputProcessor is null", npe.getMessage());
+			assertEquals("Output processor is null", npe.getMessage());
 		}
 
 		try {
@@ -464,16 +457,18 @@ public class ProcessUtilTest extends TestCase {
 		}
 	}
 
-	private static String[] _buildArguments(Class<?> clazz, String... args) {
-		List<String> arguments = new ArrayList<String>();
+	private static String[] _buildArguments(
+		Class<?> clazz, String... arguments) {
 
-		arguments.add("java");
-		arguments.add("-cp");
-		arguments.add(_CLASSPATH);
-		arguments.add(clazz.getName());
-		arguments.addAll(Arrays.asList(args));
+		List<String> argumentsList = new ArrayList<String>();
 
-		return arguments.toArray(new String[arguments.size()]);
+		argumentsList.add("java");
+		argumentsList.add("-cp");
+		argumentsList.add(_CLASS_PATH);
+		argumentsList.add(clazz.getName());
+		argumentsList.addAll(Arrays.asList(arguments));
+
+		return argumentsList.toArray(new String[argumentsList.size()]);
 	}
 
 	private static ExecutorService _getExecutorService() throws Exception {
@@ -516,7 +511,25 @@ public class ProcessUtilTest extends TestCase {
 		field.set(null, null);
 	}
 
-	private static final String _CLASSPATH;
+	private static final String _CLASS_PATH;
+
+	static {
+		Class<?> clazz = Echo.class;
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		String className = clazz.getName();
+
+		String name = className.replace('.', '/') + ".class";
+
+		URL url = classLoader.getResource(name);
+
+		String path = url.getPath();
+
+		int index = path.lastIndexOf(name);
+
+		_CLASS_PATH = path.substring(0, index);
+	}
 
 	private static class CaptureHandler extends Handler {
 
@@ -573,12 +586,13 @@ public class ProcessUtilTest extends TestCase {
 
 	private static class Echo {
 
-		public static void main(String[] args) {
-			int times = Integer.parseInt(args[0]);
+		@SuppressWarnings("unused")
+		public static void main(String[] arguments) {
+			int times = Integer.parseInt(arguments[0]);
 
 			for (int i = 0; i < times; i++) {
-				System.out.println("{stdout}" + Echo.class.getName() + i);
-				System.err.println("{stderr}" + Echo.class.getName() + i);
+				System.err.println("{stdErr}" + Echo.class.getName() + i);
+				System.out.println("{stdOut}" + Echo.class.getName() + i);
 			}
 		}
 
@@ -588,7 +602,8 @@ public class ProcessUtilTest extends TestCase {
 
 		public static final int EXIT_CODE = 10;
 
-		public static void main(String[] args) {
+		@SuppressWarnings("unused")
+		public static void main(String[] arguments) {
 			System.exit(EXIT_CODE);
 		}
 
@@ -604,9 +619,7 @@ public class ProcessUtilTest extends TestCase {
 				ErrorStderrOutputProcessor.class.getName());
 		}
 
-		public Void processStdOut(InputStream stdOutInputStream)
-			throws ProcessException {
-
+		public Void processStdOut(InputStream stdOutInputStream) {
 			return null;
 		}
 
@@ -615,9 +628,7 @@ public class ProcessUtilTest extends TestCase {
 	private static class ErrorStdoutOutputProcessor
 		implements OutputProcessor<Void, Void> {
 
-		public Void processStdErr(InputStream stdErrInputStream)
-			throws ProcessException {
-
+		public Void processStdErr(InputStream stdErrInputStream) {
 			return null;
 		}
 
@@ -632,24 +643,11 @@ public class ProcessUtilTest extends TestCase {
 
 	private static class Pause {
 
-		public static void main(String[] args) throws Exception {
+		@SuppressWarnings("unused")
+		public static void main(String[] arguments) throws Exception {
 			Thread.sleep(Long.MAX_VALUE);
 		}
 
-	}
-
-	static {
-		String resourcePath = Echo.class.getName().replace('.', '/').concat(
-			".class");
-
-		URL resourceURL = ProcessUtil.class.getClassLoader().getResource(
-			resourcePath);
-
-		String filePath = resourceURL.getPath();
-
-		int index = filePath.lastIndexOf(resourcePath);
-
-		_CLASSPATH = filePath.substring(0, index);
 	}
 
 }

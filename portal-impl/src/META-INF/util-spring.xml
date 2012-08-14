@@ -160,9 +160,9 @@
 			<bean class="com.liferay.portal.googleapps.GoogleAppsFactoryImpl" />
 		</property>
 	</bean>
-    <bean id="com.liferay.portal.kernel.image.GhostScriptUtil" class="com.liferay.portal.kernel.image.GhostScriptUtil">
-        <property name="ghostScript">
-            <bean class="com.liferay.portal.image.GhostScriptImpl" />
+    <bean id="com.liferay.portal.kernel.image.GhostscriptUtil" class="com.liferay.portal.kernel.image.GhostscriptUtil">
+        <property name="ghostscript">
+            <bean class="com.liferay.portal.image.GhostscriptImpl" />
         </property>
     </bean>
 	<bean id="com.liferay.portal.kernel.image.ImageMagickUtil" class="com.liferay.portal.kernel.image.ImageMagickUtil" destroy-method="destroy">

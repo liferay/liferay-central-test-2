@@ -71,15 +71,13 @@ public class HeapUtil {
 			throw new RuntimeException("Unable to parse process name " + name);
 		}
 
-		String id = name.substring(0, index);
+		int pid = GetterUtil.getInteger(name.substring(0, index));
 
-		try {
-			return GetterUtil.getInteger(id);
+		if (pid == 0) {
+			throw new RuntimeException("Unable to parse process name " + name);
 		}
-		catch (NumberFormatException nfe) {
-			throw new RuntimeException(
-				"Unable to parse process name " + name, nfe);
-		}
+
+		return pid;
 	}
 
 }

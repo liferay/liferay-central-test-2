@@ -20,37 +20,34 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 /**
- * The GhostScript utility class.
- *
  * @author Ivica Cardic
  */
-public class GhostScriptUtil {
+public class GhostscriptUtil {
 
-	/**
-	 * Executes a GhostScript command.
-	 *
-	 * @param  arguments the command arguments being passed to GhostScript
-	 * @return the asynchronous process handling the GhostScript command
-	 * @throws Exception if an unexpected error occurred while executing command
-	 */
 	public static Future<?> execute(List<String> arguments) throws Exception {
-		return _ghostScript.execute(arguments);
+		return getGhostscript().execute(arguments);
+	}
+
+	public static Ghostscript getGhostscript() {
+		PortalRuntimePermission.checkGetBeanProperty(GhostscriptUtil.class);
+
+		return _ghostscript;
 	}
 
 	public static boolean isEnabled() {
-		return _ghostScript.isEnabled();
+		return getGhostscript().isEnabled();
 	}
 
 	public static void reset() {
-		_ghostScript.reset();
+		getGhostscript().reset();
 	}
 
-	public void setGhostScript(GhostScript ghostScript) {
+	public void setGhostscript(Ghostscript ghostscript) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-		_ghostScript = ghostScript;
+		_ghostscript = ghostscript;
 	}
 
-	private static GhostScript _ghostScript;
+	private static Ghostscript _ghostscript;
 
 }

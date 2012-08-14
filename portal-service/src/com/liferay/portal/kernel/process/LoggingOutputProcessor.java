@@ -43,7 +43,7 @@ public class LoggingOutputProcessor implements OutputProcessor<Void, Void> {
 		return null;
 	}
 
-	private void _processOut(boolean stderr, InputStream inputStream)
+	private void _processOut(boolean stdErr, InputStream inputStream)
 		throws ProcessException {
 
 		UnsyncBufferedReader unsyncBufferedReader =
@@ -53,10 +53,10 @@ public class LoggingOutputProcessor implements OutputProcessor<Void, Void> {
 
 		try {
 			while ((line = unsyncBufferedReader.readLine()) != null) {
-				if (stderr && _log.isErrorEnabled()) {
+				if (stdErr && _log.isErrorEnabled()) {
 					_log.error(line);
 				}
-				else if (!stderr && _log.isInfoEnabled()) {
+				else if (!stdErr && _log.isInfoEnabled()) {
 					_log.info(line);
 				}
 			}

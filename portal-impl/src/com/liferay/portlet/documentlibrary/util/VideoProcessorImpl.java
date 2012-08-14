@@ -178,6 +178,7 @@ public class VideoProcessorImpl
 		return isSupported(mimeType);
 	}
 
+	@Override
 	public void trigger(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
@@ -187,7 +188,7 @@ public class VideoProcessorImpl
 	}
 
 	@Override
-	protected void deleteFilesPreview(
+	protected void deletePreviews(
 		long companyId, long groupId, long fileEntryId, long fileVersionId) {
 
 		String pathSegment = getPathSegment(
@@ -352,10 +353,10 @@ public class VideoProcessorImpl
 					Future<String> future = ProcessExecutor.execute(
 						ClassPathUtil.getPortalClassPath(), processCallable);
 
-					String processIdentity = Long.toString(
+					String processIdentity = String.valueOf(
 						fileVersion.getFileVersionId());
 
-					managedProcesses.put(processIdentity, future);
+					futures.put(processIdentity, future);
 
 					future.get();
 				}
@@ -531,7 +532,7 @@ public class VideoProcessorImpl
 			String processIdentity = Long.toString(
 				fileVersion.getFileVersionId());
 
-			managedProcesses.put(processIdentity, future);
+			futures.put(processIdentity, future);
 
 			future.get();
 		}

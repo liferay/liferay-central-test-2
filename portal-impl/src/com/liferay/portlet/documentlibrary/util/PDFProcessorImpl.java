@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.portal.kernel.image.GhostScriptUtil;
+import com.liferay.portal.kernel.image.GhostscriptUtil;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.log.Log;
@@ -167,6 +167,7 @@ public class PDFProcessorImpl
 		return false;
 	}
 
+	@Override
 	public void trigger(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
@@ -305,11 +306,11 @@ public class PDFProcessorImpl
 	private void _generateImages(FileVersion fileVersion, File file)
 		throws Exception {
 
-		if (GhostScriptUtil.isEnabled()) {
-			if (!_ghostScriptInitialized) {
-				GhostScriptUtil.reset();
+		if (GhostscriptUtil.isEnabled()) {
+			if (!_ghostscriptInitialized) {
+				GhostscriptUtil.reset();
 
-				_ghostScriptInitialized = true;
+				_ghostscriptInitialized = true;
 			}
 
 			_generateImagesGS(fileVersion, file);
@@ -384,7 +385,7 @@ public class PDFProcessorImpl
 			FileVersion fileVersion, InputStream inputStream)
 		throws Exception {
 
-		if (GhostScriptUtil.isEnabled()) {
+		if (GhostscriptUtil.isEnabled()) {
 			_generateImagesGS(fileVersion, inputStream);
 		}
 		else {
@@ -410,7 +411,7 @@ public class PDFProcessorImpl
 				int previewFileCount = getPreviewFileCount(fileVersion);
 
 				_log.info(
-					"GhostScript generated " + previewFileCount +
+					"Ghostscript generated " + previewFileCount +
 						" preview pages for " + fileVersion.getTitle() +
 							" in " + stopWatch);
 			}
@@ -429,7 +430,7 @@ public class PDFProcessorImpl
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"GhostScript generated a thumbnail for " +
+					"Ghostscript generated a thumbnail for " +
 						fileVersion.getTitle() + " in " + stopWatch);
 			}
 		}
@@ -444,43 +445,45 @@ public class PDFProcessorImpl
 		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		List<String> args = new ArrayList<String>();
+		List<String> arguments = new ArrayList<String>();
 
-		args.add("-sDEVICE=png16m");
+		arguments.add("-sDEVICE=png16m");
 
 		if (thumbnail) {
-			args.add("-sOutputFile=" + getThumbnailTempFilePath(tempFileId));
-			args.add("-dFirstPage=1");
-			args.add("-dLastPage=1");
+			arguments.add(
+				"-sOutputFile=" + getThumbnailTempFilePath(tempFileId));
+			arguments.add("-dFirstPage=1");
+			arguments.add("-dLastPage=1");
 		}
 		else {
-			args.add("-sOutputFile=" + getPreviewTempFilePath(tempFileId, -1));
+			arguments.add(
+				"-sOutputFile=" + getPreviewTempFilePath(tempFileId, -1));
 		}
 
-		args.add("-dPDFFitPage");
-		args.add("-dTextAlphaBits=4");
-		args.add("-dGraphicsAlphaBits=4");
-		args.add("-r" + PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI);
+		arguments.add("-dPDFFitPage");
+		arguments.add("-dTextAlphaBits=4");
+		arguments.add("-dGraphicsAlphaBits=4");
+		arguments.add("-r" + PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI);
 
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_WIDTH != 0) {
-			args.add(
+			arguments.add(
 				"-dDEVICEWIDTH" +
 					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_WIDTH);
 		}
 
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_HEIGHT != 0) {
-			args.add(
+			arguments.add(
 				"-dDEVICEHEIGHT" +
 					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_HEIGHT);
 		}
 
-		args.add(file.getPath());
+		arguments.add(file.getPath());
 
-		Future future = GhostScriptUtil.execute(args);
+		Future<?> future = GhostscriptUtil.execute(arguments);
 
-		String processIdentity = Long.toString(fileVersion.getFileVersionId());
+		String processIdentity = String.valueOf(fileVersion.getFileVersionId());
 
-		managedProcesses.put(processIdentity, future);
+		futures.put(processIdentity, future);
 
 		future.get();
 
@@ -719,6 +722,6 @@ public class PDFProcessorImpl
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessorImpl.class);
 
 	private List<Long> _fileVersionIds = new Vector<Long>();
-	private boolean _ghostScriptInitialized = false;
+	private boolean _ghostscriptInitialized = false;
 
 }

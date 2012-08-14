@@ -459,7 +459,6 @@ public class ImageToolImpl implements ImageTool {
 	private static ImageTool _instance = new ImageToolImpl();
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-
 	private static ImageMagick _imageMagick;
 
 	private class RenderedImageFuture implements Future<RenderedImage> {
@@ -499,18 +498,18 @@ public class ImageToolImpl implements ImageTool {
 			return read(bytes, _type);
 		}
 
-		public RenderedImage get(long timeout, TimeUnit unit)
+		public RenderedImage get(long timeout, TimeUnit timeUnit)
 			throws ExecutionException, InterruptedException, TimeoutException {
 
-			_future.get(timeout, unit);
+			_future.get(timeout, timeUnit);
 
 			byte[] bytes = new byte[0];
 
 			try {
 				bytes = _fileUtil.getBytes(_outputFile);
 			}
-			catch (IOException e) {
-				throw new ExecutionException(e);
+			catch (IOException ioe) {
+				throw new ExecutionException(ioe);
 			}
 
 			return read(bytes, _type);

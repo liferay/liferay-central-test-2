@@ -14,8 +14,8 @@
 
 package com.liferay.portal.image;
 
-import com.liferay.portal.kernel.image.GhostScript;
-import com.liferay.portal.kernel.image.ImageMagick;
+import com.liferay.portal.kernel.image.Ghostscript;
+import com.liferay.portal.kernel.image.ImageMagickUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.process.ProcessUtil;
@@ -34,14 +34,14 @@ import jodd.util.StringPool;
 /**
  * @author Ivica Cardic
  */
-public class GhostScriptImpl implements GhostScript {
+public class GhostscriptImpl implements Ghostscript {
 
 	public Future<?> execute(List<String> commandArguments) throws Exception {
 		if (!isEnabled()) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("Cannot execute the GhostScript command. Please install");
-			sb.append("ImageMagick and GhostScript and enable ImageMagick in ");
+			sb.append("Cannot execute the Ghostscript command. Please install");
+			sb.append("ImageMagick and Ghostscript and enable ImageMagick in ");
 			sb.append("portal-ext.properties or in the Server Administration ");
 			sb.append("control panel at: http://<server>/group/control_panel/");
 			sb.append("manage/-/server/external-services");
@@ -75,13 +75,13 @@ public class GhostScriptImpl implements GhostScript {
 	}
 
 	public boolean isEnabled() {
-		return _imageMagick.isEnabled();
+		return ImageMagickUtil.isEnabled();
 	}
 
 	public void reset() {
 		if (isEnabled()) {
 			try {
-				_globalSearchPath = _imageMagick.getGlobalSearchPath();
+				_globalSearchPath = ImageMagickUtil.getGlobalSearchPath();
 
 				_commandPath = getCommandPath();
 			}
@@ -92,7 +92,7 @@ public class GhostScriptImpl implements GhostScript {
 	}
 
 	protected String getCommandPath() throws Exception {
-		String commandPath;
+		String commandPath = null;
 
 		if (OSDetector.isWindows()) {
 			commandPath = getCommandPathWindows();
@@ -103,20 +103,20 @@ public class GhostScriptImpl implements GhostScript {
 
 		if (commandPath == null) {
 			throw new FileNotFoundException(
-				"The Ghostscript command cannot be found.");
+				"Unable to find Ghostscript command");
 		}
 
 		return commandPath;
 	}
 
 	protected String getCommandPathUnix() throws Exception {
-		String dirNames[] = _globalSearchPath.split(File.pathSeparator);
+		String[] dirNames = _globalSearchPath.split(File.pathSeparator);
 
 		for (String dirName : dirNames) {
-			File command = new File(dirName, _GHOSTSCRIPT_UNIX_COMMAND);
+			File file = new File(dirName, _GHOSTSCRIPT_COMMAND_UNIX);
 
-			if (command.exists()) {
-				return command.getCanonicalPath();
+			if (file.exists()) {
+				return file.getCanonicalPath();
 			}
 		}
 
@@ -124,43 +124,40 @@ public class GhostScriptImpl implements GhostScript {
 	}
 
 	protected String getCommandPathWindows() throws Exception {
-		String dirNames[] = _globalSearchPath.split(File.pathSeparator);
+		String[] dirNames = _globalSearchPath.split(File.pathSeparator);
 
 		for (String dirName : dirNames) {
-			for (String commandName : _GHOSTSCRIPT_WINDOWS_COMMANDS) {
-				File command = new File(dirName, commandName + ".exe");
+			for (String command : _GHOSTSCRIPT_COMMAND_WINDOWS) {
+				File file = new File(dirName, command + ".exe");
 
-				if (!command.exists()) {
-					command = new File(dirName, commandName + ".cmd");
+				if (!file.exists()) {
+					file = new File(dirName, command + ".cmd");
 
-					if (!command.exists()) {
-						command = new File(dirName, commandName + ".bat");
+					if (!file.exists()) {
+						file = new File(dirName, command + ".bat");
 
-						if (!command.exists()) {
+						if (!file.exists()) {
 							continue;
 						}
 					}
 				}
 
-				return command.getCanonicalPath();
+				return file.getCanonicalPath();
 			}
 		}
 
 		return null;
 	}
 
-	private static final String _GHOSTSCRIPT_UNIX_COMMAND = "gs";
+	private static final String _GHOSTSCRIPT_COMMAND_UNIX = "gs";
 
-	private static final String[] _GHOSTSCRIPT_WINDOWS_COMMANDS = new String[] {
+	private static final String[] _GHOSTSCRIPT_COMMAND_WINDOWS = {
 		"gswin32c", "gswin64c"
 	};
 
-	private static Log _log = LogFactoryUtil.getLog(GhostScriptImpl.class);
-
-	private static ImageMagick _imageMagick = ImageMagickImpl.getInstance();
+	private static Log _log = LogFactoryUtil.getLog(GhostscriptImpl.class);
 
 	private String _commandPath;
-
 	private String _globalSearchPath;
 
 }

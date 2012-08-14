@@ -36,7 +36,7 @@ public class ImageMagickUtil {
 	 * @see    <a href="http://www.imagemagick.org/script/convert.php">Convert
 	 *         documentation</a>
 	 */
-	public static Future convert(List<String> arguments) throws Exception {
+	public static Future<?> convert(List<String> arguments) throws Exception {
 		return getImageMagick().convert(arguments);
 	}
 

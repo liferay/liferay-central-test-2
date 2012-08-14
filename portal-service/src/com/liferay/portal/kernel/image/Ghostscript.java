@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
 /**
  * @author Ivica Cardic
  */
-public interface GhostScript {
+public interface Ghostscript {
 
 	public Future<?> execute(List<String> arguments) throws Exception;
 

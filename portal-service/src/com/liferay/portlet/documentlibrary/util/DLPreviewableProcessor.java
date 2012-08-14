@@ -336,12 +336,12 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		long companyId, long groupId, long fileEntryId, long fileVersionId,
 		String thumbnailType) {
 
-		deleteFilesPreview(companyId, groupId, fileEntryId, fileVersionId);
-		deleteFilesThumbnail(
+		deletePreviews(companyId, groupId, fileEntryId, fileVersionId);
+		deleteThumbnails(
 			companyId, groupId, fileEntryId, fileVersionId, thumbnailType);
 	}
 
-	protected void deleteFilesPreview(
+	protected void deletePreviews(
 		long companyId, long groupId, long fileEntryId, long fileVersionId) {
 
 		try {
@@ -353,7 +353,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 	}
 
-	protected void deleteFilesThumbnail(
+	protected void deleteThumbnails(
 		long companyId, long groupId, long fileEntryId, long fileVersionId,
 		String thumbnailType) {
 
@@ -374,12 +374,12 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 	protected void destroyProcess(String processIdentity) {
 		synchronized (DLPreviewableProcessor.class) {
-			Future future = managedProcesses.get(processIdentity);
+			Future<?> future = futures.get(processIdentity);
 
 			if (future != null) {
 				future.cancel(true);
 
-				managedProcesses.remove(processIdentity);
+				futures.remove(processIdentity);
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Cancellation requested for " + processIdentity);
@@ -1255,8 +1255,8 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 	}
 
-	protected Map<String, Future> managedProcesses =
-		new ConcurrentHashMap<String, Future>();
+	protected Map<String, Future<?>> futures =
+		new ConcurrentHashMap<String, Future<?>>();
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DLPreviewableProcessor.class);
