@@ -221,13 +221,11 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 
 		if (delete) {
 			Assert.assertEquals(0, getTrashEntriesCount());
-
 			Assert.assertEquals(0, searchTrashEntriesCount("Basic"));
 		}
 		else {
 			Assert.assertEquals(
 				initialTrashEntriesCount, getTrashEntriesCount());
-
 			Assert.assertEquals(
 				initialSearchTrashFileEntriesCount,
 				searchTrashEntriesCount("Basic"));
