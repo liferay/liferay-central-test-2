@@ -105,13 +105,12 @@ public class AssetEntryFinderImpl
 	protected void buildAllCategoriesSQL(long[] categoryIds, StringBundler sb)
 		throws SystemException {
 
-		String findByAndCategoryIdsSql = CustomSQLUtil.get(
+		String findByAndCategoryIdsSQL = CustomSQLUtil.get(
 			FIND_BY_AND_CATEGORY_IDS);
 
 		sb.append(" AND (");
 
 		for (int i = 0; i < categoryIds.length; i++) {
-
 			String sql = null;
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
@@ -119,18 +118,16 @@ public class AssetEntryFinderImpl
 					categoryIds[i]);
 
 				if (treeCategoryIds.size() > 1) {
-					sql =
-						StringUtil.replace(
-							findByAndCategoryIdsSql, "[$CATEGORY_ID$]",
-							StringUtil.merge(treeCategoryIds));
+					sql = StringUtil.replace(
+						findByAndCategoryIdsSQL, "[$CATEGORY_ID$]",
+						StringUtil.merge(treeCategoryIds));
 				}
 			}
 
 			if (sql == null) {
-				sql =
-					StringUtil.replace(
-						findByAndCategoryIdsSql, " IN ([$CATEGORY_ID$])",
-						" = " + categoryIds[i]);
+				sql = StringUtil.replace(
+					findByAndCategoryIdsSQL, " IN ([$CATEGORY_ID$])",
+					" = " + categoryIds[i]);
 			}
 
 			sb.append(sql);
@@ -435,7 +432,7 @@ public class AssetEntryFinderImpl
 			long[] categoryIds, StringBundler sb)
 		throws SystemException {
 
-		String findByAndCategoryIdsSql = CustomSQLUtil.get(
+		String findByAndCategoryIdsSQL = CustomSQLUtil.get(
 			FIND_BY_AND_CATEGORY_IDS);
 
 		sb.append(" AND (");
@@ -450,18 +447,16 @@ public class AssetEntryFinderImpl
 					categoryIds[i]);
 
 				if (treeCategoryIds.size() > 1) {
-					sql =
-						StringUtil.replace(
-							findByAndCategoryIdsSql, "[$CATEGORY_ID$]",
-							StringUtil.merge(treeCategoryIds));
+					sql = StringUtil.replace(
+						findByAndCategoryIdsSQL, "[$CATEGORY_ID$]",
+						StringUtil.merge(treeCategoryIds));
 				}
 			}
 
 			if (sql == null) {
-				sql =
-					StringUtil.replace(
-						findByAndCategoryIdsSql, " IN ([$CATEGORY_ID$])",
-						" = " + categoryIds[i]);
+				sql = StringUtil.replace(
+					findByAndCategoryIdsSQL, " IN ([$CATEGORY_ID$])",
+					" = " + categoryIds[i]);
 			}
 
 			sb.append(sql);
