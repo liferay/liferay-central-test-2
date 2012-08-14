@@ -373,10 +373,27 @@ public class StagingImpl implements Staging {
 			portalPreferences, layoutSetBranchId, plid);
 	}
 
+	@Deprecated
+	public void disableStaging(
+			Group scopeGroup, Group liveGroup, ServiceContext serviceContext)
+		throws Exception {
+
+		disableStaging((PortletRequest)null, liveGroup, serviceContext);
+	}
+
 	public void disableStaging(Group liveGroup, ServiceContext serviceContext)
 		throws Exception {
 
 		disableStaging((PortletRequest)null, liveGroup, serviceContext);
+	}
+
+	@Deprecated
+	public void disableStaging(
+			PortletRequest portletRequest, Group scopeGroup, Group liveGroup,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		disableStaging(portletRequest, liveGroup, serviceContext);
 	}
 
 	public void disableStaging(
@@ -431,23 +448,6 @@ public class StagingImpl implements Staging {
 
 		GroupLocalServiceUtil.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
-	}
-
-	@Deprecated
-	public void disableStaging(
-			Group scopeGroup, Group liveGroup, ServiceContext serviceContext)
-		throws Exception {
-
-		disableStaging((PortletRequest)null, liveGroup, serviceContext);
-	}
-
-	@Deprecated
-	public void disableStaging(
-			PortletRequest portletRequest, Group scopeGroup, Group liveGroup,
-			ServiceContext serviceContext)
-		throws Exception {
-
-		disableStaging(portletRequest, liveGroup, serviceContext);
 	}
 
 	public void enableLocalStaging(
