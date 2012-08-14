@@ -170,8 +170,8 @@ public class AuthVerifierPipeline {
 			settings);
 
 		if (properties != null) {
-			for (String key : properties.stringPropertyNames()) {
-				mergedSettings.put(key, properties.getProperty(key));
+			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+				mergedSettings.put((String)entry.getKey(), entry.getValue());
 			}
 		}
 
