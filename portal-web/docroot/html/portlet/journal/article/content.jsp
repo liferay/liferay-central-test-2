@@ -599,7 +599,7 @@ if (Validator.isNotNull(content)) {
 	Liferay.provide(
 		window,
 		'<portlet:namespace />postProcessTranslation',
-		function(formDate, cmd, newVersion, newStatusMessage, newLanguageId, newLanguage) {
+		function(formDate, cmd, newVersion, newLanguageId, newLanguage, newStatusMessage) {
 			var A = AUI();
 
 			document.<portlet:namespace />fm1.<portlet:namespace />formDate.value = formDate;
