@@ -2401,7 +2401,7 @@ public class SourceFormatter {
 				if (result.contains(quoteType)) {
 					int lineCount = 1;
 
-					char contentCharArray[] = content.toCharArray();
+					char[] contentCharArray = content.toCharArray();
 
 					for (int i = 0; i < x; i++) {
 						if (contentCharArray[i] == CharPool.NEW_LINE) {
