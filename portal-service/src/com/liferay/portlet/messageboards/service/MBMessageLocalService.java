@@ -319,11 +319,6 @@ public interface MBMessageLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteMessageAttachment(long messageId,
-		java.lang.String fileName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteDiscussionMessages(java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -336,6 +331,11 @@ public interface MBMessageLocalService extends BaseLocalService,
 
 	public com.liferay.portlet.messageboards.model.MBMessage deleteMessage(
 		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteMessageAttachment(long messageId,
+		java.lang.String fileName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

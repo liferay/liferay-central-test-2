@@ -378,13 +378,6 @@ public class MBMessageLocalServiceUtil {
 		return getService().deleteDiscussionMessage(messageId);
 	}
 
-	public static void deleteMessageAttachment(long messageId,
-		java.lang.String fileName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteMessageAttachment(messageId, fileName);
-	}
-
 	public static void deleteDiscussionMessages(java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -404,6 +397,13 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteMessage(message);
+	}
+
+	public static void deleteMessageAttachment(long messageId,
+		java.lang.String fileName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteMessageAttachment(messageId, fileName);
 	}
 
 	public static void deleteMessageAttachments(long messageId)

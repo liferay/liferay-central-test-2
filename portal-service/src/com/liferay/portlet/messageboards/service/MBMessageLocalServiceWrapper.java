@@ -368,13 +368,6 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService,
 		return _mbMessageLocalService.deleteDiscussionMessage(messageId);
 	}
 
-	public void deleteMessageAttachment(long messageId,
-		java.lang.String fileName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_mbMessageLocalService.deleteMessageAttachment(messageId, fileName);
-	}
-
 	public void deleteDiscussionMessages(java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -394,6 +387,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.deleteMessage(message);
+	}
+
+	public void deleteMessageAttachment(long messageId,
+		java.lang.String fileName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_mbMessageLocalService.deleteMessageAttachment(messageId, fileName);
 	}
 
 	public void deleteMessageAttachments(long messageId)
