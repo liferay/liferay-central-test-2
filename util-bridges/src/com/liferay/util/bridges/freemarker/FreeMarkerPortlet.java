@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,7 +43,34 @@ import javax.portlet.PortletResponse;
 /**
  * @author Raymond Augé
  */
-public class FreeMarkerMVCPortlet extends MVCPortlet {
+public class FreeMarkerPortlet extends MVCPortlet {
+
+	@Override
+	public void destroy() {
+		super.destroy();
+
+		Class<?> clazz = getClass();
+
+		TemplateManagerUtil.destroy(clazz.getClassLoader());
+	}
+
+	protected TemplateTaglibSupportProvider getTaglibSupportProvider()
+		throws Exception {
+
+		if (_templateTaglibSupportProvider != null) {
+			return _templateTaglibSupportProvider;
+		}
+
+		List<TemplateTaglibSupportProvider> templateTaglibSupportProviders =
+			ServiceLoader.load(TemplateTaglibSupportProvider.class);
+
+		if (!templateTaglibSupportProviders.isEmpty()) {
+			_templateTaglibSupportProvider = templateTaglibSupportProviders.get(
+				0);
+		}
+
+		return _templateTaglibSupportProvider;
+	}
 
 	@Override
 	protected void include(
@@ -81,11 +108,11 @@ public class FreeMarkerMVCPortlet extends MVCPortlet {
 					TemplateManager.FREEMARKER, templateResource,
 					TemplateContextType.CLASS_LOADER);
 
-				TemplateTaglibSupportProvider taglibSupportProvider =
+				TemplateTaglibSupportProvider templateTaglibSupportProvider =
 					getTaglibSupportProvider();
 
-				if (taglibSupportProvider != null) {
-					taglibSupportProvider.addTaglibSupport(
+				if (templateTaglibSupportProvider != null) {
+					templateTaglibSupportProvider.addTaglibSupport(
 						template, servletContextName, portletRequest,
 						portletResponse);
 				}
@@ -121,32 +148,8 @@ public class FreeMarkerMVCPortlet extends MVCPortlet {
 		}
 	}
 
-	@Override
-	public void destroy() {
-		super.destroy();
+	private static Log _log = LogFactoryUtil.getLog(FreeMarkerPortlet.class);
 
-		TemplateManagerUtil.destroy(getClass().getClassLoader());
-	}
-
-	protected TemplateTaglibSupportProvider getTaglibSupportProvider()
-		throws Exception {
-
-		if (_taglibSupportProvider != null) {
-			return _taglibSupportProvider;
-		}
-
-		List<TemplateTaglibSupportProvider> providers = ServiceLoader.load(
-			TemplateTaglibSupportProvider.class);
-
-		if (!providers.isEmpty()) {
-			_taglibSupportProvider = providers.get(0);
-		}
-
-		return _taglibSupportProvider;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(FreeMarkerMVCPortlet.class);
-
-	private TemplateTaglibSupportProvider _taglibSupportProvider;
+	private TemplateTaglibSupportProvider _templateTaglibSupportProvider;
 
 }

@@ -1,1 +1,1 @@
-com.liferay.util.freemarker.FreeMarkerTaglibSupportProvider
+com.liferay.util.freemarker.FreeMarkerTemplateTaglibSupportProvider
