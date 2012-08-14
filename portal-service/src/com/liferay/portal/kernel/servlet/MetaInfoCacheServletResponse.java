@@ -288,6 +288,10 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		return _metaData._locale;
 	}
 
+	public MetaData getMetaData() {
+		return _metaData;
+	}
+
 	@Override
 	public ServletOutputStream getOutputStream() throws IOException {
 		calledGetOutputStream = true;
@@ -566,10 +570,6 @@ public class MetaInfoCacheServletResponse extends HttpServletResponseWrapper {
 		sb.append("}");
 
 		return sb.toString();
-	}
-
-	protected MetaData getMetaData() {
-		return _metaData;
 	}
 
 	/**
