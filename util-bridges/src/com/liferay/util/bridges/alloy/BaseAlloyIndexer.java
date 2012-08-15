@@ -23,15 +23,12 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MethodCache;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
+
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,33 +39,34 @@ import java.util.List;
  */
 public abstract class BaseAlloyIndexer extends BaseIndexer {
 
-	public BaseAlloyIndexer(
-		String portletId, String className, String serviceClassName) {
+	public BaseAlloyIndexer(String portletId, String className)
+		throws Exception {
 
 		this.portletId = portletId;
 		classNames = new String[] {className};
 
-		String[] classNameParameters = StringUtil.split(
-			className, StringPool.PERIOD);
+		Class<?> clazz = getClass();
 
-		String methodName = classNameParameters[classNameParameters.length - 1];
+		ClassLoader classLoader = clazz.getClassLoader();
 
-		getModelMethodKey = new MethodKey(
-			serviceClassName, "get" + methodName, long.class);
-		getModelsCountMethodKey = new MethodKey(
-			serviceClassName,
-			"get" + TextFormatter.formatPlural(methodName) + "Count");
-		getModelsMethodKey = new MethodKey(
-			serviceClassName, "get" + TextFormatter.formatPlural(methodName),
-			int.class, int.class);
+		int pos = className.indexOf(".model.");
 
-		try {
-			MethodCache.get(getModelMethodKey);
-			MethodCache.get(getModelsCountMethodKey);
-			MethodCache.get(getModelsMethodKey);
-		}
-		catch (Exception e) {
-		}
+		String simpleClassName = className.substring(pos + 7);
+
+		String serviceClassName =
+			className.substring(0, pos) + ".service." + simpleClassName +
+				"LocalServiceUtil";
+
+		Class<?> serviceClass = classLoader.loadClass(serviceClassName);
+
+		getModelMethod = serviceClass.getMethod(
+			"get" + simpleClassName, new Class[] {long.class});
+		getModelsCountMethod = serviceClass.getMethod(
+			"get" + TextFormatter.formatPlural(simpleClassName) + "Count",
+			new Class[0]);
+		getModelsCountMethod = serviceClass.getMethod(
+			"get" + TextFormatter.formatPlural(simpleClassName),
+			new Class[] {int.class, int.class});
 	}
 
 	public String[] getClassNames() {
@@ -117,10 +115,7 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		MethodHandler methodHandler = new MethodHandler(
-			getModelMethodKey, classPK);
-
-		Object model = methodHandler.invoke(false);
+		Object model = getModelMethod.invoke(false, classPK);
 
 		doReindex(model);
 	}
@@ -138,10 +133,7 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	protected void reindexModels(long companyId) throws Exception {
-		MethodHandler methodHandler = new MethodHandler(
-			getModelsCountMethodKey);
-
-		int count = (Integer)methodHandler.invoke(false);
+		int count = (Integer)getModelsCountMethod.invoke(false);
 
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
@@ -156,10 +148,8 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	protected void reindexModels(long companyId, int start, int end)
 		throws Exception {
 
-		MethodHandler methodHandler = new MethodHandler(
-			getModelsMethodKey, start, end);
-
-		List<Object> models = (List<Object>)methodHandler.invoke(false);
+		List<Object> models = (List<Object>)getModelsMethod.invoke(
+			false, start, end);
 
 		if (models.isEmpty()) {
 			return;
@@ -178,9 +168,9 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	protected String[] classNames;
-	protected MethodKey getModelMethodKey;
-	protected MethodKey getModelsCountMethodKey;
-	protected MethodKey getModelsMethodKey;
+	protected Method getModelMethod;
+	protected Method getModelsCountMethod;
+	protected Method getModelsMethod;
 	protected String portletId;
 
 }

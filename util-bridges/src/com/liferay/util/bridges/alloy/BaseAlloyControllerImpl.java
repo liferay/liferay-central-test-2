@@ -140,16 +140,10 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			persistedModel.persist();
 		}
 
-		if (indexer == null) {
-			return;
-		}
+		if ((indexer != null) &&
+			indexerClassName.equals(baseModel.getModelClassName())) {
 
-		String baseModelClassName = baseModel.getModelClassName();
-
-		for (String indexerClassName : indexer.getClassNames()) {
-			if (baseModelClassName.equals(indexerClassName)) {
-				indexer.reindex(baseModel);
-			}
+			indexer.reindex(baseModel);
 		}
 	}
 
@@ -273,21 +267,28 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			return;
 		}
 
-		for (String className : indexer.getClassNames()) {
-			Indexer indexerCache = IndexerRegistryUtil.getIndexer(className);
+		indexerClassName = indexer.getClassNames()[0];
 
-			if (indexerCache != null) {
-				continue;
-			}
+		Indexer existingIndexer = IndexerRegistryUtil.getIndexer(
+			indexerClassName);
 
-			IndexerRegistryUtil.register(indexer);
-
-			PortletBag portletBag = PortletBagPool.get(portlet.getPortletId());
-
-			List<Indexer> indexerInstances = portletBag.getIndexerInstances();
-
-			indexerInstances.add(indexer);
+		if ((existingIndexer != null) && (existingIndexer == indexer)) {
+			return;
 		}
+
+		PortletBag portletBag = PortletBagPool.get(portlet.getPortletId());
+
+		List<Indexer> indexerInstances = portletBag.getIndexerInstances();
+
+		if (existingIndexer != null) {
+			IndexerRegistryUtil.unregister(existingIndexer);
+
+			indexerInstances.remove(existingIndexer);
+		}
+
+		IndexerRegistryUtil.register(indexer);
+
+		indexerInstances.add(indexer);
 	}
 
 	protected void initMethods() {
@@ -350,6 +351,8 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		alloyPortlet = (AlloyPortlet)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_PORTLET);
+
+		alloyPortlet.registerAlloyController(this);
 
 		portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
@@ -437,20 +440,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 	protected String translate(String pattern, Object... arguments) {
 		return LanguageUtil.format(locale, pattern, arguments);
-	}
-
-	protected void unregisterIndexer() {
-		if (indexer == null) {
-			return;
-		}
-
-		IndexerRegistryUtil.unregister(indexer);
-
-		PortletBag portletBag = PortletBagPool.get(portlet.getPortletId());
-
-		List<Indexer> indexerInstances = portletBag.getIndexerInstances();
-
-		indexerInstances.remove(indexer);
 	}
 
 	protected void updateAttachedModel(BaseModel<?> baseModel)
@@ -545,6 +534,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected EventRequest eventRequest;
 	protected EventResponse eventResponse;
 	protected Indexer indexer;
+	protected String indexerClassName;
 	protected String lifecycle;
 	protected LiferayPortletConfig liferayPortletConfig;
 	protected LiferayPortletResponse liferayPortletResponse;

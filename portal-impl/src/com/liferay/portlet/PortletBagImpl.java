@@ -250,10 +250,6 @@ public class PortletBagImpl implements PortletBag {
 		return _xmlRpcMethodInstance;
 	}
 
-	public void setIndexerInstances(List<Indexer> indexerInstances) {
-		_indexerInstances = indexerInstances;
-	}
-
 	public void setPortletInstance(Portlet portletInstance) {
 		_portletInstance = portletInstance;
 	}

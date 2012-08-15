@@ -105,8 +105,6 @@ public interface PortletBag extends Cloneable {
 
 	public Method getXmlRpcMethodInstance();
 
-	public void setIndexerInstances(List<Indexer> indexerInstances);
-
 	public void setPortletInstance(Portlet portletInstance);
 
 	public void setPortletName(String portletName);

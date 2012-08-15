@@ -924,8 +924,8 @@ public class PortletImpl extends PortletBaseImpl {
 	 * @return the indexer instances of the portlet
 	 */
 	public List<Indexer> getIndexerInstances() {
-		if (getIndexerClasses().isEmpty() &&
-			!getPortletClass().equals(AlloyPortlet.class.getName())) {
+		if (_indexerClasses.isEmpty() &&
+			!_portletClass.equals(AlloyPortlet.class.getName())) {
 
 			return Collections.emptyList();
 		}
