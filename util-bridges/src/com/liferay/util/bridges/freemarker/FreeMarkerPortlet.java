@@ -92,7 +92,7 @@ public class FreeMarkerPortlet extends MVCPortlet {
 				TemplateManager.FREEMARKER, resourcePath);
 		}
 		catch (TemplateException te) {
-			throw new IOException(te);
+			throw new IOException(te.getMessage());
 		}
 
 		if (!resourceExists) {
