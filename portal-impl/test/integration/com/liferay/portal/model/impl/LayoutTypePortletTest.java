@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
-import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -55,30 +54,8 @@ public class LayoutTypePortletTest {
 
 	@Test
 	@Transactional
-	public void testBasic() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		Assert.assertTrue(layoutType instanceof LayoutTypePortlet);
-	}
-
-	@Test
-	@Transactional
-	public void testNoPortlets() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
-
-		List<Portlet> portlets = layoutTypePortlet.getAllPortlets();
-
-		Assert.assertEquals(0, portlets.size());
-	}
-
-	@Test
-	@Transactional
 	public void testAddModeAboutPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -92,9 +69,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModeConfigPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -108,9 +83,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModeEditDefaultsPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -126,9 +99,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModeEditGuestPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -144,9 +115,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModeEditPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -160,9 +129,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModeHelpPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -176,9 +143,7 @@ public class LayoutTypePortletTest {
 	@Test
 	@Transactional
 	public void testAddModePreviewPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -187,108 +152,33 @@ public class LayoutTypePortletTest {
 
 		layoutTypePortlet.addModePreviewPortletId(portletId);
 
-		Assert.assertTrue(layoutTypePortlet.hasModePreviewPortletId(
-			portletId));
+		Assert.assertTrue(layoutTypePortlet.hasModePreviewPortletId(portletId));
 	}
 
 	@Test
 	@Transactional
 	public void testAddModePrintPortletId() throws Exception {
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
-		Assert.assertFalse(layoutTypePortlet.hasModePrintPortletId(
-			portletId));
+		Assert.assertFalse(layoutTypePortlet.hasModePrintPortletId(portletId));
 
 		layoutTypePortlet.addModePrintPortletId(portletId);
 
-		Assert.assertTrue(layoutTypePortlet.hasModePrintPortletId(
-			portletId));
+		Assert.assertTrue(layoutTypePortlet.hasModePrintPortletId(portletId));
 	}
 
 	@Test
 	@Transactional
-	public void testAddPortletId_WithInvalidIdWithoutPermission()
-		throws Exception {
+	public void testAddPortletIdCheckColumn() throws Exception {
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		Layout layout = layoutTypePortlet.getLayout();
 
 		User user = ServiceTestUtil.addUser(
 			ServiceTestUtil.randomString(), false,
-			new long[] {layoutType.getLayout().getGroupId()});
-
-		long userId = user.getUserId();
-
-		String portletId = ServiceTestUtil.randomString();
-
-		portletId = layoutTypePortlet.addPortletId(userId, portletId);
-
-		Assert.assertNull(portletId);
-	}
-
-	@Test
-	@Transactional
-	public void testAddPortletId_WithInvalidId()
-		throws Exception {
-
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
-
-		User user = ServiceTestUtil.addUser(
-			ServiceTestUtil.randomString(), false,
-			new long[] {layoutType.getLayout().getGroupId()});
-
-		long userId = user.getUserId();
-
-		String portletId = ServiceTestUtil.randomString();
-
-		portletId = layoutTypePortlet.addPortletId(userId, portletId);
-
-		Assert.assertNull(portletId);
-	}
-
-	@Test
-	@Transactional
-	public void testAddPortletId_WithValidId()
-		throws Exception {
-
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
-
-		User user = ServiceTestUtil.addUser(
-			ServiceTestUtil.randomString(), false,
-			new long[] {layoutType.getLayout().getGroupId()});
-
-		long userId = user.getUserId();
-
-		String portletId = PortletKeys.JOURNAL_CONTENT;
-
-		portletId = layoutTypePortlet.addPortletId(userId, portletId);
-
-		Assert.assertNotNull(portletId);
-	}
-
-	@Test
-	@Transactional
-	public void testAddPortletId_CheckColumn()
-		throws Exception {
-
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
-
-		User user = ServiceTestUtil.addUser(
-			ServiceTestUtil.randomString(), false,
-			new long[] {layoutType.getLayout().getGroupId()});
-
-		long userId = user.getUserId();
+			new long[] {layout.getGroupId()});
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -300,7 +190,7 @@ public class LayoutTypePortletTest {
 
 		Assert.assertEquals(2, columns.size());
 
-		portletId = layoutTypePortlet.addPortletId(userId, portletId);
+		portletId = layoutTypePortlet.addPortletId(user.getUserId(), portletId);
 
 		Assert.assertNotNull(portletId);
 
@@ -311,18 +201,14 @@ public class LayoutTypePortletTest {
 
 	@Test
 	@Transactional
-	public void testAddPortletId_Column2()
-		throws Exception {
+	public void testAddPortletIdColumn2() throws Exception {
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
 
-		LayoutType layoutType = getLayoutType();
-
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layoutType;
+		Layout layout = layoutTypePortlet.getLayout();
 
 		User user = ServiceTestUtil.addUser(
 			ServiceTestUtil.randomString(), false,
-			new long[] {layoutType.getLayout().getGroupId()});
-
-		long userId = user.getUserId();
+			new long[] {layout.getGroupId()});
 
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -336,7 +222,7 @@ public class LayoutTypePortletTest {
 		String column2 = columns.get(1);
 
 		portletId = layoutTypePortlet.addPortletId(
-			userId, portletId, column2, -1);
+			user.getUserId(), portletId, column2, -1);
 
 		Assert.assertNotNull(portletId);
 
@@ -349,13 +235,79 @@ public class LayoutTypePortletTest {
 		Assert.assertEquals(1, portlets.size());
 	}
 
-	protected LayoutType getLayoutType() throws Exception {
+	@Test
+	@Transactional
+	public void testAddPortletIdWithInvalidId() throws Exception {
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
+
+		Layout layout = layoutTypePortlet.getLayout();
+
+		User user = ServiceTestUtil.addUser(
+			ServiceTestUtil.randomString(), false,
+			new long[] {layout.getGroupId()});
+
+		String portletId = ServiceTestUtil.randomString();
+
+		portletId = layoutTypePortlet.addPortletId(user.getUserId(), portletId);
+
+		Assert.assertNull(portletId);
+	}
+
+	@Test
+	@Transactional
+	public void testAddPortletIdWithInvalidIdWithoutPermission()
+		throws Exception {
+
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
+
+		Layout layout = layoutTypePortlet.getLayout();
+
+		User user = ServiceTestUtil.addUser(
+			ServiceTestUtil.randomString(), false,
+			new long[] {layout.getGroupId()});
+
+		String portletId = ServiceTestUtil.randomString();
+
+		portletId = layoutTypePortlet.addPortletId(user.getUserId(), portletId);
+
+		Assert.assertNull(portletId);
+	}
+
+	@Test
+	@Transactional
+	public void testAddPortletIdWithValidId() throws Exception {
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
+
+		Layout layout = layoutTypePortlet.getLayout();
+
+		User user = ServiceTestUtil.addUser(
+			ServiceTestUtil.randomString(), false,
+			new long[] {layout.getGroupId()});
+
+		String portletId = PortletKeys.JOURNAL_CONTENT;
+
+		portletId = layoutTypePortlet.addPortletId(user.getUserId(), portletId);
+
+		Assert.assertNotNull(portletId);
+	}
+
+	@Test
+	@Transactional
+	public void testNoPortlets() throws Exception {
+		LayoutTypePortlet layoutTypePortlet = getLayoutTypePortlet();
+
+		List<Portlet> portlets = layoutTypePortlet.getAllPortlets();
+
+		Assert.assertEquals(0, portlets.size());
+	}
+
+	protected LayoutTypePortlet getLayoutTypePortlet() throws Exception {
 		Group group = ServiceTestUtil.addGroup(ServiceTestUtil.randomString());
 
 		Layout layout = ServiceTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString(), false);
 
-		return layout.getLayoutType();
+		return (LayoutTypePortlet)layout.getLayoutType();
 	}
 
 }
