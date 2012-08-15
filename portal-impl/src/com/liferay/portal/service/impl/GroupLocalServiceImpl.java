@@ -643,9 +643,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				StagingUtil.disableStaging(group, serviceContext);
 			}
 			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Unable to disable staging for group: " + group);
-				}
+				_log.error(
+					"Unable to disable staging for group " +
+						group.getGroupId());
 			}
 		}
 
