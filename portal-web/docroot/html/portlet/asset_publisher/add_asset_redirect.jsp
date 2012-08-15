@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
-
 String redirect = request.getParameter("redirect");
+
+Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
 %>
 
 <aui:script use="aui-base">

@@ -134,14 +134,11 @@ public class EditEntryAction extends PortletAction {
 				String oldRedirect = HttpUtil.getParameter(
 					redirect, oldRedirectParam, false);
 
-				String newRedirect = null;
-
 				if (Validator.isNotNull(oldRedirect)) {
-					newRedirect = HttpUtil.decodeURL(oldRedirect);
+					String newRedirect = HttpUtil.decodeURL(oldRedirect);
 
 					newRedirect = StringUtil.replace(
 						newRedirect, oldUrlTitle, entry.getUrlTitle());
-
 					newRedirect = StringUtil.replace(
 						newRedirect, oldRedirectParam, "redirect");
 
@@ -149,8 +146,8 @@ public class EditEntryAction extends PortletAction {
 						redirect, oldRedirect, newRedirect);
 				}
 				else if (redirect.endsWith("/blogs/" + oldUrlTitle) ||
-						redirect.contains("/blogs/" + oldUrlTitle + "?") ||
-						redirect.contains("/blog/" + oldUrlTitle + "?")) {
+						 redirect.contains("/blogs/" + oldUrlTitle + "?") ||
+						 redirect.contains("/blog/" + oldUrlTitle + "?")) {
 
 					redirect = StringUtil.replace(
 						redirect, oldUrlTitle, entry.getUrlTitle());

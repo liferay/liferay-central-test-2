@@ -27,8 +27,6 @@ PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, life
 
 String editPortletURLString = StringPool.BLANK;
 
-String fullContentRedirect = (String)request.getAttribute("view.jsp-fullContentRedirect");
-
 if (showEditURL && (editPortletURL != null)) {
 	editPortletURL.setWindowState(LiferayWindowState.POP_UP);
 	editPortletURL.setPortletMode(PortletMode.VIEW);
@@ -45,6 +43,8 @@ if (showEditURL && (editPortletURL != null)) {
 	redirectURL.setWindowState(LiferayWindowState.POP_UP);
 
 	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+
+	String fullContentRedirect = (String)request.getAttribute("view.jsp-fullContentRedirect");
 
 	if (fullContentRedirect != null) {
 		redirectURL.setParameter("redirect", fullContentRedirect);

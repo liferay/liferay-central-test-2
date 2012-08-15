@@ -179,14 +179,11 @@ public class EditArticleAction extends PortletAction {
 				String oldRedirect = HttpUtil.getParameter(
 					redirect, oldRedirectParam, false);
 
-				String newRedirect = null;
-
 				if (Validator.isNotNull(oldRedirect)) {
-					newRedirect = HttpUtil.decodeURL(oldRedirect);
+					String newRedirect = HttpUtil.decodeURL(oldRedirect);
 
 					newRedirect = StringUtil.replace(
 						newRedirect, oldUrlTitle, article.getUrlTitle());
-
 					newRedirect = StringUtil.replace(
 						newRedirect, oldRedirectParam, "redirect");
 
