@@ -52,6 +52,12 @@ if (themeDisplay.isSignedIn()) {
 	}
 }
 
+long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
+
+String assetTagName = ParamUtil.getString(request, "tag");
+
+boolean useAssetEntryQuery = Validator.isNotNull(assetTagName);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/message_boards/view");
@@ -66,12 +72,6 @@ request.setAttribute("view.jsp-threadSubscriptionClassPKs", threadSubscriptionCl
 request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 request.setAttribute("view.jsp-portletURL", portletURL);
-
-String assetTagName = ParamUtil.getString(request, "tag");
-
-boolean useAssetEntryQuery = Validator.isNotNull(assetTagName);
-
-long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
 %>
 
 <liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
