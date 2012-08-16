@@ -186,16 +186,12 @@ public JSONArray _addStructureFieldAttributes(DDMStructure structure, JSONArray 
 public JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fieldName) throws StructureFieldException {
 	JSONArray readOnlyAttributesJSONArray = JSONFactoryUtil.createJSONArray();
 
-	boolean structureHasLinks = false;
-
 	try {
-		structureHasLinks = DDMStorageLinkLocalServiceUtil.getStructureStorageLinksCount(structure.getStructureId()) > 0;
+		if (DDMStorageLinkLocalServiceUtil.getStructureStorageLinksCount(structure.getStructureId()) > 0) {
+			readOnlyAttributesJSONArray.put("name");
+		}
 	}
 	catch (Exception e) {
-	}
-
-	if (structureHasLinks) {
-		readOnlyAttributesJSONArray.put("name");
 	}
 
 	return readOnlyAttributesJSONArray;
