@@ -219,9 +219,8 @@ public class ViewSaveAsDraftWCWebContentTest extends BaseTestCase {
 			selenium.getText("//a[@id='_15_relatedAssetsLink']"));
 		assertEquals(RuntimeVariables.replace("Custom Fields (Modified)"),
 			selenium.getText("//a[@id='_15_customFieldsLink']"));
-		assertEquals("Save as Draft",
-			selenium.getValue("//input[@value='Save as Draft']"));
-		assertEquals("Publish", selenium.getValue("//input[@value='Publish']"));
-		assertEquals("Cancel", selenium.getValue("//input[@value='Cancel']"));
+		assertTrue(selenium.isVisible("//input[@value='Save as Draft']"));
+		assertTrue(selenium.isVisible("//input[@value='Publish']"));
+		assertTrue(selenium.isVisible("xPath=(//input[@value='Cancel'])[2]"));
 	}
 }
