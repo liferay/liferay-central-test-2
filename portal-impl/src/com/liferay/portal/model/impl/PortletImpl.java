@@ -401,7 +401,9 @@ public class PortletImpl extends PortletBaseImpl {
 	 */
 	@Override
 	public int compareTo(Portlet portlet) {
-		return _portletId.compareTo(portlet.getPortletId());
+		String portletId = getPortletId();
+
+		return portletId.compareTo(portlet.getPortletId());
 	}
 
 	/**
@@ -414,7 +416,9 @@ public class PortletImpl extends PortletBaseImpl {
 	public boolean equals(Object obj) {
 		Portlet portlet = (Portlet)obj;
 
-		return _portletId.equals(portlet.getPortletId());
+		String portletId = getPortletId();
+
+		return portletId.equals(portlet.getPortletId());
 	}
 
 	/**
