@@ -8,8 +8,8 @@ Source:
 
 	http://repo1.maven.org/maven2/org/glassfish/main/web/web-core/3.1.2/web-core-3.1.2-sources.jar
 
-Fix:
+SVN:
 
-	ApplicationDispatcher.java [#1036 - #1055]
+	https://svn.java.net/svn/glassfish~svn/tags/3.1.2-b23
 
-	/jdk6/bin/javac -g -cp web-core.jar;javax.servlet-api.jar ApplicationDispatcher.java
+	svn diff > GLASSFISH-19008.patch
