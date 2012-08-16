@@ -152,8 +152,8 @@ public class UploadServletRequestImpl
 	}
 
 	public UploadServletRequestImpl(
-		Map<String, FileItem[]> fileParams,
-		Map<String, List<String>> regularParams, HttpServletRequest request) {
+		HttpServletRequest request, Map<String, FileItem[]> fileParams,
+		Map<String, List<String>> regularParams) {
 
 		super(request);
 
