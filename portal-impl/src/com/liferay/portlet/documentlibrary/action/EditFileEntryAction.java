@@ -220,8 +220,7 @@ public class EditFileEntryAction extends PortletAction {
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException ||
-					 e instanceof StorageFieldRequiredException ||
-					 e instanceof UploadException) {
+					 e instanceof StorageFieldRequiredException) {
 
 				if (!cmd.equals(Constants.ADD_MULTIPLE) &&
 					!cmd.equals(Constants.ADD_TEMP)) {
