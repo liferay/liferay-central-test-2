@@ -101,7 +101,6 @@ boolean checkedOut = false;
 boolean draft = false;
 boolean hasLock = false;
 boolean pending = false;
-boolean saveAsDraft = false;
 
 Lock lock = null;
 
@@ -114,30 +113,18 @@ if (fileEntry != null) {
 	pending = fileVersion.isPending();
 }
 
+boolean saveAsDraft = false;
+
+if ((checkedOut || pending) && !PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
+	saveAsDraft = true;
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
-
-String saveButtonLabel = "save";
-
-if ((fileVersion == null) || draft || approved) {
-	saveButtonLabel = "save-as-draft";
-}
-
-String publishButtonLabel = "publish";
-
-if (DLUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, folderId, fileEntryTypeId)) {
-	publishButtonLabel = "submit-for-publication";
-}
-
-if ((checkedOut || pending) && !PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
-	publishButtonLabel = "save";
-
-	saveAsDraft = true;
-}
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -427,9 +414,30 @@ else if (dlFileEntryType != null) {
 		</c:if>
 
 		<aui:button-row>
+
+			<%
+			String saveButtonLabel = "save";
+
+			if ((fileVersion == null) || draft || approved) {
+				saveButtonLabel = "save-as-draft";
+			}
+			%>
+
 			<c:if test="<%= PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED %>">
 				<aui:button disabled="<%= checkedOut && !hasLock %>" name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' value="<%= saveButtonLabel %>" />
 			</c:if>
+
+			<%
+			String publishButtonLabel = "publish";
+
+			if (DLUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, folderId, fileEntryTypeId)) {
+				publishButtonLabel = "submit-for-publication";
+			}
+
+			if (saveAsDraft) {
+				publishButtonLabel = "save";
+			}
+			%>
 
 			<aui:button disabled="<%= checkedOut && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
