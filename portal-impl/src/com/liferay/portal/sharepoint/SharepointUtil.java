@@ -107,10 +107,7 @@ public class SharepointUtil {
 	}
 
 	public static String stripService(String url, boolean trailingSlash) {
-		url = _stripService(url, "sharepoint", trailingSlash);
-		url = _stripService(url, "webdav", trailingSlash);
-
-		return url;
+		return _instance._stripService(url, trailingSlash);
 	}
 
 	private SharepointUtil() {
@@ -151,7 +148,14 @@ public class SharepointUtil {
 		return _storageMap.values();
 	}
 
-	private static String _stripService(
+	private String _stripService(String url, boolean trailingSlash) {
+		url = _stripService(url, "sharepoint", trailingSlash);
+		url = _stripService(url, "webdav", trailingSlash);
+
+		return url;
+	}
+
+	private String _stripService(
 		String url, String service, boolean trailingSlash) {
 
 		if (trailingSlash) {

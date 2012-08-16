@@ -44,13 +44,13 @@ public class UrlToWebUrlMethodImpl extends BaseMethodImpl {
 
 		if (Validator.isNotNull(url)) {
 			if (_log.isInfoEnabled()) {
-				_log.info("Original url " + url);
+				_log.info("Original URL " + url);
 			}
 
 			url = SharepointUtil.stripService(url, false);
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Modified url " + url);
+				_log.info("Modified URL " + url);
 			}
 
 			elements.add(new Property("fileUrl", url));

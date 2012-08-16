@@ -188,18 +188,21 @@ public class SecureFilter extends BasePortalFilter {
 	protected void initPermissionChecker(HttpServletRequest request)
 		throws Exception {
 
-		if (_usePermissionChecker) {
-			User user = (User) request.getSession().getAttribute(WebKeys.USER);
-
-			PrincipalThreadLocal.setName(user.getUserId());
-			PrincipalThreadLocal.setPassword(
-				PortalUtil.getUserPassword(request));
-
-			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+		if (!_usePermissionChecker) {
+			return;
 		}
+
+		HttpSession session = request.getSession();
+
+		User user = (User)session.getAttribute(WebKeys.USER);
+
+		PrincipalThreadLocal.setName(user.getUserId());
+		PrincipalThreadLocal.setPassword(PortalUtil.getUserPassword(request));
+
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 	}
 
 	@Override
