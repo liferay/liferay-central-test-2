@@ -422,7 +422,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 		BBCodeItem bbCodeItem = null;
 
-		if (marker.getValue() + 1 < bbCodeItems.size()) {
+		if ((marker.getValue() + 1) < bbCodeItems.size()) {
 			if (data.matches("\\A\r?\n\\z")) {
 				bbCodeItem = bbCodeItems.get(marker.getValue() + 1);
 
