@@ -62,6 +62,26 @@ public class ConfigurePortletMGShowActionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
+							"//iframe[@id='_31_configurationIframeDialog']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.selectFrame("//iframe[@id='_31_configurationIframeDialog']");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
 							"//input[contains(@id,'showActionsCheckbox')]")) {
 					break;
 				}
@@ -86,5 +106,6 @@ public class ConfigurePortletMGShowActionsTest extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertTrue(selenium.isChecked(
 				"//input[contains(@id,'showActionsCheckbox')]"));
+		selenium.selectFrame("relative=top");
 	}
 }
