@@ -67,6 +67,12 @@ public class ParallelDestination extends BaseAsyncDestination {
 			message.put("companyId", CompanyThreadLocal.getCompanyId());
 		}
 
+		if (!message.contains("permissionChecker")) {
+			message.put(
+				"permissionChecker",
+				PermissionThreadLocal.getPermissionChecker());
+		}
+
 		if (!message.contains("principalName")) {
 			message.put("principalName", PrincipalThreadLocal.getName());
 		}
@@ -74,12 +80,6 @@ public class ParallelDestination extends BaseAsyncDestination {
 		if (!message.contains("principalPassword")) {
 			message.put(
 				"principalPassword", PrincipalThreadLocal.getPassword());
-		}
-
-		if (!message.contains("permissionChecker")) {
-			message.put(
-				"permissionChecker",
-				PermissionThreadLocal.getPermissionChecker());
 		}
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
@@ -95,6 +95,14 @@ public class ParallelDestination extends BaseAsyncDestination {
 							CompanyThreadLocal.setCompanyId(messageCompanyId);
 						}
 
+						PermissionChecker permissionChecker =
+							(PermissionChecker)message.get("permissionChecker");
+
+						if (permissionChecker != null) {
+							PermissionThreadLocal.setPermissionChecker(
+								permissionChecker);
+						}
+
 						String messagePrincipalName = message.getString(
 							"principalName");
 
@@ -108,14 +116,6 @@ public class ParallelDestination extends BaseAsyncDestination {
 						if (Validator.isNotNull(messagePrincipalPassword)) {
 							PrincipalThreadLocal.setPassword(
 								messagePrincipalPassword);
-						}
-
-						PermissionChecker permissionChecker =
-							(PermissionChecker)message.get("permissionChecker");
-
-						if (permissionChecker != null) {
-							PermissionThreadLocal.setPermissionChecker(
-								permissionChecker);
 						}
 
 						Boolean clusterForwardMessage = (Boolean)message.get(
