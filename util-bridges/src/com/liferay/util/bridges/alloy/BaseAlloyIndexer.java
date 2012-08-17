@@ -39,9 +39,7 @@ import java.util.List;
  */
 public abstract class BaseAlloyIndexer extends BaseIndexer {
 
-	public BaseAlloyIndexer(String portletId, String className)
-		throws Exception {
-
+	public BaseAlloyIndexer(String portletId, String className) {
 		this.portletId = portletId;
 		classNames = new String[] {className};
 
@@ -57,16 +55,21 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 			className.substring(0, pos) + ".service." + simpleClassName +
 				"LocalServiceUtil";
 
-		Class<?> serviceClass = classLoader.loadClass(serviceClassName);
+		try {
+			Class<?> serviceClass = classLoader.loadClass(serviceClassName);
 
-		getModelMethod = serviceClass.getMethod(
-			"get" + simpleClassName, new Class[] {long.class});
-		getModelsCountMethod = serviceClass.getMethod(
-			"get" + TextFormatter.formatPlural(simpleClassName) + "Count",
-			new Class[0]);
-		getModelsMethod = serviceClass.getMethod(
-			"get" + TextFormatter.formatPlural(simpleClassName),
-			new Class[] {int.class, int.class});
+			getModelMethod = serviceClass.getMethod(
+				"get" + simpleClassName, new Class[] {long.class});
+			getModelsCountMethod = serviceClass.getMethod(
+				"get" + TextFormatter.formatPlural(simpleClassName) + "Count",
+				new Class[0]);
+			getModelsMethod = serviceClass.getMethod(
+				"get" + TextFormatter.formatPlural(simpleClassName),
+				new Class[] {int.class, int.class});
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public String[] getClassNames() {
