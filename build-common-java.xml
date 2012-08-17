@@ -87,11 +87,10 @@
 					output="."
 					sourcepath="."
 				>
+					<bndfiles path="bnd.bnd" />
 					<classpath>
 						<pathelement location="classes" />
 					</classpath>
-
-					<bndfiles path="bnd.bnd" />
 				</bnd>
 			</then>
 			<else>
