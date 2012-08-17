@@ -27,8 +27,8 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class WikiPortletDisplayTemplateHandler extends
-	BasePortletDisplayTemplateHandler {
+public class WikiPortletDisplayTemplateHandler
+	extends BasePortletDisplayTemplateHandler {
 
 	public String getClassName() {
 		return WikiPage.class.getName();

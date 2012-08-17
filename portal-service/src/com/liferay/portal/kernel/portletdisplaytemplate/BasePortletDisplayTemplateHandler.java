@@ -17,6 +17,6 @@ package com.liferay.portal.kernel.portletdisplaytemplate;
 /**
  * @author Eduardo Garcia
  */
-public abstract class BasePortletDisplayTemplateHandler implements
-	PortletDisplayTemplateHandler {
+public abstract class BasePortletDisplayTemplateHandler
+	implements PortletDisplayTemplateHandler {
 }

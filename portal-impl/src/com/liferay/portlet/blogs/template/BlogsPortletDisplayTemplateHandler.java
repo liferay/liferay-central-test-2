@@ -27,8 +27,8 @@ import java.util.Locale;
 /**
  * @author Juan Fernández
  */
-public class BlogsPortletDisplayTemplateHandler extends
-	BasePortletDisplayTemplateHandler {
+public class BlogsPortletDisplayTemplateHandler
+	extends BasePortletDisplayTemplateHandler {
 
 	public String getClassName() {
 		return BlogsEntry.class.getName();

@@ -42,7 +42,7 @@ public class PortletDisplayTemplateUtil {
 
 	public static PortletDisplayTemplate getPortletDisplayTemplate() {
 		PortalRuntimePermission.checkGetBeanProperty(
-				PortletDisplayTemplate.class);
+			PortletDisplayTemplate.class);
 
 		return _portletDisplayTemplate;
 	}

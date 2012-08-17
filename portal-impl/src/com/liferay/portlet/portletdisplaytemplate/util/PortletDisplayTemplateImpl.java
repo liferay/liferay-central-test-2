@@ -41,6 +41,7 @@ import javax.portlet.RenderResponse;
 /**
  * @author Eduardo Garcia
  * @author Juan Fernandez
+ * @author Brian Wing Shun Chan
  */
 public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 
@@ -95,9 +96,9 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 					scopeGroup.getGroupId());
 
 				if (GetterUtil.getBoolean(
-					scopeGroup.getTypeSettingsProperty(
-						StagingConstants.STAGED_PORTLET +
-							PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
+						scopeGroup.getTypeSettingsProperty(
+							StagingConstants.STAGED_PORTLET +
+								PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
 
 					return stagingGroup.getGroupId();
 				}
@@ -106,9 +107,9 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 				Group liveGroup = scopeGroup.getLiveGroup();
 
 				if (!GetterUtil.getBoolean(
-					liveGroup.getTypeSettingsProperty(
-						StagingConstants.STAGED_PORTLET +
-							PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
+						liveGroup.getTypeSettingsProperty(
+							StagingConstants.STAGED_PORTLET +
+								PortletKeys.PORTLET_DISPLAY_TEMPLATES))) {
 
 					return liveGroup.getGroupId();
 				}
@@ -129,11 +130,11 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		long portletDisplayDDMTemplateId = 0;
 
 		long portletDisplayDDMTemplateGroupId = getDDMTemplateGroupId(
-				themeDisplay);
+			themeDisplay);
 
 		if (displayStyle.startsWith("ddmTemplate_")) {
 			DDMTemplate portletDisplayDDMTemplate = fetchDDMTemplate(
-					portletDisplayDDMTemplateGroupId, displayStyle);
+				portletDisplayDDMTemplateGroupId, displayStyle);
 
 			if (portletDisplayDDMTemplate != null) {
 				portletDisplayDDMTemplateId =
@@ -221,7 +222,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		return contextObjects;
 	}
 
-	private Log _log = LogFactoryUtil.getLog(PortletDisplayTemplateImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletDisplayTemplateImpl.class);
 
 	private Transformer _transformer = new DDLTransformer();
 
