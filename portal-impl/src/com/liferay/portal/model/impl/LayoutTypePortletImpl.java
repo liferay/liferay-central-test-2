@@ -1589,8 +1589,8 @@ public class LayoutTypePortletImpl
 		List<String> portletIdList = new UniqueList<String>();
 
 		for (String portletId : portletIds) {
-			removeStatesPortletId(portletId);
 			removeModesPortletId(portletId);
+			removeStatesPortletId(portletId);
 
 			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
@@ -1608,17 +1608,19 @@ public class LayoutTypePortletImpl
 
 					String key = entry.getKey();
 
-					if (key.startsWith(portletNamespace)) {
-						String nestedPortletIds = entry.getValue();
+					if (!key.startsWith(portletNamespace)) {
+						continue;
+					}
 
-						for (String curPortletId :
-								StringUtil.split(nestedPortletIds)) {
+					String nestedPortletIds = entry.getValue();
 
-							removeStatesPortletId(curPortletId);
-							removeModesPortletId(curPortletId);
+					for (String nestedPortletId :
+							StringUtil.split(nestedPortletIds)) {
 
-							portletIdList.add(curPortletId);
-						}
+						removeModesPortletId(nestedPortletId);
+						removeStatesPortletId(nestedPortletId);
+
+						portletIdList.add(nestedPortletId);
 					}
 				}
 
@@ -1627,9 +1629,10 @@ public class LayoutTypePortletImpl
 		}
 
 		try {
-			PortletLocalServiceUtil.removePortletByPreferences(
-				getPlid(), getCompanyId(),
-				portletIdList.toArray(new String[portletIdList.size()]));
+			PortletLocalServiceUtil.deletePortlets(
+				getCompanyId(),
+				portletIdList.toArray(new String[portletIdList.size()]),
+				getPlid());
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);

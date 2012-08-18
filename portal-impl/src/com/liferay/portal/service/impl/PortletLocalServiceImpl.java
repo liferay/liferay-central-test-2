@@ -220,6 +220,48 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return (Portlet)portlet.clone();
 	}
 
+	public void deletePortlet(long companyId, String portletId, long plid)
+		throws PortalException, SystemException {
+
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
+
+		resourceLocalService.deleteResource(
+			companyId, rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL,
+			PortletPermissionUtil.getPrimaryKey(plid, portletId));
+
+		List<PortletPreferences> portletPreferencesList =
+			portletPreferencesLocalService.getPortletPreferences(
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
+
+		Portlet portlet = getPortletById(companyId, portletId);
+
+		PortletLayoutListener portletLayoutListener = null;
+
+		if (portlet != null) {
+			portletLayoutListener = portlet.getPortletLayoutListenerInstance();
+
+			PortletInstanceFactoryUtil.delete(portlet);
+		}
+
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
+			if (portletLayoutListener != null) {
+				portletLayoutListener.onRemoveFromLayout(
+					portletPreferences.getPortletId(), plid);
+			}
+
+			portletPreferencesLocalService.deletePortletPreferences(
+				portletPreferences.getPortletPreferencesId());
+		}
+	}
+
+	public void deletePortlets(long companyId, String[] portletIds, long plid)
+		throws PortalException, SystemException {
+
+		for (String portletId : portletIds) {
+			deletePortlet(companyId, portletId, plid);
+		}
+	}
+
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws PortalException, SystemException {
 
@@ -808,49 +850,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	@Transactional(enabled = false)
 	public void removeCompanyPortletsPool(long companyId) {
 		_companyPortletsPool.remove(companyId);
-	}
-
-	public void removePortletByPreferences(
-			long plid, long companyId, String portletId)
-		throws PortalException, SystemException {
-
-		String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
-		resourceLocalService.deleteResource(
-			companyId, rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL,
-			PortletPermissionUtil.getPrimaryKey(plid, portletId));
-
-		List<PortletPreferences> portletPreferencesList =
-			portletPreferencesLocalService.getPortletPreferences(
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
-
-		Portlet portlet = getPortletById(companyId, portletId);
-		PortletLayoutListener portletLayoutListener = null;
-
-		if (portlet != null) {
-			portletLayoutListener = portlet.getPortletLayoutListenerInstance();
-
-			PortletInstanceFactoryUtil.delete(portlet);
-		}
-
-		for (PortletPreferences portletPreferences : portletPreferencesList) {
-			if (portletLayoutListener != null) {
-				portletLayoutListener.onRemoveFromLayout(
-					portletPreferences.getPortletId(), plid);
-			}
-
-			portletPreferencesLocalService.deletePortletPreferences(
-				portletPreferences.getPortletPreferencesId());
-		}
-	}
-
-	public void removePortletByPreferences(
-			long plid, long companyId, String[] portletIds)
-		throws PortalException, SystemException {
-
-		for (String portletId : portletIds) {
-			removePortletByPreferences(plid, companyId, portletId);
-		}
 	}
 
 	public Portlet updatePortlet(
