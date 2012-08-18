@@ -1100,7 +1100,7 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public void waitForPopUp(String windowID, String timeout) {
-		int wait;
+		int wait = 0;
 
 		if (timeout.equals("")) {
 			wait = 30;
@@ -1110,8 +1110,10 @@ public class WebDriverToSeleniumBridge
 		}
 
 		if (windowID.equals("") || windowID.equals("null")) {
-			for (int second = 0; second <= wait; second++) {
-				if (getWindowHandles().size() > 1) {
+			for (int i = 0; i <= wait; i++) {
+				Set<String> windowHandles = getWindowHandles();
+
+				if (windowHandles.size() > 1) {
 					return;
 				}
 
@@ -1129,7 +1131,7 @@ public class WebDriverToSeleniumBridge
 				targetWindowTitle = targetWindowTitle.substring(6);
 			}
 
-			for (int second = 0; second <= wait; second++) {
+			for (int i = 0; i <= wait; i++) {
 				for (String windowHandle : getWindowHandles()) {
 					WebDriver.TargetLocator targetLocator = switchTo();
 
@@ -1150,7 +1152,7 @@ public class WebDriverToSeleniumBridge
 			}
 		}
 
-		BaseTestCase.fail("Could not find the windowID: \"" + windowID + "\"");
+		BaseTestCase.fail("Unable to find the window ID \"" + windowID + "\"");
 	}
 
 	public void windowFocus() {
@@ -1175,44 +1177,42 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement;
 
 		if (locator.startsWith("//")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
-					By.xpath(locator)));
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
 		}
 		else if (locator.startsWith("class=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.className(locator.substring(6))));
 		}
 		else if (locator.startsWith("css=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.cssSelector(locator.substring(4))));
 		}
 		else if (locator.startsWith("link=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.linkText(locator.substring(5))));
 		}
 		else if (locator.startsWith("name=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.name(locator.substring(5))));
 		}
 		else if (locator.startsWith("tag=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.tagName(locator.substring(4))));
 		}
 		else if (locator.startsWith("xpath=") || locator.startsWith("xPath=")) {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(
 					By.xpath(locator.substring(6))));
 		}
 		else {
-			webElement =
-				wait.until(ExpectedConditions.presenceOfElementLocated(
-					By.id(locator)));
+			webElement = wait.until(
+				ExpectedConditions.presenceOfElementLocated(By.id(locator)));
 		}
 
 		return webElement;
