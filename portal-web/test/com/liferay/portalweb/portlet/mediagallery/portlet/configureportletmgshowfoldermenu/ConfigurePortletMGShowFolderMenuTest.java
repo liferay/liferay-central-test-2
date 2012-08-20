@@ -74,7 +74,23 @@ public class ConfigurePortletMGShowFolderMenuTest extends BaseTestCase {
 		}
 
 		selenium.selectFrame("//iframe[@id='_31_configurationIframeDialog']");
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//script[contains(@src,'/liferay/navigation_interaction.js')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
