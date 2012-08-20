@@ -47,8 +47,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PortletContainerUtil {
 
-	public static List<LayoutTypePortlet> getLayoutTypePortlets(
-			Layout requestLayout)
+	public static List<LayoutTypePortlet> getLayoutTypePortlets(Layout layout)
 		throws PortletContainerException {
 
 		if (_PORTLET_EVENT_DISTRIBUTION_LAYOUT_SET) {
@@ -56,7 +55,7 @@ public class PortletContainerUtil {
 
 			try {
 				layouts = LayoutLocalServiceUtil.getLayouts(
-					requestLayout.getGroupId(), requestLayout.isPrivateLayout(),
+					layout.getGroupId(), layout.isPrivateLayout(),
 					LayoutConstants.TYPE_PORTLET);
 			}
 			catch (SystemException se) {
@@ -66,9 +65,9 @@ public class PortletContainerUtil {
 			List<LayoutTypePortlet> layoutTypePortlets =
 				new ArrayList<LayoutTypePortlet>(layouts.size());
 
-			for (Layout layout : layouts) {
+			for (Layout curLayout : layouts) {
 				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
+					(LayoutTypePortlet)curLayout.getLayoutType();
 
 				layoutTypePortlets.add(layoutTypePortlet);
 			}
@@ -76,12 +75,12 @@ public class PortletContainerUtil {
 			return layoutTypePortlets;
 		}
 
-		if (requestLayout.isTypePortlet()) {
+		if (layout.isTypePortlet()) {
 			List<LayoutTypePortlet> layoutTypePortlets =
 				new ArrayList<LayoutTypePortlet>(1);
 
 			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)requestLayout.getLayoutType();
+				(LayoutTypePortlet)layout.getLayoutType();
 
 			layoutTypePortlets.add(layoutTypePortlet);
 
