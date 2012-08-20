@@ -769,8 +769,9 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addTrashFields(
-		Document document, String className, long classPK, Date removedDate,
-		String userName, String type) throws SystemException {
+			Document document, String className, long classPK, Date removedDate,
+			String removedByUserName, String type)
+		throws SystemException {
 
 		TrashEntry trashEntry = TrashEntryLocalServiceUtil.fetchEntry(
 			className, classPK);
@@ -786,9 +787,9 @@ public abstract class BaseIndexer implements Indexer {
 
 		document.addDate(Field.REMOVED_DATE, removedDate);
 
-		if (userName == null) {
+		if (removedByUserName == null) {
 			if (trashEntry != null) {
-				userName = trashEntry.getUserName();
+				removedByUserName = trashEntry.getUserName();
 			}
 			else {
 				ServiceContext serviceContext =
@@ -798,7 +799,7 @@ public abstract class BaseIndexer implements Indexer {
 					User user = UserLocalServiceUtil.getUser(
 						serviceContext.getUserId());
 
-					userName = user.getFullName();
+					removedByUserName = user.getFullName();
 				}
 				catch (PortalException pe) {
 				}
@@ -806,7 +807,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		document.addKeyword(
-			Field.REMOVED_BY_USER_NAME, userName, true);
+			Field.REMOVED_BY_USER_NAME, removedByUserName, true);
 
 		if (type == null) {
 			if (trashEntry != null) {
