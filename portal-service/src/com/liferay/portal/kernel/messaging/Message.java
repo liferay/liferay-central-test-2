@@ -165,7 +165,7 @@ public class Message implements Cloneable, Serializable {
 			_values = new HashMap<String, Object>();
 		}
 
-		if (value instanceof Serializable) {
+		if (!(value instanceof Serializable)) {
 			value = new TransientValue<Object>(value);
 		}
 
