@@ -58,14 +58,14 @@ if (portletDisplay.isAccess() && portletDisplay.isActive() && (portletTitle == n
 }
 
 if (portletTitle == null) {
-	portletTitle = PortalUtil.getPortletTitle(portlet, pageContext.getServletContext(), locale);
+	portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 }
 
 portletDisplay.setTitle(portletTitle);
 
 // Portlet description
 
-String portletDescription = PortalUtil.getPortletDescription(portlet, pageContext.getServletContext(), locale);
+String portletDescription = PortalUtil.getPortletDescription(portlet, application, locale);
 
 portletDisplay.setDescription(portletDescription);
 
