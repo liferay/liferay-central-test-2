@@ -82,7 +82,7 @@ List<Group> mySites = user.getMySites(true, max);
 					showPrivateSite = PropsValues.MY_SITES_SHOW_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
 				else if (mySite.isOrganization()) {
-					showPrivateSite = false;
+					showPublicSite = false;
 				}
 				else if (mySite.isUser()) {
 					showPrivateSite = PropsValues.MY_SITES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
