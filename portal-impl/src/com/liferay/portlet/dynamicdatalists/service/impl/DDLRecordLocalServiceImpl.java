@@ -146,9 +146,9 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 	public void deleteRecord(DDLRecord record)
 		throws PortalException, SystemException {
 
-		String dirName = DDMUtil.getFileUploadPath(record);
-
 		// Record
+
+		String dirName = DDMUtil.getFileUploadPath(record);
 
 		ddlRecordPersistence.remove(record);
 
