@@ -3161,18 +3161,14 @@ public class PortalImpl implements Portal {
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
-		String portletId = portlet.getRootPortletId();
-
-		String portletDescription =
-			ResourceBundleUtil.getString(
-				resourceBundle,
-				JavaConstants.JAVAX_PORTLET_DESCRIPTION.concat(
-					StringPool.PERIOD).concat(portletId));
+		String portletDescription = ResourceBundleUtil.getString(
+			resourceBundle,
+			JavaConstants.JAVAX_PORTLET_DESCRIPTION.concat(
+				StringPool.PERIOD).concat(portlet.getRootPortletId()));
 
 		if (Validator.isNull(portletDescription)) {
-			portletDescription =
-				ResourceBundleUtil.getString(
-					resourceBundle, JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+			portletDescription = ResourceBundleUtil.getString(
+				resourceBundle, JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 		}
 
 		return portletDescription;
@@ -3447,18 +3443,14 @@ public class PortalImpl implements Portal {
 
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
-		String portletId = portlet.getRootPortletId();
-
-		String portletTitle =
-			ResourceBundleUtil.getString(
-				resourceBundle,
-				JavaConstants.JAVAX_PORTLET_TITLE.concat(StringPool.PERIOD)
-					.concat(portletId));
+		String portletTitle = ResourceBundleUtil.getString(
+			resourceBundle,
+			JavaConstants.JAVAX_PORTLET_TITLE.concat(StringPool.PERIOD).concat(
+				portlet.getRootPortletId()));
 
 		if (Validator.isNull(portletTitle)) {
-			portletTitle =
-				ResourceBundleUtil.getString(
-					resourceBundle, JavaConstants.JAVAX_PORTLET_TITLE);
+			portletTitle = ResourceBundleUtil.getString(
+				resourceBundle, JavaConstants.JAVAX_PORTLET_TITLE);
 		}
 
 		return portletTitle;
