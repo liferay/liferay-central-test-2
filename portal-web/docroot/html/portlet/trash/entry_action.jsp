@@ -33,7 +33,7 @@ if (row != null) {
 	entry = (TrashEntry)row.getObject();
 }
 else {
-	entry = (TrashEntry)request.getAttribute("view_content.jsp-trashEntry");
+	entry = (TrashEntry)request.getAttribute(WebKeys.TRASH_ENTRY);
 }
 %>
 

@@ -56,7 +56,7 @@
 	<c:if test="<%= ((entry != null) && (entry.getRootEntry() == null)) || Validator.isNotNull(trashRenderer.renderActions(renderRequest, renderResponse)) %>">
 
 		<%
-		request.setAttribute("view_content.jsp-trashEntry", entry);
+		request.setAttribute(WebKeys.TRASH_ENTRY, entry);
 		%>
 
 		<liferay-util:include page='<%= (entry != null) && (entry.getRootEntry() == null) ? "/html/portlet/trash/entry_action.jsp" : trashRenderer.renderActions(renderRequest, renderResponse) %>' />
