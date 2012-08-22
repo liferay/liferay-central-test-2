@@ -51,11 +51,8 @@ List<Group> mySites = user.getMySites(true, max);
 			}
 
 			if (mySite.getPublicLayoutsPageCount() == 0) {
-				if (mySite.isSite()) {
+				if (mySite.isRegularSite()) {
 					showPublicSite = PropsValues.MY_SITES_SHOW_PUBLIC_SITES_WITH_NO_LAYOUTS;
-				}
-				else if (mySite.isOrganization()) {
-					showPublicSite = false;
 				}
 				else if (mySite.isUser()) {
 					showPublicSite = PropsValues.MY_SITES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
@@ -78,11 +75,8 @@ List<Group> mySites = user.getMySites(true, max);
 			}
 
 			if (mySite.getPrivateLayoutsPageCount() == 0) {
-				if (mySite.isSite()) {
+				if (mySite.isRegularSite()) {
 					showPrivateSite = PropsValues.MY_SITES_SHOW_PRIVATE_SITES_WITH_NO_LAYOUTS;
-				}
-				else if (mySite.isOrganization()) {
-					showPublicSite = false;
 				}
 				else if (mySite.isUser()) {
 					showPrivateSite = PropsValues.MY_SITES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
@@ -93,6 +87,11 @@ List<Group> mySites = user.getMySites(true, max);
 				}
 			}
 			else if ((defaultPrivateLayout != null ) && !LayoutPermissionUtil.contains(permissionChecker, defaultPrivateLayout, true, ActionKeys.VIEW)) {
+				showPrivateSite = false;
+			}
+
+			if (!mySite.isControlPanel() && !mySite.isSite() && !mySite.isUser()) {
+				showPublicSite = false;
 				showPrivateSite = false;
 			}
 		%>
@@ -301,7 +300,7 @@ List<Group> mySites = user.getMySites(true, max);
 						String publicAddPageHREF = null;
 						String privateAddPageHREF = null;
 
-						if (mySite.isSite() && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.ADD_LAYOUT)) {
+						if (mySite.isRegularSite() && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.ADD_LAYOUT)) {
 							PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
 
 							addPageURL.setWindowState(WindowState.NORMAL);
