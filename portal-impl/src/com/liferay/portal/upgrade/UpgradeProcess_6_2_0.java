@@ -35,9 +35,9 @@ public class UpgradeProcess_6_2_0 extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeCustomizablePortlets.class);
 		upgrade(UpgradeDynamicDataMapping.class);
 		upgrade(UpgradeUser.class);
-		upgrade(UpgradeCustomizablePortlets.class);
 	}
 
 }

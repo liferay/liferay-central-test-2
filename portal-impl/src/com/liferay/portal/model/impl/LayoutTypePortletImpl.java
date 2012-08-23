@@ -1226,7 +1226,7 @@ public class LayoutTypePortletImpl
 	}
 
 	protected void copyPreferences(
-		String sourcePortletId, String targetPortletId, long userId) {
+		long userId, String sourcePortletId, String targetPortletId) {
 
 		Layout layout = getLayout();
 
@@ -1255,8 +1255,6 @@ public class LayoutTypePortletImpl
 	}
 
 	protected String getColumn(String portletId) {
-		String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
 		List<String> columns = getColumns();
 
 		for (String columnId : columns) {
@@ -1265,8 +1263,8 @@ public class LayoutTypePortletImpl
 			String[] portletIds = StringUtil.split(columnValue);
 
 			for (String columnPortletId : portletIds) {
-				if (PortletConstants.getRootPortletId(columnPortletId).equals(
-						rootPortletId)) {
+				if (PortletConstants.hasIdenticalRootPortletId(
+						columnPortletId, portletId)) {
 
 					return columnId;
 				}
@@ -1474,14 +1472,15 @@ public class LayoutTypePortletImpl
 
 		String[] newPortletIds = new String[portletIds.length];
 
-		long userId = _portalPreferences.getUserId();
-
 		for (int i = 0; i < portletIds.length; i++) {
 			if (PortletConstants.hasInstanceId(portletIds[i])) {
 				newPortletIds[i] = PortletConstants.assemblePortletId(
-					portletIds[i], userId, generateInstanceId());
+					portletIds[i], _portalPreferences.getUserId(),
+					generateInstanceId());
 
-				copyPreferences(portletIds[i], newPortletIds[i], userId);
+				copyPreferences(
+					_portalPreferences.getUserId(), portletIds[i],
+					newPortletIds[i]);
 			}
 			else {
 				newPortletIds[i] = portletIds[i];
@@ -1516,11 +1515,9 @@ public class LayoutTypePortletImpl
 
 		String[] columnValues = StringUtil.split(columnValue);
 
-		String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
 		for (String nonstaticPortletId : columnValues) {
-			if (PortletConstants.getRootPortletId(nonstaticPortletId).equals(
-					rootPortletId)) {
+			if (PortletConstants.hasIdenticalRootPortletId(
+					nonstaticPortletId, portletId)) {
 
 				return true;
 			}
@@ -1538,19 +1535,17 @@ public class LayoutTypePortletImpl
 		String[] staticPortletIdsEnd = getStaticPortletIds(
 			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
 
-		String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
 		for (String staticPortletId : staticPortletIdsStart) {
-			if (PortletConstants.getRootPortletId(staticPortletId).equals(
-					rootPortletId)) {
+			if (PortletConstants.hasIdenticalRootPortletId(
+					staticPortletId, portletId)) {
 
 				return true;
 			}
 		}
 
 		for (String staticPortletId : staticPortletIdsEnd) {
-			if (PortletConstants.getRootPortletId(staticPortletId).equals(
-					rootPortletId)) {
+			if (PortletConstants.hasIdenticalRootPortletId(
+					staticPortletId, portletId)) {
 
 				return true;
 			}
@@ -1593,9 +1588,9 @@ public class LayoutTypePortletImpl
 			removeModesPortletId(portletId);
 			removeStatesPortletId(portletId);
 
-			String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
 			portletIdList.add(portletId);
+
+			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
 			if (rootPortletId.equals(PortletKeys.NESTED_PORTLETS)) {
 				String portletNamespace = PortalUtil.getPortletNamespace(

@@ -62,16 +62,8 @@ public class UpgradeCustomizablePortletsTest
 	@Before
 	public void setUp() throws Exception {
 		FinderCacheUtil.clearCache();
-
-		_invokeSuper = false;
-		_newPortletIds = new UniqueList<String>();
-		_portletIds = new String[] {
-			"23", "71_INSTANCE_LhZwzy867qfr", "56_INSTANCE_LhZwzy867qqb",
-			"56_INSTANCE_LhZwzy867qxc"
-		};
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	@Transactional
 	public void testBasicPreferencesExtraction() throws Exception {
@@ -79,6 +71,7 @@ public class UpgradeCustomizablePortletsTest
 
 		long ownerId = 1234;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
+
 		String preferences = getPortalPreferencesString();
 
 		preferences = StringUtil.replace(
@@ -86,9 +79,9 @@ public class UpgradeCustomizablePortletsTest
 			new String[] {
 				"@plid@", "@portlet_1@", "@portlet_2@", "@portlet_3@",
 				"@portlet_4@"
-			} ,
+			},
 			ArraysUtil.join(
-				new String[] {String.valueOf(layout.getPlid())}, _portletIds));
+				new String[] {String.valueOf(layout.getPlid())}, _PORTLET_IDS));
 
 		PortalPreferencesWrapper portalPreferencesWrapper =
 			getPortalPreferences(ownerId, ownerType, preferences);
@@ -97,12 +90,10 @@ public class UpgradeCustomizablePortletsTest
 			portalPreferencesWrapper, ownerId, ownerType, preferences);
 
 		Assert.assertEquals(_newPortletIds.size(), 4);
-
 		Assert.assertFalse(PortletConstants.hasUserId(_newPortletIds.get(0)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(1)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(2)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(3)));
-
 		Assert.assertFalse(
 			PortletConstants.hasInstanceId(_newPortletIds.get(0)));
 		Assert.assertTrue(
@@ -113,10 +104,6 @@ public class UpgradeCustomizablePortletsTest
 			PortletConstants.hasInstanceId(_newPortletIds.get(3)));
 	}
 
-	/**
-	 * An upgrade test can't be @Transactional if the upgrade code uses JDBC
-	 * directly.
-	 */
 	@Test
 	public void testUpgrade() throws Exception {
 		_invokeSuper = true;
@@ -137,9 +124,9 @@ public class UpgradeCustomizablePortletsTest
 			new String[] {
 				"@plid@", "@portlet_1@", "@portlet_2@", "@portlet_3@",
 				"@portlet_4@"
-			} ,
+			},
 			ArraysUtil.join(
-				new String[] {String.valueOf(layout.getPlid())}, _portletIds));
+				new String[] {String.valueOf(layout.getPlid())}, _PORTLET_IDS));
 
 		PortalPreferencesWrapper portalPreferencesWrapper =
 			getPortalPreferences(ownerId, ownerType, preferences);
@@ -149,12 +136,10 @@ public class UpgradeCustomizablePortletsTest
 		doUpgrade();
 
 		Assert.assertEquals(_newPortletIds.size(), 4);
-
 		Assert.assertFalse(PortletConstants.hasUserId(_newPortletIds.get(0)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(1)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(2)));
 		Assert.assertTrue(PortletConstants.hasUserId(_newPortletIds.get(3)));
-
 		Assert.assertFalse(
 			PortletConstants.hasInstanceId(_newPortletIds.get(0)));
 		Assert.assertTrue(
@@ -178,7 +163,7 @@ public class UpgradeCustomizablePortletsTest
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _portletIds[1]);
+				layout.getPlid(), _PORTLET_IDS[1]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
 
@@ -190,7 +175,7 @@ public class UpgradeCustomizablePortletsTest
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _portletIds[2]);
+				layout.getPlid(), _PORTLET_IDS[2]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
 
@@ -202,11 +187,9 @@ public class UpgradeCustomizablePortletsTest
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _portletIds[3]);
+				layout.getPlid(), _PORTLET_IDS[3]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
-
-		// Self cleanup since we're not transactional
 
 		GroupLocalServiceUtil.deleteGroup(layout.getGroup());
 	}
@@ -239,16 +222,14 @@ public class UpgradeCustomizablePortletsTest
 	}
 
 	protected String getPortalPreferencesString() throws IOException {
-		InputStream inputStream = getClass().getResourceAsStream(
+		Class<?> clazz = getClass();
+
+		InputStream inputStream = clazz.getResourceAsStream(
 			"dependencies/portal-preferences.xml");
 
 		return StringUtil.read(inputStream);
 	}
 
-	/**
-	 * Stub replacing the default upgrade behavior for basic tests
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	protected String migratePortletPreferencesToUserPreferences(
 			long userId, long plid, String portletId)
@@ -272,6 +253,7 @@ public class UpgradeCustomizablePortletsTest
 		}
 
 		String instanceId = PortletConstants.getInstanceId(portletId);
+
 		newPortletId = PortletConstants.assemblePortletId(
 			portletId, userId, instanceId);
 
@@ -280,8 +262,12 @@ public class UpgradeCustomizablePortletsTest
 		return newPortletId;
 	}
 
-	protected boolean _invokeSuper;
-	protected List<String> _newPortletIds;
-	protected String[] _portletIds;
+	private static final String[] _PORTLET_IDS = new String[] {
+		"23", "71_INSTANCE_LhZwzy867qfr", "56_INSTANCE_LhZwzy867qqb",
+		"56_INSTANCE_LhZwzy867qxc"
+	};
+
+	private boolean _invokeSuper;
+	private List<String> _newPortletIds = new UniqueList<String>();
 
 }

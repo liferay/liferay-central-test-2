@@ -22,6 +22,114 @@ import com.liferay.portal.util.PortletKeys;
  */
 public class PortletConstantsTest extends TestCase {
 
+	public void testInstanceId_1() {
+		String portletId = PortletKeys.JOURNAL_CONTENT;
+
+		assertNull(PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_10() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, "1234");
+
+		assertTrue(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_11() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234);
+
+		assertFalse(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_12() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
+
+		assertTrue(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_13() {
+		String portletId = getWarPortletId();
+
+		assertFalse(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_14() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), "1234");
+
+		assertTrue(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_15() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234);
+
+		assertFalse(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_16() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234, "5678");
+
+		assertTrue(PortletConstants.hasInstanceId(portletId));
+	}
+
+	public void testInstanceId_2() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, "1234");
+
+		assertEquals("1234", PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_3() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234);
+
+		assertNull(PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_4() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
+
+		assertEquals("5678", PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_5() {
+		String portletId = getWarPortletId();
+
+		assertNull(PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_6() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), "1234");
+
+		assertEquals("1234", PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_7() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234);
+
+		assertNull(PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_8() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234, "5678");
+
+		assertEquals("5678", PortletConstants.getInstanceId(portletId));
+	}
+
+	public void testInstanceId_9() {
+		String portletId = PortletKeys.JOURNAL_CONTENT;
+
+		assertFalse(PortletConstants.hasInstanceId(portletId));
+	}
+
 	public void testRootPortletId_1() {
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
@@ -88,118 +196,58 @@ public class PortletConstantsTest extends TestCase {
 			getWarPortletId(), PortletConstants.getRootPortletId(portletId));
 	}
 
-	public void testInstanceId_1() {
-		String portletId = PortletKeys.JOURNAL_CONTENT;
-
-		assertNull(PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_2() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, "1234");
-
-		assertEquals("1234", PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_3() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234);
-
-		assertNull(PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_4() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
-
-		assertEquals("5678", PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_5() {
-		String portletId = getWarPortletId();
-
-		assertNull(PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_6() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), "1234");
-
-		assertEquals("1234", PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_7() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234);
-
-		assertNull(PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_8() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234, "5678");
-
-		assertEquals("5678", PortletConstants.getInstanceId(portletId));
-	}
-
-	public void testInstanceId_9() {
-		String portletId = PortletKeys.JOURNAL_CONTENT;
-
-		assertFalse(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_10() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, "1234");
-
-		assertTrue(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_11() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234);
-
-		assertFalse(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_12() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
-
-		assertTrue(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_13() {
-		String portletId = getWarPortletId();
-
-		assertFalse(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_14() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), "1234");
-
-		assertTrue(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_15() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234);
-
-		assertFalse(PortletConstants.hasInstanceId(portletId));
-	}
-
-	public void testInstanceId_16() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234, "5678");
-
-		assertTrue(PortletConstants.hasInstanceId(portletId));
-	}
-
 	public void testUserId_1() {
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
 		assertEquals(0, PortletConstants.getUserId(portletId));
+	}
+
+	public void testUserId_10() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, "1234");
+
+		assertFalse(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_11() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234);
+
+		assertTrue(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_12() {
+		String portletId = PortletConstants.assemblePortletId(
+			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
+
+		assertTrue(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_13() {
+		String portletId = getWarPortletId();
+
+		assertFalse(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_14() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), "1234");
+
+		assertFalse(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_15() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234);
+
+		assertTrue(PortletConstants.hasUserId(portletId));
+	}
+
+	public void testUserId_16() {
+		String portletId = PortletConstants.assemblePortletId(
+			getWarPortletId(), 1234, "5678");
+
+		assertTrue(PortletConstants.hasUserId(portletId));
 	}
 
 	public void testUserId_2() {
@@ -254,54 +302,6 @@ public class PortletConstantsTest extends TestCase {
 		String portletId = PortletKeys.JOURNAL_CONTENT;
 
 		assertFalse(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_10() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, "1234");
-
-		assertFalse(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_11() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234);
-
-		assertTrue(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_12() {
-		String portletId = PortletConstants.assemblePortletId(
-			PortletKeys.JOURNAL_CONTENT, 1234, "5678");
-
-		assertTrue(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_13() {
-		String portletId = getWarPortletId();
-
-		assertFalse(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_14() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), "1234");
-
-		assertFalse(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_15() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234);
-
-		assertTrue(PortletConstants.hasUserId(portletId));
-	}
-
-	public void testUserId_16() {
-		String portletId = PortletConstants.assemblePortletId(
-			getWarPortletId(), 1234, "5678");
-
-		assertTrue(PortletConstants.hasUserId(portletId));
 	}
 
 	protected String getWarPortletId() {

@@ -77,28 +77,9 @@ public class PortletConstants {
 	 *
 	 * @param portletId the portlet ID
 	 * @param userId a user ID
-	 * @returns a properly assembled portlet ID
 	 */
-	public static String assemblePortletId(
-		String portletId, long userId) {
-
+	public static String assemblePortletId(String portletId, long userId) {
 		return assemblePortletId(portletId, userId, null);
-	}
-
-	/**
-	 * Returns a properly assembled portlet ID from the parameters passed. If
-	 * the portlet ID contains a user ID it will be properly retained. If the
-	 * portlet ID contains an instance ID it will be replaced by the instance ID
-	 * parameter.
-	 *
-	 * @param portletId the portlet ID
-	 * @param instanceId an instance ID
-	 * @returns a properly assembled portlet ID
-	 */
-	public static String assemblePortletId(
-		String portletId, String instanceId) {
-
-		return assemblePortletId(portletId, 0, instanceId);
 	}
 
 	/**
@@ -109,7 +90,6 @@ public class PortletConstants {
 	 *
 	 * @param portletId the portlet ID
 	 * @param instanceId an instance ID
-	 * @returns a properly assembled portlet ID
 	 */
 	public static String assemblePortletId(
 		String portletId, long userId, String instanceId) {
@@ -139,6 +119,21 @@ public class PortletConstants {
 		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Returns a properly assembled portlet ID from the parameters passed. If
+	 * the portlet ID contains a user ID it will be properly retained. If the
+	 * portlet ID contains an instance ID it will be replaced by the instance ID
+	 * parameter.
+	 *
+	 * @param portletId the portlet ID
+	 * @param instanceId an instance ID
+	 */
+	public static String assemblePortletId(
+		String portletId, String instanceId) {
+
+		return assemblePortletId(portletId, 0, instanceId);
 	}
 
 	/**
@@ -173,9 +168,8 @@ public class PortletConstants {
 		else if (x != -1) {
 			return portletId.substring(0, x);
 		}
-		else {
-			return portletId.substring(0, y);
-		}
+
+		return portletId.substring(0, y);
 	}
 
 	/**
@@ -193,16 +187,22 @@ public class PortletConstants {
 			return 0;
 		}
 
-		String userIdPart = null;
-
 		if (y != -1) {
-			userIdPart = portletId.substring(x + USER_SEPARATOR.length(), y);
-		}
-		else {
-			userIdPart = portletId.substring(x + USER_SEPARATOR.length());
+			return GetterUtil.getLong(
+				portletId.substring(x + USER_SEPARATOR.length(), y));
 		}
 
-		return GetterUtil.getLong(userIdPart);
+		return GetterUtil.getLong(
+			portletId.substring(x + USER_SEPARATOR.length()));
+	}
+
+	public static boolean hasIdenticalRootPortletId(
+		String portletId1, String portletId2) {
+
+		String rootPortletId1 = getRootPortletId(portletId1);
+		String rootPortletId2 = getRootPortletId(portletId2);
+
+		return rootPortletId1.equals(rootPortletId2);
 	}
 
 	/**

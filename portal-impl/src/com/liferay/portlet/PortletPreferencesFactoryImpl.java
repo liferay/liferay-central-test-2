@@ -268,34 +268,14 @@ public class PortletPreferencesFactoryImpl
 			boolean modeEditGuest)
 		throws PortalException, SystemException {
 
-		// Below is a list of  the possible combinations, where we specify the
-		// the owner id, the layout id, portlet id, and the function.
-
-		// liferay.com.1, SHARED, PORTAL, preference is scoped per user across
-		// the entire portal
-
-		// COMPANY.liferay.com, SHARED, 56_INSTANCE_abcd, preference is scoped
-		// per portlet and company and is shared across all layouts
-
-		// GROUP.10, SHARED, 56_INSTANCE_abcd, preference is scoped per portlet
-		// and group and is shared across all layouts
-
-		// USER.liferay.com.1, SHARED, 56_INSTANCE_abcd, preference is scoped
-		// per portlet and user and is shared across all layouts
-
-		// PUB.10, 3, 56_INSTANCE_abcd, preference is scoped per portlet, group,
-		// and layout
-
-		// PUB.10.USER.liferay.com.1, 3, 56_INSTANCE_abcd, preference is scoped
-		// per portlet, user, and layout
-
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
+
+		String originalPortletId = portletId;
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), portletId);
 
-		String originalPortletId = portletId;
 		long ownerId = 0;
 		int ownerType = 0;
 		long plid = 0;
@@ -407,10 +387,11 @@ public class PortletPreferencesFactoryImpl
 			String defaultPreferences)
 		throws SystemException {
 
+		String originalPortletId = portletId;
+
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), portletId);
 
-		String originalPortletId = portletId;
 		boolean uniquePerLayout = false;
 		boolean uniquePerGroup = false;
 
