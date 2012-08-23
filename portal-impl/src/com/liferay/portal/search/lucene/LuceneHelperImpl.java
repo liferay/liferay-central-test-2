@@ -214,7 +214,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 					// LUCENE-89
 
-					value=value.toLowerCase(queryParser.getLocale());
+					value = value.toLowerCase(queryParser.getLocale());
 				}
 
 				query = queryParser.parse(value);
