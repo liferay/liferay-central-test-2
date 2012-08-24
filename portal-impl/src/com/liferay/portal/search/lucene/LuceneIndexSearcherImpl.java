@@ -481,19 +481,18 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			Locale locale, Document hitDoc, Set<String> matchingTerms)
 		throws IOException {
 
-		TermCollectingFormatter termCollectingFormatter =
-			new TermCollectingFormatter();
-
 		String snippetField = DocumentImpl.getLocalizedName(locale, field);
-
-		String[] values = doc.getValues(snippetField);
-
 		String snippet = null;
 
 		try {
 			org.apache.lucene.search.Query luceneQuery =
 				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
 					query);
+
+			String[] values = doc.getValues(snippetField);
+
+			TermCollectingFormatter termCollectingFormatter =
+				new TermCollectingFormatter();
 
 			if ((values != null) && (values.length > 0)) {
 				snippet = LuceneHelperUtil.getSnippet(
@@ -521,14 +520,15 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				return StringPool.BLANK;
 			}
 
-			matchingTerms.addAll(termCollectingFormatter.getCollectedTerms());
+			matchingTerms.addAll(termCollectingFormatter.getTerms());
 		}
 		catch (ParseException pe) {
 			_log.error("Query " + query, pe);
 		}
 
 		hitDoc.addText(
-			Field.SNIPPET + StringPool.UNDERLINE + snippetField, snippet);
+			Field.SNIPPET.concat(StringPool.UNDERLINE).concat(snippetField),
+			snippet);
 
 		return snippet;
 	}
@@ -596,11 +596,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					getSnippet(
 						document, query, Field.CONTENT, locale, subsetDocument,
 						queryTerms);
-
 					getSnippet(
 						document, query, Field.DESCRIPTION, locale,
 						subsetDocument, queryTerms);
-
 					getSnippet(
 						document, query, Field.TITLE, locale, subsetDocument,
 						queryTerms);
@@ -632,15 +630,15 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				queryTerms = getQueryTerms(query);
 			}
 
-			hits.setStart(startTime);
-			hits.setSearchTime(searchTime);
+			hits.setDocs(subsetDocs.toArray(new Document[subsetDocs.size()]));
+			hits.setLength(length);
 			hits.setQuery(query);
 			hits.setQueryTerms(
 				queryTerms.toArray(new String[queryTerms.size()]));
-			hits.setDocs(subsetDocs.toArray(new Document[subsetDocs.size()]));
-			hits.setLength(length);
 			hits.setScores(
 				subsetScores.toArray(new Float[subsetScores.size()]));
+			hits.setSearchTime(searchTime);
+			hits.setStart(startTime);
 		}
 
 		return hits;
@@ -703,21 +701,21 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 	private class TermCollectingFormatter implements Formatter {
 
-		public Set<String> getCollectedTerms() {
-			return _collectedTerms;
+		public Set<String> getTerms() {
+			return _terms;
 		}
 
 		public String highlightTerm(
 			String originalText, TokenGroup tokenGroup) {
 
 			if (tokenGroup.getTotalScore() > 0) {
-				_collectedTerms.add(originalText);
+				_terms.add(originalText);
 			}
 
 			return originalText;
 		}
 
-		private Set<String> _collectedTerms = new HashSet<String>();
+		private Set<String> _terms = new HashSet<String>();
 
 	}
 

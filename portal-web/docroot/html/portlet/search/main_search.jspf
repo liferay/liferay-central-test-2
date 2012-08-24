@@ -21,13 +21,14 @@ SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 searchContext.setAttribute("paginationType", "more");
 searchContext.setEnd(mainSearchSearchContainer.getEnd());
-searchContext.setStart(mainSearchSearchContainer.getStart());
 
 QueryConfig queryConfig = new QueryConfig();
 
 queryConfig.setHighlightEnabled(true);
 
 searchContext.setQueryConfig(queryConfig);
+
+searchContext.setStart(mainSearchSearchContainer.getStart());
 
 Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
 

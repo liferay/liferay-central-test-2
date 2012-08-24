@@ -25,6 +25,7 @@ import javax.portlet.PortletURL;
  * @author Ryan Park
  */
 public class Summary {
+
 	public Summary(
 		Locale locale, String title, String content, PortletURL portletURL) {
 
