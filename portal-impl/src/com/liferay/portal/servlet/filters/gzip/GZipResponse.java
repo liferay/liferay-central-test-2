@@ -56,8 +56,8 @@ public class GZipResponse extends MetaInfoCacheServletResponse {
 
 		_response.setContentLength(-1);
 
-		// Don't try to move this header setting to finishResponse(), setting
-		// header after committed is a NOP. finishResponse() may be too late.
+		// Setting the header after finishResponse is too late
+
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 
 		_firefox = BrowserSnifferUtil.isFirefox(request);
@@ -65,19 +65,24 @@ public class GZipResponse extends MetaInfoCacheServletResponse {
 
 	@Override
 	public void finishResponse() throws IOException {
+
+		// Is the response committed?
+
 		if (!isCommitted()) {
-			// Not committed yet
+
+			// Has the content been GZipped yet?
 
 			if ((_servletOutputStream == null) ||
 				((_servletOutputStream != null) &&
 					(_unsyncByteArrayOutputStream != null) &&
 					(_unsyncByteArrayOutputStream.size() == 0))) {
-				// No content has been gzipped yet
 
-				// Reset wrapped response to clear out gzip header
+				// Reset the wrapped response to clear out the GZip header
+
 				_response.reset();
 
-				// Reapply meta info
+				// Reapply meta data
+
 				super.finishResponse();
 			}
 		}
