@@ -20,38 +20,34 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import java.util.Date;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.quartz.Trigger;
-
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class QuartzSchedulerEngineTest {
 
-	@Before
-	public void setUp() throws Exception {
-		engine = new QuartzSchedulerEngine();
-	}
-
 	@Test
 	public void testCronTriggerFireTime() throws Exception {
-
 		CronTrigger cronTrigger = new CronTrigger(
 			"jobName", "groupName", "0/1 * * * * ?");
 
-		Trigger trigger1 = engine.getQuartzTrigger(cronTrigger);
+		Trigger trigger1 = _quartzSchedulerEngine.getQuartzTrigger(cronTrigger);
+
 		Date nextFireTime1 = trigger1.getFireTimeAfter(trigger1.getStartTime());
 
 		Thread.sleep(1000);
 
-		Trigger trigger2 = engine.getQuartzTrigger(cronTrigger);
+		Trigger trigger2 = _quartzSchedulerEngine.getQuartzTrigger(cronTrigger);
+
 		Date nextFireTime2 = trigger2.getFireTimeAfter(trigger2.getStartTime());
 
 		if (nextFireTime1.equals(nextFireTime2)) {
-			Assert.fail("Cron triggers have the same fire time");
+			Assert.fail();
 		}
 	}
 
-	protected QuartzSchedulerEngine engine;
+	private QuartzSchedulerEngine _quartzSchedulerEngine =
+		new QuartzSchedulerEngine();
+
 }
