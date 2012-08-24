@@ -254,11 +254,11 @@ public class PortalUtil {
 
 	public static String getCanonicalURL(
 			String completeURL, ThemeDisplay themeDisplay, Layout layout,
-			boolean forceLayoutInURL)
+			boolean forceLayoutFriendlyURL)
 		throws PortalException, SystemException {
 
 		return getPortal().getCanonicalURL(
-			completeURL, themeDisplay, layout, forceLayoutInURL);
+			completeURL, themeDisplay, layout, forceLayoutFriendlyURL);
 	}
 
 	/**
