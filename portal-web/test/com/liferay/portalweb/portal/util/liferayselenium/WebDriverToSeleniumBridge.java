@@ -1362,8 +1362,7 @@ public class WebDriverToSeleniumBridge
 		//keyTable[] = Keys.UP;
 	}
 
-	private Keys[] _keysArray = new Keys[128];
-
 	private String _defaultWindowHandle;
+	private Keys[] _keysArray = new Keys[128];
 
 }
