@@ -24,23 +24,6 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 	public void testConfigurePortletDisplayStyleTitle()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace("Blogs Aggregator Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -100,6 +83,22 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			try {
 				if (selenium.isElementPresent(
 							"//script[contains(@src,'liferay/navigation_interaction.js')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//select[@id='_86_displayStyle']")) {
 					break;
 				}
 			}
