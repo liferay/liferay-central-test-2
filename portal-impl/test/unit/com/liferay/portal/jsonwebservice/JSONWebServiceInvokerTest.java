@@ -16,6 +16,7 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.jsonwebservice.action.JSONWebServiceInvokerAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -180,13 +181,16 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		result = invokerResult.getResult();
 
 		Assert.assertTrue(result instanceof Map);
-		Assert.assertEquals(
-			"{\"id\":173,\"height\":177,\"spy\":{\"id\":7,\"height\":173," +
-				"\"name\":\"James Bond\",\"value\":\"licensed\",\"thief\":" +
-				"{\"id\":-13,\"height\":59,\"name\":\"Dr. Evil\"," +
-				"\"value\":\"fun\",\"world\":\"Welcome -13 to Jupiter\"}}," +
-				"\"name\":\"John Doe\",\"value\":\"foo!\"}",
-			toJSON(invokerResult));
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{\"id\":173,\"height\":177,\"spy\":{\"id\":7,\"height\":");
+		sb.append("173,\"name\":\"James Bond\",\"value\":\"licensed\",");
+		sb.append("\"thief\":{\"id\":-13,\"height\":59,\"name\":\"Dr. Evil\",");
+		sb.append("\"value\":\"fun\",\"world\":\"Welcome -13 to Jupiter\"}},");
+		sb.append("\"name\":\"John Doe\",\"value\":\"foo!\"}");
+
+		Assert.assertEquals(sb.toString(), toJSON(invokerResult));
 	}
 
 	@Test
