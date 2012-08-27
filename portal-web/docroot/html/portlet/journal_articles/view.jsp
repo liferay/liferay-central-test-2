@@ -78,10 +78,6 @@ double version = ParamUtil.getDouble(request, "version");
 		searchTerms.setVersion(version);
 		searchTerms.setAdvancedSearch(true);
 
-		List<Long> searchFolderIdsList = new ArrayList<Long>();
-
-		searchFolderIdsList.add(searchTerms.getFolderId());
-
 		List<JournalArticle> results = null;
 		int total = 0;
 		%>
