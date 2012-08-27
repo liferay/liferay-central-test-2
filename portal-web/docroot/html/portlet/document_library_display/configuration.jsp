@@ -23,9 +23,9 @@ if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	strutsAction = "/document_library";
 }
 
-String portletNameSpace = PortalUtil.getPortletNamespace(portletResource);
-
 String redirect = ParamUtil.getString(request, "redirect");
+
+String portletNameSpace = PortalUtil.getPortletNamespace(portletResource);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
