@@ -235,7 +235,6 @@ if (layout.isTypeControlPanel()) {
 <aui:script>
 	function <portlet:namespace />copyFromLive() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-copy-from-live-and-update-the-existing-staging-portlet-information") %>')) {
-
 			submitForm(document.<portlet:namespace />fm, '<portlet:actionURL><portlet:param name="struts_action" value="/portlet_configuration/export_import" /><portlet:param name="<%= Constants.CMD %>" value="copy_from_live" /></portlet:actionURL>');
 		}
 	}
