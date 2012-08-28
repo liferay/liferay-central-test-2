@@ -39,8 +39,8 @@ import org.aspectj.weaver.tools.WeavingAdaptor;
  */
 public class URLWeavingAdaptor extends WeavingAdaptor {
 
-	public URLWeavingAdaptor(URL[] classURLs, Class<?>[] aspectClasses) {
-		super(null, classURLs, new URL[0]);
+	public URLWeavingAdaptor(URL[] urls, Class<?>[] aspectClasses) {
+		super(null, urls, new URL[0]);
 
 		generatedClassHandler = new RecordGeneratedClassHandler();
 
@@ -98,7 +98,7 @@ public class URLWeavingAdaptor extends WeavingAdaptor {
 		}
 		else {
 			throw new IllegalArgumentException(
-				"Class object " + aspectClass + " is not an AspectJ aspect");
+				"Class object " + aspectClass + " is not an aspect");
 		}
 	}
 
@@ -109,9 +109,9 @@ public class URLWeavingAdaptor extends WeavingAdaptor {
 			aspectClassLoader = ClassLoader.getSystemClassLoader();
 		}
 
-		String resourcePath = aspectClass.getName().replace('.', '/');
+		String resourcePath = aspectClass.getName();
 
-		resourcePath = resourcePath.concat(".class");
+		resourcePath = resourcePath.replace('.', '/') + ".class";
 
 		ByteArrayInputStream byteArrayInputStream = null;
 
@@ -140,10 +140,8 @@ public class URLWeavingAdaptor extends WeavingAdaptor {
 			}
 		}
 
-		String fileName = aspectClass.getSimpleName().concat(".class");
-
 		ClassParser classParser = new ClassParser(
-			byteArrayInputStream, fileName);
+			byteArrayInputStream, aspectClass.getSimpleName() + ".class");
 
 		try {
 			return classParser.parse();
@@ -153,7 +151,7 @@ public class URLWeavingAdaptor extends WeavingAdaptor {
 		}
 	}
 
-	private final Map<String, byte[]> _generatedClasses =
+	private Map<String, byte[]> _generatedClasses =
 		new HashMap<String, byte[]>();
 
 	private class RecordGeneratedClassHandler implements GeneratedClassHandler {

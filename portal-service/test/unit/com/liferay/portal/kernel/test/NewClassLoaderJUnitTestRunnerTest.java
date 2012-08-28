@@ -17,11 +17,10 @@ package com.liferay.portal.kernel.test;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Shuyang Zhou
@@ -31,72 +30,75 @@ public class NewClassLoaderJUnitTestRunnerTest {
 
 	@After
 	public void after() {
-		assertEquals(2, _stepCounter.getAndIncrement());
+		Assert.assertEquals(2, _counter.getAndIncrement());
 
-		_assertClassLoader();
+		assertClassLoader();
 	}
 
 	@Before
 	public void before() {
-		assertEquals(0, _stepCounter.getAndIncrement());
+		Assert.assertEquals(0, _counter.getAndIncrement());
+		Assert.assertNull(_classLoader);
 
-		assertNull(_classLoader);
+		Class<?> clazz = getClass();
 
-		ClassLoader defineClassLoader = getClass().getClassLoader();
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		assertSame(defineClassLoader, contextClassLoader);
+		Assert.assertSame(classLoader, contextClassLoader);
 
-		_classLoader = defineClassLoader;
+		_classLoader = classLoader;
 	}
 
 	@Test
 	public void testClassInitialization1() {
-		assertEquals(1, _stepCounter.getAndIncrement());
+		Assert.assertEquals(1, _counter.getAndIncrement());
 
-		_assertClassLoader();
+		assertClassLoader();
 
 		String value1 = "value1";
 
 		System.setProperty(PROPERTY_KEY, value1);
 
-		assertEquals(value1, ValueClass.value);
+		Assert.assertEquals(value1, ValueClass.value);
 	}
 
 	@Test
 	public void testClassInitialization2() {
-		assertEquals(1, _stepCounter.getAndIncrement());
+		Assert.assertEquals(1, _counter.getAndIncrement());
 
-		_assertClassLoader();
+		assertClassLoader();
 
 		String value2 = "value2";
 
 		System.setProperty(PROPERTY_KEY, value2);
 
-		assertEquals(value2, ValueClass.value);
+		Assert.assertEquals(value2, ValueClass.value);
 	}
 
-	private void _assertClassLoader() {
-		assertNotNull(_classLoader);
+	private void assertClassLoader() {
+		Assert.assertNotNull(_classLoader);
 
-		ClassLoader defineClassLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
 
-		assertSame(_classLoader, defineClassLoader);
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		Assert.assertSame(_classLoader, classLoader);
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		assertSame(_classLoader, contextClassLoader);
+		Assert.assertSame(_classLoader, contextClassLoader);
 	}
 
 	private static final String PROPERTY_KEY = "PROPERTY_KEY";
 
 	private ClassLoader _classLoader;
-	private AtomicInteger _stepCounter = new AtomicInteger();
+	private AtomicInteger _counter = new AtomicInteger();
 
 	private static class ValueClass {
 

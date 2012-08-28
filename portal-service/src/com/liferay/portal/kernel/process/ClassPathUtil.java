@@ -50,17 +50,17 @@ public class ClassPathUtil {
 
 		String[] paths = StringUtil.split(classPath, File.pathSeparatorChar);
 
-		List<URL> urlList = new ArrayList<URL>();
+		List<URL> urls = new ArrayList<URL>();
 
 		for (String path : paths) {
 			File file = new File(path);
 
 			URI uri = file.toURI();
 
-			urlList.add(uri.toURL());
+			urls.add(uri.toURL());
 		}
 
-		return urlList.toArray(new URL[urlList.size()]);
+		return urls.toArray(new URL[urls.size()]);
 	}
 
 	public static String getGlobalClassPath() {

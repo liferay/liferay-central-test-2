@@ -23,11 +23,10 @@ import java.lang.management.RuntimeMXBean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Shuyang Zhou
@@ -37,43 +36,40 @@ public class NewJVMJUnitTestRunnerTest {
 
 	@After
 	public void after() {
-		assertEquals(2, _stepCounter.getAndIncrement());
+		Assert.assertEquals(2, _counter.getAndIncrement());
 
-		_assertProcessId();
+		assertProcessId();
 	}
 
 	@Before
 	public void before() {
-		assertEquals(0, _stepCounter.getAndIncrement());
+		Assert.assertEquals(0, _counter.getAndIncrement());
+		Assert.assertNull(_processId);
 
-		assertNull(_processId);
-
-		_processId = _getProcessId();
+		_processId = getProcessId();
 	}
 
 	@Test
 	public void testNewJVM1() {
-		assertEquals(1, _stepCounter.getAndIncrement());
+		Assert.assertEquals(1, _counter.getAndIncrement());
 
-		_assertProcessId();
+		assertProcessId();
 	}
 
 	@Test
 	public void testNewJVM2() {
-		assertEquals(1, _stepCounter.getAndIncrement());
+		Assert.assertEquals(1, _counter.getAndIncrement());
 
-		_assertProcessId();
+		assertProcessId();
 	}
 
-	private void _assertProcessId() {
-		assertNotNull(_processId);
+	protected void assertProcessId() {
+		Assert.assertNotNull(_processId);
 
-		int processId = _getProcessId();
-
-		assertEquals(_processId.intValue(), processId);
+		Assert.assertEquals(_processId.intValue(), getProcessId());
 	}
 
-	private int _getProcessId() {
+	protected int getProcessId() {
 		RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
 
 		String name = runtimeMXBean.getName();
@@ -93,7 +89,7 @@ public class NewJVMJUnitTestRunnerTest {
 		return pid;
 	}
 
+	private AtomicInteger _counter = new AtomicInteger();
 	private Integer _processId;
-	private AtomicInteger _stepCounter = new AtomicInteger();
 
 }

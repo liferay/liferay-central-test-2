@@ -77,7 +77,7 @@ public class AspectJMockingNewJVMJUnitTestRunner extends NewJVMJUnitTestRunner {
 
 			if (aspect == null) {
 				throw new IllegalArgumentException(
-					"Class " + adviceClass.getName() + " is not an Aspect");
+					"Class " + adviceClass.getName() + " is not an aspect");
 			}
 
 			sb.append(adviceClass.getName());
@@ -95,32 +95,35 @@ public class AspectJMockingNewJVMJUnitTestRunner extends NewJVMJUnitTestRunner {
 	protected ProcessCallable<Serializable> processProcessCallable(
 		ProcessCallable<Serializable> processCallable, MethodKey methodKey) {
 
-		String baseDumpFolder = System.getProperty("junit.aspectj.dump");
+		String dumpDirName = System.getProperty("junit.aspectj.dump");
 
-		String dumpFolderName = methodKey.getClassName().concat(
-			StringPool.PERIOD).concat(methodKey.getMethodName());
+		String className = methodKey.getClassName();
 
-		File dumpFile = new File(baseDumpFolder, dumpFolderName);
+		File dumpDir = new File(
+			dumpDirName,
+			className.concat(StringPool.PERIOD).concat(
+				methodKey.getMethodName()));
 
-		return new SwitchClassLoaderProcessCallable(processCallable, dumpFile);
+		return new SwitchClassLoaderProcessCallable(processCallable, dumpDir);
 	}
 
 	private static class SwitchClassLoaderProcessCallable
 		implements ProcessCallable<Serializable> {
 
 		public SwitchClassLoaderProcessCallable(
-			ProcessCallable<Serializable> processCallable, File dumpFolder) {
+			ProcessCallable<Serializable> processCallable, File dumpDir) {
 
-			_dumpFolder = dumpFolder;
+			_dumpDir = dumpDir;
+
 			_encodedProcessCallable = SerializableUtil.serialize(
 				processCallable);
+
 			_toString = processCallable.toString();
 		}
 
 		public Serializable call() throws ProcessException {
-			String aspectClassesProperty = System.getProperty("aspectClasses");
-
-			String[] aspectClassNames = StringUtil.split(aspectClassesProperty);
+			String[] aspectClassNames = StringUtil.split(
+				System.getProperty("aspectClasses"));
 
 			Class<?>[] aspectClasses = new Class<?>[aspectClassNames.length];
 
@@ -140,18 +143,18 @@ public class AspectJMockingNewJVMJUnitTestRunner extends NewJVMJUnitTestRunner {
 				}
 
 				WeavingClassLoader weavingClassLoader = new WeavingClassLoader(
-					urls, aspectClasses, _dumpFolder);
+					urls, aspectClasses, _dumpDir);
 
 				Object originalProcessCallable =
 					SerializableUtil.deserialize(
-					_encodedProcessCallable, weavingClassLoader);
+						_encodedProcessCallable, weavingClassLoader);
 
 				currentThread.setContextClassLoader(weavingClassLoader);
 
-				Method callMethod = ReflectionUtil.getDeclaredMethod(
+				Method method = ReflectionUtil.getDeclaredMethod(
 					originalProcessCallable.getClass(), "call");
 
-				return (Serializable)callMethod.invoke(originalProcessCallable);
+				return (Serializable)method.invoke(originalProcessCallable);
 			}
 			catch (Exception e) {
 				throw new ProcessException(e);
@@ -166,9 +169,9 @@ public class AspectJMockingNewJVMJUnitTestRunner extends NewJVMJUnitTestRunner {
 			return _toString;
 		}
 
-		private final File _dumpFolder;
-		private final byte[] _encodedProcessCallable;
-		private final String _toString;
+		private File _dumpDir;
+		private byte[] _encodedProcessCallable;
+		private String _toString;
 	}
 
 }

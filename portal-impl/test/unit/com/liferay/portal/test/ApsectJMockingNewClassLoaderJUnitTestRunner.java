@@ -45,7 +45,6 @@ public class ApsectJMockingNewClassLoaderJUnitTestRunner
 
 	@Override
 	protected ClassLoader createClassLoader(FrameworkMethod frameworkMethod) {
-
 		AdviseWith adviseWith = frameworkMethod.getAnnotation(AdviseWith.class);
 
 		if (adviseWith == null) {
@@ -63,7 +62,7 @@ public class ApsectJMockingNewClassLoaderJUnitTestRunner
 
 			if (aspect == null) {
 				throw new IllegalArgumentException(
-					"Class " + adviceClass.getName() + " is not an Aspect");
+					"Class " + adviceClass.getName() + " is not an aspect");
 			}
 		}
 
@@ -78,17 +77,19 @@ public class ApsectJMockingNewClassLoaderJUnitTestRunner
 			throw new RuntimeException(murle);
 		}
 
-		String baseDumpFolder = System.getProperty("junit.aspectj.dump");
+		String dumpDirName = System.getProperty("junit.aspectj.dump");
 
 		Method method = frameworkMethod.getMethod();
 
 		Class<?> clazz = method.getDeclaringClass();
 
-		File dumpFolder = new File(
-			baseDumpFolder,
-			clazz.getName().concat(StringPool.PERIOD).concat(method.getName()));
+		String className = clazz.getName();
 
-		return new WeavingClassLoader(urls, adviceClasses, dumpFolder);
+		File dumpDir = new File(
+			dumpDirName,
+			className.concat(StringPool.PERIOD).concat(method.getName()));
+
+		return new WeavingClassLoader(urls, adviceClasses, dumpDir);
 	}
 
 }

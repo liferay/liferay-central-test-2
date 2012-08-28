@@ -37,20 +37,18 @@ import java.util.Arrays;
 public class WeavingClassLoader extends URLClassLoader {
 
 	public WeavingClassLoader(
-		URL[] urls, Class<?>[] aspectClasses, File dumpFolder) {
+		URL[] urls, Class<?>[] aspectClasses, File dumpDir) {
 
 		super(urls, null);
 
-		_weavingAdaptor = new URLWeavingAdaptor(urls, aspectClasses);
+		_dumpDir = dumpDir;
 
-		_dumpFolder = dumpFolder;
+		_urlWeavingAdaptor = new URLWeavingAdaptor(urls, aspectClasses);
 	}
 
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
-		String resourcePath = name.replace('.', '/');
-
-		resourcePath = resourcePath.concat(".class");
+		String resourcePath = name.replace('.', '/') + ".class";
 
 		InputStream inputStream = getResourceAsStream(resourcePath);
 
@@ -58,8 +56,10 @@ public class WeavingClassLoader extends URLClassLoader {
 
 		try {
 			if (inputStream == null) {
-				// On missing could be a generated inner class
-				data = _weavingAdaptor.removeGeneratedClassDate(name);
+
+				// It may be a generated inner class
+
+				data = _urlWeavingAdaptor.removeGeneratedClassDate(name);
 			}
 			else {
 				UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
@@ -71,45 +71,45 @@ public class WeavingClassLoader extends URLClassLoader {
 				data = unsyncByteArrayOutputStream.toByteArray();
 			}
 
-			if (data != null) {
-				byte[] oldData = data;
-
-				data = _weavingAdaptor.weaveClass(name, data, false);
-
-				if (!Arrays.equals(oldData, data)) {
-					if (_dumpFolder != null) {
-						File dumpFile = new File(_dumpFolder, resourcePath);
-
-						File folder = dumpFile.getParentFile();
-
-						folder.mkdirs();
-
-						FileOutputStream fileOutputStream =
-							new FileOutputStream(dumpFile);
-
-						fileOutputStream.write(data);
-
-						fileOutputStream.close();
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Woven class " + name +
-									", dump woven result into " +
-										dumpFile.getCanonicalPath());
-						}
-					}
-					else {
-						if (_log.isInfoEnabled()) {
-							_log.info("Woven class " + name);
-						}
-					}
-				}
-
-				return _generateClass(name, data);
-			}
-			else {
+			if (data == null) {
 				throw new ClassNotFoundException(name);
 			}
+
+			byte[] oldData = data;
+
+			data = _urlWeavingAdaptor.weaveClass(name, data, false);
+
+			if (Arrays.equals(oldData, data)) {
+				return _generateClass(name, data);
+			}
+
+			if (_dumpDir != null) {
+				File dumpFile = new File(_dumpDir, resourcePath);
+
+				File dumpDir = dumpFile.getParentFile();
+
+				dumpDir.mkdirs();
+
+				FileOutputStream fileOutputStream =
+					new FileOutputStream(dumpFile);
+
+				fileOutputStream.write(data);
+
+				fileOutputStream.close();
+
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Woven class " + name + " result in " +
+							dumpFile.getCanonicalPath());
+				}
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					_log.info("Woven class " + name);
+				}
+			}
+
+			return _generateClass(name, data);
 		}
 		catch (IOException ioe) {
 			throw new ClassNotFoundException(name, ioe);
@@ -142,8 +142,7 @@ public class WeavingClassLoader extends URLClassLoader {
 
 	private static Log _log = LogFactoryUtil.getLog(WeavingClassLoader.class);
 
-	private final File _dumpFolder;
-
-	private final URLWeavingAdaptor _weavingAdaptor;
+	private File _dumpDir;
+	private URLWeavingAdaptor _urlWeavingAdaptor;
 
 }

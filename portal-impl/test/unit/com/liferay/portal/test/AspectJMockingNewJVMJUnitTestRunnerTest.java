@@ -17,10 +17,9 @@ package com.liferay.portal.test;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Shuyang Zhou
@@ -30,40 +29,40 @@ public class AspectJMockingNewJVMJUnitTestRunnerTest {
 
 	@Test
 	public void testStaticUtil() {
-		assertEquals(1, StaticUtil.getValue1());
-		assertEquals(2, StaticUtil.getValue2());
+		Assert.assertEquals(1, StaticUtil.getValue1());
+		Assert.assertEquals(2, StaticUtil.getValue2());
 	}
 
+	@AdviseWith(adviceClasses = {AdviceClass1.class})
 	@Test
-	@AdviseWith(adviceClasses={AdviceClass1.class})
 	public void testStaticUtilMocking1() {
-		assertEquals(3, StaticUtil.getValue1());
-		assertEquals(2, StaticUtil.getValue2());
+		Assert.assertEquals(3, StaticUtil.getValue1());
+		Assert.assertEquals(2, StaticUtil.getValue2());
 	}
 
+	@AdviseWith(adviceClasses = {AdviceClass2.class})
 	@Test
-	@AdviseWith(adviceClasses={AdviceClass2.class})
 	public void testStaticUtilMocking2() {
-		assertEquals(1, StaticUtil.getValue1());
-		assertEquals(4, StaticUtil.getValue2());
+		Assert.assertEquals(1, StaticUtil.getValue1());
+		Assert.assertEquals(4, StaticUtil.getValue2());
 	}
 
+	@AdviseWith(adviceClasses = {AdviceClass1.class, AdviceClass2.class})
 	@Test
-	@AdviseWith(adviceClasses={AdviceClass1.class, AdviceClass2.class})
 	public void testStaticUtilMocking3() {
-		assertEquals(3, StaticUtil.getValue1());
-		assertEquals(4, StaticUtil.getValue2());
+		Assert.assertEquals(3, StaticUtil.getValue1());
+		Assert.assertEquals(4, StaticUtil.getValue2());
 	}
 
+	@AdviseWith(adviceClasses = {AdviceClass3.class})
 	@Test
-	@AdviseWith(adviceClasses={AdviceClass3.class})
 	public void testStaticUtilMocking4() {
-		assertEquals(5, StaticUtil.getValue1());
+		Assert.assertEquals(5, StaticUtil.getValue1());
 
 		try {
 			StaticUtil.getValue2();
 
-			fail();
+			Assert.fail();
 		}
 		catch (IllegalStateException ise) {
 		}
@@ -73,6 +72,7 @@ public class AspectJMockingNewJVMJUnitTestRunnerTest {
 	private static class AdviceClass1 {
 
 		@Around("execution(* *.getValue1())")
+		@SuppressWarnings("unused")
 		public Object mockGetValue() {
 			return 3;
 		}
@@ -83,6 +83,7 @@ public class AspectJMockingNewJVMJUnitTestRunnerTest {
 	private static class AdviceClass2 {
 
 		@Around("execution(* *.getValue2())")
+		@SuppressWarnings("unused")
 		public Object mockGetValue() {
 			return 4;
 		}
@@ -93,11 +94,13 @@ public class AspectJMockingNewJVMJUnitTestRunnerTest {
 	private static class AdviceClass3 {
 
 		@Around("execution(* *.getValue1())")
+		@SuppressWarnings("unused")
 		public Object mockGetValue1() {
 			return 5;
 		}
 
 		@Around("execution(* *.getValue2())")
+		@SuppressWarnings("unused")
 		public Object mockGetValue2() {
 			throw new IllegalStateException();
 		}

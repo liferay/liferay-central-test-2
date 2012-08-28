@@ -99,7 +99,7 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 	private static final String _JPDA_OPTIONS =
 		"-agentlib:jdwp=transport=dt_socket,address=8001,server=y,suspend=y";
 
-	private final String _classPath;
+	private String _classPath;
 
 	private static class TestProcessCallable
 		implements ProcessCallable<Serializable> {
@@ -124,6 +124,7 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 
 						return true;
 					}
+
 				});
 
 			Thread currentThread = Thread.currentThread();
@@ -134,16 +135,16 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			try {
 				Class<?> clazz = contextClassLoader.loadClass(_testClassName);
 
-				Object testObject = clazz.newInstance();
+				Object object = clazz.newInstance();
 
 				for (MethodKey beforeMethodKey : _beforeMethodKeys) {
-					new MethodHandler(beforeMethodKey).invoke(testObject);
+					_invoke(beforeMethodKey, object);
 				}
 
-				new MethodHandler(_testMethodKey).invoke(testObject);
+				_invoke(_testMethodKey, object);
 
 				for (MethodKey afterMethodKey : _afterMethodKeys) {
-					new MethodHandler(afterMethodKey).invoke(testObject);
+					_invoke(afterMethodKey, object);
 				}
 			}
 			catch (Exception e) {
@@ -153,8 +154,9 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			return StringPool.BLANK;
 		}
 
+		@Override
 		public String toString() {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(4);
 
 			sb.append(_testClassName);
 			sb.append(StringPool.PERIOD);
@@ -164,10 +166,18 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			return sb.toString();
 		}
 
-		private final List<MethodKey> _afterMethodKeys;
-		private final List<MethodKey> _beforeMethodKeys;
-		private final String _testClassName;
-		private final MethodKey _testMethodKey;
+		private void _invoke(MethodKey methodKey, Object object)
+			throws Exception {
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			methodHandler.invoke(object);
+		}
+
+		private List<MethodKey> _afterMethodKeys;
+		private List<MethodKey> _beforeMethodKeys;
+		private String _testClassName;
+		private MethodKey _testMethodKey;
 
 	}
 
@@ -204,9 +214,10 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 
 		@Override
 		public void evaluate() throws Throwable {
-			ProcessCallable processCallable = new TestProcessCallable(
-				_testClassName, _beforeMethodKeys, _testMethodKey,
-				_afterMethodKeys);
+			ProcessCallable<Serializable> processCallable =
+				new TestProcessCallable(
+					_testClassName, _beforeMethodKeys, _testMethodKey,
+					_afterMethodKeys);
 
 			processCallable = processProcessCallable(
 				processCallable, _testMethodKey);
@@ -230,12 +241,12 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			}
 		}
 
-		private final List<MethodKey> _afterMethodKeys;
-		private final List<String> _arguments;
-		private final List<MethodKey> _beforeMethodKeys;
-		private final String _classPath;
-		private final String _testClassName;
-		private final MethodKey _testMethodKey;
+		private List<MethodKey> _afterMethodKeys;
+		private List<String> _arguments;
+		private List<MethodKey> _beforeMethodKeys;
+		private String _classPath;
+		private String _testClassName;
+		private MethodKey _testMethodKey;
 
 	}
 

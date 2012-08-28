@@ -123,16 +123,16 @@ public class NewClassLoaderJUnitTestRunner extends BlockJUnit4ClassRunner {
 			try {
 				Class<?> clazz = _newClassLoader.loadClass(_testClassName);
 
-				Object testObject = clazz.newInstance();
+				Object object = clazz.newInstance();
 
 				for (MethodKey beforeMethodKey : _beforeMethodKeys) {
-					new MethodHandler(beforeMethodKey).invoke(testObject);
+					_invoke(beforeMethodKey, object);
 				}
 
-				new MethodHandler(_testMethodKey).invoke(testObject);
+				_invoke(_testMethodKey, object);
 
 				for (MethodKey afterMethodKey : _afterMethodKeys) {
-					new MethodHandler(afterMethodKey).invoke(testObject);
+					_invoke(afterMethodKey, object);
 				}
 			}
 			catch (InvocationTargetException ite) {
@@ -143,11 +143,19 @@ public class NewClassLoaderJUnitTestRunner extends BlockJUnit4ClassRunner {
 			}
 		}
 
-		private final List<MethodKey> _afterMethodKeys;
-		private final List<MethodKey> _beforeMethodKeys;
-		private final ClassLoader _newClassLoader;
-		private final String _testClassName;
-		private final MethodKey _testMethodKey;
+		private void _invoke(MethodKey methodKey, Object object)
+			throws Exception {
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			methodHandler.invoke(object);
+		}
+
+		private List<MethodKey> _afterMethodKeys;
+		private List<MethodKey> _beforeMethodKeys;
+		private ClassLoader _newClassLoader;
+		private String _testClassName;
+		private MethodKey _testMethodKey;
 
 	}
 
