@@ -330,7 +330,7 @@ public class PluginPackageImpl
 	private String _pageURL;
 	private String _recommendedDeploymentContext;
 	private RemotePluginPackageRepository _repository;
-	private List<String> _requiredDeploymentContexts = Collections.EMPTY_LIST;
+	private List<String> _requiredDeploymentContexts = Collections.emptyList();
 	private List<Screenshot> _screenshots = new ArrayList<Screenshot>();
 	private String _shortDescription = StringPool.BLANK;
 	private List<String> _tags = new ArrayList<String>();

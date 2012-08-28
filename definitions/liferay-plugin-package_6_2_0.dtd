@@ -46,8 +46,8 @@ code references itself through URLs that include the context.
 
 <!--
 The required-deployment-contexts element indicates contexts which this plugin
-needs to be deployed. Some plugins require this in order to rely on services
-and features provided by other plugins.
+needs to be deployed. Some plugins require this in order to rely on services and
+features provided by other plugins.
 -->
 <!ELEMENT required-deployment-contexts (required-deployment-context)*>
 
