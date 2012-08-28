@@ -28,7 +28,6 @@ import java.sql.ResultSet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Douglas Wong
@@ -66,12 +65,10 @@ public class VerifySQLServer extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			Set<String> tableNames = getTableNames();
-
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
 
-				if (!tableNames.contains(tableName.toLowerCase())) {
+				if (!isPortalTableName(tableName)) {
 					continue;
 				}
 
@@ -210,12 +207,10 @@ public class VerifySQLServer extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			Set<String> tableNames = getTableNames();
-
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
 
-				if (!tableNames.contains(tableName.toLowerCase())) {
+				if (!isPortalTableName(tableName)) {
 					continue;
 				}
 

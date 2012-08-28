@@ -26,8 +26,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import java.util.Set;
-
 /**
  * @author Brian Wing Shun Chan
  */
@@ -78,12 +76,10 @@ public class VerifyMySQL extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			Set<String> tableNames = getTableNames();
-
 			while (rs.next()) {
 				String tableName = rs.getString("Name");
 
-				if (!tableNames.contains(tableName.toLowerCase())) {
+				if (!isPortalTableName(tableName)) {
 					continue;
 				}
 

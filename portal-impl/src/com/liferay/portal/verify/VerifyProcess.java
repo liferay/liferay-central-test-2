@@ -132,10 +132,12 @@ public abstract class VerifyProcess {
 		}
 	}
 
-	protected Set<String> getTableNames() throws IOException {
-		if (_tableNames != null) {
-			return _tableNames;
+	protected Set<String> getPortalTableNames() throws Exception {
+		if (_portalTableNames != null) {
+			return _portalTableNames;
 		}
+
+		Pattern pattern = Pattern.compile("create table (\\S*) \\(");
 
 		ClassLoader classLoader = PACLClassLoaderUtil.getContextClassLoader();
 
@@ -143,7 +145,7 @@ public abstract class VerifyProcess {
 			classLoader,
 			"com/liferay/portal/tools/sql/dependencies/portal-tables.sql");
 
-		Matcher matcher = _pattern.matcher(sql);
+		Matcher matcher = pattern.matcher(sql);
 
 		Set<String> tableNames = new HashSet<String>();
 
@@ -153,16 +155,19 @@ public abstract class VerifyProcess {
 			tableNames.add(match.toLowerCase());
 		}
 
-		_tableNames = tableNames;
+		_portalTableNames = tableNames;
 
 		return tableNames;
 	}
 
+	protected boolean isPortalTableName(String tableName) throws Exception {
+		Set<String> portalTableNames = getPortalTableNames();
+
+		return portalTableNames.contains(tableName.toLowerCase());
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcess.class);
 
-	private static Pattern _pattern = Pattern.compile(
-		"create table (\\S*) \\(");
-
-	private Set<String> _tableNames;
+	private Set<String> _portalTableNames;
 
 }
