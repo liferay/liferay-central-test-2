@@ -72,9 +72,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 	public Properties generate(
 			ServletContext servletContext, List<URL> imageURLs,
-			String spriteFileName, String spritePropertiesFileName,
-			String spriteRootDir, String rootPath, int maxHeight, int maxWidth,
-			int maxSize)
+			String spriteRootDirName, String spriteFileName,
+			String spritePropertiesFileName, String rootPath, int maxHeight,
+			int maxWidth, int maxSize)
 		throws IOException {
 
 		if (imageURLs.size() < 1) {
@@ -83,22 +83,22 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 		Collections.sort(imageURLs, new PropertyComparator("path"));
 
-		File spriteRootDirFile = null;
+		File spriteRootDir = null;
 
-		if (Validator.isNull(spriteRootDir)) {
+		if (Validator.isNull(spriteRootDirName)) {
 			File tempDir = (File)servletContext.getAttribute(
-						JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR);
+				JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR);
 
-			spriteRootDirFile = new File(tempDir, SpriteProcessor.PATH);
+			spriteRootDir = new File(tempDir, SpriteProcessor.PATH);
 		}
 		else {
-			spriteRootDirFile = new File(spriteRootDir);
+			spriteRootDir = new File(spriteRootDirName);
 		}
 
-		spriteRootDirFile.mkdirs();
+		spriteRootDir.mkdirs();
 
 		File spritePropertiesFile = new File(
-			spriteRootDirFile, spritePropertiesFileName);
+			spriteRootDir, spritePropertiesFileName);
 
 		File spritePropertiesParentFile = spritePropertiesFile.getParentFile();
 
@@ -220,7 +220,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
 				null);
 
-			File spriteFile = new File(spriteRootDirFile, spriteFileName);
+			File spriteFile = new File(spriteRootDir, spriteFileName);
 
 			spriteFile.mkdirs();
 
@@ -239,7 +239,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			renderedImage = imageWorker.getPlanarImage();
 
 			spriteFile = new File(
-				spriteRootDirFile,
+				spriteRootDir,
 				StringUtil.replace(spriteFileName, ".png", ".gif"));
 
 			FileOutputStream fos = new FileOutputStream(spriteFile);

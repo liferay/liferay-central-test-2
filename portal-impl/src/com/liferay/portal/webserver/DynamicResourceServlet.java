@@ -69,10 +69,10 @@ public class DynamicResourceServlet extends WebServerServlet {
 		File file = new File(rootDir, path);
 
 		if (servletPath.equals(SpriteProcessor.PATH)) {
-			String spriteRootDir = PropsValues.SPRITE_ROOT_DIR;
+			String spriteRootDirName = PropsValues.SPRITE_ROOT_DIR;
 
-			if (Validator.isNotNull(spriteRootDir)) {
-				rootDir = new File(spriteRootDir);
+			if (Validator.isNotNull(spriteRootDirName)) {
+				rootDir = new File(spriteRootDirName);
 
 				file = new File(rootDir, pathInfo);
 			}
