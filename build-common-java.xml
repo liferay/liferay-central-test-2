@@ -71,38 +71,13 @@
 		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
 	</target>
 
-	<target name="init-liferay-manifest-helper">
-		<trycatch>
-			<try>
-				<taskdef
-					classname="com.liferay.util.ant.ManifestHelperTask"
-					classpathref="project.classpath"
-					name="liferay-manifest-helper"
-				/>
-			</try>
-			<catch>
-				<ant antfile="${project.dir}/portal-service/build.xml" target="compile" inheritAll="false" />
-				<ant antfile="${project.dir}/util-java/build.xml" target="compile" inheritAll="false" />
-
-				<taskdef
-					classname="com.liferay.util.ant.ManifestHelperTask"
-					classpathref="project.classpath"
-					name="liferay-manifest-helper"
-				/>
-			</catch>
-		</trycatch>
-	</target>
-
 	<target name="jar" depends="compile">
 		<if>
 			<available file="bnd.bnd" />
 			<then>
-				<antcall target="init-liferay-manifest-helper" />
-
-				<liferay-manifest-helper
-					analyze="true"
-					classpathref="project.classpath"
-				/>
+				<antcall target="manifest-helper">
+					<param name="manifest.helper.analyze" value="false" />
+				</antcall>
 
 				<bndexpand propertyfile="${project.dir}/common.bnd" />
 
@@ -169,12 +144,9 @@
 				<available file="classes/META-INF/MANIFEST.MF" />
 			</not>
 			<then>
-				<antcall target="init-liferay-manifest-helper" />
-
-				<liferay-manifest-helper
-					analyze="true"
-					classpathref="project.classpath"
-				/>
+				<antcall target="manifest-helper">
+					<param name="manifest.helper.analyze" value="true" />
+				</antcall>
 
 				<mkdir dir="classes/META-INF" />
 
@@ -219,5 +191,32 @@
 				</if>
 			</then>
 		</if>
+	</target>
+
+	<target name="manifest-helper">
+		<trycatch>
+			<try>
+				<taskdef
+					classname="com.liferay.util.ant.ManifestHelperTask"
+					classpathref="project.classpath"
+					name="liferay-manifest-helper"
+				/>
+			</try>
+			<catch>
+				<ant antfile="${project.dir}/portal-service/build.xml" target="compile" inheritAll="false" />
+				<ant antfile="${project.dir}/util-java/build.xml" target="compile" inheritAll="false" />
+
+				<taskdef
+					classname="com.liferay.util.ant.ManifestHelperTask"
+					classpathref="project.classpath"
+					name="liferay-manifest-helper"
+				/>
+			</catch>
+		</trycatch>
+
+		<liferay-manifest-helper
+			analyze="${manifest.helper.analyze}"
+			classpathref="project.classpath"
+		/>
 	</target>
 </project>
