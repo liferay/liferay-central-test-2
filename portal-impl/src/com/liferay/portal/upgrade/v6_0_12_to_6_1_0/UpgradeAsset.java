@@ -41,8 +41,6 @@ public class UpgradeAsset extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long journalStructureId = 0;
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
@@ -54,14 +52,14 @@ public class UpgradeAsset extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				journalStructureId = rs.getLong("id_");
+				return rs.getLong("id_");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return journalStructureId;
 	}
 
 	protected void updateAssetClassTypeId() throws Exception {
