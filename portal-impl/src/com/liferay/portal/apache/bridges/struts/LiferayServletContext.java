@@ -29,8 +29,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.Filter;
-import javax.servlet.FilterRegistration;
 import javax.servlet.FilterRegistration.Dynamic;
+import javax.servlet.FilterRegistration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -49,14 +49,14 @@ public class LiferayServletContext implements ServletContext {
 		_servletContext = servletContext;
 
 		if (_servletContext.getMajorVersion() >= 3) {
-			_isVersion3 = true;
+			_version3 = true;
 		}
 	}
 
 	public Dynamic addFilter(
 		String filterName, Class<? extends Filter> filterClass) {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -64,7 +64,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Dynamic addFilter(String filterName, Filter filter) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -72,7 +72,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Dynamic addFilter(String filterName, String className) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -80,7 +80,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public void addListener(Class<? extends EventListener> listenerClass) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return;
 		}
 
@@ -88,7 +88,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public void addListener(String className) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return;
 		}
 
@@ -96,37 +96,37 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public <T extends EventListener> void addListener(T eventListener) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return;
 		}
 
 		_servletContext.addListener(eventListener);
 	}
 
-	public javax.servlet.ServletRegistration.Dynamic addServlet(
-		String servletName, java.lang.Class<? extends Servlet> servletClass) {
+	public ServletRegistration.Dynamic addServlet(
+		String servletName, Class<? extends Servlet> servletClass) {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
 		return _servletContext.addServlet(servletName, servletClass);
 	}
 
-	public javax.servlet.ServletRegistration.Dynamic addServlet(
+	public ServletRegistration.Dynamic addServlet(
 		String servletName, Servlet servlet) {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
 		return _servletContext.addServlet(servletName, servlet);
 	}
 
-	public javax.servlet.ServletRegistration.Dynamic addServlet(
+	public ServletRegistration.Dynamic addServlet(
 		String servletName, String className) {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -136,18 +136,17 @@ public class LiferayServletContext implements ServletContext {
 	public <T extends Filter> T createFilter(Class<T> filterClass)
 		throws ServletException {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
 		return _servletContext.createFilter(filterClass);
 	}
 
-	public <T extends EventListener> T createListener(
-			Class<T> listenerClass)
+	public <T extends EventListener> T createListener(Class<T> listenerClass)
 		throws ServletException {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -157,7 +156,7 @@ public class LiferayServletContext implements ServletContext {
 	public <T extends Servlet> T createServlet(Class<T> servletClass)
 		throws ServletException {
 
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -165,7 +164,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public void declareRoles(String... roleNames) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return;
 		}
 
@@ -181,7 +180,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public ClassLoader getClassLoader() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -204,7 +203,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -212,7 +211,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public int getEffectiveMajorVersion() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return 0;
 		}
 
@@ -220,7 +219,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public int getEffectiveMinorVersion() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return 0;
 		}
 
@@ -228,7 +227,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -236,7 +235,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public FilterRegistration getFilterRegistration(String filterName) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -244,7 +243,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -260,7 +259,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public JspConfigDescriptor getJspConfigDescriptor() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -342,15 +341,17 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public ServletRegistration getServletRegistration(String servletName) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
 		return _servletContext.getServletRegistration(servletName);
 	}
 
-	public Map<String, ? extends ServletRegistration> getServletRegistrations() {
-		if (!_isVersion3) {
+	public Map<String, ? extends ServletRegistration>
+		getServletRegistrations() {
+
+		if (!_version3) {
 			return null;
 		}
 
@@ -365,7 +366,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public SessionCookieConfig getSessionCookieConfig() {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return null;
 		}
 
@@ -396,19 +397,21 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public boolean setInitParameter(String name, String value) {
-		if (!_isVersion3) {
+		if (!_version3) {
 			return false;
 		}
 
 		return _servletContext.setInitParameter(name, value);
 	}
 
-	public void setSessionTrackingModes(Set<SessionTrackingMode> modes) {
-		if (!_isVersion3) {
+	public void setSessionTrackingModes(
+		Set<SessionTrackingMode> sessionTrackingModes) {
+
+		if (!_version3) {
 			return;
 		}
 
-		_servletContext.setSessionTrackingModes(modes);
+		_servletContext.setSessionTrackingModes(sessionTrackingModes);
 	}
 
 	@Override
@@ -416,7 +419,7 @@ public class LiferayServletContext implements ServletContext {
 		return _servletContext.toString();
 	}
 
-	private boolean _isVersion3;
 	private ServletContext _servletContext;
+	private boolean _version3;
 
 }
