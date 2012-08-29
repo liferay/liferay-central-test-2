@@ -38,14 +38,15 @@ public class JSONServiceActionTest extends TestCase {
 	public void testGetArgumentValue() throws Exception {
 		JSONServiceAction jsonServiceAction = new JSONServiceAction();
 
-		String[] methodParameterNames = new String[] {
+		String[] parameters = {
 			"groupId", "categoryId", "subject", "body", "format",
 			"inputStreamOVPs", "anonymous", "priority", "allowPingbacks",
-			"serviceContext"};
+			"serviceContext"
+		};
 
 		Object[] methodAndParameterTypes =
 			jsonServiceAction.getMethodAndParameterTypes(
-				MBMessageServiceUtil.class, "addMessage", methodParameterNames,
+				MBMessageServiceUtil.class, "addMessage", parameters,
 				new String[0]);
 
 		Method method = (Method)methodAndParameterTypes[0];
@@ -58,7 +59,7 @@ public class JSONServiceActionTest extends TestCase {
 
 		Object value = jsonServiceAction.getArgValue(
 			mockHttpServletRequest, MBMessageServiceUtil.class,
-			method.getName(), methodParameterNames[5], parameterTypes[5]);
+			method.getName(), parameters[5], parameterTypes[5]);
 
 		assertEquals("[]", value.toString());
 
@@ -68,7 +69,7 @@ public class JSONServiceActionTest extends TestCase {
 
 		value = jsonServiceAction.getArgValue(
 			mockHttpServletRequest, MBMessageServiceUtil.class,
-			method.getName(), methodParameterNames[5], parameterTypes[5]);
+			method.getName(), parameters[5], parameterTypes[5]);
 
 		assertEquals(
 			"{class=com.liferay.portal.kernel.dao.orm.EntityCacheUtil}",
