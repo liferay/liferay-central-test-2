@@ -32,8 +32,8 @@ public class ViewWCWebContentTagWCSTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit Web Content"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
-			selenium.getText(
-				"//section[@id='portlet_15']/div/div/div/div/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertTrue(selenium.isVisible("//span[@class='workflow-id']"));
 		assertEquals(RuntimeVariables.replace("Version: 1.1"),
 			selenium.getText("//span[@class='workflow-version']"));
 		assertEquals(RuntimeVariables.replace("Status: Approved"),
@@ -49,8 +49,7 @@ public class ViewWCWebContentTagWCSTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//section[@id='portlet_15']/div/div/div/div/h1/span")) {
+				if (selenium.isVisible("//h1[@class='header-title']/span")) {
 					break;
 				}
 			}
@@ -61,9 +60,10 @@ public class ViewWCWebContentTagWCSTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
-			selenium.getText(
-				"//section[@id='portlet_15']/div/div/div/div/h1/span"));
-		assertTrue(selenium.isElementPresent("//span[@class='workflow-id']"));
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("\u00ab Back"),
+			selenium.getText("//a[@id='_15_TabsBack']"));
+		assertTrue(selenium.isVisible("//span[@class='workflow-id']"));
 		assertEquals(RuntimeVariables.replace("Version: 1.1"),
 			selenium.getText("//span[@class='workflow-version']"));
 		assertEquals(RuntimeVariables.replace("Status: Approved"),
@@ -72,18 +72,45 @@ public class ViewWCWebContentTagWCSTest extends BaseTestCase {
 			selenium.getText("//span/button[contains(.,'Permissions')]"));
 		assertEquals(RuntimeVariables.replace("View History"),
 			selenium.getText("//span/button[contains(.,'View History')]"));
+		assertEquals(RuntimeVariables.replace("Categorization"),
+			selenium.getText("//div[3]/h3"));
+		assertEquals(RuntimeVariables.replace("Type"),
+			selenium.getText("//label[@for='type']"));
+		assertTrue(selenium.isVisible("//select[@id='_15_type']"));
+		assertEquals("General",
+			selenium.getSelectedLabel("//select[@id='_15_type']"));
+		assertEquals(RuntimeVariables.replace("Tags"),
+			selenium.getText("//label[contains(@for,'TagNames')]"));
+		assertEquals(RuntimeVariables.replace("tag"),
+			selenium.getText(
+				"//div[contains(@id,'assetTagsSelector')]/ul/li/span/span[contains(.,'tag')]"));
 		assertEquals(RuntimeVariables.replace("Add"),
 			selenium.getText("//span/button[contains(.,'Add')]"));
 		assertEquals(RuntimeVariables.replace("Select"),
 			selenium.getText("//span/button[contains(.,'Select')]"));
 		assertEquals(RuntimeVariables.replace("Suggestions"),
 			selenium.getText("//span/button[contains(.,'Suggestions')]"));
-		assertEquals(RuntimeVariables.replace("Categorization"),
-			selenium.getText("//div[@id='_15_categorization']/h3"));
-		assertEquals("General",
-			selenium.getSelectedLabel("//select[@id='_15_type']"));
-		assertEquals(RuntimeVariables.replace("tag"),
-			selenium.getText(
-				"//div[contains(@id,'assetTagsSelector')]/ul/li/span/span[contains(.,'tag')]"));
+		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
+			selenium.getText("//span[@class='article-name']"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_contentLink']",
+				"Content"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_abstractLink']",
+				"Abstract"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_categorizationLink']",
+				"Categorization"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_scheduleLink']",
+				"Schedule"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_displayPageLink']",
+				"Display Page"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_relatedAssetsLink']",
+				"Related Assets"));
+		assertTrue(selenium.isPartialText("//a[@id='_15_customFieldsLink']",
+				"Custom Fields"));
+		assertEquals(RuntimeVariables.replace(
+				"A new version will be created automatically if this content is modified."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
+		assertTrue(selenium.isVisible("//input[@value='Save as Draft']"));
+		assertTrue(selenium.isVisible("//input[@value='Publish']"));
+		assertTrue(selenium.isVisible("xpath=(//input[@value='Cancel'])[2]"));
 	}
 }

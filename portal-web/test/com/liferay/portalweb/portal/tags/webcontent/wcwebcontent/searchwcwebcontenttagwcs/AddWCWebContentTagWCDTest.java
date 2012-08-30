@@ -32,10 +32,12 @@ public class AddWCWebContentTagWCDTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit Web Content"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
-			selenium.getText(
-				"//section[@id='portlet_15']/div/div/div/div/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertTrue(selenium.isVisible("//span[@class='workflow-id']"));
 		assertEquals(RuntimeVariables.replace("Version: 1.0"),
 			selenium.getText("//span[@class='workflow-version']"));
+		assertEquals(RuntimeVariables.replace("Status: Approved"),
+			selenium.getText("//span[@class='workflow-status']"));
 		assertTrue(selenium.isPartialText("//a[@id='_15_categorizationLink']",
 				"Categorization"));
 		selenium.clickAt("//a[@id='_15_categorizationLink']",
@@ -60,6 +62,7 @@ public class AddWCWebContentTagWCDTest extends BaseTestCase {
 
 		selenium.type("//input[@class='lfr-tag-selector-input aui-field-input-text']",
 			RuntimeVariables.replace("tag"));
+		selenium.clickAt("//button[@id='add']", RuntimeVariables.replace("Add"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
@@ -73,14 +76,34 @@ public class AddWCWebContentTagWCDTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit Web Content"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
-			selenium.getText(
-				"//section[@id='portlet_15']/div/div/div/div/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertTrue(selenium.isVisible("//span[@class='workflow-id']"));
 		assertEquals(RuntimeVariables.replace("Version: 1.1"),
 			selenium.getText("//span[@class='workflow-version']"));
+		assertEquals(RuntimeVariables.replace("Status: Approved"),
+			selenium.getText("//span[@class='workflow-status']"));
 		assertTrue(selenium.isPartialText("//a[@id='_15_categorizationLink']",
 				"Categorization"));
 		selenium.clickAt("//a[@id='_15_categorizationLink']",
 			RuntimeVariables.replace("Categorization"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[contains(@id,'assetTagsSelector')]/ul/li/span/span[contains(.,'tag')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("tag"),
 			selenium.getText(
 				"//div[contains(@id,'assetTagsSelector')]/ul/li/span/span[contains(.,'tag')]"));

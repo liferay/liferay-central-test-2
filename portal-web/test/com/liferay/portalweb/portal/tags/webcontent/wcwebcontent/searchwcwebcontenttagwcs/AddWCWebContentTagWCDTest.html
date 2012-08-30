@@ -33,13 +33,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section[@id='portlet_15']/div/div/div/div/h1/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>WC WebContent Title</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[@class='workflow-id']</td>
+	<td>Workflow ID</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//span[@class='workflow-version']</td>
 	<td>Version: 1.0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[@class='workflow-status']</td>
+	<td>Status: Approved</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
@@ -54,12 +64,17 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>//input[@class='lfr-tag-selector-input aui-field-input-text']</td>
-	<td></td>
+	<td>Tags Field</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>//input[@class='lfr-tag-selector-input aui-field-input-text']</td>
 	<td>tag</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//button[@id='add']</td>
+	<td>Add</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -88,13 +103,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section[@id='portlet_15']/div/div/div/div/h1/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>WC WebContent Title</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//span[@class='workflow-id']</td>
+	<td>Workflow ID</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//span[@class='workflow-version']</td>
 	<td>Version: 1.1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[@class='workflow-status']</td>
+	<td>Status: Approved</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
@@ -105,6 +130,11 @@
 	<td>clickAt</td>
 	<td>//a[@id='_15_categorizationLink']</td>
 	<td>Categorization</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[contains(@id,'assetTagsSelector')]/ul/li/span/span[contains(.,'tag')]</td>
+	<td>tag</td>
 </tr>
 <tr>
 	<td>assertText</td>

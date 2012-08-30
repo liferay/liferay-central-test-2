@@ -31,18 +31,19 @@ public class SearchWCWebContentTagWCSTest extends BaseTestCase {
 		selenium.clickAt("//input[@type='image']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("WC WebContent Title"));
-		assertTrue(selenium.isTextPresent("WC WebContent Content"));
-		assertTrue(selenium.isPartialText("//form/div", "Results 1 - 1 of 1."));
+		assertTrue(selenium.isPartialText("//div[@class='search-results']",
+				"Results 1 - 1 of 1."));
 		assertEquals(RuntimeVariables.replace("1."),
 			selenium.getText("//tr[contains(.,'WC WebContent Title')]/td[1]"));
+		assertTrue(selenium.isVisible(
+				"//tr[contains(.,'WC WebContent Title')]/td[2]"));
 		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
-			selenium.getText("//tr[contains(.,'WC WebContent Title')]/td[2]"));
+			selenium.getText("//tr[contains(.,'WC WebContent Title')]/td[3]"));
 		assertTrue(selenium.isPartialText(
-				"//tr[contains(.,'WC WebContent Title')]/td[3]",
+				"//tr[contains(.,'WC WebContent Title')]/td[4]",
 				"WC WebContent Content"));
 		assertTrue(selenium.isPartialText(
-				"//tr[contains(.,'WC WebContent Title')]/td[3]",
+				"//tr[contains(.,'WC WebContent Title')]/td[4]",
 				"http://localhost:8080/web/guest/web-content-display-test-page"));
 		assertTrue(selenium.isPartialText("//div[@class='search-results']",
 				"Showing 1 result."));
@@ -55,10 +56,11 @@ public class SearchWCWebContentTagWCSTest extends BaseTestCase {
 		selenium.clickAt("//input[@type='image']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("WC WebContent Title"));
-		assertFalse(selenium.isTextPresent("WC WebContent Content"));
+		assertTrue(selenium.isPartialText("//div[@class='search-results']",
+				"Results 0 - 0 of 0."));
 		assertFalse(selenium.isTextPresent("Results 1 - 1 of 1."));
-		assertTrue(selenium.isElementNotPresent("1."));
+		assertTrue(selenium.isElementNotPresent(
+				"//tr[contains(.,'WC WebContent Title')]/td[2]"));
 		assertFalse(selenium.isTextPresent("WC WebContent Title"));
 		assertFalse(selenium.isTextPresent("WC WebContent Content"));
 		assertFalse(selenium.isTextPresent(
