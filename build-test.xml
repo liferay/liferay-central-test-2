@@ -2061,6 +2061,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="tags-web-content" />
+			<param name="test.ant.script.database.collate" value="true" />
+			<param name="test.ant.script.suite" value="TagsWebContentTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="tags-wiki" />
 			<param name="test.ant.script.suite" value="TagsWikiTestSuite" />
 		</antcall>
