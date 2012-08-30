@@ -55,7 +55,8 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 	protected static void attachProcess(String message) {
 		if (!Boolean.getBoolean("attached")) {
 			ProcessExecutor.ProcessContext.attach(
-				message, 1000, new ProcessExecutor.ShutdownHook() {
+				message, 1000,
+				new ProcessExecutor.ShutdownHook() {
 
 					public boolean shutdown(
 						int shutdownCode, Throwable shutdownThrowable) {
