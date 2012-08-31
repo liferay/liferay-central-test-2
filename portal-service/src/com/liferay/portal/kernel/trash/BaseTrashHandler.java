@@ -68,7 +68,6 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		deleteTrashEntries(new long[] {classPK}, checkPermission);
 	}
 
-	@SuppressWarnings("unused")
 	public String getDeleteMessage() {
 		return "deleted-in-x";
 	}
