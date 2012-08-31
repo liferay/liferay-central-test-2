@@ -52,7 +52,7 @@ else if (tabs2.equals("page-updated-email")) {
 
 String tabs2Names = "display-settings,email-from,page-added-email,page-updated-email";
 
-if (!PropsValues.RSS_FEEDS_DISABLED) {
+if (PropsValues.RSS_FEEDS_ENABLED) {
 	tabs2Names += ",rss";
 }
 %>

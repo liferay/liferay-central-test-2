@@ -59,7 +59,7 @@ public class RSSAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		if (PropsValues.RSS_FEEDS_DISABLED) {
+		if (!PropsValues.RSS_FEEDS_ENABLED) {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, new NoSuchFeedException(),
 				actionRequest, actionResponse);
@@ -90,7 +90,7 @@ public class RSSAction extends PortletAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		if (PropsValues.RSS_FEEDS_DISABLED) {
+		if (!PropsValues.RSS_FEEDS_ENABLED) {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, new NoSuchFeedException(),
 				request, response);

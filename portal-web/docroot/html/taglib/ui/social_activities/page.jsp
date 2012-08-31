@@ -35,7 +35,7 @@ String feedTitle = (String)request.getAttribute("liferay-ui:social-activities:fe
 String feedLink = (String)request.getAttribute("liferay-ui:social-activities:feedLink");
 String feedLinkMessage = (String)request.getAttribute("liferay-ui:social-activities:feedLinkMessage");
 
-if (PropsValues.RSS_FEEDS_DISABLED) {
+if (!PropsValues.RSS_FEEDS_ENABLED) {
 	feedEnabled = false;
 }
 

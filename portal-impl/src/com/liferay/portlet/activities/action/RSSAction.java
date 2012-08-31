@@ -73,7 +73,7 @@ public class RSSAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		if (PropsValues.RSS_FEEDS_DISABLED) {
+		if (!PropsValues.RSS_FEEDS_ENABLED) {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				resourceRequest);
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(

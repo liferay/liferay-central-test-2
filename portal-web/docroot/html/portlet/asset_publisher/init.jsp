@@ -230,7 +230,7 @@ String rssDisplayStyle = preferences.getValue("rssDisplayStyle", RSSUtil.DISPLAY
 String rssFormat = preferences.getValue("rssFormat", "atom10");
 String rssName = preferences.getValue("rssName", portletDisplay.getTitle());
 
-if (PropsValues.RSS_FEEDS_DISABLED) {
+if (!PropsValues.RSS_FEEDS_ENABLED) {
 	enableRSS = false;
 }
 

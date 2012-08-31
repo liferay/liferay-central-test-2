@@ -64,7 +64,7 @@ WikiNode node = (WikiNode)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= !PropsValues.RSS_FEEDS_DISABLED %>">
+	<c:if test="<%= PropsValues.RSS_FEEDS_ENABLED %>">
 		<liferay-ui:icon
 			image="rss"
 			target="_blank"

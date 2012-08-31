@@ -32,7 +32,7 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 <br />
 
-<c:if test="<%= !PropsValues.RSS_FEEDS_DISABLED %>">
+<c:if test="<%= PropsValues.RSS_FEEDS_ENABLED %>">
 	<liferay-ui:icon-list>
 		<liferay-ui:icon
 			image="rss"

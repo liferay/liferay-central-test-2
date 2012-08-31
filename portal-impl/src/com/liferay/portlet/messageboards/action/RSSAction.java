@@ -48,7 +48,7 @@ public class RSSAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		if (PropsValues.RSS_FEEDS_DISABLED) {
+		if (!PropsValues.RSS_FEEDS_ENABLED) {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, new NoSuchFeedException(),
 				request, response);
