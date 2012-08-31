@@ -862,10 +862,11 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		if ((ParamUtil.getInteger(request, "width", 0) > 0) ||
-			(ParamUtil.getInteger(request, "height", 0) > 0)) {
+		if ((ParamUtil.getInteger(request, "height") > 0) ||
+			(ParamUtil.getInteger(request, "width") > 0)) {
 
 			InputStream inputStream = fileVersion.getContentStream(true);
+
 			Image image = ImageLocalServiceUtil.getImage(inputStream);
 
 			writeImage(image, request, response);
