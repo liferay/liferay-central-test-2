@@ -34,12 +34,8 @@ String selectionMethod = preferences.getValue("selectionMethod", "users");
 long organizationId = GetterUtil.getLong(preferences.getValue("organizationId", "0"));
 String displayStyle = preferences.getValue("displayStyle", "abstract");
 int max = GetterUtil.getInteger(preferences.getValue("max", "20"));
-boolean enableRssSubscription = GetterUtil.getBoolean(preferences.getValue("enableRssSubscription", null), true);
+boolean enableRssSubscription = !PropsValues.RSS_FEEDS_ENABLED ? false : GetterUtil.getBoolean(preferences.getValue("enableRssSubscription", null), true);
 boolean showTags = GetterUtil.getBoolean(preferences.getValue("showTags", null), true);
-
-if (!PropsValues.RSS_FEEDS_ENABLED) {
-	enableRssSubscription = false;
-}
 
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);

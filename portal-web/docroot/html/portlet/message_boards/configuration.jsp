@@ -49,12 +49,6 @@ else if (tabs2.equals("message-updated-email")) {
 	signatureEditorParam = "emailMessageUpdatedSignature";
 	signatureEditorContent = emailMessageUpdatedSignature;
 }
-
-String tabs2Names = "general,email-from,message-added-email,message-updated-email,thread-priorities,user-ranks";
-
-if (PropsValues.RSS_FEEDS_ENABLED) {
-	tabs2Names += ",rss";
-}
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -68,6 +62,14 @@ if (PropsValues.RSS_FEEDS_ENABLED) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+
+	<%
+	String tabs2Names = "general,email-from,message-added-email,message-updated-email,thread-priorities,user-ranks";
+
+	if (PropsValues.RSS_FEEDS_ENABLED) {
+		tabs2Names += ",rss";
+	}
+	%>
 
 	<liferay-ui:tabs
 		names="<%= tabs2Names %>"

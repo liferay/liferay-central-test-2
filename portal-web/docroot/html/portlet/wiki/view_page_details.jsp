@@ -154,6 +154,7 @@ int count = 0;
 		</td>
 	</tr>
 </c:if>
+
 <c:if test="<%= PropsValues.RSS_FEEDS_ENABLED %>">
 	<tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %> results-row <%= MathUtil.isOdd(count) ? "alt" : "" %>">
 		<th>
