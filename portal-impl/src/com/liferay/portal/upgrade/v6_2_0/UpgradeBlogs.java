@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_2_0.util.BlogsEntryTable;
  */
 public class UpgradeBlogs extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type BlogsEntry description STRING null");
