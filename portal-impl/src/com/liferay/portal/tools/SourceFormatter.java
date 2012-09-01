@@ -1117,9 +1117,11 @@ public class SourceFormatter {
 		if (_fileUtil.exists(basedir + "portal-impl")) {
 			fileNames = _getPortalJavaFiles();
 
-			_javaTermAlphabetizeExclusionsProperties =_getExclusionsProperties(
-				"source_formatter_javaterm_alphabetize_exclusions.properties");
-			_lineLengthExclusionsProperties = _getExclusionsProperties(
+			_javaTermAlphabetizeExclusionsProperties =
+				_getPortalExclusionsProperties(
+					"source_formatter_javaterm_alphabetize_exclusions." +
+						"properties");
+			_lineLengthExclusionsProperties = _getPortalExclusionsProperties(
 				"source_formatter_line_length_exclusions.properties");
 		}
 		else {
@@ -2884,32 +2886,6 @@ public class SourceFormatter {
 		return null;
 	}
 
-	private static Properties _getExclusionsProperties(String fileName)
-		throws IOException {
-
-		Properties exclusionsProperties = new Properties();
-
-		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
-
-		String sourceFormatterExclusions = System.getProperty(
-			"source-formatter-exclusions",
-			"com/liferay/portal/tools/dependencies/" + fileName);
-
-		URL url = classLoader.getResource(sourceFormatterExclusions);
-
-		if (url == null) {
-			return null;
-		}
-
-		InputStream inputStream = url.openStream();
-
-		exclusionsProperties.load(inputStream);
-
-		inputStream.close();
-
-		return exclusionsProperties;
-	}
-
 	private static Tuple _getJavaTermTuple(String line) {
 		int pos = line.indexOf(StringPool.OPEN_PARENTHESIS);
 
@@ -3237,6 +3213,32 @@ public class SourceFormatter {
 		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
 
 		return fileNames;
+	}
+
+	private static Properties _getPortalExclusionsProperties(String fileName)
+		throws IOException {
+
+		Properties exclusionsProperties = new Properties();
+
+		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
+
+		String sourceFormatterExclusions = System.getProperty(
+			"source-formatter-exclusions",
+			"com/liferay/portal/tools/dependencies/" + fileName);
+
+		URL url = classLoader.getResource(sourceFormatterExclusions);
+
+		if (url == null) {
+			return null;
+		}
+
+		InputStream inputStream = url.openStream();
+
+		exclusionsProperties.load(inputStream);
+
+		inputStream.close();
+
+		return exclusionsProperties;
 	}
 
 	private static Collection<String> _getPortalJavaFiles() {
