@@ -3126,19 +3126,19 @@ public class SourceFormatter {
 	private static Properties _getPluginExclusionsProperties(String fileName)
 		throws IOException {
 
-		FileInputStream fis = null;
+		FileInputStream fileInputStream = null;
 
 		int level = 0;
 
 		try {
-			fis = new FileInputStream(fileName);
+			fileInputStream = new FileInputStream(fileName);
 		}
 		catch (FileNotFoundException fnfe) {
 		}
 
-		if (fis == null) {
+		if (fileInputStream == null) {
 			try {
-				fis = new FileInputStream("../" + fileName);
+				fileInputStream = new FileInputStream("../" + fileName);
 
 				level = 1;
 			}
@@ -3146,9 +3146,9 @@ public class SourceFormatter {
 			}
 		}
 
-		if (fis == null) {
+		if (fileInputStream == null) {
 			try {
-				fis = new FileInputStream("../../" + fileName);
+				fileInputStream = new FileInputStream("../../" + fileName);
 
 				level = 2;
 			}
@@ -3157,16 +3157,15 @@ public class SourceFormatter {
 			}
 		}
 
-		Properties exclusionsProperties = new Properties();
+		Properties properties = new Properties();
 
-		exclusionsProperties.load(fis);
+		properties.load(fileInputStream);
 
 		if (level > 0) {
-			exclusionsProperties = _stripTopLevelDirectories(
-				exclusionsProperties, level);
+			properties = _stripTopLevelDirectories(properties, level);
 		}
 
-		return exclusionsProperties;
+		return properties;
 	}
 
 	private static Collection<String> _getPluginJavaFiles() {
@@ -3218,7 +3217,7 @@ public class SourceFormatter {
 	private static Properties _getPortalExclusionsProperties(String fileName)
 		throws IOException {
 
-		Properties exclusionsProperties = new Properties();
+		Properties properties = new Properties();
 
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
@@ -3234,11 +3233,11 @@ public class SourceFormatter {
 
 		InputStream inputStream = url.openStream();
 
-		exclusionsProperties.load(inputStream);
+		properties.load(inputStream);
 
 		inputStream.close();
 
-		return exclusionsProperties;
+		return properties;
 	}
 
 	private static Collection<String> _getPortalJavaFiles() {
@@ -3825,29 +3824,32 @@ public class SourceFormatter {
 			Properties properties, int level)
 		throws IOException {
 
-		String currentDir = new File(".").getCanonicalPath();
+		File dir = new File(".");
 
-		currentDir = StringUtil.replace(
-			currentDir, StringPool.BACK_SLASH, StringPool.SLASH);
+		String dirName = dir.getCanonicalPath();
 
-		int pos = currentDir.length();
+		dirName = StringUtil.replace(
+			dirName, StringPool.BACK_SLASH, StringPool.SLASH);
+
+		int pos = dirName.length();
 
 		for (int i = 0; i < level; i++) {
-			pos = currentDir.lastIndexOf(StringPool.SLASH, pos - 1);
+			pos = dirName.lastIndexOf(StringPool.SLASH, pos - 1);
 		}
 
-		String topLevelDirs = currentDir.substring(pos + 1) + StringPool.SLASH;
+		String topLevelDirNames = dirName.substring(pos + 1) + StringPool.SLASH;
 
 		Properties newProperties = new Properties();
 
 		for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 			String key = (String)entry.getKey();
 
-			if (!key.startsWith(topLevelDirs)) {
+			if (!key.startsWith(topLevelDirNames)) {
 				continue;
 			}
 
-			key = StringUtil.replaceFirst(key, topLevelDirs, StringPool.BLANK);
+			key = StringUtil.replaceFirst(
+				key, topLevelDirNames, StringPool.BLANK);
 
 			String value = (String)entry.getValue();
 
