@@ -147,22 +147,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
 			parentMessageId);
 
-		long categoryId = parentMessage.getCategoryId();
-		long groupId = parentMessage.getGroupId();
-		long threadId = parentMessage.getThreadId();
-
-		checkReplyToPermission(groupId, categoryId, parentMessageId);
-
-		if (lockLocalService.isLocked(MBThread.class.getName(), threadId)) {
-			throw new LockedThreadException();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_FILE)) {
-
-			inputStreamOVPs = Collections.emptyList();
-		}
+		checkReplyToPermission(
+			parentMessage.getGroupId(), parentMessage.getCategoryId(),
+			parentMessageId);
 
 		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
 
@@ -173,15 +160,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), parentMessageId, ActionKeys.UPDATE);
 		}
 
+		if (lockLocalService.isLocked(
+				MBThread.class.getName(), parentMessage.getThreadId())) {
+
+			throw new LockedThreadException();
+		}
+
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
+				getPermissionChecker(), parentMessage.getGroupId(),
+				parentMessage.getCategoryId(), ActionKeys.ADD_FILE)) {
+
+			inputStreamOVPs = Collections.emptyList();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), parentMessage.getGroupId(),
+				parentMessage.getCategoryId(),
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
 			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, groupId, categoryId, threadId,
+			getGuestOrUserId(), null, parentMessage.getGroupId(),
+			parentMessage.getCategoryId(), parentMessage.getThreadId(),
 			parentMessageId, subject, body, format, inputStreamOVPs, anonymous,
 			priority, allowPingbacks, serviceContext);
 	}
