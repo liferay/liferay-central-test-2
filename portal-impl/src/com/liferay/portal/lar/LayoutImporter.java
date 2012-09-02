@@ -182,9 +182,9 @@ public class LayoutImporter {
 
 		// Layouts
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		Set<Long> existingLayoutIds = new HashSet<Long>();
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.hasStagingGroup()) {
 			Group stagingGroup = group.getStagingGroup();
@@ -201,10 +201,8 @@ public class LayoutImporter {
 			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			if (!existingLayoutIds.isEmpty()) {
-				_log.debug("Delete missing layouts");
-			}
+		if (_log.isDebugEnabled() && !existingLayoutIds.isEmpty()) {
+			_log.debug("Delete missing layouts");
 		}
 
 		for (Layout layout : previousLayouts) {
@@ -617,8 +615,6 @@ public class LayoutImporter {
 
 		List<Layout> newLayouts = new ArrayList<Layout>();
 
-		Set<Long> newLayoutIds = new HashSet<Long>();
-
 		Map<Long, Layout> newLayoutsMap =
 			(Map<Long, Layout>)portletDataContext.getNewPrimaryKeysMap(
 				Layout.class);
@@ -632,8 +628,8 @@ public class LayoutImporter {
 		for (Element layoutElement : layoutElements) {
 			importLayout(
 				portletDataContext, user, layoutCache, previousLayouts,
-				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
-				themeId, colorSchemeId, layoutsImportMode, privateLayout,
+				newLayouts, newLayoutsMap, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
 				importPermissions, importPublicLayoutPermissions,
 				importThemeSettings, rootElement, layoutElement);
 		}
@@ -940,11 +936,11 @@ public class LayoutImporter {
 			PortletDataContext portletDataContext, User user,
 			LayoutCache layoutCache, List<Layout> previousLayouts,
 			List<Layout> newLayouts, Map<Long, Layout> newLayoutsMap,
-			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
-			String colorSchemeId, String layoutsImportMode,
-			boolean privateLayout, boolean importPermissions,
-			boolean importPublicLayoutPermissions, boolean importThemeSettings,
-			Element rootElement, Element layoutElement)
+			String portletsMergeMode, String themeId, String colorSchemeId,
+			String layoutsImportMode, boolean privateLayout,
+			boolean importPermissions, boolean importPublicLayoutPermissions,
+			boolean importThemeSettings, Element rootElement,
+			Element layoutElement)
 		throws Exception {
 
 		long groupId = portletDataContext.getGroupId();
@@ -1141,8 +1137,8 @@ public class LayoutImporter {
 
 			importLayout(
 				portletDataContext, user, layoutCache, previousLayouts,
-				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
-				themeId, colorSchemeId, layoutsImportMode, privateLayout,
+				newLayouts, newLayoutsMap, portletsMergeMode, themeId,
+				colorSchemeId, layoutsImportMode, privateLayout,
 				importPermissions, importPublicLayoutPermissions,
 				importThemeSettings, rootElement, (Element)parentLayoutNode);
 
@@ -1201,11 +1197,11 @@ public class LayoutImporter {
 				if (linkedLayoutNode != null) {
 					importLayout(
 						portletDataContext, user, layoutCache, previousLayouts,
-						newLayouts, newLayoutsMap, newLayoutIds,
-						portletsMergeMode, themeId, colorSchemeId,
-						layoutsImportMode, privateLayout, importPermissions,
-						importPublicLayoutPermissions, importThemeSettings,
-						rootElement, (Element)linkedLayoutNode);
+						newLayouts, newLayoutsMap, portletsMergeMode, themeId,
+						colorSchemeId, layoutsImportMode, privateLayout,
+						importPermissions, importPublicLayoutPermissions,
+						importThemeSettings, rootElement,
+						(Element)linkedLayoutNode);
 
 					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
 
@@ -1297,8 +1293,6 @@ public class LayoutImporter {
 
 		portletDataContext.setPlid(importedLayout.getPlid());
 		portletDataContext.setOldPlid(layout.getPlid());
-
-		newLayoutIds.add(importedLayout.getLayoutId());
 
 		newLayouts.add(importedLayout);
 
