@@ -137,7 +137,6 @@ public class SplitThreadAction extends PortletAction {
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-		long oldThreadId = message.getThreadId();
 		long oldParentMessageId = message.getParentMessageId();
 
 		MBThread newThread = MBThreadServiceUtil.splitThread(
