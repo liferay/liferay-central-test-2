@@ -135,13 +135,13 @@ public class VerifyGroup extends VerifyProcess {
 
 			User user = null;
 
-			if (group.isUser()) {
+			if (group.isCompany()) {
+				friendlyURL = GroupConstants.GLOBAL_FRIENDLY_URL;
+			}
+			else if (group.isUser()) {
 				user = UserLocalServiceUtil.getUserById(group.getClassPK());
 
 				friendlyURL = StringPool.SLASH + user.getScreenName();
-			}
-			else if (group.isCompany()) {
-				friendlyURL = GroupConstants.GLOBAL_FRIENDLY_URL;
 			}
 			else if (group.getClassPK() > 0) {
 				friendlyURL = StringPool.SLASH + group.getClassPK();
