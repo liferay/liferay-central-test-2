@@ -210,7 +210,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unchecked")
 	public T remove(T model) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -250,7 +249,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
-	@SuppressWarnings("unchecked")
 	public T update(T model, boolean merge) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
