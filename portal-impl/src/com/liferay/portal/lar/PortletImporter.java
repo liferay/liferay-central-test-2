@@ -423,6 +423,7 @@ public class PortletImporter {
 		boolean importData = importPortletData && (portletDataElement != null);
 
 		try {
+
 			// Portlet preferences
 
 			importPortletPreferences(

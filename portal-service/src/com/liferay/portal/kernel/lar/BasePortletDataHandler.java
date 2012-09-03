@@ -82,13 +82,12 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		long sourceGroupId = portletDataContext.getSourceGroupId();
 
 		try {
-			Document portletDataDocument = SAXReaderUtil.read(data);
+			Document document = SAXReaderUtil.read(data);
 
-			Element portletDataRootElement =
-				portletDataDocument.getRootElement();
+			Element rootElement = document.getRootElement();
 
 			long portletSourceGroupId = GetterUtil.getLong(
-				portletDataRootElement.attributeValue("group-id"));
+				rootElement.attributeValue("group-id"));
 
 			if (portletSourceGroupId != 0) {
 				portletDataContext.setSourceGroupId(portletSourceGroupId);
