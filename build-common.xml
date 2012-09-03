@@ -367,6 +367,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 	<macrodef name="manifest-helper">
 		<attribute name="analyze" default="false" />
+
 		<sequential>
 			<trycatch>
 				<try>
