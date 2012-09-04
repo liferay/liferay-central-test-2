@@ -464,7 +464,8 @@ AUI.add(
 							Liferay.fire('initLayout');
 						}
 					);
-				} else {
+				}
+				else {
 					Liferay.fire('initLayout');
 				}
 			}
