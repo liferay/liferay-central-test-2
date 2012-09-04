@@ -2070,15 +2070,16 @@ public class JournalArticleLocalServiceImpl
 		catch (IOException ioe) {
 		}
 
-		boolean addNewVersion = false;
-		boolean imported = ParamUtil.getBoolean(serviceContext, "imported");
-
 		JournalArticle latestArticle = getLatestArticle(
 			groupId, articleId, WorkflowConstants.STATUS_ANY);
 
+		JournalArticle article = latestArticle;
+
+		boolean imported = ParamUtil.getBoolean(serviceContext, "imported");
+
 		double latestVersion = latestArticle.getVersion();
 
-		JournalArticle article = latestArticle;
+		boolean addNewVersion = false;
 
 		if (imported) {
 			if (latestVersion > version) {
