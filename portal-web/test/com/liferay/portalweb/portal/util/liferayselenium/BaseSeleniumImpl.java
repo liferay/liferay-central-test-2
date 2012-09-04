@@ -98,7 +98,7 @@ public abstract class BaseSeleniumImpl
 	}
 
 	public void sendKeys(String locator, String value) {
-		_commandProcessor.doCommand("sendKeys", new String[] {locator, value,});
+		_commandProcessor.doCommand("sendKeys", new String[] {locator, value});
 	}
 
 	public void setBrowserOption() {
