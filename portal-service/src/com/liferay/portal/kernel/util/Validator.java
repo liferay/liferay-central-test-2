@@ -469,9 +469,10 @@ public class Validator {
 	 *         otherwise
 	 */
 	public static boolean isFileExtension(String fileExtension) {
-		if (isNull(fileExtension) || fileExtension.contains(StringPool.SLASH) ||
+		if (isNull(fileExtension) ||
 			fileExtension.contains(StringPool.BACK_SLASH) ||
-			fileExtension.contains(StringPool.NULL_CHAR)) {
+			fileExtension.contains(StringPool.NULL_CHAR) ||
+			fileExtension.contains(StringPool.SLASH)) {
 
 			return false;
 		}
@@ -480,9 +481,9 @@ public class Validator {
 	}
 
 	public static boolean isFileName(String name) {
-		if (isNull(name) || name.contains(StringPool.SLASH) ||
-			name.contains(StringPool.BACK_SLASH) ||
-			name.contains(StringPool.NULL_CHAR)) {
+		if (isNull(name) || name.contains(StringPool.BACK_SLASH) ||
+			name.contains(StringPool.NULL_CHAR) ||
+			name.contains(StringPool.SLASH)) {
 
 			return false;
 		}
@@ -506,20 +507,21 @@ public class Validator {
 		String normalizedPath = path.replace(
 			CharPool.BACK_SLASH, CharPool.SLASH);
 
-		if (normalizedPath.startsWith(StringPool.DOUBLE_PERIOD +
-			StringPool.SLASH)) {
+		if (normalizedPath.startsWith(
+				StringPool.DOUBLE_PERIOD.concat(StringPool.SLASH))) {
 
 			return false;
 		}
 
-		if (normalizedPath.endsWith(StringPool.SLASH +
-			StringPool.DOUBLE_PERIOD)) {
+		if (normalizedPath.endsWith(
+				StringPool.SLASH.concat(StringPool.DOUBLE_PERIOD))) {
 
 			return false;
 		}
 
-		if (normalizedPath.contains(StringPool.SLASH +
-			StringPool.DOUBLE_PERIOD + StringPool.SLASH)) {
+		if (normalizedPath.contains(
+				StringPool.SLASH.concat(
+					StringPool.DOUBLE_PERIOD).concat(StringPool.SLASH))) {
 
 			return false;
 		}
