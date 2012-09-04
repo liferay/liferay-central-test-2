@@ -314,7 +314,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 	}
 
 	protected void addResourcePermissions(Layout layout, String portletId)
-			throws Exception {
+		throws Exception {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), portletId);
