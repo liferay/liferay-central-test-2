@@ -1,11 +1,11 @@
 Selenium.prototype.doSendKeys = function(locator, value) {
-   if (this.browserbot.controlKeyDown || this.browserbot.altKeyDown || this.browserbot.metaKeyDown) {
-        throw new SeleniumError("type not supported immediately after call to controlKeyDown() or altKeyDown() or metaKeyDown()");
-    }
-        
-    var element = this.browserbot.findElement(locator);
+   if (this.browserbot.altKeyDown || this.browserbot.controlKeyDown || this.browserbot.metaKeyDown) {
+		throw new SeleniumError("type() not supported immediately after call to altKeyDown() or controlKeyDown() or metaKeyDown()");
+	}
 
-        bot.action.type(element, value);
+	var element = this.browserbot.findElement(locator);
+
+	bot.action.type(element, value);
 };
 
 Selenium.prototype.firstNumber = function(value) {
@@ -20,7 +20,7 @@ Selenium.prototype.getCurrentDay = function() {
 
 Selenium.prototype.getCurrentMonth = function() {
 	var date = new Date();
-	
+
 	var month = new Array(12);
 
 	month[0] = "January";
