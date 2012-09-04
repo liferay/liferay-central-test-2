@@ -55,10 +55,6 @@ public class JDKLoggerTestUtil {
 			_logRecords.clear();
 		}
 
-		public List<LogRecord> getLogRecords() {
-			return _logRecords;
-		}
-
 		@Override
 		public boolean isLoggable(LogRecord logRecord) {
 			return false;

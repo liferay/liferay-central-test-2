@@ -73,7 +73,6 @@ public class ClusterLinkImplTest {
 			EnableClusterLinkAdvice.class,
 			TransportationConfigurationAdvice.class
 		}
-
 	)
 	@Test
 	public void testDestroy2() throws Exception {
@@ -113,7 +112,6 @@ public class ClusterLinkImplTest {
 			EnableClusterLinkAdvice.class,
 			TransportationConfigurationAdvice.class
 		}
-
 	)
 	@Test
 	public void testGetChannel() throws Exception {
@@ -174,7 +172,6 @@ public class ClusterLinkImplTest {
 			EnableClusterLinkAdvice.class,
 			TransportationConfigurationAdvice.class
 		}
-
 	)
 	@Test
 	public void testGetLocalTransportAddresses2() throws Exception {
@@ -214,7 +211,6 @@ public class ClusterLinkImplTest {
 			EnableClusterLinkAdvice.class,
 			TransportationConfigurationAdvice.class
 		}
-
 	)
 	@Test
 	public void testGetTransportAddressesByPriority2() throws Exception {
