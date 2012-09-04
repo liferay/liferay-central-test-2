@@ -70,6 +70,10 @@ public class Validator_IW {
 		return Validator.isAscii(c);
 	}
 
+	public boolean isBlank(java.lang.String s) {
+		return Validator.isBlank(s);
+	}
+
 	public boolean isChar(char c) {
 		return Validator.isChar(c);
 	}
@@ -104,6 +108,14 @@ public class Validator_IW {
 
 	public boolean isFileExtension(java.lang.String fileExtension) {
 		return Validator.isFileExtension(fileExtension);
+	}
+
+	public boolean isFileName(java.lang.String name) {
+		return Validator.isFileName(name);
+	}
+
+	public boolean isFilePath(java.lang.String path, boolean isParentDirAllowed) {
+		return Validator.isFilePath(path, isParentDirAllowed);
 	}
 
 	public boolean isGregorianDate(int month, int day, int year) {
