@@ -28,19 +28,13 @@ import java.util.List;
  */
 public class AlloySearchResult {
 
-	public List<BaseModel<?>> getBaseModels() {
-		return baseModels;
-	}
+	public List<BaseModel<?>> getBaseModels() throws Exception {
+		if (baseModels != null) {
+			return baseModels;
+		}
 
-	public Hits getHits() {
-		return hits;
-	}
+		List<BaseModel<?>> baseModels = new ArrayList<BaseModel<?>>();
 
-	public int getSize() {
-		return size;
-	}
-
-	protected void afterPropertiesSet() throws Exception {
 		Document[] documents = hits.getDocs();
 
 		for (int i = 0; i < documents.length; i++) {
@@ -59,6 +53,20 @@ public class AlloySearchResult {
 			baseModels.add(baseModel);
 		}
 
+		this.baseModels = baseModels;
+
+		return baseModels;
+	}
+
+	public Hits getHits() {
+		return hits;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	protected void afterPropertiesSet() {
 		size = hits.getLength();
 	}
 
@@ -73,7 +81,7 @@ public class AlloySearchResult {
 	}
 
 	protected AlloyServiceInvoker alloyServiceInvoker;
-	protected List<BaseModel<?>> baseModels = new ArrayList<BaseModel<?>>();
+	protected List<BaseModel<?>> baseModels;
 	protected Hits hits;
 	protected int size;
 
