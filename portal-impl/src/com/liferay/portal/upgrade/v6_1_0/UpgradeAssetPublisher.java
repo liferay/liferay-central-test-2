@@ -16,12 +16,9 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
@@ -33,14 +30,18 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
+
+/**
+ * @author Juan Fernández
+ * @author Sergio Sanchez
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 
 	protected long getIGImageFileEntryType(long companyId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		long fileEntryTypeId = 0;
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
@@ -55,14 +56,14 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				fileEntryTypeId = rs.getLong("fileEntryTypeId");
+				return rs.getLong("fileEntryTypeId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return fileEntryTypeId;
 	}
 
 	@Override
@@ -76,9 +77,7 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		if (!GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.DL_FILE_ENTRY_TYPE_IGIMAGE))) {
-
+		if (!PropsValues.DL_FILE_ENTRY_TYPE_IG_IMAGE_AUTO_CREATE_ON_UPGRADE) {
 			return xml;
 		}
 
@@ -86,32 +85,34 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		String classNameIdsPreference[] = portletPreferences.getValues(
+		String[] classNameIds = portletPreferences.getValues(
 			"classNameIds", null);
 
-		if (Validator.isNotNull(classNameIdsPreference)) {
-			long igClassNameId = PortalUtil.getClassNameId(
+		if ((classNameIds != null) && (classNameIds.length > 0)) {
+			long dlFileEntryClassNameId = PortalUtil.getClassNameId(
+				DLFileEntry.class.getName());
+			long igImageClassNameId = PortalUtil.getClassNameId(
 				"com.liferay.portlet.imagegallery.model.IGImage");
 
-			long dlClassNameId = PortalUtil.getClassNameId(
-				DLFileEntry.class.getName());
+			List<String> classNameIdsList = ListUtil.fromArray(classNameIds);
 
-			List<String> classNameIds = ListUtil.fromArray(
-				classNameIdsPreference);
-
-			int index = classNameIds.indexOf(String.valueOf(igClassNameId));
+			int index = classNameIdsList.indexOf(
+				String.valueOf(igImageClassNameId));
 
 			if (index >= 0) {
-				classNameIds.remove(index);
+				classNameIdsList.remove(index);
 
-				if (!classNameIds.contains(String.valueOf(dlClassNameId))) {
-					classNameIds.add(index, String.valueOf(dlClassNameId));
+				if (!classNameIdsList.contains(
+						String.valueOf(dlFileEntryClassNameId))) {
+
+					classNameIdsList.add(
+						index, String.valueOf(dlFileEntryClassNameId));
 				}
 			}
 
 			portletPreferences.setValues(
 				"classNameIds",
-				classNameIds.toArray(new String[classNameIds.size()]));
+				classNameIdsList.toArray(new String[classNameIdsList.size()]));
 
 			long fileEntryTypeId = getIGImageFileEntryType(companyId);
 

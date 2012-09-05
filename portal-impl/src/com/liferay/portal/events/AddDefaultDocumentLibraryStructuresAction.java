@@ -115,8 +115,9 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_CONTRACT,
-			"Legal Contracts", DLFileEntryTypeConstants.NAME_CONTRACT,
-			ddmStructureNames, serviceContext);
+			DLFileEntryTypeConstants.NAME_CONTRACT,
+			DLFileEntryTypeConstants.NAME_CONTRACT, ddmStructureNames,
+			serviceContext);
 
 		ddmStructureNames.clear();
 
@@ -124,8 +125,9 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
-			"Marketing Banner", DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
-			ddmStructureNames, serviceContext);
+			DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
+			DLFileEntryTypeConstants.NAME_MARKETING_BANNER, ddmStructureNames,
+			serviceContext);
 
 		ddmStructureNames.clear();
 
@@ -133,8 +135,9 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
-			"Online Training", DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
-			ddmStructureNames, serviceContext);
+			DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
+			DLFileEntryTypeConstants.NAME_ONLINE_TRAINING, ddmStructureNames,
+			serviceContext);
 
 		ddmStructureNames.clear();
 
@@ -142,15 +145,16 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
-			"Sales Presentation",
+			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
 			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION, ddmStructureNames,
 			serviceContext);
 
-		if (UpgradeProcessUtil.getCreateIGImageDocumentType()) {
+		if (UpgradeProcessUtil.isCreateIGImageDocumentType()) {
 			addDLFileEntryType(
 				userId, groupId, DLFileEntryTypeConstants.NAME_IG_IMAGE,
-				"IG Image", DLFileEntryTypeConstants.NAME_IG_IMAGE,
-				ddmStructureNames, serviceContext);
+				DLFileEntryTypeConstants.NAME_IG_IMAGE,
+				DLFileEntryTypeConstants.NAME_IG_IMAGE, ddmStructureNames,
+				serviceContext);
 		}
 	}
 

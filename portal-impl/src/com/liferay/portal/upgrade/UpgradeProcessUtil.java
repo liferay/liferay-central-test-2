@@ -28,7 +28,7 @@ import com.liferay.portal.util.PropsValues;
  */
 public class UpgradeProcessUtil {
 
-	public static boolean getCreateIGImageDocumentType() {
+	public static boolean isCreateIGImageDocumentType() {
 		return _createIGImageDocumentType;
 	}
 
@@ -131,8 +131,8 @@ public class UpgradeProcessUtil {
 		}
 	}
 
-	protected static boolean _createIGImageDocumentType = false;
-
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcessUtil.class);
+
+	private static boolean _createIGImageDocumentType = false;
 
 }

@@ -23,9 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,7 +33,6 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
@@ -250,10 +247,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected void addIGImageDocumentType() throws Exception {
-		if (!GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.DL_FILE_ENTRY_TYPE_IGIMAGE))) {
-
+	protected void addIGImageDLFileEntryType() throws Exception {
+		if (!PropsValues.DL_FILE_ENTRY_TYPE_IG_IMAGE_AUTO_CREATE_ON_UPGRADE) {
 			return;
 		}
 
@@ -268,20 +263,55 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			long companyId = 0;
-
 			while (rs.next()) {
-				companyId = rs.getLong("companyId");
-
-				long userId = getDefaultUserId(companyId);
+				long companyId = rs.getLong("companyId");
 
 				long groupId = getCompanyGroupId(companyId);
-
+				long userId = getDefaultUserId(companyId);
 				Timestamp now = new Timestamp(System.currentTimeMillis());
 
-				insertIGImageDocumentType(
+				addIGImageDLFileEntryType(
 					groupId, companyId, userId, StringPool.BLANK, now, now);
 			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void addIGImageDLFileEntryType(
+			long groupId, long companyId, long userId, String userName,
+			Timestamp createDate, Timestamp modifiedDate)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("insert into DLFileEntryType (uuid_, groupId, ");
+			sb.append("companyId, userId, userName, createDate, ");
+			sb.append("modifiedDate, name, description, fileEntryTypeId) ");
+			sb.append("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			ps = con.prepareStatement(sb.toString());
+
+			ps.setString(1, PortalUUIDUtil.generate());
+			ps.setLong(2, groupId);
+			ps.setLong(3, companyId);
+			ps.setLong(4, userId);
+			ps.setString(5, userName);
+			ps.setTimestamp(6, createDate);
+			ps.setTimestamp(7, modifiedDate);
+			ps.setString(8, DLFileEntryTypeConstants.NAME_IG_IMAGE);
+			ps.setString(9, DLFileEntryTypeConstants.NAME_IG_IMAGE);
+			ps.setLong(10, increment());
+
+			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -354,7 +384,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		addIGImageDocumentType();
+		addIGImageDLFileEntryType();
 		updateIGFolderEntries();
 		updateIGImageEntries();
 		updateIGFolderPermissions();
@@ -373,14 +403,12 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long groupId = 0;
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
 				"select groupId from Group_ where classNameId = ? and " +
-						"classPK = ?");
+					"classPK = ?");
 
 			ps.setLong(1, PortalUtil.getClassNameId(Company.class.getName()));
 			ps.setLong(2, companyId);
@@ -388,14 +416,14 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				groupId = rs.getLong("groupId");
+				return rs.getLong("groupId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return groupId;
 	}
 
 	protected long getDefaultUserId(long companyId) throws Exception {
@@ -403,30 +431,27 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long userId = 0;
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select userId from User_ where defaultUser = ? and " +
-					"companyId = ?");
+				"select userId from User_ where companyId = ? and " +
+					"defaultUser = ?");
 
-			ps.setInt(1, 1);
-			ps.setLong(2, companyId);
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				userId = rs.getLong("userId");
+				return rs.getLong("userId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return userId;
-
 	}
 
 	protected Object[] getImage(long imageId) throws Exception {
@@ -450,45 +475,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			}
 
 			return null;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void insertIGImageDocumentType(
-			long groupId, long companyId, long userId, String userName,
-			Timestamp createDate, Timestamp modifiedDate)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("insert into DLFileEntryType (uuid_, groupId, ");
-			sb.append("companyId, userId, userName, createDate, ");
-			sb.append("modifiedDate, name, description, fileEntryTypeId) ");
-			sb.append("values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-			ps = con.prepareStatement(sb.toString());
-
-			ps.setString(1, PortalUUIDUtil.generate());
-			ps.setLong(2, groupId);
-			ps.setLong(3, companyId);
-			ps.setLong(4, userId);
-			ps.setString(5, userName);
-			ps.setTimestamp(6, createDate);
-			ps.setTimestamp(7, modifiedDate);
-			ps.setString(8, DLFileEntryTypeConstants.NAME_IG_IMAGE);
-			ps.setString(9, DLFileEntryTypeConstants.NAME_IG_IMAGE);
-			ps.setLong(10, increment());
-
-			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -688,8 +674,104 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected void updateCompanyIGImageEntries(
-			long companyId, long fileEntryTypeId)
+	protected void updateIGFolderEntries() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select * from IGFolder order by folderId asc");
+
+			rs = ps.executeQuery();
+
+			Map<Long, Long> folderIds = new HashMap<Long, Long>();
+
+			while (rs.next()) {
+				String uuid = rs.getString("uuid_");
+				long folderId = rs.getLong("folderId");
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+				long userId = rs.getLong("userId");
+				String userName = rs.getString("userName");
+				Timestamp createDate = rs.getTimestamp("createDate");
+				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
+				long parentFolderId = rs.getLong("parentFolderId");
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+
+				if (folderIds.containsKey(parentFolderId)) {
+					parentFolderId = folderIds.get(parentFolderId);
+				}
+
+				boolean update = updateIGImageFolderId(
+					groupId, name, parentFolderId, folderId, folderIds);
+
+				if (!update) {
+					addDLFolderEntry(
+						uuid, folderId, groupId, companyId, userId, userName,
+						createDate, modifiedDate, groupId, parentFolderId, name,
+						description, modifiedDate);
+				}
+			}
+
+			runSQL("drop table IGFolder");
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateIGFolderPermissions() throws Exception {
+		deleteConflictingIGPermissions(
+			_IG_FOLDER_CLASS_NAME, DLFolder.class.getName());
+
+		runSQL("update ResourcePermission set name = '" +
+			DLFolder.class.getName() +
+				"' where name = '" + _IG_FOLDER_CLASS_NAME + "'");
+	}
+
+	protected void updateIGImageEntries() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select fileEntryTypeId, companyId from DLFileEntryType " +
+					"where name = ?");
+
+			ps.setString(1, DLFileEntryTypeConstants.NAME_IG_IMAGE);
+
+			rs = ps.executeQuery();
+
+			boolean hasIGImageFileEntryType = false;
+
+			while (rs.next()) {
+				long fileEntryTypeId = rs.getLong("fileEntryTypeId");
+				long companyId = rs.getLong("companyId");
+
+				updateIGImageEntries(companyId, fileEntryTypeId);
+
+				hasIGImageFileEntryType = true;
+			}
+
+			if (!hasIGImageFileEntryType) {
+				updateIGImageEntries(0, 0);
+			}
+
+			runSQL("drop table IGImage");
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateIGImageEntries(long companyId, long fileEntryTypeId)
 		throws Exception {
 
 		Connection con = null;
@@ -775,106 +857,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 					fileEntryTypeId, "1.0", size, 0, userId, userName,
 					modifiedDate);
 			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateIGFolderEntries() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select * from IGFolder order by folderId asc");
-
-			rs = ps.executeQuery();
-
-			Map<Long, Long> folderIds = new HashMap<Long, Long>();
-
-			while (rs.next()) {
-				String uuid = rs.getString("uuid_");
-				long folderId = rs.getLong("folderId");
-				long groupId = rs.getLong("groupId");
-				long companyId = rs.getLong("companyId");
-				long userId = rs.getLong("userId");
-				String userName = rs.getString("userName");
-				Timestamp createDate = rs.getTimestamp("createDate");
-				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
-				long parentFolderId = rs.getLong("parentFolderId");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-
-				if (folderIds.containsKey(parentFolderId)) {
-					parentFolderId = folderIds.get(parentFolderId);
-				}
-
-				boolean update = updateIGImageFolderId(
-					groupId, name, parentFolderId, folderId, folderIds);
-
-				if (!update) {
-					addDLFolderEntry(
-						uuid, folderId, groupId, companyId, userId, userName,
-						createDate, modifiedDate, groupId, parentFolderId, name,
-						description, modifiedDate);
-				}
-			}
-
-			runSQL("drop table IGFolder");
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateIGFolderPermissions() throws Exception {
-		deleteConflictingIGPermissions(
-			_IG_FOLDER_CLASS_NAME, DLFolder.class.getName());
-
-		runSQL("update ResourcePermission set name = '" +
-			DLFolder.class.getName() +
-				"' where name = '" + _IG_FOLDER_CLASS_NAME + "'");
-	}
-
-	protected void updateIGImageEntries() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		long companyId = 0;
-		long fileEntryTypeId = 0;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select companyId, fileEntryTypeId from DLFileEntryType " +
-					"where name = ?");
-
-			ps.setString(1, DLFileEntryTypeConstants.NAME_IG_IMAGE);
-
-			rs = ps.executeQuery();
-
-			int results = 0;
-
-			while (rs.next()) {
-				companyId = rs.getLong("companyId");
-				fileEntryTypeId = rs.getLong("fileEntryTypeId");
-
-				updateCompanyIGImageEntries(companyId, fileEntryTypeId);
-
-				results++;
-			}
-
-			if (results == 0) {
-				updateCompanyIGImageEntries(companyId, 0);
-			}
-
-			runSQL("drop table IGImage");
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);

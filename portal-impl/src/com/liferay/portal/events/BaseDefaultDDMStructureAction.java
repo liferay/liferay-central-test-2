@@ -94,7 +94,7 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 				xsd, ddmStructureDefaultLocale, LocaleUtil.getDefault());
 
 			if (name.equals(DLFileEntryTypeConstants.NAME_IG_IMAGE) &&
-				!UpgradeProcessUtil.getCreateIGImageDocumentType()) {
+				!UpgradeProcessUtil.isCreateIGImageDocumentType()) {
 
 				continue;
 			}

@@ -129,7 +129,7 @@
 		</root>
 	</structure>
 	<structure>
-		<name><![CDATA[IG Image]]></name>
+		<name><![CDATA[Image Gallery Image]]></name>
 		<dynamic-structure>true</dynamic-structure>
 		<root available-locales="en_US" default-locale="en_US"/>
 	</structure>

@@ -16,12 +16,10 @@ package com.liferay.portal.upgrade.v6_0_12_to_6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -33,6 +31,7 @@ import java.sql.ResultSet;
 /**
  * @author Juan Fernández
  * @author Sergio González
+ * @author Brian Wing Shun Chan
  */
 public class UpgradeAsset extends UpgradeProcess {
 
@@ -102,37 +101,37 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void updateIGImageClassName() throws Exception {
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.DL_FILE_ENTRY_TYPE_IGIMAGE))) {
-
-			UpgradeProcessUtil.setCreateIGImageDocumentType(true);
-
-			updateIGImageClassNameClassTypeId();
-
-		}
-		else {
-			updateIGImageClassNameNotClassTypeId();
-		}
-	}
-
-	protected void updateIGImageClassNameClassTypeId() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
 		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
 			DLFileEntry.class.getName());
 		long igImageClassNameId = PortalUtil.getClassNameId(
 			"com.liferay.portlet.imagegallery.model.IGImage");
 
-		long fileEntryTypeId = 0;
-		long companyId = 0;
+		if (PropsValues.DL_FILE_ENTRY_TYPE_IG_IMAGE_AUTO_CREATE_ON_UPGRADE) {
+			UpgradeProcessUtil.setCreateIGImageDocumentType(true);
+
+			updateIGImageClassNameWithClassTypeId(
+				dlFileEntryClassNameId, igImageClassNameId);
+
+		}
+		else {
+			updateIGImageClassNameWithoutClassTypeId(
+				dlFileEntryClassNameId, igImageClassNameId);
+		}
+	}
+
+	protected void updateIGImageClassNameWithClassTypeId(
+			long dlFileEntryClassNameId, long igImageClassNameId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select companyId, fileEntryTypeId from DLFileEntryType " +
+				"select fileEntryTypeId, companyId from DLFileEntryType " +
 					"where name = ?");
 
 			ps.setString(1, DLFileEntryTypeConstants.NAME_IG_IMAGE);
@@ -140,8 +139,8 @@ public class UpgradeAsset extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				fileEntryTypeId = rs.getLong("fileEntryTypeId");
-				companyId = rs.getLong("companyId");
+				long fileEntryTypeId = rs.getLong("fileEntryTypeId");
+				long companyId = rs.getLong("companyId");
 
 				StringBundler sb = new StringBundler(8);
 
@@ -162,11 +161,9 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 	}
 
-	protected void updateIGImageClassNameNotClassTypeId() throws Exception {
-		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class.getName());
-		long igImageClassNameId = PortalUtil.getClassNameId(
-			"com.liferay.portlet.imagegallery.model.IGImage");
+	protected void updateIGImageClassNameWithoutClassTypeId(
+			long dlFileEntryClassNameId, long igImageClassNameId)
+		throws Exception {
 
 		runSQL(
 			"update AssetEntry set classNameId = " + dlFileEntryClassNameId +
