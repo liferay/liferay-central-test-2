@@ -58,13 +58,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.wiki.model.WikiPage;
 
-import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -390,14 +386,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.addFacet(scopeFacet);
 
-			Map<String, Serializable> attributes =
-				new HashMap<String, Serializable>();
-
-			attributes.put("paginationType", "regular");
-			attributes.put("status", status);
-
-			searchContext.setAttributes(attributes);
-
+			searchContext.setAttribute("paginationType", "regular");
+			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(getClassNames(className));
@@ -466,18 +456,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAssetCategoryIds(
 				StringUtil.split(assetCategoryIds, 0L));
 			searchContext.setAssetTagNames(StringUtil.split(assetTagNames));
-
-			Map<String, Serializable> attributes =
-				new HashMap<String, Serializable>();
-
-			attributes.put(Field.DESCRIPTION, description);
-			attributes.put(Field.TITLE, title);
-			attributes.put(Field.USER_NAME, userName);
-			attributes.put("paginationType", "regular");
-			attributes.put("status", status);
-
-			searchContext.setAttributes(attributes);
-
+			searchContext.setAttribute(Field.DESCRIPTION, description);
+			searchContext.setAttribute(Field.TITLE, title);
+			searchContext.setAttribute(Field.USER_NAME, userName);
+			searchContext.setAttribute("paginationType", "regular");
+			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(getClassNames(className));
