@@ -58,13 +58,13 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Raymond Augé
  */
-public class WikiIndexer extends BaseIndexer {
+public class WikiPageIndexer extends BaseIndexer {
 
 	public static final String[] CLASS_NAMES = {WikiPage.class.getName()};
 
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
-	public WikiIndexer() {
+	public WikiPageIndexer() {
 		setPermissionAware(true);
 	}
 
