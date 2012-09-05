@@ -48,7 +48,7 @@ import javax.portlet.WindowState;
 public class WikiPageAssetRenderer
 	extends BaseAssetRenderer implements TrashRenderer {
 
-	public static final String TYPE = "wiki-page";
+	public static final String TYPE = "wiki_page";
 
 	public WikiPageAssetRenderer(WikiPage page) {
 		_page = page;
