@@ -37,8 +37,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -260,49 +258,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		return sb.toString();
 	}
 
-	protected Object getModel(String className, String method, long primaryKey)
-		throws Exception {
-
-		MethodKey modelMethodKey = new MethodKey(className, method, long.class);
-
-		MethodHandler methodHandler = new MethodHandler(
-			modelMethodKey, primaryKey);
-
-		return methodHandler.invoke(false);
-	}
-
-	protected List<Object> getModels(Hits hits, String className)
-		throws Exception {
-
-		List<Object> objects = new ArrayList<Object>();
-
-		for (int i = 0; i < hits.getDocs().length; i++) {
-			Document document = hits.doc(i);
-
-			long entryClassPK = GetterUtil.getLong(
-				document.get(Field.ENTRY_CLASS_PK));
-
-			int pos = className.indexOf(".model.");
-
-			String simpleClassName = className.substring(pos + 7);
-
-			String serviceClassName =
-				className.substring(0, pos) + ".service." + simpleClassName +
-					"LocalServiceUtil";
-
-			Object model = getModel(
-				serviceClassName, "fetch" + simpleClassName, entryClassPK);
-
-			if (model == null) {
-				continue;
-			}
-
-			objects.add(model);
-		}
-
-		return objects;
-	}
-
 	protected long increment(String name) throws Exception {
 		return CounterLocalServiceUtil.increment(name);
 	}
@@ -327,6 +282,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		if ((existingIndexer != null) && (existingIndexer == indexer)) {
 			return;
 		}
+
+		alloyServiceInvoker = new AlloyServiceInvoker(indexerClassName);
+
+		BaseAlloyIndexer baseAlloyIndexer = (BaseAlloyIndexer)indexer;
+
+		baseAlloyIndexer.setAlloyServiceInvoker(alloyServiceInvoker);
+		baseAlloyIndexer.setClassName(indexerClassName);
+		baseAlloyIndexer.setPortletId(portlet.getRootPortletId());
 
 		PortletBag portletBag = PortletBagPool.get(portlet.getPortletId());
 
@@ -383,14 +346,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			log.debug("Action path " + actionPath);
 		}
 
-		if (mimeResponse != null) {
-			portletURL = mimeResponse.createRenderURL();
-
-			portletURL.setParameter("action", actionPath);
-			portletURL.setParameter("controller", controllerPath);
-			portletURL.setParameter("format", "html");
-		}
-
 		viewPath = GetterUtil.getString(
 			(String)request.getAttribute(VIEW_PATH));
 
@@ -398,6 +353,18 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		if (log.isDebugEnabled()) {
 			log.debug("View path " + viewPath);
+		}
+
+		if (mimeResponse != null) {
+			portletURL = mimeResponse.createRenderURL();
+
+			portletURL.setParameter("action", actionPath);
+			portletURL.setParameter("controller", controllerPath);
+			portletURL.setParameter("format", "html");
+
+			if (log.isDebugEnabled()) {
+				log.debug("Portlet URL " + portletURL);
+			}
 		}
 	}
 
@@ -498,13 +465,16 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		render(_VIEW_PATH_ERROR);
 	}
 
-	protected Hits search(String keywords) throws Exception {
+	protected List<BaseModel<?>> search(String keywords) throws Exception {
 		if (indexer == null) {
 			throw new Exception("No indexer found for " + controllerPath);
 		}
 
-		SearchContainer searchContainer = new SearchContainer(
-			portletRequest, portletURL, null, null);
+		List<BaseModel<?>> baseModels = new ArrayList<BaseModel<?>>();
+
+		SearchContainer<BaseModel<?>> searchContainer =
+			new SearchContainer<BaseModel<?>>(
+				portletRequest, portletURL, null, null);
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
@@ -516,7 +486,27 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		searchContext.setStart(searchContainer.getStart());
 
-		return indexer.search(searchContext);
+		Hits hits = indexer.search(searchContext);
+
+		Document[] documents = hits.getDocs();
+
+		for (int i = 0; i < documents.length; i++) {
+			Document document = hits.doc(i);
+
+			long entryClassPK = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+
+			BaseModel<?> baseModel = alloyServiceInvoker.fetchModel(
+				entryClassPK);
+
+			if (baseModel == null) {
+				continue;
+			}
+
+			baseModels.add(baseModel);
+		}
+
+		return baseModels;
 	}
 
 	protected String translate(String pattern, Object... arguments) {
@@ -608,6 +598,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected ActionRequest actionRequest;
 	protected ActionResponse actionResponse;
 	protected AlloyPortlet alloyPortlet;
+	protected AlloyServiceInvoker alloyServiceInvoker;
 	protected ClassLoader classLoader;
 	protected Class<?> clazz;
 	protected Company company;
