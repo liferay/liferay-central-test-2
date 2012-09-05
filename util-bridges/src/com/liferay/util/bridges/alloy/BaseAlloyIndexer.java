@@ -146,11 +146,15 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	protected void setClassName(String className) {
-		classNames = new String[] {className};
+		if (this.classNames == null) {
+			classNames = new String[] {className};
+		}
 	}
 
 	protected void setPortletId(String portletId) {
-		this.portletId = portletId;
+		if (this.portletId == null) {
+			this.portletId = portletId;
+		}
 	}
 
 	protected AlloyServiceInvoker alloyServiceInvoker;
