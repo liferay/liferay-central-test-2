@@ -145,7 +145,7 @@ public class EditNodeAction extends PortletAction {
 		WikiCacheThreadLocal.setClearCache(false);
 
 		if (moveToTrash) {
-			WikiNodeServiceUtil.moveEntryToTrash(nodeId);
+			WikiNodeServiceUtil.moveNodeToTrash(nodeId);
 		}
 		else {
 			WikiNodeServiceUtil.deleteNode(nodeId);

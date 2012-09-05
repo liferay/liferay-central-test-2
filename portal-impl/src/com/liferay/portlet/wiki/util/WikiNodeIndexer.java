@@ -73,10 +73,10 @@ public class WikiNodeIndexer extends BaseIndexer {
 			long entryClassPK, String actionId)
 		throws Exception {
 
-		WikiNode wikiNode = WikiNodeLocalServiceUtil.getNode(entryClassPK);
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(entryClassPK);
 
 		return WikiNodePermission.contains(
-			permissionChecker, wikiNode, ActionKeys.VIEW);
+			permissionChecker, node, ActionKeys.VIEW);
 	}
 
 	protected void addReindexCriteria(
@@ -93,28 +93,26 @@ public class WikiNodeIndexer extends BaseIndexer {
 
 	@Override
 	protected void doDelete(Object obj) throws Exception {
-		WikiNode wikiNode = (WikiNode)obj;
+		WikiNode node = (WikiNode)obj;
 
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, wikiNode.getNodeId(), wikiNode.getName());
+		document.addUID(PORTLET_ID, node.getNodeId(), node.getName());
 
 		SearchEngineUtil.deleteDocument(
-			getSearchEngineId(), wikiNode.getCompanyId(),
-			document.get(Field.UID));
+			getSearchEngineId(), node.getCompanyId(), document.get(Field.UID));
 	}
 
 	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
-		WikiNode wikiNode = (WikiNode)obj;
+		WikiNode node = (WikiNode)obj;
 
-		Document document = getBaseModelDocument(PORTLET_ID, wikiNode);
+		Document document = getBaseModelDocument(PORTLET_ID, node);
 
-		document.addUID(PORTLET_ID, wikiNode.getNodeId(), wikiNode.getName());
+		document.addUID(PORTLET_ID, node.getNodeId(), node.getName());
 
-		document.addText(Field.TITLE, wikiNode.getName());
-
-		document.addText(Field.DESCRIPTION, wikiNode.getDescription());
+		document.addText(Field.DESCRIPTION, node.getDescription());
+		document.addText(Field.TITLE, node.getName());
 
 		return document;
 	}
@@ -130,19 +128,19 @@ public class WikiNodeIndexer extends BaseIndexer {
 
 	@Override
 	protected void doReindex(Object obj) throws Exception {
-		WikiNode wikiNode = (WikiNode)obj;
+		WikiNode node = (WikiNode)obj;
 
 		Document document = getDocument(obj);
 
 		SearchEngineUtil.updateDocument(
-			getSearchEngineId(), wikiNode.getCompanyId(), document);
+			getSearchEngineId(), node.getCompanyId(), document);
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		WikiNode wikiNode = WikiNodeLocalServiceUtil.getNode(classPK);
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
 
-		doReindex(wikiNode);
+		doReindex(node);
 	}
 
 	@Override
@@ -176,30 +174,28 @@ public class WikiNodeIndexer extends BaseIndexer {
 		List<Object[]> results = WikiNodeLocalServiceUtil.dynamicQuery(
 			dynamicQuery);
 
-		Object[] minAndMaxThreadIds = results.get(0);
+		Object[] minAndMaxNodeIds = results.get(0);
 
-		if ((minAndMaxThreadIds[0] == null) ||
-				(minAndMaxThreadIds[1] == null)) {
-
+		if ((minAndMaxNodeIds[0] == null) || (minAndMaxNodeIds[1] == null)) {
 			return;
 		}
 
-		long minThreadId = (Long)minAndMaxThreadIds[0];
-		long maxThreadId = (Long)minAndMaxThreadIds[1];
+		long minNodeId = (Long)minAndMaxNodeIds[0];
+		long maxNodeId = (Long)minAndMaxNodeIds[1];
 
-		long startThreadId = minThreadId;
-		long endThreadId = startThreadId + DEFAULT_INTERVAL;
+		long startNodeId = minNodeId;
+		long endNodeId = startNodeId + DEFAULT_INTERVAL;
 
-		while (startThreadId <= maxThreadId) {
-			reindexEntries(companyId, startThreadId, endThreadId);
+		while (startNodeId <= maxNodeId) {
+			reindexEntries(companyId, startNodeId, endNodeId);
 
-			startThreadId = endThreadId;
-			endThreadId += DEFAULT_INTERVAL;
+			startNodeId = endNodeId;
+			endNodeId += DEFAULT_INTERVAL;
 		}
 	}
 
 	protected void reindexEntries(
-			long companyId, long startThreadId, long endThreadId)
+			long companyId, long startNodeId, long endNodeId)
 		throws Exception {
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
@@ -207,23 +203,22 @@ public class WikiNodeIndexer extends BaseIndexer {
 
 		Property property = PropertyFactoryUtil.forName("nodeId");
 
-		dynamicQuery.add(property.ge(startThreadId));
-		dynamicQuery.add(property.lt(endThreadId));
+		dynamicQuery.add(property.ge(startNodeId));
+		dynamicQuery.add(property.lt(endNodeId));
 
 		addReindexCriteria(dynamicQuery, companyId);
 
-		List<WikiNode> wikiNodes = WikiNodeLocalServiceUtil.dynamicQuery(
+		List<WikiNode> nodes = WikiNodeLocalServiceUtil.dynamicQuery(
 			dynamicQuery);
 
-		if (wikiNodes.isEmpty()) {
+		if (nodes.isEmpty()) {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>(
-			wikiNodes.size());
+		Collection<Document> documents = new ArrayList<Document>(nodes.size());
 
-		for (WikiNode wikiNode : wikiNodes) {
-			Document document = getDocument(wikiNode);
+		for (WikiNode node : nodes) {
+			Document document = getDocument(node);
 
 			documents.add(document);
 		}

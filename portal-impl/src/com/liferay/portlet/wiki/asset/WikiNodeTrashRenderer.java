@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.wiki.asset;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.trash.BaseTrashRenderer;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -39,9 +37,7 @@ public class WikiNodeTrashRenderer extends BaseTrashRenderer {
 
 	public static final String TYPE = "wiki_node";
 
-	public WikiNodeTrashRenderer(WikiNode node)
-		throws PortalException, SystemException {
-
+	public WikiNodeTrashRenderer(WikiNode node) {
 		_node = node;
 	}
 

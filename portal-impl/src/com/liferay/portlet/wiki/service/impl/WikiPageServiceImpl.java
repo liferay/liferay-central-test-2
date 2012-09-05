@@ -340,25 +340,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getUserId(), tempFolderName);
 	}
 
-	public void moveEntryToTrash(long nodeId, String title)
-		throws PortalException, SystemException {
-
-		WikiPagePermission.check(
-			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
-
-		wikiPageLocalService.moveEntryToTrash(getUserId(), nodeId, title);
-	}
-
-	public void moveEntryToTrash(long nodeId, String title, double version)
-		throws PortalException, SystemException {
-
-		WikiPagePermission.check(
-			getPermissionChecker(), nodeId, title, version, ActionKeys.DELETE);
-
-		wikiPageLocalService.moveEntryToTrash(
-			getUserId(), nodeId, title, version);
-	}
-
 	public void movePage(
 			long nodeId, String title, String newTitle,
 			ServiceContext serviceContext)
@@ -394,6 +375,25 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		return wikiPageLocalService.movePageAttachmentToTrash(
 			nodeId, title, fileName);
+	}
+
+	public void movePageToTrash(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
+
+		wikiPageLocalService.movePageToTrash(getUserId(), nodeId, title);
+	}
+
+	public void movePageToTrash(long nodeId, String title, double version)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, version, ActionKeys.DELETE);
+
+		wikiPageLocalService.movePageToTrash(
+			getUserId(), nodeId, title, version);
 	}
 
 	public void restorePageFromTrash(long resourcePrimKey)

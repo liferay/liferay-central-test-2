@@ -123,18 +123,18 @@ public class TrashUtil {
 			separator);
 	}
 
-	public void setTrash(Trash trash) {
-		PortalRuntimePermission.checkSetBeanProperty(getClass());
-
-		_trash = trash;
-	}
-
 	public static String stripTrashNamespace(String title) {
 		return getTrash().stripTrashNamespace(title);
 	}
 
 	public static String stripTrashNamespace(String title, String separator) {
 		return getTrash().stripTrashNamespace(title, separator);
+	}
+
+	public void setTrash(Trash trash) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
+		_trash = trash;
 	}
 
 	private static Trash _trash;

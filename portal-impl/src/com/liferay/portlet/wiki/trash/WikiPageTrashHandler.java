@@ -37,10 +37,10 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 	public void checkDuplicateTrashEntry(TrashEntry trashEntry, String newName)
 		throws PortalException, SystemException {
 
-		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
+		WikiPage page = WikiPageLocalServiceUtil.getPage(
 			trashEntry.getClassPK());
 
-		String restoredTitle = wikiPage.getTitle();
+		String restoredTitle = page.getTitle();
 
 		if (Validator.isNotNull(newName)) {
 			restoredTitle = newName;
@@ -48,14 +48,14 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
 
-		WikiPage duplicatedWikiPage = WikiPageLocalServiceUtil.fetchWikiPage(
-			wikiPage.getNodeId(), originalTitle, wikiPage.getVersion());
+		WikiPage duplicatePage = WikiPageLocalServiceUtil.fetchPage(
+			page.getNodeId(), originalTitle, page.getVersion());
 
-		if (duplicatedWikiPage != null) {
+		if (duplicatePage != null) {
 			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dee.setDuplicateEntryId(duplicatedWikiPage.getPageId());
-			dee.setOldName(duplicatedWikiPage.getTitle());
+			dee.setDuplicateEntryId(duplicatePage.getPageId());
+			dee.setOldName(duplicatePage.getTitle());
 			dee.setTrashEntryId(trashEntry.getEntryId());
 
 			throw dee;
@@ -75,15 +75,15 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 		throws PortalException, SystemException {
 
 		for (long classPK : classPKs) {
-			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(classPK);
+			WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
 
 			if (checkPermission) {
 				WikiPageServiceUtil.deletePage(
-					wikiPage.getNodeId(), wikiPage.getTitle());
+					page.getNodeId(), page.getTitle());
 			}
 			else {
 				WikiPageLocalServiceUtil.deletePage(
-					wikiPage.getNodeId(), wikiPage.getTitle());
+					page.getNodeId(), page.getTitle());
 			}
 		}
 	}
@@ -133,11 +133,11 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 	public void updateTitle(long classPK, String name)
 		throws PortalException, SystemException {
 
-		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(classPK);
+		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
 
-		wikiPage.setTitle(name);
+		page.setTitle(name);
 
-		WikiPageLocalServiceUtil.updateWikiPage(wikiPage, false);
+		WikiPageLocalServiceUtil.updateWikiPage(page, false);
 	}
 
 }

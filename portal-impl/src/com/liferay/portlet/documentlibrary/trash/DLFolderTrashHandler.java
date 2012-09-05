@@ -59,14 +59,14 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
 
-		DLFolder duplicatedFolder = DLFolderLocalServiceUtil.fetchFolder(
+		DLFolder duplicateDLFolder = DLFolderLocalServiceUtil.fetchFolder(
 			dlFolder.getGroupId(), dlFolder.getParentFolderId(), originalTitle);
 
-		if (duplicatedFolder != null) {
+		if (duplicateDLFolder != null) {
 			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dee.setDuplicateEntryId(duplicatedFolder.getFolderId());
-			dee.setOldName(duplicatedFolder.getName());
+			dee.setDuplicateEntryId(duplicateDLFolder.getFolderId());
+			dee.setOldName(duplicateDLFolder.getName());
 			dee.setTrashEntryId(trashEntry.getEntryId());
 
 			throw dee;

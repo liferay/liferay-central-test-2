@@ -466,7 +466,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiPagePersistence.removeByN_T(page.getNodeId(), page.getTitle());
 
-		// All referrals
+		// References
 
 		wikiPagePersistence.removeByN_R(page.getNodeId(), page.getTitle());
 
@@ -625,7 +625,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		TempFileUtil.deleteTempFile(userId, fileName, tempFolderName);
 	}
 
-	public WikiPage fetchWikiPage(long nodeId, String title, double version)
+	public WikiPage fetchPage(long nodeId, String title, double version)
 		throws SystemException {
 
 		return wikiPagePersistence.fetchByN_T_V(nodeId, title, version);
@@ -775,11 +775,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage getPage(long resourcePrimKey, Boolean head)
 		throws PortalException, SystemException {
 
-		WikiPageResource wikiPageResource =
+		WikiPageResource pageResource =
 			wikiPageResourceLocalService.getPageResource(resourcePrimKey);
 
-		return getPage(
-			wikiPageResource.getNodeId(), wikiPageResource.getTitle(), head);
+		return getPage(pageResource.getNodeId(), pageResource.getTitle(), head);
 	}
 
 	public WikiPage getPage(long nodeId, String title)
@@ -1047,51 +1046,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public WikiPage moveEntryToTrash(long userId, long nodeId, String title)
-		throws PortalException, SystemException {
-
-		List<WikiPage> wikiPages = wikiPagePersistence.findByN_T_H(
-			nodeId, title, true, 0, 1);
-
-		if (!wikiPages.isEmpty()) {
-			return moveEntryToTrash(userId, wikiPages.get(0));
-		}
-
-		return null;
-	}
-
-	public WikiPage moveEntryToTrash(
-			long userId, long nodeId, String title, double version)
-		throws PortalException, SystemException {
-
-		WikiPage wikiPage = wikiPagePersistence.findByN_T_V(
-			nodeId, title, version);
-
-		return moveEntryToTrash(userId, wikiPage);
-	}
-
-	public WikiPage moveEntryToTrash(long userId, WikiPage wikiPage)
-		throws PortalException, SystemException {
-
-		String title = TrashUtil.appendTrashNamespace(wikiPage.getTitle());
-
-		wikiPage.setTitle(title);
-
-		wikiPagePersistence.update(wikiPage, false);
-
-		WikiPageResource wikiPageResource =
-			wikiPageResourcePersistence.fetchByPrimaryKey(
-				wikiPage.getResourcePrimKey());
-
-		wikiPageResource.setTitle(title);
-
-		wikiPageResourcePersistence.update(wikiPageResource, false);
-
-		return updateStatus(
-			userId, wikiPage, WorkflowConstants.STATUS_IN_TRASH,
-			new ServiceContext());
-	}
-
 	public void movePage(
 			long userId, long nodeId, String title, String newTitle,
 			boolean strict, ServiceContext serviceContext)
@@ -1152,12 +1106,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Page resource
 
-		WikiPageResource wikiPageResource =
+		WikiPageResource pageResource =
 			wikiPageResourcePersistence.findByPrimaryKey(resourcePrimKey);
 
-		wikiPageResource.setTitle(newTitle);
+		pageResource.setTitle(newTitle);
 
-		wikiPageResourcePersistence.update(wikiPageResource, false);
+		wikiPageResourcePersistence.update(pageResource, false);
 
 		// Create stub page at the old location
 
@@ -1245,28 +1199,72 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getDeletedAttachmentsDir(), TrashUtil.TRASH_TIME_SEPARATOR);
 	}
 
-	public void restorePageFromTrash(long userId, WikiPage wikiPage)
+	public WikiPage movePageToTrash(long userId, long nodeId, String title)
 		throws PortalException, SystemException {
 
-		String title = TrashUtil.stripTrashNamespace(wikiPage.getTitle());
+		List<WikiPage> wikiPages = wikiPagePersistence.findByN_T_H(
+			nodeId, title, true, 0, 1);
 
-		wikiPage.setTitle(title);
+		if (!wikiPages.isEmpty()) {
+			return movePageToTrash(userId, wikiPages.get(0));
+		}
 
-		wikiPagePersistence.update(wikiPage, false);
+		return null;
+	}
 
-		WikiPageResource wikiPageResource =
+	public WikiPage movePageToTrash(
+			long userId, long nodeId, String title, double version)
+		throws PortalException, SystemException {
+
+		WikiPage page = wikiPagePersistence.findByN_T_V(nodeId, title, version);
+
+		return movePageToTrash(userId, page);
+	}
+
+	public WikiPage movePageToTrash(long userId, WikiPage page)
+		throws PortalException, SystemException {
+
+		String title = TrashUtil.appendTrashNamespace(page.getTitle());
+
+		page.setTitle(title);
+
+		wikiPagePersistence.update(page, false);
+
+		WikiPageResource pageResource =
 			wikiPageResourcePersistence.fetchByPrimaryKey(
-				wikiPage.getResourcePrimKey());
+				page.getResourcePrimKey());
 
-		wikiPageResource.setTitle(title);
+		pageResource.setTitle(title);
 
-		wikiPageResourcePersistence.update(wikiPageResource, false);
+		wikiPageResourcePersistence.update(pageResource, false);
+
+		return updateStatus(
+			userId, page, WorkflowConstants.STATUS_IN_TRASH,
+			new ServiceContext());
+	}
+
+	public void restorePageFromTrash(long userId, WikiPage page)
+		throws PortalException, SystemException {
+
+		String title = TrashUtil.stripTrashNamespace(page.getTitle());
+
+		page.setTitle(title);
+
+		wikiPagePersistence.update(page, false);
+
+		WikiPageResource pageResource =
+			wikiPageResourcePersistence.fetchByPrimaryKey(
+				page.getResourcePrimKey());
+
+		pageResource.setTitle(title);
+
+		wikiPageResourcePersistence.update(pageResource, false);
 
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
-			WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		updateStatus(
-			userId, wikiPage, trashEntry.getStatus(), new ServiceContext());
+			userId, page, trashEntry.getStatus(), new ServiceContext());
 	}
 
 	public WikiPage revertPage(
@@ -1495,11 +1493,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		WikiPageResource wikiPageResource =
+		WikiPageResource pageResource =
 			wikiPageResourceLocalService.getPageResource(resourcePrimKey);
 
 		List<WikiPage> pages = wikiPagePersistence.findByN_T(
-			wikiPageResource.getNodeId(), wikiPageResource.getTitle(), 0, 1,
+			pageResource.getNodeId(), pageResource.getTitle(), 0, 1,
 			new PageVersionComparator());
 
 		WikiPage page = null;

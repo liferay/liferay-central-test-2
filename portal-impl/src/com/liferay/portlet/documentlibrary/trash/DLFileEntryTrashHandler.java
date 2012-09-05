@@ -61,16 +61,16 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
 
-		DLFileEntry duplicatedFileEntry =
+		DLFileEntry duplicateDLFileEntry =
 			DLFileEntryLocalServiceUtil.fetchFileEntry(
 				dlFileEntry.getGroupId(), dlFileEntry.getFolderId(),
 				originalTitle);
 
-		if (duplicatedFileEntry != null) {
+		if (duplicateDLFileEntry != null) {
 			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dee.setDuplicateEntryId(duplicatedFileEntry.getFileEntryId());
-			dee.setOldName(duplicatedFileEntry.getTitle());
+			dee.setDuplicateEntryId(duplicateDLFileEntry.getFileEntryId());
+			dee.setOldName(duplicateDLFileEntry.getTitle());
 			dee.setTrashEntryId(trashEntry.getEntryId());
 
 			throw dee;

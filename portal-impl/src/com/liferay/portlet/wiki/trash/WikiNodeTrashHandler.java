@@ -48,14 +48,14 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
 
-		WikiNode duplicatedNode = WikiNodeLocalServiceUtil.fetchWikiNode(
+		WikiNode duplicateNode = WikiNodeLocalServiceUtil.fetchWikiNode(
 			node.getGroupId(), originalTitle);
 
-		if (duplicatedNode != null) {
+		if (duplicateNode != null) {
 			DuplicateEntryException dee = new DuplicateEntryException();
 
-			dee.setDuplicateEntryId(duplicatedNode.getNodeId());
-			dee.setOldName(duplicatedNode.getName());
+			dee.setDuplicateEntryId(duplicateNode.getNodeId());
+			dee.setOldName(duplicateNode.getName());
 			dee.setTrashEntryId(trashEntry.getEntryId());
 
 			throw dee;

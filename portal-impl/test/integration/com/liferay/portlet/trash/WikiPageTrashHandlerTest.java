@@ -67,8 +67,7 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 	}
 
 	protected void trashWikiPage(boolean delete) throws Exception {
-		Group group = ServiceTestUtil.addGroup(
-			"WikiPageTrashHandlerTest#testGroup");
+		Group group = ServiceTestUtil.addGroup();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
@@ -106,7 +105,7 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 			initialTrashEntriesSearchCount,
 			searchTrashEntriesCount(titleWikiPage, serviceContext));
 
-		WikiPageServiceUtil.moveEntryToTrash(
+		WikiPageServiceUtil.movePageToTrash(
 			wikiPage.getNodeId(), wikiPage.getTitle());
 
 		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(

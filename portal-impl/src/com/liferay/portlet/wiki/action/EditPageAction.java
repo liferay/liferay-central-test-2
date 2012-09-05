@@ -204,12 +204,12 @@ public class EditPageAction extends PortletAction {
 				wikiPage = WikiPageLocalServiceUtil.getPage(
 					nodeId, title, version);
 
-				WikiPageServiceUtil.moveEntryToTrash(nodeId, title, version);
+				WikiPageServiceUtil.movePageToTrash(nodeId, title, version);
 			}
 			else {
 				wikiPage = WikiPageLocalServiceUtil.getPage(nodeId, title);
 
-				WikiPageServiceUtil.moveEntryToTrash(nodeId, title);
+				WikiPageServiceUtil.movePageToTrash(nodeId, title);
 			}
 		}
 		else {

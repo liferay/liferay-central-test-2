@@ -333,15 +333,15 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		wikiImporter.importPages(userId, node, inputStreams, options);
 	}
 
-	public WikiNode moveEntryToTrash(long userId, long nodeId)
+	public WikiNode moveNodeToTrash(long userId, long nodeId)
 		throws PortalException, SystemException {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
-		return moveEntryToTrash(userId, node);
+		return moveNodeToTrash(userId, node);
 	}
 
-	public WikiNode moveEntryToTrash(long userId, WikiNode node)
+	public WikiNode moveNodeToTrash(long userId, WikiNode node)
 		throws PortalException, SystemException {
 
 		node.setName(TrashUtil.appendTrashNamespace(node.getName()));
@@ -408,6 +408,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Node
+
 		int oldStatus = node.getStatus();
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -420,6 +422,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setStatusDate(now);
 
 		wikiNodePersistence.update(node, false);
+
+		// Pages
+
+		List<WikiPage> pages = wikiPagePersistence.findByNodeId(
+			node.getNodeId());
+
+		for (WikiPage page : pages) {
+			wikiPageLocalService.updateStatus(
+				userId, page, status, status, serviceContext);
+		}
 
 		// Trash
 
@@ -450,8 +462,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		else {
 			indexer.delete(node);
 		}
-
-		updateStatuses(userId, node, status, serviceContext);
 
 		return node;
 	}
@@ -502,20 +512,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 
 		return wikiImporter;
-	}
-
-	protected void updateStatuses(
-			long userId, WikiNode wikiNode, int status,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		List<WikiPage> wikiPages = wikiPagePersistence.findByNodeId(
-			wikiNode.getNodeId());
-
-		for (WikiPage wikiPage : wikiPages) {
-			wikiPageLocalService.updateStatus(
-				userId, wikiPage, status, status, serviceContext);
-		}
 	}
 
 	protected void validate(long nodeId, long groupId, String name)

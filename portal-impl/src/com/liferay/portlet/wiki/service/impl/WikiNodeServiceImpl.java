@@ -84,13 +84,13 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getUserId(), nodeId, importer, inputStreams, options);
 	}
 
-	public WikiNode moveEntryToTrash(long nodeId)
+	public WikiNode moveNodeToTrash(long nodeId)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.DELETE);
 
-		return wikiNodeLocalService.moveEntryToTrash(getUserId(), nodeId);
+		return wikiNodeLocalService.moveNodeToTrash(getUserId(), nodeId);
 	}
 
 	public void restoreNodeFromTrash(long nodeId)
