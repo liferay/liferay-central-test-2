@@ -92,6 +92,10 @@ public class ServiceTestUtil {
 
 	public static final int THREAD_COUNT = 25;
 
+	public static Group addGroup() throws Exception {
+		return addGroup(ServiceTestUtil.randomString());
+	}
+
 	public static Group addGroup(long parentGroupId, String name)
 		throws Exception {
 

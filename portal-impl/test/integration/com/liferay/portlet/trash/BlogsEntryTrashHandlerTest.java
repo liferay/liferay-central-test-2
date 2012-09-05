@@ -185,8 +185,7 @@ public class BlogsEntryTrashHandlerTest {
 	protected void trashBlogEntry(boolean approved, boolean delete)
 		throws Exception {
 
-		Group group = ServiceTestUtil.addGroup(
-			"BlogsEntryTrashHandlerTest#testGroup");
+		Group group = ServiceTestUtil.addGroup();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
