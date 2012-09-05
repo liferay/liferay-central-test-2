@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -55,7 +53,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.lang.reflect.Method;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -464,12 +461,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		render(_VIEW_PATH_ERROR);
 	}
 
-	protected List<BaseModel<?>> search(String keywords) throws Exception {
+	protected AlloySearchResult search(String keywords) throws Exception {
 		if (indexer == null) {
 			throw new Exception("No indexer found for " + controllerPath);
 		}
 
-		List<BaseModel<?>> baseModels = new ArrayList<BaseModel<?>>();
+		AlloySearchResult alloySearchResult = new AlloySearchResult();
+
+		alloySearchResult.setAlloyServiceInvoker(alloyServiceInvoker);
 
 		SearchContainer<BaseModel<?>> searchContainer =
 			new SearchContainer<BaseModel<?>>(
@@ -487,25 +486,11 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		Hits hits = indexer.search(searchContext);
 
-		Document[] documents = hits.getDocs();
+		alloySearchResult.setHits(hits);
 
-		for (int i = 0; i < documents.length; i++) {
-			Document document = hits.doc(i);
+		alloySearchResult.afterPropertiesSet();
 
-			long entryClassPK = GetterUtil.getLong(
-				document.get(Field.ENTRY_CLASS_PK));
-
-			BaseModel<?> baseModel = alloyServiceInvoker.fetchModel(
-				entryClassPK);
-
-			if (baseModel == null) {
-				continue;
-			}
-
-			baseModels.add(baseModel);
-		}
-
-		return baseModels;
+		return alloySearchResult;
 	}
 
 	protected String translate(String pattern, Object... arguments) {
