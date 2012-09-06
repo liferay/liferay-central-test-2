@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.taglib.portletext.RuntimePortletIDs;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -86,14 +87,17 @@ public class RuntimeTag extends TagSupport {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			if (themeDisplay.isStateMaximized() &&
-				themeDisplay.getLayoutTypePortlet().hasStateMaxPortletId(
-					portletId)) {
+			if (themeDisplay.isStateMaximized()) {
+				LayoutTypePortlet layoutTypePortlet =
+					themeDisplay.getLayoutTypePortlet();
 
-				// If the layout display already has the current portlet in the
-				// maximized state, it has already been processed
+				if (layoutTypePortlet.hasStateMaxPortletId(portletId)) {
 
-				return;
+					// A portlet in the maximized state has already been
+					// processed
+
+					return;
+				}
 			}
 
 			Portlet portlet = getPortlet(
