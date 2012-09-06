@@ -60,9 +60,8 @@ public class ServletContextListenerHotDeployListener
 
 		ServletContext servletContext = hotDeployEvent.getServletContext();
 
-		Object securePluginContextListener =
-			servletContext.getAttribute(
-				SecurePluginContextListener.class.getName());
+		Object securePluginContextListener = servletContext.getAttribute(
+			SecurePluginContextListener.class.getName());
 
 		if (securePluginContextListener != null) {
 			Class<?> clazz = securePluginContextListener.getClass();
