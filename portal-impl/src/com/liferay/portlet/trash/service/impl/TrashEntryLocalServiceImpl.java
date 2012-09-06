@@ -16,9 +16,13 @@ package com.liferay.portlet.trash.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -357,6 +361,36 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return trashVersionPersistence.findByC_C(classNameId, classPK);
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, String keywords,
+			int start, int end, Sort sort)
+		throws SystemException {
+
+		try {
+			SearchContext searchContext = new SearchContext();
+
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setKeywords(keywords);
+			searchContext.setGroupIds(new long[] {groupId});
+
+			if (sort != null) {
+				searchContext.setSorts(new Sort[] {sort});
+			}
+
+			searchContext.setStart(start);
+			searchContext.setUserId(userId);
+
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				TrashEntry.class);
+
+			return indexer.search(searchContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	protected void checkEntriesAttachments(Group group)
