@@ -35,9 +35,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLIndexer;
 import com.liferay.portlet.trash.model.TrashEntry;
-import com.liferay.portlet.trash.model.TrashEntryList;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
-import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
 
 import java.util.List;
 
@@ -90,10 +88,8 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 	}
 
 	protected int getTrashEntriesCount() throws Exception {
-		TrashEntryList trashEntryList = TrashEntryServiceUtil.getEntries(
+		return TrashEntryLocalServiceUtil.getEntriesCount(
 			parentFolder.getGroupId());
-
-		return trashEntryList.getCount();
 	}
 
 	protected boolean isAssetEntryVisible(String className, long classPK)
@@ -128,7 +124,7 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
-		Hits hits = TrashEntryServiceUtil.search(
+		Hits hits = TrashEntryLocalServiceUtil.search(
 			serviceContext.getCompanyId(), serviceContext.getScopeGroupId(),
 			serviceContext.getUserId(), keywords, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);

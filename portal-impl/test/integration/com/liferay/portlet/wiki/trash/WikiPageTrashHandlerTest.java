@@ -14,11 +14,8 @@
 
 package com.liferay.portlet.wiki.trash;
 
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
-import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.trash.TrashHandler;
-import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
@@ -26,15 +23,12 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
-import com.liferay.portlet.trash.model.TrashEntry;
-import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
-import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -46,130 +40,76 @@ import org.junit.runner.RunWith;
 		TransactionalExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
+public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
-	@Before
-	public void setUp() {
-		FinderCacheUtil.clearCache();
+	@Override
+	protected BaseModel<?> addBaseModel(
+			BaseModel<?> parentBaseModel, boolean approved,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		serviceContext = (ServiceContext)serviceContext.clone();
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
+
+		WikiPage wikiPage = WikiPageLocalServiceUtil.addPage(
+			TestPropsValues.getUserId(),
+			(Long)parentBaseModel.getPrimaryKeyObj(), getSearchKeywords(),
+			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+			true, serviceContext);
+
+		WikiPageLocalServiceUtil.updateStatus(
+			TestPropsValues.getUserId(), wikiPage.getResourcePrimKey(),
+			WorkflowConstants.STATUS_APPROVED, serviceContext);
+
+		return wikiPage;
 	}
 
-	@Test
-	@Transactional
-	public void testTrashAndDelete() throws Exception {
-		trashWikiPage(true);
+	@Override
+	protected BaseModel<?> getBaseModel(long primaryKey) throws Exception {
+		return WikiPageLocalServiceUtil.getPage(primaryKey);
 	}
 
-	@Test
-	@Transactional
-	public void testTrashAndRestoreApproved() throws Exception {
-		trashWikiPage(false);
+	@Override
+	protected Class<?> getBaseModelClass() {
+		return WikiPage.class;
 	}
 
-	protected void trashWikiPage(boolean delete) throws Exception {
-		Group group = ServiceTestUtil.addGroup();
+	@Override
+	protected int getBaseModelsNotInTrashCount(BaseModel<?> parentBaseModel)
+		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		return WikiPageLocalServiceUtil.getPagesCount(
+			(Long)parentBaseModel.getPrimaryKeyObj(),
+			WorkflowConstants.STATUS_APPROVED);
+	}
 
-		serviceContext.setScopeGroupId(group.getGroupId());
+	@Override
+	protected BaseModel<?> getParentBaseModel(
+			Group group, ServiceContext serviceContext)
+		throws Exception {
 
-		String titleWikiNode = ServiceTestUtil.randomString();
+		serviceContext = (ServiceContext)serviceContext.clone();
 
-		WikiNode wikiNode = addWikiNode(titleWikiNode, serviceContext);
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
-		String titleWikiPage = ServiceTestUtil.randomString();
+		return WikiNodeLocalServiceUtil.addNode(
+			TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), serviceContext);
+	}
 
-		int initialWikiPagesCount = getWikiPagesNotInTrashCount(
-			wikiNode.getNodeId());
-		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
-		int initialWikiPagesSearchCount = searchWikiPagesCount(
-			group.getGroupId());
-		int initialTrashEntriesSearchCount = searchTrashEntriesCount(
-			titleWikiPage, serviceContext);
+	@Override
+	protected String getSearchKeywords() {
+		return "Title";
+	}
 
-		WikiPage wikiPage = addWikiPage(
-			wikiNode.getNodeId(), titleWikiPage, serviceContext);
+	@Override
+	protected void moveBaseModelToTrash(long primaryKey) throws Exception {
+		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(primaryKey);
 
-		int oldStatus = wikiPage.getStatus();
-
-		Assert.assertEquals(
-			initialWikiPagesCount + 1,
-			getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
-		Assert.assertEquals(
-			initialTrashEntriesCount, getTrashEntriesCount(group.getGroupId()));
-		Assert.assertTrue(
-			isAssetEntryVisible(
-				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-		Assert.assertEquals(
-			initialTrashEntriesSearchCount,
-			searchTrashEntriesCount(titleWikiPage, serviceContext));
-
-		WikiPageServiceUtil.movePageToTrash(
-			wikiPage.getNodeId(), wikiPage.getTitle());
-
-		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
-			WikiPage.class.getName(), wikiPage.getResourcePrimKey());
-
-		Assert.assertEquals(
-			wikiPage.getResourcePrimKey(), trashEntry.getClassPK());
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_IN_TRASH, wikiPage.getStatus());
-		Assert.assertEquals(
-			initialWikiPagesCount,
-			getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
-		Assert.assertEquals(
-			initialTrashEntriesCount + 1,
-			getTrashEntriesCount(group.getGroupId()));
-		Assert.assertFalse(
-			isAssetEntryVisible(
-				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-		Assert.assertEquals(
-			initialWikiPagesSearchCount,
-			searchWikiPagesCount(group.getGroupId()));
-		Assert.assertEquals(
-			initialTrashEntriesSearchCount + 1,
-			searchTrashEntriesCount(titleWikiPage, serviceContext));
-
-		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			wikiPage.getModelClassName());
-
-		if (delete) {
-			trashHandler.deleteTrashEntry(wikiPage.getResourcePrimKey());
-
-			Assert.assertEquals(
-				initialWikiPagesCount,
-				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
-			Assert.assertNull(
-				fetchAssetEntry(
-					WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-			Assert.assertEquals(
-				initialWikiPagesSearchCount,
-				searchWikiPagesCount(group.getGroupId()));
-			Assert.assertEquals(
-				initialTrashEntriesSearchCount,
-				searchTrashEntriesCount(titleWikiPage, serviceContext));
-		}
-		else {
-			trashHandler.restoreTrashEntry(wikiPage.getResourcePrimKey());
-
-			wikiPage = WikiPageServiceUtil.getPage(
-				wikiPage.getNodeId(), wikiPage.getTitle());
-
-			Assert.assertEquals(oldStatus, wikiPage.getStatus());
-			Assert.assertEquals(
-				initialWikiPagesCount + 1,
-				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
-			Assert.assertTrue(
-				isAssetEntryVisible(
-					WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-			Assert.assertEquals(
-				initialWikiPagesSearchCount + 1,
-				searchWikiPagesCount(group.getGroupId()));
-			Assert.assertEquals(
-				initialTrashEntriesSearchCount,
-				searchTrashEntriesCount(titleWikiPage, serviceContext));
-
-			trashHandler.deleteTrashEntry(wikiPage.getResourcePrimKey());
-		}
+		WikiPageLocalServiceUtil.movePageToTrash(
+			TestPropsValues.getUserId(), wikiPage.getNodeId(),
+			wikiPage.getTitle());
 	}
 
 }
