@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.trash;
+package com.liferay.portlet.blogs.trash;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;

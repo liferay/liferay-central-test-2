@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.trash;
+package com.liferay.portlet.documentlibrary.trash;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -68,7 +68,7 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 		return AssetEntryLocalServiceUtil.fetchEntry(className, classPK);
 	}
 
-	protected int getActiveFileRanksCount(long fileEntryId) throws Exception {
+	protected int getActiveDLFileRanksCount(long fileEntryId) throws Exception {
 		List<DLFileRank> dlFileRanks = DLFileRankLocalServiceUtil.getFileRanks(
 			parentFolder.getGroupId(), parentFolder.getUserId());
 

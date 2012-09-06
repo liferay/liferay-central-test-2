@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.trash;
+package com.liferay.portlet.wiki.trash;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -28,7 +28,6 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
-import com.liferay.portlet.wiki.BaseWikiTrashHandlerTestCase;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -79,28 +78,27 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 
 		String titleWikiPage = ServiceTestUtil.randomString();
 
-		long nodeId = wikiNode.getNodeId();
-
-		int initialWikiPagesCount = getWikiPagesNotInTrashCount(nodeId);
+		int initialWikiPagesCount = getWikiPagesNotInTrashCount(
+			wikiNode.getNodeId());
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
-		int initialWikiPagesSearchCount = searchCount(
-			WikiPage.class.getName(), group.getGroupId());
+		int initialWikiPagesSearchCount = searchWikiPagesCount(
+			group.getGroupId());
 		int initialTrashEntriesSearchCount = searchTrashEntriesCount(
 			titleWikiPage, serviceContext);
 
-		WikiPage wikiPage = addWikiPage(nodeId, titleWikiPage, serviceContext);
+		WikiPage wikiPage = addWikiPage(
+			wikiNode.getNodeId(), titleWikiPage, serviceContext);
 
 		int oldStatus = wikiPage.getStatus();
 
 		Assert.assertEquals(
-			initialWikiPagesCount + 1, getWikiPagesNotInTrashCount(nodeId));
+			initialWikiPagesCount + 1,
+			getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
 		Assert.assertEquals(
 			initialTrashEntriesCount, getTrashEntriesCount(group.getGroupId()));
-
 		Assert.assertTrue(
 			isAssetEntryVisible(
 				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-
 		Assert.assertEquals(
 			initialTrashEntriesSearchCount,
 			searchTrashEntriesCount(titleWikiPage, serviceContext));
@@ -116,7 +114,8 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_IN_TRASH, wikiPage.getStatus());
 		Assert.assertEquals(
-			initialWikiPagesCount, getWikiPagesNotInTrashCount(nodeId));
+			initialWikiPagesCount,
+			getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
 		Assert.assertEquals(
 			initialTrashEntriesCount + 1,
 			getTrashEntriesCount(group.getGroupId()));
@@ -125,7 +124,7 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 		Assert.assertEquals(
 			initialWikiPagesSearchCount,
-			searchCount(WikiPage.class.getName(), group.getGroupId()));
+			searchWikiPagesCount(group.getGroupId()));
 		Assert.assertEquals(
 			initialTrashEntriesSearchCount + 1,
 			searchTrashEntriesCount(titleWikiPage, serviceContext));
@@ -137,13 +136,14 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 			trashHandler.deleteTrashEntry(wikiPage.getResourcePrimKey());
 
 			Assert.assertEquals(
-				initialWikiPagesCount, getWikiPagesNotInTrashCount(nodeId));
+				initialWikiPagesCount,
+				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
 			Assert.assertNull(
 				fetchAssetEntry(
 					WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 			Assert.assertEquals(
 				initialWikiPagesSearchCount,
-				searchCount(WikiPage.class.getName(), group.getGroupId()));
+				searchWikiPagesCount(group.getGroupId()));
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount,
 				searchTrashEntriesCount(titleWikiPage, serviceContext));
@@ -156,14 +156,14 @@ public class WikiPageTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 
 			Assert.assertEquals(oldStatus, wikiPage.getStatus());
 			Assert.assertEquals(
-				initialWikiPagesCount + 1, getWikiPagesNotInTrashCount(nodeId));
-
-			Assert.assertTrue(isAssetEntryVisible(
-				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
+				initialWikiPagesCount + 1,
+				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
+			Assert.assertTrue(
+				isAssetEntryVisible(
+					WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 			Assert.assertEquals(
 				initialWikiPagesSearchCount + 1,
-				searchCount(WikiPage.class.getName(), group.getGroupId()));
-
+				searchWikiPagesCount(group.getGroupId()));
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount,
 				searchTrashEntriesCount(titleWikiPage, serviceContext));

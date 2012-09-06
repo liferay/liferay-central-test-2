@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.trash;
+package com.liferay.portlet.wiki.trash;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -28,7 +28,6 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
-import com.liferay.portlet.wiki.BaseWikiTrashHandlerTestCase;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
@@ -75,20 +74,20 @@ public class WikiNodeTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 
 		String titleWikiNode = ServiceTestUtil.randomString();
 
-		int initialWikiNodesSearchCount = searchCount(
-			WikiNode.class.getName(), group.getGroupId());
+		int initialWikiNodesSearchCount = searchWikiNodesCount(
+			group.getGroupId());
 		int initialTrashEntriesSearchCount = searchTrashEntriesCount(
 			titleWikiNode, serviceContext);
 
 		WikiNode wikiNode = addWikiNode(titleWikiNode, serviceContext);
 
-		long nodeId = wikiNode.getNodeId();
-
-		int initialWikiPagesCount = getWikiPagesNotInTrashCount(nodeId);
+		int initialWikiPagesCount = getWikiPagesNotInTrashCount(
+			wikiNode.getNodeId());
 
 		String titleWikiPage = ServiceTestUtil.randomString();
 
-		WikiPage wikiPage = addWikiPage(nodeId, titleWikiPage, serviceContext);
+		WikiPage wikiPage = addWikiPage(
+			wikiNode.getNodeId(), titleWikiPage, serviceContext);
 
 		int oldStatus = wikiPage.getStatus();
 
@@ -101,12 +100,14 @@ public class WikiNodeTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_IN_TRASH, wikiNode.getStatus());
 		Assert.assertEquals(
-			initialWikiPagesCount, getWikiPagesNotInTrashCount(nodeId));
-		Assert.assertFalse(isAssetEntryVisible(
-			WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
+			initialWikiPagesCount,
+			getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
+		Assert.assertFalse(
+			isAssetEntryVisible(
+				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 		Assert.assertEquals(
 			initialWikiNodesSearchCount + 1,
-				searchCount(WikiNode.class.getName(), group.getGroupId()));
+			searchWikiNodesCount(group.getGroupId()));
 
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			wikiNode.getModelClassName());
@@ -115,10 +116,11 @@ public class WikiNodeTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 			trashHandler.deleteTrashEntry(wikiNode.getNodeId());
 
 			Assert.assertEquals(
-				initialWikiPagesCount, getWikiPagesNotInTrashCount(nodeId));
+				initialWikiPagesCount,
+				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
 			Assert.assertEquals(
 				initialWikiNodesSearchCount,
-				searchCount(WikiNode.class.getName(), group.getGroupId()));
+				searchWikiNodesCount(group.getGroupId()));
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount,
 				searchTrashEntriesCount(titleWikiNode, serviceContext));
@@ -130,18 +132,17 @@ public class WikiNodeTrashHandlerTest extends BaseWikiTrashHandlerTestCase {
 
 			Assert.assertEquals(oldStatus, wikiNode.getStatus());
 			Assert.assertEquals(
-				initialWikiPagesCount + 1, getWikiPagesNotInTrashCount(nodeId));
-
-			Assert.assertTrue(isAssetEntryVisible(
-				WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
-
+				initialWikiPagesCount + 1,
+				getWikiPagesNotInTrashCount(wikiNode.getNodeId()));
+			Assert.assertTrue(
+				isAssetEntryVisible(
+					WikiPage.class.getName(), wikiPage.getResourcePrimKey()));
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount,
 				searchTrashEntriesCount(titleWikiNode, serviceContext));
-
 			Assert.assertEquals(
 				initialWikiNodesSearchCount,
-				searchCount(WikiNode.class.getName(), group.getGroupId()));
+				searchWikiNodesCount(group.getGroupId()));
 
 			trashHandler.deleteTrashEntry(wikiNode.getNodeId());
 		}

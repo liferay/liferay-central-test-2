@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.wiki;
+package com.liferay.portlet.wiki.trash;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.Hits;
@@ -124,6 +124,14 @@ public abstract class BaseWikiTrashHandlerTestCase {
 			QueryUtil.ALL_POS, null);
 
 		return results.getLength();
+	}
+
+	protected int searchWikiNodesCount(long groupId) throws Exception {
+		return searchCount(WikiPage.class.getName(), groupId);
+	}
+
+	protected int searchWikiPagesCount(long groupId) throws Exception {
+		return searchCount(WikiPage.class.getName(), groupId);
 	}
 
 }
