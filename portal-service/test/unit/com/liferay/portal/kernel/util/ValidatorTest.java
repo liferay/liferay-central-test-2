@@ -113,7 +113,6 @@ public class ValidatorTest extends TestCase {
 				fail(invalidFilePath);
 			}
 		}
-
 	}
 
 	public void testIsNull() throws Exception {
