@@ -74,6 +74,8 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 												<ul>
 
 													<%
+													Set<String> runtimePortletIds = RuntimeTag.getRuntimePortletIDs(request);
+
 													int j = 0;
 
 													for (int i = 0; i < portlets.size(); i++) {
@@ -83,7 +85,15 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 
 														boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 
-														boolean portletLocked = (!portletInstanceable && portletUsed);
+														if (runtimePortletIds != null) {
+															for (String runtimePortletId : runtimePortletIds) {
+																if (PortletConstants.hasIdenticalRootPortletId(runtimePortletId, portlet.getPortletId())) {
+																	portletUsed = true;
+																}
+															}
+														}
+
+														boolean portletLocked = !portletInstanceable && portletUsed;
 
 														if (!PortletPermissionUtil.contains(permissionChecker, layout, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE)) {
 															continue;

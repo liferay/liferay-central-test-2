@@ -96,6 +96,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 				portletCategoryIndex++;
 			}
 
+			String[] runtimePortletIds = StringUtil.split(ParamUtil.getString(request, "runtimePortletIds"));
+
 			for (Portlet portlet : portlets) {
 				divId.setIndex(0);
 
@@ -112,7 +114,13 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 				boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 
-				boolean portletLocked = (!portletInstanceable && portletUsed);
+				for (String runtimePortletId : runtimePortletIds) {
+					if (PortletConstants.hasIdenticalRootPortletId(runtimePortletId, portlet.getPortletId())) {
+						portletUsed = true;
+					}
+				}
+
+				boolean portletLocked = !portletInstanceable && portletUsed;
 
 				if (portletInstanceable && layout.isTypePanel()) {
 					continue;
