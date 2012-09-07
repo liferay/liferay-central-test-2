@@ -272,7 +272,7 @@ if (Validator.isNull(redirect)) {
 									sb.append(renderResponse.getNamespace());
 									sb.append("trashAttachment(");
 									sb.append(i + 1);
-									sb.append(",'");
+									sb.append(", '");
 									sb.append(Constants.RESTORE);
 									sb.append("');");
 									%>
@@ -530,61 +530,64 @@ if (Validator.isNull(redirect)) {
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
 
-	<c:if test="<%= !TrashUtil.isTrashEnabled(themeDisplay.getScopeGroupId()) %>">
-		Liferay.provide(
-			window,
-			'<portlet:namespace />deleteAttachment',
-			function(index) {
-				var A = AUI();
+	<c:choose>
+		<c:when test="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>">
+			Liferay.provide(
+				window,
+				'<portlet:namespace />trashAttachment',
+				function(index, action) {
+					var A = AUI();
 
-				var button = A.one('#<portlet:namespace />removeExisting' + index);
-				var span = A.one('#<portlet:namespace />existingFile' + index);
-				var file = A.one('#<portlet:namespace />msgFile' + index);
+					var existingPath = A.one('#<portlet:namespace />existingPath' + index);
+					var removeExisting = A.one('#<portlet:namespace />removeExisting' + index);
+					var undoFile = A.one('#<portlet:namespace />undoFile' + index);
+					var undoPath = A.one('#<portlet:namespace />undoPath' + index);
 
-				if (button) {
-					button.remove();
-				}
+					if (action == '<%= Constants.MOVE_TO_TRASH %>') {
+						removeExisting.hide();
+						undoFile.show();
 
-				if (span) {
-					span.remove();
-				}
+						existingPath.set('value', '');
+					}
+					else {
+						removeExisting.show();
+						undoFile.hide();
 
-				if (file) {
-					file.ancestor('.aui-field').show();
+						existingPath.set('value', undoPath.get('value'));
+					}
+				},
+				['aui-base']
+			);
+		</c:when>
+		<c:otherwise>
+			Liferay.provide(
+				window,
+				'<portlet:namespace />deleteAttachment',
+				function(index) {
+					var A = AUI();
 
-					file.ancestor('li').addClass('deleted-input');
-				}
-			},
-			['aui-base']
-		);
-	</c:if>
+					var button = A.one('#<portlet:namespace />removeExisting' + index);
+					var span = A.one('#<portlet:namespace />existingFile' + index);
+					var file = A.one('#<portlet:namespace />msgFile' + index);
 
-	<c:if test="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>">
-		Liferay.provide(
-			window,
-			'<portlet:namespace />trashAttachment',
-			function(index, action) {
-				var A = AUI();
+					if (button) {
+						button.remove();
+					}
 
-				var existingPath = A.one('#<portlet:namespace />existingPath' + index);
-				var removeExisting = A.one('#<portlet:namespace />removeExisting' + index);
-				var undoFile = A.one('#<portlet:namespace />undoFile' + index);
-				var undoPath = A.one('#<portlet:namespace />undoPath' + index);
+					if (span) {
+						span.remove();
+					}
 
-				if (action == '<%= Constants.MOVE_TO_TRASH %>') {
-					removeExisting.hide();
-					undoFile.show();
-					existingPath.set('value', '');
-				}
-				else {
-					removeExisting.show();
-					undoFile.hide();
-					existingPath.set('value', undoPath.get('value'));
-				}
-			},
-			['aui-base']
-		);
-	</c:if>
+					if (file) {
+						file.ancestor('.aui-field').show();
+
+						file.ancestor('li').addClass('deleted-input');
+					}
+				},
+				['aui-base']
+			);
+		</c:otherwise>
+	</c:choose>
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);

@@ -93,7 +93,6 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 		<liferay-ui:search-container-column-text
 			name="file-name"
 		>
-
 			<liferay-ui:icon
 				image='<%= "../file_system/small/" + DLUtil.getFileIcon(FileUtil.getExtension(displayName)) %>'
 				label="<%= true %>"
