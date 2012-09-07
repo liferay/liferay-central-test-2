@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 import com.liferay.portalweb.portal.util.TestPropsValues;
 
 import java.util.Calendar;
@@ -163,7 +162,7 @@ public abstract class BaseWebDriverImpl
 
 		for (int second = 0;; second++) {
 			if (second >= timeout) {
-				BaseTestCase.fail("timeout");
+				BaseTestCase.fail("Timeout");
 			}
 
 			try {
@@ -177,22 +176,7 @@ public abstract class BaseWebDriverImpl
 	}
 
 	public void waitForElementNotPresent(String locator) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail(
-					"Timeout: Unable to find the Locator \"" + locator + "\"");
-			}
-
-			try {
-				if (!isElementPresent(locator)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForElementNotPresent(this, locator);
 	}
 
 	public void waitForElementPresent(String locator) throws Exception {
@@ -203,8 +187,7 @@ public abstract class BaseWebDriverImpl
 		for (int second = 0;; second++) {
 			if (second >= timeout) {
 				BaseTestCase.fail(
-					"Timeout: Still able to find the Locator \"" + locator +
-						"\"");
+					"Timeout: unable to find the locator \"" + locator + "\"");
 			}
 
 			try {
@@ -220,243 +203,59 @@ public abstract class BaseWebDriverImpl
 	public void waitForNotPartialText(String locator, String value)
 		throws Exception {
 
-		String valueReplace = RuntimeVariables.replace(value);
-
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (!isPartialText(locator, valueReplace)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForNotPartialText(this, locator, value);
 	}
 
 	public void waitForNotSelectedLabel(String selectLocator, String pattern)
 		throws Exception {
 
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (!pattern.equals(getSelectedLabel(selectLocator))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForNotSelectedLabel(
+			this, selectLocator, pattern);
 	}
 
 	public void waitForNotText(String locator, String value) throws Exception {
-		String valueReplace = RuntimeVariables.replace(value);
-
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (!valueReplace.equals(getText(locator))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForNotText(this, locator, value);
 	}
 
 	public void waitForNotValue(String locator, String value) throws Exception {
-		String valueReplace = RuntimeVariables.replace(value);
-
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (!valueReplace.equals(getValue(locator))) {
-
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForNotValue(this, locator, value);
 	}
 
 	public void waitForNotVisible(String locator) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail(
-					"Timeout: Still able to find the Locator \"" + locator +
-						"\"");
-			}
-
-			try {
-				if (!isVisible(locator)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForNotVisible(this, locator);
 	}
 
 	public void waitForPartialText(String locator, String value)
 		throws Exception {
 
-		String valueReplace = RuntimeVariables.replace(value);
-
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (isPartialText(locator, valueReplace)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForPartialText(this, locator, value);
 	}
 
 	public void waitForSelectedLabel(String selectLocator, String pattern)
 		throws Exception {
 
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (pattern.equals(getSelectedLabel(selectLocator))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForSelectedLabel(
+			this, selectLocator, pattern);
 	}
 
 	public void waitForText(String locator, String value) throws Exception {
-		String valueReplace = RuntimeVariables.replace(value);
-
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (valueReplace.equals(getText(locator))) {
-
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForText(this, locator, value);
 	}
 
 	public void waitForTextNotPresent(String value) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail(
-					"Timeout: Still able to find the Text \"" + value + "\"");
-			}
-
-			try {
-				if (!isTextPresent(value)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForTextNotPresent(this, value);
 	}
 
 	public void waitForTextPresent(String value) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail(
-					"Timeout: Unable to find the Text \"" + value + "\"");
-			}
-
-			try {
-				if (isTextPresent(value)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForTextPresent(this, value);
 	}
 
 	public void waitForValue(String locator, String value) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(value).equals(getValue(locator))) {
-
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForValue(this, locator, value);
 	}
 
 	public void waitForVisible(String locator) throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= TestPropsValues.TIMEOUT_EXPLICIT_WAIT) {
-				BaseTestCase.fail(
-					"Timeout: Unable to find the Locator \"" + locator + "\"");
-			}
-
-			try {
-				if (isVisible(locator)) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		LiferaySeleniumHelper.waitForVisible(this, locator);
 	}
 
 	private String _projectDir;
