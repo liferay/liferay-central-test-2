@@ -214,25 +214,23 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected boolean isStripContentType(String contentType) {
-		boolean isStripContentType = false;
-
 		for (String stripContentType : PropsValues.STRIP_MIME_TYPES) {
 			if (stripContentType.endsWith(StringPool.STAR)) {
 				stripContentType = stripContentType.substring(
 					0, stripContentType.length() - 1);
 
-				isStripContentType = contentType.startsWith(stripContentType);
+				if (contentType.startsWith(stripContentType)) {
+					return true;
+				}
 			}
 			else {
-				isStripContentType = contentType.equals(stripContentType);
-			}
-
-			if (isStripContentType) {
-				break;
+				if (contentType.equals(stripContentType)) {
+					return true;
+				}
 			}
 		}
 
-		return isStripContentType;
+		return false;
 	}
 
 	protected void outputCloseTag(
