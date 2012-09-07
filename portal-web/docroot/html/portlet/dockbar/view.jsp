@@ -83,7 +83,7 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 
 														boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 
-														boolean portletLocked = (!portletInstanceable && portletUsed);
+														boolean portletLocked = !portletInstanceable && portletUsed;
 
 														if (!PortletPermissionUtil.contains(permissionChecker, layout, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE)) {
 															continue;
