@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -69,8 +70,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
@@ -286,43 +285,41 @@ public class WikiUtil {
 			String title, boolean preview)
 		throws Exception {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			renderRequest);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		double version = ParamUtil.getDouble(request, "version");
+		double version = ParamUtil.getDouble(renderRequest, "version");
 
 		PortletURL curViewPageURL = PortletURLUtil.clone(
 			viewPageURL, renderResponse);
 		PortletURL curEditPageURL = PortletURLUtil.clone(
 			editPageURL, renderResponse);
 
-		String attachmentURLPrefix =
-			themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" +
-			themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() +
-			"&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
+		StringBundler sb = new StringBundler();
 
-		WikiPageDisplay pageDisplay = null;
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/wiki/get_page_attachment?p_l_id=");
+		sb.append(themeDisplay.getPlid());
+		sb.append("&nodeId=");
+		sb.append(wikiPage.getNodeId());
+		sb.append("&title=");
+		sb.append(HttpUtil.encodeURL(wikiPage.getTitle()));
+		sb.append("&fileName=");
+
+		String attachmentURLPrefix = sb.toString();
 
 		if (!preview && (version == 0)) {
-			pageDisplay = WikiCacheUtil.getDisplay(
+			WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(
 				wikiPage.getNodeId(), title, curViewPageURL, curEditPageURL,
 				attachmentURLPrefix);
+
+			if (pageDisplay != null) {
+				return pageDisplay.getFormattedContent();
+			}
 		}
 
-		String formattedContent = null;
-
-		if (pageDisplay != null) {
-			formattedContent = pageDisplay.getFormattedContent();
-		}
-		else {
-			formattedContent = WikiUtil.convert(
-				wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
-		}
-
-		return formattedContent;
+		return WikiUtil.convert(
+			wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
 	}
 
 	public static String getHelpPage(String format) {

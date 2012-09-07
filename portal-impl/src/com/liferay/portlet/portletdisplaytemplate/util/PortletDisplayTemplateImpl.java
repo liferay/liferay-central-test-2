@@ -33,8 +33,6 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
 import com.liferay.taglib.util.VelocityTaglib;
 
-import java.io.Writer;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +44,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -199,6 +198,10 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		contextObjects.put(
 			PortletDisplayTemplateConstants.RENDER_RESPONSE, renderResponse);
 
+		contextObjects.put(
+			PortletDisplayTemplateConstants.TAGLIB_LIFERAY,
+			_getVelocityTaglib(pageContext));
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -206,23 +209,6 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			PortletDisplayTemplateConstants.THEME_DISPLAY, themeDisplay);
 
 		contextObjects.putAll(_getPortletPreferences(renderRequest));
-
-		// Tag libraries
-
-		HttpServletResponse response =
-			(HttpServletResponse)pageContext.getResponse();
-
-		ServletContext servletContext =
-			request.getSession().getServletContext();
-
-		Writer writer = pageContext.getOut();
-
-		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request,
-			new PipingServletResponse(response, writer), pageContext, null);
-
-		contextObjects.put(
-			PortletDisplayTemplateConstants.TAGLIB_LIFERAY, velocityTaglib);
 
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 			ddmTemplateId);
@@ -258,6 +244,25 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		}
 
 		return contextObjects;
+	}
+
+	private VelocityTaglib _getVelocityTaglib(PageContext pageContext) {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		HttpSession session = request.getSession();
+
+		ServletContext servletContext = session.getServletContext();
+
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		VelocityTaglib velocityTaglib = new VelocityTaglib(
+			servletContext, request,
+			new PipingServletResponse(response, pageContext.getOut()),
+			pageContext, null);
+
+		return velocityTaglib;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

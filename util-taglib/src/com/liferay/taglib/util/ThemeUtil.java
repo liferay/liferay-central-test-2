@@ -291,9 +291,9 @@ public class ThemeUtil {
 			servletContext, request,
 			new PipingServletResponse(response, writer), pageContext, template);
 
+		template.put(TemplateContext.WRITER, writer);
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
-		template.put(TemplateContext.WRITER, writer);
 
 		// Portal JSP tag library factory
 
@@ -511,9 +511,9 @@ public class ThemeUtil {
 			servletContext, request,
 			new PipingServletResponse(response, writer), pageContext, template);
 
+		template.put(TemplateContext.WRITER, writer);
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
-		template.put(TemplateContext.WRITER, writer);
 
 		// Merge templates
 
