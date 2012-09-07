@@ -146,7 +146,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		ConfigurableWebApplicationContext configurableWebApplicationContext) {
 
 		String configLocation = servletContext.getInitParameter(
-			PORTAL_CONFIG_LOCATION_PARAM);
+			_PORTAL_CONFIG_LOCATION_PARAM);
 
 		configurableWebApplicationContext.setConfigLocation(configLocation);
 
@@ -166,7 +166,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		return null;
 	}
 
-	protected static final String PORTAL_CONFIG_LOCATION_PARAM =
+	private static final String _PORTAL_CONFIG_LOCATION_PARAM =
 		"portalContextConfigLocation";
 
 	private static Log _log = LogFactoryUtil.getLog(
