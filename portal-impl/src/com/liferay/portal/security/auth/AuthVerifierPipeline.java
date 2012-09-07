@@ -43,6 +43,8 @@ import jodd.util.Wildcard;
  */
 public class AuthVerifierPipeline {
 
+	public static final String AUTH_TYPE = "auth.type";
+
 	public static void register(
 		AuthVerifierConfiguration authVerifierConfiguration) {
 
@@ -268,8 +270,6 @@ public class AuthVerifierPipeline {
 
 		return _createGuestVerificationResult(accessControlContext);
 	}
-
-	public static final String AUTH_TYPE = "auth.type";
 
 	private static Log _log = LogFactoryUtil.getLog(AuthVerifierPipeline.class);
 

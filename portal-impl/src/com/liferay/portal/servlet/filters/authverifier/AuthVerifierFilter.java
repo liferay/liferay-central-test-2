@@ -17,20 +17,17 @@ package com.liferay.portal.servlet.filters.authverifier;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.ac.AccessControlUtil;
 import com.liferay.portal.security.auth.AccessControlContext;
-import com.liferay.portal.security.auth.AuthVerifier;
 import com.liferay.portal.security.auth.AuthVerifierPipeline;
 import com.liferay.portal.security.auth.AuthVerifierResult;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
+import java.util.Map;
+
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 /**
  * <p>
@@ -68,23 +65,17 @@ public class AuthVerifierFilter extends BasePortalFilter {
 			}
 		}
 		else if (state == AuthVerifierResult.State.NOT_APPLICABLE) {
-			_log.error("Internal exception, invalid state " + state);
+			_log.error("Invalid state " + state);
 		}
 		else if (state == AuthVerifierResult.State.SUCCESS) {
 			long userId = authVerifierResult.getUserId();
 
 			AccessControlUtil.initContextUser(userId);
 
-			Map<String, Object> authSettings =
-				accessControlContext.getSettings();
+			Map<String, Object> settings = accessControlContext.getSettings();
 
-			String authType = GetterUtil.get(
-				authSettings.get(AuthVerifierPipeline.AUTH_TYPE),
-				StringPool.BLANK);
-
-			if (Validator.isNull(authType)) {
-				authType = null;
-			}
+			String authType = (String)settings.get(
+				AuthVerifierPipeline.AUTH_TYPE);
 
 			ProtectedServletRequest protectedServletRequest =
 				new ProtectedServletRequest(

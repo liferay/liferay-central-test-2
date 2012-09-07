@@ -26,8 +26,9 @@ import javax.servlet.http.HttpServletRequest;
  * @author Tomas Polesovsky
  */
 public class DigestAuthenticationAuthVerifier implements AuthVerifier {
+
 	public String getAuthType() {
-		return AUTH_TYPE;
+		return HttpServletRequest.DIGEST_AUTH;
 	}
 
 	public AuthVerifierResult verify(
@@ -58,5 +59,4 @@ public class DigestAuthenticationAuthVerifier implements AuthVerifier {
 		}
 	}
 
-	public static final String AUTH_TYPE = HttpServletRequest.DIGEST_AUTH;
 }

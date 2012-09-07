@@ -28,6 +28,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PortalSessionAuthVerifier implements AuthVerifier {
 
+	public static final String AUTH_TYPE =
+		PortalSessionAuthVerifier.class.getSimpleName();
+
 	public String getAuthType() {
 		return AUTH_TYPE;
 	}
@@ -60,5 +63,4 @@ public class PortalSessionAuthVerifier implements AuthVerifier {
 		}
 	}
 
-	public static final String AUTH_TYPE = "PortalSessionAuthVerifier";
 }

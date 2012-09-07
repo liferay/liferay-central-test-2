@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ParameterAutoLogin implements AuthVerifier, AutoLogin {
 
 	public String getAuthType() {
-		return AUTH_TYPE;
+		return ParameterAutoLogin.class.getSimpleName();
 	}
 
 	public String[] login(
@@ -137,8 +137,6 @@ public class ParameterAutoLogin implements AuthVerifier, AutoLogin {
 	protected String getPasswordParam() {
 		return _PASSWORD_PARAM;
 	}
-
-	public static final String AUTH_TYPE = "ParameterAutoLogin";
 
 	private static final String _LOGIN_PARAM = "parameterAutoLoginLogin";
 
