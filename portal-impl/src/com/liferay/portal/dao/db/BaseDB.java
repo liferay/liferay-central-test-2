@@ -105,8 +105,6 @@ public abstract class BaseDB implements DB {
 				}
 			}
 		}
-
-		bufferedReader.close();
 	}
 
 	public void buildCreateFile(String sqlDir, String databaseName)
@@ -437,9 +435,6 @@ public abstract class BaseDB implements DB {
 									_log.error(line);
 								}
 							}
-						}
-						finally {
-							unsyncBufferedReader.close();
 						}
 					}
 				}

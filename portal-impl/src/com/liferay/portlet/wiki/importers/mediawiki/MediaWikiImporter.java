@@ -672,8 +672,6 @@ public class MediaWikiImporter implements WikiImporter {
 
 		String line = unsyncBufferedReader.readLine();
 
-		unsyncBufferedReader.close();
-
 		while (line != null) {
 			String[] array = StringUtil.split(line);
 

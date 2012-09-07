@@ -316,8 +316,6 @@ public class DumpIndexDeletionPolicyTest {
 
 		TopDocs topDocs = indexSearcher.search(termQuery, 1);
 
-		indexSearcher.close();
-
 		Assert.assertEquals(totalHits, topDocs.totalHits);
 	}
 

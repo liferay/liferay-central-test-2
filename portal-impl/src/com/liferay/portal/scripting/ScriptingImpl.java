@@ -199,10 +199,8 @@ public class ScriptingImpl implements Scripting {
 		sb.append(getErrorMessage(e));
 		sb.append(StringPool.NEW_LINE);
 
-		LineNumberReader lineNumberReader = null;
-
 		try {
-			lineNumberReader = new LineNumberReader(
+			LineNumberReader lineNumberReader = new LineNumberReader(
 				new UnsyncStringReader(script));
 
 			while (true) {
@@ -225,15 +223,6 @@ public class ScriptingImpl implements Scripting {
 			sb.append(getErrorMessage(e));
 			sb.append(StringPool.NEW_LINE);
 			sb.append(script);
-		}
-		finally {
-			if (lineNumberReader != null) {
-				try {
-					lineNumberReader.close();
-				}
-				catch (IOException ioe) {
-				}
-			}
 		}
 
 		return sb.toString();

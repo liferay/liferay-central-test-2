@@ -402,8 +402,6 @@ public class Table {
 					}
 
 					value = sb.toString();
-
-					unsyncBufferedReader.close();
 				}
 			}
 			catch (Exception e) {

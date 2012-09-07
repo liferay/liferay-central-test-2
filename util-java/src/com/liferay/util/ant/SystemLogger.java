@@ -37,11 +37,10 @@ public class SystemLogger extends DefaultLogger {
 		if (priority <= msgOutputLevel) {
 			StringBundler sb = new StringBundler();
 
-			UnsyncBufferedReader unsyncBufferedReader = null;
-
 			try {
-				unsyncBufferedReader = new UnsyncBufferedReader(
-					new UnsyncStringReader(event.getMessage()));
+				UnsyncBufferedReader unsyncBufferedReader =
+					new UnsyncBufferedReader(
+						new UnsyncStringReader(event.getMessage()));
 
 				String line = unsyncBufferedReader.readLine();
 
@@ -61,15 +60,6 @@ public class SystemLogger extends DefaultLogger {
 				}
 			}
 			catch (IOException ioe) {
-			}
-			finally {
-				if (unsyncBufferedReader != null) {
-					try {
-						unsyncBufferedReader.close();
-					}
-					catch (IOException ioe) {
-					}
-				}
 			}
 
 			String msg = sb.toString();

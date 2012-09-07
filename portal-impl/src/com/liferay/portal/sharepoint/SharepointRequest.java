@@ -137,8 +137,6 @@ public class SharepointRequest {
 
 			String url = unsyncBufferedReader.readLine();
 
-			unsyncBufferedReader.close();
-
 			String[] params = url.split(StringPool.AMPERSAND);
 
 			for (String param : params) {

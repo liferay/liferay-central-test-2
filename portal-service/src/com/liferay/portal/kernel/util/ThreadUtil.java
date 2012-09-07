@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.lang.management.ManagementFactory;
@@ -113,13 +112,6 @@ public class ThreadUtil {
 			StreamUtil.transfer(inputStream, outputStream);
 		}
 		catch (Exception e) {
-		}
-		finally {
-			try {
-				outputStream.close();
-			}
-			catch (IOException ioe) {
-			}
 		}
 
 		return outputStream.toString();

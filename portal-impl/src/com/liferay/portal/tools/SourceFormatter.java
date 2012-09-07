@@ -173,8 +173,6 @@ public class SourceFormatter {
 			}
 		}
 
-		unsyncBufferedReader.close();
-
 		imports = _formatImports(sb.toString(), 7);
 
 		content =
@@ -1073,8 +1071,6 @@ public class SourceFormatter {
 				importsList.add(line);
 			}
 		}
-
-		unsyncBufferedReader.close();
 
 		importsList = ListUtil.sort(importsList);
 
@@ -3751,8 +3747,6 @@ public class SourceFormatter {
 					importLines.add(line);
 				}
 			}
-
-			unsyncBufferedReader.close();
 
 			List<String> unneededImports = _getJSPDuplicateImports(
 				fileName, content, importLines);

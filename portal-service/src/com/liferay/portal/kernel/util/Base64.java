@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -95,12 +94,11 @@ public class Base64 {
 			return null;
 		}
 
-		ObjectOutputStream os = null;
 		UnsyncByteArrayOutputStream ubaos = new UnsyncByteArrayOutputStream(
 			32000);
 
 		try {
-			os = new ObjectOutputStream(ubaos);
+			ObjectOutputStream os = new ObjectOutputStream(ubaos);
 
 			os.flush();
 			os.writeObject(o);
@@ -108,15 +106,6 @@ public class Base64 {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			if (os != null) {
-				try {
-					os.close();
-				}
-				catch (IOException ioe) {
-				}
-			}
 		}
 
 		return encode(ubaos.unsafeGetByteArray(), 0, ubaos.size());

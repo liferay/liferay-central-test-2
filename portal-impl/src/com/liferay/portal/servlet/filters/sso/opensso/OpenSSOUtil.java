@@ -141,8 +141,6 @@ public class OpenSSOUtil {
 						}
 					}
 				}
-
-				unsyncBufferedReader.close();
 			}
 			else if (_log.isDebugEnabled()) {
 				_log.debug("Attributes response code " + responseCode);

@@ -76,9 +76,6 @@ public class DBLoader {
 
 						throw e;
 					}
-					finally {
-						unsyncBufferedReader.close();
-					}
 				}
 			}
 		}

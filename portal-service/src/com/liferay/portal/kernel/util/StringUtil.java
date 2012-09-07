@@ -3279,8 +3279,6 @@ public class StringUtil {
 			sb.append(lineSeparator);
 		}
 
-		unsyncBufferedReader.close();
-
 		return sb.toString();
 	}
 
