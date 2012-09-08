@@ -498,11 +498,13 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	}
 
 	public void copyTomcatContextXml(File targetDir) throws Exception {
+		if (!appServerType.equals(ServerDetector.TOMCAT_ID)) {
+			return;
+		}
+
 		File targetFile = new File(targetDir, "META-INF/context.xml");
 
-		if (!appServerType.equals(ServerDetector.TOMCAT_ID) ||
-			targetFile.exists()) {
-
+		if (targetFile.exists()) {
 			return;
 		}
 
