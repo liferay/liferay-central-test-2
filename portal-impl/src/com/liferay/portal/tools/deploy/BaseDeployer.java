@@ -515,7 +515,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 				content, "antiResourceLocking=\"true\"", StringPool.BLANK);
 		}
 
-		FileUtil.write(new File(targetDir, "META-INF/context.xml"), content);
+		FileUtil.write(targetFile, content);
 	}
 
 	public void copyXmls(
