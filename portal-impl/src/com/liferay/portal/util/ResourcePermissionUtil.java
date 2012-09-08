@@ -44,8 +44,7 @@ public class ResourcePermissionUtil {
 					resource.getName(), Long.valueOf(resource.getPrimKey()));
 
 			// Individual actions are not stored separately, so
-			// currentIndividualActions will include group and company actions
-			// as well
+			// individualActions will include group and company actions as well
 
 			individualActions.addAll(
 				ResourceBlockLocalServiceUtil.getPermissions(
@@ -55,7 +54,7 @@ public class ResourcePermissionUtil {
 					resourceBlock, role.getRoleId()));
 
 			// Resource blocks do not distinguish between company scope and
-			// group-template scope permissions, so the distinction must be
+			// group template scope permissions, so the distinction must be
 			// simulated here
 
 			if (role.getType() == RoleConstants.TYPE_REGULAR) {

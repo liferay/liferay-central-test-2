@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestConstants;
@@ -195,12 +194,10 @@ public class MembershipRequestLocalServiceImpl
 		List<Long> userIds = new UniqueList<Long>();
 
 		Group group = groupLocalService.getGroup(groupId);
-		Company company = companyLocalService.getCompany(group.getCompanyId());
 		String modelResource = Group.class.getName();
-		String resourcePrimKey = String.valueOf(group.getGroupId());
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			company.getCompanyId(), group, modelResource, null);
+			group.getCompanyId(), group, modelResource, null);
 
 		List<Team> teams = teamLocalService.getGroupTeams(groupId);
 
@@ -214,8 +211,8 @@ public class MembershipRequestLocalServiceImpl
 		}
 
 		Resource resource = resourceLocalService.getResource(
-			company.getCompanyId(), modelResource,
-			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
+			group.getCompanyId(), modelResource,
+			ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(groupId));
 
 		List<String> actions = ResourceActionsUtil.getResourceActions(
 			Group.class.getName());
@@ -228,8 +225,8 @@ public class MembershipRequestLocalServiceImpl
 			}
 
 			if ((roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
-				roleName.equals(RoleConstants.ORGANIZATION_OWNER)) &&
-					!group.isOrganization()) {
+				 roleName.equals(RoleConstants.ORGANIZATION_OWNER)) &&
+				!group.isOrganization()) {
 
 				continue;
 			}
