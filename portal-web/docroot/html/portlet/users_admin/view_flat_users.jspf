@@ -23,7 +23,7 @@ SearchContainer userSearch = new UserSearch(renderRequest, "cur2", currentURLObj
 
 userSearch.setRowChecker(new RowChecker(renderResponse));
 
-if (!ParamUtil.getBoolean(renderRequest, "advancedSearch", false)) {
+if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 	currentURLObj.setParameter("status", String.valueOf(status));
 }
 %>
@@ -246,14 +246,9 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch", false)) {
 
 			<c:if test="<%= (inactiveUsersCount > 0) && (usersCount >0) %>">
 				<div class="user-status-selector">
-
-					<%
-					String taglibOnChange = renderResponse.getNamespace() + "showUsers(this);";
-					%>
-
-					<aui:select changesContext="<%= true %>" inlineLabel="left" label="show" name="userStatusSelect" onchange="<%= taglibOnChange %>">
-						<aui:option label="active" selected="<%= (status == WorkflowConstants.STATUS_APPROVED) %>" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
-						<aui:option label="inactive" selected="<%= (status == WorkflowConstants.STATUS_INACTIVE) %>" value="<%= WorkflowConstants.STATUS_INACTIVE %>" />
+					<aui:select changesContext="<%= true %>" inlineLabel="left" label="show" name="userStatusSelect" onChange='<%= renderResponse.getNamespace() + "showUsers(this);" %>'>
+						<aui:option label="active" selected="<%= status == WorkflowConstants.STATUS_APPROVED %>" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
+						<aui:option label="inactive" selected="<%= status == WorkflowConstants.STATUS_INACTIVE %>" value="<%= WorkflowConstants.STATUS_INACTIVE %>" />
 					</aui:select>
 				</div>
 			</c:if>
