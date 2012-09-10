@@ -19,8 +19,6 @@ package com.liferay.portal.model;
  */
 public class PasswordPolicyConstants {
 
-	public static final int DO_NOT_WARN = -1;
-
 	public static final String DEFAULT_PASSWORD_POLICY =
 		"Default Password Policy";
 
