@@ -263,7 +263,6 @@ public abstract class BaseTrashHandlerTestCase {
 			Assert.assertEquals(
 				initialBaseModelsSearchCount,
 				searchBaseModelsCount(getBaseModelClass(), group.getGroupId()));
-
 			Assert.assertEquals(
 				initialTrashEntriesSearchCount + 1,
 				searchTrashEntriesCount(getSearchKeywords(), serviceContext));

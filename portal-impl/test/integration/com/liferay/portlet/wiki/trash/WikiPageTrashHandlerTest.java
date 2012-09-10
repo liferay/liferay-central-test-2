@@ -45,10 +45,12 @@ import org.junit.runner.RunWith;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
+	@Override
 	public void testTrashAndDelete() throws Exception {
 		Assert.assertTrue("This test does not apply", true);
 	}
 
+	@Override
 	public void testTrashAndRestoreDraft() throws Exception {
 		Assert.assertTrue("This test does not apply", true);
 	}
