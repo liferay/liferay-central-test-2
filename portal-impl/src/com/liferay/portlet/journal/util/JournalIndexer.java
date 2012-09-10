@@ -618,7 +618,7 @@ public class JournalIndexer extends BaseIndexer {
 
 			if (structureDocument != null) {
 				String path = element.getPath();
-				
+
 				path = path.concat("[@name=").concat(
 					HtmlUtil.escapeXPathAttribute(elName)).concat("]");
 

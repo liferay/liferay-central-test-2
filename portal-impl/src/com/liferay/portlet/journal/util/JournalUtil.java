@@ -991,17 +991,6 @@ public class JournalUtil {
 		return curContent;
 	}
 
-	public static String validateXSD(String xsd) throws PortalException {
-		try {
-			Document document = SAXReaderUtil.read(xsd);
-
-			return document.asXML();
-		}
-		catch (Exception e) {
-			throw new StructureXsdException();
-		}
-	}
-
 	public static void removeArticleLocale(Element element, String languageId)
 		throws PortalException, SystemException {
 
@@ -1156,6 +1145,17 @@ public class JournalUtil {
 
 		return _transformer.transform(
 			themeDisplay, tokens, viewMode, languageId, xml, script, langType);
+	}
+
+	public static String validateXSD(String xsd) throws PortalException {
+		try {
+			Document document = SAXReaderUtil.read(xsd);
+
+			return document.asXML();
+		}
+		catch (Exception e) {
+			throw new StructureXsdException();
+		}
 	}
 
 	private static void _addElementOptions(
