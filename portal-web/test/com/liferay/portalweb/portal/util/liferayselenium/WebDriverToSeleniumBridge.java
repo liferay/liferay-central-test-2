@@ -943,13 +943,10 @@ public class WebDriverToSeleniumBridge
 			}
 		}
 		else {
-			String label;
+			String label = optionLocator;
 
 			if (optionLocator.startsWith("label=")) {
 				label = optionLocator.substring(6);
-			}
-			else {
-				label = optionLocator;
 			}
 
 			for (WebElement option : options) {
