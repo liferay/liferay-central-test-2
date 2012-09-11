@@ -111,12 +111,12 @@ public class MimeTypesImpl implements MimeTypes, MimeTypesReaderMetKeys {
 		String contentType = null;
 
 		try {
+			CloseShieldInputStream closeShieldInputStream =
+				new CloseShieldInputStream(inputStream);
+
 			Metadata metadata = new Metadata();
 
 			metadata.set(Metadata.RESOURCE_NAME_KEY, fileName);
-
-			CloseShieldInputStream closeShieldInputStream =
-				new CloseShieldInputStream(inputStream);
 
 			MediaType mediaType = _detector.detect(
 				TikaInputStream.get(closeShieldInputStream), metadata);
