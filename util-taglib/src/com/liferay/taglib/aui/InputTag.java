@@ -175,9 +175,10 @@ public class InputTag extends BaseInputTag {
 
 		String id = getId();
 		String type = getType();
-		String fieldParam = getFieldParam();
 
 		if (Validator.isNull(id)) {
+			String fieldParam = getFieldParam();
+
 			if ((model != null) && Validator.isNull(type) &&
 				Validator.isNotNull(fieldParam)) {
 
@@ -206,6 +207,8 @@ public class InputTag extends BaseInputTag {
 
 		if ((model != null) && Validator.isNull(type)) {
 			baseType = ModelHintsUtil.getType(model.getName(), field);
+
+			String fieldParam = getFieldParam();
 
 			if (Validator.isNotNull(fieldParam)) {
 				_inputName = fieldParam;
