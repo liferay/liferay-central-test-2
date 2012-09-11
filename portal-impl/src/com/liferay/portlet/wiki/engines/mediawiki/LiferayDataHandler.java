@@ -87,10 +87,10 @@ public class LiferayDataHandler extends DummyDataHandler {
 		long nodeId = getNodeId(virtualWiki);
 
 		try {
-			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
+			WikiPage page = WikiPageLocalServiceUtil.getPage(
 				nodeId, topicName, true);
 
-			return wikiPage.getTitle();
+			return page.getTitle();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
