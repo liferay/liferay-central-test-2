@@ -106,7 +106,7 @@ portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPer
 		>
 
 			<%
-			StringBundler sb = new StringBundler(10);
+			StringBundler sb = new StringBundler(9);
 
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());
@@ -116,8 +116,7 @@ portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPer
 			sb.append(UnicodeFormatter.toString(group.getDescriptiveName(locale)));
 			sb.append("', '");
 			sb.append(target);
-			sb.append("');");
-			sb.append("window.close();");
+			sb.append("'); window.close();");
 
 			String rowHREF = sb.toString();
 			%>
