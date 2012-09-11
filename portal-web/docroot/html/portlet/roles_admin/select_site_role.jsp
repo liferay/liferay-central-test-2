@@ -204,7 +204,7 @@ if (step == 1) {
 					<liferay-util:param name="classHoverName" value="<%= RolesAdminUtil.getCssClassName(role) %>" />
 
 					<%
-					StringBundler sb = new StringBundler(14);
+					StringBundler sb = new StringBundler(13);
 
 					sb.append("javascript:opener.");
 					sb.append(renderResponse.getNamespace());
@@ -218,8 +218,7 @@ if (step == 1) {
 					sb.append(UnicodeFormatter.toString(group.getDescriptiveName(locale)));
 					sb.append("', '");
 					sb.append(group.getGroupId());
-					sb.append("');");
-					sb.append("window.close();");
+					sb.append("'); window.close();");
 
 					String rowHREF = sb.toString();
 					%>

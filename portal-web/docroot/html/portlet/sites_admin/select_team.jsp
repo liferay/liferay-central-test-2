@@ -18,27 +18,24 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
 long groupId = ParamUtil.getLong(request, "groupId");
-
-Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/sites_admin/select_team");
-portletURL.setParameter("groupId", String.valueOf(groupId));
-
-pageContext.setAttribute("portletURL", portletURL);
 %>
 
 <liferay-ui:header
 	title="teams"
 />
 
+<liferay-portlet:renderURL varImpl="portletURL">
+	<portlet:param name="struts_action" value="/sites_admin/select_team" />
+	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+</liferay-portlet:renderURL>
+
 <aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 
 	<%
-		TeamSearch searchContainer = new TeamSearch(renderRequest, portletURL);
+	TeamSearch searchContainer = new TeamSearch(renderRequest, portletURL);
 	%>
 
 	<liferay-ui:search-form
@@ -47,62 +44,61 @@ pageContext.setAttribute("portletURL", portletURL);
 	/>
 
 	<%
-		TeamSearchTerms searchTerms = (TeamSearchTerms)searchContainer.getSearchTerms();
+	TeamSearchTerms searchTerms = (TeamSearchTerms)searchContainer.getSearchTerms();
 
-		int total = TeamLocalServiceUtil.searchCount(groupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
+	int total = TeamLocalServiceUtil.searchCount(groupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>());
 
-		searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-		List results = TeamLocalServiceUtil.search(groupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	List results = TeamLocalServiceUtil.search(groupId, searchTerms.getName(), searchTerms.getDescription(), new LinkedHashMap<String, Object>(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-		searchContainer.setResults(results);
+	searchContainer.setResults(results);
 
-		portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
+	portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 	%>
 
 	<div class="separator"><!-- --></div>
 
 	<%
-		List resultRows = searchContainer.getResultRows();
+	List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			Team team = (Team)results.get(i);
+	for (int i = 0; i < results.size(); i++) {
+		Team team = (Team)results.get(i);
 
-			team = team.toEscapedModel();
+		team = team.toEscapedModel();
 
-			ResultRow row = new ResultRow(team, team.getTeamId(), i);
+		ResultRow row = new ResultRow(team, team.getTeamId(), i);
 
-			StringBundler sb = new StringBundler(14);
+		StringBundler sb = new StringBundler(13);
 
-			sb.append("javascript:opener.");
-			sb.append(renderResponse.getNamespace());
-			sb.append("selectTeam('");
-			sb.append(team.getTeamId());
-			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(team.getName()));
-			sb.append("', '");
-			sb.append("groupTeams");
-			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(team.getDescription()));
-			sb.append("', '");
-			sb.append(group.getGroupId());
-			sb.append("');");
-			sb.append("window.close();");
+		sb.append("javascript:opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectTeam('");
+		sb.append(team.getTeamId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(team.getName()));
+		sb.append("', '");
+		sb.append("groupTeams");
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(team.getDescription()));
+		sb.append("', '");
+		sb.append(groupId);
+		sb.append("'); window.close();");
 
-			String rowHREF = sb.toString();
+		String rowHREF = sb.toString();
 
-			// Name
+		// Name
 
-			row.addText(team.getName(), rowHREF);
+		row.addText(team.getName(), rowHREF);
 
-			// Description
+		// Description
 
-			row.addText(team.getDescription(), rowHREF);
+		row.addText(team.getDescription(), rowHREF);
 
-			// Add result row
+		// Add result row
 
-			resultRows.add(row);
-		}
+		resultRows.add(row);
+	}
 	%>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

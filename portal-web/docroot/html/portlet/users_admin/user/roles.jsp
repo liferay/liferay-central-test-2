@@ -22,14 +22,14 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 List<Organization> organizations = (List<Organization>)request.getAttribute("user.organizations");
 Long[] organizationIds = UsersAdminUtil.getOrganizationIds(organizations);
 List<Role> roles = (List<Role>)request.getAttribute("user.roles");
-List<UserGroupRole> siteRoles = (List<UserGroupRole>)request.getAttribute("user.siteRoles");
 List<UserGroupRole> organizationRoles = (List<UserGroupRole>)request.getAttribute("user.organizationRoles");
+List<UserGroupRole> siteRoles = (List<UserGroupRole>)request.getAttribute("user.siteRoles");
 List<Group> allGroups = (List<Group>)request.getAttribute("user.allGroups");
 
 List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
-userGroupRoles.addAll(siteRoles);
 userGroupRoles.addAll(organizationRoles);
+userGroupRoles.addAll(siteRoles);
 %>
 
 <liferay-util:buffer var="removeRoleIcon">

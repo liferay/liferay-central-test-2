@@ -4973,64 +4973,75 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	protected void addDefaultRolesAndTeams(long groupId, long[] userIds)
 		throws PortalException, SystemException {
 
+		List<Role> defaultSiteRoles = new ArrayList<Role>();
+
 		Group group = groupLocalService.getGroup(groupId);
 
-		UnicodeProperties groupTypeSettings = group.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
 
-		List<Role> defaultGroupRoles = new ArrayList();
-		List<Team> defaultGroupTeams = new ArrayList();
+		long[] defaultSiteRoleIds = StringUtil.split(
+			typeSettingsProperties.getProperty("defaultSiteRoleIds"), 0L);
 
-		String[] rolesIds = StringUtil.split(
-			groupTypeSettings.getProperty("defaultGroupRoles"),
-				StringPool.COMMA);
-		String[] teamIds = StringUtil.split(
-			groupTypeSettings.getProperty("defaultGroupTeams"),
-				StringPool.COMMA);
+		for (long defaultSiteRoleId : defaultSiteRoleIds) {
+			Role defaultSiteRole = rolePersistence.fetchByPrimaryKey(
+				defaultSiteRoleId);
 
-		for (int i = 0; i < rolesIds.length; i++) {
-			try {
-				defaultGroupRoles.add(
-					roleLocalService.getRole(Long.valueOf(rolesIds[i])));
+			if (defaultSiteRole == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to find role " + defaultSiteRoleId);
+				}
+
+				continue;
 			}
-			catch (Exception e) {
-				_log.warn("The role " + rolesIds[i] + " was not found.");
-			}
+
+			defaultSiteRoles.add(defaultSiteRole);
 		}
 
-		for (int i = 0; i < teamIds.length; i++) {
-			try {
-				defaultGroupTeams.add(
-					teamLocalService.getTeam(Long.valueOf(teamIds[i])));
+		List<Team> defaultTeams = new ArrayList<Team>();
+
+		long[] defaultTeamIds = StringUtil.split(
+			typeSettingsProperties.getProperty("defaultTeamIds"), 0L);
+
+		for (long defaultTeamId : defaultTeamIds) {
+			Team defaultTeam = teamPersistence.findByPrimaryKey(defaultTeamId);
+
+			if (defaultTeam == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to find team " + defaultTeamId);
+				}
+
+				continue;
 			}
-			catch (Exception e) {
-				_log.warn("The team " + teamIds[i] + " was not found.");
-			}
+
+			defaultTeams.add(defaultTeam);
 		}
 
 		for (long userId : userIds) {
-			Set<Long> roleIdSet = new HashSet<Long>();
-			Set<Long> teamIdSet = new HashSet<Long>();
+			Set<Long> userRoleIdsSet = new HashSet<Long>();
 
-			for (Role role : defaultGroupRoles) {
+			for (Role role : defaultSiteRoles) {
 				if (!userPersistence.containsRole(userId, role.getRoleId())) {
-					roleIdSet.add(role.getRoleId());
+					userRoleIdsSet.add(role.getRoleId());
 				}
 			}
 
 			long[] userRoleIds = ArrayUtil.toArray(
-				roleIdSet.toArray(new Long[roleIdSet.size()]));
+				userRoleIdsSet.toArray(new Long[userRoleIdsSet.size()]));
 
 			userGroupRoleLocalService.addUserGroupRoles(
 				userId, groupId, userRoleIds);
 
-			for (Team team : defaultGroupTeams) {
+			Set<Long> userTeamIdsSet = new HashSet<Long>();
+
+			for (Team team : defaultTeams) {
 				if (!userPersistence.containsTeam(userId, team.getTeamId())) {
-					teamIdSet.add(team.getTeamId());
+					userTeamIdsSet.add(team.getTeamId());
 				}
 			}
 
 			long[] userTeamIds = ArrayUtil.toArray(
-				teamIdSet.toArray(new Long[teamIdSet.size()]));
+				userTeamIdsSet.toArray(new Long[userTeamIdsSet.size()]));
 
 			userPersistence.addTeams(userId, userTeamIds);
 		}

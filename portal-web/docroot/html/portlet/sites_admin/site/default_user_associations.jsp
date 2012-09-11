@@ -19,13 +19,14 @@
 <%
 Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 
-UnicodeProperties groupTypeSettings = null;
-
 long groupId = scopeGroupId;
 
+UnicodeProperties groupTypeSettings = null;
+
 if (liveGroup != null) {
-	groupTypeSettings = liveGroup.getTypeSettingsProperties();
 	groupId = liveGroup.getGroupId();
+
+	groupTypeSettings = liveGroup.getTypeSettingsProperties();
 }
 else {
 	groupTypeSettings = new UnicodeProperties();
@@ -33,20 +34,20 @@ else {
 
 List<Role> defaultSiteRoles = new ArrayList();
 
-String[] rolesIds = StringUtil.split(groupTypeSettings.getProperty("defaultSiteRoles"), StringPool.COMMA);
+long[] defaultSiteRoleIds = StringUtil.split(groupTypeSettings.getProperty("defaultSiteRoleIds"), 0L);
 
-for (int i = 0; i < rolesIds.length; i++) {
-	Role role = RoleLocalServiceUtil.getRole(Long.valueOf(rolesIds[i]));
+for (long defaultSiteRoleId : defaultSiteRoleIds) {
+	Role role = RoleLocalServiceUtil.getRole(defaultSiteRoleId);
 
 	defaultSiteRoles.add(role);
 }
 
 List<Team> defaultTeams = new ArrayList();
 
-String[] teamIds = StringUtil.split(groupTypeSettings.getProperty("defaultTeams"), StringPool.COMMA);
+long[] defaultTeamIds = StringUtil.split(groupTypeSettings.getProperty("defaultTeamIds"), 0L);
 
-for (int i = 0; i < teamIds.length; i++) {
-	Team team = TeamLocalServiceUtil.getTeam(Long.valueOf(teamIds[i]));
+for (long defaultTeamId : defaultTeamIds) {
+	Team team = TeamLocalServiceUtil.getTeam(defaultTeamId);
 
 	defaultTeams.add(team);
 }
@@ -69,7 +70,6 @@ for (int i = 0; i < teamIds.length; i++) {
 	headerNames="title,null"
 	id="siteRolesSearchContainer"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= defaultSiteRoles %>"
 		total="<%= defaultSiteRoles.size() %>"
@@ -110,7 +110,6 @@ for (int i = 0; i < teamIds.length; i++) {
 	headerNames="title,null"
 	id="teamsSearchContainer"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= defaultTeams %>"
 		total="<%= defaultTeams.size() %>"
@@ -121,7 +120,6 @@ for (int i = 0; i < teamIds.length; i++) {
 		keyProperty="teamId"
 		modelVar="team"
 	>
-
 		<liferay-ui:search-container-column-text
 			name="title"
 			value="<%= HtmlUtil.escape(team.getName()) %>"
@@ -211,6 +209,7 @@ for (int i = 0; i < teamIds.length; i++) {
 
 	function <portlet:namespace />openSiteRoleSelector() {
 		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/sites_admin/select_site_role" /><portlet:param name="step" value="2" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>';
+
 		var roleWindow = window.open(url, 'role', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
 		roleWindow.focus();
@@ -218,6 +217,7 @@ for (int i = 0; i < teamIds.length; i++) {
 
 	function <portlet:namespace />openTeamSelector() {
 		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/sites_admin/select_team" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>';
+
 		var teamWindow = window.open(url, 'role', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 
 		teamWindow.focus();
