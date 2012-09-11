@@ -1080,6 +1080,35 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			contactExpandoBridge, ldapUser.getContactExpandoAttributes());
 	}
 
+	protected void updateLDAPUser(User ldapUser, Contact ldapContact, User user)
+		throws PortalException, SystemException {
+
+		Contact contact = user.getContact();
+
+		ldapContact.setAimSn(GetterUtil.getString(contact.getAimSn()));
+		ldapContact.setFacebookSn(
+			GetterUtil.getString(contact.getFacebookSn()));
+		ldapContact.setIcqSn(GetterUtil.getString(contact.getIcqSn()));
+		ldapContact.setJabberSn(GetterUtil.getString(contact.getJabberSn()));
+		ldapContact.setMale(GetterUtil.getBoolean(contact.getMale()));
+		ldapContact.setMsnSn(GetterUtil.getString(contact.getMsnSn()));
+		ldapContact.setMySpaceSn(GetterUtil.getString(contact.getMySpaceSn()));
+		ldapContact.setPrefixId(GetterUtil.getInteger(contact.getPrefixId()));
+		ldapContact.setSkypeSn(GetterUtil.getString(contact.getSkypeSn()));
+		ldapContact.setSmsSn(GetterUtil.getString(contact.getSmsSn()));
+		ldapContact.setSuffixId(GetterUtil.getInteger(contact.getSuffixId()));
+		ldapContact.setTwitterSn(GetterUtil.getString(contact.getTwitterSn()));
+		ldapContact.setYmSn(GetterUtil.getString(contact.getYmSn()));
+
+		ldapUser.setComments(GetterUtil.getString(user.getComments()));
+		ldapUser.setGreeting(GetterUtil.getString(user.getGreeting()));
+		ldapUser.setJobTitle(GetterUtil.getString(user.getJobTitle()));
+		ldapUser.setLanguageId(GetterUtil.getString(user.getLanguageId()));
+		ldapUser.setMiddleName(GetterUtil.getString(user.getMiddleName()));
+		ldapUser.setOpenId(GetterUtil.getString(user.getOpenId()));
+		ldapUser.setTimeZoneId(GetterUtil.getString(user.getTimeZoneId()));
+	}
+
 	protected User updateUser(
 			long companyId, LDAPUser ldapUser, User user, String password,
 			String modifiedDate)
@@ -1220,35 +1249,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 
 		return user;
-	}
-
-	protected void updateLDAPUser(User ldapUser, Contact ldapContact, User user)
-		throws PortalException, SystemException {
-
-		Contact contact = user.getContact();
-
-		ldapContact.setAimSn(GetterUtil.getString(contact.getAimSn()));
-		ldapContact.setFacebookSn(
-			GetterUtil.getString(contact.getFacebookSn()));
-		ldapContact.setIcqSn(GetterUtil.getString(contact.getIcqSn()));
-		ldapContact.setJabberSn(GetterUtil.getString(contact.getJabberSn()));
-		ldapContact.setMale(GetterUtil.getBoolean(contact.getMale()));
-		ldapContact.setMsnSn(GetterUtil.getString(contact.getMsnSn()));
-		ldapContact.setMySpaceSn(GetterUtil.getString(contact.getMySpaceSn()));
-		ldapContact.setPrefixId(GetterUtil.getInteger(contact.getPrefixId()));
-		ldapContact.setSkypeSn(GetterUtil.getString(contact.getSkypeSn()));
-		ldapContact.setSmsSn(GetterUtil.getString(contact.getSmsSn()));
-		ldapContact.setSuffixId(GetterUtil.getInteger(contact.getSuffixId()));
-		ldapContact.setTwitterSn(GetterUtil.getString(contact.getTwitterSn()));
-		ldapContact.setYmSn(GetterUtil.getString(contact.getYmSn()));
-
-		ldapUser.setComments(GetterUtil.getString(user.getComments()));
-		ldapUser.setGreeting(GetterUtil.getString(user.getGreeting()));
-		ldapUser.setJobTitle(GetterUtil.getString(user.getJobTitle()));
-		ldapUser.setLanguageId(GetterUtil.getString(user.getLanguageId()));
-		ldapUser.setMiddleName(GetterUtil.getString(user.getMiddleName()));
-		ldapUser.setOpenId(GetterUtil.getString(user.getOpenId()));
-		ldapUser.setTimeZoneId(GetterUtil.getString(user.getTimeZoneId()));
 	}
 
 	private static final String _IMPORT_BY_GROUP = "group";
