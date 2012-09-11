@@ -310,6 +310,10 @@ public class PortletDisplay implements Serializable {
 		return _active;
 	}
 
+	public boolean isFocused() {
+		return _id.equals(_themeDisplay.getPpid());
+	}
+
 	public boolean isModeAbout() {
 		return _modeAbout;
 	}

@@ -549,23 +549,19 @@ public class PortalImpl implements Portal {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String portletBreadcrumbKey = WebKeys.PORTLET_BREADCRUMBS;
+		String name = WebKeys.PORTLET_BREADCRUMBS;
 
-		if (Validator.isNotNull(portletDisplay.getId()) &&
-			!themeDisplay.isPortletDisplayFocused()) {
-
-			portletBreadcrumbKey =
-				WebKeys.PORTLET_BREADCRUMBS + StringPool.UNDERLINE +
-					portletDisplay.getId();
+		if (!portletDisplay.isFocused()) {
+			name += StringPool.UNDERLINE + portletDisplay.getId();
 		}
 
 		List<BreadcrumbEntry> breadcrumbEntries =
-			(List<BreadcrumbEntry>)request.getAttribute(portletBreadcrumbKey);
+			(List<BreadcrumbEntry>)request.getAttribute(name);
 
 		if (breadcrumbEntries == null) {
 			breadcrumbEntries = new ArrayList<BreadcrumbEntry>();
 
-			request.setAttribute(portletBreadcrumbKey, breadcrumbEntries);
+			request.setAttribute(name, breadcrumbEntries);
 		}
 
 		BreadcrumbEntry breadcrumbEntry = new BreadcrumbEntry();
@@ -3157,18 +3153,13 @@ public class PortalImpl implements Portal {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String portletBreadcrumbKey = WebKeys.PORTLET_BREADCRUMBS;
+		String name = WebKeys.PORTLET_BREADCRUMBS;
 
-		if (Validator.isNotNull(portletDisplay.getId()) &&
-			!themeDisplay.isPortletDisplayFocused()) {
-
-			portletBreadcrumbKey =
-				WebKeys.PORTLET_BREADCRUMBS + StringPool.UNDERLINE +
-					portletDisplay.getId();
+		if (!portletDisplay.isFocused()) {
+			name += StringPool.UNDERLINE + portletDisplay.getId();
 		}
 
-		return (List<BreadcrumbEntry>)request.getAttribute(
-			portletBreadcrumbKey);
+		return (List<BreadcrumbEntry>)request.getAttribute(name);
 	}
 
 	public String getPortletDescription(
