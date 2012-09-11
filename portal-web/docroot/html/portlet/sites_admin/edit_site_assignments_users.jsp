@@ -130,7 +130,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 
 				List<Team> teams = TeamLocalServiceUtil.getUserTeams(user2.getUserId(), group.getGroupId());
 
-				if (userGroupRoles.size() > 0) {
+				if (!userGroupRoles.isEmpty()) {
 					buffer.append(StringPool.COMMA_AND_SPACE);
 				}
 
