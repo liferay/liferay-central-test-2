@@ -472,6 +472,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 	protected AlloySearchResult search(String keywords, Sort[] sorts)
 		throws Exception {
+
 		if (indexer == null) {
 			throw new Exception("No indexer found for " + controllerPath);
 		}
