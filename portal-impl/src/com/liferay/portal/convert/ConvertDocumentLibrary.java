@@ -145,28 +145,6 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 				migrateDLFileEntry(companyId, repositoryId, dlFileEntry);
 			}
 		}
-
-		count = ImageLocalServiceUtil.getImagesCount();
-
-		MaintenanceUtil.appendStatus("Migrating " + count + " images");
-
-		pages = count / Indexer.DEFAULT_INTERVAL;
-
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
-
-			List<Image> images = ImageLocalServiceUtil.getImages(start, end);
-
-			for (Image image : images) {
-				String fileName =
-					image.getImageId() + StringPool.PERIOD + image.getType();
-
-				migrateFile(
-					_COMPANY_ID, _REPOSITORY_ID, fileName,
-					Store.VERSION_DEFAULT);
-			}
-		}
 	}
 
 	protected void migrateDLFileEntry(
@@ -235,6 +213,28 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 	}
 
+	protected void migrateImages() throws Exception {
+		int count = ImageLocalServiceUtil.getImagesCount();
+
+		MaintenanceUtil.appendStatus("Migrating " + count + " images");
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<Image> images = ImageLocalServiceUtil.getImages(start, end);
+
+			for (Image image : images) {
+				String fileName =
+					image.getImageId() + StringPool.PERIOD + image.getType();
+
+				migrateFile(0, 0, fileName, Store.VERSION_DEFAULT);
+			}
+		}
+	}
+
 	protected void migrateMB() throws Exception {
 		int count = MBMessageLocalServiceUtil.getMBMessagesCount();
 
@@ -259,6 +259,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	protected void migratePortlets() throws Exception {
+		migrateImages();
 		migrateDL();
 		migrateMB();
 		migrateWiki();
@@ -291,15 +292,11 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		}
 	}
 
-	private static final long _COMPANY_ID = 0;
-
 	private static final String[] _HOOKS = new String[] {
 		AdvancedFileSystemStore.class.getName(), CMISStore.class.getName(),
 		FileSystemStore.class.getName(), JCRStore.class.getName(),
 		S3Store.class.getName()
 	};
-
-	private static final long _REPOSITORY_ID = 0;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ConvertDocumentLibrary.class);
