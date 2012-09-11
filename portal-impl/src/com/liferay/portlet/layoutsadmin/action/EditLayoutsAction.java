@@ -692,9 +692,9 @@ public class EditLayoutsAction extends PortletAction {
 
 	protected void setThemeSettingProperties(
 			ActionRequest actionRequest,
-			UnicodeProperties typeSettingsProperties, String device,
-			String oldThemeId, String themeId,
-			Map<String, ThemeSetting> themeSettings)
+			UnicodeProperties typeSettingsProperties, String themeId,
+			Map<String, ThemeSetting> themeSettings, String device,
+			String deviceThemeId)
 		throws PortalException, SystemException {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -707,14 +707,12 @@ public class EditLayoutsAction extends PortletAction {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		boolean themeChanged = !oldThemeId.equals(themeId);
-
 		for (String key : themeSettings.keySet()) {
 			ThemeSetting themeSetting = themeSettings.get(key);
 
 			String value = null;
 
-			if (themeChanged) {
+			if (!themeId.equals(deviceThemeId)) {
 				value = themeSetting.getValue();
 			}
 			else {
@@ -976,7 +974,7 @@ public class EditLayoutsAction extends PortletAction {
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
 			stagingGroupId, privateLayout, layout.getLayoutId(),
-			layout.getThemeId(), layoutTypeSettingsProperties);
+			layoutTypeSettingsProperties, layout.getThemeId());
 
 		return new Object[] {layout, oldFriendlyURL};
 	}
@@ -1047,36 +1045,38 @@ public class EditLayoutsAction extends PortletAction {
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
 			long stagingGroupId, boolean privateLayout, long layoutId,
-			String oldThemeId, UnicodeProperties typeSettingsProperties)
+			UnicodeProperties typeSettingsProperties, String themeId)
 		throws Exception {
 
 		String[] devices = StringUtil.split(
 			ParamUtil.getString(actionRequest, "devices"));
 
 		for (String device : devices) {
-			String themeId = ParamUtil.getString(
+			String deviceThemeId = ParamUtil.getString(
 				actionRequest, device + "ThemeId");
-			String colorSchemeId = ParamUtil.getString(
+			String deviceColorSchemeId = ParamUtil.getString(
 				actionRequest, device + "ColorSchemeId");
-			String css = ParamUtil.getString(actionRequest, device + "Css");
-			boolean wapTheme = device.equals("wap");
+			String deviceCss = ParamUtil.getString(
+				actionRequest, device + "Css");
+			boolean deviceWapTheme = device.equals("wap");
 
-			boolean inheritLookAndFeel = ParamUtil.getBoolean(
+			boolean deviceInheritLookAndFeel = ParamUtil.getBoolean(
 				actionRequest, device + "InheritLookAndFeel");
 
-			if (inheritLookAndFeel) {
-				themeId = ThemeImpl.getDefaultRegularThemeId(companyId);
-				colorSchemeId = StringPool.BLANK;
+			if (deviceInheritLookAndFeel) {
+				deviceThemeId = ThemeImpl.getDefaultRegularThemeId(companyId);
+				deviceColorSchemeId = StringPool.BLANK;
 
 				deleteThemeSettingsProperties(typeSettingsProperties, device);
 			}
-			else if (Validator.isNotNull(themeId)) {
-				colorSchemeId = getColorSchemeId(
-					companyId, themeId, colorSchemeId, wapTheme);
+			else if (Validator.isNotNull(deviceThemeId)) {
+				deviceColorSchemeId = getColorSchemeId(
+					companyId, deviceThemeId, deviceColorSchemeId,
+					deviceWapTheme);
 
 				updateThemeSettingsProperties(
-					actionRequest, companyId, typeSettingsProperties, device,
-					oldThemeId, themeId, wapTheme);
+					actionRequest, companyId, typeSettingsProperties, themeId,
+					device, deviceThemeId, deviceWapTheme);
 			}
 
 			long groupId = liveGroupId;
@@ -1090,19 +1090,19 @@ public class EditLayoutsAction extends PortletAction {
 				typeSettingsProperties.toString());
 
 			LayoutServiceUtil.updateLookAndFeel(
-				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
-				wapTheme);
+				groupId, privateLayout, layoutId, deviceThemeId,
+				deviceColorSchemeId, deviceCss, deviceWapTheme);
 		}
 	}
 
 	protected UnicodeProperties updateThemeSettingsProperties(
 			ActionRequest actionRequest, long companyId,
-			UnicodeProperties typeSettingsProperties, String device,
-			String oldThemeId, String themeId, boolean wapTheme)
+			UnicodeProperties typeSettingsProperties, String themeId,
+			String device, String deviceThemeId, boolean wapTheme)
 		throws Exception {
 
 		Theme theme = ThemeLocalServiceUtil.getTheme(
-			companyId, themeId, wapTheme);
+			companyId, deviceThemeId, wapTheme);
 
 		deleteThemeSettingsProperties(typeSettingsProperties, device);
 
@@ -1114,8 +1114,8 @@ public class EditLayoutsAction extends PortletAction {
 		}
 
 		setThemeSettingProperties(
-			actionRequest, typeSettingsProperties, device, oldThemeId, themeId,
-			themeSettings);
+			actionRequest, typeSettingsProperties, themeId, themeSettings,
+			device, deviceThemeId);
 
 		return typeSettingsProperties;
 	}
