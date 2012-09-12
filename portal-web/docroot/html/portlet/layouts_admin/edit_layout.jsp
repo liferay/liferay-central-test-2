@@ -79,25 +79,20 @@ if (layoutRevision != null) {
 
 String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
-if (selLayout.isTypeArticle() || selLayout.isTypeEmbedded() || selLayout.isTypePortlet() || selLayout.isTypePanel()) {
+if (selLayout.isSupportsEmbeddedPortlets()) {
+	List<Portlet> embeddedPortlets = new ArrayList<Portlet>();
+
 	LayoutTypePortlet selLayoutTypePortlet = (LayoutTypePortlet)selLayout.getLayoutType();
 
-	List<Portlet> embeddedPortlets = selLayoutTypePortlet.getAllPortlets();
 	List<String> portletIds = selLayoutTypePortlet.getPortletIds();
 
-	Iterator<Portlet> portletsItr = embeddedPortlets.iterator();
-
-	while (portletsItr.hasNext()) {
-		Portlet portlet = portletsItr.next();
-
-		String portletId = portlet.getPortletId();
-
-		if (portlet.isSystem() || portletIds.contains(portlet.getPortletId())) {
-			portletsItr.remove();
+	for (Portlet portlet : selLayoutTypePortlet.getAllPortlets()) {
+		if (!portlet.isSystem() && !portletIds.contains(portlet.getPortletId())) {
+			embeddedPortlets.add(portlet);
 		}
 	}
 
-	if (embeddedPortlets.size() > 0) {
+	if (!embeddedPortlets.isEmpty()) {
 		request.setAttribute("edit_pages.jsp-embeddedPortlets", embeddedPortlets);
 
 		mainSections = ArrayUtil.append(mainSections, "embedded-portlets");
