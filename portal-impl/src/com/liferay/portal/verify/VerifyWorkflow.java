@@ -29,40 +29,7 @@ import java.sql.ResultSet;
  */
 public class VerifyWorkflow extends VerifyProcess {
 
-	protected void deleteOrphanedWorkflowDefinitionLinks(
-			String columnName, String tableName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			StringBundler sb = new StringBundler(6);
-
-			sb.append("delete from WorkflowDefinitionLink where classPk not ");
-			sb.append("in(select ");
-			sb.append(columnName);
-			sb.append(" from ");
-			sb.append(tableName);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			ps = con.prepareStatement(sb.toString());
-
-			ps.execute();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, null);
-		}
-	}
-
-	@Override
-	protected void doVerify() throws Exception {
-		verifyWorkflowDefinitionLinks();
-	}
-
-	protected void verifyWorkflowDefinitionLinks() throws Exception {
+	protected void deleteOrphanedWorkflowDefinitionLinks() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -78,14 +45,26 @@ public class VerifyWorkflow extends VerifyProcess {
 			while (rs.next()) {
 				long classNameId = rs.getLong("classNameId");
 
-				ClassName className = ClassNameLocalServiceUtil.getClassName(
+				ClassName className = ClassNameLocalServiceUtil.fetchClassName(
 					classNameId);
+
+				if (className == null) {
+					continue;
+				}
 
 				String classNameValue = className.getValue();
 
-				if (classNameValue.equals(_kaleoProcessModelName)) {
-					deleteOrphanedWorkflowDefinitionLinks(
-						"kaleoProcessId", "KaleoProcess");
+				for (String[] getOrphanedAttachedModel :
+						getOrphanedAttachedModels()) {
+
+					String orphanedClassName = getOrphanedAttachedModel[0];
+					String orphanedTableName = getOrphanedAttachedModel[1];
+					String orphanedColumnName = getOrphanedAttachedModel[2];
+
+					if (classNameValue.equals(orphanedClassName)) {
+						deleteOrphanedWorkflowDefinitionLinks(
+							orphanedTableName, orphanedColumnName);
+					}
 				}
 			}
 		}
@@ -94,7 +73,36 @@ public class VerifyWorkflow extends VerifyProcess {
 		}
 	}
 
-	private static String _kaleoProcessModelName =
-		"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess";
+	protected void deleteOrphanedWorkflowDefinitionLinks(
+			String tableName, String columnName)
+		throws Exception {
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append("delete from WorkflowDefinitionLink where classPK not ");
+		sb.append("in (select ");
+		sb.append(columnName);
+		sb.append(" from ");
+		sb.append(tableName);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		runSQL(sb.toString());
+	}
+
+	@Override
+	protected void doVerify() throws Exception {
+		deleteOrphanedWorkflowDefinitionLinks();
+	}
+
+	protected String[][] getOrphanedAttachedModels() {
+		return _ORPHANED_ATTACHED_MODELS;
+	}
+
+	private static final String[][] _ORPHANED_ATTACHED_MODELS = new String[][] {
+		new String[] {
+			"com.liferay.portal.workflow.kaleo.forms.model.KaleoProcess",
+			"KaleoProcess", "kaleoProcessId"
+		}
+	};
 
 }
