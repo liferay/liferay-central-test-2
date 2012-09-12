@@ -567,6 +567,16 @@ public class LayoutImpl extends LayoutBaseImpl {
 		return false;
 	}
 
+	public boolean isSupportsEmbeddedPortlets() {
+		if (isTypeArticle() || isTypeEmbedded() || isTypePanel() ||
+			isTypePortlet()) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isTypeArticle() {
 		if (getType().equals(LayoutConstants.TYPE_ARTICLE)) {
 			return true;
