@@ -54,11 +54,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GroupFinderImpl
 	extends BasePersistenceImpl<Group> implements GroupFinder {
 
-	public static final String COUNT_BY_GROUP_ID =
-		GroupFinder.class.getName() + ".countByGroupId";
-
 	public static final String COUNT_BY_LAYOUTS =
 		GroupFinder.class.getName() + ".countByLayouts";
+
+	public static final String COUNT_BY_GROUP_ID =
+		GroupFinder.class.getName() + ".countByGroupId";
 
 	public static final String COUNT_BY_C_N_D =
 		GroupFinder.class.getName() + ".countByC_N_D";
@@ -185,31 +185,39 @@ public class GroupFinderImpl
 
 		Session session = null;
 
-		session = openSession();
+		try {
+			session = openSession();
 
-		String sql = CustomSQLUtil.get(COUNT_BY_LAYOUTS);
+			String sql = CustomSQLUtil.get(COUNT_BY_LAYOUTS);
 
-		SQLQuery q = session.createSQLQuery(sql);
+			SQLQuery q = session.createSQLQuery(sql);
 
-		q.addEntity("Group_", GroupImpl.class);
+			q.addEntity("Group_", GroupImpl.class);
 
-		QueryPos qPos = QueryPos.getInstance(q);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(companyId);
-		qPos.add(parentGroupId);
-		qPos.add(site);
+			qPos.add(companyId);
+			qPos.add(parentGroupId);
+			qPos.add(site);
 
-		Iterator<Long> itr = q.iterate();
+			Iterator<Long> itr = q.iterate();
 
-		if (itr.hasNext()) {
-			Long count = itr.next();
+			if (itr.hasNext()) {
+				Long count = itr.next();
 
-			if (count != null) {
-				return count.intValue();
+				if (count != null) {
+					return count.intValue();
+				}
 			}
-		}
 
-		return 0;
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public int countByG_U(long groupId, long userId, boolean inherit)

@@ -888,8 +888,6 @@ public class VelocityTaglib {
 
 		setUp(sitesDirectoryTag);
 
-		sitesDirectoryTag.setDisplayStyle("from-level-1");
-
 		sitesDirectoryTag.runTag();
 	}
 

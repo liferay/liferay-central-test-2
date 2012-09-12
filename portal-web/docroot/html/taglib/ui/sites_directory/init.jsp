@@ -21,29 +21,30 @@ String bulletStyle = ((String)request.getAttribute("liferay-ui:sites-directory:b
 String displayStyle = (String)request.getAttribute("liferay-ui:sites-directory:displayStyle");
 
 String headerType = null;
-String rootGroupType = null;
-int rootGroupLevel = 0;
 String includedGroups = null;
 boolean nestedChildren = true;
+int rootGroupLevel = 0;
+String rootGroupType = null;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
 if ((displayStyleDefinition != null) && (displayStyleDefinition.length != 0)) {
 	headerType = displayStyleDefinition[0];
-	rootGroupType = displayStyleDefinition[1];
-	rootGroupLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
 	includedGroups = displayStyleDefinition[3];
 
 	if (displayStyleDefinition.length > 4) {
 		nestedChildren = GetterUtil.getBoolean(displayStyleDefinition[4]);
 	}
+
+	rootGroupLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
+	rootGroupType = displayStyleDefinition[1];
 }
 else {
 	headerType = (String)request.getAttribute("liferay-ui:sites-directory:headerType");
-	rootGroupType = (String)request.getAttribute("liferay-ui:sites-directory:rootGroupType");
-	rootGroupLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:sites-directory:rootGroupLevel"));
 	includedGroups = (String)request.getAttribute("liferay-ui:sites-directory:includedGroups");
 	nestedChildren = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:sites-directory:nestedChildren"));
+	rootGroupLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:sites-directory:rootGroupLevel"));
+	rootGroupType = (String)request.getAttribute("liferay-ui:sites-directory:rootGroupType");
 }
 
 Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);

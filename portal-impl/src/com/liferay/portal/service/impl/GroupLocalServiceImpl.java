@@ -1042,7 +1042,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  parentGroupId the primary key of the parent group
-	 * @param  site whether the group is a site
+	 * @param  site whether the group is to be associated with a main site
 	 * @return the matching groups, or <code>null</code> if no matches were
 	 *         found
 	 * @throws SystemException if a system exception occurred
@@ -1131,7 +1131,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns a range of all sites that are children of the parent group and
+	 * Returns a range of all groups that are children of the parent group and
 	 * that have at least one layout.
 	 *
 	 * <p>
@@ -1146,7 +1146,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  parentGroupId the primary key of the parent group
-	 * @param  site whether the group is a site
+	 * @param  site whether the group is to be associated with a main site
 	 * @param  start the lower bound of the range of groups to return
 	 * @param  end the upper bound of the range of groups to return (not
 	 *         inclusive)
@@ -1163,13 +1163,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the number of sites that are children or the parent group and
+	 * Returns the number of groups that are children or the parent group and
 	 * that have at least one layout
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  parentGroupId the primary key of the parent group
-	 * @param  site whether the group is a site
-	 * @return the number of matching sites
+	 * @param  site whether the group is to be associated with a main site
+	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int getLayoutsGroupsCount(

@@ -19,31 +19,29 @@
 <c:if test="<%= layout != null %>">
 
 	<%
-	PortletURL portletURL = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
-
 	Group rootGroup = null;
 	boolean hidden = false;
 
-	List selBranch = new ArrayList();
+	List<Group> branchGroups = new ArrayList<Group>();
 
-	selBranch.add(group);
-	selBranch.addAll(group.getAncestors());
+	branchGroups.add(group);
+	branchGroups.addAll(group.getAncestors());
 
 	if (rootGroupType.equals("relative")) {
-		if ((rootGroupLevel >= 0) && (rootGroupLevel < selBranch.size())) {
-			rootGroup = (Group)selBranch.get(rootGroupLevel);
+		if ((rootGroupLevel >= 0) && (rootGroupLevel < branchGroups.size())) {
+			rootGroup = branchGroups.get(rootGroupLevel);
 		}
 		else {
 			rootGroup = null;
 		}
 	}
 	else if (rootGroupType.equals("absolute")) {
-		int ancestorIndex = selBranch.size() - rootGroupLevel;
+		int ancestorIndex = branchGroups.size() - rootGroupLevel;
 
-		if ((ancestorIndex >= 0) && (ancestorIndex < selBranch.size())) {
-			rootGroup = (Group)selBranch.get(ancestorIndex);
+		if ((ancestorIndex >= 0) && (ancestorIndex < branchGroups.size())) {
+			rootGroup = branchGroups.get(ancestorIndex);
 		}
-		else if (ancestorIndex == selBranch.size()) {
+		else if (ancestorIndex == branchGroups.size()) {
 			rootGroup = null;
 		}
 		else {
@@ -53,27 +51,14 @@
 	%>
 
 	<div class="sites-directory-taglib nav-menu nav-menu-style-<%= bulletStyle %>">
-
 		<c:choose>
-			<c:when test='<%= (headerType.equals("root-group") && (rootGroup != null)) %>'>
-
-				<%
-				boolean privateLayoutSet = false;
-
-				if (!rootGroup.hasPublicLayouts()) {
-					privateLayoutSet = true;
-				}
-
-				String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(rootGroup, privateLayoutSet, themeDisplay);
-				String groupName = rootGroup.getDescriptiveName(themeDisplay.getLocale());
-				%>
-
+			<c:when test='<%= headerType.equals("root-group") && (rootGroup != null) %>'>
 				<h2>
-					<a href="<%= groupFriendlyURL %>"><%= groupName %></a>
+					<a href="<%= PortalUtil.getGroupFriendlyURL(rootGroup, !rootGroup.hasPublicLayouts(), themeDisplay) %>"><%= rootGroup.getDescriptiveName(locale) %></a>
 				</h2>
 			</c:when>
 			<c:when test='<%= headerType.equals("portlet-title") %>'>
-				<h2><%= themeDisplay.getPortletDisplay().getTitle() %></h2>
+				<h2><%= portletDisplay.getTitle() %></h2>
 			</c:when>
 			<c:when test='<%= headerType.equals("breadcrumb") %>'>
 				<liferay-ui:breadcrumb />
@@ -82,7 +67,7 @@
 
 		<c:if test="<%= !hidden %>">
 			<c:choose>
-				<c:when test='<%= displayStyle.equals("icon") || displayStyle.equals("descriptive") %>'>
+				<c:when test='<%= displayStyle.equals("descriptive") || displayStyle.equals("icon") %>'>
 					<c:choose>
 						<c:when test="<%= Validator.isNull(portletDisplay.getId()) %>">
 							<div class="portlet-msg-info">
@@ -90,30 +75,31 @@
 							</div>
 						</c:when>
 						<c:otherwise>
+
+							<%
+							PortletURL portletURL = PortletURLFactoryUtil.create(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
+							%>
+
 							<liferay-ui:search-container iteratorURL="<%= portletURL %>">
 
 								<%
-								List groupChildren = null;
+								List<Group> childGroups = null;
 
 								if (rootGroup != null) {
-									groupChildren = rootGroup.getChildrenWithLayouts(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+									childGroups = rootGroup.getChildrenWithLayouts(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 								}
 								else {
-									groupChildren = GroupLocalServiceUtil.getLayoutsGroups(group.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+									childGroups = GroupLocalServiceUtil.getLayoutsGroups(group.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 								}
 
 								List<Group> visibleGroups = new UniqueList<Group>();
 
-								for (int i = 0; i < groupChildren.size(); i++) {
-									Group groupChild = (Group)groupChildren.get(i);
-
-									LayoutSet publicLayoutSet = groupChild.getPublicLayoutSet();
-
-									if ((publicLayoutSet != null) && (publicLayoutSet.getPageCount() > 0)) {
-										visibleGroups.add(groupChild);
+								for (Group childGroup : childGroups) {
+									if (childGroup.hasPublicLayouts()) {
+										visibleGroups.add(childGroup);
 									}
-									else if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupChild.getGroupId())) {
-										visibleGroups.add(groupChild);
+									else if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), childGroup.getGroupId())) {
+										visibleGroups.add(childGroup);
 									}
 								}
 								%>
@@ -125,39 +111,31 @@
 
 								<liferay-ui:search-container-row
 									className="com.liferay.portal.model.Group"
-									modelVar="groupChild"
+									modelVar="childGroup"
 								>
 
 									<%
 									LayoutSet layoutSet = null;
 
-									LayoutSet publicLayoutSet = groupChild.getPublicLayoutSet();
-
-									boolean hasPublicLayouts = false;
-
-									if ((publicLayoutSet != null) && (publicLayoutSet.getPageCount() > 0)) {
-										layoutSet = publicLayoutSet;
-
-										hasPublicLayouts = true;
+									if (childGroup.hasPublicLayouts()) {
+										layoutSet = childGroup.getPublicLayoutSet();
 									}
 									else {
-										layoutSet = groupChild.getPrivateLayoutSet();
+										layoutSet = childGroup.getPrivateLayoutSet();
 									}
-
-									String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(groupChild, !hasPublicLayouts, themeDisplay);
 									%>
 
 									<liferay-ui:app-view-entry
 										assetCategoryClassName="<%= Group.class.getName() %>"
-										assetCategoryClassPK="<%= groupChild.getGroupId() %>"
+										assetCategoryClassPK="<%= childGroup.getGroupId() %>"
 										assetTagClassName="<%= Group.class.getName() %>"
-										assetTagClassPK="<%= groupChild.getGroupId() %>"
-										description="<%= groupChild.getDescription() %>"
+										assetTagClassPK="<%= childGroup.getGroupId() %>"
+										description="<%= childGroup.getDescription() %>"
 										displayStyle="<%= displayStyle%>"
 										showCheckbox="<%= false %>"
 										thumbnailSrc='<%= themeDisplay.getPathImage() + "/layout_set_logo?img_id=" + layoutSet.getLogoId() + "&t=" + WebServerServletTokenUtil.getToken(layoutSet.getLogoId()) %>'
-										title="<%= HtmlUtil.escape(groupChild.getDescriptiveName(themeDisplay.getLocale())) %>"
-										url="<%= groupFriendlyURL %>"
+										title="<%= HtmlUtil.escape(childGroup.getDescriptiveName(locale)) %>"
+										url="<%= PortalUtil.getGroupFriendlyURL(childGroup, !childGroup.hasPublicLayouts(), themeDisplay) %>"
 									/>
 								</liferay-ui:search-container-row>
 
@@ -171,7 +149,7 @@
 					<%
 					StringBundler sb = new StringBundler();
 
-					_buildNavigation(user, rootGroup, group, selBranch, themeDisplay, 1, includedGroups, nestedChildren, sb);
+					_buildSitesDirectory(rootGroup, group, branchGroups, themeDisplay, 1, includedGroups, nestedChildren, sb);
 
 					String content = sb.toString();
 					%>
@@ -185,126 +163,112 @@
 </c:if>
 
 <%!
-private void _buildNavigation(User user, Group rootGroup, Group selGroup, List selBranch, ThemeDisplay themeDisplay, int groupLevel, String includedGroups, boolean nestedChildren, StringBundler sb) throws Exception {
-	List groupChildren = null;
+private void _buildSitesDirectory(Group rootGroup, Group selGroup, List<Group> branchGroups, ThemeDisplay themeDisplay, int groupLevel, String includedGroups, boolean nestedChildren, StringBundler sb) throws Exception {
+	List<Group> childGroups = null;
 
 	if (rootGroup != null) {
-		groupChildren = rootGroup.getChildrenWithLayouts(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		childGroups = rootGroup.getChildrenWithLayouts(true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 	else {
-		groupChildren = GroupLocalServiceUtil.getLayoutsGroups(selGroup.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		childGroups = GroupLocalServiceUtil.getLayoutsGroups(selGroup.getCompanyId(), GroupConstants.DEFAULT_LIVE_GROUP_ID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	List<Group> visibleGroups = new UniqueList<Group>();
 
-	for (int i = 0; i < groupChildren.size(); i++) {
-		Group groupChild = (Group)groupChildren.get(i);
-
-		LayoutSet publicLayoutSet = groupChild.getPublicLayoutSet();
-
-		if ((publicLayoutSet != null) && (publicLayoutSet.getPageCount() > 0)) {
-			visibleGroups.add(groupChild);
+	for (Group childGroup : childGroups) {
+		if (childGroup.hasPublicLayouts()) {
+			visibleGroups.add(childGroup);
 		}
 		else {
+			User user = themeDisplay.getUser();
+
 			List<Group> mySites = user.getMySites(true, QueryUtil.ALL_POS);
 
-			if (mySites.contains(groupChild)) {
-				visibleGroups.add(groupChild);
+			if (mySites.contains(childGroup)) {
+				visibleGroups.add(childGroup);
 			}
 		}
 	}
 
-	if (!groupChildren.isEmpty()) {
-		StringBundler tailSB = null;
+	if (childGroups.isEmpty()) {
+		return;
+	}
 
-		if (!nestedChildren) {
-			tailSB = new StringBundler();
+	StringBundler tailSB = null;
+
+	if (!nestedChildren) {
+		tailSB = new StringBundler();
+	}
+
+	sb.append("<ul class=\"sites level-");
+	sb.append(groupLevel);
+	sb.append("\">");
+
+	for (Group childGroup : childGroups) {
+		boolean open = false;
+
+		if (includedGroups.equals("auto") && branchGroups.contains(childGroup) && !childGroup.getChildren(true).isEmpty()) {
+			open = true;
 		}
 
-		sb.append("<ul class=\"sites level-");
-		sb.append(groupLevel);
-		sb.append("\">");
-
-		for (int i = 0; i < groupChildren.size(); i++) {
-			Group groupChild = (Group)groupChildren.get(i);
-
-			LayoutSet publicLayoutSet = groupChild.getPublicLayoutSet();
-
-			boolean hasPublicLayouts = false;
-
-			if ((publicLayoutSet != null) && (publicLayoutSet.getPageCount() > 0)) {
-				hasPublicLayouts = true;
-			}
-
-			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(groupChild, !hasPublicLayouts, themeDisplay);
-
-			boolean open = false;
-
-			if (includedGroups.equals("auto") && selBranch.contains(groupChild) && !groupChild.getChildren(true).isEmpty()) {
-				open = true;
-			}
-
-			if (includedGroups.equals("all")) {
-				open = true;
-			}
-
-			StringBundler className = new StringBundler(2);
-
-			if (open) {
-				className.append("open ");
-			}
-
-			if (selGroup.getGroupId() == groupChild.getGroupId()) {
-				className.append("selected ");
-			}
-
-			sb.append("<li ");
-
-			if (Validator.isNotNull(className)) {
-				sb.append("class=\"");
-				sb.append(className);
-				sb.append("\" ");
-			}
-
-			sb.append(">");
-
-			sb.append("<a ");
-
-			if (Validator.isNotNull(className)) {
-				sb.append("class=\"");
-				sb.append(className);
-				sb.append("\" ");
-			}
-
-			sb.append("href=\"");
-			sb.append(HtmlUtil.escapeHREF(groupFriendlyURL));
-			sb.append("\"> ");
-
-			sb.append(HtmlUtil.escape(groupChild.getDescriptiveName(themeDisplay.getLocale())));
-
-			sb.append("</a>");
-
-			if (open) {
-				StringBundler groupChildSB = null;
-
-				if (nestedChildren) {
-					groupChildSB = sb;
-				}
-				else {
-					groupChildSB = tailSB;
-				}
-
-				_buildNavigation(user, groupChild, selGroup, selBranch, themeDisplay, groupLevel + 1, includedGroups, nestedChildren, groupChildSB);
-			}
-
-			sb.append("</li>");
+		if (includedGroups.equals("all")) {
+			open = true;
 		}
 
-		sb.append("</ul>");
+		String className = StringPool.BLANK;
 
-		if (!nestedChildren) {
-			sb.append(tailSB);
+		if (open) {
+			className += "open ";
 		}
+
+		if (selGroup.getGroupId() == childGroup.getGroupId()) {
+			className += "selected ";
+		}
+
+		sb.append("<li ");
+
+		if (Validator.isNotNull(className)) {
+			sb.append("class=\"");
+			sb.append(className);
+			sb.append("\" ");
+		}
+
+		sb.append("><a ");
+
+		if (Validator.isNotNull(className)) {
+			sb.append("class=\"");
+			sb.append(className);
+			sb.append("\" ");
+		}
+
+		sb.append("href=\"");
+		sb.append(HtmlUtil.escapeHREF(PortalUtil.getGroupFriendlyURL(childGroup, !childGroup.hasPublicLayouts(), themeDisplay)));
+		sb.append("\"> ");
+
+		sb.append(HtmlUtil.escape(childGroup.getDescriptiveName(themeDisplay.getLocale())));
+
+		sb.append("</a>");
+
+		if (open) {
+			StringBundler childGroupSB = null;
+
+			if (nestedChildren) {
+				childGroupSB = sb;
+			}
+			else {
+				childGroupSB = tailSB;
+			}
+
+			_buildSitesDirectory(childGroup, selGroup, branchGroups, themeDisplay, groupLevel + 1, includedGroups, nestedChildren, childGroupSB);
+		}
+
+		sb.append("</li>");
+	}
+
+	sb.append("</ul>");
+
+	if (!nestedChildren) {
+		sb.append(tailSB);
 	}
 }
 %>
