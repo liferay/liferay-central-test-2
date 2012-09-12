@@ -112,27 +112,16 @@ public class JournalContentPortletLayoutListener
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), portletId, articleId);
 
-			deleteRuntimePortletResources(layout, articleId);
+			String[] runtimePortletIds = getRuntimePortletIds(
+				layout.getCompanyId(), layout.getGroupId(), articleId);
+
+			if (runtimePortletIds.length > 0) {
+				PortletLocalServiceUtil.deletePortlets(
+					layout.getCompanyId(), runtimePortletIds, layout.getPlid());
+			}
 		}
 		catch (Exception e) {
 			throw new PortletLayoutListenerException(e);
-		}
-	}
-
-	protected void deleteRuntimePortletResources(
-			Layout layout, String articleId)
-		throws Exception{
-
-		long companyId = layout.getCompanyId();
-
-		List<String> runtimePortletIds = getRuntimePortletIds(
-			companyId, layout.getGroupId(), articleId);
-
-		if ((runtimePortletIds != null) && !runtimePortletIds.isEmpty()) {
-			PortletLocalServiceUtil.deletePortlets(
-				companyId,
-				runtimePortletIds.toArray(new String[runtimePortletIds.size()]),
-				layout.getPlid());
 		}
 	}
 
@@ -149,6 +138,52 @@ public class JournalContentPortletLayoutListener
 		}
 
 		return portletId;
+	}
+
+	protected String[] getRuntimePortletIds(
+			long companyId, long scopeGroupId, String articleId)
+		throws Exception {
+
+		Group group = GroupLocalServiceUtil.getCompanyGroup(companyId);
+
+		JournalArticle article = null;
+
+		try {
+			article = JournalArticleLocalServiceUtil.getDisplayArticle(
+				scopeGroupId, articleId);
+		}
+		catch (NoSuchArticleException nsae) {
+		}
+
+		if (article == null) {
+			try {
+				article =
+					JournalArticleLocalServiceUtil.getDisplayArticle(
+						group.getGroupId(), articleId);
+			}
+			catch (NoSuchArticleException nsae) {
+				return new String[0];
+			}
+		}
+
+		List<String> portletIds = getRuntimePortletIds(article.getContent());
+
+		if (Validator.isNotNull(article.getTemplateId())) {
+			JournalTemplate journalTemplate = null;
+
+			try {
+				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
+					scopeGroupId, article.getTemplateId());
+			}
+			catch (NoSuchTemplateException nste) {
+				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
+					group.getGroupId(), article.getTemplateId());
+			}
+
+			portletIds.addAll(getRuntimePortletIds(journalTemplate.getXsl()));
+		}
+
+		return portletIds.toArray(new String[portletIds.size()]);
 	}
 
 	protected List<String> getRuntimePortletIds(String content)
@@ -183,54 +218,6 @@ public class JournalContentPortletLayoutListener
 				getRuntimePortletId(content.substring(index, closeIndex)));
 
 			index = closeIndex;
-		}
-
-		return portletIds;
-	}
-
-	protected List<String> getRuntimePortletIds(
-			long companyId, long scopeGroupId , String articleId)
-		throws Exception {
-
-		JournalArticle journalArticle = null;
-
-		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-			companyId);
-
-		try {
-			journalArticle = JournalArticleLocalServiceUtil.getDisplayArticle(
-				scopeGroupId, articleId);
-		}
-		catch (NoSuchArticleException nsae) {
-		}
-
-		if (journalArticle == null) {
-			try {
-				journalArticle =
-					JournalArticleLocalServiceUtil.getDisplayArticle(
-						companyGroup.getGroupId(), articleId);
-			}
-			catch (NoSuchArticleException nsae) {
-				return null;
-			}
-		}
-
-		List<String> portletIds = getRuntimePortletIds(
-			journalArticle.getContent());
-
-		if (Validator.isNotNull(journalArticle.getTemplateId())) {
-			JournalTemplate journalTemplate = null;
-
-			try {
-				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
-					scopeGroupId, journalArticle.getTemplateId());
-			}
-			catch (NoSuchTemplateException nste) {
-				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
-					companyGroup.getGroupId(), journalArticle.getTemplateId());
-			}
-
-			portletIds.addAll(getRuntimePortletIds(journalTemplate.getXsl()));
 		}
 
 		return portletIds;

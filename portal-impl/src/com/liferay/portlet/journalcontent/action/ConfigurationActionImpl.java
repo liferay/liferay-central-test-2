@@ -59,7 +59,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		throws Exception {
 
 		// This logic has to run in a transaction which we will invoke directly
-		// since we're not in a spring bean
+		// since this is not a Spring bean
 
 		Method doProcessActionMethod = getDoProcessActionMethod();
 
@@ -87,7 +87,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	 */
 	@Transactional(
 		isolation = Isolation.PORTAL, propagation = Propagation.REQUIRES_NEW,
-		rollbackFor = {Exception.class})
+		rollbackFor = {Exception.class}
+	)
 	protected void doProcessAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -164,22 +165,27 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					ActionResponse.class});
 		}
 		catch (Exception e) {
-			throw new java.lang.IllegalStateException(e);
+			throw new IllegalStateException(e);
 		}
 
 		return _doProcessActionMethod;
 	}
 
-	private List<MethodInterceptor> getMethodInterceptors() {
-		if (_methodInterceptors == null) {
-			_methodInterceptors = new ArrayList<MethodInterceptor>();
-
-			MethodInterceptor transactionAdvice =
-				(MethodInterceptor)PortalBeanLocatorUtil.locate(
-					"transactionAdvice");
-
-			_methodInterceptors.add(transactionAdvice);
+	protected List<MethodInterceptor> getMethodInterceptors() {
+		if (_methodInterceptors != null) {
+			return _methodInterceptors;
 		}
+
+		List<MethodInterceptor> methodInterceptors =
+			new ArrayList<MethodInterceptor>();
+
+		MethodInterceptor methodInterceptor =
+			(MethodInterceptor)PortalBeanLocatorUtil.locate(
+				"transactionAdvice");
+
+		methodInterceptors.add(methodInterceptor);
+
+		_methodInterceptors = methodInterceptors;
 
 		return _methodInterceptors;
 	}
