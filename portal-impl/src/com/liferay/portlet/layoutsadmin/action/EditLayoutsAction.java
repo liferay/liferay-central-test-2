@@ -908,15 +908,6 @@ public class EditLayoutsAction extends PortletAction {
 				PropertiesParamUtil.getProperties(
 					actionRequest, "TypeSettingsProperties--");
 
-			String[] removeEmbeddedPortletIds = ParamUtil.getParameterValues(
-				actionRequest, "removeEmbeddedPortletIds");
-
-			if (removeEmbeddedPortletIds.length > 0) {
-				PortletLocalServiceUtil.deletePortlets(
-					themeDisplay.getCompanyId(), removeEmbeddedPortletIds,
-					layout.getPlid());
-			}
-
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
@@ -970,10 +961,19 @@ public class EditLayoutsAction extends PortletAction {
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
 
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
+			String[] removeEmbeddedPortletIds = ParamUtil.getParameterValues(
+				actionRequest, "removeEmbeddedPortletIds");
+
+			if (removeEmbeddedPortletIds.length > 0) {
+				PortletLocalServiceUtil.deletePortlets(
+					themeDisplay.getCompanyId(), removeEmbeddedPortletIds,
+					layout.getPlid());
+			}
 
 			LayoutSettings layoutSettings = LayoutSettings.getInstance(layout);
+
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			EventsProcessorUtil.process(
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
