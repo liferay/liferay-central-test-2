@@ -40,18 +40,17 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 			selenium.getText("//div[@class='top-links']/ul/li[5]/span"));
 		assertEquals(RuntimeVariables.replace("Banned Users"),
 			selenium.getText("//div[@class='top-links']/ul/li[6]/span"));
-		assertTrue(selenium.isElementPresent("//input[@id='_19_keywords1']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
+		assertTrue(selenium.isVisible("//input[@id='_19_keywords1']"));
+		assertTrue(selenium.isVisible("//input[@value='Search']"));
 		assertEquals(RuntimeVariables.replace("RSS"),
 			selenium.getText(
 				"//div[@class='category-subscription-types']/span[1]/a/span"));
 		assertEquals(RuntimeVariables.replace("Subscribe"),
 			selenium.getText(
 				"//div[@class='category-subscription-types']/span[2]/a/span"));
-		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
-		assertTrue(selenium.isElementPresent(
-				"//input[@value='Post New Thread']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Permissions']"));
+		assertTrue(selenium.isVisible("//input[@value='Add Category']"));
+		assertTrue(selenium.isVisible("//input[@value='Post New Thread']"));
+		assertTrue(selenium.isVisible("//input[@value='Permissions']"));
 		assertEquals(RuntimeVariables.replace("Categories"),
 			selenium.getText(
 				"//div[@id='messageBoardsCategoriesPanel']/div/div/span"));
@@ -64,7 +63,8 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("5"),
 			selenium.getText("//tr[3]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
-			selenium.getText("//tr[3]/td[5]/span/ul/li/strong/a/span"));
+			selenium.getText(
+				"//tr[3]/td[5]/span[@title='Actions']/ul/li/strong/a/span"));
 		assertEquals(RuntimeVariables.replace("Showing 1 result."),
 			selenium.getText("//div[@class='search-results']"));
 		assertEquals(RuntimeVariables.replace("Threads"),
@@ -73,7 +73,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"There are no threads in this category."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
-		selenium.clickAt("//td[@id='_19_mbCategoriesSearchContainer_col-category_row-1']/a/strong",
+		selenium.clickAt("//tr[3]/td/a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Message Boards Home"),
@@ -107,8 +107,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 				"MB Category Thread5 Message Subject"),
 			selenium.getText(
 				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-1']"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//td[@id='_19_mbThreadsSearchContainer_col-flag_row-1']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
@@ -131,8 +130,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 				"MB Category Thread4 Message Subject"),
 			selenium.getText(
 				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-2']"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//td[@id='_19_mbThreadsSearchContainer_col-flag_row-2']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
@@ -155,8 +153,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 				"MB Category Thread3 Message Subject"),
 			selenium.getText(
 				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-3']"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//td[@id='_19_mbThreadsSearchContainer_col-flag_row-3']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
@@ -179,8 +176,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 				"MB Category Thread2 Message Subject"),
 			selenium.getText(
 				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-4']"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//td[@id='_19_mbThreadsSearchContainer_col-flag_row-4']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
@@ -203,8 +199,7 @@ public class ViewMBCategoryThreadsTest extends BaseTestCase {
 				"MB Category Thread1 Message Subject"),
 			selenium.getText(
 				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-5']"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//td[@id='_19_mbThreadsSearchContainer_col-flag_row-5']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
