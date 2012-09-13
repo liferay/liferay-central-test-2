@@ -191,7 +191,7 @@ public abstract class BaseWebDriverImpl
 		}
 		catch (Exception e) {
 			BaseTestCase.fail(
-					"Timeout: unable to find the locator \"" + locator + "\"");
+				"Timeout: unable to find the locator \"" + locator + "\"");
 		}
 		finally {
 			timeouts.implicitlyWait(
