@@ -134,17 +134,12 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 		return null;
 	}
 
-	addPortletURL.setWindowState(LiferayWindowState.POP_UP);
-
-	addPortletURL.setPortletMode(PortletMode.VIEW);
-
 	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 	PortletURL redirectURL = liferayPortletResponse.createLiferayPortletURL(themeDisplay.getPlid(), portletDisplay.getId(), PortletRequest.RENDER_PHASE, false);
 
-	redirectURL.setWindowState(LiferayWindowState.POP_UP);
-
 	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+	redirectURL.setWindowState(LiferayWindowState.POP_UP);
 
 	addPortletURL.setParameter("redirect", redirectURL.toString());
 
@@ -198,6 +193,9 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 			addPortletURL.setParameter("structureId", structure.getStructureId());
 		}
 	}
+
+	addPortletURL.setPortletMode(PortletMode.VIEW);
+	addPortletURL.setWindowState(LiferayWindowState.POP_UP);
 
 	return addPortletURL;
 }
