@@ -198,7 +198,7 @@ public class SearchContainer<R> {
 	}
 
 	public int getEnd() {
-		if (!_calledSetTotal && _log.isWarnEnabled()) {
+		if (!calledSetTotal && _log.isWarnEnabled()) {
 			_log.warn(
 				"Call setTotal before calling getEnd since the value of " +
 					"setTotal may effect the value of getEnd");
@@ -324,7 +324,7 @@ public class SearchContainer<R> {
 	}
 
 	public int getStart() {
-		if (!_calledSetTotal && _log.isWarnEnabled()) {
+		if (!calledSetTotal && _log.isWarnEnabled()) {
 			_log.warn(
 				"Call setTotal before calling getStart since the value of " +
 					"setTotal may effect the value of getStart");
