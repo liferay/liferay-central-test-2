@@ -187,7 +187,7 @@ public abstract class BaseWebDriverImpl
 			TestPropsValues.TIMEOUT_EXPLICIT_WAIT, TimeUnit.SECONDS);
 
 		try {
-			WebElement webElement = getWebElement(locator);
+			getWebElement(locator);
 		}
 		catch (Exception e) {
 			BaseTestCase.fail(
