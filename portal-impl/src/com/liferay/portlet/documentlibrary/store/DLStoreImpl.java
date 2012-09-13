@@ -536,9 +536,9 @@ public class DLStoreImpl implements DLStore {
 			throw new FileNameException(fileName);
 		}
 
-		if (fileName.endsWith(TempFileUtil.SUFFIX_TEMP_FILENAME)) {
+		if (fileName.endsWith(TempFileUtil.SUFFIX_TEMP_FILE_NAME)) {
 			fileName = StringUtil.replaceLast(
-				fileName, TempFileUtil.SUFFIX_TEMP_FILENAME, StringPool.BLANK);
+				fileName, TempFileUtil.SUFFIX_TEMP_FILE_NAME, StringPool.BLANK);
 		}
 
 		if (validateFileExtension) {
