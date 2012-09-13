@@ -39,8 +39,10 @@ public class OrganizationRoleChecker extends RowChecker {
 		Organization organization = (Organization)obj;
 
 		try {
+			Group group = organization.getGroup();
+
 			return GroupLocalServiceUtil.hasRoleGroup(
-				_role.getRoleId(), organization.getGroup().getGroupId());
+				_role.getRoleId(), group.getGroupId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
