@@ -198,10 +198,8 @@ public class SearchContainer<R> {
 	}
 
 	public int getEnd() {
-		if (!calledSetTotal && _log.isWarnEnabled()) {
-			_log.warn(
-				"Call setTotal before calling getEnd since the value of " +
-					"setTotal may effect the value of getEnd");
+		if ((_total == -1) && _log.isWarnEnabled()) {
+			_log.warn("total must be set first");
 		}
 
 		return _end;
@@ -324,10 +322,8 @@ public class SearchContainer<R> {
 	}
 
 	public int getStart() {
-		if (!calledSetTotal && _log.isWarnEnabled()) {
-			_log.warn(
-				"Call setTotal before calling getStart since the value of " +
-					"setTotal may effect the value of getStart");
+		if ((_total == -1) && _log.isWarnEnabled()) {
+			_log.warn("total must be set first");
 		}
 
 		return _start;
@@ -448,8 +444,6 @@ public class SearchContainer<R> {
 		}
 
 		_calculateStartAndEnd();
-
-		_calledSetTotal = true;
 	}
 
 	private void _buildNormalizedHeaderNames(List<String> headerNames) {
@@ -471,14 +465,13 @@ public class SearchContainer<R> {
 
 		_resultEnd = _end;
 
-		if (_resultEnd > _total) {
+		if ((_total != -1) && (_resultEnd > _total)) {
 			_resultEnd = _total;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SearchContainer.class);
 
-	private boolean _calledSetTotal;
 	private String _className;
 	private int _cur;
 	private String _curParam = DEFAULT_CUR_PARAM;
@@ -513,7 +506,7 @@ public class SearchContainer<R> {
 	private RowChecker _rowChecker;
 	private DisplayTerms _searchTerms;
 	private int _start;
-	private int _total;
+	private int _total = -1;
 	private boolean _uniqueId;
 
 }
