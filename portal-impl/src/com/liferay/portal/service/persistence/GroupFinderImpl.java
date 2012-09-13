@@ -237,6 +237,17 @@ public class GroupFinderImpl
 			descriptions, params, andOperator);
 	}
 
+	public int countByC_N_D(
+			long companyId, String[] names, String[] realNames,
+			String[] descriptions, LinkedHashMap<String, Object> params,
+			boolean andOperator)
+		throws SystemException {
+
+		return countByC_C_N_D(
+			companyId, _getGroupOrganizationClassNameIds(), names, realNames,
+			descriptions, params, andOperator);
+	}
+
 	public int countByC_C_N_D(
 			long companyId, long[] classNameIds, String name, String realName,
 			String description, LinkedHashMap<String, Object> params,
@@ -332,17 +343,6 @@ public class GroupFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	public int countByC_C_N_D(
-			long companyId, String[] names, String[] realNames,
-			String[] descriptions, LinkedHashMap<String, Object> params,
-			boolean andOperator)
-		throws SystemException {
-
-		return countByC_C_N_D(
-			companyId, _getGroupOrganizationClassNameIds(), names, realNames,
-			descriptions, params, andOperator);
 	}
 
 	public List<Group> findByKeywords(
@@ -949,14 +949,13 @@ public class GroupFinderImpl
 						classNameIds, " OR Group_.classNameId = ")));
 		}
 
-		sql = replaceJoinAndWhere(sql, params);
-
 		sql = CustomSQLUtil.replaceKeywords(
 			sql, "lower(Group_.name) LIKE ? OR lower(Group_.name)",
 			StringPool.LIKE, false, names);
 		sql = CustomSQLUtil.replaceKeywords(
 			sql, "lower(Group_.description)", StringPool.LIKE, true,
 			descriptions);
+		sql = replaceJoinAndWhere(sql, params);
 		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 		SQLQuery q = session.createSQLQuery(sql);
