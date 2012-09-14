@@ -108,9 +108,8 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 		Template template = _createTemplate(templateResource);
 
-		if (
-			PropsValues.VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL
-			!= 0) {
+		if (PropsValues.VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL !=
+				0) {
 
 			_portalCache.put(templateResource, template);
 		}
