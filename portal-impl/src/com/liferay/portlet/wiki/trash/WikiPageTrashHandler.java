@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.trash.DuplicateEntryException;
@@ -74,18 +73,15 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 
 	/**
 	 * Deletes trash attachments from all the wiki pages from a group that were
-	 * deleted after a given date
+	 * deleted after a given date.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  date the date from which attachments will be deleted
-	 * @throws PortalException if an entry with the primary key could not be
-	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTrashAttachments(long groupId, Date date)
+	@Override
+	public void deleteTrashAttachments(Group group, Date date)
 		throws PortalException, SystemException {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		long repositoryId = CompanyConstants.SYSTEM;
 

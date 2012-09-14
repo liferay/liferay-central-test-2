@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -40,18 +39,15 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 
 	/**
 	 * Deletes trash attachments from all the message boards messages from a
-	 * group that were deleted after a given date
+	 * group that were deleted after a given date.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  date the date from which attachments will be deleted
-	 * @throws PortalException if an entry with the primary key could not be
-	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTrashAttachments(long groupId, Date date)
+	@Override
+	public void deleteTrashAttachments(Group group, Date date)
 		throws PortalException, SystemException {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		long repositoryId = CompanyConstants.SYSTEM;
 
@@ -93,16 +89,14 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		}
 	}
 
-	public void deleteTrashEntries(long[] classPKs, boolean checkPermission)
-		throws PortalException, SystemException {
+	public void deleteTrashEntries(long[] classPKs, boolean checkPermission) {
 	}
 
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
-	public void restoreTrashEntries(long[] classPKs)
-		throws PortalException, SystemException {
+	public void restoreTrashEntries(long[] classPKs) {
 	}
 
 }

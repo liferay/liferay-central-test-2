@@ -394,7 +394,7 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		for (TrashHandler trashHandler :
 				TrashHandlerRegistryUtil.getTrashHandlers()) {
 
-			trashHandler.deleteTrashAttachments(group.getGroupId(), date);
+			trashHandler.deleteTrashAttachments(group, date);
 		}
 	}
 

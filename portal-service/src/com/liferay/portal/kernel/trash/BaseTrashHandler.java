@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.trash;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -52,10 +53,9 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		throws PortalException, SystemException {
 	}
 
-	public void deleteTrashAttachments(long groupId, Date date)
+	@SuppressWarnings("unused")
+	public void deleteTrashAttachments(Group group, Date date)
 		throws PortalException, SystemException {
-
-		return;
 	}
 
 	public void deleteTrashEntries(long[] classPKs)
