@@ -42,6 +42,6 @@ public abstract class BaseListNode extends BaseParentableNode {
 		_baseParentableNode = baseParentableNode;
 	}
 
-	private BaseParentableNode _baseParentableNode = null;
+	private BaseParentableNode _baseParentableNode;
 
 }

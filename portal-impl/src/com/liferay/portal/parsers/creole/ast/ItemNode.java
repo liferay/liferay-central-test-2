@@ -45,8 +45,7 @@ public abstract class ItemNode extends BaseParentableNode {
 		_baseParentableNode = baseParentableNode;
 	}
 
-	private BaseParentableNode _baseParentableNode = null;
-
+	private BaseParentableNode _baseParentableNode;
 	private int _level;
 
 }

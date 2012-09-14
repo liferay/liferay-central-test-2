@@ -43,6 +43,14 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 	}
 
 	@Test
+	public void testParseCorrectlyComplexNestedList() {
+		Assert.assertEquals(
+			"<ul><li>a<ul><li>a.1</li></ul></li><li>b<ul><li>b.1</li>" +
+				"<li>b.2</li><li>b.3</li></ul></li><li>c</li></ul>",
+			translate("list-4.creole"));
+	}
+
+	@Test
 	public void testParseCorrectlyItalicContentInListItems() {
 		Assert.assertEquals(
 			"<ul><li> <em>abcdefg</em></li></ul>", translate("list-5.creole"));
@@ -195,14 +203,6 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 		Assert.assertEquals(
 			"<ul><li>1</li><li>2</li><li>3</li></ul>",
 			translate("list-3.creole"));
-	}
-
-	@Test
-	public void testParseCorrectlyComplexNestedList() {
-		Assert.assertEquals(
-			"<ul><li>a<ul><li>a.1</li></ul></li><li>b<ul><li>b.1</li>" + 
-				"<li>b.2</li><li>b.3</li></ul></li><li>c</li></ul>",
-			translate("list-4.creole"));
 	}
 
 	@Test
