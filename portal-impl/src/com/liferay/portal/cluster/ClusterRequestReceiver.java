@@ -76,7 +76,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		Address sourceAddress = new AddressImpl(message.getSrc());
 
 		if (sourceAddress.equals(
-			_clusterExecutorImpl.getLocalClusterNodeAddress())) {
+				_clusterExecutorImpl.getLocalClusterNodeAddress())) {
 
 			boolean isProcessed = processLocalMessage(obj);
 
@@ -271,6 +271,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 
 		MethodHandler methodHandler = clusterRequest.getMethodHandler();
+
 		Object returnValue = null;
 		Exception exception = null;
 

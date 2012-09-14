@@ -29,11 +29,11 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 	public ClusterNode(String clusterNodeId, InetAddress inetAddress) {
 
 		if (clusterNodeId == null) {
-			throw new IllegalArgumentException("ClusterNode ID is null");
+			throw new IllegalArgumentException("Cluster node ID is null");
 		}
 
 		if (inetAddress == null) {
-			throw new IllegalArgumentException("InetAddress is null");
+			throw new IllegalArgumentException("Inet address is null");
 		}
 
 		_clusterNodeId = clusterNodeId;

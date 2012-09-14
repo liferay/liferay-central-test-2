@@ -102,6 +102,7 @@ public class ClusterExecutorImpl
 			CLUSTER_EXECUTOR_CALLBACK_THREAD_POOL, true);
 
 		_controlJChannel.setReceiver(null);
+
 		_controlJChannel.close();
 
 		_clusterEventListeners.clear();
@@ -493,6 +494,7 @@ public class ClusterExecutorImpl
 		FutureClusterResponses futureClusterResponses) {
 
 		MethodHandler methodHandler = clusterRequest.getMethodHandler();
+
 		Object returnValue = null;
 		Exception exception = null;
 
