@@ -139,20 +139,27 @@ public class ServiceComponentLocalServiceImpl
 
 			Element dataElement = document.addElement("data");
 
-			String tablesSQL = HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/sql/tables.sql"));
+			Element tablesSQLElement = dataElement.addElement("tables-sql");
 
-			dataElement.addElement("tables-sql").addCDATA(tablesSQL);
+			String tablesSQL = HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/sql/tables.sql"));
+
+			tablesSQLElement.addCDATA(tablesSQL);
+
+			Element sequencesSQLElement = dataElement.addElement(
+				"sequences-sql");
 
 			String sequencesSQL = HttpUtil.URLtoString(
 				servletContext.getResource("/WEB-INF/sql/sequences.sql"));
 
-			dataElement.addElement("sequences-sql").addCDATA(sequencesSQL);
+			sequencesSQLElement.addCDATA(sequencesSQL);
 
-			String indexesSQL = HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/sql/indexes.sql"));
+			Element indexesSQLElement = dataElement.addElement("indexes-sql");
 
-			dataElement.addElement("indexes-sql").addCDATA(indexesSQL);
+			String indexesSQL = HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/sql/indexes.sql"));
+
+			indexesSQLElement.addCDATA(indexesSQL);
 
 			String dataXML = document.formattedString();
 
