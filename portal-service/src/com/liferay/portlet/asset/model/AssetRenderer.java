@@ -65,7 +65,7 @@ public interface AssetRenderer {
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
-			PortletURL redirectURL, WindowState windowState)
+			WindowState windowState, PortletURL redirectURL)
 		throws Exception;
 
 	public PortletURL getURLExport(

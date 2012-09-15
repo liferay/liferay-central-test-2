@@ -92,7 +92,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
-			PortletURL redirectURL, WindowState windowState)
+			WindowState windowState, PortletURL redirectURL)
 		throws Exception {
 
 		LiferayPortletURL editPortletURL =
@@ -107,17 +107,22 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		Group stageableGroup = themeDisplay.getScopeGroup();
+		Group group = themeDisplay.getScopeGroup();
 
-		if (stageableGroup.isLayout()) {
+		if (group.isLayout()) {
 			Layout layout = themeDisplay.getLayout();
 
-			stageableGroup = layout.getGroup();
+			group = layout.getGroup();
 		}
 
-		if (stageableGroup.hasStagingGroup()) {
+		if (group.hasStagingGroup()) {
 			return null;
 		}
+
+		editPortletURL.setDoAsGroupId(getGroupId());
+
+		editPortletURL.setParameter("redirect", redirectURL.toString());
+		editPortletURL.setParameter("originalRedirect", redirectURL.toString());
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
@@ -133,12 +138,9 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 				"referringPortletResource", portletDisplay.getId());
 		}
 
-		editPortletURL.setParameter("redirect", redirectURL.toString());
-		editPortletURL.setParameter("originalRedirect", redirectURL.toString());
-		editPortletURL.setWindowState(windowState);
 		editPortletURL.setPortletMode(PortletMode.VIEW);
-		editPortletURL.setDoAsGroupId(getGroupId());
 		editPortletURL.setRefererPlid(themeDisplay.getPlid());
+		editPortletURL.setWindowState(windowState);
 
 		return editPortletURL;
 	}
