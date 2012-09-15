@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -372,10 +373,11 @@ public class EditFileEntryAction extends PortletAction {
 			if ((uploadException != null) &&
 				(uploadException.getCause() instanceof IOFileUploadException)) {
 
-				// Cancelled a temporary upload. Just consume this exception
+				// Cancelled a temporary upload
+
 			}
 			else if ((uploadException != null) &&
-				uploadException.isExceededSizeLimit()) {
+					 uploadException.isExceededSizeLimit()) {
 
 				throw new FileSizeException(uploadException.getCause());
 			}
@@ -605,21 +607,10 @@ public class EditFileEntryAction extends PortletAction {
 			String cmd, Exception e)
 		throws Exception {
 
-		if (e instanceof DuplicateLockException ||
-			e instanceof InvalidFileVersionException ||
-			e instanceof NoSuchFileEntryException ||
-			e instanceof PrincipalException) {
+		if (e instanceof AssetCategoryException ||
+			e instanceof AssetTagException) {
 
-			if (e instanceof DuplicateLockException) {
-				DuplicateLockException dle = (DuplicateLockException)e;
-
-				SessionErrors.add(actionRequest, dle.getClass(), dle.getLock());
-			}
-			else {
-				SessionErrors.add(actionRequest, e.getClass());
-			}
-
-			setForward(actionRequest, "portlet.document_library.error");
+			SessionErrors.add(actionRequest, e.getClass(), e);
 		}
 		else if (e instanceof DuplicateFileException ||
 				 e instanceof DuplicateFolderNameException ||
@@ -647,9 +638,8 @@ public class EditFileEntryAction extends PortletAction {
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);
 
-				response.setStatus(200);
-
-				response.setContentType("text/html");
+				response.setContentType(ContentTypes.TEXT_HTML);
+				response.setStatus(HttpServletResponse.SC_OK);
 
 				int errorType = 0;
 
@@ -673,10 +663,21 @@ public class EditFileEntryAction extends PortletAction {
 
 			SessionErrors.add(actionRequest, e.getClass());
 		}
-		else if (e instanceof AssetCategoryException ||
-				 e instanceof AssetTagException) {
+		else if (e instanceof DuplicateLockException ||
+				 e instanceof InvalidFileVersionException ||
+				 e instanceof NoSuchFileEntryException ||
+				 e instanceof PrincipalException) {
 
-			SessionErrors.add(actionRequest, e.getClass(), e);
+			if (e instanceof DuplicateLockException) {
+				DuplicateLockException dle = (DuplicateLockException)e;
+
+				SessionErrors.add(actionRequest, dle.getClass(), dle.getLock());
+			}
+			else {
+				SessionErrors.add(actionRequest, e.getClass());
+			}
+
+			setForward(actionRequest, "portlet.document_library.error");
 		}
 		else {
 			throw e;
