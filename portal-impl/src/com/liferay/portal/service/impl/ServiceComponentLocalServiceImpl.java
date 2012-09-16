@@ -98,7 +98,7 @@ public class ServiceComponentLocalServiceImpl
 			serviceComponentPersistence.findByBuildNamespace(
 				buildNamespace, 0, 1);
 
-		if (serviceComponents.size() == 0) {
+		if (serviceComponents.isEmpty()) {
 			long serviceComponentId = counterLocalService.increment();
 
 			serviceComponent = serviceComponentPersistence.create(
