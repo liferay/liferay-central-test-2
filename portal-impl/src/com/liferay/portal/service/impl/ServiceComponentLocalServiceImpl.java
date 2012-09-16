@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableListener;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -296,7 +298,7 @@ public class ServiceComponentLocalServiceImpl
 
 				db.runSQLTemplateString(tablesSQL, true, false);
 
-				upgradeModels(classLoader);
+				upgradeModels(classLoader, previousServiceComponent);
 			}
 
 			if (!sequencesSQL.equals(
@@ -364,6 +366,39 @@ public class ServiceComponentLocalServiceImpl
 		return models;
 	}
 
+	protected UpgradeTableListener getUpgradeTableListener(
+		ClassLoader classLoader, Class<?> modelClass) {
+
+		String modelClassName = modelClass.getName();
+
+		String upgradeTableListenerClassName = modelClassName;
+
+		upgradeTableListenerClassName = StringUtil.replaceLast(
+			upgradeTableListenerClassName, ".model.impl.", ".model.upgrade.");
+		upgradeTableListenerClassName = StringUtil.replaceLast(
+			upgradeTableListenerClassName, "ModelImpl", "UpgradeTableListener");
+
+		try {
+			UpgradeTableListener upgradeTableListener =
+				(UpgradeTableListener)InstanceFactory.newInstance(
+					classLoader, upgradeTableListenerClassName);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Instantiated " + upgradeTableListenerClassName);
+			}
+
+			return upgradeTableListener;
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to instantiate " + upgradeTableListenerClassName);
+			}
+
+			return null;
+		}
+	}
+
 	protected void removeOldServiceComponents(String buildNamespace)
 		throws SystemException {
 
@@ -386,7 +421,10 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected void upgradeModels(ClassLoader classLoader) throws Exception {
+	protected void upgradeModels(
+			ClassLoader classLoader, ServiceComponent previousServiceComponent)
+		throws Exception {
+
 		List<String> models = getModels(classLoader);
 
 		for (String name : models) {
@@ -415,9 +453,22 @@ public class ServiceComponentLocalServiceImpl
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				tableName, tableColumns);
 
+			UpgradeTableListener upgradeTableListener = getUpgradeTableListener(
+				classLoader, modelClass);
+
 			upgradeTable.setCreateSQL(tableSQLCreate);
 
+			if (upgradeTableListener != null) {
+				upgradeTableListener.onBeforeUpdateTable(
+					previousServiceComponent, upgradeTable);
+			}
+
 			upgradeTable.updateTable();
+
+			if (upgradeTableListener != null) {
+				upgradeTableListener.onAfterUpdateTable(
+					previousServiceComponent, upgradeTable);
+			}
 		}
 	}
 
