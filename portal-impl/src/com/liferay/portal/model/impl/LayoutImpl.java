@@ -73,7 +73,9 @@ import javax.servlet.http.HttpServletRequest;
 public class LayoutImpl extends LayoutBaseImpl {
 
 	public static boolean hasFriendlyURLKeyword(String friendlyURL) {
-		if (Validator.isNotNull(getFriendlyURLKeyword(friendlyURL))) {
+		String keyword = _getFriendlyURLKeyword(friendlyURL);
+
+		if (Validator.isNotNull(keyword)) {
 			return true;
 		}
 
@@ -118,7 +120,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 	public static void validateFriendlyURLKeyword(String friendlyURL)
 		throws LayoutFriendlyURLException {
 
-		String keyword = getFriendlyURLKeyword(friendlyURL);
+		String keyword = _getFriendlyURLKeyword(friendlyURL);
 
 		if (Validator.isNotNull(keyword)) {
 			LayoutFriendlyURLException lfurle =
@@ -677,10 +679,10 @@ public class LayoutImpl extends LayoutBaseImpl {
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
-	protected static String getFriendlyURLKeyword(String friendlyURL) {
+	private static String _getFriendlyURLKeyword(String friendlyURL) {
 		friendlyURL = friendlyURL.toLowerCase();
 
-		for (String keyword : _slashedKeywords) {
+		for (String keyword : _friendlyURLKeywords) {
 			if (friendlyURL.startsWith(keyword) ||
 				keyword.equals(friendlyURL + StringPool.SLASH)) {
 
@@ -692,7 +694,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 	}
 
 	private static void _initFriendlyURLKeywords() {
-		_slashedKeywords =
+		_friendlyURLKeywords =
 			new String[PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS.length];
 
 		for (int i = 0; i < PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS.length;
@@ -711,7 +713,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 				}
 			}
 
-			_slashedKeywords[i] = keyword.toLowerCase();
+			_friendlyURLKeywords[i] = keyword.toLowerCase();
 		}
 	}
 
@@ -840,7 +842,8 @@ public class LayoutImpl extends LayoutBaseImpl {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImpl.class);
-	private static String[] _slashedKeywords;
+
+	private static String[] _friendlyURLKeywords;
 
 	private LayoutSet _layoutSet;
 	private LayoutType _layoutType;
