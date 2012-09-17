@@ -23,7 +23,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -31,64 +30,51 @@ import org.junit.Test;
  */
 public class PortalSimpleDateFormatTest {
 
-	@BeforeClass
-	public static void init() {
-		_testCalendar = Calendar.getInstance();
-
-		_testCalendar.set(Calendar.YEAR, 1984);
-		_testCalendar.set(Calendar.MONTH, Calendar.MARCH);
-		_testCalendar.set(Calendar.DAY_OF_MONTH, 9);
-
-		_testCalendar.set(Calendar.HOUR_OF_DAY, 22);
-		_testCalendar.set(Calendar.MINUTE, 40);
-		_testCalendar.set(Calendar.SECOND, 0);
-		_testCalendar.set(Calendar.MILLISECOND, 0);
-
-		_testCalendar.setTimeZone(TimeZoneUtil.getDefault());
-	}
-
 	@Test
-	public void testDateOnlyIsoFormat() {
-		DateFormat dateFormat = new PortalSimpleDateFormat(
-			"yyyyMMdd", Locale.getDefault());
-
-		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
-
-		String expextedFormat = "19840309";
-
-		String dateOnlyIsoFormat = dateFormat.format(_testCalendar.getTime());
-
-		Assert.assertEquals(expextedFormat, dateOnlyIsoFormat);
-	}
-
-	@Test
-	public void testIso8601Format() {
-		DateFormat dateFormat = new PortalSimpleDateFormat(
-			DateUtil.ISO_8601_PATTERN, Locale.getDefault());
-
-		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
-
-		String expectedFormat = "1984-03-09T22:40:00+00:00";
-
-		String iso8601FormatDate = dateFormat.format(_testCalendar.getTime());
-
-		Assert.assertEquals(expectedFormat, iso8601FormatDate);
-	}
-
-	@Test
-	public void testTimeOnlyIsoFormat() {
+	public void testFormat_HHmmss() {
 		DateFormat dateFormat = new PortalSimpleDateFormat(
 			"HHmmss", Locale.getDefault());
 
 		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
 
-		String expectedFormat = "224000";
-
-		String timeOnlyIsoFormat = dateFormat.format(_testCalendar.getTime());
-
-		Assert.assertEquals(expectedFormat, timeOnlyIsoFormat);
+		Assert.assertEquals("224000", dateFormat.format(getTime()));
 	}
 
-	private static Calendar _testCalendar;
+	@Test
+	public void testFormat_ISO8601() {
+		DateFormat dateFormat = new PortalSimpleDateFormat(
+			DateUtil.ISO_8601_PATTERN, Locale.getDefault());
+
+		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
+
+		Assert.assertEquals(
+			"1984-03-09T22:40:00+00:00", dateFormat.format(getTime()));
+	}
+
+	@Test
+	public void testFormat_yyyyMMdd() {
+		DateFormat dateFormat = new PortalSimpleDateFormat(
+			"yyyyMMdd", Locale.getDefault());
+
+		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
+
+		Assert.assertEquals("19840309", dateFormat.format(getTime()));
+	}
+
+	protected long getTime() {
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.set(Calendar.YEAR, 1984);
+		calendar.set(Calendar.MONTH, Calendar.MARCH);
+		calendar.set(Calendar.DAY_OF_MONTH, 9);
+		calendar.set(Calendar.HOUR_OF_DAY, 22);
+		calendar.set(Calendar.MINUTE, 40);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		calendar.setTimeZone(TimeZoneUtil.getDefault());
+
+		return calendar.getTimeInMillis();
+	}
 
 }

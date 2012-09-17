@@ -32,29 +32,30 @@ public class PortalSimpleDateFormat extends SimpleDateFormat {
 		super(pattern, locale);
 
 		if (pattern.equals(DateUtil.ISO_8601_PATTERN)) {
-			_iso8601Format = true;
+			_iso8601Pattern = true;
 		}
 	}
 
 	@Override
 	public StringBuffer format(
-		Date date, StringBuffer toAppendTo, FieldPosition pos) {
+		Date date, StringBuffer toAppendToSB, FieldPosition fieldPosition) {
 
-		StringBuffer originalFormat = super.format(date, toAppendTo, pos);
+		StringBuffer originalSB = super.format(
+			date, toAppendToSB, fieldPosition);
 
-		if (!_iso8601Format) {
-			return originalFormat;
+		if (!_iso8601Pattern) {
+			return originalSB;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuffer modifiedSB = new StringBuffer();
 
-		sb.append(originalFormat.substring(0, 22));
-		sb.append(StringPool.COLON);
-		sb.append(originalFormat.substring(22));
+		modifiedSB.append(originalSB.substring(0, 22));
+		modifiedSB.append(StringPool.COLON);
+		modifiedSB.append(originalSB.substring(22));
 
-		return sb;
+		return modifiedSB;
 	}
 
-	private boolean _iso8601Format;
+	private boolean _iso8601Pattern;
 
 }
