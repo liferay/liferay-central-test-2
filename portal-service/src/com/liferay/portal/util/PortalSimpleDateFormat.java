@@ -55,6 +55,6 @@ public class PortalSimpleDateFormat extends SimpleDateFormat {
 		return sb;
 	}
 
-	private boolean _iso8601Format = false;
+	private boolean _iso8601Format;
 
 }
