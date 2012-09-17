@@ -20,11 +20,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -32,6 +31,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutsadmin.util.SitemapUtil;
 
@@ -77,7 +77,8 @@ public class SitemapAction extends Action {
 			else {
 				String host = PortalUtil.getHost(request);
 
-				host = host.trim().toLowerCase();
+				host = host.toLowerCase();
+				host = host.trim();
 
 				VirtualHost virtualHost =
 					VirtualHostLocalServiceUtil.getVirtualHost(host);
@@ -87,19 +88,15 @@ public class SitemapAction extends Action {
 						virtualHost.getLayoutSetId());
 				}
 				else {
-					String virtualHostSiteName = "Guest";
+					String groupName =
+						PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME;
 
-					String virtualHostDefaultSiteName = PropsUtil.get(
-						PropsKeys.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
-
-					if (Validator.isNotNull(virtualHostDefaultSiteName)) {
-						virtualHostSiteName = virtualHostDefaultSiteName;
+					if (Validator.isNull(groupName)) {
+						groupName = GroupConstants.GUEST;
 					}
 
-					long companyId = PortalUtil.getCompanyId(request);
-
 					Group group = GroupLocalServiceUtil.getGroup(
-						companyId, virtualHostSiteName);
+						themeDisplay.getCompanyId(), groupName);
 
 					layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 						group.getGroupId(), false);
