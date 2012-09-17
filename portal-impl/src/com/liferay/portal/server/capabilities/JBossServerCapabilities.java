@@ -14,8 +14,6 @@
 
 package com.liferay.portal.server.capabilities;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.server.DeepNamedValueScanner;
 
 import javax.servlet.ServletContext;
@@ -23,7 +21,7 @@ import javax.servlet.ServletContext;
 /**
  * @author Igor Spasic
  */
-public class JBossServerCapabilities implements ServerCapabilities  {
+public class JBossServerCapabilities implements ServerCapabilities {
 
 	public void determine(ServletContext servletContext) throws Exception {
 		determineSupportsHotDeploy(servletContext);
@@ -39,27 +37,16 @@ public class JBossServerCapabilities implements ServerCapabilities  {
 		DeepNamedValueScanner deepNamedValueScanner =
 			new DeepNamedValueScanner("scanEnabled", true);
 
-		deepNamedValueScanner.setVisitArrays(true);
-
-		deepNamedValueScanner.setVisitMaps(true);
-
-		deepNamedValueScanner.setIncludedClassNames(
-			"org.apache.", "org.jboss.");
-
 		deepNamedValueScanner.setExcludedClassNames(
 			"ChainedInterceptorFactory", "TagAttributeInfo", ".jandex.",
 			".vfs.");
-
 		deepNamedValueScanner.setExcludedNames("serialversion");
+		deepNamedValueScanner.setIncludedClassNames(
+			"org.apache.", "org.jboss.");
+		deepNamedValueScanner.setVisitArrays(true);
+		deepNamedValueScanner.setVisitMaps(true);
 
 		deepNamedValueScanner.scan(servletContext);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("HotDeploy founded: " +
-				deepNamedValueScanner.isFounded() + " in " +
-				deepNamedValueScanner.getElapsed() + "ms by " +
-				deepNamedValueScanner.getMatchingCount() + " matches");
-		}
 
 		Boolean scanEnabledValue =
 			(Boolean)deepNamedValueScanner.getMatchedValue();
@@ -71,10 +58,6 @@ public class JBossServerCapabilities implements ServerCapabilities  {
 			_supportsHotDeploy = scanEnabledValue.booleanValue();
 		}
 	}
-
-
-	private static Log _log = LogFactoryUtil.getLog(
-		JBossServerCapabilities.class);
 
 	private boolean _supportsHotDeploy;
 
