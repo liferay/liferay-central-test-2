@@ -43,17 +43,10 @@ public class TransactionalPortalCacheHelper {
 			return;
 		}
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _popPortalCacheMap();
+		Map<PortalCache<? extends Serializable, ?>, Map<? extends Serializable, ?>> portalCacheMap =
+			_popPortalCacheMap();
 
-		for (Map.Entry<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMapEntry : portalCacheMap.entrySet()) {
-
-			@SuppressWarnings("unchecked")
+		for (Map.Entry<PortalCache<? extends Serializable, ?>, Map<? extends Serializable, ?>> portalCacheMapEntry : portalCacheMap.entrySet()) {
 			PortalCache<Serializable, Object> portalCache =
 				(PortalCache<Serializable, Object>)portalCacheMapEntry.getKey();
 
@@ -98,7 +91,6 @@ public class TransactionalPortalCacheHelper {
 		portalCacheMap.clear();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected static <K extends Serializable, V> V get(
 		PortalCache<K, V> portalCache, K key) {
 
@@ -125,7 +117,6 @@ public class TransactionalPortalCacheHelper {
 			Map<? extends Serializable, ?>>
 				portalCacheMap = _peekPortalCacheMap();
 
-		@SuppressWarnings("unchecked")
 		Map<Serializable, Object> uncommittedMap =
 			(Map<Serializable, Object>)portalCacheMap.get(portalCache);
 

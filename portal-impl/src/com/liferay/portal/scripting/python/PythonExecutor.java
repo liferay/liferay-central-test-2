@@ -37,7 +37,7 @@ public class PythonExecutor extends BaseScriptingExecutor {
 
 	@Override
 	public void clearCache() {
-		_scriptPortalCache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public Map<String, Object> eval(
@@ -95,13 +95,13 @@ public class PythonExecutor extends BaseScriptingExecutor {
 
 		String key = String.valueOf(script.hashCode());
 
-		PyCode compiledScript = _scriptPortalCache.get(key);
+		PyCode compiledScript = _portalCache.get(key);
 
 		if (compiledScript == null) {
 			compiledScript = Py.compile_flags(
 				script, "<string>", CompileMode.exec, Py.getCompilerFlags());
 
-			_scriptPortalCache.put(key, compiledScript);
+			_portalCache.put(key, compiledScript);
 		}
 
 		return compiledScript;
@@ -112,7 +112,7 @@ public class PythonExecutor extends BaseScriptingExecutor {
 	private static final String _LANGUAGE = "python";
 
 	private volatile boolean _initialized;
-	private PortalCache<String, PyCode> _scriptPortalCache =
+	private PortalCache<String, PyCode> _portalCache =
 		SingleVMPoolUtil.getCache(_CACHE_NAME);
 
 }

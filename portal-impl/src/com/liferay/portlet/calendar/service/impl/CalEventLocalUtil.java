@@ -41,7 +41,6 @@ public class CalEventLocalUtil {
 	protected static Map<String, List<CalEvent>> getEventsPool(long groupId) {
 		String key = _encodeKey(groupId);
 
-		@SuppressWarnings("unchecked")
 		Map<String, List<CalEvent>> eventsPool =
 			(ConcurrentHashMap<String, List<CalEvent>>)_portalCache.get(key);
 

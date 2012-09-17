@@ -71,7 +71,6 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		return _portalCache.getName();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void put(K key, V value) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (value == null) {
@@ -87,7 +86,6 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void put(K key, V value, int timeToLive) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (value == null) {

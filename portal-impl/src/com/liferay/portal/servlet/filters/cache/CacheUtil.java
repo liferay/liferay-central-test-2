@@ -52,9 +52,7 @@ public class CacheUtil {
 
 		key = _encodeKey(companyId, key);
 
-		CacheResponseData data = _portalCache.get(key);
-
-		return data;
+		return _portalCache.get(key);
 	}
 
 	public static void putCacheResponseData(

@@ -307,8 +307,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		try {
 			PACLClassLoaderUtil.setContextClassLoader(aggregateClassLoader);
 
-			PortalCacheManager portalCacheManager =
-				(PortalCacheManager)PortalBeanLocatorUtil.locate(
+			PortalCacheManager<?, ?> portalCacheManager =
+				(PortalCacheManager<?, ?>)PortalBeanLocatorUtil.locate(
 					portalCacheManagerBeanId);
 
 			if (_log.isInfoEnabled()) {

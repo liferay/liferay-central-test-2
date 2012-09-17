@@ -28,14 +28,12 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().clear();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <K extends Serializable, V> PortalCache<K, V> getCache(
 		String name) {
 
 		return (PortalCache<K, V>)getSingleVMPool().getCache(name);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <K extends Serializable, V> PortalCache<K, V> getCache(
 		String name, boolean blocking) {
 

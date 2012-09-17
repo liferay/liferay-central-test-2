@@ -50,9 +50,7 @@ public class PortalCacheCacheEventListener<K extends Serializable, V>
 	}
 
 	public void notifyElementEvicted(Ehcache ehcache, Element element) {
-		@SuppressWarnings("unchecked")
 		K key = (K)element.getKey();
-		@SuppressWarnings("unchecked")
 		V value = (V)element.getObjectValue();
 
 		_cacheListener.notifyEntryEvicted(_portalCache, key, value);
@@ -63,9 +61,7 @@ public class PortalCacheCacheEventListener<K extends Serializable, V>
 	}
 
 	public void notifyElementExpired(Ehcache ehcache, Element element) {
-		@SuppressWarnings("unchecked")
 		K key = (K)element.getKey();
-		@SuppressWarnings("unchecked")
 		V value = (V)element.getObjectValue();
 
 		_cacheListener.notifyEntryExpired(_portalCache, key, value);
@@ -78,9 +74,7 @@ public class PortalCacheCacheEventListener<K extends Serializable, V>
 	public void notifyElementPut(Ehcache ehcache, Element element)
 		throws CacheException {
 
-		@SuppressWarnings("unchecked")
 		K key = (K)element.getKey();
-		@SuppressWarnings("unchecked")
 		V value = (V)element.getObjectValue();
 
 		_cacheListener.notifyEntryPut(_portalCache, key, value);
@@ -93,9 +87,7 @@ public class PortalCacheCacheEventListener<K extends Serializable, V>
 	public void notifyElementRemoved(Ehcache ehcache, Element element)
 		throws CacheException {
 
-		@SuppressWarnings("unchecked")
 		K key = (K)element.getKey();
-		@SuppressWarnings("unchecked")
 		V value = (V)element.getObjectValue();
 
 		_cacheListener.notifyEntryRemoved(_portalCache, key, value);
@@ -108,9 +100,7 @@ public class PortalCacheCacheEventListener<K extends Serializable, V>
 	public void notifyElementUpdated(Ehcache ehcache, Element element)
 		throws CacheException {
 
-		@SuppressWarnings("unchecked")
 		K key = (K)element.getKey();
-		@SuppressWarnings("unchecked")
 		V value = (V)element.getObjectValue();
 
 		_cacheListener.notifyEntryUpdated(_portalCache, key, value);

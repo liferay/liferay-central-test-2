@@ -115,7 +115,6 @@ public class MemoryPortalCache<K extends Serializable, V>
 	}
 
 	protected void notifyPutEvents(K key, V value, boolean updated) {
-
 		if (updated) {
 			for (CacheListener<K, V> cacheListener : _cacheListeners) {
 				cacheListener.notifyEntryUpdated(this, key, value);

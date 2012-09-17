@@ -25,7 +25,6 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  */
 public class WebServerServletTokenImpl implements WebServerServletToken {
 
-	@SuppressWarnings("unchecked")
 	public void afterPropertiesSet() {
 		_portalCache = (PortalCache<Long, String>)_multiVMPool.getCache(
 			_CACHE_NAME);

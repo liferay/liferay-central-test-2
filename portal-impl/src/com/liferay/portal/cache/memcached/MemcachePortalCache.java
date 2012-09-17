@@ -48,7 +48,6 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		_memcachedClient.shutdown();
 	}
 
-	@SuppressWarnings("unchecked")
 	public Collection<V> get(Collection<String> keys) {
 		List<String> processedKeys = new ArrayList<String>(keys.size());
 
@@ -91,7 +90,6 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public V get(String key) {
 		String processedKey = _name.concat(key);
 

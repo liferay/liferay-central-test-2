@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.webcache.WebCachePool;
  */
 public class WebCachePoolImpl implements WebCachePool {
 
-	@SuppressWarnings("unchecked")
 	public void afterPropertiesSet() {
 		_portalCache = (PortalCache<String, Object>)_singleVMPool.getCache(
 			_CACHE_NAME);

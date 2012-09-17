@@ -57,7 +57,6 @@ public class EhcachePortalCache<K extends Serializable, V>
 		return values;
 	}
 
-	@SuppressWarnings("unchecked")
 	public V get(K key) {
 		Element element = _ehcache.get(key);
 

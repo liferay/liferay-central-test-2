@@ -28,14 +28,12 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().clear();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <K extends Serializable, V extends Serializable>
 		PortalCache<K, V> getCache(String name) {
 
 		return (PortalCache<K, V>)getMultiVMPool().getCache(name);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <K extends Serializable, V extends Serializable>
 		PortalCache<K, V> getCache(String name, boolean blocking) {
 

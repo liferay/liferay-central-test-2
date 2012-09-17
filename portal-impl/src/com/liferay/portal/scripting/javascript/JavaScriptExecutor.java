@@ -37,7 +37,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 
 	@Override
 	public void clearCache() {
-		_scriptPortalCache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public Map<String, Object> eval(
@@ -107,7 +107,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 
 		String key = String.valueOf(script.hashCode());
 
-		Script compiledScript = _scriptPortalCache.get(key);
+		Script compiledScript = _portalCache.get(key);
 
 		if (compiledScript == null) {
 			try {
@@ -129,7 +129,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 				Context.exit();
 			}
 
-			_scriptPortalCache.put(key, compiledScript);
+			_portalCache.put(key, compiledScript);
 		}
 
 		return compiledScript;
@@ -140,7 +140,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 
 	private static final String _LANGUAGE = "javascript";
 
-	private PortalCache<String, Script> _scriptPortalCache =
+	private PortalCache<String, Script> _portalCache =
 		SingleVMPoolUtil.getCache(_CACHE_NAME);
 
 }

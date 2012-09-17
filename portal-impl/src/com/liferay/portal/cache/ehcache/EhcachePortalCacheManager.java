@@ -114,7 +114,6 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		return getCache(name, false);
 	}
 
-	@SuppressWarnings({"unchecked"})
 	public PortalCache<K, V> getCache(String name, boolean blocking) {
 		PortalCache<K, V> portalCache = _ehcachePortalCaches.get(name);
 
@@ -203,7 +202,6 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		_registerCacheStatistics = registerCacheStatistics;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected PortalCache<K, V> addCache(String name, Cache cache) {
 		EhcachePortalCache<K, V> ehcachePortalCache = null;
 

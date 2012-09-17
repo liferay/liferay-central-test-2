@@ -70,16 +70,16 @@ public class PermissionCacheUtil {
 	public static PermissionCheckerBag getBag(long userId, long groupId) {
 		PermissionCheckerBag bag = null;
 
-		BagKey key = new BagKey(userId, groupId);
+		BagKey bagKey = new BagKey(userId, groupId);
 
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
-			bag = (PermissionCheckerBag)localCache.get(key);
+			bag = (PermissionCheckerBag)localCache.get(bagKey);
 		}
 
 		if (bag == null) {
-			bag = _permissionCheckerBagPortalCache.get(key);
+			bag = _permissionCheckerBagPortalCache.get(bagKey);
 		}
 
 		return bag;
@@ -91,17 +91,17 @@ public class PermissionCacheUtil {
 
 		Boolean value = null;
 
-		PermissionKey key = new PermissionKey(
+		PermissionKey permissionKey = new PermissionKey(
 			userId, signedIn, checkGuest, groupId, name, primKey, actionId);
 
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
-			value = (Boolean)localCache.get(key);
+			value = (Boolean)localCache.get(permissionKey);
 		}
 
 		if (value == null) {
-			value = _permissionPortalCache.get(key);
+			value = _permissionPortalCache.get(permissionKey);
 		}
 
 		return value;
@@ -113,17 +113,20 @@ public class PermissionCacheUtil {
 
 		ResourceBlockIdsBag resourceBlockIdsBag = null;
 
-		ResourceBlockIdsBagKey key = new ResourceBlockIdsBagKey(
-			companyId, groupId, userId, name, checkGuest);
+		ResourceBlockIdsBagKey resourceBlockIdsBagKey =
+			new ResourceBlockIdsBagKey(
+				companyId, groupId, userId, name, checkGuest);
 
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
-			resourceBlockIdsBag = (ResourceBlockIdsBag)localCache.get(key);
+			resourceBlockIdsBag = (ResourceBlockIdsBag)localCache.get(
+				resourceBlockIdsBagKey);
 		}
 
 		if (resourceBlockIdsBag == null) {
-			resourceBlockIdsBag = _resourceBlockIdsBagCache.get(key);
+			resourceBlockIdsBag = _resourceBlockIdsBagCache.get(
+				resourceBlockIdsBagKey);
 		}
 
 		return resourceBlockIdsBag;
@@ -136,15 +139,15 @@ public class PermissionCacheUtil {
 			return null;
 		}
 
-		BagKey key = new BagKey(userId, groupId);
+		BagKey bagKey = new BagKey(userId, groupId);
 
 		if (_localCacheAvailable) {
 			Map<Serializable, Object> localCache = _localCache.get();
 
-			localCache.put(key, bag);
+			localCache.put(bagKey, bag);
 		}
 
-		_permissionCheckerBagPortalCache.put(key, bag);
+		_permissionCheckerBagPortalCache.put(bagKey, bag);
 
 		return bag;
 	}
@@ -157,16 +160,16 @@ public class PermissionCacheUtil {
 			return null;
 		}
 
-		PermissionKey key = new PermissionKey(
+		PermissionKey permissionKey = new PermissionKey(
 			userId, signedIn, checkGuest, groupId, name, primKey, actionId);
 
 		if (_localCacheAvailable) {
 			Map<Serializable, Object> localCache = _localCache.get();
 
-			localCache.put(key, value);
+			localCache.put(permissionKey, value);
 		}
 
-		_permissionPortalCache.put(key, value);
+		_permissionPortalCache.put(permissionKey, value);
 
 		return value;
 	}
@@ -179,16 +182,18 @@ public class PermissionCacheUtil {
 			return null;
 		}
 
-		ResourceBlockIdsBagKey key = new ResourceBlockIdsBagKey(
-			companyId, groupId, userId, name, checkGuest);
+		ResourceBlockIdsBagKey resourceBlockIdsBagKey =
+			new ResourceBlockIdsBagKey(
+				companyId, groupId, userId, name, checkGuest);
 
 		if (_localCacheAvailable) {
 			Map<Serializable, Object> localCache = _localCache.get();
 
-			localCache.put(key, resourceBlockIdsBag);
+			localCache.put(resourceBlockIdsBagKey, resourceBlockIdsBag);
 		}
 
-		_resourceBlockIdsBagCache.put(key, resourceBlockIdsBag);
+		_resourceBlockIdsBagCache.put(
+			resourceBlockIdsBagKey, resourceBlockIdsBag);
 
 		return resourceBlockIdsBag;
 	}

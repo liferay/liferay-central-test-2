@@ -52,7 +52,6 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public Collection<V> get(Collection<String> keys) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -105,7 +104,6 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		return (Collection<V>)values.values();
 	}
 
-	@SuppressWarnings("unchecked")
 	public V get(String key) {
 		MemcachedClientIF memcachedClient = null;
 

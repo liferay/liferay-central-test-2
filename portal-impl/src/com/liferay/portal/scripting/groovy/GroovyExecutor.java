@@ -39,7 +39,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 	@Override
 	public void clearCache() {
-		_scriptPortalCache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public Map<String, Object> eval(
@@ -84,12 +84,12 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 		String key = String.valueOf(script.hashCode());
 
-		Script compiledScript = _scriptPortalCache.get(key);
+		Script compiledScript = _portalCache.get(key);
 
 		if (compiledScript == null) {
 			compiledScript = groovyShell.parse(script);
 
-			_scriptPortalCache.put(key, compiledScript);
+			_portalCache.put(key, compiledScript);
 		}
 
 		return compiledScript;
@@ -134,7 +134,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 	private volatile GroovyShell _groovyShell = new GroovyShell();
 	private volatile Map<ClassLoader, GroovyShell> _groovyShells =
 		new WeakHashMap<ClassLoader, GroovyShell>();
-	private PortalCache<String, Script> _scriptPortalCache =
+	private PortalCache<String, Script> _portalCache =
 		SingleVMPoolUtil.getCache(_CACHE_NAME);
 
 }
