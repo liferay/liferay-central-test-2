@@ -14,6 +14,8 @@
 
 package com.liferay.portal.server;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
@@ -38,22 +40,22 @@ import jodd.util.KeyValue;
 public class DeepNamedValueScanner {
 
 	public DeepNamedValueScanner(String value) {
-		this._value = value.toLowerCase();
+		_value = value.toLowerCase();
 	}
 
-	public DeepNamedValueScanner(String value, boolean visitFlag) {
+	public DeepNamedValueScanner(String value, boolean visit) {
 		this(value);
 
-		_visitArrays = visitFlag;
-		_visitCollections = visitFlag;
-		_visitLists = visitFlag;
-		_visitSets = visitFlag;
-		_visitMaps = visitFlag;
-		_visitStaticFields = visitFlag;
+		_visitArrays = visit;
+		_visitCollections = visit;
+		_visitLists = visit;
+		_visitSets = visit;
+		_visitMaps = visit;
+		_visitStaticFields = visit;
 	}
 
-	public long getElapsed() {
-		return _elapsed;
+	public long getElapsedTime() {
+		return _elapsedTime;
 	}
 
 	public String[] getExcludedClassNames() {
@@ -80,8 +82,8 @@ public class DeepNamedValueScanner {
 		return _skipFirstCount;
 	}
 
-	public boolean isFounded() {
-		return _scanning == false;
+	public boolean isFound() {
+		return !_scanning;
 	}
 
 	public boolean isTrackUsageCount() {
@@ -117,19 +119,17 @@ public class DeepNamedValueScanner {
 			return;
 		}
 
-		System.out.println("\nType usage statistics");
-		System.out.println("---------------------");
-
-		_printStats(_typesStats.values(), topCount);
-
-		System.out.println("\nNames usage statistics");
-		System.out.println("----------------------");
+		System.out.println("-- names statistics --");
 
 		_printStats(_namesStats.values(), topCount);
+
+		System.out.println("-- types statistics --");
+
+		_printStats(_typesStats.values(), topCount);
 	}
 
 	public boolean scan(Object target) throws Exception {
-		_elapsed = System.currentTimeMillis();
+		_elapsedTime = System.currentTimeMillis();
 
 		_visitedIds = new HashSet<String>();
 
@@ -139,61 +139,50 @@ public class DeepNamedValueScanner {
 
 		_visitedIds = null;
 
-		_elapsed = System.currentTimeMillis() - _elapsed;
+		_elapsedTime = System.currentTimeMillis() - _elapsedTime;
 
-		return isFounded();
+		return isFound();
 	}
 
 	public void setExcludedClassNames(String... excludedClassNames) {
 		_excludedClassNames = excludedClassNames;
 
-		if (excludedClassNames != null) {
-			for (int i = 0; i < excludedClassNames.length; i++) {
-				excludedClassNames[i] = excludedClassNames[i].toLowerCase();
-			}
-		}
+		StringUtil.lowerCase(excludedClassNames);
 	}
 
 	public void setExcludedNames(String... excludedNames) {
 		_excludedNames = excludedNames;
 
-		if (excludedNames != null) {
-			for (int i = 0; i < excludedNames.length; i++) {
-				excludedNames[i] = excludedNames[i].toLowerCase();
-			}
-		}
+		StringUtil.lowerCase(excludedNames);
 	}
 
 	public void setIncludedClassNames(String... includedClassNames) {
 		_includedClassNames = includedClassNames;
 
-		if (includedClassNames != null) {
-			for (int i = 0; i < includedClassNames.length; i++) {
-				includedClassNames[i] = includedClassNames[i].toLowerCase();
-			}
-		}
+		StringUtil.lowerCase(includedClassNames);
 	}
 
 	public void setSkipFirstCount(int skipFirstCount) {
-		this._skipFirstCount = skipFirstCount;
+		_skipFirstCount = skipFirstCount;
 	}
 
 	public void setTrackUsageCount(boolean trackUsageCount) {
 		_trackUsageCount = trackUsageCount;
 
 		if (trackUsageCount) {
-			_typesStats = new HashMap<String, KeyValue>();
-
-			_namesStats = new HashMap<String, KeyValue>();
+			_namesStats =
+				new HashMap<String, KeyValue<String, MutableInteger>>();
+			_typesStats =
+				new HashMap<String, KeyValue<String, MutableInteger>>();
 		}
 	}
 
 	public void setVisitArrays(boolean visitArrays) {
-		this._visitArrays = visitArrays;
+		_visitArrays = visitArrays;
 	}
 
 	public void setVisitCollections(boolean visitCollections) {
-		this._visitCollections = visitCollections;
+		_visitCollections = visitCollections;
 	}
 
 	public void setVisitLists(boolean visitLists) {
@@ -201,7 +190,7 @@ public class DeepNamedValueScanner {
 	}
 
 	public void setVisitMaps(boolean visitMaps) {
-		this._visitMaps = visitMaps;
+		_visitMaps = visitMaps;
 	}
 
 	public void setVisitSets(boolean visitSets) {
@@ -212,8 +201,7 @@ public class DeepNamedValueScanner {
 		_visitStaticFields = visitStaticFields;
 	}
 
-	private boolean _acceptClass(Class targetClass) {
-
+	private boolean _acceptClass(Class<?> targetClass) {
 		String targetClassName = targetClass.getName();
 
 		targetClassName = targetClassName.toLowerCase();
@@ -287,8 +275,9 @@ public class DeepNamedValueScanner {
 	}
 
 	private void _incrementUsageCount(
-		HashMap<String, KeyValue> statMap, String name) {
-		KeyValue<String, MutableInteger> keyValue = statMap.get(name);
+		Map<String, KeyValue<String, MutableInteger>> keyValues, String name) {
+
+		KeyValue<String, MutableInteger> keyValue = keyValues.get(name);
 
 		if (keyValue == null) {
 			keyValue = new KeyValue<String, MutableInteger>();
@@ -296,10 +285,12 @@ public class DeepNamedValueScanner {
 			keyValue.setKey(name);
 			keyValue.setValue(new MutableInteger());
 
-			statMap.put(name, keyValue);
+			keyValues.put(name, keyValue);
 		}
 
-		keyValue.getValue().value++;
+		MutableInteger mutableInteger = keyValue.getValue();
+
+		mutableInteger.value++;
 	}
 
 	private void _matchField(Object target, Field field, String name)
@@ -311,9 +302,12 @@ public class DeepNamedValueScanner {
 
 		_matchingCount++;
 
-		if (name.toLowerCase().contains(_value)) {
+		name = name.toLowerCase();
+
+		if (name.contains(_value)) {
 			if (_skipFirstCount > 0) {
 				_skipFirstCount--;
+
 				return;
 			}
 
@@ -332,9 +326,12 @@ public class DeepNamedValueScanner {
 
 		_matchingCount++;
 
-		if (name.toLowerCase().contains(_value)) {
+		name = name.toLowerCase();
+
+		if (name.contains(_value)) {
 			if (_skipFirstCount > 0) {
 				_skipFirstCount--;
+
 				return;
 			}
 
@@ -344,25 +341,32 @@ public class DeepNamedValueScanner {
 		}
 	}
 
-	private void _printStats(Collection<KeyValue> values, int topCount) {
+	private void _printStats(
+		Collection<KeyValue<String, MutableInteger>> keyValues, int topCount) {
 
 		List<KeyValue<String, MutableInteger>> list =
 			new ArrayList<KeyValue<String, MutableInteger>>();
 
-		for (KeyValue value : values) {
-			list.add(value);
+		for (KeyValue<String, MutableInteger> keyValue : keyValues) {
+			list.add(keyValue);
 		}
 
 		Collections.sort(
-			list, new Comparator<KeyValue<String, MutableInteger>>() {
+			list,
+			new Comparator<KeyValue<String, MutableInteger>>() {
 
-			public int compare(
-				KeyValue<String, MutableInteger> keyValue1,
-				KeyValue<String, MutableInteger> keyValue2) {
+				public int compare(
+					KeyValue<String, MutableInteger> keyValue1,
+					KeyValue<String, MutableInteger> keyValue2) {
 
-				return keyValue2.getValue().value - keyValue1.getValue().value;
+					MutableInteger mutableInteger1 = keyValue1.getValue();
+					MutableInteger mutableInteger2 = keyValue2.getValue();
+
+					return mutableInteger2.value - mutableInteger1.value;
+				}
+
 			}
-		});
+		);
 
 		for (KeyValue<String, MutableInteger> keyValue : list) {
 			System.out.println(keyValue.getValue() + " " + keyValue.getKey());
@@ -373,23 +377,22 @@ public class DeepNamedValueScanner {
 				break;
 			}
 		}
-
 	}
 
 	private Object _resolveJavaProxy(Object target)
 		throws IllegalAccessException, NoSuchFieldException {
 
-		Class targetClass = target.getClass();
-		Class targetSuperClass = targetClass.getSuperclass();
+		Class<?> targetClass = target.getClass();
+		Class<?> targetSuperClass = targetClass.getSuperclass();
 
 		if ((targetSuperClass != null) &&
 			targetSuperClass.equals(Proxy.class)) {
 
-			Field hField = targetSuperClass.getDeclaredField("h");
+			Field field = targetSuperClass.getDeclaredField("h");
 
-			hField.setAccessible(true);
+			field.setAccessible(true);
 
-			target = hField.get(target);
+			target = field.get(target);
 		}
 
 		return target;
@@ -406,12 +409,12 @@ public class DeepNamedValueScanner {
 
 		target = _resolveJavaProxy(target);
 
-		String id;
+		String visitedId = null;
 
 		try {
-			id = String.valueOf(System.identityHashCode(target));
+			visitedId = String.valueOf(System.identityHashCode(target));
 
-			if (_visitedIds.contains(id)) {
+			if (_visitedIds.contains(visitedId)) {
 				return;
 			}
 		}
@@ -419,18 +422,18 @@ public class DeepNamedValueScanner {
 			return;
 		}
 
-		_visitedIds.add(id);
+		_visitedIds.add(visitedId);
 
-		Class targetClass = target.getClass();
+		Class<?> targetClass = target.getClass();
 
 		if (targetClass.isArray()) {
 			if (!_visitArrays) {
 				return;
 			}
 
-			Class componentType = targetClass.getComponentType();
+			Class<?> componentTypeClass = targetClass.getComponentType();
 
-			if (componentType.isPrimitive() == false) {
+			if (componentTypeClass.isPrimitive() == false) {
 				Object[] array = (Object[])target;
 
 				for (Object element : array) {
@@ -439,24 +442,26 @@ public class DeepNamedValueScanner {
 			}
 
 		}
-		else if (_visitMaps && target instanceof Map) {
-			_scanMap((Map)target);
+		else if (_visitLists && (target instanceof List)) {
+			_scanCollection((List<Object>)target);
 		}
-		else if (_visitLists && target instanceof List) {
-			_scanCollection((List)target);
+		else if (_visitMaps && (target instanceof Map)) {
+			_scanMap((Map<Object, Object>)target);
 		}
-		else if (_visitSets && target instanceof Set) {
-			_scanCollection((Set)target);
+		else if (_visitSets && (target instanceof Set)) {
+			_scanCollection((Set<Object>)target);
 		}
-		else if (_visitCollections && target instanceof Collection) {
-			_scanCollection((Collection)target);
+		else if (_visitCollections && (target instanceof Collection)) {
+			_scanCollection((Collection<Object>)target);
 		}
 		else {
 			_scanObject(target);
 		}
 	}
 
-	private void _scanCollection(Collection collection) throws Exception {
+	private void _scanCollection(Collection<Object> collection)
+		throws Exception {
+
 		for (Object element : collection) {
 			if (!_scanning) {
 				break;
@@ -466,10 +471,10 @@ public class DeepNamedValueScanner {
 		}
 	}
 
-	private void _scanMap(Map map) throws Exception {
-		Set<Map.Entry> entrySet = map.entrySet();
+	private void _scanMap(Map<Object, Object> map) throws Exception {
+		Set<Map.Entry<Object, Object>> entrySet = map.entrySet();
 
-		for (Map.Entry entry : entrySet) {
+		for (Map.Entry<Object, Object> entry : entrySet) {
 			if (!_scanning) {
 				break;
 			}
@@ -477,29 +482,27 @@ public class DeepNamedValueScanner {
 			Object key = entry.getKey();
 			Object value = entry.getValue();
 
-			String keyName = null;
+			String name = null;
 
 			if (key != null) {
-				keyName = key.toString();
+				name = key.toString();
 			}
 
-			if (_acceptName(keyName)) {
-				_matchName(value, keyName);
+			if (_acceptName(name)) {
+				_matchName(value, name);
 				_scan(value);
 			}
 		}
 	}
 
 	private void _scanObject(Object target) throws Exception {
-
-		Class targetClass = target.getClass();
+		Class<?> targetClass = target.getClass();
 
 		if (!_acceptClass(targetClass)) {
 			return;
 		}
 
 		while (targetClass != null) {
-
 			Field[] fields = targetClass.getDeclaredFields();
 
 			for (Field field : fields) {
@@ -516,7 +519,6 @@ public class DeepNamedValueScanner {
 				String fieldName = field.getName();
 
 				if (_acceptName(fieldName)) {
-
 					_matchField(target, field, fieldName);
 
 					field.setAccessible(true);
@@ -533,24 +535,24 @@ public class DeepNamedValueScanner {
 		}
 	}
 
-	private long _elapsed;
+	private long _elapsedTime;
 	private String[] _excludedClassNames;
 	private String[] _excludedNames;
 	private String[] _includedClassNames;
 	private Object _matchedValue;
 	private int _matchingCount;
-	private HashMap<String, KeyValue> _namesStats;
+	private Map<String, KeyValue<String, MutableInteger>> _namesStats;
 	private boolean _scanning;
 	private int _skipFirstCount;
 	private boolean _trackUsageCount;
-	private HashMap<String, KeyValue> _typesStats;
+	private Map<String, KeyValue<String, MutableInteger>> _typesStats;
 	private final String _value;
 	private boolean _visitArrays;
 	private boolean _visitCollections;
+	private Set<String> _visitedIds;
 	private boolean _visitLists;
 	private boolean _visitMaps;
 	private boolean _visitSets;
 	private boolean _visitStaticFields;
-	private Set<String> _visitedIds;
 
 }
