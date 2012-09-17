@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
 
 import java.text.DateFormat;
 
@@ -42,12 +43,16 @@ public class PortalSimpleDateFormatTest {
 		_testCalendar.set(Calendar.MINUTE, 40);
 		_testCalendar.set(Calendar.SECOND, 0);
 		_testCalendar.set(Calendar.MILLISECOND, 0);
+
+		_testCalendar.setTimeZone(TimeZoneUtil.getDefault());
 	}
 
 	@Test
 	public void testDateOnlyIsoFormat() {
 		DateFormat dateFormat = new PortalSimpleDateFormat(
 			"yyyyMMdd", Locale.getDefault());
+
+		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
 
 		String expextedFormat = "19840309";
 
@@ -61,6 +66,8 @@ public class PortalSimpleDateFormatTest {
 		DateFormat dateFormat = new PortalSimpleDateFormat(
 			DateUtil.ISO_8601_PATTERN, Locale.getDefault());
 
+		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
+
 		String expectedFormat = "1984-03-09T22:40:00+00:00";
 
 		String iso8601FormatDate = dateFormat.format(_testCalendar.getTime());
@@ -72,6 +79,8 @@ public class PortalSimpleDateFormatTest {
 	public void testTimeOnlyIsoFormat() {
 		DateFormat dateFormat = new PortalSimpleDateFormat(
 			"HHmmss", Locale.getDefault());
+
+		dateFormat.setTimeZone(TimeZoneUtil.getDefault());
 
 		String expectedFormat = "224000";
 
