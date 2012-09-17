@@ -14,8 +14,7 @@
 
 package com.liferay.portal.server.capabilities;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.server.DeepNamedValueScanner;
 
 import javax.servlet.ServletContext;
@@ -37,15 +36,15 @@ public class GlassfishServerCapabilities implements ServerCapabilities {
 	protected void determineSupportsHotDeploy(ServletContext servletContext)
 		throws Exception {
 
-		DeepNamedValueScanner deepNamedValueScanner =
-					new DeepNamedValueScanner("masterView");
+		DeepNamedValueScanner deepNamedValueScanner = new DeepNamedValueScanner(
+			"masterView");
 
 		deepNamedValueScanner.setExcludedClassNames("org.apache.felix.");
 		deepNamedValueScanner.setSkipFirstCount(4);
 
 		deepNamedValueScanner.scan(servletContext);
 
-		if (!deepNamedValueScanner.isFounded()) {
+		if (deepNamedValueScanner.isScanning()) {
 			_supportsHotDeploy = false;
 
 			return;
@@ -55,32 +54,22 @@ public class GlassfishServerCapabilities implements ServerCapabilities {
 
 		deepNamedValueScanner = new DeepNamedValueScanner("autodeploy-enabled");
 
-		deepNamedValueScanner.setVisitMaps(true);
 		deepNamedValueScanner.setExcludedClassNames(
 			"org.apache.felix.", "CountStatisticImpl");
 		deepNamedValueScanner.setSkipFirstCount(2);
+		deepNamedValueScanner.setVisitMaps(true);
 
 		deepNamedValueScanner.scan(masterViewObject);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("HotDeploy founded: " +
-				deepNamedValueScanner.isFounded() + " in " +
-				deepNamedValueScanner.getElapsed() + "ms by " +
-				deepNamedValueScanner.getMatchingCount() + " matches");
-		}
-
 		boolean autoDeployEnabled = true;
 
-		if (deepNamedValueScanner.isFounded()) {
-			autoDeployEnabled = Boolean.parseBoolean(
-				deepNamedValueScanner.getMatchedValue().toString());
+		if (!deepNamedValueScanner.isScanning()) {
+			autoDeployEnabled = GetterUtil.getBoolean(
+				deepNamedValueScanner.getMatchedValue());
 		}
 
 		_supportsHotDeploy = autoDeployEnabled;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		GlassfishServerCapabilities.class);
 
 	private boolean _supportsHotDeploy;
 
