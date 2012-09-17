@@ -79,8 +79,8 @@ public class DeepNamedValueScanner {
 		return _skipFirstCount;
 	}
 
-	public boolean isFound() {
-		return !_scanning;
+	public boolean isScanning() {
+		return _scanning;
 	}
 
 	public boolean isTrackUsageCount() {
@@ -138,7 +138,7 @@ public class DeepNamedValueScanner {
 
 		_elapsedTime = System.currentTimeMillis() - _elapsedTime;
 
-		return isFound();
+		return !isScanning();
 	}
 
 	public void setExcludedClassNames(String... excludedClassNames) {
