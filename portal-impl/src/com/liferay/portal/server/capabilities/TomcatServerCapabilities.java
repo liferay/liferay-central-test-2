@@ -35,8 +35,8 @@ public class TomcatServerCapabilities implements ServerCapabilities {
 	protected void determineSupportsHotDeploy(ServletContext servletContext)
 		throws Exception {
 
-		DeepNamedValueScanner deepNamedValueScanner =
-			new DeepNamedValueScanner("autoDeploy");
+		DeepNamedValueScanner deepNamedValueScanner = new DeepNamedValueScanner(
+			"autoDeploy");
 
 		deepNamedValueScanner.scan(servletContext);
 
