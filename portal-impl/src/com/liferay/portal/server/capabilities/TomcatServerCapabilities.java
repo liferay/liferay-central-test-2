@@ -14,9 +14,6 @@
 
 package com.liferay.portal.server.capabilities;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.server.DeepNamedValueScanner;
 
 import javax.servlet.ServletContext;
@@ -43,31 +40,11 @@ public class TomcatServerCapabilities implements ServerCapabilities {
 
 		deepNamedValueScanner.scan(servletContext);
 
-		if (_log.isDebugEnabled()) {
-			if (!deepNamedValueScanner.isScanning()) {
-				StringBundler sb = new StringBundler(5);
-
-				sb.append("Deep named value scanner found ");
-				sb.append(deepNamedValueScanner.getMatchingCount());
-				sb.append(" matches in ");
-				sb.append(deepNamedValueScanner.getElapsedTime());
-				sb.append(" ms");
-
-				_log.debug(sb.toString());
-			}
-			else {
-				_log.debug("Deep named value scanner did not finish scanning");
-			}
-		}
-
 		Boolean autoDeployValue =
 			(Boolean)deepNamedValueScanner.getMatchedValue();
 
 		_supportsHotDeploy = autoDeployValue.booleanValue();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		TomcatServerCapabilities.class);
 
 	private boolean _supportsHotDeploy;
 

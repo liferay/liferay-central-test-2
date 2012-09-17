@@ -14,8 +14,11 @@
 
 package com.liferay.portal.server;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Field;
@@ -118,11 +121,11 @@ public class DeepNamedValueScanner {
 
 		System.out.println("-- names statistics --");
 
-		_printStatistics(_namesDatasets.values(), topCount);
+		_printStatistics(_nameDatasets.values(), topCount);
 
 		System.out.println("-- types statistics --");
 
-		_printStatistics(_typesDatasets.values(), topCount);
+		_printStatistics(_typeDatasets.values(), topCount);
 	}
 
 	public boolean scan(Object target) throws Exception {
@@ -138,7 +141,24 @@ public class DeepNamedValueScanner {
 
 		_elapsedTime = System.currentTimeMillis() - _elapsedTime;
 
-		return !isScanning();
+		if (_log.isDebugEnabled()) {
+			if (!_scanning) {
+				StringBundler sb = new StringBundler(5);
+
+				sb.append("Deep named value scanner found ");
+				sb.append(_matchingCount);
+				sb.append(" matches in ");
+				sb.append(_elapsedTime);
+				sb.append(" ms");
+
+				_log.debug(sb.toString());
+			}
+			else {
+				_log.debug("Deep named value scanner did not finish scanning");
+			}
+		}
+
+		return !_scanning;
 	}
 
 	public void setExcludedClassNames(String... excludedClassNames) {
@@ -167,8 +187,8 @@ public class DeepNamedValueScanner {
 		_trackUsageCount = trackUsageCount;
 
 		if (trackUsageCount) {
-			_namesDatasets = new HashMap<String, Dataset>();
-			_typesDatasets = new HashMap<String, Dataset>();
+			_nameDatasets = new HashMap<String, Dataset>();
+			_typeDatasets = new HashMap<String, Dataset>();
 		}
 	}
 
@@ -196,7 +216,26 @@ public class DeepNamedValueScanner {
 		_visitStaticFields = visitStaticFields;
 	}
 
-	private boolean _acceptClass(Class<?> targetClass) {
+	private void _incrementUsageCount(
+		Map<String, Dataset> datasets, String name) {
+
+		Dataset dataset = datasets.get(name);
+
+		if (dataset == null) {
+			dataset = new Dataset();
+
+			dataset.setKey(name);
+			dataset.setValue(new IntegerWrapper());
+
+			datasets.put(name, dataset);
+		}
+
+		IntegerWrapper integerWrapper = dataset.getValue();
+
+		integerWrapper.increment();
+	}
+
+	private boolean _isAcceptClass(Class<?> targetClass) {
 		String targetClassName = targetClass.getName();
 
 		targetClassName = targetClassName.toLowerCase();
@@ -240,13 +279,13 @@ public class DeepNamedValueScanner {
 		}
 
 		if (_trackUsageCount) {
-			_incrementUsageCount(_typesDatasets, targetClass.getName());
+			_incrementUsageCount(_typeDatasets, targetClass.getName());
 		}
 
 		return true;
 	}
 
-	private boolean _acceptName(String name) {
+	private boolean _isAcceptName(String name) {
 		if (name == null) {
 			return true;
 		}
@@ -263,29 +302,10 @@ public class DeepNamedValueScanner {
 		}
 
 		if (_trackUsageCount) {
-			_incrementUsageCount(_namesDatasets, name);
+			_incrementUsageCount(_nameDatasets, name);
 		}
 
 		return true;
-	}
-
-	private void _incrementUsageCount(
-		Map<String, Dataset> datasets, String name) {
-
-		Dataset dataset = datasets.get(name);
-
-		if (dataset == null) {
-			dataset = new Dataset();
-
-			dataset.setKey(name);
-			dataset.setValue(new IntegerWrapper());
-
-			datasets.put(name, dataset);
-		}
-
-		IntegerWrapper integerWrapper = dataset.getValue();
-
-		integerWrapper.increment();
 	}
 
 	private void _matchField(Object target, Field field, String name)
@@ -465,7 +485,7 @@ public class DeepNamedValueScanner {
 				name = key.toString();
 			}
 
-			if (_acceptName(name)) {
+			if (_isAcceptName(name)) {
 				_matchName(value, name);
 				_scan(value);
 			}
@@ -475,7 +495,7 @@ public class DeepNamedValueScanner {
 	private void _scanObject(Object target) throws Exception {
 		Class<?> targetClass = target.getClass();
 
-		if (!_acceptClass(targetClass)) {
+		if (!_isAcceptClass(targetClass)) {
 			return;
 		}
 
@@ -495,7 +515,7 @@ public class DeepNamedValueScanner {
 
 				String fieldName = field.getName();
 
-				if (_acceptName(fieldName)) {
+				if (_isAcceptName(fieldName)) {
 					_matchField(target, field, fieldName);
 
 					field.setAccessible(true);
@@ -512,17 +532,20 @@ public class DeepNamedValueScanner {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		DeepNamedValueScanner.class);
+
 	private long _elapsedTime;
 	private String[] _excludedClassNames;
 	private String[] _excludedNames;
 	private String[] _includedClassNames;
 	private Object _matchedValue;
 	private int _matchingCount;
-	private Map<String, Dataset> _namesDatasets;
+	private Map<String, Dataset> _nameDatasets;
 	private boolean _scanning;
 	private int _skipFirstCount;
 	private boolean _trackUsageCount;
-	private Map<String, Dataset> _typesDatasets;
+	private Map<String, Dataset> _typeDatasets;
 	private final String _value;
 	private boolean _visitArrays;
 	private boolean _visitCollections;
