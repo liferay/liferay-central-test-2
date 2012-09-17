@@ -14,6 +14,8 @@
 
 package com.liferay.portal.server;
 
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Field;
@@ -23,16 +25,11 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import jodd.mutable.MutableInteger;
-
-import jodd.util.KeyValue;
 
 /**
  * @author Igor Spasic
@@ -114,18 +111,18 @@ public class DeepNamedValueScanner {
 		return _visitStaticFields;
 	}
 
-	public void printStats(int topCount) {
+	public void printStatistics(int topCount) {
 		if (!_trackUsageCount) {
 			return;
 		}
 
 		System.out.println("-- names statistics --");
 
-		_printStats(_namesStats.values(), topCount);
+		_printStatistics(_namesDatasets.values(), topCount);
 
 		System.out.println("-- types statistics --");
 
-		_printStats(_typesStats.values(), topCount);
+		_printStatistics(_typesDatasets.values(), topCount);
 	}
 
 	public boolean scan(Object target) throws Exception {
@@ -170,10 +167,8 @@ public class DeepNamedValueScanner {
 		_trackUsageCount = trackUsageCount;
 
 		if (trackUsageCount) {
-			_namesStats =
-				new HashMap<String, KeyValue<String, MutableInteger>>();
-			_typesStats =
-				new HashMap<String, KeyValue<String, MutableInteger>>();
+			_namesDatasets = new HashMap<String, Dataset>();
+			_typesDatasets = new HashMap<String, Dataset>();
 		}
 	}
 
@@ -245,7 +240,7 @@ public class DeepNamedValueScanner {
 		}
 
 		if (_trackUsageCount) {
-			_incrementUsageCount(_typesStats, targetClass.getName());
+			_incrementUsageCount(_typesDatasets, targetClass.getName());
 		}
 
 		return true;
@@ -268,29 +263,29 @@ public class DeepNamedValueScanner {
 		}
 
 		if (_trackUsageCount) {
-			_incrementUsageCount(_namesStats, name);
+			_incrementUsageCount(_namesDatasets, name);
 		}
 
 		return true;
 	}
 
 	private void _incrementUsageCount(
-		Map<String, KeyValue<String, MutableInteger>> keyValues, String name) {
+		Map<String, Dataset> datasets, String name) {
 
-		KeyValue<String, MutableInteger> keyValue = keyValues.get(name);
+		Dataset dataset = datasets.get(name);
 
-		if (keyValue == null) {
-			keyValue = new KeyValue<String, MutableInteger>();
+		if (dataset == null) {
+			dataset = new Dataset();
 
-			keyValue.setKey(name);
-			keyValue.setValue(new MutableInteger());
+			dataset.setKey(name);
+			dataset.setValue(new IntegerWrapper());
 
-			keyValues.put(name, keyValue);
+			datasets.put(name, dataset);
 		}
 
-		MutableInteger mutableInteger = keyValue.getValue();
+		IntegerWrapper integerWrapper = dataset.getValue();
 
-		mutableInteger.value++;
+		integerWrapper.increment();
 	}
 
 	private void _matchField(Object target, Field field, String name)
@@ -341,35 +336,17 @@ public class DeepNamedValueScanner {
 		}
 	}
 
-	private void _printStats(
-		Collection<KeyValue<String, MutableInteger>> keyValues, int topCount) {
+	private void _printStatistics(Collection<Dataset> datasets, int topCount) {
+		List<Dataset> datasetsList = new ArrayList<Dataset>();
 
-		List<KeyValue<String, MutableInteger>> list =
-			new ArrayList<KeyValue<String, MutableInteger>>();
-
-		for (KeyValue<String, MutableInteger> keyValue : keyValues) {
-			list.add(keyValue);
+		for (Dataset dataset : datasets) {
+			datasetsList.add(dataset);
 		}
 
-		Collections.sort(
-			list,
-			new Comparator<KeyValue<String, MutableInteger>>() {
+		Collections.sort(datasetsList);
 
-				public int compare(
-					KeyValue<String, MutableInteger> keyValue1,
-					KeyValue<String, MutableInteger> keyValue2) {
-
-					MutableInteger mutableInteger1 = keyValue1.getValue();
-					MutableInteger mutableInteger2 = keyValue2.getValue();
-
-					return mutableInteger2.value - mutableInteger1.value;
-				}
-
-			}
-		);
-
-		for (KeyValue<String, MutableInteger> keyValue : list) {
-			System.out.println(keyValue.getValue() + " " + keyValue.getKey());
+		for (Dataset dataset : datasetsList) {
+			System.out.println(dataset.getValue() + " " + dataset.getKey());
 
 			topCount--;
 
@@ -541,11 +518,11 @@ public class DeepNamedValueScanner {
 	private String[] _includedClassNames;
 	private Object _matchedValue;
 	private int _matchingCount;
-	private Map<String, KeyValue<String, MutableInteger>> _namesStats;
+	private Map<String, Dataset> _namesDatasets;
 	private boolean _scanning;
 	private int _skipFirstCount;
 	private boolean _trackUsageCount;
-	private Map<String, KeyValue<String, MutableInteger>> _typesStats;
+	private Map<String, Dataset> _typesDatasets;
 	private final String _value;
 	private boolean _visitArrays;
 	private boolean _visitCollections;
@@ -554,5 +531,17 @@ public class DeepNamedValueScanner {
 	private boolean _visitMaps;
 	private boolean _visitSets;
 	private boolean _visitStaticFields;
+
+	private class Dataset
+		extends ObjectValuePair<String, IntegerWrapper>
+		implements Comparable<Dataset> {
+
+		public int compareTo(Dataset dataset) {
+			IntegerWrapper integerWrapper = dataset.getValue();
+
+			return integerWrapper.compareTo(getValue());
+		}
+
+	}
 
 }
