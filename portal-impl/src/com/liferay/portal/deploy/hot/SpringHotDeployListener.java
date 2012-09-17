@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.spring.context.PortletContextLoaderListener;
-import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,8 +69,6 @@ public class SpringHotDeployListener extends BaseHotDeployListener {
 
 		ClassLoader contextClassLoader =
 			PACLClassLoaderUtil.getContextClassLoader();
-		
-		initLogger(contextClassLoader);
 
 		try {
 			PACLClassLoaderUtil.setContextClassLoader(
@@ -114,11 +111,6 @@ public class SpringHotDeployListener extends BaseHotDeployListener {
 		finally {
 			PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
 		}
-	}
-	
-	protected void initLogger(ClassLoader classLoader) {
-		Log4JUtil.configureLog4J(
-			classLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	private static Map<String, ContextLoaderListener> _contextLoaderListeners =
