@@ -16,6 +16,7 @@ package com.liferay.portal.server.capabilities;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.server.DeepNamedValueScanner;
 
 import javax.servlet.ServletContext;
@@ -43,10 +44,20 @@ public class TomcatServerCapabilities implements ServerCapabilities {
 		deepNamedValueScanner.scan(servletContext);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("HotDeploy founded: " +
-				deepNamedValueScanner.isFounded() + " in " +
-				deepNamedValueScanner.getElapsed() + "ms by " +
-				deepNamedValueScanner.getMatchingCount() + " matches");
+			if (!deepNamedValueScanner.isScanning()) {
+				StringBundler sb = new StringBundler(5);
+
+				sb.append("Deep named value scanner found ");
+				sb.append(deepNamedValueScanner.getMatchingCount());
+				sb.append(" matches in ");
+				sb.append(deepNamedValueScanner.getElapsedTime());
+				sb.append(" ms");
+
+				_log.debug(sb.toString());
+			}
+			else {
+				_log.debug("Deep named value scanner did not finish scanning");
+			}
 		}
 
 		Boolean autoDeployValue =
