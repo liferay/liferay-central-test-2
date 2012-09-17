@@ -14,8 +14,6 @@
 
 package com.liferay.portal.server.capabilities;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.server.DeepNamedValueScanner;
 
 import javax.servlet.ServletContext;
@@ -37,28 +35,16 @@ public class JettyServerCapabilities implements ServerCapabilities {
 	protected void determineSupportsHotDeploy(ServletContext servletContext)
 		throws Exception {
 
-		DeepNamedValueScanner deepNamedValueScanner =
-			new DeepNamedValueScanner("_scanInterval");
-
-		deepNamedValueScanner.setVisitLists(true);
+		DeepNamedValueScanner deepNamedValueScanner = new DeepNamedValueScanner(
+			"_scanInterval");
 
 		deepNamedValueScanner.setExcludedClassNames("WebAppProvider");
-
 		deepNamedValueScanner.setIncludedClassNames("org.eclipse.jetty");
+		deepNamedValueScanner.setVisitLists(true);
 
 		deepNamedValueScanner.scan(servletContext);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("HotDeploy founded: " +
-				deepNamedValueScanner.isFounded() + " in " +
-				deepNamedValueScanner.getElapsed() + "ms by " +
-				deepNamedValueScanner.getMatchingCount() + " matches");
-		}
-
 		Integer scanInterval = (Integer)deepNamedValueScanner.getMatchedValue();
-
-		System.out.println("---------> " + scanInterval);
-
 
 		if ((scanInterval != null) && (scanInterval.intValue() > 0)) {
 			_supportsHotDeploy = true;
@@ -67,9 +53,6 @@ public class JettyServerCapabilities implements ServerCapabilities {
 			_supportsHotDeploy = false;
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		JettyServerCapabilities.class);
 
 	private boolean _supportsHotDeploy;
 
