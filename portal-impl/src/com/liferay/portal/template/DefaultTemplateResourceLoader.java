@@ -230,8 +230,8 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		implements TemplateResource {
 
 		/**
-		 * Required by {@link java.io.Externalizable}, do not use this for other
-		 * purpose.
+		 * The empty constructor is required by {@link java.io.Externalizable}.
+		 * Do not use this for any other purpose.
 		 */
 		public NullHolderTemplateResource() {
 		}
@@ -248,9 +248,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 			return null;
 		}
 
-		public void readExternal(ObjectInput objectInput)
-			throws ClassNotFoundException, IOException {
-
+		public void readExternal(ObjectInput objectInput) throws IOException {
 			_lastModified = objectInput.readLong();
 		}
 

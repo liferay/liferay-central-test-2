@@ -32,8 +32,8 @@ import java.util.Date;
 public class JournalTemplateResource implements TemplateResource {
 
 	/**
-	 * Required by {@link java.io.Externalizable}, do not use this for other
-	 * purpose.
+	 * The empty constructor is required by {@link java.io.Externalizable}. Do
+	 * not use this for any other purpose.
 	 */
 	public JournalTemplateResource() {
 	}
@@ -96,11 +96,7 @@ public class JournalTemplateResource implements TemplateResource {
 		return _templateId.hashCode() * 11 + _journalTemplate.hashCode();
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
-
-		_templateId = objectInput.readUTF();
-
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		long journalTemplateId = objectInput.readLong();
 
 		try {
@@ -110,14 +106,17 @@ public class JournalTemplateResource implements TemplateResource {
 		}
 		catch (Exception e) {
 			throw new IOException(
-				"Unable to retrieve JournalTemplate with id " +
-					journalTemplateId, e);
+				"Unable to retrieve journal template with ID " +
+					journalTemplateId,
+				e);
 		}
+
+		_templateId = objectInput.readUTF();
 	}
 
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeUTF(_templateId);
 		objectOutput.writeLong(_journalTemplate.getId());
+		objectOutput.writeUTF(_templateId);
 	}
 
 	private JournalTemplate _journalTemplate;

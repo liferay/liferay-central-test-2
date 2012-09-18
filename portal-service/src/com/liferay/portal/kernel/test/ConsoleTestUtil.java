@@ -15,13 +15,12 @@
 package com.liferay.portal.kernel.test;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-
-import java.nio.charset.Charset;
 
 /**
  * @author Shuyang Zhou
@@ -68,7 +67,7 @@ public class ConsoleTestUtil {
 		System.setErr(printStream);
 
 		return unsyncByteArrayOutputStream.toString(
-			Charset.defaultCharset().name());
+			StringPool.DEFAULT_CHARSET_NAME);
 	}
 
 	public static String restoreStdOut(
@@ -85,7 +84,7 @@ public class ConsoleTestUtil {
 		System.setOut(printStream);
 
 		return unsyncByteArrayOutputStream.toString(
-			Charset.defaultCharset().name());
+			StringPool.DEFAULT_CHARSET_NAME);
 	}
 
 }

@@ -31,8 +31,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CacheTemplateResource implements TemplateResource {
 
 	/**
-	 * Required by {@link java.io.Externalizable}, do not use this for other
-	 * purpose.
+	 * The empty constructor is required by {@link java.io.Externalizable}. Do
+	 * not use this for any other purpose.
 	 */
 	public CacheTemplateResource() {
 	}
@@ -117,13 +117,13 @@ public class CacheTemplateResource implements TemplateResource {
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 
-		_templateResource = (TemplateResource)objectInput.readObject();
 		_lastModified = objectInput.readLong();
+		_templateResource = (TemplateResource)objectInput.readObject();
 	}
 
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeObject(_templateResource);
 		objectOutput.writeLong(_lastModified);
+		objectOutput.writeObject(_templateResource);
 	}
 
 	private long _lastModified = System.currentTimeMillis();

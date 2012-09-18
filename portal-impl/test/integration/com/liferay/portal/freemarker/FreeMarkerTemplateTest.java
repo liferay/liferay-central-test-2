@@ -331,6 +331,11 @@ public class FreeMarkerTemplateTest {
 
 	private class MockTemplateResource implements TemplateResource {
 
+		/**
+		 * The empty constructor is required by {@link java.io.Externalizable}.
+		 * Do not use this for any other purpose.
+		 */
+		@SuppressWarnings("unused")
 		public MockTemplateResource() {
 		}
 
@@ -356,18 +361,16 @@ public class FreeMarkerTemplateTest {
 			return _templateId;
 		}
 
-		public void readExternal(ObjectInput objectInput)
-			throws ClassNotFoundException, IOException {
-
-			_templateId = objectInput.readUTF();
+		public void readExternal(ObjectInput objectInput) throws IOException {
 			_lastModified = objectInput.readLong();
+			_templateId = objectInput.readUTF();
 		}
 
 		public void writeExternal(ObjectOutput objectOutput)
 			throws IOException {
 
-			objectOutput.writeUTF(_templateId);
 			objectOutput.writeLong(_lastModified);
+			objectOutput.writeUTF(_templateId);
 		}
 
 		private long _lastModified = System.currentTimeMillis();

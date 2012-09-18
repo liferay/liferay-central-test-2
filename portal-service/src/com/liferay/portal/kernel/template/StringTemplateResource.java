@@ -28,8 +28,8 @@ import java.io.Reader;
 public class StringTemplateResource implements TemplateResource {
 
 	/**
-	 * Required by {@link java.io.Externalizable}, do not use this for other
-	 * purpose.
+	 * The empty constructor is required by {@link java.io.Externalizable}. Do
+	 * not use this for any other purpose.
 	 */
 	public StringTemplateResource() {
 	}
@@ -90,18 +90,16 @@ public class StringTemplateResource implements TemplateResource {
 		return _templateId.hashCode() * 11 + _templateContent.hashCode();
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
-
-		_templateId = objectInput.readUTF();
-		_templateContent = objectInput.readUTF();
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		_lastModified = objectInput.readLong();
+		_templateContent = objectInput.readUTF();
+		_templateId = objectInput.readUTF();
 	}
 
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeUTF(_templateId);
-		objectOutput.writeUTF(_templateContent);
 		objectOutput.writeLong(_lastModified);
+		objectOutput.writeUTF(_templateContent);
+		objectOutput.writeUTF(_templateId);
 	}
 
 	private long _lastModified = System.currentTimeMillis();

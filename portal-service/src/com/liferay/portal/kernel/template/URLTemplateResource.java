@@ -35,8 +35,8 @@ import java.net.URLConnection;
 public class URLTemplateResource implements TemplateResource {
 
 	/**
-	 * Required by {@link java.io.Externalizable}, do not use this for other
-	 * purpose.
+	 * The empty constructor is required by {@link java.io.Externalizable}. Do
+	 * not use this for any other purpose.
 	 */
 	public URLTemplateResource() {
 	}
@@ -133,14 +133,9 @@ public class URLTemplateResource implements TemplateResource {
 		return _templateId.hashCode() * 11 + _templateURL.hashCode();
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
-
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		_templateId = objectInput.readUTF();
-
-		String urlString = objectInput.readUTF();
-
-		_templateURL = new URL(urlString);
+		_templateURL = new URL(objectInput.readUTF());
 	}
 
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {

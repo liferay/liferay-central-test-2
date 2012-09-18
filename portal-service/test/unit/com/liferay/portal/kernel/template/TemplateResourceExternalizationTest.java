@@ -50,11 +50,8 @@ public class TemplateResourceExternalizationTest {
 
 	@Test
 	public void testCacheTemplateResourceExternalization() throws Exception {
-		String testId = "testId";
-		String testContent = "testContent";
-
 		StringTemplateResource stringTemplateResource =
-			new StringTemplateResource(testId, testContent);
+			new StringTemplateResource("testId", "testContent");
 
 		CacheTemplateResource cacheTemplateResource =
 			new CacheTemplateResource(stringTemplateResource);
@@ -76,9 +73,9 @@ public class TemplateResourceExternalizationTest {
 		ObjectInput objectInput = new ObjectInputStream(
 			new UnsyncByteArrayInputStream(externalizedData));
 
-		Assert.assertEquals(stringTemplateResource, objectInput.readObject());
 		Assert.assertEquals(
 			cacheTemplateResource.getLastModified(), objectInput.readLong());
+		Assert.assertEquals(stringTemplateResource, objectInput.readObject());
 
 		// readExternal
 
@@ -129,32 +126,32 @@ public class TemplateResourceExternalizationTest {
 
 	@Test
 	public void testJournalTemplateResourceExternalization() throws Exception {
+		String templateId = "testId";
 		final long journalTemplateId = 100;
-
-		String testId = "testId";
 
 		JournalTemplate journalTemplate =
 			(JournalTemplate)ProxyUtil.newProxyInstance(
 				getClass().getClassLoader(),
-				new Class<?>[]{JournalTemplate.class},
+				new Class<?>[] {JournalTemplate.class},
 				new InvocationHandler() {
 
 					public Object invoke(
-							Object proxy, Method method, Object[] args)
+							Object proxy, Method method, Object[] arguments)
 						throws Throwable {
 
-						if (method.getName().equals("getId")) {
+						String methodName = method.getName();
+
+						if (methodName.equals("getId")) {
 							return journalTemplateId;
 						}
-						else {
-							throw new UnsupportedOperationException();
-						}
+
+						throw new UnsupportedOperationException();
 					}
 
 				});
 
 		JournalTemplateResource journalTemplateResource =
-			new JournalTemplateResource(testId, journalTemplate);
+			new JournalTemplateResource(templateId, journalTemplate);
 
 		// writeExternal
 
@@ -173,8 +170,8 @@ public class TemplateResourceExternalizationTest {
 		DataInputStream dataInputStream = new DataInputStream(
 			new UnsyncByteArrayInputStream(externalizedData));
 
-		Assert.assertEquals(testId, dataInputStream.readUTF());
 		Assert.assertEquals(journalTemplateId, dataInputStream.readLong());
+		Assert.assertEquals(templateId, dataInputStream.readUTF());
 
 		// readExternal
 
@@ -185,7 +182,7 @@ public class TemplateResourceExternalizationTest {
 			new DataInputStream(
 				new UnsyncByteArrayInputStream(externalizedData)));
 
-		UnsyncByteArrayOutputStream hijackedOutputStream =
+		UnsyncByteArrayOutputStream hijackedUnsyncByteArrayOutputStream =
 			ConsoleTestUtil.hijackStdErr();
 
 		try {
@@ -195,23 +192,24 @@ public class TemplateResourceExternalizationTest {
 		}
 		catch (IOException ioe) {
 			Assert.assertEquals(
-				"Unable to retrieve JournalTemplate with id " +
-					journalTemplateId, ioe.getMessage());
+				"Unable to retrieve journal template with ID " +
+					journalTemplateId,
+				ioe.getMessage());
 		}
 		finally {
-			ConsoleTestUtil.restoreStdErr(hijackedOutputStream);
+			ConsoleTestUtil.restoreStdErr(hijackedUnsyncByteArrayOutputStream);
 		}
 
-		Assert.assertEquals(testId, newJournalTemplateResource.getTemplateId());
+		Assert.assertEquals(null, newJournalTemplateResource.getTemplateId());
 	}
 
 	@Test
 	public void testStringTemplateResourceExternalization() throws Exception {
-		String testId= "testId";
-		String testContent = "testContent";
+		String templateId= "testId";
+		String templateContent = "testContent";
 
 		StringTemplateResource stringTemplateResource =
-			new StringTemplateResource(testId, testContent);
+			new StringTemplateResource(templateId, templateContent);
 
 		// writeExternal
 
@@ -230,11 +228,11 @@ public class TemplateResourceExternalizationTest {
 		DataInputStream dataInputStream = new DataInputStream(
 			new UnsyncByteArrayInputStream(externalizedData));
 
-		Assert.assertEquals(testId, dataInputStream.readUTF());
-		Assert.assertEquals(testContent, dataInputStream.readUTF());
 		Assert.assertEquals(
 			stringTemplateResource.getLastModified(),
 			dataInputStream.readLong());
+		Assert.assertEquals(templateContent, dataInputStream.readUTF());
+		Assert.assertEquals(templateId, dataInputStream.readUTF());
 
 		// readExternal
 
@@ -247,25 +245,31 @@ public class TemplateResourceExternalizationTest {
 
 		newStringTemplateResource.readExternal(mockObjectInput);
 
-		Assert.assertEquals(testId, newStringTemplateResource.getTemplateId());
-		Assert.assertEquals(
-			testContent, newStringTemplateResource.getContent());
 		Assert.assertEquals(
 			stringTemplateResource.getLastModified(),
 			newStringTemplateResource.getLastModified());
+		Assert.assertEquals(
+			templateContent, newStringTemplateResource.getContent());
+		Assert.assertEquals(
+			templateId, newStringTemplateResource.getTemplateId());
 	}
 
 	@Test
 	public void testURLTemplateResourceExternalization() throws Exception {
-		String resourcePath =
-			getClass().getName().replace('.', '/').concat(".class");
+		String templateId = "testId";
 
-		String testId= "testId";
+		Class<?> clazz = getClass();
 
-		URL url = getClass().getClassLoader().getResource(resourcePath);
+		ClassLoader classLoader = clazz.getClassLoader();
 
-		URLTemplateResource urlTemplateResource =
-			new URLTemplateResource(testId, url);
+		String resourcePath = clazz.getName();
+
+		resourcePath = resourcePath.replace('.', '/') + ".class";
+
+		URL url = classLoader.getResource(resourcePath);
+
+		URLTemplateResource urlTemplateResource = new URLTemplateResource(
+			templateId, url);
 
 		// writeExternal
 
@@ -284,7 +288,7 @@ public class TemplateResourceExternalizationTest {
 		DataInputStream dataInputStream = new DataInputStream(
 			new UnsyncByteArrayInputStream(externalizedData));
 
-		Assert.assertEquals(testId, dataInputStream.readUTF());
+		Assert.assertEquals(templateId, dataInputStream.readUTF());
 		Assert.assertEquals(url.toExternalForm(), dataInputStream.readUTF());
 
 		// readExternal
@@ -297,7 +301,7 @@ public class TemplateResourceExternalizationTest {
 
 		newURLTemplateResource.readExternal(mockObjectInput);
 
-		Assert.assertEquals(testId, newURLTemplateResource.getTemplateId());
+		Assert.assertEquals(templateId, newURLTemplateResource.getTemplateId());
 
 		Field templateURLField = ReflectionUtil.getDeclaredField(
 			URLTemplateResource.class, "_templateURL");
@@ -312,7 +316,7 @@ public class TemplateResourceExternalizationTest {
 			super(inputStream);
 		}
 
-		public Object readObject() throws ClassNotFoundException, IOException {
+		public Object readObject() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -325,7 +329,7 @@ public class TemplateResourceExternalizationTest {
 			super(outputStream);
 		}
 
-		public void writeObject(Object obj) throws IOException {
+		public void writeObject(Object obj) {
 			throw new UnsupportedOperationException();
 		}
 
