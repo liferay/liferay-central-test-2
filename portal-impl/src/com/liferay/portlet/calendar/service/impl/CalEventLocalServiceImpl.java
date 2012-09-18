@@ -258,6 +258,31 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return event;
 	}
 
+	/**
+	 * @deprecated {@link #addEvent(long, String, String, String, int, int, int,
+	 *             int, int, int, int, boolean, boolean, String, boolean,
+	 *             TZSRecurrence, int, int, int, ServiceContext)}
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	public CalEvent addEvent(
+			long userId, String title, String description, String location,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addEvent(
+			userId, title, description, location, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
+			serviceContext);
+	}
+
 	public void addEventResources(
 			CalEvent event, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -821,6 +846,31 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 
 		return event;
+	}
+
+	/**
+	 * @deprecated {@link #updateEvent(long, long, String, String, String, int,
+	 *             int, int, int, int, int, int, boolean, boolean, String,
+	 *             boolean, TZSRecurrence, int, int, int, ServiceContext)}
+	 */
+	@Indexable(type = IndexableType.REINDEX)
+	public CalEvent updateEvent(
+			long userId, long eventId, String title, String description,
+			String location, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return updateEvent(
+			userId, eventId, title, description, location, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			durationHour, durationMinute, allDay, timeZoneSensitive, type,
+			repeating, recurrence, remindBy, firstReminder, secondReminder,
+			serviceContext);
 	}
 
 	protected File exportICal4j(
