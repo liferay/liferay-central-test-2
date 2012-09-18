@@ -43,10 +43,13 @@ public class TransactionalPortalCacheHelper {
 			return;
 		}
 
-		Map<PortalCache<? extends Serializable, ?>, Map<? extends Serializable, ?>> portalCacheMap =
-			_popPortalCacheMap();
+		PortalCacheMap portalCacheMap = _popPortalCacheMap();
 
-		for (Map.Entry<PortalCache<? extends Serializable, ?>, Map<? extends Serializable, ?>> portalCacheMapEntry : portalCacheMap.entrySet()) {
+		for (Map.Entry
+				<PortalCache<? extends Serializable, ?>,
+					Map<? extends Serializable, ?>> portalCacheMapEntry :
+				portalCacheMap.entrySet()) {
+
 			PortalCache<Serializable, Object> portalCache =
 				(PortalCache<Serializable, Object>)portalCacheMapEntry.getKey();
 
@@ -70,12 +73,10 @@ public class TransactionalPortalCacheHelper {
 			return false;
 		}
 
-		List<Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>>
-				portalCacheList = _portalCacheListThreadLocal.get();
+		List<PortalCacheMap> portalCacheMaps =
+			_portalCacheMapsThreadLocal.get();
 
-		return !portalCacheList.isEmpty();
+		return !portalCacheMaps.isEmpty();
 	}
 
 	public static void rollback() {
@@ -83,10 +84,7 @@ public class TransactionalPortalCacheHelper {
 			return;
 		}
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _popPortalCacheMap();
+		PortalCacheMap portalCacheMap = _popPortalCacheMap();
 
 		portalCacheMap.clear();
 	}
@@ -94,10 +92,7 @@ public class TransactionalPortalCacheHelper {
 	protected static <K extends Serializable, V> V get(
 		PortalCache<K, V> portalCache, K key) {
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _peekPortalCacheMap();
+		PortalCacheMap portalCacheMap = _peekPortalCacheMap();
 
 		Map<? extends Serializable, ?> uncommittedMap = portalCacheMap.get(
 			portalCache);
@@ -112,10 +107,7 @@ public class TransactionalPortalCacheHelper {
 	protected static <K extends Serializable, V> void put(
 		PortalCache<K, V> portalCache, K key, V value) {
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _peekPortalCacheMap();
+		PortalCacheMap portalCacheMap = _peekPortalCacheMap();
 
 		Map<Serializable, Object> uncommittedMap =
 			(Map<Serializable, Object>)portalCacheMap.get(portalCache);
@@ -132,10 +124,7 @@ public class TransactionalPortalCacheHelper {
 	protected static <K extends Serializable, V> void remove(
 		PortalCache<K, V> portalCache, K key) {
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _peekPortalCacheMap();
+		PortalCacheMap portalCacheMap = _peekPortalCacheMap();
 
 		Map<? extends Serializable, ?> uncommittedMap = portalCacheMap.get(
 			portalCache);
@@ -148,10 +137,7 @@ public class TransactionalPortalCacheHelper {
 	protected static <K extends Serializable, V> void removeAll(
 		PortalCache<K, V> portalCache) {
 
-		Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>
-				portalCacheMap = _peekPortalCacheMap();
+		PortalCacheMap portalCacheMap = _peekPortalCacheMap();
 
 		Map<? extends Serializable, ?> uncommittedMap = portalCacheMap.get(
 			portalCache);
@@ -161,52 +147,38 @@ public class TransactionalPortalCacheHelper {
 		}
 	}
 
-	private static Map<
-		PortalCache<? extends Serializable, ?>,
-		Map<? extends Serializable, ?>> _peekPortalCacheMap() {
+	private static PortalCacheMap _peekPortalCacheMap() {
+		List<PortalCacheMap> portalCacheMaps =
+			_portalCacheMapsThreadLocal.get();
 
-		List<Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>>
-				portalCacheList = _portalCacheListThreadLocal.get();
-
-		return portalCacheList.get(portalCacheList.size() - 1);
+		return portalCacheMaps.get(portalCacheMaps.size() - 1);
 	}
 
-	private static Map<
-		PortalCache<? extends Serializable, ?>,
-		Map<? extends Serializable, ?>> _popPortalCacheMap() {
+	private static PortalCacheMap _popPortalCacheMap() {
+		List<PortalCacheMap> portalCacheMaps =
+			_portalCacheMapsThreadLocal.get();
 
-		List<Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>>
-				portalCacheList = _portalCacheListThreadLocal.get();
-
-		return portalCacheList.remove(portalCacheList.size() - 1);
+		return portalCacheMaps.remove(portalCacheMaps.size() - 1);
 	}
 
 	private static void _pushPortalCacheMap() {
-		List<Map<
-			PortalCache<? extends Serializable, ?>,
-			Map<? extends Serializable, ?>>>
-				portalCacheList = _portalCacheListThreadLocal.get();
+		List<PortalCacheMap> portalCacheMaps =
+			_portalCacheMapsThreadLocal.get();
 
-		portalCacheList.add(
-			new HashMap<
-				PortalCache<? extends Serializable, ?>,
-				Map<? extends Serializable, ?>>());
+		portalCacheMaps.add(new PortalCacheMap());
 	}
 
-	private static ThreadLocal<List<Map<
-		PortalCache<? extends Serializable, ?>,
-		Map<? extends Serializable, ?>>>>
-			_portalCacheListThreadLocal = new InitialThreadLocal<List<Map<
-				PortalCache<? extends Serializable, ?>,
-				Map<? extends Serializable, ?>>>>(
-					TransactionalPortalCacheHelper.class.getName() +
-						"._portalCacheListThreadLocal",
-					new ArrayList<Map<
-						PortalCache<? extends Serializable, ?>,
-						Map<? extends Serializable, ?>>>());
+	private static ThreadLocal<List<PortalCacheMap>>
+		_portalCacheMapsThreadLocal =
+			new InitialThreadLocal<List<PortalCacheMap>>(
+				TransactionalPortalCacheHelper.class.getName() +
+					"._portalCacheMapsThreadLocal",
+				new ArrayList<PortalCacheMap>());
+
+	private static class PortalCacheMap
+		extends HashMap
+			<PortalCache<? extends Serializable, ?>,
+				Map<? extends Serializable, ?>> {
+	}
 
 }
