@@ -68,22 +68,10 @@ public class VerifyCalendar extends VerifyProcess {
 	}
 
 	protected void verifyEndDate() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update CalEvent set endDate = null " +
-				"where (recurrence like '%\"until\":null%' " +
-				"or recurrence = 'null') and enddate is not null");
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		runSQL(
+			"update CalEvent set endDate = null where endDate is not null " +
+				"and (recurrence like '%\"until\":null%' or recurrence = " +
+					"'null')");
 	}
 
 	protected void verifyNoAssets() throws Exception {
