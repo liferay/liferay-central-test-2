@@ -2537,12 +2537,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new ArticleIDComparator(true));
 
-			boolean publishVersionHistory =
-				portletDataContext.getBooleanParameter(
-					_NAMESPACE, "version-history");
-
 			for (JournalArticle article : articles) {
-				if (publishVersionHistory ||
+				if (portletDataContext.getBooleanParameter(
+						_NAMESPACE, "version-history") ||
 					JournalArticleLocalServiceUtil.isLatestVersion(
 						article.getGroupId(), article.getArticleId(),
 						article.getVersion(),
