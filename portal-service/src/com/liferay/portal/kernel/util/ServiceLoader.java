@@ -51,9 +51,7 @@ public class ServiceLoader {
 				_load(services, classLoader, clazz, url);
 			}
 			catch (Exception e) {
-				_log.error(
-					"An error has ocurred while loading the " + clazz +
-						"using the classloader " + classLoader);
+				_log.error("Unable to load " + clazz + "with " + classLoader);
 			}
 		}
 
@@ -107,6 +105,6 @@ public class ServiceLoader {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(ServiceLoader.class);
+	private static Log _log = LogFactoryUtil.getLog(ServiceLoader.class);
 
 }
