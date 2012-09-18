@@ -132,8 +132,8 @@ public class VerifyCalendar extends VerifyProcess {
 				TZSRecurrence recurrenceObj = null;
 
 				if (Validator.isNotNull(recurrence)) {
-					recurrenceObj =
-						(TZSRecurrence)jsonSerializer.fromJSON(recurrence);
+					recurrenceObj = (TZSRecurrence)jsonSerializer.fromJSON(
+						recurrence);
 				}
 
 				String newRecurrence = JSONFactoryUtil.serialize(recurrenceObj);
