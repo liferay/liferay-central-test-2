@@ -502,21 +502,21 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		syndFeed.setLinks(syndLinks);
 
-		SyndLink syndLinkSelf = new SyndLinkImpl();
+		SyndLink selfSyndLink = new SyndLinkImpl();
 
-		syndLinks.add(syndLinkSelf);
+		syndLinks.add(selfSyndLink);
 
-		syndLinkSelf.setHref(feedURL);
-		syndLinkSelf.setRel("self");
+		selfSyndLink.setHref(feedURL);
+		selfSyndLink.setRel("self");
 
 		if (feedURL.endsWith("/-/blogs/rss")) {
-			SyndLink syndLinkAlternate = new SyndLinkImpl();
+			SyndLink alternateSyndLink = new SyndLinkImpl();
 
-			syndLinks.add(syndLinkAlternate);
+			syndLinks.add(alternateSyndLink);
 
-			syndLinkAlternate.setHref(
+			alternateSyndLink.setHref(
 				feedURL.substring(0, feedURL.length() - 12));
-			syndLinkAlternate.setRel("alternate");
+			alternateSyndLink.setRel("alternate");
 		}
 
 		syndFeed.setPublishedDate(new Date());

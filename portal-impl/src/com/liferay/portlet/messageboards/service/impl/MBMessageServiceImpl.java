@@ -777,12 +777,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		syndFeed.setLinks(syndLinks);
 
-		SyndLink syndLinkSelf = new SyndLinkImpl();
+		SyndLink selfSyndLink = new SyndLinkImpl();
 
-		syndLinks.add(syndLinkSelf);
+		syndLinks.add(selfSyndLink);
 
-		syndLinkSelf.setHref(feedURL);
-		syndLinkSelf.setRel("self");
+		selfSyndLink.setHref(feedURL);
+		selfSyndLink.setRel("self");
 
 		syndFeed.setPublishedDate(new Date());
 		syndFeed.setTitle(name);
