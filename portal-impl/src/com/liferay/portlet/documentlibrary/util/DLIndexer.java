@@ -223,17 +223,17 @@ public class DLIndexer extends BaseIndexer {
 			Document document, DLFileVersion dlFileVersion)
 		throws PortalException, SystemException {
 
-		List<DLFileEntryMetadata> fileEntryMetadataList =
+		List<DLFileEntryMetadata> dlFileEntryMetadatas =
 			DLFileEntryMetadataLocalServiceUtil.
 				getFileEntryMetadataByFileVersionId(
 					dlFileVersion.getFileVersionId());
 
-		for (DLFileEntryMetadata fileEntryMetadata : fileEntryMetadataList) {
+		for (DLFileEntryMetadata dlFileEntryMetadata : dlFileEntryMetadatas) {
 			Fields fields = null;
 
 			try {
 				fields = StorageEngineUtil.getFields(
-					fileEntryMetadata.getDDMStorageId());
+					dlFileEntryMetadata.getDDMStorageId());
 			}
 			catch (Exception e) {
 			}
@@ -241,7 +241,7 @@ public class DLIndexer extends BaseIndexer {
 			if (fields != null) {
 				DDMStructure ddmStructure =
 					DDMStructureLocalServiceUtil.getStructure(
-						fileEntryMetadata.getDDMStructureId());
+						dlFileEntryMetadata.getDDMStructureId());
 
 				DDMIndexerUtil.addAttributes(document, ddmStructure, fields);
 			}

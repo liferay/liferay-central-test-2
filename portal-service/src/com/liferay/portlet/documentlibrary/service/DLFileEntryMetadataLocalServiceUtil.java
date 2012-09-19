@@ -287,16 +287,16 @@ public class DLFileEntryMetadataLocalServiceUtil {
 		return getService().getFileEntryMetadata(ddmStructureId, fileVersionId);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata> getFileEntryMetadataByFileVersionId(
-		long fileVersionId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileEntryMetadataByFileVersionId(fileVersionId);
-	}
-
 	public static long getFileEntryMetadataCount(long fileEntryId,
 		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntryMetadataCount(fileEntryId, fileVersionId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata> getFileVersionFileEntryMetadatas(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersionFileEntryMetadatas(fileVersionId);
 	}
 
 	public static void updateFileEntryMetadata(long companyId,

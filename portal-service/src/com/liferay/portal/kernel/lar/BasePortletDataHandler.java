@@ -53,7 +53,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			if (_log.isInfoEnabled()) {
 				long duration = System.currentTimeMillis() - startTime;
 
-				_log.info("Deletion took " + Time.getDuration(duration));
+				_log.info("Deleted portlet in " + Time.getDuration(duration));
 			}
 		}
 	}
@@ -82,7 +82,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			if (_log.isInfoEnabled()) {
 				long duration = System.currentTimeMillis() - startTime;
 
-				_log.info("Export took " + Time.getDuration(duration));
+				_log.info("Exported portlet in " + Time.getDuration(duration));
 			}
 		}
 	}
@@ -146,7 +146,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			if (_log.isInfoEnabled()) {
 				long duration = System.currentTimeMillis() - startTime;
 
-				_log.info("Import took " + Time.getDuration(duration));
+				_log.info("Imported portlet in " + Time.getDuration(duration));
 			}
 		}
 	}

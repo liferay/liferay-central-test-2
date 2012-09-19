@@ -260,12 +260,12 @@ public interface DLFileEntryMetadataLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata> getFileEntryMetadataByFileVersionId(
-		long fileVersionId)
+	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata> getFileVersionFileEntryMetadatas(
+		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateFileEntryMetadata(long companyId,
