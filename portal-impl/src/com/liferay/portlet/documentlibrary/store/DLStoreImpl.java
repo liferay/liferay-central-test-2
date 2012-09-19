@@ -542,7 +542,6 @@ public class DLStoreImpl implements DLStore {
 		}
 
 		if (validateFileExtension) {
-			String fileNameLowerCase = fileName.toLowerCase();
 			boolean validFileExtension = false;
 
 			String[] fileExtensions = PrefsPropsUtil.getStringArray(
@@ -550,7 +549,7 @@ public class DLStoreImpl implements DLStore {
 
 			for (String fileExtension : fileExtensions) {
 				if (StringPool.STAR.equals(fileExtension) ||
-					fileNameLowerCase.endsWith(fileExtension.toLowerCase())) {
+					StringUtil.endsWith(fileName, fileExtension)) {
 
 					validFileExtension = true;
 
