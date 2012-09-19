@@ -32,7 +32,7 @@ public class DDMTemplateResourceImpl extends BaseResourceImpl {
 		DDMTemplate template, String parentPath, String name) {
 
 		super(
-			parentPath, name, template.getName(template.getDefaultLocale()),
+			parentPath, name, template.getName(template.getDefaultLanguageId()),
 			template.getCreateDate(), template.getModifiedDate(),
 			template.getScript().length());
 

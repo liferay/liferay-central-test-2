@@ -34,8 +34,6 @@ long classPK = BeanParamUtil.getLong(template, request, "classPK");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
-Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 if ((structure == null) && (template != null)) {
 	structure = DDMTemplateHelperUtil.fetchStructure(template);
 }
@@ -138,6 +136,11 @@ if (Validator.isNotNull(structureAvailableFields)) {
 
 					<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 						<aui:field-wrapper label="webdav-url">
+
+							<%
+							Group group = GroupLocalServiceUtil.getGroup(groupId);
+							%>
+
 							<liferay-ui:input-resource url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/webdav" + group.getFriendlyURL() + "/dynamic_data_mapping/ddmTemplates/" + templateId %>' />
 						</aui:field-wrapper>
 					</c:if>

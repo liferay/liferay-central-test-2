@@ -16,7 +16,6 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
@@ -30,7 +29,7 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 	public DDMTemplateImpl() {
 	}
 
-	public String getDefaultLocale() {
+	public String getDefaultLanguageId() {
 		Document document = null;
 
 		try {
@@ -42,7 +41,7 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 				return rootElement.attributeValue("default-locale");
 			}
 		}
-		catch (DocumentException e) {
+		catch (Exception e) {
 		}
 
 		Locale locale = LocaleUtil.getDefault();

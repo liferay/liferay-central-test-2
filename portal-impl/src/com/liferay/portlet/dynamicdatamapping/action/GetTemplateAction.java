@@ -16,8 +16,8 @@ package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
@@ -48,22 +48,14 @@ public class GetTemplateAction extends Action {
 			DDMTemplate template = DDMTemplateServiceUtil.getTemplate(
 				templateId);
 
-			String extension = DDMTemplateConstants.LANG_TYPE_VM;
-
-			if (template.getLanguage() != null) {
-				extension = template.getLanguage();
-			}
+			String extension = GetterUtil.getString(
+				template.getLanguage(), DDMTemplateConstants.LANG_TYPE_VM);
 
 			String script = template.getScript();
 
-			String fileName = null;
-			byte[] bytes = script.getBytes();
+			String contentType = null;
 
-			String contentType;
-
-			if (Validator.equals(
-				extension, DDMTemplateConstants.LANG_TYPE_XSD)) {
-
+			if (extension.equals(DDMTemplateConstants.LANG_TYPE_XSD)) {
 				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
 			else {
@@ -71,7 +63,7 @@ public class GetTemplateAction extends Action {
 			}
 
 			ServletResponseUtil.sendFile(
-				request, response, fileName, bytes, contentType);
+				request, response, null, script.getBytes(), contentType);
 
 			return null;
 		}

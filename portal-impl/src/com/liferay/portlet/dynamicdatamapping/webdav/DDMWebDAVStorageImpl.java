@@ -81,9 +81,7 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public Resource getResource(WebDAVRequest webDavRequest)
-		throws WebDAVException {
-
+	public Resource getResource(WebDAVRequest webDavRequest) {
 		String[] pathArray = webDavRequest.getPathArray();
 
 		if (pathArray.length == 4) {
@@ -152,8 +150,6 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return HttpServletResponse.SC_NOT_FOUND;
 			}
 
-			ServiceContext serviceContext = new ServiceContext();
-
 			Object model = resource.getModel();
 
 			if (model instanceof DDMStructure) {
@@ -166,7 +162,7 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DDMStructureServiceUtil.updateStructure(
 					structure.getStructureId(), structure.getNameMap(),
-					structure.getDescriptionMap(), xsd, serviceContext);
+					structure.getDescriptionMap(), xsd, new ServiceContext());
 
 				return HttpServletResponse.SC_CREATED;
 			}
@@ -182,7 +178,7 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					template.getTemplateId(), template.getNameMap(),
 					template.getDescriptionMap(), template.getType(),
 					template.getMode(), template.getLanguage(), script,
-					serviceContext);
+					new ServiceContext());
 
 				return HttpServletResponse.SC_CREATED;
 			}
@@ -243,6 +239,7 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavRequest.getPath();
+
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -256,6 +253,7 @@ public class DDMWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		WebDAVRequest webDavRequest, DDMTemplate template, boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavRequest.getPath();
+
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
