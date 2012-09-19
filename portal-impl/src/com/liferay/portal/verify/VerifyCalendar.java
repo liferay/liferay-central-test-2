@@ -14,7 +14,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -69,14 +68,10 @@ public class VerifyCalendar extends VerifyProcess {
 	}
 
 	protected void verifyEndDate() throws Exception {
-		String sql =
+		runSQL(
 			"update CalEvent set endDate = null where endDate is not null " +
 				"and (recurrence like '%\"until\":null%' or " +
-					"CAST_TEXT(recurrence) = 'null')";
-
-		sql = SQLTransformer.transform(sql);
-
-		runSQL(sql);
+					"CAST_TEXT(recurrence) = 'null')");
 	}
 
 	protected void verifyNoAssets() throws Exception {
