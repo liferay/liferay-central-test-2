@@ -118,8 +118,6 @@ public class VerifyCalendar extends VerifyProcess {
 					"recurrence) is not null or CAST_TEXT(recurrence) != '') " +
 						"and recurrence not like '%serializable%'";
 
-			sql = SQLTransformer.transform(sql);
-
 			ps = con.prepareStatement(sql);
 
 			rs = ps.executeQuery();
