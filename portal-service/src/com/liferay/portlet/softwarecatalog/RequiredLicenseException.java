@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class LicenseInUseException extends PortalException {
+public class RequiredLicenseException extends PortalException {
 
-	public LicenseInUseException() {
+	public RequiredLicenseException() {
 		super();
 	}
 
-	public LicenseInUseException(String msg) {
+	public RequiredLicenseException(String msg) {
 		super(msg);
 	}
 
-	public LicenseInUseException(String msg, Throwable cause) {
+	public RequiredLicenseException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public LicenseInUseException(Throwable cause) {
+	public RequiredLicenseException(Throwable cause) {
 		super(cause);
 	}
 

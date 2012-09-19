@@ -35,8 +35,8 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 	title='<%= (license == null) ? "new-license" : license.getName() %>'
 />
 
-<liferay-ui:error exception="<%= LicenseInUseException.class %>" message="the-selected-license-is-in-use" />
 <liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= RequiredLicenseException.class %>" message="the-selected-license-is-in-use" />
 
 <table class="lfr-table">
 <tr>
