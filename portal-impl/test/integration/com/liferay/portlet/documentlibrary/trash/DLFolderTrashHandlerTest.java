@@ -69,15 +69,15 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		DLFolder parentDLFolder = (DLFolder)parentBaseModel;
+
 		serviceContext = (ServiceContext)serviceContext.clone();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
-		DLFolder dlParentFolder = (DLFolder)parentBaseModel;
-
 		DLFolder dlFolder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), dlParentFolder.getGroupId(),
-			dlParentFolder.getGroupId(), false, dlParentFolder.getFolderId(),
+			TestPropsValues.getUserId(), parentDLFolder.getGroupId(),
+			parentDLFolder.getGroupId(), false, parentDLFolder.getFolderId(),
 			getSearchKeywords(), StringPool.BLANK, serviceContext);
 
 		return dlFolder;
@@ -104,10 +104,10 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 	protected int getBaseModelsNotInTrashCount(BaseModel<?> parentBaseModel)
 		throws Exception {
 
-		DLFolder dlParentFolder = (DLFolder)parentBaseModel;
+		DLFolder parentDLFolder = (DLFolder)parentBaseModel;
 
 		return DLFolderServiceUtil.getFoldersCount(
-			dlParentFolder.getGroupId(), dlParentFolder.getFolderId(),
+			parentDLFolder.getGroupId(), parentDLFolder.getFolderId(),
 			WorkflowConstants.STATUS_APPROVED, false);
 	}
 
@@ -133,7 +133,7 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Override
-	protected boolean isIndexableModel() {
+	protected boolean isIndexableBaseModel() {
 		return false;
 	}
 

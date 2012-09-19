@@ -65,8 +65,8 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Test
 	@Transactional
-	public void testTrashFileRank() throws Exception {
-		trashFileRank();
+	public void testTrashDLFileRank() throws Exception {
+		trashDLFileRank();
 	}
 
 	@Override
@@ -75,6 +75,12 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		DLFolder dlFolder = (DLFolder)parentBaseModel;
+
+		String content = "Content: Enterprise. Open Source.";
+
+		File file = FileUtil.createTempFile(content.getBytes());
+
 		serviceContext = (ServiceContext)serviceContext.clone();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
@@ -82,12 +88,6 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		if (approved) {
 			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 		}
-
-		String content = "Content: Enterprise. Open Source.";
-
-		File file = FileUtil.createTempFile(content.getBytes());
-
-		DLFolder dlFolder = (DLFolder)parentBaseModel;
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			dlFolder.getRepositoryId(), dlFolder.getFolderId(),
@@ -156,6 +156,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
+	@Override
 	protected Class<?> getParentBaseModelClass() {
 		return DLFolder.class;
 	}
@@ -213,7 +214,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		DLAppServiceUtil.moveFolderToTrash(primaryKey);
 	}
 
-	protected void trashFileRank() throws Exception {
+	protected void trashDLFileRank() throws Exception {
 		Group group = ServiceTestUtil.addGroup();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
@@ -246,7 +247,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			getBaseModelClassName());
 
-		trashHandler.restoreTrashEntry(getTrashClassPK(baseModel));
+		trashHandler.restoreTrashEntry(getTrashEntryClassPK(baseModel));
 
 		Assert.assertEquals(
 			1,

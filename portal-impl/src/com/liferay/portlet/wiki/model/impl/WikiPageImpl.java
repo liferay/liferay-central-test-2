@@ -177,9 +177,8 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		if (node != null) {
 			return node.isInTrash();
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	@Override

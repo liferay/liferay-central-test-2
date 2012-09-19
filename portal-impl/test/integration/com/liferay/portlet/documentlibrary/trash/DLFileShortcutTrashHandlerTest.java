@@ -58,15 +58,15 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 		Assert.assertTrue("This test does not apply", true);
 	}
 
+	@Override
+	public void testTrashDuplicate() throws Exception {
+		Assert.assertTrue("This test does not apply", true);
+	}
+
 	@Test
 	@Transactional
 	public void testTrashFileEntry() throws Exception {
 		trashFileEntry();
-	}
-
-	@Override
-	public void testTrashModelDuplicate() throws Exception {
-		Assert.assertTrue("This test does not apply", true);
 	}
 
 	@Override
@@ -85,20 +85,19 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		DLFolder dlFolder = (DLFolder)parentBaseModel;
+
+		String content = "Content: Enterprise. Open Source. For Life.";
+
 		serviceContext = (ServiceContext)serviceContext.clone();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
-		String content = "Content: Enterprise. Open Source. For Life.";
-
-		byte[] bytes = content.getBytes();
-
-		DLFolder dlFolder = (DLFolder)parentBaseModel;
-
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			dlFolder.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			"Text.txt", ContentTypes.TEXT_PLAIN, getSearchKeywords(),
-			StringPool.BLANK, StringPool.BLANK, bytes, serviceContext);
+			StringPool.BLANK, StringPool.BLANK, content.getBytes(),
+			serviceContext);
 
 		return DLAppServiceUtil.addFileShortcut(
 			dlFolder.getGroupId(), dlFolder.getFolderId(),
@@ -153,7 +152,7 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Override
-	protected boolean isIndexableModel() {
+	protected boolean isIndexableBaseModel() {
 		return false;
 	}
 

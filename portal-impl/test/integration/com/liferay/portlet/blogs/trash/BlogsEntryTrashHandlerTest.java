@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
-	public void testTrashModelDuplicate() throws Exception {
+	public void testTrashDuplicate() throws Exception {
 		Assert.assertTrue("This test does not apply", true);
 	}
 
@@ -96,7 +96,7 @@ public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
-		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.addEntry(
 			TestPropsValues.getUserId(), title, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
@@ -105,11 +105,11 @@ public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		if (approved) {
 			BlogsEntryLocalServiceUtil.updateStatus(
-				TestPropsValues.getUserId(), blogsEntry.getEntryId(),
+				TestPropsValues.getUserId(), entry.getEntryId(),
 				WorkflowConstants.STATUS_APPROVED, serviceContext);
 		}
 
-		return blogsEntry;
+		return entry;
 	}
 
 	@Override

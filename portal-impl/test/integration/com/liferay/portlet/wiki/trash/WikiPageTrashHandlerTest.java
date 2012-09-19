@@ -66,17 +66,17 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
-		WikiPage wikiPage = WikiPageLocalServiceUtil.addPage(
+		WikiPage page = WikiPageLocalServiceUtil.addPage(
 			TestPropsValues.getUserId(),
 			(Long)parentBaseModel.getPrimaryKeyObj(), getSearchKeywords(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 			true, serviceContext);
 
 		WikiPageLocalServiceUtil.updateStatus(
-			TestPropsValues.getUserId(), wikiPage.getResourcePrimKey(),
+			TestPropsValues.getUserId(), page.getResourcePrimKey(),
 			WorkflowConstants.STATUS_APPROVED, serviceContext);
 
-		return wikiPage;
+		return page;
 	}
 
 	@Override
@@ -135,32 +135,32 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Override
-	protected Long getTrashClassPK(ClassedModel classedModel) {
-		return ((WikiPage)classedModel).getResourcePrimKey();
+	protected long getTrashEntryClassPK(ClassedModel classedModel) {
+		WikiPage page = (WikiPage)classedModel;
+
+		return page.getResourcePrimKey();
+	}
+
+	@Override
+	protected boolean isBaseModelMoveableFromTrash() {
+		return false;
 	}
 
 	@Override
 	protected boolean isInTrashFolder(ClassedModel classedModel)
 		throws Exception {
 
-		WikiPage wikiPage = (WikiPage)classedModel;
+		WikiPage page = (WikiPage)classedModel;
 
-		return wikiPage.isInTrashFolder();
-	}
-
-	@Override
-	protected boolean isMoveableModel() {
-		return false;
+		return page.isInTrashFolder();
 	}
 
 	@Override
 	protected void moveBaseModelToTrash(long primaryKey) throws Exception {
-		WikiPage wikiPage = WikiPageLocalServiceUtil.getPageByPageId(
-			primaryKey);
+		WikiPage page = WikiPageLocalServiceUtil.getPageByPageId(primaryKey);
 
 		WikiPageLocalServiceUtil.movePageToTrash(
-			TestPropsValues.getUserId(), wikiPage.getNodeId(),
-			wikiPage.getTitle());
+			TestPropsValues.getUserId(), page.getNodeId(), page.getTitle());
 	}
 
 	@Override
@@ -176,19 +176,17 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			long primaryKey, ServiceContext serviceContext)
 		throws Exception {
 
+		WikiPage page = WikiPageLocalServiceUtil.getPageByPageId(primaryKey);
+
 		serviceContext = (ServiceContext)serviceContext.clone();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
-		WikiPage wikiPage = WikiPageLocalServiceUtil.getPageByPageId(
-			primaryKey);
-
 		return WikiPageLocalServiceUtil.updatePage(
-			TestPropsValues.getUserId(), wikiPage.getNodeId(),
-			getSearchKeywords(), wikiPage.getVersion(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			false, wikiPage.getFormat(), wikiPage.getParentTitle(),
-			wikiPage.getRedirectTitle(), serviceContext);
+			TestPropsValues.getUserId(), page.getNodeId(), getSearchKeywords(),
+			page.getVersion(), ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), false, page.getFormat(),
+			page.getParentTitle(), page.getRedirectTitle(), serviceContext);
 	}
 
 }

@@ -99,9 +99,9 @@ public class WikiNodeTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected String getBaseModelName(ClassedModel classedModel) {
-		WikiNode node = (WikiNode)classedModel;
+		WikiNode wikiNode = (WikiNode)classedModel;
 
-		return node.getName();
+		return wikiNode.getName();
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class WikiNodeTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Override
-	protected boolean isIndexableModel() {
+	protected boolean isIndexableBaseModel() {
 		return false;
 	}
 
