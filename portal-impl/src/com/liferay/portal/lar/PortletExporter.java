@@ -1548,33 +1548,31 @@ public class PortletExporter {
 			String value = GetterUtil.getString(
 				jxPreferences.getValue(name, null));
 
-			String prefix = "queryName";
-
-			if (value.equalsIgnoreCase("assetCategories") &&
-				name.startsWith(prefix)) {
-
-				String index = name.substring(prefix.length());
-
-				updateAssetPublisherClassPKs(
-					jxPreferences, "queryValues" + index,
-					AssetCategory.class.getName());
-			}
-			else if (name.equals(
-						"anyClassTypeJournalArticleAssetRendererFactory") ||
-					 name.equals(
-						"classTypeIdsJournalArticleAssetRendererFactory") ||
-					 name.equals("classTypeIds")) {
+			if (name.equals(
+					"anyClassTypeJournalArticleAssetRendererFactory") ||
+				name.equals(
+					"classTypeIdsJournalArticleAssetRendererFactory") ||
+				name.equals("classTypeIds")) {
 
 				updateAssetPublisherClassPKs(
 					jxPreferences, name, JournalStructure.class.getName());
-			}
-			else if (name.equals("defaultScope") || name.equals("scopeIds")) {
-				updateAssetPublisherGlobalScopeId(jxPreferences, name, plid);
 			}
 			else if (name.equals("anyAssetType") ||
 					 name.equals("classNameIds")) {
 
 				updateAssetPublisherClassNameIds(jxPreferences, name);
+			}
+			else if (name.equals("defaultScope") || name.equals("scopeIds")) {
+				updateAssetPublisherGlobalScopeId(jxPreferences, name, plid);
+			}
+			else if (name.startsWith("queryName") &&
+					 value.equalsIgnoreCase("assetCategories")) {
+
+				String index = name.substring(9);
+
+				updateAssetPublisherClassPKs(
+					jxPreferences, "queryValues" + index,
+					AssetCategory.class.getName());
 			}
 		}
 
