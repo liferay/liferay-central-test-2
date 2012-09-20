@@ -70,9 +70,10 @@ public class AlloyPortlet extends GenericPortlet {
 				IndexerRegistryUtil.unregister(indexer);
 			}
 
-			MessageListener scheduler = baseAlloyControllerImpl.scheduler;
+			MessageListener schedulerMessageListener =
+				baseAlloyControllerImpl.schedulerMessageListener;
 
-			if (scheduler == null) {
+			if (schedulerMessageListener == null) {
 				continue;
 			}
 
@@ -86,6 +87,7 @@ public class AlloyPortlet extends GenericPortlet {
 					baseAlloyControllerImpl.getSchedulerDestinationName());
 			}
 			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}

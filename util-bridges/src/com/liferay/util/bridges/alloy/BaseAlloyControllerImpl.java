@@ -66,7 +66,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.lang.reflect.Method;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -198,7 +197,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		return null;
 	}
 
-	protected MessageListener buildScheduler() {
+	protected MessageListener buildSchedulerMessageListener() {
 		return null;
 	}
 
@@ -276,18 +275,13 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected String getSchedulerDestinationName() {
-		return "liferay/alloy";
+		return "liferay/alloy/".concat(getSchedulerGroupName());
 	}
 
 	protected String getSchedulerGroupName() {
-		StringBundler sb = new StringBundler(4);
+		String rootPortletId = portlet.getRootPortletId();
 
-		sb.append(getSchedulerDestinationName());
-		sb.append(StringPool.SLASH);
-		sb.append(portlet.getPortletId());
-		sb.append(themeDisplay.getScopeGroupId());
-
-		return sb.toString();
+		return rootPortletId.concat(StringPool.SLASH).concat(controllerPath);
 	}
 
 	protected String getSchedulerJobName() {
@@ -295,10 +289,8 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected Trigger getSchedulerTrigger() {
-		Calendar startDate = CalendarFactoryUtil.getCalendar();
-
 		CronText cronText = new CronText(
-			startDate, CronText.DAILY_FREQUENCY, 1);
+			CalendarFactoryUtil.getCalendar(), CronText.DAILY_FREQUENCY, 1);
 
 		return new CronTrigger(
 			getSchedulerJobName(), getSchedulerGroupName(),
@@ -466,9 +458,9 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected void initScheduler() {
-		scheduler = buildScheduler();
+		schedulerMessageListener = buildSchedulerMessageListener();
 
-		if (scheduler == null) {
+		if (schedulerMessageListener == null) {
 			return;
 		}
 
@@ -491,17 +483,19 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 				messageListener = invokerMessageListener.getMessageListener();
 
-				if (scheduler == messageListener) {
+				if (schedulerMessageListener == messageListener) {
 					return;
 				}
 
-				Class<?> schedulerClass = scheduler.getClass();
+				Class<?> schedulerMessageListenerClass =
+					schedulerMessageListener.getClass();
 
-				String schedulerClassName = schedulerClass.getName();
+				String schedulerMessageListenerClassName =
+					schedulerMessageListenerClass.getName();
 
 				Class<?> messageListenerClass = messageListener.getClass();
 
-				if (!schedulerClassName.equals(
+				if (!schedulerMessageListenerClassName.equals(
 						messageListenerClass.getName())) {
 
 					continue;
@@ -516,6 +510,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 						getSchedulerDestinationName(), messageListener);
 				}
 				catch (Exception e) {
+					log.error(e, e);
 				}
 
 				break;
@@ -533,13 +528,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		try {
 			MessageBusUtil.registerMessageListener(
-				getSchedulerDestinationName(), scheduler);
+				getSchedulerDestinationName(), schedulerMessageListener);
 
 			SchedulerEngineUtil.schedule(
 				getSchedulerTrigger(), StorageType.MEMORY_CLUSTERED, null,
 				getSchedulerDestinationName(), null, 0);
 		}
 		catch (Exception e) {
+			log.error(e, e);
 		}
 	}
 
@@ -754,7 +750,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected ResourceRequest resourceRequest;
 	protected ResourceResponse resourceResponse;
 	protected HttpServletResponse response;
-	protected MessageListener scheduler;
+	protected MessageListener schedulerMessageListener;
 	protected ServletConfig servletConfig;
 	protected ServletContext servletContext;
 	protected ThemeDisplay themeDisplay;
