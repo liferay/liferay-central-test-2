@@ -426,7 +426,7 @@ AUI.add(
 
 								var action = 'show';
 
-								if (toolItem.StateInteraction.get('active')) {
+								if (!toolItem.StateInteraction.get('active')) {
 									action = 'hide';
 								}
 
