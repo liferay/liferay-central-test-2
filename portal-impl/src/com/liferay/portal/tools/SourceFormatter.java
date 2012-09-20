@@ -2290,7 +2290,7 @@ public class SourceFormatter {
 	}
 
 	private static void _formatServiceXML(String fileName, String content)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Document document = _saxReaderUtil.read(content);
 
