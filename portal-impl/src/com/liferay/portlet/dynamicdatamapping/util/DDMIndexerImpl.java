@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.dynamicdatamapping.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -77,7 +79,10 @@ public class DDMIndexerImpl implements DDMIndexer {
 					}
 				}
 			}
-			catch (StructureFieldException e) {
+			catch (StructureFieldException sfe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(sfe, sfe);
+				}
 			}
 		}
 	}
@@ -95,5 +100,7 @@ public class DDMIndexerImpl implements DDMIndexer {
 	}
 
 	private static final String _FIELD_NAMESPACE = "ddm";
+
+	private static Log _log = LogFactoryUtil.getLog(DDMIndexerImpl.class);
 
 }
