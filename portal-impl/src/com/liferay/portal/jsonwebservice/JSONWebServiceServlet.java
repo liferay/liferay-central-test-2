@@ -91,11 +91,13 @@ public class JSONWebServiceServlet extends JSONServlet {
 		try {
 			AccessControlThreadLocal.setRemoteAccess(true);
 
-			if (servletContext.getContext(PropsValues.PORTAL_CTX) != null) {
-				if (!PropsValues.PORTAL_CTX.equals(StringPool.SLASH) &&
-					apiPath.startsWith(PropsValues.PORTAL_CTX)) {
+			String contextPath = PropsValues.PORTAL_CTX;
 
-					apiPath = apiPath.substring(PropsValues.PORTAL_CTX.length());
+			if (servletContext.getContext(contextPath) != null) {
+				if (!contextPath.equals(StringPool.SLASH) &&
+					apiPath.startsWith(contextPath)) {
+
+					apiPath = apiPath.substring(contextPath.length());
 				}
 
 				RequestDispatcher requestDispatcher =
