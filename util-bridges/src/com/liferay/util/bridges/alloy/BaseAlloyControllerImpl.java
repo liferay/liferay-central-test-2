@@ -614,6 +614,13 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected AlloySearchResult search(
+			Map<String, Serializable> attributes, String keywords, Sort sort)
+		throws Exception {
+
+		return search(attributes, keywords, new Sort[] {sort});
+	}
+
+	protected AlloySearchResult search(
 			Map<String, Serializable> attributes, String keywords, Sort[] sorts)
 		throws Exception {
 
@@ -659,7 +666,13 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected AlloySearchResult search(String keywords) throws Exception {
-		return search(keywords, null);
+		return search(keywords, (Sort[])null);
+	}
+
+	protected AlloySearchResult search(String keywords, Sort sort)
+		throws Exception {
+
+		return search(keywords, new Sort[] {sort});
 	}
 
 	protected AlloySearchResult search(String keywords, Sort[] sorts)
