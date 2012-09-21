@@ -121,7 +121,7 @@ public class DLFileShortcutTrashHandler extends BaseTrashHandler {
 		DLFileShortcut fileShortcut =
 			DLFileShortcutLocalServiceUtil.getDLFileShortcut(classPK);
 
-		if (fileShortcut.isInTrashFolder() || fileShortcut.isInTrash()) {
+		if (fileShortcut.isInTrash() || fileShortcut.isInTrashFolder()) {
 			return true;
 		}
 

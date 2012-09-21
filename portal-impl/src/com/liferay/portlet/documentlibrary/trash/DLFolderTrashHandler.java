@@ -151,7 +151,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 
 		DLFolder dlFolder = getDLFolder(classPK);
 
-		if (dlFolder.isInTrashFolder() || dlFolder.isInTrash()) {
+		if (dlFolder.isInTrash() || dlFolder.isInTrashFolder()) {
 			return true;
 		}
 

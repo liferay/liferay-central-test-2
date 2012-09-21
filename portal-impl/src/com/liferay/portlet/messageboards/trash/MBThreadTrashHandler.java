@@ -96,9 +96,7 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		return CLASS_NAME;
 	}
 
-	public boolean isInTrash(long classPK)
-		throws PortalException, SystemException {
-
+	public boolean isInTrash(long classPK) {
 		return false;
 	}
 

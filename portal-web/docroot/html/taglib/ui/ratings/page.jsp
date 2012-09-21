@@ -96,7 +96,7 @@ if (ratingsEntry != null) {
 						for (int i = 1; i <= numberOfStars; i++) {
 						%>
 
-							<img alt="<%= (i == 1) ? LanguageUtil.format(pageContext, "the-average-rating-is-x-stars-out-of-x", new Object[] {ratingsStats.getAverageScore(), numberOfStars}) : StringPool.BLANK %>" class="aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "aui-rating-element-on" : StringPool.BLANK %>" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" title="<%= TrashUtil.isInTrash(className, classPK) ? LanguageUtil.get(pageContext, "rating-is-disabled-because-this-entry-is-in-the-recycle-bin") : StringPool.BLANK %>" />
+							<img alt="<%= (i == 1) ? LanguageUtil.format(pageContext, "the-average-rating-is-x-stars-out-of-x", new Object[] {ratingsStats.getAverageScore(), numberOfStars}) : StringPool.BLANK %>" class="aui-rating-element <%= (i <= ratingsStats.getAverageScore()) ? "aui-rating-element-on" : StringPool.BLANK %>" src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" title="<%= TrashUtil.isInTrash(className, classPK) ? LanguageUtil.get(pageContext, "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin") : StringPool.BLANK %>" />
 
 						<%
 						}
@@ -132,27 +132,27 @@ if (ratingsEntry != null) {
 									String taglibLabel = "rate-this-as-good";
 
 									if (TrashUtil.isInTrash(className, classPK)) {
-										taglibLabel = "rating-is-disabled-because-this-entry-is-in-the-recycle-bin";
+										taglibLabel = "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin";
 									}
 									else if (yourScore == 1) {
 										taglibLabel = "you-have-rated-this-as-good";
 									}
 									%>
 
-									<aui:input label='<%= taglibLabel %>' name="ratingThumb" type="radio" value="up" />
+									<aui:input label="<%= taglibLabel %>" name="ratingThumb" type="radio" value="up" />
 
 									<%
 									taglibLabel = "rate-this-as-bad";
 
 									if (TrashUtil.isInTrash(className, classPK)) {
-										taglibLabel = "rating-is-disabled-because-this-entry-is-in-the-recycle-bin";
+										taglibLabel = "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin";
 									}
 									else if (yourScore == -1) {
 										taglibLabel = "you-have-rated-this-as-bad";
 									}
 									%>
 
-									<aui:input label='<%= taglibLabel %>' name="ratingThumb" type="radio" value="down" />
+									<aui:input label="<%= taglibLabel %>" name="ratingThumb" type="radio" value="down" />
 								</c:if>
 							</div>
 						</div>
