@@ -631,7 +631,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-		if ((attributes != null) && (attributes.size() > 0)) {
+		if ((attributes != null) && !attributes.isEmpty()) {
 			searchContext.setAttributes(attributes);
 		}
 
