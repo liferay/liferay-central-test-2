@@ -70,13 +70,11 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		if (getParentStructureId() == 0) {
 			return getXsd();
 		}
-		else {
-			DDMStructure parentStructure =
-				DDMStructureLocalServiceUtil.getStructure(
-					super.getParentStructureId());
 
-			return _mergeXsds(getXsd(), parentStructure.getCompleteXsd());
-		}
+		DDMStructure parentStructure =
+			DDMStructureLocalServiceUtil.getStructure(getParentStructureId());
+
+		return _mergeXsds(getXsd(), parentStructure.getCompleteXsd());
 	}
 
 	public String getDefaultLanguageId() {
@@ -331,10 +329,9 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 		if (fieldsMap == null) {
 			if (getParentStructureId() > 0) {
-				DDMStructure parentStructure = null;
-
-				parentStructure = DDMStructureLocalServiceUtil.getStructure(
-					getParentStructureId());
+				DDMStructure parentStructure =
+					DDMStructureLocalServiceUtil.getStructure(
+						getParentStructureId());
 
 				fieldsMap = parentStructure.getFieldsMap(locale);
 			}
@@ -361,7 +358,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return fieldsMap;
 	}
 
-	private String _mergeXsds(String xsd1, String xsd2) throws PortalException {
+	private String _mergeXsds(String xsd1, String xsd2) throws SystemException {
 		try {
 			Document document1 = SAXReaderUtil.read(xsd1);
 			Document document2 = SAXReaderUtil.read(xsd2);
@@ -371,13 +368,14 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 			for (Element element : rootElement1.elements()) {
 				rootElement1.remove(element);
+
 				rootElement2.add(element);
 			}
 
 			return rootElement2.formattedString();
 		}
 		catch (Exception e) {
-			throw new PortalException(e);
+			throw new SystemException(e);
 		}
 	}
 

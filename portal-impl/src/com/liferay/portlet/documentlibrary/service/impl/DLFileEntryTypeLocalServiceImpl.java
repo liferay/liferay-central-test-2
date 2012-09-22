@@ -535,11 +535,10 @@ public class DLFileEntryTypeLocalServiceImpl
 			if (ddmStructure == null) {
 				ddmStructure = ddmStructureLocalService.addStructure(
 					userId, groupId,
+					DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
 					PortalUtil.getClassNameId(DLFileEntryMetadata.class),
-					ddmStructureKey,
-					DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID, nameMap,
-					descriptionMap, xsd, "xml", DDMStructureConstants.TYPE_AUTO,
-					serviceContext);
+					ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
+					DDMStructureConstants.TYPE_AUTO, serviceContext);
 			}
 			else {
 				if (Validator.isNull(xsd)) {

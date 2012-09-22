@@ -77,9 +77,9 @@
 
 		<!-- Other fields -->
 
+		<column name="parentStructureId" type="long" />
 		<column name="classNameId" type="long" />
 		<column name="structureKey" type="String" />
-		<column name="parentStructureId" type="long" />
 		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" localized="true" />
 		<column name="xsd" type="String" />

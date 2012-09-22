@@ -24,10 +24,8 @@ String portletResourceNamespace = ParamUtil.getString(request, "portletResourceN
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
-long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-long classPK = BeanParamUtil.getLong(structure, request, "structureId");
-
 long parentStructureId = BeanParamUtil.getLong(structure, request, "parentStructureId", DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID);
+
 String parentStructureName = StringPool.BLANK;
 
 try {
@@ -37,6 +35,9 @@ try {
 }
 catch (NoSuchStructureException nsee) {
 }
+
+long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+long classPK = BeanParamUtil.getLong(structure, request, "structureId");
 
 String script = BeanParamUtil.getString(structure, request, "xsd");
 
@@ -152,7 +153,7 @@ if (scriptJSONArray != null) {
 					<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 
 					<c:choose>
-						<c:when test="<%= (structure == null) || (Validator.isNotNull(parentStructureId)) %>">
+						<c:when test="<%= (structure == null) || Validator.isNotNull(parentStructureId) %>">
 							<portlet:renderURL var="parentStructureURL">
 								<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -201,23 +202,6 @@ if (scriptJSONArray != null) {
 
 	<aui:button href="<%= redirect %>" type="cancel" />
 </aui:button-row>
-
-<aui:script use="liferay-portlet-dynamic-data-mapping">
-	Liferay.provide(
-		window,
-		'<portlet:namespace />saveStructure',
-		function() {
-			document.<portlet:namespace />fm.<portlet:namespace />xsd.value = window.<portlet:namespace />formBuilder.getXSD();
-
-			submitForm(document.<portlet:namespace />fm);
-		},
-		['aui-base']
-	);
-
-	<c:if test="<%= Validator.isNotNull(saveCallback) && (classPK != 0) %>">
-		window.parent['<%= HtmlUtil.escapeJS(saveCallback) %>']('<%= classPK %>', '<%= HtmlUtil.escape(structure.getName(locale)) %>');
-	</c:if>
-</aui:script>
 
 <aui:script>
 	function <portlet:namespace />openParentStructureSelector() {
@@ -270,8 +254,25 @@ if (scriptJSONArray != null) {
 	);
 </aui:script>
 
+<aui:script use="liferay-portlet-dynamic-data-mapping">
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveStructure',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace />xsd.value = window.<portlet:namespace />formBuilder.getXSD();
+
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+
+	<c:if test="<%= Validator.isNotNull(saveCallback) && (classPK != 0) %>">
+		window.parent['<%= HtmlUtil.escapeJS(saveCallback) %>']('<%= classPK %>', '<%= HtmlUtil.escape(structure.getName(locale)) %>');
+	</c:if>
+</aui:script>
+
 <%!
-public JSONArray _addStructureFieldAttributes(DDMStructure structure, JSONArray scriptJSONArray) {
+public JSONArray _addStructureFieldAttributes(DDMStructure structure, JSONArray scriptJSONArray) throws Exception {
 	for (int i = 0; i < scriptJSONArray.length(); i++) {
 		JSONObject jsonObject = scriptJSONArray.getJSONObject(i);
 
@@ -287,7 +288,7 @@ public JSONArray _addStructureFieldAttributes(DDMStructure structure, JSONArray 
 	return scriptJSONArray;
 }
 
-public JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fieldName) throws StructureFieldException {
+public JSONArray _getFieldReadOnlyAttributes(DDMStructure structure, String fieldName) throws Exception {
 	JSONArray readOnlyAttributesJSONArray = JSONFactoryUtil.createJSONArray();
 
 	try {
