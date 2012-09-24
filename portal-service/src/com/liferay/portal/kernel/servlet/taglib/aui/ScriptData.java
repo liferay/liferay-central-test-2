@@ -130,7 +130,6 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	private ConcurrentMap<String, PortletData> _portletDataMap =
 		new ConcurrentHashMap<String, PortletData>();
-
 	private Map<StringBundler, Integer> _sbIndexMap =
 		new HashMap<StringBundler, Integer>();
 
