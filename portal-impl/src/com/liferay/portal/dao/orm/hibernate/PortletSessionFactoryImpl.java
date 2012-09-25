@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.spring.hibernate.PortletHibernateConfiguration;
 import com.liferay.portal.util.PropsValues;
@@ -129,6 +130,8 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		if (sessionFactory != null) {
 			return sessionFactory;
 		}
+
+		PortletClassLoaderUtil.setClassLoader(getSessionFactoryClassLoader());
 
 		PortletHibernateConfiguration portletHibernateConfiguration =
 			new PortletHibernateConfiguration();
