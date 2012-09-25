@@ -28,6 +28,7 @@ import javax.portlet.PortletRequest;
  * @author Michael C. Han
  */
 public interface SchedulerEngineHelper {
+
 	public void addJob(
 			Trigger trigger, StorageType storageType, String description,
 			String destinationName, Message message,

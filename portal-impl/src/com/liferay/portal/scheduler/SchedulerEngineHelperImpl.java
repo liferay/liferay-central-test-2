@@ -211,13 +211,13 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 
 			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SUNDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.MONDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.TUESDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.WEDNESDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.THURSDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.FRIDAY);
-			_addWeeklyDayPos(portletRequest, dayPos, Calendar.SATURDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.SUNDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.MONDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.TUESDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.WEDNESDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.THURSDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.FRIDAY);
+			addWeeklyDayPos(portletRequest, dayPos, Calendar.SATURDAY);
 
 			if (dayPos.size() == 0) {
 				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -740,7 +740,7 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 		_schedulerEngineClusterManager.updateMemorySchedulerClusterMaster();
 	}
 
-	private void _addWeeklyDayPos(
+	protected void addWeeklyDayPos(
 		PortletRequest portletRequest, List<DayAndPosition> list, int day) {
 
 		if (ParamUtil.getBoolean(portletRequest, "weeklyDayPos" + day)) {

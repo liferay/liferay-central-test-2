@@ -15,12 +15,11 @@
 package com.liferay.portal.kernel.scheduler;
 
 /**
- * @author Bruno Farache
- * @author Shuyang Zhou
- * @author Tina Tian
- * @author Raymond Augé
- *
- * @deprecated Use {@link com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil}.
+ * @author     Bruno Farache
+ * @author     Shuyang Zhou
+ * @author     Tina Tian
+ * @author     Raymond Augé
+ * @deprecated {@link SchedulerEngineHelperUtil}
  */
 public class SchedulerEngineUtil extends SchedulerEngineHelperUtil {
 }
