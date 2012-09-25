@@ -894,7 +894,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING);
 
-		SchedulerEngineHelperUtil.delete(jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineHelperUtil.delete(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	/**
@@ -916,7 +917,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING);
 
-		SchedulerEngineHelperUtil.delete(jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineHelperUtil.delete(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	/**

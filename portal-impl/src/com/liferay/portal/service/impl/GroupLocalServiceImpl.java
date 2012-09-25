@@ -2821,14 +2821,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
-				SchedulerEngineHelperUtil.delete(groupName, StorageType.PERSISTED);
+				SchedulerEngineHelperUtil.delete(
+					groupName, StorageType.PERSISTED);
 
 				// Copy from live
 
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
-				SchedulerEngineHelperUtil.delete(groupName, StorageType.PERSISTED);
+				SchedulerEngineHelperUtil.delete(
+					groupName, StorageType.PERSISTED);
 			}
 		}
 		catch (Exception e) {

@@ -234,7 +234,8 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
-		SchedulerEngineHelperUtil.unschedule(groupName, StorageType.MEMORY_CLUSTERED);
+		SchedulerEngineHelperUtil.unschedule(
+			groupName, StorageType.MEMORY_CLUSTERED);
 	}
 
 	protected void validate(
