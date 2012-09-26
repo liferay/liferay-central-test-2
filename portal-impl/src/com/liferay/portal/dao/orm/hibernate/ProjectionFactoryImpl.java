@@ -85,15 +85,15 @@ public class ProjectionFactoryImpl implements ProjectionFactory {
 				Projections.sqlProjection(sql, columnAliases, null));
 		}
 
-		org.hibernate.type.Type[] hTypes =
+		org.hibernate.type.Type[] hibernateTypes =
 			new org.hibernate.type.Type[types.length];
 
 		for (int i = 0; i < types.length; i++) {
-			hTypes[i] = TypeTranslator.translate(types[i]);
+			hibernateTypes[i] = TypeTranslator.translate(types[i]);
 		}
 
 		return new ProjectionImpl(
-			Projections.sqlProjection(sql, columnAliases, hTypes));
+			Projections.sqlProjection(sql, columnAliases, hibernateTypes));
 	}
 
 	public Projection sum(String propertyName) {

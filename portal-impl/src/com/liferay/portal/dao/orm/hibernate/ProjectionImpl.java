@@ -29,6 +29,7 @@ public class ProjectionImpl implements Projection {
 		return _projection;
 	}
 
+	@Override
 	public String toString() {
 		return _projection.toString();
 	}
