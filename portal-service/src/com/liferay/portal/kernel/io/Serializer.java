@@ -28,60 +28,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 /**
- * More compact primary types format(compares to
- * {@link java.io.ObjectOutputStream}) and ClassLoader aware Serializer.<p>
- *
- * For primary types, this class can provide better encoding performance than
- * {@link java.io.ObjectOutputStream}/{@link java.io.DataOutputStream}. Because
- * it has a more compact format (No BlockHeader) and more simple call stack
- * ({@link com.liferay.portal.kernel.io.BigEndianCodec} compares to OutputStream
- * wrapper on top of {@link java.io.Bits})<p>
- *
- * For String, unlike {@link java.io.ObjectOutputStream}/
- * {@link java.io.DataOutputStream}'s UTF encoding has a 2^16=64K length
- * limitation(Quite oftenly, that is not enough). Serializer extends the
- * limitation to 2^32=4G which is generally more than enough.<br>
- * For pure ASCII characters String, the encoding performance is almost same
- * (if not better) as {@link java.io.ObjectOutputStream}/
- * {@link java.io.DataOutputStream}.<br>
- * For String contains non-ASCII characters, Serializer is directly encoding
- * each char into two bytes rather than doing a UTF encoding. This is a trade
- * off for better CPU/Memory performance with the price of low compress rate.
- * UTF encoding costs more CPU cycles to detect unicode range for each char, the
- * output result has a variable length, which increase the memory burden on
- * decoder side to prepare decoding buffer. A plain char to two bytes encoding,
- * although is inefficient in compress rate comparing to UTF encoding, but it
- * significantly simplifies the encoder's logic, and output length is
- * predictable by just knowing the length of the String, so the decoder can
- * manage its decoding buffer very efficient.<br>
- * In average, any system should have more ASCII String usage than non-ASCII
- * String. All system internal String are ASCII String, only String holding user
- * input info may have non-ASCII character, this trade off should offer positive
- * performance affect in most cases, for other cases, developer should consider
- * to just use the {@link java.io.ObjectOutputStream}/
- * {@link java.io.DataOutputStream}.<p>
- *
- * For ordinary Object, all primary type wrappers are encoded into its raw value
- * with one byte type header. This is much more efficient than
- * {@link java.io.ObjectOutputStream}'s serialization format for primary type
- * wrappers.<br>
- * For String, it is outputed in the same way as
- * {@link #writeString(java.lang.String)}, but with one byte type header.<br>
- * For other serializable Object, each Object is serialized by a new
- * {@link java.io.ObjectOutputStream}, which means no reference handler can be
- * used across object serialization. This is on purpose to make each object is
- * isolated. Serializer is highly optimized for primary types, it is not good at
- * complex object serialization(compares to {@link java.io.ObjectOutputStream}).
- * At the beginning of object serialization, Serializer writes out the
- * ClassLoader mapping contextName(see
- * {@link com.liferay.portal.kernel.util.ClassLoaderPool}), so on Deserializer
- * side, it can use the right ClassLoader to deserialize the Object, this is an
- * important feature that {@link java.io.ObjectOutputStream}/
- * {@link java.io.ObjectInputStream} don't provide. For ClassLoader aware Object
- * serialize/deserialize(when plugin is involved),
- * {@link com.liferay.portal.kernel.io.Serializer}/
- * {@link com.liferay.portal.kernel.io.Deserializer} is a much better choice.
- *
  * @author Shuyang Zhou
  * @see Deserializer
  */
@@ -146,7 +92,9 @@ public class Serializer {
 	}
 
 	public void writeObject(Serializable serializable) {
-		// test ordered by frequency, don't change
+
+		// The if block is ordered by frequency for better performance
+
 		if (serializable == null) {
 			writeByte(SerializationConstants.TC_NULL);
 
@@ -212,8 +160,7 @@ public class Serializer {
 
 		ClassLoader classLoader = serializable.getClass().getClassLoader();
 
-		String contextName = ClassLoaderPool.getContextNameByClassLoader(
-			classLoader);
+		String contextName = ClassLoaderPool.getContextName(classLoader);
 
 		writeString(contextName);
 
@@ -227,7 +174,7 @@ public class Serializer {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
-				"Failed to write ordinary Serializable object " + serializable,
+				"Unable to write ordinary serializable object " + serializable,
 				ioe);
 		}
 	}
@@ -296,12 +243,16 @@ public class Serializer {
 		buffer = null;
 	}
 
-	// Keep this final so that JIT can inline this method
+	/**
+	 * This method is final so that JIT can inline it.
+	 */
 	protected final byte[] getBuffer(int ensureExtraSpace) {
 		int minSize = index + ensureExtraSpace;
 
 		if (minSize < 0) {
-			// Can not create byte[] with length longer than Integer.MAX_VALUE
+
+			// Cannot create byte[] with length longer than Integer.MAX_VALUE
+
 			throw new OutOfMemoryError();
 		}
 
@@ -311,7 +262,9 @@ public class Serializer {
 			int newSize = oldSize << 1;
 
 			if (newSize < minSize) {
-				// Overflow and insufficient grow protection
+
+				// Overflow and insufficient growth protection
+
 				newSize = minSize;
 			}
 
@@ -321,16 +274,6 @@ public class Serializer {
 		return buffer;
 	}
 
-	/**
-	 * Coarse-grained pooled buffer memory soften. Technically, we should soften
-	 * each pooled buffer individually, to achieve best GC interactive. However
-	 * that will increase complexity of pooled buffer accessing and also add
-	 * burden to GC SoftReference processing, which will harm performance. Here
-	 * we soften the entire ThreadLocal BufferQueue, for threads that do
-	 * serializing oftenly, most likely its BufferQueue will stay valid, for
-	 * threads that do serializing occasionally, most likely its BufferQueue
-	 * will be released by GC.
-	 */
 	protected static final ThreadLocal<BufferQueue> bufferQueueThreadLocal =
 		new SoftReferenceThreadLocal<BufferQueue>() {
 
@@ -340,10 +283,38 @@ public class Serializer {
 		}
 
 	};
-	protected static final int MIN_THREADLOCAL_BUFFER_COUNT = 8;
-	protected static final int MIN_THREADLOCAL_BUFFER_SIZE = 16 * 1024;
+
 	protected static final int THREADLOCAL_BUFFER_COUNT_LIMIT;
+
+	protected static final int THREADLOCAL_BUFFER_COUNT_MIN = 8;
+
 	protected static final int THREADLOCAL_BUFFER_SIZE_LIMIT;
+
+	protected static final int THREADLOCAL_BUFFER_SIZE_MIN = 16 * 1024;
+
+	static {
+		int threadLocalBufferCountLimit = GetterUtil.getInteger(
+			System.getProperty(
+				Serializer.class.getName() +
+					".thread.local.buffer.count.limit"));
+
+		if (threadLocalBufferCountLimit < THREADLOCAL_BUFFER_COUNT_MIN) {
+			threadLocalBufferCountLimit = THREADLOCAL_BUFFER_COUNT_MIN;
+		}
+
+		THREADLOCAL_BUFFER_COUNT_LIMIT = threadLocalBufferCountLimit;
+
+		int threadLocalBufferSizeLimit = GetterUtil.getInteger(
+			System.getProperty(
+				Serializer.class.getName() +
+					".thread.local.buffer.size.limit"));
+
+		if (threadLocalBufferSizeLimit < THREADLOCAL_BUFFER_SIZE_MIN) {
+			threadLocalBufferSizeLimit = THREADLOCAL_BUFFER_SIZE_MIN;
+		}
+
+		THREADLOCAL_BUFFER_SIZE_LIMIT = threadLocalBufferSizeLimit;
+	}
 
 	protected byte[] buffer;
 	protected int index;
@@ -359,86 +330,83 @@ public class Serializer {
 
 	}
 
-	/**
-	 * A descending ordered byte[] queue by array length. The queue is small
-	 * enough to simply use a linear scan search for maintaining order.
-	 * The entire queue data is held by a SoftReference, so when necessary GC
-	 * can release the whole buffer cache.
-	 */
 	protected static class BufferQueue {
 
 		public void enqueue(byte[] buffer) {
 			BufferNode bufferNode = new BufferNode(buffer);
 
-			if (head == null) {
-				// Empty queue
-				head = bufferNode;
+			if (headBufferNode == null) {
+				headBufferNode = bufferNode;
+
 				count = 1;
 
 				return;
 			}
 
-			BufferNode previous = null;
-			BufferNode current = head;
+			BufferNode previousBufferNode = null;
+			BufferNode currentBufferNode = headBufferNode;
 
-			while ((current != null) &&
-				(current.buffer.length > bufferNode.buffer.length)) {
+			while ((currentBufferNode != null) &&
+				   (currentBufferNode.buffer.length >
+				   		bufferNode.buffer.length)) {
 
-				previous = current;
-				current = current.next;
+				previousBufferNode = currentBufferNode;
+
+				currentBufferNode = currentBufferNode.next;
 			}
 
-			if (previous == null) {
-				// Insert to head
-				bufferNode.next = head;
-				head = bufferNode;
+			if (previousBufferNode == null) {
+				bufferNode.next = headBufferNode;
+
+				headBufferNode = bufferNode;
 			}
 			else {
-				// Insert
-				bufferNode.next = current;
-				previous.next = bufferNode;
+				bufferNode.next = currentBufferNode;
+
+				previousBufferNode.next = bufferNode;
 			}
 
 			if (++count > THREADLOCAL_BUFFER_COUNT_LIMIT) {
-				// release the last smallest buffer
-				if (previous == null) {
-					previous = head;
+				if (previousBufferNode == null) {
+					previousBufferNode = headBufferNode;
 				}
 
-				current = previous.next;
+				currentBufferNode = previousBufferNode.next;
 
-				while (current.next != null) {
-					previous = current;
-					current = current.next;
+				while (currentBufferNode.next != null) {
+					previousBufferNode = currentBufferNode;
+					currentBufferNode = currentBufferNode.next;
 				}
 
 				// Dereference
-				previous.next = null;
+
+				previousBufferNode.next = null;
 
 				// Help GC
-				current.buffer = null;
-				current.next = null;
+
+				currentBufferNode.buffer = null;
+				currentBufferNode.next = null;
 			}
 		}
 
 		public byte[] dequeue() {
-			if (head == null) {
-				// Empty queue
-				return new byte[MIN_THREADLOCAL_BUFFER_SIZE];
+			if (headBufferNode == null) {
+				return new byte[THREADLOCAL_BUFFER_SIZE_MIN];
 			}
 
-			BufferNode bufferNode = head;
+			BufferNode bufferNode = headBufferNode;
 
-			head = head.next;
+			headBufferNode = headBufferNode.next;
 
 			// Help GC
+
 			bufferNode.next = null;
 
 			return bufferNode.buffer;
 		}
 
 		protected int count;
-		protected BufferNode head;
+		protected BufferNode headBufferNode;
 
 	}
 
@@ -463,30 +431,6 @@ public class Serializer {
 			getBuffer(1)[index++] = (byte)b;
 		}
 
-	}
-
-	static {
-		int threadLocalBufferCountLimit = GetterUtil.getInteger(
-			System.getProperty(
-				Serializer.class.getName() +
-			".threadlocal.buffer.count.limit"));
-
-		if (threadLocalBufferCountLimit < MIN_THREADLOCAL_BUFFER_COUNT) {
-			threadLocalBufferCountLimit = MIN_THREADLOCAL_BUFFER_COUNT;
-		}
-
-		THREADLOCAL_BUFFER_COUNT_LIMIT = threadLocalBufferCountLimit;
-
-		int threadLocalBufferSizeLimit = GetterUtil.getInteger(
-			System.getProperty(
-				Serializer.class.getName() +
-			".threadlocal.buffer.size.limit"));
-
-		if (threadLocalBufferSizeLimit < MIN_THREADLOCAL_BUFFER_SIZE) {
-			threadLocalBufferSizeLimit = MIN_THREADLOCAL_BUFFER_SIZE;
-		}
-
-		THREADLOCAL_BUFFER_SIZE_LIMIT = threadLocalBufferSizeLimit;
 	}
 
 }

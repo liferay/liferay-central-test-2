@@ -26,9 +26,6 @@ import java.io.Serializable;
 import java.nio.ByteBuffer;
 
 /**
- * The counterpart of {@link Serializer} for deserialization. See
- * {@link Serializer} for more detail.
- *
  * @author Shuyang Zhou
  * @see Serializer
  */
@@ -102,45 +99,53 @@ public class Deserializer {
 		return l;
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T extends Serializable> T readObject()
 		throws ClassNotFoundException {
 
 		byte tcByte = buffer[index++];
 
 		switch (tcByte) {
-			case SerializationConstants.TC_BOOLEAN :
+			case SerializationConstants.TC_BOOLEAN:
 				return (T)Boolean.valueOf(readBoolean());
-			case SerializationConstants.TC_BYTE :
+
+			case SerializationConstants.TC_BYTE:
 				return (T)Byte.valueOf(readByte());
-			case SerializationConstants.TC_CHARACTER :
+
+			case SerializationConstants.TC_CHARACTER:
 				return (T)Character.valueOf(readChar());
-			case SerializationConstants.TC_DOUBLE :
+
+			case SerializationConstants.TC_DOUBLE:
 				return (T)Double.valueOf(readDouble());
-			case SerializationConstants.TC_FLOAT :
+
+			case SerializationConstants.TC_FLOAT:
 				return (T)Float.valueOf(readFloat());
-			case SerializationConstants.TC_INTEGER :
+
+			case SerializationConstants.TC_INTEGER:
 				return (T)Integer.valueOf(readInt());
-			case SerializationConstants.TC_LONG :
+
+			case SerializationConstants.TC_LONG:
 				return (T)Long.valueOf(readLong());
-			case SerializationConstants.TC_NULL :
+
+			case SerializationConstants.TC_NULL:
 				return null;
-			case SerializationConstants.TC_SHORT :
+
+			case SerializationConstants.TC_SHORT:
 				return (T)Short.valueOf(readShort());
-			case SerializationConstants.TC_STRING :
+
+			case SerializationConstants.TC_STRING:
 				return (T)readString();
-			case SerializationConstants.TC_CONTEXT_NAME :
+
+			case SerializationConstants.TC_CONTEXT_NAME:
 				String contextName = readString();
 
-				ClassLoader classLoader =
-					ClassLoaderPool.getClassLoaderByContextName(contextName);
+				ClassLoader classLoader = ClassLoaderPool.getClassLoader(
+					contextName);
 
 				try {
 					ObjectInputStream objectInpputStream =
 						new ClassLoaderObjectInputStream(
 							new BufferInputStream(), classLoader);
 
-					@SuppressWarnings("unchecked")
 					T t = (T)objectInpputStream.readObject();
 
 					objectInpputStream.close();
@@ -201,7 +206,9 @@ public class Deserializer {
 		}
 	}
 
-	// Keep this final so that JIT can inline this method
+	/**
+	 * This method is final so that JIT can inline it.
+	 */
 	protected final void detectBufferUnderflow(int availableBytes) {
 		if ((index + availableBytes) > limit) {
 			throw new IllegalStateException("Buffer underflow");

@@ -86,8 +86,9 @@ public class PluginContextListener
 	}
 
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
-		ClassLoaderPool.unregisterByName(
-			servletContextEvent.getServletContext().getServletContextName());
+		ServletContext servletContext = servletContextEvent.getServletContext();
+
+		ClassLoaderPool.unregister(servletContext.getServletContextName());
 
 		portalDestroy();
 	}
@@ -99,13 +100,13 @@ public class PluginContextListener
 
 		pluginClassLoader = currentThread.getContextClassLoader();
 
+		ClassLoaderPool.register(
+			servletContext.getServletContextName(), pluginClassLoader);
+
 		servletContext.setAttribute(PLUGIN_CLASS_LOADER, pluginClassLoader);
 
 		ServletContextPool.put(
 			servletContext.getServletContextName(), servletContext);
-
-		ClassLoaderPool.register(
-			servletContext.getServletContextName(), pluginClassLoader);
 
 		registerPortalLifecycle();
 	}

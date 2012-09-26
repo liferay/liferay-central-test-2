@@ -14,20 +14,20 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Mapping Servlet context name to/from ServletContext ClassLoader.<br>
- * For unknown context name, map to PortalClassLoader.<br>
- * For unknown ClassLoader, map to ROOT contextName, StringPool.BLANK.
- *
  * @author Shuyang Zhou
  */
 public class ClassLoaderPool {
 
-	public static ClassLoader getClassLoaderByContextName(String contextName) {
-		ClassLoader classLoader = _contextNameToClassLoaderMap.get(contextName);
+	public static ClassLoader getClassLoader(String contextName) {
+		PortalRuntimePermission.checkGetBeanProperty(ClassLoaderPool.class);
+
+		ClassLoader classLoader = _classLoaders.get(contextName);
 
 		if (classLoader == null) {
 			classLoader = PortalClassLoaderUtil.getClassLoader();
@@ -36,12 +36,12 @@ public class ClassLoaderPool {
 		return classLoader;
 	}
 
-	public static String getContextNameByClassLoader(ClassLoader classLoader) {
+	public static String getContextName(ClassLoader classLoader) {
 		if (classLoader == null) {
 			return StringPool.BLANK;
 		}
 
-		String contextName = _classLoaderToContextNameMap.get(classLoader);
+		String contextName = _contextNames.get(classLoader);
 
 		if (contextName == null) {
 			contextName = StringPool.BLANK;
@@ -51,31 +51,35 @@ public class ClassLoaderPool {
 	}
 
 	public static void register(String contextName, ClassLoader classLoader) {
-		_contextNameToClassLoaderMap.put(contextName, classLoader);
-		_classLoaderToContextNameMap.put(classLoader, contextName);
+		PortalRuntimePermission.checkGetBeanProperty(ClassLoaderPool.class);
+
+		_classLoaders.put(contextName, classLoader);
+		_contextNames.put(classLoader, contextName);
 	}
 
-	public static void unregisterByClassLoader(ClassLoader classLoader) {
-		String contextName = _classLoaderToContextNameMap.remove(classLoader);
+	public static void unregister(ClassLoader classLoader) {
+		PortalRuntimePermission.checkGetBeanProperty(ClassLoaderPool.class);
+
+		String contextName = _contextNames.remove(classLoader);
 
 		if (contextName != null) {
-			_contextNameToClassLoaderMap.remove(contextName);
+			_classLoaders.remove(contextName);
 		}
 	}
 
-	public static void unregisterByName(String contextName) {
-		ClassLoader classLoader = _contextNameToClassLoaderMap.remove(
-			contextName);
+	public static void unregister(String contextName) {
+		PortalRuntimePermission.checkGetBeanProperty(ClassLoaderPool.class);
+
+		ClassLoader classLoader = _classLoaders.remove(contextName);
 
 		if (classLoader != null) {
-			_classLoaderToContextNameMap.remove(classLoader);
+			_contextNames.remove(classLoader);
 		}
 	}
 
-	private static Map<ClassLoader, String> _classLoaderToContextNameMap =
-		new ConcurrentHashMap<ClassLoader, String>();
-
-	private static Map<String, ClassLoader> _contextNameToClassLoaderMap =
+	private static Map<String, ClassLoader> _classLoaders =
 		new ConcurrentHashMap<String, ClassLoader>();
+	private static Map<ClassLoader, String> _contextNames =
+		new ConcurrentHashMap<ClassLoader, String>();
 
 }

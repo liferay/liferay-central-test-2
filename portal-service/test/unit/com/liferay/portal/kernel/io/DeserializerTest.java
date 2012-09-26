@@ -42,17 +42,16 @@ import org.testng.Assert;
  */
 public class DeserializerTest {
 
-	public static final int TEST_ELEMENT_COUNT = 1024;
-
 	@Before
-	public void setUp() throws InterruptedException {
-		_random = new Random();
-		PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
+	public void setUp() {
+		Class<?> clazz =  getClass();
+
+		PortalClassLoaderUtil.setClassLoader(clazz.getClassLoader());
 	}
 
 	@Test
 	public void testBufferInputStream() {
-		byte[] data = new byte[TEST_ELEMENT_COUNT];
+		byte[] data = new byte[_COUNT];
 
 		_random.nextBytes(data);
 
@@ -61,7 +60,7 @@ public class DeserializerTest {
 		Deserializer.BufferInputStream bufferInputStream =
 			deserializer.new BufferInputStream();
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(data[i], bufferInputStream.read());
 		}
 
@@ -69,8 +68,8 @@ public class DeserializerTest {
 
 		bufferInputStream = deserializer.new BufferInputStream();
 
-		int size1 = TEST_ELEMENT_COUNT * 2 / 3;
-		int size2 = TEST_ELEMENT_COUNT - size1;
+		int size1 = _COUNT * 2 / 3;
+		int size2 = _COUNT - size1;
 
 		byte[] newBytes = new byte[size1];
 
@@ -113,9 +112,9 @@ public class DeserializerTest {
 
 	@Test
 	public void testReadBoolean() {
-		byte[] bytes = new byte[TEST_ELEMENT_COUNT];
+		byte[] bytes = new byte[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			bytes[i] = _random.nextBoolean() ? (byte)1 : (byte)0;
 		}
 
@@ -123,7 +122,7 @@ public class DeserializerTest {
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			if (bytes[i] == 0) {
 				Assert.assertFalse(deserializer.readBoolean());
 			}
@@ -135,7 +134,7 @@ public class DeserializerTest {
 
 	@Test
 	public void testReadByte() {
-		byte[] bytes = new byte[TEST_ELEMENT_COUNT];
+		byte[] bytes = new byte[_COUNT];
 
 		_random.nextBytes(bytes);
 
@@ -143,107 +142,122 @@ public class DeserializerTest {
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(bytes[i], deserializer.readByte());
 		}
 	}
 
 	@Test
 	public void testReadChar() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 2);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 2);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		CharBuffer charBuffer = byteBuffer.asCharBuffer();
 
-		char[] chars = new char[TEST_ELEMENT_COUNT];
+		char[] chars = new char[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			chars[i] = (char)_random.nextInt();
+
 			charBuffer.put(chars[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(chars[i], deserializer.readChar());
 		}
 	}
 
 	@Test
 	public void testReadDouble() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 8);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 8);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		DoubleBuffer doubleBuffer = byteBuffer.asDoubleBuffer();
 
-		double[] doubles = new double[TEST_ELEMENT_COUNT];
+		double[] doubles = new double[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			doubles[i] = _random.nextDouble();
+
 			doubleBuffer.put(doubles[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(doubles[i], deserializer.readDouble());
 		}
 	}
 
 	@Test
 	public void testReadFloat() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 4);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 4);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		FloatBuffer floatBuffer = byteBuffer.asFloatBuffer();
 
-		float[] floats = new float[TEST_ELEMENT_COUNT];
+		float[] floats = new float[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			floats[i] = _random.nextFloat();
+
 			floatBuffer.put(floats[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(floats[i], deserializer.readFloat());
 		}
 	}
 
 	@Test
 	public void testReadInt() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 4);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 4);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		IntBuffer intBuffer = byteBuffer.asIntBuffer();
 
-		int[] ints = new int[TEST_ELEMENT_COUNT];
+		int[] ints = new int[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			ints[i] = _random.nextInt();
+
 			intBuffer.put(ints[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(ints[i], deserializer.readInt());
 		}
 	}
 
 	@Test
 	public void testReadLong() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 8);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 8);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		LongBuffer longBuffer = byteBuffer.asLongBuffer();
 
-		long[] longs = new long[TEST_ELEMENT_COUNT];
+		long[] longs = new long[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			longs[i] = _random.nextLong();
+
 			longBuffer.put(longs[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(longs[i], deserializer.readLong());
 		}
 	}
@@ -262,7 +276,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Boolean);
-
 		Assert.assertSame(Boolean.TRUE, object);
 	}
 
@@ -280,7 +293,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Byte);
-
 		Assert.assertSame(Byte.valueOf((byte)101), object);
 	}
 
@@ -298,7 +310,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Character);
-
 		Assert.assertSame(Character.valueOf('a'), object);
 	}
 
@@ -316,7 +327,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Double);
-
 		Assert.assertEquals(17.58D, object);
 	}
 
@@ -334,7 +344,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Float);
-
 		Assert.assertEquals(17.58F, object);
 	}
 
@@ -352,7 +361,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Integer);
-
 		Assert.assertSame(Integer.valueOf(101), object);
 	}
 
@@ -370,7 +378,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Long);
-
 		Assert.assertSame(Long.valueOf(101), object);
 	}
 
@@ -397,7 +404,6 @@ public class DeserializerTest {
 		unsyncByteArrayOutputStream.write(
 			SerializationConstants.TC_CONTEXT_NAME);
 
-		// 0 length String
 		unsyncByteArrayOutputStream.write(1);
 		unsyncByteArrayOutputStream.write(new byte[4]);
 
@@ -416,7 +422,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Date);
-
 		Assert.assertEquals(date, object);
 	}
 
@@ -428,7 +433,6 @@ public class DeserializerTest {
 		unsyncByteArrayOutputStream.write(
 			SerializationConstants.TC_CONTEXT_NAME);
 
-		// 0 length String
 		unsyncByteArrayOutputStream.write(1);
 		unsyncByteArrayOutputStream.write(new byte[4]);
 
@@ -443,6 +447,7 @@ public class DeserializerTest {
 			unsyncByteArrayOutputStream.unsafeGetByteBuffer();
 
 		// Corrupt magic header
+
 		byteBuffer.put(6, (byte)0xFF);
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
@@ -472,7 +477,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof Short);
-
 		Assert.assertSame(Short.valueOf((short)101), object);
 	}
 
@@ -498,7 +502,6 @@ public class DeserializerTest {
 		Object object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof String);
-
 		Assert.assertEquals(asciiString, object);
 
 		String nonAsciiString = "非ASCII Code中文测试";
@@ -521,7 +524,6 @@ public class DeserializerTest {
 		object = deserializer.readObject();
 
 		Assert.assertTrue(object instanceof String);
-
 		Assert.assertEquals(nonAsciiString, object);
 	}
 
@@ -543,20 +545,23 @@ public class DeserializerTest {
 
 	@Test
 	public void testReadShort() {
-		ByteBuffer byteBuffer = ByteBuffer.allocate(TEST_ELEMENT_COUNT * 2);
+		ByteBuffer byteBuffer = ByteBuffer.allocate(_COUNT * 2);
+
 		byteBuffer.order(ByteOrder.BIG_ENDIAN);
+
 		ShortBuffer shortBuffer = byteBuffer.asShortBuffer();
 
-		short[] shorts = new short[TEST_ELEMENT_COUNT];
+		short[] shorts = new short[_COUNT];
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			shorts[i] = (short)_random.nextInt();
+
 			shortBuffer.put(shorts[i]);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
 
-		for (int i = 0; i < TEST_ELEMENT_COUNT; i++) {
+		for (int i = 0; i < _COUNT; i++) {
 			Assert.assertEquals(shorts[i], deserializer.readShort());
 		}
 	}
@@ -568,6 +573,7 @@ public class DeserializerTest {
 		byte[] buffer = new byte[asciiString.length() + 5];
 
 		buffer[0] = 1;
+
 		BigEndianCodec.putInt(buffer, 1, asciiString.length());
 
 		for (int i = 0; i < asciiString.length(); i++) {
@@ -587,6 +593,7 @@ public class DeserializerTest {
 		buffer = new byte[nonAsciiString.length() * 2 + 5];
 
 		buffer[0] = 0;
+
 		BigEndianCodec.putInt(buffer, 1, nonAsciiString.length());
 
 		for (int i = 0; i < nonAsciiString.length(); i++) {
@@ -602,6 +609,8 @@ public class DeserializerTest {
 		Assert.assertEquals(nonAsciiString, resultString);
 	}
 
-	private Random _random;
+	private static final int _COUNT = 1024;
+
+	private Random _random = new Random();
 
 }
