@@ -1,6 +1,6 @@
 <#--
 
-You can use Freemarker to define display templates for the Asset Publisher
+You can use FreeMarker to define display templates for the Asset Publisher
 portlet.
 
 A set of variables have been made available for the template developers:

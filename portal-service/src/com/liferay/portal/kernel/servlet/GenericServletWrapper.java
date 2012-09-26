@@ -12,18 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portal.kernel.servlet;
+
+import java.io.IOException;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import java.io.IOException;
 
 /**
-* <a href="GenericServletWrapper.java.html"><b><i>View Source</i></b></a>
-*
 * @author Eduardo García
 * @author Jorge Ferrer
 */
@@ -35,13 +34,12 @@ public class GenericServletWrapper extends GenericServlet {
 
 	@Override
 	public void service(
-			ServletRequest servletRequest,
-			ServletResponse servletResponse)
+			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
 		_servlet.service(servletRequest, servletResponse);
 	}
 
-	private final Servlet _servlet;
+	private Servlet _servlet;
 
 }

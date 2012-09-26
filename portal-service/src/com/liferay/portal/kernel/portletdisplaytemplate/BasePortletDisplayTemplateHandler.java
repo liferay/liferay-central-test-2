@@ -33,16 +33,16 @@ public abstract class BasePortletDisplayTemplateHandler
 	implements PortletDisplayTemplateHandler {
 
 	public List<Element> getDefaultTemplateElements() throws Exception {
-		String defaultTemplatesConfigPath = getTemplatesConfigFile();
+		String templatesConfigPath = getTemplatesConfigPath();
 
-		if (Validator.isNull(defaultTemplatesConfigPath)) {
+		if (Validator.isNull(templatesConfigPath)) {
 			return Collections.emptyList();
 		}
 
 		Class<?> clazz = getClass();
 
 		String xml = StringUtil.read(
-			clazz.getClassLoader(), defaultTemplatesConfigPath, false);
+			clazz.getClassLoader(), templatesConfigPath, false);
 
 		Document document = SAXReaderUtil.read(xml);
 
@@ -51,16 +51,16 @@ public abstract class BasePortletDisplayTemplateHandler
 		return rootElement.elements("template");
 	}
 
-	protected String getTemplatesConfigFile() {
+	public String getTemplatesHelpPath(String language) {
+		return PropsUtil.get(getTemplatesHelpKey(), new Filter(language));
+	}
+
+	protected String getTemplatesConfigPath() {
 		return null;
 	}
 
 	protected String getTemplatesHelpKey() {
 		return PropsKeys.PORTLET_DISPLAY_TEMPLATES_HELP;
-	}
-
-	public String getTemplatesHelpPath(String language) {
-		return PropsUtil.get(getTemplatesHelpKey(), new Filter(language));
 	}
 
 }

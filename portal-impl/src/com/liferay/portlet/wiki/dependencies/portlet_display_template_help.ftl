@@ -1,6 +1,6 @@
 <#--
 
-You can use Freemarker to define display templates for the Wiki portlet.
+You can use FreeMarker to define display templates for the Wiki portlet.
 
 A set of variables have been made available for the template developers:
 

@@ -1,6 +1,6 @@
 <#--
 
-You can use Freemarker to define display templates for the Asset Tags Navigation
+You can use FreeMarker to define display templates for the Asset Tags Navigation
 portlet.
 
 A set of variables have been made available for the template developers:

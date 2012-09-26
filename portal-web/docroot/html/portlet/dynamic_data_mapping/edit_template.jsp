@@ -38,9 +38,9 @@ if ((structure == null) && (template != null)) {
 	structure = DDMTemplateHelperUtil.fetchStructure(template);
 }
 
-String language = BeanParamUtil.getString(template, request, "language", DDMTemplateConstants.LANG_TYPE_VM);
-String mode = BeanParamUtil.getString(template, request, "mode", "create");
 String type = BeanParamUtil.getString(template, request, "type", "detail");
+String mode = BeanParamUtil.getString(template, request, "mode", "create");
+String language = BeanParamUtil.getString(template, request, "language", DDMTemplateConstants.LANG_TYPE_VM);
 String script = BeanParamUtil.getString(template, request, "script");
 
 if (Validator.isNull(script)) {
@@ -48,8 +48,7 @@ if (Validator.isNull(script)) {
 		PortletDisplayTemplateHandler portletDisplayTemplateHandler = PortletDisplayTemplateHandlerRegistryUtil.getPortletDisplayTemplateHandler(classNameId);
 
 		if (portletDisplayTemplateHandler != null) {
-			script = ContentUtil.get(portletDisplayTemplateHandler.getTemplatesHelpPath(
-					language));
+			script = ContentUtil.get(portletDisplayTemplateHandler.getTemplatesHelpPath(language));
 		}
 	}
 	else if (!type.equals("detail")) {

@@ -1,6 +1,6 @@
 <#--
 
-You can use Freemarker to define display templates for the Blogs portlet.
+You can use FreeMarker to define display templates for the Blogs portlet.
 
 A set of variables have been made available for the template developers:
 

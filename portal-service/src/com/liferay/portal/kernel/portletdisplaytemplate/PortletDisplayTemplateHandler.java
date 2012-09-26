@@ -63,10 +63,10 @@ public interface PortletDisplayTemplateHandler {
 	/**
 	 * Returns the path to the help template of the portlet display.
 	 *
-	 * @param  language the language of the template.
+	 * @param  language the language of the template
 	 * @return the path to the help template of the portlet display. This
 	 *         template will be shown as a help message when the user creates a
-	 *         new portlet display template
+	 *         new portlet display template.
 	 */
 	public String getTemplatesHelpPath(String language);
 

@@ -7,13 +7,16 @@
 		<#list entries as entry>
 		    <@aui.column columnWith="25">
 				<#assign layoutURL = portalUtil.getLayoutURL(entry, themeDisplay)>
+
 				<div class="results-header">
 					<h3>
 						<a href="${layoutURL}">${entry.getName(locale)}</a>
 					</h3>
 				</div>
+
 				<#assign pages = entry.getChildren()>
-				<@page_tree pages = pages/>
+
+				<@page_tree pages = pages />
 		    </@aui.column>
 		</#list>
 	</@aui.layout>
@@ -24,10 +27,13 @@
 		<ul class="child-pages">
 			<#list pages as page>
 				<#assign pageLayoutURL = portalUtil.getLayoutURL(page, themeDisplay)>
+
 				<li>
 					<a href="${pageLayoutURL}">${page.getName(locale)}</a>
+
 					<#assign childPages = page.getChildren()>
-					<@page_tree pages=childPages/>
+
+					<@page_tree pages = childPages />
 				</li>
 			</#list>
 		</ul>

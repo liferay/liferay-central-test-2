@@ -16,6 +16,7 @@ package com.liferay.portlet.portletdisplaytemplate.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.GenericServletWrapper;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.templateparser.Transformer;
@@ -25,7 +26,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.servlet.GenericServletWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.dynamicdatalists.util.DDLTransformer;
@@ -239,17 +239,17 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			Map<String, Object> contextObjects, PageContext pageContext)
 		throws Exception {
 
-		// Freemarker Servlet Application
+		// FreeMarker servlet application
 
-		final Servlet pageServlet = (Servlet)pageContext.getPage();
+		final Servlet servlet = (Servlet)pageContext.getPage();
 
 		GenericServlet genericServlet = null;
 
-		if (pageServlet instanceof GenericServlet) {
-			genericServlet = (GenericServlet)pageServlet;
+		if (servlet instanceof GenericServlet) {
+			genericServlet = (GenericServlet)servlet;
 		}
 		else {
-			genericServlet = new GenericServletWrapper(pageServlet);
+			genericServlet = new GenericServletWrapper(servlet);
 
 			genericServlet.init(pageContext.getServletConfig());
 		}
@@ -262,7 +262,7 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			PortletDisplayTemplateConstants.FREEMARKER_SERVLET_APPLICATION,
 			servletContextHashModel);
 
-		// Freemarker Servlet Request
+		// FreeMarker servlet request
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -276,7 +276,7 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			PortletDisplayTemplateConstants.FREEMARKER_SERVLET_REQUEST,
 			requestHashModel);
 
-		// Taglib Liferay Hash
+		// Taglib Liferay hash
 
 		TemplateHashModel taglibLiferayHash =
 			FreeMarkerTaglibFactoryUtil.createTaglibFactory(
