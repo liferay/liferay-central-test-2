@@ -334,10 +334,6 @@ public class PortletImporter {
 
 		// Available locales
 
-		Locale[] sourceAvailableLocales = LocaleUtil.fromLanguageIds(
-			StringUtil.split(
-				headerElement.attributeValue("available-locales")));
-
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			portletDataContext.getCompanyId(), portletId);
 
@@ -346,6 +342,10 @@ public class PortletImporter {
 
 		if ((portletDataHandler != null) &&
 			portletDataHandler.isDataLocalized()) {
+
+			Locale[] sourceAvailableLocales = LocaleUtil.fromLanguageIds(
+				StringUtil.split(
+					headerElement.attributeValue("available-locales")));
 
 			Locale[] targetAvailableLocales =
 				LanguageUtil.getAvailableLocales();
