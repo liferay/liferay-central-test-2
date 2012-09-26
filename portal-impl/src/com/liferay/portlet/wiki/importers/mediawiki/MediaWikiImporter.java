@@ -81,14 +81,6 @@ public class MediaWikiImporter implements WikiImporter {
 
 	public static final String SHARED_IMAGES_TITLE = "SharedImages";
 
-	public MediaWikiImporter() {
-		_specialMediaWikiDirs = SetUtil.fromArray(
-				new String[] {
-					"thumb", "temp", "archive"
-				}
-			);
-	}
-
 	public void importPages(
 			long userId, WikiNode node, InputStream[] inputStreams,
 			Map<String, String[]> options)
@@ -713,7 +705,8 @@ public class MediaWikiImporter implements WikiImporter {
 		"\\{{2}OtherTopics\\|([^\\}]*)\\}{2}");
 	private static Pattern _redirectPattern = Pattern.compile(
 		"#REDIRECT \\[\\[([^\\]]*)\\]\\]");
-	private static Set<String> _specialMediaWikiDirs;
+	private static Set<String> _specialMediaWikiDirs = SetUtil.fromArray(
+		new String[] {"archive", "temp", "thumb"});
 
 	private MediaWikiToCreoleTranslator _translator =
 		new MediaWikiToCreoleTranslator();

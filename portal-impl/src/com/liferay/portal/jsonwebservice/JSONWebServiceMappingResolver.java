@@ -30,14 +30,6 @@ import java.util.Set;
  */
 public class JSONWebServiceMappingResolver {
 
-	public JSONWebServiceMappingResolver() {
-		_prefixes = SetUtil.fromArray(
-				new String[] {
-					"get", "has", "is"
-				}
-			);
-	}
-
 	public String resolveHttpMethod(Method method) {
 		JSONWebService jsonWebServiceAnnotation = method.getAnnotation(
 			JSONWebService.class);
@@ -130,6 +122,7 @@ public class JSONWebServiceMappingResolver {
 		return HttpMethods.POST;
 	}
 
-	private static Set<String> _prefixes;
+	private static Set<String> _prefixes = SetUtil.fromArray(
+		new String[] {"get", "has", "is"});
 
 }
