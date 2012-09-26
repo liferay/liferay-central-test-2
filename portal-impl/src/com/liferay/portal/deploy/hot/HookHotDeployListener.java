@@ -2526,6 +2526,16 @@ public class HookHotDeployListener
 			release.getReleaseId(), buildNumber, null, true);
 	}
 
+	private static final String[] _PROPS_KEYS_EVENTS = {
+		LOGIN_EVENTS_POST, LOGIN_EVENTS_PRE, LOGOUT_EVENTS_POST,
+		LOGOUT_EVENTS_PRE, SERVLET_SERVICE_EVENTS_POST,
+		SERVLET_SERVICE_EVENTS_PRE
+	};
+
+	private static final String[] _PROPS_KEYS_SESSION_EVENTS = {
+		SERVLET_SESSION_CREATE_EVENTS, SERVLET_SESSION_DESTROY_EVENTS
+	};
+
 	private static final String[] _PROPS_VALUES_BOOLEAN = {
 		"auth.forward.by.last.path", "captcha.check.portal.create_account",
 		"dl.file.entry.drafts.enabled",
@@ -2650,8 +2660,10 @@ public class HookHotDeployListener
 			new HashMap<String, StringArraysContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
-	private Set<String> _propsKeysEvents;
-	private Set<String> _propsKeysSessionEvents;
+	private Set<String> _propsKeysEvents = SetUtil.fromArray(
+		_PROPS_KEYS_EVENTS);
+	private Set<String> _propsKeysSessionEvents = SetUtil.fromArray(
+		_PROPS_KEYS_SESSION_EVENTS);
 	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
