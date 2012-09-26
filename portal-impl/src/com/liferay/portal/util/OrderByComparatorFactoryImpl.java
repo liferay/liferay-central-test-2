@@ -184,9 +184,6 @@ public class OrderByComparatorFactoryImpl implements OrderByComparatorFactory {
 		private static Map<Class<?>, Object> _primitiveObjects =
 			new HashMap<Class<?>, Object>();
 
-		private Object[] _columns;
-		private String _tableName;
-
 		static {
 			_primitiveObjects.put(boolean.class, new Boolean(true));
 			_primitiveObjects.put(byte.class, new Byte("0"));
@@ -197,6 +194,9 @@ public class OrderByComparatorFactoryImpl implements OrderByComparatorFactory {
 			_primitiveObjects.put(long.class, new Long(0));
 			_primitiveObjects.put(short.class, new Short("0"));
 		}
+
+		private Object[] _columns;
+		private String _tableName;
 
 	}
 
