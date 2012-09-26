@@ -95,7 +95,7 @@ public class DLAppHelperLocalServiceImpl
 			}
 		}
 
-		boolean previousEnable = WorkflowThreadLocal.isEnabled();
+		boolean previousEnabled = WorkflowThreadLocal.isEnabled();
 
 		if (!DLAppHelperThreadLocal.isEnabled()) {
 			WorkflowThreadLocal.setEnabled(false);
@@ -115,12 +115,12 @@ public class DLAppHelperLocalServiceImpl
 					dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(),
 					userId, DLFileEntryConstants.getClassName(),
 					dlFileVersion.getFileVersionId(), dlFileVersion,
-					serviceContext,	workflowContext);
+					serviceContext, workflowContext);
 			}
 		}
 		finally {
 			if (!DLAppHelperThreadLocal.isEnabled()) {
-				WorkflowThreadLocal.setEnabled(previousEnable);
+				WorkflowThreadLocal.setEnabled(previousEnabled);
 			}
 		}
 
