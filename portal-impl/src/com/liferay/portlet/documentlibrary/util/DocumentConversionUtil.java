@@ -42,6 +42,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -245,7 +246,7 @@ public class DocumentConversionUtil {
 		Set<String> conversions = _conversionsMap.get(extension);
 
 		if (conversions == null) {
-			conversions = _DEFAULT_CONVERSIONS;
+			conversions = Collections.emptySet();
 		}
 		else if (conversions.contains(extension)) {
 			conversions.remove(extension);
@@ -368,9 +369,6 @@ public class DocumentConversionUtil {
 
 	private static final String[] _COMPARABLE_FILE_EXTENSIONS =
 		PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
-
-	private static final Set<String> _DEFAULT_CONVERSIONS =
-		new HashSet<String>();
 
 	private static final String _LOCALHOST = "localhost";
 
