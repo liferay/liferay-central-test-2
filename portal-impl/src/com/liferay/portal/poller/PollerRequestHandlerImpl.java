@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.poller.PollerHeader;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -180,11 +179,8 @@ public class PollerRequestHandlerImpl
 
 		Map<String, Boolean> portletIdsMap = pollerHeader.getPortletIdsMap();
 
-		String[] portletIds = ArrayUtil.toStringArray(
-			portletIdsMap.keySet().toArray());
-
 		List<PollerRequest> pollerRequests = new ArrayList<PollerRequest>(
-			portletIds.length);
+			portletIdsMap.size());
 
 		Set<String> receiveRequestPortletIds = null;
 
@@ -217,6 +213,8 @@ public class PollerRequestHandlerImpl
 		}
 
 		if (receiveRequest) {
+			Set<String> portletIds = portletIdsMap.keySet();
+
 			for (String portletId : portletIds) {
 				if (receiveRequestPortletIds.contains(portletId)) {
 					continue;

@@ -14,12 +14,12 @@
 
 package com.liferay.portal.kernel.poller;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -84,10 +84,10 @@ public class PollerRequest {
 		return _portletId;
 	}
 
-	public String[] getPortletIds() {
+	public Set<String> getPortletIds() {
 		Map<String, Boolean> portletIdsMap = _pollerHeader.getPortletIdsMap();
 
-		return ArrayUtil.toStringArray(portletIdsMap.keySet().toArray());
+		return portletIdsMap.keySet();
 	}
 
 	public HttpServletRequest getRequest() {
