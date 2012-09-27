@@ -24,7 +24,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -54,7 +53,8 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 			}
 		}
 
-		xmlBeanDefinitionReader.setResourceLoader(new DefaultResourceLoader());
+		xmlBeanDefinitionReader.setResourceLoader(
+			new PathMatchingResourcePatternResolver());
 
 		if (PropsValues.SPRING_CONFIGS == null) {
 			return;
@@ -69,9 +69,6 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 		else {
 			configLocations.remove("META-INF/jpa-spring.xml");
 		}
-
-		xmlBeanDefinitionReader.setResourceLoader(
-			new PathMatchingResourcePatternResolver());
 
 		for (String configLocation : configLocations) {
 			try {

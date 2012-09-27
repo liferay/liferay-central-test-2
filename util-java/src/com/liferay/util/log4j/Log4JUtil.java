@@ -58,18 +58,20 @@ public class Log4JUtil {
 		configureLog4J(classLoader.getResource("META-INF/portal-log4j.xml"));
 
 		try {
-			Enumeration<URL> extConfigurations = classLoader.getResources(
+			Enumeration<URL> enu = classLoader.getResources(
 				"META-INF/portal-log4j-ext.xml");
 
-			while (extConfigurations.hasMoreElements()) {
-				configureLog4J(extConfigurations.nextElement());
+			while (enu.hasMoreElements()) {
+				configureLog4J(enu.nextElement());
 			}
-		} catch (IOException e) {
-			java.util.logging.Logger.getLogger(Log4JUtil.class.getName()).log(
-				java.util.logging.Level.WARNING,
-				"Cannot load portal-log4j-ext.xml", e
-			);
+		}
+		catch (IOException ioe) {
+			java.util.logging.Logger logger =
+				java.util.logging.Logger.getLogger(Log4JUtil.class.getName());
 
+			logger.log(
+				java.util.logging.Level.WARNING,
+				"Unable to load portal-log4j-ext.xml", ioe);
 		}
 	}
 

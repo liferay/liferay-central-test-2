@@ -193,38 +193,35 @@ public class LanguageResources {
 
 			ClassLoader classLoader = LanguageResources.class.getClassLoader();
 
-			Enumeration<URL> urls = classLoader.getResources(name);
-			if (_log.isDebugEnabled() && !urls.hasMoreElements()) {
-				_log.debug("No " + name + " has been found");
+			Enumeration<URL> enu = classLoader.getResources(name);
+
+			if (_log.isDebugEnabled() && !enu.hasMoreElements()) {
+				_log.debug("No resources found for " + name);
 			}
 
-			while (urls.hasMoreElements()) {
-				URL url = urls.nextElement();
+			while (enu.hasMoreElements()) {
+				URL url = enu.nextElement();
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Attempting to load " + name);
+					_log.debug("Loading " + name + " from " + url);
 				}
 
-				if (url != null) {
-					InputStream inputStream = url.openStream();
+				InputStream inputStream = url.openStream();
 
-					try {
-						Properties urlProps = PropertiesUtil.load(
-							inputStream, StringPool.UTF8);
+				try {
+					Properties inputStreamProperties = PropertiesUtil.load(
+						inputStream, StringPool.UTF8);
 
-						for (String key : urlProps.stringPropertyNames()) {
-							properties.setProperty(
-								key, urlProps.getProperty(key));
-						}
-					} finally {
-						inputStream.close();
-					}
+					properties.putAll(inputStreamProperties);
 
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Loading " + url + " with " + properties.size() +
-								" values");
+							"Loading " + url + " with " +
+								inputStreamProperties.size() + " values");
 					}
+				}
+				finally {
+					inputStream.close();
 				}
 			}
 		}

@@ -43,7 +43,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.dialect.Dialect;
 
-import org.springframework.core.io.UrlResource;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
@@ -172,71 +171,58 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		}
 	}
 
+	protected void readResource(
+			Configuration configuration, InputStream inputStream)
+		throws Exception {
+
+		if (inputStream == null) {
+			return;
+		}
+
+		if (_hibernateConfigurationConverter != null) {
+			String configurationString = StringUtil.read(inputStream);
+
+			inputStream.close();
+
+			configurationString = _hibernateConfigurationConverter.convert(
+				configurationString);
+
+			inputStream = new UnsyncByteArrayInputStream(
+				configurationString.getBytes());
+		}
+
+		configuration = configuration.addInputStream(inputStream);
+
+		inputStream.close();
+	}
+
 	protected void readResource(Configuration configuration, String resource)
 		throws Exception {
 
 		ClassLoader classLoader = getConfigurationClassLoader();
 
-		if (!resource.startsWith("classpath*:")) {
-			InputStream is = classLoader.getResourceAsStream(resource);
-			readResource(configuration, resource, is);
-		} else {
-			String resourceName = resource.substring("classpath*:".length());
-			try {
-				Enumeration<URL> resources = classLoader.getResources(
-					resourceName);
+		if (resource.startsWith("classpath*:")) {
+			String name = resource.substring("classpath*:".length());
 
-				if (_log.isDebugEnabled() && !resources.hasMoreElements()) {
-					_log.debug("No " + resourceName + " has been found");
-				}
+			Enumeration<URL> enu = classLoader.getResources(name);
 
-				while (resources.hasMoreElements()) {
-					URL resourceFullName = resources.nextElement();
-					try {
-						InputStream is = new UrlResource(resourceFullName)
-							.getInputStream();
-
-						readResource(configuration, resource, is);
-					}
-					catch (Exception e2) {
-						if (_log.isWarnEnabled()) {
-							_log.warn("Problem while loading " + resource, e2);
-						}
-					}
-				}
+			if (_log.isDebugEnabled() && !enu.hasMoreElements()) {
+				_log.debug("No resources found for " + name);
 			}
-			catch (Exception e2) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Problem while loading classLoader resources: " +
-						resourceName, e2);
-				}
+
+			while (enu.hasMoreElements()) {
+				URL url = enu.nextElement();
+
+				InputStream inputStream = url.openStream();
+
+				readResource(configuration, inputStream);
 			}
 		}
+		else {
+			InputStream inputStream = classLoader.getResourceAsStream(resource);
 
-	}
-
-	protected void readResource(
-		Configuration configuration, String resource, InputStream is)
-		throws Exception {
-
-		if (is == null) {
-			return;
+			readResource(configuration, inputStream);
 		}
-
-		if (_hibernateConfigurationConverter != null) {
-			String configurationString = StringUtil.read(is);
-
-			is.close();
-
-			configurationString = _hibernateConfigurationConverter.convert(
-				configurationString);
-
-			is = new UnsyncByteArrayInputStream(configurationString.getBytes());
-		}
-
-		configuration = configuration.addInputStream(is);
-
-		is.close();
 	}
 
 	protected void setDB(Dialect dialect) {

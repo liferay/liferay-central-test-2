@@ -45,8 +45,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.springframework.core.io.UrlResource;
-
 /**
  * @author Brian Wing Shun Chan
  * @author Tomas Polesovsky
@@ -65,34 +63,30 @@ public class ModelHintsImpl implements ModelHints {
 			String[] configs = StringUtil.split(
 				PropsUtil.get(PropsKeys.MODEL_HINTS_CONFIGS));
 
-			for (int i = 0; i < configs.length; i++) {
-				if (!configs[i].startsWith("classpath*:")) {
-					read(classLoader, configs[i]);
-				} else {
-					String configName = configs[i].substring(
-						"classpath*:".length());
+			for (String config : configs) {
+				if (config.startsWith("classpath*:")) {
+					String name = config.substring("classpath*:".length());
 
-					Enumeration<URL> resources = classLoader.getResources(
-						configName);
+					Enumeration<URL> enu = classLoader.getResources(name);
 
-					if (_log.isDebugEnabled() && !resources.hasMoreElements()) {
-						_log.debug("No " + configName + " has been found");
+					if (_log.isDebugEnabled() && !enu.hasMoreElements()) {
+						_log.debug("No resources found for " + name);
 					}
 
-					while (resources.hasMoreElements()) {
-						URL resource = resources.nextElement();
+					while (enu.hasMoreElements()) {
+						URL url = enu.nextElement();
+
 						if (_log.isDebugEnabled()) {
-							_log.debug("Loading " + configName + " from: " +
-								resource);
+							_log.debug("Loading " + name + " from " + url);
 						}
 
-						InputStream is = new UrlResource(resource)
-							.getInputStream();
+						InputStream inputStream = url.openStream();
 
-						if (is != null) {
-							read(classLoader, resource.toString(), is);
-						}
+						read(classLoader, url.toString(), inputStream);
 					}
+				}
+				else {
+					read(classLoader, config);
 				}
 			}
 		}
@@ -241,10 +235,11 @@ public class ModelHintsImpl implements ModelHints {
 		read(classLoader, source, classLoader.getResourceAsStream(source));
 	}
 
-	public void read(ClassLoader classLoader, String source, InputStream is)
+	public void read(
+			ClassLoader classLoader, String source, InputStream inputStream)
 		throws Exception {
 
-		if (is == null) {
+		if (inputStream == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Cannot load " + source);
 			}
@@ -257,7 +252,7 @@ public class ModelHintsImpl implements ModelHints {
 			}
 		}
 
-		Document document = _saxReader.read(is);
+		Document document = _saxReader.read(inputStream);
 
 		Element rootElement = document.getRootElement();
 

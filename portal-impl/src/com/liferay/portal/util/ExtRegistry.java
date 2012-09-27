@@ -14,18 +14,12 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
-import java.io.File;
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,46 +33,36 @@ import javax.servlet.ServletContext;
  */
 public class ExtRegistry {
 
-	public static final List<String> IGNORED_FILES =
-		Arrays.asList(new String[] {
-			"log4j.dtd", "service.xml", "sql"+File.separator
-		});
-	public static final List<String> SUPPORTED_MERGING_FILES =
-		Arrays.asList(new String[] {
-			"ext-model-hints.xml", "ext-spring.xml", "ext-hbm.xml",
-			"portal-log4j-ext.xml", "content/Language-ext"
-		});
-
 	public static Map<String, Set<String>> getConflicts(
 			ServletContext servletContext)
 		throws Exception {
 
 		String servletContextName = servletContext.getServletContextName();
 
-		Set<String> files = _readExtFiles(
+		Set<String> fileNames = _readExtFileNames(
 			servletContext, "/WEB-INF/ext-" + servletContextName + ".xml");
 
 		Map<String, Set<String>> conflicts = new HashMap<String, Set<String>>();
 
 		for (Map.Entry<String, Set<String>> entry : _extMap.entrySet()) {
 			String curServletContextName = entry.getKey();
-			Set<String> curFiles = entry.getValue();
+			Set<String> curFileNames = entry.getValue();
 
-			for (String file : files) {
-				if (!curFiles.contains(file)) {
+			for (String fileName : fileNames) {
+				if (!curFileNames.contains(fileName)) {
 					continue;
 				}
 
-				Set<String> conflictFiles = conflicts.get(
+				Set<String> conflictFileNames = conflicts.get(
 					curServletContextName);
 
-				if (conflictFiles == null) {
-					conflictFiles = new TreeSet<String>();
+				if (conflictFileNames == null) {
+					conflictFileNames = new TreeSet<String>();
 
-					conflicts.put(curServletContextName, conflictFiles);
+					conflicts.put(curServletContextName, conflictFileNames);
 				}
 
-				conflictFiles.add(file);
+				conflictFileNames.add(fileName);
 			}
 		}
 
@@ -89,13 +73,13 @@ public class ExtRegistry {
 		return Collections.unmodifiableSet(_extMap.keySet());
 	}
 
-	public static boolean isIgnoredFile(String name) {
-		if (isMergedFile(name)) {
+	public static boolean isIgnoredFileName(String fileName) {
+		if (isMergedFileName(fileName)) {
 			return true;
 		}
 
-		for (String ignoredFile : IGNORED_FILES) {
-			if (name.contains(ignoredFile)) {
+		for (String ignoredFileName : _IGNORED_FILE_NAMES) {
+			if (fileName.contains(ignoredFileName)) {
 				return true;
 			}
 		}
@@ -103,9 +87,9 @@ public class ExtRegistry {
 		return false;
 	}
 
-	public static boolean isMergedFile(String name) {
-		for (String mergedFile : SUPPORTED_MERGING_FILES) {
-			if (name.contains(mergedFile)) {
+	public static boolean isMergedFileName(String fileName) {
+		for (String mergedFileName : _SUPPORTED_MERGING_FILE_NAMES) {
+			if (fileName.contains(mergedFileName)) {
 				return true;
 			}
 		}
@@ -127,10 +111,10 @@ public class ExtRegistry {
 
 		String servletContextName = servletContext.getServletContextName();
 
-		Set<String> files = _readExtFiles(
+		Set<String> fileNames = _readExtFileNames(
 			servletContext, "/WEB-INF/ext-" + servletContextName + ".xml");
 
-		_extMap.put(servletContextName, files);
+		_extMap.put(servletContextName, fileNames);
 	}
 
 	public static void registerPortal(ServletContext servletContext)
@@ -149,18 +133,19 @@ public class ExtRegistry {
 				String servletContextName = resourcePath.substring(
 					13, resourcePath.length() - 4);
 
-				Set<String> files = _readExtFiles(servletContext, resourcePath);
+				Set<String> fileNames = _readExtFileNames(
+					servletContext, resourcePath);
 
-				_extMap.put(servletContextName, files);
+				_extMap.put(servletContextName, fileNames);
 			}
 		}
 	}
 
-	private static Set<String> _readExtFiles(
+	private static Set<String> _readExtFileNames(
 			ServletContext servletContext, String resourcePath)
 		throws Exception {
 
-		Set<String> files = new TreeSet<String>();
+		Set<String> fileNames = new TreeSet<String>();
 
 		Document document = SAXReaderUtil.read(
 			servletContext.getResourceAsStream(resourcePath));
@@ -173,13 +158,23 @@ public class ExtRegistry {
 
 		for (Element fileElement : fileElements) {
 			String fileName = fileElement.getText();
-			if (!isIgnoredFile(fileName)) {
-				files.add(fileName);
+
+			if (!isIgnoredFileName(fileName)) {
+				fileNames.add(fileName);
 			}
 		}
 
-		return files;
+		return fileNames;
 	}
+
+	private static final String[] _IGNORED_FILE_NAMES = new String[] {
+		"log4j.dtd", "service.xml", "sql/"
+	};
+
+	private static final String[] _SUPPORTED_MERGING_FILE_NAMES = new String[] {
+		"content/Language-ext", "ext-hbm.xml", "ext-model-hints.xml",
+		"ext-spring.xml", "portal-log4j-ext.xml"
+	};
 
 	private static Map<String, Set<String>> _extMap =
 		new HashMap<String, Set<String>>();
