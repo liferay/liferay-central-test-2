@@ -30,6 +30,38 @@ public class JSONIncludesManagerTest extends TestCase {
 		new JSONFactoryUtil().setJSONFactory(new JSONFactoryImpl());
 	}
 
+	public void testExtendsOne() {
+		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
+
+		String[] excludes = jsonIncludesManager.lookupExcludes(
+			ExtendsOne.class);
+
+		assertEquals(1, excludes.length);
+		assertEquals("*", excludes[0]);
+
+		String[] includes = jsonIncludesManager.lookupIncludes(
+			ExtendsOne.class);
+
+		assertEquals(1, includes.length);
+		assertEquals("ftwo", includes[0]);
+	}
+
+	public void testExtendsTwo() {
+		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
+
+		String[] excludes = jsonIncludesManager.lookupExcludes(
+			ExtendsTwo.class);
+
+		assertEquals(1, excludes.length);
+		assertEquals("*", excludes[0]);
+
+		String[] includes = jsonIncludesManager.lookupIncludes(
+			ExtendsTwo.class);
+
+		assertEquals(1, includes.length);
+		assertEquals("ftwo", includes[0]);
+	}
+
 	public void testOne() {
 		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
 
@@ -39,34 +71,6 @@ public class JSONIncludesManagerTest extends TestCase {
 		assertEquals("not", excludes[0]);
 
 		String[] includes = jsonIncludesManager.lookupIncludes(One.class);
-
-		assertEquals(1, includes.length);
-		assertEquals("ftwo", includes[0]);
-	}
-
-	public void testSubOne() {
-		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
-
-		String[] excludes = jsonIncludesManager.lookupExcludes(ExtendsOne.class);
-
-		assertEquals(1, excludes.length);
-		assertEquals("*", excludes[0]);
-
-		String[] includes = jsonIncludesManager.lookupIncludes(ExtendsOne.class);
-
-		assertEquals(1, includes.length);
-		assertEquals("ftwo", includes[0]);
-	}
-
-	public void testSubTwo() {
-		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
-
-		String[] excludes = jsonIncludesManager.lookupExcludes(ExtendsTwo.class);
-
-		assertEquals(1, excludes.length);
-		assertEquals("*", excludes[0]);
-
-		String[] includes = jsonIncludesManager.lookupIncludes(ExtendsTwo.class);
 
 		assertEquals(1, includes.length);
 		assertEquals("ftwo", includes[0]);
