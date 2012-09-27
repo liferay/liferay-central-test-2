@@ -41,7 +41,9 @@ public class JSONFactoryTest extends TestCase {
 
 		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
-		String jsonString = jsonSerializer.exclude("class").serialize(three);
+		jsonSerializer.exclude("class");
+
+		String jsonString = jsonSerializer.serialize(three);
 
 		assertEquals("{\"flag\":true}", jsonString);
 	}

@@ -16,6 +16,9 @@ package com.liferay.portal.json;
 
 import com.liferay.portal.kernel.json.JSON;
 
+/**
+ * @author Igor Spasic
+ */
 @JSON
 public class One {
 
