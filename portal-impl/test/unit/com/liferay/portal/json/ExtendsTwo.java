@@ -17,5 +17,5 @@ package com.liferay.portal.json;
 /**
  * @author Igor Spasic
  */
-public class SubTwo extends Two {
+public class ExtendsTwo extends Two {
 }

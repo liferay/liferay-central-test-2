@@ -47,12 +47,12 @@ public class JSONIncludesManagerTest extends TestCase {
 	public void testSubOne() {
 		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
 
-		String[] excludes = jsonIncludesManager.lookupExcludes(SubOne.class);
+		String[] excludes = jsonIncludesManager.lookupExcludes(ExtendsOne.class);
 
 		assertEquals(1, excludes.length);
 		assertEquals("*", excludes[0]);
 
-		String[] includes = jsonIncludesManager.lookupIncludes(SubOne.class);
+		String[] includes = jsonIncludesManager.lookupIncludes(ExtendsOne.class);
 
 		assertEquals(1, includes.length);
 		assertEquals("ftwo", includes[0]);
@@ -61,12 +61,12 @@ public class JSONIncludesManagerTest extends TestCase {
 	public void testSubTwo() {
 		JSONIncludesManager jsonIncludesManager = new JSONIncludesManager();
 
-		String[] excludes = jsonIncludesManager.lookupExcludes(SubTwo.class);
+		String[] excludes = jsonIncludesManager.lookupExcludes(ExtendsTwo.class);
 
 		assertEquals(1, excludes.length);
 		assertEquals("*", excludes[0]);
 
-		String[] includes = jsonIncludesManager.lookupIncludes(SubTwo.class);
+		String[] includes = jsonIncludesManager.lookupIncludes(ExtendsTwo.class);
 
 		assertEquals(1, includes.length);
 		assertEquals("ftwo", includes[0]);

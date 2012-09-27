@@ -20,5 +20,5 @@ import com.liferay.portal.kernel.json.JSON;
  * @author Igor Spasic
  */
 @JSON(strict = true)
-public class SubOne extends One {
+public class ExtendsOne extends One {
 }
