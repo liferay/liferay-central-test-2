@@ -209,10 +209,10 @@ request.setAttribute("view.jsp-total", String.valueOf(total));
 			<c:when test="<%= (fileEntryTypeId >= 0) %>">
 				<c:choose>
 					<c:when test="<%= total == 0 %>">
-						<liferay-ui:message arguments="<%= dlFileEntryTypeName %>" key="there-are-no-documents-or-media-files-of-type-x" />
+						<liferay-ui:message arguments="<%= HtmlUtil.escape(dlFileEntryTypeName) %>" key="there-are-no-documents-or-media-files-of-type-x" />
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:message arguments="<%= dlFileEntryTypeName %>" key="there-are-no-documents-or-media-files-of-type-x-on-this-page" />
+						<liferay-ui:message arguments="<%= HtmlUtil.escape(dlFileEntryTypeName) %>" key="there-are-no-documents-or-media-files-of-type-x-on-this-page" />
 					</c:otherwise>
 				</c:choose>
 			</c:when>
