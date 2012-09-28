@@ -281,7 +281,7 @@ public interface DLFileEntryLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link #checkInFileEntry(long, long, String, ServiceContext)
+	* @deprecated {@link #checkInFileEntry(long, long, String, ServiceContext)}
 	*/
 	public void checkInFileEntry(long userId, long fileEntryId,
 		java.lang.String lockUuid)

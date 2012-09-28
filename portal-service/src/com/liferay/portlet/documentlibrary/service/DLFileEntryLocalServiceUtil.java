@@ -317,7 +317,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #checkInFileEntry(long, long, String, ServiceContext)
+	* @deprecated {@link #checkInFileEntry(long, long, String, ServiceContext)}
 	*/
 	public static void checkInFileEntry(long userId, long fileEntryId,
 		java.lang.String lockUuid)
