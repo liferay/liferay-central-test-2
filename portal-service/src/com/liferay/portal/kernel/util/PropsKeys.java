@@ -693,9 +693,9 @@ public interface PropsKeys {
 
 	public static final String DL_STORE_S3_SECRET_KEY = "dl.store.s3.secret.key";
 
-	public static final String DL_STORE_S3_TEMPDIR_CLEAN_ACCESS_COUNT_LIMIT = "dl.store.s3.tempdir.clean.access.count.limit";
+	public static final String DL_STORE_S3_TEMP_DIR_CLEAN_UP_EXPUNGE = "dl.store.s3.temp.dir.clean.up.expunge";
 
-	public static final String DL_STORE_S3_TEMPDIR_CLEAN_KEEP_LAST_DAYS_COUNT = "dl.store.s3.tempdir.clean.keep.last.days.count";
+	public static final String DL_STORE_S3_TEMP_DIR_CLEAN_UP_FREQUENCY = "dl.store.s3.temp.dir.clean.up.frequency";
 
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 

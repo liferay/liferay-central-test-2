@@ -39,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +66,6 @@ public class S3Store extends BaseStore {
 
 	public S3Store() {
 		try {
-			_accessCounter = 0;
 			_s3Service = getS3Service();
 			_s3Bucket = getS3Bucket();
 		}
@@ -180,16 +180,9 @@ public class S3Store extends BaseStore {
 				_s3Bucket.getName(),
 				getKey(companyId, repositoryId, fileName, versionLabel));
 
-			Date lastModifiedDate = s3Object.getLastModifiedDate();
+			File tempFile = getTempFile(s3Object, fileName);
 
-			String tempFilePath = getTempFilePath(
-				fileName, lastModifiedDate.getTime());
-
-			File tempFile = saveTempFile(
-				tempFilePath, lastModifiedDate.getTime(),
-				s3Object.getDataInputStream());
-
-			cleanTempFolder();
+			cleanUpTempFiles();
 
 			return tempFile;
 		}
@@ -474,51 +467,61 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	protected void cleanTempFolder() {
-		_accessCounter++;
+	protected void cleanUpTempFiles() {
+		_calledGetFileCount++;
 
-		if (_accessCounter <
-				PropsValues.DL_STORE_S3_TEMPDIR_CLEAN_ACCESS_COUNT_LIMIT) {
+		if (_calledGetFileCount <
+				PropsValues.DL_STORE_S3_TEMP_DIR_CLEAN_UP_FREQUENCY) {
 
 			return;
 		}
 
-		_accessCounter = 0;
+		synchronized (this) {
+			if (_calledGetFileCount == 0) {
+				return;
+			}
 
-		String tmpDirPath =
-			SystemProperties.get(SystemProperties.TMP_DIR) + _PATH_S3_TEMP_DIR;
+			_calledGetFileCount = 0;
 
-		File tmpDir = new File(tmpDirPath);
+			String tempDirName =
+				SystemProperties.get(SystemProperties.TMP_DIR) + _TEMP_DIR_NAME;
 
-		long lastDateToKeep =
-			System.currentTimeMillis() -
-				(PropsValues.DL_STORE_S3_TEMPDIR_CLEAN_KEEP_LAST_DAYS_COUNT *
-					Time.DAY);
+			File tempDir = new File(tempDirName);
 
-		deleteTempFiles(tmpDir, lastDateToKeep);
+			long lastModified = System.currentTimeMillis();
+
+			lastModified -=
+				(PropsValues.DL_STORE_S3_TEMP_DIR_CLEAN_UP_EXPUNGE * Time.DAY);
+
+			cleanUpTempFiles(tempDir, lastModified);
+		}
 	}
 
-	protected void deleteTempFiles(File file, long lastDateToKeep) {
-		if (file.isDirectory()) {
-			String[] subDirs = FileUtil.listDirs(file);
+	protected void cleanUpTempFiles(File file, long lastModified) {
+		if (!file.isDirectory()) {
+			return;
+		}
 
-			if (subDirs.length == 0) {
-				if (file.lastModified() < lastDateToKeep) {
-					FileUtil.deltree(file);
+		String[] fileNames = FileUtil.listDirs(file);
 
-					return;
-				}
+		if (fileNames.length == 0) {
+			if (file.lastModified() < lastModified) {
+				FileUtil.deltree(file);
+
+				return;
 			}
-			else {
-				for (String subDir : subDirs) {
-					deleteTempFiles(new File(file, subDir), lastDateToKeep);
-				}
+		}
+		else {
+			for (String fileName : fileNames) {
+				cleanUpTempFiles(new File(file, fileName), lastModified);
+			}
 
-				if (file.list().length == 0) {
-					FileUtil.deltree(file);
+			String[] subfileNames = file.list();
 
-					return;
-				}
+			if (subfileNames.length == 0) {
+				FileUtil.deltree(file);
+
+				return;
 			}
 		}
 	}
@@ -631,45 +634,51 @@ public class S3Store extends BaseStore {
 		return new RestS3Service(credentials);
 	}
 
-	protected String getTempFilePath(String fileName, long lastModified) {
-		String datePart = DateUtil.getCurrentDate(
-			_DATE_PATTERN_PATH, LocaleUtil.getDefault());
+	protected File getTempFile(S3Object s3Object, String fileName)
+		throws IOException, ServiceException {
 
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
-		sb.append(_PATH_S3_TEMP_DIR);
-		sb.append(datePart);
+		sb.append(_TEMP_DIR_NAME);
+		sb.append(
+			DateUtil.getCurrentDate(
+				_TEMP_DIR_PATTERN, LocaleUtil.getDefault()));
 		sb.append(fileName);
-		sb.append(lastModified);
 
-		return sb.toString();
-	}
+		Date lastModifiedDate = s3Object.getLastModifiedDate();
 
-	protected File saveTempFile(
-			String tempFileName, long lastModified, InputStream inputStream)
-		throws IOException {
+		sb.append(lastModifiedDate.getTime());
+
+		String tempFileName = sb.toString();
+
+		File tempFile = new File(tempFileName);
+
+		if (tempFile.exists() &&
+			(tempFile.lastModified() >= lastModifiedDate.getTime())) {
+
+			return tempFile;
+		}
+
+		InputStream inputStream = s3Object.getDataInputStream();
 
 		if (inputStream == null) {
 			throw new IOException("S3 object input stream is null");
 		}
 
-		File tempFile = new File(tempFileName);
-
-		if (tempFile.exists() && (tempFile.lastModified() >= lastModified)) {
-			return tempFile;
-		}
+		OutputStream outputStream = null;
 
 		try {
 			File parentFile = tempFile.getParentFile();
 
 			parentFile.mkdirs();
 
-			FileOutputStream outputStream = new FileOutputStream(tempFile);
+			outputStream = new FileOutputStream(tempFile);
+
 			StreamUtil.transfer(inputStream, outputStream);
 		}
 		finally {
-			StreamUtil.cleanUp(inputStream);
+			StreamUtil.cleanUp(inputStream, outputStream);
 		}
 
 		return tempFile;
@@ -681,17 +690,16 @@ public class S3Store extends BaseStore {
 	private static final String _BUCKET_NAME = PropsUtil.get(
 		PropsKeys.DL_STORE_S3_BUCKET_NAME);
 
-	private static final String _DATE_PATTERN_PATH = "/yyyy/MM/dd/HH/";
-
-	private static final String _PATH_S3_TEMP_DIR = "/liferay/s3";
-
 	private static final String _SECRET_KEY = PropsUtil.get(
 		PropsKeys.DL_STORE_S3_SECRET_KEY);
 
+	private static final String _TEMP_DIR_NAME = "/liferay/s3";
+
+	private static final String _TEMP_DIR_PATTERN = "/yyyy/MM/dd/HH/";
+
 	private static Log _log = LogFactoryUtil.getLog(S3Store.class);
 
-	private static int _accessCounter;
-
+	private int _calledGetFileCount;
 	private S3Bucket _s3Bucket;
 	private S3Service _s3Service;
 
