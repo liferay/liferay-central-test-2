@@ -410,17 +410,23 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		boolean webDAVCheckInMode = GetterUtil.getBoolean(
 			serviceContext.getAttribute(DLUtil.WEBDAV_CHECK_IN_MODE));
 
+		if (webDAVCheckInMode) {
+			return;
+		}
+
 		RepositoryEntry repositoryEntry = RepositoryEntryUtil.findByPrimaryKey(
 			fileEntryId);
 
 		boolean manualCheckInRequired =
 			repositoryEntry.getManualCheckInRequired();
 
-		if (!webDAVCheckInMode && manualCheckInRequired) {
-			repositoryEntry.setManualCheckInRequired(false);
-
-			RepositoryEntryUtil.update(repositoryEntry, false);
+		if (!manualCheckInRequired) {
+			return;
 		}
+
+		repositoryEntry.setManualCheckInRequired(false);
+
+		RepositoryEntryUtil.update(repositoryEntry, false);
 	}
 
 	protected void setManualCheckInRequired(
@@ -430,14 +436,16 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		boolean manualCheckInRequired = GetterUtil.getBoolean(
 			serviceContext.getAttribute(DLUtil.MANUAL_CHECK_IN_REQUIRED));
 
-		if (manualCheckInRequired) {
-			RepositoryEntry repositoryEntry =
-				RepositoryEntryUtil.findByPrimaryKey(fileEntryId);
-
-			repositoryEntry.setManualCheckInRequired(manualCheckInRequired);
-
-			RepositoryEntryUtil.update(repositoryEntry, false);
+		if (!manualCheckInRequired) {
+			return;
 		}
+
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.findByPrimaryKey(
+			fileEntryId);
+
+		repositoryEntry.setManualCheckInRequired(manualCheckInRequired);
+
+		RepositoryEntryUtil.update(repositoryEntry, false);
 	}
 
 	protected AssetEntryLocalService assetEntryLocalService;
