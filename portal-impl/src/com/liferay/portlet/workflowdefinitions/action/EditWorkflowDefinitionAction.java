@@ -81,9 +81,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else if (e instanceof WorkflowException) {
-				if (_log.isErrorEnabled()) {
-					_log.error(e, e);
-				}
+				_log.error(e, e);
 
 				SessionErrors.add(actionRequest, e.getClass());
 
