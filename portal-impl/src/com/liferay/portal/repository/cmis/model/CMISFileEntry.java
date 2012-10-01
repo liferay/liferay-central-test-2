@@ -462,6 +462,23 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return false;
 	}
 
+	public boolean isManualCheckInRequired() {
+		try {
+			RepositoryEntry repositoryEntry =
+				RepositoryEntryLocalServiceUtil.getRepositoryEntry(
+					_fileEntryId);
+
+			return repositoryEntry.isManualCheckInRequired();
+		}
+		catch (Exception e) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Unable to retrieve repository entry", e);
+			}
+
+			return false;
+		}
+	}
+
 	public boolean isSupportsLocking() {
 		return true;
 	}
@@ -483,23 +500,6 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public void setFileEntryId(long fileEntryId) {
 		_fileEntryId = fileEntryId;
-	}
-
-	public boolean isManualCheckInRequired() {
-		try {
-			RepositoryEntry repositoryEntry =
-				RepositoryEntryLocalServiceUtil.getRepositoryEntry(
-					_fileEntryId);
-
-			return repositoryEntry.isManualCheckInRequired();
-		}
-		catch (Exception e) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Unable to retrieve repository entry", e);
-			}
-
-			return false;
-		}
 	}
 
 	public void setGroupId(long groupId) {

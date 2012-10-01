@@ -403,7 +403,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAttribute(
-					DLUtil.MANUAL_CHECKIN_REQUIRED,
+					DLUtil.MANUAL_CHECK_IN_REQUIRED,
 					webDavRequest.isManualCheckInRequired());
 
 				DLAppServiceUtil.checkOutFileEntry(
@@ -787,15 +787,16 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				FileEntry fileEntry = (FileEntry)resource.getModel();
 
-				// do not allow WebDAV to check in a FileEntry if it requires
-				// manual check in
+				// Do not allow WebDAV to check in a file entry if it requires
+				// a manual check in
+
 				if (fileEntry.isManualCheckInRequired()) {
 					return false;
 				}
 
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAttribute(DLUtil.WEBDAV_CHECKIN_MODE, true);
+				serviceContext.setAttribute(DLUtil.WEBDAV_CHECK_IN_MODE, true);
 
 				DLAppServiceUtil.checkInFileEntry(
 					fileEntry.getFileEntryId(), token, serviceContext);

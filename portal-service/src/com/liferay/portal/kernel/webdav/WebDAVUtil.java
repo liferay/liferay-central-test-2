@@ -317,16 +317,17 @@ public class WebDAVUtil {
 	}
 
 	public static String stripManualCheckInRequiredPath(String pathInfo) {
-		int index = pathInfo.indexOf(DLUtil.MANUAL_CHECKIN_REQUIRED_PATH);
+		int index = pathInfo.indexOf(DLUtil.MANUAL_CHECK_IN_REQUIRED_PATH);
 
 		if (index >= 0) {
-			pathInfo = pathInfo.substring(0, index) +
-	pathInfo.substring(
-		index + DLUtil.MANUAL_CHECKIN_REQUIRED_PATH.length(),
-		pathInfo.length());
+			pathInfo =
+				pathInfo.substring(0, index) +
+					pathInfo.substring(
+						index + DLUtil.MANUAL_CHECK_IN_REQUIRED_PATH.length(),
+						pathInfo.length());
 		}
 
-	return pathInfo;
+		return pathInfo;
 	}
 
 	private WebDAVUtil() {

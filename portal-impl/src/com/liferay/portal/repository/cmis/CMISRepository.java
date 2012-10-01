@@ -254,12 +254,8 @@ public class CMISRepository extends BaseCmisRepository {
 		ServiceContext serviceContext) {
 
 		try {
-			Session session = getSession();
-
-			String versionSeriesId = toFileEntryId(fileEntryId);
-
 			boolean webDAVCheckInMode = GetterUtil.getBoolean(
-				serviceContext.getAttribute(DLUtil.WEBDAV_CHECKIN_MODE));
+				serviceContext.getAttribute(DLUtil.WEBDAV_CHECK_IN_MODE));
 
 			RepositoryEntry repositoryEntry =
 				RepositoryEntryUtil.findByPrimaryKey(fileEntryId);
@@ -272,6 +268,10 @@ public class CMISRepository extends BaseCmisRepository {
 
 				RepositoryEntryUtil.update(repositoryEntry, false);
 			}
+
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
@@ -318,7 +318,7 @@ public class CMISRepository extends BaseCmisRepository {
 			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			boolean manualCheckInRequired = GetterUtil.getBoolean(
-				serviceContext.getAttribute(DLUtil.MANUAL_CHECKIN_REQUIRED));
+				serviceContext.getAttribute(DLUtil.MANUAL_CHECK_IN_REQUIRED));
 
 			if (manualCheckInRequired) {
 				RepositoryEntry repositoryEntry =

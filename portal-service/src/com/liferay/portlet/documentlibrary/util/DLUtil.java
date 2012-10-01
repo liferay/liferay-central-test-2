@@ -84,13 +84,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DLUtil {
 
-	public static final String MANUAL_CHECKIN_REQUIRED =
+	public static final String MANUAL_CHECK_IN_REQUIRED =
 		"manualCheckInRequired";
 
-	public static final String MANUAL_CHECKIN_REQUIRED_PATH =
-		StringPool.SLASH + MANUAL_CHECKIN_REQUIRED;
+	public static final String MANUAL_CHECK_IN_REQUIRED_PATH =
+		StringPool.SLASH + MANUAL_CHECK_IN_REQUIRED;
 
-	public static final String WEBDAV_CHECKIN_MODE = "webDAVCheckInMode";
+	public static final String WEBDAV_CHECK_IN_MODE = "webDAVCheckInMode";
 
 	public static void addPortletBreadcrumbEntries(
 			DLFileShortcut dlFileShortcut, HttpServletRequest request,
@@ -729,7 +729,7 @@ public class DLUtil {
 		webDavURL.append("/api/secure/webdav");
 
 		if (manualCheckInRequired) {
-			webDavURL.append(MANUAL_CHECKIN_REQUIRED_PATH);
+			webDavURL.append(MANUAL_CHECK_IN_REQUIRED_PATH);
 		}
 
 		webDavURL.append(group.getFriendlyURL());

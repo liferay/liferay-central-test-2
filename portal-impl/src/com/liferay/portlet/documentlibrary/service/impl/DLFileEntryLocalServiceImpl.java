@@ -256,11 +256,12 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
+
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
 		boolean webDAVCheckInMode = GetterUtil.getBoolean(
-			serviceContext.getAttribute(DLUtil.WEBDAV_CHECKIN_MODE));
+			serviceContext.getAttribute(DLUtil.WEBDAV_CHECK_IN_MODE));
 
 		boolean manualCheckInRequired = dlFileEntry.getManualCheckInRequired();
 
@@ -403,7 +404,7 @@ public class DLFileEntryLocalServiceImpl
 		serviceContext.setUserId(userId);
 
 		boolean manualCheckinRequired = GetterUtil.getBoolean(
-			serviceContext.getAttribute(DLUtil.MANUAL_CHECKIN_REQUIRED));
+			serviceContext.getAttribute(DLUtil.MANUAL_CHECK_IN_REQUIRED));
 
 		dlFileEntry.setManualCheckInRequired(manualCheckinRequired);
 
