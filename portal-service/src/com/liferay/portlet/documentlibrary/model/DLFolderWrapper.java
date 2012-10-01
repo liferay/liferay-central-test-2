@@ -740,8 +740,8 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 	*
 	* @return the container name of this document library folder
 	*/
-	public java.lang.String getContainerName() {
-		return _dlFolder.getContainerName();
+	public java.lang.String getContainerModelName() {
+		return _dlFolder.getContainerModelName();
 	}
 
 	/**

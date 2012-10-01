@@ -480,7 +480,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the container name of this document library folder
 	 */
-	public String getContainerName();
+	public String getContainerModelName();
 
 	/**
 	 * Returns the parent container model ID of this document library folder.

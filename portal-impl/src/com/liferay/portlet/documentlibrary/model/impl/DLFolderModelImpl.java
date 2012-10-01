@@ -699,7 +699,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_parentFolderId = parentContainerModelId;
 	}
 
-	public String getContainerName() {
+	public String getContainerModelName() {
 		return String.valueOf(getName());
 	}
 
