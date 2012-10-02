@@ -1435,7 +1435,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		int beginPos = content.length();
 		int currentLocation = -1;
 
-		boolean isLegacyURL = true;
+		boolean legacyURL = true;
 
 		while (true) {
 			currentLocation = content.lastIndexOf(
@@ -1449,7 +1449,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (currentLocation == -1) {
 				currentLocation = content.lastIndexOf("/documents/", beginPos);
 
-				isLegacyURL = false;
+				legacyURL = false;
 			}
 
 			if (currentLocation == -1) {
@@ -1486,7 +1486,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			if ((endPos == -1) ||
-				((endPos6 != -1) && (endPos6 < endPos) && !isLegacyURL)) {
+				((endPos6 != -1) && (endPos6 < endPos) && !legacyURL)) {
 
 				endPos = endPos6;
 			}
@@ -1575,8 +1575,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					if (Validator.isNotNull(folderIdString)) {
 						long folderId = GetterUtil.getLong(folderIdString);
-						String title = MapUtil.getString(map, "title");
 						String name = MapUtil.getString(map, "name");
+						String title = MapUtil.getString(map, "title");
 
 						String groupIdString = MapUtil.getString(
 							map, "groupId");
@@ -1600,8 +1600,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						}
 					}
 					else if (map.containsKey("image_id") ||
-							map.containsKey("img_id") ||
-							map.containsKey("i_id")) {
+							 map.containsKey("img_id") ||
+							 map.containsKey("i_id")) {
 
 						long imageId = MapUtil.getLong(map, "image_id");
 
@@ -1614,8 +1614,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						}
 
 						DLFileEntry dlFileEntry =
-							DLFileEntryLocalServiceUtil
-								.fetchFileEntryByAnyImageId(imageId);
+							DLFileEntryLocalServiceUtil.
+								fetchFileEntryByAnyImageId(imageId);
 
 						if (dlFileEntry != null) {
 							fileEntry = new LiferayFileEntry(dlFileEntry);
