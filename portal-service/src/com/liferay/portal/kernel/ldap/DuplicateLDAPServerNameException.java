@@ -12,28 +12,28 @@
  * details.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.kernel.ldap;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Jonathan McCann
  */
-public class LDAPServerNameException extends PortalException {
+public class DuplicateLDAPServerNameException extends PortalException {
 
-	public LDAPServerNameException() {
+	public DuplicateLDAPServerNameException() {
 		super();
 	}
 
-	public LDAPServerNameException(String msg) {
+	public DuplicateLDAPServerNameException(String msg) {
 		super(msg);
 	}
 
-	public LDAPServerNameException(String msg, Throwable cause) {
+	public DuplicateLDAPServerNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public LDAPServerNameException(Throwable cause) {
+	public DuplicateLDAPServerNameException(Throwable cause) {
 		super(cause);
 	}
 

@@ -19,10 +19,10 @@
 <%@ page import="com.liferay.portal.AccountNameException" %><%@
 page import="com.liferay.portal.CompanyMxException" %><%@
 page import="com.liferay.portal.CompanyVirtualHostException" %><%@
-page import="com.liferay.portal.DuplicateLDAPServerNameException" %><%@
-page import="com.liferay.portal.LDAPServerNameException" %><%@
 page import="com.liferay.portal.LocaleException" %><%@
 page import="com.liferay.portal.kernel.facebook.FacebookConnectUtil" %><%@
+page import="com.liferay.portal.kernel.ldap.DuplicateLDAPServerNameException" %><%@
+page import="com.liferay.portal.kernel.ldap.LDAPServerNameException" %><%@
 page import="com.liferay.portal.security.auth.AuthSettingsUtil" %><%@
 page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %><%@
 page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %><%@
