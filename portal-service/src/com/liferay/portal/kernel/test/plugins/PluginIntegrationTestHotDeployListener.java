@@ -20,15 +20,19 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 
 import java.io.File;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.text.NumberFormat;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.runner.JUnitCore;
@@ -36,7 +40,6 @@ import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
-import org.junit.runners.model.InitializationError;
 
 /**
  * @author Manuel de la Peña
@@ -52,7 +55,7 @@ public class PluginIntegrationTestHotDeployListener
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				hotDeployEvent, "Error registering tests for ", t);
+				hotDeployEvent, "Unable to register tests for ", t);
 		}
 	}
 
@@ -64,17 +67,17 @@ public class PluginIntegrationTestHotDeployListener
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				hotDeployEvent, "Error unregistering tests for ", t);
+				hotDeployEvent, "Unable to register tests for ", t);
 		}
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent hotDeployEvent)
 		throws Exception {
 
-		List<Class<?>> testClasses = _getAllClassesInIntegrationJar(
+		List<Class<?>> testClasses = getAllClassesInIntegrationJar(
 			hotDeployEvent);
 
-		_runTestClasses(testClasses);
+		runTestClasses(testClasses);
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent hotDeployEvent)
@@ -83,26 +86,23 @@ public class PluginIntegrationTestHotDeployListener
 		_log.debug("Undeploying tests for " + hotDeployEvent);
 	}
 
-	private List<Class<?>> _getAllClassesInIntegrationJar(
+	protected List<Class<?>> getAllClassesInIntegrationJar(
 			HotDeployEvent hotDeployEvent)
-		throws ClassNotFoundException, MalformedURLException {
+		throws ClassNotFoundException {
 
-		ClassLoader contextClassLoader = hotDeployEvent.getContextClassLoader();
+		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
 
-		URL url = contextClassLoader.getResource("../lib");
+		URL url = classLoader.getResource("../lib");
 
-		// this file name depends on build-common-plugin.xml
-
-		String testJarFile =
-			hotDeployEvent.getServletContextName() + "-test-integration.jar";
-
-		List<Class<?>> classes = new ArrayList<Class<?>>();
-
-		File file = new File(url.getFile(), testJarFile);
+		File file = new File(
+			url.getFile(),
+			hotDeployEvent.getServletContextName() + "-test-integration.jar");
 
 		if (!file.exists()) {
-			return classes;
+			return Collections.emptyList();
 		}
+
+		List<Class<?>> classes = new ArrayList<Class<?>>();
 
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
@@ -113,48 +113,21 @@ public class PluginIntegrationTestHotDeployListener
 				continue;
 			}
 
-			String qualifiedName = entry.replace("/", ".");
-			qualifiedName = qualifiedName.substring(
-				0, qualifiedName.indexOf(".class"));
+			String className = entry.replace("/", ".");
 
-			Class c = contextClassLoader.loadClass(qualifiedName);
+			className = className.substring(0, className.indexOf(".class"));
 
-			classes.add(c);
+			Class<?> clazz = classLoader.loadClass(className);
+
+			classes.add(clazz);
 		}
 
 		return classes;
 	}
 
-	private void _runTestClasses(List<Class<?>> classes)
-		throws ClassNotFoundException, InitializationError, RuntimeException {
-
-		for (Class clazz : classes) {
-			if (!_isTestClass(clazz)) {
-				continue;
-			}
-
-			_log.info("Running " + clazz.getName());
-
-			Result result = JUnitCore.runClasses(clazz);
-
-			int runTests = result.getRunCount();
-			int failureTests = result.getIgnoreCount();
-			int errorsTests = result.getFailureCount();
-
-			_log.info(
-				"Tests run: " + runTests + ", Failures: " + failureTests +
-					", Errors: " + errorsTests);
-
-			for (Failure failure : result.getFailures()) {
-				_log.error(failure.toString());
-			}
-		}
-	}
-
-	private boolean _isTestClass(Class<?> clazz) {
-		Class<?> declaringClass =
-			ReflectionUtil.getAnnotationDeclaringClass(
-				RunWith.class, clazz);
+	protected boolean isTestClass(Class<?> clazz) {
+		Class<?> declaringClass = ReflectionUtil.getAnnotationDeclaringClass(
+			RunWith.class, clazz);
 
 		if (declaringClass == null) {
 			return false;
@@ -166,8 +139,8 @@ public class PluginIntegrationTestHotDeployListener
 
 		String className = clazz.getName();
 
-		if (!value.equals(LiferayPluginsIntegrationJUnitRunner.class) ||
-				!className.endsWith("Test")) {
+		if (!className.endsWith("Test") ||
+			!value.equals(LiferayPluginsIntegrationJUnitRunner.class)) {
 
 			return false;
 		}
@@ -175,7 +148,52 @@ public class PluginIntegrationTestHotDeployListener
 		return true;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	protected void runTestClasses(List<Class<?>> classes)
+		throws RuntimeException {
+
+		NumberFormat numberFormat = NumberFormat.getInstance();
+
+		numberFormat.setMaximumFractionDigits(3);
+
+		for (Class<?> clazz : classes) {
+			if (!isTestClass(clazz)) {
+				continue;
+			}
+
+			double startTime = System.currentTimeMillis();
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Running " + clazz.getName());
+			}
+
+			Result result = JUnitCore.runClasses(clazz);
+
+			if (_log.isInfoEnabled()) {
+				double endTime = System.currentTimeMillis();
+
+				StringBundler sb = new StringBundler(9);
+
+				sb.append("Tests run: ");
+				sb.append(result.getRunCount());
+				sb.append(", Failures: ");
+				sb.append(result.getIgnoreCount());
+				sb.append(", Errors: ");
+				sb.append(result.getFailureCount());
+				sb.append(", Time elapsed: ");
+				sb.append(
+					numberFormat.format((endTime - startTime) / Time.SECOND));
+				sb.append(" sec");
+
+				_log.info(sb.toString());
+			}
+
+			for (Failure failure : result.getFailures()) {
+				_log.error(failure.toString());
+			}
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
 		PluginIntegrationTestHotDeployListener.class);
 
 }
