@@ -61,7 +61,7 @@ public class ShardGloballyAdvice implements MethodInterceptor {
 
 				Object value = methodInvocation.proceed();
 
-				if (shardName.equals(ShardUtil.getDefaultShardName())){
+				if (shardName.equals(ShardUtil.getDefaultShardName())) {
 					returnValue = value;
 				}
 			}
