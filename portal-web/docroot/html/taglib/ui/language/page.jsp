@@ -119,19 +119,19 @@ for (int i = 0; i < locales.length; i++) {
 				continue;
 			}
 
-			String taglibCssClass = "taglib-language-list-text";
+			String cssClassName = "taglib-language-list-text";
 
 			if ((i + 1) < locales.length) {
-				taglibCssClass += " last";
+				cssClassName += " last";
 			}
 
-			String taglibDisplayName = null;
+			String localeDisplayName = null;
 
 			if (displayStyle == LanguageTag.LIST_SHORT_TEXT) {
-				taglibDisplayName = LocaleUtil.getShortDisplayName(locales[i], duplicateLanguages);
+				localeDisplayName = LocaleUtil.getShortDisplayName(locales[i], duplicateLanguages);
 			}
 			else {
-				taglibDisplayName = LocaleUtil.getLongDisplayName(locales[i]);
+				localeDisplayName = LocaleUtil.getLongDisplayName(locales[i]);
 			}
 		%>
 
@@ -139,10 +139,10 @@ for (int i = 0; i < locales.length; i++) {
 				<c:when test="<%= (displayStyle == LanguageTag.LIST_LONG_TEXT) || (displayStyle == LanguageTag.LIST_SHORT_TEXT) %>">
 					<c:choose>
 						<c:when test="<%= currentLanguageId.equals(languageId) %>">
-							<span class="<%= taglibCssClass %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"><%= taglibDisplayName %></span>
+							<span class="<%= cssClassName %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"><%= localeDisplayName %></span>
 						</c:when>
 						<c:otherwise>
-							<aui:a class="<%= taglibCssClass %>" href='<%= HttpUtil.addParameter(formAction, name, LocaleUtil.toLanguageId(locales[i])) %>' lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"><%= taglibDisplayName %></aui:a>
+							<aui:a class="<%= cssClassName %>" href="<%= HttpUtil.addParameter(formAction, name, LocaleUtil.toLanguageId(locales[i])) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"><%= localeDisplayName %></aui:a>
 						</c:otherwise>
 					</c:choose>
 				</c:when>

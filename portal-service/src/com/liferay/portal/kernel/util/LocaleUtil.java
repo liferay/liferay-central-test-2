@@ -58,12 +58,12 @@ public class LocaleUtil {
 		return _instance;
 	}
 
-	public static String getLongDisplayName(Locale locale) {
-		return getInstance()._getLongDisplayName(locale);
-	}
-
 	public static Map<String, String> getISOLanguages(Locale locale) {
 		return getInstance()._getISOLanguages(locale);
+	}
+
+	public static String getLongDisplayName(Locale locale) {
+		return getInstance()._getLongDisplayName(locale);
 	}
 
 	public static Locale getMostRelevantLocale() {
@@ -155,7 +155,7 @@ public class LocaleUtil {
 				}
 			}
 
-			if (_locales.size() < _MAX_LOCALES) {
+			if (_locales.size() < _LOCALES_MAX) {
 				_locales.put(languageId, locale);
 			}
 			else {
@@ -222,11 +222,10 @@ public class LocaleUtil {
 	}
 
 	private String _getLongDisplayName(Locale locale) {
-
 		String displayName = locale.getDisplayName(locale);
 
 		if (LanguageUtil.isBetaLocale(locale)) {
-			return displayName.concat(_BETA_FLAG);
+			return displayName.concat(_BETA_SUFFIX);
 		}
 
 		return displayName;
@@ -250,7 +249,8 @@ public class LocaleUtil {
 		String language = locale.getDisplayLanguage(locale);
 
 		if (language.length() > 3) {
-			language = locale.getLanguage().toUpperCase();
+			language = locale.getLanguage();
+			language = language.toUpperCase();
 		}
 
 		sb.append(language);
@@ -258,12 +258,16 @@ public class LocaleUtil {
 		if (duplicateLanguages.contains(locale.getLanguage())) {
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(locale.getCountry().toUpperCase());
+
+			String country = locale.getCountry();
+
+			sb.append(country.toUpperCase());
+
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
 
 		if (LanguageUtil.isBetaLocale(locale)) {
-			sb.append(_BETA_FLAG);
+			sb.append(_BETA_SUFFIX);
 		}
 
 		return sb.toString();
@@ -374,8 +378,9 @@ public class LocaleUtil {
 		return w3cLanguageIds;
 	}
 
-	private static final String _BETA_FLAG = " [Beta]";
-	private static final int _MAX_LOCALES = 1000;
+	private static final String _BETA_SUFFIX = " [Beta]";
+
+	private static final int _LOCALES_MAX = 1000;
 
 	private static Log _log = LogFactoryUtil.getLog(LocaleUtil.class);
 
