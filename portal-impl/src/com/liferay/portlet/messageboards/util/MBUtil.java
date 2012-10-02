@@ -747,7 +747,7 @@ public class MBUtil {
 	}
 
 	public static String replaceMessageBodyPaths(
-		String messageBody, ThemeDisplay themeDisplay) {
+		ThemeDisplay themeDisplay, String messageBody) {
 
 		return StringUtil.replace(
 			messageBody,
