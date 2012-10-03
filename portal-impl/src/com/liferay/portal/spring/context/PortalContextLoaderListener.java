@@ -144,16 +144,15 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		PortalSecurityManagerThreadLocal.setEnabled(false);
 
+		DBFactoryUtil.reset();
+		DeployManagerUtil.reset();
 		InstancePool.reset();
 		MethodCache.reset();
+		PortalBeanLocatorUtil.reset();
+		PortalLifecycleUtil.reset();
 		PortletBagPool.reset();
 
-		DeployManagerUtil.reset();
-		PortalLifecycleUtil.reset();
-		DBFactoryUtil.reset();
-
 		ReferenceRegistry.releaseReferences();
-		PortalBeanLocatorUtil.reset();
 
 		InitUtil.init();
 
