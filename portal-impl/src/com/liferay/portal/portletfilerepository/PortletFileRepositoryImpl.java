@@ -236,7 +236,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			long groupId, String portletId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Repository repository = RepositoryLocalServiceUtil.getRepository(
+		Repository repository = RepositoryLocalServiceUtil.fetchRepository(
 			groupId, portletId);
 
 		if (repository != null) {
