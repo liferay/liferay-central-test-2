@@ -1068,6 +1068,17 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	protected void setProperty(
+		Object bean1, Object bean2, String propertyName) {
+
+		Object value = BeanPropertiesUtil.getObject(bean1, propertyName);
+		Object defaultValue = BeanPropertiesUtil.getObject(bean2, propertyName);
+
+		if ((value == null) || value.equals(StringPool.BLANK)) {
+			BeanPropertiesUtil.setProperty(bean1, propertyName, defaultValue);
+		}
+	}
+
 	protected void updateExpandoAttributes(User user, LDAPUser ldapUser)
 		throws Exception {
 
@@ -1089,66 +1100,13 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		Contact contact = user.getContact();
 
-		ldapContact.setAimSn(
-			GetterUtil.getString(
-				ldapContact.getAimSn(), contact.getAimSn(), false));
-		ldapContact.setFacebookSn(
-			GetterUtil.getString(
-				ldapContact.getFacebookSn(), contact.getFacebookSn(), false));
-		ldapContact.setIcqSn(
-			GetterUtil.getString(
-				ldapContact.getIcqSn(), contact.getIcqSn(), false));
-		ldapContact.setJabberSn(
-			GetterUtil.getString(
-				ldapContact.getJabberSn(), contact.getJabberSn(), false));
-		ldapContact.setMale(
-			GetterUtil.getBoolean(ldapContact.getMale(), contact.getMale()));
-		ldapContact.setMsnSn(
-			GetterUtil.getString(
-				ldapContact.getMsnSn(), contact.getMsnSn(), false));
-		ldapContact.setMySpaceSn(
-			GetterUtil.getString(
-				ldapContact.getMySpaceSn(), contact.getMySpaceSn(), false));
-		ldapContact.setPrefixId(
-			GetterUtil.getInteger(
-				ldapContact.getPrefixId(), contact.getPrefixId()));
-		ldapContact.setSkypeSn(
-			GetterUtil.getString(
-				ldapContact.getSkypeSn(), contact.getSkypeSn(), false));
-		ldapContact.setSmsSn(
-			GetterUtil.getString(
-				ldapContact.getSmsSn(), contact.getSmsSn(), false));
-		ldapContact.setSuffixId(
-			GetterUtil.getInteger(
-				ldapContact.getSuffixId(), contact.getSuffixId()));
-		ldapContact.setTwitterSn(
-			GetterUtil.getString(
-				ldapContact.getTwitterSn(), contact.getTwitterSn(), false));
-		ldapContact.setYmSn(
-			GetterUtil.getString(
-				ldapContact.getYmSn(), contact.getYmSn(), false));
+		for (String propertyName : _CONTACT_PROPERTY_NAMES) {
+			setProperty(ldapContact, contact, propertyName);
+		}
 
-		ldapUser.setComments(
-			GetterUtil.getString(
-				ldapUser.getComments(), user.getComments(), false));
-		ldapUser.setGreeting(
-			GetterUtil.getString(
-				ldapUser.getGreeting(), user.getGreeting(), false));
-		ldapUser.setJobTitle(
-			GetterUtil.getString(
-				ldapUser.getJobTitle(), user.getJobTitle(), false));
-		ldapUser.setLanguageId(
-			GetterUtil.getString(
-				ldapUser.getLanguageId(), user.getLanguageId(), false));
-		ldapUser.setMiddleName(
-			GetterUtil.getString(
-				ldapUser.getMiddleName(), user.getMiddleName(), false));
-		ldapUser.setOpenId(
-			GetterUtil.getString(
-				ldapUser.getOpenId(), user.getOpenId(), false));
-		ldapUser.setTimeZoneId(
-			GetterUtil.getString(
-				ldapUser.getTimeZoneId(), user.getTimeZoneId(), false));
+		for (String propertyName : _USER_PROPERTY_NAMES) {
+			setProperty(ldapUser, user, propertyName);
+		}
 	}
 
 	protected User updateUser(
@@ -1293,11 +1251,21 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return user;
 	}
 
+	private static final String[] _CONTACT_PROPERTY_NAMES = {
+		"aimSn", "facebookSn", "icqSn", "jabberSn", "male", "mySpaceSn",
+		"prefixId", "skypeSn", "smsSn", "suffixId", "twitterSn", "ymSn"
+	};
+
 	private static final String _IMPORT_BY_GROUP = "group";
 
 	private static final String _IMPORT_BY_USER = "user";
 
 	private static final String _USER_PASSWORD_SCREEN_NAME = "screenName";
+
+	private static final String[] _USER_PROPERTY_NAMES = {
+		"comments", "greeting", "jobTitle", "languageId", "middleName",
+		"openId", "timeZoneId"
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalLDAPImporterImpl.class);
