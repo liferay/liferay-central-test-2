@@ -33,31 +33,30 @@ import java.util.List;
 public class PortletFileRepositoryUtil {
 
 	public static void addPortletFileEntries(
-			long groupId, long userId, long folderId,
-			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
-			String portletId)
+			long groupId, long userId, String portletId, long folderId,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs)
 		throws PortalException, SystemException {
 
 		getPortletFileRepository().addPortletFileEntries(
-			groupId, userId, folderId, inputStreamOVPs, portletId);
+			groupId, userId, portletId, folderId, inputStreamOVPs);
 	}
 
 	public static FileEntry addPortletFileEntry(
-			long groupId, long userId, long folderId, String portletId,
+			long groupId, long userId, String portletId, long folderId,
 			File file, String fileName)
 		throws PortalException, SystemException {
 
 		return getPortletFileRepository().addPortletFileEntry(
-			groupId, userId, folderId, portletId, file, fileName);
+			groupId, userId, portletId, folderId, file, fileName);
 	}
 
 	public static FileEntry addPortletFileEntry(
-			long groupId, long userId, long folderId, String portletId,
+			long groupId, long userId, String portletId, long folderId,
 			InputStream inputStream, String fileName)
 		throws PortalException, SystemException {
 
 		return getPortletFileRepository().addPortletFileEntry(
-			groupId, userId, folderId, portletId, inputStream, fileName);
+			groupId, userId, portletId, folderId, inputStream, fileName);
 	}
 
 	public static void deleteFolder(long folderId)
@@ -100,14 +99,14 @@ public class PortletFileRepositoryUtil {
 		throws SystemException {
 
 		return getPortletFileRepository().getPortletFileEntries(
-				groupId, folderId);
+			groupId, folderId);
 	}
 
 	public static int getPortletFileEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
 		return getPortletFileRepository().getPortletFileEntriesCount(
-				groupId, folderId);
+			groupId, folderId);
 	}
 
 	public static PortletFileRepository getPortletFileRepository() {
