@@ -58,31 +58,31 @@ public class RepositoryTest {
 
 	@Test
 	@Transactional
-	public void testCreateAndDeleteFileEntries() throws Exception {
-		createAndDeleteFileEntries(false);
+	public void testAddAndDeleteFileEntries() throws Exception {
+		addAndDeleteFileEntries(false);
 	}
 
 	@Test
 	@Transactional
-	public void testCreateAndDeleteFileEntriesInHiddenRepository()
+	public void testAddAndDeleteFileEntriesInHiddenRepository()
 		throws Exception {
 
-		createAndDeleteFileEntries(true);
+		addAndDeleteFileEntries(true);
 	}
 
 	@Test
 	@Transactional
-	public void testCreateAndDeleteHiddenRepositories() throws Exception {
-		createAndDeleteRepositories(true);
+	public void testAddAndDeleteHiddenRepositories() throws Exception {
+		addAndDeleteRepositories(true);
 	}
 
 	@Test
 	@Transactional
-	public void testCreateAndDeleteRepositories() throws Exception {
-		createAndDeleteRepositories(false);
+	public void testAddAndDeleteRepositories() throws Exception {
+		addAndDeleteRepositories(false);
 	}
 
-	protected void createAndDeleteFileEntries(boolean hidden) throws Exception {
+	protected void addAndDeleteFileEntries(boolean hidden) throws Exception {
 
 		// One default and one mapped repository
 
@@ -99,7 +99,7 @@ public class RepositoryTest {
 		long[] repositoryIds = {dlRepositoryId};
 
 		if (!hidden) {
-			repositoryIds = new long[]{defaultRepositoryId, dlRepositoryId};
+			repositoryIds = new long[] {defaultRepositoryId, dlRepositoryId};
 		}
 
 		long[] fileEntryIds = new long[4];
@@ -169,19 +169,6 @@ public class RepositoryTest {
 					WorkflowConstants.STATUS_ANY));
 		}
 
-		// Verify mapped folder
-
-		// TODO
-
-		/*DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
-			folderIds[1]);
-
-		DLFolder parentDLFolder = dlFolder.getParentFolder();
-
-		assertEquals(
-			parentDLFolder.getParentFolderId(),
-			DLFolderConstants.MAPPED_PARENT_FOLDER_ID);*/
-
 		// Delete repositories
 
 		RepositoryLocalServiceUtil.deleteRepositories(
@@ -207,14 +194,12 @@ public class RepositoryTest {
 		}
 	}
 
-	protected void createAndDeleteRepositories(boolean hidden)
-		throws Exception {
+	protected void addAndDeleteRepositories(boolean hidden) throws Exception {
+		// Add repositories
 
 		int initialMountFolders = DLFolderServiceUtil.getMountFoldersCount(
 			TestPropsValues.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		// Create repositories
 
 		long[] repositoryIds = new long[2];
 
