@@ -849,7 +849,9 @@ public class ExpandoValueLocalServiceImpl
 				value.setClassPK(classPK);
 			}
 
-			if (value.isNew() || !Validator.equals(value.getData(), data)) {
+			if (value.isNew() ||
+				!Validator.equals(value.getData(), dataString)) {
+
 				value.setData(dataString);
 
 				expandoValuePersistence.update(value, false);
