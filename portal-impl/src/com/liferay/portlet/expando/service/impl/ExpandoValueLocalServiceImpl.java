@@ -16,6 +16,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -848,11 +849,7 @@ public class ExpandoValueLocalServiceImpl
 				value.setClassPK(classPK);
 			}
 
-			if (value.isNew() ||
-				((value.getData() == null) && (dataString != null)) ||
-				((value.getData() != null) &&
-					!value.getData().equals(dataString))) {
-
+			if (value.isNew() || !Validator.equals(value.getData(), data)) {
 				value.setData(dataString);
 
 				expandoValuePersistence.update(value, false);
@@ -2026,9 +2023,7 @@ public class ExpandoValueLocalServiceImpl
 			value.setClassPK(classPK);
 		}
 
-		if (value.isNew() || ((value.getData() == null) && (data != null)) ||
-			((value.getData() != null) && !value.getData().equals(data))) {
-
+		if (value.isNew() || !Validator.equals(value.getData(), data)) {
 			value.setData(data);
 
 			expandoValuePersistence.update(value, false);
