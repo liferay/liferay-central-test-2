@@ -83,7 +83,28 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		return ${entity.varName}Impl;
 	}
 
-	public void readExternal(ObjectInput objectInput) throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws
+		<#assign throwsClassNotFoundException = false>
+
+		<#list entity.regularColList as column>
+			<#if column.primitiveType>
+			<#elseif column.type == "Date">
+			<#elseif column.type == "String">
+			<#elseif column.type != "Blob">
+				<#assign throwsClassNotFoundException = true>
+			</#if>
+		</#list>
+
+		<#if (cacheFields?size > 0)>
+			<#assign throwsClassNotFoundException = true>
+		</#if>
+
+		<#if throwsClassNotFoundException>
+			ClassNotFoundException,
+		</#if>
+
+		IOException {
+
 		<#list entity.regularColList as column>
 			<#if column.primitiveType>
 				${column.name} = objectInput.read${textFormatter.format(column.type, 6)}();
