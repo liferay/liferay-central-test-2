@@ -358,6 +358,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	private static class CacheKey implements Externalizable {
 
+		@SuppressWarnings("unused")
 		public CacheKey() {
 		}
 
