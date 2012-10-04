@@ -83,26 +83,16 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		return ${entity.varName}Impl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
-
+	public void readExternal(ObjectInput objectInput) throws ClassNotFoundException, IOException {
 		<#list entity.regularColList as column>
-			<#if column.type != "Blob">
-				<#if column.type == "Date">
-					${column.name} = objectInput.readLong();
-				<#else>
-					<#if column.primitiveType >
-						<#assign typeName = textFormatter.format(column.type, 6)>
-
-						${column.name} = objectInput.read${typeName}();
-					<#else>
-						<#if column.type == "String">
-							${column.name} = objectInput.readUTF();
-						<#else>
-							${column.name} = (${column.type})objectInput.readObject();
-						</#if>
-					</#if>
-				</#if>
+			<#if column.primitiveType>
+				${column.name} = objectInput.read${textFormatter.format(column.type, 6)}();
+			<#elseif column.type == "Date">
+				${column.name} = objectInput.readLong();
+			<#elseif column.type == "String">
+				${column.name} = objectInput.readUTF();
+			<#elseif column.type != "Blob">
+				${column.name} = (${column.type})objectInput.readObject();
 			</#if>
 		</#list>
 
@@ -111,31 +101,21 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		</#list>
 	}
 
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
-
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		<#list entity.regularColList as column>
-			<#if column.type != "Blob">
-				<#if column.type == "Date">
-					objectOutput.writeLong(${column.name});
-				<#else>
-					<#if column.primitiveType >
-						<#assign typeName = textFormatter.format(column.type, 6)>
-
-						objectOutput.write${typeName}(${column.name});
-					<#else>
-						<#if column.type == "String">
-							if (${column.name} == null) {
-								objectOutput.writeUTF(StringPool.BLANK);
-							}
-							else {
-								objectOutput.writeUTF(${column.name});
-							}
-						<#else>
-							objectOutput.writeObject(${column.name});
-						</#if>
-					</#if>
-				</#if>
+			<#if column.primitiveType>
+				objectOutput.write${textFormatter.format(column.type, 6)}(${column.name});
+			<#elseif column.type == "Date">
+				objectOutput.writeLong(${column.name});
+			<#elseif column.type == "String">
+				if (${column.name} == null) {
+					objectOutput.writeUTF(StringPool.BLANK);
+				}
+				else {
+					objectOutput.writeUTF(${column.name});
+				}
+			<#elseif column.type != "Blob">
+				objectOutput.writeObject(${column.name});
 			</#if>
 		</#list>
 
