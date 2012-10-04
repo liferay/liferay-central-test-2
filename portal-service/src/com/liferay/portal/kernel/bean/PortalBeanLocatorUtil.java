@@ -109,7 +109,12 @@ public class PortalBeanLocatorUtil {
 			PortalBeanLocatorUtil.class);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			if (beanLocator == null) {
+				_log.debug("Setting BeanLocator " + beanLocator);
+			}
+			else {
+				_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			}
 		}
 
 		_beanLocator = beanLocator;
