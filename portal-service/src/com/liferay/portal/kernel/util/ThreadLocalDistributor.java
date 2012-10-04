@@ -51,7 +51,7 @@ public class ThreadLocalDistributor implements Externalizable {
 
 			if (!ThreadLocal.class.isAssignableFrom(field.getType())) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(fieldName + " is not type of ThreadLocal.");
+					_log.warn(fieldName + " is not of type ThreadLocal");
 				}
 
 				continue;
@@ -59,7 +59,7 @@ public class ThreadLocalDistributor implements Externalizable {
 
 			if (!Modifier.isStatic(field.getModifiers())) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(fieldName + " is not a static ThreadLocal.");
+					_log.warn(fieldName + " is not a static ThreadLocal");
 				}
 
 				continue;
@@ -70,7 +70,7 @@ public class ThreadLocalDistributor implements Externalizable {
 
 			if (threadLocal == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(fieldName + " is not initialized.");
+					_log.warn(fieldName + " is not initialized");
 				}
 
 				continue;
@@ -86,7 +86,9 @@ public class ThreadLocalDistributor implements Externalizable {
 
 	public void capture() {
 		for (int i = 0; i < _threadLocalValues.length; i++) {
-			_threadLocalValues[i] = _threadLocals.get(i).get();
+			ThreadLocal<Serializable> threadLocal = _threadLocals.get(i);
+
+			_threadLocalValues[i] = threadLocal.get();
 		}
 	}
 
@@ -106,10 +108,10 @@ public class ThreadLocalDistributor implements Externalizable {
 		_index = objectInput.readInt();
 		_threadLocalValues = (Serializable[])objectInput.readObject();
 
-		ThreadLocalDistributor originalThreadLocalDistributor =
+		ThreadLocalDistributor threadLocalDistributor =
 			ThreadLocalDistributorRegistry.getThreadLocalDistributor(_index);
 
-		_threadLocals = originalThreadLocalDistributor._threadLocals;
+		_threadLocals = threadLocalDistributor._threadLocals;
 	}
 
 	public void restore() {

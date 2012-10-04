@@ -40,6 +40,17 @@ import org.junit.runner.RunWith;
 @RunWith(NewClassLoaderJUnitTestRunner.class)
 public class ThreadLocalDistributorTest {
 
+	public ThreadLocalDistributorTest() {
+		_keyValuePairs.add(
+			new KeyValuePair(TestClass.class.getName(), "_threadLocal"));
+		_keyValuePairs.add(
+			new KeyValuePair(TestClass.class.getName(), "_nonStatic"));
+		_keyValuePairs.add(
+			new KeyValuePair(TestClass.class.getName(), "_nullValue"));
+		_keyValuePairs.add(
+			new KeyValuePair(TestClass.class.getName(), "_object"));
+	}
+
 	@Test
 	public void testAfterPropertiesSet() throws Exception {
 		ThreadLocalDistributor threadLocalDistributor =
@@ -54,10 +65,10 @@ public class ThreadLocalDistributorTest {
 				"Thread local sources is null", iae.getMessage());
 		}
 
-		threadLocalDistributor.setClassLoader(getClass().getClassLoader());
-		threadLocalDistributor.setThreadLocalSources(keyValuePairs);
+		threadLocalDistributor.setClassLoader(getClassLoader());
+		threadLocalDistributor.setThreadLocalSources(_keyValuePairs);
 
-		// 1) With log
+		// With log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			ThreadLocalDistributor.class.getName(), Level.WARNING);
@@ -69,43 +80,41 @@ public class ThreadLocalDistributorTest {
 		LogRecord logRecord1 = logRecords.get(0);
 
 		Assert.assertEquals(
-			"_nonStatic is not a static ThreadLocal.", logRecord1.getMessage());
+			"_nonStatic is not a static ThreadLocal", logRecord1.getMessage());
 
 		LogRecord logRecord2 = logRecords.get(1);
 
 		Assert.assertEquals(
-			"_nullValue is not initialized.", logRecord2.getMessage());
+			"_nullValue is not initialized", logRecord2.getMessage());
 
 		LogRecord logRecord3 = logRecords.get(2);
 
 		Assert.assertEquals(
-			"_object is not type of ThreadLocal.", logRecord3.getMessage());
+			"_object is not of type ThreadLocal", logRecord3.getMessage());
 
-		List<ThreadLocal<Serializable>> threadLocals = _getThreadLocals(
+		List<ThreadLocal<Serializable>> threadLocals = getThreadLocals(
 			threadLocalDistributor);
 
 		Assert.assertEquals(1, threadLocals.size());
-
 		Assert.assertSame(TestClass._threadLocal, threadLocals.get(0));
 
-		// 2) Without log
+		// Without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			ThreadLocalDistributor.class.getName(), Level.OFF);
 
 		threadLocalDistributor = new ThreadLocalDistributor();
 
-		threadLocalDistributor.setClassLoader(getClass().getClassLoader());
-		threadLocalDistributor.setThreadLocalSources(keyValuePairs);
+		threadLocalDistributor.setClassLoader(getClassLoader());
+		threadLocalDistributor.setThreadLocalSources(_keyValuePairs);
 
 		threadLocalDistributor.afterPropertiesSet();
 
 		Assert.assertTrue(logRecords.isEmpty());
 
-		threadLocals = _getThreadLocals(threadLocalDistributor);
+		threadLocals = getThreadLocals(threadLocalDistributor);
 
 		Assert.assertEquals(1, threadLocals.size());
-
 		Assert.assertSame(TestClass._threadLocal, threadLocals.get(0));
 	}
 
@@ -114,8 +123,9 @@ public class ThreadLocalDistributorTest {
 		ThreadLocalDistributor threadLocalDistributor =
 			new ThreadLocalDistributor();
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		Assert.assertSame(
 			contextClassLoader, threadLocalDistributor.getClassLoader());
@@ -126,8 +136,8 @@ public class ThreadLocalDistributorTest {
 		ThreadLocalDistributor threadLocalDistributor =
 			new ThreadLocalDistributor();
 
-		threadLocalDistributor.setClassLoader(getClass().getClassLoader());
-		threadLocalDistributor.setThreadLocalSources(keyValuePairs);
+		threadLocalDistributor.setClassLoader(getClassLoader());
+		threadLocalDistributor.setThreadLocalSources(_keyValuePairs);
 
 		threadLocalDistributor.afterPropertiesSet();
 
@@ -137,7 +147,7 @@ public class ThreadLocalDistributorTest {
 
 		threadLocalDistributor.capture();
 
-		Serializable[] threadLocalValues = _getThreadLocalValues(
+		Serializable[] threadLocalValues = getThreadLocalValues(
 			threadLocalDistributor);
 
 		Assert.assertEquals(1, threadLocalValues.length);
@@ -145,6 +155,7 @@ public class ThreadLocalDistributorTest {
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
+
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 			unsyncByteArrayOutputStream);
 
@@ -180,7 +191,13 @@ public class ThreadLocalDistributorTest {
 		Assert.assertEquals(testValue, TestClass._threadLocal.get());
 	}
 
-	private List<ThreadLocal<Serializable>> _getThreadLocals(
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+
+		return clazz.getClassLoader();
+	}
+
+	protected List<ThreadLocal<Serializable>> getThreadLocals(
 			ThreadLocalDistributor threadLocalDistributor)
 		throws Exception {
 
@@ -191,7 +208,7 @@ public class ThreadLocalDistributorTest {
 			threadLocalDistributor);
 	}
 
-	private Serializable[] _getThreadLocalValues(
+	protected Serializable[] getThreadLocalValues(
 			ThreadLocalDistributor threadLocalDistributor)
 		throws Exception {
 
@@ -202,26 +219,20 @@ public class ThreadLocalDistributorTest {
 			threadLocalDistributor);
 	}
 
-	private List<KeyValuePair> keyValuePairs = new ArrayList<KeyValuePair>();
-
-	{
-		keyValuePairs.add(
-			new KeyValuePair(TestClass.class.getName(), "_threadLocal"));
-		keyValuePairs.add(
-			new KeyValuePair(TestClass.class.getName(), "_nonStatic"));
-		keyValuePairs.add(
-			new KeyValuePair(TestClass.class.getName(), "_nullValue"));
-		keyValuePairs.add(
-			new KeyValuePair(TestClass.class.getName(), "_object"));
-	}
+	private List<KeyValuePair> _keyValuePairs = new ArrayList<KeyValuePair>();
 
 	private static class TestClass {
 
 		private static ThreadLocal<String> _threadLocal =
 			new ThreadLocal<String>();
 
+		@SuppressWarnings("unused")
 		private ThreadLocal<?> _nonStatic;
+
+		@SuppressWarnings("unused")
 		private static ThreadLocal<?> _nullValue;
+
+		@SuppressWarnings("unused")
 		private Object _object;
 
 	}

@@ -25,8 +25,7 @@ public class ThreadLocalDistributorRegistry {
 		return _threadLocalDistributors;
 	}
 
-	// Package level method
-	static int addThreadLocalDistributor(
+	protected static int addThreadLocalDistributor(
 		ThreadLocalDistributor threadLocalDistributor) {
 
 		int newLength = _threadLocalDistributors.length + 1;
@@ -41,7 +40,9 @@ public class ThreadLocalDistributorRegistry {
 		return newLength - 1;
 	}
 
-	static ThreadLocalDistributor getThreadLocalDistributor(int index) {
+	protected static ThreadLocalDistributor getThreadLocalDistributor(
+		int index) {
+
 		return _threadLocalDistributors[index];
 	}
 

@@ -42,7 +42,6 @@ public class ThreadLocalDistributorRegistryTest {
 			1,
 			ThreadLocalDistributorRegistry.addThreadLocalDistributor(
 				threadLocalDistributor2));
-
 		Assert.assertSame(
 			threadLocalDistributor1,
 			ThreadLocalDistributorRegistry.getThreadLocalDistributor(0));
