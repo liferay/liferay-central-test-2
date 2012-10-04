@@ -125,10 +125,12 @@ public class AuthVerifierPipeline {
 
 				authVerifierConfiguration.setAuthVerifier(authVerifier);
 
-				String authVerifierPropertyName = PropsKeys.AUTH_VERIFIER +
+				String authVerifierPropertyName = PropsKeys.AUTH_VERIFIER;
+
+				authVerifierPropertyName +=
 					StringUtil.extractLast(
-						authVerifierClassName, StringPool.PERIOD) +
-					StringPool.PERIOD;
+						authVerifierClassName, StringPool.PERIOD);
+				authVerifierPropertyName += StringPool.PERIOD;
 
 				Properties properties = PropsUtil.getProperties(
 					authVerifierPropertyName, true);

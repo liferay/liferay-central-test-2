@@ -1028,10 +1028,12 @@ public class HookHotDeployListener
 
 			authVerifierConfiguration.setAuthVerifier(authVerifier);
 
-			String authVerifierPropertyName = AUTH_VERIFIER +
+			String authVerifierPropertyName = AUTH_VERIFIER;
+
+			authVerifierPropertyName +=
 				StringUtil.extractLast(
-					authVerifierClassName, StringPool.PERIOD) +
-				StringPool.PERIOD;
+					authVerifierClassName, StringPool.PERIOD);
+			authVerifierPropertyName += StringPool.PERIOD;
 
 			Properties properties = PropertiesUtil.getProperties(
 				portalProperties, authVerifierPropertyName, true);
