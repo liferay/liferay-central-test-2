@@ -63,7 +63,6 @@ public class MessageListenerImpl implements MessageListener {
 
 	public boolean accept(String from, String recipient, Message message) {
 		try {
-
 			if (isAutoReply(message)) {
 				return false;
 			}
