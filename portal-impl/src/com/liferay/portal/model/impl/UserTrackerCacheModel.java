@@ -107,8 +107,7 @@ public class UserTrackerCacheModel implements CacheModel<UserTracker>,
 		return userTrackerImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		userTrackerId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

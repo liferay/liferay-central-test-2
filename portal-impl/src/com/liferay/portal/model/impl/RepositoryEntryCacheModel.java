@@ -82,8 +82,7 @@ public class RepositoryEntryCacheModel implements CacheModel<RepositoryEntry>,
 		return repositoryEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		repositoryEntryId = objectInput.readLong();
 		groupId = objectInput.readLong();

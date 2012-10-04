@@ -102,8 +102,7 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		return roleImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		roleId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		classNameId = objectInput.readLong();

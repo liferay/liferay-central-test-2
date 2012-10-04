@@ -85,8 +85,7 @@ public class ShoppingItemFieldCacheModel implements CacheModel<ShoppingItemField
 		return shoppingItemFieldImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		itemFieldId = objectInput.readLong();
 		itemId = objectInput.readLong();
 		name = objectInput.readUTF();

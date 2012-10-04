@@ -81,8 +81,7 @@ public class DLFileRankCacheModel implements CacheModel<DLFileRank>,
 		return dlFileRankImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		fileRankId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

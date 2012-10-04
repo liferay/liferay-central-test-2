@@ -105,8 +105,7 @@ public class SubscriptionCacheModel implements CacheModel<Subscription>,
 		return subscriptionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		subscriptionId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

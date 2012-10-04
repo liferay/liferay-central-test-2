@@ -68,8 +68,7 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		return shardImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		shardId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();

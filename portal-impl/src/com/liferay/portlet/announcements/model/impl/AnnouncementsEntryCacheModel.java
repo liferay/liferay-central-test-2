@@ -167,8 +167,7 @@ public class AnnouncementsEntryCacheModel implements CacheModel<AnnouncementsEnt
 		return announcementsEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		entryId = objectInput.readLong();
 		companyId = objectInput.readLong();

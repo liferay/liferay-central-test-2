@@ -141,8 +141,7 @@ public class MDRRuleCacheModel implements CacheModel<MDRRule>, Externalizable {
 		return mdrRuleImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		ruleId = objectInput.readLong();
 		groupId = objectInput.readLong();

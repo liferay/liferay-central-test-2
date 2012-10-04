@@ -112,8 +112,7 @@ public class AssetTagPropertyCacheModel implements CacheModel<AssetTagProperty>,
 		return assetTagPropertyImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		tagPropertyId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

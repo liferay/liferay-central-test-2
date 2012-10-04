@@ -72,8 +72,7 @@ public class MBThreadFlagCacheModel implements CacheModel<MBThreadFlag>,
 		return mbThreadFlagImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		threadFlagId = objectInput.readLong();
 		userId = objectInput.readLong();
 		modifiedDate = objectInput.readLong();

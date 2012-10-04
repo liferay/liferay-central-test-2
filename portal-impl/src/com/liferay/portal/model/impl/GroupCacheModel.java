@@ -118,8 +118,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		return groupImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		creatorUserId = objectInput.readLong();

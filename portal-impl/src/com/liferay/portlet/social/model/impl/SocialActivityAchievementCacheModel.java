@@ -80,8 +80,7 @@ public class SocialActivityAchievementCacheModel implements CacheModel<SocialAct
 		return socialActivityAchievementImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		activityAchievementId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

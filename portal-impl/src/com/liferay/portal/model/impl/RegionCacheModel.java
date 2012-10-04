@@ -78,8 +78,7 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		return regionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		regionId = objectInput.readLong();
 		countryId = objectInput.readLong();
 		regionCode = objectInput.readUTF();

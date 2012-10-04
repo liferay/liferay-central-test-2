@@ -79,8 +79,7 @@ public class SocialRelationCacheModel implements CacheModel<SocialRelation>,
 		return socialRelationImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		relationId = objectInput.readLong();
 		companyId = objectInput.readLong();

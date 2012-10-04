@@ -219,8 +219,7 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		return assetEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

@@ -76,8 +76,7 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 		return resourceTypePermissionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourceTypePermissionId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();

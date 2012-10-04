@@ -204,8 +204,7 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		return blogsEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();

@@ -176,8 +176,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
 		return shoppingCouponImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		couponId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

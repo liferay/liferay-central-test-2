@@ -93,8 +93,7 @@ public class WebDAVPropsCacheModel implements CacheModel<WebDAVProps>,
 		return webDAVPropsImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		webDavPropsId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		createDate = objectInput.readLong();

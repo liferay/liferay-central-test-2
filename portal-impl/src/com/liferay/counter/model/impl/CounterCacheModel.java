@@ -63,8 +63,7 @@ public class CounterCacheModel implements CacheModel<Counter>, Externalizable {
 		return counterImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		name = objectInput.readUTF();
 		currentId = objectInput.readLong();
 	}

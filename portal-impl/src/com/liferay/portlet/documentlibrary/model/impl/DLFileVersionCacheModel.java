@@ -207,8 +207,7 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		return dlFileVersionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileVersionId = objectInput.readLong();
 		groupId = objectInput.readLong();

@@ -83,8 +83,7 @@ public class SCLicenseCacheModel implements CacheModel<SCLicense>,
 		return scLicenseImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		licenseId = objectInput.readLong();
 		name = objectInput.readUTF();
 		url = objectInput.readUTF();

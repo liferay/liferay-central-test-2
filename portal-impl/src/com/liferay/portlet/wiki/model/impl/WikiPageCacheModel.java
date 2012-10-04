@@ -198,8 +198,7 @@ public class WikiPageCacheModel implements CacheModel<WikiPage>, Externalizable 
 		return wikiPageImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		pageId = objectInput.readLong();
 		resourcePrimKey = objectInput.readLong();

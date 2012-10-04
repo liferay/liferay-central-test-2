@@ -82,8 +82,7 @@ public class ExpandoValueCacheModel implements CacheModel<ExpandoValue>,
 		return expandoValueImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		valueId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		tableId = objectInput.readLong();

@@ -97,8 +97,7 @@ public class LayoutPrototypeCacheModel implements CacheModel<LayoutPrototype>,
 		return layoutPrototypeImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		layoutPrototypeId = objectInput.readLong();
 		companyId = objectInput.readLong();

@@ -153,8 +153,7 @@ public class WikiNodeCacheModel implements CacheModel<WikiNode>, Externalizable 
 		return wikiNodeImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		nodeId = objectInput.readLong();
 		groupId = objectInput.readLong();

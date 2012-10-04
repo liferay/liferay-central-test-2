@@ -326,8 +326,7 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		return userImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		userId = objectInput.readLong();
 		companyId = objectInput.readLong();

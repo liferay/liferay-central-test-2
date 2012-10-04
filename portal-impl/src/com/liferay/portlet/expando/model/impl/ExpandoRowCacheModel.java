@@ -63,8 +63,7 @@ public class ExpandoRowCacheModel implements CacheModel<ExpandoRow>,
 		return expandoRowImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		rowId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		tableId = objectInput.readLong();

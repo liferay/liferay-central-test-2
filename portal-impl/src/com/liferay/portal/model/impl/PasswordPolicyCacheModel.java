@@ -181,8 +181,7 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		return passwordPolicyImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		passwordPolicyId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

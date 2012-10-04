@@ -191,8 +191,7 @@ public class CalEventCacheModel implements CacheModel<CalEvent>, Externalizable 
 		return calEventImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		eventId = objectInput.readLong();
 		groupId = objectInput.readLong();

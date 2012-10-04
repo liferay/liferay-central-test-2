@@ -69,8 +69,7 @@ public class RatingsStatsCacheModel implements CacheModel<RatingsStats>,
 		return ratingsStatsImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		statsId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();

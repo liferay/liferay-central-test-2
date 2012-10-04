@@ -77,8 +77,7 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 		return userTrackerPathImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		userTrackerPathId = objectInput.readLong();
 		userTrackerId = objectInput.readLong();
 		path = objectInput.readUTF();

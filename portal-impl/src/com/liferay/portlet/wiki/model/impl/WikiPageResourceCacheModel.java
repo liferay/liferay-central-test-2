@@ -76,8 +76,7 @@ public class WikiPageResourceCacheModel implements CacheModel<WikiPageResource>,
 		return wikiPageResourceImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		resourcePrimKey = objectInput.readLong();
 		nodeId = objectInput.readLong();

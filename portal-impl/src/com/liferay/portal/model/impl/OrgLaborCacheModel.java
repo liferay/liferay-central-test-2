@@ -100,8 +100,7 @@ public class OrgLaborCacheModel implements CacheModel<OrgLabor>, Externalizable 
 		return orgLaborImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		orgLaborId = objectInput.readLong();
 		organizationId = objectInput.readLong();
 		typeId = objectInput.readInt();

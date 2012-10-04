@@ -77,8 +77,7 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		return passwordTrackerImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		passwordTrackerId = objectInput.readLong();
 		userId = objectInput.readLong();
 		createDate = objectInput.readLong();

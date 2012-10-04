@@ -79,8 +79,7 @@ public class ServiceComponentCacheModel implements CacheModel<ServiceComponent>,
 		return serviceComponentImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		serviceComponentId = objectInput.readLong();
 		buildNamespace = objectInput.readUTF();
 		buildNumber = objectInput.readLong();

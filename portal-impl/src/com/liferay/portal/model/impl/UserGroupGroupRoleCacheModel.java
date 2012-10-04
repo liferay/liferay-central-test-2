@@ -59,8 +59,7 @@ public class UserGroupGroupRoleCacheModel implements CacheModel<UserGroupGroupRo
 		return userGroupGroupRoleImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		userGroupId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		roleId = objectInput.readLong();

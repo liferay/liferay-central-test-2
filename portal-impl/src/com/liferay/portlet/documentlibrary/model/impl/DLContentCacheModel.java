@@ -86,8 +86,7 @@ public class DLContentCacheModel implements CacheModel<DLContent>,
 		return dlContentImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		contentId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

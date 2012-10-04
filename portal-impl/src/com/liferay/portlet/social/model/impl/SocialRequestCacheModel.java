@@ -104,8 +104,7 @@ public class SocialRequestCacheModel implements CacheModel<SocialRequest>,
 		return socialRequestImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		requestId = objectInput.readLong();
 		groupId = objectInput.readLong();

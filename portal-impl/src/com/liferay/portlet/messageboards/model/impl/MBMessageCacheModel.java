@@ -188,8 +188,7 @@ public class MBMessageCacheModel implements CacheModel<MBMessage>,
 		return mbMessageImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		messageId = objectInput.readLong();
 		groupId = objectInput.readLong();

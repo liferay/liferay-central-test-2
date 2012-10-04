@@ -98,8 +98,7 @@ public class SocialActivityCounterCacheModel implements CacheModel<SocialActivit
 		return socialActivityCounterImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		activityCounterId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

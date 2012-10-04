@@ -124,8 +124,7 @@ public class JournalFolderCacheModel implements CacheModel<JournalFolder>,
 		return journalFolderImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
 		groupId = objectInput.readLong();

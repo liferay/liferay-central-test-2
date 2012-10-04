@@ -100,8 +100,7 @@ public class RatingsEntryCacheModel implements CacheModel<RatingsEntry>,
 		return ratingsEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

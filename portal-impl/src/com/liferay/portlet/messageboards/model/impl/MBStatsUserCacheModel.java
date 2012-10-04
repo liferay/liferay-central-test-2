@@ -74,8 +74,7 @@ public class MBStatsUserCacheModel implements CacheModel<MBStatsUser>,
 		return mbStatsUserImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		statsUserId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		userId = objectInput.readLong();

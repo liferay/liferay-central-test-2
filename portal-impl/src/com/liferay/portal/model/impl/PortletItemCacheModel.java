@@ -114,8 +114,7 @@ public class PortletItemCacheModel implements CacheModel<PortletItem>,
 		return portletItemImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		portletItemId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

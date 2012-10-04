@@ -138,8 +138,7 @@ public class AssetVocabularyCacheModel implements CacheModel<AssetVocabulary>,
 		return assetVocabularyImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		vocabularyId = objectInput.readLong();
 		groupId = objectInput.readLong();

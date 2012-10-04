@@ -121,8 +121,7 @@ public class ShoppingOrderItemCacheModel implements CacheModel<ShoppingOrderItem
 		return shoppingOrderItemImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		orderItemId = objectInput.readLong();
 		orderId = objectInput.readLong();
 		itemId = objectInput.readUTF();

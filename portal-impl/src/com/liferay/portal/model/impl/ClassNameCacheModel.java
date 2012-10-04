@@ -63,8 +63,7 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 		return classNameImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		classNameId = objectInput.readLong();
 		value = objectInput.readUTF();
 	}

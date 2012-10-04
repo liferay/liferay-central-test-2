@@ -63,8 +63,7 @@ public class DDMStructureLinkCacheModel implements CacheModel<DDMStructureLink>,
 		return ddmStructureLinkImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		structureLinkId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();

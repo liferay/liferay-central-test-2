@@ -131,8 +131,7 @@ public class DDLRecordVersionCacheModel implements CacheModel<DDLRecordVersion>,
 		return ddlRecordVersionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		recordVersionId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

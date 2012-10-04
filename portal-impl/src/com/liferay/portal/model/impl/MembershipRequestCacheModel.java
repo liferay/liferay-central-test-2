@@ -108,8 +108,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		return membershipRequestImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		membershipRequestId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

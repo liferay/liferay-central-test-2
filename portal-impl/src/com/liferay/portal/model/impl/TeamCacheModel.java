@@ -110,8 +110,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		return teamImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		teamId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

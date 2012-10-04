@@ -63,8 +63,7 @@ public class MBDiscussionCacheModel implements CacheModel<MBDiscussion>,
 		return mbDiscussionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		discussionId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();

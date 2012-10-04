@@ -88,8 +88,7 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		return pluginSettingImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		pluginSettingId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		pluginId = objectInput.readUTF();

@@ -111,8 +111,7 @@ public class ReleaseCacheModel implements CacheModel<Release>, Externalizable {
 		return releaseImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		releaseId = objectInput.readLong();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();

@@ -102,8 +102,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		return workflowInstanceLinkImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		workflowInstanceLinkId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

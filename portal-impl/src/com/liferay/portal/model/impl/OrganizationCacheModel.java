@@ -109,8 +109,7 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		return organizationImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		organizationId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		parentOrganizationId = objectInput.readLong();

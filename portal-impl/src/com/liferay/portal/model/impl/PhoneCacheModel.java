@@ -120,8 +120,7 @@ public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 		return phoneImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		phoneId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

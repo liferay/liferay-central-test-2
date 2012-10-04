@@ -87,8 +87,7 @@ public class BlogsStatsUserCacheModel implements CacheModel<BlogsStatsUser>,
 		return blogsStatsUserImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		statsUserId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

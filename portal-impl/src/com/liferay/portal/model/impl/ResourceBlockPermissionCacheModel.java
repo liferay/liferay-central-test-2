@@ -62,8 +62,7 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 		return resourceBlockPermissionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourceBlockPermissionId = objectInput.readLong();
 		resourceBlockId = objectInput.readLong();
 		roleId = objectInput.readLong();

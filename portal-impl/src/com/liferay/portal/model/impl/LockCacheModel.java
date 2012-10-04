@@ -128,8 +128,7 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		return lockImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		lockId = objectInput.readLong();
 		companyId = objectInput.readLong();

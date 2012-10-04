@@ -81,8 +81,7 @@ public class ShoppingItemPriceCacheModel implements CacheModel<ShoppingItemPrice
 		return shoppingItemPriceImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		itemPriceId = objectInput.readLong();
 		itemId = objectInput.readLong();
 		minQuantity = objectInput.readInt();

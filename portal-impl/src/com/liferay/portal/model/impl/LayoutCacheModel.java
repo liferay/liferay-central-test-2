@@ -252,8 +252,7 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 		return layoutImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		plid = objectInput.readLong();
 		groupId = objectInput.readLong();

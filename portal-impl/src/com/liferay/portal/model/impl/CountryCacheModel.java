@@ -105,8 +105,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		return countryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		countryId = objectInput.readLong();
 		name = objectInput.readUTF();
 		a2 = objectInput.readUTF();

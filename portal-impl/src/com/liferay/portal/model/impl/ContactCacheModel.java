@@ -291,8 +291,7 @@ public class ContactCacheModel implements CacheModel<Contact>, Externalizable {
 		return contactImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		contactId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

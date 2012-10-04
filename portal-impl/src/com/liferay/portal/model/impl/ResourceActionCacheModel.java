@@ -76,8 +76,7 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		return resourceActionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourceActionId = objectInput.readLong();
 		name = objectInput.readUTF();
 		actionId = objectInput.readUTF();

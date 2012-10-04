@@ -98,8 +98,7 @@ public class UserNotificationEventCacheModel implements CacheModel<UserNotificat
 		return userNotificationEventImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		userNotificationEventId = objectInput.readLong();
 		companyId = objectInput.readLong();

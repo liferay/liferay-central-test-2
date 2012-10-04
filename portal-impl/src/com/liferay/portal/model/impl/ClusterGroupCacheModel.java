@@ -76,8 +76,7 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		return clusterGroupImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		clusterGroupId = objectInput.readLong();
 		name = objectInput.readUTF();
 		clusterNodeIds = objectInput.readUTF();

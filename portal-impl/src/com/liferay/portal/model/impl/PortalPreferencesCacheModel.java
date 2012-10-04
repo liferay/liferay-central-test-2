@@ -69,8 +69,7 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		return portalPreferencesImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		portalPreferencesId = objectInput.readLong();
 		ownerId = objectInput.readLong();
 		ownerType = objectInput.readInt();

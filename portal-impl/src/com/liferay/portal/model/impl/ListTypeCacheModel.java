@@ -71,8 +71,7 @@ public class ListTypeCacheModel implements CacheModel<ListType>, Externalizable 
 		return listTypeImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		listTypeId = objectInput.readInt();
 		name = objectInput.readUTF();
 		type = objectInput.readUTF();

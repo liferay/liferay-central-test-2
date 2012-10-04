@@ -72,8 +72,7 @@ public class SCProductScreenshotCacheModel implements CacheModel<SCProductScreen
 		return scProductScreenshotImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		productScreenshotId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();

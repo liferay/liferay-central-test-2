@@ -115,8 +115,7 @@ public class WorkflowDefinitionLinkCacheModel implements CacheModel<WorkflowDefi
 		return workflowDefinitionLinkImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		workflowDefinitionLinkId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

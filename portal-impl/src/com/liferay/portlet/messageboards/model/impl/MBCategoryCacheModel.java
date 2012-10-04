@@ -149,8 +149,7 @@ public class MBCategoryCacheModel implements CacheModel<MBCategory>,
 		return mbCategoryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		categoryId = objectInput.readLong();
 		groupId = objectInput.readLong();

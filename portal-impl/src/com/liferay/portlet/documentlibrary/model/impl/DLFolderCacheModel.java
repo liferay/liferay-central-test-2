@@ -172,8 +172,7 @@ public class DLFolderCacheModel implements CacheModel<DLFolder>, Externalizable 
 		return dlFolderImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
 		groupId = objectInput.readLong();

@@ -111,8 +111,7 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 		return websiteImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		websiteId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

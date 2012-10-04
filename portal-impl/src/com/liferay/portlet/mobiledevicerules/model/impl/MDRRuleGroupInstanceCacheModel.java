@@ -115,8 +115,7 @@ public class MDRRuleGroupInstanceCacheModel implements CacheModel<MDRRuleGroupIn
 		return mdrRuleGroupInstanceImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		ruleGroupInstanceId = objectInput.readLong();
 		groupId = objectInput.readLong();

@@ -92,8 +92,7 @@ public class ImageCacheModel implements CacheModel<Image>, Externalizable {
 		return imageImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		imageId = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		text = objectInput.readUTF();

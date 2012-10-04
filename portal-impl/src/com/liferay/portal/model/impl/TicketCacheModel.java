@@ -105,8 +105,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		return ticketImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		ticketId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		createDate = objectInput.readLong();

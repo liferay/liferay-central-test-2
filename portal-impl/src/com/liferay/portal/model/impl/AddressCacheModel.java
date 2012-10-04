@@ -156,8 +156,7 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		return addressImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		addressId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

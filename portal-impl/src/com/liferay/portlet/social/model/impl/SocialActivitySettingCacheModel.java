@@ -85,8 +85,7 @@ public class SocialActivitySettingCacheModel implements CacheModel<SocialActivit
 		return socialActivitySettingImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		activitySettingId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

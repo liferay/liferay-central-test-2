@@ -173,8 +173,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		return accountImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		accountId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

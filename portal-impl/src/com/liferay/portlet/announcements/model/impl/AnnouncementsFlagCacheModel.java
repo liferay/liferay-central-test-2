@@ -75,8 +75,7 @@ public class AnnouncementsFlagCacheModel implements CacheModel<AnnouncementsFlag
 		return announcementsFlagImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		flagId = objectInput.readLong();
 		userId = objectInput.readLong();
 		createDate = objectInput.readLong();

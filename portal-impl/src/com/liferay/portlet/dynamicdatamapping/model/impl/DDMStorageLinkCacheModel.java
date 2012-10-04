@@ -73,8 +73,7 @@ public class DDMStorageLinkCacheModel implements CacheModel<DDMStorageLink>,
 		return ddmStorageLinkImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		storageLinkId = objectInput.readLong();
 		classNameId = objectInput.readLong();

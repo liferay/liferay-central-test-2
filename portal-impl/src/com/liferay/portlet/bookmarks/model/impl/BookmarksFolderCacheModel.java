@@ -127,8 +127,7 @@ public class BookmarksFolderCacheModel implements CacheModel<BookmarksFolder>,
 		return bookmarksFolderImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
 		groupId = objectInput.readLong();

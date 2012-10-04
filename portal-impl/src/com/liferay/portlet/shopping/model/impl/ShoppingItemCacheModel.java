@@ -227,8 +227,7 @@ public class ShoppingItemCacheModel implements CacheModel<ShoppingItem>,
 		return shoppingItemImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		itemId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

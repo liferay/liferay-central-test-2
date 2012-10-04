@@ -112,8 +112,7 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 		return emailAddressImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		emailAddressId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

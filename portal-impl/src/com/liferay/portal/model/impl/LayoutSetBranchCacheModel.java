@@ -191,8 +191,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		return layoutSetBranchImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		layoutSetBranchId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

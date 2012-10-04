@@ -118,8 +118,7 @@ public class SCFrameworkVersionCacheModel implements CacheModel<SCFrameworkVersi
 		return scFrameworkVersionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		frameworkVersionId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

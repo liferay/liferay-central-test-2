@@ -140,8 +140,7 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 		return ddlRecordSetImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		recordSetId = objectInput.readLong();
 		groupId = objectInput.readLong();

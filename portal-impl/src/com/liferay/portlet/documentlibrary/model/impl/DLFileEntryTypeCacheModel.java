@@ -120,8 +120,7 @@ public class DLFileEntryTypeCacheModel implements CacheModel<DLFileEntryType>,
 		return dlFileEntryTypeImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileEntryTypeId = objectInput.readLong();
 		groupId = objectInput.readLong();

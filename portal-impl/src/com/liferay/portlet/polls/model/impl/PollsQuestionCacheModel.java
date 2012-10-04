@@ -138,8 +138,7 @@ public class PollsQuestionCacheModel implements CacheModel<PollsQuestion>,
 		return pollsQuestionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		questionId = objectInput.readLong();
 		groupId = objectInput.readLong();

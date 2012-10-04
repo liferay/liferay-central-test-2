@@ -82,8 +82,7 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		return userGroupImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		userGroupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		parentUserGroupId = objectInput.readLong();

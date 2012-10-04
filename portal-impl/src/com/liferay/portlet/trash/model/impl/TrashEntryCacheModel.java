@@ -104,8 +104,7 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		return trashEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

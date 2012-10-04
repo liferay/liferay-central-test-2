@@ -112,8 +112,7 @@ public class AssetCategoryPropertyCacheModel implements CacheModel<AssetCategory
 		return assetCategoryPropertyImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		categoryPropertyId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

@@ -79,8 +79,7 @@ public class DLFileEntryMetadataCacheModel implements CacheModel<DLFileEntryMeta
 		return dlFileEntryMetadataImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileEntryMetadataId = objectInput.readLong();
 		DDMStorageId = objectInput.readLong();

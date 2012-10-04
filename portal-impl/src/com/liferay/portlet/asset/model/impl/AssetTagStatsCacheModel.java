@@ -63,8 +63,7 @@ public class AssetTagStatsCacheModel implements CacheModel<AssetTagStats>,
 		return assetTagStatsImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		tagStatsId = objectInput.readLong();
 		tagId = objectInput.readLong();
 		classNameId = objectInput.readLong();

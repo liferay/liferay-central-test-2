@@ -245,8 +245,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		return layoutRevisionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		layoutRevisionId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

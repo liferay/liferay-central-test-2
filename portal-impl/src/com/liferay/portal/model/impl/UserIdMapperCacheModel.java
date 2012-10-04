@@ -84,8 +84,7 @@ public class UserIdMapperCacheModel implements CacheModel<UserIdMapper>,
 		return userIdMapperImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		userIdMapperId = objectInput.readLong();
 		userId = objectInput.readLong();
 		type = objectInput.readUTF();

@@ -174,8 +174,7 @@ public class SCProductEntryCacheModel implements CacheModel<SCProductEntry>,
 		return scProductEntryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		productEntryId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();

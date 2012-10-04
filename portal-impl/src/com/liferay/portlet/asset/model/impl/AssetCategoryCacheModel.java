@@ -143,8 +143,7 @@ public class AssetCategoryCacheModel implements CacheModel<AssetCategory>,
 		return assetCategoryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		categoryId = objectInput.readLong();
 		groupId = objectInput.readLong();

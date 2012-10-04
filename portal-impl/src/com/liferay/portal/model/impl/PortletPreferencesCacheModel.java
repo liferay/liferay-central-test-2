@@ -81,8 +81,7 @@ public class PortletPreferencesCacheModel implements CacheModel<PortletPreferenc
 		return portletPreferencesImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		portletPreferencesId = objectInput.readLong();
 		ownerId = objectInput.readLong();
 		ownerType = objectInput.readInt();

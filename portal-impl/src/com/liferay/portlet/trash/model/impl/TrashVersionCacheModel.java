@@ -66,8 +66,7 @@ public class TrashVersionCacheModel implements CacheModel<TrashVersion>,
 		return trashVersionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		versionId = objectInput.readLong();
 		entryId = objectInput.readLong();
 		classNameId = objectInput.readLong();

@@ -271,8 +271,7 @@ public class JournalArticleCacheModel implements CacheModel<JournalArticle>,
 		return journalArticleImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		id = objectInput.readLong();
 		resourcePrimKey = objectInput.readLong();

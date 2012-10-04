@@ -148,8 +148,7 @@ public class MDRActionCacheModel implements CacheModel<MDRAction>,
 		return mdrActionImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		actionId = objectInput.readLong();
 		groupId = objectInput.readLong();

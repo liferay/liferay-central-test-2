@@ -59,8 +59,7 @@ public class BrowserTrackerCacheModel implements CacheModel<BrowserTracker>,
 		return browserTrackerImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		browserTrackerId = objectInput.readLong();
 		userId = objectInput.readLong();
 		browserKey = objectInput.readLong();

@@ -80,8 +80,7 @@ public class AnnouncementsDeliveryCacheModel implements CacheModel<Announcements
 		return announcementsDeliveryImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		deliveryId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();

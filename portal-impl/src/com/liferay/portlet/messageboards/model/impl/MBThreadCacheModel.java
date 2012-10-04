@@ -120,8 +120,7 @@ public class MBThreadCacheModel implements CacheModel<MBThread>, Externalizable 
 		return mbThreadImpl;
 	}
 
-	public void readExternal(ObjectInput objectInput)
-		throws ClassNotFoundException, IOException {
+	public void readExternal(ObjectInput objectInput) throws IOException {
 		threadId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
