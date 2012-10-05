@@ -131,7 +131,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
-	public String getSubContainerModelName() {
+	public String getSubcontainerModelName() {
 		return StringPool.BLANK;
 	}
 

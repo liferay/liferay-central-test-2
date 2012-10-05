@@ -128,7 +128,7 @@ public interface TrashHandler {
 
 	public String getRootContainerModelName();
 
-	public String getSubContainerModelName();
+	public String getSubcontainerModelName();
 
 	public TrashRenderer getTrashRenderer(long classPK)
 		throws PortalException, SystemException;
