@@ -146,8 +146,10 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 		WikiNodeLocalServiceUtil.updateWikiNode(node, false);
 	}
 
-	protected boolean hasPermission(
-			PermissionChecker permissionChecker, long classPK, String actionId)
+	@Override
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, String className, long classPK,
+			String actionId)
 		throws PortalException, SystemException {
 
 		return WikiNodePermission.contains(
