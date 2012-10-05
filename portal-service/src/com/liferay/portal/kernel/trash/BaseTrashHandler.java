@@ -82,6 +82,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		deleteTrashEntries(new long[] {classPK}, checkPermission);
 	}
 
+	@SuppressWarnings("unused")
 	public ContainerModel getContainerModel(long containerModelId)
 		throws PortalException, SystemException {
 
@@ -92,6 +93,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
+	@SuppressWarnings("unused")
 	public List<ContainerModel> getContainerModels(
 			long entryId, long parentContainerModelId, int start, int end)
 		throws PortalException, SystemException {
@@ -99,6 +101,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	public int getContainerModelsCount(
 			long entryId, long parentContainerModelId)
 		throws PortalException, SystemException {
@@ -149,14 +152,15 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, String className, long classPK,
-			String actionId)
+			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isRestorable(long classPK)
 		throws PortalException, SystemException {
 
@@ -183,6 +187,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		restoreTrashEntries(new long[] {classPK});
 	}
 
+	@SuppressWarnings("unused")
 	public void updateTitle(long classPK, String title)
 		throws PortalException, SystemException {
 	}

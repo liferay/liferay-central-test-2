@@ -107,7 +107,7 @@ public class TrashIndexer extends BaseIndexer {
 			entryClassName);
 
 		return trashHandler.hasPermission(
-			permissionChecker, entryClassName, entryClassPK, actionId);
+			permissionChecker, entryClassPK, actionId);
 	}
 
 	@Override

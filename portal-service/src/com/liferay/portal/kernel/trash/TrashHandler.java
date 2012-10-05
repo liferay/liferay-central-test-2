@@ -301,8 +301,7 @@ public interface TrashHandler {
 		throws PortalException, SystemException;
 
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, String className, long classPK,
-			String actionId)
+			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException;
 
 	/**

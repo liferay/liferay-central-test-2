@@ -66,8 +66,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					TrashHandlerRegistryUtil.getTrashHandler(className);
 
 				if (trashHandler.hasPermission(
-						permissionChecker, className, classPK,
-						ActionKeys.DELETE)) {
+						permissionChecker, classPK, ActionKeys.DELETE)) {
 
 					trashHandler.deleteTrashEntry(classPK);
 				}
@@ -134,8 +133,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					TrashHandlerRegistryUtil.getTrashHandler(className);
 
 				if (trashHandler.hasPermission(
-						permissionChecker, className, classPK,
-						ActionKeys.VIEW)) {
+						permissionChecker, classPK, ActionKeys.VIEW)) {
 
 					filteredEntries.add(entry);
 				}

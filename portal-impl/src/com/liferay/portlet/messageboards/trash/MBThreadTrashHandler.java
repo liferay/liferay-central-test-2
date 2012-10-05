@@ -99,9 +99,9 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, String className, long classPK,
-			String actionId)
+			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		MBThread thread = MBThreadLocalServiceUtil.getThread(classPK);

@@ -151,8 +151,7 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 
 	@Override
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, String className, long classPK,
-			String actionId)
+			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getDLFolder(classPK);
