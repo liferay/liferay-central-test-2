@@ -95,7 +95,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 
 	@SuppressWarnings("unused")
 	public List<ContainerModel> getContainerModels(
-			long entryId, long parentContainerModelId, int start, int end)
+			long trashEntryId, long parentContainerModelId, int start, int end)
 		throws PortalException, SystemException {
 
 		return null;
@@ -103,7 +103,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 
 	@SuppressWarnings("unused")
 	public int getContainerModelsCount(
-			long entryId, long parentContainerModelId)
+			long trashEntryId, long parentContainerModelId)
 		throws PortalException, SystemException {
 
 		return 0;

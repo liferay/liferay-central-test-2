@@ -112,10 +112,10 @@ public interface TrashHandler {
 	public String getContainerModelName();
 
 	public List<ContainerModel> getContainerModels(
-			long entryId, long containerModelId, int start, int end)
+			long trashEntryId, long containerModelId, int start, int end)
 		throws PortalException, SystemException;
 
-	public int getContainerModelsCount(long entryId, long containerModelId)
+	public int getContainerModelsCount(long trashEntryId, long containerModelId)
 		throws PortalException, SystemException;
 
 	public String getDeleteMessage();
