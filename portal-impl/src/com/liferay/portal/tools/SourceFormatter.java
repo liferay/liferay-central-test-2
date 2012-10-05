@@ -2879,7 +2879,13 @@ public class SourceFormatter {
 		String line, String previousLine, int lineTabCount,
 		int previousLineTabCount) {
 
-		if (Validator.isNull(previousLine)) {
+		if (Validator.isNull(line) || Validator.isNull(previousLine)) {
+			return null;
+		}
+
+		String trimmedPreviousLine = StringUtil.trimLeading(previousLine);
+
+		if (line.startsWith("// ") || trimmedPreviousLine.startsWith("// ")) {
 			return null;
 		}
 
@@ -2894,7 +2900,6 @@ public class SourceFormatter {
 		}
 
 		int previousLineLength = _getLineLength(previousLine);
-		String trimmedPreviousLine = StringUtil.trimLeading(previousLine);
 
 		if ((line.length() + previousLineLength) < 80) {
 			if (trimmedPreviousLine.startsWith("for ") &&
