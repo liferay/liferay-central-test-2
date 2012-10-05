@@ -1833,18 +1833,36 @@ public class SourceFormatter {
 
 					sb.append(previousLine);
 
-					if (previousLine.endsWith(
-							StringPool.TAB + StringPool.CLOSE_CURLY_BRACE) &&
+					if (Validator.isNotNull(previousLine) &&
 						Validator.isNotNull(trimmedLine) &&
-						!trimmedLine.startsWith(StringPool.CLOSE_CURLY_BRACE) &&
-						!trimmedLine.startsWith(StringPool.CLOSE_PARENTHESIS) &&
-						!trimmedLine.startsWith(StringPool.DOUBLE_SLASH) &&
-						!trimmedLine.startsWith("catch ") &&
-						!trimmedLine.startsWith("else ") &&
-						!trimmedLine.startsWith("finally ") &&
-						!trimmedLine.startsWith("while ")) {
+						!previousLine.contains("/*")) {
 
-						sb.append("\n");
+						String trimmedPreviousLine = StringUtil.trimLeading(
+							previousLine);
+
+						if ((trimmedPreviousLine.startsWith("// ") &&
+							 !trimmedLine.startsWith("// ")) ||
+							(!trimmedPreviousLine.startsWith("// ") &&
+							 trimmedLine.startsWith("// "))) {
+
+							sb.append("\n");
+						}
+						else if (previousLine.endsWith(
+									StringPool.TAB +
+										StringPool.CLOSE_CURLY_BRACE) &&
+								 !trimmedLine.startsWith(
+									 StringPool.CLOSE_CURLY_BRACE) &&
+								 !trimmedLine.startsWith(
+									 StringPool.CLOSE_PARENTHESIS) &&
+								 !trimmedLine.startsWith(
+									 StringPool.DOUBLE_SLASH) &&
+								 !trimmedLine.startsWith("catch ") &&
+								 !trimmedLine.startsWith("else ") &&
+								 !trimmedLine.startsWith("finally ") &&
+								 !trimmedLine.startsWith("while ")) {
+
+							sb.append("\n");
+						}
 					}
 
 					sb.append("\n");
