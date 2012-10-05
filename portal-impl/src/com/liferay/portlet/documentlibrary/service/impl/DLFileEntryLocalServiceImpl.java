@@ -1293,7 +1293,7 @@ public class DLFileEntryLocalServiceImpl
 
 		int oldDLFileVersionStatus = oldDLFileVersion.getStatus();
 
-		List<ObjectValuePair<Long, Integer>> dlFileVersionStatuses =
+		List<ObjectValuePair<Long, Integer>> dlFileVersionStatusOVPs =
 			getDlFileVersionStatuses(dlFileVersions);
 
 		dlFileVersion.setStatus(status);
@@ -1407,7 +1407,7 @@ public class DLFileEntryLocalServiceImpl
 				userId, dlFileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				dlFileEntry.getFileEntryId(), oldDLFileVersionStatus,
-				dlFileVersionStatuses, null);
+				dlFileVersionStatusOVPs, null);
 		}
 
 		// App helper
@@ -1610,23 +1610,25 @@ public class DLFileEntryLocalServiceImpl
 	protected List<ObjectValuePair<Long, Integer>> getDlFileVersionStatuses(
 		List<DLFileVersion> dlFileVersions) {
 
-		List<ObjectValuePair<Long, Integer>> dlFileVersionStatuses =
+		List<ObjectValuePair<Long, Integer>> dlFileVersionStatusOVPs =
 			new ArrayList<ObjectValuePair<Long, Integer>>(
 				dlFileVersions.size());
 
-		for (DLFileVersion curDLFileVersion : dlFileVersions) {
-			int dlFileVersionStatus = curDLFileVersion.getStatus();
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			int status = dlFileVersion.getStatus();
 
-			if (dlFileVersionStatus == WorkflowConstants.STATUS_PENDING) {
-				dlFileVersionStatus = WorkflowConstants.STATUS_DRAFT;
+			if (status == WorkflowConstants.STATUS_PENDING) {
+				status = WorkflowConstants.STATUS_DRAFT;
 			}
 
-			dlFileVersionStatuses.add(
+			ObjectValuePair<Long, Integer> dlFileVersionStatusOVP =
 				new ObjectValuePair<Long, Integer>(
-					curDLFileVersion.getFileVersionId(), dlFileVersionStatus));
+					dlFileVersion.getFileVersionId(), status);
+
+			dlFileVersionStatusOVPs.add(dlFileVersionStatusOVP);
 		}
 
-		return dlFileVersionStatuses;
+		return dlFileVersionStatusOVPs;
 	}
 
 	protected Long getFileEntryTypeId(
