@@ -84,8 +84,12 @@ import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifi
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
+import com.liferay.portlet.expando.NoSuchRowException;
+import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.trash.model.TrashVersion;
 
 import java.awt.image.RenderedImage;
@@ -1775,15 +1779,52 @@ public class DLFileEntryLocalServiceImpl
 
 			// Expando
 
-			ExpandoBridge lastFileVersionExpandoBridge =
-				dlLastFileVersion.getExpandoBridge();
-			ExpandoBridge latestFileVersionExpandoBridge =
-				dlLatestFileVersion.getExpandoBridge();
+			ExpandoTable expandoTable = null;
 
-			if (!lastFileVersionExpandoBridge.equals(
-					latestFileVersionExpandoBridge)) {
+			try {
+				expandoTable =
+					expandoTableLocalService.getDefaultTable(
+						dlLastFileVersion.getCompanyId(),
+						DLFileEntry.class.getName());
+			}
+			catch (NoSuchTableException nste) {
+			}
 
-				return false;
+			if (expandoTable != null) {
+				Date lastFileVersionExpandoRowModifiedDate = null;
+
+				try {
+					ExpandoRow lastFileVersionExpandoRow =
+						expandoRowLocalService.getRow(
+							expandoTable.getTableId(),
+							dlLastFileVersion.getPrimaryKey());
+
+					lastFileVersionExpandoRowModifiedDate =
+						lastFileVersionExpandoRow.getModifiedDate();
+				}
+				catch (NoSuchRowException nsre) {
+				}
+
+				Date latestFileVersionExpandoRowModifiedDate = null;
+
+				try {
+					ExpandoRow latestFileVersionExpandoRow =
+						expandoRowLocalService.getRow(
+							expandoTable.getTableId(),
+							dlLatestFileVersion.getPrimaryKey());
+
+					latestFileVersionExpandoRowModifiedDate =
+						latestFileVersionExpandoRow.getModifiedDate();
+				}
+				catch (NoSuchRowException nsre) {
+				}
+
+				if (!Validator.equals(
+						lastFileVersionExpandoRowModifiedDate,
+						latestFileVersionExpandoRowModifiedDate)) {
+
+					return false;
+				}
 			}
 
 			// File entry type
