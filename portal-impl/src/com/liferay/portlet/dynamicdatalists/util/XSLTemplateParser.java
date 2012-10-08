@@ -23,6 +23,7 @@ import com.liferay.util.ContentUtil;
 public class XSLTemplateParser extends
 	com.liferay.portlet.journal.util.XSLTemplateParser {
 
+	@Override
 	protected String getErrorTemplateContent() {
 		return ContentUtil.get(
 			PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_XSL);
