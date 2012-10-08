@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -1656,24 +1657,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	protected String getChecksum(InputStream is) throws Exception {
-		if (_messageDigest == null) {
-			_messageDigest = MessageDigest.getInstance("SHA");
-		}
-
-		byte[] buffer = new byte[1024];
-
-		int numRead = 0;
-
-		while ((numRead = is.read(buffer)) != -1) {
-			if (numRead > 0) {
-				_messageDigest.update(buffer, 0, numRead);
-			}
-		}
-
-		return Base64.encode(_messageDigest.digest());
-	}
-
 	protected List<ObjectValuePair<Long, Integer>> getDlFileVersionStatuses(
 		List<DLFileVersion> dlFileVersions) {
 
@@ -1873,7 +1856,7 @@ public class DLFileEntryLocalServiceImpl
 						dlFileEntry.getDataRepositoryId(),
 						dlFileEntry.getName(), dlLastFileVersion.getVersion());
 
-					lastFileVersionChecksum = getChecksum(
+					lastFileVersionChecksum = DigesterUtil.digest(
 						lastFileVersionStream);
 
 					dlLastFileVersion.setChecksum(lastFileVersionChecksum);
@@ -1886,7 +1869,7 @@ public class DLFileEntryLocalServiceImpl
 					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 					dlLatestFileVersion.getVersion());
 
-				latestFileVersionChecksum = getChecksum(
+				latestFileVersionChecksum = DigesterUtil.digest(
 					latestFileVersionStream);
 
 				if (lastFileVersionChecksum.equals(latestFileVersionChecksum)) {
