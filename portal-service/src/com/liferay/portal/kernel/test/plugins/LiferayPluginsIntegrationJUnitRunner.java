@@ -33,8 +33,8 @@ public class LiferayPluginsIntegrationJUnitRunner
 	@Override
 	public void initApplicationContext() {
 
-		// It is not necessary to init application context in plugins because
-		// a portal instance must be up and running
+		// It is not necessary to initialize the application context because a
+		// portal instance must be up and running
 
 	}
 
