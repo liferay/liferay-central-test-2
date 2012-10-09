@@ -17,25 +17,14 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.spring.aop.Skip;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
-import com.liferay.portal.spring.aop.ServiceBeanAopCacheManager;
 import com.liferay.portal.staging.StagingAdvicesThreadLocal;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * @author Brian Wing Shun Chan
@@ -61,58 +50,6 @@ public class VerifyProcessUtil {
 		return false;
 	}
 
-	private static void _startDirectDBAccessing() throws VerifyException {
-
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = false;
-
-		try {
-			Field annotationsField = ReflectionUtil.getDeclaredField(
-				ServiceBeanAopCacheManager.class, "_annotations");
-
-			annotationsField.set(
-				null, new HashMap<MethodInvocation, Annotation[]>() {
-
-					@Override
-					public Annotation[] get(Object key) {
-
-						return _mockAnnotations;
-					}
-
-					private final Annotation[] _mockAnnotations =
-						new Annotation[] {
-							new Skip() {
-
-								public Class<? extends Annotation>
-									annotationType() {
-
-									return Skip.class;
-								}
-							}
-						};
-
-				});
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	private static void _stopDirectDBAccessing() throws VerifyException {
-		PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
-
-		try {
-			Field annotationsField = ReflectionUtil.getDeclaredField(
-				ServiceBeanAopCacheManager.class, "_annotations");
-
-			annotationsField.set(
-				null, new ConcurrentHashMap<MethodInvocation, Annotation[]>());
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
 	private static boolean _verifyProcess(boolean ranUpgradeProcess)
 		throws VerifyException {
 
@@ -133,8 +70,6 @@ public class VerifyProcessUtil {
 		StagingAdvicesThreadLocal.setEnabled(false);
 		WorkflowThreadLocal.setEnabled(false);
 
-		_startDirectDBAccessing();
-
 		try {
 			String[] verifyProcessClassNames = PropsUtil.getArray(
 				PropsKeys.VERIFY_PROCESSES);
@@ -149,8 +84,6 @@ public class VerifyProcessUtil {
 			}
 		}
 		finally {
-			_stopDirectDBAccessing();
-
 			SearchEngineUtil.setIndexReadOnly(tempIndexReadOnly);
 
 			BatchSessionUtil.setEnabled(false);
