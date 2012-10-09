@@ -39,8 +39,10 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -143,6 +145,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ExpandoBridgeImpl)) {
 			return false;
@@ -151,8 +154,13 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		ExpandoBridgeImpl expandoBridgeImpl = (ExpandoBridgeImpl)obj;
 
 		try {
-			long tableId1 = getTable().getTableId();
-			long tableId2 = expandoBridgeImpl.getTable().getTableId();
+			ExpandoTable table1 = getTable();
+
+			long tableId1 = table1.getTableId();
+
+			ExpandoTable table2 = expandoBridgeImpl.getTable();
+
+			long tableId2 = table2.getTableId();
 
 			if (tableId1 != tableId2) {
 				return false;
@@ -163,13 +171,11 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 
 		for (ExpandoColumn column : getAttributeColumns()) {
-			String name = column.getName();
-			int type = column.getType();
+			Serializable attribute1 = getAttribute(column.getName());
+			Serializable attribute2 = expandoBridgeImpl.getAttribute(
+				column.getName());
 
-			Serializable attribute1 = getAttribute(name);
-			Serializable attribute2 = expandoBridgeImpl.getAttribute(name);
-
-			if (!ExpandoColumnConstants.equals(type, attribute1, attribute2)) {
+			if (!equals(column.getType(), attribute1, attribute2)) {
 				return false;
 			}
 		}
@@ -546,6 +552,67 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	public void setIndexEnabled(boolean indexEnabled) {
 		_indexEnabled = indexEnabled;
+	}
+
+	protected boolean equals(
+		int type, Serializable serializable1, Serializable serializable2) {
+
+		if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+			Boolean[] array1 = (Boolean[])serializable1;
+			Boolean[] array2 = (Boolean[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+			Date[] array1 = (Date[])serializable1;
+			Date[] array2 = (Date[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			double[] array1 = (double[])serializable1;
+			double[] array2 = (double[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			float[] array1 = (float[])serializable1;
+			float[] array2 = (float[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			int[] array1 = (int[])serializable1;
+			int[] array2 = (int[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+			long[] array1 = (long[])serializable1;
+			long[] array2 = (long[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.NUMBER_ARRAY) {
+			Number[] array1 = (Number[])serializable1;
+			Number[] array2 = (Number[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+			short[] array1 = (short[])serializable1;
+			short[] array2 = (short[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+			String[] array1 = (String[])serializable1;
+			String[] array2 = (String[])serializable2;
+
+			return Arrays.equals(array1, array2);
+		}
+
+		return serializable1.equals(serializable2);
 	}
 
 	protected List<ExpandoColumn> getAttributeColumns() {

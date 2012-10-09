@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.io.InputStream;
+
 import java.nio.ByteBuffer;
 
 /**

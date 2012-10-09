@@ -170,16 +170,16 @@ public class DigesterImpl implements Digester {
 
 			byte[] buffer = new byte[StreamUtil.BUFFER_SIZE];
 
-			int readBytes = 0;
+			int read = 0;
 
-			while ((readBytes = inputStream.read(buffer)) != -1) {
-				if (readBytes > 0) {
-					messageDigest.update(buffer, 0, readBytes);
+			while ((read = inputStream.read(buffer)) != -1) {
+				if (read > 0) {
+					messageDigest.update(buffer, 0, read);
 				}
 			}
 		}
-		catch (IOException ie) {
-			_log.error(ie, ie);
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			_log.error(nsae, nsae);
@@ -187,7 +187,6 @@ public class DigesterImpl implements Digester {
 		finally {
 			StreamUtil.cleanUp(inputStream);
 		}
-
 
 		return messageDigest.digest();
 	}

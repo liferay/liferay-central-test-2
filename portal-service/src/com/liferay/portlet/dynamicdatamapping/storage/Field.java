@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 
@@ -41,6 +42,7 @@ public class Field implements Serializable {
 		this(0, name, value);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Field)) {
 			return false;
@@ -49,13 +51,13 @@ public class Field implements Serializable {
 		Field field = (Field)obj;
 
 		if ((_ddmStructureId == field._ddmStructureId) &&
-			_name.equals(field._name) && _value.equals(field._value)) {
+			Validator.equals(_name, field._name) &&
+			Validator.equals(_value, field._value)) {
 
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public String getDataType() throws PortalException, SystemException {

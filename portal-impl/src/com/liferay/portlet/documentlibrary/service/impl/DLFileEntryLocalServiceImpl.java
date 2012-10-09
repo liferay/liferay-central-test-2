@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -98,8 +97,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
-import java.security.MessageDigest;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -270,26 +267,26 @@ public class DLFileEntryLocalServiceImpl
 			dlFileEntryPersistence.update(dlFileEntry, false);
 		}
 
-		DLFileVersion dlLastFileVersion =
+		DLFileVersion lastDLFileVersion =
 			dlFileVersionLocalService.getFileVersion(
 				dlFileEntry.getFileEntryId(), dlFileEntry.getVersion());
 
-		DLFileVersion dlLatestFileVersion =
+		DLFileVersion latestDLFileVersion =
 			dlFileVersionLocalService.getLatestFileVersion(fileEntryId, false);
 
 		if (isKeepFileVersionLabel(
-				dlFileEntry, dlLastFileVersion, dlLatestFileVersion,
+				dlFileEntry, lastDLFileVersion, latestDLFileVersion,
 				serviceContext.getWorkflowAction())) {
 
-			if (dlLastFileVersion.getSize() == dlLatestFileVersion.getSize()) {
-				removeFileVersion(dlFileEntry, dlLatestFileVersion);
+			if (lastDLFileVersion.getSize() == latestDLFileVersion.getSize()) {
+				removeFileVersion(dlFileEntry, latestDLFileVersion);
 
 				return;
 			}
 
-			dlLastFileVersion.setSize(dlLatestFileVersion.getSize());
+			lastDLFileVersion.setSize(latestDLFileVersion.getSize());
 
-			dlFileVersionPersistence.update(dlLastFileVersion, false);
+			dlFileVersionPersistence.update(lastDLFileVersion, false);
 
 			// Folder
 
@@ -305,7 +302,7 @@ public class DLFileEntryLocalServiceImpl
 			try {
 				DLStoreUtil.deleteFile(
 					user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
-					dlFileEntry.getName(), dlLastFileVersion.getVersion());
+					dlFileEntry.getName(), lastDLFileVersion.getVersion());
 			}
 			catch (NoSuchModelException nsme) {
 			}
@@ -314,11 +311,11 @@ public class DLFileEntryLocalServiceImpl
 				user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
 				dlFileEntry.getName(),
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION,
-				dlLastFileVersion.getVersion());
+				lastDLFileVersion.getVersion());
 
 			// Latest file version
 
-			removeFileVersion(dlFileEntry, dlLatestFileVersion);
+			removeFileVersion(dlFileEntry, latestDLFileVersion);
 
 			return;
 		}
@@ -326,10 +323,10 @@ public class DLFileEntryLocalServiceImpl
 		String version = getNextVersion(
 			dlFileEntry, majorVersion, serviceContext.getWorkflowAction());
 
-		dlLatestFileVersion.setVersion(version);
-		dlLatestFileVersion.setChangeLog(changeLog);
+		latestDLFileVersion.setVersion(version);
+		latestDLFileVersion.setChangeLog(changeLog);
 
-		dlFileVersionPersistence.update(dlLatestFileVersion, false);
+		dlFileVersionPersistence.update(latestDLFileVersion, false);
 
 		// Folder
 
@@ -351,7 +348,7 @@ public class DLFileEntryLocalServiceImpl
 				WorkflowConstants.ACTION_PUBLISH) {
 
 			startWorkflowInstance(
-				userId, serviceContext, dlLatestFileVersion,
+				userId, serviceContext, latestDLFileVersion,
 				DLSyncConstants.EVENT_UPDATE);
 		}
 
@@ -1752,8 +1749,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected boolean isKeepFileVersionLabel(
-			DLFileEntry dlFileEntry, DLFileVersion dlLastFileVersion,
-			DLFileVersion dlLatestFileVersion, int workflowAction)
+			DLFileEntry dlFileEntry, DLFileVersion lastDLFileVersion,
+			DLFileVersion latestDLFileVersion, int workflowAction)
 		throws PortalException, SystemException {
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
@@ -1764,97 +1761,91 @@ public class DLFileEntryLocalServiceImpl
 			return false;
 		}
 
-		if ((dlLastFileVersion.getFolderId() ==
-				dlLatestFileVersion.getFolderId()) &&
-			dlLastFileVersion.getExtension().equals(
-				dlLatestFileVersion.getExtension()) &&
-			dlLastFileVersion.getMimeType().equals(
-				dlLatestFileVersion.getMimeType()) &&
-			dlLastFileVersion.getTitle().equals(
-				dlLatestFileVersion.getTitle()) &&
-			dlLastFileVersion.getDescription().equals(
-				dlLatestFileVersion.getDescription()) &&
-			(dlLastFileVersion.getFileEntryTypeId() ==
-				dlLatestFileVersion.getFileEntryTypeId())) {
+		if ((lastDLFileVersion.getFolderId() ==
+				latestDLFileVersion.getFolderId()) &&
+			Validator.equals(
+				lastDLFileVersion.getExtension(),
+				latestDLFileVersion.getExtension()) &&
+			Validator.equals(
+				lastDLFileVersion.getMimeType(),
+				latestDLFileVersion.getMimeType()) &&
+			Validator.equals(
+				lastDLFileVersion.getTitle(), latestDLFileVersion.getTitle()) &&
+			Validator.equals(
+				lastDLFileVersion.getDescription(),
+				latestDLFileVersion.getDescription()) &&
+			(lastDLFileVersion.getFileEntryTypeId() ==
+				latestDLFileVersion.getFileEntryTypeId())) {
 
 			// Expando
 
 			ExpandoTable expandoTable = null;
 
 			try {
-				expandoTable =
-					expandoTableLocalService.getDefaultTable(
-						dlLastFileVersion.getCompanyId(),
-						DLFileEntry.class.getName());
+				expandoTable = expandoTableLocalService.getDefaultTable(
+					lastDLFileVersion.getCompanyId(),
+					DLFileEntry.class.getName());
 			}
 			catch (NoSuchTableException nste) {
 			}
 
 			if (expandoTable != null) {
-				Date lastFileVersionExpandoRowModifiedDate = null;
+				Date lastModifiedDate = null;
 
 				try {
-					ExpandoRow lastFileVersionExpandoRow =
-						expandoRowLocalService.getRow(
-							expandoTable.getTableId(),
-							dlLastFileVersion.getPrimaryKey());
+					ExpandoRow lastExpandoRow = expandoRowLocalService.getRow(
+						expandoTable.getTableId(),
+						lastDLFileVersion.getPrimaryKey());
 
-					lastFileVersionExpandoRowModifiedDate =
-						lastFileVersionExpandoRow.getModifiedDate();
+					lastModifiedDate = lastExpandoRow.getModifiedDate();
 				}
 				catch (NoSuchRowException nsre) {
 				}
 
-				Date latestFileVersionExpandoRowModifiedDate = null;
+				Date latestModifiedDate = null;
 
 				try {
-					ExpandoRow latestFileVersionExpandoRow =
+					ExpandoRow latestExpandoRow =
 						expandoRowLocalService.getRow(
 							expandoTable.getTableId(),
-							dlLatestFileVersion.getPrimaryKey());
+							latestDLFileVersion.getPrimaryKey());
 
-					latestFileVersionExpandoRowModifiedDate =
-						latestFileVersionExpandoRow.getModifiedDate();
+					latestModifiedDate = latestExpandoRow.getModifiedDate();
 				}
 				catch (NoSuchRowException nsre) {
 				}
 
-				if (!Validator.equals(
-						lastFileVersionExpandoRowModifiedDate,
-						latestFileVersionExpandoRowModifiedDate)) {
-
+				if (!Validator.equals(lastModifiedDate, latestModifiedDate)) {
 					return false;
 				}
 			}
 
 			// File entry type
 
-			List<DLFileEntryMetadata> lastFileVersionFileEntryMetadatas =
+			List<DLFileEntryMetadata> lastFileEntryMetadatas =
 				dlFileEntryMetadataLocalService.
 					getFileVersionFileEntryMetadatas(
-						dlLastFileVersion.getFileVersionId());
-			List<DLFileEntryMetadata> latestFileVersionFileEntryMetadatas =
+						lastDLFileVersion.getFileVersionId());
+			List<DLFileEntryMetadata> latestFileEntryMetadatas =
 				dlFileEntryMetadataLocalService.
 					getFileVersionFileEntryMetadatas(
-						dlLatestFileVersion.getFileVersionId());
+						latestDLFileVersion.getFileVersionId());
 
-			for (DLFileEntryMetadata lastFileVersionFileEntryMetadata :
-					lastFileVersionFileEntryMetadatas) {
+			for (DLFileEntryMetadata lastFileEntryMetadata :
+					lastFileEntryMetadatas) {
 
-				Fields lastFileVersionFields = StorageEngineUtil.getFields(
-					lastFileVersionFileEntryMetadata.getDDMStorageId());
+				Fields lastFields = StorageEngineUtil.getFields(
+					lastFileEntryMetadata.getDDMStorageId());
 
 				boolean found = false;
 
-				for (DLFileEntryMetadata latestFileVersionFileEntryMetadata :
-						latestFileVersionFileEntryMetadatas) {
+				for (DLFileEntryMetadata latestEntryMetadata :
+						latestFileEntryMetadatas) {
 
-					Fields latestFileVersionFields =
-						StorageEngineUtil.getFields(
-							latestFileVersionFileEntryMetadata.
-								getDDMStorageId());
+					Fields latestFields = StorageEngineUtil.getFields(
+						latestEntryMetadata.getDDMStorageId());
 
-					if (lastFileVersionFields.equals(latestFileVersionFields)) {
+					if (lastFields.equals(latestFields)) {
 						found = true;
 
 						break;
@@ -1868,64 +1859,61 @@ public class DLFileEntryLocalServiceImpl
 
 			// Size
 
-			long lastFileVersionSize = dlLastFileVersion.getSize();
-			long latestFileVersionSize = dlLatestFileVersion.getSize();
+			long lastSize = lastDLFileVersion.getSize();
+			long latestSize = latestDLFileVersion.getSize();
 
-			if ((lastFileVersionSize == 0) &&
-				((latestFileVersionSize == 0) || (latestFileVersionSize > 0))) {
-
+			if ((lastSize == 0) && ((latestSize == 0) || (latestSize > 0))) {
 				return true;
 			}
 
-			if (lastFileVersionSize != latestFileVersionSize) {
+			if (lastSize != latestSize) {
 				return false;
 			}
 
 			// Checksum
 
-			InputStream lastFileVersionStream = null;
-			InputStream latestFileVersionStream = null;
+			InputStream lastInputStream = null;
+			InputStream latestInputStream = null;
 
 			try {
-				String lastFileVersionChecksum =
-					dlLastFileVersion.getChecksum();
-				String latestFileVersionChecksum = null;
+				String lastChecksum = lastDLFileVersion.getChecksum();
 
-				if (Validator.isNull(lastFileVersionChecksum)) {
-					lastFileVersionStream = DLStoreUtil.getFileAsStream(
+				if (Validator.isNull(lastChecksum)) {
+					lastInputStream = DLStoreUtil.getFileAsStream(
 						dlFileEntry.getCompanyId(),
 						dlFileEntry.getDataRepositoryId(),
-						dlFileEntry.getName(), dlLastFileVersion.getVersion());
+						dlFileEntry.getName(), lastDLFileVersion.getVersion());
 
-					lastFileVersionChecksum = DigesterUtil.digest(
-						lastFileVersionStream);
+					lastChecksum = DigesterUtil.digest(lastInputStream);
 
-					dlLastFileVersion.setChecksum(lastFileVersionChecksum);
+					lastDLFileVersion.setChecksum(lastChecksum);
 
-					dlFileVersionPersistence.update(dlLastFileVersion, false);
+					dlFileVersionPersistence.update(lastDLFileVersion, false);
 				}
 
-				latestFileVersionStream = DLStoreUtil.getFileAsStream(
+				latestInputStream = DLStoreUtil.getFileAsStream(
 					dlFileEntry.getCompanyId(),
 					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
-					dlLatestFileVersion.getVersion());
+					latestDLFileVersion.getVersion());
 
-				latestFileVersionChecksum = DigesterUtil.digest(
-					latestFileVersionStream);
+				String latestChecksum = DigesterUtil.digest(latestInputStream);
 
-				if (lastFileVersionChecksum.equals(latestFileVersionChecksum)) {
+				if (lastChecksum.equals(latestChecksum)) {
 					return true;
 				}
 
-				dlLatestFileVersion.setChecksum(latestFileVersionChecksum);
+				latestDLFileVersion.setChecksum(latestChecksum);
 
-				dlFileVersionPersistence.update(dlLatestFileVersion, false);
+				dlFileVersionPersistence.update(latestDLFileVersion, false);
 			}
 			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
 			}
 			finally {
-				StreamUtil.cleanUp(lastFileVersionStream);
-				StreamUtil.cleanUp(latestFileVersionStream);
+				StreamUtil.cleanUp(lastInputStream);
+				StreamUtil.cleanUp(latestInputStream);
 			}
 		}
 
@@ -2037,7 +2025,7 @@ public class DLFileEntryLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			DLFileVersion.class.getName(), dlFileVersion.getFileVersionId());
 
-		dlFileEntryMetadataLocalService.deleteFileEntryMetadataByFileVersion(
+		dlFileEntryMetadataLocalService.deleteFileVersionFileEntryMetadata(
 			dlFileVersion.getFileVersionId());
 
 		try {
@@ -2376,7 +2364,5 @@ public class DLFileEntryLocalServiceImpl
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DLFileEntryLocalServiceImpl.class);
-
-	private MessageDigest _messageDigest = null;
 
 }

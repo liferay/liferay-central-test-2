@@ -48,7 +48,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 		}
 	}
 
-	public void deleteFileEntryMetadataByFileVersion(long fileVersionId)
+	public void deleteFileVersionFileEntryMetadata(long fileVersionId)
 		throws PortalException, SystemException {
 
 		List<DLFileEntryMetadata> fileEntryMetadatas =
