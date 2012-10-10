@@ -919,7 +919,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			if (classLoader == null) {
 
-				// No ClassLoader for this portlet, try it as servletContextName
+				// No class loader found for the portlet ID, try getting the
+				// class loader where we assume the portlet ID is really a
+				// servlet context name
 
 				classLoader = ClassLoaderPool.getClassLoader(portletId);
 			}
