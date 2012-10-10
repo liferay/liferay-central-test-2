@@ -23,12 +23,14 @@ import java.io.IOException;
  */
 public abstract class DBTest {
 
-	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
-
 	protected String buildSQL(String query) throws IOException {
-		return getDB().buildSQL(query);
+		DB db = getDB();
+
+		return db.buildSQL(query);
 	}
 
 	protected abstract DB getDB();
+
+	protected static final String RENAME_TABLE_QUERY = "alter_table_name a b";
 
 }
