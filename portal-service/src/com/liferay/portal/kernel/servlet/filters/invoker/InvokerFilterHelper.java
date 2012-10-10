@@ -173,42 +173,66 @@ public class InvokerFilterHelper {
 		return invokerFilterChain;
 	}
 
+	protected Filter getFilter(
+		ServletContext servletContext, String filterClassName,
+		FilterConfig filterConfig) {
+
+		ClassLoader pluginClassLoader = getPluginClassLoader(servletContext);
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != pluginClassLoader) {
+				currentThread.setContextClassLoader(pluginClassLoader);
+			}
+
+			Filter filter = (Filter)InstanceFactory.newInstance(
+				pluginClassLoader, filterClassName);
+
+			filter.init(filterConfig);
+
+			return filter;
+		}
+		catch (Exception e) {
+			_log.error("Unable to initialize filter " + filterClassName, e);
+		}
+		finally {
+			if (contextClassLoader != pluginClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		return null;
+	}
+
+	protected ClassLoader getPluginClassLoader(ServletContext servletContext) {
+		ClassLoader classLoader = (ClassLoader)servletContext.getAttribute(
+			PluginContextListener.PLUGIN_CLASS_LOADER);
+
+		if (classLoader != null) {
+			return classLoader;
+		}
+
+		Thread currentThread = Thread.currentThread();
+
+		return currentThread.getContextClassLoader();
+	}
+
 	protected void initFilter(
 			ServletContext servletContext, String filterName,
 			String filterClassName, Map<String, String> initParameterMap)
 		throws Exception {
 
-		ClassLoader contextClassLoader =
-			(ClassLoader)servletContext.getAttribute(
-				PluginContextListener.PLUGIN_CLASS_LOADER);
-
-		if (contextClassLoader == null) {
-			Thread currentThread = Thread.currentThread();
-
-			contextClassLoader = currentThread.getContextClassLoader();
-		}
-
 		FilterConfig filterConfig = new InvokerFilterConfig(
 			servletContext, filterName, initParameterMap);
 
-		Filter filter = null;
-		
-		Thread currentThread = Thread.currentThread();
-		ClassLoader currentClassLoader = currentThread.getContextClassLoader();
-		currentThread.setContextClassLoader(contextClassLoader);
-		
-		try {
-			filter = (Filter)InstanceFactory.newInstance(
-				contextClassLoader, filterClassName);
+		Filter filter = getFilter(
+			servletContext, filterClassName, filterConfig);
 
-			filter.init(filterConfig);
-		}
-		catch (Exception e) {
-			_log.error("Unable to initialize filter " + filterClassName, e);
-
+		if (filter == null) {
 			return;
-		} finally {
-			currentThread.setContextClassLoader(currentClassLoader);
 		}
 
 		boolean filterEnabled = true;
