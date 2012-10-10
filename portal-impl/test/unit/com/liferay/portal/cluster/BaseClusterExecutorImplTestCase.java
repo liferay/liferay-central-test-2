@@ -71,7 +71,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 /**
  * @author Tina Tian
  */
-public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
+public abstract class BaseClusterExecutorImplTestCase
+	extends BaseClusterTestCase {
 
 	public static final String SERIALIZABLE_RETRUN_VALUE =
 		"This is test method return value";

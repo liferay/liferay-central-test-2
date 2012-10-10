@@ -31,7 +31,7 @@ import org.junit.Assert;
 /**
  * @author Tina Tian
  */
-public class BaseClusterTest {
+public class BaseClusterTestCase {
 
 	@Aspect
 	public static class DisableClusterLinkAdvice {

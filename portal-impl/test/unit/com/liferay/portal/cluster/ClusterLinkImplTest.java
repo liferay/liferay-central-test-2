@@ -53,7 +53,7 @@ import org.junit.runner.RunWith;
  * @author Shuyang Zhou
  */
 @RunWith(ApsectJMockingNewClassLoaderJUnitTestRunner.class)
-public class ClusterLinkImplTest extends BaseClusterTest {
+public class ClusterLinkImplTest extends BaseClusterTestCase {
 
 	@AdviseWith(adviceClasses = {DisableClusterLinkAdvice.class})
 	@Test

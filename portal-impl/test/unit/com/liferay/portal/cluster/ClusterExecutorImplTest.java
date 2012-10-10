@@ -57,7 +57,7 @@ import org.junit.runner.RunWith;
  * @author Tina Tian
  */
 @RunWith(AspectJMockingNewJVMJUnitTestRunner.class)
-public class ClusterExecutorImplTest extends BaseClusterExecutorImplTest {
+public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 
 	@AdviseWith(
 		adviceClasses = {
