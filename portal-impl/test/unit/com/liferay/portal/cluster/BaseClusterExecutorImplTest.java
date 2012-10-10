@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.executor.PortalExecutorManagerUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PortalImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -56,6 +57,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+import org.jgroups.Channel;
 import org.jgroups.JChannel;
 import org.jgroups.Message;
 import org.jgroups.Receiver;
@@ -84,7 +86,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 				ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
 
-			return proceedingJoinPoint.proceed(new Object[]{Boolean.TRUE});
+			return proceedingJoinPoint.proceed(new Object[] {Boolean.TRUE});
 		}
 
 	}
@@ -97,7 +99,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 		public Object enableLiveUsers(ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
 
-			return proceedingJoinPoint.proceed(new Object[]{Boolean.TRUE});
+			return proceedingJoinPoint.proceed(new Object[] {Boolean.TRUE});
 		}
 
 	}
@@ -127,7 +129,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 		public Object enableClusterLink(ProceedingJoinPoint proceedingJoinPoint)
 			throws Throwable {
 
-			return proceedingJoinPoint.proceed(new Object[]{PORTAL_PORT});
+			return proceedingJoinPoint.proceed(new Object[] {PORTAL_PORT});
 		}
 
 	}
@@ -145,8 +147,8 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 
 		Assert.assertEquals(expectedClusterNodes.length, clusterNodes.size());
 
-		for (int i = 0; i < expectedClusterNodes.length; i++) {
-			Assert.assertTrue(clusterNodes.contains(expectedClusterNodes[i]));
+		for (ClusterNode expectedClusterNode : expectedClusterNodes) {
+			Assert.assertTrue(clusterNodes.contains(expectedClusterNode));
 		}
 	}
 
@@ -237,10 +239,13 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 		ClusterExecutorImpl clusterExecutorImpl = new ClusterExecutorImpl();
 
 		clusterExecutorImpl.afterPropertiesSet();
+
 		clusterExecutorImpl.setShortcutLocalMethod(true);
 
 		if (useMockReceiver) {
-			clusterExecutorImpl.getControlChannel().setReceiver(
+			Channel channel = clusterExecutorImpl.getControlChannel();
+
+			channel.setReceiver(
 				new MockClusterRequestReceiver(clusterExecutorImpl));
 		}
 
@@ -256,48 +261,48 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 		final JChannel localJChannel =
 			localClusterExecutorImpl.getControlChannel();
 
-		org.jgroups.Address address = localJChannel.getAddress();
+		org.jgroups.Address jAddress = localJChannel.getAddress();
 
-		List<org.jgroups.Address> addresses =
+		List<org.jgroups.Address> jAddresses =
 			new ArrayList<org.jgroups.Address>();
 
-		addresses.add(address);
+		jAddresses.add(jAddress);
 
 		for (ClusterExecutorImpl clusterExecutorImpl :
-			remoteClusterExecutorImpls) {
+				remoteClusterExecutorImpls) {
 
 			JChannel jChannel = clusterExecutorImpl.getControlChannel();
 
-			addresses.add(jChannel.getAddress());
+			jAddresses.add(jChannel.getAddress());
 		}
 
 		final View view = new View(
-			address, System.currentTimeMillis(), addresses);
+			jAddress, System.currentTimeMillis(), jAddresses);
 
 		new Thread() {
+
+			@Override
 			public void run() {
 				Receiver receiver = localJChannel.getReceiver();
 
 				receiver.viewAccepted(view);
 			}
+
 		}.start();
 	}
 
-	protected static final String _BEAN_IDENTIFIER = "test.bean";
+	protected static final String BEAN_IDENTIFIER = "test.bean";
 
-	protected static final String _SERVLET_CONTEXT_NAME =
+	protected static final String SERVLET_CONTEXT_NAME =
 		"TestServletContextName";
 
-	protected static final MethodKey _TEST_METHOD_KEY_1 = new MethodKey(
+	protected static MethodKey testMethod1MethodKey = new MethodKey(
 		TestBean.class.getName(), "testMethod1", String.class);
-
-	protected static final MethodKey _TEST_METHOD_KEY_2 = new MethodKey(
+	protected static MethodKey testMethod2MethodKey = new MethodKey(
 		TestBean.class.getName(), "testMethod2");
-
-	protected static final MethodKey _TEST_METHOD_KEY_3 = new MethodKey(
+	protected static MethodKey testMethod3MethodKey = new MethodKey(
 		TestBean.class.getName(), "testMethod3", String.class);
-
-	protected static final MethodKey _TEST_METHOD_KEY_4 = new MethodKey(
+	protected static MethodKey testMethod4MethodKey = new MethodKey(
 		TestBean.class.getName(), "testMethod4");
 
 	protected class MockClusterEventListener implements ClusterEventListener {
@@ -314,7 +319,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 					_joinMessageExchanger.exchange(clusterEvent);
 				}
 			}
-			catch (InterruptedException ex) {
+			catch (InterruptedException ie) {
 			}
 		}
 
@@ -381,7 +386,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 					}
 				}
 			}
-			catch (InterruptedException ex) {
+			catch (InterruptedException ie) {
 			}
 		}
 
@@ -394,6 +399,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 	protected class MockClusterResponseCallback
 		extends BaseClusterResponseCallback {
 
+		@Override
 		public void callback(ClusterNodeResponses clusterNodeResponses) {
 			try {
 				_messageExchanger.exchange(clusterNodeResponses);
@@ -434,6 +440,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 			}
 		}
 
+		@Override
 		public void processInterruptedException(
 			InterruptedException interruptedException) {
 
@@ -444,6 +451,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 			}
 		}
 
+		@Override
 		public void processTimeoutException(TimeoutException timeoutException) {
 			try {
 				_timeoutExceptionExchanger.exchange(timeoutException);
@@ -529,15 +537,15 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 			return;
 		}
 
-		com.liferay.portal.kernel.util.PropsUtil.setProps(new PropsImpl());
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(new PortalImpl());
 
 		PortalUUIDUtil portalUUIDUtil = new PortalUUIDUtil();
 
 		portalUUIDUtil.setPortalUUID(new PortalUUIDImpl());
 
-		PortalUtil portalUtil = new PortalUtil();
-
-		portalUtil.setPortal(new PortalImpl());
+		PropsUtil.setProps(new PropsImpl());
 
 		PortalExecutorManagerUtil portalExecutorManagerUtil =
 			new PortalExecutorManagerUtil();
@@ -561,7 +569,7 @@ public abstract class BaseClusterExecutorImplTest extends BaseClusterTest {
 			PortalBeanLocatorUtil.setBeanLocator(beanLocator);
 
 			PortletBeanLocatorUtil.setBeanLocator(
-				_SERVLET_CONTEXT_NAME, beanLocator);
+				SERVLET_CONTEXT_NAME, beanLocator);
 		}
 
 		JDKLoggerTestUtil.configureJDKLogger(
