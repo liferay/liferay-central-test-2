@@ -35,7 +35,8 @@ import org.junit.runner.RunWith;
  * @author Tina Tian
  */
 @RunWith(AspectJMockingNewJVMJUnitTestRunner.class)
-public class ClusterRequestReceiverTest extends BaseClusterExecutorImplTestCase {
+public class ClusterRequestReceiverTest
+	extends BaseClusterExecutorImplTestCase {
 
 	@AdviseWith(adviceClasses = {EnableClusterLinkAdvice.class})
 	@Test
