@@ -24,7 +24,7 @@ import org.junit.Test;
 /**
  * @author Miguel Pastor
  */
-public class JDataStoreDBTest extends TestDB {
+public class JDataStoreDBTest extends BaseDBTestCase {
 
 	@Test
 	public void testRewordRenameTable() throws IOException {

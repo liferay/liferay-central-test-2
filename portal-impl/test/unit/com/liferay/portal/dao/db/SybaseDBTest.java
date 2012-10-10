@@ -24,7 +24,7 @@ import org.junit.Test;
 /**
  * @author Miguel Pastor
  */
-public class SybaseDBTest extends TestDB {
+public class SybaseDBTest extends BaseDBTestCase {
 
 	@Test
 	public void testRewordRenameTable() throws IOException {
