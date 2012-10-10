@@ -904,9 +904,9 @@ public class AntlrCreoleParserTest {
 
 		Assert.assertNotNull(listNode);
 
-		return (BaseListNode) listNode.getChildASTNode(0);
+		return (BaseListNode)listNode.getChildASTNode(0);
 	}
 
-	protected Creole10Parser _creole10parser;
+	private Creole10Parser _creole10parser;
 
 }
