@@ -425,37 +425,6 @@ public class PluginsSummaryBuilder {
 				}
 
 				ticketIds.addAll(_extractTicketIds(dependentAppDir, range));
-
-				/*File dependentAppPluginPackagePropertiesFile = new File(
-					dependentAppDir,
-					"docroot/WEB-INF/liferay-plugin-package.properties");
-
-				String dependentAppPluginPackagePropertiesContent =
-					FileUtil.read(dependentAppPluginPackagePropertiesFile);
-
-				Properties dependentAppPluginPackageProperties =
-					PropertiesUtil.load(
-						dependentAppPluginPackagePropertiesContent);
-
-				int dependentAppModuleIncrementalVersion =
-					GetterUtil.getInteger(
-						dependentAppPluginPackageProperties.getProperty(
-							"module-incremental-version"));
-
-				if (moduleIncrementalVersion
-						!= dependentAppModuleIncrementalVersion) {
-
-					StringBundler msgSB = new StringBundler(5);
-
-					msgSB.append("liferay-plugin-package.properties in ");
-					msgSB.append(webInfDir);
-					msgSB.append(" and ");
-					msgSB.append(
-						dependentAppPluginPackagePropertiesFile.getParent());
-					msgSB.append(" do not have the same incremental version");
-
-					throw new RuntimeException(msgSB.toString());
-				}*/
 			}
 
 			String ticketIdsString = StringUtil.merge(
@@ -468,14 +437,20 @@ public class PluginsSummaryBuilder {
 		}
 
 		if (moduleIncrementalVersion != changeLogVersion) {
-			StringBundler msgSB = new StringBundler(4);
+			File pluginPackagePropertiesFile = new File(
+				relengChangeLogFile.getParentFile(),
+				"liferay-plugin-package.properties");
 
-			msgSB.append("liferay-plugin-package.properties and ");
-			msgSB.append("liferay-releng.changelog in ");
-			msgSB.append(relengChangeLogFile.getParent());
-			msgSB.append(" do not have the same incremental version");
+			String pluginPackagePropertiesContent = FileUtil.read(
+				pluginPackagePropertiesFile);
 
-			throw new RuntimeException(msgSB.toString());
+			pluginPackagePropertiesContent = StringUtil.replace(
+				pluginPackagePropertiesContent,
+				"module-incremental-version=" + moduleIncrementalVersion,
+				"module-incremental-version=" + changeLogVersion);
+
+			FileUtil.write(
+				pluginPackagePropertiesFile, pluginPackagePropertiesContent);
 		}
 
 		FileUtil.write(relengChangeLogFile, sb.toString());
