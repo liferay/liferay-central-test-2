@@ -56,6 +56,10 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 
 		DLFolder dlFolder = getDLFolder(trashEntry.getClassPK());
 
+		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
+			containerModelId = dlFolder.getParentFolderId();
+		}
+
 		String restoredTitle = dlFolder.getName();
 
 		if (Validator.isNotNull(newName)) {
@@ -63,10 +67,6 @@ public class DLFolderTrashHandler extends BaseTrashHandler {
 		}
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
-
-		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
-			containerModelId = dlFolder.getParentFolderId();
-		}
 
 		DLFolder duplicateDLFolder = DLFolderLocalServiceUtil.fetchFolder(
 			dlFolder.getGroupId(), dlFolder.getParentFolderId(), originalTitle);

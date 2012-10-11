@@ -63,6 +63,10 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 		WikiPage page = WikiPageLocalServiceUtil.getPage(
 			trashEntry.getClassPK());
 
+		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
+			containerModelId = page.getNodeId();
+		}
+
 		String restoredTitle = page.getTitle();
 
 		if (Validator.isNotNull(newName)) {
@@ -70,10 +74,6 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 		}
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
-
-		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
-			containerModelId = page.getNodeId();
-		}
 
 		WikiPage duplicatePage = WikiPageLocalServiceUtil.fetchPage(
 			containerModelId, originalTitle, page.getVersion());

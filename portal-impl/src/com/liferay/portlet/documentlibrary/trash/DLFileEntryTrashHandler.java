@@ -58,6 +58,10 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 
 		DLFileEntry dlFileEntry = getDLFileEntry(trashEntry.getClassPK());
 
+		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
+			containerModelId = dlFileEntry.getFolderId();
+		}
+
 		String restoredTitle = dlFileEntry.getTitle();
 
 		if (Validator.isNotNull(newName)) {
@@ -65,10 +69,6 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 		}
 
 		String originalTitle = TrashUtil.stripTrashNamespace(restoredTitle);
-
-		if (containerModelId == TrashEntryConstants.DEFAULT_CONTAINER_ID) {
-			containerModelId = dlFileEntry.getFolderId();
-		}
 
 		DLFileEntry duplicateDLFileEntry =
 			DLFileEntryLocalServiceUtil.fetchFileEntry(
