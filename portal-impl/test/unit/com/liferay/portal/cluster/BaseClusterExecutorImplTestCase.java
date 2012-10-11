@@ -378,10 +378,12 @@ public abstract class BaseClusterExecutorImplTestCase
 			Object object = message.getObject();
 
 			try {
-				if (message.getSrc().equals(
-						_clusterExecutorImpl.getLocalClusterNodeAddress().
-							getRealAddress())) {
+				org.jgroups.Address srcJAddress = message.getSrc();
 
+				Address clusterNodeAddress =
+					_clusterExecutorImpl.getLocalClusterNodeAddress();
+				
+				if (srcJAddress.equals(clusterNodeAddress.getRealAddress())) {
 					if (object instanceof ClusterRequest) {
 						_localRequestExchanger.exchange((ClusterRequest)object);
 					}
@@ -555,7 +557,9 @@ public abstract class BaseClusterExecutorImplTestCase
 			new MockPortalExecutorManager());
 
 		if (loadSpringXML) {
-			ClassLoader classLoader = getClass().getClassLoader();
+			Class<?> clazz = getClass();
+
+			ClassLoader classLoader = clazz.getClassLoader();
 
 			PortletClassLoaderUtil.setClassLoader(classLoader);
 
