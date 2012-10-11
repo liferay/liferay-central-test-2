@@ -864,8 +864,7 @@ public class ClusterSchedulerEngine
 				if (StorageType.MEMORY_CLUSTERED ==
 						schedulerResponse.getStorageType()) {
 
-					String groupName =
-						StorageType.MEMORY_CLUSTERED.toString();
+					String groupName = StorageType.MEMORY_CLUSTERED.toString();
 
 					groupName = groupName.concat(StringPool.POUND).concat(
 						schedulerResponse.getGroupName());
