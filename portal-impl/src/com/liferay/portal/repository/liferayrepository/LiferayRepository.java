@@ -460,7 +460,7 @@ public class LiferayRepository
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, boolean includeMountFolders)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlFolderService.getFoldersAndFileEntriesAndFileShortcutsCount(
 			getGroupId(), toFolderId(folderId), status, includeMountFolders);
@@ -469,7 +469,7 @@ public class LiferayRepository
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlFolderService.getFoldersAndFileEntriesAndFileShortcutsCount(
 			getGroupId(), toFolderId(folderId), status, mimeTypes,
