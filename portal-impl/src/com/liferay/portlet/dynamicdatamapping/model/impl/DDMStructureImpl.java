@@ -310,7 +310,8 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@Override
 	public void setLocalizedTransientFieldsMap(
-		Map<String, Map<String, Map<String, String>>> localizedTransientFieldsMap) {
+		Map<String, Map<String, Map<String, String>>>
+			localizedTransientFieldsMap) {
 
 		_localizedTransientFieldsMap = localizedTransientFieldsMap;
 	}
