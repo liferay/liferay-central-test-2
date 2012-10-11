@@ -106,14 +106,8 @@ public class MBStatsUserLocalServiceImpl
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public Date getLasPostDateByUserId(long groupId, long userId)
 		throws SystemException {
-
-		List<MBThread> groupThreads =
-			mbThreadLocalService.getGroupThreads(
-				groupId, WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			MBThread.class, MBStatsUserImpl.TABLE_NAME,
@@ -127,8 +121,12 @@ public class MBStatsUserLocalServiceImpl
 
 		Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
 
-		for (MBThread groupThread : groupThreads) {
-			disjunction.add(property.ne(groupThread.getThreadId()));
+		List<MBThread> threads = mbThreadLocalService.getGroupThreads(
+			groupId, WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+
+		for (MBThread thread : threads) {
+			disjunction.add(property.ne(thread.getThreadId()));
 		}
 
 		dynamicQuery.add(disjunction);
@@ -142,7 +140,6 @@ public class MBStatsUserLocalServiceImpl
 		return results.get(0);
 	}
 
-	@SuppressWarnings("unchecked")
 	public long getMessageCountByGroupId(long groupId) throws SystemException {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			MBStatsUser.class, MBStatsUserImpl.TABLE_NAME,
@@ -165,7 +162,6 @@ public class MBStatsUserLocalServiceImpl
 		return results.get(0);
 	}
 
-	@SuppressWarnings("unchecked")
 	public long getMessageCountByUserId(long userId) throws SystemException {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			MBStatsUser.class, MBStatsUserImpl.TABLE_NAME,
@@ -246,12 +242,11 @@ public class MBStatsUserLocalServiceImpl
 		int messageCount = mbMessagePersistence.countByG_U_S(
 			groupId, userId, WorkflowConstants.STATUS_APPROVED);
 
-		List<MBThread> trashedThreads =
-			mbThreadLocalService.getGroupThreads(
-				groupId, WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS);
+		List<MBThread> threads = mbThreadLocalService.getGroupThreads(
+			groupId, WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 
-		for (MBThread thread : trashedThreads) {
+		for (MBThread thread : threads) {
 			messageCount = messageCount - thread.getMessageCount();
 		}
 
