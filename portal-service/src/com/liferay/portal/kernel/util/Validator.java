@@ -198,9 +198,11 @@ public class Validator {
 		boolean[] booleanArray1, boolean[] booleanArray2) {
 
 		Boolean[] booleanObjArray1 = ArrayUtil.toArray(booleanArray1);
-		Boolean[] booleanObjArray2 = ArrayUtil.toArray(booleanArray2);
 
 		Arrays.sort(booleanObjArray1);
+
+		Boolean[] booleanObjArray2 = ArrayUtil.toArray(booleanArray2);
+
 		Arrays.sort(booleanObjArray2);
 
 		return Arrays.equals(booleanObjArray1, booleanObjArray2);
@@ -215,7 +217,12 @@ public class Validator {
 	 *         </code>otherwise
 	 */
 	public static boolean equalsSorted(byte[] byteArray1, byte[] byteArray2) {
+		byteArray1 = ArrayUtil.clone(byteArray1);
+
 		Arrays.sort(byteArray1);
+
+		byteArray2 = ArrayUtil.clone(byteArray2);
+
 		Arrays.sort(byteArray2);
 
 		return Arrays.equals(byteArray1, byteArray2);
@@ -230,7 +237,12 @@ public class Validator {
 	 *         </code>otherwise
 	 */
 	public static boolean equalsSorted(char[] charArray1, char[] charArray2) {
+		charArray1 = ArrayUtil.clone(charArray1);
+
 		Arrays.sort(charArray1);
+
+		charArray2 = ArrayUtil.clone(charArray2);
+
 		Arrays.sort(charArray2);
 
 		return Arrays.equals(charArray1, charArray2);
@@ -247,7 +259,12 @@ public class Validator {
 	public static boolean equalsSorted(
 		double[] doubleArray1, double[] doubleArray2) {
 
+		doubleArray1 = ArrayUtil.clone(doubleArray1);
+
 		Arrays.sort(doubleArray1);
+
+		doubleArray2 = ArrayUtil.clone(doubleArray2);
+
 		Arrays.sort(doubleArray2);
 
 		return Arrays.equals(doubleArray1, doubleArray2);
@@ -264,7 +281,12 @@ public class Validator {
 	public static boolean equalsSorted(
 		float[] floatArray1, float[] floatArray2) {
 
+		floatArray1 = ArrayUtil.clone(floatArray1);
+
 		Arrays.sort(floatArray1);
+
+		floatArray2 = ArrayUtil.clone(floatArray2);
+
 		Arrays.sort(floatArray2);
 
 		return Arrays.equals(floatArray1, floatArray2);
@@ -279,7 +301,12 @@ public class Validator {
 	 *         otherwise
 	 */
 	public static boolean equalsSorted(int[] intArray1, int[] intArray2) {
+		intArray1 = ArrayUtil.clone(intArray1);
+
 		Arrays.sort(intArray1);
+
+		intArray2 = ArrayUtil.clone(intArray2);
+
 		Arrays.sort(intArray2);
 
 		return Arrays.equals(intArray1, intArray2);
@@ -294,11 +321,15 @@ public class Validator {
 	 *         </code>otherwise
 	 */
 	public static boolean equalsSorted(long[] longArray1, long[] longArray2) {
+		longArray1 = ArrayUtil.clone(longArray1);
+
 		Arrays.sort(longArray1);
+
+		longArray2 = ArrayUtil.clone(longArray2);
+
 		Arrays.sort(longArray2);
 
-		return Arrays.equals(longArray1, longArray2);
-	}
+		return Arrays.equals(longArray1, longArray2); }
 
 	/**
 	 * Returns <code>true</code> if the object arrays are equal.
@@ -309,11 +340,15 @@ public class Validator {
 	 *         </code>otherwise
 	 */
 	public static boolean equalsSorted(Object[] objArray1, Object[] objArray2) {
+		objArray1 = ArrayUtil.clone(objArray1);
+
 		Arrays.sort(objArray1);
+
+		objArray2 = ArrayUtil.clone(objArray2);
+
 		Arrays.sort(objArray2);
 
-		return Arrays.equals(objArray1, objArray2);
-	}
+		return Arrays.equals(objArray1, objArray2); }
 
 	/**
 	 * Returns <code>true</code> if the short arrays are equal.
@@ -326,7 +361,12 @@ public class Validator {
 	public static boolean equalsSorted(
 		short[] shortArray1, short[] shortArray2) {
 
+		shortArray1 = ArrayUtil.clone(shortArray1);
+
 		Arrays.sort(shortArray1);
+
+		shortArray2 = ArrayUtil.clone(shortArray2);
+
 		Arrays.sort(shortArray2);
 
 		return Arrays.equals(shortArray1, shortArray2);
