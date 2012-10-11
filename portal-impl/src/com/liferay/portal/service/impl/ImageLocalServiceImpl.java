@@ -15,7 +15,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.ImageTypeException;
-import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.image.HookFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -163,7 +163,14 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 				try {
 					hook.deleteImage(image);
 				}
-				catch (NoSuchModelException nsme) {
+				catch (NoSuchImageException nsie) {
+
+					// DLHook throws NoSuchImageException if the file no longer
+					// exists. See LPS-30430. This exception can be ignored.
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(nsie, nsie);
+					}
 				}
 			}
 
