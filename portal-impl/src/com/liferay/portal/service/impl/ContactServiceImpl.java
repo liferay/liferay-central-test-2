@@ -33,7 +33,7 @@ public class ContactServiceImpl extends ContactServiceBaseImpl {
 	public Contact getContact(long contactId)
 		throws PortalException, SystemException {
 
-		Contact contact = contactLocalService.getContact(contactId);
+		Contact contact = contactPersistence.findByPrimaryKey(contactId);
 
 		CommonPermissionUtil.check(
 			getPermissionChecker(), contact.getClassNameId(),
@@ -50,7 +50,7 @@ public class ContactServiceImpl extends ContactServiceBaseImpl {
 		CommonPermissionUtil.check(
 			getPermissionChecker(), classNameId, classPK, ActionKeys.VIEW);
 
-		return contactLocalService.getContacts(
+		return contactPersistence.findByC_C(
 			classNameId, classPK, start, end, orderByComparator);
 	}
 
@@ -60,7 +60,7 @@ public class ContactServiceImpl extends ContactServiceBaseImpl {
 		CommonPermissionUtil.check(
 			getPermissionChecker(), classNameId, classPK, ActionKeys.VIEW);
 
-		return contactLocalService.getContactsCount(classNameId, classPK);
+		return contactPersistence.countByC_C(classNameId, classPK);
 	}
 
 }

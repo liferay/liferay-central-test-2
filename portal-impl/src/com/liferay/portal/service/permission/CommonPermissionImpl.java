@@ -50,13 +50,13 @@ public class CommonPermissionImpl implements CommonPermission {
 
 		if (className.equals(Account.class.getName())) {
 		}
+		else if (className.equals(Company.class.getName())) {
+		}
 		else if (className.equals(Contact.class.getName())) {
 			User user = UserLocalServiceUtil.getUserByContactId(classPK);
 
 			UserPermissionUtil.check(
 				permissionChecker, user.getUserId(), actionId);
-		}
-		else if (className.equals(Company.class.getName())) {
 		}
 		else if (className.equals(Organization.class.getName())) {
 			OrganizationPermissionUtil.check(
