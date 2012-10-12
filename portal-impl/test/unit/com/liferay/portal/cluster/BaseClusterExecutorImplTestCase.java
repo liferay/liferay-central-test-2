@@ -382,7 +382,7 @@ public abstract class BaseClusterExecutorImplTestCase
 
 				Address clusterNodeAddress =
 					_clusterExecutorImpl.getLocalClusterNodeAddress();
-				
+
 				if (srcJAddress.equals(clusterNodeAddress.getRealAddress())) {
 					if (object instanceof ClusterRequest) {
 						_localRequestExchanger.exchange((ClusterRequest)object);
