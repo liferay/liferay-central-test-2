@@ -32,8 +32,9 @@ class TransactionCommitCallbackUtil {
 
 		if (callbackListList.isEmpty()) {
 
-			// Not within a tx boundary, should only happen during
-			// upgrade/verify process
+			// Not within a transaction boundary, should only happen during
+			// an upgrade and verify process. See
+			// DBUpgrader#_disableTransactions.
 
 			try {
 				callable.call();
