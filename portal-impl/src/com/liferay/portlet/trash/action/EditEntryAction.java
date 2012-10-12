@@ -68,7 +68,12 @@ public class EditEntryAction extends PortletAction {
 		try {
 			TrashEntry[] entries = null;
 
-			if (cmd.equals(Constants.DELETE)) {
+			if (cmd.equals(Constants.CHECK)) {
+				checkEntry(actionRequest, actionResponse);
+
+				return;
+			}
+			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.EMPTY_TRASH)) {
@@ -82,11 +87,6 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.OVERRIDE)) {
 				entries = restoreOverride(actionRequest);
-			}
-			else if (cmd.equals(Constants.CHECK_ENTRY)) {
-				checkEntry(actionRequest, actionResponse);
-
-				return;
 			}
 
 			if (cmd.equals(Constants.RENAME) || cmd.equals(Constants.RESTORE) ||
