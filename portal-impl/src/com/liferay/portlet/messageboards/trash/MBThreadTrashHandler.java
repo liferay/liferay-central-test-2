@@ -106,6 +106,7 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 	public void restoreTrashEntries(long[] classPKs) {
 	}
 
+	@Override
 	protected boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {

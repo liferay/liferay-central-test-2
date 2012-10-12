@@ -261,6 +261,7 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 			pageResource, false);
 	}
 
+	@Override
 	protected boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {

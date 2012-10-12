@@ -88,6 +88,7 @@ public class BlogsEntryTrashHandler extends BaseTrashHandler {
 		}
 	}
 
+	@Override
 	protected boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {
