@@ -72,7 +72,6 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.theme.ThemeLoader;
@@ -669,7 +668,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			FileUtil.deltree(themePath + "-public");
 		}
 
-		// Delete portlet data
+		// Portlet data
 
 		deletePortletData(group);
 
@@ -3176,34 +3175,44 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			defaultUserId, group.getGroupId(), false, parameterMap, larFile);
 	}
 
-	protected void deletePortletData(Group group) {
-		try {
-			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
-				group.getCompanyId());
+	protected void deletePortletData(Group group)
+		throws PortalException, SystemException {
 
-			for (Portlet portlet : portlets) {
-				if (!portlet.isActive()) {
-					continue;
-				}
+		List<Portlet> portlets = portletLocalService.getPortlets(
+			group.getCompanyId());
 
-				PortletDataHandler portletDataHandler =
-					portlet.getPortletDataHandlerInstance();
-
-				if (portletDataHandler != null) {
-					PortletDataContext portletDataContext =
-						new PortletDataContextImpl(
-							group.getCompanyId(), group.getGroupId(), null,
-							new HashSet<String>(), null, null, null);
-
-						portletDataHandler.deleteData(
-							portletDataContext, portlet.getPortletId(), null);
-				}
+		for (Portlet portlet : portlets) {
+			if (!portlet.isActive()) {
+				continue;
 			}
-		}
-		catch (Exception e) {
-			_log.error(
-				"Unable to delete data for portlets in group: " +
-					group.getGroupId());
+
+			PortletDataHandler portletDataHandler =
+				portlet.getPortletDataHandlerInstance();
+
+			if (portletDataHandler == null) {
+				continue;
+			}
+
+			PortletDataContext portletDataContext = new PortletDataContextImpl(
+				group.getCompanyId(), group.getGroupId(), null,
+				new HashSet<String>(), null, null, null);
+
+			// For now, we are going to throw an exception if one portlet data
+			// handler has an exception to ensure that the transaction is
+			// rolled back for data integrity. We may decide that this is not
+			// the best behavior in the future because a bad plugin could
+			// disallow deletion of groups.
+
+			//try {
+				portletDataHandler.deleteData(
+					portletDataContext, portlet.getPortletId(), null);
+			/*}
+			catch (Exception e) {
+				_log.error(
+					"Unable to delete data for portlet " +
+						portlet.getPortletId() + " in group " +
+							group.getGroupId());
+			}*/
 		}
 	}
 
