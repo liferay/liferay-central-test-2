@@ -22,25 +22,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPMMessageNonUserTest extends BaseTestCase {
 	public void testAddPMMessageNonUser() throws Exception {
+		selenium.selectWindow("null");
+		selenium.selectFrame("relative=top");
 		selenium.open("/user/joebloggs/so/dashboard/");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//nav/ul/li[contains(.,'Messages')]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.waitForVisible("//nav/ul/li[contains(.,'Messages')]/a/span");
 		selenium.clickAt("//nav/ul/li[contains(.,'Messages')]/a/span",
 			RuntimeVariables.replace("Messages"));
 		selenium.waitForPageToLoad("30000");
@@ -53,24 +38,8 @@ public class AddPMMessageNonUserTest extends BaseTestCase {
 			selenium.getValue("//input[@value='New Message']"));
 		selenium.clickAt("//input[@value='New Message']",
 			RuntimeVariables.replace("New Message"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//button[contains(@class,'autocomplete-button')]/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.waitForVisible(
+			"//button[contains(@class,'autocomplete-button')]/span");
 		selenium.clickAt("//button[contains(@class,'autocomplete-button')]/span",
 			RuntimeVariables.replace("Dropdown"));
 		selenium.typeKeys("//input[@id='_1_WAR_privatemessagingportlet_to']",
@@ -89,45 +58,12 @@ public class AddPMMessageNonUserTest extends BaseTestCase {
 			RuntimeVariables.replace("Message Body"));
 		selenium.clickAt("//input[@value='Send']",
 			RuntimeVariables.replace("Send"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//span[@class='portlet-msg-error']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.waitForVisible("//span[@class='portlet-msg-error']");
 		assertEquals(RuntimeVariables.replace(
 				"The following users were not found: 'socialoffice01'"),
 			selenium.getText("//span[@class='portlet-msg-error']"));
 		selenium.open("/user/joebloggs/so/dashboard/");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//nav/ul/li[contains(.,'Messages')]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.waitForVisible("//nav/ul/li[contains(.,'Messages')]/a/span");
 		selenium.clickAt("//nav/ul/li[contains(.,'Messages')]/a/span",
 			RuntimeVariables.replace("Messages"));
 		selenium.waitForPageToLoad("30000");
