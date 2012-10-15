@@ -479,9 +479,7 @@ public class EditGroupAction extends PortletAction {
 				getTeams(actionRequest), Team.TEAM_ID_ACCESSOR,
 				StringPool.COMMA));
 
-		String[] analyticsTypes = PropsValues.SITES_FORM_ANALYTICS;
-
-		for (String analyticsType : analyticsTypes) {
+		for (String analyticsType : PropsValues.SITES_FORM_ANALYTICS) {
 			if (analyticsType.equals("google")) {
 				String googleAnalyticsId = ParamUtil.getString(
 					actionRequest, "googleAnalyticsId",

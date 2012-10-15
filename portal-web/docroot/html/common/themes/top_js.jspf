@@ -396,13 +396,9 @@
 <%-- Analytics --%>
 
 <%
-String[] analyticsTypes = PropsValues.SITES_FORM_ANALYTICS;
-
 UnicodeProperties groupTypeSettings = group.getTypeSettingsProperties();
-%>
 
-<%
-for (String analyticsType : analyticsTypes) {
+for (String analyticsType : PropsValues.SITES_FORM_ANALYTICS) {
 %>
 
 	<c:choose>

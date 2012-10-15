@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-String[] analyticsTypes = PropsValues.SITES_FORM_ANALYTICS;
-
 Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 
 UnicodeProperties groupTypeSettings = null;
@@ -34,7 +32,7 @@ else {
 <liferay-ui:error-marker key="errorSection" value="analytics" />
 
 <%
-for (String analyticsType : analyticsTypes) {
+for (String analyticsType : PropsValues.SITES_FORM_ANALYTICS) {
 %>
 
 	<c:choose>
