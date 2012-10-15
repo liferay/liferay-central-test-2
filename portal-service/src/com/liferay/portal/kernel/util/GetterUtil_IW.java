@@ -405,13 +405,13 @@ public class GetterUtil_IW {
 		return GetterUtil.getStringValues(value, defaultValue);
 	}
 
-	public java.lang.String[] getStringValues(java.lang.String[] values) {
-		return GetterUtil.getStringValues(values);
-	}
-
 	public java.lang.String[] getStringValues(java.lang.Object[] values,
 		java.lang.String[] defaultValue) {
 		return GetterUtil.getStringValues(values, defaultValue);
+	}
+
+	public java.lang.String[] getStringValues(java.lang.String[] values) {
+		return GetterUtil.getStringValues(values);
 	}
 
 	private GetterUtil_IW() {

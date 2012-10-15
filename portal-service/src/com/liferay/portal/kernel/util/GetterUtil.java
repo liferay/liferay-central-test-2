@@ -913,10 +913,6 @@ public class GetterUtil {
 		return defaultValue;
 	}
 
-	public static String[] getStringValues(String[] values) {
-		return getStringValues(values, DEFAULT_STRING_VALUES);
-	}
-
 	public static String[] getStringValues(
 		Object[] values, String[] defaultValue) {
 
@@ -931,6 +927,10 @@ public class GetterUtil {
 		}
 
 		return stringValues;
+	}
+
+	public static String[] getStringValues(String[] values) {
+		return getStringValues(values, DEFAULT_STRING_VALUES);
 	}
 
 	private static int _parseInt(String value, int defaultValue) {
