@@ -413,13 +413,13 @@ public class Serializer {
 
 	/**
 	 * Represents a descending <code>byte[]</code> queue ordered by array length.
-	 * 
+	 *
 	 * <p>
 	 * The queue is small enough to simply use a linear scan search for
 	 * maintaining its order. The entire queue data is held by a
 	 * {@link java.lang.ref.SoftReference}, so when necessary, GC can release the whole
 	 * buffer cache.
-     * </p>
+	 * </p>
 	 */
 	protected static class BufferQueue {
 
