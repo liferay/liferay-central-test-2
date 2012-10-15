@@ -245,7 +245,7 @@ SitesUtil.addPortletBreadcrumbEntries(group, pagesName, redirectURL, request, re
 					layoutsContainer.io.start();
 				}
 			},
-			'.aui-tree-label, .aui-tree-icon'
+			'.aui-tree-icon, .aui-tree-label'
 		);
 	</aui:script>
 </c:if>
