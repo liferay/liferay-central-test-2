@@ -420,8 +420,6 @@ public class Serializer {
 	 * {@link java.lang.ref.SoftReference}, so when necessary, GC can release the whole
 	 * buffer cache.
      * </p>
-     * 
-	 * @author Shuyang Zhou
 	 */
 	protected static class BufferQueue {
 
