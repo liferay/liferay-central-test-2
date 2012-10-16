@@ -22,7 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -240,17 +242,21 @@ public class DateUtil {
 	}
 
 	public static boolean isFormatAmPm(Locale locale) {
-		SimpleDateFormat simpleDataFormat =
-			(SimpleDateFormat)DateFormat.getTimeInstance(
-				DateFormat.SHORT, locale);
+		Boolean formatAmPm = _formatAmPmMap.get(locale);
 
-		String timeFormatPattern = simpleDataFormat.toPattern();
+		if (formatAmPm == null) {
+			SimpleDateFormat simpleDateFormat =
+				(SimpleDateFormat)DateFormat.getTimeInstance(
+					DateFormat.SHORT, locale);
 
-		if (timeFormatPattern.contains("a")) {
-			return true;
+			String pattern = simpleDateFormat.toPattern();
+
+			formatAmPm = pattern.contains("a");
+
+			_formatAmPmMap.put(locale, formatAmPm);
 		}
 
-		return false;
+		return formatAmPm;
 	}
 
 	public static Date newDate() {
@@ -275,5 +281,8 @@ public class DateUtil {
 
 		return dateFormat.parse(dateString);
 	}
+
+	private static Map<Locale, Boolean> _formatAmPmMap =
+		new HashMap<Locale, Boolean>();
 
 }

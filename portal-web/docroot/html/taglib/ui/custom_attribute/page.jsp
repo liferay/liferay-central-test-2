@@ -133,14 +133,12 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									year = valueDate.get(Calendar.YEAR);
 								}
 
-								boolean timeFormatAmPm = DateUtil.isFormatAmPm(locale);
-
 								int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
 
 								if ((amPm == -1) && (valueDate != null)) {
 									amPm = Calendar.AM;
 
-									if (timeFormatAmPm) {
+									if (DateUtil.isFormatAmPm(locale)) {
 										amPm = valueDate.get(Calendar.AM_PM);
 									}
 								}
@@ -150,7 +148,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								if ((hour == -1) && (valueDate != null)) {
 									hour = valueDate.get(Calendar.HOUR_OF_DAY);
 
-									if (timeFormatAmPm) {
+									if (DateUtil.isFormatAmPm(locale)) {
 										hour = valueDate.get(Calendar.HOUR);
 									}
 								}
