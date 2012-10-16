@@ -14,13 +14,13 @@
 
 package com.liferay.portal.kernel.upgrade;
 
+import com.liferay.portal.kernel.dao.db.BaseDBProcess;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.util.RunSQLProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 
@@ -34,7 +34,7 @@ import java.sql.ResultSetMetaData;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public abstract class UpgradeProcess extends RunSQLProcess  {
+public abstract class UpgradeProcess extends BaseDBProcess {
 
 	public UpgradeProcess() {
 	}

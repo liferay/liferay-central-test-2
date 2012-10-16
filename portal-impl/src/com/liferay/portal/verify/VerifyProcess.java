@@ -14,10 +14,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.db.BaseDBProcess;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.util.RunSQLProcess;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * This abstract class should be extended for startup processes that verify the
  * integrity of the database. They can be added as part of
@@ -42,7 +41,7 @@ import java.util.regex.Pattern;
  * @author Alexander Chow
  * @author Hugo Huijser
  */
-public abstract class VerifyProcess extends RunSQLProcess{
+public abstract class VerifyProcess extends BaseDBProcess {
 
 	public static final int ALWAYS = -1;
 

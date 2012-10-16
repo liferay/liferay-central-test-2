@@ -12,15 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.upgrade.util;
-
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
+package com.liferay.portal.kernel.dao.db;
 
 import java.io.IOException;
 
@@ -30,10 +22,11 @@ import javax.naming.NamingException;
 
 /**
  * @author Hugo Huijser
+ * @author Brian Wing Shun Chan
  */
-public abstract class RunSQLProcess {
+public abstract class BaseDBProcess implements DBProcess {
 
-	public RunSQLProcess() {
+	public BaseDBProcess() {
 	}
 
 	public void runSQL(String template) throws IOException, SQLException {
@@ -63,7 +56,5 @@ public abstract class RunSQLProcess {
 
 		db.runSQLTemplate(path, failOnError);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(RunSQLProcess.class);
 
 }
