@@ -1291,13 +1291,13 @@ public class ClusterSchedulerEngineTest {
 		}
 
 		public void delete(String groupName) throws SchedulerException {
+			boolean removed = false;
+
 			Set<Map.Entry<String, SchedulerResponse>> set =
 				_defaultJobs.entrySet();
 
 			Iterator<Map.Entry<String, SchedulerResponse>> iterator =
 				set.iterator();
-
-			boolean isRemoved = false;
 
 			while (iterator.hasNext()) {
 				Map.Entry<String, SchedulerResponse> entry = iterator.next();
@@ -1307,11 +1307,11 @@ public class ClusterSchedulerEngineTest {
 				if (key.contains(groupName)) {
 					iterator.remove();
 
-					isRemoved = true;
+					removed = true;
 				}
 			}
 
-			if (isRemoved) {
+			if (removed) {
 				return;
 			}
 
