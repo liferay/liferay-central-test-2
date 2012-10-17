@@ -2226,6 +2226,22 @@
 		<delete dir="${lp.plugins.dir}/dist" />
 	</target>
 
+	<target name="clean-up-test-properties">
+		<if>
+			<available file="app.server.${user.name}.properties" />
+			<then>
+				<delete file="app.server.${user.name}.properties" />
+			</then>
+		</if>
+
+		<if>
+			<available file="test.${user.name}.properties" />
+			<then>
+				<delete file="test.${user.name}.properties" />
+			</then>
+		</if>
+	</target>
+
 	<target name="clean-up-vms">
 		<if>
 			<available file="${vm.drive}\${vm.host}\${vm.host}.vmdk.lck" />
