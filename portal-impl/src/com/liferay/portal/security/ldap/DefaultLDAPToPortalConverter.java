@@ -210,7 +210,7 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 			attributes, userMappings, UserConverterKeys.STATUS);
 
 		if (Validator.isNotNull(status)) {
-			user.setStatus(Integer.valueOf(status));
+			user.setStatus(GetterUtil.getInteger(status));
 		}
 
 		ldapUser.setUser(user);
