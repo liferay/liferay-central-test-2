@@ -120,6 +120,18 @@ public class PluginsEnvironmentBuilder {
 
 		List<String> jars = ListUtil.toList(dependencyJars);
 
+		String[] requiredDeploymentContexts = StringUtil.split(
+			properties.getProperty("required-deployment-contexts"));
+
+		for (String requiredDeploymentContext : requiredDeploymentContexts) {
+			if (_fileUtil.exists(
+					libDir.getCanonicalPath() + "/" +
+						requiredDeploymentContext + "-service.jar")) {
+
+				jars.add(requiredDeploymentContext + "-service.jar");
+			}
+		}
+
 		jars.add("commons-logging.jar");
 		jars.add("log4j.jar");
 		jars.add("util-bridges.jar");
