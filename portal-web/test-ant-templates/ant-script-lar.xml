@@ -159,6 +159,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-db2-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -199,6 +201,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-hsql-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-hsql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -325,6 +329,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-oracle-10-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -365,6 +371,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-oracle-11-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -405,6 +413,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-8.4-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -445,6 +455,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-9.0-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -485,6 +497,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-2005-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -521,6 +535,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-2008-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -561,6 +577,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sybase-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />

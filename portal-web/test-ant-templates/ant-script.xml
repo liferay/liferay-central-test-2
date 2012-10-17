@@ -958,6 +958,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -978,6 +980,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql-minimal-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -999,6 +1003,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-6.1-mysql-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-6.1.0.27" />
@@ -1020,6 +1026,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-6.1-mysql-minimal-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-6.1.0.27" />
@@ -1041,6 +1049,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-7.0-mysql-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -1061,6 +1071,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-8.0-mysql-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-8.0.0.0" />
@@ -1082,6 +1094,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-7.0-mysql-minimal-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -1103,6 +1117,8 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-8.0-mysql-minimal-firefox">
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-8.0.0.0" />
