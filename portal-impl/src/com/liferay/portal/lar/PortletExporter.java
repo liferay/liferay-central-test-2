@@ -1395,6 +1395,27 @@ public class PortletExporter {
 		return sb.toString();
 	}
 
+	protected String updateAssetCategoriesNavigationPortletPreferences(
+			String xml, long plid)
+		throws Exception {
+
+		javax.portlet.PortletPreferences jxPreferences =
+			PortletPreferencesFactoryUtil.fromDefaultXML(xml);
+
+		Enumeration<String> enu = jxPreferences.getNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (name.equals("assetVocabularyIds")) {
+				updatePreferencesClassPKs(
+					jxPreferences, name, AssetVocabulary.class.getName());
+			}
+		}
+
+		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
+	}
+
 	protected void updateAssetPublisherClassNameIds(
 			javax.portlet.PortletPreferences jxPreferences, String key)
 		throws Exception {
@@ -1514,27 +1535,6 @@ public class PortletExporter {
 		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
 	}
 
-	protected String updateAssetCategoriesNavigationPortletPreferences(
-			String xml, long plid)
-		throws Exception {
-
-		javax.portlet.PortletPreferences jxPreferences =
-			PortletPreferencesFactoryUtil.fromDefaultXML(xml);
-
-		Enumeration<String> enu = jxPreferences.getNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (name.equals("assetVocabularyIds")) {
-				updatePreferencesClassPKs(
-					jxPreferences, name, AssetVocabulary.class.getName());
-			}
-		}
-
-		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
-	}
-
 	protected void updatePreferencesClassPKs(
 			javax.portlet.PortletPreferences jxPreferences, String key,
 			String className)
@@ -1565,30 +1565,30 @@ public class PortletExporter {
 				String uuid = null;
 
 				if (className.equals(AssetCategory.class.getName())) {
-					AssetCategory category =
+					AssetCategory assetCategory =
 						AssetCategoryLocalServiceUtil.fetchCategory(
 							primaryKeyLong);
 
-					if (category != null) {
-						uuid = category.getUuid();
+					if (assetCategory != null) {
+						uuid = assetCategory.getUuid();
 					}
 				}
 				else if (className.equals(AssetVocabulary.class.getName())) {
-					AssetVocabulary vocabulary =
+					AssetVocabulary assetVocabulary =
 						AssetVocabularyLocalServiceUtil.fetchAssetVocabulary(
 							primaryKeyLong);
 
-					if (vocabulary != null) {
-						uuid = vocabulary.getUuid();
+					if (assetVocabulary != null) {
+						uuid = assetVocabulary.getUuid();
 					}
 				}
 				else if (className.equals(JournalStructure.class.getName())) {
-					JournalStructure structure =
+					JournalStructure journalStructure =
 						JournalStructureLocalServiceUtil.fetchJournalStructure(
 							primaryKeyLong);
 
-					if (structure != null) {
-						uuid = structure.getUuid();
+					if (journalStructure != null) {
+						uuid = journalStructure.getUuid();
 					}
 				}
 

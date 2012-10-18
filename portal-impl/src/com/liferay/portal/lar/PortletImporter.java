@@ -1708,6 +1708,34 @@ public class PortletImporter {
 		}
 	}
 
+	protected String updateAssetCategoriesNavigationPortletPreferences(
+			PortletDataContext portletDataContext, long companyId, long ownerId,
+			int ownerType, long plid, String portletId, String xml)
+		throws Exception {
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
+		Group companyGroup = company.getGroup();
+
+		javax.portlet.PortletPreferences jxPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
+				companyId, ownerId, ownerType, plid, portletId, xml);
+
+		Enumeration<String> enu = jxPreferences.getNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (name.equals("assetVocabularyIds")) {
+				updatePreferencesClassPKs(
+					portletDataContext, jxPreferences, name,
+					AssetVocabulary.class, companyGroup.getGroupId());
+			}
+		}
+
+		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
+	}
+
 	protected void updateAssetPublisherClassNameIds(
 			javax.portlet.PortletPreferences jxPreferences, String key)
 		throws Exception {
@@ -1827,34 +1855,6 @@ public class PortletImporter {
 		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
 	}
 
-	protected String updateAssetCategoriesNavigationPortletPreferences(
-			PortletDataContext portletDataContext, long companyId, long ownerId,
-			int ownerType, long plid, String portletId, String xml)
-		throws Exception {
-
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-		Group companyGroup = company.getGroup();
-
-		javax.portlet.PortletPreferences jxPreferences =
-			PortletPreferencesFactoryUtil.fromXML(
-				companyId, ownerId, ownerType, plid, portletId, xml);
-
-		Enumeration<String> enu = jxPreferences.getNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			if (name.equals("assetVocabularyIds")) {
-				updatePreferencesClassPKs(
-					portletDataContext, jxPreferences, name,
-					AssetVocabulary.class, companyGroup.getGroupId());
-			}
-		}
-
-		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
-	}
-
 	protected void updatePortletPreferences(
 			PortletDataContext portletDataContext, long ownerId, int ownerType,
 			long plid, String portletId, String xml, boolean importData)
@@ -1962,49 +1962,50 @@ public class PortletImporter {
 					String className = clazz.getName();
 
 					if (className.equals(AssetCategory.class.getName())) {
-						AssetCategory category =
+						AssetCategory assetCategory =
 							AssetCategoryUtil.fetchByUUID_G(
 								uuid, portletDataContext.getScopeGroupId());
 
-						if (category == null) {
-							category = AssetCategoryUtil.fetchByUUID_G(
-									uuid, companyGroupId);
+						if (assetCategory == null) {
+							assetCategory = AssetCategoryUtil.fetchByUUID_G(
+								uuid, companyGroupId);
 						}
 
-						if (category != null) {
-							newPrimaryKey = category.getCategoryId();
+						if (assetCategory != null) {
+							newPrimaryKey = assetCategory.getCategoryId();
 						}
 					}
 					else if (className.equals(
 							AssetVocabulary.class.getName())) {
 
-						AssetVocabulary vocabulary =
+						AssetVocabulary assetVocabulary =
 							AssetVocabularyUtil.fetchByUUID_G(
 								uuid, portletDataContext.getScopeGroupId());
 
-						if (vocabulary == null) {
-							vocabulary = AssetVocabularyUtil.fetchByUUID_G(
+						if (assetVocabulary == null) {
+							assetVocabulary = AssetVocabularyUtil.fetchByUUID_G(
 								uuid, companyGroupId);
 						}
 
-						if (vocabulary != null) {
-							newPrimaryKey = vocabulary.getVocabularyId();
+						if (assetVocabulary != null) {
+							newPrimaryKey = assetVocabulary.getVocabularyId();
 						}
 					}
 					else if (className.equals(
 							JournalStructure.class.getName())) {
 
-						JournalStructure structure =
+						JournalStructure journalStructure =
 							JournalStructureUtil.fetchByUUID_G(
 								uuid, portletDataContext.getScopeGroupId());
 
-						if (structure == null) {
-							structure = JournalStructureUtil.fetchByUUID_G(
-								uuid, companyGroupId);
+						if (journalStructure == null) {
+							journalStructure =
+								JournalStructureUtil.fetchByUUID_G(
+									uuid, companyGroupId);
 						}
 
-						if (structure != null) {
-							newPrimaryKey = structure.getId();
+						if (journalStructure != null) {
+							newPrimaryKey = journalStructure.getId();
 						}
 					}
 				}
