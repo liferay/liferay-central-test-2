@@ -740,7 +740,7 @@ public class SitesUtil {
 
 	public static boolean isOrganizationUser(
 			long companyId, Group group, User user,
-			GroupSearchTerms searchTerms, List<String> names)
+			GroupSearchTerms searchTerms, List<String> organizationNames)
 		throws Exception {
 
 		boolean organizationUser = false;
@@ -760,7 +760,7 @@ public class SitesUtil {
 		for (Organization organization : organizationsGroups) {
 			for (long userOrganizationId : user.getOrganizationIds()) {
 				if (userOrganizationId == organization.getOrganizationId()) {
-					names.add(organization.getName());
+					organizationNames.add(organization.getName());
 
 					organizationUser = true;
 				}
@@ -799,12 +799,13 @@ public class SitesUtil {
 	}
 
 	public static boolean isUserGroupUser(
-			long companyId, Group group, User user, List<String> names)
+			long companyId, Group group, User user, List<String> userGroupNames)
 		throws Exception {
 
 		boolean userGroupUser = false;
 
-		LinkedHashMap userGroupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> userGroupParams =
+			new LinkedHashMap<String, Object>();
 
 		userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
 
@@ -815,7 +816,7 @@ public class SitesUtil {
 		for (UserGroup userGroup : userGroupsGroups) {
 			for (long userGroupId : user.getUserGroupIds()) {
 				if (userGroupId == userGroup.getUserGroupId()) {
-					names.add(userGroup.getName());
+					userGroupNames.add(userGroup.getName());
 
 					userGroupUser = true;
 				}
