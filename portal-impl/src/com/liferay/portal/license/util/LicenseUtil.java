@@ -252,13 +252,13 @@ public class LicenseUtil {
 			String osName, InputStream processInputStream)
 		throws Exception {
 
+		Set<String> macAddresses = new HashSet<String>();
+
 		Pattern macAddressPattern = _macAddressPattern1;
 
 		if (StringUtil.startsWith(osName, "aix")) {
 			macAddressPattern = _macAddressPattern2;
 		}
-
-		Set<String> macAddresses = new HashSet<String>();
 
 		String processOutput = StringUtil.read(processInputStream);
 

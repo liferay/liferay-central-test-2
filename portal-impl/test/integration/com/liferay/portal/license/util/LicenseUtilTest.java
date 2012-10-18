@@ -15,23 +15,32 @@
 package com.liferay.portal.license.util;
 
 import com.liferay.portal.kernel.test.TestCase;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.junit.Assert;
+import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class LicenseUtilTest extends TestCase {
+
+	@Test
+	public void testMacAddressAIX() throws Exception {
+		InputStream processInputStream = getInputStream("aix.txt");
+
+		Set<String> macAddresses = LicenseUtil.getMacAddresses(
+			"aix", processInputStream);
+
+		assertEquals(macAddresses.size(), 2);
+		assertTrue(macAddresses.contains("66:da:90:6b:f1:17"));
+		assertTrue(macAddresses.contains("66:da:90:6b:f1:18"));
+	}
 
 	@Test
 	public void testMacAddressUbuntu() throws Exception {
@@ -58,21 +67,7 @@ public class LicenseUtilTest extends TestCase {
 		assertTrue(macAddresses.contains("00:ff:b0:3b:1f:e7"));
 	}
 
-	@Test
-	public void testMacAddressAIX() throws Exception {
-		InputStream processInputStream = getInputStream("aix.txt");
-
-		Set<String> macAddresses = LicenseUtil.getMacAddresses(
-			"aix", processInputStream);
-
-		assertEquals(macAddresses.size(), 2);
-		assertTrue(macAddresses.contains("66:da:90:6b:f1:17"));
-		assertTrue(macAddresses.contains("66:da:90:6b:f1:18"));
-	}
-
-	protected InputStream getInputStream(String fileName)
-		throws Exception {
-
+	protected InputStream getInputStream(String fileName) throws Exception {
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
@@ -80,4 +75,5 @@ public class LicenseUtilTest extends TestCase {
 
 		return inputStream;
 	}
+
 }
