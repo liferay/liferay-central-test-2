@@ -17,15 +17,16 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-String sitesListView = ParamUtil.get(request, "sitesListView", SiteConstants.LIST_VIEW_TREE);
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
+
+String sitesListView = ParamUtil.get(request, "sitesListView", SiteConstants.LIST_VIEW_TREE);
 %>
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewSitesTreeURL">
 		<portlet:param name="struts_action" value="/sites_admin/view" />
-		<portlet:param name="sitesListView" value="<%= SiteConstants.LIST_VIEW_TREE %>" />
 		<portlet:param name="toolbarItem" value="browse" />
+		<portlet:param name="sitesListView" value="<%= SiteConstants.LIST_VIEW_TREE %>" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("browse") ? "current" : StringPool.BLANK %>">
@@ -34,8 +35,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
 
 	<portlet:renderURL var="viewSitesFlatURL">
 		<portlet:param name="struts_action" value="/sites_admin/view" />
-		<portlet:param name="sitesListView" value="<%= SiteConstants.LIST_VIEW_FLAT_SITES %>" />
 		<portlet:param name="toolbarItem" value="view-all-sites" />
+		<portlet:param name="sitesListView" value="<%= SiteConstants.LIST_VIEW_FLAT_SITES %>" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all-sites") ? "current" : StringPool.BLANK %>">

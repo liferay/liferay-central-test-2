@@ -56,7 +56,7 @@ if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 				<liferay-ui:message key="none" />
 			</c:if>
 
-			<c:if test="<%= (usersCount > 0) %>">
+			<c:if test="<%= usersCount > 0 %>">
 				<liferay-ui:icon
 					image="user_icon"
 					label="<%= true %>"
@@ -65,7 +65,7 @@ if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 				/>
 			</c:if>
 
-			<c:if test="<%= (organizationsCount > 0) %>">
+			<c:if test="<%= organizationsCount > 0 %>">
 				<liferay-ui:icon
 					image="organization_icon"
 					label="<%= true %>"
@@ -74,7 +74,7 @@ if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 				/>
 			</c:if>
 
-			<c:if test="<%= (userGroupsCount > 0) %>">
+			<c:if test="<%= userGroupsCount > 0 %>">
 				<liferay-ui:icon
 					image="group"
 					label="<%= true %>"
@@ -84,7 +84,7 @@ if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 			</c:if>
 		</dd>
 
-		<c:if test="<%= (pendingRequests > 0) %>">
+		<c:if test="<%= pendingRequests > 0 %>">
 			<portlet:renderURL var="viewMembershipRequestsURL">
 				<portlet:param name="struts_action" value="/sites_admin/view_membership_requests" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />

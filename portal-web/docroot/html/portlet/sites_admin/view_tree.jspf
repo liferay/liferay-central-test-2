@@ -24,6 +24,7 @@ if (groupId > 0) {
 }
 
 long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+
 String parentGroupName = LanguageUtil.get(pageContext, "sites-home");
 
 if ((group != null) && !group.isRoot()) {
@@ -86,7 +87,7 @@ if ((group != null) && !group.isRoot()) {
 
 			GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-			request.setAttribute("view_sites_tree.jsp-searchTerms", searchTerms);
+			request.setAttribute("view_tree.jspf-searchTerms", searchTerms);
 
 			LinkedHashMap groupParams = new LinkedHashMap();
 
@@ -154,8 +155,8 @@ if ((group != null) && !group.isRoot()) {
 			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
 
-		<aui:input name="deleteGroupIds" type="hidden" />
 		<aui:input disabled="<%= true %>" name="sitesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+		<aui:input name="deleteGroupIds" type="hidden" />
 	</aui:column>
 
 	<c:if test="<%= group != null %>">
@@ -176,7 +177,7 @@ if ((group != null) && !group.isRoot()) {
 			<%
 			request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-			request.setAttribute("view_sites_tree.jsp-site", group);
+			request.setAttribute("view_tree.jspf-site", group);
 			%>
 
 			<liferay-util:include page="/html/portlet/sites_admin/site_action.jsp" />

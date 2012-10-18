@@ -19,8 +19,8 @@
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 >
-	<aui:input name="deleteGroupIds" type="hidden" />
 	<aui:input disabled="<%= true %>" name="sitesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteGroupIds" type="hidden" />
 
 	<%
 	GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();

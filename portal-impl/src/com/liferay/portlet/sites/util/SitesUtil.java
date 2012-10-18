@@ -745,7 +745,8 @@ public class SitesUtil {
 
 		boolean organizationUser = false;
 
-		LinkedHashMap organizationParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> organizationParams =
+			new LinkedHashMap<String, Object>();
 
 		organizationParams.put(
 			"organizationsGroups", new Long(group.getGroupId()));

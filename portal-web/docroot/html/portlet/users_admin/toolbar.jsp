@@ -17,16 +17,17 @@
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
-String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
+
+String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
 %>
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewUsersTreeURL">
 		<portlet:param name="struts_action" value="/users_admin/view" />
+		<portlet:param name="toolbarItem" value="browse" />
 		<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 		<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="toolbarItem" value="browse" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("browse") ? "current" : StringPool.BLANK %>">
@@ -35,9 +36,9 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
 
 	<portlet:renderURL var="viewOrganizationsFlatURL">
 		<portlet:param name="struts_action" value="/users_admin/view" />
+		<portlet:param name="toolbarItem" value="view-all-organizations" />
 		<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS %>" />
 		<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="toolbarItem" value="view-all-organizations" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all-organizations") ? "current" : StringPool.BLANK %>">
@@ -46,9 +47,9 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
 
 	<portlet:renderURL var="viewUsersFlatURL">
 		<portlet:param name="struts_action" value="/users_admin/view" />
+		<portlet:param name="toolbarItem" value="view-all-users" />
 		<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_FLAT_USERS %>" />
 		<portlet:param name="saveUsersListView" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="toolbarItem" value="view-all-users" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all-users") ? "current" : StringPool.BLANK %>">

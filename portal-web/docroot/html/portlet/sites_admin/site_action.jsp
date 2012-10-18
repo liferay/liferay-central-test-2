@@ -31,9 +31,9 @@ if (row != null) {
 	userGroupUser = GetterUtil.getBoolean(row.getParameter("userGroupUser"));
 }
 else {
-	group = (Group)request.getAttribute("view_sites_tree.jsp-site");
+	group = (Group)request.getAttribute("view_tree.jspf-site");
 
-	GroupSearchTerms searchTerms = (GroupSearchTerms)request.getAttribute("view_sites_tree.jsp-searchTerms");
+	GroupSearchTerms searchTerms = (GroupSearchTerms)request.getAttribute("view_tree.jspf-searchTerms");
 
 	if (!group.isOrganization()) {
 		organizationUser = SitesUtil.isOrganizationUser(company.getCompanyId(), group, user, searchTerms, new ArrayList<String>());
