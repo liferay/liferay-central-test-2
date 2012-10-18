@@ -45,15 +45,6 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 
 	public static final String CLASS_NAME = MBThread.class.getName();
 
-	/**
-	 * Deletes trash attachments from all the message boards messages from a
-	 * group that were deleted after a given date.
-	 *
-	 * @param  group the group
-	 * @param  date the date from which attachments will be deleted
-	 * @throws PortalException if the attachments could not be found or deleted
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public void deleteTrashAttachments(Group group, Date date)
 		throws PortalException, SystemException {
@@ -98,16 +89,6 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		}
 	}
 
-	/**
-	 * Deletes all message boards threads with the matching primary keys.
-	 *
-	 * @param  classPKs the primary keys of the message boards threads to be
-	 *         deleted
-	 * @param  checkPermission whether to check for necessary permissions
-	 * @throws PortalException if any one of the message boards threads could
-	 *         not be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	public void deleteTrashEntries(long[] classPKs, boolean checkPermission)
 		throws PortalException, SystemException {
 
@@ -121,24 +102,10 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		}
 	}
 
-	/**
-	 * Returns the message boards thread's class name
-	 *
-	 * @return the message boards thread's class name
-	 */
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
-	/**
-	 * Returns the link to the restored message boards thread
-	 *
-	 * @param  portletRequest the portlet request
-	 * @param  classPK the primary key of the message boards thread
-	 * @return Returns the link to the restored message boards thread
-	 * @throws PortalException if the message boards thread could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
@@ -149,18 +116,6 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 			portletRequest, thread.getCategoryId());
 	}
 
-	/**
-	 * Returns the path of the restored message boards thread
-	 *
-	 * The returned string is a path of categories the restored message boards
-	 * thread belongs to.
-	 *
-	 * @param  portletRequest the portlet request
-	 * @param  classPK the primary key of the message boards thread
-	 * @return Returns the path of the restored message boards thread
-	 * @throws PortalException if the message boards thread could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
@@ -170,15 +125,6 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		return MBUtil.getAbsolutePath(portletRequest, thread.getCategoryId());
 	}
 
-	/**
-	 * Returns the trash renderer for the message boards thread with the
-	 * primary key.
-	 *
-	 * @param  classPK the primary key of the message boards thread
-	 * @return Returns the trash renderer
-	 * @throws PortalException if the message boards thread could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public TrashRenderer getTrashRenderer(long classPK)
 		throws PortalException, SystemException {
@@ -192,15 +138,6 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		return false;
 	}
 
-	/**
-	 * Restores all message boards threads with the matching primary keys.
-	 *
-	 * @param  classPKs the primary key of the message boards threads to be
-	 *         restored
-	 * @throws PortalException if any one of the message boards threads could
-	 *         not be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	public void restoreTrashEntries(long[] classPKs)
 		throws PortalException, SystemException {
 
