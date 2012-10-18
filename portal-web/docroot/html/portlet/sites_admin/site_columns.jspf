@@ -55,21 +55,11 @@
 		String message = StringPool.BLANK;
 
 		if (organizationUser || userGroupUser) {
-			StringBundler namesSB = new StringBundler();
-
-			for (int j = 0; j < (names.size() - 1); j++) {
-				namesSB.append(names.get(j));
-
-				if (j < (names.size() - 2)) {
-					namesSB.append(", ");
-				}
-			}
-
 			if (names.size() == 1) {
 				message = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x", new Object[] {HtmlUtil.escape(curGroup.getDescriptiveName(locale)), names.get(0)});
 			}
 			else {
-				message = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x-and-x", new Object[] {HtmlUtil.escape(curGroup.getDescriptiveName(locale)), namesSB, names.get(names.size() - 1)});
+				message = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x-and-x", new Object[] {HtmlUtil.escape(curGroup.getDescriptiveName(locale)), StringUtil.merge(names.toArray(new String[names.size()]), ", "), names.get(names.size() - 1)});
 			}
 	%>
 
@@ -119,6 +109,7 @@
 	if (curGroup.isOrganization()) {
 		organizationsCount += 1;
 	}
+
 	if (organizationsCount > 0) {
 		buffer.append("<div class=\"organization-count\">");
 		buffer.append(LanguageUtil.format(pageContext, organizationsCount > 1 ? "x-organizations" : "x-organization", organizationsCount));
