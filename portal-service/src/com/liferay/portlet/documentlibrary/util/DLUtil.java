@@ -322,7 +322,7 @@ public class DLUtil {
 
 		List<DLFolder> dlFolders = dlFolder.getAncestors();
 
-		StringBundler sb = new StringBundler((dlFolders.size() * 4) + 6);
+		StringBundler sb = new StringBundler((dlFolders.size() * 3) + 6);
 
 		sb.append(themeDisplay.translate("home"));
 		sb.append(StringPool.SPACE);
