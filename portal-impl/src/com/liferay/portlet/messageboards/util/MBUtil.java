@@ -252,15 +252,15 @@ public class MBUtil {
 		MBCategory mbCategory = MBCategoryLocalServiceUtil.fetchMBCategory(
 			mbCategoryId);
 
-		List<MBCategory> mbCategories = mbCategory.getAncestors();
+		List<MBCategory> categories = mbCategory.getAncestors();
 
-		StringBundler sb = new StringBundler((mbCategories.size() * 4) + 6);
+		StringBundler sb = new StringBundler((categories.size() * 3) + 6);
 
 		sb.append(themeDisplay.translate("home"));
 		sb.append(StringPool.SPACE);
 
-		for (int i = mbCategories.size(); i >= 0; i--) {
-			MBCategory curCategory = mbCategories.get(i);
+		for (int i = categories.size(); i >= 0; i--) {
+			MBCategory curCategory = categories.get(i);
 
 			sb.append(StringPool.RAQUO);
 			sb.append(StringPool.SPACE);
@@ -300,24 +300,6 @@ public class MBUtil {
 		categoryId = ParamUtil.getLong(request, "mbCategoryId", categoryId);
 
 		return categoryId;
-	}
-
-	public static String getMBControlPanelLink(
-			PortletRequest portletRequest, long mbCategoryId)
-		throws PortalException, SystemException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
-
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, PortletKeys.MESSAGE_BOARDS_ADMIN,
-			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
-			PortletRequest.RENDER_PHASE);
-
-		portletURL.setParameter("struts_action", "/message_boards_admin/view");
-		portletURL.setParameter("mbCategoryId", String.valueOf(mbCategoryId));
-
-		return portletURL.toString();
 	}
 
 	public static String getEmailFromAddress(
@@ -502,6 +484,24 @@ public class MBUtil {
 		sb.append(mx);
 
 		return sb.toString();
+	}
+
+	public static String getMBControlPanelLink(
+			PortletRequest portletRequest, long mbCategoryId)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			portletRequest, PortletKeys.MESSAGE_BOARDS_ADMIN,
+			PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId()),
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter("struts_action", "/message_boards_admin/view");
+		portletURL.setParameter("mbCategoryId", String.valueOf(mbCategoryId));
+
+		return portletURL.toString();
 	}
 
 	public static String getMessageFormat(PortletPreferences preferences) {
