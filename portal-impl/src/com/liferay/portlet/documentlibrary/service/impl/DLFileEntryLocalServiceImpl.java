@@ -513,8 +513,6 @@ public class DLFileEntryLocalServiceImpl
 					dlFileVersion.getSize(), WorkflowConstants.STATUS_DRAFT,
 					serviceContext);
 
-				// See LPS-28886
-
 				copyExpandoRowModifiedDate(
 					dlFileEntry.getCompanyId(), oldDLFileVersionId,
 					dlFileVersion.getFileVersionId());
@@ -1685,7 +1683,8 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected void copyExpandoRowModifiedDate(
-			long companyId, long srcFileVersionId, long destFileVersionId)
+			long companyId, long sourceFileVersionId,
+			long destinationFileVersionId)
 		throws PortalException, SystemException {
 
 		ExpandoTable expandoTable = null;
@@ -1698,25 +1697,25 @@ public class DLFileEntryLocalServiceImpl
 			return;
 		}
 
-		Date srcModifiedDate = null;
+		Date sourceModifiedDate = null;
 
 		try {
-			ExpandoRow srcExpandoRow = expandoRowLocalService.getRow(
-				expandoTable.getTableId(), srcFileVersionId);
+			ExpandoRow sourceExpandoRow = expandoRowLocalService.getRow(
+				expandoTable.getTableId(), sourceFileVersionId);
 
-			srcModifiedDate = srcExpandoRow.getModifiedDate();
+			sourceModifiedDate = sourceExpandoRow.getModifiedDate();
 		}
 		catch (NoSuchRowException nsre) {
 			return;
 		}
 
 		try {
-			ExpandoRow destExpandoRow = expandoRowLocalService.getRow(
-				expandoTable.getTableId(), destFileVersionId);
+			ExpandoRow destinationExpandoRow = expandoRowLocalService.getRow(
+				expandoTable.getTableId(), destinationFileVersionId);
 
-			destExpandoRow.setModifiedDate(srcModifiedDate);
+			destinationExpandoRow.setModifiedDate(sourceModifiedDate);
 
-			expandoRowLocalService.updateExpandoRow(destExpandoRow);
+			expandoRowLocalService.updateExpandoRow(destinationExpandoRow);
 		}
 		catch (NoSuchRowException nsre) {
 		}
