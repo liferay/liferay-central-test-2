@@ -272,14 +272,14 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 				template.getTemplateKey(), template.getNameMap(),
 				template.getDescriptionMap(), template.getType(),
 				template.getMode(), template.getLanguage(),
-				template.getScript(), template.getCacheable(), serviceContext);
+				template.getScript(), template.isCacheable(), serviceContext);
 		}
 		catch (TemplateDuplicateTemplateKeyException tdtke) {
 			newTemplate = DDMTemplateLocalServiceUtil.addTemplate(
 				userId, groupId, template.getClassNameId(), classPK, null,
 				template.getNameMap(), template.getDescriptionMap(),
 				template.getType(), template.getMode(), template.getLanguage(),
-				template.getScript(), template.getCacheable(), serviceContext);
+				template.getScript(), template.isCacheable(), serviceContext);
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
