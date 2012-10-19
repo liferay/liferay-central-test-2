@@ -3284,7 +3284,8 @@ public class ServiceBuilder {
 							finder.isUnique());
 
 					indexSQLs.put(
-						indexMetadata.getIndexSpec(), indexMetadata.getSQL());
+						indexMetadata.getSpecification(),
+						indexMetadata.getSQL());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +

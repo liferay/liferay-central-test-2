@@ -29,9 +29,9 @@ public class IndexMetadataFactoryUtil {
 	public static IndexMetadata create(
 		String tableName, List<String> columnNames, boolean unique) {
 
-		String indexSpec = getIndexSpec(tableName, columnNames);
+		String specification = getSpecification(tableName, columnNames);
 
-		String indexName = getIndexName(indexSpec);
+		String indexName = getIndexName(specification);
 
 		StringBundler sb = new StringBundler(5);
 
@@ -45,22 +45,23 @@ public class IndexMetadataFactoryUtil {
 		sb.append("index ");
 		sb.append(indexName);
 		sb.append(" on ");
-		sb.append(indexSpec);
+		sb.append(specification);
 
 		String sql = sb.toString();
 
-		return new IndexMetadata(indexName, tableName, indexSpec, sql, unique);
+		return new IndexMetadata(
+			indexName, tableName, unique, specification, sql);
 	}
 
-	protected static String getIndexName(String indexSpec) {
-		String indexHash = StringUtil.toHexString(indexSpec.hashCode());
+	protected static String getIndexName(String specification) {
+		String indexHash = StringUtil.toHexString(specification.hashCode());
 
 		indexHash = indexHash.toUpperCase();
 
 		return _INDEX_NAME_PREFIX.concat(indexHash);
 	}
 
-	protected static String getIndexSpec(
+	protected static String getSpecification(
 		String tableName, List<String> columnNames) {
 
 		StringBundler sb = new StringBundler(6);

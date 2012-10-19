@@ -21,24 +21,24 @@ package com.liferay.portal.kernel.dao.db;
 public class IndexMetadata extends Index {
 
 	public IndexMetadata(
-		String indexName, String tableName, String indexSpec, String sql,
-		boolean unique) {
+		String indexName, String tableName, boolean unique,
+		String specification, String sql) {
 
 		super(indexName, tableName, unique);
 
-		_indexSpec = indexSpec;
+		_specification = specification;
 		_sql = sql;
 	}
 
-	public String getIndexSpec() {
-		return _indexSpec;
+	public String getSpecification() {
+		return _specification;
 	}
 
 	public String getSQL() {
 		return _sql;
 	}
 
-	private String _indexSpec;
+	private String _specification;
 	private String _sql;
 
 }
