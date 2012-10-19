@@ -54,11 +54,12 @@ public class IndexMetadataFactoryUtil {
 	}
 
 	protected static String getIndexName(String specification) {
-		String indexHash = StringUtil.toHexString(specification.hashCode());
+		String specificationHash = StringUtil.toHexString(
+			specification.hashCode());
 
-		indexHash = indexHash.toUpperCase();
+		specificationHash = specificationHash.toUpperCase();
 
-		return _INDEX_NAME_PREFIX.concat(indexHash);
+		return _INDEX_NAME_PREFIX.concat(specificationHash);
 	}
 
 	protected static String getSpecification(
