@@ -24,9 +24,9 @@ import java.util.List;
  * @author James Lefeu
  * @auther Peter Shin
  */
-public class SBIndexFactoryUtil {
+public class IndexMetadataFactoryUtil {
 
-	public static SBIndex create(
+	public static IndexMetadata create(
 		String tableName, List<String> columnNames, boolean unique) {
 
 		String indexSpec = getIndexSpec(tableName, columnNames);
@@ -49,38 +49,37 @@ public class SBIndexFactoryUtil {
 
 		String sql = sb.toString();
 
-		return new SBIndex(indexName, tableName, indexSpec, sql, unique);
+		return new IndexMetadata(indexName, tableName, indexSpec, sql, unique);
 	}
 
 	protected static String getIndexName(String indexSpec) {
-		String indexHash = StringUtil.toHexString(
-			indexSpec.hashCode()).toUpperCase();
+		String indexHash = StringUtil.toHexString(indexSpec.hashCode());
 
-		return _INDEX_PREFIX.concat(indexHash);
+		indexHash = indexHash.toUpperCase();
+
+		return _INDEX_NAME_PREFIX.concat(indexHash);
 	}
 
 	protected static String getIndexSpec(
-		String table, List<String> columnNames) {
+		String tableName, List<String> columnNames) {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(table);
+		sb.append(tableName);
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.OPEN_PARENTHESIS);
 
-		String s = StringPool.BLANK;
-
 		if ((columnNames != null) && !columnNames.isEmpty()) {
-			s = StringUtil.merge(columnNames, StringPool.COMMA_AND_SPACE);
+			sb.append(
+				StringUtil.merge(columnNames, StringPool.COMMA_AND_SPACE));
 		}
 
-		sb.append(s);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 		sb.append(StringPool.SEMICOLON);
 
 		return sb.toString();
 	}
 
-	private static final String _INDEX_PREFIX = "IX_";
+	private static final String _INDEX_NAME_PREFIX = "IX_";
 
 }

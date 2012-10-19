@@ -18,9 +18,9 @@ package com.liferay.portal.kernel.dao.db;
  * @author James Lefeu
  * @auther Peter Shin
  */
-public class SBIndex extends Index {
+public class IndexMetadata extends Index {
 
-	public SBIndex(
+	public IndexMetadata(
 		String indexName, String tableName, String indexSpec, String sql,
 		boolean unique) {
 

@@ -15,8 +15,8 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
-import com.liferay.portal.kernel.dao.db.SBIndex;
-import com.liferay.portal.kernel.dao.db.SBIndexFactoryUtil;
+import com.liferay.portal.kernel.dao.db.IndexMetadata;
+import com.liferay.portal.kernel.dao.db.IndexMetadataFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
@@ -3268,8 +3268,9 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					List<EntityColumn> finderColsList = finder.getColumns();
 					List<String> finderColsNames = new ArrayList<String>();
+
+					List<EntityColumn> finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = finderColsList.get(k);
@@ -3277,16 +3278,19 @@ public class ServiceBuilder {
 						finderColsNames.add(col.getDBName());
 					}
 
-					SBIndex index = SBIndexFactoryUtil.create(
-						entity.getTable(), finderColsNames, finder.isUnique());
+					IndexMetadata indexMetadata =
+						IndexMetadataFactoryUtil.create(
+							entity.getTable(), finderColsNames,
+							finder.isUnique());
 
-					indexSQLs.put(index.getIndexSpec(), index.getSQL());
+					indexSQLs.put(
+						indexMetadata.getIndexSpec(), indexMetadata.getSQL());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +
 							finder.getName();
 
-					indexProps.put(finderName, index.getIndexName());
+					indexProps.put(finderName, indexMetadata.getIndexName());
 				}
 			}
 		}
