@@ -401,53 +401,13 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		upgradeDocumentLibrary.updateSyncs();
 	}
 
-	protected Map<String, Long> getActionValuesByResource(String resourceName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		HashMap<String, Long> actionIdValues = new HashMap<String, Long>();
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select actionId, bitwiseValue from ResourceAction " +
-					"where name = ?");
-
-			ps.setString(1, resourceName);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				String actionid = rs.getString("actionId");
-				long bitwiseValue = rs.getLong("bitwiseValue");
-
-				actionIdValues.put(actionid, bitwiseValue);
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to find the resource actions for " + resourceName);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return actionIdValues;
-	}
-
 	protected long getBitwiseValue(
-			Map<String, Long> actionIdValues, List<String> actionNames) {
+		Map<String, Long> bitwiseValues, List<String> actionIds) {
 
 		long bitwiseValue = 0;
 
-		for (String actionName : actionNames) {
-			Long actionIdBitwiseValue = actionIdValues.get(actionName);
+		for (String actionId : actionIds) {
+			Long actionIdBitwiseValue = bitwiseValues.get(actionId);
 
 			if (actionIdBitwiseValue == null) {
 				continue;
@@ -457,6 +417,38 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 
 		return bitwiseValue;
+	}
+
+	protected Map<String, Long> getBitwiseValues(String name) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select actionId, bitwiseValue from ResourceAction " +
+					"where name = ?");
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			Map<String, Long> bitwiseValues = new HashMap<String, Long>();
+
+			while (rs.next()) {
+				String actionId = rs.getString("actionId");
+				long bitwiseValue = rs.getLong("bitwiseValue");
+
+				bitwiseValues.put(actionId, bitwiseValue);
+			}
+
+			return bitwiseValues;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected long getCompanyGroupId(long companyId) throws Exception {
@@ -542,20 +534,20 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected List<String> getResourceActionNames(
-			Map<String, Long> actionIdValues, int actionIds) {
+	protected List<String> getResourceActionIds(
+		Map<String, Long> bitwiseValues, long actionIdsLong) {
 
-		List<String> actionNames = new ArrayList<String>();
+		List<String> actionIds = new ArrayList<String>();
 
-		for (String actionName : actionIdValues.keySet()) {
-			long bitwiseValue = actionIdValues.get(actionName);
+		for (String actionId : bitwiseValues.keySet()) {
+			long bitwiseValue = bitwiseValues.get(actionId);
 
-			if ((actionIds & bitwiseValue) == bitwiseValue) {
-				actionNames.add(actionName);
+			if ((actionIdsLong & bitwiseValue) == bitwiseValue) {
+				actionIds.add(actionId);
 			}
 		}
 
-		return actionNames;
+		return actionIds;
 	}
 
 	protected void migrateFile(
@@ -991,56 +983,49 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			String igResourceName, String dlResourceName)
 		throws Exception {
 
-		Map<String, Long> igActionIdValues = getActionValuesByResource(
-			igResourceName);
+		Map<String, Long> igBitwiseValues = getBitwiseValues(igResourceName);
 
-		if (igActionIdValues.isEmpty()) {
+		if (igBitwiseValues.isEmpty()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Resource actions do not exist for " + igResourceName +
-						". Please check the permissions for those objects");
+					"Resource actions do not exist for " + igResourceName);
 			}
 
 			return;
 		}
 
-		Map<String, Long> dlActionIdValues = getActionValuesByResource(
-			dlResourceName);
+		Map<String, Long> dlBitwiseValues = getBitwiseValues(dlResourceName);
 
-		if (dlActionIdValues.isEmpty()) {
+		if (dlBitwiseValues.isEmpty()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Resource actions do not exist for " + dlResourceName +
-						". Please check the permissions for those objects");
+					"Resource actions do not exist for " + dlResourceName);
 			}
 
 			return;
 		}
 
-		double igActionIdsCombinations = Math.pow(
-			2, igActionIdValues.size());
+		// The size of igBitwiseValues is based on the number of actions defined
+		// in resource actions which was 7 and 4 for IGFolder and IGImage
+		// respectively. This means the loop will execute at most 2^7 (128)
+		// times. If we were to check before update, we would still have to
+		// perform 128 queries, so we may as well just update 128 times even if
+		// no candidates exist for a give value.
 
-		// The size of igActionIdValues is based on the number of actions
-		// defined in resource actions which was 7 and 4 for IGFolder and
-		// IGImage respectively, which means the loop will execute at most
-		// 2^7 (128) times. If we were to check before update, we'd still have
-		// to perform 128 queries, so we may as well just update 128 times even
-		// if no candidates exist for a give value.
-
-		for (int i = 0; i < igActionIdsCombinations; i++) {
-			List<String> igActionNames = getResourceActionNames(
-				igActionIdValues, i);
+		for (int i = 0; i < Math.pow(2, igBitwiseValues.size()); i++) {
+			List<String> igActionIds = getResourceActionIds(igBitwiseValues, i);
 
 			if (igResourceName.equals(_IG_FOLDER_CLASS_NAME)) {
 				Collections.replaceAll(
-					igActionNames, "ADD_IMAGE", "ADD_DOCUMENT");
+					igActionIds, "ADD_IMAGE", "ADD_DOCUMENT");
 			}
 
-			long dlActionIds = getBitwiseValue(dlActionIdValues, igActionNames);
+			long dlActionIdsLong = getBitwiseValue(
+				dlBitwiseValues, igActionIds);
 
 			runSQL(
 				"update ResourcePermission set name = '" + dlResourceName +
-					"', actionIds = " + dlActionIds + " where name = '" +
+					"', actionIds = " + dlActionIdsLong + " where name = '" +
 						igResourceName + "'" + " and actionIds = " + i);
 		}
 	}
