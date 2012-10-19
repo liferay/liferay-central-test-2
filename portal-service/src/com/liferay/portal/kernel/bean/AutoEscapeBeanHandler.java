@@ -40,7 +40,7 @@ import java.lang.reflect.Method;
  */
 public class AutoEscapeBeanHandler implements InvocationHandler, Serializable {
 
-	public AutoEscapeBeanHandler(BaseModel baseModel) {
+	public AutoEscapeBeanHandler(BaseModel<?> baseModel) {
 		_baseModel = baseModel;
 	}
 
@@ -81,6 +81,6 @@ public class AutoEscapeBeanHandler implements InvocationHandler, Serializable {
 		return result;
 	}
 
-	private BaseModel _baseModel;
+	private BaseModel<?> _baseModel;
 
 }
