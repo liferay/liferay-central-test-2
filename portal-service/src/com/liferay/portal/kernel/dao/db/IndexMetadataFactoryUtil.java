@@ -24,16 +24,12 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class IndexMetadataFactoryUtil {
 
-	public static IndexMetadata create(String tableName, String[] columnNames) {
-		return create(tableName, columnNames, false);
-	}
+	public static IndexMetadata createIndexMetadata(
+		boolean unique, String tableName, String... columnNames) {
 
-	public static IndexMetadata create(
-		String tableName, String[] columnNames, boolean unique) {
+		String specification = _getSpecification(tableName, columnNames);
 
-		String specification = getSpecification(tableName, columnNames);
-
-		String indexName = getIndexName(specification);
+		String indexName = _getIndexName(specification);
 
 		StringBundler sb = new StringBundler(5);
 
@@ -49,7 +45,7 @@ public class IndexMetadataFactoryUtil {
 		sb.append(" on ");
 		sb.append(specification);
 
-		String indexSQLCreate = sb.toString();
+		String createSQL = sb.toString();
 
 		sb.setIndex(0);
 
@@ -58,14 +54,13 @@ public class IndexMetadataFactoryUtil {
 		sb.append(" on ");
 		sb.append(tableName);
 
-		String indexSQLDrop = sb.toString();
+		String dropSQL = sb.toString();
 
 		return new IndexMetadata(
-			indexName, tableName, unique, specification, indexSQLCreate,
-			indexSQLDrop);
+			indexName, tableName, unique, specification, createSQL, dropSQL);
 	}
 
-	protected static String getIndexName(String specification) {
+	private static String _getIndexName(String specification) {
 		String specificationHash = StringUtil.toHexString(
 			specification.hashCode());
 
@@ -74,7 +69,7 @@ public class IndexMetadataFactoryUtil {
 		return _INDEX_NAME_PREFIX.concat(specificationHash);
 	}
 
-	protected static String getSpecification(
+	private static String _getSpecification(
 		String tableName, String[] columnNames) {
 
 		StringBundler sb = new StringBundler(6);

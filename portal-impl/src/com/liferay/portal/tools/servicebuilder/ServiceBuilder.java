@@ -3268,25 +3268,25 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					String[] finderColsNames = new String[0];
+					List<String> finderColsNames = new ArrayList<String>();
 
 					List<EntityColumn> finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = finderColsList.get(k);
 
-						finderColsNames =
-							ArrayUtil.append(finderColsNames, col.getDBName());
+						finderColsNames.add(col.getDBName());
 					}
 
 					IndexMetadata indexMetadata =
-						IndexMetadataFactoryUtil.create(
-							entity.getTable(), finderColsNames,
-							finder.isUnique());
+						IndexMetadataFactoryUtil.createIndexMetadata(
+							finder.isUnique(), entity.getTable(),
+							finderColsNames.toArray(
+								new String[finderColsNames.size()]));
 
 					indexSQLs.put(
 						indexMetadata.getSpecification(),
-						indexMetadata.getIndexSQLCreate());
+						indexMetadata.getCreateSQL());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +

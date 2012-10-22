@@ -22,29 +22,29 @@ public class IndexMetadata extends Index {
 
 	public IndexMetadata(
 		String indexName, String tableName, boolean unique,
-		String specification, String indexSQLCreate, String indexSQLDrop) {
+		String specification, String createSQL, String dropSQL) {
 
 		super(indexName, tableName, unique);
 
-		_indexSQLCreate = indexSQLCreate;
-		_indexSQLDrop = indexSQLDrop;
 		_specification = specification;
+		_createSQL = createSQL;
+		_dropSQL = dropSQL;
 	}
 
-	public String getIndexSQLCreate() {
-		return _indexSQLCreate;
+	public String getCreateSQL() {
+		return _createSQL;
 	}
 
-	public String getIndexSQLDrop() {
-		return _indexSQLDrop;
+	public String getDropSQL() {
+		return _dropSQL;
 	}
 
 	public String getSpecification() {
 		return _specification;
 	}
 
-	private String _indexSQLCreate;
-	private String _indexSQLDrop;
+	private String _createSQL;
+	private String _dropSQL;
 	private String _specification;
 
 }
