@@ -76,6 +76,9 @@
 		<finder name="TemplateId" return-type="Collection">
 			<finder-column name="templateId" />
 		</finder>
+		<finder name="LayoutUuid" return-type="Collection">
+			<finder-column name="layoutUuid" />
+		</finder>
 		<finder name="SmallImageId" return-type="Collection">
 			<finder-column name="smallImageId" />
 		</finder>
