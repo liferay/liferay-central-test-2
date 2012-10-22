@@ -278,6 +278,17 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	public T update(T model) throws SystemException;
 
 	/**
+	 * @deprecated {@link #update(BaseModel)}}
+	 */
+	public T update(T model, boolean merge) throws SystemException;
+
+	/**
+	 * @deprecated {@link #update(BaseModel, ServiceContext)}}
+	 */
+	public T update(T model, boolean merge, ServiceContext serviceContext)
+		throws SystemException;
+
+	/**
 	 * Updates the model instance in the database or adds it if it does not yet
 	 * exist, within a different service context. Also notifies the appropriate
 	 * model listeners.

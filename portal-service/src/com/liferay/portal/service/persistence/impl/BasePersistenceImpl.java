@@ -298,6 +298,22 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return model;
 	}
 
+	/**
+	 * @deprecated {@link #update(BaseModel)}}
+	 */
+	public T update(T model, boolean merge) throws SystemException {
+		return update(model);
+	}
+
+	/**
+	 * @deprecated {@link #update(BaseModel, ServiceContext)}}
+	 */
+	public T update(T model, boolean merge, ServiceContext serviceContext)
+		throws SystemException {
+
+		return update(model, serviceContext);
+	}
+
 	public T update(T model, ServiceContext serviceContext)
 		throws SystemException {
 
@@ -368,6 +384,13 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 */
 	protected T updateImpl(T model) throws SystemException {
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * @deprecated {@link #updateImpl(BaseModel)}
+	 */
+	protected T updateImpl(T model, boolean merge) throws SystemException {
+		return updateImpl(model);
 	}
 
 	protected static final Object[] FINDER_ARGS_EMPTY = new Object[0];
