@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -62,54 +61,57 @@ public class AuthVerifierFilter extends BasePortalFilter {
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
-		Enumeration<String> filterInitParameters =
-			filterConfig.getInitParameterNames();
+		Enumeration<String> enu = filterConfig.getInitParameterNames();
 
-		while (filterInitParameters.hasMoreElements()) {
-			String name = filterInitParameters.nextElement();
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
 			String value = filterConfig.getInitParameter(name);
 
-			_filterConfiguration.put(name, value);
+			_initParametersMap.put(name, value);
 		}
 
-		String propertyPrefix =
-			GetterUtil.getString(
-				_filterConfiguration.get("portal_property_prefix"));
+		String portalPropertyPrefix = GetterUtil.getString(
+			_initParametersMap.get("portal_property_prefix"));
 
-		if (Validator.isNotNull(propertyPrefix)) {
-			Properties filterPortalConfiguration = PropsUtil.getProperties(
-				propertyPrefix, true);
+		if (Validator.isNotNull(portalPropertyPrefix)) {
+			Properties properties = PropsUtil.getProperties(
+				portalPropertyPrefix, true);
 
-			for (Object name : filterPortalConfiguration.keySet()) {
-				Object value = filterPortalConfiguration.get(name);
-				_filterConfiguration.put((String) name, value);
+			for (Object name : properties.keySet()) {
+				Object value = properties.get(name);
+
+				_initParametersMap.put((String)name, value);
 			}
 		}
 
-		if (_filterConfiguration.containsKey("https.required")) {
-			_httpsRequired =
-				GetterUtil.getBoolean(
-					_filterConfiguration.get("https.required"));
+		if (_initParametersMap.containsKey("hosts.allowed")) {
+			String hostsAllowedString = (String)_initParametersMap.get(
+				"hosts.allowed");
 
-			_filterConfiguration.remove("https.required");
+			String[] hostsAllowed = StringUtil.split(hostsAllowedString);
+
+			for (String hostAllowed : hostsAllowed) {
+				_hostsAllowed.add(hostAllowed);
+			}
+
+			_initParametersMap.remove("hosts.allowed");
 		}
 
-		if (_filterConfiguration.containsKey("hosts.allowed")) {
-			String[] hostsAllowedArray =
-				StringUtil.split(
-					(String) _filterConfiguration.get("hosts.allowed"));
+		if (_initParametersMap.containsKey("https.required")) {
+			_httpsRequired = GetterUtil.getBoolean(
+				_initParametersMap.get("https.required"));
 
-			_hostsAllowed.addAll(ListUtil.fromArray(hostsAllowedArray));
-
-			_filterConfiguration.remove("hosts.allowed");
+			_initParametersMap.remove("https.required");
 		}
 
-		if (_filterConfiguration.containsKey("use_permission_checker")) {
-			_filterConfiguration.remove("use_permission_checker");
-			_log.warn(
-				"use_permission_checker was deprecated and has no effect!");
-		}
+		if (_initParametersMap.containsKey("use_permission_checker")) {
+			_initParametersMap.remove("use_permission_checker");
 
+			if (_log.isWarnEnabled()) {
+				_log.warn("use_permission_checker is deprecated");
+			}
+		}
 	}
 
 	@Override
@@ -118,16 +120,16 @@ public class AuthVerifierFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (!_accessAllowed(request, response)) {
+		if (!_isAccessAllowed(request, response)) {
 			return;
 		}
 
-		if (_sslApplied(request, response)) {
+		if (_isApplySSL(request, response)) {
 			return;
 		}
 
 		AccessControlUtil.initAccessControlContext(
-			request, response, _filterConfiguration);
+			request, response, _initParametersMap);
 
 		AuthVerifierResult.State state = AccessControlUtil.verifyRequest();
 
@@ -172,7 +174,7 @@ public class AuthVerifierFilter extends BasePortalFilter {
 		}
 	}
 
-	private boolean _accessAllowed(
+	private boolean _isAccessAllowed(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
@@ -197,7 +199,7 @@ public class AuthVerifierFilter extends BasePortalFilter {
 		return false;
 	}
 
-	private boolean _sslApplied(
+	private boolean _isApplySSL(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
@@ -236,10 +238,9 @@ public class AuthVerifierFilter extends BasePortalFilter {
 	private static Log _log = LogFactoryUtil.getLog(
 		AuthVerifierFilter.class.getName());
 
-	private Map<String, Object> _filterConfiguration =
-		new HashMap<String, Object>();
 	private Set<String> _hostsAllowed = new HashSet<String>();
-
 	private boolean _httpsRequired;
+	private Map<String, Object> _initParametersMap =
+		new HashMap<String, Object>();
 
 }

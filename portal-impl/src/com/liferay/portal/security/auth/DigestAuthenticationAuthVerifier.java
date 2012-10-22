@@ -51,7 +51,7 @@ public class DigestAuthenticationAuthVerifier implements AuthVerifier {
 
 			if (userId == 0) {
 
-				// backward compatibility
+				// Deprecated
 
 				boolean forcedDigestAuth = MapUtil.getBoolean(
 					accessControlContext.getSettings(), "digest_auth");

@@ -160,10 +160,10 @@ public class BasicAuthHeaderAutoLogin implements AuthVerifier, AutoLogin {
 				authVerifierResult.setState(AuthVerifierResult.State.SUCCESS);
 				authVerifierResult.setUserId(Long.valueOf(credentials[0]));
 			}
-
-			// backward compatibility
-
 			else {
+
+				// Deprecated
+
 				boolean forcedBasicAuth = MapUtil.getBoolean(
 					accessControlContext.getSettings(), "basic_auth");
 

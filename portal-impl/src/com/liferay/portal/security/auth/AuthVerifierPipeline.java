@@ -34,6 +34,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,9 +106,11 @@ public class AuthVerifierPipeline {
 		List<AuthVerifierConfiguration> authVerifierConfigurations =
 			new ArrayList<AuthVerifierConfiguration>();
 
-		int length = request.getContextPath().length();
+		String requestURI = request.getRequestURI();
 
-		String requestURI = request.getRequestURI().substring(length);
+		String contextPath = request.getContextPath();
+
+		requestURI = requestURI.substring(contextPath.length());
 
 		for (AuthVerifierConfiguration authVerifierConfiguration :
 				_authVerifierConfigurations) {
@@ -140,6 +143,7 @@ public class AuthVerifierPipeline {
 						authVerifierClassName);
 
 				authVerifierConfiguration.setAuthVerifier(authVerifier);
+
 				authVerifierConfiguration.setAuthVerifierClassName(
 					authVerifierClassName);
 
@@ -190,10 +194,12 @@ public class AuthVerifierPipeline {
 
 		boolean merge = false;
 
-		Iterator<String> itr = settings.keySet().iterator();
+		Set<String> settingsKeys = settings.keySet();
 
-		while (itr.hasNext() && !merge) {
-			String settingsKey = itr.next();
+		Iterator<String> iterator = settingsKeys.iterator();
+
+		while (iterator.hasNext() && !merge) {
+			String settingsKey = iterator.next();
 
 			if (settingsKey.startsWith(authVerifierSettingsKey)) {
 				if (settings.get(settingsKey) instanceof String) {
@@ -206,9 +212,11 @@ public class AuthVerifierPipeline {
 			return authVerifierConfiguration;
 		}
 
-		AuthVerifierConfiguration result = new AuthVerifierConfiguration();
+		AuthVerifierConfiguration mergedAuthVerifierConfiguration =
+			new AuthVerifierConfiguration();
 
-		result.setAuthVerifier(authVerifierConfiguration.getAuthVerifier());
+		mergedAuthVerifierConfiguration.setAuthVerifier(
+			authVerifierConfiguration.getAuthVerifier());
 
 		Properties mergedProperties = new Properties(
 			authVerifierConfiguration.getProperties());
@@ -222,15 +230,15 @@ public class AuthVerifierPipeline {
 						authVerifierSettingsKey.length());
 
 					mergedProperties.setProperty(
-						propertiesKey, (String) settingsValue);
+						propertiesKey, (String)settingsValue);
 				}
 
 			}
 		}
 
-		result.setProperties(mergedProperties);
+		mergedAuthVerifierConfiguration.setProperties(mergedProperties);
 
-		return result;
+		return mergedAuthVerifierConfiguration;
 	}
 
 	private Map<String, Object> _mergeSettings(

@@ -31,7 +31,7 @@ public interface AccessControl {
 
 	public void initAccessControlContext(
 		HttpServletRequest request, HttpServletResponse response,
-		Map<String, Object> initConfiguration);
+		Map<String, Object> settings);
 
 	public void initContextUser(long userId) throws AuthException;
 

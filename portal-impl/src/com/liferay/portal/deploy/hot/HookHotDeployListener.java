@@ -1027,6 +1027,7 @@ public class HookHotDeployListener
 				portletClassLoader, AuthVerifier.class, authVerifierClassName);
 
 			authVerifierConfiguration.setAuthVerifier(authVerifier);
+
 			authVerifierConfiguration.setAuthVerifierClassName(
 				authVerifierClassName);
 

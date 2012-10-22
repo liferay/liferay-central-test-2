@@ -40,7 +40,7 @@ public class AccessControlImpl implements AccessControl {
 
 	public void initAccessControlContext(
 		HttpServletRequest request, HttpServletResponse response,
-		Map<String, Object> initConfiguration) {
+		Map<String, Object> settings) {
 
 		AccessControlContext accessControlContext =
 			AccessControlUtil.getAccessControlContext();
@@ -55,9 +55,10 @@ public class AccessControlImpl implements AccessControl {
 		accessControlContext.setRequest(request);
 		accessControlContext.setResponse(response);
 
-		Map<String, Object> settings = accessControlContext.getSettings();
+		Map<String, Object> accessControlContextSettings =
+			accessControlContext.getSettings();
 
-		settings.putAll(initConfiguration);
+		accessControlContextSettings.putAll(settings);
 
 		AccessControlUtil.setAccessControlContext(accessControlContext);
 	}

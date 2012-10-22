@@ -47,10 +47,10 @@ public class AccessControlUtil {
 
 	public static void initAccessControlContext(
 		HttpServletRequest request, HttpServletResponse response,
-		Map<String, Object> initConfiguration) {
+		Map<String, Object> settings) {
 
 		getAccessControl().initAccessControlContext(
-			request, response, initConfiguration);
+			request, response, settings);
 	}
 
 	public static void initContextUser(long userId) throws AuthException {
