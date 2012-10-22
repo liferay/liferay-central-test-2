@@ -1305,6 +1305,148 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Returns all the journal articles where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @return the matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByLayoutUuid(
+		java.lang.String layoutUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLayoutUuid(layoutUuid);
+	}
+
+	/**
+	* Returns a range of all the journal articles where layoutUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutUuid the layout uuid
+	* @param start the lower bound of the range of journal articles
+	* @param end the upper bound of the range of journal articles (not inclusive)
+	* @return the range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByLayoutUuid(
+		java.lang.String layoutUuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLayoutUuid(layoutUuid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the journal articles where layoutUuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutUuid the layout uuid
+	* @param start the lower bound of the range of journal articles
+	* @param end the upper bound of the range of journal articles (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByLayoutUuid(
+		java.lang.String layoutUuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByLayoutUuid(layoutUuid, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first journal article in the ordered set where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByLayoutUuid_First(
+		java.lang.String layoutUuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByLayoutUuid_First(layoutUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the first journal article in the ordered set where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching journal article, or <code>null</code> if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByLayoutUuid_First(
+		java.lang.String layoutUuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByLayoutUuid_First(layoutUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the last journal article in the ordered set where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByLayoutUuid_Last(
+		java.lang.String layoutUuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByLayoutUuid_Last(layoutUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the last journal article in the ordered set where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching journal article, or <code>null</code> if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle fetchByLayoutUuid_Last(
+		java.lang.String layoutUuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByLayoutUuid_Last(layoutUuid, orderByComparator);
+	}
+
+	/**
+	* Returns the journal articles before and after the current journal article in the ordered set where layoutUuid = &#63;.
+	*
+	* @param id the primary key of the current journal article
+	* @param layoutUuid the layout uuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByLayoutUuid_PrevAndNext(
+		long id, java.lang.String layoutUuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByLayoutUuid_PrevAndNext(id, layoutUuid,
+			orderByComparator);
+	}
+
+	/**
 	* Returns all the journal articles where smallImageId = &#63;.
 	*
 	* @param smallImageId the small image ID
@@ -6015,6 +6157,17 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Removes all the journal articles where layoutUuid = &#63; from the database.
+	*
+	* @param layoutUuid the layout uuid
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByLayoutUuid(java.lang.String layoutUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByLayoutUuid(layoutUuid);
+	}
+
+	/**
 	* Removes all the journal articles where smallImageId = &#63; from the database.
 	*
 	* @param smallImageId the small image ID
@@ -6401,6 +6554,18 @@ public class JournalArticleUtil {
 	public static int countByTemplateId(java.lang.String templateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByTemplateId(templateId);
+	}
+
+	/**
+	* Returns the number of journal articles where layoutUuid = &#63;.
+	*
+	* @param layoutUuid the layout uuid
+	* @return the number of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByLayoutUuid(java.lang.String layoutUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByLayoutUuid(layoutUuid);
 	}
 
 	/**
