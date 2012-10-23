@@ -73,7 +73,7 @@ public class SourceFormatter {
 				GetterUtil.getString(
 					System.getProperty("source.formatter.excludes")));
 
-			_isPortalInstance = _isPortalInstance();
+			_portalSource = _isPortalSource();
 
 			_sourceFormatterHelper = new SourceFormatterHelper(false);
 
@@ -1168,7 +1168,7 @@ public class SourceFormatter {
 
 		Collection<String> fileNames = null;
 
-		if (_isPortalInstance) {
+		if (_portalSource) {
 			fileNames = _getPortalJavaFiles();
 
 			_javaTermAlphabetizeExclusionsProperties =
@@ -2350,7 +2350,7 @@ public class SourceFormatter {
 
 		String portalPortalProperties = null;
 
-		if (_isPortalInstance) {
+		if (_portalSource) {
 			File portalPortalPropertiesFile = new File(
 				basedir + "portal-impl/src/portal.properties");
 
@@ -2374,7 +2374,7 @@ public class SourceFormatter {
 
 		directoryScanner.setBasedir(basedir);
 
-		if (_isPortalInstance) {
+		if (_portalSource) {
 			directoryScanner.setIncludes(
 				new String[] {
 					"**\\portal-ext.properties",
@@ -2449,7 +2449,7 @@ public class SourceFormatter {
 
 		String basedir = "./";
 
-		if (_isPortalInstance) {
+		if (_portalSource) {
 			File file = new File(
 				basedir + "portal-web/docroot/WEB-INF/portlet-custom.xml");
 
@@ -2727,7 +2727,7 @@ public class SourceFormatter {
 
 		String basedir = "./";
 
-		if (!_isPortalInstance) {
+		if (!_portalSource) {
 			return;
 		}
 
@@ -2837,7 +2837,7 @@ public class SourceFormatter {
 
 		String basedir = "./";
 
-		if (!_isPortalInstance) {
+		if (!_portalSource) {
 			return;
 		}
 
@@ -2882,7 +2882,7 @@ public class SourceFormatter {
 	private static void _formatWebXML() throws IOException {
 		String basedir = "./";
 
-		if (_isPortalInstance) {
+		if (_portalSource) {
 			Properties properties = new Properties();
 
 			String propertiesContent = _fileUtil.read(
@@ -3887,7 +3887,7 @@ public class SourceFormatter {
 		return false;
 	}
 
-	private static boolean _isPortalInstance() {
+	private static boolean _isPortalSource() {
 		String basedir = "./";
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
@@ -4407,7 +4407,6 @@ public class SourceFormatter {
 
 	private static String[] _excludes;
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-	private static boolean _isPortalInstance;
 	private static Pattern _javaImportPattern = Pattern.compile(
 		"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
 	private static Properties _javaTermAlphabetizeExclusionsProperties;
@@ -4420,6 +4419,7 @@ public class SourceFormatter {
 	private static Pattern _jspIncludeFilePattern = Pattern.compile(
 		"/.*[.]jsp[f]?");
 	private static Properties _lineLengthExclusionsProperties;
+	private static boolean _portalSource;
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 	private static SourceFormatterHelper _sourceFormatterHelper;
 	private static Pattern _xssPattern = Pattern.compile(
