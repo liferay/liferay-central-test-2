@@ -75,19 +75,21 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	/**
 	 * Adds a role. The user is reindexed after role is added.
 	 *
-	 * @param  userId the primary key of the user
-	 * @param  companyId the primary key of the company
-	 * @param  name the role's name
-	 * @param  titleMap the role's localized titles (optionally
-	 *         <code>null</code>)
-	 * @param  descriptionMap the role's localized descriptions (optionally
-	 *         <code>null</code>)
-	 * @param  type the role's type (optionally <code>0</code>)
-	 * @return the role
-	 * @throws PortalException if the class name or the role name were invalid,
-	 *         if the role is a duplicate, or if a user with the primary key
-	 *         could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param      userId the primary key of the user
+	 * @param      companyId the primary key of the company
+	 * @param      name the role's name
+	 * @param      titleMap the role's localized titles (optionally
+	 *             <code>null</code>)
+	 * @param      descriptionMap the role's localized descriptions (optionally
+	 *             <code>null</code>)
+	 * @param      type the role's type (optionally <code>0</code>)
+	 * @return     the role
+	 * @throws     PortalException if the class name or the role name were
+	 *             invalid, if the role is a duplicate, or if a user with the
+	 *             primary key could not be found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated {@link #addRole(long, String, long, String, Map, Map, int,
+	 *             String)}
 	 */
 	public Role addRole(
 			long userId, long companyId, String name,
@@ -96,59 +98,32 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addRole(
-			userId, companyId, name, titleMap, descriptionMap, type, null);
-	}
-
-	/**
-	 * Adds a role. The user is reindexed after role is added.
-	 *
-	 * @param  userId the primary key of the user
-	 * @param  companyId the primary key of the company
-	 * @param  name the role's name
-	 * @param  titleMap the role's localized titles (optionally
-	 *         <code>null</code>)
-	 * @param  descriptionMap the role's localized descriptions (optionally
-	 *         <code>null</code>)
-	 * @param  type the role's type (optionally <code>0</code>)
-	 * @param  subtype the role's subtype (optionally <code>null</code>)
-	 * @return the role
-	 * @throws PortalException if the class name or the role name were invalid,
-	 *         if the role is a duplicate, or if a user with the primary key
-	 *         could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Role addRole(
-			long userId, long companyId, String name,
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			int type, String subType)
-		throws PortalException, SystemException {
-
-		return addRole(
-			userId, companyId, name, titleMap, descriptionMap, type, null, 0,
-			subType);
+			userId, null, 0, name, titleMap, descriptionMap, type, null);
 	}
 
 	/**
 	 * Adds a role with additional parameters. The user is reindexed after role
 	 * is added.
 	 *
-	 * @param  userId the primary key of the user
-	 * @param  companyId the primary key of the company
-	 * @param  name the role's name
-	 * @param  titleMap the role's localized titles (optionally
-	 *         <code>null</code>)
-	 * @param  descriptionMap the role's localized descriptions (optionally
-	 *         <code>null</code>)
-	 * @param  type the role's type (optionally <code>0</code>)
-	 * @param  className the name of the class for which the role is created
-	 *         (optionally <code>null</code>)
-	 * @param  classPK the primary key of the class for which the role is
-	 *         created (optionally <code>0</code>)
-	 * @return the role
-	 * @throws PortalException if the class name or the role name were invalid,
-	 *         if the role is a duplicate, or if a user with the primary key
-	 *         could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param      userId the primary key of the user
+	 * @param      companyId the primary key of the company
+	 * @param      name the role's name
+	 * @param      titleMap the role's localized titles (optionally
+	 *             <code>null</code>)
+	 * @param      descriptionMap the role's localized descriptions (optionally
+	 *             <code>null</code>)
+	 * @param      type the role's type (optionally <code>0</code>)
+	 * @param      className the name of the class for which the role is created
+	 *             (optionally <code>null</code>)
+	 * @param      classPK the primary key of the class for which the role is
+	 *             created (optionally <code>0</code>)
+	 * @return     the role
+	 * @throws     PortalException if the class name or the role name were
+	 *             invalid, if the role is a duplicate, or if a user with the
+	 *             primary key could not be found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated {@link #addRole(long, String, long, String, Map, Map, int,
+	 *             String)}
 	 */
 	public Role addRole(
 			long userId, long companyId, String name,
@@ -157,8 +132,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addRole(
-			userId, companyId, name, titleMap, descriptionMap, type, className,
-			classPK, null);
+			userId, className, classPK, name, titleMap, descriptionMap, type,
+			null);
 	}
 
 	/**
@@ -166,18 +141,16 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * is added.
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  companyId the primary key of the company
+	 * @param  className the name of the class for which the role is created
+	 *         (optionally <code>null</code>)
+	 * @param  classPK the primary key of the class for which the role is
+	 *         created (optionally <code>0</code>)
 	 * @param  name the role's name
 	 * @param  titleMap the role's localized titles (optionally
 	 *         <code>null</code>)
 	 * @param  descriptionMap the role's localized descriptions (optionally
 	 *         <code>null</code>)
 	 * @param  type the role's type (optionally <code>0</code>)
-	 * @param  className the name of the class for which the role is created
-	 *         (optionally <code>null</code>)
-	 * @param  classPK the primary key of the class for which the role is
-	 *         created (optionally <code>0</code>)
-	 * @param  subtype the role's subtype (optionally <code>null</code>)
 	 * @return the role
 	 * @throws PortalException if the class name or the role name were invalid,
 	 *         if the role is a duplicate, or if a user with the primary key
@@ -185,13 +158,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Role addRole(
-			long userId, long companyId, String name,
+			long userId, String className, long classPK, String name,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			int type, String className, long classPK, String subType)
+			int type, String subType)
 		throws PortalException, SystemException {
 
 		// Role
 
+		User user = userPersistence.findByPrimaryKey(userId);
 		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -202,11 +176,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			classPK = roleId;
 		}
 
-		validate(0, companyId, classNameId, name);
+		validate(0, user.getCompanyId(), classNameId, name);
 
 		Role role = rolePersistence.create(roleId);
 
-		role.setCompanyId(companyId);
+		role.setCompanyId(user.getCompanyId());
 		role.setClassNameId(classNameId);
 		role.setClassPK(classPK);
 		role.setName(name);
@@ -219,10 +193,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Resources
 
-		if (userId > 0) {
+		if (!user.isDefaultUser()) {
 			resourceLocalService.addResources(
-				companyId, 0, userId, Role.class.getName(), role.getRoleId(),
-				false, false, false);
+				user.getCompanyId(), 0, userId, Role.class.getName(),
+				role.getRoleId(), false, false, false);
 
 			if (!ImportExportThreadLocal.isImportInProcess()) {
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
@@ -1278,8 +1252,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchRoleException nsre) {
+			User user = userLocalService.getDefaultUser(companyId);
+
 			role = roleLocalService.addRole(
-				0, companyId, name, null, descriptionMap, type);
+				user.getUserId(), null, 0, name, null, descriptionMap, type,
+				null);
 		}
 
 		if (name.equals(RoleConstants.USER)) {

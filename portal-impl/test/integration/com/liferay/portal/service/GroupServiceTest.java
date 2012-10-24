@@ -291,8 +291,8 @@ public class GroupServiceTest {
 		}
 		catch (NoSuchRoleException nsre) {
 			role = RoleLocalServiceUtil.addRole(
-				TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
-				"Subsites Admin", null, null, RoleConstants.TYPE_SITE);
+				TestPropsValues.getUserId(), null, 0, "Subsites Admin", null,
+				null, RoleConstants.TYPE_SITE, null);
 		}
 
 		ResourcePermissionLocalServiceUtil.addResourcePermission(
