@@ -43,11 +43,19 @@ import javax.portlet.PortletRequest;
  */
 public abstract class BaseTrashHandler implements TrashHandler {
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public void checkDuplicateTrashEntry(
 			TrashEntry trashEntry, long containerModelId, String newName)
 		throws PortalException, SystemException {
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public void deleteTrashAttachments(Group group, Date date)
 		throws PortalException, SystemException {
 	}
@@ -70,6 +78,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		deleteTrashEntries(new long[] {classPK}, checkPermission);
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public ContainerModel getContainerModel(long containerModelId)
 		throws PortalException, SystemException {
 
@@ -80,6 +92,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public List<ContainerModel> getContainerModels(
 			long classPK, long parentContainerModelId, int start, int end)
 		throws PortalException, SystemException {
@@ -87,6 +103,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return null;
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public int getContainerModelsCount(
 			long classPK, long parentContainerModelId)
 		throws PortalException, SystemException {
@@ -98,12 +118,20 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return "deleted-in-x";
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public String getRestoreLink(PortletRequest PortletRequest, long classPK)
 		throws PortalException, SystemException {
 
 		return StringPool.BLANK;
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
@@ -161,6 +189,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return hasPermission(permissionChecker, classPK, actionId);
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public boolean isRestorable(long classPK)
 		throws PortalException, SystemException {
 
@@ -187,6 +219,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		restoreTrashEntries(new long[] {classPK});
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public void updateTitle(long classPK, String title)
 		throws PortalException, SystemException {
 	}
