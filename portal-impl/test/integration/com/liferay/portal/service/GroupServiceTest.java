@@ -151,6 +151,7 @@ public class GroupServiceTest {
 		Group scope = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			Layout.class.getName(), layout.getPlid(),
+			GroupConstants.DEFAULT_LIVE_GROUP_ID,
 			layout.getName(LocaleUtil.getDefault()), null, 0, null, false, true,
 			null);
 
@@ -276,8 +277,8 @@ public class GroupServiceTest {
 		}
 
 		return GroupServiceUtil.addGroup(
-			parentGroupId, name, description, type, friendlyURL, site, active,
-			serviceContext);
+			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
+			description, type, friendlyURL, site, active, serviceContext);
 	}
 
 	private void _givePermissionToManageSubsites(User user, Group group)
