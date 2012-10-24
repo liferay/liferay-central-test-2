@@ -28,6 +28,11 @@ import javax.portlet.PortletPreferences;
 public class UpgradeDynamicDataListDisplay
 	extends BaseUpgradePortletPreferences {
 
+	public UpgradeDynamicDataListDisplay() {
+		_preferenceNamesMap.put("detailDDMTemplateId", "formDDMTemplateId");
+		_preferenceNamesMap.put("listDDMTemplateId", "displayDDMTemplateId");
+	}
+
 	@Override
 	protected String[] getPortletIds() {
 		return new String[] {"169_INSTANCE_%"};
@@ -45,26 +50,22 @@ public class UpgradeDynamicDataListDisplay
 
 		Map<String, String[]> preferencesMap = preferences.getMap();
 
-		for (String oldPreferenceName : _oldPreferenceNamesMap.keySet()) {
-			String[] values = preferencesMap.get(oldPreferenceName);
+		for (String name : _preferenceNamesMap.keySet()) {
+			String[] values = preferencesMap.get(name);
 
-			if (values != null) {
-				preferences.reset(oldPreferenceName);
-
-				preferences.setValues(
-					_oldPreferenceNamesMap.get(oldPreferenceName), values);
+			if (values == null) {
+				continue;
 			}
+
+			preferences.reset(name);
+
+			preferences.setValues(_preferenceNamesMap.get(name), values);
 		}
 
 		return PortletPreferencesFactoryUtil.toXML(preferences);
 	}
 
-	private static Map<String, String> _oldPreferenceNamesMap =
+	private Map<String, String> _preferenceNamesMap =
 		new HashMap<String, String>();
-
-	static {
-		_oldPreferenceNamesMap.put("detailDDMTemplateId", "formDDMTemplateId");
-		_oldPreferenceNamesMap.put("listDDMTemplateId", "displayDDMTemplateId");
-	}
 
 }
