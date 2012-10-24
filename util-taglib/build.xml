@@ -42,7 +42,7 @@
 	</target>
 
 	<target name="jar">
-		<copy file="src/META-INF/liferay-portlet.tld" tofile="classes/META-INF/liferay-portlet_2_0.tld"/>
+		<copy file="src/META-INF/liferay-portlet.tld" tofile="classes/META-INF/liferay-portlet_2_0.tld" />
 
 		<replace file="classes/META-INF/liferay-portlet_2_0.tld">
 			<replacetoken>&lt;uri&gt;http://java.sun.com/portlet&lt;/uri&gt;</replacetoken>
