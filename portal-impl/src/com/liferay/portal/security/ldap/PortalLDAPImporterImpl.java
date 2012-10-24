@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.ldap.LDAPFilterException;
 import com.liferay.portal.kernel.ldap.LDAPUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -279,9 +278,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 					String.valueOf(companyId), emailAddress, screenName
 				});
 
-			if (!LDAPUtil.validateFilter(filter)) {
-				throw new LDAPFilterException("Invalid filter syntax");
-			}
+			LDAPUtil.validateFilter(filter);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Search filter after transformation " + filter);

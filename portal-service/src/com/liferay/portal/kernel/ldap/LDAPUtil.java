@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.ldap;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -183,38 +184,7 @@ public class LDAPUtil {
 		return baseURL + StringPool.SLASH + baseDN;
 	}
 
-	public static Date parseDate(String date) throws Exception {
-		String format = "yyyyMMddHHmmss";
-
-		if (date.endsWith("Z")) {
-			if (date.indexOf(CharPool.PERIOD) != -1) {
-				format = "yyyyMMddHHmmss.S'Z'";
-			}
-			else {
-				format = "yyyyMMddHHmmss'Z'";
-			}
-		}
-		else if ((date.indexOf(CharPool.DASH) != -1) ||
-				 (date.indexOf(CharPool.PLUS) != -1)) {
-
-			if (date.indexOf(CharPool.PERIOD) != -1) {
-				format = "yyyyMMddHHmmss.SZ";
-			}
-			else {
-				format = "yyyyMMddHHmmssZ";
-			}
-		}
-		else if (date.indexOf(CharPool.PERIOD) != -1) {
-			format = "yyyyMMddHHmmss.S";
-		}
-
-		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-			format);
-
-		return dateFormat.parse(date);
-	}
-
-	public static boolean validateFilter(String filter) {
+	public static boolean isValidFilter(String filter) {
 		if (Validator.isNull(filter)) {
 			return true;
 		}
@@ -277,6 +247,43 @@ public class LDAPUtil {
 		}
 
 		return true;
+	}
+
+	public static Date parseDate(String date) throws Exception {
+		String format = "yyyyMMddHHmmss";
+
+		if (date.endsWith("Z")) {
+			if (date.indexOf(CharPool.PERIOD) != -1) {
+				format = "yyyyMMddHHmmss.S'Z'";
+			}
+			else {
+				format = "yyyyMMddHHmmss'Z'";
+			}
+		}
+		else if ((date.indexOf(CharPool.DASH) != -1) ||
+				 (date.indexOf(CharPool.PLUS) != -1)) {
+
+			if (date.indexOf(CharPool.PERIOD) != -1) {
+				format = "yyyyMMddHHmmss.SZ";
+			}
+			else {
+				format = "yyyyMMddHHmmssZ";
+			}
+		}
+		else if (date.indexOf(CharPool.PERIOD) != -1) {
+			format = "yyyyMMddHHmmss.S";
+		}
+
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+			format);
+
+		return dateFormat.parse(date);
+	}
+
+	public static void validateFilter(String filter) throws PortalException {
+		if (!isValidFilter(filter)) {
+			throw new LDAPFilterException("Invalid filter " + filter);
+		}
 	}
 
 }

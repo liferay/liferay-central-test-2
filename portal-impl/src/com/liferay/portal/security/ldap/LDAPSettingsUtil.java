@@ -15,7 +15,6 @@
 package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.ldap.LDAPFilterException;
 import com.liferay.portal.kernel.ldap.LDAPUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -59,9 +58,7 @@ public class LDAPSettingsUtil {
 				String.valueOf(companyId), emailAddress, screenName, userId
 			});
 
-		if (!LDAPUtil.validateFilter(filter)) {
-			throw new LDAPFilterException("Invalid filter syntax");
-		}
+		LDAPUtil.validateFilter(filter);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter after transformation " + filter);
