@@ -157,7 +157,7 @@ String url = (String)request.getAttribute("liferay-ui:app-view-entry:url");
 			data="<%= data %>"
 			image="<%= thumbnailSrc %>"
 			label="<%= true %>"
-			localizeMessage="false"
+			localizeMessage="<%= false %>"
 			message="<%= title %>"
 			method="get"
 			url="<%= url %>"
