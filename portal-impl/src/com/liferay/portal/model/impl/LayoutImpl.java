@@ -83,29 +83,20 @@ public class LayoutImpl extends LayoutBaseImpl {
 	}
 
 	public static int validateFriendlyURL(String friendlyURL) {
-		return validateFriendlyURL(friendlyURL, false);
+		return validateFriendlyURL(friendlyURL, true);
 	}
 
-	public static int validateFriendlyURL
-		(String friendlyURL, boolean checkURLForVirtualHostFilter) {
+	public static int validateFriendlyURL(
+		String friendlyURL, boolean checkMaxLength) {
 
 		if (friendlyURL.length() < 2) {
 			return LayoutFriendlyURLException.TOO_SHORT;
 		}
 
-		if (!checkURLForVirtualHostFilter) {
-			if (friendlyURL.length() > LayoutConstants.
-				FRIENDLY_URL_MAX_LENGTH) {
+		if (checkMaxLength &&
+			(friendlyURL.length() > LayoutConstants.FRIENDLY_URL_MAX_LENGTH)) {
 
-				return LayoutFriendlyURLException.TOO_LONG;
-			}
-		}
-		else {
-			if (friendlyURL.length() > PropsValues.
-				VIRTUAL_HOSTS_LAYOUT_FRIENDLY_URL_MAX_LENGTH) {
-
-				return LayoutFriendlyURLException.TOO_LONG;
-			}
+			return LayoutFriendlyURLException.TOO_LONG;
 		}
 
 		if (!friendlyURL.startsWith(StringPool.SLASH)) {

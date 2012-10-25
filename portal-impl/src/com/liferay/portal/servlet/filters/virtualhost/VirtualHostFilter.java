@@ -92,7 +92,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			return false;
 		}
 
-		int code = LayoutImpl.validateFriendlyURL(friendlyURL, true);
+		int code = LayoutImpl.validateFriendlyURL(friendlyURL, false);
 
 		if ((code > -1) &&
 			(code != LayoutFriendlyURLException.ENDS_WITH_SLASH)) {
