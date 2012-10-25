@@ -1913,15 +1913,13 @@ public class SourceFormatter {
 	private static void _formatJS() throws IOException {
 		String basedir = "./";
 
-		List<String> list = new ArrayList<String>();
-
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
 
 		String[] excludes = {
-			"**\\tools\\**", "**\\js\\aui\\**", "**\\js\\editor\\**",
-			"**\\js\\misc\\**", "**\\VAADIN\\**"
+			"**\\js\\aui\\**", "**\\js\\editor\\**", "**\\js\\misc\\**",
+			"**\\tools\\**", "**\\VAADIN\\**"
 		};
 
 		excludes = ArrayUtil.append(excludes, _excludes);
@@ -1930,9 +1928,8 @@ public class SourceFormatter {
 
 		directoryScanner.setIncludes(new String[] {"**\\*.js"});
 
-		list.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
-
-		String[] fileNames = list.toArray(new String[list.size()]);
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
@@ -2002,8 +1999,6 @@ public class SourceFormatter {
 		String copyright = _getCopyright();
 		String oldCopyright = _getOldCopyright();
 
-		List<String> list = new ArrayList<String>();
-
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
@@ -2020,9 +2015,8 @@ public class SourceFormatter {
 		directoryScanner.setIncludes(
 			new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
-		list.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
-
-		String[] fileNames = list.toArray(new String[list.size()]);
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
