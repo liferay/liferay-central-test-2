@@ -32,7 +32,7 @@ public class WCWebContentTestPlan extends BaseTestSuite {
 
 		testSuite.addTest(AddWCStructureWebContentLocalizedTests.suite());
 		testSuite.addTest(AddWCWebContentTests.suite());
-		testSuite.addTest(EditWCWebContentTests.suite());		
+		testSuite.addTest(EditWCWebContentTests.suite());
 
 		return testSuite;
 	}
