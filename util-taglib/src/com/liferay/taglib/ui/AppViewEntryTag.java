@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.Map;
