@@ -38,11 +38,6 @@ String thumbnailStyle = (String)request.getAttribute("liferay-ui:app-view-entry:
 String title = (String)request.getAttribute("liferay-ui:app-view-entry:title");
 String url = (String)request.getAttribute("liferay-ui:app-view-entry:url");
 
-// Title and Description may or may not be escaped already, see LPS-30417
-
-title = HtmlUtil.unescape(title);
-description = HtmlUtil.unescape(description);
-
 String shortTitle = StringUtil.shorten(title, 60);
 %>
 
