@@ -28,7 +28,18 @@ String uploadProgressId = "dlFileEntryUploadProgress";
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long fileEntryId = fileEntry.getFileEntryId();
+
 long folderId = fileEntry.getFolderId();
+
+if (Validator.isNull(redirect)) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/document_library/view");
+	portletURL.setParameter("folderId", String.valueOf(folderId));
+
+	redirect = portletURL.toString();
+}
+
 String extension = fileEntry.getExtension();
 String title = fileEntry.getTitle();
 
@@ -86,15 +97,6 @@ boolean hasAudio = AudioProcessorUtil.hasAudio(fileVersion);
 boolean hasImages = ImageProcessorUtil.hasImages(fileVersion);
 boolean hasPDFImages = PDFProcessorUtil.hasImages(fileVersion);
 boolean hasVideo = VideoProcessorUtil.hasVideo(fileVersion);
-
-if (Validator.isNull(redirect)) {
-	PortletURL viewURL = renderResponse.createRenderURL();
-
-	viewURL.setParameter("struts_action", "/document_library/view");
-	viewURL.setParameter("folderId", String.valueOf(folderId));
-
-	redirect = viewURL.toString();
-}
 
 AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.fetchEntry(DLFileEntryConstants.getClassName(), assetClassPK);
 

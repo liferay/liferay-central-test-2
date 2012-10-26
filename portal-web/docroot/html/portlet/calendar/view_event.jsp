@@ -19,6 +19,14 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+if (Validator.isNull(redirect)) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/calendar/view");
+
+	redirect = portletURL.toString();
+}
+
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
 Recurrence recurrence = null;
@@ -39,14 +47,6 @@ if (event.getRepeating() && (recurrence != null)) {
 	else if (recurrence.getOccurrence() > 0) {
 		endDateType = CalEventConstants.END_DATE_TYPE_END_AFTER;
 	}
-}
-
-if (Validator.isNull(redirect)) {
-	PortletURL viewURL = renderResponse.createRenderURL();
-
-	viewURL.setParameter("struts_action", "/calendar/view");
-
-	redirect = viewURL.toString();
 }
 
 AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalEvent.class.getName(), event.getEventId());
