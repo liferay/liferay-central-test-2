@@ -3,11 +3,9 @@
 <#assign layoutLocalService = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")>
 
 <#macro getLayoutsOptions groupId privateLayout parentLayoutId selectedPlid level=0>
-
 	<#assign layouts = layoutLocalService.getLayouts(groupId, privateLayout, parentLayoutId)>
 
 	<#if (layouts?size > 0)>
-
 		<#if (level == 0)>
 			<optgroup label="<#if (privateLayout)>${languageUtil.get(locale, "private-pages")}<#else>${languageUtil.get(locale, "public-pages")}</#if>">
 		</#if>
@@ -41,7 +39,6 @@
 </#macro>
 
 <@aui["field-wrapper"] helpMessage=escape(fieldStructure.tip) label=escape(label) required=required>
-
 	<#assign selectedPlid = 0>
 
 	<#if (fieldRawValue?? && fieldRawValue != "")>
@@ -55,11 +52,9 @@
 	</#if>
 
 	<select name="${namespacedFieldName}">
-
 		<@getLayoutsOptions groupId=scopeGroupId privateLayout=false parentLayoutId=0 selectedPlid=selectedPlid></@>
 
 		<@getLayoutsOptions groupId=scopeGroupId privateLayout=true parentLayoutId=0 selectedPlid=selectedPlid></@>
-
 	</select>
 
 	${fieldStructure.children}

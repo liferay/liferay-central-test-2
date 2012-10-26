@@ -1,15 +1,13 @@
 <#include "../init.ftl">
 
-<#assign layoutLocalService = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")>
-
 <#if (fieldRawValue?? && fieldRawValue != "")>
-
 	<#assign fieldLayoutJSONObject = jsonFactoryUtil.createJSONObject(fieldRawValue)>
+
+	<#assign layoutLocalService = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")>
 
 	<#assign fieldLayout = layoutLocalService.fetchLayout(fieldLayoutJSONObject.getLong("groupId"), fieldLayoutJSONObject.getBoolean("privateLayout"), fieldLayoutJSONObject.getLong("layoutId"))!"">
 
 	<#if (fieldLayout?? && fieldLayout != "")>
-
 		<@aui["field-wrapper"] label=escape(label)>
 			<@aui.input name=namespacedFieldName type="hidden" value=fieldValue />
 
@@ -17,7 +15,5 @@
 
 			${fieldStructure.children}
 		</@>
-
 	</#if>
-
 </#if>
