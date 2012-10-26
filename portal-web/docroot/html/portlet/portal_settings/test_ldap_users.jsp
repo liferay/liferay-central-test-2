@@ -82,9 +82,7 @@ String[] attributeIds = StringUtil.split(StringUtil.merge(userMappings.values())
 
 List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-String trimmedUserFilter = userFilter.trim();
-
-if (Validator.isNotNull(userFilter) && !trimmedUserFilter.equals(StringPool.STAR)) {
+if (Validator.isNotNull(userFilter) && !userFilter.equals(StringPool.STAR)) {
 	PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, attributeIds, searchResults);
 }
 %>
