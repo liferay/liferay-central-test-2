@@ -43,12 +43,12 @@ public class AlloyServiceInvoker {
 		try {
 			Class<?> serviceClass = classLoader.loadClass(serviceClassName);
 
+			dynamicQueryCountMethod = serviceClass.getMethod(
+				"dynamicQueryCount", new Class[] {DynamicQuery.class});
+			dynamicQueryMethod = serviceClass.getMethod(
+				"dynamicQuery", new Class[] {DynamicQuery.class});
 			fetchModelMethod = serviceClass.getMethod(
 				"fetch" + simpleClassName, new Class[] {long.class});
-			getDynamicQueryMethod = serviceClass.getMethod(
-				"dynamicQuery", new Class[] {DynamicQuery.class});
-			getDynamicQueryCountMethod = serviceClass.getMethod(
-				"dynamicQueryCount", new Class[] {DynamicQuery.class});
 			getModelsCountMethod = serviceClass.getMethod(
 				"get" + TextFormatter.formatPlural(simpleClassName) + "Count",
 				new Class[0]);
@@ -61,19 +61,17 @@ public class AlloyServiceInvoker {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
+	public List dynamicQuery(DynamicQuery dynamicQuery) throws Exception {
+		return (List)dynamicQueryMethod.invoke(false, dynamicQuery);
+	}
+
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws Exception {
+		return (Long)dynamicQueryCountMethod.invoke(false, dynamicQuery);
+	}
+
 	public BaseModel<?> fetchModel(long classPK) throws Exception {
 		return (BaseModel<?>)fetchModelMethod.invoke(false, classPK);
-	}
-
-	@SuppressWarnings("rawtypes")
-	public List getDynamicQuery(DynamicQuery dynamicQuery) throws Exception {
-		return (List)getDynamicQueryMethod.invoke(false, dynamicQuery);
-	}
-
-	public long getDynamicQueryCount(DynamicQuery dynamicQuery)
-		throws Exception {
-
-		return (Long)getDynamicQueryCountMethod.invoke(false, dynamicQuery);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -85,9 +83,9 @@ public class AlloyServiceInvoker {
 		return (Integer)getModelsCountMethod.invoke(false);
 	}
 
+	protected Method dynamicQueryCountMethod;
+	protected Method dynamicQueryMethod;
 	protected Method fetchModelMethod;
-	protected Method getDynamicQueryMethod;
-	protected Method getDynamicQueryCountMethod;
 	protected Method getModelsCountMethod;
 	protected Method getModelsMethod;
 
