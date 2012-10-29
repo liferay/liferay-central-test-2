@@ -421,9 +421,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		if (_languageId != null) {
 			return _languageId;
 		}
-		else {
-			return LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-		}
+
+		return LocaleUtil.toLanguageId(LocaleUtil.getMostRelevantLocale());
 	}
 
 	/**
