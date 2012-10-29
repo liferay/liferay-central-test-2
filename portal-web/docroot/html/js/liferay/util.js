@@ -826,10 +826,7 @@
 			];
 
 			var detachEventHandles = function() {
-				AArray.invoke(
-					eventHandles,
-					'detach'
-				);
+				AArray.invoke(eventHandles, 'detach');
 
 				iframeDocument.purge(true);
 			};
