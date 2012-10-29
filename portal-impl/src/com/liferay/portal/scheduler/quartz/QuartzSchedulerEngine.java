@@ -615,12 +615,12 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return null;
 		}
 
-		Date startDate = trigger.getStartDate();
 		Date endDate = trigger.getEndDate();
 		String jobName = fixMaxLength(
 			trigger.getJobName(), JOB_NAME_MAX_LENGTH);
 		String groupName = fixMaxLength(
 			trigger.getGroupName(), GROUP_NAME_MAX_LENGTH);
+		Date startDate = trigger.getStartDate();
 
 		Trigger quartzTrigger = null;
 
