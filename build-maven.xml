@@ -259,4 +259,3 @@ Run "ant -f build-dist.xml all zip-portal-war" to generate that file.
 		<delete dir="${tstamp.value}" />
 	</target>
 </project>
-
