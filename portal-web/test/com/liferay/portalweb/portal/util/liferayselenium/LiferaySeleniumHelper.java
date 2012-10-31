@@ -14,6 +14,7 @@
 
 package com.liferay.portalweb.portal.util.liferayselenium;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -39,10 +40,11 @@ public class LiferaySeleniumHelper {
 	public static void assertConfirmation(
 		LiferaySelenium liferaySelenium, String pattern) {
 
-		pattern = StringUtil.replace(pattern, "?", "[\\\\s\\\\S]");
+		String confirmation = liferaySelenium.getConfirmation();
 
 		BaseTestCase.assertTrue(
-			liferaySelenium.getConfirmation().matches("^" + pattern + "$"));
+			confirmation.matches(
+				"^" + StringUtil.replace(pattern, "?", "[\\\\s\\\\S]") + "$"));
 	}
 
 	public static void assertElementNotPresent(
@@ -106,7 +108,6 @@ public class LiferaySeleniumHelper {
 
 		BaseTestCase.assertNotEquals(
 			pattern, liferaySelenium.getValue(locator));
-
 	}
 
 	public static void assertNotVisible(
@@ -191,7 +192,7 @@ public class LiferaySeleniumHelper {
 	}
 
 	public static void pause(String waitTime) throws Exception {
-		Thread.sleep(Integer.parseInt(waitTime));
+		Thread.sleep(GetterUtil.getInteger(waitTime));
 	}
 
 	public static void setBrowserOption() {
