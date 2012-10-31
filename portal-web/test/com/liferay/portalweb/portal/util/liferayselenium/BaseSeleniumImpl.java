@@ -34,8 +34,6 @@ public abstract class BaseSeleniumImpl
 	public BaseSeleniumImpl(String projectDir, Selenium selenium) {
 		super(selenium);
 
-		_clipBoard = "";
-
 		_projectDir = projectDir;
 
 		initCommandProcessor();
@@ -441,7 +439,7 @@ public abstract class BaseSeleniumImpl
 	private static final String _OUTPUT_SCREENSHOTS_DIR =
 		TestPropsValues.OUTPUT_DIR + "screenshots/";
 
-	private String _clipBoard;
+	private String _clipBoard = "";
 	private CommandProcessor _commandProcessor;
 	private String _projectDir;
 	private String _timeout = "90000";

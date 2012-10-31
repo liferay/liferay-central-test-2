@@ -40,8 +40,6 @@ public abstract class BaseWebDriverImpl
 
 		super(webDriver);
 
-		_clipBoard = "";
-
 		_projectDir = projectDir;
 
 		webDriver.get(browserURL);
@@ -409,7 +407,7 @@ public abstract class BaseWebDriverImpl
 		super.waitForPageToLoad("30000");
 	}
 
-	private String _clipBoard;
+	private String _clipBoard = "";
 	private String _projectDir;
 
 }
