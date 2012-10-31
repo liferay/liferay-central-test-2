@@ -28,19 +28,20 @@ import java.util.Map;
  */
 public class ClassLoaderObjectInputStream extends ObjectInputStream {
 
-	public ClassLoaderObjectInputStream(InputStream is, ClassLoader classLoader)
+	public ClassLoaderObjectInputStream(
+			InputStream inputStream, ClassLoader classLoader)
 		throws IOException {
 
-		super(is);
+		super(inputStream);
 
 		_classLoader = classLoader;
 	}
 
 	@Override
-	protected Class<?> resolveClass(ObjectStreamClass osc)
+	protected Class<?> resolveClass(ObjectStreamClass objectStreamClass)
 		throws ClassNotFoundException {
 
-		String name = osc.getName();
+		String name = objectStreamClass.getName();
 
 		try {
 			return Class.forName(name, false, _classLoader);
