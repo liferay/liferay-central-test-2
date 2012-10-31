@@ -415,10 +415,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setName(name);
 		category.setDescription(description);
 
-		if (!category.getDisplayStyle().equals(displayStyle)) {
+		if (!displayStyle.equals(category.getDisplayStyle())) {
 			category.setDisplayStyle(displayStyle);
 
-			updateChildrenCategoriesDisplayStyle(category, displayStyle);
+			updateChildCategoriesDisplayStyle(category, displayStyle);
 		}
 
 		mbCategoryPersistence.update(category);
@@ -574,7 +574,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		deleteCategory(fromCategory);
 	}
 
-	protected void updateChildrenCategoriesDisplayStyle(
+	protected void updateChildCategoriesDisplayStyle(
 			MBCategory category, String displayStyle)
 		throws PortalException, SystemException {
 
@@ -583,7 +583,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			QueryUtil.ALL_POS);
 
 		for (MBCategory curCategory : categories) {
-			updateChildrenCategoriesDisplayStyle(curCategory, displayStyle);
+			updateChildCategoriesDisplayStyle(curCategory, displayStyle);
 
 			curCategory.setDisplayStyle(displayStyle);
 
