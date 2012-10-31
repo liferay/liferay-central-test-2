@@ -62,7 +62,7 @@ public class DLAppServiceSoapTest {
 		catch (Exception e) {
 		}
 
-		_folder = getDLAppServiceSoap().addFolder(
+		_folderSoap = getDLAppServiceSoap().addFolder(
 			_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			name, description, serviceContext);
 	}
@@ -70,8 +70,8 @@ public class DLAppServiceSoapTest {
 	@After
 	public void tearDown() throws Exception {
 		try {
-			if (_folder != null) {
-				getDLAppServiceSoap().deleteFolder(_folder.getFolderId());
+			if (_folderSoap != null) {
+				getDLAppServiceSoap().deleteFolder(_folderSoap.getFolderId());
 			}
 		}
 		catch (Exception e) {
@@ -99,7 +99,7 @@ public class DLAppServiceSoapTest {
 	}
 
 	protected FileEntrySoap addFileEntry(String title) throws Exception {
-		long folderId = _folder.getFolderId();
+		long folderId = _folderSoap.getFolderId();
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 		byte[] bytes = _CONTENT.getBytes();
@@ -128,7 +128,7 @@ public class DLAppServiceSoapTest {
 	private static final String _CONTENT =
 		"Content: Enterprise. Open Source. For Life.";
 
-	private static FolderSoap _folder;
+	private FolderSoap _folderSoap;
 	private Group _group;
 
 }
