@@ -587,7 +587,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			curCategory.setDisplayStyle(displayStyle);
 
-			mbCategoryPersistence.update(curCategory, false);
+			mbCategoryPersistence.update(curCategory);
 		}
 	}
 
