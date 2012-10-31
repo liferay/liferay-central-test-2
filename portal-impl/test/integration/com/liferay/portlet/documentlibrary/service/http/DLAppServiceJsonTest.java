@@ -202,7 +202,6 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 	private static final String _UUID = "[$UUID$]";
 
 	private long _folderId;
-
 	private Group _group;
 
 }

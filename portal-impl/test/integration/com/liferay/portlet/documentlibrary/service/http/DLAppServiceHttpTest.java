@@ -122,7 +122,6 @@ public class DLAppServiceHttpTest {
 		"Content: Enterprise. Open Source. For Life.";
 
 	private Folder _folder;
-
 	private Group _group;
 
 }

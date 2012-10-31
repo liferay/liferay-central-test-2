@@ -116,24 +116,19 @@ public class DLAppServiceSoapTest {
 	}
 
 	protected DLAppServiceSoap getDLAppServiceSoap() throws Exception {
-		if (_service == null) {
-			DLAppServiceSoapServiceLocator locator =
-				new DLAppServiceSoapServiceLocator();
+		DLAppServiceSoapServiceLocator dlAppServiceSoapServiceLocator =
+			new DLAppServiceSoapServiceLocator();
 
-			_service = locator.getPortlet_DL_DLAppService(
-				TestPropsValues.getSoapURL(
-					locator.getPortlet_DL_DLAppServiceWSDDServiceName()));
-		}
-
-		return _service;
+		return dlAppServiceSoapServiceLocator.getPortlet_DL_DLAppService(
+			TestPropsValues.getSoapURL(
+				dlAppServiceSoapServiceLocator.
+					getPortlet_DL_DLAppServiceWSDDServiceName()));
 	}
 
 	private static final String _CONTENT =
 		"Content: Enterprise. Open Source. For Life.";
 
 	private static FolderSoap _folder;
-	private static DLAppServiceSoap _service;
-
 	private Group _group;
 
 }

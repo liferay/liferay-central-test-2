@@ -52,28 +52,14 @@ public class DLAppLocalServiceTest {
 
 	@Test
 	public void testAddFolder() throws Exception {
-		Folder folder = null;
-
-		try {
-			folder = addFolder(true);
-		}
-		catch (Exception e) {
-			Assert.fail("Unexpected error while creating a folder");
-		}
+		Folder folder = addFolder(true);
 
 		Assert.assertTrue(folder != null);
 	}
 
 	@Test
 	public void testAddRootFolder() throws Exception {
-		Folder folder = null;
-
-		try {
-			folder = addFolder(false);
-		}
-		catch (Exception e) {
-			Assert.fail("Unexpected error while creating a folder");
-		}
+		Folder folder = addFolder(false);
 
 		Assert.assertTrue(folder != null);
 	}

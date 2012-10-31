@@ -84,7 +84,6 @@ public class ResourceLocalServiceTest {
 	}
 
 	private Group _group;
-
 	private long[] _userIds;
 
 	private class AddResources extends DoAsUserThread {

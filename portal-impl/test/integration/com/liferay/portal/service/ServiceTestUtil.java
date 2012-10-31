@@ -356,6 +356,10 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
+		// Class names
+
+		_checkClassNames();
+
 		// Resource actions
 
 		try {
@@ -364,10 +368,6 @@ public class ServiceTestUtil {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// Stateful services
-
-		_checkClassNames();
 
 		// Asset
 
@@ -445,6 +445,10 @@ public class ServiceTestUtil {
 		return PwdGenerator.getPassword();
 	}
 
+	private static void _checkClassNames() {
+		PortalUtil.getClassNameId(LiferayRepository.class.getName());
+	}
+
 	private static void _checkResourceActions() throws Exception {
 		for (int i = 0; i < 200; i++) {
 			String portletId = String.valueOf(i);
@@ -471,13 +475,6 @@ public class ServiceTestUtil {
 					modelName, modelActions);
 			}
 		}
-	}
-
-	private static void _checkClassNames() {
-
-		// Repository Default ClassName
-
-		PortalUtil.getClassNameId(LiferayRepository.class.getName());
 	}
 
 	private static void _deleteDLDirectories() {
