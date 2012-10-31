@@ -29,19 +29,20 @@ import javax.servlet.ServletContext;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockServletContext;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
 
 /**
  * @author Igor Spasic
@@ -57,20 +58,20 @@ public class JSONWebServiceServiceActionTest
 	public static void init() throws Exception {
 		initPortalServices();
 
-		PropsUtil.setProps(new PropsImpl());
+		Class<?> clazz = JSONWebServiceServiceAction.class;
+
+		PortalClassLoaderUtil.setClassLoader(clazz.getClassLoader());
 
 		PortalUtil portalUtil = new PortalUtil();
 
 		portalUtil.setPortal(new PortalImpl());
 
+		PropsUtil.setProps(new PropsImpl());
+
 		ServletContext servletContext = new MockServletContext();
 
-		Class<?> clazz = JSONWebServiceServiceAction.class;
-
-		PortalClassLoaderUtil.setClassLoader(clazz.getClassLoader());
-
 		_jsonWebServiceServiceAction = new JSONWebServiceServiceAction(
-			"", servletContext, null);
+			servletContext, null);
 
 		registerActionClass(FooService.class);
 	}

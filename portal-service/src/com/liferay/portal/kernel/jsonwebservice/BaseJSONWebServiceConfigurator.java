@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -48,7 +49,7 @@ public abstract class BaseJSONWebServiceConfigurator
 	public void clean() {
 		int count =
 			JSONWebServiceActionsManagerUtil.unregisterJSONWebServiceActions(
-				_servletContextPath);
+				_contextPath);
 
 		_registeredActionsCount -= count;
 
@@ -57,7 +58,7 @@ public abstract class BaseJSONWebServiceConfigurator
 				_log.debug(
 					"Removed " + count +
 						" existing JSON Web Service actions that belonged to " +
-							_servletContextPath);
+							_contextPath);
 			}
 		}
 	}
@@ -68,6 +69,10 @@ public abstract class BaseJSONWebServiceConfigurator
 		return _classLoader;
 	}
 
+	public String getContextPath() {
+		return _contextPath;
+	}
+
 	public int getRegisteredActionsCount() {
 		return _registeredActionsCount;
 	}
@@ -76,17 +81,11 @@ public abstract class BaseJSONWebServiceConfigurator
 		return _servletContext;
 	}
 
-	public String getServletContextPath() {
-		return _servletContextPath;
-	}
-
-	public void init(
-		String servletContextPath, ServletContext servletContext,
-		ClassLoader classLoader) {
-
-		_classLoader = classLoader;
+	public void init(ServletContext servletContext, ClassLoader classLoader) {
 		_servletContext = servletContext;
-		_servletContextPath = servletContextPath;
+		_classLoader = classLoader;
+
+		_contextPath = ContextPathUtil.getContextPath(servletContext);
 	}
 
 	public void registerClass(String className, InputStream inputStream)
@@ -128,23 +127,27 @@ public abstract class BaseJSONWebServiceConfigurator
 			}
 		}
 
-		_onJSONWebServiceClass(className);
+		onJSONWebServiceClass(className);
 	}
 
-	private boolean _hasAnnotatedServiceImpl(String className) {
-		StringBundler implClassName = new StringBundler(4);
+	protected byte[] getTypeSignatureBytes(Class<?> clazz) {
+		return ('L' + clazz.getName().replace('.', '/') + ';').getBytes();
+	}
+
+	protected boolean hasAnnotatedServiceImpl(String className) {
+		StringBundler sb = new StringBundler(4);
 
 		int pos = className.lastIndexOf(CharPool.PERIOD);
 
-		implClassName.append(className.substring(0, pos));
-		implClassName.append(".impl");
-		implClassName.append(className.substring(pos));
-		implClassName.append("Impl");
+		sb.append(className.substring(0, pos));
+		sb.append(".impl");
+		sb.append(className.substring(pos));
+		sb.append("Impl");
 
 		Class<?> implClass = null;
 
 		try {
-			implClass = _classLoader.loadClass(implClassName.toString());
+			implClass = _classLoader.loadClass(sb.toString());
 		}
 		catch (ClassNotFoundException cnfe) {
 			return false;
@@ -158,7 +161,7 @@ public abstract class BaseJSONWebServiceConfigurator
 		}
 	}
 
-	private boolean _isJSONWebServiceClass(Class<?> clazz) {
+	protected boolean isJSONWebServiceClass(Class<?> clazz) {
 		if (!clazz.isAnonymousClass() && !clazz.isArray() && !clazz.isEnum() &&
 			!clazz.isLocalClass() && !clazz.isPrimitive() &&
 			!(clazz.isMemberClass() ^
@@ -170,7 +173,63 @@ public abstract class BaseJSONWebServiceConfigurator
 		return false;
 	}
 
-	private Class<?> _loadUtilClass(Class<?> implementationClass)
+	protected boolean isTypeSignatureInUse(InputStream inputStream) {
+		try {
+
+			// Create a buffer the same length as the type signature array
+
+			byte[] buffer = new byte[_jsonWebServiceAnnotationBytes.length];
+
+			// Read an initial number of bytes into the buffer
+
+			int value = inputStream.read(buffer);
+
+			// Number of bytes read must be more than the type signature length
+
+			if (value < _jsonWebServiceAnnotationBytes.length) {
+				return false;
+			}
+
+			// Pass if the the buffer equals the type signature
+
+			if (Arrays.equals(buffer, _jsonWebServiceAnnotationBytes)) {
+				return true;
+			}
+
+			// Read a single byte from the stream
+
+			while ((value = inputStream.read()) != -1) {
+
+				// Fail if we are at the end of the stream
+
+				if (value == -1) {
+					return false;
+				}
+
+				// Shift the buffer left
+
+				System.arraycopy(buffer, 1, buffer, 0, buffer.length - 1);
+
+				// Add the read byte to the end of the buffer
+
+				buffer[buffer.length - 1] = (byte)value;
+
+				// Compare the updated buffer to the signature
+
+				if (Arrays.equals(buffer, _jsonWebServiceAnnotationBytes)) {
+					return true;
+				}
+			}
+		}
+		catch (IOException ioe) {
+			throw new IllegalStateException(
+				"Unable to read bytes from input stream", ioe);
+		}
+
+		return false;
+	}
+
+	protected Class<?> loadUtilClass(Class<?> implementationClass)
 		throws ClassNotFoundException {
 
 		Class<?> utilClass = _utilClasses.get(implementationClass);
@@ -198,24 +257,24 @@ public abstract class BaseJSONWebServiceConfigurator
 		return utilClass;
 	}
 
-	private void _onJSONWebServiceClass(String className) throws Exception {
+	protected void onJSONWebServiceClass(String className) throws Exception {
 		Class<?> actionClass = _classLoader.loadClass(className);
 
-		if (!_isJSONWebServiceClass(actionClass)) {
+		if (!isJSONWebServiceClass(actionClass)) {
 			return;
 		}
 
-		if (actionClass.isInterface() && _hasAnnotatedServiceImpl(className)) {
+		if (actionClass.isInterface() && hasAnnotatedServiceImpl(className)) {
 			return;
 		}
 
-		JSONWebService classAnnotation = actionClass.getAnnotation(
+		JSONWebService classJSONWebService = actionClass.getAnnotation(
 			JSONWebService.class);
 
-		JSONWebServiceMode classAnnotationMode = JSONWebServiceMode.MANUAL;
+		JSONWebServiceMode classJSONWebServiceMode = JSONWebServiceMode.MANUAL;
 
-		if (classAnnotation != null) {
-			classAnnotationMode = classAnnotation.mode();
+		if (classJSONWebService != null) {
+			classJSONWebServiceMode = classJSONWebService.mode();
 		}
 
 		Method[] methods = actionClass.getMethods();
@@ -229,17 +288,17 @@ public abstract class BaseJSONWebServiceConfigurator
 
 			boolean registerMethod = false;
 
-			JSONWebService methodAnnotation = method.getAnnotation(
+			JSONWebService methodJSONWebService = method.getAnnotation(
 				JSONWebService.class);
 
-			if (classAnnotationMode.equals(JSONWebServiceMode.AUTO)) {
+			if (classJSONWebServiceMode.equals(JSONWebServiceMode.AUTO)) {
 				registerMethod = true;
 
-				if (methodAnnotation != null) {
-					JSONWebServiceMode methodAnnotationMode =
-						methodAnnotation.mode();
+				if (methodJSONWebService != null) {
+					JSONWebServiceMode methodJSONWebServiceMode =
+						methodJSONWebService.mode();
 
-					if (methodAnnotationMode.equals(
+					if (methodJSONWebServiceMode.equals(
 							JSONWebServiceMode.IGNORE)) {
 
 						registerMethod = false;
@@ -247,11 +306,11 @@ public abstract class BaseJSONWebServiceConfigurator
 				}
 			}
 			else {
-				if (methodAnnotation != null) {
-					JSONWebServiceMode methodAnnotationMode =
-						methodAnnotation.mode();
+				if (methodJSONWebService != null) {
+					JSONWebServiceMode methodJSONWebServiceMode =
+						methodJSONWebService.mode();
 
-					if (!methodAnnotationMode.equals(
+					if (!methodJSONWebServiceMode.equals(
 							JSONWebServiceMode.IGNORE)) {
 
 						registerMethod = true;
@@ -260,12 +319,12 @@ public abstract class BaseJSONWebServiceConfigurator
 			}
 
 			if (registerMethod) {
-				_registerJSONWebServiceAction(actionClass, method);
+				registerJSONWebServiceAction(actionClass, method);
 			}
 		}
 	}
 
-	private void _registerJSONWebServiceAction(
+	protected void registerJSONWebServiceAction(
 			Class<?> implementationClass, Method method)
 		throws Exception {
 
@@ -279,7 +338,7 @@ public abstract class BaseJSONWebServiceConfigurator
 			return;
 		}
 
-		Class<?> utilClass = _loadUtilClass(implementationClass);
+		Class<?> utilClass = loadUtilClass(implementationClass);
 
 		try {
 			method = utilClass.getMethod(
@@ -290,76 +349,16 @@ public abstract class BaseJSONWebServiceConfigurator
 		}
 
 		JSONWebServiceActionsManagerUtil.registerJSONWebServiceAction(
-			_servletContextPath, method.getDeclaringClass(), method, path,
-			httpMethod);
+			_contextPath, method.getDeclaringClass(), method, path, httpMethod);
 
 		_registeredActionsCount++;
-	}
-
-	protected byte[] getTypeSignatureBytes(Class<?> clazz) {
-		return ('L' + clazz.getName().replace('.', '/') + ';').getBytes();
-	}
-
-	protected boolean isTypeSignatureInUse(InputStream inputStream) {
-		try {
-
-			// create a buffer the same length as the type signature array
-
-			byte[] buffer = new byte[_jsonWebServiceAnnotationBytes.length];
-
-			// read an initial number of bytes into the buffer
-
-			int value = inputStream.read(buffer);
-
-			// if the number of bytes read is less than the type signature
-			// length immediately fail
-
-			if ((value < _jsonWebServiceAnnotationBytes.length)) {
-				return false;
-			}
-
-			// if the buffer equals the type signature immediately succeed
-
-			if (Arrays.equals(buffer, _jsonWebServiceAnnotationBytes)) {
-				return true;
-			}
-
-			// read a single byte from the stream
-
-			while ((value = inputStream.read()) != -1) {
-				// immediately fail if we're at the end of the stream
-
-				if (value == -1) {
-					return false;
-				}
-
-				// shift the buffer left
-
-				System.arraycopy(buffer, 1, buffer, 0, buffer.length - 1);
-
-				// add the read byte to the end of the buffer
-
-				buffer[buffer.length - 1] = (byte)value;
-
-				// compare the updated buffer to the signature
-
-				if (Arrays.equals(buffer, _jsonWebServiceAnnotationBytes)) {
-					return true;
-				}
-			}
-		}
-		catch (IOException ioe) {
-			throw new IllegalStateException(
-				"Unable to read bytes from input stream.", ioe);
-		}
-
-		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseJSONWebServiceConfigurator.class);
 
 	private ClassLoader _classLoader;
+	private String _contextPath;
 	private Set<String> _invalidHttpMethods = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS));
 	private final byte[] _jsonWebServiceAnnotationBytes = getTypeSignatureBytes(
@@ -368,7 +367,6 @@ public abstract class BaseJSONWebServiceConfigurator
 		new JSONWebServiceMappingResolver();
 	private int _registeredActionsCount;
 	private ServletContext _servletContext;
-	private String _servletContextPath;
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 

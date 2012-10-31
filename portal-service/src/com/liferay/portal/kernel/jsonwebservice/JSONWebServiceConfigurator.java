@@ -32,9 +32,7 @@ public interface JSONWebServiceConfigurator {
 
 	public int getRegisteredActionsCount();
 
-	public void init(
-		String servletContextPath, ServletContext servletContext,
-		ClassLoader classLoader);
+	public void init(ServletContext servletContext, ClassLoader classLoader);
 
 	public void registerClass(String className, InputStream inputStream)
 		throws Exception;

@@ -19,20 +19,20 @@
 <%
 String signature = ParamUtil.getString(request, "signature");
 
-Set<String> servletContextPaths = JSONWebServiceActionsManagerUtil.getJSONWebServiceServletContextPaths();
+Set<String> contextPaths = JSONWebServiceActionsManagerUtil.getContextPaths();
 %>
 
-<c:if test="<%= servletContextPaths.size() > 1 %>">
+<c:if test="<%= contextPaths.size() > 1 %>">
 	<aui:select cssClass="lfr-api-context" label="context-path" name="contextPath">
 
 		<%
-		for (String servletContextPath : servletContextPaths) {
-			if (Validator.isNull(servletContextPath)) {
-				servletContextPath = StringPool.SLASH;
+		for (String curContextPath : contextPaths) {
+			if (Validator.isNull(curContextPath)) {
+				curContextPath = StringPool.SLASH;
 			}
 		%>
 
-			<aui:option label="<%= servletContextPath %>" selected="<%= contextPath.equals(servletContextPath) %>" value="<%= servletContextPath %>" />
+			<aui:option label="<%= curContextPath %>" selected="<%= contextPath.equals(curContextPath) %>" value="<%= curContextPath %>" />
 
 		<%
 		}
@@ -91,14 +91,7 @@ Set<String> servletContextPaths = JSONWebServiceActionsManagerUtil.getJSONWebSer
 					<li class="lfr-api-signature <%= (serviceSignature.equals(signature)) ? "selected" : StringPool.BLANK %>">
 
 						<%
-						String methodURL = jsonwsContextURL;
-
-						if (Validator.isNull(contextPath)) {
-							methodURL += "?signature=".concat(serviceSignature);
-						}
-						else {
-							methodURL += "&signature=".concat(serviceSignature);
-						}
+						String methodURL = HttpUtil.addParameter(jsonWSContextPath, "signature", serviceSignature);
 						%>
 
 						<a class="method-name lfr-api-service-result" data-metaData="<%= jsonWebServiceClassName %>" href="<%= methodURL %>">
@@ -133,7 +126,7 @@ Set<String> servletContextPaths = JSONWebServiceActionsManagerUtil.getJSONWebSer
 		function(event){
 			var contextPath = event.currentTarget.val();
 
-			var location = '<%= mainJsonwsContextURL %>';
+			var location = '<%= jsonWSPath %>';
 
 			if (contextPath && (contextPath != '/')) {
 				location = Liferay.Util.addParams('contextPath=' + contextPath, location);

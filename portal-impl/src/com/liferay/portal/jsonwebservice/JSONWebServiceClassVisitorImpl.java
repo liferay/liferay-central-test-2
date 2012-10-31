@@ -29,8 +29,8 @@ import org.objectweb.asm.ClassReader;
  * @author Igor Spasic
  * @author Raymond Augé
  */
-public class JSONWebServiceClassVisitorImpl extends EmptyClassVisitor
-	implements JSONWebServiceClassVisitor {
+public class JSONWebServiceClassVisitorImpl
+	extends EmptyClassVisitor implements JSONWebServiceClassVisitor {
 
 	public JSONWebServiceClassVisitorImpl(InputStream inputStream)
 		throws IOException {

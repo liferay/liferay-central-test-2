@@ -37,6 +37,7 @@ import javax.servlet.ServletContext;
 import jodd.io.findfile.ClassFinder;
 import jodd.io.findfile.FindFile;
 import jodd.io.findfile.RegExpFindFile;
+
 import jodd.util.ClassLoaderUtil;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -50,9 +51,9 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 
 	public JSONWebServiceConfiguratorImpl() {
 
-		// We can't extend two classes, so use an anonymous delegate.
+		// We cannot extend two classes, so use an anonymous delegate.
 
-		_delegate = new BaseJSONWebServiceConfigurator() {
+		_baseJSONWebServiceConfigurator = new BaseJSONWebServiceConfigurator() {
 
 			@Override
 			public void configure() throws PortalException, SystemException {
@@ -61,10 +62,10 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 				if (getClassLoader() !=
 						PACLClassLoaderUtil.getPortalClassLoader()) {
 
-					classPathFiles = _getPluginClassPathFiles();
+					classPathFiles = getPluginClassPathFiles();
 				}
 				else {
-					classPathFiles = _getPortalClassPathFiles();
+					classPathFiles = getPortalClassPathFiles();
 				}
 
 				_configure(classPathFiles);
@@ -74,24 +75,19 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 	}
 
 	public void clean() {
-		_delegate.clean();
+		_baseJSONWebServiceConfigurator.clean();
 	}
 
-	public void configure()
-		throws PortalException, SystemException {
-
-		_delegate.configure();
+	public void configure() throws PortalException, SystemException {
+		_baseJSONWebServiceConfigurator.configure();
 	}
 
 	public int getRegisteredActionsCount() {
-		return _delegate.getRegisteredActionsCount();
+		return _baseJSONWebServiceConfigurator.getRegisteredActionsCount();
 	}
 
-	public void init(
-		String servletContextPath, ServletContext servletContext,
-		ClassLoader classLoader) {
-
-		_delegate.init(servletContextPath, servletContext, classLoader);
+	public void init(ServletContext servletContext, ClassLoader classLoader) {
+		_baseJSONWebServiceConfigurator.init(servletContext, classLoader);
 
 		setIncludedJars(
 			"*_wl_cls_gen.jar", "*-hook-service*.jar", "*-portlet-service*.jar",
@@ -101,46 +97,12 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 	public void registerClass(String className, InputStream inputStream)
 		throws Exception {
 
-		_delegate.registerClass(className, inputStream);
+		_baseJSONWebServiceConfigurator.registerClass(className, inputStream);
 	}
 
-	@Override
-	protected void onEntry(EntryData entryData) throws Exception {
-		String className = entryData.getName();
-
-		InputStream inputStream = new BufferedInputStream(
-			entryData.openInputStream());
-
-		registerClass(className, inputStream);
-	}
-
-	private void _configure(File... classPathFiles) throws PortalException {
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Configure JSON web service actions");
-
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		try {
-			scanPaths(classPathFiles);
-		}
-		catch (Exception e) {
-			throw new PortalException(e.getMessage(), e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Configured " + getRegisteredActionsCount() + " actions in " +
-					stopWatch.getTime() + " ms");
-		}
-	}
-
-	protected File[] _getPluginClassPathFiles() throws SystemException {
-		ClassLoader classLoader = _delegate.getClassLoader();
+	protected File[] getPluginClassPathFiles() throws SystemException {
+		ClassLoader classLoader =
+			_baseJSONWebServiceConfigurator.getClassLoader();
 
 		URL servicePropertiesURL = classLoader.getResource(
 			"service.properties");
@@ -197,7 +159,7 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 		return classPathFiles;
 	}
 
-	protected File[] _getPortalClassPathFiles() {
+	protected File[] getPortalClassPathFiles() {
 		File[] classPathFiles = null;
 
 		File portalImplJarFile = new File(
@@ -213,15 +175,50 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 		}
 		else {
 			classPathFiles = ClassLoaderUtil.getDefaultClasspath(
-				_delegate.getClassLoader());
+				_baseJSONWebServiceConfigurator.getClassLoader());
 		}
 
 		return classPathFiles;
 	}
 
+	@Override
+	protected void onEntry(EntryData entryData) throws Exception {
+		String className = entryData.getName();
+
+		InputStream inputStream = new BufferedInputStream(
+			entryData.openInputStream());
+
+		registerClass(className, inputStream);
+	}
+
+	private void _configure(File... classPathFiles) throws PortalException {
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Configure JSON web service actions");
+
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		try {
+			scanPaths(classPathFiles);
+		}
+		catch (Exception e) {
+			throw new PortalException(e.getMessage(), e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Configured " + getRegisteredActionsCount() + " actions in " +
+					stopWatch.getTime() + " ms");
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		JSONWebServiceConfiguratorImpl.class);
 
-	private BaseJSONWebServiceConfigurator _delegate;
+	private BaseJSONWebServiceConfigurator _baseJSONWebServiceConfigurator;
 
 }

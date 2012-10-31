@@ -33,9 +33,9 @@ import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.mock.web.MockHttpServletRequest;
-
 import org.powermock.api.mockito.PowerMockito;
+
+import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
  * @author Igor Spasic

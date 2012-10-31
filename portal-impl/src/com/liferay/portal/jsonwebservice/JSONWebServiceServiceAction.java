@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceConfigurator;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServiceLoader;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
@@ -46,19 +47,20 @@ import org.apache.struts.action.ActionMapping;
 public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 	public JSONWebServiceServiceAction(
-		String servletContextPath, ServletContext servletContext,
-		ClassLoader classLoader) {
+		ServletContext servletContext, ClassLoader classLoader) {
+
+		String contextPath = ContextPathUtil.getContextPath(servletContext);
 
 		if ((classLoader == null) &&
-			PortalUtil.getPathContext().equals(servletContextPath)) {
+			contextPath.equals(PortalUtil.getPathContext())) {
 
 			classLoader = PACLClassLoaderUtil.getPortalClassLoader();
 		}
 
-		_jsonWebServiceConfigurator = getConfigurator(classLoader);
+		_jsonWebServiceConfigurator = getJSONWebServiceConfigurator(
+			classLoader);
 
-		_jsonWebServiceConfigurator.init(
-			servletContextPath, servletContext, classLoader);
+		_jsonWebServiceConfigurator.init(servletContext, classLoader);
 
 		_jsonWebServiceConfigurator.clean();
 
@@ -75,30 +77,6 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 				_log.info("JSON web service is disabled");
 			}
 		}
-	}
-
-	protected JSONWebServiceConfigurator getConfigurator(
-		ClassLoader classLoader) {
-
-		JSONWebServiceConfigurator configurator = null;
-
-		try {
-			List<JSONWebServiceConfigurator> configurators = ServiceLoader.load(
-				classLoader, JSONWebServiceConfigurator.class);
-
-			if (!configurators.isEmpty()) {
-				configurator = configurators.get(0);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (configurator == null) {
-			configurator = new JSONWebServiceConfiguratorImpl();
-		}
-
-		return configurator;
 	}
 
 	public void destroy() {
@@ -150,6 +128,31 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 			return JSONFactoryUtil.serializeException(e);
 		}
+	}
+
+	protected JSONWebServiceConfigurator getJSONWebServiceConfigurator(
+		ClassLoader classLoader) {
+
+		JSONWebServiceConfigurator jsonWebServiceConfigurator = null;
+
+		try {
+			List<JSONWebServiceConfigurator> jsonWebServiceConfigurators =
+				ServiceLoader.load(
+					classLoader, JSONWebServiceConfigurator.class);
+
+			if (!jsonWebServiceConfigurators.isEmpty()) {
+				jsonWebServiceConfigurator = jsonWebServiceConfigurators.get(0);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (jsonWebServiceConfigurator == null) {
+			jsonWebServiceConfigurator = new JSONWebServiceConfiguratorImpl();
+		}
+
+		return jsonWebServiceConfigurator;
 	}
 
 	@Override

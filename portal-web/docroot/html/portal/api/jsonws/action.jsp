@@ -30,7 +30,8 @@ String signature = ParamUtil.getString(request, "signature");
 			String invocationPath = jsonWebServiceActionMapping.getPath();
 
 			if (Validator.isNotNull(contextPath)) {
-				invocationPath = jsonWebServiceActionMapping.getServletContextPath().concat(StringPool.PERIOD).concat(jsonWebServiceActionMapping.getPath().substring(1));
+				invocationPath = invocationPath.substring(1);
+				invocationPath = jsonWebServiceActionMapping.getContextPath() + StringPool.PERIOD + invocationPath;
 			}
 			%>
 
@@ -259,7 +260,7 @@ String signature = ParamUtil.getString(request, "signature");
 				};
 			</aui:script>
 
-			<aui:form action='<%= invocationPath %>' enctype="<%= enctype %>" method="<%= jsonWebServiceActionMapping.getMethod() %>" name="execute">
+			<aui:form action="<%= invocationPath %>" enctype="<%= enctype %>" method="<%= jsonWebServiceActionMapping.getMethod() %>" name="execute">
 
 				<%
 				if (PropsValues.JSON_SERVICE_AUTH_TOKEN_ENABLED) {
@@ -497,14 +498,14 @@ Liferay.Service(
 </textarea>
 
 <textarea class="aui-helper-hidden" id="curlTpl">
-curl <%= themeDisplay.getPortalURL() + mainJsonwsContextURL + invocationPath %> \\
+curl <%= themeDisplay.getPortalURL() + jsonWSPath + invocationPath %> \\
   -u test@liferay.com:test <tpl if="data.length">\\
   <tpl for="data">-d {key}={[this.formatDataType(values.key, values.value)]} <tpl if="!$last">\\
   </tpl></tpl></tpl>
 </textarea>
 
 <textarea class="aui-helper-hidden" id="urlTpl">
-<%= themeDisplay.getPortalURL() + mainJsonwsContextURL + invocationPath %><tpl if="data.length">/<tpl for="data">{key:this.toURIParam}/{value}<tpl if="!$last">/</tpl></tpl></tpl><tpl if="extraData.length">?<tpl for="extraData">{key:this.toURIParam}={value}<tpl if="!$last">&amp;</tpl></tpl></tpl>
+<%= themeDisplay.getPortalURL() + jsonWSPath + invocationPath %><tpl if="data.length">/<tpl for="data">{key:this.toURIParam}/{value}<tpl if="!$last">/</tpl></tpl></tpl><tpl if="extraData.length">?<tpl for="extraData">{key:this.toURIParam}={value}<tpl if="!$last">&amp;</tpl></tpl></tpl>
 </textarea>
 	</c:when>
 	<c:otherwise>
