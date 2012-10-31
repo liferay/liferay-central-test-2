@@ -359,7 +359,7 @@ public class DDLImpl implements DDL {
 		throws Exception {
 
 		boolean defaultValue = GetterUtil.getBoolean(
-			preferences.getValue("editable", Boolean.TRUE.toString()));
+			preferences.getValue("editable", null), true);
 
 		return isEditable(portletId, groupId, defaultValue);
 	}
@@ -389,21 +389,21 @@ public class DDLImpl implements DDL {
 			boolean checkPermission, ServiceContext serviceContext)
 		throws Exception {
 
-		boolean majorVersion = ParamUtil.getBoolean(
-			serviceContext, "majorVersion");
-
 		DDLRecord record = DDLRecordLocalServiceUtil.fetchRecord(recordId);
-
-		long scopeGroupId = serviceContext.getScopeGroupId();
-		String portletId = serviceContext.getPortletId();
 
 		PortletPreferences preferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				serviceContext.getPortletPreferencesIds());
 
-		if (!isEditable(preferences, portletId, scopeGroupId)) {
+		if (!isEditable(
+				preferences, serviceContext.getPortletId(),
+				serviceContext.getScopeGroupId())) {
+
 			return record;
 		}
+
+		boolean majorVersion = ParamUtil.getBoolean(
+			serviceContext, "majorVersion");
 
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getDDLRecordSet(
 			recordSetId);
