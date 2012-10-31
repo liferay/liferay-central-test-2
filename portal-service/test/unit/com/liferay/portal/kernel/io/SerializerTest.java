@@ -592,14 +592,13 @@ public class SerializerTest {
 
 		Class<?> clazz = getClass();
 
-		String className = clazz.getName();
-
 		serializer.writeObject(clazz);
 
 		ByteBuffer byteBuffer = serializer.toByteBuffer();
 
-		Assert.assertEquals(className.length() + 11, byteBuffer.limit());
+		String className = clazz.getName();
 
+		Assert.assertEquals(className.length() + 11, byteBuffer.limit());
 		Assert.assertEquals(SerializationConstants.TC_CLASS, byteBuffer.get());
 		Assert.assertEquals(1, byteBuffer.get());
 		Assert.assertEquals(0, byteBuffer.getInt());
