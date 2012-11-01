@@ -144,7 +144,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// User Group
+		// User group
 
 		validate(0, companyId, name);
 
@@ -828,6 +828,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			long companyId, long userGroupId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		// User group
 
 		validate(userGroupId, companyId, name);
 
