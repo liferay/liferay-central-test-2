@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -121,11 +122,11 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 
 		Document document = createDocument("en_US,pt_BR", "en_US");
 
-		Element dynamicElement = addDynamicElement(
+		Element dynamicElementElement = addDynamicElement(
 			document.getRootElement(), "text", "name");
 
-		addDynamicContent(dynamicElement, "en_US", "Joe Bloggs");
-		addDynamicContent(dynamicElement, "pt_BR", "Joao da Silva");
+		addDynamicContent(dynamicElementElement, "en_US", "Joe Bloggs");
+		addDynamicContent(dynamicElementElement, "pt_BR", "Joao da Silva");
 
 		String xml = document.asXML();
 
@@ -178,7 +179,8 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 			null, tokens, Constants.VIEW, "en_US", xml, script,
 			JournalTemplateConstants.LANG_TYPE_VM);
 
-		Assert.assertEquals(String.valueOf(companyId), content);
+		Assert.assertEquals(
+			String.valueOf(TestPropsValues.getCompanyId()), content);
 
 		script = "@@company_id@@";
 
@@ -186,7 +188,8 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 			null, tokens, Constants.VIEW, "en_US", xml, script,
 			JournalTemplateConstants.LANG_TYPE_VM);
 
-		Assert.assertEquals(String.valueOf(companyId), content);
+		Assert.assertEquals(
+			String.valueOf(TestPropsValues.getCompanyId()), content);
 	}
 
 	@Test
@@ -258,10 +261,9 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 
 		Element rootElement = document.addElement("root");
 
-		rootElement.addElement("request");
-
 		rootElement.addAttribute("available-locales", availableLocales);
 		rootElement.addAttribute("default-locale", defaultLocale);
+		rootElement.addElement("request");
 
 		return document;
 	}
@@ -278,10 +280,12 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 	}
 
 	protected Map<String, String> getTokens() throws Exception {
-		Map<String, String> tokens = JournalUtil.getTokens(groupId, null, null);
+		Map<String, String> tokens = JournalUtil.getTokens(
+			TestPropsValues.getGroupId(), null, null);
 
-		tokens.put("company_id", String.valueOf(companyId));
-		tokens.put("group_id", String.valueOf(groupId));
+		tokens.put(
+			"company_id", String.valueOf(TestPropsValues.getCompanyId()));
+		tokens.put("group_id", String.valueOf(TestPropsValues.getGroupId()));
 
 		return tokens;
 	}

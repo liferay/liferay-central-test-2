@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -26,19 +25,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.junit.Before;
-
 /**
  * @author Marcellus Tavares
  */
 public class BaseJournalServiceTestCase {
-
-	@Before
-	public void setUp() throws Exception {
-		companyId = TestPropsValues.getCompanyId();
-		groupId = TestPropsValues.getGroupId();
-		user = TestPropsValues.getUser();
-	}
 
 	protected JournalArticle addArticle(
 			String content, String structureId, String templateId)
@@ -50,16 +40,16 @@ public class BaseJournalServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(groupId);
-
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(TestPropsValues.getGroupId());
 
 		return JournalArticleLocalServiceUtil.addArticle(
-			user.getUserId(), groupId, 0, 0, 0, StringPool.BLANK, true, 0,
-			titleMap, null, content, "general", structureId, templateId, null,
-			1, 1, 1965, 0, 0, 0, 0, 0, 0, 0, true, 0, 0, 0, 0, 0, true, false,
-			false, null, null, null, null, serviceContext);
+			TestPropsValues.getUserId(), TestPropsValues.getGroupId(), 0, 0, 0,
+			StringPool.BLANK, true, 0, titleMap, null, content, "general",
+			structureId, templateId, null, 1, 1, 1965, 0, 0, 0, 0, 0, 0, 0,
+			true, 0, 0, 0, 0, 0, true, false, false, null, null, null, null,
+			serviceContext);
 	}
 
 	protected JournalStructure addStrucure(String xsd) throws Exception {
@@ -73,8 +63,8 @@ public class BaseJournalServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		return JournalStructureLocalServiceUtil.addStructure(
-			user.getUserId(), groupId, StringPool.BLANK, true, null, nameMap,
-			null, xsd, serviceContext);
+			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			StringPool.BLANK, true, null, nameMap, null, xsd, serviceContext);
 	}
 
 	protected JournalTemplate addTemplate(
@@ -91,14 +81,9 @@ public class BaseJournalServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		return JournalTemplateLocalServiceUtil.addTemplate(
-			user.getUserId(), groupId, StringPool.BLANK, true, structureId,
-			nameMap, null, xsl, true, langType, false, false, null, null,
-			serviceContext);
+			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			StringPool.BLANK, true, structureId, nameMap, null, xsl, true,
+			langType, false, false, null, null, serviceContext);
 	}
-
-	protected long companyId;
-	protected long groupId;
-
-	protected User user;
 
 }
