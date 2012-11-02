@@ -75,12 +75,12 @@ public class BatchJspCompiler {
 		arguments.add(_classDir);
 		arguments.addAll(Arrays.asList(fileNames));
 
-		Class<?> mainClass = Class.forName("com.caucho.jsp.JspCompiler");
+		Class<?> clazz = Class.forName("com.caucho.jsp.JspCompiler");
 
-		Method mainMethod = mainClass.getMethod("main", String[].class);
+		Method method = clazz.getMethod("main", String[].class);
 
 		try {
-			mainMethod.invoke(
+			method.invoke(
 				null, (Object)arguments.toArray(new String[arguments.size()]));
 		}
 		catch (Exception e) {

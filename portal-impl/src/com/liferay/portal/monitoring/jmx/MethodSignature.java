@@ -24,7 +24,10 @@ import java.lang.reflect.Method;
 public class MethodSignature {
 
 	public MethodSignature(Method method) {
-		_className = method.getDeclaringClass().getName();
+		Class<?> clazz = method.getDeclaringClass();
+
+		_className = clazz.getName();
+
 		_methodName = method.getName();
 
 		Class<?>[] parameterTypes = method.getParameterTypes();
@@ -100,8 +103,8 @@ public class MethodSignature {
 		return hashCode;
 	}
 
-	private final String _className;
-	private final String _methodName;
-	private final String[] _parameterTypeNames;
+	private String _className;
+	private String _methodName;
+	private String[] _parameterTypeNames;
 
 }

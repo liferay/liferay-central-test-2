@@ -14,7 +14,6 @@
 
 package com.liferay.portal.monitoring.statistics.service;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.monitoring.RequestStatus;
 import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.kernel.monitoring.statistics.RequestStatistics;
@@ -33,9 +32,7 @@ public class ServiceStatistics
 		_className = className;
 	}
 
-	public long getAverageTime(String methodName, String[] parameterTypes)
-		throws SystemException {
-
+	public long getAverageTime(String methodName, String[] parameterTypes) {
 		MethodSignature methodSignature = new MethodSignature(
 			_className, methodName, parameterTypes);
 
@@ -49,9 +46,7 @@ public class ServiceStatistics
 		return -1;
 	}
 
-	public long getErrorCount(String methodName, String[] parameterTypes)
-		throws SystemException {
-
+	public long getErrorCount(String methodName, String[] parameterTypes) {
 		MethodSignature methodSignature = new MethodSignature(
 			_className, methodName, parameterTypes);
 
@@ -65,9 +60,7 @@ public class ServiceStatistics
 		return -1;
 	}
 
-	public long getMaxTime(String methodName, String[] parameterTypes)
-		throws SystemException {
-
+	public long getMaxTime(String methodName, String[] parameterTypes) {
 		MethodSignature methodSignature = new MethodSignature(
 			_className, methodName, parameterTypes);
 
@@ -81,9 +74,7 @@ public class ServiceStatistics
 		return -1;
 	}
 
-	public long getMinTime(String methodName, String[] parameterTypes)
-		throws SystemException {
-
+	public long getMinTime(String methodName, String[] parameterTypes) {
 		MethodSignature methodSignature = new MethodSignature(
 			_className, methodName, parameterTypes);
 
@@ -97,9 +88,7 @@ public class ServiceStatistics
 		return -1;
 	}
 
-	public long getRequestCount(String methodName, String[] parameterTypes)
-		throws SystemException {
-
+	public long getRequestCount(String methodName, String[] parameterTypes) {
 		MethodSignature methodSignature = new MethodSignature(
 			_className, methodName, parameterTypes);
 

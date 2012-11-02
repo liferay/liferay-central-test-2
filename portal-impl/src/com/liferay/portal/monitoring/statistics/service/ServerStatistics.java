@@ -14,7 +14,6 @@
 
 package com.liferay.portal.monitoring.statistics.service;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.monitoring.jmx.MethodSignature;
 
@@ -28,8 +27,7 @@ public class ServerStatistics
 	implements DataSampleProcessor<ServiceRequestDataSample> {
 
 	public long getAverageTime(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
 
@@ -41,8 +39,7 @@ public class ServerStatistics
 	}
 
 	public long getErrorCount(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
 
@@ -54,8 +51,7 @@ public class ServerStatistics
 	}
 
 	public long getMaxTime(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
 
@@ -67,8 +63,7 @@ public class ServerStatistics
 	}
 
 	public long getMinTime(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
 
@@ -80,8 +75,7 @@ public class ServerStatistics
 	}
 
 	public long getRequestCount(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		ServiceStatistics serviceStatistics = _serviceStatistics.get(className);
 

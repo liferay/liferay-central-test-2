@@ -14,7 +14,6 @@
 
 package com.liferay.portal.monitoring.statistics.service;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.monitoring.MonitoringProcessor;
 import com.liferay.portal.kernel.monitoring.RequestStatus;
@@ -47,8 +46,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 	}
 
 	public void addMonitoredMethod(
-			String className, String methodName, String[] parameterTypes)
-		throws SystemException {
+		String className, String methodName, String[] parameterTypes) {
 
 		MethodSignature methodSignature = new MethodSignature(
 			className, methodName, parameterTypes);
