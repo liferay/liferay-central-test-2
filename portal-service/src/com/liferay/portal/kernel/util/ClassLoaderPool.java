@@ -25,9 +25,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * <ul>
  * <li>
  * For an unknown context names are mapped to the PortalClassLoader.
- * If PortalClassLoader has not been initialized yet(Most likely not within a
- * running portal, for example, in unit test or some external tools),
- * fallback to thread context classloader
  * </li>
  * <li>
  * For an unknown ClassLoaders are mapped to the ROOT context name

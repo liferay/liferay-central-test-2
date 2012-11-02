@@ -101,8 +101,8 @@ public class ClassLoaderPoolTest {
 			clazz.getClassLoader(),
 			ClassLoaderPool.getClassLoader(StringPool.BLANK));
 
-		// Get class loader with an invalid context name, portal classloader not
-		// initialized
+		// Get class loader with an invalid context name where the portal class
+		// loader is not initialized
 
 		PortalClassLoaderUtil.setClassLoader(null);
 
