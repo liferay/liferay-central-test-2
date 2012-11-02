@@ -60,10 +60,10 @@ public class VerifyOracle extends VerifyProcess {
 				String columnName = rs.getString(2);
 				int dataLength = rs.getInt(3);
 
-				if (isBetweenReleases(
+				if (isBetweenBuildNumbers(
 						buildNumber, ReleaseInfo.RELEASE_5_2_9_BUILD_NUMBER,
 						ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER) ||
-					isBetweenReleases(
+					isBetweenBuildNumbers(
 						buildNumber, ReleaseInfo.RELEASE_6_0_5_BUILD_NUMBER,
 						ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
 
@@ -116,18 +116,16 @@ public class VerifyOracle extends VerifyProcess {
 		alterColumns();
 	}
 
-	protected boolean isBetweenReleases(
-		int buildNumber, int startReleaseBuildNumber,
-		int endReleaseBuildNumber) {
+	protected boolean isBetweenBuildNumbers(
+		int buildNumber, int startBuildNumber, int endBuildNumber) {
 
-		if (buildNumber >= startReleaseBuildNumber &&
-			buildNumber < endReleaseBuildNumber) {
+		if ((buildNumber >= startBuildNumber) &&
+			(buildNumber < endBuildNumber)) {
 
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyOracle.class);
