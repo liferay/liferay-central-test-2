@@ -304,6 +304,15 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
+		// Template manager
+
+		try {
+			TemplateManagerUtil.init();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Indexers
 
 		IndexerRegistryUtil.register(new BlogsIndexer());
@@ -376,15 +385,6 @@ public class ServiceTestUtil {
 			new BlogsEntryAssetRendererFactory());
 		AssetRendererFactoryRegistryUtil.register(
 			new DLFileEntryAssetRendererFactory());
-
-		// Template Manager
-
-		try {
-			TemplateManagerUtil.init();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		// Trash
 
