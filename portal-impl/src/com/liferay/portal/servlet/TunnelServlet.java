@@ -72,7 +72,7 @@ public class TunnelServlet extends HttpServlet {
 			if (methodHandler != null) {
 				MethodKey methodKey = methodHandler.getMethodKey();
 
-				if (!isValidRequest(methodKey.getDeclaringClass().getName())) {
+				if (!isValidRequest(methodKey.getDeclaringClass())) {
 					return;
 				}
 
@@ -113,7 +113,9 @@ public class TunnelServlet extends HttpServlet {
 		}
 	}
 
-	protected boolean isValidRequest(String className) {
+	protected boolean isValidRequest(Class<?> clazz) {
+		String className = clazz.getName();
+
 		if (className.contains(".service.") &&
 			className.endsWith("ServiceUtil") &&
 			!className.endsWith("LocalServiceUtil")) {

@@ -35,7 +35,7 @@ public class CMISRepositoryUtil {
 
 		try {
 			PortalClassInvoker.invoke(
-				false, _checkRepository, repositoryId, parameters,
+				false, _checkRepositoryMethodKey, repositoryId, parameters,
 				typeSettingsProperties, typeSettingsKey);
 		}
 		catch (Exception e) {
@@ -50,7 +50,7 @@ public class CMISRepositoryUtil {
 
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
-				false, _createSession, parameters);
+				false, _createSessionMethodKey, parameters);
 
 			if (returnObj != null) {
 				session = (Session)returnObj;
@@ -73,7 +73,7 @@ public class CMISRepositoryUtil {
 
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
-				false, _getTypeSettingsValue, typeSettingsProperties,
+				false, _getTypeSettingsValueMethodKey, typeSettingsProperties,
 				typeSettingsKey);
 
 			if (returnObj != null) {
@@ -87,20 +87,20 @@ public class CMISRepositoryUtil {
 		return value;
 	}
 
-	private static final Class<?> _CLASS =
-		ClassResolverUtil.resolveByPortalClassLoader(
-			"com.liferay.portal.repository.cmis.CMISRepositoryUtil");
+	private static final String _CLASS_NAME =
+		"com.liferay.portal.repository.cmis.CMISRepositoryUtil";
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepositoryUtil.class);
 
-	private static MethodKey _checkRepository = new MethodKey(
-		_CLASS, "checkRepository", long.class, Map.class,
-		UnicodeProperties.class, String.class);
-
-	private static MethodKey _createSession = new MethodKey(
-		_CLASS, "createSession", Map.class);
-
-	private static MethodKey _getTypeSettingsValue = new MethodKey(
-		_CLASS, "getTypeSettingsValue", UnicodeProperties.class, String.class);
+	private static MethodKey _checkRepositoryMethodKey = new MethodKey(
+		ClassResolverUtil.resolveByPortalClassLoader(_CLASS_NAME),
+		"checkRepository", long.class, Map.class, UnicodeProperties.class,
+		String.class);
+	private static MethodKey _createSessionMethodKey = new MethodKey(
+		ClassResolverUtil.resolveByPortalClassLoader(_CLASS_NAME),
+		"createSession", Map.class);
+	private static MethodKey _getTypeSettingsValueMethodKey = new MethodKey(
+		ClassResolverUtil.resolveByPortalClassLoader(_CLASS_NAME),
+		"getTypeSettingsValue", UnicodeProperties.class, String.class);
 
 }

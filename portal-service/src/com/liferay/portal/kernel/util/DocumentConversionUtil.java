@@ -51,14 +51,14 @@ public class DocumentConversionUtil {
 		}
 	}
 
-	private static final Class<?> _CLASS =
-		ClassResolverUtil.resolveByPortalClassLoader(
-			"com.liferay.portlet.documentlibrary.util.DocumentConversionUtil");
+	private static final String _CLASS_NAME =
+		"com.liferay.portlet.documentlibrary.util.DocumentConversionUtil";
 
 	private static MethodKey _convertMethodKey = new MethodKey(
-		_CLASS, "convert", String.class, InputStream.class, String.class,
-		String.class);
+		ClassResolverUtil.resolveByPortalClassLoader(_CLASS_NAME), "convert",
+		String.class, InputStream.class, String.class, String.class);
 	private static MethodKey _getConversionsMethodKey = new MethodKey(
-		_CLASS, "getConversions", String.class);
+		ClassResolverUtil.resolveByPortalClassLoader(_CLASS_NAME),
+		"getConversions", String.class);
 
 }
