@@ -168,6 +168,8 @@ public class OrganizationLocalServiceImpl
 
 		organizationPersistence.update(organization);
 
+		// Group
+
 		long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 
 		if (parentOrganizationId !=
@@ -180,8 +182,6 @@ public class OrganizationLocalServiceImpl
 				parentGroupId = parentOrganization.getGroupId();
 			}
 		}
-
-		// Group
 
 		Group group = groupLocalService.addGroup(
 			userId, parentGroupId, Organization.class.getName(), organizationId,
@@ -1610,15 +1610,14 @@ public class OrganizationLocalServiceImpl
 
 		Group group = organization.getGroup();
 
-		boolean isParentOrganizationParentGroup =
-			isOrganizationGroup(
-				group.getParentGroupId(), oldParentOrganizationId);
-
 		long parentGroupId = group.getParentGroupId();
 
-		if (isParentOrganizationParentGroup) {
+		boolean organizationGroup = isOrganizationGroup(
+			oldParentOrganizationId, group.getParentGroupId());
+
+		if (organizationGroup) {
 			if (parentOrganizationId !=
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 				Organization parentOrganization =
 					organizationPersistence.fetchByPrimaryKey(
@@ -1631,7 +1630,7 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 
-		if (!oldName.equals(name) || isParentOrganizationParentGroup) {
+		if (!oldName.equals(name) || organizationGroup) {
 			groupLocalService.updateGroup(
 				group.getGroupId(), parentGroupId, name, group.getDescription(),
 				group.getType(), group.getFriendlyURL(), group.isActive(),
@@ -1685,30 +1684,6 @@ public class OrganizationLocalServiceImpl
 				addSuborganizations(allSuborganizations, suborganizations);
 			}
 		}
-	}
-
-	protected boolean isOrganizationGroup(long groupId, long organizationId)
-		throws PortalException, SystemException {
-
-		if ((organizationId ==
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) &&
-			(groupId == GroupConstants.DEFAULT_PARENT_GROUP_ID)) {
-
-			return true;
-		}
-
-		if (organizationId !=
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-			Organization organization =
-				organizationPersistence.fetchByPrimaryKey(organizationId);
-
-			if (organization.getGroupId() == groupId) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	protected long getParentOrganizationId(
@@ -1802,6 +1777,30 @@ public class OrganizationLocalServiceImpl
 		}
 
 		return organizationIds;
+	}
+
+	protected boolean isOrganizationGroup(long organizationId, long groupId)
+		throws SystemException {
+
+		if ((organizationId ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) &&
+			(groupId == GroupConstants.DEFAULT_PARENT_GROUP_ID)) {
+
+			return true;
+		}
+
+		if (organizationId !=
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+			Organization organization =
+				organizationPersistence.fetchByPrimaryKey(organizationId);
+
+			if (organization.getGroupId() == groupId) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected boolean isParentOrganization(
