@@ -131,26 +131,34 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 			return sessionFactory;
 		}
 
+		ClassLoader oldPortletClassLoader =
+			PortletClassLoaderUtil.getClassLoader();
+
 		PortletClassLoaderUtil.setClassLoader(getSessionFactoryClassLoader());
 
-		PortletHibernateConfiguration portletHibernateConfiguration =
-			new PortletHibernateConfiguration();
-
-		portletHibernateConfiguration.setDataSource(dataSource);
-
 		try {
-			sessionFactory =
-				portletHibernateConfiguration.buildSessionFactory();
+			PortletHibernateConfiguration portletHibernateConfiguration =
+				new PortletHibernateConfiguration();
+
+			portletHibernateConfiguration.setDataSource(dataSource);
+
+			try {
+				sessionFactory =
+					portletHibernateConfiguration.buildSessionFactory();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+
+				return null;
+			}
+
+			_sessionFactories.put(dataSource, sessionFactory);
+
+			return sessionFactory;
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return null;
+		finally {
+			PortletClassLoaderUtil.setClassLoader(oldPortletClassLoader);
 		}
-
-		_sessionFactories.put(dataSource, sessionFactory);
-
-		return sessionFactory;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
