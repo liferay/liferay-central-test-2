@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -151,14 +150,12 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		boolean signedIn = !user.isDefaultUser();
-
 		HttpSession session = request.getSession();
+
+		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
 
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
-
-		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
 
 		if (Validator.isNotNull(doAsUserLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(doAsUserLanguageId);
@@ -171,7 +168,7 @@ public class ServicePreAction extends Action {
 			locale = LocaleUtil.fromLanguageId(i18nLanguageId);
 		}
 		else if (locale == null) {
-			if (signedIn) {
+			if (!user.isDefaultUser()) {
 				locale = user.getLocale();
 			}
 			else {
