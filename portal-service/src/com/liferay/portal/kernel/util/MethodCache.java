@@ -26,32 +26,30 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MethodCache {
 
 	public static void reset() {
-		_methodsMap.clear();
+		_methods.clear();
 	}
 
 	/**
-	 * No public accessing is allowed, used only by {@link MethodKey}
+	 * @see {@link MethodKey}
 	 */
 	protected static Method get(MethodKey methodKey)
 		throws NoSuchMethodException {
 
-		Method method = _methodsMap.get(methodKey);
+		Method method = _methods.get(methodKey);
 
 		if (method == null) {
 			Class<?> declaringClass = methodKey.getDeclaringClass();
-			String methodName = methodKey.getMethodName();
-			Class<?>[] parameterTypes = methodKey.getParameterTypes();
 
 			method = declaringClass.getDeclaredMethod(
-				methodName, parameterTypes);
+				methodKey.getMethodName(), methodKey.getParameterTypes());
 
-			_methodsMap.put(methodKey, method);
+			_methods.put(methodKey, method);
 		}
 
 		return method;
 	}
 
-	private static Map<MethodKey, Method> _methodsMap =
-		new ConcurrentHashMap<MethodKey, Method>();;
+	private static Map<MethodKey, Method> _methods =
+		new ConcurrentHashMap<MethodKey, Method>();
 
 }

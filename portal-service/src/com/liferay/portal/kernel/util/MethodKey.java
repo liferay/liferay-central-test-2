@@ -26,15 +26,9 @@ import java.lang.reflect.Method;
 
 import java.nio.ByteBuffer;
 
+import java.util.Arrays;
+
 /**
- * A serializable loose representation for {@link Method}. Only declaring class,
- * method name and parameter types are considered. Return type and exception
- * types are ignored, which means compiler generated bridging method is
- * considered logically the same as it source counterpart. On deserialization
- * for generic {@link Method}, which {@link Method} is resolved (bridge one or
- * source one) is runtime environment depended. As a force cast to return value
- * will be performed anyway, this generally is not a problem.
- *
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
@@ -64,8 +58,8 @@ public class MethodKey implements Externalizable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
+		if (this == obj) {
+			return true;
 		}
 
 		if (!(obj instanceof MethodKey)) {
@@ -74,15 +68,9 @@ public class MethodKey implements Externalizable {
 
 		MethodKey methodKey = (MethodKey)obj;
 
-		if ((_declaringClass == methodKey._declaringClass) &&
-			_methodName.equals(methodKey._methodName) &&
-			(_parameterTypes.length == methodKey._parameterTypes.length)) {
-
-			for (int i = 0; i < _parameterTypes.length; i++) {
-				if (_parameterTypes[i] != methodKey._parameterTypes[i]) {
-					return false;
-				}
-			}
+		if (Validator.equals(_declaringClass, methodKey._declaringClass) &&
+			Validator.equals(_methodName, methodKey._methodName) &&
+			Arrays.equals(_parameterTypes, methodKey._parameterTypes)) {
 
 			return true;
 		}
@@ -139,26 +127,27 @@ public class MethodKey implements Externalizable {
 
 	@Override
 	public String toString() {
-		if (_toString == null) {
-			StringBundler sb = new StringBundler(
-				4 + _parameterTypes.length * 2);
-
-			sb.append(_declaringClass.getName());
-			sb.append(StringPool.PERIOD);
-			sb.append(_methodName);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-
-			for (Class<?> parameterType : _parameterTypes) {
-				sb.append(parameterType.getName());
-				sb.append(StringPool.COMMA);
-			}
-
-			sb.setIndex(sb.index() - 1);
-
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			_toString = sb.toString();
+		if (_toString != null) {
+			return _toString;
 		}
+
+		StringBundler sb = new StringBundler(4 + _parameterTypes.length * 2);
+
+		sb.append(_declaringClass.getName());
+		sb.append(StringPool.PERIOD);
+		sb.append(_methodName);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		for (Class<?> parameterType : _parameterTypes) {
+			sb.append(parameterType.getName());
+			sb.append(StringPool.COMMA);
+		}
+
+		sb.setIndex(sb.index() - 1);
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		_toString = sb.toString();
 
 		return _toString;
 	}
@@ -168,6 +157,7 @@ public class MethodKey implements Externalizable {
 
 		Class<?> declaringClass = classLoader.loadClass(
 			_declaringClass.getName());
+
 		Class<?>[] parameterTypes = new Class<?>[_parameterTypes.length];
 
 		for (int i = 0; i < _parameterTypes.length; i++) {
