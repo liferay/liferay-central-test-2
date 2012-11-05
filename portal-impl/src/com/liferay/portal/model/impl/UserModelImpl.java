@@ -119,15 +119,16 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long CONTACTID_COLUMN_BITMASK = 2L;
-	public static long DEFAULTUSER_COLUMN_BITMASK = 4L;
-	public static long EMAILADDRESS_COLUMN_BITMASK = 8L;
-	public static long FACEBOOKID_COLUMN_BITMASK = 16L;
-	public static long OPENID_COLUMN_BITMASK = 32L;
-	public static long PORTRAITID_COLUMN_BITMASK = 64L;
-	public static long SCREENNAME_COLUMN_BITMASK = 128L;
-	public static long STATUS_COLUMN_BITMASK = 256L;
-	public static long USERID_COLUMN_BITMASK = 512L;
-	public static long UUID_COLUMN_BITMASK = 1024L;
+	public static long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static long DEFAULTUSER_COLUMN_BITMASK = 8L;
+	public static long EMAILADDRESS_COLUMN_BITMASK = 16L;
+	public static long FACEBOOKID_COLUMN_BITMASK = 32L;
+	public static long OPENID_COLUMN_BITMASK = 64L;
+	public static long PORTRAITID_COLUMN_BITMASK = 128L;
+	public static long SCREENNAME_COLUMN_BITMASK = 256L;
+	public static long STATUS_COLUMN_BITMASK = 512L;
+	public static long USERID_COLUMN_BITMASK = 1024L;
+	public static long UUID_COLUMN_BITMASK = 2048L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -642,7 +643,17 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setCreateDate(Date createDate) {
+		_columnBitmask |= CREATEDATE_COLUMN_BITMASK;
+
+		if (_originalCreateDate == null) {
+			_originalCreateDate = _createDate;
+		}
+
 		_createDate = createDate;
+	}
+
+	public Date getOriginalCreateDate() {
+		return _originalCreateDate;
 	}
 
 	@JSON
@@ -1294,6 +1305,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userModelImpl._setOriginalCompanyId = false;
 
+		userModelImpl._originalCreateDate = userModelImpl._createDate;
+
 		userModelImpl._originalDefaultUser = userModelImpl._defaultUser;
 
 		userModelImpl._setOriginalDefaultUser = false;
@@ -1837,6 +1850,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private Date _createDate;
+	private Date _originalCreateDate;
 	private Date _modifiedDate;
 	private boolean _defaultUser;
 	private boolean _originalDefaultUser;

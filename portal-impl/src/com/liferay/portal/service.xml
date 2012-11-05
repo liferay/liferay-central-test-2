@@ -2059,6 +2059,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
+		<finder name="C_CD" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="createDate" />
+		</finder>
 		<finder name="C_DU" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="defaultUser" />
