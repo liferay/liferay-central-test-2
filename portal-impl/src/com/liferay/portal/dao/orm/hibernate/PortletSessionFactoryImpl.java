@@ -131,12 +131,12 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 			return sessionFactory;
 		}
 
-		ClassLoader oldPortletClassLoader =
-			PortletClassLoaderUtil.getClassLoader();
-
-		PortletClassLoaderUtil.setClassLoader(getSessionFactoryClassLoader());
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 		try {
+			PortletClassLoaderUtil.setClassLoader(
+				getSessionFactoryClassLoader());
+
 			PortletHibernateConfiguration portletHibernateConfiguration =
 				new PortletHibernateConfiguration();
 
@@ -157,7 +157,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 			return sessionFactory;
 		}
 		finally {
-			PortletClassLoaderUtil.setClassLoader(oldPortletClassLoader);
+			PortletClassLoaderUtil.setClassLoader(classLoader);
 		}
 	}
 
