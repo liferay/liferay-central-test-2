@@ -26,7 +26,8 @@ import java.io.OutputStream;
 public class AnnotatedObjectOutputStream extends ObjectOutputStream {
 
 	public AnnotatedObjectOutputStream(OutputStream outputStream)
-			throws IOException {
+		throws IOException {
+
 		super(outputStream);
 	}
 
