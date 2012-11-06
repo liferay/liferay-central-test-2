@@ -14,13 +14,9 @@
 
 package com.liferay.portlet.usergroupsadmin.util;
 
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
@@ -87,14 +83,6 @@ public class UserGroupIndexer extends BaseIndexer {
 				addSearchExpando(searchQuery, searchContext, expandoAttributes);
 			}
 		}
-	}
-
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId) {
-
-		Property property = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(property.eq(companyId));
 	}
 
 	@Override
@@ -235,77 +223,31 @@ public class UserGroupIndexer extends BaseIndexer {
 	}
 
 	protected void reindexUserGroups(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			UserGroup.class, PACLClassLoaderUtil.getPortalClassLoader());
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		Projection minUserGroupIdProjection = ProjectionFactoryUtil.min(
-			"userGroupId");
-		Projection maxUserGroupIdProjection = ProjectionFactoryUtil.max(
-			"userGroupId");
+		ActionableDynamicQuery actionableDynamicQuery =
+			new BaseActionableDynamicQuery() {
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				UserGroup userGroup = (UserGroup)object;
 
-		projectionList.add(minUserGroupIdProjection);
-		projectionList.add(maxUserGroupIdProjection);
+				Document document = getDocument(userGroup);
 
-		dynamicQuery.setProjection(projectionList);
+				documents.add(document);
+			}
 
-		addReindexCriteria(dynamicQuery, companyId);
+		};
 
-		List<Object[]> results = UserGroupLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
+		actionableDynamicQuery.setBaseLocalService(
+			UserGroupLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(UserGroup.class);
+		actionableDynamicQuery.setClassLoader(
+			PACLClassLoaderUtil.getPortalClassLoader());
+		actionableDynamicQuery.setCompanyId(companyId);
+		actionableDynamicQuery.setPrimaryKeyPropertyName("userGroupId");
 
-		Object[] minAndMaxUserGroupIds = results.get(0);
-
-		if ((minAndMaxUserGroupIds[0] == null) ||
-			(minAndMaxUserGroupIds[1] == null)) {
-
-			return;
-		}
-
-		long minUserGroupId = (Long)minAndMaxUserGroupIds[0];
-		long maxUserGroupId = (Long)minAndMaxUserGroupIds[1];
-
-		long startUserGroupId = minUserGroupId;
-		long endUserGroupId = startUserGroupId + DEFAULT_INTERVAL;
-
-		while (startUserGroupId <= maxUserGroupId) {
-			reindexUserGroups(companyId, startUserGroupId, endUserGroupId);
-
-			startUserGroupId = endUserGroupId;
-			endUserGroupId += DEFAULT_INTERVAL;
-		}
-	}
-
-	protected void reindexUserGroups(
-			long companyId, long startUserGroupId, long endUserGroupId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			UserGroup.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("userGroupId");
-
-		dynamicQuery.add(property.ge(startUserGroupId));
-		dynamicQuery.add(property.lt(endUserGroupId));
-
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<UserGroup> userGroups = UserGroupLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
-
-		if (userGroups.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(
-			userGroups.size());
-
-		for (UserGroup userGroup : userGroups) {
-			Document document = getDocument(userGroup);
-
-			documents.add(document);
-		}
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);

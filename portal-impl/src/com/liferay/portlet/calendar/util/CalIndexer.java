@@ -14,13 +14,9 @@
 
 package com.liferay.portlet.calendar.util;
 
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -36,7 +32,6 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -60,14 +55,6 @@ public class CalIndexer extends BaseIndexer {
 
 	public String getPortletId() {
 		return PORTLET_ID;
-	}
-
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId) {
-
-		Property property = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(property.eq(companyId));
 	}
 
 	@Override
@@ -140,72 +127,31 @@ public class CalIndexer extends BaseIndexer {
 	}
 
 	protected void reindexEvents(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			CalEvent.class, PACLClassLoaderUtil.getPortalClassLoader());
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		Projection minEventIdProjection = ProjectionFactoryUtil.min("eventId");
-		Projection maxEventIdProjection = ProjectionFactoryUtil.max("eventId");
+		ActionableDynamicQuery actionableDynamicQuery =
+			new BaseActionableDynamicQuery() {
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				CalEvent event = (CalEvent)object;
 
-		projectionList.add(minEventIdProjection);
-		projectionList.add(maxEventIdProjection);
+				Document document = getDocument(event);
 
-		dynamicQuery.setProjection(projectionList);
+				documents.add(document);
+			}
 
-		addReindexCriteria(dynamicQuery, companyId);
+		};
 
-		List<Object[]> results = CalEventLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
+		actionableDynamicQuery.setBaseLocalService(
+			CalEventLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(CalEvent.class);
+		actionableDynamicQuery.setClassLoader(
+			PACLClassLoaderUtil.getPortalClassLoader());
+		actionableDynamicQuery.setCompanyId(companyId);
+		actionableDynamicQuery.setPrimaryKeyPropertyName("eventId");
 
-		Object[] minAndMaxEventIds = results.get(0);
-
-		if ((minAndMaxEventIds[0] == null) || (minAndMaxEventIds[1] == null)) {
-			return;
-		}
-
-		long minEventId = (Long)minAndMaxEventIds[0];
-		long maxEventId = (Long)minAndMaxEventIds[1];
-
-		long startEventId = minEventId;
-		long endEventId = startEventId + DEFAULT_INTERVAL;
-
-		while (startEventId <= maxEventId) {
-			reindexEvents(companyId, startEventId, endEventId);
-
-			startEventId = endEventId;
-			endEventId += DEFAULT_INTERVAL;
-		}
-	}
-
-	protected void reindexEvents(
-			long companyId, long startEventId, long endEventId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			CalEvent.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("eventId");
-
-		dynamicQuery.add(property.ge(startEventId));
-		dynamicQuery.add(property.lt(endEventId));
-
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<CalEvent> events = CalEventLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
-
-		if (events.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(events.size());
-
-		for (CalEvent event : events) {
-			Document document = getDocument(event);
-
-			documents.add(document);
-		}
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);
