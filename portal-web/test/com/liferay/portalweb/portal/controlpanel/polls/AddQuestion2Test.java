@@ -68,5 +68,8 @@ public class AddQuestion2Test extends BaseTestCase {
 			selenium.getText("//tr[contains(.,'Test Poll Question 2')]/td[3]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//tr[contains(.,'Test Poll Question 2')]/td[4]/a"));
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText(
+				"//tr[contains(.,'Test Poll Question 2')]/td[5]/span[@title='Actions']/ul/li/strong/a/span"));
 	}
 }

@@ -59,24 +59,44 @@
 	<td>Edited Test Question 2</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertVisible</td>
 	<td>//div[2]/div/span[1]/span/span/input</td>
 	<td>Choice A</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertText</td>
+	<td>//span[1]/span/label</td>
+	<td>a. Test Choice A</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
 	<td>//span[2]/span/span/input</td>
 	<td>Choice B</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertText</td>
+	<td>//span[2]/span/label</td>
+	<td>b. Test Choice B</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
 	<td>//span[3]/span/span/input</td>
 	<td>Choice C</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
+	<td>assertText</td>
+	<td>//span[3]/span/label</td>
+	<td>c. Test Choice C</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
 	<td>//span[4]/span/span/input</td>
 	<td>Choice D</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[4]/span/label</td>
+	<td>d. NEW Test Choice D</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -136,7 +156,7 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>//select[@id='_25_expirationDateMonth']</td>
-	<td></td>
+	<td>Expiration Month</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -177,6 +197,31 @@
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Edited Test Question 2')]/td[1]/a</td>
+	<td>Edited Test Question 2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Edited Test Question 2')]/td[2]/a</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Edited Test Question 2')]/td[3]/a</td>
+	<td>Never</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//tr[contains(.,'Edited Test Question 2')]/td[4]/a</td>
+	<td>Never</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Edited Test Question 2')]/td[5]/span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>Actions</td>
 </tr>
 </tbody></table>
 </body>

@@ -40,7 +40,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Poll Question"),
 			selenium.getText("//tr[contains(.,'Test Poll Question')]/td[1]/a"));
-		selenium.clickAt("link=Test Poll Question",
+		selenium.clickAt("//tr[contains(.,'Test Poll Question')]/td[1]/a",
 			RuntimeVariables.replace("Test Poll Question"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Area"),
@@ -49,38 +49,51 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			RuntimeVariables.replace("Area"));
 		Thread.sleep(5000);
 		selenium.selectPopUp("");
+		selenium.waitForVisible("//body/img");
 		assertTrue(selenium.isVisible("//body/img"));
 		selenium.close();
 		selenium.selectWindow("null");
 		selenium.waitForVisible("//a[contains(.,'Horizontal Bar')]");
+		assertEquals(RuntimeVariables.replace("Horizontal Bar"),
+			selenium.getText("//a[contains(.,'Horizontal Bar')]"));
 		selenium.clickAt("//a[contains(.,'Horizontal Bar')]",
 			RuntimeVariables.replace("Horizontal Bar"));
 		Thread.sleep(5000);
 		selenium.selectPopUp("");
+		selenium.waitForVisible("//body/img");
 		assertTrue(selenium.isVisible("//body/img"));
 		selenium.close();
 		selenium.selectWindow("null");
 		selenium.waitForVisible("//a[contains(.,'Line')]");
+		assertEquals(RuntimeVariables.replace("Line"),
+			selenium.getText("//a[contains(.,'Line')]"));
 		selenium.clickAt("//a[contains(.,'Line')]",
 			RuntimeVariables.replace("Line"));
 		Thread.sleep(5000);
 		selenium.selectPopUp("");
+		selenium.waitForVisible("//body/img");
 		assertTrue(selenium.isVisible("//body/img"));
 		selenium.close();
 		selenium.selectWindow("null");
 		selenium.waitForVisible("//a[contains(.,'Pie')]");
+		assertEquals(RuntimeVariables.replace("Pie"),
+			selenium.getText("//a[contains(.,'Pie')]"));
 		selenium.clickAt("//a[contains(.,'Pie')]",
 			RuntimeVariables.replace("Pie"));
 		Thread.sleep(5000);
 		selenium.selectPopUp("");
+		selenium.waitForVisible("//body/img");
 		assertTrue(selenium.isVisible("//body/img"));
 		selenium.close();
 		selenium.selectWindow("null");
 		selenium.waitForVisible("//a[contains(.,'Vertical Bar')]");
+		assertEquals(RuntimeVariables.replace("Vertical Bar"),
+			selenium.getText("//a[contains(.,'Vertical Bar')]"));
 		selenium.clickAt("//a[contains(.,'Vertical Bar')]",
 			RuntimeVariables.replace("Vertical Bar"));
 		Thread.sleep(5000);
 		selenium.selectPopUp("");
+		selenium.waitForVisible("//body/img");
 		assertTrue(selenium.isVisible("//body/img"));
 		selenium.close();
 		selenium.selectWindow("null");

@@ -49,14 +49,19 @@ public class ExpireQuestionTest extends BaseTestCase {
 				selenium.clickAt("//tr[contains(.,'Edited Test Question 2')]/td[1]/a",
 					RuntimeVariables.replace("Edited Test Question 2"));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isElementPresent(
+				assertTrue(selenium.isVisible(
 						"//div[2]/div/span[1]/span/span/input"));
-				assertTrue(selenium.isElementPresent(
-						"//span[2]/span/span/input"));
-				assertTrue(selenium.isElementPresent(
-						"//span[3]/span/span/input"));
-				assertTrue(selenium.isElementPresent(
-						"//span[4]/span/span/input"));
+				assertEquals(RuntimeVariables.replace("a. Test Choice A"),
+					selenium.getText("//span[1]/span/label"));
+				assertTrue(selenium.isVisible("//span[2]/span/span/input"));
+				assertEquals(RuntimeVariables.replace("b. Test Choice B"),
+					selenium.getText("//span[2]/span/label"));
+				assertTrue(selenium.isVisible("//span[3]/span/span/input"));
+				assertEquals(RuntimeVariables.replace("c. Test Choice C"),
+					selenium.getText("//span[3]/span/label"));
+				assertTrue(selenium.isVisible("//span[4]/span/span/input"));
+				assertEquals(RuntimeVariables.replace("d. NEW Test Choice D"),
+					selenium.getText("//span[4]/span/label"));
 				selenium.clickAt("//input[@value='Cancel']",
 					RuntimeVariables.replace("Cancel"));
 				selenium.waitForPageToLoad("30000");
@@ -109,6 +114,21 @@ public class ExpireQuestionTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
+				assertEquals(RuntimeVariables.replace("Edited Test Question 2"),
+					selenium.getText(
+						"//tr[contains(.,'Edited Test Question 2')]/td[1]/a"));
+				assertEquals(RuntimeVariables.replace("0"),
+					selenium.getText(
+						"//tr[contains(.,'Edited Test Question 2')]/td[2]/a"));
+				assertEquals(RuntimeVariables.replace("Never"),
+					selenium.getText(
+						"//tr[contains(.,'Edited Test Question 2')]/td[3]/a"));
+				assertNotEquals(RuntimeVariables.replace("Never"),
+					selenium.getText(
+						"//tr[contains(.,'Edited Test Question 2')]/td[4]/a"));
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//tr[contains(.,'Edited Test Question 2')]/td[5]/span[@title='Actions']/ul/li/strong/a/span"));
 
 			case 100:
 				label = -1;

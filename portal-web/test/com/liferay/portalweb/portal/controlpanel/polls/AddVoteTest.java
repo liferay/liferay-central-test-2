@@ -43,8 +43,12 @@ public class AddVoteTest extends BaseTestCase {
 		selenium.clickAt("//tr[contains(.,'Test Poll Question')]/td[1]/a",
 			RuntimeVariables.replace("Test Poll Question"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("a. Test Choice A"),
+			selenium.getText(
+				"//span[@class='aui-field aui-field-choice']/span/label"));
 		selenium.clickAt("//input[@name='_25_choiceId']",
-			RuntimeVariables.replace("Choice A"));
+			RuntimeVariables.replace("Test Choice A"));
+		assertTrue(selenium.isChecked("//input[@name='_25_choiceId']"));
 		selenium.clickAt("//input[@value='Vote']",
 			RuntimeVariables.replace("Vote"));
 		selenium.waitForPageToLoad("30000");
@@ -57,16 +61,14 @@ public class AddVoteTest extends BaseTestCase {
 				"This is a test poll description."),
 			selenium.getText("//fieldset/div/span"));
 		assertEquals(RuntimeVariables.replace("100%"),
-			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td[1]"));
+			selenium.getText("//tr[contains(.,'Test Choice A')]/td[1]"));
 		assertEquals(RuntimeVariables.replace("1"),
-			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td[2]"));
+			selenium.getText("//tr[contains(.,'Test Choice A')]/td[2]"));
+		assertTrue(selenium.isVisible(
+				"//tr[contains(.,'Test Choice A')]/td[3]/div/div/div[contains(@style,'width: 100%')]"));
 		assertEquals(RuntimeVariables.replace("a."),
-			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td[4]"));
+			selenium.getText("//tr[contains(.,'Test Choice A')]/td[4]"));
 		assertEquals(RuntimeVariables.replace("Test Choice A"),
-			selenium.getText(
-				"//tr[@class='portlet-section-alternate results-row alt']/td[5]"));
+			selenium.getText("//tr[contains(.,'Test Choice A')]/td[5]"));
 	}
 }
