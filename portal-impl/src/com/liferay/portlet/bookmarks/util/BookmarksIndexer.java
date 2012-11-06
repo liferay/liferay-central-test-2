@@ -15,7 +15,6 @@
 package com.liferay.portlet.bookmarks.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
@@ -32,15 +31,15 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.persistence.GroupActionableDynamicQuery;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryActionableDynamicQuery;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -178,7 +177,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		final Collection<Document> documents = new ArrayList<Document>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new BookmarksEntryActionableDynamicQuery() {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
@@ -198,13 +197,7 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			BookmarksEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BookmarksEntry.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setGroupId(groupId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
 		actionableDynamicQuery.performActions();
 
@@ -216,7 +209,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		throws PortalException, SystemException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new BookmarksFolderActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object)
@@ -232,13 +225,7 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			BookmarksFolderLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BookmarksFolder.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
 
 		actionableDynamicQuery.performActions();
 	}
