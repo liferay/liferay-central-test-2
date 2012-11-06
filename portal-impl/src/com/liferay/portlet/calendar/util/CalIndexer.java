@@ -15,8 +15,8 @@
 package com.liferay.portlet.calendar.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -25,10 +25,10 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.persistence.CalEventActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -126,11 +126,13 @@ public class CalIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexEvents(long companyId) throws Exception {
+	protected void reindexEvents(long companyId)
+		throws PortalException, SystemException {
+
 		final Collection<Document> documents = new ArrayList<Document>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new CalEventActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
@@ -143,13 +145,7 @@ public class CalIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			CalEventLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(CalEvent.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("eventId");
 
 		actionableDynamicQuery.performActions();
 

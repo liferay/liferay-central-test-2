@@ -15,7 +15,6 @@
 package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
@@ -31,13 +30,13 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -173,7 +172,7 @@ public class BlogsIndexer extends BaseIndexer {
 		final Collection<Document> documents = new ArrayList<Document>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new BlogsEntryActionableDynamicQuery() {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
@@ -203,13 +202,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			BlogsEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(BlogsEntry.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("entryId");
 
 		actionableDynamicQuery.performActions();
 

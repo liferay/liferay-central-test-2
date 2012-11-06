@@ -15,8 +15,8 @@
 package com.liferay.portlet.usergroupsadmin.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.persistence.UserGroupActionableDynamicQuery;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 
@@ -222,11 +222,13 @@ public class UserGroupIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexUserGroups(long companyId) throws Exception {
+	protected void reindexUserGroups(long companyId)
+		throws PortalException, SystemException {
+
 		final Collection<Document> documents = new ArrayList<Document>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new UserGroupActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
@@ -239,13 +241,7 @@ public class UserGroupIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			UserGroupLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(UserGroup.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("userGroupId");
 
 		actionableDynamicQuery.performActions();
 

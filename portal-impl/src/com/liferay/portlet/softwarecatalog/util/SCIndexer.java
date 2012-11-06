@@ -15,8 +15,8 @@
 package com.liferay.portlet.softwarecatalog.util;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -31,12 +31,12 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
+import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -204,11 +204,13 @@ public class SCIndexer extends BaseIndexer {
 		}
 	}
 
-	protected void reindexProductEntries(long companyId) throws Exception {
+	protected void reindexProductEntries(long companyId)
+		throws PortalException, SystemException {
+
 		final Collection<Document> documents = new ArrayList<Document>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new BaseActionableDynamicQuery() {
+			new SCProductEntryActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
@@ -221,13 +223,7 @@ public class SCIndexer extends BaseIndexer {
 
 		};
 
-		actionableDynamicQuery.setBaseLocalService(
-			SCProductEntryLocalServiceUtil.getService());
-		actionableDynamicQuery.setClass(SCProductEntry.class);
-		actionableDynamicQuery.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setPrimaryKeyPropertyName("productEntryId");
 
 		actionableDynamicQuery.performActions();
 
