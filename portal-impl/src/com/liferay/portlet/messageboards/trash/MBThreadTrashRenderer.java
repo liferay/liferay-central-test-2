@@ -88,21 +88,20 @@ public class MBThreadTrashRenderer extends BaseTrashRenderer {
 		renderRequest.setAttribute(
 			WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 		renderRequest.setAttribute(
-			WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, _rootMessage);
+			WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY,
+			messageDisplay.getCategory());
 		renderRequest.setAttribute(
 			WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE,
 			treeWalker.getRoot());
 		renderRequest.setAttribute(
-			WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY,
-			messageDisplay.getCategory());
+			WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+		renderRequest.setAttribute(
+			WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.FALSE);
+		renderRequest.setAttribute(
+			WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, _rootMessage);
 		renderRequest.setAttribute(
 			WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD,
 			messageDisplay.getThread());
-		renderRequest.setAttribute(
-			WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE,
-			Boolean.valueOf(false));
-		renderRequest.setAttribute(
-			WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 
 		return "/html/portlet/message_boards/view_thread_tree.jsp";
 	}
