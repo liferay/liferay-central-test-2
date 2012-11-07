@@ -45,8 +45,8 @@ import javax.portlet.WindowState;
  * @author Juan Fernández
  * @author Sergio González
  */
-public class MBMessageAssetRenderer extends BaseAssetRenderer
-	implements TrashRenderer {
+public class MBMessageAssetRenderer
+	extends BaseAssetRenderer implements TrashRenderer {
 
 	public MBMessageAssetRenderer(MBMessage message) {
 		_message = message;

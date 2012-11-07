@@ -30,8 +30,7 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
  */
 public class MBMessageTrashHandler extends BaseTrashHandler {
 
-	public void deleteTrashEntries(long[] classPKs, boolean checkPermission)
-		throws PortalException, SystemException {
+	public void deleteTrashEntries(long[] classPKs, boolean checkPermission) {
 	}
 
 	public String getClassName() {
@@ -46,10 +45,10 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 		return message.isInTrash();
 	}
 
-	public void restoreTrashEntries(long[] classPKs)
-		throws PortalException, SystemException {
+	public void restoreTrashEntries(long[] classPKs) {
 	}
 
+	@Override
 	protected boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws PortalException, SystemException {
