@@ -38,16 +38,11 @@ public class MBCategoryImpl extends MBCategoryBaseImpl {
 
 		MBCategory category = this;
 
-		while (true) {
-			if (!category.isRoot()) {
-				category = MBCategoryLocalServiceUtil.getCategory(
-					category.getParentCategoryId());
+		while (!category.isRoot()) {
+			category = MBCategoryLocalServiceUtil.getCategory(
+				category.getParentCategoryId());
 
-				ancestorCategoryIds.add(category.getCategoryId());
-			}
-			else {
-				break;
-			}
+			ancestorCategoryIds.add(category.getCategoryId());
 		}
 
 		return ancestorCategoryIds;
@@ -74,6 +69,7 @@ public class MBCategoryImpl extends MBCategoryBaseImpl {
 
 		if (getParentCategoryId() ==
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			return null;
 		}
 
@@ -86,9 +82,8 @@ public class MBCategoryImpl extends MBCategoryBaseImpl {
 
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 }
