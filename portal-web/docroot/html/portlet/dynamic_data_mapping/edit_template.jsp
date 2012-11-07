@@ -14,9 +14,6 @@
  */
 --%>
 
-<%@ page import="com.liferay.portlet.dynamicdatamapping.TemplateSmallImageNameException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.TemplateSmallImageSizeException" %>
-
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
@@ -35,7 +32,7 @@ long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId)
 long classNameId = BeanParamUtil.getLong(template, request, "classNameId");
 long classPK = BeanParamUtil.getLong(template, request, "classPK");
 
-boolean isSmallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
+boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
@@ -201,7 +198,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 								<table>
 									<tr>
 										<th>
-											<c:if test="<%= isSmallImage && (template != null) %>">
+											<c:if test="<%= smallImage && (template != null) %>">
 												<img alt="<liferay-ui:message key="preview" />" class="lfr-ddm-small-image-preview" src="<%= Validator.isNotNull(template.getSmallImageURL()) ? template.getSmallImageURL() : themeDisplay.getPathImage() + "/template?img_id=" + template.getSmallImageId() + "&t=" + WebServerServletTokenUtil.getToken(template.getSmallImageId()) %>" />
 											</c:if>
 										</th>
@@ -321,7 +318,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 				{
 					animated: true,
 					content: '#<portlet:namespace />smallImageContainer .lfr-ddm-small-image-content',
-					expanded: <%= isSmallImage %>,
+					expanded: <%= smallImage %>,
 					header: '#<portlet:namespace />smallImageContainer .lfr-ddm-small-image-header',
 					on: {
 						animatingChange: function(event) {

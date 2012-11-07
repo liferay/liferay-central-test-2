@@ -237,7 +237,6 @@ public class EditTemplateAction extends PortletAction {
 
 		boolean cacheable = ParamUtil.getBoolean(
 			uploadPortletRequest, "cacheable");
-
 		boolean smallImage = ParamUtil.getBoolean(
 			uploadPortletRequest, "smallImage");
 		String smallImageURL = ParamUtil.getString(

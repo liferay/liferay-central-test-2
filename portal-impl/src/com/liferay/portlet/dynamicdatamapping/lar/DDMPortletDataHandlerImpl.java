@@ -110,7 +110,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element templateElement = templatesElement.addElement("template");
 
 		if (template.isSmallImage() &&
-				Validator.isNull(template.getSmallImageURL())) {
+			Validator.isNull(template.getSmallImageURL())) {
 
 			Image smallImage = ImageUtil.fetchByPrimaryKey(
 				template.getSmallImageId());
@@ -236,9 +236,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		long classPK = MapUtil.getLong(
 			structureIds, template.getClassPK(), template.getClassPK());
 
-		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			templateElement, template, _NAMESPACE);
-
 		File smallFile = null;
 
 		String smallImagePath = templateElement.attributeValue(
@@ -255,6 +252,9 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 				FileUtil.write(smallFile, bytes);
 			}
 		}
+
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			templateElement, template, _NAMESPACE);
 
 		DDMTemplate importedTemplate = null;
 
@@ -275,7 +275,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 					template.getDescriptionMap(), template.getType(),
 					template.getMode(), template.getLanguage(),
 					template.getScript(), template.isCacheable(),
-					template.getSmallImage(), template.getSmallImageURL(),
+					template.isSmallImage(), template.getSmallImageURL(),
 					smallFile, serviceContext);
 			}
 		}
