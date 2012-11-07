@@ -67,30 +67,28 @@ public class DDLRecordSetImplTest extends BaseDDLServiceTestCase {
 			"Test Structure", document.asXML(), StorageType.XML.getValue(),
 			DDMStructureConstants.TYPE_DEFAULT);
 
-		DDLRecordSet ddlRecordSet = addRecordSet(ddmStructure.getStructureId());
-
-		// Retrieve first element
+		DDLRecordSet recordSet = addRecordSet(ddmStructure.getStructureId());
 
 		Element dynamicElement = rootElement.element("dynamic-element");
 
 		rootElement.remove(dynamicElement);
 
-		DDMTemplate ddmTemplate = addFormTemplate(
+		DDMTemplate template = addFormTemplate(
 			ddmStructure.getStructureId(), "Test Form Template",
 			document.asXML());
 
 		Set<String> fieldNames = ddmStructure.getFieldNames();
 
-		DDMStructure ddlRecordSetStructure = ddlRecordSet.getDDMStructure(
-			ddmTemplate.getTemplateId());
+		DDMStructure recordSetDDMStructure = recordSet.getDDMStructure(
+			template.getTemplateId());
 
-		if (fieldNames.equals(ddlRecordSetStructure.getFieldNames())) {
+		if (fieldNames.equals(recordSetDDMStructure.getFieldNames())) {
 			Assert.fail();
 		}
 
-		ddlRecordSetStructure = ddlRecordSet.getDDMStructure();
+		recordSetDDMStructure = recordSet.getDDMStructure();
 
-		if (!fieldNames.equals(ddlRecordSetStructure.getFieldNames())) {
+		if (!fieldNames.equals(recordSetDDMStructure.getFieldNames())) {
 			Assert.fail();
 		}
 	}
