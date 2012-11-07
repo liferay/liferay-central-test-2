@@ -2399,7 +2399,7 @@ public class JournalArticleLocalServiceImpl
 		boolean visible = article.isApproved();
 
 		if (article.getClassNameId() !=
-			JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
+				JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 
 			visible = false;
 		}
@@ -2564,7 +2564,7 @@ public class JournalArticleLocalServiceImpl
 				}
 
 				if (article.getClassNameId() ==
-					JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
+						JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 
 					// Get the earliest display date and latest expiration date
 					// among all article versions
@@ -2599,7 +2599,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (article.getClassNameId() ==
-			JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
+				JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 
 			// Email
 
@@ -3577,7 +3577,7 @@ public class JournalArticleLocalServiceImpl
 				}
 			}
 			else if (classNameId ==
-				JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
+						JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 
 				throw new NoSuchTemplateException();
 			}
