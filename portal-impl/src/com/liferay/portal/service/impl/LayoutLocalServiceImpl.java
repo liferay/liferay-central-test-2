@@ -459,22 +459,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			deleteLayout(childLayout, updateLayoutSet, serviceContext);
 		}
 
-		// Mobile Device Rules
-
-		long layoutClassNameId = classNameLocalService.getClassNameId(
-			Layout.class);
-
-		List<MDRRuleGroupInstance> mdrRuleGroupInstances =
-			mdrRuleGroupInstancePersistence.findByC_C(
-				layoutClassNameId, layout.getPlid());
-
-		for (MDRRuleGroupInstance mdrRuleGroupInstance :
-				mdrRuleGroupInstances) {
-
-			mdrRuleGroupInstanceLocalService.deleteMDRRuleGroupInstance(
-				mdrRuleGroupInstance);
-		}
-
 		// Portlet preferences
 
 		portletPreferencesLocalService.deletePortletPreferencesByPlid(
@@ -489,6 +473,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		ratingsStatsLocalService.deleteStats(
 			Layout.class.getName(), layout.getPlid());
+
+		// Mobile device rules
+
+		long layoutClassNameId = classNameLocalService.getClassNameId(
+			Layout.class);
+
+		List<MDRRuleGroupInstance> mdrRuleGroupInstances =
+			mdrRuleGroupInstancePersistence.findByC_C(
+				layoutClassNameId, layout.getPlid());
+
+		for (MDRRuleGroupInstance mdrRuleGroupInstance :
+				mdrRuleGroupInstances) {
+
+			mdrRuleGroupInstanceLocalService.deleteMDRRuleGroupInstance(
+				mdrRuleGroupInstance);
+		}
 
 		// Message boards
 
