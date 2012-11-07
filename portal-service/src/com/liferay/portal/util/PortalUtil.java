@@ -1321,13 +1321,6 @@ public class PortalUtil {
 		getPortal().initCustomSQL();
 	}
 
-	public static boolean isAllowAddPortletDefaultResource(
-			HttpServletRequest request, Portlet portlet)
-		throws PortalException, SystemException {
-
-		return getPortal().isAllowAddPortletDefaultResource(request, portlet);
-	}
-
 	public static void invokeTaglibDiscussion(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -1335,6 +1328,13 @@ public class PortalUtil {
 
 		getPortal().invokeTaglibDiscussion(
 			portletConfig, actionRequest, actionResponse);
+	}
+
+	public static boolean isAllowAddPortletDefaultResource(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		return getPortal().isAllowAddPortletDefaultResource(request, portlet);
 	}
 
 	public static boolean isCDNDynamicResourcesEnabled(
