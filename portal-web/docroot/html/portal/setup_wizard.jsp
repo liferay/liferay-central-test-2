@@ -69,7 +69,7 @@
 							<aui:select inlineField="<%= true %>" label="default-language" name="companyLocale">
 
 								<%
-								String languageId = GetterUtil.getString((String)session.getAttribute(WebKeys.SETUP_WIZARD_DEFAULT_LOCALE), LocaleUtil.getDefault().toString());
+								String languageId = GetterUtil.getString((String)session.getAttribute(WebKeys.SETUP_WIZARD_DEFAULT_LOCALE), SetupWizardUtil.getDefaultLanguageId());
 
 								Locale[] locales = LanguageUtil.getAvailableLocales();
 

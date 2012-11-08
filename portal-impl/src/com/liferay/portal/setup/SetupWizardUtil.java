@@ -93,6 +93,12 @@ public class SetupWizardUtil {
 	public static final String PROPERTIES_FILE_NAME =
 		"portal-setup-wizard.properties";
 
+	public static String getDefaultLanguageId() {
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocaleUtil.toLanguageId(defaultLocale);
+	}
+
 	public static boolean isDefaultDatabase(HttpServletRequest request) {
 		boolean hsqldb = ParamUtil.getBoolean(
 			request, "defaultDatabase",
@@ -133,10 +139,8 @@ public class SetupWizardUtil {
 	public static void updateLanguage(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		String defaultLanguageId = LocaleUtil.getDefault().toString();
-
 		String languageId = ParamUtil.getString(
-			request, "companyLocale", defaultLanguageId);
+			request, "companyLocale", getDefaultLanguageId());
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -476,10 +480,8 @@ public class SetupWizardUtil {
 			AccountLocalServiceUtil.updateAccount(account);
 		}
 
-		String defaultLanguageId = LocaleUtil.getDefault().toString();
-
 		String languageId = ParamUtil.getString(
-			request, "companyLocale", defaultLanguageId);
+			request, "companyLocale", getDefaultLanguageId());
 
 		User defaultUser = company.getDefaultUser();
 
