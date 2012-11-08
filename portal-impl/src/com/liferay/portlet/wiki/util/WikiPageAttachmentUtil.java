@@ -16,12 +16,12 @@ package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -31,20 +31,17 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
  */
 public class WikiPageAttachmentUtil {
 
-	public static WikiPage getPageByFileEntryId(long dlFileEntryId)
+	public static WikiPage getPageByFileEntryId(long fileEntryId)
 		throws PortalException, SystemException {
 
-		DLFileEntry dlFileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
-			dlFileEntryId);
+		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+			fileEntryId);
 
-		long dlFolderId = dlFileEntry.getFolderId();
+		long folderId = fileEntry.getFolderId();
 
-		DLFolder dlFolder = PortletFileRepositoryUtil.getPortletFolder(
-			dlFolderId);
+		Folder folder = PortletFileRepositoryUtil.getPortletFolder(folderId);
 
-		String dlFolderName = dlFolder.getName();
-
-		long resourcePrimKey = GetterUtil.getLong(dlFolderName);
+		long resourcePrimKey = GetterUtil.getLong(folder.getName());
 
 		return WikiPageLocalServiceUtil.getPage(resourcePrimKey);
 	}
@@ -61,11 +58,11 @@ public class WikiPageAttachmentUtil {
 		long repositoryId = PortletFileRepositoryUtil.getPortletRepository(
 			groupId, PortletKeys.WIKI, serviceContext);
 
-		DLFolder nodeFolder = PortletFileRepositoryUtil.getPortletFolder(
+		Folder nodeFolder = PortletFileRepositoryUtil.getPortletFolder(
 			userId, repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			String.valueOf(nodeId), serviceContext);
 
-		DLFolder pageFolder = PortletFileRepositoryUtil.getPortletFolder(
+		Folder pageFolder = PortletFileRepositoryUtil.getPortletFolder(
 			userId, repositoryId, nodeFolder.getFolderId(),
 			String.valueOf(pageId), serviceContext);
 

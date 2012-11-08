@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -40,7 +40,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 	public WikiPageImpl() {
 	}
 
-	public List<DLFileEntry> getAttachmentsFiles()
+	public List<FileEntry> getAttachmentsFileEntries()
 		throws PortalException, SystemException {
 
 		return PortletFileRepositoryUtil.getPortletFileEntries(
@@ -59,14 +59,14 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 	public long getAttachmentsFolderId()
 		throws PortalException, SystemException {
 
-		if (_attachmentFolderId > 0) {
-			return _attachmentFolderId;
+		if (_attachmentsFolderId > 0) {
+			return _attachmentsFolderId;
 		}
 
-		_attachmentFolderId = WikiPageAttachmentUtil.getPageFolderId(
+		_attachmentsFolderId = WikiPageAttachmentUtil.getPageFolderId(
 			getGroupId(), getUserId(), getNodeId(), getResourcePrimKey());
 
-		return _attachmentFolderId;
+		return _attachmentsFolderId;
 	}
 
 	public List<WikiPage> getChildPages() {
@@ -85,7 +85,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return pages;
 	}
 
-	public List<DLFileEntry> getDeletedAttachmentsFiles()
+	public List<FileEntry> getDeletedAttachmentsFileEntries()
 			throws PortalException, SystemException {
 
 		return PortletFileRepositoryUtil.getPortletFileEntries(
@@ -93,7 +93,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 			WorkflowConstants.STATUS_IN_TRASH);
 	}
 
-	public int getDeletedAttachmentsFilesCount()
+	public int getDeletedAttachmentsFileEntriesCount()
 			throws PortalException, SystemException {
 
 		return PortletFileRepositoryUtil.getPortletFileEntriesCount(
@@ -180,12 +180,12 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return isHead();
 	}
 
-	public void setAttachmentsFolderId(long attachmentFolderId) {
-		_attachmentFolderId = attachmentFolderId;
+	public void setAttachmentsFolderId(long attachmentsFolderId) {
+		_attachmentsFolderId = attachmentsFolderId;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WikiPageImpl.class);
 
-	private long _attachmentFolderId;
+	private long _attachmentsFolderId;
 
 }

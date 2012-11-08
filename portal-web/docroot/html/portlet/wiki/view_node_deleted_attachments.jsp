@@ -21,7 +21,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
-List<DLFileEntry> attachments = node.getDeletedAttachmentsFiles();
+List<FileEntry> attachmentsFileEntries = node.getDeletedAttachmentsFiles();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -58,7 +58,7 @@ iteratorURL.setParameter("viewTrashAttachments", Boolean.TRUE.toString());
 	emptyMessage="remove-the-attachments-for-this-wiki-node"
 	infoMessage="attachments-that-have-been-removed-for-more-than-x-days-will-be-automatically-deleted"
 	portletURL="<%= emptyTrashURL.toString() %>"
-	totalEntries="<%= attachments.size() %>"
+	totalEntries="<%= attachmentsFileEntries.size() %>"
 />
 
 <liferay-ui:search-container
@@ -66,8 +66,8 @@ iteratorURL.setParameter("viewTrashAttachments", Boolean.TRUE.toString());
 	iteratorURL="<%= iteratorURL %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(attachments, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= attachments.size() %>"
+		results="<%= ListUtil.subList(attachmentsFileEntries, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= attachmentsFileEntries.size() %>"
 	/>
 
 	<liferay-ui:search-container-row

@@ -21,9 +21,9 @@ boolean viewTrashAttachments = ParamUtil.getBoolean(request, "viewTrashAttachmen
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-DLFileEntry dlFileEntry = (DLFileEntry)row.getObject();
+FileEntry attachmentsFileEntry = (FileEntry)row.getObject();
 
-WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(dlFileEntry.getFileEntryId());
+WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(attachmentsFileEntry.getFileEntryId());
 %>
 
 <liferay-ui:icon-menu>
@@ -36,7 +36,7 @@ WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(dlFileEntry.getF
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-					<portlet:param name="fileName" value="<%= dlFileEntry.getTitle() %>" />
+					<portlet:param name="fileName" value="<%= attachmentsFileEntry.getTitle() %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
@@ -53,7 +53,7 @@ WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(dlFileEntry.getF
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-					<portlet:param name="fileName" value="<%= dlFileEntry.getTitle() %>" />
+					<portlet:param name="fileName" value="<%= attachmentsFileEntry.getTitle() %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon-delete
@@ -69,7 +69,7 @@ WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(dlFileEntry.getF
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
 					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-					<portlet:param name="fileName" value="<%= dlFileEntry.getTitle() %>" />
+					<portlet:param name="fileName" value="<%= attachmentsFileEntry.getTitle() %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon-delete

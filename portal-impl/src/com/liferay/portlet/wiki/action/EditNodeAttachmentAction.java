@@ -107,7 +107,7 @@ public class EditNodeAttachmentAction extends EditFileEntryAction {
 			nodeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (WikiPage wikiPage : wikiPages) {
-			if (wikiPage.getDeletedAttachmentsFilesCount() > 0) {
+			if (wikiPage.getDeletedAttachmentsFileEntriesCount() > 0) {
 				WikiPageServiceUtil.deleteTrashPageAttachments(
 					nodeId, wikiPage.getTitle());
 			}

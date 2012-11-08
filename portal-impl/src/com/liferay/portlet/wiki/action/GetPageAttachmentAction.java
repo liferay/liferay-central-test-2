@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
@@ -23,7 +24,6 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -107,12 +107,12 @@ public class GetPageAttachmentAction extends PortletAction {
 
 		WikiPage wikiPage = WikiPageServiceUtil.getPage(nodeId, title);
 
-		DLFileEntry dlFileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 			wikiPage.getGroupId(), wikiPage.getAttachmentsFolderId(), fileName);
 
 		ServletResponseUtil.sendFile(
-			request, response, fileName, dlFileEntry.getContentStream(),
-			dlFileEntry.getSize(), dlFileEntry.getMimeType());
+			request, response, fileName, fileEntry.getContentStream(),
+			fileEntry.getSize(), fileEntry.getMimeType());
 	}
 
 	@Override

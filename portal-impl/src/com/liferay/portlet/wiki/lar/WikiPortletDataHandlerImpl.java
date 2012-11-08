@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -372,24 +372,22 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					_NAMESPACE, "attachments") &&
 				page.isHead()) {
 
-				List<DLFileEntry> attachmentsFiles = page.getAttachmentsFiles();
+				int i = 0;
 
-				for (int i = 0; i < attachmentsFiles.size(); i++) {
-					DLFileEntry attachment = attachmentsFiles.get(i);
-
+				for (FileEntry fileEntry : page.getAttachmentsFileEntries()) {
 					Element attachmentElement = pageElement.addElement(
 						"attachment");
 
 					attachmentElement.addAttribute(
-						"name", attachment.getTitle());
+						"name", fileEntry.getTitle());
 
 					String binPath = getPageAttachementBinPath(
-						portletDataContext, page, i);
+						portletDataContext, page, i++);
 
 					attachmentElement.addAttribute("bin-path", binPath);
 
 					portletDataContext.addZipEntry(
-						binPath, attachment.getContentStream());
+						binPath, fileEntry.getContentStream());
 				}
 
 				page.setAttachmentsFolderId(page.getAttachmentsFolderId());

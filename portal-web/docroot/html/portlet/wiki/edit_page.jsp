@@ -54,10 +54,10 @@ if (wikiPage == null) {
 
 boolean editable = false;
 
-List<DLFileEntry> attachments = null;
+List<FileEntry> attachmentsFileEntries = null;
 
 if (wikiPage != null) {
-	attachments = wikiPage.getAttachmentsFiles();
+	attachmentsFileEntries = wikiPage.getAttachmentsFileEntries();
 
 	if (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) {
 		editable = true;
@@ -95,15 +95,15 @@ if ((templateNodeId > 0) && Validator.isNotNull(templateTitle)) {
 		templatePage = WikiPageServiceUtil.getPage(templateNodeId, templateTitle);
 
 		if (Validator.isNull(parentTitle)) {
-			parentTitle = templatePage.getParentTitle();
+	parentTitle = templatePage.getParentTitle();
 
-			if (wikiPage.isNew()) {
-				format = templatePage.getFormat();
+	if (wikiPage.isNew()) {
+		format = templatePage.getFormat();
 
-				wikiPage.setContent(templatePage.getContent());
-				wikiPage.setFormat(format);
-				wikiPage.setParentTitle(parentTitle);
-			}
+		wikiPage.setContent(templatePage.getContent());
+		wikiPage.setFormat(format);
+		wikiPage.setParentTitle(parentTitle);
+	}
 		}
 	}
 	catch (Exception e) {
@@ -284,22 +284,22 @@ if (Validator.isNull(redirect)) {
 			</c:if>
 
 			<aui:fieldset>
-				<c:if test="<%= (attachments != null) && (attachments.size() > 0) %>">
+				<c:if test="<%= (attachmentsFileEntries != null) && !attachmentsFileEntries.isEmpty() %>">
 					<aui:field-wrapper label="attachments">
 
 						<%
-						for (int i = 0; i < attachments.size(); i++) {
-							DLFileEntry dlFileEntry = attachments.get(i);
+						for (int i = 0; i < attachmentsFileEntries.size(); i++) {
+							FileEntry attachmentsFileEntry = attachmentsFileEntries.get(i);
 						%>
 
 							<portlet:actionURL var="getPageAttachmentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 								<portlet:param name="struts_action" value="/wiki/get_page_attachment" />
 								<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
 								<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-								<portlet:param name="fileName" value="<%= dlFileEntry.getTitle() %>" />
+								<portlet:param name="fileName" value="<%= attachmentsFileEntry.getTitle() %>" />
 							</portlet:actionURL>
 
-							<aui:a href="<%= getPageAttachmentURL %>"><%= dlFileEntry.getTitle() %></aui:a> (<%= TextFormatter.formatStorageSize(dlFileEntry.getSize(), locale) %>)<%= (i < (attachments.size() - 1)) ? ", " : "" %>
+							<aui:a href="<%= getPageAttachmentURL %>"><%= attachmentsFileEntry.getTitle() %></aui:a> (<%= TextFormatter.formatStorageSize(attachmentsFileEntry.getSize(), locale) %>)<%= (i < (attachmentsFileEntries.size() - 1)) ? ", " : "" %>
 
 						<%
 						}

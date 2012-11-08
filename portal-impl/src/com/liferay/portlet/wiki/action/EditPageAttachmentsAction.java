@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -42,7 +43,6 @@ import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.action.EditFileEntryAction;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -417,15 +417,15 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 			ParamUtil.getString(actionRequest, "restoreEntryIds"), 0L);
 
 		for (long restoreEntryId : restoreEntryIds) {
-			DLFileEntry dlFileEntry =
-				PortletFileRepositoryUtil.getPortletFileEntry(restoreEntryId);
+			FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+				restoreEntryId);
 
 			WikiPage wikiPage = WikiPageAttachmentUtil.getPageByFileEntryId(
-				dlFileEntry.getFileEntryId());
+				fileEntry.getFileEntryId());
 
 			WikiPageServiceUtil.restorePageAttachmentFromTrash(
 				wikiPage.getNodeId(), wikiPage.getTitle(),
-				dlFileEntry.getTitle());
+				fileEntry.getTitle());
 		}
 	}
 

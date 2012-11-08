@@ -16,11 +16,11 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -120,22 +120,20 @@ public class AttachmentCommandReceiver extends BaseCommandReceiver {
 		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
 			wikiPageResourcePrimKey);
 
-		List<DLFileEntry> attachments = wikiPage.getAttachmentsFiles();
-
 		String attachmentURLPrefix = ParamUtil.getString(
 			request, "attachmentURLPrefix");
 
-		for (DLFileEntry dlFileEntry : attachments) {
+		for (FileEntry fileEntry : wikiPage.getAttachmentsFileEntries()) {
 			Element fileElement = document.createElement("File");
 
 			filesElement.appendChild(fileElement);
 
-			fileElement.setAttribute("name", dlFileEntry.getTitle());
-			fileElement.setAttribute("desc", dlFileEntry.getTitle());
+			fileElement.setAttribute("name", fileEntry.getTitle());
+			fileElement.setAttribute("desc", fileEntry.getTitle());
 			fileElement.setAttribute(
-				"size", String.valueOf(dlFileEntry.getSize()));
+				"size", String.valueOf(fileEntry.getSize()));
 			fileElement.setAttribute(
-				"url", attachmentURLPrefix + dlFileEntry.getTitle());
+				"url", attachmentURLPrefix + fileEntry.getTitle());
 		}
 	}
 
