@@ -177,11 +177,6 @@ public class AssetCategoryLocalServiceImpl
 			deleteCategory(curCategory.getCategoryId());
 		}
 
-		// Entries
-
-		List<AssetEntry> entries = assetTagPersistence.getAssetEntries(
-			category.getCategoryId());
-
 		// Category
 
 		assetCategoryPersistence.remove(category);
@@ -191,6 +186,11 @@ public class AssetCategoryLocalServiceImpl
 		resourceLocalService.deleteResource(
 			category.getCompanyId(), AssetCategory.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
+
+		// Entries
+
+		List<AssetEntry> entries = assetTagPersistence.getAssetEntries(
+			category.getCategoryId());
 
 		// Properties
 
