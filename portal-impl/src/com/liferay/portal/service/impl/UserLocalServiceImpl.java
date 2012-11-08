@@ -787,6 +787,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setScreenName(screenName);
 		user.setEmailAddress(emailAddress);
 		user.setFacebookId(facebookId);
+
+		Long ldapServerId = (Long)serviceContext.getAttribute("ldapServerId");
+
+		if (ldapServerId != null) {
+			user.setLdapServerId(ldapServerId);
+		}
+		else {
+			user.setLdapServerId(-1);
+		}
+
 		user.setOpenId(openId);
 		user.setLanguageId(locale.toString());
 		user.setTimeZoneId(defaultUser.getTimeZoneId());
@@ -797,9 +807,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setJobTitle(jobTitle);
 		user.setStatus(WorkflowConstants.STATUS_DRAFT);
 		user.setExpandoBridgeAttributes(serviceContext);
-
-		user.setLdapServerId(-1);
-		updateLdapServerId(user, serviceContext);
 
 		userPersistence.update(user, serviceContext);
 
@@ -4856,6 +4863,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		user.setFacebookId(facebookId);
+
+		Long ldapServerId = (Long)serviceContext.getAttribute("ldapServerId");
+
+		if (ldapServerId != null) {
+			user.setLdapServerId(ldapServerId);
+		}
+
 		user.setOpenId(openId);
 		user.setLanguageId(languageId);
 		user.setTimeZoneId(timeZoneId);
@@ -4866,8 +4880,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
 		user.setExpandoBridgeAttributes(serviceContext);
-
-		updateLdapServerId(user, serviceContext);
 
 		userPersistence.update(user, serviceContext);
 
@@ -5657,16 +5669,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		PermissionCacheUtil.clearCache();
-	}
-
-	protected void updateLdapServerId(
-		User user, ServiceContext serviceContext) {
-
-		Long ldapServerId = (Long)serviceContext.getAttribute("ldapServerId");
-
-		if (ldapServerId != null) {
-			user.setLdapServerId(ldapServerId);
-		}
 	}
 
 	protected void updateOrganizations(

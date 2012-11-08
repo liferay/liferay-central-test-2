@@ -2012,6 +2012,7 @@
 		<column name="screenName" type="String" />
 		<column name="emailAddress" type="String" />
 		<column name="facebookId" type="long" />
+		<column name="ldapServerId" type="long" />
 		<column name="openId" type="String" />
 		<column name="portraitId" type="long" />
 		<column name="languageId" type="String" />
@@ -2024,7 +2025,6 @@
 		<column name="jobTitle" type="String" />
 		<column name="loginDate" type="Date" />
 		<column name="loginIP" type="String" />
-		<column name="ldapServerId" type="long" />
 		<column name="lastLoginDate" type="Date" />
 		<column name="lastLoginIP" type="String" />
 		<column name="lastFailedLoginDate" type="Date" />
