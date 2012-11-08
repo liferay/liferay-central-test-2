@@ -229,7 +229,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			LDAPSettingsUtil.getContactExpandoMappings(ldapServerId, companyId);
 
 		User user = importUser(
-			companyId, ldapServerId, attributes, userMappings,
+			ldapServerId, companyId, attributes, userMappings,
 			userExpandoMappings, contactMappings, contactExpandoMappings,
 			password);
 
@@ -692,7 +692,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 								ldapServerId, companyId, searchResult));
 
 					User user = importUser(
-						companyId, ldapServerId, userAttributes, userMappings,
+						ldapServerId, companyId, userAttributes, userMappings,
 						userExpandoMappings, contactMappings,
 						contactExpandoMappings, StringPool.BLANK);
 
@@ -877,7 +877,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	}
 
 	protected User importUser(
-			long companyId, long ldapServerId, Attributes attributes,
+			long ldapServerId, long companyId, Attributes attributes,
 			Properties userMappings, Properties userExpandoMappings,
 			Properties contactMappings, Properties contactExpandoMappings,
 			String password)
@@ -1010,7 +1010,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			try {
 				User user = importUser(
-					companyId, ldapServerId, userAttributes, userMappings,
+					ldapServerId, companyId, userAttributes, userMappings,
 					userExpandoMappings, contactMappings,
 					contactExpandoMappings, StringPool.BLANK);
 
