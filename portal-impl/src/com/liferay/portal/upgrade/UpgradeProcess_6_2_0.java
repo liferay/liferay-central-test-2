@@ -22,7 +22,6 @@ import com.liferay.portal.upgrade.v6_2_0.UpgradeDynamicDataListDisplay;
 import com.liferay.portal.upgrade.v6_2_0.UpgradeDynamicDataMapping;
 import com.liferay.portal.upgrade.v6_2_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_2_0.UpgradeUser;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeWikiAttachments;
 
 /**
  * @author Raymond Augé
@@ -43,7 +42,6 @@ public class UpgradeProcess_6_2_0 extends UpgradeProcess {
 		upgrade(UpgradeDynamicDataMapping.class);
 		upgrade(UpgradeDynamicDataListDisplay.class);
 		upgrade(UpgradeUser.class);
-		upgrade(UpgradeWikiAttachments.class);
 	}
 
 }
