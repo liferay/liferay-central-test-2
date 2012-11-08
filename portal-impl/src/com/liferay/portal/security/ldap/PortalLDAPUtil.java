@@ -905,21 +905,6 @@ public class PortalLDAPUtil {
 		return sb.toString();
 	}
 
-	/**
-	 * Returns first not empty value (emailAddress or screenName).
-	 *
-	 * @param emailAddress
-	 * @param screenName
-	 * @return
-	 */
-	private static String _getFirstNotBlank(String emailAddress,
-	String screenName) {
-
-		return Validator.isNotNull(emailAddress)
-				? emailAddress
-				: screenName;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(PortalLDAPUtil.class);
 
 }
