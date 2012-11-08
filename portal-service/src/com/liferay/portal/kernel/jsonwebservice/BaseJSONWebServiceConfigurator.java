@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -287,12 +286,10 @@ public abstract class BaseJSONWebServiceConfigurator
 				continue;
 			}
 
-			if (_excludedMethodNames != null) {
-				String methodName = method.getName();
+			if ((_excludedMethodNames != null) &&
+				_excludedMethodNames.contains(method.getName())) {
 
-				if (ArrayUtil.contains(_excludedMethodNames, methodName)) {
-					continue;
-				}
+				continue;
 			}
 
 			boolean registerMethod = false;
@@ -366,10 +363,11 @@ public abstract class BaseJSONWebServiceConfigurator
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseJSONWebServiceConfigurator.class);
 
+	private static Set<String> _excludedMethodNames = SetUtil.fromArray(
+		new String[] {"getBeanIdentifier", "setBeanIdentifier"});
+
 	private ClassLoader _classLoader;
 	private String _contextPath;
-	private String[] _excludedMethodNames = new String[] {
-		"getBeanIdentifier", "setBeanIdentifier"};
 	private Set<String> _invalidHttpMethods = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS));
 	private final byte[] _jsonWebServiceAnnotationBytes = getTypeSignatureBytes(
