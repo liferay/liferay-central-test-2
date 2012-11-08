@@ -143,7 +143,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 					<th>
 						&nbsp;
 					</th>
-				<tr>
+				</tr>
 
 			<%
 			for (int i = 0; i < ldapServerIds.length; i++) {
