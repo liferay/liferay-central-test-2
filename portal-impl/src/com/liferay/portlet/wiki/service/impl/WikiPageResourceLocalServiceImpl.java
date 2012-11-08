@@ -49,7 +49,7 @@ public class WikiPageResourceLocalServiceImpl
 	}
 
 	public WikiPageResource fetchPageResource(long nodeId, String title)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return wikiPageResourcePersistence.fetchByN_T(nodeId, title);
 	}
