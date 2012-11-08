@@ -359,11 +359,11 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		int preferredLDAPResult = authenticateAgainstPreferredLdapServer(
+		int preferredLDAPServerResult = authenticateAgainstPreferredLDAPServer(
 			companyId, emailAddress, screenName, userId, password);
 
-		if (preferredLDAPResult == SUCCESS) {
-			return preferredLDAPResult;
+		if (preferredLDAPServerResult == SUCCESS) {
+			return preferredLDAPServerResult;
 		}
 
 		long[] ldapServerIds = StringUtil.split(
@@ -402,15 +402,15 @@ public class LDAPAuth implements Authenticator {
 			companyId, userId, emailAddress, screenName, true, FAILURE);
 	}
 
-	protected int authenticateAgainstPreferredLdapServer(
+	protected int authenticateAgainstPreferredLDAPServer(
 			long companyId, String emailAddress, String screenName, long userId,
 			String password)
 		throws Exception {
 
 		int result = DNE;
-	
+
 		User user = null;
-	
+
 		try {
 			if (userId > 0) {
 				user = UserLocalServiceUtil.getUserById(companyId, userId);
@@ -425,48 +425,45 @@ public class LDAPAuth implements Authenticator {
 			}
 			else {
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"No user credentials found, cannot fetch preferred LDAP server");
+					_log.debug("Unable to get preferred LDAP server");
 				}
-	
+
 				return result;
 			}
 		}
 		catch (NoSuchUserException nsue) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"User not found, cannot fetch preferred LDAP server", nsue);
+				_log.debug("Unable to get preferred LDAP server", nsue);
 			}
-	
+
 			return result;
 		}
-	
+
 		long ldapServerId = user.getLdapServerId();
-	
+
 		if (ldapServerId < 0) {
 			return result;
 		}
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-	
+
 		String providerUrl = PrefsPropsUtil.getString(
-			user.getCompanyId(),
-			PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
-	
+			user.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
+
 		if (Validator.isNull(providerUrl)) {
 			return result;
 		}
-	
+
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Using ldapServerId: " + ldapServerId +
-				" to authenticate user: " + user.getScreenName());
+				"Using LDAP server ID " + ldapServerId +
+					" to authenticate user " + user.getUserId());
 		}
-	
+
 		result = authenticate(
 			ldapServerId, companyId, emailAddress, screenName, userId,
 			password);
-	
+
 		return result;
 	}
 

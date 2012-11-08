@@ -114,6 +114,16 @@ public class LDAPSettingsUtil {
 		return groupMappings;
 	}
 
+	public static long getPreferredLDAPServerId(
+			long companyId, String screenName)
+		throws PortalException, SystemException {
+
+		User user = UserLocalServiceUtil.getUserByScreenName(
+			companyId, screenName);
+
+		return user.getLdapServerId();
+	}
+
 	public static String getPropertyPostfix(long ldapServerId) {
 		return StringPool.PERIOD + ldapServerId;
 	}
@@ -220,16 +230,6 @@ public class LDAPSettingsUtil {
 		else {
 			return false;
 		}
-	}
-
-	public static long getPreferredLdapServerId(
-			long companyId, String screenName)
-		throws PortalException, SystemException {
-
-		User user = UserLocalServiceUtil.getUserByScreenName(
-			companyId, screenName);
-
-		return user.getLdapServerId();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LDAPSettingsUtil.class);

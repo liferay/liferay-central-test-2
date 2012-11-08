@@ -279,16 +279,15 @@ public class PortalLDAPUtil {
 			long companyId, String screenName, String emailAddress)
 		throws Exception {
 
-		long preferredLdapServerId =
-			LDAPSettingsUtil.getPreferredLdapServerId(
-				companyId, screenName);
+		long preferredLDAPServerId = LDAPSettingsUtil.getPreferredLDAPServerId(
+			companyId, screenName);
 
-		if (preferredLdapServerId >= 0) {
+		if (preferredLDAPServerId >= 0) {
 			if (hasUser(
-					preferredLdapServerId, companyId, screenName,
+					preferredLDAPServerId, companyId, screenName,
 					emailAddress)) {
 
-				return preferredLdapServerId;
+				return preferredLDAPServerId;
 			}
 		}
 
