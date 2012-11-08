@@ -140,9 +140,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 					<th>
 						<liferay-ui:message key="ldap-server-name" />
 					</th>
-					<th>
-						&nbsp;
-					</th>
+					<th></th>
 				</tr>
 
 			<%
