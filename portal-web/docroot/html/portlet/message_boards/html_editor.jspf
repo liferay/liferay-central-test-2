@@ -22,7 +22,7 @@ if (quote && Validator.isNull(body) && (curParentMessage != null)) {
 	sb.append(parentAuthor);
 	sb.append(": </div><div class=\"quote\"><div class=\"quote-content\">");
 	sb.append(curParentMessage.getBody(false));
-	sb.append("</div></blockquote><br><br><br>");
+	sb.append("</div></blockquote><br /><br /><br />");
 
 	body = sb.toString();
 }
