@@ -29,7 +29,6 @@ DDMTemplate template = (DDMTemplate)request.getAttribute(WebKeys.DYNAMIC_DATA_MA
 long templateId = BeanParamUtil.getLong(template, request, "templateId");
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId);
-
 long classNameId = BeanParamUtil.getLong(template, request, "classNameId");
 long classPK = BeanParamUtil.getLong(template, request, "classPK");
 

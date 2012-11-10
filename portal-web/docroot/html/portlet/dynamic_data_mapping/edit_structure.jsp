@@ -23,6 +23,8 @@ String portletResourceNamespace = ParamUtil.getString(request, "portletResourceN
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
+long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
+
 long parentStructureId = BeanParamUtil.getLong(structure, request, "parentStructureId", DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID);
 
 String parentStructureName = StringPool.BLANK;
@@ -34,8 +36,6 @@ try {
 }
 catch (NoSuchStructureException nsee) {
 }
-
-long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
 
 long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 long classPK = BeanParamUtil.getLong(structure, request, "structureId");
