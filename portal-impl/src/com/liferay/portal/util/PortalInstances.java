@@ -296,17 +296,21 @@ public class PortalInstances {
 			(ShardDataSourceTargetSource)
 				InfrastructureUtil.getShardDataSourceTargetSource();
 
-		shardDataSourceTargetSource.setDataSource(
-			PropsValues.SHARD_DEFAULT_NAME);
+		ShardSessionFactoryTargetSource shardSessionFactoryTargetSource = null;
 
-		ShardSessionFactoryTargetSource shardSessionFactoryTargetSource =
-			(ShardSessionFactoryTargetSource)
-				InfrastructureUtil.getShardSessionFactoryTargetSource();
+		if (shardDataSourceTargetSource != null) {
+			shardDataSourceTargetSource.setDataSource(
+				PropsValues.SHARD_DEFAULT_NAME);
 
-		shardSessionFactoryTargetSource.setSessionFactory(
-			PropsValues.SHARD_DEFAULT_NAME);
+			shardSessionFactoryTargetSource =
+				(ShardSessionFactoryTargetSource)
+					InfrastructureUtil.getShardSessionFactoryTargetSource();
 
-		ShardUtil.pushCompanyService(PropsValues.SHARD_DEFAULT_NAME);
+			shardSessionFactoryTargetSource.setSessionFactory(
+				PropsValues.SHARD_DEFAULT_NAME);
+
+			ShardUtil.pushCompanyService(PropsValues.SHARD_DEFAULT_NAME);
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -328,11 +332,14 @@ public class PortalInstances {
 			}
 		}
 		finally {
-			ShardUtil.popCompanyService();
+			if (shardDataSourceTargetSource != null) {
+				ShardUtil.popCompanyService();
 
-			shardSessionFactoryTargetSource.setSessionFactory(currentShardName);
+				shardSessionFactoryTargetSource.setSessionFactory(
+					currentShardName);
 
-			shardDataSourceTargetSource.setDataSource(currentShardName);
+				shardDataSourceTargetSource.setDataSource(currentShardName);
+			}
 
 			DataAccess.cleanUp(con, ps, rs);
 		}
