@@ -1147,6 +1147,10 @@ public class PortalImpl implements Portal {
 
 		boolean cdnEnabled = ParamUtil.getBoolean(request, "cdn_enabled", true);
 
+		if (!cdnEnabled) {
+			return StringPool.BLANK;
+		}
+
 		String cdnHost = null;
 
 		Company company = getCompany(request);
@@ -1158,7 +1162,7 @@ public class PortalImpl implements Portal {
 			cdnHost = getCDNHostHttp(company.getCompanyId());
 		}
 
-		if (cdnEnabled && Validator.isUrl(cdnHost)) {
+		if (Validator.isUrl(cdnHost)) {
 			return cdnHost;
 		}
 
