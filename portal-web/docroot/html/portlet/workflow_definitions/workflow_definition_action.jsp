@@ -38,6 +38,7 @@ WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 	/>
 
 	<c:if test='<%= DeployManagerUtil.isDeployed("kaleo-designer-portlet") %>'>
+
 		<%
 		String taglibOnClick = "javascript:Liferay.Util.getOpener()." + renderResponse.getNamespace() + "openKaleoDesigner('" + workflowDefinition.getName() + "', '" + workflowDefinition.getVersion() + "', '', Liferay.Util.getWindowName());";
 		%>
