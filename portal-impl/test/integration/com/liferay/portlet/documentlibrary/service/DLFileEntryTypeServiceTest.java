@@ -25,8 +25,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
@@ -104,18 +104,18 @@ public class DLFileEntryTypeServiceTest {
 
 	@Test
 	public void testAddFileEntryType() throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
 		Class<?> clazz = getClass();
 
 		byte[] testFileBytes = FileUtil.getBytes(
 			clazz.getResourceAsStream(_TEST_DDM_STRUCTURE));
 
-		ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setAttribute("xsd", new String(testFileBytes));
 
 		User user = TestPropsValues.getUser();
 
 		serviceContext.setLanguageId(LocaleUtil.toLanguageId(user.getLocale()));
-
-		serviceContext.setAttribute("xsd", new String(testFileBytes));
 
 		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
