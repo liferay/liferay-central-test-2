@@ -739,17 +739,22 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		Serializable serializableValue = searchContext.getAttribute(field);
-
 		String value = null;
 
-		if ((serializableValue != null) &&
-			serializableValue.getClass().isArray()) {
+		Serializable serializable = searchContext.getAttribute(field);
 
-			value = StringUtil.merge((Object[])serializableValue);
+		if (serializable != null) {
+			Class<?> clazz = serializable.getClass();
+
+			if (clazz.isArray()) {
+				value = StringUtil.merge((Object[])serializable);
+			}
+			else {
+				value = GetterUtil.getString(serializable);
+			}
 		}
 		else {
-			value = GetterUtil.getString(serializableValue);
+			value = GetterUtil.getString(serializable);
 		}
 
 		if (searchContext.getFacet(field) != null) {
