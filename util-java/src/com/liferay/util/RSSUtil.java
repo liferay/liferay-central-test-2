@@ -103,7 +103,6 @@ public class RSSUtil {
 
 	public static String getFeedTypeName(String feedType) {
 		String type = getFeedTypeFormat(feedType);
-		double version = getFeedTypeVersion(feedType);
 
 		if (type.equals(ATOM)) {
 			type = "Atom";
@@ -111,6 +110,8 @@ public class RSSUtil {
 		else if (type.equals(RSS)) {
 			type = "RSS";
 		}
+
+		double version = getFeedTypeVersion(feedType);
 
 		return type + StringPool.SPACE + version;
 	}

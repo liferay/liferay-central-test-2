@@ -163,6 +163,7 @@ public class EditFeedAction extends PortletAction {
 			actionRequest, "targetPortletId");
 		String contentField = ParamUtil.getString(
 			actionRequest, "contentField");
+
 		String feedType = ParamUtil.getString(
 			actionRequest, "feedType", RSSUtil.FEED_TYPE_DEFAULT);
 

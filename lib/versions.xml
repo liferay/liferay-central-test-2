@@ -2775,7 +2775,7 @@
 		<file-name>portal/rome.jar</file-name>
 		<version>1.0</version>
 		<project-name>ROME</project-name>
-		<project-url>http://rome.dev.java.net</project-url>
+		<project-url>http://java.net/projects/rome</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
