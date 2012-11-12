@@ -377,9 +377,8 @@ public class AnnouncementsEntryLocalServiceImpl
 				toName = organization.getName();
 
 				params.put(
-					"usersOrgsTree", ListUtil.fromArray(new Organization[] {
-						organization}));
-
+					"usersOrgsTree",
+					ListUtil.fromArray(new Organization[] {organization}));
 			}
 			else if (className.equals(Role.class.getName())) {
 				Role role = rolePersistence.findByPrimaryKey(classPK);
