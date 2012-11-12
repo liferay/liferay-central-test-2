@@ -83,7 +83,7 @@ if (Validator.isNull(contentField) || ((structure == null) && !contentField.equa
 	contentField = JournalFeedConstants.WEB_CONTENT_DESCRIPTION;
 }
 
-String feedFormat = BeanParamUtil.getString(feed, request, "feedType", RSSUtil.FORMAT_DEFAULT);
+String feedFormat = BeanParamUtil.getString(feed, request, "feedFormat", RSSUtil.FORMAT_DEFAULT);
 double feedVersion = BeanParamUtil.getDouble(feed, request, "feedVersion", RSSUtil.VERSION_DEFAULT);
 
 String feedType = RSSUtil.getFeedType(feedFormat, feedVersion);
@@ -307,13 +307,13 @@ if (feed != null) {
 					</c:if>
 				</aui:select>
 
-				<aui:select label="feed-type" name="feedType">
+				<aui:select name="feedType">
 
 					<%
 					for (String curFeedType : RSSUtil.FEED_TYPES) {
 					%>
 
-						<aui:option label="<%= RSSUtil.getFeedTypeName(curFeedType) %>" selected="<%= feedType.equals(curFeedType) %>" useModelValue="<%= false %>" value="<%= curFeedType %>" />
+						<aui:option label="<%= RSSUtil.getFeedTypeName(curFeedType) %>" selected="<%= feedType.equals(curFeedType) %>" value="<%= curFeedType %>" />
 
 					<%
 					}
