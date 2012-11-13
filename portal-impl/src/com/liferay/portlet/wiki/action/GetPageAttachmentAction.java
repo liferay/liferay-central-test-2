@@ -119,7 +119,7 @@ public class GetPageAttachmentAction extends PortletAction {
 			wikiPage.getGroupId(), wikiPage.getAttachmentsFolderId(), fileName);
 
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
-		
+
 		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
 		if ((status != WorkflowConstants.STATUS_IN_TRASH) &&
