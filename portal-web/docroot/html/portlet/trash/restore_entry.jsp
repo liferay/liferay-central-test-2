@@ -19,12 +19,12 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+String restoreEntryURL = ParamUtil.getString(request, "restoreEntryURL");
+
 String trashEntryId = ParamUtil.getString(request, "trashEntryId");
 
 String duplicateEntryId = ParamUtil.getString(request, "duplicateEntryId");
 String oldName = ParamUtil.getString(request, "oldName");
-
-String restoreEntryURL = ParamUtil.getString(request, "restoreEntryURL");
 %>
 
 <div class="portlet-msg-alert" id="<portlet:namespace />messageContainer">
