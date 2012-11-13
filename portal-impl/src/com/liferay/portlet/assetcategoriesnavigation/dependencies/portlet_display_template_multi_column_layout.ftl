@@ -1,6 +1,4 @@
 <#assign aui = taglibLiferayHash["/WEB-INF/tld/aui.tld"] />
-<#assign liferay_portlet = taglibLiferayHash["/WEB-INF/tld/liferay-portlet.tld"] />
-<#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
 <#assign assetCategoryService = serviceLocator.findService("com.liferay.portlet.asset.service.AssetCategoryService")>
 
@@ -8,7 +6,6 @@
 	<@aui.layout>
 		<#list entries as entry>
 			<@aui.column columnWith="25">
-
 				<div class="results-header">
 					<h3>
 						${entry.getName()}
@@ -17,27 +14,27 @@
 
 				<#assign categories = entry.getCategories()>
 
-				<@category_tree categories=categories />
+				<@displayCategories categories=categories />
 			</@aui.column>
 		</#list>
 	</@aui.layout>
 </#if>
 
-<#macro category_tree categories>
+<#macro displayCategories categories>
 	<#if categories?has_content>
 		<ul class="categories">
 			<#list categories as category>
-				<#assign categoryURL = renderResponse.createRenderURL()>
-
-				${categoryURL.setParameter("resetCur", "true")}
-				${categoryURL.setParameter("categoryId", category.getCategoryId()?string)}
-
 				<li>
+					<#assign categoryURL = renderResponse.createRenderURL()>
+
+					${categoryURL.setParameter("resetCur", "true")}
+					${categoryURL.setParameter("categoryId", category.getCategoryId()?string)}
+
 					<a href="${categoryURL}">${category.getName()}</a>
 
 					<#assign childCategories = assetCategoryService.getChildCategories(category.getCategoryId())>
 
-					<@category_tree categories=childCategories />
+					<@displayCategories categories=childCategories />
 				</li>
 			</#list>
 		</ul>
