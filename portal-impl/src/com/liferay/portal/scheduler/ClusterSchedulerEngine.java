@@ -774,13 +774,13 @@ public class ClusterSchedulerEngine
 	protected ObjectValuePair<String, StorageType> resolveGroupName(
 		String groupName) {
 
-		int pos = groupName.indexOf(CharPool.POUND);
+		int index = groupName.indexOf(CharPool.POUND);
 
-		String storageTypeString = groupName.substring(0, pos);
+		String storageTypeString = groupName.substring(0, index);
 
 		StorageType storageType = StorageType.valueOf(storageTypeString);
 
-		String orginalGroupName = groupName.substring(pos + 1);
+		String orginalGroupName = groupName.substring(index + 1);
 
 		return new ObjectValuePair<String, StorageType>(
 			orginalGroupName, storageType);
@@ -917,7 +917,9 @@ public class ClusterSchedulerEngine
 
 	private static final String _LOCK_CLASS_NAME =
 		SchedulerEngine.class.getName();
+
 	private static final String _PLUGIN_READY = "plugin.ready";
+
 	private static final String _PORTAL_READY = "portal.ready";
 
 	private static Log _log = LogFactoryUtil.getLog(

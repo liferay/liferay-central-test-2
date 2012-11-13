@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Clusterable {
 
-	Class<? extends ClusterInvokeAcceptor> acceptor()
+	public Class<? extends ClusterInvokeAcceptor> acceptor()
 		default ClusterInvokeAcceptor.class;
 
 }

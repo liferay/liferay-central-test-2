@@ -524,9 +524,10 @@ public class ClusterSchedulerEngineTest {
 
 	@Test
 	public void testSetClusterableThreadLocal1() throws Exception {
-		_clusterSchedulerEngine = _getClusterSchedulerEngine(false, 4, 2);
 
-		//Test when StorageType is StorageType.PERSISTED
+		// Persisted storage type
+
+		_clusterSchedulerEngine = _getClusterSchedulerEngine(false, 4, 2);
 
 		_clusterSchedulerEngine.delete(
 			_TEST_JOB_NAME_PREFIX + CharPool.NUMBER_0,
@@ -540,7 +541,7 @@ public class ClusterSchedulerEngineTest {
 
 		ClusterInvokeThreadLocal.setEnabled(true);
 
-		//Test when plugin is initializing
+		// Plugin is initializing
 
 		PluginContextLifecycleThreadLocal.setInitializing(true);
 
@@ -558,7 +559,7 @@ public class ClusterSchedulerEngineTest {
 
 		ClusterInvokeThreadLocal.setEnabled(true);
 
-		//Test when plugin is destorying
+		// Plugin is destroying
 
 		PluginContextLifecycleThreadLocal.setDestroying(true);
 
@@ -576,7 +577,7 @@ public class ClusterSchedulerEngineTest {
 
 		ClusterInvokeThreadLocal.setEnabled(true);
 
-		//Test when portal is not ready
+		// Portal is not ready
 
 		_clusterSchedulerEngine.shutdown();
 
@@ -712,7 +713,9 @@ public class ClusterSchedulerEngineTest {
 				_MEMORY_CLUSTER_TEST_GROUP_NAME);
 
 		for (SchedulerResponse curSchedulerResponse : schedulerResponses) {
-			if (curSchedulerResponse.getJobName().equals(_TEST_JOB_NAME_0)) {
+			String jobName = curSchedulerResponse.getJobName();
+
+			if (jobName.equals(_TEST_JOB_NAME_0)) {
 				_assertTriggerState(
 					curSchedulerResponse, TriggerState.UNSCHEDULED);
 			}
@@ -904,7 +907,7 @@ public class ClusterSchedulerEngineTest {
 	private Map<String, Serializable> _collectThreadLocalContext()
 		throws Exception {
 
-		Map<String, Serializable> context =  _threadLocalContext.get();
+		Map<String, Serializable> context = _threadLocalContext.get();
 
 		_threadLocalContext.remove();
 
@@ -1174,8 +1177,7 @@ public class ClusterSchedulerEngineTest {
 			long timestamp = System.currentTimeMillis();
 
 			_localAddress = new AddressImpl(new MockAddress(timestamp));
-			_anotherAddress=  new AddressImpl(
-				new MockAddress(timestamp + 1000));
+			_anotherAddress= new AddressImpl(new MockAddress(timestamp + 1000));
 
 			_addresses.add(_localAddress);
 			_addresses.add(_anotherAddress);
@@ -1344,8 +1346,12 @@ public class ClusterSchedulerEngineTest {
 		private String _namespaceGroupName(
 			String groupName, StorageType storageType) {
 
-			return storageType.toString().concat(StringPool.POUND).concat(
-				groupName);
+			String namespaceGroupName = storageType.toString();
+
+			namespaceGroupName = namespaceGroupName.concat(
+				StringPool.POUND).concat(groupName);
+
+			return namespaceGroupName;
 		}
 
 		private static List<Address> _addresses = new ArrayList<Address>();

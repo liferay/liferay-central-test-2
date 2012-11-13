@@ -116,6 +116,7 @@ public class ClusterableAdvice
 			clusterInvokeAcceptorClass, context);
 	}
 
+	@SuppressWarnings("unused")
 	private static Object _invoke(
 			MethodHandler methodHandler, String servletContextName,
 			String beanIdentifier,
@@ -180,15 +181,15 @@ public class ClusterableAdvice
 	private static MethodKey _invokeMethodKey = new MethodKey(
 		ClusterableAdvice.class, "_invoke", MethodHandler.class, String.class,
 		String.class, Class.class, Map.class);
-	private static Clusterable _nullClusterable =
-		new Clusterable() {
 
-			public Class<? extends Annotation> annotationType() {
-				return Clusterable.class;
-			}
+	private static Clusterable _nullClusterable = new Clusterable() {
 
 			public Class<? extends ClusterInvokeAcceptor> acceptor() {
 				return null;
+			}
+
+			public Class<? extends Annotation> annotationType() {
+				return Clusterable.class;
 			}
 
 		};

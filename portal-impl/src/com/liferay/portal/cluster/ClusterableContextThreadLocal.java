@@ -27,23 +27,24 @@ import java.util.Map;
 public class ClusterableContextThreadLocal {
 
 	public static void putThreadLocalContext(String key, Serializable value) {
-		Map<String, Serializable> context = _threadLocalContext.get();
+		Map<String, Serializable> context = _contextThreadLocal.get();
 
 		context.put(key, value);
 	}
 
 	protected static Map<String, Serializable> collectThreadLocalContext() {
-		Map<String, Serializable> context = _threadLocalContext.get();
+		Map<String, Serializable> context = _contextThreadLocal.get();
 
-		_threadLocalContext.remove();
+		_contextThreadLocal.remove();
 
 		return context;
 	}
 
 	private static ThreadLocal<HashMap<String, Serializable>>
-		_threadLocalContext =
+		_contextThreadLocal =
 			new InitialThreadLocal<HashMap<String, Serializable>>(
-				ClusterableContextThreadLocal.class.getName(),
+				ClusterableContextThreadLocal.class.getName() +
+					"._contextThreadLocal",
 				new HashMap<String, Serializable>(), true);
 
 }

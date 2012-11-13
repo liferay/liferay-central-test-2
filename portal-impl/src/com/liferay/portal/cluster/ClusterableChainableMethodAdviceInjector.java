@@ -24,7 +24,9 @@ import com.liferay.portal.util.PropsValues;
 public class ClusterableChainableMethodAdviceInjector
 	extends ChainableMethodAdviceInjector {
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public void setServletContextName(String servletContextName) {
 	}
 
