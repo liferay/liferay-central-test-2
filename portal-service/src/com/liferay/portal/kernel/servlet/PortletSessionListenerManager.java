@@ -38,7 +38,7 @@ import javax.servlet.http.HttpSessionListener;
  */
 public class PortletSessionListenerManager
 	implements HttpSessionActivationListener, HttpSessionAttributeListener,
-		HttpSessionBindingListener, HttpSessionListener {
+			   HttpSessionBindingListener, HttpSessionListener {
 
 	public static void addHttpSessionActivationListener(
 		HttpSessionActivationListener httpSessionActivationListener) {
