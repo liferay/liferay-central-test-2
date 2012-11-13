@@ -65,13 +65,14 @@ public class TikaRawMetadataProcessor extends XugglerRawMetadataProcessor {
 			_parser.parse(inputStream, contentHandler, metadata, parserContext);
 		}
 		catch (Exception e) {
-			Throwable rootCause = ExceptionUtils.getRootCause(e);
+			Throwable throwable = ExceptionUtils.getRootCause(e);
 
-			if ((rootCause instanceof CryptographyException) ||
-				(rootCause instanceof EncryptedDocumentException)) {
+			if ((throwable instanceof CryptographyException) ||
+				(throwable instanceof EncryptedDocumentException)) {
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("Cannot extract metadata from encrypted file!");
+					_log.warn(
+						"Unable to extract metadata from an encrypted file");
 				}
 			}
 			else {

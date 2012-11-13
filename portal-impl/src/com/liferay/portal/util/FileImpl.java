@@ -326,13 +326,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			}
 		}
 		catch (Exception e) {
-			Throwable rootCause = ExceptionUtils.getRootCause(e);
+			Throwable throwable = ExceptionUtils.getRootCause(e);
 
-			if ((rootCause instanceof CryptographyException) ||
-				(rootCause instanceof EncryptedDocumentException)) {
+			if ((throwable instanceof CryptographyException) ||
+				(throwable instanceof EncryptedDocumentException)) {
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("Cannot extract text from encrypted file!");
+					_log.warn("Unable to extract text from an encrypted file");
 				}
 			}
 			else {
