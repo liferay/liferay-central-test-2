@@ -145,7 +145,9 @@ public class ServletContextUtil {
 	public static String getRootPath(ServletContext servletContext)
 		throws MalformedURLException {
 
-		return getRootURI(servletContext).toString();
+		URI rootURI = getRootURI(servletContext);
+
+		return rootURI.toString();
 	}
 
 	public static URI getRootURI(ServletContext servletContext)
@@ -162,20 +164,19 @@ public class ServletContextUtil {
 
 			URI uri = rootURL.toURI();
 
-			String scheme = uri.getScheme();
-			String authority = uri.getAuthority();
 			String path = uri.getPath();
 
-			int pos = path.indexOf(_PATH_WEB_XML);
+			int index = path.indexOf(_PATH_WEB_XML);
 
-			if (pos == 0) {
+			if (index == 0) {
 				path = StringPool.SLASH;
 			}
 			else {
-				path = path.substring(0, pos);
+				path = path.substring(0, index);
 			}
 
-			rootURI = new URI(scheme, authority, path, null, null);
+			rootURI = new URI(
+				uri.getScheme(), uri.getAuthority(), path, null, null);
 
 			servletContext.setAttribute(_URI_ATTRIBUTE, rootURI);
 		}
