@@ -803,11 +803,11 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	@Override
 	public ${entity.name} toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
 	}
 
 	@Override
@@ -1050,7 +1050,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	private static ClassLoader _classLoader = ${entity.name}.class.getClassLoader();
 
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {${entity.name}.class};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {${entity.name}.class};
 
 	<#list entity.regularColList as column>
 		<#if (column.type == "Blob") && column.lazy>
@@ -1080,6 +1080,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		private long _columnBitmask;
 	</#if>
 
-	private ${entity.name} _escapedModelProxy;
+	private ${entity.name} _escapedModel;
 
 }
