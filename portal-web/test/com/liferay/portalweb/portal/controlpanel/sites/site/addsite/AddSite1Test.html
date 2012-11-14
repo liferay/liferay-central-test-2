@@ -49,8 +49,13 @@
 	<td>Sites</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//span[@title='Add']/ul/li/strong/a/span</td>
+	<td>Add</td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>link=Add</td>
+	<td>//span[@title='Add']/ul/li/strong/a/span</td>
 	<td>Add</td>
 </tr>
 <tr>
@@ -94,6 +99,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAt</td>
+	<td>//div[@id='dockbar']</td>
+	<td>Dockbar</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]</td>
+	<td>AUI Editable Min</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//li[@id='_145_mySites']/a/span</td>
 	<td>Go to</td>
@@ -120,7 +135,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>//input[@id='_134_name']</td>
+	<td>//input[@name='_134_keywords']</td>
 	<td>Site1</td>
 </tr>
 <tr>
@@ -129,8 +144,8 @@
 	<td>Search</td>
 </tr>
 <tr>
-	<td>assertPartialText</td>
-	<td>//td[1]/a</td>
+	<td>assertText</td>
+	<td>//tr[contains(.,'Site1 Name')]/td[2]/a</td>
 	<td>Site1 Name</td>
 </tr>
 </tbody></table>

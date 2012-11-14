@@ -43,8 +43,8 @@ public class AssignMembersSitesTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 				selenium.waitForPageToLoad("30000");
-				selenium.type("//input[@id='_134_name']",
-					RuntimeVariables.replace("Site Name"));
+				selenium.type("//input[@name='_134_keywords']",
+					RuntimeVariables.replace("Name"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
@@ -95,9 +95,20 @@ public class AssignMembersSitesTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isChecked("//input[@name='_174_rowIds']"));
+
+				boolean entryCheckbox = selenium.isChecked(
+						"//input[@name='_174_rowIds']");
+
+				if (entryCheckbox) {
+					label = 3;
+
+					continue;
+				}
+
 				selenium.clickAt("//input[@name='_174_rowIds']",
 					RuntimeVariables.replace("Checkbox"));
+
+			case 3:
 				assertTrue(selenium.isChecked("//input[@name='_174_rowIds']"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
