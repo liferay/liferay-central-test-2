@@ -34,8 +34,6 @@ import com.liferay.portlet.social.model.SocialActivitySettingSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -394,22 +392,6 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 	}
 
 	@Override
-	public SocialActivitySetting toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialActivitySetting)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialActivitySetting)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialActivitySettingImpl socialActivitySettingImpl = new SocialActivitySettingImpl();
 
@@ -608,5 +590,4 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 	private String _value;
 	private long _columnBitmask;
 	private SocialActivitySetting _escapedModel;
-	private SocialActivitySetting _unescapedModel;
 }

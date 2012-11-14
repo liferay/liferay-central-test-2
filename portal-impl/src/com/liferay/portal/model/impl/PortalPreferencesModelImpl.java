@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -237,22 +235,6 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 	}
 
 	@Override
-	public PortalPreferences toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PortalPreferences)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PortalPreferences)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PortalPreferencesImpl portalPreferencesImpl = new PortalPreferencesImpl();
 
@@ -406,5 +388,4 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 	private String _preferences;
 	private long _columnBitmask;
 	private PortalPreferences _escapedModel;
-	private PortalPreferences _unescapedModel;
 }

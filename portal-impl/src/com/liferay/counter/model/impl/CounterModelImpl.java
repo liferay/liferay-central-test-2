@@ -27,8 +27,6 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -158,22 +156,6 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	}
 
 	@Override
-	public Counter toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Counter)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Counter)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		CounterImpl counterImpl = new CounterImpl();
 
@@ -283,5 +265,4 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	private String _name;
 	private long _currentId;
 	private Counter _escapedModel;
-	private Counter _unescapedModel;
 }

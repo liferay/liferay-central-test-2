@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -462,22 +460,6 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	@Override
-	public Organization toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Organization)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Organization)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		OrganizationImpl organizationImpl = new OrganizationImpl();
 
@@ -720,5 +702,4 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	private String _comments;
 	private long _columnBitmask;
 	private Organization _escapedModel;
-	private Organization _unescapedModel;
 }

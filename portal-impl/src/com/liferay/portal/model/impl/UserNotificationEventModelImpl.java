@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -368,22 +366,6 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	@Override
-	public UserNotificationEvent toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (UserNotificationEvent)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (UserNotificationEvent)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		UserNotificationEventImpl userNotificationEventImpl = new UserNotificationEventImpl();
 
@@ -617,5 +599,4 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	private boolean _setOriginalArchived;
 	private long _columnBitmask;
 	private UserNotificationEvent _escapedModel;
-	private UserNotificationEvent _unescapedModel;
 }

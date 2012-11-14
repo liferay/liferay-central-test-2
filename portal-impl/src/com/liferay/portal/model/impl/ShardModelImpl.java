@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -267,22 +265,6 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	}
 
 	@Override
-	public Shard toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Shard)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Shard)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShardImpl shardImpl = new ShardImpl();
 
@@ -437,5 +419,4 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	private String _originalName;
 	private long _columnBitmask;
 	private Shard _escapedModel;
-	private Shard _unescapedModel;
 }

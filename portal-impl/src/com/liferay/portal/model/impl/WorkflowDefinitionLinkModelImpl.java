@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -469,22 +467,6 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	@Override
-	public WorkflowDefinitionLink toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (WorkflowDefinitionLink)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (WorkflowDefinitionLink)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
@@ -766,5 +748,4 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	private boolean _setOriginalWorkflowDefinitionVersion;
 	private long _columnBitmask;
 	private WorkflowDefinitionLink _escapedModel;
-	private WorkflowDefinitionLink _unescapedModel;
 }

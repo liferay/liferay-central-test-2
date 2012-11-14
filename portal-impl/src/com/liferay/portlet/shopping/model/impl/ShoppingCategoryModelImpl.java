@@ -34,8 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategorySoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -423,22 +421,6 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	@Override
-	public ShoppingCategory toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingCategory)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingCategory)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
 
@@ -692,5 +674,4 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	private String _description;
 	private long _columnBitmask;
 	private ShoppingCategory _escapedModel;
-	private ShoppingCategory _unescapedModel;
 }

@@ -34,8 +34,6 @@ import com.liferay.portlet.messageboards.model.MBCategorySoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -544,22 +542,6 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	@Override
-	public MBCategory toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBCategory)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBCategory)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
@@ -891,5 +873,4 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	private Date _lastPostDate;
 	private long _columnBitmask;
 	private MBCategory _escapedModel;
-	private MBCategory _unescapedModel;
 }

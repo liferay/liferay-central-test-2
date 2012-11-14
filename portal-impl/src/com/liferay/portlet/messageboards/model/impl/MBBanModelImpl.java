@@ -34,8 +34,6 @@ import com.liferay.portlet.messageboards.model.MBBanSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -392,22 +390,6 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	@Override
-	public MBBan toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBBan)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBBan)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBBanImpl mbBanImpl = new MBBanImpl();
 
@@ -621,5 +603,4 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	private boolean _setOriginalBanUserId;
 	private long _columnBitmask;
 	private MBBan _escapedModel;
-	private MBBan _unescapedModel;
 }

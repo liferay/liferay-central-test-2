@@ -35,8 +35,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -519,22 +517,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	@Override
-	public Phone toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Phone)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Phone)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PhoneImpl phoneImpl = new PhoneImpl();
 
@@ -809,5 +791,4 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	private boolean _setOriginalPrimary;
 	private long _columnBitmask;
 	private Phone _escapedModel;
-	private Phone _unescapedModel;
 }

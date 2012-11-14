@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -654,22 +652,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	@Override
-	public Group toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Group)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Group)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		GroupImpl groupImpl = new GroupImpl();
 
@@ -980,5 +962,4 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
 	private Group _escapedModel;
-	private Group _unescapedModel;
 }

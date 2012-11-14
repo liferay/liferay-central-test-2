@@ -32,8 +32,6 @@ import com.liferay.portlet.ratings.model.RatingsStatsModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -285,22 +283,6 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	}
 
 	@Override
-	public RatingsStats toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (RatingsStats)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (RatingsStats)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
 
@@ -468,5 +450,4 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	private double _averageScore;
 	private long _columnBitmask;
 	private RatingsStats _escapedModel;
-	private RatingsStats _unescapedModel;
 }

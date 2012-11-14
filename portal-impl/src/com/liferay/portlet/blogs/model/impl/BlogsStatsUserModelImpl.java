@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -372,22 +370,6 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	@Override
-	public BlogsStatsUser toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (BlogsStatsUser)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (BlogsStatsUser)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
 
@@ -617,5 +599,4 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	private double _ratingsAverageScore;
 	private long _columnBitmask;
 	private BlogsStatsUser _escapedModel;
-	private BlogsStatsUser _unescapedModel;
 }

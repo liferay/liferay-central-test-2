@@ -32,8 +32,6 @@ import com.liferay.portlet.social.model.SocialActivityCounterModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -469,22 +467,6 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 	}
 
 	@Override
-	public SocialActivityCounter toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialActivityCounter)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialActivityCounter)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialActivityCounterImpl socialActivityCounterImpl = new SocialActivityCounterImpl();
 
@@ -755,5 +737,4 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 	private boolean _active;
 	private long _columnBitmask;
 	private SocialActivityCounter _escapedModel;
-	private SocialActivityCounter _unescapedModel;
 }

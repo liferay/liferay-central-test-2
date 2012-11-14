@@ -32,8 +32,6 @@ import com.liferay.portlet.trash.model.TrashVersionModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -282,22 +280,6 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 	}
 
 	@Override
-	public TrashVersion toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (TrashVersion)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (TrashVersion)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		TrashVersionImpl trashVersionImpl = new TrashVersionImpl();
 
@@ -461,5 +443,4 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 	private int _status;
 	private long _columnBitmask;
 	private TrashVersion _escapedModel;
-	private TrashVersion _unescapedModel;
 }

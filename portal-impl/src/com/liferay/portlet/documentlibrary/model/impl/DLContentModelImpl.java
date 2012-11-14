@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Blob;
 import java.sql.Types;
 
@@ -353,22 +351,6 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 	}
 
 	@Override
-	public DLContent toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DLContent)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DLContent)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DLContentImpl dlContentImpl = new DLContentImpl();
 
@@ -567,5 +549,4 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 	private long _size;
 	private long _columnBitmask;
 	private DLContent _escapedModel;
-	private DLContent _unescapedModel;
 }

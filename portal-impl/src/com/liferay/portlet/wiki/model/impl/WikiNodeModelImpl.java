@@ -35,8 +35,6 @@ import com.liferay.portlet.wiki.model.WikiNodeSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -651,22 +649,6 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	}
 
 	@Override
-	public WikiNode toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (WikiNode)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (WikiNode)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
@@ -995,5 +977,4 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private WikiNode _escapedModel;
-	private WikiNode _unescapedModel;
 }

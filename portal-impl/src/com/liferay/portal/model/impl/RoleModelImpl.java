@@ -36,8 +36,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -637,22 +635,6 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	@Override
-	public Role toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Role)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Role)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		RoleImpl roleImpl = new RoleImpl();
 
@@ -890,5 +872,4 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	private String _originalSubtype;
 	private long _columnBitmask;
 	private Role _escapedModel;
-	private Role _unescapedModel;
 }

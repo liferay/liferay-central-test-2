@@ -35,8 +35,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -737,22 +735,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	}
 
 	@Override
-	public CalEvent toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (CalEvent)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (CalEvent)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		CalEventImpl calEventImpl = new CalEventImpl();
 
@@ -1184,5 +1166,4 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	private int _secondReminder;
 	private long _columnBitmask;
 	private CalEvent _escapedModel;
-	private CalEvent _unescapedModel;
 }

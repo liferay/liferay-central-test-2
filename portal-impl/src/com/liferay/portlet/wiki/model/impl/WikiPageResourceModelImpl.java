@@ -30,8 +30,6 @@ import com.liferay.portlet.wiki.model.WikiPageResourceModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -250,22 +248,6 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	@Override
-	public WikiPageResource toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (WikiPageResource)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (WikiPageResource)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
@@ -425,5 +407,4 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	private String _originalTitle;
 	private long _columnBitmask;
 	private WikiPageResource _escapedModel;
-	private WikiPageResource _unescapedModel;
 }

@@ -32,8 +32,6 @@ import com.liferay.portlet.shopping.model.ShoppingCartModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -375,22 +373,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	@Override
-	public ShoppingCart toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingCart)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingCart)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
@@ -641,5 +623,4 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	private boolean _insure;
 	private long _columnBitmask;
 	private ShoppingCart _escapedModel;
-	private ShoppingCart _unescapedModel;
 }

@@ -34,8 +34,6 @@ import com.liferay.portlet.polls.model.PollsVoteSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -403,22 +401,6 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	@Override
-	public PollsVote toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PollsVote)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PollsVote)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
@@ -650,5 +632,4 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	private Date _voteDate;
 	private long _columnBitmask;
 	private PollsVote _escapedModel;
-	private PollsVote _unescapedModel;
 }

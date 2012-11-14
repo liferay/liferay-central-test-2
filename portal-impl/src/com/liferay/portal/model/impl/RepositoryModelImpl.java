@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -554,22 +552,6 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	}
 
 	@Override
-	public Repository toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Repository)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Repository)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		RepositoryImpl repositoryImpl = new RepositoryImpl();
 
@@ -877,5 +859,4 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	private long _dlFolderId;
 	private long _columnBitmask;
 	private Repository _escapedModel;
-	private Repository _unescapedModel;
 }

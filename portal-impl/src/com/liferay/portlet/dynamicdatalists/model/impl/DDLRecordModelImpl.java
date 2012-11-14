@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -539,22 +537,6 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	@Override
-	public DDLRecord toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DDLRecord)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DDLRecord)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DDLRecordImpl ddlRecordImpl = new DDLRecordImpl();
 
@@ -857,5 +839,4 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private int _displayIndex;
 	private long _columnBitmask;
 	private DDLRecord _escapedModel;
-	private DDLRecord _unescapedModel;
 }

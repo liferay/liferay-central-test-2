@@ -35,8 +35,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -497,22 +495,6 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	@Override
-	public EmailAddress toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (EmailAddress)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (EmailAddress)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
 
@@ -773,5 +755,4 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	private boolean _setOriginalPrimary;
 	private long _columnBitmask;
 	private EmailAddress _escapedModel;
-	private EmailAddress _unescapedModel;
 }

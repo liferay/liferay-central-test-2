@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -330,22 +328,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	@Override
-	public Region toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Region)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Region)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		RegionImpl regionImpl = new RegionImpl();
 
@@ -514,5 +496,4 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
 	private Region _escapedModel;
-	private Region _unescapedModel;
 }

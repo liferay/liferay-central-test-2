@@ -34,8 +34,6 @@ import com.liferay.portlet.journal.model.JournalFeedSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -735,22 +733,6 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	@Override
-	public JournalFeed toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (JournalFeed)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (JournalFeed)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		JournalFeedImpl journalFeedImpl = new JournalFeedImpl();
 
@@ -1198,5 +1180,4 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	private double _feedVersion;
 	private long _columnBitmask;
 	private JournalFeed _escapedModel;
-	private JournalFeed _unescapedModel;
 }

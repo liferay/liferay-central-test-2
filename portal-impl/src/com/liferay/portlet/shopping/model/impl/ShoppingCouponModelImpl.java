@@ -35,8 +35,6 @@ import com.liferay.portlet.shopping.model.ShoppingCouponSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -589,22 +587,6 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	}
 
 	@Override
-	public ShoppingCoupon toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingCoupon)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingCoupon)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
@@ -959,5 +941,4 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	private String _discountType;
 	private long _columnBitmask;
 	private ShoppingCoupon _escapedModel;
-	private ShoppingCoupon _unescapedModel;
 }

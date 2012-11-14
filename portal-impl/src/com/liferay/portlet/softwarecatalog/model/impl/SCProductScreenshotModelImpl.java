@@ -29,8 +29,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -308,22 +306,6 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	@Override
-	public SCProductScreenshot toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SCProductScreenshot)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SCProductScreenshot)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
@@ -534,5 +516,4 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	private boolean _setOriginalPriority;
 	private long _columnBitmask;
 	private SCProductScreenshot _escapedModel;
-	private SCProductScreenshot _unescapedModel;
 }

@@ -29,8 +29,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemPriceModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -328,22 +326,6 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	@Override
-	public ShoppingItemPrice toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingItemPrice)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingItemPrice)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
 
@@ -565,5 +547,4 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	private int _status;
 	private long _columnBitmask;
 	private ShoppingItemPrice _escapedModel;
-	private ShoppingItemPrice _unescapedModel;
 }

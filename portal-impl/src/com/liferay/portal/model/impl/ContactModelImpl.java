@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -965,22 +963,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	@Override
-	public Contact toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Contact)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Contact)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ContactImpl contactImpl = new ContactImpl();
 
@@ -1572,5 +1554,4 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	private String _hoursOfOperation;
 	private long _columnBitmask;
 	private Contact _escapedModel;
-	private Contact _unescapedModel;
 }

@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -378,22 +376,6 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	@Override
-	public Subscription toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Subscription)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Subscription)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
 
@@ -630,5 +612,4 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	private String _frequency;
 	private long _columnBitmask;
 	private Subscription _escapedModel;
-	private Subscription _unescapedModel;
 }

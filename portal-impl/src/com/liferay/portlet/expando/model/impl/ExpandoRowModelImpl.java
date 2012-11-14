@@ -26,8 +26,6 @@ import com.liferay.portlet.expando.model.ExpandoRowModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -233,22 +231,6 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	@Override
-	public ExpandoRow toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ExpandoRow)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ExpandoRow)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
 
@@ -413,5 +395,4 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	private boolean _setOriginalClassPK;
 	private long _columnBitmask;
 	private ExpandoRow _escapedModel;
-	private ExpandoRow _unescapedModel;
 }

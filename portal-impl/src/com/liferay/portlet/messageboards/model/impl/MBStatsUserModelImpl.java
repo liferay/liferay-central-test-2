@@ -31,8 +31,6 @@ import com.liferay.portlet.messageboards.model.MBStatsUserModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -282,22 +280,6 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	}
 
 	@Override
-	public MBStatsUser toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBStatsUser)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBStatsUser)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
@@ -478,5 +460,4 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	private Date _lastPostDate;
 	private long _columnBitmask;
 	private MBStatsUser _escapedModel;
-	private MBStatsUser _unescapedModel;
 }

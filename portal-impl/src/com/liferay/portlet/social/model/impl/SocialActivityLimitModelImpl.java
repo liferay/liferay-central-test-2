@@ -33,8 +33,6 @@ import com.liferay.portlet.social.model.SocialActivityLimitModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -403,22 +401,6 @@ public class SocialActivityLimitModelImpl extends BaseModelImpl<SocialActivityLi
 	}
 
 	@Override
-	public SocialActivityLimit toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialActivityLimit)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialActivityLimit)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialActivityLimitImpl socialActivityLimitImpl = new SocialActivityLimitImpl();
 
@@ -651,5 +633,4 @@ public class SocialActivityLimitModelImpl extends BaseModelImpl<SocialActivityLi
 	private String _value;
 	private long _columnBitmask;
 	private SocialActivityLimit _escapedModel;
-	private SocialActivityLimit _unescapedModel;
 }

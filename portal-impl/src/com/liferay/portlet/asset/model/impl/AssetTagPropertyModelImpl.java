@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -414,22 +412,6 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	@Override
-	public AssetTagProperty toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (AssetTagProperty)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (AssetTagProperty)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
 
@@ -661,5 +643,4 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	private String _value;
 	private long _columnBitmask;
 	private AssetTagProperty _escapedModel;
-	private AssetTagProperty _unescapedModel;
 }

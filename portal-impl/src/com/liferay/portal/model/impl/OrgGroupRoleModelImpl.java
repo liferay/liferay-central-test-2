@@ -25,8 +25,6 @@ import com.liferay.portal.service.persistence.OrgGroupRolePK;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -201,22 +199,6 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	}
 
 	@Override
-	public OrgGroupRole toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (OrgGroupRole)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (OrgGroupRole)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
@@ -346,5 +328,4 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	private boolean _setOriginalRoleId;
 	private long _columnBitmask;
 	private OrgGroupRole _escapedModel;
-	private OrgGroupRole _unescapedModel;
 }

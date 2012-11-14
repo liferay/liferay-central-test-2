@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -684,22 +682,6 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	@Override
-	public LayoutSetBranch toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (LayoutSetBranch)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (LayoutSetBranch)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
@@ -1094,5 +1076,4 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	private boolean _layoutSetPrototypeLinkEnabled;
 	private long _columnBitmask;
 	private LayoutSetBranch _escapedModel;
-	private LayoutSetBranch _unescapedModel;
 }

@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -570,22 +568,6 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	@Override
-	public BookmarksEntry toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (BookmarksEntry)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (BookmarksEntry)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
 
@@ -922,5 +904,4 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	private int _priority;
 	private long _columnBitmask;
 	private BookmarksEntry _escapedModel;
-	private BookmarksEntry _unescapedModel;
 }

@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -294,22 +292,6 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	@Override
-	public ResourceTypePermission toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ResourceTypePermission)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ResourceTypePermission)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ResourceTypePermissionImpl resourceTypePermissionImpl = new ResourceTypePermissionImpl();
 
@@ -492,5 +474,4 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	private long _actionIds;
 	private long _columnBitmask;
 	private ResourceTypePermission _escapedModel;
-	private ResourceTypePermission _unescapedModel;
 }

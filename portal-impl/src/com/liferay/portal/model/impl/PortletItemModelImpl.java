@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -395,22 +393,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	@Override
-	public PortletItem toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PortletItem)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PortletItem)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
@@ -657,5 +639,4 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	private boolean _setOriginalClassNameId;
 	private long _columnBitmask;
 	private PortletItem _escapedModel;
-	private PortletItem _unescapedModel;
 }

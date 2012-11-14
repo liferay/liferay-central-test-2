@@ -30,8 +30,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -507,22 +505,6 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	}
 
 	@Override
-	public OrgLabor toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (OrgLabor)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (OrgLabor)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		OrgLaborImpl orgLaborImpl = new OrgLaborImpl();
 
@@ -814,5 +796,4 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	private int _satClose;
 	private long _columnBitmask;
 	private OrgLabor _escapedModel;
-	private OrgLabor _unescapedModel;
 }

@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -258,22 +256,6 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	}
 
 	@Override
-	public ServiceComponent toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ServiceComponent)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ServiceComponent)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
@@ -457,5 +439,4 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	private String _data;
 	private long _columnBitmask;
 	private ServiceComponent _escapedModel;
-	private ServiceComponent _unescapedModel;
 }

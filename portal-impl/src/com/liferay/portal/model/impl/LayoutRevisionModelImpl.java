@@ -39,8 +39,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -1398,22 +1396,6 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	@Override
-	public LayoutRevision toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (LayoutRevision)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (LayoutRevision)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
@@ -1962,5 +1944,4 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private LayoutRevision _escapedModel;
-	private LayoutRevision _unescapedModel;
 }

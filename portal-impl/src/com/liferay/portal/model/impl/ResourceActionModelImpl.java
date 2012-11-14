@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -242,22 +240,6 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	@Override
-	public ResourceAction toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ResourceAction)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ResourceAction)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
@@ -423,5 +405,4 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	private long _bitwiseValue;
 	private long _columnBitmask;
 	private ResourceAction _escapedModel;
-	private ResourceAction _unescapedModel;
 }

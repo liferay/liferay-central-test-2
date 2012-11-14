@@ -34,8 +34,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -471,22 +469,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	@Override
-	public SCFrameworkVersion toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SCFrameworkVersion)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SCFrameworkVersion)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
 
@@ -744,5 +726,4 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	private int _priority;
 	private long _columnBitmask;
 	private SCFrameworkVersion _escapedModel;
-	private SCFrameworkVersion _unescapedModel;
 }

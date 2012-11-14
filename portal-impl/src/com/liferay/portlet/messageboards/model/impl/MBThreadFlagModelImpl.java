@@ -31,8 +31,6 @@ import com.liferay.portlet.messageboards.model.MBThreadFlagModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -243,22 +241,6 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 	}
 
 	@Override
-	public MBThreadFlag toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBThreadFlag)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBThreadFlag)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBThreadFlagImpl mbThreadFlagImpl = new MBThreadFlagImpl();
 
@@ -414,5 +396,4 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 	private boolean _setOriginalThreadId;
 	private long _columnBitmask;
 	private MBThreadFlag _escapedModel;
-	private MBThreadFlag _unescapedModel;
 }

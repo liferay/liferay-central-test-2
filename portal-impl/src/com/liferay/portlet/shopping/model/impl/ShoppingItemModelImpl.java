@@ -34,8 +34,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -984,22 +982,6 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	@Override
-	public ShoppingItem toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingItem)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingItem)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingItemImpl shoppingItemImpl = new ShoppingItemImpl();
 
@@ -1549,5 +1531,4 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	private String _largeImageURL;
 	private long _columnBitmask;
 	private ShoppingItem _escapedModel;
-	private ShoppingItem _unescapedModel;
 }

@@ -32,8 +32,6 @@ import com.liferay.portlet.messageboards.model.MBMailingListModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -706,22 +704,6 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	@Override
-	public MBMailingList toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBMailingList)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBMailingList)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
@@ -1185,5 +1167,4 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
 	private MBMailingList _escapedModel;
-	private MBMailingList _unescapedModel;
 }

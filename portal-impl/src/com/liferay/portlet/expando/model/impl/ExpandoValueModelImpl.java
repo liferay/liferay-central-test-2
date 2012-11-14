@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.model.ExpandoValueSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -417,22 +415,6 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	@Override
-	public ExpandoValue toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ExpandoValue)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ExpandoValue)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
@@ -681,5 +663,4 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	private String _originalData;
 	private long _columnBitmask;
 	private ExpandoValue _escapedModel;
-	private ExpandoValue _unescapedModel;
 }

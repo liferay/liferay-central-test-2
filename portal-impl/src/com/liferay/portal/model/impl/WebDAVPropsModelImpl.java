@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -306,22 +304,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	}
 
 	@Override
-	public WebDAVProps toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (WebDAVProps)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (WebDAVProps)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
@@ -519,5 +501,4 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	private String _props;
 	private long _columnBitmask;
 	private WebDAVProps _escapedModel;
-	private WebDAVProps _unescapedModel;
 }

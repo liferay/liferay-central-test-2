@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -257,22 +255,6 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	@Override
-	public AssetTagStats toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (AssetTagStats)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (AssetTagStats)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
@@ -428,5 +410,4 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	private int _assetCount;
 	private long _columnBitmask;
 	private AssetTagStats _escapedModel;
-	private AssetTagStats _unescapedModel;
 }

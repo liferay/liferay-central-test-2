@@ -38,8 +38,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -802,22 +800,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	@Override
-	public DDMStructure toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DDMStructure)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DDMStructure)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DDMStructureImpl ddmStructureImpl = new DDMStructureImpl();
 
@@ -1168,5 +1150,4 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private int _type;
 	private long _columnBitmask;
 	private DDMStructure _escapedModel;
-	private DDMStructure _unescapedModel;
 }

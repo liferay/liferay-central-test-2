@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -528,22 +526,6 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 	}
 
 	@Override
-	public Account toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Account)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Account)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		AccountImpl accountImpl = new AccountImpl();
 
@@ -870,5 +852,4 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 	private String _type;
 	private String _size;
 	private Account _escapedModel;
-	private Account _unescapedModel;
 }

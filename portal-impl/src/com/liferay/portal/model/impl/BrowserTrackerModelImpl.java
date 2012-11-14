@@ -30,8 +30,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -212,22 +210,6 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	}
 
 	@Override
-	public BrowserTracker toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (BrowserTracker)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (BrowserTracker)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
@@ -360,5 +342,4 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	private long _browserKey;
 	private long _columnBitmask;
 	private BrowserTracker _escapedModel;
-	private BrowserTracker _unescapedModel;
 }

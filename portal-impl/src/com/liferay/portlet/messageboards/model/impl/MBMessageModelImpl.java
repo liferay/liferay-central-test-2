@@ -37,8 +37,6 @@ import com.liferay.portlet.messageboards.model.MBMessageSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -974,22 +972,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	@Override
-	public MBMessage toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBMessage)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBMessage)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
@@ -1479,5 +1461,4 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private MBMessage _escapedModel;
-	private MBMessage _unescapedModel;
 }

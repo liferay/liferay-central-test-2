@@ -27,8 +27,6 @@ import com.liferay.portal.model.ListTypeSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -247,22 +245,6 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	}
 
 	@Override
-	public ListType toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ListType)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ListType)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
@@ -402,5 +384,4 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	private String _originalType;
 	private long _columnBitmask;
 	private ListType _escapedModel;
-	private ListType _unescapedModel;
 }

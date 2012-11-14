@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -544,22 +542,6 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	}
 
 	@Override
-	public DDLRecordVersion toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DDLRecordVersion)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DDLRecordVersion)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DDLRecordVersionImpl ddlRecordVersionImpl = new DDLRecordVersionImpl();
 
@@ -854,5 +836,4 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private DDLRecordVersion _escapedModel;
-	private DDLRecordVersion _unescapedModel;
 }

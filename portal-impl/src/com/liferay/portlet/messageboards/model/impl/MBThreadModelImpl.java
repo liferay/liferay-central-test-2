@@ -36,8 +36,6 @@ import com.liferay.portlet.messageboards.model.MBThreadSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -681,22 +679,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	@Override
-	public MBThread toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MBThread)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MBThread)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MBThreadImpl mbThreadImpl = new MBThreadImpl();
 
@@ -1024,5 +1006,4 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private MBThread _escapedModel;
-	private MBThread _unescapedModel;
 }

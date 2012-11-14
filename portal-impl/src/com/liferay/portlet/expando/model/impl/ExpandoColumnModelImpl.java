@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.model.ExpandoColumnSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -337,22 +335,6 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	@Override
-	public ExpandoColumn toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ExpandoColumn)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ExpandoColumn)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
@@ -543,5 +525,4 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	private String _typeSettings;
 	private long _columnBitmask;
 	private ExpandoColumn _escapedModel;
-	private ExpandoColumn _unescapedModel;
 }

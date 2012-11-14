@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -468,22 +466,6 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	@Override
-	public DLFileEntryType toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DLFileEntryType)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DLFileEntryType)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DLFileEntryTypeImpl dlFileEntryTypeImpl = new DLFileEntryTypeImpl();
 
@@ -736,5 +718,4 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	private String _description;
 	private long _columnBitmask;
 	private DLFileEntryType _escapedModel;
-	private DLFileEntryType _unescapedModel;
 }

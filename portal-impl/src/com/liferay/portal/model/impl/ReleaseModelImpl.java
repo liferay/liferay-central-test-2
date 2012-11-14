@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -312,22 +310,6 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	@Override
-	public Release toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Release)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Release)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
@@ -549,5 +531,4 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	private String _testString;
 	private long _columnBitmask;
 	private Release _escapedModel;
-	private Release _unescapedModel;
 }

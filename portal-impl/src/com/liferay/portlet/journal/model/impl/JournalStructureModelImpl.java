@@ -38,8 +38,6 @@ import com.liferay.portlet.journal.model.JournalStructureSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -686,22 +684,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	}
 
 	@Override
-	public JournalStructure toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (JournalStructure)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (JournalStructure)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
 
@@ -1005,5 +987,4 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	private String _xsd;
 	private long _columnBitmask;
 	private JournalStructure _escapedModel;
-	private JournalStructure _unescapedModel;
 }

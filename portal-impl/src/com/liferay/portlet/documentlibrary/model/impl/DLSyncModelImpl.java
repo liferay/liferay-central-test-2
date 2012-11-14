@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -504,22 +502,6 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	}
 
 	@Override
-	public DLSync toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DLSync)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DLSync)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DLSyncImpl dlSyncImpl = new DLSyncImpl();
 
@@ -840,5 +822,4 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	private String _version;
 	private long _columnBitmask;
 	private DLSync _escapedModel;
-	private DLSync _unescapedModel;
 }

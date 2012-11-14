@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -338,22 +336,6 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	@Override
-	public UserTracker toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (UserTracker)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (UserTracker)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
 
@@ -576,5 +558,4 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	private String _userAgent;
 	private long _columnBitmask;
 	private UserTracker _escapedModel;
-	private UserTracker _unescapedModel;
 }

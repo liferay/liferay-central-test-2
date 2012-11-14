@@ -35,8 +35,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -856,22 +854,6 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	@Override
-	public DLFolder toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DLFolder)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DLFolder)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
@@ -1298,5 +1280,4 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private DLFolder _escapedModel;
-	private DLFolder _unescapedModel;
 }

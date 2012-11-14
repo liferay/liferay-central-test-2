@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -414,22 +412,6 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	}
 
 	@Override
-	public Team toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Team)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Team)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		TeamImpl teamImpl = new TeamImpl();
 
@@ -653,5 +635,4 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	private String _description;
 	private long _columnBitmask;
 	private Team _escapedModel;
-	private Team _unescapedModel;
 }

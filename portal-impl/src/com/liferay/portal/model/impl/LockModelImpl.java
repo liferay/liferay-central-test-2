@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -423,22 +421,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	@Override
-	public Lock toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Lock)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Lock)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		LockImpl lockImpl = new LockImpl();
 
@@ -708,5 +690,4 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	private Date _originalExpirationDate;
 	private long _columnBitmask;
 	private Lock _escapedModel;
-	private Lock _unescapedModel;
 }

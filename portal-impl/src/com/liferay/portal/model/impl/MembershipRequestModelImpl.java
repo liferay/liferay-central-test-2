@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -440,22 +438,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	@Override
-	public MembershipRequest toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MembershipRequest)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MembershipRequest)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
@@ -698,5 +680,4 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	private boolean _setOriginalStatusId;
 	private long _columnBitmask;
 	private MembershipRequest _escapedModel;
-	private MembershipRequest _unescapedModel;
 }

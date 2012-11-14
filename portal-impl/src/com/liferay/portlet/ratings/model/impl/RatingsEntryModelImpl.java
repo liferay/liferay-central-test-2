@@ -35,8 +35,6 @@ import com.liferay.portlet.ratings.model.RatingsEntrySoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -435,22 +433,6 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	@Override
-	public RatingsEntry toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (RatingsEntry)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (RatingsEntry)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
@@ -681,5 +663,4 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	private boolean _setOriginalScore;
 	private long _columnBitmask;
 	private RatingsEntry _escapedModel;
-	private RatingsEntry _unescapedModel;
 }

@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -354,22 +352,6 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	@Override
-	public PortletPreferences toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PortletPreferences)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PortletPreferences)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
 
@@ -558,5 +540,4 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	private String _preferences;
 	private long _columnBitmask;
 	private PortletPreferences _escapedModel;
-	private PortletPreferences _unescapedModel;
 }

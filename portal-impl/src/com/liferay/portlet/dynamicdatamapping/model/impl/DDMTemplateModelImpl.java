@@ -38,8 +38,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -916,22 +914,6 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	@Override
-	public DDMTemplate toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DDMTemplate)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DDMTemplate)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DDMTemplateImpl ddmTemplateImpl = new DDMTemplateImpl();
 
@@ -1353,5 +1335,4 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	private String _smallImageURL;
 	private long _columnBitmask;
 	private DDMTemplate _escapedModel;
-	private DDMTemplate _unescapedModel;
 }

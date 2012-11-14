@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -240,22 +238,6 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	}
 
 	@Override
-	public PasswordTracker toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PasswordTracker)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PasswordTracker)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
@@ -428,5 +410,4 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	private String _password;
 	private long _columnBitmask;
 	private PasswordTracker _escapedModel;
-	private PasswordTracker _unescapedModel;
 }

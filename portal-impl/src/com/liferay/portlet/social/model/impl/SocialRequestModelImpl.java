@@ -35,8 +35,6 @@ import com.liferay.portlet.social.model.SocialRequestSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -585,22 +583,6 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	}
 
 	@Override
-	public SocialRequest toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialRequest)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialRequest)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
 
@@ -899,5 +881,4 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	private boolean _setOriginalStatus;
 	private long _columnBitmask;
 	private SocialRequest _escapedModel;
-	private SocialRequest _unescapedModel;
 }

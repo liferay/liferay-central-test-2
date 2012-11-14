@@ -35,8 +35,6 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstanceSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -518,22 +516,6 @@ public class MDRRuleGroupInstanceModelImpl extends BaseModelImpl<MDRRuleGroupIns
 	}
 
 	@Override
-	public MDRRuleGroupInstance toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (MDRRuleGroupInstance)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (MDRRuleGroupInstance)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		MDRRuleGroupInstanceImpl mdrRuleGroupInstanceImpl = new MDRRuleGroupInstanceImpl();
 
@@ -810,5 +792,4 @@ public class MDRRuleGroupInstanceModelImpl extends BaseModelImpl<MDRRuleGroupIns
 	private int _priority;
 	private long _columnBitmask;
 	private MDRRuleGroupInstance _escapedModel;
-	private MDRRuleGroupInstance _unescapedModel;
 }

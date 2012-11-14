@@ -38,8 +38,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -1091,22 +1089,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	@Override
-	public AssetEntry toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (AssetEntry)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (AssetEntry)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
@@ -1598,5 +1580,4 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	private int _viewCount;
 	private long _columnBitmask;
 	private AssetEntry _escapedModel;
-	private AssetEntry _unescapedModel;
 }

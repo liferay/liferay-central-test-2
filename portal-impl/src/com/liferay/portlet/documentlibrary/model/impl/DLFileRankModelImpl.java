@@ -32,8 +32,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -339,22 +337,6 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	@Override
-	public DLFileRank toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (DLFileRank)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (DLFileRank)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		DLFileRankImpl dlFileRankImpl = new DLFileRankImpl();
 
@@ -558,5 +540,4 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
 	private DLFileRank _escapedModel;
-	private DLFileRank _unescapedModel;
 }

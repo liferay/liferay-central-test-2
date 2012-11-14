@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -282,22 +280,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	}
 
 	@Override
-	public UserIdMapper toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (UserIdMapper)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (UserIdMapper)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
 
@@ -474,5 +456,4 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	private String _originalExternalUserId;
 	private long _columnBitmask;
 	private UserIdMapper _escapedModel;
-	private UserIdMapper _unescapedModel;
 }

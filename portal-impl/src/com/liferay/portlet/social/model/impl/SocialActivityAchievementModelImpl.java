@@ -32,8 +32,6 @@ import com.liferay.portlet.social.model.SocialActivityAchievementModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -325,22 +323,6 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 	}
 
 	@Override
-	public SocialActivityAchievement toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialActivityAchievement)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialActivityAchievement)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialActivityAchievementImpl socialActivityAchievementImpl = new SocialActivityAchievementImpl();
 
@@ -534,5 +516,4 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 	private boolean _setOriginalFirstInGroup;
 	private long _columnBitmask;
 	private SocialActivityAchievement _escapedModel;
-	private SocialActivityAchievement _unescapedModel;
 }

@@ -35,8 +35,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -615,22 +613,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	@Override
-	public SCProductEntry toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SCProductEntry)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SCProductEntry)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
@@ -994,5 +976,4 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	private String _originalRepoArtifactId;
 	private long _columnBitmask;
 	private SCProductEntry _escapedModel;
-	private SCProductEntry _unescapedModel;
 }

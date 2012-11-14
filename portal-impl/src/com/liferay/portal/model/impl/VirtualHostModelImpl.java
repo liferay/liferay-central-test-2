@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -248,22 +246,6 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	@Override
-	public VirtualHost toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (VirtualHost)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (VirtualHost)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
@@ -420,5 +402,4 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	private String _originalHostname;
 	private long _columnBitmask;
 	private VirtualHost _escapedModel;
-	private VirtualHost _unescapedModel;
 }

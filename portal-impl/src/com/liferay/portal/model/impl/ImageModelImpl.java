@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -338,22 +336,6 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	}
 
 	@Override
-	public Image toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Image)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Image)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ImageImpl imageImpl = new ImageImpl();
 
@@ -548,5 +530,4 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	private boolean _setOriginalSize;
 	private long _columnBitmask;
 	private Image _escapedModel;
-	private Image _unescapedModel;
 }

@@ -34,8 +34,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -365,22 +363,6 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	@Override
-	public AnnouncementsDelivery toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (AnnouncementsDelivery)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (AnnouncementsDelivery)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
 
@@ -563,5 +545,4 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	private boolean _website;
 	private long _columnBitmask;
 	private AnnouncementsDelivery _escapedModel;
-	private AnnouncementsDelivery _unescapedModel;
 }

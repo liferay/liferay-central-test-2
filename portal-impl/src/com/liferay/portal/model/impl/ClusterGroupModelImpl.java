@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -214,22 +212,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	@Override
-	public ClusterGroup toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ClusterGroup)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ClusterGroup)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
@@ -373,5 +355,4 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	private String _clusterNodeIds;
 	private boolean _wholeCluster;
 	private ClusterGroup _escapedModel;
-	private ClusterGroup _unescapedModel;
 }

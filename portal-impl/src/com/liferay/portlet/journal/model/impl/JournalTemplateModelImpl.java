@@ -38,8 +38,6 @@ import com.liferay.portlet.journal.model.JournalTemplateSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -807,22 +805,6 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	@Override
-	public JournalTemplate toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (JournalTemplate)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (JournalTemplate)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		JournalTemplateImpl journalTemplateImpl = new JournalTemplateImpl();
 
@@ -1194,5 +1176,4 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	private String _smallImageURL;
 	private long _columnBitmask;
 	private JournalTemplate _escapedModel;
-	private JournalTemplate _unescapedModel;
 }

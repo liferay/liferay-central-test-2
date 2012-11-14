@@ -29,8 +29,6 @@ import com.liferay.portlet.expando.model.ExpandoTableModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -253,22 +251,6 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	}
 
 	@Override
-	public ExpandoTable toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ExpandoTable)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ExpandoTable)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
@@ -425,5 +407,4 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	private String _originalName;
 	private long _columnBitmask;
 	private ExpandoTable _escapedModel;
-	private ExpandoTable _unescapedModel;
 }

@@ -32,8 +32,6 @@ import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -358,22 +356,6 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	@Override
-	public SCLicense toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SCLicense)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SCLicense)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
 
@@ -551,5 +533,4 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	private boolean _setOriginalRecommended;
 	private long _columnBitmask;
 	private SCLicense _escapedModel;
-	private SCLicense _unescapedModel;
 }

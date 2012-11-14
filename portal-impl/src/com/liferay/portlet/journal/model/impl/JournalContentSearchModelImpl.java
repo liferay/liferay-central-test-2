@@ -30,8 +30,6 @@ import com.liferay.portlet.journal.model.JournalContentSearchModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -330,22 +328,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	@Override
-	public JournalContentSearch toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (JournalContentSearch)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (JournalContentSearch)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
@@ -547,5 +529,4 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	private String _originalArticleId;
 	private long _columnBitmask;
 	private JournalContentSearch _escapedModel;
-	private JournalContentSearch _unescapedModel;
 }

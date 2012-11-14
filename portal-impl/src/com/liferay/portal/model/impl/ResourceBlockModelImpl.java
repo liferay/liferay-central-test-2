@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -351,22 +349,6 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 	}
 
 	@Override
-	public ResourceBlock toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ResourceBlock)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ResourceBlock)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ResourceBlockImpl resourceBlockImpl = new ResourceBlockImpl();
 
@@ -552,5 +534,4 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 	private long _referenceCount;
 	private long _columnBitmask;
 	private ResourceBlock _escapedModel;
-	private ResourceBlock _unescapedModel;
 }

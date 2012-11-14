@@ -33,8 +33,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -1229,22 +1227,6 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	@Override
-	public User toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (User)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (User)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		UserImpl userImpl = new UserImpl();
 
@@ -1958,5 +1940,4 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private boolean _setOriginalStatus;
 	private long _columnBitmask;
 	private User _escapedModel;
-	private User _unescapedModel;
 }

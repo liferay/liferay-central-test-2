@@ -27,8 +27,6 @@ import com.liferay.portal.service.persistence.UserGroupGroupRolePK;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -264,22 +262,6 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	}
 
 	@Override
-	public UserGroupGroupRole toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (UserGroupGroupRole)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (UserGroupGroupRole)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		UserGroupGroupRoleImpl userGroupGroupRoleImpl = new UserGroupGroupRoleImpl();
 
@@ -415,5 +397,4 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	private boolean _setOriginalRoleId;
 	private long _columnBitmask;
 	private UserGroupGroupRole _escapedModel;
-	private UserGroupGroupRole _unescapedModel;
 }

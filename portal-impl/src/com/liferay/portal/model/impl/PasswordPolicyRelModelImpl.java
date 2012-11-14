@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -265,22 +263,6 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	@Override
-	public PasswordPolicyRel toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (PasswordPolicyRel)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (PasswordPolicyRel)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
 
@@ -434,5 +416,4 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	private boolean _setOriginalClassPK;
 	private long _columnBitmask;
 	private PasswordPolicyRel _escapedModel;
-	private PasswordPolicyRel _unescapedModel;
 }

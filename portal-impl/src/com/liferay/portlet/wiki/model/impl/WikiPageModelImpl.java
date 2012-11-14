@@ -35,8 +35,6 @@ import com.liferay.portlet.wiki.model.WikiPageSoap;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -925,22 +923,6 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	@Override
-	public WikiPage toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (WikiPage)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (WikiPage)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
@@ -1435,5 +1417,4 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	private Date _statusDate;
 	private long _columnBitmask;
 	private WikiPage _escapedModel;
-	private WikiPage _unescapedModel;
 }

@@ -33,8 +33,6 @@ import com.liferay.portlet.social.model.SocialActivityModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.HashMap;
@@ -481,22 +479,6 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	@Override
-	public SocialActivity toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (SocialActivity)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (SocialActivity)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		SocialActivityImpl socialActivityImpl = new SocialActivityImpl();
 
@@ -772,5 +754,4 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	private boolean _setOriginalReceiverUserId;
 	private long _columnBitmask;
 	private SocialActivity _escapedModel;
-	private SocialActivity _unescapedModel;
 }

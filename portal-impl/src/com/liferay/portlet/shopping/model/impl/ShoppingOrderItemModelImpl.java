@@ -30,8 +30,6 @@ import com.liferay.portlet.shopping.model.ShoppingOrderItemModel;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -348,22 +346,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	@Override
-	public ShoppingOrderItem toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (ShoppingOrderItem)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (ShoppingOrderItem)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
@@ -606,5 +588,4 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	private Date _shippedDate;
 	private long _columnBitmask;
 	private ShoppingOrderItem _escapedModel;
-	private ShoppingOrderItem _unescapedModel;
 }

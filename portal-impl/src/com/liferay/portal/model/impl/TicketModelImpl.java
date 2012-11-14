@@ -31,8 +31,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationHandler;
-
 import java.sql.Types;
 
 import java.util.Date;
@@ -332,22 +330,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	}
 
 	@Override
-	public Ticket toUnescapedModel() {
-		if (ProxyUtil.isProxyClass(getClass())) {
-			InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(this);
-
-			AutoEscapeBeanHandler autoEscapeBeanHandler = (AutoEscapeBeanHandler)invocationHandler;
-
-			_unescapedModel = (Ticket)autoEscapeBeanHandler.getBean();
-		}
-		else {
-			_unescapedModel = (Ticket)this;
-		}
-
-		return _unescapedModel;
-	}
-
-	@Override
 	public Object clone() {
 		TicketImpl ticketImpl = new TicketImpl();
 
@@ -566,5 +548,4 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	private Date _expirationDate;
 	private long _columnBitmask;
 	private Ticket _escapedModel;
-	private Ticket _unescapedModel;
 }
