@@ -85,7 +85,7 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	}
 
 	public T toUnescapedModel() {
-		return (T)this;
+		return (T) this;
 	}
 
 	protected Locale getLocale(String languageId) {
