@@ -1,7 +1,5 @@
 <#assign aui = taglibLiferayHash["/WEB-INF/tld/aui.tld"] />
 
-<#assign assetCategoryService = serviceLocator.findService("com.liferay.portlet.asset.service.AssetCategoryService")>
-
 <#if entries?has_content>
 	<@aui.layout>
 		<#list entries as entry>
@@ -31,6 +29,8 @@
 					${categoryURL.setParameter("categoryId", category.getCategoryId()?string)}
 
 					<a href="${categoryURL}">${category.getName()}</a>
+
+					<#assign assetCategoryService = serviceLocator.findService("com.liferay.portlet.asset.service.AssetCategoryService")>
 
 					<#assign childCategories = assetCategoryService.getChildCategories(category.getCategoryId())>
 
