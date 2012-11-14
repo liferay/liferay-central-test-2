@@ -279,7 +279,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, boolean subscribed,
 			boolean includeAnonymous, QueryDefinition queryDefinition)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (userId <= 0) {
 			return getGroupThreads(groupId, queryDefinition);
@@ -305,7 +305,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, boolean subscribed,
 			QueryDefinition queryDefinition)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getGroupThreads(
 			groupId, userId, subscribed, true, queryDefinition);
@@ -318,7 +318,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, null);
@@ -334,7 +334,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, null);
@@ -348,7 +348,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	 */
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, null);
@@ -358,7 +358,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, QueryDefinition queryDefinition)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getGroupThreads(groupId, userId, false, queryDefinition);
 	}

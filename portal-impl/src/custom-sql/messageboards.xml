@@ -156,17 +156,6 @@
 				MAX(currentMessage.modifiedDate) DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_C">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
-			FROM
-				MBThread
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBThread.categoryId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U">
 		<![CDATA[
 			SELECT
@@ -182,20 +171,15 @@
 				(MBMessage.categoryId != -1)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_A">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_C">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
 			FROM
 				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBThread.threadId = MBMessage.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?) AND
-				(MBMessage.categoryId != -1) AND
-				(MBMessage.anonymous = ?)
+				(MBThread.categoryId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_C">
@@ -213,7 +197,7 @@
 				(MBMessage.userId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_MD">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_LPD">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
@@ -227,6 +211,22 @@
 				(MBThread.categoryId != -1) AND
 				(MBThread.lastPostDate > ?) AND
 				(MBMessage.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_U_A">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBThread.threadId = MBMessage.threadId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBMessage.userId = ?) AND
+				(MBMessage.categoryId != -1) AND
+				(MBMessage.anonymous = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByS_G_U">
@@ -296,20 +296,6 @@
 				(categoryId != -1)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_C">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBThread.*}
-			FROM
-				MBThread
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBThread.categoryId = ?)
-			ORDER BY
-				MBThread.priority DESC,
-				MBThread.lastPostDate DESC
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U">
 		<![CDATA[
 			SELECT
@@ -328,20 +314,15 @@
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U_A">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_C">
 		<![CDATA[
 			SELECT
 				DISTINCT {MBThread.*}
 			FROM
 				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBThread.threadId = MBMessage.threadId)
 			WHERE
 				(MBThread.groupId = ?) AND
-				(MBMessage.userId = ?) AND
-				(MBMessage.categoryId != -1) AND
-				(MBMessage.anonymous = ?)
+				(MBThread.categoryId = ?)
 			ORDER BY
 				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
@@ -365,7 +346,7 @@
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U_MD">
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U_LPD">
 		<![CDATA[
 			SELECT
 				DISTINCT {MBThread.*}
@@ -380,6 +361,25 @@
 				(MBThread.lastPostDate > ?) AND
 				(MBMessage.userId = ?)
 			ORDER BY
+				MBThread.lastPostDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_U_A">
+		<![CDATA[
+			SELECT
+				DISTINCT {MBThread.*}
+			FROM
+				MBThread
+			INNER JOIN
+				MBMessage ON
+					(MBThread.threadId = MBMessage.threadId)
+			WHERE
+				(MBThread.groupId = ?) AND
+				(MBMessage.userId = ?) AND
+				(MBMessage.categoryId != -1) AND
+				(MBMessage.anonymous = ?)
+			ORDER BY
+				MBThread.priority DESC,
 				MBThread.lastPostDate DESC
 		]]>
 	</sql>
