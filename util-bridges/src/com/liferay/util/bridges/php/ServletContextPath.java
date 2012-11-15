@@ -44,39 +44,16 @@ public class ServletContextPath extends FilesystemPath {
 
 		_servletContext = servletContext;
 
+		_root = this;
+
 		try {
 			_rootURI = ServletContextUtil.getRootURI(_servletContext);
 		}
-		catch (MalformedURLException e) {
+		catch (MalformedURLException murle) {
 			throw new IllegalStateException();
 		}
 
 		_useRootURI = true;
-
-		_root = this;
-	}
-
-	protected ServletContextPath(
-		FilesystemPath root, ServletContext servletContext, String userPath,
-		String path) {
-
-		super(root, userPath, path);
-
-		_servletContext = servletContext;
-
-		try {
-			_rootURI = ServletContextUtil.getRootURI(_servletContext);
-		}
-		catch (MalformedURLException e) {
-			throw new IllegalStateException();
-		}
-
-		if (userPath.startsWith(_rootURI.toString())) {
-			_useRootURI = true;
-		}
-		else {
-			_useRootURI = false;
-		}
 	}
 
 	@Override
@@ -91,14 +68,14 @@ public class ServletContextPath extends FilesystemPath {
 		String authority = _rootURI.getAuthority();
 
 		if (Validator.isNotNull(authority)) {
-			int pos = path.indexOf(authority);
+			int index = path.indexOf(authority);
 
-			if (pos != -1) {
-				path = path.substring(pos + authority.length());
+			if (index != -1) {
+				path = path.substring(index + authority.length());
 			}
 		}
 
-		return new ServletContextPath(_root, _servletContext, userPath, path);
+		return new ServletContextPath(_root, userPath, path, _servletContext);
 	}
 
 	@Override
@@ -114,13 +91,31 @@ public class ServletContextPath extends FilesystemPath {
 	public StreamImpl openReadImpl() throws IOException {
 		String path = getPath();
 
-		URL resourceURL = _servletContext.getResource(path);
+		URL url = _servletContext.getResource(path);
 
-		if (resourceURL == null) {
+		if (url == null) {
 			throw new FileNotFoundException(getFullPath());
 		}
 
-		return new VfsStream(resourceURL.openStream(), null);
+		return new VfsStream(url.openStream(), null);
+	}
+
+	protected ServletContextPath(
+		FilesystemPath root, String userPath, String path,
+		ServletContext servletContext) {
+
+		super(root, userPath, path);
+
+		_servletContext = servletContext;
+
+		try {
+			_rootURI = ServletContextUtil.getRootURI(_servletContext);
+		}
+		catch (MalformedURLException murle) {
+			throw new IllegalStateException();
+		}
+
+		_useRootURI = userPath.startsWith(_rootURI.toString());
 	}
 
 	private URI _rootURI;
