@@ -15,7 +15,7 @@
 package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.upgrade.BaseUpgradeAttachments;
+import com.liferay.portal.kernel.upgrade.v6_2_0.BaseUpgradeAttachments;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
