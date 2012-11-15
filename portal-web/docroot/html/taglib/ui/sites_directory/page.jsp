@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.taglib.ui.SitesDirectoryTag" %>
-
 <%--
 /**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
@@ -29,16 +27,16 @@
 	branchGroups.add(group);
 	branchGroups.addAll(group.getAncestors());
 
-	if (sites.equals(SitesDirectoryTag.TOP_LEVEL)) {
+	if (sites.equals(SitesDirectoryTag.SITES_TOP_LEVEL)) {
 		rootGroup = null;
 	}
-	else if (sites.equals(SitesDirectoryTag.CHILDREN) && (branchGroups.size() > 0)) {
+	else if (sites.equals(SitesDirectoryTag.SITES_CHILDREN) && (branchGroups.size() > 0)) {
 		rootGroup = branchGroups.get(0);
 	}
-	else if (sites.equals(SitesDirectoryTag.SIBLINGS) && (branchGroups.size() > 1)) {
+	else if (sites.equals(SitesDirectoryTag.SITES_SIBLINGS) && (branchGroups.size() > 1)) {
 		rootGroup = branchGroups.get(1);
 	}
-	else if (sites.equals(SitesDirectoryTag.PARENT) && (branchGroups.size() > 2)) {
+	else if (sites.equals(SitesDirectoryTag.SITES_PARENT) && (branchGroups.size() > 2)) {
 		rootGroup = branchGroups.get(2);
 	}
 	else {
@@ -131,13 +129,7 @@
 					<%
 					StringBundler sb = new StringBundler();
 
-					boolean showHierarchy = false;
-
-					if (displayStyle.equals("list-hierarchy")) {
-						showHierarchy = true;
-					}
-
-					_buildSitesList(rootGroup, group, branchGroups, themeDisplay, 1, showHierarchy, true, sb);
+					_buildSitesList(rootGroup, group, branchGroups, themeDisplay, 1, displayStyle.equals("list-hierarchy"), true, sb);
 
 					String content = sb.toString();
 					%>

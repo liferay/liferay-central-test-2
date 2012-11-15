@@ -30,10 +30,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<aui:fieldset column="<%= true %>">
 				<aui:select name="preferences--sites--">
-					<aui:option label="<%= SitesDirectoryTag.TOP_LEVEL %>" selected="<%= sites.equals(SitesDirectoryTag.TOP_LEVEL) %>" />
-					<aui:option label="<%= SitesDirectoryTag.PARENT %>" selected="<%= sites.equals(SitesDirectoryTag.PARENT) %>" />
-					<aui:option label="<%= SitesDirectoryTag.SIBLINGS %>" selected="<%= sites.equals(SitesDirectoryTag.SIBLINGS) %>" />
-					<aui:option label="<%= SitesDirectoryTag.CHILDREN %>" selected="<%= sites.equals(SitesDirectoryTag.CHILDREN) %>" />
+					<aui:option label="<%= SitesDirectoryTag.SITES_TOP_LEVEL %>" selected="<%= sites.equals(SitesDirectoryTag.SITES_TOP_LEVEL) %>" />
+					<aui:option label="<%= SitesDirectoryTag.SITES_PARENT %>" selected="<%= sites.equals(SitesDirectoryTag.SITES_PARENT) %>" />
+					<aui:option label="<%= SitesDirectoryTag.SITES_SIBLINGS %>" selected="<%= sites.equals(SitesDirectoryTag.SITES_SIBLINGS) %>" />
+					<aui:option label="<%= SitesDirectoryTag.SITES_CHILDREN %>" selected="<%= sites.equals(SitesDirectoryTag.SITES_CHILDREN) %>" />
 				</aui:select>
 
 				<aui:select name="preferences--displayStyle--">

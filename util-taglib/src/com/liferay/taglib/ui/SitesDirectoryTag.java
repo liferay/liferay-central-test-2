@@ -23,10 +23,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SitesDirectoryTag extends IncludeTag {
 
-	public static final String CHILDREN = "children";
-	public static final String PARENT = "parent";
-	public static final String SIBLINGS = "siblings";
-	public static final String TOP_LEVEL = "top-level";
+	public static final String SITES_CHILDREN = "children";
+
+	public static final String SITES_PARENT = "parent";
+
+	public static final String SITES_SIBLINGS = "siblings";
+
+	public static final String SITES_TOP_LEVEL = "top-level";
 
 	public void setDisplayStyle(String displayStyle) {
 		_displayStyle = displayStyle;
@@ -39,7 +42,7 @@ public class SitesDirectoryTag extends IncludeTag {
 	@Override
 	protected void cleanUp() {
 		_displayStyle = "descriptive";
-		_sites = TOP_LEVEL;
+		_sites = SITES_TOP_LEVEL;
 	}
 
 	@Override
@@ -59,6 +62,6 @@ public class SitesDirectoryTag extends IncludeTag {
 		"/html/taglib/ui/sites_directory/page.jsp";
 
 	private String _displayStyle = "descriptive";
-	private String _sites = TOP_LEVEL;
+	private String _sites = SITES_TOP_LEVEL;
 
 }
