@@ -83,8 +83,8 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		String subject = SUBJECT;
-		String body = BODY;
+		String subject = _SUBJECT;
+		String body = _BODY;
 		String format = MBMessageConstants.DEFAULT_FORMAT;
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -130,7 +130,7 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected String getSearchKeywords() {
-		return SUBJECT;
+		return _SUBJECT;
 	}
 
 	@Override
@@ -153,8 +153,8 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 		MBThreadServiceUtil.moveThreadToTrash(primaryKey);
 	}
 
-	private static final String BODY = "Body";
+	private static final String _BODY = "Body";
 
-	private static final String SUBJECT = "Subject";
+	private static final String _SUBJECT = "Subject";
 
 }
