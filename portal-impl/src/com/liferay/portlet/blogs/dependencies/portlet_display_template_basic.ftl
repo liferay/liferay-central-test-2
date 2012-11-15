@@ -1,13 +1,13 @@
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
 <#list entries as entry>
-	<#assign viewURL = renderResponse.createRenderURL() />
-
-	${viewURL.setParameter("struts_action", "/blogs/view_entry")}
-	${viewURL.setParameter("redirect", currentURL)}
-	${viewURL.setParameter("urlTitle", entry.getUrlTitle())}
-
 	<div class="entry">
+		<#assign viewURL = renderResponse.createRenderURL() />
+
+		${viewURL.setParameter("struts_action", "/blogs/view_entry")}
+		${viewURL.setParameter("redirect", currentURL)}
+		${viewURL.setParameter("urlTitle", entry.getUrlTitle())}
+
 		<div class="entry-content">
 			<div class="entry-title">
 				<h2><a href="${viewURL}">${htmlUtil.escape(entry.getTitle())}</a></h2>
