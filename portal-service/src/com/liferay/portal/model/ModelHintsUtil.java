@@ -69,7 +69,8 @@ public class ModelHintsUtil {
 	}
 
 	public static String getValue(
-			String model, String field, String name, String defaultValue) {
+		String model, String field, String name, String defaultValue) {
+
 		return getModelHints().getValue(model, field, name, defaultValue);
 	}
 
