@@ -33,8 +33,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
-import java.util.Date;
-
 /**
  * @author Eudaldo Alonso
  */
@@ -166,17 +164,15 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 	}
 
 	protected long addDLFolder(
-			long groupId, long companyId, long userId, String userName,
-			Timestamp createDate, long repositoryId, long parentFolderId,
-			String name, boolean hidden)
+			long folderId, long groupId, long companyId, long userId,
+			String userName, Timestamp createDate, long repositoryId,
+			long parentFolderId, String name, boolean hidden)
 		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 
 		try {
-			long folderId = increment();
-
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			StringBundler sb = new StringBundler(8);
@@ -233,8 +229,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		long repositoryId = increment();
 
 		long folderId = addDLFolder(
-			groupId, companyId, userId, userName, createDate, repositoryId,
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, portletId, true);
+			increment(), groupId, companyId, userId, userName, createDate,
+			repositoryId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, portletId,
+			true);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -345,8 +342,8 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		}
 
 		return addDLFolder(
-			groupId, companyId, userId, userName, createDate, repositoryId,
-			parentFolderId, name, hidden);
+			increment(), groupId, companyId, userId, userName, createDate,
+			repositoryId, parentFolderId, name, hidden);
 	}
 
 	protected abstract String getPortletId();
@@ -401,14 +398,11 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			return;
 		}
 
-		Date date = new Date();
-
-		Timestamp createDate = new Timestamp(date.getTime());
+		Timestamp createDate = new Timestamp(System.currentTimeMillis());
 
 		long repositoryId = getRepositoryId(
 			groupId, companyId, userId, userName, createDate, getClassNameId(),
 			getPortletId());
-
 		long containerFolderId = getContainerFolderId(
 			groupId, companyId, resourcePrimKey, containerId, userId, userName,
 			createDate);
@@ -419,12 +413,12 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			String title = FileUtil.getShortFileName(attachment);
 
-			long size = DLStoreUtil.getFileSize(
-				companyId, CompanyConstants.SYSTEM, attachment);
-
 			String extension = FileUtil.getExtension(title);
 
 			String mimeType = MimeTypesUtil.getContentType(extension);
+
+			long size = DLStoreUtil.getFileSize(
+				companyId, CompanyConstants.SYSTEM, attachment);
 
 			long fileEntryId = addDLFileEntry(
 				groupId, companyId, userId, userName, createDate, repositoryId,
@@ -448,7 +442,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Can't not delete the attachment " + attachment, e);
+						"Unable to delete the attachment " + attachment, e);
 				}
 			}
 		}
@@ -461,7 +455,8 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Can't delete the directory " + getDirName(resourcePrimKey),
+					"Unable to delete the directory " +
+						getDirName(resourcePrimKey),
 					e);
 			}
 		}
