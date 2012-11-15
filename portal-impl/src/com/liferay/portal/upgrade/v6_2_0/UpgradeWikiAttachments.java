@@ -82,18 +82,18 @@ public class UpgradeWikiAttachments extends BaseUpgradeAttachments {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select resourcePrimKey, nodeId, companyId, groupId, userId, " +
-					"userName from WikiPage group by resourcePrimKey");
+				"select resourcePrimKey, groupId, companyId, userId, " +
+					"userName, nodeId from WikiPage group by resourcePrimKey");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long resourcePrimKey = rs.getLong("resourcePrimKey");
-				long nodeId = rs.getLong("nodeId");
-				long companyId = rs.getLong("companyId");
 				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
 				String userName = rs.getString("userName");
+				long nodeId = rs.getLong("nodeId");
 
 				updateEntryAttachments(
 					companyId, groupId, resourcePrimKey, nodeId, userId,
