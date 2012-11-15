@@ -64,30 +64,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "att
 	/>
 </c:if>
 
-<%
-String emptyResultsMessage = null;
-
-if (viewTrashAttachments) {
-	emptyResultsMessage = "this-page-does-not-have-file-attachments-in-the-recycle-bin";
-}
-else {
-	emptyResultsMessage = "this-page-does-not-have-file-attachments";
-}
-
-int status = WorkflowConstants.STATUS_APPROVED;
-
-if (viewTrashAttachments) {
-	status = WorkflowConstants.STATUS_IN_TRASH;
-}
-
-PortletURL iteratorURL = renderResponse.createRenderURL();
-
-iteratorURL.setParameter("struts_action", "/wiki/view_page_attachments");
-iteratorURL.setParameter("redirect", currentURL);
-iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-iteratorURL.setParameter("viewTrashAttachments", String.valueOf(viewTrashAttachments));
-%>
-
 <c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>">
 	<c:choose>
 		<c:when test="<%= viewTrashAttachments %>">
@@ -139,6 +115,24 @@ iteratorURL.setParameter("viewTrashAttachments", String.valueOf(viewTrashAttachm
 	<br />
 </c:if>
 
+<%
+String emptyResultsMessage = null;
+
+if (viewTrashAttachments) {
+	emptyResultsMessage = "this-page-does-not-have-file-attachments-in-the-recycle-bin";
+}
+else {
+	emptyResultsMessage = "this-page-does-not-have-file-attachments";
+}
+
+PortletURL iteratorURL = renderResponse.createRenderURL();
+
+iteratorURL.setParameter("struts_action", "/wiki/view_page_attachments");
+iteratorURL.setParameter("redirect", currentURL);
+iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+iteratorURL.setParameter("viewTrashAttachments", String.valueOf(viewTrashAttachments));
+%>
+
 <liferay-ui:search-container
 	emptyResultsMessage="<%= emptyResultsMessage %>"
 	iteratorURL="<%= iteratorURL %>"
@@ -168,6 +162,12 @@ iteratorURL.setParameter("viewTrashAttachments", String.valueOf(viewTrashAttachm
 
 		<%
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
+
+		int status = WorkflowConstants.STATUS_APPROVED;
+
+		if (viewTrashAttachments) {
+			status = WorkflowConstants.STATUS_IN_TRASH;
+		}
 		%>
 
 		<liferay-portlet:actionURL varImpl="rowURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
