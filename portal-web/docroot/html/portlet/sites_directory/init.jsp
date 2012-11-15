@@ -16,6 +16,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.taglib.ui.SitesDirectoryTag" %>
+
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
@@ -26,7 +28,7 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String displayStyle = PrefsParamUtil.getString(preferences, renderRequest, "displayStyle", "descriptive");
-String sites = PrefsParamUtil.getString(preferences, renderRequest, "sites", SitesDirectoryTag.TOP_LEVEL);
+String sites = PrefsParamUtil.getString(preferences, renderRequest, "sites", SitesDirectoryTag.SITES_TOP_LEVEL);
 %>
 
 <%@ include file="/html/portlet/sites_directory/init-ext.jsp" %>

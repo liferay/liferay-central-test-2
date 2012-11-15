@@ -16,6 +16,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.taglib.ui.SitesDirectoryTag" %>
+
 <%
 String displayStyle = (String)request.getAttribute("liferay-ui:sites-directory:displayStyle");
 String sites = (String)request.getAttribute("liferay-ui:sites-directory:sites");
