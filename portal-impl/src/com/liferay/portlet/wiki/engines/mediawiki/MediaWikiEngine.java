@@ -170,9 +170,9 @@ public class MediaWikiEngine implements WikiEngine {
 		try {
 			content = page.getContent();
 
-			DirectTagMatcher attachmentTagMatcher = new DirectTagMatcher(page);
+			DirectTagMatcher directTagMatcher = new DirectTagMatcher(page);
 
-			String tagMatch = attachmentTagMatcher.replaceMatches(content);
+			String tagMatch = directTagMatcher.replaceMatches(content);
 
 			if (tagMatch != null) {
 				content = tagMatch;

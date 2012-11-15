@@ -34,7 +34,7 @@ public class DirectURLMatcher extends CallbackMatcher {
 		_page = page;
 		_attachmentURLPrefix = attachmentURLPrefix;
 
-		setRegex(_REGEX);
+		setRegex(_URL_REGEX);
 	}
 
 	public String replaceMatches(
@@ -47,12 +47,12 @@ public class DirectURLMatcher extends CallbackMatcher {
 		return replaceMatches(charSequence, _callBack);
 	}
 
-	private static final String _REGEX =
-		"<a href=\"[^\"]*?Special:Edit[^\"]*?topic=[^\"]*?\".*?title=\"" +
-			"([^\"]*?)\".*?>(.*?)</a>";
-
 	private static final String _UNDERSCORE_REGEX =
 		"<p>([^|<]*)[|]*?([^|<]*)<\\/p>";
+
+	private static final String _URL_REGEX =
+		"<a href=\"[^\"]*?Special:Edit[^\"]*?topic=[^\"]*?\".*?title=\"" +
+			"([^\"]*?)\".*?>(.*?)</a>";
 
 	private String _attachmentURLPrefix;
 
