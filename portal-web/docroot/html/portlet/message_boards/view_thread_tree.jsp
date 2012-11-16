@@ -37,6 +37,7 @@ if (treeWalker.isOdd()) {
 %>
 
 <c:if test="<%= !Validator.equals(message.getMessageId(), selMessage.getMessageId()) || MBUtil.isViewableMessage(themeDisplay, message) %>">
+
 	<%
 	request.setAttribute("edit_message.jsp-category", category);
 	request.setAttribute("edit_message.jsp-className", className);

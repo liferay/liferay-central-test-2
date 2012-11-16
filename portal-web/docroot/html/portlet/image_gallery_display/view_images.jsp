@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/image_gallery_display/init.jsp" %>
 
 <%
-Long folderId = (Long) request.getAttribute("view.jsp-folderId");
-String[] mediaGalleryMimeTypes = (String []) request.getAttribute("view.jsp-mediaGalleryMimeTypes");
-List results = (List) request.getAttribute("view.jsp-results");
-SearchContainer searchContainer = (SearchContainer) request.getAttribute("view.jsp-searchContainer");
+Long folderId = (Long)request.getAttribute("view.jsp-folderId");
+String[] mediaGalleryMimeTypes = (String[])request.getAttribute("view.jsp-mediaGalleryMimeTypes");
+List results = (List)request.getAttribute("view.jsp-results");
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("view.jsp-searchContainer");
 %>
 
 <c:choose>

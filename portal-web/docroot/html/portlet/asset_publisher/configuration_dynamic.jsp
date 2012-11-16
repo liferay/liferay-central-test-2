@@ -17,11 +17,11 @@
 <%@ include file="/html/portlet/asset_publisher/init.jsp" %>
 
 <%
-List<AssetRendererFactory> classTypesAssetRendererFactories = (List<AssetRendererFactory>) request.getAttribute("configuration.jsp-classTypesAssetRendererFactories");
-PortletURL configurationRenderURL = (PortletURL) request.getAttribute("configuration.jsp-configurationRenderURL");
-String redirect = (String) request.getAttribute("configuration.jsp-redirect");
-String rootPortletId = (String) request.getAttribute("configuration.jsp-rootPortletId");
-String selectScope = (String) request.getAttribute("configuration.jsp-selectScope");
+List<AssetRendererFactory> classTypesAssetRendererFactories = (List<AssetRendererFactory>)request.getAttribute("configuration.jsp-classTypesAssetRendererFactories");
+PortletURL configurationRenderURL = (PortletURL)request.getAttribute("configuration.jsp-configurationRenderURL");
+String redirect = (String)request.getAttribute("configuration.jsp-redirect");
+String rootPortletId = (String)request.getAttribute("configuration.jsp-rootPortletId");
+String selectScope = (String)request.getAttribute("configuration.jsp-selectScope");
 %>
 
 <liferay-ui:panel-container extended="<%= true %>" id="assetPublisherDynamicSelectionStylePanelContainer" persistState="<%= true %>">
