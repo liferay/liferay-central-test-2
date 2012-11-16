@@ -53,8 +53,8 @@ public class DeactivateStagingSitesNavigatingStagingTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Edit Settings"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Edit Settings')]"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Edit Settings')]"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Edit Settings')]",
+			RuntimeVariables.replace("Edit Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.waitForVisible("//a[@id='_165_stagingLink']");
 		assertTrue(selenium.isPartialText("//a[@id='_165_stagingLink']",
@@ -97,8 +97,8 @@ public class DeactivateStagingSitesNavigatingStagingTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Edit Settings"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Edit Settings')]/a"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Edit Settings')]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Edit Settings')]/a",
+			RuntimeVariables.replace("Edit Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.waitForVisible("//a[@id='_165_stagingLink']");
 		assertTrue(selenium.isPartialText("//a[@id='_165_stagingLink']",

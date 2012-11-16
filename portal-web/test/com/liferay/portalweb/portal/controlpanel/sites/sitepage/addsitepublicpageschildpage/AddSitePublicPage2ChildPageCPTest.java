@@ -82,8 +82,8 @@ public class AddSitePublicPage2ChildPageCPTest extends BaseTestCase {
 					"//input[@id='_156_addLayoutName_en_US']");
 				selenium.type("//input[@id='_156_addLayoutName_en_US']",
 					RuntimeVariables.replace("Public Page2 Child Page"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Page']"));
+				selenium.clickAt("//input[@value='Add Page']",
+					RuntimeVariables.replace("Add Page"));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),

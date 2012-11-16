@@ -52,8 +52,8 @@ public class AddSitesInactiveTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("Blank Site"),
 					selenium.getText(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Blank Site')]"));
-				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Blank Site')]"));
+				selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Blank Site')]",
+					RuntimeVariables.replace("Blank Site"));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("//input[@id='_134_name']",
 					RuntimeVariables.replace("Site Name"));

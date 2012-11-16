@@ -43,8 +43,8 @@ public class ViewSiteTeamTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Site Name"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Site Name')]"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Site Name')]"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Site Name')]",
+			RuntimeVariables.replace("Site Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Site Memberships",
 			RuntimeVariables.replace("Site Memberships"));
@@ -59,14 +59,17 @@ public class ViewSiteTeamTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("\u00ab Back"),
 			selenium.getText("//span[@class='header-back-to']/a"));
 		assertEquals(RuntimeVariables.replace("View Members"),
-			selenium.getText("//div[@class='lfr-portlet-toolbar']/span[1]"));
+			selenium.getText(
+				"//div[@class='lfr-portlet-toolbar']/span[@class='lfr-toolbar-button view-button ']"));
 		assertTrue(selenium.isPartialText(
-				"//div[@class='lfr-portlet-toolbar']/span[2]", "Add Members"));
+				"//div[@class='lfr-portlet-toolbar']/span[@title='Add Members']",
+				"Add Members"));
 		assertTrue(selenium.isPartialText(
-				"//div[@class='lfr-portlet-toolbar']/span[3]",
+				"//div[@class='lfr-portlet-toolbar']/span[@title='Add Site Roles to']",
 				"Add Site Roles to"));
 		assertEquals(RuntimeVariables.replace("View Teams"),
-			selenium.getText("//div[@class='lfr-portlet-toolbar']/span[4]"));
+			selenium.getText(
+				"//div[@class='lfr-portlet-toolbar']/span[@class='lfr-toolbar-button teams-button current']"));
 		assertTrue(selenium.isVisible("//input[@id='_174_name']"));
 		assertTrue(selenium.isVisible("//input[@value='Search']"));
 		assertTrue(selenium.isVisible("//input[@value='Add Team']"));

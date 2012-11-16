@@ -52,8 +52,8 @@ public class AssertRemoveMembersSitesTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Manage Memberships"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Memberships')]"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Memberships')]"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Memberships')]",
+			RuntimeVariables.replace("Manage Memberships"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("userfn userln"));
 	}
