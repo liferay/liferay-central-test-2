@@ -103,9 +103,8 @@ public class ViewAction extends PortletAction {
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		String queryString = StringPool.BLANK;
-
 		String layoutURL = StringPool.BLANK;
+		String queryString = StringPool.BLANK;
 
 		int pos = redirect.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
@@ -114,9 +113,8 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (pos != -1) {
-			queryString = redirect.substring(pos);
-
 			layoutURL = redirect.substring(0, pos);
+			queryString = redirect.substring(pos);
 		}
 
 		Layout layout = themeDisplay.getLayout();
@@ -124,10 +122,7 @@ public class ViewAction extends PortletAction {
 		Group group = layout.getGroup();
 
 		if (PortalUtil.isGroupFriendlyURL(
-				layoutURL, group.getFriendlyURL(),
-				layout.getFriendlyURL())) {
-
-			// See LPS-30648
+				layoutURL, group.getFriendlyURL(), layout.getFriendlyURL())) {
 
 			if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
 				redirect = layoutURL;
