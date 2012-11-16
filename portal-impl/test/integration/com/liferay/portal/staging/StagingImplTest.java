@@ -86,16 +86,14 @@ public class StagingImplTest {
 
 		serviceContext.setScopeGroupId(groupId);
 
-		AssetVocabulary vocabulary =
+		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
 				TestPropsValues.getUserId(), "TestVocabulary", titleMap,
 				descriptionMap, null, serviceContext);
 
-		String[] properties = new String[0];
-
 		return AssetCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(), 0, titleMap, descriptionMap,
-			vocabulary.getVocabularyId(), properties, serviceContext);
+			assetVocabulary.getVocabularyId(), new String[0], serviceContext);
 	}
 
 	protected JournalArticle addJournalArticle(
@@ -151,10 +149,9 @@ public class StagingImplTest {
 
 		// Create content
 
-		JournalArticle journalArticle = addJournalArticle(
+		AssetCategory assetCategory = addAssetCategory(
 			group.getGroupId(), "Title", "content");
-
-		AssetCategory category = addAssetCategory(
+		JournalArticle journalArticle = addJournalArticle(
 			group.getGroupId(), "Title", "content");
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
@@ -205,6 +202,13 @@ public class StagingImplTest {
 
 		// Update content in staging
 
+		AssetCategory stagingAssetCategory =
+			AssetCategoryLocalServiceUtil.getCategory(
+				assetCategory.getUuid(), stagingGroup.getGroupId());
+
+		stagingAssetCategory = updateAssetCategory(
+			stagingAssetCategory, "new name");
+
 		JournalArticle stagingJournalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
 				stagingGroup.getGroupId(), journalArticle.getUrlTitle());
@@ -212,12 +216,6 @@ public class StagingImplTest {
 		stagingJournalArticle = updateJournalArticle(
 			stagingJournalArticle, "Title2",
 			stagingJournalArticle.getContent());
-
-		AssetCategory stagingCategory =
-			AssetCategoryLocalServiceUtil.getCategory(
-				category.getUuid(), stagingGroup.getGroupId());
-
-		stagingCategory = updateAssetCategory(stagingCategory, "new name");
 
 		// Publish to live
 
@@ -227,23 +225,23 @@ public class StagingImplTest {
 
 		// Retrieve content from live after publishing
 
+		assetCategory = AssetCategoryLocalServiceUtil.getCategory(
+			assetCategory.getUuid(), group.getGroupId());
 		journalArticle = JournalArticleLocalServiceUtil.getArticle(
 			group.getGroupId(), journalArticle.getArticleId());
-		category = AssetCategoryLocalServiceUtil.getCategory(
-			category.getUuid(), group.getGroupId());
 
 		if (stageCategories) {
 			for (Locale locale : _locales) {
 				Assert.assertEquals(
-					category.getTitle(locale),
-					stagingCategory.getTitle(locale));
+					assetCategory.getTitle(locale),
+					stagingAssetCategory.getTitle(locale));
 			}
 		}
 		else {
 			for (Locale locale : _locales) {
 				Assert.assertFalse(
-					category.getTitle(locale).equals(
-						stagingCategory.getTitle(locale)));
+					assetCategory.getTitle(locale).equals(
+						stagingAssetCategory.getTitle(locale)));
 			}
 		}
 
@@ -291,12 +289,12 @@ public class StagingImplTest {
 		}
 
 		return JournalArticleLocalServiceUtil.updateArticle(
-				journalArticle.getUserId(), journalArticle.getGroupId(),
-				journalArticle.getFolderId(), journalArticle.getArticleId(),
-				journalArticle.getVersion(), titleMap,
-				journalArticle.getDescriptionMap(), content,
-				journalArticle.getLayoutUuid(),
-				ServiceTestUtil.getServiceContext());
+			journalArticle.getUserId(), journalArticle.getGroupId(),
+			journalArticle.getFolderId(), journalArticle.getArticleId(),
+			journalArticle.getVersion(), titleMap,
+			journalArticle.getDescriptionMap(), content,
+			journalArticle.getLayoutUuid(),
+			ServiceTestUtil.getServiceContext());
 	}
 
 	private static Locale[] _locales = {
