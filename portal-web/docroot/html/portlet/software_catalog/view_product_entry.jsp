@@ -333,13 +333,13 @@ PortalUtil.setPageSubtitle(productEntry.getName(), request);
 PortalUtil.setPageDescription(productEntry.getShortDescription(), request);
 PortalUtil.setPageKeywords(productEntry.getTags(), request);
 
+SCProductEntry unescapedProductEntry = productEntry.toUnescapedModel();
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/software_catalog/view_product");
 portletURL.setParameter("redirect", currentURL);
 portletURL.setParameter("productEntryId", String.valueOf(productEntry.getProductEntryId()));
-
-SCProductEntry unescapedProductEntry = productEntry.toUnescapedModel();
 
 PortalUtil.addPortletBreadcrumbEntry(request, unescapedProductEntry.getName(), portletURL.toString());
 %>
