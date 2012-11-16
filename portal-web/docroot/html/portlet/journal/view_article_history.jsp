@@ -20,6 +20,7 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "web-content");
 
 String redirect = ParamUtil.getString(request, "redirect");
+
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 String orderByCol = ParamUtil.getString(request, "orderByCol");

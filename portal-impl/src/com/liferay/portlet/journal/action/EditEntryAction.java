@@ -26,7 +26,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
@@ -41,6 +41,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -95,7 +96,7 @@ public class EditEntryAction extends PortletAction {
 						(ThemeDisplay)actionRequest.getAttribute(
 							WebKeys.THEME_DISPLAY);
 
-					PortletURLImpl portletURL = new PortletURLImpl(
+					PortletURL portletURL = PortletURLFactoryUtil.create(
 						actionRequest, portletConfig.getPortletName(),
 						themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
