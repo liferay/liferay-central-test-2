@@ -255,9 +255,6 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 	);
 </aui:script>
 
-<c:if test='<%= selectionStyle.equals("dynamic") %>'>
-</c:if>
-
 <%!
 private String _getKey(Group group, long scopeGroupId) throws Exception {
 	String key = null;
