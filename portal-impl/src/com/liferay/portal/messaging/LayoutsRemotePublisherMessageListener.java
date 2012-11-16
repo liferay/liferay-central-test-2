@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -86,20 +85,7 @@ public class LayoutsRemotePublisherMessageListener
 
 		String range = MapUtil.getString(parameterMap, "range");
 
-		if (range.equals("last")) {
-			int last = MapUtil.getInteger(parameterMap, "last");
-
-			if (last > 0) {
-				Date scheduledFireTime =
-					publisherRequest.getScheduledFireTime();
-
-				startDate = new Date(
-					scheduledFireTime.getTime() - (last * Time.HOUR));
-
-				endDate = scheduledFireTime;
-			}
-		}
-		else if (range.equals("fromLastPublishDate")) {
+		if (range.equals("fromLastPublishDate")) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				sourceGroupId, privateLayout);
 
@@ -110,6 +96,19 @@ public class LayoutsRemotePublisherMessageListener
 				endDate = new Date();
 
 				startDate = new Date(lastPublishDate);
+			}
+		}
+		else if (range.equals("last")) {
+			int last = MapUtil.getInteger(parameterMap, "last");
+
+			if (last > 0) {
+				Date scheduledFireTime =
+					publisherRequest.getScheduledFireTime();
+
+				startDate = new Date(
+					scheduledFireTime.getTime() - (last * Time.HOUR));
+
+				endDate = scheduledFireTime;
 			}
 		}
 
