@@ -1,29 +1,29 @@
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
+<div class="taglib-header">
+	<h1 class="header-title">${entry.getTitle()}</h1>
+</div>
+
+<div style="float: right;">
+	<@getEditIcon />
+
+	<@getPageDetailsIcon />
+
+	<@getPrintIcon />
+</div>
+
 <#assign assetEntryLocalService = serviceLocator.findService("com.liferay.portlet.asset.service.AssetEntryLocalService") />
 
 <#assign wikiPageClassName = "com.liferay.portlet.wiki.model.WikiPage" />
 
 <#assign assetEntry = assetEntryLocalService.getEntry(wikiPageClassName, entry.getResourcePrimKey()) />
 
-<#assign assetRenderer = assetEntry.getAssetRenderer() />
-
-<div class="taglib-header">
-	<h1 class="header-title">${entry.getTitle()}</h1>
-</div>
-
-<div style="float:right">
-	<@getEditIcon />
-
-	<@getDetailsIcon />
-
-	<@getPrintIcon />
-</div>
-
 <div class="wiki-body">
 	<div class="wiki-info">
 		<span class="stats">${assetEntry.getViewCount()} <@liferay.language key="views" /></span> |
+
 		<span class="date"><@liferay.language key="last-modified" /> ${dateUtil.getDate(entry.getModifiedDate(), "dd MMM yyyy - HH:mm:ss", locale)}</span>
+
 		<span class="author"><@liferay.language key="by" /> ${htmlUtil.escape(portalUtil.getUserName(entry.getUserId(), entry.getUserName()))}</span>
 	</div>
 
@@ -40,7 +40,7 @@
 
 	<div class="page-actions">
 		<div class="article-actions">
-			<@getAddChildIcon />
+			<@getAddChildPageIcon />
 
 			<@getAttatchmentsIcon />
 		</div>
@@ -55,28 +55,28 @@
 
 <div class="page-categorization">
 	<div class="page-categories">
-		<#assign categorizedPagesURL = renderResponse.createRenderURL() />
+		<#assign viewCategorizedPagesURL = renderResponse.createRenderURL() />
 
-		${categorizedPagesURL.setParameter("struts_action", "/wiki/view_categorized_pages")}
-		${categorizedPagesURL.setParameter("nodeId", entry.getNodeId()?string)}
+		${viewCategorizedPagesURL.setParameter("struts_action", "/wiki/view_categorized_pages")}
+		${viewCategorizedPagesURL.setParameter("nodeId", entry.getNodeId()?string)}
 
 		<@liferay_ui["asset-categories-summary"]
 			className=wikiPageClassName
 			classPK=entry.getResourcePrimKey()
-			portletURL=categorizedPagesURL
+			portletURL=viewCategorizedPagesURL
 		/>
 	</div>
 
 	<div class="page-tags">
-		<#assign taggedPagesURL = renderResponse.createRenderURL() />
+		<#assign viewTaggedPagesURL = renderResponse.createRenderURL() />
 
-		${taggedPagesURL.setParameter("struts_action", "/wiki/view_tagged_pages")}
-		${taggedPagesURL.setParameter("nodeId", entry.getNodeId()?string)}
+		${viewTaggedPagesURL.setParameter("struts_action", "/wiki/view_tagged_pages")}
+		${viewTaggedPagesURL.setParameter("nodeId", entry.getNodeId()?string)}
 
 		<@liferay_ui["asset-tags-summary"]
 			className=wikiPageClassName
 			classPK=entry.getResourcePrimKey()
-			portletURL=taggedPagesURL
+			portletURL=viewTaggedPagesURL
 		/>
 	</div>
 </div>
@@ -89,26 +89,44 @@
 
 		<table class="taglib-search-iterator">
 			<tr class="portlet-section-header results-header">
-				<th><@liferay.language key="page" /></th>
-				<th><@liferay.language key="last-modified" /></th>
-				<th><@liferay.language key="ratings" /></th>
-				<th><@liferay.language key="views" /></th>
+				<th>
+					<@liferay.language key="page" />
+				</th>
+				<th>
+					<@liferay.language key="last-modified" />
+				</th>
+				<th>
+					<@liferay.language key="ratings" />
+				</th>
+				<th>
+					<@liferay.language key="views" />
+				</th>
 			</tr>
 
 			<#list childPages as childPage>
 				<tr class="results-row">
-					<#assign childPageViewURL = renderResponse.createRenderURL() />
+					<#assign viewPageURL = renderResponse.createRenderURL() />
 
-					${childPageViewURL.setParameter("struts_action", "/wiki/view")}
-					${childPageViewURL.setParameter("nodeName", childPage.getNode().getName())}
-					${childPageViewURL.setParameter("title", childPage.getTitle())}
+					${viewPageURL.setParameter("struts_action", "/wiki/view")}
 
-					<td><a href="${childPageViewURL}">${childPage.getTitle()}</a></td>
-					<td><a href="${childPageViewURL}">${dateUtil.getDate(childPage.getModifiedDate(),"dd MMM yyyy - HH:mm:ss", locale)} <@liferay.language key="by" /> ${htmlUtil.escape(portalUtil.getUserName(childPage.getUserId(), childPage.getUserName()))}</a></td>
+					<#assign childNode = childPage.getNode() />
+
+					${viewPageURL.setParameter("nodeName", childNode.getName())}
+
+					${viewPageURL.setParameter("title", childPage.getTitle())}
+
+					<td>
+						<a href="${viewPageURL}">${childPage.getTitle()}</a>
+					</td>
+					<td>
+						<a href="${viewPageURL}">${dateUtil.getDate(childPage.getModifiedDate(),"dd MMM yyyy - HH:mm:ss", locale)} <@liferay.language key="by" /> ${htmlUtil.escape(portalUtil.getUserName(childPage.getUserId(), childPage.getUserName()))}</a>
+					</td>
 					<td>
 						<@getRatings cssClass="child-ratings" entry=childPage />
 					</td>
-					<td><span class="stats">${assetEntryLocalService.getEntry(wikiPageClassName, childPage.getResourcePrimKey()).getViewCount()}</span></td>
+					<td>
+						<span class="stats">${assetEntryLocalService.getEntry(wikiPageClassName, childPage.getResourcePrimKey()).getViewCount()}</span>
+					</td>
 				</tr>
 			</#list>
 		</table>
@@ -117,7 +135,9 @@
 
 <@getDiscussion />
 
-<#macro getAddChildIcon>
+<#assign assetRenderer = assetEntry.getAssetRenderer() />
+
+<#macro getAddChildPageIcon>
 	<#if assetRenderer.hasEditPermission(themeDisplay.getPermissionChecker())>
 		<#assign addPageURL = renderResponse.createRenderURL() />
 
@@ -138,15 +158,15 @@
 </#macro>
 
 <#macro getAttatchmentsIcon>
-	<#assign viewAttachmentsURL = renderResponse.createRenderURL() />
+	<#assign viewPageAttachmentsURL = renderResponse.createRenderURL() />
 
-	${viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments") }
+	${viewPageAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments") }
 
 	<@liferay_ui["icon"]
 		image="clip"
 		label=true
 		message='${entry.getAttachmentsFilesCount() + languageUtil.get(locale, "attachments")}'
-		url=viewAttachmentsURL?string
+		url=viewPageAttachmentsURL?string
 	/>
 </#macro>
 
@@ -164,7 +184,7 @@
 </#macro>
 
 <#macro getDiscussion>
-	<#if validator.isNotNull(assetRenderer.getDiscussionPath()) && enableComments == "true">
+	<#if validator.isNotNull(assetRenderer.getDiscussionPath()) && (enableComments == "true")>
 		<br />
 
 		<#assign discussionURL = renderResponse.createActionURL() />
@@ -204,12 +224,12 @@
 <#macro getPrintIcon>
 	<#assign printPortletURL = renderResponse.createRenderURL() />
 
-	${printPortletURL.setWindowState("pop_up")}
 	${printPortletURL.setParameter("viewMode", "print")}
+	${printPortletURL.setWindowState("pop_up")}
 
 	<#assign formatParams = ["aui-helper-hidden-accessible", htmlUtil.escape(assetRenderer.getTitle(locale))] />
 	<#assign title = languageUtil.format(locale, "print-x-x", formatParams) />
-	<#assign taglibPrintURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'" + renderResponse.getNamespace() + "printAsset', title: '" + title + "', uri:'" + htmlUtil.escapeURL(printPortletURL.toString()) + "'});" />
+	<#assign taglibPrintURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'" + renderResponse.getNamespace() + "printAsset', title: '" + title + "', uri: '" + htmlUtil.escapeURL(printPortletURL.toString()) + "'});" />
 
 	<@liferay_ui["icon"]
 		image="print"
@@ -230,7 +250,7 @@
 </#macro>
 
 <#macro getRelatedAssets>
-	<#if assetEntry?? && enableRelatedAssets == "true">
+	<#if assetEntry?? && (enableRelatedAssets == "true")>
 		<@liferay_ui["asset-links"]
 			assetEntryId=assetEntry.getEntryId()
 		/>
