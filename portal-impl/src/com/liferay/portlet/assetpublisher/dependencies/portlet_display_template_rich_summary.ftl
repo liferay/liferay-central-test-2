@@ -1,9 +1,6 @@
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
 <#list entries as entry>
-
-	<#-- Assign the loop variable to a plain variable to make it visible from macros -->
-
 	<#assign entry = entry />
 
 	<#assign assetRenderer = entry.getAssetRenderer() />
@@ -24,7 +21,7 @@
 		</div>
 
 		<h3 class="asset-title">
-			<a href="${viewURL}"><img alt="" src="${assetRenderer.getIconPath(renderRequest)}"/>${entry.getTitle(locale)}</a>
+			<a href="${viewURL}"><img alt="" src="${assetRenderer.getIconPath(renderRequest)}" />${entry.getTitle(locale)}</a>
 		</h3>
 
 		<@getMetadataField fieldName="tags" />
@@ -41,7 +38,7 @@
 
 				${assetRenderer.getSummary(locale)}
 
-				<a href="${viewURL}"><@liferay.language key="read-more" /><span class="aui-helper-hidden-accessible"><@liferay.language key="about"/>${entry.getTitle(locale)}</span> &raquo;</a>
+				<a href="${viewURL}"><@liferay.language key="read-more" /><span class="aui-helper-hidden-accessible"><@liferay.language key="about" />${entry.getTitle(locale)}</span> &raquo;</a>
 			</div>
 
 			<@getRatings />
@@ -109,86 +106,68 @@
 </#macro>
 
 <#macro getMetadataField fieldName>
-	<#assign dateFormat = "dd MMM yyyy - HH:mm:ss" />
-
 	<#if stringUtil.split(metadataFields)?seq_contains(metadataFieldName)>
 		<span class="metadata-entry metadata-"${metadataFieldName}">
-			<#switch fieldName>
-				<#case "author">
-					<@liferay.language key="by" /> ${portalUtil.getUserName(assetRenderer.getUserId(), assetRenderer.getUserName())}
+			<#assign dateFormat = "dd MMM yyyy - HH:mm:ss" />
 
-					<#break>
-				<#case "categories">
-					<@liferay_ui["asset-categories-summary"]
-						className=entry.getClassName()
-						classPK=entry.getClassPK()
-						portletURL=renderResponse.createRenderURL()
-					/>
+			<#if fieldName == "author">
+				<@liferay.language key="by" /> ${portalUtil.getUserName(assetRenderer.getUserId(), assetRenderer.getUserName())}
+			<#elseif fieldName == "categories">
+				<@liferay_ui["asset-categories-summary"]
+					className=entry.getClassName()
+					classPK=entry.getClassPK()
+					portletURL=renderResponse.createRenderURL()
+				/>
+			<#elseif fieldName == "create-date">
+				${dateUtil.getDate(entry.getCreateDate(), dateFormat, locale)}
+			<#elseif fieldName == "expiration-date">
+				${dateUtil.getDate(entry.getExpirationDate(), dateFormat, locale)}
+			<#elseif fieldName == "modified-date">
+				${dateUtil.getDate(entry.getModifiedDate(), dateFormat, locale)}
+			<#elseif fieldName == "priority">
+				${entry.getPriority()}
+			<#elseif fieldName == "publish-date">
+				${ddateUtil.getDate(entry.getPublishDate(), dateFormat, locale)}
+			<#elseif fieldName == "tags">
+				<@liferay_ui["asset-tags-summary"]
+					className=entry.getClassName()
+					classPK=entry.getClassPK()
+					portletURL=renderResponse.createRenderURL()
+				/>
+			<#elseif fieldName == "view-count">
+				<@liferay_ui["icon"]
+					image="history"
+				/>
 
-					<#break>
-				<#case "create-date">
-					${dateUtil.getDate(entry.getCreateDate(), dateFormat, locale)}
-
-					<#break>
-				<#case "expiration-date">
-					${dateUtil.getDate(entry.getExpirationDate(), dateFormat, locale)}
-
-					<#break>
-				<#case "modified-date">
-					${dateUtil.getDate(entry.getModifiedDate(), dateFormat, locale)}
-
-					<#break>
-				<#case "priority">
-					${entry.getPriority()}
-
-					<#break>
-				<#case "publish-date">
-					${ddateUtil.getDate(entry.getPublishDate(), dateFormat, locale)}
-
-					<#break>
-				<#case "tags">
-					<@liferay_ui["asset-tags-summary"]
-						className=entry.getClassName()
-						classPK=entry.getClassPK()
-						portletURL=renderResponse.createRenderURL()
-					/>
-
-					<#break>
-				<#case "view-count">
-					<@liferay_ui["icon"]
-						image="history"
-					/>
-
-					${entry.getViewCount()} <@liferay.language key="views" />
-
-					<#break>
-			</#switch>
+				${entry.getViewCount()} <@liferay.language key="views" />
+			</#if>
 		</span>
 	</#if>
 </#macro>
 
 <#macro getPrintIcon>
 	<#if enablePrint == "true" >
-		<#assign printPortletURL = renderResponse.createRenderURL() />
+		<#assign printURL = renderResponse.createRenderURL() />
 
-		${printPortletURL.setWindowState("pop_up")}
-		${printPortletURL.setParameter("struts_action", "/asset_publisher/view_content")}
-		${printPortletURL.setParameter("assetEntryId", entry.getEntryId()?string)}
-		${printPortletURL.setParameter("viewMode", "print")}
-		${printPortletURL.setParameter("type", entry.getAssetRendererFactory().getType())}
+		${printURL.setParameter("struts_action", "/asset_publisher/view_content")}
+		${printURL.setParameter("assetEntryId", entry.getEntryId()?string)}
+		${printURL.setParameter("viewMode", "print")}
+		${printURL.setParameter("type", entry.getAssetRendererFactory().getType())}
 
 		<#if (validator.isNotNull(assetRenderer.getUrlTitle()))>
 			<#if (assetRenderer.getGroupId() != themeDisplay.getScopeGroupId())>
-				${printPortletURL.setParameter("groupId", assetRenderer.getGroupId()?string)}
+				${printURL.setParameter("groupId", assetRenderer.getGroupId()?string)}
 			</#if>
 
-			${printPortletURL.setParameter("urlTitle", assetRenderer.getUrlTitle())}
+			${printURL.setParameter("urlTitle", assetRenderer.getUrlTitle())}
 		</#if>
+
+		${printURL.setWindowState("pop_up")}
 
 		<@liferay_ui["icon"]
 			image="print"
 			message="print"
-			url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'" + renderResponse.getNamespace() + "printAsset', title: '" + languageUtil.format(locale, "print-x-x", ["aui-helper-hidden-accessible", htmlUtil.escape(assetRenderer.getTitle(locale))]) + "', uri:'" + htmlUtil.escapeURL(printPortletURL.toString()) + "'});"
+			url="javascript:Liferay.Util.openWindow({dialog: {width: 960}, id:'" + renderResponse.getNamespace() + "printAsset', title: '" + languageUtil.format(locale, "print-x-x", ["aui-helper-hidden-accessible", htmlUtil.escape(assetRenderer.getTitle(locale))]) + "', uri: '" + htmlUtil.escapeURL(printURL.toString()) + "'});"
 		/>
 	</#if>
 </#macro>
