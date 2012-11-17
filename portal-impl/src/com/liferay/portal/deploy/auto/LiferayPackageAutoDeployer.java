@@ -142,6 +142,10 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 		}
 	}
 
+	public AutoDeployer cloneAutoDeployer() {
+		return new LiferayPackageAutoDeployer();
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayPackageAutoDeployer.class);
 
