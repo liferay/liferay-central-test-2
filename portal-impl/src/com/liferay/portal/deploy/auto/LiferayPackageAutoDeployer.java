@@ -51,7 +51,7 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
