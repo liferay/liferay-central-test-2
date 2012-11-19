@@ -838,11 +838,11 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 			_log.info("Deploying " + srcFile.getName());
 		}
 
-		String specifiedAppServerType =
+		String autoDeploymentContextAppServerType =
 			autoDeploymentContext.getAppServerType();
 
-		if (Validator.isNotNull(specifiedAppServerType)) {
-			appServerType = specifiedAppServerType;
+		if (Validator.isNotNull(autoDeploymentContextAppServerType)) {
+			appServerType = autoDeploymentContextAppServerType;
 		}
 
 		String specifiedContext = autoDeploymentContext.getContext();
