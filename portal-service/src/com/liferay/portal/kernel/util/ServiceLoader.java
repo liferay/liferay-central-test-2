@@ -70,7 +70,7 @@ public class ServiceLoader {
 		while (enu.hasMoreElements()) {
 			URL url = enu.nextElement();
 
-			if (!serviceLoaderCondition.shouldLoad(url)) {
+			if (!serviceLoaderCondition.isLoad(url)) {
 				continue;
 			}
 
@@ -135,10 +135,6 @@ public class ServiceLoader {
 	private static Log _log = LogFactoryUtil.getLog(ServiceLoader.class);
 
 	private static ServiceLoaderCondition _serviceLoaderCondition =
-		new ServiceLoaderCondition() {
-			public boolean shouldLoad(URL url) {
-				return true;
-			}
-		};
+		new DefaultServiceLoaderCondition();
 
 }

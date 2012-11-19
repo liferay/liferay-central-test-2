@@ -17,10 +17,15 @@ package com.liferay.portal.kernel.util;
 import java.net.URL;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Miguel Pastor
  */
-public interface ServiceLoaderCondition {
+public class DefaultServiceLoaderCondition implements ServiceLoaderCondition {
 
-	public boolean isLoad(URL url);
+	public boolean isLoad(URL url) {
+		return _LOAD;
+	}
+
+	private static final boolean _LOAD = true;
 
 }
