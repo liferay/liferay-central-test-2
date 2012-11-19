@@ -244,8 +244,15 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
-		return contains(
-			permissionChecker, groupId, layout, portlet, actionId, strict);
+		if (portlet != null) {
+			return contains(
+				permissionChecker, groupId, layout, portlet, actionId, strict);
+		}
+		else {
+			return doContains(
+				permissionChecker, groupId, layout, portletId, actionId,
+				strict);
+		}
 	}
 
 	public boolean contains(
