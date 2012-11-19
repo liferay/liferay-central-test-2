@@ -34,14 +34,6 @@ if (!uniqueNamespace.endsWith(StringPool.UNDERLINE)) {
 
 String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
 String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");
-
-String guestPermissionsName = "guestPermissions";
-String groupPermissionsName = "groupPermissions";
-
-if (!uniqueNamespace.equals(namespace)) {
-	guestPermissionsName = guestPermissionsName + StringPool.UNDERLINE + modelName;
-	groupPermissionsName = groupPermissionsName + StringPool.UNDERLINE + modelName;
-}
 %>
 
 <c:choose>
@@ -58,6 +50,14 @@ if (!uniqueNamespace.equals(namespace)) {
 		Role ownerRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.OWNER);
 
 		String[] roleNames = new String[] {RoleConstants.GUEST, defaultGroupRole.getName()};
+
+		String guestPermissionsName = "guestPermissions";
+		String groupPermissionsName = "groupPermissions";
+
+		if (!uniqueNamespace.equals(namespace)) {
+			guestPermissionsName = guestPermissionsName + StringPool.UNDERLINE + modelName;
+			groupPermissionsName = groupPermissionsName + StringPool.UNDERLINE + modelName;
+		}
 
 		List groupPermissions = ListUtil.fromArray(request.getParameterValues(groupPermissionsName));
 		List guestPermissions = ListUtil.fromArray(request.getParameterValues(guestPermissionsName));
