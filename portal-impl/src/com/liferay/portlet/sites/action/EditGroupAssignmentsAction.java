@@ -37,6 +37,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -46,9 +49,6 @@ import javax.portlet.RenderResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -187,13 +187,14 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
+
+		addUserIds = filterUserIds(groupId, addUserIds);
+
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
-
-		addUserIds = filterUserIds(groupId, addUserIds);
 
 		UserServiceUtil.addGroupUsers(groupId, addUserIds, serviceContext);
 		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds, serviceContext);
