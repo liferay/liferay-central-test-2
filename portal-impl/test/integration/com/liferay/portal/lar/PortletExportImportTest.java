@@ -199,18 +199,19 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 			Boolean.FALSE.toString(),
 			jxPreferences.getValue("showAvailableLocales", StringPool.BLANK));
 
-		// Update display portlet with a new globally scoped article
+		// Update journal content portlet with a new globally scoped journal
+		// article
 
 		Company company = CompanyUtil.fetchByPrimaryKey(
 			_layoutSetPrototypeLayout.getCompanyId());
 
 		Group companyGroup = company.getGroup();
 
-		JournalArticle globalScopeArticle = addJournalArticle(
-			companyGroup.getGroupId(), 0, "Global article", "Global content");
+		JournalArticle globalScopeJournalArticle = addJournalArticle(
+			companyGroup.getGroupId(), 0, "Global Article", "Global Content");
 
 		layoutSetprototypeJxPreferences.setValue(
-			"articleId", globalScopeArticle.getArticleId());
+			"articleId", globalScopeJournalArticle.getArticleId());
 		layoutSetprototypeJxPreferences.setValue(
 			"groupId", Long.toString(companyGroup.getGroupId()));
 		layoutSetprototypeJxPreferences.setValue(
@@ -226,10 +227,10 @@ public class PortletExportImportTest extends BaseExportImportTestCase {
 			_group.getCompanyId(), layout.getPlid(),
 			_layoutSetPrototypeJournalContentPortletId);
 
-		// Check preferences when journal article is from global scope
+		// Check preferences when journal article is from the global scope
 
 		Assert.assertEquals(
-			globalScopeArticle.getArticleId(),
+			globalScopeJournalArticle.getArticleId(),
 			jxPreferences.getValue("articleId", StringPool.BLANK));
 		Assert.assertEquals(
 			String.valueOf(companyGroup.getGroupId()),
