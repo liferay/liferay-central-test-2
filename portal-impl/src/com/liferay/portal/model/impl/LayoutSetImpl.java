@@ -157,23 +157,26 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 		return value;
 	}
 
+	@Override
 	public String getVirtualHostname() {
-		if (_virtualHostname == null) {
-			try {
-				VirtualHost virtualHost =
-					VirtualHostLocalServiceUtil.fetchVirtualHost(
-						getCompanyId(), getLayoutSetId());
+		if (_virtualHostname != null) {
+			return _virtualHostname;
+		}
 
-				if (virtualHost == null) {
-					_virtualHostname = StringPool.BLANK;
-				}
-				else {
-					_virtualHostname = virtualHost.getHostname();
-				}
-			}
-			catch (Exception e) {
+		try {
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.fetchVirtualHost(
+					getCompanyId(), getLayoutSetId());
+
+			if (virtualHost == null) {
 				_virtualHostname = StringPool.BLANK;
 			}
+			else {
+				_virtualHostname = virtualHost.getHostname();
+			}
+		}
+		catch (Exception e) {
+			_virtualHostname = StringPool.BLANK;
 		}
 
 		return _virtualHostname;

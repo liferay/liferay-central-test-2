@@ -178,23 +178,25 @@ public class CompanyImpl extends CompanyBaseImpl {
 		return getDefaultUser().getTimeZone();
 	}
 
+	@Override
 	public String getVirtualHostname() {
-		if (_virtualHostname == null) {
-			try {
-				VirtualHost virtualHost =
-					VirtualHostLocalServiceUtil.fetchVirtualHost(
-						getCompanyId(), 0);
+		if (_virtualHostname != null) {
+			return _virtualHostname;
+		}
 
-				if (virtualHost == null) {
-					_virtualHostname = StringPool.BLANK;
-				}
-				else {
-					_virtualHostname = virtualHost.getHostname();
-				}
-			}
-			catch (Exception e) {
+		try {
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.fetchVirtualHost(getCompanyId(), 0);
+
+			if (virtualHost == null) {
 				_virtualHostname = StringPool.BLANK;
 			}
+			else {
+				_virtualHostname = virtualHost.getHostname();
+			}
+		}
+		catch (Exception e) {
+			_virtualHostname = StringPool.BLANK;
 		}
 
 		return _virtualHostname;
