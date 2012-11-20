@@ -80,50 +80,52 @@ public class PortalSecurityManager extends SecurityManager {
 			throw new NullPointerException();
 		}
 
-		if (which != Member.PUBLIC) {
-			Class<?> caller = Reflection.getCallerClass(4);
+		if (which == Member.PUBLIC) {
+			return;
+		}
 
-			ClassLoader callerClassLoader = PACLClassLoaderUtil.getClassLoader(
-				caller);
+		ClassLoader classClassLoader = PACLClassLoaderUtil.getClassLoader(
+			clazz);
 
-			ClassLoader clazzClassLoader = PACLClassLoaderUtil.getClassLoader(
-				clazz);
+		if (classClassLoader == null) {
+			return;
+		}
 
-			if ((callerClassLoader == null) && (clazzClassLoader == null)) {
-				return;
-			}
+		Class<?> callerClass = Reflection.getCallerClass(4);
 
-			if (callerClassLoader == null) {
-				for (int i = 5;; i++) {
-					caller = Reflection.getCallerClass(i);
+		ClassLoader callerClassLoader = PACLClassLoaderUtil.getClassLoader(
+			callerClass);
 
-					if (caller == null) {
-						break;
-					}
+		if (callerClassLoader == null) {
+			for (int i = 5;; i++) {
+				callerClass = Reflection.getCallerClass(i);
 
-					String className = caller.getName();
+				if (callerClass == null) {
+					break;
+				}
 
-					if (!className.startsWith("java.lang") &&
-						!className.startsWith("java.security") &&
-						!className.startsWith("sun.reflect")) {
+				String className = callerClass.getName();
 
-						callerClassLoader = PACLClassLoaderUtil.getClassLoader(
-							caller);
+				if (!className.startsWith("java.lang") &&
+					!className.startsWith("java.security") &&
+					!className.startsWith("sun.reflect")) {
 
-						break;
-					}
+					callerClassLoader = PACLClassLoaderUtil.getClassLoader(
+						callerClass);
+
+					break;
 				}
 			}
-
-			if (callerClassLoader == clazzClassLoader) {
-				return;
-			}
-
-			Permission permission = new RuntimePermission(
-				PACLConstants.RUNTIME_PERMISSION_ACCESS_DECLARED_MEMBERS);
-
-			checkPermission(permission);
 		}
+
+		if (classClassLoader == callerClassLoader) {
+			return;
+		}
+
+		Permission permission = new RuntimePermission(
+			PACLConstants.RUNTIME_PERMISSION_ACCESS_DECLARED_MEMBERS);
+
+		checkPermission(permission);
 	}
 
 	@Override
