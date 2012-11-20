@@ -114,7 +114,7 @@ if ((folder == null) || folder.isSupportsMetadata()) {
 </liferay-ui:icon-menu>
 
 <aui:script use="aui-base,uploader">
-	if (!A.UA.ios && A.Uploader.TYPE != 'none') {
+	if (!A.UA.ios && (A.Uploader.TYPE != 'none')) {
 		var uploadMultipleDocumentsIcon = A.all('.upload-multiple-documents:hidden');
 
 		uploadMultipleDocumentsIcon.show();
