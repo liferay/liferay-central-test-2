@@ -25,34 +25,27 @@ public class StagedModelDataHandlerImpl<T extends StagedModel>
 	implements StagedModelDataHandler<T> {
 
 	public void export(
-			T entity, PortletDataContext portletDataContext,
-			Element... elements)
-		throws Exception {
-
-		return;
+		T stagedModel, PortletDataContext portletDataContext,
+		Element... elements) {
 	}
 
 	public void importData(
-			Element entityElement, PortletDataContext portletDataContext)
-		throws Exception {
+		Element stagedModelElement, PortletDataContext portletDataContext) {
 
-		String path = entityElement.attributeValue("path");
+		String path = stagedModelElement.attributeValue("path");
 
-		T entity = (T)portletDataContext.getZipEntryAsObject(
-			entityElement, path);
+		T stagedModel = (T)portletDataContext.getZipEntryAsObject(
+			stagedModelElement, path);
 
 		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
-		importData(entity, path, portletDataContext);
+		importData(stagedModel, path, portletDataContext);
 	}
 
 	public void importData(
-			T entity, String path, PortletDataContext portletDataContext)
-		throws Exception {
-
-		return;
+		T stagedModel, String path, PortletDataContext portletDataContext) {
 	}
 
 }

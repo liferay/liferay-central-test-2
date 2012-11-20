@@ -17,7 +17,7 @@ package com.liferay.portal.model;
 /**
  * @author Michael C. Han
  */
-public interface StagedModel extends GroupedModel, ClassedModel {
+public interface StagedModel extends GroupedModel {
 
 	public String getUuid();
 
