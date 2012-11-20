@@ -248,11 +248,9 @@ public class PortletPermissionImpl implements PortletPermission {
 			return contains(
 				permissionChecker, groupId, layout, portlet, actionId, strict);
 		}
-		else {
-			return doContains(
-				permissionChecker, groupId, layout, portletId, actionId,
-				strict);
-		}
+
+		return doContains(
+			permissionChecker, groupId, layout, portletId, actionId, strict);
 	}
 
 	public boolean contains(
