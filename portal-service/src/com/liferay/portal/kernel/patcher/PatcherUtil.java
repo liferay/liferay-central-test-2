@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.patcher;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.io.File;
 
 import java.util.Properties;
@@ -24,8 +26,8 @@ import java.util.Properties;
  */
 public class PatcherUtil {
 
-	public static boolean applyPatch(File patch) {
-		return getPatcher().applyPatch(patch);
+	public static boolean applyPatch(File patchFile) {
+		return getPatcher().applyPatch(patchFile);
 	}
 
 	public static String[] getFixedIssues() {
@@ -36,12 +38,14 @@ public class PatcherUtil {
 		return getPatcher().getInstalledPatches();
 	}
 
-	public static Patcher getPatcher() {
-		return _patcher;
+	public static File getPatchDirectory() {
+		return getPatcher().getPatchDirectory();
 	}
 
-	public static File getPatchFolder() {
-		return getPatcher().getPatchFolder();
+	public static Patcher getPatcher() {
+		PortalRuntimePermission.checkGetBeanProperty(Patcher.class);
+
+		return _patcher;
 	}
 
 	public static Properties getProperties() {
@@ -49,6 +53,8 @@ public class PatcherUtil {
 	}
 
 	public void setPatcher(Patcher patcher) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_patcher = patcher;
 	}
 

@@ -24,21 +24,21 @@ import java.util.Properties;
  */
 public interface Patcher {
 
-	public static final String FIXED_ISSUES = "fixed.issues";
+	public static final String PATCHER_PROPERTIES = "patcher.properties";
 
-	public static final String INSTALLED_PATCHES = "installed.patches";
+	public static final String PROPERTY_FIXED_ISSUES = "fixed.issues";
 
-	public static final String PATCH_FOLDER = "patch.folder";
+	public static final String PROPERTY_INSTALLED_PATCHES = "installed.patches";
 
-	public static final String PATCHING_INFO_PROPERTIES = "patching.properties";
+	public static final String PROPERTY_PATCH_DIRECTORY = "patch.directory";
 
-	public boolean applyPatch(File patch);
+	public boolean applyPatch(File patchFile);
 
 	public String[] getFixedIssues();
 
 	public String[] getInstalledPatches();
 
-	public File getPatchFolder();
+	public File getPatchDirectory();
 
 	public Properties getProperties();
 
