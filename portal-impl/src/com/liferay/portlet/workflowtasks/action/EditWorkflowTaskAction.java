@@ -58,8 +58,6 @@ public class EditWorkflowTaskAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
 		try {
 			if (cmd.equals(Constants.ASSIGN)) {
 				assignTask(actionRequest);
@@ -71,6 +69,7 @@ public class EditWorkflowTaskAction extends PortletAction {
 				updateTask(actionRequest);
 			}
 
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			String closeRedirect = ParamUtil.getString(
 				actionRequest, "closeRedirect");
 

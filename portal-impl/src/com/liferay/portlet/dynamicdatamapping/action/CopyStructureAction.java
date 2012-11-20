@@ -68,7 +68,6 @@ public class CopyStructureAction extends PortletAction {
 
 			String redirect = getSaveAndContinueRedirect(
 				portletConfig, actionRequest, structure);
-
 			String closeRedirect = ParamUtil.getString(
 				actionRequest, "closeRedirect");
 

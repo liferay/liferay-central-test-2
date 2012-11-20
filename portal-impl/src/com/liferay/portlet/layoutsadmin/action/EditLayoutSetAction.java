@@ -82,13 +82,12 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
 		try {
 			if (cmd.equals(Constants.UPDATE)) {
 				updateLayoutSet(actionRequest, actionResponse);
 			}
 
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			String closeRedirect = ParamUtil.getString(
 				actionRequest, "closeRedirect");
 
