@@ -36,29 +36,7 @@
 // and rely on the load event on the body element to properly rewrite the URL.
 
 // However, if the original request was an AJAX request, sending a redirect is
-// less than ideal. In this case we'll simply print our simple error output.
-
-String redirect = null;
-boolean doRedirect = true;
-
-LayoutSet layoutSet = (LayoutSet)request.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET);
-
-if (layoutSet != null) {
-	redirect = PortalUtil.getPathMain();
-}
-else {
-	redirect = PortalUtil.getHomeURL(request);
-}
-
-if (!request.isRequestedSessionIdFromCookie()) {
-	redirect = PortalUtil.getURLWithSessionId(redirect, session.getId());
-}
-
-String xRequestWith = request.getHeader(HttpHeaders.X_REQUESTED_WITH);
-
-if (HttpHeaders.XML_HTTP_REQUEST.equalsIgnoreCase(xRequestWith)) {
-	//doRedirect = false;
-}
+// less than ideal. In this case we will simply print the error message.
 
 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
@@ -69,49 +47,69 @@ String uri = (String)request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_REQU
 if (_log.isWarnEnabled()) {
 	_log.warn("{msg=\"" + msg + "\", uri=" + uri + "}", t);
 }
+
+String xRequestWith = request.getHeader(HttpHeaders.X_REQUESTED_WITH);
 %>
 
 <html>
 
-<c:if test="<%= doRedirect %>">
+<c:choose>
+	<c:when test="<%= HttpHeaders.XML_HTTP_REQUEST.equalsIgnoreCase(xRequestWith) %>">
 
-	<head>
-		<title></title>
-		<meta content="1; url=<%= redirect %>" http-equiv="refresh" />
-	</head>
+		<%
+		String redirect = null;
 
-	<body onload="javascript:location.replace('<%= redirect %>')">
+		LayoutSet layoutSet = (LayoutSet)request.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
-	<!--
-	The numbers below are used to fill up space so that this works properly in IE.
-	See http://support.microsoft.com/default.aspx?scid=kb;en-us;Q294807 for more
-	information on why this is necessary.
+		if (layoutSet != null) {
+			redirect = PortalUtil.getPathMain();
+		}
+		else {
+			redirect = PortalUtil.getHomeURL(request);
+		}
 
-	12345678901234567890123456789012345678901234567890123456789012345678901234567890
-	12345678901234567890123456789012345678901234567890123456789012345678901234567890
-	12345678901234567890123456789012345678901234567890123456789012345678901234567890
-	-->
+		if (!request.isRequestedSessionIdFromCookie()) {
+			redirect = PortalUtil.getURLWithSessionId(redirect, session.getId());
+		}
+		%>
 
-	</body>
+		<head>
+			<title></title>
+			<meta content="1; url=<%= redirect %>" http-equiv="refresh" />
+		</head>
 
-</c:if>
-<c:if test="<%= !doRedirect %>">
+		<body onload="javascript:location.replace('<%= redirect %>')">
 
-	<head>
-		<title>Http Status 404 - <%= LanguageUtil.get(pageContext, "not-found") %></title>
-	</head>
+		<!--
+		The numbers below are used to fill up space so that this works properly in IE.
+		See http://support.microsoft.com/default.aspx?scid=kb;en-us;Q294807 for more
+		information on why this is necessary.
 
-	<body>
+		12345678901234567890123456789012345678901234567890123456789012345678901234567890
+		12345678901234567890123456789012345678901234567890123456789012345678901234567890
+		12345678901234567890123456789012345678901234567890123456789012345678901234567890
+		-->
 
-		<h1>Http Status 404 - <%= LanguageUtil.get(pageContext, "not-found") %></h1>
+		</body>
+	</c:when>
+	<c:otherwise>
+		<head>
+			<title>Http Status 404 - <%= LanguageUtil.get(pageContext, "not-found") %></title>
+		</head>
 
-		<p><%= LanguageUtil.get(pageContext, "message") %>: <%= msg %></p>
+		<body>
+			<h1>Http Status 404 - <%= LanguageUtil.get(pageContext, "not-found") %></h1>
 
-		<p><%= LanguageUtil.get(pageContext, "resource") %>: <%= uri %></p>
+			<p>
+				<%= LanguageUtil.get(pageContext, "message") %>: <%= msg %>
+			</p>
 
-	</body>
-
-</c:if>
+			<p>
+				<%= LanguageUtil.get(pageContext, "resource") %>: <%= uri %>
+			</p>
+		</body>
+	</c:otherwise>
+</c:choose>
 
 </html>
 
