@@ -36,67 +36,6 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	 */
 
 	/**
-	* Caches the group in the entity cache if it is enabled.
-	*
-	* @param group the group
-	*/
-	public void cacheResult(com.liferay.portal.model.Group group);
-
-	/**
-	* Caches the groups in the entity cache if it is enabled.
-	*
-	* @param groups the groups
-	*/
-	public void cacheResult(
-		java.util.List<com.liferay.portal.model.Group> groups);
-
-	/**
-	* Creates a new group with the primary key. Does not add the group to the database.
-	*
-	* @param groupId the primary key for the new group
-	* @return the new group
-	*/
-	public com.liferay.portal.model.Group create(long groupId);
-
-	/**
-	* Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param groupId the primary key of the group
-	* @return the group that was removed
-	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group remove(long groupId)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Group updateImpl(
-		com.liferay.portal.model.Group group)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the group with the primary key or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
-	*
-	* @param groupId the primary key of the group
-	* @return the group
-	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group findByPrimaryKey(long groupId)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the group with the primary key or returns <code>null</code> if it could not be found.
-	*
-	* @param groupId the primary key of the group
-	* @return the group, or <code>null</code> if a group with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group fetchByPrimaryKey(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns all the groups where companyId = &#63;.
 	*
 	* @param companyId the company ID
@@ -215,6 +154,25 @@ public interface GroupPersistence extends BasePersistence<Group> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the groups where companyId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63;.
+	*
+	* @param companyId the company ID
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group where liveGroupId = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
 	* @param liveGroupId the live group ID
@@ -246,6 +204,27 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*/
 	public com.liferay.portal.model.Group fetchByLiveGroupId(long liveGroupId,
 		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the group where liveGroupId = &#63; from the database.
+	*
+	* @param liveGroupId the live group ID
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByLiveGroupId(long liveGroupId)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where liveGroupId = &#63;.
+	*
+	* @param liveGroupId the live group ID
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -376,6 +355,27 @@ public interface GroupPersistence extends BasePersistence<Group> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the groups where companyId = &#63; and parentGroupId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param parentGroupId the parent group ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByC_P(long companyId, long parentGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and parentGroupId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param parentGroupId the parent group ID
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_P(long companyId, long parentGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
 	* @param companyId the company ID
@@ -415,6 +415,30 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the group where companyId = &#63; and name = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param name the name
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByC_N(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and name = &#63;.
+	*
+	* @param companyId the company ID
+	* @param name the name
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group where companyId = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
 	* @param companyId the company ID
@@ -451,6 +475,30 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*/
 	public com.liferay.portal.model.Group fetchByC_F(long companyId,
 		java.lang.String friendlyURL, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the group where companyId = &#63; and friendlyURL = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param friendlyURL the friendly u r l
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByC_F(long companyId,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and friendlyURL = &#63;.
+	*
+	* @param companyId the company ID
+	* @param friendlyURL the friendly u r l
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_F(long companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -581,6 +629,27 @@ public interface GroupPersistence extends BasePersistence<Group> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the groups where companyId = &#63; and site = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param site the site
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByC_S(long companyId, boolean site)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and site = &#63;.
+	*
+	* @param companyId the company ID
+	* @param site the site
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_S(long companyId, boolean site)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the groups where type = &#63; and active = &#63;.
 	*
 	* @param type the type
@@ -708,6 +777,27 @@ public interface GroupPersistence extends BasePersistence<Group> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the groups where type = &#63; and active = &#63; from the database.
+	*
+	* @param type the type
+	* @param active the active
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByT_A(int type, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where type = &#63; and active = &#63;.
+	*
+	* @param type the type
+	* @param active the active
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByT_A(int type, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
 	* @param companyId the company ID
@@ -747,6 +837,32 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*/
 	public com.liferay.portal.model.Group fetchByC_C_C(long companyId,
 		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByC_C_C(long companyId,
+		long classNameId, long classPK)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -885,6 +1001,29 @@ public interface GroupPersistence extends BasePersistence<Group> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the groups where companyId = &#63; and parentGroupId = &#63; and site = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param parentGroupId the parent group ID
+	* @param site the site
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByC_P_S(long companyId, long parentGroupId, boolean site)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and parentGroupId = &#63; and site = &#63;.
+	*
+	* @param companyId the company ID
+	* @param parentGroupId the parent group ID
+	* @param site the site
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_P_S(long companyId, long parentGroupId, boolean site)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
 	* @param companyId the company ID
@@ -924,6 +1063,33 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*/
 	public com.liferay.portal.model.Group fetchByC_L_N(long companyId,
 		long liveGroupId, java.lang.String name, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param liveGroupId the live group ID
+	* @param name the name
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByC_L_N(long companyId,
+		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
+	*
+	* @param companyId the company ID
+	* @param liveGroupId the live group ID
+	* @param name the name
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_L_N(long companyId, long liveGroupId,
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -973,6 +1139,96 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param liveGroupId the live group ID
+	* @param name the name
+	* @return the group that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group removeByC_C_L_N(long companyId,
+		long classNameId, long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param liveGroupId the live group ID
+	* @param name the name
+	* @return the number of matching groups
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_C_L_N(long companyId, long classNameId,
+		long liveGroupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Caches the group in the entity cache if it is enabled.
+	*
+	* @param group the group
+	*/
+	public void cacheResult(com.liferay.portal.model.Group group);
+
+	/**
+	* Caches the groups in the entity cache if it is enabled.
+	*
+	* @param groups the groups
+	*/
+	public void cacheResult(
+		java.util.List<com.liferay.portal.model.Group> groups);
+
+	/**
+	* Creates a new group with the primary key. Does not add the group to the database.
+	*
+	* @param groupId the primary key for the new group
+	* @return the new group
+	*/
+	public com.liferay.portal.model.Group create(long groupId);
+
+	/**
+	* Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param groupId the primary key of the group
+	* @return the group that was removed
+	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group remove(long groupId)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Group updateImpl(
+		com.liferay.portal.model.Group group)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the group with the primary key or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	*
+	* @param groupId the primary key of the group
+	* @return the group
+	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group findByPrimaryKey(long groupId)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the group with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param groupId the primary key of the group
+	* @return the group, or <code>null</code> if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group fetchByPrimaryKey(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the groups.
 	*
 	* @return the groups
@@ -1015,267 +1271,11 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the groups where companyId = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where liveGroupId = &#63; from the database.
-	*
-	* @param liveGroupId the live group ID
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the groups where companyId = &#63; and parentGroupId = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param parentGroupId the parent group ID
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByC_P(long companyId, long parentGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where companyId = &#63; and name = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByC_N(long companyId,
-		java.lang.String name)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where companyId = &#63; and friendlyURL = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param friendlyURL the friendly u r l
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByC_F(long companyId,
-		java.lang.String friendlyURL)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the groups where companyId = &#63; and site = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param site the site
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByC_S(long companyId, boolean site)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the groups where type = &#63; and active = &#63; from the database.
-	*
-	* @param type the type
-	* @param active the active
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByT_A(int type, boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByC_C_C(long companyId,
-		long classNameId, long classPK)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the groups where companyId = &#63; and parentGroupId = &#63; and site = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param parentGroupId the parent group ID
-	* @param site the site
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByC_P_S(long companyId, long parentGroupId, boolean site)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param liveGroupId the live group ID
-	* @param name the name
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByC_L_N(long companyId,
-		long liveGroupId, java.lang.String name)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
-	*
-	* @param companyId the company ID
-	* @param classNameId the class name ID
-	* @param liveGroupId the live group ID
-	* @param name the name
-	* @return the group that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group removeByC_C_L_N(long companyId,
-		long classNameId, long liveGroupId, java.lang.String name)
-		throws com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes all the groups from the database.
 	*
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeAll()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63;.
-	*
-	* @param companyId the company ID
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where liveGroupId = &#63;.
-	*
-	* @param liveGroupId the live group ID
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and parentGroupId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param parentGroupId the parent group ID
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_P(long companyId, long parentGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company ID
-	* @param name the name
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and friendlyURL = &#63;.
-	*
-	* @param companyId the company ID
-	* @param friendlyURL the friendly u r l
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_F(long companyId, java.lang.String friendlyURL)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and site = &#63;.
-	*
-	* @param companyId the company ID
-	* @param site the site
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_S(long companyId, boolean site)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where type = &#63; and active = &#63;.
-	*
-	* @param type the type
-	* @param active the active
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByT_A(int type, boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
-	*
-	* @param companyId the company ID
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_C_C(long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and parentGroupId = &#63; and site = &#63;.
-	*
-	* @param companyId the company ID
-	* @param parentGroupId the parent group ID
-	* @param site the site
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_P_S(long companyId, long parentGroupId, boolean site)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
-	*
-	* @param companyId the company ID
-	* @param liveGroupId the live group ID
-	* @param name the name
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_L_N(long companyId, long liveGroupId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
-	*
-	* @param companyId the company ID
-	* @param classNameId the class name ID
-	* @param liveGroupId the live group ID
-	* @param name the name
-	* @return the number of matching groups
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByC_C_L_N(long companyId, long classNameId,
-		long liveGroupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
