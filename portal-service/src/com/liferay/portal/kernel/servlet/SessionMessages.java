@@ -414,7 +414,7 @@ public class SessionMessages {
 			map = (Map<String, Object>)session.getAttribute(_CLASS_NAME);
 
 			if ((map == null) && createIfAbsent) {
-				map = new LinkedHashMap<String, Object>();
+				map = new SessionMessagesMap();
 
 				session.setAttribute(_CLASS_NAME, map);
 			}
@@ -437,7 +437,7 @@ public class SessionMessages {
 			map = (Map<String, Object>)portletSession.getAttribute(_CLASS_NAME);
 
 			if ((map == null) && createIfAbsent) {
-				map = new LinkedHashMap<String, Object>();
+				map = new SessionMessagesMap();
 
 				portletSession.setAttribute(_CLASS_NAME, map);
 			}
@@ -452,5 +452,43 @@ public class SessionMessages {
 	}
 
 	private static final String _CLASS_NAME = SessionMessages.class.getName();
+
+	private static class SessionMessagesMap
+		extends LinkedHashMap<String, Object> {
+
+		@Override
+		public Object get(Object key) {
+			key = _transformKey(key);
+
+			return super.get(key);
+		}
+
+		@Override
+		public boolean containsKey(Object key) {
+			key = _transformKey(key);
+
+			return super.containsKey(key);
+		}
+
+		@Override
+		public Object put(String key, Object value) {
+			key = _transformKey(key);
+
+			return super.put(key, value);
+		}
+
+		private String _transformKey(Object key) {
+			String keyString = String.valueOf(key);
+
+			if (keyString != null) {
+				if (keyString.equals("request_processed")) {
+					keyString = "requestProcessed";
+				}
+			}
+
+			return keyString;
+		}
+
+	}
 
 }
