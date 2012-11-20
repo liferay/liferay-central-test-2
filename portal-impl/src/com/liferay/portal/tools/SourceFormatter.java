@@ -4702,7 +4702,7 @@ public class SourceFormatter {
 		"(?:confirmation|label|(?:M|m)essage|message key|names|title)=\"[^A-Z" +
 			"<=%\\[\\s]+\"");
 	private static Pattern _taglibSessionKeyPattern = Pattern.compile(
-		"<liferay-ui:success [^>]+>|<liferay-ui:error [^>]+>",
+		"<liferay-ui:error [^>]+>|<liferay-ui:success [^>]+>",
 		Pattern.MULTILINE);
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*(Bean)?ParamUtil\\.getString\\(");
