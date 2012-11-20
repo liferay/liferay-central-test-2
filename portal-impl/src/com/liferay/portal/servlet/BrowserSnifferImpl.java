@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -335,20 +334,16 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 			return accept;
 		}
 
-		Object acceptAttribute = request.getAttribute(HttpHeaders.ACCEPT);
+		accept = String.valueOf(request.getAttribute(HttpHeaders.ACCEPT));
 
-		if (acceptAttribute instanceof String) {
-			accept = (String)acceptAttribute;
-		}
-
-		if (Validator.isNotNull(accept)) {
+		if (accept != null) {
 			return accept;
 		}
 
-		String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
+		accept = request.getHeader(HttpHeaders.ACCEPT);
 
-		if (acceptHeader != null) {
-			accept = acceptHeader.toLowerCase();
+		if (accept != null) {
+			accept = accept.toLowerCase();
 		}
 		else {
 			accept = StringPool.BLANK;
@@ -366,21 +361,17 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 			return userAgent;
 		}
 
-		Object userAgentAttribute = request.getAttribute(
-			HttpHeaders.USER_AGENT);
+		userAgent = String.valueOf(
+			request.getAttribute(HttpHeaders.USER_AGENT));
 
-		if (userAgentAttribute instanceof String) {
-			userAgent = (String)userAgentAttribute;
-		}
-
-		if (Validator.isNotNull(userAgent)) {
+		if (userAgent != null) {
 			return userAgent;
 		}
 
-		String userAgentHeader = request.getHeader(HttpHeaders.USER_AGENT);
+		userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-		if (userAgentHeader != null) {
-			userAgent = userAgentHeader.toLowerCase();
+		if (userAgent != null) {
+			userAgent = userAgent.toLowerCase();
 		}
 		else {
 			userAgent = StringPool.BLANK;
