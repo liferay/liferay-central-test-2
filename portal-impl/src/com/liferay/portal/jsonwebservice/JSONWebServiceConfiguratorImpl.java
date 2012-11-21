@@ -142,9 +142,9 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 			libDir = new File(classPathFile.getParent(), "lib");
 		}
 
-		List<File> classPathList = new ArrayList<File>();
+		List<File> classPaths = new ArrayList<File>();
 
-		classPathList.add(classPathFile);
+		classPaths.add(classPathFile);
 
 		FindFile findFile = new RegExpFindFile(
 			".*-(hook|portlet|web)-service.*\\.jar");
@@ -154,14 +154,14 @@ public class JSONWebServiceConfiguratorImpl extends ClassFinder
 		File file = null;
 
 		while ((file = findFile.nextFile()) != null) {
-			classPathList.add(file);
+			classPaths.add(file);
 		}
 
 		File classesDir = new File(libDir.getParent(), "classes");
 
-		classPathList.add(classesDir);
+		classPaths.add(classesDir);
 
-		return classPathList.toArray(new File[classPathList.size()]);
+		return classPaths.toArray(new File[classPaths.size()]);
 	}
 
 	protected File[] getPortalClassPathFiles() {
