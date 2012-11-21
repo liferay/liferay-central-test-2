@@ -178,8 +178,15 @@ public class OrganizationFinderImpl
 
 			StringBundler sb = new StringBundler();
 
-			boolean doUnion = (params != null) &&
-				Validator.isNotNull(params.get("groupOrganization"));
+			boolean doUnion = false;
+
+			if (params != null) {
+				Long groupOrganization = (Long)params.get("groupOrganization");
+
+				if (groupOrganization != null) {
+					doUnion = true;
+				}
+			}
 
 			if (doUnion) {
 				sb.append(StringPool.OPEN_PARENTHESIS);
