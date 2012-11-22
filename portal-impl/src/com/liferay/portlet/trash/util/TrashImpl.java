@@ -236,7 +236,7 @@ public class TrashImpl implements Trash {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		UnicodeProperties typeSettingsProperties =
-			group.getLiveParentTypeSettingsProperties();
+			group.getParentLiveGroupTypeSettingsProperties();
 
 		int trashEnabledCompany = PrefsPropsUtil.getInteger(
 			group.getCompanyId(), PropsKeys.TRASH_ENABLED);

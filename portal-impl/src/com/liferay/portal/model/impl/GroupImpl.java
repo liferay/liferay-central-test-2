@@ -161,30 +161,9 @@ public class GroupImpl extends GroupBaseImpl {
 		}
 	}
 
-	public UnicodeProperties getLiveParentTypeSettingsProperties() {
-		try {
-			if (isLayout()) {
-				Group parentGroup = GroupLocalServiceUtil.getGroup(
-					getParentGroupId());
-
-				return parentGroup.getLiveParentTypeSettingsProperties();
-			}
-
-			if (isStagingGroup()) {
-				Group liveGroup = getLiveGroup();
-
-				return liveGroup.getTypeSettingsProperties();
-			}
-		}
-		catch (Exception e) {
-		}
-
-		return getTypeSettingsProperties();
-	}
-
 	public String getLiveParentTypeSettingsProperty(String key) {
 		UnicodeProperties typeSettingsProperties =
-			getLiveParentTypeSettingsProperties();
+			getParentLiveGroupTypeSettingsProperties();
 
 		return typeSettingsProperties.getProperty(key);
 	}
@@ -212,6 +191,27 @@ public class GroupImpl extends GroupBaseImpl {
 		}
 
 		return GroupLocalServiceUtil.getGroup(parentGroupId);
+	}
+
+	public UnicodeProperties getParentLiveGroupTypeSettingsProperties() {
+		try {
+			if (isLayout()) {
+				Group parentGroup = GroupLocalServiceUtil.getGroup(
+					getParentGroupId());
+
+				return parentGroup.getParentLiveGroupTypeSettingsProperties();
+			}
+
+			if (isStagingGroup()) {
+				Group liveGroup = getLiveGroup();
+
+				return liveGroup.getTypeSettingsProperties();
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return getTypeSettingsProperties();
 	}
 
 	public String getPathFriendlyURL(
@@ -531,7 +531,7 @@ public class GroupImpl extends GroupBaseImpl {
 
 	public boolean isStagedPortlet(String portletId) {
 		UnicodeProperties typeSettingsProperties =
-			getLiveParentTypeSettingsProperties();
+			getParentLiveGroupTypeSettingsProperties();
 
 		portletId = PortletConstants.getRootPortletId(portletId);
 
