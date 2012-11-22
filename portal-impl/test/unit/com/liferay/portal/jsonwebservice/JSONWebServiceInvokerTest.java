@@ -17,12 +17,12 @@ package com.liferay.portal.jsonwebservice;
 import com.liferay.portal.jsonwebservice.action.JSONWebServiceInvokerAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.liferay.portal.kernel.util.StringUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -359,8 +359,9 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 	}
 
 	@Test
-	public void testTypeConversion() throws Exception {
+	public void testTypeConversion1() throws Exception {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 
 		map.put("/foo/hey", params);
@@ -387,6 +388,7 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 	@Test
 	public void testTypeConversion2() throws Exception {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 
 		map.put("/foo/hey", params);

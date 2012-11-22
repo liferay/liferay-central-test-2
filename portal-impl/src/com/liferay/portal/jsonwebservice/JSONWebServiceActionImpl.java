@@ -262,7 +262,9 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 					parameterValue = calendar;
 				}
 				else if (parameterType.equals(List.class)) {
-					String stringValue = value.toString().trim();
+					String stringValue = value.toString();
+
+					stringValue = stringValue.trim();
 
 					if (!stringValue.startsWith(StringPool.OPEN_BRACKET)) {
 						stringValue = StringPool.OPEN_BRACKET.concat(
@@ -291,7 +293,9 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 					parameterValue = map;
 				}
 				else if (parameterType.isArray()) {
-					String stringValue = value.toString().trim();
+					String stringValue = value.toString();
+
+					stringValue = stringValue.trim();
 
 					if (!stringValue.startsWith(StringPool.OPEN_BRACKET)) {
 						stringValue = StringPool.OPEN_BRACKET.concat(
@@ -310,19 +314,19 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 						parameterValue = TypeConverterManager.convertType(
 							value, parameterType);
 					}
-					catch (ClassCastException e) {
-						String stringValue = value.toString().trim();
+					catch (ClassCastException cce) {
+						String stringValue = value.toString();
 
-						if (stringValue.startsWith(
+						stringValue = stringValue.trim();
+
+						if (!stringValue.startsWith(
 								StringPool.OPEN_CURLY_BRACE)) {
 
-							parameterValue =
-								JSONFactoryUtil.looseDeserializeSafe
-									(stringValue, parameterType);
+							throw cce;
 						}
-						else {
-							throw e;
-						}
+
+						parameterValue = JSONFactoryUtil.looseDeserializeSafe(
+							stringValue, parameterType);
 					}
 				}
 			}

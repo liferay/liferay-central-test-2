@@ -72,7 +72,7 @@ public class FooService {
 
 		return calendar.get(Calendar.YEAR) + ", " + userIds[0] + '/' +
 			userIds.length + ", " + locales.get(0) + '/' + locales.size() +
-			", " + ids[0] + '/' + ids.length;
+				", " + ids[0] + '/' + ids.length;
 	}
 
 	public static String methodOne(long id, long nameId) {

@@ -132,8 +132,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 			"using #1: h=121/id=-1/n=Felix/v=!!!",
 			jsonWebServiceAction.invoke());
 
-		mockHttpServletRequest = createHttpRequest(
-			"/foo/use2");
+		mockHttpServletRequest = createHttpRequest("/foo/use2");
 
 		mockHttpServletRequest.setParameter(
 			"fooData", "{height: 121, name:'Felix', value:'!!!'}");
@@ -143,6 +142,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 
 		try {
 			jsonWebServiceAction.invoke();
+
 			Assert.fail();
 		}
 		catch (Exception e) {
@@ -315,7 +315,7 @@ public class JSONWebServiceTest extends BaseJSONWebServiceTestCase {
 	}
 
 	@Test
-	public void testTypeConversion() throws Exception {
+	public void testTypeConversion1() throws Exception {
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			"/foo/hey");
 
