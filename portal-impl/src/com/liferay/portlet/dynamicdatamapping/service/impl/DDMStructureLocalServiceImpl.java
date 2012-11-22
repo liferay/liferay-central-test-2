@@ -324,25 +324,6 @@ public class DDMStructureLocalServiceImpl
 			long groupId, String structureKey, boolean includeGlobalStructures)
 		throws PortalException, SystemException {
 
-		structureKey = structureKey.trim().toUpperCase();
-
-		if (groupId == 0) {
-			_log.error(
-				"No group id was passed for " + structureKey + ". Group id is" +
-					"required since 4.2.0. Please update all custom code and " +
-					"data that references structures without a group id.");
-
-			List<DDMStructure> ddmStructures =
-				ddmStructurePersistence.findByStructureKey(structureKey);
-
-			if (!ddmStructures.isEmpty()) {
-				return ddmStructures.get(0);
-			}
-
-			throw new NoSuchStructureException(
-				"No DDMStructure exists with the structure id " + structureKey);
-		}
-
 		DDMStructure structure = ddmStructurePersistence.fetchByG_S(
 			groupId, structureKey);
 
@@ -352,7 +333,7 @@ public class DDMStructureLocalServiceImpl
 
 		if (!includeGlobalStructures) {
 			throw new NoSuchStructureException(
-				"No JournalStructure exists with the structure id " +
+				"No JournalStructure exists with the structure key " +
 					structureKey);
 		}
 
@@ -775,7 +756,9 @@ public class DDMStructureLocalServiceImpl
 
 				Element rootElement = document.getRootElement();
 
-				if (rootElement.elements().isEmpty()) {
+				List<Element> rootElementElements = rootElement.elements();
+
+				if (rootElementElements.isEmpty()) {
 					throw new StructureXsdException();
 				}
 
