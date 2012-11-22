@@ -69,15 +69,15 @@ public class GroupServiceTest {
 
 	@Test
 	public void testAddPermissionsCustomRole() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_givePermissionToManageSubsites(user, group1);
+		givePermissionToManageSubsites(user, group);
 
-		_testGroup(
-			user, group1, null, null, true, false, false, false, true, true,
+		testGroup(
+			user, group, null, null, true, false, false, false, true, true,
 			true);
 	}
 
@@ -91,36 +91,36 @@ public class GroupServiceTest {
 		User user = ServiceTestUtil.addUser(
 			null, true, new long[] {group11.getGroupId()});
 
-		_givePermissionToManageSubsites(user, group11);
+		givePermissionToManageSubsites(user, group11);
 
-		_testGroup(
+		testGroup(
 			user, group1, group11, null, true, false, false, false, false, true,
 			true);
 	}
 
 	@Test
 	public void testAddPermissionsRegularUser() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_testGroup(
-			user, group1, null, null, true, false, false, false, false, false,
+		testGroup(
+			user, group, null, null, true, false, false, false, false, false,
 			false);
 	}
 
 	@Test
 	public void testAddPermissionsSiteAdmin() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_giveSiteAdminRole(user, group1);
+		giveSiteAdminRole(user, group);
 
-		_testGroup(
-			user, group1, null, null, true, false, true, false, true, true,
+		testGroup(
+			user, group, null, null, true, false, true, false, true, true,
 			true);
 	}
 
@@ -134,41 +134,40 @@ public class GroupServiceTest {
 		User user = ServiceTestUtil.addUser(
 			null, true, new long[] {group11.getGroupId()});
 
-		_giveSiteAdminRole(user, group11);
+		giveSiteAdminRole(user, group11);
 
-		_testGroup(
+		testGroup(
 			user, group1, group11, null, true, false, false, true, false, true,
 			true);
 	}
 
 	@Test
 	public void testDeleteSite() throws Exception {
-		Group group = ServiceTestUtil.addGroup("Test deletion");
-
-		long groupId = group.getGroupId();
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
 			ServiceTestUtil.randomString(), false,
 			new long[] {group.getGroupId()});
 
-		BlogsEntry entry = _addBlogsEntry(groupId, user.getUserId());
-
-		long entryId = entry.getEntryId();
+		BlogsEntry blogsEntry = addBlogsEntry(
+			group.getGroupId(), user.getUserId());
 
 		Assert.assertNotNull(
-			BlogsEntryLocalServiceUtil.fetchBlogsEntry(entryId));
+			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
+				blogsEntry.getEntryId()));
 
-		GroupLocalServiceUtil.deleteGroup(groupId);
+		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 
-		Assert.assertNull(BlogsEntryLocalServiceUtil.fetchBlogsEntry(entryId));
+		Assert.assertNull(
+			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
+				blogsEntry.getEntryId()));
 	}
 
 	@Test
 	public void testScopes() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
-		Layout layout = ServiceTestUtil.addLayout(
-			group1.getGroupId(), "Page 1");
+		Layout layout = ServiceTestUtil.addLayout(group.getGroupId(), "Page 1");
 
 		Assert.assertFalse(layout.hasScopeGroup());
 
@@ -180,14 +179,16 @@ public class GroupServiceTest {
 			null);
 
 		Assert.assertFalse(scope.isRoot());
-		Assert.assertEquals(scope.getParentGroupId(), group1.getGroupId());
+		Assert.assertEquals(scope.getParentGroupId(), group.getGroupId());
 	}
 
 	@Test
 	public void testSubsites() throws Exception {
 		Group group1 = ServiceTestUtil.addGroup("Test 1");
+
 		Group group11 = ServiceTestUtil.addGroup(
 			group1.getGroupId(), "Test 1.1");
+
 		Group group111 = ServiceTestUtil.addGroup(
 			group11.getGroupId(), "Test 1.1.1");
 
@@ -200,15 +201,15 @@ public class GroupServiceTest {
 
 	@Test
 	public void testUpdatePermissionsCustomRole() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_givePermissionToManageSubsites(user, group1);
+		givePermissionToManageSubsites(user, group);
 
-		_testGroup(
-			user, group1, null, null, false, true, false, false, true, true,
+		testGroup(
+			user, group, null, null, false, true, false, false, true, true,
 			true);
 	}
 
@@ -222,36 +223,36 @@ public class GroupServiceTest {
 		User user = ServiceTestUtil.addUser(
 			null, true, new long[] {group11.getGroupId()});
 
-		_givePermissionToManageSubsites(user, group11);
+		givePermissionToManageSubsites(user, group11);
 
-		_testGroup(
+		testGroup(
 			user, group1, group11, null, false, true, false, false, false, true,
 			true);
 	}
 
 	@Test
 	public void testUpdatePermissionsRegularUser() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_testGroup(
-			user, group1, null, null, false, true, false, false, false, false,
+		testGroup(
+			user, group, null, null, false, true, false, false, false, false,
 			false);
 	}
 
 	@Test
 	public void testUpdatePermissionsSiteAdmin() throws Exception {
-		Group group1 = ServiceTestUtil.addGroup("Test 1");
+		Group group = ServiceTestUtil.addGroup();
 
 		User user = ServiceTestUtil.addUser(
-			null, true, new long[] {group1.getGroupId()});
+			null, true, new long[] {group.getGroupId()});
 
-		_giveSiteAdminRole(user, group1);
+		giveSiteAdminRole(user, group);
 
-		_testGroup(
-			user, group1, null, null, false, true, true, false, true, true,
+		testGroup(
+			user, group, null, null, false, true, true, false, true, true,
 			true);
 	}
 
@@ -265,20 +266,15 @@ public class GroupServiceTest {
 		User user = ServiceTestUtil.addUser(
 			null, true, new long[] {group11.getGroupId()});
 
-		_giveSiteAdminRole(user, group11);
+		giveSiteAdminRole(user, group11);
 
-		_testGroup(
+		testGroup(
 			user, group1, group11, null, false, true, false, true, false, true,
 			true);
 	}
 
-	private BlogsEntry _addBlogsEntry(long groupId, long userId)
+	protected BlogsEntry addBlogsEntry(long groupId, long userId)
 		throws Exception {
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_APPROVED);
 
 		String title = "Title";
 		String description = "Description";
@@ -296,6 +292,11 @@ public class GroupServiceTest {
 		String smallImageFileName = StringPool.BLANK;
 		InputStream smallImageInputStream = null;
 
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_APPROVED);
+
 		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
 			userId, title, description, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
@@ -306,8 +307,8 @@ public class GroupServiceTest {
 		return blogsEntry;
 	}
 
-	private Group _addGroup(
-		String name, long parentGroupId, ServiceContext serviceContext)
+	protected Group addGroup(
+			String name, long parentGroupId, ServiceContext serviceContext)
 		throws Exception {
 
 		Group group = GroupLocalServiceUtil.fetchGroup(
@@ -333,7 +334,7 @@ public class GroupServiceTest {
 			description, type, friendlyURL, site, active, serviceContext);
 	}
 
-	private void _givePermissionToManageSubsites(User user, Group group)
+	protected void givePermissionToManageSubsites(User user, Group group)
 		throws Exception {
 
 		Role role = null;
@@ -360,7 +361,7 @@ public class GroupServiceTest {
 			user.getUserId(), group.getGroupId(), roleIds);
 	}
 
-	private void _giveSiteAdminRole(User user, Group group) throws Exception {
+	protected void giveSiteAdminRole(User user, Group group) throws Exception {
 		Role role = RoleLocalServiceUtil.getRole(
 			TestPropsValues.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
 
@@ -370,7 +371,7 @@ public class GroupServiceTest {
 			user.getUserId(), group.getGroupId(), roleIds);
 	}
 
-	private void _testGroup(
+	protected void testGroup(
 			User user, Group group1, Group group11, Group group111,
 			boolean addGroup, boolean updateGroup, boolean hasManageSite1,
 			boolean hasManageSite11, boolean hasManageSubsitePermisionOnGroup1,
@@ -404,7 +405,7 @@ public class GroupServiceTest {
 
 		if (addGroup) {
 			try {
-				_addGroup(
+				addGroup(
 					"Test 2", GroupConstants.DEFAULT_PARENT_GROUP_ID,
 					serviceContext);
 
@@ -415,7 +416,7 @@ public class GroupServiceTest {
 			}
 
 			try {
-				_addGroup("Test 1.2", group1.getGroupId(), serviceContext);
+				addGroup("Test 1.2", group1.getGroupId(), serviceContext);
 
 				if (!hasManageSubsitePermisionOnGroup1 && !hasManageSite1) {
 					Assert.fail("The user should not be able to add this site");
@@ -428,7 +429,7 @@ public class GroupServiceTest {
 			}
 
 			try {
-				_addGroup("Test 1.1.2", group11.getGroupId(), serviceContext);
+				addGroup("Test 1.1.2", group11.getGroupId(), serviceContext);
 
 				if (!hasManageSubsitePermisionOnGroup11 && !hasManageSite1) {
 					Assert.fail("The user should not be able to add this site");
@@ -441,8 +442,7 @@ public class GroupServiceTest {
 			}
 
 			try {
-				_addGroup(
-					"Test 1.1.1.2", group111.getGroupId(), serviceContext);
+				addGroup("Test 1.1.1.2", group111.getGroupId(), serviceContext);
 
 				if (!hasManageSubsitePermisionOnGroup111 && !hasManageSite1) {
 					Assert.fail("The user should not be able to add this site");
