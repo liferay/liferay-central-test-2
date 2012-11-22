@@ -42,7 +42,14 @@ import java.util.List;
 public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 
 	@Override
-	public List<ContainerModel> getAncestors(long containerModelId)
+	public ContainerModel getContainerModel(long containerModelId)
+		throws PortalException, SystemException {
+
+		return (ContainerModel)getDLFolder(containerModelId);
+	}
+
+	@Override
+	public List<ContainerModel> getParentContainerModels(long containerModelId)
 		throws PortalException, SystemException {
 
 		List<ContainerModel> containerModels = new ArrayList<ContainerModel>();
@@ -61,13 +68,6 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 		}
 
 		return containerModels;
-	}
-
-	@Override
-	public ContainerModel getContainerModel(long containerModelId)
-		throws PortalException, SystemException {
-
-		return (ContainerModel)getDLFolder(containerModelId);
 	}
 
 	@Override

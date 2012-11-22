@@ -80,8 +80,9 @@ public class TrashImpl implements Trash {
 		String rootContainerModelName = LanguageUtil.get(
 			themeDisplay.getLocale(), trashHandler.getRootContainerModelName());
 
-		List<ContainerModel> containerModels = trashHandler.getAncestors(
-			containerModel.getContainerModelId());
+		List<ContainerModel> containerModels =
+			trashHandler.getParentContainerModels(
+				containerModel.getContainerModelId());
 
 		if ((containerModels == null) || containerModels.isEmpty()) {
 			PortalUtil.addPortletBreadcrumbEntry(
