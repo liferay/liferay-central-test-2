@@ -69,9 +69,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TrashImpl implements Trash {
 
-	public void addContainerBreadcrumbEntries(
+	public void addContainerModelBreadcrumbEntries(
 			HttpServletRequest request, TrashHandler trashHandler,
-			ContainerModel containerModel, PortletURL containerURL)
+			ContainerModel containerModel, PortletURL containerModelURL)
 		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -84,28 +84,28 @@ public class TrashImpl implements Trash {
 			trashHandler.getParentContainerModels(
 				containerModel.getContainerModelId());
 
-		if ((containerModels == null) || containerModels.isEmpty()) {
+		Collections.reverse(containerModels);
+
+		if (containerModels.isEmpty()) {
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, rootContainerModelName, null);
 
 			return;
 		}
 
-		containerURL.setParameter("containerModelId", "0");
+		containerModelURL.setParameter("containerModelId", "0");
 
 		PortalUtil.addPortletBreadcrumbEntry(
-			request, rootContainerModelName, containerURL.toString());
-
-		Collections.reverse(containerModels);
+			request, rootContainerModelName, containerModelURL.toString());
 
 		for (ContainerModel curContainerModel : containerModels) {
-			containerURL.setParameter(
+			containerModelURL.setParameter(
 				"containerModelId",
 				String.valueOf(curContainerModel.getContainerModelId()));
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, curContainerModel.getContainerModelName(),
-				containerURL.toString());
+				containerModelURL.toString());
 		}
 
 		PortalUtil.addPortletBreadcrumbEntry(

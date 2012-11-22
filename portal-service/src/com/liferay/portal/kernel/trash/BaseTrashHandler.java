@@ -29,6 +29,7 @@ import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.trash.model.TrashEntry;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -181,10 +182,14 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return "deleted-in-x";
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ContainerModel> getParentContainerModels(long containerModelId)
 		throws PortalException, SystemException {
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -232,34 +237,50 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
-	public List<TrashRenderer> getTrashContainedModels(
-			long classPK, int start, int end)
-		throws PortalException, SystemException {
-
-		return null;
-	}
-
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getTrashContainedModelsCount(long classPK)
 		throws PortalException, SystemException {
 
 		return 0;
 	}
 
-	public String getTrashContainerModelName() {
-		return StringPool.BLANK;
-	}
-
-	public List<TrashRenderer> getTrashContainerModels(
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<TrashRenderer> getTrashContainedModelTrashRenderers(
 			long classPK, int start, int end)
 		throws PortalException, SystemException {
 
 		return null;
 	}
 
+	public String getTrashContainerModelName() {
+		return StringPool.BLANK;
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getTrashContainerModelsCount(long classPK)
 		throws PortalException, SystemException {
 
 		return 0;
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<TrashRenderer> getTrashContainerModelTrashRenderers(
+			long classPK, int start, int end)
+		throws PortalException, SystemException {
+
+		return null;
 	}
 
 	public TrashRenderer getTrashRenderer(long classPK)

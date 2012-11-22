@@ -316,20 +316,20 @@ public interface TrashHandler {
 
 	public String getTrashContainedModelName();
 
-	public List<TrashRenderer> getTrashContainedModels(
-			long classPK, int start, int end)
+	public int getTrashContainedModelsCount(long classPK)
 		throws PortalException, SystemException;
 
-	public int getTrashContainedModelsCount(long classPK)
+	public List<TrashRenderer> getTrashContainedModelTrashRenderers(
+			long classPK, int start, int end)
 		throws PortalException, SystemException;
 
 	public String getTrashContainerModelName();
 
-	public List<TrashRenderer> getTrashContainerModels(
-			long classPK, int start, int end)
+	public int getTrashContainerModelsCount(long classPK)
 		throws PortalException, SystemException;
 
-	public int getTrashContainerModelsCount(long classPK)
+	public List<TrashRenderer> getTrashContainerModelTrashRenderers(
+			long classPK, int start, int end)
 		throws PortalException, SystemException;
 
 	/**

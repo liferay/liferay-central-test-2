@@ -36,9 +36,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface Trash {
 
-	public void addContainerBreadcrumbEntries(
+	public void addContainerModelBreadcrumbEntries(
 			HttpServletRequest request, TrashHandler trashHandler,
-			ContainerModel containerModel, PortletURL containerURL)
+			ContainerModel containerModel, PortletURL containerModelURL)
 		throws PortalException, SystemException;
 
 	public String appendTrashNamespace(String title);

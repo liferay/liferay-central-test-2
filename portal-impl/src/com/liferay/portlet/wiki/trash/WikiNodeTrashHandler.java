@@ -98,35 +98,34 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 	}
 
 	@Override
-	public List<TrashRenderer> getTrashContainedModels(
+	public int getTrashContainedModelsCount(long classPK)
+		throws SystemException {
+
+		return WikiPageLocalServiceUtil.getPagesCount(classPK);
+	}
+
+	@Override
+	public List<TrashRenderer> getTrashContainedModelTrashRenderers(
 			long classPK, int start, int end)
 		throws PortalException, SystemException {
 
-		List<TrashRenderer> trashContainedModels =
-			new ArrayList<TrashRenderer>();
+		List<TrashRenderer> trashRenderers = new ArrayList<TrashRenderer>();
 
-		List<WikiPage> wikiPages = WikiPageLocalServiceUtil.getPages(
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
 			classPK, start, end);
 
-		for (WikiPage wikiPage : wikiPages) {
+		for (WikiPage page : pages) {
 			TrashHandler trashHandler =
 				TrashHandlerRegistryUtil.getTrashHandler(
 					WikiPage.class.getName());
 
 			TrashRenderer trashRenderer = trashHandler.getTrashRenderer(
-				wikiPage.getResourcePrimKey());
+				page.getResourcePrimKey());
 
-			trashContainedModels.add(trashRenderer);
+			trashRenderers.add(trashRenderer);
 		}
 
-		return trashContainedModels;
-	}
-
-	@Override
-	public int getTrashContainedModelsCount(long classPK)
-		throws PortalException, SystemException {
-
-		return WikiPageLocalServiceUtil.getPagesCount(classPK);
+		return trashRenderers;
 	}
 
 	@Override
@@ -138,6 +137,7 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 		return new WikiNodeTrashRenderer(node);
 	}
 
+	@Override
 	public boolean isContainerModel() {
 		return true;
 	}

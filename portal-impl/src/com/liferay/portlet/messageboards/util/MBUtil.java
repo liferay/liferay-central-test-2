@@ -254,9 +254,9 @@ public class MBUtil {
 
 		List<MBCategory> categories = mbCategory.getAncestors();
 
-		StringBundler sb = new StringBundler((categories.size() * 3) + 6);
-
 		Collections.reverse(categories);
+
+		StringBundler sb = new StringBundler((categories.size() * 3) + 6);
 
 		sb.append(themeDisplay.translate("home"));
 		sb.append(StringPool.SPACE);

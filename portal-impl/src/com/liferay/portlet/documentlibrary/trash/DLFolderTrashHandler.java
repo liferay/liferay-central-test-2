@@ -145,6 +145,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 			permissionChecker, groupId, classPK, trashActionId);
 	}
 
+	@Override
 	public boolean isContainerModel() {
 		return true;
 	}

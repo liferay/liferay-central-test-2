@@ -51,13 +51,13 @@ public class TrashUtil {
 
 	public static final String TRASH_TIME_SEPARATOR = "_TRASH_TIME_";
 
-	public static void addContainerBreadcrumbEntries(
+	public static void addContainerModelBreadcrumbEntries(
 			HttpServletRequest request, TrashHandler trashHandler,
-			ContainerModel containerModel, PortletURL containerURL)
+			ContainerModel containerModel, PortletURL containerModelURL)
 		throws PortalException, SystemException {
 
-		getTrash().addContainerBreadcrumbEntries(
-			request, trashHandler, containerModel, containerURL);
+		getTrash().addContainerModelBreadcrumbEntries(
+			request, trashHandler, containerModel, containerModelURL);
 	}
 
 	public static String appendTrashNamespace(String title) {
