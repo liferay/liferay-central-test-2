@@ -65,7 +65,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 			new long[] {group.getGroupId()});
 
 		blogsEntry = BlogsTestUtil.addBlogsEntry(
-			group, user.getUserId(), false);
+			user.getUserId(), group, false);
 	}
 
 	@After

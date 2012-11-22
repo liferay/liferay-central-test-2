@@ -32,13 +32,8 @@ import java.io.InputStream;
 public class BlogsTestUtil {
 
 	public static BlogsEntry addBlogsEntry(
-			Group group, long userId, boolean approved)
+			long userId, Group group, boolean approved)
 		throws Exception {
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		String title = "Title";
 		String description = "Description";
@@ -55,6 +50,11 @@ public class BlogsTestUtil {
 		String smallImageURL = StringPool.BLANK;
 		String smallImageFileName = StringPool.BLANK;
 		InputStream smallImageInputStream = null;
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.addEntry(
 			userId, title, description, content, displayDateMonth,

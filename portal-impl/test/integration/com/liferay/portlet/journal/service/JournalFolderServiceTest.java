@@ -73,8 +73,10 @@ public class JournalFolderServiceTest {
 
 		JournalFolder folder1 = JournalTestUtil.addFolder(
 			group.getGroupId(), 0, "Test 1");
+
 		JournalFolder folder11 = JournalTestUtil.addFolder(
 			group.getGroupId(), folder1.getFolderId(), "Test 1.1");
+
 		JournalFolder folder111 = JournalTestUtil.addFolder(
 			group.getGroupId(), folder11.getFolderId(), "Test 1.1.1");
 

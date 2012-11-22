@@ -148,7 +148,7 @@ public class GroupServiceTest {
 			new long[] {group.getGroupId()});
 
 		BlogsEntry blogsEntry = BlogsTestUtil.addBlogsEntry(
-			group, user.getUserId(), true);
+			user.getUserId(), group, true);
 
 		Assert.assertNotNull(
 			BlogsEntryLocalServiceUtil.fetchBlogsEntry(

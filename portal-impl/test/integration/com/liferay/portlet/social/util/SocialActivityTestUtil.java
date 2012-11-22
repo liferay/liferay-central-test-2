@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.social.util;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -35,8 +33,7 @@ import com.liferay.portlet.social.service.SocialActivityLimitLocalServiceUtil;
 public class SocialActivityTestUtil {
 
 	public static SocialActivity addActivity(
-			Group group, User user, AssetEntry assetEntry, int type)
-		throws PortalException, SystemException {
+		User user, Group group, AssetEntry assetEntry, int type) {
 
 		SocialActivity activity = new SocialActivityImpl();
 
@@ -53,7 +50,7 @@ public class SocialActivityTestUtil {
 	}
 
 	public static AssetEntry addAsset(
-			Group group, User creatorUser, AssetEntry assetEntry)
+			User user, Group group, AssetEntry assetEntry)
 		throws Exception {
 
 		if (assetEntry != null) {
@@ -61,8 +58,7 @@ public class SocialActivityTestUtil {
 		}
 
 		return AssetEntryLocalServiceUtil.updateEntry(
-			creatorUser.getUserId(), group.getGroupId(), _TEST_MODEL, 1, null,
-			null);
+			user.getUserId(), group.getGroupId(), _TEST_MODEL, 1, null, null);
 	}
 
 	public static SocialActivityCounter getActivityCounter(

@@ -56,7 +56,7 @@ public class SocialActivityCounterLocalServiceTest
 	public void testAddActivity() throws Exception {
 		SocialActivityCounterLocalServiceUtil.addActivityCounters(
 			SocialActivityTestUtil.addActivity(
-				_group, _creatorUser, _assetEntry, 1));
+				_creatorUser, _group, _assetEntry, 1));
 
 		SocialActivityCounter contribution =
 			SocialActivityTestUtil.getActivityCounter(
@@ -75,7 +75,7 @@ public class SocialActivityCounterLocalServiceTest
 
 		SocialActivityCounterLocalServiceUtil.addActivityCounters(
 			SocialActivityTestUtil.addActivity(
-				_group, _actorUser, _assetEntry, 2));
+				_actorUser, _group, _assetEntry, 2));
 
 		contribution = SocialActivityTestUtil.getActivityCounter(
 			_group.getGroupId(),
@@ -101,7 +101,7 @@ public class SocialActivityCounterLocalServiceTest
 
 		SocialActivityCounterLocalServiceUtil.addActivityCounters(
 			SocialActivityTestUtil.addActivity(
-				_group, _actorUser, _assetEntry, 2));
+				_actorUser, _group, _assetEntry, 2));
 
 		activityLimit =  SocialActivityTestUtil.getActivityLimit(
 			_group.getGroupId(), _actorUser, _assetEntry, 2,
@@ -115,11 +115,11 @@ public class SocialActivityCounterLocalServiceTest
 	public void testToggleActivities() throws Exception {
 		SocialActivityCounterLocalServiceUtil.addActivityCounters(
 			SocialActivityTestUtil.addActivity(
-				_group, _creatorUser, _assetEntry, 1));
+				_creatorUser, _group, _assetEntry, 1));
 
 		SocialActivityCounterLocalServiceUtil.addActivityCounters(
 			SocialActivityTestUtil.addActivity(
-				_group, _actorUser, _assetEntry, 2));
+				_actorUser, _group, _assetEntry, 2));
 
 		SocialActivityCounter contribution =
 			SocialActivityTestUtil.getActivityCounter(
