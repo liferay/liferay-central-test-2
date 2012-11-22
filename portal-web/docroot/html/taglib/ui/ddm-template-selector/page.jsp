@@ -29,41 +29,9 @@ String label = (String)request.getAttribute("liferay-ui:ddm-template-select:labe
 String preferenceName = (String)request.getAttribute("liferay-ui:ddm-template-select:preferenceName");
 String preferenceValue = (String)request.getAttribute("liferay-ui:ddm-template-select:preferenceValue");
 String refreshURL = (String)request.getAttribute("liferay-ui:ddm-template-select:refreshURL");
-
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:ddm-template-select:showEmptyOption"));
 
-DDMTemplate ddmTemplate = null;
-
 long ddmTemplateGroupId = PortletDisplayTemplateUtil.getDDMTemplateGroupId(themeDisplay);
-
-Group ddmTemplateGroup = GroupServiceUtil.getGroup(ddmTemplateGroupId);
-
-if (preferenceValue.startsWith("ddmTemplate_")) {
-	ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(ddmTemplateGroupId, preferenceValue);
-}
-
-List<DDMTemplate> companyPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(themeDisplay.getCompanyGroupId(), classNameId, 0);
-
-List<DDMTemplate> groupPortletDDMTemplates = null;
-
-if (ddmTemplateGroupId != themeDisplay.getCompanyGroupId()) {
-	groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(ddmTemplateGroupId, classNameId, 0);
-}
-
-String message = LanguageUtil.format(pageContext, "manage-display-templates-for-x", ddmTemplateGroup.getName(), false);
-
-long controlPanelPlid = PortalUtil.getControlPanelPlid(company.getCompanyId());
-
-LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, controlPanelPlid, PortletRequest.RENDER_PHASE);
-
-liferayPortletURL.setDoAsGroupId(ddmTemplateGroupId);
-liferayPortletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
-liferayPortletURL.setPortletMode(PortletMode.VIEW);
-liferayPortletURL.setWindowState(LiferayWindowState.POP_UP);
-
-String liferayPortletURLString = liferayPortletURL.toString();
-
-liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classNameId", classNameId);
 %>
 
 <aui:select id="displayStyle" label="<%= label %>" name='<%= "preferences--" + preferenceName + "--" %>'>
@@ -87,6 +55,16 @@ liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classN
 		</optgroup>
 	</c:if>
 
+	<%
+	DDMTemplate ddmTemplate = null;
+
+	if (preferenceValue.startsWith("ddmTemplate_")) {
+		ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(ddmTemplateGroupId, preferenceValue);
+	}
+
+	List<DDMTemplate> companyPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(themeDisplay.getCompanyGroupId(), classNameId, 0);
+	%>
+
 	<c:if test="<%= (companyPortletDDMTemplates != null) && !companyPortletDDMTemplates.isEmpty() %>">
 		<optgroup label="<liferay-ui:message key="global" />">
 
@@ -105,6 +83,14 @@ liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classN
 
 		</optgroup>
 	</c:if>
+
+	<%
+	List<DDMTemplate> groupPortletDDMTemplates = null;
+
+	if (ddmTemplateGroupId != themeDisplay.getCompanyGroupId()) {
+		groupPortletDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(ddmTemplateGroupId, classNameId, 0);
+	}
+	%>
 
 	<c:if test="<%= (groupPortletDDMTemplates != null) && !groupPortletDDMTemplates.isEmpty() %>">
 		<optgroup label="<%= themeDisplay.getScopeGroupName() %>">
@@ -126,7 +112,18 @@ liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classN
 	</c:if>
 </aui:select>
 
-<liferay-ui:icon cssClass="manage-display-templates" id="selectDDMTemplate" image="<%= icon %>" label="<%= true %>" message="<%= message %>" url="javascript:;" />
+<%
+Group ddmTemplateGroup = GroupServiceUtil.getGroup(ddmTemplateGroupId);
+%>
+
+<liferay-ui:icon
+	cssClass="manage-display-templates"
+	id="selectDDMTemplate"
+	image="<%= icon %>"
+	label="<%= true %>"
+	message='<%= LanguageUtil.format(pageContext, "manage-display-templates-for-x", ddmTemplateGroup.getName(), false) %>'
+	url="javascript:;"
+/>
 
 <aui:script use="aui-base">
 	var selectDDMTemplate = A.one('#<portlet:namespace />selectDDMTemplate');
@@ -145,6 +142,22 @@ liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classN
 						},
 						id: windowId,
 						title: '<%= UnicodeLanguageUtil.get(pageContext, "application-display-templates") %>',
+
+						<%
+						long controlPanelPlid = PortalUtil.getControlPanelPlid(company.getCompanyId());
+
+						LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(request, PortletKeys.PORTLET_DISPLAY_TEMPLATES, controlPanelPlid, PortletRequest.RENDER_PHASE);
+
+						liferayPortletURL.setDoAsGroupId(ddmTemplateGroupId);
+						liferayPortletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
+						liferayPortletURL.setPortletMode(PortletMode.VIEW);
+						liferayPortletURL.setWindowState(LiferayWindowState.POP_UP);
+
+						String liferayPortletURLString = liferayPortletURL.toString();
+
+						liferayPortletURLString = HttpUtil.addParameter(liferayPortletURLString, "classNameId", classNameId);
+						%>
+
 						uri: '<%= liferayPortletURLString %>'
 					},
 					function (ddmPortletWindow) {
