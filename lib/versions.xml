@@ -662,7 +662,7 @@
 		<file-name>development/osgi.cmpn.jar</file-name>
 		<version>4.3.1.201210102024</version>
 		<project-name>OSGi Compendium Specification</project-name>
-		<project-url>http://www.osgi.org/Release4/Download</project-url>
+		<project-url>http://www.osgi.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -673,7 +673,7 @@
 		<file-name>development/osgi.core.jar</file-name>
 		<version>4.3.1.201210102023</version>
 		<project-name>OSGi Core Specification</project-name>
-		<project-url>http://www.osgi.org/Release4/Download</project-url>
+		<project-url>http://www.osgi.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
