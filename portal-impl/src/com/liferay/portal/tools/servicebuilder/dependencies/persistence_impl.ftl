@@ -131,10 +131,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		new String[0]);
 
 	<#list entity.getFinderList() as finder>
-		<#include "persistence_impl_finder_finderpath.ftl">
+		<#include "persistence_impl_finder_finder_path.ftl">
+
 		<#include "persistence_impl_finder_find.ftl">
+
 		<#include "persistence_impl_finder_remove.ftl">
+
 		<#include "persistence_impl_finder_count.ftl">
+
 		<#include "persistence_impl_finder_field.ftl">
 	</#list>
 
