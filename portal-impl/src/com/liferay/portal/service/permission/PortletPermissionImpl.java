@@ -423,6 +423,7 @@ public class PortletPermissionImpl implements PortletPermission {
 			if ((groupId > 0) && layout.isTypeControlPanel() &&
 				Validator.equals(portletId, PortletKeys.SITES_ADMIN)) {
 
+				//special case to handle sites admin in control panel
 				group = GroupLocalServiceUtil.getGroup(groupId);
 			}
 			else {
