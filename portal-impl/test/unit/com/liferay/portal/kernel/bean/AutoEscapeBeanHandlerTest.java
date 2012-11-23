@@ -31,47 +31,44 @@ public class AutoEscapeBeanHandlerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		new HtmlUtil().setHtml(new HtmlImpl());
+		HtmlUtil htmlUtil = new HtmlUtil();
 
-		_model = new ModelImpl(UNESCAPED_TEXT);
+		htmlUtil.setHtml(new HtmlImpl());
+
+		_bean = new BeanImpl(_UNESCAPED_TEXT);
 	}
 
 	@Test
-	public void testToEscapedModel() {
-		Model escapedModel = _model.toEscapedModel();
+	public void testToEscapedBean() {
+		Bean escapedBean = _bean.toEscapedBean();
 
-		Assert.assertEquals(ESCAPED_TEXT, escapedModel.getAttribute());
-	}
-
-	@Test
-	public void testToEscapedModelUnescapedAttribute() {
-		Model escapedModel = _model.toEscapedModel();
-
+		Assert.assertEquals(_ESCAPED_TEXT, escapedBean.getAttribute());
 		Assert.assertEquals(
-			UNESCAPED_TEXT, escapedModel.getUnescapedAttribute());
+			_UNESCAPED_TEXT, escapedBean.getUnescapedAttribute());
 	}
 
-	private static final String ESCAPED_TEXT = "old mc&#039;donald";
+	private static final String _ESCAPED_TEXT = "Old Mc&#039;Donald";
 
-	private static final String UNESCAPED_TEXT = "old mc'donald";
+	private static final String _UNESCAPED_TEXT = "Old Mc'Donald";
 
-	private Model _model;
+	private Bean _bean;
 
-	private interface Model extends Serializable {
+	private interface Bean extends Serializable {
 
 		@AutoEscape
 		public String getAttribute();
 
 		public String getUnescapedAttribute();
 
-		public Model toEscapedModel();
+		public Bean toEscapedBean();
+
 	}
 
-	private class ModelImpl implements Model {
+	private class BeanImpl implements Bean {
 
-		public ModelImpl(String value) {
-			_attribute = value;
-			_unescapedAttribute = value;
+		public BeanImpl(String attribute) {
+			_attribute = attribute;
+			_unescapedAttribute = attribute;
 		}
 
 		public String getAttribute() {
@@ -82,14 +79,13 @@ public class AutoEscapeBeanHandlerTest {
 			return _unescapedAttribute;
 		}
 
-		public Model toEscapedModel() {
-			return (Model) ProxyUtil.newProxyInstance(
-				getClass().getClassLoader(), _escapedModelInterfaces,
+		public Bean toEscapedBean() {
+			Class<?> clazz = getClass();
+
+			return (Bean)ProxyUtil.newProxyInstance(
+				clazz.getClassLoader(), new Class<?>[] {Bean.class},
 				new AutoEscapeBeanHandler(this));
 		}
-
-		private Class<?>[] _escapedModelInterfaces =
-			new Class[] { Model.class };
 
 		private String _attribute;
 		private String _unescapedAttribute;
