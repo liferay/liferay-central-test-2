@@ -48,9 +48,8 @@ public class OmniadminUtil {
 			if (user == null) {
 				return false;
 			}
-			else {
-				return isOmniadmin(user);
-			}
+
+			return isOmniadmin(user);
 		}
 		catch (SystemException se) {
 			return false;
