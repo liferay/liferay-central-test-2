@@ -45,9 +45,10 @@
 
 				<#if entity.getOrder()??>
 					<#assign orderList = entity.getOrder().getColumns()>
-					<#assign pkList = entity.getPKList()>
 
 					<#list orderList as order>
+						<#assign pkList = entity.getPKList()>
+
 						<#if !finderColsList?seq_contains(order) && !pkList?seq_contains(order)>
 							| ${entity.name}ModelImpl.${order.name?upper_case}_COLUMN_BITMASK
 						</#if>
@@ -59,7 +60,7 @@
 	</#if>
 </#if>
 
-<#if finder.isUnique() || !finder.isCollection()>
+<#if !finder.isCollection() || finder.isUnique()>
 	public static final FinderPath FINDER_PATH_FETCH_BY_${finder.name?upper_case} = new FinderPath(
 		${entity.name}ModelImpl.ENTITY_CACHE_ENABLED,
 		${entity.name}ModelImpl.FINDER_CACHE_ENABLED,

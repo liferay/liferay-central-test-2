@@ -21,11 +21,11 @@ public int countBy${finder.name}(
 
 ) throws SystemException {
 	FinderPath finderPath =
-	<#if !finder.hasCustomComparator()>
-		FINDER_PATH_COUNT_BY_${finder.name?upper_case};
-	<#else>
-		FINDER_PATH_WITH_PAGINATION_COUNT_BY_${finder.name?upper_case};
-	</#if>
+		<#if !finder.hasCustomComparator()>
+			FINDER_PATH_COUNT_BY_${finder.name?upper_case};
+		<#else>
+			FINDER_PATH_WITH_PAGINATION_COUNT_BY_${finder.name?upper_case};
+		</#if>
 
 	Object[] finderArgs = new Object[] {
 		<#list finderColsList as finderCol>

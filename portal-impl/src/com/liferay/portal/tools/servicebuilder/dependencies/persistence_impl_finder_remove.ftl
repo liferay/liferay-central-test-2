@@ -1,8 +1,8 @@
 <#assign finderColsList = finder.getColumns()>
 
-<#-- Case 3 : finder.isUnique() == false && finder.isCollection()-->
+<#-- Case 3: finder.isCollection() && !finder.isUnique() -->
 
-<#if !finder.isUnique() && finder.isCollection()>
+<#if finder.isCollection() && !finder.isUnique()>
 	/**
 	 * Removes all the ${entity.humanNames} where ${finder.getHumanConditions(false)} from the database.
 	 *
@@ -31,7 +31,7 @@
 	}
 <#else>
 
-<#-- Case 9 : !finder.isCollection() || finder.isUnique() -->
+<#-- Case 9: !finder.isCollection() || finder.isUnique() -->
 
 	/**
 	 * Removes the ${entity.humanName} where ${finder.getHumanConditions(false)} from the database.

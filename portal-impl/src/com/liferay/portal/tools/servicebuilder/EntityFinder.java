@@ -39,10 +39,9 @@ public class EntityFinder {
 
 		if (isCollection() && isUnique() && !hasArrayableOperator()) {
 			throw new IllegalArgumentException(
-				"\"Unique + Collection\" combination is a legal setting only " +
-					"for finders with arrayable column, see ExpandoColumn as " +
-						"an example. Finder " + name + " does not have any " +
-							"arrayable column.");
+				"A finder cannot return a Collection and be unique unless " +
+					"it has an arrayable column. See the ExpandoColumn " +
+						"service.xml declaration for an example.");
 		}
 	}
 

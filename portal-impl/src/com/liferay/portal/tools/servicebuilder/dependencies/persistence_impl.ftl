@@ -946,7 +946,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					Collections.sort(list);
 
-					list = new UnmodifiableList(list);
+					list = new UnmodifiableList<${entity.name}>(list);
 				}
 				else {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
@@ -1136,7 +1136,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 							Collections.sort(list);
 
-							list = new UnmodifiableList(list);
+							list = new UnmodifiableList<${tempEntity.packagePath}.model.${tempEntity.name}>(list);
 						}
 						else {
 							list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);

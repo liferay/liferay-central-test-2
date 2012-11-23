@@ -8,9 +8,11 @@ if (orderByComparator != null) {
 	appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 }
 else
+
 <#if checkPagination>
-if (pagination)
+	if (pagination)
 </#if>
+
 {
 	query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
 }

@@ -1,70 +1,84 @@
 <#assign finderColsList = finder.getColumns()>
 
 <#--
-	Basic cases table:
-	+---------------------------+-------------------------------+-------------------------------+
-	|							|finder.isCollection() == true  |finder.isCollection() == false |
-	+---------------------------+-------------------------------+-------------------------------+
-	|finder.isUnique() == true  |			case 1				|			case 2				|
-	+---------------------------+-------------------------------+-------------------------------+
-	|finder.isUnique() == false |			case 3				|			case 4				|
-	+---------------------------+-------------------------------+-------------------------------+
+Basic Cases Table:
 
-	Combination cases table1:
++---------------------------+-------------------------------+-------------------------------+
+|							|	finder.isCollection()		|	!finder.isCollection()		|
++---------------------------+-------------------------------+-------------------------------+
+|	finder.isUnique()		|			Case 1				|			Case 2				|
++---------------------------+-------------------------------+-------------------------------+
+|	!finder.isUnique()		|			Case 3				|			Case 4				|
++---------------------------+-------------------------------+-------------------------------+
 
-	+---------------------------+-------------------------------+-------------------------------+
-	|							|finder.isCollection() == true  |finder.isCollection() == false |
-	+---------------------------+---------------------------------------------------------------+
-	|finder.isUnique() == true  |							case 5								|
-	+---------------------------+---------------------------------------------------------------+
-	|finder.isUnique() == false |							case 6								|
-	+---------------------------+---------------------------------------------------------------+
+Combination Cases Table 1:
 
-	Combination cases table2:
++---------------------------+-------------------------------+-------------------------------+
+|							|	finder.isCollection()		|	!finder.isCollection()		|
++---------------------------+---------------------------------------------------------------+
+|	finder.isUnique()		|							Case 5								|
++---------------------------+---------------------------------------------------------------+
+|	!finder.isUnique()		|							Case 6								|
++---------------------------+---------------------------------------------------------------+
 
-	+---------------------------+-------------------------------+-------------------------------+
-	|							|finder.isCollection() == true  |finder.isCollection() == false |
-	+---------------------------+-------------------------------+-------------------------------+
-	|finder.isUnique() == true  |								|								|
-	+---------------------------|			case 7				|			case 8				|
-	|finder.isUnique() == false |								|								|
-	+---------------------------+-------------------------------+-------------------------------+
+Combination Cases Table 2:
 
-	Combination cases table3:
++---------------------------+-------------------------------+-------------------------------+
+|							|	finder.isCollection()		|	!finder.isCollection()		|
++---------------------------+-------------------------------+-------------------------------+
+|	finder.isUnique()		|								|								|
++---------------------------|			Case 7				|			Case 8				|
+|	!finder.isUnique()		|								|								|
++---------------------------+-------------------------------+-------------------------------+
 
-	+---------------------------+-------------------------------+-------------------------------+
-	|							|finder.isCollection() == true  |finder.isCollection() == false |
-	+---------------------------+-------------------------------+-------------------------------+
-	|finder.isUnique() == true  |											case 9				|
-	+---------------------------|--------------------------------								|
-	|finder.isUnique() == false |								|								|
-	+---------------------------+-------------------------------+-------------------------------+
+Combination Cases Table 3:
 
-	finder.isUnique() == true is a physical unique on DB side, finder.isCollection() == false is a logic unique on Portal side. So case 9 can be considered as an united unique.
++---------------------------+-------------------------------+-------------------------------+
+|							|	finder.isCollection()		|	!finder.isCollection()		|
++---------------------------+-------------------------------+-------------------------------+
+|	finder.isUnique()		|																|
++---------------------------|--------------------------------			Case 9				|
+|	!finder.isUnique()		|								|								|
++---------------------------+-------------------------------+-------------------------------+
 
-	There 9 cases in total, 4 basic cases as shown in the first table.
+There are a total of 9 cases. The first 4 cases are the basic cases as show in
+the first table.
 
-	When a scenario covers two close basic cases, to avoid duplicate code, we combine them into a new case and remove them from basic cases.]
-	case 1 + case 2 -> case 5
-	case 3 + case 4 -> case 6
-	case 1 + case 3 -> case 7
-	case 2 + case 4 -> case 8
-	case 1 + case 2 + case 4 -> case 9
+The additional combination case tables allow us to group the basic cases. For
+example:
+
+A combination of case 1 and case 2 is grouped as case 5.
+
+A combination of case 3 and case 4 is grouped as case 6.
+
+A combination of case 1 and case 3 is grouped as case 7.
+
+A combination of case 2 and case 4 is grouped as case 8.
+
+A combination of case 1, case 2, and case 4 is grouped as case 9.
+
+Grouping the basic cases allows us to write the finder implementation with as
+little duplicate code as possible.
+
+finder.isUnique() means a literal unique finder because it generates a unique
+index at the database level. !finder.isCollection() means a conceptual unique
+that may or may not be enforced with a unique index at the database level. Case
+9 can be considered a union of the literal and conceptual unique finders.
 -->
 
-<#-- Case 1 : finder.isUnique() == true && finder.isCollection() == true -->
+<#-- Case 1: finder.isCollection() && finder.isUnique() -->
 
-<#if finder.isUnique() && finder.isCollection()>
+<#if finder.isCollection() && finder.isUnique()>
 </#if>
 
-<#-- Case 2 : finder.isUnique() == true && finder.isCollection() == false -->
+<#-- Case 2: !finder.isCollection() && finder.isUnique() -->
 
-<#if finder.isUnique() && !finder.isCollection()>
+<#if !finder.isCollection() && finder.isUnique()>
 </#if>
 
-<#-- Case 3 : finder.isUnique() == false && finder.isCollection() == true -->
+<#-- Case 3: finder.isCollection() && !finder.isUnique() -->
 
-<#if !finder.isUnique() && finder.isCollection()>
+<#if finder.isCollection() && !finder.isUnique()>
 	/**
 	 * Returns all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
 	 *
@@ -208,7 +222,9 @@
 
 		if (list == null) {
 			<#assign checkPagination = true>
+
 			<#include "persistence_impl_find_by_query.ftl">
+
 			<#assign checkPagination = false>
 
 			String sql = query.toString();
@@ -229,7 +245,7 @@
 
 					Collections.sort(list);
 
-					list = new UnmodifiableList(list);
+					list = new UnmodifiableList<${entity.name}>(list);
 				}
 				else {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
@@ -1199,22 +1215,22 @@
 	</#if>
 </#if>
 
-<#-- Case 4 : finder.isUnique() == false && finder.isCollection() == false -->
+<#-- Case 4: !finder.isCollection() && !finder.isUnique() -->
 
-<#if !finder.isUnique() && !finder.isCollection()>
+<#if !finder.isCollection() && !finder.isUnique()>
 </#if>
 
-<#-- Case 5 : finder.isUnique() == true -->
+<#-- Case 5: finder.isUnique() -->
 
 <#if finder.isUnique()>
 </#if>
 
-<#-- Case 6 : finder.isUnique() == false -->
+<#-- Case 6: !finder.isUnique() -->
 
 <#if !finder.isUnique()>
 </#if>
 
-<#-- Case 7 : finder.isCollection() == true -->
+<#-- Case 7: finder.isCollection() -->
 
 <#if finder.isCollection()>
 	<#if finder.hasArrayableOperator()>
@@ -1353,7 +1369,6 @@
 			) {
 				<#if finder.isUnique()>
 					${entity.name} ${entity.varName} = fetchBy${finder.name}(
-
 						<#list finderColsList as finderCol>
 							<#if finderCol.hasArrayableOperator()>
 								${finderCol.names}[0]
@@ -1378,7 +1393,6 @@
 					}
 				<#else>
 					return findBy${finder.name}(
-
 						<#list finderColsList as finderCol>
 							<#if finderCol.hasArrayableOperator()>
 								${finderCol.names}[0],
@@ -1454,7 +1468,9 @@
 
 			if (list == null) {
 				<#assign checkPagination = true>
+
 				<#include "persistence_impl_find_by_arrayable_query.ftl">
+
 				<#assign checkPagination = false>
 
 				String sql = query.toString();
@@ -1475,7 +1491,7 @@
 
 						Collections.sort(list);
 
-						list = new UnmodifiableList(list);
+						list = new UnmodifiableList<${entity.name}>(list);
 					}
 					else {
 						list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
@@ -1500,13 +1516,12 @@
 	</#if>
 </#if>
 
-<#-- Case 8 : finder.isCollection() == false -->
+<#-- Case 8: !finder.isCollection() -->
 
 <#if !finder.isCollection()>
 </#if>
 
-
-<#-- Case 9 : !finder.isCollection() || finder.isUnique() -->
+<#-- Case 9: !finder.isCollection() || finder.isUnique() -->
 
 <#if !finder.isCollection() || finder.isUnique()>
 	/**
