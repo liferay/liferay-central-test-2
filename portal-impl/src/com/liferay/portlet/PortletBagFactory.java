@@ -151,14 +151,14 @@ public class PortletBagFactory {
 		PortletDataHandler portletDataHandlerInstance = newPortletDataHandler(
 			portlet);
 
-		List<StagedModelDataHandler> stagedModelDataHandlerInstances =
-			new ArrayList<StagedModelDataHandler>();
+		List<StagedModelDataHandler<?>> stagedModelDataHandlerInstances =
+			new ArrayList<StagedModelDataHandler<?>>();
 
 		for (String stagedModelDataHandlerClass :
 				portlet.getStagedModelDataHandlerClasses()) {
 
-			StagedModelDataHandler stagedModelDataHandler =
-				(StagedModelDataHandler)newInstance(
+			StagedModelDataHandler<?> stagedModelDataHandler =
+				(StagedModelDataHandler<?>)newInstance(
 					StagedModelDataHandler.class, stagedModelDataHandlerClass);
 
 			stagedModelDataHandlerInstances.add(stagedModelDataHandler);

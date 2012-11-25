@@ -62,7 +62,7 @@ public class PortletBagImpl implements PortletBag {
 		FriendlyURLMapper friendlyURLMapperInstance,
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
-		List<StagedModelDataHandler> stagedModelDataHandlerInstances,
+		List<StagedModelDataHandler<?>> stagedModelDataHandlerInstances,
 		PortletDisplayTemplateHandler portletDisplayTemplateHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
 		PollerProcessor pollerProcessorInstance,
@@ -234,7 +234,9 @@ public class PortletBagImpl implements PortletBag {
 		return _socialRequestInterpreterInstance;
 	}
 
-	public List<StagedModelDataHandler> getStagedModelDataHandlerInstances() {
+	public List<StagedModelDataHandler<?>>
+		getStagedModelDataHandlerInstances() {
+
 		return _stagedModelDataHandlerInstances;
 	}
 
@@ -288,7 +290,7 @@ public class PortletBagImpl implements PortletBag {
 	private ServletContext _servletContext;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private SocialRequestInterpreter _socialRequestInterpreterInstance;
-	private List<StagedModelDataHandler> _stagedModelDataHandlerInstances;
+	private List<StagedModelDataHandler<?>> _stagedModelDataHandlerInstances;
 	private List<TrashHandler> _trashHandlerInstances;
 	private URLEncoder _urlEncoderInstance;
 	private WebDAVStorage _webDAVStorageInstance;

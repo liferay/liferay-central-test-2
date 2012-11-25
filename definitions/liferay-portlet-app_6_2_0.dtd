@@ -247,7 +247,7 @@ http://docs.liferay.com/portal/6.2/javadocs/portal-service/com/liferay/portal/ke
 <!--
 The staged-model-data-handler-class value must be a class that implements
 com.liferay.portal.kernel.lar.StagedModelDatahandler and is called to handle
-export and import functionalities for a staged modelled entity.
+export and import logic for a staged model entity.
 -->
 <!ELEMENT staged-model-data-handler-class (#PCDATA)>
 

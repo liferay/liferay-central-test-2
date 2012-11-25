@@ -96,7 +96,7 @@ public interface PortletBag extends Cloneable {
 
 	public SocialRequestInterpreter getSocialRequestInterpreterInstance();
 
-	public List<StagedModelDataHandler> getStagedModelDataHandlerInstances();
+	public List<StagedModelDataHandler<?>> getStagedModelDataHandlerInstances();
 
 	public List<TrashHandler> getTrashHandlerInstances();
 
