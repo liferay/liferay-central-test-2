@@ -14,50 +14,52 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Mate Thurzo
+ * @author Brian Wing Shun Chan
  */
 public class StagedModelDataHandlerRegistryUtil {
 
-	public static StagedModelDataHandler getStagedModelDataHandler(
+	public static StagedModelDataHandler<?> getStagedModelDataHandler(
 		String className) {
 
 		return getStagedModelDataHandlerRegistry().getStagedModelDataHandler(
 			className);
 	}
 
-	public static List<StagedModelDataHandler> getStagedModelDataHandlerList() {
-		return getStagedModelDataHandlerRegistry().
-			getStagedModelDataHandlerList();
-	}
-
 	public static StagedModelDataHandlerRegistry
 		getStagedModelDataHandlerRegistry() {
+
+		PortalRuntimePermission.checkGetBeanProperty(
+			StagedModelDataHandlerRegistryUtil.class);
 
 		return _stagedModelDataHandlerRegistry;
 	}
 
-	public static Map<String, StagedModelDataHandler>
-		getStagedModelDataHandlers() {
-
+	public static List<StagedModelDataHandler<?>> getStagedModelDataHandlers() {
 		return getStagedModelDataHandlerRegistry().getStagedModelDataHandlers();
 	}
 
-	public static void register(StagedModelDataHandler stagedModelDataHandler) {
+	public static void register(
+		StagedModelDataHandler<?> stagedModelDataHandler) {
+
 		getStagedModelDataHandlerRegistry().register(stagedModelDataHandler);
 	}
 
 	public static void unregister(
-		StagedModelDataHandler stagedModelDataHandler) {
+		StagedModelDataHandler<?> stagedModelDataHandler) {
 
 		getStagedModelDataHandlerRegistry().unregister(stagedModelDataHandler);
 	}
 
 	public void setStagedModelDataHandlerRegistry(
 		StagedModelDataHandlerRegistry stagedModelDataHandlerRegistry) {
+
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_stagedModelDataHandlerRegistry = stagedModelDataHandlerRegistry;
 	}

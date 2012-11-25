@@ -15,13 +15,8 @@
 package com.liferay.portal.lar;
 
 import com.liferay.portal.kernel.lar.StagedModelDataHandler;
-import com.liferay.portal.kernel.lar.StagedModelDataHandlerImpl;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerRegistry;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.Validator;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,82 +28,30 @@ import java.util.Map;
 public class StagedModelDataHandlerRegistryImpl
 	implements StagedModelDataHandlerRegistry {
 
-	public StagedModelDataHandler getStagedModelDataHandler(String className) {
-		if (Validator.isNull(className) ||
-			!_stagedModelDataHandlers.containsKey(className)) {
-
-			return null;
-		}
+	public StagedModelDataHandler<?> getStagedModelDataHandler(
+		String className) {
 
 		return _stagedModelDataHandlers.get(className);
 	}
 
-	public List<StagedModelDataHandler> getStagedModelDataHandlerList() {
+	public List<StagedModelDataHandler<?>> getStagedModelDataHandlers() {
 		return ListUtil.fromMapValues(_stagedModelDataHandlers);
 	}
 
-	public Map<String, StagedModelDataHandler> getStagedModelDataHandlers() {
-		return _stagedModelDataHandlers;
-	}
-
-	public void register(StagedModelDataHandler stagedModelDataHandler) {
-		if (stagedModelDataHandler == null) {
-			return;
-		}
-
-		String stagedModelClassName = getStagedModelClassName(
-			stagedModelDataHandler);
+	public void register(StagedModelDataHandler<?> stagedModelDataHandler) {
+		/*String className = null;
 
 		_stagedModelDataHandlers.put(
-			stagedModelClassName, stagedModelDataHandler);
+			className, stagedModelDataHandler);*/
 	}
 
-	public void unregister(StagedModelDataHandler stagedModelDataHandler) {
-		if (stagedModelDataHandler == null) {
-			return;
-		}
+	public void unregister(StagedModelDataHandler<?> stagedModelDataHandler) {
+		/*String className = null;
 
-		String stagedModelClassName = getStagedModelClassName(
-			stagedModelDataHandler);
-
-		if (stagedModelClassName == null) {
-			return;
-		}
-
-		if (!_stagedModelDataHandlers.containsKey(stagedModelClassName)) {
-			return;
-		}
-
-		_stagedModelDataHandlers.remove(stagedModelClassName);
+		_stagedModelDataHandlers.remove(className);*/
 	}
 
-	protected String getStagedModelClassName(
-		StagedModelDataHandler stagedModelDataHandler) {
-
-		Class clazz = stagedModelDataHandler.getClass();
-
-		Class superClazz = clazz.getSuperclass();
-
-		if ((superClazz == null) ||
-			!superClazz.getName().equals(
-				StagedModelDataHandlerImpl.class.getName())) {
-
-			return null;
-		}
-
-		ParameterizedType type =
-			(ParameterizedType)clazz.getGenericSuperclass();
-
-		Type[] actualTypeArgs = type.getActualTypeArguments();
-
-		if ((actualTypeArgs != null) && (actualTypeArgs.length > 0)) {
-			return ((Class)actualTypeArgs[0]).getName();
-		}
-
-		return null;
-	}
-
-	private Map<String, StagedModelDataHandler> _stagedModelDataHandlers =
-		new HashMap<String, StagedModelDataHandler>();
+	private Map<String, StagedModelDataHandler<?>> _stagedModelDataHandlers =
+		new HashMap<String, StagedModelDataHandler<?>>();
 
 }

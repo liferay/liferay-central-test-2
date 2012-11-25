@@ -15,21 +15,19 @@
 package com.liferay.portal.kernel.lar;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Mate Thurzo
  */
 public interface StagedModelDataHandlerRegistry {
 
-	public StagedModelDataHandler getStagedModelDataHandler(String className);
+	public StagedModelDataHandler<?> getStagedModelDataHandler(
+		String className);
 
-	public List<StagedModelDataHandler> getStagedModelDataHandlerList();
+	public List<StagedModelDataHandler<?>> getStagedModelDataHandlers();
 
-	public Map<String, StagedModelDataHandler> getStagedModelDataHandlers();
+	public void register(StagedModelDataHandler<?> stagedModelDataHandler);
 
-	public void register(StagedModelDataHandler stagedModelDataHandler);
-
-	public void unregister(StagedModelDataHandler stagedModelDataHandler);
+	public void unregister(StagedModelDataHandler<?> stagedModelDataHandler);
 
 }
