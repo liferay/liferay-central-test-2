@@ -107,7 +107,6 @@ Group parentGroup = themeDisplay.getParentGroup();
 			<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="treeUrlPublicPages">
 				<portlet:param name="struts_action" value="/journal/select_display_page" />
 				<portlet:param name="cmd" value="<%= ActionKeys.VIEW_TREE %>" />
-				<portlet:param name="draggableTree" value="<%= Boolean.FALSE.toString() %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
 
 				<c:if test="<%= selLayout != null && !selLayout.isPrivateLayout() %>">
@@ -116,6 +115,7 @@ Group parentGroup = themeDisplay.getParentGroup();
 
 				<portlet:param name="treeId" value="treeContainerPublicPages" />
 				<portlet:param name="checkContentDisplayPage" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="draggableTree" value="<%= Boolean.FALSE.toString() %>" />
 				<portlet:param name="expandFirstNode" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="saveState" value="<%= Boolean.FALSE.toString() %>" />
 			</liferay-portlet:resourceURL>
