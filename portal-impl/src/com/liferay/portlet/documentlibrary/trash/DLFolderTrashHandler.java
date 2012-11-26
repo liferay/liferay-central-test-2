@@ -174,19 +174,19 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 
 	@Override
 	public void moveEntry(
-			long classPK, long containerId, ServiceContext serviceContext)
+			long classPK, long containerModelId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLAppServiceUtil.moveFolder(classPK, containerId, serviceContext);
+		DLAppServiceUtil.moveFolder(classPK, containerModelId, serviceContext);
 	}
 
 	@Override
 	public void moveTrashEntry(
-			long classPK, long containerId, ServiceContext serviceContext)
+			long classPK, long containerModelId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLAppServiceUtil.moveFolderFromTrash(
-			classPK, containerId, serviceContext);
+			classPK, containerModelId, serviceContext);
 	}
 
 	public void restoreTrashEntries(long[] classPKs)

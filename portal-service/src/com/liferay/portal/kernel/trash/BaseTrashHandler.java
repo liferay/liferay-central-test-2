@@ -357,6 +357,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return true;
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public void moveEntry(
 			long classPK, long containerModelId, ServiceContext serviceContext)
 		throws PortalException, SystemException {

@@ -298,9 +298,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 	protected abstract long getClassNameId();
 
-	protected long getContainerFolderId(
+	protected long getContainerModelFolderId(
 			long groupId, long companyId, long resourcePrimKey,
-			long containerId, long userId, String userName,
+			long containerModelId, long userId, String userName,
 			Timestamp createDate)
 		throws Exception {
 
@@ -390,7 +390,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 	protected void updateEntryAttachments(
 			long companyId, long groupId, long resourcePrimKey,
-			long containerId, long userId, String userName)
+			long containerModelId, long userId, String userName)
 		throws Exception {
 
 		String[] attachments = getAttachments(companyId, resourcePrimKey);
@@ -404,9 +404,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		long repositoryId = getRepositoryId(
 			groupId, companyId, userId, userName, createDate, getClassNameId(),
 			getPortletId());
-		long containerFolderId = getContainerFolderId(
-			groupId, companyId, resourcePrimKey, containerId, userId, userName,
-			createDate);
+		long containerModelFolderId = getContainerModelFolderId(
+			groupId, companyId, resourcePrimKey, containerModelId, userId,
+			userName, createDate);
 
 		for (String attachment : attachments) {
 			String name = String.valueOf(
@@ -423,18 +423,18 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			long fileEntryId = addDLFileEntry(
 				groupId, companyId, userId, userName, createDate, repositoryId,
-				containerFolderId, name, extension, mimeType, title, size);
+				containerModelFolderId, name, extension, mimeType, title, size);
 
 			addDLFileVersion(
 				increment(), groupId, companyId, userId, userName, createDate,
-				repositoryId, containerFolderId, fileEntryId, extension,
+				repositoryId, containerModelFolderId, fileEntryId, extension,
 				mimeType, title, size);
 
 			byte[] bytes = DLStoreUtil.getFileAsBytes(
 				companyId, CompanyConstants.SYSTEM, attachment);
 
 			DLStoreUtil.addFile(
-				companyId, containerFolderId, name, false, bytes);
+				companyId, containerModelFolderId, name, false, bytes);
 
 			try {
 				DLStoreUtil.deleteFile(
