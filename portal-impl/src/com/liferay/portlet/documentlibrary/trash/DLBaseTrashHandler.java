@@ -58,7 +58,8 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 		List<Folder> folders = repository.getFolders(
 			parentContainerModelId, false, start, end, null);
 
-		List<ContainerModel> containerModels = new ArrayList<ContainerModel>();
+		List<ContainerModel> containerModels = new ArrayList<ContainerModel>(
+			folders.size());
 
 		for (Folder folder : folders) {
 			containerModels.add((ContainerModel)folder.getModel());
@@ -204,6 +205,7 @@ public abstract class DLBaseTrashHandler extends BaseTrashHandler {
 		return trashRenderers;
 	}
 
+	@Override
 	public boolean isMovable() {
 		return true;
 	}
