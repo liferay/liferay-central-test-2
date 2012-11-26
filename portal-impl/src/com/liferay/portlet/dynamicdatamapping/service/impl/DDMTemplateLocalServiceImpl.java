@@ -280,7 +280,7 @@ public class DDMTemplateLocalServiceImpl
 
 		if (!includeGlobalTemplates) {
 			throw new NoSuchTemplateException(
-				"No DDMTemplate exists with the template id " + templateKey);
+				"No DDMTemplate exists with the template key " + templateKey);
 		}
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
