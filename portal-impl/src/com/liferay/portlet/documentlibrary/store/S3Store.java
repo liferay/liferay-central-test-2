@@ -252,11 +252,11 @@ public class S3Store extends BaseStore {
 			String versionLabel = getHeadVersionLabel(
 				companyId, repositoryId, fileName);
 
-			StorageObject s3ObjectDetails = _s3Service.getObjectDetails(
+			StorageObject storageObject = _s3Service.getObjectDetails(
 				_s3Bucket.getName(),
 				getKey(companyId, repositoryId, fileName, versionLabel));
 
-			return s3ObjectDetails.getContentLength();
+			return storageObject.getContentLength();
 		}
 		catch (ServiceException se) {
 			throw new SystemException(se);
@@ -309,7 +309,6 @@ public class S3Store extends BaseStore {
 				null);
 
 			for (S3Object oldS3Object : s3Objects) {
-
 				String oldKey = oldS3Object.getKey();
 
 				oldS3Object = _s3Service.getObject(_s3Bucket.getName(), oldKey);
@@ -361,7 +360,6 @@ public class S3Store extends BaseStore {
 				null);
 
 			for (S3Object oldS3Object : s3Objects) {
-
 				String oldKey = oldS3Object.getKey();
 
 				oldS3Object = _s3Service.getObject(_s3Bucket.getName(), oldKey);
