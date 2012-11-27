@@ -19,16 +19,16 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-FileEntry attachmentsFileEntry = (FileEntry)row.getObject();
+FileEntry fileEntry = (FileEntry)row.getObject();
 
-MBMessage message = MBAttachmentUtil.getMBMessageByFileEntryId(attachmentsFileEntry.getFileEntryId());
+MBMessage message = MBMessageAttachmentsUtil.getMessage(fileEntry.getFileEntryId());
 %>
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.ADD_FILE) %>">
 
 		<%
-		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), attachmentsFileEntry.getFileEntryId());
+		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 		%>
 
 		<portlet:actionURL var="restoreEntryURL">
@@ -50,7 +50,7 @@ MBMessage message = MBAttachmentUtil.getMBMessageByFileEntryId(attachmentsFileEn
 		/>
 
 		<%
-		DLFileEntry dlFileEntry = (DLFileEntry)attachmentsFileEntry.getModel();
+		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 		%>
 
 		<portlet:actionURL var="deleteURL">

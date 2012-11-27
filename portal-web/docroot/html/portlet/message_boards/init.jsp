@@ -87,7 +87,7 @@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %
 page import="com.liferay.portlet.trash.model.TrashEntry" %><%@
 page import="com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil" %><%@
 page import="com.liferay.portlet.trash.util.TrashUtil" %><%@
-page import="com.liferay.util.RSSUtil" %><%@ page import="com.liferay.portlet.messageboards.util.MBAttachmentUtil" %>
+page import="com.liferay.util.RSSUtil" %><%@ page import="com.liferay.portlet.messageboards.util.MBMessageAttachmentsUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

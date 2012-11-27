@@ -59,10 +59,10 @@ boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean quote = ParamUtil.getBoolean(request, "quote");
 boolean splitThread = ParamUtil.getBoolean(request, "splitThread");
 
-List<FileEntry> existingAttachments = new ArrayList<FileEntry>();
+List<FileEntry> existingAttachmentsFileEntries = new ArrayList<FileEntry>();
 
 if ((message != null) && message.isAttachments()) {
-	existingAttachments = message.getAttachmentsFileEntries();
+	existingAttachmentsFileEntries = message.getAttachmentsFileEntries();
 }
 
 boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(message, request, "allowPingbacks", true);
@@ -231,12 +231,12 @@ if (Validator.isNull(redirect)) {
 
 		<c:if test="<%= attachments %>">
 			<aui:fieldset cssClass="message-attachments" label="attachments">
-				<c:if test="<%= existingAttachments.size() > 0 %>">
+				<c:if test="<%= existingAttachmentsFileEntries.size() > 0 %>">
 					<ul>
 
 						<%
-						for (int i = 0; i < existingAttachments.size(); i++) {
-							FileEntry fileEntry = existingAttachments.get(i);
+						for (int i = 0; i < existingAttachmentsFileEntries.size(); i++) {
+							FileEntry fileEntry = existingAttachmentsFileEntries.get(i);
 
 							String taglibJavascript = "javascript:;";
 
@@ -297,7 +297,7 @@ if (Validator.isNull(redirect)) {
 				</c:if>
 
 				<%
-				for (int i = existingAttachments.size() + 1; i <= 5; i++) {
+				for (int i = existingAttachmentsFileEntries.size() + 1; i <= 5; i++) {
 				%>
 
 					<div>
@@ -609,7 +609,7 @@ if (Validator.isNull(redirect)) {
 	<aui:script use="aui-base">
 
 		<%
-		for (int i = 1; i <= existingAttachments.size(); i++) {
+		for (int i = 1; i <= existingAttachmentsFileEntries.size(); i++) {
 		%>
 
 			var removeExisting = A.one('#<portlet:namespace />removeExisting' + <%= i %>);

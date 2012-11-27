@@ -368,8 +368,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "attachments") &&
 			message.isAttachments()) {
 
-			for (FileEntry attachment : message.getAttachmentsFileEntries()) {
-				String name = attachment.getTitle();
+			for (FileEntry fileEntry : message.getAttachmentsFileEntries()) {
+				String name = fileEntry.getTitle();
 				String binPath = getMessageAttachementBinPath(
 					portletDataContext, message, name);
 
@@ -380,7 +380,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				attachmentElement.addAttribute("bin-path", binPath);
 
 				portletDataContext.addZipEntry(
-					binPath, attachment.getContentStream());
+					binPath, fileEntry.getContentStream());
 			}
 
 			message.setAttachmentsFolderId(message.getAttachmentsFolderId());

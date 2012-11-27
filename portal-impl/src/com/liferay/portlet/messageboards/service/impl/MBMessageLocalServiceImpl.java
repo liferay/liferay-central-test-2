@@ -1414,9 +1414,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Attachments
 
 		if (!inputStreamOVPs.isEmpty() || !existingFiles.isEmpty()) {
-			List<FileEntry> dlFileEntries = message.getAttachmentsFileEntries();
+			List<FileEntry> fileEntries = message.getAttachmentsFileEntries();
 
-			for (FileEntry fileEntry : dlFileEntries) {
+			for (FileEntry fileEntry : fileEntries) {
 				if (!existingFiles.contains(fileEntry.getTitle())) {
 					if (!TrashUtil.isTrashEnabled(message.getGroupId())) {
 						deleteMessageAttachment(

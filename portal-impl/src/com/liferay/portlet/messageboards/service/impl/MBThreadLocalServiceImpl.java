@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.NumberIncrement;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1037,8 +1035,5 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			indexer.reindex(message);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		MBThreadLocalServiceImpl.class);
 
 }
