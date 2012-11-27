@@ -215,7 +215,7 @@ public class MapUtil {
 	}
 
 	public static String toString(
-		Map<?, ?> map, String includesRegex, String excludesRegex) {
+		Map<?, ?> map, String hideIncludesRegex, String hideExcludesRegex) {
 
 		if (map.isEmpty()) {
 			return StringPool.OPEN_CURLY_BRACE + StringPool.CLOSE_CURLY_BRACE;
@@ -231,15 +231,15 @@ public class MapUtil {
 
 			String keyString = String.valueOf(key);
 
-			if (includesRegex != null) {
-				if (!keyString.matches(includesRegex)) {
-					continue;
+			if (hideIncludesRegex != null) {
+				if (!keyString.matches(hideIncludesRegex)) {
+					value = "********";
 				}
 			}
 
-			if (excludesRegex != null) {
-				if (keyString.matches(excludesRegex)) {
-					continue;
+			if (hideExcludesRegex != null) {
+				if (keyString.matches(hideExcludesRegex)) {
+					value = "********";
 				}
 			}
 
