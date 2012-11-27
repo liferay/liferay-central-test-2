@@ -29,7 +29,7 @@ import java.sql.Timestamp;
 /**
  * @author Eudaldo Alonso
  */
-public class UpgradeMBAttachments extends BaseUpgradeAttachments {
+public class UpgradeMessageBoardsAttachments extends BaseUpgradeAttachments {
 
 	@Override
 	protected long getClassNameId() {
@@ -37,9 +37,9 @@ public class UpgradeMBAttachments extends BaseUpgradeAttachments {
 	}
 
 	@Override
-	protected long getContainerFolderId(
+	protected long getContainerModelFolderId(
 			long groupId, long companyId, long resourcePrimKey,
-			long containerId, long userId, String userName,
+			long containerModelId, long userId, String userName,
 			Timestamp createDate)
 		throws Exception {
 
@@ -53,7 +53,7 @@ public class UpgradeMBAttachments extends BaseUpgradeAttachments {
 
 		long threadFolderId = getFolderId(
 			groupId, companyId, userId, userName, createDate, repositoryId,
-			repositoryFolderId, String.valueOf(containerId), false);
+			repositoryFolderId, String.valueOf(containerModelId), false);
 
 		long messageFolderId = getFolderId(
 			groupId, companyId, userId, userName, createDate, repositoryId,
@@ -63,8 +63,8 @@ public class UpgradeMBAttachments extends BaseUpgradeAttachments {
 	}
 
 	@Override
-	protected String getDirName(long containerId, long resourcePrimKey) {
-		return "messageboards/" + containerId + "/" + resourcePrimKey;
+	protected String getDirName(long containerModelId, long resourcePrimKey) {
+		return "messageboards/" + containerModelId + "/" + resourcePrimKey;
 	}
 
 	@Override
