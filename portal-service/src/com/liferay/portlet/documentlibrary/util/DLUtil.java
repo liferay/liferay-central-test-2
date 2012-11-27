@@ -153,15 +153,7 @@ public class DLUtil {
 	public static String getFileEntryImage(
 		FileEntry fileEntry, ThemeDisplay themeDisplay) {
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("<img style=\"border-width: 0; text-align: left;\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/file_system/small/");
-		sb.append(fileEntry.getIcon());
-		sb.append(".png\">");
-
-		return sb.toString();
+		return getDL().getFileEntryImage(fileEntry, themeDisplay);
 	}
 
 	public static String getFileIcon(String extension) {
