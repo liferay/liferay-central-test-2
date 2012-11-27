@@ -214,9 +214,7 @@ public class MapUtil {
 		return toString(map, false);
 	}
 
-	public static String toString(
-		Map<?, ?> map, boolean excludePasswordFields) {
-
+	public static String toString(Map<?, ?> map, boolean hidePasswordFields) {
 		if (map.isEmpty()) {
 			return StringPool.OPEN_CURLY_BRACE + StringPool.CLOSE_CURLY_BRACE;
 		}
@@ -231,10 +229,10 @@ public class MapUtil {
 
 			String keyString = String.valueOf(key);
 
-			if (excludePasswordFields &&
+			if (hidePasswordFields &&
 				keyString.toLowerCase().contains("password")) {
 
-				value = "REMOVED";
+				value = "HIDDEN";
 			}
 
 			sb.append(keyString);
