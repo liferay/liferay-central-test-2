@@ -280,10 +280,10 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 	}
 
 	protected String[] getAttachments(
-			long companyId, long containerId, long resourcePrimKey)
+			long companyId, long containerModelId, long resourcePrimKey)
 		throws Exception {
 
-		String dirName = getDirName(containerId, resourcePrimKey);
+		String dirName = getDirName(containerModelId, resourcePrimKey);
 
 		String[] attachments = null;
 
@@ -309,7 +309,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 	}
 
 	protected abstract String getDirName(
-		long containerId, long resourcePrimKey);
+		long containerModelId, long resourcePrimKey);
 
 	protected long getFolderId(
 			long groupId, long companyId, long userId, String userName,
@@ -396,7 +396,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		throws Exception {
 
 		String[] attachments = getAttachments(
-			companyId, containerId, resourcePrimKey);
+			companyId, containerModelId, resourcePrimKey);
 
 		if ((attachments == null) || (attachments.length == 0)) {
 			return;

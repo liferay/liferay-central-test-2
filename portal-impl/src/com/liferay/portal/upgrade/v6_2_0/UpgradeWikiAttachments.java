@@ -63,7 +63,7 @@ public class UpgradeWikiAttachments extends BaseUpgradeAttachments {
 	}
 
 	@Override
-	protected String getDirName(long containerId, long resourcePrimKey) {
+	protected String getDirName(long containerModelId, long resourcePrimKey) {
 		return "wiki/" + resourcePrimKey;
 	}
 
