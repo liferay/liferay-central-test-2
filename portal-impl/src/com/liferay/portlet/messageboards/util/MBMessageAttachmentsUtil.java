@@ -26,17 +26,16 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 /**
  * @author Eudaldo Alonso
  */
-public class MBAttachmentUtil {
+public class MBMessageAttachmentsUtil {
 
-	public static MBMessage getMBMessageByFileEntryId(long fileEntryId)
+	public static MBMessage getMessage(long fileEntryId)
 		throws PortalException, SystemException {
 
 		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 			fileEntryId);
 
-		long folderId = fileEntry.getFolderId();
-
-		Folder folder = PortletFileRepositoryUtil.getPortletFolder(folderId);
+		Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+			fileEntry.getFolderId());
 
 		long messageId = GetterUtil.getLong(folder.getName());
 
