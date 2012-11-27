@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.dynamicdatamapping.util;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -45,136 +47,164 @@ import java.util.Locale;
  */
 public class DDMXMLImpl implements DDMXML {
 
-	public String formatXML(Document document) throws IOException {
-		return document.formattedString(_XML_INDENT);
+	public String formatXML(Document document) throws SystemException {
+		try {
+			return document.formattedString(_XML_INDENT);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
-	public String formatXML(String xml) throws DocumentException, IOException {
+	public String formatXML(String xml) throws SystemException {
 
 		// This is only supposed to format your xml, however, it will also
 		// unwantingly change &#169; and other characters like it into their
 		// respective readable versions
 
-		xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
-
 		try {
+			xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
 			xml = XMLFormatter.toString(xml, _XML_INDENT);
+			xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
+
+			return xml;
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 		catch (org.dom4j.DocumentException de) {
-			throw new DocumentException(de.getMessage());
+			throw new SystemException(de);
 		}
-
-		xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
-
-		return xml;
 	}
 
-	public String getXML(Fields fields) throws Exception {
+	public String getXML(Fields fields)
+		throws PortalException, SystemException {
+
 		return getXML(0, fields, false);
 	}
 
-	public String getXML(long ddmContentId, Fields fields, boolean mergeFields)
-		throws Exception {
+	public String getXML(long contentId, Fields fields, boolean mergeFields)
+		throws PortalException, SystemException {
 
-		Document document = null;
-		Element rootElement = null;
+		try {
+			Document document = null;
 
-		if (mergeFields && (ddmContentId > 0)) {
-			DDMContent ddmContent = DDMContentLocalServiceUtil.getContent(
-				ddmContentId);
+			Element rootElement = null;
 
-			document = SAXReaderUtil.read(ddmContent.getXml());
-			rootElement = document.getRootElement();
-		}
-		else {
-			document = SAXReaderUtil.createDocument();
-			rootElement = document.addElement("root");
-		}
+			if (mergeFields && (contentId > 0)) {
+				DDMContent content = DDMContentLocalServiceUtil.getContent(
+					contentId);
 
-		Iterator<Field> itr = fields.iterator();
+				document = SAXReaderUtil.read(content.getXml());
 
-		while (itr.hasNext()) {
-			Field field = itr.next();
-
-			Object value = field.getValue();
-
-			if (value instanceof Date) {
-				Date valueDate = (Date)value;
-
-				value = valueDate.getTime();
-			}
-
-			String valueString = String.valueOf(value);
-
-			if (valueString != null) {
-				valueString = valueString.trim();
-			}
-
-			Element dynamicElementElement = getElementByName(
-				document, field.getName());
-
-			if (dynamicElementElement == null) {
-				appendField(rootElement, field.getName(), valueString);
+				rootElement = document.getRootElement();
 			}
 			else {
-				updateField(
-					dynamicElementElement, field.getName(), valueString);
-			}
-		}
+				document = SAXReaderUtil.createDocument();
 
-		return document.formattedString();
+				rootElement = document.addElement("root");
+			}
+
+			Iterator<Field> itr = fields.iterator();
+
+			while (itr.hasNext()) {
+				Field field = itr.next();
+
+				Object value = field.getValue();
+
+				if (value instanceof Date) {
+					Date valueDate = (Date)value;
+
+					value = valueDate.getTime();
+				}
+
+				String valueString = String.valueOf(value);
+
+				if (valueString != null) {
+					valueString = valueString.trim();
+				}
+
+				Element dynamicElementElement = getElementByName(
+					document, field.getName());
+
+				if (dynamicElementElement == null) {
+					appendField(rootElement, field.getName(), valueString);
+				}
+				else {
+					updateField(
+						dynamicElementElement, field.getName(), valueString);
+				}
+			}
+
+			return document.formattedString();
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public String updateXMLDefaultLocale(
 			String xml, Locale contentDefaultLocale,
 			Locale contentNewDefaultLocale)
-		throws DocumentException, IOException {
+		throws SystemException {
 
-		if (LocaleUtil.equals(contentDefaultLocale, contentNewDefaultLocale)) {
-			return xml;
+		try {
+			if (LocaleUtil.equals(
+					contentDefaultLocale, contentNewDefaultLocale)) {
+
+				return xml;
+			}
+
+			Document document = SAXReaderUtil.read(xml);
+
+			Element rootElement = document.getRootElement();
+
+			Attribute availableLocalesAttribute = rootElement.attribute(
+				_AVAILABLE_LOCALES);
+
+			String contentNewDefaultLanguageId = LocaleUtil.toLanguageId(
+				contentNewDefaultLocale);
+
+			String availableLocalesAttributeValue =
+				availableLocalesAttribute.getValue();
+
+			if (!availableLocalesAttributeValue.contains(
+					contentNewDefaultLanguageId)) {
+
+				StringBundler sb = new StringBundler(3);
+
+				sb.append(availableLocalesAttribute.getValue());
+				sb.append(StringPool.COMMA);
+				sb.append(contentNewDefaultLanguageId);
+
+				availableLocalesAttribute.setValue(sb.toString());
+			}
+
+			Attribute defaultLocaleAttribute = rootElement.attribute(
+				_DEFAULT_LOCALE);
+
+			defaultLocaleAttribute.setValue(contentNewDefaultLanguageId);
+
+			fixElementsDefaultLocale(
+				rootElement, contentDefaultLocale, contentNewDefaultLocale);
+
+			return document.formattedString();
 		}
-
-		Document document = SAXReaderUtil.read(xml);
-
-		Element rootElement = document.getRootElement();
-
-		Attribute availableLocalesAttribute = rootElement.attribute(
-			_AVAILABLE_LOCALES);
-
-		String contentNewDefaultLanguageId = LocaleUtil.toLanguageId(
-			contentNewDefaultLocale);
-
-		String availableLocalesAttributeValue =
-			availableLocalesAttribute.getValue();
-
-		if (!availableLocalesAttributeValue.contains(
-				contentNewDefaultLanguageId)) {
-
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(availableLocalesAttribute.getValue());
-			sb.append(StringPool.COMMA);
-			sb.append(contentNewDefaultLanguageId);
-
-			availableLocalesAttribute.setValue(sb.toString());
+		catch (DocumentException de) {
+			throw new SystemException(de);
 		}
-
-		Attribute defaultLocaleAttribute = rootElement.attribute(
-			_DEFAULT_LOCALE);
-
-		defaultLocaleAttribute.setValue(contentNewDefaultLanguageId);
-
-		fixElementsDefaultLocale(
-			rootElement, contentDefaultLocale, contentNewDefaultLocale);
-
-		return document.formattedString();
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	protected Element appendField(
-		Element rootElement, String fieldName, String fieldValue) {
+		Element element, String fieldName, String fieldValue) {
 
-		Element dynamicElementElement = rootElement.addElement(
-			"dynamic-element");
+		Element dynamicElementElement = element.addElement("dynamic-element");
 
 		dynamicElementElement.addElement("dynamic-content");
 
@@ -237,12 +267,11 @@ public class DDMXMLImpl implements DDMXML {
 	}
 
 	protected void updateField(
-		Element dynamicElementElement, String fieldName, String value) {
+		Element element, String fieldName, String value) {
 
-		Element dynamicContentElement = dynamicElementElement.element(
-			"dynamic-content");
+		Element dynamicContentElement = element.element("dynamic-content");
 
-		dynamicElementElement.addAttribute("name", fieldName);
+		element.addAttribute("name", fieldName);
 
 		dynamicContentElement.clearContent();
 
