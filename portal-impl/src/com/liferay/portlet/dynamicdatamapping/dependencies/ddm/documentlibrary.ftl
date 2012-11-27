@@ -71,7 +71,7 @@
 	Liferay.provide(
 		window,
 		'${portletNamespace}${namespacedFieldName}setFileEntry',
-		function(groupId, url, uuid, title, version) {
+		function(url, uuid, groupId, title, version) {
 			var A = AUI();
 
 			var inputNode = A.one('#${portletNamespace}${namespacedFieldName}');
