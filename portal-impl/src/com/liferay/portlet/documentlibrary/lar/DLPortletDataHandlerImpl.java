@@ -606,6 +606,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if ((existingRepository == null) ||
 					!(existingRepository instanceof LiferayRepository)) {
+
 					serviceContext.setUuid(repository.getUuid());
 
 					importedRepositoryId =
