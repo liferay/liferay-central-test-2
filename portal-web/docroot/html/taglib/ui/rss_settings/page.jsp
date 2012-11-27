@@ -27,11 +27,11 @@ String name = (String)request.getAttribute("liferay-ui:rss-settings:name");
 boolean nameEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:rss-settings:nameEnabled"));
 %>
 
-<div class="taglib-rss-preferences">
+<div class="taglib-rss-settings">
 	<aui:fieldset>
 		<aui:input label="enable-rss-subscription" name="preferences--enableRss--" type="checkbox" value="<%= enabled %>" />
 
-		<div class="rss-preferences-options" id="<portlet:namespace />rssOptions">
+		<div class="rss-settings-options" id="<portlet:namespace />rssOptions">
 			<c:if test="<%= nameEnabled %>">
 				<aui:input label="rss-feed-name" name="preferences--rssName--" type="text" value="<%= name %>" />
 			</c:if>

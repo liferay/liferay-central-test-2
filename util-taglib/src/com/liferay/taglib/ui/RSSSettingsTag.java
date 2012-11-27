@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Eduardo Garcia
  */
-public class RSSPreferencesTag extends IncludeTag {
+public class RSSSettingsTag extends IncludeTag {
 
 	public void setDelta(int delta) {
 		_delta = delta;

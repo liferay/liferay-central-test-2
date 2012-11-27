@@ -363,7 +363,7 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 
 	<c:if test="<%= PortalUtil.isRSSFeedsEnabled() %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherRssPanel" persistState="<%= true %>" title="rss">
-			<liferay-ui:rss-preferences
+			<liferay-ui:rss-settings
 				delta="<%= rssDelta %>"
 				displayStyle="<%= rssDisplayStyle %>"
 				enabled="<%= enableRSS %>"

@@ -2513,7 +2513,7 @@
 	</tag>
 	<tag>
 		<name>rss-preferences</name>
-		<tag-class>com.liferay.taglib.ui.RSSPreferencesTag</tag-class>
+		<tag-class>com.liferay.taglib.ui.RSSSettingsTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>delta</name>
