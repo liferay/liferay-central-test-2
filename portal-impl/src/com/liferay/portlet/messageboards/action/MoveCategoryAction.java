@@ -16,8 +16,10 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -43,6 +45,13 @@ public class MoveCategoryAction extends PortletAction {
 
 		try {
 			moveCategory(actionRequest, actionResponse);
+
+			String redirect = PortalUtil.escapeRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
+
+			if (Validator.isNotNull(redirect)) {
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
@@ -90,12 +99,8 @@ public class MoveCategoryAction extends PortletAction {
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentCategory");
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
 		MBCategoryServiceUtil.moveCategory(
 			categoryId, parentCategoryId, mergeWithParentCategory);
-
-		actionResponse.sendRedirect(redirect);
 	}
 
 }
