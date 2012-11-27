@@ -211,10 +211,12 @@ public class MapUtil {
 	}
 
 	public static String toString(Map<?, ?> map) {
-		return toString(map, false);
+		return toString(map, null, null);
 	}
 
-	public static String toString(Map<?, ?> map, boolean hidePasswordFields) {
+	public static String toString(
+		Map<?, ?> map, String includesRegex, String excludesRegex) {
+
 		if (map.isEmpty()) {
 			return StringPool.OPEN_CURLY_BRACE + StringPool.CLOSE_CURLY_BRACE;
 		}
@@ -229,10 +231,16 @@ public class MapUtil {
 
 			String keyString = String.valueOf(key);
 
-			if (hidePasswordFields &&
-				keyString.toLowerCase().contains("password")) {
+			if (includesRegex != null) {
+				if (!keyString.matches(includesRegex)) {
+					continue;
+				}
+			}
 
-				value = "HIDDEN";
+			if (excludesRegex != null) {
+				if (keyString.matches(excludesRegex)) {
+					continue;
+				}
 			}
 
 			sb.append(keyString);
