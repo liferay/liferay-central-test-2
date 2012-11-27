@@ -46,12 +46,9 @@ import org.junit.runner.RunWith;
 /**
  * @author Julio Camarero
  */
-@ExecutionTestListeners(
-	listeners = {
-			EnvironmentExecutionTestListener.class
-	})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class MessageBoardsAttachmentsTrashTest {
+public class MBAttachmentsTrashTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -67,7 +64,7 @@ public class MessageBoardsAttachmentsTrashTest {
 			user.getUserId(), user.getFullName(), _group.getGroupId(),
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, "Subject", "Body",
 			MBMessageConstants.DEFAULT_FORMAT,
-			getInputStreamOVPs("company_logo.png"), false, 0, false,
+			_getInputStreamOVPs("company_logo.png"), false, 0, false,
 			serviceContext);
 	}
 
@@ -86,15 +83,15 @@ public class MessageBoardsAttachmentsTrashTest {
 
 	@Test
 	public void testTrashAndDelete() throws Exception {
-		trashMessageBoardsAttachments(false);
+		_trashMBAttachments(false);
 	}
 
 	@Test
 	public void testTrashAndRestore() throws Exception {
-		trashMessageBoardsAttachments(true);
+		_trashMBAttachments(true);
 	}
 
-	private List<ObjectValuePair<String, InputStream>> getInputStreamOVPs(
+	private List<ObjectValuePair<String, InputStream>> _getInputStreamOVPs(
 		String fileName) {
 
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
@@ -113,10 +110,8 @@ public class MessageBoardsAttachmentsTrashTest {
 		return inputStreamOVPs;
 	}
 
-	private void trashMessageBoardsAttachments(boolean restore)
-		throws Exception {
+	private void _trashMBAttachments(boolean restore) throws Exception {
 		int initialNotInTrashCount = _message.getAttachmentsFileEntriesCount();
-
 		int initialTrashEntriesCount =
 			_message.getDeletedAttachmentsFileEntriesCount();
 
@@ -136,7 +131,7 @@ public class MessageBoardsAttachmentsTrashTest {
 
 		_message = MBMessageLocalServiceUtil.updateMessage(
 			TestPropsValues.getUserId(), _message.getMessageId(), "Subject",
-			"Body", getInputStreamOVPs(fileName), existingFiles, 0, false,
+			"Body", _getInputStreamOVPs(fileName), existingFiles, 0, false,
 			serviceContext);
 
 		Assert.assertEquals(
