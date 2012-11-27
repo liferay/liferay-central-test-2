@@ -88,13 +88,13 @@ public class RSSTag extends IncludeTag {
 			}
 
 			if (Validator.isNotNull(_displayStyle) &&
-					!_displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
+				!_displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 
 				_resourceURL.setParameter("displayStyle", _displayStyle);
 			}
 
 			if (Validator.isNotNull(_feedType) &&
-					!_feedType.equals(RSSUtil.FEED_TYPE_DEFAULT)) {
+				!_feedType.equals(RSSUtil.FEED_TYPE_DEFAULT)) {
 
 				_resourceURL.setParameter(
 					"type", RSSUtil.getFeedTypeFormat(_feedType));
@@ -115,14 +115,14 @@ public class RSSTag extends IncludeTag {
 			}
 
 			if (Validator.isNotNull(_displayStyle) &&
-					!_displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
+				!_displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 
 				_url = HttpUtil.addParameter(
 					_url, "displayStyle", _displayStyle);
 			}
 
 			if (Validator.isNotNull(_feedType) &&
-					!_feedType.equals(RSSUtil.FEED_TYPE_DEFAULT)) {
+				!_feedType.equals(RSSUtil.FEED_TYPE_DEFAULT)) {
 
 				_url = HttpUtil.addParameter(
 					_url, "type", RSSUtil.getFeedTypeFormat(_feedType));
