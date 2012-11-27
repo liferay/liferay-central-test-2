@@ -14,6 +14,7 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -249,41 +250,47 @@ public class PortletAction extends Action {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	protected boolean isDisplaySuccessMessage(ActionRequest actionRequest)
+	protected boolean isDisplaySuccessMessage(PortletRequest portletRequest)
 		throws SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+		if (!SessionErrors.isEmpty(portletRequest)) {
+			return false;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		Layout layout = layoutTypePortlet.getLayout();
+		Layout layout = themeDisplay.getLayout();
 
 		if (layout.isTypeControlPanel()) {
 			return true;
 		}
 
-		String portletId = (String)actionRequest.getAttribute(
+		String portletId = (String)portletRequest.getAttribute(
 			WebKeys.PORTLET_ID);
 
-		boolean hasPortletId = false;
-
 		try {
-			hasPortletId = layoutTypePortlet.hasPortletId(portletId);
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				return true;
+			}
 		}
-		catch (Exception e) {
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
 		}
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
-		if (hasPortletId || portlet.isAddDefaultResource()) {
+		if (portlet.isAddDefaultResource()) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	protected boolean redirectToLogin(
@@ -320,9 +327,7 @@ public class PortletAction extends Action {
 			String redirect)
 		throws IOException, SystemException {
 
-		if (SessionErrors.isEmpty(actionRequest) &&
-			isDisplaySuccessMessage(actionRequest)) {
-
+		if (isDisplaySuccessMessage(actionRequest)) {
 			addSuccessMessage(actionRequest, actionResponse);
 		}
 
