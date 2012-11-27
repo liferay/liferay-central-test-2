@@ -456,7 +456,7 @@ public class DLImpl implements DL {
 	}
 
 	/**
-	 * @deprecated {@link #getPreviewURL(com.liferay.portal.kernel.repository.model.FileEntry, com.liferay.portal.kernel.repository.model.FileVersion, com.liferay.portal.theme.ThemeDisplay,
+	 * @deprecated {@link #getPreviewURL(FileEntry, FileVersion, ThemeDisplay,
 	 *             String, boolean, boolean)}
 	 */
 	public String getPreviewURL(

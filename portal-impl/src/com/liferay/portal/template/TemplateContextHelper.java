@@ -151,7 +151,7 @@ public class TemplateContextHelper {
 
 		variables.put("dateUtil", DateUtil_IW.getInstance());
 
-		// DL util
+		// Document library util
 
 		variables.put("dlUtil", DLUtil.getDL());
 
