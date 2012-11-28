@@ -341,23 +341,25 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	}
 
 	private String _valueToString(Object value) {
-		if (!value.getClass().isArray()) {
+		Class<?> valueType = value.getClass();
+
+		if (!valueType.isArray()) {
 			return value.toString();
 		}
 
-		Object[] array = (Object[]) value;
+		Object[] array = (Object[])value;
 
-		StringBundler stringBundler = new StringBundler(array.length * 2 - 1);
+		StringBundler sb = new StringBundler((array.length * 2) - 1);
 
 		for (int i = 0; i < array.length; i++) {
 			if (i != 0) {
-				stringBundler.append(StringPool.COMMA);
+				sb.append(StringPool.COMMA);
 			}
 
-			stringBundler.append(array[i].toString());
+			sb.append(array[i].toString());
 		}
 
-		return stringBundler.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
