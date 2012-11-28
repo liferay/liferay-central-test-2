@@ -14,30 +14,9 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.security.permission.PermissionChecker;
-
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
 public class DefaultControlPanelEntry extends BaseControlPanelEntry {
-
-	@Override
-	protected boolean hasAccessPermissionDenied(
-			PermissionChecker permissionChecker, Group group, Portlet portlet)
-		throws Exception {
-
-		return false;
-	}
-
-	@Override
-	protected boolean hasPermissionImplicit(
-			PermissionChecker permissionChecker, Group group, Portlet portlet)
-		throws Exception {
-
-		return false;
-	}
-
 }

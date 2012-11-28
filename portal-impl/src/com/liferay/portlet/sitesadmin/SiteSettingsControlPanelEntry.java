@@ -19,16 +19,16 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
-import com.liferay.portlet.DefaultControlPanelEntry;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
  * @author Eric Min
  * @author Jorge Ferrer
  */
-public class SiteSettingsControlPanelEntry extends DefaultControlPanelEntry {
+public class SiteSettingsControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
-	public boolean hasAccessPermissionDenied(
+	protected boolean hasAccessPermissionDenied(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 

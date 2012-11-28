@@ -25,7 +25,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
-import com.liferay.portlet.DefaultControlPanelEntry;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 import java.util.List;
 
@@ -33,10 +33,10 @@ import java.util.List;
  * @author Jorge Ferrer
  * @author Zsolt Berentey
  */
-public class UsersControlPanelEntry extends DefaultControlPanelEntry {
+public class UsersControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
-	public boolean hasPermissionImplicit(
+	protected boolean hasPermissionImplicitlyGranted(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 

@@ -19,7 +19,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.DefaultControlPanelEntry;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 import java.util.LinkedHashMap;
 
@@ -28,10 +28,10 @@ import java.util.LinkedHashMap;
  * @author Sergio González
  * @author Miguel Pastor
  */
-public class SitesControlPanelEntry extends DefaultControlPanelEntry {
+public class SitesControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
-	public boolean hasPermissionImplicit(
+	protected boolean hasPermissionImplicitlyGranted(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 

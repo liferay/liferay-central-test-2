@@ -21,7 +21,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 /**
  * @author Jorge Ferrer
  */
-public class OmniadminControlPanelEntry extends DefaultControlPanelEntry {
+public class OmniadminControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
 	public boolean hasAccessPermission(

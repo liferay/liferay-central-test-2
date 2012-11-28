@@ -17,6 +17,7 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 
 /**
  * @author Jorge Ferrer
@@ -25,6 +26,36 @@ public interface ControlPanelEntry {
 
 	public boolean hasAccessPermission(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
+		throws Exception;
+
+	/**
+	 * @deprecated As of 6.2, with no direct replacement.<p>This method was
+	 *             originally defined to determine if a portlet should be
+	 *             displayed in the Control Panel. In this version, this method
+	 *             should alway returns <code>false</code> and remains only to
+	 *             preserve binary compatibility. This method will be
+	 *             permanently removed in a future version.</p><p>In lieu of
+	 *             this method, the Control Panel now uses {@link
+	 *             #hasAccessPermission} to determine if a portlet should be
+	 *             displayed in the Control Panel.</p>
+	 */
+	public boolean isVisible(
+			PermissionChecker permissionChecker, Portlet portlet)
+		throws Exception;
+
+	/**
+	 * @deprecated As of 6.2, with no direct replacement.<p>This method was
+	 *             originally defined to determine if a portlet should be
+	 *             displayed in the Control Panel. In this version, this method
+	 *             should alway returns <code>false</code> and remains only to
+	 *             preserve binary compatibility. This method will be
+	 *             permanently removed in a future version.</p><p>In lieu of
+	 *             this method, the Control Panel now uses {@link
+	 *             #hasAccessPermission} to determine if a portlet should be
+	 *             displayed in the Control Panel.</p>
+	 */
+	public boolean isVisible(
+			Portlet portlet, String category, ThemeDisplay themeDisplay)
 		throws Exception;
 
 }

@@ -26,7 +26,7 @@ public class MyWorkflowInstancesControlPanelEntry
 	extends WorkflowControlPanelEntry {
 
 	@Override
-	protected boolean hasPermissionImplicit(
+	protected boolean hasPermissionImplicitlyGranted(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 

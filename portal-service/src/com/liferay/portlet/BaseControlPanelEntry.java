@@ -22,6 +22,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletCategoryKeys;
 
 /**
@@ -37,18 +38,74 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 			return false;
 		}
 
-		if (hasAccessPermissionExplicit(permissionChecker, group, portlet)) {
+		if (hasAccessPermissionExplicitlyGranted(
+				permissionChecker, group, portlet)) {
+
 			return true;
 		}
 
-		return hasPermissionImplicit(permissionChecker, group, portlet);
+		return hasPermissionImplicitlyGranted(
+			permissionChecker, group, portlet);
 	}
 
-	protected abstract boolean hasAccessPermissionDenied(
-			PermissionChecker permissionChecker, Group group, Portlet portlet)
-		throws Exception;
+	/**
+	 * @deprecated As of 6.2, with no direct replacement.<p>This method was
+	 *             originally defined to determine if a portlet should be
+	 *             displayed in the Control Panel. In this version, this method
+	 *             should alway returns <code>false</code> and remains only to
+	 *             preserve binary compatibility. This method will be
+	 *             permanently removed in a future version.</p><p>In lieu of
+	 *             this method, the Control Panel now uses {@link
+	 *             #hasAccessPermission} to determine if a portlet should be
+	 *             displayed in the Control Panel.</p>
+	 */
+	public boolean isVisible(
+			PermissionChecker permissionChecker, Portlet portlet)
+		throws Exception {
 
-	protected boolean hasAccessPermissionExplicit(
+		return false;
+	}
+
+	/**
+	 * @deprecated As of 6.2, with no direct replacement.<p>This method was
+	 *             originally defined to determine if a portlet should be
+	 *             displayed in the Control Panel. In this version, this method
+	 *             should alway returns <code>false</code> and remains only to
+	 *             preserve binary compatibility. This method will be
+	 *             permanently removed in a future version.</p><p>In lieu of
+	 *             this method, the Control Panel now uses {@link
+	 *             #hasAccessPermission} to determine if a portlet should be
+	 *             displayed in the Control Panel.</p>
+	 */
+	public boolean isVisible(
+			Portlet portlet, String category, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		return false;
+	}
+
+	protected long getDefaultPlid(Group group, String category) {
+		long plid = LayoutConstants.DEFAULT_PLID;
+
+		if (category.equals(PortletCategoryKeys.CONTENT)) {
+			plid = group.getDefaultPublicPlid();
+
+			if (plid == LayoutConstants.DEFAULT_PLID) {
+				plid = group.getDefaultPrivatePlid();
+			}
+		}
+
+		return plid;
+	}
+
+	protected boolean hasAccessPermissionDenied(
+			PermissionChecker permissionChecker, Group group, Portlet portlet)
+		throws Exception {
+
+		return false;
+	}
+
+	protected boolean hasAccessPermissionExplicitlyGranted(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws PortalException, SystemException {
 
@@ -74,7 +131,7 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		}
 
 		if (PortletPermissionUtil.contains(
-				permissionChecker, groupId, _getDefaultPlid(group, category),
+				permissionChecker, groupId, getDefaultPlid(group, category),
 				portlet.getPortletId(), ActionKeys.ACCESS_IN_CONTROL_PANEL,
 				true)) {
 
@@ -84,22 +141,11 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		return false;
 	}
 
-	protected abstract boolean hasPermissionImplicit(
+	protected boolean hasPermissionImplicitlyGranted(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
-		throws Exception;
+		throws Exception {
 
-	private long _getDefaultPlid(Group group, String category) {
-		long plid = LayoutConstants.DEFAULT_PLID;
-
-		if (category.equals(PortletCategoryKeys.CONTENT)) {
-			plid = group.getDefaultPublicPlid();
-
-			if (plid == LayoutConstants.DEFAULT_PLID) {
-				plid = group.getDefaultPrivatePlid();
-			}
-		}
-
-		return plid;
+		return false;
 	}
 
 }

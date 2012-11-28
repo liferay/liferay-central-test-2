@@ -18,12 +18,12 @@ import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.DefaultControlPanelEntry;
+import com.liferay.portlet.BaseControlPanelEntry;
 
 /**
  * @author Jorge Ferrer
  */
-public class WorkflowControlPanelEntry extends DefaultControlPanelEntry {
+public class WorkflowControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
 	protected boolean hasAccessPermissionDenied(

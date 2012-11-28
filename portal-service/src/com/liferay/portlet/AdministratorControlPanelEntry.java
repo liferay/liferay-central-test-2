@@ -21,8 +21,9 @@ import com.liferay.portal.security.permission.PermissionChecker;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AdministratorControlPanelEntry implements ControlPanelEntry {
+public class AdministratorControlPanelEntry extends BaseControlPanelEntry {
 
+	@Override
 	public boolean hasAccessPermission(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {

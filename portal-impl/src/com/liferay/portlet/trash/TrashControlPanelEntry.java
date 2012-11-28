@@ -17,16 +17,16 @@ package com.liferay.portlet.trash;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.DefaultControlPanelEntry;
+import com.liferay.portlet.BaseControlPanelEntry;
 import com.liferay.portlet.trash.util.TrashUtil;
 
 /**
  * @author Eudaldo Alonso
  */
-public class TrashControlPanelEntry extends DefaultControlPanelEntry {
+public class TrashControlPanelEntry extends BaseControlPanelEntry {
 
 	@Override
-	public boolean hasAccessPermissionDenied(
+	protected boolean hasAccessPermissionDenied(
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 
