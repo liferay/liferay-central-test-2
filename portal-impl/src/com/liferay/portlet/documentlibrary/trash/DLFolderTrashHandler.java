@@ -212,6 +212,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 		DLFolderLocalServiceUtil.updateDLFolder(dlFolder);
 	}
 
+	@Override
 	protected Repository getRepository(long classPK)
 		throws PortalException, SystemException {
 
