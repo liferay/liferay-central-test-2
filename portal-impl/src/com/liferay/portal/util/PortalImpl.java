@@ -3115,10 +3115,10 @@ public class PortalImpl implements Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure) {
 
+		StringBundler sb = new StringBundler();
+
 		boolean https =
 			secure || Http.HTTPS.equals(PropsValues.WEB_SERVER_PROTOCOL);
-
-		StringBundler sb = new StringBundler();
 
 		if (https) {
 			sb.append(Http.HTTPS_WITH_SLASH);
