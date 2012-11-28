@@ -21,6 +21,7 @@ String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
 
 TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
+
 TrashRenderer trashRenderer = trashHandler.getTrashRenderer(classPK);
 
 ContainerModel containerModel = (ContainerModel)request.getAttribute(WebKeys.TRASH_CONTAINER_MODEL);
@@ -59,7 +60,6 @@ TrashUtil.addContainerModelBreadcrumbEntries(request, trashHandler, containerMod
 	<liferay-ui:search-container
 		searchContainer="<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, containerURL, null, null) %>"
 	>
-
 		<liferay-ui:search-container-results>
 
 			<%
@@ -105,7 +105,7 @@ TrashUtil.addContainerModelBreadcrumbEntries(request, trashHandler, containerMod
 			/>
 
 			<%
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler(8);
 
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectContainer('");
