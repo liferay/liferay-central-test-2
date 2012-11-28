@@ -80,14 +80,14 @@ public class DDMXMLImpl implements DDMXML {
 		}
 	}
 
-	public Fields getFields(DDMStructure ddmStructure, String xml)
+	public Fields getFields(DDMStructure structure, String xml)
 		throws PortalException, SystemException {
 
-		return getFields(ddmStructure, null, xml, null);
+		return getFields(structure, null, xml, null);
 	}
 
 	public Fields getFields(
-		DDMStructure ddmStructure, XPath conditionXPath, String xml,
+			DDMStructure structure, XPath xPath, String xml,
 			List<String> fieldNames)
 		throws PortalException, SystemException {
 
@@ -100,9 +100,7 @@ public class DDMXMLImpl implements DDMXML {
 			return null;
 		}
 
-		if ((conditionXPath != null) &&
-				!conditionXPath.booleanValueOf(document)) {
-
+		if ((xPath != null) && !xPath.booleanValueOf(document)) {
 			return null;
 		}
 
@@ -118,20 +116,19 @@ public class DDMXMLImpl implements DDMXML {
 			String fieldValue = dynamicElementElement.elementText(
 				"dynamic-content");
 
-			if (!ddmStructure.hasField(fieldName) ||
+			if (!structure.hasField(fieldName) ||
 				((fieldNames != null) && !fieldNames.contains(fieldName))) {
 
 				continue;
 			}
 
-			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
+			String fieldDataType = structure.getFieldDataType(fieldName);
 
 			Serializable fieldValueSerializable =
 				FieldConstants.getSerializable(fieldDataType, fieldValue);
 
 			Field field = new Field(
-				ddmStructure.getStructureId(), fieldName,
-				fieldValueSerializable);
+				structure.getStructureId(), fieldName, fieldValueSerializable);
 
 			fields.put(field);
 		}

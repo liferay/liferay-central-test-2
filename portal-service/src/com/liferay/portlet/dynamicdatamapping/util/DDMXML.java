@@ -34,11 +34,11 @@ public interface DDMXML {
 
 	public String formatXML(String xml) throws SystemException;
 
-	public Fields getFields(DDMStructure ddmStructure, String xml)
+	public Fields getFields(DDMStructure structure, String xml)
 		throws PortalException, SystemException;
 
 	public Fields getFields(
-			DDMStructure ddmStructure, XPath conditionXPath, String xml,
+			DDMStructure structure, XPath xPath, String xml,
 			List<String> fieldNames)
 		throws PortalException, SystemException;
 

@@ -45,19 +45,18 @@ public class DDMXMLUtil {
 		return _ddmXML;
 	}
 
-	public static Fields getFields(DDMStructure ddmStructure, String xml)
+	public static Fields getFields(DDMStructure structure, String xml)
 		throws PortalException, SystemException {
 
-		return getDDMXML().getFields(ddmStructure, xml);
+		return getDDMXML().getFields(structure, xml);
 	}
 
 	public static Fields getFields(
-		DDMStructure ddmStructure, XPath conditionXPath, String xml,
+			DDMStructure structure, XPath xPath, String xml,
 			List<String> fieldNames)
 		throws PortalException, SystemException {
 
-		return getDDMXML().getFields(
-			ddmStructure, conditionXPath, xml, fieldNames);
+		return getDDMXML().getFields(structure, xPath, xml, fieldNames);
 	}
 
 	public static String getXML(Fields fields)
