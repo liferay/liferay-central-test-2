@@ -1438,9 +1438,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		boolean legacyURL = true;
 
-		String contextPath = PortalUtil.getPathContext();
-
 		while (true) {
+			String contextPath = PortalUtil.getPathContext();
+
 			currentLocation = content.lastIndexOf(
 				contextPath.concat("/c/document_library/get_file?"), beginPos);
 
@@ -1633,6 +1633,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					continue;
 				}
 
+				beginPos = currentLocation;
+
 				DLPortletDataHandlerImpl.exportFileEntry(
 					portletDataContext, dlFileEntryTypesElement,
 					dlFoldersElement, dlFileEntriesElement, dlFileRanksElement,
@@ -1661,8 +1663,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				dlReferenceElement.addAttribute("path", path);
 
 				String dlReference = "[$dl-reference=" + path + "$]";
-
-				beginPos = currentLocation;
 
 				sb.replace(beginPos, endPos, dlReference);
 			}
