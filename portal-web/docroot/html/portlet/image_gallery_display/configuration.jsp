@@ -93,7 +93,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 						showEmptyOption="<%= true %>"
 					/>
 				</div>
-
 			</aui:fieldset>
 		</liferay-ui:panel>
 
