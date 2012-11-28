@@ -1903,6 +1903,91 @@ public class AssetCategoryUtil {
 	}
 
 	/**
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
+	*
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetCategory findByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence().findByP_N_V(parentCategoryId, name, vocabularyId);
+	}
+
+	/**
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByP_N_V(parentCategoryId, name, vocabularyId);
+	}
+
+	/**
+	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByP_N_V(parentCategoryId, name, vocabularyId,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
+	*
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the asset category that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetCategory removeByP_N_V(
+		long parentCategoryId, java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException {
+		return getPersistence()
+				   .removeByP_N_V(parentCategoryId, name, vocabularyId);
+	}
+
+	/**
+	* Returns the number of asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the number of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByP_N_V(long parentCategoryId,
+		java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByP_N_V(parentCategoryId, name, vocabularyId);
+	}
+
+	/**
 	* Returns all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
@@ -2228,91 +2313,6 @@ public class AssetCategoryUtil {
 		return getPersistence()
 				   .filterCountByG_P_N_V(groupId, parentCategoryId, name,
 			vocabularyId);
-	}
-
-	/**
-	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
-	*
-	* @param parentCategoryId the parent category ID
-	* @param name the name
-	* @param vocabularyId the vocabulary ID
-	* @return the matching asset category
-	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetCategory findByP_N_V(
-		long parentCategoryId, java.lang.String name, long vocabularyId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException {
-		return getPersistence().findByP_N_V(parentCategoryId, name, vocabularyId);
-	}
-
-	/**
-	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param parentCategoryId the parent category ID
-	* @param name the name
-	* @param vocabularyId the vocabulary ID
-	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
-		long parentCategoryId, java.lang.String name, long vocabularyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByP_N_V(parentCategoryId, name, vocabularyId);
-	}
-
-	/**
-	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param parentCategoryId the parent category ID
-	* @param name the name
-	* @param vocabularyId the vocabulary ID
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetCategory fetchByP_N_V(
-		long parentCategoryId, java.lang.String name, long vocabularyId,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByP_N_V(parentCategoryId, name, vocabularyId,
-			retrieveFromCache);
-	}
-
-	/**
-	* Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
-	*
-	* @param parentCategoryId the parent category ID
-	* @param name the name
-	* @param vocabularyId the vocabulary ID
-	* @return the asset category that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetCategory removeByP_N_V(
-		long parentCategoryId, java.lang.String name, long vocabularyId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchCategoryException {
-		return getPersistence()
-				   .removeByP_N_V(parentCategoryId, name, vocabularyId);
-	}
-
-	/**
-	* Returns the number of asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
-	*
-	* @param parentCategoryId the parent category ID
-	* @param name the name
-	* @param vocabularyId the vocabulary ID
-	* @return the number of matching asset categories
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByP_N_V(long parentCategoryId,
-		java.lang.String name, long vocabularyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .countByP_N_V(parentCategoryId, name, vocabularyId);
 	}
 
 	/**

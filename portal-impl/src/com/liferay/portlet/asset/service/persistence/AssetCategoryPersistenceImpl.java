@@ -5752,6 +5752,288 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	private static final String _FINDER_COLUMN_N_V_NAME_2 = "assetCategory.name = ? AND ";
 	private static final String _FINDER_COLUMN_N_V_NAME_3 = "(assetCategory.name IS NULL OR assetCategory.name = ?) AND ";
 	private static final String _FINDER_COLUMN_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_P_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
+			AssetCategoryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByP_N_V",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Long.class.getName()
+			},
+			AssetCategoryModelImpl.PARENTCATEGORYID_COLUMN_BITMASK |
+			AssetCategoryModelImpl.NAME_COLUMN_BITMASK |
+			AssetCategoryModelImpl.VOCABULARYID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByP_N_V",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Long.class.getName()
+			});
+
+	/**
+	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
+	 *
+	 * @param parentCategoryId the parent category ID
+	 * @param name the name
+	 * @param vocabularyId the vocabulary ID
+	 * @return the matching asset category
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetCategory findByP_N_V(long parentCategoryId, String name,
+		long vocabularyId) throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = fetchByP_N_V(parentCategoryId, name,
+				vocabularyId);
+
+		if (assetCategory == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("parentCategoryId=");
+			msg.append(parentCategoryId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(", vocabularyId=");
+			msg.append(vocabularyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCategoryException(msg.toString());
+		}
+
+		return assetCategory;
+	}
+
+	/**
+	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param parentCategoryId the parent category ID
+	 * @param name the name
+	 * @param vocabularyId the vocabulary ID
+	 * @return the matching asset category, or <code>null</code> if a matching asset category could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetCategory fetchByP_N_V(long parentCategoryId, String name,
+		long vocabularyId) throws SystemException {
+		return fetchByP_N_V(parentCategoryId, name, vocabularyId, true);
+	}
+
+	/**
+	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param parentCategoryId the parent category ID
+	 * @param name the name
+	 * @param vocabularyId the vocabulary ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching asset category, or <code>null</code> if a matching asset category could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetCategory fetchByP_N_V(long parentCategoryId, String name,
+		long vocabularyId, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { parentCategoryId, name, vocabularyId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_N_V,
+					finderArgs, this);
+		}
+
+		if (result instanceof AssetCategory) {
+			AssetCategory assetCategory = (AssetCategory)result;
+
+			if ((parentCategoryId != assetCategory.getParentCategoryId()) ||
+					!Validator.equals(name, assetCategory.getName()) ||
+					(vocabularyId != assetCategory.getVocabularyId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_P_N_V_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_P_N_V_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_P_N_V_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_P_N_V_VOCABULARYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(parentCategoryId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(vocabularyId);
+
+				List<AssetCategory> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
+						finderArgs, list);
+				}
+				else {
+					AssetCategory assetCategory = list.get(0);
+
+					result = assetCategory;
+
+					cacheResult(assetCategory);
+
+					if ((assetCategory.getParentCategoryId() != parentCategoryId) ||
+							(assetCategory.getName() == null) ||
+							!assetCategory.getName().equals(name) ||
+							(assetCategory.getVocabularyId() != vocabularyId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
+							finderArgs, assetCategory);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (AssetCategory)result;
+		}
+	}
+
+	/**
+	 * Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
+	 *
+	 * @param parentCategoryId the parent category ID
+	 * @param name the name
+	 * @param vocabularyId the vocabulary ID
+	 * @return the asset category that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetCategory removeByP_N_V(long parentCategoryId, String name,
+		long vocabularyId) throws NoSuchCategoryException, SystemException {
+		AssetCategory assetCategory = findByP_N_V(parentCategoryId, name,
+				vocabularyId);
+
+		return remove(assetCategory);
+	}
+
+	/**
+	 * Returns the number of asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	 *
+	 * @param parentCategoryId the parent category ID
+	 * @param name the name
+	 * @param vocabularyId the vocabulary ID
+	 * @return the number of matching asset categories
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByP_N_V(long parentCategoryId, String name,
+		long vocabularyId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_P_N_V;
+
+		Object[] finderArgs = new Object[] { parentCategoryId, name, vocabularyId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_P_N_V_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_P_N_V_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_P_N_V_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_P_N_V_VOCABULARYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(parentCategoryId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(vocabularyId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2 = "assetCategory.parentCategoryId = ? AND ";
+	private static final String _FINDER_COLUMN_P_N_V_NAME_1 = "assetCategory.name IS NULL AND ";
+	private static final String _FINDER_COLUMN_P_N_V_NAME_2 = "assetCategory.name = ? AND ";
+	private static final String _FINDER_COLUMN_P_N_V_NAME_3 = "(assetCategory.name IS NULL OR assetCategory.name = ?) AND ";
+	private static final String _FINDER_COLUMN_P_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
 			AssetCategoryImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
@@ -6848,288 +7130,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	private static final String _FINDER_COLUMN_G_P_N_V_NAME_2 = "assetCategory.name = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_N_V_NAME_3 = "(assetCategory.name IS NULL OR assetCategory.name = ?) AND ";
 	private static final String _FINDER_COLUMN_G_P_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
-	public static final FinderPath FINDER_PATH_FETCH_BY_P_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED,
-			AssetCategoryImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByP_N_V",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Long.class.getName()
-			},
-			AssetCategoryModelImpl.PARENTCATEGORYID_COLUMN_BITMASK |
-			AssetCategoryModelImpl.NAME_COLUMN_BITMASK |
-			AssetCategoryModelImpl.VOCABULARYID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_P_N_V = new FinderPath(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetCategoryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByP_N_V",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Long.class.getName()
-			});
-
-	/**
-	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
-	 *
-	 * @param parentCategoryId the parent category ID
-	 * @param name the name
-	 * @param vocabularyId the vocabulary ID
-	 * @return the matching asset category
-	 * @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetCategory findByP_N_V(long parentCategoryId, String name,
-		long vocabularyId) throws NoSuchCategoryException, SystemException {
-		AssetCategory assetCategory = fetchByP_N_V(parentCategoryId, name,
-				vocabularyId);
-
-		if (assetCategory == null) {
-			StringBundler msg = new StringBundler(8);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("parentCategoryId=");
-			msg.append(parentCategoryId);
-
-			msg.append(", name=");
-			msg.append(name);
-
-			msg.append(", vocabularyId=");
-			msg.append(vocabularyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchCategoryException(msg.toString());
-		}
-
-		return assetCategory;
-	}
-
-	/**
-	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param parentCategoryId the parent category ID
-	 * @param name the name
-	 * @param vocabularyId the vocabulary ID
-	 * @return the matching asset category, or <code>null</code> if a matching asset category could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetCategory fetchByP_N_V(long parentCategoryId, String name,
-		long vocabularyId) throws SystemException {
-		return fetchByP_N_V(parentCategoryId, name, vocabularyId, true);
-	}
-
-	/**
-	 * Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param parentCategoryId the parent category ID
-	 * @param name the name
-	 * @param vocabularyId the vocabulary ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching asset category, or <code>null</code> if a matching asset category could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetCategory fetchByP_N_V(long parentCategoryId, String name,
-		long vocabularyId, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { parentCategoryId, name, vocabularyId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_P_N_V,
-					finderArgs, this);
-		}
-
-		if (result instanceof AssetCategory) {
-			AssetCategory assetCategory = (AssetCategory)result;
-
-			if ((parentCategoryId != assetCategory.getParentCategoryId()) ||
-					!Validator.equals(name, assetCategory.getName()) ||
-					(vocabularyId != assetCategory.getVocabularyId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_SELECT_ASSETCATEGORY_WHERE);
-
-			query.append(_FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_P_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_P_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_P_N_V_NAME_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_P_N_V_VOCABULARYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(parentCategoryId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				List<AssetCategory> list = q.list();
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
-						finderArgs, list);
-				}
-				else {
-					AssetCategory assetCategory = list.get(0);
-
-					result = assetCategory;
-
-					cacheResult(assetCategory);
-
-					if ((assetCategory.getParentCategoryId() != parentCategoryId) ||
-							(assetCategory.getName() == null) ||
-							!assetCategory.getName().equals(name) ||
-							(assetCategory.getVocabularyId() != vocabularyId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
-							finderArgs, assetCategory);
-					}
-				}
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
-					finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (AssetCategory)result;
-		}
-	}
-
-	/**
-	 * Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
-	 *
-	 * @param parentCategoryId the parent category ID
-	 * @param name the name
-	 * @param vocabularyId the vocabulary ID
-	 * @return the asset category that was removed
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetCategory removeByP_N_V(long parentCategoryId, String name,
-		long vocabularyId) throws NoSuchCategoryException, SystemException {
-		AssetCategory assetCategory = findByP_N_V(parentCategoryId, name,
-				vocabularyId);
-
-		return remove(assetCategory);
-	}
-
-	/**
-	 * Returns the number of asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
-	 *
-	 * @param parentCategoryId the parent category ID
-	 * @param name the name
-	 * @param vocabularyId the vocabulary ID
-	 * @return the number of matching asset categories
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByP_N_V(long parentCategoryId, String name,
-		long vocabularyId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_P_N_V;
-
-		Object[] finderArgs = new Object[] { parentCategoryId, name, vocabularyId };
-
-		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
-				this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_ASSETCATEGORY_WHERE);
-
-			query.append(_FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_P_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_P_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_P_N_V_NAME_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_P_N_V_VOCABULARYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(parentCategoryId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				qPos.add(vocabularyId);
-
-				count = (Long)q.uniqueResult();
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_P_N_V_PARENTCATEGORYID_2 = "assetCategory.parentCategoryId = ? AND ";
-	private static final String _FINDER_COLUMN_P_N_V_NAME_1 = "assetCategory.name IS NULL AND ";
-	private static final String _FINDER_COLUMN_P_N_V_NAME_2 = "assetCategory.name = ? AND ";
-	private static final String _FINDER_COLUMN_P_N_V_NAME_3 = "(assetCategory.name IS NULL OR assetCategory.name = ?) AND ";
-	private static final String _FINDER_COLUMN_P_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
 
 	/**
 	 * Caches the asset category in the entity cache if it is enabled.
