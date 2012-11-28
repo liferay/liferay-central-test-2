@@ -26,8 +26,10 @@
 
 						<#if column.isEscaped()>
 							access="com.liferay.portal.dao.orm.hibernate.EscapedPropertyAccessor"
-						<#elseif serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
-							access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+						<#else>
+							<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+								access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+							</#if>
 						</#if>
 
 						/>
@@ -39,8 +41,10 @@
 				<id name="${column.DBName}"
 					<#if column.isEscaped()>
 						access="com.liferay.portal.dao.orm.hibernate.EscapedPropertyAccessor"
-					<#elseif serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
-						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+					<#else>
+						<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+							access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+						</#if>
 					</#if>
 
 					type="<#if !entity.hasPrimitivePK()>java.lang.</#if>${column.type}"
@@ -80,8 +84,10 @@
 
 					<#if column.isEscaped()>
 						access="com.liferay.portal.dao.orm.hibernate.EscapedPropertyAccessor"
-					<#elseif serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
-						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+					<#else>
+						<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+							access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+						</#if>
 					</#if>
 
 					<#if column.isPrimitiveType() || column.type == "String">
@@ -110,8 +116,10 @@
 					<id name="${column.DBName}">
 						<#if column.isEscaped()>
 							access="com.liferay.portal.dao.orm.hibernate.EscapedPropertyAccessor"
-						<#elseif serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
-							access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+						<#else>
+							<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+								access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+							</#if>
 						</#if>
 
 						<generator class="foreign">
