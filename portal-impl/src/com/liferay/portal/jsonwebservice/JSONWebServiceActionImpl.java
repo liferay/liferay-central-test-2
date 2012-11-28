@@ -346,9 +346,8 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		if (valueType.isArray()) {
 			return StringUtil.merge((Object[])value);
 		}
-		else {
-			return value.toString();
-		}
+
+		return value.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
