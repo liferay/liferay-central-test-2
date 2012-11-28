@@ -23,8 +23,8 @@ import com.liferay.portal.kernel.util.CamelCaseUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodParameter;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Array;
@@ -343,23 +343,12 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	private String _valueToString(Object value) {
 		Class<?> valueType = value.getClass();
 
-		if (!valueType.isArray()) {
+		if (valueType.isArray()) {
+			return StringUtil.merge((Object[])value);
+		}
+		else {
 			return value.toString();
 		}
-
-		Object[] array = (Object[])value;
-
-		StringBundler sb = new StringBundler((array.length * 2) - 1);
-
-		for (int i = 0; i < array.length; i++) {
-			if (i != 0) {
-				sb.append(StringPool.COMMA);
-			}
-
-			sb.append(array[i].toString());
-		}
-
-		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
