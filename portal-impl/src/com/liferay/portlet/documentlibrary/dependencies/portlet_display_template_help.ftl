@@ -1,6 +1,6 @@
 <#--
 
-You can use FreeMarker to define display templates for the Document and Media
+You can use FreeMarker to define display templates for the Documents and Media
 portlet.
 
 A set of variables have been made available for the template developers:
@@ -25,15 +25,5 @@ servlet context
 {$taglibLiferayHash}: a hash that provides access to Liferay's taglibs
 
 {$themeDisplay}: the theme display
-
-It is possible to use these variables to create advanced templates to display
-a set of file entries in your document and media portlet. Here's a simple
-template example:
-
-<#list entries as entry>
-	<h1 class="file-title">
-		${entry.getTitle()}
-	</h1>
-</#list>
 
 --#>
