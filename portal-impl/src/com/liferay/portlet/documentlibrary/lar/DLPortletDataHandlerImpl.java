@@ -608,7 +608,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				long classNameId = 0;
 
 				if (existingRepository != null) {
-					classNameId = existingRepository.getClassNameId();	
+					classNameId = existingRepository.getClassNameId();
 				}
 
 				if ((existingRepository == null) ||

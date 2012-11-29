@@ -104,11 +104,11 @@
 	Liferay.provide(
 		window,
 		'<portlet:namespace />submitForm',
-		function(className, classPK, containerModelId, redirect) {
+		function(redirect, className, classPK, containerModelId) {
+			document.<portlet:namespace />selectContainerForm.<portlet:namespace />redirect.value = redirect;
 			document.<portlet:namespace />selectContainerForm.<portlet:namespace />className.value = className;
 			document.<portlet:namespace />selectContainerForm.<portlet:namespace />classPK.value = classPK;
 			document.<portlet:namespace />selectContainerForm.<portlet:namespace />containerModelId.value = containerModelId;
-			document.<portlet:namespace />selectContainerForm.<portlet:namespace />redirect.value = redirect;
 
 			submitForm(document.<portlet:namespace />selectContainerForm);
 		},

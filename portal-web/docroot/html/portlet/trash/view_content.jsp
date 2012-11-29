@@ -167,7 +167,7 @@
 								%>
 
 								<liferay-ui:search-container-column-text
-										name="name"
+									name="name"
 								>
 									<liferay-ui:icon
 										label="<%= true %>"
@@ -190,7 +190,7 @@
 
 				<c:if test="<%= (containerModelsCount + baseModelsCount) == 0 %>">
 					<div class="portlet-msg-info">
-						<liferay-ui:message arguments="<%= new String[] {ResourceActionsUtil.getModelResource(locale, className)} %>" key="this-x-does-not-contain-any-entry" />
+						<liferay-ui:message arguments="<%= new String[] {ResourceActionsUtil.getModelResource(locale, className)} %>" key="this-x-does-not-contain-an-entry" />
 					</div>
 				</c:if>
 			</liferay-ui:panel-container>
