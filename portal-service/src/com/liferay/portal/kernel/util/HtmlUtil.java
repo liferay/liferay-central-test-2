@@ -118,6 +118,4 @@ public class HtmlUtil {
 
 	private static Html _html;
 
-	public static final String NEW_THREAD_URL = "${newThreadURL}";
-
 }

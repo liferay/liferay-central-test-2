@@ -27,7 +27,15 @@ if (quote && Validator.isNull(body) && (curParentMessage != null)) {
 	body = sb.toString();
 }
 else if (splitThread && Validator.isNull(body)) {
-	body = LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "<a href=" + HtmlUtil.NEW_THREAD_URL + ">" + HtmlUtil.NEW_THREAD_URL + "</a>", false);
+	StringBundler sb = new StringBundler(5);
+
+	sb.append("<a href=");
+	sb.append(MBThreadConstants.NEW_THREAD_URL);
+	sb.append(">");
+	sb.append(MBThreadConstants.NEW_THREAD_URL);
+	sb.append("</a>");
+
+	body = LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", sb.toString(), false);
 }
 %>
 
