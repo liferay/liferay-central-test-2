@@ -107,6 +107,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public ContainerModel getParentContainerModel(long classPK)
 		throws PortalException, SystemException {
 

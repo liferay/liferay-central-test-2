@@ -107,6 +107,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 		return "found-in-deleted-folder-x";
 	}
 
+	@Override
 	public ContainerModel getParentContainerModel(long classPK)
 		throws PortalException, SystemException {
 

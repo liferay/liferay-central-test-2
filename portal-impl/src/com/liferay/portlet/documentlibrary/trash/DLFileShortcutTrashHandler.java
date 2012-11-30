@@ -62,6 +62,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public ContainerModel getParentContainerModel(long classPK)
 		throws PortalException, SystemException {
 

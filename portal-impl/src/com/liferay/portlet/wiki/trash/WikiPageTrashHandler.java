@@ -109,6 +109,7 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public ContainerModel getParentContainerModel(long classPK)
 		throws PortalException, SystemException {
 

@@ -140,7 +140,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 			long classPK, long containerModelId, int start, int end)
 		throws PortalException, SystemException {
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -171,6 +171,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return "deleted-in-x";
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ContainerModel getParentContainerModel(long classPK)
 		throws PortalException, SystemException {
 
@@ -250,7 +254,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 			long classPK, int start, int end)
 		throws PortalException, SystemException {
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	public String getTrashContainerModelName() {
@@ -275,7 +279,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 			long classPK, int start, int end)
 		throws PortalException, SystemException {
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	public TrashRenderer getTrashRenderer(long classPK)
