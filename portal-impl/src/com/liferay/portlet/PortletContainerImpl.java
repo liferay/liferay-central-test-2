@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -468,11 +467,8 @@ public class PortletContainerImpl implements PortletContainer {
 					(PortletConfigImpl)invokerPortlet.getPortletConfig();
 
 				if (invokerPortlet.isStrutsPortlet() ||
-					((invokerPortletConfigImpl != null) &&
-						(GetterUtil.getBoolean(
-							invokerPortletConfigImpl.getInitParameter(
-								"copy-request-parameters")) ||
-						!invokerPortletConfigImpl.isWARFile()))) {
+					invokerPortletConfigImpl.isCopyRequestParameters() ||
+					!invokerPortletConfigImpl.isWARFile()) {
 
 					uploadServletRequest = new UploadServletRequestImpl(
 						request);
