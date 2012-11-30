@@ -907,7 +907,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated {@link #getRecentChanges(long, long, int, int)}
 	 */
 	public List<WikiPage> getRecentChanges(long nodeId, int start, int end)
 		throws PortalException, SystemException {
@@ -930,7 +930,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated {@link #getRecentChangesCount(long, long)}
 	 */
 	public int getRecentChangesCount(long nodeId)
 		throws PortalException, SystemException {
