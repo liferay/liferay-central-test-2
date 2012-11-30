@@ -428,12 +428,12 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.VIEW);
 
-		Calendar cal = CalendarFactoryUtil.getCalendar();
+		Calendar calendar = CalendarFactoryUtil.getCalendar();
 
-		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		calendar.add(Calendar.WEEK_OF_YEAR, -1);
 
 		return wikiPageFinder.filterFindByCreateDate(
-			groupId, nodeId, cal.getTime(), false, start, end);
+			groupId, nodeId, calendar.getTime(), false, start, end);
 	}
 
 	public int getRecentChangesCount(long groupId, long nodeId)
@@ -442,12 +442,12 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.VIEW);
 
-		Calendar cal = CalendarFactoryUtil.getCalendar();
+		Calendar calendar = CalendarFactoryUtil.getCalendar();
 
-		cal.add(Calendar.WEEK_OF_YEAR, -1);
+		calendar.add(Calendar.WEEK_OF_YEAR, -1);
 
 		return wikiPageFinder.filterCountByCreateDate(
-			groupId, nodeId, cal.getTime(), false);
+			groupId, nodeId, calendar.getTime(), false);
 	}
 
 	public String[] getTempPageAttachmentNames(

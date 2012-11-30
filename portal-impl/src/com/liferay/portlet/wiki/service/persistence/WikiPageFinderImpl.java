@@ -195,13 +195,13 @@ public class WikiPageFinderImpl
 		try {
 			session = openSession();
 
+			String sql = CustomSQLUtil.get(COUNT_BY_CREATE_DATE);
+
 			String createDateComparator = StringPool.GREATER_THAN;
 
 			if (before) {
 				createDateComparator = StringPool.LESS_THAN;
 			}
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CREATE_DATE);
 
 			sql = StringUtil.replace(
 				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
@@ -254,13 +254,13 @@ public class WikiPageFinderImpl
 		try {
 			session = openSession();
 
+			String sql = CustomSQLUtil.get(FIND_BY_CREATE_DATE);
+
 			String createDateComparator = StringPool.GREATER_THAN;
 
 			if (before) {
 				createDateComparator = StringPool.LESS_THAN;
 			}
-
-			String sql = CustomSQLUtil.get(FIND_BY_CREATE_DATE);
 
 			sql = StringUtil.replace(
 				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);

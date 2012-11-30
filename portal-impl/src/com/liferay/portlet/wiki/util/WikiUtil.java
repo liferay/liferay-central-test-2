@@ -112,7 +112,7 @@ public class WikiUtil {
 	}
 
 	public static List<WikiPage> filterOrphans(List<WikiPage> pages)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<Map<String, Boolean>> pageTitles =
 			new ArrayList<Map<String, Boolean>>();
@@ -125,7 +125,9 @@ public class WikiUtil {
 
 		for (WikiPage page : pages) {
 			for (Map<String, Boolean> pageTitle : pageTitles) {
-				if (pageTitle.get(page.getTitle().toLowerCase()) != null) {
+				String pageTitleLowerCase = page.getTitle();
+
+				if (pageTitle.get(pageTitleLowerCase) != null) {
 					notOrphans.add(page);
 
 					break;
