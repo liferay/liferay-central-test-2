@@ -17,7 +17,6 @@
 <%@ include file="/html/taglib/ddm/html/init.jsp" %>
 
 <div class="lfr-ddm-container" id="<portlet:namespace /><%= containerId %>">
-
 	<c:if test="<%= Validator.isNotNull(xsd) %>">
 		<%= DDMXSDUtil.getHTML(pageContext, xsd, fields, fieldsNamespace, readOnly, locale) %>
 

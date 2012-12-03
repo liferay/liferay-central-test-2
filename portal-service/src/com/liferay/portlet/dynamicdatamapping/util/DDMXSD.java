@@ -34,7 +34,7 @@ import javax.servlet.jsp.PageContext;
 public interface DDMXSD {
 
 	public String getFieldHTML(
-			PageContext pageContext, Element fieldElement, Fields fields,
+			PageContext pageContext, Element element, Fields fields,
 			String namespace, String mode, boolean readOnly, Locale locale)
 		throws Exception;
 
@@ -79,6 +79,6 @@ public interface DDMXSD {
 		throws PortalException, SystemException;
 
 	public String getXSD(long classNameId, long classPK)
-		throws Exception;
+		throws PortalException, SystemException;
 
 }

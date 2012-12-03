@@ -101,7 +101,7 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	public String getFieldHTML(
-			PageContext pageContext, Element fieldElement, Fields fields,
+			PageContext pageContext, Element element, Fields fields,
 			String namespace, String mode, boolean readOnly, Locale locale)
 		throws Exception {
 
@@ -113,7 +113,7 @@ public class DDMXSDImpl implements DDMXSD {
 		String portletNamespace = PortalUtil.getPortletNamespace(portletId);
 
 		Map<String, Object> freeMarkerContext = getFreeMarkerContext(
-			fieldElement, locale);
+			element, locale);
 
 		freeMarkerContext.put("portletNamespace", portletNamespace);
 		freeMarkerContext.put("namespace", namespace);
@@ -126,12 +126,11 @@ public class DDMXSDImpl implements DDMXSD {
 			(Map<String, Object>)freeMarkerContext.get("fieldStructure");
 
 		String childrenHTML = getHTML(
-			pageContext, fieldElement, fields, namespace, mode, readOnly,
-			locale);
+			pageContext, element, fields, namespace, mode, readOnly, locale);
 
 		field.put("children", childrenHTML);
 
-		String fieldNamespace = fieldElement.attributeValue(
+		String fieldNamespace = element.attributeValue(
 			"fieldNamespace", _DEFAULT_NAMESPACE);
 
 		TemplateResource templateResource = _defaultTemplateResource;
@@ -147,7 +146,7 @@ public class DDMXSDImpl implements DDMXSD {
 			templateResource = _defaultReadOnlyTemplateResource;
 		}
 
-		String type = fieldElement.attributeValue("type");
+		String type = element.attributeValue("type");
 
 		String templateName = StringUtil.replaceFirst(
 			type, fieldNamespace.concat(StringPool.DASH), StringPool.BLANK);
@@ -189,7 +188,7 @@ public class DDMXSDImpl implements DDMXSD {
 			String namespace, String mode, boolean readOnly, Locale locale)
 		throws Exception {
 
-		String xsd = DDMXSDUtil.getXSD(classNameId, classPK);
+		String xsd = getXSD(classNameId, classPK);
 
 		Document document = SAXReaderUtil.read(xsd);
 
@@ -201,16 +200,15 @@ public class DDMXSDImpl implements DDMXSD {
 
 		Node node = xPathSelector.selectSingleNode(document.getRootElement());
 
-		Element fieldElement = (Element)node.asXPathResult(node.getParent());
+		Element element = (Element)node.asXPathResult(node.getParent());
 
 		if (repeatableIndex > 0) {
-			fieldElement.addAttribute(
+			element.addAttribute(
 				"repeatableIndex", String.valueOf(repeatableIndex));
 		}
 
-		return DDMXSDUtil.getFieldHTML(
-			pageContext, fieldElement, fields, namespace, mode, readOnly,
-			locale);
+		return getFieldHTML(
+			pageContext, element, fields, namespace, mode, readOnly, locale);
 	}
 
 	public String getHTML(
@@ -415,31 +413,32 @@ public class DDMXSDImpl implements DDMXSD {
 		}
 	}
 
-	public String getXSD(long classNameId, long classPK) throws Exception {
-		String xsd = null;
+	public String getXSD(long classNameId, long classPK)
+		throws PortalException, SystemException {
 
-		if ((classNameId > 0) && (classPK > 0)) {
-			long ddmStructureClassNameId = PortalUtil.getClassNameId(
-				DDMStructure.class);
-
-			long ddmTemplateClassNameId = PortalUtil.getClassNameId(
-				DDMTemplate.class);
-
-			if (classNameId == ddmStructureClassNameId) {
-				DDMStructure structure = DDMStructureServiceUtil.getStructure(
-					classPK);
-
-				xsd = structure.getCompleteXsd();
-			}
-			else if (classNameId == ddmTemplateClassNameId) {
-				DDMTemplate template = DDMTemplateServiceUtil.getTemplate(
-					classPK);
-
-				xsd = template.getScript();
-			}
+		if ((classNameId <= 0) || (classPK <= 0)) {
+			return null;
 		}
 
-		return xsd;
+		long ddmStructureClassNameId = PortalUtil.getClassNameId(
+			DDMStructure.class);
+
+		long ddmTemplateClassNameId = PortalUtil.getClassNameId(
+			DDMTemplate.class);
+
+		if (classNameId == ddmStructureClassNameId) {
+			DDMStructure structure = DDMStructureServiceUtil.getStructure(
+				classPK);
+
+			return structure.getCompleteXsd();
+		}
+		else if (classNameId == ddmTemplateClassNameId) {
+			DDMTemplate template = DDMTemplateServiceUtil.getTemplate(classPK);
+
+			return template.getScript();
+		}
+
+		return null;
 	}
 
 	protected Map<String, Object> getFieldContext(

@@ -41,13 +41,12 @@ public class DDMXSDUtil {
 	}
 
 	public static String getFieldHTML(
-			PageContext pageContext, Element fieldElement, Fields fields,
+			PageContext pageContext, Element element, Fields fields,
 			String namespace, String mode, boolean readOnly, Locale locale)
 		throws Exception {
 
 		return getDDMXSD().getFieldHTML(
-			pageContext, fieldElement, fields, namespace, mode, readOnly,
-			locale);
+			pageContext, element, fields, namespace, mode, readOnly, locale);
 	}
 
 	public static String getFieldHTMLByName(
@@ -129,7 +128,7 @@ public class DDMXSDUtil {
 	}
 
 	public static String getXSD(long classNameId, long classPK)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		return getDDMXSD().getXSD(classNameId, classPK);
 	}

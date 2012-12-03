@@ -17,12 +17,11 @@ package com.liferay.portlet.dynamicdatamapping.action;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil;
 
-import java.util.Locale;
-
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspFactory;
@@ -46,26 +45,25 @@ public class RenderStructureFieldAction extends Action {
 		throws Exception {
 
 		try {
-			JspFactory factory = JspFactory.getDefaultFactory();
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			Servlet servlet = getServlet();
+			JspFactory jspFactory = JspFactory.getDefaultFactory();
 
-			PageContext pageContext = factory.getPageContext(
-				servlet, request, response, null, true,
+			PageContext pageContext = jspFactory.getPageContext(
+				getServlet(), request, response, null, true,
 				JspWriter.DEFAULT_BUFFER, true);
 
 			long classNameId = ParamUtil.getLong(request, "classNameId");
 			long classPK = ParamUtil.getLong(request, "classPK");
 			String fieldName = ParamUtil.getString(request, "fieldName");
-			boolean readOnly = ParamUtil.getBoolean(request, "readOnly");
 			int repeatableIndex = ParamUtil.getInteger(
 				request, "repeatableIndex");
-
-			Locale locale = PortalUtil.getLocale(request);
+			boolean readOnly = ParamUtil.getBoolean(request, "readOnly");
 
 			String fieldHTML = DDMXSDUtil.getFieldHTMLByName(
 				pageContext, classNameId, classPK, fieldName, repeatableIndex,
-				null, null, null, readOnly, locale);
+				null, null, null, readOnly, themeDisplay.getLocale());
 
 			response.setContentType(ContentTypes.TEXT_HTML);
 
