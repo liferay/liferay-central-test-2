@@ -104,9 +104,8 @@ public class RuntimePageImpl implements RuntimePage {
 			TemplateResource templateResource)
 		throws Exception {
 
-		StringBundler sb = null;
-
-		sb = doDispatch(pageContext, portletId, templateResource, true);
+		StringBundler sb = doDispatch(
+			pageContext, portletId, templateResource, true);
 
 		sb.writeTo(pageContext.getOut());
 	}
@@ -255,8 +254,6 @@ public class RuntimePageImpl implements RuntimePage {
 		ClassLoader contextClassLoader =
 			PACLClassLoaderUtil.getContextClassLoader();
 
-		StringBundler sb = null;
-
 		try {
 			TemplateContextType templateContextType =
 				TemplateContextType.STANDARD;
@@ -270,13 +267,15 @@ public class RuntimePageImpl implements RuntimePage {
 			}
 
 			if (processTemplate) {
-				sb = doProcessTemplate(
+				return doProcessTemplate(
 					pageContext, portletId, templateResource,
 					templateContextType);
 			}
 			else {
 				doProcessCustomizationSettings(
 					pageContext, templateResource, templateContextType);
+
+				return null;
 			}
 		}
 		finally {
@@ -286,8 +285,6 @@ public class RuntimePageImpl implements RuntimePage {
 				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
-
-		return sb;
 	}
 
 	protected void doProcessCustomizationSettings(
