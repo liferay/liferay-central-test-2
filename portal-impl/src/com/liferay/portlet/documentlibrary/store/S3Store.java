@@ -568,7 +568,7 @@ public class S3Store extends BaseStore {
 	protected String getKey(
 		long companyId, long repositoryId, String fileName) {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(companyId);
 		sb.append(StringPool.SLASH);
@@ -582,7 +582,7 @@ public class S3Store extends BaseStore {
 		long companyId, long repositoryId, String fileName,
 		String versionLabel) {
 
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(companyId);
 		sb.append(StringPool.SLASH);
