@@ -154,7 +154,7 @@ public class RSSTag extends IncludeTag {
 	private int _delta = SearchContainer.DEFAULT_DELTA;
 	private String _displayStyle = RSSUtil.DISPLAY_STYLE_ABSTRACT;
 	private String _feedType = RSSUtil.FEED_TYPE_DEFAULT;
-	private String _message = "RSS";
+	private String _message = "rss";
 	private String _name;
 	private ResourceURL _resourceURL;
 	private String _url;
