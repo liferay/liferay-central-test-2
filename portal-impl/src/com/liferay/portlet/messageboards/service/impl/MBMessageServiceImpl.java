@@ -148,7 +148,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		MBMessage parentMessage = mbMessageLocalService.getMessage(
+		MBMessage parentMessage = mbMessagePersistence.findByPrimaryKey(
 			parentMessageId);
 
 		checkReplyToPermission(
