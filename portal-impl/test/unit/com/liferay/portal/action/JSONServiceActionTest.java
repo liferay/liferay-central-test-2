@@ -33,7 +33,7 @@ public class JSONServiceActionTest extends TestCase {
 	@Override
 	public void setUp() throws Exception {
 		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-		
+
 		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 	}
 

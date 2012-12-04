@@ -18,8 +18,6 @@ import com.liferay.portal.dao.orm.common.EntityCacheImpl;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONSerializer;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.HitsImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +34,7 @@ public class JSONFactoryTest extends TestCase {
 		JSONInit.init();
 
 		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-		
+
 		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 	}
 
@@ -119,22 +117,6 @@ public class JSONFactoryTest extends TestCase {
 		assertNotNull(map);
 		assertEquals(1, map.size());
 		assertEquals(EntityCacheImpl.class.getName(), map.get("class"));
-	}
-
-	public void testSerialize() {
-		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
-
-		Hits hits = new HitsImpl();
-
-		String json = jsonSerializer.serialize(hits);
-
-		assertTrue(json.contains("\"docs\":null"));
-		assertFalse(json.contains("\"query\""));
-		assertTrue(json.contains("\"queryTerms\":null"));
-		assertTrue(json.contains("\"scores\":[]"));
-		assertTrue(json.contains("\"snippets\":[]"));
-		assertTrue(json.contains("\"start\":0"));
-		assertTrue(json.contains("\"length\":0"));
 	}
 
 }
