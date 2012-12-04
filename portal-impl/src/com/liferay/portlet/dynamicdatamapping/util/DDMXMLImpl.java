@@ -134,14 +134,8 @@ public class DDMXMLImpl implements DDMXML {
 		return fields;
 	}
 
-	public String getXML(Fields fields)
-		throws PortalException, SystemException {
-
-		return getXML(fields, null);
-	}
-
-	public String getXML(Fields fields, Document document)
-		throws PortalException, SystemException {
+	public String getXML(Document document, Fields fields)
+		throws SystemException {
 
 		Element rootElement = null;
 
@@ -191,6 +185,10 @@ public class DDMXMLImpl implements DDMXML {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	public String getXML(Fields fields) throws SystemException {
+		return getXML(null, fields);
 	}
 
 	public String updateXMLDefaultLocale(

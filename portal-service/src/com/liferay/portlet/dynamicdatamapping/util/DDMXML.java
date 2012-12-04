@@ -42,11 +42,10 @@ public interface DDMXML {
 			List<String> fieldNames)
 		throws PortalException, SystemException;
 
-	public String getXML(Fields fields)
-		throws PortalException, SystemException;
+	public String getXML(Document document, Fields fields)
+		throws SystemException;
 
-	public String getXML(Fields fields, Document document)
-		throws PortalException, SystemException;
+	public String getXML(Fields fields) throws SystemException;
 
 	public String updateXMLDefaultLocale(
 			String xml, Locale contentDefaultLocale,
