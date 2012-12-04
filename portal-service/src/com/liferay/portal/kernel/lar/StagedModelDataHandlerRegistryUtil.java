@@ -53,7 +53,7 @@ public class StagedModelDataHandlerRegistryUtil {
 	public static void unregister(
 		List<StagedModelDataHandler<?>> stagedModelDataHandlers) {
 
-		for (StagedModelDataHandler stagedModelDataHandler :
+		for (StagedModelDataHandler<?> stagedModelDataHandler :
 				stagedModelDataHandlers) {
 
 			unregister(stagedModelDataHandler);
