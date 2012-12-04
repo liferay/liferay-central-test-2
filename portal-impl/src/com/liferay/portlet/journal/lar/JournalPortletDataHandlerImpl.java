@@ -952,9 +952,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		content = importDLFileEntries(
 			portletDataContext, parentElement, content);
-
 		content = importLayoutFriendlyURLs(portletDataContext, content);
-
 		content = importLinksToLayout(portletDataContext, content);
 
 		return content;
@@ -2413,11 +2411,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		content = StringUtil.replace(
 			content, "@data_handler_private_group_servlet_mapping@",
 			privateGroupServletMapping);
-
 		content = StringUtil.replace(
 			content, "@data_handler_private_user_servlet_mapping@",
 			privateUserServletMapping);
-
 		content = StringUtil.replace(
 			content, "@data_handler_public_servlet_mapping@",
 			publicServletMapping);
