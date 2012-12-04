@@ -205,7 +205,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<c:when test="<%= Validator.isNotNull(trashRenderer.renderActions(renderRequest, renderResponse)) %>">
 				<liferay-ui:search-container-column-jsp
 					align="right"
-					path='<%= trashRenderer.renderActions(renderRequest, renderResponse) %>'
+					path="<%= trashRenderer.renderActions(renderRequest, renderResponse) %>"
 				/>
 			</c:when>
 			<c:when test="<%= entry.getRootEntry() == null %>">
@@ -220,7 +220,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<%
 					request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-					request.setAttribute("curTrashRenderer", trashRenderer);
+					request.setAttribute(WebKeys.TRASH_RENDERER, trashRenderer);
 					%>
 
 					<liferay-util:include page="/html/portlet/trash/view_content_action.jsp" />
