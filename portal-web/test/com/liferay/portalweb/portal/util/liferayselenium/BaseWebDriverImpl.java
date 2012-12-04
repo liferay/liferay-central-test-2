@@ -210,12 +210,12 @@ public abstract class BaseWebDriverImpl
 		return StringUtil.valueOf(GetterUtil.getInteger(firstNumber) + 1);
 	}
 
-	public String getNumberDecrement(String expression) {
-		return LiferaySeleniumHelper.getNumberDecrement(expression);
+	public String getNumberDecrement(String value) {
+		return LiferaySeleniumHelper.getNumberDecrement(value);
 	}
 
-	public String getNumberIncrement(String expression) {
-		return LiferaySeleniumHelper.getNumberIncrement(expression);
+	public String getNumberIncrement(String value) {
+		return LiferaySeleniumHelper.getNumberIncrement(value);
 	}
 
 	public void goBackAndWait() {
