@@ -15,6 +15,8 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.facebook.FacebookConnectUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -44,28 +46,10 @@ public class FacebookAutoLogin implements AutoLogin {
 				return null;
 			}
 
-			HttpSession session = request.getSession();
-
-			String emailAddress = (String)session.getAttribute(
-				WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
-
 			User user = null;
 
 			try {
-				if (Validator.isNotNull(emailAddress)) {
-					session.removeAttribute(
-						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
-
-					user = UserLocalServiceUtil.getUserByEmailAddress(
-						companyId, emailAddress);
-				}
-				else {
-					long facebookId = GetterUtil.getLong(
-						(String)session.getAttribute(WebKeys.FACEBOOK_USER_ID));
-
-					user = UserLocalServiceUtil.getUserByFacebookId(
-						companyId, facebookId);
-				}
+				user = getUser(request, companyId);
 			}
 			catch (NoSuchUserException nsue) {
 				return null;
@@ -83,6 +67,29 @@ public class FacebookAutoLogin implements AutoLogin {
 			_log.error(e, e);
 
 			return null;
+		}
+	}
+
+	protected User getUser(HttpServletRequest request, long companyId)
+		throws PortalException, SystemException {
+
+		HttpSession session = request.getSession();
+
+		String emailAddress = (String)session.getAttribute(
+			WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+
+		if (Validator.isNotNull(emailAddress)) {
+			session.removeAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
+
+			return UserLocalServiceUtil.getUserByEmailAddress(
+				companyId, emailAddress);
+		}
+		else {
+			long facebookId = GetterUtil.getLong(
+				(String)session.getAttribute(WebKeys.FACEBOOK_USER_ID));
+
+			return UserLocalServiceUtil.getUserByFacebookId(
+				companyId, facebookId);
 		}
 	}
 

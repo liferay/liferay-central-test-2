@@ -120,25 +120,25 @@ public class BasicAuthHeaderAutoLogin implements AuthVerifier, AutoLogin {
 				decodedCredentials.substring(0, pos));
 			String password = decodedCredentials.substring(pos + 1);
 
-			String[] credentials = null;
-
 			try {
 				long userId = LoginUtil.getAuthenticatedUserId(
 					request, login, password, null);
 
-				credentials = new String[3];
+				String[] credentials = new String[3];
 
 				credentials[0] = String.valueOf(userId);
 				credentials[1] = password;
 				credentials[2] = Boolean.TRUE.toString();
+
+				return credentials;
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(login + " is not a valid login", e);
 				}
-			}
 
-			return credentials;
+				return null;
+			}
 		}
 		catch (Exception e) {
 			throw new AutoLoginException(e);
