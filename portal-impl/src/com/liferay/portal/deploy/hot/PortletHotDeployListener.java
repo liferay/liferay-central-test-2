@@ -223,6 +223,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		List<StagedModelDataHandler<?>> stagedModelDataHandlers =
+			portlet.getStagedModelDataHandlerInstances();
+
+		if (stagedModelDataHandlers != null) {
+			StagedModelDataHandlerRegistryUtil.unregister(
+				stagedModelDataHandlers);
+		}
+
 		PollerProcessorUtil.deletePollerProcessor(portlet.getPortletId());
 
 		POPServerUtil.deleteListener(portlet.getPopMessageListenerInstance());
@@ -250,14 +258,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (atomCollectionAdapters != null) {
 			AtomCollectionAdapterRegistryUtil.unregister(
 				atomCollectionAdapters);
-		}
-
-		List<StagedModelDataHandler<?>> stagedModelDataHandlers =
-			portlet.getStagedModelDataHandlerInstances();
-
-		if (stagedModelDataHandlers != null) {
-			StagedModelDataHandlerRegistryUtil.unregister(
-				stagedModelDataHandlers);
 		}
 
 		List<TrashHandler> trashHandlers = portlet.getTrashHandlerInstances();
