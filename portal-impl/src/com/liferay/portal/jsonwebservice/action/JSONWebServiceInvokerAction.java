@@ -305,7 +305,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 	}
 
 	private Statement _parseStatement(
-		String assignment, Map<String, Object> statementData) {
+		String assignment, Map<String, Object> statementBody) {
 
 		Statement statement = new Statement();
 
@@ -342,15 +342,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		}
 
 		HashMap<String, Object> parameterMap =
-			new HashMap<String, Object>(statementData.size());
+			new HashMap<String, Object>(statementBody.size());
 
 		statement.setParameterMap(parameterMap);
 
-		Set<String> keySet = statementData.keySet();
-
-		for (String key : keySet) {
+		for (String key : statementBody.keySet()) {
 			if (key.startsWith(StringPool.AT)) {
-				String value = (String)statementData.get(key);
+				String value = (String)statementBody.get(key);
 
 				List<Flag> flags = statement.getFlags();
 
@@ -369,7 +367,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			}
 			else if (key.startsWith(StringPool.DOLLAR)) {
 				Map<String, Object> map =
-					(Map<String, Object>)statementData.get(key);
+					(Map<String, Object>)statementBody.get(key);
 
 				List<Statement> variableStatements =
 					statement.getVariableStatements();
@@ -385,7 +383,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 				variableStatements.add(variableStatement);
 			}
 			else {
-				Object value = statementData.get(key);
+				Object value = statementBody.get(key);
 
 				parameterMap.put(CamelCaseUtil.normalizeCamelCase(key), value);
 			}
