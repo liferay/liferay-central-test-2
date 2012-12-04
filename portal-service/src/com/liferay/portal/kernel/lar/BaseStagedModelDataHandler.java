@@ -21,7 +21,7 @@ import com.liferay.portal.model.StagedModel;
  * @author Mate Thurzo
  * @author Daniel Kocsis
  */
-public abstract class StagedModelDataHandlerImpl<T extends StagedModel>
+public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 	implements StagedModelDataHandler<T> {
 
 	public void export(
