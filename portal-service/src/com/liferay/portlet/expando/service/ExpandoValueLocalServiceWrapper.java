@@ -960,9 +960,10 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
-	public java.util.Map getData(long companyId, java.lang.String className,
-		java.lang.String tableName, java.lang.String columnName, long classPK,
-		java.util.Map defaultData)
+	public java.util.Map<?, ?> getData(long companyId,
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK,
+		java.util.Map<?, ?> defaultData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getData(companyId, className,

@@ -1007,9 +1007,10 @@ public class ExpandoValueLocalServiceUtil {
 			classPK, defaultData);
 	}
 
-	public static java.util.Map getData(long companyId,
+	public static java.util.Map<?, ?> getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, long classPK, java.util.Map defaultData)
+		java.lang.String columnName, long classPK,
+		java.util.Map<?, ?> defaultData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
