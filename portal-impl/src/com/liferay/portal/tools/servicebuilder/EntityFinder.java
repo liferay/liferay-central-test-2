@@ -46,7 +46,7 @@ public class EntityFinder {
 
 		if ((!isCollection() || isUnique()) && hasCustomComparator()) {
 			throw new IllegalArgumentException(
-				"Unique finder can not have custom comparator");
+				"A unique finder cannot have a custom comparator");
 		}
 	}
 
