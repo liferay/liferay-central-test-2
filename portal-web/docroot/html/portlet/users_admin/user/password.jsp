@@ -112,7 +112,7 @@ else {
 	%>
 
 	<aui:fieldset>
-		<%@ include file="/html/portlet/users_admin/user/password_reminder_query_question.jspf" %>
+		<%@ include file="/html/portlet/users_admin/user/password_reminder_query_questions.jspf" %>
 
 		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
 			<div id="<portlet:namespace />customQuestionDiv">
