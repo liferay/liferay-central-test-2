@@ -333,12 +333,12 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		int type = column.getType();
-
 		ExpandoValue value = new ExpandoValueImpl();
 
 		value.setCompanyId(table.getCompanyId());
 		value.setColumnId(column.getColumnId());
+
+		int type = column.getType();
 
 		if (type == ExpandoColumnConstants.STRING_ARRAY_LOCALIZED) {
 			value.setStringArrayMap((Map<Locale, String[]>)dataMap);
@@ -498,8 +498,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 		else {
 			return expandoValueLocalService.addValue(
-				companyId, className, tableName, columnName, classPK,
-				(Map)data);
+				companyId, className, tableName, columnName, classPK, data);
 		}
 	}
 
@@ -1495,9 +1494,9 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
-	public Map getData(
+	public Map<?, ?> getData(
 			long companyId, String className, String tableName,
-			String columnName, long classPK, Map defaultData)
+			String columnName, long classPK, Map<?, ?> defaultData)
 		throws PortalException, SystemException {
 
 		ExpandoValue value = expandoValueLocalService.getValue(
@@ -2188,7 +2187,7 @@ public class ExpandoValueLocalServiceImpl
 		else {
 			return (Serializable)expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
-				new HashMap());
+				new HashMap<Object, Object>());
 		}
 	}
 
