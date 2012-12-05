@@ -31,6 +31,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -40,8 +41,7 @@ public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 
 	@Override
 	protected String doRender(Field field, Locale locale) throws Exception {
-
-		ArrayList<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 
 		for (Serializable value : field.getValues()) {
 			String valueString = String.valueOf(value);
@@ -53,7 +53,7 @@ public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 			values.add(handleJSON(valueString, locale));
 		}
 
-		return StringUtil.merge(values, ", ");
+		return StringUtil.merge(values, StringPool.COMMA_AND_SPACE);
 	}
 
 	@Override
@@ -68,10 +68,10 @@ public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 	}
 
 	protected String handleJSON(String json, Locale locale) {
-		JSONObject fieldValueJSONObject = null;
+		JSONObject jsonObject = null;
 
 		try {
-			fieldValueJSONObject = JSONFactoryUtil.createJSONObject(json);
+			jsonObject = JSONFactoryUtil.createJSONObject(json);
 		}
 		catch (JSONException jsone) {
 			if (_log.isDebugEnabled()) {
@@ -81,8 +81,8 @@ public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
-		long fileEntryGroupId = fieldValueJSONObject.getLong("groupId");
-		String fileEntryUUID = fieldValueJSONObject.getString("uuid");
+		long fileEntryGroupId = jsonObject.getLong("groupId");
+		String fileEntryUUID = jsonObject.getString("uuid");
 
 		try {
 			FileEntry fileEntry = DLAppServiceUtil.getFileEntryByUuidAndGroupId(

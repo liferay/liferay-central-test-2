@@ -30,6 +30,7 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -39,7 +40,7 @@ public class LinkToPageFieldRenderer extends BaseFieldRenderer {
 
 	@Override
 	protected String doRender(Field field, Locale locale) throws Exception {
-		ArrayList<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 
 		for (Serializable value : field.getValues()) {
 			String valueString = String.valueOf(value);
@@ -51,7 +52,7 @@ public class LinkToPageFieldRenderer extends BaseFieldRenderer {
 			values.add(handleJSON(valueString, locale));
 		}
 
-		return StringUtil.merge(values, ", ");
+		return StringUtil.merge(values, StringPool.COMMA_AND_SPACE);
 	}
 
 	@Override
@@ -66,10 +67,10 @@ public class LinkToPageFieldRenderer extends BaseFieldRenderer {
 	}
 
 	protected String handleJSON(String value, Locale locale) {
-		JSONObject fieldValueJSONObject = null;
+		JSONObject jsonObject = null;
 
 		try {
-			fieldValueJSONObject = JSONFactoryUtil.createJSONObject(value);
+			jsonObject = JSONFactoryUtil.createJSONObject(value);
 		}
 		catch (JSONException jsone) {
 			if (_log.isDebugEnabled()) {
@@ -79,10 +80,9 @@ public class LinkToPageFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
-		long groupId = fieldValueJSONObject.getLong("groupId");
-		boolean privateLayout = fieldValueJSONObject.getBoolean(
-			"privateLayout");
-		long layoutId = fieldValueJSONObject.getLong("layoutId");
+		long groupId = jsonObject.getLong("groupId");
+		boolean privateLayout = jsonObject.getBoolean("privateLayout");
+		long layoutId = jsonObject.getLong("layoutId");
 
 		try {
 			return LayoutServiceUtil.getLayoutName(

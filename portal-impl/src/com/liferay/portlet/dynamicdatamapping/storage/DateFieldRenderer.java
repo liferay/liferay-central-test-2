@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.text.Format;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -36,7 +37,7 @@ public class DateFieldRenderer extends BaseFieldRenderer {
 	protected String doRender(Field field, Locale locale) throws Exception {
 		Format format = FastDateFormatFactoryUtil.getDate(locale);
 
-		ArrayList<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 
 		for (Serializable value : field.getValues()) {
 			String valueString = String.valueOf(value);
@@ -48,7 +49,7 @@ public class DateFieldRenderer extends BaseFieldRenderer {
 			values.add(format.format(valueString));
 		}
 
-		return StringUtil.merge(values, ", ");
+		return StringUtil.merge(values, StringPool.COMMA_AND_SPACE);
 	}
 
 	@Override

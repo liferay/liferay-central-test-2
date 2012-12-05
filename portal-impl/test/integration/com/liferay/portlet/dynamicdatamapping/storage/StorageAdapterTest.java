@@ -28,6 +28,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.service.BaseDDMServiceTestCase;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,7 +44,11 @@ import org.junit.runner.RunWith;
 @Transactional
 public class StorageAdapterTest extends BaseDDMServiceTestCase {
 
-	public StorageAdapterTest() {
+	@Before
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
+
 		_classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
 
 		_expandoStorageAdapater = new ExpandoStorageAdapter();
@@ -54,21 +59,21 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 	public void testCreateRepeatableField() throws Exception {
 		String xsd = readText("text-repeatable-structure.xsd");
 
-		DDMStructure ddmStructure = addStructure(
+		DDMStructure structure = addStructure(
 			_classNameId, null, "Test Structure", xsd,
 			StorageType.XML.getValue(), DDMStructureConstants.TYPE_DEFAULT);
 
 		Fields fields = new Fields();
 
 		Field field = new Field(
-			ddmStructure.getStructureId(), "name", new String[] {"1", "2"});
+			structure.getStructureId(), "name", new String[] {"1", "2"});
 
 		fields.put(field);
 
 		// XML
 
 		long classPK = create(
-			_xmlStorageAdapater, ddmStructure.getStructureId(), fields);
+			_xmlStorageAdapater, structure.getStructureId(), fields);
 
 		Fields actualFields = _xmlStorageAdapater.getFields(classPK);
 
@@ -77,7 +82,7 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 		// Expando
 
 		classPK = create(
-			_expandoStorageAdapater, ddmStructure.getStructureId(), fields);
+			_expandoStorageAdapater, structure.getStructureId(), fields);
 
 		actualFields = _expandoStorageAdapater.getFields(classPK);
 
@@ -94,7 +99,6 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 	}
 
 	private long _classNameId;
-
 	private StorageAdapter _expandoStorageAdapater;
 	private StorageAdapter _xmlStorageAdapater;
 

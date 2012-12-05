@@ -106,11 +106,11 @@ public class EditRecordFileAction extends PortletAction {
 
 		String fieldName = ParamUtil.getString(portletRequest, "fieldName");
 
-		int valueIndex = ParamUtil.getInteger(portletRequest, "valueIndex");
-
 		Field field = fields.get(fieldName);
 
 		List<Serializable> values = field.getValues();
+
+		int valueIndex = ParamUtil.getInteger(portletRequest, "valueIndex");
 
 		values.remove(valueIndex);
 

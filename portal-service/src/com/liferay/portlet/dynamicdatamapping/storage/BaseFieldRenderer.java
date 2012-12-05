@@ -30,9 +30,7 @@ public abstract class BaseFieldRenderer implements FieldRenderer {
 			return doRender(field, locale);
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to render field", e);
-			}
+			_log.error("Unable to render field", e);
 		}
 
 		return null;
@@ -43,9 +41,7 @@ public abstract class BaseFieldRenderer implements FieldRenderer {
 			return doRender(field, locale, valueIndex);
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to render field", e);
-			}
+			_log.error("Unable to render field", e);
 		}
 
 		return null;

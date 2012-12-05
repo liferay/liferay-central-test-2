@@ -100,8 +100,8 @@ public class DDMImpl implements DDM {
 		DDMStructure ddmStructure = getDDMStructure(
 			ddmStructureId, ddmTemplateId);
 
-		JSONObject repeatabaleFields = getRepeatableFieldsMapJSON(
-			serviceContext);
+		JSONObject repeatabaleFieldsMapJSONObject =
+			getRepeatableFieldsMapJSONObject(serviceContext);
 
 		Set<String> fieldNames = ddmStructure.getFieldNames();
 
@@ -109,8 +109,8 @@ public class DDMImpl implements DDM {
 
 		for (String fieldName : fieldNames) {
 			List<Serializable> fieldValues = getFieldValues(
-				ddmStructure, repeatabaleFields, fieldName, fieldNamespace,
-				serviceContext);
+				ddmStructure, repeatabaleFieldsMapJSONObject, fieldName,
+				fieldNamespace, serviceContext);
 
 			if (fieldValues.isEmpty()) {
 				continue;
@@ -274,24 +274,19 @@ public class DDMImpl implements DDM {
 			return;
 		}
 
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
-
-		JSONObject repeatabaleFields = getRepeatableFieldsMapJSON(
-			serviceContext);
-
-		List<String> fieldNames = getFieldNames(
-			ddmStructure, fieldNamespace, fieldName, repeatabaleFields);
-
 		UploadRequest uploadRequest = (UploadRequest)request;
 
 		Fields fields = StorageEngineUtil.getFields(storageId);
 
-		InputStream inputStream = null;
+		List<String> fieldNames = getFieldNames(
+			structureId, fieldName, fieldNamespace, serviceContext);
 
-		List<Serializable> fieldValues = new ArrayList<Serializable>();
+		List<Serializable> fieldValues = new ArrayList<Serializable>(
+			fieldNames.size());
 
 		for (String fieldNameValue : fieldNames) {
+			InputStream inputStream = null;
+
 			try {
 				String fileName = uploadRequest.getFileName(fieldNameValue);
 
@@ -356,8 +351,8 @@ public class DDMImpl implements DDM {
 	}
 
 	protected List<String> getFieldNames(
-			DDMStructure ddmStructure, String fieldNamespace, String fieldName,
-			JSONObject repeatabaleFields)
+			DDMStructure ddmStructure, String fieldName, String fieldNamespace,
+			JSONObject repeatableFieldsMapJSONObject)
 		throws PortalException, SystemException {
 
 		List<String> fieldNames = new ArrayList<String>();
@@ -366,8 +361,8 @@ public class DDMImpl implements DDM {
 
 		boolean repeatable = ddmStructure.isFieldRepeatable(fieldName);
 
-		if (repeatable && (repeatabaleFields != null)) {
-			JSONArray jsonArray = repeatabaleFields.getJSONArray(
+		if (repeatable && (repeatableFieldsMapJSONObject != null)) {
+			JSONArray jsonArray = repeatableFieldsMapJSONObject.getJSONArray(
 				fieldNamespace + fieldName);
 
 			for (int i = 0; i < jsonArray.length(); i++) {
@@ -379,17 +374,34 @@ public class DDMImpl implements DDM {
 		return fieldNames;
 	}
 
-	protected List<Serializable> getFieldValues(
-			DDMStructure ddmStructure, JSONObject repeatabaleFields,
-			String fieldName, String fieldNamespace,
+	protected List<String> getFieldNames(
+			long structureId, String fieldNamespace, String fieldName,
 			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDMStructure ddmStructure =
+			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
+
+		JSONObject repeatableFieldsMapJSONObject =
+			getRepeatableFieldsMapJSONObject(serviceContext);
+
+		return getFieldNames(
+			ddmStructure, fieldName, fieldNamespace,
+			repeatableFieldsMapJSONObject);
+	}
+
+	protected List<Serializable> getFieldValues(
+			DDMStructure ddmStructure,
+			JSONObject repeatabaleFieldsMapJSONObject, String fieldName,
+			String fieldNamespace, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String fieldDataType = ddmStructure.getFieldDataType(fieldName);
 		String fieldType = ddmStructure.getFieldType(fieldName);
 
 		List<String> fieldNames = getFieldNames(
-			ddmStructure, fieldNamespace, fieldName, repeatabaleFields);
+			ddmStructure, fieldName, fieldNamespace,
+			repeatabaleFieldsMapJSONObject);
 
 		List<Serializable> fieldValues = new ArrayList<Serializable>(
 			fieldNames.size());
@@ -401,10 +413,10 @@ public class DDMImpl implements DDM {
 			if (fieldDataType.equals(FieldConstants.DATE)) {
 				int fieldValueMonth = GetterUtil.getInteger(
 					serviceContext.getAttribute(fieldNameValue + "Month"));
-				int fieldValueYear = GetterUtil.getInteger(
-					serviceContext.getAttribute(fieldNameValue + "Year"));
 				int fieldValueDay = GetterUtil.getInteger(
 					serviceContext.getAttribute(fieldNameValue + "Day"));
+				int fieldValueYear = GetterUtil.getInteger(
+					serviceContext.getAttribute(fieldNameValue + "Year"));
 
 				Date fieldValueDate = PortalUtil.getDate(
 					fieldValueMonth, fieldValueDay, fieldValueYear);
@@ -440,7 +452,7 @@ public class DDMImpl implements DDM {
 		return fieldValues;
 	}
 
-	protected JSONObject getRepeatableFieldsMapJSON(
+	protected JSONObject getRepeatableFieldsMapJSONObject(
 		ServiceContext serviceContext) {
 
 		try {

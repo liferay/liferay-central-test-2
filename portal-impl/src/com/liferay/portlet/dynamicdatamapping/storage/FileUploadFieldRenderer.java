@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -35,7 +36,7 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 
 	@Override
 	protected String doRender(Field field, Locale locale) throws Exception {
-		ArrayList<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
 
 		for (Serializable value : field.getValues()) {
 			String valueString = String.valueOf(value);
@@ -47,7 +48,7 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 			values.add(handleJSON(valueString));
 		}
 
-		return StringUtil.merge(values, ", ");
+		return StringUtil.merge(values, StringPool.COMMA_AND_SPACE);
 	}
 
 	@Override
@@ -62,10 +63,10 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 	}
 
 	protected String handleJSON(String json) {
-		JSONObject fieldValueJSONObject = null;
+		JSONObject jsonObject = null;
 
 		try {
-			fieldValueJSONObject = JSONFactoryUtil.createJSONObject(json);
+			jsonObject = JSONFactoryUtil.createJSONObject(json);
 		}
 		catch (JSONException jsone) {
 			if (_log.isDebugEnabled()) {
@@ -75,7 +76,7 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
-		return fieldValueJSONObject.getString("name");
+		return jsonObject.getString("name");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
