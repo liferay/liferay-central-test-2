@@ -117,10 +117,10 @@ public class GoogleHook implements Hook {
 
 			deleteEmailAddress(companyId, userId);
 
-			String nickname = _getNickname(emailAddress);
-
 			GNicknameManager gNicknameManager =
 				GoogleAppsFactoryUtil.getGNicknameManager(companyId);
+
+			String nickname = _getNickname(emailAddress);
 
 			gNicknameManager.addGNickname(userId, nickname);
 
