@@ -62,9 +62,9 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
-		MBThread thread = MBThreadLocalServiceUtil.getThread(classPK);
+		String portletId = PortletKeys.MESSAGE_BOARDS;
 
-		String portletName = PortletKeys.MESSAGE_BOARDS;
+		MBThread thread = MBThreadLocalServiceUtil.getThread(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
 			thread.getGroupId(), PortletKeys.MESSAGE_BOARDS);
@@ -72,11 +72,11 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			plid = PortalUtil.getControlPanelPlid(portletRequest);
 
-			portletName = PortletKeys.MESSAGE_BOARDS_ADMIN;
+			portletId = PortletKeys.MESSAGE_BOARDS_ADMIN;
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, portletName, plid, PortletRequest.RENDER_PHASE);
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/message_boards_admin/view");
 		portletURL.setParameter(

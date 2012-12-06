@@ -105,9 +105,9 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
-		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
+		String portletId = PortletKeys.WIKI;
 
-		String portletName = PortletKeys.WIKI;
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
 			node.getGroupId(), PortletKeys.WIKI);
@@ -115,21 +115,21 @@ public class WikiNodeTrashHandler extends BaseTrashHandler {
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			plid = PortalUtil.getControlPanelPlid(portletRequest);
 
-			portletName = PortletKeys.WIKI_ADMIN;
+			portletId = PortletKeys.WIKI_ADMIN;
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, portletName, plid, PortletRequest.RENDER_PHASE);
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		return portletURL.toString();
 	}
 
 	@Override
-	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
-			throws PortalException, SystemException {
+	public String getRestoreMessage(
+		PortletRequest portletRequest, long classPK) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.translate("wiki");
 	}

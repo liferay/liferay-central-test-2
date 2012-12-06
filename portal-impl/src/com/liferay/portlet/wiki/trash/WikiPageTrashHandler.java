@@ -123,9 +123,9 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
-		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
+		String portletId = PortletKeys.WIKI;
 
-		String portletName = PortletKeys.WIKI;
+		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
 			page.getGroupId(), PortletKeys.WIKI);
@@ -133,11 +133,11 @@ public class WikiPageTrashHandler extends BaseTrashHandler {
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			plid = PortalUtil.getControlPanelPlid(portletRequest);
 
-			portletName = PortletKeys.WIKI_ADMIN;
+			portletId = PortletKeys.WIKI_ADMIN;
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, portletName, plid, PortletRequest.RENDER_PHASE);
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		WikiNode node = page.getNode();
 

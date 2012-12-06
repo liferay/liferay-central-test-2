@@ -62,29 +62,28 @@ public class BlogsEntryTrashHandler extends BaseTrashHandler {
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
 		throws PortalException, SystemException {
 
-		BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
-			classPK);
+		String portletId = PortletKeys.BLOGS;
 
-		String portletName = PortletKeys.BLOGS;
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
-			blogsEntry.getGroupId(), PortletKeys.BLOGS);
+			entry.getGroupId(), PortletKeys.BLOGS);
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			plid = PortalUtil.getControlPanelPlid(portletRequest);
 
-			portletName = PortletKeys.BLOGS_ADMIN;
+			portletId = PortletKeys.BLOGS_ADMIN;
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			portletRequest, portletName, plid, PortletRequest.RENDER_PHASE);
+			portletRequest, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		return portletURL.toString();
 	}
 
 	@Override
-	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
-		throws PortalException, SystemException {
+	public String getRestoreMessage(
+		PortletRequest portletRequest, long classPK) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
