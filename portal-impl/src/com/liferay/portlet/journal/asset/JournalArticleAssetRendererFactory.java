@@ -130,7 +130,8 @@ public class JournalArticleAssetRendererFactory
 
 			for (DDMStructure ddmStructure : ddmStructures) {
 				classTypes.put(
-					ddmStructure.getStructureId(), ddmStructure.getName(locale));
+					ddmStructure.getStructureId(),
+					ddmStructure.getName(locale));
 			}
 		}
 
