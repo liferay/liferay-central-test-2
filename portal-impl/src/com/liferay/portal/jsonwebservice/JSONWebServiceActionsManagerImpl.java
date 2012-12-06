@@ -234,7 +234,8 @@ public class JSONWebServiceActionsManagerImpl
 		if (_jsonWebServiceActionConfigs.contains(jsonWebServiceActionConfig)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"JSON Web Service action already registered: " + path);
+					"A JSON web service action is already registered at " +
+						path);
 			}
 
 			return;
