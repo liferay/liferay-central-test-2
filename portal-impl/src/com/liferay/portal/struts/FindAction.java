@@ -24,12 +24,10 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -171,32 +169,16 @@ public abstract class FindAction extends Action {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				for (String portletId : _portletIds) {
-					if (layoutTypePortlet.hasPortletId(portletId) &&
-						LayoutPermissionUtil.contains(
+					if (!layoutTypePortlet.hasPortletId(portletId) ||
+						!LayoutPermissionUtil.contains(
 							permissionChecker, layout, ActionKeys.VIEW)) {
 
-						Portlet portlet =
-							PortletLocalServiceUtil.getPortletById(
-								themeDisplay.getCompanyId(), portletId);
-
-						if (portlet.isInstanceable()) {
-							for (String curPortletId :
-									layoutTypePortlet.getPortletIds()) {
-
-								String curRootPortletId =
-									PortletConstants.getRootPortletId(
-										curPortletId);
-
-								if (portletId.equals(curRootPortletId)) {
-									portletId = curPortletId;
-
-									break;
-								}
-							}
-						}
-
-						return new Object[] {plid, portletId};
+						continue;
 					}
+
+					portletId = getPortletId(layoutTypePortlet, portletId);
+
+					return new Object[] {plid, portletId};
 				}
 			}
 			catch (NoSuchLayoutException nsle) {
@@ -212,28 +194,36 @@ public abstract class FindAction extends Action {
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			if (LayoutPermissionUtil.contains(
+			if (!LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.VIEW)) {
 
-				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
-
-				for (String curPortletId : layoutTypePortlet.getPortletIds()) {
-					String curRootPortletId = PortletConstants.getRootPortletId(
-						curPortletId);
-
-					if (portletId.equals(curRootPortletId)) {
-						portletId = curPortletId;
-
-						break;
-					}
-				}
-
-				return new Object[] {plid, portletId};
+				continue;
 			}
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			portletId = getPortletId(layoutTypePortlet, portletId);
+
+			return new Object[] {plid, portletId};
 		}
 
 		throw new NoSuchLayoutException();
+	}
+
+	protected String getPortletId(
+		LayoutTypePortlet layoutTypePortlet, String portletId) {
+
+		for (String curPortletId : layoutTypePortlet.getPortletIds()) {
+			String curRootPortletId = PortletConstants.getRootPortletId(
+				curPortletId);
+
+			if (portletId.equals(curRootPortletId)) {
+				return curPortletId;
+			}
+		}
+
+		return portletId;
 	}
 
 	protected abstract String getPrimaryKeyParameterName();
