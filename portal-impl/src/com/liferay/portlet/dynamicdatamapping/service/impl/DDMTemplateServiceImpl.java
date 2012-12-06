@@ -40,10 +40,10 @@ import java.util.Map;
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 	public DDMTemplate addTemplate(
-		long groupId, long classNameId, long classPK,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		String type, String mode, String language, String script,
-		ServiceContext serviceContext)
+			long groupId, long classNameId, long classPK,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String type, String mode, String language, String script,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String ddmResource = ParamUtil.getString(serviceContext, "ddmResource");

@@ -56,7 +56,7 @@ public class BaseJournalServiceTestCase {
 			serviceContext);
 	}
 
-	protected DDMStructure addStructure(String xsd) throws Exception {
+	protected DDMStructure addDDMStructure(String xsd) throws Exception {
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 		nameMap.put(Locale.US, "Test Structure");
@@ -72,7 +72,8 @@ public class BaseJournalServiceTestCase {
 			null, xsd, serviceContext);
 	}
 
-	protected DDMTemplate addTemplate(long structureId, String xsl, String lang)
+	protected DDMTemplate addDDMTemplate(
+			long structureId, String xsl, String lang)
 		throws Exception {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();

@@ -61,12 +61,12 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 
 		String xsd = document.asXML();
 
-		DDMStructure structure = addStructure(xsd);
+		DDMStructure ddmStructure = addDDMStructure(xsd);
 
 		String xsl = "$name.getData()";
 
-		DDMTemplate template = addTemplate(
-			structure.getStructureId(), xsl,
+		DDMTemplate ddmTemplate = addDDMTemplate(
+			ddmStructure.getStructureId(), xsl,
 			JournalTemplateConstants.LANG_TYPE_VM);
 
 		document = createDocument("en_US", "en_US");
@@ -79,7 +79,7 @@ public class JournalTransformerTest extends BaseJournalServiceTestCase {
 		String xml = document.asXML();
 
 		JournalArticle article = addArticle(
-			xml, structure.getStructureKey(), template.getTemplateKey());
+			xml, ddmStructure.getStructureKey(), ddmTemplate.getTemplateKey());
 
 		Map<String, String> tokens = getTokens();
 

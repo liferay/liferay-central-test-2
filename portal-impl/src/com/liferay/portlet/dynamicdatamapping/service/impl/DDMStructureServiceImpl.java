@@ -37,9 +37,9 @@ import java.util.Map;
 public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 
 	public DDMStructure addStructure(
-		long userId, long groupId, long classNameId,
-		Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
-		String xsd, ServiceContext serviceContext)
+			long userId, long groupId, long classNameId,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
+			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String ddmResource = ParamUtil.getString(serviceContext, "ddmResource");
