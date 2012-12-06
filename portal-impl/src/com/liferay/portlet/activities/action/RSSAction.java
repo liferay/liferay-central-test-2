@@ -179,6 +179,11 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		int max = ParamUtil.getInteger(
+			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
+
+		List<SocialActivity> activities = getActivities(resourceRequest, max);
+
 		String feedTitle = ParamUtil.getString(resourceRequest, "feedTitle");
 		String format = ParamUtil.getString(
 			resourceRequest, "type", RSSUtil.FORMAT_DEFAULT);
@@ -187,10 +192,6 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 		String displayStyle = ParamUtil.getString(
 			resourceRequest, "displayStyle",
 			RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
-		int max = ParamUtil.getInteger(
-			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
-
-		List<SocialActivity> activities = getActivities(resourceRequest, max);
 
 		String rss = exportToRSS(
 			resourceRequest, feedTitle, null, format, version, displayStyle,
