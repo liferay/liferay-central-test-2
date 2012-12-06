@@ -164,15 +164,15 @@ public class JSONWebServiceServiceActionTest
 	}
 
 	@Test
-	public void testServletContextUrl1() throws Exception {
-		testServletContextUrl(
+	public void testServletContextURL1() throws Exception {
+		testServletContextURL(
 			"/somectx", true,
 			"/foo/hello-world/user-id/173/world-name/Jupiter");
 	}
 
 	@Test
-	public void testServletContextUrl2() throws Exception {
-		testServletContextUrl(
+	public void testServletContextURL2() throws Exception {
+		testServletContextURL(
 			"/somectx", false,
 			"/somectx.foo/hello-world/user-id/173/world-name/Jupiter");
 	}
@@ -209,12 +209,13 @@ public class JSONWebServiceServiceActionTest
 
 		MockHttpServletRequest mockHttpServletRequest =
 			createInvokerHttpServletRequest(json);
-		MockHttpServletResponse mockHttpServletResponse =
-			new MockHttpServletResponse();
 
 		if (setContextPath) {
 			mockHttpServletRequest.setContextPath(ctx);
 		}
+
+		MockHttpServletResponse mockHttpServletResponse =
+			new MockHttpServletResponse();
 
 		json = _jsonWebServiceServiceAction.getJSON(
 			new ActionMapping(), new DynaActionForm(), mockHttpServletRequest,
@@ -251,7 +252,7 @@ public class JSONWebServiceServiceActionTest
 		Assert.assertEquals("\"Welcome 173 to Jupiter\"", json);
 	}
 
-	protected void testServletContextUrl(
+	protected void testServletContextURL(
 			String ctx, boolean setContextPath, String request)
 		throws Exception {
 

@@ -106,6 +106,7 @@ public class JSONWebServiceActionsManagerImpl
 		String[] paths = _resolvePaths(request, path);
 
 		String servletContextPath = paths[0];
+
 		path = paths[1];
 
 		if (_log.isDebugEnabled()) {
@@ -148,6 +149,7 @@ public class JSONWebServiceActionsManagerImpl
 		String[] paths = _resolvePaths(request, path);
 
 		String servletContextPath = paths[0];
+
 		path = paths[1];
 
 		if (_log.isDebugEnabled()) {
@@ -385,15 +387,15 @@ public class JSONWebServiceActionsManagerImpl
 	private String[] _resolvePaths(HttpServletRequest request, String path) {
 		String servletContextPath = null;
 
-		int slashIndex = path.indexOf(CharPool.FORWARD_SLASH, 1);
+		int index = path.indexOf(CharPool.FORWARD_SLASH, 1);
 
-		if (slashIndex != -1) {
-			int dotIndex = path.lastIndexOf(CharPool.PERIOD, slashIndex);
+		if (index != -1) {
+			index = path.lastIndexOf(CharPool.PERIOD, index);
 
-			if (dotIndex != -1) {
-				servletContextPath = path.substring(0, dotIndex);
+			if (index != -1) {
+				servletContextPath = path.substring(0, index);
 
-				path = CharPool.FORWARD_SLASH + path.substring(dotIndex + 1);
+				path = CharPool.FORWARD_SLASH + path.substring(index + 1);
 			}
 		}
 
