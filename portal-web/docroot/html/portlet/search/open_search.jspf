@@ -127,9 +127,9 @@ for (int i = 0; i < portlets.size(); i++) {
 	if (openSearch instanceof HitsOpenSearchImpl) {
 		HitsOpenSearchImpl hitsOpenSearchImpl = (HitsOpenSearchImpl)openSearch;
 
-		Indexer indexer = hitsOpenSearchImpl.getIndexer();
+		Indexer hitsOpenSearchImplIndexer = hitsOpenSearchImpl.getIndexer();
 
-		filterSearch = indexer.isFilterSearch();
+		filterSearch = hitsOpenSearchImplIndexer.isFilterSearch();
 	}
 
 	List resultRows = new ArrayList();
