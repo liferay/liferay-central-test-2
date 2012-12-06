@@ -507,6 +507,6 @@ public class AnnouncementsEntryLocalServiceImpl
 	private static Log _log = LogFactoryUtil.getLog(
 		AnnouncementsEntryLocalServiceImpl.class);
 
-	private static Date _previousCheckDate = null;
+	private Date _previousCheckDate;
 
 }
