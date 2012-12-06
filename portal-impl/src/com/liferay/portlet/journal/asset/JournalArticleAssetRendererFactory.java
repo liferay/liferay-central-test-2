@@ -123,14 +123,14 @@ public class JournalArticleAssetRendererFactory
 		Map<Long, String> classTypes = new HashMap<Long, String>();
 
 		for (long groupId : groupIds) {
-			List<DDMStructure> structures =
+			List<DDMStructure> ddmStructures =
 				DDMStructureLocalServiceUtil.getStructures(
 					groupId,
 					PortalUtil.getClassNameId(JournalArticle.class.getName()));
 
-			for (DDMStructure structure : structures) {
+			for (DDMStructure ddmStructure : ddmStructures) {
 				classTypes.put(
-					structure.getStructureId(), structure.getName(locale));
+					ddmStructure.getStructureId(), ddmStructure.getName(locale));
 			}
 		}
 
