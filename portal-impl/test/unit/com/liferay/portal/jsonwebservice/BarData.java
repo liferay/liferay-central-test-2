@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.json.JSON;
 /**
  * @author Igor Spasic
  */
-public class FooData2 {
+public class BarData {
 
 	@JSON
 	public int[] getArray() {

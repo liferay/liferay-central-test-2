@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionMapping;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.util.CamelCaseUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -210,9 +209,9 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 	}
 
 	private void _checkJSONSerializerIncludeName(String includeName) {
-		if (includeName.indexOf(CharPool.STAR) != -1) {
+		if (includeName.contains(StringPool.STAR)) {
 			throw new IllegalArgumentException(
-				"Special characters are not allowed: " + includeName);
+				includeName + " has special characters");
 		}
 	}
 

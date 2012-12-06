@@ -26,6 +26,10 @@ import java.util.Locale;
  */
 public class FooService {
 
+	public static BarData bar() {
+		return new BarData();
+	}
+
 	public static String camel(String goodName, String badNAME) {
 		return goodName + '*' + badNAME;
 	}
@@ -107,10 +111,6 @@ public class FooService {
 		Class<?> clazz = serviceContext.getClass();
 
 		return clazz.getName();
-	}
-
-	public static FooData2 two() {
-		return new FooData2();
 	}
 
 	public static String use1(FooDataImpl fooData) {

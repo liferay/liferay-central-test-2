@@ -60,20 +60,18 @@ public class FlexjsonObjectJSONTransformer
 	private void _exclude(
 		List<PathExpression> pathExpressions, String path, String... names) {
 
-		int pathExpressionsSize = pathExpressions.size();
-
 		for (String name : names) {
 			PathExpression pathExpression = new PathExpression(
 				path.concat(name), false);
 
-			for (int i = 0; i < pathExpressionsSize; i++) {
-				PathExpression expression = pathExpressions.get(i);
+			for (int i = 0; i < pathExpressions.size(); i++) {
+				PathExpression curPathExpression = pathExpressions.get(i);
 
-				if (pathExpression.equals(expression) &&
-						expression.isIncluded()) {
+				if (pathExpression.equals(curPathExpression) &&
+					curPathExpression.isIncluded()) {
 
-					// Same path expression found, but it was included
-					// therefore replace it with excluded path expression
+					// Same path expression found, but it was included,
+					// therefore, replace it with the excluded path expression
 
 					pathExpressions.set(i, pathExpression);
 

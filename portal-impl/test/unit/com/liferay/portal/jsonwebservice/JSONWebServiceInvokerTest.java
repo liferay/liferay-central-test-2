@@ -279,7 +279,7 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 
-		map.put("/foo/two", params);
+		map.put("/foo/bar", params);
 
 		String json = toJSON(map);
 
@@ -296,7 +296,8 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		// Hack 1
 
 		map.clear();
-		map.put("$* = /foo/two", params);
+
+		map.put("$* = /foo/bar", params);
 
 		json = toJSON(map);
 
@@ -317,7 +318,8 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		// Hack 2
 
 		map.clear();
-		map.put("$secret = /foo/two", params);
+
+		map.put("$secret = /foo/bar", params);
 
 		json = toJSON(map);
 
