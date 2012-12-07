@@ -49,7 +49,7 @@ Liferay = window.Liferay || {};
 		{
 			URL_INVOKE: themeDisplay.getPathContext() + '/api/jsonws/invoke',
 
-			sbind: function() {
+			bind: function() {
 				var instance = this;
 
 				var args = A.Array(arguments, 0, true);
