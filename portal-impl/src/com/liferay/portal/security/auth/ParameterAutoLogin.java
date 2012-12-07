@@ -126,11 +126,11 @@ public class ParameterAutoLogin extends BaseAutoLogin implements AuthVerifier {
 		return credentials;
 	}
 
-	private String getLoginParam() {
+	protected String getLoginParam() {
 		return _LOGIN_PARAM;
 	}
 
-	private String getPasswordParam() {
+	protected String getPasswordParam() {
 		return _PASSWORD_PARAM;
 	}
 

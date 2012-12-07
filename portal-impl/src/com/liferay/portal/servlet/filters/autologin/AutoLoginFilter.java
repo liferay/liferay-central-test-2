@@ -220,12 +220,14 @@ public class AutoLoginFilter extends BasePortalFilter {
 					}
 				}
 				catch (Exception e) {
-					String currentURL = PortalUtil.getCurrentURL(request);
-
 					StringBundler sb = new StringBundler(4);
 
 					sb.append("Current URL ");
+
+					String currentURL = PortalUtil.getCurrentURL(request);
+					
 					sb.append(currentURL);
+
 					sb.append(" generates exception: ");
 					sb.append(e.getMessage());
 
@@ -235,9 +237,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 						}
 					}
 					else {
-						if (_log.isErrorEnabled()) {
-							_log.error(sb.toString());
-						}
+						_log.error(sb.toString());
 					}
 				}
 			}

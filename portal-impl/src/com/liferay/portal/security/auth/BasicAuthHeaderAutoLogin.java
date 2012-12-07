@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
@@ -141,15 +143,15 @@ public class BasicAuthHeaderAutoLogin
 
 		String encodedCredentials = st.nextToken();
 
-		if (getLog().isDebugEnabled()) {
-			getLog().debug("Encoded credentials are " + encodedCredentials);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Encoded credentials are " + encodedCredentials);
 		}
 
 		String decodedCredentials = new String(
 			Base64.decode(encodedCredentials));
 
-		if (getLog().isDebugEnabled()) {
-			getLog().debug("Decoded credentials are " + decodedCredentials);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Decoded credentials are " + decodedCredentials);
 		}
 
 		int pos = decodedCredentials.indexOf(CharPool.COLON);
@@ -176,5 +178,8 @@ public class BasicAuthHeaderAutoLogin
 
 	private static final String _BASIC_REALM =
 		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		BasicAuthHeaderAutoLogin.class);
 
 }

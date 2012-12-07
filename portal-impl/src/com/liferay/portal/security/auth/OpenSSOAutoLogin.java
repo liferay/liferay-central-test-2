@@ -16,6 +16,8 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -46,6 +48,41 @@ import javax.servlet.http.HttpServletResponse;
  * @author Prashant Dighe
  */
 public class OpenSSOAutoLogin extends BaseAutoLogin {
+
+	protected User addUser(
+			long companyId, String firstName, String lastName,
+			String emailAddress, String screenName, Locale locale)
+		throws Exception {
+
+		long creatorUserId = 0;
+		boolean autoPassword = false;
+		String password1 = PwdGenerator.getPassword();
+		String password2 = password1;
+		boolean autoScreenName = false;
+		long facebookId = 0;
+		String openId = StringPool.BLANK;
+		String middleName = StringPool.BLANK;
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = StringPool.BLANK;
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
+		long[] userGroupIds = null;
+		boolean sendEmail = false;
+		ServiceContext serviceContext = new ServiceContext();
+
+		return UserLocalServiceUtil.addUser(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+	}
 
 	@Override
 	protected String[] doLogin(
@@ -92,8 +129,8 @@ public class OpenSSOAutoLogin extends BaseAutoLogin {
 		String firstName = nameValues.get(firstNameAttr);
 		String lastName = nameValues.get(lastNameAttr);
 
-		if (getLog().isDebugEnabled()) {
-			getLog().debug(
+		if (_log.isDebugEnabled()) {
+			_log.debug(
 				"Validating user information for " + firstName + " " +
 					lastName + " with screen name " + screenName +
 					" and email address " + emailAddress);
@@ -165,8 +202,8 @@ public class OpenSSOAutoLogin extends BaseAutoLogin {
 				locale = themeDisplay.getLocale();
 			}
 
-			if (getLog().isDebugEnabled()) {
-				getLog().debug("Adding user " + screenName);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Adding user " + screenName);
 			}
 
 			user = addUser(
@@ -195,39 +232,6 @@ public class OpenSSOAutoLogin extends BaseAutoLogin {
 		return credentials;
 	}
 
-	private User addUser(
-			long companyId, String firstName, String lastName,
-			String emailAddress, String screenName, Locale locale)
-		throws Exception {
-
-		long creatorUserId = 0;
-		boolean autoPassword = false;
-		String password1 = PwdGenerator.getPassword();
-		String password2 = password1;
-		boolean autoScreenName = false;
-		long facebookId = 0;
-		String openId = StringPool.BLANK;
-		String middleName = StringPool.BLANK;
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = StringPool.BLANK;
-		long[] groupIds = null;
-		long[] organizationIds = null;
-		long[] roleIds = null;
-		long[] userGroupIds = null;
-		boolean sendEmail = false;
-		ServiceContext serviceContext = new ServiceContext();
-
-		return UserLocalServiceUtil.addUser(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, facebookId, openId,
-			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
-	}
+	private static Log _log = LogFactoryUtil.getLog(OpenSSOAutoLogin.class);
 
 }

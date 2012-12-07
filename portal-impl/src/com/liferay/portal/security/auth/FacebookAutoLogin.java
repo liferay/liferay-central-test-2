@@ -55,7 +55,7 @@ public class FacebookAutoLogin extends BaseAutoLogin {
 		return credentials;
 	}
 
-	private User getUser(HttpServletRequest request, long companyId)
+	protected User getUser(HttpServletRequest request, long companyId)
 		throws PortalException, SystemException {
 
 		HttpSession session = request.getSession();

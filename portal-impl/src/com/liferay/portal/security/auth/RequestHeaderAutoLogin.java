@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -55,13 +57,13 @@ public class RequestHeaderAutoLogin extends BaseAutoLogin {
 		String remoteAddr = request.getRemoteAddr();
 
 		if (AuthSettingsUtil.isAccessAllowed(request, _hostsAllowed)) {
-			if (getLog().isDebugEnabled()) {
-				getLog().debug("Access allowed for " + remoteAddr);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Access allowed for " + remoteAddr);
 			}
 		}
 		else {
-			if (getLog().isWarnEnabled()) {
-				getLog().warn("Access denied for " + remoteAddr);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Access denied for " + remoteAddr);
 			}
 
 			return null;
@@ -102,6 +104,9 @@ public class RequestHeaderAutoLogin extends BaseAutoLogin {
 
 		return credentials;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		RequestHeaderAutoLogin.class);
 
 	private Set<String> _hostsAllowed = new HashSet<String>();
 

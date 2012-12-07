@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseAutoLogin implements AutoLogin {
 
-	public final String[] handleException(
+	public String[] handleException(
 			HttpServletRequest request, HttpServletResponse response,
 			Exception e)
 		throws AutoLoginException {
@@ -33,7 +33,7 @@ public abstract class BaseAutoLogin implements AutoLogin {
 		return doHandleException(request, response, e);
 	}
 
-	public final String[] login(
+	public String[] login(
 			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
@@ -54,9 +54,7 @@ public abstract class BaseAutoLogin implements AutoLogin {
 			throw new AutoLoginException(e);
 		}
 
-		if (getLog().isErrorEnabled()) {
-			getLog().error(e, e);
-		}
+		_log.error(e, e);
 
 		return null;
 	}
@@ -65,10 +63,6 @@ public abstract class BaseAutoLogin implements AutoLogin {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception;
 
-	protected Log getLog() {
-		return _log;
-	}
-
-	private Log _log = LogFactoryUtil.getLog(getClass());
+	private static Log _log = LogFactoryUtil.getLog(BaseAutoLogin.class);
 
 }
