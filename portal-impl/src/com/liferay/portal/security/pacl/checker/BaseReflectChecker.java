@@ -52,15 +52,15 @@ public abstract class BaseReflectChecker extends BaseChecker {
 
 	protected boolean hasReflect(Permission permission) {
 
-		String name = permission.getName();
-		String actions = permission.getActions();
-
 		/*for (int i = 6; i <= 15; i++) {
 			System.out.println(
 				"Caller class " + i + " " + Reflection.getCallerClass(i));
 		}*/
 
 		// JSP compiler
+
+		String name = permission.getName();
+		String actions = permission.getActions();
 
 		if (isJSPCompiler(name, actions)) {
 			return true;
@@ -69,33 +69,40 @@ public abstract class BaseReflectChecker extends BaseChecker {
 		Class<?> callerClass9 = null;
 
 		if (permission instanceof CheckMemberAccessPermission) {
-			CheckMemberAccessPermission memberAccessPermission =
+			CheckMemberAccessPermission checkMemberAccessPermission =
 				(CheckMemberAccessPermission)permission;
 
-			if (memberAccessPermission.getCaller() == ReferenceRegistry.class) {
-				Class<?> realCallerClass = memberAccessPermission.getCaller();
+			if (checkMemberAccessPermission.getCallerClass() ==
+					ReferenceRegistry.class) {
+
+				Class<?> checkMemberAccessPermissionCallerClass =
+					checkMemberAccessPermission.getCallerClass();
 
 				int depth = 9;
 
-				while (realCallerClass == ReferenceRegistry.class) {
+				while (checkMemberAccessPermissionCallerClass ==
+							ReferenceRegistry.class) {
+
 					depth++;
 
-					realCallerClass = Reflection.getCallerClass(depth);
+					checkMemberAccessPermissionCallerClass =
+						Reflection.getCallerClass(depth);
 				}
 
 				ClassLoader callerClassLoader =
-					PACLClassLoaderUtil.getClassLoader(realCallerClass);
+					PACLClassLoaderUtil.getClassLoader(
+						checkMemberAccessPermissionCallerClass);
 
 				if (callerClassLoader ==
-						memberAccessPermission.getSubjectClassLoader()) {
+						checkMemberAccessPermission.getSubjectClassLoader()) {
 
-					logReflect(realCallerClass, depth);
+					logReflect(checkMemberAccessPermissionCallerClass, depth);
 
 					return true;
 				}
 			}
 
-			callerClass9 = memberAccessPermission.getCaller();
+			callerClass9 = checkMemberAccessPermission.getCallerClass();
 		}
 		else {
 			callerClass9 = Reflection.getCallerClass(9);
@@ -147,12 +154,10 @@ public abstract class BaseReflectChecker extends BaseChecker {
 		// java.lang.Class
 
 		Class<?> callerClass7 = Reflection.getCallerClass(7);
-		Class<?> callerClass8 = null;
+		Class<?> callerClass8 = Reflection.getCallerClass(8);
 
 		if (name.equals("suppressAccessChecks") &&
 			(callerClass7 == ReferenceEntry.class)) {
-
-			callerClass8 = Reflection.getCallerClass(8);
 
 			if (callerClass8 == ReferenceRegistry.class) {
 				logReflect(callerClass7, 7);
@@ -162,10 +167,6 @@ public abstract class BaseReflectChecker extends BaseChecker {
 		}
 
 		if (JavaDetector.isIBM() || JavaDetector.isJDK7()) {
-			if (callerClass8 == null) {
-				callerClass8 = Reflection.getCallerClass(8);
-			}
-
 			if ((callerClass8.getEnclosingClass() == Class.class) &&
 				CheckerUtil.isAccessControllerDoPrivileged(9)) {
 

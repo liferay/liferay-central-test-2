@@ -23,36 +23,36 @@ import java.security.BasicPermission;
 public class CheckMemberAccessPermission extends BasicPermission {
 
 	public CheckMemberAccessPermission(
-		String name, Class<?> caller, ClassLoader callerClassLoader,
-		Class<?> subject, ClassLoader subjectClassLoader) {
+		String name, Class<?> callerClass, ClassLoader callerClassLoader,
+		Class<?> subjectClass, ClassLoader subjectClassLoader) {
 
 		super(name);
 
-		_caller = caller;
+		_callerClass = callerClass;
 		_callerClassLoader = callerClassLoader;
-		_subject = subject;
+		_subjectClass = subjectClass;
 		_subjectClassLoader = subjectClassLoader;
 	}
 
-	public Class<?> getCaller() {
-		return _caller;
+	public Class<?> getCallerClass() {
+		return _callerClass;
 	}
 
 	public ClassLoader getCallerClassLoader() {
 		return _callerClassLoader;
 	}
 
-	public Class<?> getSubject() {
-		return _subject;
+	public Class<?> getSubjectClass() {
+		return _subjectClass;
 	}
 
 	public ClassLoader getSubjectClassLoader() {
 		return _subjectClassLoader;
 	}
 
-	private Class<?> _caller;
+	private Class<?> _callerClass;
 	private ClassLoader _callerClassLoader;
-	private Class<?> _subject;
+	private Class<?> _subjectClass;
 	private ClassLoader _subjectClassLoader;
 
 }
