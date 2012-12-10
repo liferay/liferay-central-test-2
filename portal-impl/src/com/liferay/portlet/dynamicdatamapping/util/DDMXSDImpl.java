@@ -44,7 +44,6 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.dynamicdatamapping.StructureFieldException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
@@ -295,7 +294,7 @@ public class DDMXSDImpl implements DDMXSD {
 	public JSONArray getJSONArray(DDMStructure structure, String xsd)
 		throws PortalException, SystemException {
 
-		JSONArray jsonArray;
+		JSONArray jsonArray = null;
 
 		if (Validator.isNull(xsd)) {
 			jsonArray = getJSONArray(structure.getDocument());
@@ -304,11 +303,7 @@ public class DDMXSDImpl implements DDMXSD {
 			jsonArray = getJSONArray(xsd);
 		}
 
-		try {
-			addStructureFieldAttributes(structure, jsonArray);
-		}
-		catch (Exception e) {
-		}
+		addStructureFieldAttributes(structure, jsonArray);
 
 		return jsonArray;
 	}
@@ -445,24 +440,19 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	protected JSONArray addStructureFieldAttributes(
-			DDMStructure structure, JSONArray scriptJSONArray)
-		throws Exception {
+		DDMStructure structure, JSONArray jsonArray) {
 
-		for (int i = 0; i < scriptJSONArray.length(); i++) {
-			JSONObject jsonObject = scriptJSONArray.getJSONObject(i);
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			String fieldName = jsonObject.getString("name");
 
-			try {
-				jsonObject.put(
-					"readOnlyAttributes",
-					getStructureFieldReadOnlyAttributes(structure, fieldName));
-			}
-			catch (StructureFieldException sfe) {
-			}
+			jsonObject.put(
+				"readOnlyAttributes",
+				getStructureFieldReadOnlyAttributes(structure, fieldName));
 		}
 
-		return scriptJSONArray;
+		return jsonArray;
 	}
 
 	protected Map<String, Object> getFieldContext(
@@ -534,23 +524,21 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	protected JSONArray getStructureFieldReadOnlyAttributes(
-			DDMStructure structure, String fieldName)
-		throws Exception {
+		DDMStructure structure, String fieldName) {
 
-		JSONArray readOnlyAttributesJSONArray =
-			JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		try {
 			if (DDMStorageLinkLocalServiceUtil.getStructureStorageLinksCount(
 					structure.getStructureId()) > 0) {
 
-				readOnlyAttributesJSONArray.put("name");
+				jsonArray.put("name");
 			}
 		}
 		catch (Exception e) {
 		}
 
-		return readOnlyAttributesJSONArray;
+		return jsonArray;
 	}
 
 	protected String processFTL(
