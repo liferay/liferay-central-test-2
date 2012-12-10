@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil;
@@ -56,6 +57,7 @@ public class GetStructureJSONAction extends Action {
 			ServletResponseUtil.write(response, jsonArray.toString());
 		}
 		catch (Exception e) {
+			PortalUtil.sendError(e, request, response);
 		}
 
 		return null;
