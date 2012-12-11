@@ -138,8 +138,7 @@ public class LuceneHelperImplTest {
 
 		luceneHelperUtil.setLuceneHelper(_luceneHelperImpl);
 
-		_clusterNode = new ClusterNode(
-			_CLUSER_NODE_ID, _localhostInetAddress);
+		_clusterNode = new ClusterNode(_CLUSER_NODE_ID, _localhostInetAddress);
 	}
 
 	@AdviseWith(
@@ -372,7 +371,7 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexFromCluster5() throws Exception {
-		
+
 		// Debug is enabled
 
 		_mockClusterExecutor.setNodeNumber(2);
@@ -533,7 +532,7 @@ public class LuceneHelperImplTest {
 	private static final long _COMPANY_ID = 1;
 
 	private static final long _LAST_GENERATION = 1;
-	
+
 	private static final byte[] _RESPONSE_MESSAGE =
 		"Response Message".getBytes();
 
