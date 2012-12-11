@@ -5467,9 +5467,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		final Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			User.class);
 
-		long companyId = user.getCompanyId();
-
-		Callable<Void> callable = new PortalCallable<Void>(companyId) {
+		Callable<Void> callable = new PortalCallable<Void>(
+			user.getCompanyId()) {
 
 			@Override
 			protected Void doCall() throws Exception {
