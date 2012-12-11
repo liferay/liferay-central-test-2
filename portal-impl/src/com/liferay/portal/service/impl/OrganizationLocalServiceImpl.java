@@ -473,6 +473,44 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
+	public List<Organization> getOrganizations(
+			long userId, int start, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		List<Organization> organizations = ListUtil.copy(
+			userPersistence.getOrganizations(userId));
+
+		Iterator<Organization> iterator = organizations.iterator();
+
+		while (iterator.hasNext()) {
+			Organization organization = iterator.next();
+
+			if ((organization.getCompanyId() != user.getCompanyId()) ||
+				(organization.getParentOrganization() == null)) {
+
+				iterator.remove();
+			}
+		}
+
+		if (organizations.isEmpty()) {
+			return organizations;
+		}
+
+		if (obc == null) {
+			obc = new OrganizationNameComparator(true);
+		}
+
+		Collections.sort(organizations, obc);
+
+		if ((start != QueryUtil.ALL_POS) || (end != QueryUtil.ALL_POS)) {
+			organizations = ListUtil.subList(organizations, start, end);
+		}
+
+		return organizations;
+	}
+
 	/**
 	 * Returns all the organizations belonging to the parent organization.
 	 *
@@ -530,44 +568,6 @@ public class OrganizationLocalServiceImpl
 			return organizationPersistence.findByC_P(
 				companyId, parentOrganizationId, start, end);
 		}
-	}
-
-	public List<Organization> getOrganizations(
-			long userId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		List<Organization> organizations = ListUtil.copy(
-			userPersistence.getOrganizations(userId));
-
-		Iterator<Organization> iterator = organizations.iterator();
-
-		while (iterator.hasNext()) {
-			Organization organization = iterator.next();
-
-			if ((organization.getCompanyId() != user.getCompanyId()) ||
-				(organization.getParentOrganization() == null)) {
-
-				iterator.remove();
-			}
-		}
-
-		if (organizations.isEmpty()) {
-			return organizations;
-		}
-
-		if (obc == null) {
-			obc = new OrganizationNameComparator(true);
-		}
-
-		Collections.sort(organizations, obc);
-
-		if ((start != QueryUtil.ALL_POS) || (end != QueryUtil.ALL_POS)) {
-			organizations = ListUtil.subList(organizations, start, end);
-		}
-
-		return organizations;
 	}
 
 	/**
