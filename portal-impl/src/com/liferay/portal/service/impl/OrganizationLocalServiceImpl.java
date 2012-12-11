@@ -533,11 +533,12 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getOrganizations(
-			long companyId, long userId, int start, int end,
-			OrderByComparator obc)
+			long userId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
-		List<Organization> organizations = new ArrayList<Organization>(
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		List<Organization> organizations = ListUtil.copy(
 			userPersistence.getOrganizations(userId));
 
 		Iterator<Organization> iterator = organizations.iterator();
@@ -545,8 +546,8 @@ public class OrganizationLocalServiceImpl
 		while (iterator.hasNext()) {
 			Organization organization = iterator.next();
 
-			if ((organization.getCompanyId() != companyId) ||
-					(organization.getParentOrganization() == null)) {
+			if ((organization.getCompanyId() != user.getCompanyId()) ||
+				(organization.getParentOrganization() == null)) {
 
 				iterator.remove();
 			}

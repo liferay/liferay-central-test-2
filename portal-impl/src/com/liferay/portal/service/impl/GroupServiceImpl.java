@@ -459,7 +459,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 			List<Organization> userOrgs =
 				organizationLocalService.getOrganizations(
-					user.getCompanyId(), userId, start, end, null);
+					userId, start, end, null);
 
 			for (Organization organization : userOrgs) {
 				if (!organization.hasPrivateLayouts() &&
