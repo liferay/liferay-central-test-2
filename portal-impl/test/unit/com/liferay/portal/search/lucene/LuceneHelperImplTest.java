@@ -102,9 +102,9 @@ public class LuceneHelperImplTest {
 
 		portalUUIDUtil.setPortalUUID(new PortalUUIDImpl());
 
-		PortalInstances.addCompanyId(_TEST_COMPANY_ID);
+		PortalInstances.addCompanyId(_COMPANY_ID);
 
-		_localhost = InetAddress.getLocalHost();
+		_localhostInetAddress = InetAddress.getLocalHost();
 
 		_mockClusterExecutor = new MockClusterExecutor();
 
@@ -132,13 +132,14 @@ public class LuceneHelperImplTest {
 			(Map<Long, IndexAccessor>)indexAccessorsField.get(
 				_luceneHelperImpl);
 
-		indexAccessorMap.put(_TEST_COMPANY_ID, _mockIndexAccessor);
+		indexAccessorMap.put(_COMPANY_ID, _mockIndexAccessor);
 
 		LuceneHelperUtil luceneHelperUtil = new LuceneHelperUtil();
 
 		luceneHelperUtil.setLuceneHelper(_luceneHelperImpl);
 
-		_testClusterNode = new ClusterNode(_TEST_CLASSNODE_ID, _localhost);
+		_clusterNode = new ClusterNode(
+			_CLUSER_NODE_ID, _localhostInetAddress);
 	}
 
 	@AdviseWith(
@@ -158,12 +159,12 @@ public class LuceneHelperImplTest {
 		_mockClusterExecutor.setNodeNumber(2);
 		_mockClusterExecutor.setPort(port);
 
-		_testClusterNode.setPort(port);
+		_clusterNode.setPort(port);
 
 		JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.OFF);
 
-		ClusterEvent clusterEvent = ClusterEvent.join(_testClusterNode);
+		ClusterEvent clusterEvent = ClusterEvent.join(_clusterNode);
 
 		_fireClusterEventListeners(clusterEvent);
 
@@ -188,7 +189,7 @@ public class LuceneHelperImplTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.SEVERE);
 
-		ClusterEvent clusterEvent = ClusterEvent.join(_testClusterNode);
+		ClusterEvent clusterEvent = ClusterEvent.join(_clusterNode);
 
 		_fireClusterEventListeners(clusterEvent);
 
@@ -196,7 +197,7 @@ public class LuceneHelperImplTest {
 
 		_assertLogger(
 			logRecords.get(0),
-			"Unable to load indexes for company " + _TEST_COMPANY_ID,
+			"Unable to load indexes for company " + _COMPANY_ID,
 			SystemException.class);
 	}
 
@@ -208,14 +209,15 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexClusterEventListener3() throws Exception {
-		_mockClusterExecutor.setNodeNumber(3);
 
 		// Debug is enabled
+
+		_mockClusterExecutor.setNodeNumber(3);
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		ClusterEvent clusterEvent = ClusterEvent.join(_testClusterNode);
+		ClusterEvent clusterEvent = ClusterEvent.join(_clusterNode);
 
 		_fireClusterEventListeners(clusterEvent);
 
@@ -225,7 +227,7 @@ public class LuceneHelperImplTest {
 			logRecords.get(0),
 			"Number of original cluster members is greater than one", null);
 
-		// Debug is not enabled
+		// Debug is disabled
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
@@ -253,7 +255,7 @@ public class LuceneHelperImplTest {
 		JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		byte[] responseMessage = _mockIndexAccessor.getResponseMessage();
 
@@ -270,15 +272,16 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexFromCluster2() throws Exception {
-		_mockClusterExecutor.setNodeNumber(3);
-		_mockClusterExecutor.setAutoResponse(false);
 
 		// Debug is enabled
+
+		_mockClusterExecutor.setNodeNumber(3);
+		_mockClusterExecutor.setAutoResponse(false);
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertEquals(2, logRecords.size());
 
@@ -292,12 +295,12 @@ public class LuceneHelperImplTest {
 				TimeUnit.MILLISECONDS,
 			null);
 
-		// Debug is not enabled
+		// Debug is disabled
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertTrue(logRecords.isEmpty());
 	}
@@ -310,25 +313,26 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexFromCluster3() throws Exception {
-		_mockClusterExecutor.setNodeNumber(2);
 
 		// Debug is enabled
+
+		_mockClusterExecutor.setNodeNumber(2);
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertEquals(1, logRecords.size());
 
 		_assertLogger(logRecords.get(0), "invalid port", null);
 
-		// Debug is not enabled
+		// Debug is disabled
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertTrue(logRecords.isEmpty());
 	}
@@ -347,17 +351,16 @@ public class LuceneHelperImplTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertEquals(2, logRecords.size());
 
 		_assertLogger(
 			logRecords.get(0),
 			"Start loading lucene index files from cluster node", null);
-
 		_assertLogger(
 			logRecords.get(1),
-			"Unable to load index for company " + _TEST_COMPANY_ID,
+			"Unable to load index for company " + _COMPANY_ID,
 			SystemException.class);
 	}
 
@@ -369,16 +372,17 @@ public class LuceneHelperImplTest {
 	)
 	@Test
 	public void testLoadIndexFromCluster5() throws Exception {
+		
+		// Debug is enabled
+
 		_mockClusterExecutor.setNodeNumber(2);
 		_mockClusterExecutor.setInvokeMethodThrowException(true);
 		_mockClusterExecutor.setPort(1024);
 
-		// Debug is enabled
-
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -387,12 +391,12 @@ public class LuceneHelperImplTest {
 			"Suppress exception caused by remote method invocation",
 			Exception.class);
 
-		// Debug is not enabled
+		// Debug is disabled
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertTrue(logRecords.isEmpty());
 	}
@@ -410,7 +414,7 @@ public class LuceneHelperImplTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.FINE);
 
-		_luceneHelperImpl.loadIndexesFromCluster(_TEST_COMPANY_ID);
+		_luceneHelperImpl.loadIndexesFromCluster(_COMPANY_ID);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -524,17 +528,20 @@ public class LuceneHelperImplTest {
 		}
 	}
 
-	private static final byte[] _RESPONSE_MESSAGE =
-		"response message".getBytes();
-	private static final String _TEST_CLASSNODE_ID = "12345";
-	private static final long _TEST_COMPANY_ID = 1;
-	private static final long _TEST_LAST_GENERATION = 1;
+	private static final String _CLUSER_NODE_ID = "12345";
 
-	private InetAddress _localhost;
+	private static final long _COMPANY_ID = 1;
+
+	private static final long _LAST_GENERATION = 1;
+	
+	private static final byte[] _RESPONSE_MESSAGE =
+		"Response Message".getBytes();
+
+	private ClusterNode _clusterNode;
+	private InetAddress _localhostInetAddress;
 	private LuceneHelperImpl _luceneHelperImpl;
 	private MockClusterExecutor _mockClusterExecutor;
 	private MockIndexAccessor _mockIndexAccessor;
-	private ClusterNode _testClusterNode;
 
 	private class MockAddress implements org.jgroups.Address {
 
@@ -566,6 +573,7 @@ public class LuceneHelperImplTest {
 			_blockingQueue = blockingQueue;
 		}
 
+		@Override
 		public E poll(long timeout, TimeUnit unit) throws InterruptedException {
 			return _blockingQueue.poll(1000, TimeUnit.MILLISECONDS);
 		}
@@ -612,7 +620,8 @@ public class LuceneHelperImplTest {
 				clusterNodeResponse.setUuid(clusterRequest.getUuid());
 
 				ClusterNode clusterNode = new ClusterNode(
-					String.valueOf(System.currentTimeMillis()), _localhost);
+					String.valueOf(System.currentTimeMillis()),
+					_localhostInetAddress);
 
 				clusterNode.setPort(_port);
 
@@ -645,7 +654,7 @@ public class LuceneHelperImplTest {
 				BlockingQueue<ClusterNodeResponse> blockingQueue =
 					futureClusterResponses.get().getClusterResponses();
 
-				MockBlockingQueue mockBlockingQueue =
+				MockBlockingQueue<ClusterNodeResponse> mockBlockingQueue =
 					new MockBlockingQueue<ClusterNodeResponse>(blockingQueue);
 
 				clusterResponseCallback.callback(mockBlockingQueue);
@@ -752,7 +761,7 @@ public class LuceneHelperImplTest {
 				return TransientTokenUtil.createToken(timeToLive);
 			}
 			else if (methodKey.equals(_getLastGenerationMethodKey)) {
-				return _TEST_LAST_GENERATION + 1;
+				return _LAST_GENERATION + 1;
 			}
 
 			return null;
@@ -790,11 +799,11 @@ public class LuceneHelperImplTest {
 		}
 
 		public long getCompanyId() {
-			return _TEST_COMPANY_ID;
+			return _COMPANY_ID;
 		}
 
 		public long getLastGeneration() {
-			return _TEST_LAST_GENERATION;
+			return _LAST_GENERATION;
 		}
 
 		public Directory getLuceneDir() {
@@ -805,13 +814,12 @@ public class LuceneHelperImplTest {
 			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
-			StreamUtil.transfer(inputStream, unsyncByteArrayOutputStream);;
+			StreamUtil.transfer(inputStream, unsyncByteArrayOutputStream);
 
 			_bytes = unsyncByteArrayOutputStream.toByteArray();
 		}
 
-		public void updateDocument(Term term, Document document)
-			throws IOException {
+		public void updateDocument(Term term, Document document) {
 		}
 
 		public byte[] getResponseMessage() {
@@ -826,7 +834,8 @@ public class LuceneHelperImplTest {
 
 		public MockServer() throws IOException {
 			ServerSocketChannel serverSocketChannel =
-				SocketUtil.createServerSocketChannel(_localhost, 1024, null);
+				SocketUtil.createServerSocketChannel(
+					_localhostInetAddress, 1024, null);
 
 			_serverSocket = serverSocketChannel.socket();
 		}
