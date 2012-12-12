@@ -66,10 +66,27 @@ public class PluginsEnvironmentBuilder {
 
 		String dirName = dir.getCanonicalPath();
 
-		String[] fileNames = ds.getIncludedFiles();
+		for (String fileName : ds.getIncludedFiles()) {
+			setupWarProject(dirName, fileName);
+		}
 
-		for (String fileName : fileNames) {
-			setupProject(dirName, fileName);
+		ds = new DirectoryScanner();
+
+		ds.setBasedir(dir);
+		ds.setIncludes(new String[] {"**\\build.xml"});
+
+		ds.scan();
+
+		for (String fileName : ds.getIncludedFiles()) {
+			String content = _fileUtil.read(dirName + "/" + fileName);
+
+			if (!content.contains(
+					"<import file=\"../build-common-shared.xml\" />")) {
+
+				continue;
+			}
+
+			setupJarProject(dirName, fileName);
 		}
 	}
 
@@ -186,7 +203,21 @@ public class PluginsEnvironmentBuilder {
 		return jars;
 	}
 
-	protected void setupProject(String dirName, String fileName)
+	protected void setupJarProject(String dirName, String fileName)
+		throws Exception {
+
+		File buildFile = new File(dirName + "/" + fileName);
+
+		File projectDir = new File(buildFile.getParent());
+
+		File libDir = new File(projectDir, "lib");
+
+		List<String> dependencyJars = Collections.emptyList();
+
+		writeEclipseFiles(libDir, projectDir, dependencyJars);
+	}
+
+	protected void setupWarProject(String dirName, String fileName)
 		throws Exception {
 
 		File propertiesFile = new File(dirName + "/" + fileName);
@@ -543,7 +574,7 @@ public class PluginsEnvironmentBuilder {
 		"docroot/WEB-INF/ext-util-bridges/src",
 		"docroot/WEB-INF/ext-util-java/src",
 		"docroot/WEB-INF/ext-util-taglib/src", "docroot/WEB-INF/service",
-		"docroot/WEB-INF/src"
+		"docroot/WEB-INF/src", "src"
 	};
 
 	private static final String[] _TEST_TYPES = {"integration", "unit"};
