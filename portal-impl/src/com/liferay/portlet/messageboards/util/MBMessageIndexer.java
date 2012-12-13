@@ -246,6 +246,10 @@ public class MBMessageIndexer extends BaseIndexer {
 		document.addKeyword("threadId", message.getThreadId());
 
 		if (!message.isInTrash() && message.isInTrashThread()) {
+			addTrashFields(
+				document, MBThread.class.getName(), message.getThreadId(), null,
+				null, MBMessageAssetRendererFactory.TYPE);
+
 			String className = MBThread.class.getName();
 			long classPK = message.getThreadId();
 
@@ -258,12 +262,9 @@ public class MBMessageIndexer extends BaseIndexer {
 				classPK = category.getCategoryId();
 			}
 
-			addTrashFields(
-				document, MBThread.class.getName(), message.getThreadId(), null,
-				null, MBMessageAssetRendererFactory.TYPE);
-
 			document.addKeyword(Field.ROOT_ENTRY_CLASS_NAME, className);
 			document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, classPK);
+
 			document.addKeyword(
 				Field.STATUS, WorkflowConstants.STATUS_IN_TRASH);
 		}
