@@ -822,7 +822,7 @@ public class LayoutImporter {
 			}
 		}
 
-		// Update merge-time for layout set prototypes
+		// Last merge time for layout set prototypes
 
 		if (layoutsImportMode.equals(
 				PortletDataHandlerKeys.
