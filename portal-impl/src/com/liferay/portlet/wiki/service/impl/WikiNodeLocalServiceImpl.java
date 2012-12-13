@@ -427,7 +427,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Pages
 
-		updateStatues(node.getNodeId(), status);
+		updateStatus(node.getNodeId(), status);
 
 		// Trash
 
@@ -511,69 +511,73 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiImporter;
 	}
 
-	protected void updateStatues(long nodeId, int status)
+	protected void updateStatus(long nodeId, int status)
 		throws PortalException, SystemException {
 
 		List<WikiPage> pages = wikiPagePersistence.findByNodeId(nodeId);
 
 		for (WikiPage page : pages) {
-			if (status == WorkflowConstants.STATUS_IN_TRASH) {
-				if (page.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-					assetEntryLocalService.updateVisible(
-						WikiPage.class.getName(), page.getResourcePrimKey(),
-						false);
-				}
+			updateStatus(page, status);
+		}
+	}
 
-				// Social
+	protected void updateStatus(WikiPage page, int status)
+		throws PortalException, SystemException {
 
-				socialActivityCounterLocalService.disableActivityCounters(
-					WikiPage.class.getName(), page.getResourcePrimKey());
-
-				// Index
-
-				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-					WikiPage.class);
-
-				indexer.reindex(page);
-
-				// Cache
-
-				if (WikiCacheThreadLocal.isClearCache()) {
-					WikiCacheUtil.clearCache(page.getNodeId());
-				}
-
-				if (page.getStatus() == WorkflowConstants.STATUS_PENDING) {
-					page.setStatus(WorkflowConstants.STATUS_DRAFT);
-
-					wikiPagePersistence.update(page);
-
-					workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
-						page.getCompanyId(), page.getGroupId(),
-						WikiPage.class.getName(), page.getResourcePrimKey());
-				}
+		if (status == WorkflowConstants.STATUS_IN_TRASH) {
+			if (page.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+				assetEntryLocalService.updateVisible(
+					WikiPage.class.getName(), page.getResourcePrimKey(), false);
 			}
-			else {
 
-				// Asset
+			// Social
 
-				if (page.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-					assetEntryLocalService.updateVisible(
-						WikiPage.class.getName(), page.getResourcePrimKey(),
-						true);
-				}
+			socialActivityCounterLocalService.disableActivityCounters(
+				WikiPage.class.getName(), page.getResourcePrimKey());
 
-				// Social
+			// Index
 
-				socialActivityCounterLocalService.enableActivityCounters(
-					WikiPage.class.getName(), page.getResourcePrimKey());
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				WikiPage.class);
 
-				// Index
+			indexer.reindex(page);
 
-				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-					WikiPage.class);
+			// Cache
 
-				indexer.reindex(page);
+			if (WikiCacheThreadLocal.isClearCache()) {
+				WikiCacheUtil.clearCache(page.getNodeId());
 			}
+
+			if (page.getStatus() == WorkflowConstants.STATUS_PENDING) {
+				page.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+				wikiPagePersistence.update(page);
+
+				workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+					page.getCompanyId(), page.getGroupId(),
+					WikiPage.class.getName(), page.getResourcePrimKey());
+			}
+		}
+		else {
+
+			// Asset
+
+			if (page.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+				assetEntryLocalService.updateVisible(
+					WikiPage.class.getName(), page.getResourcePrimKey(), true);
+			}
+
+			// Social
+
+			socialActivityCounterLocalService.enableActivityCounters(
+				WikiPage.class.getName(), page.getResourcePrimKey());
+
+			// Index
+
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				WikiPage.class);
+
+			indexer.reindex(page);
 		}
 	}
 
