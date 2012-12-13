@@ -67,7 +67,8 @@ public class ExpandoValueLocalServiceTest {
 	@Test
 	public void testAddLocalizedStringArrayValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 1");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testAddLocalizedStringArrayValue");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column",
@@ -102,7 +103,8 @@ public class ExpandoValueLocalServiceTest {
 	@Test
 	public void testAddLocalizedStringValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 2");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testAddLocalizedStringValue");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column",
@@ -130,7 +132,8 @@ public class ExpandoValueLocalServiceTest {
 	@Test
 	public void testAddStringArrayValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 3");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testAddStringArrayValue");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column",
@@ -155,7 +158,7 @@ public class ExpandoValueLocalServiceTest {
 	@Test
 	public void testAddWrongValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 4");
+			TestPropsValues.getCompanyId(), _classNameId, "testAddWrongValue");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column", ExpandoColumnConstants.STRING);
@@ -181,7 +184,8 @@ public class ExpandoValueLocalServiceTest {
 	@Test
 	public void testGetDefaultColumnValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 5");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testGetDefaultColumnValue");
 
 		Map<Locale, String> defaultData = new HashMap<Locale, String>();
 
@@ -200,9 +204,10 @@ public class ExpandoValueLocalServiceTest {
 	}
 
 	@Test
-	public void testGetNonExistingLocaleValue() throws Exception {
+	public void testGetNonexistingLocaleValue() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 6");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testGetNonexistingLocaleValue");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column",
@@ -228,19 +233,16 @@ public class ExpandoValueLocalServiceTest {
 
 		Assert.assertEquals(_ptLocale, availableLocales.get(0));
 		Assert.assertEquals(_enLocale, availableLocales.get(1));
-
 		Assert.assertEquals("um" , value.getString(_ptLocale));
 		Assert.assertEquals("one" , value.getString(_enLocale));
-
-		// Default value
-
 		Assert.assertEquals("um" , value.getString(_frLocale));
 	}
 
 	@Test
 	public void testGetSerializableData() throws Exception {
 		ExpandoTable table = ExpandoTableLocalServiceUtil.addTable(
-			TestPropsValues.getCompanyId(), _classNameId, "Test Table 7");
+			TestPropsValues.getCompanyId(), _classNameId,
+			"testGetSerializableData");
 
 		ExpandoColumn column = ExpandoColumnLocalServiceUtil.addColumn(
 			table.getTableId(), "Test Column",
