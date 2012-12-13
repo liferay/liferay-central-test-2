@@ -1194,8 +1194,14 @@ public class DLFileEntryLocalServiceImpl
 	public Lock lockFileEntry(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		return doLockFileEntry(
-			userId, fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+		if (hasFileEntryLock(userId, fileEntryId)) {
+			return lockLocalService.getLock(
+				DLFileEntry.class.getName(), fileEntryId);
+		}
+
+		return lockLocalService.lock(
+			userId, DLFileEntry.class.getName(), fileEntryId, null, false,
+			DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -1731,26 +1737,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (NoSuchRowException nsre) {
 		}
-	}
-
-	protected Lock doLockFileEntry(
-			long userId, long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		if (hasFileEntryLock(userId, fileEntryId)) {
-			return lockLocalService.getLock(
-				DLFileEntry.class.getName(), fileEntryId);
-		}
-
-		if ((expirationTime <= 0) ||
-			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
-
-			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
-		}
-
-		return lockLocalService.lock(
-			userId, DLFileEntry.class.getName(), fileEntryId, owner, false,
-			expirationTime);
 	}
 
 	protected List<ObjectValuePair<Long, Integer>> getDlFileVersionStatuses(
