@@ -97,6 +97,8 @@ else if (fileEntry != null) {
 	folderId = fileEntry.getFolderId();
 }
 
+boolean checkedOut = fileEntry.isCheckedOut();
+boolean hasLock = fileEntry.hasLock();
 boolean restore = false;
 
 PortletURL viewFolderURL = liferayPortletResponse.createRenderURL();
@@ -107,9 +109,6 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 if (fileShortcut != null) {
 	fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getToFileEntryId());
 }
-
-boolean checkedOut = fileEntry.isCheckedOut();
-boolean hasLock = fileEntry.hasLock();
 %>
 
 <liferay-util:buffer var="iconMenu">

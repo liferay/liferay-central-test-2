@@ -401,25 +401,22 @@ public class DLAppHelperLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long fileEntryId = fileEntry.getFileEntryId();
-
 		boolean hasLock = dlFileEntryLocalService.hasFileEntryLock(
-			userId, fileEntryId);
+			userId, fileEntry.getFileEntryId());
 
 		if (!hasLock) {
-
-			// Lock
-
-			dlFileEntryLocalService.lockFileEntry(userId, fileEntryId);
+			dlFileEntryLocalService.lockFileEntry(
+				userId, fileEntry.getFileEntryId());
 		}
 
 		try {
-			return moveFileEntryFromTrashImpl(
+			return doMoveFileEntryFromTrash(
 				userId, fileEntry, newFolderId, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
-				dlFileEntryLocalService.unlockFileEntry(fileEntryId);
+				dlFileEntryLocalService.unlockFileEntry(
+					fileEntry.getFileEntryId());
 			}
 		}
 	}
@@ -427,24 +424,21 @@ public class DLAppHelperLocalServiceImpl
 	public FileEntry moveFileEntryToTrash(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		long fileEntryId = fileEntry.getFileEntryId();
-
 		boolean hasLock = dlFileEntryLocalService.hasFileEntryLock(
-			userId, fileEntryId);
+			userId, fileEntry.getFileEntryId());
 
 		if (!hasLock) {
-
-			// Lock
-
-			dlFileEntryLocalService.lockFileEntry(userId, fileEntryId);
+			dlFileEntryLocalService.lockFileEntry(
+				userId, fileEntry.getFileEntryId());
 		}
 
 		try {
-			return moveFileEntryToTrashImpl(userId, fileEntry);
+			return doMoveFileEntryToTrash(userId, fileEntry);
 		}
 		finally {
 			if (!hasLock) {
-				dlFileEntryLocalService.unlockFileEntry(fileEntryId);
+				dlFileEntryLocalService.unlockFileEntry(
+					fileEntry.getFileEntryId());
 			}
 		}
 	}
@@ -507,27 +501,22 @@ public class DLAppHelperLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long folderId = folder.getFolderId();
-
-		boolean hasLock = dlFolderService.hasFolderLock(folderId);
+		boolean hasLock = dlFolderService.hasFolderLock(folder.getFolderId());
 
 		Lock lock = null;
 
 		if (!hasLock) {
-
-			// Lock
-
-			lock = dlFolderService.lockFolder(folderId);
+			lock = dlFolderService.lockFolder(folder.getFolderId());
 		}
 
 		try {
-			return moveFolderFromTrashImpl(
+			return doMoveFolderFromTrash(
 				userId, folder, parentFolderId, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
 				dlFolderService.unlockFolder(
-					folder.getGroupId(), folderId, lock.getUuid());
+					folder.getGroupId(), folder.getFolderId(), lock.getUuid());
 			}
 		}
 	}
@@ -535,29 +524,23 @@ public class DLAppHelperLocalServiceImpl
 	public Folder moveFolderToTrash(long userId, Folder folder)
 		throws PortalException, SystemException {
 
-		long folderId = folder.getFolderId();
-
-		boolean hasLock = dlFolderService.hasFolderLock(folderId);
+		boolean hasLock = dlFolderService.hasFolderLock(folder.getFolderId());
 
 		Lock lock = null;
 
 		if (!hasLock) {
-
-			// Lock
-
-			lock = dlFolderService.lockFolder(folderId);
+			lock = dlFolderService.lockFolder(folder.getFolderId());
 		}
 
 		try {
-			return moveFolderToTrashImpl(userId, folder);
+			return doMoveFolderToTrash(userId, folder);
 		}
 		finally {
 			if (!hasLock) {
 				dlFolderService.unlockFolder(
-					folder.getGroupId(), folderId, lock.getUuid());
+					folder.getGroupId(), folder.getFolderId(), lock.getUuid());
 			}
 		}
-
 	}
 
 	public void restoreFileEntryFromTrash(long userId, FileEntry fileEntry)
@@ -1106,29 +1089,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	protected long getFileEntryTypeId(FileEntry fileEntry) {
-		if (fileEntry instanceof LiferayFileEntry) {
-			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
-
-			return dlFileEntry.getFileEntryTypeId();
-		}
-		else {
-			return 0;
-		}
-	}
-
-	protected boolean isStagingGroup(long groupId) {
-		try {
-			Group group = groupLocalService.getGroup(groupId);
-
-			return group.isStagingGroup();
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
-	protected FileEntry moveFileEntryFromTrashImpl(
+	protected FileEntry doMoveFileEntryFromTrash(
 			long userId, FileEntry fileEntry, long newFolderId,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1197,8 +1158,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	protected FileEntry moveFileEntryToTrashImpl(
-			long userId, FileEntry fileEntry)
+	protected FileEntry doMoveFileEntryToTrash(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -1268,7 +1228,7 @@ public class DLAppHelperLocalServiceImpl
 		return fileEntry;
 	}
 
-	protected Folder moveFolderFromTrashImpl(
+	protected Folder doMoveFolderFromTrash(
 			long userId, Folder folder, long parentFolderId,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1296,7 +1256,7 @@ public class DLAppHelperLocalServiceImpl
 			folder.getFolderId(), parentFolderId, serviceContext);
 	}
 
-	protected Folder moveFolderToTrashImpl(long userId, Folder folder)
+	protected Folder doMoveFolderToTrash(long userId, Folder folder)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -1314,6 +1274,28 @@ public class DLAppHelperLocalServiceImpl
 		dlFileRankLocalService.disableFileRanksByFolderId(folder.getFolderId());
 
 		return new LiferayFolder(dlFolder);
+	}
+
+	protected long getFileEntryTypeId(FileEntry fileEntry) {
+		if (fileEntry instanceof LiferayFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
+
+			return dlFileEntry.getFileEntryTypeId();
+		}
+		else {
+			return 0;
+		}
+	}
+
+	protected boolean isStagingGroup(long groupId) {
+		try {
+			Group group = groupLocalService.getGroup(groupId);
+
+			return group.isStagingGroup();
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 
 	protected void registerDLProcessorCallback(
