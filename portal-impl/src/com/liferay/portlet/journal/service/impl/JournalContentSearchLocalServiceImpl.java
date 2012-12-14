@@ -104,7 +104,7 @@ public class JournalContentSearchLocalServiceImpl
 	public void deleteArticleContentSearch(
 			long groupId, boolean privateLayout, long layoutId,
 			String portletId, String articleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		JournalContentSearch contentSearch =
 			journalContentSearchPersistence.fetchByG_P_L_P_A(
