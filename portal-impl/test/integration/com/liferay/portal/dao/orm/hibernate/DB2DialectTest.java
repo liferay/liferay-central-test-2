@@ -43,7 +43,7 @@ public class DB2DialectTest {
 	@Before
 	public void setUp() throws Exception {
 		DB db = DBFactoryUtil.getDB();
-		
+
 		String dbType = db.getType();
 
 		Assume.assumeTrue(dbType.equals(DB.TYPE_DB2));
