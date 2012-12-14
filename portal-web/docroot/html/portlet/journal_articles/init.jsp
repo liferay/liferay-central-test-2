@@ -42,7 +42,7 @@ PortletPreferences preferences = renderRequest.getPreferences();
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
-	portletConfig = PortletConfigFactoryUtil.getPortletConfig(company.getCompanyId(), portletResource, application);
+	portletConfig = PortalUtil.getPortletConfig(company.getCompanyId(), portletResource, application);
 
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }

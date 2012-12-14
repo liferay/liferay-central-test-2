@@ -14,11 +14,9 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Portlet;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletException;
 
 import javax.servlet.ServletContext;
 
@@ -30,14 +28,6 @@ public interface PortletConfigFactory {
 	public PortletConfig create(Portlet portlet, ServletContext servletContext);
 
 	public void destroy(Portlet portlet);
-
-	public PortletConfig getPortletConfig(
-			long companyId, String portletId, ServletContext servletContext)
-		throws PortletException, SystemException;
-
-	public PortletConfig getPortletConfig(
-			Portlet portlet, ServletContext servletContext)
-		throws PortletException, SystemException;
 
 	public PortletConfig update(Portlet portlet);
 
