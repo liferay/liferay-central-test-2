@@ -75,6 +75,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	public static final String MS_OFFICE_2010_TEXT_XML_UTF8 =
+		"text/xml; charset=\"utf-8\"";
+
 	@Override
 	public int copyCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
@@ -853,12 +856,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected String getContentType(
 		HttpServletRequest request, File file, String title, String extension) {
 
-		String contentType = GetterUtil.get(
+		String contentType = GetterUtil.getString(
 			request.getHeader(HttpHeaders.CONTENT_TYPE),
 			ContentTypes.APPLICATION_OCTET_STREAM);
 
 		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM) ||
-			contentType.equals(ContentTypes.TEXT_XML_UTF8_2)) {
+			contentType.equals(MS_OFFICE_2010_TEXT_XML_UTF8)) {
 
 			contentType = MimeTypesUtil.getContentType(file, title);
 		}

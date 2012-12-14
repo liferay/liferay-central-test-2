@@ -963,12 +963,6 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByF_N(folderId, name);
 	}
 
-	public List<DLFileEntry> getFileEntriesByMimeType(String mimeType)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findByMimeType(mimeType);
-	}
-
 	public int getFileEntriesCount() throws SystemException {
 		return dlFileEntryPersistence.countAll();
 	}

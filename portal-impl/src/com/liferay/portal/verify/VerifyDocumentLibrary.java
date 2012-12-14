@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -41,9 +42,12 @@ import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryActionableDynamicQuery;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionActionableDynamicQuery;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
+import com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl;
 
 import java.io.InputStream;
 
@@ -124,90 +128,99 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		DLFileEntryTypeLocalServiceUtil.updateDLFileEntryType(dlFileEntryType);
 	}
 
-	protected void checkFileEntryMimeTypes(String originalMimeType)
+	protected void checkFileEntryMimeTypes(final String originalMimeType)
 		throws Exception {
 
-		List<DLFileEntry> dlFileEntries =
-			DLFileEntryLocalServiceUtil.getFileEntriesByMimeType(
-				originalMimeType);
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DLFileEntryActionableDynamicQuery() {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + dlFileEntries.size() + " file entries with " +
-					originalMimeType);
-		}
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		for (DLFileEntry dlFileEntry : dlFileEntries) {
-			InputStream inputStream =
-				DLFileEntryLocalServiceUtil.getFileAsStream(
-					dlFileEntry.getUserId(), dlFileEntry.getFileEntryId(),
-					dlFileEntry.getVersion(), false);
+				DLFileEntry dlFileEntry = (DLFileEntry)object;
 
-			String title = DLUtil.getTitleWithExtension(
-				dlFileEntry.getTitle(), dlFileEntry.getExtension());
+				InputStream inputStream =
+					DLFileEntryLocalServiceUtil.getFileAsStream(
+						dlFileEntry.getUserId(), dlFileEntry.getFileEntryId(),
+						dlFileEntry.getVersion(), false);
 
-			String mimeType = MimeTypesUtil.getContentType(inputStream, title);
+				String title = DLUtil.getTitleWithExtension(
+					dlFileEntry.getTitle(), dlFileEntry.getExtension());
 
-			if (mimeType.equals(originalMimeType)) {
-				continue;
+				String mimeType = MimeTypesUtil.getContentType(
+					inputStream, title);
+
+				if (mimeType.equals(originalMimeType)) {
+					return;
+				}
+
+				dlFileEntry.setMimeType(mimeType);
+
+				DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
+
+				DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+
+				dlFileVersion.setMimeType(mimeType);
+
+				DLFileVersionLocalServiceUtil.updateDLFileVersion(
+					dlFileVersion);
 			}
 
-			dlFileEntry.setMimeType(mimeType);
+		};
 
-			DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
-
-			DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
-
-			dlFileVersion.setMimeType(mimeType);
-
-			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
-		}
+		actionableDynamicQuery.performActions();
 	}
 
-	protected void checkFileVersionMimeTypes(String originalMimeType)
+	protected void checkFileVersionMimeTypes(final String originalMimeType)
 		throws Exception {
 
-		List<DLFileVersion> dlFileVersions =
-			DLFileVersionLocalServiceUtil.getFileVersionsByMimeType(
-				originalMimeType);
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DLFileVersionActionableDynamicQuery() {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + dlFileVersions.size() + " file versions with " +
-					originalMimeType);
-		}
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		for (DLFileVersion dlFileVersion : dlFileVersions) {
-			InputStream inputStream =
-				DLFileEntryLocalServiceUtil.getFileAsStream(
-					dlFileVersion.getUserId(), dlFileVersion.getFileEntryId(),
-					dlFileVersion.getVersion(), false);
+				DLFileVersion dlFileVersion = (DLFileVersion)object;
 
-			String title = DLUtil.getTitleWithExtension(
-				dlFileVersion.getTitle(), dlFileVersion.getExtension());
+				InputStream inputStream =
+					DLFileEntryLocalServiceUtil.getFileAsStream(
+						dlFileVersion.getUserId(),
+						dlFileVersion.getFileEntryId(),
+						dlFileVersion.getVersion(), false);
 
-			String mimeType = MimeTypesUtil.getContentType(inputStream, title);
+				String title = DLUtil.getTitleWithExtension(
+					dlFileVersion.getTitle(), dlFileVersion.getExtension());
 
-			if (mimeType.equals(originalMimeType)) {
-				continue;
+				String mimeType = MimeTypesUtil.getContentType(
+					inputStream, title);
+
+				if (mimeType.equals(originalMimeType)) {
+					return;
+				}
+
+				dlFileVersion.setMimeType(mimeType);
+
+				DLFileVersionLocalServiceUtil.updateDLFileVersion(
+					dlFileVersion);
 			}
 
-			dlFileVersion.setMimeType(mimeType);
+		};
 
-			dlFileVersion.setMimeType(mimeType);
-
-			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
-		}
+		actionableDynamicQuery.performActions();
 	}
 
 	protected void checkMimeTypes() throws Exception {
-		checkFileEntryMimeTypes(ContentTypes.APPLICATION_OCTET_STREAM);
+		String[] mimeTypes = {
+			ContentTypes.APPLICATION_OCTET_STREAM,
+			DLWebDAVStorageImpl.MS_OFFICE_2010_TEXT_XML_UTF8
+		};
 
-		checkFileVersionMimeTypes(ContentTypes.APPLICATION_OCTET_STREAM);
-
-		checkFileEntryMimeTypes(ContentTypes.TEXT_XML_UTF8_2);
-
-		checkFileVersionMimeTypes(ContentTypes.TEXT_XML_UTF8_2);
+		for (String mimeType : mimeTypes) {
+			checkFileEntryMimeTypes(mimeType);
+			checkFileVersionMimeTypes(mimeType);
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Fixed file entries with invalid mime types");
@@ -221,7 +234,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Processing " + dlFileEntries.size() +
-					" file entries with invalid version");
+					" misversioned file entries");
 		}
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
