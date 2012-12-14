@@ -1210,7 +1210,7 @@ public class ProcessExecutorTest {
 					"Child Process", 100, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach Assert.failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				Thread.sleep(1000);
@@ -1249,7 +1249,7 @@ public class ProcessExecutorTest {
 					"Child Process", Long.MAX_VALUE, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach Assert.failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				Thread heartbeatThread = _getHeartbeatThread(false);
