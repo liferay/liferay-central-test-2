@@ -177,10 +177,10 @@ public class ActionUtil {
 				groupId, className, classPK);
 		}
 		else if (Validator.isNotNull(structureId)) {
-			DDMStructure structure = null;
+			DDMStructure ddmStructure = null;
 
 			try {
-				structure = DDMStructureServiceUtil.getStructure(
+				ddmStructure = DDMStructureServiceUtil.getStructure(
 					groupId, structureId);
 			}
 			catch (NoSuchStructureException nsse1) {
@@ -189,7 +189,7 @@ public class ActionUtil {
 				}
 
 				try {
-					structure = DDMStructureServiceUtil.getStructure(
+					ddmStructure = DDMStructureServiceUtil.getStructure(
 						themeDisplay.getCompanyGroupId(), structureId);
 				}
 				catch (NoSuchStructureException nsse2) {
@@ -199,7 +199,7 @@ public class ActionUtil {
 
 			article = JournalArticleServiceUtil.getArticle(
 				groupId, DDMStructure.class.getName(),
-				structure.getStructureId());
+				ddmStructure.getStructureId());
 
 			article.setNew(true);
 
@@ -348,14 +348,14 @@ public class ActionUtil {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String structureId = ParamUtil.getString(request, "structureId");
 
-		DDMStructure structure = null;
+		DDMStructure ddmStructure = null;
 
 		if (Validator.isNotNull(structureId)) {
-			structure = DDMStructureServiceUtil.getStructure(
+			ddmStructure = DDMStructureServiceUtil.getStructure(
 				groupId, structureId);
 		}
 
-		request.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE, ddmStructure);
 	}
 
 	public static void getStructure(PortletRequest portletRequest)
@@ -366,11 +366,11 @@ public class ActionUtil {
 
 		getStructure(request);
 
-		DDMStructure structure =
+		DDMStructure ddmStructure =
 			(DDMStructure)portletRequest.getAttribute(
 				WebKeys.JOURNAL_STRUCTURE);
 
-		JournalUtil.addRecentStructure(portletRequest, structure);
+		JournalUtil.addRecentDDMStructure(portletRequest, ddmStructure);
 	}
 
 	public static void getTemplate(HttpServletRequest request)
@@ -379,13 +379,14 @@ public class ActionUtil {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String templateId = ParamUtil.getString(request, "templateId");
 
-		DDMTemplate template = null;
+		DDMTemplate ddmTemplate = null;
 
 		if (Validator.isNotNull(templateId)) {
-			template = DDMTemplateServiceUtil.getTemplate(groupId, templateId);
+			ddmTemplate = DDMTemplateServiceUtil.getTemplate(
+				groupId, templateId);
 		}
 
-		request.setAttribute(WebKeys.JOURNAL_TEMPLATE, template);
+		request.setAttribute(WebKeys.JOURNAL_TEMPLATE, ddmTemplate);
 	}
 
 	public static void getTemplate(PortletRequest portletRequest)
@@ -396,10 +397,10 @@ public class ActionUtil {
 
 		getTemplate(request);
 
-		DDMTemplate template = (DDMTemplate)portletRequest.getAttribute(
+		DDMTemplate ddmTemplate = (DDMTemplate)portletRequest.getAttribute(
 			WebKeys.JOURNAL_TEMPLATE);
 
-		JournalUtil.addRecentTemplate(portletRequest, template);
+		JournalUtil.addRecentDDMTemplate(portletRequest, ddmTemplate);
 	}
 
 	protected static boolean hasArticle(ActionRequest actionRequest)
