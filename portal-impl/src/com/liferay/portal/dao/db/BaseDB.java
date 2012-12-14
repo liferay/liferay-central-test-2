@@ -706,7 +706,7 @@ public abstract class BaseDB implements DB {
 		Map<String, Object> variables = new HashMap<String, Object>();
 
 		variables.put("counter", new SimpleCounter());
-		variables.put("PortalUUIDUtil", PortalUUIDUtil.class);
+		variables.put("portalUUIDUtil", PortalUUIDUtil.class);
 
 		ClassLoader classLoader = PACLClassLoaderUtil.getContextClassLoader();
 
