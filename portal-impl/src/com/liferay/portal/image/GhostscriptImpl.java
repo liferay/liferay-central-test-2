@@ -43,8 +43,9 @@ public class GhostscriptImpl implements Ghostscript {
 			sb.append("Cannot execute the Ghostscript command. Please install");
 			sb.append("ImageMagick and Ghostscript and enable ImageMagick in ");
 			sb.append("portal-ext.properties or in the Server Administration ");
-			sb.append("control panel at: http://<server>/group/control_panel/");
-			sb.append("manage/-/server/external-services");
+			sb.append("section of the Control Panel at: ");
+			sb.append("http://<server>/group/control_panel/manage/-/server/");
+			sb.append("external-services");
 
 			throw new IllegalStateException(sb.toString());
 		}
