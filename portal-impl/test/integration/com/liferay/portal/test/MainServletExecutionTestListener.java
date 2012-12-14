@@ -70,9 +70,11 @@ public class MainServletExecutionTestListener
 			super(resourceBasePath, resourceLoader);
 		}
 
-		// TomcatServerCapabilities needs that field
-
-		private Boolean autoDeploy = Boolean.TRUE;
+		/**
+		 * @see com.liferay.portal.server.capabilities.TomcatServerCapabilities
+		 */
+		@SuppressWarnings("unused")
+		protected Boolean autoDeploy = Boolean.TRUE;
 
 	}
 
