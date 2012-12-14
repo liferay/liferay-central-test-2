@@ -425,7 +425,7 @@ public class DLAppHelperLocalServiceImpl
 
 	/**
 	 * Moves the file entry to the recycle bin.
-	 * 
+	 *
 	 * @param userId the primary key of the user moving the file entry
 	 * @param fileEntry the file entry to be moved
 	 * @return the moved file entry
@@ -470,7 +470,7 @@ public class DLAppHelperLocalServiceImpl
 
 	/**
 	 * Moves the file shortcut to the recycle bin.
-	 * 
+	 *
 	 * @param userId the primary key of the user moving the file shortcut
 	 * @param dlFileShortcut the file shortcut to be moved
 	 * @return the moved file shortcut
@@ -543,7 +543,7 @@ public class DLAppHelperLocalServiceImpl
 
 	/**
 	 * Moves the folder to the recycle bin.
-	 * 
+	 *
 	 * @param userId the primary key of the user moving the folder
 	 * @param folder the folder to be moved
 	 * @return the moved folder
