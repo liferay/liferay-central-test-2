@@ -39,11 +39,11 @@ public class LayoutSetBranchCreateDateComparator extends OrderByComparator {
 
 	@Override
 	public int compare(Object obj1, Object obj2) {
-		LayoutSetBranch branch1 = (LayoutSetBranch)obj1;
-		LayoutSetBranch branch2 = (LayoutSetBranch)obj2;
+		LayoutSetBranch layoutSetBranch1 = (LayoutSetBranch)obj1;
+		LayoutSetBranch layoutSetBranch2 = (LayoutSetBranch)obj2;
 
 		int value = DateUtil.compareTo(
-			branch1.getCreateDate(), branch2.getCreateDate());
+			layoutSetBranch1.getCreateDate(), layoutSetBranch2.getCreateDate());
 
 		if (_ascending) {
 			return value;
