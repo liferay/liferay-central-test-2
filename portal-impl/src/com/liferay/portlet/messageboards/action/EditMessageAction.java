@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -144,13 +143,15 @@ public class EditMessageAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
-			else if (e instanceof SystemException &&
-					 e.getCause() instanceof SanitizerException) {
-
-				SessionErrors.add(actionRequest, SanitizerException.class);
-			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}

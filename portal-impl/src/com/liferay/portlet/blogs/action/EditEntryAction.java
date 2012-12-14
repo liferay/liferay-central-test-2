@@ -220,13 +220,15 @@ public class EditEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
-			else if (e instanceof SystemException &&
-					 e.getCause() instanceof SanitizerException) {
-
-				SessionErrors.add(actionRequest, SanitizerException.class);
-			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
