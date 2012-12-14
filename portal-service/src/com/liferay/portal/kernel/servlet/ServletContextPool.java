@@ -52,15 +52,6 @@ public class ServletContextPool {
 	}
 
 	public static ServletContext remove(String servletContextName) {
-
-		// We should never remove the portal context. See LPS-12683
-
-		String portalContextPath = PortalUtil.getPathContext();
-
-		if (portalContextPath.equals(servletContextName)) {
-			return null;
-		}
-
 		return _instance._remove(servletContextName);
 	}
 
@@ -108,6 +99,15 @@ public class ServletContextPool {
 	}
 
 	private ServletContext _remove(String servletContextName) {
+
+		// We should never remove the portal context. See LPS-12683.
+
+		String contextPath = PortalUtil.getPathContext();
+
+		if (contextPath.equals(servletContextName)) {
+			return null;
+		}
+
 		ServletContext servletContext = _servletContexts.remove(
 			servletContextName);
 
