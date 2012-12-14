@@ -145,6 +145,10 @@ public class PermissionsURLTag extends TagSupport {
 		_redirect = redirect;
 	}
 
+	public void setResourceGroupId(long resourceGroupId) {
+		_resourceGroupId = String.valueOf(resourceGroupId);
+	}
+
 	public void setResourceGroupId(String resourceGroupId) {
 		_resourceGroupId = resourceGroupId;
 	}
