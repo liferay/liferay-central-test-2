@@ -36,52 +36,54 @@ import org.junit.runner.RunWith;
 /**
  * @author Laszlo Csontos
  */
-@ExecutionTestListeners(listeners = { PersistenceExecutionTestListener.class} )
+@ExecutionTestListeners(listeners = {PersistenceExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class DB2DialectTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Assume.assumeTrue(DB.TYPE_DB2.equals(DBFactoryUtil.getDB().getType()));
+		DB db = DBFactoryUtil.getDB();
+		
+		String dbType = db.getType();
+
+		Assume.assumeTrue(dbType.equals(DB.TYPE_DB2));
 	}
 
 	@Test
 	public void testPagingWithOffset() {
-		doPaging(_MOCK_SQL, 10, 20);
+		testPaging(_SQL, 10, 20);
 	}
 
 	@Test
 	public void testPagingWithoutOffset() {
-		doPaging(_MOCK_SQL, 0, 20);
+		testPaging(_SQL, 0, 20);
 	}
 
-	protected void doPaging(String sql, int offset, int limit) {
+	protected void testPaging(String sql, int offset, int limit) {
+		SessionFactory sessionFactory =
+			(SessionFactory)PortalBeanLocatorUtil.locate(
+				"liferaySessionFactory");
 
 		Session session = null;
 
-		List<?> result = null;
-
 		try {
-			session = _liferaySessionFactory.openSession();
+			session = sessionFactory.openSession();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			result = QueryUtil.list(
-				q, _liferaySessionFactory.getDialect(), offset, offset + limit);
+			List<?> result = QueryUtil.list(
+				q, sessionFactory.getDialect(), offset, offset + limit);
+
+			Assert.assertNotNull(result);
+			Assert.assertEquals(limit, result.size());
 		}
 		finally {
-			_liferaySessionFactory.closeSession(session);
+			sessionFactory.closeSession(session);
 		}
-
-		Assert.assertNotNull(result);
-		Assert.assertEquals(limit, result.size());
 	}
 
-	private static final String _MOCK_SQL =
-		"SELECT tabname FROM syscat.tables " +
-		"WHERE tabschema = 'SYSIBM' ORDER BY tabname";
-
-	private SessionFactory _liferaySessionFactory =
-		(SessionFactory) PortalBeanLocatorUtil.locate("liferaySessionFactory");
+	private static final String _SQL =
+		"SELECT tabname FROM syscat.tables WHERE tabschema = 'SYSIBM' ORDER " +
+			"BY tabname";
 
 }

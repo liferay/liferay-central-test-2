@@ -27,13 +27,13 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 
 	public DB2Dialect() {
 		super();
-		registerKeyword("optimize");
+
 		registerKeyword("for");
+		registerKeyword("optimize");
 	}
 
 	@Override
 	public String getLimitString(String sql, int offset, int limit) {
-
 		boolean hasOffset = false;
 
 		if ((offset > 0) || forceLimitUsage()) {
@@ -49,9 +49,6 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 			sb = new StringBundler(5);
 		}
 
-		// If offset is not specified ROW_NUMBER() OVER () can be omitted
-		// and implicit sort will not be taken place this way.
-
 		if (!hasOffset) {
 			addQueryForLimitedRows(sb, sql, limit);
 			addOptimizeForLimitedRows(sb, limit);
@@ -62,17 +59,19 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 		// Outer query
 
 		sb.append("SELECT outerQuery.* FROM (");
-		sb.append("SELECT ROW_NUMBER() OVER() AS rownumber_, ");
+		sb.append("SELECT ROW_NUMBER() OVER() AS rowNumber_, ");
 
 		// Inner query
 
 		sb.append("innerQuery.* FROM (");
+
 		addQueryForLimitedRows(sb, sql, limit);
+
 		sb.append(") AS innerQuery");
 
 		// Offset
 
-		sb.append(") AS outerQuery WHERE rownumber_ > ");
+		sb.append(") AS outerQuery WHERE rowNumber_ > ");
 		sb.append(offset);
 
 		addOptimizeForLimitedRows(sb, limit);
@@ -85,25 +84,23 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 		return _SUPPORTS_VARIABLE_LIMIT;
 	}
 
-	private void addOptimizeForLimitedRows(StringBundler sb, int limit) {
-		String sqlFragment = StringUtil.replace(
-			_SQL_OPTIMIZE_FOR_LIMITED_ROWS, "[$LIMIT$]", String.valueOf(limit));
-
+	protected void addOptimizeForLimitedRows(StringBundler sb, int limit) {
 		sb.append(StringPool.SPACE);
-		sb.append(sqlFragment);
+		sb.append(
+			StringUtil.replace(
+				_SQL_OPTIMIZE_FOR_LIMITED_ROWS, "[$LIMIT$]",
+				String.valueOf(limit)));
 	}
 
-	private void addQueryForLimitedRows(
+	protected void addQueryForLimitedRows(
 		StringBundler sb, String sql, int limit) {
 
 		sb.append(sql);
-
-		String sqlFragment = StringUtil.replace(
-			_SQL_FETCH_FIRST_LIMITED_ROWS_ONLY, "[$LIMIT$]",
-			String.valueOf(limit));
-
 		sb.append(StringPool.SPACE);
-		sb.append(sqlFragment);
+		sb.append(
+			StringUtil.replace(
+				_SQL_FETCH_FIRST_LIMITED_ROWS_ONLY, "[$LIMIT$]",
+				String.valueOf(limit)));
 	}
 
 	private static final String _SQL_FETCH_FIRST_LIMITED_ROWS_ONLY =
