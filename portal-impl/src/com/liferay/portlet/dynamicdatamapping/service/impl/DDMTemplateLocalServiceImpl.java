@@ -189,7 +189,8 @@ public class DDMTemplateLocalServiceImpl
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DDMTemplate template = getDDMTemplate(templateId);
+		DDMTemplate template = ddmTemplatePersistence.findByPrimaryKey(
+			templateId);
 
 		File smallImageFile = null;
 
@@ -227,7 +228,7 @@ public class DDMTemplateLocalServiceImpl
 
 		List<DDMTemplate> newTemplates = new ArrayList<DDMTemplate>();
 
-		List<DDMTemplate> oldTemplates = getTemplates(
+		List<DDMTemplate> oldTemplates = ddmTemplatePersistence.findByC_C_T(
 			classNameId, oldClassPK, type);
 
 		for (DDMTemplate oldTemplate : oldTemplates) {
