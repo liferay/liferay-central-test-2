@@ -172,7 +172,7 @@ public class ServletContextUtil {
 			int index = path.indexOf(PATH_WEB_XML);
 
 			if (index < 0) {
-				throw new MalformedURLException("Invalid URL: " + rootURL);
+				throw new MalformedURLException("Invalid URL " + rootURL);
 			}
 
 			if (index == 0) {
