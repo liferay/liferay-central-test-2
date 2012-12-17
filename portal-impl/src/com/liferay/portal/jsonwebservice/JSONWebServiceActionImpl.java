@@ -107,7 +107,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 			List<?> list = null;
 
 			if (value instanceof List) {
-				list = (List)value;
+				list = (List<?>)value;
 			}
 			else {
 				String stringValue = value.toString();
@@ -124,6 +124,21 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 			}
 
 			return _convertListToArray(list, parameterType.getComponentType());
+		}
+		else if (parameterType.equals(Calendar.class)) {
+			Calendar calendar = Calendar.getInstance();
+
+			calendar.setLenient(false);
+
+			String stringValue = value.toString();
+
+			stringValue = stringValue.trim();
+
+			long timeInMillis = GetterUtil.getLong(stringValue);
+
+			calendar.setTimeInMillis(timeInMillis);
+
+			return calendar;
 		}
 		else if (parameterType.equals(List.class)) {
 			List<?> list = null;
@@ -147,6 +162,13 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
 			return _generifyList(list, genericParameterTypes);
 		}
+		else if (parameterType.equals(Locale.class)) {
+			String stringValue = value.toString();
+
+			stringValue = stringValue.trim();
+
+			return LocaleUtil.fromLanguageId(stringValue);
+		}
 		else if (parameterType.equals(Map.class)) {
 			String stringValue = value.toString();
 
@@ -156,28 +178,6 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 				stringValue, HashMap.class);
 
 			return _generifyMap(map, genericParameterTypes);
-		}
-		else if (parameterType.equals(Calendar.class)) {
-			Calendar calendar = Calendar.getInstance();
-
-			calendar.setLenient(false);
-
-			String stringValue = value.toString();
-
-			stringValue = stringValue.trim();
-
-			long timeInMillis = GetterUtil.getLong(stringValue);
-
-			calendar.setTimeInMillis(timeInMillis);
-
-			return calendar;
-		}
-		else if (parameterType.equals(Locale.class)) {
-			String stringValue = value.toString();
-
-			stringValue = stringValue.trim();
-
-			return LocaleUtil.fromLanguageId(stringValue);
 		}
 		else {
 			Object parameterValue = null;
