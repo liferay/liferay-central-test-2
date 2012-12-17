@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -68,39 +68,37 @@ public class UpgradePortletIdsTest extends UpgradePortletId {
 
 	@Test
 	public void testUpgrade() throws Exception {
-		long companyId = TestPropsValues.getCompanyId();
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			initialRootPortletId);
-
-		Layout layout = getLayout();
+		Layout layout = addLayout();
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
 
 		layoutTypePortlet.addPortletId(
-			TestPropsValues.getUserId(), initialInstancePortletId);
+			TestPropsValues.getUserId(), _OLD_PORTLET_ID);
 
-		addPortletPreferences(layout, initialInstancePortletId);
+		addPortletPreferences(layout, _OLD_PORTLET_ID);
 
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
 		Role role = RoleLocalServiceUtil.getRole(
-			companyId, RoleConstants.GUEST);
+			TestPropsValues.getCompanyId(), RoleConstants.GUEST);
 
 		roleIdsToActionIds.put(
 			role.getRoleId(), new String[] {ActionKeys.CONFIGURATION});
 
 		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-			layout.getGroupId(), companyId, initialRootPortletId,
-			initialInstancePortletId, roleIdsToActionIds);
+			layout.getGroupId(), TestPropsValues.getCompanyId(),
+			_OLD_ROOT_PORTLET_ID, _OLD_PORTLET_ID, roleIdsToActionIds);
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			_OLD_ROOT_PORTLET_ID);
 
 		PortletLocalServiceUtil.destroyPortlet(portlet);
 
 		doUpgrade();
 
-		portlet.setCompanyId(companyId);
-		portlet.setPortletId(subsequentRootPortletId);
+		portlet.setCompanyId(TestPropsValues.getCompanyId());
+		portlet.setPortletId(_NEW_ROOT_PORTLET_ID);
 
 		List<String> portletActions =
 			ResourceActionsUtil.getPortletResourceActions(
@@ -115,24 +113,30 @@ public class UpgradePortletIdsTest extends UpgradePortletId {
 
 		layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
-		Assert.assertTrue(
-			layoutTypePortlet.hasPortletId(subsequentInstancePortletId));
+		Assert.assertTrue(layoutTypePortlet.hasPortletId(_NEW_PORTLET_ID));
 
 		boolean hasViewPermission =
 			ResourcePermissionLocalServiceUtil.hasResourcePermission(
-				companyId, subsequentRootPortletId,
-				ResourceConstants.SCOPE_INDIVIDUAL, subsequentInstancePortletId,
+				TestPropsValues.getCompanyId(), _NEW_ROOT_PORTLET_ID,
+				ResourceConstants.SCOPE_INDIVIDUAL, _NEW_PORTLET_ID,
 				role.getRoleId(), ActionKeys.VIEW);
 
 		Assert.assertFalse(hasViewPermission);
 
 		boolean hasConfigurationPermission =
 			ResourcePermissionLocalServiceUtil.hasResourcePermission(
-				companyId, subsequentRootPortletId,
-				ResourceConstants.SCOPE_INDIVIDUAL, subsequentInstancePortletId,
+				TestPropsValues.getCompanyId(), _NEW_ROOT_PORTLET_ID,
+				ResourceConstants.SCOPE_INDIVIDUAL, _NEW_PORTLET_ID,
 				role.getRoleId(), ActionKeys.CONFIGURATION);
 
 		Assert.assertTrue(hasConfigurationPermission);
+	}
+
+	protected Layout addLayout() throws Exception {
+		Group group = ServiceTestUtil.addGroup();
+
+		return ServiceTestUtil.addLayout(
+			group.getGroupId(), ServiceTestUtil.randomString(), false);
 	}
 
 	protected void addPortletPreferences(Layout layout, String portletId)
@@ -144,27 +148,22 @@ public class UpgradePortletIdsTest extends UpgradePortletId {
 			PortletConstants.DEFAULT_PREFERENCES);
 	}
 
-	protected Layout getLayout() throws Exception {
-		Group group = ServiceTestUtil.addGroup();
-
-		return ServiceTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString(), false);
-	}
-
 	@Override
 	protected String[][] getPortletIdsArray() {
 		return new String[][] {
 			new String[] {
-				initialRootPortletId,
-				subsequentRootPortletId
+				_OLD_ROOT_PORTLET_ID, _NEW_ROOT_PORTLET_ID
 			}
 		};
 	}
 
-	protected String initialInstancePortletId = "71_INSTANCE_LhZwzy867qfr";
-	protected String initialRootPortletId = "71";
-	protected String subsequentInstancePortletId =
+	private static final String _NEW_PORTLET_ID =
 		"71_test_INSTANCE_LhZwzy867qfr";
-	protected String subsequentRootPortletId = "71_test";
+
+	private static final String _NEW_ROOT_PORTLET_ID = "71_test";
+
+	private static final String _OLD_PORTLET_ID = "71_INSTANCE_LhZwzy867qfr";
+
+	private static final String _OLD_ROOT_PORTLET_ID = "71";
 
 }

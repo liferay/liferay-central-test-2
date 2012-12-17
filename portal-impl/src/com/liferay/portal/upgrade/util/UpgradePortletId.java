@@ -43,38 +43,6 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 	}
 
-	protected void updateLayouts(
-			String oldRootPortletId, String newRootPortletId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select plid, typeSettings from Layout where typeSettings " +
-					"like '%" + oldRootPortletId + "%'");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long plid = rs.getLong("plid");
-				String typeSettings = rs.getString("typeSettings");
-
-				String newTypeSettings = StringUtil.replace(
-					typeSettings, oldRootPortletId, newRootPortletId);
-
-				updateLayout(plid, newTypeSettings);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	protected String[][] getPortletIdsArray() {
 		return new String[][] {
 			new String[] {
@@ -114,54 +82,13 @@ public class UpgradePortletId extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long portletPreferencesId = rs.getLong(
-					"portletPreferencesId");
+				long portletPreferencesId = rs.getLong("portletPreferencesId");
 				String portletId = rs.getString("portletId");
 
 				String newPortletId = StringUtil.replace(
 					portletId, oldRootPortletId, newRootPortletId);
 
 				updatePortletPreference(portletPreferencesId, newPortletId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateResourcePermission(
-			String oldRootPortletId, String newRootPortletId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			// Note the 'name' field was already updated
-
-			ps = con.prepareStatement(
-				"select resourcePermissionId, name, primKey from " +
-					"ResourcePermission where name = '" + oldRootPortletId +
-						"'");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long resourcePermissionId = rs.getLong(
-					"resourcePermissionId");
-				String name = rs.getString("name");
-				String primKey = rs.getString("primKey");
-
-				String newName = StringUtil.replace(
-					name, oldRootPortletId, newRootPortletId);
-				String newPrimKey = StringUtil.replace(
-					primKey, oldRootPortletId, newRootPortletId);
-
-				updateResourcePermission(
-					resourcePermissionId, newName, newPrimKey);
 			}
 		}
 		finally {
@@ -220,34 +147,58 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 	}
 
-	protected void updatePortlet(
+	protected void updateLayouts(
 			String oldRootPortletId, String newRootPortletId)
 		throws Exception {
 
-		// Portlet
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select plid, typeSettings from Layout where typeSettings " +
+					"like '%" + oldRootPortletId + "%'");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long plid = rs.getLong("plid");
+				String typeSettings = rs.getString("typeSettings");
+
+				String newTypeSettings = StringUtil.replace(
+					typeSettings, oldRootPortletId, newRootPortletId);
+
+				updateLayout(plid, newTypeSettings);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortlet(
+			String oldRootPortletId, String newRootPortletId)
+		throws Exception {
 
 		runSQL(
 			"update Portlet set portletId = '" + newRootPortletId +
 				"' where portletId = '" + oldRootPortletId + "'");
 
-		// ResourceAction
-
 		runSQL(
 			"update ResourceAction set name = '" + newRootPortletId +
 				"' where name = '" + oldRootPortletId + "'");
 
-		// ResourceAction
-
 		updateResourcePermission(oldRootPortletId, newRootPortletId);
-
-		// PortletPreferences
 
 		updateInstanceablePortletPreferences(
 			oldRootPortletId, newRootPortletId);
 	}
 
 	protected void updatePortletPreference(
-			long portletPreferencesId, String newPortletId)
+			long portletPreferencesId, String portletId)
 		throws Exception {
 
 		Connection con = null;
@@ -260,7 +211,7 @@ public class UpgradePortletId extends UpgradeProcess {
 				"update PortletPreferences set portletId = ? where " +
 					"portletPreferencesId = " + portletPreferencesId);
 
-			ps.setString(1, newPortletId);
+			ps.setString(1, portletId);
 
 			ps.executeUpdate();
 		}
@@ -270,7 +221,7 @@ public class UpgradePortletId extends UpgradeProcess {
 	}
 
 	protected void updateResourcePermission(
-			long resourcePermissionId, String newName, String newPrimKey)
+			long resourcePermissionId, String name, String primKey)
 		throws Exception {
 
 		Connection con = null;
@@ -283,13 +234,50 @@ public class UpgradePortletId extends UpgradeProcess {
 				"update ResourcePermission set name = ?, primKey = ? where " +
 					"resourcePermissionId = " + resourcePermissionId);
 
-			ps.setString(1, newName);
-			ps.setString(2, newPrimKey);
+			ps.setString(1, name);
+			ps.setString(2, primKey);
 
 			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void updateResourcePermission(
+			String oldRootPortletId, String newRootPortletId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select resourcePermissionId, name, primKey from " +
+					"ResourcePermission where name = '" + oldRootPortletId +
+						"'");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long resourcePermissionId = rs.getLong("resourcePermissionId");
+				String name = rs.getString("name");
+				String primKey = rs.getString("primKey");
+
+				String newName = StringUtil.replace(
+					name, oldRootPortletId, newRootPortletId);
+				String newPrimKey = StringUtil.replace(
+					primKey, oldRootPortletId, newRootPortletId);
+
+				updateResourcePermission(
+					resourcePermissionId, newName, newPrimKey);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
