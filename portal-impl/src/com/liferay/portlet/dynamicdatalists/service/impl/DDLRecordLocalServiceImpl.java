@@ -208,10 +208,10 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 
 		Fields fields = StorageEngineUtil.getFields(record.getDDMStorageId());
 
-		Iterator<Field> it = fields.iterator();
+		Iterator<Field> itr = fields.iterator();
 
-		while (it.hasNext()) {
-			Field field = it.next();
+		while (itr.hasNext()) {
+			Field field = itr.next();
 
 			Map<Locale, List<Serializable>> valuesMap = field.getValuesMap();
 

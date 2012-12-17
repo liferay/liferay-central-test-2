@@ -530,26 +530,31 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		while (itr.hasNext()) {
 			Field field = itr.next();
 
-			Map dataMap = null;
+			Map<Locale, ?> dataMap = null;
 
 			if (field.isRepeatable()) {
-				dataMap = new HashMap<Locale, String[]>();
+				Map<Locale, String[]> stringArrayMap =
+					new HashMap<Locale, String[]>();
 
 				for (Locale locale : field.getAvailableLocales()) {
 					String[] values = ArrayUtil.toStringArray(
 						(Object[])field.getValue(locale));
 
-					dataMap.put(locale, values);
+					stringArrayMap.put(locale, values);
 				}
+
+				dataMap = stringArrayMap;
 			}
 			else {
-				dataMap = new HashMap<Locale, String>();
+				Map<Locale, String> stringMap = new HashMap<Locale, String>();
 
 				for (Locale locale : field.getAvailableLocales()) {
 					String value = String.valueOf(field.getValue(locale));
 
-					dataMap.put(locale, value);
+					stringMap.put(locale, value);
 				}
+
+				dataMap = stringMap;
 			}
 
 			ExpandoValueLocalServiceUtil.addValue(

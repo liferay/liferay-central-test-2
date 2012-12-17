@@ -37,7 +37,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,20 +51,6 @@ import org.junit.runner.RunWith;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 @Transactional
 public class StorageAdapterTest extends BaseDDMServiceTestCase {
-
-	@Before
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
-
-		_expandoStorageAdapater = new ExpandoStorageAdapter();
-		_xmlStorageAdapater = new XMLStorageAdapter();
-
-		_enLocale = LocaleUtil.fromLanguageId("en_US");
-		_ptLocale = LocaleUtil.fromLanguageId("pt_BR");
-	}
 
 	@Test
 	public void testCreateLocalizedField() throws Exception {
@@ -82,25 +67,31 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 
 		List<Serializable> enValues = ListUtil.fromArray(
 			new Serializable[] {"one", "two", "three"});
+
+		Locale enLocale = LocaleUtil.fromLanguageId("en_US");
+
+		dataMap.put(enLocale, enValues);
+
 		List<Serializable> ptValues = ListUtil.fromArray(
 			new Serializable[] {"um", "dois", "tres"});
 
-		dataMap.put(_enLocale, enValues);
-		dataMap.put(_ptLocale, ptValues);
+		Locale ptLocale = LocaleUtil.fromLanguageId("pt_BR");
+
+		dataMap.put(ptLocale, ptValues);
 
 		Field field1 = new Field(
-			structure.getStructureId(), "name_1", dataMap, _enLocale);
+			structure.getStructureId(), "name_1", dataMap, enLocale);
 
 		fields.put(field1);
 
 		Field field2 = new Field();
 
-		field2.setDefaultLocale(_ptLocale);
+		field2.setDefaultLocale(ptLocale);
 		field2.setDDMStructureId(structure.getStructureId());
 		field2.setName("name_2");
 
-		field2.addValue(_enLocale, "Joe");
-		field2.addValue(_ptLocale, "Joao");
+		field2.addValue(enLocale, "Joe");
+		field2.addValue(ptLocale, "Joao");
 
 		fields.put(field2);
 
@@ -167,10 +158,9 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 			ServiceTestUtil.getServiceContext(group.getGroupId()));
 	}
 
-	private long _classNameId;
-	private Locale _enLocale;
-	private StorageAdapter _expandoStorageAdapater;
-	private Locale _ptLocale;
-	private StorageAdapter _xmlStorageAdapater;
+	private long _classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
+	private StorageAdapter _expandoStorageAdapater =
+		new ExpandoStorageAdapter();
+	private StorageAdapter _xmlStorageAdapater = new XMLStorageAdapter();
 
 }

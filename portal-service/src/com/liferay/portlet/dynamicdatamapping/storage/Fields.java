@@ -74,10 +74,10 @@ public class Fields implements Serializable {
 	public Locale getDefaultLocale() {
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		Iterator<Field> it = iterator();
+		Iterator<Field> itr = iterator();
 
-		if (it.hasNext()) {
-			Field field = it.next();
+		if (itr.hasNext()) {
+			Field field = itr.next();
 
 			defaultLocale = field.getDefaultLocale();
 		}

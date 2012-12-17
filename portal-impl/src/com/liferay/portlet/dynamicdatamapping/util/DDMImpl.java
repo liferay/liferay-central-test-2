@@ -102,28 +102,17 @@ public class DDMImpl implements DDM {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		String defaultLanguageId = GetterUtil.getString(
-			serviceContext.getAttribute("defaultLanguageId"));
-
-		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
-
-		String languageId = GetterUtil.getString(
-			serviceContext.getAttribute("languageId"),
-			serviceContext.getLanguageId());
-
-		Locale locale = LocaleUtil.fromLanguageId(languageId);
-
 		DDMStructure ddmStructure = getDDMStructure(
 			ddmStructureId, ddmTemplateId);
-
-		JSONObject repeatabaleFieldsMapJSONObject =
-			getRepeatableFieldsMapJSONObject(serviceContext);
 
 		Set<String> fieldNames = ddmStructure.getFieldNames();
 
 		Fields fields = new Fields();
 
 		for (String fieldName : fieldNames) {
+			JSONObject repeatabaleFieldsMapJSONObject =
+				getRepeatableFieldsMapJSONObject(serviceContext);
+
 			List<Serializable> fieldValues = getFieldValues(
 				ddmStructure, repeatabaleFieldsMapJSONObject, fieldName,
 				fieldNamespace, serviceContext);
@@ -132,8 +121,19 @@ public class DDMImpl implements DDM {
 				continue;
 			}
 
+			String languageId = GetterUtil.getString(
+				serviceContext.getAttribute("languageId"),
+				serviceContext.getLanguageId());
+
+			Locale locale = LocaleUtil.fromLanguageId(languageId);
+
 			Field field = new Field(
 				ddmStructureId, fieldName, fieldValues, locale);
+
+			String defaultLanguageId = GetterUtil.getString(
+				serviceContext.getAttribute("defaultLanguageId"));
+
+			Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
 			field.setDefaultLocale(defaultLocale);
 
@@ -243,10 +243,10 @@ public class DDMImpl implements DDM {
 	}
 
 	public Fields mergeFields(Fields newFields, Fields existingFields) {
-		Iterator<Field> it = newFields.iterator();
+		Iterator<Field> itr = newFields.iterator();
 
-		while (it.hasNext()) {
-			Field newField = it.next();
+		while (itr.hasNext()) {
+			Field newField = itr.next();
 
 			Field existingField = existingFields.get(newField.getName());
 
@@ -427,14 +427,14 @@ public class DDMImpl implements DDM {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
+		DDMStructure structure = DDMStructureLocalServiceUtil.getDDMStructure(
+			structureId);
 
 		JSONObject repeatableFieldsMapJSONObject =
 			getRepeatableFieldsMapJSONObject(serviceContext);
 
 		return getFieldNames(
-			ddmStructure, fieldName, fieldNamespace,
+			structure, fieldName, fieldNamespace,
 			repeatableFieldsMapJSONObject);
 	}
 
