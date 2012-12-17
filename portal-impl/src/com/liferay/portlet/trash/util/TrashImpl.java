@@ -352,9 +352,7 @@ public class TrashImpl implements Trash {
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"No TrashEntry exists with ID " +
-						String.valueOf(trashEntryId));
+				_log.debug("No trash entry exists with ID " + trashEntryId);
 			}
 		}
 

@@ -62,14 +62,14 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
-		String randomTitle = ServiceTestUtil.randomString(
-			_MAX_PAGE_TITLE_LENGTH - getSearchKeywords().length());
+		String title = getSearchKeywords();
 
-		String pageTitle = getSearchKeywords().concat(randomTitle);
+		title += ServiceTestUtil.randomString(
+			_PAGE_TITLE_MAX_LENGTH - title.length());
 
 		WikiPage page = WikiPageLocalServiceUtil.addPage(
 			TestPropsValues.getUserId(),
-			(Long)parentBaseModel.getPrimaryKeyObj(), pageTitle,
+			(Long)parentBaseModel.getPrimaryKeyObj(), title,
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 			true, serviceContext);
 
@@ -122,7 +122,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return WikiNodeLocalServiceUtil.addNode(
 			TestPropsValues.getUserId(),
-			ServiceTestUtil.randomString(_MAX_NODE_NAME_LENGTH),
+			ServiceTestUtil.randomString(_NODE_NAME_MAX_LENGTH),
 			ServiceTestUtil.randomString(), serviceContext);
 	}
 
@@ -200,8 +200,8 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			page.getParentTitle(), page.getRedirectTitle(), serviceContext);
 	}
 
-	private static final int _MAX_NODE_NAME_LENGTH = 75;
+	private static final int _NODE_NAME_MAX_LENGTH = 75;
 
-	private static final int _MAX_PAGE_TITLE_LENGTH = 255;
+	private static final int _PAGE_TITLE_MAX_LENGTH = 255;
 
 }

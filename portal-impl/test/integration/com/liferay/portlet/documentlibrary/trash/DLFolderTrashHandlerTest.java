@@ -72,14 +72,14 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		DLFolder parentDLFolder = (DLFolder)parentBaseModel;
 
+		String name = getSearchKeywords();
+
+		name += ServiceTestUtil.randomString(
+			_FOLDER_NAME_MAX_LENGTH - name.length());
+
 		serviceContext = (ServiceContext)serviceContext.clone();
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		String randomName = ServiceTestUtil.randomString(
-			_MAX_FOLDER_NAME_LENGTH - getSearchKeywords().length());
-
-		String name = getSearchKeywords().concat(randomName);
 
 		DLFolder dlFolder = DLFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), parentDLFolder.getGroupId(),
@@ -190,6 +190,6 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 		DLAppServiceUtil.moveFolderToTrash(primaryKey);
 	}
 
-	private static final int _MAX_FOLDER_NAME_LENGTH = 100;
+	private static final int _FOLDER_NAME_MAX_LENGTH = 100;
 
 }

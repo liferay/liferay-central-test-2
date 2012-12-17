@@ -238,9 +238,8 @@ public abstract class BaseTrashHandlerTestCase {
 		if (baseModelName.startsWith(StringPool.SLASH)) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	protected boolean isIndexableBaseModel() {

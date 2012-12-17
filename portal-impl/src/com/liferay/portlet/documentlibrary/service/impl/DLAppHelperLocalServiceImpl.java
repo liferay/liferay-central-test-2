@@ -1190,6 +1190,8 @@ public class DLAppHelperLocalServiceImpl
 	protected FileEntry doMoveFileEntryToTrash(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
+		// File versions
+
 		List<DLFileVersion> dlFileVersions =
 			dlFileVersionLocalService.getFileVersions(
 				fileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
@@ -1205,8 +1207,6 @@ public class DLAppHelperLocalServiceImpl
 		workflowContext.put("dlFileVersions", (Serializable)dlFileVersions);
 
 		int oldStatus = fileVersion.getStatus();
-
-		// File version
 
 		dlFileEntryLocalService.updateStatus(
 			userId, fileVersion.getFileVersionId(),
@@ -1301,9 +1301,9 @@ public class DLAppHelperLocalServiceImpl
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			DLFolderConstants.getClassName(), dlFolder.getFolderId());
 
-		String trashName = TrashUtil.getTrashTitle(trashEntry.getEntryId());
+		String trashTitle = TrashUtil.getTrashTitle(trashEntry.getEntryId());
 
-		dlFolder.setName(trashName);
+		dlFolder.setName(trashTitle);
 
 		dlFolderPersistence.update(dlFolder);
 

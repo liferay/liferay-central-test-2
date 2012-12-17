@@ -77,7 +77,6 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 		keyProperty="fileEntryId"
 		modelVar="fileEntry"
 	>
-
 		<portlet:actionURL var="rowURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 			<portlet:param name="struts_action" value="/message_boards/get_message_attachment" />
 			<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />

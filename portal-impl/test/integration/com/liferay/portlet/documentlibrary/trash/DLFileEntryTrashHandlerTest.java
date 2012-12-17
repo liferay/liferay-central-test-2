@@ -78,6 +78,11 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		DLFolder dlFolder = (DLFolder)parentBaseModel;
 
+		String title = getSearchKeywords();
+
+		title += ServiceTestUtil.randomString(
+			_FILE_ENTRY_TITLE_MAX_LENGTH - title.length());
+
 		String content = "Content: Enterprise. Open Source.";
 
 		File file = FileUtil.createTempFile(content.getBytes());
@@ -89,11 +94,6 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		if (approved) {
 			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 		}
-
-		String randomTitle = ServiceTestUtil.randomString(
-			_MAX_FILE_ENTRY_TITLE_LENGTH - getSearchKeywords().length());
-
-		String title = getSearchKeywords().concat(randomTitle);
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			dlFolder.getRepositoryId(), dlFolder.getFolderId(),
@@ -158,7 +158,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		return DLFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
 			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(_MAX_FOLDER_NAME_LENGTH),
+			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH),
 			StringPool.BLANK, false, serviceContext);
 	}
 
@@ -290,8 +290,8 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		return liferayFileEntry.getDLFileEntry();
 	}
 
-	private static final int _MAX_FILE_ENTRY_TITLE_LENGTH = 255;
+	private static final int _FILE_ENTRY_TITLE_MAX_LENGTH = 255;
 
-	private static final int _MAX_FOLDER_NAME_LENGTH = 100;
+	private static final int _FOLDER_NAME_MAX_LENGTH = 100;
 
 }
