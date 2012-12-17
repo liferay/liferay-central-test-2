@@ -44,10 +44,12 @@ if (recordVersion != null) {
 	fields = StorageEngineUtil.getFields(recordVersion.getDDMStorageId());
 }
 
-Locale[] availableLocales = new Locale[] {};
+Locale[] availableLocales = new Locale[0];
 
 if (fields != null) {
-	availableLocales = fields.getAvailableLocales().toArray(availableLocales);
+	Set<Locale> availableLocalesSet = fields.getAvailableLocales();
+
+	availableLocales = availableLocalesSet.toArray(new Locale[availableLocalesSet.size()]);
 }
 
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
@@ -87,10 +89,10 @@ if (translating) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
-	<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
-	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
 	<aui:input name="recordId" type="hidden" value="<%= recordId %>" />
+	<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
+	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>">
@@ -111,8 +113,12 @@ if (translating) {
 
 	<aui:fieldset>
 		<c:if test="<%= !translating %>">
-
-			<aui:translation-manager availableLocales="<%= availableLocales %>" defaultLanguageId="<%= defaultLanguageId %>" id="translationManager" readOnly="<%= recordId > 0 %>" />
+			<aui:translation-manager
+				availableLocales="<%= availableLocales %>"
+				defaultLanguageId="<%= defaultLanguageId %>"
+				id="translationManager"
+				readOnly="<%= recordId > 0 %>"
+			/>
 
 			<liferay-portlet:renderURL copyCurrentRenderParameters="<%= true %>" var="updateDefaultLanguageURL">
 				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />

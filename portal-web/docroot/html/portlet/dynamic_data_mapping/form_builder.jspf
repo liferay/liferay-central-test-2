@@ -18,18 +18,25 @@
 
 <%
 String[] availableLanguageIds = LocalizationUtil.getAvailableLocales(script);
-String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 
 Locale[] availableLocales = new Locale[availableLanguageIds.length];
 
 for (int i = 0; i < availableLanguageIds.length; i++) {
 	availableLocales[i] = LocaleUtil.fromLanguageId(availableLanguageIds[i]);
 }
+
+String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 %>
 
 <div class="separator"><!-- --></div>
 
-<aui:translation-manager availableLocales="<%= availableLocales %>" defaultLanguageId="<%= defaultLanguageId %>" id="translationManager" initialize="<%= false %>" readOnly="<%= true %>" />
+<aui:translation-manager
+	availableLocales="<%= availableLocales %>"
+	defaultLanguageId="<%= defaultLanguageId %>"
+	id="translationManager"
+	initialize="<%= false %>"
+	readOnly="<%= true %>"
+/>
 
 <div class="aui-diagram-builder" id="<portlet:namespace />formBuilder">
 	<div class="aui-diagram-builder-content aui-helper-clearfix" id="<portlet:namespace />formBuilderContent">
