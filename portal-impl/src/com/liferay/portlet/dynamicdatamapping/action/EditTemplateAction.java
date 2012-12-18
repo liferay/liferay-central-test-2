@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -211,15 +212,13 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected String getScript(UploadPortletRequest uploadPortletRequest) {
-		String script = null;
+		InputStream inputStream = null;
 
 		try {
-			InputStream is = uploadPortletRequest.getFileAsStream("script");
+			inputStream = uploadPortletRequest.getFileAsStream("script");
 
-			if (is != null) {
-				script = new String(FileUtil.getBytes(is));
-
-				is.close();
+			if (inputStream != null) {
+				return new String(FileUtil.getBytes(inputStream));
 			}
 		}
 		catch (IOException ioe) {
@@ -227,8 +226,11 @@ public class EditTemplateAction extends PortletAction {
 				_log.warn(ioe, ioe);
 			}
 		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
 
-		return script;
+		return null;
 	}
 
 	protected DDMTemplate updateTemplate(ActionRequest actionRequest)
