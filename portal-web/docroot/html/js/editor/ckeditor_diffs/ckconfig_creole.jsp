@@ -100,24 +100,7 @@ CKEDITOR.on(
 
 		var infoTab;
 
-		if (dialogName === 'table' || dialogName === 'tableProperties') {
-			infoTab = dialogDefinition.getContents('info');
-
-			infoTab.remove('cmbAlign');
-			infoTab.remove('cmbWidthType');
-			infoTab.remove('cmbWidthType');
-			infoTab.remove('htmlHeightType');
-			infoTab.remove('txtBorder');
-			infoTab.remove('txtCellPad');
-			infoTab.remove('txtCellSpace');
-			infoTab.remove('txtHeight');
-			infoTab.remove('txtSummary');
-			infoTab.remove('txtWidth');
-
-			dialogDefinition.minHeight = 180;
-			dialogDefinition.minWidth = 210;
-		}
-		else if (dialogName === 'cellProperties') {
+		if (dialogName === 'cellProperties') {
 			infoTab = dialogDefinition.getContents('info');
 
 			infoTab.remove('bgColor');
@@ -135,6 +118,23 @@ CKEDITOR.on(
 			infoTab.remove('wordWrap');
 
 			dialogDefinition.minHeight = 40;
+			dialogDefinition.minWidth = 210;
+		}
+		else if (dialogName === 'table' || dialogName === 'tableProperties') {
+			infoTab = dialogDefinition.getContents('info');
+
+			infoTab.remove('cmbAlign');
+			infoTab.remove('cmbWidthType');
+			infoTab.remove('cmbWidthType');
+			infoTab.remove('htmlHeightType');
+			infoTab.remove('txtBorder');
+			infoTab.remove('txtCellPad');
+			infoTab.remove('txtCellSpace');
+			infoTab.remove('txtHeight');
+			infoTab.remove('txtSummary');
+			infoTab.remove('txtWidth');
+
+			dialogDefinition.minHeight = 180;
 			dialogDefinition.minWidth = 210;
 		}
 	}
