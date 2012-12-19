@@ -162,6 +162,17 @@ public class PluginsEnvironmentBuilder {
 
 		for (String currentImportShared : importShared) {
 			jars.add(currentImportShared + ".jar");
+
+			File currentImportSharedLibDir = new File(
+				projectDir, "/../../shared/" + currentImportShared + "/lib");
+
+			if (!currentImportSharedLibDir.exists()) {
+				continue;
+			}
+
+			for (File f : currentImportSharedLibDir.listFiles()) {
+				jars.add(f.getName());
+			}
 		}
 
 		return jars;
