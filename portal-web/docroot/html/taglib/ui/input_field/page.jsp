@@ -388,11 +388,11 @@ if (hints != null) {
 				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
 			}
 
-			boolean localized = ModelHintsUtil.isLocalized(model, field);
-
 			if (autoSize) {
 				displayHeight = "auto";
 			}
+
+			boolean localized = ModelHintsUtil.isLocalized(model, field);
 
 			String xml = StringPool.BLANK;
 
