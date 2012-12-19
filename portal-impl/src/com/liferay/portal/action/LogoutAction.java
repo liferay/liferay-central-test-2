@@ -84,9 +84,8 @@ public class LogoutAction extends Action {
 			passwordCookie.setMaxAge(0);
 			passwordCookie.setPath(StringPool.SLASH);
 
-			boolean rememberMe =
-				GetterUtil.getBoolean(
-					CookieKeys.getCookie(request, CookieKeys.REMEMBER_ME));
+			boolean rememberMe = GetterUtil.getBoolean(
+				CookieKeys.getCookie(request, CookieKeys.REMEMBER_ME));
 
 			if (!rememberMe) {
 				Cookie loginCookie = new Cookie(
