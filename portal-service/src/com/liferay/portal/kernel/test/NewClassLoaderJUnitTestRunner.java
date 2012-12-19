@@ -47,7 +47,7 @@ public class NewClassLoaderJUnitTestRunner extends BlockJUnit4ClassRunner {
 
 		super(clazz);
 
-		sort(new Sorter(new AlphabetizingDescriptionComparator()));
+		sort(new Sorter(new DescriptionComparator()));
 	}
 
 	protected ClassLoader createClassLoader(FrameworkMethod frameworkMethod) {

@@ -52,7 +52,7 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 
 		_classPath = ClassPathUtil.getJVMClassPath(false);
 
-		sort(new Sorter(new AlphabetizingDescriptionComparator()));
+		sort(new Sorter(new DescriptionComparator()));
 	}
 
 	protected static void attachProcess(String message) {

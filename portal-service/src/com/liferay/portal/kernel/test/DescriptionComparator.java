@@ -21,12 +21,13 @@ import org.junit.runner.Description;
 /**
  * @author Shuyang Zhou
  */
-public class AlphabetizingDescriptionComparator
-	implements Comparator<Description> {
+public class DescriptionComparator implements Comparator<Description> {
 
 	public int compare(Description description1, Description description2) {
-		return description1.getDisplayName().compareTo(
-			description2.getDisplayName());
+		String displayName1 = description1.getDisplayName();
+		String displayName2 = description2.getDisplayName();
+
+		return displayName1.compareTo(displayName2);
 	}
 
 }

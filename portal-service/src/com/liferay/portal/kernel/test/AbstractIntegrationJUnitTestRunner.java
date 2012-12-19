@@ -39,7 +39,7 @@ public abstract class AbstractIntegrationJUnitTestRunner
 
 		_testContextHandler = new TestContextHandler(clazz);
 
-		sort(new Sorter(new AlphabetizingDescriptionComparator()));
+		sort(new Sorter(new DescriptionComparator()));
 	}
 
 	public abstract void initApplicationContext();
