@@ -440,7 +440,7 @@ if (hints != null) {
 						</c:otherwise>
 					</c:choose>
 
-					<c:if test="<%= autoSize && !localized  %>">
+					<c:if test="<%= autoSize && !localized %>">
 						<aui:script use="aui-autosize">
 							A.one('#<%= namespace %><%= id %>').plug(
 								A.Plugin.Autosize,
