@@ -298,8 +298,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	private static final String[] _HOOKS = new String[] {
-		AdvancedFileSystemStore.class.getName(), CMISStore.class.getName(), 
-		DBStore.class.getName(), FileSystemStore.class.getName(), 
+		AdvancedFileSystemStore.class.getName(), CMISStore.class.getName(),
+		DBStore.class.getName(), FileSystemStore.class.getName(),
 		JCRStore.class.getName(), S3Store.class.getName()
 	};
 
