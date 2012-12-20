@@ -28,7 +28,6 @@ import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -217,8 +216,12 @@ public class GetFileAction extends PortletAction {
 				}
 
 				if (dlFileEntry != null) {
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)request.getAttribute(
+							WebKeys.THEME_DISPLAY);
+
 					PermissionChecker permissionChecker =
-						PermissionThreadLocal.getPermissionChecker();
+						themeDisplay.getPermissionChecker();
 
 					DLFileEntryPermission.check(
 						permissionChecker, dlFileEntry, ActionKeys.VIEW);
