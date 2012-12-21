@@ -1771,8 +1771,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static boolean isFileEntryTypeExportable(
-			DLFileEntryType dlFileEntryType)
-		throws PortalException, SystemException {
+		DLFileEntryType dlFileEntryType) {
 
 		if (dlFileEntryType.getFileEntryTypeId() == 0) {
 			return false;
