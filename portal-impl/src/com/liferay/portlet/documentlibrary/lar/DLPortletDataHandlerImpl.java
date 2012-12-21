@@ -1846,13 +1846,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			"repository-entries");
 
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-				portletDataContext.getCompanyId());
+			portletDataContext.getCompanyId());
 
 		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeServiceUtil.getFileEntryTypes(
 				new long[] {
 					portletDataContext.getScopeGroupId(),
-					companyGroup.getGroupId()});
+					companyGroup.getGroupId()
+				});
 
 		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
 			if (!isFileEntryTypeExportable(dlFileEntryType)) {
