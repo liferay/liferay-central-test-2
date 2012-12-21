@@ -67,10 +67,11 @@ public class MBCategoryImpl extends MBCategoryBaseImpl {
 	public MBCategory getParentCategory()
 		throws PortalException, SystemException {
 
-		if ((getParentCategoryId() ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)
-			|| (getParentCategoryId() ==
-			MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		long parentCategoryId = getParentCategoryId();
+
+		if ((parentCategoryId ==
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(parentCategoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
 			return null;
 		}

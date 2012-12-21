@@ -43,18 +43,17 @@ import org.junit.runner.RunWith;
 public class MBCategoryLocalServiceTest {
 
 	@Test
-	public void testDiscussionParentCategory() throws Exception {
+	public void testGetParentDiscussionCategory() throws Exception {
 		MBCategory discussionCategory =
 			MBCategoryLocalServiceUtil.getCategory(
 				MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 
 		Assert.assertNotNull(discussionCategory);
-
 		Assert.assertNull(discussionCategory.getParentCategory());
 	}
 
 	@Test
-	public void testParentCategory() throws Exception {
+	public void testGetParentCategory() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		MBCategory parentCategory = MBCategoryLocalServiceUtil.addCategory(
@@ -67,7 +66,6 @@ public class MBCategoryLocalServiceTest {
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
 
 		Assert.assertNotNull(childCategory.getParentCategory());
-
 		Assert.assertNull(parentCategory.getParentCategory());
 	}
 
