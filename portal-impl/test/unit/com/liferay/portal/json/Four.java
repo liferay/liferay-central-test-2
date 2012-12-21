@@ -49,6 +49,7 @@ public class Four {
 
 	private int _number = 173;
 	private long _private = 0xCAFEBABE;
+
 	@JSON
 	private String _value = "something";
 
