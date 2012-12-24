@@ -1132,7 +1132,7 @@ public class MetaInfoCacheServletResponseTest extends TestCase {
 		final AtomicReference<String> locationReference =
 			new AtomicReference<String>();
 		final AtomicReference<String> messageReference =
-				new AtomicReference<String>();
+			new AtomicReference<String>();
 		final AtomicInteger statusReference = new AtomicInteger();
 
 		StubHttpServletResponse stubHttpServletResponse =
