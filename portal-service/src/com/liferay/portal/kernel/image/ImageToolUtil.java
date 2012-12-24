@@ -141,7 +141,6 @@ public class ImageToolUtil {
 	}
 
 	public static Image getImage(byte[] bytes) throws IOException {
-
 		return getImageTool().getImage(bytes);
 	}
 

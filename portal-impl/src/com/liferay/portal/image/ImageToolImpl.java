@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsUtil;
@@ -33,7 +34,6 @@ import com.sun.media.jai.codec.ImageEncoder;
 
 import java.awt.Graphics2D;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.IndexColorModel;
@@ -304,29 +304,27 @@ public class ImageToolImpl implements ImageTool {
 		return baos.toByteArray();
 	}
 
-	public com.liferay.portal.model.Image getDefaultCompanyLogo() {
+	public Image getDefaultCompanyLogo() {
 		return _defaultCompanyLogo;
 	}
 
-	public com.liferay.portal.model.Image getDefaultOrganizationLogo() {
+	public Image getDefaultOrganizationLogo() {
 		return _defaultOrganizationLogo;
 	}
 
-	public com.liferay.portal.model.Image getDefaultSpacer() {
+	public Image getDefaultSpacer() {
 		return _defaultSpacer;
 	}
 
-	public com.liferay.portal.model.Image getDefaultUserFemalePortrait() {
+	public Image getDefaultUserFemalePortrait() {
 		return _defaultUserFemalePortrait;
 	}
 
-	public com.liferay.portal.model.Image getDefaultUserMalePortrait() {
+	public Image getDefaultUserMalePortrait() {
 		return _defaultUserMalePortrait;
 	}
 
-	public com.liferay.portal.model.Image getImage(byte[] bytes)
-		throws IOException {
-
+	public Image getImage(byte[] bytes) throws IOException {
 		if (bytes == null) {
 			return null;
 		}
@@ -345,7 +343,7 @@ public class ImageToolImpl implements ImageTool {
 		int width = renderedImage.getWidth();
 		int size = bytes.length;
 
-		com.liferay.portal.model.Image image = new ImageImpl();
+		Image image = new ImageImpl();
 
 		image.setTextObj(bytes);
 		image.setType(type);
@@ -356,24 +354,19 @@ public class ImageToolImpl implements ImageTool {
 		return image;
 	}
 
-	public com.liferay.portal.model.Image getImage(File file)
-		throws IOException {
-
+	public Image getImage(File file) throws IOException {
 		byte[] bytes = _fileUtil.getBytes(file);
 
 		return getImage(bytes);
 	}
 
-	public com.liferay.portal.model.Image getImage(InputStream is)
-		throws IOException {
-
+	public Image getImage(InputStream is) throws IOException {
 		byte[] bytes = _fileUtil.getBytes(is, -1, true);
 
 		return getImage(bytes);
 	}
 
-	public com.liferay.portal.model.Image getImage(
-			InputStream is, boolean cleanUpStream)
+	public Image getImage(InputStream is, boolean cleanUpStream)
 		throws IOException {
 
 		byte[] bytes = _fileUtil.getBytes(is, -1, cleanUpStream);
@@ -451,8 +444,8 @@ public class ImageToolImpl implements ImageTool {
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
 
-		Image scaledImage = bufferedImage.getScaledInstance(
-			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+		java.awt.Image scaledImage = bufferedImage.getScaledInstance(
+			scaledWidth, scaledHeight, java.awt.Image.SCALE_SMOOTH);
 
 		graphics.drawImage(scaledImage, 0, 0, null);
 
@@ -534,8 +527,8 @@ public class ImageToolImpl implements ImageTool {
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
 
-		Image scaledImage = bufferedImage.getScaledInstance(
-			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+		java.awt.Image scaledImage = bufferedImage.getScaledInstance(
+			scaledWidth, scaledHeight, java.awt.Image.SCALE_SMOOTH);
 
 		graphics.drawImage(scaledImage, 0, 0, null);
 
@@ -637,15 +630,11 @@ public class ImageToolImpl implements ImageTool {
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static ImageMagick _imageMagick;
 
-	private com.liferay.portal.model.Image _defaultCompanyLogo;
-
-	private com.liferay.portal.model.Image _defaultOrganizationLogo;
-
-	private com.liferay.portal.model.Image _defaultSpacer;
-
-	private com.liferay.portal.model.Image _defaultUserFemalePortrait;
-
-	private com.liferay.portal.model.Image _defaultUserMalePortrait;
+	private Image _defaultCompanyLogo;
+	private Image _defaultOrganizationLogo;
+	private Image _defaultSpacer;
+	private Image _defaultUserFemalePortrait;
+	private Image _defaultUserMalePortrait;
 
 	private class RenderedImageFuture implements Future<RenderedImage> {
 

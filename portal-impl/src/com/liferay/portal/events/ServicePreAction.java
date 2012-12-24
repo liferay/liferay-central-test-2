@@ -301,15 +301,13 @@ public class ServicePreAction extends Action {
 
 		// Company logo
 
-		long logoId = company.getLogoId();
-
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(imagePath);
 		sb.append("/company_logo?img_id=");
-		sb.append(logoId);
+		sb.append(company.getLogoId());
 		sb.append("&t=");
-		sb.append(WebServerServletTokenUtil.getToken(logoId));
+		sb.append(WebServerServletTokenUtil.getToken(company.getLogoId()));
 
 		String companyLogo = sb.toString();
 
@@ -318,7 +316,7 @@ public class ServicePreAction extends Action {
 
 		Image companyLogoImage = null;
 
-		if (logoId > 0) {
+		if (company.getLogoId() > 0) {
 			companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
 				company.getLogoId());
 		}
@@ -596,7 +594,7 @@ public class ServicePreAction extends Action {
 			layoutSet = layout.getLayoutSet();
 
 			if (company.isSiteLogo()) {
-				logoId = 0;
+				long logoId = 0;
 
 				if (layoutSet.isLogo()) {
 					logoId = layoutSet.getLogoId();
