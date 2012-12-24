@@ -102,17 +102,17 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 	public void testAutoSyncHibernateSessionStateOnTxCreation()
 		throws SystemException {
 
-		String testClassName = "testClassName";
+		// Add in new transaction
 
-		// 1) Add in new tx
-
-		ClassName className = classNameLocalService.addClassName(testClassName);
+		ClassName className = classNameLocalService.addClassName(
+			"testAutoSyncHibernateSessionStateOnTxCreation1");
 
 		try {
 
-			// 2) Fetch in current tx
+			// Fetch in current transaction
 
-			// Clear entity cache to force populate Hibernate 1st level cache
+			// Clear entity cache to force Hibernate to populate its first level
+			// cache
 
 			EntityCacheUtil.clearCache();
 
@@ -123,29 +123,31 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 
 			if (!currentSession.contains(className)) {
 				throw new IllegalStateException(
-					"After fetch ClassName is not cached by hibernate 1st " +
-						"level cache");
+					"Entities are not available in Hibernate's first level " +
+						"cache");
 			}
 
-			String newTestClassName = "newTestClassName";
 			ClassName newClassName = new ClassNameImpl();
 
 			newClassName.setPrimaryKey(className.getClassNameId());
-			newClassName.setValue(newTestClassName);
 
-			// 3) Update in new tx
+			String newValue = "testAutoSyncHibernateSessionStateOnTxCreation2";
+
+			newClassName.setValue(newValue);
+
+			// Update in new transaction
 
 			classNameLocalService.updateClassName(newClassName);
 
 			if (currentSession.contains(className)) {
 				throw new IllegalStateException(
-					"After launched new tx ClassName is still cached by " +
-						"hibernate 1st level cache");
+					"Entities are still available in Hibernate's first level " +
+						"cache");
 			}
 
-			// 4) Refetch in current tx
+			// Refetch in current transaction
 
-			// Clear entity cache to force load through Hibernate 1st level
+			// Clear entity cache to force Hibernate to populate its first level
 			// cache
 
 			EntityCacheUtil.clearCache();
@@ -153,15 +155,15 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 			className = classNamePersistence.fetchByPrimaryKey(
 				className.getClassNameId());
 
-			if (!className.getValue().equals(newTestClassName)) {
+			if (!newValue.equals(className.getValue())) {
 				throw new IllegalStateException(
-					"Expected " + newTestClassName + ", found " +
+					"Expected " + newValue + " but found " +
 						className.getClassName());
 			}
 		}
 		finally {
 
-			// 5) Clean up
+			// Clean up
 
 			classNameLocalService.deleteClassName(className);
 		}

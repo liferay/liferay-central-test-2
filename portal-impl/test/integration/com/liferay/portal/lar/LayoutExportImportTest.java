@@ -182,10 +182,9 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 			}
 			else {
 
-				// Database will truncate Date value to lose milliseconds, to
-				// ensure the later query can compare the Date value, here we
-				// sleep more than 1 second to ensure the truncate won't affect
-				// the comparison.
+				// Database will store Date values without milliseconds. Wait
+				// for more than one second to ensure that later queries can
+				// correctly compare the Date values.
 
 				Thread.sleep(2000);
 
