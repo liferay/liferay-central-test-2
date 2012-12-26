@@ -249,9 +249,8 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalHibernateConfiguration.class);
 
-	private final static Map<ProxyFactory, ClassLoader>
-		_proxyFactoryClassLoaders =
-			new WeakHashMap<ProxyFactory, ClassLoader>();
+	private static Map<ProxyFactory, ClassLoader> _proxyFactoryClassLoaders =
+		new WeakHashMap<ProxyFactory, ClassLoader>();
 
 	static {
 		ProxyFactory.classLoaderProvider =
@@ -262,22 +261,24 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 						ClassLoader classLoader = _proxyFactoryClassLoaders.get(
 							proxyFactory);
 
-						if (classLoader == null) {
-							classLoader =
-								PACLClassLoaderUtil.getPortalClassLoader();
-
-							ClassLoader contextClassLoader =
-								PACLClassLoaderUtil.getContextClassLoader();
-
-							if (classLoader != contextClassLoader) {
-								classLoader = new PreloadClassLoader(
-									contextClassLoader,
-									getPreloadClassLoaderClasses());
-							}
-
-							_proxyFactoryClassLoaders.put(
-								proxyFactory, classLoader);
+						if (classLoader != null) {
+							return classLoader;
 						}
+
+						ClassLoader classLoader =
+							PACLClassLoaderUtil.getPortalClassLoader();
+
+						ClassLoader contextClassLoader =
+							PACLClassLoaderUtil.getContextClassLoader();
+
+						if (classLoader != contextClassLoader) {
+							classLoader = new PreloadClassLoader(
+								contextClassLoader,
+								getPreloadClassLoaderClasses());
+						}
+
+						_proxyFactoryClassLoaders.put(
+							proxyFactory, classLoader);
 
 						return classLoader;
 					}
