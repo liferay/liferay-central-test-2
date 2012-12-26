@@ -642,7 +642,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return category;
 	}
 
-	public void updateChildrenStatus(
+	public void updateDependentStatus(
 		User user, List<Object> categoriesAndThreads, int status)
 		throws PortalException, SystemException {
 
@@ -666,7 +666,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 					continue;
 				}
 
-				updateChildrenStatus(
+				updateDependentStatus(
 					user,
 					getCategoriesAndThreads(
 						category.getGroupId(), category.getCategoryId()),
@@ -697,7 +697,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		List<Object> categoriesAndThreads = getCategoriesAndThreads(
 			category.getGroupId(), categoryId);
 
-		updateChildrenStatus(user, categoriesAndThreads, status);
+		updateDependentStatus(user, categoriesAndThreads, status);
 
 		// Trash
 
