@@ -68,7 +68,7 @@ try {
 		}
 	}
 
-	if (!assetEntry.isVisible()){
+	if (!assetEntry.isVisible()) {
 		throw new NoSuchModelException();
 	}
 
