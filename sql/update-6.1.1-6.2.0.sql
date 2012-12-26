@@ -309,8 +309,6 @@ drop table Groups_Permissions;
 
 alter table Image drop column text_;
 
-COMMIT_TRANSACTION;
-
 alter table JournalArticle add folderId LONG;
 
 create table JournalFolder (
