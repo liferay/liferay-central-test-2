@@ -50,6 +50,7 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 		}
 	}
 
+	@Override
 	public boolean isInTrashContainer(long classPK)
 		throws PortalException, SystemException {
 

@@ -180,6 +180,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 		}
 	}
 
+	@Override
 	public boolean isInTrashContainer(long classPK)
 		throws PortalException, SystemException {
 

@@ -169,6 +169,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 		}
 	}
 
+	@Override
 	public boolean isInTrashContainer(long classPK)
 		throws PortalException, SystemException {
 

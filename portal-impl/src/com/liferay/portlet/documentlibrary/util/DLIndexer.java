@@ -349,7 +349,9 @@ public class DLIndexer extends BaseIndexer {
 
 			addFileEntryTypeAttributes(document, dlFileVersion);
 
-			if (!dlFileVersion.isInTrash() && dlFileVersion.isInTrashContainer()) {
+			if (!dlFileVersion.isInTrash() &&
+				dlFileVersion.isInTrashContainer()) {
+
 				DLFolder trashedFolder = dlFileVersion.getTrashContainer();
 
 				addTrashFields(

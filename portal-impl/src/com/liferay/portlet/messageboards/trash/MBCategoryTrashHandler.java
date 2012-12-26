@@ -306,6 +306,7 @@ public class MBCategoryTrashHandler extends BaseTrashHandler {
 		return false;
 	}
 
+	@Override
 	public boolean isInTrashContainer(long classPK)
 		throws PortalException, SystemException {
 

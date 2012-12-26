@@ -155,6 +155,7 @@ public class MBThreadTrashHandler extends BaseTrashHandler {
 		return false;
 	}
 
+	@Override
 	public boolean isInTrashContainer(long classPK)
 			throws PortalException, SystemException {
 
