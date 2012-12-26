@@ -886,13 +886,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 			<%
 			if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && DLUtil.isOfficeExtension(extension) && portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIe(request)) {
-				webDavUrl = DLUtil.getWebDavURL(themeDisplay, fileEntry.getFolder(), fileEntry, PropsValues.DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED);
 			%>
 
 				fileEntryToolbarChildren.push(
 					{
 						handler: function(event) {
-							<portlet:namespace />openDocument('<%= webDavUrl %>');
+							<portlet:namespace />openDocument('<%= DLUtil.getWebDavURL(themeDisplay, fileEntry.getFolder(), fileEntry, PropsValues.DL_FILE_ENTRY_OPEN_IN_MS_OFFICE_MANUAL_CHECK_IN_REQUIRED) %>');
 						},
 						icon: 'msoffice',
 						label: '<%= UnicodeLanguageUtil.get(pageContext, "open-in-ms-office") %>'
