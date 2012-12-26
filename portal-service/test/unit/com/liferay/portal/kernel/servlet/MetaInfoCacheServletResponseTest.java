@@ -446,7 +446,6 @@ public class MetaInfoCacheServletResponseTest extends TestCase {
 					messageReference.set(message);
 				}
 
-
 			};
 
 		// Clean
