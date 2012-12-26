@@ -159,7 +159,7 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		DLFolder dLFolder = (DLFolder)classedModel;
 
-		return dLFolder.isInTrashFolder();
+		return dLFolder.isInTrashContainer();
 	}
 
 	@Override

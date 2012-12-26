@@ -130,7 +130,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 		DLFileShortcut fileShortcut =
 			DLFileShortcutLocalServiceUtil.getDLFileShortcut(classPK);
 
-		if (fileShortcut.isInTrash() || fileShortcut.isInTrashFolder()) {
+		if (fileShortcut.isInTrash() || fileShortcut.isInTrashContainer()) {
 			return true;
 		}
 
@@ -143,7 +143,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 		DLFileShortcut fileShortcut =
 			DLFileShortcutLocalServiceUtil.getDLFileShortcut(classPK);
 
-		return fileShortcut.isInTrashFolder();
+		return fileShortcut.isInTrashContainer();
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 
 		DLFileShortcut dlFileShortcut = getDLFileShortcut(classPK);
 
-		return !dlFileShortcut.isInTrashFolder();
+		return !dlFileShortcut.isInTrashContainer();
 	}
 
 	@Override

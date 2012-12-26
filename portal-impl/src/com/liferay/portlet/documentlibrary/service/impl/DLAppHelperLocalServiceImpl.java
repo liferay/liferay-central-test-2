@@ -936,7 +936,7 @@ public class DLAppHelperLocalServiceImpl
 			// Social
 
 			if ((oldStatus != WorkflowConstants.STATUS_IN_TRASH) &&
-				!latestFileVersion.isInTrashFolder()) {
+				!latestFileVersion.isInTrashContainer()) {
 
 				Date activityDate = latestFileVersion.getModifiedDate();
 

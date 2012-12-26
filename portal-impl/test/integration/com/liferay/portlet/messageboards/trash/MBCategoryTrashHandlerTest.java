@@ -142,7 +142,7 @@ public class MBCategoryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		MBCategory category = (MBCategory)classedModel;
 
-		return category.isInTrashCategory();
+		return category.isInTrashContainer();
 	}
 
 	@Override

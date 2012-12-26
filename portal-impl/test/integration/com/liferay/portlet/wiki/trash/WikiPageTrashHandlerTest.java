@@ -163,7 +163,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		WikiPage page = (WikiPage)classedModel;
 
-		return page.isInTrashNode();
+		return page.isInTrashContainer();
 	}
 
 	@Override

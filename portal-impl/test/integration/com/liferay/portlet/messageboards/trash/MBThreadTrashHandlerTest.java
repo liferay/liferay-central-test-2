@@ -158,7 +158,7 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		MBThread thread = (MBThread)classedModel;
 
-		return thread.isInTrashCategory();
+		return thread.isInTrashContainer();
 	}
 
 	@Override

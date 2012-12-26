@@ -198,7 +198,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
-		return dlFileVersion.isInTrashFolder();
+		return dlFileVersion.isInTrashContainer();
 	}
 
 	@Override

@@ -843,7 +843,7 @@ public class WebServerServlet extends HttpServlet {
 				(LiferayFileVersion)fileVersion;
 
 			if (liferayFileVersion.isInTrash() ||
-				liferayFileVersion.isInTrashFolder()) {
+				liferayFileVersion.isInTrashContainer()) {
 
 				int status = ParamUtil.getInteger(
 					request, "status", WorkflowConstants.STATUS_APPROVED);

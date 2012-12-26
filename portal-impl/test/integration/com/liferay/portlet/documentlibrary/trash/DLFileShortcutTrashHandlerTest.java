@@ -168,7 +168,7 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		DLFileShortcut dLFileShortcut = (DLFileShortcut)classedModel;
 
-		return dLFileShortcut.isInTrashFolder();
+		return dLFileShortcut.isInTrashContainer();
 	}
 
 	@Override

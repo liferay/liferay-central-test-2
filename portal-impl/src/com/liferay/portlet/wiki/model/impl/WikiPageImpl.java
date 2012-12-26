@@ -210,7 +210,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return pages;
 	}
 
-	public boolean isInTrashNode() {
+	public boolean isInTrashContainer() {
 		WikiNode node = getNode();
 
 		if (node != null) {

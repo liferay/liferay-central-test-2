@@ -158,7 +158,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 
 			DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
 
-			if (dlFileEntry.isInTrashFolder() || dlFileVersion.isInTrash()) {
+			if (dlFileEntry.isInTrashContainer() || dlFileVersion.isInTrash()) {
 				return true;
 			}
 
@@ -174,7 +174,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 
 		DLFileEntry dlFileEntry = getDLFileEntry(classPK);
 
-		return dlFileEntry.isInTrashFolder();
+		return dlFileEntry.isInTrashContainer();
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class DLFileEntryTrashHandler extends DLBaseTrashHandler {
 		try {
 			DLFileEntry dlFileEntry = getDLFileEntry(classPK);
 
-			return !dlFileEntry.isInTrashFolder();
+			return !dlFileEntry.isInTrashContainer();
 		}
 		catch (InvalidRepositoryException ire) {
 			return false;
