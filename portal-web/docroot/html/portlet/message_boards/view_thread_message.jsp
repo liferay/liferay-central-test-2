@@ -294,7 +294,6 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 
 					<%
 					int attachmentsFileEntriesCount = message.getAttachmentsFileEntriesCount();
-
 					int deletedAttachmentsFileEntriesCount = message.getDeletedAttachmentsFileEntriesCount();
 					%>
 

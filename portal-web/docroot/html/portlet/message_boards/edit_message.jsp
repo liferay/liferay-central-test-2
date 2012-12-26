@@ -296,10 +296,10 @@ if (Validator.isNull(redirect)) {
 						for (int i = 0; i < existingAttachmentsFileEntries.size(); i++) {
 							FileEntry fileEntry = existingAttachmentsFileEntries.get(i);
 
-							String taglibJavascript = "javascript:;";
+							String taglibDeleteAttachment = "javascript:;";
 
 							if (!TrashUtil.isTrashEnabled(scopeGroupId)) {
-								taglibJavascript = "javascript:" + renderResponse.getNamespace() + "deleteAttachment(" + (i + 1) + ");";
+								taglibDeleteAttachment = "javascript:" + renderResponse.getNamespace() + "deleteAttachment(" + (i + 1) + ");";
 							}
 						%>
 
@@ -322,7 +322,7 @@ if (Validator.isNull(redirect)) {
 									message='<%= TrashUtil.isTrashEnabled(scopeGroupId) ? "remove" : "delete" %>'
 									method="get"
 									trash="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>"
-									url="<%= taglibJavascript %>"
+									url="<%= taglibDeleteAttachment %>"
 								/>
 
 								<c:if test="<%= TrashUtil.isTrashEnabled(scopeGroupId) %>">
