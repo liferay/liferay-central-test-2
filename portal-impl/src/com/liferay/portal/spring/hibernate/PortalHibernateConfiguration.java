@@ -61,7 +61,17 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 			new ProxyFactory.ClassLoaderProvider() {
 
 				public ClassLoader get(ProxyFactory proxyFactory) {
-					return _createProxyFactoryClassLoader();
+					ClassLoader contextClassLoader =
+						PACLClassLoaderUtil.getContextClassLoader();
+					ClassLoader portalClassLoader =
+						PACLClassLoaderUtil.getPortalClassLoader();
+
+					if (contextClassLoader == portalClassLoader) {
+						return contextClassLoader;
+					}
+
+					return new PreloadClassLoader(
+						contextClassLoader, getPreloadClassLoaderClasses());
 				}
 
 			};
@@ -96,6 +106,26 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 	protected String[] getConfigurationResources() {
 		return PropsUtil.getArray(PropsKeys.HIBERNATE_CONFIGS);
+	}
+
+	protected Map<String, Class<?>> getPreloadClassLoaderClasses() {
+		try {
+			Map<String, Class<?>> classes = new HashMap<String, Class<?>>();
+
+			for (String className : _PRELOAD_CLASS_NAMES) {
+				ClassLoader portalClassLoader =
+					PACLClassLoaderUtil.getPortalClassLoader();
+
+				Class<?> clazz = portalClassLoader.loadClass(className);
+
+				classes.put(className, clazz);
+			}
+
+			return classes;
+		}
+		catch (ClassNotFoundException cnfe) {
+			throw new RuntimeException(cnfe);
+		}
 	}
 
 	@Override
@@ -231,41 +261,8 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		DBFactoryUtil.setDB(dialect);
 	}
 
-	private ClassLoader _createProxyFactoryClassLoader() {
-		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
-		ClassLoader portalClassLoader =
-			PACLClassLoaderUtil.getPortalClassLoader();
-
-		if (contextClassLoader == portalClassLoader) {
-			return contextClassLoader;
-		}
-		else {
-			Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-
-			try {
-				for (String className : _PRELOAD_CLASS_NAMES) {
-					Class<?> hibernateProxyClass = portalClassLoader.loadClass(
-						className);
-
-					classMap.put(className, hibernateProxyClass);
-				}
-			}
-			catch (ClassNotFoundException cnfe) {
-				throw new RuntimeException(cnfe);
-			}
-
-			return new PreloadClassLoader(contextClassLoader, classMap);
-		}
-	}
-
-	private static final String[] _PRELOAD_CLASS_NAMES = {
-		"javassist.util.proxy.MethodHandler",
-		"javassist.util.proxy.ProxyObject",
-		"javassist.util.proxy.RuntimeSupport",
-		"org.hibernate.proxy.HibernateProxy",
-		"org.hibernate.proxy.LazyInitializer"
-	};
+	private static final String[] _PRELOAD_CLASS_NAMES =
+		PropsValues.SPRING_HIBERNATE_CONFIGURATION_PROXY_FACTORY_PRELOAD_CLASSLOADER_CLASSES;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalHibernateConfiguration.class);

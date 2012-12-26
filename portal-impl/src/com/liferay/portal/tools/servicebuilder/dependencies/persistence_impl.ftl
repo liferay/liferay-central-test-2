@@ -612,7 +612,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 			else {
 				<#if entity.hasLazyBlobColumn()>
-					<#-- This is a workaround to Hibernate bug : https://hibernate.onjira.com/browse/HHH-2680 . Please remove this block, and add merge cascade in hbm_xml.ftl, once we upgrade to Hibernate 4.x -->
+
+					<#-- Workaround for HHH-2680 -->
+
 					session.evict(${entity.varName});
 					session.saveOrUpdate(${entity.varName});
 				<#else>
