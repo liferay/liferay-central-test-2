@@ -365,13 +365,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		messageElement.addAttribute(
 			"question", String.valueOf(thread.isQuestion()));
 
-		boolean isAttachments = message.getAttachmentsFileEntriesCount() > 0;
+		boolean hasAttachmentsFileEntries =
+			message.getAttachmentsFileEntriesCount() > 0;
 
 		messageElement.addAttribute(
-			"isAttachments", String.valueOf(isAttachments));
+			"hasAttachmentsFileEntries",
+			String.valueOf(hasAttachmentsFileEntries));
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "attachments") &&
-			isAttachments) {
+			hasAttachmentsFileEntries) {
 
 			for (FileEntry fileEntry : message.getAttachmentsFileEntries()) {
 				String name = fileEntry.getTitle();
@@ -466,10 +468,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		PortletDataContext portletDataContext, Element messageElement,
 		MBMessage message) {
 
-		boolean isAttachments = GetterUtil.getBoolean(
-			messageElement.attributeValue("isAttachments"));
+		boolean hasAttachmentsFileEntries = GetterUtil.getBoolean(
+			messageElement.attributeValue("hasAttachmentsFileEntries"));
 
-		if (!isAttachments &&
+		if (!hasAttachmentsFileEntries &&
 			portletDataContext.getBooleanParameter(_NAMESPACE, "attachments")) {
 
 			return Collections.emptyList();
