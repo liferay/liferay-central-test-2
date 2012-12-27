@@ -296,7 +296,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return getArticlesByStructureId(
+		return journalArticleFinder.filterFindByG_C_S_S(
 			groupId, JournalArticleConstants.CLASSNAME_ID_DEFAULT, structureId,
 			WorkflowConstants.STATUS_ANY, start, end, obc);
 	}

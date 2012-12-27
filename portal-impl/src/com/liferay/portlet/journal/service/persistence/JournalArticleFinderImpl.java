@@ -56,11 +56,11 @@ public class JournalArticleFinderImpl
 	public static final String COUNT_BY_G_U_C =
 		JournalArticleFinder.class.getName() + ".countByG_U_C";
 
-	public static final String COUNT_BY_G_F_S =
-		JournalArticleFinder.class.getName() + ".countByG_F_S";
-
 	public static final String COUNT_BY_G_C_S =
 		JournalArticleFinder.class.getName() + ".countByG_C_S";
+
+	public static final String COUNT_BY_G_F_S =
+		JournalArticleFinder.class.getName() + ".countByG_F_S";
 
 	public static final String COUNT_BY_G_U_C_S =
 		JournalArticleFinder.class.getName() + ".countByG_U_C_S";
