@@ -457,17 +457,15 @@ public class EditLayoutsAction extends PortletAction {
 
 				throw new PrincipalException();
 			}
-			else if (
-				!group.isUser() &&
-				!GroupPermissionUtil.contains(
-					permissionChecker, layout.getGroupId(),
-					ActionKeys.UPDATE)) {
+			else if (!group.isUser() &&
+					 !GroupPermissionUtil.contains(
+						permissionChecker, layout.getGroupId(),
+						ActionKeys.UPDATE)) {
 
 				throw new PrincipalException();
 			}
-			else if (
-				group.isUser() &&
-				(permissionChecker.getUserId() != group.getClassPK())) {
+			else if (group.isUser() &&
+					 (permissionChecker.getUserId() != group.getClassPK())) {
 
 				throw new PrincipalException();
 			}
