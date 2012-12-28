@@ -14,9 +14,6 @@
 
 package com.liferay.portal.dao.orm;
 
-import com.liferay.portal.dao.db.OracleDB;
-import com.liferay.portal.dao.db.PostgreSQLDB;
-import com.liferay.portal.dao.db.SybaseDB;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
@@ -32,221 +29,28 @@ import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * This test shows the SQL NULL comparison difference across all databases
- * supported by Liferay Portal.<p>
- *
- * The comparison can yield 3 different results : TRUE, FALSE OR NULL.<p>
- *
- * This test tests 3 different values : <br>
- * ''(blank string), null(NULL value) and 0 (number zero)<br>
- * comparing to NULL with 6 comparators : <br>
- * =, !=, IS, IS NOT, LIKE and NOT LIKE.<p>
- *
- * The results show in following table:
- *
- * <table border="1">
- *	<tr>
- *		<th></th>
- *		<th>MySQL/DB2/SQL Server 2005/2008</th>
- *		<th>PostgreSQL</th>
- *		<th>Oracle 10G/11G</th>
- *		<th>Sybase</th>
- *	</tr>
- *	<tr>
- *		<td colspan="5" align="center">'' comparison with NULL</td>
- *	</tr>
- *	<tr>
- *		<td>'' = NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>FALSE*</td>
- *	</tr>
- *	<tr>
- *		<td>'' != NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>TRUE*</td>
- *	</tr>
- *	<tr>
- *		<td>'' IS NULL</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *		<td>TRUE</td>
- *		<td>FALSE*</td>
- *	</tr>
- *	<tr>
- *		<td>'' IS NOT NULL</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *		<td>FALSE</td>
- *		<td>TRUE*</td>
- *	</tr>
- *	<tr>
- *		<td>'' LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>FALSE</td>
- *	</tr>
- *	<tr>
- *		<td>'' NOT LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>TRUE</td>
- *	</tr>
- *	<tr>
- *		<td colspan="5" align="center">NULL comparison with NULL</td>
- *	</tr>
- *	<tr>
- *		<td>NULL = NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>TRUE*</td>
- *	</tr>
- *	<tr>
- *		<td>NULL != NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>FALSE*</td>
- *	</tr>
- *	<tr>
- *		<td>NULL IS NULL</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *		<td>TRUE*</td>
- *	</tr>
- *	<tr>
- *		<td>NULL IS NOT NULL</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *		<td>FALSE*</td>
- *	</tr>
- *	<tr>
- *		<td>NULL LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>FALSE</td>
- *	</tr>
- *	<tr>
- *		<td>NULL NOT LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>TRUE</td>
- *	</tr>
- *	<tr>
- *		<td colspan="5" align="center">0 comparison with NULL</td>
- *	</tr>
- *	<tr>
- *		<td>0 = NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>FALSE</td>
- *	</tr>
- *	<tr>
- *		<td>0 != NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>NULL</td>
- *		<td>TRUE</td>
- *	</tr>
- *	<tr>
- *		<td>0 IS NULL</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *		<td>FALSE</td>
- *	</tr>
- *	<tr>
- *		<td>0 IS NOT NULL</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *		<td>TRUE</td>
- *	</tr>
- *	<tr>
- *		<td>0 LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL*</td>
- *		<td>NULL</td>
- *		<td>FALSE*</td>
- *	</tr>
- *	<tr>
- *		<td>0 NOT LIKE NULL</td>
- *		<td>NULL</td>
- *		<td>NULL*</td>
- *		<td>NULL</td>
- *		<td>TRUE*</td>
- *	</tr>
- * </table>
- *
- * Notice, PostgreSQLDB and SybaseDB can not handle certain comparisons directly
- * , so a CAST or CONVERT is required. See fields whose value followed with *<p>
- *
- * Base on the results table, there are only 4 comparisons behave exactly the
- * same across all databases.
- *
- * <ol>
- *		<li>(NULL IS NULL) = TRUE</li>
- *		<li>(NULL IS NOT NULL) = FALSE</li>
- *		<li>(0 IS NULL) = FALSE</li>
- *		<li>(0 IS NOT NULL) = TRUE</li>
- * </ol>
- *
  * @author Shuyang Zhou
  */
-@ExecutionTestListeners(listeners = {
-	PersistenceExecutionTestListener.class})
+@ExecutionTestListeners(listeners = {PersistenceExecutionTestListener.class})
 @RunWith(LiferayPersistenceIntegrationJUnitTestRunner.class)
 public class SQLNullTest {
 
-	@Before
-	public void setUp() {
-		_db = DBFactoryUtil.getDB();
-
-		_equalNull = "SELECT DISTINCT 1 FROM ClassName_ WHERE ? = NULL";
-
-		_isNotNull = "SELECT DISTINCT 1 FROM ClassName_ WHERE ? IS NOT NULL";
-
-		_isNull = "SELECT DISTINCT 1 FROM ClassName_ WHERE ? IS NULL";
-
-		_likeNull = "SELECT DISTINCT 1 FROM ClassName_ WHERE ? LIKE NULL";
-
-		_notEqualNull = "SELECT DISTINCT 1 FROM ClassName_ WHERE ? != NULL";
-
-		_notLikeNull =
-			"SELECT DISTINCT 1 FROM ClassName_ WHERE ? NOT LIKE NULL";
-
-		_sessionFactory = (SessionFactory)PortalBeanLocatorUtil.locate(
-			"liferaySessionFactory");
-	}
-
 	@Test
-	public void testBlankStringEqualNull() {
-		if (_db instanceof SybaseDB) {
-			_equalNull = _equalNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+	public void testBlankStringEqualsNull() {
+		String sql = _SQL_EQUALS_NULL;
 
-		// ('' = NULL) is NULL, expect for Sybase is false
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_equalNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -263,16 +67,16 @@ public class SQLNullTest {
 
 	@Test
 	public void testBlankStringIsNotNull() {
-		if (_db instanceof SybaseDB) {
-			_isNotNull = _isNotNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+		String sql = _SQL_IS_NOT_NULL;
 
-		// ('' IS NOT NULL) is true, expect for Oracle is false
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNotNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -280,7 +84,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof OracleDB) {
+			if (isOracle()) {
 				Assert.assertTrue(list.isEmpty());
 			}
 			else {
@@ -294,16 +98,16 @@ public class SQLNullTest {
 
 	@Test
 	public void testBlankStringIsNull() {
-		if (_db instanceof SybaseDB) {
-			_isNull = _isNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+		String sql = _SQL_IS_NULL;
 
-		// ('' IS NULL) is false, expect for Oracle is true
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -311,7 +115,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof OracleDB) {
+			if (isOracle()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -325,13 +129,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testBlankStringLikeNull() {
-
-		// ('' LIKE NULL) is NULL, expect for Sybase is false
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_likeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_LIKE_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -347,17 +148,17 @@ public class SQLNullTest {
 	}
 
 	@Test
-	public void testBlankStringNotEqualNull() {
-		if (_db instanceof SybaseDB) {
-			_notEqualNull = _notEqualNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+	public void testBlankStringNotEqualsNull() {
+		String sql = _SQL_NOT_EQUALS_NULL;
 
-		// ('' != NULL) is NULL, expect for Sybase is true
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notEqualNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -365,7 +166,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -379,13 +180,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testBlankStringNotLikeNull() {
-
-		// ('' NOT LIKE NULL) is NULL, expect for Sybase is true
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notLikeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_NOT_LIKE_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -393,7 +191,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -406,17 +204,17 @@ public class SQLNullTest {
 	}
 
 	@Test
-	public void testNullEqualNull() {
-		if (_db instanceof SybaseDB) {
-			_equalNull = _equalNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+	public void testNullEqualsNull() {
+		String sql = _SQL_EQUALS_NULL;
 
-		// (null = NULL) is NULL, expect for Sybase is true
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_equalNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -424,7 +222,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -438,16 +236,16 @@ public class SQLNullTest {
 
 	@Test
 	public void testNullIsNotNull() {
-		if (_db instanceof SybaseDB) {
-			_isNotNull = _isNotNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+		String sql = _SQL_IS_NOT_NULL;
 
-		// (null IS NOT NULL) is false
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNotNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -464,16 +262,16 @@ public class SQLNullTest {
 
 	@Test
 	public void testNullIsNull() {
-		if (_db instanceof SybaseDB) {
-			_isNull = _isNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+		String sql = _SQL_IS_NULL;
 
-		// (null IS NULL) is true
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -490,13 +288,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testNullLikeNull() {
-
-		// (null LIKE NULL) is NULL, expect for Sybase is false
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_likeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_LIKE_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -512,17 +307,17 @@ public class SQLNullTest {
 	}
 
 	@Test
-	public void testNullNotEqualNull() {
-		if (_db instanceof SybaseDB) {
-			_notEqualNull = _notEqualNull.replace("?", "CONVERT(VARCHAR, ?)");
-		}
+	public void testNullNotEqualsNull() {
+		String sql = _SQL_NOT_EQUALS_NULL;
 
-		// (null != NULL) is NULL, expect for Sybase is false
+		if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notEqualNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -539,13 +334,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testNullNotLikeNull() {
-
-		// (null not LIKE NULL) is NULL, expect for Sybase is true
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notLikeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_NOT_LIKE_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -553,7 +345,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -566,14 +358,11 @@ public class SQLNullTest {
 	}
 
 	@Test
-	public void testZeroEqualNull() {
-
-		// (0 = NULL) is NULL, expect for Sybase is false
-
+	public void testZeroEqualsNull() {
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_equalNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_EQUALS_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -590,13 +379,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testZeroIsNotNull() {
-
-		// (0 IS NOT NULL) is true
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNotNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_IS_NOT_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -613,13 +399,10 @@ public class SQLNullTest {
 
 	@Test
 	public void testZeroIsNull() {
-
-		// (0 IS NULL) is false
-
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_isNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_IS_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -636,20 +419,19 @@ public class SQLNullTest {
 
 	@Test
 	public void testZeroLikeNull() {
-		if (_db instanceof PostgreSQLDB) {
-			_likeNull = _likeNull.replace("?", "CAST(? AS VARCHAR)");
-		}
+		String sql = _SQL_LIKE_NULL;
 
-		if (_db instanceof SybaseDB) {
-			_likeNull = _likeNull.replace("?", "CONVERT(VARCHAR, ?)");
+		if (isPostgreSQL()) {
+			sql = transformPostgreSQL(sql);
 		}
-
-		// (0 LIKE NULL) is NULL, expect for Sybase is false
+		else if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_likeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -665,14 +447,11 @@ public class SQLNullTest {
 	}
 
 	@Test
-	public void testZeroNotEqualNull() {
-
-		// (0 != NULL) is NULL, expect for Sybase is true
-
+	public void testZeroNotEqualsNull() {
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notEqualNull);
+			SQLQuery sqlQuery = session.createSQLQuery(_SQL_NOT_EQUALS_NULL);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -680,7 +459,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -694,20 +473,19 @@ public class SQLNullTest {
 
 	@Test
 	public void testZeroNotLikeNull() {
-		if (_db instanceof PostgreSQLDB) {
-			_notLikeNull = _notLikeNull.replace("?", "CAST(? AS VARCHAR)");
-		}
+		String sql = _SQL_NOT_LIKE_NULL;
 
-		if (_db instanceof SybaseDB) {
-			_notLikeNull = _notLikeNull.replace("?", "CONVERT(VARCHAR, ?)");
+		if (isPostgreSQL()) {
+			sql = transformPostgreSQL(sql);
 		}
-
-		// (0 not LIKE NULL) is NULL, expect for Sybase is true
+		else if (isSybase()) {
+			sql = transformSybaseSQL(sql);
+		}
 
 		Session session = _sessionFactory.openSession();
 
 		try {
-			SQLQuery sqlQuery = session.createSQLQuery(_notLikeNull);
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -715,7 +493,7 @@ public class SQLNullTest {
 
 			List<Object> list = sqlQuery.list();
 
-			if (_db instanceof SybaseDB) {
+			if (isSybase()) {
 				Assert.assertFalse(list.isEmpty());
 			}
 			else {
@@ -727,13 +505,51 @@ public class SQLNullTest {
 		}
 	}
 
-	private DB _db;
-	private String _equalNull;
-	private String _isNotNull;
-	private String _isNull;
-	private String _likeNull;
-	private String _notEqualNull;
-	private String _notLikeNull;
-	private SessionFactory _sessionFactory;
+	protected boolean isDBType(String dBType) {
+		DB db = DBFactoryUtil.getDB();
+
+		return dBType.equals(db.getType());
+	}
+
+	protected boolean isOracle() {
+		return isDBType(DB.TYPE_ORACLE);
+	}
+
+	protected boolean isPostgreSQL() {
+		return isDBType(DB.TYPE_POSTGRESQL);
+	}
+
+	protected boolean isSybase() {
+		return isDBType(DB.TYPE_SYBASE);
+	}
+
+	protected String transformPostgreSQL(String sql) {
+		return sql.replace("?", "CAST(? AS VARCHAR)");
+	}
+
+	protected String transformSybaseSQL(String sql) {
+		return sql.replace("?", "CONVERT(VARCHAR, ?)");
+	}
+
+	private static final String _SQL_EQUALS_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? = NULL";
+
+	private static final String _SQL_IS_NOT_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? IS NOT NULL";
+
+	private static final String _SQL_IS_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? IS NULL";
+
+	private static final String _SQL_LIKE_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? LIKE NULL";
+
+	private static final String _SQL_NOT_EQUALS_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? != NULL";
+
+	private static final String _SQL_NOT_LIKE_NULL =
+		"SELECT DISTINCT 1 FROM ClassName_ WHERE ? NOT LIKE NULL";
+
+	private SessionFactory _sessionFactory =
+		(SessionFactory)PortalBeanLocatorUtil.locate("liferaySessionFactory");
 
 }
