@@ -33,16 +33,15 @@ public class TransactionInterceptorFactoryBean
 		if (dynamicDataSourceTargetSource == null) {
 			return new TransactionInterceptor();
 		}
-		else {
-			DynamicDataSourceTransactionInterceptor
-				dynamicDataSourceTransactionInterceptor =
-					new DynamicDataSourceTransactionInterceptor();
 
-			dynamicDataSourceTransactionInterceptor.setDynamicDataSourceTargetSource(
-				dynamicDataSourceTargetSource);
+		DynamicDataSourceTransactionInterceptor
+			dynamicDataSourceTransactionInterceptor =
+				new DynamicDataSourceTransactionInterceptor();
 
-			return dynamicDataSourceTransactionInterceptor;
-		}
+		dynamicDataSourceTransactionInterceptor.
+			setDynamicDataSourceTargetSource(dynamicDataSourceTargetSource);
+
+		return dynamicDataSourceTransactionInterceptor;
 	}
 
 }
