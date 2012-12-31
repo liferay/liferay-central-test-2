@@ -276,16 +276,18 @@ public class LiferayPortlet extends GenericPortlet {
 	protected Method getActionMethod(String actionName)
 		throws NoSuchMethodException {
 
-		Method method = actionMethodMap.get(actionName);
+		Method method = actionMethods.get(actionName);
 
 		if (method != null) {
 			return method;
 		}
 
-		method = getClass().getMethod(
+		Class<?> clazz = getClass();
+
+		method = clazz.getMethod(
 			actionName, ActionRequest.class, ActionResponse.class);
 
-		actionMethodMap.put(actionName, method);
+		actionMethods.put(actionName, method);
 
 		return method;
 	}
@@ -411,7 +413,7 @@ public class LiferayPortlet extends GenericPortlet {
 		PortletResponseUtil.write(mimeResponse, json.toString());
 	}
 
-	protected Map<String, Method> actionMethodMap =
+	protected Map<String, Method> actionMethods =
 		new ConcurrentHashMap<String, Method>();
 	protected boolean addProcessActionSuccessMessage;
 
