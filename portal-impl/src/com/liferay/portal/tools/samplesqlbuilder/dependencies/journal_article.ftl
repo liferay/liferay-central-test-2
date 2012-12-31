@@ -32,12 +32,14 @@ ${sampleSQLBuilder.insertMBMessage(mbMessage)}
 
 insert into MBThread values (${mbThread.threadId}, ${mbThread.groupId}, ${mbThread.companyId}, ${mbThread.categoryId}, ${mbThread.rootMessageId}, ${mbThread.rootMessageUserId}, ${mbThread.messageCount}, 0, ${mbThread.lastPostByUserId}, CURRENT_TIMESTAMP, 0, FALSE, 0, ${mbThread.lastPostByUserId}, '', CURRENT_TIMESTAMP);
 
-<#assign startId = publicLayouts?size>
+<#assign publicLayoutsSize = publicLayouts?size>
 
 <#list 1..maxJournalArticleCount as journalArticleCount>
 	<#assign friendlyURL = "/" + groupId + "_journal_article_" + journalArticleCount>
 
-	<#assign layout = dataFactory.addLayout(startId + journalArticleCount, "Web Content " + journalArticleCount, friendlyURL, "", "56,")>
+	<#assign layout = dataFactory.addLayout(publicLayoutsSize + journalArticleCount, "Web Content " + journalArticleCount, friendlyURL, "", "56,")>
+
+	${writerLayoutCSV.write(friendlyURL + "\n")}
 
 	<#assign publicLayouts = publicLayouts + [layout]>
 
@@ -54,6 +56,4 @@ insert into MBThread values (${mbThread.threadId}, ${mbThread.groupId}, ${mbThre
 	${sampleSQLBuilder.insertResourcePermission("86", layout.plid + "_LAYOUT_86")}
 
 	insert into JournalContentSearch values (${counter.get()}, ${groupId}, ${companyId}, 0, ${layout.layoutId}, '56', '${journalArticle.articleId}');
-
-	${writerLayoutCSV.write(friendlyURL + "\n")}
 </#list>
