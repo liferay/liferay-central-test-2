@@ -32,6 +32,7 @@ String refreshURL = (String)request.getAttribute("liferay-ui:ddm-template-select
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:ddm-template-select:showEmptyOption"));
 
 long ddmTemplateGroupId = PortletDisplayTemplateUtil.getDDMTemplateGroupId(themeDisplay);
+
 Group ddmTemplateGroup = GroupServiceUtil.getGroup(ddmTemplateGroupId);
 %>
 
