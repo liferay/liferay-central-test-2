@@ -462,6 +462,8 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(entry.getCompanyId());
+		subscriptionSender.setContextAttribute(
+			"[$ENTRY_CONTENT$]", entry.getContent(), false);
 		subscriptionSender.setContextAttributes(
 			"[$ENTRY_ID$]", entry.getEntryId(), "[$ENTRY_TITLE$]",
 			entry.getTitle(), "[$ENTRY_TYPE$]",
@@ -470,8 +472,6 @@ public class AnnouncementsEntryLocalServiceImpl
 			LanguageUtil.get(
 				company.getLocale(),
 				(entry.isAlert() ? "alert" : "announcement")));
-		subscriptionSender.setContextAttribute(
-			"[$ENTRY_CONTENT$]", entry.getContent(), false);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("announcements_entry", entry.getEntryId());
