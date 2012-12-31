@@ -44,18 +44,15 @@ if (Validator.isNotNull(target)) {
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
 		long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+
+		LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
+
+		if (filterManageableOrganizations) {
+			organizationParams.put("organizationsTree", user.getOrganizations());
+		}
 		%>
 
 		<liferay-ui:search-container-results>
-
-			<%
-			LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
-
-			if (filterManageableOrganizations) {
-				organizationParams.put("organizationsTree", user.getOrganizations());
-			}
-			%>
-
 			<c:choose>
 				<c:when test="<%= PropsValues.ORGANIZATIONS_INDEXER_ENABLED && PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
 					<%@ include file="/html/portlet/users_admin/organization_search_results_index.jspf" %>
