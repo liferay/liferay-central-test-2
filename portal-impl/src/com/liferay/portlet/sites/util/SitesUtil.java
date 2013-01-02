@@ -618,7 +618,7 @@ public class SitesUtil {
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME,
-			new String[]{Boolean.FALSE.toString()});
+			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME_REFERENCE,
 			new String[] {Boolean.TRUE.toString()});
@@ -1135,7 +1135,7 @@ public class SitesUtil {
 			prototypeTypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 
 		if (mergeFailCount >
-			PropsValues.LAYOUT_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
+				PropsValues.LAYOUT_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
 
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(6);
@@ -1159,8 +1159,6 @@ public class SitesUtil {
 			Lock lock = LockLocalServiceUtil.lock(
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layout.getPlid()), owner, false);
-
-			// Double deep check
 
 			if (!owner.equals(lock.getOwner())) {
 				Date createDate = lock.getCreateDate();

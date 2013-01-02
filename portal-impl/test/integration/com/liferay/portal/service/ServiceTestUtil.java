@@ -165,6 +165,8 @@ public class ServiceTestUtil {
 		catch (NoSuchLayoutException nsle) {
 		}
 
+		String description = "This is a test page.";
+
 		ServiceContext serviceContext = getServiceContext();
 
 		if (layoutPrototype != null) {
@@ -173,8 +175,6 @@ public class ServiceTestUtil {
 			serviceContext.setAttribute(
 				"layoutPrototypeUuid", layoutPrototype.getUuid());
 		}
-
-		String description = "This is a test page.";
 
 		return LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), groupId, privateLayout,
