@@ -927,9 +927,8 @@ public class LayoutLocalServiceUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.Layout> getNoPermissionLayouts(
-		com.liferay.portal.model.Role role)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getNoPermissionLayouts(role);
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getNoPermissionLayouts(roleId);
 	}
 
 	/**

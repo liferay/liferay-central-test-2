@@ -834,8 +834,7 @@ public interface LayoutLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> getNoPermissionLayouts(
-		com.liferay.portal.model.Role role)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns all the layouts whose friendly URLs are <code>null</code>

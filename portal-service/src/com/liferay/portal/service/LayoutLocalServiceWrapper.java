@@ -911,9 +911,8 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.liferay.portal.model.Layout> getNoPermissionLayouts(
-		com.liferay.portal.model.Role role)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layoutLocalService.getNoPermissionLayouts(role);
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.getNoPermissionLayouts(roleId);
 	}
 
 	/**
