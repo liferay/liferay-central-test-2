@@ -33,6 +33,7 @@ public class CaptureAppender extends AppenderSkeleton {
 
 	public CaptureAppender(Logger logger) {
 		_logger = logger;
+
 		_parentCategory = logger.getParent();
 
 		try {

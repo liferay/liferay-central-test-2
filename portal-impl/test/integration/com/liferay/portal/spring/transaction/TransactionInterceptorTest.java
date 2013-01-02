@@ -77,7 +77,8 @@ public class TransactionInterceptorTest {
 			Assert.fail();
 		}
 		catch (RuntimeException re) {
-			Assert.assertEquals("Mock Exception", re.getMessage());
+			Assert.assertEquals(
+				"MockPlatformTransactionManager", re.getMessage());
 		}
 		finally {
 			transactionInterceptor.setPlatformTransactionManager(
@@ -111,20 +112,20 @@ public class TransactionInterceptorTest {
 			_platformTransactionManager = platformTransactionManager;
 		}
 
+		public void commit(TransactionStatus transactionStatus)
+			throws TransactionException {
+
+			_platformTransactionManager.rollback(transactionStatus);
+
+			throw new RuntimeException("MockPlatformTransactionManager");
+		}
+
 		public TransactionStatus getTransaction(
 				TransactionDefinition transactionDefinition)
 			throws TransactionException {
 
 			return _platformTransactionManager.getTransaction(
 				transactionDefinition);
-		}
-
-		public void commit(TransactionStatus transactionStatus)
-			throws TransactionException {
-
-			_platformTransactionManager.rollback(transactionStatus);
-
-			throw new RuntimeException("Mock Exception");
 		}
 
 		public void rollback(TransactionStatus transactionStatus)
