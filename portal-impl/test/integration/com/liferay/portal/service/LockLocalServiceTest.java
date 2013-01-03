@@ -112,40 +112,6 @@ public class LockLocalServiceTest {
 		LockLocalServiceUtil.unlock(className, key, owner2, false);
 	}
 
-	private boolean isExpectedException(SystemException se) {
-		Throwable cause = se.getCause();
-
-		if (cause instanceof ORMException) {
-			cause = cause.getCause();
-
-			if (cause instanceof LockAcquisitionException) {
-				return true;
-			}
-
-			if (cause instanceof ConstraintViolationException) {
-				return true;
-			}
-
-			DB db =DBFactoryUtil.getDB();
-
-			if ((db instanceof SybaseDB) &&
-				(cause instanceof GenericJDBCException)) {
-
-				cause = cause.getCause();
-
-				if ((cause instanceof BatchUpdateException) &&
-					cause.getMessage().equals(
-						"Attempt to insert duplicate key row in object " +
-							"'Lock_' with unique index 'IX_228562AD'\n")) {
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
 	private class LockingJob implements Runnable {
 
 		public LockingJob(
@@ -165,7 +131,6 @@ public class LockLocalServiceTest {
 		public void run() {
 			int count = 0;
 
-			Iteration:
 			while (true) {
 				try {
 					Lock lock = LockLocalServiceUtil.lock(
@@ -173,9 +138,11 @@ public class LockLocalServiceTest {
 
 					if (lock.isNew()) {
 
-						// Lock creator is responsible to unlock it. Try
-						// multi-time in case some DBMS(like SQL Server)
-						// randomly pick up victim to rollback.
+						// The lock creator is responsible for unlocking. Try
+						// to unlock many times because some databases like SQL
+						// Server may randomly choke and rollback an unlock.
+
+						boolean reacquireLock = false;
 
 						while (true) {
 							try {
@@ -183,13 +150,15 @@ public class LockLocalServiceTest {
 									_className, _key, _owner, false);
 
 								if (++count >= _requiredSuccessCount) {
-									break Iteration;
+									reacquireLock = true;
+
+									break;
 								}
 
 								break;
 							}
 							catch (SystemException se) {
-								if (isExpectedException(se)) {
+								if (_isExpectedException(se)) {
 									continue;
 								}
 
@@ -198,10 +167,14 @@ public class LockLocalServiceTest {
 								break;
 							}
 						}
+
+						if (reacquireLock) {
+							continue;
+						}
 					}
 				}
 				catch (SystemException se) {
-					if (isExpectedException(se)) {
+					if (_isExpectedException(se)) {
 						continue;
 					}
 
@@ -210,6 +183,42 @@ public class LockLocalServiceTest {
 					break;
 				}
 			}
+		}
+
+		private boolean _isExpectedException(SystemException se) {
+			Throwable cause = se.getCause();
+
+			if (!(cause instanceof ORMException)) {
+				return false;
+			}
+
+			cause = cause.getCause();
+
+			if ((cause instanceof ConstraintViolationException) ||
+				(cause instanceof LockAcquisitionException)) {
+
+				return true;
+			}
+
+			DB db = DBFactoryUtil.getDB();
+
+			if ((db instanceof SybaseDB) &&
+				(cause instanceof GenericJDBCException)) {
+
+				cause = cause.getCause();
+
+				String message = cause.getMessage();
+
+				if ((cause instanceof BatchUpdateException) &&
+					message.equals(
+						"Attempt to insert duplicate key row in object " +
+							"'Lock_' with unique index 'IX_228562AD'\n")) {
+
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		private String _className;
