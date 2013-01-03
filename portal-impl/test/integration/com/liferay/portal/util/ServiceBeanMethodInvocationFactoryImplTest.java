@@ -59,10 +59,16 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 		_emailAddresses.add(emailAddress1);
 		_emailAddresses.add(emailAddress2);
 
-		ServiceBeanMethodInvocationFactoryUtil.proceed(
-			this, ServiceBeanMethodInvocationFactoryImplTest.class,
-			getSaveMethod(), new Object[] {true},
-			new String[] {"transactionAdvice"});
+		try {
+			ServiceBeanMethodInvocationFactoryUtil.proceed(
+				this, ServiceBeanMethodInvocationFactoryImplTest.class,
+				getSaveMethod(), new Object[] {true},
+				new String[] {"transactionAdvice"});
+
+			fail();
+		}
+		catch (Exception e) {
+		}
 
 		Assert.assertEquals(
 			0, EmailAddressLocalServiceUtil.getEmailAddressesCount());
@@ -88,8 +94,7 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 	protected Method getSaveMethod() throws Exception {
 		Class<?> clazz = getClass();
 
-		return clazz.getDeclaredMethod(
-			"save", new Class<?>[] {Set.class, boolean.class});
+		return clazz.getDeclaredMethod("save", new Class<?>[] {boolean.class});
 	}
 
 	protected EmailAddress newEmailAddress(String address) throws Exception {
