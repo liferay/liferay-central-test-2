@@ -65,7 +65,7 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 				getSaveMethod(), new Object[] {true},
 				new String[] {"transactionAdvice"});
 
-			fail();
+			Assert.fail();
 		}
 		catch (Exception e) {
 		}
