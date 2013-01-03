@@ -2114,7 +2114,7 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/jcl-over-sl4fj.jar</file-name>
+		<file-name>portal/jcl-over-slf4j.jar</file-name>
 		<version>1.6.4</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
@@ -2485,7 +2485,7 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/log4j-over-sl4fj.jar</file-name>
+		<file-name>portal/log4j-over-slf4j.jar</file-name>
 		<version>1.6.4</version>
 		<project-name>SLF4J</project-name>
 		<project-url>http://www.slf4j.org</project-url>
