@@ -24,7 +24,7 @@ public interface ServiceBeanMethodInvocationFactory {
 
 	public void proceed(
 			Object target, Class<?> targetClass, Method method,
-			Object[] arguments)
+			Object[] arguments, String[] methodInterceptorBeanIds)
 		throws Exception;
 
 }

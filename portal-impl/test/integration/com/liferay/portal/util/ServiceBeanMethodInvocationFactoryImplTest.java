@@ -14,7 +14,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -22,7 +21,7 @@ import com.liferay.portal.kernel.util.ServiceBeanMethodInvocationFactoryUtil;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.EmailAddressPersistence;
+import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.lang.reflect.Method;
@@ -38,6 +37,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
+ * @see    OrderByComparatorFactoryImplTest
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class ServiceBeanMethodInvocationFactoryImplTest {
@@ -59,13 +59,10 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 		_emailAddresses.add(emailAddress1);
 		_emailAddresses.add(emailAddress2);
 
-		try {
-			ServiceBeanMethodInvocationFactoryUtil.proceed(
-				this, ServiceBeanMethodInvocationFactoryImplTest.class,
-				getSaveMethod(), new Object[] {_emailAddresses, true});
-		}
-		catch (Exception e) {
-		}
+		ServiceBeanMethodInvocationFactoryUtil.proceed(
+			this, ServiceBeanMethodInvocationFactoryImplTest.class,
+			getSaveMethod(), new Object[] {true},
+			new String[] {"transactionAdvice"});
 
 		Assert.assertEquals(
 			0, EmailAddressLocalServiceUtil.getEmailAddressesCount());
@@ -79,36 +76,26 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 		_emailAddresses.add(emailAddress1);
 		_emailAddresses.add(emailAddress2);
 
-		try {
-			ServiceBeanMethodInvocationFactoryUtil.proceed(
-				this, ServiceBeanMethodInvocationFactoryImplTest.class,
-				getSaveMethod(), new Object[] {_emailAddresses, false});
-		}
-		catch (Exception e) {
-		}
+		ServiceBeanMethodInvocationFactoryUtil.proceed(
+			this, ServiceBeanMethodInvocationFactoryImplTest.class,
+			getSaveMethod(), new Object[] {false},
+			new String[] {"transactionAdvice"});
 
 		Assert.assertEquals(
 			2, EmailAddressLocalServiceUtil.getEmailAddressesCount());
 	}
 
-	protected Method getSaveMethod() {
+	protected Method getSaveMethod() throws Exception {
 		Class<?> clazz = getClass();
 
-		try {
-			return clazz.getDeclaredMethod(
-				"save",
-				new Class<?>[] {
-					Set.class, boolean.class});
-		}
-		catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
+		return clazz.getDeclaredMethod(
+			"save", new Class<?>[] {Set.class, boolean.class});
 	}
 
 	protected EmailAddress newEmailAddress(String address) throws Exception {
-		long pk = ServiceTestUtil.nextLong();
+		long emailAddressId = ServiceTestUtil.nextLong();
 
-		EmailAddress emailAddress = _emailAddressPersistence.create(pk);
+		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
 
 		emailAddress.setAddress(address);
 
@@ -119,21 +106,16 @@ public class ServiceBeanMethodInvocationFactoryImplTest {
 		isolation = Isolation.PORTAL, propagation = Propagation.REQUIRES_NEW,
 		rollbackFor = {Exception.class}
 	)
-	protected void save(Set<EmailAddress> emailAddresses, boolean rollback)
-		throws Exception {
-
-		for (EmailAddress emailAddress : emailAddresses) {
-			_emailAddressPersistence.update(emailAddress);
+	protected void save(boolean rollback) throws Exception {
+		for (EmailAddress emailAddress : _emailAddresses) {
+			EmailAddressUtil.update(emailAddress);
 		}
 
 		if (rollback) {
-			throw new Exception("Rollback transaction");
+			throw new Exception();
 		}
 	}
 
 	private Set<EmailAddress> _emailAddresses = new HashSet<EmailAddress>();
-	private EmailAddressPersistence _emailAddressPersistence =
-		(EmailAddressPersistence)PortalBeanLocatorUtil.locate(
-			EmailAddressPersistence.class.getName());
 
 }

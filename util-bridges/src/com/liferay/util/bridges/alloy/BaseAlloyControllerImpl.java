@@ -110,7 +110,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		initServletVariables();
 		initPortletVariables();
 		initThemeDisplayVariables();
-		initExecuteActionMethod();
 		initMethods();
 		initPaths();
 		initIndexer();
@@ -127,9 +126,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		}
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			Class<?> superClass = clazz.getSuperclass();
+
+			Method executeActionMethod = superClass.getDeclaredMethod(
+				"executeAction", new Class<?>[] {Method.class});
+
 			ServiceBeanMethodInvocationFactoryUtil.proceed(
 				this, BaseAlloyControllerImpl.class, executeActionMethod,
-				new Object[] {method});
+				new Object[] {method}, new String[] {"transactionAdvice"});
 		}
 		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 			executeRender(method);
@@ -338,17 +342,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected void initClass() {
 		clazz = getClass();
 		classLoader = clazz.getClassLoader();
-		superClazz = clazz.getSuperclass();
-	}
-
-	protected void initExecuteActionMethod() {
-		try {
-			executeActionMethod = superClazz.getDeclaredMethod(
-				"executeAction", new Class<?>[] {Method.class});
-		}
-		catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
 	}
 
 	protected void initIndexer() {
@@ -798,7 +791,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected String controllerPath;
 	protected EventRequest eventRequest;
 	protected EventResponse eventResponse;
-	protected Method executeActionMethod;
 	protected Indexer indexer;
 	protected String indexerClassName;
 	protected String lifecycle;
@@ -823,7 +815,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected MessageListener schedulerMessageListener;
 	protected ServletConfig servletConfig;
 	protected ServletContext servletContext;
-	protected Class<?> superClazz;
 	protected ThemeDisplay themeDisplay;
 	protected User user;
 	protected String viewPath;

@@ -35,11 +35,11 @@ public class ServiceBeanMethodInvocationFactoryUtil {
 
 	public static void proceed(
 			Object target, Class<?> targetClass, Method method,
-			Object[] arguments)
+			Object[] arguments, String[] methodInterceptorBeanIds)
 		throws Exception {
 
 		getServiceBeanMethodInvocationFactory().proceed(
-			target, targetClass, method, arguments);
+			target, targetClass, method, arguments, methodInterceptorBeanIds);
 	}
 
 	public void setServiceBeanMethodInvocationFactory(
