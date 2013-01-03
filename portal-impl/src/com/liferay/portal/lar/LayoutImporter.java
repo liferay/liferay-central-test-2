@@ -1565,13 +1565,13 @@ public class LayoutImporter {
 
 		LayoutTypePortlet importedLayoutType =
 			(LayoutTypePortlet)importedLayout.getLayoutType();
+
+		List<String> importedPortletIds = importedLayoutType.getPortletIds();
+
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();
 
-		List<String> importedPortletIds = importedLayoutType.getPortletIds();
-		List<String> portletIds = layoutType.getPortletIds();
-
-		importedPortletIds.removeAll(portletIds);
+		importedPortletIds.removeAll(layoutType.getPortletIds());
 
 		if (!importedPortletIds.isEmpty()) {
 			PortletLocalServiceUtil.deletePortlets(
