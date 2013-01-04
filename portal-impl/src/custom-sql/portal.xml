@@ -420,6 +420,28 @@
 				(Users_Groups.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByNoPermissions">
+		<![CDATA[
+			SELECT
+				{Layout.*}
+			FROM
+				Layout
+			WHERE
+				(plid NOT IN (
+					SELECT
+						Layout.plid
+					FROM
+						Layout
+					INNER JOIN
+						ResourcePermission ON
+							(ResourcePermission.companyId = Layout.companyId) AND
+							(ResourcePermission.name = Layout.name) AND
+							(ResourcePermission.scope = ?) AND
+							(resourcePermission.primKey = CAST_TEXT(Layout.plid)) AND
+							(ResourcePermission.roleId = ?)
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByNullFriendlyURL">
 		<![CDATA[
 			SELECT
@@ -444,28 +466,6 @@
 			WHERE
 				(Layout.groupId = ?) AND
 				(Layout.privateLayout = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByNoPermissions">
-		<![CDATA[
-			SELECT
-				{Layout.*}
-			FROM
-				Layout
-			WHERE
-				(plid NOT IN (
-					SELECT
-						Layout.plid
-					FROM
-						Layout
-					INNER JOIN
-						ResourcePermission ON
-							(ResourcePermission.companyId = Layout.companyId) AND
-							(ResourcePermission.name = Layout.name) AND
-							(ResourcePermission.scope = ?) AND
-							(resourcePermission.primKey = CAST_TEXT(Layout.plid)) AND
-							(ResourcePermission.roleId = ?)
-				))
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
