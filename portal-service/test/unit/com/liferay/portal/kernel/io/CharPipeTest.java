@@ -573,7 +573,7 @@ public class CharPipeTest extends TestCase {
 			assertTrue(timestampAfterSkip1 >= timestampBeforeWrite);
 			assertTrue(timestampAfterSkip2 >= timestampAfterSkip1);
 
-			if (System.getenv("JENKINS_URL") == null)) {
+			if (System.getenv("JENKINS_URL") == null) {
 				assertTrue(
 					(timestampAfterSkip1 - timestampBeforeWrite) >=
 						(timestampAfterSkip2 - timestampAfterSkip1));
