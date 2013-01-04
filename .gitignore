@@ -1,7 +1,8 @@
 *~
-*.ant-*
 *.bak
 *.iml
+*.ipr
+*.iws
 *.swp
 .ant_targets
 .sass-cache/
