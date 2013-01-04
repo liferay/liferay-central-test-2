@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -44,7 +43,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
@@ -114,9 +112,6 @@ public class DDMXSDImpl implements DDMXSD {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String portletId = PortalUtil.getPortletId(request);
 
 		String portletNamespace = PortalUtil.getPortletNamespace(portletId);
@@ -160,7 +155,7 @@ public class DDMXSDImpl implements DDMXSD {
 
 		String name = element.attributeValue("name");
 
-		StringBuffer sb = new StringBuffer(fieldRepetition);
+		StringBundler sb = new StringBundler(fieldRepetition);
 
 		while (fieldRepetition > 0) {
 			fieldStructure.put("fieldNamespace", PwdGenerator.getPassword(4));

@@ -397,13 +397,13 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	private Map<String, String> _getPrivateField(String privateFieldName) {
 		Map<String, String> privateField = new HashMap<String, String>();
 
-		privateField.put("private", "true");
-
 		String dataType = PropsUtil.get(
 			PropsKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_PRIVATE_FIELD_DATATYPE,
 			new Filter(privateFieldName));
 
 		privateField.put("dataType", dataType);
+
+		privateField.put("private", Boolean.TRUE.toString());
 
 		String repeatable = PropsUtil.get(
 			PropsKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_PRIVATE_FIELD_REPEATABLE,

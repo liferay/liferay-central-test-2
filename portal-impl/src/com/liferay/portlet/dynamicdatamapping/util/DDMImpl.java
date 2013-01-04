@@ -401,9 +401,8 @@ public class DDMImpl implements DDM {
 	}
 
 	protected List<String> getFieldNames(
-			String fieldNamespace, String fieldName,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		String fieldNamespace, String fieldName,
+		ServiceContext serviceContext) {
 
 		String[] fieldsDisplayValues = StringUtil.split(
 			(String)serviceContext.getAttribute(
