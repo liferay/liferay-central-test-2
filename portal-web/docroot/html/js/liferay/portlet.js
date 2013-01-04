@@ -38,7 +38,7 @@
 						p_auth: Liferay.authToken,
 						p_l_id: event.plid,
 						p_p_id: event.portletId,
-						p_v_g_id: themeDisplay.getParentGroupId()
+						p_v_l_s_g_id: themeDisplay.getParentGroupId()
 					}
 				}
 			);
@@ -159,12 +159,6 @@
 				currentColumnId = Util.getColumnId(column.attr('id'));
 			}
 
-			var pvlsgid = 0;
-
-			if (themeDisplay.isVirtualLayout()) {
-				pvlsgid = themeDisplay.getScopeGroupId();
-			}
-
 			var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
 			var data = {
@@ -178,8 +172,7 @@
 				p_p_id: portletId,
 				p_p_i_id: portletItemId,
 				p_p_isolated: true,
-				p_v_g_id: themeDisplay.getParentGroupId(),
-				p_v_l_s_g_id: pvlsgid
+				p_v_l_s_g_id: themeDisplay.getParentGroupId()
 			};
 
 			var firstPortlet = container.one('.portlet-boundary');
@@ -453,7 +446,7 @@
 								p_l_id: plid,
 								p_p_id: portlet.portletId,
 								p_p_restore: restore,
-								p_v_g_id: themeDisplay.getParentGroupId()
+								p_v_l_s_g_id: themeDisplay.getParentGroupId()
 							}
 						}
 					);
