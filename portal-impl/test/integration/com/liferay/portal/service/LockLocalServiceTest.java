@@ -148,36 +148,19 @@ public class LockLocalServiceTest {
 									_className, _key, _owner, false);
 
 								if (++count >= _requiredSuccessCount) {
-
-									// The test is done, quit this test thread
-
 									return;
 								}
-								else {
 
-									// Need more iteration
-
-									break;
-								}
+								break;
 							}
 							catch (SystemException se) {
 								if (_isExpectedException(se)) {
-
-									// Failed to unlock by expected exception,
-									// retry
-
 									continue;
 								}
-								else {
 
-									// Failed to unlock by unexpected exception,
-									// record the exception and quit this test
-									// thread.
+								_systemException = se;
 
-									_systemException = se;
-
-									return;
-								}
+								return;
 							}
 						}
 					}
