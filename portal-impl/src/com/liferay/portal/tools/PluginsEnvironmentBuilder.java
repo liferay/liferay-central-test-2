@@ -60,10 +60,7 @@ public class PluginsEnvironmentBuilder {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(dir);
-		ds.setIncludes(
-			new String[] {
-				"**/docroot/WEB-INF/liferay-plugin-package.properties"
-			});
+		ds.setIncludes(new String[] {"**\\liferay-plugin-package.properties"});
 
 		ds.scan();
 
@@ -76,7 +73,7 @@ public class PluginsEnvironmentBuilder {
 		ds = new DirectoryScanner();
 
 		ds.setBasedir(dir);
-		ds.setIncludes(new String[] {"**/build.xml"});
+		ds.setIncludes(new String[] {"**\\build.xml"});
 
 		ds.scan();
 
