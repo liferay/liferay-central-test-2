@@ -293,17 +293,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/jakarta-regexp.jar</file-name>
-		<version>1.2</version>
-		<project-name>Jakarta Regexp</project-name>
-		<project-url>http://jakarta.apache.org/regexp</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 1.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/jasper.jar</file-name>
 		<version>7.0.34</version>
 		<project-name>Tomcat</project-name>
@@ -2003,6 +1992,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jakarta-regexp.jar</file-name>
+		<version>1.5</version>
+		<project-name>Jakarta Regexp</project-name>
+		<project-url>http://jakarta.apache.org/regexp</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jamwiki-core.jar</file-name>
 		<version>1.0.7</version>
 		<project-name>JAMWiki</project-name>
@@ -2501,7 +2501,7 @@
 	<library>
 		<file-name>portal/lucene-analyzers.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Analyzers</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2523,7 +2523,7 @@
 	<library>
 		<file-name>portal/lucene-grouping.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Grouping</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2534,7 +2534,7 @@
 	<library>
 		<file-name>portal/lucene-highlighter.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Highlighter</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2545,7 +2545,7 @@
 	<library>
 		<file-name>portal/lucene-icu.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene ICU</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2556,7 +2556,7 @@
 	<library>
 		<file-name>portal/lucene-join.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Join</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2567,7 +2567,7 @@
 	<library>
 		<file-name>portal/lucene-memory.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Memory</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2578,7 +2578,7 @@
 	<library>
 		<file-name>portal/lucene-misc.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Misc</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2589,7 +2589,7 @@
 	<library>
 		<file-name>portal/lucene-queries.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Queries</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2600,7 +2600,7 @@
 	<library>
 		<file-name>portal/lucene-queryparser.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Query Parser</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
@@ -2611,7 +2611,7 @@
 	<library>
 		<file-name>portal/lucene-spellchecker.jar</file-name>
 		<version>3.5.0</version>
-		<project-name>Lucene Spellchecker</project-name>
+		<project-name>Lucene</project-name>
 		<project-url>http://lucene.apache.org</project-url>
 		<licenses>
 			<license>
