@@ -885,7 +885,7 @@ public class WebDriverToSeleniumBridge
 					refresh();
 				}
 
-				if (getLocation().equals(targetURL)) {
+				if (targetURL.equals(getLocation())) {
 					break;
 				}
 
