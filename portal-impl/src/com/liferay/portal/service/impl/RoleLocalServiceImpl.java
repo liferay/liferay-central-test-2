@@ -1278,13 +1278,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (String portletId : getDefaultControlPanelPortlets()) {
-			List<ResourcePermission> resourcePermissions =
-				resourcePermissionPersistence.findByC_N_S_P_R(
-					role.getCompanyId(), portletId,
-					ResourceConstants.SCOPE_COMPANY,
-					String.valueOf(role.getCompanyId()), role.getRoleId());
+			int count = resourcePermissionPersistence.countByC_N_S_P_R(
+				role.getCompanyId(), portletId, ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(role.getCompanyId()), role.getRoleId());
 
-			if (!resourcePermissions.isEmpty()) {
+			if (count > 0) {
 				continue;
 			}
 
