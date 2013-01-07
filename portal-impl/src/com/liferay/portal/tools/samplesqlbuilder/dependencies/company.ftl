@@ -12,15 +12,16 @@ insert into VirtualHost values (${counter.get()}, ${companyId}, 0, 'localhost');
 
 ${sampleSQLBuilder.insertUser(contact, null, null, null, user)}
 
-<#assign user = dataFactory.addUser(false, "test")>
 <#assign contact = dataFactory.addContact("Test", "Test")>
-<#assign groupIds = [dataFactory.guestGroup.groupId]>
-<#assign organizationIds = []>
-<#assign roleIds = [dataFactory.administratorRole.roleId]>
+<#assign user = dataFactory.addUser(false, "test")>
 
 <#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName, false)>
 
 ${sampleSQLBuilder.insertGroup(userGroup, [], [])}
+
+<#assign groupIds = [dataFactory.guestGroup.groupId]>
+<#assign organizationIds = []>
+<#assign roleIds = [dataFactory.administratorRole.roleId]>
 
 ${sampleSQLBuilder.insertUser(contact, groupIds, organizationIds, roleIds, user)}
 

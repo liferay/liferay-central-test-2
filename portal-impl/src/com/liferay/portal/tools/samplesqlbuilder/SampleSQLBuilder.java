@@ -275,8 +275,8 @@ public class SampleSQLBuilder {
 		Map<String, Object> context = getContext();
 
 		put(context, "ddlRecord", ddlRecord);
-		put(context, "ddlRecordSet", ddlRecordSet);
 		put(context, "ddlRecordCount", ddlRecordCount);
+		put(context, "ddlRecordSet", ddlRecordSet);
 
 		processTemplate(_tplDDLRecord, context);
 	}
