@@ -15,7 +15,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.ResourceBlocksNotSupportedException;
-import com.liferay.portal.dao.db.PostgreSQLDB;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.CurrentConnectionUtil;
@@ -824,7 +823,7 @@ public class ResourceBlockLocalServiceImpl
 
 					DB db = DBFactoryUtil.getDB();
 
-					if (db instanceof PostgreSQLDB) {
+					if (!db.isSupportsQueryingAfterException()) {
 						DataSource dataSource =
 							resourceBlockPersistence.getDataSource();
 

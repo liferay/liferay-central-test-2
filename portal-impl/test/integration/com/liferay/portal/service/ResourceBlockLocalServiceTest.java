@@ -332,9 +332,6 @@ public class ResourceBlockLocalServiceTest {
 					break;
 				}
 				catch (SystemException se) {
-
-					// Retry
-
 				}
 			}
 
