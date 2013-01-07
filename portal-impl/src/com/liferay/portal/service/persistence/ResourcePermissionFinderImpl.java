@@ -47,18 +47,6 @@ public class ResourcePermissionFinderImpl
 	public static final String COUNT_BY_C_N_S_P_R_A =
 		ResourcePermissionFinder.class.getName() + ".countByC_N_S_P_R_A";
 
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_N_S_P_R_A =
-		new FinderPath(
-			ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
-			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			ResourcePermissionPersistenceImpl.FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_N_S_P_R_A",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName(), String.class.getName(),
-				Long.class.getName(), Long.class.getName()
-			});
-
 	public static final String FIND_BY_RESOURCE =
 		ResourcePermissionFinder.class.getName() + ".findByResource";
 
@@ -67,6 +55,19 @@ public class ResourcePermissionFinderImpl
 
 	public static final String FIND_BY_C_N_S =
 		ResourcePermissionFinder.class.getName() + ".findByC_N_S";
+
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_N_S_P_R_A =
+		new FinderPath(
+			ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			ResourcePermissionPersistenceImpl.
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByC_N_S_P_R_A",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName()
+			});
 
 	public int countByR_S(long roleId, int[] scopes) throws SystemException {
 		Session session = null;
