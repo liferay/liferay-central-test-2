@@ -308,7 +308,7 @@ else if (((folderId != rootFolderId) && (parentFolderId == 0)) || ((folderId == 
 						}
 						catch (Exception e) {
 							if (_log.isWarnEnabled()) {
-								_log.warn("Error trying to access repository", e);
+								_log.warn("Unable to access repository", e);
 							}
 					%>
 
