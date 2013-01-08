@@ -686,16 +686,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
 			}
 
 			if (orderByComparator != null) {
@@ -718,7 +720,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -910,16 +912,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 		query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
+		boolean bindUuid = false;
+
 		if (uuid == null) {
 			query.append(_FINDER_COLUMN_UUID_UUID_1);
 		}
+		else if (uuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_UUID_UUID_3);
+		}
 		else {
-			if (uuid.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_UUID_UUID_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_UUID_UUID_2);
-			}
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_UUID_2);
 		}
 
 		if (orderByComparator != null) {
@@ -990,7 +994,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (uuid != null) {
+		if (bindUuid) {
 			qPos.add(uuid);
 		}
 
@@ -1045,16 +1049,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_UUID_2);
 			}
 
 			String sql = query.toString();
@@ -1068,7 +1074,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -1091,7 +1097,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "bookmarksFolder.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "bookmarksFolder.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksFolderModelImpl.FINDER_CACHE_ENABLED,
 			BookmarksFolderImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -1187,16 +1193,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 			}
 
 			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
@@ -1212,7 +1220,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -1295,16 +1303,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
 			}
 
 			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
@@ -1320,7 +1330,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -1345,7 +1355,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "bookmarksFolder.uuid IS NULL AND ";
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "bookmarksFolder.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "bookmarksFolder.groupId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksFolderModelImpl.FINDER_CACHE_ENABLED,
@@ -1469,16 +1479,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_C_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_C_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_C_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_C_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_C_UUID_2);
 			}
 
 			query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
@@ -1503,7 +1515,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -1709,16 +1721,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 		query.append(_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
 
+		boolean bindUuid = false;
+
 		if (uuid == null) {
 			query.append(_FINDER_COLUMN_UUID_C_UUID_1);
 		}
+		else if (uuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_UUID_C_UUID_3);
+		}
 		else {
-			if (uuid.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_UUID_C_UUID_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_UUID_C_UUID_2);
-			}
+			bindUuid = true;
+
+			query.append(_FINDER_COLUMN_UUID_C_UUID_2);
 		}
 
 		query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
@@ -1791,7 +1805,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (uuid != null) {
+		if (bindUuid) {
 			qPos.add(uuid);
 		}
 
@@ -1852,16 +1866,18 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 			query.append(_SQL_COUNT_BOOKMARKSFOLDER_WHERE);
 
+			boolean bindUuid = false;
+
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_C_UUID_1);
 			}
+			else if (uuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_C_UUID_3);
+			}
 			else {
-				if (uuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_UUID_C_UUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_UUID_C_UUID_2);
-				}
+				bindUuid = true;
+
+				query.append(_FINDER_COLUMN_UUID_C_UUID_2);
 			}
 
 			query.append(_FINDER_COLUMN_UUID_C_COMPANYID_2);
@@ -1877,7 +1893,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (uuid != null) {
+				if (bindUuid) {
 					qPos.add(uuid);
 				}
 
@@ -1902,7 +1918,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 	private static final String _FINDER_COLUMN_UUID_C_UUID_1 = "bookmarksFolder.uuid IS NULL AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "bookmarksFolder.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(bookmarksFolder.uuid IS NULL OR bookmarksFolder.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "bookmarksFolder.companyId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,
 			BookmarksFolderModelImpl.FINDER_CACHE_ENABLED,
