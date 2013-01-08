@@ -391,6 +391,13 @@ public class LayoutServiceUtil {
 			portletId);
 	}
 
+	public static com.liferay.portal.model.Layout getLayoutByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLayoutByUuidAndGroupId(uuid, groupId);
+	}
+
 	/**
 	* Returns the name of the layout.
 	*

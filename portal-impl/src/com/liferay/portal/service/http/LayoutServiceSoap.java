@@ -305,6 +305,21 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSoap getLayoutByUuidAndGroupId(
+		java.lang.String uuid, long groupId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.getLayoutByUuidAndGroupId(uuid,
+					groupId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	/**
 	* Returns the name of the layout.
 	*
