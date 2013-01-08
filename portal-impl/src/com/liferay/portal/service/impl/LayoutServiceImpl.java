@@ -526,7 +526,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			uuid, groupId);
 
 		LayoutPermissionUtil.check(
-			getPermissionChecker(), layout.getPlid(), ActionKeys.VIEW);
+			getPermissionChecker(), layout, ActionKeys.VIEW);
 
 		return layout;
 	}
