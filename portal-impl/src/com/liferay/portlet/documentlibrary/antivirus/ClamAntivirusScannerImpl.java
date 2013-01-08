@@ -29,10 +29,8 @@ public class ClamAntivirusScannerImpl extends BaseFileAntivirusScanner {
 	public void scan(File file)
 		throws AntivirusScannerException, SystemException {
 
-		String filePath = file.getAbsolutePath();
-
 		ProcessBuilder processBuilder = new ProcessBuilder(
-			"clamscan", "--stdout", "--no-summary", filePath);
+			"clamscan", "--stdout", "--no-summary", file.getAbsolutePath());
 
 		processBuilder.redirectErrorStream(true);
 
@@ -57,7 +55,7 @@ public class ClamAntivirusScannerImpl extends BaseFileAntivirusScanner {
 
 			if (scanResult.contains("FOUND")) {
 				throw new AntivirusScannerException(
-					"Virus detected in " + filePath);
+					"Virus detected in " + file.getAbsolutePath());
 			}
 		}
 		catch (IOException ioe) {
