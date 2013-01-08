@@ -1846,10 +1846,11 @@ public class PortletImporter {
 			return;
 		}
 
-		String newValue1 = "Group_" + groupId;
+		String newGroupId = "Group_" + groupId;
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-		String newValue2 = "Layout_" + layout.getLayoutId();
+
+		String newLayoutId = "Layout_" + layout.getLayoutId();
 
 		String[] newValues = new String[oldValues.length];
 
@@ -1857,10 +1858,10 @@ public class PortletImporter {
 			String oldValue = oldValues[i];
 
 			newValues[i] = StringUtil.replace(
-				oldValue, "Group_Company", newValue1);
+				oldValue, "Group_Company", newGroupId);
 
 			newValues[i] = StringUtil.replace(
-				oldValue, "Layout_LayoutId", newValue2);
+				oldValue, "Layout_LayoutId", newLayoutId);
 		}
 
 		jxPreferences.setValues(key, newValues);
