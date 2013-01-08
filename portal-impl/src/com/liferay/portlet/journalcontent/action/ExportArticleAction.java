@@ -80,13 +80,14 @@ public class ExportArticleAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
+			String xmlRequest = PortletRequestUtil.toXML(
+				actionRequest, actionResponse);
+
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);
 
-			String xmlRequest = PortletRequestUtil.toXML(actionRequest, actionResponse);
-			
 			getFile(
 				groupId, articleId, targetExtension, allowedExtensions,
 				languageId, themeDisplay, xmlRequest, request, response);
@@ -101,14 +102,15 @@ public class ExportArticleAction extends PortletAction {
 	protected void getFile(
 			long groupId, String articleId, String targetExtension,
 			String[] allowedExtensions, String languageId,
-			ThemeDisplay themeDisplay, String xmlRequest, HttpServletRequest request,
-			HttpServletResponse response)
+			ThemeDisplay themeDisplay, String xmlRequest,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		try {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
-					groupId, articleId, null, "export", languageId, themeDisplay, 1, xmlRequest);
+					groupId, articleId, null, "export", languageId,
+					themeDisplay, 1, xmlRequest);
 
 			int pages = articleDisplay.getNumberOfPages();
 
