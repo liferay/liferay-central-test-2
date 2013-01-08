@@ -226,7 +226,6 @@
 	<classpathentry kind="lib" path="lib/portal/liferay-icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-yui-compressor.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
-	<classpathentry kind="lib" path="lib/portal/log4j-over-slf4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-analyzers.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-grouping.jar"/>
