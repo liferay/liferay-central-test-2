@@ -86,10 +86,10 @@
 
 				List resultRows = searchContainer.getResultRows();
 
-				PortletURL summaryURL = PortletURLUtil.clone(portletURL, renderResponse);
-
 				for (int i = 0; i < results.getDocs().length; i++) {
 					Document doc = results.doc(i);
+
+					PortletURL summaryURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 					Summary summary = indexer.getSummary(doc, locale, StringPool.BLANK, summaryURL);
 
