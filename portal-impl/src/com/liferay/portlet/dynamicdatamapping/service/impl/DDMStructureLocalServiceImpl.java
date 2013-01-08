@@ -859,9 +859,9 @@ public class DDMStructureLocalServiceImpl
 		if (!ArrayUtil.contains(availableLocales, contentDefaultLocale)) {
 			Long companyId = CompanyThreadLocal.getCompanyId();
 
-			LocaleException le = new LocaleException("Locale '" +
-				contentDefaultLocale + "' is default for content but is not " +
-				"available in portal with companyId " + companyId);
+			LocaleException le = new LocaleException(
+				"The locale " + contentDefaultLocale +
+					" is not available in company " + companyId);
 
 			le.setSourceAvailableLocales(new Locale[] {contentDefaultLocale});
 			le.setTargetAvailableLocales(availableLocales);
