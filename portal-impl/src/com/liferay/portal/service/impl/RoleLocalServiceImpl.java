@@ -51,7 +51,6 @@ import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.ShardLocalServiceUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -257,7 +256,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				shardName = company.getShardName();
 			}
 			catch (NoSuchShardException nsse) {
-				Shard shard = ShardLocalServiceUtil.addShard(
+				Shard shard = shardLocalService.addShard(
 					Company.class.getName(), company.getCompanyId(),
 					PropsValues.SHARD_DEFAULT_NAME);
 
