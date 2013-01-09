@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -183,13 +182,10 @@ public class VerifyJournal extends VerifyProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("select groupId, portletId from JournalContentSearch ");
-			sb.append("group by groupId, portletId ");
-			sb.append("having count(groupId) > 1 and count(portletId) > 1");
-
-			ps = con.prepareStatement(sb.toString());
+			ps = con.prepareStatement(
+				"select groupId, portletId from JournalContentSearch group " +
+					"by groupId, portletId having count(groupId) > 1 and " +
+						"count(portletId) > 1");
 
 			rs = ps.executeQuery();
 
@@ -215,13 +211,10 @@ public class VerifyJournal extends VerifyProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("select preferences from PortletPreferences ");
-			sb.append("inner join Layout on PortletPreferences.plid = ");
-			sb.append("Layout.plid where groupId = ? and portletId = ?");
-
-			ps = con.prepareStatement(sb.toString());
+			ps = con.prepareStatement(
+				"select preferences from PortletPreferences inner join " +
+					"Layout on PortletPreferences.plid = Layout.plid where " +
+						"groupId = ? and portletId = ?");
 
 			ps.setLong(1, groupId);
 			ps.setString(2, portletId);
