@@ -350,8 +350,8 @@ public class PortletAction extends Action {
 			redirect = ParamUtil.getString(actionRequest, "redirect");
 		}
 
-		if (Validator.isNotNull(redirect) &&
-			Validator.isNotNull(closeRedirect) && (portletConfig != null)) {
+		if ((portletConfig != null) && Validator.isNotNull(redirect) &&
+			Validator.isNotNull(closeRedirect)) {
 
 			redirect = HttpUtil.setParameter(
 				redirect, "closeRedirect", closeRedirect);
