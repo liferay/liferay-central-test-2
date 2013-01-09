@@ -94,6 +94,7 @@ import com.liferay.portlet.asset.service.permission.AssetPermission;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetTagUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -1846,11 +1847,12 @@ public class PortletImporter {
 			return;
 		}
 
-		String newGroupId = "Group_" + groupId;
+		String newGroupId = AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX + groupId;
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		String newLayoutId = "Layout_" + layout.getLayoutId();
+		String newLayoutId =
+			AssetPublisherUtil.SCOPE_ID_LAYOUT_PREFIX + layout.getLayoutId();
 
 		String[] newValues = new String[oldValues.length];
 
@@ -1858,7 +1860,8 @@ public class PortletImporter {
 			String oldValue = oldValues[i];
 
 			newValues[i] = StringUtil.replace(
-				oldValue, new String[] {"Group_Company", "Layout_LayoutId"},
+				oldValue,
+				new String[] {"[$GROUP_SCOPE_ID$]", "[$LAYOUT_SCOPE_ID$]"},
 				new String[] {newGroupId, newLayoutId});
 		}
 

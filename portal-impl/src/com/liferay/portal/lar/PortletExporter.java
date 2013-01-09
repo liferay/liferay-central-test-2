@@ -76,6 +76,7 @@ import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
@@ -1526,14 +1527,17 @@ public class PortletExporter {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		String layoutId = "Layout_" + layout.getLayoutId();
-
 		Company company = CompanyLocalServiceUtil.getCompany(
 			layout.getCompanyId());
 
 		Group companyGroup = company.getGroup();
 
-		String companyGroupId = "Group_" + companyGroup.getGroupId();
+		String groupScopeId =
+			AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
+				companyGroup.getGroupId();
+
+		String layoutScopeId =
+			AssetPublisherUtil.SCOPE_ID_LAYOUT_PREFIX + layout.getLayoutId();
 
 		String[] newValues = new String[oldValues.length];
 
@@ -1541,8 +1545,8 @@ public class PortletExporter {
 			String oldValue = oldValues[i];
 
 			newValues[i] = StringUtil.replace(
-				oldValue, new String[] {companyGroupId, layoutId},
-				new String[] {"Group_Company", "Layout_LayoutId"});
+				oldValue, new String[] {groupScopeId, layoutScopeId},
+				new String[] {"[$GROUP_SCOPE_ID$]", "[$LAYOUT_SCOPE_ID$]"});
 		}
 
 		jxPreferences.setValues(key, newValues);
