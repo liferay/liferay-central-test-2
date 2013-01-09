@@ -241,14 +241,10 @@ public class DLFileEntryLocalServiceImpl
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
-		// File version
-
 		DLFileVersion dlFileVersion =
 			dlFileVersionLocalService.getLatestFileVersion(fileEntryId, false);
 
 		removeFileVersion(dlFileEntry, dlFileVersion);
-
-		// Folder
 
 		if (dlFileEntry.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -498,8 +494,6 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileEntryPersistence.update(dlFileEntry);
 
-		// File version
-
 		String version = dlFileVersion.getVersion();
 
 		if (!version.equals(
@@ -545,8 +539,6 @@ public class DLFileEntryLocalServiceImpl
 					dlFileVersion.getFileVersionId());
 			}
 
-			// File
-
 			try {
 				DLStoreUtil.deleteFile(
 					dlFileEntry.getCompanyId(),
@@ -567,15 +559,13 @@ public class DLFileEntryLocalServiceImpl
 				serviceContext);
 		}
 
-		// Folder
-
 		if (dlFileEntry.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(
 				dlFileEntry.getFolderId());
 
-			dlFolder.setLastPostDate(new Date());
+			dlFolder.setLastPostDate(dlFileVersion.getModifiedDate());
 
 			dlFolderPersistence.update(dlFolder);
 		}
