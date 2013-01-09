@@ -164,7 +164,7 @@ public class LocaleUtil {
 					!LanguageUtil.isDuplicateLanguageCode(languageId)) {
 
 					throw new IllegalArgumentException(
-						"Invalid locale: " + locale);
+						"Invalid locale " + locale);
 				}
 			}
 
