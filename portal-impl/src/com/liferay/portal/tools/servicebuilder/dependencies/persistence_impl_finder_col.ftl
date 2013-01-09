@@ -12,7 +12,8 @@
 	else {
 		bind${finderCol.methodName} = true;
 </#if>
-		query.append(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_2);
+
+query.append(_FINDER_COLUMN_${finder.name?upper_case}_${finderCol.name?upper_case}_2);
 
 <#if !finderCol.isPrimitiveType()>
 	}
