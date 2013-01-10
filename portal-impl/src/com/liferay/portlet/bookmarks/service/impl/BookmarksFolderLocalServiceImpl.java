@@ -223,7 +223,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		QueryDefinition queryDefinition = new QueryDefinition(status);
 
-		return bookmarksFolderFinder.findBF_BE_ByG_F(
+		return bookmarksFolderFinder.findF_E_ByG_F(
 			groupId, folderId, queryDefinition);
 	}
 
@@ -234,7 +234,7 @@ public class BookmarksFolderLocalServiceImpl
 		QueryDefinition queryDefinition = new QueryDefinition(
 			status, start, end, null);
 
-		return bookmarksFolderFinder.findBF_BE_ByG_F(
+		return bookmarksFolderFinder.findF_E_ByG_F(
 			groupId, folderId, queryDefinition);
 	}
 
@@ -244,7 +244,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		QueryDefinition queryDefinition = new QueryDefinition(status);
 
-		return bookmarksFolderFinder.countBF_BE_ByG_F(
+		return bookmarksFolderFinder.countF_E_ByG_F(
 				groupId, folderId, queryDefinition);
 	}
 
