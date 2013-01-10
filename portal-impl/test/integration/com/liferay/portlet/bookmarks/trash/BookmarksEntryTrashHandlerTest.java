@@ -78,9 +78,7 @@ public class BookmarksEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		BookmarksFolder folder = (BookmarksFolder)parentBaseModel;
 
 		String name = getSearchKeywords();
-
 		String url = "http://www.liferay.com";
-
 		String description = "Content: Enterprise. Open Source.";
 
 		return BookmarksEntryLocalServiceUtil.addEntry(
@@ -169,8 +167,8 @@ public class BookmarksEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 			group, serviceContext);
 
 		BookmarksEntryServiceUtil.moveEntryFromTrash(
-			(Long) classedModel.getPrimaryKeyObj(),
-			(Long) parentBaseModel.getPrimaryKeyObj());
+			(Long)classedModel.getPrimaryKeyObj(),
+			(Long)parentBaseModel.getPrimaryKeyObj());
 
 		return parentBaseModel;
 	}

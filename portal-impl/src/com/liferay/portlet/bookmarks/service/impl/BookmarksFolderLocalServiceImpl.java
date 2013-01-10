@@ -379,20 +379,18 @@ public class BookmarksFolderLocalServiceImpl
 			long userId, BookmarksFolder folder, int status)
 		throws PortalException, SystemException {
 
-		int oldStatus = folder.getStatus();
-
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Date now = new Date();
+		int oldStatus = folder.getStatus();
 
 		folder.setStatus(status);
 		folder.setStatusByUserId(userId);
 		folder.setStatusByUserName(user.getFullName());
-		folder.setStatusDate(now);
+		folder.setStatusDate(new Date());
 
 		bookmarksFolderPersistence.update(folder);
 
-		// BookmarksFolders and BookmarksEntries
+		// Folders and entries
 
 		List<Object> foldersAndEntries =
 			bookmarksFolderLocalService.getFoldersAndEntries(
@@ -507,6 +505,9 @@ public class BookmarksFolderLocalServiceImpl
 				BookmarksEntry entry = (BookmarksEntry)object;
 
 				if (status == WorkflowConstants.STATUS_IN_TRASH) {
+
+					// Asset
+
 					if (entry.getStatus() ==
 							WorkflowConstants.STATUS_APPROVED) {
 
@@ -544,7 +545,7 @@ public class BookmarksFolderLocalServiceImpl
 						BookmarksEntry.class.getName(), entry.getEntryId());
 				}
 
-				// Index
+				// Indexer
 
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					BookmarksEntry.class);

@@ -441,16 +441,16 @@ public class BookmarksEntryLocalServiceImpl
 			long userId, BookmarksEntry entry, int status)
 		throws PortalException, SystemException {
 
-		int oldStatus = entry.getStatus();
+		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Date now = new Date();
+		int oldStatus = entry.getStatus();
 
 		entry.setStatus(status);
 		entry.setStatusByUserId(userId);
 		entry.setStatusByUserName(user.getScreenName());
-		entry.setStatusDate(now);
+		entry.setStatusDate(new Date());
 
 		bookmarksEntryPersistence.update(entry);
 

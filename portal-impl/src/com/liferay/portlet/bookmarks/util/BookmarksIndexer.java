@@ -131,17 +131,16 @@ public class BookmarksIndexer extends BaseIndexer {
 		document.addText(Field.URL, entry.getUrl());
 
 		if (!entry.isInTrash() && entry.isInTrashContainer()) {
-			BookmarksFolder trashedFolder = entry.getTrashContainer();
+			BookmarksFolder folder = entry.getTrashContainer();
 
 			addTrashFields(
-				document, BookmarksFolder.class.getName(),
-				trashedFolder.getFolderId(), null, null,
-				BookmarksEntryAssetRendererFactory.TYPE);
+				document, BookmarksFolder.class.getName(), folder.getFolderId(),
+				null, null, BookmarksEntryAssetRendererFactory.TYPE);
 
 			document.addKeyword(
 				Field.ROOT_ENTRY_CLASS_NAME, BookmarksFolder.class.getName());
 			document.addKeyword(
-				Field.ROOT_ENTRY_CLASS_PK, trashedFolder.getFolderId());
+				Field.ROOT_ENTRY_CLASS_PK, folder.getFolderId());
 			document.addKeyword(
 				Field.STATUS, WorkflowConstants.STATUS_IN_TRASH);
 		}
@@ -207,9 +206,10 @@ public class BookmarksIndexer extends BaseIndexer {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
-				Property property = PropertyFactoryUtil.forName("folderId");
+				Property folderIdProperty = PropertyFactoryUtil.forName(
+					"folderId");
 
-				dynamicQuery.add(property.eq(folderId));
+				dynamicQuery.add(folderIdProperty.eq(folderId));
 
 				Property statusProperty = PropertyFactoryUtil.forName("status");
 

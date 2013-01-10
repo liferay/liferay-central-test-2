@@ -76,7 +76,7 @@ public class BookmarksFolderTrashHandler extends BookmarksBaseTrashHandler {
 
 	@Override
 	public String getRestoreLink(PortletRequest portletRequest, long classPK)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		BookmarksFolder folder = getBookmarksFolder(classPK);
 
@@ -86,7 +86,7 @@ public class BookmarksFolderTrashHandler extends BookmarksBaseTrashHandler {
 
 	@Override
 	public String getRestoreMessage(PortletRequest portletRequest, long classPK)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		BookmarksFolder folder = getBookmarksFolder(classPK);
 
@@ -118,7 +118,7 @@ public class BookmarksFolderTrashHandler extends BookmarksBaseTrashHandler {
 
 	@Override
 	public boolean isRestorable(long classPK)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		BookmarksFolder folder = getBookmarksFolder(classPK);
 
@@ -150,10 +150,10 @@ public class BookmarksFolderTrashHandler extends BookmarksBaseTrashHandler {
 	}
 
 	@Override
-	protected BookmarksFolder getBookmarksContainer(long classPK)
+	protected BookmarksFolder getBookmarksFolder(long classPK)
 		throws PortalException, SystemException {
 
-		return getBookmarksFolder(classPK);
+		return BookmarksFolderLocalServiceUtil.getFolder(classPK);
 	}
 
 	@Override

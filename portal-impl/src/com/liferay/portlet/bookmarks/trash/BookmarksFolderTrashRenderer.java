@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.bookmarks.trash;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.trash.BaseTrashRenderer;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -31,9 +29,7 @@ public class BookmarksFolderTrashRenderer extends BaseTrashRenderer {
 
 	public static final String TYPE = "bookmarks_folder";
 
-	public BookmarksFolderTrashRenderer(BookmarksFolder folder)
-		throws PortalException, SystemException {
-
+	public BookmarksFolderTrashRenderer(BookmarksFolder folder) {
 		_folder = folder;
 	}
 
@@ -45,6 +41,7 @@ public class BookmarksFolderTrashRenderer extends BaseTrashRenderer {
 		return _folder.getFolderId();
 	}
 
+	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/folder.png";
 	}
