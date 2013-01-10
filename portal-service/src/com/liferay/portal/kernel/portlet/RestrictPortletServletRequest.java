@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.servlet.PersistentHttpServletRequestWrapper;
 import com.liferay.portal.kernel.util.Mergeable;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Collections;
@@ -126,13 +125,11 @@ public class RestrictPortletServletRequest
 			value = _nullValue;
 		}
 
-		if (ServerDetector.isWebLogic()) {
-			if (value instanceof NonSerializableObjectHandler) {
-				NonSerializableObjectHandler nonSerializableObjectHandler =
-					(NonSerializableObjectHandler) value;
+		if (value instanceof NonSerializableObjectHandler) {
+			NonSerializableObjectHandler nonSerializableObjectHandler =
+				(NonSerializableObjectHandler)value;
 
-				value = nonSerializableObjectHandler.getValue();
-			}
+			value = nonSerializableObjectHandler.getValue();
 		}
 
 		_attributes.put(name, value);
