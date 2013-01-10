@@ -42,59 +42,59 @@ public class BookmarksFolderFinderImpl
 		extends BasePersistenceImpl<BookmarksFolder>
 	implements BookmarksFolderFinder {
 
-	public static final String COUNT_BE_BY_G_F =
-		BookmarksFolderFinder.class.getName() + ".countBE_ByG_F";
+	public static final String COUNT_F_BY_G_P =
+		BookmarksFolderFinder.class.getName() + ".countF_ByG_P";
 
-	public static final String COUNT_BF_BY_G_P =
-		BookmarksFolderFinder.class.getName() + ".countBF_ByG_P";
+	public static final String COUNT_F_BY_G_P_S =
+	BookmarksFolderFinder.class.getName() + ".countF_ByG_P_S";
 
-	public static final String COUNT_BE_BY_G_F_S =
-		BookmarksFolderFinder.class.getName() + ".countBE_ByG_F_S";
+	public static final String COUNT_E_BY_G_F =
+		BookmarksFolderFinder.class.getName() + ".countE_ByG_F";
 
-	public static final String COUNT_BF_BY_G_P_S =
-		BookmarksFolderFinder.class.getName() + ".countBF_ByG_P_S";
+	public static final String COUNT_E_BY_G_F_S =
+		BookmarksFolderFinder.class.getName() + ".countE_ByG_F_S";
 
-	public static final String FIND_BE_BY_G_F =
-		BookmarksFolderFinder.class.getName() + ".findBE_ByG_F";
+	public static final String FIND_F_BY_G_P =
+	BookmarksFolderFinder.class.getName() + ".findF_ByG_P";
 
-	public static final String FIND_BF_BY_G_P =
-		BookmarksFolderFinder.class.getName() + ".findBF_ByG_P";
+	public static final String FIND_F_BY_G_P_S =
+	BookmarksFolderFinder.class.getName() + ".findF_ByG_P_S";
 
-	public static final String FIND_BE_BY_G_F_S =
-		BookmarksFolderFinder.class.getName() + ".findBE_ByG_F_S";
+	public static final String FIND_E_BY_G_F =
+		BookmarksFolderFinder.class.getName() + ".findE_ByG_F";
 
-	public static final String FIND_BF_BY_G_P_S =
-		BookmarksFolderFinder.class.getName() + ".findBF_ByG_P_S";
+	public static final String FIND_E_BY_G_F_S =
+		BookmarksFolderFinder.class.getName() + ".findE_ByG_F_S";
 
-	public int countBF_BE_ByG_F(
+	public int countF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doCountBF_BE_ByG_F(groupId, folderId, queryDefinition, false);
+		return doCountF_E_ByG_F(groupId, folderId, queryDefinition, false);
 	}
 
-	public int filterCountBF_BE_ByG_F(
+	public int filterCountF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doCountBF_BE_ByG_F(groupId, folderId, queryDefinition, true);
+		return doCountF_E_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
-	public List<Object> filterFindBF_BE_ByG_F(
+	public List<Object> filterFindBF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doFindBF_BE_ByG_F(groupId, folderId, queryDefinition, true);
+		return doFindF_E_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
-	public List<Object> findBF_BE_ByG_F(
+	public List<Object> findF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doFindBF_BE_ByG_F(groupId, folderId, queryDefinition, false);
+		return doFindF_E_ByG_F(groupId, folderId, queryDefinition, false);
 	}
 
-	protected int doCountBF_BE_ByG_F(
+	protected int doCountF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition,
 			boolean inlineSQLHelper)
 		throws SystemException {
@@ -111,10 +111,10 @@ public class BookmarksFolderFinderImpl
 			String sql = null;
 
 			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(COUNT_BF_BY_G_P);
+				sql = CustomSQLUtil.get(COUNT_F_BY_G_P);
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_BF_BY_G_P_S);
+				sql = CustomSQLUtil.get(COUNT_F_BY_G_P_S);
 
 				sql = replaceExcludeStatus(sql, queryDefinition);
 			}
@@ -129,10 +129,10 @@ public class BookmarksFolderFinderImpl
 			sb.append(" UNION ALL ");
 
 			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(COUNT_BE_BY_G_F);
+				sql = CustomSQLUtil.get(COUNT_E_BY_G_F);
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_BE_BY_G_F_S);
+				sql = CustomSQLUtil.get(COUNT_E_BY_G_F_S);
 
 				sql = replaceExcludeStatus(sql, queryDefinition);
 			}
@@ -144,7 +144,6 @@ public class BookmarksFolderFinderImpl
 			}
 
 			sb.append(sql);
-
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			sql = sb.toString();
@@ -191,7 +190,7 @@ public class BookmarksFolderFinderImpl
 		}
 	}
 
-	protected List<Object> doFindBF_BE_ByG_F(
+	protected List<Object> doFindF_E_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition,
 			boolean inlineSQLHelper)
 		throws SystemException {
@@ -208,10 +207,10 @@ public class BookmarksFolderFinderImpl
 			String sql = null;
 
 			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(FIND_BF_BY_G_P);
+				sql = CustomSQLUtil.get(FIND_F_BY_G_P);
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_BF_BY_G_P_S);
+				sql = CustomSQLUtil.get(FIND_F_BY_G_P_S);
 
 				sql = replaceExcludeStatus(sql, queryDefinition);
 			}
@@ -226,10 +225,10 @@ public class BookmarksFolderFinderImpl
 			sb.append(" UNION ALL ");
 
 			if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.get(FIND_BE_BY_G_F);
+				sql = CustomSQLUtil.get(FIND_E_BY_G_F);
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_BE_BY_G_F_S);
+				sql = CustomSQLUtil.get(FIND_E_BY_G_F_S);
 
 				sql = replaceExcludeStatus(sql, queryDefinition);
 			}
@@ -241,7 +240,6 @@ public class BookmarksFolderFinderImpl
 			}
 
 			sb.append(sql);
-
 			sb.append(") TEMP_TABLE ORDER BY modelName ASC");
 
 			sql = sb.toString();
@@ -278,7 +276,7 @@ public class BookmarksFolderFinderImpl
 				Object[] array = itr.next();
 
 				long modelId = (Long)array[0];
-				String name = (String)array[1];
+				//String name = (String)array[1];
 				long modelFolder = (Long)array[2];
 
 				Object obj = null;

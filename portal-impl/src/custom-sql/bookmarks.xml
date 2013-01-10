@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countBE_ByG_F">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countE_ByG_F">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -12,7 +12,7 @@
 				(BookmarksEntry.folderId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countBF_ByG_P">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countF_ByG_P">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -23,7 +23,7 @@
 				(BookmarksFolder.parentFolderId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countBE_ByG_F_S">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countE_ByG_F_S">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -35,7 +35,7 @@
 				(BookmarksEntry.status = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countBF_ByG_P_S">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.countF_ByG_P_S">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -47,7 +47,7 @@
 				(BookmarksFolder.status = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findBE_ByG_F">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findE_ByG_F">
 		<![CDATA[
 			SELECT
 				BookmarksEntry.entryId AS modelId, BookmarksEntry.name AS modelName, 1 AS modelFolder
@@ -58,7 +58,7 @@
 				(BookmarksEntry.folderId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findBF_ByG_P">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findF_ByG_P">
 		<![CDATA[
 			SELECT
 				BookmarksFolder.folderId AS modelId, BookmarksFolder.name AS modelName, 0 AS modelFolder
@@ -69,7 +69,7 @@
 				(BookmarksFolder.parentFolderId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findBE_ByG_F_S">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findE_ByG_F_S">
 		<![CDATA[
 			SELECT
 				BookmarksEntry.entryId AS modelId, BookmarksEntry.name AS modelName, 1 AS modelFolder
@@ -81,7 +81,7 @@
 				(BookmarksEntry.status = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findBF_ByG_P_S">
+	<sql id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder.findF_ByG_P_S">
 		<![CDATA[
 			SELECT
 				BookmarksFolder.folderId AS modelId, BookmarksFolder.name AS modelName, 0 AS modelFolder
