@@ -149,21 +149,19 @@ public class AssetCategoryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
+
 		Locale locale = LocaleUtil.getDefault();
 
-		Map<Locale, String> categoryTitleMap = new HashMap<Locale, String>();
+		titleMap.put(locale, title);
 
-		categoryTitleMap.put(locale, title);
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		Map<Locale, String> categoryDescriptionMap =
-			new HashMap<Locale, String>();
-
-		categoryDescriptionMap.put(locale, StringPool.BLANK);
+		descriptionMap.put(locale, StringPool.BLANK);
 
 		return addCategory(
-			userId, AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
-			categoryTitleMap, categoryDescriptionMap, vocabularyId, null,
-			serviceContext);
+			userId, AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, titleMap,
+			descriptionMap, vocabularyId, null, serviceContext);
 	}
 
 	public void addCategoryResources(

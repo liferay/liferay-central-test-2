@@ -34,10 +34,10 @@ import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.impl.AssetEntryServiceImpl;
-import com.liferay.portlet.asset.util.AssetEntryTestUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -53,7 +53,8 @@ import org.junit.runner.RunWith;
 @Transactional
 public class AssetEntryQueryTest {
 
-	public void setUpAssetCategories() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		AssetVocabulary vocabulary =
@@ -105,278 +106,234 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAllAssetCategories1() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds = new long[] {_healthCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, false, 2);
+		testAssetCategories(new long[] {_healthCategoryId}, false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories2() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, false, 2);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId}, false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories3() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId, _foodCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, false, 1);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId, _foodCategoryId},
+			false, false, 1);
 	}
 
 	@Test
 	public void testAllAssetCategories4() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds = new long[] {
-			_healthCategoryId, _sportCategoryId, _foodCategoryId,
-			_travelCategoryId
-		};
-
-		testAssetCategories(assetCategoryIds, false, false, 0);
+		testAssetCategories(
+			new long[] {
+				_healthCategoryId, _sportCategoryId, _foodCategoryId,
+				_travelCategoryId
+			},
+			false, false, 0);
 	}
 
 	@Test
 	public void testAllAssetTags1() throws Exception {
-		String[] assetTagNames = new String[] {"liferay"};
-
-		testAssetTags(assetTagNames, false, false, 2);
+		testAssetTags(new String[] {"liferay"}, false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetTags2() throws Exception {
-		String[] assetTagNames = new String[] {"liferay", "architecture"};
-
-		testAssetTags(assetTagNames, false, false, 2);
+		testAssetTags(
+			new String[] {"liferay", "architecture"}, false, false, 2);
 	}
 
 	@Test
 	public void testAllAssetTags3() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services"};
-
-		testAssetTags(assetTagNames, false, false, 1);
+		testAssetTags(
+		new String[] {"liferay", "architecture", "services"}, false, false, 1);
 	}
 
 	@Test
 	public void testAllAssetTags4() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services", "osgi"};
-
-		testAssetTags(assetTagNames, false, false, 0);
+		testAssetTags(
+			new String[] {"liferay", "architecture", "services", "osgi"}, false,
+			false, 0);
 	}
 
 	@Test
 	public void testAnyAssetCategories1() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds = new long[] {_healthCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, false, 2);
+		testAssetCategories(new long[] {_healthCategoryId}, true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories2() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, false, 2);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId}, true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories3() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId, _foodCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, false, 2);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId, _foodCategoryId},
+			true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories4() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, false, 1);
+		testAssetCategories(
+			new long[] {_fashionCategoryId, _foodCategoryId}, true, false, 1);
 	}
 
 	@Test
 	public void testAnyAssetTags1() throws Exception {
-		String[] assetTagNames = new String[] {"liferay"};
-
-		testAssetTags(assetTagNames, true, false, 2);
+		testAssetTags(new String[] {"liferay"}, true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetTags2() throws Exception {
-		String[] assetTagNames = new String[] {"liferay", "architecture"};
-
-		testAssetTags(assetTagNames, true, false, 2);
+		testAssetTags(new String[] {"liferay", "architecture"}, true, false, 2);
 	}
 
 	@Test
 	public void testAnyAssetTags3() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services"};
-
-		testAssetTags(assetTagNames, true, false, 2);
+		testAssetTags(
+			new String[] {"liferay", "architecture", "services"}, true, false,
+			2);
 	}
 
 	@Test
 	public void testAnyAssetTags4() throws Exception {
-		String[] assetTagNames = new String[] {"modularity", "osgi"};
-
-		testAssetTags(assetTagNames, true, false, 1);
+		testAssetTags(new String[] {"modularity", "osgi"}, true, false, 1);
 	}
 
 	@Test
 	public void testNotAllAssetCategories1() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds = new long[] {_healthCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, true, 0);
+		testAssetCategories(new long[] {_healthCategoryId}, false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetCategories2() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, true, 0);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId}, false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetCategories3() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, true, 1);
+		testAssetCategories(
+			new long[] {_fashionCategoryId, _foodCategoryId}, false, true, 1);
 	}
 
 	@Test
 	public void testNotAllAssetCategories4() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId};
-
-		testAssetCategories(assetCategoryIds, false, true, 2);
+		testAssetCategories(
+			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId},
+			false, true, 2);
 	}
 
 	@Test
 	public void testNotAllAssetTags1() throws Exception {
-		String[] assetTagNames = new String[] {"liferay"};
-
-		testAssetTags(assetTagNames, false, true, 0);
+		testAssetTags(new String[] {"liferay"}, false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetTags2() throws Exception {
-		String[] assetTagNames = new String[] {"liferay", "architecture"};
-
-		testAssetTags(assetTagNames, false, true, 0);
+		testAssetTags(new String[] {"liferay", "architecture"}, false, true, 0);
 	}
 
 	@Test
 	public void testNotAllAssetTags3() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services"};
-
-		testAssetTags(assetTagNames, false, true, 1);
+		testAssetTags(
+			new String[] {"liferay", "architecture", "services"}, false, true,
+			1);
 	}
 
 	@Test
 	public void testNotAllAssetTags4() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services", "osgi"};
-
-		testAssetTags(assetTagNames, false, true, 2);
+		testAssetTags(
+			new String[] {"liferay", "architecture", "services", "osgi"}, false,
+			true, 2);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories1() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds = new long[] {_healthCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, true, 0);
+		testAssetCategories(new long[] {_healthCategoryId}, true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories2() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_healthCategoryId, _sportCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, true, 0);
+		testAssetCategories(
+			new long[] {_healthCategoryId, _sportCategoryId}, true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories3() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, true, 0);
+		testAssetCategories(
+			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId},
+			true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories4() throws Exception {
-		setUpAssetCategories();
-
-		long[] assetCategoryIds =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-
-		testAssetCategories(assetCategoryIds, true, true, 1);
+		testAssetCategories(
+			new long[] {_fashionCategoryId, _foodCategoryId}, true, true, 1);
 	}
 
 	@Test
 	public void testNotAnyAssetTags1() throws Exception {
-		String[] assetTagNames = new String[] {"liferay"};
-
-		testAssetTags(assetTagNames, true, true, 0);
+		testAssetTags(new String[] {"liferay"}, true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetTags2() throws Exception {
-		String[] assetTagNames = new String[] {"liferay", "architecture"};
-
-		testAssetTags(assetTagNames, true, true, 0);
+		testAssetTags(new String[] {"liferay", "architecture"}, true, true, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetTags3() throws Exception {
-		String[] assetTagNames =
-			new String[] {"liferay", "architecture", "services"};
-
-		testAssetTags(assetTagNames, true, true, 0);
+		testAssetTags(
+			new String[] {"liferay", "architecture", "services"}, true, true,
+			0);
 	}
 
 	@Test
 	public void testNotAnyAssetTags4() throws Exception {
-		String[] assetTagNames = new String[] {"modularity", "osgi"};
+		testAssetTags(new String[] {"modularity", "osgi"}, true, true, 1);
+	}
 
-		testAssetTags(assetTagNames, true, true, 1);
+	protected AssetEntryQuery buildAssetEntryQueryWithAssetCategoryIds(
+		AssetEntryQuery assetEntryQuery, long[] assetCategoryIds, boolean any,
+		boolean not) {
+
+		if (any && not) {
+			assetEntryQuery.setNotAnyCategoryIds(assetCategoryIds);
+		}
+		else if (!any && not) {
+			assetEntryQuery.setNotAllCategoryIds(assetCategoryIds);
+		}
+		else if (any && !not) {
+			assetEntryQuery.setAnyCategoryIds(assetCategoryIds);
+		}
+		else {
+			assetEntryQuery.setAllCategoryIds(assetCategoryIds);
+		}
+
+		return assetEntryQuery;
+	}
+
+	protected AssetEntryQuery buildAssetEntryQueryWithAssetTagIds(
+			AssetEntryQuery assetEntryQuery, long[] assetTagIds, boolean any,
+		boolean not) {
+
+		if (any && not) {
+			assetEntryQuery.setNotAnyTagIds(assetTagIds);
+		}
+		else if (!any && not) {
+			assetEntryQuery.setNotAllTagIds(assetTagIds);
+		}
+		else if (any && !not) {
+			assetEntryQuery.setAnyTagIds(assetTagIds);
+		}
+		else {
+			assetEntryQuery.setAllTagIds(assetTagIds);
+		}
+
+		return assetEntryQuery;
 	}
 
 	protected void testAssetCategories(
@@ -385,23 +342,12 @@ public class AssetEntryQueryTest {
 		throws Exception {
 
 		testAssetCategorization(
-			assetCategoryIds, null, "Skiing in Alps", _assetCategoryIds1, null,
-			"Keep your body in a good shape!", _assetCategoryIds2, null, any,
-			not, expectedResults);
+			assetCategoryIds, null, "Skiing in the Alps", _assetCategoryIds1,
+			null, "Keep your body in a good shape!", _assetCategoryIds2, null,
+			any, not, expectedResults);
 	}
 
-	protected void testAssetTags(
-			String[] assetTagNames, boolean any, boolean not,
-			int expectedResults)
-		throws Exception {
-
-		testAssetCategorization(
-			null, assetTagNames, "Liferay Architectural Approach", null,
-			_assetTagNames1, "Modularity with OSGI", null, _assetTagNames2, any,
-			not, expectedResults);
-	}
-
-	private void testAssetCategorization(
+	protected void testAssetCategorization(
 			long[] assetCategoryIds, String[] assetTagNames, String title1,
 			long[] assetCategoryIds1, String[] assetTagNames1, String title2,
 			long[] assetCategoryIds2, String[] assetTagNames2, boolean any,
@@ -419,7 +365,7 @@ public class AssetEntryQueryTest {
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		if (assetCategoryIds != null) {
-			assetEntryQuery = AssetEntryTestUtil.buildAssetEntryQueryCategories(
+			assetEntryQuery = buildAssetEntryQueryWithAssetCategoryIds(
 				assetEntryQuery, assetCategoryIds, any, not);
 		}
 
@@ -431,7 +377,7 @@ public class AssetEntryQueryTest {
 			assetTagIds = AssetTagLocalServiceUtil.getTagIds(
 				group.getGroupId(), assetTagNames);
 
-			assetEntryQuery = AssetEntryTestUtil.buildAssetEntryQueryTags(
+			assetEntryQuery = buildAssetEntryQueryWithAssetTagIds(
 				assetEntryQuery, assetTagIds, any, not);
 		}
 
@@ -476,7 +422,7 @@ public class AssetEntryQueryTest {
 		assetEntryQuery = new AssetEntryQuery();
 
 		if (assetCategoryIds != null) {
-			assetEntryQuery = AssetEntryTestUtil.buildAssetEntryQueryCategories(
+			assetEntryQuery = buildAssetEntryQueryWithAssetCategoryIds(
 				assetEntryQuery, assetCategoryIds, any, not);
 		}
 
@@ -484,7 +430,7 @@ public class AssetEntryQueryTest {
 			assetTagIds = AssetTagLocalServiceUtil.getTagIds(
 				group.getGroupId(), assetTagNames);
 
-			assetEntryQuery = AssetEntryTestUtil.buildAssetEntryQueryTags(
+			assetEntryQuery = buildAssetEntryQueryWithAssetTagIds(
 				assetEntryQuery, assetTagIds, any, not);
 		}
 
@@ -494,20 +440,26 @@ public class AssetEntryQueryTest {
 		Assert.assertEquals(initialEntries + expectedResults, allTagsEntries);
 	}
 
-	private long[] _assetCategoryIds1 = null;
-	private long[] _assetCategoryIds2 = null;
+	protected void testAssetTags(
+			String[] assetTagNames, boolean any, boolean not,
+			int expectedResults)
+		throws Exception {
 
-	private String[] _assetTagNames1 =
-		new String[] {"liferay", "architecture", "services"};
-	private String[] _assetTagNames2 =
-		new String[] {"liferay", "architecture", "modularity", "osgi"};
+		testAssetCategorization(
+			null, assetTagNames, "Liferay Architectural Approach", null,
+			new String[] {"liferay", "architecture", "services"},
+			"Modularity with OSGI", null,
+			new String[] {"liferay", "architecture", "modularity", "osgi"}, any,
+			not, expectedResults);
+	}
 
-	private long _fashionCategoryId = 0;
-	private long _foodCategoryId = 0;
-	private long _healthCategoryId = 0;
-	private long _sportCategoryId = 0;
-	private long _travelCategoryId = 0;
-
-	private long _vocabularyId = 0;
+	private long[] _assetCategoryIds1;
+	private long[] _assetCategoryIds2;
+	private long _fashionCategoryId;
+	private long _foodCategoryId;
+	private long _healthCategoryId;
+	private long _sportCategoryId;
+	private long _travelCategoryId;
+	private long _vocabularyId;
 
 }
