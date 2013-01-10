@@ -235,9 +235,7 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 		HttpServletRequest request) {
 
 		if (ServerDetector.isWebLogic()) {
-			if (!NonSerializableObjectRequestWrapper.isRequestWrapped(
-					request)) {
-
+			if (!NonSerializableObjectRequestWrapper.isWrapped(request)) {
 				request = new NonSerializableObjectRequestWrapper(request);
 			}
 		}
