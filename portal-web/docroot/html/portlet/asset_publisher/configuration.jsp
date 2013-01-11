@@ -83,7 +83,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 
 				<aui:option label="<%= _getName(themeDisplay, company.getGroup(), locale) %>" selected="<%= (groupIds.length == 1) && (themeDisplay.getCompanyGroupId() == groupIds[0]) %>" value="<%= _getScopeId(company.getGroup(), themeDisplay.getScopeGroupId()) %>" />
 
-				<optgroup label="-----------"></optgroup>
+				<optgroup label="----------"></optgroup>
 
 				<aui:option cssClass="advanced-options" label='<%= LanguageUtil.get(pageContext,"advanced-options") + "..." %>' selected="<%= (groupIds.length > 1) || ((groupIds.length == 1) && (groupIds[0] != themeDisplay.getScopeGroupId()) && (groupIds[0] != layoutScopeGroupId) && (groupIds[0] != themeDisplay.getCompanyGroupId())) %>" value="<%= false %>" />
 			</aui:select>
@@ -266,10 +266,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) throws Exception {
 	String name = null;
 
-	if (group.isLayoutPrototype()) {
-		name = LanguageUtil.get(locale, "default");
-	}
-	else if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
+	if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(LanguageUtil.get(locale, "current-site"));
@@ -290,6 +287,9 @@ private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) t
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		name = sb.toString();
+	}
+	else if (group.isLayoutPrototype()) {
+		name = LanguageUtil.get(locale, "default");
 	}
 	else {
 		name = HtmlUtil.escape(group.getDescriptiveName(locale));
