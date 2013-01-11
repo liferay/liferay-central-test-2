@@ -1277,57 +1277,40 @@ public class WebDriverToSeleniumBridge
 
 	protected List<WebElement> getWebElements(String locator) {
 		if (locator.startsWith("//")) {
-			List<WebElement> webElements = findElements(By.xpath(locator));
-
-			return webElements;
+			return findElements(By.xpath(locator));
 		}
 		else if (locator.startsWith("class=")) {
 			locator = locator.substring(6);
 
-			List<WebElement> webElements = findElements(By.className(locator));
-
-			return webElements;
+			return findElements(By.className(locator));
 		}
 		else if (locator.startsWith("css=")) {
 			locator = locator.substring(4);
 
-			List<WebElement> webElements = findElements(
-				By.cssSelector(locator));
-
-			return webElements;
+			return findElements(By.cssSelector(locator));
 		}
 		else if (locator.startsWith("link=")) {
 			locator = locator.substring(5);
 
-			List<WebElement> webElements = findElements(By.linkText(locator));
-
-			return webElements;
+			return findElements(By.linkText(locator));
 		}
 		else if (locator.startsWith("name=")) {
 			locator = locator.substring(5);
 
-			List<WebElement> webElements = findElements(By.name(locator));
-
-			return webElements;
+			return findElements(By.name(locator));
 		}
 		else if (locator.startsWith("tag=")) {
 			locator = locator.substring(4);
 
-			List<WebElement> webElements = findElements(By.tagName(locator));
-
-			return webElements;
+			return findElements(By.tagName(locator));
 		}
 		else if (locator.startsWith("xpath=") || locator.startsWith("xPath=")) {
 			locator = locator.substring(6);
 
-			List<WebElement> webElements = findElements(By.xpath(locator));
-
-			return webElements;
+			return findElements(By.xpath(locator));
 		}
 		else {
-			List<WebElement> webElements = findElements(By.id(locator));
-
-			return webElements;
+			return findElements(By.id(locator));
 		}
 	}
 

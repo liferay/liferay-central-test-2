@@ -52,13 +52,7 @@ public class LiferaySeleniumHelper {
 		LiferaySelenium liferaySelenium, String locator) {
 
 		if (liferaySelenium.isElementPresent(locator)) {
-			StringBundler sb = new StringBundler();
-
-			sb.append("able to find the locator \"");
-			sb.append(locator);
-			sb.append("\"\n");
-
-			BaseTestCase.fail(sb.toString());
+			BaseTestCase.fail("Element is present at " + locator);
 		}
 	}
 
@@ -66,13 +60,7 @@ public class LiferaySeleniumHelper {
 		LiferaySelenium liferaySelenium, String locator) {
 
 		if (liferaySelenium.isElementNotPresent(locator)) {
-			StringBundler sb = new StringBundler();
-
-			sb.append("unable to find the locator \"");
-			sb.append(locator);
-			sb.append("\"\n");
-
-			BaseTestCase.fail(sb.toString());
+			BaseTestCase.fail("Element is not present at " + locator);
 		}
 	}
 
