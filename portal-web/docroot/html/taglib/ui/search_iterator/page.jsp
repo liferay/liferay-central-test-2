@@ -176,9 +176,9 @@ int sortColumnIndex = -1;
 					</c:if>
 
 						<%
-						String headerNameValue;
+						String headerNameValue = null;
 
-						if (rowChecker == null || i > 0) {
+						if ((rowChecker == null) || (i > 0)) {
 							headerNameValue = LanguageUtil.get(pageContext, HtmlUtil.escape(headerName));
 						}
 						else {
