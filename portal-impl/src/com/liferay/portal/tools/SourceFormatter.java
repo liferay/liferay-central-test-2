@@ -739,22 +739,22 @@ public class SourceFormatter {
 		do {
 			String match = matcher.group();
 
-			String str = null;
+			String s = null;
 
 			if (pattern.equals(_sessionKeyPattern)) {
-				str = StringPool.COMMA;
+				s = StringPool.COMMA;
 			}
 			else if (pattern.equals(_taglibSessionKeyPattern)) {
-				str = "key=";
+				s = "key=";
 			}
 
-			int x = match.indexOf(str);
+			int x = match.indexOf(s);
 
 			if (x == -1) {
 				continue;
 			}
 
-			x = x + str.length();
+			x = x + s.length();
 
 			String substring = match.substring(x).trim();
 
