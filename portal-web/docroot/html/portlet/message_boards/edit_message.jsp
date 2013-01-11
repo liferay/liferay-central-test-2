@@ -105,9 +105,6 @@ if (Validator.isNull(redirect)) {
 	previewMessage.setSubject(subject);
 	previewMessage.setBody(body);
 
-	boolean editable = false;
-	boolean enablePermLink = true;
-
 	MBCategory category = null;
 
 	int depth = 0;
@@ -119,9 +116,9 @@ if (Validator.isNull(redirect)) {
 	request.setAttribute("edit_message.jsp-category", category);
 	request.setAttribute("edit_message.jsp-className", className);
 	request.setAttribute("edit_message.jsp-depth", depth);
-	request.setAttribute("edit_message.jsp-editable", editable);
-	request.setAttribute("edit-message.jsp-enablePermLink", enablePermLink);
+	request.setAttribute("edit_message.jsp-editable", Boolean.FALSE);
 	request.setAttribute("edit_message.jsp-message", previewMessage);
+	request.setAttribute("edit-message.jsp-showPermanentLink", Boolean.TRUE);
 	request.setAttribute("edit_message.jsp-thread", thread);
 	%>
 
@@ -448,9 +445,6 @@ if (Validator.isNull(redirect)) {
 		<liferay-ui:message key="replying-to" />:
 
 		<%
-		boolean editable = false;
-		boolean enablePermLink = true;
-
 		message = curParentMessage;
 		MBCategory category = null;
 
@@ -462,9 +456,9 @@ if (Validator.isNull(redirect)) {
 		request.setAttribute("edit_message.jsp-category", category);
 		request.setAttribute("edit_message.jsp-className", className);
 		request.setAttribute("edit_message.jsp-depth", depth);
-		request.setAttribute("edit_message.jsp-editable", editable);
-		request.setAttribute("edit-message.jsp-enablePermLink", enablePermLink);
+		request.setAttribute("edit_message.jsp-editable", Boolean.FALSE);
 		request.setAttribute("edit_message.jsp-message", message);
+		request.setAttribute("edit-message.jsp-showPermanentLink", Boolean.TRUE);
 		request.setAttribute("edit_message.jsp-thread", thread);
 		%>
 
