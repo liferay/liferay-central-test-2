@@ -83,17 +83,17 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 <c:if test="<%= (scopeGroup != null) && (!scopeGroup.hasStagingGroup() || scopeGroup.isStagingGroup()) && !portletName.equals(PortletKeys.RELATED_ASSETS) %>">
 
-		<%
-		for (long groupId : groupIds) {
-		%>
+	<%
+	for (long groupId : groupIds) {
+	%>
 
-			<div class="lfr-meta-actions add-asset-selector">
-				<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-			</div>
+		<div class="lfr-meta-actions add-asset-selector">
+			<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+		</div>
 
-		<%
-		}
-		%>
+	<%
+	}
+	%>
 
 </c:if>
 
