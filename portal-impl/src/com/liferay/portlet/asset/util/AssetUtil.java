@@ -210,8 +210,7 @@ public class AssetUtil {
 					String assetCategoryIds = entry.getValue();
 
 					addPortletURL.setParameter(
-						"assetCategoryIds".concat(
-							StringPool.UNDERLINE + assetVocabularyId),
+						"assetCategoryIds_" + assetVocabularyId,
 						assetCategoryIds);
 				}
 			}
