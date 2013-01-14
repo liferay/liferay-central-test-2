@@ -144,7 +144,7 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
-				StringBundler sb = new StringBundler(6);
+				StringBundler sb = new StringBundler(4);
 
 				sb.append("<img alt=\"\" src=\"");
 				sb.append(assetRenderer.getIconPath(renderRequest));
