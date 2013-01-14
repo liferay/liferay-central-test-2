@@ -16,7 +16,6 @@ package com.liferay.portal.atom;
 
 import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistry;
-import com.liferay.portal.kernel.atom.AtomException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -41,9 +40,7 @@ public class AtomCollectionAdapterRegistryImpl
 		return ListUtil.fromMapValues(_atomCollectionAdapters);
 	}
 
-	public void register(AtomCollectionAdapter<?> atomCollectionAdapter)
-		throws AtomException {
-
+	public void register(AtomCollectionAdapter<?> atomCollectionAdapter) {
 		if (_atomCollectionAdapters.containsKey(
 				atomCollectionAdapter.getCollectionName())) {
 
