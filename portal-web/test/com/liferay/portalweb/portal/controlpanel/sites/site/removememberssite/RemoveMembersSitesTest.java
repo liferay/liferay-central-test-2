@@ -62,8 +62,9 @@ public class RemoveMembersSitesTest extends BaseTestCase {
 					RuntimeVariables.replace("Manage Memberships"));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Users"),
-					selenium.getText("//div/ul/li[2]/span/a"));
-				selenium.clickAt("//div/ul/li[2]/span/a",
+					selenium.getText(
+						"//ul[@class='aui-tabview-list']/li[2]/span/a"));
+				selenium.clickAt("//ul[@class='aui-tabview-list']/li[2]/span/a",
 					RuntimeVariables.replace("Users"));
 				selenium.waitForPageToLoad("30000");
 				selenium.waitForElementPresent("//a[.='\u00ab Basic']");
