@@ -38,12 +38,6 @@ if (folder != null) {
 	repositoryId = folder.getRepositoryId();
 }
 
-Set<Long> folderSubscriptionClassPKs = null;
-
-if (themeDisplay.isSignedIn()) {
-	folderSubscriptionClassPKs = DLUtil.getFolderSubscriptionClassPKs(user.getUserId());
-}
-
 int status = WorkflowConstants.STATUS_APPROVED;
 
 if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
@@ -51,8 +45,6 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGr
 }
 
 long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayTemplateDDMTemplateId(themeDisplay, displayTemplate);
-
-request.setAttribute("view.jsp-folderSubscriptionClassPKs", folderSubscriptionClassPKs);
 %>
 
 <c:choose>

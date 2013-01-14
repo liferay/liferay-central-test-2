@@ -73,8 +73,6 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGr
 	status = WorkflowConstants.STATUS_ANY;
 }
 
-Set<Long> folderSubscriptionClassPKs = (Set<Long>)request.getAttribute("view.jsp-folderSubscriptionClassPKs");
-
 boolean folderSelected = GetterUtil.getBoolean((String)request.getAttribute("view_entries.jsp-folderSelected"));
 
 String modelResource = null;
@@ -295,6 +293,20 @@ if ((row == null) && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) |
 			</c:choose>
 
 			<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.SUBSCRIBE) && ((folder == null) || folder.isSupportsSubscribing()) %>">
+
+				<%
+				Set<Long> folderSubscriptionClassPKs = null;
+
+				if (themeDisplay.isSignedIn() && (folderSubscriptionClassPKs == null)) {
+					folderSubscriptionClassPKs = DLUtil.getFolderSubscriptionClassPKs(user.getUserId());
+
+					request.setAttribute("folder_action.jsp-folderSubscriptionClassPKs", folderSubscriptionClassPKs);
+				}
+				else {
+					folderSubscriptionClassPKs = (Set<Long>)request.getAttribute("folder_action.jsp-folderSubscriptionClassPKs");
+				}
+				%>
+
 				<c:choose>
 					<c:when test="<%= (folderSubscriptionClassPKs != null) && (folderSubscriptionClassPKs.contains(folderId) || ((folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) && folderSubscriptionClassPKs.contains(scopeGroupId))) %>">
 						<portlet:actionURL var="unsubscribeURL">
