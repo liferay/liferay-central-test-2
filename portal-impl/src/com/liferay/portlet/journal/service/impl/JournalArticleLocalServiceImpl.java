@@ -852,7 +852,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public JournalArticle fetchJournalArticle(String uuid, long groupId)
+	public JournalArticle fetchArticle(String uuid, long groupId)
 		throws SystemException {
 
 		return journalArticlePersistence.fetchByUUID_G(uuid, groupId);
