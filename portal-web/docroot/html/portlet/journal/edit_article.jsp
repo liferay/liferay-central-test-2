@@ -131,7 +131,6 @@ request.setAttribute("edit_article.jsp-structure", ddmStructure);
 request.setAttribute("edit_article.jsp-languageId", languageId);
 request.setAttribute("edit_article.jsp-defaultLanguageId", defaultLanguageId);
 request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
-request.setAttribute("edit_article.jsp-privateLayout", new Boolean(layout.getPrivateLayout()));
 %>
 
 <liferay-util:include page="/html/portlet/journal/article_header.jsp" />
@@ -164,7 +163,7 @@ request.setAttribute("edit_article.jsp-privateLayout", new Boolean(layout.getPri
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="privateLayout" type="hidden" value="<%= layout.getPrivateLayout() %>" />
+	<aui:input name="privateLayout" type="hidden" value="<%= layout.isPrivateLayout() %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="classNameId" type="hidden" value="<%= classNameId %>" />
 	<aui:input name="classPK" type="hidden" value="<%= classPK %>" />
