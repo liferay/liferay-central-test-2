@@ -65,9 +65,9 @@ public class DLCheckInCheckOutTest {
 			String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
 			ActionKeys.ADD_DOCUMENT);
 
-		_author = ServiceTestUtil.addUser("author", _group.getGroupId());
-
-		_overrider = ServiceTestUtil.addUser("overrider", _group.getGroupId());
+		_authorUser = ServiceTestUtil.addUser("author", _group.getGroupId());
+		_overriderUser = ServiceTestUtil.addUser(
+			"overrider", _group.getGroupId());
 
 		_serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId(), 0);
@@ -81,14 +81,13 @@ public class DLCheckInCheckOutTest {
 	public void tearDown() throws Exception {
 		DLAppServiceUtil.deleteFolder(_folder.getFolderId());
 
-		UserLocalServiceUtil.deleteUser(_author.getUserId());
-
-		UserLocalServiceUtil.deleteUser(_overrider.getUserId());
+		UserLocalServiceUtil.deleteUser(_authorUser.getUserId());
+		UserLocalServiceUtil.deleteUser(_overriderUser.getUserId());
 	}
 
 	@Test
 	public void testAdminOverrideCheckout() throws Exception {
-		overrideCheckout(_author, TestPropsValues.getUser(), true);
+		overrideCheckout(_authorUser, TestPropsValues.getUser(), true);
 	}
 
 	@Test
@@ -190,7 +189,7 @@ public class DLCheckInCheckOutTest {
 
 	@Test
 	public void testWithoutPermissionOverrideCheckout() throws Exception {
-		overrideCheckout(_author, _overrider, false);
+		overrideCheckout(_authorUser, _overriderUser, false);
 	}
 
 	@Test
@@ -204,9 +203,9 @@ public class DLCheckInCheckOutTest {
 
 		try {
 			UserLocalServiceUtil.setRoleUsers(
-				role.getRoleId(), new long[] {_overrider.getUserId()});
+				role.getRoleId(), new long[] {_overriderUser.getUserId()});
 
-			overrideCheckout(_author, _overrider, true);
+			overrideCheckout(_authorUser, _overriderUser, true);
 		}
 		finally {
 			RoleLocalServiceUtil.deleteRole(role.getRoleId());
@@ -215,9 +214,7 @@ public class DLCheckInCheckOutTest {
 
 	protected FileEntry createFileEntry(String fileName) throws Exception {
 		long repositoryId = _group.getGroupId();
-
 		long folderId = _folder.getFolderId();
-
 		InputStream inputStream = new UnsyncByteArrayInputStream(
 			_TEST_CONTENT.getBytes());
 
@@ -269,21 +266,21 @@ public class DLCheckInCheckOutTest {
 	}
 
 	protected void overrideCheckout(
-			User author, User overrider, boolean expectOverride)
+			User authorUser, User overriderUser, boolean expectOverride)
 		throws Exception {
 
-		String fileName = "OverrideCheckoutTest.txt";
-
-		ServiceTestUtil.setUser(author);
+		ServiceTestUtil.setUser(authorUser);
 
 		try {
+			String fileName = "OverrideCheckoutTest.txt";
+
 			FileEntry fileEntry = createFileEntry(fileName);
 
 			long fileEntryId = fileEntry.getFileEntryId();
 
 			DLAppServiceUtil.checkOutFileEntry(fileEntryId, _serviceContext);
 
-			ServiceTestUtil.setUser(overrider);
+			ServiceTestUtil.setUser(overriderUser);
 
 			try {
 				DLAppServiceUtil.cancelCheckOut(fileEntryId);
@@ -299,14 +296,14 @@ public class DLCheckInCheckOutTest {
 			}
 
 			if (expectOverride) {
-				ServiceTestUtil.setUser(author);
+				ServiceTestUtil.setUser(authorUser);
 
 				DLAppServiceUtil.checkOutFileEntry(
 					fileEntryId, _serviceContext);
 
 				updateFileEntry(fileEntryId, fileName);
 
-				ServiceTestUtil.setUser(overrider);
+				ServiceTestUtil.setUser(overriderUser);
 			}
 
 			try {
@@ -354,11 +351,11 @@ public class DLCheckInCheckOutTest {
 	private static final String _TEST_CONTENT =
 		"LIFERAY\nEnterprise. Open Source. For Life.";
 
-	private User _author;
+	private User _authorUser;
 	private FileEntry _fileEntry;
 	private Folder _folder;
 	private Group _group;
-	private User _overrider;
+	private User _overriderUser;
 	private ServiceContext _serviceContext;
 
 }
