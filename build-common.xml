@@ -755,7 +755,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/cobertura.ser" />
 					<jvmarg line="${junit.debug.jpda}" />
 					<jvmarg value="-Xmx${junit.java.mx}" />
-					<jvmarg value="-XX:MaxPermSize=${junit.java.MaxPermSize}" />
+					<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<jvmarg value="-Dfile.encoding=UTF-8" />
 					<jvmarg value="-Djava.net.preferIPv4Stack=true" />
@@ -804,7 +804,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/cobertura.ser" />
 			<jvmarg line="${junit.debug.jpda}" />
 			<jvmarg value="-Xmx${junit.java.mx}" />
-			<jvmarg value="-XX:MaxPermSize=${junit.java.MaxPermSize}" />
+			<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
 			<jvmarg value="-Dexternal-properties=${test.properties}" />
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 			<jvmarg value="-Djava.net.preferIPv4Stack=true" />
