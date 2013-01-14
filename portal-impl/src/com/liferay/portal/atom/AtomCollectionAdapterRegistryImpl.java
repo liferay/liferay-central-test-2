@@ -65,7 +65,7 @@ public class AtomCollectionAdapterRegistryImpl
 			atomCollectionAdapter.getCollectionName());
 	}
 
-	public static final Log _log = LogFactoryUtil.getLog(
+	public static Log _log = LogFactoryUtil.getLog(
 		AtomCollectionAdapterRegistryImpl.class);
 
 	private Map<String, AtomCollectionAdapter<?>> _atomCollectionAdapters =
