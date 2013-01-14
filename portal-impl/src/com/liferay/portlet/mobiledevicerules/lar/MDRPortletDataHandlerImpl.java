@@ -707,7 +707,6 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long targetGroupId = GetterUtil.getLong(
 			typeSettingsProperties.getProperty("groupId"));
-
 		boolean privateLayout = GetterUtil.getBoolean(
 			actionElement.attributeValue("private-layout"));
 
