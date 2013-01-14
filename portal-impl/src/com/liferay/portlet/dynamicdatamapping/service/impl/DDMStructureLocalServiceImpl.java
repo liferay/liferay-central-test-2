@@ -298,7 +298,7 @@ public class DDMStructureLocalServiceImpl
 		DDMStructure structure = ddmStructurePersistence.fetchByG_S(
 			groupId, structureKey);
 
-		if (!includeGlobalStructures || (structure != null)) {
+		if ((structure != null) || !includeGlobalStructures) {
 			return structure;
 		}
 
