@@ -371,6 +371,15 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchStructure(
+		long groupId, java.lang.String structureKey,
+		boolean includeGlobalStructures)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.fetchStructure(groupId, structureKey,
+			includeGlobalStructures);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchStructure(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureLocalService.fetchStructure(uuid, groupId);
