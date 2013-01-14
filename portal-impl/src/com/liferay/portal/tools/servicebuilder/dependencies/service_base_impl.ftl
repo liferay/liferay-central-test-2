@@ -282,8 +282,6 @@ import javax.sql.DataSource;
 		<#if entity.hasUuid() && entity.hasColumn("groupId")>
 			<#if entity.name == "Layout">
 				/**
-				 * Returns the ${entity.humanName} with the UUID and privateLayout in the group.
-				 *
 				 * @param uuid the UUID of ${entity.humanName}
 				 * @param groupId the group id of the ${entity.humanName}
 				 * @param privateLayout whether the ${entity.humanName} is private to the group

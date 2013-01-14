@@ -828,8 +828,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the layout with the UUID and privateLayout in the group.
-	 *
 	 * @param  uuid the layout's UUID
 	 * @param  groupId the primary key of the group
 	 * @param  privateLayout whether the layout is private to the group
