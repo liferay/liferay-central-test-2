@@ -59,10 +59,10 @@ public class User_JoinSitesRestrictedTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//div[@class='portlet-body']/div"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-success'])[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"Your request was sent. You will receive a reply by email."),
-			selenium.getText("//div[@class='portlet-body']/div[2]"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-success'])[2]"));
 		assertTrue(selenium.isPartialText(
 				"//tr[contains(.,'Site Name')]/td[1]", "Site Name"));
 		assertTrue(selenium.isPartialText(
