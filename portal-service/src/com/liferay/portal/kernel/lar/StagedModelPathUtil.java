@@ -25,37 +25,29 @@ import java.io.Serializable;
  * @author Mate Thurzo
  * @author Daniel Kocsis
  */
-public class ExportImportPathUtil {
+public class StagedModelPathUtil {
 
-	public static final String ROOT_PATH_GROUPS = "/groups/";
+	public static String getPath(
+		PortletDataContext portletDataContext, String className, long classPK) {
 
-	public static String getEntityPath(Object entity) {
-		if (!(entity instanceof StagedModel)) {
-			return StringPool.BLANK;
-		}
+		return getPath(
+			portletDataContext.getSourceGroupId(), className, classPK);
+	}
 
-		StagedModel stagedModel = (StagedModel)entity;
+	public static String getPath(StagedModel stagedModel) {
+		ClassedModel classedModel = (ClassedModel)stagedModel;
 
-		ClassedModel classedModel = (ClassedModel)entity;
-
-		return getEntityPath(
+		return getPath(
 			stagedModel.getGroupId(), classedModel.getModelClassName(),
 			classedModel.getPrimaryKeyObj());
 	}
 
-	public static String getEntityPath(
-		String className, long classPK, PortletDataContext portletDataContext) {
-
-		return getEntityPath(
-			portletDataContext.getSourceGroupId(), className, classPK);
-	}
-
-	protected static String getEntityPath(
+	protected static String getPath(
 		long groupId, String className, Serializable primaryKeyObj) {
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append(ROOT_PATH_GROUPS);
+		sb.append("/groups/");
 		sb.append(groupId);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(className);
