@@ -2157,7 +2157,7 @@ public class StagingImpl implements Staging {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to set recent layout revision id", pe);
+				_log.warn("Unable to set recent layout revision ID", pe);
 			}
 		}
 
