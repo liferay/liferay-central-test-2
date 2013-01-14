@@ -98,7 +98,7 @@ public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 			int graceLimit, boolean lockout, int maxFailure,
 			long lockoutDuration, long resetFailureCount,
 			long resetTicketMaxAge)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		PasswordPolicyPermissionUtil.check(
 			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
