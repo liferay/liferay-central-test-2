@@ -429,18 +429,17 @@ public class DLImpl implements DL {
 	public Set<Long> getFolderSubscriptionClassPKs(long userId)
 		throws SystemException {
 
-		List<Subscription> folderSubscriptions =
+		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getUserSubscriptions(
 				userId, Folder.class.getName());
 
-		Set<Long> folderSubscriptionClassPKs = new HashSet<Long>(
-			folderSubscriptions.size());
+		Set<Long> classPKs = new HashSet<Long>(subscriptions.size());
 
-		for (Subscription subscription : folderSubscriptions) {
-			folderSubscriptionClassPKs.add(subscription.getClassPK());
+		for (Subscription subscription : subscriptions) {
+			classPKs.add(subscription.getClassPK());
 		}
 
-		return folderSubscriptionClassPKs;
+		return classPKs;
 	}
 
 	public String getGenericName(String extension) {

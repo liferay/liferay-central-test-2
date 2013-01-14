@@ -308,18 +308,17 @@ public class MBUtil {
 	public static Set<Long> getCategorySubscriptionClassPKs(long userId)
 		throws SystemException {
 
-		List<Subscription> categorySubscriptions =
+		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getUserSubscriptions(
 				userId, MBCategory.class.getName());
 
-		Set<Long> categorySubscriptionClassPKs = new HashSet<Long>(
-			categorySubscriptions.size());
+		Set<Long> classPKs = new HashSet<Long>(subscriptions.size());
 
-		for (Subscription subscription : categorySubscriptions) {
-			categorySubscriptionClassPKs.add(subscription.getClassPK());
+		for (Subscription subscription : subscriptions) {
+			classPKs.add(subscription.getClassPK());
 		}
 
-		return categorySubscriptionClassPKs;
+		return classPKs;
 	}
 
 	public static String getEmailFromAddress(
@@ -647,18 +646,17 @@ public class MBUtil {
 	public static Set<Long> getThreadSubscriptionClassPKs(long userId)
 		throws SystemException {
 
-		List<Subscription> threadSubscriptions =
+		List<Subscription> subscriptions =
 			SubscriptionLocalServiceUtil.getUserSubscriptions(
 				userId, MBThread.class.getName());
 
-		Set<Long> threadSubscriptionClassPKs = new HashSet<Long>(
-			threadSubscriptions.size());
+		Set<Long> classPKs = new HashSet<Long>(subscriptions.size());
 
-		for (Subscription subscription : threadSubscriptions) {
-			threadSubscriptionClassPKs.add(subscription.getClassPK());
+		for (Subscription subscription : subscriptions) {
+			classPKs.add(subscription.getClassPK());
 		}
 
-		return threadSubscriptionClassPKs;
+		return classPKs;
 	}
 
 	public static Date getUnbanDate(MBBan ban, int expireInterval) {

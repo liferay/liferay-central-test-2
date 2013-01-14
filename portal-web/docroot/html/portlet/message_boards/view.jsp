@@ -34,7 +34,6 @@ Set<Long> threadSubscriptionClassPKs = null;
 
 if (themeDisplay.isSignedIn()) {
 	categorySubscriptionClassPKs = MBUtil.getCategorySubscriptionClassPKs(user.getUserId());
-
 	threadSubscriptionClassPKs = MBUtil.getThreadSubscriptionClassPKs(user.getUserId());
 }
 

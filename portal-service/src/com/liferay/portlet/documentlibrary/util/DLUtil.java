@@ -165,7 +165,7 @@ public class DLUtil {
 	}
 
 	public static Set<Long> getFolderSubscriptionClassPKs(long userId)
-			throws SystemException {
+		throws SystemException {
 
 		return getDL().getFolderSubscriptionClassPKs(userId);
 	}
