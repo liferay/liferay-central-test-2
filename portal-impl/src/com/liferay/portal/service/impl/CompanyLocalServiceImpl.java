@@ -206,6 +206,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			// Account
 
+			String name = webId;
+
+			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+				name = PropsValues.COMPANY_DEFAULT_NAME;
+			}
+
 			String legalName = null;
 			String legalId = null;
 			String legalType = null;
@@ -214,12 +220,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String industry = null;
 			String type = null;
 			String size = null;
-
-			String name = webId;
-
-			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-				name = PropsValues.COMPANY_DEFAULT_NAME;
-			}
 
 			updateAccount(
 				company, name, legalName, legalId, legalType, sicCode,
