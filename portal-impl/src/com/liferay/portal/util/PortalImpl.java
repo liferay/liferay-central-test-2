@@ -3865,8 +3865,8 @@ public class PortalImpl implements Portal {
 				scopeGroup.getParentGroupId(), companyGroup.getGroupId()
 			};
 		}
-		else if (scopeGroup.isRegularSite() ||
-				 scopeGroup.isLayoutSetPrototype()) {
+		else if (scopeGroup.isLayoutSetPrototype() ||
+				 scopeGroup.isRegularSite()) {
 
 			return new long[] {groupId, companyGroup.getGroupId()};
 		}
