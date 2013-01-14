@@ -1228,7 +1228,7 @@ public class LayoutImporter {
 
 					typeSettingsProperties.setProperty(
 						"privateLayout",
-						String.valueOf(linkedLayout.getPrivateLayout()));
+						String.valueOf(linkedLayout.isPrivateLayout()));
 					typeSettingsProperties.setProperty(
 						"linkToLayoutId",
 						String.valueOf(linkedLayout.getLayoutId()));

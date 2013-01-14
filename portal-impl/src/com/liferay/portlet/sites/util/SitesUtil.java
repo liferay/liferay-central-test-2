@@ -500,7 +500,7 @@ public class SitesUtil {
 
 		if (newPlid <= 0) {
 			Layout firstLayout = LayoutLocalServiceUtil.fetchFirstLayout(
-				layoutSet.getGroupId(), layoutSet.getPrivateLayout(),
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (firstLayout != null) {
@@ -666,8 +666,9 @@ public class SitesUtil {
 
 			if (LayoutLocalServiceUtil.hasLayoutSetPrototypeLayout(
 					layoutSet.getLayoutSetPrototypeUuid(),
+					layout.getCompanyId(),
 					layout.getSourcePrototypeLayoutUuid(),
-					layout.getCompanyId(), layout.isPrivateLayout())) {
+					layout.isPrivateLayout())) {
 
 				return false;
 			}
