@@ -489,11 +489,11 @@ public class ServiceTestUtil {
 		TrashHandlerRegistryUtil.register(new DLFileEntryTrashHandler());
 		TrashHandlerRegistryUtil.register(new DLFileShortcutTrashHandler());
 		TrashHandlerRegistryUtil.register(new DLFolderTrashHandler());
+		TrashHandlerRegistryUtil.register(new JournalArticleTrashHandler());
 		TrashHandlerRegistryUtil.register(new MBCategoryTrashHandler());
 		TrashHandlerRegistryUtil.register(new MBThreadTrashHandler());
 		TrashHandlerRegistryUtil.register(new WikiNodeTrashHandler());
 		TrashHandlerRegistryUtil.register(new WikiPageTrashHandler());
-		TrashHandlerRegistryUtil.register(new JournalArticleTrashHandler());
 
 		// Workflow
 
