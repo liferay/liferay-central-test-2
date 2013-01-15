@@ -124,7 +124,6 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 			}
 
 			qPos.add(groupId);
-
 			qPos.add(WorkflowConstants.STATUS_IN_TRASH);
 
 			if (folderId >= 0) {

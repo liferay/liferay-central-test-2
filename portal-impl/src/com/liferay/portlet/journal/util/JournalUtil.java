@@ -449,27 +449,27 @@ public class JournalUtil {
 			return themeDisplay.translate("home");
 		}
 
-		JournalFolder journalFolder = JournalFolderLocalServiceUtil.getFolder(
+		JournalFolder folder = JournalFolderLocalServiceUtil.getFolder(
 			folderId);
 
-		List<JournalFolder> journalFolders = journalFolder.getAncestors();
+		List<JournalFolder> folders = folder.getAncestors();
 
-		Collections.reverse(journalFolders);
+		Collections.reverse(folders);
 
-		StringBundler sb = new StringBundler((journalFolders.size() * 3) + 5);
+		StringBundler sb = new StringBundler((folders.size() * 3) + 5);
 
 		sb.append(themeDisplay.translate("home"));
 		sb.append(StringPool.SPACE);
 
-		for (JournalFolder curJournalFolder : journalFolders) {
+		for (JournalFolder curFolder : folders) {
 			sb.append(StringPool.RAQUO);
 			sb.append(StringPool.SPACE);
-			sb.append(curJournalFolder.getName());
+			sb.append(curFolder.getName());
 		}
 
 		sb.append(StringPool.RAQUO);
 		sb.append(StringPool.SPACE);
-		sb.append(journalFolder.getName());
+		sb.append(folder.getName());
 
 		return sb.toString();
 	}
