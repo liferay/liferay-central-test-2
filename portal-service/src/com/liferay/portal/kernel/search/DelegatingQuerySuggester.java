@@ -18,7 +18,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.HashMap;
+import edu.emory.mathcs.backport.java.util.Collections;
+
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class DelegatingQuerySuggester implements QuerySuggester {
 				_log.debug("No query suggester available");
 			}
 
-			return _EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
 		return _querySuggester.spellCheckKeywords(searchContext, max);
@@ -73,9 +74,6 @@ public class DelegatingQuerySuggester implements QuerySuggester {
 
 		return _querySuggester.suggestKeywordQueries(searchContext, max);
 	}
-
-	private static final Map<String, List<String>> _EMPTY_MAP =
-		new HashMap<String, List<String>>();
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DelegatingQuerySuggester.class);
