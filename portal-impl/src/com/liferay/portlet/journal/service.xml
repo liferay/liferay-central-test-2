@@ -131,7 +131,7 @@
 			<finder-column name="folderId" />
 			<finder-column name="status" arrayable-operator="OR" />
 		</finder>
-		<finder name="G_F_notST" return-type="Collection">
+		<finder name="G_F_NotST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="folderId" />
 			<finder-column name="status" comparator="!=" />
