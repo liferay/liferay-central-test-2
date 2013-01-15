@@ -37,7 +37,7 @@ public class DelegatingQuerySuggester implements QuerySuggester {
 
 		if (_querySuggester == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No query suggester available");
+				_log.debug("No query suggester configured");
 			}
 
 			return StringPool.BLANK;
@@ -52,7 +52,7 @@ public class DelegatingQuerySuggester implements QuerySuggester {
 
 		if (_querySuggester == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No query suggester available");
+				_log.debug("No query suggester configured");
 			}
 
 			return Collections.emptyMap();
@@ -66,7 +66,7 @@ public class DelegatingQuerySuggester implements QuerySuggester {
 
 		if (_querySuggester == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No query suggester available");
+				_log.debug("No query suggester configured");
 			}
 
 			return StringPool.EMPTY_ARRAY;
