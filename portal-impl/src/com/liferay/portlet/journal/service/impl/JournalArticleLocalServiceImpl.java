@@ -1351,13 +1351,6 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByG_F(groupId, folderId);
 	}
 
-	public int getArticlesCount(long groupId, long folderId, int notStatus)
-		throws SystemException {
-
-		return journalArticlePersistence.countByG_F_notST(
-			groupId, folderId, notStatus);
-	}
-
 	public List<JournalArticle> getCompanyArticles(
 			long companyId, double version, int status, int start, int end)
 		throws SystemException {
@@ -1614,6 +1607,13 @@ public class JournalArticleLocalServiceImpl
 		return article.getVersion();
 	}
 
+	public int getNotInTrashArticlesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return journalArticlePersistence.countByG_F_NotST(
+			groupId, folderId, WorkflowConstants.STATUS_IN_TRASH);
+	}
+
 	public List<JournalArticle> getStructureArticles(
 			long groupId, String structureId)
 		throws SystemException {
@@ -1713,7 +1713,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articleVersions =
-			journalArticleLocalService.getArticles(
+			journalArticlePersistence.findByG_A(
 				article.getGroupId(), article.getArticleId());
 
 		articleVersions = ListUtil.sort(
@@ -1728,8 +1728,7 @@ public class JournalArticleLocalServiceImpl
 			userId, article.getId(), WorkflowConstants.STATUS_IN_TRASH,
 			workflowContext, new ServiceContext());
 
-		// Remove the existing index because we are changing the primary key of
-		// the Lucene's document (articleId)
+		// Remove the existing index because we are changing article ID
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			JournalArticle.class);
@@ -1742,7 +1741,7 @@ public class JournalArticleLocalServiceImpl
 		String trashArticleId = TrashUtil.getTrashTitle(
 			trashEntry.getEntryId());
 
-		if ((articleVersions != null) && !articleVersions.isEmpty()) {
+		if (!articleVersions.isEmpty()) {
 			for (JournalArticle curArticleVersion : articleVersions) {
 				curArticleVersion.setArticleId(trashArticleId);
 
@@ -1821,8 +1820,7 @@ public class JournalArticleLocalServiceImpl
 	public void restoreArticleFromTrash(long userId, JournalArticle article)
 		throws PortalException, SystemException {
 
-		// Remove the existing index because we are changing the primary key of
-		// the Lucene's document (articleId)
+		// Remove the existing index because we are changing article ID
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			JournalArticle.class);
@@ -1833,10 +1831,10 @@ public class JournalArticleLocalServiceImpl
 			article.getArticleId());
 
 		List<JournalArticle> articleVersions =
-			journalArticleLocalService.getArticles(
+			journalArticlePersistence.findByG_A(
 				article.getGroupId(), article.getArticleId());
 
-		if ((articleVersions != null) && !articleVersions.isEmpty()) {
+		if (!articleVersions.isEmpty()) {
 			for (JournalArticle curArticleVersion : articleVersions) {
 				curArticleVersion.setArticleId(trashArticleId);
 
@@ -1868,6 +1866,7 @@ public class JournalArticleLocalServiceImpl
 		workflowContext.put("trashVersions", (Serializable)trashVersions);
 
 		ServiceContext serviceContext = new ServiceContext();
+
 		serviceContext.setScopeGroupId(article.getGroupId());
 
 		updateStatus(
@@ -1898,7 +1897,7 @@ public class JournalArticleLocalServiceImpl
 			int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_F_C_notS_A_V_T_D_C_T_S_T_D_S_R(
+		return journalArticleFinder.findByC_G_F_C_NotS_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, type, structureId, templateId,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator,
@@ -1914,7 +1913,7 @@ public class JournalArticleLocalServiceImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_F_C_notS_A_V_T_D_C_T_S_T_D_S_R(
+		return journalArticleFinder.findByC_G_F_C_NotS_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, folderIds, classNameId, articleId, version,
 			title, description, content, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, status, reviewDate, andOperator,
