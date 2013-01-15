@@ -47,37 +47,33 @@ public class ModuleFrameworkAdapterHelper {
 
 			File[] files = coreDir.listFiles();
 
-			URL[] classpath = new URL[files.length];
+			URL[] urls = new URL[files.length];
 
-			for (int i = 0; i < classpath.length; i++) {
-				classpath[i] = new URL("file:" + files[i].getAbsolutePath());
+			for (int i = 0; i < urls.length; i++) {
+				urls[i] = new URL("file:" + files[i].getAbsolutePath());
 			}
 
 			_classLoader = new ModuleFrameworkClassLoader(
-				classpath, PACLClassLoaderUtil.getPortalClassLoader());
+				urls, PACLClassLoaderUtil.getPortalClassLoader());
 
 			return _classLoader;
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unexpected error while configuring the custom classloader " +
-					"for the module framework. It will be unusable!");
+				"Unable to configure the class loader for the module " +
+					"framework");
 
 			throw new RuntimeException(e);
 		}
 	}
 
-	public ModuleFrameworkAdapterHelper(String classname) {
+	public ModuleFrameworkAdapterHelper(String className) {
 		try {
-			_adaptedInstance = InstanceFactory.newInstance(
-				getClassLoader(), classname);
+			_adaptedObject = InstanceFactory.newInstance(
+				getClassLoader(), className);
 		}
 		catch (Exception e) {
-			_log.error(
-				"Unexpected error has ocurred while loading module framework" +
-					". It will be unusable");
-
-			// not able to recover on this kind of fail
+			_log.error("Unable to load the module framework");
 
 			throw new RuntimeException(e);
 		}
@@ -89,13 +85,13 @@ public class ModuleFrameworkAdapterHelper {
 		try {
 			Method method = searchMethod(methodName, parameterTypes);
 
-			return method.invoke(_adaptedInstance, parameters);
+			return method.invoke(_adaptedObject, parameters);
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-		}
+			_log.error(e, e);
 
-		throw new RuntimeException("Unexpected in module framework");
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Object execute(String methodName, Object...parameters) {
@@ -109,16 +105,16 @@ public class ModuleFrameworkAdapterHelper {
 		throws Exception {
 
 		MethodKey methodKey = new MethodKey(
-			_adaptedInstance.getClass(), methodName, parameterTypes);
+			_adaptedObject.getClass(), methodName, parameterTypes);
 
-		if (_methodsCache.containsKey(methodKey)) {
-			return _methodsCache.get(methodKey);
+		if (_methods.containsKey(methodKey)) {
+			return _methods.get(methodKey);
 		}
 
 		Method method = ReflectionUtil.getDeclaredMethod(
-			_adaptedInstance.getClass(), methodName, parameterTypes);
+			_adaptedObject.getClass(), methodName, parameterTypes);
 
-		_methodsCache.put(methodKey, method);
+		_methods.put(methodKey, method);
 
 		return method;
 	}
@@ -127,9 +123,9 @@ public class ModuleFrameworkAdapterHelper {
 		ModuleFrameworkAdapterHelper.class);
 
 	private static ClassLoader _classLoader;
-	private static Map<MethodKey, Method> _methodsCache =
+	private static Map<MethodKey, Method> _methods =
 		new HashMap<MethodKey, Method>();
 
-	private Object _adaptedInstance;
+	private Object _adaptedObject;
 
 }

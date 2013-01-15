@@ -12,12 +12,10 @@
  * details.
  */
 
-package com.liferay.osgi.bootstrap.impl;
+package com.liferay.osgi.bootstrap;
 
 import aQute.libg.header.OSGiHeader;
 
-import com.liferay.osgi.bootstrap.ModuleFramework;
-import com.liferay.osgi.bootstrap.ModuleFrameworkUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

@@ -14,6 +14,8 @@
 
 package com.liferay.portal.module.framework;
 
+import java.io.IOException;
+
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -30,19 +32,18 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 	public ModuleFrameworkClassLoader(URL[] urls, ClassLoader parent) {
 		super(urls, parent);
 
-		// On some app servers we could find their own OSGI framework in the
-		// boostrap classloader
+		// Some application servers include their own OSGi framework in the
+		// bootstrap class loader
 
-		// _system = getSystemClassLoader();
-
+		//_systemClassLoader = getSystemClassLoader();
 	}
 
 	@Override
 	public URL getResource(String name) {
 		URL url = null;
 
-		if (_system != null) {
-			url = _system.getResource(name);
+		if (_systemClassLoader != null) {
+			url = _systemClassLoader.getResource(name);
 		}
 
 		if (url == null) {
@@ -57,30 +58,28 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 	}
 
 	@Override
-	public Enumeration<URL> getResources(String name)
-		throws java.io.IOException {
+	public Enumeration<URL> getResources(String name) throws IOException {
+		final List<URL> urls = new ArrayList<URL>();
 
 		Enumeration<URL> systemURLs = null;
 
-		if (_system != null) {
-			systemURLs = _system.getResources(name);
+		if (_systemClassLoader != null) {
+			systemURLs = _systemClassLoader.getResources(name);
 		}
-
-		Enumeration<URL> localURLs = findResources(name);
-
-		Enumeration<URL> parentURLs = null;
-
-		if (getParent() != null) {
-			parentURLs = getParent().getResources(name);
-		}
-
-		final List<URL> urls = new ArrayList<URL>();
-
-		// the order of this operations is important
 
 		urls.addAll(_buildURLs(systemURLs));
 
+		Enumeration<URL> localURLs = findResources(name);
+
 		urls.addAll(_buildURLs(localURLs));
+
+		Enumeration<URL> parentURLs = null;
+
+		ClassLoader parentClassLoader = getParent();
+
+		if (parentClassLoader != null) {
+			parentURLs = parentClassLoader.getResources(name);
+		}
 
 		urls.addAll(_buildURLs(parentURLs));
 
@@ -94,24 +93,22 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 			public URL nextElement() {
 				return iterator.next();
 			}
+
 		};
 	}
 
 	@Override
-	protected synchronized Class<?> loadClass(
-		String name, boolean resolve) throws ClassNotFoundException {
+	protected synchronized Class<?> loadClass(String name, boolean resolve)
+		throws ClassNotFoundException {
 
 		Class<?> clazz = findLoadedClass(name);
 
 		if (clazz == null) {
-			if (_system != null) {
+			if (_systemClassLoader != null) {
 				try {
-					clazz = _system.loadClass(name);
+					clazz = _systemClassLoader.loadClass(name);
 				}
-				catch (ClassNotFoundException classNotFoundException) {
-
-					// Ignore it!
-
+				catch (ClassNotFoundException cnfe) {
 				}
 			}
 
@@ -119,7 +116,7 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 				try {
 					clazz = findClass(name);
 				}
-				catch (ClassNotFoundException classNotFoundException) {
+				catch (ClassNotFoundException cnfe) {
 					clazz = super.loadClass(name, resolve);
 				}
 			}
@@ -146,6 +143,6 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 		return urls;
 	}
 
-	private ClassLoader _system;
+	private ClassLoader _systemClassLoader;
 
 }

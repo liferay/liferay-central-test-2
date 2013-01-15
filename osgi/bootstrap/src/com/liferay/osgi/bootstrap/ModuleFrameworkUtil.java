@@ -14,7 +14,6 @@
 
 package com.liferay.osgi.bootstrap;
 
-import com.liferay.osgi.bootstrap.impl.ModuleFrameworkImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.io.InputStream;
@@ -44,8 +43,9 @@ public class ModuleFrameworkUtil {
 	public static ModuleFramework getModuleFramework() {
 		if (_moduleFramework == null) {
 
-			// This can't be injected by Spring since we're running before it,
-			// but we're making it inject-able for testing.
+			// This class cannot be injected by Spring since it is used before
+			// Spring is initialized. However, this class can be injected for
+			// testing purposes.
 
 			_moduleFramework = new ModuleFrameworkImpl();
 		}

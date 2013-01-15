@@ -14,10 +14,7 @@
 
 package com.liferay.portal.module.framework;
 
-import java.io.IOException;
-
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +38,7 @@ public class ModuleFrameworkServletAdapter extends HttpServlet {
 	}
 
 	@Override
-	public void init(ServletConfig servletConfig) throws ServletException {
+	public void init(ServletConfig servletConfig) {
 		_moduleFrameworkAdapterHelper.exec(
 			"init", new Class[] {ServletConfig.class}, servletConfig);
 	}
@@ -62,8 +59,7 @@ public class ModuleFrameworkServletAdapter extends HttpServlet {
 
 	@Override
 	protected void service(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		_moduleFrameworkAdapterHelper.exec(
 			"service",
