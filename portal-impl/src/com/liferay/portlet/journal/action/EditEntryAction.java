@@ -59,7 +59,6 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Sergio González
- * @author Sergio González
  */
 public class EditEntryAction extends PortletAction {
 
