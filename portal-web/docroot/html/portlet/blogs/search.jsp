@@ -59,12 +59,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 		searchContext.setStart(searchContainer.getStart());
 
 		Hits hits = indexer.search(searchContext);
-
-		List<BlogsEntry> entries = BlogsUtil.getEntries(hits);
 		%>
 
 		<liferay-ui:search-container-results
-			results="<%= entries %>"
+			results="<%= BlogsUtil.getEntries(hits) %>"
 			total="<%= hits.getLength() %>"
 		/>
 
@@ -103,7 +101,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		<br /><br />
 
-		<liferay-ui:search-iterator/>
+		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 </aui:form>
 

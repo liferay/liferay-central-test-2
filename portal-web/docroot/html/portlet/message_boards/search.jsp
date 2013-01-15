@@ -84,12 +84,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 		searchContext.setStart(searchContainer.getStart());
 
 		Hits hits = indexer.search(searchContext);
-
-		List<MBMessage> messages = MBUtil.getEntries(hits);
 		%>
 
 		<liferay-ui:search-container-results
-			results="<%= messages %>"
+			results="<%= MBUtil.getEntries(hits) %>"
 			total="<%= hits.getLength() %>"
 		/>
 
@@ -101,11 +99,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 			<%
 			MBCategory category = message.getCategory();
 
-			PortletURL categoryUrl = renderResponse.createRenderURL();
+			PortletURL categoryURL = renderResponse.createRenderURL();
 
-			categoryUrl.setParameter("struts_action", "/message_boards/view");
-			categoryUrl.setParameter("redirect", currentURL);
-			categoryUrl.setParameter("mbCategoryId", String.valueOf(category.getCategoryId()));
+			categoryURL.setParameter("struts_action", "/message_boards/view");
+			categoryURL.setParameter("redirect", currentURL);
+			categoryURL.setParameter("mbCategoryId", String.valueOf(category.getCategoryId()));
 
 			// Thread and message
 
@@ -124,7 +122,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			/>
 
 			<liferay-ui:search-container-column-text
-				href="<%= categoryUrl %>"
+				href="<%= categoryURL %>"
 				name="category"
 				value="<%= HtmlUtil.escape(category.getName()) %>"
 			/>

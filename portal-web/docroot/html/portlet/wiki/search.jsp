@@ -72,12 +72,10 @@ portletURL.setParameter("keywords", keywords);
 		searchContext.setStart(searchContainer.getStart());
 
 		Hits hits = indexer.search(searchContext);
-
-		List<WikiPage> pages = WikiUtil.getEntries(hits);
 		%>
 
 		<liferay-ui:search-container-results
-			results="<%= pages %>"
+			results="<%= WikiUtil.getEntries(hits) %>"
 			total="<%= hits.getLength() %>"
 		/>
 
