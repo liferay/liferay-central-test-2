@@ -886,8 +886,7 @@ public class SitesUtil {
 			Layout sourcePrototypeLayout =
 				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
 					sourcePrototypeLayoutUuid,
-					layoutSetPrototypeGroup.getGroupId(),
-					true);
+					layoutSetPrototypeGroup.getGroupId(), true);
 
 			doMergeLayoutPrototypeLayout(
 				layoutSetPrototypeGroup, sourcePrototypeLayout);
