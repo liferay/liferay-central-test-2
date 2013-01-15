@@ -174,13 +174,12 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Override
-	protected int getBaseModelsNotInTrashCount(BaseModel<?> parentBaseModel)
+	protected int getNotInTrashBaseModelsCount(BaseModel<?> parentBaseModel)
 		throws Exception {
 
-		return JournalArticleLocalServiceUtil.getArticlesCount(
+		return JournalArticleLocalServiceUtil.getNotInTrashArticlesCount(
 			((Group)parentBaseModel).getGroupId(),
-			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			WorkflowConstants.STATUS_IN_TRASH);
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	@Override
