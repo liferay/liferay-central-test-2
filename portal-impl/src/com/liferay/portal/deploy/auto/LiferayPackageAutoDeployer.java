@@ -92,7 +92,6 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 				InputStream inputStream = zipFile.getInputStream(zipEntry);
 
 				if (zipEntryFileName.equals("liferay-marketplace.properties")) {
-
 					inputStream = zipFile.getInputStream(zipEntry);
 
 					propertiesString = StringUtil.read(inputStream);
