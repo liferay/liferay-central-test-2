@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.DelegatingQuerySuggester;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -53,7 +54,6 @@ import com.liferay.portal.kernel.search.facet.RangeFacet;
 import com.liferay.portal.kernel.search.facet.SimpleFacet;
 import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
-import com.liferay.portal.kernel.search.suggest.DelegatingQuerySuggester;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -84,8 +84,8 @@ import org.apache.lucene.search.highlight.TokenGroup;
 /**
  * @author Bruno Farache
  */
-public class LuceneIndexSearcherImpl extends DelegatingQuerySuggester
-	implements IndexSearcher {
+public class LuceneIndexSearcherImpl
+	extends DelegatingQuerySuggester implements IndexSearcher {
 
 	public Hits search(SearchContext searchContext, Query query)
 		throws SearchException {

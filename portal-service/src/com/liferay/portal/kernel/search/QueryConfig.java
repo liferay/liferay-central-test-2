@@ -74,9 +74,9 @@ public class QueryConfig implements Serializable {
 			_attributes.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_ENABLED), false);
 	}
 
-	public boolean isHitsPostProcessingEnabled() {
+	public boolean isHitsProcessingEnabled() {
 		return GetterUtil.getBoolean(
-			_attributes.get(_HITS_POST_PROCESSING_ENABLED), true);
+			_attributes.get(HITS_PROCESSING_ENABLED), true);
 	}
 
 	public boolean isQuerySuggestionEnabled() {
@@ -121,8 +121,8 @@ public class QueryConfig implements Serializable {
 			highlightSnippetSize);
 	}
 
-	public void setHitsPostProcessingEnabled(boolean enabled) {
-		_attributes.put(_HITS_POST_PROCESSING_ENABLED, enabled);
+	public void setHitsProcessingEnabled(boolean hitsProcessingEnabled) {
+		_attributes.put(HITS_PROCESSING_ENABLED, hitsProcessingEnabled);
 	}
 
 	public void setLocale(Locale locale) {
@@ -132,9 +132,6 @@ public class QueryConfig implements Serializable {
 	public void setScoreEnabled(boolean scoreEnabled) {
 		_attributes.put(PropsKeys.INDEX_SEARCH_SCORING_ENABLED, scoreEnabled);
 	}
-
-	private static final String _HITS_POST_PROCESSING_ENABLED =
-		"hitsPostProcessingEnabled";
 
 	private static final boolean _INDEX_SEARCH_HIGHLIGHT_ENABLED =
 		GetterUtil.getBoolean(
@@ -152,15 +149,18 @@ public class QueryConfig implements Serializable {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_ENABLED));
 
-	private static final float
-		_INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD =
-		GetterUtil.getFloat(
-			PropsUtil.get(
-				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD));
-
 	private static final boolean _INDEX_SEARCH_SCORING_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.INDEX_SEARCH_SCORING_ENABLED));
+
+	private static final String HITS_PROCESSING_ENABLED =
+		"hitsProcessingEnabled";
+
+	private static final float
+		_INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD =
+			GetterUtil.getFloat(
+				PropsUtil.get(
+					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD));
 
 	private Map<String, Serializable> _attributes =
 		new HashMap<String, Serializable>();

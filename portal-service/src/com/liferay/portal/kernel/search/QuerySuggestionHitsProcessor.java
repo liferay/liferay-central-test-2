@@ -12,20 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search.postprocess;
-
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.QueryConfig;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+package com.liferay.portal.kernel.search;
 
 /**
  * @author Michael C. Han
  */
-public class QuerySuggestionHitsPostProcessor implements HitsPostProcessor {
+public class QuerySuggestionHitsProcessor implements HitsProcessor {
 
-	public boolean postProcess(SearchContext searchContext, Hits hits)
+	public boolean process(SearchContext searchContext, Hits hits)
 		throws SearchException {
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();

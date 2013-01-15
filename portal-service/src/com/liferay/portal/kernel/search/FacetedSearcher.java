@@ -97,7 +97,7 @@ public class FacetedSearcher extends BaseIndexer {
 				hits = filterSearch(hits, permissionChecker, searchContext);
 			}
 
-			doHitsPostProcess(searchContext, hits);
+			processHits(searchContext, hits);
 
 			return hits;
 		}

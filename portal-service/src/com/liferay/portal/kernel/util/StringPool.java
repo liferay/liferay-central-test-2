@@ -37,8 +37,6 @@ public class StringPool {
 
 	public static final String BLANK = "";
 
-	public static final String[] BLANK_ARRAY = new String[0];
-
 	public static final String CARET = "^";
 
 	public static final String CDATA_CLOSE = "]]>";
@@ -91,6 +89,8 @@ public class StringPool {
 	public static final String DOUBLE_SPACE = "  ";
 
 	public static final String DOUBLE_UNDERLINE = "__";
+
+	public static final String[] EMPTY_ARRAY = new String[0];
 
 	public static final String EQUAL = "=";
 

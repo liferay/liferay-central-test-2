@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,23 +32,14 @@ public class HitsImpl implements Hits {
 
 	public void copy(Hits hits) {
 		setDocs(hits.getDocs());
-
 		setLength(hits.getLength());
-
 		setQuery(hits.getQuery());
-
 		setQuerySuggestions(hits.getQuerySuggestions());
-
 		setQueryTerms(hits.getQueryTerms());
-
 		setScores(hits.getScores());
-
 		setSearchTime(hits.getSearchTime());
-
 		setSnippets(hits.getSnippets());
-
 		setSpellCheckResults(hits.getSpellCheckResults());
-
 		setStart(hits.getStart());
 	}
 
@@ -78,8 +68,8 @@ public class HitsImpl implements Hits {
 
 	@JSON
 	public String[] getQuerySuggestions() {
-		if (Validator.isNull(_querySuggestions)) {
-			return StringPool.BLANK_ARRAY;
+		if ((_querySuggestions == null) || (_querySuggestions.length == 0)) {
+			return StringPool.EMPTY_ARRAY;
 		}
 
 		return _querySuggestions;
@@ -186,16 +176,16 @@ public class HitsImpl implements Hits {
 		return subset;
 	}
 
-	private String _collatedSpellCheckResult = null;
+	private String _collatedSpellCheckResult;
 	private Document[] _docs;
 	private int _length;
 	private Query _query;
-	private String[] _querySuggestions = null;
+	private String[] _querySuggestions;
 	private String[] _queryTerms;
 	private float[] _scores = new float[0];
 	private float _searchTime;
 	private String[] _snippets = {};
-	private Map<String, List<String>> _spellCheckResults = null;
+	private Map<String, List<String>> _spellCheckResults;
 	private long _start;
 
 }

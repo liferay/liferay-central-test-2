@@ -12,18 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search.postprocess;
+package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Michael C. Han
  */
-public interface HitsPostProcessor {
+@MessagingProxy(mode = ProxyMode.SYNC)
+public interface QuerySuggester {
 
-	public boolean postProcess(SearchContext searchContext, Hits hits)
+	public String spellCheckKeywords(SearchContext searchContext)
+		throws SearchException;
+
+	public Map<String, List<String>> spellCheckKeywords(
+			SearchContext searchContext, int max)
+		throws SearchException;
+
+	public String[] suggestKeywordQueries(SearchContext searchContext, int max)
 		throws SearchException;
 
 }

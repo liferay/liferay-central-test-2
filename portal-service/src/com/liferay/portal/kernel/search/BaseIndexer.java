@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
-import com.liferay.portal.kernel.search.postprocess.HitsPostProcessor;
-import com.liferay.portal.kernel.search.postprocess.HitsPostProcessorRegistry;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.trash.TrashRenderer;
@@ -422,7 +420,7 @@ public abstract class BaseIndexer implements Indexer {
 				hits = filterSearch(hits, permissionChecker, searchContext);
 			}
 
-			doHitsPostProcess(searchContext, hits);
+			processHits(searchContext, hits);
 
 			return hits;
 		}
@@ -1014,17 +1012,6 @@ public abstract class BaseIndexer implements Indexer {
 			PortletURL portletURL)
 		throws Exception;
 
-	protected void doHitsPostProcess(SearchContext searchContext, Hits hits)
-		throws SearchException {
-
-		HitsPostProcessor hitsPostProcessor =
-			HitsPostProcessorRegistry.getDefaultHitsPostProcessor();
-
-		if (hitsPostProcessor != null) {
-			hitsPostProcessor.postProcess(searchContext, hits);
-		}
-	}
-
 	protected abstract void doReindex(Object obj) throws Exception;
 
 	protected abstract void doReindex(String className, long classPK)
@@ -1342,6 +1329,17 @@ public abstract class BaseIndexer implements Indexer {
 	protected void postProcessFullQuery(
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {
+	}
+
+	protected void processHits(SearchContext searchContext, Hits hits)
+		throws SearchException {
+
+		HitsProcessor hitsProcessor =
+			HitsProcessorRegistryUtil.getDefaultHitsProcessor();
+
+		if (hitsProcessor != null) {
+			hitsProcessor.process(searchContext, hits);
+		}
 	}
 
 	protected void setFilterSearch(boolean filterSearch) {

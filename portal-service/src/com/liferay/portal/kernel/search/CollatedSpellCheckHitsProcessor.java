@@ -12,29 +12,24 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search.postprocess;
-
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
+package com.liferay.portal.kernel.search;
 
 /**
  * @author Michael C. Han
  */
-public class CollatedSpellCheckHitsPostProcessor implements HitsPostProcessor {
+public class CollatedSpellCheckHitsProcessor implements HitsProcessor {
 
-	public boolean postProcess(SearchContext searchContext, Hits hits)
+	public boolean process(SearchContext searchContext, Hits hits)
 		throws SearchException {
 
 		if (hits.getLength() > 0) {
 			return true;
 		}
 
-		String collatedKeyWords = SearchEngineUtil.spellCheckKeywords(
+		String collatedKeywords = SearchEngineUtil.spellCheckKeywords(
 			searchContext);
 
-		hits.setCollatedSpellCheckResult(collatedKeyWords);
+		hits.setCollatedSpellCheckResult(collatedKeywords);
 
 		return true;
 	}

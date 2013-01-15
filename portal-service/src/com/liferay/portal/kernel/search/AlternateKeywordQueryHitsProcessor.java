@@ -12,28 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search.postprocess;
+package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.search.FacetedSearcher;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.QueryConfig;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.Validator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Michael C. Han
  */
-public class AlternateKeywordQueryHitsPostProcessor
-	implements HitsPostProcessor {
+public class AlternateKeywordQueryHitsProcessor implements HitsProcessor {
 
-	public boolean postProcess(SearchContext searchContext, Hits hits)
+	public boolean process(SearchContext searchContext, Hits hits)
 		throws SearchException {
 
-		if ((hits.getLength() > 0) ||
-			Validator.isNull(hits.getSpellCheckResults())) {
+		if (hits.getLength() > 0) {
+			return true;
+		}
+
+		Map<String, List<String>> spellCheckResults =
+			hits.getSpellCheckResults();
+
+		if (spellCheckResults == null) {
 			return true;
 		}
 
@@ -44,13 +43,15 @@ public class AlternateKeywordQueryHitsPostProcessor
 		String[] additionalQuerySuggestions =
 			SearchEngineUtil.suggestKeywordQueries(searchContext, 5);
 
-		if (Validator.isNotNull(additionalQuerySuggestions)) {
+		if ((additionalQuerySuggestions != null) &&
+			(additionalQuerySuggestions.length > 0)) {
+
 			searchContext.setKeywords(additionalQuerySuggestions[0]);
 		}
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
-		queryConfig.setHitsPostProcessingEnabled(false);
+		queryConfig.setHitsProcessingEnabled(false);
 
 		Indexer indexer = FacetedSearcher.getInstance();
 

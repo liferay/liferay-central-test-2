@@ -57,21 +57,18 @@ public class IndexSearcherProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public String spellCheckKeywords(SearchContext searchContext)
-		throws SearchException {
-
+	public String spellCheckKeywords(SearchContext searchContext) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Map<String, List<String>> spellCheckKeywords(
-			SearchContext searchContext, int max)
-		throws SearchException {
+		SearchContext searchContext, int max) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] suggestKeywordQueries(SearchContext searchContext, int max)
-		throws SearchException {
+	public String[] suggestKeywordQueries(
+		SearchContext searchContext, int max) {
 
 		throw new UnsupportedOperationException();
 	}

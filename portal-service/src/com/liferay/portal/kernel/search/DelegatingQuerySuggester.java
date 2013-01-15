@@ -12,12 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search.suggest;
-
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
+package com.liferay.portal.kernel.search;
 
 import java.util.List;
 import java.util.Map;
@@ -25,32 +20,31 @@ import java.util.Map;
 /**
  * @author Michael C. Han
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
-public interface QuerySuggester {
+public class DelegatingQuerySuggester implements QuerySuggester {
 
-	/**
-	 * Spell check the keywords specified in the SearchContext.
-	 *
-	 * @param searchContext
-	 * @return keywords collated into a single , most likely string
-	 * @throws SearchException
-	 */
+	public void setQuerySuggester(QuerySuggester querySuggester) {
+		_querySuggester = querySuggester;
+	}
+
 	public String spellCheckKeywords(SearchContext searchContext)
-		throws SearchException;
+		throws SearchException {
 
-	/**
-	 * Spell check the keywords specified in the SearchContext.
-	 *
-	 * @param searchContext
-	 * @param max number of permutations for each word in keyword phrase
-	 * @return Map of potential spellings for each misspelled key word
-	 * @throws SearchException
-	 */
+		return _querySuggester.spellCheckKeywords(searchContext);
+	}
+
 	public Map<String, List<String>> spellCheckKeywords(
 			SearchContext searchContext, int max)
-		throws SearchException;
+		throws SearchException {
+
+		return _querySuggester.spellCheckKeywords(searchContext, max);
+	}
 
 	public String[] suggestKeywordQueries(SearchContext searchContext, int max)
-		throws SearchException;
+		throws SearchException {
+
+		return _querySuggester.suggestKeywordQueries(searchContext, max);
+	}
+
+	private QuerySuggester _querySuggester;
 
 }
