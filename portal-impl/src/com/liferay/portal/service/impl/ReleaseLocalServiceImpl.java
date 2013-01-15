@@ -108,8 +108,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (Validator.isNull(servletContextName)) {
-			throw new IllegalArgumentException(
-				"Servlet context name cannot be null");
+			throw new IllegalArgumentException("Servlet context name is null");
 		}
 
 		Release release = null;
