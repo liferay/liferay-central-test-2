@@ -273,15 +273,15 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 		Map<String, Map<String, String>> fieldsMap = getFieldsMap();
 
-		for (Map.Entry<String, Map<String, String>> fieldEntry :
+		for (Map.Entry<String, Map<String, String>> entry :
 				fieldsMap.entrySet()) {
 
-			Map<String, String> field = fieldEntry.getValue();
+			Map<String, String> field = entry.getValue();
 
 			String parentNameKey = _getPrivateAttributeKey("parentName");
 
 			if (!field.containsKey(parentNameKey)) {
-				fieldNames.add(fieldEntry.getKey());
+				fieldNames.add(entry.getKey());
 			}
 		}
 

@@ -83,12 +83,14 @@ public class JournalConverterUtil {
 
 		Document document = SAXReaderUtil.createDocument();
 
-		String availableLocales = getAvailableLocales(ddmFields);
-		Locale defaultLocale = ddmFields.getDefaultLocale();
-
 		Element rootElement = document.addElement("root");
 
+		String availableLocales = getAvailableLocales(ddmFields);
+
 		rootElement.addAttribute("available-locales", availableLocales);
+
+		Locale defaultLocale = ddmFields.getDefaultLocale();
+
 		rootElement.addAttribute(
 			"default-locale", LocaleUtil.toLanguageId(defaultLocale));
 
@@ -204,10 +206,11 @@ public class JournalConverterUtil {
 
 		Field ddmField = new Field();
 
-		String name = dynamicElementElement.attributeValue("name");
-
 		ddmField.setDDMStructureId(ddmStructure.getStructureId());
 		ddmField.setDefaultLocale(LocaleUtil.fromLanguageId(defaultLocale));
+
+		String name = dynamicElementElement.attributeValue("name");
+
 		ddmField.setName(name);
 
 		String dataType = ddmStructure.getFieldDataType(name);
@@ -371,7 +374,7 @@ public class JournalConverterUtil {
 		String indexType = ddmStructure.getFieldProperty(
 			fieldName, "indexType");
 
-		dynamicElementElement.addAttribute("type", _ddmTypesMap.get(fieldType));
+		dynamicElementElement.addAttribute("type", _ddmTypes.get(fieldType));
 		dynamicElementElement.addAttribute("index-type", indexType);
 
 		for (Locale locale : ddmField.getAvailableLocales()) {
@@ -442,18 +445,18 @@ public class JournalConverterUtil {
 		fieldsDisplay.setValue(StringUtil.merge(fieldsDisplayValues));
 	}
 
-	private static Map<String, String> _ddmTypesMap =
+	private static Map<String, String> _ddmTypes =
 		new HashMap<String, String>();
 
 	static {
-		_ddmTypesMap.put("text", "text");
-		_ddmTypesMap.put("textarea", "text_box");
-		_ddmTypesMap.put("ddm-text-html", "text_area");
-		_ddmTypesMap.put("ddm-fileupload", "image");
-		_ddmTypesMap.put("ddm-documentlibrary", "document_library");
-		_ddmTypesMap.put("checkbox", "boolean");
-		_ddmTypesMap.put("select", "list");
-		_ddmTypesMap.put("ddm-link-to-page", "link_to_layout");
+		_ddmTypes.put("checkbox", "boolean");
+		_ddmTypes.put("ddm-documentlibrary", "document_library");
+		_ddmTypes.put("ddm-fileupload", "image");
+		_ddmTypes.put("ddm-link-to-page", "link_to_layout");
+		_ddmTypes.put("ddm-text-html", "text_area");
+		_ddmTypes.put("select", "list");
+		_ddmTypes.put("text", "text");
+		_ddmTypes.put("textarea", "text_box");
 	}
 
 }
