@@ -842,9 +842,7 @@ public class MBUtil {
 			});
 	}
 
-	public static void updateCategoryMessageCount(final MBCategory category)
-		throws SystemException {
-
+	public static void updateCategoryMessageCount(final MBCategory category) {
 		Callable<Void> callable = new PortalCallable<Void>(
 			category.getCompanyId()) {
 
@@ -866,9 +864,7 @@ public class MBUtil {
 		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
 	}
 
-	public static void updateCategoryStatistics(final MBCategory category)
-		throws SystemException {
-
+	public static void updateCategoryStatistics(final MBCategory category) {
 		Callable<Void> callable = new PortalCallable<Void>(
 			category.getCompanyId()) {
 
@@ -896,9 +892,7 @@ public class MBUtil {
 		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
 	}
 
-	public static void updateCategoryThreadCount(final MBCategory category)
-		throws SystemException {
-
+	public static void updateCategoryThreadCount(final MBCategory category) {
 		Callable<Void> callable = new PortalCallable<Void>(
 			category.getCompanyId()) {
 
@@ -920,9 +914,7 @@ public class MBUtil {
 		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
 	}
 
-	public static void updateThreadMessageCount(final MBThread thread)
-		throws SystemException {
-
+	public static void updateThreadMessageCount(final MBThread thread) {
 		Callable<Void> callable = new PortalCallable<Void>(
 			thread.getCompanyId()) {
 
