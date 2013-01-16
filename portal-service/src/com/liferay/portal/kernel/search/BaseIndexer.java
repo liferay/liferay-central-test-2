@@ -786,12 +786,12 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		MultiValueFacet facet = new MultiValueFacet(searchContext);
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
 
-		facet.setFieldName(Field.USER_ID);
-		facet.setStatic(true);
+		multiValueFacet.setFieldName(Field.USER_ID);
+		multiValueFacet.setStatic(true);
 
-		searchContext.addFacet(facet);
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addStagingGroupKeyword(Document document, long groupId)
