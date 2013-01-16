@@ -110,8 +110,8 @@ public class LiferaySeleniumHelper {
 			String text = liferaySelenium.getText(locator);
 
 			BaseTestCase.fail(
-				"Expected \"" + pattern + "\" to not match \"" + text +
-					"\" found at \"" + locator + "\"");
+				"Pattern " + pattern + " does not match " + text + " at " +
+					locator);
 		}
 	}
 
@@ -151,8 +151,7 @@ public class LiferaySeleniumHelper {
 			String text = liferaySelenium.getText(locator);
 
 			BaseTestCase.fail(
-				"Expected \"" + pattern + "\" to match \"" + text +
-					"\" found at \"" + locator + "\"");
+				"Pattern " + pattern + " matches " + text + " at " + locator);
 		}
 	}
 
@@ -225,14 +224,14 @@ public class LiferaySeleniumHelper {
 		if (liferaySelenium.isElementNotPresent(locator)) {
 			return false;
 		}
-		else {
-			liferaySelenium.setTimeoutImplicit("1");
 
-			boolean isNotText = !value.equals(liferaySelenium.getText(locator));
+		liferaySelenium.setTimeoutImplicit("1");
 
+		try {
+			return !value.equals(liferaySelenium.getText(locator));
+		}
+		finally {
 			liferaySelenium.setDefaultTimeoutImplicit();
-
-			return isNotText;
 		}
 	}
 
@@ -242,14 +241,14 @@ public class LiferaySeleniumHelper {
 		if (liferaySelenium.isElementNotPresent(locator)) {
 			return false;
 		}
-		else {
-			liferaySelenium.setTimeoutImplicit("1");
 
-			boolean isText = value.equals(liferaySelenium.getText(locator));
+		liferaySelenium.setTimeoutImplicit("1");
 
+		try {
+			return value.equals(liferaySelenium.getText(locator));
+		}
+		finally {
 			liferaySelenium.setDefaultTimeoutImplicit();
-
-			return isText;
 		}
 	}
 
