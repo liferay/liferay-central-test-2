@@ -587,9 +587,9 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 		return _group.getDescriptiveName(locale);
 	}
 
-	public java.lang.String getGroupIcon(
+	public java.lang.String getIconURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _group.getGroupIcon(themeDisplay);
+		return _group.getIconURL(themeDisplay);
 	}
 
 	public com.liferay.portal.model.Group getLiveGroup() {
