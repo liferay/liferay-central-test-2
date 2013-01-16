@@ -130,7 +130,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 
 					<liferay-ui:search-container-column-text
 						name="type"
-						value="<%= LanguageUtil.get(pageContext, _getGroupType(themeDisplay, group)) %>"
+						value="<%= LanguageUtil.get(pageContext, _getType(themeDisplay, group)) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -268,17 +268,17 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 </aui:script>
 
 <%!
-private String _getGroupType (ThemeDisplay themeDisplay, Group group) {
-	String name = "site";
+private String _getType(ThemeDisplay themeDisplay, Group group) {
+	String type = "site";
 
 	if (group.getGroupId() == themeDisplay.getCompanyGroupId()) {
-		name = "global";
+		type = "global";
 	}
 	else if (group.isLayout()) {
-		name = "page";
+		type = "page";
 	}
 
-	return name;
+	return type;
 }
 
 private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) throws Exception {
