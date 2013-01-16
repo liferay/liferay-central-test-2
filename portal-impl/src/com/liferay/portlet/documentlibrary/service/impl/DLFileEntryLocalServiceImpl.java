@@ -1533,7 +1533,7 @@ public class DLFileEntryLocalServiceImpl
 		dlAppHelperLocalService.updateStatus(
 			userId, new LiferayFileEntry(dlFileEntry),
 			new LiferayFileVersion(dlFileVersion), oldStatus, status,
-			serviceContext, workflowContext);
+			workflowContext, serviceContext);
 
 		// Indexer
 
