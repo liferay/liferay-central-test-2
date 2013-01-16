@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,9 +39,6 @@ import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -151,22 +147,20 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		String[] scopeIds = preferences.getValues(
+			"scopeIds",
+			new String[] {
+				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
+					GroupConstants.DEFAULT
+			});
+
 		String scopeId = ParamUtil.getString(actionRequest, "scopeId");
 
-		String[] scopeIdsPreferences = preferences.getValues(
-			"scopeIds", new String[] {
-				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-					GroupConstants.DEFAULT});
+		if (!ArrayUtil.contains(scopeIds, scopeId)) {
+			scopeIds = ArrayUtil.append(scopeIds, scopeId);
+		}
 
-		Set<String> scopeIds = new HashSet<String>();
-
-		scopeIds.addAll(ListUtil.toList(scopeIdsPreferences));
-
-		scopeIds.add(scopeId);
-
-		scopeIdsPreferences = ArrayUtil.toStringArray(scopeIds.toArray());
-
-		preferences.setValues("scopeIds", scopeIdsPreferences);
+		preferences.setValues("scopeIds", scopeIds);
 	}
 
 	protected String[] getClassTypeIds(
@@ -286,22 +280,18 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
+		String[] scopeIds = preferences.getValues(
+			"scopeIds",
+			new String[] {
+				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
+					GroupConstants.DEFAULT
+			});
+
 		String scopeId = ParamUtil.getString(actionRequest, "scopeId");
 
-		String[] scopeIdsPreferences = preferences.getValues(
-			"scopeIds", new String[] {
-				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-					GroupConstants.DEFAULT});
+		scopeIds = ArrayUtil.remove(scopeIds, scopeId);
 
-		Set<String> scopeIds = new HashSet<String>();
-
-		scopeIds.addAll(ListUtil.toList(scopeIdsPreferences));
-
-		scopeIds.remove(scopeId);
-
-		scopeIdsPreferences = ArrayUtil.toStringArray(scopeIds.toArray());
-
-		preferences.setValues("scopeIds", scopeIdsPreferences);
+		preferences.setValues("scopeIds", scopeIds);
 	}
 
 	protected void removeSelection(
