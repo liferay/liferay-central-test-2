@@ -596,14 +596,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public List<Layout> getLayouts(long groupId, boolean privateLayout)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return layoutPersistence.filterFindByG_P(groupId, privateLayout);
 	}
 
 	public List<Layout> getLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return layoutPersistence.filterFindByG_P_P(
 			groupId, privateLayout, parentLayoutId);
