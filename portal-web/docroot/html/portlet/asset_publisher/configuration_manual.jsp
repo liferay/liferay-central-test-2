@@ -163,12 +163,11 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 							<%
 							PortletURL assetBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.ASSET_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
-							assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
-							assetBrowserURL.setPortletMode(PortletMode.VIEW);
-
 							assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 							assetBrowserURL.setParameter("groupId", String.valueOf(groupId));
 							assetBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectAsset");
+							assetBrowserURL.setPortletMode(PortletMode.VIEW);
+							assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 							for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 								if (!curRendererFactory.isSelectable()) {

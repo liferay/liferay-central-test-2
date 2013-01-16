@@ -120,8 +120,7 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 
 	PortletURL redirectURL = liferayPortletResponse.createLiferayPortletURL(themeDisplay.getPlid(), portletDisplay.getId(), PortletRequest.RENDER_PHASE, false);
 
-	redirectURL.setParameter(
-		"struts_action", "/asset_publisher/add_asset_redirect");
+	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
 	redirectURL.setWindowState(LiferayWindowState.POP_UP);
 
 	for (long classNameId : classNameIds) {

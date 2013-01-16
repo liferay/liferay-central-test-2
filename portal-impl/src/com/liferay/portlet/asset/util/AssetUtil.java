@@ -150,8 +150,6 @@ public class AssetUtil {
 			return null;
 		}
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		if (redirect != null) {
 			addPortletURL.setParameter("redirect", redirect);
 		}
@@ -164,6 +162,8 @@ public class AssetUtil {
 				"referringPortletResource", referringPortletResource);
 		}
 		else {
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
 			addPortletURL.setParameter(
 				"referringPortletResource", portletDisplay.getId());
 

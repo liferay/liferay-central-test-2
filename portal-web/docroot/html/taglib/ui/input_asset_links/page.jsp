@@ -126,9 +126,9 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 			assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId1());
 		}
 
-		AssetRendererFactory assetRendererFactory = assetLinkEntry.getAssetRendererFactory();
-
 		assetLinkEntry = assetLinkEntry.toEscapedModel();
+
+		AssetRendererFactory assetRendererFactory = assetLinkEntry.getAssetRendererFactory();
 
 		Group assetLinkEntryGroup = GroupLocalServiceUtil.getGroup(assetLinkEntry.getGroupId());
 		%>
