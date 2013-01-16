@@ -221,13 +221,14 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 			<fileset dir="lib/portal" />
 		</copy>
 
-		<copy todir="${module.framework.core.dir}">
-			<fileset dir="osgi/lib/${module.framework.implementation}" includes="*.jar" />
+		<copy todir="${liferay.home}/data/osgi/core">
+			<fileset dir="osgi/lib/common/core" includes="*.jar" />
+			<fileset dir="osgi/lib/${module.framework.implementation}/core" includes="*.jar" />
 		</copy>
 
-		<copy todir="${module.framework.lib.dir}">
-			<fileset dir="osgi/lib" includes="*.jar" excludes="osgi.cmpn.jar,osgi.core.jar" />
-			<fileset dir="osgi/lib/${module.framework.implementation}/libs" includes="*.jar" />
+		<copy todir="${liferay.home}/data/osgi/portal">
+			<fileset dir="osgi/lib/common/portal" includes="*.jar" />
+			<fileset dir="osgi/lib/${module.framework.implementation}/portal" includes="*.jar" />
 		</copy>
 
 		<if>
