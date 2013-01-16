@@ -36,12 +36,10 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" />
-	<aui:input name="assetEntryType" type="hidden" />
 	<aui:input name="typeSelection" type="hidden" />
 	<aui:input name="assetEntryId" type="hidden" />
-	<aui:input name="assetParentId" type="hidden" />
-	<aui:input name="preferences--assetTitle--" type="hidden" />
 	<aui:input name="assetEntryOrder" type="hidden" value="-1" />
+	<aui:input name="assetEntryType" type="hidden" />
 
 	<%
 	String rootPortletId = PortletConstants.getRootPortletId(portletResource);
