@@ -17,8 +17,9 @@
 <%@ include file="/html/portlet/asset_browser/init.jsp" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
+
+long groupId = ParamUtil.getLong(request, "groupId");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
