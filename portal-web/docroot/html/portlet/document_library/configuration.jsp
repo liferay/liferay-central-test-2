@@ -17,13 +17,13 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "display-settings");
-
 String strutsAction = "/document_library_display";
 
 if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	strutsAction = "/document_library";
 }
+
+String tabs2 = ParamUtil.getString(request, "tabs2", "display-settings");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -428,11 +428,6 @@ String editorContent = emailBody;
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 
-	function <portlet:namespace />updateLanguage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />openFolderSelector() {
 		var folderWindow = window.open('<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/select_folder" %>' /></liferay-portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=830');
 
@@ -448,6 +443,11 @@ String editorContent = emailBody;
 		};
 
 		Liferay.Util.selectFolder(folderData, '<liferay-portlet:renderURL portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>', '<portlet:namespace />');
+	}
+
+	function <portlet:namespace />updateLanguage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	Liferay.provide(
