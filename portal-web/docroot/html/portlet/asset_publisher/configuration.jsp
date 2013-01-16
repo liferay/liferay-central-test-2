@@ -124,7 +124,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 						<liferay-ui:icon
 							label="<%= true %>"
 							message="<%= _getName(themeDisplay, group) %>"
-							src="<%= group.getGroupIcon(themeDisplay) %>"
+							src="<%= group.getIconURL(themeDisplay) %>"
 						/>
 					</liferay-ui:search-container-column-text>
 
@@ -167,7 +167,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 							<portlet:param name="scopeId" value="<%= AssetPublisherUtil.getScopeId(group, scopeGroupId) %>" />
 						</liferay-portlet:actionURL>
 
-						<liferay-ui:icon id='<%= "scope" + group.getGroupId() %>' message="<%= _getName(themeDisplay, group) %>" method="post" src="<%= group.getGroupIcon(themeDisplay) %>" url="<%= addScopeURL %>" />
+						<liferay-ui:icon id='<%= "scope" + group.getGroupId() %>' message="<%= _getName(themeDisplay, group) %>" method="post" src="<%= group.getIconURL(themeDisplay) %>" url="<%= addScopeURL %>" />
 
 					<%
 					}

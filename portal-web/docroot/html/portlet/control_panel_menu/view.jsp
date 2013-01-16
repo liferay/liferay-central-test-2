@@ -143,7 +143,7 @@
 				<liferay-util:buffer var="groupSelectorIconMenu">
 					<c:choose>
 						<c:when test="<%= !manageableSites.isEmpty() %>">
-							<liferay-ui:icon-menu align="left" direction="down" icon="<%= curGroup.getGroupIcon(themeDisplay) %>" id="groupSelector" localizeMessage="<%= false %>" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
+							<liferay-ui:icon-menu align="left" direction="down" icon="<%= curGroup.getIconURL(themeDisplay) %>" id="groupSelector" localizeMessage="<%= false %>" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
 
 								<%
 								for (int i = 0; i < manageableSites.size(); i++) {
@@ -165,7 +165,7 @@
 									<liferay-ui:icon
 										localizeMessage="<%= false %>"
 										message="<%= HtmlUtil.escape(message) %>"
-										src="<%= group.getGroupIcon(themeDisplay) %>"
+										src="<%= group.getIconURL(themeDisplay) %>"
 										url="<%= url %>"
 									/>
 
@@ -184,7 +184,7 @@
 								cssClass="lfr-panel-title-single"
 								label="<%= true %>"
 								message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>"
-								src="<%= curGroup.getGroupIcon(themeDisplay) %>"
+								src="<%= curGroup.getIconURL(themeDisplay) %>"
 							/>
 						</c:otherwise>
 					</c:choose>
@@ -224,7 +224,7 @@
 						<liferay-ui:icon-menu align="left" direction="down" icon="" message='<%= LanguageUtil.get(pageContext, "scope") + StringPool.COLON + StringPool.SPACE + curGroupLabel %>'>
 							<liferay-ui:icon
 								message="default"
-								src="<%= curGroup.getGroupIcon(themeDisplay) %>"
+								src="<%= curGroup.getIconURL(themeDisplay) %>"
 								url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>'
 							/>
 
@@ -235,7 +235,7 @@
 
 								<liferay-ui:icon
 									message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
-									src="<%= scopeGroup.getGroupIcon(themeDisplay) %>"
+									src="<%= scopeGroup.getIconURL(themeDisplay) %>"
 									url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", scopeGroup.getGroupId()) %>'
 								/>
 
