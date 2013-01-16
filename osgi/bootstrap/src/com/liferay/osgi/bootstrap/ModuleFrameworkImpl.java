@@ -16,7 +16,6 @@ package com.liferay.osgi.bootstrap;
 
 import aQute.libg.header.OSGiHeader;
 
-import com.liferay.osgi.bootstrap.ModuleFrameworkConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -508,9 +507,10 @@ public class ModuleFrameworkImpl
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
 
-		properties.put(BEAN_ID, beanName);
-		properties.put(ORIGINAL_BEAN, Boolean.TRUE);
-		properties.put(SERVICE_VENDOR, ReleaseInfo.getVendor());
+		properties.put(SERVICE_PROPERTY_KEY_BEAN_ID, beanName);
+		properties.put(SERVICE_PROPERTY_KEY_ORIGINAL_BEAN, Boolean.TRUE);
+		properties.put(
+			SERVICE_PROPERTY_KEY_SERVICE_VENDOR, ReleaseInfo.getVendor());
 
 		bundleContext.registerService(
 			names.toArray(new String[names.size()]), bean, properties);
@@ -521,9 +521,11 @@ public class ModuleFrameworkImpl
 
 		Hashtable<String, Object> properties = new Hashtable<String, Object>();
 
-		properties.put(BEAN_ID, ServletContext.class.getName());
-		properties.put(ORIGINAL_BEAN, Boolean.TRUE);
-		properties.put(SERVICE_VENDOR, ReleaseInfo.getVendor());
+		properties.put(
+			SERVICE_PROPERTY_KEY_BEAN_ID, ServletContext.class.getName());
+		properties.put(SERVICE_PROPERTY_KEY_ORIGINAL_BEAN, Boolean.TRUE);
+		properties.put(
+			SERVICE_PROPERTY_KEY_SERVICE_VENDOR, ReleaseInfo.getVendor());
 
 		bundleContext.registerService(
 			new String[] {ServletContext.class.getName()}, servletContext,
