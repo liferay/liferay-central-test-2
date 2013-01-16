@@ -1589,7 +1589,7 @@ public class SourceFormatter {
 								}
 
 								if (excluded == null) {
-									excluded = 
+									excluded =
 										_javaTermSortExclusions.getProperty(
 											fileNameWithForwardSlashes);
 								}
