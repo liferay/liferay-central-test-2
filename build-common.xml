@@ -484,7 +484,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 	<target name="compile-test-functional">
 		<ant target="compile-test-cmd">
-			<property name="test.type" value="" />
+			<property name="test.type" value="functional" />
 		</ant>
 	</target>
 

@@ -58,9 +58,9 @@
                     <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
-                    <label>portal-web\test</label>
+                    <label>portal-web\test\functional</label>
                     <type>java</type>
-                    <location>portal-web/test</location>
+                    <location>portal-web/test/functional</location>
                     <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
@@ -158,8 +158,8 @@
                         <location>portal-service/test/unit</location>
                     </source-folder>
                     <source-folder style="packages">
-                        <label>portal-web\test</label>
-                        <location>portal-web/test</location>
+                        <label>portal-web\test\functional</label>
+                        <location>portal-web/test/functional</location>
                     </source-folder>
                     <source-folder style="packages">
                         <label>support-tomcat\src</label>
@@ -210,7 +210,7 @@
                 <package-root>portal-service/src</package-root>
                 <!--<package-root>portal-service/test/integration</package-root>-->
                 <package-root>portal-service/test/unit</package-root>
-                <package-root>portal-web/test</package-root>
+                <package-root>portal-web/test/functional</package-root>
                 <package-root>support-tomcat/src</package-root>
                 <package-root>util-bridges/src</package-root>
                 <package-root>util-java/src</package-root>
