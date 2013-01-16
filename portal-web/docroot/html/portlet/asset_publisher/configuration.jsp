@@ -268,19 +268,6 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 </aui:script>
 
 <%!
-private String _getType(ThemeDisplay themeDisplay, Group group) {
-	String type = "site";
-
-	if (group.getGroupId() == themeDisplay.getCompanyGroupId()) {
-		type = "global";
-	}
-	else if (group.isLayout()) {
-		type = "page";
-	}
-
-	return type;
-}
-
 private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) throws Exception {
 	String name = null;
 
@@ -314,5 +301,18 @@ private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) t
 	}
 
 	return name;
+}
+
+private String _getType(ThemeDisplay themeDisplay, Group group) {
+	String type = "site";
+
+	if (group.getGroupId() == themeDisplay.getCompanyGroupId()) {
+		type = "global";
+	}
+	else if (group.isLayout()) {
+		type = "page";
+	}
+
+	return type;
 }
 %>
