@@ -64,7 +64,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 			long layoutScopeGroupId = 0;
 			%>
 
-			<aui:option label="<%= _getName(themeDisplay, themeDisplay.getScopeGroup(), locale) %>" selected="<%= (groupIds.length == 1) && (themeDisplay.getScopeGroupId() == groupIds[0]) %>" value="<%= themeDisplay.getScopeGroupId() %>" />
+			<aui:option label="<%= _getName(themeDisplay, themeDisplay.getScopeGroup()) %>" selected="<%= (groupIds.length == 1) && (themeDisplay.getScopeGroupId() == groupIds[0]) %>" value="<%= themeDisplay.getScopeGroupId() %>" />
 
 			<c:if test="<%= layout.hasScopeGroup() %>">
 
@@ -74,10 +74,10 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 				layoutScopeGroupId = layoutScopeGroup.getGroupId();
 				%>
 
-				<aui:option label="<%= _getName(themeDisplay, layoutScopeGroup, locale) %>" selected="<%= (groupIds.length == 1) && (layoutScopeGroupId == groupIds[0]) %>" value="<%= AssetPublisherUtil.getScopeId(layoutScopeGroup, themeDisplay.getScopeGroupId()) %>" />
+				<aui:option label="<%= _getName(themeDisplay, layoutScopeGroup) %>" selected="<%= (groupIds.length == 1) && (layoutScopeGroupId == groupIds[0]) %>" value="<%= AssetPublisherUtil.getScopeId(layoutScopeGroup, themeDisplay.getScopeGroupId()) %>" />
 			</c:if>
 
-			<aui:option label="<%= _getName(themeDisplay, company.getGroup(), locale) %>" selected="<%= (groupIds.length == 1) && (themeDisplay.getCompanyGroupId() == groupIds[0]) %>" value="<%= AssetPublisherUtil.getScopeId(company.getGroup(), themeDisplay.getScopeGroupId()) %>" />
+			<aui:option label="<%= _getName(themeDisplay, company.getGroup()) %>" selected="<%= (groupIds.length == 1) && (themeDisplay.getCompanyGroupId() == groupIds[0]) %>" value="<%= AssetPublisherUtil.getScopeId(company.getGroup(), themeDisplay.getScopeGroupId()) %>" />
 
 			<optgroup label="----------"></optgroup>
 
@@ -123,7 +123,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 					>
 						<liferay-ui:icon
 							label="<%= true %>"
-							message="<%= _getName(themeDisplay, group, locale) %>"
+							message="<%= _getName(themeDisplay, group) %>"
 							src="<%= group.getGroupIcon(themeDisplay) %>"
 						/>
 					</liferay-ui:search-container-column-text>
@@ -167,7 +167,7 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 							<portlet:param name="scopeId" value="<%= AssetPublisherUtil.getScopeId(group, scopeGroupId) %>" />
 						</liferay-portlet:actionURL>
 
-						<liferay-ui:icon id='<%= "scope" + group.getGroupId() %>' message="<%= _getName(themeDisplay, group, locale) %>" method="post" src="<%= group.getGroupIcon(themeDisplay) %>" url="<%= addScopeURL %>" />
+						<liferay-ui:icon id='<%= "scope" + group.getGroupId() %>' message="<%= _getName(themeDisplay, group) %>" method="post" src="<%= group.getGroupIcon(themeDisplay) %>" url="<%= addScopeURL %>" />
 
 					<%
 					}
@@ -268,16 +268,16 @@ List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<Asse
 </aui:script>
 
 <%!
-private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) throws Exception {
+private String _getName(ThemeDisplay themeDisplay, Group group) throws Exception {
 	String name = null;
 
 	if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(LanguageUtil.get(locale, "current-site"));
+		sb.append(LanguageUtil.get(themeDisplay.getLocale(), "current-site"));
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(HtmlUtil.escape(group.getDescriptiveName(locale)));
+		sb.append(HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale())));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		name = sb.toString();
@@ -285,19 +285,19 @@ private String _getName(ThemeDisplay themeDisplay, Group group, Locale locale) t
 	else if (group.isLayout() && (group.getClassPK() == themeDisplay.getPlid())) {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(LanguageUtil.get(locale, "current-page"));
+		sb.append(LanguageUtil.get(themeDisplay.getLocale(), "current-page"));
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(HtmlUtil.escape(group.getDescriptiveName(locale)));
+		sb.append(HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale())));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		name = sb.toString();
 	}
 	else if (group.isLayoutPrototype()) {
-		name = LanguageUtil.get(locale, "default");
+		name = LanguageUtil.get(themeDisplay.getLocale(), "default");
 	}
 	else {
-		name = HtmlUtil.escape(group.getDescriptiveName(locale));
+		name = HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale()));
 	}
 
 	return name;
