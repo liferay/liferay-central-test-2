@@ -40,21 +40,6 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		return _CLASS_NAMES;
 	}
 
-	protected String _getFolderLink(
-		ThemeDisplay themeDisplay, FileEntry fileEntry) {
-
-		StringBundler sb = new StringBundler(6);
-
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/document_library/find_folder?groupId=");
-		sb.append(fileEntry.getRepositoryId());
-		sb.append("&folderId=");
-		sb.append(fileEntry.getFolderId());
-
-		return sb.toString();
-	}
-
 	@Override
 	protected SocialActivityFeedEntry doInterpret(
 			SocialActivity activity, ThemeDisplay themeDisplay)
@@ -93,7 +78,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append("/document_library/find_file_entry?fileEntryId=");
 		sb.append(fileEntry.getFileEntryId());
 
-		String link =sb.toString();
+		String link = sb.toString();
 
 		// Title
 
@@ -127,7 +112,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		sb = new StringBundler(3);
+		sb.setIndex(0);
 
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
@@ -139,16 +124,31 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		String fileEntryLink = assetRenderer.getURLDownload(themeDisplay);
 
 		sb.append(wrapLink(fileEntryLink, "download-file", themeDisplay));
+
 		sb.append(StringPool.SPACE);
 
-		sb.append(
-			wrapLink(
-				_getFolderLink(themeDisplay, fileEntry), "go-to-folder",
-				themeDisplay));
+		String folderLink = getFolderLink(themeDisplay, fileEntry);
+
+		sb.append(wrapLink(folderLink, "go-to-folder", themeDisplay));
 
 		String body = sb.toString();
 
 		return new SocialActivityFeedEntry(link, title, body);
+	}
+
+	protected String getFolderLink(
+		ThemeDisplay themeDisplay, FileEntry fileEntry) {
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append(themeDisplay.getPortalURL());
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/find_folder?groupId=");
+		sb.append(fileEntry.getRepositoryId());
+		sb.append("&folderId=");
+		sb.append(fileEntry.getFolderId());
+
+		return sb.toString();
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
