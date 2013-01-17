@@ -250,7 +250,10 @@ public abstract class BaseTrashHandlerTestCase {
 	}
 
 	protected boolean isIndexableBaseModel() {
-		return true;
+
+		// See LPS-32381
+
+		return false;
 	}
 
 	protected boolean isInTrashContainer(ClassedModel classedModel)
