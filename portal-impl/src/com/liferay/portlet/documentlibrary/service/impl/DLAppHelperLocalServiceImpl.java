@@ -57,7 +57,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLAppHelperLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.documentlibrary.util.DLAppHelperThreadLocal;
@@ -1427,8 +1426,8 @@ public class DLAppHelperLocalServiceImpl
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 
 		DLFileEntryType dlFileEntryType =
-			DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
-			dlFileEntry.getFileEntryTypeId());
+			dlFileEntryTypeLocalService.getDLFileEntryType(
+				dlFileEntry.getFileEntryTypeId());
 
 		subscriptionSender.setCompanyId(fileVersion.getCompanyId());
 		subscriptionSender.setContextAttributes(
