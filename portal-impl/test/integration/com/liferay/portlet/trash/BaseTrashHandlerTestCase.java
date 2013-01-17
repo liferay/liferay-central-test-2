@@ -16,7 +16,6 @@ package com.liferay.portlet.trash;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -35,7 +34,7 @@ import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portal.test.Sync;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.trash.model.TrashEntry;
@@ -52,6 +51,7 @@ import org.junit.Test;
  * @author Eudaldo Alonso
  * @author Manuel de la Peña
  */
+@Sync
 public abstract class BaseTrashHandlerTestCase {
 
 	@Before
@@ -281,8 +281,6 @@ public abstract class BaseTrashHandlerTestCase {
 	protected int searchBaseModelsCount(Class<?> clazz, long groupId)
 		throws Exception {
 
-		Thread.sleep(2000 * TestPropsValues.JUNIT_DELAY_FACTOR);
-
 		Indexer indexer = IndexerRegistryUtil.getIndexer(clazz);
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext();
@@ -297,8 +295,6 @@ public abstract class BaseTrashHandlerTestCase {
 	protected int searchTrashEntriesCount(
 			String keywords, ServiceContext serviceContext)
 		throws Exception {
-
-		Thread.sleep(2000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
 		Hits results = TrashEntryLocalServiceUtil.search(
 			serviceContext.getCompanyId(), serviceContext.getScopeGroupId(),
