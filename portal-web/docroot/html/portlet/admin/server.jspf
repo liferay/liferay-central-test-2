@@ -17,6 +17,8 @@
 <%= ReleaseInfo.getReleaseInfo() %><br />
 
 <%
+String keywords = ParamUtil.getString(request, "keywords");
+
 long uptimeDiff = System.currentTimeMillis() - PortalUtil.getUptime().getTime();
 long days = uptimeDiff / Time.DAY;
 long hours = (uptimeDiff / Time.HOUR) % 24;
@@ -34,8 +36,6 @@ serverURL.setParameter("struts_action", "/admin/view");
 serverURL.setParameter("tabs1", tabs1);
 serverURL.setParameter("tabs2", tabs2);
 serverURL.setParameter("tabs3", tabs3);
-
-String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <liferay-ui:message key="uptime" />:
@@ -229,37 +229,43 @@ String keywords = ParamUtil.getString(request, "keywords");
 				<br /><br />
 
 				<%
-				String emptyResultsMessage = null;
-				Properties properties = null;
-
-				if (tabs3.equals("portal-properties")) {
-					emptyResultsMessage = "no-portal-properties-were-found-that-matched-the-keywords";
-					properties = PropsUtil.getProperties();
-				}
-				else {
-					emptyResultsMessage = "no-system-properties-were-found-that-matched-the-keywords";
-					properties = System.getProperties();
-				}
-
 				List<String> headerNames = new ArrayList<String>();
 
 				headerNames.add("property");
 				headerNames.add("value");
 
+				String emptyResultsMessage = null;
+
+				if (tabs3.equals("portal-properties")) {
+					emptyResultsMessage = "no-portal-properties-were-found-that-matched-the-keywords";
+				}
+				else {
+					emptyResultsMessage = "no-system-properties-were-found-that-matched-the-keywords";
+				}
+
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, serverURL, headerNames, emptyResultsMessage);
 
-				Map<String, String> portalProperties = new TreeMap<String, String>();
+				Map<String, String> filteredProperties = new TreeMap<String, String>();
 
-				for (Object key : properties.keySet()) {
-					String propKey = (String)key;
-					String propValue = properties.getProperty(propKey, StringPool.BLANK);
+				Properties properties = null;
 
-					if (Validator.isNull(keywords) || propKey.contains(keywords) || propValue.contains(keywords)) {
-						portalProperties.put(propKey, propValue);
+				if (tabs3.equals("portal-properties")) {
+					properties = PropsUtil.getProperties();
+				}
+				else {
+					properties = System.getProperties();
+				}
+
+				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+					String property = (String)entry.getKey();
+					String value = (String)entry.getValue();
+
+					if (Validator.isNull(keywords) || property.contains(keywords) || value.contains(keywords)) {
+						filteredProperties.put(property, value);
 					}
 				}
 
-				List results = ListUtil.fromCollection(portalProperties.entrySet());
+				List results = ListUtil.fromCollection(filteredProperties.entrySet());
 
 				searchContainer.setTotal(results.size());
 
