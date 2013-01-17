@@ -29,10 +29,10 @@ public class IndexerWrapper implements Indexer {
 		_indexer = indexer;
 	}
 
-	public void addRelatedEntityFields(Document document, Object obj)
+	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
 
-		_indexer.addRelatedEntityFields(document, obj);
+		_indexer.addRelatedEntryFields(document, obj);
 	}
 
 	public void delete(long companyId, String uid) throws SearchException {

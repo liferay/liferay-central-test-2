@@ -273,7 +273,7 @@ public class MBMessageIndexer extends BaseIndexer {
 				message.getClassName());
 
 			if (indexer != null) {
-				indexer.addRelatedEntityFields(document, obj);
+				indexer.addRelatedEntryFields(document, obj);
 			}
 		}
 

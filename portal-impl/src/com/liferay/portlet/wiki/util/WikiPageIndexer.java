@@ -73,7 +73,7 @@ public class WikiPageIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public void addRelatedEntityFields(Document document, Object obj)
+	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
 
 		MBMessage message = (MBMessage)obj;
@@ -81,7 +81,7 @@ public class WikiPageIndexer extends BaseIndexer {
 		WikiPage page = WikiPageLocalServiceUtil.getPage(message.getClassPK());
 
 		document.addKeyword(Field.NODE_ID, page.getNodeId());
-		document.addKeyword("isRelatedEntity", true);
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	public String[] getClassNames() {

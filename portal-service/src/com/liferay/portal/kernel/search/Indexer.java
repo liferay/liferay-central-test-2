@@ -29,7 +29,7 @@ public interface Indexer {
 
 	public static final int DEFAULT_INTERVAL = 10000;
 
-	public void addRelatedEntityFields(Document document, Object obj)
+	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception;
 
 	public void delete(long companyId, String uid) throws SearchException;

@@ -105,7 +105,7 @@ public class DLIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public void addRelatedEntityFields(Document document, Object obj)
+	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
 
 		MBMessage message = (MBMessage)obj;
@@ -114,7 +114,7 @@ public class DLIndexer extends BaseIndexer {
 			message.getClassPK());
 
 		document.addKeyword(Field.FOLDER_ID, dlFileEntry.getFolderId());
-		document.addKeyword("isRelatedEntity", true);
+		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
 	public String[] getClassNames() {
