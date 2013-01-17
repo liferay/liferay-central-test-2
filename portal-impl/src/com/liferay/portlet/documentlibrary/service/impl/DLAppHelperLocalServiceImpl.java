@@ -1465,16 +1465,17 @@ public class DLAppHelperLocalServiceImpl
 				Folder.class.getName(), curFolderId);
 		}
 
-		if (fileEntryType.getFileEntryTypeId() !=
+		if (fileEntryType.getFileEntryTypeId() ==
 				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
 
 			subscriptionSender.addPersistedSubscribers(
 				DLFileEntryType.class.getName(),
-				fileEntryType.getFileEntryTypeId());
+				fileVersion.getGroupId());
 		}
 		else {
 			subscriptionSender.addPersistedSubscribers(
-				DLFileEntryType.class.getName(), fileVersion.getGroupId());
+				DLFileEntryType.class.getName(),
+				fileEntryType.getFileEntryTypeId());
 		}
 
 		subscriptionSender.flushNotificationsAsync();
