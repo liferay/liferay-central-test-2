@@ -930,7 +930,7 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg line="--basedir test --minimize ${minimize} --reportDuplicates ${reportDuplicates}" />
+			<arg line="--basedir test/functional --minimize ${minimize} --reportDuplicates ${reportDuplicates}" />
 		</java>
 	</target>
 
