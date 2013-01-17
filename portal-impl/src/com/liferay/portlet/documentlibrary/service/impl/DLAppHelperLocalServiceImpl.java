@@ -1407,9 +1407,9 @@ public class DLAppHelperLocalServiceImpl
 
 		FileEntry fileEntry = fileVersion.getFileEntry();
 
-		long folderId = fileEntry.getFolderId();
-
 		Folder folder = null;
+
+		long folderId = fileEntry.getFolderId();
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			folder = dlAppLocalService.getFolder(folderId);
@@ -1426,7 +1426,7 @@ public class DLAppHelperLocalServiceImpl
 
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
 			dlFileEntry.getFileEntryTypeId());
 
@@ -1435,7 +1435,7 @@ public class DLAppHelperLocalServiceImpl
 			"[$DOCUMENT_STATUS_BY_USER_NAME$]",
 			fileVersion.getStatusByUserName(), "[$DOCUMENT_TITLE$]",
 			fileVersion.getTitle(), "[$DOCUMENT_TYPE$]",
-			fileEntryType.getName(), "[$FOLDER_NAME$]", folderName);
+			dlFileEntryType.getName(), "[$FOLDER_NAME$]", folderName);
 		subscriptionSender.setContextUserPrefix("DOCUMENT");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
@@ -1465,17 +1465,16 @@ public class DLAppHelperLocalServiceImpl
 				Folder.class.getName(), curFolderId);
 		}
 
-		if (fileEntryType.getFileEntryTypeId() ==
+		if (dlFileEntryType.getFileEntryTypeId() ==
 				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
 
 			subscriptionSender.addPersistedSubscribers(
-				DLFileEntryType.class.getName(),
-				fileVersion.getGroupId());
+				DLFileEntryType.class.getName(), fileVersion.getGroupId());
 		}
 		else {
 			subscriptionSender.addPersistedSubscribers(
 				DLFileEntryType.class.getName(),
-				fileEntryType.getFileEntryTypeId());
+				dlFileEntryType.getFileEntryTypeId());
 		}
 
 		subscriptionSender.flushNotificationsAsync();
