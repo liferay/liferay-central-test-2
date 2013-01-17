@@ -55,9 +55,9 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		searchContext.setAttribute("paginationType", "regular");
 		searchContext.setEnd(searchContainer.getEnd());
+		searchContext.setIncludeDiscussions(true);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setIncludeDiscussions(true);
 
 		Hits hits = indexer.search(searchContext);
 		%>
@@ -68,7 +68,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 		/>
 
 		<liferay-ui:search-container-row
-			className="java.lang.Object"
+			className="Object"
 			modelVar="obj"
 		>
 

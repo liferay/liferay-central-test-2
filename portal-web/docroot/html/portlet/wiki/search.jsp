@@ -67,10 +67,10 @@ portletURL.setParameter("keywords", keywords);
 
 		searchContext.setAttribute("paginationType", "more");
 		searchContext.setEnd(searchContainer.getEnd());
+		searchContext.setIncludeDiscussions(true);
 		searchContext.setKeywords(keywords);
 		searchContext.setNodeIds(nodeIds);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setIncludeDiscussions(true);
 
 		Hits hits = indexer.search(searchContext);
 		%>
@@ -81,7 +81,7 @@ portletURL.setParameter("keywords", keywords);
 		/>
 
 		<liferay-ui:search-container-row
-			className="java.lang.Object"
+			className="Object"
 			modelVar="obj"
 		>
 

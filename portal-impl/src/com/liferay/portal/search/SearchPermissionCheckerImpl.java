@@ -73,10 +73,10 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 			String className = document.get(Field.ENTRY_CLASS_NAME);
 
-			boolean isRelatedEntity = GetterUtil.getBoolean(
+			boolean relatedEntry = GetterUtil.getBoolean(
 				document.get(Field.RELATED_ENTRY));
 
-			if (isRelatedEntity) {
+			if (relatedEntry) {
 				long classNameId = GetterUtil.getLong(
 					document.get(Field.CLASS_NAME_ID));
 
@@ -93,7 +93,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				classPK = document.get(Field.ENTRY_CLASS_PK);
 			}
 
-			if (isRelatedEntity) {
+			if (relatedEntry) {
 				classPK = document.get(Field.CLASS_PK);
 			}
 

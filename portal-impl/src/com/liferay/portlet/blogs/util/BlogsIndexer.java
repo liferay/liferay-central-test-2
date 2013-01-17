@@ -62,9 +62,7 @@ public class BlogsIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public void addRelatedEntryFields(Document document, Object obj)
-		throws Exception {
-
+	public void addRelatedEntryFields(Document document, Object obj) {
 		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 

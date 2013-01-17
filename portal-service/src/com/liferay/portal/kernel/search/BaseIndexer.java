@@ -194,12 +194,12 @@ public abstract class BaseIndexer implements Indexer {
 			if (searchContext.isIncludeDiscussions()) {
 				searchContext.setEntryClassNames(
 					new String[] {
-						getClassName(searchContext),
-						MBMessage.class.getName()});
+						getClassName(searchContext), MBMessage.class.getName()
+					});
 
 				searchContext.setAttribute("discussion", true);
 				searchContext.setAttribute(
-					"relatedClassName", getClassName(searchContext));
+					"relatedEntryClassName", getClassName(searchContext));
 			}
 			else {
 				searchContext.setEntryClassNames(

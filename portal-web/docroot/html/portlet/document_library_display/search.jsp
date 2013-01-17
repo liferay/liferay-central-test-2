@@ -89,9 +89,9 @@ int mountFoldersCount = DLAppServiceUtil.getMountFoldersCount(scopeGroupId, DLFo
 		searchContext.setAttribute("paginationType", "more");
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setFolderIds(folderIdsArray);
+		searchContext.setIncludeDiscussions(true);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setIncludeDiscussions(true);
 
 		Hits hits = DLAppServiceUtil.search(repositoryId, searchContext);
 		%>
@@ -102,7 +102,7 @@ int mountFoldersCount = DLAppServiceUtil.getMountFoldersCount(scopeGroupId, DLFo
 		/>
 
 		<liferay-ui:search-container-row
-			className="java.lang.Object"
+			className="Object"
 			modelVar="obj"
 		>
 

@@ -560,7 +560,10 @@ public class DLImpl implements DL {
 			try {
 				Object obj = null;
 
-				if (entryClassName.equals(MBMessage.class.getName())) {
+				if (entryClassName.equals(DLFileEntry.class.getName())) {
+					obj = DLAppLocalServiceUtil.getFileEntry(entryClassPK);
+				}
+				else if (entryClassName.equals(MBMessage.class.getName())) {
 					long classPK = GetterUtil.getLong(
 						document.get(Field.CLASS_PK));
 
@@ -568,17 +571,15 @@ public class DLImpl implements DL {
 
 					obj = MBMessageLocalServiceUtil.getMessage(entryClassPK);
 				}
-				else if (entryClassName.equals(DLFileEntry.class.getName())) {
-					obj = DLAppLocalServiceUtil.getFileEntry(entryClassPK);
-				}
 
 				entries.add(obj);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Documents and Media search index is stale and " +
-						"contains entity {className=" + entryClassName +
-						", classPK=" + entryClassPK + "}");
+					_log.warn(
+						"Documents and Media search index is stale and " +
+							"contains entry {className=" + entryClassName +
+								", classPK=" + entryClassPK + "}");
 				}
 			}
 		}
