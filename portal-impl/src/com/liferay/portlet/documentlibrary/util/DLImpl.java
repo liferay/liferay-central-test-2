@@ -996,11 +996,11 @@ public class DLImpl implements DL {
 	}
 
 	public boolean isSubscribedToFileEntryType(
-		long companyId, long groupId, long userId, long fileEntryTypeId)
+			long companyId, long groupId, long userId, long fileEntryTypeId)
 		throws SystemException {
 
 		if (fileEntryTypeId ==
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
 
 			fileEntryTypeId = groupId;
 		}
@@ -1011,15 +1011,15 @@ public class DLImpl implements DL {
 	}
 
 	public boolean isSubscribedToFolder(
-		long companyId, long groupId, long userId, long folderId)
+			long companyId, long groupId, long userId, long folderId)
 		throws PortalException, SystemException {
 
 		return isSubscribedToFolder(companyId, groupId, userId, folderId, true);
 	}
 
 	public boolean isSubscribedToFolder(
-		long companyId, long groupId, long userId, long folderId,
-		boolean recursive)
+			long companyId, long groupId, long userId, long folderId,
+			boolean recursive)
 		throws PortalException, SystemException {
 
 		List<Long> ancestorFolderIds = new ArrayList<Long>();
