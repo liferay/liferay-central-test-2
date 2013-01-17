@@ -14,18 +14,23 @@
 
 package com.liferay.portal.sanitizer;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerException;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.InstanceFactory;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Zsolt Balogh
@@ -39,9 +44,15 @@ public class SanitizerImpl implements Sanitizer {
 				continue;
 			}
 
-			Sanitizer sanitizer = (Sanitizer)InstancePool.get(className);
+			try {
+				Sanitizer sanitizer = (Sanitizer)InstanceFactory.newInstance(
+					className);
 
-			registerSanitizer(sanitizer);
+				registerSanitizer(sanitizer);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 	}
 
@@ -55,15 +66,13 @@ public class SanitizerImpl implements Sanitizer {
 			Map<String, Object> options)
 		throws SanitizerException {
 
-		byte[] output = bytes;
-
 		for (Sanitizer sanitizer : _sanitizers) {
-			output = sanitizer.sanitize(
+			bytes = sanitizer.sanitize(
 				companyId, groupId, userId, className, classPK, contentType,
-				modes, output, options);
+				modes, bytes, options);
 		}
 
-		return output;
+		return bytes;
 	}
 
 	public void sanitize(
@@ -73,10 +82,37 @@ public class SanitizerImpl implements Sanitizer {
 			Map<String, Object> options)
 		throws SanitizerException {
 
-		for (Sanitizer sanitizer : _sanitizers) {
-			sanitizer.sanitize(
+		if (_sanitizers.isEmpty()) {
+			return;
+		}
+
+		if (_sanitizers.size() == 1) {
+			sanitize(
 				companyId, groupId, userId, className, classPK, contentType,
 				modes, inputStream, outputStream, options);
+
+			return;
+		}
+
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		try {
+			StreamUtil.transfer(inputStream, byteArrayOutputStream);
+		}
+		catch (IOException ioe) {
+			throw new SanitizerException(ioe);
+		}
+
+		byte[] bytes = sanitize(
+			companyId, groupId, userId, className, classPK, contentType, modes,
+			byteArrayOutputStream.toByteArray(), options);
+
+		try {
+			outputStream.write(bytes);
+		}
+		catch (IOException ioe) {
+			throw new SanitizerException(ioe);
 		}
 	}
 
@@ -86,21 +122,21 @@ public class SanitizerImpl implements Sanitizer {
 			Map<String, Object> options)
 		throws SanitizerException {
 
-		String output = s;
-
 		for (Sanitizer sanitizer : _sanitizers) {
-			output = sanitizer.sanitize(
+			s = sanitizer.sanitize(
 				companyId, groupId, userId, className, classPK, contentType,
-				modes, output, options);
+				modes, s, options);
 		}
 
-		return output;
+		return s;
 	}
 
 	public void unregisterSanitizer(Sanitizer sanitizer) {
 		_sanitizers.remove(sanitizer);
 	}
 
-	private List<Sanitizer> _sanitizers = new ArrayList<Sanitizer>();
+	private static Log _log = LogFactoryUtil.getLog(SanitizerImpl.class);
+
+	private List<Sanitizer> _sanitizers = new CopyOnWriteArrayList<Sanitizer>();
 
 }

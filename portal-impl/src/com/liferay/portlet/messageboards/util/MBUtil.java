@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -247,13 +248,13 @@ public class MBUtil {
 			else if (partContent instanceof String) {
 				Map<String, Object> options = new HashMap<String, Object>();
 
-				options.put("mb.email", "receive");
+				options.put("emailPartToMBMessageBody", Boolean.TRUE);
 
 				String messageBody = SanitizerUtil.sanitize(
 					0, 0, 0, MBMessage.class.getName(), 0, contentType,
 					Sanitizer.MODE_ALL, (String)partContent, options);
 
-				if (contentType.startsWith("text/html")) {
+				if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
 					mbMailMessage.setHtmlBody(messageBody);
 				}
 				else {
