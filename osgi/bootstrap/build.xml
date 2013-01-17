@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="bootstrap" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="osgi-bootstrap" basedir="." default="compile" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value="../.." />
 
 	<import file="../../build-common-java.xml" />
