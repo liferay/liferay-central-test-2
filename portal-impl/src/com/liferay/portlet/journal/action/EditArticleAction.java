@@ -644,10 +644,10 @@ public class EditArticleAction extends PortletAction {
 			targetLayout =
 				LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
 					layoutUuid, groupId, true);
+		}
 
-			if (targetLayout == null) {
-				layoutUuid = null;
-			}
+		if (targetLayout == null) {
+			layoutUuid = null;
 		}
 
 		int displayDateMonth = ParamUtil.getInteger(
