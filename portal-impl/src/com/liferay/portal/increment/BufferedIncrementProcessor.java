@@ -41,7 +41,6 @@ public class BufferedIncrementProcessor {
 		BufferedIncrementConfiguration bufferedIncrementConfiguration,
 		Method method) {
 
-		_batchablePipe = new BatchablePipe<Serializable, Increment<?>>();
 		_bufferedIncrementConfiguration = bufferedIncrementConfiguration;
 
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
@@ -56,7 +55,11 @@ public class BufferedIncrementProcessor {
 		StringBundler sb = new StringBundler(parameterTypes.length * 2 + 5);
 
 		sb.append("BufferedIncreament-");
-		sb.append(method.getDeclaringClass().getSimpleName());
+
+		Class<?> clazz = method.getDeclaringClass();
+
+		sb.append(clazz.getSimpleName());
+
 		sb.append(StringPool.PERIOD);
 		sb.append(method.getName());
 		sb.append(StringPool.OPEN_PARENTHESIS);
@@ -75,7 +78,6 @@ public class BufferedIncrementProcessor {
 				PACLClassLoaderUtil.getContextClassLoader()));
 
 		_executorService = threadPoolExecutor;
-		_queueLengthTracker = new AtomicInteger();
 	}
 
 	public void destroy() {
@@ -92,10 +94,11 @@ public class BufferedIncrementProcessor {
 		}
 	}
 
-	private final BatchablePipe<Serializable, Increment<?>> _batchablePipe;
+	private final BatchablePipe<Serializable, Increment<?>> _batchablePipe =
+		new BatchablePipe<Serializable, Increment<?>>();
 	private final BufferedIncrementConfiguration
 		_bufferedIncrementConfiguration;
 	private final ExecutorService _executorService;
-	private final AtomicInteger _queueLengthTracker;
+	private final AtomicInteger _queueLengthTracker = new AtomicInteger();
 
 }

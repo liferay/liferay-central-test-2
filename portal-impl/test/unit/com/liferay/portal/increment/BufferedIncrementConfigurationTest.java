@@ -103,7 +103,7 @@ public class BufferedIncrementConfigurationTest {
 			bufferedIncrementConfiguration.calculateStandbyTime(-1);
 		}
 		catch (IllegalArgumentException iae) {
-			Assert.assertEquals("Negative queue legnth : -1", iae.getMessage());
+			Assert.assertEquals("Negative queue length -1", iae.getMessage());
 		}
 
 		int standbyQueueThreshold =
@@ -145,15 +145,15 @@ public class BufferedIncrementConfigurationTest {
 		}
 
 		@Around(
-			"execution(" +
-				"public static String com.liferay.portal.util.PropsUtil.get(" +
-				"String, com.liferay.portal.kernel.configuration.Filter)) && " +
-				"args(key, filter)")
+			"execution(public static String com.liferay.portal.util." +
+				"PropsUtil.get(String, com.liferay.portal.kernel." +
+					"configuration.Filter)) && args(key, filter)")
 		public Object get(String key, Filter filter) {
 			return _props.get(key);
 		}
 
 		private static Map<String, String> _props = Collections.emptyMap();
+
 	}
 
 	private List<LogRecord> _doTestInvalidSetting(Level level) {

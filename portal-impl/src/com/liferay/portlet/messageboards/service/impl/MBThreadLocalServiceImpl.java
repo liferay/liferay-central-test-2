@@ -565,7 +565,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	@BufferedIncrement(
-		configuration = "mbthread", incrementClass = NumberIncrement.class)
+		configuration = "MBThread", incrementClass = NumberIncrement.class)
 	public MBThread incrementViewCounter(long threadId, int increment)
 		throws PortalException, SystemException {
 

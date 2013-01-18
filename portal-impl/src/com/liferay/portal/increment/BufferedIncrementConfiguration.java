@@ -31,11 +31,9 @@ public class BufferedIncrementConfiguration {
 
 		_enabled = GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.BUFFERED_INCREMENT_ENABLED, filter));
-
 		_standbyQueueThreshold = GetterUtil.getInteger(
 			PropsUtil.get(
 				PropsKeys.BUFFERED_INCREMENT_STANDBY_QUEUE_THRESHOLD, filter));
-
 		_standbyTimeUpperLimit = GetterUtil.getLong(
 			PropsUtil.get(
 				PropsKeys.BUFFERED_INCREMENT_STANDBY_TIME_UPPER_LIMIT, filter));
@@ -86,7 +84,7 @@ public class BufferedIncrementConfiguration {
 	public long calculateStandbyTime(int queueLength) {
 		if (queueLength < 0) {
 			throw new IllegalArgumentException(
-				"Negative queue legnth : " + queueLength);
+				"Negative queue length " + queueLength);
 		}
 
 		if (!_standbyEnabled) {

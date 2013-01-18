@@ -34,14 +34,15 @@ public class BufferedIncrementRunnable implements Runnable {
 		BatchablePipe<Serializable, Increment<?>> batchablePipe,
 		AtomicInteger queueLengthTracker) {
 
-		_batchablePipe = batchablePipe;
 		_bufferedIncrementConfiguration = bufferedIncrementConfiguration;
-		_companyId = CompanyThreadLocal.getCompanyId();
+		_batchablePipe = batchablePipe;
 		_queueLengthTracker = queueLengthTracker;
 
 		if (_bufferedIncrementConfiguration.isStandbyEnabled()) {
 			_queueLengthTracker.incrementAndGet();
 		}
+
+		_companyId = CompanyThreadLocal.getCompanyId();
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -61,7 +62,8 @@ public class BufferedIncrementRunnable implements Runnable {
 			}
 			catch (Throwable t) {
 				_log.error(
-					"Cannot write buffered increment value to the database", t);
+					"Unable to write buffered increment value to the database",
+					t);
 			}
 
 			if (_bufferedIncrementConfiguration.isStandbyEnabled()) {

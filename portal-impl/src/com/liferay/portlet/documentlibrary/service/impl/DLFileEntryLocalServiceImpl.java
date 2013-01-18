@@ -1183,7 +1183,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	@BufferedIncrement(
-		configuration = "dlfileentry", incrementClass = NumberIncrement.class)
+		configuration = "DLFileEntry", incrementClass = NumberIncrement.class)
 	public void incrementViewCounter(DLFileEntry dlFileEntry, int increment)
 		throws SystemException {
 

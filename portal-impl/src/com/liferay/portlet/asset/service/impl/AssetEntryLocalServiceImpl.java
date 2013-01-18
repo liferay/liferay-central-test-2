@@ -314,7 +314,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	@BufferedIncrement(
-		configuration = "assetentry", incrementClass = NumberIncrement.class)
+		configuration = "AssetEntry", incrementClass = NumberIncrement.class)
 	public AssetEntry incrementViewCounter(
 			long userId, String className, long classPK, int increment)
 		throws SystemException {

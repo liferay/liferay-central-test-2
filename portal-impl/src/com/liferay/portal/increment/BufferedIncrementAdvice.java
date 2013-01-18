@@ -52,13 +52,13 @@ public class BufferedIncrementAdvice
 		String configuration = bufferedIncrement.configuration();
 
 		BufferedIncrementConfiguration bufferedIncrementConfiguration =
-			_configurationMap.get(configuration);
+			_bufferedIncrementConfigurations.get(configuration);
 
 		if (bufferedIncrementConfiguration == null) {
 			bufferedIncrementConfiguration = new BufferedIncrementConfiguration(
 				configuration);
 
-			_configurationMap.put(
+			_bufferedIncrementConfigurations.put(
 				configuration, bufferedIncrementConfiguration);
 		}
 
@@ -69,14 +69,14 @@ public class BufferedIncrementAdvice
 		Method method = methodInvocation.getMethod();
 
 		BufferedIncrementProcessor bufferedIncrementProcessor =
-			_bufferedIncrementProcessorMap.get(method);
+			_bufferedIncrementProcessors.get(method);
 
 		if (bufferedIncrementProcessor == null) {
 			bufferedIncrementProcessor = new BufferedIncrementProcessor(
 				bufferedIncrementConfiguration, method);
 
 			BufferedIncrementProcessor previousBufferedIncrementProcessor =
-				_bufferedIncrementProcessorMap.putIfAbsent(
+				_bufferedIncrementProcessors.putIfAbsent(
 					method, bufferedIncrementProcessor);
 
 			if (previousBufferedIncrementProcessor != null) {
@@ -111,7 +111,7 @@ public class BufferedIncrementAdvice
 
 	public void destroy() {
 		for (BufferedIncrementProcessor bufferedIncrementProcessor :
-				_bufferedIncrementProcessorMap.values()) {
+				_bufferedIncrementProcessors.values()) {
 
 			bufferedIncrementProcessor.destroy();
 		}
@@ -137,17 +137,13 @@ public class BufferedIncrementAdvice
 				return null;
 			}
 
-			public boolean parallel() {
-				return true;
-			}
-
 		};
 
+	private Map<String, BufferedIncrementConfiguration>
+		_bufferedIncrementConfigurations =
+			new ConcurrentHashMap<String, BufferedIncrementConfiguration>();
 	private ConcurrentMap<Method, BufferedIncrementProcessor>
-		_bufferedIncrementProcessorMap =
+		_bufferedIncrementProcessors =
 			new ConcurrentHashMap<Method, BufferedIncrementProcessor>();
-
-	private Map<String, BufferedIncrementConfiguration> _configurationMap =
-		new ConcurrentHashMap<String, BufferedIncrementConfiguration>();
 
 }
