@@ -325,23 +325,16 @@ public class SearchEngineUtil {
 	public static void indexDictionaries(String searchEngineId, long companyId)
 		throws SearchException {
 
-		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+		SearchEngine searchEngine = getSearchEngine(searchEngineId);
+
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
 
-		searchContext.setSearchEngineId(searchEngineId);
 		searchContext.setCompanyId(companyId);
+		searchContext.setSearchEngineId(searchEngineId);
 
-		if (searchEngine != null) {
-			IndexWriter indexWriter = searchEngine.getIndexWriter();
-
-			indexWriter.indexDictionaries(searchContext);
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info("No search engine found for: " + searchEngineId);
-			}
-		}
+		indexWriter.indexDictionaries(searchContext);
 	}
 
 	public static void indexDictionary(long companyId, Locale locale)
@@ -358,24 +351,17 @@ public class SearchEngineUtil {
 			String searchEngineId, long companyId, Locale locale)
 		throws SearchException {
 
-		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+		SearchEngine searchEngine = getSearchEngine(searchEngineId);
+
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
 
-		searchContext.setSearchEngineId(searchEngineId);
 		searchContext.setCompanyId(companyId);
+		searchContext.setSearchEngineId(searchEngineId);
 		searchContext.setLocale(locale);
 
-		if (searchEngine != null) {
-			IndexWriter indexWriter = searchEngine.getIndexWriter();
-
-			indexWriter.indexDictionary(searchContext);
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info("No search engine found for: " + searchEngineId);
-			}
-		}
+		indexWriter.indexDictionary(searchContext);
 	}
 
 	public static boolean isIndexReadOnly() {
