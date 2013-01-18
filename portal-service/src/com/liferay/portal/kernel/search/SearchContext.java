@@ -336,8 +336,8 @@ public class SearchContext implements Serializable {
 	private Map<String, Facet> _facets = new ConcurrentHashMap<String, Facet>();
 	private long[] _folderIds;
 	private long[] _groupIds;
-	private boolean _includeAttachments = false;
-	private boolean _includeDiscussions = false;
+	private boolean _includeAttachments;
+	private boolean _includeDiscussions;
 	private boolean _includeLiveGroups = true;
 	private boolean _includeStagingGroups = true;
 	private String _keywords;

@@ -390,11 +390,14 @@ public class DLIndexer extends BaseIndexer {
 						RepositoryLocalServiceUtil.getRepository(
 							dlFileEntry.getRepositoryId());
 
-					Indexer indexer = IndexerRegistryUtil.getIndexerByPortletId(
-						repository.getPortletId());
+					String portletId = repository.getPortletId();
 
-					if (indexer != null) {
-						indexer.addRelatedEntryFields(document, obj);
+					for (Indexer indexer : IndexerRegistryUtil.getIndexers()) {
+						if (portletId.equals(indexer.getPortletId())) {
+							indexer.addRelatedEntryFields(document, obj);
+
+							break;
+						}
 					}
 				}
 				catch (Exception e) {

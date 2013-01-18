@@ -23,8 +23,6 @@ public interface IndexerRegistry {
 
 	public Indexer getIndexer(String className);
 
-	public Indexer getIndexerByPortletId(String portletId);
-
 	public List<Indexer> getIndexers();
 
 	public Indexer nullSafeGetIndexer(String className);

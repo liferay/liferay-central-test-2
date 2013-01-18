@@ -556,7 +556,7 @@ public class MBUtil {
 					_log.warn(
 						"Message boards search index is stale and contains " +
 							"entry {className=" + entryClassName + ", " +
-							"classPK=" + entryClassPK + "}");
+								"classPK=" + entryClassPK + "}");
 				}
 
 				continue;

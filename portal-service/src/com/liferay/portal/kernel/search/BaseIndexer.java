@@ -78,8 +78,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.trash.model.TrashEntry;
 import com.liferay.portlet.trash.service.TrashEntryLocalServiceUtil;
 
-import javax.portlet.PortletURL;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -88,6 +88,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import javax.portlet.PortletURL;
 
 /**
  * @author Brian Wing Shun Chan
@@ -191,24 +193,24 @@ public abstract class BaseIndexer implements Indexer {
 		try {
 			searchContext.setSearchEngineId(getSearchEngineId());
 
-			String[] classNames = new String[]{getClassName(searchContext)};
+			String[] entryClassNames = {getClassName(searchContext)};
 
 			if (searchContext.isIncludeAttachments()) {
-				classNames = ArrayUtil.append(
-					classNames, DLFileEntry.class.getName());
+				entryClassNames = ArrayUtil.append(
+					entryClassNames, DLFileEntry.class.getName());
 			}
 
 			if (searchContext.isIncludeDiscussions()) {
-				classNames = ArrayUtil.append(
-					classNames, MBMessage.class.getName());
+				entryClassNames = ArrayUtil.append(
+					entryClassNames, MBMessage.class.getName());
 
 				searchContext.setAttribute("discussion", true);
 			}
 
-			searchContext.setEntryClassNames(classNames);
+			searchContext.setEntryClassNames(entryClassNames);
 
-			if (searchContext.isIncludeDiscussions() ||
-				searchContext.isIncludeAttachments()) {
+			if (searchContext.isIncludeAttachments() ||
+				searchContext.isIncludeDiscussions()) {
 
 				searchContext.setAttribute(
 					"relatedEntryClassName", getClassName(searchContext));
