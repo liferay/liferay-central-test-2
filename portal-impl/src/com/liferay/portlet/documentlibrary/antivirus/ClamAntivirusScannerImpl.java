@@ -15,11 +15,9 @@
 package com.liferay.portlet.documentlibrary.antivirus;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author Michael C. Han
