@@ -39,6 +39,9 @@ import java.util.Map;
  */
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
+	private static final String _DDL_CLASS_NAME =
+		"com.liferay.portlet.dynamicdatalists";
+
 	public DDMTemplate addTemplate(
 			long groupId, long classNameId, long classPK,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -210,20 +213,20 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 	}
 
 	public List<DDMTemplate> getTemplates(
+			long groupId, long classNameId, long classPK, String type)
+		throws SystemException {
+
+		return ddmTemplatePersistence.filterFindByG_C_C_T(
+			groupId, classNameId, classPK, type);
+	}
+
+	public List<DDMTemplate> getTemplates(
 			long groupId, long classNameId, long classPK, String type,
 			String mode)
 		throws SystemException {
 
 		return ddmTemplatePersistence.filterFindByG_C_C_T_M(
 			groupId, classNameId, classPK, type, mode);
-	}
-
-	public List<DDMTemplate> getTemplates(
-			long classNameId, long classPK, String type, String mode)
-		throws SystemException {
-
-		return ddmTemplatePersistence.findByC_C_T_M(
-			classNameId, classPK, type, mode);
 	}
 
 	public List<DDMTemplate> search(
@@ -346,8 +349,5 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 		return ddmResourceActionId;
 	}
-
-	private static final String _DDL_CLASS_NAME =
-		"com.liferay.portlet.dynamicdatalists";
 
 }

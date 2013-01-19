@@ -674,7 +674,7 @@ public class DDMStructureLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
 		List<DDMTemplate> templates = ddmTemplateLocalService.getTemplates(
-			classNameId, structure.getStructureId(),
+			structure.getGroupId(), classNameId, structure.getStructureId(),
 			DDMTemplateConstants.TEMPLATE_TYPE_FORM);
 
 		for (DDMTemplate template : templates) {
