@@ -21,10 +21,10 @@ public interface ToolTag {
 
 	public void cleanUp();
 
-	public java.lang.String getHandler();
+	public String getHandler();
 
-	public java.lang.String getIcon();
+	public String getIcon();
 
-	public java.lang.String getId();
+	public String getId();
 
 }
