@@ -511,14 +511,14 @@ public class DDMTemplateServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplates(
 		HttpPrincipal httpPrincipal, long groupId, long classNameId,
-		long classPK, java.lang.String type, java.lang.String mode)
+		long classPK, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMTemplateServiceUtil.class,
 					"getTemplates", _getTemplatesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					classNameId, classPK, type, mode);
+					classNameId, classPK, type);
 
 			Object returnObj = null;
 
@@ -543,14 +543,14 @@ public class DDMTemplateServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplates(
-		HttpPrincipal httpPrincipal, long classNameId, long classPK,
-		java.lang.String type, java.lang.String mode)
+		HttpPrincipal httpPrincipal, long groupId, long classNameId,
+		long classPK, java.lang.String type, java.lang.String mode)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMTemplateServiceUtil.class,
 					"getTemplates", _getTemplatesParameterTypes13);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					classNameId, classPK, type, mode);
 
 			Object returnObj = null;
@@ -958,11 +958,10 @@ public class DDMTemplateServiceHttp {
 			long.class, long.class, long.class
 		};
 	private static final Class<?>[] _getTemplatesParameterTypes12 = new Class[] {
-			long.class, long.class, long.class, java.lang.String.class,
-			java.lang.String.class
+			long.class, long.class, long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getTemplatesParameterTypes13 = new Class[] {
-			long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
 			java.lang.String.class
 		};
 	private static final Class<?>[] _searchParameterTypes14 = new Class[] {
