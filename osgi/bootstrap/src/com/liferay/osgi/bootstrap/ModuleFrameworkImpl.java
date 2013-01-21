@@ -93,14 +93,14 @@ public class ModuleFrameworkImpl
 	}
 
 	public Object addBundle(
-			String location, InputStream inputStream, boolean checkPermissions)
+			String location, InputStream inputStream, boolean checkPermission)
 		throws PortalException {
 
 		if (_framework == null) {
 			return null;
 		}
 
-		if (checkPermissions) {
+		if (checkPermission) {
 			_checkPermission();
 		}
 
@@ -124,16 +124,6 @@ public class ModuleFrameworkImpl
 		}
 	}
 
-	public Bundle getBundle(long bundleId) {
-		if (_framework == null) {
-			return null;
-		}
-
-		BundleContext bundleContext = _framework.getBundleContext();
-
-		return bundleContext.getBundle(bundleId);
-	}
-
 	public Bundle getBundle(
 			BundleContext bundleContext, InputStream inputStream)
 		throws PortalException {
@@ -141,7 +131,8 @@ public class ModuleFrameworkImpl
 		try {
 			if (inputStream.markSupported()) {
 
-				// 200Kb is a very large manifest file, should be enough
+				// 1 megabyte is more than enough for even the largest manifest
+				// file
 
 				inputStream.mark(1024 * 1000);
 			}
@@ -156,25 +147,24 @@ public class ModuleFrameworkImpl
 
 			Attributes attributes = manifest.getMainAttributes();
 
-			String bundleSymbolicNameAttribute = attributes.getValue(
+			String bundleSymbolicNameAttributeValue = attributes.getValue(
 				Constants.BUNDLE_SYMBOLICNAME);
 
-			Map<String, Map<String, String>> bundleSymbolicNamesMap =
-				OSGiHeader.parseHeader(bundleSymbolicNameAttribute);
+			Map<String, Map<String, String>> bundleSymbolicNameMap =
+				OSGiHeader.parseHeader(bundleSymbolicNameAttributeValue);
 
-			Set<String> bundleSymbolicNamesSet =
-				bundleSymbolicNamesMap.keySet();
+			Set<String> bundleSymbolicNameSet = bundleSymbolicNameMap.keySet();
 
-			Iterator<String> bundleSymbolicNamesIterator =
-				bundleSymbolicNamesSet.iterator();
+			Iterator<String> bundleSymbolicNameIterator =
+				bundleSymbolicNameSet.iterator();
 
-			String bundleSymbolicName = bundleSymbolicNamesIterator.next();
+			String bundleSymbolicName = bundleSymbolicNameIterator.next();
 
-			String bundleVersionAttribute = attributes.getValue(
+			String bundleVersionAttributeValue = attributes.getValue(
 				Constants.BUNDLE_VERSION);
 
 			Version bundleVersion = Version.parseVersion(
-				bundleVersionAttribute);
+				bundleVersionAttributeValue);
 
 			for (Bundle bundle : bundleContext.getBundles()) {
 				Version curBundleVersion = Version.parseVersion(
@@ -192,6 +182,16 @@ public class ModuleFrameworkImpl
 		catch (IOException ioe) {
 			throw new PortalException(ioe);
 		}
+	}
+
+	public Bundle getBundle(long bundleId) {
+		if (_framework == null) {
+			return null;
+		}
+
+		BundleContext bundleContext = _framework.getBundleContext();
+
+		return bundleContext.getBundle(bundleId);
 	}
 
 	public Framework getFramework() {
@@ -578,15 +578,15 @@ public class ModuleFrameworkImpl
 		String activationPolicy = headers.get(
 			Constants.BUNDLE_ACTIVATIONPOLICY);
 
-		if (activationPolicy != null) {
-			Map<String, Map<String, String>> header = OSGiHeader.parseHeader(
-				activationPolicy);
+		if (activationPolicy == null) {
+			return false;
+		}
 
-			if ((header.size() > 0) &&
-				header.containsKey(Constants.ACTIVATION_LAZY)) {
+		Map<String, Map<String, String>> activationPolicyMap =
+			OSGiHeader.parseHeader(activationPolicy);
 
-				return true;
-			}
+		if (activationPolicyMap.containsKey(Constants.ACTIVATION_LAZY)) {
+			return true;
 		}
 
 		return false;
@@ -596,27 +596,25 @@ public class ModuleFrameworkImpl
 		String location, List<Bundle> lazyActivationBundles,
 		List<Bundle> startBundles, List<Bundle> refreshBundles) {
 
-		int defaultStartLevel =
-			PropsValues.MODULE_FRAMEWORK_BEGINNING_START_LEVEL;
 		boolean start = false;
-		int startLevel = defaultStartLevel;
+		int startLevel = PropsValues.MODULE_FRAMEWORK_BEGINNING_START_LEVEL;
 
-		int pos = location.lastIndexOf(StringPool.AT);
+		int index = location.lastIndexOf(StringPool.AT);
 
-		if (pos != -1) {
-			String[] attributes = StringUtil.split(
-				location.substring(pos + 1), StringPool.COLON);
+		if (index != -1) {
+			String[] parts = StringUtil.split(
+				location.substring(index + 1), StringPool.COLON);
 
-			for (String attribute : attributes) {
-				if (attribute.equals("start")) {
+			for (String part : parts) {
+				if (part.equals("start")) {
 					start = true;
 				}
 				else {
-					startLevel = GetterUtil.getInteger(attribute);
+					startLevel = GetterUtil.getInteger(part);
 				}
 			}
 
-			location = location.substring(0, pos);
+			location = location.substring(0, index);
 		}
 
 		InputStream inputStream = null;
@@ -770,26 +768,28 @@ public class ModuleFrameworkImpl
 
 	private Framework _framework;
 
-	private class ModuleFrameworkServiceLoaderCondition implements
-		ServiceLoaderCondition {
+	private class ModuleFrameworkServiceLoaderCondition
+		implements ServiceLoaderCondition {
 
 		public boolean isLoad(URL url) {
-			return url.getPath().contains(
-				PropsValues.MODULE_FRAMEWORK_CORE_DIR);
+			String path = url.getPath();
+
+			return path.contains(PropsValues.MODULE_FRAMEWORK_CORE_DIR);
 		}
 
 	}
 
 	private class StartupFrameworkListener implements FrameworkListener {
+
 		public StartupFrameworkListener(
 			List<Bundle> startBundles, List<Bundle> lazyActivationBundles) {
 
-			_lazyActivationBundles = lazyActivationBundles;
 			_startBundles = startBundles;
+			_lazyActivationBundles = lazyActivationBundles;
 		}
 
-		public void frameworkEvent(FrameworkEvent event) {
-			if (event.getType() != FrameworkEvent.PACKAGES_REFRESHED) {
+		public void frameworkEvent(FrameworkEvent frameworkEvent) {
+			if (frameworkEvent.getType() != FrameworkEvent.PACKAGES_REFRESHED) {
 				return;
 			}
 
@@ -812,8 +812,9 @@ public class ModuleFrameworkImpl
 			}
 
 			try {
-				BundleContext bundleContext =
-					event.getBundle().getBundleContext();
+				Bundle bundle = frameworkEvent.getBundle();
+
+				BundleContext bundleContext = bundle.getBundleContext();
 
 				bundleContext.removeFrameworkListener(this);
 			}
@@ -822,8 +823,8 @@ public class ModuleFrameworkImpl
 			}
 		}
 
-		List<Bundle> _lazyActivationBundles;
-		List<Bundle> _startBundles;
+		private List<Bundle> _lazyActivationBundles;
+		private List<Bundle> _startBundles;
 
 	}
 
