@@ -39,9 +39,6 @@ import java.util.Map;
  */
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
-	private static final String _DDL_CLASS_NAME =
-		"com.liferay.portlet.dynamicdatalists";
-
 	public DDMTemplate addTemplate(
 			long groupId, long classNameId, long classPK,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -349,5 +346,8 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 		return ddmResourceActionId;
 	}
+
+	private static final String _DDL_CLASS_NAME =
+		"com.liferay.portlet.dynamicdatalists";
 
 }
