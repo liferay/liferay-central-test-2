@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.test.AbstractExecutionTestListener;
 import com.liferay.portal.kernel.test.TestContext;
 
+import java.lang.reflect.Method;
+
 /**
  * @author Miguel Pastor
  */
@@ -27,28 +29,66 @@ public class SynchronousDestinationExecutionTestListener
 
 	@Override
 	public void runAfterClass(TestContext testContext) {
-		_setSync(_previousSync);
+		_classSyncStatus.restorePreviousSyncMode();
+	}
+
+	@Override
+	public void runAfterTest(TestContext testContext) {
+		_methodSyncStatus.restorePreviousSyncMode();
 	}
 
 	@Override
 	public void runBeforeClass(TestContext testContext) {
-		_previousSync = ProxyModeThreadLocal.isForceSync();
-
 		Class<?> testClass = testContext.getClazz();
 
-		_sync = AnnotationLocator.locate(testClass, Sync.class);
+		Sync sync = AnnotationLocator.locate(testClass, Sync.class);
 
-		_setSync(true);
+		_classSyncStatus.setSync(sync);
+		_classSyncStatus.setStatus(ProxyModeThreadLocal.isForceSync());
+
+		_classSyncStatus.enableSyncMode();
 	}
 
-	private void _setSync(boolean sync) {
-		if (_sync != null) {
-			ProxyModeThreadLocal.setForceSync(sync);
+	@Override
+	public void runBeforeTest(TestContext testContext) {
+		Method method = testContext.getMethod();
+		Class<?> testClass = testContext.getClazz();
+
+		Sync sync = AnnotationLocator.locate(method, testClass, Sync.class);
+
+		_methodSyncStatus.setSync(sync);
+		_methodSyncStatus.setStatus(ProxyModeThreadLocal.isForceSync());
+
+		_methodSyncStatus.enableSyncMode();
+	}
+
+	private SyncStatus _classSyncStatus = new SyncStatus();
+	private SyncStatus _methodSyncStatus = new SyncStatus();
+
+	private class SyncStatus {
+		public void enableSyncMode() {
+			if (_sync != null) {
+				ProxyModeThreadLocal.setForceSync(true);
+			}
 		}
+
+		public void restorePreviousSyncMode() {
+			if (_sync != null) {
+				ProxyModeThreadLocal.setForceSync(_status);
+			}
+		}
+
+		public void setStatus(boolean status) {
+			_status = status;
+		}
+
+		public void setSync(Sync sync) {
+			_sync = sync;
+		}
+
+		private boolean _status;
+		private Sync _sync;
+
 	}
-
-	private boolean _previousSync;
-
-	private Sync _sync;
 
 }
