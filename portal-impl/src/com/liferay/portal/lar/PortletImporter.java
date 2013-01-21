@@ -2024,9 +2024,8 @@ public class PortletImporter {
 								uuid, portletDataContext.getScopeGroupId());
 
 						if (ddmStructure == null) {
-							ddmStructure =
-								DDMStructureUtil.fetchByUUID_G(
-									uuid, companyGroupId);
+							ddmStructure = DDMStructureUtil.fetchByUUID_G(
+								uuid, companyGroupId);
 						}
 
 						if (ddmStructure != null) {
