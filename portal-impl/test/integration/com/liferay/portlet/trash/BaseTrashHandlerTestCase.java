@@ -51,7 +51,6 @@ import org.junit.Test;
  * @author Eudaldo Alonso
  * @author Manuel de la Peña
  */
-@Sync
 public abstract class BaseTrashHandlerTestCase {
 
 	@Before
@@ -251,10 +250,7 @@ public abstract class BaseTrashHandlerTestCase {
 	}
 
 	protected boolean isIndexableBaseModel() {
-
-		// See LPS-32381
-
-		return false;
+		return true;
 	}
 
 	protected boolean isInTrashContainer(ClassedModel classedModel)
