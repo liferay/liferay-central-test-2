@@ -212,14 +212,13 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 
 				int index = 0;
 
-				request.setAttribute("configuration.jsp-categorizableGroupIds", _getCategorizableGroupIds(groupIds));
-
 				for (int queryLogicIndex : queryLogicIndexes) {
 					String queryValues = StringUtil.merge(preferences.getValues("queryValues" + queryLogicIndex , new String[0]));
 					String tagNames = ParamUtil.getString(request, "queryTagNames" + queryLogicIndex, queryValues);
 					String categoryIds = ParamUtil.getString(request, "queryCategoryIds" + queryLogicIndex, queryValues);
 
 					if (Validator.isNotNull(tagNames) || Validator.isNotNull(categoryIds) || (queryLogicIndexes.length == 1)) {
+						request.setAttribute("configuration.jsp-categorizableGroupIds", _getCategorizableGroupIds(groupIds));
 						request.setAttribute("configuration.jsp-index", String.valueOf(index));
 						request.setAttribute("configuration.jsp-queryLogicIndex", String.valueOf(queryLogicIndex));
 				%>
