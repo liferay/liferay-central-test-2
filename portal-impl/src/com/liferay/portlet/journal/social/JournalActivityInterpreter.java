@@ -53,16 +53,16 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			JournalArticleLocalServiceUtil.getJournalArticle(
 				activity.getClassPK());
 
-		if ((activityType == JournalActivityKeys.ADD_JOURNAL_ARTICLE) &&
+		if ((activityType == JournalActivityKeys.ADD_ARTICLE) &&
 			!JournalPermission.contains(
 				permissionChecker, activity.getGroupId(),
 				ActionKeys.ADD_ARTICLE)) {
 
 			return null;
 		}
-		else if ((activityType == JournalActivityKeys.UPDATE_JOURNAL_ARTICLE) &&
-			!JournalArticlePermission.contains(
-				permissionChecker, article, ActionKeys.UPDATE)) {
+		else if ((activityType == JournalActivityKeys.UPDATE_ARTICLE) &&
+				 !JournalArticlePermission.contains(
+					 permissionChecker, article, ActionKeys.UPDATE)) {
 
 			return null;
 		}
@@ -100,7 +100,7 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		if (activityType == JournalActivityKeys.ADD_JOURNAL_ARTICLE) {
+		if (activityType == JournalActivityKeys.ADD_ARTICLE) {
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-journal-add-article";
 			}
@@ -108,7 +108,7 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 				titlePattern = "activity-journal-add-article-in";
 			}
 		}
-		else if (activityType == JournalActivityKeys.UPDATE_JOURNAL_ARTICLE) {
+		else if (activityType == JournalActivityKeys.UPDATE_ARTICLE) {
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-journal-update-article";
 			}
@@ -117,19 +117,19 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 		}
 
-		String eventTitle = getValue(
+		String articleTitle = getValue(
 			activity.getExtraData(), "title", article.getTitle());
 
 		Object[] titleArguments = null;
 
 		if (Validator.isNotNull(link)) {
 			titleArguments = new Object[] {
-				groupName, creatorUserName, wrapLink(link, eventTitle)
+				groupName, creatorUserName, wrapLink(link, articleTitle)
 			};
 		}
 		else {
 			titleArguments = new Object[] {
-				groupName, creatorUserName, eventTitle,
+				groupName, creatorUserName, articleTitle,
 			};
 		}
 
@@ -139,12 +139,10 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String body = StringPool.BLANK;
 
-		double articleVersion = article.getVersion();
-
-		if (articleVersion > 1) {
+		if (article.getVersion() > 1) {
 			body = LanguageUtil.format(
 				themeDisplay.getLocale(),"created-new-journal-version",
-				articleVersion);
+				article.getVersion());
 		}
 
 		return new SocialActivityFeedEntry(link, title, body);
