@@ -25,13 +25,15 @@ import java.util.logging.Logger;
 public class Jdk14LogFactoryImpl implements LogFactory {
 
 	public Jdk14LogFactoryImpl() {
-		LogManager logManager = LogManager.getLogManager();
-
 		try {
-			InputStream inputStream = getClass().getResourceAsStream(
+			Class<?> clazz = getClass();
+
+			InputStream inputStream = clazz.getResourceAsStream(
 				"/logging.properties");
 
 			if (inputStream != null) {
+				LogManager logManager = LogManager.getLogManager();
+
 				logManager.readConfiguration(inputStream);
 			}
 		}
