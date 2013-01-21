@@ -19,8 +19,8 @@ package com.liferay.portlet.journal.social;
  */
 public class JournalActivityKeys {
 
-	public static final int ADD_JOURNAL_ARTICLE = 1;
+	public static final int ADD_ARTICLE = 1;
 
-	public static final int UPDATE_JOURNAL_ARTICLE = 2;
+	public static final int UPDATE_ARTICLE = 2;
 
 }
