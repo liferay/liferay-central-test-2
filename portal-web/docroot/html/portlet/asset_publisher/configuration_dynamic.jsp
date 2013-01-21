@@ -446,21 +446,19 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 </aui:script>
 
 <%!
-	private long[] _getCategorizableGroupIds(long[] groupIds) throws Exception {
-		long[] categorizableGroupIds = new long[groupIds.length];
+private long[] _getCategorizableGroupIds(long[] groupIds) throws Exception {
+	Set<Long> categorizableGroupIds = new HashSet<Long>(groupIds.length);
 
-		for (long groupId : groupIds) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+	for (long groupId : groupIds) {
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
-			}
-
-			if (!ArrayUtil.contains(categorizableGroupIds, groupId)) {
-				categorizableGroupIds = ArrayUtil.append(categorizableGroupIds, groupId);
-			}
+		if (group.isLayout()) {
+			groupId = group.getParentGroupId();
 		}
 
-		return categorizableGroupIds;
+		categorizableGroupIds.add(groupId);
 	}
+
+	return ArrayUtil.toArray(categorizableGroupIds.toArray(new Long[categorizableGroupIds.size()]));
+}
 %>
