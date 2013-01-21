@@ -16,7 +16,7 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.DelegatingSpellCheckIndexWriter;
+import com.liferay.portal.kernel.search.BaseIndexWriter;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -40,8 +40,7 @@ import org.apache.lucene.index.Term;
  * @author Allen Chiang
  * @author Alex Wallace
  */
-public class LuceneIndexWriterImpl
-	extends DelegatingSpellCheckIndexWriter implements IndexWriter {
+public class LuceneIndexWriter extends BaseIndexWriter implements IndexWriter {
 
 	public void addDocument(SearchContext searchContext, Document document)
 		throws SearchException {
@@ -221,7 +220,6 @@ public class LuceneIndexWriterImpl
 		return luceneDocument;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LuceneIndexWriterImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneIndexWriter.class);
 
 }

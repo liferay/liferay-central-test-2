@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.DelegatingQuerySuggester;
+import com.liferay.portal.kernel.search.BaseIndexSearcher;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -84,8 +84,8 @@ import org.apache.lucene.search.highlight.TokenGroup;
 /**
  * @author Bruno Farache
  */
-public class LuceneIndexSearcherImpl
-	extends DelegatingQuerySuggester implements IndexSearcher {
+public class LuceneIndexSearcher
+	extends BaseIndexSearcher implements IndexSearcher {
 
 	public Hits search(SearchContext searchContext, Query query)
 		throws SearchException {
@@ -646,8 +646,7 @@ public class LuceneIndexSearcherImpl
 		return hits;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LuceneIndexSearcherImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LuceneIndexSearcher.class);
 
 	private class HitDocs {
 
