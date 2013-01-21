@@ -2692,11 +2692,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		Locale locale = serviceContext.getLocale();
-
-		JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-		extraDataJSONObject.put("title", article.getTitle(locale));
-
 		if (hasModifiedLatestApprovedVersion(
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
@@ -2781,27 +2776,26 @@ public class JournalArticleLocalServiceImpl
 						expirationDate, true);
 				}
 
-				// Indexer
-
-				reindex(article);
-
 				// Social
 
 				if (serviceContext.isCommandUpdate()) {
 					socialActivityLocalService.addActivity(
 						user.getUserId(), article.getGroupId(),
 						JournalArticle.class.getName(), article.getId(),
-						JournalActivityKeys.UPDATE_JOURNAL_ARTICLE,
-						extraDataJSONObject.toString(), 0);
+						JournalActivityKeys.UPDATE_ARTICLE,
+						getExtraDataJSON(article, serviceContext), 0);
 				}
 				else {
 					socialActivityLocalService.addUniqueActivity(
 						user.getUserId(), article.getGroupId(),
 						JournalArticle.class.getName(), article.getId(),
-						JournalActivityKeys.ADD_JOURNAL_ARTICLE,
-						extraDataJSONObject.toString(), 0);
+						JournalActivityKeys.ADD_ARTICLE,
+						getExtraDataJSON(article, serviceContext), 0);
 				}
 
+				// Indexer
+
+				reindex(article);
 			}
 			else if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
 				updatePreviousApprovedArticle(article);
@@ -2809,6 +2803,23 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (oldStatus == WorkflowConstants.STATUS_IN_TRASH) {
+
+			// Social
+
+			if (serviceContext.isCommandUpdate()) {
+				socialActivityLocalService.addActivity(
+					user.getUserId(), article.getGroupId(),
+					JournalArticle.class.getName(), article.getId(),
+					JournalActivityKeys.UPDATE_ARTICLE,
+					getExtraDataJSON(article, serviceContext), 0);
+			}
+			else {
+				socialActivityLocalService.addUniqueActivity(
+					user.getUserId(), article.getGroupId(),
+					JournalArticle.class.getName(), article.getId(),
+					JournalActivityKeys.ADD_ARTICLE,
+					getExtraDataJSON(article, serviceContext), 0);
+			}
 
 			// Trash
 
@@ -2838,23 +2849,6 @@ public class JournalArticleLocalServiceImpl
 					JournalArticle.class);
 
 				indexer.delete(article);
-			}
-
-			//Social
-
-			if (serviceContext.isCommandUpdate()) {
-				socialActivityLocalService.addActivity(
-					user.getUserId(), article.getGroupId(),
-					JournalArticle.class.getName(), article.getId(),
-					JournalActivityKeys.UPDATE_JOURNAL_ARTICLE,
-					extraDataJSONObject.toString(), 0);
-			}
-			else {
-				socialActivityLocalService.addUniqueActivity(
-					user.getUserId(), article.getGroupId(),
-					JournalArticle.class.getName(), article.getId(),
-					JournalActivityKeys.ADD_JOURNAL_ARTICLE,
-					extraDataJSONObject.toString(), 0);
 			}
 
 		}
@@ -3455,6 +3449,16 @@ public class JournalArticleLocalServiceImpl
 		dateInterval[1] = latestExpirationDate;
 
 		return dateInterval;
+	}
+
+	protected String getExtraDataJSON(
+		JournalArticle article, ServiceContext serviceContext) {
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("title", article.getTitle(serviceContext.getLocale()));
+
+		return jsonObject.toString();
 	}
 
 	protected String getUniqueUrlTitle(
