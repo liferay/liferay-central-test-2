@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.social;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -138,12 +137,6 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Body
 
 		String body = StringPool.BLANK;
-
-		if (article.getVersion() > 1) {
-			body = LanguageUtil.format(
-				themeDisplay.getLocale(),"created-new-journal-version",
-				article.getVersion());
-		}
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}
