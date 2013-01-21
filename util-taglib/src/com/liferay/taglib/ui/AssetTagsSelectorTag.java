@@ -22,9 +22,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -108,23 +105,23 @@ public class AssetTagsSelectorTag extends IncludeTag {
 			ThemeDisplay themeDisplay = (ThemeDisplay) pageContext.getAttribute(
 				"themeDisplay");
 
-			List<Long> groupIds = new ArrayList<Long>();
+			long[] groupIds = null;
 
 			Group group = themeDisplay.getScopeGroup();
 
 			if (group.isLayout()) {
-				groupIds.add(group.getParentGroupId());
+				groupIds = new long[] {group.getParentGroupId()};
 			}
 			else {
-				groupIds.add(group.getGroupId());
+				groupIds = new long[] {group.getGroupId()};
 			}
 
 			if (group.getParentGroupId() != themeDisplay.getCompanyGroupId()) {
-				groupIds.add(themeDisplay.getCompanyGroupId());
+				groupIds = ArrayUtil.append(
+					groupIds, themeDisplay.getCompanyGroupId());
 			}
 
-			_groupIds = ArrayUtil.toArray(
-				ArrayUtil.toLongArray(groupIds.toArray()));
+			_groupIds = groupIds;
 		}
 
 		request.setAttribute(
