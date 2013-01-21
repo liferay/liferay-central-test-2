@@ -45,7 +45,8 @@ import org.junit.runner.RunWith;
  * @author Zsolt Berentey
  * @author Eduardo Garcia
  */
-@ExecutionTestListeners(listeners = {
+@ExecutionTestListeners(
+	listeners = {
 		MainServletExecutionTestListener.class,
 		SynchronousDestinationExecutionTestListener.class
 	})
