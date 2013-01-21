@@ -40,9 +40,10 @@ public class PACLTemplateWrapper implements Template {
 			return template;
 		}
 
-		PACLPolicy policy = PACLPolicyManager.getPACLPolicy(contextClassLoader);
+		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
+			contextClassLoader);
 
-		return new PACLTemplateWrapper(template, policy);
+		return new PACLTemplateWrapper(template, paclPolicy);
 	}
 
 	public PACLTemplateWrapper(Template template, PACLPolicy policy) {
@@ -51,7 +52,7 @@ public class PACLTemplateWrapper implements Template {
 		}
 
 		_template = template;
-		_policy = policy;
+		_paclPolicy = policy;
 	}
 
 	public Object get(String key) {
@@ -63,16 +64,16 @@ public class PACLTemplateWrapper implements Template {
 	}
 
 	public boolean processTemplate(Writer writer) throws TemplateException {
-		PACLPolicy initialPolicy =
+		PACLPolicy paclPolicy =
 			PortalSecurityManagerThreadLocal.getPACLPolicy();
 
 		try {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(_policy);
+			PortalSecurityManagerThreadLocal.setPACLPolicy(_paclPolicy);
 
 			return _template.processTemplate(writer);
 		}
 		finally {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(initialPolicy);
+			PortalSecurityManagerThreadLocal.setPACLPolicy(paclPolicy);
 		}
 	}
 
@@ -80,7 +81,7 @@ public class PACLTemplateWrapper implements Template {
 		_template.put(key, value);
 	}
 
-	private PACLPolicy _policy;
+	private PACLPolicy _paclPolicy;
 	private Template _template;
 
 }

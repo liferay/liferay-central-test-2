@@ -122,10 +122,10 @@ public class TemplateContextHelper {
 		PACLPolicy threadLocalPACLPolicy =
 			PortalSecurityManagerThreadLocal.getPACLPolicy();
 
-		PACLPolicy contextClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(contextClassLoader);
-
 		try {
+			PACLPolicy contextClassLoaderPACLPolicy =
+				PACLPolicyManager.getPACLPolicy(contextClassLoader);
+
 			PortalSecurityManagerThreadLocal.setPACLPolicy(
 				contextClassLoaderPACLPolicy);
 
@@ -283,27 +283,24 @@ public class TemplateContextHelper {
 	}
 
 	public void removeAllHelperUtilities() {
-		_helperUtilitiesMapCache.clear();
+		_helperUtilitiesMaps.clear();
 	}
 
 	public void removeHelperUtilities(ClassLoader classLoader) {
-		_helperUtilitiesMapCache.remove(classLoader);
+		_helperUtilitiesMaps.remove(classLoader);
 	}
 
 	protected Map<String, Object> doGetHelperUtilities(
-		ClassLoader contextClassLoader,
-		TemplateContextType templateContextType) {
+		ClassLoader classLoader, TemplateContextType templateContextType) {
 
-		EnumMap<TemplateContextType, Map<String, Object>> helperUtilitiesMap =
-			_helperUtilitiesMapCache.get(contextClassLoader);
+		HelperUtilitiesMap helperUtilitiesMap = _helperUtilitiesMaps.get(
+			classLoader);
 
 		if (helperUtilitiesMap == null) {
-			helperUtilitiesMap =
-				new EnumMap<TemplateContextType, Map<String, Object>>(
-					TemplateContextType.class);
+			helperUtilitiesMap = new HelperUtilitiesMap(
+				TemplateContextType.class);
 
-			_helperUtilitiesMapCache.put(
-				contextClassLoader, helperUtilitiesMap);
+			_helperUtilitiesMaps.put(classLoader, helperUtilitiesMap);
 		}
 
 		Map<String, Object> helperUtilities = helperUtilitiesMap.get(
@@ -821,10 +818,17 @@ public class TemplateContextHelper {
 	private static Log _log = LogFactoryUtil.getLog(
 		TemplateContextHelper.class);
 
-	private Map<ClassLoader, EnumMap<TemplateContextType, Map<String, Object>>>
-		_helperUtilitiesMapCache =
-			new ConcurrentHashMap
-				<ClassLoader,
-					EnumMap<TemplateContextType, Map<String, Object>>>();
+	private Map<ClassLoader, HelperUtilitiesMap>
+		_helperUtilitiesMaps = new ConcurrentHashMap
+			<ClassLoader, HelperUtilitiesMap>();
+
+	private class HelperUtilitiesMap
+		extends EnumMap<TemplateContextType, Map<String, Object>> {
+
+		public HelperUtilitiesMap(Class<TemplateContextType> keyClazz) {
+			super(keyClazz);
+		}
+
+	}
 
 }

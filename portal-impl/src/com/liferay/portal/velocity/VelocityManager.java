@@ -74,7 +74,7 @@ public class VelocityManager implements TemplateManager {
 
 		Template template = null;
 
-		VelocityContext velocityContext = _getVelocityContext(
+		VelocityContext velocityContext = getVelocityContext(
 			templateContextType);
 
 		if (templateContextType.equals(TemplateContextType.EMPTY)) {
@@ -181,7 +181,7 @@ public class VelocityManager implements TemplateManager {
 		_templateContextHelper = templateContextHelper;
 	}
 
-	private VelocityContext _getVelocityContext(
+	protected VelocityContext getVelocityContext(
 		TemplateContextType templateContextType) {
 
 		VelocityContext velocityContext = new VelocityContext();
