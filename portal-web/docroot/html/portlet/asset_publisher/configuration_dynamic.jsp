@@ -106,7 +106,10 @@ String selectScope = (String)request.getAttribute("configuration.jsp-selectScope
 
 				String className = AssetPublisherUtil.getClassName(assetRendererFactory);
 
-				Long[] assetAvailableClassTypeIds = ArrayUtil.toLongArray(assetAvailableClassTypes.keySet().toArray());
+				Set<Long> assetAvailableClassTypeIdsSet = assetAvailableClassTypes.keySet();
+
+				Long[] assetAvailableClassTypeIds = assetAvailableClassTypeIdsSet.toArray(new Long[assetAvailableClassTypeIdsSet.size()]);
+
 				Long[] assetSelectedClassTypeIds = AssetPublisherUtil.getClassTypeIds(preferences, className, assetAvailableClassTypeIds);
 
 				// Left list
@@ -459,6 +462,6 @@ private long[] _getCategorizableGroupIds(long[] groupIds) throws Exception {
 		categorizableGroupIds.add(groupId);
 	}
 
-	return ArrayUtil.toArray(categorizableGroupIds.toArray(new Long[categorizableGroupIds.size()]));
+	return ArrayUtil.toLongArray(categorizableGroupIds);
 }
 %>
