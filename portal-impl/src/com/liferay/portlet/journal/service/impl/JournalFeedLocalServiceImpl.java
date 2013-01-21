@@ -31,7 +31,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
@@ -339,8 +338,7 @@ public class JournalFeedLocalServiceImpl
 		else {
 			try {
 				DDMStructure ddmStructure =
-					DDMStructureLocalServiceUtil.getStructure(
-						groupId, structureId);
+					ddmStructureLocalService.getStructure(groupId, structureId);
 
 				Document document = SAXReaderUtil.read(ddmStructure.getXsd());
 
