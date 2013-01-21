@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.HitsImpl;
-import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryConfig;
@@ -84,8 +83,7 @@ import org.apache.lucene.search.highlight.TokenGroup;
 /**
  * @author Bruno Farache
  */
-public class LuceneIndexSearcher
-	extends BaseIndexSearcher implements IndexSearcher {
+public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 	public Hits search(SearchContext searchContext, Query query)
 		throws SearchException {
