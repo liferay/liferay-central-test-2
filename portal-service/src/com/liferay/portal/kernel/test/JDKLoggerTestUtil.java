@@ -74,8 +74,7 @@ public class JDKLoggerTestUtil {
 
 	static {
 
-		// Force to initialize java.util.logging.LogManager before configuring
-		// any java.util.logging.Logger, see LPS-32051 for the cause.
+		// See LPS-32051 and LPS-32471
 
 		LogFactoryUtil.getLog(JDKLoggerTestUtil.class);
 	}
