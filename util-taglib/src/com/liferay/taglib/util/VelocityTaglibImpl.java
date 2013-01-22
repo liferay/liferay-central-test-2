@@ -585,20 +585,6 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		requestDispatcher.include(_request, _response);
 	}
 
-	public VelocityTaglibImpl init(
-		ServletContext servletContext, HttpServletRequest request,
-		HttpServletResponse response, PageContext pageContext,
-		TemplateContext templateContext) {
-
-		_servletContext = servletContext;
-		_request = request;
-		_response = response;
-		_pageContext = pageContext;
-		_templateContext = templateContext;
-
-		return this;
-	}
-
 	public void journalArticle(
 			String articleId, long groupId, String templateId)
 		throws Exception {
@@ -946,6 +932,20 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return WrapPortletTag.doTag(
 			wrapPage, portletPage, _servletContext, _request, _response,
 			_pageContext);
+	}
+
+	protected VelocityTaglibImpl init(
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response, PageContext pageContext,
+		TemplateContext templateContext) {
+
+		_servletContext = servletContext;
+		_request = request;
+		_response = response;
+		_pageContext = pageContext;
+		_templateContext = templateContext;
+
+		return this;
 	}
 
 	protected void setUp(TagSupport tagSupport) throws Exception {
