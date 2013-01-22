@@ -36,7 +36,7 @@ catch (Exception e) {
 	backURL="<%= redirect %>"
 	escapeXml="<%= false %>"
 	localizeTitle="<%= (selCompany == null) %>"
-	title='<%= (escapedCompany2 == null) ? "new-portal-instance" : HtmlUtil.escape(selCompany.getName()) %>'
+	title='<%= (selCompany == null) ? "new-portal-instance" : HtmlUtil.escape(selCompany.getName()) %>'
 />
 
 <portlet:actionURL var="editInstanceURL">
