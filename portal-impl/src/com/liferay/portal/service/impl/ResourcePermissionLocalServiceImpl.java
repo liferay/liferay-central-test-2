@@ -378,7 +378,7 @@ public class ResourcePermissionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return resourcePermissionPersistence.findByC_N_S_P_R(
-				companyId, name, scope, primKey, roleId);
+			companyId, name, scope, primKey, roleId);
 	}
 
 	/**
