@@ -46,18 +46,18 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 	protected void addAttachment(ClassedModel classedModel) throws Exception {
 		WikiPage page = (WikiPage)classedModel;
 
+		String fileName = ServiceTestUtil.randomString() + ".txt";
+
 		Class<?> clazz = getClass();
 
-		byte[] fileBytes = FileUtil.getBytes(
+		byte[] bytes = FileUtil.getBytes(
 			clazz.getResourceAsStream("dependencies/OSX_Test.docx"));
 
 		File file = null;
 
-		if ((fileBytes != null) && (fileBytes.length > 0)) {
-			file = FileUtil.createTempFile(fileBytes);
+		if ((bytes != null) && (bytes.length > 0)) {
+			file = FileUtil.createTempFile(bytes);
 		}
-
-		String fileName = ServiceTestUtil.randomString() + ".txt";
 
 		WikiPageLocalServiceUtil.addPageAttachment(
 			TestPropsValues.getUserId(), page.getNodeId(), page.getTitle(),
@@ -70,14 +70,14 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		serviceContext = (ServiceContext)serviceContext.clone();
-
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
-
 		String title = getSearchKeywords();
 
 		title += ServiceTestUtil.randomString(
 			_PAGE_TITLE_MAX_LENGTH - title.length());
+
+		serviceContext = (ServiceContext)serviceContext.clone();
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		WikiPage page = WikiPageLocalServiceUtil.addPage(
 			TestPropsValues.getUserId(),
