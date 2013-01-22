@@ -36,9 +36,9 @@ public interface ModuleFramework {
 	public Object addBundle(String location, InputStream inputStream)
 		throws PortalException;
 
-	public List<URL> getExtraPackageLocations();
-
 	public Map<String, List<URL>> getExtraPackageMap();
+
+	public List<URL> getExtraPackageURLs();
 
 	public Framework getFramework();
 

@@ -41,12 +41,12 @@ public class ModuleFrameworkUtil {
 		return getModuleFramework().addBundle(location, inputStream);
 	}
 
-	public static List<URL> getExtraPackageLocations() {
-		return getModuleFramework().getExtraPackageLocations();
-	}
-
 	public static Map<String, List<URL>> getExtraPackageMap() {
 		return getModuleFramework().getExtraPackageMap();
+	}
+
+	public static List<URL> getExtraPackageURLs() {
+		return getModuleFramework().getExtraPackageURLs();
 	}
 
 	public static Framework getFramework() {
