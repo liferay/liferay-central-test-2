@@ -15,20 +15,19 @@
 --%>
 
 <%
-String emailParam = (String)request.getAttribute("configuration.jsp-emailParam");
-String editorParam = (String)request.getAttribute("configuration.jsp-editorParam");
-
-String currentLanguageId = LanguageUtil.getLanguageId(request);
-
 String emailFromName = ParamUtil.getString(request, "emailFromName", AssetPublisherUtil.getEmailFromName(preferences, company.getCompanyId()));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", AssetPublisherUtil.getEmailFromAddress(preferences, company.getCompanyId()));
 
+String emailParam = (String)request.getAttribute("configuration.jsp-emailParam");
 String defaultEmailSubject = ContentUtil.get(PropsUtil.get(PropsKeys.ASSET_PUBLISHER_EMAIL_ASSET_ENTRY_ADDED_SUBJECT));
 String defaultEmailBody = ContentUtil.get(PropsUtil.get(PropsKeys.ASSET_PUBLISHER_EMAIL_ASSET_ENTRY_ADDED_BODY));
+
+String currentLanguageId = LanguageUtil.getLanguageId(request);
 
 String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, defaultEmailSubject);
 String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, defaultEmailBody);
 
+String editorParam = (String)request.getAttribute("configuration.jsp-editorParam");
 String editorContent = emailBody;
 
 boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAddedEnabled(preferences);
