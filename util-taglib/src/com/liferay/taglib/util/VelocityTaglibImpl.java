@@ -87,12 +87,12 @@ import javax.servlet.jsp.PageContext;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class VelocityTaglib {
+public class VelocityTaglibImpl implements VelocityTaglib {
 
-	public VelocityTaglib() {
+	public VelocityTaglibImpl() {
 	}
 
-	public VelocityTaglib(
+	public VelocityTaglibImpl(
 		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response, PageContext pageContext,
 		TemplateContext templateContext) {
@@ -585,7 +585,7 @@ public class VelocityTaglib {
 		requestDispatcher.include(_request, _response);
 	}
 
-	public VelocityTaglib init(
+	public VelocityTaglibImpl init(
 		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response, PageContext pageContext,
 		TemplateContext templateContext) {
