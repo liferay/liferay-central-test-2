@@ -60,7 +60,7 @@ public interface DLFolderFinder {
 		com.liferay.portal.kernel.dao.orm.QueryDefinition queryDefinition)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findByNoAssets()
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findF_ByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<java.lang.Object> findF_FE_FS_ByG_F_M_M(

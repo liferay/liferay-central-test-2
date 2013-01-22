@@ -92,9 +92,9 @@ public class DLFolderFinderUtil {
 				   .filterFindFE_FS_ByG_F(groupId, folderId, queryDefinition);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findByNoAssets()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> findF_ByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByNoAssets();
+		return getFinder().findF_ByNoAssets();
 	}
 
 	public static java.util.List<java.lang.Object> findF_FE_FS_ByG_F_M_M(
