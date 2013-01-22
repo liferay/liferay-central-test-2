@@ -650,55 +650,55 @@ public class ModuleFrameworkImpl
 
 	private String _getSystemPackagesExtra() {
 		_extraPackageMap = new TreeMap<String, List<URL>>();
-	
+
 		StringBundler sb = new StringBundler();
-	
+
 		for (String extraPackage :
 				PropsValues.MODULE_FRAMEWORK_SYSTEM_PACKAGES_EXTRA) {
-	
+
 			sb.append(extraPackage);
 			sb.append(StringPool.COMMA);
 		}
-	
+
 		List<URL> urls = new UniqueList<URL>();
-	
+
 		ClassLoader classLoader = PACLClassLoaderUtil.getPortalClassLoader();
-	
+
 		Enumeration<URL> enu = Collections.enumeration(Collections.emptyList());
-	
+
 		try {
 			enu = classLoader.getResources(MANIFEST_PATH);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
 		}
-	
+
 		while (enu.hasMoreElements()) {
 			URL url = enu.nextElement();
-	
+
 			urls.add(url);
 		}
-	
+
 		for (URL url : urls) {
 			_processURL(
 				sb, url,
 				PropsValues.MODULE_FRAMEWORK_SYSTEM_BUNDLE_IGNORED_FRAGMENTS);
 		}
-	
+
 		_extraPackageMap = Collections.unmodifiableMap(_extraPackageMap);
-	
+
 		sb.setIndex(sb.index() - 1);
-	
+
 		if (_log.isTraceEnabled()) {
 			String s = sb.toString();
-	
+
 			s = s.replace(",", "\n");
-	
+
 			_log.trace(
 				"The portal's system bundle is exporting the following " +
 					"packages:\n" +s);
 		}
-	
+
 		return sb.toString();
 	}
 
