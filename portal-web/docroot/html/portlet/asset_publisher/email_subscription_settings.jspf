@@ -84,6 +84,12 @@ boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAdded
 
 	<dl>
 		<dt>
+			[ASSET_ENTRIES_LIST]
+		</dt>
+		<dd>
+			<liferay-ui:message key="the-list-of-assets" />
+		</dd>
+		<dt>
 			[$COMPANY_ID$]
 		</dt>
 		<dd>
@@ -102,12 +108,6 @@ boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAdded
 			<liferay-ui:message key="the-company-name-associated-with-the-asset" />
 		</dd>
 		<dt>
-		<dt>
-			[ASSET_ENTRIES_LIST]
-		</dt>
-		<dd>
-			<liferay-ui:message key="the-list-of-assets" />
-		</dd>
 		<dt>
 			[$FROM_ADDRESS$]
 		</dt>
