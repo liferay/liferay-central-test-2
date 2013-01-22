@@ -66,7 +66,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		if (cmd.equals(Constants.UPDATE)) {
+		if (cmd.equals(Constants.TRANSLATE)) {
+			super.processAction(portletConfig, actionRequest, actionResponse);
+		}
+		else if (cmd.equals(Constants.UPDATE)) {
 			validateEmailAssetEntryAdded(actionRequest);
 			validateEmailFrom(actionRequest);
 
@@ -81,9 +84,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 			updateDefaultAssetPublisher(actionRequest);
 
-			super.processAction(portletConfig, actionRequest, actionResponse);
-		}
-		else if (cmd.equals(Constants.TRANSLATE)) {
 			super.processAction(portletConfig, actionRequest, actionResponse);
 		}
 		else {
