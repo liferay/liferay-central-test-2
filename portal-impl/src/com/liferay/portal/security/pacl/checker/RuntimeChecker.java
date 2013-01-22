@@ -83,6 +83,12 @@ public class RuntimeChecker extends BaseReflectChecker {
 					_log, "Attempted to create a class loader");
 			}
 		}
+		else if (name.equals(RUNTIME_PERMISSION_CREATE_SECURITY_MANAGER)) {
+			if (!hasCreateSecurityManager()) {
+				throwSecurityException(
+					_log, "Attempted to create a security manager");
+			}
+		}
 		else if (name.startsWith(RUNTIME_PERMISSION_GET_CLASSLOADER)) {
 			if (PortalSecurityManagerThreadLocal.isCheckGetClassLoader() &&
 				!isJSPCompiler(permission.getName(), permission.getActions()) &&
@@ -202,6 +208,20 @@ public class RuntimeChecker extends BaseReflectChecker {
 
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	protected boolean hasCreateSecurityManager() {
+		Class<?> callerClass7 = Reflection.getCallerClass(7);
+
+		if (callerClass7.getName().startsWith("javax.crypto") &&
+			CheckerUtil.isAccessControllerDoPrivileged(10)) {
+
+			logCreateSecurityManager(callerClass7, 7);
+
+			return true;
 		}
 
 		return false;
@@ -705,6 +725,14 @@ public class RuntimeChecker extends BaseReflectChecker {
 			_log.info(
 				"Allowing frame " + frame + " with caller " + callerClass +
 					" to create a class loader");
+		}
+	}
+
+	protected void logCreateSecurityManager(Class<?> callerClass, int frame) {
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Allowing frame " + frame + " with caller " + callerClass +
+					"to create a security manager");
 		}
 	}
 
