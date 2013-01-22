@@ -219,11 +219,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			/>
 
 			<%
-				long groupFileEntriesUserId = 0;
+			long groupFileEntriesUserId = 0;
 
-				if (topLink.equals("mine") && themeDisplay.isSignedIn()) {
-					groupFileEntriesUserId = user.getUserId();
-				}
+			if (topLink.equals("mine") && themeDisplay.isSignedIn()) {
+				groupFileEntriesUserId = user.getUserId();
+			}
 			%>
 
 			<liferay-ui:search-container

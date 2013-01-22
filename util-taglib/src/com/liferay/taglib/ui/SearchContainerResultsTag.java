@@ -46,7 +46,7 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 
 			int total = searchContainer.getTotal();
 
-			if (Validator.isNull(_total)) {
+			if (_total == 0) {
 				_total = total;
 			}
 
@@ -62,6 +62,7 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 			}
 
 			searchContainer.setResults(_results);
+
 			if (total == 0) {
 				searchContainer.setTotal(_total);
 			}
