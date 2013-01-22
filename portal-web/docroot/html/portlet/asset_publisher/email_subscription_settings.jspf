@@ -93,19 +93,19 @@ boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAdded
 			[$COMPANY_ID$]
 		</dt>
 		<dd>
-			<liferay-ui:message key="the-company-id-associated-with-the-asset" />
+			<liferay-ui:message key="the-company-id-associated-with-the-assets" />
 		</dd>
 		<dt>
 			[$COMPANY_MX$]
 		</dt>
 		<dd>
-			<liferay-ui:message key="the-company-mx-associated-with-the-asset" />
+			<liferay-ui:message key="the-company-mx-associated-with-the-assets" />
 		</dd>
 		<dt>
 			[$COMPANY_NAME$]
 		</dt>
 		<dd>
-			<liferay-ui:message key="the-company-name-associated-with-the-asset" />
+			<liferay-ui:message key="the-company-name-associated-with-the-assets" />
 		</dd>
 		<dt>
 		<dt>
@@ -136,7 +136,7 @@ boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAdded
 			[$SITE_NAME$]
 		</dt>
 		<dd>
-			<liferay-ui:message key="the-site-name-associated-with-the-asset" />
+			<liferay-ui:message key="the-site-name-associated-with-the-assets" />
 		</dd>
 		<dt>
 			[$TO_ADDRESS$]
