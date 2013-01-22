@@ -27,8 +27,12 @@ import com.liferay.portal.security.pacl.PACLClassUtil;
 
 import java.security.Permission;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.xerces.impl.dv.DatatypeException;
 import org.apache.xerces.parsers.AbstractDOMParser;
@@ -358,10 +362,14 @@ public class RuntimeChecker extends BaseReflectChecker {
 	}
 
 	protected boolean hasGetEnv(String name) {
-		if (_environmentVariables.contains(name) ||
-			_environmentVariables.contains(StringPool.STAR)) {
+		for (Pattern environmentVariablePattern :
+				_environmentVariablePatterns) {
 
-			return true;
+			Matcher matcher = environmentVariablePattern.matcher(name);
+
+			if (matcher.matches()) {
+				return true;
+			}
 		}
 
 		Class<?> callerClass7 = Reflection.getCallerClass(7);
@@ -475,17 +483,22 @@ public class RuntimeChecker extends BaseReflectChecker {
 	}
 
 	protected void initEnvironmentVariables() {
-		_environmentVariables = getPropertySet(
-			"security-manager-get-environment-variable");
+		Set<String> environmentVariables = getPropertySet(
+			"security-manager-environment-variables");
 
-		if (_log.isDebugEnabled()) {
-			Set<String> environmentVariables = new TreeSet<String>(
-				_environmentVariables);
+		_environmentVariablePatterns = new ArrayList<Pattern>(
+			environmentVariables.size());
 
-			for (String environmentVariable : environmentVariables) {
+		for (String environmentVariable : environmentVariables) {
+			Pattern environmentVariablePattern = Pattern.compile(
+				environmentVariable);
+			
+			_environmentVariablePatterns.add(environmentVariablePattern);
+
+			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Allowing access to environment variable " +
-						environmentVariable);
+					"Allowing access to environment variables that match " +
+						"the regular expression " + environmentVariable);
 			}
 		}
 	}
@@ -774,6 +787,6 @@ public class RuntimeChecker extends BaseReflectChecker {
 	private static Log _log = LogFactoryUtil.getLog(RuntimeChecker.class);
 
 	private Set<String> _classLoaderReferenceIds;
-	private Set<String> _environmentVariables;
+	private List<Pattern> _environmentVariablePatterns;
 
 }
