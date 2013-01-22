@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.search.lucene;
+package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.search.Hits;
