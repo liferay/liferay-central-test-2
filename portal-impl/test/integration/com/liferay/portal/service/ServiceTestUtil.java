@@ -416,8 +416,8 @@ public class ServiceTestUtil {
 		IndexerRegistryUtil.register(new ContactIndexer());
 		IndexerRegistryUtil.register(new UserIndexer());
 		IndexerRegistryUtil.register(new BookmarksIndexer());
-		IndexerRegistryUtil.register(new DLFolderIndexer());
 		IndexerRegistryUtil.register(new DLFileEntryIndexer());
+		IndexerRegistryUtil.register(new DLFolderIndexer());
 		IndexerRegistryUtil.register(new MBMessageIndexer());
 		IndexerRegistryUtil.register(new TrashIndexer());
 		IndexerRegistryUtil.register(new WikiNodeIndexer());

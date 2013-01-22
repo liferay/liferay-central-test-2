@@ -323,7 +323,7 @@
 				[$FILE_SHORTCUT_FOLDER_ID$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findByNoAssets">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_ByNoAssets">
 		<![CDATA[
 			SELECT
 				{DLFolder.*}

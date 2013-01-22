@@ -534,7 +534,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<DLFolder> getNoAssetFolders() throws SystemException {
-		return dlFolderFinder.findByNoAssets();
+		return dlFolderFinder.findF_ByNoAssets();
 	}
 
 	public void getSubfolderIds(

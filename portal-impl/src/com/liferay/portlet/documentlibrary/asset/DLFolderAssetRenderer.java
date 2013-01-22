@@ -42,8 +42,8 @@ import javax.portlet.WindowState;
 /**
  * @author Alexander Chow
  */
-public class DLFolderAssetRenderer extends BaseAssetRenderer
-	implements TrashRenderer {
+public class DLFolderAssetRenderer
+	extends BaseAssetRenderer implements TrashRenderer {
 
 	public static final String TYPE = "folder";
 
@@ -75,7 +75,6 @@ public class DLFolderAssetRenderer extends BaseAssetRenderer
 		try {
 			foldersCount = DLAppServiceUtil.getFoldersCount(
 				_folder.getRepositoryId(), _folder.getFolderId());
-
 			fileEntriesAndFileShortcutsCount =
 				DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(
 					_folder.getRepositoryId(), _folder.getFolderId(),
@@ -139,11 +138,10 @@ public class DLFolderAssetRenderer extends BaseAssetRenderer
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
 			PortletKeys.DOCUMENT_LIBRARY, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(windowState);
-
 		portletURL.setParameter("struts_action", "/document_library/view");
 		portletURL.setParameter(
 			"folderId", String.valueOf(_folder.getFolderId()));
+		portletURL.setWindowState(windowState);
 
 		return portletURL;
 	}
@@ -171,8 +169,10 @@ public class DLFolderAssetRenderer extends BaseAssetRenderer
 		return _folder.getUuid();
 	}
 
-	public String render(RenderRequest renderRequest,
-		RenderResponse renderResponse, String template) throws Exception {
+	public String render(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String template)
+		throws Exception {
 
 		if (template.equals(TEMPLATE_ABSTRACT) ||
 			template.equals(TEMPLATE_FULL_CONTENT)) {

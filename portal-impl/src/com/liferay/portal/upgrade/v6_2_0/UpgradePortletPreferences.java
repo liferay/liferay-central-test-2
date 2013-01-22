@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -32,8 +31,9 @@ import javax.portlet.PortletPreferences;
  */
 public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
+	@Override
 	protected String[] getPortletIds() {
-		return new String[] { PortletKeys.SEARCH };
+		return new String[] {PortletKeys.SEARCH};
 	}
 
 	protected JSONObject upgradeDataJSONObject(JSONObject dataJSONObject)
@@ -64,6 +64,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		return dataJSONObject;
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
@@ -74,7 +75,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		String searchConfiguration = portletPreferences.getValue(
-			"searchConfiguration", StringPool.NULL);
+			"searchConfiguration", null);
 
 		if (Validator.isNull(searchConfiguration)) {
 			return null;

@@ -36,8 +36,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Alexander Chow
  */
@@ -69,11 +67,9 @@ public class DLFolderAssetRendererFactory extends BaseAssetRendererFactory {
 			LiferayPortletResponse liferayPortletResponse)
 		throws PortalException, SystemException {
 
-		HttpServletRequest request =
-			liferayPortletRequest.getHttpServletRequest();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		if (!DLPermission.contains(
 				themeDisplay.getPermissionChecker(),
@@ -83,7 +79,7 @@ public class DLFolderAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			request, PortletKeys.DOCUMENT_LIBRARY,
+			liferayPortletRequest, PortletKeys.DOCUMENT_LIBRARY,
 			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(

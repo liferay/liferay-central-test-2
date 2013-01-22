@@ -59,8 +59,8 @@ public class DLFolderFinderImpl
 	public static final String COUNT_FS_BY_G_F_A_S =
 		DLFolderFinder.class.getName() + ".countFS_ByG_F_A_S";
 
-	public static final String FIND_BY_NO_ASSETS =
-		DLFolderFinder.class.getName() + ".findByNoAssets";
+	public static final String FIND_F_BY_NO_ASSETS =
+		DLFolderFinder.class.getName() + ".findF_ByNoAssets";
 
 	public static final String FIND_F_BY_G_M_F =
 		DLFolderFinder.class.getName() + ".findF_ByG_M_F";
@@ -159,13 +159,13 @@ public class DLFolderFinderImpl
 		return doFindFE_FS_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
-	public List<DLFolder> findByNoAssets() throws SystemException {
+	public List<DLFolder> findF_ByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+			String sql = CustomSQLUtil.get(FIND_F_BY_NO_ASSETS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

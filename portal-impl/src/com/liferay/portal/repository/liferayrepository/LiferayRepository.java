@@ -675,7 +675,8 @@ public class LiferayRepository
 		scopeFacet.setStatic(true);
 
 		searchContext.addFacet(scopeFacet);
-		searchContext.setEntryClassNames(_searchEntryClassNames);
+
+		searchContext.setEntryClassNames(_ENTRY_CLASS_NAMES);
 
 		return indexer.search(searchContext);
 	}
@@ -859,10 +860,10 @@ public class LiferayRepository
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(LiferayRepository.class);
-
-	private static String[] _searchEntryClassNames = new String[] {
+	private static final String[] _ENTRY_CLASS_NAMES = {
 		DLFileEntryConstants.getClassName(), DLFolderConstants.getClassName()
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(LiferayRepository.class);
 
 }
