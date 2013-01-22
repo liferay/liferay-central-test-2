@@ -134,72 +134,58 @@ public class DummyVelocityTaglib implements VelocityTaglib {
 	}
 
 	public AssetLinksTag getAssetLinksTag() throws Exception {
-
 		return null;
 	}
 
 	public AssetTagsSummaryTag getAssetTagsSummaryTag() throws Exception {
-
 		return null;
 	}
 
 	public BreadcrumbTag getBreadcrumbTag() throws Exception {
-
 		return null;
 	}
 
 	public ColumnTag getColumnTag() throws Exception {
-
 		return null;
 	}
 
 	public DiscussionTag getDiscussionTag() throws Exception {
-
 		return null;
 	}
 
 	public FlagsTag getFlagsTag() throws Exception {
-
 		return null;
 	}
 
 	public IconTag getIconTag() throws Exception {
-
 		return null;
 	}
 
 	public JournalArticleTag getJournalArticleTag() throws Exception {
-
 		return null;
 	}
 
 	public LayoutTag getLayoutTag() throws Exception {
-
 		return null;
 	}
 
 	public MySitesTag getMySitesTag() throws Exception {
-
 		return null;
 	}
 
 	public PngImageTag getPngImageTag() throws Exception {
-
 		return null;
 	}
 
 	public RatingsTag getRatingsTag() throws Exception {
-
 		return null;
 	}
 
 	public String getSetting(String name) {
-
 		return null;
 	}
 
 	public WindowState getWindowState(String windowState) {
-
 		return null;
 	}
 
