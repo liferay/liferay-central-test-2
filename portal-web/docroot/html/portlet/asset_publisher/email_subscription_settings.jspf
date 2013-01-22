@@ -84,7 +84,7 @@ boolean emailAssetEntryAddedEnabled = AssetPublisherUtil.getEmailAssetEntryAdded
 
 	<dl>
 		<dt>
-			[$ASSET_ENTRIES_LIST$]
+			[$ASSET_ENTRIES$]
 		</dt>
 		<dd>
 			<liferay-ui:message key="the-list-of-assets" />
