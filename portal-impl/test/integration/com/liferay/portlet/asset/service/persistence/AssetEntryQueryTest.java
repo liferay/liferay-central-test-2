@@ -136,7 +136,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAllAssetTags1() throws Exception {
-		testAssetTags(new String[]{"liferay"}, false, false, 2);
+		testAssetTags(new String[] {"liferay"}, false, false, 2);
 	}
 
 	@Test
@@ -160,7 +160,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAnyAssetCategories1() throws Exception {
-		testAssetCategories(new long[]{_healthCategoryId}, true, false, 2);
+		testAssetCategories(new long[] {_healthCategoryId}, true, false, 2);
 	}
 
 	@Test
@@ -184,7 +184,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testAnyAssetTags1() throws Exception {
-		testAssetTags(new String[]{"liferay"}, true, false, 2);
+		testAssetTags(new String[] {"liferay"}, true, false, 2);
 	}
 
 	@Test
@@ -206,7 +206,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testNotAllAssetCategories1() throws Exception {
-		testAssetCategories(new long[]{_healthCategoryId}, false, true, 0);
+		testAssetCategories(new long[] {_healthCategoryId}, false, true, 0);
 	}
 
 	@Test
@@ -230,7 +230,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testNotAllAssetTags1() throws Exception {
-		testAssetTags(new String[]{"liferay"}, false, true, 0);
+		testAssetTags(new String[] {"liferay"}, false, true, 0);
 	}
 
 	@Test
@@ -254,7 +254,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testNotAnyAssetCategories1() throws Exception {
-		testAssetCategories(new long[]{_healthCategoryId}, true, true, 0);
+		testAssetCategories(new long[] {_healthCategoryId}, true, true, 0);
 	}
 
 	@Test
@@ -278,7 +278,7 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testNotAnyAssetTags1() throws Exception {
-		testAssetTags(new String[]{"liferay"}, true, true, 0);
+		testAssetTags(new String[] {"liferay"}, true, true, 0);
 	}
 
 	@Test
@@ -310,10 +310,8 @@ public class AssetEntryQueryTest {
 				assetEntryQuery, assetCategoryIds, any, not);
 		}
 
-		long[] assetTagIds = null;
-
 		if (assetTagNames != null) {
-			assetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			long[] assetTagIds = AssetTagLocalServiceUtil.getTagIds(
 				groupId, assetTagNames);
 
 			assetEntryQuery = _buildAssetEntryQueryWithAssetTagIds(
