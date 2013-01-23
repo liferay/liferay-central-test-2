@@ -94,8 +94,6 @@ public interface DL {
 			PortletRequest portletRequest, long folderId)
 		throws PortalException, SystemException;
 
-	public List<SearchResult> getDLEntries(Hits hits);
-
 	public Map<Locale, String> getEmailFileEntryAddedBodyMap(
 		PortletPreferences preferences);
 
@@ -155,6 +153,8 @@ public interface DL {
 
 	public OrderByComparator getRepositoryModelOrderByComparator(
 		String orderByCol, String orderByType);
+
+	public List<SearchResult> getSearchResults(Hits hits);
 
 	public String getTempFileId(long id, String version);
 

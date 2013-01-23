@@ -159,10 +159,6 @@ public class DLUtil {
 		return getDL().getDLControlPanelLink(portletRequest, folderId);
 	}
 
-	public static List<SearchResult> getDLEntries(Hits hits) {
-		return getDL().getDLEntries(hits);
-	}
-
 	public static Map<Locale, String> getEmailFileEntryAddedBodyMap(
 		PortletPreferences preferences) {
 
@@ -278,6 +274,10 @@ public class DLUtil {
 
 		return getDL().getRepositoryModelOrderByComparator(
 			orderByCol, orderByType);
+	}
+
+	public static List<SearchResult> getSearchResults(Hits hits) {
+		return getDL().getSearchResults(hits);
 	}
 
 	public static String getTempFileId(long id, String version) {

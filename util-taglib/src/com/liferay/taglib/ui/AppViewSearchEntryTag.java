@@ -52,8 +52,8 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		_locked = locked;
 	}
 
-	public void setMessages(List<MBMessage> messages) {
-		_messages = messages;
+	public void setMbMessages(List<MBMessage> mbMessages) {
+		_mbMessages = mbMessages;
 	}
 
 	public void setQueryTerms(String[] queryTerms) {
@@ -95,7 +95,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		_description = null;
 		_folderName = null;
 		_locked = false;
-		_messages = null;
+		_mbMessages = null;
 		_queryTerms = null;
 		_rowCheckerId = null;
 		_rowCheckerName = null;
@@ -129,7 +129,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:locked", _locked);
 		request.setAttribute(
-			"liferay-ui:app-view-search-entry:messages", _messages);
+			"liferay-ui:app-view-search-entry:mbMessages", _mbMessages);
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:queryTerms", _queryTerms);
 		request.setAttribute(
@@ -156,7 +156,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 	private String _description;
 	private String _folderName;
 	private boolean _locked;
-	private List<MBMessage> _messages;
+	private List<MBMessage> _mbMessages;
 	private String[] _queryTerms;
 	private String _rowCheckerId;
 	private String _rowCheckerName;

@@ -29,11 +29,11 @@ public class SearchResult {
 		_className = className;
 		_classPK = classPK;
 
-		_messages = new ArrayList<MBMessage>();
+		_mbMessages = new ArrayList<MBMessage>();
 	}
 
-	public void addMessage(MBMessage message) {
-		_messages.add(message);
+	public void addMBMessage(MBMessage mbMessage) {
+		_mbMessages.add(mbMessage);
 	}
 
 	@Override
@@ -65,8 +65,8 @@ public class SearchResult {
 		return _classPK;
 	}
 
-	public List<MBMessage> getMessages() {
-		return _messages;
+	public List<MBMessage> getMBMessages() {
+		return _mbMessages;
 	}
 
 	public void setClassName(String className) {
@@ -77,12 +77,12 @@ public class SearchResult {
 		_classPK = classPK;
 	}
 
-	public void setMessages(List<MBMessage> messages) {
-		_messages = messages;
+	public void setMessages(List<MBMessage> mbMessages) {
+		_mbMessages = mbMessages;
 	}
 
 	private String _className;
 	private long _classPK;
-	private List<MBMessage> _messages;
+	private List<MBMessage> _mbMessages;
 
 }

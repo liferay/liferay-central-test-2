@@ -22,7 +22,7 @@ String description = (String)request.getAttribute("liferay-ui:app-view-search-en
 String cssClass = (String)request.getAttribute("liferay-ui:app-view-search-entry:cssClass");
 String folderName = (String)request.getAttribute("liferay-ui:app-view-search-entry:folderName");
 boolean locked = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-search-entry:locked"));
-List<MBMessage> messages = (List<MBMessage>)request.getAttribute("liferay-ui:app-view-search-entry:messages");
+List<MBMessage> mbMessages = (List<MBMessage>)request.getAttribute("liferay-ui:app-view-search-entry:mbMessages");
 String[] queryTerms = (String[])request.getAttribute("liferay-ui:app-view-search-entry:queryTerms");
 String rowCheckerId = (String)request.getAttribute("liferay-ui:app-view-search-entry:rowCheckerId");
 String rowCheckerName = (String)request.getAttribute("liferay-ui:app-view-search-entry:rowCheckerName");
@@ -31,11 +31,9 @@ int status = GetterUtil.getInteger(request.getAttribute("liferay-ui:app-view-sea
 String thumbnailSrc = (String)request.getAttribute("liferay-ui:app-view-search-entry:thumbnailSrc");
 String title = (String)request.getAttribute("liferay-ui:app-view-search-entry:title");
 String url = (String)request.getAttribute("liferay-ui:app-view-search-entry:url");
-
-String shortTitle = StringUtil.shorten(title, 60);
 %>
 
-<div class="app-view-entry app-view-search-entry-taglib entry-display-style <%= showCheckbox ? "selectable" : StringPool.BLANK %> <%= cssClass %>" data-title="<%= HtmlUtil.escapeAttribute(shortTitle) %>">
+<div class="app-view-entry app-view-search-entry-taglib entry-display-style <%= showCheckbox ? "selectable" : StringPool.BLANK %> <%= cssClass %>" data-title="<%= HtmlUtil.escapeAttribute(StringUtil.shorten(title, 60)) %>">
 	<a class="entry-link" href="<%= url %>" title="<%= HtmlUtil.escapeAttribute(title + " - " + description) %>">
 		<c:if test="<%= Validator.isNotNull(thumbnailSrc) %>">
 			<div class="entry-thumbnail">
@@ -77,11 +75,11 @@ String shortTitle = StringUtil.shorten(title, 60);
 		</span>
 	</a>
 
-	<c:if test="<%= messages != null %>">
+	<c:if test="<%= mbMessages != null %>">
 
 		<%
-		for (MBMessage message : messages) {
-			User userDisplay = UserLocalServiceUtil.getUser(message.getUserId());
+		for (MBMessage mbMessage : mbMessages) {
+			User userDisplay = UserLocalServiceUtil.getUser(mbMessage.getUserId());
 		%>
 
 			<div class="entry-discussion">
@@ -99,7 +97,7 @@ String shortTitle = StringUtil.shorten(title, 60);
 					</span>
 
 					<span cssClass="entry-discussion-body">
-						<%= StringUtil.highlight(message.getSubject(), queryTerms) %>
+						<%= StringUtil.highlight(mbMessage.getSubject(), queryTerms) %>
 					</span>
 				</aui:a>
 			</div>
