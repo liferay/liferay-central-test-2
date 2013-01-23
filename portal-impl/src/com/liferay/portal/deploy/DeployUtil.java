@@ -125,9 +125,7 @@ public class DeployUtil {
 			context = "root";
 		}
 
-		String fileName = context.concat(".xml");
-
-		File contextXml = new File(contextsDirName, fileName);
+		File contextXml = new File(contextsDirName, context + ".xml");
 
 		if (contextXml.exists()) {
 			FileUtils.touch(contextXml);
@@ -138,8 +136,8 @@ public class DeployUtil {
 			filterMap.put("context", context);
 
 			copyDependencyXml(
-				"jetty-context-configure.xml", contextsDirName, fileName,
-				filterMap, true);
+				"jetty-context-configure.xml", contextXml.getParent(),
+				contextXml.getName(), filterMap, true);
 		}
 	}
 
@@ -148,9 +146,8 @@ public class DeployUtil {
 			context = "/ROOT";
 		}
 
-		String fileName = context.concat("/WEB-INF/web.xml");
-
-		File webXml = new File(getAutoDeployDestDir(), fileName);
+		File webXml = new File(
+			getAutoDeployDestDir(), context + "/WEB-INF/web.xml");
 
 		FileUtils.touch(webXml);
 	}
