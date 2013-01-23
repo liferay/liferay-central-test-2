@@ -216,7 +216,9 @@ public class RuntimeChecker extends BaseReflectChecker {
 	protected boolean hasCreateSecurityManager() {
 		Class<?> callerClass7 = Reflection.getCallerClass(7);
 
-		if (callerClass7.getName().startsWith("javax.crypto") &&
+		String callerClassName7 = callerClass7.getName();
+
+		if (callerClassName7.startsWith("javax.crypto") &&
 			CheckerUtil.isAccessControllerDoPrivileged(10)) {
 
 			logCreateSecurityManager(callerClass7, 7);
