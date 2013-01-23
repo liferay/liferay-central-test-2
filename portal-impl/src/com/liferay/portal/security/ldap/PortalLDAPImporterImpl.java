@@ -1149,8 +1149,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			if (Validator.isNull(modifiedDate)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"LDAP entry never modified, skipping user " +
-							user.getEmailAddress());
+						"Skipping user " + user.getEmailAddress() +
+							" because the LDAP entry was never modified");
 				}
 
 				return user;
@@ -1162,16 +1162,15 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				if (ldapUser.isAutoPassword()) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"User " + user.getEmailAddress() +
-								" is already synchronized, skipping");
+							"Skipping user " + user.getEmailAddress() +
+								" because he is already synchronized");
 					}
 
 					return user;
 				}
 
 				UserLocalServiceUtil.updatePassword(
-					user.getUserId(), password, password, passwordReset,
-					true);
+					user.getUserId(), password, password, passwordReset, true);
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
