@@ -119,12 +119,14 @@ public class CustomSQL {
 	}
 
 	public String get(
-		String id, QueryDefinition queryDefinition, String table) {
+		String id, QueryDefinition queryDefinition, String tableName) {
 
 		String sql = get(id);
 
-		if (!Validator.isBlank(table) && !table.endsWith(StringPool.PERIOD)) {
-			table = table.concat(StringPool.PERIOD);
+		if (!Validator.isBlank(tableName) &&
+			!tableName.endsWith(StringPool.PERIOD)) {
+
+			tableName = tableName.concat(StringPool.PERIOD);
 		}
 
 		if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
@@ -133,11 +135,13 @@ public class CustomSQL {
 		else {
 			if (queryDefinition.isExcludeStatus()) {
 				sql = sql.replace(
-					_STATUS_KEYWORD, table.concat(_STATUS_CONDITION_INVERSE));
+					_STATUS_KEYWORD,
+					tableName.concat(_STATUS_CONDITION_INVERSE));
 			}
 			else {
 				sql = sql.replace(
-					_STATUS_KEYWORD, table.concat(_STATUS_CONDITION_DEFAULT));
+					_STATUS_KEYWORD,
+					tableName.concat(_STATUS_CONDITION_DEFAULT));
 			}
 		}
 
@@ -769,8 +773,8 @@ public class CustomSQL {
 
 	private static final String _STATUS_CONDITION_DEFAULT = "status = ?";
 
-	private static final String _STATUS_CONDITION_EMPTY = String.valueOf(
-		WorkflowConstants.STATUS_ANY).concat(" = ?");
+	private static final String _STATUS_CONDITION_EMPTY =
+		WorkflowConstants.STATUS_ANY + " = ?";
 
 	private static final String _STATUS_CONDITION_INVERSE = "status != ?";
 
