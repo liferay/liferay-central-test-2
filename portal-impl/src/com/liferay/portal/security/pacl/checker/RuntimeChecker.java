@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.PathUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.pacl.PACLClassUtil;
@@ -59,26 +58,6 @@ public class RuntimeChecker extends BaseReflectChecker {
 
 	public void checkPermission(Permission permission) {
 		String name = permission.getName();
-
-		String propertyName = name;
-
-		if (propertyName.indexOf(StringPool.PERIOD) > 0) {
-			propertyName = propertyName.substring(
-				0, propertyName.indexOf(StringPool.PERIOD));
-		}
-
-		String key = TextFormatter.format(propertyName, TextFormatter.K);
-
-		String[] classNames = getPropertyArray(
-			"security-manager-runtime-permission-" + key);
-
-		if (classNames.length != 0) {
-			for (String className : classNames) {
-				if (hasClassInCallTree(className)) {
-					return ;
-				}
-			}
-		}
 
 		if (name.startsWith(RUNTIME_PERMISSION_ACCESS_CLASS_IN_PACKAGE)) {
 			int pos = name.indexOf(StringPool.PERIOD);
@@ -137,7 +116,6 @@ public class RuntimeChecker extends BaseReflectChecker {
 		}
 		else if (name.startsWith(RUNTIME_PERMISSION_LOAD_LIBRARY)) {
 			if (!hasLoadLibrary()) {
-
 				throwSecurityException(_log, "Attempted to load library");
 			}
 		}
@@ -446,7 +424,7 @@ public class RuntimeChecker extends BaseReflectChecker {
 				CheckerUtil.isAccessControllerDoPrivileged(8)) ||
 			(isDefaultMBeanServerInterceptor(
 				callerClass8.getEnclosingClass()) &&
-			CheckerUtil.isAccessControllerDoPrivileged(9))) {
+			 CheckerUtil.isAccessControllerDoPrivileged(9))) {
 
 			logGetProtectionDomain(callerClass8, 8);
 
