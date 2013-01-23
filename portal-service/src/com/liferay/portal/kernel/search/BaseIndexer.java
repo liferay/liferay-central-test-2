@@ -491,33 +491,36 @@ public abstract class BaseIndexer implements Indexer {
 		String[] relatedEntryClassNames = (String[])searchContext.getAttribute(
 			"relatedEntryClassNames");
 
-		if ((relatedEntryClassNames != null) &&
-				(relatedEntryClassNames.length > 0)) {
+		if ((relatedEntryClassNames == null) ||
+			(relatedEntryClassNames.length == 0)) {
 
-			BooleanQuery relatedQueries = BooleanQueryFactoryUtil.create(
-				searchContext);
+			return;
+		}
 
-			for (String relatedEntryClassName : relatedEntryClassNames) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
-					relatedEntryClassName);
+		BooleanQuery relatedQueries = BooleanQueryFactoryUtil.create(
+			searchContext);
 
-				if (indexer != null) {
-					BooleanQuery relatedQuery = BooleanQueryFactoryUtil.create(
-						searchContext);
+		for (String relatedEntryClassName : relatedEntryClassNames) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				relatedEntryClassName);
 
-					indexer.postProcessContextQuery(
-						relatedQuery, searchContext);
-
-					relatedQuery.addRequiredTerm(
-						Field.CLASS_NAME_ID,
-						PortalUtil.getClassNameId(relatedEntryClassName));
-
-					relatedQueries.add(relatedQuery, BooleanClauseOccur.SHOULD);
-				}
+			if (indexer == null) {
+				continue;
 			}
 
-			contextQuery.add(relatedQueries, BooleanClauseOccur.MUST);
+			BooleanQuery relatedQuery = BooleanQueryFactoryUtil.create(
+				searchContext);
+
+			indexer.postProcessContextQuery(relatedQuery, searchContext);
+
+			relatedQuery.addRequiredTerm(
+				Field.CLASS_NAME_ID,
+				PortalUtil.getClassNameId(relatedEntryClassName));
+
+			relatedQueries.add(relatedQuery, BooleanClauseOccur.SHOULD);
 		}
+
+		contextQuery.add(relatedQueries, BooleanClauseOccur.MUST);
 	}
 
 	protected void addSearchArrayQuery(
