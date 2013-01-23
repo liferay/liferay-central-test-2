@@ -247,8 +247,8 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	}
 
 	protected String getArticlesSQL(
-			long groupId, QueryDefinition queryDefinition,
-			boolean inlineSQLHelper) {
+		long groupId, QueryDefinition queryDefinition,
+		boolean inlineSQLHelper) {
 
 		String sql = CustomSQLUtil.get(
 			FIND_A_BY_G_F, queryDefinition, "JournalArticle");
