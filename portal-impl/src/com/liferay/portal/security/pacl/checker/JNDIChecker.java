@@ -14,6 +14,9 @@
 
 package com.liferay.portal.security.pacl.checker;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.security.Permission;
 
 import java.util.ArrayList;
@@ -21,9 +24,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -64,7 +64,7 @@ public class JNDIChecker extends BaseChecker {
 				_log.debug(
 					"Allowing access to JNDI names that match the regular " +
 						"expression " + name);
-			}			
+			}
 		}
 	}
 

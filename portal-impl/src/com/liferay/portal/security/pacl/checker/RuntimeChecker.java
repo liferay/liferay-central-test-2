@@ -492,7 +492,7 @@ public class RuntimeChecker extends BaseReflectChecker {
 		for (String environmentVariable : environmentVariables) {
 			Pattern environmentVariablePattern = Pattern.compile(
 				environmentVariable);
-			
+
 			_environmentVariablePatterns.add(environmentVariablePattern);
 
 			if (_log.isDebugEnabled()) {
