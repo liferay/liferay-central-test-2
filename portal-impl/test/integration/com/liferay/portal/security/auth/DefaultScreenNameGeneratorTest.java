@@ -15,18 +15,14 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 
 import junit.framework.Assert;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,17 +34,6 @@ import org.junit.runner.RunWith;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class DefaultScreenNameGeneratorTest {
 
-	@BeforeClass
-	public static void setUp() throws Exception {
-		ClassLoader classLoader = PACLClassLoaderUtil.getPortalClassLoader();
-
-		_screenNameGenerator = (ScreenNameGenerator)classLoader.loadClass(
-			DefaultScreenNameGenerator.class.getName()).newInstance();
-
-		_usersScreenNameAllowNumeric = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.USERS_SCREEN_NAME_ALLOW_NUMERIC));
-	}
-
 	@Test
 	public void testGenerate() throws Exception {
 		String generatedScreenName = _screenNameGenerator.generate(
@@ -59,62 +44,59 @@ public class DefaultScreenNameGeneratorTest {
 	}
 
 	@Test
-	public void testGenerateAlreadyExisting() throws Exception {
+	public void testGenerateDuplicateScreenName() throws Exception {
 		User user = TestPropsValues.getUser();
 
-		String existingScreenName = user.getScreenName();
-
-		String generatedScreenName = _screenNameGenerator.generate(
+		String screenName = _screenNameGenerator.generate(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
-			existingScreenName + "@liferay.com");
+			user.getScreenName() + "@liferay.com");
 
-		Assert.assertNotSame(existingScreenName, generatedScreenName);
-
-		Assert.assertEquals(existingScreenName + ".1", generatedScreenName);
+		Assert.assertNotSame(user.getScreenName(), screenName);
+		Assert.assertEquals(user.getScreenName() + ".1", screenName);
 	}
 
 	@Test
-	public void testGenerateNoMailAddress() throws Exception {
-		long userId = TestPropsValues.getUserId();
+	public void testGenerateNoEmailAddress() throws Exception {
+		String screenName = _screenNameGenerator.generate(
+			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(), null);
 
-		String generatedScreenName = _screenNameGenerator.generate(
-			TestPropsValues.getCompanyId(), userId, null);
-
-		if (_usersScreenNameAllowNumeric) {
-			Assert.assertEquals(String.valueOf(userId), generatedScreenName);
+		if (PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC) {
+			Assert.assertEquals(
+				String.valueOf(TestPropsValues.getUserId()), screenName);
 		}
 		else {
-			Assert.assertEquals("user." + userId, generatedScreenName);
+			Assert.assertEquals(
+				"user." + TestPropsValues.getUserId(), screenName);
 		}
 	}
 
 	@Test
-	public void testGenerateNumeric() throws Exception {
-		String generatedScreenName = _screenNameGenerator.generate(
+	public void testGenerateNumericEmailAddress() throws Exception {
+		String screenName = _screenNameGenerator.generate(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			"123@liferay.com");
 
-		if (_usersScreenNameAllowNumeric) {
-			Assert.assertNotSame("user.123", generatedScreenName);
-			Assert.assertEquals("123", generatedScreenName);
+		if (PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC) {
+			Assert.assertNotSame("user.123", screenName);
+			Assert.assertEquals("123", screenName);
 		}
 		else {
-			Assert.assertNotSame("123", generatedScreenName);
-			Assert.assertEquals("user.123", generatedScreenName);
+			Assert.assertNotSame("123", screenName);
+			Assert.assertEquals("user.123", screenName);
 		}
 	}
 
 	@Test
-	public void testGeneratePostfixUser() throws Exception {
-		long userId = TestPropsValues.getUserId();
+	public void testGeneratePostfixEmailAddress() throws Exception {
+		String screenName = _screenNameGenerator.generate(
+			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
+			"postfix@liferay.com");
 
-		String generatedScreenName = _screenNameGenerator.generate(
-			TestPropsValues.getCompanyId(), userId, "postfix@liferay.com");
-
-		Assert.assertEquals("postfix." + userId, generatedScreenName);
+		Assert.assertEquals(
+			"postfix." + TestPropsValues.getUserId(), screenName);
 	}
 
-	private static ScreenNameGenerator _screenNameGenerator;
-	private static boolean _usersScreenNameAllowNumeric = false;
+	private ScreenNameGenerator _screenNameGenerator =
+		new DefaultScreenNameGenerator();
 
 }
