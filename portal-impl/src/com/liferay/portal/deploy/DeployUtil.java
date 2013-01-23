@@ -121,8 +121,9 @@ public class DeployUtil {
 	public static void redeployJetty(String context) throws Exception {
 		String contextsDirName = System.getProperty("jetty.home") + "/contexts";
 
-		if (Validator.isNull(context) || context.equals(StringPool.SLASH)) {
-			context = "root";
+		if (_isPortalContext(context)) {
+			throw new UnsupportedOperationException(
+				"This method is meant for redeploying plugins, not the portal");
 		}
 
 		File contextXml = new File(contextsDirName, context + ".xml");
@@ -142,8 +143,9 @@ public class DeployUtil {
 	}
 
 	public static void redeployTomcat(String context) throws Exception {
-		if (Validator.isNull(context) || context.equals(StringPool.SLASH)) {
-			context = "/ROOT";
+		if (_isPortalContext(context)) {
+			throw new UnsupportedOperationException(
+				"This method is meant for redeploying plugins, not the portal");
 		}
 
 		File webXml = new File(
@@ -233,6 +235,16 @@ public class DeployUtil {
 		if (undeployInterval > 0) {
 			Thread.sleep(undeployInterval);
 		}
+	}
+
+	private static boolean _isPortalContext(String context) {
+		if (Validator.isNull(context) || context.equals(StringPool.SLASH) ||
+			context.equals(PropsValues.PORTAL_CTX)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private DeployUtil() {
