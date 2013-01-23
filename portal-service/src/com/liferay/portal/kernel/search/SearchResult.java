@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.messageboards.model.MBMessage;
 
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class SearchResult {
 
 		SearchResult searchResult = (SearchResult)obj;
 
-		if ((_classPK == searchResult.getClassPK()) &&
-			_className.equals(searchResult.getClassName())) {
+		if (Validator.equals(_classPK, searchResult._classPK) &&
+			Validator.equals(_className, searchResult._className)) {
 
 			return true;
 		}
