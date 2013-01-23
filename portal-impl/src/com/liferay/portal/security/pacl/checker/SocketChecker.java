@@ -16,8 +16,6 @@ package com.liferay.portal.security.pacl.checker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.net.SocketPermission;
 
@@ -40,7 +38,7 @@ public class SocketChecker extends BaseChecker {
 		String actions = permission.getActions();
 		String name = permission.getName();
 
-		if (!_hostsAndPorts.implies(permission)) {
+		if (!_permissions.implies(permission)) {
 			throwSecurityException(
 				_log, "Attempted " + actions + " for address " + name);
 		}
@@ -68,7 +66,7 @@ public class SocketChecker extends BaseChecker {
 		SocketPermission socketPermission = new SocketPermission(
 			networkPart, action);
 
-		_hostsAndPorts.add(socketPermission);
+		_permissions.add(socketPermission);
 	}
 
 	protected void initListenPorts() {
@@ -81,17 +79,11 @@ public class SocketChecker extends BaseChecker {
 	}
 
 	protected void initListenPorts(String listenPart) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(StringPool.STAR);
-		sb.append(StringPool.COLON);
-		sb.append(listenPart);
-
-		initHostsAndPorts(sb.toString(), SOCKET_PERMISSION_LISTEN);
+		initHostsAndPorts("*:" + listenPart, SOCKET_PERMISSION_LISTEN);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SocketChecker.class);
 
-	private Permissions _hostsAndPorts = new Permissions();
+	private Permissions _permissions = new Permissions();
 
 }
