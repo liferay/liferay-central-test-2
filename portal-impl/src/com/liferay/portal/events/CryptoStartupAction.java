@@ -14,7 +14,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -28,14 +27,17 @@ import javax.crypto.Mac;
  */
 public class CryptoStartupAction extends SimpleAction {
 
-	public void run(String[] ids) throws ActionException {
+	@Override
+	public void run(String[] ids) {
 		try {
 			Mac.getInstance("HmacSHA1");
 		}
 		catch (NoSuchAlgorithmException nsae) {
-			_log.error("Unable to get Mac for algorithm HmacSHA1", nsae);
+			_log.error(
+				"Unable to get Mac instance for algorithm HmacSHA1", nsae);
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CryptoStartupAction.class);
+
 }
