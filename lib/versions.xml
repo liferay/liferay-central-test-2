@@ -93,10 +93,10 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>lib/development/ckpackager.jar</file-name>
-		<version>32768</version>
-		<project-name>CKPackager</project-name>
-		<project-url>http://svn.fckeditor.net/CKPackager/trunk/bin</project-url>
+		<file-name>lib/development/ckbuilder.jar</file-name>
+		<version>1.6</version>
+		<project-name>CKBuilder</project-name>
+		<project-url>http://download.cksource.com/CKBuilder/1.6</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>

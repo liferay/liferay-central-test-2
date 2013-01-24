@@ -24,7 +24,7 @@
 	<classpathentry kind="lib" path="lib/development/ant-ext.jar"/>
 	<classpathentry kind="lib" path="lib/development/ant-installer.jar"/>
 	<classpathentry kind="lib" path="lib/development/catalina.jar"/>
-	<classpathentry kind="lib" path="lib/development/ckpackager.jar"/>
+	<classpathentry kind="lib" path="lib/development/ckbuilder.jar"/>
 	<classpathentry kind="lib" path="lib/development/cobertura.jar"/>
 	<classpathentry kind="lib" path="lib/development/deployment.jar"/>
 	<classpathentry kind="lib" path="lib/development/derby.jar"/>
