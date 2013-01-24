@@ -279,7 +279,7 @@
 						</java>
 					</then>
 				</if>
-				
+
 				<move
 					file="docroot/html/js/editor/ckeditor/dev/builder/release/ckeditor"
 					preservelastmodified="true"

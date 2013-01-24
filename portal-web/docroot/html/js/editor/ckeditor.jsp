@@ -54,6 +54,8 @@ String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-u
 String editorImpl = (String)request.getAttribute("liferay-ui:input-editor:editorImpl");
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+boolean inlineEdit = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:inlineEdit"));
+String inlineEditSaveURL = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:inlineEditSaveURL"));
 
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
@@ -61,8 +63,6 @@ if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
 
-boolean inlineEdit = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:inlineEdit"));
-String inlineEditSaveURL = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:inlineEditSaveURL"));
 boolean resizable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:resizable"));
 boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
 String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
@@ -100,10 +100,8 @@ if (!inlineEdit) {
 
 		<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathJavaScript() + "/editor/ckeditor/ckeditor.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 
-		<c:if test="<%= inlineEdit && inlineEditSaveURL != null %>">
-
-		<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathJavaScript() + "/editor/ckeditor/main.js", javaScriptLastModified)) %>" type="text/javascript"></script>
-
+		<c:if test="<%= inlineEdit && (inlineEditSaveURL != null) %>">
+			<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathJavaScript() + "/editor/ckeditor/main.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 		</c:if>
 
 		<script type="text/javascript">
@@ -168,17 +166,17 @@ if (!inlineEdit) {
 </aui:script>
 
 <%
-	String textareaName = name;
+String textareaName = name;
 
-	String modules = StringPool.BLANK;
-%>
+String modules = StringPool.BLANK;
 
-<c:if test="<%= inlineEdit && inlineEditSaveURL != null %>">
-<%
+if (inlineEdit && (inlineEditSaveURL != null)) {
 	textareaName = name + "_original";
 
 	modules = "inline-editor-ckeditor";
+}
 %>
+
 </c:if>
 
 <div class="<%= cssClass %>">
@@ -189,10 +187,10 @@ if (!inlineEdit) {
 	CKEDITOR.disableAutoInline = true;
 </script>
 
-<aui:script use="<%= modules %>" >
+<aui:script use="<%= modules %>">
 	(function() {
 		function setData() {
-			<c:if test="<%= Validator.isNotNull(initMethod) && !(inlineEdit && inlineEditSaveURL != null) %>">
+			<c:if test="<%= Validator.isNotNull(initMethod) && !(inlineEdit && (inlineEditSaveURL != null)) %>">
 				ckEditor.setData(<%= HtmlUtil.escapeJS(namespace + initMethod) %>());
 			</c:if>
 		}
@@ -234,7 +232,7 @@ if (!inlineEdit) {
 
 		var ckEditor = CKEDITOR.instances['<%= name %>'];
 
-		<c:if test="<%= inlineEdit && inlineEditSaveURL != null %>">
+		<c:if test="<%= inlineEdit && (inlineEditSaveURL != null) %>">
 			new Liferay.CKEditorInline(
 				{
 					editor: ckEditor,
@@ -285,7 +283,6 @@ if (!inlineEdit) {
 			</c:choose>
 
 	<%
-
 			if (Validator.isNotNull(onChangeMethod)) {
 				%>
 

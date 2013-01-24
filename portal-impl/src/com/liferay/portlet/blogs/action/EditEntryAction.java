@@ -389,10 +389,8 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void updateContent(
-		ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
@@ -425,15 +423,21 @@ public class EditEntryAction extends PortletAction {
 				entry.getAllowTrackbacks(), null, entry.getSmallImage(),
 				entry.getSmallImageURL(), null, null, serviceContext);
 
-			jsonObject.put("success", true);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			jsonObject.put("success", Boolean.TRUE);
+
+			writeJSON(actionRequest, actionResponse, jsonObject);
 		}
 		catch (Exception e) {
-			jsonObject.put("success", false);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			jsonObject.put("success", Boolean.FALSE);
 
 			jsonObject.putException(e);
-		}
 
-		writeJSON(actionRequest, actionResponse, jsonObject);
+			writeJSON(actionRequest, actionResponse, jsonObject);
+		}
 	}
 
 	protected Object[] updateEntry(ActionRequest actionRequest)

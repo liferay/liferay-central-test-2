@@ -57,7 +57,11 @@ if (!CKEDITOR.stylesSet.get('liferayStyles')) {
 	);
 }
 
+CKEDITOR.config.autoSaveTimeout = 3000;
+
 CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
+
+CKEDITOR.config.closeNoticeTimeout = 8000;
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escapeJS(cssPath) %>/main.css';
 
@@ -70,10 +74,6 @@ CKEDITOR.config.height = 265;
 CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
 
 CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
-
-CKEDITOR.config.autoSaveTimeout = 3000;
-
-CKEDITOR.config.closeNoticeTimeout = 8000;
 
 CKEDITOR.config.toolbar_editInPlace = [
 	['Styles'],
@@ -97,9 +97,11 @@ CKEDITOR.config.toolbar_email = [
 
 CKEDITOR.config.toolbar_liferay = [
 	['Bold', 'Italic', 'Underline', 'Strike'],
+
 	<c:if test="<%= inlineEdit %>">
-	['AjaxSave', '-', 'Restore'],
+		['AjaxSave', '-', 'Restore'],
 	</c:if>
+
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', ],
 	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
 	'/',
