@@ -164,28 +164,22 @@ public class ResourceActionLocalServiceImpl
 			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
-			long siteMemberBitwiseValue = 0;
 			long guestBitwiseValue = 0;
 			long ownerBitwiseValue = 0;
+			long siteMemberBitwiseValue = 0;
 
 			for (ResourceAction resourceAction : newResourceActions) {
 				String actionId = resourceAction.getActionId();
-
-				if (groupDefaultActions.contains(actionId)) {
-					siteMemberBitwiseValue |= resourceAction.getBitwiseValue();
-				}
 
 				if (guestDefaultActions.contains(actionId)) {
 					guestBitwiseValue |= resourceAction.getBitwiseValue();
 				}
 
 				ownerBitwiseValue |= resourceAction.getBitwiseValue();
-			}
 
-			if (siteMemberBitwiseValue > 0) {
-				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.SITE_MEMBER,
-					ResourceConstants.SCOPE_INDIVIDUAL, siteMemberBitwiseValue);
+				if (groupDefaultActions.contains(actionId)) {
+					siteMemberBitwiseValue |= resourceAction.getBitwiseValue();
+				}
 			}
 
 			if (guestBitwiseValue > 0) {
@@ -198,6 +192,12 @@ public class ResourceActionLocalServiceImpl
 				resourcePermissionLocalService.addResourcePermissions(
 					name, RoleConstants.OWNER,
 					ResourceConstants.SCOPE_INDIVIDUAL, ownerBitwiseValue);
+			}
+
+			if (siteMemberBitwiseValue > 0) {
+				resourcePermissionLocalService.addResourcePermissions(
+					name, RoleConstants.SITE_MEMBER,
+					ResourceConstants.SCOPE_INDIVIDUAL, siteMemberBitwiseValue);
 			}
 		}
 	}

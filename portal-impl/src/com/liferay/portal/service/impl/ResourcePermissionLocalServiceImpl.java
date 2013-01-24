@@ -181,13 +181,13 @@ public class ResourcePermissionLocalServiceImpl
 
 		try {
 
-			// 1) Update exist ResourcePermissions' actionIds
+			// Update existing resource permissions
 
-			String sql = CustomSQLUtil.get(_UPDATE_ACTIONIDS);
+			String sql = CustomSQLUtil.get(_UPDATE_ACTION_IDS);
 
-			String roleIds = ListUtil.toString(roles, Role.ROLE_ID_ACCESSOR);
-
-			sql = StringUtil.replace(sql, "[$ROLE_ID$]", roleIds);
+			sql = StringUtil.replace(
+				sql, "[$ROLE_ID$]",
+				ListUtil.toString(roles, Role.ROLE_ID_ACCESSOR));
 
 			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
@@ -200,17 +200,17 @@ public class ResourcePermissionLocalServiceImpl
 
 			sqlQuery.executeUpdate();
 
-			// 2) Add missing ResourcePermissions
+			// Add missing resource permissions
 
-			sql = CustomSQLUtil.get(_FIND_MISSING_RESOURCEPERMISSIONS);
+			sql = CustomSQLUtil.get(_FIND_MISSING_RESOURCE_PERMISSIONS);
 
 			sqlQuery = session.createSQLQuery(sql);
 
-			sqlQuery.addScalar("temp.companyId", Type.LONG);
-			sqlQuery.addScalar("temp.name", Type.STRING);
-			sqlQuery.addScalar("temp.scope", Type.INTEGER);
-			sqlQuery.addScalar("temp.primKey", Type.STRING);
-			sqlQuery.addScalar("role.roleId", Type.LONG);
+			sqlQuery.addScalar("TEMP_TABLE.companyId", Type.LONG);
+			sqlQuery.addScalar("TEMP_TABLE.name", Type.STRING);
+			sqlQuery.addScalar("TEMP_TABLE.scope", Type.INTEGER);
+			sqlQuery.addScalar("TEMP_TABLE.primKey", Type.STRING);
+			sqlQuery.addScalar("Role_.roleId", Type.LONG);
 
 			qPos = QueryPos.getInstance(sqlQuery);
 
@@ -218,30 +218,27 @@ public class ResourcePermissionLocalServiceImpl
 			qPos.add(scope);
 			qPos.add(roleName);
 
-			List<Object[]> resourcePermissionKeys = sqlQuery.list(true);
+			List<Object[]> resourcePermissionArrays = sqlQuery.list(true);
 
-			if (resourcePermissionKeys.isEmpty()) {
+			if (resourcePermissionArrays.isEmpty()) {
 				return;
 			}
 
-			for (Object[] resourcePermissionKey : resourcePermissionKeys) {
-				Long tempCompanyId = (Long)resourcePermissionKey[0];
-				String tempName = (String)resourcePermissionKey[1];
-				Integer tempScope = (Integer)resourcePermissionKey[2];
-				String tempPrimKey = (String)resourcePermissionKey[3];
-				Long tempRoleId = (Long)resourcePermissionKey[4];
-
+			for (Object[] resourcePermissionArray : resourcePermissionArrays) {
 				long resourcePermissionId = counterLocalService.increment(
 					ResourcePermission.class.getName());
 
 				ResourcePermission resourcePermission =
 					resourcePermissionPersistence.create(resourcePermissionId);
 
-				resourcePermission.setCompanyId(tempCompanyId);
-				resourcePermission.setName(tempName);
-				resourcePermission.setScope(tempScope);
-				resourcePermission.setPrimKey(tempPrimKey);
-				resourcePermission.setRoleId(tempRoleId);
+				resourcePermission.setCompanyId(
+					(Long)resourcePermissionArray[0]);
+				resourcePermission.setName((String)resourcePermissionArray[1]);
+				resourcePermission.setScope(
+					(Integer)resourcePermissionArray[2]);
+				resourcePermission.setPrimKey(
+					(String)resourcePermissionArray[3]);
+				resourcePermission.setRoleId((Long)resourcePermissionArray[4]);
 				resourcePermission.setActionIds(resourceActionBitwiseValue);
 
 				session.save(resourcePermission);
@@ -1341,11 +1338,11 @@ public class ResourcePermissionLocalServiceImpl
 		}
 	}
 
-	private static final String _FIND_MISSING_RESOURCEPERMISSIONS =
+	private static final String _FIND_MISSING_RESOURCE_PERMISSIONS =
 		ResourcePermissionLocalServiceImpl.class.getName() +
 			".findMissingResourcePermissions";
 
-	private static final String _UPDATE_ACTIONIDS =
+	private static final String _UPDATE_ACTION_IDS =
 		ResourcePermissionLocalServiceImpl.class.getName() +
 			".updateActionIds";
 
