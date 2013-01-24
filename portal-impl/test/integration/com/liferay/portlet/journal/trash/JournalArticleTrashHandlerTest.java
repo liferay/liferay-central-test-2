@@ -34,10 +34,6 @@ import com.liferay.portlet.journal.util.JournalTestUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 

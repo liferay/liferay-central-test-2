@@ -20,12 +20,10 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
@@ -40,15 +38,16 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
 
+import java.util.Locale;
+import java.util.Map;
+
+import javax.portlet.PortletPreferences;
+
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import javax.portlet.PortletPreferences;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Manuel de la Peña
@@ -65,9 +64,34 @@ public class JournalTestUtilTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = ServiceTestUtil.addGroup();
+	}
 
-		_user = ServiceTestUtil.addUser(
-			"JournalTestUtilName", _group.getGroupId());
+	@Test
+	public void testAddArticleWithDDMStructureAndDDMTemplate()
+		throws Exception {
+
+		Document document = JournalTestUtil.createDocument("en_US", "en_US");
+
+		Element dynamicElementElement =
+			JournalTestUtil.addDynamicElementElement(
+				document.getRootElement(), "text", "name");
+
+		JournalTestUtil.addDynamicContentElement(
+			dynamicElementElement, "en_US", "Joe Bloggs");
+
+		String xml = document.asXML();
+
+		DDMStructure ddmStructure = JournalTestUtil.addDDMStructure();
+
+		DDMTemplate ddmTemplate = JournalTestUtil.addDDMTemplate(
+			ddmStructure.getStructureId(),
+			JournalTemplateConstants.LANG_TYPE_VM,
+			JournalTestUtil.getSampleTemplateXSL());
+
+		Assert.assertNotNull(
+			JournalTestUtil.addArticleWithXMLContent(
+				xml, ddmStructure.getStructureKey(),
+				ddmTemplate.getTemplateKey()));
 	}
 
 	@Test
@@ -78,40 +102,15 @@ public class JournalTestUtilTest {
 		Assert.assertNotNull(
 			JournalTestUtil.addArticle(
 				_group.getGroupId(), folder.getFolderId(), "Test Article",
-				"This is a test article"));
+				"This is a test article."));
 	}
 
 	@Test
 	public void testAddArticleWithoutFolder()throws Exception {
 		Assert.assertNotNull(
 			JournalTestUtil.addArticle(
-				_group.getGroupId(), "Test Article", "This is a test article"));
-	}
-
-	@Test
-	public void testAddArticleWithStructureAndTemplate() throws Exception {
-		DDMStructure ddmStructure = JournalTestUtil.addDDMStructure();
-
-		String xsl = "$name.getData()";
-
-		DDMTemplate ddmTemplate = JournalTestUtil.addDDMTemplate(
-			ddmStructure.getStructureId(), xsl,
-			JournalTemplateConstants.LANG_TYPE_VM);
-
-		Document document = JournalTestUtil.createDocument("en_US", "en_US");
-
-		Element dynamicElement = JournalTestUtil.addDynamicElement(
-			document.getRootElement(), "text", "name");
-
-		JournalTestUtil.addDynamicContent(
-			dynamicElement, "en_US", "Joe Bloggs");
-
-		String xml = document.asXML();
-
-		Assert.assertNotNull(
-			JournalTestUtil.addArticleWithXMLContent(
-				xml, ddmStructure.getStructureKey(),
-				ddmTemplate.getTemplateKey()));
+				_group.getGroupId(), "Test Article",
+				"This is a test article."));
 	}
 
 	@Test
@@ -126,18 +125,13 @@ public class JournalTestUtilTest {
 	}
 
 	@Test
-	public void testAddDDMStructureWithNonExistingLanguage() throws Exception {
+	public void testAddDDMStructureWithNonexistingLocale() throws Exception {
 		try {
 			resetCompanyLanguages("en_US");
 
 			JournalTestUtil.addDDMStructure(Locale.CANADA);
 
-			StringBundler sb = new StringBundler(2);
-
-			sb.append(LocaleUtil.toLanguageId(Locale.CANADA));
-			sb.append(" locale is not present");
-
-			Assert.fail(sb.toString());
+			Assert.fail();
 		}
 		catch (StructureNameException sne) {
 		}
@@ -160,12 +154,10 @@ public class JournalTestUtilTest {
 
 	@Test
 	public void testAddDDMTemplateToDDMStructure() throws Exception {
-
 		DDMStructure ddmStructure = JournalTestUtil.addDDMStructure();
 
-		long structureId = ddmStructure.getStructureId();
-
-		Assert.assertNotNull(JournalTestUtil.addDDMTemplate(structureId));
+		Assert.assertNotNull(
+			JournalTestUtil.addDDMTemplate(ddmStructure.getStructureId()));
 	}
 
 	@Test
@@ -174,34 +166,31 @@ public class JournalTestUtilTest {
 
 		DDMStructure ddmStructure = JournalTestUtil.addDDMStructure();
 
-		long structureId = ddmStructure.getStructureId();
-
 		Assert.assertNotNull(
 			JournalTestUtil.addDDMTemplate(
-				structureId, JournalTestUtil.getSampleTemplateXSL(),
-				JournalTemplateConstants.LANG_TYPE_VM));
+				ddmStructure.getStructureId(),
+				JournalTemplateConstants.LANG_TYPE_VM,
+				JournalTestUtil.getSampleTemplateXSL()));
 	}
 
 	@Test
 	public void testAddDynamicContent() {
 		try {
-			Map<String, String> tokens = getTokens();
-
 			Document document = JournalTestUtil.createDocument(
 				"en_US,pt_BR", "en_US");
 
-			Element dynamicElementElement = JournalTestUtil.addDynamicElement(
-				document.getRootElement(), "text", "name");
+			Element dynamicElementElement =
+				JournalTestUtil.addDynamicElementElement(
+					document.getRootElement(), "text", "name");
 
-			JournalTestUtil.addDynamicContent(
+			JournalTestUtil.addDynamicContentElement(
 				dynamicElementElement, "en_US", "Joe Bloggs");
 
 			String xml = document.asXML();
 
-			String script = "$name.getData()";
-
 			String content = JournalUtil.transform(
-				null, tokens, Constants.VIEW, "en_US", xml, script,
+				null, getTokens(), Constants.VIEW, "en_US", xml,
+				JournalTestUtil.getSampleTemplateXSL(),
 				JournalTemplateConstants.LANG_TYPE_VM);
 
 			Assert.assertEquals("Joe Bloggs", content);
@@ -218,7 +207,8 @@ public class JournalTestUtilTest {
 		Element rootElement = document.addElement("root");
 
 		Assert.assertNotNull(
-			JournalTestUtil.addDynamicElement(rootElement, "text", "name"));
+			JournalTestUtil.addDynamicElementElement(
+				rootElement, "text", "name"));
 	}
 
 	@Test
@@ -236,19 +226,15 @@ public class JournalTestUtilTest {
 	public void testCreateLocalizedContent() {
 		Assert.assertNotNull(
 			JournalTestUtil.createLocalizedContent(
-				"This is a content", LocaleUtil.getDefault()));
+				"This is localized content.", LocaleUtil.getDefault()));
 	}
 
 	@Test
 	public void testGetSampleStructuredContent() throws Exception {
-		Map<String, String> tokens = getTokens();
-
-		String xml = JournalTestUtil.getSampleStructuredContent();
-
-		String script = "$name.getData()";
-
 		String content = JournalUtil.transform(
-			null, tokens, Constants.VIEW, "en_US", xml, script,
+			null, getTokens(), Constants.VIEW, "en_US",
+			JournalTestUtil.getSampleStructuredContent(),
+			JournalTestUtil.getSampleTemplateXSL(),
 			JournalTemplateConstants.LANG_TYPE_VM);
 
 		Assert.assertEquals("Joe Bloggs", content);
@@ -267,17 +253,15 @@ public class JournalTestUtilTest {
 
 	@Test
 	public void testUpdateArticle() throws Exception {
-		String content = "This is a test article";
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(), "Test Article", "This is a test article.");
 
-		JournalArticle journalArticle = JournalTestUtil.addArticle(
-			_group.getGroupId(), "Test Article", content);
-
-		String updatedContent = JournalTestUtil.createLocalizedContent(
-			"This is an updated test article", LocaleUtil.getDefault());
+		String localizedContent = JournalTestUtil.createLocalizedContent(
+			"This is an updated test article.", LocaleUtil.getDefault());
 
 		Assert.assertNotNull(
 			JournalTestUtil.updateArticle(
-				journalArticle, journalArticle.getTitle(), updatedContent));
+				article, article.getTitle(), localizedContent));
 	}
 
 	protected Map<String, String> getTokens() throws Exception {
@@ -305,7 +289,5 @@ public class JournalTestUtilTest {
 	}
 
 	private Group _group;
-
-	private User _user;
 
 }
