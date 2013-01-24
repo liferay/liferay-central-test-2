@@ -555,9 +555,7 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public boolean isChecked(String locator) {
-		WebDriverHelper.setTimeoutImplicit(this, "1");
-
-		WebElement webElement = getWebElement(locator);
+		WebElement webElement = getWebElement(locator, "1");
 
 		return webElement.isSelected();
 	}
@@ -575,9 +573,7 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public boolean isElementPresent(String locator) {
-		WebDriverHelper.setTimeoutImplicit(this, "1");
-
-		List<WebElement> webElements = getWebElements(locator);
+		List<WebElement> webElements = getWebElements(locator, "1");
 
 		return !webElements.isEmpty();
 	}
@@ -1094,6 +1090,10 @@ public class WebDriverToSeleniumBridge
 		throw new UnsupportedOperationException();
 	}
 
+	public void setDefaultTimeoutImplicit() {
+		WebDriverHelper.setDefaultTimeoutImplicit(this);
+	}
+
 	public void setExtensionJs(String extensionJs) {
 		throw new UnsupportedOperationException();
 	}
@@ -1107,6 +1107,10 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public void setTimeout(String timeout) {
+	}
+
+	public void setTimeoutImplicit(String timeout) {
+		WebDriverHelper.setTimeoutImplicit(this, timeout);
 	}
 
 	public void shiftKeyDown() {
@@ -1263,17 +1267,28 @@ public class WebDriverToSeleniumBridge
 	}
 
 	protected WebElement getWebElement(String locator) {
-		List<WebElement> webElements = getWebElements(locator);
+		return getWebElement(locator, null);
+	}
+
+	protected WebElement getWebElement(String locator, String timeout) {
+		List<WebElement> webElements = getWebElements(locator, timeout);
 
 		if (!webElements.isEmpty()) {
 			return webElements.get(0);
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	protected List<WebElement> getWebElements(String locator) {
+		return getWebElements(locator, null);
+	}
+
+	protected List<WebElement> getWebElements(String locator, String timeout) {
+		if (timeout != null) {
+			setTimeoutImplicit(timeout);
+		}
+
 		try {
 			if (locator.startsWith("//")) {
 				return findElements(By.xpath(locator));
@@ -1315,7 +1330,9 @@ public class WebDriverToSeleniumBridge
 			}
 		}
 		finally {
-			WebDriverHelper.setDefaultTimeoutImplicit(this);
+			if (timeout != null) {
+				setDefaultTimeoutImplicit();
+			}
 		}
 	}
 
