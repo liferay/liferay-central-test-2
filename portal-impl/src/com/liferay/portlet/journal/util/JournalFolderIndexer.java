@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,9 +30,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalFolderPermission;
@@ -105,13 +102,6 @@ public class JournalFolderIndexer extends BaseIndexer {
 		document.addText(Field.DESCRIPTION, folder.getDescription());
 		document.addKeyword(Field.FOLDER_ID, folder.getParentFolderId());
 		document.addText(Field.TITLE, folder.getName());
-
-		ExpandoBridge expandoBridge =
-			ExpandoBridgeFactoryUtil.getExpandoBridge(
-				folder.getCompanyId(), JournalFolder.class.getName(),
-				folder.getFolderId());
-
-		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + folder + " indexed successfully");
