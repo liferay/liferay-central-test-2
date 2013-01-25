@@ -196,20 +196,20 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 					<c:when test="<%= PropsValues.JOURNAL_ARTICLES_SEARCH_WITH_INDEX %>">
 
 						<%
-						LinkedHashMap<String, Object> journalParams = new LinkedHashMap<String, Object>();
+						LinkedHashMap<String, Object> params = new LinkedHashMap<String, Object>();
 
-						journalParams.put("expandoAttributes", searchTerms.getKeywords());
-						journalParams.put("includeDiscussions", searchTerms.getKeywords());
+						params.put("expandoAttributes", searchTerms.getKeywords());
+						params.put("includeDiscussions", searchTerms.getKeywords());
 
 						Sort sort = SortFactoryUtil.getSort(JournalArticle.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 						Hits hits = null;
 
 						if (searchTerms.isAdvancedSearch()) {
-							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), searchTerms.getStructureId(), searchTerms.getTemplateId(), journalParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
+							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), searchTerms.getStructureId(), searchTerms.getTemplateId(), params, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 						}
 						else {
-							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getKeywords(), journalParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
+							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getKeywords(), params, searchContainer.getStart(), searchContainer.getEnd(), sort);
 						}
 
 						total = hits.getLength();
@@ -342,14 +342,14 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 					<div class="portlet-msg-info">
 
 						<%
-						String msgInfo = LanguageUtil.get(pageContext, "no-articles-were-found-that-matched-the-specified-filters");
+						String message = LanguageUtil.get(pageContext, "no-articles-were-found-that-matched-the-specified-filters");
 
 						if (!advancedSearch) {
-							msgInfo = LanguageUtil.format(pageContext, "no-articles-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>");
+							message = LanguageUtil.format(pageContext, "no-articles-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>");
 						}
 						%>
 
-						<%= msgInfo %>
+						<%= message %>
 					</div>
 				</c:if>
 
