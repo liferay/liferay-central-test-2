@@ -56,7 +56,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -178,29 +177,18 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntry.setVersionUserName(user.getFullName());
 		dlFileEntry.setCreateDate(serviceContext.getCreateDate(now));
 		dlFileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
-		dlFileEntry.setRepositoryId(repositoryId);
-		dlFileEntry.setFolderId(folderId);
-		dlFileEntry.setName(name);
-		dlFileEntry.setExtension(extension);
-		dlFileEntry.setMimeType(mimeType);
-		dlFileEntry.setTitle(title);
-		dlFileEntry.setDescription(description);
-		dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
-		dlFileEntry.setVersion(DLFileEntryConstants.VERSION_DEFAULT);
-		dlFileEntry.setSize(size);
-		dlFileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
 
-		DLFolder folderRepository = null;
+		DLFolder repositoryDLFolder = null;
 
 		if (repositoryId != groupId) {
-			Repository repository = RepositoryLocalServiceUtil.getRepository(
+			Repository repository = repositoryLocalService.getRepository(
 				repositoryId);
 
-			folderRepository = dlFolderLocalService.getFolder(
+			repositoryDLFolder = dlFolderPersistence.findByPrimaryKey(
 				repository.getDlFolderId());
 		}
 
-		if ((folderRepository != null) && folderRepository.isHidden()) {
+		if ((repositoryDLFolder != null) && repositoryDLFolder.isHidden()) {
 			long classNameId = PortalUtil.getClassNameId(
 				(String)serviceContext.getAttribute("className"));
 			long classPK = ParamUtil.getLong(serviceContext, "classPK");
@@ -212,6 +200,18 @@ public class DLFileEntryLocalServiceImpl
 				dlFileEntry.setClassPK(classPK);
 			}
 		}
+
+		dlFileEntry.setRepositoryId(repositoryId);
+		dlFileEntry.setFolderId(folderId);
+		dlFileEntry.setName(name);
+		dlFileEntry.setExtension(extension);
+		dlFileEntry.setMimeType(mimeType);
+		dlFileEntry.setTitle(title);
+		dlFileEntry.setDescription(description);
+		dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
+		dlFileEntry.setVersion(DLFileEntryConstants.VERSION_DEFAULT);
+		dlFileEntry.setSize(size);
+		dlFileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
 
 		dlFileEntryPersistence.update(dlFileEntry);
 
