@@ -240,6 +240,7 @@
 			<basic name="classPK" />
 			<basic name="parentGroupId" />
 			<basic name="liveGroupId" />
+			<basic name="treePath" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="type">

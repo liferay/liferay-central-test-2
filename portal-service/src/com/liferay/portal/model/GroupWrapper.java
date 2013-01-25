@@ -49,6 +49,7 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 		attributes.put("classPK", getClassPK());
 		attributes.put("parentGroupId", getParentGroupId());
 		attributes.put("liveGroupId", getLiveGroupId());
+		attributes.put("treePath", getTreePath());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("type", getType());
@@ -101,6 +102,12 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 
 		if (liveGroupId != null) {
 			setLiveGroupId(liveGroupId);
+		}
+
+		String treePath = (String)attributes.get("treePath");
+
+		if (treePath != null) {
+			setTreePath(treePath);
 		}
 
 		String name = (String)attributes.get("name");
@@ -324,6 +331,24 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	}
 
 	/**
+	* Returns the tree path of this group.
+	*
+	* @return the tree path of this group
+	*/
+	public java.lang.String getTreePath() {
+		return _group.getTreePath();
+	}
+
+	/**
+	* Sets the tree path of this group.
+	*
+	* @param treePath the tree path of this group
+	*/
+	public void setTreePath(java.lang.String treePath) {
+		_group.setTreePath(treePath);
+	}
+
+	/**
 	* Returns the name of this group.
 	*
 	* @return the name of this group
@@ -542,6 +567,12 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_group.persist();
+	}
+
+	public java.lang.String buildTreePath()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _group.buildTreePath();
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> getAncestors()
