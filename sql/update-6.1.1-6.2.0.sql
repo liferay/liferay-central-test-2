@@ -295,11 +295,6 @@ alter table DLFileEntry add classNameId LONG;
 alter table DLFileEntry add classPK LONG;
 alter table DLFileEntry add manualCheckInRequired BOOLEAN;
 
-COMMIT_TRANSACTION;
-
-update DLFileEntry set classNameId = 0;
-update DLFileEntry set classPK = 0;
-
 alter table DLFileRank add active_ BOOLEAN;
 
 COMMIT_TRANSACTION;
