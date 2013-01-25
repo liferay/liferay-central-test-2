@@ -17,5 +17,5 @@ package com.liferay.portal.tools.seleniumbuilder;
 /**
  * @author Michael Hashimoto
  */
-public class TestCasesXMLToJavaBuilder extends BaseXMLToJavaBuilder {
+public class TestPlanConverter extends BaseConverter {
 }

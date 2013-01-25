@@ -17,5 +17,5 @@ package com.liferay.portal.tools.seleniumbuilder;
 /**
  * @author Michael Hashimoto
  */
-public class PathsXMLToJavaBuilder extends BaseXMLToJavaBuilder {
+public class MacroConverter extends BaseConverter {
 }

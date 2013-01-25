@@ -17,5 +17,5 @@ package com.liferay.portal.tools.seleniumbuilder;
 /**
  * @author Michael Hashimoto
  */
-public class BaseJavaBuilder {
+public class PathConverter extends BaseConverter {
 }

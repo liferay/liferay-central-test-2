@@ -17,5 +17,5 @@ package com.liferay.portal.tools.seleniumbuilder;
 /**
  * @author Michael Hashimoto
  */
-public class TestPlansJavaBuilder extends BaseJavaBuilder {
+public class TestCaseConverter extends BaseConverter {
 }

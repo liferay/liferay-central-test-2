@@ -17,5 +17,5 @@ package com.liferay.portal.tools.seleniumbuilder;
 /**
  * @author Michael Hashimoto
  */
-public class FunctionsXMLToJavaBuilder extends BaseXMLToJavaBuilder {
+public class BaseConverter {
 }
