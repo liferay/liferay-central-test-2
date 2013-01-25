@@ -29,7 +29,8 @@ public class FolderSearcher extends BaseIndexer {
 
 	public static final String[] CLASS_NAMES = {
 		BookmarksFolder.class.getName(), DLFolder.class.getName(),
-		JournalFolder.class.getName()};
+		JournalFolder.class.getName()
+	};
 
 	public static Indexer getInstance() {
 		return new FolderSearcher();
