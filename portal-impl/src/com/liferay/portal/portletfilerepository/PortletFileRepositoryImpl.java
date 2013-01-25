@@ -91,13 +91,13 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		String contentType = MimeTypesUtil.getContentType(file);
 
+		serviceContext.setAttribute("className", className);
+		serviceContext.setAttribute("classPK", String.valueOf(classPK));
+
 		boolean dlAppHelperEnabled = DLAppHelperThreadLocal.isEnabled();
 
 		try {
 			DLAppHelperThreadLocal.setEnabled(false);
-
-			serviceContext.setAttribute("className", className);
-			serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 			return DLAppLocalServiceUtil.addFileEntry(
 				userId, repositoryId, folderId, fileName, contentType, fileName,
@@ -138,13 +138,13 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 		String contentType = MimeTypesUtil.getContentType(
 			inputStream, fileName);
 
+		serviceContext.setAttribute("className", className);
+		serviceContext.setAttribute("classPK", String.valueOf(classPK));
+
 		boolean dlAppHelperEnabled = DLAppHelperThreadLocal.isEnabled();
 
 		try {
 			DLAppHelperThreadLocal.setEnabled(false);
-
-			serviceContext.setAttribute("className", className);
-			serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 			return DLAppLocalServiceUtil.addFileEntry(
 				userId, repositoryId, folderId, fileName, contentType, fileName,
