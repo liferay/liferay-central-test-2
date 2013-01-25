@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -78,10 +78,8 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavRequest)
-		throws WebDAVException {
-
-		return new ArrayList<Resource>();
+	public List<Resource> getResources(WebDAVRequest webDavRequest) {
+		return Collections.emptyList();
 	}
 
 	@Override
