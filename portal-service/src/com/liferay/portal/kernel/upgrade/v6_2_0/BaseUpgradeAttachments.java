@@ -362,10 +362,6 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 	protected abstract String getPortletId();
 
-	protected String getRepositoryClassName() {
-		return LiferayRepository.class.getName();
-	}
-
 	protected long getRepositoryId(
 			long groupId, long companyId, long userId, String userName,
 			Timestamp createDate, long classNameId, String portletId)
@@ -421,7 +417,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 		long repositoryId = getRepositoryId(
 			groupId, companyId, userId, userName, createDate,
-			PortalUtil.getClassNameId(getRepositoryClassName()),
+			PortalUtil.getClassNameId(LiferayRepository.class.getName()),
 			getPortletId());
 		long containerModelFolderId = getContainerModelFolderId(
 			groupId, companyId, resourcePrimKey, containerModelId, userId,
