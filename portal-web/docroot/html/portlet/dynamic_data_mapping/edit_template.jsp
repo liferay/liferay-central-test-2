@@ -51,7 +51,7 @@ if (Validator.isNull(script)) {
 	if (portletDisplayTemplateHandler != null) {
 		script = ContentUtil.get(portletDisplayTemplateHandler.getTemplatesHelpPath(language));
 	}
-	else if ((structure != null) && structure.getClassName().equals(JournalArticle.class)) {
+	else if ((structure != null) && Validator.equals(structure.getClassName(), JournalArticle.class)) {
 		script = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_CONTENT, new Filter(DDMTemplateConstants.LANG_TYPE_VM)));
 	}
 	else if (!type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
