@@ -1286,19 +1286,19 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "resourcePermission.roleId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_LIKEP = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			ResourcePermissionImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_P",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_LikeP",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_P = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_LIKEP = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByC_P",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByC_LikeP",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
@@ -1309,9 +1309,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<ResourcePermission> findByC_P(long companyId, String primKey)
+	public List<ResourcePermission> findByC_LikeP(long companyId, String primKey)
 		throws SystemException {
-		return findByC_P(companyId, primKey, QueryUtil.ALL_POS,
+		return findByC_LikeP(companyId, primKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -1329,9 +1329,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<ResourcePermission> findByC_P(long companyId, String primKey,
-		int start, int end) throws SystemException {
-		return findByC_P(companyId, primKey, start, end, null);
+	public List<ResourcePermission> findByC_LikeP(long companyId,
+		String primKey, int start, int end) throws SystemException {
+		return findByC_LikeP(companyId, primKey, start, end, null);
 	}
 
 	/**
@@ -1349,14 +1349,14 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the ordered range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<ResourcePermission> findByC_P(long companyId, String primKey,
-		int start, int end, OrderByComparator orderByComparator)
+	public List<ResourcePermission> findByC_LikeP(long companyId,
+		String primKey, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_P;
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_LIKEP;
 		finderArgs = new Object[] {
 				companyId, primKey,
 				
@@ -1391,20 +1391,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_LIKEP_COMPANYID_2);
 
 			boolean bindPrimKey = false;
 
 			if (primKey == null) {
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_1);
 			}
 			else if (primKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_3);
 			}
 			else {
 				bindPrimKey = true;
 
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_2);
 			}
 
 			if (orderByComparator != null) {
@@ -1473,10 +1473,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourcePermission findByC_P_First(long companyId, String primKey,
-		OrderByComparator orderByComparator)
+	public ResourcePermission findByC_LikeP_First(long companyId,
+		String primKey, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
-		ResourcePermission resourcePermission = fetchByC_P_First(companyId,
+		ResourcePermission resourcePermission = fetchByC_LikeP_First(companyId,
 				primKey, orderByComparator);
 
 		if (resourcePermission != null) {
@@ -1507,9 +1507,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourcePermission fetchByC_P_First(long companyId, String primKey,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<ResourcePermission> list = findByC_P(companyId, primKey, 0, 1,
+	public ResourcePermission fetchByC_LikeP_First(long companyId,
+		String primKey, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<ResourcePermission> list = findByC_LikeP(companyId, primKey, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1529,10 +1530,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourcePermission findByC_P_Last(long companyId, String primKey,
-		OrderByComparator orderByComparator)
+	public ResourcePermission findByC_LikeP_Last(long companyId,
+		String primKey, OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
-		ResourcePermission resourcePermission = fetchByC_P_Last(companyId,
+		ResourcePermission resourcePermission = fetchByC_LikeP_Last(companyId,
 				primKey, orderByComparator);
 
 		if (resourcePermission != null) {
@@ -1563,11 +1564,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourcePermission fetchByC_P_Last(long companyId, String primKey,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByC_P(companyId, primKey);
+	public ResourcePermission fetchByC_LikeP_Last(long companyId,
+		String primKey, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByC_LikeP(companyId, primKey);
 
-		List<ResourcePermission> list = findByC_P(companyId, primKey,
+		List<ResourcePermission> list = findByC_LikeP(companyId, primKey,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1588,7 +1590,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourcePermission[] findByC_P_PrevAndNext(
+	public ResourcePermission[] findByC_LikeP_PrevAndNext(
 		long resourcePermissionId, long companyId, String primKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchResourcePermissionException, SystemException {
@@ -1601,12 +1603,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			ResourcePermission[] array = new ResourcePermissionImpl[3];
 
-			array[0] = getByC_P_PrevAndNext(session, resourcePermission,
+			array[0] = getByC_LikeP_PrevAndNext(session, resourcePermission,
 					companyId, primKey, orderByComparator, true);
 
 			array[1] = resourcePermission;
 
-			array[2] = getByC_P_PrevAndNext(session, resourcePermission,
+			array[2] = getByC_LikeP_PrevAndNext(session, resourcePermission,
 					companyId, primKey, orderByComparator, false);
 
 			return array;
@@ -1619,7 +1621,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		}
 	}
 
-	protected ResourcePermission getByC_P_PrevAndNext(Session session,
+	protected ResourcePermission getByC_LikeP_PrevAndNext(Session session,
 		ResourcePermission resourcePermission, long companyId, String primKey,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -1634,20 +1636,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
 
-		query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
+		query.append(_FINDER_COLUMN_C_LIKEP_COMPANYID_2);
 
 		boolean bindPrimKey = false;
 
 		if (primKey == null) {
-			query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
+			query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_1);
 		}
 		else if (primKey.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
+			query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_3);
 		}
 		else {
 			bindPrimKey = true;
 
-			query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
+			query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_2);
 		}
 
 		if (orderByComparator != null) {
@@ -1749,9 +1751,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_P(long companyId, String primKey)
+	public void removeByC_LikeP(long companyId, String primKey)
 		throws SystemException {
-		for (ResourcePermission resourcePermission : findByC_P(companyId,
+		for (ResourcePermission resourcePermission : findByC_LikeP(companyId,
 				primKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
 		}
@@ -1765,9 +1767,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the number of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByC_P(long companyId, String primKey)
+	public int countByC_LikeP(long companyId, String primKey)
 		throws SystemException {
-		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_P;
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_LIKEP;
 
 		Object[] finderArgs = new Object[] { companyId, primKey };
 
@@ -1779,20 +1781,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
 
-			query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_LIKEP_COMPANYID_2);
 
 			boolean bindPrimKey = false;
 
 			if (primKey == null) {
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_1);
 			}
 			else if (primKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_3);
 			}
 			else {
 				bindPrimKey = true;
 
-				query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
+				query.append(_FINDER_COLUMN_C_LIKEP_PRIMKEY_2);
 			}
 
 			String sql = query.toString();
@@ -1829,10 +1831,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resourcePermission.primKey LIKE NULL";
-	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resourcePermission.primKey LIKE ?";
-	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resourcePermission.primKey IS NULL OR resourcePermission.primKey LIKE '')";
+	private static final String _FINDER_COLUMN_C_LIKEP_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_LIKEP_PRIMKEY_1 = "resourcePermission.primKey LIKE NULL";
+	private static final String _FINDER_COLUMN_C_LIKEP_PRIMKEY_2 = "resourcePermission.primKey LIKE ?";
+	private static final String _FINDER_COLUMN_C_LIKEP_PRIMKEY_3 = "(resourcePermission.primKey IS NULL OR resourcePermission.primKey LIKE '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_N_S = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			ResourcePermissionImpl.class,

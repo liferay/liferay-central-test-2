@@ -378,7 +378,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the matching resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_P(
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_LikeP(
 		long companyId, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -396,7 +396,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the range of matching resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_P(
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_LikeP(
 		long companyId, java.lang.String primKey, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -415,7 +415,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the ordered range of matching resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_P(
+	public java.util.List<com.liferay.portal.model.ResourcePermission> findByC_LikeP(
 		long companyId, java.lang.String primKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -430,7 +430,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.ResourcePermission findByC_P_First(
+	public com.liferay.portal.model.ResourcePermission findByC_LikeP_First(
 		long companyId, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
@@ -445,7 +445,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.ResourcePermission fetchByC_P_First(
+	public com.liferay.portal.model.ResourcePermission fetchByC_LikeP_First(
 		long companyId, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -460,7 +460,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.ResourcePermission findByC_P_Last(
+	public com.liferay.portal.model.ResourcePermission findByC_LikeP_Last(
 		long companyId, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
@@ -475,7 +475,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.ResourcePermission fetchByC_P_Last(
+	public com.liferay.portal.model.ResourcePermission fetchByC_LikeP_Last(
 		long companyId, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -491,7 +491,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.ResourcePermission[] findByC_P_PrevAndNext(
+	public com.liferay.portal.model.ResourcePermission[] findByC_LikeP_PrevAndNext(
 		long resourcePermissionId, long companyId, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchResourcePermissionException,
@@ -504,7 +504,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @param primKey the prim key
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByC_P(long companyId, java.lang.String primKey)
+	public void removeByC_LikeP(long companyId, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -515,7 +515,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	* @return the number of matching resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByC_P(long companyId, java.lang.String primKey)
+	public int countByC_LikeP(long companyId, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
