@@ -421,12 +421,12 @@ public class ServiceTestUtil {
 		IndexerRegistryUtil.register(new BookmarksFolderIndexer());
 		IndexerRegistryUtil.register(new DLFileEntryIndexer());
 		IndexerRegistryUtil.register(new DLFolderIndexer());
+		IndexerRegistryUtil.register(new JournalArticleIndexer());
+		IndexerRegistryUtil.register(new JournalFolderIndexer());
 		IndexerRegistryUtil.register(new MBMessageIndexer());
 		IndexerRegistryUtil.register(new TrashIndexer());
 		IndexerRegistryUtil.register(new WikiNodeIndexer());
 		IndexerRegistryUtil.register(new WikiPageIndexer());
-		IndexerRegistryUtil.register(new JournalArticleIndexer());
-		IndexerRegistryUtil.register(new JournalFolderIndexer());
 
 		// Upgrade
 
