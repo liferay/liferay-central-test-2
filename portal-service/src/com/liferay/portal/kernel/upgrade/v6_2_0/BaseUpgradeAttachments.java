@@ -305,7 +305,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 	protected abstract String getClassName();
 
-	protected abstract long getClassNameId();
+	protected long getClassNameId() {
+		return PortalUtil.getClassNameId(getClassName());
+	}
 
 	protected long getContainerModelFolderId(
 			long groupId, long companyId, long resourcePrimKey,
