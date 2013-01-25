@@ -101,7 +101,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		Long classNameId = (Long)searchContext.getAttribute(
 			Field.CLASS_NAME_ID);
 
-		if (Validator.isNotNull(classNameId)) {
+		if (classNameId != null) {
 			contextQuery.addRequiredTerm("classNameId", classNameId.toString());
 		}
 

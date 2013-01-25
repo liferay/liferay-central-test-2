@@ -1933,8 +1933,8 @@ public class JournalArticleLocalServiceImpl
 	public Hits search(
 			long companyId, long groupId, List<Long> folderIds,
 			long classNameId, String structureId, String templateId,
-			String keywords, LinkedHashMap<String, Object> params,
-			boolean includeDiscussions, int start, int end, Sort sort)
+			String keywords, LinkedHashMap<String, Object> params, int start,
+			int end, Sort sort)
 		throws SystemException {
 
 		String articleId = null;
@@ -1962,19 +1962,7 @@ public class JournalArticleLocalServiceImpl
 		return search(
 			companyId, groupId, folderIds, classNameId, articleId, title,
 			description, content, null, status, structureId, templateId, params,
-			includeDiscussions, andOperator, start, end, sort);
-	}
-
-	public Hits search(
-			long companyId, long groupId, List<Long> folderIds,
-			long classNameId, String structureId, String templateId,
-			String keywords, LinkedHashMap<String, Object> params, int start,
-			int end, Sort sort)
-		throws SystemException {
-
-		return search(
-			companyId, groupId, folderIds, classNameId, structureId, templateId,
-			keywords, params, false, start, end, sort);
+			andOperator, start, end, sort);
 	}
 
 	public Hits search(
@@ -1982,8 +1970,8 @@ public class JournalArticleLocalServiceImpl
 			long classNameId, String articleId, String title,
 			String description, String content, String type, String status,
 			String structureId, String templateId,
-			LinkedHashMap<String, Object> params, boolean includeDiscussions,
-			boolean andSearch, int start, int end, Sort sort)
+			LinkedHashMap<String, Object> params, boolean andSearch, int start,
+			int end, Sort sort)
 		throws SystemException {
 
 		try {
@@ -2011,7 +1999,8 @@ public class JournalArticleLocalServiceImpl
 			searchContext.setEnd(end);
 			searchContext.setFolderIds(folderIds);
 			searchContext.setGroupIds(new long[] {groupId});
-			searchContext.setIncludeDiscussions(includeDiscussions);
+			searchContext.setIncludeDiscussions(
+				GetterUtil.getBoolean(params.get("includeDiscussions")));
 
 			if (params != null) {
 				String keywords = (String)params.remove("keywords");
@@ -2042,21 +2031,6 @@ public class JournalArticleLocalServiceImpl
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-	}
-
-	public Hits search(
-			long companyId, long groupId, List<Long> folderIds,
-			long classNameId, String articleId, String title,
-			String description, String content, String type, String status,
-			String structureId, String templateId,
-			LinkedHashMap<String, Object> params, boolean andSearch, int start,
-			int end, Sort sort)
-		throws SystemException {
-
-		return search(
-			companyId, groupId, folderIds, classNameId, articleId, title,
-			description, content, type, status, structureId, templateId, params,
-			andSearch, false, start, end, sort);
 	}
 
 	public int searchCount(

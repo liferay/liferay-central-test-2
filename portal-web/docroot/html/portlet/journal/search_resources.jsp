@@ -1,4 +1,3 @@
-
 <%--
 /**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
@@ -190,7 +189,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 			}
 
 			try {
-				boolean isResultsEmpty = false;
+				boolean emptySearchResults = false;
 			%>
 
 				<c:choose>
@@ -200,16 +199,17 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 						LinkedHashMap<String, Object> journalParams = new LinkedHashMap<String, Object>();
 
 						journalParams.put("expandoAttributes", searchTerms.getKeywords());
+						journalParams.put("includeDiscussions", searchTerms.getKeywords());
 
 						Sort sort = SortFactoryUtil.getSort(JournalArticle.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 						Hits hits = null;
 
 						if (searchTerms.isAdvancedSearch()) {
-							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), searchTerms.getStructureId(), searchTerms.getTemplateId(), journalParams, true, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
+							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), searchTerms.getStructureId(), searchTerms.getTemplateId(), journalParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 						}
 						else {
-							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getKeywords(), journalParams, true, searchContainer.getStart(), searchContainer.getEnd(), sort);
+							hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFolderIds(), JournalArticleConstants.CLASSNAME_ID_DEFAULT, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getKeywords(), journalParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 						}
 
 						total = hits.getLength();
@@ -218,45 +218,45 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 
 						List<SearchResult> searchResults = SearchResultUtil.getSearchResults(hits);
 
-						isResultsEmpty = searchResults.isEmpty();
+						emptySearchResults = searchResults.isEmpty();
 
 						for (int i = 0; i < searchResults.size(); i++) {
 							SearchResult searchResult = searchResults.get(i);
 
-							JournalArticleResource curArticleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(searchResult.getClassPK());
+							JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(searchResult.getClassPK());
 
-							JournalArticle curArticle = JournalArticleLocalServiceUtil.getArticle(curArticleResource.getGroupId(), curArticleResource.getArticleId());
+							JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleResource.getGroupId(), articleResource.getArticleId());
 						%>
 
 							<c:choose>
-								<c:when test="<%= (curArticle != null) && JournalArticlePermission.contains(permissionChecker, curArticle, ActionKeys.VIEW) %>">
+								<c:when test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW) %>">
 
 									<%
-									PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
+									PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-									tempRowURL.setParameter("struts_action", "/journal/edit_article");
-									tempRowURL.setParameter("redirect", currentURL);
-									tempRowURL.setParameter("groupId", String.valueOf(curArticle.getGroupId()));
-									tempRowURL.setParameter("folderId", String.valueOf(curArticle.getFolderId()));
-									tempRowURL.setParameter("articleId", curArticle.getArticleId());
+									rowURL.setParameter("struts_action", "/journal/edit_article");
+									rowURL.setParameter("redirect", currentURL);
+									rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
+									rowURL.setParameter("folderId", String.valueOf(article.getFolderId()));
+									rowURL.setParameter("articleId", article.getArticleId());
 
-									request.setAttribute("view_entries.jsp-article", curArticle);
+									request.setAttribute("view_entries.jsp-article", article);
 									%>
 
 									<liferay-ui:app-view-search-entry
 										actionJsp="/html/portlet/journal/article_action.jsp"
 										cssClass='<%= MathUtil.isEven(i) ? "alt" : StringPool.BLANK %>'
-										description="<%= curArticle.getDescription(locale) %>"
-										folderName="<%= JournalUtil.getAbsolutePath(liferayPortletRequest, curArticle.getFolderId()) %>"
+										description="<%= article.getDescription(locale) %>"
+										folderName="<%= JournalUtil.getAbsolutePath(liferayPortletRequest, article.getFolderId()) %>"
 										mbMessages="<%= searchResult.getMBMessages() %>"
 										queryTerms="<%= hits.getQueryTerms() %>"
-										rowCheckerId="<%= String.valueOf(curArticle.getArticleId()) %>"
+										rowCheckerId="<%= String.valueOf(article.getArticleId()) %>"
 										rowCheckerName="<%= JournalArticle.class.getSimpleName() %>"
-										showCheckbox="<%= JournalArticlePermission.contains(permissionChecker, curArticle, ActionKeys.DELETE) || JournalArticlePermission.contains(permissionChecker, curArticle, ActionKeys.UPDATE) %>"
-										status="<%= curArticle.getStatus() %>"
+										showCheckbox="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) || JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>"
+										status="<%= article.getStatus() %>"
 										thumbnailSrc='<%= themeDisplay.getPathThemeImages() + "/file_system/large/default.png" %>'
-										title="<%= curArticle.getTitle(locale) %>"
-										url="<%= tempRowURL.toString() %>"
+										title="<%= article.getTitle(locale) %>"
+										url="<%= rowURL.toString() %>"
 									/>
 								</c:when>
 
@@ -281,7 +281,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 						<%@ include file="/html/portlet/journal/article_search_results_database.jspf" %>
 
 						<%
-						isResultsEmpty = results.isEmpty();
+						emptySearchResults = results.isEmpty();
 
 						request.setAttribute("view.jsp-total", String.valueOf(total));
 
@@ -297,13 +297,13 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 								<c:when test="<%= (curArticle != null) && JournalArticlePermission.contains(permissionChecker, curArticle, ActionKeys.VIEW) %>">
 
 									<%
-									PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
+									PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-									tempRowURL.setParameter("struts_action", "/journal/edit_article");
-									tempRowURL.setParameter("redirect", currentURL);
-									tempRowURL.setParameter("groupId", String.valueOf(curArticle.getGroupId()));
-									tempRowURL.setParameter("folderId", String.valueOf(curArticle.getFolderId()));
-									tempRowURL.setParameter("articleId", curArticle.getArticleId());
+									rowURL.setParameter("struts_action", "/journal/edit_article");
+									rowURL.setParameter("redirect", currentURL);
+									rowURL.setParameter("groupId", String.valueOf(curArticle.getGroupId()));
+									rowURL.setParameter("folderId", String.valueOf(curArticle.getFolderId()));
+									rowURL.setParameter("articleId", curArticle.getArticleId());
 
 									request.setAttribute("view_entries.jsp-article", curArticle);
 									%>
@@ -320,7 +320,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 										status="<%= curArticle.getStatus() %>"
 										thumbnailSrc='<%= themeDisplay.getPathThemeImages() + "/file_system/large/default.png" %>'
 										title="<%= curArticle.getTitle(locale) %>"
-										url="<%= tempRowURL.toString() %>"
+										url="<%= rowURL.toString() %>"
 									/>
 								</c:when>
 
@@ -338,7 +338,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 					</c:otherwise>
 				</c:choose>
 
-				<c:if test="<%= isResultsEmpty %>">
+				<c:if test="<%= emptySearchResults %>">
 					<div class="portlet-msg-info">
 
 						<%
