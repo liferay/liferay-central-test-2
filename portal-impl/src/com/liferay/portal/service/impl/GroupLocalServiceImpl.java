@@ -706,7 +706,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Resources
 
 		List<ResourcePermission> resourcePermissions =
-			resourcePermissionPersistence.findByC_P(
+			resourcePermissionPersistence.findByC_LikeP(
 				group.getCompanyId(), String.valueOf(group.getGroupId()));
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
