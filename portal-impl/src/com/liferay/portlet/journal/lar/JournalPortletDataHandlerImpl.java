@@ -198,14 +198,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			articleElement.addAttribute(
 				"ddm-template-uuid", ddmTemplate.getUuid());
 
-			String templatePath = getDDMTemplatePath(
+			String ddmTemplatePath = getDDMTemplatePath(
 				portletDataContext, ddmTemplate);
 
 			DDMPortletDataHandlerImpl.exportTemplate(
 				portletDataContext, ddmTemplatesElement,
 				dlFileEntryTypesElement, dlFoldersElement, dlFileEntriesElement,
 				dlFileRanksElement, dlRepositoriesElement,
-				dlRepositoryEntriesElement, templatePath, ddmTemplate);
+				dlRepositoryEntriesElement, ddmTemplatePath, ddmTemplate);
 		}
 
 		Image smallImage = ImageUtil.fetchByPrimaryKey(
@@ -1673,11 +1673,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (portletDataContext.isWithinDateRange(
 					ddmTemplate.getModifiedDate())) {
 
-				String templatePath = getDDMTemplatePath(
+				String ddmTemplatePath = getDDMTemplatePath(
 					portletDataContext, ddmTemplate);
 
 				DDMPortletDataHandlerImpl.exportTemplate(
-					portletDataContext, ddmTemplatesElement, templatePath,
+					portletDataContext, ddmTemplatesElement, ddmTemplatePath,
 					ddmTemplate);
 			}
 		}

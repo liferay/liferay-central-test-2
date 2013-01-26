@@ -258,15 +258,15 @@ public class JournalContentPortletDataHandlerImpl
 				DDMTemplateLocalServiceUtil.getTemplate(
 					article.getGroupId(), preferenceTemplateId, true);
 
-			String templatePath =
+			String ddmTemplatePath =
 				JournalPortletDataHandlerImpl.getDDMTemplatePath(
 					portletDataContext, ddmTemplate);
 
 			DDMPortletDataHandlerImpl.exportTemplate(
 				portletDataContext, rootElement, dlFileEntryTypesElement,
 				dlFoldersElement, dlFilesElement, dlFileRanksElement,
-				dlRepositoriesElement, dlRepositoryEntriesElement, templatePath,
-				ddmTemplate);
+				dlRepositoriesElement, dlRepositoryEntriesElement,
+				ddmTemplatePath, ddmTemplate);
 		}
 
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
