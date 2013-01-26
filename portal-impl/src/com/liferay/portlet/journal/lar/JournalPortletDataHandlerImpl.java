@@ -1017,7 +1017,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_articles, _ddmStructuresTemplatesAndFeeds, _embeddedAssets,
+			_articles, _ddmStructuresDDMTemplatesAndFeeds, _embeddedAssets,
 			_versionHistory
 		};
 	}
@@ -1033,7 +1033,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_articles, _ddmStructuresTemplatesAndFeeds
+			_articles, _ddmStructuresDDMTemplatesAndFeeds
 		};
 	}
 
@@ -1634,7 +1634,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		Element ddmStructuresElement = rootElement.addElement("ddmStructures");
+		Element ddmStructuresElement = rootElement.addElement("ddm-structures");
 
 		List<DDMStructure> ddmStructures = DDMStructureUtil.findByG_C(
 			portletDataContext.getScopeGroupId(),
@@ -1658,7 +1658,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			ddmTemplates.addAll(ddmStructure.getTemplates());
 		}
 
-		Element ddmTemplatesElement = rootElement.addElement("ddmTemplates");
+		Element ddmTemplatesElement = rootElement.addElement("ddm-templates");
 		Element dlFileEntryTypesElement = rootElement.addElement(
 			"dl-file-entry-types");
 		Element dlFoldersElement = rootElement.addElement("dl-folders");
@@ -1754,7 +1754,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		importReferencedData(portletDataContext, rootElement);
 
-		Element ddmStructuresElement = rootElement.element("ddmStructures");
+		Element ddmStructuresElement = rootElement.element("ddm-structures");
 
 		List<Element> ddmStructureElements = ddmStructuresElement.elements(
 			"structure");
@@ -1764,7 +1764,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext, ddmStructureElement);
 		}
 
-		Element ddmTemplatesElement = rootElement.element("ddmTemplates");
+		Element ddmTemplatesElement = rootElement.element("ddm-templates");
 
 		List<Element> ddmTemplateElements = ddmTemplatesElement.elements(
 			"template");
@@ -1826,9 +1826,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static PortletDataHandlerBoolean _articles =
 		new PortletDataHandlerBoolean(_NAMESPACE, "web-content");
 
-	private static PortletDataHandlerBoolean _ddmStructuresTemplatesAndFeeds =
-		new PortletDataHandlerBoolean(
-			_NAMESPACE, "ddmStructures-ddmTemplates-and-feeds", true, true);
+	private static PortletDataHandlerBoolean
+		_ddmStructuresDDMTemplatesAndFeeds = new PortletDataHandlerBoolean(
+			_NAMESPACE, "ddm-structures-ddm-templates-and-feeds", true, true);
 
 	private static PortletDataHandlerBoolean _embeddedAssets =
 		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
