@@ -1828,7 +1828,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean
 		_ddmStructuresDDMTemplatesAndFeeds = new PortletDataHandlerBoolean(
-			_NAMESPACE, "ddm-structures-ddm-templates-and-feeds", true, true);
+			_NAMESPACE, "structures-templates-and-feeds", true, true);
 
 	private static PortletDataHandlerBoolean _embeddedAssets =
 		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
