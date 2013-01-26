@@ -819,21 +819,21 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			autoFeedId = true;
 		}
 
-		Map<String, String> ddmStructureIds =
+		Map<String, String> ddmStructureKeys =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class + ".structureKey");
 
-		String parentDDMStructureId = MapUtil.getString(
-			ddmStructureIds, feed.getStructureId(), feed.getStructureId());
+		String parentDDMStructureKey = MapUtil.getString(
+			ddmStructureKeys, feed.getStructureId(), feed.getStructureId());
 
-		Map<String, String> ddmTemplateIds =
+		Map<String, String> ddmTemplateKeys =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				DDMTemplate.class + ".templateKey");
 
-		String parentDDMTemplateId = MapUtil.getString(
-			ddmTemplateIds, feed.getTemplateId(), feed.getTemplateId());
-		String parentRenderDDMTemplateId = MapUtil.getString(
-			ddmTemplateIds, feed.getRendererTemplateId(),
+		String parentDDMTemplateKey = MapUtil.getString(
+			ddmTemplateKeys, feed.getTemplateId(), feed.getTemplateId());
+		String parentRenderDDMTemplateKey = MapUtil.getString(
+			ddmTemplateKeys, feed.getRendererTemplateId(),
 			feed.getRendererTemplateId());
 
 		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
@@ -860,8 +860,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					importedFeed = JournalFeedLocalServiceUtil.addFeed(
 						userId, portletDataContext.getScopeGroupId(), feedId,
 						autoFeedId, feed.getName(), feed.getDescription(),
-						feed.getType(), parentDDMStructureId,
-						parentDDMTemplateId, parentRenderDDMTemplateId,
+						feed.getType(), parentDDMStructureKey,
+						parentDDMTemplateKey, parentRenderDDMTemplateKey,
 						feed.getDelta(), feed.getOrderByCol(),
 						feed.getOrderByType(),
 						feed.getTargetLayoutFriendlyUrl(),
@@ -873,8 +873,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					importedFeed = JournalFeedLocalServiceUtil.updateFeed(
 						existingFeed.getGroupId(), existingFeed.getFeedId(),
 						feed.getName(), feed.getDescription(), feed.getType(),
-						parentDDMStructureId, parentDDMTemplateId,
-						parentRenderDDMTemplateId, feed.getDelta(),
+						parentDDMStructureKey, parentDDMTemplateKey,
+						parentRenderDDMTemplateKey, feed.getDelta(),
 						feed.getOrderByCol(), feed.getOrderByType(),
 						feed.getTargetLayoutFriendlyUrl(),
 						feed.getTargetPortletId(), feed.getContentField(),
@@ -886,8 +886,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFeed = JournalFeedLocalServiceUtil.addFeed(
 					userId, portletDataContext.getScopeGroupId(), feedId,
 					autoFeedId, feed.getName(), feed.getDescription(),
-					feed.getType(), parentDDMStructureId, parentDDMTemplateId,
-					parentRenderDDMTemplateId, feed.getDelta(),
+					feed.getType(), parentDDMStructureKey, parentDDMTemplateKey,
+					parentRenderDDMTemplateKey, feed.getDelta(),
 					feed.getOrderByCol(), feed.getOrderByType(),
 					feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
