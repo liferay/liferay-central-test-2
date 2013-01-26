@@ -187,9 +187,9 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 					PortletURL siteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
 					siteBrowserURL.setParameter("struts_action", "/site_browser/view");
+					siteBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectGroup");
 					siteBrowserURL.setPortletMode(PortletMode.VIEW);
 					siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
-					siteBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectGroup");
 
 					String siteBrowserURLString = HttpUtil.addParameter(siteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
 
@@ -258,7 +258,6 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-
 
 	function <portlet:namespace />selectScope() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'select-scope';

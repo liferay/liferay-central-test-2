@@ -164,7 +164,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		String scopeId = ParamUtil.getString(actionRequest, "scopeId");
 
-		checkScope(actionRequest, scopeId);
+		checkPermission(actionRequest, scopeId);
 
 		if (!ArrayUtil.contains(scopeIds, scopeId)) {
 			scopeIds = ArrayUtil.append(scopeIds, scopeId);
@@ -174,7 +174,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		preferences.setValues("scopeIds", scopeIds);
 	}
 
-	protected void checkScope(ActionRequest actionRequest, String scopeId)
+	protected void checkPermission(ActionRequest actionRequest, String scopeId)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
