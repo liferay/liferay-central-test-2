@@ -14,9 +14,10 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
+import com.liferay.portal.tools.ArgumentsUtil;
 import com.liferay.portal.util.InitUtil;
 
-import jargs.gnu.CmdLineParser;
+import java.util.Map;
 
 /**
  * @author Michael Hashimoto
@@ -30,20 +31,17 @@ public class SeleniumBuilder {
 	}
 
 	public SeleniumBuilder(String[] args) throws Exception {
-		CmdLineParser cmdLineParser = new CmdLineParser();
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		CmdLineParser.Option basedirOption = cmdLineParser.addStringOption(
-			"basedir");
-		CmdLineParser.Option seleniumTypesOption =
-			cmdLineParser.addStringOption("seleniumTypes");
+		String baseDir = arguments.get("selenium.base.dir");
+		String types = arguments.get("selenium.types");
 
-		cmdLineParser.parse(args);
+		System.out.println(types);
 
-		String basedir = (String)cmdLineParser.getOptionValue(basedirOption);
-		String seleniumTypes = (String)cmdLineParser.getOptionValue(
-			seleniumTypesOption);
-
-		SeleniumBuilderContext context = new SeleniumBuilderContext(basedir);
+		SeleniumBuilderContext seleniumBuilderContext =
+			new SeleniumBuilderContext(baseDir);
+		
+		System.out.println(seleniumBuilderContext);
 	}
 
 }

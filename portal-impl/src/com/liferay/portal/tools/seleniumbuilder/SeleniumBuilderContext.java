@@ -17,8 +17,8 @@ package com.liferay.portal.tools.seleniumbuilder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -27,110 +27,75 @@ import org.apache.tools.ant.DirectoryScanner;
  */
 public class SeleniumBuilderContext {
 
-	public SeleniumBuilderContext(String basedir) throws Exception {
-		_basedir = basedir;
-
-		_fileNameSet = _initFileNameSet();
-
-		_fileNameSetAction = _initFileNameSetAction();
-		_fileNameSetFunction = _initFileNameSetFunction();
-		_fileNameSetMacro = _initFileNameSetMacro();
-		_fileNameSetPath = _initFileNameSetPath();
-		_fileNameSetTestCase = _initFileNameSetTestCase();
-		_fileNameSetTestSuite = _initFileNameSetTestSuite();
-	}
-
-	public String getBasedir() {
-		return _basedir;
-	}
-
-	public Set<String> getFileNameSet() {
-		return _fileNameSet;
-	}
-
-	public Set<String> getFileNameSetAction() {
-		return _fileNameSetAction;
-	}
-
-	public Set<String> getFileNameSetFunction() {
-		return _fileNameSetFunction;
-	}
-
-	public Set<String> getFileNameSetMacro() {
-		return _fileNameSetMacro;
-	}
-
-	public Set<String> getFileNameSetPath() {
-		return _fileNameSetPath;
-	}
-
-	public Set<String> getFileNameSetTestCase() {
-		return _fileNameSetTestCase;
-	}
-
-	public Set<String> getFileNameSetTestSuite() {
-		return _fileNameSetTestSuite;
-	}
-
-	private Set<String> _initFileNameSet() throws Exception {
-		Set<String> treeSet = new TreeSet<String>();
+	public SeleniumBuilderContext(String baseDir) throws Exception {
+		_baseDir = baseDir;
 
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		directoryScanner.setBasedir(_basedir);
+		directoryScanner.setBasedir(_baseDir);
 		directoryScanner.setIncludes(
 			new String[] {
-				"**\\portalweb\\**\\*.action", "**\\portalweb\\**\\*.function",
-				"**\\portalweb\\**\\*.macro", "**\\portalweb\\**\\*.path",
-				"**\\portalweb\\**\\*.testcase",
-				"**\\portalweb\\**\\*.testsuite"
+				"**\\*.action", "**\\*.function", "**\\*.macro", "**\\*.path",
+				"**\\*.testcase", "**\\*.testsuite"
 			});
 
 		directoryScanner.scan();
 
-		for (String fileName : directoryScanner.getIncludedFiles()) {
+		String[] fileNames = directoryScanner.getIncludedFiles();
+
+		for (String fileName : fileNames) {
 			fileName = _normalizeFileName(fileName);
 
-			treeSet.add(fileName);
-		}
-
-		return treeSet;
-	}
-
-	private Set<String> _initFileNameSetAction() {
-		return _initFileNameSetType(".action");
-	}
-
-	private Set<String> _initFileNameSetFunction() {
-		return _initFileNameSetType(".function");
-	}
-
-	private Set<String> _initFileNameSetMacro() {
-		return _initFileNameSetType(".macro");
-	}
-
-	private Set<String> _initFileNameSetPath() {
-		return _initFileNameSetType(".path");
-	}
-
-	private Set<String> _initFileNameSetTestCase() {
-		return _initFileNameSetType(".testcase");
-	}
-
-	private Set<String> _initFileNameSetTestSuite() {
-		return _initFileNameSetType(".testsuite");
-	}
-
-	private Set<String> _initFileNameSetType(String suffix) {
-		Set<String> treeSet = new TreeSet<String>();
-
-		for (String fileName : _fileNameSet) {
-			if (fileName.endsWith(suffix)) {
-				treeSet.add(fileName);
+			if (fileName.endsWith(".action")) {
+				_actionFileNames.add(fileName);
+			}
+			else if (fileName.endsWith(".function")) {
+				_functionFileNames.add(fileName);
+			}
+			else if (fileName.endsWith(".macro")) {
+				_macroFileNames.add(fileName);
+			}
+			else if (fileName.endsWith(".path")) {
+				_pathFileNames.add(fileName);
+			}
+			else if (fileName.endsWith(".testcase")) {
+				_testCaseFileNames.add(fileName);
+			}
+			else if (fileName.endsWith(".testsuite")) {
+				_testSuiteFileNames.add(fileName);
+			}
+			else {
+				throw new IllegalArgumentException("Invalid file " + fileName);
 			}
 		}
+	}
 
-		return treeSet;
+	public Set<String> getActionFileNames() {
+		return _actionFileNames;
+	}
+
+	public String getBaseDir() {
+		return _baseDir;
+	}
+
+	public Set<String> getFunctionFileNames() {
+		return _functionFileNames;
+	}
+
+	public Set<String> getMacroFileNames() {
+		return _macroFileNames;
+	}
+
+	public Set<String> getPathFileNames() {
+		return _pathFileNames;
+	}
+
+	public Set<String> getTestCaseFileNames() {
+		return _testCaseFileNames;
+	}
+
+	public Set<String> getTestSuiteFileNames() {
+		return _testSuiteFileNames;
 	}
 
 	private String _normalizeFileName(String fileName) {
@@ -138,13 +103,12 @@ public class SeleniumBuilderContext {
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 	}
 
-	private String _basedir;
-	private Set<String> _fileNameSet;
-	private Set<String> _fileNameSetAction;
-	private Set<String> _fileNameSetFunction;
-	private Set<String> _fileNameSetMacro;
-	private Set<String> _fileNameSetPath;
-	private Set<String> _fileNameSetTestCase;
-	private Set<String> _fileNameSetTestSuite;
+	private Set<String> _actionFileNames = new HashSet<String>();
+	private String _baseDir;
+	private Set<String> _functionFileNames = new HashSet<String>();
+	private Set<String> _macroFileNames = new HashSet<String>();
+	private Set<String> _pathFileNames = new HashSet<String>();
+	private Set<String> _testCaseFileNames = new HashSet<String>();
+	private Set<String> _testSuiteFileNames = new HashSet<String>();
 
 }
