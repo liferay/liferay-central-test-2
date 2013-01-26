@@ -182,11 +182,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			articleElement.addAttribute(
 				"ddm-structure-uuid", ddmStructure.getUuid());
 
-			String structurePath = getDDMStructurePath(
+			String ddmStructurePath = getDDMStructurePath(
 				portletDataContext, ddmStructure.getUuid());
 
 			DDMPortletDataHandlerImpl.exportStructure(
-				portletDataContext, ddmStructuresElement, structurePath,
+				portletDataContext, ddmStructuresElement, ddmStructurePath,
 				ddmStructure);
 		}
 
@@ -1647,11 +1647,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (portletDataContext.isWithinDateRange(
 					ddmStructure.getModifiedDate())) {
 
-				String structurePath = getDDMStructurePath(
+				String ddmStructurePath = getDDMStructurePath(
 					portletDataContext, ddmStructure.getUuid());
 
 				DDMPortletDataHandlerImpl.exportStructure(
-					portletDataContext, ddmStructuresElement, structurePath,
+					portletDataContext, ddmStructuresElement, ddmStructurePath,
 					ddmStructure);
 			}
 
