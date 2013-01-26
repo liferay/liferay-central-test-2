@@ -356,12 +356,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				pageElement = pagesElement.addElement("page");
 			}
 
-			String content =
-				DDMPortletDataHandlerImpl.exportReferencedContent(
-					portletDataContext, dlFileEntryTypesElement,
-					dlFoldersElement, dlFileEntriesElement, dlFileRanksElement,
-					dlRepositoriesElement, dlRepositoryEntriesElement,
-					pageElement, page.getContent());
+			String content = DDMPortletDataHandlerImpl.exportReferencedContent(
+				portletDataContext, dlFileEntryTypesElement, dlFoldersElement,
+				dlFileEntriesElement, dlFileRanksElement, dlRepositoriesElement,
+				dlRepositoryEntriesElement, pageElement, page.getContent());
 
 			page.setContent(content);
 
