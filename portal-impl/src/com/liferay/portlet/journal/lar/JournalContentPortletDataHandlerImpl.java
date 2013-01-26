@@ -356,19 +356,21 @@ public class JournalContentPortletDataHandlerImpl
 			portletPreferences.setValue("articleId", StringPool.BLANK);
 		}
 
-		String templateId = portletPreferences.getValue("templateId", null);
+		String ddmTemplateKey = portletPreferences.getValue(
+			"ddmTemplateKey", null);
 
-		if (Validator.isNotNull(templateId)) {
-			Map<String, String> templateIds =
+		if (Validator.isNotNull(ddmTemplateKey)) {
+			Map<String, String> ddmTemplateKeys =
 				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-					DDMTemplate.class + ".templateId");
+					DDMTemplate.class + ".ddmTemplateKey");
 
-			templateId = MapUtil.getString(templateIds, templateId, templateId);
+			ddmTemplateKey = MapUtil.getString(
+				ddmTemplateKeys, ddmTemplateKey, ddmTemplateKey);
 
-			portletPreferences.setValue("templateId", templateId);
+			portletPreferences.setValue("ddmTemplateKey", ddmTemplateKey);
 		}
 		else {
-			portletPreferences.setValue("templateId", StringPool.BLANK);
+			portletPreferences.setValue("ddmTemplateKey", StringPool.BLANK);
 		}
 
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
