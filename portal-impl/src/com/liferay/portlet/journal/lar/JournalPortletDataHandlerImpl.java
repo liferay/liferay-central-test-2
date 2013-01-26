@@ -180,7 +180,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					article.getGroupId(), article.getStructureId(), true);
 
 			articleElement.addAttribute(
-				"ddmStructure-uuid", ddmStructure.getUuid());
+				"ddm-structure-uuid", ddmStructure.getUuid());
 
 			String structurePath = getDDMStructurePath(
 				portletDataContext, ddmStructure.getUuid());
@@ -196,7 +196,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					article.getGroupId(), article.getTemplateId(), true);
 
 			articleElement.addAttribute(
-				"ddmTemplate-uuid", ddmTemplate.getUuid());
+				"ddm-template-uuid", ddmTemplate.getUuid());
 
 			String templatePath = getDDMTemplatePath(
 				portletDataContext, ddmTemplate);
@@ -490,7 +490,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			String ddmStructureUuid = articleElement.attributeValue(
-				"ddmStructure-uuid");
+				"ddm-structure-uuid");
 
 			DDMStructure existingDDMStructure =
 				DDMStructureUtil.fetchByUUID_G(
@@ -540,7 +540,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (Validator.isNotNull(article.getTemplateId())) {
 			String ddmTemplateUuid = articleElement.attributeValue(
-				"ddmTemplate-uuid");
+				"ddm-template-uuid");
 
 			DDMTemplate existingDDMTemplate =
 				DDMTemplateUtil.fetchByUUID_G(
