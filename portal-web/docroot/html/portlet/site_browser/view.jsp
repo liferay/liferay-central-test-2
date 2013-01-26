@@ -17,17 +17,18 @@
 <%@ include file="/html/portlet/site_browser/init.jsp" %>
 
 <%
-String target = ParamUtil.getString(request, "target");
-String callback = ParamUtil.getString(request, "callback");
 boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
 boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPersonalSite");
+String callback = ParamUtil.getString(request, "callback");
+String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/site_browser/view");
-portletURL.setParameter("target", target);
 portletURL.setParameter("includeCompany", String.valueOf(includeCompany));
 portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPersonalSite));
+portletURL.setParameter("callback", callback);
+portletURL.setParameter("target", target);
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
@@ -79,12 +80,13 @@ portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPer
 
 			groupParams.put("site", Boolean.TRUE);
 
-			int end = searchContainer.getEnd() - additionalSites;
 			int start = searchContainer.getStart();
 
 			if (searchContainer.getStart() > additionalSites) {
 				start = searchContainer.getStart() - additionalSites;
 			}
+
+			int end = searchContainer.getEnd() - additionalSites;
 
 			List<Group> sites = null;
 
@@ -101,7 +103,6 @@ portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPer
 
 			results.addAll(sites);
 
-
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);
 			%>
@@ -117,7 +118,7 @@ portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPer
 		>
 
 			<%
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(11);
 
 			sb.append("javascript:Liferay.Util.getOpener().");
 			sb.append(callback);
