@@ -40,7 +40,7 @@ public class SeleniumBuilder {
 
 		SeleniumBuilderContext seleniumBuilderContext =
 			new SeleniumBuilderContext(baseDir);
-		
+
 		System.out.println(seleniumBuilderContext);
 	}
 
