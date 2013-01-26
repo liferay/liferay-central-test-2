@@ -486,7 +486,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		long ddmStructurePrimaryKey = 0;
+		long ddmStructureId = 0;
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			String ddmStructureUuid = articleElement.attributeValue(
@@ -533,7 +533,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			ddmStructurePrimaryKey = existingDDMStructure.getPrimaryKey();
+			ddmStructureId = existingDDMStructure.getStructureId();
 
 			parentDDMStructureKey = existingDDMStructure.getStructureKey();
 		}
@@ -696,7 +696,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (existingArticle == null) {
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					article.getClassNameId(), ddmStructurePrimaryKey, articleId,
+					article.getClassNameId(), ddmStructureId, articleId,
 					autoArticleId, article.getVersion(), article.getTitleMap(),
 					article.getDescriptionMap(), article.getContent(),
 					article.getType(), parentDDMStructureKey,
@@ -731,7 +731,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			importedArticle = JournalArticleLocalServiceUtil.addArticle(
 				userId, portletDataContext.getScopeGroupId(), folderId,
-				article.getClassNameId(), ddmStructurePrimaryKey, articleId,
+				article.getClassNameId(), ddmStructureId, articleId,
 				autoArticleId, article.getVersion(), article.getTitleMap(),
 				article.getDescriptionMap(), article.getContent(),
 				article.getType(), parentDDMStructureKey, parentDDMTemplateKey,
