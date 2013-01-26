@@ -1230,7 +1230,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(portletDataContext.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/ddmStructures/");
+		sb.append("/ddm-structures/");
 		sb.append(uuid);
 		sb.append(".xml");
 
@@ -1243,7 +1243,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(portletDataContext.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/ddmTemplates/");
+		sb.append("/ddm-templates/");
 		sb.append(ddmTemplate.getUuid());
 		sb.append(".xml");
 
