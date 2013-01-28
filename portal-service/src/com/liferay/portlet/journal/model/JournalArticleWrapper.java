@@ -1360,9 +1360,9 @@ public class JournalArticleWrapper implements JournalArticle,
 		_journalArticle.persist();
 	}
 
-	public java.lang.String getArticleImage(
+	public java.lang.String getArticleImageURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _journalArticle.getArticleImage(themeDisplay);
+		return _journalArticle.getArticleImageURL(themeDisplay);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource()
