@@ -378,7 +378,7 @@ else if (((folderId != rootFolderId) && (parentFolderId == 0)) || ((folderId == 
 
 					String folderImage = "folder_empty";
 
-					if (DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(curFolder.getRepositoryId(), curFolder.getFolderId(), status, true) > 0) {
+					if (DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(curFolder.getRepositoryId(), curFolder.getFolderId(), WorkflowConstants.STATUS_APPROVED, true) > 0) {
 						folderImage = "folder_full_document";
 					}
 
