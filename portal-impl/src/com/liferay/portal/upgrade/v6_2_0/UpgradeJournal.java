@@ -178,11 +178,6 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 		return ddmTemplateId;
 	}
 
-	protected void cleanUpTables() throws Exception {
-		runSQL("drop table JournalStructure");
-		runSQL("drop table JournalTemplate");
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
 		try {
@@ -201,8 +196,6 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 		updateTemplates();
 
 		updatePortletPreferences();
-
-		cleanUpTables();
 	}
 
 	@Override
@@ -307,6 +300,8 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		runSQL("drop table JournalStructure");
 	}
 
 	protected void updateTemplates() throws Exception {
@@ -361,6 +356,8 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		runSQL("drop table JournalTemplate");
 	}
 
 	private Map<String, Long> _ddmStructureIds = new HashMap<String, Long>();
