@@ -292,7 +292,7 @@ boolean advancedSearch = ParamUtil.getBoolean(liferayPortletRequest, ArticleDisp
 										rowCheckerName="<%= JournalArticle.class.getSimpleName() %>"
 										showCheckbox="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) || JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>"
 										status="<%= article.getStatus() %>"
-										thumbnailSrc='<%= (Validator.isNotNull(article.getArticleImage(themeDisplay))) ? article.getArticleImage(themeDisplay) : themeDisplay.getPathThemeImages() + "/file_system/large/default.png" %>'
+										thumbnailSrc='<%= Validator.isNotNull(article.getArticleImageURL(themeDisplay)) ? article.getArticleImageURL(themeDisplay) : themeDisplay.getPathThemeImages() + "/file_system/large/default.png" %>'
 										title="<%= article.getTitle(locale) %>"
 										url="<%= rowURL.toString() %>"
 									/>

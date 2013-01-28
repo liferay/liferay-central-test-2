@@ -196,7 +196,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 					<div class="article-info">
 						<div class="float-container">
 							<c:if test="<%= article.isSmallImage() %>">
-								<img alt="" class="article-image" src="<%= HtmlUtil.escape(article.getArticleImage(themeDisplay)) %>" width="150" />
+								<img alt="" class="article-image" src="<%= HtmlUtil.escape(article.getArticleImageURL(themeDisplay)) %>" width="150" />
 							</c:if>
 
 							<c:if test="<%= !article.isNew() %>">

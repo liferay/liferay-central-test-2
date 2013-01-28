@@ -59,7 +59,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	public JournalArticleImpl() {
 	}
 
-	public String getArticleImage(ThemeDisplay themeDisplay) {
+	public String getArticleImageURL(ThemeDisplay themeDisplay) {
 		if (!isSmallImage()) {
 			return null;
 		}
