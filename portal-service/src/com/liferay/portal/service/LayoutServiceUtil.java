@@ -121,10 +121,6 @@ public class LayoutServiceUtil {
 	}
 
 	/**
-	* Adds a layout with empty maps for descriptions, keywords, and titles ,
-	* and a names map containing a mapping for the default locale as its only
-	* entry.
-	*
 	* <p>
 	* This method handles the creation of the layout including its resources,
 	* metadata, and internal data structures. It is not necessary to make
