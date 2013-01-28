@@ -816,11 +816,12 @@ public class DataFactory {
 		List<String> models = ModelHintsUtil.getModels();
 
 		for (String model : models) {
-			long classNameId = _counter.get();
-
 			ClassName className = new ClassNameImpl();
 
+			long classNameId = _counter.get();
+
 			className.setClassNameId(classNameId);
+
 			className.setValue(model);
 
 			_classNames.add(className);
