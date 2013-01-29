@@ -74,7 +74,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		title += ServiceTestUtil.randomString(
 			_PAGE_TITLE_MAX_LENGTH - title.length());
 
-		return WikiTestUtil.addWikiPage(
+		return WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), serviceContext.getScopeGroupId(),
 			(Long)parentBaseModel.getPrimaryKeyObj(), title, approved);
 	}

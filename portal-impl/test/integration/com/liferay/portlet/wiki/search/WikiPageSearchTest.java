@@ -78,7 +78,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		return WikiTestUtil.addWikiPage(
+		return WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), serviceContext.getScopeGroupId(),
 			(Long)parentBaseModel.getPrimaryKeyObj(), keywords, approved);
 	}

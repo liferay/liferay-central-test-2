@@ -26,7 +26,7 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
  */
 public class WikiTestUtil {
 
-	public static WikiPage addWikiPage(
+	public static WikiPage addPage(
 			long userId, long groupId, long nodeId, String title,
 			boolean approved)
 		throws Exception {
@@ -35,9 +35,6 @@ public class WikiTestUtil {
 
 		try {
 			WorkflowThreadLocal.setEnabled(true);
-
-			String content = "Content";
-			String summary = "Summary";
 
 			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 				groupId);
@@ -48,7 +45,8 @@ public class WikiTestUtil {
 			serviceContext = (ServiceContext)serviceContext.clone();
 
 			WikiPage page = WikiPageLocalServiceUtil.addPage(
-				userId, nodeId, title, content, summary, true, serviceContext);
+				userId, nodeId, title, "Content", "Summary", true,
+				serviceContext);
 
 			if (approved) {
 				page = WikiPageLocalServiceUtil.updateStatus(
