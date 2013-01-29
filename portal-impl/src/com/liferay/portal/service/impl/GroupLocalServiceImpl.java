@@ -1661,12 +1661,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * </p>
 	 *
 	 * @param  companyId the primary key of the group's company
-	 * @throws PortalException if an group with the primary key could not be
+	 * @throws PortalException if a group with the primary key could not be
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void rebuildTree(long companyId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(companyId);
 
