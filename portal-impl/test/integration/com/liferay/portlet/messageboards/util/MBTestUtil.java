@@ -30,7 +30,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
  */
 public class MBTestUtil {
 
-	public static MBCategory addMBCategory(ServiceContext serviceContext)
+	public static MBCategory addCategory(ServiceContext serviceContext)
 		throws Exception {
 
 		return MBCategoryServiceUtil.addCategory(
@@ -39,7 +39,7 @@ public class MBTestUtil {
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
-	public static MBMessage addMBMessage(
+	public static MBMessage addMessage(
 			long categoryId, String keywords, boolean approved,
 			ServiceContext serviceContext)
 		throws Exception {

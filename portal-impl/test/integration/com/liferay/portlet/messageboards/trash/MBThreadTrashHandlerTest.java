@@ -84,7 +84,7 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		MBCategory category = (MBCategory)parentBaseModel;
 
-		MBMessage message = MBTestUtil.addMBMessage(
+		MBMessage message = MBTestUtil.addMessage(
 			category.getCategoryId(), getSearchKeywords(), approved,
 			serviceContext);
 
@@ -119,7 +119,7 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 			Group group, ServiceContext serviceContext)
 		throws Exception {
 
-		return MBTestUtil.addMBCategory(serviceContext);
+		return MBTestUtil.addCategory(serviceContext);
 	}
 
 	@Override
@@ -190,8 +190,6 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return super.searchBaseModelsCount(MBMessage.class, groupId);
 	}
-
-	private static final String _BODY = "Body";
 
 	private static final String _SUBJECT = "Subject";
 
