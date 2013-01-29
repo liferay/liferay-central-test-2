@@ -212,32 +212,25 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 		return _preferenceNamesMap;
 	}
 
-	protected void updateModelPermissions(
+	protected void updateResourcePermission(
 			long companyId, String oldClassName, String newClassName,
 			long oldPrimKey, long newPrimKey)
 		throws Exception {
 
-		Connection con = null;
-		PreparedStatement ps = null;
+		StringBundler sb = new StringBundler(10);
 
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
+		sb.append("update ResourcePermission set name = '");
+		sb.append(newClassName);
+		sb.append("', primKey = ");
+		sb.append(newPrimKey);
+		sb.append(" where companyId = ");
+		sb.append(companyId);
+		sb.append(" and name = '");
+		sb.append(oldClassName);
+		sb.append("' and primKey = ");
+		sb.append(oldPrimKey);
 
-			ps = con.prepareStatement(
-				"update ResourcePermission set name = ?, primKey = ?" +
-					" where companyId = ? and name = ? and primKey = ?;");
-
-			ps.setString(1, newClassName);
-			ps.setLong(2, newPrimKey);
-			ps.setLong(3, companyId);
-			ps.setString(4, oldClassName);
-			ps.setLong(5, oldPrimKey);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		runSQL(sb.toString());
 	}
 
 	protected long updateStructure(String structureId) throws Exception {
@@ -282,11 +275,9 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 					createDate, modifiedDate, parentStructureId, structureId,
 					name, description, xsd);
 
-				String oldClassName = JournalStructure.class.getName();
-				String newClassName = DDMStructure.class.getName();
-
-				updateModelPermissions(
-					companyId, oldClassName, newClassName, id_, ddmStructureId);
+				updateResourcePermission(
+					companyId, JournalStructure.class.getName(),
+					DDMStructure.class.getName(), id_, ddmStructureId);
 
 				_ddmStructureIds.put(
 					groupId + "#" + structureId, ddmStructureId);
@@ -333,11 +324,9 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 					createDate, modifiedDate, parentStructureId, structureId,
 					name, description, xsd);
 
-				String oldClassName = JournalStructure.class.getName();
-				String newClassName = DDMStructure.class.getName();
-
-				updateModelPermissions(
-					companyId, oldClassName, newClassName, id_, ddmStructureId);
+				updateResourcePermission(
+					companyId, JournalStructure.class.getName(),
+					DDMStructure.class.getName(), id_, ddmStructureId);
 
 				_ddmStructureIds.put(
 					groupId + "#" + structureId, ddmStructureId);
@@ -399,11 +388,9 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 					DDMTemplateConstants.TEMPLATE_MODE_CREATE, language, script,
 					cacheable, smallImage, smallImageId, smallImageURL);
 
-				String oldClassName = JournalTemplate.class.getName();
-				String newClassName = DDMTemplate.class.getName();
-
-				updateModelPermissions(
-					companyId, oldClassName, newClassName, id_, ddmTemplateId);
+				updateResourcePermission(
+					companyId, JournalTemplate.class.getName(),
+					DDMTemplate.class.getName(), id_, ddmTemplateId);
 			}
 		}
 		finally {
