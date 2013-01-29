@@ -302,8 +302,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setClassNameId(classNameId);
 		group.setClassPK(classPK);
 		group.setParentGroupId(parentGroupId);
-		group.setTreePath(group.buildTreePath());
 		group.setLiveGroupId(liveGroupId);
+		group.setTreePath(group.buildTreePath());
 		group.setName(name);
 		group.setDescription(description);
 		group.setType(type);
