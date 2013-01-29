@@ -23,6 +23,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 String redirect = ParamUtil.getString(request, "redirect");
+boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -33,8 +34,6 @@ if (group != null) {
 User selUser = PortalUtil.getSelectedUser(request, false);
 
 long userGroupId = ParamUtil.getLong(request, "userGroupId");
-
-boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

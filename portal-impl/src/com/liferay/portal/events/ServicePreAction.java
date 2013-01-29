@@ -1025,7 +1025,7 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 				pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
-				if (PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+				if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 					pageSettingsURL.setControlPanelCategory(
 						_CONTROL_PANEL_CATEGORY_PORTLET_PREFIX +
 							PortletKeys.LAYOUTS_ADMIN);
@@ -1070,7 +1070,9 @@ public class ServicePreAction extends Action {
 						"selPlid", String.valueOf(plid));
 					manageSiteMembershipsURL.setPortletMode(PortletMode.VIEW);
 
-					if (PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+					if (PropsValues.
+							DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
+
 						manageSiteMembershipsURL.setControlPanelCategory(
 							_CONTROL_PANEL_CATEGORY_PORTLET_PREFIX +
 								PortletKeys.SITE_MEMBERSHIPS_ADMIN);
@@ -1130,7 +1132,7 @@ public class ServicePreAction extends Action {
 					"showBackURL", Boolean.FALSE.toString());
 				siteSettingsURL.setPortletMode(PortletMode.VIEW);
 
-				if (PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+				if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 					siteSettingsURL.setControlPanelCategory(
 						_CONTROL_PANEL_CATEGORY_PORTLET_PREFIX +
 							PortletKeys.SITE_SETTINGS);
@@ -1173,7 +1175,7 @@ public class ServicePreAction extends Action {
 					"groupId", String.valueOf(scopeGroupId));
 				siteMapSettingsURL.setPortletMode(PortletMode.VIEW);
 
-				if (PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+				if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 					siteMapSettingsURL.setControlPanelCategory(
 						_CONTROL_PANEL_CATEGORY_PORTLET_PREFIX +
 							PortletKeys.LAYOUTS_ADMIN);

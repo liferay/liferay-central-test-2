@@ -135,7 +135,7 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 							<%
 							String useDialogFullDialog = StringPool.BLANK;
 
-							if (PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+							if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 								useDialogFullDialog = " use-dialog full-dialog";
 							}
 							%>
@@ -297,7 +297,7 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 				<%
 				String useDialog = StringPool.BLANK;
 
-				if (!group.isControlPanel() && PropsValues.DOCKBAR_MANAGE_LINKS_WINDOW_STATE_POPUP) {
+				if (!group.isControlPanel() && PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 					useDialog = StringPool.SPACE + "use-dialog";
 				}
 
