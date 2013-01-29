@@ -393,6 +393,10 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		throw new SystemException();
 	}
 
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void restoreRelatedTrashEntry(String className, long classPK)
 		throws PortalException, SystemException {
 	}
