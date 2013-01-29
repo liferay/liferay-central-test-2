@@ -66,8 +66,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 		User user = ServiceTestUtil.addUser(
 			ServiceTestUtil.randomString(), group.getGroupId());
 
-		blogsEntry = BlogsTestUtil.addBlogsEntry(
-			user.getUserId(), group, false);
+		entry = BlogsTestUtil.addEntry(user.getUserId(), group, false);
 	}
 
 	@After
@@ -78,38 +77,38 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testApprovedToDraft() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 	}
 
 	@Test
 	public void testApprovedToTrash() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_IN_TRASH, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 	}
 
 	@Test
 	public void testDraftToApprovedByAdd() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertTrue(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(1, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.ADD_ENTRY, 1);
@@ -118,18 +117,18 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testDraftToApprovedByUpdate() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertTrue(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(1, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.UPDATE_ENTRY, 1);
@@ -141,20 +140,20 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 		displayDate.add(Calendar.DATE, 1);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
+		entry.setDisplayDate(displayDate.getTime());
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.ADD_ENTRY, 1);
 
-		AssetEntry assetEntry = fetchAssetEntry(blogsEntry.getEntryId());
+		AssetEntry assetEntry = fetchAssetEntry(entry.getEntryId());
 
 		Assert.assertNull(assetEntry.getPublishDate());
 	}
@@ -162,31 +161,31 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testDraftToScheduledUpdate() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		blogsEntry = BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+		entry = BlogsEntryLocalServiceUtil.updateStatus(
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
 		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
+		entry.setDisplayDate(displayDate.getTime());
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.UPDATE_ENTRY, 1);
 
-		AssetEntry assetEntry = fetchAssetEntry(blogsEntry.getEntryId());
+		AssetEntry assetEntry = fetchAssetEntry(entry.getEntryId());
 
 		Assert.assertNotNull(assetEntry.getPublishDate());
 	}
@@ -194,10 +193,10 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testDraftToTrash() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_IN_TRASH, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 	}
 
@@ -207,56 +206,56 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 		displayDate.add(Calendar.DATE, 1);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
+		entry.setDisplayDate(displayDate.getTime());
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
-		blogsEntry = BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+		entry = BlogsEntryLocalServiceUtil.updateStatus(
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		displayDate.add(Calendar.DATE, -2);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
+		entry.setDisplayDate(displayDate.getTime());
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
 		BlogsEntryLocalServiceUtil.checkEntries();
 
-		Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertTrue(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(1, searchBlogsEntriesCount(group.getGroupId()));
 	}
 
 	@Test
 	public void testScheduledByUpdateToApproved() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		Calendar displayDate = new GregorianCalendar();
 
 		displayDate.add(Calendar.DATE, 1);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
-		blogsEntry.setStatus(WorkflowConstants.STATUS_DRAFT);
+		entry.setDisplayDate(displayDate.getTime());
+		entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
-		blogsEntry = BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+		entry = BlogsEntryLocalServiceUtil.updateStatus(
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		checkSocialActivity(BlogsActivityKeys.UPDATE_ENTRY, 1);
 
 		displayDate.add(Calendar.DATE, -2);
 
-		blogsEntry.setDisplayDate(displayDate.getTime());
+		entry.setDisplayDate(displayDate.getTime());
 
-		BlogsEntryLocalServiceUtil.updateBlogsEntry(blogsEntry);
+		BlogsEntryLocalServiceUtil.updateBlogsEntry(entry);
 
 		BlogsEntryLocalServiceUtil.checkEntries();
 
-		Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertTrue(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(1, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.UPDATE_ENTRY, 1);
@@ -265,18 +264,18 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testTrashToApproved() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_IN_TRASH, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
-		Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertTrue(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(1, searchBlogsEntriesCount(group.getGroupId()));
 
 		checkSocialActivity(BlogsActivityKeys.ADD_ENTRY, 1);
@@ -285,33 +284,33 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 	@Test
 	public void testTrashToDraft() throws Exception {
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_IN_TRASH, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_APPROVED, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_APPROVED,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_IN_TRASH, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			getServiceContext(entry));
 
 		BlogsEntryLocalServiceUtil.updateStatus(
-			getUserId(), blogsEntry.getEntryId(),
-			WorkflowConstants.STATUS_DRAFT, getServiceContext(blogsEntry));
+			getUserId(), entry.getEntryId(), WorkflowConstants.STATUS_DRAFT,
+			getServiceContext(entry));
 
-		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertFalse(isAssetEntryVisible(entry.getEntryId()));
 		Assert.assertEquals(0, searchBlogsEntriesCount(group.getGroupId()));
 	}
 
@@ -320,15 +319,15 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 		Thread.sleep(500 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
-		List<SocialActivity> activities =
+		List<SocialActivity> socialActivities =
 			SocialActivityLocalServiceUtil.getGroupActivities(
 				group.getGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		int count = 0;
 
-		for (SocialActivity activity : activities) {
+		for (SocialActivity socialActivity : socialActivities) {
 			if ((activityType == ACTIVITY_KEY_ANY) ||
-				(activity.getType() == activityType)) {
+				(activityType == socialActivity.getType())) {
 
 				count = count + 1;
 			}
@@ -339,7 +338,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 
 	protected static final int ACTIVITY_KEY_ANY = -1;
 
-	protected BlogsEntry blogsEntry;
+	protected BlogsEntry entry;
 	protected Group group;
 
 }

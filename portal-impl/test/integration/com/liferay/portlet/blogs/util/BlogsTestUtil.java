@@ -31,14 +31,14 @@ import java.io.InputStream;
  */
 public class BlogsTestUtil {
 
-	public static BlogsEntry addBlogsEntry(
+	public static BlogsEntry addEntry(
 			long userId, Group group, boolean approved)
 		throws Exception {
 
-		return addBlogsEntry(userId, group, "Title", approved);
+		return addEntry(userId, group, "Title", approved);
 	}
 
-	public static BlogsEntry addBlogsEntry(
+	public static BlogsEntry addEntry(
 			long userId, Group group, String title, boolean approved)
 		throws Exception {
 
@@ -88,13 +88,13 @@ public class BlogsTestUtil {
 		}
 	}
 
-	public static BlogsEntry addBlogsEntry(
+	public static BlogsEntry addEntry(
 			long userId, long groupId, String title, boolean approved)
 		throws Exception {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		return addBlogsEntry(userId, group, title, approved);
+		return addEntry(userId, group, title, approved);
 	}
 
 }

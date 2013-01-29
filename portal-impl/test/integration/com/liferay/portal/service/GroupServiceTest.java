@@ -138,7 +138,7 @@ public class GroupServiceTest {
 		User user = ServiceTestUtil.addUser(
 			ServiceTestUtil.randomString(), group.getGroupId());
 
-		BlogsEntry blogsEntry = BlogsTestUtil.addBlogsEntry(
+		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(
 			user.getUserId(), group, true);
 
 		Assert.assertNotNull(

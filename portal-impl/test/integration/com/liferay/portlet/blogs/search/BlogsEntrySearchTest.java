@@ -52,7 +52,7 @@ public class BlogsEntrySearchTest extends BaseSearchTestCase {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		return BlogsTestUtil.addBlogsEntry(
+		return BlogsTestUtil.addEntry(
 			TestPropsValues.getUserId(), serviceContext.getScopeGroupId(),
 			keywords, approved);
 	}
