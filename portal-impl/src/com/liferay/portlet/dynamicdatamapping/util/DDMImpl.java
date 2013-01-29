@@ -173,7 +173,7 @@ public class DDMImpl implements DDM {
 
 		for (String value : values) {
 			String fieldName = StringUtil.extractFirst(
-					value, DDMImpl.INSTANCE_SEPARATOR);
+				value, DDMImpl.INSTANCE_SEPARATOR);
 
 			if (ddmStructure.hasField(fieldName)) {
 				fieldsDisplayValues.add(fieldName);

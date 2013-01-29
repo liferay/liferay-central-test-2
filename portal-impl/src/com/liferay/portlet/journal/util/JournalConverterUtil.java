@@ -57,13 +57,13 @@ public class JournalConverterUtil {
 
 		Document document = SAXReaderUtil.read(xml);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			ddmStructure.getStructureId(), DDMImpl.FIELDS_DISPLAY_NAME,
 			StringPool.BLANK);
 
 		Fields ddmFields = new Fields();
 
-		ddmFields.put(fieldsDisplay);
+		ddmFields.put(fieldsDisplayField);
 
 		Element rootElement = document.getRootElement();
 
@@ -440,15 +440,15 @@ public class JournalConverterUtil {
 			fieldName.concat(DDMImpl.INSTANCE_SEPARATOR).concat(
 				PwdGenerator.getPassword());
 
-		Field fieldsDisplay = ddmFields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+		Field fieldsDisplayField = ddmFields.get(DDMImpl.FIELDS_DISPLAY_NAME);
 
 		String[] fieldsDisplayValues = StringUtil.split(
-			(String)fieldsDisplay.getValue());
+			(String)fieldsDisplayField.getValue());
 
 		fieldsDisplayValues = ArrayUtil.append(
 			fieldsDisplayValues, fieldsDisplayValue);
 
-		fieldsDisplay.setValue(StringUtil.merge(fieldsDisplayValues));
+		fieldsDisplayField.setValue(StringUtil.merge(fieldsDisplayValues));
 	}
 
 	private static Map<String, String> _ddmTypes =

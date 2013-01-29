@@ -84,11 +84,11 @@ public class JournalConverterUtilTest {
 
 		expectedFields.put(booleanField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME,
 			"boolean_INSTANCE_Okhyj6Ni,boolean_INSTANCE_1SYNQuhg");
 
-		expectedFields.put(fieldsDisplay);
+		expectedFields.put(fieldsDisplayField);
 
 		String xml = readText(
 			"sample-journal-content-boolean-repeatable-field.xml");
@@ -112,10 +112,10 @@ public class JournalConverterUtilTest {
 
 		expectedFields.put(docLibraryField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "doc_library_INSTANCE_4aGOvP3N");
 
-		expectedFields.put(fieldsDisplay);
+		expectedFields.put(fieldsDisplayField);
 
 		String xml = readText("sample-journal-content-doc-library-field.xml");
 
@@ -146,10 +146,10 @@ public class JournalConverterUtilTest {
 
 		expectedFields.put(linkToPageField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "link_INSTANCE_MiO7vIJu");
 
-		expectedFields.put(fieldsDisplay);
+		expectedFields.put(fieldsDisplayField);
 
 		String xml = readText("sample-journal-content-link-to-page-field.xml");
 
@@ -168,10 +168,10 @@ public class JournalConverterUtilTest {
 
 		expectedFields.put(multiSelectField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "multi_select_INSTANCE_9X5wVsSv");
 
-		expectedFields.put(fieldsDisplay);
+		expectedFields.put(fieldsDisplayField);
 
 		String xml = readText("sample-journal-content-multi-list-field.xml");
 
@@ -201,10 +201,10 @@ public class JournalConverterUtilTest {
 
 		expectedFields.put(selectField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "select_INSTANCE_pcm9WPVX");
 
-		expectedFields.put(fieldsDisplay);
+		expectedFields.put(fieldsDisplayField);
 
 		String xml = readText("sample-journal-content-list-field.xml");
 
@@ -222,11 +222,11 @@ public class JournalConverterUtilTest {
 
 		fields.put(booleanField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME,
 			"boolean_INSTANCE_Okhyj6Ni,boolean_INSTANCE_1SYNQuhg");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-boolean-repeatable-field.xml");
@@ -249,10 +249,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(docLibrary);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "doc_library_INSTANCE_4aGOvP3N");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-doc-library-field.xml");
@@ -283,10 +283,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(linkToPageField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "link_INSTANCE_MiO7vIJu");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-link-to-page-field.xml");
@@ -305,10 +305,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(multiSelectField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "multi_select_INSTANCE_9X5wVsSv");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-multi-list-field.xml");
@@ -338,10 +338,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(selectField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "select_INSTANCE_pcm9WPVX");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText("sample-journal-content-list-field.xml");
 
@@ -358,12 +358,12 @@ public class JournalConverterUtilTest {
 
 		fields.put(textAreaField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME,
 			"textArea_INSTANCE_ND057krU,textArea_INSTANCE_HvemvQgl," +
 			"textArea_INSTANCE_enAnbvq6");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-text-box-repeatable-field.xml");
@@ -381,10 +381,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(textField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "text_INSTANCE_bf4sdx6Q");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText("sample-journal-content-text-field.xml");
 
@@ -401,10 +401,10 @@ public class JournalConverterUtilTest {
 
 		fields.put(textHTMLField);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME, "textHTML_INSTANCE_RFnJ1nCn");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		String expectedXML = readText(
 			"sample-journal-content-text-area-field.xml");
@@ -600,7 +600,7 @@ public class JournalConverterUtilTest {
 
 		fields.put(ext);
 
-		Field fieldsDisplay = new Field(
+		Field fieldsDisplayField = new Field(
 			DDMImpl.FIELDS_DISPLAY_NAME,
 			"contact_INSTANCE_RF3do1m5,phone_INSTANCE_QK6B0wK9," +
 			"ext_INSTANCE_L67MPqQf,ext_INSTANCE_8uxzZl41," +
@@ -608,7 +608,7 @@ public class JournalConverterUtilTest {
 			"phone_INSTANCE_lVTcTviF,ext_INSTANCE_cZalDSll," +
 			"ext_INSTANCE_HDrK2Um5");
 
-		fields.put(fieldsDisplay);
+		fields.put(fieldsDisplayField);
 
 		return fields;
 	}
