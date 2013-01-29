@@ -813,7 +813,7 @@ public class DLAppHelperLocalServiceImpl
 			DLFolder dlFolder = (DLFolder)folder.getModel();
 
 			if (dlFolder.isApproved() && !dlFolder.isHidden() &&
-					!dlFolder.isInHiddenFolder()) {
+				!dlFolder.isInHiddenFolder()) {
 
 				visible = true;
 			}
