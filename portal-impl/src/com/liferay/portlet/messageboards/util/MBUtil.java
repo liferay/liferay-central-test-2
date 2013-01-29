@@ -186,7 +186,8 @@ public class MBUtil {
 
 			return;
 		}
-		else if (message.getCategoryId() !=
+
+		if (message.getCategoryId() !=
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			MBCategory category = message.getCategory();
