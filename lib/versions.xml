@@ -1207,7 +1207,7 @@
 		</comments>
 	</library>
 	<library>
-		<file-name>lib/portal/boilerpipe-1.1.0.jar</file-name>
+		<file-name>lib/portal/boilerpipe.jar</file-name>
 		<version>1.1.0</version>
 		<project-name>Boilerpipe</project-name>
 		<project-url>http://code.google.com/p/boilerpipe/</project-url>
@@ -1216,6 +1216,9 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			Removed org.cyberneko.* because it conflicts with nekohtml.jar.
+		</comments>
 	</library>
 	<library>
 		<file-name>lib/portal/bsh.jar</file-name>
@@ -2724,11 +2727,11 @@
 	<library>
 		<file-name>lib/portal/netcdf.jar</file-name>
 		<version>4.2-min</version>
-		<project-name>CyberNeko HTML Parser</project-name>
-		<project-url>http://sourceforge.net/projects/nekohtml</project-url>
+		<project-name>Netcdf-Java / Common Data Model Library</project-name>
+		<project-url>http://www.unidata.ucar.edu/packages/netcdf-java/</project-url>
 		<licenses>
 			<license>
-				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright 1998-2009 University Corporation for Atmospheric Research/Unidata</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -2820,7 +2823,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/poi.jar</file-name>
-		<version>3.8</version>
+		<version>3.9</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2832,7 +2835,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/poi-ooxml.jar</file-name>
-		<version>3.8</version>
+		<version>3.9</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2844,7 +2847,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/poi-ooxml-schemas.jar</file-name>
-		<version>3.8</version>
+		<version>3.9</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2856,7 +2859,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/poi-scratchpad.jar</file-name>
-		<version>3.8</version>
+		<version>3.9</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -3488,17 +3491,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>lib/portal/xmpcore.jar</file-name>
-		<version>5.1.2</version>
-		<project-name>xmpcore</project-name>
-		<project-url>http://www.adobe.com/devnet/xmp.html</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>lib/portal/wsdl4j.jar</file-name>
 		<version>1.6</version>
 		<project-name>WSDL4J</project-name>
@@ -3627,6 +3619,17 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>(c) 2001, Institute for Data Communications Systems, http://www.nue.et-inf.uni-siegen.de</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>lib/portal/xmpcore.jar</file-name>
+		<version>5.1.2</version>
+		<project-name>xmpcore</project-name>
+		<project-url>http://www.adobe.com/devnet/xmp.html</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
