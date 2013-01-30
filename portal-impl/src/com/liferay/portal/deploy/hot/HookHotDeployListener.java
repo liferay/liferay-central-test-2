@@ -458,10 +458,6 @@ public class HookHotDeployListener
 			}
 		}
 
-		if (portalProperties.containsKey(PropsKeys.SITES_MEMBERSHIP_POLICY)) {
-			MembershipPolicyFactory.setInstance(null);
-		}
-
 		if (portalProperties.containsKey(
 				PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR)) {
 
@@ -480,6 +476,10 @@ public class HookHotDeployListener
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
 			FullNameValidatorFactory.setInstance(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_MEMBERSHIP_POLICY)) {
+			MembershipPolicyFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1879,18 +1879,6 @@ public class HookHotDeployListener
 			}
 		}
 
-		if (portalProperties.containsKey(PropsKeys.SITES_MEMBERSHIP_POLICY)) {
-			String membershipPolicyClassName = portalProperties.getProperty(
-				PropsKeys.SITES_MEMBERSHIP_POLICY);
-
-			MembershipPolicy membershipPolicy =
-				(MembershipPolicy)newInstance(
-					portletClassLoader, MembershipPolicy.class,
-					membershipPolicyClassName);
-
-			MembershipPolicyFactory.setInstance(membershipPolicy);
-		}
-
 		if (portalProperties.containsKey(
 				PropsKeys.USERS_EMAIL_ADDRESS_GENERATOR)) {
 
@@ -1943,6 +1931,17 @@ public class HookHotDeployListener
 					fullNameValidatorClassName);
 
 			FullNameValidatorFactory.setInstance(fullNameValidator);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.USERS_MEMBERSHIP_POLICY)) {
+			String membershipPolicyClassName = portalProperties.getProperty(
+				PropsKeys.USERS_MEMBERSHIP_POLICY);
+
+			MembershipPolicy membershipPolicy = (MembershipPolicy)newInstance(
+				portletClassLoader, MembershipPolicy.class,
+				membershipPolicyClassName);
+
+			MembershipPolicyFactory.setInstance(membershipPolicy);
 		}
 
 		if (portalProperties.containsKey(

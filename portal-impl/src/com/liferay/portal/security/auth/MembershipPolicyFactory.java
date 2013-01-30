@@ -29,7 +29,7 @@ public class MembershipPolicyFactory {
 		if (_membershipPolicy == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Instantiate " + PropsValues.SITES_MEMBERSHIP_POLICY);
+					"Instantiate " + PropsValues.USERS_MEMBERSHIP_POLICY);
 			}
 
 			ClassLoader classLoader =
@@ -38,7 +38,7 @@ public class MembershipPolicyFactory {
 			try {
 				_membershipPolicy =
 					(MembershipPolicy)InstanceFactory.newInstance(
-						classLoader, PropsValues.SITES_MEMBERSHIP_POLICY);
+						classLoader, PropsValues.USERS_MEMBERSHIP_POLICY);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
