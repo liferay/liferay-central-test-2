@@ -34,7 +34,7 @@ public class DefaultMembershipPolicy implements MembershipPolicy {
 		return Collections.emptyList();
 	}
 
-	public List<Group> getMandatorySites(User user) {
+	public List<Group> getMandatoryGroups(User user) {
 		return Collections.emptyList();
 	}
 

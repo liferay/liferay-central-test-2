@@ -469,9 +469,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	public void checkMembershipPolicy(User user)
-		throws PortalException, SystemException {
-
+	public void checkMembershipPolicy(User user) throws SystemException {
 		MembershipPolicy membershipPolicy =
 			MembershipPolicyFactory.getInstance();
 
@@ -480,7 +478,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		groupParams.put("inherit", Boolean.FALSE);
 		groupParams.put("site", Boolean.TRUE);
-		groupParams.put("usersGroups", new Long(user.getUserId()));
+		groupParams.put("usersGroups", user.getUserId());
 
 		List<Group> userGroups = search(
 			user.getCompanyId(), groupParams, QueryUtil.ALL_POS,
@@ -493,14 +491,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		List<Group> mandatorySites = membershipPolicy.getMandatorySites(user);
+		List<Group> groups = membershipPolicy.getMandatoryGroups(user);
 
-		for (Group mandatorySite : mandatorySites) {
-			if (!hasUserGroup(
-					user.getUserId(), mandatorySite.getGroupId(), false)) {
-
+		for (Group group : groups) {
+			if (!hasUserGroup(user.getUserId(), group.getGroupId(), false)) {
 				addUserGroups(
-					user.getUserId(), new long[] {mandatorySite.getGroupId()});
+					user.getUserId(), new long[] {group.getGroupId()});
 			}
 		}
 	}

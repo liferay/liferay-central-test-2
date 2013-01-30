@@ -29,7 +29,7 @@ public interface MembershipPolicy {
 
 	public List<Role> getMandatoryRoles(Group group, User user);
 
-	public List<Group> getMandatorySites(User user);
+	public List<Group> getMandatoryGroups(User user);
 
 	public boolean isMembershipAllowed(Group group, User user);
 

@@ -75,9 +75,7 @@ public class UserGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void checkMembershipPolicy(User user)
-		throws PortalException, SystemException {
-
+	public void checkMembershipPolicy(User user) throws SystemException {
 		MembershipPolicy membershipPolicy =
 			MembershipPolicyFactory.getInstance();
 
@@ -86,43 +84,38 @@ public class UserGroupRoleLocalServiceImpl
 
 		groupParams.put("inheritance", Boolean.FALSE);
 		groupParams.put("site", Boolean.TRUE);
-		groupParams.put("usersGroups", new Long(user.getUserId()));
+		groupParams.put("usersGroups", user.getUserId());
 
 		List<Group> userGroups = groupLocalService.search(
 			user.getCompanyId(), groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		for (Group userGroup : userGroups) {
-
-			// Mandatory Roles
-
 			List<Role> mandatoryRoles = membershipPolicy.getMandatoryRoles(
 				userGroup, user);
 
-			for (Role mandatoryRole : mandatoryRoles) {
+			for (Role role : mandatoryRoles) {
 				if (!hasUserGroupRole(
 						user.getUserId(), userGroup.getGroupId(),
-						mandatoryRole.getRoleId(), false)) {
+						role.getRoleId(), false)) {
 
 					addUserGroupRoles(
 						user.getUserId(), userGroup.getGroupId(),
-						new long[] {mandatoryRole.getRoleId()});
+						new long[] {role.getRoleId()});
 				}
 			}
-
-			// Forbidden Roles
 
 			List<Role> forbiddenRoles = membershipPolicy.getForbiddenRoles(
 				userGroup, user);
 
-			for (Role forbiddenRole : forbiddenRoles) {
+			for (Role role : forbiddenRoles) {
 				if (hasUserGroupRole(
 						user.getUserId(), userGroup.getGroupId(),
-						forbiddenRole.getRoleId(), false)) {
+						role.getRoleId(), false)) {
 
 					deleteUserGroupRoles(
 						user.getUserId(), userGroup.getGroupId(),
-						new long[] {forbiddenRole.getRoleId()});
+						new long[] {role.getRoleId()});
 				}
 			}
 		}
