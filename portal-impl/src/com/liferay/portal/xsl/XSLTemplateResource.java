@@ -53,11 +53,11 @@ public class XSLTemplateResource implements TemplateResource {
 		}
 
 		if (tokens == null) {
-			throw new IllegalArgumentException("Tokens is null");
+			throw new IllegalArgumentException("Tokens map is null");
 		}
 
 		if (Validator.isNull(xml)) {
-			throw new IllegalArgumentException("Xml is null");
+			throw new IllegalArgumentException("XML is null");
 		}
 
 		_templateId = templateId;
@@ -79,10 +79,10 @@ public class XSLTemplateResource implements TemplateResource {
 
 		XSLTemplateResource xslTemplateResource = (XSLTemplateResource)obj;
 
-		if (_templateId.equals(xslTemplateResource._templateId) &&
-			_script.equals(xslTemplateResource._script) &&
-			_xml.equals(xslTemplateResource._xml) &&
-			_tokens.equals(xslTemplateResource._tokens)) {
+		if (Validator.equals(_templateId, xslTemplateResource._templateId) &&
+			Validator.equals(_script, xslTemplateResource._script) &&
+			Validator.equals(_xml, xslTemplateResource._xml) &&
+			Validator.equals(_tokens, xslTemplateResource._tokens)) {
 
 			return true;
 		}

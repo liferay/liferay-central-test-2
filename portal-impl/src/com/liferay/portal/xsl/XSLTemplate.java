@@ -57,9 +57,9 @@ public class XSLTemplate implements Template {
 				"Template context helper is null");
 		}
 
-		_templateContextHelper = templateContextHelper;
 		_xslTemplateResource = xslTemplateResource;
 		_errorTemplateResource = errorTemplateResource;
+		_templateContextHelper = templateContextHelper;
 
 		_context = new HashMap<String, Object>();
 

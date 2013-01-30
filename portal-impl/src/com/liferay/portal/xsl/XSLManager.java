@@ -59,15 +59,10 @@ public class XSLManager implements TemplateManager {
 		TemplateResource errorTemplateResource,
 		TemplateContextType templateContextType) {
 
-		if (!(templateResource instanceof XSLTemplateResource)) {
-			throw new IllegalArgumentException(
-				"Template resource is not an XSLTemplateResource");
-		}
+		Template template = null;
 
 		XSLTemplateResource xslTemplateResource =
 			(XSLTemplateResource)templateResource;
-
-		Template template = null;
 
 		Map<String, Object> context = _templateContextHelper.getHelperUtilities(
 			templateContextType);
