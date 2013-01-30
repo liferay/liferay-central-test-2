@@ -27,9 +27,9 @@ public interface MembershipPolicy {
 
 	public List<Role> getForbiddenRoles(Group group, User user);
 
-	public List<Role> getMandatoryRoles(Group group, User user);
-
 	public List<Group> getMandatoryGroups(User user);
+
+	public List<Role> getMandatoryRoles(Group group, User user);
 
 	public boolean isMembershipAllowed(Group group, User user);
 

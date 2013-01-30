@@ -30,11 +30,11 @@ public class DefaultMembershipPolicy implements MembershipPolicy {
 		return Collections.emptyList();
 	}
 
-	public List<Role> getMandatoryRoles(Group group, User user) {
+	public List<Group> getMandatoryGroups(User user) {
 		return Collections.emptyList();
 	}
 
-	public List<Group> getMandatoryGroups(User user) {
+	public List<Role> getMandatoryRoles(Group group, User user) {
 		return Collections.emptyList();
 	}
 

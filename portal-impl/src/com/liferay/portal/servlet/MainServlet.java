@@ -548,7 +548,6 @@ public class MainServlet extends ActionServlet {
 
 	protected void checkMembershipPolicy(User user) throws SystemException {
 		GroupLocalServiceUtil.checkMembershipPolicy(user);
-
 		UserGroupRoleLocalServiceUtil.checkMembershipPolicy(user);
 	}
 
