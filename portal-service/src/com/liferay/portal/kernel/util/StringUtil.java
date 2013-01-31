@@ -2877,6 +2877,7 @@ public class StringUtil {
 		}
 
 		int len = s.length();
+
 		int x = len;
 
 		for (int i = 0; i < len; i++) {
@@ -2908,9 +2909,8 @@ public class StringUtil {
 		if ((x == 0) && (y == len)) {
 			return s;
 		}
-		else {
-			return s.substring(x, y);
-		}
+
+		return s.substring(x, y);
 	}
 
 	/**
@@ -3116,26 +3116,26 @@ public class StringUtil {
 		}
 
 		int len = s.length();
-		int y = 0;
+		int x = 0;
 
 		for (int i = len - 1; i >= 0; i--) {
 			char c = s.charAt(i);
 
 			if (!Character.isWhitespace(c)) {
-				y = i + 1;
+				x = i + 1;
 
 				break;
 			}
 		}
 
-		if (y == 0) {
+		if (x == 0) {
 			return StringPool.BLANK;
 		}
-		else if (y == len) {
+		else if (x == len) {
 			return s;
 		}
 		else {
-			return s.substring(0, y);
+			return s.substring(0, x);
 		}
 	}
 
@@ -3177,26 +3177,26 @@ public class StringUtil {
 		}
 
 		int len = s.length();
-		int y = 0;
+		int x = 0;
 
 		for (int i = len - 1; i >= 0; i--) {
 			char c = s.charAt(i);
 
 			if (!_isTrimable(c, exceptions)) {
-				y = i + 1;
+				x = i + 1;
 
 				break;
 			}
 		}
 
-		if (y == 0) {
+		if (x == 0) {
 			return StringPool.BLANK;
 		}
-		else if (y == len) {
+		else if (x == len) {
 			return s;
 		}
 		else {
-			return s.substring(0, y);
+			return s.substring(0, x);
 		}
 	}
 
