@@ -128,7 +128,6 @@ public class DDMImpl implements DDM {
 			Field field = new Field();
 
 			field.setDDMStructureId(ddmStructureId);
-			field.setName(fieldName);
 
 			String languageId = GetterUtil.getString(
 				serviceContext.getAttribute("languageId"),
@@ -147,8 +146,10 @@ public class DDMImpl implements DDM {
 				defaultLocale = LocaleUtil.getDefault();
 			}
 
-			field.setValues(locale, fieldValues);
 			field.setDefaultLocale(defaultLocale);
+
+			field.setName(fieldName);
+			field.setValues(locale, fieldValues);
 
 			fields.put(field);
 		}
