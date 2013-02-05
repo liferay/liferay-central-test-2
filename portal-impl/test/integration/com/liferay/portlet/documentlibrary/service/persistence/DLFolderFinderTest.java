@@ -190,6 +190,35 @@ public class DLFolderFinderTest {
 			4,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
 				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
+
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
+				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+
+		Assert.assertEquals(
+			1,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
+				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
+				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+	}
+
+	@Test
+	public void testCountFE_FS_ByG_F_M() throws Exception {
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
+
 		Assert.assertEquals(
 			4,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
@@ -205,10 +234,6 @@ public class DLFolderFinderTest {
 
 		Assert.assertEquals(
 			3,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
-				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
-		Assert.assertEquals(
-			3,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
 				_group.getGroupId(), _folder.getFolderId(), null,
 				queryDefinition));
@@ -222,10 +247,6 @@ public class DLFolderFinderTest {
 
 		Assert.assertEquals(
 			1,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
-				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
-		Assert.assertEquals(
-			1,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
 				_group.getGroupId(), _folder.getFolderId(), null,
 				queryDefinition));
@@ -237,10 +258,6 @@ public class DLFolderFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		Assert.assertEquals(
-			3,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
-				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
 		Assert.assertEquals(
 			3,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
