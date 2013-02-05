@@ -821,8 +821,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPlid(plid);
 		themeDisplay.setPpid(ppid);
 		themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
-		themeDisplay.setSiteGroupId(siteGroupId);
 		themeDisplay.setScopeGroupId(scopeGroupId);
+		themeDisplay.setSiteGroupId(siteGroupId);
 		themeDisplay.setSignedIn(signedIn);
 		themeDisplay.setPermissionChecker(permissionChecker);
 		themeDisplay.setLocale(locale);
