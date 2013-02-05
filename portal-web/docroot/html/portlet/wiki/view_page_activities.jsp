@@ -62,7 +62,6 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			escapedModel="<%= true %>"
 			keyProperty="activityId"
 			modelVar="activity"
-			rowVar="row"
 		>
 
 			<%
