@@ -1664,23 +1664,23 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 
 		String webSphereHome = System.getenv("WAS_HOME");
 
-		String wsadminBatchFilePath = null;
+		String wsadminBatchFileName = null;
 
 		if (OSDetector.isWindows()) {
-			wsadminBatchFilePath = webSphereHome + "\\bin\\wsadmin.bat";
+			wsadminBatchFileName = webSphereHome + "\\bin\\wsadmin.bat";
 		}
 		else {
-			wsadminBatchFilePath = webSphereHome + "/bin/wsadmin.sh";
+			wsadminBatchFileName = webSphereHome + "/bin/wsadmin.sh";
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Installing plugin by executing " + wsadminBatchFilePath +
+				"Installing plugin by executing " + wsadminBatchFileName +
 					" -f " + wsadminFileName);
 		}
 
 		ProcessBuilder processBuilder = new ProcessBuilder(
-			wsadminBatchFilePath, "-f", wsadminFileName);
+			wsadminBatchFileName, "-f", wsadminFileName);
 
 		processBuilder.redirectErrorStream(true);
 
