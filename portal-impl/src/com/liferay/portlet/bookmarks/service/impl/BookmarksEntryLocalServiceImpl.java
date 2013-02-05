@@ -322,7 +322,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public BookmarksEntry openEntry(long userId, BookmarksEntry entry)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		entry.setVisits(entry.getVisits() + 1);
 

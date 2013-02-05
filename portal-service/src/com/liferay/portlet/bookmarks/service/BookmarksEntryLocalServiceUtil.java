@@ -395,8 +395,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long userId, com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().openEntry(userId, entry);
 	}
 
