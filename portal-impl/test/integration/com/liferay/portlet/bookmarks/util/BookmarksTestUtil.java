@@ -106,9 +106,8 @@ public class BookmarksTestUtil {
 	public static BookmarksFolder addFolder(long groupId, String name)
 		throws Exception {
 
-		long parentFolderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-		return addFolder(groupId, parentFolderId, name);
+		return addFolder(
+			groupId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
 	}
 
 	public static BookmarksFolder addFolder(String name) throws Exception {
