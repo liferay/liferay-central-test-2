@@ -145,19 +145,6 @@ public class DLFileEntryFinderTest {
 	public void testCountByG_U_F_M() throws Exception {
 		QueryDefinition queryDefinition = new QueryDefinition();
 
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		Assert.assertEquals(2, doCountBy_G_U_F_M(0, null, queryDefinition));
-		Assert.assertEquals(
-			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
-		Assert.assertEquals(
-			1,
-			doCountBy_G_U_F_M(0, ContentTypes.TEXT_PLAIN, queryDefinition));
-		Assert.assertEquals(
-			0,
-			doCountBy_G_U_F_M(
-				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
-
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		Assert.assertEquals(3, doCountBy_G_U_F_M(0, null, queryDefinition));
@@ -182,6 +169,20 @@ public class DLFileEntryFinderTest {
 			0,
 			doCountBy_G_U_F_M(
 				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		Assert.assertEquals(2, doCountBy_G_U_F_M(0, null, queryDefinition));
+		Assert.assertEquals(
+			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
+		Assert.assertEquals(
+			1,
+			doCountBy_G_U_F_M(0, ContentTypes.TEXT_PLAIN, queryDefinition));
+		Assert.assertEquals(
+			0,
+			doCountBy_G_U_F_M(
+				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
+
 	}
 
 	@Test
@@ -196,25 +197,14 @@ public class DLFileEntryFinderTest {
 	public void testFindByG_U_F_M() throws Exception {
 		QueryDefinition queryDefinition = new QueryDefinition();
 
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		List<DLFileEntry> dlFileEntries = doFindBy_G_U_F_M(
-			0, ContentTypes.TEXT_PLAIN, queryDefinition);
-
-		Assert.assertEquals(1, dlFileEntries.size());
-
-		DLFileEntry dlFileEntry = dlFileEntries.get(0);
-
-		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
-
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		dlFileEntries = doFindBy_G_U_F_M(
+		List<DLFileEntry> dlFileEntries = doFindBy_G_U_F_M(
 			_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
 
-		dlFileEntry = dlFileEntries.get(0);
+		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
 		Assert.assertEquals("FE3.txt", dlFileEntry.getDescription());
 
@@ -228,6 +218,17 @@ public class DLFileEntryFinderTest {
 		dlFileEntry = dlFileEntries.get(0);
 
 		Assert.assertEquals("FE2.pdf", dlFileEntry.getTitle());
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		dlFileEntries = doFindBy_G_U_F_M(
+			0, ContentTypes.TEXT_PLAIN, queryDefinition);
+
+		Assert.assertEquals(1, dlFileEntries.size());
+
+		dlFileEntry = dlFileEntries.get(0);
+
+		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 	}
 
 	@Test

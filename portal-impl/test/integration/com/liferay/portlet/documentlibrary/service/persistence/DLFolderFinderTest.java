@@ -103,20 +103,6 @@ public class DLFolderFinderTest {
 	public void testCountF_FE_FS_ByG_F_M_M() throws Exception {
 		QueryDefinition queryDefinition = new QueryDefinition();
 
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		Assert.assertEquals(
-			4,
-			DLFolderFinderUtil.filterCountF_FE_FS_ByG_F_M_M(
-				_group.getGroupId(), _folder.getFolderId(), null, false,
-				queryDefinition));
-		Assert.assertEquals(
-			3,
-			DLFolderFinderUtil.filterCountF_FE_FS_ByG_F_M_M(
-				_group.getGroupId(), _folder.getFolderId(),
-				new String[] {ContentTypes.TEXT_PLAIN}, false,
-				queryDefinition));
-
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		Assert.assertEquals(
@@ -152,12 +138,34 @@ public class DLFolderFinderTest {
 			DLFolderFinderUtil.filterCountF_FE_FS_ByG_F_M_M(
 				_group.getGroupId(), _folder.getFolderId(), null, false,
 				queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		Assert.assertEquals(
+			4,
+			DLFolderFinderUtil.filterCountF_FE_FS_ByG_F_M_M(
+				_group.getGroupId(), _folder.getFolderId(), null, false,
+				queryDefinition));
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.filterCountF_FE_FS_ByG_F_M_M(
+				_group.getGroupId(), _folder.getFolderId(),
+				new String[] {ContentTypes.TEXT_PLAIN}, false,
+				queryDefinition));
 	}
 
 	@Test
 	public void testCountFE_ByG_F() throws Exception {
-		QueryDefinition queryDefinition = new QueryDefinition(
-			WorkflowConstants.STATUS_IN_TRASH);
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
+
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.countFE_ByG_F(
+				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
 		Assert.assertEquals(
 			1,
@@ -170,35 +178,11 @@ public class DLFolderFinderTest {
 			2,
 			DLFolderFinderUtil.countFE_ByG_F(
 				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
-
-		Assert.assertEquals(
-			3,
-			DLFolderFinderUtil.countFE_ByG_F(
-				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
 	}
 
 	@Test
 	public void testCountFE_FS_ByG_F() throws Exception {
 		QueryDefinition queryDefinition = new QueryDefinition();
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		Assert.assertEquals(
-			3,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
-				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
-		Assert.assertEquals(
-			3,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
-				_group.getGroupId(), _folder.getFolderId(), null,
-				queryDefinition));
-		Assert.assertEquals(
-			2,
-			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
-				_group.getGroupId(), _folder.getFolderId(),
-				new String[] {ContentTypes.TEXT_PLAIN}, queryDefinition));
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
@@ -247,6 +231,23 @@ public class DLFolderFinderTest {
 				queryDefinition));
 		Assert.assertEquals(
 			1,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
+				_group.getGroupId(), _folder.getFolderId(),
+				new String[] {ContentTypes.TEXT_PLAIN}, queryDefinition));
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F(
+				_group.getGroupId(), _folder.getFolderId(), queryDefinition));
+		Assert.assertEquals(
+			3,
+			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
+				_group.getGroupId(), _folder.getFolderId(), null,
+				queryDefinition));
+		Assert.assertEquals(
+			2,
 			DLFolderFinderUtil.filterCountFE_FS_ByG_F_M(
 				_group.getGroupId(), _folder.getFolderId(),
 				new String[] {ContentTypes.TEXT_PLAIN}, queryDefinition));
