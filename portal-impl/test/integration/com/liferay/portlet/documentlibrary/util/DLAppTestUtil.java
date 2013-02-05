@@ -93,13 +93,9 @@ public abstract class DLAppTestUtil {
 	}
 
 	public static FileEntry addFileEntry(
-			long userId, long groupId, long folderId, String mimeType,
-			String sourceFileName, String title, byte[] bytes,
-			int workflowAction)
+			long userId, long groupId, long folderId, String sourceFileName,
+			String mimeType, String title, byte[] bytes, int workflowAction)
 		throws Exception {
-
-		String description = StringPool.BLANK;
-		String changeLog = StringPool.BLANK;
 
 		if ((bytes == null) && Validator.isNotNull(sourceFileName)) {
 			bytes = _CONTENT.getBytes();
@@ -114,14 +110,14 @@ public abstract class DLAppTestUtil {
 
 		return DLAppLocalServiceUtil.addFileEntry(
 			userId, groupId, folderId, sourceFileName, mimeType, title,
-			description, changeLog, bytes, serviceContext);
+			StringPool.BLANK, StringPool.BLANK, bytes, serviceContext);
 	}
 
 	public static FileEntry addFileEntry(
-			long groupId, long folderId, String fileName)
+			long groupId, long folderId, String sourceFileName)
 		throws Exception {
 
-		return addFileEntry(groupId, folderId, fileName, fileName);
+		return addFileEntry(groupId, folderId, sourceFileName, sourceFileName);
 	}
 
 	public static FileEntry addFileEntry(
@@ -164,29 +160,29 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFileEntry(
-			groupId, folderId, ContentTypes.TEXT_PLAIN, sourceFileName, title,
+			groupId, folderId, sourceFileName, ContentTypes.TEXT_PLAIN, title,
 			bytes, workflowAction);
 	}
 
 	public static FileEntry addFileEntry(
-			long groupId, long folderId, String mimeType, String fileName,
+			long groupId, long folderId, String sourceFileName, String mimeType,
 			String title)
 		throws Exception {
 
 		return addFileEntry(
-			groupId, folderId, mimeType, fileName, title, null,
+			groupId, folderId, sourceFileName, mimeType, title, null,
 			WorkflowConstants.ACTION_PUBLISH);
 
 	}
 
 	public static FileEntry addFileEntry(
-			long groupId, long folderId, String mimeType, String sourceFileName,
+			long groupId, long folderId, String sourceFileName, String mimeType,
 			String title, byte[] bytes, int workflowAction)
 		throws Exception {
 
 		return addFileEntry(
-			TestPropsValues.getUserId(), groupId, folderId, mimeType,
-			sourceFileName, title, bytes, workflowAction);
+			TestPropsValues.getUserId(), groupId, folderId, sourceFileName,
+			mimeType, title, bytes, workflowAction);
 	}
 
 	public static Folder addFolder(
@@ -248,13 +244,13 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return updateFileEntry(
-			groupId, fileEntryId, ContentTypes.TEXT_PLAIN, sourceFileName,
+			groupId, fileEntryId, sourceFileName, ContentTypes.TEXT_PLAIN,
 			title, majorVersion);
 	}
 
 	public static FileEntry updateFileEntry(
-			long groupId, long fileEntryId, String mimeType,
-			String sourceFileName, String title, boolean majorVersion)
+			long groupId, long fileEntryId, String sourceFileName,
+			String mimeType, String title, boolean majorVersion)
 		throws Exception {
 
 		String description = StringPool.BLANK;
