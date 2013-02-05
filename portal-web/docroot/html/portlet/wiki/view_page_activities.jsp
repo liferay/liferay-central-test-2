@@ -13,6 +13,7 @@
  * details.
  */
 --%>
+
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
