@@ -425,14 +425,14 @@ public class DLFileEntryFinderImpl
 		String id, long groupId, List<Long> folderIds, String[] mimeTypes,
 		QueryDefinition queryDefinition, boolean inlineSQLHelper) {
 
-		String table = DLFileVersionImpl.TABLE_NAME;
+		String tableName = DLFileVersionImpl.TABLE_NAME;
 
-		String sql = CustomSQLUtil.get(id, queryDefinition, table);
+		String sql = CustomSQLUtil.get(id, queryDefinition, tableName);
 
 		if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
 			sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 
-			table = DLFileEntryImpl.TABLE_NAME;
+			tableName = DLFileEntryImpl.TABLE_NAME;
 		}
 		else {
 			sql = StringUtil.replace(
@@ -447,18 +447,18 @@ public class DLFileEntryFinderImpl
 				groupId);
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(7);
 
-		if (folderIds.size() > 0) {
+		if (!folderIds.isEmpty()) {
 			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(getFolderIds(folderIds, table));
+			sb.append(getFolderIds(folderIds, tableName));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
 
 		if ((mimeTypes != null) && (mimeTypes.length > 0)) {
 			sb.append(WHERE_AND);
 			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(getMimeTypes(mimeTypes, table));
+			sb.append(getMimeTypes(mimeTypes, tableName));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 		}
 

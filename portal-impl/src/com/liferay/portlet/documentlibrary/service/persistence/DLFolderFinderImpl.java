@@ -638,8 +638,6 @@ public class DLFolderFinderImpl
 		String id, long groupId, String[] mimeTypes,
 		QueryDefinition queryDefinition, boolean inlineSQLHelper) {
 
-		StringBundler sb = new StringBundler();
-
 		String sql = CustomSQLUtil.get(
 			id, queryDefinition, DLFileVersionImpl.TABLE_NAME);
 
@@ -658,6 +656,8 @@ public class DLFolderFinderImpl
 				sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
 				groupId);
 		}
+
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(sql);
 
@@ -694,7 +694,9 @@ public class DLFolderFinderImpl
 				"DLFileShortcut.fileShortcutId", groupId);
 		}
 
-		StringBundler sb = new StringBundler(sql);
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(sql);
 
 		if ((mimeTypes != null) && (mimeTypes.length > 0)) {
 			sb.append(WHERE_AND);
