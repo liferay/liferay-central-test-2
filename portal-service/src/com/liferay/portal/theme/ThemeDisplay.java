@@ -239,21 +239,21 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroup()}
+	 * @deprecated As of 6.2 renamed to {@link #getSiteGroup}
 	 */
 	public Group getParentGroup() {
 		return getSiteGroup();
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupId()}
+	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupId}
 	 */
 	public long getParentGroupId() {
 		return getSiteGroupId();
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupName()}
+	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupName}
 	 */
 	public String getParentGroupName() throws PortalException, SystemException {
 		return getSiteGroupName();
@@ -394,8 +394,7 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to
-	 * 	{@link #getSiteGroupIdOrLiveGroupId()} ()}
+	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupIdOrLiveGroupId}
 	 */
 	public long getScopeGroupIdOrLiveGroupId()
 		throws PortalException, SystemException {
