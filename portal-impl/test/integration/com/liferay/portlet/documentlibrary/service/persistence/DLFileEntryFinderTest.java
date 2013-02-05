@@ -92,23 +92,24 @@ public class DLFileEntryFinderTest {
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			user.getUserId(), _group.getGroupId(), _folder.getFolderId(),
-			ContentTypes.TEXT_PLAIN, "FE1.txt", "FE1.txt", null,
+			"FE1.txt", ContentTypes.TEXT_PLAIN, "FE1.txt", null,
 			WorkflowConstants.ACTION_PUBLISH);
 
-		DLFileEntry dlFileEntry =
-			((LiferayFileEntry)fileEntry).getDLFileEntry();
+		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
 
-		dlFileEntry.setSmallImageId(_SMALL_IMAGE_ID);
+		DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
+
 		dlFileEntry.setExtraSettings("Extra Settings");
+		dlFileEntry.setSmallImageId(_SMALL_IMAGE_ID);
 
 		dlFileEntry = DLFileEntryLocalServiceUtil.updateDLFileEntry(
 			dlFileEntry);
 
-		_fileVersion = dlFileEntry.getFileVersion();
+		_dlFileVersion = dlFileEntry.getFileVersion();
 
 		DLAppTestUtil.addFileEntry(
-			_group.getGroupId(), _folder.getFolderId(),
-			ContentTypes.APPLICATION_PDF, "FE2.pdf", "FE2.pdf");
+			_group.getGroupId(), _folder.getFolderId(), "FE2.pdf",
+			ContentTypes.APPLICATION_PDF, "FE2.pdf");
 
 		fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), _folder.getFolderId(), false, "FE3.txt",
@@ -137,9 +138,7 @@ public class DLFileEntryFinderTest {
 
 	@Test
 	public void testCountByExtraSettings() throws Exception {
-		int count = DLFileEntryFinderUtil.countByExtraSettings();
-
-		Assert.assertEquals(count, 2);
+		Assert.assertEquals(2, DLFileEntryFinderUtil.countByExtraSettings());
 	}
 
 	@Test
@@ -148,30 +147,41 @@ public class DLFileEntryFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		Assert.assertEquals(doCountBy_G_U_F_M(false, null, queryDefinition), 2);
-		Assert.assertEquals(doCountBy_G_U_F_M(true, null, queryDefinition), 1);
+		Assert.assertEquals(2, doCountBy_G_U_F_M(0, null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(false, _TEXT_PLAIN, queryDefinition), 1);
+			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(true, _TEXT_PLAIN, queryDefinition), 0);
+			1,
+			doCountBy_G_U_F_M(0, ContentTypes.TEXT_PLAIN, queryDefinition));
+		Assert.assertEquals(
+			0,
+			doCountBy_G_U_F_M(
+				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		Assert.assertEquals(doCountBy_G_U_F_M(false, null, queryDefinition), 3);
-		Assert.assertEquals(doCountBy_G_U_F_M(true, null, queryDefinition), 2);
+		Assert.assertEquals(3, doCountBy_G_U_F_M(0, null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(false, _TEXT_PLAIN, queryDefinition), 2);
+			2, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(true, _TEXT_PLAIN, queryDefinition), 1);
+			2, doCountBy_G_U_F_M(0, ContentTypes.TEXT_PLAIN, queryDefinition));
+		Assert.assertEquals(
+			1,
+			doCountBy_G_U_F_M(
+				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(doCountBy_G_U_F_M(false, null, queryDefinition), 2);
-		Assert.assertEquals(doCountBy_G_U_F_M(true, null, queryDefinition), 1);
+		Assert.assertEquals(2, doCountBy_G_U_F_M(0, null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(false, _TEXT_PLAIN, queryDefinition), 1);
+			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 		Assert.assertEquals(
-			doCountBy_G_U_F_M(true, _TEXT_PLAIN, queryDefinition), 0);
+			1,
+			doCountBy_G_U_F_M(0, ContentTypes.TEXT_PLAIN, queryDefinition));
+		Assert.assertEquals(
+			0,
+			doCountBy_G_U_F_M(
+				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
 	}
 
 	@Test
@@ -179,7 +189,7 @@ public class DLFileEntryFinderTest {
 		DLFileEntry dlFileEntry = DLFileEntryFinderUtil.findByAnyImageId(
 			_SMALL_IMAGE_ID);
 
-		Assert.assertEquals(dlFileEntry.getTitle(), "FE1.txt");
+		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 	}
 
 	@Test
@@ -188,72 +198,71 @@ public class DLFileEntryFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		List<DLFileEntry> fileEntries = doFindBy_G_U_F_M(
-			false, _TEXT_PLAIN, queryDefinition);
+		List<DLFileEntry> dlFileEntries = doFindBy_G_U_F_M(
+			0, ContentTypes.TEXT_PLAIN, queryDefinition);
 
-		Assert.assertEquals(fileEntries.size(), 1);
+		Assert.assertEquals(1, dlFileEntries.size());
 
-		DLFileEntry dlFileEntry = fileEntries.get(0);
+		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
-		Assert.assertEquals(dlFileEntry.getTitle(), "FE1.txt");
+		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		fileEntries = doFindBy_G_U_F_M(true, _TEXT_PLAIN, queryDefinition);
+		dlFileEntries = doFindBy_G_U_F_M(
+			_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition);
 
-		Assert.assertEquals(fileEntries.size(), 1);
+		Assert.assertEquals(1, dlFileEntries.size());
 
-		dlFileEntry = fileEntries.get(0);
+		dlFileEntry = dlFileEntries.get(0);
 
-		Assert.assertEquals(dlFileEntry.getDescription(), "FE3.txt");
+		Assert.assertEquals("FE3.txt", dlFileEntry.getDescription());
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-		fileEntries = doFindBy_G_U_F_M(true, null, queryDefinition);
+		dlFileEntries = doFindBy_G_U_F_M(
+			_folder.getUserId(), null, queryDefinition);
 
-		Assert.assertEquals(fileEntries.size(), 1);
+		Assert.assertEquals(dlFileEntries.size(), 1);
 
-		dlFileEntry = fileEntries.get(0);
+		dlFileEntry = dlFileEntries.get(0);
 
-		Assert.assertEquals(dlFileEntry.getTitle(), "FE2.pdf");
+		Assert.assertEquals("FE2.pdf", dlFileEntry.getTitle());
 	}
 
 	@Test
 	public void testFindByMisversioned() throws Exception {
-		_fileVersion.setFileEntryId(1111);
+		_dlFileVersion.setFileEntryId(ServiceTestUtil.randomLong());
 
-		DLFileVersionLocalServiceUtil.updateDLFileVersion(_fileVersion);
+		DLFileVersionLocalServiceUtil.updateDLFileVersion(_dlFileVersion);
 
-		List<DLFileEntry> fileEntries =
+		List<DLFileEntry> dlFileEntries =
 			DLFileEntryFinderUtil.findByMisversioned();
 
-		Assert.assertEquals(fileEntries.size(), 1);
+		Assert.assertEquals(1, dlFileEntries.size());
 
-		DLFileEntry dlFileEntry = fileEntries.get(0);
+		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
-		Assert.assertEquals(dlFileEntry.getTitle(), "FE1.txt");
+		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 	}
 
 	@Test
 	public void testFindByNoAssets() throws Exception {
 		AssetEntryLocalServiceUtil.deleteEntry(
-			DLFileEntry.class.getName(), _fileVersion.getFileEntryId());
+			DLFileEntry.class.getName(), _dlFileVersion.getFileEntryId());
 
-		AssetEntryLocalServiceUtil.fetchEntry(
-			DLFileEntry.class.getName(), _fileVersion.getFileEntryId());
+		List<DLFileEntry> dlFileEntries =
+			DLFileEntryFinderUtil.findByNoAssets();
 
-		List<DLFileEntry> fileEntries = DLFileEntryFinderUtil.findByNoAssets();
+		Assert.assertEquals(1, dlFileEntries.size());
 
-		Assert.assertEquals(fileEntries.size(), 1);
+		DLFileEntry dlFileEntry = dlFileEntries.get(0);
 
-		DLFileEntry dlFileEntry = fileEntries.get(0);
-
-		Assert.assertEquals(dlFileEntry.getTitle(), "FE1.txt");
+		Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 	}
 
 	protected int doCountBy_G_U_F_M(
-			boolean withUserId, String mimeType,
-			QueryDefinition queryDefinition)
+			long userId, String mimeType, QueryDefinition queryDefinition)
 		throws Exception {
 
 		List<Long> folderIds = ListUtil.toList(
@@ -263,12 +272,6 @@ public class DLFileEntryFinderTest {
 
 		if (mimeType != null) {
 			mimeTypes = new String[] {mimeType};
-		}
-
-		long userId = 0;
-
-		if (withUserId) {
-			userId = _folder.getUserId();
 		}
 
 		return DLFileEntryFinderUtil.countByG_U_F_M(
@@ -276,8 +279,7 @@ public class DLFileEntryFinderTest {
 	}
 
 	protected List<DLFileEntry> doFindBy_G_U_F_M(
-			boolean withUserId, String mimeType,
-			QueryDefinition queryDefinition)
+			long userId, String mimeType, QueryDefinition queryDefinition)
 		throws Exception {
 
 		List<Long> folderIds = ListUtil.toList(
@@ -287,12 +289,6 @@ public class DLFileEntryFinderTest {
 
 		if (mimeType != null) {
 			mimeTypes = new String[] {mimeType};
-		}
-
-		long userId = 0;
-
-		if (withUserId) {
-			userId = _folder.getUserId();
 		}
 
 		return DLFileEntryFinderUtil.findByG_U_F_M(
@@ -301,9 +297,7 @@ public class DLFileEntryFinderTest {
 
 	private static final long _SMALL_IMAGE_ID = 1234L;
 
-	private static final String _TEXT_PLAIN = ContentTypes.TEXT_PLAIN;
-
-	private DLFileVersion _fileVersion;
+	private DLFileVersion _dlFileVersion;
 	private Folder _folder;
 	private Group _group;
 
