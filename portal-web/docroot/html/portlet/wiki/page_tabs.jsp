@@ -56,13 +56,13 @@ PortletURL viewPageOutgoingLinksURL = PortletURLUtil.clone(viewPageDetailsURL, r
 
 viewPageOutgoingLinksURL.setParameter("struts_action", "/wiki/view_page_outgoing_links");
 
-PortletURL attachmentsURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
+PortletURL viewPageAttachmentsURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
-attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
+viewPageAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
-PortletURL viewActivitiesURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
+PortletURL viewPageActivitiesURL = PortletURLUtil.clone(viewPageDetailsURL, renderResponse);
 
-viewActivitiesURL.setParameter("struts_action", "/wiki/view_page_activities");
+viewPageActivitiesURL.setParameter("struts_action", "/wiki/view_page_activities");
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
@@ -76,8 +76,8 @@ viewActivitiesURL.setParameter("struts_action", "/wiki/view_page_activities");
 			url2="<%= viewPageHistoryURL.toString() %>"
 			url3="<%= viewPageIncomingLinksURL.toString() %>"
 			url4="<%= viewPageOutgoingLinksURL.toString() %>"
-			url5="<%= attachmentsURL.toString() %>"
-			url6="<%= viewActivitiesURL.toString() %>"
+			url5="<%= viewPageAttachmentsURL.toString() %>"
+			url6="<%= viewPageActivitiesURL.toString() %>"
 		/>
 	</c:when>
 	<c:otherwise>
@@ -87,8 +87,8 @@ viewActivitiesURL.setParameter("struts_action", "/wiki/view_page_activities");
 			url1="<%= viewPageHistoryURL.toString() %>"
 			url2="<%= viewPageIncomingLinksURL.toString() %>"
 			url3="<%= viewPageOutgoingLinksURL.toString() %>"
-			url4="<%= attachmentsURL.toString() %>"
-			url5="<%= viewActivitiesURL.toString() %>"
+			url4="<%= viewPageAttachmentsURL.toString() %>"
+			url5="<%= viewPageActivitiesURL.toString() %>"
 		/>
 	</c:otherwise>
 </c:choose>
