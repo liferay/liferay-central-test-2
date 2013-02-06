@@ -147,7 +147,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 								<liferay-ui:icon
 									image="add_article"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-the-page", new Object[] {activityUser.getFullName(), pageTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-page", new Object[] {activityUser.getFullName(), pageTitleLink}) %>'
 								/>
 							</c:when >
 							<c:when test="<%= activity.getType() == WikiActivityKeys.UPDATE_PAGE %>">
@@ -158,7 +158,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 								<liferay-ui:icon
 									image="edit"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-update-the-page-to-version", new Object[] {activityUser.getFullName(), pageTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-update-page", new Object[] {activityUser.getFullName(), pageTitleLink}) %>'
 								/>
 
 								<c:if test="<%= Validator.isNotNull(activityWikiPage.getSummary()) %>">
