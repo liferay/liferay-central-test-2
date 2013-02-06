@@ -65,9 +65,8 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 		>
 
 			<%
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(activity.getExtraData());
-
 			User activityUser = UserLocalServiceUtil.getUserById(activity.getUserId());
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(activity.getExtraData());
 			%>
 
 			<liferay-ui:search-container-column-text
