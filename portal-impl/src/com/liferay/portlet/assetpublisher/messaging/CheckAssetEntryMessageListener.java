@@ -22,7 +22,7 @@ import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
  * @author Roberto Diaz
  * @author Sergio González
  */
-public class AssetPublisherNotificationListener extends BaseMessageListener {
+public class CheckAssetEntryMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
