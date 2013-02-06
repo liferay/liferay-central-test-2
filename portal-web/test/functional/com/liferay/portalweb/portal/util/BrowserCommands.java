@@ -69,7 +69,9 @@ public class BrowserCommands {
 
 	private static final String _BROWSER_COMMANDS_DIR =
 		TestPropsValues.BROWSER_COMMANDS_DIR;
+
 	private static final String _BROWSER_TYPE = TestPropsValues.BROWSER_TYPE;
+
 	private static final String _OUTPUT_DIR = TestPropsValues.OUTPUT_DIR;
 
 }
