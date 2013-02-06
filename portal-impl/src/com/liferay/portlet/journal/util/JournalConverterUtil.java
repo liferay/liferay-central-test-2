@@ -48,7 +48,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Bruno Basto
  * @author Marcellus Tavares
  * @author Bruno Basto
  */
@@ -178,6 +177,15 @@ public class JournalConverterUtil {
 				childrenDynamicElementElement, ddmStructure, ddmFields,
 				defaultLocale);
 		}
+	}
+
+	protected static void addMetadataAttribute(
+		Element metadataElement, String name, String value) {
+
+		Element entryElement = metadataElement.addElement("entry");
+
+		entryElement.addAttribute("name", name);
+		entryElement.addCDATA(value);
 	}
 
 	protected static int countFieldRepetition(
@@ -338,7 +346,7 @@ public class JournalConverterUtil {
 			fieldName, "indexType");
 
 		dynamicElementElement.addAttribute(
-			"type", _ddmToJournalTypes.get(fieldType));
+			"type", _ddmTypesToJournalTypes.get(fieldType));
 		dynamicElementElement.addAttribute("index-type", indexType);
 
 		for (Locale locale : ddmField.getAvailableLocales()) {
@@ -348,9 +356,9 @@ public class JournalConverterUtil {
 			dynamicContentElement.addAttribute(
 				"language-id", LocaleUtil.toLanguageId(locale));
 
-			int index = ddmFieldsCounter.get(fieldName);
+			int count = ddmFieldsCounter.get(fieldName);
 
-			Serializable fieldValue = ddmField.getValue(locale, index);
+			Serializable fieldValue = ddmField.getValue(locale, count);
 
 			updateDynamicContentValue(
 				dynamicContentElement, fieldType, String.valueOf(fieldValue));
@@ -369,10 +377,10 @@ public class JournalConverterUtil {
 		for (String childFieldName :
 				ddmStructure.getChildrenFieldNames(fieldName)) {
 
-			int offset = ddmFieldsCounter.get(fieldName);
+			int count = ddmFieldsCounter.get(fieldName);
 
 			int repetitions = countFieldRepetition(
-				ddmFields, childFieldName, fieldName, offset);
+				ddmFields, childFieldName, fieldName, count);
 
 			for (int i = 0; i < repetitions; i++) {
 				Element childDynamicElementElement =
@@ -477,28 +485,26 @@ public class JournalConverterUtil {
 	protected static void updateXSDDynamicElement(Element element) {
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		String name = element.attributeValue("name");
-		String type = element.attributeValue("type");
 		String indexType = element.attributeValue("index-type");
+		String name = element.attributeValue("name");
 		String repeatable = element.attributeValue("repeatable");
+		String type = element.attributeValue("type");
 
-		// meta-data
+		Element metadataElement = element.element("meta-data");
 
-		Element metaDataElement = element.element("meta-data");
-
-		if (metaDataElement == null) {
-			metaDataElement = element.addElement("meta-data");
+		if (metadataElement == null) {
+			metadataElement = element.addElement("meta-data");
 		}
 
-		if (type.equals("selection_break")) {
+		if (type.equals("multi-list")) {
+			addMetadataAttribute(metadataElement, "multiple", "true");
+		}
+		else if (type.equals("selection_break")) {
 			Element parentElement = element.getParent();
 
 			parentElement.remove(element);
 
 			return;
-		}
-		else if (type.equals("multi-list")) {
-			addMetaDataAttribute(metaDataElement, "multiple", "true");
 		}
 		else {
 			Element parentElement = element.getParent();
@@ -506,10 +512,10 @@ public class JournalConverterUtil {
 			String parentType = parentElement.attributeValue("type");
 
 			if ((parentType != null) && parentType.equals("select")) {
-				metaDataElement.addAttribute(
+				metadataElement.addAttribute(
 					"locale", defaultLocale.toString());
 
-				addMetaDataAttribute(metaDataElement, "label", name);
+				addMetadataAttribute(metadataElement, "label", name);
 
 				element.addAttribute(
 					"name", "option" + PwdGenerator.getPassword(4));
@@ -528,7 +534,7 @@ public class JournalConverterUtil {
 		element.addAttribute("dataType", _ddmDataTypes.get(type));
 		element.addAttribute("indexType", indexType);
 
-		String newType = _journalToDDMTypes.get(type);
+		String newType = _journalTypesToDDMTypes.get(type);
 
 		element.addAttribute("type", newType);
 
@@ -536,71 +542,60 @@ public class JournalConverterUtil {
 			element.addAttribute("fieldNamespace", "ddm");
 		}
 
-		metaDataElement.addAttribute("locale", defaultLocale.toString());
+		metadataElement.addAttribute("locale", defaultLocale.toString());
 
-		List<Element> entries = metaDataElement.elements();
+		List<Element> entryElements = metadataElement.elements();
 
-		if (entries.size() == 0) {
-			addMetaDataAttribute(metaDataElement, "label", name);
+		if (entryElements.isEmpty()) {
+			addMetadataAttribute(metadataElement, "label", name);
 		}
 		else {
-			for (Element entry : entries) {
-				String oldEntryName = entry.attributeValue("name");
-				String newEntryName = _ddmMetaDataAttributes.get(oldEntryName);
+			for (Element entryElement : entryElements) {
+				String oldEntryName = entryElement.attributeValue("name");
+
+				String newEntryName = _ddmMetadataAttributes.get(oldEntryName);
 
 				if (newEntryName == null) {
-					metaDataElement.remove(entry);
+					metadataElement.remove(entryElement);
 				}
 				else {
-					entry.addAttribute("name", newEntryName);
+					entryElement.addAttribute("name", newEntryName);
 				}
 			}
 		}
 
-		if (newType.equals("ddm-date") ||
-			newType.equals("ddm-decimal") ||
+		if (newType.equals("ddm-date") || newType.equals("ddm-decimal") ||
 			newType.equals("ddm-integer") ||
 			newType.equals("ddm-link-to-page") ||
-			newType.equals("ddm-number") ||
-			newType.equals("ddm-text-html") ||
-			newType.equals("textarea") ||
-			newType.equals("text")) {
+			newType.equals("ddm-number") || newType.equals("ddm-text-html") ||
+			newType.equals("text") || newType.equals("textarea")) {
 
-			addMetaDataAttribute(metaDataElement, "fieldCssClass", "aui-w25");
-			addMetaDataAttribute(metaDataElement, "width", "25");
+			addMetadataAttribute(metadataElement, "fieldCssClass", "aui-w25");
+			addMetadataAttribute(metadataElement, "width", "25");
+		}
+		else if (newType.equals("ddm-fileupload")) {
+			addMetadataAttribute(metadataElement, "acceptFiles", "*");
+			addMetadataAttribute(metadataElement, "readOnly", "false");
 		}
 
-		if (newType.equals("ddm-fileupload")) {
-			addMetaDataAttribute(metaDataElement, "acceptFiles", "*");
-			addMetaDataAttribute(metaDataElement, "readOnly", "false");
+		addMetadataAttribute(metadataElement, "repeatable", repeatable);
+		addMetadataAttribute(metadataElement, "showLabel", "true");
+
+		List<Element> dynamicElementElements = element.elements(
+			"dynamic-element");
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			updateXSDDynamicElement(dynamicElementElement);
 		}
-
-		addMetaDataAttribute(metaDataElement, "repeatable", repeatable);
-		addMetaDataAttribute(metaDataElement, "showLabel", "true");
-
-		List<Element> children = element.elements("dynamic-element");
-
-		for (Element child : children) {
-			updateXSDDynamicElement(child);
-		}
-	}
-
-	private static void addMetaDataAttribute(
-		Element metaDataElement, String name, String value) {
-
-		Element entryElement = metaDataElement.addElement("entry");
-
-		entryElement.addAttribute("name", name);
-		entryElement.addCDATA(value);
 	}
 
 	private static Map<String, String> _ddmDataTypes =
 		new HashMap<String, String>();
-	private static Map<String, String> _ddmMetaDataAttributes =
+	private static Map<String, String> _ddmMetadataAttributes =
 		new HashMap<String, String>();
-	private static Map<String, String> _ddmToJournalTypes =
+	private static Map<String, String> _ddmTypesToJournalTypes =
 		new HashMap<String, String>();
-	private static Map<String, String> _journalToDDMTypes =
+	private static Map<String, String> _journalTypesToDDMTypes =
 		new HashMap<String, String>();
 
 	static {
@@ -614,30 +609,30 @@ public class JournalConverterUtil {
 		_ddmDataTypes.put("text_area", "html");
 		_ddmDataTypes.put("text_box", "string");
 
-		_ddmMetaDataAttributes.put("instructions", "tip");
-		_ddmMetaDataAttributes.put("label", "label");
-		_ddmMetaDataAttributes.put("multiple", "multiple");
-		_ddmMetaDataAttributes.put("predefinedValue", "predefinedValue");
-		_ddmMetaDataAttributes.put("required", "required");
+		_ddmMetadataAttributes.put("instructions", "tip");
+		_ddmMetadataAttributes.put("label", "label");
+		_ddmMetadataAttributes.put("multiple", "multiple");
+		_ddmMetadataAttributes.put("predefinedValue", "predefinedValue");
+		_ddmMetadataAttributes.put("required", "required");
 
-		_ddmToJournalTypes.put("checkbox", "boolean");
-		_ddmToJournalTypes.put("ddm-documentlibrary", "document_library");
-		_ddmToJournalTypes.put("ddm-fileupload", "image");
-		_ddmToJournalTypes.put("ddm-link-to-page", "link_to_layout");
-		_ddmToJournalTypes.put("ddm-text-html", "text_area");
-		_ddmToJournalTypes.put("select", "list");
-		_ddmToJournalTypes.put("text", "text");
-		_ddmToJournalTypes.put("textarea", "text_box");
+		_ddmTypesToJournalTypes.put("checkbox", "boolean");
+		_ddmTypesToJournalTypes.put("ddm-documentlibrary", "document_library");
+		_ddmTypesToJournalTypes.put("ddm-fileupload", "image");
+		_ddmTypesToJournalTypes.put("ddm-link-to-page", "link_to_layout");
+		_ddmTypesToJournalTypes.put("ddm-text-html", "text_area");
+		_ddmTypesToJournalTypes.put("select", "list");
+		_ddmTypesToJournalTypes.put("text", "text");
+		_ddmTypesToJournalTypes.put("textarea", "text_box");
 
-		_journalToDDMTypes.put("boolean", "checkbox");
-		_journalToDDMTypes.put("document_library", "ddm-documentlibrary");
-		_journalToDDMTypes.put("image", "ddm-fileupload");
-		_journalToDDMTypes.put("link_to_layout", "ddm-link-to-page");
-		_journalToDDMTypes.put("list", "select");
-		_journalToDDMTypes.put("multi-list", "select");
-		_journalToDDMTypes.put("text", "text");
-		_journalToDDMTypes.put("text_area", "ddm-text-html");
-		_journalToDDMTypes.put("text_box", "textarea");
+		_journalTypesToDDMTypes.put("boolean", "checkbox");
+		_journalTypesToDDMTypes.put("document_library", "ddm-documentlibrary");
+		_journalTypesToDDMTypes.put("image", "ddm-fileupload");
+		_journalTypesToDDMTypes.put("link_to_layout", "ddm-link-to-page");
+		_journalTypesToDDMTypes.put("list", "select");
+		_journalTypesToDDMTypes.put("multi-list", "select");
+		_journalTypesToDDMTypes.put("text", "text");
+		_journalTypesToDDMTypes.put("text_area", "ddm-text-html");
+		_journalTypesToDDMTypes.put("text_box", "textarea");
 	}
 
 }

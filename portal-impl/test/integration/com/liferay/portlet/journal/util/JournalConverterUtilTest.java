@@ -86,19 +86,16 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 
 	@Test
 	public void testGetDDMXSD() throws Exception {
-		String expectedDDMXSD = readText("test-ddm-structure-all-fields.xml");
-
 		DDMStructure expectedDDMStructure = new DDMStructureImpl();
 
-		expectedDDMStructure.setXsd(expectedDDMXSD);
-
-		String journalXSD = readText("test-journal-structure-all-fields.xml");
-
-		String actualDDMXSD = JournalConverterUtil.getDDMXSD(journalXSD);
+		expectedDDMStructure.setXsd(
+			readText("test-ddm-structure-all-fields.xml"));
 
 		DDMStructure actualDDMStructure = new DDMStructureImpl();
 
-		actualDDMStructure.setXsd(actualDDMXSD);
+		actualDDMStructure.setXsd(
+			JournalConverterUtil.getDDMXSD(
+				readText("test-journal-structure-all-fields.xml")));
 
 		Assert.assertEquals(
 			expectedDDMStructure.getFieldsMap(),

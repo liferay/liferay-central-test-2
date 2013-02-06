@@ -78,8 +78,6 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 
 			ps = con.prepareStatement(sql);
 
-			String convertedXSD = JournalConverterUtil.getDDMXSD(xsd);
-
 			ps.setString(1, uuid_);
 			ps.setLong(2, ddmStructureId);
 			ps.setLong(3, groupId);
@@ -93,7 +91,7 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 			ps.setString(11, ddmStructureKey);
 			ps.setString(12, name);
 			ps.setString(13, description);
-			ps.setString(14, convertedXSD);
+			ps.setString(14, JournalConverterUtil.getDDMXSD(xsd));
 			ps.setString(15, storageType);
 			ps.setInt(16, type);
 
