@@ -959,8 +959,8 @@ public class AssetPublisherUtil {
 			return;
 		}
 
-		long[] lastNotifiedAssetEntryIds = GetterUtil.getLongValues(
-			preferences.getValues("last-notified-asset-entry-ids", null));
+		long[] notifiedAssetEntryIds = GetterUtil.getLongValues(
+			preferences.getValues("notifiedAssetEntryIds", null));
 
 		List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
 
@@ -968,7 +968,7 @@ public class AssetPublisherUtil {
 			AssetEntry assetEntry = assetEntries.get(i);
 
 			if (!ArrayUtil.contains(
-					lastNotifiedAssetEntryIds, assetEntry.getEntryId())) {
+					notifiedAssetEntryIds, assetEntry.getEntryId())) {
 
 				newAssetEntries.add(assetEntry);
 			}
@@ -980,7 +980,7 @@ public class AssetPublisherUtil {
 
 		try {
 			preferences.setValues(
-				"last-notified-asset-entry-ids",
+				"notifiedAssetEntryIds",
 				StringUtil.split(
 					ListUtil.toString(
 						assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
