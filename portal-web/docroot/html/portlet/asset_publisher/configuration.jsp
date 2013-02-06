@@ -204,7 +204,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 					String parentSiteBrowserURLString = HttpUtil.addParameter(parentSiteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
 
-					String parentSiteBrowserTaglibURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-parent-site") + "', uri:'" + HtmlUtil.escapeURL(parentSiteBrowserURLString) + "'});";
+					String taglibParentSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-parent-site") + "', uri:'" + HtmlUtil.escapeURL(parentSiteBrowserURLString) + "'});";
 
 					Group siteGroup = themeDisplay.getSiteGroup();
 					%>
@@ -214,7 +214,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 							cssClass="highlited"
 							image="add"
 							message='<%= LanguageUtil.get(pageContext, "parent-site") + StringPool.TRIPLE_PERIOD %>'
-							url="<%= parentSiteBrowserTaglibURL %>"
+							url="<%= taglibParentSiteBrowserURL %>"
 						/>
 					</c:if>
 
@@ -231,7 +231,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 					String childrenSiteBrowserURLString = HttpUtil.addParameter(childrenSiteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
 
-					String childrenSiteBrowserTaglibURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-child-site") + "', uri:'" + HtmlUtil.escapeURL(childrenSiteBrowserURLString) + "'});";
+					String taglibChildrenSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-child-site") + "', uri:'" + HtmlUtil.escapeURL(childrenSiteBrowserURLString) + "'});";
 					%>
 
 					<c:if test="<%= GroupLocalServiceUtil.getGroupsCount(company.getCompanyId(), layout.getGroupId(), Boolean.TRUE) > 0 %>">
@@ -239,7 +239,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 							cssClass="highlited"
 							image="add"
 							message='<%= LanguageUtil.get(pageContext, "child-site") + StringPool.TRIPLE_PERIOD %>'
-							url="<%= childrenSiteBrowserTaglibURL %>"
+							url="<%= taglibChildrenSiteBrowserURL %>"
 						/>
 					</c:if>
 
@@ -255,14 +255,14 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 					String siteBrowserURLString = HttpUtil.addParameter(siteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
 
-					String siteBrowserTaglibURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-site") + "', uri:'" + HtmlUtil.escapeURL(siteBrowserURLString) + "'});";
+					String taglibSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-site") + "', uri:'" + HtmlUtil.escapeURL(siteBrowserURLString) + "'});";
 					%>
 
 					<liferay-ui:icon
 						cssClass="highlited"
 						image="add"
 						message='<%= LanguageUtil.get(pageContext, "site") + StringPool.TRIPLE_PERIOD %>'
-						url="<%= siteBrowserTaglibURL %>"
+						url="<%= taglibSiteBrowserURL %>"
 					/>
 				</liferay-ui:icon-menu>
 			</div>
