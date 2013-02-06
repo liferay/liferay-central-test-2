@@ -74,7 +74,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	protected String getFullName(long userId) throws Exception {
+	protected String getUserName(long userId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -83,8 +83,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select firstName, middleName, lastName from User_" +
-					" where userId = ?");
+				"select firstName, middleName, lastName from User_ where " +
+					"userId = ?");
 
 			ps.setLong(1, userId);
 
@@ -110,7 +110,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateFileRank(
-			long fileRankId, String fullName, Timestamp createDate)
+			long fileRankId, long userId, Timestamp modifiedDate)
 		throws Exception {
 
 		Connection con = null;
@@ -120,11 +120,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"update DLFileRank set userName = ?, modifiedDate = ?" +
-					" where fileRankId = ?");
+				"update DLFileRank set userName = ?, modifiedDate = ? where " +
+					"fileRankId = ?");
 
-			ps.setString(1, fullName);
-			ps.setTimestamp(2, createDate);
+			ps.setString(1, getUserName(userId));
+			ps.setTimestamp(2, modifiedDate);
 			ps.setLong(3, fileRankId);
 
 			ps.executeUpdate();
@@ -152,9 +152,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long userId = rs.getLong("userId");
 				Timestamp createDate = rs.getTimestamp("createDate");
 
-				String fullName = getFullName(userId);
-
-				updateFileRank(fileRankId, fullName, createDate);
+				updateFileRank(fileRankId, userId, createDate);
 			}
 		}
 		finally {

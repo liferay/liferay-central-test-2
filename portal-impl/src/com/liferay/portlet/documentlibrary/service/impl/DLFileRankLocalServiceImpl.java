@@ -40,10 +40,10 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long fileRankId = counterLocalService.increment();
-
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
+
+		long fileRankId = counterLocalService.increment();
 
 		DLFileRank dlFileRank = dlFileRankPersistence.create(fileRankId);
 
@@ -197,8 +197,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			companyId, userId, fileEntryId);
 
 		if (dlFileRank != null) {
-			dlFileRank.setModifiedDate(
-				serviceContext.getModifiedDate(new Date()));
+			dlFileRank.setModifiedDate(serviceContext.getModifiedDate(null));
 
 			try {
 				dlFileRankPersistence.update(dlFileRank);
