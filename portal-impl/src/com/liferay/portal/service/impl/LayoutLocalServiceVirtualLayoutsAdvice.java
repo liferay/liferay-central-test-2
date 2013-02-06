@@ -55,8 +55,8 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 	implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-		if (MergeLayoutPrototypesThreadLocal.isInProgress() ||
-			MergeLayoutPrototypesThreadLocal.isCompleted()) {
+		if (MergeLayoutPrototypesThreadLocal.isCompleted() ||
+			MergeLayoutPrototypesThreadLocal.isInProgress()) {
 
 			return methodInvocation.proceed();
 		}
@@ -120,7 +120,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					groupId, privateLayout);
 
-				doMergeLayoutSetPrototypeLayouts(
+				mergeLayoutSetPrototypeLayouts(
 					group, layoutSet, privateLayout, workflowEnabled);
 
 				List<Layout> layouts = (List<Layout>)methodInvocation.proceed();
@@ -221,7 +221,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		return layouts;
 	}
 
-	protected void doMergeLayoutSetPrototypeLayouts(
+	protected void mergeLayoutSetPrototypeLayouts(
 		Group group, LayoutSet layoutSet, boolean privateLayout,
 		boolean workflowEnabled) {
 
@@ -233,33 +233,25 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			MergeLayoutPrototypesThreadLocal.setInProgress(true);
 			WorkflowThreadLocal.setEnabled(false);
 
-			int layoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+			int count = LayoutLocalServiceUtil.getLayoutsCount(
 				group, privateLayout);
 
-			if (layoutsCount == 0) {
+			if (count == 0) {
 				SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
 
 				return;
 			}
 
-			//find all layouts for current layout set
-			//if any of them has changed, do not merge.
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				group.getGroupId(), privateLayout);
 
-			boolean modified = false;
-
 			for (Layout layout : layouts) {
 				if (SitesUtil.isLayoutModifiedSinceLastMerge(layout)) {
-					modified = true;
-
-					break;
+					return;
 				}
 			}
 
-			if (!modified) {
-				SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
-			}
+			SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

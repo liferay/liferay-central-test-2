@@ -30,18 +30,16 @@ public class MergeLayoutPrototypesThreadLocal {
 	}
 
 	public static void setInProgress(boolean inProgress) {
-		if (_inProgress.get() && !inProgress) {
+		if (!inProgress && _inProgress.get()) {
 			_completed.set(true);
 		}
 
 		_inProgress.set(inProgress);
-
 	}
 
 	private static ThreadLocal<Boolean> _completed =
 		new AutoResetThreadLocal<Boolean>(
 			MergeLayoutPrototypesThreadLocal.class + "._completed", false);
-
 	private static ThreadLocal<Boolean> _inProgress =
 		new AutoResetThreadLocal<Boolean>(
 			MergeLayoutPrototypesThreadLocal.class + "._inProgress", false);
