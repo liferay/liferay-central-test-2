@@ -217,7 +217,7 @@ public class AssetPublisherUtil {
 
 		assetEntries.add(assetEntry);
 
-		AssetPublisherUtil.notifySubscribers(
+		notifySubscribers(
 			plid, portletId, assetEntries,
 			ServiceContextUtil.getPortletPreferences(serviceContext));
 	}
@@ -312,7 +312,7 @@ public class AssetPublisherUtil {
 			long[] availableClassNameIds =
 				AssetRendererFactoryRegistryUtil.getClassNameIds();
 
-			long[] classNameIds = AssetPublisherUtil.getClassNameIds(
+			long[] classNameIds = getClassNameIds(
 				preferences, availableClassNameIds);
 
 			assetEntryQuery.setClassNameIds(classNameIds);
@@ -338,8 +338,7 @@ public class AssetPublisherUtil {
 
 		assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 
-		long[] groupIds = AssetPublisherUtil.getGroupIds(
-			preferences, scopeGroupId, layout);
+		long[] groupIds = getGroupIds(preferences, scopeGroupId, layout);
 
 		assetEntryQuery.setGroupIds(groupIds);
 
@@ -800,29 +799,21 @@ public class AssetPublisherUtil {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				group.getClassPK());
 
-			key =
-				AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX +
-					layout.getUuid();
+			key = SCOPE_ID_LAYOUT_UUID_PREFIX + layout.getUuid();
 		}
 		else if (group.isLayoutPrototype() ||
 				(group.getGroupId() == scopeGroupId)) {
 
-			key =
-				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-					GroupConstants.DEFAULT;
+			key = SCOPE_ID_GROUP_PREFIX + GroupConstants.DEFAULT;
 		}
 		else {
 			Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
 			if (scopeGroup.hasAncestor(group.getGroupId())) {
-				key =
-					AssetPublisherUtil.SCOPE_ID_PARENT_GROUP_PREFIX +
-						group.getGroupId();
+				key = SCOPE_ID_PARENT_GROUP_PREFIX + group.getGroupId();
 			}
 			else {
-				key =
-					AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-						group.getGroupId();
+				key = SCOPE_ID_GROUP_PREFIX + group.getGroupId();
 			}
 		}
 
@@ -973,7 +964,7 @@ public class AssetPublisherUtil {
 			return;
 		}
 	
-		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
+		List<AssetEntry> assetEntries = getAssetEntries(
 			preferences, layout, layout.getGroupId(), false);
 	
 		if (assetEntries.isEmpty()) {
