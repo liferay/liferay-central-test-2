@@ -117,7 +117,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		}
 	}
 
-	public int getFoldersAndArticlesCount(long groupId, long folderId)
+	public int getFoldersAndEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
 		return getFoldersAndEntriesCount(
