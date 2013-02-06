@@ -364,17 +364,12 @@ public class AssetPublisherUtil {
 
 		assetEntryQuery.setStart(0);
 
-		List<AssetEntry> assetEntries = null;
-
 		if (checkPermission) {
-			assetEntries = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+			return AssetEntryServiceUtil.getEntries(assetEntryQuery);
 		}
 		else {
-			assetEntries = AssetEntryLocalServiceUtil.getEntries(
-				assetEntryQuery);
+			return AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 		}
-
-		return assetEntries;
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
