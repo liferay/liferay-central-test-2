@@ -200,7 +200,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			}
 		}
 		else if (scopeId.startsWith(
-				AssetPublisherUtil.SCOPE_ID_PARENT_GROUP_PREFIX)) {
+					AssetPublisherUtil.SCOPE_ID_PARENT_GROUP_PREFIX)) {
 
 			Group siteGroup = themeDisplay.getSiteGroup();
 

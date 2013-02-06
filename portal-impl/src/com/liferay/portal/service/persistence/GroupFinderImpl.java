@@ -1338,15 +1338,13 @@ public class GroupFinderImpl
 			if (key.equals("groupsTree")) {
 				List<Group> groupsTree = (List<Group>)entry.getValue();
 
-				int size = groupsTree.size();
-
 				if (!groupsTree.isEmpty()) {
 					sb.append("(");
 
-					for (int i = 0; i < size; i++) {
+					for (int i = 0; i < groupsTree.size(); i++) {
 						sb.append("(Group_.treePath LIKE ?) ");
 
-						if ((i + 1) < size) {
+						if ((i + 1) < groupsTree.size()) {
 							sb.append("OR ");
 						}
 					}
@@ -1457,8 +1455,7 @@ public class GroupFinderImpl
 
 				qPos.add(value);
 			}
-
-			if (key.equals("groupsTree")) {
+			else if (key.equals("groupsTree")) {
 				List<Group> groupsTree = (List<Group>)entry.getValue();
 
 				if (!groupsTree.isEmpty()) {
