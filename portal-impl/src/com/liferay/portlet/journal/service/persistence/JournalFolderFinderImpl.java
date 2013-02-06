@@ -47,11 +47,11 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	public static final String COUNT_F_BY_G_F =
 		JournalFolderFinder.class.getName() + ".countF_ByG_F";
 
-	public static final String FIND_BY_NO_ASSETS =
-		JournalFolderFinder.class.getName() + ".findByNoAssets";
-
 	public static final String FIND_A_BY_G_F =
 		JournalFolderFinder.class.getName() + ".findA_ByG_F";
+
+	public static final String FIND_F_BY_NO_ASSETS =
+		JournalFolderFinder.class.getName() + ".findByF_ByNoAssets";
 
 	public static final String FIND_F_BY_G_F =
 		JournalFolderFinder.class.getName() + ".findF_ByG_F";
@@ -77,13 +77,13 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 		return doFindF_AByG_F(groupId, folderId, queryDefinition, true);
 	}
 
-	public List<JournalFolder> findByNoAssets() throws SystemException {
+	public List<JournalFolder> findF_ByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+			String sql = CustomSQLUtil.get(FIND_F_BY_NO_ASSETS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
