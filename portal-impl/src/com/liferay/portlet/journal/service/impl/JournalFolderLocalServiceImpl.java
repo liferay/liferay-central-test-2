@@ -198,7 +198,7 @@ public class JournalFolderLocalServiceImpl
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY, start, end, obc);
 
-		return journalFolderFinder.findF_AByG_F(
+		return journalFolderFinder.findF_A_ByG_F(
 			groupId, folderId, queryDefinition);
 	}
 
@@ -243,7 +243,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	public List<JournalFolder> getNoAssetFolders() throws SystemException {
-		return journalFolderFinder.findByNoAssets();
+		return journalFolderFinder.findF_ByNoAssets();
 	}
 
 	public void getSubfolderIds(

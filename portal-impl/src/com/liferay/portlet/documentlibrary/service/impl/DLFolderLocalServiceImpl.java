@@ -729,17 +729,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFolderPersistence.update(dlFolder);
 
-		// Asset
-
-		if (status == WorkflowConstants.STATUS_APPROVED) {
-			assetEntryLocalService.updateVisible(
-				DLFolder.class.getName(), dlFolder.getFolderId(), true);
-		}
-		else if (status == WorkflowConstants.STATUS_IN_TRASH) {
-			assetEntryLocalService.updateVisible(
-				DLFolder.class.getName(), dlFolder.getFolderId(), false);
-		}
-
 		// Folders, file entries, and file shortcuts
 
 		QueryDefinition queryDefinition = new QueryDefinition(
@@ -751,6 +740,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlAppHelperLocalService.updateDependentStatus(
 			user, foldersAndFileEntriesAndFileShortcuts, status);
+
+		// Asset
+
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			assetEntryLocalService.updateVisible(
+				DLFolder.class.getName(), dlFolder.getFolderId(), true);
+		}
+		else if (status == WorkflowConstants.STATUS_IN_TRASH) {
+			assetEntryLocalService.updateVisible(
+				DLFolder.class.getName(), dlFolder.getFolderId(), false);
+		}
 
 		// Trash
 

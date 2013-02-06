@@ -97,7 +97,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY, start, end, obc);
 
-		return journalFolderFinder.filterFindF_AByG_F(
+		return journalFolderFinder.filterFindF_A_ByG_F(
 			groupId, folderId, queryDefinition);
 	}
 

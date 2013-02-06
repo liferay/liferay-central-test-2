@@ -126,15 +126,15 @@ public class BookmarksFolderLocalServiceImpl
 		resourceLocalService.deleteResource(
 			folder, ResourceConstants.SCOPE_INDIVIDUAL);
 
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			BookmarksFolder.class.getName(), folder.getFolderId());
-
 		// Entries
 
 		bookmarksEntryLocalService.deleteEntries(
 			folder.getGroupId(), folder.getFolderId(), includeTrashedEntries);
+
+		// Asset
+
+		assetEntryLocalService.deleteEntry(
+			BookmarksFolder.class.getName(), folder.getFolderId());
 
 		// Expando
 
@@ -437,6 +437,8 @@ public class BookmarksFolderLocalServiceImpl
 			long userId, BookmarksFolder folder, int status)
 		throws PortalException, SystemException {
 
+		// Folder
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		int oldStatus = folder.getStatus();
@@ -448,6 +450,14 @@ public class BookmarksFolderLocalServiceImpl
 
 		bookmarksFolderPersistence.update(folder);
 
+		// Folders and entries
+
+		List<Object> foldersAndEntries =
+			bookmarksFolderLocalService.getFoldersAndEntries(
+				folder.getGroupId(), folder.getFolderId());
+
+		updateDependentStatus(foldersAndEntries, status);
+
 		// Asset
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
@@ -458,14 +468,6 @@ public class BookmarksFolderLocalServiceImpl
 			assetEntryLocalService.updateVisible(
 				BookmarksFolder.class.getName(), folder.getFolderId(), false);
 		}
-
-		// Folders and entries
-
-		List<Object> foldersAndEntries =
-			bookmarksFolderLocalService.getFoldersAndEntries(
-				folder.getGroupId(), folder.getFolderId());
-
-		updateDependentStatus(foldersAndEntries, status);
 
 		// Trash
 

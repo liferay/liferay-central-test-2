@@ -117,13 +117,6 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		}
 	}
 
-	public int getFoldersAndEntriesCount(long groupId, long folderId)
-		throws SystemException {
-
-		return getFoldersAndEntriesCount(
-			groupId, folderId, WorkflowConstants.STATUS_ANY);
-	}
-
 	public List<Object> getFoldersAndEntries(long groupId, long folderId)
 		throws SystemException {
 
@@ -150,6 +143,13 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
 		return bookmarksFolderFinder.filterFindBF_E_ByG_F(
 			groupId, folderId, queryDefinition);
+	}
+
+	public int getFoldersAndEntriesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return getFoldersAndEntriesCount(
+			groupId, folderId, WorkflowConstants.STATUS_ANY);
 	}
 
 	public int getFoldersAndEntriesCount(
