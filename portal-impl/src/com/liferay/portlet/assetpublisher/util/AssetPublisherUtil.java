@@ -84,6 +84,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -288,62 +289,7 @@ public class AssetPublisherUtil {
 				com.liferay.portal.model.PortletPreferences portletPreferences =
 					(com.liferay.portal.model.PortletPreferences)object;
 
-				Layout layout = LayoutLocalServiceUtil.getLayout(
-					portletPreferences.getPlid());
-
-				PortletPreferences preferences =
-					PortletPreferencesFactoryUtil.fromXML(
-						layout.getCompanyId(), portletPreferences.getOwnerId(),
-						portletPreferences.getOwnerType(),
-						portletPreferences.getPlid(),
-						portletPreferences.getPortletId(),
-						portletPreferences.getPreferences());
-
-				if (!getEmailAssetEntryAddedEnabled(preferences)) {
-					return;
-				}
-
-				List<AssetEntry> assetEntries =
-					AssetPublisherUtil.getAssetEntries(
-						preferences, layout, layout.getGroupId(), false);
-
-				if (assetEntries.isEmpty()) {
-					return;
-				}
-
-				long[] lastNotifiedAssetEntryIds = GetterUtil.getLongValues(
-					preferences.getValues(
-						"last-notified-asset-entry-ids", null));
-
-				List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
-
-				for (int i = 0; i < assetEntries.size(); i++) {
-					AssetEntry assetEntry = assetEntries.get(i);
-
-					if (!ArrayUtil.contains(
-							lastNotifiedAssetEntryIds,
-							assetEntry.getEntryId())) {
-
-						newAssetEntries.add(assetEntry);
-					}
-				}
-
-				notifySubscribers(
-					portletPreferences.getPlid(),
-					portletPreferences.getPortletId(), newAssetEntries,
-					preferences);
-
-				try {
-					preferences.setValues(
-						"last-notified-asset-entry-ids",
-						StringUtil.split(
-							ListUtil.toString(
-								assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
-
-					preferences.store();
-				}
-				catch (Exception e) {
-				}
+				_checkAssetEntries(portletPreferences);
 			}
 
 		};
@@ -1008,6 +954,66 @@ public class AssetPublisherUtil {
 			permissionChecker.getUserId(),
 			com.liferay.portal.model.PortletPreferences.class.getName(),
 			_getPortletPreferencesId(plid, portletId));
+	}
+
+	private static void _checkAssetEntries(
+			com.liferay.portal.model.PortletPreferences portletPreferences)
+		throws PortalException, SystemException {
+	
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			portletPreferences.getPlid());
+	
+		PortletPreferences preferences = PortletPreferencesFactoryUtil.fromXML(
+			layout.getCompanyId(), portletPreferences.getOwnerId(),
+			portletPreferences.getOwnerType(), portletPreferences.getPlid(),
+			portletPreferences.getPortletId(),
+			portletPreferences.getPreferences());
+	
+		if (!getEmailAssetEntryAddedEnabled(preferences)) {
+			return;
+		}
+	
+		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
+			preferences, layout, layout.getGroupId(), false);
+	
+		if (assetEntries.isEmpty()) {
+			return;
+		}
+	
+		long[] lastNotifiedAssetEntryIds = GetterUtil.getLongValues(
+			preferences.getValues("last-notified-asset-entry-ids", null));
+	
+		List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
+	
+		for (int i = 0; i < assetEntries.size(); i++) {
+			AssetEntry assetEntry = assetEntries.get(i);
+	
+			if (!ArrayUtil.contains(
+					lastNotifiedAssetEntryIds, assetEntry.getEntryId())) {
+	
+				newAssetEntries.add(assetEntry);
+			}
+		}
+	
+		notifySubscribers(
+			portletPreferences.getPlid(), portletPreferences.getPortletId(),
+			newAssetEntries, preferences);
+	
+		try {
+			preferences.setValues(
+				"last-notified-asset-entry-ids",
+				StringUtil.split(
+					ListUtil.toString(
+						assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
+	
+			preferences.store();
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (PortletException pe) {
+			throw new SystemException(pe);
+		}
 	}
 
 	private static String _getAssetEntryXml(
