@@ -170,6 +170,14 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		return _publishToLiveByDefault;
 	}
 
+	protected Element addExportRootElement() {
+		Document document = SAXReaderUtil.createDocument();
+
+		Class<?> clazz = getClass();
+
+		return document.addElement(clazz.getSimpleName());
+	}
+
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
