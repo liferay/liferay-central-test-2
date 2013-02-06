@@ -94,7 +94,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	}
 
 	if (portletName.equals(PortletKeys.SITE_MEMBERS_DIRECTORY) && (organizationId == 0) && (userGroupId == 0)) {
-		userParams.put("inherit", true);
+		userParams.put("inherit", Boolean.TRUE);
 		userParams.put("usersGroups", new Long(themeDisplay.getScopeGroupId()));
 	}
 	%>
