@@ -14,6 +14,10 @@
 
 package com.liferay.portlet.assetpublisher.util;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -29,7 +33,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrimitiveLongList;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -51,6 +54,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesActionableDynamicQuery;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -262,79 +266,97 @@ public class AssetPublisherUtil {
 	}
 
 	public static void checkAssetEntries() throws Exception {
-		StringBundler sb = new StringBundler(3);
+		ActionableDynamicQuery actionableDynamicQuery =
+			new PortletPreferencesActionableDynamicQuery() {
 
-		sb.append(PortletKeys.ASSET_PUBLISHER);
-		sb.append(PortletConstants.INSTANCE_SEPARATOR);
-		sb.append(StringPool.PERCENT);
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				Property property = PropertyFactoryUtil.forName("portletId");
 
-		List<com.liferay.portal.model.PortletPreferences> preferencesList =
-			PortletPreferencesLocalServiceUtil.
-				getPortletPreferencesByLikePortletId(sb.toString());
+				String portletId =
+					PortletKeys.ASSET_PUBLISHER +
+						PortletConstants.INSTANCE_SEPARATOR +
+							StringPool.PERCENT;
 
-		for (com.liferay.portal.model.PortletPreferences curPreferences :
-				preferencesList) {
-
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				curPreferences.getPlid());
-
-			PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.fromXML(
-					layout.getCompanyId(), curPreferences.getOwnerId(),
-					curPreferences.getOwnerType(), curPreferences.getPlid(),
-					curPreferences.getPortletId(),
-					curPreferences.getPreferences());
-
-			if (!getEmailAssetEntryAddedEnabled(preferences)) {
-				continue;
+				dynamicQuery.add(property.like(portletId));
 			}
 
-			List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
-				preferences, layout, layout.getGroupId(), false);
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-			if (assetEntries.isEmpty()) {
-				continue;
-			}
+				com.liferay.portal.model.PortletPreferences portletPreferences =
+					(com.liferay.portal.model.PortletPreferences)object;
 
-			long[] lastNotifiedAssetEntryIds = GetterUtil.getLongValues(
-				preferences.getValues("last-notified-asset-entry-ids", null));
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					portletPreferences.getPlid());
 
-			List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
+				PortletPreferences preferences =
+					PortletPreferencesFactoryUtil.fromXML(
+						layout.getCompanyId(), portletPreferences.getOwnerId(),
+						portletPreferences.getOwnerType(),
+						portletPreferences.getPlid(),
+						portletPreferences.getPortletId(),
+						portletPreferences.getPreferences());
 
-			for (int i = 0; i < assetEntries.size(); i++) {
-				AssetEntry assetEntry = assetEntries.get(i);
+				if (!getEmailAssetEntryAddedEnabled(preferences)) {
+					return;
+				}
 
-				if (!ArrayUtil.contains(
-					lastNotifiedAssetEntryIds, assetEntry.getEntryId())) {
+				List<AssetEntry> assetEntries =
+					AssetPublisherUtil.getAssetEntries(
+						preferences, layout, layout.getGroupId(), false);
 
-					newAssetEntries.add(assetEntry);
+				if (assetEntries.isEmpty()) {
+					return;
+				}
+
+				long[] lastNotifiedAssetEntryIds = GetterUtil.getLongValues(
+					preferences.getValues(
+						"last-notified-asset-entry-ids", null));
+
+				List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
+
+				for (int i = 0; i < assetEntries.size(); i++) {
+					AssetEntry assetEntry = assetEntries.get(i);
+
+					if (!ArrayUtil.contains(
+							lastNotifiedAssetEntryIds,
+							assetEntry.getEntryId())) {
+
+						newAssetEntries.add(assetEntry);
+					}
+				}
+
+				notifySubscribers(
+					portletPreferences.getPlid(),
+					portletPreferences.getPortletId(), newAssetEntries,
+					preferences);
+
+				try {
+					preferences.setValues(
+						"last-notified-asset-entry-ids",
+						StringUtil.split(
+							ListUtil.toString(
+								assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
+
+					preferences.store();
+				}
+				catch (Exception e) {
 				}
 			}
 
-			notifySubscribers(
-				curPreferences.getPlid(), curPreferences.getPortletId(),
-				newAssetEntries, preferences);
+		};
 
-			try {
-				preferences.setValues(
-					"last-notified-asset-entry-ids",
-					StringUtil.split(
-						ListUtil.toString(
-							assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
-
-				preferences.store();
-			}
-			catch (Exception e) {
-			}
-		}
+		actionableDynamicQuery.performActions();
 	}
 
 	public static List<AssetEntry> getAssetEntries(
 			PortletPreferences preferences, Layout layout, long scopeGroupId,
 			boolean checkPermission)
-		throws Exception {
+		throws PortalException, SystemException {
 
-		AssetEntryQuery assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(
+		AssetEntryQuery assetEntryQuery = getAssetEntryQuery(
 			preferences, new long[] {scopeGroupId});
 
 		boolean anyAssetType = GetterUtil.getBoolean(
@@ -419,7 +441,7 @@ public class AssetPublisherUtil {
 
 	public static AssetEntryQuery getAssetEntryQuery(
 			PortletPreferences portletPreferences, long[] scopeGroupIds)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
