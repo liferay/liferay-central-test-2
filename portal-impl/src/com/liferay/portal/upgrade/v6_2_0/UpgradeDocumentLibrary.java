@@ -83,7 +83,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select firstName, middleName, lastName from user_" +
+				"select firstName, middleName, lastName from User_" +
 					" where userId = ?");
 
 			ps.setLong(1, userId);
