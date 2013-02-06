@@ -70,11 +70,11 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 		return doCountF_A_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
-	public List<Object> filterFindF_AByG_F(
+	public List<Object> filterFindF_A_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doFindF_AByG_F(groupId, folderId, queryDefinition, true);
+		return doFindF_A_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
 	public List<JournalFolder> findF_ByNoAssets() throws SystemException {
@@ -99,11 +99,11 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 		}
 	}
 
-	public List<Object> findF_AByG_F(
+	public List<Object> findF_A_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
-		return doFindF_AByG_F(groupId, folderId, queryDefinition, false);
+		return doFindF_A_ByG_F(groupId, folderId, queryDefinition, false);
 	}
 
 	protected int doCountF_A_ByG_F(
@@ -179,7 +179,7 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 		}
 	}
 
-	protected List<Object> doFindF_AByG_F(
+	protected List<Object> doFindF_A_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition,
 			boolean inlineSQLHelper)
 		throws SystemException {
