@@ -124,13 +124,13 @@ if (Validator.isNotNull(target)) {
 				<%
 				Map<String, Object> data = new HashMap<String, Object>();
 
-				data.put("organizationId", organization.getOrganizationId());
 				data.put("groupId", organization.getGroupId());
 				data.put("name", HtmlUtil.escape(organization.getName()));
+				data.put("organizationId", organization.getOrganizationId());
 				data.put("type", organization.getType());
 				%>
 
-				<aui:button cssClass="selector-button" value="choose" data="<%= data %>" />
+				<aui:button cssClass="selector-button" data="<%= data %>" value="choose" />
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 
