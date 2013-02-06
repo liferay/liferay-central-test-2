@@ -69,8 +69,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserPersonalSite;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.security.auth.MembershipPolicy;
-import com.liferay.portal.security.auth.MembershipPolicyFactory;
+import com.liferay.portal.security.auth.MembershipPolicyUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -471,9 +470,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void checkMembershipPolicy(User user) throws SystemException {
-		MembershipPolicy membershipPolicy =
-			MembershipPolicyFactory.getInstance();
-
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
@@ -486,13 +482,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			QueryUtil.ALL_POS);
 
 		for (Group group : groups) {
-			if (!membershipPolicy.isMembershipAllowed(group, user)) {
+			if (!MembershipPolicyUtil.isMembershipAllowed(group, user)) {
 				unsetUserGroups(
 					user.getUserId(), new long[] {group.getGroupId()});
 			}
 		}
 
-		Set<Group> mandatoryGroups = membershipPolicy.getMandatoryGroups(user);
+		Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(
+			user);
 
 		for (Group group : mandatoryGroups) {
 			if (!hasUserGroup(user.getUserId(), group.getGroupId(), false)) {

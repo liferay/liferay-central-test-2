@@ -25,24 +25,7 @@ import com.liferay.portal.util.PropsValues;
  * @author Sergio González
  * @author Shuyang Zhou
  */
-public class MembershipPolicyFactory {
-
-	public static MembershipPolicy getInstance() {
-		return _membershipPolicy;
-	}
-
-	public static void setInstance(MembershipPolicy membershipPolicy) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Set " + ClassUtil.getClassName(membershipPolicy));
-		}
-
-		if (membershipPolicy == null) {
-			_membershipPolicy = _originalMembershipPolicy;
-		}
-		else {
-			_membershipPolicy = membershipPolicy;
-		}
-	}
+public class MembershipPolicyFactoryImpl implements MembershipPolicyFactory {
 
 	public void afterPropertiesSet() throws Exception {
 		if (_log.isDebugEnabled()) {
@@ -56,6 +39,23 @@ public class MembershipPolicyFactory {
 				classLoader, PropsValues.USERS_MEMBERSHIP_POLICY);
 
 		_membershipPolicy = _originalMembershipPolicy;
+	}
+
+	public MembershipPolicy getMembershipPolicy() {
+		return _membershipPolicy;
+	}
+
+	public void setMembershipPolicy(MembershipPolicy membershipPolicy) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set " + ClassUtil.getClassName(membershipPolicy));
+		}
+
+		if (membershipPolicy == null) {
+			_membershipPolicy = _originalMembershipPolicy;
+		}
+		else {
+			_membershipPolicy = membershipPolicy;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
