@@ -50,12 +50,11 @@ public class SeleniumBuilderFileUtil {
 
 	public String getClassName(String fileName, String classSuffix) {
 		int x = fileName.lastIndexOf(StringPool.SLASH);
-		int y = fileName.indexOf(CharPool.PERIOD);
-
-		String filePath = fileName.substring(0, x + 1);
 
 		String packagePath = StringUtil.replace(
-			filePath, StringPool.SLASH, StringPool.PERIOD);
+			fileName.substring(0, x + 1), StringPool.SLASH, StringPool.PERIOD);
+
+		int y = fileName.indexOf(CharPool.PERIOD);
 
 		String simpleClassName = fileName.substring(x + 1, y) + classSuffix;
 
