@@ -101,7 +101,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 	<liferay-ui:search-container-results>
 		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.DIRECTORY) && Validator.equals(themeDisplay.getPortletDisplay().getId(), PortletKeys.DIRECTORY) && PropsValues.USERS_INDEXER_ENABLED && PropsValues.USERS_SEARCH_WITH_INDEX %>">
+			<c:when test="<%= portletName.equals(PortletKeys.DIRECTORY) && PropsValues.USERS_INDEXER_ENABLED && PropsValues.USERS_SEARCH_WITH_INDEX %>">
 				<%@ include file="/html/portlet/users_admin/user_search_results_index.jspf" %>
 			</c:when>
 			<c:otherwise>
