@@ -174,12 +174,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			<liferay-ui:search-container-column-text
 				name="date"
 			>
-
-				<%
-				Date createDate = new Date(activity.getCreateDate());
-				%>
-
-				<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(pageContext, System.currentTimeMillis() - createDate.getTime(), true) %>" key="x-ago" />
+				<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(pageContext, System.currentTimeMillis() - activity.getCreateDate(), true) %>" key="x-ago" />
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 
