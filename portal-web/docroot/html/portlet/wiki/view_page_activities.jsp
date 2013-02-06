@@ -49,7 +49,6 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 <div class="page-activities">
 	<liferay-ui:search-container
-		emptyResultsMessage="this-page-does-not-have-any-activity"
 		iteratorURL="<%= iteratorURL %>"
 	>
 		<liferay-ui:search-container-results
