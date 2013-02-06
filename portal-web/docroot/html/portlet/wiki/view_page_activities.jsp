@@ -103,21 +103,21 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 								<liferay-ui:icon
 									image="clip"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-the-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
 								/>
 							</c:when>
 							<c:when test="<%= activity.getType() == SocialActivityConstants.TYPE_MOVE_ATTACHMENT_TO_TRASH %>">
 								<liferay-ui:icon
 									image="delete_attachment"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-remove-the-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-delete-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
 								/>
 							</c:when>
 							<c:when test="<%= activity.getType() == SocialActivityConstants.TYPE_RESTORE_ATTACHMENT_FROM_TRASH %>">
 								<liferay-ui:icon
 									image="undo"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-restore-the-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-restore-attachment", new Object[] {activityUser.getFullName(), attachmentTitleLink}) %>'
 								/>
 							</c:when>
 						</c:choose>
