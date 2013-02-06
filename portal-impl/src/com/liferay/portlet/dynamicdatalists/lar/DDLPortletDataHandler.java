@@ -14,6 +14,9 @@
 
 package com.liferay.portlet.dynamicdatalists.lar;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
@@ -22,6 +25,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetActionableDynamicQuery;
 
 import java.util.List;
 
@@ -45,19 +49,21 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		if (!portletDataContext.addPrimaryKey(
+		if (portletDataContext.addPrimaryKey(
 				DDLPortletDataHandler.class, "deleteData")) {
 
-			DDLRecordSetLocalServiceUtil.deleteRecordSets(
-				portletDataContext.getScopeGroupId());
+			return portletPreferences;
 		}
+
+		DDLRecordSetLocalServiceUtil.deleteRecordSets(
+			portletDataContext.getScopeGroupId());
 
 		return portletPreferences;
 	}
 
 	@Override
 	protected String doExportData(
-			PortletDataContext portletDataContext, String portletId,
+			final PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
 
@@ -69,20 +75,32 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 		Element rootElement = document.addElement("ddl-data");
 
-		Element recordSetsElement = rootElement.addElement("record-sets");
+		final Element recordSetsElement = rootElement.addElement("record-sets");
 
-		List<DDLRecordSet> recordSets =
-			DDLRecordSetLocalServiceUtil.getRecordSets(
-				portletDataContext.getScopeGroupId());
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DDLRecordSetActionableDynamicQuery() {
 
-		for (DDLRecordSet recordSet : recordSets) {
-			if (portletDataContext.isWithinDateRange(
-					recordSet.getModifiedDate())) {
+				@Override
+				protected void addCriteria(DynamicQuery dynamicQuery) {
+					portletDataContext.addDateRangeCriteria(
+						dynamicQuery, "modifiedDate");
+				}
 
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, recordSetsElement, recordSet);
-			}
-		}
+				@Override
+				protected void performAction(Object object)
+					throws PortalException {
+
+					DDLRecordSet recordSet = (DDLRecordSet)object;
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, recordSetsElement, recordSet);
+				}
+
+		};
+
+		actionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
+
+		actionableDynamicQuery.performActions();
 
 		return document.formattedString();
 	}
