@@ -124,7 +124,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 						</c:choose>
 					</c:when>
 
-					<c:when test="<%= activity.getType() == WikiActivityKeys.UPDATE_PAGE || activity.getType() == WikiActivityKeys.ADD_PAGE %>">
+					<c:when test="<%= (activity.getType() == WikiActivityKeys.ADD_PAGE) || (activity.getType() == WikiActivityKeys.UPDATE_PAGE) %>">
 
 						<%
 						double version = extraDataJSONObject.getDouble("version");
