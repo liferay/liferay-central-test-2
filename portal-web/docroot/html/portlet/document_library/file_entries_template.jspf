@@ -14,18 +14,17 @@
  */
 --%>
 
-<%
-String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/default.png";
-
-String thumbnailStyle = DLUtil.getThumbnailStyle();
-%>
-
 <div class="lfr-template" id="<portlet:namespace />appViewEntryTemplates">
+
+	<%
+	String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/default.png";
+	%>
+
 	<liferay-ui:app-view-entry
 		displayStyle="icon"
 		showCheckbox="<%= Boolean.FALSE %>"
 		thumbnailSrc="<%= thumbnailSrc %>"
-		thumbnailStyle="<%= thumbnailStyle %>"
+		thumbnailStyle="<%= DLUtil.getThumbnailStyle() %>"
 		title="{title}"
 		url="<%= uploadURL %>"
 	/>
@@ -34,7 +33,7 @@ String thumbnailStyle = DLUtil.getThumbnailStyle();
 		displayStyle="descriptive"
 		showCheckbox="<%= Boolean.FALSE %>"
 		thumbnailSrc="<%= thumbnailSrc %>"
-		thumbnailStyle="<%= thumbnailStyle %>"
+		thumbnailStyle="<%= DLUtil.getThumbnailStyle() %>"
 		title="{title}"
 		url="<%= uploadURL %>"
 	/>

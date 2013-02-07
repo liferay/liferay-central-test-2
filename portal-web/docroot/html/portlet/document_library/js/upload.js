@@ -906,7 +906,7 @@ AUI.add(
 
 					instance._maxFileSize = maxFileSize;
 
-					instance._viewFileEntryUrl = config.viewFileEntryUrl;
+					instance._viewFileEntryURL = config.viewFileEntryURL;
 
 					instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size-no-larger-than-x');
 					instance._zeroByteFileText = Liferay.Language.get('the-file-contains-no-data-and-cannot-be-uploaded.-please-use-the-classic-uploader');
@@ -1187,7 +1187,7 @@ AUI.add(
 				var link = node.one(selector);
 
 				if (link) {
-					link.attr('href', Liferay.Util.addParams(id, instance._viewFileEntryUrl));
+					link.attr('href', Liferay.Util.addParams(id, instance._viewFileEntryURL));
 				}
 			},
 

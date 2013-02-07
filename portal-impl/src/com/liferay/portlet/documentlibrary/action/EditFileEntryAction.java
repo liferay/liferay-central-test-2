@@ -133,9 +133,9 @@ public class EditFileEntryAction extends PortletAction {
 				}
 			}
 			else if (cmd.equals(Constants.ADD) ||
+					 cmd.equals(Constants.ADD_DYNAMIC) ||
 					 cmd.equals(Constants.UPDATE) ||
-					 cmd.equals(Constants.UPDATE_AND_CHECKIN) ||
-					 cmd.equals(Constants.ADD_DYNAMIC)) {
+					 cmd.equals(Constants.UPDATE_AND_CHECKIN)) {
 
 				updateFileEntry(portletConfig, actionRequest, actionResponse);
 			}
@@ -623,9 +623,9 @@ public class EditFileEntryAction extends PortletAction {
 				 e instanceof SourceFileNameException ||
 				 e instanceof StorageFieldRequiredException) {
 
-			if (!(cmd.equals(Constants.ADD_MULTIPLE) ||
-				cmd.equals(Constants.ADD_TEMP) ||
-				cmd.equals(Constants.ADD_DYNAMIC))) {
+			if (!cmd.equals(Constants.ADD_DYNAMIC) &&
+				!cmd.equals(Constants.ADD_MULTIPLE) &&
+				!cmd.equals(Constants.ADD_TEMP)) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
@@ -776,14 +776,14 @@ public class EditFileEntryAction extends PortletAction {
 			long size = uploadPortletRequest.getSize("file");
 
 			if ((cmd.equals(Constants.ADD) ||
-			    cmd.equals(Constants.ADD_DYNAMIC)) &&
-			    (size == 0)) {
+				 cmd.equals(Constants.ADD_DYNAMIC)) &&
+				(size == 0)) {
 
 				contentType = MimeTypesUtil.getContentType(title);
 			}
 
 			if (cmd.equals(Constants.ADD) ||
-			    cmd.equals(Constants.ADD_DYNAMIC) || (size > 0)) {
+				cmd.equals(Constants.ADD_DYNAMIC) || (size > 0)) {
 
 				String portletName = portletConfig.getPortletName();
 
@@ -818,7 +818,7 @@ public class EditFileEntryAction extends PortletAction {
 			FileEntry fileEntry = null;
 
 			if (cmd.equals(Constants.ADD) ||
-			    cmd.equals(Constants.ADD_DYNAMIC)) {
+				cmd.equals(Constants.ADD_DYNAMIC)) {
 
 				// Add file entry
 
@@ -865,7 +865,7 @@ public class EditFileEntryAction extends PortletAction {
 				(UploadException)actionRequest.getAttribute(
 					WebKeys.UPLOAD_EXCEPTION);
 
-			if (uploadException != null &&
+			if ((uploadException != null) &&
 				uploadException.isExceededSizeLimit()) {
 
 				throw new FileSizeException(uploadException.getCause());
