@@ -176,6 +176,16 @@ create unique index IX_702D1AD5 on DDMStorageLink (classPK);
 create index IX_81776090 on DDMStorageLink (structureId);
 create index IX_32A18526 on DDMStorageLink (uuid_);
 
+create index IX_31817A62 on DDMStructure (classNameId);
+create index IX_4FBAC092 on DDMStructure (companyId, classNameId);
+create index IX_C8419FBE on DDMStructure (groupId);
+create index IX_B6ED5E50 on DDMStructure (groupId, classNameId);
+create unique index IX_C8785130 on DDMStructure (groupId, classNameId, structureKey);
+create index IX_20FDE04C on DDMStructure (structureKey);
+create index IX_E61809C8 on DDMStructure (uuid_);
+create index IX_F9FB8D60 on DDMStructure (uuid_, companyId);
+create unique index IX_85C7EBE2 on DDMStructure (uuid_, groupId);
+
 create index IX_D43E4208 on DDMStructureLink (classNameId);
 create unique index IX_C803899D on DDMStructureLink (classPK);
 create index IX_17692B58 on DDMStructureLink (structureId);

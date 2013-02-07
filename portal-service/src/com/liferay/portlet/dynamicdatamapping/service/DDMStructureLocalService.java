@@ -456,8 +456,6 @@ public interface DDMStructureLocalService extends BaseLocalService,
 	* </p>
 	*
 	* @param groupId the primary key of the group
-	* @param classNameId the primary key of the class name for the structure's
-	related model
 	* @param structureKey the unique string identifying the structure
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
@@ -498,11 +496,9 @@ public interface DDMStructureLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the structure matching the structure key, classNameId and group.
+	* Returns the structure matching the structure key and group.
 	*
 	* @param groupId the primary key of the group
-	* @param classNameId the primary key of the class name for the structure's
-	related model
 	* @param structureKey the unique string identifying the structure
 	* @return the matching structure, or <code>null</code> if a matching
 	structure could not be found
@@ -514,8 +510,8 @@ public interface DDMStructureLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the structure matching the structure key, classNameId and group,
-	* optionally in the global scope.
+	* Returns the structure matching the structure key and group, optionally in
+	* the global scope.
 	*
 	* <p>
 	* This method first searches in the group. If the structure is still not
@@ -524,8 +520,6 @@ public interface DDMStructureLocalService extends BaseLocalService,
 	* </p>
 	*
 	* @param groupId the primary key of the group
-	* @param classNameId the primary key of the class name for the structure's
-	related model
 	* @param structureKey the unique string identifying the structure
 	* @param includeGlobalStructures whether to include the global scope in
 	the search
@@ -667,11 +661,9 @@ public interface DDMStructureLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the structure matching the structure key, classNameId and group.
+	* Returns the structure matching the structure key and group.
 	*
 	* @param groupId the primary key of the structure's group
-	* @param classNameId the primary key of the class name for the structure's
-	related model
 	* @param structureKey the unique string identifying the structure
 	* @return the matching structure
 	* @throws PortalException if a matching structure could not be found
@@ -684,8 +676,8 @@ public interface DDMStructureLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the structure matching the structure key, classNameId and group,
-	* optionally in the global scope.
+	* Returns the structure matching the structure key and group, optionally in
+	* the global scope.
 	*
 	* <p>
 	* This method first searches in the group. If the structure is still not
@@ -694,8 +686,6 @@ public interface DDMStructureLocalService extends BaseLocalService,
 	* </p>
 	*
 	* @param groupId the primary key of the structure's group
-	* @param classNameId the primary key of the class name for the structure's
-	related model
 	* @param structureKey the unique string identifying the structure
 	* @param includeGlobalStructures whether to include the global scope in
 	the search
@@ -1036,21 +1026,17 @@ public interface DDMStructureLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the structure matching the structure key, classNameId and group,
-	* replacing its old parent structure, name map, description map, and XSD
-	* with new ones.
+	* Updates the structure replacing its old parent structure, name map,
+	* description map, and XSD with new ones.
 	*
-	* @param groupId the primary key of the group
+	* @param structureId the primary key of the structure
 	* @param parentStructureId the primary key of the new parent structure
-	* @param classNameId the primary key of the class name for the structure's
-	related model
-	* @param structureKey unique string identifying the structure
 	* @param nameMap the structure's new locales and localized names
 	* @param descriptionMap the structure's new locales and localized
-	descriptions
+	description
 	* @param xsd the structure's new XML schema definition
 	* @param serviceContext the service context to be applied. Can set the
-	modification date
+	modification date.
 	* @return the updated structure
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
@@ -1066,17 +1052,18 @@ public interface DDMStructureLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the structure replacing its old parent structure, name map,
-	* description map, and XSD with new ones.
+	* Updates the structure matching the structure key and group, replacing its
+	* old parent structure, name map, description map, and XSD with new ones.
 	*
-	* @param structureId the primary key of the structure
+	* @param groupId the primary key of the group
 	* @param parentStructureId the primary key of the new parent structure
+	* @param structureKey unique string identifying the structure
 	* @param nameMap the structure's new locales and localized names
 	* @param descriptionMap the structure's new locales and localized
-	description
+	descriptions
 	* @param xsd the structure's new XML schema definition
 	* @param serviceContext the service context to be applied. Can set the
-	modification date.
+	modification date
 	* @return the updated structure
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
