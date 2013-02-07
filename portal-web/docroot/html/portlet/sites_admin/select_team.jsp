@@ -18,9 +18,9 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-String callback = ParamUtil.getString(request, "callback", "selectTeam");
 
 long groupId = ParamUtil.getLong(request, "groupId");
+String callback = ParamUtil.getString(request, "callback", "selectTeam");
 %>
 
 <liferay-ui:header

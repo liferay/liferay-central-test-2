@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/user_groups_admin/init.jsp" %>
 
 <%
-String target = ParamUtil.getString(request, "target");
 String callback = ParamUtil.getString(request, "callback", "selectUserGroup");
+String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

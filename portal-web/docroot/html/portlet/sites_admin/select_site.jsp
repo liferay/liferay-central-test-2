@@ -19,16 +19,16 @@
 <%
 boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
 boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPersonalSite");
-String target = ParamUtil.getString(request, "target");
 String callback = ParamUtil.getString(request, "callback", "selectGroup");
+String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/sites_admin/select_site");
 portletURL.setParameter("includeCompany", String.valueOf(includeCompany));
 portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPersonalSite));
-portletURL.setParameter("target", target);
 portletURL.setParameter("callback", callback);
+portletURL.setParameter("target", target);
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
