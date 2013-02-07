@@ -505,6 +505,7 @@ public class DDMStructureLocalServiceImpl
 		return ddmStructurePersistence.fetchByG_C_S(
 			groupId, classNameId, structureKey);
 	}
+
 	/**
 	 * Returns the structure matching the structure key and group, optionally in
 	 * the global scope.
