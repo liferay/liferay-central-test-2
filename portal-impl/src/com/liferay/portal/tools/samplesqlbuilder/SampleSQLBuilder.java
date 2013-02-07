@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -48,7 +47,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.SimpleCounter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -79,124 +77,124 @@ public class SampleSQLBuilder {
 
 		InitUtil.initWithSpring();
 
-		new SampleSQLBuilder(arguments);
-	}
-
-	public SampleSQLBuilder(Map<String, String> arguments) {
-
 		try {
-			String baseDir = arguments.get("sample.sql.base.dir");
-			_dbType = arguments.get("sample.sql.db.type");
-			_maxBlogsEntryCommentCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.blogs.entry.comment.count"));
-			_maxBlogsEntryCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.blogs.entry.count"));
-			_maxDDLRecordCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.ddl.record.count"));
-			_maxDDLRecordSetCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.ddl.record.set.count"));
-			_maxDLFileEntryCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.dl.file.entry.count"));
-			_maxDLFileEntrySize = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.dl.file.entry.size"));
-			_maxDLFolderCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.dl.folder.count"));
-			_maxDLFolderDepth = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.dl.folder.depth"));
-			_maxGroupCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.group.count"));
-			_maxJournalArticleCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.journal.article.count"));
-			int maxJournalArticleSize = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.journal.article.size"));
-			_maxMBCategoryCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.mb.category.count"));
-			_maxMBMessageCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.mb.message.count"));
-			_maxMBThreadCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.mb.thread.count"));
-			_maxUserCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.user.count"));
-			_maxUserToGroupCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.user.to.group.count"));
-			_maxWikiNodeCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.wiki.node.count"));
-			_maxWikiPageCommentCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.wiki.page.comment.count"));
-			_maxWikiPageCount = GetterUtil.getInteger(
-				arguments.get("sample.sql.max.wiki.page.count"));
-			_optimizeBufferSize = GetterUtil.getInteger(
-				arguments.get("sample.sql.optimize.buffer.size"));
-			_outputDir = arguments.get("sample.sql.output.dir");
-			_outputMerge = GetterUtil.getBoolean(
-				arguments.get("sample.sql.output.merge"));
-
-			_dataFactory = new DataFactory(
-				baseDir, _maxGroupCount, maxJournalArticleSize,
-				_maxUserToGroupCount, _maxMBCategoryCount, _maxMBThreadCount,
-				_maxMBMessageCount);
-
-			_db = DBFactoryUtil.getDB(_dbType);
-
-			if (_db instanceof MySQLDB) {
-				_db = new SampleMySQLDB();
-			}
-
-			// Clean up previous output
-
-			FileUtil.delete(_outputDir + "/sample-" + _dbType + ".sql");
-			FileUtil.deltree(_outputDir + "/output");
-
-			// Generic
-
-			_tempDir = new File(_outputDir, "temp");
-
-			_tempDir.mkdirs();
-
-			final CharPipe charPipe = new CharPipe(_PIPE_BUFFER_SIZE);
-
-			generateSQL(charPipe);
-
-			try {
-
-				// Specific
-
-				compressSQL(charPipe.getReader());
-
-				// Merge
-
-				mergeSQL();
-			}
-			finally {
-				FileUtil.deltree(_tempDir);
-			}
-
-			StringBundler sb = new StringBundler();
-
-			List<String> keys = ListUtil.fromMapKeys(arguments);
-
-			Collections.sort(keys);
-
-			for (String key : keys) {
-				if (!key.startsWith("sample.sql")) {
-					continue;
-				}
-
-				String value = arguments.get(key);
-
-				sb.append(key);
-				sb.append(StringPool.EQUAL);
-				sb.append(value);
-				sb.append(StringPool.NEW_LINE);
-			}
-
-			FileUtil.write(
-				new File(_outputDir, "benchmarks-actual.properties"),
-				sb.toString());
+			new SampleSQLBuilder(arguments);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public SampleSQLBuilder(Map<String, String> arguments) throws Exception {
+		String baseDir = arguments.get("sample.sql.base.dir");
+
+		_dbType = arguments.get("sample.sql.db.type");
+		_maxBlogsEntryCommentCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.blogs.entry.comment.count"));
+		_maxBlogsEntryCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.blogs.entry.count"));
+		_maxDDLRecordCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.ddl.record.count"));
+		_maxDDLRecordSetCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.ddl.record.set.count"));
+		_maxDLFileEntryCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.dl.file.entry.count"));
+		_maxDLFileEntrySize = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.dl.file.entry.size"));
+		_maxDLFolderCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.dl.folder.count"));
+		_maxDLFolderDepth = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.dl.folder.depth"));
+		_maxGroupCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.group.count"));
+		_maxJournalArticleCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.journal.article.count"));
+		_maxJournalArticleSize = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.journal.article.size"));
+		_maxMBCategoryCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.mb.category.count"));
+		_maxMBMessageCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.mb.message.count"));
+		_maxMBThreadCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.mb.thread.count"));
+		_maxUserCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.user.count"));
+		_maxUserToGroupCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.user.to.group.count"));
+		_maxWikiNodeCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.wiki.node.count"));
+		_maxWikiPageCommentCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.wiki.page.comment.count"));
+		_maxWikiPageCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.wiki.page.count"));
+		_optimizeBufferSize = GetterUtil.getInteger(
+			arguments.get("sample.sql.optimize.buffer.size"));
+		_outputDir = arguments.get("sample.sql.output.dir");
+		_outputMerge = GetterUtil.getBoolean(
+			arguments.get("sample.sql.output.merge"));
+
+		_dataFactory = new DataFactory(
+			baseDir, _maxGroupCount, _maxJournalArticleSize,
+			_maxMBCategoryCount, _maxMBThreadCount, _maxMBMessageCount,
+			_maxUserToGroupCount);
+
+		_db = DBFactoryUtil.getDB(_dbType);
+
+		if (_db instanceof MySQLDB) {
+			_db = new SampleMySQLDB();
+		}
+
+		// Clean up previous output
+
+		FileUtil.delete(_outputDir + "/sample-" + _dbType + ".sql");
+		FileUtil.deltree(_outputDir + "/output");
+
+		// Generic
+
+		_tempDir = new File(_outputDir, "temp");
+
+		_tempDir.mkdirs();
+
+		final CharPipe charPipe = new CharPipe(_PIPE_BUFFER_SIZE);
+
+		generateSQL(charPipe);
+
+		try {
+
+			// Specific
+
+			compressSQL(charPipe.getReader());
+
+			// Merge
+
+			mergeSQL();
+		}
+		finally {
+			FileUtil.deltree(_tempDir);
+		}
+
+		StringBundler sb = new StringBundler();
+
+		List<String> keys = ListUtil.fromMapKeys(arguments);
+
+		Collections.sort(keys);
+
+		for (String key : keys) {
+			if (!key.startsWith("sample.sql")) {
+				continue;
+			}
+
+			String value = arguments.get(key);
+
+			sb.append(key);
+			sb.append(StringPool.EQUAL);
+			sb.append(value);
+			sb.append(StringPool.NEW_LINE);
+		}
+
+		FileUtil.write(
+			new File(_outputDir, "benchmarks-actual.properties"),
+			sb.toString());
 	}
 
 	public void insertBlogsEntry(BlogsEntry blogsEntry) throws Exception {
@@ -477,17 +475,11 @@ public class SampleSQLBuilder {
 	protected Map<String, Object> getContext() {
 		Map<String, Object> context = new HashMap<String, Object>();
 
-		Company company = _dataFactory.getCompany();
-		User defaultUser = _dataFactory.getDefaultUser();
-		SimpleCounter counter = _dataFactory.getCounter();
-		SimpleCounter userScreenNameIncrementer =
-			_dataFactory.getUserScreenNameIncrementer();
-
-		put(context, "companyId", company.getCompanyId());
-		put(context, "counter", counter);
+		put(context, "companyId", _dataFactory.getCompanyId());
+		put(context, "counter", _dataFactory.getCounter());
 		put(context, "dataFactory", _dataFactory);
 		put(context, "dateUtil", DateUtil_IW.getInstance());
-		put(context, "defaultUserId", defaultUser.getCompanyId());
+		put(context, "defaultUserId", _dataFactory.getDefaultUserId());
 		put(context, "maxDLFileEntrySize", _maxDLFileEntrySize);
 		put(context, "maxBlogsEntryCommentCount", _maxBlogsEntryCommentCount);
 		put(context, "maxBlogsEntryCount", _maxBlogsEntryCount);
@@ -509,7 +501,9 @@ public class SampleSQLBuilder {
 		put(context, "portalUUIDUtil", SequentialUUID.getSequentialUUID());
 		put(context, "sampleSQLBuilder", this);
 		put(context, "stringUtil", StringUtil_IW.getInstance());
-		put(context, "userScreenNameIncrementer", userScreenNameIncrementer);
+		put(
+			context, "userScreenNameCounter",
+			_dataFactory.getUserScreenNameCounter());
 		put(context, "writerBlogsCSV", _writerBlogsCSV);
 		put(context, "writerCompanyCSV", _writerCompanyCSV);
 		put(context, "writerDocumentLibraryCSV", _writerDocumentLibraryCSV);
@@ -651,6 +645,7 @@ public class SampleSQLBuilder {
 	private int _maxDLFolderDepth;
 	private int _maxGroupCount;
 	private int _maxJournalArticleCount;
+	private int _maxJournalArticleSize;
 	private int _maxMBCategoryCount;
 	private int _maxMBMessageCount;
 	private int _maxMBThreadCount;
