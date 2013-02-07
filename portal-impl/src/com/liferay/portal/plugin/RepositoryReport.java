@@ -38,10 +38,12 @@ public class RepositoryReport implements Serializable {
 			sb.append(ppe.getMessage());
 		}
 
-		if ((ppe.getCause() != null) &&
-			Validator.isNotNull(ppe.getCause().getMessage())) {
+		if (ppe.getCause() != null) {
+			Throwable cause = ppe.getCause();
 
-			sb.append(ppe.getCause().getMessage());
+			if (Validator.isNotNull(cause.getMessage())) {
+				sb.append(cause.getMessage());
+			}
 		}
 
 		if (sb.index() == 0) {
