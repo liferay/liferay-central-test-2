@@ -67,13 +67,13 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			ObjectValuePair<String, InputStream> inputStreamOVP =
 				inputStreamOVPs.get(i);
 
-			InputStream is = inputStreamOVP.getValue();
+			InputStream inputStream = inputStreamOVP.getValue();
 			String fileName = inputStreamOVP.getKey();
 
 			File file = null;
 
 			try {
-				file = FileUtil.createTempFile(is);
+				file = FileUtil.createTempFile(inputStream);
 
 				String mimeType = MimeTypesUtil.getContentType(file, fileName);
 

@@ -40,6 +40,14 @@ import java.sql.Timestamp;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	protected void deleteTempDirectory() {
+		try {
+			DLStoreUtil.deleteDirectory(0, 0, "liferay_temp/");
+		}
+		catch (Exception e) {
+		}
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 
@@ -75,9 +83,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		// Temp Files
+		// Temp directory
 
-		updateTempFiles();
+		deleteTempDirectory();
 	}
 
 	protected String getUserName(long userId) throws Exception {
@@ -163,14 +171,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateTempFiles() {
-		try {
-			DLStoreUtil.deleteDirectory(0, 0, "liferay_temp/");
-		}
-		catch (Exception e) {
 		}
 	}
 

@@ -888,7 +888,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 				String extension = (String)image[0];
 
-				String mimeType = MimeTypesUtil.getContentTypeFromExtension(
+				String mimeType = MimeTypesUtil.getExtensionContentType(
 					extension);
 
 				String name = String.valueOf(

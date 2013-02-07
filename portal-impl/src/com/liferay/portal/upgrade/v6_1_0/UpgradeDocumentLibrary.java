@@ -174,7 +174,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long fileEntryId = rs.getLong("fileEntryId");
 				String extension = rs.getString("extension");
 
-				String mimeType = MimeTypesUtil.getContentTypeFromExtension(
+				String mimeType = MimeTypesUtil.getExtensionContentType(
 					extension);
 
 				runSQL(
@@ -280,7 +280,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String name = rs.getString("name");
 				String extension = rs.getString("extension");
 
-				String mimeType = MimeTypesUtil.getContentTypeFromExtension(
+				String mimeType = MimeTypesUtil.getExtensionContentType(
 					extension);
 
 				long fileEntryId = getFileEntryId(groupId, folderId, name);

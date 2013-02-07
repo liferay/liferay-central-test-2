@@ -68,7 +68,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 			file = FileUtil.createTempFile(bytes);
 		}
 
-		String mimeType = MimeTypesUtil.getContentTypeFromExtension("docx");
+		String mimeType = MimeTypesUtil.getExtensionContentType("docx");
 
 		WikiPageLocalServiceUtil.addPageAttachment(
 			TestPropsValues.getUserId(), page.getNodeId(), page.getTitle(),

@@ -97,7 +97,9 @@ public class TempFileUtil {
 		String[] fileEntryNames = new String[fileEntries.size()];
 
 		for (int i = 0; i < fileEntries.size(); i++) {
-			fileEntryNames[i] = fileEntries.get(i).getTitle();
+			FileEntry fileEntry = fileEntries.get(i);
+
+			fileEntryNames[i] = fileEntry.getTitle();
 		}
 
 		return fileEntryNames;

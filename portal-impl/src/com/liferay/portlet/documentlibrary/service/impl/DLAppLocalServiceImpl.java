@@ -248,7 +248,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String extension = DLAppUtil.getExtension(title, sourceFileName);
 
 			if (size == 0) {
-				mimeType = MimeTypesUtil.getContentTypeFromExtension(extension);
+				mimeType = MimeTypesUtil.getExtensionContentType(extension);
 			}
 			else {
 				File file = null;
@@ -1029,7 +1029,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String extension = DLAppUtil.getExtension(title, sourceFileName);
 
 			if (size == 0) {
-				mimeType = MimeTypesUtil.getContentTypeFromExtension(extension);
+				mimeType = MimeTypesUtil.getExtensionContentType(extension);
 			}
 			else {
 				File file = null;

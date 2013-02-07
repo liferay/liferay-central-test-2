@@ -294,12 +294,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				inputStreamOVPs.get(i);
 
 			String fileName = inputStreamOVP.getKey();
-			InputStream is = inputStreamOVP.getValue();
+			InputStream inputStream = inputStreamOVP.getValue();
 
 			File file = null;
 
 			try {
-				file = FileUtil.createTempFile(is);
+				file = FileUtil.createTempFile(inputStream);
 
 				String mimeType = MimeTypesUtil.getContentType(file, fileName);
 

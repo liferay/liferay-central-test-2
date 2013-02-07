@@ -297,7 +297,7 @@ public class EditCompanyLogoAction extends PortletAction {
 		byte[] bytes = ImageToolUtil.getBytes(
 			imageBag.getRenderedImage(), imageBag.getType());
 
-		String contentType = MimeTypesUtil.getContentTypeFromExtension(
+		String contentType = MimeTypesUtil.getExtensionContentType(
 			imageBag.getType());
 
 		mimeResponse.setContentType(contentType);

@@ -110,7 +110,7 @@ public class WikiAttachmentsTrashTest {
 			file = FileUtil.createTempFile(fileBytes);
 		}
 
-		String mimeType = MimeTypesUtil.getContentTypeFromExtension("docx");
+		String mimeType = MimeTypesUtil.getExtensionContentType("docx");
 
 		WikiPageLocalServiceUtil.addPageAttachment(
 			TestPropsValues.getUserId(), _node.getNodeId(), _page.getTitle(),

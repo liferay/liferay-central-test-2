@@ -248,7 +248,7 @@ public class JournalRSSUtil {
 
 		syndEnclosure.setLength((Long)imageProperties[1]);
 		syndEnclosure.setType(
-			MimeTypesUtil.getContentTypeFromExtension(
+			MimeTypesUtil.getExtensionContentType(
 				imageProperties[0].toString()));
 		syndEnclosure.setUrl(portalURL + url);
 
@@ -272,7 +272,7 @@ public class JournalRSSUtil {
 		syndLink.setLength((Long)imageProperties[1]);
 		syndLink.setRel("enclosure");
 		syndLink.setType(
-			MimeTypesUtil.getContentTypeFromExtension(
+			MimeTypesUtil.getExtensionContentType(
 				imageProperties[0].toString()));
 
 		syndLinks.add(syndLink);

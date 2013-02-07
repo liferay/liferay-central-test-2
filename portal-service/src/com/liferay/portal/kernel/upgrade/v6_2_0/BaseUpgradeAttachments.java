@@ -430,8 +430,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			String extension = FileUtil.getExtension(title);
 
-			String mimeType = MimeTypesUtil.getContentTypeFromExtension(
-				extension);
+			String mimeType = MimeTypesUtil.getExtensionContentType(extension);
 
 			long size = DLStoreUtil.getFileSize(
 				companyId, CompanyConstants.SYSTEM, attachment);

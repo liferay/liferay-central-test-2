@@ -64,8 +64,8 @@ public class MimeTypesUtil {
 		return getMimeTypes().getContentType(fileName);
 	}
 
-	public static String getContentTypeFromExtension(String extension) {
-		return getMimeTypes().getContentTypeFromExtension(extension);
+	public static String getExtensionContentType(String extension) {
+		return getMimeTypes().getExtensionContentType(extension);
 	}
 
 	/**
