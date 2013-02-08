@@ -107,6 +107,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 							new MembershipPolicyException(
 								MembershipPolicyException.
 									ROLE_MEMBERSHIP_NOT_ALLOWED);
+						
+						membershipPolicyException.addGroup(group);
 					}
 
 					if (!membershipPolicyException.getUsers().contains(user)) {
@@ -148,6 +150,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 							new MembershipPolicyException(
 								MembershipPolicyException.
 									ROLE_MEMBERSHIP_REQUIRED);
+						
+						membershipPolicyException.addGroup(group);
 					}
 
 					if (!membershipPolicyException.getUsers().contains(user)) {
