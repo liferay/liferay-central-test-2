@@ -48,11 +48,12 @@ import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandler;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetActionableDynamicQuery;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureActionableDynamicQuery;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplateActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -652,7 +653,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 		final Element structuresElement = rootElement.addElement("structures");
 
 		ActionableDynamicQuery structuresActionableDynamicQuery =
-			new DDLRecordSetActionableDynamicQuery() {
+			new DDMStructureActionableDynamicQuery() {
 
 				@Override
 				protected void addCriteria(DynamicQuery dynamicQuery) {
@@ -680,7 +681,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 		final Element templatesElement = rootElement.addElement("templates");
 
 		ActionableDynamicQuery templatesActionableDynamicQuery =
-			new DDLRecordSetActionableDynamicQuery() {
+			new DDMTemplateActionableDynamicQuery() {
 
 				@Override
 				protected void addCriteria(DynamicQuery dynamicQuery) {
