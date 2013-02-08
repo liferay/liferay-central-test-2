@@ -1844,19 +1844,19 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		if (groupIds != null) {
-			checkGroups(CompanyConstants.SYSTEM, groupIds);
+			checkGroups(0, groupIds);
 		}
 
 		if (organizationIds != null) {
-			checkOrganizations(CompanyConstants.SYSTEM, organizationIds);
+			checkOrganizations(0, organizationIds);
 		}
 
 		if (roleIds != null) {
-			checkRoles(CompanyConstants.SYSTEM, roleIds);
+			checkRoles(0, roleIds);
 		}
 
 		if (userGroupIds != null) {
-			checkUserGroupIds(CompanyConstants.SYSTEM, userGroupIds);
+			checkUserGroupIds(0, userGroupIds);
 		}
 
 		boolean anonymousUser = ParamUtil.getBoolean(
