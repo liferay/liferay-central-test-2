@@ -1742,10 +1742,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
+		MembershipPolicyException membershipPolicyException = null;
+
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
-
-		MembershipPolicyException membershipPolicyException = null;
 
 		for (long userId : userIds) {
 			User user = userLocalService.fetchUser(userId);
@@ -2180,10 +2180,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
+		MembershipPolicyException membershipPolicyException = null;
+
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
-
-		MembershipPolicyException membershipPolicyException = null;
 
 		for (long userId : userIds) {
 			User user = userLocalService.fetchUser(userId);
