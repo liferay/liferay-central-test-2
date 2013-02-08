@@ -40,7 +40,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		}
 
 		checkAddUserGroupRolesMembershipPolicy(
-			new long[]{userId}, groupId, roleIds);
+			new long[] {userId}, groupId, roleIds);
 
 		userGroupRoleLocalService.addUserGroupRoles(userId, groupId, roleIds);
 	}
@@ -52,7 +52,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			getPermissionChecker(), groupId, roleId);
 
 		checkAddUserGroupRolesMembershipPolicy(
-			userIds, groupId, new long[]{roleId});
+			userIds, groupId, new long[] {roleId});
 
 		userGroupRoleLocalService.addUserGroupRoles(userIds, groupId, roleId);
 	}
@@ -66,7 +66,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		}
 
 		checkDeleteUserGroupRolesMembershipPolicy(
-			new long[]{userId}, groupId, roleIds);
+			new long[] {userId}, groupId, roleIds);
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
 			userId, groupId, roleIds);
@@ -79,7 +79,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			getPermissionChecker(), groupId, roleId);
 
 		checkDeleteUserGroupRolesMembershipPolicy(
-			userIds, groupId, new long[]{roleId});
+			userIds, groupId, new long[] {roleId});
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
 			userIds, groupId, roleId);
