@@ -21,14 +21,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.dynamicdatamapping.TemplateDuplicateTemplateKeyException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
@@ -89,23 +87,6 @@ public class DDMTemplateStagedModelDataHandler
 		return newTemplate;
 	}
 
-	protected String getTemplateSmallImagePath(
-			PortletDataContext portletDataContext, DDMTemplate template)
-		throws Exception {
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(
-			portletDataContext.getPortletPath(
-				PortletKeys.DYNAMIC_DATA_MAPPING));
-		sb.append("/templates/thumbnail-");
-		sb.append(template.getTemplateId());
-		sb.append(StringPool.PERIOD);
-		sb.append(template.getSmallImageType());
-
-		return sb.toString();
-	}
-
 	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, Element[] elements,
@@ -147,8 +128,10 @@ public class DDMTemplateStagedModelDataHandler
 				template.setSmallImageURL(smallImageURL);
 			}
 			else if (smallImage != null) {
-				String smallImagePath = getTemplateSmallImagePath(
-					portletDataContext, template);
+				String smallImagePath = StagedModelPathUtil.getPath(
+					template,
+					smallImage.getImageId() + StringPool.PERIOD +
+						template.getSmallImageType());
 
 				templateElement.addAttribute(
 					"small-image-path", smallImagePath);
