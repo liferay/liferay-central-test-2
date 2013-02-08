@@ -1929,27 +1929,29 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		// and that the group membership is allowed
 
 		for (long groupId : groupIds) {
-			if ((oldGroupIds == null) ||
-				!ArrayUtil.contains(oldGroupIds, groupId)) {
+			if ((oldGroupIds != null) &&
+				ArrayUtil.contains(oldGroupIds, groupId)) {
 
-				Group group = groupPersistence.findByPrimaryKey(groupId);
-
-				GroupPermissionUtil.check(
-					permissionChecker, group, ActionKeys.ASSIGN_MEMBERS);
-
-				if (!MembershipPolicyUtil.isMembershipAllowed(group, user)) {
-					if (membershipPolicyException == null) {
-						membershipPolicyException =
-							new MembershipPolicyException(
-								MembershipPolicyException.
-									GROUP_MEMBERSHIP_NOT_ALLOWED);
-
-						membershipPolicyException.addUser(user);
-					}
-
-					membershipPolicyException.addGroup(group);
-				}
+				continue;
 			}
+
+			Group group = groupPersistence.findByPrimaryKey(groupId);
+
+			GroupPermissionUtil.check(
+				permissionChecker, group, ActionKeys.ASSIGN_MEMBERS);
+
+			if (MembershipPolicyUtil.isMembershipAllowed(group, user)) {
+				continue;
+			}
+
+			if (membershipPolicyException == null) {
+				membershipPolicyException = new MembershipPolicyException(
+					MembershipPolicyException.GROUP_MEMBERSHIP_NOT_ALLOWED);
+
+				membershipPolicyException.addUser(user);
+			}
+
+			membershipPolicyException.addGroup(group);
 		}
 
 		if (membershipPolicyException != null) {
@@ -2008,27 +2010,28 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			Organization organization =
 				organizationPersistence.findByPrimaryKey(organizationId);
 
-			if ((oldOrganizationIds == null) ||
-				!ArrayUtil.contains(oldOrganizationIds, organizationId)) {
+			if ((oldOrganizationIds != null) &&
+				ArrayUtil.contains(oldOrganizationIds, organizationId)) {
 
-				OrganizationPermissionUtil.check(
-					permissionChecker, organization, ActionKeys.ASSIGN_MEMBERS);
-
-				if (!MembershipPolicyUtil.isMembershipAllowed(
-						organization, user)) {
-
-					if (membershipPolicyException == null) {
-						membershipPolicyException =
-							new MembershipPolicyException(
-								MembershipPolicyException.
-									ORGANIZATION_MEMBERSHIP_NOT_ALLOWED);
-
-						membershipPolicyException.addUser(user);
-					}
-
-					membershipPolicyException.addOrganization(organization);
-				}
+				continue;
 			}
+
+			OrganizationPermissionUtil.check(
+				permissionChecker, organization, ActionKeys.ASSIGN_MEMBERS);
+
+			if (MembershipPolicyUtil.isMembershipAllowed(organization, user)) {
+				continue;
+			}
+
+			if (membershipPolicyException == null) {
+				membershipPolicyException = new MembershipPolicyException(
+					MembershipPolicyException.
+						ORGANIZATION_MEMBERSHIP_NOT_ALLOWED);
+
+				membershipPolicyException.addUser(user);
+			}
+
+			membershipPolicyException.addOrganization(organization);
 		}
 
 		if (membershipPolicyException != null) {
@@ -2081,27 +2084,29 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		// and that the role membership is allowed
 
 		for (long roleId : roleIds) {
-			if ((oldRoleIds == null) ||
-				!ArrayUtil.contains(oldRoleIds, roleId)) {
+			if ((oldRoleIds != null) &&
+				ArrayUtil.contains(oldRoleIds, roleId)) {
 
-				RolePermissionUtil.check(
-					permissionChecker, roleId, ActionKeys.ASSIGN_MEMBERS);
-
-				Role role = rolePersistence.findByPrimaryKey(roleId);
-
-				if (!MembershipPolicyUtil.isMembershipAllowed(role, user)) {
-					if (membershipPolicyException == null) {
-						membershipPolicyException =
-							new MembershipPolicyException(
-								MembershipPolicyException.
-									ROLE_MEMBERSHIP_NOT_ALLOWED);
-
-						membershipPolicyException.addUser(user);
-					}
-
-					membershipPolicyException.addRole(role);
-				}
+				continue;
 			}
+
+			RolePermissionUtil.check(
+				permissionChecker, roleId, ActionKeys.ASSIGN_MEMBERS);
+
+			Role role = rolePersistence.findByPrimaryKey(roleId);
+
+			if (MembershipPolicyUtil.isMembershipAllowed(role, user)) {
+				continue;
+			}
+
+			if (membershipPolicyException == null) {
+				membershipPolicyException = new MembershipPolicyException(
+					MembershipPolicyException.ROLE_MEMBERSHIP_NOT_ALLOWED);
+
+				membershipPolicyException.addUser(user);
+			}
+
+			membershipPolicyException.addRole(role);
 		}
 
 		if (membershipPolicyException != null) {
@@ -2273,8 +2278,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 			if (membershipPolicyException == null) {
 				membershipPolicyException = new MembershipPolicyException(
-					MembershipPolicyException.
-						USER_GROUP_MEMBERSHIP_REQUIRED);
+					MembershipPolicyException. USER_GROUP_MEMBERSHIP_REQUIRED);
 
 				membershipPolicyException.addUserGroup(userGroup);
 			}
