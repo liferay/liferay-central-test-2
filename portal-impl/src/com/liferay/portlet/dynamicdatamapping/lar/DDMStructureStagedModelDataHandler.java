@@ -47,7 +47,7 @@ public class DDMStructureStagedModelDataHandler
 		throws PortalException {
 
 		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(
-				structure.getDefaultLanguageId());
+			structure.getDefaultLanguageId());
 
 		Locale[] structureAvailableLocales = LocaleUtil.fromLanguageIds(
 			structure.getAvailableLanguageIds());
@@ -70,7 +70,7 @@ public class DDMStructureStagedModelDataHandler
 		Element structureElement = structuresElement.addElement("structure");
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-				structure.getCompanyId());
+			structure.getCompanyId());
 
 		if (defaultUserId == structure.getUserId()) {
 			structureElement.addAttribute("preloaded", "true");
