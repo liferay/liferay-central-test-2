@@ -43,22 +43,6 @@ public class DDMStructureStagedModelDataHandler
 		return DDMStructure.class.getName();
 	}
 
-	protected void prepareLanguagesForImport(DDMStructure structure)
-		throws PortalException {
-
-		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(
-			structure.getDefaultLanguageId());
-
-		Locale[] structureAvailableLocales = LocaleUtil.fromLanguageIds(
-			structure.getAvailableLanguageIds());
-
-		Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(
-			DDMStructure.class.getName(), structure.getPrimaryKey(),
-			structureDefaultLocale, structureAvailableLocales);
-
-		structure.prepareLocalizedFieldsForImport(defaultImportLocale);
-	}
-
 	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, Element[] elements,
@@ -151,6 +135,22 @@ public class DDMStructureStagedModelDataHandler
 
 		structureIds.put(
 			structure.getStructureId(), importedStructure.getStructureId());
+	}
+
+	protected void prepareLanguagesForImport(DDMStructure structure)
+		throws PortalException {
+
+		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(
+			structure.getDefaultLanguageId());
+
+		Locale[] structureAvailableLocales = LocaleUtil.fromLanguageIds(
+			structure.getAvailableLanguageIds());
+
+		Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(
+			DDMStructure.class.getName(), structure.getPrimaryKey(),
+			structureDefaultLocale, structureAvailableLocales);
+
+		structure.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
 
 }
