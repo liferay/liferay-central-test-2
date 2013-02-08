@@ -99,25 +99,25 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			for (long userId : userIds) {
 				User user = userPersistence.findByPrimaryKey(userId);
 
-				if (!MembershipPolicyUtil.isMembershipAllowed(
+				if (MembershipPolicyUtil.isMembershipAllowed(
 						role, user, group)) {
+					
+					continue;
+				}
 
-					if (membershipPolicyException == null) {
-						membershipPolicyException =
-							new MembershipPolicyException(
-								MembershipPolicyException.
-									ROLE_MEMBERSHIP_NOT_ALLOWED);
-						
-						membershipPolicyException.addGroup(group);
-					}
+				if (membershipPolicyException == null) {
+					membershipPolicyException = new MembershipPolicyException(
+						MembershipPolicyException.ROLE_MEMBERSHIP_NOT_ALLOWED);
 
-					if (!membershipPolicyException.getUsers().contains(user)) {
-						membershipPolicyException.addUser(user);
-					}
+					membershipPolicyException.addGroup(group);
+				}
 
-					if (!membershipPolicyException.getRoles().contains(role)) {
-						membershipPolicyException.addRole(role);
-					}
+				if (!membershipPolicyException.getUsers().contains(user)) {
+					membershipPolicyException.addUser(user);
+				}
+
+				if (!membershipPolicyException.getRoles().contains(role)) {
+					membershipPolicyException.addRole(role);
 				}
 			}
 		}
@@ -144,23 +144,23 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 				Set<Role> mandatoryRoles =
 					MembershipPolicyUtil.getMandatoryRoles(group, user);
 
-				if (mandatoryRoles.contains(role)) {
-					if (membershipPolicyException == null) {
-						membershipPolicyException =
-							new MembershipPolicyException(
-								MembershipPolicyException.
-									ROLE_MEMBERSHIP_REQUIRED);
-						
-						membershipPolicyException.addGroup(group);
-					}
+				if (!mandatoryRoles.contains(role)) {
+					continue;
+				}
 
-					if (!membershipPolicyException.getUsers().contains(user)) {
-						membershipPolicyException.addUser(user);
-					}
+				if (membershipPolicyException == null) {
+					membershipPolicyException = new MembershipPolicyException(
+						MembershipPolicyException.ROLE_MEMBERSHIP_REQUIRED);
 
-					if (!membershipPolicyException.getRoles().contains(role)) {
-						membershipPolicyException.addRole(role);
-					}
+					membershipPolicyException.addGroup(group);
+				}
+
+				if (!membershipPolicyException.getUsers().contains(user)) {
+					membershipPolicyException.addUser(user);
+				}
+
+				if (!membershipPolicyException.getRoles().contains(role)) {
+					membershipPolicyException.addRole(role);
 				}
 			}
 		}
