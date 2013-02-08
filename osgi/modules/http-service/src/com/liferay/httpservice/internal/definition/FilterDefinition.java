@@ -30,9 +30,9 @@ public class FilterDefinition {
 	public FilterDefinition(
 		String name, Filter filter, Dictionary<String, String> initParams) {
 
+		_name = name;
 		_filter = filter;
 		_initParams = initParams;
-		_name = name;
 	}
 
 	public Filter getFilter() {

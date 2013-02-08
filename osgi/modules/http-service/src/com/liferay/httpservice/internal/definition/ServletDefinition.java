@@ -30,9 +30,9 @@ public class ServletDefinition {
 	public ServletDefinition(
 		String name, Servlet servlet, Dictionary<Object, Object> initParams) {
 
-		_initParams = initParams;
 		_name = name;
 		_servlet = servlet;
+		_initParams = initParams;
 	}
 
 	public Dictionary<Object, Object> getInitParams() {
