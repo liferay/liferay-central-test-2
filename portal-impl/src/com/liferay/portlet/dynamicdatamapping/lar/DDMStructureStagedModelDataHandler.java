@@ -140,15 +140,15 @@ public class DDMStructureStagedModelDataHandler
 	protected void prepareLanguagesForImport(DDMStructure structure)
 		throws PortalException {
 
-		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(
+		Locale defaultLocale = LocaleUtil.fromLanguageId(
 			structure.getDefaultLanguageId());
 
-		Locale[] structureAvailableLocales = LocaleUtil.fromLanguageIds(
+		Locale[] availableLocales = LocaleUtil.fromLanguageIds(
 			structure.getAvailableLanguageIds());
 
 		Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(
 			DDMStructure.class.getName(), structure.getPrimaryKey(),
-			structureDefaultLocale, structureAvailableLocales);
+			defaultLocale, availableLocales);
 
 		structure.prepareLocalizedFieldsForImport(defaultImportLocale);
 	}
