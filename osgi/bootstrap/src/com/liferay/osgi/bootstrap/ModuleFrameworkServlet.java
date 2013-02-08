@@ -16,7 +16,6 @@ package com.liferay.osgi.bootstrap;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
 
@@ -50,9 +49,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 
 	@Override
 	public void destroy() {
-		super.destroy();
-
-		_httpServletTracker.close();
+		_serviceTracker.close();
 	}
 
 	@Override
@@ -67,22 +64,18 @@ public class ModuleFrameworkServlet extends HttpServlet
 
 		_bundleContext = framework.getBundleContext();
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append("(&(bean.id=");
-		sb.append(HttpServlet.class.getName());
-		sb.append(")(original.bean=*))");
-
 		try {
-			Filter filter = _bundleContext.createFilter(sb.toString());
+			Filter filter = _bundleContext.createFilter(
+				"(&(bean.id=" + HttpServlet.class.getName() +
+					")(original.bean=*))");
 
-			_httpServletTracker = new ServiceTracker<HttpServlet, HttpServlet>(
+			_serviceTracker = new ServiceTracker<HttpServlet, HttpServlet>(
 				_bundleContext, filter, this);
 
-			_httpServletTracker.open();
+			_serviceTracker.open();
 		}
-		catch (InvalidSyntaxException e) {
-			_log.error(e, e);
+		catch (InvalidSyntaxException ise) {
+			_log.error(ise, ise);
 		}
 	}
 
@@ -110,7 +103,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 		if (_httpServlet == null) {
 			response.sendError(
 				HttpServletResponse.SC_SERVICE_UNAVAILABLE,
-				"Framework unavailable or not configured");
+				"Module framework is unavailable");
 
 			return;
 		}
@@ -123,6 +116,6 @@ public class ModuleFrameworkServlet extends HttpServlet
 
 	private BundleContext _bundleContext;
 	private HttpServlet _httpServlet;
-	private ServiceTracker<HttpServlet, HttpServlet> _httpServletTracker;
+	private ServiceTracker<HttpServlet, HttpServlet> _serviceTracker;
 
 }
