@@ -370,6 +370,8 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 				long smallImageId = rs.getLong("smallImageId");
 				String smallImageURL = rs.getString("smallImageURL");
 
+				long ddmTemplateId = increment();
+
 				long classNameId = PortalUtil.getClassNameId(
 					DDMStructure.class.getName());
 
@@ -378,8 +380,6 @@ public class UpgradeJournal extends RenameUpgradePortletPreferences {
 				if (Validator.isNotNull(structureId)) {
 					classPK = _ddmStructureIds.get(groupId + "#" + structureId);
 				}
-
-				long ddmTemplateId = increment();
 
 				addDDMTemplate(
 					uuid_, ddmTemplateId, groupId, companyId, userId, userName,
