@@ -17,7 +17,7 @@
 			<then>
 				<ant dir="${project.dir}/osgi/bootstrap" target="jar" inheritall="false" />
 
-				<path id="this.classpath">
+				<path id="module.classpath">
 					<fileset dir="${project.dir}/osgi/bootstrap" includes="osgi-bootstrap.jar" />
 					<path refid="project.classpath" />
 				</path>
@@ -25,7 +25,7 @@
 				<mkdir dir="classes" />
 
 				<antcall target="compile-java" inheritrefs="true">
-					<param name="javac.classpathref" value="this.classpath" />
+					<param name="javac.classpathref" value="module.classpath" />
 					<param name="javac.destdir" value="classes" />
 					<param name="javac.srcdir" value="src" />
 				</antcall>
