@@ -2116,7 +2116,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		long[] unsetUserIds = new long[userIds.length];
 
-		List<User> oldUsers = userLocalService.getRoleUsers(roleId);
+		List<User> oldUsers = rolePersistence.getUsers(roleId);
 
 		for (int i = 0; i < oldUsers.size(); i++) {
 			User user = oldUsers.get(i);
@@ -2137,7 +2137,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		long[] unsetUserIds = new long[userIds.length];
 
-		List<User> oldUsers = userLocalService.getUserGroupUsers(userGroupId);
+		List<User> oldUsers = userGroupPersistence.getUsers(userGroupId);
 
 		for (int i = 0; i < oldUsers.size(); i++) {
 			User user = oldUsers.get(i);
