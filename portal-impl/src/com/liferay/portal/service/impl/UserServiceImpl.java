@@ -1897,8 +1897,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if (userId != CompanyConstants.SYSTEM) {
 
-			// Add back any groups that the administrator does not have the
-			// rights to remove or that have a mandatory membership
+			// Add back any mandatory groups or groups that the administrator
+			// does not have the rights to remove and check that he has the
+			// permission to add a new group
 
 			Set<Group> mandatoryGroups =
 				MembershipPolicyUtil.getMandatoryGroups(user);
@@ -1923,10 +1924,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		MembershipPolicyException membershipPolicyException = null;
-
 		// Check that the administrator has the permission to add a new group
 		// and that the group membership is allowed
+
+		MembershipPolicyException membershipPolicyException = null;
 
 		for (long groupId : groupIds) {
 			if ((oldGroupIds != null) &&
@@ -1972,8 +1973,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if (userId != CompanyConstants.SYSTEM) {
 
-			// Add back any organizations that the administrator does not have
-			// the rights to remove or that have a mandatory membership
+			// Add back any mandatory organizations or organizations that the
+			// administrator does not have the rights to remove and check that
+			// he has the permission to add a new organization
 
 			Set<Organization> mandatoryOrganizations =
 				MembershipPolicyUtil.getMandatoryOrganizations(user);
@@ -2001,10 +2003,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		MembershipPolicyException membershipPolicyException = null;
-
 		// Check that the administrator has the permission to add a new
 		// organization and that the organization membership is allowed
+
+		MembershipPolicyException membershipPolicyException = null;
 
 		for (long organizationId : organizationIds) {
 			if ((oldOrganizationIds != null) &&
@@ -2052,8 +2054,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if (userId != CompanyConstants.SYSTEM) {
 
-			// Add back any roles that the administrator does not have the
-			// rights to remove or that have a mandatory membership
+			// Add back any mandatory roles or roles that the administrator
+			// does not have the rights to remove and check that he has the
+			// permission to add a new role
 
 			Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(
 				user);
@@ -2078,10 +2081,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		MembershipPolicyException membershipPolicyException = null;
-
 		// Check that the administrator has the permission to add a new role
 		// and that the role membership is allowed
+
+		MembershipPolicyException membershipPolicyException = null;
 
 		for (long roleId : roleIds) {
 			if ((oldRoleIds != null) &&
