@@ -12,23 +12,18 @@
  * details.
  */
 
-package com.liferay.osgi.bootstrap.constants;
+package com.liferay.osgi.bootstrap;
 
 /**
  * @author Raymond Augé
  * @author Miguel Pastor
  */
-public interface ModuleFrameworkExtenderConstants {
-	public static final String EXTENDER_KEY_BUNDLE = "extender.bundle";
+public interface ServicePropsKeys {
 
-	public static final String EXTENDER_KEY_BUNDLE_ID = "extender.bundle.id";
+	public static final String BEAN_ID = "bean.id";
 
-	public static final String EXTENDER_KEY_BUNDLE_SYMBOLICNAME =
-		"extender.bundle.symbolicName";
+	public static final String ORIGINAL_BEAN = "original.bean";
 
-	public static final String EXTENDER_KEY_BUNDLE_VERSION =
-		"extender.bundle.version";
-
-	public static final String EXTENDER_PATH_MODULE = "o";
+	public static final String VENDOR = "service.vendor";
 
 }

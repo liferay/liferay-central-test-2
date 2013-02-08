@@ -12,16 +12,23 @@
  * details.
  */
 
-package com.liferay.osgi.bootstrap.constants;
+package com.liferay.osgi.bootstrap;
 
 /**
- * @author Raymond Augé
  * @author Miguel Pastor
+ * @author Raymond Augé
  */
-public interface ModuleFrameworkBundleConstants {
-	public static final String BUNDLE_MANIFEST_FILE_PATH =
-		"META-INF/MANIFEST.MF";
+public interface FrameworkPropsKeys {
 
-	public static final String BUNDLE_SYSTEM_GENERATED_FRAGMENT_PREFIX = "sfg_";
+	public static final String FELIX_FILEINSTALL_DIR = "felix.fileinstall.dir";
+
+	public static final String FELIX_FILEINSTALL_LOG_LEVEL =
+		"felix.fileinstall.log.level";
+
+	public static final String FELIX_FILEINSTALL_POLL =
+		"felix.fileinstall.poll";
+
+	public static final String FELIX_FILEINSTALL_TMPDIR =
+		"felix.fileinstall.tmpdir";
 
 }
