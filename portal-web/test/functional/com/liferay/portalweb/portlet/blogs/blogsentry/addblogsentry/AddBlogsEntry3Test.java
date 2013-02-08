@@ -36,6 +36,7 @@ public class AddBlogsEntry3Test extends BaseTestCase {
 		selenium.waitForVisible(
 			"//a[contains(@class,'cke_button cke_button__cut') and contains(@class,'cke_button_disabled')]");
 		selenium.waitForVisible("//iframe[contains(@title,'Rich Text Editor')]");
+		Thread.sleep(1000);
 		selenium.typeFrame("//iframe[contains(@title,'Rich Text Editor')]",
 			RuntimeVariables.replace("Blogs Entry3 Content"));
 		selenium.clickAt("//input[@value='Publish']",
