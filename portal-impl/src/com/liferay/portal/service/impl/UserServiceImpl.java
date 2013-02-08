@@ -1914,7 +1914,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					(!GroupPermissionUtil.contains(
 						permissionChecker, group.getGroupId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					mandatoryGroups.contains(group))) {
+					 mandatoryGroups.contains(group))) {
 
 					groupIds = ArrayUtil.append(groupIds, group.getGroupId());
 				}
@@ -1988,10 +1988,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (!ArrayUtil.contains(
 						organizationIds, organization.getOrganizationId()) &&
-					!OrganizationPermissionUtil.contains(
+					(!OrganizationPermissionUtil.contains(
 						permissionChecker, organization.getOrganizationId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					mandatoryOrganizations.contains(organization)) {
+					 mandatoryOrganizations.contains(organization))) {
 
 					organizationIds = ArrayUtil.append(
 						organizationIds, organization.getOrganizationId());
@@ -2069,7 +2069,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					(!RolePermissionUtil.contains(
 						permissionChecker, role.getRoleId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					mandatoryRoles.contains(role))) {
+					 mandatoryRoles.contains(role))) {
 
 					roleIds = ArrayUtil.append(roleIds, role.getRoleId());
 				}
