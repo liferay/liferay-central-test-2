@@ -448,7 +448,6 @@ public class DLFolderFinderImpl
 			sql = sb.toString();
 
 			sql = updateSQL(sql, folderId, includeMountFolders);
-
 			sql = CustomSQLUtil.replaceOrderBy(
 				sql, queryDefinition.getOrderByComparator());
 
