@@ -129,8 +129,6 @@ public class DDMTemplateStagedModelDataHandler
 			dlRepositoryEntriesElement = elements[6];
 		}
 
-		template = (DDMTemplate)template.clone();
-
 		Element templateElement = templatesElement.addElement("template");
 
 		if (template.isSmallImage()) {
