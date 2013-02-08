@@ -1751,7 +1751,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			organizationId);
 
 		for (long userId : userIds) {
-			User user = userLocalService.fetchUser(userId);
+			User user = userPersistence.findByPrimaryKey(userId);
 
 			if (MembershipPolicyUtil.isMembershipAllowed(organization, user)) {
 				continue;
