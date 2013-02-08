@@ -96,10 +96,10 @@ public class UserGroupRoleLocalServiceImpl
 			QueryUtil.ALL_POS);
 
 		for (Group group : groups) {
-			Set<Role> mandatoryGroupRoles =
-				MembershipPolicyUtil.getMandatoryRoles(group, user);
+			Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(
+				group, user);
 
-			for (Role role : mandatoryGroupRoles) {
+			for (Role role : mandatoryRoles) {
 				if (!hasUserGroupRole(
 						user.getUserId(), group.getGroupId(), role.getRoleId(),
 						false)) {
@@ -110,12 +110,12 @@ public class UserGroupRoleLocalServiceImpl
 				}
 			}
 
-			List<Role> userGroupRoles = roleLocalService.getUserGroupRoles(
+			List<Role> roles = roleLocalService.getUserGroupRoles(
 				user.getUserId(), group.getGroupId());
 
-			for (Role role : userGroupRoles) {
+			for (Role role : roles) {
 				if (!MembershipPolicyUtil.isMembershipAllowed(
-						role, user, group)) {
+						group, role, user)) {
 
 					deleteUserGroupRoles(
 						user.getUserId(), group.getGroupId(),
@@ -128,10 +128,10 @@ public class UserGroupRoleLocalServiceImpl
 			organizationLocalService.getUserOrganizations(user.getUserId());
 
 		for (Organization organization : organizations) {
-			Set<Role> mandatoryOrganizationRoles =
-				MembershipPolicyUtil.getMandatoryRoles(organization, user);
+			Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(
+				organization, user);
 
-			for (Role role : mandatoryOrganizationRoles) {
+			for (Role role : mandatoryRoles) {
 				if (!hasUserGroupRole(
 						user.getUserId(), organization.getGroupId(),
 						role.getRoleId(), false)) {
@@ -142,13 +142,12 @@ public class UserGroupRoleLocalServiceImpl
 				}
 			}
 
-			List<Role> userOrganizationRoles =
-				roleLocalService.getUserGroupRoles(
-					user.getUserId(), organization.getGroupId());
+			List<Role> roles = roleLocalService.getUserGroupRoles(
+				user.getUserId(), organization.getGroupId());
 
-			for (Role role : userOrganizationRoles) {
+			for (Role role : roles) {
 				if (!MembershipPolicyUtil.isMembershipAllowed(
-						role, user, organization)) {
+						organization, role, user)) {
 
 					deleteUserGroupRoles(
 						user.getUserId(), organization.getGroupId(),
