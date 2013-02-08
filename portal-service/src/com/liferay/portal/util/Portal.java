@@ -798,6 +798,8 @@ public interface Portal {
 
 	public String getPathMain();
 
+	public String getPathModule();
+
 	public String getPathProxy();
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
