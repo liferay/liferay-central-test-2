@@ -1943,6 +1943,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			GroupPermissionUtil.check(
 				permissionChecker, group, ActionKeys.ASSIGN_MEMBERS);
 
+			if (user == null) {
+				continue;
+			}
+
 			if (MembershipPolicyUtil.isMembershipAllowed(group, user)) {
 				continue;
 			}
@@ -2025,6 +2029,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			OrganizationPermissionUtil.check(
 				permissionChecker, organization, ActionKeys.ASSIGN_MEMBERS);
 
+			if (user == null) {
+				continue;
+			}
+
 			if (MembershipPolicyUtil.isMembershipAllowed(organization, user)) {
 				continue;
 			}
@@ -2103,6 +2111,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 			RolePermissionUtil.check(
 				permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS);
+
+			if (user == null) {
+				continue;
+			}
 
 			if (MembershipPolicyUtil.isMembershipAllowed(role, user)) {
 				continue;
