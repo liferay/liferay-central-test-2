@@ -2007,14 +2007,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		// organization and that the organization membership is allowed
 
 		for (long organizationId : organizationIds) {
-			Organization organization =
-				organizationPersistence.findByPrimaryKey(organizationId);
-
 			if ((oldOrganizationIds != null) &&
 				ArrayUtil.contains(oldOrganizationIds, organizationId)) {
 
 				continue;
 			}
+
+			Organization organization =
+				organizationPersistence.findByPrimaryKey(organizationId);
 
 			OrganizationPermissionUtil.check(
 				permissionChecker, organization, ActionKeys.ASSIGN_MEMBERS);
@@ -2090,10 +2090,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				continue;
 			}
 
-			RolePermissionUtil.check(
-				permissionChecker, roleId, ActionKeys.ASSIGN_MEMBERS);
-
 			Role role = rolePersistence.findByPrimaryKey(roleId);
+
+			RolePermissionUtil.check(
+				permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS);
 
 			if (MembershipPolicyUtil.isMembershipAllowed(role, user)) {
 				continue;
