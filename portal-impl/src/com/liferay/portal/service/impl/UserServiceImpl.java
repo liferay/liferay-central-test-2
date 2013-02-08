@@ -1742,7 +1742,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
-		Organization organization = organizationLocalService.fetchOrganization(
+		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
 
 		MembershipPolicyException membershipPolicyException = null;
@@ -2180,7 +2180,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
-		Organization organization = organizationLocalService.fetchOrganization(
+		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
 
 		MembershipPolicyException membershipPolicyException = null;
