@@ -61,6 +61,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -2114,19 +2115,18 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
-		long[] unsetUserIds = new long[userIds.length];
+		List<Long> unsetUserIds = new ArrayList<Long>(userIds.length);
 
-		List<User> oldUsers = rolePersistence.getUsers(roleId);
+		List<User> users = rolePersistence.getUsers(roleId);
 
-		for (int i = 0; i < oldUsers.size(); i++) {
-			User user = oldUsers.get(i);
-
+		for (User user : users) {
 			if (!ArrayUtil.contains(userIds, user.getUserId())) {
-				unsetUserIds[i] = user.getUserId();
+				unsetUserIds.add(user.getUserId());
 			}
 		}
 
-		checkUnsetRoleUsersMembershipPolicy(roleId, unsetUserIds);
+		checkUnsetRoleUsersMembershipPolicy(
+			roleId, ArrayUtil.toLongArray(unsetUserIds));
 
 		checkAddRoleUsersMembershipPolicy(roleId, userIds);
 	}
@@ -2135,19 +2135,18 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
-		long[] unsetUserIds = new long[userIds.length];
+		List<Long> unsetUserIds = new ArrayList<Long>(userIds.length);
 
-		List<User> oldUsers = userGroupPersistence.getUsers(userGroupId);
+		List<User> users = userGroupPersistence.getUsers(userGroupId);
 
-		for (int i = 0; i < oldUsers.size(); i++) {
-			User user = oldUsers.get(i);
-
+		for (User user : users) {
 			if (!ArrayUtil.contains(userIds, user.getUserId())) {
-				unsetUserIds[i] = user.getUserId();
+				unsetUserIds.add(user.getUserId());
 			}
 		}
 
-		checkUnsetUserGroupUsersMembershipPolicy(userGroupId, unsetUserIds);
+		checkUnsetUserGroupUsersMembershipPolicy(
+			userGroupId, ArrayUtil.toLongArray(unsetUserIds));
 
 		checkAddUserGroupUsersMembershipPolicy(userGroupId, userIds);
 	}
