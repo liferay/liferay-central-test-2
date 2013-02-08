@@ -80,7 +80,17 @@ public class DefaultMembershipPolicy implements MembershipPolicy {
 		return false;
 	}
 
+	public boolean isMembershipAllowed(Group group, Role role, User user) {
+		return true;
+	}
+
 	public boolean isMembershipAllowed(Group group, User user) {
+		return true;
+	}
+
+	public boolean isMembershipAllowed(
+		Organization organization, Role role, User user) {
+
 		return true;
 	}
 
@@ -89,16 +99,6 @@ public class DefaultMembershipPolicy implements MembershipPolicy {
 	}
 
 	public boolean isMembershipAllowed(Role role, User user) {
-		return true;
-	}
-
-	public boolean isMembershipAllowed(Role role, User user, Group group) {
-		return true;
-	}
-
-	public boolean isMembershipAllowed(
-		Role role, User user, Organization organization) {
-
 		return true;
 	}
 

@@ -53,16 +53,16 @@ public interface MembershipPolicy {
 
 	public boolean isApplicableUser(User user);
 
+	public boolean isMembershipAllowed(Group group, Role role, User user);
+
 	public boolean isMembershipAllowed(Group group, User user);
+
+	public boolean isMembershipAllowed(
+		Organization organization, Role role, User user);
 
 	public boolean isMembershipAllowed(Organization organization, User user);
 
 	public boolean isMembershipAllowed(Role role, User user);
-
-	public boolean isMembershipAllowed(Role role, User user, Group group);
-
-	public boolean isMembershipAllowed(
-		Role role, User user, Organization organization);
 
 	public boolean isMembershipAllowed(UserGroup userGroup, User user);
 

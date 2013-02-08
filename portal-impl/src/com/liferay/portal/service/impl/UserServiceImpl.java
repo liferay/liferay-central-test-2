@@ -2426,7 +2426,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (role.getType() == RoleConstants.TYPE_SITE) {
 					if (!MembershipPolicyUtil.isMembershipAllowed(
-							role, user, userGroupRole.getGroup())) {
+							userGroupRole.getGroup(), role, user)) {
 
 						if (membershipPolicyException == null) {
 							membershipPolicyException =
@@ -2452,7 +2452,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 							organizationId);
 
 					if (!MembershipPolicyUtil.isMembershipAllowed(
-							role, user, organization)) {
+							organization, role, user)) {
 
 						if (membershipPolicyException == null) {
 							membershipPolicyException =

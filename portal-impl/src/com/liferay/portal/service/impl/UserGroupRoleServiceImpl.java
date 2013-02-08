@@ -100,8 +100,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 				User user = userPersistence.findByPrimaryKey(userId);
 
 				if (MembershipPolicyUtil.isMembershipAllowed(
-						role, user, group)) {
-					
+						group, role, user)) {
+
 					continue;
 				}
 

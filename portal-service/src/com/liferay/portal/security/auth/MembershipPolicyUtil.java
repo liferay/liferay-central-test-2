@@ -121,11 +121,29 @@ public class MembershipPolicyUtil {
 		return membershipPolicy.isApplicableUser(user);
 	}
 
+	public static boolean isMembershipAllowed(
+		Group group, Role role, User user) {
+
+		MembershipPolicy membershipPolicy =
+			MembershipPolicyFactoryUtil.getMembershipPolicy();
+
+		return membershipPolicy.isMembershipAllowed(group, role, user);
+	}
+
 	public static boolean isMembershipAllowed(Group group, User user) {
 		MembershipPolicy membershipPolicy =
 			MembershipPolicyFactoryUtil.getMembershipPolicy();
 
 		return membershipPolicy.isMembershipAllowed(group, user);
+	}
+
+	public static boolean isMembershipAllowed(
+		Organization organization, Role role, User user) {
+
+		MembershipPolicy membershipPolicy =
+			MembershipPolicyFactoryUtil.getMembershipPolicy();
+
+		return membershipPolicy.isMembershipAllowed(organization, role, user);
 	}
 
 	public static boolean isMembershipAllowed(
@@ -142,23 +160,6 @@ public class MembershipPolicyUtil {
 			MembershipPolicyFactoryUtil.getMembershipPolicy();
 
 		return membershipPolicy.isMembershipAllowed(role, user);
-	}
-
-	public static boolean isMembershipAllowed(
-		Role role, User user, Group group) {
-
-		MembershipPolicy membershipPolicy =
-			MembershipPolicyFactoryUtil.getMembershipPolicy();
-
-		return membershipPolicy.isMembershipAllowed(role, user, group);
-	}
-
-	public static boolean isMembershipAllowed(
-		Role role, User user, Organization organization) {
-		MembershipPolicy membershipPolicy =
-			MembershipPolicyFactoryUtil.getMembershipPolicy();
-
-		return membershipPolicy.isMembershipAllowed(role, user, organization);
 	}
 
 	public static boolean isMembershipAllowed(UserGroup userGroup, User user) {
