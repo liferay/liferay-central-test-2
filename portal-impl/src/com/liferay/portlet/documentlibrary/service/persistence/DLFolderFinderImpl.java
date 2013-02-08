@@ -754,26 +754,25 @@ public class DLFolderFinderImpl
 	protected String updateSQL(
 		String sql, long folderId, boolean includeMountFolders) {
 
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$FILE_ENTRY_FOLDER_ID$]", "[$FILE_SHORTCUT_FOLDER_ID$]",
+				"[$FILE_VERSION_FOLDER_ID$]", "[$FOLDER_PARENT_FOLDER_ID$]"
+			},
+			new String[] {
+				getFolderId(folderId, "DLFileEntry"),
+				getFolderId(folderId, "DLFileVersion"),
+				getFolderId(folderId, "DLFileShortcut"),
+				getFolderId(folderId, "DLFolder")
+			});
+
 		if (includeMountFolders) {
 			sql = StringUtil.replace(
 				sql, "(DLFolder.mountPoint = ?) AND", StringPool.BLANK);
 		}
 
-		sql = StringUtil.replace(
-			sql, "[$FOLDER_PARENT_FOLDER_ID$]",
-			getFolderId(folderId, "DLFolder"));
-
-		sql = StringUtil.replace(
-			sql, "[$FILE_ENTRY_FOLDER_ID$]",
-			getFolderId(folderId, "DLFileEntry"));
-
-		sql = StringUtil.replace(
-			sql, "[$FILE_VERSION_FOLDER_ID$]",
-			getFolderId(folderId, "DLFileVersion"));
-
-		return StringUtil.replace(
-			sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-			getFolderId(folderId, "DLFileShortcut"));
+		return sql;
 	}
 
 }
