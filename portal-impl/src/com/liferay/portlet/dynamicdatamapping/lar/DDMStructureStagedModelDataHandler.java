@@ -43,7 +43,7 @@ public class DDMStructureStagedModelDataHandler
 		return DDMStructure.class.getName();
 	}
 
-	protected static void prepareLanguagesForImport(DDMStructure structure)
+	protected void prepareLanguagesForImport(DDMStructure structure)
 		throws PortalException {
 
 		Locale structureDefaultLocale = LocaleUtil.fromLanguageId(

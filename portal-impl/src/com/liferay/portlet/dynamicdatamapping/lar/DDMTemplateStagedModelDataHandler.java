@@ -52,7 +52,7 @@ public class DDMTemplateStagedModelDataHandler
 		return DDMTemplate.class.getName();
 	}
 
-	protected static DDMTemplate addTemplate(
+	protected DDMTemplate addTemplate(
 			long userId, long groupId, DDMTemplate template, long classPK,
 			File smallFile, ServiceContext serviceContext)
 		throws Exception {
@@ -89,7 +89,7 @@ public class DDMTemplateStagedModelDataHandler
 		return newTemplate;
 	}
 
-	protected static String getTemplateSmallImagePath(
+	protected String getTemplateSmallImagePath(
 			PortletDataContext portletDataContext, DDMTemplate template)
 		throws Exception {
 
