@@ -652,7 +652,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 
 		final Element structuresElement = rootElement.addElement("structures");
 
-		ActionableDynamicQuery structuresActionableDynamicQuery =
+		ActionableDynamicQuery structureActionableDynamicQuery =
 			new DDMStructureActionableDynamicQuery() {
 
 				@Override
@@ -673,14 +673,14 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 
 		};
 
-		structuresActionableDynamicQuery.setGroupId(
+		structureActionableDynamicQuery.setGroupId(
 			portletDataContext.getScopeGroupId());
 
-		structuresActionableDynamicQuery.performActions();
+		structureActionableDynamicQuery.performActions();
 
 		final Element templatesElement = rootElement.addElement("templates");
 
-		ActionableDynamicQuery templatesActionableDynamicQuery =
+		ActionableDynamicQuery templateActionableDynamicQuery =
 			new DDMTemplateActionableDynamicQuery() {
 
 				@Override
@@ -701,10 +701,10 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 
 		};
 
-		templatesActionableDynamicQuery.setGroupId(
+		templateActionableDynamicQuery.setGroupId(
 			portletDataContext.getScopeGroupId());
 
-		templatesActionableDynamicQuery.performActions();
+		templateActionableDynamicQuery.performActions();
 
 		return rootElement.formattedString();
 	}
