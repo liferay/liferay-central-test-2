@@ -1848,13 +1848,13 @@ public class PortletImporter {
 			long companyGroupId, long plid)
 		throws Exception {
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
 		String[] oldValues = jxPreferences.getValues(key, null);
 
 		if (oldValues == null) {
 			return;
 		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 		String companyGroupScopeId =
 			AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX + companyGroupId;
@@ -1867,12 +1867,10 @@ public class PortletImporter {
 			String newValue = StringUtil.replace(
 				oldValue, "[$COMPANY_GROUP_SCOPE_ID$]", companyGroupScopeId);
 
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
 			if (!oldValue.equals("false") && !oldValue.equals("true") &&
 				!AssetPublisherUtil.isScopeIdSelectable(
-					permissionChecker, newValue, companyGroupId, layout)) {
+					PermissionThreadLocal.getPermissionChecker(), newValue,
+					companyGroupId, layout)) {
 
 				continue;
 			}

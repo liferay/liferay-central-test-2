@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -92,7 +93,6 @@ public class AssetPublisherExportImportTest extends BaseExportImportTestCase {
 
 		preferenceMap.put(
 			"defaultScope", new String[] {Boolean.FALSE.toString()});
-
 		preferenceMap.put(
 			"scopeIds",
 			new String[] {
@@ -108,7 +108,7 @@ public class AssetPublisherExportImportTest extends BaseExportImportTestCase {
 			portletPreferences.getValue("defaultScope", null));
 		Assert.assertEquals(null, portletPreferences.getValue("scopeId", null));
 		Assert.assertTrue(
-			"The child groupId should have been filtered out on import",
+			"The child group ID should have been filtered out on import",
 			Validator.isNull(portletPreferences.getValues("scopeIds", null)));
 	}
 
@@ -249,13 +249,20 @@ public class AssetPublisherExportImportTest extends BaseExportImportTestCase {
 			Boolean.FALSE.toString(),
 			portletPreferences.getValue("defaultScope", null));
 		Assert.assertEquals(null, portletPreferences.getValue("scopeId", null));
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX);
+		sb.append(companyGroup.getGroupId());
+		sb.append(StringPool.COMMA);
+		sb.append(AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX);
+		sb.append(_importedLayout.getUuid());
+		sb.append(StringPool.COMMA);
+		sb.append(AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX);
+		sb.append(importedSecondLayout.getUuid());
+
 		Assert.assertEquals(
-			AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-				companyGroup.getGroupId() + StringPool.COMMA +
-					AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX +
-						_importedLayout.getUuid() + StringPool.COMMA +
-							AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX +
-								importedSecondLayout.getUuid(),
+			sb.toString(),
 			StringUtil.merge(portletPreferences.getValues("scopeIds", null)));
 	}
 
@@ -293,11 +300,17 @@ public class AssetPublisherExportImportTest extends BaseExportImportTestCase {
 			Boolean.FALSE.toString(),
 			portletPreferences.getValue("defaultScope", null));
 		Assert.assertEquals(null, portletPreferences.getValue("scopeId", null));
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX);
+		sb.append(_importedLayout.getUuid());
+		sb.append(StringPool.COMMA);
+		sb.append(AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX);
+		sb.append(importedSecondLayout.getUuid());
+
 		Assert.assertEquals(
-			AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX +
-				_importedLayout.getUuid() + StringPool.COMMA +
-					AssetPublisherUtil.SCOPE_ID_LAYOUT_UUID_PREFIX +
-						importedSecondLayout.getUuid(),
+			sb.toString(),
 			StringUtil.merge(portletPreferences.getValues("scopeIds", null)));
 	}
 

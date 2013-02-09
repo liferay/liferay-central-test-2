@@ -699,14 +699,12 @@ public class AssetPublisherUtil {
 				scopeIdGroup = scopeIdLayout.getScopeGroup();
 			}
 			else {
-				long userId = PrincipalThreadLocal.getUserId();
-
-				String name = String.valueOf(scopeIdLayout.getPlid());
-
 				scopeIdGroup = GroupLocalServiceUtil.addGroup(
-					userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
+					PrincipalThreadLocal.getUserId(),
+					GroupConstants.DEFAULT_PARENT_GROUP_ID,
 					Layout.class.getName(), scopeIdLayout.getPlid(),
-					GroupConstants.DEFAULT_LIVE_GROUP_ID, name, null, 0, null,
+					GroupConstants.DEFAULT_LIVE_GROUP_ID,
+					String.valueOf(scopeIdLayout.getPlid()), null, 0, null,
 					false, true, null);
 			}
 
