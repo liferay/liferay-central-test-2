@@ -15,20 +15,10 @@
 package com.liferay.portlet.social.model.impl;
 
 /**
- * The extended model implementation for the SocialActivitySet service. Represents a row in the &quot;SocialActivitySet&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.social.model.SocialActivitySet} interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 public class SocialActivitySetImpl extends SocialActivitySetBaseImpl {
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a social activity set model instance should use the {@link com.liferay.portlet.social.model.SocialActivitySet} interface instead.
-	 */
+
 	public SocialActivitySetImpl() {
 	}
 

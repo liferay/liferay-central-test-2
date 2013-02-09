@@ -21,78 +21,47 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivitySet;
 import com.liferay.portlet.social.service.base.SocialActivitySetLocalServiceBaseImpl;
 
-import java.util.List;
-
 /**
  * @author Matthew Kong
  */
 public class SocialActivitySetLocalServiceImpl
-		extends SocialActivitySetLocalServiceBaseImpl {
+	extends SocialActivitySetLocalServiceBaseImpl {
 
-	public void addActivitySet(
-			long userId, long groupId, String className, long classPK, int type,
-			SocialActivity activity)
+	public SocialActivitySet addActivitySet(
+			long userId, long activityId, String className, long classPK,
+			int type)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
+		// Activity set
 
-		long createDate = activity.getCreateDate();
+		User user = userPersistence.findByPrimaryKey(userId);
+		SocialActivity activity = socialActivityPersistence.findByPrimaryKey(
+			activityId);
 
 		long activitySetId = counterLocalService.increment();
 
 		SocialActivitySet activitySet = socialActivitySetPersistence.create(
 			activitySetId);
 
-		activitySet.setGroupId(groupId);
+		activitySet.setGroupId(activity.getGroupId());
 		activitySet.setCompanyId(user.getCompanyId());
 		activitySet.setUserId(userId);
-		activitySet.setCreateDate(createDate);
-		activitySet.setModifiedDate(createDate);
+		activitySet.setCreateDate(activity.getCreateDate());
+		activitySet.setModifiedDate(activity.getCreateDate());
 		activitySet.setClassName(className);
 		activitySet.setClassPK(classPK);
 		activitySet.setType(type);
 		activitySet.setActivityCount(1);
 
-		socialActivitySetLocalService.addSocialActivitySet(activitySet);
+		socialActivitySetPersistence.update(activitySet);
+
+		// Activity
 
 		activity.setActivitySetId(activitySetId);
 
-		socialActivityLocalService.updateSocialActivity(activity);
-	}
+		socialActivityPersistence.update(activity);
 
-	public List<SocialActivitySet> getActivitySets(
-			long classNameId, long classPK, int start, int end)
-		throws SystemException {
-
-		return socialActivitySetPersistence.findByC_C(
-			classNameId, classPK, start, end);
-	}
-
-	public List<SocialActivitySet> getActivitySets(
-			long groupId, long userId, long classNameId, int type, int start,
-			int end)
-		throws SystemException {
-
-		return socialActivitySetPersistence.findByG_U_C_T(
-			groupId, userId, classNameId, type, start, end);
-	}
-
-	public List<SocialActivitySet> getActivitySets(
-			long groupId, long userId, long classNameId, long classPK,
-			int start, int end)
-		throws SystemException {
-
-		return socialActivitySetPersistence.findByG_U_C_C(
-			groupId, userId, classNameId, classPK, start, end);
-	}
-
-	public List<SocialActivitySet> getActivitySets(
-			long groupId, long userId, long classNameId, long classPK, int type,
-			int start, int end)
-		throws SystemException {
-
-		return socialActivitySetPersistence.findByG_U_C_C_T(
-			groupId, userId, classNameId, classPK, type, start, end);
+		return activitySet;
 	}
 
 }
