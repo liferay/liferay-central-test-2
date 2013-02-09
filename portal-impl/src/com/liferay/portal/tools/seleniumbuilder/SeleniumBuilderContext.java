@@ -50,6 +50,8 @@ public class SeleniumBuilderContext {
 			fileName = _normalizeFileName(fileName);
 
 			if (fileName.endsWith(".action")) {
+				_actionFileNames.add(fileName);
+
 				String actionName = _getName(fileName);
 
 				if (_actionNames.contains(actionName)) {
@@ -57,13 +59,15 @@ public class SeleniumBuilderContext {
 						"Duplicate name " + actionName + " at " + fileName);
 				}
 
-				_actionFileNames.add(fileName);
-
 				_actionNames.add(actionName);
 
 				_actionRootElements.put(fileName, _getRootElement(fileName));
 			}
 			else if (fileName.endsWith(".function")) {
+				_functionClassNames.add(_getClassName(fileName));
+
+				_functionFileNames.add(fileName);
+
 				String functionName = _getName(fileName);
 
 				if (_functionNames.contains(functionName)) {
@@ -71,15 +75,15 @@ public class SeleniumBuilderContext {
 						"Duplicate name " + functionName + " at " + fileName);
 				}
 
-				_functionClassNames.add(_getClassName(fileName));
-
-				_functionFileNames.add(fileName);
-
 				_functionNames.add(functionName);
 
 				_functionRootElements.put(fileName, _getRootElement(fileName));
 			}
 			else if (fileName.endsWith(".macro")) {
+				_macroClassNames.add(_getClassName(fileName));
+
+				_macroFileNames.add(fileName);
+
 				String macroName = _getName(fileName);
 
 				if (_macroNames.contains(macroName)) {
@@ -87,15 +91,17 @@ public class SeleniumBuilderContext {
 						"Duplicate name " + macroName + " at " + fileName);
 				}
 
-				_macroClassNames.add(_getClassName(fileName));
-
-				_macroFileNames.add(fileName);
-
 				_macroNames.add(macroName);
 
 				_macroRootElements.put(fileName, _getRootElement(fileName));
 			}
 			else if (fileName.endsWith(".path")) {
+				_actionClassNames.add(_getClassName(fileName, "Action"));
+
+				_pathClassNames.add(_getClassName(fileName));
+
+				_pathFileNames.add(fileName);
+
 				String pathName = _getName(fileName);
 
 				if (_pathNames.contains(pathName)) {
@@ -103,17 +109,15 @@ public class SeleniumBuilderContext {
 						"Duplicate name " + pathName + " at " + fileName);
 				}
 
-				_actionClassNames.add(_getClassName(fileName, "Action"));
-
-				_pathClassNames.add(_getClassName(fileName));
-
-				_pathFileNames.add(fileName);
-
 				_pathNames.add(pathName);
 
 				_pathRootElements.put(fileName, _getRootElement(fileName));
 			}
 			else if (fileName.endsWith(".testcase")) {
+				_testCaseClassNames.add(_getClassName(fileName));
+
+				_testCaseFileNames.add(fileName);
+
 				String testCaseName = _getName(fileName);
 
 				if (_testCaseNames.contains(testCaseName)) {
@@ -121,25 +125,21 @@ public class SeleniumBuilderContext {
 						"Duplicate name " + testCaseName + " at " + fileName);
 				}
 
-				_testCaseClassNames.add(_getClassName(fileName));
-
-				_testCaseFileNames.add(fileName);
-
 				_testCaseNames.add(testCaseName);
 
 				_testCaseRootElements.put(fileName, _getRootElement(fileName));
 			}
 			else if (fileName.endsWith(".testsuite")) {
+				_testSuiteClassNames.add(_getClassName(fileName));
+
+				_testSuiteFileNames.add(fileName);
+
 				String testSuiteName = _getName(fileName);
 
 				if (_testSuiteNames.contains(testSuiteName)) {
 					throw new Exception(
 						"Duplicate name " + testSuiteName + " at " + fileName);
 				}
-
-				_testSuiteClassNames.add(_getClassName(fileName));
-
-				_testSuiteFileNames.add(fileName);
 
 				_testSuiteNames.add(testSuiteName);
 
