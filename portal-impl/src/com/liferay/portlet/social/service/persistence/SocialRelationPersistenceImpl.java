@@ -42,7 +42,6 @@ import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.impl.SocialRelationImpl;
 import com.liferay.portlet.social.model.impl.SocialRelationModelImpl;
-import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
 
 import java.io.Serializable;
 

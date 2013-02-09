@@ -230,30 +230,9 @@ public interface SocialActivitySetLocalService extends BaseLocalService,
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public void addActivitySet(long userId, long groupId,
-		java.lang.String className, long classPK, int type,
-		com.liferay.portlet.social.model.SocialActivity activity)
+	public com.liferay.portlet.social.model.SocialActivitySet addActivitySet(
+		long userId, long activityId, java.lang.String className, long classPK,
+		int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long classNameId, long classPK, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, int type, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, long classPK, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
 }

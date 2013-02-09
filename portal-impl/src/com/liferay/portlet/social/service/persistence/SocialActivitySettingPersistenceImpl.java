@@ -41,7 +41,6 @@ import com.liferay.portlet.social.NoSuchActivitySettingException;
 import com.liferay.portlet.social.model.SocialActivitySetting;
 import com.liferay.portlet.social.model.impl.SocialActivitySettingImpl;
 import com.liferay.portlet.social.model.impl.SocialActivitySettingModelImpl;
-import com.liferay.portlet.social.service.persistence.SocialActivitySettingPersistence;
 
 import java.io.Serializable;
 

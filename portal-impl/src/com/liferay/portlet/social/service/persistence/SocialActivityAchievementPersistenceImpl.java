@@ -41,7 +41,6 @@ import com.liferay.portlet.social.NoSuchActivityAchievementException;
 import com.liferay.portlet.social.model.SocialActivityAchievement;
 import com.liferay.portlet.social.model.impl.SocialActivityAchievementImpl;
 import com.liferay.portlet.social.model.impl.SocialActivityAchievementModelImpl;
-import com.liferay.portlet.social.service.persistence.SocialActivityAchievementPersistence;
 
 import java.io.Serializable;
 

@@ -252,44 +252,13 @@ public class SocialActivitySetLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static void addActivitySet(long userId, long groupId,
-		java.lang.String className, long classPK, int type,
-		com.liferay.portlet.social.model.SocialActivity activity)
+	public static com.liferay.portlet.social.model.SocialActivitySet addActivitySet(
+		long userId, long activityId, java.lang.String className, long classPK,
+		int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addActivitySet(userId, groupId, className, classPK, type, activity);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long classNameId, long classPK, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getActivitySets(classNameId, classPK, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, int type, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getActivitySets(groupId, userId, classNameId, type, start,
-			end);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, long classPK, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getActivitySets(groupId, userId, classNameId, classPK,
-			start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getActivitySets(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getActivitySets(groupId, userId, classNameId, classPK,
-			type, start, end);
+				   .addActivitySet(userId, activityId, className, classPK, type);
 	}
 
 	public static SocialActivitySetLocalService getService() {

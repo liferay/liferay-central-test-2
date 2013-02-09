@@ -84,16 +84,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialActivitySet"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
-				"value.object.column.bitmask.enabled.com.liferay.portlet.social.model.SocialActivitySet"),
-			true);
-	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
-	public static long CLASSPK_COLUMN_BITMASK = 2L;
-	public static long COMPANYID_COLUMN_BITMASK = 4L;
-	public static long GROUPID_COLUMN_BITMASK = 8L;
-	public static long TYPE_COLUMN_BITMASK = 16L;
-	public static long USERID_COLUMN_BITMASK = 32L;
-	public static long MODIFIEDDATE_COLUMN_BITMASK = 64L;
+	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialActivitySet"));
 
@@ -218,19 +209,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
 		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -238,19 +217,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setCompanyId(long companyId) {
-		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
-
-		if (!_setOriginalCompanyId) {
-			_setOriginalCompanyId = true;
-
-			_originalCompanyId = _companyId;
-		}
-
 		_companyId = companyId;
-	}
-
-	public long getOriginalCompanyId() {
-		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -258,14 +225,6 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setUserId(long userId) {
-		_columnBitmask |= USERID_COLUMN_BITMASK;
-
-		if (!_setOriginalUserId) {
-			_setOriginalUserId = true;
-
-			_originalUserId = _userId;
-		}
-
 		_userId = userId;
 	}
 
@@ -275,10 +234,6 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
-	}
-
-	public long getOriginalUserId() {
-		return _originalUserId;
 	}
 
 	public long getCreateDate() {
@@ -294,8 +249,6 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setModifiedDate(long modifiedDate) {
-		_columnBitmask = -1L;
-
 		_modifiedDate = modifiedDate;
 	}
 
@@ -322,19 +275,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
-
-		if (!_setOriginalClassNameId) {
-			_setOriginalClassNameId = true;
-
-			_originalClassNameId = _classNameId;
-		}
-
 		_classNameId = classNameId;
-	}
-
-	public long getOriginalClassNameId() {
-		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -342,19 +283,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setClassPK(long classPK) {
-		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
-
-		if (!_setOriginalClassPK) {
-			_setOriginalClassPK = true;
-
-			_originalClassPK = _classPK;
-		}
-
 		_classPK = classPK;
-	}
-
-	public long getOriginalClassPK() {
-		return _originalClassPK;
 	}
 
 	public int getType() {
@@ -362,19 +291,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	}
 
 	public void setType(int type) {
-		_columnBitmask |= TYPE_COLUMN_BITMASK;
-
-		if (!_setOriginalType) {
-			_setOriginalType = true;
-
-			_originalType = _type;
-		}
-
 		_type = type;
-	}
-
-	public int getOriginalType() {
-		return _originalType;
 	}
 
 	public int getActivityCount() {
@@ -383,10 +300,6 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 	public void setActivityCount(int activityCount) {
 		_activityCount = activityCount;
-	}
-
-	public long getColumnBitmask() {
-		return _columnBitmask;
 	}
 
 	@Override
@@ -486,33 +399,6 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 	@Override
 	public void resetOriginalValues() {
-		SocialActivitySetModelImpl socialActivitySetModelImpl = this;
-
-		socialActivitySetModelImpl._originalGroupId = socialActivitySetModelImpl._groupId;
-
-		socialActivitySetModelImpl._setOriginalGroupId = false;
-
-		socialActivitySetModelImpl._originalCompanyId = socialActivitySetModelImpl._companyId;
-
-		socialActivitySetModelImpl._setOriginalCompanyId = false;
-
-		socialActivitySetModelImpl._originalUserId = socialActivitySetModelImpl._userId;
-
-		socialActivitySetModelImpl._setOriginalUserId = false;
-
-		socialActivitySetModelImpl._originalClassNameId = socialActivitySetModelImpl._classNameId;
-
-		socialActivitySetModelImpl._setOriginalClassNameId = false;
-
-		socialActivitySetModelImpl._originalClassPK = socialActivitySetModelImpl._classPK;
-
-		socialActivitySetModelImpl._setOriginalClassPK = false;
-
-		socialActivitySetModelImpl._originalType = socialActivitySetModelImpl._type;
-
-		socialActivitySetModelImpl._setOriginalType = false;
-
-		socialActivitySetModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -630,27 +516,14 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		};
 	private long _activitySetId;
 	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
-	private long _originalCompanyId;
-	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
-	private long _originalUserId;
-	private boolean _setOriginalUserId;
 	private long _createDate;
 	private long _modifiedDate;
 	private long _classNameId;
-	private long _originalClassNameId;
-	private boolean _setOriginalClassNameId;
 	private long _classPK;
-	private long _originalClassPK;
-	private boolean _setOriginalClassPK;
 	private int _type;
-	private int _originalType;
-	private boolean _setOriginalType;
 	private int _activityCount;
-	private long _columnBitmask;
 	private SocialActivitySet _escapedModel;
 }
