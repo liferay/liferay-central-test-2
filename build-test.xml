@@ -459,6 +459,11 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="control-panel-recycle-bin" />
+			<param name="test.ant.script.suite" value="ControlPanelRecycleBinTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-roles" />
 			<param name="test.ant.script.suite" value="ControlPanelRolesTestSuite" />
 		</antcall>
