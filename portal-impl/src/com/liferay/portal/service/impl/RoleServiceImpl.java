@@ -52,8 +52,8 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	 * @param  type the role's type (optionally <code>0</code>)
 	 * @param  subType the role's subtype (optionally <code>null</code>)
 	 * @param  serviceContext the role's service context (optionally
-	 *         <code>null</code>). Can set the expando bridge attributes
-	 *         for the role.
+	 *         <code>null</code>). Can set the expando bridge attributes for the
+	 *         role.
 	 * @return the role
 	 * @throws PortalException if a user with the primary key could not be
 	 *         found, if the user did not have permission to add roles, if the

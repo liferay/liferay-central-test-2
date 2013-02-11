@@ -409,11 +409,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			throw new RequiredRoleException();
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			Role.class.getName(), role.getRoleId());
-
 		// Resources
 
 		List<ResourcePermission> resourcePermissions =
@@ -446,6 +441,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		// Role
 
 		rolePersistence.remove(role);
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			Role.class.getName(), role.getRoleId());
 
 		// Permission cache
 
