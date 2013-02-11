@@ -38,12 +38,14 @@ public class SearchBlogEntryQuotesNoTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace("Blogs"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isVisible("//input[@title='Search Entries']"));
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("\"Blog Entry Title\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Showing 1 - 0."),
-			selenium.getText("//div[@class='search-results']"));
+		assertEquals(RuntimeVariables.replace(
+				"No entries were found that matched the keywords: \"Blog Entry Title\"."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

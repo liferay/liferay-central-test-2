@@ -15,6 +15,9 @@
 package com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentriesno;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry1Test;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry2Test;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry3Test;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
 import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntry1Test;
 import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntry2Test;

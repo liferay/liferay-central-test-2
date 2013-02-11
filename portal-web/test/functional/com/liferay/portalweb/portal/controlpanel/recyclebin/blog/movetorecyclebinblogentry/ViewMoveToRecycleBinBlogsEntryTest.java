@@ -28,8 +28,7 @@ public class ViewMoveToRecycleBinBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Test Page",
 			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Showing 0 results."),
-			selenium.getText("//div[@class='search-results']"));
+		assertFalse(selenium.isTextPresent("Blogs Entry Title"));
 		selenium.open("/web/guest/home/");
 		selenium.clickAt("//div[@id='dockbar']",
 			RuntimeVariables.replace("Dockbar"));
@@ -45,8 +44,27 @@ public class ViewMoveToRecycleBinBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Recycle Bin",
 			RuntimeVariables.replace("Recycle Bin"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Entries that have been in Recycle Bin for more than 30 days will be automatically deleted. Empty the Recycle Bin"),
+			selenium.getText(
+				"//div[@class='lfr-message-info taglib-trash-empty']/form"));
+		assertEquals(RuntimeVariables.replace("Empty the Recycle Bin"),
+			selenium.getText("//a[@class='trash-empty-link']"));
+		assertTrue(selenium.isVisible("//input[@title='Search Entries']"));
+		assertTrue(selenium.isVisible("//input[@value='Search']"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText(
-				"//div[@class='lfr-search-container ']/div/div/table/tbody/tr[3]/td/span/a"));
+				"//tr[contains(.,'Blogs Entry Title')]/td[1]/span/a"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry"),
+			selenium.getText("//tr[contains(.,'Blogs Entry Title')]/td[2]"));
+		assertTrue(selenium.isVisible(
+				"//tr[contains(.,'Blogs Entry Title')]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+			selenium.getText("//tr[contains(.,'Blogs Entry Title')]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText(
+				"//tr[contains(.,'Blogs Entry Title')]/td[5]/span/ul/li/strong/a"));
+		assertEquals(RuntimeVariables.replace("Showing 1 result."),
+			selenium.getText("//div[@class='search-results']"));
 	}
 }

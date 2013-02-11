@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentryno;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentry.MoveToRecycleBinBlogsEntryTest;
 import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentry.ViewMoveToRecycleBinBlogsEntryTest;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
 import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntryTest;
@@ -34,7 +35,7 @@ public class SearchBlogEntryNoTests extends BaseTestSuite {
 		testSuite.addTestSuite(AddPageBlogsTest.class);
 		testSuite.addTestSuite(AddPortletBlogsTest.class);
 		testSuite.addTestSuite(AddBlogsEntryTest.class);
-		testSuite.addTestSuite(MoveToRecycleBinBlogEntryTest.class);
+		testSuite.addTestSuite(MoveToRecycleBinBlogsEntryTest.class);
 		testSuite.addTestSuite(SearchBlogEntryNoTest.class);
 		testSuite.addTestSuite(SearchBlogEntryQuotesNoTest.class);
 		testSuite.addTestSuite(ViewMoveToRecycleBinBlogsEntryTest.class);

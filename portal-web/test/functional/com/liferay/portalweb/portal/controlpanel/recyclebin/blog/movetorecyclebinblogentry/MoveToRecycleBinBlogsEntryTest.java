@@ -28,17 +28,21 @@ public class MoveToRecycleBinBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Test Page",
 			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText(
+				"//div[@class='entry-title']/h2[contains(.,'Blogs Entry Title')]/a"));
 		selenium.waitForVisible(
-			"xPath=(//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr/td[3]/span/a)[1]");
+			"//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr[contains(.,'Move to the Recycle Bin')]/td[3]/span/a");
 		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
 			selenium.getText(
-				"xPath=(//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr/td[3]/span/a)[1]"));
-		selenium.clickAt("xPath=(//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr/td[3]/span/a)[1]",
+				"//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr[contains(.,'Move to the Recycle Bin')]/td[3]/span/a"));
+		selenium.clickAt("//div[@class='lfr-meta-actions edit-actions entry']/table/tbody/tr[contains(.,'Move to the Recycle Bin')]/td[3]/span/a",
 			RuntimeVariables.replace("Move to the Recycle Bin"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"The selected item was moved to the Recycle Bin. Undo"),
 			selenium.getText(
 				"//div[@class='portlet-msg-success taglib-trash-undo']"));
+		assertFalse(selenium.isTextPresent("Blogs Entry Title"));
 	}
 }

@@ -38,26 +38,30 @@ public class SearchBlogEntriesNoTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace("Blogs"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isVisible("//input[@title='Search Entries']"));
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("Blog Entry1 Test"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Showing 1 - 0."),
-			selenium.getText("//div[@class='search-results']"));
+		assertEquals(RuntimeVariables.replace(
+				"No entries were found that matched the keywords: Blog Entry1 Test."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("Blog Entry2 Test"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Showing 1 - 0."),
-			selenium.getText("//div[@class='search-results']"));
+		assertEquals(RuntimeVariables.replace(
+				"No entries were found that matched the keywords: Blog Entry2 Test."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("Blog Entry3 Test"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Showing 1 - 0."),
-			selenium.getText("//div[@class='search-results']"));
+		assertEquals(RuntimeVariables.replace(
+				"No entries were found that matched the keywords: Blog Entry3 Test."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }
