@@ -46,7 +46,6 @@ int trashEntriesMaxAge = PropertiesParamUtil.getInteger(groupTypeSettings, reque
 	</aui:input>
 </aui:fieldset>
 
-
 <aui:script>
 	Liferay.Util.disableSelectBoxes('<portlet:namespace />trashEntriesMaxAge', '<%= TrashUtil.TRASH_ENABLED %>', '<portlet:namespace />trashEnabled');
 </aui:script>
