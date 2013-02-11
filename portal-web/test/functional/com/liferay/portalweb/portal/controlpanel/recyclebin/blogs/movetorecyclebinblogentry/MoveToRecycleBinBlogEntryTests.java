@@ -12,16 +12,11 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentriesno;
+package com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.movetorecyclebinblogentry;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry1Test;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry2Test;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntry3Test;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
-import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntry1Test;
-import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntry2Test;
-import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntry3Test;
+import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.AddBlogsEntryTest;
 import com.liferay.portalweb.portlet.blogs.blogsentry.addblogsentry.TearDownBlogsEntryTest;
 import com.liferay.portalweb.portlet.blogs.portlet.addportletblogs.AddPageBlogsTest;
 import com.liferay.portalweb.portlet.blogs.portlet.addportletblogs.AddPortletBlogsTest;
@@ -32,19 +27,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchBlogEntriesNoTests extends BaseTestSuite {
+public class MoveToRecycleBinBlogEntryTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddPageBlogsTest.class);
 		testSuite.addTestSuite(AddPortletBlogsTest.class);
-		testSuite.addTestSuite(AddBlogsEntry1Test.class);
-		testSuite.addTestSuite(AddBlogsEntry2Test.class);
-		testSuite.addTestSuite(AddBlogsEntry3Test.class);
-		testSuite.addTestSuite(MoveToRecycleBinBlogEntry1Test.class);
-		testSuite.addTestSuite(MoveToRecycleBinBlogEntry2Test.class);
-		testSuite.addTestSuite(MoveToRecycleBinBlogEntry3Test.class);
-		testSuite.addTestSuite(SearchBlogEntriesNoTest.class);
-		testSuite.addTestSuite(SearchBlogsEntriesQuotesNoTest.class);
+		testSuite.addTestSuite(AddBlogsEntryTest.class);
+		testSuite.addTestSuite(MoveToRecycleBinBlogsEntryTest.class);
+		testSuite.addTestSuite(ViewMoveToRecycleBinBlogsEntryTest.class);
 		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

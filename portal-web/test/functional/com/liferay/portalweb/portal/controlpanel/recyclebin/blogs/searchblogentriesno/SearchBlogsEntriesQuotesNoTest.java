@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentriesno;
+package com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.searchblogentriesno;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchBlogEntriesNoTest extends BaseTestCase {
-	public void testSearchBlogEntriesNo() throws Exception {
+public class SearchBlogsEntriesQuotesNoTest extends BaseTestCase {
+	public void testSearchBlogsEntriesQuotesNo() throws Exception {
 		selenium.selectWindow("null");
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
@@ -40,28 +40,28 @@ public class SearchBlogEntriesNoTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isVisible("//input[@title='Search Entries']"));
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Blog Entry1 Test"));
+			RuntimeVariables.replace("\"Blog Entry1 Test\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Blog Entry1 Test."),
+				"No entries were found that matched the keywords: \"Blog Entry1 Test\"."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Blog Entry2 Test"));
+			RuntimeVariables.replace("\"Blog Entry2 Test\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Blog Entry2 Test."),
+				"No entries were found that matched the keywords: \"Blog Entry2 Test\"."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Blog Entry3 Test"));
+			RuntimeVariables.replace("\"Blog Entry3 Test\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"No entries were found that matched the keywords: Blog Entry3 Test."),
+				"No entries were found that matched the keywords: \"Blog Entry3 Test\"."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

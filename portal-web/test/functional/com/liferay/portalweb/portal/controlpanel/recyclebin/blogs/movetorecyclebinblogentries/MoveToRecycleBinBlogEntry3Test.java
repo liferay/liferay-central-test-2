@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries;
+package com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.movetorecyclebinblogentries;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

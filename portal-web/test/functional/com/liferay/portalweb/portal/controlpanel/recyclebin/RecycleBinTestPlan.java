@@ -15,7 +15,7 @@
 package com.liferay.portalweb.portal.controlpanel.recyclebin;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.BlogTestPlan;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.BlogsTestPlan;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -28,7 +28,7 @@ public class RecycleBinTestPlan extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(BlogTestPlan.suite());
+		testSuite.addTest(BlogsTestPlan.suite());
 
 		return testSuite;
 	}

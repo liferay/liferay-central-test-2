@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.recyclebin.blog;
+package com.liferay.portalweb.portal.controlpanel.recyclebin.blogs;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentries.MoveToRecycleBinBlogEntriesTests;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.movetorecyclebinblogentry.MoveToRecycleBinBlogEntryTests;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentriesno.SearchBlogEntriesNoTests;
-import com.liferay.portalweb.portal.controlpanel.recyclebin.blog.searchblogentryno.SearchBlogEntryNoTests;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.movetorecyclebinblogentries.MoveToRecycleBinBlogEntriesTests;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.movetorecyclebinblogentry.MoveToRecycleBinBlogEntryTests;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.searchblogentriesno.SearchBlogEntriesNoTests;
+import com.liferay.portalweb.portal.controlpanel.recyclebin.blogs.searchblogentryno.SearchBlogEntryNoTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,7 +26,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class BlogTestPlan extends BaseTestSuite {
+public class BlogsTestPlan extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
