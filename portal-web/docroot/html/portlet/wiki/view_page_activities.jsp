@@ -85,7 +85,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 						String title = extraDataJSONObject.getString("title");
 
-						if(fileEntry != null) {
+						if (fileEntry != null) {
 							fileVersion = fileEntry.getFileVersion();
 						}
 						%>
