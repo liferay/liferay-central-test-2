@@ -1503,9 +1503,6 @@ public class PortletExporter {
 
 				updateAssetPublisherClassNameIds(jxPreferences, name);
 			}
-			else if (name.equals("scopeIds")) {
-				updateAssetPublisherScopeIds(jxPreferences, name, plid);
-			}
 			else if (name.startsWith("queryName") &&
 					 value.equalsIgnoreCase("assetCategories")) {
 
@@ -1514,6 +1511,9 @@ public class PortletExporter {
 				updatePreferencesClassPKs(
 					jxPreferences, "queryValues" + index,
 					AssetCategory.class.getName());
+			}
+			else if (name.equals("scopeIds")) {
+				updateAssetPublisherScopeIds(jxPreferences, name, plid);
 			}
 		}
 

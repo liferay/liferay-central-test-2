@@ -1824,11 +1824,6 @@ public class PortletImporter {
 
 				updateAssetPublisherClassNameIds(jxPreferences, name);
 			}
-			else if (name.equals("scopeIds")) {
-				updateAssetPublisherScopeIds(
-					jxPreferences, name, companyGroup.getGroupId(),
-					layout.getPlid());
-			}
 			else if (name.startsWith("queryName") &&
 					 value.equalsIgnoreCase("assetCategories")) {
 
@@ -1837,6 +1832,11 @@ public class PortletImporter {
 				updatePreferencesClassPKs(
 					portletDataContext, jxPreferences, "queryValues" + index,
 					AssetCategory.class, companyGroup.getGroupId());
+			}
+			else if (name.equals("scopeIds")) {
+				updateAssetPublisherScopeIds(
+					jxPreferences, name, companyGroup.getGroupId(),
+					layout.getPlid());
 			}
 		}
 

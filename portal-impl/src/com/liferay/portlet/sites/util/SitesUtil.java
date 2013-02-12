@@ -553,9 +553,7 @@ public class SitesUtil {
 			parameterMap, null, null);
 	}
 
-	public static Long[] filterGroups(
-		List<Group> groups, String[] names) {
-
+	public static Long[] filterGroups(List<Group> groups, String[] names) {
 		List<Long> groupIds = new ArrayList<Long>();
 
 		for (Group group : groups) {
