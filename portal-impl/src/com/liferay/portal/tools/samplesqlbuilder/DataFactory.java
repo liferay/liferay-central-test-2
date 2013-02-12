@@ -912,13 +912,10 @@ public class DataFactory {
 	public void initDLFileEntryType() {
 		_defaultDLFileEntryType = new DLFileEntryTypeImpl();
 
-		Date date = new Date();
-
 		_defaultDLFileEntryType.setUuid(SequentialUUID.generate());
 		_defaultDLFileEntryType.setFileEntryTypeId(
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
-		_defaultDLFileEntryType.setCreateDate(date);
-		_defaultDLFileEntryType.setModifiedDate(date);
+		_defaultDLFileEntryType.setCreateDate(newCreateDate());
 		_defaultDLFileEntryType.setName(
 			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT);
 	}
@@ -1109,20 +1106,14 @@ public class DataFactory {
 		return new IntegerWrapper();
 	}
 
-	public String[] nextName(long currentIndex) {
-		int firstNamesSize = _firstNames.size();
-		int lastNamesSize = _lastNames.size();
+	public String[] nextUserName(long index) {
+		String[] userName = new String[2];
 
-		int firstNameIndex =
-			(int)(currentIndex / lastNamesSize) % firstNamesSize;
-		int lastNameIndex = (int)(currentIndex % lastNamesSize);
+		userName[0] = _firstNames.get(
+			(int)(index / _lastNames.size()) % _firstNames.size());
+		userName[1] = _lastNames.get((int)(index % _lastNames.size()));
 
-		String[] names = new String[2];
-
-		names[0] = _firstNames.get(firstNameIndex);
-		names[1] = _lastNames.get(lastNameIndex);
-
-		return names;
+		return userName;
 	}
 
 	protected Date newCreateDate() {
@@ -1149,25 +1140,15 @@ public class DataFactory {
 	private List<CounterModelImpl> _counters;
 	private long _ddlRecordSetClassNameId;
 	private long _ddmContentClassNameId;
-
 	private DLFileEntryType _defaultDLFileEntryType;
-
 	private User _defaultUser;
-
 	private SimpleCounter _dlDateCounter;
-
 	private long _dlFileEntryClassNameId;
-
 	private List<String> _firstNames;
-
 	private long _groupClassNameId;
-
 	private Group _guestGroup;
-
 	private Role _guestRole;
-
 	private long _journalArticleClassNameId;
-
 	private String _journalArticleContent;
 	private List<String> _lastNames;
 	private int _maxGroupsCount;
@@ -1191,7 +1172,6 @@ public class DataFactory {
 	private Role _siteOwnerRole;
 	private SimpleCounter _socialActivityCounter;
 	private long _userClassNameId;
-	private Object[] _userNames;
 	private Role _userRole;
 	private SimpleCounter _userScreenNameCounter;
 	private long _wikiPageClassNameId;

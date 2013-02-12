@@ -6,9 +6,9 @@
 
 <#if (maxUserCount > 0)>
 	<#list 1..maxUserCount as userCount>
-		<#assign name = dataFactory.nextName(userCount - 1)>
+		<#assign userName = dataFactory.nextUserName(userCount - 1)>
 
-		<#assign contact = dataFactory.addContact(name[0], name[1])>
+		<#assign contact = dataFactory.addContact(userName[0], userName[1])>
 		<#assign user = dataFactory.addUser(false, "test" + userScreenNameCounter.get())>
 
 		<#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName, false)>
