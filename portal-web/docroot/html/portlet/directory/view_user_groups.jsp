@@ -34,10 +34,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 	LinkedHashMap<String, Object> userGroupParams = new LinkedHashMap<String, Object>();
 
-	if (portletName.equals(PortletKeys.SITE_MEMBERS_DIRECTORY)) {
-		userGroupParams.put("userGroupsGroups", new Long(themeDisplay.getScopeGroupId()));
-	}
-
 	if (portletName.equals(PortletKeys.MY_SITES_DIRECTORY)) {
 		LinkedHashMap<String, Object> groupParams = new LinkedHashMap<String, Object>();
 
@@ -58,6 +54,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		}
 
 		userGroupParams.put("userGroupsGroups", ArrayUtil.toArray(groupIds));
+	}
+	else if (portletName.equals(PortletKeys.SITE_MEMBERS_DIRECTORY)) {
+		userGroupParams.put("userGroupsGroups", new Long(themeDisplay.getScopeGroupId()));
 	}
 	%>
 
