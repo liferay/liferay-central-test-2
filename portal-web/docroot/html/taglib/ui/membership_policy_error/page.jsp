@@ -23,37 +23,33 @@
 	<%
 	MembershipPolicyException mpe = (MembershipPolicyException)errorException;
 
-	List<Group> groups = mpe.getGroups();
-	List<Organization> organizations = mpe.getOrganizations();
-	List<Role> roles = mpe.getRoles();
-	List<UserGroup> userGroups = mpe.getUserGroups();
 	List<User> users = mpe.getUsers();
 	%>
 
 	<c:choose>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.GROUP_MEMBERSHIP_NOT_ALLOWED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(groups, "descriptiveName", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getGroups(), "descriptiveName", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.GROUP_MEMBERSHIP_REQUIRED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(groups, "descriptiveName", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getGroups(), "descriptiveName", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.ORGANIZATION_MEMBERSHIP_NOT_ALLOWED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getOrganizations(), "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.ORGANIZATION_MEMBERSHIP_REQUIRED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(organizations, "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getOrganizations(), "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-is-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.ROLE_MEMBERSHIP_NOT_ALLOWED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(roles, "title", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-cannot-be-assigned-to-x" : "the-following-users-cannot-be-assigned-to-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getRoles(), "title", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-cannot-be-assigned-to-x" : "the-following-users-cannot-be-assigned-to-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.ROLE_MEMBERSHIP_REQUIRED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(roles, "title", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-cannot-be-unassigned-from-x" : "the-following-users-cannot-be-unassigned-from-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getRoles(), "title", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-cannot-be-unassigned-from-x" : "the-following-users-cannot-be-unassigned-from-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.USER_GROUP_MEMBERSHIP_NOT_ALLOWED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(userGroups, "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-are-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getUserGroups(), "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-are-not-allowed-to-join-x" : "the-following-users-are-not-allowed-to-join-x-x" %>' />
 		</c:when>
 		<c:when test="<%= mpe.getType() == MembershipPolicyException.USER_GROUP_MEMBERSHIP_REQUIRED %>">
-			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(userGroups, "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-are-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
+			<liferay-ui:message arguments='<%= new Object[] {ListUtil.toString(users, "fullName", StringPool.COMMA_AND_SPACE), ListUtil.toString(mpe.getUserGroups(), "name", StringPool.COMMA_AND_SPACE)} %>' key='<%= users.size() == 1 ? "x-are-not-allowed-to-leave-x" : "the-following-users-are-not-allowed-to-leave-x-x" %>' />
 		</c:when>
 	</c:choose>
 </liferay-ui:error>

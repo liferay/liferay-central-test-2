@@ -63,15 +63,14 @@ public class UserGroupRoleUserChecker extends RowChecker {
 		Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(
 			_group, user);
 
-		if ((!MembershipPolicyUtil.isMembershipAllowed(_group, _role, user) &&
-				!isChecked(user)) ||
-			(mandatoryRoles.contains(_role) && isChecked(user))) {
+		if ((isChecked(user) && mandatoryRoles.contains(_role)) ||
+			(!isChecked(user) &&
+			 !MembershipPolicyUtil.isMembershipAllowed(_group, _role, user))) {
 
 			return true;
 		}
-		else {
-			return super.isDisabled(obj);
-		}
+
+		return super.isDisabled(obj);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

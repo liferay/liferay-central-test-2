@@ -30,8 +30,6 @@ List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 userGroupRoles.addAll(organizationRoles);
 userGroupRoles.addAll(siteRoles);
-
-Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(selUser);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="roles" />
@@ -72,6 +70,10 @@ Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(selUser);
 			name="title"
 			value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
 		/>
+
+		<%
+		Set<Role> mandatoryRoles = MembershipPolicyUtil.getMandatoryRoles(selUser);
+		%>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && !mandatoryRoles.contains(role) %>">
 			<liferay-ui:search-container-column-text>

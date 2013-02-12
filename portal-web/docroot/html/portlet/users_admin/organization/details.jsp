@@ -18,7 +18,6 @@
 
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
-User selUser = (User)request.getAttribute("user.selUser");
 
 long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationSearchContainerPrimaryKeys", (organization != null) ? organization.getParentOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
@@ -45,6 +44,8 @@ if (organization != null) {
 
 	groupId = group.getGroupId();
 }
+
+User selUser = (User)request.getAttribute("user.selUser");
 %>
 
 <liferay-util:buffer var="removeOrganizationIcon">

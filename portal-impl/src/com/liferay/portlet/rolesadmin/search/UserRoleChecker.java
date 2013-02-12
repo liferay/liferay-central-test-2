@@ -60,13 +60,12 @@ public class UserRoleChecker extends RowChecker {
 
 		if ((isChecked(user) && mandatoryRoles.contains(_role)) ||
 			(!isChecked(user) &&
-				!MembershipPolicyUtil.isMembershipAllowed(_role, user))) {
+			 !MembershipPolicyUtil.isMembershipAllowed(_role, user))) {
 
 			return true;
 		}
-		else {
-			return super.isDisabled(obj);
-		}
+
+		return super.isDisabled(obj);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UserRoleChecker.class);

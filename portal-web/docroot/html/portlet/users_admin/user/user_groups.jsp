@@ -18,10 +18,7 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
-
 List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGroups");
-
-Set<UserGroup> mandatoryUserGroups = MembershipPolicyUtil.getMandatoryUserGroups(selUser);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="user-groups" />
@@ -56,6 +53,11 @@ Set<UserGroup> mandatoryUserGroups = MembershipPolicyUtil.getMandatoryUserGroups
 			name="name"
 			property="name"
 		/>
+
+
+		<%
+		Set<UserGroup> mandatoryUserGroups = MembershipPolicyUtil.getMandatoryUserGroups(selUser);
+		%>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && !mandatoryUserGroups.contains(userGroup) %>">
 			<liferay-ui:search-container-column-text>

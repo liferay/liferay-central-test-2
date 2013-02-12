@@ -71,13 +71,12 @@ public class UserGroupChecker extends RowChecker {
 
 		if ((isChecked(user) && mandatoryGroups.contains(_group)) ||
 			(!isChecked(user) &&
-				!MembershipPolicyUtil.isMembershipAllowed(_group, user))) {
+			 !MembershipPolicyUtil.isMembershipAllowed(_group, user))) {
 
 			return true;
 		}
-		else {
-			return super.isDisabled(obj);
-		}
+
+		return super.isDisabled(obj);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UserGroupChecker.class);

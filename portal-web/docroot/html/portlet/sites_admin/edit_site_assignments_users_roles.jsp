@@ -32,8 +32,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.
 portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 %>
 
-<liferay-ui:membership-policy-error />
-
 <aui:input name="p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 <aui:input name="addRoleIds" type="hidden" />
 <aui:input name="removeRoleIds" type="hidden" />
@@ -41,6 +39,8 @@ portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 <liferay-ui:message key="edit-site-roles-for-user" />: <%= HtmlUtil.escape(selUser.getFullName()) %>
 
 <br /><br />
+
+<liferay-ui:membership-policy-error />
 
 <%
 RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);

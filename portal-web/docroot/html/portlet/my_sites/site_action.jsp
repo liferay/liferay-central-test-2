@@ -22,8 +22,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Group group = (Group)row.getObject();
 
 String tabs1 = (String)request.getAttribute("view.jsp-tabs1");
-
-Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
 %>
 
 <liferay-ui:icon-menu showWhenSingleIcon='<%= tabs1.equals("my-sites") %>'>
@@ -60,6 +58,10 @@ Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
 					url="<%= viewPrivatePagesURL %>"
 				/>
 			</c:if>
+
+			<%
+			Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
+			%>
 
 			<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !mandatoryGroups.contains(group) %>">
 				<portlet:actionURL var="leaveURL">

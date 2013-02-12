@@ -68,16 +68,16 @@ public class UserOrganizationChecker extends RowChecker {
 
 		User user = (User)obj;
 
-		Set<Organization> mandatoryOrganizations =
-			MembershipPolicyUtil.getMandatoryOrganizations(user);
+		if (isChecked(user)) {
+			Set<Organization> mandatoryOrganizations =
+				MembershipPolicyUtil.getMandatoryOrganizations(user);
 
-		if ((isChecked(user) &&
-				mandatoryOrganizations.contains(_organization)) ||
-			(!isChecked(user) &&
+			if (mandatoryOrganizations.contains(_organization) ||
 				!MembershipPolicyUtil.isMembershipAllowed(
-					_organization, user))) {
+					_organization, user)) {
 
-			return true;
+				return true;
+			}
 		}
 
 		try {

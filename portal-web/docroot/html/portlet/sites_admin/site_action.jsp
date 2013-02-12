@@ -46,8 +46,6 @@ boolean view = false;
 if (row == null) {
 	view = true;
 }
-
-Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
@@ -118,6 +116,10 @@ Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
 			url="<%= viewPrivatePagesURL %>"
 		/>
 	</c:if>
+
+	<%
+	Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
+	%>
 
 	<c:if test="<%= (!(organizationUser || userGroupUser) && ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId())) && !mandatoryGroups.contains(group) %>">
 		<portlet:actionURL var="leaveURL">

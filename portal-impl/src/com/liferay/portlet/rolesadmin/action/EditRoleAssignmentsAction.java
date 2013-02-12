@@ -73,8 +73,8 @@ public class EditRoleAssignmentsAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else if (e instanceof NoSuchRoleException ||
-				e instanceof PrincipalException ||
-				e instanceof RoleAssignmentException) {
+					 e instanceof PrincipalException ||
+					 e instanceof RoleAssignmentException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 

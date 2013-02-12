@@ -30,8 +30,6 @@ Organization organization = (Organization)request.getAttribute("edit_user_roles.
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-portletURL");
 %>
 
-<liferay-ui:membership-policy-error />
-
 <aui:input name="addUserIds" type="hidden" />
 <aui:input name="removeUserIds" type="hidden" />
 
@@ -50,6 +48,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 	param="tabs1"
 	url="<%= portletURL.toString() %>"
 />
+
+<liferay-ui:membership-policy-error />
 
 <liferay-ui:search-container
 	rowChecker="<%= (role.getType() == RoleConstants.TYPE_SITE) ? new UserGroupRoleUserChecker(renderResponse, group, role) : new OrganizationRoleUserChecker(renderResponse, organization, role) %>"
