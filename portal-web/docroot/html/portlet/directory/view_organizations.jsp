@@ -51,11 +51,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 		long[] groupIds = StringUtil.split(ListUtil.toString(groups, "groupId"), 0L);
 
-		for (String excludedSiteName : PropsValues.MY_SITES_DIRECTORY_SITE_EXCLUDES) {
-			Group excludedSite = GroupLocalServiceUtil.fetchGroup(themeDisplay.getCompanyId(), excludedSiteName);
+		for (String name : PropsValues.MY_SITES_DIRECTORY_SITE_EXCLUDES) {
+			Group group = GroupLocalServiceUtil.fetchGroup(themeDisplay.getCompanyId(), name);
 
-			if (excludedSite != null) {
-				groupIds = ArrayUtil.remove(groupIds, excludedSite.getGroupId());
+			if (group != null) {
+				groupIds = ArrayUtil.remove(groupIds, group.getGroupId());
 			}
 		}
 
