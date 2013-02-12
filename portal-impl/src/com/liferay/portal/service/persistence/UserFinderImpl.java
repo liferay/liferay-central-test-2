@@ -246,9 +246,11 @@ public class UserFinderImpl
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
-			params3 = new LinkedHashMap<String, Object>(params1);
 
 			params2.remove("usersGroups");
+
+			params3 = new LinkedHashMap<String, Object>(params1);
+
 			params3.remove("usersGroups");
 
 			List<Long> organizationIds = new ArrayList<Long>();
@@ -483,9 +485,11 @@ public class UserFinderImpl
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
-			params3 = new LinkedHashMap<String, Object>(params1);
 
 			params2.remove("usersGroups");
+
+			params3 = new LinkedHashMap<String, Object>(params1);
+
 			params3.remove("usersGroups");
 
 			List<Long> organizationIds = new ArrayList<Long>();
