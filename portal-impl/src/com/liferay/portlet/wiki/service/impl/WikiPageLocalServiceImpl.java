@@ -1496,19 +1496,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
-		// Workflow
-
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), page.getGroupId(), userId,
-			WikiPage.class.getName(), page.getPageId(), page, serviceContext);
-
-		// Social (Drafts)
+		// Social
 
 		if (serviceContext.getWorkflowAction() !=
 				WorkflowConstants.ACTION_PUBLISH) {
 
 			if (!page.isMinorEdit() ||
-					PropsValues.WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY) {
+				PropsValues.WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY) {
 
 				JSONObject extraDataJSONObject =
 					JSONFactoryUtil.createJSONObject();
@@ -1521,6 +1515,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 					extraDataJSONObject.toString(), 0);
 			}
 		}
+
+		// Workflow
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), page.getGroupId(), userId,
+			WikiPage.class.getName(), page.getPageId(), page, serviceContext);
 
 		return page;
 	}

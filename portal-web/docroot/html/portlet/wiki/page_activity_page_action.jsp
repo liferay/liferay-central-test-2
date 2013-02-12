@@ -28,11 +28,11 @@ double version = extraDataJSONObject.getDouble("version");
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-WikiPage socialActivityWikiPage = WikiPageLocalServiceUtil.getPage(node.getNodeId(), wikiPage.getTitle(), version);
+WikiPage socialActivityPage = WikiPageLocalServiceUtil.getPage(node.getNodeId(), wikiPage.getTitle(), version);
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= (version != wikiPage.getVersion()) && (socialActivityWikiPage.isApproved()) && (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) %>">
+	<c:if test="<%= (version != wikiPage.getVersion()) && (socialActivityPage.isApproved()) && (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)) %>">
 		<portlet:actionURL var="revertURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />

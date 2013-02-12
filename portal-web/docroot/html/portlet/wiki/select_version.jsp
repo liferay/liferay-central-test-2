@@ -47,9 +47,9 @@ double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
 		<liferay-ui:search-container-column-text
 			name=""
 		>
-				<c:if test="<%= sourceVersion != curWikiPage.getVersion() %>">
-						<aui:button cssClass="select-wiki-page-version" data-sourceversion="<%= sourceVersion %>" data-targetversion="<%= curWikiPage.getVersion() %>" href="javascript:;" value="choose" />
-				</c:if>
+			<c:if test="<%= sourceVersion != curWikiPage.getVersion() %>">
+				<aui:button cssClass="select-wiki-page-version" data-sourceversion="<%= sourceVersion %>" data-targetversion="<%= curWikiPage.getVersion() %>" href="javascript:;" value="choose" />
+			</c:if>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
