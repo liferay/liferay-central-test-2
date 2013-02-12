@@ -394,7 +394,8 @@ public class SocialActivitySetWrapper implements SocialActivitySet,
 		return new SocialActivitySetWrapper((SocialActivitySet)_socialActivitySet.clone());
 	}
 
-	public int compareTo(SocialActivitySet socialActivitySet) {
+	public int compareTo(
+		com.liferay.portlet.social.model.SocialActivitySet socialActivitySet) {
 		return _socialActivitySet.compareTo(socialActivitySet);
 	}
 
@@ -403,15 +404,15 @@ public class SocialActivitySetWrapper implements SocialActivitySet,
 		return _socialActivitySet.hashCode();
 	}
 
-	public com.liferay.portal.model.CacheModel<SocialActivitySet> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.portlet.social.model.SocialActivitySet> toCacheModel() {
 		return _socialActivitySet.toCacheModel();
 	}
 
-	public SocialActivitySet toEscapedModel() {
+	public com.liferay.portlet.social.model.SocialActivitySet toEscapedModel() {
 		return new SocialActivitySetWrapper(_socialActivitySet.toEscapedModel());
 	}
 
-	public SocialActivitySet toUnescapedModel() {
+	public com.liferay.portlet.social.model.SocialActivitySet toUnescapedModel() {
 		return new SocialActivitySetWrapper(_socialActivitySet.toUnescapedModel());
 	}
 
