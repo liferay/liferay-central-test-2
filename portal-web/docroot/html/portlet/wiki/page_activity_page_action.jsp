@@ -25,10 +25,9 @@ JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(HtmlUtil.unesc
 
 double version = extraDataJSONObject.getDouble("version");
 
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-WikiPage socialActivityPage = WikiPageLocalServiceUtil.getPage(node.getNodeId(), wikiPage.getTitle(), version);
+WikiPage socialActivityPage = WikiPageLocalServiceUtil.getPage(wikiPage.getNodeId(), wikiPage.getTitle(), version);
 %>
 
 <liferay-ui:icon-menu>
