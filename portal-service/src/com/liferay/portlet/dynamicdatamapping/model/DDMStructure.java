@@ -116,7 +116,8 @@ public interface DDMStructure extends DDMStructureModel, PersistedModel {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getWebDavURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String webDAVToken);
 
 	public boolean hasField(java.lang.String fieldName)
 		throws com.liferay.portal.kernel.exception.PortalException,

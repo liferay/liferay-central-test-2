@@ -945,8 +945,9 @@ public class DDMStructureWrapper implements DDMStructure,
 	}
 
 	public java.lang.String getWebDavURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _ddmStructure.getWebDavURL(themeDisplay);
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String webDAVToken) {
+		return _ddmStructure.getWebDavURL(themeDisplay, webDAVToken);
 	}
 
 	public boolean hasField(java.lang.String fieldName)

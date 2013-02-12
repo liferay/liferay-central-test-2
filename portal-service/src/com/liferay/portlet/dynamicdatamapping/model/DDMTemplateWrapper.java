@@ -969,8 +969,9 @@ public class DDMTemplateWrapper implements DDMTemplate,
 	}
 
 	public java.lang.String getWebDavURL(
-		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _ddmTemplate.getWebDavURL(themeDisplay);
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String webDAVToken) {
+		return _ddmTemplate.getWebDavURL(themeDisplay, webDAVToken);
 	}
 
 	public void setSmallImageType(java.lang.String smallImageType) {
