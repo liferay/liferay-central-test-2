@@ -921,7 +921,7 @@ public class LayoutLocalServiceUtil {
 	/**
 	* Returns all the layouts without resource permissions
 	*
-	* @param
+	* @param roleId the primary key of the role
 	* @return all the layouts without resource permissions
 	* @throws SystemException if a system exception occurred
 	*/
