@@ -118,6 +118,11 @@ String tabs1 = (String)request.getAttribute("view.jsp-tabs1");
 					</c:choose>
 				</c:when>
 				<c:otherwise>
+
+					<%
+					Set<Group> mandatoryGroups = MembershipPolicyUtil.getMandatoryGroups(user);
+					%>
+
 					<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !mandatoryGroups.contains(group) %>">
 						<portlet:actionURL var="leaveURL">
 							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
