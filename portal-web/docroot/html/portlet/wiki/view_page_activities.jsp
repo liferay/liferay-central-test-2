@@ -161,7 +161,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 								<liferay-ui:icon
 									image="add_article"
 									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-the-page", new Object[] {socialActivityUser.getFullName(), pageTitleLink}) %>'
+									message='<%= LanguageUtil.format(pageContext, "activity-wiki-add-page", new Object[] {StringPool.BLANK, socialActivityUser.getFullName(), pageTitleLink}) %>'
 								/>
 							</c:when >
 							<c:when test="<%= socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE %>">
