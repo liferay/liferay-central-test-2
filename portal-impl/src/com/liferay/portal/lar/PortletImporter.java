@@ -1881,8 +1881,8 @@ public class PortletImporter {
 			catch (NoSuchGroupException nsge) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + "because the group " +
-							"referenced was not found");
+						"Ignoring scope " + newValue + "because the " +
+							"referenced group was not found");
 				}
 			}
 		}
