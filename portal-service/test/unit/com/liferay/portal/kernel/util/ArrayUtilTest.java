@@ -12,10 +12,9 @@
  * details.
  */
 
-package unit.com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
-import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,70 +25,70 @@ import java.util.List;
 public class ArrayUtilTest extends TestCase {
 
 	public void testToDoubleArray() throws Exception {
-		List<Double> doubleList = new ArrayList<Double>();
+		List<Double> list = new ArrayList<Double>();
 
-		doubleList.add(1.0);
-		doubleList.add(2.0);
+		list.add(1.0);
+		list.add(2.0);
 
-		double[] doubleArray = ArrayUtil.toDoubleArray(doubleList);
+		double[] array = ArrayUtil.toDoubleArray(list);
 
-		assertEquals(doubleArray.length, doubleList.size());
+		assertEquals(array.length, list.size());
 
-		for (int i = 0; i < doubleList.size(); i++) {
-			Double value = doubleList.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			Double value = list.get(i);
 
-			assertEquals(value.doubleValue(), doubleArray[i]);
+			assertEquals(value.doubleValue(), array[i]);
 		}
 	}
 
 	public void testToFloatArray() throws Exception {
-		List<Float> floatList = new ArrayList<Float>();
+		List<Float> list = new ArrayList<Float>();
 
-		floatList.add(1.0F);
-		floatList.add(2.0F);
+		list.add(1.0F);
+		list.add(2.0F);
 
-		float[] floatArray = ArrayUtil.toFloatArray(floatList);
+		float[] array = ArrayUtil.toFloatArray(list);
 
-		assertEquals(floatArray.length, floatList.size());
+		assertEquals(array.length, list.size());
 
-		for (int i = 0; i < floatList.size(); i++) {
-			Float value = floatList.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			Float value = list.get(i);
 
-			assertEquals(value.floatValue(), floatArray[i]);
+			assertEquals(value.floatValue(), array[i]);
 		}
 	}
 
 	public void testToIntArray() throws Exception {
-		List<Integer> intList = new ArrayList<Integer>();
+		List<Integer> list = new ArrayList<Integer>();
 
-		intList.add(100);
-		intList.add(200);
+		list.add(1);
+		list.add(2);
 
-		int[] intArray = ArrayUtil.toIntArray(intList);
+		int[] array = ArrayUtil.toIntArray(list);
 
-		assertEquals(intArray.length, intList.size());
+		assertEquals(array.length, list.size());
 
-		for (int i = 0; i < intList.size(); i++) {
-			Integer value = intList.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			Integer value = list.get(i);
 
-			assertEquals(value.intValue(), intArray[i]);
+			assertEquals(value.intValue(), array[i]);
 		}
 	}
 
 	public void testToLongArray() throws Exception {
-		List<Long> longList = new ArrayList<Long>();
+		List<Long> list = new ArrayList<Long>();
 
-		longList.add(100L);
-		longList.add(200L);
+		list.add(1L);
+		list.add(2L);
 
-		long[] longArray = ArrayUtil.toLongArray(longList);
+		long[] array = ArrayUtil.toLongArray(list);
 
-		assertEquals(longArray.length, longList.size());
+		assertEquals(array.length, list.size());
 
-		for (int i = 0; i < longList.size(); i++) {
-			Long value = longList.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			Long value = list.get(i);
 
-			assertEquals(value.longValue(), longArray[i]);
+			assertEquals(value.longValue(), array[i]);
 		}
 	}
 
