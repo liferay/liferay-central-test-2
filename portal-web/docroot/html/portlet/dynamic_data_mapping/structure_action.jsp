@@ -52,7 +52,7 @@ DDMStructure structure = (DDMStructure)row.getObject();
 			image="edit"
 			message="edit-default-values"
 			url="<%= editStructureDefaultValuesURL %>"
-			/>
+		/>
 	</c:if>
 
 	<c:if test="<%= DDMStructurePermission.contains(permissionChecker, structure, ActionKeys.VIEW) && showManageTemplates %>">

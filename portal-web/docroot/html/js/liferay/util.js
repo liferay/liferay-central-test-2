@@ -1297,6 +1297,11 @@
 			ddmURL.setParameter('ddmResource', config.ddmResource);
 			ddmURL.setParameter('ddmResourceActionId', config.ddmResourceActionId);
 			ddmURL.setParameter('groupId', config.groupId);
+
+			if ('refererPortletName' in config) {
+				ddmURL.setParameter('refererPortletName', config.refererPortletName);
+			}
+s
 			ddmURL.setParameter('saveCallback', config.saveCallback);
 			ddmURL.setParameter('scopeAvailableFields', config.availableFields);
 			ddmURL.setParameter('scopeStorageType', config.storageType);
@@ -1305,10 +1310,6 @@
 			ddmURL.setParameter('scopeTemplateMode', config.templateMode);
 			ddmURL.setParameter('scopeTemplateType', config.templateType);
 			ddmURL.setParameter('scopeTitle', config.title);
-
-			if ('refererPortletName' in config) {
-				ddmURL.setParameter('refererPortletName', config.refererPortletName);
-			}
 
 			if ('showGlobalScope' in config) {
 				ddmURL.setParameter('showGlobalScope', config.showGlobalScope);

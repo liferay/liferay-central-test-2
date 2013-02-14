@@ -313,6 +313,12 @@ public class JournalArticleLocalServiceImpl
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
+		// Dynamic data mapping
+
+		if (PortalUtil.getClassNameId(DDMStructure.class) == classNameId) {
+			updateDDMStructureXSD(classPK, content, serviceContext);
+		}
+
 		// Message boards
 
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
@@ -350,12 +356,6 @@ public class JournalArticleLocalServiceImpl
 			updateStatus(
 				userId, article, WorkflowConstants.STATUS_APPROVED, null,
 				new HashMap<String, Serializable>(), serviceContext);
-		}
-
-		// Update Structure Default Values
-
-		if (PortalUtil.getClassNameId(DDMStructure.class) == classNameId) {
-			updateStructureDefaultValues(classPK, content, serviceContext);
 		}
 
 		return article;
@@ -2406,6 +2406,15 @@ public class JournalArticleLocalServiceImpl
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
+		// Dynamic data mapping
+
+		if (PortalUtil.getClassNameId(DDMStructure.class) ==
+				article.getClassNameId()) {
+
+			updateDDMStructureXSD(
+				article.getClassPK(), content, serviceContext);
+		}
+
 		// Expando
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
@@ -2448,15 +2457,6 @@ public class JournalArticleLocalServiceImpl
 			// Indexer
 
 			reindex(article);
-		}
-
-		// Update Structure Default Values
-
-		if (PortalUtil.getClassNameId(DDMStructure.class) ==
-				article.getClassNameId()) {
-
-			updateStructureDefaultValues(
-				article.getClassPK(), content, serviceContext);
 		}
 
 		return article;
@@ -3806,6 +3806,38 @@ public class JournalArticleLocalServiceImpl
 		subscriptionSender.flushNotificationsAsync();
 	}
 
+	protected void updateDDMStructureXSD(
+			long ddmStructureId, String content, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Document document = SAXReaderUtil.read(content);
+
+			Element rootElement = document.getRootElement();
+
+			List<Element> elements = rootElement.elements();
+
+			for (Element element : elements) {
+				String fieldName = element.attributeValue(
+					"name", StringPool.BLANK);
+
+				List<Element> dynamicContentElements = element.elements(
+					"dynamic-content");
+
+				for (Element dynamicContentElement : dynamicContentElements) {
+					String value = dynamicContentElement.getText();
+
+					ddmStructureLocalService.updateXSDFieldMetadata(
+						ddmStructureId, fieldName,
+						FieldConstants.PREDEFINED_VALUE, value, serviceContext);
+				}
+			}
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
+		}
+	}
+
 	protected void updatePreviousApprovedArticle(JournalArticle article)
 		throws PortalException, SystemException {
 
@@ -3857,39 +3889,6 @@ public class JournalArticleLocalServiceImpl
 			if (article.isIndexable()) {
 				reindex(previousApprovedArticle);
 			}
-		}
-	}
-
-	protected void updateStructureDefaultValues(
-			long ddmStructureId, String content, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-			Document document = SAXReaderUtil.read(content);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> elements = rootElement.elements();
-
-			for (Element element : elements) {
-				String fieldName = element.attributeValue(
-					"name", StringPool.BLANK);
-
-				List<Element> dynamicContentEls = element.elements(
-					"dynamic-content");
-
-				for (Element dynamicContentEl : dynamicContentEls) {
-					String defaultValue = dynamicContentEl.getText();
-
-					ddmStructureLocalService.updateXSDFieldMetadata(
-						ddmStructureId, fieldName,
-						FieldConstants.PREDEFINED_VALUE, defaultValue,
-						serviceContext);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 	}
 
