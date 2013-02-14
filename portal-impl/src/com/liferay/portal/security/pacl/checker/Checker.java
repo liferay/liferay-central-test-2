@@ -28,7 +28,7 @@ public interface Checker {
 
 	public void checkPermission(Permission permission);
 
-	public String[] generateRuleFromCondition(Object... conditions);
+	public String[] generateRule(Object... arguments);
 
 	public ClassLoader getClassLoader();
 
