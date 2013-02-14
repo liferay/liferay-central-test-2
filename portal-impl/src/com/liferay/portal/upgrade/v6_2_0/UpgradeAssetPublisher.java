@@ -58,11 +58,11 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			portletPreferences.getValue("rssFormat", null));
 
 		if (Validator.isNotNull(rssFormat)) {
-			String rssFeedType = RSSUtil.getFeedType(
-				RSSUtil.getFormatType(rssFormat),
-				RSSUtil.getFormatVersion(rssFormat));
-
-			portletPreferences.setValue("rssFeedType", rssFeedType);
+			portletPreferences.setValue(
+				"rssFeedType",
+				RSSUtil.getFeedType(
+					RSSUtil.getFormatType(rssFormat),
+					RSSUtil.getFormatVersion(rssFormat)));
 		}
 
 		portletPreferences.reset("rssFormat");
@@ -79,17 +79,16 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 		}
 
 		if (defaultScope.equals("true")) {
-			String[] scopeIds = new String[] {
-				AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
-					GroupConstants.DEFAULT
-			};
-
-			portletPreferences.setValues("scopeIds", scopeIds);
+			portletPreferences.setValues(
+				"scopeIds",
+				new String[] {
+					AssetPublisherUtil.SCOPE_ID_GROUP_PREFIX +
+						GroupConstants.DEFAULT
+				});
 		}
 		else if (!defaultScope.equals("false")) {
-			String[] scopeIds = new String[] {defaultScope};
-
-			portletPreferences.setValues("scopeIds", scopeIds);
+			portletPreferences.setValues(
+				"scopeIds", new String[] {defaultScope});
 		}
 
 		portletPreferences.reset("defaultScope");
