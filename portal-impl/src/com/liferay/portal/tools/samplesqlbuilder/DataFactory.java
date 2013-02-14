@@ -713,6 +713,10 @@ public class DataFactory {
 	}
 
 	public String getDateString(Date date) {
+		if (date == null) {
+			return null;
+		}
+
 		return _simpleDateFormat.format(date);
 	}
 
