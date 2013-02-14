@@ -17,7 +17,6 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -71,10 +70,12 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public void deleteActivityInterpreter(
 		SocialActivityInterpreter activityInterpreter) {
 
-		String[] classNames = activityInterpreter.getClassNames();
+		if (activityInterpreter != null) {
+			String[] classNames = activityInterpreter.getClassNames();
 
-		for (String className : classNames) {
-			_activityInterpreters.remove(className);
+			for (String className : classNames) {
+				_activityInterpreters.remove(className);
+			}
 		}
 	}
 
@@ -122,24 +123,24 @@ public class SocialActivityInterpreterLocalServiceImpl
 			}
 		}
 
-		String className = PortalUtil.getClassName(activity.getClassNameId());
-
 		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)_activityInterpreters.get(className);
+			(SocialActivityInterpreterImpl)_activityInterpreters.get(
+				activity.getClassName());
 
-		if (activityInterpreter != null) {
-			SocialActivityFeedEntry activityFeedEntry =
-				activityInterpreter.interpret(activity, themeDisplay);
-
-			if (activityFeedEntry != null) {
-				activityFeedEntry.setPortletId(
-					activityInterpreter.getPortletId());
-
-				return activityFeedEntry;
-			}
+		if (activityInterpreter == null) {
+			return null;
 		}
 
-		return null;
+		SocialActivityFeedEntry activityFeedEntry =
+			activityInterpreter.interpret(activity, themeDisplay);
+
+		if (activityFeedEntry == null) {
+			return null;
+		}
+
+		activityFeedEntry.setPortletId(activityInterpreter.getPortletId());
+
+		return activityFeedEntry;
 	}
 
 	public SocialActivityFeedEntry interpret(
@@ -154,25 +155,24 @@ public class SocialActivityInterpreterLocalServiceImpl
 			_log.error(e, e);
 		}
 
-		String className = PortalUtil.getClassName(
-			activitySet.getClassNameId());
-
 		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)_activityInterpreters.get(className);
+			(SocialActivityInterpreterImpl)_activityInterpreters.get(
+				activitySet.getClassName());
 
-		if (activityInterpreter != null) {
-			SocialActivityFeedEntry activityFeedEntry =
-					activityInterpreter.interpret(activitySet, themeDisplay);
-
-			if (activityFeedEntry != null) {
-				activityFeedEntry.setPortletId(
-					activityInterpreter.getPortletId());
-
-				return activityFeedEntry;
-			}
+		if (activityInterpreter == null) {
+			return null;
 		}
 
-		return null;
+		SocialActivityFeedEntry activityFeedEntry =
+			activityInterpreter.interpret(activitySet, themeDisplay);
+
+		if (activityFeedEntry == null) {
+			return null;
+		}
+
+		activityFeedEntry.setPortletId(activityInterpreter.getPortletId());
+
+		return activityFeedEntry;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
