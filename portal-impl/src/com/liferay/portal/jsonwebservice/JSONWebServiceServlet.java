@@ -77,7 +77,7 @@ public class JSONWebServiceServlet extends JSONServlet {
 
 		if ((!path.equals(StringPool.BLANK) &&
 			 !path.equals(StringPool.SLASH)) ||
-			(request.getParameter("list") != null)) {
+			(request.getParameter("discover") != null)) {
 
 			try {
 				ServicePreAction servicePreAction =

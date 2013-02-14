@@ -42,16 +42,16 @@ import jodd.util.Wildcard;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceListAction implements JSONWebServiceAction {
+public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
-	public JSONWebServiceListAction(HttpServletRequest request) {
-		String list = request.getParameter("list");
-
-		_filters = StringUtil.split(list);
-
+	public JSONWebServiceDiscoverAction(HttpServletRequest request) {
 		_basePath = request.getServletPath();
 		_baseURL = request.getRequestURL().toString();
 		_contextPath = request.getContextPath();
+
+		String discover = request.getParameter("discover");
+
+		_discover = StringUtil.split(discover);
 	}
 
 	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
@@ -61,18 +61,18 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 	public Object invoke() throws Exception {
 		Map<String, Object> resultsMap = new LinkedHashMap<String, Object>();
 
+		Map<String, Object> jsonWebServiceActionMappingMaps =
+			_buildJsonWebServiceActionMappingMaps();
+
+		resultsMap.put("actions", jsonWebServiceActionMappingMaps);
+
 		resultsMap.put("context", _contextPath);
 		resultsMap.put("basePath", _basePath);
 		resultsMap.put("baseURL", _baseURL);
 
-		if (_filters.length > 0) {
-			resultsMap.put("filters", Arrays.toString(_filters));
+		if (_discover.length > 0) {
+			resultsMap.put("discover", Arrays.toString(_discover));
 		}
-
-		Map<String, Object> jsonWebServiceActionMappingMaps =
-			_buildJsonWebServiceActionMappingMaps();
-
-		resultsMap.put("methods", jsonWebServiceActionMappingMaps);
 
 		return resultsMap;
 	}
@@ -101,13 +101,13 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 				new LinkedHashMap<String, Object>();
 
 			jsonWebServiceActionMappingMap.put(
-				"httpMethod", jsonWebServiceActionMapping.getMethod());
+				"method", jsonWebServiceActionMapping.getMethod());
 
 			MethodParameter[] methodParameters =
 				jsonWebServiceActionMapping.getMethodParameters();
 
-			Map<String, Object> parameters = new LinkedHashMap<String, Object>(
-				methodParameters.length);
+			Map<String, Object> parameterMap =
+				new LinkedHashMap<String, Object>(methodParameters.length);
 
 			for (MethodParameter methodParameter : methodParameters) {
 				Class<?>[] genericTypes = null;
@@ -119,12 +119,12 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 					throw new PortalException(e);
 				}
 
-				parameters.put(
+				parameterMap.put(
 					methodParameter.getName(),
 					_formatType(methodParameter.getType(), genericTypes));
 			}
 
-			jsonWebServiceActionMappingMap.put("parameters", parameters);
+			jsonWebServiceActionMappingMap.put("parameters", parameterMap);
 
 			jsonWebServiceActionMappingMap.put("path", path);
 
@@ -196,11 +196,11 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 	}
 
 	private boolean _isAcceptPath(String path) {
-		if (_filters.length == 0) {
+		if (_discover.length == 0) {
 			return true;
 		}
 
-		if (Wildcard.matchOne(path, _filters) != -1) {
+		if (Wildcard.matchOne(path, _discover) != -1) {
 			return true;
 		}
 		else {
@@ -211,7 +211,7 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 	private String _basePath;
 	private String _baseURL;
 	private String _contextPath;
-	private String[] _filters;
+	private String[] _discover;
 	private List<Class<?>> _types = new ArrayList<Class<?>>();
 
 }
