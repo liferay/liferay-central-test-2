@@ -14,15 +14,13 @@
 
 package com.liferay.httpservice.ws.json;
 
-import com.liferay.httpservice.HttpServicePropsKeys;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.BaseJSONWebServiceConfigurator;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -44,19 +42,19 @@ public class JSONWebServiceConfiguratorImpl
 	extends BaseJSONWebServiceConfigurator {
 
 	@Override
-	public void configure() throws PortalException, SystemException {
+	public void configure() {
 		ServletContext servletContext = getServletContext();
 
 		Bundle bundle = (Bundle)servletContext.getAttribute(
-			HttpServicePropsKeys.HTTP_SERVICE_OSGI_BUNDLE);
+			WebKeys.OSGI_BUNDLE);
 
 		String path = StringPool.SLASH;
 
-		URL entryURL = bundle.getEntry("WEB-INF/service.xml");
+		URL url = bundle.getEntry("WEB-INF/service.xml");
 
-		if (entryURL != null) {
+		if (url != null) {
 			try {
-				Document document = SAXReaderUtil.read(entryURL.openStream());
+				Document document = SAXReaderUtil.read(url.openStream());
 
 				Element rootElement = document.getRootElement();
 
@@ -74,28 +72,32 @@ public class JSONWebServiceConfiguratorImpl
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
-		Collection<String> resources = bundleWiring.listResources(
+		Collection<String> classPaths = bundleWiring.listResources(
 			path, "*.class", BundleWiring.LISTRESOURCES_RECURSE);
 
-		if ((resources == null) || resources.isEmpty()) {
+		registerClasses(classPaths);
+	}
+
+	protected void registerClasses(Collection<String> classPaths) {
+		if ((classPaths == null) || classPaths.isEmpty()) {
 			return;
 		}
 
 		ClassLoader classLoader = getClassLoader();
 
-		for (String resource : resources) {
-			URL resourceURL = classLoader.getResource(resource);
+		for (String classPath : classPaths) {
+			URL url = classLoader.getResource(classPath);
 
 			String className = StringUtil.replace(
-				resourceURL.getPath(), new String[]{StringPool.SLASH, ".class"},
-				new String[]{StringPool.PERIOD, StringPool.BLANK});
+				url.getPath(), new String[] {StringPool.SLASH, ".class"},
+				new String[] {StringPool.PERIOD, StringPool.BLANK});
 
 			if (className.startsWith(StringPool.PERIOD)) {
 				className = className.substring(1);
 			}
 
 			try {
-				registerClass(className, resourceURL.openStream());
+				registerClass(className, url.openStream());
 			}
 			catch (Exception e) {
 				_log.error(e, e);

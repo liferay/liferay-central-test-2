@@ -36,6 +36,11 @@ public class BundleServletConfig implements ServletConfig {
 		_servletContext = servletContext;
 		_servletName = servletName;
 		_initParameters = initParameters;
+
+		if (_initParameters == null) {
+			_initParameters = new Hashtable<String, String>();
+		}
+
 		_httpContext = httpContext;
 	}
 
@@ -44,19 +49,15 @@ public class BundleServletConfig implements ServletConfig {
 	}
 
 	public String getInitParameter(String name) {
-		return getInitParameters().get(name);
+		return _initParameters.get(name);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public Enumeration getInitParameterNames() {
-		return getInitParameters().keys();
+		return _initParameters.keys();
 	}
 
 	public Dictionary<String, String> getInitParameters() {
-		if (_initParameters == null) {
-			_initParameters = new Hashtable<String, String>();
-		}
-
 		return _initParameters;
 	}
 
@@ -68,8 +69,8 @@ public class BundleServletConfig implements ServletConfig {
 		return _servletName;
 	}
 
-	public void setInitParameter(String paramName, String value) {
-		getInitParameters().put(paramName, value);
+	public void setInitParameter(String name, String value) {
+		_initParameters.put(name, value);
 	}
 
 	private HttpContext _httpContext;

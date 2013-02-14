@@ -14,7 +14,6 @@
 
 package com.liferay.httpservice.servlet;
 
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -24,6 +23,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.webserver.WebServerServlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -43,18 +43,15 @@ import org.osgi.service.http.HttpContext;
 public class ResourceServlet extends WebServerServlet {
 
 	@Override
-	public void init(ServletConfig servletConfig) throws ServletException {
+	public void init(ServletConfig servletConfig) {
 		_bundleServletConfig = (BundleServletConfig)servletConfig;
-
-		_alias = GetterUtil.getString(
-			_bundleServletConfig.getInitParameter(
-				HttpServicePropsKeys.HTTP_SERVICE_ALIAS));
 
 		_httpContext = _bundleServletConfig.getHttpContext();
 
+		_alias = GetterUtil.getString(
+			_bundleServletConfig.getInitParameter("alias"));
 		_name = GetterUtil.getString(
-			_bundleServletConfig.getInitParameter(
-				HttpServicePropsKeys.HTTP_SERVICE_NAME));
+			_bundleServletConfig.getInitParameter("name"));
 	}
 
 	@Override
@@ -62,44 +59,30 @@ public class ResourceServlet extends WebServerServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		String requestURI = URLDecoder.decode(request.getRequestURI(), "UTF-8");
-
-		String contextPath = request.getContextPath();
-
-		if (!contextPath.equals(StringPool.SLASH)) {
-			requestURI = requestURI.substring(contextPath.length());
-		}
-
-		String fileName = requestURI;
-
-		int pos = fileName.lastIndexOf(StringPool.SLASH);
-
-		if (pos != -1) {
-			fileName = fileName.substring(pos + 1);
-		}
-
-		pos = requestURI.indexOf(_alias);
-
-		if (pos == 0) {
-			requestURI = requestURI.substring(_alias.length());
-		}
-
-		if (Validator.isNotNull(_name)) {
-			requestURI = _name.concat(requestURI);
-		}
-
 		try {
-			URL resourceURL = _httpContext.getResource(requestURI);
+			String requestURI = getRequestURI(request);
 
-			if (resourceURL == null) {
+			int aliasIndex = requestURI.indexOf(_alias);
+
+			if (aliasIndex == 0) {
+				requestURI = requestURI.substring(_alias.length());
+			}
+
+			if (Validator.isNotNull(_name)) {
+				requestURI = _name.concat(requestURI);
+			}
+
+			URL url = _httpContext.getResource(requestURI);
+
+			if (url == null) {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 				return;
 			}
 
-			URLConnection connection = resourceURL.openConnection();
+			URLConnection urlConnection = url.openConnection();
 
-			long lastModified = connection.getLastModified();
+			long lastModified = urlConnection.getLastModified();
 
 			if (lastModified > 0) {
 				long ifModifiedSince = request.getDateHeader(
@@ -108,10 +91,10 @@ public class ResourceServlet extends WebServerServlet {
 				if ((ifModifiedSince > 0) &&
 					(ifModifiedSince == lastModified)) {
 
+					response.setContentLength(0);
+
 					response.setDateHeader(
 						HttpHeaders.LAST_MODIFIED, lastModified);
-
-					// If there is an ETag header, re-send it.
 
 					String ifNoneMatch = request.getHeader(
 						HttpHeaders.IF_NONE_MATCH);
@@ -123,7 +106,6 @@ public class ResourceServlet extends WebServerServlet {
 					}
 
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-					response.setContentLength(0);
 
 					return;
 				}
@@ -133,25 +115,46 @@ public class ResourceServlet extends WebServerServlet {
 				response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 			}
 
-			String contentType = _httpContext.getMimeType(fileName);
+			String fileName = getRequestURI(request);
 
-			// Send file
+			int slashIndex = fileName.lastIndexOf(StringPool.SLASH);
+
+			if (slashIndex != -1) {
+				fileName = fileName.substring(slashIndex + 1);
+			}
+
+			String contentType = _httpContext.getMimeType(fileName);
 
 			if (isSupportsRangeHeader(contentType)) {
 				sendFileWithRangeHeader(
-					request, response, fileName, connection.getInputStream(),
-					connection.getContentLength(), contentType);
+					request, response, fileName, urlConnection.getInputStream(),
+					urlConnection.getContentLength(), contentType);
 			}
 			else {
 				ServletResponseUtil.sendFile(
-					request, response, fileName, connection.getInputStream(),
-					connection.getContentLength(), contentType);
+					request, response, fileName, urlConnection.getInputStream(),
+					urlConnection.getContentLength(), contentType);
 			}
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, e, request, response);
 		}
+	}
+
+	protected String getRequestURI(HttpServletRequest request)
+		throws UnsupportedEncodingException {
+
+		String requestURI = URLDecoder.decode(
+			request.getRequestURI(), StringPool.UTF8);
+
+		String contextPath = request.getContextPath();
+
+		if (!contextPath.equals(StringPool.SLASH)) {
+			requestURI = requestURI.substring(contextPath.length());
+		}
+
+		return requestURI;
 	}
 
 	private String _alias;

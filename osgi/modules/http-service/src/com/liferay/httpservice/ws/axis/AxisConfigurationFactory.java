@@ -25,17 +25,18 @@ import org.apache.axis.configuration.EngineConfigurationFactoryDefault;
 public class AxisConfigurationFactory implements EngineConfigurationFactory {
 
 	public AxisConfigurationFactory() {
-		_delegate = EngineConfigurationFactoryDefault.newFactory(null);
+		_engineConfigurationFactory =
+			EngineConfigurationFactoryDefault.newFactory(null);
 	}
 
 	public EngineConfiguration getClientEngineConfig() {
-		return _delegate.getClientEngineConfig();
+		return _engineConfigurationFactory.getClientEngineConfig();
 	}
 
 	public EngineConfiguration getServerEngineConfig() {
-		return _delegate.getServerEngineConfig();
+		return _engineConfigurationFactory.getServerEngineConfig();
 	}
 
-	private final EngineConfigurationFactory _delegate;
+	private EngineConfigurationFactory _engineConfigurationFactory;
 
 }
