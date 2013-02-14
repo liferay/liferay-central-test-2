@@ -73,16 +73,11 @@ public class JSONWebServiceServlet extends JSONServlet {
 			request = uploadServletRequest;
 		}
 
-		// We want to support a blank parameter such as ?list so we can't use
-		// ParamUtil because it always returns a blank string.
-
-		String list = request.getParameter("list");
-
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		if ((!path.equals(StringPool.BLANK) &&
 			 !path.equals(StringPool.SLASH)) ||
-			(list != null)) {
+			(request.getParameter("list") != null)) {
 
 			try {
 				ServicePreAction servicePreAction =

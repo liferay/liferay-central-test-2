@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.MethodParameter;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -48,17 +47,11 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 	public JSONWebServiceListAction(HttpServletRequest request) {
 		String list = request.getParameter("list");
 
-		if (Validator.isNull(list)) {
-			_filters = null;
-		}
-		else {
-			_filters = StringUtil.split(list);
-		}
+		_filters = StringUtil.split(list);
 
 		_basePath = request.getServletPath();
 		_baseURL = request.getRequestURL().toString();
 		_contextPath = request.getContextPath();
-		_types = new ArrayList<Class<?>>();
 	}
 
 	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
@@ -70,53 +63,45 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 
 		resultsMap.put("context", _contextPath);
 		resultsMap.put("basePath", _basePath);
-		resultsMap.put("baseUrl", _baseURL);
+		resultsMap.put("baseURL", _baseURL);
 
-		if (_filters != null) {
+		if (_filters.length > 0) {
 			resultsMap.put("filters", Arrays.toString(_filters));
 		}
 
-		Map<String, Object> servicesMap = _buildServicesMap();
+		Map<String, Object> jsonWebServiceActionMappingMaps =
+			_buildJsonWebServiceActionMappingMaps();
 
-		resultsMap.put("methods", servicesMap);
+		resultsMap.put("methods", jsonWebServiceActionMappingMaps);
 
 		return resultsMap;
 	}
 
-	private boolean _acceptPath(String path) {
-		if (_filters == null) {
-			return true;
-		}
+	private Map<String, Object> _buildJsonWebServiceActionMappingMaps()
+		throws PortalException {
 
-		if (Wildcard.matchOne(path, _filters) != -1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private Map<String, Object> _buildServicesMap() throws PortalException {
-		List<JSONWebServiceActionMapping> jsonWebServiceActionMappings =
+		List<JSONWebServiceActionMapping> jsonWebServiceActionMappingMaps =
 			JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(
 				_contextPath);
 
-		Map<String, Object> servicesMap = new LinkedHashMap<String, Object>(
-			jsonWebServiceActionMappings.size());
+		Map<String, Object> jsonWebServiceActionMappingsMap =
+			new LinkedHashMap<String, Object>(
+				jsonWebServiceActionMappingMaps.size());
 
 		for (JSONWebServiceActionMapping jsonWebServiceActionMapping :
-				jsonWebServiceActionMappings) {
+				jsonWebServiceActionMappingMaps) {
 
 			String path = jsonWebServiceActionMapping.getPath();
 
-			if (!_acceptPath(path)) {
+			if (!_isAcceptPath(path)) {
 				continue;
 			}
 
-			Map<String, Object> actionsMap =
+			Map<String, Object> jsonWebServiceActionMappingMap =
 				new LinkedHashMap<String, Object>();
 
-			Method actionMethod = jsonWebServiceActionMapping.getActionMethod();
+			jsonWebServiceActionMappingMap.put(
+				"httpMethod", jsonWebServiceActionMapping.getMethod());
 
 			MethodParameter[] methodParameters =
 				jsonWebServiceActionMapping.getMethodParameters();
@@ -139,17 +124,20 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 					_formatType(methodParameter.getType(), genericTypes));
 			}
 
-			actionsMap.put(
-				"httpMethod", jsonWebServiceActionMapping.getMethod());
-			actionsMap.put("parameters", parameters);
-			actionsMap.put("path", path);
-			actionsMap.put(
+			jsonWebServiceActionMappingMap.put("parameters", parameters);
+
+			jsonWebServiceActionMappingMap.put("path", path);
+
+			Method actionMethod = jsonWebServiceActionMapping.getActionMethod();
+
+			jsonWebServiceActionMappingMap.put(
 				"response", _formatType(actionMethod.getReturnType(), null));
 
-			servicesMap.put(path, actionsMap);
+			jsonWebServiceActionMappingsMap.put(
+				path, jsonWebServiceActionMappingMap);
 		}
 
-		return servicesMap;
+		return jsonWebServiceActionMappingsMap;
 	}
 
 	private String _formatType(Class<?> type, Class<?>[] genericTypes) {
@@ -162,16 +150,13 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 		if (type.isPrimitive()) {
 			return type.getSimpleName();
 		}
-
-		if (type.equals(Date.class)) {
+		else if (type.equals(Date.class)) {
 			return "long";
 		}
-
-		if (type.equals(Locale.class) || type.equals(String.class)) {
+		else if (type.equals(Locale.class) || type.equals(String.class)) {
 			return "string";
 		}
-
-		if (type.equals(Object.class) || type.equals(Serializable.class)) {
+		else if (type.equals(Object.class) || type.equals(Serializable.class)) {
 			return "object";
 		}
 
@@ -210,10 +195,23 @@ public class JSONWebServiceListAction implements JSONWebServiceAction {
 		return typeName + sb.toString();
 	}
 
+	private boolean _isAcceptPath(String path) {
+		if (_filters.length == 0) {
+			return true;
+		}
+
+		if (Wildcard.matchOne(path, _filters) != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private String _basePath;
 	private String _baseURL;
 	private String _contextPath;
 	private String[] _filters;
-	private List<Class<?>> _types;
+	private List<Class<?>> _types = new ArrayList<Class<?>>();
 
 }

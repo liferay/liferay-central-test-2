@@ -101,25 +101,8 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 		JSONWebServiceAction jsonWebServiceAction = null;
 
-		// We want to support a blank parameter such as ?list so we can't use
-		// ParamUtil because it always returns a blank string.
-
-		String list = request.getParameter("list");
-
-		String path = GetterUtil.getString(request.getPathInfo());
-
 		try {
-			if (path.equals("/invoke")) {
-				jsonWebServiceAction = new JSONWebServiceInvokerAction(request);
-			}
-			else if (list != null) {
-				jsonWebServiceAction = new JSONWebServiceListAction(request);
-			}
-			else {
-				jsonWebServiceAction =
-					JSONWebServiceActionsManagerUtil.getJSONWebServiceAction(
-						request);
-			}
+			jsonWebServiceAction = getJSONWebServiceAction(request);
 
 			Object returnObj = jsonWebServiceAction.invoke();
 
@@ -146,6 +129,23 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 			return JSONFactoryUtil.serializeException(e);
 		}
+	}
+
+	protected JSONWebServiceAction getJSONWebServiceAction(
+		HttpServletRequest request) {
+
+		String path = GetterUtil.getString(request.getPathInfo());
+
+		if (path.equals("/invoke")) {
+			return new JSONWebServiceInvokerAction(request);
+		}
+
+		if (request.getParameter("list") != null) {
+			return new JSONWebServiceListAction(request);
+		}
+
+		return JSONWebServiceActionsManagerUtil.getJSONWebServiceAction(
+			request);
 	}
 
 	protected JSONWebServiceConfigurator getJSONWebServiceConfigurator(
