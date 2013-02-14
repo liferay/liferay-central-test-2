@@ -593,10 +593,10 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 		long importedRepositoryId = 0;
 
-		boolean hidden = GetterUtil.getBoolean(
-			repositoryElement.attributeValue("hidden"));
-
 		try {
+			boolean hidden = GetterUtil.getBoolean(
+				repositoryElement.attributeValue("hidden"));
+
 			if (portletDataContext.isDataStrategyMirror()) {
 				Repository existingRepository = RepositoryUtil.fetchByUUID_G(
 					repository.getUuid(), portletDataContext.getScopeGroupId());
