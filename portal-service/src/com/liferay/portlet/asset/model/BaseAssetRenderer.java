@@ -85,9 +85,8 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return
-			themeDisplay.getPathThemeImages() +
-				"/file_system/large/default.png";
+		return themeDisplay.getPathThemeImages() +
+			"/file_system/large/default.png";
 	}
 
 	public String getURLDownload(ThemeDisplay themeDisplay) {
