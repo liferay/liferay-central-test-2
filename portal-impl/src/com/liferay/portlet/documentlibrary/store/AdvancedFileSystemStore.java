@@ -16,6 +16,8 @@ package com.liferay.portlet.documentlibrary.store;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -89,7 +91,7 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 				fileNameVersionFile, newFileNameVersionFile);
 
 			if (!renamed) {
-				throw new SystemException(
+				_log.error(
 					"File name version file was not renamed from " +
 						fileNameVersionFile.getPath() + " to " +
 							newFileNameVersionFile.getPath());
@@ -280,6 +282,9 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 		return headVersionLabel;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(AdvancedFileSystemStore.class);
 
 	private static final String _HOOK_EXTENSION = "afsh";
 
