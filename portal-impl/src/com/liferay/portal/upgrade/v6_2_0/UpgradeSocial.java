@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.social.WikiActivityKeys;
@@ -30,53 +31,42 @@ import java.sql.Timestamp;
 /**
  * @author Sergio Sanchez
  */
-public class UpgradeWikiSocialActivities extends UpgradeProcess {
+public class UpgradeSocial extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		updateWikiPageSocialActivities();
-	}
-
-	private void addUpdatedSocialActivity(
-			long groupId, long companyId, long userId, Timestamp modifiedDate,
-			long classNameId, long resourcePrimKey, double version)
+	protected void addActivity(
+			long activityId, long groupId, long companyId, long userId,
+			Timestamp createDate, long mirrorActivityId, long classNameId,
+			long classPK, int type, String extraData, long receiverUserId)
 		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-		extraDataJSONObject.put("version", version);
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(
-				"insert into SocialActivity (activityId, groupId, companyId, " +
-					"userId, createDate, mirrorActivityId, classNameId, " +
-						"classPK, type_, extraData, receiverUserId) values (" +
-							"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			StringBundler sb = new StringBundler(5);
 
-			ps.setLong(1, increment());
+			sb.append("insert into SocialActivity (activityId, groupId, ");
+			sb.append("companyId, userId, createDate, mirrorActivityId, ");
+			sb.append("classNameId, classPK, type_, extraData, ");
+			sb.append("receiverUserId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
+			sb.append("?)");
+
+			ps = con.prepareStatement(sb.toString());
+
+			ps.setLong(1, activityId);
 			ps.setLong(2, groupId);
 			ps.setLong(3, companyId);
 			ps.setLong(4, userId);
-			ps.setLong(5, modifiedDate.getTime());
-			ps.setInt(6, 0);
+			ps.setLong(5, createDate.getTime());
+			ps.setLong(6, mirrorActivityId);
 			ps.setLong(7, classNameId);
-			ps.setLong(8, resourcePrimKey);
-
-			if (version > 1.0) {
-				ps.setInt(9, WikiActivityKeys.UPDATE_PAGE);
-			}
-			else {
-				ps.setInt(9, WikiActivityKeys.ADD_PAGE);
-			}
-
-			ps.setString(10, extraDataJSONObject.toString());
-			ps.setInt(11, 0);
+			ps.setLong(8, classPK);
+			ps.setInt(9, type);
+			ps.setString(10, extraData);
+			ps.setLong(11, receiverUserId);
 
 			ps.executeUpdate();
 		}
@@ -85,18 +75,21 @@ public class UpgradeWikiSocialActivities extends UpgradeProcess {
 		}
 	}
 
-	private void updateWikiPageSocialActivities() throws Exception {
+	@Override
+	protected void doUpgrade() throws Exception {
+		updateWikiPageActivities();
+	}
+
+	protected void updateWikiPageActivities() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(WikiPage.class);
+
+		runSQL("delete from SocialActivity where classNameId = " + classNameId);
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			runSQL(
-				"delete from SocialActivity where classNameId = " +
-					classNameId);
-
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
@@ -113,9 +106,21 @@ public class UpgradeWikiSocialActivities extends UpgradeProcess {
 				long resourcePrimKey = rs.getLong("resourcePrimKey");
 				double version = rs.getDouble("version");
 
-				addUpdatedSocialActivity(
-					groupId, companyId, userId, modifiedDate, classNameId,
-					resourcePrimKey, version);
+				int type = WikiActivityKeys.ADD_PAGE;
+
+				if (version > 1.0) {
+					type = WikiActivityKeys.UPDATE_PAGE;
+				}
+
+				JSONObject extraDataJSONObject =
+					JSONFactoryUtil.createJSONObject();
+
+				extraDataJSONObject.put("version", version);
+
+				addActivity(
+					increment(), groupId, companyId, userId, modifiedDate, 0,
+					classNameId, resourcePrimKey, type,
+					extraDataJSONObject.toString(), 0);
 			}
 		}
 		finally {
