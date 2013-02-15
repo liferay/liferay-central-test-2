@@ -801,7 +801,8 @@ public class LayoutImporter {
 
 		GroupLocalServiceUtil.updateSite(groupId, true);
 
-		// Last merge time must be the same for merged layouts and the layoutset
+		// Last merge time must be the same for merged layouts and the layout
+		// set
 
 		long lastMergeTime = System.currentTimeMillis();
 
@@ -811,7 +812,7 @@ public class LayoutImporter {
 			UnicodeProperties typeSettingsProperties =
 				layout.getTypeSettingsProperties();
 
-			// Web content layout type
+			// Journal article layout type
 
 			String articleId = typeSettingsProperties.getProperty("article-id");
 
