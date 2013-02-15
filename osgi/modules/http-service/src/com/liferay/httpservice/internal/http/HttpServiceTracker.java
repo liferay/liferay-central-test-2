@@ -17,10 +17,11 @@ package com.liferay.httpservice.internal.http;
 import com.liferay.httpservice.internal.definition.FilterDefinition;
 import com.liferay.httpservice.internal.definition.ListenerDefinition;
 import com.liferay.httpservice.internal.definition.ServletDefinition;
-import com.liferay.httpservice.internal.servlet.WebXML;
-import com.liferay.httpservice.internal.servlet.WebXMLLoader;
+import com.liferay.httpservice.internal.definition.WebXMLDefinition;
+import com.liferay.httpservice.internal.definition.WebXMLDefinitionLoader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.xml.DocumentException;
 
 import java.util.List;
 import java.util.Map;
@@ -39,17 +40,22 @@ import org.osgi.util.tracker.ServiceTracker;
 public class HttpServiceTracker
 	extends ServiceTracker<HttpService, HttpService> {
 
-	public HttpServiceTracker(BundleContext bundleContext, Bundle bundle) {
+	public HttpServiceTracker(BundleContext bundleContext, Bundle bundle)
+		throws DocumentException {
+
 		super(bundleContext, HttpService.class, null);
 
 		_bundleContext = bundleContext;
 		_bundle = bundle;
-		_webXMLLoader = new WebXMLLoader();
+
+		_webXMLDefinitionLoader = new WebXMLDefinitionLoader();
 	}
 
 	@Override
-	public HttpService addingService(ServiceReference<HttpService> reference) {
-		_serviceReference = reference;
+	public HttpService addingService(
+		ServiceReference<HttpService> serviceReference) {
+
+		_serviceReference = serviceReference;
 
 		HttpService httpService = _bundleContext.getService(_serviceReference);
 
@@ -62,7 +68,9 @@ public class HttpServiceTracker
 		readConfiguration(_bundle);
 
 		initListeners((ExtendedHttpService)httpService, httpContext);
+
 		initServlets(httpService, httpContext);
+
 		initFilters((ExtendedHttpService)httpService, httpContext);
 
 		return httpService;
@@ -78,79 +86,92 @@ public class HttpServiceTracker
 		}
 
 		destroyFilters((ExtendedHttpService)httpService);
+
 		destroyServlets(httpService);
+
 		destroyListeners((ExtendedHttpService)httpService);
 
 		_webXML = null;
 	}
 
-	protected void destroyFilters(ExtendedHttpService httpService) {
-		Map<String, FilterDefinition> filters = _webXML.getFilters();
+	protected void destroyFilters(ExtendedHttpService extendedHttpService) {
+		Map<String, FilterDefinition> filterDefinitions =
+			_webXML.getFilterDefinitions();
 
-		for (String filterMapping : filters.keySet()) {
+		for (String name : filterDefinitions.keySet()) {
 			try {
-				httpService.unregisterFilter(filterMapping);
+				extendedHttpService.unregisterFilter(name);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 	}
 
-	protected void destroyListeners(ExtendedHttpService httpService) {
-		List<ListenerDefinition> listeners = _webXML.getListeners();
+	protected void destroyListeners(ExtendedHttpService extendedHttpService) {
+		List<ListenerDefinition> listenerDefinitions =
+			_webXML.getListenerDefinitions();
 
-		for (ListenerDefinition listenerDefinition : listeners) {
+		for (ListenerDefinition listenerDefinition : listenerDefinitions) {
 			try {
-				httpService.unregisterListener(
+				extendedHttpService.unregisterListener(
 					listenerDefinition.getListener());
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 	}
 
 	protected void destroyServlets(HttpService httpService) {
-		Map<String, ServletDefinition> servlets = _webXML.getServlets();
+		Map<String, ServletDefinition> servlets =
+			_webXML.getServletDefinitions();
 
-		for (String servletMapping : servlets.keySet()) {
-			httpService.unregister(servletMapping);
+		for (String name : servlets.keySet()) {
+			httpService.unregister(name);
 		}
 	}
 
 	protected void initFilters(
-		ExtendedHttpService httpService, HttpContext httpContext) {
+		ExtendedHttpService extendedHttpService, HttpContext httpContext) {
 
-		Map<String, FilterDefinition> filters = _webXML.getFilters();
+		Map<String, FilterDefinition> filterDefinitions =
+			_webXML.getFilterDefinitions();
 
-		for (String filterMapping : filters.keySet()) {
-			FilterDefinition filterDefinition = filters.get(filterMapping);
+		for (Map.Entry<String, FilterDefinition> entry :
+				filterDefinitions.entrySet()) {
 
-			try {
-				httpService.registerFilter(
-					filterMapping, filterDefinition.getFilter(),
-					filterDefinition.getInitParams(), httpContext);
-			}
-			catch (Exception e) {
-				_log.error(e);
+			FilterDefinition filterDefinition = entry.getValue();
+
+			List<String> urlPatterns = filterDefinition.getURLPatterns();
+
+			for (String urlPattern : urlPatterns) {
+				try {
+					extendedHttpService.registerFilter(
+						urlPattern, filterDefinition.getFilter(),
+						filterDefinition.getInitParameters(), httpContext);
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 	}
 
 	protected void initListeners(
-		ExtendedHttpService httpService, HttpContext httpContext) {
+		ExtendedHttpService extendedHttpService, HttpContext httpContext) {
 
-		List<ListenerDefinition> listeners = _webXML.getListeners();
+		List<ListenerDefinition> listenerDefinitions =
+			_webXML.getListenerDefinitions();
 
-		for (ListenerDefinition listenerDefinition : listeners) {
+		for (ListenerDefinition listenerDefinition : listenerDefinitions) {
 			try {
-				httpService.registerListener(
+				extendedHttpService.registerListener(
 					listenerDefinition.getListener(),
-					listenerDefinition.getContextParams(), httpContext);
+					_webXML.getContextParameters(), httpContext);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 	}
@@ -158,33 +179,44 @@ public class HttpServiceTracker
 	protected void initServlets(
 		HttpService httpService, HttpContext httpContext) {
 
-		Map<String, ServletDefinition> servlets = _webXML.getServlets();
+		Map<String, ServletDefinition> servletDefinitions =
+			_webXML.getServletDefinitions();
 
-		for (String servletMapping : servlets.keySet()) {
-			ServletDefinition servletDefinition = servlets.get(servletMapping);
+		for (Map.Entry<String, ServletDefinition> entry :
+				servletDefinitions.entrySet()) {
 
-			try {
-				httpService.registerServlet(
-					servletMapping, servletDefinition.getServlet(),
-					servletDefinition.getInitParams(), httpContext);
-			}
-			catch (Exception e) {
-				_log.error(e);
+			ServletDefinition servletDefinition = entry.getValue();
+
+			List<String> urlPatterns = servletDefinition.getURLPatterns();
+
+			for (String urlPattern : urlPatterns) {
+				try {
+					httpService.registerServlet(
+						urlPattern, servletDefinition.getServlet(),
+						servletDefinition.getInitParameters(), httpContext);
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 	}
 
 	protected void readConfiguration(Bundle bundle) {
-		_webXML = _webXMLLoader.loadWebXML(bundle);
+		try {
+			_webXML = _webXMLDefinitionLoader.loadWebXML(bundle);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
-
-	protected WebXML _webXML;
-	protected WebXMLLoader _webXMLLoader;
 
 	private static Log _log = LogFactoryUtil.getLog(HttpServiceTracker.class);
 
 	private Bundle _bundle;
 	private BundleContext _bundleContext;
 	private ServiceReference<HttpService> _serviceReference;
+	private WebXMLDefinition _webXML;
+	private WebXMLDefinitionLoader _webXMLDefinitionLoader;
 
 }

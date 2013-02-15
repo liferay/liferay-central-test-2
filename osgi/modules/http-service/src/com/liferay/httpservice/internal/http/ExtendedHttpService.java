@@ -14,7 +14,7 @@
 
 package com.liferay.httpservice.internal.http;
 
-import java.util.Dictionary;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletException;
@@ -30,16 +30,16 @@ import org.osgi.service.http.NamespaceException;
 public interface ExtendedHttpService extends HttpService {
 
 	public void registerFilter(
-			String filterMapping, Filter filter,
-			Dictionary<String, String> initParams, HttpContext httpContext)
+			String urlPattern, Filter filter,
+			Map<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException;
 
 	public void registerListener(
-			Object listener, Dictionary<String, String> initParams,
+			Object listener, Map<String, String> initParameters,
 			HttpContext httpContext)
 		throws ServletException;
 
-	public void unregisterFilter(String filterMapping);
+	public void unregisterFilter(String name);
 
 	public void unregisterListener(Object listener);
 

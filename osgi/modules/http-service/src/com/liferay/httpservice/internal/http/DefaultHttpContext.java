@@ -17,8 +17,6 @@ package com.liferay.httpservice.internal.http;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.IOException;
-
 import java.net.URL;
 
 import java.util.Enumeration;
@@ -48,49 +46,50 @@ public class DefaultHttpContext implements HttpContext {
 			path = StringPool.SLASH.concat(path);
 		}
 
-		URL resourceURL = null;
+		URL url = null;
 
-		if (!path.startsWith(_EXT_PREFIX)) {
-			resourceURL = getResource(_EXT_PREFIX.concat(path));
+		if (!path.startsWith(_PATH_EXT)) {
+			url = getResource(_PATH_EXT.concat(path));
 
-			if (resourceURL != null) {
-				return resourceURL;
+			if (url != null) {
+				return url;
 			}
 		}
 
-		resourceURL = _bundle.getResource(path);
+		url = _bundle.getResource(path);
 
-		if (resourceURL != null) {
-			return resourceURL;
+		if (url != null) {
+			return url;
 		}
 
 		String filePattern = path;
 
-		int pos = path.lastIndexOf(StringPool.SLASH);
+		int index = path.lastIndexOf(StringPool.SLASH);
 
-		if (pos != -1) {
-			filePattern = path.substring(pos + 1);
-			path = path.substring(0, pos);
+		if (index != -1) {
+			filePattern = path.substring(index + 1);
+
+			path = path.substring(0, index);
 		}
 
-		Enumeration<URL> findEntries = _bundle.findEntries(
+		Enumeration<URL> enumeration = _bundle.findEntries(
 			path, filePattern, false);
 
-		if ((findEntries != null) && findEntries.hasMoreElements()) {
-			return findEntries.nextElement();
+		if ((enumeration != null) && enumeration.hasMoreElements()) {
+			return enumeration.nextElement();
 		}
 
 		return null;
 	}
 
 	public boolean handleSecurity(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		return true;
 	}
 
-	private static final String _EXT_PREFIX = "/ext";
+	private static final String _PATH_EXT = "/ext";
+
 	private Bundle _bundle;
 
 }
