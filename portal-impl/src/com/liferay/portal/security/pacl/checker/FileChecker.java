@@ -180,33 +180,44 @@ public class FileChecker extends BaseChecker {
 	}
 
 	@Override
-	public String[] generateRule(Object... arguments) {
-		String[] rule = new String[2];
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
 
-		if ((arguments != null) && (arguments.length == 1) &&
-			(arguments[0] instanceof Permission)) {
+		if ((arguments == null) || (arguments.length != 1) ||
+			!(arguments[0] instanceof Permission)) {
 
-			Permission permission = (Permission)arguments[0];
-
-			String actions = permission.getActions();
-
-			if (actions.equals(FILE_PERMISSION_ACTION_DELETE)) {
-				rule[0] = "security-manager-files-delete";
-			}
-			else if (actions.equals(FILE_PERMISSION_ACTION_EXECUTE)) {
-				rule[0] = "security-manager-files-execute";
-			}
-			else if (actions.equals(FILE_PERMISSION_ACTION_READ)) {
-				rule[0] = "security-manager-files-read";
-			}
-			else if (actions.equals(FILE_PERMISSION_ACTION_WRITE)) {
-				rule[0] = "security-manager-files-write";
-			}
-
-			rule[1] = permission.getName();
+			return null;
 		}
 
-		return rule;
+		Permission permission = (Permission)arguments[0];
+
+		String actions = permission.getActions();
+
+		String key = null;
+
+		if (actions.equals(FILE_PERMISSION_ACTION_DELETE)) {
+			key = "security-manager-files-delete";
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_EXECUTE)) {
+			key = "security-manager-files-execute";
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_READ)) {
+			key = "security-manager-files-read";
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_WRITE)) {
+			key = "security-manager-files-write";
+		}
+		else {
+			return null;
+		}
+
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey(key);
+		authorizationProperty.setValue(permission.getName());
+
+		return authorizationProperty;
 	}
 
 	protected void addCanonicalPath(List<String> paths, String path) {

@@ -65,57 +65,62 @@ public class PortalServiceChecker extends BaseChecker {
 	}
 
 	@Override
-	public String[] generateRule(Object... arguments) {
-		String[] rule = new String[2];
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
 
-		if ((arguments != null) && (arguments.length > 0)) {
-			Object object;
-			Method method;
-
-			if (arguments[0] instanceof Permission) {
-				PortalServicePermission portalServicePermission =
-					(PortalServicePermission)arguments[0];
-
-				object = portalServicePermission.getObject();
-				method = portalServicePermission.getMethod();
-			}
-			else {
-				object = arguments[0];
-				method = (Method)arguments[1];
-			}
-
-			Class<?> clazz = getClass(object);
-
-			if (clazz == null) {
-				return rule;
-			}
-
-			ClassLoader classLoader = PACLClassLoaderUtil.getClassLoader(clazz);
-
-			PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
-				classLoader);
-
-			String filter = "[portal]";
-
-			if (paclPolicy != null) {
-				filter = StringPool.OPEN_BRACKET.concat(
-					paclPolicy.getServletContextName()).concat(
-						StringPool.CLOSE_BRACKET);
-			}
-
-			String className = getInterfaceName(clazz.getName());
-
-			String methodName = method.getName();
-
-			if (methodName.equals("invokeMethod")) {
-				methodName = (String)arguments[0];
-			}
-
-			rule[0] = "security-manager-services".concat(filter);
-			rule[1] = className.concat(StringPool.POUND).concat(methodName);
+		if ((arguments == null) || (arguments.length == 0)) {
+			return null;
 		}
 
-		return rule;
+		Object object = null;
+		Method method = null;
+
+		if (arguments[0] instanceof Permission) {
+			PortalServicePermission portalServicePermission =
+				(PortalServicePermission)arguments[0];
+
+			object = portalServicePermission.getObject();
+			method = portalServicePermission.getMethod();
+		}
+		else {
+			object = arguments[0];
+			method = (Method)arguments[1];
+		}
+
+		Class<?> clazz = getClass(object);
+
+		if (clazz == null) {
+			return null;
+		}
+
+		ClassLoader classLoader = PACLClassLoaderUtil.getClassLoader(clazz);
+
+		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(classLoader);
+
+		String filter = "[portal]";
+
+		if (paclPolicy != null) {
+			filter =
+				StringPool.OPEN_BRACKET + paclPolicy.getServletContextName() +
+					StringPool.CLOSE_BRACKET;
+		}
+
+		String className = getInterfaceName(clazz.getName());
+
+		String methodName = method.getName();
+
+		if (methodName.equals("invokeMethod")) {
+			methodName = (String)arguments[0];
+		}
+
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey("security-manager-services" + filter);
+		authorizationProperty.setValue(
+			className + StringPool.POUND + methodName);
+
+		return authorizationProperty;
 	}
 
 	public boolean hasService(

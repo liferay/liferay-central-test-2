@@ -59,30 +59,40 @@ public class PortalMessageBusChecker extends BaseChecker {
 	}
 
 	@Override
-	public String[] generateRule(Object... arguments) {
-		String[] rule = new String[2];
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
 
-		if ((arguments != null) && (arguments.length == 1) &&
-			(arguments[0] instanceof Permission)) {
+		if ((arguments == null) || (arguments.length != 1) ||
+			!(arguments[0] instanceof Permission)) {
 
-			PortalMessageBusPermission portalMessageBusPermission =
-				(PortalMessageBusPermission)arguments[0];
-
-			String name = portalMessageBusPermission.getName();
-			String destinationName =
-				portalMessageBusPermission.getDestinationName();
-
-			if (name.equals(PORTAL_MESSAGE_BUS_PERMISSION_LISTEN)) {
-				rule[0] = "security-manager-message-bus-listen";
-			}
-			else if (name.equals(PORTAL_MESSAGE_BUS_PERMISSION_SEND)) {
-				rule[0] = "security-manager-message-bus-send";
-			}
-
-			rule[1] = destinationName;
+			return null;
 		}
 
-		return rule;
+		PortalMessageBusPermission portalMessageBusPermission =
+			(PortalMessageBusPermission)arguments[0];
+
+		String name = portalMessageBusPermission.getName();
+
+		String key = null;
+
+		if (name.equals(PORTAL_MESSAGE_BUS_PERMISSION_LISTEN)) {
+			key = "security-manager-message-bus-listen";
+		}
+		else if (name.equals(PORTAL_MESSAGE_BUS_PERMISSION_SEND)) {
+			key = "security-manager-message-bus-send";
+		}
+		else {
+			return null;
+		}
+
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey(key);
+		authorizationProperty.setValue(
+			portalMessageBusPermission.getDestinationName());
+
+		return authorizationProperty;
 	}
 
 	protected void initListenDestinationNames() {

@@ -28,7 +28,8 @@ public interface Checker {
 
 	public void checkPermission(Permission permission);
 
-	public String[] generateRule(Object... arguments);
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments);
 
 	public ClassLoader getClassLoader();
 

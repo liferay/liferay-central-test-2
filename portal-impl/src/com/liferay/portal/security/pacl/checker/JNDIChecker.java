@@ -40,17 +40,22 @@ public class JNDIChecker extends BaseChecker {
 	}
 
 	@Override
-	public String[] generateRule(Object... arguments) {
-		String[] rule = new String[2];
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
 
-		if ((arguments != null) && (arguments.length == 1) &&
-			(arguments[0] instanceof String)) {
+		if ((arguments == null) || (arguments.length != 1) ||
+			!(arguments[0] instanceof String)) {
 
-			rule[0] = "security-manager-jndi-names";
-			rule[1] = (String)arguments[0];
+			return null;
 		}
 
-		return rule;
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey("security-manager-jndi-names");
+		authorizationProperty.setValue((String)arguments[0]);
+
+		return authorizationProperty;
 	}
 
 	public boolean hasJNDI(String name) {

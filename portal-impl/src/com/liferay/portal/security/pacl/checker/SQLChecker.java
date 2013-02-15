@@ -58,82 +58,114 @@ public class SQLChecker extends BaseChecker {
 	}
 
 	@Override
-	public String[] generateRule(Object... arguments) {
-		String[] rule = new String[2];
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
 
-		if ((arguments != null) && (arguments.length == 1) &&
-			(arguments[0] instanceof String)) {
+		if ((arguments == null) || (arguments.length != 1) ||
+			!(arguments[0] instanceof String)) {
 
-			String sql = (String)arguments[0];
-
-			Statement statement = null;
-
-			try {
-				statement = _jSqlParser.parse(new StringReader(sql));
-			}
-			catch (Exception e) {
-				_log.error("Unable to parse SQL " + sql);
-
-				return rule;
-			}
-
-			if (statement instanceof CreateTable) {
-				CreateTable createTable = (CreateTable)statement;
-
-				rule[0] = "security-manager-sql-tables-create";
-				rule[1] = createTable.getTable().getName();
-			}
-			else if (statement instanceof Delete) {
-				Delete delete = (Delete)statement;
-
-				rule[0] = "security-manager-sql-tables-delete";
-				rule[1] = delete.getTable().getName();
-			}
-			else if (statement instanceof Drop) {
-				Drop drop = (Drop)statement;
-
-				rule[0] = "security-manager-sql-tables-drop";
-				rule[1] = drop.getName();
-			}
-			else if (statement instanceof Insert) {
-				Insert insert = (Insert)statement;
-
-				rule[0] = "security-manager-sql-tables-insert";
-				rule[1] = insert.getTable().getName();
-			}
-			else if (statement instanceof Replace) {
-				Replace replace = (Replace)statement;
-
-				rule[0] = "security-manager-sql-tables-replace";
-				rule[1] = replace.getTable().getName();
-			}
-			else if (statement instanceof Select) {
-				Select select = (Select)statement;
-
-				rule[0] = "security-manager-sql-tables-select";
-
-				TableNamesFinder tableNamesFinder = new TableNamesFinder();
-
-				List<String> tableNames = tableNamesFinder.getTableNames(
-					select);
-
-				rule[1] = StringUtil.merge(tableNames);
-			}
-			else if (statement instanceof Truncate) {
-				Truncate truncate = (Truncate)statement;
-
-				rule[0] = "security-manager-sql-tables-truncate";
-				rule[1] = truncate.getTable().getName();
-			}
-			else if (statement instanceof Update) {
-				Update update = (Update)statement;
-
-				rule[0] = "security-manager-sql-tables-update";
-				rule[1] = update.getTable().getName();
-			}
+			return null;
 		}
 
-		return rule;
+		String sql = (String)arguments[0];
+
+		Statement statement = null;
+
+		try {
+			statement = _jSqlParser.parse(new StringReader(sql));
+		}
+		catch (Exception e) {
+			_log.error("Unable to parse SQL " + sql);
+
+			return null;
+		}
+
+		String key = null;
+		String value = null;
+
+		if (statement instanceof CreateTable) {
+			key = "security-manager-sql-tables-create";
+
+			CreateTable createTable = (CreateTable)statement;
+
+			Table table = createTable.getTable();
+
+			value = table.getName();
+		}
+		else if (statement instanceof Delete) {
+			key = "security-manager-sql-tables-delete";
+
+			Delete delete = (Delete)statement;
+
+			Table table = delete.getTable();
+
+			value = table.getName();
+		}
+		else if (statement instanceof Drop) {
+			key = "security-manager-sql-tables-drop";
+
+			Drop drop = (Drop)statement;
+
+			value = drop.getName();
+		}
+		else if (statement instanceof Insert) {
+			key = "security-manager-sql-tables-insert";
+
+			Insert insert = (Insert)statement;
+
+			Table table = insert.getTable();
+
+			value = table.getName();
+		}
+		else if (statement instanceof Replace) {
+			key = "security-manager-sql-tables-replace";
+
+			Replace replace = (Replace)statement;
+
+			Table table = replace.getTable();
+
+			value = table.getName();
+		}
+		else if (statement instanceof Select) {
+			key = "security-manager-sql-tables-select";
+
+			TableNamesFinder tableNamesFinder = new TableNamesFinder();
+
+			Select select = (Select)statement;
+
+			List<String> tableNames = tableNamesFinder.getTableNames(select);
+
+			value = StringUtil.merge(tableNames);
+		}
+		else if (statement instanceof Truncate) {
+			key = "security-manager-sql-tables-truncate";
+
+			Truncate truncate = (Truncate)statement;
+
+			Table table = truncate.getTable();
+
+			value = table.getName();
+		}
+		else if (statement instanceof Update) {
+			key = "security-manager-sql-tables-update";
+
+			Update update = (Update)statement;
+
+			Table table = update.getTable();
+
+			value = table.getName();
+		}
+		else {
+			return null;
+		}
+
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey(key);
+		authorizationProperty.setValue(value);
+
+		return authorizationProperty;
 	}
 
 	public boolean hasSQL(String sql) {

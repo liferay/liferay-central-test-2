@@ -118,7 +118,8 @@ public class PACLPolicyManager {
 	}
 
 	public enum State {
-		DISABLED, ENABLED, GENERATE;
+
+		DISABLED, ENABLED, GENERATING_AUTHORIZATION_PROPERTY;
 
 		public static State parse(String state) {
 			if (GetterUtil.getBoolean(state) == true) {
