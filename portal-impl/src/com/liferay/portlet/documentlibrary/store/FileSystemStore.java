@@ -16,8 +16,6 @@ package com.liferay.portlet.documentlibrary.store;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -314,7 +312,7 @@ public class FileSystemStore extends BaseStore {
 		boolean renamed = FileUtil.move(fileNameDir, newFileNameDir);
 
 		if (!renamed) {
-			_log.error(
+			throw new SystemException(
 				"File name directory was not renamed from " +
 					fileNameDir.getPath() + " to " + newFileNameDir.getPath());
 		}
@@ -340,7 +338,7 @@ public class FileSystemStore extends BaseStore {
 		boolean renamed = FileUtil.move(fileNameDir, newFileNameDir);
 
 		if (!renamed) {
-			_log.error(
+			throw new SystemException(
 				"File name directory was not renamed from " +
 					fileNameDir.getPath() + " to " + newFileNameDir.getPath());
 		}
@@ -508,8 +506,6 @@ public class FileSystemStore extends BaseStore {
 
 		return repositoryDir;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(FileSystemStore.class);
 
 	private Map<RepositoryDirKey, File> _repositoryDirs =
 		new ConcurrentHashMap<RepositoryDirKey, File>();
