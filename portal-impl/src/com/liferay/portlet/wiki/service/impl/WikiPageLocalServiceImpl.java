@@ -1503,16 +1503,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			PropsValues.WIKI_PAGE_MINOR_EDIT_ADD_SOCIAL_ACTIVITY) {
 
 			if (oldVersion == newVersion) {
-				SocialActivity lastActivity =
+				SocialActivity lastSocialActivity =
 					socialActivityLocalService.fetchFirstActivity(
 						WikiPage.class.getName(), page.getResourcePrimKey(),
 						WikiActivityKeys.UPDATE_PAGE);
 
-				if (lastActivity != null) {
-					lastActivity.setCreateDate(now.getTime() + 1);
-					lastActivity.setUserId(serviceContext.getUserId());
+				if (lastSocialActivity != null) {
+					lastSocialActivity.setCreateDate(now.getTime() + 1);
+					lastSocialActivity.setUserId(serviceContext.getUserId());
 
-					socialActivityPersistence.update(lastActivity);
+					socialActivityPersistence.update(lastSocialActivity);
 				}
 			}
 			else {
