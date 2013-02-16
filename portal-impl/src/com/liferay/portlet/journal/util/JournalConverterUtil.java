@@ -532,19 +532,20 @@ public class JournalConverterUtil {
 		element.addAttribute("dataType", _ddmDataTypes.get(type));
 		element.addAttribute("indexType", indexType);
 
+		String required = "false";
+
 		XPath xPathSelector = SAXReaderUtil.createXPath(
 			"entry[@name='required']");
 
-		Element requiredMetadataElement =
-			(Element)xPathSelector.selectSingleNode(metadataElement);
+		Element requiredElement = (Element)xPathSelector.selectSingleNode(
+			metadataElement);
 
-		String required = "false";
-
-		if (requiredMetadataElement != null) {
-			required = requiredMetadataElement.getText();
+		if (requiredElement != null) {
+			required = requiredElement.getText();
 		}
 
 		element.addAttribute("required", required);
+
 		element.addAttribute("showLabel", "true");
 
 		String newType = _journalTypesToDDMTypes.get(type);
