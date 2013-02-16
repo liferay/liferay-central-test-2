@@ -303,9 +303,9 @@ public interface PropsKeys {
 
 	public static final String BROWSER_CACHE_SIGNED_IN_DISABLED = "browser.cache.signed.in.disabled";
 
-	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
+	public static final String BROWSER_COMPATIBILITY_IE_VERSIONS = "browser.compatibility.ie.versionss";
 
-	public static final String BROWSER_UA_IE_COMPATIBILITY_VERSIONS = "browser.ua.ie.compatibility.versions";
+	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
 
 	public static final String BUFFERED_INCREMENT_ENABLED = "buffered.increment.enabled";
 
