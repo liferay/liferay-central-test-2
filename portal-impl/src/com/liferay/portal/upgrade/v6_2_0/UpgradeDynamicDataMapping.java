@@ -58,64 +58,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 		runSQL("update DDMTemplate set classNameId = " + classNameId);
 
-		updateDDMStructureStructureKeys();
-		updateDDMStructureXSDs();
-	}
-
-	protected void updateDDMStructureStructureKeys() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement("select * from DDMStructure");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long structureId = rs.getLong("structureId");
-				String structureKey = rs.getString("structureKey");
-
-				structureKey = structureKey.trim().toUpperCase();
-
-				runSQL(
-					"update DDMStructure set structureKey = '" + structureKey +
-						"' where structureId = " + structureId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateDDMStructureXSDs() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement("select * from DDMStructure");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long structureId = rs.getLong("structureId");
-				String xsd = rs.getString("xsd");
-
-				xsd = updateXSD(xsd);
-
-				runSQL(
-					"update DDMStructure set xsd = '" + xsd +
-						"' where structureId = " + structureId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		updateStructures();
 	}
 
 	protected void updateMetadataElement(
@@ -140,6 +83,59 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		}
 	}
 
+	protected void updateStructure(
+			long structureId, String structureKey, String xsd)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update DDMStructure set structureKey = ?, xsd = ? where " +
+					"structureId = ?");
+
+			ps.setString(1, structureKey);
+			ps.setString(2, xsd);
+			ps.setLong(3, structureId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateStructures() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement("select * from DDMStructure");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long structureId = rs.getLong("structureId");
+				String structureKey = rs.getString("structureKey");
+				String xsd = rs.getString("xsd");
+
+				updateStructure(
+					structureId, structureKey.trim().toUpperCase(),
+					updateXSD(xsd));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected String updateXSD(String xsd) throws Exception {
 		Document document = SAXReaderUtil.read(xsd);
 
@@ -159,8 +155,14 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		Element metadataElement = element.element("meta-data");
 
 		updateMetadataElement(
-			metadataElement, _relocatedMetadadaEntryNames,
-			_removedMetadataEntryNames);
+			metadataElement,
+			new String[] {
+				"multiple", "readOnly", "repeatable", "required", "showLabel",
+				"width",
+			},
+			new String[] {
+				"displayChildLabelAsValue", "fieldCssClass"
+			});
 
 		List<Element> dynamicElementElements = element.elements(
 			"dynamic-element");
@@ -169,11 +171,5 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			updateXSDDynamicElement(dynamicElementElement);
 		}
 	}
-
-	private String[] _relocatedMetadadaEntryNames = new String[] {
-		"multiple", "readOnly", "repeatable", "required", "showLabel", "width"};
-
-	private String[] _removedMetadataEntryNames = new String[] {
-		"displayChildLabelAsValue", "fieldCssClass"};
 
 }
