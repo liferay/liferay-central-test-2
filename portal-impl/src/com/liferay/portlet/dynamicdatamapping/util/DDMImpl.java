@@ -525,7 +525,7 @@ public class DDMImpl implements DDM {
 						fieldValue = UnicodeFormatter.bytesToHex(bytes);
 					}
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 					return null;
 				}
 			}

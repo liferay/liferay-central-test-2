@@ -413,9 +413,9 @@ public class EditArticleAction extends PortletAction {
 	protected Map<String, byte[]> getImages(Fields fields, Locale locale)
 		throws Exception {
 
-		Iterator<Field> iterator = fields.iterator();
-
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
+
+		Iterator<Field> iterator = fields.iterator();
 
 		while (iterator.hasNext()) {
 			Field field = iterator.next();
@@ -423,14 +423,15 @@ public class EditArticleAction extends PortletAction {
 			String dataType = field.getDataType();
 			String name = field.getName();
 
-			if (dataType.equals(FieldConstants.IMAGE)) {
-				String content = (String)field.getValue(locale);
-
-				String imageKey = "_" + name + "_" + LanguageUtil.getLanguageId(
-					locale);
-
-				images.put(imageKey, UnicodeFormatter.hexToBytes(content));
+			if (!dataType.equals(FieldConstants.IMAGE)) {
+				continue;
 			}
+
+			String content = (String)field.getValue(locale);
+
+			images.put(
+				"_" + name + "_" + LanguageUtil.getLanguageId(locale),
+				UnicodeFormatter.hexToBytes(content));
 		}
 
 		return images;
@@ -599,14 +600,6 @@ public class EditArticleAction extends PortletAction {
 				uploadPortletRequest, "description_" + toLanguageId);
 		}
 
-		String languageId = toLanguageId;
-
-		if (Validator.isNull(languageId)) {
-			languageId = defaultLanguageId;
-		}
-
-		Locale locale = LocaleUtil.fromLanguageId(languageId);
-
 		String content = ParamUtil.getString(uploadPortletRequest, "content");
 
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
@@ -618,6 +611,14 @@ public class EditArticleAction extends PortletAction {
 			uploadPortletRequest, "structureId");
 
 		if (Validator.isNotNull(structureId)) {
+			String languageId = toLanguageId;
+
+			if (Validator.isNull(languageId)) {
+				languageId = defaultLanguageId;
+			}
+
+			Locale locale = LocaleUtil.fromLanguageId(languageId);
+
 			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.fetchStructure(
 					groupId, PortalUtil.getClassNameId(JournalArticle.class),
