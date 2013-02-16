@@ -263,8 +263,7 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 							return classLoader;
 						}
 
-						classLoader =
-							ClassLoaderUtil.getPortalClassLoader();
+						classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 						ClassLoader contextClassLoader =
 							ClassLoaderUtil.getContextClassLoader();

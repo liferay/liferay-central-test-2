@@ -53,8 +53,7 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 			if ((classLoaders != null) && (classLoaders.length > 0)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
-						ClassLoaderUtil.getPortalClassLoader(),
-						classLoaders);
+						ClassLoaderUtil.getPortalClassLoader(), classLoaders);
 
 				interpreter.setClassLoader(aggregateClassLoader);
 			}

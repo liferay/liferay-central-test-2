@@ -201,8 +201,7 @@ public class HotDeployImpl implements HotDeploy {
 			ClassLoader contextClassLoader = getContextClassLoader();
 
 			try {
-				setContextClassLoader(
-					ClassLoaderUtil.getPortalClassLoader());
+				setContextClassLoader(ClassLoaderUtil.getPortalClassLoader());
 
 				List<HotDeployEvent> dependentEvents =
 					new ArrayList<HotDeployEvent>(_dependentHotDeployEvents);

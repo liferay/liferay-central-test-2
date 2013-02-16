@@ -84,8 +84,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		rubyInstanceConfig.setJitThreshold(
 			PropsValues.SCRIPTING_JRUBY_COMPILE_THRESHOLD);
-		rubyInstanceConfig.setLoader(
-			ClassLoaderUtil.getPortalClassLoader());
+		rubyInstanceConfig.setLoader(ClassLoaderUtil.getPortalClassLoader());
 
 		_basePath = PortalUtil.getPortalLibDir();
 
@@ -150,8 +149,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			if ((classLoaders != null) && (classLoaders.length > 0)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
-						ClassLoaderUtil.getPortalClassLoader(),
-						classLoaders);
+						ClassLoaderUtil.getPortalClassLoader(), classLoaders);
 
 				rubyInstanceConfig.setLoader(aggregateClassLoader);
 			}

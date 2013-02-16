@@ -55,8 +55,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 			if ((classLoaders != null) && (classLoaders.length > 0)) {
 				ClassLoader aggregateClassLoader =
 					AggregateClassLoader.getAggregateClassLoader(
-						ClassLoaderUtil.getPortalClassLoader(),
-						classLoaders);
+						ClassLoaderUtil.getPortalClassLoader(), classLoaders);
 
 				context.setApplicationClassLoader(aggregateClassLoader);
 			}

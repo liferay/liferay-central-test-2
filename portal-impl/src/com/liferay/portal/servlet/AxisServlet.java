@@ -74,14 +74,12 @@ public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 					ClassLoaderUtil.getContextClassLoader();
 
 				try {
-					ClassLoaderUtil.setContextClassLoader(
-						_pluginClassLoader);
+					ClassLoaderUtil.setContextClassLoader(_pluginClassLoader);
 
 					super.service(request, response);
 				}
 				finally {
-					ClassLoaderUtil.setContextClassLoader(
-						contextClassLoader);
+					ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 				}
 			}
 		}

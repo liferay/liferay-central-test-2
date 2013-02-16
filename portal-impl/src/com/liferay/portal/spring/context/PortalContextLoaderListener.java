@@ -215,8 +215,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		SingleVMPoolUtil.clear();
 		WebCachePoolUtil.clear();
 
-		ClassLoader portalClassLoader =
-			ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		BeanLocatorImpl beanLocatorImpl = new BeanLocatorImpl(
 			portalClassLoader, applicationContext);

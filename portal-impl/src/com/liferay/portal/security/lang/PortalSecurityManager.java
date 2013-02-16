@@ -85,8 +85,7 @@ public class PortalSecurityManager extends SecurityManager {
 			return;
 		}
 
-		ClassLoader classClassLoader = ClassLoaderUtil.getClassLoader(
-			clazz);
+		ClassLoader classClassLoader = ClassLoaderUtil.getClassLoader(clazz);
 
 		if (classClassLoader == null) {
 			return;

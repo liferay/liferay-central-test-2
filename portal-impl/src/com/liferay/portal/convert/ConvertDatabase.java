@@ -212,8 +212,7 @@ public class ConvertDatabase extends ConvertProcess {
 
 	protected Class<?> getImplClass(String implClassName) throws Exception {
 		try {
-			ClassLoader classLoader =
-				ClassLoaderUtil.getPortalClassLoader();
+			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 			return classLoader.loadClass(implClassName);
 		}

@@ -111,8 +111,7 @@ public class TemplateContextHelper {
 
 		ClassLoader contextClassLoader =
 			ClassLoaderUtil.getContextClassLoader();
-		ClassLoader portalClassLoader =
-			ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		if (contextClassLoader == portalClassLoader) {
 			return doGetHelperUtilities(

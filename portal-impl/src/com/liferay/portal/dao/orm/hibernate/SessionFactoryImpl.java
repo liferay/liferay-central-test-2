@@ -102,8 +102,7 @@ public class SessionFactoryImpl implements SessionFactory {
 	public void setSessionFactoryClassLoader(
 		ClassLoader sessionFactoryClassLoader) {
 
-		ClassLoader portalClassLoader =
-			ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		if (sessionFactoryClassLoader == portalClassLoader) {
 			_sessionFactoryClassLoader = sessionFactoryClassLoader;

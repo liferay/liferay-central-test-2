@@ -22,8 +22,8 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.security.pacl.PACLClassUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.security.AccessController;
 import java.security.Permission;

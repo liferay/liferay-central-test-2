@@ -131,8 +131,7 @@ public class CaptchaImpl implements Captcha {
 				}
 
 				_captcha = (Captcha)InstanceFactory.newInstance(
-					ClassLoaderUtil.getPortalClassLoader(),
-					captchaClassName);
+					ClassLoaderUtil.getPortalClassLoader(), captchaClassName);
 
 				_originalCaptcha = _captcha;
 			}

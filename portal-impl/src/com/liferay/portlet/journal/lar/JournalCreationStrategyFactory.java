@@ -31,8 +31,7 @@ public class JournalCreationStrategyFactory {
 					"Instantiate " + PropsValues.JOURNAL_LAR_CREATION_STRATEGY);
 			}
 
-			ClassLoader classLoader =
-				ClassLoaderUtil.getPortalClassLoader();
+			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 			try {
 				_journalCreationStrategy =

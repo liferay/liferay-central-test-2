@@ -23,8 +23,8 @@ import com.liferay.portal.kernel.util.PathUtil;
 import com.liferay.portal.kernel.util.ReferenceEntry;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.security.pacl.PACLClassUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.beans.Introspector;
 

@@ -80,8 +80,7 @@ public class StartupHelper {
 		DB db, Connection connection, boolean dropIndexes) {
 
 		try {
-			ClassLoader classLoader =
-				ClassLoaderUtil.getContextClassLoader();
+			ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
 
 			String tablesSQL = StringUtil.read(
 				classLoader,

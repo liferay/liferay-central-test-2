@@ -65,14 +65,12 @@ public class JSONServlet extends HttpServlet {
 					ClassLoaderUtil.getContextClassLoader();
 
 				try {
-					ClassLoaderUtil.setContextClassLoader(
-						_pluginClassLoader);
+					ClassLoaderUtil.setContextClassLoader(_pluginClassLoader);
 
 					_jsonAction.execute(null, null, request, response);
 				}
 				finally {
-					ClassLoaderUtil.setContextClassLoader(
-						contextClassLoader);
+					ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 				}
 			}
 		}

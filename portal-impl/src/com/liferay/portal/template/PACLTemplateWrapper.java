@@ -33,8 +33,7 @@ public class PACLTemplateWrapper implements Template {
 	public static Template getTemplate(Template template) {
 		ClassLoader contextClassLoader =
 			ClassLoaderUtil.getContextClassLoader();
-		ClassLoader portalClassLoder =
-			ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader portalClassLoder = ClassLoaderUtil.getPortalClassLoader();
 
 		if (contextClassLoader == portalClassLoder) {
 			return template;

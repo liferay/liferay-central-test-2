@@ -37,8 +37,7 @@ public class DeploymentHandler {
 		String dmId, String dmUser, String dmPassword, String dfClassName) {
 
 		try {
-			ClassLoader classLoader =
-				ClassLoaderUtil.getPortalClassLoader();
+			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 			DeploymentFactoryManager deploymentFactoryManager =
 				DeploymentFactoryManager.getInstance();

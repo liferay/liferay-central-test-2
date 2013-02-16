@@ -287,8 +287,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	public String extractText(InputStream is, String fileName) {
 		String text = null;
 
-		ClassLoader portalClassLoader =
-			ClassLoaderUtil.getPortalClassLoader();
+		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		ClassLoader contextClassLoader =
 			ClassLoaderUtil.getContextClassLoader();
