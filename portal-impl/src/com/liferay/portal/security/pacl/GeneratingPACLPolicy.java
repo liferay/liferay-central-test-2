@@ -66,7 +66,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 				AuthorizationProperty authorizationProperty =
 					checker.generateAuthorizationProperty(permission);
 
-				trackAuthorizationProperty(authorizationProperty);
+				mergeAuthorizationProperty(authorizationProperty);
 			}
 			catch (Exception e) {
 				throw se;
@@ -82,7 +82,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			AuthorizationProperty authorizationProperty =
 				jndiChecker.generateAuthorizationProperty(name);
 
-			trackAuthorizationProperty(authorizationProperty);
+			mergeAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
@@ -99,7 +99,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 				portalServiceChecker.generateAuthorizationProperty(
 					object, method, arguments);
 
-			trackAuthorizationProperty(authorizationProperty);
+			mergeAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
@@ -113,7 +113,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			AuthorizationProperty authorizationProperty =
 				sqlChecker.generateAuthorizationProperty(sql);
 
-			trackAuthorizationProperty(authorizationProperty);
+			mergeAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
@@ -144,7 +144,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 	}
 
-	protected void trackAuthorizationProperty(
+	protected void mergeAuthorizationProperty(
 		AuthorizationProperty authorizationProperty) {
 
 		if (authorizationProperty == null) {
@@ -180,8 +180,8 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Tracking " + getServletContextName() +
-						" with authorization property " +
+					getServletContextName() +
+						" generated authorization property " +
 							authorizationProperty);
 			}
 

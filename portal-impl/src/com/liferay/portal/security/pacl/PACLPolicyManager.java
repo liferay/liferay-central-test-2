@@ -16,6 +16,7 @@ package com.liferay.portal.security.pacl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.lang.PortalSecurityManager;
@@ -37,26 +38,22 @@ public class PACLPolicyManager {
 		String servletContextName, ClassLoader classLoader,
 		Properties properties) {
 
-		PACLPolicy paclPolicy = null;
+		String value = properties.getProperty(
+			"security-manager-enabled", "false");
 
-		State state = State.parse(
-			properties.getProperty(
-				"security-manager-enabled", State.DISABLED.getValue()));
-
-		if (state == State.ENABLED) {
-			paclPolicy = new ActivePACLPolicy(
+		if (value.equals("generate")) {
+			return new GeneratingPACLPolicy(
 				servletContextName, classLoader, properties);
 		}
-		else if (state == State.GENERATING_AUTHORIZATION_PROPERTY) {
-			paclPolicy = new GeneratingPACLPolicy(
+		
+		if (GetterUtil.getBoolean(value)) {
+			return new ActivePACLPolicy(
 				servletContextName, classLoader, properties);
 		}
 		else {
-			paclPolicy = new InactivePACLPolicy(
+			return new InactivePACLPolicy(
 				servletContextName, classLoader, properties);
 		}
-
-		return paclPolicy;
 	}
 
 	public static int getActiveCount() {
@@ -119,45 +116,6 @@ public class PACLPolicyManager {
 
 			ServiceBeanAopCacheManagerUtil.reset();
 		}
-	}
-
-	public enum State {
-
-		DISABLED("false"), ENABLED("true"),
-		GENERATING_AUTHORIZATION_PROPERTY("generate");
-
-		public static State parse(String value) {
-			if (DISABLED.getValue().equals(value)) {
-				return DISABLED;
-			}
-			else if (ENABLED.getValue().equals(value)) {
-				return ENABLED;
-			}
-			else if (GENERATING_AUTHORIZATION_PROPERTY.getValue().equals(
-						value)) {
-
-				return GENERATING_AUTHORIZATION_PROPERTY;
-			}
-			else {
-				throw new IllegalArgumentException("Invalid value " + value);
-			}
-		}
-
-		public String getValue() {
-			return _value;
-		}
-
-		@Override
-		public String toString() {
-			return _value;
-		}
-
-		private State(String value) {
-			_value = value;
-		}
-
-		private String _value;
-
 	}
 
 	private static void _overridePortalSecurityManager() {
