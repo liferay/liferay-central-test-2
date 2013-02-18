@@ -180,12 +180,17 @@ public class GroupPermissionImpl implements GroupPermission {
 
 		Role siteAdministratorRole = RoleLocalServiceUtil.getRole(
 			permissionChecker.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+
+		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+				userId, groupId, siteAdministratorRole.getRoleId())) {
+
+			return true;
+		}
+
 		Role siteOwnerRole = RoleLocalServiceUtil.getRole(
 			permissionChecker.getCompanyId(), RoleConstants.SITE_OWNER);
 
 		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, siteAdministratorRole.getRoleId()) ||
-			UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 				userId, groupId, siteOwnerRole.getRoleId())) {
 
 			return true;

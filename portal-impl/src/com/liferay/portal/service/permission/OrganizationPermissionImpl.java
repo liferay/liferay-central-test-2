@@ -134,12 +134,17 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		Role organizationAdministratorRole = RoleLocalServiceUtil.getRole(
 			permissionChecker.getCompanyId(),
 			RoleConstants.ORGANIZATION_ADMINISTRATOR);
+
+		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+				userId, groupId, organizationAdministratorRole.getRoleId())) {
+
+			return true;
+		}
+
 		Role organizationOwnerRole = RoleLocalServiceUtil.getRole(
 			permissionChecker.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
 		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, organizationAdministratorRole.getRoleId()) ||
-			UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 				userId, groupId, organizationOwnerRole.getRoleId())) {
 
 			return true;
