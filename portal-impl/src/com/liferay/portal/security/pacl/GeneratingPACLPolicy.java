@@ -17,10 +17,8 @@ package com.liferay.portal.security.pacl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.checker.AuthorizationProperty;
 import com.liferay.portal.security.pacl.checker.Checker;
@@ -186,8 +184,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 
 			if (_properties.containsKey(key) ||
 				!key.startsWith("security-manager-") ||
-				key.equals("security-manager-enabled") ||
-				key.equals("security-manager-generator-dir")) {
+				key.equals("security-manager-enabled")) {
 
 				continue;
 			}
@@ -201,13 +198,6 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 
 		try {
 			PortalSecurityManagerThreadLocal.setEnabled(false);
-
-			String dirName = GetterUtil.getString(
-				getProperty("security-manager-generator-dir"));
-
-			if (Validator.isNull(dirName)) {
-				dirName = PropsValues.LIFERAY_HOME + "/pacl-policy";
-			}
 
 			StringBundler sb = new StringBundler();
 
@@ -239,8 +229,8 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			}
 
 			FileUtil.write(
-				dirName, getServletContextName() + ".pacl-policy",
-				sb.toString());
+				PropsValues.LIFERAY_HOME + "/pacl-policy",
+				getServletContextName() + ".pacl-policy", sb.toString());
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
