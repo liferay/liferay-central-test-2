@@ -16,7 +16,6 @@ package com.liferay.portal.security.pacl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.lang.PortalSecurityManager;
@@ -41,7 +40,8 @@ public class PACLPolicyManager {
 		PACLPolicy paclPolicy = null;
 
 		State state = State.parse(
-			properties.getProperty("security-manager-enabled", "false"));
+			properties.getProperty(
+				"security-manager-enabled", State.DISABLED.getValue()));
 
 		if (state == State.ENABLED) {
 			paclPolicy = new ActivePACLPolicy(
@@ -123,18 +123,40 @@ public class PACLPolicyManager {
 
 	public enum State {
 
-		DISABLED, ENABLED, GENERATING_AUTHORIZATION_PROPERTY;
+		DISABLED("false"), ENABLED("true"),
+		GENERATING_AUTHORIZATION_PROPERTY("generate");
 
-		public static State parse(String state) {
-			if (state.equals("generate")) {
-				return GENERATING_AUTHORIZATION_PROPERTY;
+		public static State parse(String value) {
+			if (DISABLED.getValue().equals(value)) {
+				return DISABLED;
 			}
-			else if (GetterUtil.getBoolean(state) == true) {
+			else if (ENABLED.getValue().equals(value)) {
 				return ENABLED;
 			}
+			else if (GENERATING_AUTHORIZATION_PROPERTY.getValue().equals(
+						value)) {
 
-			return DISABLED;
+				return GENERATING_AUTHORIZATION_PROPERTY;
+			}
+			else {
+				throw new IllegalArgumentException("Invalid value " + value);
+			}
 		}
+
+		public String getValue() {
+			return _value;
+		}
+
+		@Override
+		public String toString() {
+			return _value;
+		}
+
+		private State(String value) {
+			_value = value;
+		}
+
+		private String _value;
 
 	}
 

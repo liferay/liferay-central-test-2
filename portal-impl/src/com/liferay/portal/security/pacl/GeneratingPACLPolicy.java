@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.checker.AuthorizationProperty;
@@ -30,7 +29,6 @@ import com.liferay.portal.security.pacl.checker.PortalServiceChecker;
 import com.liferay.portal.security.pacl.checker.SQLChecker;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.File;
 import java.io.IOException;
 
 import java.lang.reflect.Method;
@@ -38,11 +36,9 @@ import java.lang.reflect.Method;
 import java.security.Permission;
 
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -70,7 +66,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 				AuthorizationProperty authorizationProperty =
 					checker.generateAuthorizationProperty(permission);
 
-				trackGeneratedAuthorizationProperty(authorizationProperty);
+				trackAuthorizationProperty(authorizationProperty);
 			}
 			catch (Exception e) {
 				throw se;
@@ -86,7 +82,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			AuthorizationProperty authorizationProperty =
 				jndiChecker.generateAuthorizationProperty(name);
 
-			trackGeneratedAuthorizationProperty(authorizationProperty);
+			trackAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
@@ -103,7 +99,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 				portalServiceChecker.generateAuthorizationProperty(
 					object, method, arguments);
 
-			trackGeneratedAuthorizationProperty(authorizationProperty);
+			trackAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
@@ -117,72 +113,38 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			AuthorizationProperty authorizationProperty =
 				sqlChecker.generateAuthorizationProperty(sql);
 
-			trackGeneratedAuthorizationProperty(authorizationProperty);
+			trackAuthorizationProperty(authorizationProperty);
 		}
 
 		return true;
 	}
 
-	private String generateProperties() {
-		StringBundler sb = new StringBundler();
+	protected void mergeExistingProperties() {
 
-		for (Map.Entry<String, Set<String>> entry : _trackedProperties.entrySet()) {
-			String key = entry.getKey();
-			Set<String> valueSet = entry.getValue();
-
-			sb.append(key);
-			sb.append(StringPool.EQUAL);
-
-			Set<String> sortedSet = new TreeSet<String>(valueSet);
-
-			for (String value : sortedSet) {
-				sb.append(StringPool.BACK_SLASH);
-				sb.append(StringPool.NEW_LINE);
-				sb.append(_INDENT);
-				sb.append(value);
-				sb.append(StringPool.COMMA);
-			}
-
-			sb.setIndex(sb.index() - 1);
-
-			sb.append(StringPool.NEW_LINE.concat(StringPool.NEW_LINE));
-		}
-
-		if (sb.length() > 0) {
-			sb.setIndex(sb.index() - 1);
-		}
-
-		return sb.toString();
-	}
-
-	private void mergeUntrackedProperties() {
-
-		// This is done so that the written policy is the complete picture
-		// rather than only a list of the modified properties. The developer
-		// therefore need only copy the entire policy.
+		// Merge existing properties so that the the written policy is the
+		// complete picture rather than only a list of the modified properties.
+		// Therefore, the developer needs only to copy the entire policy.
 
 		Properties properties = getProperties();
 
-		Enumeration<Object> keys = properties.keys();
+		Enumeration<Object> enumeration = properties.keys();
 
-		while (keys.hasMoreElements()) {
-			String key = (String)keys.nextElement();
+		while (enumeration.hasMoreElements()) {
+			String key = (String)enumeration.nextElement();
 
-			if (_trackedProperties.containsKey(key) ||
-				!key.startsWith(_SECURITY_MANAGER_PREFIX) ||
-				key.equals(_SECURITY_MANAGER_ENABLED) ||
-				key.equals(_SECURITY_MANAGER_GENERATOR_DIR)) {
+			if (_properties.containsKey(key) ||
+				!key.startsWith("security-manager-") ||
+				key.equals("security-manager-enabled") ||
+				key.equals("security-manager-generator-dir")) {
 
 				continue;
 			}
 
-			Set<String> propertySet = getPropertySet(key);
-
-			_trackedProperties.put(key, propertySet);
+			_properties.put(key, getPropertySet(key));
 		}
 	}
 
-	private void trackGeneratedAuthorizationProperty(
+	protected void trackAuthorizationProperty(
 		AuthorizationProperty authorizationProperty) {
 
 		if (authorizationProperty == null) {
@@ -190,28 +152,26 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 
 		String key = authorizationProperty.getKey();
-		String[] values = StringUtil.split(authorizationProperty.getValue());
 
-		Set<String> existingProperties = getPropertySet(key);
-		Set<String> trackedProperties = _trackedProperties.get(key);
+		Set<String> values = _properties.get(key);
 
-		boolean changed = false;
+		boolean modified = false;
 
-		if (trackedProperties == null) {
-			trackedProperties = new HashSet<String>(existingProperties);
+		if (values == null) {
+			values = getPropertySet(key);
 
-			changed = true;
+			modified = true;
 		}
 
-		for (String value : values) {
-			if (!trackedProperties.contains(value)) {
-				trackedProperties.add(value);
+		for (String value : authorizationProperty.getValues()) {
+			if (!values.contains(value)) {
+				values.add(value);
 
-				changed = true;
+				modified = true;
 			}
 		}
 
-		if (!changed) {
+		if (!modified) {
 			return;
 		}
 
@@ -220,43 +180,67 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"[PACL][" + getServletContextName() + "] adding " +
-						"authorization property " + authorizationProperty);
+					"Tracking " + getServletContextName() +
+						" with authorization property " +
+							authorizationProperty);
 			}
 
-			// Only add new properties to the map if there was a change and we
-			// have a lock
+			_properties.put(key, values);
 
-			_trackedProperties.put(key, trackedProperties);
+			mergeExistingProperties();
 
-			mergeUntrackedProperties();
-
-			writePropertiesFile();
+			writePACLPolicyFile();
 		}
 		finally {
 			_reentrantLock.unlock();
 		}
 	}
 
-	private void writePropertiesFile() {
+	protected void writePACLPolicyFile() {
 		boolean enabled = PortalSecurityManagerThreadLocal.isEnabled();
 
 		try {
 			PortalSecurityManagerThreadLocal.setEnabled(false);
 
-			String fileName = getServletContextName().concat(_FILE_EXTENSION);
+			String dirName = GetterUtil.getString(
+				getProperty("security-manager-generator-dir"));
 
-			String writePath = GetterUtil.getString(
-				getProperty(_SECURITY_MANAGER_GENERATOR_DIR));
-
-			if (Validator.isNull(writePath)) {
-				writePath = PropsValues.LIFERAY_HOME.concat(
-					File.separator).concat(_POLICY_DIR);
+			if (Validator.isNull(dirName)) {
+				dirName = PropsValues.LIFERAY_HOME + "/pacl-policy";
 			}
 
-			String properties = generateProperties();
+			StringBundler sb = new StringBundler();
 
-			FileUtil.write(writePath, fileName, properties);
+			for (Map.Entry<String, Set<String>> entry :
+					_properties.entrySet()) {
+
+				String key = entry.getKey();
+
+				sb.append(key);
+				sb.append(StringPool.EQUAL);
+
+				Set<String> values = entry.getValue();
+
+				for (String value : values) {
+					sb.append(StringPool.BACK_SLASH);
+					sb.append(StringPool.NEW_LINE);
+					sb.append(StringPool.FOUR_SPACES);
+					sb.append(value);
+					sb.append(StringPool.COMMA);
+				}
+
+				sb.setIndex(sb.index() - 1);
+
+				sb.append(StringPool.NEW_LINE + StringPool.NEW_LINE);
+			}
+
+			if (sb.length() > 0) {
+				sb.setIndex(sb.index() - 1);
+			}
+
+			FileUtil.write(
+				dirName, getServletContextName() + ".pacl-policy",
+				sb.toString());
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -266,19 +250,9 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 	}
 
-	private static final String _FILE_EXTENSION = ".policy";
-	private static final String _INDENT =
-		StringPool.THREE_SPACES + StringPool.SPACE;
-	private static final String _POLICY_DIR = "pacl-policy";
-	private static final String _SECURITY_MANAGER_ENABLED =
-		"security-manager-enabled";
-	private static final String _SECURITY_MANAGER_GENERATOR_DIR =
-		"security-manager-generator-dir";
-	private static final String _SECURITY_MANAGER_PREFIX = "security-manager-";
-
 	private static Log _log = LogFactoryUtil.getLog(GeneratingPACLPolicy.class);
 
-	private ConcurrentSkipListMap<String, Set<String>> _trackedProperties =
+	private Map<String, Set<String>> _properties =
 		new ConcurrentSkipListMap<String, Set<String>>();
 	private ReentrantLock _reentrantLock = new ReentrantLock();
 
