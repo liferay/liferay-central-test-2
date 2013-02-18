@@ -119,31 +119,6 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		return true;
 	}
 
-	protected void mergeExistingProperties() {
-
-		// Merge existing properties so that the the written policy is the
-		// complete picture rather than only a list of the modified properties.
-		// Therefore, the developer needs only to copy the entire policy.
-
-		Properties properties = getProperties();
-
-		Enumeration<Object> enumeration = properties.keys();
-
-		while (enumeration.hasMoreElements()) {
-			String key = (String)enumeration.nextElement();
-
-			if (_properties.containsKey(key) ||
-				!key.startsWith("security-manager-") ||
-				key.equals("security-manager-enabled") ||
-				key.equals("security-manager-generator-dir")) {
-
-				continue;
-			}
-
-			_properties.put(key, getPropertySet(key));
-		}
-	}
-
 	protected void mergeAuthorizationProperty(
 		AuthorizationProperty authorizationProperty) {
 
@@ -193,6 +168,31 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 		finally {
 			_reentrantLock.unlock();
+		}
+	}
+
+	protected void mergeExistingProperties() {
+
+		// Merge existing properties so that the the written policy is the
+		// complete picture rather than only a list of the modified properties.
+		// Therefore, the developer needs only to copy the entire policy.
+
+		Properties properties = getProperties();
+
+		Enumeration<Object> enumeration = properties.keys();
+
+		while (enumeration.hasMoreElements()) {
+			String key = (String)enumeration.nextElement();
+
+			if (_properties.containsKey(key) ||
+				!key.startsWith("security-manager-") ||
+				key.equals("security-manager-enabled") ||
+				key.equals("security-manager-generator-dir")) {
+
+				continue;
+			}
+
+			_properties.put(key, getPropertySet(key));
 		}
 	}
 

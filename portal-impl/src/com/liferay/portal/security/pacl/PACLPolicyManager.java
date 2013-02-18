@@ -45,7 +45,7 @@ public class PACLPolicyManager {
 			return new GeneratingPACLPolicy(
 				servletContextName, classLoader, properties);
 		}
-		
+
 		if (GetterUtil.getBoolean(value)) {
 			return new ActivePACLPolicy(
 				servletContextName, classLoader, properties);
