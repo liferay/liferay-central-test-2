@@ -51,8 +51,7 @@ public class BundleFilterConfig implements FilterConfig {
 		return _initParameters.get(parameter);
 	}
 
-	@SuppressWarnings("rawtypes")
-	public Enumeration getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 		return Collections.enumeration(_initParameters.keySet());
 	}
 
