@@ -15,8 +15,8 @@
 package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UniqueList;
@@ -33,6 +33,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -191,7 +192,7 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 				return _attributes.get(WebKeys.SERVLET_PATH);
 			}
 
-			if (ArrayUtil.contains(_MASKED_ATTRIBUTES, name)) {
+			if (_maskedAttributes.contains(name)) {
 				return _attributes.get(name);
 			}
 
@@ -262,7 +263,7 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		public void removeAttribute(String name) {
 			Object oldValue = null;
 
-			if (ArrayUtil.contains(_MASKED_ATTRIBUTES, name)) {
+			if (_maskedAttributes.contains(name)) {
 				oldValue = _attributes.remove(name);
 			}
 			else {
@@ -285,7 +286,7 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		public void setAttribute(String name, Object value) {
 			Object oldValue = null;
 
-			if (ArrayUtil.contains(_MASKED_ATTRIBUTES, name)) {
+			if (_maskedAttributes.contains(name)) {
 				oldValue = _attributes.put(name, value);
 			}
 			else {
@@ -330,14 +331,15 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 
 	}
 
-	private static final String[] _MASKED_ATTRIBUTES = new String[] {
-		JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH,
-		JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO,
-		JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING,
-		JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI,
-		JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH,
-		WebKeys.INVOKER_FILTER_URI, WebKeys.SERVLET_PATH
-	};
+	private static Set<String> _maskedAttributes = SetUtil.fromArray(
+		new String[] {
+			JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI,
+			JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH,
+			JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH,
+			JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO,
+			JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING,
+			WebKeys.INVOKER_FILTER_URI, WebKeys.SERVLET_PATH
+		});
 
 	private BundleFilterChain _bundleFilterChain;
 	private BundleServletContext _bundleServletContext;
