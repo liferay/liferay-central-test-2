@@ -188,13 +188,13 @@ public class UsersAdminImpl implements UsersAdmin {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		for (int i = 0; i < userIds.length; i++) {
-			User user = UserLocalServiceUtil.getUser(userIds[i]);
+		for (long userId : userIds) {
+			User user = UserLocalServiceUtil.getUser(userId);
 
 			if (MembershipPolicyUtil.isMembershipProtected(
 					permissionChecker, group, role, user)) {
 
-				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
+				filteredUserIds = ArrayUtil.remove(filteredUserIds, userId);
 			}
 		}
 
@@ -372,14 +372,14 @@ public class UsersAdminImpl implements UsersAdmin {
 
 		long[] filteredUserIds = userIds;
 
-		for (int i = 0; i < userIds.length; i++) {
+		for (long userId : userIds) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
-			User user = UserLocalServiceUtil.getUser(userIds[i]);
+			User user = UserLocalServiceUtil.getUser(userId);
 
 			if (MembershipPolicyUtil.isMembershipProtected(
 					permissionChecker, group, user)) {
 
-				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
+				filteredUserIds = ArrayUtil.remove(filteredUserIds, userId);
 			}
 		}
 
