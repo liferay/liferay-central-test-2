@@ -49,13 +49,4 @@ public interface OrganizationPermission {
 			String actionId)
 		throws PortalException, SystemException;
 
-	public boolean hasMembershipProtected(
-			PermissionChecker permissionChecker, long groupId, long userId)
-		throws PortalException, SystemException;
-
-	public boolean hasRoleProtected(
-			PermissionChecker permissionChecker, long groupId, long userId,
-			long roleId)
-		throws PortalException, SystemException;
-
 }
