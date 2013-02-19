@@ -14,13 +14,9 @@
 
 package com.liferay.httpservice.internal.servlet;
 
-import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UniqueList;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.PACLPolicy;
 import com.liferay.portal.security.pacl.PACLPolicyManager;
@@ -28,25 +24,13 @@ import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.io.IOException;
 
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletRequestAttributeEvent;
-import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Raymond Augé
@@ -68,10 +52,6 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 			requestURI, StringPool.DOUBLE_SLASH, StringPool.SLASH);
 
 		_contextPath = _bundleServletContext.getContextPath();
-
-		_pathInfo = null;
-		_queryString = null;
-		_servletPath = null;
 
 		if (!_extensionMapping) {
 			_servletPath = _servletMapping;
@@ -134,7 +114,7 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		throws IOException, ServletException {
 
 		BundleServletRequest bundleServletRequest = new BundleServletRequest(
-			(HttpServletRequest)request);
+			this, (HttpServletRequest)request);
 
 		doDispatch(bundleServletRequest, response);
 	}
@@ -143,7 +123,7 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		throws IOException, ServletException {
 
 		BundleServletRequest bundleServletRequest = new BundleServletRequest(
-			(HttpServletRequest)request);
+				this, (HttpServletRequest)request);
 
 		if (_contextPath != null) {
 			bundleServletRequest.setAttribute(
@@ -174,172 +154,21 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		doDispatch(bundleServletRequest, response);
 	}
 
-	public class BundleServletRequest extends HttpServletRequestWrapper {
-
-		public BundleServletRequest(HttpServletRequest request) {
-			super(request);
-
-			_session = new BundleSession(request.getSession());
-		}
-
-		@Override
-		public Object getAttribute(String name) {
-			if ((name.equals(
-					JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH) ||
-				 name.equals(WebKeys.INVOKER_FILTER_URI)) &&
-				_attributes.containsKey(WebKeys.SERVLET_PATH)) {
-
-				return _attributes.get(WebKeys.SERVLET_PATH);
-			}
-
-			if (_maskedAttributes.contains(name)) {
-				return _attributes.get(name);
-			}
-
-			return super.getAttribute(name);
-		}
-
-		@Override
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Enumeration getAttributeNames() {
-			List<String> attributeNames = new UniqueList<String>();
-
-			Enumeration<String> enu = super.getAttributeNames();
-
-			while (enu.hasMoreElements()) {
-				String name = enu.nextElement();
-
-				attributeNames.add(name);
-			}
-
-			attributeNames.addAll(_attributes.keySet());
-
-			return Collections.enumeration(attributeNames);
-		}
-
-		@Override
-		public String getContextPath() {
-			return _bundleServletContext.getContextPath();
-		}
-
-		@Override
-		public String getPathInfo() {
-			return _pathInfo;
-		}
-
-		@Override
-		public RequestDispatcher getRequestDispatcher(String path) {
-			RequestDispatcher requestDispatcher =
-				_bundleServletContext.getRequestDispatcher(path);
-
-			if (requestDispatcher != null) {
-				return requestDispatcher;
-			}
-
-			return super.getRequestDispatcher(path);
-		}
-
-		@Override
-		public String getRequestURI() {
-			return getContextPath().concat(_requestURI);
-		}
-
-		@Override
-		public String getServletPath() {
-			return _servletPath;
-		}
-
-		@Override
-		public HttpSession getSession() {
-			return _session;
-		}
-
-		@Override
-		public HttpSession getSession(boolean create) {
-			return _session;
-		}
-
-		@Override
-		public void removeAttribute(String name) {
-			Object oldValue = null;
-
-			if (_maskedAttributes.contains(name)) {
-				oldValue = _attributes.remove(name);
-			}
-			else {
-				oldValue = super.getAttribute(name);
-
-				super.removeAttribute(name);
-			}
-
-			List<ServletRequestAttributeListener> listeners =
-				_bundleServletContext.getServletRequestAttributeListeners();
-
-			for (ServletRequestAttributeListener listener : listeners) {
-				listener.attributeReplaced(
-					new ServletRequestAttributeEvent(
-						_bundleServletContext, this, name, oldValue));
-			}
-		}
-
-		@Override
-		public void setAttribute(String name, Object value) {
-			Object oldValue = null;
-
-			if (_maskedAttributes.contains(name)) {
-				oldValue = _attributes.put(name, value);
-			}
-			else {
-				oldValue = super.getAttribute(name);
-
-				super.setAttribute(name, value);
-			}
-
-			List<ServletRequestAttributeListener> listeners =
-				_bundleServletContext.getServletRequestAttributeListeners();
-
-			for (ServletRequestAttributeListener listener : listeners) {
-
-				if (oldValue != null) {
-					listener.attributeReplaced(
-						new ServletRequestAttributeEvent(
-							_bundleServletContext, this, name, oldValue));
-				}
-				else {
-					listener.attributeAdded(
-						new ServletRequestAttributeEvent(
-							_bundleServletContext, this, name, oldValue));
-				}
-			}
-		}
-
-		private Map<String, Object> _attributes = new HashMap<String, Object>();
-		private HttpSession _session;
-
+	protected BundleServletContext getBundleServletContext() {
+		return _bundleServletContext;
 	}
 
-	public class BundleSession extends HttpSessionWrapper {
-
-		public BundleSession(HttpSession session) {
-			super(session);
-		}
-
-		@Override
-		public ServletContext getServletContext() {
-			return _bundleServletContext;
-		}
-
+	protected String getPathInfo() {
+		return _pathInfo;
 	}
 
-	private static Set<String> _maskedAttributes = SetUtil.fromArray(
-		new String[] {
-			JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI,
-			JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH,
-			JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH,
-			JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO,
-			JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING,
-			WebKeys.INVOKER_FILTER_URI, WebKeys.SERVLET_PATH
-		});
+	protected String getRequestURI() {
+		return _requestURI;
+	}
+
+	protected String getServletPath() {
+		return _servletPath;
+	}
 
 	private BundleFilterChain _bundleFilterChain;
 	private BundleServletContext _bundleServletContext;
