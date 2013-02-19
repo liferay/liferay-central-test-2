@@ -16,6 +16,7 @@ package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UniqueList;
@@ -51,17 +52,6 @@ import javax.servlet.http.HttpSession;
  * @author Miguel Pastor
  */
 public class BundleRequestDispatcher implements RequestDispatcher {
-
-	public static final String INCLUDE_CONTEXT_PATH =
-		"javax.servlet.include.context_path";
-	public static final String INCLUDE_PATH_INFO =
-		"javax.servlet.include.path_info";
-	public static final String INCLUDE_QUERY_STRING =
-		"javax.servlet.include.query_string";
-	public static final String INCLUDE_REQUEST_URI =
-		"javax.servlet.include.request_uri";
-	public static final String INCLUDE_SERVLET_PATH =
-		"javax.servlet.include.servlet_path";
 
 	public BundleRequestDispatcher(
 		String servletMapping, boolean extensionMapping, String requestURI,
@@ -156,27 +146,28 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 
 		if (_contextPath != null) {
 			bundleServletRequest.setAttribute(
-				INCLUDE_CONTEXT_PATH, _contextPath);
+				JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH, _contextPath);
 		}
 
 		if (_pathInfo != null) {
-			bundleServletRequest.setAttribute(INCLUDE_PATH_INFO, _pathInfo);
+			bundleServletRequest.setAttribute(
+				JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO, _pathInfo);
 		}
 
 		if (_queryString != null) {
 			bundleServletRequest.setAttribute(
-				INCLUDE_QUERY_STRING, _queryString);
+				JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING, _queryString);
 		}
 
 		if (_requestURI != null) {
 			bundleServletRequest.setAttribute(
-				INCLUDE_REQUEST_URI,
+				JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI,
 				_bundleServletContext.getContextPath().concat(_requestURI));
 		}
 
 		if (_servletPath != null) {
 			bundleServletRequest.setAttribute(
-				INCLUDE_SERVLET_PATH, _servletPath);
+				JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH, _servletPath);
 		}
 
 		doDispatch(bundleServletRequest, response);
@@ -192,7 +183,8 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 
 		@Override
 		public Object getAttribute(String name) {
-			if ((name.equals(INCLUDE_SERVLET_PATH) ||
+			if ((name.equals(
+					JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH) ||
 				 name.equals(WebKeys.INVOKER_FILTER_URI)) &&
 				_attributes.containsKey(WebKeys.SERVLET_PATH)) {
 
@@ -339,9 +331,12 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 	}
 
 	private static final String[] _MASKED_ATTRIBUTES = new String[] {
-		INCLUDE_CONTEXT_PATH, INCLUDE_PATH_INFO, INCLUDE_QUERY_STRING,
-		INCLUDE_REQUEST_URI, INCLUDE_SERVLET_PATH, WebKeys.INVOKER_FILTER_URI,
-		WebKeys.SERVLET_PATH
+		JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH,
+		JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO,
+		JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING,
+		JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI,
+		JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH,
+		WebKeys.INVOKER_FILTER_URI, WebKeys.SERVLET_PATH
 	};
 
 	private BundleFilterChain _bundleFilterChain;
