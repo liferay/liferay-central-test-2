@@ -57,8 +57,8 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		_description = HtmlUtil.unescape(description);
 	}
 
-	public void setFileEntryResults(List<Tuple> fileEntryResults) {
-		_fileEntryResults = fileEntryResults;
+	public void setFileEntryTuples(List<Tuple> fileEntryTuples) {
+		_fileEntryTuples = fileEntryTuples;
 	}
 
 	public void setLocked(boolean locked) {
@@ -109,7 +109,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		_containerType = null;
 		_cssClass = null;
 		_description = null;
-		_fileEntryResults = null;
+		_fileEntryTuples = null;
 		_locked = false;
 		_mbMessages = null;
 		_queryTerms = null;
@@ -147,8 +147,8 @@ public class AppViewSearchEntryTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:description", _description);
 		request.setAttribute(
-			"liferay-ui:app-view-search-entry:fileEntryResults",
-			_fileEntryResults);
+			"liferay-ui:app-view-search-entry:fileEntryTuples",
+			_fileEntryTuples);
 		request.setAttribute(
 			"liferay-ui:app-view-search-entry:locked", _locked);
 		request.setAttribute(
@@ -180,7 +180,7 @@ public class AppViewSearchEntryTag extends IncludeTag {
 	private String _containerType;
 	private String _cssClass;
 	private String _description;
-	private List<Tuple> _fileEntryResults;
+	private List<Tuple> _fileEntryTuples;
 	private boolean _locked;
 	private List<MBMessage> _mbMessages;
 	private String[] _queryTerms;

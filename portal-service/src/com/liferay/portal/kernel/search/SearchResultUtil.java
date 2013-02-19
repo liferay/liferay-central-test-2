@@ -100,11 +100,11 @@ public class SearchResultUtil {
 				}
 
 				if (fileEntry != null) {
-					Summary fileEntrySummary = getSummary(
+					Summary summary = getSummary(
 						document, DLFileEntry.class.getName(),
 						fileEntry.getFileEntryId(), locale, portletURL);
 
-					searchResult.addFileEntry(fileEntry, fileEntrySummary);
+					searchResult.addFileEntry(fileEntry, summary);
 				}
 
 				if (mbMessage != null) {

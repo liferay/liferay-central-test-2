@@ -32,10 +32,10 @@ public class SearchResult {
 		_classPK = classPK;
 	}
 
-	public void addFileEntry(FileEntry fileEntry, Summary fileEntrySummary) {
-		Tuple result = new Tuple(fileEntry, fileEntrySummary);
+	public void addFileEntry(FileEntry fileEntry, Summary summary) {
+		Tuple tuple = new Tuple(fileEntry, summary);
 
-		_fileEntryResults.add(result);
+		_fileEntryTuples.add(tuple);
 	}
 
 	public void addMBMessage(MBMessage mbMessage) {
@@ -71,8 +71,8 @@ public class SearchResult {
 		return _classPK;
 	}
 
-	public List<Tuple> getFileEntryResults() {
-		return _fileEntryResults;
+	public List<Tuple> getFileEntryTuples() {
+		return _fileEntryTuples;
 	}
 
 	public List<MBMessage> getMBMessages() {
@@ -101,7 +101,7 @@ public class SearchResult {
 
 	private String _className;
 	private long _classPK;
-	private List<Tuple> _fileEntryResults = new ArrayList<Tuple>();
+	private List<Tuple> _fileEntryTuples = new ArrayList<Tuple>();
 	private List<MBMessage> _mbMessages = new ArrayList<MBMessage>();
 	private Summary _summary;
 

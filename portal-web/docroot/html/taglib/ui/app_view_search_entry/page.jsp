@@ -23,7 +23,7 @@ String containerName = (String)request.getAttribute("liferay-ui:app-view-search-
 String containerType = GetterUtil.getString(request.getAttribute("liferay-ui:app-view-search-entry:containerType"), LanguageUtil.get(locale, "folder"));
 String cssClass = (String)request.getAttribute("liferay-ui:app-view-search-entry:cssClass");
 String description = (String)request.getAttribute("liferay-ui:app-view-search-entry:description");
-List<Tuple> fileEntryResults = (List<Tuple>)request.getAttribute("liferay-ui:app-view-search-entry:fileEntryResults");
+List<Tuple> fileEntryTuples = (List<Tuple>)request.getAttribute("liferay-ui:app-view-search-entry:fileEntryTuples");
 boolean locked = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app-view-search-entry:locked"));
 List<MBMessage> mbMessages = (List<MBMessage>)request.getAttribute("liferay-ui:app-view-search-entry:mbMessages");
 String[] queryTerms = (String[])request.getAttribute("liferay-ui:app-view-search-entry:queryTerms");
@@ -78,12 +78,12 @@ String url = (String)request.getAttribute("liferay-ui:app-view-search-entry:url"
 		</span>
 	</a>
 
-	<c:if test="<%= fileEntryResults != null %>">
+	<c:if test="<%= fileEntryTuples != null %>">
 
 		<%
-		for (Tuple fileEntryResult : fileEntryResults) {
-			FileEntry fileEntry = (FileEntry)fileEntryResult.getObject(0);
-			Summary fileEntrySummary = (Summary)fileEntryResult.getObject(1);
+		for (Tuple fileEntryTuple : fileEntryTuples) {
+			FileEntry fileEntry = (FileEntry)fileEntryTuple.getObject(0);
+			Summary summary = (Summary)fileEntryTuple.getObject(1);
 		%>
 
 			<div class="entry-attachment">
@@ -101,7 +101,7 @@ String url = (String)request.getAttribute("liferay-ui:app-view-search-entry:url"
 						</span>
 
 						<span cssClass="body">
-							<%= StringUtil.highlight((Validator.isNotNull(fileEntrySummary.getContent())) ? fileEntrySummary.getContent() : fileEntry.getTitle(), queryTerms) %>
+							<%= StringUtil.highlight((Validator.isNotNull(summary.getContent())) ? summary.getContent() : fileEntry.getTitle(), queryTerms) %>
 						</span>
 				</aui:a>
 			</div>

@@ -269,7 +269,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>fileEntryResults</name>
+			<name>fileEntryTuples</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
