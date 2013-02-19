@@ -311,7 +311,7 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajaxRequest) {
 				}
 				%>
 
-				<c:if test="<%= searchResults.isEmpty() %>">
+				<c:if test="<%= searchResultsList.isEmpty() %>">
 					<div class="portlet-msg-info">
 						<%= LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>
 					</div>
