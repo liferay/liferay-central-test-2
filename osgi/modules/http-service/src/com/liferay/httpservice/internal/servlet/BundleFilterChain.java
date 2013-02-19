@@ -45,9 +45,9 @@ public class BundleFilterChain implements FilterChain {
 	public void doFilter(ServletRequest request, ServletResponse response)
 		throws IOException, ServletException {
 
-		Filter currentFilter = _filters.poll();
+		Filter filter = _filters.poll();
 
-		if (currentFilter == null) {
+		if (filter == null) {
 			ServletConfig servletConfig = _servlet.getServletConfig();
 
 			if (servletConfig instanceof BundleServletConfig) {
@@ -69,7 +69,7 @@ public class BundleFilterChain implements FilterChain {
 			return;
 		}
 
-		currentFilter.doFilter(request, response, this);
+		filter.doFilter(request, response, this);
 	}
 
 	public void setServlet(Servlet servlet) {
