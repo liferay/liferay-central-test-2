@@ -24,8 +24,6 @@ import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-import java.util.Random;
-
 /**
  * @author Alberto Chaparro
  */
@@ -44,7 +42,7 @@ public class UserTestUtil {
 		throws Exception {
 
 		User groupUser = ServiceTestUtil.addUser(
-			"groupUser" + _random.nextInt(), group.getGroupId());
+			ServiceTestUtil.randomString(), group.getGroupId());
 
 		Role role = RoleLocalServiceUtil.getRole(
 			TestPropsValues.getCompanyId(), roleName);
@@ -75,7 +73,7 @@ public class UserTestUtil {
 		Organization organization, String roleName) throws Exception {
 
 		User organizationUser = ServiceTestUtil.addUser(
-			"organizationUser" + _random.nextInt(), organization.getGroupId());
+			ServiceTestUtil.randomString(), organization.getGroupId());
 
 		long[] userIds = {organizationUser.getUserId()};
 
@@ -90,7 +88,5 @@ public class UserTestUtil {
 
 		return organizationUser;
 	}
-
-	static Random _random = new Random();
 
 }
