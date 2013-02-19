@@ -4575,6 +4575,7 @@ public class SourceFormatter {
 			s = s.substring(1);
 
 			String value = null;
+
 			int y = -1;
 
 			for (;;) {
