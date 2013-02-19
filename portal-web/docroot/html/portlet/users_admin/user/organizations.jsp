@@ -84,11 +84,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		</liferay-ui:search-container-column-text>
 
-		<%
-		Group organizationGroup = organization.getGroup();
-		%>
-
-		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && ((selUser == null) || !OrganizationPermissionUtil.hasMembershipProtected(permissionChecker, organizationGroup.getGroupId(), selUser.getUserId())) %>">
+		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && ((selUser == null) || !MembershipPolicyUtil.isMembershipProtected(permissionChecker, organization, selUser)) %>">
 			<liferay-ui:search-container-column-text>
 				<a class="modify-link" data-rowId="<%= organization.getOrganizationId() %>" href="javascript:;"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>

@@ -24,8 +24,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.MembershipPolicyException;
 import com.liferay.portal.security.auth.MembershipPolicyUtil;
 import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
-import com.liferay.portal.service.permission.GroupPermissionUtil;
-import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
@@ -65,7 +63,10 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		long[] filteredRoles = roleIds;
+		long[] filteredRoleIds = roleIds;
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		for (long roleId : roleIds) {
 			UserGroupRolePermissionUtil.check(
@@ -73,33 +74,26 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 			Role role = roleLocalService.getRole(roleId);
 
-			if (role.getType() == RoleConstants.TYPE_SITE) {
-				if (GroupPermissionUtil.hasRoleProtected(
-						getPermissionChecker(), groupId, userId,
-					role.getRoleId())) {
+			if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+				(role.getType() == RoleConstants.TYPE_SITE)) {
 
-					filteredRoles = ArrayUtil.remove(filteredRoles, roleId);
-				}
-			}
-			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-				if (OrganizationPermissionUtil.hasRoleProtected(
-						getPermissionChecker(), groupId, userId,
-						role.getRoleId())) {
+				if (MembershipPolicyUtil.isMembershipProtected(
+						getPermissionChecker(), group, role, user)) {
 
-					filteredRoles = ArrayUtil.remove(filteredRoles, roleId);
+					filteredRoleIds = ArrayUtil.remove(filteredRoleIds, roleId);
 				}
 			}
 		}
 
-		if (filteredRoles.length == 0) {
+		if (filteredRoleIds.length == 0) {
 			return;
 		}
 
 		checkDeleteUserGroupRolesMembershipPolicy(
-			new long[] {userId}, groupId, filteredRoles);
+			new long[] {userId}, groupId, filteredRoleIds);
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
-			userId, groupId, filteredRoles);
+			userId, groupId, filteredRoleIds);
 	}
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
@@ -110,12 +104,10 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 		Role role = roleLocalService.getRole(roleId);
 
-		if (role.getType() == RoleConstants.TYPE_SITE) {
-			userIds = UsersAdminUtil.filterDeleteSiteRoleUserIds(
-				getPermissionChecker(), groupId, role.getRoleId(), userIds);
-		}
-		else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-			userIds = UsersAdminUtil.filterDeleteOrganizationRoleUserIds(
+		if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+			(role.getType() == RoleConstants.TYPE_SITE)) {
+
+			userIds = UsersAdminUtil.filterDeleteGroupRoleUserIds(
 				getPermissionChecker(), groupId, role.getRoleId(), userIds);
 		}
 

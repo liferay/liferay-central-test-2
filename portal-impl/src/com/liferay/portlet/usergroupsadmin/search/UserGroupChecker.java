@@ -23,7 +23,6 @@ import com.liferay.portal.security.auth.MembershipPolicyUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 import java.util.Set;
 
@@ -83,9 +82,8 @@ public class UserGroupChecker extends RowChecker {
 				PermissionChecker permissionChecker =
 					PermissionThreadLocal.getPermissionChecker();
 
-				if (GroupPermissionUtil.hasMembershipProtected(
-						permissionChecker, _group.getGroupId(),
-						user.getUserId())) {
+				if (MembershipPolicyUtil.isMembershipProtected(
+						permissionChecker, _group, user)) {
 
 					return true;
 				}

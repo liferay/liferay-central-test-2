@@ -1105,10 +1105,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
-		Group group = groupLocalService.getOrganizationGroup(
-			getUser().getCompanyId(), organizationId);
+		User user = getUser();
 
-		userIds = UsersAdminUtil.filterUnsetOrganizationUserIds(
+		Group group = groupLocalService.getOrganizationGroup(
+			user.getCompanyId(), organizationId);
+
+		userIds = UsersAdminUtil.filterUnsetGroupUserIds(
 			getPermissionChecker(), group.getGroupId(), userIds);
 
 		if (userIds.length == 0) {
@@ -1949,8 +1951,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					(!GroupPermissionUtil.contains(
 						permissionChecker, group.getGroupId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					 GroupPermissionUtil.hasMembershipProtected(
-						 permissionChecker, group.getGroupId(), userId) ||
+					 MembershipPolicyUtil.isMembershipProtected(
+						permissionChecker, group, user) ||
 					 mandatoryGroups.contains(group))) {
 
 					groupIds = ArrayUtil.append(groupIds, group.getGroupId());
@@ -2029,16 +2031,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 			for (int i = 0; i < oldOrganizations.size(); i++) {
 				Organization organization = oldOrganizations.get(i);
-				Group organizationGroup = organization.getGroup();
 
 				if (!ArrayUtil.contains(
 						organizationIds, organization.getOrganizationId()) &&
 					(!OrganizationPermissionUtil.contains(
 						permissionChecker, organization.getOrganizationId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					 OrganizationPermissionUtil.hasMembershipProtected(
-						 permissionChecker, organizationGroup.getGroupId(),
-						 userId) ||
+					 MembershipPolicyUtil.isMembershipProtected(
+						 permissionChecker, organization, user) ||
 					 mandatoryOrganizations.contains(organization))) {
 
 					organizationIds = ArrayUtil.append(
@@ -2380,9 +2380,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				if (!ArrayUtil.contains(
 						userGroupIds, userGroup.getUserGroupId()) &&
 					(!UserGroupPermissionUtil.contains(
-							permissionChecker, userGroup.getUserGroupId(),
-							ActionKeys.ASSIGN_MEMBERS) ||
-						mandatoryUserGroups.contains(userGroup))) {
+						permissionChecker, userGroup.getUserGroupId(),
+						ActionKeys.ASSIGN_MEMBERS) ||
+					 mandatoryUserGroups.contains(userGroup))) {
 
 					userGroupIds = ArrayUtil.append(
 						userGroupIds, userGroup.getUserGroupId());
@@ -2455,21 +2455,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
 				Role role = oldUserGroupRole.getRole();
 
-				if (role.getType() == RoleConstants.TYPE_SITE) {
-					if (!userGroupRoles.contains(oldUserGroupRole) &&
-						(!UserGroupRolePermissionUtil.contains(
-							permissionChecker, oldUserGroupRole.getGroupId(),
-							oldUserGroupRole.getRoleId()) ||
-						 GroupPermissionUtil.hasRoleProtected(
-							 getPermissionChecker(),
-							 oldUserGroupRole.getGroupId(), userId,
-							 role.getRoleId()) ||
-						 mandatoryRoles.contains(role))) {
-
-						userGroupRoles.add(oldUserGroupRole);
-					}
-				}
-				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+				if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 					Group group = oldUserGroupRole.getGroup();
 
 					Organization organization =
@@ -2481,14 +2467,26 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 							organization, user);
 
 					if (!userGroupRoles.contains(oldUserGroupRole) &&
-						(OrganizationPermissionUtil.hasRoleProtected(
-							getPermissionChecker(),
-							oldUserGroupRole.getGroupId(), userId,
-							role.getRoleId()) ||
-						 !UserGroupRolePermissionUtil.contains(
+						(!UserGroupRolePermissionUtil.contains(
 							permissionChecker, oldUserGroupRole.getGroupId(),
 							oldUserGroupRole.getRoleId()) ||
+						 MembershipPolicyUtil.isMembershipProtected(
+							 getPermissionChecker(),
+							oldUserGroupRole.getGroup(), role, user) ||
 						 mandatoryOrganizationRoles.contains(role))) {
+
+						userGroupRoles.add(oldUserGroupRole);
+					}
+				}
+				else if (role.getType() == RoleConstants.TYPE_SITE) {
+					if (!userGroupRoles.contains(oldUserGroupRole) &&
+						(!UserGroupRolePermissionUtil.contains(
+							permissionChecker, oldUserGroupRole.getGroupId(),
+							oldUserGroupRole.getRoleId()) ||
+						 MembershipPolicyUtil.isMembershipProtected(
+							 getPermissionChecker(),
+							 oldUserGroupRole.getGroup(), role, user) ||
+						 mandatoryRoles.contains(role))) {
 
 						userGroupRoles.add(oldUserGroupRole);
 					}
@@ -2511,9 +2509,17 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					permissionChecker, userGroupRole.getGroupId(),
 					userGroupRole.getRoleId());
 
-				if (role.getType() == RoleConstants.TYPE_SITE) {
+				if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+					Group group = userGroupRole.getGroup();
+
+					long organizationId = group.getOrganizationId();
+
+					Organization organization =
+						organizationPersistence.findByPrimaryKey(
+							organizationId);
+
 					if (!MembershipPolicyUtil.isMembershipAllowed(
-							userGroupRole.getGroup(), role, user)) {
+							organization, role, user)) {
 
 						if (membershipPolicyException == null) {
 							membershipPolicyException =
@@ -2527,19 +2533,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 						membershipPolicyException.addRole(role);
 					}
 				}
-				else if (role.getType() ==
-					RoleConstants.TYPE_ORGANIZATION) {
-
-					Group group = userGroupRole.getGroup();
-
-					long organizationId = group.getOrganizationId();
-
-					Organization organization =
-						organizationPersistence.findByPrimaryKey(
-							organizationId);
-
+				else if (role.getType() == RoleConstants.TYPE_SITE) {
 					if (!MembershipPolicyUtil.isMembershipAllowed(
-							organization, role, user)) {
+							userGroupRole.getGroup(), role, user)) {
 
 						if (membershipPolicyException == null) {
 							membershipPolicyException =
