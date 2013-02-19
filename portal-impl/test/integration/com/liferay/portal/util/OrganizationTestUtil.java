@@ -12,13 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.ServiceTestUtil;
 
 /**
  * @author Alberto Chaparro
@@ -26,7 +28,6 @@ import com.liferay.portal.model.User;
 public class OrganizationTestUtil {
 
 	public static Organization addOrganization() throws Exception {
-
 		return addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			ServiceTestUtil.randomString(),
