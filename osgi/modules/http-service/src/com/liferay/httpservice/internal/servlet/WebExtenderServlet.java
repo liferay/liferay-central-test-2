@@ -60,18 +60,16 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 
-	public static final String NAME = "Web Extender Servlet";
-
 	public WebExtenderServlet(BundleContext bundleContext) {
 		_bundleContext = bundleContext;
 	}
 
 	@Override
 	public void destroy() {
-		_httpServletRegistration.unregister();
-		_httpServiceRegistration.unregister();
-		_servletTracker.close();
-		_filterTracker.close();
+		_filterServiceTracker.close();
+		_httpServiceServiceRegistration.unregister();
+		_httpServletServiceRegistration.unregister();
+		_servletServiceTracker.close();
 
 		super.destroy();
 	}
@@ -109,7 +107,7 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 		properties.put(ServicePropsKeys.ORIGINAL_BEAN, Boolean.TRUE);
 		properties.put(ServicePropsKeys.VENDOR, ReleaseInfo.getVendor());
 
-		_httpServletRegistration = _bundleContext.registerService(
+		_httpServletServiceRegistration = _bundleContext.registerService(
 			HttpServlet.class, this, properties);
 
 		HttpSupport httpSupport = new HttpSupport(_bundleContext, this);
@@ -119,21 +117,21 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 
 		properties.put(ServicePropsKeys.BEAN_ID, HttpService.class.getName());
 
-		_httpServiceRegistration = _bundleContext.registerService(
+		_httpServiceServiceRegistration = _bundleContext.registerService(
 			new String[] {
-				HttpService.class.getName(),
-				ExtendedHttpService.class.getName()},
+				HttpService.class.getName(), ExtendedHttpService.class.getName()
+			},
 			httpServiceFactory, properties);
 
-		_filterTracker = new ServiceTracker<Filter, Filter>(
+		_filterServiceTracker = new ServiceTracker<Filter, Filter>(
 			_bundleContext, Filter.class, new FilterTracker(httpSupport));
 
-		_filterTracker.open();
+		_filterServiceTracker.open();
 
-		_servletTracker = new ServiceTracker<Servlet, Servlet>(
+		_servletServiceTracker = new ServiceTracker<Servlet, Servlet>(
 			_bundleContext, Servlet.class, new ServletTracker(httpSupport));
 
-		_servletTracker.open();
+		_servletServiceTracker.open();
 	}
 
 	@Override
@@ -279,9 +277,9 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 	private static Log _log = LogFactoryUtil.getLog(WebExtenderServlet.class);
 
 	private BundleContext _bundleContext;
-	private ServiceTracker<Filter, Filter> _filterTracker;
-	private ServiceRegistration<?> _httpServiceRegistration;
-	private ServiceRegistration<HttpServlet> _httpServletRegistration;
-	private ServiceTracker<Servlet, Servlet> _servletTracker;
+	private ServiceTracker<Filter, Filter> _filterServiceTracker;
+	private ServiceRegistration<?> _httpServiceServiceRegistration;
+	private ServiceRegistration<HttpServlet> _httpServletServiceRegistration;
+	private ServiceTracker<Servlet, Servlet> _servletServiceTracker;
 
 }

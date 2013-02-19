@@ -72,8 +72,7 @@ public class BundleServletRequest extends HttpServletRequestWrapper {
 	}
 
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		List<String> attributeNames = new UniqueList<String>();
 
 		Enumeration<String> enu = super.getAttributeNames();
@@ -146,13 +145,18 @@ public class BundleServletRequest extends HttpServletRequestWrapper {
 			super.removeAttribute(name);
 		}
 
-		List<ServletRequestAttributeListener> listeners =
+		List<ServletRequestAttributeListener> servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		for (ServletRequestAttributeListener listener : listeners) {
-			listener.attributeReplaced(
+		for (ServletRequestAttributeListener servletRequestAttributeListener :
+				servletRequestAttributeListeners) {
+
+			ServletRequestAttributeEvent servletRequestAttributeEvent =
 				new ServletRequestAttributeEvent(
-					_bundleServletContext, this, name, oldValue));
+					_bundleServletContext, this, name, oldValue);
+
+			servletRequestAttributeListener.attributeReplaced(
+				servletRequestAttributeEvent);
 		}
 	}
 
@@ -169,20 +173,23 @@ public class BundleServletRequest extends HttpServletRequestWrapper {
 			super.setAttribute(name, value);
 		}
 
-		List<ServletRequestAttributeListener> listeners =
+		List<ServletRequestAttributeListener> servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		for (ServletRequestAttributeListener listener : listeners) {
+		for (ServletRequestAttributeListener servletRequestAttributeListener :
+				servletRequestAttributeListeners) {
+
+			ServletRequestAttributeEvent servletRequestAttributeEvent =
+				new ServletRequestAttributeEvent(
+					_bundleServletContext, this, name, oldValue);
 
 			if (oldValue != null) {
-				listener.attributeReplaced(
-					new ServletRequestAttributeEvent(
-						_bundleServletContext, this, name, oldValue));
+				servletRequestAttributeListener.attributeReplaced(
+					servletRequestAttributeEvent);
 			}
 			else {
-				listener.attributeAdded(
-					new ServletRequestAttributeEvent(
-						_bundleServletContext, this, name, oldValue));
+				servletRequestAttributeListener.attributeAdded(
+					servletRequestAttributeEvent);
 			}
 		}
 	}
@@ -198,7 +205,6 @@ public class BundleServletRequest extends HttpServletRequestWrapper {
 		});
 
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
-
 	private BundleRequestDispatcher _bundleRequestDispatcher;
 	private BundleServletContext _bundleServletContext;
 	private HttpSession _session;

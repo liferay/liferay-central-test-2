@@ -14,7 +14,6 @@
 
 package com.liferay.httpservice.servlet;
 
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -47,13 +46,12 @@ public class ResourceServlet extends WebServerServlet {
 	public void init(ServletConfig servletConfig) {
 		_bundleServletConfig = (BundleServletConfig)servletConfig;
 
-		_alias = GetterUtil.getString(
-			_bundleServletConfig.getInitParameter(HttpServicePropsKeys.ALIAS));
-
 		_httpContext = _bundleServletConfig.getHttpContext();
 
+		_alias = GetterUtil.getString(
+			_bundleServletConfig.getInitParameter("alias"));
 		_name = GetterUtil.getString(
-			_bundleServletConfig.getInitParameter(HttpServicePropsKeys.NAME));
+			_bundleServletConfig.getInitParameter("name"));
 	}
 
 	@Override

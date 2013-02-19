@@ -21,11 +21,9 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
-import javax.servlet.ServletException;
 
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
-import org.osgi.service.http.NamespaceException;
 
 /**
  * @author Raymond Augé
@@ -34,77 +32,39 @@ import org.osgi.service.http.NamespaceException;
 public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 
 	public HttpServiceWrapper(BundleServletContext bundleServletContext) {
-		_bundleServletContext = bundleServletContext;
 	}
 
 	public HttpContext createDefaultHttpContext() {
-		return _bundleServletContext.getHttpContext();
+		return null;
 	}
 
 	public void registerFilter(
-			String filterMapping, Filter filter,
-			Map<String, String> initParameters, HttpContext httpContext)
-		throws NamespaceException, ServletException {
-
-		if (httpContext == null) {
-			httpContext = createDefaultHttpContext();
-		}
-
-		_bundleServletContext.registerFilter(
-			filterMapping, filter, initParameters, httpContext);
+		String urlPattern, Filter filter, Map<String, String> initParameters,
+		HttpContext httpContext) {
 	}
 
-	@SuppressWarnings({ "unchecked" })
 	public void registerListener(
-			Object listener, Map<String, String> initParameters,
-			HttpContext httpContext)
-		throws ServletException {
-
-		if (httpContext == null) {
-			httpContext = createDefaultHttpContext();
-		}
-
-		_bundleServletContext.registerListener(
-			listener, initParameters, httpContext);
+		Object listener, Map<String, String> initParameters,
+		HttpContext httpContext) {
 	}
 
 	public void registerResources(
-			String alias, String name, HttpContext httpContext)
-		throws NamespaceException {
-
-		if (httpContext == null) {
-			httpContext = createDefaultHttpContext();
-		}
-
-		_bundleServletContext.registerResources(alias, name, httpContext);
+		String alias, String name, HttpContext httpContext) {
 	}
 
-	@SuppressWarnings({ "rawtypes" })
 	public void registerServlet(
-			String alias, Servlet servlet, Dictionary initparams,
-			HttpContext httpContext)
-		throws NamespaceException, ServletException {
-
-		if (httpContext == null) {
-			httpContext = createDefaultHttpContext();
-		}
-
-		_bundleServletContext.registerServlet(
-			alias, servlet, initparams, httpContext);
+		String alias, Servlet servlet,
+		@SuppressWarnings("rawtypes") Dictionary initParameters,
+		HttpContext httpContext) {
 	}
 
 	public void unregister(String alias) {
-		_bundleServletContext.unregister(alias);
 	}
 
-	public void unregisterFilter(String filterMapping) {
-		_bundleServletContext.unregisterFilter(filterMapping);
+	public void unregisterFilter(String name) {
 	}
 
 	public void unregisterListener(Object listener) {
-		_bundleServletContext.unregisterListener(listener);
 	}
-
-	private BundleServletContext _bundleServletContext;
 
 }

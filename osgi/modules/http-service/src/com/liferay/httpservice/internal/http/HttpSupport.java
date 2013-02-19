@@ -14,7 +14,6 @@
 
 package com.liferay.httpservice.internal.http;
 
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.httpservice.internal.servlet.BundleServletContext;
 import com.liferay.httpservice.internal.servlet.WebExtenderServlet;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
@@ -79,10 +78,7 @@ public class HttpSupport {
 	public Filter getHttpContextFilter(String contextId)
 		throws InvalidSyntaxException {
 
-		String filter =
-			"(&(" + HttpServicePropsKeys.CONTEXT_ID + "=" + contextId + ")";
-
-		return _bundleContext.createFilter(filter);
+		return _bundleContext.createFilter("(&(contextId=" + contextId + ")");
 	}
 
 	public BundleServletContext getNonWabServletContext(Bundle bundle) {
@@ -145,23 +141,15 @@ public class HttpSupport {
 	public Filter getWabServletContextFilter(Bundle bundle)
 		throws InvalidSyntaxException {
 
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(7);
 
-		sb.append("(&(");
-		sb.append(HttpServicePropsKeys.BUNDLE_SYMBOLICNAME);
-		sb.append("=");
+		sb.append("(&(bundle.symbolicName=");
 		sb.append(bundle.getSymbolicName());
-		sb.append(")(");
-		sb.append(HttpServicePropsKeys.BUNDLE_VERSION);
-		sb.append("=");
-		sb.append(bundle.getVersion().toString());
-		sb.append(")(");
-		sb.append(HttpServicePropsKeys.BUNDLE_ID);
-		sb.append("=");
+		sb.append(")(bundle.version=");
+		sb.append(bundle.getVersion());
+		sb.append(")(bundle.id=");
 		sb.append(bundle.getBundleId());
-		sb.append(")(");
-		sb.append(HttpServicePropsKeys.WEB_CONTEXTPATH);
-		sb.append("=*))");
+		sb.append(")(Web-ContextPath=*))");
 
 		return _bundleContext.createFilter(sb.toString());
 	}

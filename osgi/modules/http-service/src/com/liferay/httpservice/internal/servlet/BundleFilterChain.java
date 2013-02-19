@@ -42,7 +42,8 @@ public class BundleFilterChain implements FilterChain {
 		_filters.add(filter);
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response)
+	public void doFilter(
+			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
 		Filter filter = _filters.poll();
@@ -57,19 +58,19 @@ public class BundleFilterChain implements FilterChain {
 				HttpContext httpContext = bundleServletConfig.getHttpContext();
 
 				if (!httpContext.handleSecurity(
-						(HttpServletRequest)request,
-						(HttpServletResponse)response)) {
+						(HttpServletRequest)servletRequest,
+						(HttpServletResponse)servletResponse)) {
 
 					return;
 				}
 			}
 
-			_servlet.service(request, response);
+			_servlet.service(servletRequest, servletResponse);
 
 			return;
 		}
 
-		filter.doFilter(request, response, this);
+		filter.doFilter(servletRequest, servletResponse, this);
 	}
 
 	public void setServlet(Servlet servlet) {

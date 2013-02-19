@@ -62,7 +62,6 @@ public class HttpServiceFactory implements ServiceFactory<HttpService> {
 	public void ungetService(
 		Bundle bundle, ServiceRegistration<HttpService> serviceRegistration,
 		HttpService httpService) {
-
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(HttpServiceFactory.class);
