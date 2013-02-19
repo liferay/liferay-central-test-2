@@ -45,6 +45,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.auth.MembershipPolicyUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.AddressLocalServiceUtil;
@@ -177,34 +178,21 @@ public class UsersAdminImpl implements UsersAdmin {
 		return roleIds;
 	}
 
-	public long[] filterDeleteOrganizationRoleUserIds(
+	public long[] filterDeleteGroupRoleUserIds(
 			PermissionChecker permissionChecker, long groupId, long roleId,
 			long[] userIds)
 		throws PortalException, SystemException {
 
 		long[] filteredUserIds = userIds;
 
-		for (int i = 0; i < userIds.length; i++) {
-			if (OrganizationPermissionUtil.hasRoleProtected(
-					permissionChecker, groupId, userIds[i], roleId)) {
-
-				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
-			}
-		}
-
-		return filteredUserIds;
-	}
-
-	public long[] filterDeleteSiteRoleUserIds(
-			PermissionChecker permissionChecker, long groupId, long roleId,
-			long[] userIds)
-		throws PortalException, SystemException {
-
-		long[] filteredUserIds = userIds;
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Role role = RoleLocalServiceUtil.getRole(roleId);
 
 		for (int i = 0; i < userIds.length; i++) {
-			if (GroupPermissionUtil.hasRoleProtected(
-					permissionChecker, groupId, userIds[i], roleId)) {
+			User user = UserLocalServiceUtil.getUser(userIds[i]);
+
+			if (MembershipPolicyUtil.isMembershipProtected(
+					permissionChecker, group, role, user)) {
 
 				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
 			}
@@ -385,25 +373,11 @@ public class UsersAdminImpl implements UsersAdmin {
 		long[] filteredUserIds = userIds;
 
 		for (int i = 0; i < userIds.length; i++) {
-			if (GroupPermissionUtil.hasMembershipProtected(
-					permissionChecker, groupId, userIds[i])) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			User user = UserLocalServiceUtil.getUser(userIds[i]);
 
-				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
-			}
-		}
-
-		return filteredUserIds;
-	}
-
-	public long[] filterUnsetOrganizationUserIds(
-			PermissionChecker permissionChecker, long groupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		long[] filteredUserIds = userIds;
-
-		for (int i = 0; i < userIds.length; i++) {
-			if (OrganizationPermissionUtil.hasMembershipProtected(
-					permissionChecker, groupId, userIds[i])) {
+			if (MembershipPolicyUtil.isMembershipProtected(
+					permissionChecker, group, user)) {
 
 				filteredUserIds = ArrayUtil.remove(filteredUserIds, userIds[i]);
 			}
