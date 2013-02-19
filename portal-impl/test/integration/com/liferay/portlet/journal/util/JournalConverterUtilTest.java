@@ -108,7 +108,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testGetContentFromDocLibraryField() throws Exception {
+	public void testGetContentFromDocumentLibraryField() throws Exception {
 		Fields fields = new Fields();
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
@@ -550,7 +550,8 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 	}
 
 	protected Map<String, Map<Locale, List<String>>> getFieldsMap(
-		String content) throws Exception {
+			String content)
+		throws Exception {
 
 		Map<String, Map<Locale, List<String>>> fieldsMap =
 			new HashMap<String, Map<Locale, List<String>>>();
