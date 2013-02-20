@@ -284,28 +284,28 @@ public class JournalConverterImpl implements JournalConverter {
 	}
 
 	protected Serializable getDocumentLibraryValue(String url) {
-		int beginIndex = url.indexOf("/documents/");
-
-		if (beginIndex == -1) {
-			return null;
-		}
-
-		int endIndex = url.indexOf(StringPool.QUESTION);
-
-		if (endIndex == -1) {
-			endIndex = url.length();
-		}
-
-		url = url.substring(beginIndex, endIndex);
-
-		String[] pathArray = StringUtil.split(url, CharPool.SLASH);
-
 		try {
-			long groupId = GetterUtil.getLong(pathArray[2]);
+			int x = url.indexOf("/documents/");
+
+			if (x == -1) {
+				return null;
+			}
+
+			int y = url.indexOf(StringPool.QUESTION);
+
+			if (y == -1) {
+				y = url.length();
+			}
+
+			url = url.substring(x, y);
+
+			String[] parts = StringUtil.split(url, CharPool.SLASH);
+
+			long groupId = GetterUtil.getLong(parts[2]);
 
 			FileEntry fileEntry =
 				DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-					pathArray[5], groupId);
+					parts[5], groupId);
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
