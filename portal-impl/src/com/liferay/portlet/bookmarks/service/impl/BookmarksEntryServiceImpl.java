@@ -123,21 +123,23 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 			long groupId, long userId, long rootFolderId, int start, int end)
 		throws PortalException, SystemException {
 
-		long[] folderIds = bookmarksFolderService.getFolderIds(
+		List<Long> folderIds = bookmarksFolderService.getFolderIds(
 			groupId, rootFolderId);
 
-		if (folderIds.length == 0) {
+		if (folderIds.size() == 0) {
 			return Collections.emptyList();
 		}
 		else if (userId <= 0) {
 			return bookmarksEntryPersistence.filterFindByG_F_S(
-				groupId, folderIds, WorkflowConstants.STATUS_APPROVED, start,
-				end, new EntryModifiedDateComparator());
+				groupId, ArrayUtil.toLongArray(folderIds),
+				WorkflowConstants.STATUS_APPROVED, start, end,
+				new EntryModifiedDateComparator());
 		}
 		else {
 			return bookmarksEntryPersistence.filterFindByG_U_F_S(
-				groupId, userId, folderIds, WorkflowConstants.STATUS_APPROVED,
-				start, end, new EntryModifiedDateComparator());
+				groupId, userId, ArrayUtil.toLongArray(folderIds),
+				WorkflowConstants.STATUS_APPROVED, start, end,
+				new EntryModifiedDateComparator());
 		}
 	}
 
@@ -158,19 +160,21 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 			long groupId, long userId, long rootFolderId)
 		throws PortalException, SystemException {
 
-		long[] folderIds = bookmarksFolderService.getFolderIds(
+		List<Long> folderIds = bookmarksFolderService.getFolderIds(
 			groupId, rootFolderId);
 
-		if (folderIds.length == 0) {
+		if (folderIds.size() == 0) {
 			return 0;
 		}
 		else if (userId <= 0) {
 			return bookmarksEntryPersistence.filterCountByG_F_S(
-				groupId, folderIds, WorkflowConstants.STATUS_APPROVED);
+				groupId, ArrayUtil.toLongArray(folderIds),
+				WorkflowConstants.STATUS_APPROVED);
 		}
 		else {
 			return bookmarksEntryPersistence.filterCountByG_U_F_S(
-				groupId, userId, folderIds, WorkflowConstants.STATUS_APPROVED);
+				groupId, userId, ArrayUtil.toLongArray(folderIds),
+				WorkflowConstants.STATUS_APPROVED);
 		}
 	}
 

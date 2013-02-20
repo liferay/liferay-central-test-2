@@ -17,7 +17,6 @@ package com.liferay.portlet.bookmarks.service.impl;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -83,7 +82,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		return folder;
 	}
 
-	public long[] getFolderIds(long groupId, long folderId)
+	public List<Long> getFolderIds(long groupId, long folderId)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
@@ -93,7 +92,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
 		folderIds.add(0, folderId);
 
-		return ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()]));
+		return folderIds;
 	}
 
 	public List<BookmarksFolder> getFolders(long groupId)
