@@ -245,8 +245,7 @@ public class SitesImpl implements Sites {
 		UnicodeProperties prototypeTypeSettingsProperties =
 			layoutPrototypeLayout.getTypeSettingsProperties();
 
-		prototypeTypeSettingsProperties.setProperty(
-			MERGE_FAIL_COUNT, "0");
+		prototypeTypeSettingsProperties.setProperty(MERGE_FAIL_COUNT, "0");
 
 		LayoutLocalServiceUtil.updateLayout(layoutPrototypeLayout);
 	}
@@ -973,8 +972,7 @@ public class SitesImpl implements Sites {
 			layoutSetPrototypeLayoutSet.getSettingsProperties();
 
 		int mergeFailCount = GetterUtil.getInteger(
-			layoutSetPrototypeSettingsProperties.getProperty(
-				MERGE_FAIL_COUNT));
+			layoutSetPrototypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 
 		if (mergeFailCount >
 			PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
@@ -1090,8 +1088,7 @@ public class SitesImpl implements Sites {
 		settingsProperties.remove(LAST_MERGE_TIME);
 
 		settingsProperties.setProperty(
-			LAST_RESET_TIME,
-			String.valueOf(System.currentTimeMillis()));
+			LAST_RESET_TIME, String.valueOf(System.currentTimeMillis()));
 
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 	}
@@ -1188,8 +1185,7 @@ public class SitesImpl implements Sites {
 			layoutPrototypeLayout.getTypeSettingsProperties();
 
 		int mergeFailCount = GetterUtil.getInteger(
-			prototypeTypeSettingsProperties.getProperty(
-				MERGE_FAIL_COUNT));
+			prototypeTypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 
 		if (mergeFailCount >
 				PropsValues.LAYOUT_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
