@@ -26,19 +26,32 @@ import java.util.List;
 public class AssetCategoryDisplayImpl implements AssetCategoryDisplay {
 
 	public AssetCategoryDisplayImpl(
-		List<AssetCategory> categories, int page, int total) {
+		List<AssetCategory> categories, int total, int start, int end) {
 
 		_categories = categories;
-		_page = page;
 		_total = total;
+		_start = start;
+		_end = end;
 	}
 
 	public List<AssetCategory> getCategories() {
 		return _categories;
 	}
 
+	public int getEnd() {
+		return _end;
+	}
+
 	public int getPage() {
-		return _page;
+		if ((_end > 0) && (_start > 0)) {
+			return _end / (_end - _start);
+		}
+
+		return 0;
+	}
+
+	public int getStart() {
+		return _start;
 	}
 
 	public int getTotal() {
@@ -47,7 +60,9 @@ public class AssetCategoryDisplayImpl implements AssetCategoryDisplay {
 
 	@JSON
 	private List<AssetCategory> _categories;
-	private int _page;
+
+	private int _end;
+	private int _start;
 	private int _total;
 
 }

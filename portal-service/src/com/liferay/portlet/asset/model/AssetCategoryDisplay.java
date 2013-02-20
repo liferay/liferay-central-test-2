@@ -25,7 +25,11 @@ public interface AssetCategoryDisplay extends Serializable {
 
 	public List<AssetCategory> getCategories();
 
+	public int getEnd();
+
 	public int getPage();
+
+	public int getStart();
 
 	public int getTotal();
 

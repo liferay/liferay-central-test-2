@@ -23,7 +23,11 @@ import java.util.List;
  */
 public interface AssetVocabularyDisplay extends Serializable {
 
+	public int getEnd();
+
 	public int getPage();
+
+	public int getStart();
 
 	public int getTotal();
 

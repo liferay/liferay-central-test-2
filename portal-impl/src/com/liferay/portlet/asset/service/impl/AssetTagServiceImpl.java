@@ -115,9 +115,7 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 	public AssetTagDisplay getGroupTagsDisplay(
 			long groupId, String name, int start, int end)
-		throws PortalException, SystemException {
-
-		int page = end / (end - start);
+		throws SystemException {
 
 		List<AssetTag> tags = null;
 		int total = 0;
@@ -133,10 +131,12 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			total = getGroupTagsCount(groupId);
 		}
 
-		return new AssetTagDisplayImpl(tags, page, total);
+		return new AssetTagDisplayImpl(tags, total, start, end);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated {@link #getGroupTagsDisplay(long, String, int, int)}
+	 */
 	public JSONObject getJSONGroupTags(
 			long groupId, String name, int start, int end)
 		throws PortalException, SystemException {

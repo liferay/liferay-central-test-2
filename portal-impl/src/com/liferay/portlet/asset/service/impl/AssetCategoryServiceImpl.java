@@ -152,7 +152,10 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return search(new long[]{groupId}, name, vocabularyIds, start, end);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated {@link #getVocabularyCategoriesDisplay(long, int, int,
+	 *             OrderByComparator)}
+	 */
 	public JSONObject getJSONVocabularyCategories(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -169,7 +172,10 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return jsonObject;
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated {@link #getVocabularyCategoriesDisplay(long, String, long,
+	 *             int, int, OrderByComparator)}
+	 */
 	public JSONObject getJSONVocabularyCategories(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -268,7 +274,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			assetCategoryLocalService.getVocabularyCategories(
 				vocabularyId, start, end, obc));
 
-		return new AssetCategoryDisplayImpl(categories, 1, categories.size());
+		return new AssetCategoryDisplayImpl(
+			categories, categories.size(), start, end);
 	}
 
 	public AssetCategoryDisplay getVocabularyCategoriesDisplay(
@@ -276,13 +283,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			OrderByComparator obc)
 		throws PortalException, SystemException {
 
-		int page = 0;
-
-		if ((end > 0) && (start > 0)) {
-			page = end / (end - start);
-		}
-
-		List<AssetCategory> categories;
+		List<AssetCategory> categories = null;
 		int total = 0;
 
 		if (Validator.isNotNull(name)) {
@@ -297,7 +298,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			total = getVocabularyCategoriesCount(groupId, vocabularyId);
 		}
 
-		return new AssetCategoryDisplayImpl(categories, page, total);
+		return new AssetCategoryDisplayImpl(categories, total, start, end);
 	}
 
 	public List<AssetCategory> getVocabularyRootCategories(

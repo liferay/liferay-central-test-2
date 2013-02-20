@@ -177,9 +177,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	public AssetVocabularyDisplay getGroupVocabulariesDisplay(
 			long groupId, String name, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		int page = end / (end - start);
+		throws SystemException {
 
 		List<AssetVocabulary> vocabularies;
 		int total = 0;
@@ -195,7 +193,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 			total = getGroupVocabulariesCount(groupId);
 		}
 
-		return new AssetVocabularyDisplayImpl(vocabularies, page, total);
+		return new AssetVocabularyDisplayImpl(vocabularies, total, start, end);
 	}
 
 	@Deprecated

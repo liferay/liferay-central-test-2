@@ -26,15 +26,28 @@ import java.util.List;
 public class AssetVocabularyDisplayImpl implements AssetVocabularyDisplay {
 
 	public AssetVocabularyDisplayImpl(
-		List<AssetVocabulary> vocabularies, int page, int total) {
+		List<AssetVocabulary> vocabularies, int total, int start, int end) {
 
 		_vocabularies = vocabularies;
-		_page = page;
 		_total = total;
+		_start = start;
+		_end = end;
+	}
+
+	public int getEnd() {
+		return _end;
 	}
 
 	public int getPage() {
-		return _page;
+		if ((_end > 0) && (_start > 0)) {
+			return _end / (_end - _start);
+		}
+
+		return 0;
+	}
+
+	public int getStart() {
+		return _start;
 	}
 
 	public int getTotal() {
@@ -45,8 +58,10 @@ public class AssetVocabularyDisplayImpl implements AssetVocabularyDisplay {
 		return _vocabularies;
 	}
 
-	private int _page;
+	private int _end;
+	private int _start;
 	private int _total;
+
 	@JSON
 	private List<AssetVocabulary> _vocabularies;
 

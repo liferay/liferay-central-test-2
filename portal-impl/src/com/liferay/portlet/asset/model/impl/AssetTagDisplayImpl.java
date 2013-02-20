@@ -25,14 +25,29 @@ import java.util.List;
  */
 public class AssetTagDisplayImpl implements AssetTagDisplay {
 
-	public AssetTagDisplayImpl(List<AssetTag> tags, int page, int total) {
+	public AssetTagDisplayImpl(
+		List<AssetTag> tags, int total, int start, int end) {
+
 		_tags = tags;
-		_page = page;
 		_total = total;
+		_start = start;
+		_end = end;
+	}
+
+	public int getEnd() {
+		return _end;
 	}
 
 	public int getPage() {
-		return _page;
+		if ((_end > 0) && (_start > 0)) {
+			return _end / (_end - _start);
+		}
+
+		return 0;
+	}
+
+	public int getStart() {
+		return _start;
 	}
 
 	public List<AssetTag> getTags() {
@@ -43,9 +58,12 @@ public class AssetTagDisplayImpl implements AssetTagDisplay {
 		return _total;
 	}
 
-	private int _page;
+	private int _end;
+	private int _start;
+
 	@JSON
 	private List<AssetTag> _tags;
+
 	private int _total;
 
 }
