@@ -218,7 +218,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
 	public List<Long> getSubfolderIds(
 			long groupId, long folderId, boolean recurse)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
