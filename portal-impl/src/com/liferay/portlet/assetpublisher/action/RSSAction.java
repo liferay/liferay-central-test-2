@@ -149,7 +149,7 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 
 		return AssetPublisherUtil.getAssetEntries(
 			preferences, themeDisplay.getLayout(),
-			themeDisplay.getScopeGroupId(), true, rssDelta);
+			themeDisplay.getScopeGroupId(), rssDelta, true);
 	}
 
 	protected String getAssetPublisherURL(PortletRequest portletRequest)

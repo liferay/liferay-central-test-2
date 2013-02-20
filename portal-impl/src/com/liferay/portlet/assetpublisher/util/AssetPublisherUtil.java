@@ -297,7 +297,7 @@ public class AssetPublisherUtil {
 
 	public static List<AssetEntry> getAssetEntries(
 			PortletPreferences preferences, Layout layout, long scopeGroupId,
-			boolean checkPermission, int max)
+			int max, boolean checkPermission)
 		throws PortalException, SystemException {
 
 		AssetEntryQuery assetEntryQuery = getAssetEntryQuery(
@@ -990,8 +990,8 @@ public class AssetPublisherUtil {
 		}
 
 		List<AssetEntry> assetEntries = getAssetEntries(
-			preferences, layout, layout.getGroupId(), false,
-			PropsValues.ASSET_PUBLISHER_DYNAMIC_SUBSCRIPTION_LIMIT);
+			preferences, layout, layout.getGroupId(),
+			PropsValues.ASSET_PUBLISHER_DYNAMIC_SUBSCRIPTION_LIMIT, false);
 
 		if (assetEntries.isEmpty()) {
 			return;
