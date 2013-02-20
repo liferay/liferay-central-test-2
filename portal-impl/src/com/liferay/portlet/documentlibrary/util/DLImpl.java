@@ -939,7 +939,7 @@ public class DLImpl implements DL {
 
 			fileEntryTitle = fileEntry.getTitle();
 
-			if (openDocumentUrl && DLUtil.isOfficeExtension(extension) &&
+			if (openDocumentUrl && isOfficeExtension(extension) &&
 				!fileEntryTitle.endsWith(StringPool.PERIOD + extension)) {
 
 				webDavURL.append(DL.OFFICE_EXTENSION_PATH);
