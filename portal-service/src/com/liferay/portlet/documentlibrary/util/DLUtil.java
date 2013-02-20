@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -45,19 +44,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Julio Camarero
  */
 public class DLUtil {
-
-	public static final String MANUAL_CHECK_IN_REQUIRED =
-		"manualCheckInRequired";
-
-	public static final String MANUAL_CHECK_IN_REQUIRED_PATH =
-		StringPool.SLASH + MANUAL_CHECK_IN_REQUIRED;
-
-	public static final String OFFICE_EXTENSION = "officeExtension";
-
-	public static final String OFFICE_EXTENSION_PATH =
-		StringPool.SLASH + OFFICE_EXTENSION;
-
-	public static final String WEBDAV_CHECK_IN_MODE = "webDAVCheckInMode";
 
 	public static void addPortletBreadcrumbEntries(
 			DLFileShortcut dlFileShortcut, HttpServletRequest request,

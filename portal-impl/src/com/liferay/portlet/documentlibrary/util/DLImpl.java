@@ -929,7 +929,7 @@ public class DLImpl implements DL {
 		webDavURL.append("/webdav");
 
 		if (manualCheckInRequired) {
-			webDavURL.append(DLUtil.MANUAL_CHECK_IN_REQUIRED_PATH);
+			webDavURL.append(DL.MANUAL_CHECK_IN_REQUIRED_PATH);
 		}
 
 		String fileEntryTitle = null;
@@ -942,7 +942,7 @@ public class DLImpl implements DL {
 			if (openDocumentUrl && DLUtil.isOfficeExtension(extension) &&
 				!fileEntryTitle.endsWith(StringPool.PERIOD + extension)) {
 
-				webDavURL.append(DLUtil.OFFICE_EXTENSION_PATH);
+				webDavURL.append(DL.OFFICE_EXTENSION_PATH);
 
 				fileEntryTitle += StringPool.PERIOD + extension;
 			}

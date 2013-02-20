@@ -84,6 +84,7 @@ import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
+import com.liferay.portlet.documentlibrary.util.DL;
 import com.liferay.portlet.documentlibrary.util.DLAppUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
@@ -294,7 +295,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntryId);
 
 		boolean webDAVCheckInMode = GetterUtil.getBoolean(
-			serviceContext.getAttribute(DLUtil.WEBDAV_CHECK_IN_MODE));
+			serviceContext.getAttribute(DL.WEBDAV_CHECK_IN_MODE));
 
 		boolean manualCheckInRequired = dlFileEntry.getManualCheckInRequired();
 
@@ -503,7 +504,7 @@ public class DLFileEntryLocalServiceImpl
 		serviceContext.setUserId(userId);
 
 		boolean manualCheckinRequired = GetterUtil.getBoolean(
-			serviceContext.getAttribute(DLUtil.MANUAL_CHECK_IN_REQUIRED));
+			serviceContext.getAttribute(DL.MANUAL_CHECK_IN_REQUIRED));
 
 		dlFileEntry.setManualCheckInRequired(manualCheckinRequired);
 

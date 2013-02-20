@@ -57,7 +57,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrary.util.DLUtil;
+import com.liferay.portlet.documentlibrary.util.DL;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.File;
@@ -399,7 +399,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAttribute(
-					DLUtil.MANUAL_CHECK_IN_REQUIRED,
+					DL.MANUAL_CHECK_IN_REQUIRED,
 					webDavRequest.isManualCheckInRequired());
 
 				DLAppServiceUtil.checkOutFileEntry(
@@ -784,7 +784,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAttribute(DLUtil.WEBDAV_CHECK_IN_MODE, true);
+				serviceContext.setAttribute(DL.WEBDAV_CHECK_IN_MODE, true);
 
 				DLAppServiceUtil.checkInFileEntry(
 					fileEntry.getFileEntryId(), token, serviceContext);
