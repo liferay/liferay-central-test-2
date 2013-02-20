@@ -163,8 +163,7 @@ public class BookmarksFolderServiceUtil {
 
 	public static java.util.List<java.lang.Long> getSubfolderIds(long groupId,
 		long folderId, boolean recurse)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSubfolderIds(groupId, folderId, recurse);
 	}
 
