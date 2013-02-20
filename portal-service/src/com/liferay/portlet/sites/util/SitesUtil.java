@@ -247,7 +247,7 @@ public class SitesUtil {
 	}
 
 	/**
-	 * @deprecated {@link #mergeLayoutPrototypeLayout(com.liferay.portal.model.Group, com.liferay.portal.model.Layout)}
+	 * @deprecated {@link #mergeLayoutPrototypeLayout(Group, Layout)}
 	 */
 	public static void mergeLayoutProtypeLayout(Group group, Layout layout)
 		throws Exception {
@@ -263,7 +263,7 @@ public class SitesUtil {
 	}
 
 	/**
-	 * @deprecated {@link #mergeLayoutSetPrototypeLayouts(com.liferay.portal.model.Group, com.liferay.portal.model.LayoutSet)}
+	 * @deprecated {@link #mergeLayoutSetPrototypeLayouts(Group, LayoutSet)}
 	 */
 	public static void mergeLayoutSetProtypeLayouts(
 			Group group, LayoutSet layoutSet)
