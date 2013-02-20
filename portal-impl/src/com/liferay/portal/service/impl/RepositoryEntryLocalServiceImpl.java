@@ -37,13 +37,12 @@ public class RepositoryEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
 
 		long repositoryEntryId = counterLocalService.increment();
 
 		RepositoryEntry repositoryEntry = repositoryEntryPersistence.create(
 			repositoryEntryId);
-
-		Date now = new Date();
 
 		repositoryEntry.setUuid(serviceContext.getUuid());
 		repositoryEntry.setGroupId(groupId);
