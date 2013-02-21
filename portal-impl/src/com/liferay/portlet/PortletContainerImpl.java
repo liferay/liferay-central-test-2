@@ -797,7 +797,8 @@ public class PortletContainerImpl implements PortletContainer {
 
 			if (themeDisplay.isIsolated() && _SCRIPT_BUFFER_FILTER_ENABLED) {
 				if (!GetterUtil.getBoolean(
-						request.getAttribute(WebKeys.SCRIPT_DATA_OUTPUTED))) {
+						request.getAttribute(
+							WebKeys.AUI_SCRIPT_DATA_OUTPUTTED))) {
 
 					Writer writer = response.getWriter();
 
@@ -807,7 +808,7 @@ public class PortletContainerImpl implements PortletContainer {
 					writer.write(scriptDataString);
 
 					request.setAttribute(
-						WebKeys.SCRIPT_DATA_OUTPUTED, Boolean.TRUE);
+						WebKeys.AUI_SCRIPT_DATA_OUTPUTTED, Boolean.TRUE);
 				}
 			}
 		}

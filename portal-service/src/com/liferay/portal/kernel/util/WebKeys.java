@@ -27,6 +27,8 @@ public interface WebKeys {
 
 	public static final String AUI_SCRIPT_DATA = "LIFERAY_SHARED_AUI_SCRIPT_DATA";
 
+	public static final String AUI_SCRIPT_DATA_OUTPUTTED = "LIFERAY_SHARED_AUI_SCRIPT_DATA_OUTPUTTED";
+
 	public static final String AUTHENTICATION_TOKEN = "LIFERAY_SHARED_AUTHENTICATION_TOKEN";
 
 	public static final String CLP_MESSAGE_LISTENERS = "CLP_MESSAGE_LISTENERS";
@@ -122,8 +124,6 @@ public interface WebKeys {
 	public static final String RENDER_PORTLET_COLUMN_POS = "RENDER_PORTLET_COLUMN_POS";
 
 	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
-
-	public static final String SCRIPT_DATA_OUTPUTED = "SCRIPT_DATA_OUTPUTED";
 
 	public static final String SEARCH_CONTAINER = "SEARCH_CONTAINER";
 

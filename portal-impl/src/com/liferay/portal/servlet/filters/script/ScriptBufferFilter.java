@@ -97,7 +97,8 @@ public class ScriptBufferFilter extends BasePortalFilter {
 				content = content.concat(scriptData);
 			}
 
-			request.setAttribute(WebKeys.SCRIPT_DATA_OUTPUTED, Boolean.TRUE);
+			request.setAttribute(
+				WebKeys.AUI_SCRIPT_DATA_OUTPUTTED, Boolean.TRUE);
 		}
 
 		ServletResponseUtil.write(response, content);
