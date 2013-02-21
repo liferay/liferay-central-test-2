@@ -459,6 +459,17 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 	}
 
+	public boolean hasControlPanelAccessPermission(
+			PermissionChecker permissionChecker, long scopeGroupId,
+			String portletId)
+		throws PortalException, SystemException {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
+
+		return hasControlPanelAccessPermission(
+			permissionChecker, scopeGroupId, portlet);
+	}
+
 	public boolean hasLayoutManagerPermission(
 		String portletId, String actionId) {
 

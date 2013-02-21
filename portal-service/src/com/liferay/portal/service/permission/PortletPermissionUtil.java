@@ -185,14 +185,13 @@ public class PortletPermissionUtil {
 			permissionChecker, groupId, layout, portletId, actionId, strict);
 	}
 
+
+
 	/**
-	 * @see        #hasControlPanelAccessPermission(PermissionChecker, long,
-	 *             Collection)
-	 * @deprecated As of 6.2. This method will be permanently removed in a
-	 *             future version. Please use {@link
-	 *             #hasControlPanelAccessPermission}.
+	 * @deprecated As of 6.2, replaced by {@link
+	 *             #hasControlPanelAccessPermission(PermissionChecker, long,
+	 *             Collection)}
 	 */
-	@Deprecated
 	public static boolean contains(
 		PermissionChecker permissionChecker, long groupId, long plid,
 		Collection<Portlet> portlets, String actionId) {
@@ -201,10 +200,9 @@ public class PortletPermissionUtil {
 			return hasControlPanelAccessPermission(
 				permissionChecker, groupId, portlets);
 
-		} catch (PortalException e) {
-			_log.error(e);
-		} catch (SystemException e) {
-			_log.error(e);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		return false;
@@ -300,6 +298,15 @@ public class PortletPermissionUtil {
 
 		return getPortletPermission().hasControlPanelAccessPermission(
 			permissionChecker, scopeGroupId, portlet);
+	}
+
+	public static boolean hasControlPanelAccessPermission(
+			PermissionChecker permissionChecker, long scopeGroupId,
+			String portletId)
+		throws PortalException, SystemException {
+
+		return getPortletPermission().hasControlPanelAccessPermission(
+			permissionChecker, scopeGroupId, portletId);
 	}
 
 	public static boolean hasLayoutManagerPermission(

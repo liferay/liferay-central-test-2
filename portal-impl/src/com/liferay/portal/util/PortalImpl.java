@@ -4994,16 +4994,13 @@ public class PortalImpl implements Portal {
 			String portletId, ThemeDisplay themeDisplay)
 		throws SystemException {
 
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			themeDisplay.getCompanyId(), portletId);
-
 		try {
 			return PortletPermissionUtil.hasControlPanelAccessPermission(
 				themeDisplay.getPermissionChecker(),
-				themeDisplay.getScopeGroupId(), portlet);
+				themeDisplay.getScopeGroupId(), portletId);
 		}
 		catch (PortalException e) {
-			_log.warn("Cannot process control panel access permission", e);
+			_log.warn("Unable to check control panel access permission", e);
 		}
 
 		return false;
