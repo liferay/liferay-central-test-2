@@ -197,7 +197,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 	</div>
 
 	<c:if test="<%= editable %>">
-		<div class="float-container lfr-available-themes" id='<%= device + "availableThemes" %>'>
+		<div class="float-container lfr-available-themes" id="<%= device %>availableThemes">
 			<h3>
 				<span class="header-title">
 					<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
