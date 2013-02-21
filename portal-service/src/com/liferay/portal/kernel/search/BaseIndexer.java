@@ -1205,7 +1205,7 @@ public abstract class BaseIndexer implements Indexer {
 			BaseModel<?> workflowedBaseModel)
 		throws SystemException {
 
-		Document document = (Document)_document.clone();
+		Document document = newDocument();
 
 		String className = baseModel.getModelClassName();
 
@@ -1374,6 +1374,10 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		return null;
+	}
+
+	protected Document newDocument() {
+		return (Document)_document.clone();
 	}
 
 	protected void populateAddresses(
