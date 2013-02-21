@@ -68,7 +68,7 @@ public class ScriptBufferFilter extends BasePortalFilter {
 		if (_log.isDebugEnabled()) {
 			String completeURL = HttpUtil.getCompleteURL(request);
 
-			_log.debug("Flushing scripts buffer for " + completeURL);
+			_log.debug("Flushing script buffer for " + completeURL);
 		}
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
@@ -87,23 +87,23 @@ public class ScriptBufferFilter extends BasePortalFilter {
 		if ((contentType != null) &&
 			contentType.startsWith(ContentTypes.TEXT_HTML)) {
 
-			String scriptData = AUIUtil.getScriptData(request);
+			String scriptData = AUIUtil.getScriptDataString(request);
 
-			if (content.indexOf(_CLOSE_BODY) > -1) {
+			if (content.contains(_BODY_CLOSE)) {
 				content = StringUtil.replace(
-					content, _CLOSE_BODY, scriptData.concat(_CLOSE_BODY));
+					content, _BODY_CLOSE, scriptData.concat(_BODY_CLOSE));
 			}
 			else {
 				content = content.concat(scriptData);
 			}
 
-			request.setAttribute(WebKeys.SCRIPT_DATA_OUTPUTED, true);
+			request.setAttribute(WebKeys.SCRIPT_DATA_OUTPUTED, Boolean.TRUE);
 		}
 
 		ServletResponseUtil.write(response, content);
 	}
 
-	private static final String _CLOSE_BODY = "</body>";
+	private static final String _BODY_CLOSE = "</body>";
 
 	private static Log _log = LogFactoryUtil.getLog(ScriptBufferFilter.class);
 

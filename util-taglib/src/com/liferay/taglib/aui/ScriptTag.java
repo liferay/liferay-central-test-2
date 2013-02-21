@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.taglib.aui.base.BaseScriptTag;
 
+import java.io.Writer;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -114,8 +116,12 @@ public class ScriptTag extends BaseScriptTag {
 					PortalIncludeUtil.include(pageContext, page);
 				}
 				else {
-					AUIUtil.outputInlineScriptData(
-						request, pageContext.getOut());
+					Writer writer = pageContext.getOut();
+
+					String scriptDataString = AUIUtil.getScriptDataString(
+						request);
+
+					writer.write(scriptDataString);
 				}
 			}
 			else {

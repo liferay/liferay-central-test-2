@@ -16,14 +16,10 @@ package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import java.io.IOException;
-import java.io.Writer;
 
 import java.util.Map;
 import java.util.Set;
@@ -174,9 +170,7 @@ public class AUIUtil {
 		return sb.toString();
 	}
 
-	public static String getScriptData(HttpServletRequest request)
-		throws IOException {
-
+	public static String getScriptDataString(HttpServletRequest request) {
 		ScriptData scriptData = (ScriptData)request.getAttribute(
 			ScriptTag.class.getName());
 
@@ -196,7 +190,6 @@ public class AUIUtil {
 		StringBundler sb = new StringBundler();
 
 		sb.append("<script type=\"text/javascript\">\n// <![CDATA[\n");
-
 		sb.append(scriptData.getRawSB());
 
 		StringBundler callbackSB = scriptData.getCallbackSB();
@@ -211,7 +204,7 @@ public class AUIUtil {
 			}
 
 			sb.append("AUI().");
-			sb.append( loadMethod );
+			sb.append(loadMethod);
 			sb.append("(");
 
 			Set<String> useSet = scriptData.getUseSet();
@@ -224,46 +217,13 @@ public class AUIUtil {
 			}
 
 			sb.append("function(A) {");
-
 			sb.append(callbackSB);
-
 			sb.append("});");
 		}
 
 		sb.append("\n// ]]>\n</script>");
 
 		return sb.toString();
-	}
-
-	public static void outputInlineScriptData(
-			HttpServletRequest request, Writer writer)
-		throws Exception {
-
-		String scriptData = AUIUtil.getScriptData(request);
-
-		writer.write(scriptData);
-	}
-
-	public static void outputScriptData(
-			HttpServletRequest request, Writer writer)
-		throws Exception {
-
-		String scriptData = AUIUtil.getScriptData(request);
-
-		writer.write(scriptData);
-
-		request.setAttribute(WebKeys.SCRIPT_DATA_OUTPUTED, true);
-	}
-
-	public static void outputScriptDataIfNeeded(
-			HttpServletRequest request, Writer writer)
-		throws Exception {
-
-		if (!GetterUtil.getBoolean(
-				request.getAttribute(WebKeys.SCRIPT_DATA_OUTPUTED))) {
-
-			outputScriptData(request, writer);
-		}
 	}
 
 }

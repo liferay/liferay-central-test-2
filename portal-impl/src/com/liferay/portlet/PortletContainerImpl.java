@@ -796,7 +796,19 @@ public class PortletContainerImpl implements PortletContainer {
 			}
 
 			if (themeDisplay.isIsolated() && _SCRIPT_BUFFER_FILTER_ENABLED) {
-				AUIUtil.outputScriptDataIfNeeded(request, response.getWriter());
+				if (!GetterUtil.getBoolean(
+						request.getAttribute(WebKeys.SCRIPT_DATA_OUTPUTED))) {
+
+					Writer writer = response.getWriter();
+
+					String scriptDataString = AUIUtil.getScriptDataString(
+						request);
+
+					writer.write(scriptDataString);
+
+					request.setAttribute(
+						WebKeys.SCRIPT_DATA_OUTPUTED, Boolean.TRUE);
+				}
 			}
 		}
 		finally {
@@ -965,8 +977,8 @@ public class PortletContainerImpl implements PortletContainer {
 	}
 
 	private static final boolean _SCRIPT_BUFFER_FILTER_ENABLED =
-			GetterUtil.getBoolean(
-				PropsUtil.get(ScriptBufferFilter.class.getName()));
+		GetterUtil.getBoolean(
+			PropsUtil.get(ScriptBufferFilter.class.getName()));
 
 	private static Log _log = LogFactoryUtil.getLog(PortletContainerImpl.class);
 
