@@ -1194,6 +1194,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage movePageToTrash(long userId, WikiPage page)
 		throws PortalException, SystemException {
 
+		// Page
+
 		int oldStatus = page.getStatus();
 
 		page = updateStatus(
