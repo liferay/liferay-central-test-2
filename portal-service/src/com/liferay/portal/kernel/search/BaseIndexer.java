@@ -103,6 +103,10 @@ public abstract class BaseIndexer implements Indexer {
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
+	public BaseIndexer() {
+		_document = new DocumentImpl();
+	}
+
 	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
 	}
@@ -282,7 +286,7 @@ public abstract class BaseIndexer implements Indexer {
 	public String getSortField(String orderByCol) {
 		String sortField = doGetSortField(orderByCol);
 
-		if (DocumentImpl.isSortableTextField(sortField)) {
+		if (_document.isSortableTextField(sortField)) {
 			return DocumentImpl.getSortableFieldName(sortField);
 		}
 
@@ -1201,7 +1205,7 @@ public abstract class BaseIndexer implements Indexer {
 			BaseModel<?> workflowedBaseModel)
 		throws SystemException {
 
-		Document document = new DocumentImpl();
+		Document document = (Document)_document.clone();
 
 		String className = baseModel.getModelClassName();
 
@@ -1458,12 +1462,17 @@ public abstract class BaseIndexer implements Indexer {
 		_permissionAware = permissionAware;
 	}
 
+	protected void setSortableTextFields(String[] sortableTextFields) {
+		_document.setSortableTextFields(sortableTextFields);
+	}
+
 	protected void setStagingAware(boolean stagingAware) {
 		_stagingAware = stagingAware;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
+	private Document _document;
 	private boolean _filterSearch;
 	private boolean _indexerEnabled = true;
 	private IndexerPostProcessor[] _indexerPostProcessors =
