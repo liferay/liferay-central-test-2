@@ -221,12 +221,6 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryPersistence.fetchByPrimaryKey(categoryId);
 	}
 
-	public List<Long> getAllChildCategories(long parentCategoryId)
-		throws SystemException {
-
-		return assetCategoryFinder.findByG_L(parentCategoryId);
-	}
-
 	public List<AssetCategory> getCategories() throws SystemException {
 		return assetCategoryPersistence.findAll();
 	}
@@ -306,6 +300,12 @@ public class AssetCategoryLocalServiceImpl
 		throws SystemException {
 
 		return assetCategoryFinder.findByEntryId(entryId);
+	}
+
+	public List<Long> getSubcategoryIds(long parentCategoryId)
+		throws SystemException {
+
+		return assetCategoryFinder.findByG_L(parentCategoryId);
 	}
 
 	public List<AssetCategory> getVocabularyCategories(
