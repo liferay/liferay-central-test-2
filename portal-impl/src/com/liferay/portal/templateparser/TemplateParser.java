@@ -319,6 +319,7 @@ public class TemplateParser {
 		templateContext.put("companyId", getCompanyId());
 		templateContext.put("device", getDevice());
 		templateContext.put("groupId", getGroupId());
+		templateContext.put("journalTemplatesPath", getJournalTemplatesPath());
 
 		Locale locale = LocaleUtil.fromLanguageId(_languageId);
 
@@ -327,8 +328,6 @@ public class TemplateParser {
 		templateContext.put(
 			"permissionChecker", PermissionThreadLocal.getPermissionChecker());
 		templateContext.put("viewMode", _viewMode);
-
-		templateContext.put("journalTemplatesPath", getJournalTemplatesPath());
 
 		String randomNamespace =
 			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
@@ -351,9 +350,7 @@ public class TemplateParser {
 
 	private Map<String, Object> _contextObjects = new HashMap<String, Object>();
 	private String _languageId;
-
 	private TemplateContext _templateContext;
-
 	private ThemeDisplay _themeDisplay;
 	private Map<String, String> _tokens;
 	private String _viewMode;

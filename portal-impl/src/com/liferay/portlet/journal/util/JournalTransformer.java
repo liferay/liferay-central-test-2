@@ -39,8 +39,6 @@ public class JournalTransformer extends BaseTransformer {
 			SetUtil.fromArray(
 				PropsUtil.getArray(PropsKeys.JOURNAL_TRANSFORMER_LISTENER)));
 
-		_errorTemplateIdMap = new HashMap<String, String>();
-
 		Set<String> langTypes = TemplateManagerUtil.getSupportedLanguageTypes(
 			PropsKeys.JOURNAL_ERROR_TEMPLATE);
 
@@ -49,14 +47,14 @@ public class JournalTransformer extends BaseTransformer {
 				PropsKeys.JOURNAL_ERROR_TEMPLATE, new Filter(langType));
 
 			if (Validator.isNotNull(errorTemplateId)) {
-				_errorTemplateIdMap.put(langType, errorTemplateId);
+				_errorTemplateIds.put(langType, errorTemplateId);
 			}
 		}
 	}
 
 	@Override
 	protected String getErrorTemplateId(String langType) {
-		return _errorTemplateIdMap.get(langType);
+		return _errorTemplateIds.get(langType);
 	}
 
 	@Override
@@ -74,7 +72,8 @@ public class JournalTransformer extends BaseTransformer {
 		return _transformerListenerClassNames;
 	}
 
-	private Map<String, String> _errorTemplateIdMap;
+	private Map<String, String> _errorTemplateIds =
+		new HashMap<String, String>();
 	private Set<String> _transformerListenerClassNames;
 
 }

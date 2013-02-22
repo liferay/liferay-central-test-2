@@ -40,8 +40,6 @@ public class DDLTransformer extends BaseTransformer {
 				PropsUtil.getArray(
 					PropsKeys.DYNAMIC_DATA_LISTS_TRANSFORMER_LISTENER)));
 
-		_errorTemplateIdMap = new HashMap<String, String>();
-
 		Set<String> langTypes = TemplateManagerUtil.getSupportedLanguageTypes(
 			PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE);
 
@@ -51,14 +49,14 @@ public class DDLTransformer extends BaseTransformer {
 				new Filter(langType));
 
 			if (Validator.isNotNull(errorTemplateId)) {
-				_errorTemplateIdMap.put(langType, errorTemplateId);
+				_errorTemplateIds.put(langType, errorTemplateId);
 			}
 		}
 	}
 
 	@Override
 	protected String getErrorTemplateId(String langType) {
-		return _errorTemplateIdMap.get(langType);
+		return _errorTemplateIds.get(langType);
 	}
 
 	@Override
@@ -76,7 +74,8 @@ public class DDLTransformer extends BaseTransformer {
 		return _transformerListenerClassNames;
 	}
 
-	private Map<String, String> _errorTemplateIdMap;
+	private Map<String, String> _errorTemplateIds =
+		new HashMap<String, String>();
 	private Set<String> _transformerListenerClassNames;
 
 }
