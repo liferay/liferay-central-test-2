@@ -71,9 +71,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 			activity.getExtraData());
 
-		// Only those users who can edit the page should see the activities
-		// related to non-approved versions
-
 		if (activityType == WikiActivityKeys.UPDATE_PAGE) {
 			double version = extraDataJSONObject.getDouble("version");
 
@@ -108,33 +105,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		if ((activityType == WikiActivityKeys.ADD_COMMENT) ||
-			(activityType == SocialActivityConstants.TYPE_ADD_COMMENT)) {
-
-			if (Validator.isNull(groupName)) {
-				titlePattern = "activity-wiki-add-comment";
-			}
-			else {
-				titlePattern = "activity-wiki-add-comment-in";
-			}
-		}
-		else if (activityType == WikiActivityKeys.ADD_PAGE) {
-			if (Validator.isNull(groupName)) {
-				titlePattern = "activity-wiki-add-page";
-			}
-			else {
-				titlePattern = "activity-wiki-add-page-in";
-			}
-		}
-		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
-			if (Validator.isNull(groupName)) {
-				titlePattern = "activity-wiki-update-page";
-			}
-			else {
-				titlePattern = "activity-wiki-update-page-in";
-			}
-		}
-		else if (activityType == SocialActivityConstants.TYPE_ADD_ATTACHMENT) {
+		if (activityType == SocialActivityConstants.TYPE_ADD_ATTACHMENT) {
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-wiki-add-attachment";
 			}
@@ -164,8 +135,35 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 				titlePattern = "activity-wiki-restore-attachment-in";
 			}
 		}
+		else if ((activityType == SocialActivityConstants.TYPE_ADD_COMMENT) ||
+				 (activityType == WikiActivityKeys.ADD_COMMENT)) {
 
-		// Atachment
+			if (Validator.isNull(groupName)) {
+				titlePattern = "activity-wiki-add-comment";
+			}
+			else {
+				titlePattern = "activity-wiki-add-comment-in";
+			}
+		}
+		else if (activityType == WikiActivityKeys.ADD_PAGE) {
+			if (Validator.isNull(groupName)) {
+				titlePattern = "activity-wiki-add-page";
+			}
+			else {
+				titlePattern = "activity-wiki-add-page-in";
+			}
+		}
+		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
+			if (Validator.isNull(groupName)) {
+				titlePattern = "activity-wiki-update-page";
+			}
+			else {
+				titlePattern = "activity-wiki-update-page-in";
+			}
+		}
+
+		String pageTitle = wrapLink(
+			link, HtmlUtil.escape(pageResource.getTitle()));
 
 		String attachmentTitle = null;
 
@@ -176,7 +174,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 				SocialActivityConstants.TYPE_RESTORE_ATTACHMENT_FROM_TRASH)) {
 
 			FileEntry fileEntry = null;
-			FileVersion fileVersion = null;
 
 			try {
 				fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
@@ -185,13 +182,13 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			catch (NoSuchModelException nsme) {
 			}
 
+			FileVersion fileVersion = null;
+
 			if (fileEntry != null) {
 				fileVersion = fileEntry.getFileVersion();
 			}
 
 			String fileEntryTitle = extraDataJSONObject.getString("title");
-
-			// Attachment Link
 
 			if ((fileVersion != null) && !fileVersion.isInTrash()) {
 				StringBundler sb = new StringBundler(9);
@@ -213,9 +210,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 				attachmentTitle = HtmlUtil.escape(fileEntryTitle);
 			}
 		}
-
-		String pageTitle = wrapLink(
-			link, HtmlUtil.escape(pageResource.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, pageTitle, attachmentTitle
