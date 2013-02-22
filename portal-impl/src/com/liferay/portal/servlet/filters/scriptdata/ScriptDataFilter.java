@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.script;
+package com.liferay.portal.servlet.filters.scriptdata;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -33,10 +33,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Bruno Basto
  * @author Eduardo Lundgren
  */
-public class ScriptBufferFilter extends BasePortalFilter {
+public class ScriptDataFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
-		ScriptBufferFilter.class.getName() + "SKIP_FILTER";
+		ScriptDataFilter.class.getName() + "SKIP_FILTER";
 
 	@Override
 	public boolean isFilterEnabled(
@@ -68,7 +68,7 @@ public class ScriptBufferFilter extends BasePortalFilter {
 		if (_log.isDebugEnabled()) {
 			String completeURL = HttpUtil.getCompleteURL(request);
 
-			_log.debug("Flushing script buffer for " + completeURL);
+			_log.debug("Output script data for " + completeURL);
 		}
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
@@ -77,7 +77,7 @@ public class ScriptBufferFilter extends BasePortalFilter {
 			new BufferCacheServletResponse(response);
 
 		processFilter(
-			ScriptBufferFilter.class, request, bufferCacheServletResponse,
+			ScriptDataFilter.class, request, bufferCacheServletResponse,
 			filterChain);
 
 		String content = bufferCacheServletResponse.getString();
@@ -106,6 +106,6 @@ public class ScriptBufferFilter extends BasePortalFilter {
 
 	private static final String _BODY_CLOSE = "</body>";
 
-	private static Log _log = LogFactoryUtil.getLog(ScriptBufferFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(ScriptDataFilter.class);
 
 }

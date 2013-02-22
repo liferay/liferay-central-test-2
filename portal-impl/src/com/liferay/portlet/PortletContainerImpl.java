@@ -58,7 +58,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.servlet.filters.script.ScriptBufferFilter;
+import com.liferay.portal.servlet.filters.scriptdata.ScriptDataFilter;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -978,8 +978,7 @@ public class PortletContainerImpl implements PortletContainer {
 	}
 
 	private static final boolean _SCRIPT_BUFFER_FILTER_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(ScriptBufferFilter.class.getName()));
+		GetterUtil.getBoolean(PropsUtil.get(ScriptDataFilter.class.getName()));
 
 	private static Log _log = LogFactoryUtil.getLog(PortletContainerImpl.class);
 
