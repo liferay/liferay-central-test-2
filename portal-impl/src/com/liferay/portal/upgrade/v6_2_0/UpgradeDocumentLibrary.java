@@ -48,10 +48,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			String sql =
-				"select distinct DLFileEntry.companyId from DLFileEntry";
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"select distinct companyId from DLFileEntry");
 
 			rs = ps.executeQuery();
 
@@ -59,7 +57,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 
 				try {
-					DLStoreUtil.deleteDirectory(companyId, 0, "checksum/");
+					DLStoreUtil.deleteDirectory(companyId, 0, "checksum");
 				}
 				catch (Exception e) {
 				}
@@ -113,13 +111,13 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
+		// Checksum directory
+
+		deleteChecksumDirectory();
+
 		// Temp directory
 
 		deleteTempDirectory();
-
-		// 6.1.x checksum
-
-		deleteChecksumDirectory();
 	}
 
 	protected String getUserName(long userId) throws Exception {
