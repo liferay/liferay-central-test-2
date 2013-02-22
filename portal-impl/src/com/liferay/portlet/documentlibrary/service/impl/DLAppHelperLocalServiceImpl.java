@@ -694,10 +694,6 @@ public class DLAppHelperLocalServiceImpl
 
 		dlFileRankLocalService.enableFileRanksByFolderId(folder.getFolderId());
 
-		// Trash
-
-		trashEntryLocalService.deleteEntry(trashEntry.getEntryId());
-
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -705,6 +701,10 @@ public class DLAppHelperLocalServiceImpl
 			folder.getFolderId(),
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH, StringPool.BLANK,
 			0);
+
+		// Trash
+
+		trashEntryLocalService.deleteEntry(trashEntry.getEntryId());
 	}
 
 	public AssetEntry updateAsset(
