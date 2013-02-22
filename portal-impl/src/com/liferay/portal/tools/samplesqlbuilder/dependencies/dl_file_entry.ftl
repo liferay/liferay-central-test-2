@@ -25,10 +25,7 @@ insert into DDMContent values ('${portalUUIDUtil.generate()}', ${ddmContent.cont
 
 insert into DDMStorageLink values ('${portalUUIDUtil.generate()}', ${ddmStorageLink.storageLinkId}, ${dataFactory.DDMContentClassNameId}, ${ddmContent.contentId}, ${ddmStructure.structureId});
 
-<#assign mbThreadId = counter.get()>
-<#assign mbMessageId = counter.get()>
-
-${sampleSQLBuilder.insertMBDiscussion(dlFileEntry.groupId, dlFileEntry.userId, mbMessageId, mbThreadId, dataFactory.DLFileEntryClassNameId, dlFileEntry.fileEntryId, 0)}
+${sampleSQLBuilder.insertMBDiscussion(dlFileEntry.groupId, dlFileEntry.userId, dataFactory.DLFileEntryClassNameId, dlFileEntry.fileEntryId, ${counter.get()}, ${counter.get()}, 0)}
 
 <#assign socialActivity = dataFactory.addSocialActivity(dlFileEntry.groupId, dlFileEntry.companyId, dlFileEntry.userId, dataFactory.DLFileEntryClassNameId, dlFileEntry.fileEntryId)>
 

@@ -7,7 +7,7 @@
 		<#assign mbThreadId = counter.get()>
 		<#assign mbRootMessageId = counter.get()>
 
-		${sampleSQLBuilder.insertMBDiscussion(groupId, firstUserId, mbRootMessageId, mbThreadId, dataFactory.blogsEntryClassNameId, blogsEntry.entryId, maxBlogsEntryCommentCount)}
+		${sampleSQLBuilder.insertMBDiscussion(groupId, firstUserId, dataFactory.blogsEntryClassNameId, blogsEntry.entryId, mbThreadId, mbRootMessageId, maxBlogsEntryCommentCount)}
 
 		${writerBlogsCSV.write(blogsEntry.entryId + "," + blogsEntry.urlTitle + "," + mbThreadId + "," + mbRootMessageId + "\n")}
 	</#list>

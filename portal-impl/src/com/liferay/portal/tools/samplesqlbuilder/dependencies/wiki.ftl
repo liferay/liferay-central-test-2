@@ -10,10 +10,10 @@
 
 				${sampleSQLBuilder.insertWikiPage(wikiNode, wikiPage)}
 
-				<#assign mbThreadId = counter.get()>
 				<#assign mbRootMessageId = counter.get()>
+				<#assign mbThreadId = counter.get()>
 
-				${sampleSQLBuilder.insertMBDiscussion(groupId, firstUserId, mbRootMessageId, mbThreadId, dataFactory.wikiPageClassNameId, wikiPage.resourcePrimKey, maxWikiPageCommentCount)}
+				${sampleSQLBuilder.insertMBDiscussion(groupId, firstUserId, dataFactory.wikiPageClassNameId, wikiPage.resourcePrimKey, mbThreadId, mbRootMessageId, maxWikiPageCommentCount)}
 
 				${writerWikiCSV.write(wikiNode.nodeId + "," + wikiNode.name + "," + wikiPage.resourcePrimKey + "," + wikiPage.title + "," + mbThreadId + "," + mbRootMessageId + "\n")}
 			</#list>
