@@ -93,8 +93,8 @@ public class PositionTagSupport extends BaseBodyTagSupport implements BodyTag {
 	private static final boolean _SCRIPT_BUFFER_FILTER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(
-				"com.liferay.portal.servlet.filters.scriptdata." +
-					"ScriptDataFilter"));
+				"com.liferay.portal.servlet.filters.script." +
+					"ScriptBufferFilter"));
 
 	private String _position;
 
