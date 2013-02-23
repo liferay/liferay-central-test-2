@@ -499,19 +499,19 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			}
 		}
 
-		for (String systemPortletFilterClassName :
+		for (String portletFilterClassName :
 				PropsValues.PORTLET_FILTERS_SYSTEM) {
 
-			PortletFilterImpl portletFilterImpl =
+			com.liferay.portal.model.PortletFilter portletFilterModel =
 				new PortletFilterImpl(
-					systemPortletFilterClassName, systemPortletFilterClassName,
+					portletFilterClassName, portletFilterClassName,
 					Collections.<String>emptySet(),
 					Collections.<String, String>emptyMap(), portletApp);
 
 			PortletFilter portletFilter = PortletFilterFactory.create(
-				portletFilterImpl, _portletContextImpl);
+				portletFilterModel, _portletContextImpl);
 
-			_systemFilters.add(portletFilter);
+			_systemPortletFilters.add(portletFilter);
 
 			if (portletFilter instanceof ActionFilter) {
 				_actionFilters.add((ActionFilter)portletFilter);
@@ -674,11 +674,11 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_renderFilters.clear();
 		_resourceFilters.clear();
 
-		for (PortletFilter portletFilter : _systemFilters) {
+		for (PortletFilter portletFilter : _systemPortletFilters) {
 			portletFilter.destroy();
 		}
 
-		_systemFilters.clear();
+		_systemPortletFilters.clear();
 	}
 
 	private void _initialize(
@@ -724,6 +724,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		new ArrayList<ResourceFilter>();
 	private boolean _strutsBridgePortlet;
 	private boolean _strutsPortlet;
-	private List<PortletFilter> _systemFilters = new ArrayList<PortletFilter>();
+	private List<PortletFilter> _systemPortletFilters =
+		new ArrayList<PortletFilter>();
 
 }

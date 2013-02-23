@@ -12,14 +12,13 @@
  * details.
  */
 
-package com.liferay.portlet.filters;
+package com.liferay.portlet;
 
 import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.MimeResponseImpl;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -93,7 +92,7 @@ public class ScriptDataPortletFilter implements RenderFilter, ResourceFilter {
 			request, scriptData, (MimeResponseImpl)resourceResponse);
 	}
 
-	public void init(FilterConfig filterConfig) throws PortletException {
+	public void init(FilterConfig filterConfig) {
 	}
 
 	private void _flushScriptData(

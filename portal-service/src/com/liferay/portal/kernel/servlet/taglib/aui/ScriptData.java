@@ -89,6 +89,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 		for (PortletData portletData : _portletDataMap.values()) {
 			portletData._rawSB.writeTo(writer);
+
 			callbackSB.append(portletData._callbackSB);
 		}
 
@@ -102,7 +103,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 			}
 
 			writer.write("AUI().");
-			writer.write( loadMethod );
+			writer.write(loadMethod);
 			writer.write("(");
 
 			Set<String> useSet = new TreeSet<String>();
