@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 
@@ -170,7 +171,21 @@ public abstract class BaseStore implements Store {
 			companyId, repositoryId, fileName, fromVersionLabel);
 
 		if (is == null) {
-			_log.error("File version is not available");
+			if (_log.isWarnEnabled()) {
+				StringBundler sb = new StringBundler(9);
+
+				sb.append("No file version is available for {companyId=");
+				sb.append(companyId);
+				sb.append(", repositoryId=");
+				sb.append(repositoryId);
+				sb.append(", fileName=");
+				sb.append(fileName);
+				sb.append(", fromVersionLabel=");
+				sb.append(fromVersionLabel);
+				sb.append("}");
+
+				_log.warn(sb.toString());
+			}
 
 			return;
 		}
