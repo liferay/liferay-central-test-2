@@ -984,6 +984,12 @@ public class DDMStructureLocalServiceUtil {
 		return getService().getStructures(groupIds);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getStructures(
+		long[] groupIds, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStructures(groupIds, classNameId);
+	}
+
 	/**
 	* Returns the number of structures belonging to the group.
 	*
