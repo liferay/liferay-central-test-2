@@ -56,7 +56,7 @@ public class BookmarksFolderStagedModelDataHandlerTest
 			BookmarksTestUtil.addFolder(
 				group.getGroupId(), "Test Parent Folder"));
 
-		HashMap<String, List<StagedModel>> dependentStagedModels =
+		Map<String, List<StagedModel>> dependentStagedModels =
 			new HashMap<String, List<StagedModel>>();
 
 		dependentStagedModels.put(
