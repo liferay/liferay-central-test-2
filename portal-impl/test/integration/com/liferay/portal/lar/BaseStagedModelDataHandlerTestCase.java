@@ -38,7 +38,6 @@ import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.portal.xml.ElementImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,8 +49,6 @@ import java.util.List;
 import java.util.Map;
 
 import junit.framework.Assert;
-
-import org.dom4j.DocumentHelper;
 
 import org.junit.After;
 import org.junit.Before;
@@ -154,15 +151,15 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 		List<Element> stagedModelElements = new ArrayList<Element>();
 
 		for (String className : dependentStagedModels.keySet()) {
-			Element dependentStagedModelElement = new ElementImpl(
-				DocumentHelper.createElement(className));
+			Element dependentStagedModelElement = SAXReaderUtil.createElement(
+				className);
 
 			stagedModelElements.add(dependentStagedModelElement);
 		}
 
 		if (!dependentStagedModels.containsKey(getStagedModelClassName())) {
-			Element dependentStagedModelElement = new ElementImpl(
-				DocumentHelper.createElement(getStagedModelClassName()));
+			Element dependentStagedModelElement = SAXReaderUtil.createElement(
+				getStagedModelClassName());
 
 			stagedModelElements.add(dependentStagedModelElement);
 		}
@@ -178,8 +175,7 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 	protected Element getImportedStagedModelElement(
 		StagedModel stagedModel, Element[] stagedModelElements) {
 
-		Element rootElement = new ElementImpl(
-			DocumentHelper.createElement("root"));
+		Element rootElement = SAXReaderUtil.createElement("root");
 
 		for (Element element : stagedModelElements) {
 			rootElement.add(element);
