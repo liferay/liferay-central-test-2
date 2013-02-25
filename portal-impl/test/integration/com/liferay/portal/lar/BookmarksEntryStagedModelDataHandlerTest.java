@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
+import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
@@ -48,37 +49,35 @@ public class BookmarksEntryStagedModelDataHandlerTest
 	extends BaseStagedModelDataHandlerTestCase {
 
 	@Override
-	protected Map<String, List<StagedModel>> addDependentStagedModels(
-			Group group)
-		throws Exception {
-
-		List<StagedModel> dependentStagedFolderModels =
-			new ArrayList<StagedModel>();
-
-		dependentStagedFolderModels.add(
-			BookmarksTestUtil.addFolder(group.getGroupId(), "Test Folder"));
-
-		Map<String, List<StagedModel>> dependentStagedModels =
-			new HashMap<String, List<StagedModel>>();
-
-		dependentStagedModels.put(
-			BookmarksFolder.class.getName(), dependentStagedFolderModels);
-
-		return dependentStagedModels;
-	}
-
-	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String, List<StagedModel>> dependentStagedModels)
+			Group group, Map<String, List<StagedModel>> stagedModelsMap)
 		throws Exception {
 
-		List<StagedModel> folderList = dependentStagedModels.get(
+		List<StagedModel> stagedModels = stagedModelsMap.get(
 			BookmarksFolder.class.getName());
 
-		BookmarksFolder folder = (BookmarksFolder)folderList.get(0);
+		BookmarksFolder folder = (BookmarksFolder)stagedModels.get(0);
 
 		return BookmarksTestUtil.addEntry(
 			group.getGroupId(), folder.getFolderId(), true);
+	}
+
+	@Override
+	protected Map<String, List<StagedModel>> addStagedModels(Group group)
+		throws Exception {
+
+		Map<String, List<StagedModel>> stagedModelsMap =
+			new HashMap<String, List<StagedModel>>();
+
+		List<StagedModel> stagedModels = new ArrayList<StagedModel>();
+
+		stagedModels.add(
+			BookmarksTestUtil.addFolder(
+				group.getGroupId(), ServiceTestUtil.randomString()));
+
+		stagedModelsMap.put(BookmarksFolder.class.getName(), stagedModels);
+
+		return stagedModelsMap;
 	}
 
 	@Override
@@ -103,16 +102,16 @@ public class BookmarksEntryStagedModelDataHandlerTest
 	}
 
 	@Override
-	protected void validateDependentImportedStagedModels(
-			Map<String, List<StagedModel>> dependentStagedModels, Group group)
+	protected void validateImport(
+			Map<String, List<StagedModel>> stagedModelsMap, Group group)
 		throws Exception {
 
-		List<StagedModel> folders = dependentStagedModels.get(
+		List<StagedModel> stagedModels = stagedModelsMap.get(
 			BookmarksFolder.class.getName());
 
-		Assert.assertEquals(1, folders.size());
+		Assert.assertEquals(1, stagedModels.size());
 
-		BookmarksFolder folder = (BookmarksFolder)folders.get(0);
+		BookmarksFolder folder = (BookmarksFolder)stagedModels.get(0);
 
 		BookmarksFolderLocalServiceUtil.getBookmarksFolderByUuidAndGroupId(
 			folder.getUuid(), group.getGroupId());
