@@ -137,13 +137,12 @@ public class DataFactory {
 
 			initClassNames();
 			initCompany();
-			initAccount();
-			initDefaultUsers();
 			initDLFileEntryType();
 			initGuestGroup();
 			initJournalArticle(maxJournalArticleSize);
 			initRoles();
 			initUserNames();
+			initUsers();
 			initVirtualHost();
 		}
 		catch (Exception e) {
@@ -196,14 +195,12 @@ public class DataFactory {
 	public Contact addContact(User user) {
 		Contact contact = new ContactImpl();
 
-		Date date = new Date();
-
 		contact.setContactId(user.getContactId());
 		contact.setCompanyId(user.getCompanyId());
 		contact.setUserId(user.getUserId());
 		contact.setUserName(user.getFullName());
-		contact.setCreateDate(date);
-		contact.setModifiedDate(date);
+		contact.setCreateDate(newDate());
+		contact.setModifiedDate(newDate());
 		contact.setClassNameId(_userClassNameId);
 		contact.setClassPK(user.getUserId());
 		contact.setAccountId(_company.getAccountId());
@@ -212,7 +209,7 @@ public class DataFactory {
 		contact.setFirstName(user.getFirstName());
 		contact.setLastName(user.getLastName());
 		contact.setMale(true);
-		contact.setBirthday(date);
+		contact.setBirthday(newDate());
 
 		return contact;
 	}
@@ -259,7 +256,7 @@ public class DataFactory {
 		ddlRecord.setGroupId(groupId);
 		ddlRecord.setCompanyId(companyId);
 		ddlRecord.setUserId(userId);
-		ddlRecord.setCreateDate(newCreateDate());
+		ddlRecord.setCreateDate(newDate());
 		ddlRecord.setRecordSetId(ddlRecordSetId);
 
 		return ddlRecord;
@@ -325,7 +322,7 @@ public class DataFactory {
 		ddmStructure.setGroupId(groupId);
 		ddmStructure.setCompanyId(companyId);
 		ddmStructure.setUserId(userId);
-		ddmStructure.setCreateDate(newCreateDate());
+		ddmStructure.setCreateDate(newDate());
 		ddmStructure.setClassNameId(classNameId);
 
 		return ddmStructure;
@@ -355,7 +352,7 @@ public class DataFactory {
 		dlFileEntry.setGroupId(groupId);
 		dlFileEntry.setCompanyId(companyId);
 		dlFileEntry.setUserId(userId);
-		dlFileEntry.setCreateDate(newCreateDate());
+		dlFileEntry.setCreateDate(newDate());
 		dlFileEntry.setRepositoryId(groupId);
 		dlFileEntry.setFolderId(folderId);
 		dlFileEntry.setName(name);
@@ -412,7 +409,7 @@ public class DataFactory {
 		dlFolder.setGroupId(groupId);
 		dlFolder.setCompanyId(companyId);
 		dlFolder.setUserId(userId);
-		dlFolder.setCreateDate(newCreateDate());
+		dlFolder.setCreateDate(newDate());
 		dlFolder.setRepositoryId(groupId);
 		dlFolder.setParentFolderId(parentFolderId);
 		dlFolder.setName(name);
@@ -663,10 +660,11 @@ public class DataFactory {
 	}
 
 	public User addUser(int currentIndex) {
-		String[] names = nextUserName(currentIndex - 1);
+		String[] userName = nextUserName(currentIndex - 1);
 
 		return newUser(
-			names[0], names[1], "test" + _userScreenNameCounter.get(), false);
+			userName[0], userName[1], "test" + _userScreenNameCounter.get(),
+			false);
 	}
 
 	public List<Long> addUserToGroupIds(long groupId) {
@@ -862,19 +860,6 @@ public class DataFactory {
 		return _wikiPageClassNameId;
 	}
 
-	public void initAccount() {
-		_account = new AccountImpl();
-
-		Date date = new Date();
-
-		_account.setAccountId(_company.getAccountId());
-		_account.setCompanyId(_company.getCompanyId());
-		_account.setCreateDate(date);
-		_account.setModifiedDate(date);
-		_account.setName("Liferay");
-		_account.setLegalName("Liferay, Inc.");
-	}
-
 	public void initClassNames() {
 		_classNames = new ArrayList<ClassName>();
 
@@ -932,13 +917,15 @@ public class DataFactory {
 		_company.setWebId("liferay.com");
 		_company.setMx("liferay.com");
 		_company.setActive(true);
-	}
 
-	public void initDefaultUsers() {
-		_defaultUser = newUser(
-			StringPool.BLANK, StringPool.BLANK, StringPool.BLANK, true);
-		_guestUser = newUser("Test", "Test", "Test", false);
-		_sampleUser = newUser("Sample", "Sample", "Sample", false);
+		_account = new AccountImpl();
+
+		_account.setAccountId(_company.getAccountId());
+		_account.setCompanyId(_company.getCompanyId());
+		_account.setCreateDate(newDate());
+		_account.setModifiedDate(newDate());
+		_account.setName("Liferay");
+		_account.setLegalName("Liferay, Inc.");
 	}
 
 	public void initDLFileEntryType() {
@@ -947,8 +934,8 @@ public class DataFactory {
 		_defaultDLFileEntryType.setUuid(SequentialUUID.generate());
 		_defaultDLFileEntryType.setFileEntryTypeId(
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
-		_defaultDLFileEntryType.setCreateDate(newCreateDate());
-		_defaultDLFileEntryType.setModifiedDate(newCreateDate());
+		_defaultDLFileEntryType.setCreateDate(newDate());
+		_defaultDLFileEntryType.setModifiedDate(newDate());
 		_defaultDLFileEntryType.setName(
 			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT);
 	}
@@ -1076,6 +1063,13 @@ public class DataFactory {
 			new File(_baseDir, dependenciesDir + "last_names.txt"));
 	}
 
+	public void initUsers() {
+		_defaultUser = newUser(
+			StringPool.BLANK, StringPool.BLANK, StringPool.BLANK, true);
+		_guestUser = newUser("Test", "Test", "Test", false);
+		_sampleUser = newUser("Sample", "Sample", "Sample", false);
+	}
+
 	public void initVirtualHost() throws Exception {
 		_virtualHost = new VirtualHostImpl();
 
@@ -1098,19 +1092,17 @@ public class DataFactory {
 		return userName;
 	}
 
-	protected Date newCreateDate() {
+	protected Date newDate() {
 		return new Date(_baseCreateTime + (_dlDateCounter.get() * Time.SECOND));
 	}
 
 	protected Role newRole(String name, int type) {
 		Role role = new RoleImpl();
 
-		long roleId = _counter.get();
-
-		role.setRoleId(roleId);
+		role.setRoleId(_counter.get());
 		role.setCompanyId(_company.getCompanyId());
 		role.setClassNameId(_roleClassNameId);
-		role.setClassPK(roleId);
+		role.setClassPK(role.getRoleId());
 		role.setName(name);
 		role.setType(type);
 
@@ -1121,45 +1113,40 @@ public class DataFactory {
 		String firstName, String lastName, String screenName,
 		boolean defaultUser) {
 
+		long userId = _counter.get();
+
+		if (Validator.isNull(screenName)) {
+			screenName = String.valueOf(userId);
+		}
+
 		User user = new UserImpl();
 
-		Date date = new Date();
-
 		user.setUuid(SequentialUUID.generate());
-		user.setUserId(_counter.get());
+		user.setUserId(userId);
 		user.setCompanyId(_company.getCompanyId());
-		user.setCreateDate(date);
-		user.setModifiedDate(date);
+		user.setCreateDate(newDate());
+		user.setModifiedDate(newDate());
 		user.setDefaultUser(defaultUser);
 		user.setContactId(_counter.get());
-		user.setPassword(_PASSWORD);
-		user.setPasswordModifiedDate(date);
-		user.setReminderQueryQuestion(_QUERY_QUESTION);
-		user.setLanguageId(_DEFAULT_LANGUAGE_ID);
+		user.setPassword("test");
+		user.setPasswordModifiedDate(newDate());
+		user.setReminderQueryQuestion("What is your screen name?");
+		user.setReminderQueryAnswer(screenName);
+		user.setEmailAddress(screenName + "@liferay.com");
+		user.setScreenName(screenName);
+		user.setLanguageId("en_US");
+		user.setGreeting("Welcome " + screenName + StringPool.EXCLAMATION);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		user.setLoginDate(date);
-		user.setLastLoginDate(date);
-		user.setLastFailedLoginDate(date);
-		user.setLockoutDate(date);
+		user.setLoginDate(newDate());
+		user.setLastLoginDate(newDate());
+		user.setLastFailedLoginDate(newDate());
+		user.setLockoutDate(newDate());
 		user.setAgreedToTermsOfUse(true);
 		user.setEmailAddressVerified(true);
 
-		if (Validator.isNull(screenName)) {
-			screenName = String.valueOf(user.getUserId());
-		}
-
-		user.setScreenName(screenName);
-		user.setReminderQueryAnswer(screenName);
-		user.setGreeting("Welcome " + screenName + StringPool.EXCLAMATION);
-		user.setEmailAddress(screenName + "@liferay.com");
-
 		return user;
 	}
-
-	private static final String _DEFAULT_LANGUAGE_ID = "en_US";
-	private static final String _PASSWORD = "test";
-	private static final String _QUERY_QUESTION = "what is your screen name?";
 
 	private Account _account;
 	private Role _administratorRole;
