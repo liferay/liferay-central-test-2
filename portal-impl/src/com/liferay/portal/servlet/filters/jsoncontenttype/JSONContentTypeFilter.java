@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet.filters.jsoncontenttype;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.servlet.JSONContentTypeServletResponse;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.FilterChain;
