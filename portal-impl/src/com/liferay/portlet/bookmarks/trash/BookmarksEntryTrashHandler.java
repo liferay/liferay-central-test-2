@@ -114,8 +114,8 @@ public class BookmarksEntryTrashHandler extends BookmarksBaseTrashHandler {
 	}
 
 	@Override
-	public boolean isInTrashContainer(
-			long classPK) throws PortalException, SystemException {
+	public boolean isInTrashContainer(long classPK)
+		throws PortalException, SystemException {
 
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
