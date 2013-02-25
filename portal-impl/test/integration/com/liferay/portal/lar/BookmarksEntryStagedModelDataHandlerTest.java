@@ -47,6 +47,7 @@ import org.junit.runner.RunWith;
 public class BookmarksEntryStagedModelDataHandlerTest
 	extends BaseStagedModelDataHandlerTestCase {
 
+	@Override
 	protected Map<String, List<StagedModel>> addDependentStagedModels(
 			Group group)
 		throws Exception {
@@ -66,6 +67,7 @@ public class BookmarksEntryStagedModelDataHandlerTest
 		return dependentStagedModels;
 	}
 
+	@Override
 	protected StagedModel addStagedModel(
 			Group group, Map<String, List<StagedModel>> dependentStagedModels)
 		throws Exception {
@@ -79,6 +81,7 @@ public class BookmarksEntryStagedModelDataHandlerTest
 			group.getGroupId(), folder.getFolderId(), true);
 	}
 
+	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
 			return BookmarksEntryLocalServiceUtil.

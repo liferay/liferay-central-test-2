@@ -79,6 +79,7 @@ public class BookmarksFolderStagedModelDataHandlerTest
 			group.getGroupId(), parentFolder.getFolderId(), "Test Folder");
 	}
 
+	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
 			return BookmarksFolderLocalServiceUtil.
