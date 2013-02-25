@@ -33,7 +33,7 @@ import org.objectweb.asm.MethodVisitor;
  * @author Raymond Augé
  */
 public class JSONWebServiceClassVisitorImpl
-		implements JSONWebServiceClassVisitor, ClassVisitor {
+	implements ClassVisitor, JSONWebServiceClassVisitor {
 
 	public JSONWebServiceClassVisitorImpl(InputStream inputStream)
 		throws IOException {
@@ -50,13 +50,15 @@ public class JSONWebServiceClassVisitorImpl
 	}
 
 	public void visit(
-			int version, int access, String name, String signature,
-			String superName, String[] interfaces) {
+		int version, int access, String name, String signature,
+		String superName, String[] interfaces) {
 
 		_className = StringUtil.replace(name, CharPool.SLASH, CharPool.PERIOD);
 	}
 
-	public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+	public AnnotationVisitor visitAnnotation(
+		String description, boolean visible) {
+
 		return null;
 	}
 
@@ -67,19 +69,19 @@ public class JSONWebServiceClassVisitorImpl
 	}
 
 	public FieldVisitor visitField(
-			int access, String name, String desc, String signature,
-			Object value) {
+		int access, String name, String description, String signature,
+		Object value) {
 
 		return null;
 	}
 
 	public void visitInnerClass(
-			String name, String outerName, String innerName, int access) {
+		String name, String outerName, String innerName, int access) {
 	}
 
 	public MethodVisitor visitMethod(
-			int access, String name, String desc, String signature,
-			String[] exceptions) {
+		int access, String name, String description, String signature,
+		String[] exceptions) {
 
 		return null;
 	}

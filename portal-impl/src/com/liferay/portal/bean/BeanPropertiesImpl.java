@@ -45,7 +45,9 @@ public class BeanPropertiesImpl implements BeanProperties {
 
 	public void copyProperties(Object source, Object target) {
 		try {
-			BeanCopy.beans(source, target).copy();
+			BeanCopy beanCopy = BeanCopy.beans(source, target);
+
+			beanCopy.copy();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -56,7 +58,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		Object source, Object target, Class<?> editable) {
 
 		try {
-			BeanCopy.beans(source, target).includeAs(editable).copy();
+			BeanCopy beanCopy = BeanCopy.beans(source, target);
+
+			beanCopy.includeAs(editable);
+
+			beanCopy.copy();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -67,7 +73,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 		Object source, Object target, String[] ignoreProperties) {
 
 		try {
-			BeanCopy.beans(source, target).exclude(ignoreProperties).copy();
+			BeanCopy beanCopy = BeanCopy.beans(source, target);
+
+			beanCopy.exclude(ignoreProperties);
+
+			beanCopy.copy();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
