@@ -168,6 +168,8 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 			new Element[stagedModelElements.size()]);
 	}
 
+	protected abstract String getElementName();
+
 	protected Date getEndDate() {
 		return new Date();
 	}
@@ -185,7 +187,7 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 
 		sb.append(getStagedModelClassName());
 		sb.append(StringPool.FORWARD_SLASH);
-		sb.append(getXMLElementName());
+		sb.append(getElementName());
 		sb.append("[@path='");
 		sb.append(StagedModelPathUtil.getPath(stagedModel));
 		sb.append("']");
@@ -226,8 +228,6 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 	protected Date getStartDate() {
 		return new Date(System.currentTimeMillis() - Time.HOUR);
 	}
-
-	protected abstract String getXMLElementName();
 
 	protected void validateDependentImportedStagedModels(
 			Map<String, List<StagedModel>> dependentStagedModels, Group group)

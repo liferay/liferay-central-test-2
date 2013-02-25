@@ -82,6 +82,11 @@ public class BookmarksEntryStagedModelDataHandlerTest
 	}
 
 	@Override
+	protected String getElementName() {
+		return "entry";
+	}
+
+	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
 			return BookmarksEntryLocalServiceUtil.
@@ -95,11 +100,6 @@ public class BookmarksEntryStagedModelDataHandlerTest
 	@Override
 	protected String getStagedModelClassName() {
 		return BookmarksEntry.class.getName();
-	}
-
-	@Override
-	protected String getXMLElementName() {
-		return "entry";
 	}
 
 	@Override
