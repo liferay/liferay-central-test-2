@@ -45,7 +45,7 @@ public class JSONContentTypeFilter extends BasePortalFilter {
 		else {
 			processFilter(
 				JSONContentTypeFilter.class, request,
-				new JSONContentTypeServletResponse(response), filterChain);
+				new JSONContentTypeResponse(response), filterChain);
 		}
 	}
 
