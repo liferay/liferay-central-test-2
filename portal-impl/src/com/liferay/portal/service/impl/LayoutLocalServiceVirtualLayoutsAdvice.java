@@ -56,7 +56,6 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (MergeLayoutPrototypesThreadLocal.isInProgress()) {
-
 			return methodInvocation.proceed();
 		}
 

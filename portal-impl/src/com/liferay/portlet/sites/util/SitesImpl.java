@@ -778,7 +778,7 @@ public class SitesImpl implements Sites {
 			layoutSetPrototypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 
 		if (mergeFailCount >
-			PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
+				PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_FAIL_THRESHOLD) {
 
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(6);
