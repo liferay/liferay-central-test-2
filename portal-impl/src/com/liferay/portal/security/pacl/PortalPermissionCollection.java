@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.pacl;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.security.Permission;
 import java.security.PermissionCollection;
 import java.security.Policy;
@@ -38,8 +40,13 @@ public class PortalPermissionCollection extends PermissionCollection {
 		throw new SecurityException();
 	}
 
+	@Override
+	public Enumeration<Permission> elements() {
+		return Collections.enumeration(Collections.EMPTY_LIST);
+	}
+
 	public Policy getJavaSecurityPolicy() {
-		return null; // TODO Future API : _paclPolicy.getJavaSecurityPolicy();
+		return null;
 	}
 
 	@Override
@@ -63,13 +70,13 @@ public class PortalPermissionCollection extends PermissionCollection {
 	}
 
 	@Override
-	public Enumeration<Permission> elements() {
-		return Collections.enumeration(Collections.EMPTY_LIST);
-	}
-
-	@Override
 	public String toString() {
-		return "PortalPermissionCollection".concat(_paclPolicy.toString());
+		Class<?> clazz = getClass();
+
+		String className = clazz.getSimpleName();
+
+		return className.concat(StringPool.POUND).concat(
+			_paclPolicy.toString());
 	}
 
 	private PACLPolicy _paclPolicy;
