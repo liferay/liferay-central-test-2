@@ -3,13 +3,13 @@
 
 <#if entries?has_content>
 	<style>
-		#<@liferay_portlet.namespace />Carousel .aui-carousel-item {
+		#<@liferay_portlet.namespace />carousel .aui-carousel-item {
 			height: 250px;
 			width: 700px;
 		}
 	</style>
 
-	<div id="<@liferay_portlet.namespace />Carousel">
+	<div id="<@liferay_portlet.namespace />carousel">
 		<#assign imageMimeTypes = propsUtil.getArray("dl.file.entry.preview.image.mime.types") />
 
 		<#list entries as entry>
@@ -22,7 +22,7 @@
 	<@aui.script use="aui-carousel">
 		new A.Carousel(
 			{
-				contentBox: '#<@liferay_portlet.namespace />Carousel',
+				contentBox: '#<@liferay_portlet.namespace />carousel',
 				height: 250,
 				intervalTime: 2,
 				width: 700
