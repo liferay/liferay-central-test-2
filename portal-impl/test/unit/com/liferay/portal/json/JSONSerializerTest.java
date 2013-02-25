@@ -28,6 +28,7 @@ import junit.framework.TestCase;
  */
 public class JSONSerializerTest extends TestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
