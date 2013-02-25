@@ -258,11 +258,11 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		if (!(object instanceof Map)) {
 			String json = JSONFactoryUtil.looseSerialize(object);
 
-			Class<?> type = object.getClass();
+			Class<?> clazz = object.getClass();
 
 			object = JSONFactoryUtil.looseDeserialize(json, HashMap.class);
 
-			String[] includes = JSONIncludesManagerUtil.lookupIncludes(type);
+			String[] includes = JSONIncludesManagerUtil.lookupIncludes(clazz);
 
 			for (String include : includes) {
 				_addInclude(statement, include);
@@ -516,7 +516,7 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 	private class Statement {
 
-		private Statement(Statement parentStatement) {
+		public Statement(Statement parentStatement) {
 			_parentStatement = parentStatement;
 		}
 
