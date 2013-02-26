@@ -112,7 +112,6 @@ public class UserServiceTest {
 
 		User subjectUser = UserTestUtil.addGroupAdminUser(
 			organization.getGroup());
-
 		User objectUser = UserTestUtil.addOrganizationAdminUser(organization);
 
 		unsetOrganizationUsers(
@@ -120,7 +119,7 @@ public class UserServiceTest {
 
 		Assert.assertTrue(
 			UserLocalServiceUtil.hasOrganizationUser(
-					organization.getOrganizationId(), objectUser.getUserId()));
+				organization.getOrganizationId(), objectUser.getUserId()));
 	}
 
 	@Test
@@ -129,7 +128,6 @@ public class UserServiceTest {
 
 		User subjectUser = UserTestUtil.addGroupAdminUser(
 			organization.getGroup());
-
 		User objectUser = UserTestUtil.addOrganizationOwnerUser(organization);
 
 		unsetOrganizationUsers(
@@ -137,7 +135,7 @@ public class UserServiceTest {
 
 		Assert.assertTrue(
 			UserLocalServiceUtil.hasOrganizationUser(
-					organization.getOrganizationId(), objectUser.getUserId()));
+				organization.getOrganizationId(), objectUser.getUserId()));
 	}
 
 	@Test
@@ -174,7 +172,6 @@ public class UserServiceTest {
 
 		User subjectUser = UserTestUtil.addGroupOwnerUser(
 			organization.getGroup());
-
 		User objectUser = UserTestUtil.addOrganizationAdminUser(organization);
 
 		unsetOrganizationUsers(
@@ -182,7 +179,7 @@ public class UserServiceTest {
 
 		Assert.assertTrue(
 			UserLocalServiceUtil.hasOrganizationUser(
-					organization.getOrganizationId(), objectUser.getUserId()));
+				organization.getOrganizationId(), objectUser.getUserId()));
 	}
 
 	@Test
@@ -191,7 +188,6 @@ public class UserServiceTest {
 
 		User subjectUser = UserTestUtil.addGroupOwnerUser(
 			organization.getGroup());
-
 		User objectUser = UserTestUtil.addOrganizationOwnerUser(organization);
 
 		unsetOrganizationUsers(
@@ -199,7 +195,7 @@ public class UserServiceTest {
 
 		Assert.assertTrue(
 			UserLocalServiceUtil.hasOrganizationUser(
-					organization.getOrganizationId(), objectUser.getUserId()));
+				organization.getOrganizationId(), objectUser.getUserId()));
 	}
 
 	@Test
