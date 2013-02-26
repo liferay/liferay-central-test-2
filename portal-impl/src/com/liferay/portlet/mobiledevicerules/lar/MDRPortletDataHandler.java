@@ -48,8 +48,8 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 		setAlwaysExportable(true);
 		setAlwaysStaged(true);
 		setExportControls(
-			new PortletDataHandlerBoolean(NAMESPACE, "actions", true, true),
-			new PortletDataHandlerBoolean(NAMESPACE, "rules", true, true));
+			new PortletDataHandlerBoolean(NAMESPACE, "rules", true, true),
+			new PortletDataHandlerBoolean(NAMESPACE, "actions", true, true));
 		setImportControls(new PortletDataHandlerControl[0]);
 		setPublishToLiveByDefault(true);
 	}
