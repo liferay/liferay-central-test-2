@@ -616,7 +616,7 @@ public class JavadocFormatter {
 
 		if (value != null) {
 			value = value.substring(name.length());
-			
+
 			DocUtil.add(throwsElement, "required", true);
 		}
 
