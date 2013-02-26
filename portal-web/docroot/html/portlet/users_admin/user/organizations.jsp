@@ -139,7 +139,6 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/users_admin/select_organization" /><portlet:param name="p_u_i_d" value='<%= selUser == null ? "0" : String.valueOf(selUser.getUserId()) %>' /></portlet:renderURL>'
 				},
 				function(event){
-					debugger;
 					var rowColumns = [];
 
 					rowColumns.push(event.name);
@@ -148,6 +147,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 					rowColumns.push('<a class="modify-link" data-rowId="' + event.organizationid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
 
 					searchContainer.addRow(rowColumns, event.organizationid);
+
 					searchContainer.updateDataStore();
 				}
 			);
