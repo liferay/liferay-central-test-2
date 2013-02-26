@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -26,7 +27,9 @@ import com.liferay.portlet.social.model.SocialActivitySet;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalServiceBaseImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,14 +62,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public void addActivityInterpreter(
 		SocialActivityInterpreter activityInterpreter) {
 
-		String[] classNames = activityInterpreter.getClassNames();
+		List<SocialActivityInterpreter> activityInterpreters =
+			new ArrayList<SocialActivityInterpreter>();
 
-		Map<String, SocialActivityInterpreter> activityInterpreters =
-			new HashMap<String, SocialActivityInterpreter>();
-
-		for (String className : classNames) {
-			activityInterpreters.put(className, activityInterpreter);
-		}
+		activityInterpreters.add(activityInterpreter);
 
 		_activityInterpreters.put(
 			activityInterpreter.getSelector(), activityInterpreters);
@@ -80,18 +79,14 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public void deleteActivityInterpreter(
 		SocialActivityInterpreter activityInterpreter) {
 
-		String[] classNames = activityInterpreter.getClassNames();
-
-		Map<String, SocialActivityInterpreter> activityInterpreters =
+		List<SocialActivityInterpreter> activityInterpreters =
 			_activityInterpreters.get(activityInterpreter.getSelector());
 
 		if (activityInterpreters == null) {
 			return;
 		}
 
-		for (String className : classNames) {
-			activityInterpreters.remove(className);
-		}
+		activityInterpreters.remove(activityInterpreter);
 	}
 
 	/**
@@ -146,31 +141,33 @@ public class SocialActivityInterpreterLocalServiceImpl
 			}
 		}
 
-		Map<String, SocialActivityInterpreter> activityInterpreters =
+		List<SocialActivityInterpreter> activityInterpreters =
 			_activityInterpreters.get(selector);
 
 		if (activityInterpreters == null) {
 			return null;
 		}
 
-		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)activityInterpreters.get(
-				activity.getClassName());
+		String className = PortalUtil.getClassName(activity.getClassNameId());
 
-		if (activityInterpreter == null) {
-			return null;
+		for (int i = 0; i < activityInterpreters.size(); i++) {
+			SocialActivityInterpreterImpl activityInterpreter =
+				(SocialActivityInterpreterImpl)activityInterpreters.get(i);
+
+			if (activityInterpreter.hasClassName(className)) {
+				SocialActivityFeedEntry activityFeedEntry =
+					activityInterpreter.interpret(activity, serviceContext);
+
+				if (activityFeedEntry != null) {
+					activityFeedEntry.setPortletId(
+						activityInterpreter.getPortletId());
+
+					return activityFeedEntry;
+				}
+			}
 		}
 
-		SocialActivityFeedEntry activityFeedEntry =
-			activityInterpreter.interpret(activity, serviceContext);
-
-		if (activityFeedEntry == null) {
-			return null;
-		}
-
-		activityFeedEntry.setPortletId(activityInterpreter.getPortletId());
-
-		return activityFeedEntry;
+		return null;
 	}
 
 	public SocialActivityFeedEntry interpret(
@@ -195,38 +192,40 @@ public class SocialActivityInterpreterLocalServiceImpl
 			_log.error(e, e);
 		}
 
-		Map<String, SocialActivityInterpreter> activityInterpreters =
+		List<SocialActivityInterpreter> activityInterpreters =
 			_activityInterpreters.get(selector);
 
 		if (activityInterpreters == null) {
 			return null;
 		}
 
-		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)activityInterpreters.get(
-				activitySet.getClassName());
+		String className = PortalUtil.getClassName(
+			activitySet.getClassNameId());
 
-		if (activityInterpreter == null) {
-			return null;
+		for (int i = 0; i < activityInterpreters.size(); i++) {
+			SocialActivityInterpreterImpl activityInterpreter =
+				(SocialActivityInterpreterImpl)activityInterpreters.get(i);
+
+			if (activityInterpreter.hasClassName(className)) {
+				SocialActivityFeedEntry activityFeedEntry =
+					activityInterpreter.interpret(activitySet, serviceContext);
+
+				if (activityFeedEntry != null) {
+					activityFeedEntry.setPortletId(
+						activityInterpreter.getPortletId());
+
+					return activityFeedEntry;
+				}
+			}
 		}
 
-		SocialActivityFeedEntry activityFeedEntry =
-			activityInterpreter.interpret(activitySet, serviceContext);
-
-		if (activityFeedEntry == null) {
-			return null;
-		}
-
-		activityFeedEntry.setPortletId(activityInterpreter.getPortletId());
-
-		return activityFeedEntry;
+		return null;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		SocialActivityInterpreterLocalServiceImpl.class);
 
-	private Map<String, Map<String, SocialActivityInterpreter>>
-		_activityInterpreters =
-			new HashMap<String, Map<String, SocialActivityInterpreter>>();
+	private Map<String, List<SocialActivityInterpreter>> _activityInterpreters =
+		new HashMap<String, List<SocialActivityInterpreter>>();
 
 }
