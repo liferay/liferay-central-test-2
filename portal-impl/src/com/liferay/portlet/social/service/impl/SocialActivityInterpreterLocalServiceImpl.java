@@ -16,8 +16,9 @@ package com.liferay.portlet.social.service.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -27,6 +28,8 @@ import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalSer
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * The social activity interpreter local service. Activity interpreters are
@@ -56,23 +59,17 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public void addActivityInterpreter(
 		SocialActivityInterpreter activityInterpreter) {
 
-		addActivityInterpreter(
-			PortalUtil.getPathContext(), activityInterpreter);
-	}
-
-	public void addActivityInterpreter(
-		String context, SocialActivityInterpreter activityInterpreter) {
-
 		String[] classNames = activityInterpreter.getClassNames();
 
-		Map<String, SocialActivityInterpreter> interpreterMap =
+		Map<String, SocialActivityInterpreter> activityInterpreters =
 			new HashMap<String, SocialActivityInterpreter>();
 
 		for (String className : classNames) {
-			interpreterMap.put(className, activityInterpreter);
+			activityInterpreters.put(className, activityInterpreter);
 		}
 
-		_activityInterpreters.put(context, interpreterMap);
+		_activityInterpreters.put(
+			activityInterpreter.getSelector(), activityInterpreters);
 	}
 
 	/**
@@ -83,27 +80,18 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public void deleteActivityInterpreter(
 		SocialActivityInterpreter activityInterpreter) {
 
-		deleteActivityInterpreter(
-			PortalUtil.getPathContext(), activityInterpreter);
-	}
-
-	public void deleteActivityInterpreter(
-		String context, SocialActivityInterpreter activityInterpreter) {
-
 		String[] classNames = activityInterpreter.getClassNames();
 
-		Map<String, SocialActivityInterpreter> interpreterMap =
-			_activityInterpreters.get(context);
+		Map<String, SocialActivityInterpreter> activityInterpreters =
+			_activityInterpreters.get(activityInterpreter.getSelector());
 
-		if (interpreterMap == null) {
+		if (activityInterpreters == null) {
 			return;
 		}
 
 		for (String className : classNames) {
-			interpreterMap.remove(className);
+			activityInterpreters.remove(className);
 		}
-
-		_activityInterpreters.put(context, interpreterMap);
 	}
 
 	/**
@@ -117,27 +105,22 @@ public class SocialActivityInterpreterLocalServiceImpl
 	 * </p>
 	 *
 	 * @param  activity the activity to be translated to human readable form
-	 * @param  themeDisplay the theme display needed by interpreters to create
-	 *         links and get localized text fragments
 	 * @return the activity feed that is a human readable form of the activity
 	 *         record or <code>null</code> if a compatible interpreter is not
 	 *         found
 	 */
 	public SocialActivityFeedEntry interpret(
-		SocialActivity activity, ThemeDisplay themeDisplay) {
+		String selector, SocialActivity activity,
+		ServiceContext serviceContext) {
 
-		return interpret(PortalUtil.getPathContext(), activity, themeDisplay);
-	}
+		HttpServletRequest request = serviceContext.getRequest();
 
-	public SocialActivityFeedEntry interpret(
-		SocialActivitySet activitySet, ThemeDisplay themeDisplay) {
+		if (request == null) {
+			return null;
+		}
 
-		return interpret(
-			PortalUtil.getPathContext(), activitySet, themeDisplay);
-	}
-
-	public SocialActivityFeedEntry interpret(
-		String context, SocialActivity activity, ThemeDisplay themeDisplay) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		try {
 			if (activity.getUserId() == themeDisplay.getDefaultUserId()) {
@@ -163,15 +146,15 @@ public class SocialActivityInterpreterLocalServiceImpl
 			}
 		}
 
-		Map<String, SocialActivityInterpreter> interpreterMap =
-			_activityInterpreters.get(context);
+		Map<String, SocialActivityInterpreter> activityInterpreters =
+			_activityInterpreters.get(selector);
 
-		if (interpreterMap == null) {
+		if (activityInterpreters == null) {
 			return null;
 		}
 
 		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)interpreterMap.get(
+			(SocialActivityInterpreterImpl)activityInterpreters.get(
 				activity.getClassName());
 
 		if (activityInterpreter == null) {
@@ -179,7 +162,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		SocialActivityFeedEntry activityFeedEntry =
-			activityInterpreter.interpret(activity, themeDisplay);
+			activityInterpreter.interpret(activity, serviceContext);
 
 		if (activityFeedEntry == null) {
 			return null;
@@ -191,8 +174,17 @@ public class SocialActivityInterpreterLocalServiceImpl
 	}
 
 	public SocialActivityFeedEntry interpret(
-		String context, SocialActivitySet activitySet,
-		ThemeDisplay themeDisplay) {
+		String selector, SocialActivitySet activitySet,
+		ServiceContext serviceContext) {
+
+		HttpServletRequest request = serviceContext.getRequest();
+
+		if (request == null) {
+			return null;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		try {
 			if (activitySet.getUserId() == themeDisplay.getDefaultUserId()) {
@@ -203,15 +195,15 @@ public class SocialActivityInterpreterLocalServiceImpl
 			_log.error(e, e);
 		}
 
-		Map<String, SocialActivityInterpreter> interpreterMap =
-			_activityInterpreters.get(context);
+		Map<String, SocialActivityInterpreter> activityInterpreters =
+			_activityInterpreters.get(selector);
 
-		if (interpreterMap == null) {
+		if (activityInterpreters == null) {
 			return null;
 		}
 
 		SocialActivityInterpreterImpl activityInterpreter =
-			(SocialActivityInterpreterImpl)interpreterMap.get(
+			(SocialActivityInterpreterImpl)activityInterpreters.get(
 				activitySet.getClassName());
 
 		if (activityInterpreter == null) {
@@ -219,7 +211,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		SocialActivityFeedEntry activityFeedEntry =
-			activityInterpreter.interpret(activitySet, themeDisplay);
+			activityInterpreter.interpret(activitySet, serviceContext);
 
 		if (activityFeedEntry == null) {
 			return null;

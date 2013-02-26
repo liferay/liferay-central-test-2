@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
@@ -11,24 +12,4 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
-package com.liferay.portlet.social.model;
-
-import com.liferay.portal.service.ServiceContext;
-
-/**
- * @author Brian Wing Shun Chan
- */
-public interface SocialActivityInterpreter {
-
-	public String[] getClassNames();
-
-	public String getSelector();
-
-	public SocialActivityFeedEntry interpret(
-		SocialActivity activity, ServiceContext serviceContext);
-
-	public SocialActivityFeedEntry interpret(
-		SocialActivitySet activitySet, ServiceContext serviceContext);
-
-}
+--%>
