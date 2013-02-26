@@ -63,19 +63,17 @@ import org.junit.runner.RunWith;
 public class JournalExportImportTest extends BasePortletExportImportTestCase {
 
 	@Test
-	public void testExportImportBasicJournalContent() throws Exception {
+	public void testExportImportBasicJournalArticle() throws Exception {
 		exportImportJournalArticle(false);
 	}
 
 	@Test
-	public void testExportImportStructuredJournalContent() throws Exception {
+	public void testExportImportStructuredJournalArticle() throws Exception {
 		exportImportJournalArticle(true);
 	}
 
 	protected void exportImportJournalArticle(boolean structuredContent)
 		throws Exception {
-
-		// Add a Journal Article, DDM Structure and Template
 
 		JournalArticle article = null;
 		DDMStructure ddmStructure = null;
@@ -101,16 +99,12 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 
 		String exportedResourceUuid = article.getArticleResourceUuid();
 
-		// Export Portlet Content
-
 		Map<String, String[]> parameterMap = getExportParameterMap(
 			_group.getGroupId(), _layout.getPlid());
 
 		_larFile = LayoutLocalServiceUtil.exportPortletInfoAsFile(
 			_layout.getPlid(), _group.getGroupId(), PortletKeys.JOURNAL,
 			parameterMap, null, null);
-
-		// Add another site and _layout
 
 		_importedGroup = GroupTestUtil.addGroup();
 
@@ -120,8 +114,6 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 		int initialArticlesCount =
 			JournalArticleLocalServiceUtil.getArticlesCount(
 				_importedGroup.getGroupId());
-
-		// Import Portlet Content
 
 		PortletImporter portletImporter = new PortletImporter();
 
@@ -133,102 +125,45 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 			_importedGroup.getGroupId(), PortletKeys.JOURNAL, parameterMap,
 			_larFile);
 
-		// Verify there is just one new article in the new site
-
 		int articlesCount = JournalArticleLocalServiceUtil.getArticlesCount(
 			_importedGroup.getGroupId());
 
-		Assert.assertEquals(
-			"The article has not been imported", initialArticlesCount + 1,
-			articlesCount);
-
-		// Verify the same article exists in the new site
+		Assert.assertEquals(initialArticlesCount + 1, articlesCount);
 
 		JournalArticleResource importedJournalArticleResource =
 			JournalArticleResourceLocalServiceUtil.fetchArticleResource(
 				exportedResourceUuid, _importedGroup.getGroupId());
 
-		Assert.assertNotNull(
-			"The imported article has not kept the uuid",
-			importedJournalArticleResource);
+		Assert.assertNotNull(importedJournalArticleResource);
 
 		if (structuredContent) {
-
-			// Verify the structure and template exist in the new site
-
 			DDMStructure importedDDMStructure =
 				DDMStructureLocalServiceUtil.fetchStructure(
 					ddmStructure.getUuid(), _importedGroup.getGroupId());
 
-			Assert.assertNotNull(
-				"The DDM Structure has not been imported",
-				importedDDMStructure);
+			Assert.assertNotNull(importedDDMStructure);
 
 			DDMTemplate importedDDMTemplate =
 				DDMTemplateLocalServiceUtil.fetchTemplate(
 					ddmTemplate.getUuid(), _importedGroup.getGroupId());
 
-			Assert.assertNotNull(
-				"The DDM Template has not been imported", importedDDMTemplate);
-
-			// Check Relationships
-
+			Assert.assertNotNull(importedDDMTemplate);
 			Assert.assertEquals(
-				"The imported article doesn't point to the right DDM Structure",
 				article.getStructureId(),
 				importedDDMStructure.getStructureKey());
-
 			Assert.assertEquals(
-				"The imported article doesn't point to the right DDM Template",
 				article.getTemplateId(), importedDDMTemplate.getTemplateKey());
-
 			Assert.assertEquals(
-				"The imported DDM Structure doesn't point to the right DDM " +
-					"Template",
 				importedDDMTemplate.getClassPK(),
 				importedDDMStructure.getStructureId());
 		}
 	}
 
-	protected Map<String, String[]> getExportParameterMap(
-			long groupId, long plid)
+	protected Map<String, String[]> getBaseParameterMap(long groupId, long plid)
 		throws Exception {
 
 		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
-		// Journal Options
-
-		parameterMap.put(
-			"_journal_categories", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_ddmStructures-ddmTemplates-and-feeds",
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_embedded-assets", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_version-history", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_images", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_web-content", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_ratings", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_tags", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_comments", new String[] {Boolean.TRUE.toString()});
-
-		// General Options
-
-		parameterMap.put(Constants.CMD, new String[] {Constants.EXPORT});
-		parameterMap.put("doAsGroupId", new String[] {String.valueOf(groupId)});
-		parameterMap.put("groupId", new String[] {String.valueOf(groupId)});
-		parameterMap.put(
-			"permissionsAssignedToRoles",
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put("plid", new String[] {String.valueOf(plid)});
-		parameterMap.put("portletResource", new String[] {PortletKeys.JOURNAL});
-		parameterMap.put("range", new String[] {"fromLastPublishDate"});
 		parameterMap.put(
 			PortletDataHandlerKeys.CATEGORIES,
 			new String[] {Boolean.TRUE.toString()});
@@ -241,9 +176,50 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_METADATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
+
+		parameterMap.put(
+			"_journal_categories", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_comments", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_ddmStructures-ddmTemplates-and-feeds",
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_images", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_ratings", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_tags", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_web-content", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put("doAsGroupId", new String[] {String.valueOf(groupId)});
+		parameterMap.put("groupId", new String[] {String.valueOf(groupId)});
+		parameterMap.put(
+			"permissionsAssignedToRoles",
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put("plid", new String[] {String.valueOf(plid)});
+		parameterMap.put("portletResource", new String[] {PortletKeys.JOURNAL});
+
+		return parameterMap;
+	}
+
+	protected Map<String, String[]> getExportParameterMap(
+			long groupId, long plid)
+		throws Exception {
+
+		Map<String, String[]> parameterMap = getBaseParameterMap(groupId, plid);
+
+		parameterMap.put(Constants.CMD, new String[] {Constants.EXPORT});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
-				PortletKeys.JOURNAL, new String[] {Boolean.TRUE.toString()});
+				PortletKeys.JOURNAL,
+			new String[] {Boolean.TRUE.toString()});
+
+		parameterMap.put(
+			"_journal_embedded-assets", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			"_journal_version-history", new String[] {Boolean.TRUE.toString()});
+		parameterMap.put("range", new String[] {"fromLastPublishDate"});
 
 		return parameterMap;
 	}
@@ -252,40 +228,9 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 			long groupId, long plid)
 		throws Exception {
 
-		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
-
-		// Journal Options
-
-		parameterMap.put(
-			"_journal_web-content", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_tags", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_ddmStructures-ddmTemplates-and-feeds",
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_categories", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_comments", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_images", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			"_journal_ratings", new String[] {Boolean.TRUE.toString()});
-
-		// General Options
+		Map<String, String[]> parameterMap = getBaseParameterMap(groupId, plid);
 
 		parameterMap.put(Constants.CMD, new String[] {Constants.IMPORT});
-		parameterMap.put("doAsGroupId", new String[] {String.valueOf(groupId)});
-		parameterMap.put("groupId", new String[] {String.valueOf(groupId)});
-		parameterMap.put(
-			"permissionsAssignedToRoles",
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put("plid", new String[] {String.valueOf(plid)});
-		parameterMap.put("portletResource", new String[] {PortletKeys.JOURNAL});
-
-		parameterMap.put(
-			PortletDataHandlerKeys.CATEGORIES,
-			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
@@ -293,16 +238,7 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_METADATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,

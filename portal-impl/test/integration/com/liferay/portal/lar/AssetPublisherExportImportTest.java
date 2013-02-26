@@ -59,8 +59,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 @PrepareForTest({PortletLocalServiceUtil.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 @Transactional
-public class AssetPublisherExportImportTest extends
-	BasePortletExportImportTestCase {
+public class AssetPublisherExportImportTest
+	extends BasePortletExportImportTestCase {
 
 	@Test
 	public void testChildLayoutScopeIds() throws Exception {
