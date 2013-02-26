@@ -95,6 +95,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 		Map<String, SocialActivityInterpreter> interpreterMap =
 			_activityInterpreters.get(context);
 
+		if (interpreterMap == null) {
+			return;
+		}
+
 		for (String className : classNames) {
 			interpreterMap.remove(className);
 		}
@@ -162,6 +166,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 		Map<String, SocialActivityInterpreter> interpreterMap =
 			_activityInterpreters.get(context);
 
+		if (interpreterMap == null) {
+			return null;
+		}
+
 		SocialActivityInterpreterImpl activityInterpreter =
 			(SocialActivityInterpreterImpl)interpreterMap.get(
 				activity.getClassName());
@@ -197,6 +205,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 
 		Map<String, SocialActivityInterpreter> interpreterMap =
 			_activityInterpreters.get(context);
+
+		if (interpreterMap == null) {
+			return null;
+		}
 
 		SocialActivityInterpreterImpl activityInterpreter =
 			(SocialActivityInterpreterImpl)interpreterMap.get(
