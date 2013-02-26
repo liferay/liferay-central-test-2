@@ -56,13 +56,13 @@
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
@@ -124,13 +124,13 @@
 		<model-name>com.liferay.portlet.bookmarks.model.BookmarksEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.bookmarks.model.BookmarksEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.bookmarks.model.BookmarksFolder</model-name>
@@ -141,43 +141,43 @@
 		<model-name>com.liferay.portlet.bookmarks.model.BookmarksFolder</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.documentlibrary.model.DLFileEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.documentlibrary.model.DLFileEntry</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.documentlibrary.model.DLFolder</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.documentlibrary.model.DLFolder</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.journal.model.JournalArticle</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.journal.model.JournalArticle</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
@@ -264,13 +264,13 @@
 		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
@@ -324,25 +324,25 @@
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_ATTACHMENT_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_ATTACHMENT_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
 		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
+		<counters-enabled>false</counters-enabled>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
