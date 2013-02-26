@@ -244,7 +244,7 @@ public class SocialConfigurationUtil {
 		activityDefinition.setLogActivity(logActivity);
 
 		boolean countersEnabled = GetterUtil.getBoolean(
-			activityElement.elementText("enable-counters"), true);
+			activityElement.elementText("counters-enabled"), true);
 
 		activityDefinition.setCountersEnabled(countersEnabled);
 
