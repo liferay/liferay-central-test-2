@@ -1146,13 +1146,15 @@ public class DataFactory {
 
 	protected Date nextFutureDate() {
 		return new Date(
-			_baseFutureTime + (_futureDateCounter.get() * Time.SECOND));
+			_FUTURE_TIME + (_futureDateCounter.get() * Time.SECOND));
 	}
+
+	private static final long _FUTURE_TIME =
+		System.currentTimeMillis() + Time.YEAR;
 
 	private Account _account;
 	private Role _administratorRole;
 	private String _baseDir;
-	private long _baseFutureTime = System.currentTimeMillis() + Time.YEAR;
 	private long _blogsEntryClassNameId;
 	private List<ClassName> _classNames;
 	private Company _company;
