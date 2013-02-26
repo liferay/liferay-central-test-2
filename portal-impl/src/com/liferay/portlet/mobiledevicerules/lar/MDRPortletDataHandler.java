@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
 import com.liferay.portlet.mobiledevicerules.model.MDRRule;
-import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRActionActionableDynamicQuery;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleActionableDynamicQuery;
@@ -66,9 +65,6 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 
 			return portletPreferences;
 		}
-
-		MDRRuleGroupInstanceLocalServiceUtil.deleteGroupRuleGroupInstances(
-			portletDataContext.getScopeGroupId());
 
 		MDRRuleGroupLocalServiceUtil.deleteRuleGroups(
 			portletDataContext.getGroupId());
