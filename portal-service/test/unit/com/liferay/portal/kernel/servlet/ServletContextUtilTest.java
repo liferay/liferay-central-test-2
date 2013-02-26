@@ -87,11 +87,8 @@ public class ServletContextUtilTest extends PowerMockito {
 	protected void getResourceURI(String resourceURL) throws Exception {
 		URL url = getURL(resourceURL);
 
-		URI actualURI = ServletContextUtil.getResourceURI(url);
-
-		URI expectedURI = getURI(url.getPath());
-
-		Assert.assertEquals(expectedURI, actualURI);
+		Assert.assertEquals(
+			getURI(url.getPath()), ServletContextUtil.getResourceURI(url));
 	}
 
 	protected void getRootURI(String path, URI uri) throws Exception {

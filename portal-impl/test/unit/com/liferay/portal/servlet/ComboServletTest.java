@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.CharPool;
 
+import java.io.Serializable;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -44,25 +46,25 @@ import org.springframework.mock.web.MockServletContext;
 public class ComboServletTest extends PowerMockito {
 
 	@BeforeClass
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void init() throws Exception {
+	public static void setUp() throws Exception {
 		mockStatic(SingleVMPoolUtil.class);
 
-		MemoryPortalCacheManager memoryPortalCacheManager =
-			new MemoryPortalCacheManager();
+		MemoryPortalCacheManager<Serializable, Object>
+			memoryPortalCacheManager =
+				new MemoryPortalCacheManager<Serializable, Object>();
 
 		memoryPortalCacheManager.afterPropertiesSet();
 
-		String comboServletClass = ComboServlet.class.getName();
+		String className = ComboServlet.class.getName();
 
 		when(
-			SingleVMPoolUtil.getCache(comboServletClass)
+			SingleVMPoolUtil.getCache(className)
 		).thenReturn(
-			memoryPortalCacheManager.getCache(comboServletClass)
+			memoryPortalCacheManager.getCache(className)
 		);
 
 		String fileContentBagClass =
-			comboServletClass + CharPool.PERIOD + "FileContentBag";
+			className + CharPool.PERIOD + "FileContentBag";
 
 		when(
 			SingleVMPoolUtil.getCache(fileContentBagClass)

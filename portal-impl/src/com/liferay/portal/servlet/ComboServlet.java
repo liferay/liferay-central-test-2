@@ -154,10 +154,10 @@ public class ComboServlet extends HttpServlet {
 					modulePath = StringUtil.replaceFirst(
 						p.concat(modulePath), contextPath, StringPool.BLANK);
 
-					URL resourceURL = getResourceURL(
+					URL url = getResourceURL(
 						servletContext, rootPath, modulePath);
 
-					if (resourceURL == null) {
+					if (url == null) {
 						response.setHeader(
 							HttpHeaders.CACHE_CONTROL,
 							HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
@@ -167,8 +167,7 @@ public class ComboServlet extends HttpServlet {
 					}
 
 					bytes = getResourceContent(
-						request, response, resourceURL, modulePath,
-						minifierType);
+						request, response, url, modulePath, minifierType);
 				}
 
 				bytesArray[--length] = bytes;
@@ -288,19 +287,19 @@ public class ComboServlet extends HttpServlet {
 			ServletContext servletContext, String rootPath, String path)
 		throws Exception {
 
-		URL resourceURL = servletContext.getResource(path);
+		URL url = servletContext.getResource(path);
 
-		if (resourceURL == null) {
+		if (url == null) {
 			return null;
 		}
 
-		String filePath = ServletContextUtil.getResourcePath(resourceURL);
+		String filePath = ServletContextUtil.getResourcePath(url);
 
 		int pos = filePath.indexOf(
 			rootPath.concat(StringPool.SLASH).concat(_JAVASCRIPT_DIR));
 
 		if (pos == 0) {
-			return resourceURL;
+			return url;
 		}
 
 		return null;
