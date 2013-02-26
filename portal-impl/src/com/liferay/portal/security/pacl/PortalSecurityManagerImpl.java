@@ -66,7 +66,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		catch (Exception e) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Unable to override the original java security policy " +
+					"Unable to override the original Java security policy " +
 						"because sufficient privileges are not granted to " +
 							"Liferay. PACL is not enabled.");
 			}
