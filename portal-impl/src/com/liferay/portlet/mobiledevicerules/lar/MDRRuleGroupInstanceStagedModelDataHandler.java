@@ -56,15 +56,11 @@ public class MDRRuleGroupInstanceStagedModelDataHandler
 
 		Element ruleGroupsElement = elements[0];
 
-		// Rule group
-
 		MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.getRuleGroup(
 			ruleGroupInstance.getRuleGroupId());
 
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, ruleGroupsElement, ruleGroup);
-
-		// Rule group instance
 
 		Element ruleGroupInstancesElement = elements[1];
 

@@ -57,8 +57,6 @@ public class MDRActionStagedModelDataHandler
 		Element ruleGroupsElement = elements[0];
 		Element ruleGroupInstancesElement = elements[1];
 
-		// Rule Group Instance
-
 		MDRRuleGroupInstance ruleGroupInstance =
 			MDRRuleGroupInstanceLocalServiceUtil.getRuleGroupInstance(
 				action.getRuleGroupInstanceId());
@@ -67,8 +65,6 @@ public class MDRActionStagedModelDataHandler
 			portletDataContext,
 			new Element[] {ruleGroupsElement, ruleGroupInstancesElement},
 			ruleGroupInstance);
-
-		// Action
 
 		Element actionsElement = elements[2];
 
@@ -80,22 +76,19 @@ public class MDRActionStagedModelDataHandler
 			UnicodeProperties typeSettingsProperties =
 				action.getTypeSettingsProperties();
 
-			long targetPlid = GetterUtil.getLong(
+			long plid = GetterUtil.getLong(
 				typeSettingsProperties.getProperty("plid"));
 
 			try {
-				Layout targetLayout = LayoutLocalServiceUtil.getLayout(
-					targetPlid);
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				actionElement.addAttribute(
-					"layout-uuid", targetLayout.getUuid());
+				actionElement.addAttribute("layout-uuid", layout.getUuid());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to set the layout uuid of the target " +
-							targetPlid +
-								". Site redirect may not match after import.",
+						"Unable to set the layout uuid of layout " + plid +
+							". Site redirect may not match after import.",
 						e);
 				}
 			}
@@ -111,8 +104,6 @@ public class MDRActionStagedModelDataHandler
 			PortletDataContext portletDataContext, Element element, String path,
 			MDRAction action)
 		throws Exception {
-
-		// Rule Group Instance
 
 		String ruleGroupInstancePath = StagedModelPathUtil.getPath(
 			portletDataContext, MDRRuleGroupInstance.class.getName(),
@@ -134,15 +125,13 @@ public class MDRActionStagedModelDataHandler
 			ruleGroupInstanceIds, action.getRuleGroupInstanceId(),
 			action.getRuleGroupInstanceId());
 
-		// Action
-
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			element, action, MDRPortletDataHandler.NAMESPACE);
 
 		serviceContext.setUserId(
 			portletDataContext.getUserId(action.getUserUuid()));
 
-		validateTargetLayoutPlid(element, action);
+		validateLayout(element, action);
 
 		MDRAction importedAction = null;
 
@@ -176,43 +165,40 @@ public class MDRActionStagedModelDataHandler
 			action, importedAction, MDRPortletDataHandler.NAMESPACE);
 	}
 
-	protected void validateTargetLayoutPlid(
-		Element actionElement, MDRAction action) {
-
+	protected void validateLayout(Element actionElement, MDRAction action) {
 		String type = action.getType();
 
 		if (!type.equals(SiteRedirectActionHandler.class.getName())) {
 			return;
 		}
 
-		String targetLayoutUuid = actionElement.attributeValue("layout-uuid");
+		String layoutUuid = actionElement.attributeValue("layout-uuid");
 
-		if (Validator.isNull(targetLayoutUuid)) {
+		if (Validator.isNull(layoutUuid)) {
 			return;
 		}
 
 		UnicodeProperties typeSettingsProperties =
 			action.getTypeSettingsProperties();
 
-		long targetGroupId = GetterUtil.getLong(
+		long groupId = GetterUtil.getLong(
 			typeSettingsProperties.getProperty("groupId"));
 		boolean privateLayout = GetterUtil.getBoolean(
 			actionElement.attributeValue("private-layout"));
 
 		try {
-			Layout targetLayout =
-				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					targetLayoutUuid, targetGroupId, privateLayout);
+			Layout layout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+				layoutUuid, groupId, privateLayout);
 
 			typeSettingsProperties.setProperty(
-				"plid", String.valueOf(targetLayout.getPlid()));
+				"plid", String.valueOf(layout.getPlid()));
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to find target layout with uuid " +
-						targetLayoutUuid + " in group " + targetGroupId +
-							". Site redirect may not match target layout.",
+					"Unable to find layout with uuid " + layoutUuid +
+						" in group " + groupId + ". Site redirect may not " +
+							"match target layout.",
 					e);
 			}
 		}

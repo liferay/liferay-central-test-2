@@ -87,8 +87,6 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 		final Element ruleGroupsElement = rootElement.addElement("rule-groups");
 		final Element rulesElement = rootElement.addElement("rules");
 
-		// Rules
-
 		ActionableDynamicQuery rulesActionableDynamicQuery =
 			new MDRRuleActionableDynamicQuery() {
 
@@ -113,8 +111,6 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getScopeGroupId());
 
 		rulesActionableDynamicQuery.performActions();
-
-		// Actions
 
 		final Element ruleGroupInstancesElement = rootElement.addElement(
 			"rule-group-instances");
@@ -167,8 +163,6 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 
 		Element rootElement = document.getRootElement();
 
-		// Rules
-
 		Element rulesElement = rootElement.element("rules");
 
 		List<Element> ruleElements = rulesElement.elements("rule");
@@ -177,8 +171,6 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, ruleElement);
 		}
-
-		// Actions
 
 		Element actionsElement = rootElement.element("actions");
 

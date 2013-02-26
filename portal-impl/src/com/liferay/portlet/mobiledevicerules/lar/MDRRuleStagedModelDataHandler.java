@@ -46,8 +46,6 @@ public class MDRRuleStagedModelDataHandler
 			MDRRule rule)
 		throws Exception {
 
-		// Rule group
-
 		Element ruleGroupsElement = elements[0];
 
 		MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.getRuleGroup(
@@ -55,8 +53,6 @@ public class MDRRuleStagedModelDataHandler
 
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, ruleGroupsElement, ruleGroup);
-
-		// Rule
 
 		Element rulesElement = elements[1];
 
@@ -72,8 +68,6 @@ public class MDRRuleStagedModelDataHandler
 			PortletDataContext portletDataContext, Element element, String path,
 			MDRRule rule)
 		throws Exception {
-
-		// Rule Group
 
 		String ruleGroupPath = StagedModelPathUtil.getPath(
 			portletDataContext, MDRRuleGroup.class.getName(),
@@ -91,8 +85,6 @@ public class MDRRuleStagedModelDataHandler
 
 		long ruleGroupId = MapUtil.getLong(
 			ruleGroupIds, rule.getRuleGroupId(), rule.getRuleGroupId());
-
-		// Rule
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			element, rule, MDRPortletDataHandler.NAMESPACE);
