@@ -1,8 +1,8 @@
 var gotoLabels = {};
 
 Selenium.prototype.continueFromRow = function(rowNum) {
-	if (rowNum == null || rowNum == undefined || rowNum < 0) {
-		alert("Invalid rowNum specified.");
+	if ((rowNum == null) || (rowNum == undefined) || (rowNum < 0)) {
+		alert("Invalid row number");
 
 		throw new Error;
 	}
@@ -16,7 +16,7 @@ Selenium.prototype.doDownloadTempFile = function(value) {
 Selenium.prototype.doGotoIf = function(condition, label) {
 	if (eval(condition)) {
 		if (gotoLabels[label] == undefined) {
-			alert("Specified label '" + label + "' is not found.");
+			alert("Unable to find label " + label);
 
 			throw new Error;
 		}
@@ -129,9 +129,9 @@ Selenium.prototype.getNumberIncrement = function(expression) {
 Selenium.prototype.initialiseLabels = function() {
 	gotoLabels = {};
 
-	var numCommands = testCase.commands.length;
+	var commands = testCase.commands.length;
 
-	for (var i = 0; i < numCommands; i++) {
+	for (var i = 0; i < commands; i++) {
 		var row = testCase.commands[i];
 
 		if ((row.type == 'command') && (row.command.toLowerCase() == "label")) {
@@ -145,7 +145,11 @@ Selenium.prototype.isPartialText = function(locator, pattern) {
 
 	var index = value.search(pattern);
 
-	return (index != -1);
+	if (index != -1) {
+		return true;
+	}
+
+	return false;
 };
 
 Selenium.prototype.reset = function() {
