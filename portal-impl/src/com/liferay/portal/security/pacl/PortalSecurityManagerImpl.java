@@ -44,8 +44,6 @@ public class PortalSecurityManagerImpl extends SecurityManager
 	implements PortalSecurityManager {
 
 	public PortalSecurityManagerImpl() {
-		_parentSecurityManager = System.getSecurityManager();
-
 		initClasses();
 
 		try {
@@ -129,7 +127,5 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalSecurityManagerImpl.class.getName());
-
-	private SecurityManager _parentSecurityManager;
 
 }
