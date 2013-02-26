@@ -218,18 +218,6 @@
 		</counter>
 	</activity>
 	<activity>
-		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
-		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
-		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
-	</activity>
-	<activity>
-		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
-		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
-		<log-activity>true</log-activity>
-		<enable-counters>false</enable-counters>
-	</activity>
-	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_SUBSCRIBE}</activity-type>
 		<language-key>SUBSCRIBE</language-key>
@@ -271,6 +259,18 @@
 		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_VIEW}</activity-type>
 		<language-key>VIEW</language-key>
 		<participation-value>1</participation-value>
+	</activity>
+	<activity>
+		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_MOVE_TO_TRASH}</activity-type>
+		<log-activity>true</log-activity>
+		<enable-counters>false</enable-counters>
+	</activity>
+	<activity>
+		<model-name>com.liferay.portlet.messageboards.model.MBThread</model-name>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_RESTORE_FROM_TRASH}</activity-type>
+		<log-activity>true</log-activity>
+		<enable-counters>false</enable-counters>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
