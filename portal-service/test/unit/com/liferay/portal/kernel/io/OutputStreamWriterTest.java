@@ -93,14 +93,12 @@ public class OutputStreamWriterTest {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
 			markerOutputStream);
 
-		char[] charArray = "abcdefg".toCharArray();
-
-		outputStreamWriter.write(charArray, 3, 2);
+		outputStreamWriter.write("abcdefg".toCharArray(), 3, 2);
 
 		Assert.assertArrayEquals(
 			new byte[] {'d', 'e'}, markerOutputStream._bytes);
-		Assert.assertEquals(0, markerOutputStream._offset);
 		Assert.assertEquals(2, markerOutputStream._length);
+		Assert.assertEquals(0, markerOutputStream._offset);
 	}
 
 	@Test
@@ -110,13 +108,11 @@ public class OutputStreamWriterTest {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
 			markerOutputStream);
 
-		int charValue = 'a';
-
-		outputStreamWriter.write(charValue);
+		outputStreamWriter.write('a');
 
 		Assert.assertArrayEquals(new byte[] {'a'}, markerOutputStream._bytes);
-		Assert.assertEquals(0, markerOutputStream._offset);
 		Assert.assertEquals(1, markerOutputStream._length);
+		Assert.assertEquals(0, markerOutputStream._offset);
 	}
 
 	@Test
@@ -126,14 +122,12 @@ public class OutputStreamWriterTest {
 		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
 			markerOutputStream);
 
-		String string = "abcdefg";
-
-		outputStreamWriter.write(string, 3, 2);
+		outputStreamWriter.write("abcdefg", 3, 2);
 
 		Assert.assertArrayEquals(
 			new byte[] {'d', 'e'}, markerOutputStream._bytes);
-		Assert.assertEquals(0, markerOutputStream._offset);
 		Assert.assertEquals(2, markerOutputStream._length);
+		Assert.assertEquals(0, markerOutputStream._offset);
 	}
 
 	private OutputStream _getOutputStream(OutputStreamWriter outputStreamWriter)
@@ -165,14 +159,14 @@ public class OutputStreamWriterTest {
 		}
 
 		@Override
-		public void write(int b) throws IOException {
+		public void write(int b) {
 		}
 
+		private byte[] _bytes;
 		private boolean _closed;
 		private boolean _flushed;
-		private byte[] _bytes;
-		private int _offset;
 		private int _length;
+		private int _offset;
 
 	}
 
