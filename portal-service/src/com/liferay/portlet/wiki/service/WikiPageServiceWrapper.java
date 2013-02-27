@@ -179,7 +179,8 @@ public class WikiPageServiceWrapper implements WikiPageService,
 	public java.lang.String getNodePagesRSS(long nodeId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageService.getNodePagesRSS(nodeId, max, type, version,
 			displayStyle, feedURL, entryURL);
 	}
@@ -187,7 +188,9 @@ public class WikiPageServiceWrapper implements WikiPageService,
 	public java.lang.String getNodePagesRSS(long nodeId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
-		java.lang.String attachmentURLPrefix) throws java.lang.Exception {
+		java.lang.String attachmentURLPrefix)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageService.getNodePagesRSS(nodeId, max, type, version,
 			displayStyle, feedURL, entryURL, attachmentURLPrefix);
 	}
@@ -265,7 +268,8 @@ public class WikiPageServiceWrapper implements WikiPageService,
 		java.lang.String title, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL, java.util.Locale locale)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageService.getPagesRSS(companyId, nodeId, title, max,
 			type, version, displayStyle, feedURL, entryURL, locale);
 	}
@@ -274,7 +278,9 @@ public class WikiPageServiceWrapper implements WikiPageService,
 		java.lang.String title, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL, java.lang.String attachmentURLPrefix,
-		java.util.Locale locale) throws java.lang.Exception {
+		java.util.Locale locale)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiPageService.getPagesRSS(companyId, nodeId, title, max,
 			type, version, displayStyle, feedURL, entryURL,
 			attachmentURLPrefix, locale);
