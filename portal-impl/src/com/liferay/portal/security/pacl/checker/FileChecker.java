@@ -373,25 +373,28 @@ public class FileChecker extends BaseChecker {
 
 			addCanonicalPaths(paths, file);
 
-			Enumeration<URL> systemResources =
-				ClassLoader.getSystemClassLoader().getResources(
-					"META-INF/MANIFEST.MF");
+			ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
-			while (systemResources.hasMoreElements()) {
-				URL url = systemResources.nextElement();
+			Enumeration<URL> enumeration = classLoader.getResources(
+				"META-INF/MANIFEST.MF");
 
-				JarURLConnection openConnection =
+			while (enumeration.hasMoreElements()) {
+				URL url = enumeration.nextElement();
+
+				JarURLConnection jarURLConnection =
 					(JarURLConnection)url.openConnection();
 
-				String filePath = openConnection.getJarFileURL().getFile();
+				URL jarFileURL = jarURLConnection.getJarFileURL();
 
-				int pos = filePath.lastIndexOf(File.separatorChar);
+				String fileName = jarFileURL.getFile();
+
+				int pos = fileName.lastIndexOf(File.separatorChar);
 
 				if (pos != -1) {
-					filePath = filePath.substring(0, pos + 1);
+					fileName = fileName.substring(0, pos + 1);
 				}
 
-				addCanonicalPath(paths, filePath);
+				addCanonicalPath(paths, fileName);
 			}
 		}
 		catch (IOException ioe) {
