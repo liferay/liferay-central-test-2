@@ -75,9 +75,9 @@ public class XSLTemplate implements Template {
 	}
 
 	public String[] getKeys() {
-		Set<String> keySet = _context.keySet();
+		Set<String> keys = _context.keySet();
 
-		return keySet.toArray(new String[keySet.size()]);
+		return keys.toArray(new String[keys.size()]);
 	}
 
 	public void prepare(HttpServletRequest request) {
