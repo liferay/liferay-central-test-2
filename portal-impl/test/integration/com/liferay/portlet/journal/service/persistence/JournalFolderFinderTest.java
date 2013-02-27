@@ -55,17 +55,16 @@ public class JournalFolderFinderTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_folderA = JournalTestUtil.addFolder(_group.getGroupId(), "Folder A");
-
-		_folderB = JournalTestUtil.addFolder(
-			_group.getGroupId(), _folderA.getFolderId(), "Folder B");
+		_folder1 = JournalTestUtil.addFolder(_group.getGroupId(), "Folder 1");
+		_folder2 = JournalTestUtil.addFolder(
+			_group.getGroupId(), _folder1.getFolderId(), "Folder 2");
 
 		JournalTestUtil.addArticle(
-			_group.getGroupId(), _folderA.getFolderId(), "Article 1",
+			_group.getGroupId(), _folder1.getFolderId(), "Article 1",
 			StringPool.BLANK);
 
 		JournalArticle article = JournalTestUtil.addArticle(
-			_group.getGroupId(), _folderA.getFolderId(), "Article 2",
+			_group.getGroupId(), _folder1.getFolderId(), "Article 2",
 			StringPool.BLANK);
 
 		JournalArticleLocalServiceUtil.moveArticleToTrash(
@@ -81,21 +80,21 @@ public class JournalFolderFinderTest {
 		Assert.assertEquals(
 			3,
 			JournalFolderFinderUtil.countF_A_ByG_F(
-				_group.getGroupId(), _folderA.getFolderId(), queryDefinition));
+				_group.getGroupId(), _folder1.getFolderId(), queryDefinition));
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
 		Assert.assertEquals(
 			2,
 			JournalFolderFinderUtil.countF_A_ByG_F(
-				_group.getGroupId(), _folderA.getFolderId(), queryDefinition));
+				_group.getGroupId(), _folder1.getFolderId(), queryDefinition));
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
 		Assert.assertEquals(
 			2,
 			JournalFolderFinderUtil.countF_A_ByG_F(
-				_group.getGroupId(), _folderA.getFolderId(), queryDefinition));
+				_group.getGroupId(), _folder1.getFolderId(), queryDefinition));
 	}
 
 	@Test
@@ -105,7 +104,7 @@ public class JournalFolderFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<Object> results = JournalFolderFinderUtil.findF_A_ByG_F(
-			_group.getGroupId(), _folderA.getFolderId(), queryDefinition);
+			_group.getGroupId(), _folder1.getFolderId(), queryDefinition);
 
 		Assert.assertEquals(3, results.size());
 
@@ -113,7 +112,7 @@ public class JournalFolderFinderTest {
 			if (result instanceof JournalFolder) {
 				JournalFolder folder = (JournalFolder)result;
 
-				Assert.assertEquals("Folder B", folder.getName());
+				Assert.assertEquals("Folder 2", folder.getName());
 			}
 			else if (result instanceof JournalArticle) {
 				JournalArticle article = (JournalArticle)result;
@@ -129,7 +128,7 @@ public class JournalFolderFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
 		results = JournalFolderFinderUtil.findF_A_ByG_F(
-			_group.getGroupId(), _folderA.getFolderId(), queryDefinition);
+			_group.getGroupId(), _folder1.getFolderId(), queryDefinition);
 
 		Assert.assertEquals(2, results.size());
 
@@ -137,7 +136,7 @@ public class JournalFolderFinderTest {
 			if (result instanceof JournalFolder) {
 				JournalFolder folder = (JournalFolder)result;
 
-				Assert.assertEquals("Folder B", folder.getName());
+				Assert.assertEquals("Folder 2", folder.getName());
 			}
 			else if (result instanceof JournalArticle) {
 				JournalArticle article = (JournalArticle)result;
@@ -150,7 +149,7 @@ public class JournalFolderFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
 		results = JournalFolderFinderUtil.findF_A_ByG_F(
-			_group.getGroupId(), _folderA.getFolderId(), queryDefinition);
+			_group.getGroupId(), _folder1.getFolderId(), queryDefinition);
 
 		Assert.assertEquals(2, results.size());
 
@@ -158,7 +157,7 @@ public class JournalFolderFinderTest {
 			if (result instanceof JournalFolder) {
 				JournalFolder folder = (JournalFolder)result;
 
-				Assert.assertEquals("Folder B", folder.getName());
+				Assert.assertEquals("Folder 2", folder.getName());
 			}
 			else if (result instanceof JournalArticle) {
 				JournalArticle article = (JournalArticle)result;
@@ -172,7 +171,7 @@ public class JournalFolderFinderTest {
 	@Test
 	public void testFindF_ByNoAssets() throws Exception {
 		AssetEntryLocalServiceUtil.deleteEntry(
-			JournalFolder.class.getName(), _folderB.getFolderId());
+			JournalFolder.class.getName(), _folder2.getFolderId());
 
 		LastSessionRecorderUtil.syncLastSessionState();
 
@@ -183,11 +182,11 @@ public class JournalFolderFinderTest {
 
 		JournalFolder folder = folders.get(0);
 
-		Assert.assertEquals(_folderB.getFolderId(), folder.getFolderId());
+		Assert.assertEquals(_folder2.getFolderId(), folder.getFolderId());
 	}
 
-	private JournalFolder _folderA;
-	private JournalFolder _folderB;
+	private JournalFolder _folder1;
+	private JournalFolder _folder2;
 	private Group _group;
 
 }

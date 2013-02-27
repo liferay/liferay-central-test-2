@@ -64,17 +64,17 @@ public class JournalArticleFinderTest {
 
 		_ddmStructure = JournalTestUtil.addDDMStructure(_group.getGroupId());
 
-		_folder = JournalTestUtil.addFolder(_group.getGroupId(), "Folder A");
+		_folder = JournalTestUtil.addFolder(_group.getGroupId(), "Folder 1");
 
 		_article = JournalTestUtil.addArticle(
 			_group.getGroupId(), _folder.getFolderId(), "Article 1",
 			StringPool.BLANK);
 
+		JournalFolder folder = JournalTestUtil.addFolder(
+			_group.getGroupId(), "Folder 2");
+
 		DDMTemplate ddmTemplate = JournalTestUtil.addDDMTemplate(
 			_group.getGroupId(), _ddmStructure.getStructureId());
-
-		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), "Folder B");
 
 		JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder.getFolderId(),
@@ -167,7 +167,6 @@ public class JournalArticleFinderTest {
 				_group.getGroupId(),
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 				_ddmStructure.getStructureKey(), queryDefinition));
-
 		Assert.assertEquals(
 			2,
 			JournalArticleFinderUtil.countByG_C_S(
@@ -183,7 +182,6 @@ public class JournalArticleFinderTest {
 				_group.getGroupId(),
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 				_ddmStructure.getStructureKey(), queryDefinition));
-
 		Assert.assertEquals(
 			1,
 			JournalArticleFinderUtil.countByG_C_S(
@@ -199,7 +197,6 @@ public class JournalArticleFinderTest {
 				_group.getGroupId(),
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 				_ddmStructure.getStructureKey(), queryDefinition));
-
 		Assert.assertEquals(
 			1,
 			JournalArticleFinderUtil.countByG_C_S(
