@@ -46,28 +46,6 @@ public class PortalServiceChecker extends BaseChecker {
 		initServices();
 	}
 
-	public boolean implies(Permission permission) {
-		PortalServicePermission portalServicePermission =
-			(PortalServicePermission)permission;
-
-		String name = portalServicePermission.getName();
-		Object object = portalServicePermission.getObject();
-
-		if (name.equals(PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY)) {
-			Class<?> implClass = (Class<?>)object;
-
-			if (!hasDynamicQuery(implClass)) {
-				logSecurityException(
-					_log,
-					"Attempted to create a dynamic query for " + implClass);
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	@Override
 	public AuthorizationProperty generateAuthorizationProperty(
 		Object... arguments) {
@@ -165,6 +143,28 @@ public class PortalServiceChecker extends BaseChecker {
 		}
 
 		return false;
+	}
+
+	public boolean implies(Permission permission) {
+		PortalServicePermission portalServicePermission =
+			(PortalServicePermission)permission;
+
+		String name = portalServicePermission.getName();
+		Object object = portalServicePermission.getObject();
+
+		if (name.equals(PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY)) {
+			Class<?> implClass = (Class<?>)object;
+
+			if (!hasDynamicQuery(implClass)) {
+				logSecurityException(
+					_log,
+					"Attempted to create a dynamic query for " + implClass);
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	protected Class<?> getClass(Object object) {

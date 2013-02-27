@@ -152,46 +152,6 @@ public class FileChecker extends BaseChecker {
 		initPermissions();
 	}
 
-	public boolean implies(Permission permission) {
-		String name = permission.getName();
-		String actions = permission.getActions();
-
-		if (actions.equals(FILE_PERMISSION_ACTION_DELETE)) {
-			if (!hasDelete(permission)) {
-				logSecurityException(
-					_log, "Attempted to delete file " + name);
-
-				return false;
-			}
-		}
-		else if (actions.equals(FILE_PERMISSION_ACTION_EXECUTE)) {
-			if (!hasExecute(permission)) {
-				logSecurityException(
-					_log, "Attempted to execute file " + name);
-
-				return false;
-			}
-		}
-		else if (actions.equals(FILE_PERMISSION_ACTION_READ)) {
-			if (PortalSecurityManagerThreadLocal.isCheckReadFile() &&
-				!hasRead(permission)) {
-
-				logSecurityException(_log, "Attempted to read file " + name);
-
-				return false;
-			}
-		}
-		else if (actions.equals(FILE_PERMISSION_ACTION_WRITE)) {
-			if (!hasWrite(permission)) {
-				logSecurityException(_log, "Attempted to write file " + name);
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	@Override
 	public AuthorizationProperty generateAuthorizationProperty(
 		Object... arguments) {
@@ -231,6 +191,44 @@ public class FileChecker extends BaseChecker {
 		authorizationProperty.setValue(permission.getName());
 
 		return authorizationProperty;
+	}
+
+	public boolean implies(Permission permission) {
+		String name = permission.getName();
+		String actions = permission.getActions();
+
+		if (actions.equals(FILE_PERMISSION_ACTION_DELETE)) {
+			if (!hasDelete(permission)) {
+				logSecurityException(_log, "Attempted to delete file " + name);
+
+				return false;
+			}
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_EXECUTE)) {
+			if (!hasExecute(permission)) {
+				logSecurityException(_log, "Attempted to execute file " + name);
+
+				return false;
+			}
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_READ)) {
+			if (PortalSecurityManagerThreadLocal.isCheckReadFile() &&
+				!hasRead(permission)) {
+
+				logSecurityException(_log, "Attempted to read file " + name);
+
+				return false;
+			}
+		}
+		else if (actions.equals(FILE_PERMISSION_ACTION_WRITE)) {
+			if (!hasWrite(permission)) {
+				logSecurityException(_log, "Attempted to write file " + name);
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	protected void addCanonicalPath(List<String> paths, String path) {

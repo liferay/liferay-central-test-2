@@ -36,20 +36,6 @@ public class SocketChecker extends BaseChecker {
 		initListenPorts();
 	}
 
-	public boolean implies(Permission permission) {
-		String actions = permission.getActions();
-		String name = permission.getName();
-
-		if (!_permissions.implies(permission)) {
-			logSecurityException(
-				_log, "Attempted " + actions + " for address " + name);
-
-			return false;
-		}
-
-		return true;
-	}
-
 	@Override
 	public AuthorizationProperty generateAuthorizationProperty(
 		Object... arguments) {
@@ -104,6 +90,20 @@ public class SocketChecker extends BaseChecker {
 		authorizationProperty.setValue(value);
 
 		return authorizationProperty;
+	}
+
+	public boolean implies(Permission permission) {
+		String actions = permission.getActions();
+		String name = permission.getName();
+
+		if (!_permissions.implies(permission)) {
+			logSecurityException(
+				_log, "Attempted " + actions + " for address " + name);
+
+			return false;
+		}
+
+		return true;
 	}
 
 	protected void initAcceptHostsAndPorts() {

@@ -41,6 +41,71 @@ public class PortalHookChecker extends BaseChecker {
 		initStrutsActionPaths();
 	}
 
+	@Override
+	public AuthorizationProperty generateAuthorizationProperty(
+		Object... arguments) {
+
+		if ((arguments == null) || (arguments.length != 1) ||
+			!(arguments[0] instanceof Permission)) {
+
+			return null;
+		}
+
+		PortalHookPermission portalHookPermission =
+			(PortalHookPermission)arguments[0];
+
+		String name = portalHookPermission.getName();
+		Object subject = portalHookPermission.getSubject();
+
+		String key = null;
+		String value = null;
+
+		if (name.equals(PORTAL_HOOK_PERMISSION_CUSTOM_JSP_DIR)) {
+			key = "security-manager-hook-custom-jsp-dir-enabled";
+			value = "true";
+		}
+		else if (name.equals(PORTAL_HOOK_PERMISSION_INDEXER)) {
+			key = "security-manager-hook-indexers";
+			value = (String)subject;
+		}
+		else if (name.equals(
+					PORTAL_HOOK_PERMISSION_LANGUAGE_PROPERTIES_LOCALE)) {
+
+			key = "security-manager-hook-language-properties-locales";
+
+			Locale locale = (Locale)subject;
+
+			value = LocaleUtil.toLanguageId(locale);
+		}
+		else if (name.equals(PORTAL_HOOK_PERMISSION_PORTAL_PROPERTIES_KEY)) {
+			key = "security-manager-hook-portal-properties-keys";
+			value = (String)subject;
+		}
+		else if (name.equals(PORTAL_HOOK_PERMISSION_SERVICE)) {
+			key = "security-manager-hook-services";
+			value = (String)subject;
+		}
+		else if (name.equals(PORTAL_HOOK_PERMISSION_SERVLET_FILTERS)) {
+			key = "security-manager-hook-servlet-filters-enabled";
+			value = "true";
+		}
+		else if (name.equals(PORTAL_HOOK_PERMISSION_STRUTS_ACTION_PATH)) {
+			key = "security-manager-hook-struts-action-paths";
+			value = (String)subject;
+		}
+		else {
+			return null;
+		}
+
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
+
+		authorizationProperty.setKey(key);
+		authorizationProperty.setValue(value);
+
+		return authorizationProperty;
+	}
+
 	public boolean implies(Permission permission) {
 		PortalHookPermission portalHookPermission =
 			(PortalHookPermission)permission;
@@ -122,71 +187,6 @@ public class PortalHookChecker extends BaseChecker {
 		}
 
 		return true;
-	}
-
-	@Override
-	public AuthorizationProperty generateAuthorizationProperty(
-		Object... arguments) {
-
-		if ((arguments == null) || (arguments.length != 1) ||
-			!(arguments[0] instanceof Permission)) {
-
-			return null;
-		}
-
-		PortalHookPermission portalHookPermission =
-			(PortalHookPermission)arguments[0];
-
-		String name = portalHookPermission.getName();
-		Object subject = portalHookPermission.getSubject();
-
-		String key = null;
-		String value = null;
-
-		if (name.equals(PORTAL_HOOK_PERMISSION_CUSTOM_JSP_DIR)) {
-			key = "security-manager-hook-custom-jsp-dir-enabled";
-			value = "true";
-		}
-		else if (name.equals(PORTAL_HOOK_PERMISSION_INDEXER)) {
-			key = "security-manager-hook-indexers";
-			value = (String)subject;
-		}
-		else if (name.equals(
-					PORTAL_HOOK_PERMISSION_LANGUAGE_PROPERTIES_LOCALE)) {
-
-			key = "security-manager-hook-language-properties-locales";
-
-			Locale locale = (Locale)subject;
-
-			value = LocaleUtil.toLanguageId(locale);
-		}
-		else if (name.equals(PORTAL_HOOK_PERMISSION_PORTAL_PROPERTIES_KEY)) {
-			key = "security-manager-hook-portal-properties-keys";
-			value = (String)subject;
-		}
-		else if (name.equals(PORTAL_HOOK_PERMISSION_SERVICE)) {
-			key = "security-manager-hook-services";
-			value = (String)subject;
-		}
-		else if (name.equals(PORTAL_HOOK_PERMISSION_SERVLET_FILTERS)) {
-			key = "security-manager-hook-servlet-filters-enabled";
-			value = "true";
-		}
-		else if (name.equals(PORTAL_HOOK_PERMISSION_STRUTS_ACTION_PATH)) {
-			key = "security-manager-hook-struts-action-paths";
-			value = (String)subject;
-		}
-		else {
-			return null;
-		}
-
-		AuthorizationProperty authorizationProperty =
-			new AuthorizationProperty();
-
-		authorizationProperty.setKey(key);
-		authorizationProperty.setValue(value);
-
-		return authorizationProperty;
 	}
 
 	protected void initCustomJspDir() {

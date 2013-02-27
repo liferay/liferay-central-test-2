@@ -53,27 +53,6 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 	}
 
 	@Override
-	public boolean implies(Permission permission) {
-		Checker checker = getChecker(permission.getClass());
-
-		if (checker.implies(permission)) {
-			return true;
-		}
-
-		try {
-			AuthorizationProperty authorizationProperty =
-				checker.generateAuthorizationProperty(permission);
-
-			mergeAuthorizationProperty(authorizationProperty);
-		}
-		catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-
-	@Override
 	public boolean hasJNDI(String name) {
 		JNDIChecker jndiChecker = getJndiChecker();
 
@@ -113,6 +92,27 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 				sqlChecker.generateAuthorizationProperty(sql);
 
 			mergeAuthorizationProperty(authorizationProperty);
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean implies(Permission permission) {
+		Checker checker = getChecker(permission.getClass());
+
+		if (checker.implies(permission)) {
+			return true;
+		}
+
+		try {
+			AuthorizationProperty authorizationProperty =
+				checker.generateAuthorizationProperty(permission);
+
+			mergeAuthorizationProperty(authorizationProperty);
+		}
+		catch (Exception e) {
+			return false;
 		}
 
 		return true;
