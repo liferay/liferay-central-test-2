@@ -391,21 +391,21 @@ public class FileChecker extends BaseChecker {
 				URL url = enumeration.nextElement();
 
 				URLConnection urlConnection = url.openConnection();
-				
+
 				if (urlConnection instanceof JarURLConnection) {
 					JarURLConnection jarURLConnection =
 						(JarURLConnection)url.openConnection();
-	
+
 					URL jarFileURL = jarURLConnection.getJarFileURL();
-	
+
 					String fileName = jarFileURL.getFile();
-	
+
 					int pos = fileName.lastIndexOf(File.separatorChar);
-	
+
 					if (pos != -1) {
 						fileName = fileName.substring(0, pos + 1);
 					}
-	
+
 					addCanonicalPath(paths, fileName);
 				}
 			}
