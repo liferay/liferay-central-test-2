@@ -230,7 +230,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 	}
 
 	public void moveFolderToTrash(long folderId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		JournalFolder folder = journalFolderLocalService.getFolder(folderId);
 

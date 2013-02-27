@@ -191,7 +191,7 @@ public class EditFolderAction extends PortletAction {
 		throws PortalException, SystemException {
 
 		long[] restoreEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "restoreFolderIds"), 0L);
+			ParamUtil.getString(actionRequest, "restoreFolderIds"), 0L);
 
 		for (long restoreEntryId : restoreEntryIds) {
 			JournalFolderServiceUtil.restoreFolderFromTrash(restoreEntryId);
