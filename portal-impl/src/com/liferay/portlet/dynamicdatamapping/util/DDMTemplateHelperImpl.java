@@ -78,13 +78,13 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 				continue;
 			}
 
-			Class<? extends Object> objectClass = object.getClass();
+			Class<?> clazz = object.getClass();
 
-			for (Field field : objectClass.getFields()) {
+			for (Field field : clazz.getFields()) {
 				jsonArray.put(field.getName());
 			}
 
-			for (Method method : objectClass.getMethods()) {
+			for (Method method : clazz.getMethods()) {
 				Class<?>[] parameterTypes = method.getParameterTypes();
 
 				StringBundler sb = new StringBundler(
