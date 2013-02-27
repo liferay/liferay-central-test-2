@@ -15,8 +15,6 @@
 package com.liferay.portal.security.lang;
 
 /**
- * This interface MUST NOT be made public.
- *
  * @author Raymond Augé
  */
 public interface DoPrivilegedBean {
