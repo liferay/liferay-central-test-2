@@ -104,6 +104,7 @@ import java.util.Stack;
 	public void displayRecognitionError(String[] tokenNames,RecognitionException e) {
 		String header = getErrorHeader(e);
 		String message = getErrorMessage(e, tokenNames);
+
 		_errors.add(header + " " + message);
 	}
 
@@ -138,9 +139,9 @@ import java.util.Stack;
 		return listNode;
 	}
 
-	private WikiPageNode _wikipage = null;
-
 	private List<String> _errors = new ArrayList<String>();
+	private WikiPageNode _wikipage;
+
 }
 
 wikipage

@@ -107,7 +107,6 @@ public class TranslationToXHTMLTest {
 			"<p><pre> Inline </pre></p>", translate("nowikiblock-10.creole"));
 	}
 
-	
 	@Test
 	public void testParseCorrectlyNoWikiBlockWithBraces() {
 		Assert.assertEquals(
