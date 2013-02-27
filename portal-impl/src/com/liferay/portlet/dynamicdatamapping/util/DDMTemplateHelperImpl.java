@@ -60,7 +60,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 		JSONObject jsonObject1 = JSONFactoryUtil.createJSONObject();
 
 		TemplateResource templateResource = new StringTemplateResource(
-			_TEMPLATE_ID, _TEMPLATE_SCRIPT);
+			_TEMPLATE_ID, _TEMPLATE_CONTENT);
 
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL, templateResource,
@@ -94,7 +94,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 				sb.append(method.getName());
 				sb.append(StringPool.OPEN_PARENTHESIS);
 
-				for (Class parameterType : parameterTypes) {
+				for (Class<?> parameterType : parameterTypes) {
 					sb.append(parameterType.getSimpleName());
 					sb.append(StringPool.COMMA_AND_SPACE);
 				}
@@ -114,7 +114,8 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 		return jsonObject1.toString();
 	}
 
+	private static final String _TEMPLATE_CONTENT = "# Placeholder";
+
 	private static final String _TEMPLATE_ID = "0";
-	private static final String _TEMPLATE_SCRIPT = "# Placeholder";
 
 }
