@@ -273,7 +273,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {As of 6.2.0, replaced by @link #getNodePagesRSS(long, int,
+	 * @deprecated As of 6.2.0, replaced by {@link #getNodePagesRSS(long, int,
 	 *             String, double, String, String, String, String)}
 	 */
 	public String getNodePagesRSS(
@@ -288,7 +288,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	public String getNodePagesRSS(
 			long nodeId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
-			String attachmentURLPrefix )
+			String attachmentURLPrefix)
 		throws Exception {
 
 		WikiNodePermission.check(
@@ -422,7 +422,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {As of 6.2.0, replaced by @link #getPagesRSS(long, long,
+	 * @deprecated As of 6.2.0, replaced by {@link #getPagesRSS(long, long,
 	 *             String, int, String, double, String, String, String, String,
 	 *             java.util.Locale)}
 	 */
