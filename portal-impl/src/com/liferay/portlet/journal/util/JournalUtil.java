@@ -1712,7 +1712,7 @@ public class JournalUtil {
 
 	private static Map<String, String> _customTokens;
 	private static Transformer _transformer = new Transformer(
-		PropsKeys.JOURNAL_TRANSFORMER_LISTENER,
-		PropsKeys.JOURNAL_ERROR_TEMPLATE, TemplateContextType.RESTRICTED);
+		PropsKeys.JOURNAL_ERROR_TEMPLATE,
+		PropsKeys.JOURNAL_TRANSFORMER_LISTENER, TemplateContextType.RESTRICTED);
 
 }

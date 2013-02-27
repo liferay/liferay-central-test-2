@@ -65,7 +65,7 @@ public class Transformer {
 		TemplateContextType defaultTemplateContextType) {
 
 		_transformerListenerClassNames = SetUtil.fromArray(
-				PropsUtil.getArray(transformerListenerPropertyKey));
+			PropsUtil.getArray(transformerListenerPropertyKey));
 
 		Set<String> langTypes = TemplateManagerUtil.getSupportedLanguageTypes(
 			errorTemplatePropertyKey);
@@ -330,9 +330,8 @@ public class Transformer {
 		if (langType.equals(TemplateConstants.LANG_TYPE_XSL)) {
 			return TemplateContextType.EMPTY;
 		}
-		else {
-			return _defaultTemplateContextType;
-		}
+
+		return _defaultTemplateContextType;
 	}
 
 	protected String getTemplateId(
