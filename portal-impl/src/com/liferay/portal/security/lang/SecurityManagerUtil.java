@@ -140,7 +140,6 @@ public class SecurityManagerUtil {
 	}
 
 	private static PortalSecurityManager _portalSecurityManager;
-
 	private static PortalSecurityManagerStrategy _portalSecurityManagerStrategy;
 
 	private enum PortalSecurityManagerStrategy {
