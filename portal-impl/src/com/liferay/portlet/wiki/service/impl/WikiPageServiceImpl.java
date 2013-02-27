@@ -279,7 +279,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	public String getNodePagesRSS(
 			long nodeId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		return getNodePagesRSS(
 			nodeId, max, type, version, displayStyle, feedURL, entryURL, null);
@@ -289,7 +289,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			long nodeId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			String attachmentURLPrefix)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.VIEW);
@@ -430,7 +430,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			long companyId, long nodeId, String title, int max, String type,
 			double version, String displayStyle, String feedURL,
 			String entryURL, Locale locale)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		return getPagesRSS(
 			companyId, nodeId, title, max, type, version, displayStyle, feedURL,
@@ -441,7 +441,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			long companyId, long nodeId, String title, int max, String type,
 			double version, String displayStyle, String feedURL,
 			String entryURL, String attachmentURLPrefix, Locale locale)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
@@ -613,7 +613,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			double version, String displayStyle, String feedURL,
 			String entryURL, String attachmentURLPrefix, List<WikiPage> pages,
 			boolean diff, Locale locale)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
@@ -660,8 +660,20 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 							page, null, null, attachmentURLPrefix);
 					}
 					else {
-						value = WikiUtil.diffHtml(
-							latestPage, page, null, null, attachmentURLPrefix);
+						try {
+							value = WikiUtil.diffHtml(
+								latestPage, page, null, null,
+								attachmentURLPrefix);
+						}
+						catch (PortalException pe) {
+							throw pe;
+						}
+						catch (SystemException se) {
+							throw se;
+						}
+						catch (Exception e) {
+							throw new SystemException(e);
+						}
 					}
 
 					syndContent.setValue(value);

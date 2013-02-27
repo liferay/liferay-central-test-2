@@ -107,12 +107,12 @@ public class WikiUtil {
 		String targetContent = StringPool.BLANK;
 
 		if (sourcePage != null) {
-			sourceContent = WikiUtil.convert(
+			sourceContent = convert(
 				sourcePage, viewPageURL, editPageURL, attachmentURLPrefix);
 		}
 
 		if (targetPage != null) {
-			targetContent = WikiUtil.convert(
+			targetContent = convert(
 				targetPage, viewPageURL, editPageURL, attachmentURLPrefix);
 		}
 
@@ -433,7 +433,7 @@ public class WikiUtil {
 			}
 		}
 
-		return WikiUtil.convert(
+		return convert(
 			wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
 	}
 
