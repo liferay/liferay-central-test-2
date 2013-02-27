@@ -149,7 +149,6 @@ import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.comparator.PortletControlPanelWeightComparator;
 import com.liferay.portal.webserver.WebServerServlet;
-
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactoryUtil;
@@ -191,7 +190,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
-
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 import com.liferay.util.PwdGenerator;

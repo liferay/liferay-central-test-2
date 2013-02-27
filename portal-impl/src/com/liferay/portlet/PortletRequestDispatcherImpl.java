@@ -76,8 +76,9 @@ public class PortletRequestDispatcherImpl
 		_requestDispatcher = requestDispatcher;
 		_named = named;
 		_liferayPortletContext = (LiferayPortletContext)portletContext;
-		_portlet = _liferayPortletContext.getPortlet();
 		_path = path;
+
+		_portlet = _liferayPortletContext.getPortlet();
 	}
 
 	public void forward(

@@ -65,7 +65,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-
 import com.liferay.util.SerializableUtil;
 
 import java.io.Serializable;

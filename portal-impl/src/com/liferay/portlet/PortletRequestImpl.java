@@ -47,7 +47,6 @@ import com.liferay.portal.servlet.SharedSessionServletRequest;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 
 import java.security.Principal;
