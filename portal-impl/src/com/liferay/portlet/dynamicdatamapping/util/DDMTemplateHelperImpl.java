@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.dynamicdatamapping.util;
 
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.template.StringTemplateResource;
@@ -57,7 +58,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 	public String getAutocompleteJSON(HttpServletRequest request)
 		throws Exception {
 
-		JSONObject jsonObject1 = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		TemplateResource templateResource = new StringTemplateResource(
 			_TEMPLATE_ID, _TEMPLATE_CONTENT);
@@ -68,10 +69,8 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
 		template.prepare(request);
 
-		JSONObject emptyJsonObject = JSONFactoryUtil.createJSONObject();
-
 		for (String key : template.getKeys()) {
-			JSONObject jsonObject2 = JSONFactoryUtil.createJSONObject();
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 			Object object = template.get(key);
 
@@ -82,7 +81,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 			Class<? extends Object> objectClass = object.getClass();
 
 			for (Field field : objectClass.getFields()) {
-				jsonObject2.put(field.getName(), emptyJsonObject);
+				jsonArray.put(field.getName());
 			}
 
 			for (Method method : objectClass.getMethods()) {
@@ -105,13 +104,13 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 
-				jsonObject2.put(sb.toString(), emptyJsonObject);
+				jsonArray.put(sb.toString());
 			}
 
-			jsonObject1.put(key, jsonObject2);
+			jsonObject.put(key, jsonArray);
 		}
 
-		return jsonObject1.toString();
+		return jsonObject.toString();
 	}
 
 	private static final String _TEMPLATE_CONTENT = "# Placeholder";
