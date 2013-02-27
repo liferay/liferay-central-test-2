@@ -88,7 +88,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 				Class<?>[] parameterTypes = method.getParameterTypes();
 
 				StringBundler sb = new StringBundler(
-					4 + (parameterTypes.length * 2));
+					3 + ((parameterTypes.length * 2) - 1));
 
 				sb.append(method.getName());
 				sb.append(StringPool.OPEN_PARENTHESIS);
