@@ -125,7 +125,7 @@ public class CreoleWikiEngine implements WikiEngine {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Unable to parse:\n" + creoleCode, re);
 
-				for (String error: creole10Parser.getErrors()){
+				for (String error : creole10Parser.getErrors()) {
 					_log.debug(error);
 				}
 			}
