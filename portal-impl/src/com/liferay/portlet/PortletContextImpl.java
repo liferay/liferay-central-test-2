@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,7 +40,7 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  * @author Brett Randall
  */
-public class PortletContextImpl implements InternalPortletContext {
+public class PortletContextImpl implements LiferayPortletContext {
 
 	public PortletContextImpl(Portlet portlet, ServletContext servletContext) {
 		_portlet = portlet;

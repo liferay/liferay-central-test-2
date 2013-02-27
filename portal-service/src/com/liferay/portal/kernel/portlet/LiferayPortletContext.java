@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.model.Portlet;
 
@@ -23,7 +23,7 @@ import javax.servlet.ServletContext;
 /**
  * @author Raymond Augé
  */
-public interface InternalPortletContext extends PortletContext {
+public interface LiferayPortletContext extends PortletContext {
 
 	public Portlet getPortlet();
 

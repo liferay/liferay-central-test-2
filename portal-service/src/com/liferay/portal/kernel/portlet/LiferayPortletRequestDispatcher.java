@@ -12,17 +12,24 @@
  * details.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import java.io.IOException;
+
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.PortletResponse;
 
 /**
  * @author Raymond Augé
  */
-public interface InternalPortletConfig extends LiferayPortletConfig {
+public interface LiferayPortletRequestDispatcher
+	extends PortletRequestDispatcher {
 
-	public boolean isCopyRequestParameters();
-
-	public boolean isWARFile();
+	public void include(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			boolean strutsURLEncoder)
+		throws IOException, PortletException;
 
 }

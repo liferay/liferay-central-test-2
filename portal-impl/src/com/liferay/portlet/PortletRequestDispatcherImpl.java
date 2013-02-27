@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequestDispatcher;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.DynamicServletRequest;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -56,7 +57,7 @@ import org.apache.struts.Globals;
  * @author Brian Myunghun Kim
  */
 public class PortletRequestDispatcherImpl
-	implements InternalPortletRequestDispatcher {
+	implements LiferayPortletRequestDispatcher {
 
 	public PortletRequestDispatcherImpl(
 		RequestDispatcher requestDispatcher, boolean named,

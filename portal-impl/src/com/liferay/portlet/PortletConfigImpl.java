@@ -14,6 +14,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -45,7 +46,7 @@ import javax.xml.namespace.QName;
  * @author Eduardo Lundgren
  * @author Shuyang Zhou
  */
-public class PortletConfigImpl implements InternalPortletConfig {
+public class PortletConfigImpl implements LiferayPortletConfig {
 
 	public PortletConfigImpl(Portlet portlet, PortletContext portletContext) {
 		_portletApp = portlet.getPortletApp();
