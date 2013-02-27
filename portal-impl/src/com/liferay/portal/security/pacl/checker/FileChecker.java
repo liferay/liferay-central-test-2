@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.net.URLConnection;
 
 import java.security.Permission;
 
@@ -389,20 +390,24 @@ public class FileChecker extends BaseChecker {
 			while (enumeration.hasMoreElements()) {
 				URL url = enumeration.nextElement();
 
-				JarURLConnection jarURLConnection =
-					(JarURLConnection)url.openConnection();
-
-				URL jarFileURL = jarURLConnection.getJarFileURL();
-
-				String fileName = jarFileURL.getFile();
-
-				int pos = fileName.lastIndexOf(File.separatorChar);
-
-				if (pos != -1) {
-					fileName = fileName.substring(0, pos + 1);
+				URLConnection urlConnection = url.openConnection();
+				
+				if (urlConnection instanceof JarURLConnection) {
+					JarURLConnection jarURLConnection =
+						(JarURLConnection)url.openConnection();
+	
+					URL jarFileURL = jarURLConnection.getJarFileURL();
+	
+					String fileName = jarFileURL.getFile();
+	
+					int pos = fileName.lastIndexOf(File.separatorChar);
+	
+					if (pos != -1) {
+						fileName = fileName.substring(0, pos + 1);
+					}
+	
+					addCanonicalPath(paths, fileName);
 				}
-
-				addCanonicalPath(paths, fileName);
 			}
 		}
 		catch (IOException ioe) {
