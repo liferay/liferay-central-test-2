@@ -678,6 +678,13 @@ public class BookmarksFolderLocalServiceImpl
 					continue;
 				}
 
+				// Folders and entries
+
+				List<Object> curFoldersAndEntries = getFoldersAndEntries(
+					folder.getGroupId(), folder.getFolderId());
+
+				updateDependentStatus(curFoldersAndEntries, status);
+
 				if (status == WorkflowConstants.STATUS_IN_TRASH) {
 
 					// Asset
@@ -711,12 +718,6 @@ public class BookmarksFolderLocalServiceImpl
 					BookmarksFolder.class);
 
 				indexer.reindex(folder);
-
-				List<Object> curFoldersAndEntries =
-					bookmarksFolderLocalService.getFoldersAndEntries(
-						folder.getGroupId(), folder.getFolderId());
-
-				updateDependentStatus(curFoldersAndEntries, status);
 			}
 		}
 	}

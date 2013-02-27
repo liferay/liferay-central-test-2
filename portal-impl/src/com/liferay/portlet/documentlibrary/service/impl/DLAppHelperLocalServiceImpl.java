@@ -952,7 +952,19 @@ public class DLAppHelperLocalServiceImpl
 					continue;
 				}
 
-				// Social
+				// Folders, file entries, and file shortcuts
+
+				QueryDefinition queryDefinition = new QueryDefinition(
+					WorkflowConstants.STATUS_ANY);
+
+				List<Object> foldersAndFileEntriesAndFileShortcuts =
+					dlFolderLocalService.
+						getFoldersAndFileEntriesAndFileShortcuts(
+							dlFolder.getGroupId(), dlFolder.getFolderId(), null,
+							false, queryDefinition);
+
+				updateDependentStatus(
+					user, foldersAndFileEntriesAndFileShortcuts, status);
 
 				if (status == WorkflowConstants.STATUS_IN_TRASH) {
 
@@ -989,18 +1001,6 @@ public class DLAppHelperLocalServiceImpl
 					DLFolder.class);
 
 				indexer.reindex(dlFolder);
-
-				QueryDefinition queryDefinition = new QueryDefinition(
-					WorkflowConstants.STATUS_ANY);
-
-				List<Object> foldersAndFileEntriesAndFileShortcuts =
-					dlFolderLocalService.
-						getFoldersAndFileEntriesAndFileShortcuts(
-							dlFolder.getGroupId(), dlFolder.getFolderId(), null,
-							false, queryDefinition);
-
-				updateDependentStatus(
-					user, foldersAndFileEntriesAndFileShortcuts, status);
 			}
 		}
 	}

@@ -743,6 +743,13 @@ public class JournalFolderLocalServiceImpl
 					continue;
 				}
 
+				// Folders and articles
+
+				List<Object> curFoldersAndEntries = getFoldersAndArticles(
+					folder.getGroupId(), folder.getFolderId());
+
+				updateDependentStatus(curFoldersAndEntries, status);
+
 				if (status == WorkflowConstants.STATUS_IN_TRASH) {
 
 					// Asset
@@ -776,12 +783,6 @@ public class JournalFolderLocalServiceImpl
 					JournalFolder.class);
 
 				indexer.reindex(folder);
-
-				List<Object> curFoldersAndEntries =
-					journalFolderLocalService.getFoldersAndArticles(
-						folder.getGroupId(), folder.getFolderId());
-
-				updateDependentStatus(curFoldersAndEntries, status);
 			}
 		}
 	}
