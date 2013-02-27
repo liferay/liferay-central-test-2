@@ -1,6 +1,6 @@
 <#setting number_format = "0">
 
-<#assign counters = dataFactory.addCounters()>
+<#assign counters = dataFactory.newCounters()>
 
 <#list counters as counter>
 	<#if ('${counter.name}' == 'com.liferay.counter.model.Counter')>
