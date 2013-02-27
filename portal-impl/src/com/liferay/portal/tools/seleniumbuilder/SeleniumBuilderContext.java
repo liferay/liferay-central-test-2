@@ -79,6 +79,8 @@ public class SeleniumBuilderContext {
 
 				Element rootElement = _getRootElement(fileName);
 
+				_functionParams.put(functionName, _getParams(rootElement));
+
 				_functionReturnTypes.put(
 					functionName, _getReturnType(rootElement));
 
@@ -192,6 +194,10 @@ public class SeleniumBuilderContext {
 		return _functionNames;
 	}
 
+	public Integer getFunctionParam(String functionName) {
+		return _functionParams.get(functionName);
+	}
+
 	public String getFunctionReturnType(String functionName) {
 		return _functionReturnTypes.get(functionName);
 	}
@@ -276,6 +282,10 @@ public class SeleniumBuilderContext {
 		return _seleniumBuilderFileUtil.getName(fileName);
 	}
 
+	private int _getParams(Element rootElement) throws Exception {
+		return _seleniumBuilderFileUtil.getParams(rootElement);
+	}
+
 	private String _getReturnType(Element rootElement) throws Exception {
 		return _seleniumBuilderFileUtil.getReturnType(rootElement);
 	}
@@ -301,6 +311,8 @@ public class SeleniumBuilderContext {
 	private Map<String, String> _functionFileNames =
 		new HashMap<String, String>();
 	private Set<String> _functionNames = new HashSet<String>();
+	private Map<String, Integer> _functionParams =
+		new HashMap<String, Integer>();
 	private Map<String, String> _functionReturnTypes =
 		new HashMap<String, String>();
 	private Map<String, Element> _functionRootElements =
