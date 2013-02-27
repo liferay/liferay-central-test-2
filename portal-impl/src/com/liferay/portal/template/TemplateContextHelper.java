@@ -70,7 +70,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.webserver.WebServerServletTokenUtil;
-import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
@@ -91,6 +90,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -149,12 +149,11 @@ public class TemplateContextHelper {
 
 		// Portlet config
 
-		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		if (portletConfigImpl != null) {
-			template.put("portletConfig", portletConfigImpl);
+		if (portletConfig != null) {
+			template.put("portletConfig", portletConfig);
 		}
 
 		// Render request
