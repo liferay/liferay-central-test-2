@@ -77,14 +77,14 @@ public class SeleniumBuilderContext {
 
 				_functionNames.add(functionName);
 
+				_functionReturnTypes.put(
+					functionName, _getReturnType(functionName));
+
 				Element rootElement = _getRootElement(fileName);
 
-				_functionParams.put(functionName, _getParams(rootElement));
-
-				_functionReturnTypes.put(
-					functionName, _getReturnType(rootElement));
-
 				_functionRootElements.put(functionName, rootElement);
+				_functionTargetCounts.put(
+					functionName, _getTargetCount(rootElement));
 			}
 			else if (fileName.endsWith(".macro")) {
 				String macroName = _getName(fileName);
@@ -194,16 +194,16 @@ public class SeleniumBuilderContext {
 		return _functionNames;
 	}
 
-	public Integer getFunctionParam(String functionName) {
-		return _functionParams.get(functionName);
-	}
-
 	public String getFunctionReturnType(String functionName) {
 		return _functionReturnTypes.get(functionName);
 	}
 
 	public Element getFunctionRootElement(String functionName) {
 		return _functionRootElements.get(functionName);
+	}
+
+	public Integer getFunctionTargetCount(String functionName) {
+		return _functionTargetCounts.get(functionName);
 	}
 
 	public String getMacroClassName(String macroName) {
@@ -282,16 +282,16 @@ public class SeleniumBuilderContext {
 		return _seleniumBuilderFileUtil.getName(fileName);
 	}
 
-	private int _getParams(Element rootElement) throws Exception {
-		return _seleniumBuilderFileUtil.getParams(rootElement);
-	}
-
-	private String _getReturnType(Element rootElement) throws Exception {
-		return _seleniumBuilderFileUtil.getReturnType(rootElement);
+	private String _getReturnType(String name) throws Exception {
+		return _seleniumBuilderFileUtil.getReturnType(name);
 	}
 
 	private Element _getRootElement(String fileName) throws Exception {
 		return _seleniumBuilderFileUtil.getRootElement(fileName);
+	}
+
+	private int _getTargetCount(Element rootElement) throws Exception {
+		return _seleniumBuilderFileUtil.getTargetCount(rootElement);
 	}
 
 	private String _normalizeFileName(String fileName) {
@@ -311,12 +311,12 @@ public class SeleniumBuilderContext {
 	private Map<String, String> _functionFileNames =
 		new HashMap<String, String>();
 	private Set<String> _functionNames = new HashSet<String>();
-	private Map<String, Integer> _functionParams =
-		new HashMap<String, Integer>();
 	private Map<String, String> _functionReturnTypes =
 		new HashMap<String, String>();
 	private Map<String, Element> _functionRootElements =
 		new HashMap<String, Element>();
+	private Map<String, Integer> _functionTargetCounts =
+		new HashMap<String, Integer>();
 	private Map<String, String> _macroClassNames =
 		new HashMap<String, String>();
 	private Map<String, String> _macroFileNames = new HashMap<String, String>();
