@@ -85,6 +85,7 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
 
 		sb.append(portalURL);
+
 		sb.append(themeDisplay.getPathContext());
 		sb.append(StringPool.SLASH);
 		sb.append("webdav");
@@ -92,10 +93,10 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 		Group group = themeDisplay.getScopeGroup();
 
 		sb.append(group.getFriendlyURL());
+
 		sb.append(StringPool.SLASH);
 		sb.append("Templates");
 		sb.append(StringPool.SLASH);
-
 		sb.append(getTemplateId());
 
 		return sb.toString();

@@ -322,6 +322,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
 
 		sb.append(portalURL);
+
 		sb.append(themeDisplay.getPathContext());
 		sb.append(StringPool.SLASH);
 		sb.append("webdav");
@@ -329,10 +330,10 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		Group group = themeDisplay.getScopeGroup();
 
 		sb.append(group.getFriendlyURL());
+
 		sb.append(StringPool.SLASH);
 		sb.append("Structures");
 		sb.append(StringPool.SLASH);
-
 		sb.append(getStructureId());
 
 		return sb.toString();
