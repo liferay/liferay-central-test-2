@@ -27,8 +27,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
- * An abstraction for {@link Channel} based IPC framework.
- *
  * @author Shuyang Zhou
  */
 public interface IntraBand {
@@ -39,7 +37,7 @@ public interface IntraBand {
 
 	public boolean isOpen();
 
-	public RegistrationReference registerChannel(Channel duplexChannel)
+	public RegistrationReference registerChannel(Channel channel)
 		throws IOException;
 
 	public RegistrationReference registerChannel(
