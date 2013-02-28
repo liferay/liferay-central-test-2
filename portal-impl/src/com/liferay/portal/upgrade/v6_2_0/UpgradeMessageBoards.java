@@ -45,7 +45,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		updateMBThreadFlags();
 	}
 
-	protected String getFullName(long userId) throws Exception {
+	protected String getUserName(long userId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -54,8 +54,8 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select firstName, middleName, lastName from user_ " +
-					"where userId = ?");
+				"select firstName, middleName, lastName from User_ where " +
+					"userId = ?");
 
 			ps.setLong(1, userId);
 
@@ -136,13 +136,13 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				long userId = rs.getLong("userId");
 				long threadId = rs.getLong("threadId");
 
-				String fullName = getFullName(userId);
+				String userName = getUserName(userId);
 
 				long[] groupCompanyIdsArray = getGroupCompanyIdsArray(threadId);
 
 				updateThreadFlag(
 					threadFlagId, groupCompanyIdsArray[0],
-					groupCompanyIdsArray[1], fullName);
+					groupCompanyIdsArray[1], userName);
 			}
 		}
 		finally {
