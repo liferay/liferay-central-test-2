@@ -42,7 +42,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		updateMBThreadFlags();
+		updateThreadFlags();
 	}
 
 	protected String getUserName(long userId) throws Exception {
@@ -80,7 +80,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		}
 	}
 
-	protected long[] getGroupCompanyIdsArray(long threadId) throws Exception {
+	protected long[] getThreadArray(long threadId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -118,7 +118,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		return new String[] {"19"};
 	}
 
-	protected void updateMBThreadFlags() throws Exception {
+	protected void updateThreadFlags() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -138,7 +138,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 				String userName = getUserName(userId);
 
-				long[] groupCompanyIdsArray = getGroupCompanyIdsArray(threadId);
+				long[] groupCompanyIdsArray = getThreadArray(threadId);
 
 				updateThreadFlag(
 					threadFlagId, groupCompanyIdsArray[0],
@@ -162,8 +162,8 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 			ps = con.prepareStatement(
 				"update MBThreadFlag set groupId = ?, companyId = ?, " +
-					"userName = ?, createdDate = modifiedDate " +
-						"where threadFlagId = ?");
+					"userName = ?, createdDate = modifiedDate where " +
+						"threadFlagId = ?");
 
 			ps.setLong(1, groupId);
 			ps.setLong(2, companyId);
