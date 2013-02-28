@@ -863,18 +863,11 @@ public class PortletBagFactory {
 			newSocialActivityInterpreterInstances(Portlet portlet)
 		throws Exception {
 
-		List<String> socialActivityInterpreterClasses =
-			portlet.getSocialActivityInterpreterClasses();
-
-		if (socialActivityInterpreterClasses == null) {
-			return null;
-		}
-
 		List<SocialActivityInterpreter> socialActivityInterpreterInstances =
 			new ArrayList<SocialActivityInterpreter>();
 
 		for (String socialActivityInterpreterClass :
-				socialActivityInterpreterClasses) {
+				portlet.getSocialActivityInterpreterClasses()) {
 
 			SocialActivityInterpreter socialActivityInterpreterInstance =
 				newSocialActivityInterpreterInstance(
