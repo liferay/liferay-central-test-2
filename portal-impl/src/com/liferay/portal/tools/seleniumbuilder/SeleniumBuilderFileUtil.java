@@ -49,20 +49,7 @@ public class SeleniumBuilderFileUtil {
 	}
 
 	public String getClassName(String fileName, String classSuffix) {
-		String filePath = getFilePath(fileName);
-
-		String packagePath = StringUtil.replace(
-			filePath, StringPool.SLASH, StringPool.PERIOD);
-
-		String simpleClassName = getName(fileName) + classSuffix;
-
-		return packagePath + "." + simpleClassName;
-	}
-
-	public String getFilePath(String fileName) {
-		int x = fileName.lastIndexOf(StringPool.SLASH);
-
-		return fileName.substring(0, x);
+		return getPackageName(fileName) + "." + getName(fileName) + classSuffix;
 	}
 
 	public String getName(String fileName) {
@@ -84,6 +71,19 @@ public class SeleniumBuilderFileUtil {
 		}
 
 		return content;
+	}
+
+	public String getPackageName(String fileName) {
+		String packagePath = getPackagePath(fileName);
+
+		return StringUtil.replace(
+			packagePath, StringPool.SLASH, StringPool.PERIOD);
+	}
+
+	public String getPackagePath(String fileName) {
+		int x = fileName.lastIndexOf(StringPool.SLASH);
+
+		return fileName.substring(0, x);
 	}
 
 	public String getReturnType(String name) {
