@@ -348,8 +348,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		PortletDisplayTemplateImpl.class);
 
 	private Transformer _transformer = new Transformer(
-		PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE,
 		PropsKeys.DYNAMIC_DATA_LISTS_TRANSFORMER_LISTENER,
+		PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE,
 		TemplateContextType.STANDARD);
 
 }
