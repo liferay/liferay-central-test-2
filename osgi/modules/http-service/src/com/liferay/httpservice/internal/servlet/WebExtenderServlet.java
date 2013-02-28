@@ -26,13 +26,12 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -61,16 +60,15 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 
-	public static final String NAME = "Web Extender Servlet";
-
 	public WebExtenderServlet(BundleContext bundleContext) {
 		_bundleContext = bundleContext;
 	}
 
+	@Override
 	public void destroy() {
-		_httpServletRegistration.unregister();
-		_httpServiceRegistration.unregister();
 		_filterTracker.close();
+		_httpServiceRegistration.unregister();
+		_httpServletRegistration.unregister();
 		_servletTracker.close();
 
 		super.destroy();
@@ -99,34 +97,37 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 		return _bundleContext;
 	}
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
-
-		properties.put(ServicePropsKeys.BEAN_ID, HttpServlet.class.getName());
-		properties.put(ServicePropsKeys.ORIGINAL_BEAN, Boolean.TRUE);
-		properties.put(ServicePropsKeys.VENDOR, ReleaseInfo.getVendor());
-
-		_httpServletRegistration = _bundleContext.registerService(
-			HttpServlet.class, this, properties);
-
 		HttpSupport httpSupport = new HttpSupport(_bundleContext, this);
-
-		HttpServiceFactory httpServiceFactory = new HttpServiceFactory(
-			httpSupport);
-
-		properties.put(ServicePropsKeys.BEAN_ID, HttpService.class.getName());
-
-		_httpServiceRegistration = _bundleContext.registerService(
-			new String[] {
-				HttpService.class.getName(), ExtendedHttpService.class.getName()
-			}, httpServiceFactory, properties);
 
 		_filterTracker = new ServiceTracker<Filter, Filter>(
 			_bundleContext, Filter.class, new FilterTracker(httpSupport));
 
 		_filterTracker.open();
+
+		HttpServiceFactory httpServiceFactory = new HttpServiceFactory(
+			httpSupport);
+
+		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+
+		properties.put(ServicePropsKeys.BEAN_ID, HttpService.class.getName());
+		properties.put(ServicePropsKeys.ORIGINAL_BEAN, Boolean.TRUE);
+		properties.put(ServicePropsKeys.VENDOR, ReleaseInfo.getVendor());
+
+		_httpServiceRegistration = _bundleContext.registerService(
+			new String[] {
+				ExtendedHttpService.class.getName(),
+				HttpService.class.getName(),
+			},
+			httpServiceFactory, properties);
+
+		properties.put(ServicePropsKeys.BEAN_ID, HttpServlet.class.getName());
+
+		_httpServletRegistration = _bundleContext.registerService(
+			HttpServlet.class, this, properties);
 
 		_servletTracker = new ServiceTracker<Servlet, Servlet>(
 			_bundleContext, Servlet.class, new ServletTracker(httpSupport));
@@ -139,12 +140,11 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		_printDebugHeaderInfo(request);
-
-		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
-		String requestURI = request.getRequestURI();
+		printHeaders(request);
 
 		Portlet portlet = null;
+
+		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 
 		if (Validator.isNotNull(portletId)) {
 			try {
@@ -161,56 +161,31 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 		String servletContextName = null;
 
 		if (portlet != null) {
-			servletContextName =
-				portlet.getPortletApp().getServletContextName();
-		}
-		else {
-			if (requestURI != null) {
-				String pathContext = PortalUtil.getPathContext();
-				String requestURITemp = requestURI;
+			PortletApp portletApp = portlet.getPortletApp();
 
-				if (Validator.isNotNull(pathContext) &&
-					requestURITemp.startsWith(pathContext)) {
-
-					requestURITemp = requestURITemp.substring(
-						pathContext.length());
-				}
-
-				if (requestURITemp.startsWith(Portal.PATH_MODULE)) {
-					requestURITemp = requestURITemp.substring(
-						Portal.PATH_MODULE.length());
-				}
-
-				servletContextName = requestURITemp;
-
-				if (servletContextName.startsWith(StringPool.SLASH)) {
-					servletContextName = servletContextName.substring(1);
-				}
-
-				int index = servletContextName.indexOf(StringPool.SLASH);
-
-				if (index != -1) {
-					requestURITemp = servletContextName.substring(
-						index, servletContextName.length());
-
-					servletContextName = servletContextName.substring(0, index);
-				}
-			}
+			servletContextName = portletApp.getServletContextName();
 		}
 
 		ServletContext servletContext = ServletContextPool.get(
 			servletContextName);
 
-		if (servletContext == null) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND,
-				new IllegalArgumentException(
-					"No application mapped to this path"), request, response);
+		service(
+			request, response, servletContext, portletId,
+			request.getRequestURI());
+	}
 
+	protected void printHeaders(HttpServletRequest request) {
+		if (!_log.isDebugEnabled()) {
 			return;
 		}
 
-		service(request, response, servletContext, portletId, requestURI);
+		Enumeration<String> enumeration = request.getHeaderNames();
+
+		while (enumeration.hasMoreElements()) {
+			Object name = enumeration.nextElement();
+
+			_log.debug(name + " = " + request.getHeader(String.valueOf(name)));
+		}
 	}
 
 	protected void service(
@@ -223,11 +198,11 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader classLoader = bundleServletContext.getClassLoader();
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			currentThread.setContextClassLoader(classLoader);
+			currentThread.setContextClassLoader(
+				bundleServletContext.getClassLoader());
 
 			RequestDispatcher requestDispatcher =
 				bundleServletContext.getRequestDispatcher(requestURI);
@@ -249,25 +224,11 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND,
 				new IllegalArgumentException(
-					"No servlet or resource mapped to the path: " + requestURI),
-					request, response);
+					"No servlet or resource mapped to " + requestURI),
+				request, response);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	private void _printDebugHeaderInfo(HttpServletRequest request) {
-		if (!_log.isDebugEnabled()) {
-			return;
-		}
-
-		Enumeration<String> enu = request.getHeaderNames();
-
-		while (enu.hasMoreElements()) {
-			Object name = enu.nextElement();
-
-			_log.debug(name + " = " + request.getHeader(String.valueOf(name)));
 		}
 	}
 
