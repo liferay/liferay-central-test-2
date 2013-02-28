@@ -49,6 +49,37 @@ public class HttpSupport {
 		return _bundleContext;
 	}
 
+	public BundleServletContext getBundleServletContext(Bundle bundle)
+		throws InvalidSyntaxException {
+	
+		BundleServletContext bundleServletContext = getWABBundleServletContext(
+			bundle);
+	
+		if (bundleServletContext != null) {
+			return bundleServletContext;
+		}
+	
+		return getNonWABBundleServletContext(bundle);
+	}
+
+	public Filter getFilter(Bundle bundle) throws InvalidSyntaxException {
+		StringBundler sb = new StringBundler(7);
+	
+		sb.append("(&(bundle.symbolicName=");
+		sb.append(bundle.getSymbolicName());
+		sb.append(")(bundle.version=");
+		sb.append(bundle.getVersion());
+		sb.append(")(bundle.id=");
+		sb.append(bundle.getBundleId());
+		sb.append(")(Web-ContextPath=*))");
+	
+		return _bundleContext.createFilter(sb.toString());
+	}
+
+	public Filter getFilter(String contextId) throws InvalidSyntaxException {
+		return _bundleContext.createFilter("(&(contextId=" + contextId + ")");
+	}
+
 	public HttpContext getHttpContext(String contextId)
 		throws InvalidSyntaxException {
 
@@ -56,10 +87,10 @@ public class HttpSupport {
 			return null;
 		}
 
-		Filter filter = getHttpContextFilter(contextId);
+		Filter filter = getFilter(contextId);
 
-		Collection<ServiceReference<HttpContext>>
-			serviceReferences = _bundleContext.getServiceReferences(
+		Collection<ServiceReference<HttpContext>> serviceReferences =
+			_bundleContext.getServiceReferences(
 				HttpContext.class, filter.toString());
 
 		Iterator<ServiceReference<HttpContext>> iterator =
@@ -75,27 +106,21 @@ public class HttpSupport {
 		return null;
 	}
 
-	public Filter getHttpContextFilter(String contextId)
-		throws InvalidSyntaxException {
-
-		return _bundleContext.createFilter("(&(contextId=" + contextId + ")");
-	}
-
-	public BundleServletContext getNonWabServletContext(Bundle bundle) {
-		String bundleContextName = BundleServletContext.getServletContextName(
+	public BundleServletContext getNonWABBundleServletContext(Bundle bundle) {
+		String servletContextName = BundleServletContext.getServletContextName(
 			bundle, true);
 
 		ServletContext servletContext = ServletContextPool.get(
-			bundleContextName);
+			servletContextName);
 
 		if (servletContext == null) {
 			BundleServletContext bundleServletContext =
 				new BundleServletContext(
-					bundle, bundleContextName, _webExtenderServlet);
+					bundle, servletContextName, _webExtenderServlet);
 
-			bundleServletContext.setServletContextName(bundleContextName);
+			bundleServletContext.setServletContextName(servletContextName);
 
-			ServletContextPool.put(bundleContextName, bundleServletContext);
+			ServletContextPool.put(servletContextName, bundleServletContext);
 
 			servletContext = bundleServletContext;
 		}
@@ -103,23 +128,10 @@ public class HttpSupport {
 		return (BundleServletContext)servletContext;
 	}
 
-	public BundleServletContext getServletContext(Bundle bundle)
+	public BundleServletContext getWABBundleServletContext(Bundle bundle)
 		throws InvalidSyntaxException {
 
-		BundleServletContext bundleServletContext = getWabServletContext(
-			bundle);
-
-		if (bundleServletContext != null) {
-			return bundleServletContext;
-		}
-
-		return getNonWabServletContext(bundle);
-	}
-
-	public BundleServletContext getWabServletContext(Bundle bundle)
-		throws InvalidSyntaxException {
-
-		Filter filter = getWabServletContextFilter(bundle);
+		Filter filter = getFilter(bundle);
 
 		Collection<ServiceReference<BundleServletContext>>
 			serviceReferences = _bundleContext.getServiceReferences(
@@ -136,22 +148,6 @@ public class HttpSupport {
 		}
 
 		return null;
-	}
-
-	public Filter getWabServletContextFilter(Bundle bundle)
-		throws InvalidSyntaxException {
-
-		StringBundler sb = new StringBundler(7);
-
-		sb.append("(&(bundle.symbolicName=");
-		sb.append(bundle.getSymbolicName());
-		sb.append(")(bundle.version=");
-		sb.append(bundle.getVersion());
-		sb.append(")(bundle.id=");
-		sb.append(bundle.getBundleId());
-		sb.append(")(Web-ContextPath=*))");
-
-		return _bundleContext.createFilter(sb.toString());
 	}
 
 	public WebExtenderServlet getWebExtenderServlet() {

@@ -39,13 +39,14 @@ public class HttpServiceFactory implements ServiceFactory<HttpService> {
 
 		try {
 			BundleServletContext bundleServletContext =
-				_httpSupport.getWabServletContext(bundle);
+				_httpSupport.getWABBundleServletContext(bundle);
 
 			if (bundleServletContext != null) {
 				return new HttpServiceWrapper(bundleServletContext);
 			}
 
-			bundleServletContext = _httpSupport.getNonWabServletContext(bundle);
+			bundleServletContext = _httpSupport.getNonWABBundleServletContext(
+				bundle);
 
 			return new NonWABHttpServiceWrapper(bundleServletContext);
 		}
