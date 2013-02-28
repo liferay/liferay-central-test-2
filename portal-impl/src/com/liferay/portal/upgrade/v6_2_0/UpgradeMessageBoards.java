@@ -45,39 +45,9 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		updateThreadFlags();
 	}
 
-	protected String getUserName(long userId) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select firstName, middleName, lastName from User_ where " +
-					"userId = ?");
-
-			ps.setLong(1, userId);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				String firstName = rs.getString("firstName");
-				String middleName = rs.getString("middleName");
-				String lastName = rs.getString("lastName");
-
-				FullNameGenerator fullNameGenerator =
-					FullNameGeneratorFactory.getInstance();
-
-				return fullNameGenerator.getFullName(
-					firstName, middleName, lastName);
-			}
-
-			return StringPool.BLANK;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+	@Override
+	protected String[] getPortletIds() {
+		return new String[] {"19"};
 	}
 
 	protected Object[] getThreadArray(long threadId) throws Exception {
@@ -113,9 +83,66 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		}
 	}
 
-	@Override
-	protected String[] getPortletIds() {
-		return new String[] {"19"};
+	protected String getUserName(long userId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select firstName, middleName, lastName from User_ where " +
+					"userId = ?");
+
+			ps.setLong(1, userId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String firstName = rs.getString("firstName");
+				String middleName = rs.getString("middleName");
+				String lastName = rs.getString("lastName");
+
+				FullNameGenerator fullNameGenerator =
+					FullNameGeneratorFactory.getInstance();
+
+				return fullNameGenerator.getFullName(
+					firstName, middleName, lastName);
+			}
+
+			return StringPool.BLANK;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateThreadFlag(
+			long threadFlagId, long groupId, long companyId, String fullName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update MBThreadFlag set groupId = ?, companyId = ?, " +
+					"userName = ?, createdDate = modifiedDate where " +
+						"threadFlagId = ?");
+
+			ps.setLong(1, groupId);
+			ps.setLong(2, companyId);
+			ps.setString(3, fullName);
+			ps.setLong(4, threadFlagId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
 	}
 
 	protected void updateThreadFlags() throws Exception {
@@ -151,33 +178,6 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateThreadFlag(
-			long threadFlagId, long groupId, long companyId, String fullName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update MBThreadFlag set groupId = ?, companyId = ?, " +
-					"userName = ?, createdDate = modifiedDate where " +
-						"threadFlagId = ?");
-
-			ps.setLong(1, groupId);
-			ps.setLong(2, companyId);
-			ps.setString(3, fullName);
-			ps.setLong(4, threadFlagId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
