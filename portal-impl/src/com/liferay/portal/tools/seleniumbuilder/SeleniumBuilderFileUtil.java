@@ -53,9 +53,7 @@ public class SeleniumBuilderFileUtil {
 	public String getClassSuffix(String fileName) {
 		int x = fileName.indexOf(CharPool.PERIOD);
 
-		String fileSuffix = fileName.substring(x + 1);
-
-		return StringUtil.upperCaseFirstLetter(fileSuffix);
+		return StringUtil.upperCaseFirstLetter(fileName.substring(x + 1));
 	}
 
 	public String getName(String fileName) {
