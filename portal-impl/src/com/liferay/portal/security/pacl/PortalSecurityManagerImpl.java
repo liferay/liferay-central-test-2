@@ -103,82 +103,9 @@ public class PortalSecurityManagerImpl extends SecurityManager
 	}
 
 	@Override
-	public void checkPermission(Permission permission) {
-		boolean loopSupport = false;
-
-		try {
-			if ((permission instanceof ReflectPermission) &&
-				(permission.getName().equals("suppressAccessChecks")) &&
-				(_checkMembersAccessClassLoader.get() != null)) {
-
-				// The suppressAccessChecks is particularly difficult to
-				// handle because the java API does not have a mechanism to
-				// get the class on which the accessibility is being suppressed.
-				// This makes it difficult to differentiate between code
-				// changing it's own accessibility (OK) from accessibility
-				// changes on foreign code (Not OK). However there is a common
-				// programming pattern we can take advantage of to short circuit
-				// the problem.
-				//
-				// The common programming pattern is:
-				//
-				//     T t = clazz.getDeclared*(..);
-				//     t.setAccessible(true);
-				//
-				// i.e. a call to getDeclared* followed immediately by a call
-				//      to change accessibility of t.
-				//
-				// The getDeclared* calls on the Class result in a call to
-				// SecurityManager.checkMemberAccess(clazz, accessType) in which
-				// case if the target class and the caller class are from the
-				// same classLoader the checking is short circuited with a
-				// successful result. If this short circuit happens in our
-				// implementation we will store the classLoader of the target
-				// class, and on the very next permission check, if the check is
-				// for "suppressAccessChecks" AND the classLoader of the caller
-				// is the same as the stored classLoader from the previous check
-				// we will also allow the check to succeed. In any case, the
-				// thread local is purged to avoid later erroneous successes.
-
-				Class<?> stack[] = getClassContext();
-
-				// someCaller                         [2]
-				// java.lang.reflect.AccessibleObject [1] Constructor, Field, or
-				//                                        Method
-				// SecurityManager.checkMemberAccess  [0]
-
-				if (_checkMembersAccessClassLoader.get() ==
-						stack[2].getClassLoader()) {
-
-					// The loopSupport variable is set to true so that if the
-					// initial call was to one of the array result methods:
-					//
-					//     T[] t = clazz.getDeclared*s(..);
-					//
-					// followed by a loop over the array the code will still
-					// work. We'll hang onto the classLoader as long as
-					// subsequent checks are for "suppressAccessChecks" and the
-					// class loader still matches.
-
-					loopSupport = true;
-
-					return;
-				}
-			}
-
-			java.security.AccessController.checkPermission(permission);
-		}
-		finally {
-			if (!loopSupport) {
-				_checkMembersAccessClassLoader.set(null);
-			}
-		}
-	}
-
-	@Override
 	public void checkMemberAccess(Class<?> clazz, int accessibility) {
 		if (clazz == null) {
-			throw new NullPointerException("class can't be null");
+			throw new NullPointerException("Class cannot be null");
 		}
 
 		if (accessibility == Member.PUBLIC) {
@@ -187,26 +114,98 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 		Class<?> stack[] = getClassContext();
 
-		// stack depth of 4 should be the caller of one of the
-		// methods in java.lang.Class that invoke checkMember
-		// access. The stack should look like:
-		//
-		// someCaller                        [3]
-		// java.lang.Class.someReflectionAPI [2]
-		// java.lang.Class.checkMemberAccess [1]
-		// SecurityManager.checkMemberAccess [0]
+		// Stack depth of 4 should be the caller of one of the methods in
+		// java.lang.Class that invoked the checkMember access. The stack
+		// should look like:
+
+		// [3] someCaller
+		// [2] java.lang.Class.someReflectionAPI
+		// [1] java.lang.Class.checkMemberAccess
+		// [0] SecurityManager.checkMemberAccess
 
 		ClassLoader clazzClassLoader = clazz.getClassLoader();
 
 		if ((stack.length < 4) ||
 			(stack[3].getClassLoader() != clazzClassLoader)) {
 
-			_checkMembersAccessClassLoader.set(null);
+			_checkMemberAccessClassLoader.set(null);
 
 			checkPermission(SecurityConstants.CHECK_MEMBER_ACCESS_PERMISSION);
 		}
 		else {
-			_checkMembersAccessClassLoader.set(clazzClassLoader);
+			_checkMemberAccessClassLoader.set(clazzClassLoader);
+		}
+	}
+
+	@Override
+	public void checkPermission(Permission permission) {
+		boolean clearCheckMemberAccessClassLoader = true;
+
+		try {
+			String name = permission.getName();
+
+			if ((permission instanceof ReflectPermission) &&
+				name.equals("suppressAccessChecks") &&
+				(_checkMemberAccessClassLoader.get() != null)) {
+
+				// The "suppressAccessChecks" permission is particularly
+				// difficult to handle because the Java API does not have a
+				// mechanism to get the class on which the accessibility is
+				// being suppressed. This makes it difficult to differentiate
+				// between code changing its own accessibility (allowed) from
+				// accessibility changes on foreign code (not allowed). However,
+				// there is a common programming pattern we can take advantage
+				// of to short circuit the problem.
+
+				// T t = clazz.getDeclared*(..);
+
+				// t.setAccessible(true);
+
+				// Call getDeclared* and immediately change the accessibility of
+				// it. The getDeclared* results in a call to
+				// SecurityManager#checkMemberAccess(Class, int). In the case
+				// where the target class and the caller class are from the
+				// same class loader, the checking is short circuited with a
+				// successful result. If this short circuit happens in our
+				// implementation, we will store the class loader of the target
+				// class, and on the very next permission check, if the check is
+				// for "suppressAccessChecks" and the classLoader of the caller
+				// is the same as the stored class loader from the previous
+				// check, we will also allow the check to succeed. In all cases,
+				// the thread local is purged to avoid later erroneous
+				// successes.
+
+				Class<?> stack[] = getClassContext();
+
+				// [2] someCaller
+				// [1] java.lang.reflect.AccessibleObject
+				// [0] SecurityManager.checkMemberAccess
+
+				if (_checkMemberAccessClassLoader.get() ==
+						stack[2].getClassLoader()) {
+
+					// The clearCheckMemberAccessClassLoader variable is set to
+					// false to support the calls to getDeclared*s that return
+					// an array.
+
+					// T[] t = clazz.getDeclared*s(..);
+
+					// We will hang onto the class loader as long as subsequent
+					// checks are for "suppressAccessChecks" and the class
+					// loader still matches.
+
+					clearCheckMemberAccessClassLoader = false;
+
+					return;
+				}
+			}
+
+			AccessController.checkPermission(permission);
+		}
+		finally {
+			if (clearCheckMemberAccessClassLoader) {
+				_checkMemberAccessClassLoader.set(null);
+			}
 		}
 	}
 
@@ -276,13 +275,13 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
-	private static ThreadLocal<ClassLoader> _checkMembersAccessClassLoader =
-		new AutoResetThreadLocal<ClassLoader>(
-			PortalSecurityManagerImpl.class +
-				"._checkMembersAccessClassLoader", null);
-
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalSecurityManagerImpl.class.getName());
+
+	private static ThreadLocal<ClassLoader> _checkMemberAccessClassLoader =
+		new AutoResetThreadLocal<ClassLoader>(
+			PortalSecurityManagerImpl.class +
+				"._checkMembersAccessClassLoader");
 
 	private Policy _policy;
 
