@@ -204,8 +204,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		String prefix =
 			PluginPackage.REPOSITORY_XML_FILENAME_PREFIX + StringPool.DASH;
 		String extension =
-			StringPool.PERIOD +
-				PluginPackage.REPOSITORY_XML_FILENAME_EXTENSION;
+			StringPool.PERIOD + PluginPackage.REPOSITORY_XML_FILENAME_EXTENSION;
 
 		if (Validator.isNull(version)) {
 			String path = GetterUtil.getString(request.getPathInfo());
