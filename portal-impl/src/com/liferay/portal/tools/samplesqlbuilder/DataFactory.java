@@ -136,15 +136,11 @@ public class DataFactory {
 		_maxGroupsCount = maxGroupsCount;
 		_maxUserToGroupCount = maxUserToGroupCount;
 
-		// Init SimpleCounters
-
 		_counter = new SimpleCounter(_maxGroupsCount + 1);
 		_futureDateCounter = new SimpleCounter();
 		_resourcePermissionCounter = new SimpleCounter();
 		_socialActivityCounter = new SimpleCounter();
 		_userScreenNameCounter = new SimpleCounter();
-
-		// Init ClassNames
 
 		_classNames = new ArrayList<ClassName>();
 
@@ -161,10 +157,8 @@ public class DataFactory {
 
 			_classNames.add(className);
 
-			_classNameMap.put(model, classNameId);
+			_classNamesMap.put(model, classNameId);
 		}
-
-		// Init IDs
 
 		_companyId = _counter.get();
 		_accountId = _counter.get();
@@ -188,7 +182,7 @@ public class DataFactory {
 	}
 
 	public long getBlogsEntryClassNameId() {
-		return _classNameMap.get(BlogsEntry.class.getName());
+		return _classNamesMap.get(BlogsEntry.class.getName());
 	}
 
 	public List<ClassName> getClassNames() {
@@ -220,11 +214,11 @@ public class DataFactory {
 	}
 
 	public long getDDLRecordSetClassNameId() {
-		return _classNameMap.get(DDLRecordSet.class.getName());
+		return _classNamesMap.get(DDLRecordSet.class.getName());
 	}
 
 	public long getDDMContentClassNameId() {
-		return _classNameMap.get(DDMContent.class.getName());
+		return _classNamesMap.get(DDMContent.class.getName());
 	}
 
 	public DLFileEntryType getDefaultDLFileEntryType() {
@@ -240,11 +234,11 @@ public class DataFactory {
 	}
 
 	public long getDLFileEntryClassNameId() {
-		return _classNameMap.get(DLFileEntry.class.getName());
+		return _classNamesMap.get(DLFileEntry.class.getName());
 	}
 
 	public long getGroupClassNameId() {
-		return _classNameMap.get(Group.class.getName());
+		return _classNamesMap.get(Group.class.getName());
 	}
 
 	public Group getGuestGroup() {
@@ -256,11 +250,11 @@ public class DataFactory {
 	}
 
 	public long getJournalArticleClassNameId() {
-		return _classNameMap.get(JournalArticle.class.getName());
+		return _classNamesMap.get(JournalArticle.class.getName());
 	}
 
 	public long getMBMessageClassNameId() {
-		return _classNameMap.get(MBMessage.class.getName());
+		return _classNamesMap.get(MBMessage.class.getName());
 	}
 
 	public List<Long> getNewUserGroupIds(long groupId) {
@@ -292,7 +286,7 @@ public class DataFactory {
 	}
 
 	public long getUserClassNameId() {
-		return _classNameMap.get(User.class.getName());
+		return _classNamesMap.get(User.class.getName());
 	}
 
 	public Role getUserRole() {
@@ -304,7 +298,7 @@ public class DataFactory {
 	}
 
 	public long getWikiPageClassNameId() {
-		return _classNameMap.get(WikiPage.class.getName());
+		return _classNamesMap.get(WikiPage.class.getName());
 	}
 
 	public void initCompany() {
@@ -1037,7 +1031,7 @@ public class DataFactory {
 
 		role.setRoleId(_counter.get());
 		role.setCompanyId(_companyId);
-		role.setClassNameId(_classNameMap.get(Role.class.getName()));
+		role.setClassNameId(_classNamesMap.get(Role.class.getName()));
 		role.setClassPK(role.getRoleId());
 		role.setName(name);
 		role.setType(type);
@@ -1096,8 +1090,8 @@ public class DataFactory {
 	private long _accountId;
 	private Role _administratorRole;
 	private String _baseDir;
-	private Map<String, Long> _classNameMap = new HashMap<String, Long>();
 	private List<ClassName> _classNames;
+	private Map<String, Long> _classNamesMap = new HashMap<String, Long>();
 	private Company _company;
 	private long _companyId;
 	private SimpleCounter _counter;
