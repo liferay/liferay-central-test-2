@@ -125,8 +125,7 @@ public class Transformer {
 		templateId = getTemplateId(
 			templateId, companyId, companyGroupId, groupId);
 
-		Template template = getTemplate(
-			themeDisplay, contextObjects, script, langType, templateId);
+		Template template = getTemplate(templateId, script, langType);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -270,7 +269,7 @@ public class Transformer {
 				groupId = themeDisplay.getScopeGroupId();
 			}
 			else if (tokens != null) {
-				companyId =GetterUtil.getLong(tokens.get("company_id"));
+				companyId = GetterUtil.getLong(tokens.get("company_id"));
 				companyGroupId = GetterUtil.getLong(
 					tokens.get("company_group_id"));
 				groupId = GetterUtil.getLong(tokens.get("group_id"));
@@ -282,8 +281,7 @@ public class Transformer {
 				templateId, companyId, companyGroupId, groupId);
 
 			Template template = getTemplate(
-				themeDisplay, tokens, languageId, xml, script, langType,
-				templateId);
+				templateId, tokens, languageId, xml, script, langType);
 
 			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -327,11 +325,11 @@ public class Transformer {
 				template.put(
 					"permissionChecker",
 					PermissionThreadLocal.getPermissionChecker());
-				template.put("viewMode", viewMode);
 				template.put(
 					"randomNamespace",
 					PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 						StringPool.UNDERLINE);
+				template.put("viewMode", viewMode);
 
 				load = mergeTemplate(template, unsyncStringWriter);
 			}
@@ -432,28 +430,8 @@ public class Transformer {
 	}
 
 	protected Template getTemplate(
-			ThemeDisplay themeDisplay, Map<String, Object> contextObjects,
-			String script, String langType, String templateId)
-		throws Exception {
-
-		TemplateResource templateResource = new StringTemplateResource(
-			templateId, script);
-
-		TemplateResource errorTemplateResource = getErrorTemplateResource(
-			langType);
-
-		TemplateContextType templateContextType = getTemplateContextType(
-			langType);
-
-		return TemplateManagerUtil.getTemplate(
-			langType, templateResource, errorTemplateResource,
-			templateContextType);
-	}
-
-	protected Template getTemplate(
-			ThemeDisplay themeDisplay, Map<String, String> tokens,
-			String languageId, String xml, String script, String langType,
-			String templateId)
+			String templateId, Map<String, String> tokens, String languageId,
+			String xml, String script, String langType)
 		throws Exception {
 
 		TemplateResource templateResource = null;
@@ -468,6 +446,24 @@ public class Transformer {
 		else {
 			templateResource = new StringTemplateResource(templateId, script);
 		}
+
+		TemplateResource errorTemplateResource = getErrorTemplateResource(
+			langType);
+
+		TemplateContextType templateContextType = getTemplateContextType(
+			langType);
+
+		return TemplateManagerUtil.getTemplate(
+			langType, templateResource, errorTemplateResource,
+			templateContextType);
+	}
+
+	protected Template getTemplate(
+			String templateId, String script, String langType)
+		throws Exception {
+
+		TemplateResource templateResource = new StringTemplateResource(
+			templateId, script);
 
 		TemplateResource errorTemplateResource = getErrorTemplateResource(
 			langType);
@@ -614,11 +610,15 @@ public class Transformer {
 					map.put(nameElement.getText(), values);
 				}
 			}
-			else if (childElement.elements().size() > 0) {
-				map.put(name, insertRequestVariables(childElement));
-			}
 			else {
-				map.put(name, childElement.getText());
+				List<Element> elements = childElement.elements();
+
+				if (!elements.isEmpty()) {
+					map.put(name, insertRequestVariables(childElement));
+				}
+				else {
+					map.put(name, childElement.getText());
+				}
 			}
 		}
 
