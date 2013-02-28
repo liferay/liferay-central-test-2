@@ -34,6 +34,30 @@ import javax.servlet.jsp.PageContext;
  */
 public class ResourceActionsUtil {
 
+	/**
+	 * @deprecated {@link ResourceActions#ACTION_NAME_PREFIX}
+	 */
+	public static final String ACTION_NAME_PREFIX =
+		ResourceActions.ACTION_NAME_PREFIX;
+
+	/**
+	 * @deprecated {@link ResourceActions#MODEL_RESOURCE_NAME_PREFIX}
+	 */
+	public static final String MODEL_RESOURCE_NAME_PREFIX =
+		ResourceActions.MODEL_RESOURCE_NAME_PREFIX;
+
+	/**
+	 * @deprecated {@link ResourceActions#ORGANIZATION_MODEL_RESOURCES}
+	 */
+	public static final String[] ORGANIZATION_MODEL_RESOURCES =
+		ResourceActions.ORGANIZATION_MODEL_RESOURCES;
+
+	/**
+	 * @deprecated {@link ResourceActions#PORTAL_MODEL_RESOURCES}
+	 */
+	public static final String[] PORTAL_MODEL_RESOURCES =
+		ResourceActions.PORTAL_MODEL_RESOURCES;
+
 	public static void checkAction(String name, String actionId)
 		throws NoSuchResourceActionException {
 
