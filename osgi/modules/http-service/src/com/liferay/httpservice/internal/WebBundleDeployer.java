@@ -26,8 +26,6 @@ public class WebBundleDeployer {
 
 	public WebBundleDeployer(WebExtenderServlet webExtenderServlet)
 		throws Exception {
-
-		_webExtenderServlet = webExtenderServlet;
 	}
 
 	public void close() {
@@ -38,7 +36,5 @@ public class WebBundleDeployer {
 
 	public void doStop(Bundle bundle, String servletContextName) {
 	}
-
-	private WebExtenderServlet _webExtenderServlet;
 
 }

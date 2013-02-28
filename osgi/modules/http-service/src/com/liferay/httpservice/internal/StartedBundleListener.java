@@ -27,9 +27,9 @@ import org.osgi.framework.BundleListener;
  * @author Raymond Augé
  * @author Miguel Pastor
  */
-public class BundleStartListener implements BundleListener {
+public class StartedBundleListener implements BundleListener {
 
-	public BundleStartListener(WebBundleDeployer webBundleDeployer) {
+	public StartedBundleListener(WebBundleDeployer webBundleDeployer) {
 		_webBundleDeployer = webBundleDeployer;
 	}
 
@@ -55,7 +55,8 @@ public class BundleStartListener implements BundleListener {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BundleStartListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		StartedBundleListener.class);
 
 	private WebBundleDeployer _webBundleDeployer;
 

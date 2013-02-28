@@ -27,9 +27,9 @@ import org.osgi.framework.SynchronousBundleListener;
  * @author Raymond Augé
  * @author Miguel Pastor
  */
-public class BundleStopListener implements SynchronousBundleListener {
+public class StoppedBundleListener implements SynchronousBundleListener {
 
-	public BundleStopListener(WebBundleDeployer webBundleDeployer) {
+	public StoppedBundleListener(WebBundleDeployer webBundleDeployer) {
 		_webBundleDeployer = webBundleDeployer;
 	}
 
@@ -55,7 +55,8 @@ public class BundleStopListener implements SynchronousBundleListener {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BundleStopListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		StoppedBundleListener.class);
 
 	private WebBundleDeployer _webBundleDeployer;
 
