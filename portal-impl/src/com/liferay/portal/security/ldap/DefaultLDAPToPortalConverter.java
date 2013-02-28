@@ -146,40 +146,15 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 
 		Contact contact = ContactUtil.create(0);
 
-
-		List<ListType> prefixes = ListTypeServiceUtil.getListTypes(
+		int prefixId = getListTypeId(
+			attributes, contactMappings, ContactConverterKeys.PREFIX,
 			ListTypeConstants.CONTACT_PREFIX);
-
-		int prefixId = 0;
-
-		String prefix = LDAPUtil.getAttributeString(
-			attributes, contactMappings, ContactConverterKeys.PREFIX);
-
-		for (ListType lt : prefixes) {
-			if (prefix.equals(lt.getName())) {
-				prefixId = lt.getListTypeId();
-
-				break;
-			}
-		}
 
 		contact.setPrefixId(prefixId);
 
-		List<ListType> suffixes = ListTypeServiceUtil.getListTypes(
+		int suffixId = getListTypeId(
+			attributes, contactMappings, ContactConverterKeys.SUFFIX,
 			ListTypeConstants.CONTACT_SUFFIX);
-
-		int suffixId = 0;
-
-		String suffix = LDAPUtil.getAttributeString(
-			attributes, contactMappings, ContactConverterKeys.SUFFFIX);
-
-		for (ListType lt : suffixes) {
-			if (suffix.equals(lt.getName())) {
-				suffixId = lt.getListTypeId();
-
-				break;
-			}
-		}
 
 		contact.setSuffixId(suffixId);
 
@@ -188,9 +163,7 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 
 		gender = gender.toLowerCase();
 
-		if (gender.equals(StringPool.FALSE) || gender.equals("female") ||
-			gender.equals("f")) {
-
+		if (GetterUtil.getBoolean(gender) || gender.equals("female")) {
 			contact.setMale(false);
 		}
 		else {
@@ -215,43 +188,33 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 		contact.setSmsSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.SMS_SN));
-
 		contact.setAimSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.AIM_SN));
-
 		contact.setFacebookSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.FACEBOOK_SN));
-
 		contact.setIcqSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.ICQ_SN));
-
 		contact.setJabberSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.JABBER_SN));
-
 		contact.setMsnSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.MSN_SN));
-
 		contact.setMySpaceSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.MYSPACE_SN));
-
 		contact.setSkypeSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.SKYPE_SN));
-
 		contact.setTwitterSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.TWITTER_SN));
-
 		contact.setYmSn(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.YM_SN));
-
 		contact.setJobTitle(
 			LDAPUtil.getAttributeString(
 				attributes, contactMappings, ContactConverterKeys.JOB_TITLE));
@@ -355,6 +318,26 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 		}
 
 		return expandoAttributes;
+	}
+
+	protected int getListTypeId(
+			Attributes attributes, Properties contactMappings,
+			String contactMappingsKey, String listTypeType)
+		throws Exception {
+
+		List<ListType> contactPrefixListTypes =
+			ListTypeServiceUtil.getListTypes(listTypeType);
+
+		String name = LDAPUtil.getAttributeString(
+			attributes, contactMappings, contactMappingsKey);
+
+		for (ListType listType : contactPrefixListTypes) {
+			if (name.equals(listType.getName())) {
+				return listType.getListTypeId();
+			}
+		}
+
+		return 0;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -43,7 +43,7 @@ public class ContactConverterKeys {
 
 	public static final String SMS_SN = "smsSn";
 
-	public static final String SUFFFIX = "suffix";
+	public static final String SUFFIX = "suffix";
 
 	public static final String TWITTER_SN = "twitterSn";
 
