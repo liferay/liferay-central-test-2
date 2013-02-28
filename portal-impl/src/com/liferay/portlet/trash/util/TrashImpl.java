@@ -115,7 +115,7 @@ public class TrashImpl implements Trash {
 
 		for (String attachmentFileName : attachmentFileNames) {
 			String trashTime = TrashUtil.getTrashTime(
-				attachmentFileName, Trash.TRASH_TIME_SEPARATOR);
+				attachmentFileName, TRASH_TIME_SEPARATOR);
 
 			long timestamp = GetterUtil.getLong(trashTime);
 
