@@ -97,7 +97,7 @@ public class OutputTag extends PositionTagSupport {
 		if (outputData == null) {
 			outputData = new OutputData();
 
-			request.setAttribute(WebKeys.OUTPUT_DATA, outputData);
+			servletRequest.setAttribute(WebKeys.OUTPUT_DATA, outputData);
 		}
 
 		return outputData;
