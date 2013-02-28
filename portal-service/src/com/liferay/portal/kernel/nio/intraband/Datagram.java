@@ -29,29 +29,6 @@ import java.nio.channels.ScatteringByteChannel;
 import java.util.EnumSet;
 
 /**
- * Big Endian Byte Order.<br>
- * Data format:
- * <table border="1">
- *	<tr>
- *		<td>Name</td><td>Type</td><td>Size(byte)</td><td>Offset</td>
- *	</tr>
- *	<tr>
- *		<td>Status Flag</td><td>byte</td><td>1</td><td>0</td>
- *	</tr>
- *  <tr>
- *		<td>Sequence Id</td><td>long</td><td>8</td><td>1</td>
- *	</tr>
- *	<tr>
- *		<td>Data Type</td><td>byte</td><td>1</td><td>9</td>
- *	</tr>
- *	<tr>
- *		<td>Data Size</td><td>int</td><td>4</td><td>10</td>
- *	</tr>
- *	<tr>
- *		<td>Data Chunk</td><td>byte[]</td><td>${Data Size}</td><td>14</td>
- *	</tr>
- * </table>
- *
  * @author Shuyang Zhou
  */
 public class Datagram {
@@ -61,7 +38,7 @@ public class Datagram {
 	}
 
 	public static Datagram createRequestDatagram(
-		byte type, ByteBuffer dataBuffer) {
+		byte type, ByteBuffer dataByteBuffer) {
 
 		Datagram datagram = new Datagram();
 
@@ -69,7 +46,7 @@ public class Datagram {
 
 		datagram._headerBufferArray[_INDEX_STATUS_FLAG] = _FLAG_REQUEST;
 
-		// Request Datagram does not set Sequence Id
+		// Request datagram does not set the sequence ID
 
 		// Data type
 
@@ -79,11 +56,11 @@ public class Datagram {
 
 		BigEndianCodec.putInt(
 			datagram._headerBufferArray, _INDEX_DATA_SIZE,
-			dataBuffer.remaining());
+			dataByteBuffer.remaining());
 
 		// Data chunk
 
-		datagram._dataBuffer = dataBuffer;
+		datagram._dataByteBuffer = dataByteBuffer;
 
 		return datagram;
 	}
@@ -95,7 +72,7 @@ public class Datagram {
 	}
 
 	public static Datagram createResponseDatagram(
-		Datagram requestDatagram, ByteBuffer dataBuffer) {
+		Datagram requestDatagram, ByteBuffer byteBuffer) {
 
 		Datagram datagram = new Datagram();
 
@@ -103,29 +80,29 @@ public class Datagram {
 
 		datagram._headerBufferArray[_INDEX_STATUS_FLAG] = _FLAG_RESPONSE;
 
-		// Sequence Id
+		// Sequence ID
 
 		BigEndianCodec.putLong(
 			datagram._headerBufferArray, _INDEX_SEQUENCE_ID,
 			requestDatagram.getSequenceId());
 
-		// Response Datagram does not set data type
+		// Response datagram does not set the data type
 
 		// Data size
 
 		BigEndianCodec.putInt(
 			datagram._headerBufferArray, _INDEX_DATA_SIZE,
-			dataBuffer.remaining());
+			byteBuffer.remaining());
 
 		// Data chunk
 
-		datagram._dataBuffer = dataBuffer;
+		datagram._dataByteBuffer = byteBuffer;
 
 		return datagram;
 	}
 
 	public ByteBuffer getData() {
-		return _dataBuffer;
+		return _dataByteBuffer;
 	}
 
 	public byte getType() {
@@ -136,67 +113,65 @@ public class Datagram {
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{statusFlag=");
-		sb.append(_headerBufferArray[_INDEX_STATUS_FLAG]);
-		sb.append(", sequenceId=");
-		sb.append(
-			BigEndianCodec.getLong(_headerBufferArray, _INDEX_SEQUENCE_ID));
-		sb.append(", dataType=");
-		sb.append(_headerBufferArray[_INDEX_DATA_TYPE]);
-		sb.append(", dataSize=");
-		sb.append(BigEndianCodec.getInt(_headerBufferArray, _INDEX_DATA_SIZE));
-		sb.append(", dataChunk=");
+		sb.append("{dataChunk=");
 
-		ByteBuffer dataBuffer = _dataBuffer;
+		ByteBuffer byteBuffer = _dataByteBuffer;
 
-		if (dataBuffer == null) {
+		if (byteBuffer == null) {
 			sb.append(StringPool.NULL);
 		}
 		else {
-			sb.append(dataBuffer.toString());
+			sb.append(byteBuffer.toString());
 		}
 
+		sb.append(", dataSize=");
+		sb.append(BigEndianCodec.getInt(_headerBufferArray, _INDEX_DATA_SIZE));
+		sb.append(", dataType=");
+		sb.append(_headerBufferArray[_INDEX_DATA_TYPE]);
+		sb.append(", sequenceId=");
+		sb.append(
+			BigEndianCodec.getLong(_headerBufferArray, _INDEX_SEQUENCE_ID));
+		sb.append(", statusFlag=");
+		sb.append(_headerBufferArray[_INDEX_STATUS_FLAG]);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
-	// Package level methods, do not escalate access level
-
-	static Datagram createACKResponseDatagram(long sequenceId) {
+	protected static Datagram createACKResponseDatagram(long sequenceId) {
 		Datagram datagram = new Datagram();
 
 		// Status flag
 
 		datagram._headerBufferArray[_INDEX_STATUS_FLAG] = _FLAG_ACK_RESPONSE;
 
-		// Sequence Id
+		// Sequence ID
 
 		BigEndianCodec.putLong(
 			datagram._headerBufferArray, _INDEX_SEQUENCE_ID, sequenceId);
 
-		// ACK response does not set data type
+		// ACK response datagram does not set the data type
 
 		// Data size
 
 		BigEndianCodec.putInt(datagram._headerBufferArray, _INDEX_DATA_SIZE, 0);
 
-		// Empty data chunk
+		// Data chunk
 
-		datagram._dataBuffer = _EMPTY_BUFFER;
+		datagram._dataByteBuffer = _EMPTY_BUFFER;
 
 		return datagram;
 	}
 
-	static Datagram createReceiveDatagram() {
+	protected static Datagram createReceiveDatagram() {
 		return new Datagram();
 	}
 
-	long getSequenceId() {
+	protected long getSequenceId() {
 		return BigEndianCodec.getLong(_headerBufferArray, _INDEX_SEQUENCE_ID);
 	}
 
-	boolean isAckRequest() {
+	protected boolean isAckRequest() {
 		byte statusFlag = _headerBufferArray[_INDEX_STATUS_FLAG];
 
 		if ((statusFlag & _FLAG_ACK_REQUEST) != 0) {
@@ -207,7 +182,7 @@ public class Datagram {
 		}
 	}
 
-	boolean isAckResponse() {
+	protected boolean isAckResponse() {
 		byte statusFlag = _headerBufferArray[_INDEX_STATUS_FLAG];
 
 		if ((statusFlag & _FLAG_ACK_RESPONSE) != 0) {
@@ -218,7 +193,7 @@ public class Datagram {
 		}
 	}
 
-	boolean isRequest() {
+	protected boolean isRequest() {
 		byte statusFlag = _headerBufferArray[_INDEX_STATUS_FLAG];
 
 		if ((statusFlag & _FLAG_REQUEST) != 0) {
@@ -229,7 +204,7 @@ public class Datagram {
 		}
 	}
 
-	boolean isResponse() {
+	protected boolean isResponse() {
 		byte statusFlag = _headerBufferArray[_INDEX_STATUS_FLAG];
 
 		if ((statusFlag & _FLAG_RESPONSE) != 0) {
@@ -240,15 +215,15 @@ public class Datagram {
 		}
 	}
 
-	boolean readFrom(ScatteringByteChannel scatteringByteChannel)
+	protected boolean readFrom(ScatteringByteChannel scatteringByteChannel)
 		throws IOException {
 
-		if (_headerBuffer.hasRemaining()) {
-			if (scatteringByteChannel.read(_headerBuffer) == -1) {
+		if (_headerByteBuffer.hasRemaining()) {
+			if (scatteringByteChannel.read(_headerByteBuffer) == -1) {
 				throw new EOFException();
 			}
 
-			if (_headerBuffer.hasRemaining()) {
+			if (_headerByteBuffer.hasRemaining()) {
 				return false;
 			}
 			else {
@@ -256,31 +231,31 @@ public class Datagram {
 					_headerBufferArray, _INDEX_DATA_SIZE);
 
 				if (dataSize == 0) {
-					_dataBuffer = _EMPTY_BUFFER;
+					_dataByteBuffer = _EMPTY_BUFFER;
 
 					return true;
 				}
 				else {
-					_dataBuffer = ByteBuffer.allocate(dataSize);
+					_dataByteBuffer = ByteBuffer.allocate(dataSize);
 				}
 			}
 		}
 
-		if (scatteringByteChannel.read(_dataBuffer) == -1) {
+		if (scatteringByteChannel.read(_dataByteBuffer) == -1) {
 			throw new EOFException();
 		}
 
-		if (_dataBuffer.hasRemaining()) {
+		if (_dataByteBuffer.hasRemaining()) {
 			return false;
 		}
 		else {
-			_dataBuffer.flip();
+			_dataByteBuffer.flip();
 
 			return true;
 		}
 	}
 
-	void setAckRequest(boolean ackRequest) {
+	protected void setAckRequest(boolean ackRequest) {
 		byte statusFlag = _headerBufferArray[_INDEX_STATUS_FLAG];
 
 		if (ackRequest) {
@@ -293,65 +268,73 @@ public class Datagram {
 		_headerBufferArray[_INDEX_STATUS_FLAG] = statusFlag;
 	}
 
-	void setSequenceId(long sequenceId) {
+	protected void setSequenceId(long sequenceId) {
 		BigEndianCodec.putLong(
 			_headerBufferArray, _INDEX_SEQUENCE_ID, sequenceId);
 	}
 
-	boolean writeTo(GatheringByteChannel gatheringByteChannel)
+	protected boolean writeTo(GatheringByteChannel gatheringByteChannel)
 		throws IOException {
 
-		if (_headerBuffer.hasRemaining()) {
-			ByteBuffer[] outputBuffers = new ByteBuffer[2];
+		if (_headerByteBuffer.hasRemaining()) {
+			ByteBuffer[] byteBuffers = new ByteBuffer[2];
 
-			outputBuffers[0] = _headerBuffer;
-			outputBuffers[1] = _dataBuffer;
+			byteBuffers[0] = _headerByteBuffer;
+			byteBuffers[1] = _dataByteBuffer;
 
-			gatheringByteChannel.write(outputBuffers);
+			gatheringByteChannel.write(byteBuffers);
 		}
 		else {
-			gatheringByteChannel.write(_dataBuffer);
+			gatheringByteChannel.write(_dataByteBuffer);
 		}
 
-		if (_dataBuffer.hasRemaining()) {
+		if (_dataByteBuffer.hasRemaining()) {
 			return false;
 		}
 		else {
-			_dataBuffer = null;
+			_dataByteBuffer = null;
 
 			return true;
 		}
 	}
 
+	protected Object attachment;
+	protected CompletionHandler<Object> completionHandler;
+	protected EnumSet<CompletionType> completionTypes;
+	protected long expireTime;
+	protected long timeout;
+
 	private Datagram() {
-		_headerBuffer = ByteBuffer.allocate(_HEADER_SIZE);
+		_headerByteBuffer = ByteBuffer.allocate(_HEADER_SIZE);
 
-		// Direct reference to internal byte[] for fast encoding/decoding
+		// Directly reference the interanl byte array for faster encoding and
+		// decoding
 
-		_headerBufferArray = _headerBuffer.array();
+		_headerBufferArray = _headerByteBuffer.array();
 	}
 
 	private static final ByteBuffer _EMPTY_BUFFER = ByteBuffer.allocate(0);
+
 	private static final byte _FLAG_ACK_REQUEST = 1;
+
 	private static final byte _FLAG_ACK_RESPONSE = 2;
+
 	private static final byte _FLAG_REQUEST = 4;
+
 	private static final byte _FLAG_RESPONSE = 8;
+
 	private static final int _HEADER_SIZE = 14;
+
 	private static final int _INDEX_DATA_SIZE = 10;
+
 	private static final int _INDEX_DATA_TYPE = 9;
+
 	private static final int _INDEX_SEQUENCE_ID = 1;
+
 	private static final int _INDEX_STATUS_FLAG = 0;
 
-	// Package level fields, do not escalate access level
-
-	Object attachment;
-	CompletionHandler<Object> completionHandler;
-	long expireTime;
-	EnumSet<CompletionType> completionTypes;
-	long timeout;
-
-	private ByteBuffer _dataBuffer;
-	private final ByteBuffer _headerBuffer;
+	private ByteBuffer _dataByteBuffer;
 	private final byte[] _headerBufferArray;
+	private final ByteBuffer _headerByteBuffer;
 
 }
