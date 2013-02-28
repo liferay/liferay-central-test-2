@@ -75,10 +75,10 @@ public class BundleServletRequest extends HttpServletRequestWrapper {
 	public Enumeration<String> getAttributeNames() {
 		List<String> attributeNames = new UniqueList<String>();
 
-		Enumeration<String> enu = super.getAttributeNames();
+		Enumeration<String> enumeration = super.getAttributeNames();
 
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
+		while (enumeration.hasMoreElements()) {
+			String name = enumeration.nextElement();
 
 			attributeNames.add(name);
 		}

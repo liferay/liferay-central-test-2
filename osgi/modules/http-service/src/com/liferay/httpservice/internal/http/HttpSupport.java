@@ -51,20 +51,20 @@ public class HttpSupport {
 
 	public BundleServletContext getBundleServletContext(Bundle bundle)
 		throws InvalidSyntaxException {
-	
+
 		BundleServletContext bundleServletContext = getWABBundleServletContext(
 			bundle);
-	
+
 		if (bundleServletContext != null) {
 			return bundleServletContext;
 		}
-	
+
 		return getNonWABBundleServletContext(bundle);
 	}
 
 	public Filter getFilter(Bundle bundle) throws InvalidSyntaxException {
 		StringBundler sb = new StringBundler(7);
-	
+
 		sb.append("(&(bundle.symbolicName=");
 		sb.append(bundle.getSymbolicName());
 		sb.append(")(bundle.version=");
@@ -72,7 +72,7 @@ public class HttpSupport {
 		sb.append(")(bundle.id=");
 		sb.append(bundle.getBundleId());
 		sb.append(")(Web-ContextPath=*))");
-	
+
 		return _bundleContext.createFilter(sb.toString());
 	}
 
@@ -116,7 +116,8 @@ public class HttpSupport {
 		if (servletContext == null) {
 			BundleServletContext bundleServletContext =
 				new BundleServletContext(
-					bundle, servletContextName, _webExtenderServlet);
+					bundle, servletContextName,
+					_webExtenderServlet.getServletContext());
 
 			bundleServletContext.setServletContextName(servletContextName);
 
@@ -133,8 +134,8 @@ public class HttpSupport {
 
 		Filter filter = getFilter(bundle);
 
-		Collection<ServiceReference<BundleServletContext>>
-			serviceReferences = _bundleContext.getServiceReferences(
+		Collection<ServiceReference<BundleServletContext>> serviceReferences =
+			_bundleContext.getServiceReferences(
 				BundleServletContext.class, filter.toString());
 
 		Iterator<ServiceReference<BundleServletContext>> iterator =

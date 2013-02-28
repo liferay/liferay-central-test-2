@@ -31,6 +31,7 @@ import java.util.Dictionary;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestListener;
 
@@ -95,6 +96,9 @@ public class BundleServletContext extends LiferayServletContext {
 			}
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
 		if (Validator.isNull(deploymentContext) && generate) {
@@ -113,9 +117,9 @@ public class BundleServletContext extends LiferayServletContext {
 
 	public BundleServletContext(
 		Bundle bundle, String servletContextName,
-		WebExtenderServlet webExtenderServlet) {
+		ServletContext servletContext) {
 
-		super(webExtenderServlet.getServletContext());
+		super(servletContext);
 	}
 
 	public ClassLoader getClassLoader() {

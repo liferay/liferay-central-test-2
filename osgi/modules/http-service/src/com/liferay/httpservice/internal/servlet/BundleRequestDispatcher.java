@@ -15,8 +15,6 @@
 package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.PACLPolicy;
 import com.liferay.portal.security.pacl.PACLPolicyManager;
@@ -37,33 +35,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Miguel Pastor
  */
 public class BundleRequestDispatcher implements RequestDispatcher {
-
-	public BundleRequestDispatcher(
-		String servletMapping, boolean extensionMapping, String requestURI,
-		BundleServletContext bundleServletContext,
-		BundleFilterChain bundleFilterChain) {
-
-		_servletMapping = servletMapping;
-		_extensionMapping = extensionMapping;
-		_requestURI = StringUtil.replace(
-			requestURI, StringPool.DOUBLE_SLASH, StringPool.SLASH);
-		_bundleServletContext = bundleServletContext;
-		_bundleFilterChain = bundleFilterChain;
-
-		if (!_extensionMapping) {
-			_servletPath = _servletMapping;
-		}
-		else {
-			_servletPath = _requestURI;
-		}
-
-		if ((_servletPath != null) &&
-			_requestURI.startsWith(_servletPath) &&
-			(_requestURI.length() > _servletPath.length())) {
-
-			_pathInfo = _requestURI.substring(_servletPath.length());
-		}
-	}
 
 	public void doDispatch(
 			ServletRequest servletRequest, ServletResponse servletResponse)
@@ -181,11 +152,9 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 
 	private BundleFilterChain _bundleFilterChain;
 	private BundleServletContext _bundleServletContext;
-	private boolean _extensionMapping;
 	private String _pathInfo;
 	private String _queryString;
 	private String _requestURI;
-	private String _servletMapping;
 	private String _servletPath;
 
 }
