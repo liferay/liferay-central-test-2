@@ -51,9 +51,9 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 			runSQL("alter table MBThreadFlag add companyId LONG");
 
-			runSQL("alter table MBThreadFlag add userName STRING");
+			runSQL("alter table MBThreadFlag add userName VARCHAR(75) null");
 
-			runSQL("alter table MBThreadFlag add createdDate DATE");
+			runSQL("alter table MBThreadFlag add createdDate DATE null");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
