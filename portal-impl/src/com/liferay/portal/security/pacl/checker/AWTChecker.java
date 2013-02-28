@@ -66,12 +66,14 @@ public class AWTChecker extends BaseChecker {
 		return authorizationProperty;
 	}
 
-	private void initOperations() {
-		 Set<String> names = getPropertySet("security-manager-awt-operations");
+	protected void initOperations() {
+		Set<String> names = getPropertySet("security-manager-awt-operations");
 
-		 for (String name : names) {
-			 _permissions.add(new AWTPermission(name));
-		 }
+		for (String name : names) {
+			Permission permission = new AWTPermission(name);
+
+			_permissions.add(permission);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AWTChecker.class);
