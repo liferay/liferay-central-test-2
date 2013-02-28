@@ -1207,15 +1207,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String trashTitle = TrashUtil.getTrashTitle(trashEntry.getEntryId());
 
-		List<WikiPage> versionPages = wikiPagePersistence.findByR_N_H(
-			page.getResourcePrimKey(), page.getNodeId(), false);
-
-		for (WikiPage versionPage : versionPages) {
-			versionPage.setTitle(trashTitle);
-
-			wikiPagePersistence.update(versionPage);
-		}
-
 		List<WikiPage> redirectPages = wikiPagePersistence.findByN_R(
 			page.getNodeId(), page.getTitle());
 
@@ -1223,6 +1214,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			redirectPage.setRedirectTitle(trashTitle);
 
 			wikiPagePersistence.update(redirectPage);
+		}
+
+		List<WikiPage> versionPages = wikiPagePersistence.findByR_N_H(
+			page.getResourcePrimKey(), page.getNodeId(), false);
+
+		for (WikiPage versionPage : versionPages) {
+			versionPage.setTitle(trashTitle);
+
+			wikiPagePersistence.update(versionPage);
 		}
 
 		WikiPageResource pageResource =
@@ -1288,15 +1288,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String title = TrashUtil.getOriginalTitle(page.getTitle());
 
-		List<WikiPage> versionPages = wikiPagePersistence.findByR_N_H(
-			page.getResourcePrimKey(), page.getNodeId(), false);
-
-		for (WikiPage versionPage : versionPages) {
-			versionPage.setTitle(title);
-
-			wikiPagePersistence.update(versionPage);
-		}
-
 		List<WikiPage> redirectPages = wikiPagePersistence.findByN_R(
 			page.getNodeId(), page.getTitle());
 
@@ -1304,6 +1295,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			redirectPage.setRedirectTitle(title);
 
 			wikiPagePersistence.update(redirectPage);
+		}
+
+		List<WikiPage> versionPages = wikiPagePersistence.findByR_N_H(
+			page.getResourcePrimKey(), page.getNodeId(), false);
+
+		for (WikiPage versionPage : versionPages) {
+			versionPage.setTitle(title);
+
+			wikiPagePersistence.update(versionPage);
 		}
 
 		WikiPageResource pageResource =
