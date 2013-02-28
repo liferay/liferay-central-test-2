@@ -248,7 +248,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 					layoutSet.getGroupId());
 
 				if (group.isGuest() && friendlyURL.equals(StringPool.SLASH) &&
-						!layoutSet.isPrivateLayout()) {
+					!layoutSet.isPrivateLayout()) {
 
 					String homeURL = PortalUtil.getRelativeHomeURL(request);
 
