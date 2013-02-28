@@ -23,14 +23,12 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
-import com.liferay.portal.upgrade.v6_2_0.util.MBThreadFlagTable;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.RSSUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.portlet.PortletPreferences;
 
@@ -43,24 +41,6 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 	@Override
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
-
-		// MBThreadFlag
-
-		try {
-			runSQL("alter table MBThreadFlag add groupId LONG");
-
-			runSQL("alter table MBThreadFlag add companyId LONG");
-
-			runSQL("alter table MBThreadFlag add userName VARCHAR(75) null");
-
-			runSQL("alter table MBThreadFlag add createdDate DATE null");
-		}
-		catch (SQLException sqle) {
-			upgradeTable(
-				MBThreadFlagTable.TABLE_NAME, MBThreadFlagTable.TABLE_COLUMNS,
-				MBThreadFlagTable.TABLE_SQL_CREATE,
-				MBThreadFlagTable.TABLE_SQL_ADD_INDEXES);
-		}
 
 		updateMBThreadFlags();
 	}

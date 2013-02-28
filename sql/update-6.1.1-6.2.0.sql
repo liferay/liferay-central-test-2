@@ -380,6 +380,10 @@ update MBMessage set status = 2 where status = 9;
 alter table MBMessage drop column attachments;
 
 alter table MBThreadFlag add uuid_ VARCHAR(75) null;
+alter table MBThreadFlag add groupId LONG;
+alter table MBThreadFlag add companyId LONG;
+alter table MBThreadFlag add userName VARCHAR(75) null;
+alter table MBThreadFlag add createdDate DATE null;
 
 drop table OrgGroupPermission;
 
