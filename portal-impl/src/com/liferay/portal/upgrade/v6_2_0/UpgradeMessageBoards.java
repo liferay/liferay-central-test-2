@@ -80,7 +80,7 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		}
 	}
 
-	protected long[] getThreadArray(long threadId) throws Exception {
+	protected Object[] getThreadArray(long threadId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -99,14 +99,14 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 
-				return new long[] {groupId, companyId};
+				return new Object[] {groupId, companyId};
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to find message thread " + threadId);
+				_log.debug("Unable to find thread " + threadId);
 			}
 
-			return new long[] {0, 0};
+			return null;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -138,11 +138,15 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 				String userName = getUserName(userId);
 
-				long[] groupCompanyIdsArray = getThreadArray(threadId);
+				Object[] threadArray = getThreadArray(threadId);
+
+				if (threadArray == null) {
+					continue;
+				}
 
 				updateThreadFlag(
-					threadFlagId, groupCompanyIdsArray[0],
-					groupCompanyIdsArray[1], userName);
+					threadFlagId, (Long)threadArray[0], (Long)threadArray[1],
+					userName);
 			}
 		}
 		finally {
