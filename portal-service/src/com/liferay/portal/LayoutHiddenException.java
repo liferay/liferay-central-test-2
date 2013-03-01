@@ -17,27 +17,25 @@ package com.liferay.portal;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
+ * @deprecated
  */
-public class RequiredLayoutException extends PortalException {
+public class LayoutHiddenException extends PortalException {
 
-	public static final int AT_LEAST_ONE = 1;
-
-	public static final int FIRST_LAYOUT_TYPE = 3;
-
-	/**
-	 * @deprecated
-	 */
-	public static final int FIRST_LAYOUT_HIDDEN = 4;
-
-	public RequiredLayoutException(int type) {
-		_type = type;
+	public LayoutHiddenException() {
+		super();
 	}
 
-	public int getType() {
-		return _type;
+	public LayoutHiddenException(String msg) {
+		super(msg);
 	}
 
-	private int _type;
+	public LayoutHiddenException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public LayoutHiddenException(Throwable cause) {
+		super(cause);
+	}
 
 }
