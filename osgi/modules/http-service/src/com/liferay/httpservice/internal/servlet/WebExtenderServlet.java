@@ -176,34 +176,34 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 			PortletApp portletApp = portlet.getPortletApp();
 
 			servletContextName = portletApp.getServletContextName();
-		} else {
-			if (requestURI != null) {
-				String pathContext = PortalUtil.getPathContext();
-				String requestURITemp = requestURI;
+		}
+		else if (requestURI != null) {
+			servletContextName = requestURI;
 
-				if (Validator.isNotNull(pathContext) &&
-					requestURITemp.startsWith(pathContext)) {
+			String contextPath = PortalUtil.getPathContext();
 
-					requestURITemp = requestURITemp.substring(
-						pathContext.length());
-				}
+			if (Validator.isNotNull(contextPath) &&
+				servletContextName.startsWith(contextPath)) {
 
-				if (requestURITemp.startsWith(Portal.PATH_MODULE)) {
-					requestURITemp = requestURITemp.substring(
-						Portal.PATH_MODULE.length());
-				}
+				servletContextName = servletContextName.substring(
+					contextPath.length());
+			}
 
-				servletContextName = requestURITemp;
+			String modulePath = Portal.PATH_MODULE;
 
-				if (servletContextName.startsWith(StringPool.SLASH)) {
-					servletContextName = servletContextName.substring(1);
-				}
+			if (servletContextName.startsWith(modulePath)) {
+				servletContextName = servletContextName.substring(
+					modulePath.length());
+			}
 
-				int index = servletContextName.indexOf(StringPool.SLASH);
+			if (servletContextName.startsWith(StringPool.SLASH)) {
+				servletContextName = servletContextName.substring(1);
+			}
 
-				if (index != -1) {
-					servletContextName = servletContextName.substring(0, index);
-				}
+			int index = servletContextName.indexOf(StringPool.SLASH);
+
+			if (index != -1) {
+				servletContextName = servletContextName.substring(0, index);
 			}
 		}
 
