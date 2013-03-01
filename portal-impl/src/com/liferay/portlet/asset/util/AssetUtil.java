@@ -176,27 +176,27 @@ public class AssetUtil {
 						AssetCategoryLocalServiceUtil.fetchAssetCategory(
 							assetCategoryId);
 
-					if (assetCategory != null) {
-						long assetVocabularyId =
-							assetCategory.getVocabularyId();
+					if (assetCategory == null) {
+						continue;
+					}
 
-						if (assetVocabularyAssetCategoryIds.containsKey(
-								assetVocabularyId)) {
+					long assetVocabularyId = assetCategory.getVocabularyId();
 
-							String assetCategoryIds =
-								assetVocabularyAssetCategoryIds.get(
-									assetVocabularyId);
+					if (assetVocabularyAssetCategoryIds.containsKey(
+							assetVocabularyId)) {
 
-							assetVocabularyAssetCategoryIds.put(
-								assetVocabularyId,
-								assetCategoryIds + StringPool.COMMA +
-									assetCategoryId);
-						}
-						else {
-							assetVocabularyAssetCategoryIds.put(
-								assetVocabularyId, String.valueOf
-									(assetCategoryId));
-						}
+						String assetCategoryIds =
+							assetVocabularyAssetCategoryIds.get(
+								assetVocabularyId);
+
+						assetVocabularyAssetCategoryIds.put(
+							assetVocabularyId,
+							assetCategoryIds + StringPool.COMMA +
+								assetCategoryId);
+					}
+					else {
+						assetVocabularyAssetCategoryIds.put(
+							assetVocabularyId, String.valueOf(assetCategoryId));
 					}
 				}
 

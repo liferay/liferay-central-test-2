@@ -32,7 +32,6 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.portlet.asset.service.permission.AssetEntryPermission;
@@ -238,18 +237,18 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		List<Long> viewableCategoryIds = new ArrayList<Long>();
 
 		for (long categoryId : categoryIds) {
-			AssetCategory category =
-					AssetCategoryLocalServiceUtil.fetchCategory(categoryId);
+			AssetCategory category = assetCategoryPersistence.fetchByPrimaryKey(
+				categoryId);
 
 			if (category == null) {
 				continue;
 			}
 
-		if (AssetCategoryPermission.contains(getPermissionChecker(),
-			categoryId, ActionKeys.VIEW)) {
-			viewableCategoryIds.add(categoryId);
-			}
+			if (AssetCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
+				viewableCategoryIds.add(categoryId);
+			}
 		}
 
 		return ArrayUtil.toArray(
