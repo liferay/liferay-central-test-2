@@ -2155,9 +2155,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return layout;
 		}
 
-		Date now = new Date();
-
-		layout.setModifiedDate(now);
+		layout.setModifiedDate(new Date());
 		layout.setPriority(nextPriority);
 
 		layoutPersistence.update(layout);
@@ -2178,18 +2176,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		priority = 0;
 
 		for (Layout curLayout : layouts) {
-			int curOldPriority = curLayout.getPriority();
-
 			int curNextPriority = layoutLocalServiceHelper.getNextPriority(
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getParentLayoutId(),
 				curLayout.getSourcePrototypeLayoutUuid(), priority++);
 
-			if (curOldPriority == curNextPriority) {
+			if (curLayout.getPriority() == curNextPriority) {
 				continue;
 			}
 
-			curLayout.setModifiedDate(now);
+			curLayout.setModifiedDate(layout.getModifiedDate());
 			curLayout.setPriority(curNextPriority);
 
 			layoutPersistence.update(curLayout);
