@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.process.ProcessExecutor.ProcessContext;
 import com.liferay.portal.kernel.process.ProcessExecutor.ShutdownHook;
 import com.liferay.portal.kernel.process.log.ProcessOutputStream;
+import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -75,12 +76,17 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
 
 /**
  * @author Shuyang Zhou
  */
 public class ProcessExecutorTest {
+
+	@ClassRule
+	public static CodeCoverageAssertor codeCoverageAssertor =
+		new CodeCoverageAssertor();
 
 	@Before
 	public void setUp() throws Exception {
@@ -1052,6 +1058,12 @@ public class ProcessExecutorTest {
 		if (!Validator.isNull(agentLine)) {
 			arguments.add(agentLine);
 			arguments.add("-Djunit.cobertura.agent=" + agentLine);
+		}
+
+		boolean junitCodeCoverage = Boolean.getBoolean("junit.code.coverage");
+
+		if (junitCodeCoverage) {
+			arguments.add("-Djunit.code.coverage=true");
 		}
 
 		boolean junitDebug = Boolean.getBoolean("junit.debug");
