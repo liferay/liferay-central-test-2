@@ -131,20 +131,18 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-			String baseDir, int maxGroupsCount, int maxJournalArticleSize,
-			int maxUserToGroupCount, int maxBlogsEntryCount,
-			int maxMBCategoryCount, int maxMBThreadCount,
-			int maxMBMessageCountPerThread)
+			String baseDir, int maxBlogsEntryCount, int maxGroupsCount,
+			int maxJournalArticleSize, int maxMBCategoryCount,
+			int maxMBThreadCount, int maxMBMessageCount,
+			int maxUserToGroupCount)
 		throws Exception {
 
 		_baseDir = baseDir;
-		_maxGroupsCount = maxGroupsCount;
-		_maxUserToGroupCount = maxUserToGroupCount;
 		_maxBlogsEntryCount = maxBlogsEntryCount;
-
+		_maxGroupsCount = maxGroupsCount;
 		_maxMBMessageCount =
-			maxMBCategoryCount * maxMBThreadCount *
-			maxMBMessageCountPerThread;
+			maxMBCategoryCount * maxMBThreadCount * maxMBMessageCount;
+		_maxUserToGroupCount = maxUserToGroupCount;
 
 		_counter = new SimpleCounter(_maxGroupsCount + 1);
 		_futureDateCounter = new SimpleCounter();
@@ -359,7 +357,7 @@ public class DataFactory {
 		_groups = new ArrayList<Group>(_maxGroupsCount);
 
 		for (int i = 1; i <= _maxGroupsCount; i++) {
-			String name = "community" + Integer.toString(i);
+			String name = "Site " + i;
 
 			Group group = newGroup(i, groupClassNameId, i, name, name, true);
 
@@ -532,32 +530,6 @@ public class DataFactory {
 		blogsStatsUser.setLastPostDate(new Date());
 
 		return blogsStatsUser;
-	}
-
-	public List<Layout> newCommonLayouts(long groupId) {
-		List<Layout> layouts = new ArrayList<Layout>();
-
-		Layout layout = newLayout(groupId, "welcome", "58,", "47,");
-
-		layouts.add(layout);
-
-		layout = newLayout(groupId, "blogs", "", "33,");
-
-		layouts.add(layout);
-
-		layout = newLayout(groupId, "document_library", "", "20,");
-
-		layouts.add(layout);
-
-		layout = newLayout(groupId, "forums", "", "19,");
-
-		layouts.add(layout);
-
-		layout = newLayout(groupId, "wiki", "", "36,");
-
-		layouts.add(layout);
-
-		return layouts;
 	}
 
 	public Contact newContact(User user) {
@@ -812,7 +784,7 @@ public class DataFactory {
 	public Group newGroup(User user) throws Exception {
 		return newGroup(
 			_counter.get(), getUserClassNameId(), user.getUserId(),
-			Long.toString(user.getUserId()), user.getScreenName(), false);
+			String.valueOf(user.getUserId()), user.getScreenName(), false);
 	}
 
 	public IntegerWrapper newInteger() {
@@ -856,16 +828,6 @@ public class DataFactory {
 			_layoutCounters.put(groupId, simpleCounter);
 		}
 
-		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
-
-		typeSettingsProperties.setProperty(
-			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, "2_columns_ii");
-		typeSettingsProperties.setProperty("column-1", column1);
-		typeSettingsProperties.setProperty("column-2", column2);
-
-		String typeSettings = StringUtil.replace(
-			typeSettingsProperties.toString(), "\n", "\\n");
-
 		Layout layout = new LayoutImpl();
 
 		layout.setUuid(SequentialUUID.generate());
@@ -879,16 +841,29 @@ public class DataFactory {
 			"<?xml version=\"1.0\"?><root><name>" + name + "</name></root>");
 		layout.setType(LayoutConstants.TYPE_PORTLET);
 		layout.setFriendlyURL(StringPool.FORWARD_SLASH + name);
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		typeSettingsProperties.setProperty(
+			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, "2_columns_ii");
+		typeSettingsProperties.setProperty("column-1", column1);
+		typeSettingsProperties.setProperty("column-2", column2);
+
+		String typeSettings = StringUtil.replace(
+			typeSettingsProperties.toString(), "\n", "\\n");
+
 		layout.setTypeSettings(typeSettings);
 
 		return layout;
 	}
 
-	public List<LayoutSet> newLayoutSets(long groupId, int pageCount) {
+	public List<LayoutSet> newLayoutSets(
+		long groupId, int publicLayoutSetPageCount) {
+
 		List<LayoutSet> layoutSets = new ArrayList<LayoutSet>(2);
 
 		layoutSets.add(newLayoutSet(groupId, true, 0));
-		layoutSets.add(newLayoutSet(groupId, false, pageCount));
+		layoutSets.add(newLayoutSet(groupId, false, publicLayoutSetPageCount));
 
 		return layoutSets;
 	}
@@ -990,6 +965,18 @@ public class DataFactory {
 		portletPreferences.setPreferences(preferences);
 
 		return portletPreferences;
+	}
+
+	public List<Layout> newPublicLayouts(long groupId) {
+		List<Layout> layouts = new ArrayList<Layout>();
+
+		layouts.add(newLayout(groupId, "welcome", "58,", "47,"));
+		layouts.add(newLayout(groupId, "blogs", "", "33,"));
+		layouts.add(newLayout(groupId, "document_library", "", "20,"));
+		layouts.add(newLayout(groupId, "forums", "", "19,"));
+		layouts.add(newLayout(groupId, "wiki", "", "36,"));
+
+		return layouts;
 	}
 
 	public List<ResourcePermission> newResourcePermission(
@@ -1103,16 +1090,16 @@ public class DataFactory {
 
 		Group group = new GroupImpl();
 
+		group.setGroupId(groupId);
 		group.setCompanyId(_companyId);
 		group.setCreatorUserId(_sampleUserId);
 		group.setClassNameId(classNameId);
+		group.setClassPK(classPK);
 		group.setTreePath(group.buildTreePath());
 		group.setName(name);
 		group.setFriendlyURL(StringPool.FORWARD_SLASH + friendlyURL);
 		group.setSite(site);
 		group.setActive(true);
-		group.setGroupId(groupId);
-		group.setClassPK(classPK);
 
 		return group;
 	}

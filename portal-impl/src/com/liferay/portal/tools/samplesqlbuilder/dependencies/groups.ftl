@@ -5,7 +5,7 @@ ${sampleSQLBuilder.insertGroup(dataFactory.guestGroup, [dataFactory.newLayout(da
 <#list dataFactory.groups as group>
 	<#assign groupId = group.groupId>
 
-	<#assign publicLayouts = dataFactory.newCommonLayouts(groupId)>
+	<#assign publicLayouts = dataFactory.newPublicLayouts(groupId)>
 
 	<#include "users.ftl">
 
