@@ -564,7 +564,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	/**
-	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 * @deprecated {@link #isApproved}
 	 */
 	public boolean getApproved() {
 		return isApproved();
