@@ -338,8 +338,8 @@ public class SeleniumBuilderContext {
 	}
 
 	private String _getSimpleClassName(String fileName, String classSuffix) {
-		return
-			_seleniumBuilderFileUtil.getSimpleClassName(fileName, classSuffix);
+		return _seleniumBuilderFileUtil.getSimpleClassName(
+			fileName, classSuffix);
 	}
 
 	private int _getTargetCount(Element rootElement) throws Exception {
