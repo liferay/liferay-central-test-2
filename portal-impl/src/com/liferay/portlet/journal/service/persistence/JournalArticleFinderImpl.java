@@ -70,11 +70,11 @@ public class JournalArticleFinderImpl
 	public static final String FIND_BY_REVIEW_DATE =
 		JournalArticleFinder.class.getName() + ".findByReviewDate";
 
-	public static final String FIND_BY_G_F =
-		JournalArticleFinder.class.getName() + ".findByG_F";
-
 	public static final String FIND_BY_R_D =
 		JournalArticleFinder.class.getName() + ".findByR_D";
+
+	public static final String FIND_BY_G_F =
+		JournalArticleFinder.class.getName() + ".findByG_F";
 
 	public static final String FIND_BY_G_U_C =
 		JournalArticleFinder.class.getName() + ".findByG_U_C";
@@ -554,13 +554,6 @@ public class JournalArticleFinderImpl
 		}
 	}
 
-	public List<JournalArticle> findByG_F(
-			long groupId, List<Long> folderIds, QueryDefinition queryDefinition)
-		throws SystemException {
-
-		return doFindByG_F(groupId, folderIds, queryDefinition, false);
-	}
-
 	public JournalArticle findByR_D(long resourcePrimKey, Date displayDate)
 		throws NoSuchArticleException, SystemException {
 
@@ -606,6 +599,13 @@ public class JournalArticleFinderImpl
 		sb.append("}");
 
 		throw new NoSuchArticleException(sb.toString());
+	}
+
+	public List<JournalArticle> findByG_F(
+			long groupId, List<Long> folderIds, QueryDefinition queryDefinition)
+		throws SystemException {
+
+		return doFindByG_F(groupId, folderIds, queryDefinition, false);
 	}
 
 	public List<JournalArticle> findByG_U_C(
