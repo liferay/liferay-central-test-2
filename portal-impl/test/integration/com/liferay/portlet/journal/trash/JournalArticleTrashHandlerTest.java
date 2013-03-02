@@ -183,10 +183,9 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			primaryKey);
 
-		String title = "Content: Enterprise. Open Source. For Life.";
-
 		return JournalTestUtil.updateArticle(
-			article, title, article.getContent());
+			article, "Content: Enterprise. Open Source. For Life.",
+			article.getContent());
 	}
 
 	private static final int _FOLDER_NAME_MAX_LENGTH = 100;
