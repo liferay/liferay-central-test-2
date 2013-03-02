@@ -77,7 +77,7 @@ DDLRecordVersion latestRecordVersion = record.getLatestRecordVersion();
 	%>
 
 	<aui:button-row>
-		<c:if test="<%= DDLRecordSetPermission.contains(permissionChecker, record.getRecordSet(), ActionKeys.UPDATE) && Validator.equals(version, latestRecordVersion.getVersion()) %>">
+		<c:if test="<%= DDLRecordSetPermission.contains(permissionChecker, record.getRecordSet(), ActionKeys.UPDATE) && version.equals(latestRecordVersion.getVersion()) %>">
 			<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
