@@ -277,7 +277,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public DLFolder deleteFolder(long folderId, boolean includeTrashedEntries)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = getFolder(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		return deleteFolder(dlFolder, includeTrashedEntries);
 	}
