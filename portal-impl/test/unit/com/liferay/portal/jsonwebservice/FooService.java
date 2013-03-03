@@ -65,6 +65,17 @@ public class FooService {
 		return fooData;
 	}
 
+	public static FooDataPage getFooDataPage() {
+		FooDataAltImpl fooDataAltImpl = new FooDataAltImpl();
+
+		fooDataAltImpl.setArray(9, 5, 7);
+		fooDataAltImpl.setHeight(8);
+		fooDataAltImpl.setId(2);
+		fooDataAltImpl.setName("life");
+
+		return new FooDataPage(fooDataAltImpl, getFooDatas(), 3);
+	}
+
 	public static List<FooData> getFooDatas() {
 		List<FooData> fooDataList = new ArrayList<FooData>();
 
@@ -73,17 +84,6 @@ public class FooService {
 		fooDataList.add(getFooData(3));
 
 		return fooDataList;
-	}
-
-	public static FooDataPage getFooPage() {
-		FooDataAltImpl fooData = new FooDataAltImpl();
-
-		fooData.setArray(9, 5, 7);
-		fooData.setHeight(8);
-		fooData.setId(2);
-		fooData.setName("life");
-
-		return new FooDataPage(fooData, getFooDatas(), 3);
 	}
 
 	public static String hello() {

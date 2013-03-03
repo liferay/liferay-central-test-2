@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -42,7 +43,9 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 	@Test
 	public void testAddVariableToInnerProperty() throws Exception {
 		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> pParams = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> xxx2Params = new LinkedHashMap<String, Object>();
 
 		xxx2Params.put("@userId", "$p.page");
@@ -50,18 +53,18 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		pParams.put("data.$XXX2 = /foo/hello-world", xxx2Params);
 
-		commandMap.put("$p = /foo/get-foo-page", pParams);
+		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		String json = invoke(commandMap);
-		String expected = prepareExpectedResult(false, false, false);
-
-		Assert.assertEquals(expected, json);
+		Assert.assertEquals(
+			prepareExpectedResult(false, false, false), invoke(commandMap));
 	}
 
 	@Test
 	public void testAddVariableToRootAndInnerProperty() throws Exception {
 		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> pParams = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> xxx1Params = new LinkedHashMap<String, Object>();
 
 		xxx1Params.put("@userId", "$p.page");
@@ -76,43 +79,43 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		pParams.put("data.$XXX2 = /foo/hello-world", xxx2Params);
 
-		commandMap.put("$p = /foo/get-foo-page", pParams);
+		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		String json = invoke(commandMap);
-		String expected = prepareExpectedResult(true, false, false);
-
-		Assert.assertEquals(expected, json);
+		Assert.assertEquals(
+			prepareExpectedResult(true, false, false), invoke(commandMap));
 	}
 
 	@Test
 	public void testAddVariableToRootInnerAndListProperty() throws Exception {
 		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> pParams = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> xxx1Params = new LinkedHashMap<String, Object>();
-		Map<String, Object> xxx2Params = new LinkedHashMap<String, Object>();
-		Map<String, Object> xxx3Params = new LinkedHashMap<String, Object>();
 
 		xxx1Params.put("@userId", "$p.page");
 		xxx1Params.put("worldName", "galaxy");
 
 		pParams.put("$XXX1 = /foo/hello-world", xxx1Params);
 
+		Map<String, Object> xxx2Params = new LinkedHashMap<String, Object>();
+
 		xxx2Params.put("@userId", "$p.page");
 		xxx2Params.put("worldName", "star");
 
 		pParams.put("data.$XXX2 = /foo/hello-world", xxx2Params);
+
+		Map<String, Object> xxx3Params = new LinkedHashMap<String, Object>();
 
 		xxx3Params.put("@userId", "$p.page");
 		xxx3Params.put("worldName", "pulsar");
 
 		pParams.put("list.$XXX3 = /foo/hello-world", xxx3Params);
 
-		commandMap.put("$p = /foo/get-foo-page", pParams);
+		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		String json = invoke(commandMap);
-		String expected = prepareExpectedResult(true, true, false);
-
-		Assert.assertEquals(expected, json);
+		Assert.assertEquals(
+			prepareExpectedResult(true, true, false), invoke(commandMap));
 	}
 
 	@Test
@@ -120,32 +123,34 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 		throws Exception {
 
 		Map<String, Object> commandMap = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> pParams = new LinkedHashMap<String, Object>();
+
 		Map<String, Object> xxx1Params = new LinkedHashMap<String, Object>();
-		Map<String, Object> xxx2Params = new LinkedHashMap<String, Object>();
-		Map<String, Object> xxx3Params = new LinkedHashMap<String, Object>();
 
 		xxx1Params.put("@userId", "$p.page");
 		xxx1Params.put("worldName", "galaxy");
 
 		pParams.put("$XXX1 = /foo/hello-world", xxx1Params);
 
+		Map<String, Object> xxx2Params = new LinkedHashMap<String, Object>();
+
 		xxx2Params.put("@userId", "$p.page");
 		xxx2Params.put("worldName", "star");
 
 		pParams.put("data.$XXX2 = /foo/hello-world", xxx2Params);
+
+		Map<String, Object> xxx3Params = new LinkedHashMap<String, Object>();
 
 		xxx3Params.put("@userId", "$p.list.id");
 		xxx3Params.put("worldName", "pulsar");
 
 		pParams.put("list.$XXX3 = /foo/hello-world", xxx3Params);
 
-		commandMap.put("$p = /foo/get-foo-page", pParams);
+		commandMap.put("$p = /foo/get-foo-data-page", pParams);
 
-		String json = invoke(commandMap);
-		String expected = prepareExpectedResult(true, true, true);
-
-		Assert.assertEquals(expected, json);
+		Assert.assertEquals(
+			prepareExpectedResult(true, true, true), invoke(commandMap));
 	}
 
 	protected String invoke(Object command) throws Exception {
@@ -153,10 +158,9 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		JSONWebServiceAction jsonWebServiceAction = prepareInvokerAction(json);
 
-		Object result = jsonWebServiceAction.invoke();
-
 		JSONWebServiceInvokerAction.InvokerResult invokerResult =
-			(JSONWebServiceInvokerAction.InvokerResult)result;
+			(JSONWebServiceInvokerAction.InvokerResult)
+				jsonWebServiceAction.invoke();
 
 		return invokerResult.toJSONString();
 	}
@@ -173,60 +177,62 @@ public class JSONWebServiceInvokerInnerTest extends BaseJSONWebServiceTestCase {
 
 		resultMap.put("page", 3);
 
-		LinkedHashMap<String, Object> resultData =
-			new LinkedHashMap<String, Object>();
+		Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-		resultData.put("id", 2);
-		resultData.put("height", 8);
-		resultData.put("XXX2", "Welcome 3 to star");
-		resultData.put("name", "life");
-		resultData.put("array", new int[] {9, 5, 7});
+		data.put("id", 2);
+		data.put("height", 8);
+		data.put("XXX2", "Welcome 3 to star");
+		data.put("name", "life");
+		data.put("array", new int[] {9, 5, 7});
 
-		resultMap.put("data", resultData);
+		resultMap.put("data", data);
 
-		ArrayList<LinkedHashMap<String, Object>> resultList =
-			new ArrayList<LinkedHashMap<String, Object>>();
+		List<Map<String, Object>> resultList =
+			new ArrayList<Map<String, Object>>();
 
-		LinkedHashMap<String, Object> resultElement =
+		LinkedHashMap<String, Object> resultListElement =
 			new LinkedHashMap<String, Object>();
 
 		if (xxx3) {
-			resultElement.put("id", 1);
-			resultElement.put("height", 177);
-			resultElement.put("XXX3", "Welcome 3 to pulsar");
+			resultListElement.put("id", 1);
+			resultListElement.put("height", 177);
+			resultListElement.put("XXX3", "Welcome 3 to pulsar");
 		}
 		else {
-			resultElement.put("height", 177);
-			resultElement.put("id", 1);
+			resultListElement.put("height", 177);
+			resultListElement.put("id", 1);
 		}
 
-		resultElement.put("name", "John Doe");
-		resultElement.put("value", "foo!");
+		resultListElement.put("name", "John Doe");
+		resultListElement.put("value", "foo!");
 
 		if (index) {
-			resultElement.put("XXX3", "Welcome 1 to pulsar");
+			resultListElement.put("XXX3", "Welcome 1 to pulsar");
 		}
 
-		resultList.add(resultElement);
+		resultList.add(resultListElement);
 
-		resultElement = (LinkedHashMap<String, Object>)resultElement.clone();
-		resultElement.put("id", 2);
+		resultListElement =
+			(LinkedHashMap<String, Object>)resultListElement.clone();
+
+		resultListElement.put("id", 2);
 
 		if (index) {
-			resultElement.put("XXX3", "Welcome 2 to pulsar");
+			resultListElement.put("XXX3", "Welcome 2 to pulsar");
 		}
 
-		resultList.add(resultElement);
+		resultList.add(resultListElement);
 
-		resultElement = (LinkedHashMap<String, Object>)resultElement.clone();
+		resultListElement =
+			(LinkedHashMap<String, Object>)resultListElement.clone();
 
-		resultElement.put("id", 3);
+		resultListElement.put("id", 3);
 
 		if (index) {
-			resultElement.put("XXX3", "Welcome 3 to pulsar");
+			resultListElement.put("XXX3", "Welcome 3 to pulsar");
 		}
 
-		resultList.add(resultElement);
+		resultList.add(resultListElement);
 
 		resultMap.put("list", resultList);
 

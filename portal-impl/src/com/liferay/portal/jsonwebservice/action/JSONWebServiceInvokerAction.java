@@ -217,40 +217,40 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 		int index = name.indexOf(".$");
 
-		String innerBeanName = name.substring(0, index);
+		String innerObjectName = name.substring(0, index);
 
-		if (innerBeanName.contains(StringPool.PERIOD)) {
+		if (innerObjectName.contains(StringPool.PERIOD)) {
 			throw new IllegalArgumentException(
 				"Inner properties with more than 1 level are not supported");
 		}
 
-		Object innerObject = map.get(innerBeanName);
+		Object innerObject = map.get(innerObjectName);
 
 		String innerPropertyName = name.substring(index + 2);
 
 		if (innerObject instanceof List) {
-			List<Object> innerList = (List)innerObject;
+			List<Object> innerList = (List<Object>)innerObject;
 
 			List<Object> newInnerList = new ArrayList<Object>(innerList.size());
 
 			for (Object innerListElement : innerList) {
 				Map<String, Object> newInnerListElement = _convertObjectToMap(
-					statement, innerListElement, innerBeanName);
+					statement, innerListElement, innerObjectName);
 
 				newInnerListElement.put(innerPropertyName, variableResult);
 
 				newInnerList.add(newInnerListElement);
 			}
 
-			map.put(innerBeanName, newInnerList);
+			map.put(innerObjectName, newInnerList);
 		}
 		else {
 			Map<String, Object> innerMap = _convertObjectToMap(
-				statement, innerObject, innerBeanName);
+				statement, innerObject, innerObjectName);
 
 			innerMap.put(innerPropertyName, variableResult);
 
-			map.put(innerBeanName, innerMap);
+			map.put(innerObjectName, innerMap);
 		}
 
 		return map;
@@ -593,10 +593,9 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 					Map<String, Object> parameterMap =
 						statement.getParameterMap();
 
-					Object target = statement._pushTarget;
-
 					Object propertyValue = BeanUtil.getDeclaredProperty(
-						target, value.substring(pushedName.length()));
+						statement._pushTarget,
+						value.substring(pushedName.length()));
 
 					parameterMap.put(flag.getName(), propertyValue);
 				}
@@ -654,9 +653,8 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			if (_pushTarget != null) {
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		public Object push(Object result) {
