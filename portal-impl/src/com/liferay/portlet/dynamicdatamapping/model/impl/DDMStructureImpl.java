@@ -307,7 +307,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return fieldsMap;
 	}
 
-	public String getWebDavURL(ThemeDisplay themeDisplay, String webDavToken) {
+	public String getWebDavURL(ThemeDisplay themeDisplay, String webDAVToken) {
 		StringBundler sb = new StringBundler(11);
 
 		boolean secure = false;
@@ -332,7 +332,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		sb.append(group.getFriendlyURL());
 
 		sb.append(StringPool.SLASH);
-		sb.append(webDavToken);
+		sb.append(webDAVToken);
 		sb.append(StringPool.SLASH);
 		sb.append("Structures");
 		sb.append(StringPool.SLASH);
