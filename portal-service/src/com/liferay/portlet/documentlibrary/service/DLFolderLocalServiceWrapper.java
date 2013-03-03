@@ -552,8 +552,7 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService,
 	}
 
 	public boolean hasFolderLock(long userId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderLocalService.hasFolderLock(userId, folderId);
 	}
 

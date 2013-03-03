@@ -566,8 +566,7 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static boolean hasFolderLock(long userId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasFolderLock(userId, folderId);
 	}
 
