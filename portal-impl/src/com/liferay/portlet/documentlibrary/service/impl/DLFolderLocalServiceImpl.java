@@ -593,7 +593,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public boolean hasFolderLock(long userId, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return lockLocalService.hasLock(
 			userId, DLFolder.class.getName(), folderId);
