@@ -664,7 +664,6 @@ public class EditLayoutsAction extends PortletAction {
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 
-		long targetPlid = ParamUtil.getLong(actionRequest, "selPlid");
 		long layoutPrototypeId = ParamUtil.getLong(
 			actionRequest, "layoutPrototypeId");
 
@@ -674,12 +673,13 @@ public class EditLayoutsAction extends PortletAction {
 
 		SitesUtil.setMergeFailCount(layoutPrototype, 0);
 
-		Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetPlid);
+		long selPlid = ParamUtil.getLong(actionRequest, "selPlid");
 
-		SitesUtil.resetPrototype(targetLayout);
+		Layout selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 
-		SitesUtil.mergeLayoutPrototypeLayout(
-			targetLayout.getGroup(), targetLayout);
+		SitesUtil.resetPrototype(selLayout);
+
+		SitesUtil.mergeLayoutPrototypeLayout(selLayout.getGroup(), selLayout);
 
 		layoutPrototype = LayoutPrototypeServiceUtil.getLayoutPrototype(
 			layoutPrototypeId);

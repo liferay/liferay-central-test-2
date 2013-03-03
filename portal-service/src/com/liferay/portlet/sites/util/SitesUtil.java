@@ -161,7 +161,7 @@ public class SitesUtil {
 	}
 
 	public static int getMergeFailCount(LayoutSetPrototype layoutSetPrototype)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return getSites().getMergeFailCount(layoutSetPrototype);
 	}

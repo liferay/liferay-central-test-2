@@ -641,10 +641,8 @@ public class SitesImpl implements Sites {
 		UnicodeProperties prototypeTypeSettingsProperties =
 			layoutPrototypeLayout.getTypeSettingsProperties();
 
-		int mergeFailCount = GetterUtil.getInteger(
+		return GetterUtil.getInteger(
 			prototypeTypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
-
-		return mergeFailCount;
 	}
 
 	public int getMergeFailCount(LayoutSetPrototype layoutSetPrototype)
@@ -656,10 +654,8 @@ public class SitesImpl implements Sites {
 		UnicodeProperties layoutSetPrototypeSettingsProperties =
 			layoutSetPrototypeLayoutSet.getSettingsProperties();
 
-		int mergeFailCount = GetterUtil.getInteger(
+		return GetterUtil.getInteger(
 			layoutSetPrototypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
-
-		return mergeFailCount;
 	}
 
 	public void importLayoutSetPrototype(

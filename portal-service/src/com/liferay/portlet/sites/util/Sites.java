@@ -185,7 +185,7 @@ public interface Sites {
 		throws PortalException, SystemException;
 
 	public void resetPrototype(LayoutSet layoutSet)
-			throws PortalException, SystemException;
+		throws PortalException, SystemException;
 
 	public void setMergeFailCount(
 			LayoutPrototype layoutPrototype, int newMergeFailCount)

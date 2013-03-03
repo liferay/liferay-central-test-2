@@ -27,8 +27,6 @@ import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -291,9 +289,6 @@ public class EditGroupAction extends PortletAction {
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 
-		long targetGroupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayoutSet = ParamUtil.getBoolean(
-			actionRequest, "privateLayoutSet");
 		long layoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "layoutSetPrototypeId");
 
@@ -303,14 +298,18 @@ public class EditGroupAction extends PortletAction {
 
 		SitesUtil.setMergeFailCount(layoutSetPrototype, 0);
 
-		LayoutSet targetLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-			targetGroupId, privateLayoutSet);
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayoutSet = ParamUtil.getBoolean(
+			actionRequest, "privateLayoutSet");
 
-		SitesUtil.resetPrototype(targetLayoutSet);
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			groupId, privateLayoutSet);
 
-		Group targetGroup = GroupLocalServiceUtil.getGroup(targetGroupId);
+		SitesUtil.resetPrototype(layoutSet);
 
-		SitesUtil.mergeLayoutSetPrototypeLayouts(targetGroup, targetLayoutSet);
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
 
 		layoutSetPrototype =
 			LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(
@@ -742,7 +741,5 @@ public class EditGroupAction extends PortletAction {
 	}
 
 	private static final int _LAYOUT_SET_VISIBILITY_PRIVATE = 1;
-
-	private static Log _log = LogFactoryUtil.getLog(EditGroupAction.class);
 
 }

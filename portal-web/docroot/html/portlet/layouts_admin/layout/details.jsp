@@ -138,15 +138,13 @@ StringBuilder friendlyURLBase = new StringBuilder();
 
 		<%
 		LayoutPrototype layoutPrototype = LayoutPrototypeLocalServiceUtil.getLayoutPrototypeByUuidAndCompanyId(selLayout.getLayoutPrototypeUuid(), company.getCompanyId());
-
-		boolean layoutPrototypeLinkEnabled = selLayout.isLayoutPrototypeLinkEnabled();
 		%>
 
 		<aui:input name="layoutPrototypeUuid" type="hidden" value="<%= selLayout.getLayoutPrototypeUuid() %>" />
 
-		<aui:input label='<%= LanguageUtil.format(pageContext, "automatically-apply-changes-done-to-the-page-template-x", HtmlUtil.escape(layoutPrototype.getName(user.getLocale()))) %>' name="layoutPrototypeLinkEnabled" type="checkbox" value="<%= layoutPrototypeLinkEnabled %>" />
+		<aui:input label='<%= LanguageUtil.format(pageContext, "automatically-apply-changes-done-to-the-page-template-x", HtmlUtil.escape(layoutPrototype.getName(user.getLocale()))) %>' name="layoutPrototypeLinkEnabled" type="checkbox" value="<%= selLayout.isLayoutPrototypeLinkEnabled() %>" />
 
-		<div class='<%= layoutPrototypeLinkEnabled ? "" : "aui-helper-hidden" %>' id="<portlet:namespace/>layoutPrototypeMergeAlert">
+		<div class='<%= selLayout.isLayoutPrototypeLinkEnabled() ? "" : "aui-helper-hidden" %>' id="<portlet:namespace/>layoutPrototypeMergeAlert">
 
 			<%
 			request.setAttribute("edit_layout_prototype.jsp-layoutPrototype", layoutPrototype);
