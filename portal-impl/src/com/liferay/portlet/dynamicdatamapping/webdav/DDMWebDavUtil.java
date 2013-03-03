@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping.webdav;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
@@ -114,7 +115,7 @@ public class DDMWebDavUtil {
 						try {
 							ddmStructure =
 								DDMStructureLocalServiceUtil.getStructure(
-									Long.valueOf(typeId));
+									GetterUtil.getLong(typeId));
 						}
 						catch (NumberFormatException nfe) {
 							ddmStructure =
@@ -137,7 +138,7 @@ public class DDMWebDavUtil {
 						try {
 							ddmTemplate =
 								DDMTemplateLocalServiceUtil.getTemplate(
-									Long.valueOf(typeId));
+									GetterUtil.getLong(typeId));
 						}
 						catch (NumberFormatException nfe) {
 							ddmTemplate =
