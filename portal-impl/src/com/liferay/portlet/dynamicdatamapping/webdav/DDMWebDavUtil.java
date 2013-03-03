@@ -110,22 +110,22 @@ public class DDMWebDavUtil {
 
 				if (type.equals(TYPE_STRUCTURES)) {
 					try {
-						DDMStructure ddmStructure = null;
+						DDMStructure structure = null;
 
 						try {
-							ddmStructure =
+							structure =
 								DDMStructureLocalServiceUtil.getStructure(
 									GetterUtil.getLong(typeId));
 						}
 						catch (NumberFormatException nfe) {
-							ddmStructure =
+							structure =
 								DDMStructureLocalServiceUtil.getStructure(
 									webDavRequest.getGroupId(), classNameId,
 									typeId);
 						}
 
 						return DDMWebDavUtil.toResource(
-							webDavRequest, ddmStructure, rootPath, false);
+							webDavRequest, structure, rootPath, false);
 					}
 					catch (NoSuchStructureException nsse) {
 						return null;
@@ -133,22 +133,20 @@ public class DDMWebDavUtil {
 				}
 				else if (type.equals(TYPE_TEMPLATES)) {
 					try {
-						DDMTemplate ddmTemplate = null;
+						DDMTemplate template = null;
 
 						try {
-							ddmTemplate =
-								DDMTemplateLocalServiceUtil.getTemplate(
-									GetterUtil.getLong(typeId));
+							template = DDMTemplateLocalServiceUtil.getTemplate(
+								GetterUtil.getLong(typeId));
 						}
 						catch (NumberFormatException nfe) {
-							ddmTemplate =
-								DDMTemplateLocalServiceUtil.getTemplate(
-									webDavRequest.getGroupId(), classNameId,
-									typeId);
+							template = DDMTemplateLocalServiceUtil.getTemplate(
+								webDavRequest.getGroupId(), classNameId,
+								typeId);
 						}
 
 						return DDMWebDavUtil.toResource(
-							webDavRequest, ddmTemplate, rootPath, false);
+							webDavRequest, template, rootPath, false);
 					}
 					catch (NoSuchTemplateException nste) {
 						return null;
@@ -179,7 +177,7 @@ public class DDMWebDavUtil {
 			Object model = resource.getModel();
 
 			if (model instanceof DDMStructure) {
-				DDMStructure ddmStructure = (DDMStructure)model;
+				DDMStructure structure = (DDMStructure)model;
 
 				HttpServletRequest request =
 					webDavRequest.getHttpServletRequest();
@@ -187,17 +185,15 @@ public class DDMWebDavUtil {
 				String xsd = StringUtil.read(request.getInputStream());
 
 				DDMStructureServiceUtil.updateStructure(
-					ddmStructure.getGroupId(),
-					ddmStructure.getParentStructureId(),
-					ddmStructure.getClassNameId(),
-					ddmStructure.getStructureKey(), ddmStructure.getNameMap(),
-					ddmStructure.getDescriptionMap(), xsd,
+					structure.getGroupId(), structure.getParentStructureId(),
+					structure.getClassNameId(), structure.getStructureKey(),
+					structure.getNameMap(), structure.getDescriptionMap(), xsd,
 					new ServiceContext());
 
 				return HttpServletResponse.SC_CREATED;
 			}
 			else if (model instanceof DDMTemplate) {
-				DDMTemplate ddmTemplate = (DDMTemplate)model;
+				DDMTemplate template = (DDMTemplate)model;
 
 				HttpServletRequest request =
 					webDavRequest.getHttpServletRequest();
@@ -205,11 +201,11 @@ public class DDMWebDavUtil {
 				String script = StringUtil.read(request.getInputStream());
 
 				DDMTemplateServiceUtil.updateTemplate(
-					ddmTemplate.getTemplateId(), ddmTemplate.getNameMap(),
-					ddmTemplate.getDescriptionMap(), ddmTemplate.getType(),
-					ddmTemplate.getMode(), ddmTemplate.getLanguage(), script,
-					ddmTemplate.isCacheable(), ddmTemplate.isSmallImage(),
-					ddmTemplate.getSmallImageURL(), null, new ServiceContext());
+					template.getTemplateId(), template.getNameMap(),
+					template.getDescriptionMap(), template.getType(),
+					template.getMode(), template.getLanguage(), script,
+					template.isCacheable(), template.isSmallImage(),
+					template.getSmallImageURL(), null, new ServiceContext());
 
 				return HttpServletResponse.SC_CREATED;
 			}
