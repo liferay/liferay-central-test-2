@@ -38,39 +38,39 @@ import java.util.List;
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	@Override
-	public int deleteResource(WebDAVRequest webDavRequest)
+	public int deleteResource(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		return DDMWebDavUtil.deleteResource(
-			webDavRequest, getRootPath(), getToken(),
+			webDAVRequest, getRootPath(), getToken(),
 			PortalUtil.getClassNameId(JournalArticle.class));
 	}
 
-	public Resource getResource(WebDAVRequest webDavRequest)
+	public Resource getResource(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		return DDMWebDavUtil.getResource(
-			webDavRequest, getRootPath(), getToken(),
+			webDAVRequest, getRootPath(), getToken(),
 			PortalUtil.getClassNameId(JournalArticle.class));
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavRequest)
+	public List<Resource> getResources(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavRequest.getPathArray();
+			String[] pathArray = webDAVRequest.getPathArray();
 
 			if (pathArray.length == 2) {
-				return getFolders(webDavRequest);
+				return getFolders(webDAVRequest);
 			}
 			else if (pathArray.length == 3) {
 				String type = pathArray[2];
 
 				if (type.equals(DDMWebDavUtil.TYPE_STRUCTURES)) {
-					return getStructures(webDavRequest);
+					return getStructures(webDAVRequest);
 				}
 				else if (type.equals(DDMWebDavUtil.TYPE_TEMPLATES)) {
-					return getTemplates(webDavRequest);
+					return getTemplates(webDAVRequest);
 				}
 			}
 
@@ -82,42 +82,42 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	@Override
-	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
+	public int putResource(WebDAVRequest webDAVRequest) throws WebDAVException {
 		return DDMWebDavUtil.putResource(
-			webDavRequest, getRootPath(), getToken(),
+			webDAVRequest, getRootPath(), getToken(),
 			PortalUtil.getClassNameId(JournalArticle.class));
 	}
 
-	protected List<Resource> getFolders(WebDAVRequest webDavRequest)
+	protected List<Resource> getFolders(WebDAVRequest webDAVRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
 		resources.add(
 			DDMWebDavUtil.toResource(
-				webDavRequest, DDMWebDavUtil.TYPE_STRUCTURES, getRootPath(),
+				webDAVRequest, DDMWebDavUtil.TYPE_STRUCTURES, getRootPath(),
 				true));
 		resources.add(
 			DDMWebDavUtil.toResource(
-				webDavRequest, DDMWebDavUtil.TYPE_TEMPLATES, getRootPath(),
+				webDAVRequest, DDMWebDavUtil.TYPE_TEMPLATES, getRootPath(),
 				true));
 
 		return resources;
 	}
 
-	protected List<Resource> getStructures(WebDAVRequest webDavRequest)
+	protected List<Resource> getStructures(WebDAVRequest webDAVRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
 		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getStructures(
-				webDavRequest.getGroupId(),
+				webDAVRequest.getGroupId(),
 				PortalUtil.getClassNameId(JournalArticle.class));
 
 		for (DDMStructure ddmStructure : ddmStructures) {
 			Resource resource = DDMWebDavUtil.toResource(
-				webDavRequest, ddmStructure, getRootPath(), true);
+				webDAVRequest, ddmStructure, getRootPath(), true);
 
 			resources.add(resource);
 		}
@@ -125,20 +125,20 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return resources;
 	}
 
-	protected List<Resource> getTemplates(WebDAVRequest webDavRequest)
+	protected List<Resource> getTemplates(WebDAVRequest webDAVRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
 		List<DDMTemplate> ddmTemplates =
 			DDMTemplateLocalServiceUtil.getTemplatesByStructureClassNameId(
-				webDavRequest.getGroupId(),
+				webDAVRequest.getGroupId(),
 				PortalUtil.getClassNameId(JournalArticle.class),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		for (DDMTemplate ddmTemplate : ddmTemplates) {
 			Resource resource = DDMWebDavUtil.toResource(
-				webDavRequest, ddmTemplate, getRootPath(), true);
+				webDAVRequest, ddmTemplate, getRootPath(), true);
 
 			resources.add(resource);
 		}

@@ -45,13 +45,13 @@ public class DDMWebDavUtil {
 	public static final String TYPE_TEMPLATES = "Templates";
 
 	public static int deleteResource(
-			WebDAVRequest webDavRequest, String rootPath, String token,
+			WebDAVRequest webDAVRequest, String rootPath, String token,
 			long classNameId)
 		throws WebDAVException {
 
 		try {
 			Resource resource = getResource(
-				webDavRequest, rootPath, token, classNameId);
+				webDAVRequest, rootPath, token, classNameId);
 
 			if (resource == null) {
 				return HttpServletResponse.SC_NOT_FOUND;
@@ -87,22 +87,22 @@ public class DDMWebDavUtil {
 	}
 
 	public static Resource getResource(
-			WebDAVRequest webDavRequest, String rootPath, String token,
+			WebDAVRequest webDAVRequest, String rootPath, String token,
 			long classNameId)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavRequest.getPathArray();
+			String[] pathArray = webDAVRequest.getPathArray();
 
 			if (pathArray.length == 2) {
-				String path = rootPath + webDavRequest.getPath();
+				String path = rootPath + webDAVRequest.getPath();
 
 				return new BaseResourceImpl(path, StringPool.BLANK, token);
 			}
 			else if (pathArray.length == 3) {
 				String type = pathArray[2];
 
-				return toResource(webDavRequest, type, rootPath, false);
+				return toResource(webDAVRequest, type, rootPath, false);
 			}
 			else if (pathArray.length == 4) {
 				String type = pathArray[2];
@@ -120,12 +120,12 @@ public class DDMWebDavUtil {
 						catch (NumberFormatException nfe) {
 							structure =
 								DDMStructureLocalServiceUtil.getStructure(
-									webDavRequest.getGroupId(), classNameId,
+									webDAVRequest.getGroupId(), classNameId,
 									typeId);
 						}
 
 						return DDMWebDavUtil.toResource(
-							webDavRequest, structure, rootPath, false);
+							webDAVRequest, structure, rootPath, false);
 					}
 					catch (NoSuchStructureException nsse) {
 						return null;
@@ -141,12 +141,12 @@ public class DDMWebDavUtil {
 						}
 						catch (NumberFormatException nfe) {
 							template = DDMTemplateLocalServiceUtil.getTemplate(
-								webDavRequest.getGroupId(), classNameId,
+								webDAVRequest.getGroupId(), classNameId,
 								typeId);
 						}
 
 						return DDMWebDavUtil.toResource(
-							webDavRequest, template, rootPath, false);
+							webDAVRequest, template, rootPath, false);
 					}
 					catch (NoSuchTemplateException nste) {
 						return null;
@@ -162,13 +162,13 @@ public class DDMWebDavUtil {
 	}
 
 	public static int putResource(
-			WebDAVRequest webDavRequest, String rootPath, String token,
+			WebDAVRequest webDAVRequest, String rootPath, String token,
 			long classNameId)
 		throws WebDAVException {
 
 		try {
 			Resource resource = getResource(
-				webDavRequest, rootPath, token, classNameId);
+				webDAVRequest, rootPath, token, classNameId);
 
 			if (resource == null) {
 				return HttpServletResponse.SC_NOT_FOUND;
@@ -180,7 +180,7 @@ public class DDMWebDavUtil {
 				DDMStructure structure = (DDMStructure)model;
 
 				HttpServletRequest request =
-					webDavRequest.getHttpServletRequest();
+					webDAVRequest.getHttpServletRequest();
 
 				String xsd = StringUtil.read(request.getInputStream());
 
@@ -196,7 +196,7 @@ public class DDMWebDavUtil {
 				DDMTemplate template = (DDMTemplate)model;
 
 				HttpServletRequest request =
-					webDavRequest.getHttpServletRequest();
+					webDAVRequest.getHttpServletRequest();
 
 				String script = StringUtil.read(request.getInputStream());
 
@@ -222,10 +222,10 @@ public class DDMWebDavUtil {
 	}
 
 	public static Resource toResource(
-		WebDAVRequest webDavRequest, DDMStructure structure, String rootPath,
+		WebDAVRequest webDAVRequest, DDMStructure structure, String rootPath,
 		boolean appendPath) {
 
-		String parentPath = rootPath + webDavRequest.getPath();
+		String parentPath = rootPath + webDAVRequest.getPath();
 
 		String name = StringPool.BLANK;
 
@@ -237,10 +237,10 @@ public class DDMWebDavUtil {
 	}
 
 	public static Resource toResource(
-		WebDAVRequest webDavRequest, DDMTemplate template, String rootPath,
+		WebDAVRequest webDAVRequest, DDMTemplate template, String rootPath,
 		boolean appendPath) {
 
-		String parentPath = rootPath + webDavRequest.getPath();
+		String parentPath = rootPath + webDAVRequest.getPath();
 
 		String name = StringPool.BLANK;
 
@@ -252,10 +252,10 @@ public class DDMWebDavUtil {
 	}
 
 	public static Resource toResource(
-		WebDAVRequest webDavRequest, String type, String rootPath,
+		WebDAVRequest webDAVRequest, String type, String rootPath,
 		boolean appendPath) {
 
-		String parentPath = rootPath + webDavRequest.getPath();
+		String parentPath = rootPath + webDAVRequest.getPath();
 
 		String name = StringPool.BLANK;
 

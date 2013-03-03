@@ -32,31 +32,31 @@ public class ApplicationDisplayTemplateWebDAVStorageImpl
 	extends BaseWebDAVStorageImpl {
 
 	@Override
-	public int deleteResource(WebDAVRequest webDavRequest)
+	public int deleteResource(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		return DDMWebDavUtil.deleteResource(
-			webDavRequest, getRootPath(), getToken(), 0);
+			webDAVRequest, getRootPath(), getToken(), 0);
 	}
 
-	public Resource getResource(WebDAVRequest webDavRequest)
+	public Resource getResource(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		return DDMWebDavUtil.getResource(
-			webDavRequest, getRootPath(), getToken(), 0);
+			webDAVRequest, getRootPath(), getToken(), 0);
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavRequest)
+	public List<Resource> getResources(WebDAVRequest webDAVRequest)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavRequest.getPathArray();
+			String[] pathArray = webDAVRequest.getPathArray();
 
 			if (pathArray.length == 2) {
-				return getFolders(webDavRequest);
+				return getFolders(webDAVRequest);
 			}
 			else if (pathArray.length == 3) {
-				return getTemplates(webDavRequest);
+				return getTemplates(webDAVRequest);
 			}
 
 			return new ArrayList<Resource>();
@@ -67,36 +67,36 @@ public class ApplicationDisplayTemplateWebDAVStorageImpl
 	}
 
 	@Override
-	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
+	public int putResource(WebDAVRequest webDAVRequest) throws WebDAVException {
 		return DDMWebDavUtil.putResource(
-			webDavRequest, getRootPath(), getToken(), 0);
+			webDAVRequest, getRootPath(), getToken(), 0);
 	}
 
-	protected List<Resource> getFolders(WebDAVRequest webDavRequest)
+	protected List<Resource> getFolders(WebDAVRequest webDAVRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
 		resources.add(
 			DDMWebDavUtil.toResource(
-				webDavRequest, DDMWebDavUtil.TYPE_TEMPLATES, getRootPath(),
+				webDAVRequest, DDMWebDavUtil.TYPE_TEMPLATES, getRootPath(),
 				true));
 
 		return resources;
 	}
 
-	protected List<Resource> getTemplates(WebDAVRequest webDavRequest)
+	protected List<Resource> getTemplates(WebDAVRequest webDAVRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
 		List<DDMTemplate> ddmTemplates =
 			DDMTemplateLocalServiceUtil.getTemplatesByClassPK(
-				webDavRequest.getGroupId(), 0);
+				webDAVRequest.getGroupId(), 0);
 
 		for (DDMTemplate ddmTemplate : ddmTemplates) {
 			Resource resource = DDMWebDavUtil.toResource(
-				webDavRequest, ddmTemplate, getRootPath(), true);
+				webDAVRequest, ddmTemplate, getRootPath(), true);
 
 			resources.add(resource);
 		}
