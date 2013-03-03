@@ -97,7 +97,6 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			DDMWebDavUtil.toResource(
 				webDavRequest, DDMWebDavUtil.TYPE_STRUCTURES, getRootPath(),
 				true));
-
 		resources.add(
 			DDMWebDavUtil.toResource(
 				webDavRequest, DDMWebDavUtil.TYPE_TEMPLATES, getRootPath(),
