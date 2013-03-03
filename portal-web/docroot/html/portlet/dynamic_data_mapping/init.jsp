@@ -63,7 +63,7 @@ String chooseCallback = ParamUtil.getString(request, "chooseCallback");
 String ddmResource = ParamUtil.getString(request, "ddmResource");
 String ddmResourceActionId = ParamUtil.getString(request, "ddmResourceActionId");
 String refererPortletName = ParamUtil.getString(request, "refererPortletName");
-String refererWebDAVToken = ParamUtil.getString(request, "refererWebDAVToken");
+String refererWebDAVToken = ParamUtil.getString(request, "refererWebDAVToken", portletConfig.getInitParameter("refererWebDAVToken"));
 String saveCallback = ParamUtil.getString(request, "saveCallback");
 String scopeAvailableFields = ParamUtil.getString(request, "scopeAvailableFields");
 String scopeStorageType = ParamUtil.getString(request, "scopeStorageType");
@@ -99,10 +99,6 @@ else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-if (Validator.isNull(refererWebDAVToken)) {
-	refererWebDAVToken = portletConfig.getInitParameter("refererWebDAVToken");
-}
 %>
 
 <%@ include file="/html/portlet/dynamic_data_mapping/init-ext.jsp" %>

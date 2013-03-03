@@ -51,8 +51,6 @@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
 
 <%
-Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
-
 String ddmResource = portletConfig.getInitParameter("ddm-resource");
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
