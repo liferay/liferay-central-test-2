@@ -1302,6 +1302,10 @@
 				ddmURL.setParameter('refererPortletName', config.refererPortletName);
 			}
 
+			if ('refererWebDAVToken' in config) {
+				ddmURL.setParameter('refererWebDAVToken', config.refererWebDAVToken);
+			}
+
 			ddmURL.setParameter('saveCallback', config.saveCallback);
 			ddmURL.setParameter('scopeAvailableFields', config.availableFields);
 			ddmURL.setParameter('scopeStorageType', config.storageType);
@@ -1310,10 +1314,6 @@
 			ddmURL.setParameter('scopeTemplateMode', config.templateMode);
 			ddmURL.setParameter('scopeTemplateType', config.templateType);
 			ddmURL.setParameter('scopeTitle', config.title);
-
-			if ('refererWebDAVToken' in config) {
-				ddmURL.setParameter('refererWebDAVToken', config.refererWebDAVToken);
-			}
 
 			if ('showGlobalScope' in config) {
 				ddmURL.setParameter('showGlobalScope', config.showGlobalScope);
