@@ -99,14 +99,14 @@ public abstract class BaseTrashHandlerTestCase {
 
 	@Test
 	@Transactional
-	public void testTrashMineBaseModel() throws Exception {
-		trashMineBaseModel();
+	public void testTrashMoveBaseModel() throws Exception {
+		trashMoveBaseModel();
 	}
 
 	@Test
 	@Transactional
-	public void testTrashMoveBaseModel() throws Exception {
-		trashMoveBaseModel();
+	public void testTrashMyBaseModel() throws Exception {
+		trashMyBaseModel();
 	}
 
 	@Test
@@ -556,34 +556,6 @@ public abstract class BaseTrashHandlerTestCase {
 		Assert.assertTrue(isBaseModelTrashName(duplicateBaseModel));
 	}
 
-	protected void trashMineBaseModel() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
-		serviceContext.setScopeGroupId(group.getGroupId());
-
-		BaseModel<?> parentBaseModel = getParentBaseModel(
-			group, serviceContext);
-
-		int initialBaseModelsCount = getMineBaseModelsCount(
-			group.getGroupId(), TestPropsValues.getUserId());
-
-		addBaseModel(parentBaseModel, true, serviceContext);
-		addBaseModel(parentBaseModel, true, serviceContext);
-		addBaseModel(parentBaseModel, true, serviceContext);
-
-		Assert.assertEquals(
-			initialBaseModelsCount + 3,
-			getMineBaseModelsCount(
-				group.getGroupId(), TestPropsValues.getUserId()));
-
-		moveParentBaseModelToTrash((Long)parentBaseModel.getPrimaryKeyObj());
-
-		Assert.assertEquals(
-			initialBaseModelsCount,
-			getMineBaseModelsCount(
-				group.getGroupId(), TestPropsValues.getUserId()));
-	}
-
 	protected void trashMoveBaseModel() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
@@ -637,6 +609,34 @@ public abstract class BaseTrashHandlerTestCase {
 				Assert.assertTrue(isAssetEntryVisible(baseModel));
 			}
 		}
+	}
+
+	protected void trashMyBaseModel() throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		BaseModel<?> parentBaseModel = getParentBaseModel(
+			group, serviceContext);
+
+		int initialBaseModelsCount = getMineBaseModelsCount(
+			group.getGroupId(), TestPropsValues.getUserId());
+
+		addBaseModel(parentBaseModel, true, serviceContext);
+		addBaseModel(parentBaseModel, true, serviceContext);
+		addBaseModel(parentBaseModel, true, serviceContext);
+
+		Assert.assertEquals(
+			initialBaseModelsCount + 3,
+			getMineBaseModelsCount(
+				group.getGroupId(), TestPropsValues.getUserId()));
+
+		moveParentBaseModelToTrash((Long)parentBaseModel.getPrimaryKeyObj());
+
+		Assert.assertEquals(
+			initialBaseModelsCount,
+			getMineBaseModelsCount(
+				group.getGroupId(), TestPropsValues.getUserId()));
 	}
 
 	protected void trashParentBaseModel(
