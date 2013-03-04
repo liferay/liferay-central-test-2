@@ -40,7 +40,7 @@ public class AssertEditAPEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//h3[@class='asset-title']/a"));
-		assertTrue(selenium.isElementPresent("link=Edit Blogs Entry Title"));
+		assertTrue(selenium.isVisible("//div[contains(.,'Edit')]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
 			selenium.getText("//div[@class='asset-summary']"));
 	}

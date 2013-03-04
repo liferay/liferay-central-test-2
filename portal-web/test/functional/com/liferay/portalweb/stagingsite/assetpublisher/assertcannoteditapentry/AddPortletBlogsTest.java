@@ -55,7 +55,7 @@ public class AddPortletBlogsTest extends BaseTestCase {
 		selenium.waitForVisible("//input[@id='layout_configuration_content']");
 		selenium.sendKeys("//input[@id='layout_configuration_content']",
 			RuntimeVariables.replace("b"));
-		selenium.waitForVisible("//li[@title='Blogs']/p/a");
+		selenium.waitForText("//li[@title='Blogs']/p/a", "Add");
 		selenium.clickAt("//li[@title='Blogs']/p/a",
 			RuntimeVariables.replace("Add"));
 		selenium.waitForVisible("//section");
