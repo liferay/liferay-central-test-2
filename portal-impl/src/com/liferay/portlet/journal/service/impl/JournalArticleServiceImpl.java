@@ -388,7 +388,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()])));
 	}
 
-	public List<JournalArticle> getGroupFileEntries(
+	public List<JournalArticle> getGroupArticles(
 			long groupId, long userId, long rootFolderId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws PortalException, SystemException {
@@ -399,7 +399,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY, start, end, orderByComparator);
 
-		if (folderIds.size() == 0) {
+		if (folderIds.isEmpty()) {
 			return Collections.emptyList();
 		}
 		else if (userId <= 0) {
@@ -413,7 +413,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		}
 	}
 
-	public int getGroupFileEntriesCount(
+	public int getGroupArticlesCount(
 			long groupId, long userId, long rootFolderId)
 		throws PortalException, SystemException {
 
@@ -423,7 +423,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY);
 
-		if (folderIds.size() == 0) {
+		if (folderIds.isEmpty()) {
 			return 0;
 		}
 		else if (userId <= 0) {
