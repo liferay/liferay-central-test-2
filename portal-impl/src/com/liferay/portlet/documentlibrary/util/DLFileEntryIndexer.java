@@ -167,7 +167,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			"structureValue");
 
 		if (Validator.isNotNull(structureField) &&
-				Validator.isNotNull(structureValue)) {
+			Validator.isNotNull(structureValue)) {
 
 			contextQuery.addRequiredTerm(structureField, structureValue);
 		}

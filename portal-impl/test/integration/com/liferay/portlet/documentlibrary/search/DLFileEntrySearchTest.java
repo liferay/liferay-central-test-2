@@ -64,14 +64,14 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
-	protected BaseModel<?> addBaseModelWithStructure(
+	protected BaseModel<?> addBaseModelWithDDMStructure(
 			BaseModel<?> parentBaseModel, String keywords,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		String xsd = DDMStructureTestUtil.getSampleStructureXSD("name");
 
-		_ddmStructure = DDMStructureTestUtil.addDDMStructure(
+		_ddmStructure = DDMStructureTestUtil.addStructure(
 			serviceContext.getScopeGroupId(), DLFileEntry.class.getName(), xsd);
 
 		DLFileEntryType dlFileEntryType =
@@ -124,6 +124,12 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
+	protected String getDDMStructureFieldName() {
+		return DDMIndexerUtil.encodeName(
+			_ddmStructure.getStructureId(), "name", LocaleUtil.getDefault());
+	}
+
+	@Override
 	protected BaseModel<?> getParentBaseModel(
 			Group group, ServiceContext serviceContext)
 		throws Exception {
@@ -140,13 +146,8 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 		return "Title";
 	}
 
-	@Override
-	protected String getStructureField() {
-		return DDMIndexerUtil.encodeName(
-			_ddmStructure.getStructureId(), "name", LocaleUtil.getDefault());
-	}
-
 	private static final int _FOLDER_NAME_MAX_LENGTH = 100;
+
 	private DDMStructure _ddmStructure;
 
 }

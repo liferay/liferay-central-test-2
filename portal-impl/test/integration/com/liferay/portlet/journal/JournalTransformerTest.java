@@ -63,12 +63,12 @@ public class JournalTransformerTest {
 
 		String xsd = document.asXML();
 
-		DDMStructure ddmStructure = DDMStructureTestUtil.addDDMStructure(
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			JournalArticle.class.getName(), xsd);
 
 		String xsl = "$name.getData()";
 
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addDDMTemplate(
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
 			ddmStructure.getStructureId(), TemplateConstants.LANG_TYPE_VM, xsl);
 
 		document = JournalTestUtil.createDocument("en_US", "en_US");

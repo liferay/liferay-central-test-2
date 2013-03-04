@@ -970,7 +970,7 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public List<DDMStructure> getStructures(long[] groupIds, long classNameId)
-			throws SystemException {
+		throws SystemException {
 
 		return ddmStructurePersistence.findByG_C(groupIds, classNameId);
 	}

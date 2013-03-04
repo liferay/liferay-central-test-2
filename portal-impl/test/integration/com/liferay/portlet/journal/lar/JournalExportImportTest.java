@@ -82,10 +82,10 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 		DDMTemplate ddmTemplate = null;
 
 		if (structuredContent) {
-			ddmStructure = DDMStructureTestUtil.addDDMStructure(
+			ddmStructure = DDMStructureTestUtil.addStructure(
 				_group.getGroupId(), JournalArticle.class.getName());
 
-			ddmTemplate = DDMTemplateTestUtil.addDDMTemplate(
+			ddmTemplate = DDMTemplateTestUtil.addTemplate(
 				_group.getGroupId(), ddmStructure.getStructureId());
 
 			String content = DDMStructureTestUtil.getSampleStructuredContent();

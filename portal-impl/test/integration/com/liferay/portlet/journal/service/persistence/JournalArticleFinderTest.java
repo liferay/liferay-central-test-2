@@ -65,7 +65,7 @@ public class JournalArticleFinderTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_ddmStructure = DDMStructureTestUtil.addDDMStructure(
+		_ddmStructure = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
 
 		_folder = JournalTestUtil.addFolder(_group.getGroupId(), "Folder 1");
@@ -77,7 +77,7 @@ public class JournalArticleFinderTest {
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), "Folder 2");
 
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addDDMTemplate(
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
 			_group.getGroupId(), _ddmStructure.getStructureId());
 
 		JournalTestUtil.addArticleWithXMLContent(

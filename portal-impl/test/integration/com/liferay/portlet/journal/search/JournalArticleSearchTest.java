@@ -55,18 +55,18 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
-	protected BaseModel<?> addBaseModelWithStructure(
+	protected BaseModel<?> addBaseModelWithDDMStructure(
 			BaseModel<?> parentBaseModel, String keywords,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		String xsd = DDMStructureTestUtil.getSampleStructureXSD("name");
 
-		_ddmStructure = DDMStructureTestUtil.addDDMStructure(
+		_ddmStructure = DDMStructureTestUtil.addStructure(
 			serviceContext.getScopeGroupId(), JournalArticle.class.getName(),
 			xsd);
 
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addDDMTemplate(
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
 			serviceContext.getScopeGroupId(), _ddmStructure.getStructureId());
 
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
@@ -99,6 +99,12 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
+	protected String getDDMStructureFieldName() {
+		return DDMIndexerUtil.encodeName(
+			_ddmStructure.getStructureId(), "name", LocaleUtil.getDefault());
+	}
+
+	@Override
 	protected BaseModel<?> getParentBaseModel(
 			Group group, ServiceContext serviceContext)
 		throws Exception {
@@ -109,12 +115,6 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 	@Override
 	protected String getSearchKeywords() {
 		return "Title";
-	}
-
-	@Override
-	protected String getStructureField() {
-		return DDMIndexerUtil.encodeName(
-			_ddmStructure.getStructureId(), "name", LocaleUtil.getDefault());
 	}
 
 	private DDMStructure _ddmStructure;

@@ -70,13 +70,13 @@ public abstract class BaseSearchTestCase {
 	}
 
 	@Test
-	public void testSearchByKeywords() throws Exception {
-		searchByKeywords();
+	public void testSearchByDDMStructureField() throws Exception {
+		searchByDDMStructureField();
 	}
 
 	@Test
-	public void testSearchByStructureField() throws Exception {
-		searchByStructureField();
+	public void testSearchByKeywords() throws Exception {
+		searchByKeywords();
 	}
 
 	@Test
@@ -86,8 +86,8 @@ public abstract class BaseSearchTestCase {
 	}
 
 	@Test
-	public void testSearchWithinStructure() throws Exception {
-		searchWithinStructure();
+	public void testSearchWithinDDMStructure() throws Exception {
+		searchWithinDDMStructure();
 	}
 
 	protected void addAttachment(ClassedModel classedModel) throws Exception {
@@ -113,7 +113,7 @@ public abstract class BaseSearchTestCase {
 		}
 	}
 
-	protected BaseModel<?> addBaseModelWithStructure(
+	protected BaseModel<?> addBaseModelWithDDMStructure(
 			BaseModel<?> parentBaseModel, String keywords,
 			ServiceContext serviceContext)
 		throws Exception {
@@ -158,6 +158,10 @@ public abstract class BaseSearchTestCase {
 		return (Long)classedModel.getPrimaryKeyObj();
 	}
 
+	protected String getDDMStructureFieldName() {
+		return StringPool.BLANK;
+	}
+
 	protected BaseModel<?> getParentBaseModel(
 			Group group, ServiceContext serviceContext)
 		throws Exception {
@@ -166,10 +170,6 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected abstract String getSearchKeywords();
-
-	protected String getStructureField() {
-		return StringPool.BLANK;
-	}
 
 	protected void searchAttachments() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
@@ -241,6 +241,33 @@ public abstract class BaseSearchTestCase {
 		return results.getLength();
 	}
 
+	protected void searchByDDMStructureField() throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+			group.getGroupId());
+
+		int initialBaseModelsSearchCount = searchBaseModelsCount(
+			getBaseModelClass(), group.getGroupId(), searchContext);
+
+		BaseModel<?> parentBaseModel = getParentBaseModel(
+			group, serviceContext);
+
+		baseModel = addBaseModelWithDDMStructure(
+			parentBaseModel, getSearchKeywords(), serviceContext);
+
+		searchContext.setAttribute(
+			"structureField", getDDMStructureFieldName());
+		searchContext.setAttribute("structureValue", getSearchKeywords());
+
+		Assert.assertEquals(
+			initialBaseModelsSearchCount + 1,
+			searchBaseModelsCount(
+				getBaseModelClass(), group.getGroupId(), searchContext));
+	}
+
 	protected void searchByKeywords() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
@@ -259,32 +286,6 @@ public abstract class BaseSearchTestCase {
 
 		baseModel = addBaseModel(
 			parentBaseModel, true, getSearchKeywords(), serviceContext);
-
-		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
-			searchBaseModelsCount(
-				getBaseModelClass(), group.getGroupId(), searchContext));
-	}
-
-	protected void searchByStructureField() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
-		serviceContext.setScopeGroupId(group.getGroupId());
-
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
-			group.getGroupId());
-
-		int initialBaseModelsSearchCount = searchBaseModelsCount(
-			getBaseModelClass(), group.getGroupId(), searchContext);
-
-		BaseModel<?> parentBaseModel = getParentBaseModel(
-			group, serviceContext);
-
-		baseModel = addBaseModelWithStructure(
-			parentBaseModel, getSearchKeywords(), serviceContext);
-
-		searchContext.setAttribute("structureField", getStructureField());
-		searchContext.setAttribute("structureValue", getSearchKeywords());
 
 		Assert.assertEquals(
 			initialBaseModelsSearchCount + 1,
@@ -325,7 +326,7 @@ public abstract class BaseSearchTestCase {
 				getBaseModelClass(), group.getGroupId(), searchContext));
 	}
 
-	protected void searchWithinStructure() throws Exception {
+	protected void searchWithinDDMStructure() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		serviceContext.setScopeGroupId(group.getGroupId());
@@ -341,7 +342,7 @@ public abstract class BaseSearchTestCase {
 		BaseModel<?> parentBaseModel = getParentBaseModel(
 			group, serviceContext);
 
-		baseModel = addBaseModelWithStructure(
+		baseModel = addBaseModelWithDDMStructure(
 			parentBaseModel,  getSearchKeywords(), serviceContext);
 
 		Assert.assertEquals(

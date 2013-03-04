@@ -36,81 +36,6 @@ import java.util.Map;
  */
 public class DDMTemplateTestUtil {
 
-	public static DDMTemplate addDDMTemplate(long ddmStructureId)
-		throws Exception {
-
-		return addDDMTemplate(
-			ddmStructureId, TemplateConstants.LANG_TYPE_VM,
-			getSampleTemplateXSL(), LocaleUtil.getDefault());
-	}
-
-	public static DDMTemplate addDDMTemplate(
-			long ddmStructureId, Locale defaultLocale)
-		throws Exception {
-
-		return addDDMTemplate(
-			ddmStructureId, TemplateConstants.LANG_TYPE_VM,
-			getSampleTemplateXSL(), defaultLocale);
-	}
-
-	public static DDMTemplate addDDMTemplate(long groupId, long ddmStructureId)
-		throws Exception {
-
-		return addDDMTemplate(
-			groupId, ddmStructureId, TemplateConstants.LANG_TYPE_VM,
-			getSampleTemplateXSL(), LocaleUtil.getDefault());
-	}
-
-	public static DDMTemplate addDDMTemplate(
-			long groupId, long ddmStructureId, Locale defaultLocale)
-		throws Exception {
-
-		return addDDMTemplate(
-			groupId, ddmStructureId, TemplateConstants.LANG_TYPE_VM,
-			getSampleTemplateXSL(), defaultLocale);
-	}
-
-	public static DDMTemplate addDDMTemplate(
-			long groupId, long ddmStructureId, String language, String script,
-			Locale defaultLocale)
-		throws Exception {
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(defaultLocale, "Test Template");
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		return DDMTemplateLocalServiceUtil.addTemplate(
-			TestPropsValues.getUserId(), groupId,
-			PortalUtil.getClassNameId(DDMStructure.class.getName()),
-			ddmStructureId, nameMap, null,
-			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null, language, script,
-			serviceContext);
-	}
-
-	public static DDMTemplate addDDMTemplate(
-			long ddmStructureId, String language, String script)
-		throws Exception {
-
-		return addDDMTemplate(
-			TestPropsValues.getGroupId(), ddmStructureId, language, script,
-			LocaleUtil.getDefault());
-	}
-
-	public static DDMTemplate addDDMTemplate(
-			long ddmStructureId, String language, String script,
-			Locale defaultLocale)
-		throws Exception {
-
-		return addDDMTemplate(
-			TestPropsValues.getGroupId(), ddmStructureId, language, script,
-			defaultLocale);
-	}
-
 	public static void addDynamicContentElement(
 		Element dynamicElementElement, String languageId, String value) {
 
@@ -130,6 +55,79 @@ public class DDMTemplateTestUtil {
 		dynamicElementElement.addAttribute("type", type);
 
 		return dynamicElementElement;
+	}
+
+	public static DDMTemplate addTemplate(long structureId) throws Exception {
+		return addTemplate(
+			structureId, TemplateConstants.LANG_TYPE_VM, getSampleTemplateXSL(),
+			LocaleUtil.getDefault());
+	}
+
+	public static DDMTemplate addTemplate(
+			long structureId, Locale defaultLocale)
+		throws Exception {
+
+		return addTemplate(
+			structureId, TemplateConstants.LANG_TYPE_VM, getSampleTemplateXSL(),
+			defaultLocale);
+	}
+
+	public static DDMTemplate addTemplate(long groupId, long structureId)
+		throws Exception {
+
+		return addTemplate(
+			groupId, structureId, TemplateConstants.LANG_TYPE_VM,
+			getSampleTemplateXSL(), LocaleUtil.getDefault());
+	}
+
+	public static DDMTemplate addTemplate(
+			long groupId, long structureId, Locale defaultLocale)
+		throws Exception {
+
+		return addTemplate(
+			groupId, structureId, TemplateConstants.LANG_TYPE_VM,
+			getSampleTemplateXSL(), defaultLocale);
+	}
+
+	public static DDMTemplate addTemplate(
+			long groupId, long structureId, String language, String script,
+			Locale defaultLocale)
+		throws Exception {
+
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(defaultLocale, "Test Template");
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		return DDMTemplateLocalServiceUtil.addTemplate(
+			TestPropsValues.getUserId(), groupId,
+			PortalUtil.getClassNameId(DDMStructure.class.getName()),
+			structureId, nameMap, null,
+			DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY, null, language, script,
+			serviceContext);
+	}
+
+	public static DDMTemplate addTemplate(
+			long structureId, String language, String script)
+		throws Exception {
+
+		return addTemplate(
+			TestPropsValues.getGroupId(), structureId, language, script,
+			LocaleUtil.getDefault());
+	}
+
+	public static DDMTemplate addTemplate(
+			long structureId, String language, String script,
+			Locale defaultLocale)
+		throws Exception {
+
+		return addTemplate(
+			TestPropsValues.getGroupId(), structureId, language, script,
+			defaultLocale);
 	}
 
 	public static Document createDocument(

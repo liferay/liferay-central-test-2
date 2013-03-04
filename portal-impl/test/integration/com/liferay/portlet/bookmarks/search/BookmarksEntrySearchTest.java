@@ -53,7 +53,7 @@ public class BookmarksEntrySearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
-	public void testSearchByStructureField() throws Exception {
+	public void testSearchByDDMStructureField() throws Exception {
 		Assert.assertTrue("This test does not apply", true);
 	}
 
@@ -63,7 +63,7 @@ public class BookmarksEntrySearchTest extends BaseSearchTestCase {
 	}
 
 	@Override
-	public void testSearchWithinStructure() throws Exception {
+	public void testSearchWithinDDMStructure() throws Exception {
 		Assert.assertTrue("This test does not apply", true);
 	}
 

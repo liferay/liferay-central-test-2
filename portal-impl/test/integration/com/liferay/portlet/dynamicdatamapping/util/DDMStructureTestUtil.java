@@ -33,31 +33,30 @@ import java.util.Map;
  */
 public class DDMStructureTestUtil {
 
-	public static DDMStructure addDDMStructure(long groupId, String className)
+	public static DDMStructure addStructure(long groupId, String className)
 		throws Exception {
 
-		return addDDMStructure(
+		return addStructure(
 			groupId, className, getSampleStructureXSD(),
 			LocaleUtil.getDefault());
 	}
 
-	public static DDMStructure addDDMStructure(
+	public static DDMStructure addStructure(
 			long groupId, String className, Locale defaultLocale)
 		throws Exception {
 
-		return addDDMStructure(
+		return addStructure(
 			groupId, className, getSampleStructureXSD(), defaultLocale);
 	}
 
-	public static DDMStructure addDDMStructure(
+	public static DDMStructure addStructure(
 			long groupId, String className, String xsd)
 		throws Exception {
 
-		return addDDMStructure(
-			groupId, className, xsd, LocaleUtil.getDefault());
+		return addStructure(groupId, className, xsd, LocaleUtil.getDefault());
 	}
 
-	public static DDMStructure addDDMStructure(
+	public static DDMStructure addStructure(
 			long groupId, String className, String xsd, Locale defaultLocale)
 		throws Exception {
 
@@ -76,36 +75,34 @@ public class DDMStructureTestUtil {
 			serviceContext);
 	}
 
-	public static DDMStructure addDDMStructure(String className)
-		throws Exception {
-
-		return addDDMStructure(
+	public static DDMStructure addStructure(String className) throws Exception {
+		return addStructure(
 			TestPropsValues.getGroupId(), className, getSampleStructureXSD(),
 			LocaleUtil.getDefault());
 	}
 
-	public static DDMStructure addDDMStructure(
+	public static DDMStructure addStructure(
 			String className, Locale defaultLocale)
 		throws Exception {
 
-		return addDDMStructure(
+		return addStructure(
 			TestPropsValues.getGroupId(), className, getSampleStructureXSD(),
 			defaultLocale);
 	}
 
-	public static DDMStructure addDDMStructure(String className, String xsd)
+	public static DDMStructure addStructure(String className, String xsd)
 		throws Exception {
 
-		return addDDMStructure(
+		return addStructure(
 			TestPropsValues.getGroupId(), className, xsd,
 			LocaleUtil.getDefault());
 	}
 
-	public static DDMStructure addDDMStructure(
+	public static DDMStructure addStructure(
 			String className, String xsd, Locale defaultLocale)
 		throws Exception {
 
-		return addDDMStructure(
+		return addStructure(
 			TestPropsValues.getGroupId(), className, xsd, defaultLocale);
 	}
 
