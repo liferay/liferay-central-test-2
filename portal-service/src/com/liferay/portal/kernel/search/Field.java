@@ -190,8 +190,8 @@ public class Field implements Serializable {
 		return _name;
 	}
 
-	public Class<? extends Number> getNumericType() {
-		return _numericType;
+	public Class<? extends Number> getNumericClass() {
+		return _numericClass;
 	}
 
 	public String getValue() {
@@ -236,8 +236,8 @@ public class Field implements Serializable {
 		_numeric = numeric;
 	}
 
-	public void setNumericType(Class<? extends Number> numericType) {
-		_numericType = numericType;
+	public void setNumericClass(Class<? extends Number> numericClass) {
+		_numericClass = numericClass;
 	}
 
 	public void setTokenized(boolean tokenized) {
@@ -256,7 +256,7 @@ public class Field implements Serializable {
 	private Map<Locale, String> _localizedValues;
 	private String _name;
 	private boolean _numeric;
-	private Class<? extends Number> _numericType;
+	private Class<? extends Number> _numericClass;
 	private boolean _tokenized;
 	private String[] _values;
 
