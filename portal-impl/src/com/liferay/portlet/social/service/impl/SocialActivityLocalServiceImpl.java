@@ -232,6 +232,13 @@ public class SocialActivityLocalServiceImpl
 
 			socialActivityPersistence.update(activity);
 
+			long activitySetId =
+				socialActivityInterpreterLocalService.getActivitySetId(
+					activity.getActivityId());
+
+			socialActivitySetLocalService.incrementActivityCount(
+				activitySetId, activityId);
+
 			if (mirrorActivity != null) {
 				long mirrorActivityId = counterLocalService.increment(
 					SocialActivity.class.getName());
@@ -335,6 +342,9 @@ public class SocialActivityLocalServiceImpl
 	public void deleteActivities(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
+		socialActivitySetLocalService.decrementActivityCount(
+			assetEntry.getClassNameId(), assetEntry.getClassPK());
+
 		socialActivityPersistence.removeByC_C(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
 
@@ -350,9 +360,12 @@ public class SocialActivityLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteActivities(String className, long classPK)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		socialActivitySetLocalService.decrementActivityCount(
+			classNameId, classPK);
 
 		socialActivityPersistence.removeByC_C(classNameId, classPK);
 	}
@@ -379,10 +392,15 @@ public class SocialActivityLocalServiceImpl
 	 * @param  activity the activity to be removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteActivity(SocialActivity activity) throws SystemException {
+	public void deleteActivity(SocialActivity activity)
+		throws PortalException, SystemException {
+
 		socialActivityPersistence.remove(activity);
 
 		try {
+			socialActivitySetLocalService.decrementActivityCount(
+				activity.getActivitySetId());
+
 			socialActivityPersistence.removeByMirrorActivityId(
 				activity.getActivityId());
 		}
@@ -411,6 +429,9 @@ public class SocialActivityLocalServiceImpl
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
+			socialActivitySetLocalService.decrementActivityCount(
+				activity.getActivitySetId());
+
 			socialActivityPersistence.remove(activity);
 		}
 
@@ -418,6 +439,9 @@ public class SocialActivityLocalServiceImpl
 			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
+			socialActivitySetLocalService.decrementActivityCount(
+				activity.getActivitySetId());
+
 			socialActivityPersistence.remove(activity);
 		}
 

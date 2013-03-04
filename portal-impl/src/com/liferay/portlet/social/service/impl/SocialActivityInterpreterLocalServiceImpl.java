@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.social.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -87,6 +89,44 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		activityInterpreters.remove(activityInterpreter);
+	}
+
+	public long getActivitySetId(long activityId)
+		throws PortalException, SystemException {
+
+		long activitySetId = 0;
+
+		List<SocialActivityInterpreter> activityInterpreters =
+			_activityInterpreters.get("default selector portal property");
+
+		if (activityInterpreters != null) {
+			SocialActivity activity =
+				socialActivityPersistence.findByPrimaryKey(activityId);
+
+			String className = PortalUtil.getClassName(
+				activity.getClassNameId());
+
+			for (int i = 0; i < activityInterpreters.size(); i++) {
+				SocialActivityInterpreterImpl activityInterpreter =
+					(SocialActivityInterpreterImpl)activityInterpreters.get(i);
+
+				if (activityInterpreter.hasClassName(className)) {
+					activitySetId = activityInterpreter.getActivitySetId(
+						activityId);
+
+					break;
+				}
+			}
+		}
+
+		if (activitySetId == 0) {
+			SocialActivitySet activitySet =
+				socialActivitySetLocalService.addActivitySet(activityId);
+
+			activitySetId = activitySet.getActivitySetId();
+		}
+
+		return activitySetId;
 	}
 
 	/**
