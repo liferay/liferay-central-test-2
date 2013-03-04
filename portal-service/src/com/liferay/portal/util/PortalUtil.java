@@ -1704,6 +1704,10 @@ public class PortalUtil {
 		return getPortal().transformCustomSQL(sql);
 	}
 
+	public static String transformSQL(String sql) {
+		return getPortal().transformSQL(sql);
+	}
+
 	public static PortletMode updatePortletMode(
 		String portletId, User user, Layout layout, PortletMode portletMode,
 		HttpServletRequest request) {
