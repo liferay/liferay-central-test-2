@@ -44,7 +44,8 @@ public class MDRRuleGroupStagedModelDataHandlerTest
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String, List<StagedModel>> dependentStagedModels)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		return MDRTestUtil.addRuleGroup(group.getGroupId());

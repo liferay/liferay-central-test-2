@@ -88,7 +88,7 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 			getEndDate(), zipWriter);
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			addDependentStagedModels(stagingGroup);
+			addDependentStagedModelsMap(stagingGroup);
 
 		StagedModel stagedModel = addStagedModel(
 			stagingGroup, dependentStagedModelsMap);
@@ -128,7 +128,20 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 		validateImport(stagedModel, dependentStagedModelsMap, liveGroup);
 	}
 
-	protected Map<String, List<StagedModel>> addDependentStagedModels(
+	protected List<StagedModel> addDependentStagedModel(
+		Map<String, List<StagedModel>> dependentStagedModelsMap, Class<?> clazz,
+		StagedModel dependentStagedModel) {
+
+		List<StagedModel> dependentStagedModels = new ArrayList<StagedModel>();
+
+		dependentStagedModels.add(dependentStagedModel);
+
+		dependentStagedModelsMap.put(clazz.getName(), dependentStagedModels);
+
+		return dependentStagedModels;
+	}
+
+	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
 			Group group)
 		throws Exception {
 

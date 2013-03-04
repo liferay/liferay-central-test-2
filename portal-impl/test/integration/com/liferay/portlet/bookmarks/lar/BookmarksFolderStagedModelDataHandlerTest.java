@@ -26,7 +26,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,21 +46,18 @@ public class BookmarksFolderStagedModelDataHandlerTest
 	extends BaseStagedModelDataHandlerTestCase {
 
 	@Override
-	protected Map<String, List<StagedModel>> addDependentStagedModels(
+	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
 			Group group)
 		throws Exception {
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
 			new HashMap<String, List<StagedModel>>();
 
-		List<StagedModel> dependentStagedModels = new ArrayList<StagedModel>();
+		BookmarksFolder folder = BookmarksTestUtil.addFolder(
+			group.getGroupId(), ServiceTestUtil.randomString());
 
-		dependentStagedModels.add(
-			BookmarksTestUtil.addFolder(
-				group.getGroupId(), ServiceTestUtil.randomString()));
-
-		dependentStagedModelsMap.put(
-			BookmarksFolder.class.getName(), dependentStagedModels);
+		addDependentStagedModel(
+			dependentStagedModelsMap, BookmarksFolder.class, folder);
 
 		return dependentStagedModelsMap;
 	}

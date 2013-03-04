@@ -33,7 +33,6 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalSe
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.util.MDRTestUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,33 +72,31 @@ public class MDRRuleGroupInstanceStagedModelDataHandlerTest
 	}
 
 	@Override
-	protected Map<String, List<StagedModel>> addDependentStagedModels(
+	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
 			Group group)
 		throws Exception {
 
-		Map<String, List<StagedModel>> stagedModelsMap =
+		Map<String, List<StagedModel>> dependentStagedModelsMap =
 			new HashMap<String, List<StagedModel>>();
-
-		List<StagedModel> stagedModels = new ArrayList<StagedModel>();
 
 		MDRRuleGroup ruleGroup = MDRTestUtil.addRuleGroup(group.getGroupId());
 
-		stagedModels.add(ruleGroup);
+		addDependentStagedModel(
+			dependentStagedModelsMap, MDRRuleGroup.class, ruleGroup);
 
-		stagedModelsMap.put(MDRRuleGroup.class.getName(), stagedModels);
-
-		return stagedModelsMap;
+		return dependentStagedModelsMap;
 	}
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String, List<StagedModel>> dependentStagedModels)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
-		List<StagedModel> ruleGroups = dependentStagedModels.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			MDRRuleGroup.class.getName());
 
-		MDRRuleGroup ruleGroup = (MDRRuleGroup)ruleGroups.get(0);
+		MDRRuleGroup ruleGroup = (MDRRuleGroup)dependentStagedModels.get(0);
 
 		return MDRTestUtil.addRuleGroupInstance(
 			group.getGroupId(), Layout.class.getName(), layout.getPlid(),
@@ -130,15 +127,16 @@ public class MDRRuleGroupInstanceStagedModelDataHandlerTest
 
 	@Override
 	protected void validateImport(
-			Map<String, List<StagedModel>> stagedModelsMap, Group group)
+			Map<String, List<StagedModel>> dependentStagedModelsMap,
+			Group group)
 		throws Exception {
 
-		List<StagedModel> stagedModels = stagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			MDRRuleGroup.class.getName());
 
-		Assert.assertEquals(1, stagedModels.size());
+		Assert.assertEquals(1, dependentStagedModels.size());
 
-		MDRRuleGroup ruleGroup = (MDRRuleGroup)stagedModels.get(0);
+		MDRRuleGroup ruleGroup = (MDRRuleGroup)dependentStagedModels.get(0);
 
 		MDRRuleGroupLocalServiceUtil.getMDRRuleGroupByUuidAndGroupId(
 			ruleGroup.getUuid(), group.getGroupId());
