@@ -324,10 +324,12 @@ public class CreateAccountAction extends PortletAction {
 
 		String login = null;
 
-		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+		String authType = company.getAuthType();
+
+		if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			login = String.valueOf(user.getUserId());
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			login = user.getScreenName();
 		}
 		else {
@@ -416,6 +418,17 @@ public class CreateAccountAction extends PortletAction {
 		String screenName = ParamUtil.getString(actionRequest, "screenName");
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
+
+		HttpSession session = request.getSession();
+
+		long facebookId = GetterUtil.getLong(
+			session.getAttribute(WebKeys.FACEBOOK_INCOMPLETE_USER_ID));
+
+		if (facebookId > 0) {
+			password1 = PwdGenerator.getPassword();
+			password2 = password1;
+		}
+
 		String openId = ParamUtil.getString(actionRequest, "openId");
 		String firstName = ParamUtil.getString(actionRequest, "firstName");
 		String middleName = ParamUtil.getString(actionRequest, "middleName");
@@ -430,16 +443,6 @@ public class CreateAccountAction extends PortletAction {
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
 		boolean updateUserInformation = true;
 		boolean sendEmail = true;
-
-		HttpSession session = request.getSession();
-
-		long facebookId = GetterUtil.getLong(
-			session.getAttribute(WebKeys.FACEBOOK_INCOMPLETE_USER_ID));
-
-		if (facebookId > 0) {
-			password1 = PwdGenerator.getPassword();
-			password2 = password1;
-		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
@@ -468,12 +471,12 @@ public class CreateAccountAction extends PortletAction {
 
 			String login = null;
 
-			if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+			String authType = company.getAuthType();
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				login = String.valueOf(user.getUserId());
 			}
-			else if (company.getAuthType().equals(
-						CompanyConstants.AUTH_TYPE_SN)) {
-
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				login = user.getScreenName();
 			}
 			else {
@@ -503,10 +506,12 @@ public class CreateAccountAction extends PortletAction {
 
 		Company company = themeDisplay.getCompany();
 
-		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+		String authType = company.getAuthType();
+
+		if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			login = String.valueOf(user.getUserId());
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			login = user.getScreenName();
 		}
 		else {

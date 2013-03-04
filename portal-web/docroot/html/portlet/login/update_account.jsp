@@ -18,11 +18,12 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-long userId = ParamUtil.getLong(request, "userId");
 
 User selUser = null;
 
 Contact selContact = null;
+
+long userId = ParamUtil.getLong(request, "userId");
 
 if (userId > 0) {
 	selUser = UserLocalServiceUtil.getUser(userId);
@@ -34,30 +35,32 @@ if (userId > 0) {
 	selContact = selUser.getContact();
 }
 
+String screenName = BeanParamUtil.getString(selUser, request, "screenName");
+String emailAddress = BeanParamUtil.getString(selUser, request, "emailAddress");
+String openId = BeanParamUtil.getString(selUser, request, "openId");
+String firstName = BeanParamUtil.getString(selUser, request, "firstName");
+String middleName = BeanParamUtil.getString(selUser, request, "middleName");
+String lastName = BeanParamUtil.getString(selUser, request, "lastName");
+int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
+int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
+
+Calendar birthdayCalendar = CalendarFactoryUtil.getCalendar();
+
 int birthdayDay = ParamUtil.getInteger(request, "birthdayDay");
 int birthdayMonth = ParamUtil.getInteger(request, "birthdayMonth");
 int birthdayYear = ParamUtil.getInteger(request, "birthdayYear");
-String emailAddress = BeanParamUtil.getString(selUser, request, "emailAddress");
-String firstName = BeanParamUtil.getString(selUser, request, "firstName");
-String jobTitle = BeanParamUtil.getString(selUser, request, "jobTitle");
-String lastName = BeanParamUtil.getString(selUser, request, "lastName");
-boolean male = BeanParamUtil.getBoolean(selUser, request, "male", true);
-String middleName = BeanParamUtil.getString(selUser, request, "middleName");
-String openId = BeanParamUtil.getString(selUser, request, "openId");
-int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
-String screenName = BeanParamUtil.getString(selUser, request, "screenName");
-int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
 
-Calendar birthday = CalendarFactoryUtil.getCalendar();
+Date birthdayDate = PortalUtil.getDate(birthdayMonth, birthdayDay, birthdayYear);
 
-Date date = PortalUtil.getDate(birthdayMonth, birthdayDay, birthdayYear);
-
-if (date != null) {
-	birthday.setTime(date);
+if (birthdayDate != null) {
+	birthdayCalendar.setTime(birthdayDate);
 }
 else if (selUser != null) {
-	birthday.setTime(selContact.getBirthday());
+	birthdayCalendar.setTime(selContact.getBirthday());
 }
+
+boolean male = BeanParamUtil.getBoolean(selUser, request, "male", true);
+String jobTitle = BeanParamUtil.getString(selUser, request, "jobTitle");
 %>
 
 <div class="anonymous-account">
@@ -73,19 +76,19 @@ else if (selUser != null) {
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 		</c:if>
 
-		<aui:input name="birthdayDay" type="hidden" value="<%= String.valueOf(birthday.get(Calendar.DAY_OF_MONTH)) %>" />
-		<aui:input name="birthdayMonth" type="hidden" value="<%= String.valueOf(birthday.get(Calendar.MONTH)) %>" />
-		<aui:input name="birthdayYear" type="hidden" value="<%= String.valueOf(birthday.get(Calendar.YEAR)) %>" />
-		<aui:input name="emailAddress" type="hidden" value="<%= emailAddress %>" />
-		<aui:input name="firstName" type="hidden" value="<%= firstName %>" />
-		<aui:input name="jobTitle" type="hidden" value="<%= jobTitle %>" />
-		<aui:input name="lastName" type="hidden" value="<%= lastName %>" />
-		<aui:input name="male" type="hidden" value="<%= String.valueOf(male) %>" />
-		<aui:input name="middleName" type="hidden" value="<%= middleName %>" />
-		<aui:input name="openId" type="hidden" value="<%= openId %>" />
-		<aui:input name="prefixId" type="hidden" value="<%= String.valueOf(prefixId) %>" />
 		<aui:input name="screenName" type="hidden" value="<%= screenName %>" />
+		<aui:input name="emailAddress" type="hidden" value="<%= emailAddress %>" />
+		<aui:input name="openId" type="hidden" value="<%= openId %>" />
+		<aui:input name="firstName" type="hidden" value="<%= firstName %>" />
+		<aui:input name="middleName" type="hidden" value="<%= middleName %>" />
+		<aui:input name="lastName" type="hidden" value="<%= lastName %>" />
+		<aui:input name="prefixId" type="hidden" value="<%= String.valueOf(prefixId) %>" />
 		<aui:input name="suffixId" type="hidden" value="<%= String.valueOf(suffixId) %>" />
+		<aui:input name="male" type="hidden" value="<%= String.valueOf(male) %>" />
+		<aui:input name="birthdayDay" type="hidden" value="<%= String.valueOf(birthdayCalendar.get(Calendar.DAY_OF_MONTH)) %>" />
+		<aui:input name="birthdayMonth" type="hidden" value="<%= String.valueOf(birthdayCalendar.get(Calendar.MONTH)) %>" />
+		<aui:input name="birthdayYear" type="hidden" value="<%= String.valueOf(birthdayCalendar.get(Calendar.YEAR)) %>" />
+		<aui:input name="jobTitle" type="hidden" value="<%= jobTitle %>" />
 	</aui:form>
 
 	<div class="portlet-msg-alert">

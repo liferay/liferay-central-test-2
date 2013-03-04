@@ -184,31 +184,31 @@ public class FacebookConnectAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletURL redirectURL = PortletURLFactoryUtil.create(
-			request, PortletKeys.LOGIN, themeDisplay.getPlid(),
-			PortletRequest.RENDER_PHASE);
-
-		redirectURL.setWindowState(LiferayWindowState.POP_UP);
-		redirectURL.setPortletMode(PortletMode.VIEW);
-
-		redirectURL.setParameter("struts_action", "/login/login_redirect");
-		redirectURL.setParameter("emailAddress", user.getEmailAddress());
-		redirectURL.setParameter("anonymousUser", Boolean.FALSE.toString());
-
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.LOGIN, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(LiferayWindowState.POP_UP);
-		portletURL.setPortletMode(PortletMode.VIEW);
-
-		portletURL.setParameter("struts_action", "/login/update_account");
 		portletURL.setParameter("saveLastPath", Boolean.FALSE.toString());
+		portletURL.setParameter("struts_action", "/login/update_account");
+
+		PortletURL redirectURL = PortletURLFactoryUtil.create(
+			request, PortletKeys.LOGIN, themeDisplay.getPlid(),
+			PortletRequest.RENDER_PHASE);
+
+		redirectURL.setParameter("struts_action", "/login/login_redirect");
+		redirectURL.setParameter("emailAddress", user.getEmailAddress());
+		redirectURL.setParameter("anonymousUser", Boolean.FALSE.toString());
+		redirectURL.setPortletMode(PortletMode.VIEW);
+		redirectURL.setWindowState(LiferayWindowState.POP_UP);
+
+		portletURL.setParameter("redirect", redirectURL.toString());
+
 		portletURL.setParameter("userId", String.valueOf(user.getUserId()));
 		portletURL.setParameter("emailAddress", user.getEmailAddress());
 		portletURL.setParameter("firstName", user.getFirstName());
 		portletURL.setParameter("lastName", user.getLastName());
-		portletURL.setParameter("redirect", redirectURL.toString());
+		portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		response.sendRedirect(portletURL.toString());
 	}

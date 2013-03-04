@@ -4070,6 +4070,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		User user = getUserByEmailAddress(companyId, emailAddress);
+
+		if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
+			throw new PortalException("Invalid user status");
+		}
+
+		User defaultUser = getDefaultUser(companyId);
+
 		if (facebookId > 0) {
 			autoPassword = false;
 
@@ -4080,14 +4088,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			sendEmail = false;
 		}
-
-		User user = getUserByEmailAddress(companyId, emailAddress);
-
-		if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
-			throw new PortalException("Invalid user status");
-		}
-
-		User defaultUser = getDefaultUser(companyId);
 
 		if (updateUserInformation) {
 			autoScreenName = false;
