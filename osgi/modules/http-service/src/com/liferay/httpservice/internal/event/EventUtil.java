@@ -41,9 +41,13 @@ public class EventUtil
 	implements ServiceTrackerCustomizer<EventAdmin, EventAdmin> {
 
 	public static final String DEPLOYED = "org/osgi/service/web/DEPLOYED";
+
 	public static final String DEPLOYING = "org/osgi/service/web/DEPLOYING";
+
 	public static final String FAILED = "org/osgi/service/web/FAILED";
+
 	public static final String UNDEPLOYED = "org/osgi/service/web/UNDEPLOYED";
+
 	public static final String UNDEPLOYING = "org/osgi/service/web/UNDEPLOYING";
 
 	public static void close() {
@@ -70,25 +74,27 @@ public class EventUtil
 	}
 
 	public void _close() {
-		_eventAdminTracker.close();
+		_eventAdminServiceTracker.close();
 
 		_bundleContext = null;
-		_eventAdminTracker = null;
+		_eventAdminServiceTracker = null;
 		_webExtenderBundle = null;
 	}
 
-	public EventAdmin addingService(ServiceReference<EventAdmin> reference) {
-		_eventAdmin = _bundleContext.getService(reference);
+	public EventAdmin addingService(
+		ServiceReference<EventAdmin> serviceReference) {
+
+		_eventAdmin = _bundleContext.getService(serviceReference);
 
 		return _eventAdmin;
 	}
 
 	public void modifiedService(
-		ServiceReference<EventAdmin> reference, EventAdmin service) {
+		ServiceReference<EventAdmin> serviceReference, EventAdmin eventAdmin) {
 	}
 
 	public void removedService(
-		ServiceReference<EventAdmin> reference, EventAdmin service) {
+		ServiceReference<EventAdmin> serviceReference, EventAdmin eventAdmin) {
 
 		_eventAdmin = null;
 	}
@@ -100,10 +106,6 @@ public class EventUtil
 		Bundle bundle, String eventTopic, Exception exception,
 		boolean collision) {
 
-		String servletContextName = BundleServletContext.getServletContextName(
-			bundle, true);
-		String servletContextPath = StringPool.SLASH.concat(servletContextName);
-
 		Map<String, Object> properties = new Hashtable<String, Object>();
 
 		properties.put("bundle", bundle);
@@ -111,32 +113,45 @@ public class EventUtil
 		properties.put("bundle.symbolicName", bundle.getSymbolicName());
 		properties.put("bundle.version", bundle.getVersion());
 
+		String servletContextName = BundleServletContext.getServletContextName(
+			bundle, true);
+
+		String contextPath = StringPool.SLASH.concat(servletContextName);
+
 		if (collision) {
-			properties.put("collision", servletContextPath);
+			properties.put("collision", contextPath);
 
-			List<String> collidedIds = new ArrayList<String>();
+			List<String> collidedBundleIds = new ArrayList<String>();
 
-			for (Bundle curBundle : bundle.getBundleContext().getBundles()) {
+			BundleContext bundleContext = bundle.getBundleContext();
+
+			for (Bundle curBundle : bundleContext.getBundles()) {
 				if (curBundle.equals(bundle) ||
 					(curBundle.getState() != Bundle.ACTIVE)) {
 
 					continue;
 				}
 
-				String curContextName =
+				String curServletContextName =
 					BundleServletContext.getServletContextName(curBundle);
 
-				if ((curContextName != null) &&
-					curContextName.equals(servletContextName)) {
+				if ((curServletContextName != null) &&
+					curServletContextName.equals(servletContextName)) {
 
-					collidedIds.add(String.valueOf(curBundle.getBundleId()));
+					collidedBundleIds.add(
+						String.valueOf(curBundle.getBundleId()));
 				}
 			}
 
-			properties.put("collision.bundles", collidedIds);
+			properties.put("collision.bundles", collidedBundleIds);
 		}
 
-		properties.put("context.path", servletContextPath);
+		properties.put("context.path", contextPath);
+
+		if (exception != null) {
+			properties.put("exception", exception);
+		}
+
 		properties.put("extender.bundle", _webExtenderBundle);
 		properties.put("extender.bundle.id", _webExtenderBundle.getBundleId());
 		properties.put(
@@ -144,11 +159,6 @@ public class EventUtil
 			_webExtenderBundle.getSymbolicName());
 		properties.put(
 			"extender.bundle.version", _webExtenderBundle.getVersion());
-
-		if (exception != null) {
-			properties.put("exception", exception);
-		}
-
 		properties.put("servlet.context.name", servletContextName);
 		properties.put("timestamp", System.currentTimeMillis());
 
@@ -170,14 +180,14 @@ public class EventUtil
 
 		_webExtenderBundle = _bundleContext.getBundle();
 
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+		Map<String, Object> properties = new Hashtable<String, Object>();
 
 		properties.put(EventConstants.EVENT_TOPIC, _EVENT_TOPICS);
 
-		_eventAdminTracker = new ServiceTracker<EventAdmin, EventAdmin>(
+		_eventAdminServiceTracker = new ServiceTracker<EventAdmin, EventAdmin>(
 			_bundleContext, EventAdmin.class.getName(), this);
 
-		_eventAdminTracker.open();
+		_eventAdminServiceTracker.open();
 	}
 
 	private static final String[] _EVENT_TOPICS = new String[] {
@@ -190,7 +200,7 @@ public class EventUtil
 
 	private BundleContext _bundleContext;
 	private EventAdmin _eventAdmin;
-	private ServiceTracker<EventAdmin, EventAdmin> _eventAdminTracker;
+	private ServiceTracker<EventAdmin, EventAdmin> _eventAdminServiceTracker;
 	private Bundle _webExtenderBundle;
 
 }
