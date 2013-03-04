@@ -101,7 +101,7 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 	protected int getMineBaseModelsCount(long groupId, long userId)
 		throws Exception {
 
-		return JournalArticleServiceUtil.getGroupFileEntriesCount(
+		return JournalArticleServiceUtil.getGroupArticlesCount(
 			groupId, userId, JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
@@ -132,7 +132,7 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected int getRecentBaseModelsCount(long groupId) throws Exception {
-		return JournalArticleServiceUtil.getGroupFileEntriesCount(
+		return JournalArticleServiceUtil.getGroupArticlesCount(
 			groupId, 0, JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
