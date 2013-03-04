@@ -14,14 +14,11 @@
 
 package com.liferay.portlet.mobiledevicerules.util;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.mobile.device.rulegroup.action.impl.SimpleRedirectActionHandler;
 import com.liferay.portal.mobile.device.rulegroup.rule.impl.SimpleRuleHandler;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.LayoutTestUtil;
-import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
 import com.liferay.portlet.mobiledevicerules.model.MDRRule;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
@@ -31,7 +28,6 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalSe
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleLocalServiceUtil;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -44,7 +40,8 @@ public class MDRTestUtil {
 		throws Exception {
 
 		return addAction(
-			ruleGroupInstanceId, getRandomNameMap(), getRandomDescriptionMap(),
+			ruleGroupInstanceId, ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
 			SimpleRedirectActionHandler.getHandlerType(), null);
 	}
 
@@ -56,12 +53,13 @@ public class MDRTestUtil {
 
 		return MDRActionLocalServiceUtil.addAction(
 			ruleGroupInstanceId, nameMap, descriptionMap, type, typeSettings,
-			getDefaultServiceContext());
+			ServiceTestUtil.getServiceContext());
 	}
 
 	public static MDRRule addRule(long ruleGroupId) throws Exception {
 		return addRule(
-			ruleGroupId, getRandomNameMap(), getRandomDescriptionMap(),
+			ruleGroupId, ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
 			SimpleRuleHandler.getHandlerType(), null);
 	}
 
@@ -73,12 +71,13 @@ public class MDRTestUtil {
 
 		return MDRRuleLocalServiceUtil.addRule(
 			ruleGroupId, nameMap, descriptionMap, type, typeSettings,
-			getDefaultServiceContext());
+			ServiceTestUtil.getServiceContext());
 	}
 
 	public static MDRRuleGroup addRuleGroup(long groupId) throws Exception {
 		return addRuleGroup(
-			groupId, getRandomNameMap(), getRandomDescriptionMap());
+			groupId, ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap());
 	}
 
 	public static MDRRuleGroup addRuleGroup(
@@ -87,7 +86,8 @@ public class MDRTestUtil {
 		throws Exception {
 
 		return MDRRuleGroupLocalServiceUtil.addRuleGroup(
-			groupId, nameMap, descriptionMap, getDefaultServiceContext());
+			groupId, nameMap, descriptionMap,
+			ServiceTestUtil.getServiceContext(groupId));
 	}
 
 	public static MDRRuleGroupInstance addRuleGroupInstance(
@@ -98,7 +98,7 @@ public class MDRTestUtil {
 			groupId, ServiceTestUtil.randomString());
 
 		return addRuleGroupInstance(
-				groupId, Layout.class.getName(), layout.getPlid(), ruleGroupId);
+			groupId, Layout.class.getName(), layout.getPlid(), ruleGroupId);
 	}
 
 	public static MDRRuleGroupInstance addRuleGroupInstance(
@@ -107,37 +107,7 @@ public class MDRTestUtil {
 
 		return MDRRuleGroupInstanceLocalServiceUtil.addRuleGroupInstance(
 			groupId, className, classPK, ruleGroupId,
-			getDefaultServiceContext());
-	}
-
-	protected static ServiceContext getDefaultServiceContext()
-		throws Exception {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
-		serviceContext.setUserId(TestPropsValues.getUserId());
-
-		return serviceContext;
-	}
-
-	protected static Map<Locale, String> getRandomDescriptionMap()
-		throws Exception {
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(
-			LocaleUtil.getDefault(), ServiceTestUtil.randomString());
-
-		return descriptionMap;
-	}
-
-	protected static Map<Locale, String> getRandomNameMap() throws Exception {
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(LocaleUtil.getDefault(), ServiceTestUtil.randomString());
-
-		return nameMap;
+			ServiceTestUtil.getServiceContext(groupId));
 	}
 
 }
