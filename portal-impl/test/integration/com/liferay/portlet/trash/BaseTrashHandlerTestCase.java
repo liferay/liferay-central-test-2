@@ -657,8 +657,8 @@ public abstract class BaseTrashHandlerTestCase {
 		baseModel = addBaseModel(parentBaseModel, true, serviceContext);
 
 		Assert.assertEquals(
-				initialBaseModelsCount + 1,
-				getNotInTrashBaseModelsCount(parentBaseModel));
+			initialBaseModelsCount + 1,
+			getNotInTrashBaseModelsCount(parentBaseModel));
 		Assert.assertEquals(
 			initialTrashEntriesCount, getTrashEntriesCount(group.getGroupId()));
 
@@ -668,8 +668,8 @@ public abstract class BaseTrashHandlerTestCase {
 			initialBaseModelsCount,
 			getNotInTrashBaseModelsCount(parentBaseModel));
 		Assert.assertEquals(
-				initialTrashEntriesCount + 1,
-				getTrashEntriesCount(group.getGroupId()));
+			initialTrashEntriesCount + 1,
+			getTrashEntriesCount(group.getGroupId()));
 
 		Assert.assertFalse(isInTrashContainer(baseModel));
 
@@ -743,7 +743,7 @@ public abstract class BaseTrashHandlerTestCase {
 			group, serviceContext);
 
 		int initialBaseModelsCount = getRecentBaseModelsCount(
-				group.getGroupId());
+			group.getGroupId());
 
 		addBaseModel(parentBaseModel, true, serviceContext);
 		addBaseModel(parentBaseModel, true, serviceContext);

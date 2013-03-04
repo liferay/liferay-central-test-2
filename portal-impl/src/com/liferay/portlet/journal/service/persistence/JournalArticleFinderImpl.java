@@ -822,8 +822,8 @@ public class JournalArticleFinderImpl
 			}
 			else {
 				sql = StringUtil.replace(
-						sql, "[$FOLDER_ID$]",
-						getFolderIds(folderIds, JournalArticleImpl.TABLE_NAME));
+					sql, "[$FOLDER_ID$]",
+					getFolderIds(folderIds, JournalArticleImpl.TABLE_NAME));
 			}
 
 			if (inlineSQLHelper) {

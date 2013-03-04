@@ -131,7 +131,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Override
 	protected int getMineBaseModelsCount(long groupId, long userId)
-			throws Exception {
+		throws Exception {
 
 		return DLAppServiceUtil.getGroupFileEntriesCount(
 			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, null,
