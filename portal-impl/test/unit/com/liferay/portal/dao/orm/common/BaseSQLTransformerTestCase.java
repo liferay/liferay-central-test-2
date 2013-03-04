@@ -37,7 +37,4 @@ public abstract class BaseSQLTransformerTestCase {
 		return SQLTransformer.transform(sql);
 	}
 
-	protected static final String NON_EMPTY_FIELD_COMPARISON =
-		"SELECT * FROM table where field != ''";
-
 }

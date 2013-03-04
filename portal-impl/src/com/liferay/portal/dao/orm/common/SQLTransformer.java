@@ -265,7 +265,7 @@ public class SQLTransformer {
 		return matcher.replaceAll("$1 ($2)");
 	}
 
-	private String _replaceNonEmptinessComparison(String sql) {
+	private String _replaceNotEqualsBlankStringComparison(String sql) {
 		return StringUtil.replace(sql, " != ''", " IS NOT NULL");
 	}
 
@@ -307,7 +307,7 @@ public class SQLTransformer {
 			}
 		}
 		else if (_vendorOracle) {
-			newSQL = _replaceNonEmptinessComparison(newSQL);
+			newSQL = _replaceNotEqualsBlankStringComparison(newSQL);
 		}
 		else if (_vendorPostgreSQL) {
 			newSQL = _replaceNegativeComparison(newSQL);
@@ -421,7 +421,6 @@ public class SQLTransformer {
 		"CAST_LONG\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _castTextPattern = Pattern.compile(
 		"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
-
 	private static Pattern _integerDivisionPattern = Pattern.compile(
 		"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _jpqlCountPattern = Pattern.compile(

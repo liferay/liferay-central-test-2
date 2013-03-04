@@ -26,10 +26,10 @@ import org.junit.Test;
 public class OracleSQLTransformerTest extends BaseSQLTransformerTestCase {
 
 	@Test
-	public void testReplaceNonEmptinessComparison() {
+	public void testReplaceNotEqualsBlankStringComparison() {
 		Assert.assertEquals(
-			"SELECT * FROM table where field IS NOT NULL",
-			transformSQL(NON_EMPTY_FIELD_COMPARISON));
+			"SELECT * FROM User_ WHERE emailAddress IS NOT NULL",
+			transformSQL("SELECT * FROM User_ WHERE emailAddress != ''"));
 	}
 
 	@Override
