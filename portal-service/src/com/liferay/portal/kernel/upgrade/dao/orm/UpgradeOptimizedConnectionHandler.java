@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.upgrade.dao.orm;
 
+import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.lang.reflect.InvocationHandler;
@@ -59,6 +60,8 @@ public class UpgradeOptimizedConnectionHandler implements InvocationHandler {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		sql = SQLTransformer.transform(sql);
 
 		PreparedStatement preparedStatement = _connection.prepareStatement(
 			sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
