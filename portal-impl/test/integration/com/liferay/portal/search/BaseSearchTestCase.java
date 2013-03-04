@@ -259,8 +259,9 @@ public abstract class BaseSearchTestCase {
 			parentBaseModel, getSearchKeywords(), serviceContext);
 
 		searchContext.setAttribute(
-			"structureField", getDDMStructureFieldName());
-		searchContext.setAttribute("structureValue", getSearchKeywords());
+			"ddmStructureFieldName", getDDMStructureFieldName());
+		searchContext.setAttribute(
+			"ddmStructureFieldValue", getSearchKeywords());
 
 		Assert.assertEquals(
 			initialBaseModelsSearchCount + 1,

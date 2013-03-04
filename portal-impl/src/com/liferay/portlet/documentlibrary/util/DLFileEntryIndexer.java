@@ -162,9 +162,9 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			Field.HIDDEN, searchContext.isIncludeAttachments());
 
 		String structureField = (String)searchContext.getAttribute(
-			"structureField");
+			"ddmStructureFieldName");
 		String structureValue = (String)searchContext.getAttribute(
-			"structureValue");
+			"ddmStructureFieldValue");
 
 		if (Validator.isNotNull(structureField) &&
 			Validator.isNotNull(structureValue)) {

@@ -110,9 +110,9 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		String structureField = (String)searchContext.getAttribute(
-			"structureField");
+			"ddmStructureFieldName");
 		String structureValue = (String)searchContext.getAttribute(
-			"structureValue");
+			"ddmStructureFieldValue");
 
 		if (Validator.isNotNull(structureField) &&
 			Validator.isNotNull(structureValue)) {
