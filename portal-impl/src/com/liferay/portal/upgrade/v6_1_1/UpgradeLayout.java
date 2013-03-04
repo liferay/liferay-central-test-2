@@ -14,7 +14,6 @@
 
 package com.liferay.portal.upgrade.v6_1_1;
 
-import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -122,11 +121,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			sb.append("layoutPrototypeUuid != '' and ");
 			sb.append("sourcePrototypeLayoutUuid != ''");
 
-			String sql = sb.toString();
-
-			sql = SQLTransformer.transform(sql);
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
