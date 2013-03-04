@@ -44,13 +44,9 @@ public class WebBundleDeployer {
 	}
 
 	public void close() {
-		Set<String> keySet = ServletContextPool.keySet();
+		Set<String> servletContextNames = ServletContextPool.keySet();
 
-		Iterator<String> iterator = keySet.iterator();
-
-		while (iterator.hasNext()) {
-			String servletContextName = iterator.next();
-
+		for (String servletContextName : servletContextNames) {
 			ServletContext servletContext = ServletContextPool.get(
 				servletContextName);
 
@@ -83,7 +79,7 @@ public class WebBundleDeployer {
 			servletContextName);
 
 		if (servletContext != null) {
-			_collidedWabBundleIds.add(bundle.getBundleId());
+			_collidedWABBundleIds.add(bundle.getBundleId());
 
 			return;
 		}
@@ -99,7 +95,6 @@ public class WebBundleDeployer {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
 	}
 
 	public void doStop(Bundle bundle, String servletContextName) {
@@ -125,39 +120,40 @@ public class WebBundleDeployer {
 			_log.error(e, e);
 		}
 
-		handleCollidedWabs(bundle, servletContextName);
+		handleCollidedWABs(bundle, servletContextName);
 	}
 
-	protected void handleCollidedWabs(
+	protected void handleCollidedWABs(
 		Bundle bundle, String servletContextName) {
 
-		if (_collidedWabBundleIds.isEmpty()) {
+		if (_collidedWABBundleIds.isEmpty()) {
 			return;
 		}
 
-		Iterator<Long> iterator = _collidedWabBundleIds.iterator();
-
 		BundleContext bundleContext = _webExtenderServlet.getBundleContext();
+
+		Iterator<Long> iterator = _collidedWABBundleIds.iterator();
 
 		while (iterator.hasNext()) {
 			long bundleId = iterator.next();
-			Bundle candidate = bundleContext.getBundle(bundleId);
 
-			if (candidate == null) {
+			Bundle curBundle = bundleContext.getBundle(bundleId);
+
+			if (curBundle == null) {
 				iterator.remove();
 
 				continue;
 			}
 
 			String curServletContextName =
-				BundleServletContext.getServletContextName(candidate);
+				BundleServletContext.getServletContextName(curBundle);
 
 			if (servletContextName.equals(curServletContextName) &&
-				(bundle.getBundleId() != candidate.getBundleId())) {
+				(bundle.getBundleId() != curBundle.getBundleId())) {
 
 				iterator.remove();
 
-				doStart(candidate, servletContextName);
+				doStart(curBundle, servletContextName);
 
 				break;
 			}
@@ -166,7 +162,7 @@ public class WebBundleDeployer {
 
 	private static Log _log = LogFactoryUtil.getLog(WebBundleDeployer.class);
 
-	private List<Long> _collidedWabBundleIds = Collections.synchronizedList(
+	private List<Long> _collidedWABBundleIds = Collections.synchronizedList(
 		new ArrayList<Long>());
 	private WebExtenderServlet _webExtenderServlet;
 
