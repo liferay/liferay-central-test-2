@@ -38,8 +38,6 @@ _sass_cache_*.css
 /benchmarks/lib
 /benchmarks/log
 
-/cobertura-agent/classes
-
 /classes/Test.class
 
 /intellij
@@ -195,6 +193,8 @@ _sass_cache_*.css
 /support-tomcat/support-tomcat*.jar
 
 /test-results
+
+/tools/cobertura-agent/classes
 
 /tools/maven/*.asc
 
