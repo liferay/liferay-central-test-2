@@ -221,8 +221,8 @@
 					<isset property="manifest.premain.class" />
 					<then>
 						<manifest file="classes/META-INF/MANIFEST.MF" mode="update">
-							<attribute name="Premain-Class" value="${manifest.premain.class}" />
 							<attribute name="Can-Retransform-Classes" value="${manifest.can.retransform.classes}" />
+							<attribute name="Premain-Class" value="${manifest.premain.class}" />
 						</manifest>
 					</then>
 				</if>
