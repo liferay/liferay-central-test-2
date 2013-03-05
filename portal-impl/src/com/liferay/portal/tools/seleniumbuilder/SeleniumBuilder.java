@@ -41,13 +41,10 @@ public class SeleniumBuilder {
 		SeleniumBuilderContext seleniumBuilderContext =
 			new SeleniumBuilderContext(baseDir);
 
-		String types = arguments.get("selenium.types");
+		Set<String> types = SetUtil.fromArray(
+			StringUtil.split(arguments.get("selenium.types")));
 
-		String[] typesArray = StringUtil.split(types);
-
-		Set<String> typesSet = SetUtil.fromArray(typesArray);
-
-		if (typesSet.contains("function")) {
+		if (types.contains("function")) {
 			FunctionConverter functionConverter = new FunctionConverter(
 				seleniumBuilderContext);
 
