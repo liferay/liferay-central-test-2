@@ -65,22 +65,25 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 			_excludePatterns[i] = pattern;
 		}
 
-		// Shutdown hook to persistent instrument data
+		ProjectDataUtil.addShutdownHook(
+			new Runnable() {
 
-		ProjectDataUtil.addShutdownHook(new Runnable() {
+				public void run() {
+					File dataFile =
+							CoverageDataFileHandler.getDefaultDataFile();
 
-			public void run() {
-				File dataFile = CoverageDataFileHandler.getDefaultDataFile();
+					Collection<ProjectData> projectDatas =
+							_projectDatas.values();
 
-				Collection<ProjectData> projectDatas = _projectDatas.values();
+					ProjectDataUtil.mergeSave(
+						dataFile, lockFile,
+						projectDatas.toArray(
+							new ProjectData[projectDatas.size()]));
+				}
 
-				ProjectDataUtil.mergeSave(
-					dataFile, lockFile,
-					projectDatas.toArray(new ProjectData[projectDatas.size()]));
 			}
 
-		});
-
+		);
 	}
 
 	public boolean _matches(String className) {
@@ -110,9 +113,8 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 	}
 
 	public byte[] transform(
-			ClassLoader classLoader, String className,
-			Class<?> classBeingRedefined, ProtectionDomain protectionDomain,
-			byte[] classfileBuffer)
+			ClassLoader classLoader, String className, Class<?> refinedClass,
+			ProtectionDomain protectionDomain, byte[] classfileBuffer)
 		throws IllegalClassFormatException {
 
 		if (_matches(className)) {
@@ -133,10 +135,10 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 
 			ClassVisitor classVisitor = classWriter;
 
-			if (classBeingRedefined != null) {
+			if (refinedClass != null) {
 
 				// This is retransform. The HasBeenInstrumented mark interface
-				// has to be removed to satisfy JVM instrument tool
+				// has to be removed to satisfy the JVM instrument tool.
 
 				classVisitor = new RemoveHasBeenInstrumentedClassVisitor(
 					classVisitor);
@@ -155,9 +157,8 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 			return classWriter.toByteArray();
 		}
 
-		// Modify TouchCollector's static initialization block,
-		// redirect ProjectData.initialize() to
-		// InstrumentationAgent.initialize()
+		// Modify TouchCollector's static initialization block by redirecting
+		// ProjectData#initialize to InstrumentationAgent#initialize
 
 		if (className.equals(
 				"net/sourceforge/cobertura/coveragedata/TouchCollector")) {
@@ -168,6 +169,7 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 				classWriter);
 
 			ClassReader classReader = new ClassReader(classfileBuffer);
+
 			classReader.accept(classVisitor, 0);
 
 			return classWriter.toByteArray();
@@ -176,10 +178,10 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 		return null;
 	}
 
-	private Pattern[] _excludePatterns;
-	private final static String _hasBeenInstrumentedClassName =
+	private static final String _HAS_BEEN_INSTRUMENTED_CLASS_NAME =
 		"net/sourceforge/cobertura/coveragedata/HasBeenInstrumented";
 
+	private Pattern[] _excludePatterns;
 	private Pattern[] _includePatterns;
 	private ConcurrentMap<ClassLoader, ProjectData> _projectDatas =
 		new ConcurrentHashMap<ClassLoader, ProjectData>();
@@ -199,11 +201,11 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 			String superName, String[] interfaces) {
 
 			if ((access & Opcodes.ACC_SUPER) != 0) {
-				List<String> interfaceList = Arrays.asList(interfaces);
+				List<String> interfacesList = Arrays.asList(interfaces);
 
-				if (interfaceList.remove(_hasBeenInstrumentedClassName)) {
-					interfaces = interfaceList.toArray(
-						new String[interfaceList.size()]);
+				if (interfacesList.remove(_HAS_BEEN_INSTRUMENTED_CLASS_NAME)) {
+					interfaces = interfacesList.toArray(
+						new String[interfacesList.size()]);
 
 					super.visit(
 						version, access, name, signature, superName,

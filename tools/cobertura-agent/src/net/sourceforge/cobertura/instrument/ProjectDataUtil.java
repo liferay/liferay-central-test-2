@@ -48,9 +48,6 @@ public class ProjectDataUtil {
 	}
 
 	public static ProjectData captureProjectData(File dataFile, File lockFile) {
-
-		// Flush out all buffered ProjectDatas
-
 		for (Runnable runnable : _getShutdownHooks()) {
 			runnable.run();
 		}
@@ -74,9 +71,6 @@ public class ProjectDataUtil {
 
 	public static ProjectData collectProjectData() {
 		ProjectData projectData = new ProjectData();
-
-		// Mute TouchCollector.applyTouchesOnProjectData()'s System.out
-		// to collect touch data
 
 		PrintStream printStream = new PrintStream(new ByteArrayOutputStream());
 
@@ -103,7 +97,7 @@ public class ProjectDataUtil {
 			FileLock fileLock = _lockFile(lockFile);
 
 			try {
-				ProjectData masterProjectData;
+				ProjectData masterProjectData = null;
 
 				if (dataFile.exists()) {
 					masterProjectData = _readProjectData(dataFile);
@@ -113,7 +107,6 @@ public class ProjectDataUtil {
 				}
 
 				for (ProjectData projectData : projectDatas) {
-
 					masterProjectData.merge(projectData);
 				}
 
@@ -125,11 +118,6 @@ public class ProjectDataUtil {
 		}
 	}
 
-	/**
-	 * Get system wide unique shutdownHook list. ProjectDataUtil could be loaded
-	 * by multiple ClassLoaders which in turn create multiple shutdownHook lists.
-	 * This method ensures always use the system ClassLoader initialized one.
-	 */
 	private static List<Runnable> _getShutdownHooks() {
 		ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
 
@@ -252,8 +240,6 @@ public class ProjectDataUtil {
 
 	static {
 		ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
-
-		// Only initialize for system ClassLoader
 
 		if (ProjectDataUtil.class.getClassLoader() == systemClassLoader) {
 			Runtime.getRuntime().addShutdownHook(

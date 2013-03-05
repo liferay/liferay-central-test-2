@@ -24,15 +24,6 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * All assert classes are required to be added after tests finish to avoid eager
- * class loading.<p>
- *
- * The main class is inferred by the test class name, so make sure you always
- * follow the unit test naming pattern. For dependent classes, extend
- * CodeCoverageAssertor to overwrite
- * {@link #appendAssertClasses(java.util.List)} to append Class literals. As
- * Class literals are lazily loaded, it won't trigger an eager loading.
- *
  * @author Shuyang Zhou
  */
 public class CodeCoverageAssertor implements TestRule {
@@ -59,13 +50,13 @@ public class CodeCoverageAssertor implements TestRule {
 
 			@Override
 			public void evaluate() throws Throwable {
-				_dynamicInstrumentMethod.invoke(null, _includes, _excludes);
+				_dynamicallyInstrumentMethod.invoke(null, _includes, _excludes);
 
 				try {
 					statement.evaluate();
 				}
 				finally {
-					List<Class<?>> assertClassList = new ArrayList<Class<?>>();
+					List<Class<?>> assertClasses = new ArrayList<Class<?>>();
 
 					String className = description.getClassName();
 
@@ -73,26 +64,32 @@ public class CodeCoverageAssertor implements TestRule {
 						className = className.substring(
 							0, className.length() - 4);
 
-						ClassLoader classLoader = getClass().getClassLoader();
+						ClassLoader classLoader = getClassLoader();
 
 						Class<?> clazz = classLoader.loadClass(className);
 
-						assertClassList.add(clazz);
+						assertClasses.add(clazz);
 					}
 
-					appendAssertClasses(assertClassList);
+					appendAssertClasses(assertClasses);
 
 					_assertCoverageMethod.invoke(
 						null, _includeInnerClasses,
-						assertClassList.toArray(
-							new Class<?>[assertClassList.size()]));
+						assertClasses.toArray(
+							new Class<?>[assertClasses.size()]));
 				}
 			}
 		};
 	}
+	
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+		
+		return clazz.getClassLoader();
+	}
 
 	private static final Method _assertCoverageMethod;
-	private static final Method _dynamicInstrumentMethod;
+	private static final Method _dynamicallyInstrumentMethod;
 
 	private final String[] _excludes;
 	private final boolean _includeInnerClasses;
@@ -107,9 +104,8 @@ public class CodeCoverageAssertor implements TestRule {
 
 			_assertCoverageMethod = instrumentationAgentClass.getMethod(
 				"assertCoverage", boolean.class, Class[].class);
-
-			_dynamicInstrumentMethod = instrumentationAgentClass.getMethod(
-				"dynamicInstrument", String[].class, String[].class);
+			_dynamicallyInstrumentMethod = instrumentationAgentClass.getMethod(
+				"dynamicallyInstrument", String[].class, String[].class);
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);

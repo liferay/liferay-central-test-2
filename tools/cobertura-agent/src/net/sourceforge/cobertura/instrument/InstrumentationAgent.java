@@ -35,7 +35,7 @@ public class InstrumentationAgent {
 	public static synchronized void assertCoverage(
 		boolean includeInnerClasses, Class<?>... classes) {
 
-		if (!_dynamicInstrumented) {
+		if (!_dynamicallyInstrumented) {
 			return;
 		}
 
@@ -61,11 +61,11 @@ public class InstrumentationAgent {
 		System.clearProperty("junit.code.coverage");
 	}
 
-	public static synchronized void dynamicInstrument(
+	public static synchronized void dynamicallyInstrument(
 			String[] includes, String[] excludes)
 		throws UnmodifiableClassException {
 
-		if ((_instrumentation == null) || _dynamicInstrumented) {
+		if ((_instrumentation == null) || _dynamicallyInstrumented) {
 			return;
 		}
 
@@ -95,38 +95,36 @@ public class InstrumentationAgent {
 		_instrumentation.retransformClasses(
 			modifiableClasses.toArray(new Class<?>[modifiableClasses.size()]));
 
-		_dynamicInstrumented = true;
+		_dynamicallyInstrumented = true;
 
 		System.setProperty("junit.code.coverage", "true");
 	}
 
 	public static void initialize() {
+		ProjectDataUtil.addShutdownHook(
+			new Runnable() {
 
-		// Shutdown hook for each ClassLoader to persistent touch data
+				public void run() {
+					File dataFile =
+						CoverageDataFileHandler.getDefaultDataFile();
 
-		ProjectDataUtil.addShutdownHook(new Runnable() {
+					ProjectData projectData =
+						ProjectDataUtil.collectProjectData();
 
-			public void run() {
+					ProjectDataUtil.mergeSave(dataFile, _lockFile, projectData);
+				}
 
-				// Merge persistent touch data
-
-				File dataFile = CoverageDataFileHandler.getDefaultDataFile();
-
-				ProjectData projectData = ProjectDataUtil.collectProjectData();
-
-				ProjectDataUtil.mergeSave(dataFile, _lockFile, projectData);
 			}
-
-		});
+		);
 	}
 
 	public static synchronized void premain(
-		String agentArgs, Instrumentation instrumentation) {
+		String agentArguments, Instrumentation instrumentation) {
 
-		String[] args = agentArgs.split(";");
+		String[] arguments = agentArguments.split(";");
 
-		String[] includes = args[0].split(",");
-		String[] excludes = args[1].split(",");
+		String[] includes = arguments[0].split(",");
+		String[] excludes = arguments[1].split(",");
 
 		boolean junitCodeCoverage = Boolean.getBoolean("junit.code.coverage");
 
@@ -142,8 +140,8 @@ public class InstrumentationAgent {
 			_includes = includes;
 			_excludes = excludes;
 
-			// Force clear data file to make sure the coervage assert is based
-			// on current test.
+			// Force clear data file to make sure the coverage assert is based
+			// on the current test
 
 			File dataFile = CoverageDataFileHandler.getDefaultDataFile();
 
@@ -151,8 +149,8 @@ public class InstrumentationAgent {
 		}
 		else {
 			System.out.println(
-				"Warning! Current JVM does not support class retransform. " +
-					"Dynamic instrument is disabled.");
+				"Current JVM does not support class retransform. " +
+					"Dynamic instrumententation is disabled.");
 		}
 	}
 
@@ -161,11 +159,11 @@ public class InstrumentationAgent {
 
 		if (classData == null) {
 			throw new RuntimeException(
-				"Class " + clazz.getName() + " has no coverage data.");
+				"Class " + clazz.getName() + " has no coverage data");
 		}
 
 		if ((classData.getBranchCoverageRate() != 1.0) ||
-				(classData.getLineCoverageRate() != 1.0)) {
+			(classData.getLineCoverageRate() != 1.0)) {
 
 			System.out.printf(
 				"%n[Cobertura] %s is not fully covered.%n[Cobertura]Branch " +
@@ -194,9 +192,9 @@ public class InstrumentationAgent {
 			parentFolder.mkdirs();
 		}
 
-		// OS wide lock file, created by the first started process where we know
-		// for sure there is no race condition. All data file accessing needs to
-		// acquire exclusive lock on this lock file to prevent lost update.
+		// OS wide lock file is created by the first started process where we
+		// know for sure that there is no race condition. Acquiring an exclusive
+		// lock on this lock file prevents losing updates on the data file.
 
 		_lockFile = new File(parentFolder, "lock");
 
@@ -208,7 +206,7 @@ public class InstrumentationAgent {
 		}
 	}
 
-	private static boolean _dynamicInstrumented;
+	private static boolean _dynamicallyInstrumented;
 	private static String[] _excludes;
 	private static String[] _includes;
 	private static Instrumentation _instrumentation;
