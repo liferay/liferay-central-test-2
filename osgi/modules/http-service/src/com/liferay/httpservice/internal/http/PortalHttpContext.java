@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 
-import java.io.IOException;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -49,10 +47,11 @@ public class PortalHttpContext implements HttpContext {
 		return mimeType;
 	}
 
-	public URL getResource(String resource) {
+	public URL getResource(String path) {
 		try {
-			return _servletContext.getResource(resource);
-		} catch (MalformedURLException mue) {
+			return _servletContext.getResource(path);
+		}
+		catch (MalformedURLException mue) {
 			_log.error(mue, mue);
 		}
 
@@ -60,8 +59,7 @@ public class PortalHttpContext implements HttpContext {
 	}
 
 	public boolean handleSecurity(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		return true;
 	}
