@@ -14,7 +14,6 @@
 
 package com.liferay.httpservice.internal.servlet;
 
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.httpservice.servlet.BundleServletConfig;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContext;
 import com.liferay.portal.kernel.log.Log;
@@ -169,7 +168,7 @@ public class BundleServletContext extends LiferayServletContext {
 	public void registerFilter(
 			String filterMapping, Filter filter,
 			Map<String, String> initParameters, HttpContext httpContext)
-		throws NamespaceException, ServletException {
+		throws ServletException {
 
 		validate(filterMapping, filter, httpContext);
 
@@ -178,7 +177,7 @@ public class BundleServletContext extends LiferayServletContext {
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		int serviceRanking = GetterUtil.getInteger(
-			initParameters.remove(HttpServicePropsKeys.SERVICE_RANKING));
+			initParameters.remove("service.ranking"));
 
 		try {
 			currentThread.setContextClassLoader(getClassLoader());
@@ -291,8 +290,7 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	protected void validate(
-			String filterMapping, Filter filter, HttpContext httpContext)
-		throws NamespaceException {
+		String filterMapping, Filter filter, HttpContext httpContext) {
 
 		if (filterMapping == null) {
 			throw new IllegalArgumentException("FilterMapping cannot be null");

@@ -14,8 +14,6 @@
 
 package com.liferay.httpservice.internal.http;
 
-import com.liferay.httpservice.HttpServicePropsKeys.Action;
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.httpservice.internal.servlet.BundleServletContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,14 +29,13 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpContext;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
  * @author Raymond Augé
  * @author Miguel Pastor
  */
 public class ServletTracker
-	implements ServiceTrackerCustomizer<Servlet, Servlet> {
+	extends BaseServiceTrackerCustomizer<Servlet, Servlet> {
 
 	public ServletTracker(HttpSupport httpSupport) {
 		_httpSupport = httpSupport;
@@ -49,27 +46,27 @@ public class ServletTracker
 
 		Servlet servlet = bundleContext.getService(serviceReference);
 
-		return doAction(serviceReference, servlet, Action.ADDING);
+		return doAction(serviceReference, servlet, ACTION_ADDING);
 	}
 
 	public void modifiedService(
 		ServiceReference<Servlet> serviceReference, Servlet servlet) {
 
-		doAction(serviceReference, servlet, Action.MODIFIED);
+		doAction(serviceReference, servlet, ACTION_MODIFIED);
 	}
 
 	public void removedService(
 		ServiceReference<Servlet> serviceReference, Servlet servlet) {
 
-		doAction(serviceReference, servlet, Action.REMOVED);
+		doAction(serviceReference, servlet, ACTION_REMOVED);
 	}
 
 	protected Servlet doAction(
 		ServiceReference<Servlet> serviceReference, Servlet servlet,
-		Action action) {
+		int action) {
 
 		String alias = GetterUtil.getString(
-			serviceReference.getProperty(HttpServicePropsKeys.ALIAS));
+			serviceReference.getProperty("alias"));
 
 		if (Validator.isNull(alias)) {
 			return servlet;
@@ -77,15 +74,13 @@ public class ServletTracker
 
 		Map<String, String> initParameters = new Hashtable<String, String>();
 
-		if (action != Action.REMOVED) {
+		if (action != ACTION_REMOVED) {
 			for (String key : serviceReference.getPropertyKeys()) {
-				if (key.startsWith(HttpServicePropsKeys.INIT_PREFIX)) {
+				if (key.startsWith("init.")) {
 					String value = GetterUtil.getString(
 						serviceReference.getProperty(key));
 
-					initParameters.put(
-						key.substring(
-							HttpServicePropsKeys.INIT_PREFIX.length()), value);
+					initParameters.put(key.substring(5), value);
 				}
 			}
 		}
@@ -96,14 +91,13 @@ public class ServletTracker
 			BundleServletContext bundleServletContext =
 				_httpSupport.getBundleServletContext(bundle);
 
-			if (action != Action.ADDING) {
+			if (action != ACTION_ADDING) {
 				bundleServletContext.unregisterServlet(alias);
 			}
 
-			if (action != Action.REMOVED) {
+			if (action != ACTION_REMOVED) {
 				String contextId = GetterUtil.getString(
-					serviceReference.getProperty(
-						HttpServicePropsKeys.CONTEXT_ID));
+					serviceReference.getProperty("contextId"));
 
 				HttpContext httpContext = _httpSupport.getHttpContext(
 					contextId);

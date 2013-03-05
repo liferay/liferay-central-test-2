@@ -12,26 +12,21 @@
  * details.
  */
 
-package com.liferay.httpservice;
+package com.liferay.httpservice.internal.http;
+
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
  * @author Miguel Pastor
  * @author Raymond Augé
  */
-public interface HttpServicePropsKeys {
+public abstract class BaseServiceTrackerCustomizer<S, T>
+	implements ServiceTrackerCustomizer<S, T> {
 
-	public static final String ALIAS = "alias";
+	protected static final int ACTION_ADDING = 0;
 
-	public static final String CONTEXT_ID = "contextId";
+	protected static final int ACTION_MODIFIED = 1;
 
-	public static final String INIT_PREFIX = "init.";
-
-	public static final String SERVICE_RANKING = "service.ranking";
-
-	public static enum Action {
-
-		ADDING, REMOVED, MODIFIED
-
-	}
+	protected static final int ACTION_REMOVED = 2;
 
 }

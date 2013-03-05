@@ -14,14 +14,12 @@
 
 package com.liferay.httpservice.internal.http;
 
-import com.liferay.httpservice.HttpServicePropsKeys.Action;
-import com.liferay.httpservice.HttpServicePropsKeys;
 import com.liferay.httpservice.internal.servlet.BundleServletContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -30,13 +28,13 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpContext;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
  * @author Raymond Augé
  * @author Miguel Pastor
  */
-public class FilterTracker implements ServiceTrackerCustomizer<Filter, Filter> {
+public class FilterTracker extends
+	BaseServiceTrackerCustomizer<Filter, Filter> {
 
 	public FilterTracker(HttpSupport httpSupport) {
 		_httpSupport = httpSupport;
@@ -47,49 +45,44 @@ public class FilterTracker implements ServiceTrackerCustomizer<Filter, Filter> {
 
 		Filter filter = bundleContext.getService(serviceReference);
 
-		return doAction(serviceReference, filter, Action.ADDING);
+		return doAction(serviceReference, filter, ACTION_ADDING);
 	}
 
 	public void modifiedService(
 		ServiceReference<Filter> serviceReference, Filter filter) {
 
-		doAction(serviceReference, filter, Action.MODIFIED);
+		doAction(serviceReference, filter, ACTION_MODIFIED);
 	}
 
 	public void removedService(
 		ServiceReference<Filter> serviceReference, Filter filter) {
 
-		doAction(serviceReference, filter, Action.REMOVED);
+		doAction(serviceReference, filter, ACTION_REMOVED);
 	}
 
 	protected Filter doAction(
-		ServiceReference<Filter> serviceReference, Filter filter,
-		Action action) {
+		ServiceReference<Filter> serviceReference, Filter filter, int action) {
 
 		String pattern = GetterUtil.getString(
 			serviceReference.getProperty("pattern"));
 
-		Map<String, String> initParameters = new Hashtable<String, String>();
+		Map<String, String> initParameters = new HashMap<String, String>();
 
-		if (action != Action.REMOVED) {
+		if (action != ACTION_REMOVED) {
 			for (String key : serviceReference.getPropertyKeys()) {
-				if (key.startsWith(HttpServicePropsKeys.INIT_PREFIX)) {
+				if (key.startsWith("init.")) {
 					String value = GetterUtil.getString(
 						serviceReference.getProperty(key));
 
-					initParameters.put(
-						key.substring(
-							HttpServicePropsKeys.INIT_PREFIX.length()), value);
+					initParameters.put(key.substring(5), value);
 				}
 			}
 
 			int serviceRanking = GetterUtil.getInteger(
-				serviceReference.getProperty(
-					HttpServicePropsKeys.SERVICE_RANKING));
+				serviceReference.getProperty("service.ranking"));
 
 			initParameters.put(
-				HttpServicePropsKeys.SERVICE_RANKING,
-				String.valueOf(serviceRanking));
+				"service.ranking", String.valueOf(serviceRanking));
 		}
 
 		Bundle bundle = serviceReference.getBundle();
@@ -98,14 +91,13 @@ public class FilterTracker implements ServiceTrackerCustomizer<Filter, Filter> {
 			BundleServletContext bundleServletContext =
 				_httpSupport.getBundleServletContext(bundle);
 
-			if (action != Action.ADDING) {
+			if (action != ACTION_ADDING) {
 				bundleServletContext.unregisterFilter(pattern);
 			}
 
-			if (action != Action.REMOVED) {
+			if (action != ACTION_REMOVED) {
 				String contextId = GetterUtil.getString(
-					serviceReference.getProperty(
-						HttpServicePropsKeys.CONTEXT_ID));
+					serviceReference.getProperty("contextId"));
 
 				HttpContext httpContext = _httpSupport.getHttpContext(
 					contextId);

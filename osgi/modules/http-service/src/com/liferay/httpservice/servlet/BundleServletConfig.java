@@ -53,8 +53,7 @@ public class BundleServletConfig implements ServletConfig {
 		return _initParameters.get(name);
 	}
 
-	@SuppressWarnings("rawtypes")
-	public Enumeration getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 		return Collections.enumeration(_initParameters.keySet());
 	}
 
