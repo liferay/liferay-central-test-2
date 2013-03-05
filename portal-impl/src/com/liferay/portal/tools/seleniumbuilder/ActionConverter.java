@@ -18,4 +18,9 @@ package com.liferay.portal.tools.seleniumbuilder;
  * @author Michael Hashimoto
  */
 public class ActionConverter extends BaseConverter {
+
+	public ActionConverter(SeleniumBuilderContext seleniumBuilderContext) {
+		super(seleniumBuilderContext);
+	}
+
 }

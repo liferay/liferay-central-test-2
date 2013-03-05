@@ -14,7 +14,7 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
-import com.liferay.portal.kernel.util.StringBundler;
+import java.util.Map;
 
 /**
  * @author Michael Hashimoto
@@ -22,42 +22,15 @@ import com.liferay.portal.kernel.util.StringBundler;
 public class FunctionConverter extends BaseConverter {
 
 	public FunctionConverter(SeleniumBuilderContext seleniumBuilderContext) {
-		_seleniumBuilderContext = seleniumBuilderContext;
+		super(seleniumBuilderContext);
 	}
 
-	public void convert(String functionName) {
-		StringBundler sb = new StringBundler();
+	public void convert(String functionName) throws Exception {
+		Map<String, Object> context = getContext();
 
-		sb.append("package ");
-		sb.append(_getFunctionPackageName(functionName));
-		sb.append(";\n\n");
+		context.put("functionName", functionName);
 
-		sb.append("import com.liferay.portalweb.portal.util.liferayselenium.");
-		sb.append("LiferaySelenium;\n");
-
-		sb.append("public class ");
-		sb.append(_getFunctionSimpleClassName(functionName));
-		sb.append(" extends BaseFunctions {\n\n");
-
-		sb.append("public ");
-		sb.append(_getFunctionSimpleClassName(functionName));
-		sb.append("(LiferaySelenium liferaySelenium) {\n");
-
-		sb.append("super(liferaySelenium);\n");
-
-		sb.append("}\n");
-
-		sb.append("}");
+		processTemplate("function.ftl", context);
 	}
-
-	private String _getFunctionPackageName(String functionName) {
-		return _seleniumBuilderContext.getFunctionPackageName(functionName);
-	}
-
-	private String _getFunctionSimpleClassName(String functionName) {
-		return _seleniumBuilderContext.getFunctionSimpleClassName(functionName);
-	}
-
-	private SeleniumBuilderContext _seleniumBuilderContext;
 
 }

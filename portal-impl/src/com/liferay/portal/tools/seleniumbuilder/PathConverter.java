@@ -18,4 +18,9 @@ package com.liferay.portal.tools.seleniumbuilder;
  * @author Michael Hashimoto
  */
 public class PathConverter extends BaseConverter {
+
+	public PathConverter(SeleniumBuilderContext seleniumBuilderContext) {
+		super(seleniumBuilderContext);
+	}
+
 }

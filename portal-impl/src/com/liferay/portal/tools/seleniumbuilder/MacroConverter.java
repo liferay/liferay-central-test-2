@@ -18,4 +18,9 @@ package com.liferay.portal.tools.seleniumbuilder;
  * @author Michael Hashimoto
  */
 public class MacroConverter extends BaseConverter {
+
+	public MacroConverter(SeleniumBuilderContext seleniumBuilderContext) {
+		super(seleniumBuilderContext);
+	}
+
 }

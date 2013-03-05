@@ -18,4 +18,9 @@ package com.liferay.portal.tools.seleniumbuilder;
  * @author Michael Hashimoto
  */
 public class TestCaseConverter extends BaseConverter {
+
+	public TestCaseConverter(SeleniumBuilderContext seleniumBuilderContext) {
+		super(seleniumBuilderContext);
+	}
+
 }
