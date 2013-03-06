@@ -26,11 +26,9 @@ public class BaseAction {
 
 	public BaseAction(LiferaySelenium liferaySelenium) {
 		this.liferaySelenium = liferaySelenium;
-
-		paths = new HashMap<String, String>();
 	}
 
 	protected LiferaySelenium liferaySelenium;
-	protected Map<String, String> paths;
+	protected Map<String, String> paths = new HashMap<String, String>();
 
 }
