@@ -19,20 +19,20 @@ package com.liferay.portal.security.membershippolicy;
  */
 public class RoleMembershipPolicyFactoryUtil {
 
-	public static RoleMembershipPolicy getMembershipPolicy() {
-		return getMembershipPolicyFactory().getRoleMembershipPolicy();
+	public static RoleMembershipPolicy getRoleMembershipPolicy() {
+		return getRoleMembershipPolicyFactory().getRoleMembershipPolicy();
 	}
 
-	public static RoleMembershipPolicyFactory getMembershipPolicyFactory() {
-		return _membershipPolicyFactory;
+	public static RoleMembershipPolicyFactory getRoleMembershipPolicyFactory() {
+		return _roleMembershipPolicyFactory;
 	}
 
-	public void setMembershipPolicyFactory(
-		RoleMembershipPolicyFactory membershipPolicyFactory) {
+	public void setRoleMembershipPolicyFactory(
+		RoleMembershipPolicyFactory roleMembershipPolicyFactory) {
 
-		_membershipPolicyFactory = membershipPolicyFactory;
+		_roleMembershipPolicyFactory = roleMembershipPolicyFactory;
 	}
 
-	private static RoleMembershipPolicyFactory _membershipPolicyFactory;
+	private static RoleMembershipPolicyFactory _roleMembershipPolicyFactory;
 
 }

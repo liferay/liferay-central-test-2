@@ -580,22 +580,22 @@
 	<bean id="com.liferay.portal.security.auth.ScreenNameValidatorFactory" class="com.liferay.portal.security.auth.ScreenNameValidatorFactory" />
 	<bean id="com.liferay.portal.security.ldap.AttributesTransformerFactory" class="com.liferay.portal.security.ldap.AttributesTransformerFactory" />
 	<bean id="com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryUtil" class="com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryUtil">
-		<property name="membershipPolicyFactory">
+		<property name="organizationMembershipPolicyFactory">
 			<bean class="com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.security.membershippolicy.RoleMembershipPolicyFactoryUtil" class="com.liferay.portal.security.membershippolicy.RoleMembershipPolicyFactoryUtil">
-		<property name="membershipPolicyFactory">
+		<property name="roleMembershipPolicyFactory">
 			<bean class="com.liferay.portal.security.membershippolicy.RoleMembershipPolicyFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.security.membershippolicy.SiteMembershipPolicyFactoryUtil" class="com.liferay.portal.security.membershippolicy.SiteMembershipPolicyFactoryUtil">
-		<property name="membershipPolicyFactory">
+		<property name="siteMembershipPolicyFactory">
 			<bean class="com.liferay.portal.security.membershippolicy.SiteMembershipPolicyFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.security.membershippolicy.UserGroupMembershipPolicyFactoryUtil" class="com.liferay.portal.security.membershippolicy.UserGroupMembershipPolicyFactoryUtil">
-		<property name="membershipPolicyFactory">
+		<property name="userGroupMembershipPolicyFactory">
 			<bean class="com.liferay.portal.security.membershippolicy.UserGroupMembershipPolicyFactoryImpl" />
 		</property>
 	</bean>

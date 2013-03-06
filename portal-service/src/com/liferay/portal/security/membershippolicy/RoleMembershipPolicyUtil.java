@@ -32,54 +32,54 @@ public class RoleMembershipPolicyUtil {
 			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		membershipPolicy.checkRoles(userIds, addRoleIds, removeRoleIds);
+		roleMembershipPolicy.checkRoles(userIds, addRoleIds, removeRoleIds);
 	}
 
 	public static boolean isRoleAllowed(long userId, long roleId)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		return membershipPolicy.isRoleAllowed(userId, roleId);
+		return roleMembershipPolicy.isRoleAllowed(userId, roleId);
 	}
 
 	public static boolean isRoleRequired(long userId, long roleId)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		return membershipPolicy.isRoleRequired(userId, roleId);
+		return roleMembershipPolicy.isRoleRequired(userId, roleId);
 	}
 
 	public static void propagateRoles(
 			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		membershipPolicy.propagateRoles(userIds, addRoleIds, removeRoleIds);
+		roleMembershipPolicy.propagateRoles(userIds, addRoleIds, removeRoleIds);
 	}
 
 	public static void verifyPolicy() throws PortalException, SystemException {
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		membershipPolicy.verifyPolicy();
+		roleMembershipPolicy.verifyPolicy();
 	}
 
 	public static void verifyPolicy(Role role)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(role);
+		roleMembershipPolicy.verifyPolicy(role);
 	}
 
 	public static void verifyPolicy(
@@ -87,10 +87,10 @@ public class RoleMembershipPolicyUtil {
 			Map<String, Serializable> oldExpandoAttributes)
 		throws PortalException, SystemException {
 
-		RoleMembershipPolicy membershipPolicy =
-			RoleMembershipPolicyFactoryUtil.getMembershipPolicy();
+		RoleMembershipPolicy roleMembershipPolicy =
+			RoleMembershipPolicyFactoryUtil.getRoleMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(role, oldRole, oldExpandoAttributes);
+		roleMembershipPolicy.verifyPolicy(role, oldRole, oldExpandoAttributes);
 	}
 
 }

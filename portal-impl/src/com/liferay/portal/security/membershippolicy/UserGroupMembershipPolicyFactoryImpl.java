@@ -36,36 +36,38 @@ public class UserGroupMembershipPolicyFactoryImpl
 
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		_originalMembershipPolicy =
+		_originalUserGroupMembershipPolicy =
 			(UserGroupMembershipPolicy)InstanceFactory.newInstance(
 				classLoader, PropsValues.MEMBERSHIP_POLICY_USER_GROUPS);
 
-		_membershipPolicy = _originalMembershipPolicy;
+		_userGroupMembershipPolicy = _originalUserGroupMembershipPolicy;
 	}
 
 	public UserGroupMembershipPolicy getUserGroupMembershipPolicy() {
-		return _membershipPolicy;
+		return _userGroupMembershipPolicy;
 	}
 
-	public void setMembershipPolicy(
-		UserGroupMembershipPolicy membershipPolicy) {
+	public void setUserGroupMembershipPolicy(
+		UserGroupMembershipPolicy userGroupMembershipPolicy) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set " + ClassUtil.getClassName(membershipPolicy));
+			_log.debug(
+				"Set " + ClassUtil.getClassName(userGroupMembershipPolicy));
 		}
 
-		if (membershipPolicy == null) {
-			_membershipPolicy = _originalMembershipPolicy;
+		if (userGroupMembershipPolicy == null) {
+			_userGroupMembershipPolicy = _originalUserGroupMembershipPolicy;
 		}
 		else {
-			_membershipPolicy = membershipPolicy;
+			_userGroupMembershipPolicy = userGroupMembershipPolicy;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		UserGroupMembershipPolicyFactory.class);
 
-	private static volatile UserGroupMembershipPolicy _membershipPolicy;
-	private static UserGroupMembershipPolicy _originalMembershipPolicy;
+	private static UserGroupMembershipPolicy _originalUserGroupMembershipPolicy;
+	private static volatile UserGroupMembershipPolicy
+		_userGroupMembershipPolicy;
 
 }

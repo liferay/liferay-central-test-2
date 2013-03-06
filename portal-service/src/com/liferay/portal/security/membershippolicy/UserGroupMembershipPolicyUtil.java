@@ -32,56 +32,58 @@ public class UserGroupMembershipPolicyUtil {
 			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		membershipPolicy.checkMembership(
+		userGroupMembershipPolicy.checkMembership(
 			userIds, addUserGroupIds, removeUserGroupIds);
 	}
 
 	public static boolean isMembershipAllowed(long userId, long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		return membershipPolicy.isMembershipAllowed(userId, userGroupId);
+		return userGroupMembershipPolicy.isMembershipAllowed(
+			userId, userGroupId);
 	}
 
 	public static boolean isMembershipRequired(long userId, long userGroupId)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		return membershipPolicy.isMembershipRequired(userId, userGroupId);
+		return userGroupMembershipPolicy.isMembershipRequired(
+			userId, userGroupId);
 	}
 
 	public static void propagateMembership(
 			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		membershipPolicy.propagateMembership(
+		userGroupMembershipPolicy.propagateMembership(
 			userIds, addUserGroupIds, removeUserGroupIds);
 	}
 
 	public static void verifyPolicy() throws PortalException, SystemException {
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		membershipPolicy.verifyPolicy();
+		userGroupMembershipPolicy.verifyPolicy();
 	}
 
 	public static void verifyPolicy(UserGroup userGroup)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(userGroup);
+		userGroupMembershipPolicy.verifyPolicy(userGroup);
 	}
 
 	public static void verifyPolicy(
@@ -89,10 +91,10 @@ public class UserGroupMembershipPolicyUtil {
 			Map<String, Serializable> oldExpandoAttributes)
 		throws PortalException, SystemException {
 
-		UserGroupMembershipPolicy membershipPolicy =
-			UserGroupMembershipPolicyFactoryUtil.getMembershipPolicy();
+		UserGroupMembershipPolicy userGroupMembershipPolicy =
+			UserGroupMembershipPolicyFactoryUtil.getUserGroupMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(
+		userGroupMembershipPolicy.verifyPolicy(
 			userGroup, oldUserGroup, oldExpandoAttributes);
 	}
 

@@ -36,36 +36,40 @@ public class OrganizationMembershipPolicyFactoryImpl
 
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		_originalMembershipPolicy =
+		_originalOrganizationMembershipPolicy =
 			(OrganizationMembershipPolicy)InstanceFactory.newInstance(
 				classLoader, PropsValues.MEMBERSHIP_POLICY_ORGANIZATIONS);
 
-		_membershipPolicy = _originalMembershipPolicy;
+		_organizationMembershipPolicy = _originalOrganizationMembershipPolicy;
 	}
 
 	public OrganizationMembershipPolicy getOrganizationMembershipPolicy() {
-		return _membershipPolicy;
+		return _organizationMembershipPolicy;
 	}
 
-	public void setMembershipPolicy(
-		OrganizationMembershipPolicy membershipPolicy) {
+	public void setOrganizationMembershipPolicy(
+		OrganizationMembershipPolicy organizationMembershipPolicy) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set " + ClassUtil.getClassName(membershipPolicy));
+			_log.debug(
+				"Set " + ClassUtil.getClassName(organizationMembershipPolicy));
 		}
 
-		if (membershipPolicy == null) {
-			_membershipPolicy = _originalMembershipPolicy;
+		if (organizationMembershipPolicy == null) {
+			_organizationMembershipPolicy =
+				_originalOrganizationMembershipPolicy;
 		}
 		else {
-			_membershipPolicy = membershipPolicy;
+			_organizationMembershipPolicy = organizationMembershipPolicy;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		OrganizationMembershipPolicyFactory.class);
 
-	private static volatile OrganizationMembershipPolicy _membershipPolicy;
-	private static OrganizationMembershipPolicy _originalMembershipPolicy;
+	private static volatile OrganizationMembershipPolicy
+		_organizationMembershipPolicy;
+	private static OrganizationMembershipPolicy
+		_originalOrganizationMembershipPolicy;
 
 }

@@ -38,10 +38,11 @@ public class OrganizationMembershipPolicyUtil {
 			long[] removeOrganizationIds)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.checkMembership(
+		organizationMembershipPolicy.checkMembership(
 			userIds, addOrganizationIds, removeOrganizationIds);
 	}
 
@@ -50,19 +51,23 @@ public class OrganizationMembershipPolicyUtil {
 			List<UserGroupRole> removeUserGroupRoles)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.checkRoles(addUserGroupRoles, removeUserGroupRoles);
+		organizationMembershipPolicy.checkRoles(
+			addUserGroupRoles, removeUserGroupRoles);
 	}
 
 	public static boolean isMembershipAllowed(long userId, long organizationId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isMembershipAllowed(userId, organizationId);
+		return organizationMembershipPolicy.isMembershipAllowed(
+			userId, organizationId);
 	}
 
 	public static boolean isMembershipProtected(
@@ -70,30 +75,35 @@ public class OrganizationMembershipPolicyUtil {
 			long organizationId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isMembershipProtected(
+		return organizationMembershipPolicy.isMembershipProtected(
 			permissionChecker, userId, organizationId);
 	}
 
 	public static boolean isMembershipRequired(long userId, long organizationId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isMembershipRequired(userId, organizationId);
+		return organizationMembershipPolicy.isMembershipRequired(
+			userId, organizationId);
 	}
 
 	public static boolean isRoleAllowed(
 			long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isRoleAllowed(userId, organizationId, roleId);
+		return organizationMembershipPolicy.isRoleAllowed(
+			userId, organizationId, roleId);
 	}
 
 	public static boolean isRoleProtected(
@@ -101,10 +111,11 @@ public class OrganizationMembershipPolicyUtil {
 			long organizationId, long roleId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isRoleProtected(
+		return organizationMembershipPolicy.isRoleProtected(
 			permissionChecker, userId, organizationId, roleId);
 	}
 
@@ -112,10 +123,12 @@ public class OrganizationMembershipPolicyUtil {
 			long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		return membershipPolicy.isRoleRequired(userId, organizationId, roleId);
+		return organizationMembershipPolicy.isRoleRequired(
+			userId, organizationId, roleId);
 	}
 
 	public static void propagateMembership(
@@ -123,10 +136,11 @@ public class OrganizationMembershipPolicyUtil {
 			long[] removeOrganizationIds)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.propagateMembership(
+		organizationMembershipPolicy.propagateMembership(
 			userIds, addOrganizationIds, removeOrganizationIds);
 	}
 
@@ -135,27 +149,30 @@ public class OrganizationMembershipPolicyUtil {
 			List<UserGroupRole> removeUserGroupRoles)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.propagateRoles(
+		organizationMembershipPolicy.propagateRoles(
 			addUserGroupRoles, removeUserGroupRoles);
 	}
 
 	public static void verifyPolicy() throws PortalException, SystemException {
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.verifyPolicy();
+		organizationMembershipPolicy.verifyPolicy();
 	}
 
 	public static void verifyPolicy(Organization organization)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(organization);
+		organizationMembershipPolicy.verifyPolicy(organization);
 	}
 
 	public static void verifyPolicy(
@@ -164,10 +181,11 @@ public class OrganizationMembershipPolicyUtil {
 			Map<String, Serializable> oldExpandoAttributes)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(
+		organizationMembershipPolicy.verifyPolicy(
 			organization, oldOrganization, oldAssetCategories, oldAssetTags,
 			oldExpandoAttributes);
 	}
@@ -175,10 +193,11 @@ public class OrganizationMembershipPolicyUtil {
 	public static void verifyPolicy(Role role)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(role);
+		organizationMembershipPolicy.verifyPolicy(role);
 	}
 
 	public static void verifyPolicy(
@@ -186,10 +205,12 @@ public class OrganizationMembershipPolicyUtil {
 			Map<String, Serializable> oldExpandoAttributes)
 		throws PortalException, SystemException {
 
-		OrganizationMembershipPolicy membershipPolicy =
-			OrganizationMembershipPolicyFactoryUtil.getMembershipPolicy();
+		OrganizationMembershipPolicy organizationMembershipPolicy =
+			OrganizationMembershipPolicyFactoryUtil.
+				getOrganizationMembershipPolicy();
 
-		membershipPolicy.verifyPolicy(role, oldRole, oldExpandoAttributes);
+		organizationMembershipPolicy.verifyPolicy(
+			role, oldRole, oldExpandoAttributes);
 	}
 
 }

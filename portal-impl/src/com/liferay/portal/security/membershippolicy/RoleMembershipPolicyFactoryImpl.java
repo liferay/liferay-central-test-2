@@ -36,36 +36,36 @@ public class RoleMembershipPolicyFactoryImpl
 
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		_originalMembershipPolicy =
+		_originalRoleMembershipPolicy =
 			(RoleMembershipPolicy)InstanceFactory.newInstance(
 				classLoader, PropsValues.MEMBERSHIP_POLICY_ROLES);
 
-		_membershipPolicy = _originalMembershipPolicy;
+		_roleMembershipPolicy = _originalRoleMembershipPolicy;
 	}
 
 	public RoleMembershipPolicy getRoleMembershipPolicy() {
-		return _membershipPolicy;
+		return _roleMembershipPolicy;
 	}
 
-	public void setMembershipPolicy(
-		RoleMembershipPolicy RolesMembershipPolicy) {
+	public void setRoleMembershipPolicy(
+		RoleMembershipPolicy roleMembershipPolicy) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set " + ClassUtil.getClassName(RolesMembershipPolicy));
+			_log.debug("Set " + ClassUtil.getClassName(roleMembershipPolicy));
 		}
 
-		if (RolesMembershipPolicy == null) {
-			_membershipPolicy = _originalMembershipPolicy;
+		if (roleMembershipPolicy == null) {
+			_roleMembershipPolicy = _originalRoleMembershipPolicy;
 		}
 		else {
-			_membershipPolicy = RolesMembershipPolicy;
+			_roleMembershipPolicy = roleMembershipPolicy;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		RoleMembershipPolicyFactory.class);
 
-	private static volatile RoleMembershipPolicy _membershipPolicy;
-	private static RoleMembershipPolicy _originalMembershipPolicy;
+	private static RoleMembershipPolicy _originalRoleMembershipPolicy;
+	private static volatile RoleMembershipPolicy _roleMembershipPolicy;
 
 }

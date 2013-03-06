@@ -36,34 +36,36 @@ public class SiteMembershipPolicyFactoryImpl
 
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		_originalMembershipPolicy =
+		_originalSiteMembershipPolicy =
 			(SiteMembershipPolicy)InstanceFactory.newInstance(
 				classLoader, PropsValues.MEMBERSHIP_POLICY_SITES);
 
-		_membershipPolicy = _originalMembershipPolicy;
+		_siteMembershipPolicy = _originalSiteMembershipPolicy;
 	}
 
 	public SiteMembershipPolicy getSiteMembershipPolicy() {
-		return _membershipPolicy;
+		return _siteMembershipPolicy;
 	}
 
-	public void setMembershipPolicy(SiteMembershipPolicy membershipPolicy) {
+	public void setSiteMembershipPolicy(
+		SiteMembershipPolicy siteMembershipPolicy) {
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set " + ClassUtil.getClassName(membershipPolicy));
+			_log.debug("Set " + ClassUtil.getClassName(siteMembershipPolicy));
 		}
 
-		if (membershipPolicy == null) {
-			_membershipPolicy = _originalMembershipPolicy;
+		if (siteMembershipPolicy == null) {
+			_siteMembershipPolicy = _originalSiteMembershipPolicy;
 		}
 		else {
-			_membershipPolicy = membershipPolicy;
+			_siteMembershipPolicy = siteMembershipPolicy;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		SiteMembershipPolicyFactory.class);
 
-	private static volatile SiteMembershipPolicy _membershipPolicy;
-	private static SiteMembershipPolicy _originalMembershipPolicy;
+	private static SiteMembershipPolicy _originalSiteMembershipPolicy;
+	private static volatile SiteMembershipPolicy _siteMembershipPolicy;
 
 }
