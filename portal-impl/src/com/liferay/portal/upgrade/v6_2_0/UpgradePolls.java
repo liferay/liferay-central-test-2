@@ -15,6 +15,8 @@
 package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -91,5 +93,7 @@ public class UpgradePolls extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradePolls.class);
 
 }
