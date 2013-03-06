@@ -86,17 +86,17 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			arguments.add("-Djunit.cobertura.agent=" + agentLine);
 		}
 
+		boolean coberturaParentDynamicallyInstrumented = Boolean.getBoolean(
+			"cobertura.parent.dynamically.instrumented");
+
+		if (coberturaParentDynamicallyInstrumented) {
+			arguments.add("-Dcobertura.parent.dynamically.instrumented=true");
+		}
+
 		boolean junitCodeCoverage = Boolean.getBoolean("junit.code.coverage");
 
 		if (junitCodeCoverage) {
 			arguments.add("-Djunit.code.coverage=true");
-		}
-
-		boolean parentDynamicallyInstrument = Boolean.getBoolean(
-			"parent.dynamically.instrument");
-
-		if (parentDynamicallyInstrument) {
-			arguments.add("-Dparent.dynamically.instrument=true");
 		}
 
 		boolean junitDebug = Boolean.getBoolean("junit.debug");

@@ -72,11 +72,11 @@ public class CodeCoverageAssertor implements TestRule {
 					statement.evaluate();
 				}
 				finally {
+					List<Class<?>> assertClasses = new ArrayList<Class<?>>();
+
 					ClassLoader classLoader = getClassLoader();
 
 					Class<?> clazz = classLoader.loadClass(className);
-
-					List<Class<?>> assertClasses = new ArrayList<Class<?>>();
 
 					assertClasses.add(clazz);
 
@@ -98,13 +98,13 @@ public class CodeCoverageAssertor implements TestRule {
 	}
 
 	private String[] _generateIncludes(String mainClassName) throws Exception {
+		List<Class<?>> assertClasses = new ArrayList<Class<?>>();
+
 		String jvmClassPath = ClassPathUtil.getJVMClassPath(false);
 
 		URL[] urls = ClassPathUtil.getClassPathURLs(jvmClassPath);
 
 		ClassLoader classLoader = new URLClassLoader(urls, null);
-
-		List<Class<?>> assertClasses = new ArrayList<Class<?>>();
 
 		Class<?> mainClass = classLoader.loadClass(mainClassName);
 

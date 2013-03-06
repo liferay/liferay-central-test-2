@@ -62,7 +62,7 @@ public class InstrumentationAgent {
 			}
 		}
 		finally {
-			System.clearProperty("parent.dynamically.instrument");
+			System.clearProperty("cobertura.parent.dynamically.instrumented");
 			System.clearProperty("junit.code.coverage");
 
 			_dynamicallyInstrumented = false;
@@ -78,8 +78,11 @@ public class InstrumentationAgent {
 					new ClassDefinition[_originalClassDefinitions.size()];
 
 				for (int i = 0; i < _originalClassDefinitions.size(); i++) {
-					classDefinitions[i] = _originalClassDefinitions.get(
-						i).toClassDefinition();
+					OriginalClassDefinition originalClassDefinition =
+						_originalClassDefinitions.get(i);
+
+					classDefinitions[i] =
+						originalClassDefinition.toClassDefinition();
 				}
 
 				_originalClassDefinitions = null;
@@ -87,7 +90,7 @@ public class InstrumentationAgent {
 				_instrumentation.redefineClasses(classDefinitions);
 			}
 			catch (Exception e) {
-				throw new RuntimeException("Failed to uninstrument classes", e);
+				throw new RuntimeException("Unable to uninstrument classes", e);
 			}
 		}
 	}
@@ -121,7 +124,9 @@ public class InstrumentationAgent {
 
 		for (Class<?> loadedClass : allLoadedClasses) {
 			if (_instrumentation.isModifiableClass(loadedClass)) {
-				String className = loadedClass.getName().replace('.', '/');
+				String className = loadedClass.getName();
+
+				className = className.replace('.', '/');
 
 				if (_coberturaClassFileTransformer.matches(className)) {
 					modifiableClasses.add(loadedClass);
@@ -135,7 +140,7 @@ public class InstrumentationAgent {
 		_dynamicallyInstrumented = true;
 		_originalClassDefinitions = null;
 
-		System.setProperty("parent.dynamically.instrument", "true");
+		System.setProperty("cobertura.parent.dynamically.instrumented", "true");
 		System.setProperty("junit.code.coverage", "true");
 	}
 
@@ -169,17 +174,16 @@ public class InstrumentationAgent {
 		String[] includes = arguments[0].split(",");
 		String[] excludes = arguments[1].split(",");
 
+		boolean coberturaParentDynamicallyInstrumented = Boolean.getBoolean(
+			"cobertura.parent.dynamically.instrumented");
 		boolean junitCodeCoverage = Boolean.getBoolean("junit.code.coverage");
 
-		boolean parentDynamicallyInstrument = Boolean.getBoolean(
-			"parent.dynamically.instrument");
-
-		// For sub process, it is only considered as statically instrumented
-		// when itself is configured so and its parent is not dynamically
-		// instrumented.
+		// A subprocess is only considered as statically instrumented
+		// when it is configured as such and its parent is not dynamically
+		// instrumented
 
 		_staticallyInstrumented =
-			junitCodeCoverage && !parentDynamicallyInstrument;
+			!coberturaParentDynamicallyInstrumented && junitCodeCoverage;
 
 		if (junitCodeCoverage) {
 			CoberturaClassFileTransformer coberturaClassFileTransformer =
@@ -193,8 +197,8 @@ public class InstrumentationAgent {
 			_includes = includes;
 			_excludes = excludes;
 
-			// Force clear data file to make sure the coverage assert is based
-			// on the current test
+			// Forcibly clear the data file to make sure that the coverage
+			// assert is based on the current test
 
 			File dataFile = CoverageDataFileHandler.getDefaultDataFile();
 
@@ -202,13 +206,13 @@ public class InstrumentationAgent {
 		}
 		else {
 			System.out.println(
-				"Current JVM does not support class retransform. " +
-					"Dynamic instrumententation is disabled.");
+				"Current JVM does not support class retransform. Dynamic s" +
+					"instrumententation is disabled.");
 		}
 	}
 
 	public static synchronized void recordInstrumentation(
-		ClassLoader classLoader, String name, byte[] classfileBuffer) {
+		ClassLoader classLoader, String name, byte[] bytes) {
 
 		if (!_dynamicallyInstrumented) {
 			return;
@@ -220,7 +224,7 @@ public class InstrumentationAgent {
 		}
 
 		OriginalClassDefinition originalClassDefinition =
-			new OriginalClassDefinition(classLoader, name, classfileBuffer);
+			new OriginalClassDefinition(classLoader, name, bytes);
 
 		_originalClassDefinitions.add(originalClassDefinition);
 	}
@@ -252,7 +256,13 @@ public class InstrumentationAgent {
 			"[Cobertura] %s is fully covered.%n", classData.getName());
 	}
 
-	private static final File _lockFile;
+	private static CoberturaClassFileTransformer _coberturaClassFileTransformer;
+	private static boolean _dynamicallyInstrumented;
+	private static String[] _excludes;
+
+	private static String[] _includes;
+	private static Instrumentation _instrumentation;
+	private static File _lockFile;
 
 	static {
 		File dataFile = CoverageDataFileHandler.getDefaultDataFile();
@@ -277,22 +287,17 @@ public class InstrumentationAgent {
 		}
 	}
 
-	private static CoberturaClassFileTransformer _coberturaClassFileTransformer;
-	private static boolean _dynamicallyInstrumented;
-	private static String[] _excludes;
-	private static String[] _includes;
-	private static Instrumentation _instrumentation;
 	private static List<OriginalClassDefinition> _originalClassDefinitions;
 	private static boolean _staticallyInstrumented;
 
 	private static class OriginalClassDefinition {
 
 		public OriginalClassDefinition(
-			ClassLoader classLoader, String className, byte[] classfileBuffer) {
+			ClassLoader classLoader, String className, byte[] bytes) {
 
 			_classLoader = classLoader;
 			_className = className.replace('/', '.');
-			_classfileBuffer = classfileBuffer;
+			_bytes = bytes;
 		}
 
 		public ClassDefinition toClassDefinition()
@@ -300,10 +305,10 @@ public class InstrumentationAgent {
 
 			Class<?> clazz = _classLoader.loadClass(_className);
 
-			return new ClassDefinition(clazz, _classfileBuffer);
+			return new ClassDefinition(clazz, _bytes);
 		}
 
-		private final byte[] _classfileBuffer;
+		private final byte[] _bytes;
 		private final ClassLoader _classLoader;
 		private final String _className;
 
