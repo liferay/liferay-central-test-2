@@ -14,12 +14,14 @@
 
 package com.liferay.portalweb2.util.block.function;
 
+import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
+
 /**
  * @author Michael Hashimoto
  */
 public class BaseFunction {
 
-	public BaseFunctions(LiferaySelenium liferaySelenium) {
+	public BaseFunction(LiferaySelenium liferaySelenium) {
 		this.liferaySelenium = liferaySelenium;
 	}
 
