@@ -50,6 +50,10 @@ public class UpgradePolls extends UpgradeProcess {
 				return rs.getLong("groupId");
 			}
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to find question " + questionId);
+			}
+
 			return 0;
 		}
 		finally {
