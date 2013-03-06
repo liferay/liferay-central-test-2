@@ -293,7 +293,7 @@ public class LocalizationImpl implements Localization {
 	}
 
 	public Map<Locale, String> getLocalizationMap(
-		HttpServletRequest httpServletRequest, String parameter) {
+		HttpServletRequest request, String parameter) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
@@ -305,9 +305,7 @@ public class LocalizationImpl implements Localization {
 			String localeParameter = parameter.concat(
 				StringPool.UNDERLINE).concat(languageId);
 
-			map.put(
-				locale,
-				ParamUtil.getString(httpServletRequest, localeParameter));
+			map.put(locale, ParamUtil.getString(request, localeParameter));
 		}
 
 		return map;

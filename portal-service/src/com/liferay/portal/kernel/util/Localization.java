@@ -113,7 +113,7 @@ public interface Localization {
 		String xml, String requestedLanguageId, boolean useDefault);
 
 	public Map<Locale, String> getLocalizationMap(
-		HttpServletRequest httpServletRequest, String parameter);
+		HttpServletRequest request, String parameter);
 
 	/**
 	 * Returns a map of locales and localized strings for the parameter in the

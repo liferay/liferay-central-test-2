@@ -79,10 +79,9 @@ public class LocalizationUtil {
 	}
 
 	public static Map<Locale, String> getLocalizationMap(
-		HttpServletRequest httpServletRequest, String parameter) {
+		HttpServletRequest request, String parameter) {
 
-		return getLocalization().getLocalizationMap(
-			httpServletRequest, parameter);
+		return getLocalization().getLocalizationMap(request, parameter);
 	}
 
 	public static Map<Locale, String> getLocalizationMap(
