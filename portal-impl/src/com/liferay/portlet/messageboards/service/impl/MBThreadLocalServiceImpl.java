@@ -58,9 +58,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			long categoryId, MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
-
 		// Thread
+
+		Date now = new Date();
 
 		long threadId = message.getThreadId();
 
@@ -615,7 +615,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Thread
 
 		thread.setModifiedDate(new Date());
-
 		thread.setCategoryId(categoryId);
 
 		mbThreadPersistence.update(thread);
@@ -746,8 +745,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBThread thread = addThread(
 			message.getCategoryId(), message, serviceContext);
 
-		// Update modified date for old thread
-
 		oldThread.setModifiedDate(serviceContext.getModifiedDate(new Date()));
 
 		mbThreadPersistence.update(oldThread);
@@ -876,7 +873,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 
 			thread.setModifiedDate(now);
-
 			thread.setStatus(status);
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(user.getFullName());

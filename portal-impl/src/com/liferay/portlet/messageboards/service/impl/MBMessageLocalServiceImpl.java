@@ -2132,7 +2132,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			(oldStatus != status)) {
 
 			thread.setModifiedDate(modifiedDate);
-
 			thread.setStatus(status);
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(user.getFullName());

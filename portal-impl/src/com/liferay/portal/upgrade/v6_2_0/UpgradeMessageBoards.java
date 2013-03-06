@@ -43,8 +43,8 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 	protected void doUpgrade() throws Exception {
 		super.doUpgrade();
 
-		updateThreads();
 		updateThreadFlags();
+		updateThreads();
 	}
 
 	protected Object[] getMessageArray(long messageId) throws Exception {
@@ -68,6 +68,10 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				Timestamp createDate = rs.getTimestamp("createDate");
 
 				return new Object[] {userId, createDate};
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to find message " + messageId);
 			}
 
 			return null;
