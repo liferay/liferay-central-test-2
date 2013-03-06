@@ -228,8 +228,6 @@ public class SourceFormatter {
 	public SourceFormatter(boolean useProperties, boolean throwException)
 		throws Exception {
 
-		_errorMessages = new ArrayList<String>();
-
 		_excludes = StringUtil.split(
 			GetterUtil.getString(
 				System.getProperty("source.formatter.excludes")));
@@ -4859,7 +4857,7 @@ public class SourceFormatter {
 		"tiles"
 	};
 
-	private static List<String> _errorMessages;
+	private static List<String> _errorMessages = new ArrayList<String>();
 	private static String[] _excludes;
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Pattern _javaImportPattern = Pattern.compile(
