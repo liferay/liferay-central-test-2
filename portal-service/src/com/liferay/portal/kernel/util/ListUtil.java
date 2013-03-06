@@ -204,8 +204,8 @@ public class ListUtil {
 	}
 
 	public static <E> List<E> remove(List<E> list, List<E> remove) {
-		if ((list == null) || (list.isEmpty()) ||
-			(remove == null)|| (remove.isEmpty())) {
+		if ((list == null) || list.isEmpty() ||
+			(remove == null)|| remove.isEmpty()) {
 
 			return list;
 		}
