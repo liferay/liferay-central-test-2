@@ -28,10 +28,10 @@ public class UpgradePolls extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updatePollsVotes();
+		updateVotes();
 	}
 
-	protected long getPollsQuestionsGroupId(long questionId) throws Exception {
+	protected long getGroupId(long questionId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -50,34 +50,14 @@ public class UpgradePolls extends UpgradeProcess {
 				return rs.getLong("groupId");
 			}
 
-			return -1;
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void updatePollsVote(long voteId, long groupId) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update PollsVote set groupId = ? where voteId = ?");
-
-			ps.setLong(1, groupId);
-			ps.setLong(2, voteId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
-	protected void updatePollsVotes() throws Exception {
+	protected void updateVotes() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -94,13 +74,13 @@ public class UpgradePolls extends UpgradeProcess {
 				long voteId = rs.getLong("voteId");
 				long questionId = rs.getLong("questionId");
 
-				long groupId = getPollsQuestionsGroupId(questionId);
+				long groupId = getGroupId(questionId);
 
-				if (groupId < 0) {
-					continue;
+				if (groupId > 0) {
+					runSQL(
+						"update PollsVote set groupId = " + groupId +
+							" where voteId = " + voteId);
 				}
-
-				updatePollsVote(voteId, groupId);
 			}
 		}
 		finally {
