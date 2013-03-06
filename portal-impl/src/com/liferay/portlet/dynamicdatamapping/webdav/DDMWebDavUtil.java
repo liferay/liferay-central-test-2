@@ -60,7 +60,7 @@ public class DDMWebDavUtil {
 		}
 
 		String type = pathArray[2];
-		String journalTypeId = pathArray[3];
+		String typeId = pathArray[3];
 
 		if (type.equals(TYPE_STRUCTURES)) {
 			HttpServletRequest request = webDavRequest.getHttpServletRequest();
@@ -71,8 +71,7 @@ public class DDMWebDavUtil {
 
 			Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-			nameMap.put(
-				LocaleUtil.fromLanguageId(defaultLocale), journalTypeId);
+			nameMap.put(LocaleUtil.fromLanguageId(defaultLocale), typeId);
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -87,8 +86,8 @@ public class DDMWebDavUtil {
 		}
 		else if (type.equals(TYPE_TEMPLATES)) {
 
-			// DDM Templates can not be added via WebDav because there is no
-			// way to know the associated className or classPK
+			// DDM templates can not be added via WebDAV because there is no
+			// way to know the associated class name or class PK
 
 			return HttpServletResponse.SC_FORBIDDEN;
 		}
