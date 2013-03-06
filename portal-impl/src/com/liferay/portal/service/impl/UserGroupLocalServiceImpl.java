@@ -663,6 +663,28 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	/**
+	 * Returns the number of user groups that match the keywords
+	 *
+	 * @param  companyId the primary key of the user group's company
+	 * @param  name the name keywords (optionally <code>null</code>)
+	 * @param  description the description keywords (optionally <code>null</code>)
+	 * @param  params the finder params (optionally <code>null</code>). For more
+	 *         information see {@link
+	 *         com.liferay.portal.service.persistence.UserGroupFinder}
+	 * @return the number of matching user groups
+	 * @throws SystemException if a system exception occurred
+	 * @see    com.liferay.portal.service.persistence.UserGroupFinder
+	 */
+	public int searchCount(
+			long companyId, String name, String description,
+			LinkedHashMap<String, Object> params, boolean andOperator)
+		throws SystemException {
+
+		return userGroupFinder.countByN_D(companyId, name, description,
+			params, andOperator);
+	}
+
+	/**
 	 * Sets the user groups associated with the user copying the user group
 	 * layouts and removing and adding user group associations for the user as
 	 * necessary.
