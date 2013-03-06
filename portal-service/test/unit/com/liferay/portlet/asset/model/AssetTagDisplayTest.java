@@ -20,29 +20,10 @@ import org.junit.Test;
 /**
  * @author Igor Spasic
  */
-public class PageCalculationTest {
+public class AssetTagDisplayTest {
 
 	@Test
-	public void testCategoryDisplayPage() {
-		AssetCategoryDisplay assetCategoryDisplay = new AssetCategoryDisplay();
-
-		assetCategoryDisplay.setStart(0);
-		assetCategoryDisplay.setEnd(20);
-
-		Assert.assertEquals(1, assetCategoryDisplay.getPage());
-
-		assetCategoryDisplay.setStart(20);
-		assetCategoryDisplay.setEnd(40);
-
-		Assert.assertEquals(2, assetCategoryDisplay.getPage());
-
-		assetCategoryDisplay.setEnd(0);
-
-		Assert.assertEquals(0, assetCategoryDisplay.getPage());
-	}
-
-	@Test
-	public void testTagDisplayPage() {
+	public void testGetPage() {
 		AssetTagDisplay assetTagDisplay = new AssetTagDisplay();
 
 		assetTagDisplay.setStart(0);
@@ -58,26 +39,6 @@ public class PageCalculationTest {
 		assetTagDisplay.setEnd(0);
 
 		Assert.assertEquals(0, assetTagDisplay.getPage());
-	}
-
-	@Test
-	public void testVocabularyDisplayPage() {
-		AssetVocabularyDisplay assetVocabularyDisplay =
-			new AssetVocabularyDisplay();
-
-		assetVocabularyDisplay.setStart(0);
-		assetVocabularyDisplay.setEnd(20);
-
-		Assert.assertEquals(1, assetVocabularyDisplay.getPage());
-
-		assetVocabularyDisplay.setStart(20);
-		assetVocabularyDisplay.setEnd(40);
-
-		Assert.assertEquals(2, assetVocabularyDisplay.getPage());
-
-		assetVocabularyDisplay.setEnd(0);
-
-		Assert.assertEquals(0, assetVocabularyDisplay.getPage());
 	}
 
 }
