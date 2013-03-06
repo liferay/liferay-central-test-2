@@ -20,9 +20,9 @@ package com.liferay.portalweb2.util.block.function;
 public class BaseFunction {
 
 	public BaseFunctions(LiferaySelenium liferaySelenium) {
-		selenium = liferaySelenium;
+		this.liferaySelenium = liferaySelenium;
 	}
 
-	protected LiferaySelenium selenium;
+	protected LiferaySelenium liferaySelenium;
 
 }
