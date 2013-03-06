@@ -72,7 +72,7 @@ public class CustomAttributesAvailableTag extends TagSupport {
 
 			List<String> attributeNames = ListUtil.remove(
 				Collections.list(expandoBridge.getAttributeNames()),
-				ListUtil.fromString(_ignore, StringPool.COMMA));
+				ListUtil.fromString(_ignoreAttributeNames, StringPool.COMMA));
 
 			if (attributeNames.isEmpty()) {
 				return SKIP_BODY;
@@ -137,7 +137,7 @@ public class CustomAttributesAvailableTag extends TagSupport {
 				_classPK = 0;
 				_companyId = 0;
 				_editable = false;
-				_ignore = null;
+				_ignoreAttributeNames = null;
 			}
 		}
 	}
@@ -158,14 +158,14 @@ public class CustomAttributesAvailableTag extends TagSupport {
 		_editable = editable;
 	}
 
-	public void setIgnore(String ignore) {
-		_ignore = ignore;
+	public void setIgnoreAttributeNames(String ignoreAttributeNames) {
+		_ignoreAttributeNames = ignoreAttributeNames;
 	}
 
 	private String _className;
 	private long _classPK;
 	private long _companyId;
 	private boolean _editable;
-	private String _ignore;
+	private String _ignoreAttributeNames;
 
 }

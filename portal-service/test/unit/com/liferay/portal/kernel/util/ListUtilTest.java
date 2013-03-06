@@ -55,8 +55,8 @@ public class ListUtilTest extends TestCase {
 		removeList.add("bbb");
 
 		Assert.assertEquals(
-			Collections.EMPTY_LIST,
-			ListUtil.remove(Collections.EMPTY_LIST, removeList));
+			Collections.emptyList(),
+			ListUtil.remove(Collections.emptyList(), removeList));
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class ListUtilTest extends TestCase {
 		removeList.add("ccc");
 
 		Assert.assertEquals(
-			Collections.EMPTY_LIST, ListUtil.remove(list, removeList));
+			Collections.emptyList(), ListUtil.remove(list, removeList));
 	}
 
 	@Test
@@ -134,6 +134,5 @@ public class ListUtilTest extends TestCase {
 
 		Assert.assertEquals(expectedList, ListUtil.remove(list, removeList));
 	}
-
 
 }
