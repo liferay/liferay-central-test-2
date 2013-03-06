@@ -444,6 +444,50 @@ public class HookHotDeployListener
 			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
+		if (portalProperties.containsKey(
+				PropsKeys.MEMBERSHIP_POLICY_ORGANIZATIONS)) {
+
+			OrganizationMembershipPolicyFactoryImpl
+				organizationMembershipPolicyFactoryImpl =
+					(OrganizationMembershipPolicyFactoryImpl)
+						OrganizationMembershipPolicyFactoryUtil.
+							getOrganizationMembershipPolicyFactory();
+
+			organizationMembershipPolicyFactoryImpl.
+				setOrganizationMembershipPolicy(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_ROLES)) {
+			RoleMembershipPolicyFactoryImpl roleMembershipPolicyFactoryImpl =
+				(RoleMembershipPolicyFactoryImpl)
+					RoleMembershipPolicyFactoryUtil.
+						getRoleMembershipPolicyFactory();
+
+			roleMembershipPolicyFactoryImpl.setRoleMembershipPolicy(null);
+		}
+
+		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_SITES)) {
+			SiteMembershipPolicyFactoryImpl siteMembershipPolicyFactoryImpl =
+				(SiteMembershipPolicyFactoryImpl)
+					SiteMembershipPolicyFactoryUtil.
+						getSiteMembershipPolicyFactory();
+
+			siteMembershipPolicyFactoryImpl.setSiteMembershipPolicy(null);
+		}
+
+		if (portalProperties.containsKey(
+				PropsKeys.MEMBERSHIP_POLICY_USER_GROUPS)) {
+
+			UserGroupMembershipPolicyFactoryImpl
+				userGroupMembershipPolicyFactoryImpl =
+					(UserGroupMembershipPolicyFactoryImpl)
+						UserGroupMembershipPolicyFactoryUtil.
+							getUserGroupMembershipPolicyFactory();
+
+			userGroupMembershipPolicyFactoryImpl.setUserGroupMembershipPolicy(
+				null);
+		}
+
 		if (portalProperties.containsKey(PropsKeys.PASSWORDS_TOOLKIT)) {
 			ToolkitWrapper toolkitWrapper =
 				(ToolkitWrapper)PwdToolkitUtil.getToolkit();
@@ -486,47 +530,6 @@ public class HookHotDeployListener
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
 			FullNameValidatorFactory.setInstance(null);
-		}
-
-		if (portalProperties.containsKey(
-				PropsKeys.MEMBERSHIP_POLICY_ORGANIZATIONS)) {
-
-			OrganizationMembershipPolicyFactoryImpl
-				membershipPolicyFactoryImpl =
-					(OrganizationMembershipPolicyFactoryImpl)
-						OrganizationMembershipPolicyFactoryUtil.
-							getMembershipPolicyFactory();
-
-			membershipPolicyFactoryImpl.setMembershipPolicy(null);
-		}
-
-		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_ROLES)) {
-			RoleMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
-				(RoleMembershipPolicyFactoryImpl)
-					RoleMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
-
-			membershipPolicyFactoryImpl.setMembershipPolicy(null);
-		}
-
-		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_SITES)) {
-			SiteMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
-				(SiteMembershipPolicyFactoryImpl)
-					SiteMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
-
-			membershipPolicyFactoryImpl.setMembershipPolicy(null);
-		}
-
-		if (portalProperties.containsKey(
-				PropsKeys.MEMBERSHIP_POLICY_USER_GROUPS)) {
-
-			UserGroupMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
-				(UserGroupMembershipPolicyFactoryImpl)
-					UserGroupMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
-
-			membershipPolicyFactoryImpl.setMembershipPolicy(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1884,82 +1887,89 @@ public class HookHotDeployListener
 		if (portalProperties.containsKey(
 				PropsKeys.MEMBERSHIP_POLICY_ORGANIZATIONS)) {
 
-			String membershipPolicyClassName = portalProperties.getProperty(
-				PropsKeys.MEMBERSHIP_POLICY_ORGANIZATIONS);
+			String organizationMembershipPolicyClassName =
+				portalProperties.getProperty(
+					PropsKeys.MEMBERSHIP_POLICY_ORGANIZATIONS);
 
 			OrganizationMembershipPolicyFactoryImpl
-				membershipPolicyFactoryImpl =
+				organizationMembershipPolicyFactoryImpl =
 					(OrganizationMembershipPolicyFactoryImpl)
 						OrganizationMembershipPolicyFactoryUtil.
-							getMembershipPolicyFactory();
+							getOrganizationMembershipPolicyFactory();
 
-			OrganizationMembershipPolicy membershipPolicy =
+			OrganizationMembershipPolicy organizationMembershipPolicy =
 				(OrganizationMembershipPolicy)newInstance(
 					portletClassLoader, OrganizationMembershipPolicy.class,
-					membershipPolicyClassName);
+					organizationMembershipPolicyClassName);
 
-			membershipPolicyFactoryImpl.setMembershipPolicy(membershipPolicy);
+			organizationMembershipPolicyFactoryImpl.
+				setOrganizationMembershipPolicy(organizationMembershipPolicy);
 
-			membershipPolicy.verifyPolicy();
+			organizationMembershipPolicy.verifyPolicy();
 		}
 
 		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_ROLES)) {
-			String membershipPolicyClassName = portalProperties.getProperty(
+			String roleMembershipPolicyClassName = portalProperties.getProperty(
 				PropsKeys.MEMBERSHIP_POLICY_ROLES);
 
-			RoleMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
+			RoleMembershipPolicyFactoryImpl roleMembershipPolicyFactoryImpl =
 				(RoleMembershipPolicyFactoryImpl)
 					RoleMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
+						getRoleMembershipPolicyFactory();
 
-			RoleMembershipPolicy membershipPolicy =
+			RoleMembershipPolicy roleMembershipPolicy =
 				(RoleMembershipPolicy)newInstance(
 					portletClassLoader, RoleMembershipPolicy.class,
-					membershipPolicyClassName);
+					roleMembershipPolicyClassName);
 
-			membershipPolicyFactoryImpl.setMembershipPolicy(membershipPolicy);
+			roleMembershipPolicyFactoryImpl.setRoleMembershipPolicy(
+				roleMembershipPolicy);
 
-			membershipPolicy.verifyPolicy();
+			roleMembershipPolicy.verifyPolicy();
 		}
 
 		if (portalProperties.containsKey(PropsKeys.MEMBERSHIP_POLICY_SITES)) {
-			String membershipPolicyClassName = portalProperties.getProperty(
+			String siteMembershipPolicyClassName = portalProperties.getProperty(
 				PropsKeys.MEMBERSHIP_POLICY_SITES);
 
-			SiteMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
+			SiteMembershipPolicyFactoryImpl siteMembershipPolicyFactoryImpl =
 				(SiteMembershipPolicyFactoryImpl)
 					SiteMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
+						getSiteMembershipPolicyFactory();
 
-			SiteMembershipPolicy membershipPolicy =
+			SiteMembershipPolicy siteMembershipPolicy =
 				(SiteMembershipPolicy)newInstance(
 					portletClassLoader, SiteMembershipPolicy.class,
-					membershipPolicyClassName);
+					siteMembershipPolicyClassName);
 
-			membershipPolicyFactoryImpl.setMembershipPolicy(membershipPolicy);
+			siteMembershipPolicyFactoryImpl.setSiteMembershipPolicy(
+				siteMembershipPolicy);
 
-			membershipPolicy.verifyPolicy();
+			siteMembershipPolicy.verifyPolicy();
 		}
 
 		if (portalProperties.containsKey(
 				PropsKeys.MEMBERSHIP_POLICY_USER_GROUPS)) {
 
-			String membershipPolicyClassName = portalProperties.getProperty(
-				PropsKeys.MEMBERSHIP_POLICY_USER_GROUPS);
+			String userGroupMembershipPolicyClassName =
+				portalProperties.getProperty(
+					PropsKeys.MEMBERSHIP_POLICY_USER_GROUPS);
 
-			UserGroupMembershipPolicyFactoryImpl membershipPolicyFactoryImpl =
-				(UserGroupMembershipPolicyFactoryImpl)
-					UserGroupMembershipPolicyFactoryUtil.
-						getMembershipPolicyFactory();
+			UserGroupMembershipPolicyFactoryImpl
+				userGroupMembershipPolicyFactoryImpl =
+					(UserGroupMembershipPolicyFactoryImpl)
+						UserGroupMembershipPolicyFactoryUtil.
+							getUserGroupMembershipPolicyFactory();
 
-			UserGroupMembershipPolicy membershipPolicy =
+			UserGroupMembershipPolicy userGroupMembershipPolicy =
 				(UserGroupMembershipPolicy)newInstance(
 					portletClassLoader, UserGroupMembershipPolicy.class,
-					membershipPolicyClassName);
+					userGroupMembershipPolicyClassName);
 
-			membershipPolicyFactoryImpl.setMembershipPolicy(membershipPolicy);
+			userGroupMembershipPolicyFactoryImpl.setUserGroupMembershipPolicy(
+				userGroupMembershipPolicy);
 
-			membershipPolicy.verifyPolicy();
+			userGroupMembershipPolicy.verifyPolicy();
 		}
 
 		if (portalProperties.containsKey(PropsKeys.PASSWORDS_TOOLKIT)) {
