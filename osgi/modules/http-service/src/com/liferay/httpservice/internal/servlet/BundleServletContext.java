@@ -221,7 +221,7 @@ public class BundleServletContext extends LiferayServletContext {
 
 	private void _registerServlet(Servlet servlet, List<String> urlPatterns) {
 		for (String urlPattern : urlPatterns) {
-			_servletsMap.put(urlPattern, servlet);
+			_servlets.put(urlPattern, servlet);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -235,14 +235,30 @@ public class BundleServletContext extends LiferayServletContext {
 		throws NamespaceException {
 
 		for (String urlPattern : urlPatterns) {
-			_validate(urlPattern);
+			if (Validator.isNull(urlPattern)) {
+				throw new IllegalArgumentException(
+					"An empty URL pattern is not allowed");
+			}
+	
+			if (!urlPattern.startsWith(StringPool.SLASH) ||
+				(urlPattern.endsWith(StringPool.SLASH) &&
+				 !urlPattern.equals(StringPool.SLASH))) {
+	
+				throw new IllegalArgumentException(
+					"URL patterns must start with / but cannot end with it");
+			}
+	
+			if (_servlets.containsKey(urlPattern)) {
+				throw new NamespaceException(
+					"URL pattern " + urlPattern + " already exists");
+			}
 		}
 
 		if (servlet == null) {
 			throw new IllegalArgumentException("Servlet must not be null");
 		}
 
-		if (_servletsMap.containsValue(servlet)) {
+		if (_servlets.containsValue(servlet)) {
 			throw new IllegalArgumentException("Servlet is already registered");
 		}
 
@@ -251,31 +267,11 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	private void _validate(String urlPattern) throws NamespaceException {
-		if (Validator.isNull(urlPattern)) {
-			throw new IllegalArgumentException(
-				"An empty URL pattern is not allowed");
-		}
-
-		if (!urlPattern.startsWith(StringPool.SLASH) ||
-			(urlPattern.endsWith(StringPool.SLASH) &&
-			 !urlPattern.equals(StringPool.SLASH))) {
-
-			throw new IllegalArgumentException(
-				"URL patterns must start with / but cannot end with it");
-		}
-
-		if (_servletsMap.containsKey(urlPattern)) {
-			throw new NamespaceException(
-				"URL pattern " + urlPattern + " already exists");
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
 
 	private Bundle _bundle;
 	private String _servletContextName;
-	private Map<String, Servlet> _servletsMap =
+	private Map<String, Servlet> _servlets =
 		new ConcurrentHashMap<String, Servlet>();
 
 }
