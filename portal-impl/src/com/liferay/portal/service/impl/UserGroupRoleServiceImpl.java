@@ -37,9 +37,9 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
-		List<UserGroupRole> userOrganizationRoles =
+		List<UserGroupRole> organizationUserGroupRoles =
 			new ArrayList<UserGroupRole>();
+		List<UserGroupRole> siteUserGroupRoles = new ArrayList<UserGroupRole>();
 
 		for (long roleId : roleIds) {
 			UserGroupRolePermissionUtil.check(
@@ -48,37 +48,37 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
 				userId, groupId, roleId);
 
-			UserGroupRole userGroupRole =
-				userGroupRoleLocalService.createUserGroupRole(userGroupRolePK);
+			UserGroupRole userGroupRole = userGroupRolePersistence.create(
+				userGroupRolePK);
 
-			Role role = roleLocalService.getRole(roleId);
+			Role role = rolePersistence.findByPrimaryKey(roleId);
 
 			if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-				userOrganizationRoles.add(userGroupRole);
+				organizationUserGroupRoles.add(userGroupRole);
 			}
 			else if (role.getType() == RoleConstants.TYPE_SITE) {
-				userGroupRoles.add(userGroupRole);
+				siteUserGroupRoles.add(userGroupRole);
 			}
 		}
 
-		if (!userGroupRoles.isEmpty()) {
-			SiteMembershipPolicyUtil.checkRoles(userGroupRoles, null);
+		if (!siteUserGroupRoles.isEmpty()) {
+			SiteMembershipPolicyUtil.checkRoles(siteUserGroupRoles, null);
 		}
 
-		if (!userOrganizationRoles.isEmpty()) {
+		if (!organizationUserGroupRoles.isEmpty()) {
 			OrganizationMembershipPolicyUtil.checkRoles(
-				userOrganizationRoles, null);
+				organizationUserGroupRoles, null);
 		}
 
 		userGroupRoleLocalService.addUserGroupRoles(userId, groupId, roleIds);
 
-		if (!userGroupRoles.isEmpty()) {
-			SiteMembershipPolicyUtil.propagateRoles(userGroupRoles, null);
+		if (!siteUserGroupRoles.isEmpty()) {
+			SiteMembershipPolicyUtil.propagateRoles(siteUserGroupRoles, null);
 		}
 
-		if (!userOrganizationRoles.isEmpty()) {
+		if (!organizationUserGroupRoles.isEmpty()) {
 			OrganizationMembershipPolicyUtil.propagateRoles(
-				userOrganizationRoles, null);
+				organizationUserGroupRoles, null);
 		}
 	}
 
@@ -97,8 +97,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
 				userId, groupId, roleId);
 
-			UserGroupRole userGroupRole =
-				userGroupRoleLocalService.createUserGroupRole(userGroupRolePK);
+			UserGroupRole userGroupRole = userGroupRolePersistence.create(
+				userGroupRolePK);
 
 			userGroupRoles.add(userGroupRole);
 		}
@@ -107,7 +107,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			return;
 		}
 
-		Role role = roleLocalService.getRole(roleId);
+		Role role = rolePersistence.findByPrimaryKey(roleId);
 
 		if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 			OrganizationMembershipPolicyUtil.checkRoles(userGroupRoles, null);
@@ -130,9 +130,9 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		List<UserGroupRole> filteredUserGroupRoles =
+		List<UserGroupRole> filteredOrganizationUserGroupRoles =
 			new ArrayList<UserGroupRole>();
-		List<UserGroupRole> filteredUserOrganizationRoles =
+		List<UserGroupRole> filteredSiteUserGroupRoles =
 			new ArrayList<UserGroupRole>();
 
 		for (long roleId : roleIds) {
@@ -144,53 +144,54 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
 				userId, groupId, roleId);
 
-			UserGroupRole userGroupRole =
-				userGroupRoleLocalService.createUserGroupRole(userGroupRolePK);
+			UserGroupRole userGroupRole = userGroupRolePersistence.create(
+				userGroupRolePK);
 
 			if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-				Group group = groupLocalService.getGroup(groupId);
+				Group group = groupPersistence.findByPrimaryKey(groupId);
 
 				if (!OrganizationMembershipPolicyUtil.isRoleProtected(
 						getPermissionChecker(), userId,
 						group.getOrganizationId(), roleId)) {
 
-					filteredUserOrganizationRoles.add(userGroupRole);
+					filteredOrganizationUserGroupRoles.add(userGroupRole);
 				}
 			}
 			else if ((role.getType() == RoleConstants.TYPE_SITE) &&
 					 !SiteMembershipPolicyUtil.isRoleProtected(
 						getPermissionChecker(), userId, groupId, roleId)) {
 
-					filteredUserGroupRoles.add(userGroupRole);
+					filteredSiteUserGroupRoles.add(userGroupRole);
 			}
 		}
 
-		if (filteredUserGroupRoles.isEmpty() &&
-			filteredUserOrganizationRoles.isEmpty()) {
+		if (filteredOrganizationUserGroupRoles.isEmpty() &&
+			filteredSiteUserGroupRoles.isEmpty()) {
 
 			return;
 		}
 
-		if (!filteredUserGroupRoles.isEmpty()) {
-			SiteMembershipPolicyUtil.checkRoles(null, filteredUserGroupRoles);
+		if (!filteredOrganizationUserGroupRoles.isEmpty()) {
+			OrganizationMembershipPolicyUtil.checkRoles(
+				null, filteredSiteUserGroupRoles);
 		}
 
-		if (!filteredUserOrganizationRoles.isEmpty()) {
-			OrganizationMembershipPolicyUtil.checkRoles(
-				null, filteredUserGroupRoles);
+		if (!filteredSiteUserGroupRoles.isEmpty()) {
+			SiteMembershipPolicyUtil.checkRoles(
+				null, filteredSiteUserGroupRoles);
 		}
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
 			userId, groupId, roleIds);
 
-		if (!filteredUserGroupRoles.isEmpty()) {
-			SiteMembershipPolicyUtil.propagateRoles(
-				null, filteredUserGroupRoles);
+		if (!filteredOrganizationUserGroupRoles.isEmpty()) {
+			OrganizationMembershipPolicyUtil.propagateRoles(
+				null, filteredOrganizationUserGroupRoles);
 		}
 
-		if (!filteredUserOrganizationRoles.isEmpty()) {
-			OrganizationMembershipPolicyUtil.propagateRoles(
-				null, filteredUserOrganizationRoles);
+		if (!filteredSiteUserGroupRoles.isEmpty()) {
+			SiteMembershipPolicyUtil.propagateRoles(
+				null, filteredSiteUserGroupRoles);
 		}
 	}
 
@@ -203,17 +204,17 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 		List<UserGroupRole> filteredUserGroupRoles =
 			new ArrayList<UserGroupRole>();
 
-		Role role = roleLocalService.getRole(roleId);
+		Role role = rolePersistence.findByPrimaryKey(roleId);
 
 		for (long userId : userIds) {
 			UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
 				userId, groupId, roleId);
 
-			UserGroupRole userGroupRole =
-				userGroupRoleLocalService.createUserGroupRole(userGroupRolePK);
+			UserGroupRole userGroupRole = userGroupRolePersistence.create(
+				userGroupRolePK);
 
 			if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-				Group group = groupLocalService.getGroup(groupId);
+				Group group = groupPersistence.findByPrimaryKey(groupId);
 
 				if (!OrganizationMembershipPolicyUtil.isRoleProtected(
 						getPermissionChecker(), userId,
@@ -224,7 +225,7 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			}
 			else if ((role.getType() == RoleConstants.TYPE_SITE) &&
 					 (!SiteMembershipPolicyUtil.isRoleProtected(
-						getPermissionChecker(), userId, groupId, roleId))) {
+					  getPermissionChecker(), userId, groupId, roleId))) {
 
 					filteredUserGroupRoles.add(userGroupRole);
 			}
@@ -234,12 +235,12 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 			return;
 		}
 
-		if (role.getType() == RoleConstants.TYPE_SITE) {
-			SiteMembershipPolicyUtil.checkRoles(null, filteredUserGroupRoles);
-		}
-		else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+		if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 			OrganizationMembershipPolicyUtil.checkRoles(
 				null, filteredUserGroupRoles);
+		}
+		else if (role.getType() == RoleConstants.TYPE_SITE) {
+			SiteMembershipPolicyUtil.checkRoles(null, filteredUserGroupRoles);
 		}
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
