@@ -91,7 +91,9 @@ public class ListUtilTest extends TestCase {
 		expectedList.add("bbb");
 		expectedList.add("ccc");
 
-		Assert.assertEquals(expectedList, ListUtil.remove(list, null));
+		List<String> removeList = null;
+
+		Assert.assertEquals(expectedList, ListUtil.remove(list, removeList));
 	}
 
 	@Test
