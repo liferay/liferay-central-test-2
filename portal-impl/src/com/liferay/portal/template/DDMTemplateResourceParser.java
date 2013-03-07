@@ -33,7 +33,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUti
 /**
  * @author Tina Tian
  * @author Juan Fernández
- *
  */
 public class DDMTemplateResourceParser implements TemplateResourceParser {
 
@@ -70,8 +69,6 @@ public class DDMTemplateResourceParser implements TemplateResourceParser {
 						groupId + ", ddmTemplateKey=" + ddmTemplateKey + "}");
 			}
 
-			// Look for a generic template
-
 			long classNameId = 0;
 
 			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(
@@ -85,9 +82,6 @@ public class DDMTemplateResourceParser implements TemplateResourceParser {
 					companyGroup.getGroupId(), classNameId, ddmTemplateKey);
 
 				if (ddmTemplate == null) {
-
-					// Look for a structure template
-
 					classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
 					ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(

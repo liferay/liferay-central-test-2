@@ -26,6 +26,6 @@ servlet context
 {$themeDisplay}: the theme display
 
 The variable ${templatesPath} can be used to include another template through
-its template key, e.g. <#include "${templatesPath}/LAYOUT-PARENT" />
+its template key, e.g. <#include "${templatesPath}/LAYOUT-PARENT" />.
 
 -->
