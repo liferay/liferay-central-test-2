@@ -263,27 +263,6 @@ public class SeleniumBuilderContext {
 		return _functionPackageNames.get(functionName);
 	}
 
-	public String getFunctionParameterString(String functionName) {
-		Integer fuctionTargetCount = getFunctionTargetCount(functionName);
-
-		if (fuctionTargetCount == 1) {
-			return "String target, String value";
-		}
-		else {
-			String functionParameterString = "";
-
-			for (int i = 1; i < fuctionTargetCount; i++) {
-				functionParameterString +=
-					"String target" + i + ", String value" + i + ", ";
-			}
-
-			functionParameterString = functionParameterString.substring(
-				0, functionParameterString.length() - 2);
-
-			return functionParameterString;
-		}
-	}
-
 	public String getFunctionReturnType(String functionName) {
 		return _functionReturnTypes.get(functionName);
 	}
@@ -296,7 +275,7 @@ public class SeleniumBuilderContext {
 		return _functionSimpleClassNames.get(functionName);
 	}
 
-	public Integer getFunctionTargetCount(String functionName) {
+	public int getFunctionTargetCount(String functionName) {
 		return _functionTargetCounts.get(functionName);
 	}
 

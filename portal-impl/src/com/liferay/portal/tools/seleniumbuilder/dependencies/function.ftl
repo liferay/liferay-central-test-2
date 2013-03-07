@@ -12,10 +12,18 @@ public class ${seleniumBuilderContext.getFunctionSimpleClassName(functionName)} 
 
 	<#assign functionCommandElements = rootElement.elements("function-command")>
 
-	<#assign functionParameterString = seleniumBuilderContext.getFunctionParameterString(functionName)>
-
 	<#list functionCommandElements as functionCommandElement>
-		public ${seleniumBuilderContext.getFunctionReturnType(functionName)} ${functionCommandElement.attributeValue("name")}(${functionParameterString}) {
+		public ${seleniumBuilderContext.getFunctionReturnType(functionName)} ${functionCommandElement.attributeValue("name")}(
+		
+		<#list 1..seleniumBuilderContext.getFunctionTargetCount(functionName) as i>
+			String target${i}, String value${i}
+			
+			<#if i_has_next>
+				,
+			</#if>
+		</#list>
+
+		) {
 		}
 	</#list>
 
