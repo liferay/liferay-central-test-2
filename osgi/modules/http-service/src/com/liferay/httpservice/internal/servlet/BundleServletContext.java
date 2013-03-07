@@ -257,7 +257,8 @@ public class BundleServletContext extends LiferayServletContext {
 
 			if (_servlets.containsKey(urlPattern)) {
 				throw new NamespaceException(
-					"URL pattern " + urlPattern + " already exists");
+					"A servlet is already registered with the URL pattern " +
+						urlPattern);
 			}
 		}
 
