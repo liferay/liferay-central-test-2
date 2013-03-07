@@ -67,11 +67,14 @@ public class HttpServiceTracker
 
 		readConfiguration(_bundle);
 
-		initListeners((ExtendedHttpService)httpService, httpContext);
+		ExtendedHttpService extendedHttpService =
+			(ExtendedHttpService)httpService;
 
-		initServlets((ExtendedHttpService)httpService, httpContext);
+		initListeners(extendedHttpService, httpContext);
 
-		initFilters((ExtendedHttpService)httpService, httpContext);
+		initServlets(extendedHttpService, httpContext);
+
+		initFilters(extendedHttpService, httpContext);
 
 		return httpService;
 	}
@@ -85,11 +88,14 @@ public class HttpServiceTracker
 			return;
 		}
 
-		destroyFilters((ExtendedHttpService)httpService);
+		ExtendedHttpService extendedHttpService =
+			(ExtendedHttpService)httpService;
 
-		destroyServlets((ExtendedHttpService)httpService);
+		destroyFilters(extendedHttpService);
 
-		destroyListeners((ExtendedHttpService)httpService);
+		destroyServlets(extendedHttpService);
+
+		destroyListeners(extendedHttpService);
 
 		_webXML = null;
 	}
