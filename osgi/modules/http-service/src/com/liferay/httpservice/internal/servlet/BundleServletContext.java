@@ -149,6 +149,7 @@ public class BundleServletContext extends LiferayServletContext {
 		return null;
 	}
 
+	@Override
 	public String getServletContextName() {
 		return _servletContextName;
 	}
@@ -172,11 +173,11 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerServlet(
-			String servletName, List<String> aliases, Servlet servlet,
+			String servletName, List<String> urlPatterns, Servlet servlet,
 			Dictionary<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException {
 
-		_validate(servlet, aliases, httpContext);
+		_validate(servlet, urlPatterns, httpContext);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -190,7 +191,7 @@ public class BundleServletContext extends LiferayServletContext {
 
 			servlet.init(servletConfig);
 
-			_registerServlet(servlet, aliases);
+			_registerServlet(servlet, urlPatterns);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -198,42 +199,43 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerServlet(
-			String alias, Servlet servlet,
+			String urlPattern, Servlet servlet,
 			Dictionary<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException {
 
-		List<String> aliases = Arrays.asList(alias);
+		List<String> urlPatterns = Arrays.asList(urlPattern);
 
-		registerServlet(alias, aliases, servlet, initParameters, httpContext);
+		registerServlet(
+			urlPattern, urlPatterns, servlet, initParameters, httpContext);
 	}
 
 	public void setServletContextName(String servletContextName) {
 		_servletContextName = servletContextName;
 	}
 
-	public void unregisterFilter(String filterMapping) {
+	public void unregisterFilter(String urlPattern) {
 	}
 
-	public void unregisterServlet(String alias) {
+	public void unregisterServlet(String urlPattern) {
 	}
 
-	private void _registerServlet(Servlet servlet, List<String> aliases) {
-		for (String alias : aliases) {
-			_servletsMap.put(alias, servlet);
+	private void _registerServlet(Servlet servlet, List<String> urlPatterns) {
+		for (String urlPattern : urlPatterns) {
+			_servletsMap.put(urlPattern, servlet);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Registered servlet at " + getContextPath().concat(alias));
+					"Registered servlet at " + getContextPath() + urlPattern);
 			}
 		}
 	}
 
 	private void _validate(
-			Servlet servlet, List<String> aliases, HttpContext httpContext)
+			Servlet servlet, List<String> urlPatterns, HttpContext httpContext)
 		throws NamespaceException {
 
-		for (String alias : aliases) {
-			_validate(alias);
+		for (String urlPattern : urlPatterns) {
+			_validate(urlPattern);
 		}
 
 		if (servlet == null) {
@@ -249,21 +251,23 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	private void _validate(String alias) throws NamespaceException {
-		if (Validator.isNull(alias)) {
-			throw new IllegalArgumentException("Empty aliases are not allowed");
+	private void _validate(String urlPattern) throws NamespaceException {
+		if (Validator.isNull(urlPattern)) {
+			throw new IllegalArgumentException(
+				"An empty URL pattern is not allowed");
 		}
 
-		if (!alias.startsWith(StringPool.SLASH) ||
-			(alias.endsWith(StringPool.SLASH) &&
-			 !alias.equals(StringPool.SLASH))) {
+		if (!urlPattern.startsWith(StringPool.SLASH) ||
+			(urlPattern.endsWith(StringPool.SLASH) &&
+			 !urlPattern.equals(StringPool.SLASH))) {
 
 			throw new IllegalArgumentException(
-				"Alias must start with / but must not end with it");
+				"URL patterns must start with / but cannot end with it");
 		}
 
-		if (_servletsMap.containsKey(alias)) {
-			throw new NamespaceException("Alias " + alias + " already exists");
+		if (_servletsMap.containsKey(urlPattern)) {
+			throw new NamespaceException(
+				"URL pattern " + urlPattern + " already exists");
 		}
 	}
 

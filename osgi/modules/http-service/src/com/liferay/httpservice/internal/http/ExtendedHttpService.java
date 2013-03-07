@@ -43,9 +43,9 @@ public interface ExtendedHttpService extends HttpService {
 		throws ServletException;
 
 	public void registerServlet(
-			String servletName, List<String> aliases, Servlet servlet,
+			String servletName, List<String> urlPatterns, Servlet servlet,
 			@SuppressWarnings("rawtypes") Dictionary initParameters,
-			HttpContext context)
+			HttpContext httpContext)
 		throws NamespaceException, ServletException;
 
 	public void unregisterFilter(String name);

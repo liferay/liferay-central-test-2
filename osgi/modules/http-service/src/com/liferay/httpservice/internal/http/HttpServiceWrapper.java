@@ -22,11 +22,9 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
-import javax.servlet.ServletException;
 
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
-import org.osgi.service.http.NamespaceException;
 
 /**
  * @author Raymond Augé
@@ -56,10 +54,9 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 	}
 
 	public void registerServlet(
-			String servletName, List<String> aliases, Servlet servlet,
-			@SuppressWarnings("rawtypes") Dictionary initParameters,
-			HttpContext httpContext)
-		throws NamespaceException, ServletException {
+		String servletName, List<String> urlPatterns, Servlet servlet,
+		@SuppressWarnings("rawtypes") Dictionary initParameters,
+		HttpContext httpContext) {
 	}
 
 	public void registerServlet(
