@@ -16,6 +16,7 @@ package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.httpservice.servlet.BundleServletConfig;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContext;
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -33,6 +34,7 @@ import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
@@ -177,7 +179,7 @@ public class BundleServletContext extends LiferayServletContext {
 			Dictionary<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException {
 
-		_validate(servlet, urlPatterns, httpContext);
+		validate(servletName, servlet, urlPatterns, httpContext);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -191,7 +193,7 @@ public class BundleServletContext extends LiferayServletContext {
 
 			servlet.init(servletConfig);
 
-			_registerServlet(servlet, urlPatterns);
+			registerServlet(servletName, servlet, urlPatterns);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -219,7 +221,11 @@ public class BundleServletContext extends LiferayServletContext {
 	public void unregisterServlet(String urlPattern) {
 	}
 
-	private void _registerServlet(Servlet servlet, List<String> urlPatterns) {
+	protected void registerServlet(
+		String servletName, Servlet servlet, List<String> urlPatterns) {
+
+		_servletNames.add(servletName);
+
 		for (String urlPattern : urlPatterns) {
 			_servlets.put(urlPattern, servlet);
 
@@ -230,24 +236,30 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	private void _validate(
-			Servlet servlet, List<String> urlPatterns, HttpContext httpContext)
+	protected void validate(
+			String servletName, Servlet servlet, List<String> urlPatterns,
+			HttpContext httpContext)
 		throws NamespaceException {
+
+		if (_servletNames.contains(servletName)) {
+			throw new NamespaceException(
+				"A servlet is already registered with the name " + servletName);
+		}
 
 		for (String urlPattern : urlPatterns) {
 			if (Validator.isNull(urlPattern)) {
 				throw new IllegalArgumentException(
 					"An empty URL pattern is not allowed");
 			}
-	
+
 			if (!urlPattern.startsWith(StringPool.SLASH) ||
 				(urlPattern.endsWith(StringPool.SLASH) &&
 				 !urlPattern.equals(StringPool.SLASH))) {
-	
+
 				throw new IllegalArgumentException(
 					"URL patterns must start with / but cannot end with it");
 			}
-	
+
 			if (_servlets.containsKey(urlPattern)) {
 				throw new NamespaceException(
 					"URL pattern " + urlPattern + " already exists");
@@ -263,7 +275,7 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 
 		if (httpContext == null) {
-			throw new IllegalArgumentException("HttpContext cannot be null");
+			throw new IllegalArgumentException("HTTP context cannot be null");
 		}
 	}
 
@@ -271,6 +283,7 @@ public class BundleServletContext extends LiferayServletContext {
 
 	private Bundle _bundle;
 	private String _servletContextName;
+	private Set<String> _servletNames = new ConcurrentHashSet<String>();
 	private Map<String, Servlet> _servlets =
 		new ConcurrentHashMap<String, Servlet>();
 
