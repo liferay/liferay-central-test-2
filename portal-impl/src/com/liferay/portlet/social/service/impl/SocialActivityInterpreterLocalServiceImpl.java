@@ -65,7 +65,11 @@ public class SocialActivityInterpreterLocalServiceImpl
 		SocialActivityInterpreter activityInterpreter) {
 
 		List<SocialActivityInterpreter> activityInterpreters =
-			new ArrayList<SocialActivityInterpreter>();
+			_activityInterpreters.get(activityInterpreter.getSelector());
+
+		if (activityInterpreters == null) {
+			activityInterpreters = new ArrayList<SocialActivityInterpreter>();
+		}
 
 		activityInterpreters.add(activityInterpreter);
 
@@ -89,6 +93,12 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		activityInterpreters.remove(activityInterpreter);
+	}
+
+	public Map<String, List<SocialActivityInterpreter>>
+		getActivityInterpreters() {
+
+		return _activityInterpreters;
 	}
 
 	public long getActivitySetId(long activityId)
