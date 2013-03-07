@@ -10,4 +10,5 @@ public class ${seleniumBuilderContext.getPathSimpleClassName(pathName)} {
 
 		return paths;
 	}
+
 }
