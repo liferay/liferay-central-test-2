@@ -16,7 +16,6 @@ package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.httpservice.servlet.BundleServletConfig;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContext;
-import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -34,7 +33,6 @@ import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
@@ -203,10 +201,10 @@ public class BundleServletContext extends LiferayServletContext {
 
 			servlet.init(servletConfig);
 
-			_servletNames.add(servletName);
+			_servletsByServletNames.put(servletName, servlet);
 
 			for (String urlPattern : urlPatterns) {
-				_servlets.put(urlPattern, servlet);
+				_servletsByURLPatterns.put(urlPattern, servlet);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -246,7 +244,9 @@ public class BundleServletContext extends LiferayServletContext {
 			HttpContext httpContext)
 		throws NamespaceException {
 
-		if (_servletNames.contains(servletName)) {
+		Servlet registeredServlet = _servletsByServletNames.get(servletName);
+
+		if ((registeredServlet != null) && (registeredServlet != servlet)) {
 			throw new NamespaceException(
 				"A servlet is already registered with the name " + servletName);
 		}
@@ -265,7 +265,7 @@ public class BundleServletContext extends LiferayServletContext {
 					"URL patterns must start with / but cannot end with it");
 			}
 
-			if (_servlets.containsKey(urlPattern)) {
+			if (_servletsByURLPatterns.containsKey(urlPattern)) {
 				throw new NamespaceException(
 					"A servlet is already registered with the URL pattern " +
 						urlPattern);
@@ -276,7 +276,7 @@ public class BundleServletContext extends LiferayServletContext {
 			throw new IllegalArgumentException("Servlet must not be null");
 		}
 
-		if (_servlets.containsValue(servlet)) {
+		if (_servletsByURLPatterns.containsValue(servlet)) {
 			throw new IllegalArgumentException("Servlet is already registered");
 		}
 
@@ -289,8 +289,9 @@ public class BundleServletContext extends LiferayServletContext {
 
 	private Bundle _bundle;
 	private String _servletContextName;
-	private Set<String> _servletNames = new ConcurrentHashSet<String>();
-	private Map<String, Servlet> _servlets =
+	private Map<String, Servlet> _servletsByServletNames =
+		new ConcurrentHashMap<String, Servlet>();
+	private Map<String, Servlet> _servletsByURLPatterns =
 		new ConcurrentHashMap<String, Servlet>();
 
 }
