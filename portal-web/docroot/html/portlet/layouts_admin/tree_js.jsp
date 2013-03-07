@@ -598,6 +598,15 @@ if (!selectableTree) {
 					},
 				</c:if>
 
+				'drop:hit': function(event) {
+					var dropNode = event.drop.get('node').get('parentNode');
+
+					var dropTreeNode = dropNode.getData('tree-node');
+
+					if (!dropTreeNode.get('draggable')) {
+						event.halt();
+					}
+				},
 				dropAppend: function(event) {
 					var tree = event.tree;
 
@@ -608,15 +617,6 @@ if (!selectableTree) {
 						TreeUtil.extractPlid(tree.dropNode),
 						index
 					);
-				},
-				'drop:hit': function(event) {
-					var dropNode = event.drop.get('node').get('parentNode');
-
-					var dropTreeNode = dropNode.getData('tree-node');
-
-					if (!dropTreeNode.get('draggable')) {
-						event.halt();
-					}
 				},
 				dropInsert: function(event) {
 					var tree = event.tree;
