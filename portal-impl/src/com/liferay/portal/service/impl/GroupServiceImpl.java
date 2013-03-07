@@ -834,10 +834,10 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			List<AssetTag> oldAssetTags = assetTagLocalService.getTags(
 				Group.class.getName(), groupId);
 
-			ExpandoBridge expandoBridge = group.getExpandoBridge();
+			ExpandoBridge oldExpandoBridge = oldGroup.getExpandoBridge();
 
 			Map<String, Serializable> oldExpandoAttributes =
-				expandoBridge.getAttributes();
+				oldExpandoBridge.getAttributes();
 
 			group = groupLocalService.updateGroup(
 				groupId, parentGroupId, name, description, type, friendlyURL,
