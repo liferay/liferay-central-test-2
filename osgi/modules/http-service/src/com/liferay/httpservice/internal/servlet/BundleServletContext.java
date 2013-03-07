@@ -271,14 +271,6 @@ public class BundleServletContext extends LiferayServletContext {
 						urlPattern);
 			}
 		}
-
-		if (servlet == null) {
-			throw new IllegalArgumentException("Servlet must not be null");
-		}
-
-		if (httpContext == null) {
-			throw new IllegalArgumentException("HTTP context cannot be null");
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
