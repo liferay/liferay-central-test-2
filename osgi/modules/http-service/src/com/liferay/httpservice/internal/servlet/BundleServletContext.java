@@ -170,8 +170,18 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerFilter(
-		String urlPattern, Filter filter,
+		String filterName, List<String> urlPatterns, Filter filter,
 		Dictionary<String, String> initParameters, HttpContext httpContext) {
+	}
+
+	public void registerFilter(
+		String filterName, String urlPattern, Filter filter,
+		Dictionary<String, String> initParameters, HttpContext httpContext) {
+
+		List<String> urlPatterns = Arrays.asList(urlPattern);
+
+		registerFilter(
+			filterName, urlPatterns, filter, initParameters, httpContext);
 	}
 
 	public void registerServlet(
@@ -211,14 +221,14 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerServlet(
-			String urlPattern, Servlet servlet,
+			String servletName, String urlPattern, Servlet servlet,
 			Dictionary<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException {
 
 		List<String> urlPatterns = Arrays.asList(urlPattern);
 
 		registerServlet(
-			urlPattern, urlPatterns, servlet, initParameters, httpContext);
+			servletName, urlPatterns, servlet, initParameters, httpContext);
 	}
 
 	public void setServletContextName(String servletContextName) {

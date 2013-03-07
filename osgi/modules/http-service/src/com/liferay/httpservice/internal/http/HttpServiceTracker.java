@@ -104,9 +104,9 @@ public class HttpServiceTracker
 		Map<String, FilterDefinition> filterDefinitions =
 			_webXML.getFilterDefinitions();
 
-		for (String name : filterDefinitions.keySet()) {
+		for (String filterName : filterDefinitions.keySet()) {
 			try {
-				extendedHttpService.unregisterFilter(name);
+				extendedHttpService.unregisterFilter(filterName);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -133,8 +133,8 @@ public class HttpServiceTracker
 		Map<String, ServletDefinition> servlets =
 			_webXML.getServletDefinitions();
 
-		for (String name : servlets.keySet()) {
-			extendedHttpService.unregisterServlet(name);
+		for (String servletName : servlets.keySet()) {
+			extendedHttpService.unregisterServlet(servletName);
 		}
 	}
 
@@ -149,17 +149,15 @@ public class HttpServiceTracker
 
 			FilterDefinition filterDefinition = entry.getValue();
 
-			List<String> urlPatterns = filterDefinition.getURLPatterns();
-
-			for (String urlPattern : urlPatterns) {
-				try {
-					extendedHttpService.registerFilter(
-						urlPattern, filterDefinition.getFilter(),
-						filterDefinition.getInitParameters(), httpContext);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
+			try {
+				extendedHttpService.registerFilter(
+					filterDefinition.getName(),
+					filterDefinition.getURLPatterns(),
+					filterDefinition.getFilter(),
+					filterDefinition.getInitParameters(), httpContext);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}

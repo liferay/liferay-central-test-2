@@ -33,7 +33,7 @@ import org.osgi.service.http.NamespaceException;
 public interface ExtendedHttpService extends HttpService {
 
 	public void registerFilter(
-			String urlPattern, Filter filter,
+			String filterName, List<String> urlPatterns, Filter filter,
 			Map<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException;
 

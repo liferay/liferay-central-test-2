@@ -40,8 +40,8 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 	}
 
 	public void registerFilter(
-		String urlPattern, Filter filter, Map<String, String> initParameters,
-		HttpContext httpContext) {
+		String filterName, List<String> urlPatterns, Filter filter,
+		Map<String, String> initParameters, HttpContext httpContext) {
 	}
 
 	public void registerListener(
@@ -59,6 +59,9 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 		HttpContext httpContext) {
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
 	public void registerServlet(
 		String urlPattern, Servlet servlet,
 		@SuppressWarnings("rawtypes") Dictionary initParameters,
