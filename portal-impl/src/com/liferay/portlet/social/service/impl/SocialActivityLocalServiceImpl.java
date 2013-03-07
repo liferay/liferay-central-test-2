@@ -23,6 +23,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -232,12 +233,14 @@ public class SocialActivityLocalServiceImpl
 
 			socialActivityPersistence.update(activity);
 
-			long activitySetId =
-				socialActivityInterpreterLocalService.getActivitySetId(
-					activity.getActivityId());
+			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+				long activitySetId =
+					socialActivityInterpreterLocalService.getActivitySetId(
+						activity.getActivityId());
 
-			socialActivitySetLocalService.incrementActivityCount(
-				activitySetId, activityId);
+				socialActivitySetLocalService.incrementActivityCount(
+					activitySetId, activityId);
+			}
 
 			if (mirrorActivity != null) {
 				long mirrorActivityId = counterLocalService.increment(
@@ -342,8 +345,10 @@ public class SocialActivityLocalServiceImpl
 	public void deleteActivities(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
-		socialActivitySetLocalService.decrementActivityCount(
-			assetEntry.getClassNameId(), assetEntry.getClassPK());
+		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+			socialActivitySetLocalService.decrementActivityCount(
+				assetEntry.getClassNameId(), assetEntry.getClassPK());
+		}
 
 		socialActivityPersistence.removeByC_C(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
@@ -364,8 +369,10 @@ public class SocialActivityLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		socialActivitySetLocalService.decrementActivityCount(
-			classNameId, classPK);
+		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+			socialActivitySetLocalService.decrementActivityCount(
+				classNameId, classPK);
+		}
 
 		socialActivityPersistence.removeByC_C(classNameId, classPK);
 	}
@@ -398,8 +405,10 @@ public class SocialActivityLocalServiceImpl
 		socialActivityPersistence.remove(activity);
 
 		try {
-			socialActivitySetLocalService.decrementActivityCount(
-				activity.getActivitySetId());
+			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+				socialActivitySetLocalService.decrementActivityCount(
+					activity.getActivitySetId());
+			}
 
 			socialActivityPersistence.removeByMirrorActivityId(
 				activity.getActivityId());
@@ -429,8 +438,10 @@ public class SocialActivityLocalServiceImpl
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
-			socialActivitySetLocalService.decrementActivityCount(
-				activity.getActivitySetId());
+			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+				socialActivitySetLocalService.decrementActivityCount(
+					activity.getActivitySetId());
+			}
 
 			socialActivityPersistence.remove(activity);
 		}
@@ -439,8 +450,10 @@ public class SocialActivityLocalServiceImpl
 			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
-			socialActivitySetLocalService.decrementActivityCount(
-				activity.getActivitySetId());
+			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+				socialActivitySetLocalService.decrementActivityCount(
+					activity.getActivitySetId());
+			}
 
 			socialActivityPersistence.remove(activity);
 		}
