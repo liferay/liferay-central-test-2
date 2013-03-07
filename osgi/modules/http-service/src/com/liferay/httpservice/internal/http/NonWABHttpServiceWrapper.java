@@ -61,18 +61,22 @@ public class NonWABHttpServiceWrapper
 	}
 
 	public void registerServlet(
-		String alias, Servlet servlet,
+		String urlPattern, Servlet servlet,
 		@SuppressWarnings("rawtypes") Dictionary initParameters,
 		HttpContext httpContext) {
 	}
 
-	public void unregister(String alias) {
+	public void unregister(String servletName) {
+		unregisterServlet(servletName);
 	}
 
-	public void unregisterFilter(String name) {
+	public void unregisterFilter(String filterName) {
 	}
 
 	public void unregisterListener(Object listener) {
+	}
+
+	public void unregisterServlet(String servletName) {
 	}
 
 }

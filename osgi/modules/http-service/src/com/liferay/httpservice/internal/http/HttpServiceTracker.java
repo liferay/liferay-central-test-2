@@ -87,7 +87,7 @@ public class HttpServiceTracker
 
 		destroyFilters((ExtendedHttpService)httpService);
 
-		destroyServlets(httpService);
+		destroyServlets((ExtendedHttpService)httpService);
 
 		destroyListeners((ExtendedHttpService)httpService);
 
@@ -123,12 +123,12 @@ public class HttpServiceTracker
 		}
 	}
 
-	protected void destroyServlets(HttpService httpService) {
+	protected void destroyServlets(ExtendedHttpService extendedHttpService) {
 		Map<String, ServletDefinition> servlets =
 			_webXML.getServletDefinitions();
 
 		for (String name : servlets.keySet()) {
-			httpService.unregister(name);
+			extendedHttpService.unregisterServlet(name);
 		}
 	}
 

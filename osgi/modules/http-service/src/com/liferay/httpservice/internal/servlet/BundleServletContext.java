@@ -170,7 +170,7 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerFilter(
-		String filterMapping, Filter filter,
+		String urlPattern, Filter filter,
 		Dictionary<String, String> initParameters, HttpContext httpContext) {
 	}
 
@@ -179,7 +179,7 @@ public class BundleServletContext extends LiferayServletContext {
 			Dictionary<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException {
 
-		validate(servletName, servlet, urlPatterns, httpContext);
+		validateServlet(servletName, servlet, urlPatterns, httpContext);
 
 		Thread currentThread = Thread.currentThread();
 
@@ -194,10 +194,10 @@ public class BundleServletContext extends LiferayServletContext {
 			servlet.init(servletConfig);
 
 			_servletNames.add(servletName);
-	
+
 			for (String urlPattern : urlPatterns) {
 				_servlets.put(urlPattern, servlet);
-	
+
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Registered servlet at " + getContextPath() +
@@ -225,13 +225,13 @@ public class BundleServletContext extends LiferayServletContext {
 		_servletContextName = servletContextName;
 	}
 
-	public void unregisterFilter(String urlPattern) {
+	public void unregisterFilter(String filterName) {
 	}
 
-	public void unregisterServlet(String urlPattern) {
+	public void unregisterServlet(String servletName) {
 	}
 
-	protected void validate(
+	protected void validateServlet(
 			String servletName, Servlet servlet, List<String> urlPatterns,
 			HttpContext httpContext)
 		throws NamespaceException {

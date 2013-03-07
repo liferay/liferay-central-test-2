@@ -48,8 +48,10 @@ public interface ExtendedHttpService extends HttpService {
 			HttpContext httpContext)
 		throws NamespaceException, ServletException;
 
-	public void unregisterFilter(String name);
+	public void unregisterFilter(String filterName);
 
 	public void unregisterListener(Object listener);
+
+	public void unregisterServlet(String servletName);
 
 }
