@@ -49,6 +49,8 @@ public class ListUtilTest extends TestCase {
 
 	@Test
 	public void testRemoveFromEmptyList() {
+		List<String> list = Collections.EMPTY_LIST;
+
 		List<String> removeList = new ArrayList<String>();
 
 		removeList.add("aaa");
@@ -56,7 +58,7 @@ public class ListUtilTest extends TestCase {
 
 		Assert.assertEquals(
 			Collections.emptyList(),
-			ListUtil.remove(Collections.EMPTY_LIST, removeList));
+			ListUtil.remove(list, removeList));
 	}
 
 	@Test
