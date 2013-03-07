@@ -93,8 +93,7 @@ public class UserOrganizationChecker extends RowChecker {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
+
 			return super.isDisabled(obj);
 		}
 	}

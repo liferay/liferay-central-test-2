@@ -85,9 +85,11 @@ public class OrganizationRoleUserChecker extends RowChecker {
 				}
 			}
 		}
-		finally {
-			return super.isDisabled(obj);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
+
+		return super.isDisabled(obj);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
