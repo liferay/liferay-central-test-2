@@ -26,6 +26,7 @@ import java.net.URL;
 public class ClassLoaderResourceParser extends URLResourceParser {
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public URL getURL(String templateId) {
 		if (templateId.contains(TemplateConstants.JOURNAL_SEPARATOR) ||
 			templateId.contains(TemplateConstants.SERVLET_SEPARATOR) ||
