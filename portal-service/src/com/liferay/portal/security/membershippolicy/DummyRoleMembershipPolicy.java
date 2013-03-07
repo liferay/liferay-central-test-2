@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Role;
 
 import java.io.Serializable;
@@ -26,39 +24,35 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Roberto Díaz
  * @author Sergio González
+ *
  */
 public class DummyRoleMembershipPolicy extends BaseRoleMembershipPolicy {
 
 	public void checkRoles(
-			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addRoleIds, long[] removeRoleIds) {
 	}
 
-	public boolean isRoleAllowed(long userId, long roleId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isRoleAllowed(long userId, long roleId) {
 		return true;
 	}
 
-	public boolean isRoleRequired(long userId, long roleId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isRoleRequired(long userId, long roleId) {
 		return false;
 	}
 
 	public void propagateRoles(
-			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addRoleIds, long[] removeRoleIds) {
 	}
 
-	public void verifyPolicy(Role role)
-		throws PortalException, SystemException {
+	@Override
+	public void verifyPolicy(Role role) {
 	}
 
 	public void verifyPolicy(
-			Role role, Role oldRole,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException, SystemException {
+		Role role, Role oldRole,
+		Map<String, Serializable> oldExpandoAttributes) {
 	}
 
 }

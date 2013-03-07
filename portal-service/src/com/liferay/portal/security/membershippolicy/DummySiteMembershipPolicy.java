@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroupRole;
@@ -34,71 +32,60 @@ import java.util.Map;
 public class DummySiteMembershipPolicy extends BaseSiteMembershipPolicy {
 
 	public void checkMembership(
-			long[] userIds, long[] addGroupIds, long[] removeGroupIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addGroupIds, long[] removeGroupIds) {
 	}
 
 	public void checkRoles(
-			List<UserGroupRole> addUserGroupRoles,
-			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException, SystemException {
+		List<UserGroupRole> addUserGroupRoles,
+		List<UserGroupRole> removeUserGroupRoles) {
 	}
 
-	public boolean isMembershipAllowed(long userId, long groupId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isMembershipAllowed(long userId, long groupId) {
 		return true;
 	}
 
-	public boolean isMembershipRequired(long userId, long groupId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isMembershipRequired(long userId, long groupId) {
 		return false;
 	}
 
-	public boolean isRoleAllowed(long userId, long groupId, long roleId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isRoleAllowed(long userId, long groupId, long roleId) {
 		return true;
 	}
 
-	public boolean isRoleRequired(long userId, long groupId, long roleId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isRoleRequired(long userId, long groupId, long roleId) {
 		return false;
 	}
 
 	public void propagateMembership(
-			long[] userIds, long[] addGroupIds, long[] removeGroupIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addGroupIds, long[] removeGroupIds) {
 	}
 
 	public void propagateRoles(
-			List<UserGroupRole> addUserGroupRoles,
-			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException, SystemException {
+		List<UserGroupRole> addUserGroupRoles,
+		List<UserGroupRole> removeUserGroupRoles) {
 	}
 
-	public void verifyPolicy(Group group)
-		throws PortalException, SystemException {
-	}
-
-	public void verifyPolicy(
-			Group group, Group oldGroup, List<AssetCategory> oldAssetCategories,
-			List<AssetTag> oldAssetTags,
-			Map<String, Serializable> oldExpandoAttributes,
-			String oldTypeSettings)
-		throws PortalException, SystemException {
-	}
-
-	public void verifyPolicy(Role role)
-		throws PortalException, SystemException {
+	@Override
+	public void verifyPolicy(Group group) {
 	}
 
 	public void verifyPolicy(
-			Role role, Role oldRole,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException, SystemException {
+		Group group, Group oldGroup, List<AssetCategory> oldAssetCategories,
+		List<AssetTag> oldAssetTags,
+		Map<String, Serializable> oldExpandoAttributes,
+		String oldTypeSettings) {
+	}
+
+	public void verifyPolicy(Role role) {
+	}
+
+	public void verifyPolicy(
+		Role role, Role oldRole,
+		Map<String, Serializable> oldExpandoAttributes) {
 	}
 
 }

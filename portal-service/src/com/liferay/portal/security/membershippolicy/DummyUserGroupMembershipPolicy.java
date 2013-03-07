@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.UserGroup;
 
 import java.io.Serializable;
@@ -30,35 +28,30 @@ public class DummyUserGroupMembershipPolicy
 	extends BaseUserGroupMembershipPolicy {
 
 	public void checkMembership(
-			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds) {
 	}
 
-	public boolean isMembershipAllowed(long userId, long userGroupId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isMembershipAllowed(long userId, long userGroupId) {
 		return true;
 	}
 
-	public boolean isMembershipRequired(long userId, long userGroupId)
-		throws PortalException, SystemException {
-
+	@Override
+	public boolean isMembershipRequired(long userId, long userGroupId) {
 		return false;
 	}
 
 	public void propagateMembership(
-			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds) {
 	}
 
-	public void verifyPolicy(UserGroup userGroup)
-		throws PortalException, SystemException {
+	@Override
+	public void verifyPolicy(UserGroup userGroup) {
 	}
 
 	public void verifyPolicy(
-			UserGroup userGroup, UserGroup oldUserGroup,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException, SystemException {
+		UserGroup userGroup, UserGroup oldUserGroup,
+		Map<String, Serializable> oldExpandoAttributes) {
 	}
 
 }
