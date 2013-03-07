@@ -14,6 +14,10 @@
 
 package com.liferay.portal.security.membershippolicy;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
@@ -21,14 +25,13 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.persistence.GroupActionableDynamicQuery;
+import com.liferay.portal.service.persistence.UserGroupRoleActionableDynamicQuery;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
-import com.liferay.portal.util.PortalUtil;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -171,39 +174,47 @@ public abstract class BaseSiteMembershipPolicyImpl
 	}
 
 	public void verifyPolicy() throws PortalException, SystemException {
-		long[] companyIds = PortalUtil.getCompanyIds();
+		ActionableDynamicQuery groupActionableDynamicQuery =
+			new GroupActionableDynamicQuery() {
 
-		for (long companyId : companyIds) {
-			LinkedHashMap<String, Object> groupParams =
-				new LinkedHashMap<String, Object>();
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				Property property = PropertyFactoryUtil.forName("site");
 
-			groupParams.put("site", Boolean.TRUE);
+				dynamicQuery.add(property.eq(true));
+			}
 
-			int start = 0;
-			int end = SEARCH_INTERVAL;
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-			int total = GroupLocalServiceUtil.getGroupsCount();
+				Group group = (Group)object;
 
-			while (start <= total) {
-				List<Group> groups = GroupLocalServiceUtil.search(
-					companyId, groupParams, start, end);
+				verifyPolicy(group);
 
-				for (Group group : groups) {
-					verifyPolicy(group);
+				ActionableDynamicQuery userGroupRoleActionableDynamicQuery =
+					new UserGroupRoleActionableDynamicQuery() {
 
-					List<UserGroupRole> userGroupRoles =
-						UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroup(
-							group.getGroupId());
+					@Override
+					protected void performAction(Object object)
+						throws PortalException, SystemException {
 
-					for (UserGroupRole userGroupRole : userGroupRoles) {
+						UserGroupRole userGroupRole = (UserGroupRole)object;
+
 						verifyPolicy(userGroupRole.getRole());
 					}
-				}
 
-				start = end;
-				end += end;
+				};
+
+				userGroupRoleActionableDynamicQuery.setGroupId(
+					group.getGroupId());
+
+				userGroupRoleActionableDynamicQuery.performActions();
 			}
-		}
+
+		};
+
+		groupActionableDynamicQuery.performActions();
 	}
 
 	public void verifyPolicy(Group group)

@@ -14,13 +14,11 @@
 
 package com.liferay.portal.security.membershippolicy;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-
-import java.util.List;
+import com.liferay.portal.service.persistence.RoleActionableDynamicQuery;
 
 /**
  * @author Roberto Díaz
@@ -58,23 +56,21 @@ public abstract class BaseRoleMembershipPolicyImpl
 	}
 
 	public void verifyPolicy() throws PortalException, SystemException {
-		int start = 0;
-		int end = SEARCH_INTERVAL;
+		ActionableDynamicQuery actionableDynamicQuery =
+			new RoleActionableDynamicQuery() {
 
-		int total = RoleLocalServiceUtil.getTypeRolesCount(
-			RoleConstants.TYPE_REGULAR);
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		while (start <= total) {
-			List<Role> roles = RoleLocalServiceUtil.getTypeRoles(
-				RoleConstants.TYPE_REGULAR, start, end);
+				Role role = (Role)object;
 
-			for (Role role : roles) {
 				verifyPolicy(role);
 			}
 
-			start = end;
-			end += end;
-		}
+		};
+
+		actionableDynamicQuery.performActions();
 	}
 
 	public void verifyPolicy(Role role)

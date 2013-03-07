@@ -14,12 +14,11 @@
 
 package com.liferay.portal.security.membershippolicy;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.service.UserGroupLocalServiceUtil;
-
-import java.util.List;
+import com.liferay.portal.service.persistence.UserGroupActionableDynamicQuery;
 
 /**
  * @author Roberto Díaz
@@ -59,22 +58,21 @@ public abstract class BaseUserGroupMembershipPolicyImpl
 	}
 
 	public void verifyPolicy() throws PortalException, SystemException {
-		int start = 0;
-		int end = SEARCH_INTERVAL;
+		ActionableDynamicQuery actionableDynamicQuery =
+			new UserGroupActionableDynamicQuery() {
 
-		int total = UserGroupLocalServiceUtil.getUserGroupsCount();
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		while (start <= total) {
-			List<UserGroup> userGroups =
-				UserGroupLocalServiceUtil.getUserGroups(start, end);
+				UserGroup userGroup = (UserGroup)object;
 
-			for (UserGroup userGroup : userGroups) {
 				verifyPolicy(userGroup);
 			}
 
-			start = end;
-			end += end;
-		}
+		};
+
+		actionableDynamicQuery.performActions();
 	}
 
 	public void verifyPolicy(UserGroup userGroup)

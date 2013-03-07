@@ -28,8 +28,6 @@ import java.util.Map;
  */
 public interface UserGroupMembershipPolicy {
 
-	public static final int SEARCH_INTERVAL = 500;
-
 	public void checkMembership(
 			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
 		throws PortalException, SystemException;

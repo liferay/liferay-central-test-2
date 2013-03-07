@@ -28,8 +28,6 @@ import java.util.Map;
  */
 public interface RoleMembershipPolicy {
 
-	public static final int SEARCH_INTERVAL = 500;
-
 	public void checkRoles(
 			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
 		throws PortalException, SystemException;

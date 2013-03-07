@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.membershippolicy;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
@@ -25,6 +26,8 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.persistence.OrganizationActionableDynamicQuery;
+import com.liferay.portal.service.persistence.UserGroupRoleActionableDynamicQuery;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 
 import java.util.ArrayList;
@@ -191,30 +194,40 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 	}
 
 	public void verifyPolicy() throws PortalException, SystemException {
-		int start = 0;
-		int end = SEARCH_INTERVAL;
+		ActionableDynamicQuery organizationActionableDynamicQuery =
+			new OrganizationActionableDynamicQuery() {
 
-		int total = OrganizationLocalServiceUtil.getOrganizationsCount();
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		while (start <= total) {
-			List<Organization> organizations =
-				OrganizationLocalServiceUtil.getOrganizations(start, end);
+				Organization organization = (Organization)object;
 
-			for (Organization organization : organizations) {
 				verifyPolicy(organization);
 
-				List<UserGroupRole> userGroupRoles =
-					UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroup(
-						organization.getGroupId());
+				ActionableDynamicQuery userGroupRoleActionableDynamicQuery =
+					new UserGroupRoleActionableDynamicQuery() {
 
-				for (UserGroupRole userGroupRole : userGroupRoles) {
-					verifyPolicy(userGroupRole.getRole());
-				}
+					@Override
+					protected void performAction(Object object)
+						throws PortalException, SystemException {
+
+						UserGroupRole userGroupRole = (UserGroupRole)object;
+
+						verifyPolicy(userGroupRole.getRole());
+					}
+
+				};
+
+				userGroupRoleActionableDynamicQuery.setGroupId(
+					organization.getGroupId());
+
+				userGroupRoleActionableDynamicQuery.performActions();
 			}
 
-			start = end;
-			end += end;
-		}
+		};
+
+		organizationActionableDynamicQuery.performActions();
 	}
 
 	public void verifyPolicy(Organization organization)
