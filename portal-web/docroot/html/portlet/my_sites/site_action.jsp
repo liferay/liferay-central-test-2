@@ -22,9 +22,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Group group = (Group)row.getObject();
 
 String tabs1 = (String)request.getAttribute("view.jsp-tabs1");
-
-boolean isMembershipRequired = SiteMembershipPolicyUtil.isMembershipRequired(user.getUserId(), group.getGroupId());
-boolean isMembershipAllowed = SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId());
 %>
 
 <liferay-ui:icon-menu showWhenSingleIcon='<%= tabs1.equals("my-sites") %>'>
@@ -62,7 +59,7 @@ boolean isMembershipAllowed = SiteMembershipPolicyUtil.isMembershipAllowed(user.
 				/>
 			</c:if>
 
-			<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !isMembershipRequired %>">
+			<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !SiteMembershipPolicyUtil.isMembershipRequired(user.getUserId(), group.getGroupId()) %>">
 				<portlet:actionURL var="leaveURL">
 					<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -79,7 +76,7 @@ boolean isMembershipAllowed = SiteMembershipPolicyUtil.isMembershipAllowed(user.
 		</c:when>
 		<c:otherwise>
 			<c:choose>
-				<c:when test="<%= !GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId()) && isMembershipAllowed %>">
+				<c:when test="<%= !GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId()) && SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId()) %>">
 					<c:choose>
 						<c:when test="<%= group.getType() == GroupConstants.TYPE_SITE_OPEN %>">
 							<portlet:actionURL var="joinURL">
@@ -95,7 +92,7 @@ boolean isMembershipAllowed = SiteMembershipPolicyUtil.isMembershipAllowed(user.
 								url="<%= joinURL %>"
 							/>
 						</c:when>
-						<c:when test="<%= (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) && isMembershipAllowed %>">
+						<c:when test="<%= (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) && SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId()) %>">
 							<portlet:renderURL var="membershipRequestURL">
 								<portlet:param name="struts_action" value="/sites_admin/post_membership_request" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -118,7 +115,7 @@ boolean isMembershipAllowed = SiteMembershipPolicyUtil.isMembershipAllowed(user.
 				</c:when>
 				<c:otherwise>
 
-					<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !isMembershipRequired %>">
+					<c:if test="<%= ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED)) && GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId(), false) && !SiteMembershipPolicyUtil.isMembershipRequired(user.getUserId(), group.getGroupId()) %>">
 						<portlet:actionURL var="leaveURL">
 							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />
