@@ -32,7 +32,9 @@ public class FunctionConverter extends BaseConverter {
 
 		String content = processTemplate("function.ftl", context);
 
-		writeFile(getFunctionJavaFileName(functionName), content, true);
+		seleniumBuilderFileUtil.writeFile(
+			seleniumBuilderContext.getFunctionJavaFileName(functionName),
+			content, true);
 	}
 
 }
