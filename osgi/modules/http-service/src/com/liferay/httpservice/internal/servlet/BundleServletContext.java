@@ -276,10 +276,6 @@ public class BundleServletContext extends LiferayServletContext {
 			throw new IllegalArgumentException("Servlet must not be null");
 		}
 
-		if (_servletsByURLPatterns.containsValue(servlet)) {
-			throw new IllegalArgumentException("Servlet is already registered");
-		}
-
 		if (httpContext == null) {
 			throw new IllegalArgumentException("HTTP context cannot be null");
 		}
