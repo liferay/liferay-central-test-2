@@ -30,9 +30,11 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.Arrays;
 import java.util.Dictionary;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
@@ -208,8 +210,8 @@ public class BundleServletContext extends LiferayServletContext {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Registered servlet at " + getContextPath() +
-							urlPattern);
+						"Registered servlet " + servletName + " at " +
+							getContextPath() + urlPattern);
 				}
 			}
 		}
@@ -237,6 +239,29 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void unregisterServlet(String servletName) {
+		Servlet servlet = _servletsByServletNames.remove(servletName);
+
+		if (servlet == null) {
+			return;
+		}
+
+		Set<Map.Entry<String, Servlet>> set = _servletsByURLPatterns.entrySet();
+
+		Iterator<Map.Entry<String, Servlet>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, Servlet> entry = iterator.next();
+
+			Servlet curServlet = entry.getValue();
+
+			if (curServlet == servlet) {
+				iterator.remove();
+			}
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Unregistered servlet " + servletName);
+		}
 	}
 
 	protected void validateServlet(
