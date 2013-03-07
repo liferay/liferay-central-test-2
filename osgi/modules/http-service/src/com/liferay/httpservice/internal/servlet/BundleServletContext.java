@@ -193,7 +193,17 @@ public class BundleServletContext extends LiferayServletContext {
 
 			servlet.init(servletConfig);
 
-			registerServlet(servletName, servlet, urlPatterns);
+			_servletNames.add(servletName);
+	
+			for (String urlPattern : urlPatterns) {
+				_servlets.put(urlPattern, servlet);
+	
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Registered servlet at " + getContextPath() +
+							urlPattern);
+				}
+			}
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -219,21 +229,6 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void unregisterServlet(String urlPattern) {
-	}
-
-	protected void registerServlet(
-		String servletName, Servlet servlet, List<String> urlPatterns) {
-
-		_servletNames.add(servletName);
-
-		for (String urlPattern : urlPatterns) {
-			_servlets.put(urlPattern, servlet);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Registered servlet at " + getContextPath() + urlPattern);
-			}
-		}
 	}
 
 	protected void validate(
