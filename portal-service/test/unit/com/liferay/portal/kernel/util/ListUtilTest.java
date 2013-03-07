@@ -49,7 +49,7 @@ public class ListUtilTest extends TestCase {
 
 	@Test
 	public void testRemoveFromEmptyList() {
-		List<String> list = Collections.EMPTY_LIST;
+		List<String> list = Collections.<String>emptyList();
 
 		List<String> removeList = new ArrayList<String>();
 
