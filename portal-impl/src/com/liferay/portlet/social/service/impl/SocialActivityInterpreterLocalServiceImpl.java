@@ -18,10 +18,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
@@ -107,7 +109,8 @@ public class SocialActivityInterpreterLocalServiceImpl
 		long activitySetId = 0;
 
 		List<SocialActivityInterpreter> activityInterpreters =
-			_activityInterpreters.get("default selector portal property");
+			_activityInterpreters.get(
+				PropsValues.SOCIAL_ACTIVITY_SETS_GROUPING_SELECTOR);
 
 		if (activityInterpreters != null) {
 			SocialActivity activity =
