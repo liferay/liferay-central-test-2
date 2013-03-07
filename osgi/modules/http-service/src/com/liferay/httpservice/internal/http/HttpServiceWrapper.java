@@ -55,8 +55,7 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 
 	public void registerServlet(
 		String servletName, List<String> urlPatterns, Servlet servlet,
-		@SuppressWarnings("rawtypes") Dictionary initParameters,
-		HttpContext httpContext) {
+		Map<String, String> initParameters, HttpContext httpContext) {
 	}
 
 	/**
@@ -66,6 +65,8 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 		String urlPattern, Servlet servlet,
 		@SuppressWarnings("rawtypes") Dictionary initParameters,
 		HttpContext httpContext) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public void unregister(String servletName) {

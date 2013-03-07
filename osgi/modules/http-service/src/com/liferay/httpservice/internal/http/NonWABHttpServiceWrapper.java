@@ -56,8 +56,7 @@ public class NonWABHttpServiceWrapper
 
 	public void registerServlet(
 		String servletName, List<String> urlPatterns, Servlet servlet,
-		@SuppressWarnings("rawtypes") Dictionary initParameters,
-		HttpContext httpContext) {
+		Map<String, String> initParameters, HttpContext httpContext) {
 	}
 
 	/**
@@ -67,6 +66,8 @@ public class NonWABHttpServiceWrapper
 		String urlPattern, Servlet servlet,
 		@SuppressWarnings("rawtypes") Dictionary initParameters,
 		HttpContext httpContext) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public void unregister(String servletName) {

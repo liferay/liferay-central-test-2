@@ -14,7 +14,6 @@
 
 package com.liferay.httpservice.internal.http;
 
-import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +43,7 @@ public interface ExtendedHttpService extends HttpService {
 
 	public void registerServlet(
 			String servletName, List<String> urlPatterns, Servlet servlet,
-			@SuppressWarnings("rawtypes") Dictionary initParameters,
-			HttpContext httpContext)
+			Map<String, String> initParameters, HttpContext httpContext)
 		throws NamespaceException, ServletException;
 
 	public void unregisterFilter(String filterName);
