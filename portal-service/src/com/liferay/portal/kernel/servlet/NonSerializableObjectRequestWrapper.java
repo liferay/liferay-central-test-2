@@ -23,7 +23,9 @@ public class NonSerializableObjectRequestWrapper extends
 	PersistentHttpServletRequestWrapper {
 
 	public static boolean isWrapped(HttpServletRequest request) {
-		String className = request.getClass().getName();
+		Class<?> clazz = request.getClass();
+
+		String className = clazz.getName();
 
 		if (className.startsWith("weblogic.")) {
 			request.removeAttribute(
