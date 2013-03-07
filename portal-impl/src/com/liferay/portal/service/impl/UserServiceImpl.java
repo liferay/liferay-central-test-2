@@ -1776,7 +1776,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		// Groups Membership Policy
+		// Group membership policy
 
 		long[] oldGroupIds = user.getGroupIds();
 
@@ -1802,7 +1802,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		// Organizations Membership Policy
+		// Organization membership policy
 
 		long[] oldOrganizationIds = user.getOrganizationIds();
 
@@ -1831,7 +1831,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		// Roles Membership Policy
+		// Role membership policy
 
 		long[] oldRoleIds = user.getRoleIds();
 
@@ -1857,33 +1857,33 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		List<UserGroupRole> oldUserGroupRoles =
-			userGroupRoleLocalService.getUserGroupRoles(userId);
-
-		List<UserGroupRole> oldSiteUserGroupRoles =
-			new ArrayList<UserGroupRole>();
 		List<UserGroupRole> oldOrganizationUserGroupRoles =
 			new ArrayList<UserGroupRole>();
+		List<UserGroupRole> oldSiteUserGroupRoles =
+			new ArrayList<UserGroupRole>();
+
+		List<UserGroupRole> oldUserGroupRoles =
+			userGroupRolePersistence.findByUserId(userId);
 
 		for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
 			Role role = oldUserGroupRole.getRole();
 
-			if (role.getType() == RoleConstants.TYPE_SITE) {
-				oldSiteUserGroupRoles.add(oldUserGroupRole);
-			}
-			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+			if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 				oldOrganizationUserGroupRoles.add(oldUserGroupRole);
+			}
+			else if (role.getType() == RoleConstants.TYPE_SITE) {
+				oldSiteUserGroupRoles.add(oldUserGroupRole);
 			}
 		}
 
-		List<UserGroupRole> addSiteUserGroupRoles =
-			new ArrayList<UserGroupRole>();
-		List<UserGroupRole> removeSiteUserGroupRoles = ListUtil.copy(
-			oldSiteUserGroupRoles);
 		List<UserGroupRole> addOrganizationUserGroupRoles =
 			new ArrayList<UserGroupRole>();
 		List<UserGroupRole> removeOrganizationUserGroupRoles = ListUtil.copy(
 			oldOrganizationUserGroupRoles);
+		List<UserGroupRole> addSiteUserGroupRoles =
+			new ArrayList<UserGroupRole>();
+		List<UserGroupRole> removeSiteUserGroupRoles = ListUtil.copy(
+			oldSiteUserGroupRoles);
 
 		if (userGroupRoles != null) {
 			userGroupRoles = checkUserGroupRoles(userId, userGroupRoles);
@@ -1891,15 +1891,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			for (UserGroupRole userGroupRole : userGroupRoles) {
 				Role role = userGroupRole.getRole();
 
-				if (role.getType() == RoleConstants.TYPE_SITE) {
-					if (oldSiteUserGroupRoles.contains(userGroupRole)) {
-						removeSiteUserGroupRoles.remove(userGroupRole);
-					}
-					else {
-						addSiteUserGroupRoles.add(userGroupRole);
-					}
-				}
-				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+				if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 					if (oldOrganizationUserGroupRoles.contains(userGroupRole)) {
 						removeOrganizationUserGroupRoles.remove(userGroupRole);
 					}
@@ -1907,13 +1899,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 						addOrganizationUserGroupRoles.add(userGroupRole);
 					}
 				}
-			}
-
-			if (!addSiteUserGroupRoles.isEmpty() ||
-				!removeSiteUserGroupRoles.isEmpty()) {
-
-				SiteMembershipPolicyUtil.checkRoles(
-					addSiteUserGroupRoles, removeSiteUserGroupRoles);
+				else if (role.getType() == RoleConstants.TYPE_SITE) {
+					if (oldSiteUserGroupRoles.contains(userGroupRole)) {
+						removeSiteUserGroupRoles.remove(userGroupRole);
+					}
+					else {
+						addSiteUserGroupRoles.add(userGroupRole);
+					}
+				}
 			}
 
 			if (!addOrganizationUserGroupRoles.isEmpty() ||
@@ -1923,9 +1916,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					addOrganizationUserGroupRoles,
 					removeOrganizationUserGroupRoles);
 			}
+
+			if (!addSiteUserGroupRoles.isEmpty() ||
+				!removeSiteUserGroupRoles.isEmpty()) {
+
+				SiteMembershipPolicyUtil.checkRoles(
+					addSiteUserGroupRoles, removeSiteUserGroupRoles);
+			}
 		}
 
-		// User Groups Membership Policy
+		// User group membership policy
 
 		long[] oldUserGroupIds = user.getUserGroupIds();
 
@@ -2288,7 +2288,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					(!RolePermissionUtil.contains(
 						permissionChecker, role.getRoleId(),
 						ActionKeys.ASSIGN_MEMBERS)) ||
-					RoleMembershipPolicyUtil.isRoleRequired(
+					 RoleMembershipPolicyUtil.isRoleRequired(
 						userId, role.getRoleId())) {
 
 					roleIds = ArrayUtil.append(roleIds, role.getRoleId());
@@ -2340,7 +2340,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					(!UserGroupPermissionUtil.contains(
 						permissionChecker, userGroup.getUserGroupId(),
 						ActionKeys.ASSIGN_MEMBERS) ||
-					UserGroupMembershipPolicyUtil.isMembershipRequired(
+					 UserGroupMembershipPolicyUtil.isMembershipRequired(
 						userId, userGroup.getUserGroupId()))) {
 
 					userGroupIds = ArrayUtil.append(

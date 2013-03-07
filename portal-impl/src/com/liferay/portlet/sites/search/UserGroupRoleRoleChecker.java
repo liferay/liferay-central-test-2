@@ -64,20 +64,24 @@ public class UserGroupRoleRoleChecker extends RowChecker {
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
-			if ((!isChecked(role) &&
-				!SiteMembershipPolicyUtil.isRoleAllowed(
-					_user.getUserId(), _group.getGroupId(),
-					role.getRoleId())) ||
-				(isChecked(role) &&
-				SiteMembershipPolicyUtil.isRoleProtected(
-					permissionChecker, _user.getUserId(), _group.getGroupId(),
-					role.getRoleId())) ||
-				(isChecked(role) &&
-				SiteMembershipPolicyUtil.isRoleRequired(
-					_user.getUserId(), _group.getGroupId(),
-					role.getRoleId()))) {
+			if (isChecked(role)) {
+				if (SiteMembershipPolicyUtil.isRoleProtected(
+						permissionChecker, _user.getUserId(),
+						_group.getGroupId(), role.getRoleId()) ||
+					SiteMembershipPolicyUtil.isRoleRequired(
+						_user.getUserId(), _group.getGroupId(),
+						role.getRoleId())) {
 
-				return true;
+					return true;
+				}
+			}
+			else {
+				if (!SiteMembershipPolicyUtil.isRoleAllowed(
+						_user.getUserId(), _group.getGroupId(),
+						role.getRoleId())) {
+
+					return true;
+				}
 			}
 		}
 		finally {
