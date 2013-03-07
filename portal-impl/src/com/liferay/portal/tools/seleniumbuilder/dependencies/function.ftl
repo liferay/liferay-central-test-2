@@ -8,9 +8,13 @@ public class ${seleniumBuilderContext.getFunctionSimpleClassName(functionName)} 
 		super(liferaySelenium);
 	}
 
-	<#list functionCommands as functionCommand>
-	public ${seleniumBuilderContext.getFunctionReturnType(functionName)} ${functionCommand.attributeValue("name")}() {
-	}
+	<#assign rootElement = seleniumBuilderContext.getFunctionRootElement(functionName)>
+
+	<#assign functionCommandElements = rootElement.elements("function-command")>
+
+	<#list functionCommandElements as functionCommandElement>
+		public ${seleniumBuilderContext.getFunctionReturnType(functionName)} ${functionCommandElement.attributeValue("name")}() {
+		}
 	</#list>
 
 }
