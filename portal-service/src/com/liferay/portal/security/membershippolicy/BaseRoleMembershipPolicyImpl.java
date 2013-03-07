@@ -29,6 +29,7 @@ import java.util.List;
 public abstract class BaseRoleMembershipPolicyImpl
 	implements RoleMembershipPolicy {
 
+	@SuppressWarnings("unused")
 	public boolean isRoleAllowed(long userId, long roleId)
 		throws PortalException, SystemException {
 
@@ -42,6 +43,7 @@ public abstract class BaseRoleMembershipPolicyImpl
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isRoleRequired(long userId, long roleId)
 		throws PortalException, SystemException {
 

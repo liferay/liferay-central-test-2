@@ -37,6 +37,7 @@ import java.util.List;
 public abstract class BaseOrganizationMembershipPolicyImpl
 	implements OrganizationMembershipPolicy {
 
+	@SuppressWarnings("unused")
 	public boolean isMembershipAllowed(long userId, long organizationId)
 		throws PortalException, SystemException {
 
@@ -89,6 +90,7 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isMembershipRequired(long userId, long organizationId)
 		throws PortalException, SystemException {
 
@@ -106,6 +108,8 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 	public boolean isRoleAllowed(long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
+		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
+
 		Organization organization =
 			OrganizationLocalServiceUtil.getOrganization(organizationId);
 
@@ -114,8 +118,6 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 
 		UserGroupRole userGroupRole =
 			UserGroupRoleLocalServiceUtil.createUserGroupRole(userGroupRolePK);
-
-		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 		userGroupRoles.add(userGroupRole);
 
@@ -165,6 +167,8 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 	public boolean isRoleRequired(long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
+		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
+
 		Organization organization =
 			OrganizationLocalServiceUtil.getOrganization(organizationId);
 
@@ -172,9 +176,7 @@ public abstract class BaseOrganizationMembershipPolicyImpl
 			userId, organization.getGroupId(), roleId);
 
 		UserGroupRole userGroupRole =
-			UserGroupRoleLocalServiceUtil.fetchUserGroupRole(userGroupRolePK);
-
-		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
+			UserGroupRoleLocalServiceUtil.getUserGroupRole(userGroupRolePK);
 
 		userGroupRoles.add(userGroupRole);
 

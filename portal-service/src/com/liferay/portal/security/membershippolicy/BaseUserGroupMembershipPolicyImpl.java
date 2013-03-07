@@ -28,6 +28,7 @@ import java.util.List;
 public abstract class BaseUserGroupMembershipPolicyImpl
 	implements UserGroupMembershipPolicy {
 
+	@SuppressWarnings("unused")
 	public boolean isMembershipAllowed(long userId, long userGroupId)
 		throws PortalException, SystemException {
 
@@ -42,6 +43,7 @@ public abstract class BaseUserGroupMembershipPolicyImpl
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isMembershipRequired(long userId, long userGroupId)
 		throws PortalException, SystemException {
 
