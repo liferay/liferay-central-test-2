@@ -161,9 +161,11 @@ public class UpdateLayoutAction extends JSONAction {
 
 		boolean deleteable = LayoutPermissionUtil.contains(
 			themeDisplay.getPermissionChecker(), layout, ActionKeys.DELETE);
-		boolean sortable = GroupPermissionUtil.contains(
-			themeDisplay.getPermissionChecker(), layout.getGroupId(),
-			ActionKeys.MANAGE_LAYOUTS) && SitesUtil.isLayoutSortable(layout);
+		boolean sortable =
+			GroupPermissionUtil.contains(
+				themeDisplay.getPermissionChecker(), layout.getGroupId(),
+				ActionKeys.MANAGE_LAYOUTS) &&
+			SitesUtil.isLayoutSortable(layout);
 		boolean updateable = LayoutPermissionUtil.contains(
 			themeDisplay.getPermissionChecker(), layout, ActionKeys.UPDATE);
 
