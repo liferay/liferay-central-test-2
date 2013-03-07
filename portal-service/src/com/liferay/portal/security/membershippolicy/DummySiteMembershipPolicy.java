@@ -31,8 +31,7 @@ import java.util.Map;
  * @author Roberto Díaz
  * @author Sergio González
  */
-public class DummySiteMembershipPolicyImpl
-	extends BaseSiteMembershipPolicyImpl {
+public class DummySiteMembershipPolicy extends BaseSiteMembershipPolicy {
 
 	public void checkMembership(
 			long[] userIds, long[] addGroupIds, long[] removeGroupIds)

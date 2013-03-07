@@ -17,23 +17,21 @@ package com.liferay.portal.security.membershippolicy;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.service.persistence.UserGroupActionableDynamicQuery;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.service.persistence.RoleActionableDynamicQuery;
 
 /**
  * @author Roberto Díaz
  * @author Sergio González
  */
-public abstract class BaseUserGroupMembershipPolicyImpl
-	implements UserGroupMembershipPolicy {
+public abstract class BaseRoleMembershipPolicy implements RoleMembershipPolicy {
 
 	@SuppressWarnings("unused")
-	public boolean isMembershipAllowed(long userId, long userGroupId)
+	public boolean isRoleAllowed(long userId, long roleId)
 		throws PortalException, SystemException {
 
 		try {
-			checkMembership(
-				new long[] {userId}, new long[] {userGroupId}, null);
+			checkRoles(new long[] {userId}, new long[] {roleId}, null);
 		}
 		catch (Exception e) {
 			return false;
@@ -43,12 +41,11 @@ public abstract class BaseUserGroupMembershipPolicyImpl
 	}
 
 	@SuppressWarnings("unused")
-	public boolean isMembershipRequired(long userId, long userGroupId)
+	public boolean isRoleRequired(long userId, long roleId)
 		throws PortalException, SystemException {
 
 		try {
-			checkMembership(
-				new long[] {userId}, null, new long[] {userGroupId});
+			checkRoles(new long[] {userId}, null, new long[] {roleId});
 		}
 		catch (Exception e) {
 			return true;
@@ -59,15 +56,15 @@ public abstract class BaseUserGroupMembershipPolicyImpl
 
 	public void verifyPolicy() throws PortalException, SystemException {
 		ActionableDynamicQuery actionableDynamicQuery =
-			new UserGroupActionableDynamicQuery() {
+			new RoleActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object)
 				throws PortalException, SystemException {
 
-				UserGroup userGroup = (UserGroup)object;
+				Role role = (Role)object;
 
-				verifyPolicy(userGroup);
+				verifyPolicy(role);
 			}
 
 		};
@@ -75,10 +72,10 @@ public abstract class BaseUserGroupMembershipPolicyImpl
 		actionableDynamicQuery.performActions();
 	}
 
-	public void verifyPolicy(UserGroup userGroup)
+	public void verifyPolicy(Role role)
 		throws PortalException, SystemException {
 
-		verifyPolicy(userGroup, null, null);
+		verifyPolicy(role, null, null);
 	}
 
 }

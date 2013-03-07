@@ -15,19 +15,18 @@
 package com.liferay.portal.security.membershippolicy;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.persistence.GroupActionableDynamicQuery;
+import com.liferay.portal.service.persistence.OrganizationActionableDynamicQuery;
 import com.liferay.portal.service.persistence.UserGroupRoleActionableDynamicQuery;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 
@@ -38,15 +37,16 @@ import java.util.List;
  * @author Roberto Díaz
  * @author Sergio González
  */
-public abstract class BaseSiteMembershipPolicyImpl
-	implements SiteMembershipPolicy {
+public abstract class BaseOrganizationMembershipPolicy
+	implements OrganizationMembershipPolicy {
 
 	@SuppressWarnings("unused")
-	public boolean isMembershipAllowed(long userId, long groupId)
+	public boolean isMembershipAllowed(long userId, long organizationId)
 		throws PortalException, SystemException {
 
 		try {
-			checkMembership(new long[] {userId}, new long[] {groupId}, null);
+			checkMembership(
+				new long[] {userId}, new long[] {organizationId}, null);
 		}
 		catch (Exception e) {
 			return false;
@@ -56,27 +56,36 @@ public abstract class BaseSiteMembershipPolicyImpl
 	}
 
 	public boolean isMembershipProtected(
-			PermissionChecker permissionChecker, long userId, long groupId)
+			PermissionChecker permissionChecker, long userId,
+			long organizationId)
 		throws PortalException, SystemException {
 
-		if (permissionChecker.isGroupOwner(groupId)) {
+		if (permissionChecker.isOrganizationOwner(organizationId)) {
 			return false;
 		}
 
-		Role siteAdministratorRole = RoleLocalServiceUtil.getRole(
-			permissionChecker.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		Group group = organization.getGroup();
+
+		Role organizationAdministratorRole = RoleLocalServiceUtil.getRole(
+			permissionChecker.getCompanyId(),
+			RoleConstants.ORGANIZATION_ADMINISTRATOR);
 
 		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, siteAdministratorRole.getRoleId())) {
+				userId, group.getGroupId(),
+				organizationAdministratorRole.getRoleId())) {
 
 			return true;
 		}
 
-		Role siteOwnerRole = RoleLocalServiceUtil.getRole(
-			permissionChecker.getCompanyId(), RoleConstants.SITE_OWNER);
+		Role organizationOwnerRole = RoleLocalServiceUtil.getRole(
+			permissionChecker.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
 		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, siteOwnerRole.getRoleId())) {
+				userId, group.getGroupId(),
+				organizationOwnerRole.getRoleId())) {
 
 			return true;
 		}
@@ -85,11 +94,12 @@ public abstract class BaseSiteMembershipPolicyImpl
 	}
 
 	@SuppressWarnings("unused")
-	public boolean isMembershipRequired(long userId, long groupId)
+	public boolean isMembershipRequired(long userId, long organizationId)
 		throws PortalException, SystemException {
 
 		try {
-			checkMembership(new long[] {userId}, null, new long[] {groupId});
+			checkMembership(
+				new long[] {userId}, null, new long[] {organizationId});
 		}
 		catch (Exception e) {
 			return true;
@@ -98,14 +108,16 @@ public abstract class BaseSiteMembershipPolicyImpl
 		return false;
 	}
 
-	@SuppressWarnings("unused")
-	public boolean isRoleAllowed(long userId, long groupId, long roleId)
+	public boolean isRoleAllowed(long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
 		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
 		UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
-			userId, groupId, roleId);
+			userId, organization.getGroupId(), roleId);
 
 		UserGroupRole userGroupRole =
 			UserGroupRoleLocalServiceUtil.createUserGroupRole(userGroupRolePK);
@@ -123,11 +135,11 @@ public abstract class BaseSiteMembershipPolicyImpl
 	}
 
 	public boolean isRoleProtected(
-			PermissionChecker permissionChecker, long userId, long groupId,
-			long roleId)
+			PermissionChecker permissionChecker, long userId,
+			long organizationId, long roleId)
 		throws PortalException, SystemException {
 
-		if (permissionChecker.isGroupOwner(groupId)) {
+		if (permissionChecker.isOrganizationOwner(organizationId)) {
 			return false;
 		}
 
@@ -135,14 +147,19 @@ public abstract class BaseSiteMembershipPolicyImpl
 
 		String roleName = role.getName();
 
-		if (!roleName.equals(RoleConstants.SITE_ADMINISTRATOR) &&
-			!roleName.equals(RoleConstants.SITE_OWNER)) {
+		if (!roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) &&
+			!roleName.equals(RoleConstants.ORGANIZATION_OWNER)) {
 
 			return false;
 		}
 
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
+		Group group = organization.getGroup();
+
 		if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, roleId)) {
+				userId, group.getGroupId(), role.getRoleId())) {
 
 			return true;
 		}
@@ -150,13 +167,16 @@ public abstract class BaseSiteMembershipPolicyImpl
 		return false;
 	}
 
-	public boolean isRoleRequired(long userId, long groupId, long roleId)
+	public boolean isRoleRequired(long userId, long organizationId, long roleId)
 		throws PortalException, SystemException {
 
 		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
+		Organization organization =
+			OrganizationLocalServiceUtil.getOrganization(organizationId);
+
 		UserGroupRolePK userGroupRolePK = new UserGroupRolePK(
-			userId, groupId, roleId);
+			userId, organization.getGroupId(), roleId);
 
 		UserGroupRole userGroupRole =
 			UserGroupRoleLocalServiceUtil.getUserGroupRole(userGroupRolePK);
@@ -174,23 +194,16 @@ public abstract class BaseSiteMembershipPolicyImpl
 	}
 
 	public void verifyPolicy() throws PortalException, SystemException {
-		ActionableDynamicQuery groupActionableDynamicQuery =
-			new GroupActionableDynamicQuery() {
-
-			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				Property property = PropertyFactoryUtil.forName("site");
-
-				dynamicQuery.add(property.eq(true));
-			}
+		ActionableDynamicQuery organizationActionableDynamicQuery =
+			new OrganizationActionableDynamicQuery() {
 
 			@Override
 			protected void performAction(Object object)
 				throws PortalException, SystemException {
 
-				Group group = (Group)object;
+				Organization organization = (Organization)object;
 
-				verifyPolicy(group);
+				verifyPolicy(organization);
 
 				ActionableDynamicQuery userGroupRoleActionableDynamicQuery =
 					new UserGroupRoleActionableDynamicQuery() {
@@ -207,20 +220,20 @@ public abstract class BaseSiteMembershipPolicyImpl
 				};
 
 				userGroupRoleActionableDynamicQuery.setGroupId(
-					group.getGroupId());
+					organization.getGroupId());
 
 				userGroupRoleActionableDynamicQuery.performActions();
 			}
 
 		};
 
-		groupActionableDynamicQuery.performActions();
+		organizationActionableDynamicQuery.performActions();
 	}
 
-	public void verifyPolicy(Group group)
+	public void verifyPolicy(Organization organization)
 		throws PortalException, SystemException {
 
-		verifyPolicy(group, null, null, null, null, null);
+		verifyPolicy(organization, null, null, null, null);
 	}
 
 }

@@ -14,69 +14,51 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.service.persistence.RoleActionableDynamicQuery;
+
+import java.io.Serializable;
+
+import java.util.Map;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Roberto Díaz
  * @author Sergio González
  */
-public abstract class BaseRoleMembershipPolicyImpl
-	implements RoleMembershipPolicy {
+public class DummyRoleMembershipPolicy extends BaseRoleMembershipPolicy {
 
-	@SuppressWarnings("unused")
+	public void checkRoles(
+			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
+		throws PortalException, SystemException {
+	}
+
 	public boolean isRoleAllowed(long userId, long roleId)
 		throws PortalException, SystemException {
-
-		try {
-			checkRoles(new long[] {userId}, new long[] {roleId}, null);
-		}
-		catch (Exception e) {
-			return false;
-		}
 
 		return true;
 	}
 
-	@SuppressWarnings("unused")
 	public boolean isRoleRequired(long userId, long roleId)
 		throws PortalException, SystemException {
-
-		try {
-			checkRoles(new long[] {userId}, null, new long[] {roleId});
-		}
-		catch (Exception e) {
-			return true;
-		}
 
 		return false;
 	}
 
-	public void verifyPolicy() throws PortalException, SystemException {
-		ActionableDynamicQuery actionableDynamicQuery =
-			new RoleActionableDynamicQuery() {
-
-			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
-				Role role = (Role)object;
-
-				verifyPolicy(role);
-			}
-
-		};
-
-		actionableDynamicQuery.performActions();
+	public void propagateRoles(
+			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
+		throws PortalException, SystemException {
 	}
 
 	public void verifyPolicy(Role role)
 		throws PortalException, SystemException {
+	}
 
-		verifyPolicy(role, null, null);
+	public void verifyPolicy(
+			Role role, Role oldRole,
+			Map<String, Serializable> oldExpandoAttributes)
+		throws PortalException, SystemException {
 	}
 
 }

@@ -14,51 +14,71 @@
 
 package com.liferay.portal.security.membershippolicy;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.UserGroup;
-
-import java.io.Serializable;
-
-import java.util.Map;
+import com.liferay.portal.service.persistence.UserGroupActionableDynamicQuery;
 
 /**
  * @author Roberto Díaz
  * @author Sergio González
  */
-public class DummyUserGroupMembershipPolicyImpl
-	extends BaseUserGroupMembershipPolicyImpl {
+public abstract class BaseUserGroupMembershipPolicy
+	implements UserGroupMembershipPolicy {
 
-	public void checkMembership(
-			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
-		throws PortalException, SystemException {
-	}
-
+	@SuppressWarnings("unused")
 	public boolean isMembershipAllowed(long userId, long userGroupId)
 		throws PortalException, SystemException {
+
+		try {
+			checkMembership(
+				new long[] {userId}, new long[] {userGroupId}, null);
+		}
+		catch (Exception e) {
+			return false;
+		}
 
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isMembershipRequired(long userId, long userGroupId)
 		throws PortalException, SystemException {
+
+		try {
+			checkMembership(
+				new long[] {userId}, null, new long[] {userGroupId});
+		}
+		catch (Exception e) {
+			return true;
+		}
 
 		return false;
 	}
 
-	public void propagateMembership(
-			long[] userIds, long[] addUserGroupIds, long[] removeUserGroupIds)
-		throws PortalException, SystemException {
+	public void verifyPolicy() throws PortalException, SystemException {
+		ActionableDynamicQuery actionableDynamicQuery =
+			new UserGroupActionableDynamicQuery() {
+
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
+
+				UserGroup userGroup = (UserGroup)object;
+
+				verifyPolicy(userGroup);
+			}
+
+		};
+
+		actionableDynamicQuery.performActions();
 	}
 
 	public void verifyPolicy(UserGroup userGroup)
 		throws PortalException, SystemException {
-	}
 
-	public void verifyPolicy(
-			UserGroup userGroup, UserGroup oldUserGroup,
-			Map<String, Serializable> oldExpandoAttributes)
-		throws PortalException, SystemException {
+		verifyPolicy(userGroup, null, null);
 	}
 
 }

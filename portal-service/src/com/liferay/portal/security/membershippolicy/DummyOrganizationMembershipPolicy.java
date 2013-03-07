@@ -31,8 +31,8 @@ import java.util.Map;
  * @author Roberto Díaz
  * @author Sergio González
  */
-public class DummyOrganizationMembershipPolicyImpl
-	extends BaseOrganizationMembershipPolicyImpl {
+public class DummyOrganizationMembershipPolicy
+	extends BaseOrganizationMembershipPolicy {
 
 	public void checkMembership(
 			long[] userIds, long[] addOrganizationIds,
