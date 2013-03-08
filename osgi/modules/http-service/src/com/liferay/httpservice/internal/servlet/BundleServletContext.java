@@ -149,19 +149,19 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public ClassLoader getClassLoader() {
-		Object value = _contextAttributes.get(
+		ClassLoader classLoader = (ClassLoader)_contextAttributes.get(
 			PluginContextListener.PLUGIN_CLASS_LOADER);
 
-		if (value == null) {
+		if (classLoader == null) {
 			BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
-			value = bundleWiring.getClassLoader();
+			classLoader = bundleWiring.getClassLoader();
 
 			_contextAttributes.put(
-				PluginContextListener.PLUGIN_CLASS_LOADER, value);
+				PluginContextListener.PLUGIN_CLASS_LOADER, classLoader);
 		}
 
-		return (ClassLoader)value;
+		return classLoader;
 	}
 
 	public HttpContext getHttpContext() {
