@@ -299,7 +299,8 @@ public class RuntimeChecker extends BaseChecker {
 	}
 
 	protected boolean hasGetClassLoader(String name) {
-		// temporarily return true
+
+		// Temporarily return true
 
 		return true;
 	}
@@ -335,8 +336,8 @@ public class RuntimeChecker extends BaseChecker {
 	protected boolean hasGetProtectionDomain() {
 		Class<?> callerClass8 = Reflection.getCallerClass(8);
 
-		if (((callerClass8 == AccessController.class) &&
-				CheckerUtil.isAccessControllerDoPrivileged(8))) {
+		if ((callerClass8 == AccessController.class) &&
+			CheckerUtil.isAccessControllerDoPrivileged(8)) {
 
 			logGetProtectionDomain(callerClass8, 8);
 

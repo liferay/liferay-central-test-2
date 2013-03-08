@@ -26,8 +26,6 @@ import java.security.Permission;
 import java.util.Set;
 import java.util.TreeSet;
 
-import sun.reflect.Reflection;
-
 /**
  * @author Brian Wing Shun Chan
  */

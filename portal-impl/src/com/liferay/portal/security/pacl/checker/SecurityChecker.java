@@ -61,13 +61,15 @@ public class SecurityChecker extends BaseChecker {
 	}
 
 	protected boolean hasGetPolicy() {
-		// temporarily return true
+
+		// Temporarily return true
 
 		return true;
 	}
 
 	protected boolean hasSetPolicy() {
-		// temporarily return true
+
+		// Temporarily return true
 
 		return true;
 	}
