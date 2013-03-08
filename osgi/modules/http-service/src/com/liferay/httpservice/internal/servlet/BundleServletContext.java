@@ -264,6 +264,23 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
+	protected void validateFilter(
+			String filterName, Filter filter, List<String> urlPatterns,
+			HttpContext httpContext)
+		throws NamespaceException {
+
+		Filter registeredFilter = _filters.get(filterName);
+
+		if ((registeredFilter != null) && (registeredFilter != filter)) {
+			throw new NamespaceException(
+				"A filter is already registered with the name " + filterName);
+		}
+
+		for (String urlPattern : urlPatterns) {
+			validateURLPattern(urlPattern);
+		}
+	}
+
 	protected void validateServlet(
 			String servletName, Servlet servlet, List<String> urlPatterns,
 			HttpContext httpContext)
@@ -277,18 +294,7 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 
 		for (String urlPattern : urlPatterns) {
-			if (Validator.isNull(urlPattern)) {
-				throw new IllegalArgumentException(
-					"An empty URL pattern is not allowed");
-			}
-
-			if (!urlPattern.startsWith(StringPool.SLASH) ||
-				(urlPattern.endsWith(StringPool.SLASH) &&
-				 !urlPattern.equals(StringPool.SLASH))) {
-
-				throw new IllegalArgumentException(
-					"URL patterns must start with / but cannot end with it");
-			}
+			validateURLPattern(urlPattern);
 
 			if (_servletsByURLPatterns.containsKey(urlPattern)) {
 				throw new NamespaceException(
@@ -298,9 +304,26 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
+	protected void validateURLPattern(String urlPattern) {
+		if (Validator.isNull(urlPattern)) {
+			throw new IllegalArgumentException(
+				"An empty URL pattern is not allowed");
+		}
+
+		if (!urlPattern.startsWith(StringPool.SLASH) ||
+			(urlPattern.endsWith(StringPool.SLASH) &&
+			 !urlPattern.equals(StringPool.SLASH))) {
+
+			throw new IllegalArgumentException(
+				"URL patterns must start with / but cannot end with it");
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
 
 	private Bundle _bundle;
+	private Map<String, Filter> _filters =
+		new ConcurrentHashMap<String, Filter>();
 	private String _servletContextName;
 	private Map<String, Servlet> _servletsByServletNames =
 		new ConcurrentHashMap<String, Servlet>();
