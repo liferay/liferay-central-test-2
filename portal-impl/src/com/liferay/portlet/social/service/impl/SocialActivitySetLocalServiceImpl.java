@@ -49,7 +49,6 @@ public class SocialActivitySetLocalServiceImpl
 		activitySet.setClassName(activity.getClassName());
 		activitySet.setClassPK(activity.getClassPK());
 		activitySet.setType(activity.getType());
-		activitySet.setActivityCount(0);
 
 		socialActivitySetPersistence.update(activitySet);
 
