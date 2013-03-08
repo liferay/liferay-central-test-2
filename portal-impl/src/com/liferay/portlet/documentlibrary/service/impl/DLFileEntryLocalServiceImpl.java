@@ -812,8 +812,9 @@ public class DLFileEntryLocalServiceImpl
 			lockFileEntry(userId, fileEntryId);
 		}
 
+		boolean latestVersion = false;
+
 		DLFileEntry dlFileEntry = null;
-		boolean isLatestVersion = false;
 
 		try {
 			DLFileVersion dlFileVersion = dlFileVersionPersistence.findByF_V(
@@ -841,9 +842,9 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
 
-			isLatestVersion = version.equals(dlFileEntry.getVersion());
+			latestVersion = version.equals(dlFileEntry.getVersion());
 
-			if (isLatestVersion) {
+			if (latestVersion) {
 				try {
 					DLFileVersion dlLatestFileVersion =
 						dlFileVersionLocalService.getLatestFileVersion(
@@ -887,7 +888,7 @@ public class DLFileEntryLocalServiceImpl
 			unlockFileEntry(fileEntryId);
 		}
 
-		if (isLatestVersion) {
+		if (latestVersion) {
 			return dlFileEntry;
 		}
 

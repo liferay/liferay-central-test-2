@@ -171,7 +171,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void expireBaseModelVersions(
-			BaseModel<?> baseModel, boolean expireAll,
+			BaseModel<?> baseModel, boolean expireAllVersions,
 			ServiceContext serviceContext)
 		throws Exception {
 	}
@@ -371,7 +371,9 @@ public abstract class BaseSearchTestCase {
 				getBaseModelClass(), group.getGroupId(), searchContext));
 	}
 
-	protected void searchExpireVersions(boolean expireAll) throws Exception {
+	protected void searchExpireVersions(boolean expireAllVersions)
+		throws Exception {
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		serviceContext.setScopeGroupId(group.getGroupId());
@@ -402,9 +404,9 @@ public abstract class BaseSearchTestCase {
 			searchBaseModelsCount(
 				getBaseModelClass(), group.getGroupId(), searchContext));
 
-		expireBaseModelVersions(baseModel, expireAll, serviceContext);
+		expireBaseModelVersions(baseModel, expireAllVersions, serviceContext);
 
-		if (expireAll && isExpirableAllVersions()) {
+		if (expireAllVersions && isExpirableAllVersions()) {
 			Assert.assertEquals(
 				initialBaseModelsCount,
 				searchBaseModelsCount(

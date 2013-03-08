@@ -91,13 +91,13 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 	@Override
 	protected void expireBaseModelVersions(
-			BaseModel<?> baseModel, boolean expireAll,
+			BaseModel<?> baseModel, boolean expireAllVersions,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		JournalArticle article = (JournalArticle)baseModel;
 
-		if (expireAll) {
+		if (expireAllVersions) {
 			JournalArticleLocalServiceUtil.expireArticle(
 				article.getUserId(), article.getGroupId(),
 				article.getArticleId(), article.getUrlTitle(), serviceContext);

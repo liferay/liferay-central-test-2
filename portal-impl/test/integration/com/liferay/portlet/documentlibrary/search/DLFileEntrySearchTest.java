@@ -121,13 +121,13 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 
 	@Override
 	protected void expireBaseModelVersions(
-			BaseModel<?> baseModel, boolean expireAll,
+			BaseModel<?> baseModel, boolean expireAllVersions,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		DLFileEntry dlFileEntry = (DLFileEntry)baseModel;
 
-		if (expireAll) {
+		if (expireAllVersions) {
 			DLAppServiceUtil.deleteFileEntry(dlFileEntry.getFileEntryId());
 		}
 		else {

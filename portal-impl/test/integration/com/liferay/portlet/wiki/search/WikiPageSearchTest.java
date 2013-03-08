@@ -104,13 +104,13 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 
 	@Override
 	protected void expireBaseModelVersions(
-			BaseModel<?> baseModel, boolean expireAll,
+			BaseModel<?> baseModel, boolean expireAllVersions,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		WikiPage page = (WikiPage)baseModel;
 
-		if (expireAll) {
+		if (expireAllVersions) {
 			WikiPageServiceUtil.deletePage(page.getNodeId(), page.getTitle());
 		}
 		else {
