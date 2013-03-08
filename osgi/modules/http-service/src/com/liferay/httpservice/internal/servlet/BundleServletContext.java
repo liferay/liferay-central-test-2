@@ -224,11 +224,11 @@ public class BundleServletContext extends LiferayServletContext {
 			int serviceRanking = GetterUtil.getInteger(
 				initParameters.remove("service.ranking"));
 
-			if ((serviceRanking <= 0) && !_filtersByServiceOrder.isEmpty()) {
-				serviceRanking = _filtersByServiceOrder.lastKey() + 1;
+			if ((serviceRanking <= 0) && !_filtersByServiceRanking.isEmpty()) {
+				serviceRanking = _filtersByServiceRanking.lastKey() + 1;
 			}
 
-			_filtersByServiceOrder.put(serviceRanking, filterName);
+			_filtersByServiceRanking.put(serviceRanking, filterName);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -310,8 +310,7 @@ public class BundleServletContext extends LiferayServletContext {
 
 		filter.destroy();
 
-		cleanFiltersByServiceId(filterName);
-
+		cleanFiltersByServiceRanking(filterName);
 		cleanFiltersByURLMapping(filterName, filter);
 	}
 
@@ -352,8 +351,8 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	protected void cleanFiltersByServiceId(String filterName) {
-		Set<Entry<Integer, String>> set = _filtersByServiceOrder.entrySet();
+	protected void cleanFiltersByServiceRanking(String filterName) {
+		Set<Entry<Integer, String>> set = _filtersByServiceRanking.entrySet();
 
 		Iterator<Entry<Integer, String>> iterator = set.iterator();
 
@@ -469,7 +468,7 @@ public class BundleServletContext extends LiferayServletContext {
 		new ConcurrentHashMap<String, Object>();
 	private Map<String, Filter> _filtersByFilterNames =
 		new ConcurrentHashMap<String, Filter>();
-	private TreeMap<Integer, String> _filtersByServiceOrder =
+	private TreeMap<Integer, String> _filtersByServiceRanking =
 		new TreeMap<Integer, String>();
 	private Map<String, Filter> _filtersByURLPatterns =
 		new ConcurrentHashMap<String, Filter>();
