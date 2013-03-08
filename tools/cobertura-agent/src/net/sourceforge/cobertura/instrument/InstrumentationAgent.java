@@ -65,11 +65,10 @@ public class InstrumentationAgent {
 			System.clearProperty("cobertura.parent.dynamically.instrumented");
 			System.clearProperty("junit.code.coverage");
 
+			_coberturaClassFileTransformer = null;
 			_dynamicallyInstrumented = false;
 
 			_instrumentation.removeTransformer(_coberturaClassFileTransformer);
-
-			_coberturaClassFileTransformer = null;
 
 			if (_originalClassDefinitions == null) {
 				return;
