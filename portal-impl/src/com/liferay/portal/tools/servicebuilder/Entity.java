@@ -326,6 +326,17 @@ public class Entity {
 		}
 	}
 
+	public String getPKVarNames() {
+		if (hasCompoundPK()) {
+			return getVarName() + "PKs";
+		}
+		else {
+			EntityColumn col = _getPKColumn();
+
+			return col.getNames();
+		}
+	}
+
 	public String getPortletName() {
 		return _portletName;
 	}
