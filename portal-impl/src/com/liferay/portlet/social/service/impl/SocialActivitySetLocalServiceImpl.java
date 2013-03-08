@@ -33,7 +33,7 @@ public class SocialActivitySetLocalServiceImpl
 
 		// Activity set
 
-		SocialActivity activity = socialActivityLocalService.getActivity(
+		SocialActivity activity = socialActivityPersistence.findByPrimaryKey(
 			activityId);
 
 		long activitySetId = counterLocalService.increment();
