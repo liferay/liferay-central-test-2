@@ -17,7 +17,7 @@ package com.liferay.portal.security.pacl;
 import com.liferay.portal.spring.aop.ChainableMethodAdvice;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated As of 6.2.0
  */
 public class PACLAdvice extends ChainableMethodAdvice {
