@@ -205,12 +205,16 @@ public class BundleServletContext extends LiferayServletContext {
 
 			_servletsByServletNames.put(servletName, servlet);
 
+			if (_log.isInfoEnabled()) {
+				_log.info("Registered servlet " + servletName);
+			}
+
 			for (String urlPattern : urlPatterns) {
 				_servletsByURLPatterns.put(urlPattern, servlet);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Registered servlet " + servletName + " at " +
+						"Mapped servlet " + servletName + " to " +
 							getContextPath() + urlPattern);
 				}
 			}
@@ -236,6 +240,40 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void unregisterFilter(String filterName) {
+		Filter filter = _filtersByFilterNames.remove(filterName);
+
+		if (filter == null) {
+			return;
+		}
+
+		filter.destroy();
+
+		Set<Map.Entry<String, Filter>> set = _filtersByURLPatterns.entrySet();
+
+		Iterator<Map.Entry<String, Filter>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, Filter> entry = iterator.next();
+
+			Filter curFilter = entry.getValue();
+
+			if (curFilter != filter) {
+				continue;
+			}
+
+			iterator.remove();
+
+			if (_log.isInfoEnabled()) {
+				String urlPattern = entry.getKey();
+
+				_log.info(
+					"Unmapped filter " + filterName + " from " + urlPattern);
+			}
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Unregistered filter " + filterName);
+		}
 	}
 
 	public void unregisterServlet(String servletName) {
@@ -244,6 +282,8 @@ public class BundleServletContext extends LiferayServletContext {
 		if (servlet == null) {
 			return;
 		}
+
+		servlet.destroy();
 
 		Set<Map.Entry<String, Servlet>> set = _servletsByURLPatterns.entrySet();
 
@@ -254,8 +294,17 @@ public class BundleServletContext extends LiferayServletContext {
 
 			Servlet curServlet = entry.getValue();
 
-			if (curServlet == servlet) {
-				iterator.remove();
+			if (curServlet != servlet) {
+				continue;
+			}
+
+			iterator.remove();
+
+			if (_log.isInfoEnabled()) {
+				String urlPattern = entry.getKey();
+
+				_log.info(
+					"Unmapped servlet " + servletName + " from " + urlPattern);
 			}
 		}
 
@@ -269,7 +318,7 @@ public class BundleServletContext extends LiferayServletContext {
 			HttpContext httpContext)
 		throws NamespaceException {
 
-		Filter registeredFilter = _filters.get(filterName);
+		Filter registeredFilter = _filtersByFilterNames.get(filterName);
 
 		if ((registeredFilter != null) && (registeredFilter != filter)) {
 			throw new NamespaceException(
@@ -322,7 +371,9 @@ public class BundleServletContext extends LiferayServletContext {
 	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
 
 	private Bundle _bundle;
-	private Map<String, Filter> _filters =
+	private Map<String, Filter> _filtersByFilterNames =
+		new ConcurrentHashMap<String, Filter>();
+	private Map<String, Filter> _filtersByURLPatterns =
 		new ConcurrentHashMap<String, Filter>();
 	private String _servletContextName;
 	private Map<String, Servlet> _servletsByServletNames =
