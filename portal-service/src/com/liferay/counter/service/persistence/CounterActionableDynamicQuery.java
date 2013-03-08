@@ -33,6 +33,6 @@ public abstract class CounterActionableDynamicQuery
 
 		setClassLoader(PortalClassLoaderUtil.getClassLoader());
 
-		setPrimaryKeyPropertyName("name");
+		setPrimaryKeyPropertyName("primaryKey.name");
 	}
 }

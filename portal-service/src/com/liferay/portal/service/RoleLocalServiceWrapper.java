@@ -606,7 +606,7 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	}
 
 	/**
-	* Returns a range of all the roles of the type.
+	* Returns all the roles of the type.
 	*
 	* @param type the role's type (optionally <code>0</code>)
 	* @return the range of the roles of the type
