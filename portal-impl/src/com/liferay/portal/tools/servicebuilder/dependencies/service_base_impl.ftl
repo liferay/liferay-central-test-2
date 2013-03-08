@@ -392,39 +392,138 @@ import javax.sql.DataSource;
 			<#if column.isCollection() && column.isMappingManyToMany()>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
-				public void add${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + tempEntity.name + entity.name, [tempEntity.PKClassName, entity.PKClassName], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void add${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.add${entity.name}(${tempEntity.PKVarName}, ${entity.PKVarName});
 				}
 
-				public void add${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.name} ${entity.varName}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + tempEntity.name + entity.name, [tempEntity.PKClassName, packagePath + ".model." + entity.name], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void add${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.add${entity.name}(${tempEntity.PKVarName}, ${entity.varName});
 				}
 
-				public void add${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + tempEntity.name + entity.names, [tempEntity.PKClassName, entity.PKClassName + "[]"], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void add${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.add${entity.names}(${tempEntity.PKVarName}, ${entity.PKVarNames});
 				}
 
-				public void add${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, List<${entity.name}> ${entity.names}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + tempEntity.name + entity.names, [tempEntity.PKClassName, "java.util.List<" + entity.name + ">"], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void add${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, List<${entity.name}> ${entity.names}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.add${entity.names}(${tempEntity.PKVarName}, ${entity.names});
 				}
 
-				public void clear${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "clear" + tempEntity.name + entity.names, [tempEntity.PKClassName], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void clear${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.clear${entity.names}(${tempEntity.PKVarName});
 				}
 
-				public void delete${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + tempEntity.name + entity.name, [tempEntity.PKClassName, entity.PKClassName], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void delete${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.remove${entity.name}(${tempEntity.PKVarName}, ${entity.PKVarName});
 				}
 
-				public void delete${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.name} ${entity.varName}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + tempEntity.name + entity.name, [tempEntity.PKClassName, packagePath + ".model." + entity.name], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void delete${tempEntity.name}${entity.name}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.remove${entity.name}(${tempEntity.PKVarName}, ${entity.varName});
 				}
 
-				public void delete${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + tempEntity.name + entity.names, [tempEntity.PKClassName, entity.PKClassName + "[]"], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void delete${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.remove${entity.names}(${tempEntity.PKVarName}, ${entity.PKVarNames});
 				}
 
-				public void delete${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, List<${entity.name}> ${entity.names}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + tempEntity.name + entity.names, [tempEntity.PKClassName, "java.util.List<" + entity.name + ">"], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void delete${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, List<${entity.name}> ${entity.names}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.remove${entity.names}(${tempEntity.PKVarName}, ${entity.names});
 				}
 
@@ -452,7 +551,18 @@ import javax.sql.DataSource;
 					return ${tempEntity.varName}Persistence.contains${entity.names}(${tempEntity.PKVarName});
 				}
 
-				public void set${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws SystemException {
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "set" + tempEntity.name + entity.names, [tempEntity.PKClassName, entity.PKClassName + "[]"], ["SystemException"])>
+
+				/**
+				<#list serviceBaseExceptions as exception>
+				<#if exception == "SystemException">
+				 * @throws SystemException if a system exception occurred
+				<#else>
+				 * @throws ${exception}
+				</#if>
+				</#list>
+				 */
+				public void set${tempEntity.name}${entity.names}(${tempEntity.PKClassName} ${tempEntity.PKVarName}, ${entity.PKClassName}[] ${entity.PKVarNames}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 					${tempEntity.varName}Persistence.set${entity.names}(${tempEntity.PKVarName}, ${entity.PKVarNames});
 				}
 			</#if>
