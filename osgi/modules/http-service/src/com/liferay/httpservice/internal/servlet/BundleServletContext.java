@@ -30,15 +30,15 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
@@ -221,14 +221,29 @@ public class BundleServletContext extends LiferayServletContext {
 				}
 			}
 
+			FilterServiceRanking filterServiceRanking =
+				new FilterServiceRanking();
+
+			filterServiceRanking.setFilterName(filterName);
+
 			int serviceRanking = GetterUtil.getInteger(
-				initParameters.remove("service.ranking"));
+				initParameters.remove("service.ranking"),
+				_FILTER_SERVICE_RANKING_DEFAULT);
 
-			if ((serviceRanking <= 0) && !_filtersByServiceRanking.isEmpty()) {
-				serviceRanking = _filtersByServiceRanking.lastKey() + 1;
-			}
+			filterServiceRanking.setServiceRanking(serviceRanking);
 
-			_filtersByServiceRanking.put(serviceRanking, filterName);
+			_filterServiceRankings.add(filterServiceRanking);
+
+			// Filters are sorted based on their service ranking value where
+			// the default service ranking is 10 for those filters that do not
+			// specify a specific service ranking.
+
+			// Filters are first sorted based on the service ranking where
+			// filters with a smaller service ranking appear earlier in the
+			// list, and then based on when the filter was registered where
+			// those that are registered earlier appear earlier in the list.
+
+			Collections.sort(_filterServiceRankings);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -352,16 +367,13 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	protected void unregisterFilterByServiceRanking(String filterName) {
-		Set<Entry<Integer, String>> set = _filtersByServiceRanking.entrySet();
-
-		Iterator<Entry<Integer, String>> iterator = set.iterator();
+		Iterator<FilterServiceRanking> iterator =
+			_filterServiceRankings.iterator();
 
 		while (iterator.hasNext()) {
-			Entry<Integer, String> entry = iterator.next();
+			FilterServiceRanking filterServiceRanking = iterator.next();
 
-			String curFilterName = entry.getValue();
-
-			if (!curFilterName.equals(filterName)) {
+			if (!filterName.equals(filterServiceRanking.getFilterName())) {
 				continue;
 			}
 
@@ -463,6 +475,8 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
+	private static final int _FILTER_SERVICE_RANKING_DEFAULT = 10;
+
 	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
 
 	private Bundle _bundle;
@@ -470,14 +484,89 @@ public class BundleServletContext extends LiferayServletContext {
 		new ConcurrentHashMap<String, Object>();
 	private Map<String, Filter> _filtersByFilterNames =
 		new ConcurrentHashMap<String, Filter>();
-	private TreeMap<Integer, String> _filtersByServiceRanking =
-		new TreeMap<Integer, String>();
 	private Map<String, Filter> _filtersByURLPatterns =
 		new ConcurrentHashMap<String, Filter>();
+	private List<FilterServiceRanking> _filterServiceRankings =
+		new CopyOnWriteArrayList<FilterServiceRanking>();
 	private String _servletContextName;
 	private Map<String, Servlet> _servletsByServletNames =
 		new ConcurrentHashMap<String, Servlet>();
 	private Map<String, Servlet> _servletsByURLPatterns =
 		new ConcurrentHashMap<String, Servlet>();
+
+	private class FilterServiceRanking
+		implements Comparable<FilterServiceRanking> {
+
+		public String getFilterName() {
+			return _filterName;
+		}
+
+		public int getServiceRanking() {
+			return _serviceRanking;
+		}
+
+		public long getTimestamp() {
+			return _timestamp;
+		}
+
+		public int compareTo(FilterServiceRanking filterServiceRanking) {
+			if (_serviceRanking <
+					filterServiceRanking.getServiceRanking()) {
+
+				return -1;
+			}
+			else if (_serviceRanking >
+						filterServiceRanking.getServiceRanking()) {
+
+				return 1;
+			}
+
+			if (_timestamp < filterServiceRanking.getTimestamp()) {
+				return -1;
+			}
+			else if (_timestamp > filterServiceRanking.getTimestamp()) {
+				return 1;
+			}
+
+			return 0;
+		}
+
+		@Override
+		public boolean equals(Object object) {
+			if (this == object) {
+				return true;
+			}
+
+			if (!(object instanceof FilterServiceRanking)) {
+				return false;
+			}
+
+			FilterServiceRanking filterServiceRanking =
+				(FilterServiceRanking)object;
+
+			if (Validator.equals(
+					_filterName, filterServiceRanking._filterName) &&
+				Validator.equals(
+					_serviceRanking, filterServiceRanking._serviceRanking)) {
+
+				return true;
+			}
+
+			return false;
+		}
+
+		public void setFilterName(String filterName) {
+			_filterName = filterName;
+		}
+
+		public void setServiceRanking(int serviceRanking) {
+			_serviceRanking = serviceRanking;
+		}
+
+		private String _filterName;
+		private int _serviceRanking;
+		private long _timestamp = System.currentTimeMillis();
+
+	}
 
 }
