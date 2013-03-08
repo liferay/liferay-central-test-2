@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -150,11 +151,9 @@ public class DataFactory {
 		_baseDir = baseDir;
 		_maxBlogsEntryCount = maxBlogsEntryCount;
 		_maxGroupsCount = maxGroupsCount;
-		_maxMBMessageCountPerThread = maxMBMessageCount;
+		_maxMBCategoryCount = maxMBCategoryCount;
 		_maxMBThreadCount = maxMBThreadCount;
-		_maxMBMessageCountPerCategory = maxMBThreadCount * maxMBMessageCount;
-		_maxMBMessageCount =
-			maxMBCategoryCount * maxMBThreadCount * maxMBMessageCount;
+		_maxMBMessageCount = maxMBMessageCount;
 		_maxUserToGroupCount = maxUserToGroupCount;
 
 		_counter = new SimpleCounter(_maxGroupsCount + 1);
@@ -365,6 +364,12 @@ public class DataFactory {
 	}
 
 	public void initJournalArticle(int maxJournalArticleSize) {
+		StringBundler sb = new StringBundler();
+
+		sb.append("<?xml version=\"1.0\"?><root available-locales=\"en_US\" ");
+		sb.append("default-locale=\"en_US\"><static-content language-id=");
+		sb.append("\"en_US\"><![CDATA[<p>");
+
 		if (maxJournalArticleSize <= 0) {
 			maxJournalArticleSize = 1;
 		}
@@ -375,11 +380,11 @@ public class DataFactory {
 			chars[i] = (char)(CharPool.LOWER_CASE_A + (i % 26));
 		}
 
-		_journalArticleContent =
-			"<?xml version=\"1.0\"?><root available-locales=\"en_US\" " +
-				"default-locale=\"en_US\"><static-content language-id=" +
-					"\"en_US\"><![CDATA[<p>" + new String(chars) + "</p>]]>" +
-						"</static-content></root>";
+		sb.append(new String(chars));
+
+		sb.append("</p>]]></static-content></root>");
+
+		_journalArticleContent = sb.toString();
 	}
 
 	public void initRoles() {
@@ -554,8 +559,7 @@ public class DataFactory {
 		blogsEntry.setModifiedDate(new Date());
 		blogsEntry.setTitle("Test Blog " + currentIndex);
 		blogsEntry.setUrlTitle("testblog" + currentIndex);
-		blogsEntry.setContent(
-			"This is a test blog " + currentIndex + StringPool.PERIOD);
+		blogsEntry.setContent("This is test blog " + currentIndex + ".");
 		blogsEntry.setDisplayDate(new Date());
 		blogsEntry.setStatusDate(new Date());
 
@@ -725,7 +729,6 @@ public class DataFactory {
 	}
 
 	public DLFileEntry newDlFileEntry(DLFolder dlFoler, int currentIndex) {
-
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 
 		dlFileEntry.setUuid(SequentialUUID.generate());
@@ -866,9 +869,9 @@ public class DataFactory {
 		journalArticle.setContent(_journalArticleContent);
 		journalArticle.setType("general");
 		journalArticle.setDisplayDate(new Date());
-		journalArticle.setIndexable(true);
 		journalArticle.setExpirationDate(nextFutureDate());
 		journalArticle.setReviewDate(new Date());
+		journalArticle.setIndexable(true);
 		journalArticle.setStatusDate(new Date());
 
 		return journalArticle;
@@ -953,7 +956,7 @@ public class DataFactory {
 		mbCategory.setName("Test Category " + currentIndex);
 		mbCategory.setDisplayStyle(MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 		mbCategory.setThreadCount(_maxMBThreadCount);
-		mbCategory.setMessageCount(_maxMBMessageCountPerCategory);
+		mbCategory.setMessageCount(_maxMBThreadCount * _maxMBMessageCount);
 		mbCategory.setLastPostDate(new Date());
 		mbCategory.setStatusDate(new Date());
 
@@ -998,25 +1001,21 @@ public class DataFactory {
 	public MBMessage newMBMessage(MBThread mbThread, int currentIndex) {
 		long messageId = 0;
 		long parentMessageId = 0;
-		long rootMessageId = mbThread.getRootMessageId();
 
 		if (currentIndex == 1) {
-			messageId = rootMessageId;
+			messageId = mbThread.getRootMessageId();
 			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 		}
 		else {
 			messageId = _counter.get();
-			parentMessageId = rootMessageId;
+			parentMessageId = mbThread.getRootMessageId();
 		}
-
-		String subject = "Test Message " + currentIndex;
-		String body =
-			"This is a test message " + currentIndex + StringPool.PERIOD;
 
 		return newMBMessage(
 			mbThread.getGroupId(), 0, 0, mbThread.getCategoryId(),
-			mbThread.getThreadId(), messageId, rootMessageId, parentMessageId,
-			subject, body);
+			mbThread.getThreadId(), messageId, mbThread.getRootMessageId(),
+			parentMessageId, "Test Message " + currentIndex,
+			"This is test message " + currentIndex + ".");
 	}
 
 	public MBMessage newMBMessage(
@@ -1024,27 +1023,27 @@ public class DataFactory {
 
 		long messageId = 0;
 		long parentMessageId = 0;
-		long rootMessageId = mbThread.getRootMessageId();
 		String subject = null;
 		String body = null;
 
 		if (currentIndex == 0) {
-			messageId = rootMessageId;
+			messageId = mbThread.getRootMessageId();
 			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 			subject = StringUtil.valueOf(classPK);
 			body = StringUtil.valueOf(classPK);
 		}
 		else {
 			messageId = _counter.get();
-			parentMessageId = rootMessageId;
+			parentMessageId = mbThread.getRootMessageId();
 			subject = "N/A";
-			body = "This is a test comment " + currentIndex + StringPool.PERIOD;
+			body = "This is test comment " + currentIndex + ".";
 		}
 
 		return newMBMessage(
 			mbThread.getGroupId(), classNameId, classPK,
 			MBCategoryConstants.DISCUSSION_CATEGORY_ID, mbThread.getThreadId(),
-			messageId, rootMessageId, parentMessageId, subject, body);
+			messageId, mbThread.getRootMessageId(), parentMessageId, subject,
+			body);
 	}
 
 	public MBStatsUser newMBStatsUser(long groupId) {
@@ -1053,7 +1052,8 @@ public class DataFactory {
 		mbStatsUser.setStatsUserId(_counter.get());
 		mbStatsUser.setGroupId(groupId);
 		mbStatsUser.setUserId(_sampleUserId);
-		mbStatsUser.setMessageCount(_maxMBMessageCount);
+		mbStatsUser.setMessageCount(
+			_maxMBCategoryCount * _maxMBThreadCount * _maxMBMessageCount);
 		mbStatsUser.setLastPostDate(new Date());
 
 		return mbStatsUser;
@@ -1074,7 +1074,7 @@ public class DataFactory {
 	public MBThread newMBThread(MBCategory mbCategory) {
 		return newMBThread(
 			_counter.get(), mbCategory.getGroupId(), mbCategory.getCategoryId(),
-			_counter.get(), _maxMBMessageCountPerThread);
+			_counter.get(), _maxMBMessageCount);
 	}
 
 	public PortletPreferences newPortletPreferences(
@@ -1198,8 +1198,7 @@ public class DataFactory {
 		wikiPage.setNodeId(wikiNode.getNodeId());
 		wikiPage.setTitle("Test Page " + currentIndex);
 		wikiPage.setVersion(WikiPageConstants.VERSION_DEFAULT);
-		wikiPage.setContent(
-			"This is a test page " + currentIndex + StringPool.PERIOD);
+		wikiPage.setContent("This is test page " + currentIndex + ".");
 		wikiPage.setFormat(WikiPageConstants.DEFAULT_FORMAT);
 		wikiPage.setHead(true);
 
@@ -1245,11 +1244,11 @@ public class DataFactory {
 		assetEntry.setClassPK(classPK);
 		assetEntry.setClassUuid(uuid);
 		assetEntry.setClassTypeId(classTypeId);
+		assetEntry.setVisible(visible);
 		assetEntry.setStartDate(createDate);
 		assetEntry.setEndDate(nextFutureDate());
 		assetEntry.setPublishDate(createDate);
 		assetEntry.setExpirationDate(nextFutureDate());
-		assetEntry.setVisible(visible);
 		assetEntry.setMimeType(mimeType);
 		assetEntry.setTitle(title);
 
@@ -1415,6 +1414,7 @@ public class DataFactory {
 		"<?xml version=\"1.0\" encoding=\"UTF-8\"?><root available-locales=" +
 			"\"en_US\" default-locale=\"en_US\"><Title language-id=\"en_US\"" +
 				">Test Journal Article</Title></root>";
+
 	private Account _account;
 	private long _accountId;
 	private Role _administratorRole;
@@ -1439,9 +1439,8 @@ public class DataFactory {
 	private int _maxBlogsEntryCount;
 	private int _maxDLFileEntrySize;
 	private int _maxGroupsCount;
+	private int _maxMBCategoryCount;
 	private int _maxMBMessageCount;
-	private int _maxMBMessageCountPerCategory;
-	private int _maxMBMessageCountPerThread;
 	private int _maxMBThreadCount;
 	private int _maxUserToGroupCount;
 	private Role _ownerRole;
