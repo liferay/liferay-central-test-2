@@ -310,8 +310,8 @@ public class BundleServletContext extends LiferayServletContext {
 
 		filter.destroy();
 
-		cleanFiltersByServiceRanking(filterName);
-		cleanFiltersByURLMapping(filterName, filter);
+		unregisterFilterByServiceRanking(filterName);
+		unregisterFilterByURLMapping(filterName, filter);
 	}
 
 	public void unregisterServlet(String servletName) {
@@ -351,7 +351,7 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	protected void cleanFiltersByServiceRanking(String filterName) {
+	protected void unregisterFilterByServiceRanking(String filterName) {
 		Set<Entry<Integer, String>> set = _filtersByServiceRanking.entrySet();
 
 		Iterator<Entry<Integer, String>> iterator = set.iterator();
@@ -369,7 +369,9 @@ public class BundleServletContext extends LiferayServletContext {
 		}
 	}
 
-	protected void cleanFiltersByURLMapping(String filterName, Filter filter) {
+	protected void unregisterFilterByURLMapping(
+		String filterName, Filter filter) {
+
 		Set<Map.Entry<String, Filter>> set = _filtersByURLPatterns.entrySet();
 
 		Iterator<Map.Entry<String, Filter>> iterator = set.iterator();
