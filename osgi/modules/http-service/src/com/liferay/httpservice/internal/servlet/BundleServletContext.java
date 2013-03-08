@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -170,13 +171,49 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerFilter(
-		String filterName, List<String> urlPatterns, Filter filter,
-		Map<String, String> initParameters, HttpContext httpContext) {
+			String filterName, List<String> urlPatterns, Filter filter,
+			Map<String, String> initParameters, HttpContext httpContext)
+		throws NamespaceException, ServletException {
+
+		validateFilter(filterName, filter, urlPatterns, httpContext);
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(getClassLoader());
+
+			FilterConfig filterConfig = new BundleFilterConfig(
+				this, filterName, initParameters, httpContext);
+
+			filter.init(filterConfig);
+
+			_filtersByFilterNames.put(filterName, filter);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Registered filter " + filterName);
+			}
+
+			for (String urlPattern : urlPatterns) {
+				_filtersByURLPatterns.put(urlPattern, filter);
+
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Mapped filter " + filterName + " to " +
+							getContextPath() + urlPattern);
+				}
+			}
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	public void registerFilter(
-		String filterName, String urlPattern, Filter filter,
-		Map<String, String> initParameters, HttpContext httpContext) {
+			String filterName, String urlPattern, Filter filter,
+			Map<String, String> initParameters, HttpContext httpContext)
+		throws NamespaceException, ServletException {
 
 		List<String> urlPatterns = Arrays.asList(urlPattern);
 
