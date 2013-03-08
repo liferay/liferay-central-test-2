@@ -546,7 +546,7 @@ public class DataFactory {
 			ContentTypes.TEXT_HTML, wikiPage.getTitle());
 	}
 
-	public BlogsEntry newBlogsEntry(long groupId, int currentIndex) {
+	public BlogsEntry newBlogsEntry(long groupId, int index) {
 		BlogsEntry blogsEntry = new BlogsEntryImpl();
 
 		blogsEntry.setUuid(SequentialUUID.generate());
@@ -557,9 +557,9 @@ public class DataFactory {
 		blogsEntry.setUserName(_sampleUser.getFullName());
 		blogsEntry.setCreateDate(new Date());
 		blogsEntry.setModifiedDate(new Date());
-		blogsEntry.setTitle("Test Blog " + currentIndex);
-		blogsEntry.setUrlTitle("testblog" + currentIndex);
-		blogsEntry.setContent("This is test blog " + currentIndex + ".");
+		blogsEntry.setTitle("Test Blog " + index);
+		blogsEntry.setUrlTitle("testblog" + index);
+		blogsEntry.setContent("This is test blog " + index + ".");
 		blogsEntry.setDisplayDate(new Date());
 		blogsEntry.setStatusDate(new Date());
 
@@ -728,7 +728,7 @@ public class DataFactory {
 		return ddmStructureLink;
 	}
 
-	public DLFileEntry newDlFileEntry(DLFolder dlFoler, int currentIndex) {
+	public DLFileEntry newDlFileEntry(DLFolder dlFoler, int index) {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 
 		dlFileEntry.setUuid(SequentialUUID.generate());
@@ -743,10 +743,10 @@ public class DataFactory {
 		dlFileEntry.setModifiedDate(nextFutureDate());
 		dlFileEntry.setRepositoryId(dlFoler.getRepositoryId());
 		dlFileEntry.setFolderId(dlFoler.getFolderId());
-		dlFileEntry.setName("TestFile" + currentIndex);
+		dlFileEntry.setName("TestFile" + index);
 		dlFileEntry.setExtension("txt");
 		dlFileEntry.setMimeType(ContentTypes.TEXT_PLAIN);
-		dlFileEntry.setTitle("TestFile" + currentIndex + ".txt");
+		dlFileEntry.setTitle("TestFile" + index + ".txt");
 		dlFileEntry.setFileEntryTypeId(
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
 		dlFileEntry.setVersion(DLFileEntryConstants.VERSION_DEFAULT);
@@ -788,9 +788,7 @@ public class DataFactory {
 		return dlFileVersion;
 	}
 
-	public DLFolder newDLFolder(
-		long groupId, long parentFolderId, int currentIndex) {
-
+	public DLFolder newDLFolder(long groupId, long parentFolderId, int index) {
 		DLFolder dlFolder = new DLFolderImpl();
 
 		dlFolder.setUuid(SequentialUUID.generate());
@@ -803,7 +801,7 @@ public class DataFactory {
 		dlFolder.setModifiedDate(nextFutureDate());
 		dlFolder.setRepositoryId(groupId);
 		dlFolder.setParentFolderId(parentFolderId);
-		dlFolder.setName("Test Folder " + currentIndex);
+		dlFolder.setName("Test Folder " + index);
 		dlFolder.setLastPostDate(nextFutureDate());
 		dlFolder.setDefaultFileEntryTypeId(
 			_defaultDLFileEntryType.getFileEntryTypeId());
@@ -940,7 +938,7 @@ public class DataFactory {
 		return layoutSets;
 	}
 
-	public MBCategory newMBCategory(long groupId, int currentIndex) {
+	public MBCategory newMBCategory(long groupId, int index) {
 		MBCategory mbCategory = new MBCategoryImpl();
 
 		mbCategory.setUuid(SequentialUUID.generate());
@@ -953,7 +951,7 @@ public class DataFactory {
 		mbCategory.setModifiedDate(new Date());
 		mbCategory.setParentCategoryId(
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
-		mbCategory.setName("Test Category " + currentIndex);
+		mbCategory.setName("Test Category " + index);
 		mbCategory.setDisplayStyle(MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 		mbCategory.setThreadCount(_maxMBThreadCount);
 		mbCategory.setMessageCount(_maxMBThreadCount * _maxMBMessageCount);
@@ -998,11 +996,11 @@ public class DataFactory {
 		return mbMailingList;
 	}
 
-	public MBMessage newMBMessage(MBThread mbThread, int currentIndex) {
+	public MBMessage newMBMessage(MBThread mbThread, int index) {
 		long messageId = 0;
 		long parentMessageId = 0;
 
-		if (currentIndex == 1) {
+		if (index == 1) {
 			messageId = mbThread.getRootMessageId();
 			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 		}
@@ -1014,19 +1012,19 @@ public class DataFactory {
 		return newMBMessage(
 			mbThread.getGroupId(), 0, 0, mbThread.getCategoryId(),
 			mbThread.getThreadId(), messageId, mbThread.getRootMessageId(),
-			parentMessageId, "Test Message " + currentIndex,
-			"This is test message " + currentIndex + ".");
+			parentMessageId, "Test Message " + index,
+			"This is test message " + index + ".");
 	}
 
 	public MBMessage newMBMessage(
-		MBThread mbThread, long classNameId, long classPK, int currentIndex) {
+		MBThread mbThread, long classNameId, long classPK, int index) {
 
 		long messageId = 0;
 		long parentMessageId = 0;
 		String subject = null;
 		String body = null;
 
-		if (currentIndex == 0) {
+		if (index == 0) {
 			messageId = mbThread.getRootMessageId();
 			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 			subject = StringUtil.valueOf(classPK);
@@ -1036,7 +1034,7 @@ public class DataFactory {
 			messageId = _counter.get();
 			parentMessageId = mbThread.getRootMessageId();
 			subject = "N/A";
-			body = "This is test comment " + currentIndex + ".";
+			body = "This is test comment " + index + ".";
 		}
 
 		return newMBMessage(
@@ -1157,15 +1155,15 @@ public class DataFactory {
 		return socialActivity;
 	}
 
-	public User newUser(int currentIndex) {
-		String[] userName = nextUserName(currentIndex - 1);
+	public User newUser(int index) {
+		String[] userName = nextUserName(index - 1);
 
 		return newUser(
 			_counter.get(), userName[0], userName[1],
 			"test" + _userScreenNameCounter.get(), false);
 	}
 
-	public WikiNode newWikiNode(long groupId, int currentIndex) {
+	public WikiNode newWikiNode(long groupId, int index) {
 		WikiNode wikiNode = new WikiNodeImpl();
 
 		wikiNode.setUuid(SequentialUUID.generate());
@@ -1176,14 +1174,14 @@ public class DataFactory {
 		wikiNode.setUserName(_sampleUser.getFullName());
 		wikiNode.setCreateDate(new Date());
 		wikiNode.setModifiedDate(new Date());
-		wikiNode.setName("Test Node " + currentIndex);
+		wikiNode.setName("Test Node " + index);
 		wikiNode.setLastPostDate(new Date());
 		wikiNode.setStatusDate(new Date());
 
 		return wikiNode;
 	}
 
-	public WikiPage newWikiPage(WikiNode wikiNode, int currentIndex) {
+	public WikiPage newWikiPage(WikiNode wikiNode, int index) {
 		WikiPage wikiPage = new WikiPageImpl();
 
 		wikiPage.setUuid(SequentialUUID.generate());
@@ -1196,9 +1194,9 @@ public class DataFactory {
 		wikiPage.setCreateDate(new Date());
 		wikiPage.setModifiedDate(new Date());
 		wikiPage.setNodeId(wikiNode.getNodeId());
-		wikiPage.setTitle("Test Page " + currentIndex);
+		wikiPage.setTitle("Test Page " + index);
 		wikiPage.setVersion(WikiPageConstants.VERSION_DEFAULT);
-		wikiPage.setContent("This is test page " + currentIndex + ".");
+		wikiPage.setContent("This is test page " + index + ".");
 		wikiPage.setFormat(WikiPageConstants.DEFAULT_FORMAT);
 		wikiPage.setHead(true);
 
