@@ -17,23 +17,24 @@
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
+String p_u_i_d = ParamUtil.getString(request, "p_u_i_d");
 String eventName = ParamUtil.getString(request, "eventName", "selectOrganization");
 String target = ParamUtil.getString(request, "target");
-String p_u_i_d = ParamUtil.getString(request, "p_u_i_d");
 
 User selUser = PortalUtil.getSelectedUser(request);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/users_admin/select_organization");
+
+if (selUser != null) {
+	portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
+}
+
 portletURL.setParameter("eventName", eventName);
 
 if (Validator.isNotNull(target)) {
 	portletURL.setParameter("target", target);
-}
-
-if (selUser != null) {
-	portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 }
 %>
 
