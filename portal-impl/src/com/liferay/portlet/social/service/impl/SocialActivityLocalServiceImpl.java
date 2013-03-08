@@ -233,15 +233,6 @@ public class SocialActivityLocalServiceImpl
 
 			socialActivityPersistence.update(activity);
 
-			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-				long activitySetId =
-					socialActivityInterpreterLocalService.getActivitySetId(
-						activity.getActivityId());
-
-				socialActivitySetLocalService.incrementActivityCount(
-					activitySetId, activityId);
-			}
-
 			if (mirrorActivity != null) {
 				long mirrorActivityId = counterLocalService.increment(
 					SocialActivity.class.getName());
@@ -250,6 +241,15 @@ public class SocialActivityLocalServiceImpl
 				mirrorActivity.setMirrorActivityId(activity.getPrimaryKey());
 
 				socialActivityPersistence.update(mirrorActivity);
+			}
+
+			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+				long activitySetId =
+					socialActivityInterpreterLocalService.getActivitySetId(
+						activity.getActivityId());
+
+				socialActivitySetLocalService.incrementActivityCount(
+					activitySetId, activityId);
 			}
 		}
 
@@ -345,15 +345,15 @@ public class SocialActivityLocalServiceImpl
 	public void deleteActivities(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
-		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-			socialActivitySetLocalService.decrementActivityCount(
-				assetEntry.getClassNameId(), assetEntry.getClassPK());
-		}
-
 		socialActivityPersistence.removeByC_C(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
 
 		socialActivityCounterLocalService.deleteActivityCounters(assetEntry);
+
+		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+			socialActivitySetLocalService.decrementActivityCount(
+				assetEntry.getClassNameId(), assetEntry.getClassPK());
+		}
 	}
 
 	/**
@@ -369,12 +369,12 @@ public class SocialActivityLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
+		socialActivityPersistence.removeByC_C(classNameId, classPK);
+
 		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 			socialActivitySetLocalService.decrementActivityCount(
 				classNameId, classPK);
 		}
-
-		socialActivityPersistence.removeByC_C(classNameId, classPK);
 	}
 
 	/**
@@ -405,15 +405,15 @@ public class SocialActivityLocalServiceImpl
 		socialActivityPersistence.remove(activity);
 
 		try {
-			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-				socialActivitySetLocalService.decrementActivityCount(
-					activity.getActivitySetId());
-			}
-
 			socialActivityPersistence.removeByMirrorActivityId(
 				activity.getActivityId());
 		}
 		catch (NoSuchActivityException nsae) {
+		}
+
+		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
+			socialActivitySetLocalService.decrementActivityCount(
+				activity.getActivitySetId());
 		}
 	}
 
@@ -438,24 +438,24 @@ public class SocialActivityLocalServiceImpl
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
+			socialActivityPersistence.remove(activity);
+
 			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 				socialActivitySetLocalService.decrementActivityCount(
 					activity.getActivitySetId());
 			}
-
-			socialActivityPersistence.remove(activity);
 		}
 
 		activities = socialActivityPersistence.findByReceiverUserId(
 			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
+			socialActivityPersistence.remove(activity);
+
 			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 				socialActivitySetLocalService.decrementActivityCount(
 					activity.getActivitySetId());
 			}
-
-			socialActivityPersistence.remove(activity);
 		}
 
 		socialActivityCounterLocalService.deleteActivityCounters(

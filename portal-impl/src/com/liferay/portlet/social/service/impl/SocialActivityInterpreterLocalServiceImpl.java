@@ -109,7 +109,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 
 		List<SocialActivityInterpreter> activityInterpreters =
 			_activityInterpreters.get(
-				PropsValues.SOCIAL_ACTIVITY_SETS_GROUPING_SELECTOR);
+				PropsValues.SOCIAL_ACTIVITY_SETS_SELECTOR);
 
 		if (activityInterpreters != null) {
 			SocialActivity activity =

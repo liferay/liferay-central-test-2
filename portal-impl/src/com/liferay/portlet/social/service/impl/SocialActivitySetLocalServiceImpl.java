@@ -62,11 +62,11 @@ public class SocialActivitySetLocalServiceImpl
 		return activitySet;
 	}
 
-	public SocialActivitySet decrementActivityCount(long activitySetId)
+	public void decrementActivityCount(long activitySetId)
 		throws PortalException, SystemException {
 
 		if (activitySetId == 0) {
-			return null;
+			return;
 		}
 
 		SocialActivitySet socialActivitySet =
@@ -75,13 +75,13 @@ public class SocialActivitySetLocalServiceImpl
 		if (socialActivitySet.getActivityCount() == 1) {
 			socialActivitySetPersistence.remove(activitySetId);
 
-			return null;
+			return;
 		}
 
 		socialActivitySet.setActivityCount(
 			socialActivitySet.getActivityCount() - 1);
 
-		return socialActivitySetPersistence.update(socialActivitySet);
+		socialActivitySetPersistence.update(socialActivitySet);
 	}
 
 	public void decrementActivityCount(long classNameId, long classPK)
@@ -95,8 +95,7 @@ public class SocialActivitySetLocalServiceImpl
 		}
 	}
 
-	public SocialActivitySet incrementActivityCount(
-			long activitySetId, long activityId)
+	public void incrementActivityCount(long activitySetId, long activityId)
 		throws PortalException, SystemException {
 
 		SocialActivitySet socialActivitySet =
@@ -110,7 +109,7 @@ public class SocialActivitySetLocalServiceImpl
 
 		socialActivitySet.setModifiedDate(activity.getCreateDate());
 
-		return socialActivitySetPersistence.update(socialActivitySet);
+		socialActivitySetPersistence.update(socialActivitySet);
 	}
 
 }
