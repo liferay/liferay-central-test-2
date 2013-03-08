@@ -17,8 +17,8 @@ package com.liferay.portal.kernel.security.pacl.permission;
 import java.security.BasicPermission;
 
 /**
- * @author Raymond Augé
- * @author Zsolt Berentey
+ * @author     Raymond Augé
+ * @author     Zsolt Berentey
  * @deprecated As of 6.2.0
  */
 public class CheckMemberAccessPermission extends BasicPermission {

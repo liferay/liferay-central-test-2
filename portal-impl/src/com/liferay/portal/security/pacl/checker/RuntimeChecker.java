@@ -125,7 +125,8 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_ACCESS_DECLARED_MEMBERS)) {
-			// temporarily return true
+
+			// Temporarily return true
 
 			return true;
 		}

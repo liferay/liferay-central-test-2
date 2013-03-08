@@ -28,7 +28,8 @@ public class ReflectChecker extends BaseChecker {
 	}
 
 	public boolean implies(Permission permission) {
-		// temporarily return true
+
+		// Temporarily return true
 
 		return true;
 	}
