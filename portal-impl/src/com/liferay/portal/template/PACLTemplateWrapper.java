@@ -22,7 +22,7 @@ import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Tina Tian
+ * @author     Tina Tian
  * @deprecated As of 6.2.0
  */
 public class PACLTemplateWrapper implements Template {
