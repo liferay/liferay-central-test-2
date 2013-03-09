@@ -15,7 +15,6 @@
 package com.liferay.portal.template;
 
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateException;
 
 import java.io.Writer;
 
@@ -42,7 +41,7 @@ public class PACLTemplateWrapper implements Template {
 	public void prepare(HttpServletRequest request) {
 	}
 
-	public boolean processTemplate(Writer writer) throws TemplateException {
+	public boolean processTemplate(Writer writer) {
 		return false;
 	}
 
