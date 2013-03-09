@@ -396,7 +396,7 @@ public class AnnouncementsEntryLocalServiceImpl
 				}
 				else {
 					params.put(
-						"userGroupRole", new Long[] {new Long(0), classPK});
+						"userGroupRole", new Long[] {Long.valueOf(0), classPK});
 				}
 			}
 			else if (className.equals(UserGroup.class.getName())) {
