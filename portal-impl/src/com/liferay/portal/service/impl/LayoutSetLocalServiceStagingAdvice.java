@@ -349,7 +349,7 @@ public class LayoutSetLocalServiceStagingAdvice
 			returnValue = wrapLayoutSet((LayoutSet)returnValue);
 		}
 		else if (returnValue instanceof List<?>) {
-			List list = (List)returnValue;
+			List<?> list = (List<?>)returnValue;
 
 			if (!list.isEmpty() && (list.get(0) instanceof LayoutSet)) {
 				returnValue = wrapLayoutSets((List<LayoutSet>)returnValue);
