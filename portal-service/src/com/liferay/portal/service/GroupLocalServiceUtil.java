@@ -723,24 +723,19 @@ public class GroupLocalServiceUtil {
 	}
 
 	/**
-	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
-		long userId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserGroups(userId);
 	}
 
 	/**
-	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
 		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserGroups(userId, start, end);
 	}
 

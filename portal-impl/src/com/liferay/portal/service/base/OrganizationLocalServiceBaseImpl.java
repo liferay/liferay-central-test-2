@@ -646,20 +646,18 @@ public abstract class OrganizationLocalServiceBaseImpl
 	}
 
 	/**
-	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<Organization> getUserOrganizations(long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 		return userPersistence.getOrganizations(userId);
 	}
 
 	/**
-	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<Organization> getUserOrganizations(long userId, int start,
-		int end) throws PortalException, SystemException {
+		int end) throws SystemException {
 		return userPersistence.getOrganizations(userId, start, end);
 	}
 

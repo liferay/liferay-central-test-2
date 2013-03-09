@@ -460,24 +460,19 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	/**
-	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserOrganizations(userId);
 	}
 
 	/**
-	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserOrganizations(userId, start, end);
 	}
 

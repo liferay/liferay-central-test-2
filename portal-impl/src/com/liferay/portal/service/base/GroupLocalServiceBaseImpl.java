@@ -964,20 +964,17 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<Group> getUserGroups(long userId)
-		throws PortalException, SystemException {
+	public List<Group> getUserGroups(long userId) throws SystemException {
 		return userPersistence.getGroups(userId);
 	}
 
 	/**
-	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<Group> getUserGroups(long userId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 		return userPersistence.getGroups(userId, start, end);
 	}
 
