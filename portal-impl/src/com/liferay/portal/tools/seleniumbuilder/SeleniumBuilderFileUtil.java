@@ -135,17 +135,14 @@ public class SeleniumBuilderFileUtil {
 	public int getTargetCount(Element rootElement) {
 		String xml = rootElement.asXML();
 
-		for (int i = 1;; i++) {
-			if (xml.contains("${target" + i +"}")) {
+		for (int i = 1;;) {
+			if (xml.contains("${target" + i + "}")) {
+				i++;
+
 				continue;
 			}
 
-			if (i == 1) {
-				return 1;
-			}
-			else {
-				return i - 1;
-			}
+			return i;
 		}
 	}
 
