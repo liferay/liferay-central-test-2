@@ -410,6 +410,21 @@ public class Entity {
 		return TextFormatter.formatPlural(getVarName());
 	}
 
+	public boolean hasActionableDynamicQuery() {
+		if (hasColumns() && hasLocalService()) {
+			if (hasCompoundPK()) {
+				EntityColumn col = _pkList.get(0);
+
+				return col.isPrimitiveType();
+			}
+			else {
+				return hasPrimitivePK();
+			}
+		}
+
+		return false;
+	}
+
 	public boolean hasArrayableOperator() {
 		for (EntityFinder finder : _finderList) {
 			if (finder.hasArrayableOperator()) {
