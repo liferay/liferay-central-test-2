@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.nio.intraband.CompletionHandler.CompletionType;
 import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
 import java.io.IOException;
 
 import java.nio.ByteBuffer;
@@ -33,6 +31,7 @@ import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +43,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -56,8 +56,6 @@ import org.junit.Test;
  * @author Shuyang Zhou
  */
 public class BaseIntraBandTest {
-
-	public static final long DEFAULT_TIMEOUT = 1000;
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -79,23 +77,26 @@ public class BaseIntraBandTest {
 
 	@Test
 	public void testDatagramReceiveHandlerRegister() throws Exception {
+
+		// Length
+
 		AtomicReference<DatagramReceiveHandler[]>
 			datagramReceiveHandlersReference =
 				_mockIntraBand.datagramReceiveHandlersReference;
 
-		// 1) Assert size
-
-		Assert.assertEquals(256, datagramReceiveHandlersReference.get().length);
-
-		// 2) Get with copy
-
 		DatagramReceiveHandler[] datagramReceiveHandlers =
-			_mockIntraBand.getDatagramReceiveHandlers();
+			datagramReceiveHandlersReference.get();
+
+		Assert.assertEquals(256, datagramReceiveHandlers.length);
+
+		// Copy
+
+		datagramReceiveHandlers = _mockIntraBand.getDatagramReceiveHandlers();
 
 		Assert.assertNotSame(
 			datagramReceiveHandlersReference.get(), datagramReceiveHandlers);
 
-		// 3) First register
+		// First register
 
 		DatagramReceiveHandler datagramReceiveHandler1 =
 			new RecordDatagramReceiveHandler();
@@ -105,12 +106,11 @@ public class BaseIntraBandTest {
 				_type, datagramReceiveHandler1);
 
 		Assert.assertNull(oldDatagramReceiveHandler);
-
 		Assert.assertSame(
 			datagramReceiveHandler1,
 			_mockIntraBand.getDatagramReceiveHandlers()[_type]);
 
-		// 4) Second register
+		// Second register
 
 		DatagramReceiveHandler datagramReceiveHandler2 =
 			new RecordDatagramReceiveHandler();
@@ -120,12 +120,11 @@ public class BaseIntraBandTest {
 				_type, datagramReceiveHandler2);
 
 		Assert.assertSame(datagramReceiveHandler1, oldDatagramReceiveHandler);
-
 		Assert.assertSame(
 			datagramReceiveHandler2,
 			_mockIntraBand.getDatagramReceiveHandlers()[_type]);
 
-		// 5) Unregister
+		// Unregister
 
 		DatagramReceiveHandler removedDatagramReceiveHandler =
 			_mockIntraBand.unregisterDatagramReceiveHandler(_type);
@@ -133,7 +132,7 @@ public class BaseIntraBandTest {
 		Assert.assertSame(
 			datagramReceiveHandler2, removedDatagramReceiveHandler);
 
-		// 6) Concurrent registering
+		// Concurrent registering
 
 		final int handlerCount = 10240;
 		final int threadCount = 10;
@@ -179,8 +178,9 @@ public class BaseIntraBandTest {
 				return null;
 			}
 
-			private final int _start;
 			private final int _end;
+			private final int _start;
+
 		}
 
 		List<RegisterJob> registerJobs = new ArrayList<RegisterJob>(
@@ -215,11 +215,11 @@ public class BaseIntraBandTest {
 
 		_mockIntraBand.close();
 
-		// 7) Assert null after close
+		// Null after close
 
 		Assert.assertNull(datagramReceiveHandlersReference.get());
 
-		// 8) Get after close
+		// Get after close
 
 		try {
 			_mockIntraBand.getDatagramReceiveHandlers();
@@ -229,7 +229,7 @@ public class BaseIntraBandTest {
 		catch (ClosedIntraBandException cibe) {
 		}
 
-		// 9) Register after close
+		// Register after close
 
 		try {
 			_mockIntraBand.registerDatagramReceiveHandler(
@@ -240,7 +240,7 @@ public class BaseIntraBandTest {
 		catch (ClosedIntraBandException cibe) {
 		}
 
-		// 10) Unregister after close
+		// Unregister after close
 
 		try {
 			_mockIntraBand.unregisterDatagramReceiveHandler(_type);
@@ -254,14 +254,16 @@ public class BaseIntraBandTest {
 	@Test
 	public void testGenerateSequenceId() throws Exception {
 
-		// 1) Overflow resetting
+		// Overflow resetting
 
-		_mockIntraBand.sequenceIdGenerator.set(Long.MAX_VALUE);
+		AtomicLong sequenceIdGenerator = _mockIntraBand.sequenceIdGenerator;
+
+		sequenceIdGenerator.set(Long.MAX_VALUE);
 
 		Assert.assertEquals(1, _mockIntraBand.generateSequenceId());
 		Assert.assertEquals(2, _mockIntraBand.generateSequenceId());
 
-		// 2) Concurrent resetting
+		// Concurrent resetting
 
 		int testCount = 10240;
 
@@ -270,6 +272,7 @@ public class BaseIntraBandTest {
 			public Long call() throws Exception {
 				return _mockIntraBand.generateSequenceId();
 			}
+
 		};
 
 		List<Callable<Long>> getSequenceIdCallables =
@@ -281,13 +284,18 @@ public class BaseIntraBandTest {
 		ExecutorService executorService = Executors.newFixedThreadPool(2);
 
 		for (int i = 0; i < testCount; i++) {
-			_mockIntraBand.sequenceIdGenerator.set(Long.MAX_VALUE);
+			sequenceIdGenerator.set(Long.MAX_VALUE);
 
 			List<Future<Long>> getSequenceIdFutures = executorService.invokeAll(
 				getSequenceIdCallables);
 
-			long sequenceId1 = getSequenceIdFutures.get(0).get();
-			long sequenceId2 = getSequenceIdFutures.get(1).get();
+			Future<Long> sequenceIdFuture1 = getSequenceIdFutures.get(0);
+
+			long sequenceId1 = sequenceIdFuture1.get();
+
+			Future<Long> sequenceIdFuture2 = getSequenceIdFutures.get(1);
+
+			long sequenceId2 = sequenceIdFuture2.get();
 
 			Assert.assertTrue(
 				((sequenceId1 == 1) && (sequenceId2 == 2)) ||
@@ -300,14 +308,16 @@ public class BaseIntraBandTest {
 	@Test
 	public void testHandleReading() throws Exception {
 
-		// 1) IOException, new receive Datagram, debug log
+		// IOException, new receive datagram, debug log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.FINE);
 
 		MockRegistrationReference mockRegistrationReference =
 			new MockRegistrationReference(_mockIntraBand);
+
 		ChannelContext channelContext = new ChannelContext(null);
+
 		channelContext.setRegistrationReference(mockRegistrationReference);
 
 		_mockIntraBand.handleReading(
@@ -315,22 +325,23 @@ public class BaseIntraBandTest {
 
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		Assert.assertEquals(1, logRecords.size());
+		Assert.assertTrue(
+			hasLogMessage(logRecords, "Broken read channel, unregister "));
 
 		LogRecord logRecord = logRecords.get(0);
 
-		Assert.assertTrue(
-			logRecord.getMessage().startsWith(
-				"Broken read channel, unregister "));
 		Assert.assertTrue(logRecord.getThrown() instanceof IOException);
 
-		// 2) IOException, new receive Datagram, info log
+		// IOException, new receive datagram, info log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.INFO);
 
 		mockRegistrationReference = new MockRegistrationReference(
 			_mockIntraBand);
+
 		channelContext = new ChannelContext(null);
+
 		channelContext.setRegistrationReference(mockRegistrationReference);
 
 		_mockIntraBand.handleReading(
@@ -338,24 +349,25 @@ public class BaseIntraBandTest {
 
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		Assert.assertEquals(1, logRecords.size());
+		Assert.assertTrue(
+			hasLogMessage(logRecords, "Broken read channel, unregister "));
 
 		logRecord = logRecords.get(0);
 
-		Assert.assertTrue(
-			logRecord.getMessage().startsWith(
-				"Broken read channel, unregister "));
 		Assert.assertNull(logRecord.getThrown());
 
-		// 3) IOException, exist receive Datagram, without log
+		// IOException, existing receive datagram, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
 		mockRegistrationReference = new MockRegistrationReference(
 			_mockIntraBand);
+
 		channelContext = new ChannelContext(null);
-		channelContext.setRegistrationReference(mockRegistrationReference);
+
 		channelContext.setReadingDatagram(Datagram.createReceiveDatagram());
+		channelContext.setRegistrationReference(mockRegistrationReference);
 
 		_mockIntraBand.handleReading(
 			new MockScatteringByteChannel(false), channelContext);
@@ -363,7 +375,7 @@ public class BaseIntraBandTest {
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 4) Slow reading ownerless Datagram, with log
+		// Slow reading of ownerless datagram, with log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
@@ -373,21 +385,19 @@ public class BaseIntraBandTest {
 		SourceChannel sourceChannel = pipe.source();
 		final SinkChannel sinkChannel = pipe.sink();
 
-		// Collecting serialized data
+		// Collect serialized data
 
-		Datagram requestDatagram = Datagram.createRequestDatagram(
-			_type, _dataContent);
+		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
 		requestDatagram.writeTo(sinkChannel);
 
-		final ByteBuffer byteBuffer = ByteBuffer.allocate(
-			_dataContent.length + 14);
+		final ByteBuffer byteBuffer = ByteBuffer.allocate(_data.length + 14);
 
 		while (byteBuffer.hasRemaining()) {
 			sourceChannel.read(byteBuffer);
 		}
 
-		// Slowly writing data
+		// Slowly write data
 
 		sourceChannel.configureBlocking(false);
 		sinkChannel.configureBlocking(false);
@@ -398,7 +408,7 @@ public class BaseIntraBandTest {
 			public void run() {
 				try {
 					for (byte b : byteBuffer.array()) {
-						sinkChannel.write(ByteBuffer.wrap(new byte[]{b}));
+						sinkChannel.write(ByteBuffer.wrap(new byte[] {b}));
 
 						Thread.sleep(1);
 					}
@@ -427,32 +437,36 @@ public class BaseIntraBandTest {
 		slowWritingThread.join();
 
 		Assert.assertEquals(_type, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertEquals(1, logRecords.size());
-		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Dropped ownerless request "));
 
-		// 5) Read ownerless Datagram, without log
+		logRecord = logRecords.get(0);
+
+		String message = logRecord.getMessage();
+
+		Assert.assertTrue(message.startsWith("Dropped ownerless request "));
+
+		// Read ownerless datagram, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isRequest());
 		Assert.assertEquals(_type, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 6) Read ownerless ACK response, with log
+		// Read ownerless ACK response, with log
 
 		long sequenceId = 100;
 
@@ -461,8 +475,11 @@ public class BaseIntraBandTest {
 
 		Datagram ackResponseDatagram = Datagram.createACKResponseDatagram(
 			sequenceId);
+
 		ackResponseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
@@ -470,17 +487,19 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(receiveDatagram.isAckResponse());
 		Assert.assertEquals(1, logRecords.size());
 		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Dropped ownerless ACK response "));
+			hasLogMessage(logRecords, "Dropped ownerless ACK response "));
 
-		// 7) Ownerless ACK response, without log
+		// Ownerless ACK response, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
 		ackResponseDatagram = Datagram.createACKResponseDatagram(sequenceId);
+
 		ackResponseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
@@ -488,159 +507,198 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(receiveDatagram.isAckResponse());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 8) Normal ACK response
+		// Normal ACK response
 
 		RecordCompletionHandler<Object> recordCompletionHandler =
 			new RecordCompletionHandler<Object>();
 
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.timeout = 10000;
+
+		requestDatagram.setSequenceId(sequenceId);
+
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
+
 		ackResponseDatagram = Datagram.createACKResponseDatagram(sequenceId);
+
 		ackResponseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		recordCompletionHandler.waitUntilDelivered();
+
 		Assert.assertTrue(receiveDatagram.isAckResponse());
 
-		// 9) Ownerless response, with log
+		// Ownerless response, with log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
 
 		Datagram responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
+
 		responseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isResponse());
 		Assert.assertEquals(0, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertEquals(1, logRecords.size());
 		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Dropped ownerless response "));
+			hasLogMessage(logRecords, "Dropped ownerless response "));
 
-		// 10) Ownerless response, without log
+		// Ownerless response, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
 		responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
+
 		responseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isResponse());
 		Assert.assertEquals(0, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 11) Reply response
+		// Reply response
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
+
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.completionTypes = BaseIntraBand.REPLIED_ENUM_SET;
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.timeout = 10000;
+
+		requestDatagram.setSequenceId(sequenceId);
+
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
+
 		responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
+
 		responseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		recordCompletionHandler.waitUntilReplied();
+
 		Assert.assertTrue(receiveDatagram.isResponse());
 		Assert.assertEquals(0, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 
-		// 12) Unconcerned response, with log
+		// Unconcerned response, with log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
+
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.timeout = 10000;
+
+		requestDatagram.setSequenceId(sequenceId);
+
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
+
 		responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
+
 		responseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isResponse());
 		Assert.assertEquals(0, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertEquals(1, logRecords.size());
 		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Dropped unconcerned response "));
+			hasLogMessage(logRecords, "Dropped unconcerned response "));
 
-		// 13) Unconcerned response, without log
+		// Unconcerned response, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
+
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.timeout = 10000;
+
+		requestDatagram.setSequenceId(sequenceId);
+
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
+
 		responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
+
 		responseDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isResponse());
 		Assert.assertEquals(0, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 14) Ownerless request with ACK requirement, with log
+		// Ownerless request with ACK requirement, with log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
 
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.setAckRequest(true);
+		requestDatagram.setSequenceId(sequenceId);
+
 		requestDatagram.writeTo(sinkChannel);
+
 		mockRegistrationReference = new MockRegistrationReference(
 			_mockIntraBand);
+
 		channelContext = new ChannelContext(null);
+
 		channelContext.setRegistrationReference(mockRegistrationReference);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
@@ -648,57 +706,63 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(receiveDatagram.isAckRequest());
 		Assert.assertTrue(receiveDatagram.isRequest());
 		Assert.assertEquals(_type, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Assert.assertEquals(1, logRecords.size());
 		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Dropped ownerless request "));
+			hasLogMessage(logRecords, "Dropped ownerless request "));
 		Assert.assertSame(
 			mockRegistrationReference,
 			_mockIntraBand.getRegistrationReference());
-		Assert.assertEquals(
-			sequenceId, _mockIntraBand.getDatagram().getSequenceId());
-		Assert.assertTrue(_mockIntraBand.getDatagram().isAckResponse());
 
-		// 15) Request dispatching with failure
+		Datagram datagram = _mockIntraBand.getDatagram();
+
+		Assert.assertEquals(sequenceId, datagram.getSequenceId());
+		Assert.assertTrue(datagram.isAckResponse());
+
+		// Request dispatching with failure
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.SEVERE);
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
+
 		RecordDatagramReceiveHandler recordDatagramReceiveHandler =
 			new RecordDatagramReceiveHandler();
+
 		_mockIntraBand.registerDatagramReceiveHandler(
 			_type, recordDatagramReceiveHandler);
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
-		requestDatagram.setSequenceId(sequenceId);
-		requestDatagram.setAckRequest(true);
+
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
+
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.timeout = 10000;
+
+		requestDatagram.setAckRequest(true);
+		requestDatagram.setSequenceId(sequenceId);
+
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
+
 		requestDatagram.writeTo(sinkChannel);
+
 		receiveDatagram = Datagram.createReceiveDatagram();
+
 		channelContext.setReadingDatagram(receiveDatagram);
 
 		_mockIntraBand.handleReading(sourceChannel, channelContext);
 
 		Assert.assertTrue(receiveDatagram.isRequest());
 		Assert.assertEquals(_type, receiveDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, receiveDatagram.getData().array());
+		Assert.assertArrayEquals(_data, receiveDatagram.getData());
 		Datagram recordDatagram =
 			recordDatagramReceiveHandler.getReceiveDatagram();
 		Assert.assertSame(receiveDatagram, recordDatagram);
 		Assert.assertEquals(_type, recordDatagram.getType());
-		Assert.assertArrayEquals(
-			_dataContent, recordDatagram.getData().array());
+		Assert.assertArrayEquals(_data, recordDatagram.getData());
 		Assert.assertEquals(1, logRecords.size());
+		Assert.assertTrue(hasLogMessage(logRecords, "Unable to dispatch"));
 
 		logRecord = logRecords.get(0);
 
-		Assert.assertTrue(
-			logRecord.getMessage().startsWith("Dispatching failure."));
 		Assert.assertTrue(logRecord.getThrown() instanceof RuntimeException);
 
 		sourceChannel.close();
@@ -708,63 +772,64 @@ public class BaseIntraBandTest {
 	@Test
 	public void testHandleWriting() throws Exception {
 
-		// 1) IOException, new send Datagram, debug log
+		// IOException, new send Datagram, debug log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.FINE);
 
-		Datagram requestDatagram = Datagram.createRequestDatagram(
-			_type, _dataContent);
 		MockRegistrationReference mockRegistrationReference =
 			new MockRegistrationReference(_mockIntraBand);
 
 		ChannelContext channelContext = new ChannelContext(
 			new LinkedList<Datagram>());
-		channelContext.setWritingDatagram(requestDatagram);
+
 		channelContext.setRegistrationReference(mockRegistrationReference);
+		channelContext.setWritingDatagram(
+			Datagram.createRequestDatagram(_type, _data));
 
-		boolean stillWritable = _mockIntraBand.handleWriting(
-			new MockGatheringByteChannel(), channelContext);
-
-		Assert.assertFalse(stillWritable);
+		Assert.assertFalse(
+			_mockIntraBand.handleWriting(
+				new MockGatheringByteChannel(), channelContext));
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		Assert.assertEquals(1, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
 
+		String message = logRecord.getMessage();
+
 		Assert.assertTrue(
-			logRecord.getMessage().startsWith(
-				"Broken write channel, unregister "));
+			message.startsWith("Broken write channel, unregister "));
 		Assert.assertTrue(logRecord.getThrown() instanceof IOException);
 
-		// 2) IOException, new send Datagram, info log
+		// IOException, new send Datagram, info log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.INFO);
 
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
+		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 		mockRegistrationReference = new MockRegistrationReference(
 			_mockIntraBand);
 
 		channelContext = new ChannelContext(new LinkedList<Datagram>());
-		channelContext.setWritingDatagram(requestDatagram);
+
 		channelContext.setRegistrationReference(mockRegistrationReference);
+		channelContext.setWritingDatagram(requestDatagram);
 
-		stillWritable = _mockIntraBand.handleWriting(
-			new MockGatheringByteChannel(), channelContext);
-
-		Assert.assertFalse(stillWritable);
+		Assert.assertFalse(
+			_mockIntraBand.handleWriting(
+				new MockGatheringByteChannel(), channelContext));
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		Assert.assertEquals(1, logRecords.size());
 
 		logRecord = logRecords.get(0);
 
+		message = logRecord.getMessage();
+
 		Assert.assertTrue(
-			logRecord.getMessage().startsWith(
-				"Broken write channel, unregister "));
+			message.startsWith("Broken write channel, unregister "));
 		Assert.assertNull(logRecord.getThrown());
 
-		// 3) IOException, exist send Datagram, with CompletionHandler,
+		// IOException, exist send Datagram, with CompletionHandler,
 		// without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
@@ -772,7 +837,7 @@ public class BaseIntraBandTest {
 
 		RecordCompletionHandler<Object> recordCompletionHandler =
 			new RecordCompletionHandler<Object>();
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
 		requestDatagram.completionHandler = recordCompletionHandler;
 		mockRegistrationReference = new MockRegistrationReference(
 			_mockIntraBand);
@@ -780,16 +845,15 @@ public class BaseIntraBandTest {
 		channelContext.setWritingDatagram(requestDatagram);
 		channelContext.setRegistrationReference(mockRegistrationReference);
 
-		stillWritable = _mockIntraBand.handleWriting(
-			new MockGatheringByteChannel(), channelContext);
-
-		Assert.assertFalse(stillWritable);
+		Assert.assertFalse(
+			_mockIntraBand.handleWriting(
+				new MockGatheringByteChannel(), channelContext));
 		Assert.assertFalse(mockRegistrationReference.isValid());
 		recordCompletionHandler.waitUntilFailed();
 		Assert.assertNotNull(recordCompletionHandler.getIOException());
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// 4) Huge Datagram write
+		// Huge Datagram write
 
 		Pipe pipe = Pipe.open();
 
@@ -799,7 +863,7 @@ public class BaseIntraBandTest {
 		sourceChannel.configureBlocking(false);
 		sinkChannel.configureBlocking(false);
 
-		// 10MB buffer
+		// 0MB buffer
 
 		int bufferSize = 1024 * 1024 * 10;
 
@@ -827,41 +891,40 @@ public class BaseIntraBandTest {
 		sourceChannel.configureBlocking(true);
 		sinkChannel.configureBlocking(true);
 
-		// 5) SUBMITTED callback
+		// SUBMITTED callback
 
 		Object attachment = new Object();
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
 		requestDatagram.attachment = attachment;
 		requestDatagram.completionHandler = recordCompletionHandler;
 		requestDatagram.completionTypes = EnumSet.of(CompletionType.SUBMITTED);
 		channelContext = new ChannelContext(new LinkedList<Datagram>());
 		channelContext.setWritingDatagram(requestDatagram);
 
-		stillWritable = _mockIntraBand.handleWriting(
-			sinkChannel, channelContext);
-
-		Assert.assertTrue(stillWritable);
+		Assert.assertTrue(
+			_mockIntraBand.handleWriting(sinkChannel, channelContext));
 		recordCompletionHandler.waitUntilSubmitted();
 		Assert.assertSame(attachment, recordCompletionHandler.getAttachment());
 
-		// 6) REPLIED callback
+		// REPLIED callback
 
-		requestDatagram = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram = Datagram.createRequestDatagram(_type, _data);
 		requestDatagram.completionTypes = EnumSet.of(CompletionType.REPLIED);
 
 		Queue<Datagram> sendingQueue = new LinkedList<Datagram>();
 
 		channelContext = new ChannelContext(sendingQueue);
+
 		channelContext.setWritingDatagram(requestDatagram);
 
-		stillWritable = _mockIntraBand.handleWriting(
-			sinkChannel, channelContext);
-
-		Assert.assertTrue(stillWritable);
-		Assert.assertNull(requestDatagram.getData());
 		Assert.assertTrue(
-			requestDatagram.toString().contains("dataChunk=null"));
+			_mockIntraBand.handleWriting(sinkChannel, channelContext));
+		Assert.assertNull(requestDatagram.getData());
+
+		String requestDatagramString = requestDatagram.toString();
+
+		Assert.assertTrue(requestDatagramString.contains("dataChunk=null"));
 
 		sourceChannel.close();
 		sinkChannel.close();
@@ -874,13 +937,12 @@ public class BaseIntraBandTest {
 	@Test
 	public void testResponseWaiting() throws Exception {
 
-		// 1) Add
+		// Add
 
 		long sequenceId = 100;
 		long timeout = 10000;
 
-		Datagram requestDatagram = Datagram.createRequestDatagram(
-			_type, _dataContent);
+		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
 		requestDatagram.setSequenceId(sequenceId);
 		requestDatagram.timeout = timeout;
@@ -895,10 +957,10 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(
 			_mockIntraBand.timeoutMap.values().contains(sequenceId));
 
-		// 2) Remove, hit
+		// Remove, hit
 
 		Datagram responseDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
 
 		Assert.assertFalse(responseDatagram.isRequest());
 
@@ -907,20 +969,20 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(_mockIntraBand.responseWaitingMap.isEmpty());
 		Assert.assertTrue(_mockIntraBand.timeoutMap.isEmpty());
 
-		// 3) Remove, miss
+		// Remove, miss
 
 		_mockIntraBand.removeResponseWaitingDatagram(responseDatagram);
 
 		Assert.assertTrue(_mockIntraBand.responseWaitingMap.isEmpty());
 		Assert.assertTrue(_mockIntraBand.timeoutMap.isEmpty());
 
-		// 4) Cleanup timeout, hit, with log
+		// Cleanup timeout, hit, with log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
 
 		Datagram requestDatagram1 = Datagram.createRequestDatagram(
-			_type, _dataContent);
+			_type, _data);
 
 		RecordCompletionHandler<Object> recordCompletionHandler1 =
 			new RecordCompletionHandler<Object>();
@@ -930,7 +992,7 @@ public class BaseIntraBandTest {
 		requestDatagram1.timeout = 1;
 
 		Datagram requestDatagram2 = Datagram.createRequestDatagram(
-			_type, _dataContent);
+			_type, _data);
 
 		RecordCompletionHandler<Object> recordCompletionHandler2 =
 			new RecordCompletionHandler<Object>();
@@ -965,22 +1027,30 @@ public class BaseIntraBandTest {
 		_mockIntraBand.cleanUpTimeoutResponseWaitingDatagrams();
 
 		Assert.assertEquals(2, logRecords.size());
+
+		LogRecord logRecord = logRecords.get(0);
+
+		String message = logRecord.getMessage();
+
 		Assert.assertTrue(
-			logRecords.get(0).getMessage().startsWith(
-				"Removed timeout response waiting Datagram "));
+			message.startsWith("Removed timeout response waiting datagram "));
+
+		logRecord = logRecords.get(1);
+
+		message = logRecord.getMessage();
+
 		Assert.assertTrue(
-			logRecords.get(1).getMessage().startsWith(
-				"Removed timeout response waiting Datagram "));
+			message.startsWith("Removed timeout response waiting datagram "));
 
 		recordCompletionHandler1.waitUntilTimeouted();
 		recordCompletionHandler2.waitUntilTimeouted();
 
-		// 5) Cleanup timeout, hit, without log
+		// Cleanup timeout, hit, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
 
-		requestDatagram1 = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram1 = Datagram.createRequestDatagram(_type, _data);
 
 		recordCompletionHandler1 = new RecordCompletionHandler<Object>();
 
@@ -988,7 +1058,7 @@ public class BaseIntraBandTest {
 		requestDatagram1.completionHandler = recordCompletionHandler1;
 		requestDatagram1.timeout = 1;
 
-		requestDatagram2 = Datagram.createRequestDatagram(_type, _dataContent);
+		requestDatagram2 = Datagram.createRequestDatagram(_type, _data);
 
 		recordCompletionHandler2 = new RecordCompletionHandler<Object>();
 
@@ -1026,7 +1096,7 @@ public class BaseIntraBandTest {
 		recordCompletionHandler1.waitUntilTimeouted();
 		recordCompletionHandler2.waitUntilTimeouted();
 
-		// 5) Cleanup timeout, miss
+		// Cleanup timeout, miss
 
 		_mockIntraBand.cleanUpTimeoutResponseWaitingDatagrams();
 	}
@@ -1034,7 +1104,7 @@ public class BaseIntraBandTest {
 	@Test
 	public void testSendDatagramWithCallback() throws Exception {
 
-		// 1) RegistrationReference is null
+		// Registration reference is null
 
 		try {
 			_mockIntraBand.sendDatagram(null, null, null, null, null);
@@ -1043,10 +1113,10 @@ public class BaseIntraBandTest {
 		}
 		catch (NullPointerException npe) {
 			Assert.assertEquals(
-				"RegistrationReference is null", npe.getMessage());
+				"Registration reference is null", npe.getMessage());
 		}
 
-		// 2) RegistrationReference is cancelled
+		// RegistrationReference is cancelled
 
 		RegistrationReference registrationReference =
 			new MockRegistrationReference(_mockIntraBand);
@@ -1061,10 +1131,10 @@ public class BaseIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"RegistrationReference is not valid", iae.getMessage());
+				"Registration reference is invalid", iae.getMessage());
 		}
 
-		// 3) Datagram is null
+		// Datagram is null
 
 		registrationReference = new MockRegistrationReference(_mockIntraBand);
 
@@ -1078,68 +1148,67 @@ public class BaseIntraBandTest {
 			Assert.assertEquals("Datagram is null", npe.getMessage());
 		}
 
-		// 4) CompletionType set is null
+		// Completion type set is null
 
 		try {
 			_mockIntraBand.sendDatagram(
 				registrationReference,
-				Datagram.createRequestDatagram(_type, _dataContent), null, null,
-				null);
+				Datagram.createRequestDatagram(_type, _data), null, null, null);
 
 			Assert.fail();
 		}
 		catch (NullPointerException npe) {
-			Assert.assertEquals("CompletionType set is null", npe.getMessage());
+			Assert.assertEquals(
+				"Completion type set is null", npe.getMessage());
 		}
 
-		// 5) CompletionType set is empty
+		// Completion type set is empty
 
 		try {
 			_mockIntraBand.sendDatagram(
 				registrationReference,
-				Datagram.createRequestDatagram(_type, _dataContent), null,
+				Datagram.createRequestDatagram(_type, _data), null,
 				EnumSet.noneOf(CompletionHandler.CompletionType.class), null);
 
 			Assert.fail();
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"CompletionType set is empty", iae.getMessage());
+				"Completion type set is empty", iae.getMessage());
 		}
 
-		// 6) CompleteHandler is null
+		// Complete handler is null
 
 		try {
 			_mockIntraBand.sendDatagram(
 				registrationReference,
-				Datagram.createRequestDatagram(_type, _dataContent), null,
+				Datagram.createRequestDatagram(_type, _data), null,
 				EnumSet.of(CompletionHandler.CompletionType.SUBMITTED), null);
 
 			Assert.fail();
 		}
 		catch (NullPointerException npe) {
-			Assert.assertEquals("CompleteHandler is null", npe.getMessage());
+			Assert.assertEquals("Complete handler is null", npe.getMessage());
 		}
 
-		// 7) TimeUnit is null
+		// Time unit is null
 
 		try {
 			_mockIntraBand.sendDatagram(
 				registrationReference,
-				Datagram.createRequestDatagram(_type, _dataContent), null,
+				Datagram.createRequestDatagram(_type, _data), null,
 				EnumSet.of(CompletionHandler.CompletionType.SUBMITTED),
 				new RecordCompletionHandler<Object>(), 1000, null);
 
 			Assert.fail();
 		}
 		catch (NullPointerException npe) {
-			Assert.assertEquals("TimeUnit is null", npe.getMessage());
+			Assert.assertEquals("Time unit is null", npe.getMessage());
 		}
 
-		// 8) None positive timeout
+		// None positive timeout
 
-		Datagram requestDatagram = Datagram.createRequestDatagram(
-			_type, _dataContent);
+		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
 		_mockIntraBand.sendDatagram(
 			registrationReference, requestDatagram, null,
@@ -1149,7 +1218,7 @@ public class BaseIntraBandTest {
 		long sequenceId = requestDatagram.getSequenceId();
 
 		Assert.assertEquals(
-			DEFAULT_TIMEOUT, _mockIntraBand.getDatagram().timeout);
+			_TIMEOUT_DEFAULT, _mockIntraBand.getDatagram().timeout);
 		Assert.assertEquals(1, _mockIntraBand.responseWaitingMap.size());
 		Assert.assertSame(
 			requestDatagram,
@@ -1158,7 +1227,7 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(
 			_mockIntraBand.timeoutMap.values().remove(sequenceId));
 
-		// 9) Coverting timeout
+		// Coverting timeout
 
 		_mockIntraBand.sendDatagram(
 			registrationReference, requestDatagram, null,
@@ -1176,7 +1245,7 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(
 			_mockIntraBand.timeoutMap.values().remove(sequenceId));
 
-		// 10) Default timeout
+		// Default timeout
 
 		_mockIntraBand.sendDatagram(
 			registrationReference, requestDatagram, null,
@@ -1184,13 +1253,13 @@ public class BaseIntraBandTest {
 			new RecordCompletionHandler<Object>());
 
 		Assert.assertEquals(
-			DEFAULT_TIMEOUT, _mockIntraBand.getDatagram().timeout);
+			_TIMEOUT_DEFAULT, _mockIntraBand.getDatagram().timeout);
 	}
 
 	@Test
 	public void testSendDatagramWithoutCallback() throws Exception {
 
-		// 1) RegistrationReference is null
+		// Registration reference is null
 
 		try {
 			_mockIntraBand.sendDatagram(null, null);
@@ -1199,10 +1268,10 @@ public class BaseIntraBandTest {
 		}
 		catch (NullPointerException npe) {
 			Assert.assertEquals(
-				"RegistrationReference is null", npe.getMessage());
+				"Registration reference is null", npe.getMessage());
 		}
 
-		// 2) RegistrationReference is cancelled
+		// Registration reference is cancelled
 
 		RegistrationReference registrationReference =
 			new MockRegistrationReference(_mockIntraBand);
@@ -1216,10 +1285,10 @@ public class BaseIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"RegistrationReference is not valid", iae.getMessage());
+				"Registration reference is invalid", iae.getMessage());
 		}
 
-		// 3) Datagram is null
+		// Datagram is null
 
 		registrationReference = new MockRegistrationReference(_mockIntraBand);
 
@@ -1232,9 +1301,9 @@ public class BaseIntraBandTest {
 			Assert.assertEquals("Datagram is null", npe.getMessage());
 		}
 
-		// 4) Normal send
+		// Normal send
 
-		Datagram datagram = Datagram.createRequestDatagram(_type, _dataContent);
+		Datagram datagram = Datagram.createRequestDatagram(_type, _data);
 
 		_mockIntraBand.sendDatagram(registrationReference, datagram);
 
@@ -1246,7 +1315,7 @@ public class BaseIntraBandTest {
 	@Test
 	public void testSendSyncDatagram() throws Exception {
 
-		// 1) RegistrationReference is null
+		// Registration reference is null
 
 		try {
 			_mockIntraBand.sendSyncDatagram(null, null);
@@ -1255,10 +1324,10 @@ public class BaseIntraBandTest {
 		}
 		catch (NullPointerException npe) {
 			Assert.assertEquals(
-				"RegistrationReference is null", npe.getMessage());
+				"Registration reference is null", npe.getMessage());
 		}
 
-		// 2) RegistrationReference is cancelled
+		// Registration reference is cancelled
 
 		RegistrationReference registrationReference =
 			new MockRegistrationReference(_mockIntraBand);
@@ -1272,10 +1341,10 @@ public class BaseIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"RegistrationReference is not valid", iae.getMessage());
+				"Registration reference is invalid", iae.getMessage());
 		}
 
-		// 3) Datagram is null
+		// Datagram is null
 
 		registrationReference = new MockRegistrationReference(_mockIntraBand);
 
@@ -1288,24 +1357,22 @@ public class BaseIntraBandTest {
 			Assert.assertEquals("Datagram is null", npe.getMessage());
 		}
 
-		// 4) TimeUnit is null
+		// Time unit is null
 
 		try {
 			_mockIntraBand.sendSyncDatagram(
 				registrationReference,
-				Datagram.createRequestDatagram(_type, _dataContent), 1000,
-				null);
+				Datagram.createRequestDatagram(_type, _data), 1000, null);
 
 			Assert.fail();
 		}
 		catch (NullPointerException npe) {
-			Assert.assertEquals("TimeUnit is null", npe.getMessage());
+			Assert.assertEquals("Time unit is null", npe.getMessage());
 		}
 
-		// 5) None positive timeout
+		// Timeout less than 1
 
-		Datagram requestDatagram = Datagram.createRequestDatagram(
-			_type, _dataContent);
+		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
 		try {
 			_mockIntraBand.sendSyncDatagram(
@@ -1319,9 +1386,9 @@ public class BaseIntraBandTest {
 		}
 
 		Assert.assertEquals(
-			DEFAULT_TIMEOUT, _mockIntraBand.getDatagram().timeout);
+			_TIMEOUT_DEFAULT, _mockIntraBand.getDatagram().timeout);
 
-		// 6) Coverting timeout
+		// Coverting timeout
 
 		try {
 			_mockIntraBand.sendSyncDatagram(
@@ -1335,12 +1402,12 @@ public class BaseIntraBandTest {
 
 		Assert.assertEquals(2000, requestDatagram.timeout);
 
-		// 7) Datagram writing IOException
+		// Datagram writing IOException
 
 		final IOException expectedIOException = new IOException(
-			"Force to fail");
+			"RecordDatagramReceiveHandler");
 
-		IntraBand intraBand = new MockIntraBand(DEFAULT_TIMEOUT) {
+		IntraBand intraBand = new MockIntraBand(_TIMEOUT_DEFAULT) {
 
 			@Override
 			protected void doSendDatagram(
@@ -1361,12 +1428,12 @@ public class BaseIntraBandTest {
 			Assert.assertSame(expectedIOException, ioe);
 		}
 
-		// 8) Replied
+		// Replied
 
 		final Datagram expectedDatagram = Datagram.createResponseDatagram(
-			requestDatagram, _dataContent);
+			requestDatagram, _data);
 
-		intraBand = new MockIntraBand(DEFAULT_TIMEOUT) {
+		intraBand = new MockIntraBand(_TIMEOUT_DEFAULT) {
 
 			@Override
 			protected void doSendDatagram(
@@ -1383,9 +1450,6 @@ public class BaseIntraBandTest {
 
 		Assert.assertSame(expectedDatagram, responseDatagram);
 
-		// 9) Invoke unused SendSyncDatagramCompletionHandler methods to satisfy
-		// code coverage
-
 		SendSyncDatagramCompletionHandler sendSyncDatagramCompletionHandler =
 			new SendSyncDatagramCompletionHandler();
 
@@ -1394,9 +1458,23 @@ public class BaseIntraBandTest {
 		sendSyncDatagramCompletionHandler.timeouted(null);
 	}
 
-	private byte[] _dataContent = "Datagram Sending Test".getBytes(
-		Charset.defaultCharset());
-	private MockIntraBand _mockIntraBand = new MockIntraBand(DEFAULT_TIMEOUT);
+	protected boolean hasLogMessage(
+		List<LogRecord> logRecords, String expectedMessage) {
+
+		LogRecord logRecord = logRecords.get(0);
+
+		String actualMessage = logRecord.getMessage();
+
+		return actualMessage.startsWith(expectedMessage);
+	}
+
+	private static final String _DATA_STRING =
+		BaseIntraBandTest.class.getName();
+
+	private static final long _TIMEOUT_DEFAULT = 1000;
+
+	private byte[] _data = _DATA_STRING.getBytes(Charset.defaultCharset());
+	private MockIntraBand _mockIntraBand = new MockIntraBand(_TIMEOUT_DEFAULT);
 	private byte _type = 1;
 
 	private static class MockGatheringByteChannel
@@ -1410,19 +1488,20 @@ public class BaseIntraBandTest {
 			return true;
 		}
 
-		public int write(ByteBuffer src) throws IOException {
+		public int write(ByteBuffer byteBuffer) throws IOException {
 			throw new IOException();
 		}
 
-		public long write(ByteBuffer[] srcs) throws IOException {
+		public long write(ByteBuffer[] byteBuffer) throws IOException {
 			throw new IOException();
 		}
 
-		public long write(ByteBuffer[] srcs, int offset, int length)
+		public long write(ByteBuffer[] byteBuffer, int offset, int length)
 			throws IOException {
 
 			throw new IOException();
 		}
+
 	}
 
 	private static class MockScatteringByteChannel
@@ -1440,11 +1519,11 @@ public class BaseIntraBandTest {
 			return true;
 		}
 
-		public int read(ByteBuffer dst) {
-			if (_eofOnDataBufferReading && (dst.capacity() == 14)) {
-				BigEndianCodec.putInt(dst.array(), 10, 1);
+		public int read(ByteBuffer byteBuffer) {
+			if (_eofOnDataBufferReading && (byteBuffer.capacity() == 14)) {
+				BigEndianCodec.putInt(byteBuffer.array(), 10, 1);
 
-				dst.position(dst.limit());
+				byteBuffer.position(byteBuffer.limit());
 
 				return 14;
 			}
@@ -1453,11 +1532,11 @@ public class BaseIntraBandTest {
 			}
 		}
 
-		public long read(ByteBuffer[] dsts) {
+		public long read(ByteBuffer[] byteBuffer) {
 			return -1;
 		}
 
-		public long read(ByteBuffer[] dsts, int offset, int length) {
+		public long read(ByteBuffer[] byteBuffer, int offset, int length) {
 			return -1;
 		}
 

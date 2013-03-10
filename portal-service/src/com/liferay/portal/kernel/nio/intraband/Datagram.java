@@ -101,7 +101,11 @@ public class Datagram {
 		return datagram;
 	}
 
-	public ByteBuffer getData() {
+	public byte[] getData() {
+		return _dataByteBuffer.array();
+	}
+
+	public ByteBuffer getDataByteBuffer() {
 		return _dataByteBuffer;
 	}
 

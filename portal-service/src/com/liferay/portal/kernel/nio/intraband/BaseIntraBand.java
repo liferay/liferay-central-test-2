@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.nio.intraband;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.nio.intraband.CompletionHandler.CompletionType;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.io.IOException;
 
@@ -27,6 +28,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.CountDownLatch;
@@ -42,18 +44,13 @@ public abstract class BaseIntraBand implements IntraBand {
 
 	public BaseIntraBand(long defaultTimeout) {
 		this.defaultTimeout = defaultTimeout;
-		responseWaitingMap = new ConcurrentHashMap<Long, Datagram>();
-		timeoutMap = new ConcurrentSkipListMap<Long, Long>();
-		datagramReceiveHandlersReference =
-			new AtomicReference<DatagramReceiveHandler[]>(
-				new DatagramReceiveHandler[256]);
-		open = true;
-		sequenceIdGenerator = new AtomicLong();
 	}
 
+	@SuppressWarnings("unused")
 	public void close() throws InterruptedException, IOException {
-		open = false;
 		datagramReceiveHandlersReference.set(null);
+
+		open = false;
 	}
 
 	public DatagramReceiveHandler[] getDatagramReceiveHandlers() {
@@ -62,13 +59,7 @@ public abstract class BaseIntraBand implements IntraBand {
 		DatagramReceiveHandler[] datagramReceiveHandlers =
 			datagramReceiveHandlersReference.get();
 
-		DatagramReceiveHandler[] copyDatagramReceiveHandlers =
-			new DatagramReceiveHandler[256];
-
-		System.arraycopy(
-			datagramReceiveHandlers, 0, copyDatagramReceiveHandlers, 0, 256);
-
-		return copyDatagramReceiveHandlers;
+		return ArrayUtil.clone(datagramReceiveHandlers);
 	}
 
 	public boolean isOpen() {
@@ -80,22 +71,17 @@ public abstract class BaseIntraBand implements IntraBand {
 
 		ensureOpen();
 
-		int index = ((int)type) & 0xFF;
+		int index = type & 0xFF;
 
 		DatagramReceiveHandler oldDatagramReceiveHandler = null;
 		DatagramReceiveHandler[] datagramReceiveHandlers = null;
 		DatagramReceiveHandler[] copyDatagramReceiveHandlers = null;
 
-		// CAS registering
-
 		do {
 			datagramReceiveHandlers = datagramReceiveHandlersReference.get();
 
-			copyDatagramReceiveHandlers = new DatagramReceiveHandler[256];
-
-			System.arraycopy(
-				datagramReceiveHandlers, 0, copyDatagramReceiveHandlers, 0,
-				256);
+			copyDatagramReceiveHandlers = ArrayUtil.clone(
+				datagramReceiveHandlers);
 
 			oldDatagramReceiveHandler = copyDatagramReceiveHandlers[index];
 
@@ -112,12 +98,12 @@ public abstract class BaseIntraBand implements IntraBand {
 		RegistrationReference registrationReference, Datagram datagram) {
 
 		if (registrationReference == null) {
-			throw new NullPointerException("RegistrationReference is null");
+			throw new NullPointerException("Registration reference is null");
 		}
 
 		if (!registrationReference.isValid()) {
 			throw new IllegalArgumentException(
-				"RegistrationReference is not valid");
+				"Registration reference is invalid");
 		}
 
 		if (datagram == null) {
@@ -146,12 +132,12 @@ public abstract class BaseIntraBand implements IntraBand {
 		TimeUnit timeUnit) {
 
 		if (registrationReference == null) {
-			throw new NullPointerException("RegistrationReference is null");
+			throw new NullPointerException("Registration reference is null");
 		}
 
 		if (!registrationReference.isValid()) {
 			throw new IllegalArgumentException(
-				"RegistrationReference is not valid");
+				"Registration reference is invalid");
 		}
 
 		if (datagram == null) {
@@ -159,19 +145,19 @@ public abstract class BaseIntraBand implements IntraBand {
 		}
 
 		if (completionTypes == null) {
-			throw new NullPointerException("CompletionType set is null");
+			throw new NullPointerException("Completion type set is null");
 		}
 
 		if (completionTypes.isEmpty()) {
-			throw new IllegalArgumentException("CompletionType set is empty");
+			throw new IllegalArgumentException("Completion type set is empty");
 		}
 
 		if (completionHandler == null) {
-			throw new NullPointerException("CompleteHandler is null");
+			throw new NullPointerException("Complete handler is null");
 		}
 
 		if (timeUnit == null) {
-			throw new NullPointerException("TimeUnit is null");
+			throw new NullPointerException("Time unit is null");
 		}
 
 		if (timeout <= 0) {
@@ -183,18 +169,18 @@ public abstract class BaseIntraBand implements IntraBand {
 
 		ensureOpen();
 
-		datagram.setAckRequest(
-			completionTypes.contains(CompletionType.DELIVERED));
 		datagram.attachment = attachment;
 		datagram.completionHandler =
 			(CompletionHandler<Object>)completionHandler;
 		datagram.completionTypes = completionTypes;
+		datagram.timeout = timeout;
+
+		datagram.setAckRequest(
+			completionTypes.contains(CompletionType.DELIVERED));
 
 		if (datagram.getSequenceId() == 0) {
 			datagram.setSequenceId(generateSequenceId());
 		}
-
-		datagram.timeout = timeout;
 
 		if (completionTypes.contains(CompletionType.DELIVERED) ||
 			completionTypes.contains(CompletionType.REPLIED)) {
@@ -220,12 +206,12 @@ public abstract class BaseIntraBand implements IntraBand {
 		throws InterruptedException, IOException, TimeoutException {
 
 		if (registrationReference == null) {
-			throw new NullPointerException("RegistrationReference is null");
+			throw new NullPointerException("Registration reference is null");
 		}
 
 		if (!registrationReference.isValid()) {
 			throw new IllegalArgumentException(
-				"RegistrationReference is not valid");
+				"Registration reference is invalid");
 		}
 
 		if (datagram == null) {
@@ -233,7 +219,7 @@ public abstract class BaseIntraBand implements IntraBand {
 		}
 
 		if (timeUnit == null) {
-			throw new NullPointerException("TimeUnit is null");
+			throw new NullPointerException("Time unit is null");
 		}
 
 		if (timeout <= 0) {
@@ -265,31 +251,32 @@ public abstract class BaseIntraBand implements IntraBand {
 	}
 
 	protected void cleanUpTimeoutResponseWaitingDatagrams() {
-		long currentTime = System.currentTimeMillis();
+		Map<Long, Long> map = timeoutMap.headMap(
+			System.currentTimeMillis(), true);
 
-		Map<Long, Long> removeMap = timeoutMap.headMap(currentTime, true);
+		if (map.isEmpty()) {
+			return;
+		}
 
-		if (!removeMap.isEmpty()) {
-			Iterator<Map.Entry<Long, Long>> removeIterator =
-				removeMap.entrySet().iterator();
+		Set<Map.Entry<Long, Long>> set = map.entrySet();
 
-			while (removeIterator.hasNext()) {
-				Map.Entry<Long, Long> removeEntry = removeIterator.next();
+		Iterator<Map.Entry<Long, Long>> iterator = set.iterator();
 
-				removeIterator.remove();
+		while (iterator.hasNext()) {
+			Map.Entry<Long, Long> entry = iterator.next();
 
-				Long sequenceId = removeEntry.getValue();
+			iterator.remove();
 
-				Datagram datagram = responseWaitingMap.remove(sequenceId);
+			Long sequenceId = entry.getValue();
 
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Removed timeout response waiting Datagram " +
-						datagram);
-				}
+			Datagram datagram = responseWaitingMap.remove(sequenceId);
 
-				datagram.completionHandler.timeouted(datagram.attachment);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Removed timeout response waiting datagram " + datagram);
 			}
+
+			datagram.completionHandler.timeouted(datagram.attachment);
 		}
 	}
 
@@ -306,12 +293,11 @@ public abstract class BaseIntraBand implements IntraBand {
 
 		datagram.completionHandler = sendSyncDatagramCompletionHandler;
 		datagram.completionTypes = REPLIED_ENUM_SET;
+		datagram.timeout = timeout;
 
 		if (datagram.getSequenceId() == 0) {
 			datagram.setSequenceId(generateSequenceId());
 		}
-
-		datagram.timeout = timeout;
 
 		addResponseWaitingDatagram(datagram);
 
@@ -331,21 +317,17 @@ public abstract class BaseIntraBand implements IntraBand {
 
 		if (sequenceId <= 0) {
 
-			// overflow, reset
-
-			// Here we assume long number scope is large enough to keep a huge
-			// window time between the oldest and latest response waiting
-			// Datagrams.
-			// In a real system, far before latest response waiting Datagram's
-			// id catching up the oldest one causing id confliction, we shall
-			// see OOM already. Assume the system has no other pieces costing
-			// memory (which is so not true), to see an id confliction, we need
-			// to hold up 2^63 references to Datagram(Positive id only). Even we
-			// ignore the data inside Datagram, just by references themselves,
-			// we need 2^65 byte = 32 EB(Exbibyte) memory to hold up, which is
-			// impossible to any current exist computer system in the world.
-
-			// Spinning reseting negative id generator back to start
+			// We assume a long primitive type can hold enough numbers to keep a
+			// large window time between the earliest and the latest response
+			// waiting datagrams. In a real system, we will run out of memory
+			// long before the latest response waiting datagram's ID can catch
+			// up to the earliest response waiting datagram's ID to cause an ID
+			// conflict. Even if the sequence ID generator was the only code to
+			// use memory (which will never be true), to see an ID conflict, we
+			// need to hold up 2^63 references. Even if we did not factor in the
+			// data inside the datagram, and considered just the references
+			// themselves, we would need 2^65 byte or 32 EB (exbibyte) of
+			// memory, which is impossible in existing computer systems.
 
 			while (true) {
 				if (sequenceIdGenerator.compareAndSet(sequenceId, 1)) {
@@ -357,7 +339,6 @@ public abstract class BaseIntraBand implements IntraBand {
 				// Another concurrent reset just happened
 
 				if (sequenceId > 0) {
-
 					return sequenceId;
 				}
 
@@ -385,9 +366,6 @@ public abstract class BaseIntraBand implements IntraBand {
 					Datagram.createReceiveDatagram());
 
 				if (datagram.isAckResponse()) {
-
-					// 1) ACK response
-
 					Datagram requestDatagram = removeResponseWaitingDatagram(
 						datagram);
 
@@ -398,14 +376,13 @@ public abstract class BaseIntraBand implements IntraBand {
 						}
 					}
 					else {
-						requestDatagram.completionHandler.delivered(
-							requestDatagram.attachment);
+						CompletionHandler<Object> completionHandler =
+							requestDatagram.completionHandler;
+
+						completionHandler.delivered(requestDatagram.attachment);
 					}
 				}
 				else if (datagram.isResponse()) {
-
-					// 2) Normal response
-
 					Datagram requestDatagram = removeResponseWaitingDatagram(
 						datagram);
 
@@ -414,20 +391,24 @@ public abstract class BaseIntraBand implements IntraBand {
 							_log.warn("Dropped ownerless response " + datagram);
 						}
 					}
-					else if (requestDatagram.completionTypes.contains(
-						CompletionType.REPLIED)) {
+					else {
+						EnumSet<CompletionType> completionTypes =
+							requestDatagram.completionTypes;
 
-						requestDatagram.completionHandler.replied(
-							requestDatagram.attachment, datagram);
-					}
-					else if (_log.isWarnEnabled()) {
-						_log.warn("Dropped unconcerned response " + datagram);
+						if (completionTypes.contains(CompletionType.REPLIED)) {
+							CompletionHandler<Object> completionHandler =
+								requestDatagram.completionHandler;
+
+							completionHandler.replied(
+								requestDatagram.attachment, datagram);
+						}
+						else if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Dropped unconcerned response " + datagram);
+						}
 					}
 				}
 				else {
-
-					// 3) ACK request
-
 					if (datagram.isAckRequest()) {
 						Datagram ackResponseDatagram =
 							Datagram.createACKResponseDatagram(
@@ -438,9 +419,7 @@ public abstract class BaseIntraBand implements IntraBand {
 							ackResponseDatagram);
 					}
 
-					// 4) Normal request, DatagramReceiveHandler dispatching
-
-					int index = ((int)datagram.getType()) & 0xFF;
+					int index = datagram.getType() & 0xFF;
 
 					DatagramReceiveHandler datagramReceiveHandler =
 						datagramReceiveHandlersReference.get()[index];
@@ -457,7 +436,7 @@ public abstract class BaseIntraBand implements IntraBand {
 								datagram);
 						}
 						catch (Throwable t) {
-							_log.error("Dispatching failure.", t);
+							_log.error("Unable to dispatch", t);
 						}
 					}
 				}
@@ -491,30 +470,21 @@ public abstract class BaseIntraBand implements IntraBand {
 			if (datagram.writeTo(gatheringByteChannel)) {
 				channelContext.setWritingDatagram(null);
 
-				// Notify CompleteHandler if there is any.
-
-				EnumSet<CompletionType> interestCompletionTypes =
+				EnumSet<CompletionType> completionTypes =
 					datagram.completionTypes;
 
-				if (interestCompletionTypes != null) {
-					if (interestCompletionTypes.contains(
-							CompletionType.SUBMITTED)) {
-
-						Object attachment = datagram.attachment;
-
+				if (completionTypes != null) {
+					if (completionTypes.contains(CompletionType.SUBMITTED)) {
 						CompletionHandler<Object> completeHandler =
 							datagram.completionHandler;
 
-						completeHandler.submitted(attachment);
+						completeHandler.submitted(datagram.attachment);
 					}
 				}
 
 				return true;
 			}
 			else {
-
-				// Channel is no longer writable
-
 				return false;
 			}
 		}
@@ -524,8 +494,11 @@ public abstract class BaseIntraBand implements IntraBand {
 
 			registrationReference.cancelRegistration();
 
-			if (datagram.completionHandler != null) {
-				datagram.completionHandler.failed(datagram.attachment, ioe);
+			CompletionHandler<Object> completionHandler =
+				datagram.completionHandler;
+
+			if (completionHandler != null) {
+				completionHandler.failed(datagram.attachment, ioe);
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -536,7 +509,7 @@ public abstract class BaseIntraBand implements IntraBand {
 			else if (_log.isInfoEnabled()) {
 				_log.info(
 					"Broken write channel, unregister " +
-					registrationReference);
+						registrationReference);
 			}
 
 			return false;
@@ -562,11 +535,15 @@ public abstract class BaseIntraBand implements IntraBand {
 
 	protected final long defaultTimeout;
 	protected final AtomicReference<DatagramReceiveHandler[]>
-		datagramReceiveHandlersReference;
-	protected volatile boolean open;
-	protected final Map<Long, Datagram> responseWaitingMap;
-	protected final AtomicLong sequenceIdGenerator;
-	protected final NavigableMap<Long, Long> timeoutMap;
+		datagramReceiveHandlersReference =
+			new AtomicReference<DatagramReceiveHandler[]>(
+				new DatagramReceiveHandler[256]);
+	protected volatile boolean open = true;
+	protected final Map<Long, Datagram> responseWaitingMap =
+		new ConcurrentHashMap<Long, Datagram>();
+	protected final AtomicLong sequenceIdGenerator = new AtomicLong();
+	protected final NavigableMap<Long, Long> timeoutMap =
+		new ConcurrentSkipListMap<Long, Long>();
 
 	protected static class SendSyncDatagramCompletionHandler
 		implements CompletionHandler<Object> {
@@ -579,6 +556,7 @@ public abstract class BaseIntraBand implements IntraBand {
 			// Must set before count down to ensure memory visibility
 
 			_ioe = ioe;
+
 			_countDownLatch.countDown();
 		}
 
@@ -587,6 +565,7 @@ public abstract class BaseIntraBand implements IntraBand {
 			// Must set before count down to ensure memory visibility
 
 			_datagram = datagram;
+
 			_countDownLatch.countDown();
 		}
 
@@ -613,12 +592,7 @@ public abstract class BaseIntraBand implements IntraBand {
 			return _datagram;
 		}
 
-		// This final is crucial for thread safety
-
 		private final CountDownLatch _countDownLatch = new CountDownLatch(1);
-
-		// Piggyback memory visibility on _countDownLatch
-
 		private Datagram _datagram;
 		private IOException _ioe;
 

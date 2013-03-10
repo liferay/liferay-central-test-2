@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,12 +25,14 @@ public class RecordCompletionHandler<A> implements CompletionHandler<A> {
 
 	public void delivered(A attachment) {
 		_attachment = attachment;
+
 		_deliveredCountDownLatch.countDown();
 	}
 
 	public void failed(A attachment, IOException ioe) {
 		_attachment = attachment;
 		_ioe = ioe;
+
 		_failedCountDownLatch.countDown();
 	}
 
@@ -44,16 +46,19 @@ public class RecordCompletionHandler<A> implements CompletionHandler<A> {
 
 	public void replied(A attachment, Datagram datagram) {
 		_attachment = attachment;
+
 		_repliedCountDownLatch.countDown();
 	}
 
 	public void submitted(A attachment) {
 		_attachment = attachment;
+
 		_submittedCountDownLatch.countDown();
 	}
 
 	public void timeouted(A attachment) {
 		_attachment = attachment;
+
 		_timeoutedCountDownLatch.countDown();
 	}
 

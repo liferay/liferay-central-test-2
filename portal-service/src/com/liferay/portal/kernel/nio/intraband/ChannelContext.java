@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,9 +55,9 @@ public class ChannelContext {
 		_writingDatagram = writingDatagram;
 	}
 
-	// All non-final fields are not threadsafe. They depend on external logic to
-	// do thread safe publication, after that these fields must be accessed
-	// sololy by polling threads to remain thread safety.
+	// All nonfinal fields are not thread safe. They depend on external logic to
+	// do thread safe publication and must be accessed solely by polling threads
+	// to remain thread safety.
 
 	private Datagram _readingDatagram;
 	private RegistrationReference _registrationReference;
