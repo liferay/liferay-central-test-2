@@ -173,7 +173,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	/**
 	 * @deprecated As of 6.2.0 replaced by {@link #discardDraft(long, String,
-	 	 *             double)}
+	 *             double)}
 	 */
 	public void deletePage(long nodeId, String title, double version)
 		throws PortalException, SystemException {
