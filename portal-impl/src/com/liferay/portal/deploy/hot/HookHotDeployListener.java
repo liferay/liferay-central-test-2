@@ -150,7 +150,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.DefaultControlPanelEntryFactory;
 import com.liferay.portlet.documentlibrary.antivirus.AntivirusScanner;
@@ -312,7 +311,7 @@ public class HookHotDeployListener
 
 	protected boolean checkPermission(
 		String name, ClassLoader portletClassLoader, Object subject,
-		String comment) {
+		String message) {
 
 		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
 			portletClassLoader);
@@ -329,7 +328,7 @@ public class HookHotDeployListener
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(comment);
+			_log.info(message);
 		}
 
 		return false;
@@ -1217,8 +1216,7 @@ public class HookHotDeployListener
 
 		if (!checkPermission(
 				PACLConstants.PORTAL_HOOK_PERMISSION_CUSTOM_JSP_DIR,
-				portletClassLoader, null,
-				"Rejecting custom JSP directory")) {
+				portletClassLoader, null, "Rejecting custom JSP directory")) {
 
 			return;
 		}
@@ -2199,8 +2197,7 @@ public class HookHotDeployListener
 
 		if (!checkPermission(
 				PACLConstants.PORTAL_HOOK_PERMISSION_SERVLET_FILTERS,
-				portletClassLoader, null,
-				"Rejecting servlet filters")) {
+				portletClassLoader, null, "Rejecting servlet filters")) {
 
 			return;
 		}
