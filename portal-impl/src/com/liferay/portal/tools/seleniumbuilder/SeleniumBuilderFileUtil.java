@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -42,35 +43,30 @@ public class SeleniumBuilderFileUtil {
 		return _baseDir;
 	}
 
-	public Set<String> getChildElementNameSet(Element element) {
-		return getChildElementNameSet(new TreeSet<String>(), element);
-	}
-
-	public Set<String> getChildElementNameSet(
-		Set<String> nameSet, Element element) {
+	public Set<String> getChildElementNames(Element element) {
+		Set<String> childElementNames = new TreeSet<String>();
 
 		List<Element> childElements = element.elements();
 
 		if (childElements.isEmpty()) {
-			return nameSet;
+			return childElementNames;
 		}
-		else {
-			for (Element childElement : childElements) {
-				String childElementName = childElement.attributeValue("name");
 
-				if (!(childElementName == null)) {
-					int x = childElementName.lastIndexOf(StringPool.POUND);
+		for (Element childElement : childElements) {
+			String childElementName = childElement.attributeValue("name");
 
-					if (!(x == -1)) {
-						nameSet.add(childElementName.substring(0, x));
-					}
+			if (childElementName != null) {
+				int x = childElementName.lastIndexOf(StringPool.POUND);
+
+				if (x != -1) {
+					childElementNames.add(childElementName.substring(0, x));
 				}
-
-				getChildElementNameSet(nameSet, childElement);
 			}
+
+			childElementNames.addAll(getChildElementNames(childElement));
 		}
 
-		return nameSet;
+		return childElementNames;
 	}
 
 	public String getClassName(String fileName) {
@@ -179,6 +175,10 @@ public class SeleniumBuilderFileUtil {
 
 			return i;
 		}
+	}
+
+	public String getVariableName(String name) {
+		return TextFormatter.format(name, TextFormatter.I);
 	}
 
 	public String normalizeFileName(String fileName) {

@@ -24,10 +24,10 @@ public class ${seleniumBuilderContext.getFunctionSimpleClassName(functionName)} 
 		</#list>
 
 		) {
-			<#assign objectNameSet = seleniumBuilderFileUtil.getChildElementNameSet(functionCommandElement)>
+			<#assign childElementNames = seleniumBuilderFileUtil.getChildElementNames(functionCommandElement)>
 
-			<#list objectNameSet as objectName>
-				${objectName}Function ${stringUtil.lowerCaseFirstLetter(objectName)}Function = new ${objectName}Function(liferaySelenium);
+			<#list childElementNames as childElementName>
+				${childElementName}Function ${seleniumBuilderFileUtil.getVariableName(childElementName)}Function = new ${childElementName}Function(liferaySelenium);
 			</#list>
 		}
 	</#list>

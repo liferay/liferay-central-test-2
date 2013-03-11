@@ -16,7 +16,6 @@ package com.liferay.portal.tools.seleniumbuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.StringUtil_IW;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +37,6 @@ public class BaseConverter {
 
 		context.put("seleniumBuilderContext", seleniumBuilderContext);
 		context.put("seleniumBuilderFileUtil", seleniumBuilderFileUtil);
-		context.put("stringUtil", StringUtil_IW.getInstance());
 
 		return context;
 	}
