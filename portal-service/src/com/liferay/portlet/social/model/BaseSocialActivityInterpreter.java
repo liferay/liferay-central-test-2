@@ -129,11 +129,7 @@ public abstract class BaseSocialActivityInterpreter
 			groupName = getGroupName(activity.getGroupId(), themeDisplay);
 		}
 
-		// Link
-
 		String link = getLink(activity, themeDisplay);
-
-		// Title
 
 		Object[] titleArguments = getTitleArguments(
 			groupName, activity, link, getTitle(activity, themeDisplay),
@@ -142,8 +138,6 @@ public abstract class BaseSocialActivityInterpreter
 		String titlePattern = getTitlePattern(groupName, activity);
 
 		String title = themeDisplay.translate(titlePattern, titleArguments);
-
-		// Body
 
 		String body = getBody(activity, themeDisplay);
 
