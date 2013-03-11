@@ -316,19 +316,19 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 					LayoutParentLayoutIdException.NOT_PARENTABLE);
 			}
 
-			// Layout cannot become descendant of itself
-
-			if (PortalUtil.isLayoutDescendant(layout, parentLayoutId)) {
-				throw new LayoutParentLayoutIdException(
-					LayoutParentLayoutIdException.SELF_DESCENDANT);
-			}
-
 			// Layout cannot become a child of a layout that is not sortable
 			// because it is linked to a layout set prototype
 
 			if (!SitesUtil.isLayoutSortable(parentLayout)) {
 				throw new LayoutParentLayoutIdException(
 					LayoutParentLayoutIdException.NOT_SORTABLE);
+			}
+
+			// Layout cannot become descendant of itself
+
+			if (PortalUtil.isLayoutDescendant(layout, parentLayoutId)) {
+				throw new LayoutParentLayoutIdException(
+					LayoutParentLayoutIdException.SELF_DESCENDANT);
 			}
 
 			// If layout is moved, the new first layout must be valid
