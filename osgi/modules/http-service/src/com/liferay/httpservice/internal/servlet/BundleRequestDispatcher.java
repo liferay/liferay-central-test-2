@@ -15,8 +15,6 @@
 package com.liferay.httpservice.internal.servlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
 import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.io.IOException;
@@ -45,9 +43,6 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 		try {
 			ClassLoader pluginClassLoader =
 				_bundleServletContext.getClassLoader();
-
-			PACLPolicy pluginPACLPolicy = PACLPolicyManager.getPACLPolicy(
-				pluginClassLoader);
 
 			ClassLoaderUtil.setContextClassLoader(pluginClassLoader);
 
