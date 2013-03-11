@@ -295,9 +295,6 @@ public class TrashImpl implements Trash {
 			return null;
 		}
 
-		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
-			className, classPK);
-
 		String namespace = PortalUtil.getPortletNamespace(PortletKeys.TRASH);
 
 		Map<String, String[]> params = new HashMap<String, String[]>();
@@ -306,6 +303,9 @@ public class TrashImpl implements Trash {
 			namespace + "struts_action", new String[] {"/trash/view_content"});
 		params.put(
 			namespace + "redirect", new String[] {themeDisplay.getURLCurrent()});
+
+		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
+			className, classPK);
 
 		if (trashEntry.getRootEntry() != null) {
 			params.put(namespace + "className", new String[] {className});

@@ -74,7 +74,6 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		StringBundler sb = new StringBundler(3);
 
 		sb.append(wrapLink(fileEntryLink, "download-file", themeDisplay));
-
 		sb.append(StringPool.SPACE);
 
 		String folderLink = getFolderLink(fileEntry, themeDisplay);

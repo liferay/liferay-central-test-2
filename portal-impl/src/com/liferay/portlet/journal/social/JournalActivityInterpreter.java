@@ -43,9 +43,8 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 	protected String getLink(SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getJournalArticle(
-				activity.getClassPK());
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			activity.getClassPK());
 
 		if (TrashUtil.isInTrash(
 				JournalArticle.class.getName(), article.getResourcePrimKey())) {
@@ -54,8 +53,6 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				themeDisplay);
 		}
-
-		String link = null;
 
 		JournalArticle lastestArticle =
 			JournalArticleLocalServiceUtil.getLatestArticle(
@@ -67,13 +64,12 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
 				themeDisplay.getScopeGroup(), false, themeDisplay);
 
-			link =
-				groupFriendlyURL.concat(
-					JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
-						lastestArticle.getUrlTitle());
+			return groupFriendlyURL.concat(
+				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
+					lastestArticle.getUrlTitle());
 		}
 
-		return link;
+		return null;
 	}
 
 	@Override
@@ -81,9 +77,8 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getJournalArticle(
-				activity.getClassPK());
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			activity.getClassPK());
 
 		return article.getTitle(themeDisplay.getLocale());
 	}
@@ -138,10 +133,6 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			String actionId, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getJournalArticle(
-				activity.getClassPK());
-
 		int activityType = activity.getType();
 
 		if ((activityType == JournalActivityKeys.ADD_ARTICLE) &&
@@ -151,11 +142,15 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			return false;
 		}
-		else if ((activityType == JournalActivityKeys.UPDATE_ARTICLE) &&
-			!JournalArticlePermission.contains(
-				permissionChecker, article, ActionKeys.UPDATE)) {
+		else if (activityType == JournalActivityKeys.UPDATE_ARTICLE) {
+			JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+				activity.getClassPK());
 
-			return false;
+			if (!JournalArticlePermission.contains(
+					permissionChecker, article, ActionKeys.UPDATE)) {
+
+				return false;
+			}
 		}
 
 		return true;

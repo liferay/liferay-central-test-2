@@ -75,20 +75,15 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			displayDate = dateFormatDate.format(entry.getDisplayDate());
 		}
 
-		Object[] titleArguments = new Object[] {
+		return new Object[] {
 			groupName, creatorUserName, receiverUserName, displayTitle,
 			displayDate
 		};
-
-		return titleArguments;
 	}
 
 	@Override
 	protected String getTitlePattern(String groupName, SocialActivity activity)
 		throws Exception {
-
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
-			activity.getClassPK());
 
 		int activityType = activity.getType();
 
@@ -103,6 +98,9 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
+			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
+				activity.getClassPK());
+
 			if (entry.getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 				if (Validator.isNull(groupName)) {
 					return "activity-blogs-scheduled-entry";

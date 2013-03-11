@@ -53,8 +53,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String attachmentTitle = StringPool.BLANK;
-
 		int activityType = activity.getType();
 
 		if ((activityType == SocialActivityConstants.TYPE_ADD_ATTACHMENT) ||
@@ -96,15 +94,14 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 				sb.append("&fileName=");
 				sb.append(fileEntryTitle);
 
-				attachmentTitle = wrapLink(
-					sb.toString(), HtmlUtil.escape(fileEntryTitle));
+				return wrapLink(sb.toString(), HtmlUtil.escape(fileEntryTitle));
 			}
 			else {
-				attachmentTitle = HtmlUtil.escape(fileEntryTitle);
+				return HtmlUtil.escape(fileEntryTitle);
 			}
 		}
 
-		return attachmentTitle;
+		return StringPool.BLANK;
 	}
 
 	@Override
@@ -150,12 +147,10 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			title = wrapLink(link, title);
 		}
 
-		Object[] titleArguments = new Object[] {
+		return new Object[] {
 			groupName, creatorUserName, title,
 			getAttachmentTitle(activity, pageResource, themeDisplay)
 		};
-
-		return titleArguments;
 	}
 
 	@Override
@@ -254,13 +249,13 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			return false;
 		}
 
-		WikiPageResource pageResource =
-			WikiPageResourceLocalServiceUtil.getPageResource(
-				activity.getClassPK());
-
 		int activityType = activity.getType();
 
 		if (activityType == WikiActivityKeys.UPDATE_PAGE) {
+			WikiPageResource pageResource =
+				WikiPageResourceLocalServiceUtil.getPageResource(
+					activity.getClassPK());
+
 			double version = GetterUtil.getDouble(
 				activity.getExtraDataValue("version"));
 
