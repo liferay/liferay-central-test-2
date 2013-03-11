@@ -109,7 +109,8 @@ public interface WikiPageService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated As of 6.2.0
+	* @deprecated As of 6.2.0 replaced by {@link #discardDraft(long, String,
+	double)}
 	*/
 	public void deletePage(long nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -130,6 +131,10 @@ public interface WikiPageService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteTrashPageAttachments(long nodeId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void discardDraft(long nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

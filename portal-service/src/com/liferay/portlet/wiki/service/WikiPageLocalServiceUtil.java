@@ -378,7 +378,8 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated As of 6.2.0
+	* @deprecated As of 6.2.0 replaced by {@link #discardDraft(long, String,
+	double)}
 	*/
 	public static void deletePage(long nodeId, java.lang.String title,
 		double version)
@@ -425,6 +426,13 @@ public class WikiPageLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTrashPageAttachments(nodeId, title);
+	}
+
+	public static void discardDraft(long nodeId, java.lang.String title,
+		double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().discardDraft(nodeId, title, version);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage fetchPage(

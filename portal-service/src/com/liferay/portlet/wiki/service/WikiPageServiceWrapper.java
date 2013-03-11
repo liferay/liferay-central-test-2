@@ -119,7 +119,8 @@ public class WikiPageServiceWrapper implements WikiPageService,
 	}
 
 	/**
-	* @deprecated As of 6.2.0
+	* @deprecated As of 6.2.0 replaced by {@link #discardDraft(long, String,
+	double)}
 	*/
 	public void deletePage(long nodeId, java.lang.String title, double version)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -152,6 +153,12 @@ public class WikiPageServiceWrapper implements WikiPageService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiPageService.deleteTrashPageAttachments(nodeId, title);
+	}
+
+	public void discardDraft(long nodeId, java.lang.String title, double version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageService.discardDraft(nodeId, title, version);
 	}
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildren(
