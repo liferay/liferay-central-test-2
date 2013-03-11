@@ -324,9 +324,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 	var timeZoneSensitiveCheckbox = A.one('#<portlet:namespace />timeZoneSensitiveCheckbox');
 
-	var startDateHour = document.getElementsByName("<portlet:namespace />startDateHour");
-	var startDateMinute = document.getElementsByName("<portlet:namespace />startDateMinute");
-	var startDateAmPm = document.getElementsByName("<portlet:namespace />startDateAmPm");
+	var startDateHour = document.<portlet:namespace />fm.<portlet:namespace />startDateHour;
+	var startDateMinute = document.<portlet:namespace />fm.<portlet:namespace />startDateMinute;
+	var startDateAmPm = document.<portlet:namespace />fm.<portlet:namespace />startDateAmPm;
 
 	allDayCheckbox.on(
 		'change',
@@ -345,18 +345,18 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				timeZoneSensitiveCheckbox.attr('checked', false);
 				timeZoneSensitiveCheckbox.attr('disabled', true);
 
-				startDateHour[0].disabled = true;
-				startDateMinute[0].disabled = true;
-				startDateAmPm[0].disabled = true;
+				startDateHour.disabled = true;
+				startDateMinute.disabled = true;
+				startDateAmPm.disabled = true;
 			}
 			else {
 				durationHour.attr('disabled', false);
 				durationMinute.attr('disabled', false);
 				timeZoneSensitiveCheckbox.attr('disabled', false);
 
-				startDateHour[0].disabled = false;
-				startDateMinute[0].disabled = false;
-				startDateAmPm[0].disabled = false;
+				startDateHour.disabled = false;
+				startDateMinute.disabled = false;
+				startDateAmPm.disabled = false;
 
 				if (timeZoneSensitiveCheckbox.previous().val() === 'true') {
 					timeZoneSensitiveCheckbox.attr('checked', true);
