@@ -1048,14 +1048,14 @@ public class WebDriverToSeleniumBridge
 		Set<String> windowHandles = getWindowHandles();
 
 		if (windowID.equals("") || windowID.equals("null")) {
-			String currentWindowTitle = getTitle();
+			String title = getTitle();
 
 			for (String windowHandle : windowHandles) {
 				WebDriver.TargetLocator targetLocator = switchTo();
 
 				targetLocator.window(windowHandle);
 
-				if (!currentWindowTitle.equals(getTitle())) {
+				if (!title.equals(getTitle())) {
 					return;
 				}
 			}
@@ -1069,14 +1069,14 @@ public class WebDriverToSeleniumBridge
 		Set<String> windowHandles = getWindowHandles();
 
 		if (windowID.equals("name=undefined")) {
-			String currentWindowTitle = getTitle();
+			String title = getTitle();
 
 			for (String windowHandle : windowHandles) {
 				WebDriver.TargetLocator targetLocator = switchTo();
 
 				targetLocator.window(windowHandle);
 
-				if (!currentWindowTitle.equals(getTitle())) {
+				if (!title.equals(getTitle())) {
 					return;
 				}
 			}
