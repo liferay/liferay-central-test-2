@@ -39,13 +39,13 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 		return _assetEntry;
 	}
 
-	public String getExtraDataProperty(String property) throws JSONException {
+	public String getExtraDataValue(String key) throws JSONException {
 		if (_extraDataJSONObject == null) {
 			_extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 				getExtraData());
 		}
 
-		return _extraDataJSONObject.getString(property);
+		return _extraDataJSONObject.getString(key);
 	}
 
 	public boolean isClassName(String className) {

@@ -67,7 +67,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			try {
 				long fileEntryId = GetterUtil.getLong(
-					activity.getExtraDataProperty("fileEntryId"));
+					activity.getExtraDataValue("fileEntryId"));
 
 				fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 					fileEntryId);
@@ -81,7 +81,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 				fileVersion = fileEntry.getFileVersion();
 			}
 
-			String fileEntryTitle = activity.getExtraDataProperty("title");
+			String fileEntryTitle = activity.getExtraDataValue("title");
 
 			if ((fileVersion != null) && !fileVersion.isInTrash()) {
 				StringBundler sb = new StringBundler(9);
@@ -262,7 +262,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		if (activityType == WikiActivityKeys.UPDATE_PAGE) {
 			double version = GetterUtil.getDouble(
-				activity.getExtraDataProperty("version"));
+				activity.getExtraDataValue("version"));
 
 			WikiPage page = WikiPageLocalServiceUtil.getPage(
 				pageResource.getNodeId(), pageResource.getTitle(), version);
