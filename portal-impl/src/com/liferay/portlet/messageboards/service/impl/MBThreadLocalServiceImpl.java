@@ -1051,7 +1051,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			}
 		}
 
-		// Stats
+		// Statistics
 
 		for (long userId : userIds) {
 			mbStatsUserLocalService.updateStatsUser(groupId, userId);
