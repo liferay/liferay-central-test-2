@@ -99,8 +99,6 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			permissionChecker, activity.getClassPK(), actionId);
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		CalEvent.class.getName()
-	};
+	private static final String[] _CLASS_NAMES = {CalEvent.class.getName()};
 
 }

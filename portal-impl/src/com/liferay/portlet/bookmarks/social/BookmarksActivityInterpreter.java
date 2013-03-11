@@ -155,8 +155,7 @@ public class BookmarksActivityInterpreter
 		return false;
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		BookmarksEntry.class.getName(), BookmarksFolder.class.getName()
-	};
+	private static final String[] _CLASS_NAMES =
+		{BookmarksEntry.class.getName(), BookmarksFolder.class.getName()};
 
 }

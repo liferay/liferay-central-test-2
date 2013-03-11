@@ -177,8 +177,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			permissionChecker, message.getMessageId(), actionId);
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		MBMessage.class.getName(), MBThread.class.getName()
-	};
+	private static final String[] _CLASS_NAMES =
+		{MBMessage.class.getName(), MBThread.class.getName()};
 
 }

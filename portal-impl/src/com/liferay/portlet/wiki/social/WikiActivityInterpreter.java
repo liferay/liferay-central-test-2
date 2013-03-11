@@ -274,8 +274,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		return true;
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		WikiPage.class.getName()
-	};
+	private static final String[] _CLASS_NAMES = {WikiPage.class.getName()};
 
 }

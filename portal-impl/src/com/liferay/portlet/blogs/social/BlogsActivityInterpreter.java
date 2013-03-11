@@ -158,8 +158,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			permissionChecker, activity.getClassPK(), actionId);
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		BlogsEntry.class.getName()
-	};
+	private static final String[] _CLASS_NAMES = {BlogsEntry.class.getName()};
 
 }

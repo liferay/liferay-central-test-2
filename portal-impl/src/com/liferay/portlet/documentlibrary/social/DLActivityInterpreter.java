@@ -236,8 +236,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		return false;
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		DLFileEntry.class.getName(), DLFolder.class.getName()
-	};
+	private static final String[] _CLASS_NAMES =
+		{DLFileEntry.class.getName(), DLFolder.class.getName()};
 
 }

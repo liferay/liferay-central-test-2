@@ -156,8 +156,7 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 		return true;
 	}
 
-	private static final String[] _CLASS_NAMES = new String[] {
-		JournalArticle.class.getName()
-	};
+	private static final String[] _CLASS_NAMES =
+		{JournalArticle.class.getName()};
 
 }
