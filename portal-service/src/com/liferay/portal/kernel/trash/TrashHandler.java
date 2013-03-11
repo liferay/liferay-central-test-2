@@ -398,16 +398,6 @@ public interface TrashHandler {
 			long classPK, int start, int end)
 		throws PortalException, SystemException;
 
-	/**
-	 * Returns the first parent container for the model entity with the primary
-	 * key that is in the Recycle Bin.
-	 *
-	 * @param  classPK the primary key of the model entity
-	 *
-	 * @return the first parent container that is in the Recycle Bin
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
-	 */
 	public ContainerModel getTrashContainer(long classPK)
 		throws PortalException, SystemException;
 
