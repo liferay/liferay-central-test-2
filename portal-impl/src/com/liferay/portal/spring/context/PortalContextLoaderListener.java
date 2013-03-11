@@ -50,7 +50,6 @@ import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
-
 import com.liferay.portlet.PortletContextBagPool;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 

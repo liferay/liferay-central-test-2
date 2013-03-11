@@ -115,8 +115,7 @@ public class TemplateContextHelper {
 				contextClassLoader, templateContextType);
 		}
 
-		return doGetHelperUtilities(
-			contextClassLoader, templateContextType);
+		return doGetHelperUtilities(contextClassLoader, templateContextType);
 	}
 
 	public Set<String> getRestrictedVariables() {

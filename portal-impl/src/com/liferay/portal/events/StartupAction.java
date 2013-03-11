@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.plugin.PluginPackageIndexer;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
-
 import com.liferay.portlet.messageboards.util.MBMessageIndexer;
 
 /**
