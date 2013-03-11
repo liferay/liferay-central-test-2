@@ -283,9 +283,8 @@ public class TrashImpl implements Trash {
 			ContainerModel containerModel = trashHandler.getTrashContainer(
 				classPK);
 
-			classPK = containerModel.getContainerModelId();
-
 			className = containerModel.getModelClassName();
+			classPK = containerModel.getContainerModelId();
 
 			trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
 		}
@@ -304,29 +303,29 @@ public class TrashImpl implements Trash {
 		Map<String, String[]> params = new HashMap<String, String[]>();
 
 		params.put(
-			namespace + "struts_action", new String[]{"/trash/view_content"});
+			namespace + "struts_action", new String[] {"/trash/view_content"});
 		params.put(
-			namespace + "redirect", new String[]{themeDisplay.getURLCurrent()});
+			namespace + "redirect", new String[] {themeDisplay.getURLCurrent()});
 
 		if (trashEntry.getRootEntry() != null) {
-			params.put(namespace + "className", new String[]{className});
+			params.put(namespace + "className", new String[] {className});
 			params.put(
-				namespace + "classPK", new String[]{String.valueOf(classPK)});
+				namespace + "classPK", new String[] {String.valueOf(classPK)});
 		}
 		else {
 			params.put(
 				namespace + "trashEntryId",
-				new String[]{String.valueOf(trashEntry.getEntryId())});
+				new String[] {String.valueOf(trashEntry.getEntryId())});
 		}
 
-		params.put(namespace + "type", new String[]{trashRenderer.getType()});
+		params.put(namespace + "type", new String[] {trashRenderer.getType()});
 		params.put(
-			namespace + "showActions", new String[]{Boolean.FALSE.toString()});
+			namespace + "showActions", new String[] {Boolean.FALSE.toString()});
 		params.put(
 			namespace + "showAssetMetadata",
-			new String[]{Boolean.TRUE.toString()});
+			new String[] {Boolean.TRUE.toString()});
 		params.put(
-			namespace + "showEditURL", new String[]{Boolean.FALSE.toString()});
+			namespace + "showEditURL", new String[] {Boolean.FALSE.toString()});
 
 		return PortalUtil.getControlPanelFullURL(
 			themeDisplay.getScopeGroupId(), PortletKeys.TRASH, params);

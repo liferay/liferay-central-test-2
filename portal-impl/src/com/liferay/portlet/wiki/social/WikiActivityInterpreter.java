@@ -66,9 +66,8 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			FileEntry fileEntry = null;
 
 			try {
-				long fileEntryId =
-					GetterUtil.getLong(
-						activity.getExtraDataProperty("fileEntryId"));
+				long fileEntryId = GetterUtil.getLong(
+					activity.getExtraDataProperty("fileEntryId"));
 
 				fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 					fileEntryId);
@@ -113,6 +112,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		return "/wiki/find_page?pageResourcePrimKey=";
 	}
 
+	@Override
 	protected String getTitle(
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {

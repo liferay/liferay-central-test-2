@@ -132,6 +132,7 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 		return null;
 	}
 
+	@Override
 	protected boolean hasPermissions(
 			PermissionChecker permissionChecker, SocialActivity activity,
 			String actionId, ThemeDisplay themeDisplay)

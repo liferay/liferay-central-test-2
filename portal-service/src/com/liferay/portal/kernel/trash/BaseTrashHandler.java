@@ -155,6 +155,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return Collections.emptyList();
 	}
 
+	@SuppressWarnings("unused")
 	public ContainerModel getTrashContainer(long classPK)
 		throws PortalException, SystemException {
 
@@ -165,6 +166,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 		return StringPool.BLANK;
 	}
 
+	@SuppressWarnings("unused")
 	public int getTrashContainerModelsCount(long classPK)
 		throws PortalException, SystemException {
 
