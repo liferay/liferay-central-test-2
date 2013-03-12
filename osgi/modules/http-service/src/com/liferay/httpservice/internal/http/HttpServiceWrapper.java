@@ -35,11 +35,11 @@ import org.osgi.service.http.NamespaceException;
 public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 
 	public HttpServiceWrapper(BundleServletContext bundleServletContext) {
-		_bundleServletContext = bundleServletContext;
+		this.bundleServletContext = bundleServletContext;
 	}
 
 	public HttpContext createDefaultHttpContext() {
-		return _bundleServletContext.getHttpContext();
+		return bundleServletContext.getHttpContext();
 	}
 
 	public void registerFilter(
@@ -51,7 +51,7 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 			httpContext = createDefaultHttpContext();
 		}
 
-		_bundleServletContext.registerFilter(
+		bundleServletContext.registerFilter(
 			filterName, urlPatterns, filter, initParameters, httpContext);
 	}
 
@@ -73,7 +73,7 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 			httpContext = createDefaultHttpContext();
 		}
 
-		_bundleServletContext.registerServlet(
+		bundleServletContext.registerServlet(
 			servletName, urlPatterns, servlet, initParameters, httpContext);
 	}
 
@@ -93,16 +93,16 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 	}
 
 	public void unregisterFilter(String filterName) {
-		_bundleServletContext.unregisterFilter(filterName);
+		bundleServletContext.unregisterFilter(filterName);
 	}
 
 	public void unregisterListener(Object listener) {
 	}
 
 	public void unregisterServlet(String servletName) {
-		_bundleServletContext.unregisterServlet(servletName);
+		bundleServletContext.unregisterServlet(servletName);
 	}
 
-	private BundleServletContext _bundleServletContext;
+	protected BundleServletContext bundleServletContext;
 
 }

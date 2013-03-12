@@ -39,6 +39,7 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 		super(bundleServletContext);
 	}
 
+	@Override
 	public void registerFilter(
 			String filterName, List<String> urlPatterns, Filter filter,
 			Map<String, String> initParameters, HttpContext httpContext)
@@ -50,15 +51,18 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 		_registrations.add(filterName);
 	}
 
+	@Override
 	public void registerListener(
 		Object listener, Map<String, String> initParameters,
 		HttpContext httpContext) {
 	}
 
+	@Override
 	public void registerResources(
 		String alias, String name, HttpContext httpContext) {
 	}
 
+	@Override
 	public void registerServlet(
 			String servletName, List<String> urlPatterns, Servlet servlet,
 			Map<String, String> initParameters, HttpContext httpContext)
@@ -73,6 +77,7 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+	@Override
 	public void registerServlet(
 		String urlPattern, Servlet servlet,
 		@SuppressWarnings("rawtypes") Dictionary initParameters,
@@ -81,19 +86,23 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void unregister(String servletName) {
 		unregisterServlet(servletName);
 	}
 
+	@Override
 	public void unregisterFilter(String filterName) {
 		super.unregisterFilter(filterName);
 
 		removeRegistration(filterName);
 	}
 
+	@Override
 	public void unregisterListener(Object listener) {
 	}
 
+	@Override
 	public void unregisterServlet(String servletName) {
 		super.unregisterServlet(servletName);
 
@@ -107,10 +116,9 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 			return;
 		}
 
-		ServletContextPool.remove(
-			_bundleServletContext.getServletContextName());
+		ServletContextPool.remove(bundleServletContext.getServletContextName());
 
-		_bundleServletContext = null;
+		bundleServletContext = null;
 	}
 
 	private List<Object> _registrations = new ArrayList<Object>();
