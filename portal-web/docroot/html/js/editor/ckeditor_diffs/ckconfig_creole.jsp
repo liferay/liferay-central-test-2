@@ -78,11 +78,11 @@ CKEDITOR.config.removePlugins = [
 	'wsc'
 ].join();
 
-CKEDITOR.config.resize_enabled = <%= resizable %>;
-
 <c:if test="<%= resizable %>">
 	CKEDITOR.config.resize_dir = 'vertical';
 </c:if>
+
+CKEDITOR.config.resize_enabled = <%= resizable %>;
 
 CKEDITOR.config.toolbar_creole = [
 	['Cut','Copy','Paste','PasteText','PasteFromWord'],
