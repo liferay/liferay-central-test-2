@@ -189,7 +189,7 @@ public class WebExtenderServlet extends PortletServlet implements StrutsAction {
 					contextPath.length());
 			}
 
-			String modulePath = Portal.PATH_MODULE;
+			String modulePath = Portal.PATH_MODULE + StringPool.SLASH;
 
 			if (servletContextName.startsWith(modulePath)) {
 				servletContextName = servletContextName.substring(

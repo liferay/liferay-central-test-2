@@ -156,38 +156,34 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public Object getAttribute(String name) {
-		if (name.equals("osgi-bundle")) {
+		if (name.equals(JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR)) {
+			return getTempDir();
+		}
+		else if (name.equals("osgi-bundle")) {
 			return _bundle;
 		}
 		else if (name.equals("osgi-bundlecontext")) {
-
-			// This is required to meet OSGi Comp 4.3, WAS 128.6.1.
-
 			return _bundle.getBundleContext();
 		}
-		else if (name.equals(JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR)) {
-			return getTempDir();
-		}
 
-		Object nameValue = _contextAttributes.get(name);
+		Object value = _contextAttributes.get(name);
 
-		if (nameValue == null) {
+		if (value == null) {
 			if (name.equals(PluginContextListener.PLUGIN_CLASS_LOADER)) {
 				return getClassLoader();
 			}
 			else if (name.equals("org.apache.catalina.JSP_PROPERTY_GROUPS")) {
-				nameValue = new HashMap();
+				value = new HashMap<Object, Object>();
 
-				_contextAttributes.put(name, nameValue);
+				_contextAttributes.put(name, value);
 			}
 			else if (name.equals("org.apache.tomcat.InstanceManager")) {
 				return super.getAttribute(name);
 			}
 		}
 
-		return nameValue;
+		return value;
 	}
 
 	public Bundle getBundle() {
@@ -316,17 +312,18 @@ public class BundleServletContext extends LiferayServletContext {
 			String alias, String name, HttpContext httpContext)
 		throws NamespaceException {
 
+		Map<String, String> initParameters = new Hashtable<String, String>();
+
+		initParameters.put("alias", alias);
+
 		if (name == null) {
-			throw new IllegalArgumentException("Name cannot be null");
+			throw new IllegalArgumentException("Name is null");
 		}
 
 		if (name.endsWith(StringPool.SLASH) && !name.equals(StringPool.SLASH)) {
 			throw new IllegalArgumentException("Invalid name " + name);
 		}
 
-		Map<String, String> initParameters = new Hashtable<String, String>();
-
-		initParameters.put("alias", alias);
 		initParameters.put("name", name);
 
 		Servlet resourceServlet = new ResourceServlet();
@@ -336,7 +333,8 @@ public class BundleServletContext extends LiferayServletContext {
 				name, alias, resourceServlet, initParameters, httpContext);
 
 			AuthPublicPathRegistry.register(
-				Portal.PATH_MODULE + _servletContextName + alias);
+				Portal.PATH_MODULE + StringPool.SLASH + _servletContextName +
+					alias);
 		}
 		catch (ServletException se) {
 			throw new IllegalArgumentException(se);
@@ -434,7 +432,8 @@ public class BundleServletContext extends LiferayServletContext {
 			}
 
 			AuthPublicPathRegistry.unregister(
-				Portal.PATH_MODULE + _servletContextName + entry.getKey());
+				Portal.PATH_MODULE + StringPool.SLASH + _servletContextName +
+					entry.getKey());
 
 			iterator.remove();
 
@@ -452,22 +451,21 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	protected File getTempDir() {
-		if (_tempDir == null) {
-			File parentTempDir = (File)super.getAttribute(
-				JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR);
-
-			String servletContextName = getServletContextName();
-
-			File tempDir = new File(parentTempDir, servletContextName);
-
-			if (!tempDir.exists() && !tempDir.mkdirs()) {
-				throw new IllegalStateException(
-					"Can't create webapp tempDir for " +
-						getServletContextName());
-			}
-
-			_tempDir = tempDir;
+		if (_tempDir != null) {
+			return _tempDir;
 		}
+
+		File parentTempDir = (File)super.getAttribute(
+			JavaConstants.JAVAX_SERVLET_CONTEXT_TEMPDIR);
+
+		File tempDir = new File(parentTempDir, _servletContextName);
+
+		if (!tempDir.exists() && !tempDir.mkdirs()) {
+			throw new IllegalStateException(
+				"Unable to make temporary directory " + tempDir);
+		}
+
+		_tempDir = tempDir;
 
 		return _tempDir;
 	}
