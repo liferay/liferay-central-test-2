@@ -302,7 +302,8 @@ public class TrashImpl implements Trash {
 		params.put(
 			namespace + "struts_action", new String[] {"/trash/view_content"});
 		params.put(
-			namespace + "redirect", new String[] {themeDisplay.getURLCurrent()});
+			namespace + "redirect",
+			new String[] {themeDisplay.getURLCurrent()});
 
 		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
 			className, classPK);
