@@ -257,7 +257,7 @@ if (step == 1) {
 
 					<%
 					String rowHREF = null;
-					if (Validator.isNull(p_u_i_d) || OrganizationMembershipPolicyUtil.isRoleAllowed(selUser != null ? selUser.getUserId() : 0, organization.getOrganizationId(), role.getRoleId())) {
+					if (Validator.isNull(p_u_i_d) || OrganizationMembershipPolicyUtil.isRoleAllowed((selUser != null) ? selUser.getUserId() : 0, organization.getOrganizationId(), role.getRoleId())) {
 						StringBundler sb = new StringBundler(14);
 
 						sb.append("javascript:opener.");
