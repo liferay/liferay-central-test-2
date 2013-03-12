@@ -103,6 +103,6 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 		_bundleServletContext.unregisterServlet(servletName);
 	}
 
-	protected BundleServletContext _bundleServletContext;
+	private BundleServletContext _bundleServletContext;
 
 }

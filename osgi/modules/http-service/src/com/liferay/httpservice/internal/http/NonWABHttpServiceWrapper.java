@@ -88,7 +88,7 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 	public void unregisterFilter(String filterName) {
 		super.unregisterFilter(filterName);
 
-		removeRegistryEntry(filterName);
+		removeRegistration(filterName);
 	}
 
 	public void unregisterListener(Object listener) {
@@ -97,10 +97,10 @@ public class NonWABHttpServiceWrapper extends HttpServiceWrapper {
 	public void unregisterServlet(String servletName) {
 		super.unregisterServlet(servletName);
 
-		removeRegistryEntry(servletName);
+		removeRegistration(servletName);
 	}
 
-	protected void removeRegistryEntry(Object object) {
+	protected void removeRegistration(Object object) {
 		_registrations.remove(object);
 
 		if (!_registrations.isEmpty()) {
