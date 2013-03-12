@@ -55,7 +55,9 @@ public class BundleServletContextTest extends PowerMockito {
 	public void testGetClassloader() {
 		mockBundleWiring();
 
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		Assert.assertEquals(
 			classLoader, _bundleServletContext.getClassLoader());
@@ -120,14 +122,16 @@ public class BundleServletContextTest extends PowerMockito {
 			_bundleWiring
 		);
 
+		Class<?> clazz = getClass();
+
 		when(
 			_bundleWiring.getClassLoader()
 		).thenReturn(
-			getClass().getClassLoader()
+			clazz.getClassLoader()
 		);
 	}
 
-	protected void registerServlet(String servletName, String ... urlMappings)
+	protected void registerServlet(String servletName, String ... urlPatterns)
 		throws NamespaceException, ServletException {
 
 		mockBundleWiring();
@@ -139,7 +143,7 @@ public class BundleServletContextTest extends PowerMockito {
 		);
 
 		_bundleServletContext.registerServlet(
-			servletName, Arrays.asList(urlMappings), _servlet, null,
+			servletName, Arrays.asList(urlPatterns), _servlet, null,
 			_httpContext);
 
 		Servlet servlet = _bundleServletContext.getServlet(servletName);
@@ -155,8 +159,13 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	protected void verifyBundleWiring() {
-		Mockito.verify(_bundleWiring).getClassLoader();
-		Mockito.verify(_bundle).adapt(BundleWiring.class);
+		Bundle bundle = Mockito.verify(_bundle);
+
+		bundle.adapt(BundleWiring.class);
+
+		BundleWiring bundleWiring = Mockito.verify(_bundleWiring);
+
+		bundleWiring.getClassLoader();
 	}
 
 	@Mock
