@@ -43,30 +43,35 @@ public class SeleniumBuilderFileUtil {
 		return _baseDir;
 	}
 
-	public Set<String> getChildElementNames(Element element) {
-		Set<String> childElementNames = new TreeSet<String>();
+	public Set<String> getChildElementAttributeValues(
+		Element element, String attributeName) {
+
+		Set<String> childElementAttributeValues = new TreeSet<String>();
 
 		List<Element> childElements = element.elements();
 
 		if (childElements.isEmpty()) {
-			return childElementNames;
+			return childElementAttributeValues;
 		}
 
 		for (Element childElement : childElements) {
-			String childElementName = childElement.attributeValue("function");
+			String childElementName = childElement.attributeValue(
+				attributeName);
 
 			if (childElementName != null) {
 				int x = childElementName.lastIndexOf(StringPool.POUND);
 
 				if (x != -1) {
-					childElementNames.add(childElementName.substring(0, x));
+					childElementAttributeValues.add(
+						childElementName.substring(0, x));
 				}
 			}
 
-			childElementNames.addAll(getChildElementNames(childElement));
+			childElementAttributeValues.addAll(
+				getChildElementAttributeValues(childElement, attributeName));
 		}
 
-		return childElementNames;
+		return childElementAttributeValues;
 	}
 
 	public String getClassName(String fileName) {
