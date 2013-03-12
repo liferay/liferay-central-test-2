@@ -374,7 +374,6 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 					</aui:fieldset>
 				</liferay-ui:panel>
 			</c:if>
-
 		</liferay-ui:panel-container>
 	</liferay-ui:section>
 

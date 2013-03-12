@@ -51,6 +51,7 @@ public class AssetSearcher extends BaseIndexer {
 
 	public String[] getClassNames() {
 		long[] classNameIds = _assetEntryQuery.getClassNameIds();
+
 		String[] classNames = new String[classNameIds.length];
 
 		for (int i = 0; i < classNames.length; i++) {
@@ -86,31 +87,32 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getAllCategoryIds().length <= 0) {
+		long[] allCategoryIds = _assetEntryQuery.getAllCategoryIds();
+
+		if (allCategoryIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long categoryId : _assetEntryQuery.getAllCategoryIds()) {
-			List<Long> treeCategoryIds = new ArrayList<Long>();
+		for (long allCategoryId : allCategoryIds) {
+			List<Long> categoryIds = new ArrayList<Long>();
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				treeCategoryIds =
-					AssetCategoryLocalServiceUtil.getSubcategoryIds(categoryId);
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					allCategoryId);
 			}
 
-			if (treeCategoryIds.size() <= 0) {
-				treeCategoryIds.add(categoryId);
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(allCategoryId);
 			}
 
 			BooleanQuery categoryIdQuery = BooleanQueryFactoryUtil.create(
 				searchContext);
 
-			for (long treeCategoryId : treeCategoryIds) {
-				categoryIdQuery.addTerm(
-					Field.ASSET_CATEGORY_IDS, treeCategoryId);
+			for (long categoryId : categoryIds) {
+				categoryIdQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
 			}
 
 			categoryIdsQuery.add(categoryIdQuery, BooleanClauseOccur.MUST);
@@ -123,14 +125,16 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getAllTagIds().length <= 0) {
+		long[] allTagIds = _assetEntryQuery.getAllTagIds();
+
+		if (allTagIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery tagIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long tagId : _assetEntryQuery.getAllTagIds()) {
+		for (long tagId : allTagIds) {
 			tagIdsQuery.addRequiredTerm(Field.ASSET_TAG_IDS, tagId);
 		}
 
@@ -141,28 +145,29 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getAnyCategoryIds().length <= 0) {
+		long[] anyCategoryIds = _assetEntryQuery.getAnyCategoryIds();
+
+		if (anyCategoryIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long categoryId : _assetEntryQuery.getAnyCategoryIds()) {
-			List<Long> treeCategoryIds = new ArrayList<Long>();
+		for (long anyCategoryId : anyCategoryIds) {
+			List<Long> categoryIds = new ArrayList<Long>();
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				treeCategoryIds =
-					AssetCategoryLocalServiceUtil.getSubcategoryIds(categoryId);
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					anyCategoryId);
 			}
 
-			if (treeCategoryIds.size() <= 0) {
-				treeCategoryIds.add(categoryId);
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(anyCategoryId);
 			}
 
-			for (long treeCategoryId : treeCategoryIds) {
-				categoryIdsQuery.addTerm(
-					Field.ASSET_CATEGORY_IDS, treeCategoryId);
+			for (long categoryId : categoryIds) {
+				categoryIdsQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
 			}
 		}
 
@@ -173,14 +178,16 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getAnyTagIds().length <= 0) {
+		long[] anyTagIds = _assetEntryQuery.getAnyTagIds();
+
+		if (anyTagIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery tagIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long tagId : _assetEntryQuery.getAnyTagIds()) {
+		for (long tagId : anyTagIds) {
 			tagIdsQuery.addTerm(Field.ASSET_TAG_IDS, tagId);
 		}
 
@@ -213,31 +220,32 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getNotAllCategoryIds().length <= 0) {
+		long[] notAllCategoryIds = _assetEntryQuery.getNotAllCategoryIds();
+
+		if (notAllCategoryIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long categoryId : _assetEntryQuery.getNotAllCategoryIds()) {
-			List<Long> treeCategoryIds = new ArrayList<Long>();
+		for (long notAllCategoryId : notAllCategoryIds) {
+			List<Long> categoryIds = new ArrayList<Long>();
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				treeCategoryIds =
-					AssetCategoryLocalServiceUtil.getSubcategoryIds(categoryId);
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					notAllCategoryId);
 			}
 
-			if (treeCategoryIds.size() <= 0) {
-				treeCategoryIds.add(categoryId);
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(notAllCategoryId);
 			}
 
 			BooleanQuery categoryIdQuery = BooleanQueryFactoryUtil.create(
 				searchContext);
 
-			for (long treeCategoryId : treeCategoryIds) {
-				categoryIdQuery.addTerm(
-					Field.ASSET_CATEGORY_IDS, treeCategoryId);
+			for (long categoryId : categoryIds) {
+				categoryIdQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
 			}
 
 			categoryIdsQuery.add(categoryIdQuery, BooleanClauseOccur.MUST);
@@ -250,14 +258,16 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getNotAllTagIds().length <= 0) {
+		long[] notAllTagIds = _assetEntryQuery.getNotAllTagIds();
+
+		if (notAllTagIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery tagIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long tagId : _assetEntryQuery.getNotAllTagIds()) {
+		for (long tagId : notAllTagIds) {
 			tagIdsQuery.addRequiredTerm(Field.ASSET_TAG_IDS, tagId);
 		}
 
@@ -268,28 +278,29 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getNotAnyCategoryIds().length <= 0) {
+		long[] notAnyCategoryIds = _assetEntryQuery.getNotAnyCategoryIds();
+
+		if (notAnyCategoryIds.length == 0) {
 			return;
 		}
 
 		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
 			searchContext);
 
-		for (long categoryId : _assetEntryQuery.getNotAnyCategoryIds()) {
-			List<Long> treeCategoryIds = new ArrayList<Long>();
+		for (long notAnyCategoryId : notAnyCategoryIds) {
+			List<Long> categoryIds = new ArrayList<Long>();
 
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				treeCategoryIds =
-					AssetCategoryLocalServiceUtil.getSubcategoryIds(categoryId);
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					notAnyCategoryId);
 			}
 
-			if (treeCategoryIds.size() <= 0) {
-				treeCategoryIds.add(categoryId);
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(notAnyCategoryId);
 			}
 
-			for (long treeCategoryId : treeCategoryIds) {
-				categoryIdsQuery.addTerm(
-					Field.ASSET_CATEGORY_IDS, treeCategoryId);
+			for (long categoryId : categoryIds) {
+				categoryIdsQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
 			}
 		}
 
@@ -300,7 +311,9 @@ public class AssetSearcher extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (_assetEntryQuery.getNotAnyTagIds().length <= 0) {
+		long[] notAnyTagIds = _assetEntryQuery.getNotAnyTagIds();
+
+		if (notAnyTagIds.length == 0) {
 			return;
 		}
 

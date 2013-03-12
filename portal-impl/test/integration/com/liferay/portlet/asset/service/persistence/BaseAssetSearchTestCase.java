@@ -133,45 +133,44 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAllAssetCategories1() throws Exception {
-		long[] allCategories = new long[] {_healthCategoryId};
+		long[] allCategoryIds = {_healthCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null,
-				allCategories, null);
+				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories2() throws Exception {
-		long[] allCategories = new long[] {_healthCategoryId, _sportCategoryId};
+		long[] allCategoryIds = {_healthCategoryId, _sportCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null,
-				allCategories, null);
+				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
 
 	@Test
 	public void testAllAssetCategories3() throws Exception {
-		long[] allCategories = new long[] {
-			_healthCategoryId, _sportCategoryId, _foodCategoryId
-		};
+		long[] allCategoryIds =
+			{_healthCategoryId, _sportCategoryId, _foodCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null,
-				allCategories, null);
+				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAllAssetCategories4() throws Exception {
-		long[] allCategories = new long[] {
+		long[] allCategoryIds = {
 			_healthCategoryId, _sportCategoryId, _foodCategoryId,
 			_travelCategoryId
 		};
@@ -179,14 +178,14 @@ public abstract class BaseAssetSearchTestCase {
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null,
-				allCategories, null);
+				allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
 
 	@Test
 	public void testAllAssetTags1() throws Exception {
-		String[] allTags = new String[] {"liferay"};
+		String[] allTags = {"liferay"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -198,7 +197,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAllAssetTags2() throws Exception {
-		String[] allTags = new String[] {"liferay", "architecture"};
+		String[] allTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -210,7 +209,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAllAssetTags3() throws Exception {
-		String[] allTags = new String[] {"liferay", "architecture", "services"};
+		String[] allTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -222,9 +221,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAllAssetTags4() throws Exception {
-		String[] allTags = new String[] {
-			"liferay", "architecture", "services", "osgi"
-		};
+		String[] allTags = {"liferay", "architecture", "services", "osgi"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -236,57 +233,56 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAnyAssetCategories1() throws Exception {
-		long[] anyCategories = new long[] {_healthCategoryId};
+		long[] anyCategoryIds = {_healthCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null, null,
-				anyCategories);
+				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories2() throws Exception {
-		long[] anyCategories = new long[] {_healthCategoryId, _sportCategoryId};
+		long[] anyCategoryIds = {_healthCategoryId, _sportCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null, null,
-				anyCategories);
+				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories3() throws Exception {
-		long[] anyCategories = new long[] {
-			_healthCategoryId, _sportCategoryId, _foodCategoryId
-		};
+		long[] anyCategoryIds =
+			{_healthCategoryId, _sportCategoryId, _foodCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null, null,
-				anyCategories);
+				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 2);
 	}
 
 	@Test
 	public void testAnyAssetCategories4() throws Exception {
-		long[] anyCategories = new long[] {_fashionCategoryId, _foodCategoryId};
+		long[] anyCategoryIds = {_fashionCategoryId, _foodCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null, null,
-				anyCategories);
+				anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAnyAssetTags1() throws Exception {
-		String[] anyTags = new String[] {"liferay"};
+		String[] anyTags = {"liferay"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -298,7 +294,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAnyAssetTags2() throws Exception {
-		String[] anyTags = new String[] {"liferay", "architecture"};
+		String[] anyTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -310,7 +306,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAnyAssetTags3() throws Exception {
-		String[] anyTags = new String[] {"liferay", "architecture", "services"};
+		String[] anyTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -322,7 +318,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAnyAssetTags4() throws Exception {
-		String[] anyTags = new String[] {"modularity", "osgi"};
+		String[] anyTags = {"modularity", "osgi"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -334,92 +330,89 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetCategoryAllAndAny() throws Exception {
-		long[] allCategories =
-			new long[] {_healthCategoryId, _sportCategoryId, _travelCategoryId};
-		long[] anyCategories = new long[] {_healthCategoryId};
+		long[] allCategoryIds =
+			{_healthCategoryId, _sportCategoryId, _travelCategoryId};
+		long[] anyCategoryIds = {_healthCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null, null,
-				allCategories, anyCategories);
+				allCategoryIds, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAssetCategoryNotAllAndAll() throws Exception {
-		long[] notAllCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-		long[] allCategories =
-			new long[] {_healthCategoryId, _sportCategoryId, _travelCategoryId};
+		long[] notAllCategoryIds = {_fashionCategoryId, _foodCategoryId};
+		long[] allCategoryIds =
+			{_healthCategoryId, _sportCategoryId, _travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
-				null, allCategories, null);
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
+				null, allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAssetCategoryNotAllAndAny() throws Exception {
-		long[] notAllCategories = new long[] {_fashionCategoryId};
-		long[] anyCategories = new long[] {_sportCategoryId, _travelCategoryId};
+		long[] notAllCategoryIds = {_fashionCategoryId};
+		long[] anyCategoryIds = {_sportCategoryId, _travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
-				null, null, anyCategories);
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
+				null, null, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAssetCategoryNotAllAndNotAny() throws Exception {
-		long[] notAllCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-		long[] notAnyCategories = new long[] {_travelCategoryId};
+		long[] notAllCategoryIds = {_fashionCategoryId, _foodCategoryId};
+		long[] notAnyCategoryIds = {_travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
-				notAnyCategories, null, null);
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
+				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
 
 	@Test
 	public void testAssetCategoryNotAnyAndAll() throws Exception {
-		long[] notAnyCategories = new long[] {_fashionCategoryId};
-		long[] allCategories = new long[] {_healthCategoryId, _sportCategoryId};
+		long[] notAnyCategoryIds = {_fashionCategoryId};
+		long[] allCategoryIds = {_healthCategoryId, _sportCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, allCategories, null);
+				notAnyCategoryIds, allCategoryIds, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAssetCategoryNotAnyAndAny() throws Exception {
-		long[] notAnyCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId};
-		long[] anyCategories =
-			new long[] {_healthCategoryId, _sportCategoryId, _travelCategoryId};
+		long[] notAnyCategoryIds = {_fashionCategoryId, _foodCategoryId};
+		long[] anyCategoryIds =
+			{_healthCategoryId, _sportCategoryId, _travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, null, anyCategories);
+				notAnyCategoryIds, null, anyCategoryIds);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testAssetTagsAllAndAny() throws Exception {
-		String[] allTags = new String[] {"liferay", "architecture", "services"};
-		String[] anyTags = new String[] {"liferay"};
+		String[] allTags = {"liferay", "architecture", "services"};
+		String[] anyTags = {"liferay"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -431,8 +424,8 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetTagsNotAllAndAll() throws Exception {
-		String[] notAllTags = new String[] {"osgi", "modularity"};
-		String[] allTags = new String[] {"liferay", "architecture", "services"};
+		String[] notAllTags = {"osgi", "modularity"};
+		String[] allTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -444,8 +437,8 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetTagsNotAllAndAny() throws Exception {
-		String[] notAllTags = new String[] {"services"};
-		String[] anyTags = new String[] {"liferay", "architecture"};
+		String[] notAllTags = {"services"};
+		String[] anyTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -457,8 +450,8 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetTagsNotAllAndNotAny() throws Exception {
-		String[] notAllTags = new String[] {"osgi", "modularity"};
-		String[] notAnyTags = new String[] {"services"};
+		String[] notAllTags = {"osgi", "modularity"};
+		String[] notAnyTags = {"services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -470,8 +463,8 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetTagsNotAnyAndAll() throws Exception {
-		String[] notAnyTags = new String[] {"modularity"};
-		String[] allTags = new String[] {"liferay", "architecture"};
+		String[] notAnyTags = {"modularity"};
+		String[] allTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -483,8 +476,8 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testAssetTagsNotAnyAndAny() throws Exception {
-		String[] notAnyTags = new String[] {"modularity", "osgi"};
-		String[] anyTags = new String[] {"liferay", "architecture", "services"};
+		String[] notAnyTags = {"modularity", "osgi"};
+		String[] anyTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -540,12 +533,13 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testGroups() throws Exception {
-		Group group1 = GroupTestUtil.addGroup();
-		Group group2 = GroupTestUtil.addGroup();
-
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 		assetEntryQuery.setClassName(getBaseModelClassName());
+
+		Group group1 = GroupTestUtil.addGroup();
+		Group group2 = GroupTestUtil.addGroup();
+
 		assetEntryQuery.setGroupIds(
 			new long[] {group1.getGroupId(), group2.getGroupId()});
 
@@ -577,11 +571,11 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetCategories1() throws Exception {
-		long[] notAllCategories = new long[] {_healthCategoryId};
+		long[] notAllCategoryIds = {_healthCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
 				null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -589,12 +583,11 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetCategories2() throws Exception {
-		long[] notAllCategories =
-			new long[] {_healthCategoryId, _sportCategoryId};
+		long[] notAllCategoryIds = {_healthCategoryId, _sportCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
 				null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
@@ -602,12 +595,11 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetCategories3() throws Exception {
-		long[] notAllCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId};
+		long[] notAllCategoryIds = {_fashionCategoryId, _foodCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
 				null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
@@ -615,12 +607,12 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetCategories4() throws Exception {
-		long[] notAllCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId};
+		long[] notAllCategoryIds =
+			{_fashionCategoryId, _foodCategoryId, _travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
-				_group.getGroupId(), getBaseModelClassName(), notAllCategories,
+				_group.getGroupId(), getBaseModelClassName(), notAllCategoryIds,
 				null, null, null);
 
 		testAssetCategorization(assetEntryQuery, 2);
@@ -628,7 +620,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetTags1() throws Exception {
-		String[] notAllTags = new String[] {"liferay"};
+		String[] notAllTags = {"liferay"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -640,7 +632,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetTags2() throws Exception {
-		String[] notAllTags = new String[] {"liferay", "architecture"};
+		String[] notAllTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -652,8 +644,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetTags3() throws Exception {
-		String[] notAllTags =
-			new String[] {"liferay", "architecture", "services"};
+		String[] notAllTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -665,8 +656,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAllAssetTags4() throws Exception {
-		String[] notAllTags =
-			new String[] {"liferay", "architecture", "services", "osgi"};
+		String[] notAllTags = {"liferay", "architecture", "services", "osgi"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -678,58 +668,56 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAnyAssetCategories1() throws Exception {
-		long[] notAnyCategories = new long[] {_healthCategoryId};
+		long[] notAnyCategoryIds = {_healthCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, null, null);
+				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories2() throws Exception {
-		long[] notAnyCategories =
-			new long[] {_healthCategoryId, _sportCategoryId};
+		long[] notAnyCategoryIds = {_healthCategoryId, _sportCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, null, null);
+				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories3() throws Exception {
-		long[] notAnyCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId, _travelCategoryId};
+		long[] notAnyCategoryIds =
+			{_fashionCategoryId, _foodCategoryId, _travelCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, null, null);
+				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
 	}
 
 	@Test
 	public void testNotAnyAssetCategories4() throws Exception {
-		long[] notAnyCategories =
-			new long[] {_fashionCategoryId, _foodCategoryId};
+		long[] notAnyCategoryIds = {_fashionCategoryId, _foodCategoryId};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), getBaseModelClassName(), null,
-				notAnyCategories, null, null);
+				notAnyCategoryIds, null, null);
 
 		testAssetCategorization(assetEntryQuery, 1);
 	}
 
 	@Test
 	public void testNotAnyAssetTags1() throws Exception {
-		String[] notAnyTags = new String[] {"liferay"};
+		String[] notAnyTags = {"liferay"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -741,7 +729,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAnyAssetTags2() throws Exception {
-		String[] notAnyTags = new String[] {"liferay", "architecture"};
+		String[] notAnyTags = {"liferay", "architecture"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -753,8 +741,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAnyAssetTags3() throws Exception {
-		String[] notAnyTags =
-			new String[] {"liferay", "architecture", "services"};
+		String[] notAnyTags = {"liferay", "architecture", "services"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -766,7 +753,7 @@ public abstract class BaseAssetSearchTestCase {
 
 	@Test
 	public void testNotAnyAssetTags4() throws Exception {
-		String[] notAnyTags = new String[] {"modularity", "osgi"};
+		String[] notAnyTags = {"modularity", "osgi"};
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
@@ -782,12 +769,12 @@ public abstract class BaseAssetSearchTestCase {
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), new String[] {getBaseModelClassName()});
 
-		String[] orderedTitles = new String[] {
-			"content", "life", "liferay", "open", "osgi", "social"
+		String[] titles = {
+			"open", "liferay", "social", "osgi", "content", "life"
 		};
 
-		String[] titles = new String[] {
-			"open", "liferay", "social", "osgi", "content", "life"
+		String[] orderedTitles = {
+			"content", "life", "liferay", "open", "osgi", "social"
 		};
 
 		testOrderByTitle(assetEntryQuery, "asc", titles, orderedTitles);
@@ -799,12 +786,12 @@ public abstract class BaseAssetSearchTestCase {
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				_group.getGroupId(), new String[] {getBaseModelClassName()});
 
-		String[] orderedTitles = new String[] {
-			"social", "osgi", "open", "liferay", "life", "content"
+		String[] titles = {
+			"open", "liferay", "social", "osgi", "content", "life"
 		};
 
-		String[] titles = new String[] {
-			"open", "liferay", "social", "osgi", "content", "life"
+		String[] orderedTitles = {
+			"social", "osgi", "open", "liferay", "life", "content"
 		};
 
 		testOrderByTitle(assetEntryQuery, "desc", titles, orderedTitles);
@@ -974,14 +961,12 @@ public abstract class BaseAssetSearchTestCase {
 
 		Document[] documents = search(assetEntryQuery, searchContext);
 
-		int i = 0;
+		for (int i = 0; i < documents.length; i++) {
+			Document document = documents[i];
 
-		for (Document document : documents) {
 			String field = document.get("title");
 
 			Assert.assertEquals(field, orderedTitles[i]);
-
-			i++;
 		}
 	}
 

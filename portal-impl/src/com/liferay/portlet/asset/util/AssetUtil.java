@@ -258,9 +258,7 @@ public class AssetUtil {
 		return addPortletURL;
 	}
 
-	public static List<AssetEntry> getAssetEntries(Hits hits)
-		throws PortalException, SystemException {
-
+	public static List<AssetEntry> getAssetEntries(Hits hits) {
 		List<AssetEntry> assetEntries = new ArrayList<AssetEntry>();
 
 		for (Document document : hits.getDocs()) {

@@ -43,11 +43,11 @@ public class AssetEntryQueryTestUtil {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
-		// ClassNames
+		// Class name IDs
 
 		assetEntryQuery.setClassNameIds(classNameIds);
 
-		// ClassTypeIds
+		// Class type IDs
 
 		if (Validator.isNotNull(classTypeIds)) {
 			assetEntryQuery.setClassTypeIds(classTypeIds);
@@ -91,7 +91,7 @@ public class AssetEntryQueryTestUtil {
 			assetEntryQuery.setAllTagIds(getAssetTagsIds(groupId, allTags));
 		}
 
-		// GroupIds
+		// Group IDs
 
 		assetEntryQuery.setGroupIds(new long[] {groupId});
 
@@ -160,8 +160,8 @@ public class AssetEntryQueryTestUtil {
 			long groupId, String[] assetTagNames)
 		throws Exception {
 
-		if (Validator.isNull(assetTagNames)) {
-			return new long[] {};
+		if ((assetTagNames == null) || (assetTagNames.length == 0)) {
+			return new long[0];
 		}
 
 		return AssetTagLocalServiceUtil.getTagIds(groupId, assetTagNames);
