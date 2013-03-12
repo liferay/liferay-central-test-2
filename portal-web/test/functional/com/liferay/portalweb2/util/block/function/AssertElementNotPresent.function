@@ -4,6 +4,7 @@
 			<condition selenium="isElementPresent" />
 			<then>
 				<execute selenium="waitForNotVisible" />
+
 				<execute selenium="assertNotVisible" />
 			</then>
 			<else>
