@@ -30,7 +30,9 @@ public class ${seleniumBuilderContext.getFunctionSimpleClassName(functionName)} 
 				${childElementAttributeValue}Function ${seleniumBuilderFileUtil.getVariableName(childElementAttributeValue)}Function = new ${childElementAttributeValue}Function(liferaySelenium);
 			</#list>
 
-			${functionConverter.convertBlockElement(functionCommandElement)}
+			<#assign blockElement = functionCommandElement>
+
+			<#include "block_element.ftl">
 		}
 	</#list>
 
