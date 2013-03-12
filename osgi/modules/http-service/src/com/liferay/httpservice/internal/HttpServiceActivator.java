@@ -40,7 +40,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  */
 public class HttpServiceActivator
 	implements BundleActivator,
-		ServiceTrackerCustomizer<ServletContext, ServletContext> {
+			   ServiceTrackerCustomizer<ServletContext, ServletContext> {
 
 	public ServletContext addingService(
 		ServiceReference<ServletContext> serviceReference) {
@@ -59,14 +59,16 @@ public class HttpServiceActivator
 
 			_webExtenderServlet.init(servletConfig);
 
-			_webPluginDeployer = new WebBundleDeployer(_webExtenderServlet);
+			_webBundleDeployer = new WebBundleDeployer(_webExtenderServlet);
 
 			_startedBundleListener = new StartedBundleListener(
-				_webPluginDeployer);
-			_stoppedBundleListener = new StoppedBundleListener(
-				_webPluginDeployer);
+				_webBundleDeployer);
 
 			bundleContext.addBundleListener(_startedBundleListener);
+
+			_stoppedBundleListener = new StoppedBundleListener(
+				_webBundleDeployer);
+
 			bundleContext.addBundleListener(_stoppedBundleListener);
 		}
 		catch (Exception e) {
@@ -91,18 +93,21 @@ public class HttpServiceActivator
 		ServiceReference<ServletContext> serviceReference,
 		ServletContext servletContext) {
 
-		_webPluginDeployer.close();
+		_webBundleDeployer.close();
+
+		_webBundleDeployer = null;
+
 		_webExtenderServlet.destroy();
 
-		BundleContext bundleContext = getBundleContext();
+		_webExtenderServlet = null;
 
-		bundleContext.removeBundleListener(_startedBundleListener);
-		bundleContext.removeBundleListener(_stoppedBundleListener);
+		_bundleContext.removeBundleListener(_startedBundleListener);
 
 		_startedBundleListener = null;
+
+		_bundleContext.removeBundleListener(_stoppedBundleListener);
+
 		_stoppedBundleListener = null;
-		_webExtenderServlet = null;
-		_webPluginDeployer = null;
 	}
 
 	public void start(BundleContext bundleContext) throws Exception {
@@ -122,26 +127,29 @@ public class HttpServiceActivator
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
+		_bundleContext = null;
+
 		_servletContextTracker.close();
 
-		EventUtil.close();
-
-		_bundleContext = null;
 		_servletContextTracker = null;
+
+		EventUtil.close();
 	}
 
 	protected void checkStartableBundles() {
-		for (Bundle bundle : getBundleContext().getBundles()) {
+		for (Bundle bundle : _bundleContext.getBundles()) {
 			String servletContextName =
 				BundleServletContext.getServletContextName(bundle);
 
-			if (Validator.isNotNull(servletContextName)) {
-				try {
-					_webPluginDeployer.doStart(bundle, servletContextName);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
+			if (Validator.isNull(servletContextName)) {
+				continue;
+			}
+
+			try {
+				_webBundleDeployer.doStart(bundle, servletContextName);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}
@@ -151,9 +159,9 @@ public class HttpServiceActivator
 	private BundleContext _bundleContext;
 	private StartedBundleListener _startedBundleListener;
 	private StoppedBundleListener _stoppedBundleListener;
+	private WebBundleDeployer _webBundleDeployer;
 	private WebExtenderServlet _webExtenderServlet;
 	private ServiceTracker<ServletContext, ServletContext>
 		_servletContextTracker;
-	private WebBundleDeployer _webPluginDeployer;
 
 }
