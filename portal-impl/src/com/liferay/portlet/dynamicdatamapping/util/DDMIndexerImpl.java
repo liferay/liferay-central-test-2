@@ -62,8 +62,7 @@ public class DDMIndexerImpl implements DDMIndexer {
 					if (value instanceof Boolean) {
 						document.addKeyword(name, (Boolean)value);
 					}
-
-					if (value instanceof Boolean[]) {
+					else if (value instanceof Boolean[]) {
 						document.addKeyword(name, (Boolean[])value);
 					}
 					else if (value instanceof Date) {

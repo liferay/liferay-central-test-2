@@ -92,7 +92,7 @@ public class DocumentImpl implements Document {
 		String[] dates = new String[values.length];
 
 		for (int i = 0; i < values.length; i++) {
-			dates[i] =_dateFormat.format(values[i]);
+			dates[i] = _dateFormat.format(values[i]);
 		}
 
 		addKeyword(name, dates);
