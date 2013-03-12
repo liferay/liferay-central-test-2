@@ -49,7 +49,7 @@ public class AddSitePublicPageTest extends BaseTestCase {
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Site Name"),
-					selenium.getText("//td[2]/a"));
+					selenium.getText("//tr[contains(.,'Site Name')]/td[2]/a"));
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -64,8 +64,9 @@ public class AddSitePublicPageTest extends BaseTestCase {
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Add Page"),
-					selenium.getText("//div/span/button[1]"));
-				selenium.clickAt("//div/span/button[1]",
+					selenium.getText(
+						"//span[@class='aui-toolbar-content']/button[contains(.,'Add Page')]"));
+				selenium.clickAt("//span[@class='aui-toolbar-content']/button[contains(.,'Add Page')]",
 					RuntimeVariables.replace("Add Page"));
 				selenium.waitForVisible(
 					"//input[@id='_156_addLayoutName_en_US']");

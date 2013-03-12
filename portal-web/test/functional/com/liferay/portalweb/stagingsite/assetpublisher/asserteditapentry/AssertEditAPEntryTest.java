@@ -38,6 +38,15 @@ public class AssertEditAPEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isVisible("//span[@title='Options']/ul/li/strong/a"));
+		assertTrue(selenium.isVisible("//img[@title='Minimize']"));
+		assertTrue(selenium.isVisible("//img[@title='Maximize']"));
+		assertTrue(selenium.isVisible("//img[@title='Remove']"));
+		assertEquals(RuntimeVariables.replace("Add New"),
+			selenium.getText(
+				"//li[@class='lfr-trigger']/strong/a/span[contains(.,'Add New')]"));
+		assertEquals(RuntimeVariables.replace("Subscribe"),
+			selenium.getText("//div[@class='subscribe-action']/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//h3[@class='asset-title']/a"));
 		assertTrue(selenium.isVisible("//div[contains(.,'Edit')]/span/a/span"));

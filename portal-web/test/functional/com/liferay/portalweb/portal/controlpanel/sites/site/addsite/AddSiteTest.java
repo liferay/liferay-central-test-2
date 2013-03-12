@@ -79,8 +79,7 @@ public class AddSiteTest extends BaseTestCase {
 			selenium.getText("//tr[contains(.,'Site Name')]/td[6]"));
 		assertEquals(RuntimeVariables.replace(""),
 			selenium.getText("//tr[contains(.,'Site Name')]/td[7]"));
-		assertEquals(RuntimeVariables.replace("Actions"),
-			selenium.getText(
+		assertTrue(selenium.isVisible(
 				"//tr[contains(.,'Site Name')]/td[8]/span[@title='Actions']/ul/li/strong/a/span"));
 	}
 }
