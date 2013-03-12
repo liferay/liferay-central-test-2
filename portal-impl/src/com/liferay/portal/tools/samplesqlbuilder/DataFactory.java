@@ -851,6 +851,21 @@ public class DataFactory {
 
 		JournalArticle journalArticle = new JournalArticleImpl();
 
+		journalArticle.setUuid(SequentialUUID.generate());
+		journalArticle.setId(_counter.get());
+		journalArticle.setResourcePrimKey(
+			journalArticleResource.getResourcePrimKey());
+		journalArticle.setGroupId(journalArticleResource.getGroupId());
+		journalArticle.setCompanyId(_companyId);
+		journalArticle.setUserId(_sampleUserId);
+		journalArticle.setUserName(_sampleUser.getFullName());
+		journalArticle.setCreateDate(new Date());
+		journalArticle.setModifiedDate(new Date());
+		journalArticle.setClassNameId(
+			JournalArticleConstants.CLASSNAME_ID_DEFAULT);
+		journalArticle.setArticleId(journalArticleResource.getArticleId());
+		journalArticle.setVersion(versionIndex);
+
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("TestJournalArticle_");
@@ -870,22 +885,9 @@ public class DataFactory {
 
 		String title = sb.toString();
 
-		journalArticle.setUuid(SequentialUUID.generate());
-		journalArticle.setId(_counter.get());
-		journalArticle.setResourcePrimKey(
-			journalArticleResource.getResourcePrimKey());
-		journalArticle.setGroupId(journalArticleResource.getGroupId());
-		journalArticle.setCompanyId(_companyId);
-		journalArticle.setUserId(_sampleUserId);
-		journalArticle.setUserName(_sampleUser.getFullName());
-		journalArticle.setCreateDate(new Date());
-		journalArticle.setModifiedDate(new Date());
-		journalArticle.setClassNameId(
-			JournalArticleConstants.CLASSNAME_ID_DEFAULT);
-		journalArticle.setArticleId(journalArticleResource.getArticleId());
-		journalArticle.setVersion(versionIndex);
 		journalArticle.setTitle(title);
 		journalArticle.setUrlTitle(urlTitle);
+
 		journalArticle.setContent(_journalArticleContent);
 		journalArticle.setType("general");
 		journalArticle.setDisplayDate(new Date());
