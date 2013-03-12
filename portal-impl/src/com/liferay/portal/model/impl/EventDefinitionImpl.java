@@ -17,10 +17,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portlet.PortletQNameUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,14 +32,14 @@ public class EventDefinitionImpl implements EventDefinition {
 		_qName = qName;
 		_valueType = valueType;
 		_portletApp = portletApp;
+
+		_qNames = new HashSet<QName>();
+
+		_qNames.add(_qName);
 	}
 
 	public void addAliasQName(QName aliasQName) {
-		_aliasQNames.put(PortletQNameUtil.getKey(aliasQName), aliasQName);
-	}
-
-	public QName getAliasQName(String uri, String localPart) {
-		return _aliasQNames.get(PortletQNameUtil.getKey(uri, localPart));
+		_qNames.add(aliasQName);
 	}
 
 	public PortletApp getPortletApp() {
@@ -49,6 +48,10 @@ public class EventDefinitionImpl implements EventDefinition {
 
 	public QName getQName() {
 		return _qName;
+	}
+
+	public Set<QName> getQNames() {
+		return _qNames;
 	}
 
 	public String getValueType() {
@@ -67,9 +70,9 @@ public class EventDefinitionImpl implements EventDefinition {
 		_valueType = valueType;
 	}
 
-	private Map<String, QName> _aliasQNames = new HashMap<String, QName>();
 	private PortletApp _portletApp;
 	private QName _qName;
+	private Set<QName> _qNames;
 	private String _valueType;
 
 }

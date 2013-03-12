@@ -24,12 +24,10 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.QName;
-import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.io.IOException;
@@ -37,7 +35,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.portlet.Event;
 
@@ -252,56 +249,20 @@ public class PortletContainerUtil {
 				throw new PortletContainerException(e);
 			}
 
-			layout = layoutTypePortlet.getLayout();
-
 			for (Portlet portlet : portlets) {
 				for (Event event : events) {
 					javax.xml.namespace.QName qName = event.getQName();
 
-					String namespaceURI = qName.getNamespaceURI();
-					String localPart = qName.getLocalPart();
-
 					QName processingQName = portlet.getProcessingEvent(
-						namespaceURI, localPart);
+						qName.getNamespaceURI(), qName.getLocalPart());
 
-					if (processingQName != null) {
-						processEvent(request, response, portlet, layout, event);
+					if (processingQName == null) {
+						continue;
 					}
-					else {
-						PortletApp portletApp = portlet.getPortletApp();
 
-						Set<EventDefinition> eventDefinitions =
-							portletApp.getEventDefinitions();
-
-						for (EventDefinition eventDefinition :
-								eventDefinitions) {
-
-							QName aliasQName = eventDefinition.getAliasQName(
-								namespaceURI, localPart);
-
-							if (aliasQName == null) {
-								continue;
-							}
-
-							QName eventQName = eventDefinition.getQName();
-
-							processingQName = portlet.getProcessingEvent(
-								eventQName.getNamespaceURI(),
-								eventQName.getLocalPart());
-
-							if (processingQName == null) {
-								continue;
-							}
-
-							LiferayEvent liferayEvent = (LiferayEvent)event;
-
-							Event aliasedEvent = liferayEvent.clone(qName);
-
-							processEvent(
-								request, response, portlet, layout,
-								aliasedEvent);
-						}
-					}
+					processEvent(
+						request, response, portlet,
+						layoutTypePortlet.getLayout(), event);
 				}
 			}
 		}

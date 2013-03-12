@@ -14,25 +14,21 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.portlet.LiferayEvent;
-
 import java.io.Serializable;
+
+import javax.portlet.Event;
 
 import javax.xml.namespace.QName;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class EventImpl implements LiferayEvent, Serializable {
+public class EventImpl implements Event, Serializable {
 
 	public EventImpl(String name, QName qName, Serializable value) {
 		_name = name;
 		_qName = qName;
 		_value = value;
-	}
-
-	public LiferayEvent clone(QName qName) {
-		return new EventImpl(_name, qName, _value);
 	}
 
 	public String getName() {

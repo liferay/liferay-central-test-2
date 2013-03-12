@@ -1969,6 +1969,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				qNameElement, nameElement, portletApp.getDefaultNamespace());
 
 			processingEvents.add(qName);
+
+			Set<EventDefinition> eventDefinitions =
+				portletApp.getEventDefinitions();
+
+			for (EventDefinition eventDefinition : eventDefinitions) {
+				Set<QName> qNames = eventDefinition.getQNames();
+
+				if (qNames.contains(qName)) {
+					processingEvents.addAll(qNames);
+				}
+			}
 		}
 
 		portletModel.setProcessingEvents(processingEvents);

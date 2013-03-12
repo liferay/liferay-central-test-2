@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.xml.QName;
 
 import java.io.Serializable;
 
+import java.util.Set;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -25,11 +27,11 @@ public interface EventDefinition extends Serializable {
 
 	public void addAliasQName(QName aliasQName);
 
-	public QName getAliasQName(String uri, String localPart);
-
 	public PortletApp getPortletApp();
 
 	public QName getQName();
+
+	public Set<QName> getQNames();
 
 	public String getValueType();
 
