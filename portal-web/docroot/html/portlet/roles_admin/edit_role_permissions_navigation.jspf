@@ -258,24 +258,24 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 <%!
 private static final String[] _SITE_PORTLETS = {
-	PortletKeys.SITES_ADMIN,
+	PortletKeys.SITES_ADMIN
 };
 
 private static final String[] _ORGANIZATION_PORTLETS = {
-	PortletKeys.USERS_ADMIN,
+	PortletKeys.USERS_ADMIN
 };
 
 private static final String[] _PORTAL_PORTLETS = {
-	PortletKeys.SITES_ADMIN,
+	PortletKeys.EXPANDO,
+	PortletKeys.LAYOUT_PROTOTYPE,
+	PortletKeys.LAYOUT_SET_PROTOTYPE,
 	PortletKeys.MONITORING,
 	PortletKeys.PASSWORD_POLICIES_ADMIN,
 	PortletKeys.PLUGINS_ADMIN,
-	PortletKeys.ROLES_ADMIN,
 	PortletKeys.PORTAL_SETTINGS,
-	PortletKeys.USERS_ADMIN,
-	PortletKeys.EXPANDO,
-	PortletKeys.LAYOUT_PROTOTYPE,
-	PortletKeys.LAYOUT_SET_PROTOTYPE
+	PortletKeys.ROLES_ADMIN,
+	PortletKeys.SITES_ADMIN,
+	PortletKeys.USERS_ADMIN
 };
 
 private boolean _isSitePortlet(String portletId) {
