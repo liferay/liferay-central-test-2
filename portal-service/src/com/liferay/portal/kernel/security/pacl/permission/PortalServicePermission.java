@@ -40,11 +40,38 @@ public class PortalServicePermission extends BasicPermission {
 		securityManager.checkPermission(permission);
 	}
 
+	public static void checkService(
+		Object object, Method method, Object[] arguments) {
+
+		SecurityManager securityManager = System.getSecurityManager();
+
+		if (securityManager == null) {
+			return;
+		}
+
+		PortalServicePermission portalServicePermission =
+			new PortalServicePermission(
+				PACLConstants.PORTAL_SERVICE_PERMISSION_SERVICE, object,
+				method, arguments);
+
+		securityManager.checkPermission(portalServicePermission);
+	}
+
 	public PortalServicePermission(String name, Object object, Method method) {
+		this(name, object, method, null);
+	}
+
+	public PortalServicePermission(
+			String name, Object object, Method method, Object[] arguments) {
 		super(name);
 
 		_object = object;
 		_method = method;
+		_arguments = arguments;
+	}
+
+	public Object[] getArguments() {
+		return _arguments;
 	}
 
 	public Method getMethod() {
@@ -55,7 +82,8 @@ public class PortalServicePermission extends BasicPermission {
 		return _object;
 	}
 
-	private Method _method;
-	private Object _object;
+	private transient Object[] _arguments;
+	private transient Method _method;
+	private transient Object _object;
 
 }
