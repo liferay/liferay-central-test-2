@@ -479,27 +479,6 @@ else if (classNameId > 0) {
 </aui:script>
 
 <%!
-private String _getPaletteItemTitle(PageContext pageContext, TemplateVariableDefinition templateVariableDefinition) {
-	StringBundler sb = new StringBundler();
-
-	sb.append("<p>");
-	sb.append(LanguageUtil.get(pageContext, templateVariableDefinition.getLabel() + "-help"));
-	sb.append("</p>");
-	sb.append(LanguageUtil.get(pageContext, "variable"));
-	sb.append(StringPool.COLON);
-	sb.append("&nbsp;");
-	sb.append(templateVariableDefinition.getName());
-	sb.append(_getPaletteItemTitle(pageContext, "class", templateVariableDefinition.getClazz()));
-
-	if (templateVariableDefinition.isCollection()) {
-		TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
-
-		sb.append(_getPaletteItemTitle(pageContext, "items-class", itemTemplateVariableDefinition.getClazz()));
-	}
-
-	return sb.toString();
-}
-
 private String _getPaletteItemTitle(PageContext pageContext, String label, Class<?> clazz) {
 	StringBundler sb = new StringBundler();
 
@@ -531,6 +510,27 @@ private String _getPaletteItemTitle(PageContext pageContext, String label, Class
 
 	if (Validator.isNull(javadocURL)) {
 		sb.append("</a>");
+	}
+
+	return sb.toString();
+}
+
+private String _getPaletteItemTitle(PageContext pageContext, TemplateVariableDefinition templateVariableDefinition) {
+	StringBundler sb = new StringBundler();
+
+	sb.append("<p>");
+	sb.append(LanguageUtil.get(pageContext, templateVariableDefinition.getLabel() + "-help"));
+	sb.append("</p>");
+	sb.append(LanguageUtil.get(pageContext, "variable"));
+	sb.append(StringPool.COLON);
+	sb.append("&nbsp;");
+	sb.append(templateVariableDefinition.getName());
+	sb.append(_getPaletteItemTitle(pageContext, "class", templateVariableDefinition.getClazz()));
+
+	if (templateVariableDefinition.isCollection()) {
+		TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
+
+		sb.append(_getPaletteItemTitle(pageContext, "items-class", itemTemplateVariableDefinition.getClazz()));
 	}
 
 	return sb.toString();
