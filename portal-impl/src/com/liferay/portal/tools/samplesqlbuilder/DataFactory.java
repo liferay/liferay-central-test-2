@@ -159,17 +159,6 @@ public class DataFactory {
 		_maxMBMessageCount = maxMBMessageCount;
 		_maxUserToGroupCount = maxUserToGroupCount;
 
-		_dlDDMStructureContent = StringUtil.read(
-			new FileInputStream(
-				new File(
-					_baseDir,
-					_DEPENDENCIES_DIR + "ddm_structure_basic_document.xml")));
-
-		_ddlDDMStructureContent = StringUtil.read(
-			new FileInputStream(
-				new File(
-					_baseDir, _DEPENDENCIES_DIR + "ddm_structure_ddl.xml")));
-
 		_counter = new SimpleCounter(_maxGroupsCount + 1);
 		_futureDateCounter = new SimpleCounter();
 		_resourcePermissionCounter = new SimpleCounter();
@@ -198,6 +187,16 @@ public class DataFactory {
 		_companyId = _counter.get();
 		_guestGroupId = _counter.get();
 		_sampleUserId = _counter.get();
+
+		_dlDDMStructureContent = StringUtil.read(
+			new FileInputStream(
+				new File(
+					_baseDir,
+					_DEPENDENCIES_DIR + "ddm_structure_basic_document.xml")));
+		_ddlDDMStructureContent = StringUtil.read(
+			new FileInputStream(
+				new File(
+					_baseDir, _DEPENDENCIES_DIR + "ddm_structure_ddl.xml")));
 
 		initCompany();
 		initDLFileEntryType();
@@ -259,6 +258,10 @@ public class DataFactory {
 
 	public DDMStructure getDefaultDLDDMStructure() {
 		return _defaultDLDDMStructure;
+	}
+
+	public long getDefaultDLDDMStructureId() {
+		return _defaultDLDDMStructure.getStructureId();
 	}
 
 	public DLFileEntryType getDefaultDLFileEntryType() {
@@ -1314,6 +1317,7 @@ public class DataFactory {
 		sb.append("</Name></root>");
 
 		ddmStructure.setName(sb.toString());
+
 		ddmStructure.setXsd(xsd);
 		ddmStructure.setStorageType("xml");
 
@@ -1493,8 +1497,10 @@ public class DataFactory {
 	private static final String _DEPENDENCIES_DIR=
 		"../portal-impl/src/com/liferay/portal/tools/samplesqlbuilder/" +
 			"dependencies/";
+
 	private static final long _FUTURE_TIME =
 		System.currentTimeMillis() + Time.YEAR;
+
 	private static final String _SAMPLE_USER_NAME = "Sample";
 
 	private Account _account;
