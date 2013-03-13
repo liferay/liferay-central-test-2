@@ -50,7 +50,7 @@ public class PortletDisplayTemplatePortletDataHandler
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		exportPortletDisplayTemplates(portletDataContext, rootElement);
 

@@ -166,7 +166,7 @@ public class JournalContentPortletDataHandler
 			}
 		}
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		if (article == null) {
 			portletDataContext.setScopeGroupId(previousScopeGroupId);

@@ -188,7 +188,7 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 			return StringPool.BLANK;
 		}
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		Element dlFileEntryTypesElement = rootElement.addElement(
 			"dl-file-entry-types");

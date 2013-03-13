@@ -69,7 +69,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.dynamicdatalist",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		final Element recordSetsElement = rootElement.addElement("record-sets");
 

@@ -80,7 +80,7 @@ public class DDLDisplayPortletDataHandler extends DDLPortletDataHandler {
 			return StringPool.BLANK;
 		}
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
 			recordSetId);

@@ -102,7 +102,7 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.wiki", portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));

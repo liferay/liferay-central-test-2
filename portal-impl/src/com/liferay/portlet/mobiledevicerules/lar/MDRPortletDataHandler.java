@@ -80,7 +80,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.mobiledevicerules",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		final Element ruleGroupsElement = rootElement.addElement("rule-groups");
 		final Element rulesElement = rootElement.addElement("rules");

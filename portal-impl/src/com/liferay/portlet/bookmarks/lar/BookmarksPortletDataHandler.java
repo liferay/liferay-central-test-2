@@ -93,7 +93,7 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.bookmarks",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));

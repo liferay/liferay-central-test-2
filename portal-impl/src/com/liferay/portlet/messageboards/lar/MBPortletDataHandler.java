@@ -128,7 +128,7 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.messageboards",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));

@@ -103,7 +103,7 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.blogs", portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));

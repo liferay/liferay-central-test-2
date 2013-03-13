@@ -1631,7 +1631,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.journal",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));

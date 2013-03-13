@@ -1829,7 +1829,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.documentlibrary",
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = addExportRootElement();
+		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
