@@ -737,6 +737,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _expandoColumnsMap;
 	}
 
+	public Element getExportDataRootElement() {
+		return _exportDataRootElement;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -1286,6 +1290,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.setClassLoader(classLoader);
 	}
 
+	public void setExportDataRootElement(Element exportDataRootElement) {
+		_exportDataRootElement = exportDataRootElement;
+	}
+
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
@@ -1570,6 +1578,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Date _endDate;
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
 		new HashMap<String, List<ExpandoColumn>>();
+	private Element _exportDataRootElement;
 	private long _groupId;
 	private Element _importDataRootElement;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();

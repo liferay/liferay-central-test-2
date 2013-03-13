@@ -154,6 +154,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, List<ExpandoColumn>> getExpandoColumns();
 
+	public Element getExportDataRootElement();
+
 	public long getGroupId();
 
 	public Element getImportDataRootElement();
@@ -268,6 +270,8 @@ public interface PortletDataContext extends Serializable {
 	public void putNotUniquePerLayout(String dataKey);
 
 	public void setClassLoader(ClassLoader classLoader);
+
+	public void setExportDataRootElement(Element exportDataRootElement);
 
 	public void setGroupId(long groupId);
 
