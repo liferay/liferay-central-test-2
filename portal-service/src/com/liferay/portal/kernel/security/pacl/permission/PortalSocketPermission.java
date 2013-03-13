@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,7 +25,6 @@ import java.net.URL;
 
 import java.security.Permission;
 
-
 /**
  * @author Raymond Augé
  */
@@ -36,7 +35,7 @@ public class PortalSocketPermission {
 
 		String domain = HttpUtil.getDomain(location);
 		int port = -1;
-		String protocol = HttpUtil.getProtocol(location).toLowerCase();
+		String protocol = HttpUtil.getProtocol(location);
 
 		checkConnect(domain, port, protocol);
 	}
@@ -44,7 +43,7 @@ public class PortalSocketPermission {
 	public static void checkConnect(String location) {
 		String domain = HttpUtil.getDomain(location);
 		int port = -1;
-		String protocol = HttpUtil.getProtocol(location).toLowerCase();
+		String protocol = HttpUtil.getProtocol(location);
 
 		checkConnect(domain, port, protocol);
 	}
@@ -56,7 +55,7 @@ public class PortalSocketPermission {
 
 		String domain = url.getHost();
 		int port = url.getPort();
-		String protocol = url.getProtocol().toLowerCase();
+		String protocol = url.getProtocol();
 
 		checkConnect(domain, port, protocol);
 	}
@@ -70,6 +69,8 @@ public class PortalSocketPermission {
 		}
 
 		if (port == -1) {
+			protocol = protocol.toLowerCase();
+
 			if (protocol.startsWith(Http.HTTPS)) {
 				port = Http.HTTPS_PORT;
 			}
