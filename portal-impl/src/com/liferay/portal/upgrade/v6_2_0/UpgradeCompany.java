@@ -15,8 +15,6 @@
 package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Company;
@@ -35,10 +33,9 @@ public class UpgradeCompany extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		if (Encryptor.KEY_ALGORITHM.equals("DES")) {
-			_log.warn(
-				"Unable to upgrade company key, DES is chosen as default");
+		String keyAlgorithm = Encryptor.KEY_ALGORITHM;
 
+		if (keyAlgorithm.equals("DES")) {
 			return;
 		}
 
@@ -53,6 +50,7 @@ public class UpgradeCompany extends UpgradeProcess {
 		throws EncryptorException, SystemException {
 
 		Key key = company.getKeyObj();
+
 		String algorithm = key.getAlgorithm();
 
 		if (!algorithm.equals("DES")) {
@@ -65,7 +63,5 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		CompanyLocalServiceUtil.updateCompany(company);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeCompany.class);
 
 }
