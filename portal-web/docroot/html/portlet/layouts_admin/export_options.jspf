@@ -243,58 +243,56 @@
 											PortletDataHandler portletDataHandler = portlet.getPortletDataHandlerInstance();
 
 											try {
-												PortletDataHandlerControl[] metadataControls = null;
+												PortletDataHandlerControl[] metadataControls = portletDataHandler.getExportMetadataControls();
 
-													metadataControls = portletDataHandler.getExportMetadataControls();
+												if (metadataControls.length > 0) {
+													String rootPortletId = portlet.getRootPortletId();
 
-													if (metadataControls.length > 0) {
-														String rootPortletId = portlet.getRootPortletId();
+													for (int i = 0; i < metadataControls.length; i++) {
+														if (!displayedControls.contains(metadataControls[i].getControlName())) {
+															displayedControls.add(metadataControls[i].getControlName());
+														}
+														else {
+															continue;
+														}
 
-														for (int i = 0; i < metadataControls.length; i++) {
-															if (!displayedControls.contains(metadataControls[i].getControlName())) {
-																displayedControls.add(metadataControls[i].getControlName());
-															}
-															else {
-																continue;
-															}
+														PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)metadataControls[i];
 
-															PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)metadataControls[i];
+														PortletDataHandlerControl[] childrenControls = control.getChildren();
 
-															PortletDataHandlerControl[] childrenControls = control.getChildren();
-
-															if ((childrenControls != null) && (childrenControls.length > 0)) {
-																request.setAttribute("render_controls.jsp-controls", childrenControls);
+														if ((childrenControls != null) && (childrenControls.length > 0)) {
+															request.setAttribute("render_controls.jsp-controls", childrenControls);
 												%>
 
-																<li class="tree-item">
-																	<aui:fieldset cssClass="portlet-type-data-section" label="<%= metadataControls[i].getControlName() %>">
-																		<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
-																			<liferay-util:include page="/html/portlet/layouts_admin/render_controls.jsp" />
-																		</ul>
-																	</aui:fieldset>
-																</li>
+															<li class="tree-item">
+																<aui:fieldset cssClass="portlet-type-data-section" label="<%= metadataControls[i].getControlName() %>">
+																	<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
+																		<liferay-util:include page="/html/portlet/layouts_admin/render_controls.jsp" />
+																	</ul>
+																</aui:fieldset>
+															</li>
 
 												<%
-															}
 														}
 													}
 												}
-												catch (PortletDataException pde) {
-												%>
-
-													<li class="tree-item">
-														<div class="portlet-msg-error">
-															<%= PortalUtil.getPortletTitle(portlet, application, locale) %>: <%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %>
-														</div>
-													</li>
-
-											<%
-												}
 											}
+											catch (PortletDataException pde) {
 											%>
 
-										</ul>
-									</aui:fieldset>
+												<li class="tree-item">
+													<div class="portlet-msg-error">
+														<%= PortalUtil.getPortletTitle(portlet, application, locale) %>: <%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %>
+													</div>
+												</li>
+
+										<%
+											}
+										}
+										%>
+
+									</ul>
+								</aui:fieldset>
 							</li>
 						</ul>
 					</c:if>
