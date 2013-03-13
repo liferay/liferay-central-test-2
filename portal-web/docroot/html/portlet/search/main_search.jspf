@@ -19,15 +19,15 @@ SearchContainer mainSearchSearchContainer = new SearchContainer(renderRequest, n
 
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+searchContext.setAttribute("paginationType", "more");
+searchContext.setEnd(mainSearchSearchContainer.getEnd());
+
 if (groupId != 0) {
 	searchContext.setGroupIds(new long[] {groupId});
 }
 else {
 	searchContext.setGroupIds(new long[0]);
 }
-
-searchContext.setAttribute("paginationType", "more");
-searchContext.setEnd(mainSearchSearchContainer.getEnd());
 
 QueryConfig queryConfig = new QueryConfig();
 
