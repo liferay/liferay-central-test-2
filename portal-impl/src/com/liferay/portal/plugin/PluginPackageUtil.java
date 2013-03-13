@@ -640,13 +640,15 @@ public class PluginPackageUtil {
 		String pluginsXmlURL = sb.toString();
 
 		try {
-			Object httpObject = HttpUtil.getHttp();
 			HttpImpl httpImpl = null;
 
-			if (httpObject instanceof DoPrivilegedBean) {
-				DoPrivilegedBean wrapper = (DoPrivilegedBean)httpObject;
+			Object httpObject = HttpUtil.getHttp();
 
-				httpImpl = (HttpImpl)wrapper.getActualBean();
+			if (httpObject instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)httpObject;
+
+				httpImpl = (HttpImpl)doPrivilegedBean.getActualBean();
 			}
 			else {
 				httpImpl = (HttpImpl)httpObject;
