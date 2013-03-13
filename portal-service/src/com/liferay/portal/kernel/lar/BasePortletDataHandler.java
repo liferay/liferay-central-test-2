@@ -129,6 +129,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 				Element rootElement = document.getRootElement();
 
+				portletDataContext.setImportDataRootElement(rootElement);
+
 				long portletSourceGroupId = GetterUtil.getLong(
 					rootElement.attributeValue("group-id"));
 

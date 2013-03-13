@@ -156,6 +156,8 @@ public interface PortletDataContext extends Serializable {
 
 	public long getGroupId();
 
+	public Element getImportDataRootElement();
+
 	public String getLayoutPath(long layoutId);
 
 	public Map<String, Lock> getLocks();
@@ -268,6 +270,8 @@ public interface PortletDataContext extends Serializable {
 	public void setClassLoader(ClassLoader classLoader);
 
 	public void setGroupId(long groupId);
+
+	public void setImportDataRootElement(Element importDataRootElement);
 
 	public void setOldPlid(long oldPlid);
 

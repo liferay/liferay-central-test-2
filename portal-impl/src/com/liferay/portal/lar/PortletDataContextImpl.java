@@ -741,6 +741,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _groupId;
 	}
 
+	public Element getImportDataRootElement() {
+		return _importDataRootElement;
+	}
+
 	public String getLayoutPath(long layoutId) {
 		return getRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
@@ -1286,6 +1290,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_groupId = groupId;
 	}
 
+	public void setImportDataRootElement(Element importDataRootElement) {
+		_importDataRootElement = importDataRootElement;
+	}
+
 	public void setOldPlid(long oldPlid) {
 		_oldPlid = oldPlid;
 	}
@@ -1563,6 +1571,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
 		new HashMap<String, List<ExpandoColumn>>();
 	private long _groupId;
+	private Element _importDataRootElement;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
 		new HashMap<String, Map<?, ?>>();
