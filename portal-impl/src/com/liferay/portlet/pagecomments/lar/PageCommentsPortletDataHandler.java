@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -87,10 +86,6 @@ public class PageCommentsPortletDataHandler extends BasePortletDataHandler {
 			"com.liferay.portlet.pagecomments",
 			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
-
-		if (Validator.isNull(data)) {
-			return null;
-		}
 
 		Document document = SAXReaderUtil.read(data);
 

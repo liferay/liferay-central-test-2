@@ -238,10 +238,6 @@ public class JournalContentPortletDataHandler
 			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
-		if (Validator.isNull(data)) {
-			return null;
-		}
-
 		long previousScopeGroupId = portletDataContext.getScopeGroupId();
 
 		long importGroupId = GetterUtil.getLong(

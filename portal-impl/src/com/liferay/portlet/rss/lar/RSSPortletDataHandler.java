@@ -233,10 +233,6 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		if (Validator.isNull(data)) {
-			return null;
-		}
-
 		Document document = SAXReaderUtil.read(data);
 
 		Element rootElement = document.getRootElement();
