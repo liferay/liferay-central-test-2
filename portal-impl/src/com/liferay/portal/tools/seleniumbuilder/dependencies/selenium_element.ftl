@@ -2,8 +2,15 @@
 
 liferaySelenium.${selenium}(
 
-<#if seleniumBuilderContext.getSeleniumParameterCount(selenium) \gte 1>
-	<#if selenium = "assertConfirmation" || selenium = "assertTextNotPresent" || selenium = "assertTextPresent" || selenium = "waitForConfirmation" || selenium = "waitForTextNotPresent" || selenium = "waitForTextPresent">
+<#if seleniumBuilderContext.getSeleniumParameterCount(selenium) gte 1>
+	<#if
+		(selenium = "assertConfirmation") ||
+		(selenium = "assertTextNotPresent") ||
+		(selenium = "assertTextPresent") ||
+		(selenium = "waitForConfirmation") ||
+		(selenium = "waitForTextNotPresent") ||
+		(selenium = "waitForTextPresent")
+	>
 		value1
 	<#elseif seleniumElement.attributeValue("target")??>
 		<#assign target = seleniumElement.attributeValue("target")>
