@@ -359,9 +359,8 @@ public class BundleServletContext extends LiferayServletContext {
 	}
 
 	public void registerListener(
-			Object listener, Map<String, String> initParameters,
-			HttpContext httpContext)
-		throws ServletException {
+		Object listener, Map<String, String> initParameters,
+		HttpContext httpContext) {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -533,10 +532,10 @@ public class BundleServletContext extends LiferayServletContext {
 	public void removeAttribute(String name) {
 		Object value = _contextAttributes.remove(name);
 
-		for (ServletContextAttributeListener listener :
+		for (ServletContextAttributeListener servletContextAttributeListener :
 				_servletContextAttributeListeners) {
 
-			listener.attributeRemoved(
+			servletContextAttributeListener.attributeRemoved(
 				new ServletContextAttributeEvent(this, name, value));
 		}
 	}
@@ -813,21 +812,21 @@ public class BundleServletContext extends LiferayServletContext {
 	private HttpServiceTracker _httpServiceTracker;
 	private Map<String, String> _initParameters = new HashMap<String, String>();
 	private ServiceRegistration<BundleServletContext> _serviceRegistration;
-	private List<ServletContextListener> _servletContextListeners =
-		new ArrayList<ServletContextListener>();
-	private String _servletContextName;
 	private List<ServletContextAttributeListener>
 		_servletContextAttributeListeners =
 			new ArrayList<ServletContextAttributeListener>();
+	private List<ServletContextListener> _servletContextListeners =
+		new ArrayList<ServletContextListener>();
+	private String _servletContextName;
+	private List<ServletRequestAttributeListener>
+		_servletRequestAttributeListeners =
+			new ArrayList<ServletRequestAttributeListener>();
 	private List<ServletRequestListener> _servletRequestListeners =
 		new ArrayList<ServletRequestListener>();
 	private Map<String, Servlet> _servletsByServletNames =
 		new ConcurrentHashMap<String, Servlet>();
 	private Map<String, Servlet> _servletsByURLPatterns =
 		new ConcurrentHashMap<String, Servlet>();
-	private List<ServletRequestAttributeListener>
-		_servletRequestAttributeListeners =
-			new ArrayList<ServletRequestAttributeListener>();
 	private File _tempDir;
 
 	private class FilterServiceRanking

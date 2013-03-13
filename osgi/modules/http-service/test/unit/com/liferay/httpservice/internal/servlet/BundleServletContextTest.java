@@ -102,28 +102,22 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testRegisterHttpSessionActivationListener()
-		throws ServletException {
-
+	public void testRegisterHttpSessionActivationListener() {
 		registerListener(_httpSessionActivationListener);
 	}
 
 	@Test
-	public void testRegisterHttpSessionAttributeListener()
-		throws ServletException {
-
+	public void testRegisterHttpSessionAttributeListener() {
 		registerListener(_httpSessionAttributeListener);
 	}
 
 	@Test
-	public void testRegisterHttpSessionBindingListener()
-		throws ServletException {
-
+	public void testRegisterHttpSessionBindingListener() {
 		registerListener(_httpSessionBindingListener);
 	}
 
 	@Test
-	public void testRegisterHttpSessionListener() throws ServletException {
+	public void testRegisterHttpSessionListener() {
 		registerListener(_httpSessionListener);
 	}
 
@@ -191,14 +185,12 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testRegisterServletContextAttributeListener()
-		throws ServletException {
-
+	public void testRegisterServletContextAttributeListener() {
 		registerListener(_servletContextAttributeListener);
 	}
 
 	@Test
-	public void testRegisterServletContextListener() throws ServletException {
+	public void testRegisterServletContextListener() {
 		registerListener(_servletContextListener);
 	}
 
@@ -226,39 +218,34 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testRegisterServletRequestAttributeListener()
-		throws ServletException {
-
+	public void testRegisterServletRequestAttributeListener() {
 		List<ServletRequestAttributeListener> servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		int oldSize = servletRequestAttributeListeners.size();
+		int initialSize = servletRequestAttributeListeners.size();
 
 		registerListener(_servletRequestAttributeListener);
 
 		servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		int currentSize = servletRequestAttributeListeners.size();
-
-		Assert.assertEquals(oldSize + 1, currentSize);
+		Assert.assertEquals(
+			initialSize + 1, servletRequestAttributeListeners.size());
 	}
 
 	@Test
-	public void testRegisterServletRequestListener() throws ServletException {
+	public void testRegisterServletRequestListener() {
 		List<ServletRequestListener> servletRequestListeners =
 			_bundleServletContext.getServletRequestListeners();
 
-		int oldSize = servletRequestListeners.size();
+		int initialSize = servletRequestListeners.size();
 
 		registerListener(_servletRequestListener);
 
 		servletRequestListeners =
 			_bundleServletContext.getServletRequestListeners();
 
-		int currentSize = servletRequestListeners.size();
-
-		Assert.assertEquals(oldSize + 1, currentSize);
+		Assert.assertEquals(initialSize + 1, servletRequestListeners.size());
 	}
 
 	@Test
@@ -269,14 +256,12 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testUnegisterHttpSessionAttributeListener()
-		throws ServletException {
-
+	public void testUnegisterHttpSessionAttributeListener() {
 		unregisterListener(_httpSessionAttributeListener);
 	}
 
 	@Test
-	public void testUnegisterServletContextListener() throws ServletException {
+	public void testUnegisterServletContextListener() {
 		unregisterListener(_servletContextListener);
 	}
 
@@ -296,29 +281,24 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testUnregisterHttpSessionActivationListener()
-		throws ServletException {
-
+	public void testUnregisterHttpSessionActivationListener() {
 		unregisterListener(_httpSessionActivationListener);
 	}
 
 	@Test
-	public void testUnregisterHttpSessionBindingListener()
-		throws ServletException {
+	public void testUnregisterHttpSessionBindingListener() {
 
 		unregisterListener(_httpSessionBindingListener);
 	}
 
 	@Test
-	public void testUnregisterHttpSessionListener() throws ServletException {
+	public void testUnregisterHttpSessionListener() {
 		unregisterListener(_httpSessionListener);
 	}
 
 	@Test
-	public void testUnregisterNonExistingServlet()
-		throws NamespaceException, ServletException {
-
-		String servletName = "Non existing servlet";
+	public void testUnregisterNonExistingServlet() {
+		String servletName = "Nonexisting Servlet";
 
 		_bundleServletContext.unregisterServlet(servletName);
 
@@ -328,20 +308,16 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testUnregisterServletContextAttributeListener()
-		throws ServletException {
-
+	public void testUnregisterServletContextAttributeListener() {
 		registerListener(_servletContextAttributeListener);
 	}
 
 	@Test
-	public void testUnregisterServletRequestAttributeListener()
-		throws ServletException {
-
+	public void testUnregisterServletRequestAttributeListener() {
 		List<ServletRequestAttributeListener> servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		int oldSize = servletRequestAttributeListeners.size();
+		int initialSize = servletRequestAttributeListeners.size();
 
 		registerListener(_servletRequestAttributeListener);
 
@@ -350,17 +326,16 @@ public class BundleServletContextTest extends PowerMockito {
 		servletRequestAttributeListeners =
 			_bundleServletContext.getServletRequestAttributeListeners();
 
-		int currentSize = servletRequestAttributeListeners.size();
-
-		Assert.assertEquals(oldSize, currentSize);
+		Assert.assertEquals(
+			initialSize, servletRequestAttributeListeners.size());
 	}
 
 	@Test
-	public void testUnregisterServletRequestListener() throws ServletException {
+	public void testUnregisterServletRequestListener() {
 		List<ServletRequestListener> servletRequestListeners =
 			_bundleServletContext.getServletRequestListeners();
 
-		int oldSize = servletRequestListeners.size();
+		int initialSize = servletRequestListeners.size();
 
 		registerListener(_servletRequestListener);
 
@@ -369,9 +344,7 @@ public class BundleServletContextTest extends PowerMockito {
 		servletRequestListeners =
 			_bundleServletContext.getServletRequestListeners();
 
-		int currentSize = servletRequestListeners.size();
-
-		Assert.assertEquals(oldSize, currentSize);
+		Assert.assertEquals(initialSize, servletRequestListeners.size());
 	}
 
 	protected void mockBundleWiring() {
@@ -390,7 +363,7 @@ public class BundleServletContextTest extends PowerMockito {
 		);
 	}
 
-	protected void registerListener(Object listener) throws ServletException {
+	protected void registerListener(Object listener) {
 		mockBundleWiring();
 
 		_bundleServletContext.registerListener(listener, null, _httpContext);

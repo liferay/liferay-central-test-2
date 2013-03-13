@@ -56,9 +56,8 @@ public class HttpServiceWrapper implements ExtendedHttpService, HttpService {
 	}
 
 	public void registerListener(
-			Object listener, Map<String, String> initParameters,
-			HttpContext httpContext)
-		throws ServletException {
+		Object listener, Map<String, String> initParameters,
+		HttpContext httpContext) {
 
 		bundleServletContext.registerListener(
 			listener, initParameters, httpContext);

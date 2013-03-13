@@ -37,9 +37,8 @@ public interface ExtendedHttpService extends HttpService {
 		throws NamespaceException, ServletException;
 
 	public void registerListener(
-			Object listener, Map<String, String> initParameters,
-			HttpContext httpContext)
-		throws ServletException;
+		Object listener, Map<String, String> initParameters,
+		HttpContext httpContext);
 
 	public void registerServlet(
 			String servletName, List<String> urlPatterns, Servlet servlet,
