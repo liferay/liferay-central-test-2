@@ -106,7 +106,7 @@ public class PollsQuestionLocalServiceImpl
 		if (choices != null) {
 			for (PollsChoice choice : choices) {
 				pollsChoiceLocalService.addChoice(
-					questionId, userId, choice.getName(),
+					userId, questionId, choice.getName(),
 					choice.getDescription(), new ServiceContext());
 			}
 		}

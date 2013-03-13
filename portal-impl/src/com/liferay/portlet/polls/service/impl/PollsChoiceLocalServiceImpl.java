@@ -40,9 +40,9 @@ public class PollsChoiceLocalServiceImpl
 
 		validate(name, description);
 
+		User user = userPersistence.findByPrimaryKey(userId);
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
-		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		long choiceId = counterLocalService.increment();
