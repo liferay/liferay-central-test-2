@@ -470,8 +470,8 @@ public class AssetUtil {
 
 		if (sortField.equals(Field.CREATE_DATE) ||
 			sortField.equals(Field.EXPIRATION_DATE) ||
-			sortField.equals("modifiedDate") ||
-			sortField.equals(Field.PUBLISH_DATE)) {
+			sortField.equals(Field.PUBLISH_DATE) ||
+			sortField.equals("modifiedDate")) {
 
 			sortType = Sort.LONG_TYPE;
 		}
@@ -503,7 +503,6 @@ public class AssetUtil {
 		Sort sort1 = getSort(
 			assetEntryQuery.getOrderByType1(), assetEntryQuery.getOrderByCol1(),
 			locale);
-
 		Sort sort2 = getSort(
 			assetEntryQuery.getOrderByType2(), assetEntryQuery.getOrderByCol2(),
 			locale);

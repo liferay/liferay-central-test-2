@@ -645,8 +645,8 @@ public class DocumentImpl implements Document {
 		return field.getValues();
 	}
 
-	public boolean hasField(String field) {
-		if (_fields.containsKey(field)) {
+	public boolean hasField(String name) {
+		if (_fields.containsKey(name)) {
 			return true;
 		}
 

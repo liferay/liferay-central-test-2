@@ -518,11 +518,6 @@ public abstract class BaseIndexer implements Indexer {
 			document.addDate(Field.EXPIRATION_DATE, new Date(Long.MAX_VALUE));
 		}
 
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-			assetEntry.getTitle(), true);
-
-		document.addLocalizedKeyword("localized_title", titleMap, true);
-
 		if (!document.hasField(Field.MODIFIED_DATE)) {
 			document.addDate(Field.MODIFIED_DATE, assetEntry.getModifiedDate());
 		}
@@ -542,6 +537,11 @@ public abstract class BaseIndexer implements Indexer {
 		document.addNumber(Field.RATINGS, ratingsStats.getAverageScore());
 
 		document.addNumber(Field.VIEW_COUNT, assetEntry.getViewCount());
+
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+			assetEntry.getTitle(), true);
+
+		document.addLocalizedKeyword("localized_title", titleMap, true);
 	}
 
 	/**
