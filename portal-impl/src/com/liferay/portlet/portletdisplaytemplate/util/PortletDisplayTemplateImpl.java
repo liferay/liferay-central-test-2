@@ -164,8 +164,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		return portletDisplayDDMTemplateId;
 	}
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap() {
-		Map<String, TemplateVariableGroup> templateVariableGroupMap =
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups() {
+		Map<String, TemplateVariableGroup> templateVariableGroups =
 			new LinkedHashMap<String, TemplateVariableGroup>();
 
 		TemplateVariableGroup fieldsTemplateVariableGroup =
@@ -177,27 +177,27 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		fieldsTemplateVariableGroup.addVariable(
 			"entry", null, PortletDisplayTemplateConstants.ENTRY);
 
-		templateVariableGroupMap.put("fields", fieldsTemplateVariableGroup);
+		templateVariableGroups.put("fields", fieldsTemplateVariableGroup);
 
 		TemplateVariableGroup generalVariablesTemplateVariableGroup =
 			new TemplateVariableGroup("general-variables");
 
 		generalVariablesTemplateVariableGroup.addVariable(
+			"current-url", String.class,
+			PortletDisplayTemplateConstants.CURRENT_URL);
+		generalVariablesTemplateVariableGroup.addVariable(
 			"locale", Locale.class, PortletDisplayTemplateConstants.LOCALE);
+		generalVariablesTemplateVariableGroup.addVariable(
+			"portlet-preferences", Map.class,
+			PortletDisplayTemplateConstants.PORTLET_PREFERENCES);
 		generalVariablesTemplateVariableGroup.addVariable(
 			"template-id", null,
 			PortletDisplayTemplateConstants.DDM_TEMPLATE_ID);
 		generalVariablesTemplateVariableGroup.addVariable(
-			"current-url", String.class,
-			PortletDisplayTemplateConstants.CURRENT_URL);
-		generalVariablesTemplateVariableGroup.addVariable(
 			"theme-display", ThemeDisplay.class,
 			PortletDisplayTemplateConstants.THEME_DISPLAY);
-		generalVariablesTemplateVariableGroup.addVariable(
-			"portlet-preferences", Map.class,
-			PortletDisplayTemplateConstants.PORTLET_PREFERENCES);
 
-		templateVariableGroupMap.put(
+		templateVariableGroups.put(
 			"general-variables", generalVariablesTemplateVariableGroup);
 
 		TemplateVariableGroup utilTemplateVariableGroup =
@@ -207,18 +207,18 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			"http-request", HttpServletRequest.class,
 			PortletDisplayTemplateConstants.REQUEST);
 		utilTemplateVariableGroup.addVariable(
+			"liferay-taglib", VelocityTaglib.class,
+			PortletDisplayTemplateConstants.TAGLIB_LIFERAY);
+		utilTemplateVariableGroup.addVariable(
 			"render-request", RenderRequest.class,
 			PortletDisplayTemplateConstants.RENDER_REQUEST);
 		utilTemplateVariableGroup.addVariable(
 			"render-response", RenderResponse.class,
 			PortletDisplayTemplateConstants.RENDER_RESPONSE);
-		utilTemplateVariableGroup.addVariable(
-			"liferay-taglib", VelocityTaglib.class,
-			PortletDisplayTemplateConstants.TAGLIB_LIFERAY);
 
-		templateVariableGroupMap.put("util", utilTemplateVariableGroup);
+		templateVariableGroups.put("util", utilTemplateVariableGroup);
 
-		return templateVariableGroupMap;
+		return templateVariableGroups;
 	}
 
 	public String renderDDMTemplate(

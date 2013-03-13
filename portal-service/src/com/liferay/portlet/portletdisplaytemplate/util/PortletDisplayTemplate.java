@@ -35,7 +35,7 @@ public interface PortletDisplayTemplate {
 	public long getPortletDisplayTemplateDDMTemplateId(
 		ThemeDisplay themeDisplay, String displayStyle);
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap();
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups();
 
 	public String renderDDMTemplate(
 			PageContext pageContext, long ddmTemplateId, List<?> entries)

@@ -20,33 +20,32 @@ package com.liferay.portal.kernel.template;
 public class TemplateVariableDefinition {
 
 	public TemplateVariableDefinition(
-		String labelKey, Class clazz, String variableName) {
+		String label, Class<?> clazz, String variableName) {
 
-		_labelKey = labelKey;
-		_name = variableName;
+		_label = label;
 		_clazz = clazz;
+		_name = variableName;
 	}
 
 	public TemplateVariableDefinition(
-		String labelKey, Class clazz, String variableName,
-		TemplateVariableDefinition collectionItem) {
+		String label, Class<?> clazz, String variableName,
+		TemplateVariableDefinition itemTemplateVariableDefinition) {
 
-		_collectionItem = collectionItem;
-		_labelKey = labelKey;
-		_name = variableName;
-		_clazz = clazz;
+		this(label, clazz, variableName);
+
+		_itemTemplateVariableDefinition = itemTemplateVariableDefinition;
 	}
 
-	public Class getClazz() {
+	public Class<?> getClazz() {
 		return _clazz;
 	}
 
-	public TemplateVariableDefinition getCollectionItem() {
-		return _collectionItem;
+	public TemplateVariableDefinition getItemTemplateVariableDefinition() {
+		return _itemTemplateVariableDefinition;
 	}
 
-	public String getLabelKey() {
-		return _labelKey;
+	public String getLabel() {
+		return _label;
 	}
 
 	public String getName() {
@@ -54,15 +53,16 @@ public class TemplateVariableDefinition {
 	}
 
 	public boolean isCollection() {
-		if (_collectionItem != null) {
+		if (_itemTemplateVariableDefinition != null) {
 			return true;
 		}
 
 		return false;
 	}
 
-	private TemplateVariableDefinition _collectionItem;
-	private Class _clazz; private String _labelKey;
+	private Class<?> _clazz;
+	private TemplateVariableDefinition _itemTemplateVariableDefinition;
+	private String _label;
 	private String _name;
 
 }

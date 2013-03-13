@@ -57,14 +57,25 @@ public class AssetPublisherPortletDisplayTemplateHandler
 		return PropsKeys.ASSET_PUBLISHER_DISPLAY_TEMPLATES_HELP;
 	}
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap(
+	@Override
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
 		long classPK) {
 
-		Map<String, TemplateVariableGroup> templateVariablesMap =
-			super.getTemplateVariablesMap(classPK);
+		Map<String, TemplateVariableGroup> templateVariableGroups =
+			super.getTemplateVariableGroups(classPK);
+
+		TemplateVariableGroup assetPublisherUtilTemplateVariableGroup =
+			new TemplateVariableGroup("asset-publisher-util");
+
+		assetPublisherUtilTemplateVariableGroup.addVariable(
+			"asset-publisher-helper", AssetPublisherHelper.class,
+			PortletDisplayTemplateConstants.ASSET_PUBLISHER_HELPER);
+
+		templateVariableGroups.put(
+			"asset-publisher-util", assetPublisherUtilTemplateVariableGroup);
 
 		TemplateVariableGroup fieldsTemplateVariableGroup =
-			templateVariablesMap.get("fields");
+			templateVariableGroups.get("fields");
 
 		fieldsTemplateVariableGroup.empty();
 
@@ -76,17 +87,7 @@ public class AssetPublisherPortletDisplayTemplateHandler
 			"asset-entry", AssetEntry.class,
 			PortletDisplayTemplateConstants.ENTRY);
 
-		TemplateVariableGroup assetUtilTemplateVariableGroup =
-			new TemplateVariableGroup("asset-publisher-util");
-
-		assetUtilTemplateVariableGroup.addVariable(
-			"asset-publisher-helper", AssetPublisherHelper.class,
-			PortletDisplayTemplateConstants.ASSET_PUBLISHER_HELPER);
-
-		templateVariablesMap.put(
-			"asset-publisher-util", assetUtilTemplateVariableGroup);
-
-		return templateVariablesMap;
+		return templateVariableGroups;
 	}
 
 	@Override

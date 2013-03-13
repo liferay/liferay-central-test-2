@@ -106,27 +106,27 @@ import org.apache.struts.tiles.ComponentContext;
  */
 public class TemplateContextHelper {
 
-	public static Map<String, TemplateVariableGroup> getTemplateVariablesMap(
+	public static Map<String, TemplateVariableGroup> getTemplateVariableGroups(
 		long classNameId, long classPK) {
 
-		PortletDisplayTemplateHandler handler =
+		PortletDisplayTemplateHandler portletDisplayTemplateHandler =
 			PortletDisplayTemplateHandlerRegistryUtil.
 				getPortletDisplayTemplateHandler(classNameId);
 
-		if (handler == null) {
-			return null;
+		if (portletDisplayTemplateHandler == null) {
+			return Collections.emptyMap();
 		}
 
-		Map<String, TemplateVariableGroup> templateVariablesMap =
-			handler.getTemplateVariablesMap(classPK);
+		Map<String, TemplateVariableGroup> templateVariableGroups =
+			portletDisplayTemplateHandler.getTemplateVariableGroups(classPK);
 
 		TemplateVariableGroup utilTemplateVariableGroup =
-			templateVariablesMap.get("util");
+			templateVariableGroups.get("util");
 
 		utilTemplateVariableGroup.addVariable(
 			"http-request", HttpServletRequest.class, "request");
 
-		return templateVariablesMap;
+		return templateVariableGroups;
 	}
 
 	public Map<String, Object> getHelperUtilities(

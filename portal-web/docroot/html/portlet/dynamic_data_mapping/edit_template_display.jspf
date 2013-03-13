@@ -32,16 +32,14 @@ else {
 
 boolean useRichEditor = editorType.equals("rich");
 
-Map<String, TemplateVariableGroup> templateVariablesMap = null;
+Map<String, TemplateVariableGroup> templateVariableGroups = Collections.emptyMap();
 
 if (template != null) {
-	templateVariablesMap = TemplateContextHelper.getTemplateVariablesMap(template.getClassNameId(), classPK);
+	templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(template.getClassNameId(), classPK);
 }
 else if (classNameId > 0) {
-	templateVariablesMap = TemplateContextHelper.getTemplateVariablesMap(classNameId, classPK);
+	templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNameId, classPK);
 }
-
-boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMap.isEmpty());
 %>
 
 <aui:input name="scriptContent" type="hidden" value="<%= script %>" />
@@ -78,17 +76,8 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 		</div>
 
 		<div class="lfr-template-editor-container">
-
-			<%
-			String cssClassPalette = "lfr-template-palette-container";
-
-			if (!language.equalsIgnoreCase("ftl")) {
-				cssClassPalette += " aui-helper-hidden";
-			}
-			%>
-
-			<c:if test="<%= displayPalette %>">
-				<div class="<%= cssClassPalette %>" id="<portlet:namespace />templatePaletteContainer">
+			<c:if test="<%= !templateVariableGroups.isEmpty() %>">
+				<div class="lfr-template-palette-container<%= !language.equalsIgnoreCase("ftl") ? " aui-helper-hidden" : "" %>" id="<portlet:namespace />templatePaletteContainer">
 					<div class="minimize-panels" id="<portlet:namespace />paletteToggler">
 						<a href="javascript:;">
 							<span><liferay-ui:message key="minimize-panels" /></span>
@@ -99,49 +88,43 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 						<div id="<portlet:namespace />paletteData">
 
 							<%
-							for (TemplateVariableGroup templateVariableGroup : templateVariablesMap.values()) {
+							for (TemplateVariableGroup templateVariableGroup : templateVariableGroups.values()) {
 							%>
 
-							<div class="palette-section">
-								<div class="palette-item-header aui-toggler-header-expanded">
-									<span class="palette-item-header-icon"></span>
-									<span><liferay-ui:message key="<%= templateVariableGroup.getLabelKey() %>" /></span>
-								</div>
-								<ul class="palette-item-content">
+								<div class="palette-section">
+									<div class="palette-item-header aui-toggler-header-expanded">
+										<span class="palette-item-header-icon"></span>
 
-									<%
-									for (TemplateVariableDefinition variableDefinition : templateVariableGroup.getVariableDefinitions()) {
+										<span><liferay-ui:message key="<%= templateVariableGroup.getLabel() %>" /></span>
+									</div>
 
-										String dataContent1 = "${" + variableDefinition.getName() + "}";
-										String dataContent2 = StringPool.BLANK;
+									<ul class="palette-item-content">
 
-										if (variableDefinition.isCollection()) {
-											TemplateVariableDefinition itemVariableDefinition = variableDefinition.getCollectionItem();
+										<%
+										for (TemplateVariableDefinition templateVariableDefinition : templateVariableGroup.getTemplateVariableDefinitions()) {
+											String dataContent1 = "${" + templateVariableDefinition.getName() + "}";
+											String dataContent2 = StringPool.BLANK;
 
-											dataContent1 = "<#list " + itemVariableDefinition.getName() + " as " +variableDefinition.getName() + ">";
-											dataContent2 = "</#list>";
-									%>
+											if (templateVariableDefinition.isCollection()) {
+												TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
 
+												dataContent1 = "<#list " + itemTemplateVariableDefinition.getName() + " as " + templateVariableDefinition.getName() + ">";
+												dataContent2 = "</#list>";
+											}
+										%>
 
-									<%
+											<li class="palette-item-container">
+												<span class="palette-item" data-content1="<%= dataContent1 %>" <c:if test="<%= Validator.isNotNull(dataContent2) %>">data-content2="<%= dataContent2 %>"</c:if> title="<%= HtmlUtil.escapeAttribute(_getPaletteItemTitle(pageContext, templateVariableDefinition)) %>">
+													<liferay-ui:message key="<%= templateVariableDefinition.getLabel() %>" />
+												</span>
+											</li>
+
+										<%
 										}
-									%>
+										%>
 
-										<li class="palette-item-container">
-											<span class="palette-item"
-												  data-content1="<%= dataContent1 %>"
-												  <%= Validator.isNotNull(dataContent2) ? "data-content2=\"" + dataContent2 + "\"" : StringPool.BLANK %>
-												  title="<%= HtmlUtil.escapeAttribute(_getPaletteItemTitle(pageContext, variableDefinition)) %>">
-												<liferay-ui:message key="<%= variableDefinition.getLabelKey() %>" />
-											</span>
-										</li>
-
-									<%
-									}
-									%>
-
-								</ul>
-							</div>
+									</ul>
+								</div>
 
 							<%
 							}
@@ -188,7 +171,7 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 	var prevEditorContent;
 	var richEditor;
 
-	<c:if test="<%= displayPalette %>">
+	<c:if test="<%= !templateVariableGroups.isEmpty() %>">
 		var CSS_EDITOR_CONTAINER_FULL = 'lfr-editor-container-full';
 
 		var CSS_EDITOR_CONTAINER_PALETTE_MINIMIZED = 'lfr-editor-container-palette-minimized';
@@ -355,7 +338,7 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 	}
 
 	function onTemplateLanguageChange(event) {
-		<c:if test="<%= displayPalette %>">
+		<c:if test="<%= !templateVariableGroups.isEmpty() %>">
 			updatePalette(event);
 		</c:if>
 
@@ -412,13 +395,13 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 		panelScriptContainer.one('#<portlet:namespace />richEditor').toggle(richEditorType);
 
 		if (richEditorType) {
-			<c:if test="<%= displayPalette %>">
+			<c:if test="<%= !templateVariableGroups.isEmpty() %>">
 				hidePalette();
 			</c:if>
 
 			richEditor.editor.resize();
 		}
-		<c:if test="<%= displayPalette %>">
+		<c:if test="<%= !templateVariableGroups.isEmpty() %>">
 			else {
 				showPalette();
 			}
@@ -464,7 +447,7 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 
 			updateEditorPlugins();
 
-			<c:if test="<%= displayPalette %>">
+			<c:if test="<%= !templateVariableGroups.isEmpty() %>">
 				paletteContainer.delegate('click', onPaletteItemChosen, '.palette-item');
 
 				attachPaletteInteraction();
@@ -496,33 +479,28 @@ boolean displayPalette = ((templateVariablesMap != null) && !templateVariablesMa
 </aui:script>
 
 <%!
-private String _getPaletteItemTitle(PageContext pageContext, TemplateVariableDefinition variableDefinition) {
+private String _getPaletteItemTitle(PageContext pageContext, TemplateVariableDefinition templateVariableDefinition) {
 	StringBundler sb = new StringBundler();
 
 	sb.append("<p>");
-	sb.append(LanguageUtil.get(pageContext, variableDefinition.getLabelKey() + "-help"));
+	sb.append(LanguageUtil.get(pageContext, templateVariableDefinition.getLabel() + "-help"));
 	sb.append("</p>");
 	sb.append(LanguageUtil.get(pageContext, "variable"));
 	sb.append(StringPool.COLON);
 	sb.append("&nbsp;");
-	sb.append(variableDefinition.getName());
+	sb.append(templateVariableDefinition.getName());
+	sb.append(_getPaletteItemTitle(pageContext, "class", templateVariableDefinition.getClazz()));
 
-	Class clazz = variableDefinition.getClazz();
+	if (templateVariableDefinition.isCollection()) {
+		TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
 
-	sb.append(_getPaletteItemTitleClass(pageContext, "class", clazz));
-
-	if (variableDefinition.isCollection()) {
-		TemplateVariableDefinition itemVariableDefinition = variableDefinition.getCollectionItem();
-
-		clazz = itemVariableDefinition.getClazz();
-
-		sb.append(_getPaletteItemTitleClass(pageContext, "items-class", clazz));
+		sb.append(_getPaletteItemTitle(pageContext, "items-class", itemTemplateVariableDefinition.getClazz()));
 	}
 
 	return sb.toString();
 }
 
-private String _getPaletteItemTitleClass(PageContext pageContext, String label, Class clazz) {
+private String _getPaletteItemTitle(PageContext pageContext, String label, Class<?> clazz) {
 	StringBundler sb = new StringBundler();
 
 	if (clazz == null) {
@@ -541,6 +519,7 @@ private String _getPaletteItemTitleClass(PageContext pageContext, String label, 
 	if (className.startsWith("com.liferay")) {
 		javadocURL = "http://docs.liferay.com/portal/6.1/javadocs/";
 	}
+
 	if (Validator.isNotNull(javadocURL)) {
 		sb.append("<a href=\"");
 		sb.append(javadocURL);

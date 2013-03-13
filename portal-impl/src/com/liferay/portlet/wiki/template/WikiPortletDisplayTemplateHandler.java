@@ -55,14 +55,15 @@ public class WikiPortletDisplayTemplateHandler
 		return PropsKeys.WIKI_DISPLAY_TEMPLATES_HELP;
 	}
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap(
+	@Override
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
 		long classPK) {
 
-		Map<String, TemplateVariableGroup> templateVariablesMap =
-			super.getTemplateVariablesMap(classPK);
+		Map<String, TemplateVariableGroup> templateVariableGroups =
+			super.getTemplateVariableGroups(classPK);
 
 		TemplateVariableGroup fieldsTemplateVariableGroup =
-			templateVariablesMap.get("fields");
+			templateVariableGroups.get("fields");
 
 		fieldsTemplateVariableGroup.empty();
 
@@ -71,7 +72,7 @@ public class WikiPortletDisplayTemplateHandler
 		fieldsTemplateVariableGroup.addVariable(
 			"wiki-page-content", String.class, "formattedContent");
 
-		return templateVariablesMap;
+		return templateVariableGroups;
 	}
 
 	@Override

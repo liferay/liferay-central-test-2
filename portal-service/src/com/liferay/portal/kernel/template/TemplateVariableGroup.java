@@ -22,52 +22,56 @@ import java.util.Collection;
  */
 public class TemplateVariableGroup {
 
-	public TemplateVariableGroup(String labelKey) {
-		_labelKey = labelKey;
+	public TemplateVariableGroup(String label) {
+		_label = label;
 	}
 
 	public TemplateVariableDefinition addCollectionVariable(
-		String collectionLabelKey, Class collectionClazz, String collectionName,
-		String itemLabelKey, Class itemClazz, String itemName) {
+		String collectionLabelKey, Class<?> collectionClazz,
+		String collectionName, String itemLabelKey, Class<?> itemClazz,
+		String itemName) {
 
-		TemplateVariableDefinition itemVariableDefinition =
+		TemplateVariableDefinition itemTemplateVariableDefinition =
 			new TemplateVariableDefinition(itemLabelKey, itemClazz, itemName);
 
-		TemplateVariableDefinition collectionVariableDefinition =
+		TemplateVariableDefinition collectionTemplateVariableDefinition =
 			new TemplateVariableDefinition(
 				collectionLabelKey, collectionClazz, collectionName,
-				itemVariableDefinition);
+				itemTemplateVariableDefinition);
 
-		_variableDefinitions.add(collectionVariableDefinition);
+		_templateVariableDefinitions.add(collectionTemplateVariableDefinition);
 
-		return collectionVariableDefinition;
+		return collectionTemplateVariableDefinition;
 	}
 
 	public TemplateVariableDefinition addVariable(
-		String labelKey, Class clazz, String variableName) {
+		String labelKey, Class<?> clazz, String variableName) {
 
-		TemplateVariableDefinition variableDefinition =
+		TemplateVariableDefinition templateVariableDefinition =
 			new TemplateVariableDefinition(labelKey, clazz, variableName);
 
-		_variableDefinitions.add(variableDefinition);
+		_templateVariableDefinitions.add(templateVariableDefinition);
 
-		return variableDefinition;
+		return templateVariableDefinition;
 	}
 
 	public void empty() {
-		_variableDefinitions = new ArrayList<TemplateVariableDefinition>();
+		_templateVariableDefinitions.clear();
 	}
 
-	public String getLabelKey() {
-		return _labelKey;
+	public String getLabel() {
+		return _label;
 	}
 
-	public Collection<TemplateVariableDefinition> getVariableDefinitions() {
-		return _variableDefinitions;
+	public Collection<TemplateVariableDefinition>
+		getTemplateVariableDefinitions() {
+
+		return _templateVariableDefinitions;
 	}
 
-	private String _labelKey;
-	private Collection<TemplateVariableDefinition> _variableDefinitions =
-		new ArrayList<TemplateVariableDefinition>();
+	private String _label;
+	private Collection<TemplateVariableDefinition>
+		_templateVariableDefinitions =
+			new ArrayList<TemplateVariableDefinition>();
 
 }

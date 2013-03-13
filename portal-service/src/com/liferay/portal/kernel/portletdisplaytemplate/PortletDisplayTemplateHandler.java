@@ -81,7 +81,7 @@ public interface PortletDisplayTemplateHandler {
 	 */
 	public String getTemplatesHelpPropertyKey();
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap(
-		long templateClassPK);
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
+		long classPK);
 
 }

@@ -67,10 +67,10 @@ public abstract class BasePortletDisplayTemplateHandler
 		return PropsKeys.PORTLET_DISPLAY_TEMPLATES_HELP;
 	}
 
-	public Map<String, TemplateVariableGroup> getTemplateVariablesMap(
+	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
 		long classPK) {
 
-		return PortletDisplayTemplateUtil.getTemplateVariablesMap();
+		return PortletDisplayTemplateUtil.getTemplateVariableGroups();
 	}
 
 	protected String getTemplatesConfigPath() {
