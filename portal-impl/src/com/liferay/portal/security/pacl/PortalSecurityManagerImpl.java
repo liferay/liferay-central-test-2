@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.security.lang.PortalSecurityManager;
-import com.liferay.portal.security.pacl.checker.CheckerUtil;
 import com.liferay.portal.security.pacl.jndi.PACLInitialContextFactoryBuilder;
 
 import java.lang.reflect.Field;
