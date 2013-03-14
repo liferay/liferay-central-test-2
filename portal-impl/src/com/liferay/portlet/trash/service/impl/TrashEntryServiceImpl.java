@@ -59,8 +59,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	public void deleteEntries(long groupId)
 		throws PrincipalException, SystemException {
 
-		List<TrashEntry> entries = trashEntryPersistence.findByGroupId(
-			groupId);
+		List<TrashEntry> entries = trashEntryPersistence.findByGroupId(groupId);
 
 		for (TrashEntry entry : entries) {
 			try {
