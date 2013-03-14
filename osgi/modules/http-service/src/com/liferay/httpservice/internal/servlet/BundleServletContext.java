@@ -43,7 +43,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
@@ -251,31 +250,31 @@ public class BundleServletContext extends LiferayServletContext {
 
 	@Override
 	public String getRealPath(String path) {
-		URL resourceURL = _httpContext.getResource(path);
+		URL url = _httpContext.getResource(path);
 
-		if (resourceURL != null) {
-			return resourceURL.toExternalForm();
+		if (url != null) {
+			return url.toExternalForm();
 		}
 
 		return path;
 	}
 
 	@Override
-	public URL getResource(String path) throws MalformedURLException {
+	public URL getResource(String path) {
 		return _httpContext.getResource(path);
 	}
 
 	@Override
 	public InputStream getResourceAsStream(String path) {
 		try {
-			URL resourceURL = getResource(path);
+			URL url = getResource(path);
 
-			if (resourceURL != null) {
-				return resourceURL.openStream();
+			if (url != null) {
+				return url.openStream();
 			}
 		}
-		catch (IOException e) {
-			_log.error(e, e);
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 		}
 
 		return null;
@@ -283,21 +282,21 @@ public class BundleServletContext extends LiferayServletContext {
 
 	@Override
 	public Set<String> getResourcePaths(String path) {
-		Set<String> resourcePaths = new HashSet<String>();
+		Set<String> paths = new HashSet<String>();
 
-		Enumeration<String> entryPaths= _bundle.getEntryPaths(path);
+		Enumeration<String> enumeration = _bundle.getEntryPaths(path);
 
-		if (entryPaths == null) {
-			return Collections.EMPTY_SET;
+		if (enumeration == null) {
+			return Collections.emptySet();
 		}
 
-		while (entryPaths.hasMoreElements()) {
-			String resourcePath = entryPaths.nextElement();
+		while (enumeration.hasMoreElements()) {
+			String entryPath = enumeration.nextElement();
 
-			resourcePaths.add(StringPool.SLASH.concat(resourcePath));
+			paths.add(StringPool.SLASH.concat(entryPath));
 		}
 
-		return resourcePaths;
+		return paths;
 	}
 
 	@Override
