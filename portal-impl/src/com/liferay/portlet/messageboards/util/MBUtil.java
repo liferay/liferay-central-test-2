@@ -935,7 +935,7 @@ public class MBUtil {
 	}
 
 	public static void updateCategoryMessageCount(
-		final long categoryId, long companyId) {
+		long companyId, final long categoryId) {
 
 		Callable<Void> callable = new PortalCallable<Void>(companyId) {
 
@@ -965,7 +965,7 @@ public class MBUtil {
 	}
 
 	public static void updateCategoryStatistics(
-		final long categoryId, long companyId) {
+		long companyId, final long categoryId) {
 
 		Callable<Void> callable = new PortalCallable<Void>(companyId) {
 
@@ -1001,7 +1001,7 @@ public class MBUtil {
 	}
 
 	public static void updateCategoryThreadCount(
-		final long categoryId, long companyId) {
+		long companyId, final long categoryId) {
 
 		Callable<Void> callable = new PortalCallable<Void>(companyId) {
 
@@ -1031,7 +1031,7 @@ public class MBUtil {
 	}
 
 	public static void updateThreadMessageCount(
-		final long threadId, long companyId) {
+		long companyId, final long threadId) {
 
 		Callable<Void> callable = new PortalCallable<Void>(companyId) {
 

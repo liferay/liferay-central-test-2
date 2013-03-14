@@ -208,7 +208,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					thread.getCategoryId());
 
 				MBUtil.updateCategoryStatistics(
-					category.getCategoryId(), category.getCompanyId());
+					category.getCompanyId(), category.getCategoryId());
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (!thread.isInTrash()) {
@@ -646,12 +646,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		if ((oldCategory != null) && (categoryId != oldCategoryId)) {
 			MBUtil.updateCategoryStatistics(
-				oldCategory.getCategoryId(), oldCategory.getCompanyId());
+				oldCategory.getCompanyId(), oldCategory.getCategoryId());
 		}
 
 		if ((category != null) && (categoryId != oldCategoryId)) {
 			MBUtil.updateCategoryStatistics(
-				category.getCategoryId(), category.getCompanyId());
+				category.getCompanyId(), category.getCategoryId());
 		}
 
 		return thread;
@@ -813,12 +813,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Update new thread
 
 		MBUtil.updateThreadMessageCount(
-			thread.getThreadId(), thread.getCompanyId());
+			thread.getCompanyId(), thread.getThreadId());
 
 		// Update old thread
 
 		MBUtil.updateThreadMessageCount(
-			oldThread.getThreadId(), oldThread.getCompanyId());
+			oldThread.getCompanyId(), oldThread.getThreadId());
 
 		// Category
 
@@ -828,7 +828,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
 			MBUtil.updateCategoryThreadCount(
-				category.getCategoryId(), category.getCompanyId());
+				category.getCompanyId(), category.getCategoryId());
 		}
 
 		return thread;
@@ -901,7 +901,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					thread.getCategoryId());
 
 				MBUtil.updateCategoryStatistics(
-					category.getCategoryId(), category.getCompanyId());
+					category.getCompanyId(), category.getCategoryId());
 			}
 
 			if (status == WorkflowConstants.STATUS_IN_TRASH) {
