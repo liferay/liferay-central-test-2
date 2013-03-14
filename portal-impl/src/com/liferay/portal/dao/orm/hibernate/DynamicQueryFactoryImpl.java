@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.permission.PortalServicePermission;
 import com.liferay.portal.util.ClassLoaderUtil;
 
-
 import java.util.HashMap;
 import java.util.Map;
 

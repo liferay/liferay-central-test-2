@@ -34,8 +34,8 @@ public class PortalServicePermission extends BasicPermission {
 		}
 
 		Permission permission = new PortalServicePermission(
-			PACLConstants.PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY,
-			implClass, null);
+			PACLConstants.PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY, implClass,
+			null);
 
 		securityManager.checkPermission(permission);
 	}
@@ -51,8 +51,8 @@ public class PortalServicePermission extends BasicPermission {
 
 		PortalServicePermission portalServicePermission =
 			new PortalServicePermission(
-				PACLConstants.PORTAL_SERVICE_PERMISSION_SERVICE, object,
-				method, arguments);
+				PACLConstants.PORTAL_SERVICE_PERMISSION_SERVICE, object, method,
+				arguments);
 
 		securityManager.checkPermission(portalServicePermission);
 	}
@@ -62,7 +62,8 @@ public class PortalServicePermission extends BasicPermission {
 	}
 
 	public PortalServicePermission(
-			String name, Object object, Method method, Object[] arguments) {
+		String name, Object object, Method method, Object[] arguments) {
+
 		super(name);
 
 		_object = object;
