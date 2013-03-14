@@ -272,13 +272,13 @@ public class PortalRuntimeChecker extends BaseChecker {
 			"security-manager-class-loader-reference-ids");
 
 		if (_log.isDebugEnabled()) {
-			Set<String> referenceIds = new TreeSet<String>(
+			Set<String> classLoaderReferenceIds = new TreeSet<String>(
 				_classLoaderReferenceIds);
 
-			for (String referenceId : referenceIds) {
+			for (String classLoaderReferenceId : classLoaderReferenceIds) {
 				_log.debug(
 					"Allowing access to class loader for reference " +
-						referenceId);
+						classLoaderReferenceId);
 			}
 		}
 	}
