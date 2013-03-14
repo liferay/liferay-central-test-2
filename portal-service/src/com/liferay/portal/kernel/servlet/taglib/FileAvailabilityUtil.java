@@ -92,5 +92,4 @@ public class FileAvailabilityUtil {
 	private static Map<String, Boolean> _availabilities =
 		new ConcurrentHashMap<String, Boolean>();
 
-
 }
