@@ -35,8 +35,7 @@ public class FileUtil {
 	public static void copyDirectory(File source, File destination)
 		throws IOException {
 
-		PortalFilePermission.checkCopy(
-			source.getPath(), destination.getPath());
+		PortalFilePermission.checkCopy(source.getPath(), destination.getPath());
 
 		getFile().copyDirectory(source, destination);
 	}
@@ -45,8 +44,7 @@ public class FileUtil {
 			String sourceDirName, String destinationDirName)
 		throws IOException {
 
-		PortalFilePermission.checkCopy(
-			sourceDirName, destinationDirName);
+		PortalFilePermission.checkCopy(sourceDirName, destinationDirName);
 
 		getFile().copyDirectory(sourceDirName, destinationDirName);
 	}
@@ -285,9 +283,6 @@ public class FileUtil {
 	}
 
 	public static void mkdirs(String pathName) {
-
-		// copy checks read/write, same as mkdirs except on the same path
-
 		PortalFilePermission.checkCopy(pathName, pathName);
 
 		getFile().mkdirs(pathName);
