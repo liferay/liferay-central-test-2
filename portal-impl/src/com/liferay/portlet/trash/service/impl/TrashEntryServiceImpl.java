@@ -198,14 +198,14 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				permissionChecker, entry.getGroupId(),
 				destinationContainerModelId, TrashActionKeys.MOVE)) {
 
-			throw new PrincipalException("trash.move.error");
+			throw new PrincipalException();
 		}
 
 		if (trashHandler.isInTrash(classPK) &&
 			!trashHandler.hasTrashPermission(
 				permissionChecker, 0, classPK, TrashActionKeys.RESTORE)) {
 
-			throw new PrincipalException("trash.restore.error");
+			throw new PrincipalException();
 		}
 
 		trashHandler.checkDuplicateTrashEntry(
@@ -244,7 +244,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				permissionChecker, 0, entry.getClassPK(),
 				TrashActionKeys.RESTORE)) {
 
-			throw new PrincipalException("trash.restore.error");
+			throw new PrincipalException();
 		}
 
 		if (overrideClassPK > 0) {
@@ -252,7 +252,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					permissionChecker, 0, overrideClassPK,
 					TrashActionKeys.OVERWRITE)) {
 
-				throw new PrincipalException("trash.restore.overwrite.error");
+				throw new PrincipalException();
 			}
 
 			trashHandler.deleteTrashEntry(overrideClassPK);
@@ -262,7 +262,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					permissionChecker, 0, entry.getClassPK(),
 					TrashActionKeys.RENAME)) {
 
-				throw new PrincipalException("trash.restore.rename.error");
+				throw new PrincipalException();
 			}
 
 			trashHandler.updateTitle(entry.getClassPK(), name);
@@ -287,7 +287,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		if (!trashHandler.hasTrashPermission(
 				permissionChecker, 0, entry.getClassPK(), ActionKeys.DELETE)) {
 
-			throw new PrincipalException("trash.delete.error");
+			throw new PrincipalException();
 		}
 
 		trashHandler.deleteTrashEntry(entry.getClassPK());
