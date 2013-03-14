@@ -50,8 +50,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * @author Laszlo Csontos
  * @author Zsolt Berentey
+ * @author Laszlo Csontos
  */
 @ExecutionTestListeners(
 	listeners = {
@@ -316,12 +316,14 @@ public class JournalArticleFinderTest {
 
 		Assert.assertEquals(expectedCount, actualCount);
 
-		actualCount =
-			((List)JournalArticleFinderUtil.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		List<JournalArticle> articles =
+			JournalArticleFinderUtil.findByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 				companyId, groupId, folderIds, classNameId, articleId, version,
 				title, description, content, type, ddmStructureKey,
 				ddmTemplateKey, displayDateGT, displayDateLT, reviewDate,
-				andOperator, queryDefinition)).size();
+				andOperator, queryDefinition);
+
+		actualCount = articles.size();
 
 		Assert.assertEquals(expectedCount, actualCount);
 	}
@@ -336,8 +338,10 @@ public class JournalArticleFinderTest {
 
 		Assert.assertEquals(expectedCount, actualCount);
 
-		actualCount = ((List)JournalArticleFinderUtil.findByG_C_S(
-			groupId, classNameId, ddmStructureKey, queryDefinition)).size();
+		List<JournalArticle> articles = JournalArticleFinderUtil.findByG_C_S(
+			groupId, classNameId, ddmStructureKey, queryDefinition);
+
+		actualCount = articles.size();
 
 		Assert.assertEquals(expectedCount, actualCount);
 	}
@@ -352,8 +356,10 @@ public class JournalArticleFinderTest {
 
 		Assert.assertEquals(expectedCount, actualCount);
 
-		actualCount = ((List)JournalArticleFinderUtil.findByG_F(
-				groupId, folderIds, queryDefinition)).size();
+		List<JournalArticle> articles = JournalArticleFinderUtil.findByG_F(
+			groupId, folderIds, queryDefinition);
+
+		actualCount = articles.size();
 
 		Assert.assertEquals(expectedCount, actualCount);
 	}
@@ -368,8 +374,10 @@ public class JournalArticleFinderTest {
 
 		Assert.assertEquals(expectedCount, actualCount);
 
-		actualCount = ((List)JournalArticleFinderUtil.findByG_U_F_C(
-			groupId, userId, folderIds, classNameId, queryDefinition)).size();
+		List<JournalArticle> articles = JournalArticleFinderUtil.findByG_U_F_C(
+			groupId, userId, folderIds, classNameId, queryDefinition);
+
+		actualCount = articles.size();
 
 		Assert.assertEquals(expectedCount, actualCount);
 	}
