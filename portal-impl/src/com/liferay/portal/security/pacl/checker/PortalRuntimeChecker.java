@@ -325,6 +325,6 @@ public class PortalRuntimeChecker extends BaseChecker {
 	private Set<String> _getBeanPropertyClassNames;
 	private Set<String> _searchEngineIds;
 	private Set<String> _setBeanPropertyClassNames;
-	private List<Pattern>  _threadPoolExecutorNamePatterns;
+	private List<Pattern> _threadPoolExecutorNamePatterns;
 
 }
