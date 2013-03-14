@@ -112,7 +112,8 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 				Timestamp modifiedDate = rs.getTimestamp("modifiedDate");
 
 				return new Object[] {
-					groupId, companyId, userId, createDate, modifiedDate};
+					groupId, companyId, userId, createDate, modifiedDate
+				};
 			}
 
 			if (_log.isDebugEnabled()) {

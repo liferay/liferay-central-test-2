@@ -61,7 +61,8 @@ public class UpgradePolls extends UpgradeProcess {
 
 				return new Object[] {
 					groupId, companyId, userId, userName, createDate,
-						modifiedDate};
+					modifiedDate
+				};
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -169,8 +170,10 @@ public class UpgradePolls extends UpgradeProcess {
 					continue;
 				}
 
+				long groupId = questionArray[0];
+
 				runSQL(
-					"update PollsVote set groupId = " + questionArray[0] +
+					"update PollsVote set groupId = " + groupId +
 						" where voteId = " + voteId);
 			}
 		}
