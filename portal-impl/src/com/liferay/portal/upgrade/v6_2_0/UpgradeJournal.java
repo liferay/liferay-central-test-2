@@ -207,7 +207,8 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 	@Override
 	protected String[] getPortletIds() {
 		return new String[] {
-			"56_INSTANCE_%", "62_INSTANCE_%", "101_INSTANCE_%"};
+			"56_INSTANCE_%", "62_INSTANCE_%", "101_INSTANCE_%"
+		};
 	}
 
 	protected void updatePreferencesClassPKs(
@@ -462,15 +463,17 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 			if (Validator.isNotNull(templateId)) {
 				preferences.reset("templateId");
+
 				preferences.setValue("ddmTemplateKey", templateId);
 			}
 		}
-		else if (portletId.startsWith("62")) {
+		else if (portletId.startsWith(PortletKeys.JOURNAL_CONTENT_LIST)) {
 			String structureId = preferences.getValue(
 				"structureId", StringPool.BLANK);
 
 			if (Validator.isNotNull(structureId)) {
 				preferences.reset("structureId");
+
 				preferences.setValue("ddmStructureKey", structureId);
 			}
 		}
