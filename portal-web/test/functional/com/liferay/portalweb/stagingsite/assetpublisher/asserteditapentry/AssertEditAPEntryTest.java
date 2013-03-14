@@ -38,6 +38,14 @@ public class AssertEditAPEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Staging"),
+			selenium.getText(
+				"//div[@class='staging-bar']/ul/li/span/a[contains(.,'Staging')]"));
+		selenium.clickAt("//div[@class='staging-bar']/ul/li/span/a[contains(.,'Staging')]",
+			RuntimeVariables.replace("Staging"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Site Name (Staging)"),
+			selenium.getText("//h1[@class='site-title']/span"));
 		assertTrue(selenium.isVisible("//span[@title='Options']/ul/li/strong/a"));
 		assertTrue(selenium.isVisible("//img[@title='Minimize']"));
 		assertTrue(selenium.isVisible("//img[@title='Maximize']"));
