@@ -151,8 +151,7 @@ public abstract class AbstractMessagingConfigurator
 			}
 			catch (SecurityException se) {
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Rejecting destination " + destination.getName());
+					_log.info("Rejecting destination " + destination.getName());
 				}
 
 				continue;

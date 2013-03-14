@@ -32,8 +32,7 @@ public class PortalMessageBusPermission extends BasicPermission {
 		}
 
 		Permission permission = new PortalMessageBusPermission(
-			PACLConstants.PORTAL_MESSAGE_BUS_PERMISSION_SEND,
-			destinationName);
+			PACLConstants.PORTAL_MESSAGE_BUS_PERMISSION_SEND, destinationName);
 
 		securityManager.checkPermission(permission);
 	}
