@@ -235,7 +235,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 					break;
 				}
 
-				long newPrimaryKey = _ddmStructurePKs.get(
+				Long newPrimaryKey = _ddmStructurePKs.get(
 					GetterUtil.getLong(oldPrimaryKey));
 
 				if (Validator.isNotNull(newPrimaryKey)) {
