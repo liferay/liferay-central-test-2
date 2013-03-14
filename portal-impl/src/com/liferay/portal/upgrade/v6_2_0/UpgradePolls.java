@@ -170,7 +170,7 @@ public class UpgradePolls extends UpgradeProcess {
 					continue;
 				}
 
-				long groupId = questionArray[0];
+				long groupId = (Long)questionArray[0];
 
 				runSQL(
 					"update PollsVote set groupId = " + groupId +
