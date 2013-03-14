@@ -72,9 +72,6 @@ public class FileAvailabilityUtil {
 		_availabilities.clear();
 	}
 
-	private static Map<String, Boolean> _availabilities =
-		new ConcurrentHashMap<String, Boolean>();
-
 	public static class ResourceAction
 		implements PrivilegedExceptionAction<URL> {
 
@@ -91,5 +88,9 @@ public class FileAvailabilityUtil {
 		private ServletContext _servletContext;
 
 	}
+
+	private static Map<String, Boolean> _availabilities =
+		new ConcurrentHashMap<String, Boolean>();
+
 
 }
