@@ -14,14 +14,14 @@ public class ${seleniumBuilderContext.getActionSimpleClassName(actionName)} exte
 	<#if seleniumBuilderContext.getActionRootElement(actionName)??>
 		<#assign rootElement = seleniumBuilderContext.getActionRootElement(actionName)>
 
-		<#assign functionSelectorElements = rootElement.elements("function-selector")>
+		<#assign actionCommandElements = rootElement.elements("action-command")>
 
-		<#list functionSelectorElements as functionSelectorElement>
-			<#assign functionName = functionSelectorElement.attributeValue("name")>
+		<#list actionCommandElements as actionCommandElement>
+			<#assign actionCommandName = actionCommandElement.attributeValue("name")>
 
-			public ${seleniumBuilderContext.getFunctionReturnType(functionName)} ${seleniumBuilderFileUtil.getVariableName(functionName)}(
+			public ${seleniumBuilderContext.getFunctionReturnType(actionCommandName)} ${seleniumBuilderFileUtil.getVariableName(actionCommandName)}(
 
-			<#list 1..seleniumBuilderContext.getFunctionTargetCount(functionName) as i>
+			<#list 1..seleniumBuilderContext.getFunctionTargetCount(actionCommandName) as i>
 				String target${i}, String value${i}
 
 				<#if i_has_next>

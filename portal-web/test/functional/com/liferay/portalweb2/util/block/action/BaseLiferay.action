@@ -1,16 +1,10 @@
 <action-definition>
-	<function-selector name="AssertElementNotPresent">
-	</function-selector>
-
-	<function-selector name="Click">
+	<action-command name="Click">
 		<case contains="/input">
 			<execute function="Click#clickAtAndWait" />
 		</case>
 		<default>
 			<execute function="Click#clickAt" />
 		</default>
-	</function-selector>
-		
-	<function-selector name="IsElementPresent">
-	</function-selector>
+	</action-command>
 </action-definition>
