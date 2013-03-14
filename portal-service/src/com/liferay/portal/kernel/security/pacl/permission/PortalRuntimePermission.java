@@ -63,7 +63,7 @@ public class PortalRuntimePermission extends BasicPermission {
 			return;
 		}
 
-		Permission permission;
+		Permission permission = null;
 
 		if (Validator.isNotNull(classLoaderReferenceId)) {
 			permission = new RuntimePermission(

@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +53,7 @@ public class BeanLocatorImpl implements BeanLocator {
 	}
 
 	public ClassLoader getClassLoader() {
-		PortalRuntimePermission.checkGetClassLoader(
-			_paclServletContextName);
+		PortalRuntimePermission.checkGetClassLoader(_paclServletContextName);
 
 		return _classLoader;
 	}
