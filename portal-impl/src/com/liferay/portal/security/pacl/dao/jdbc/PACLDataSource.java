@@ -15,8 +15,6 @@
 package com.liferay.portal.security.pacl.dao.jdbc;
 
 import com.liferay.portal.dao.jdbc.util.DataSourceWrapper;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.security.pacl.PACLPolicy;
 import com.liferay.portal.security.pacl.PACLUtil;
@@ -51,9 +49,6 @@ public class PACLDataSource extends DataSourceWrapper {
 			paclPolicy.getClassLoader(), new Class<?>[] {Connection.class},
 			new PACLConnectionHandler(connection, paclPolicy));
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		PACLDataSource.class.getName());
 
 	private DataSource _dataSource;
 
