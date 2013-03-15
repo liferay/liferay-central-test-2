@@ -59,7 +59,7 @@ public class ${seleniumBuilderContext.getActionSimpleClassName(actionName)} exte
 					${childElementAttributeValue}Function ${seleniumBuilderFileUtil.getVariableName(childElementAttributeValue)}Function = new ${childElementAttributeValue}Function(liferaySelenium);
 				</#list>
 
-				<#if seleniumBuilderFileUtil.hasChildElement(actionCommandElement, "case")>
+				<#if actionCommandElement.element("case")??>
 					<#assign caseElements = actionCommandElement.elements("case")>
 
 					<#list caseElements as caseElement>
@@ -79,7 +79,7 @@ public class ${seleniumBuilderContext.getActionSimpleClassName(actionName)} exte
 					</#list>
 
 					else {
-						<#if seleniumBuilderFileUtil.hasChildElement(actionCommandElement, "default")>
+						<#if actionCommandElement.element("default")??>
 							<#assign defaultElement = actionCommandElement.element("default")>
 
 							<#assign functionElement = defaultElement.element("execute")>
@@ -103,7 +103,7 @@ public class ${seleniumBuilderContext.getActionSimpleClassName(actionName)} exte
 							);
 						</#if>
 					}
-				<#elseif seleniumBuilderFileUtil.hasChildElement(actionCommandElement, "default")>
+				<#elseif actionCommandElement.element("default")??>
 					<#assign defaultElement = actionCommandElement.element("default")>
 
 					<#assign functionElement = defaultElement.element("execute")>
