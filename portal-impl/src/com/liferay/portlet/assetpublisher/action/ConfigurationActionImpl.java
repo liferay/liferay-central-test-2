@@ -41,6 +41,8 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -224,9 +226,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			themeDisplay.getCompanyGroupId(), themeDisplay.getSiteGroupId()
 		};
 
-		if (assetRendererFactory.getClassTypes(
-				groupIds, themeDisplay.getLocale()) == null) {
+		Map<Long, String> classTypes = assetRendererFactory.getClassTypes(
+			groupIds, themeDisplay.getLocale());
 
+		if (classTypes.isEmpty()) {
 			return null;
 		}
 

@@ -110,7 +110,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 					for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 						Map<Long, String> assetAvailableClassTypes = assetRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId}, themeDisplay.getLocale());
 
-						if ((assetAvailableClassTypes == null) || assetAvailableClassTypes.isEmpty()) {
+						if (assetAvailableClassTypes.isEmpty()) {
 							continue;
 						}
 
@@ -186,7 +186,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							for (long assetAvailableClassTypeId : assetAvailableClassTypeIds) {
 								Map<String, Map<String, String>> classTypeFieldNames = assetRendererFactory.getClassTypeFieldNames(assetAvailableClassTypeId, locale);
 
-								if ((classTypeFieldNames == null) || classTypeFieldNames.isEmpty()) {
+								if (classTypeFieldNames.isEmpty()) {
 									continue;
 								}
 							%>
@@ -484,7 +484,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 		<%
 		Map<Long, String> assetAvailableClassTypes = curRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId}, themeDisplay.getLocale());
 
-		if ((assetAvailableClassTypes == null) || assetAvailableClassTypes.isEmpty()) {
+		if (assetAvailableClassTypes.isEmpty()) {
 			continue;
 		}
 		%>

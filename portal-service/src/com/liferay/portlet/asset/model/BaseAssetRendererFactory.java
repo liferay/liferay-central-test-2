@@ -30,6 +30,7 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.util.DDMIndexerUtil;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -78,13 +79,13 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 			long classTypeId, Locale locale)
 		throws Exception {
 
-		return null;
+		return Collections.emptyMap();
 	}
 
 	public Map<Long, String> getClassTypes(long[] groupId, Locale locale)
 		throws Exception {
 
-		return null;
+		return Collections.emptyMap();
 	}
 
 	public String getIconPath(PortletRequest portletRequest) {
@@ -117,13 +118,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		Map<String, Map<String, String>> classTypeFieldNames =
 			getClassTypeFieldNames(classTypeId, locale);
 
-		if ((classTypeFieldNames == null) ||
-			(classTypeFieldNames.size() <= 0)) {
-
-			return false;
-		}
-
-		return true;
+		return !classTypeFieldNames.isEmpty();
 	}
 
 	public boolean hasPermission(
