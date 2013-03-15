@@ -105,7 +105,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 			exportEvent(portletDataContext, rootElement, event);
 		}
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

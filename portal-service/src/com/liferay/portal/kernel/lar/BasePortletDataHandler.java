@@ -213,13 +213,15 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		return null;
 	}
 
-	protected String getExportDataFormattedDocument(Element rootElement) {
+	protected String getExportDataRootElementString(Element rootElement) {
 		if (rootElement == null) {
 			return StringPool.BLANK;
 		}
 
 		try {
-			return rootElement.getDocument().formattedString();
+			Document document = rootElement.getDocument();
+
+			return document.formattedString();
 		}
 		catch (IOException ioe) {
 			return StringPool.BLANK;

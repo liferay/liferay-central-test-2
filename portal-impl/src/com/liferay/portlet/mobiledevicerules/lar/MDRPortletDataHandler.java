@@ -143,7 +143,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 
 		actionsActionableDynamicQuery.performActions();
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

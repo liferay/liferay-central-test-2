@@ -512,7 +512,7 @@ public class WikiPortletDataHandler extends BasePortletDataHandler {
 			exportNode(portletDataContext, nodesElement, pagesElement, node);
 		}
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

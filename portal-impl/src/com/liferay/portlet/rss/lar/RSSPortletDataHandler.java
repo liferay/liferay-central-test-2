@@ -222,7 +222,7 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 				dlRepositoryEntriesElement, article, false);
 		}
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

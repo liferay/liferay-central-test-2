@@ -704,7 +704,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 
 		templateActionableDynamicQuery.performActions();
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

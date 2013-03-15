@@ -113,7 +113,7 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		WikiPortletDataHandler.exportNode(
 			portletDataContext, nodesElement, pagesElement, node);
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override

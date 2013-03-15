@@ -362,7 +362,7 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 				votesElement, question);
 		}
 
-		return getExportDataFormattedDocument(rootElement);
+		return getExportDataRootElementString(rootElement);
 	}
 
 	@Override
