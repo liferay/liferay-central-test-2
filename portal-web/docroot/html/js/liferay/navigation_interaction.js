@@ -185,7 +185,7 @@ AUI.add(
 						var activeDescendant = focusManager.get(ACTIVE_DESCENDANT);
 						var descendants = focusManager.get('descendants');
 
-						if (!(instance._lastShownMenu && event.type.indexOf('focusedChange') !== -1)) {
+						if (!(instance._lastShownMenu && (event.type.indexOf('focusedChange') !== -1))) {
 							if (MAP_HOVER.menu) {
 								Liferay.fire('hideNavigationMenu', MAP_HOVER);
 							}
