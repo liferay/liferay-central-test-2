@@ -90,7 +90,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			long classTypeId, Locale locale)
 		throws Exception {
 
-		Map<String, Map<String, String>> filterFields =
+		Map<String, Map<String, String>> classTypeFieldNames =
 			new HashMap<String, Map<String, String>>();
 
 		DLFileEntryType dlFileEntryType =
@@ -99,10 +99,11 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
-			filterFields.putAll(filterDDMStructureFields(ddmStructure, locale));
+			classTypeFieldNames.putAll(
+				getDDMStructureFieldNames(ddmStructure, locale));
 		}
 
-		return filterFields;
+		return classTypeFieldNames;
 	}
 
 	@Override

@@ -123,7 +123,7 @@ public class JournalArticleAssetRendererFactory
 		DDMStructure ddmStructure =
 			DDMStructureLocalServiceUtil.getDDMStructure(classTypeId);
 
-		return filterDDMStructureFields(ddmStructure, locale);
+		return getDDMStructureFieldNames(ddmStructure, locale);
 	}
 
 	@Override

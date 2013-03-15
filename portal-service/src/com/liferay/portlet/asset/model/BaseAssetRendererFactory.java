@@ -153,11 +153,17 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		_portletId = portletId;
 	}
 
-	protected Map<String, Map<String, String>> filterDDMStructureFields(
+	protected long getControlPanelPlid(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
+	}
+
+	protected Map<String, Map<String, String>> getDDMStructureFieldNames(
 			DDMStructure ddmStructure, Locale locale)
 		throws Exception {
 
-		Map<String, Map<String, String>> filterFields =
+		Map<String, Map<String, String>> ddmStructureFieldNames =
 			new HashMap<String, Map<String, String>>();
 
 		Map<String, Map<String, String>> fieldsMap = ddmStructure.getFieldsMap(
@@ -165,9 +171,10 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 		for (Map<String, String> fieldMap : fieldsMap.values()) {
 			String indexType = fieldMap.get("indexType");
-			boolean isPrivate = GetterUtil.getBoolean(fieldMap.get("private"));
+			boolean privateField = GetterUtil.getBoolean(
+				fieldMap.get("private"));
 
-			if (Validator.isNull(indexType) || isPrivate) {
+			if (Validator.isNull(indexType) || privateField) {
 				continue;
 			}
 
@@ -176,16 +183,10 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 			String encodeFieldName = DDMIndexerUtil.encodeName(
 				ddmStructure.getStructureId(), name, locale);
 
-			filterFields.put(encodeFieldName, fieldMap);
+			ddmStructureFieldNames.put(encodeFieldName, fieldMap);
 		}
 
-		return filterFields;
-	}
-
-	protected long getControlPanelPlid(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
+		return ddmStructureFieldNames;
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
