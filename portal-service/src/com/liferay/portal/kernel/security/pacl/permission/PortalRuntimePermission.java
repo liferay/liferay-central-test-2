@@ -77,8 +77,8 @@ public class PortalRuntimePermission extends BasicPermission {
 		}
 
 		Permission permission = new PortalRuntimePermission(
-			PACLConstants.PORTAL_RUNTIME_PERMISSION_PORTLET_BAG_POOL,
-			null, portletId);
+			PACLConstants.PORTAL_RUNTIME_PERMISSION_PORTLET_BAG_POOL, null,
+			portletId);
 
 		securityManager.checkPermission(permission);
 	}

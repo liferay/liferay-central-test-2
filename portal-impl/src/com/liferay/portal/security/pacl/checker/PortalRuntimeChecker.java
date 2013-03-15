@@ -249,6 +249,20 @@ public class PortalRuntimeChecker extends BaseChecker {
 		return true;
 	}
 
+	protected boolean hasPortletBagPoolPortletId(String portletId) {
+		for (Pattern portletBagPoolPortletIdPattern :
+				_portletBagPoolPortletIdPatterns) {
+
+			Matcher matcher = portletBagPoolPortletIdPattern.matcher(portletId);
+
+			if (matcher.matches()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	protected boolean hasSetBeanProperty(Class<?> clazz, String property) {
 		String className = clazz.getName();
 
@@ -260,20 +274,6 @@ public class PortalRuntimeChecker extends BaseChecker {
 			if (_setBeanPropertyClassNames.contains(
 					className.concat(StringPool.POUND).concat(property))) {
 
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	protected boolean hasPortletBagPoolPortletId(String portletId) {
-		for (Pattern portletBagPoolPortletIdPattern :
-				_portletBagPoolPortletIdPatterns) {
-
-			Matcher matcher = portletBagPoolPortletIdPattern.matcher(portletId);
-
-			if (matcher.matches()) {
 				return true;
 			}
 		}
@@ -416,7 +416,7 @@ public class PortalRuntimeChecker extends BaseChecker {
 	private Set<String> _classLoaderReferenceIds;
 	private Set<String> _expandoBridgeClassNames;
 	private Set<String> _getBeanPropertyClassNames;
-	private List<Pattern>  _portletBagPoolPortletIdPatterns;
+	private List<Pattern> _portletBagPoolPortletIdPatterns;
 	private Set<String> _searchEngineIds;
 	private Set<String> _setBeanPropertyClassNames;
 	private List<Pattern> _threadPoolExecutorNamePatterns;
