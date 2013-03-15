@@ -1032,39 +1032,6 @@ public class BundleServletContext extends LiferayServletContext {
 		new ConcurrentHashMap<String, Servlet>();
 	private File _tempDir;
 
-	private class FilterServiceRankingComparator
-		implements Comparator<FilterServiceRanking> {
-
-		public int compare(
-			FilterServiceRanking filterServiceRanking1,
-			FilterServiceRanking filterServiceRanking2) {
-
-			if (filterServiceRanking1.getServiceRanking() <
-					filterServiceRanking2.getServiceRanking()) {
-
-				return -1;
-			}
-			else if (filterServiceRanking1.getServiceRanking() >
-						filterServiceRanking2.getServiceRanking()) {
-
-				return 1;
-			}
-
-			if (filterServiceRanking1.getTimestamp() <
-					filterServiceRanking2.getTimestamp()) {
-
-				return -1;
-			}
-			else if (filterServiceRanking1.getTimestamp() >
-						filterServiceRanking2.getTimestamp()) {
-
-				return 1;
-			}
-
-			return 0;
-		}
-	}
-
 	private class FilterServiceRanking {
 
 		@Override
@@ -1124,6 +1091,39 @@ public class BundleServletContext extends LiferayServletContext {
 		private long _timestamp = System.currentTimeMillis();
 		private List<String> _urlPatterns;
 
+	}
+
+	private class FilterServiceRankingComparator
+		implements Comparator<FilterServiceRanking> {
+
+		public int compare(
+			FilterServiceRanking filterServiceRanking1,
+			FilterServiceRanking filterServiceRanking2) {
+
+			if (filterServiceRanking1.getServiceRanking() <
+					filterServiceRanking2.getServiceRanking()) {
+
+				return -1;
+			}
+			else if (filterServiceRanking1.getServiceRanking() >
+						filterServiceRanking2.getServiceRanking()) {
+
+				return 1;
+			}
+
+			if (filterServiceRanking1.getTimestamp() <
+					filterServiceRanking2.getTimestamp()) {
+
+				return -1;
+			}
+			else if (filterServiceRanking1.getTimestamp() >
+						filterServiceRanking2.getTimestamp()) {
+
+				return 1;
+			}
+
+			return 0;
+		}
 	}
 
 }
