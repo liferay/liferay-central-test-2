@@ -116,8 +116,6 @@ public class AssetEntryQuery {
 
 		this();
 
-		_attributes = new HashMap<String, Serializable>();
-
 		setClassNameIds(classNameIds);
 		_start = searchContainer.getStart();
 		_end = searchContainer.getEnd();
@@ -643,7 +641,8 @@ public class AssetEntryQuery {
 	private long[][] _allTagIdsArray = new long[0][];
 	private long[] _anyCategoryIds = new long[0];
 	private long[] _anyTagIds = new long[0];
-	private Map<String, Serializable> _attributes;
+	private Map<String, Serializable> _attributes =
+		new HashMap<String, Serializable>();
 	private long[] _classNameIds = new long[0];
 	private long[] _classTypeIds = new long[0];
 	private String _description;
