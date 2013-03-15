@@ -31,16 +31,16 @@ public class ChromeWebDriverImpl extends BaseWebDriverImpl {
 		super(projectDir, browserURL, new ChromeDriver(_desiredCapabilities));
 	}
 
-	private static DesiredCapabilities _desiredCapabilities;
+	private static DesiredCapabilities _desiredCapabilities = null;
 
 	static {
 		_desiredCapabilities = DesiredCapabilities.chrome();
 
 		Map<String, Object> preferences = new HashMap<String, Object>();
 
-		preferences.put("download.prompt_for_download", false);
 		preferences.put(
 			"download.default_directory", TestPropsValues.OUTPUT_DIR);
+		preferences.put("download.prompt_for_download", false);
 
 		_desiredCapabilities.setCapability("chrome.prefs", preferences);
 	}
