@@ -192,7 +192,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							%>
 
 								<div class="asset-subtypefields aui-helper-hidden" id="<portlet:namespace /><%= assetAvailableClassTypeId %>_<%= className %>Options">
-									<aui:select cssClass="asset-subtypefields-selector" label='<%= LanguageUtil.format(pageContext, "filter-by-a-field-of-x", HtmlUtil.escapeAttribute(assetAvailableClassTypes.get(assetAvailableClassTypeId))) %>' name='<%= "ddmStructureFieldName" + assetAvailableClassTypeId + "_" + className %>'>
+									<aui:select cssClass="asset-subtypefields-selector" label='<%= LanguageUtil.format(pageContext, "filter-by-field-x", HtmlUtil.escapeAttribute(assetAvailableClassTypes.get(assetAvailableClassTypeId))) %>' name='<%= "ddmStructureFieldName" + assetAvailableClassTypeId + "_" + className %>'>
 										<aui:option label="none" selected="<%= Validator.isNull(ddmStructureFieldName) %>" value="" />
 
 										<optgroup label="<liferay-ui:message key="fields" />">
