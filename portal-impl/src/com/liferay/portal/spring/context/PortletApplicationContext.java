@@ -106,6 +106,19 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		xmlBeanDefinitionReader.setBeanClassLoader(getBeanClassLoader());
 	}
 
+	protected void injectExplicitBean(
+		Class<?> clazz, BeanDefinitionRegistry beanDefinitionRegistry) {
+
+		beanDefinitionRegistry.registerBeanDefinition(
+			clazz.getName(), new RootBeanDefinition(clazz));
+	}
+
+	protected void injectExplicitBeans(
+		BeanDefinitionRegistry beanDefinitionRegistry) {
+
+		injectExplicitBean(DoPrivilegedFactory.class, beanDefinitionRegistry);
+	}
+
 	@Override
 	protected void loadBeanDefinitions(
 		XmlBeanDefinitionReader xmlBeanDefinitionReader) {
@@ -119,7 +132,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		BeanDefinitionRegistry beanDefinitionRegistry =
 			xmlBeanDefinitionReader.getBeanFactory();
 
-		_injectExplicitBeans(beanDefinitionRegistry);
+		injectExplicitBeans(beanDefinitionRegistry);
 
 		for (String configLocation : configLocations) {
 			try {
@@ -142,20 +155,6 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	private static boolean _isUseRestrictedClassLoader() {
 		return PACLPolicyManager.isActive();
-	}
-
-	private void _injectExplicitBean(
-		Class<DoPrivilegedFactory> clazz,
-		BeanDefinitionRegistry beanDefinitionRegistry) {
-
-		beanDefinitionRegistry.registerBeanDefinition(
-			clazz.getName(), new RootBeanDefinition(clazz));
-	}
-
-	private void _injectExplicitBeans(
-		BeanDefinitionRegistry beanDefinitionRegistry) {
-
-		_injectExplicitBean(DoPrivilegedFactory.class, beanDefinitionRegistry);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,10 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  */
 public class DoPrivilegedFactory implements BeanPostProcessor {
 
+	public static <T> T wrap(T bean) {
+		return AccessController.doPrivileged(new WrapPrivilegedAction<T>(bean));
+	}
+
 	public DoPrivilegedFactory() {
 	}
 
@@ -45,16 +49,16 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 			return bean;
 		}
 
-		Class<?> beanClass = bean.getClass();
+		Class<?> clazz = bean.getClass();
 
-		if (!isDoPrivileged(beanClass)) {
+		if (!_isDoPrivileged(clazz)) {
 			return bean;
 		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Wrapping calls to bean " + beanName + " of type " +
-					bean.getClass() + " with access controller checking");
+					clazz + " with access controller checking");
 		}
 
 		return wrap(bean);
@@ -66,70 +70,25 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 		return bean;
 	}
 
-	public static <T> T wrap(T bean) {
-		return AccessController.doPrivileged(new WrapAction<T>(bean));
-	}
+	public static class WrapPrivilegedAction <T>
+		implements PrivilegedAction<T> {
 
-	private static Class<?>[] getInterfaces(Object object) {
-		List<Class<?>> interfaceClasses = new UniqueList<Class<?>>();
-
-		Class<?> clazz = object.getClass();
-
-		getInterfaces(interfaceClasses, clazz);
-
-		Class<?> superClass = clazz.getSuperclass();
-
-		while (superClass != null) {
-			getInterfaces(interfaceClasses, superClass);
-
-			superClass = superClass.getSuperclass();
-		}
-
-		return interfaceClasses.toArray(new Class<?>[interfaceClasses.size()]);
-	}
-
-	private static void getInterfaces(
-		List<Class<?>> interfaceClasses, Class<?> clazz) {
-
-		for (Class<?> interfaceClass : clazz.getInterfaces()) {
-			interfaceClasses.add(interfaceClass);
-		}
-	}
-
-	private boolean isDoPrivileged(Class<?> beanClass) {
-		DoPrivileged annotation = beanClass.getAnnotation(DoPrivileged.class);
-
-		while ((annotation == null) &&
-			   (beanClass = beanClass.getSuperclass()) != null) {
-
-			annotation = beanClass.getAnnotation(DoPrivileged.class);
-		}
-
-		if (annotation != null) {
-			return true;
-		}
-
-		return false;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(DoPrivilegedFactory.class);
-
-	public static class WrapAction <T> implements PrivilegedAction<T> {
-
-		public WrapAction(T bean) {
+		public WrapPrivilegedAction(T bean) {
 			_bean = bean;
 		}
 
-		@SuppressWarnings("unchecked")
 		public T run() {
 			Class<?> clazz = _bean.getClass();
-			String packageName = clazz.getPackage().getName();
+
+			Package pkg = clazz.getPackage();
+
+			String packageName = pkg.getName();
 
 			if (clazz.isPrimitive() || packageName.startsWith("java.")) {
 				return _bean;
 			}
 
-			Class<?>[] interfaces = getInterfaces(_bean);
+			Class<?>[] interfaces = _getInterfaces(_bean);
 
 			if (interfaces.length <= 0) {
 				return _bean;
@@ -154,5 +113,57 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 		private T _bean;
 
 	}
+
+	/**
+	 * @see {@link com.liferay.portal.bean.BeanLocatorImpl#getInterfaces(List,
+	 *      Class)}
+	 */
+	private static void _getInterfaces(
+		List<Class<?>> interfaceClasses, Class<?> clazz) {
+
+		for (Class<?> interfaceClass : clazz.getInterfaces()) {
+			interfaceClasses.add(interfaceClass);
+		}
+	}
+
+	/**
+	 * @see {@link
+	 *      com.liferay.portal.bean.BeanLocatorImpl#getInterfaces(Object)}
+	 */
+	private static Class<?>[] _getInterfaces(Object object) {
+		List<Class<?>> interfaceClasses = new UniqueList<Class<?>>();
+
+		Class<?> clazz = object.getClass();
+
+		_getInterfaces(interfaceClasses, clazz);
+
+		Class<?> superClass = clazz.getSuperclass();
+
+		while (superClass != null) {
+			_getInterfaces(interfaceClasses, superClass);
+
+			superClass = superClass.getSuperclass();
+		}
+
+		return interfaceClasses.toArray(new Class<?>[interfaceClasses.size()]);
+	}
+
+	private boolean _isDoPrivileged(Class<?> beanClass) {
+		DoPrivileged doPrivileged = beanClass.getAnnotation(DoPrivileged.class);
+
+		while ((doPrivileged == null) &&
+			   (beanClass = beanClass.getSuperclass()) != null) {
+
+			doPrivileged = beanClass.getAnnotation(DoPrivileged.class);
+		}
+
+		if (doPrivileged != null) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DoPrivilegedFactory.class);
 
 }
