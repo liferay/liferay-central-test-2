@@ -67,7 +67,8 @@ public class PACLPolicyManager {
 	}
 
 	public static PACLPolicy getPACLPolicy(ClassLoader classLoader) {
-		return AccessController.doPrivileged(new PACLPolicyAction(classLoader));
+		return AccessController.doPrivileged(
+			new PACLPolicyPrivilegedAction(classLoader));
 	}
 
 	public static boolean isActive() {
@@ -196,10 +197,10 @@ public class PACLPolicyManager {
 	private static Map<ClassLoader, PACLPolicy> _paclPolicies =
 		new HashMap<ClassLoader, PACLPolicy>();
 
-	private static class PACLPolicyAction
+	private static class PACLPolicyPrivilegedAction
 		implements PrivilegedAction<PACLPolicy> {
 
-		public PACLPolicyAction(ClassLoader classLoader) {
+		public PACLPolicyPrivilegedAction(ClassLoader classLoader) {
 			_classLoader = classLoader;
 		}
 
@@ -218,4 +219,5 @@ public class PACLPolicyManager {
 		private ClassLoader _classLoader;
 
 	}
+
 }

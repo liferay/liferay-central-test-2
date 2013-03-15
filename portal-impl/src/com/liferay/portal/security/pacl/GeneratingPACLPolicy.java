@@ -107,7 +107,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 
 		AccessController.doPrivileged(
-			new AuthorizationPropertyAction(authorizationProperty));
+			new AuthorizationPropertyPrivilegedAction(authorizationProperty));
 	}
 
 	protected void mergeExistingProperties() {
@@ -180,10 +180,10 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		new ConcurrentSkipListMap<String, Set<String>>();
 	private ReentrantLock _reentrantLock = new ReentrantLock();
 
-	private class AuthorizationPropertyAction
+	private class AuthorizationPropertyPrivilegedAction
 		implements PrivilegedAction<Void> {
 
-		public AuthorizationPropertyAction(
+		public AuthorizationPropertyPrivilegedAction(
 			AuthorizationProperty authorizationProperty) {
 
 			_authorizationProperty = authorizationProperty;
@@ -238,5 +238,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 		}
 
 		private AuthorizationProperty _authorizationProperty;
+
 	}
+
 }
