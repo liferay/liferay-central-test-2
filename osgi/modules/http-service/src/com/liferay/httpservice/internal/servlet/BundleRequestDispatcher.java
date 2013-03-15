@@ -42,15 +42,10 @@ public class BundleRequestDispatcher implements RequestDispatcher {
 
 		_servletMapping = servletMapping;
 		_extensionMapping = extensionMapping;
-		_bundleFilterChain = bundleFilterChain;
-		_bundleServletContext = bundleServletContext;
-
 		_requestURI = StringUtil.replace(
 			requestURI, StringPool.DOUBLE_SLASH, StringPool.SLASH);
-
-		_pathInfo = null;
-		_queryString = null;
-		_servletPath = null;
+		_bundleServletContext = bundleServletContext;
+		_bundleFilterChain = bundleFilterChain;
 
 		if (!_extensionMapping) {
 			_servletPath = _servletMapping;
