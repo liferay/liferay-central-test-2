@@ -50,7 +50,7 @@ public class ${seleniumBuilderContext.getActionSimpleClassName(actionName)} exte
 
 			) throws Exception {
 				<#list 1..seleniumBuilderContext.getFunctionTargetCount(actionCommandName) as i>
-					target${i} = getTarget(target${i});
+					String locator${i} = getLocator(target${i});
 				</#list>
 
 				<#assign childElementAttributeValues = seleniumBuilderFileUtil.getChildElementAttributeValues(actionCommandElement, "function")>

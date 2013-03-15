@@ -28,7 +28,7 @@ public class BaseAction {
 		this.liferaySelenium = liferaySelenium;
 	}
 
-	protected String getTarget(String target) {
+	protected String getLocator(String target) {
 		if (paths.containsKey(target)) {
 			return paths.get(target);
 		}
