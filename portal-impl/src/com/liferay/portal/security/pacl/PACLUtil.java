@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.pacl;
 
+import com.liferay.portal.kernel.cache.CacheRegistryItem;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.security.lang.SecurityManagerUtil;
 
@@ -28,6 +30,30 @@ import java.security.ProtectionDomain;
  * @author Raymond Augé
  */
 public class PACLUtil {
+
+	public static Class<?> getClass(Object object) {
+		Class<?> clazz = object.getClass();
+
+		if (object instanceof Class) {
+			clazz = (Class<?>)object;
+		}
+
+		if (ProxyUtil.isProxyClass(clazz) || !clazz.isInterface()) {
+			Class<?>[] interfaces = clazz.getInterfaces();
+
+			if (interfaces.length > 0) {
+				clazz = interfaces[0];
+
+				if (clazz.equals(CacheRegistryItem.class) &&
+					(interfaces.length > 1)) {
+
+					clazz = interfaces[1];
+				}
+			}
+		}
+
+		return clazz;
+	}
 
 	public static PACLPolicy getPACLPolicy() {
 		if (!PACLPolicyManager.isActive()) {
