@@ -205,10 +205,6 @@ public class AssetEntryQuery {
 	}
 
 	public Serializable getAttribute(String name) {
-		if (_attributes == null) {
-			return null;
-		}
-
 		return _attributes.get(name);
 	}
 
@@ -355,15 +351,16 @@ public class AssetEntryQuery {
 	}
 
 	public void setAttribute(String name, Serializable value) {
-		if (_attributes == null) {
-			_attributes = new HashMap<String, Serializable>();
-		}
-
 		_attributes.put(name, value);
 	}
 
 	public void setAttributes(Map<String, Serializable> attributes) {
-		_attributes = attributes;
+		if (_attributes == null) {
+			_attributes = new HashMap<String, Serializable>();
+		}
+		else {
+			_attributes = attributes;
+		}
 	}
 
 	public void setClassName(String className) {
