@@ -80,11 +80,11 @@ public class AssetEntryQuery {
 	}
 
 	public AssetEntryQuery(AssetEntryQuery assetEntryQuery) {
-		setAttributes(assetEntryQuery.getAttributes());
 		setAllCategoryIds(assetEntryQuery.getAllCategoryIds());
 		setAllTagIdsArray(assetEntryQuery.getAllTagIdsArray());
 		setAnyCategoryIds(assetEntryQuery.getAnyCategoryIds());
 		setAnyTagIds(assetEntryQuery.getAnyTagIds());
+		setAttributes(assetEntryQuery.getAttributes());
 		setClassNameIds(assetEntryQuery.getClassNameIds());
 		setClassTypeIds(assetEntryQuery.getClassTypeIds());
 		setDescription(assetEntryQuery.getDescription());
