@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -67,8 +68,8 @@ public class PortalRuntimeChecker extends BaseChecker {
 		String name = portalRuntimePermission.getName();
 		String servletContextName =
 			portalRuntimePermission.getServletContextName();
-		String property = portalRuntimePermission.getProperty();
 		Object subject = portalRuntimePermission.getSubject();
+		String property = portalRuntimePermission.getProperty();
 
 		String key = null;
 		String value = null;
@@ -82,11 +83,14 @@ public class PortalRuntimeChecker extends BaseChecker {
 			value = (String)subject;
 		}
 		else if (name.equals(PORTAL_RUNTIME_PERMISSION_GET_BEAN_PROPERTY)) {
-			String filter =
-				StringPool.OPEN_BRACKET + servletContextName +
-						StringPool.CLOSE_BRACKET;
+			StringBundler sb = new StringBundler(4);
 
-			key = "security-manager-get-bean-property".concat(filter);
+			sb.append("security-manager-get-bean-property");
+			sb.append(StringPool.OPEN_BRACKET);
+			sb.append(servletContextName);
+			sb.append(StringPool.CLOSE_BRACKET);
+
+			key = sb.toString();
 
 			Class<?> clazz = (Class<?>)subject;
 
@@ -105,11 +109,14 @@ public class PortalRuntimeChecker extends BaseChecker {
 			value = (String)subject;
 		}
 		else if (name.equals(PORTAL_RUNTIME_PERMISSION_SET_BEAN_PROPERTY)) {
-			String filter =
-				StringPool.OPEN_BRACKET + servletContextName +
-					StringPool.CLOSE_BRACKET;
+			StringBundler sb = new StringBundler(4);
 
-			key = "security-manager-set-bean-property".concat(filter);
+			sb.append("security-manager-set-bean-property");
+			sb.append(StringPool.OPEN_BRACKET);
+			sb.append(servletContextName);
+			sb.append(StringPool.CLOSE_BRACKET);
+
+			key = sb.toString();
 
 			Class<?> clazz = (Class<?>)subject;
 
@@ -142,6 +149,8 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 		String name = portalRuntimePermission.getName();
 		Object subject = portalRuntimePermission.getSubject();
+		String servletContextName =
+			portalRuntimePermission.getServletContextName();
 		String property = GetterUtil.getString(
 			portalRuntimePermission.getProperty());
 
@@ -157,9 +166,6 @@ public class PortalRuntimeChecker extends BaseChecker {
 		}
 		else if (name.equals(PORTAL_RUNTIME_PERMISSION_GET_BEAN_PROPERTY)) {
 			Class<?> clazz = (Class<?>)subject;
-
-			String servletContextName =
-				portalRuntimePermission.getServletContextName();
 
 			if (!hasGetBeanProperty(servletContextName, clazz, property)) {
 				if (Validator.isNotNull(property)) {
@@ -213,9 +219,6 @@ public class PortalRuntimeChecker extends BaseChecker {
 		else if (name.equals(PORTAL_RUNTIME_PERMISSION_SET_BEAN_PROPERTY)) {
 			Class<?> clazz = (Class<?>)subject;
 
-			String servletContextName =
-				portalRuntimePermission.getServletContextName();
-
 			if (!hasSetBeanProperty(servletContextName, clazz, property)) {
 				if (Validator.isNotNull(property)) {
 					logSecurityException(
@@ -251,25 +254,25 @@ public class PortalRuntimeChecker extends BaseChecker {
 	protected boolean hasGetBeanProperty(
 		String servletContextName, Class<?> clazz, String property) {
 
-		String className = clazz.getName();
-
 		if (servletContextName.equals(getServletContextName())) {
 			return true;
 		}
 
-		Set<String> _getBeanPropertyClassNames =
-			_getBeanPropertyClassNamesMap.get(servletContextName);
+		Set<String> getBeanPropertyClassNames = _getBeanPropertyClassNames.get(
+			servletContextName);
 
-		if (_getBeanPropertyClassNames == null) {
+		if (getBeanPropertyClassNames == null) {
 			return false;
 		}
 
-		if (_getBeanPropertyClassNames.contains(className)) {
+		String className = clazz.getName();
+
+		if (getBeanPropertyClassNames.contains(className)) {
 			return true;
 		}
 
 		if (Validator.isNotNull(property)) {
-			if (_getBeanPropertyClassNames.contains(
+			if (getBeanPropertyClassNames.contains(
 					className.concat(StringPool.POUND).concat(property))) {
 
 				return true;
@@ -303,25 +306,25 @@ public class PortalRuntimeChecker extends BaseChecker {
 	protected boolean hasSetBeanProperty(
 		String servletContextName, Class<?> clazz, String property) {
 
-		String className = clazz.getName();
-
 		if (servletContextName.equals(getServletContextName())) {
 			return true;
 		}
 
-		Set<String> _setBeanPropertyClassNames =
-			_setBeanPropertyClassNamesMap.get(servletContextName);
+		Set<String> setBeanPropertyClassNames = _setBeanPropertyClassNames.get(
+			servletContextName);
 
-		if (_setBeanPropertyClassNames == null) {
+		if (setBeanPropertyClassNames == null) {
 			return false;
 		}
 
-		if (_setBeanPropertyClassNames.contains(className)) {
+		String className = clazz.getName();
+
+		if (setBeanPropertyClassNames.contains(className)) {
 			return true;
 		}
 
 		if (Validator.isNotNull(property)) {
-			if (_setBeanPropertyClassNames.contains(
+			if (setBeanPropertyClassNames.contains(
 					className.concat(StringPool.POUND).concat(property))) {
 
 				return true;
@@ -394,17 +397,17 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 			String servletContextName = key.substring(x + 1, y);
 
-			Set<String> beanPropertyClassNames = SetUtil.fromArray(
+			Set<String> getBeanPropertyClassNames = SetUtil.fromArray(
 				StringUtil.split(value));
 
-			_getBeanPropertyClassNamesMap.put(
-				servletContextName, beanPropertyClassNames);
+			_getBeanPropertyClassNames.put(
+				servletContextName, getBeanPropertyClassNames);
 
 			if (_log.isDebugEnabled() &&
 				!servletContextName.equals(_PORTAL_SERVLET_CONTEXT_NAME)) {
 
 				Set<String> classNames = new TreeSet<String>(
-					beanPropertyClassNames);
+					getBeanPropertyClassNames);
 
 				for (String className : classNames) {
 					_log.debug(
@@ -414,26 +417,26 @@ public class PortalRuntimeChecker extends BaseChecker {
 			}
 		}
 
-		// legacy support
+		// Backwards compatibility
 
-		Set<String> beanPropertyClassNames = _getBeanPropertyClassNamesMap.get(
+		Set<String> getBeanPropertyClassNames = _getBeanPropertyClassNames.get(
 			_PORTAL_SERVLET_CONTEXT_NAME);
 
-		if (beanPropertyClassNames == null) {
-			beanPropertyClassNames = getPropertySet(
+		if (getBeanPropertyClassNames == null) {
+			getBeanPropertyClassNames = getPropertySet(
 				"security-manager-get-bean-property");
 		}
 		else {
-			beanPropertyClassNames.addAll(
+			getBeanPropertyClassNames.addAll(
 				getPropertySet("security-manager-get-bean-property"));
 		}
 
-		_getBeanPropertyClassNamesMap.put(
-			_PORTAL_SERVLET_CONTEXT_NAME, beanPropertyClassNames);
+		_getBeanPropertyClassNames.put(
+			_PORTAL_SERVLET_CONTEXT_NAME, getBeanPropertyClassNames);
 
 		if (_log.isDebugEnabled()) {
 			Set<String> classNames = new TreeSet<String>(
-				beanPropertyClassNames);
+				getBeanPropertyClassNames);
 
 			for (String className : classNames) {
 				_log.debug(
@@ -494,17 +497,17 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 			String servletContextName = key.substring(x + 1, y);
 
-			Set<String> beanPropertyClassNames = SetUtil.fromArray(
+			Set<String> setBeanPropertyClassNames = SetUtil.fromArray(
 				StringUtil.split(value));
 
-			_setBeanPropertyClassNamesMap.put(
-				servletContextName, beanPropertyClassNames);
+			_setBeanPropertyClassNames.put(
+				servletContextName, setBeanPropertyClassNames);
 
 			if (_log.isDebugEnabled() &&
 				!servletContextName.equals(_PORTAL_SERVLET_CONTEXT_NAME)) {
 
 				Set<String> classNames = new TreeSet<String>(
-					beanPropertyClassNames);
+					setBeanPropertyClassNames);
 
 				for (String className : classNames) {
 					_log.debug(
@@ -514,26 +517,26 @@ public class PortalRuntimeChecker extends BaseChecker {
 			}
 		}
 
-		// legacy support
+		// Backwards compatibility
 
-		Set<String> beanPropertyClassNames = _setBeanPropertyClassNamesMap.get(
+		Set<String> setBeanPropertyClassNames = _setBeanPropertyClassNames.get(
 			_PORTAL_SERVLET_CONTEXT_NAME);
 
-		if (beanPropertyClassNames == null) {
-			beanPropertyClassNames = getPropertySet(
+		if (setBeanPropertyClassNames == null) {
+			setBeanPropertyClassNames = getPropertySet(
 				"security-manager-set-bean-property");
 		}
 		else {
-			beanPropertyClassNames.addAll(
+			setBeanPropertyClassNames.addAll(
 				getPropertySet("security-manager-set-bean-property"));
 		}
 
-		_setBeanPropertyClassNamesMap.put(
-			_PORTAL_SERVLET_CONTEXT_NAME, beanPropertyClassNames);
+		_setBeanPropertyClassNames.put(
+			_PORTAL_SERVLET_CONTEXT_NAME, setBeanPropertyClassNames);
 
 		if (_log.isDebugEnabled()) {
 			Set<String> classNames = new TreeSet<String>(
-				beanPropertyClassNames);
+				setBeanPropertyClassNames);
 
 			for (String className : classNames) {
 				_log.debug(
@@ -571,11 +574,11 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 	private Set<String> _classLoaderReferenceIds;
 	private Set<String> _expandoBridgeClassNames;
-	private Map<String, Set<String>> _getBeanPropertyClassNamesMap =
+	private Map<String, Set<String>> _getBeanPropertyClassNames =
 		new HashMap<String, Set<String>>();
 	private List<Pattern> _portletBagPoolPortletIdPatterns;
 	private Set<String> _searchEngineIds;
-	private Map<String, Set<String>> _setBeanPropertyClassNamesMap =
+	private Map<String, Set<String>> _setBeanPropertyClassNames =
 		new HashMap<String, Set<String>>();
 	private List<Pattern> _threadPoolExecutorNamePatterns;
 

@@ -218,23 +218,27 @@ public class PortalRuntimePermission extends BasicPermission {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(10);
 
-		sb.append("(");
-		sb.append(getClass().getName());
-		sb.append(" ");
+		sb.append("{class=");
+
+		Class<?> clazz = getClass();
+
+		sb.append(clazz.getName());
+
+		sb.append(", name=");
 		sb.append(getName());
-		sb.append(" ");
-		sb.append(getServletContextName());
-		sb.append(" ");
-		sb.append(getSubject());
 
 		if (_property != null) {
-			sb.append("#");
+			sb.append(", property=");
 			sb.append(_property);
 		}
 
-		sb.append(")");
+		sb.append(", servletContextName=");
+		sb.append(getServletContextName());
+		sb.append(", subject=");
+		sb.append(getSubject());
+		sb.append("}");
 
 		return sb.toString();
 	}
