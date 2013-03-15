@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.TemplateResourceLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.template.TemplateResourceThreadLocal;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.TemplateCache;
@@ -85,16 +85,16 @@ public class LiferayTemplateCache extends TemplateCache {
 
 			if (templateId.equals(macroTemplateId)) {
 
-				// this template is provided by the portal, so invoke it from an
+				// This template is provided by the portal, so invoke it from an
 				// access controller
 
 				try {
 					return AccessController.doPrivileged(
-						new TemplateAction(
+						new TemplateActionPrivilegedAction(
 							macroTemplateId, locale, encoding, parse));
 				}
-				catch (PrivilegedActionException e) {
-					throw (IOException)e.getException();
+				catch (PrivilegedActionException pae) {
+					throw (IOException)pae.getException();
 				}
 			}
 		}
@@ -170,10 +170,10 @@ public class LiferayTemplateCache extends TemplateCache {
 	private Configuration _configuration;
 	private Method _normalizeNameMethod;
 	private PortalCache<TemplateResource, Object> _portalCache;
+	private class TemplateActionPrivilegedAction
+		implements PrivilegedExceptionAction<Template> {
 
-	public class TemplateAction implements PrivilegedExceptionAction<Template> {
-
-		public TemplateAction(
+		public TemplateActionPrivilegedAction(
 			String templateId, Locale locale, String encoding, boolean parse) {
 
 			_templateId = templateId;

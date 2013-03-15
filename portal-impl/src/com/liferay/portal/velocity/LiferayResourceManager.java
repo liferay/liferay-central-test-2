@@ -20,10 +20,10 @@ import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.TemplateResourceLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.template.TemplateResourceThreadLocal;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
@@ -90,21 +90,52 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		for (String macroTemplateId : macroTemplateIds) {
 			if (resourceName.equals(macroTemplateId)) {
 
-				// this resource is provided by the portal, so invoke it from an
+				// This resource is provided by the portal, so invoke it from an
 				// access controller
 
 				try {
 					return AccessController.doPrivileged(
-						new ResourceAction(
+						new ResourceActionPrivilegedAction(
 							resourceName, resourceType, encoding));
 				}
-				catch (PrivilegedActionException e) {
-					throw (IOException)e.getException();
+				catch (PrivilegedActionException pae) {
+					throw (IOException)pae.getException();
 				}
 			}
 		}
 
 		return doGetResource(resourceName, resourceType, encoding);
+	}
+
+	@Override
+	public synchronized void initialize(RuntimeServices runtimeServices)
+		throws Exception {
+
+		ExtendedProperties extendedProperties =
+			runtimeServices.getConfiguration();
+
+		Field field = ReflectionUtil.getDeclaredField(
+			RuntimeInstance.class, "configuration");
+
+		field.set(
+			runtimeServices, new FastExtendedProperties(extendedProperties));
+
+		super.initialize(runtimeServices);
+	}
+
+	private Template _createTemplate(TemplateResource templateResource)
+		throws IOException {
+
+		Template template = new LiferayTemplate(templateResource.getReader());
+
+		template.setEncoding(TemplateConstants.DEFAUT_ENCODING);
+		template.setName(templateResource.getTemplateId());
+		template.setResourceLoader(new LiferayResourceLoader());
+		template.setRuntimeServices(rsvc);
+
+		template.process();
+
+		return template;
 	}
 
 	private Resource doGetResource(
@@ -151,37 +182,6 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		return template;
 	}
 
-	@Override
-	public synchronized void initialize(RuntimeServices runtimeServices)
-		throws Exception {
-
-		ExtendedProperties extendedProperties =
-			runtimeServices.getConfiguration();
-
-		Field field = ReflectionUtil.getDeclaredField(
-			RuntimeInstance.class, "configuration");
-
-		field.set(
-			runtimeServices, new FastExtendedProperties(extendedProperties));
-
-		super.initialize(runtimeServices);
-	}
-
-	private Template _createTemplate(TemplateResource templateResource)
-		throws IOException {
-
-		Template template = new LiferayTemplate(templateResource.getReader());
-
-		template.setEncoding(TemplateConstants.DEFAUT_ENCODING);
-		template.setName(templateResource.getTemplateId());
-		template.setResourceLoader(new LiferayResourceLoader());
-		template.setRuntimeServices(rsvc);
-
-		template.process();
-
-		return template;
-	}
-
 	private PortalCache<TemplateResource, Object> _portalCache;
 
 	private class LiferayTemplate extends Template {
@@ -216,9 +216,10 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 	}
 
-	public class ResourceAction implements PrivilegedExceptionAction<Resource> {
+	private class ResourceActionPrivilegedAction
+		implements PrivilegedExceptionAction<Resource> {
 
-		public ResourceAction(
+		public ResourceActionPrivilegedAction(
 			String resourceName, int resourceType, String encoding) {
 
 			_resourceName = resourceName;
