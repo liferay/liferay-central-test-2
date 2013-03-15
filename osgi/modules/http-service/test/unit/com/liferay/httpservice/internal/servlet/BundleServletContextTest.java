@@ -108,7 +108,7 @@ public class BundleServletContextTest extends PowerMockito {
 		throws NamespaceException, ServletException {
 
 		try {
-			registerFilter("Bad Mapping filter", "/a/");
+			registerFilter("Bad Mapping Filter", "/a/");
 		}
 		catch (IllegalArgumentException iae) {
 			return;
@@ -121,14 +121,14 @@ public class BundleServletContextTest extends PowerMockito {
 	public void testRegisterFilterMultipleMapping()
 		throws NamespaceException, ServletException {
 
-		registerFilter("Security filter", "/a", "/b/*");
+		registerFilter("Security Filter", "/a", "/b/*");
 	}
 
 	@Test
 	public void testRegisterFilterSingleMapping()
 		throws NamespaceException, ServletException {
 
-		registerFilter("Security filter", "/a");
+		registerFilter("Security Filter", "/a");
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class BundleServletContextTest extends PowerMockito {
 
 		initParameters.put("service.ranking", "1");
 
-		registerFilter("Security filter", initParameters, "/a");
+		registerFilter("Security Filter", initParameters, "/a");
 	}
 
 	@Test
@@ -405,14 +405,14 @@ public class BundleServletContextTest extends PowerMockito {
 	}
 
 	protected void registerFilter(
-			String filterName, Map<String, String> initProperties,
+			String filterName, Map<String, String> initParameters,
 			String ... urlPatterns)
 		throws NamespaceException, ServletException {
 
 		mockBundleWiring();
 
 		_bundleServletContext.registerFilter(
-			filterName, Arrays.asList(urlPatterns), _filter, initProperties,
+			filterName, Arrays.asList(urlPatterns), _filter, initParameters,
 			_httpContext);
 
 		verifyBundleWiring();
