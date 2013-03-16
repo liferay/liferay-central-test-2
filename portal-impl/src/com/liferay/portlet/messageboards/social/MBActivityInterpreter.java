@@ -108,8 +108,8 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	@Override
-	protected String getTitlePattern(String groupName, SocialActivity activity)
-		throws Exception {
+	protected String getTitlePattern(
+		String groupName, SocialActivity activity) {
 
 		int activityType = activity.getType();
 
