@@ -296,16 +296,20 @@ public abstract class BaseSocialActivityInterpreter
 		}
 	}
 
-	protected String getValue(
-		String extraData, String key, String defaultValue) {
+	protected String getValue(String extraDataJSON, String key) {
+		return getValue(extraDataJSON, key, StringPool.BLANK);
+	}
 
-		if (Validator.isNull(extraData)) {
+	protected String getValue(
+		String extraDataJSON, String key, String defaultValue) {
+
+		if (Validator.isNull(extraDataJSON)) {
 			return HtmlUtil.escape(defaultValue);
 		}
 
 		try {
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
-				extraData);
+				extraDataJSON);
 
 			String value = extraDataJSONObject.getString(key);
 
@@ -314,7 +318,7 @@ public abstract class BaseSocialActivityInterpreter
 			}
 		}
 		catch (JSONException jsone) {
-			_log.error("Unable to create JSON object from " + extraData);
+			_log.error("Unable to create a JSON object from " + extraDataJSON);
 		}
 
 		return HtmlUtil.escape(defaultValue);
