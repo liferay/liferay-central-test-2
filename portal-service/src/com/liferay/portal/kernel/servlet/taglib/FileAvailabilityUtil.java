@@ -50,7 +50,8 @@ public class FileAvailabilityUtil {
 
 			try {
 				url = AccessController.doPrivileged(
-					new ResourceAction(servletContext, path));
+					new ResourcePrivilegedExceptionAction(
+						servletContext, path));
 			}
 			catch (Exception e) {
 			}
@@ -72,10 +73,15 @@ public class FileAvailabilityUtil {
 		_availabilities.clear();
 	}
 
-	public static class ResourceAction
+	private static Map<String, Boolean> _availabilities =
+		new ConcurrentHashMap<String, Boolean>();
+
+	private static class ResourcePrivilegedExceptionAction
 		implements PrivilegedExceptionAction<URL> {
 
-		public ResourceAction(ServletContext servletContext, String path) {
+		public ResourcePrivilegedExceptionAction(
+			ServletContext servletContext, String path) {
+
 			_servletContext = servletContext;
 			_path = path;
 		}
@@ -88,8 +94,5 @@ public class FileAvailabilityUtil {
 		private ServletContext _servletContext;
 
 	}
-
-	private static Map<String, Boolean> _availabilities =
-		new ConcurrentHashMap<String, Boolean>();
 
 }
