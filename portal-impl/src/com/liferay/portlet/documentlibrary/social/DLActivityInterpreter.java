@@ -62,6 +62,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			return StringPool.BLANK;
 		}
 
+		StringBundler sb = new StringBundler(3);
+
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				DLFileEntry.class.getName());
@@ -71,9 +73,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String fileEntryLink = assetRenderer.getURLDownload(themeDisplay);
 
-		StringBundler sb = new StringBundler(3);
-
 		sb.append(wrapLink(fileEntryLink, "download-file", themeDisplay));
+
 		sb.append(StringPool.SPACE);
 
 		String folderLink = getFolderLink(fileEntry, themeDisplay);
