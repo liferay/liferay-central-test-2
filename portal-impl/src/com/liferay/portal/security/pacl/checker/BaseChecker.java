@@ -55,7 +55,7 @@ public abstract class BaseChecker implements Checker, PACLConstants {
 
 	public int getStackIndex(int oracle, int ibm, int ibm7) {
 		if (JavaDetector.isIBM()) {
-			if (JavaDetector.getJavaVersion().equals("1.6.0")) {
+			if (JavaDetector.isJDK6()) {
 				return ibm;
 			}
 
