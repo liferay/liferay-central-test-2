@@ -12,7 +12,7 @@
  * details.
  */
 
-package integration.com.liferay.portlet.polls.lar;
+package com.liferay.portlet.polls.lar;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.lar.BaseStagedModelDataHandlerTestCase;
