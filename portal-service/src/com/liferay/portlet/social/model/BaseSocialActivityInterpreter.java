@@ -192,6 +192,34 @@ public abstract class BaseSocialActivityInterpreter
 		}
 	}
 
+	protected String getJSONValue(String json, String key) {
+		return getJSONValue(json, key, StringPool.BLANK);
+	}
+
+	protected String getJSONValue(
+		String json, String key, String defaultValue) {
+
+		if (Validator.isNull(json)) {
+			return HtmlUtil.escape(defaultValue);
+		}
+
+		try {
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
+				json);
+
+			String value = extraDataJSONObject.getString(key);
+
+			if (Validator.isNotNull(value)) {
+				return HtmlUtil.escape(value);
+			}
+		}
+		catch (JSONException jsone) {
+			_log.error("Unable to create a JSON object from " + json);
+		}
+
+		return HtmlUtil.escape(defaultValue);
+	}
+
 	protected String getLink(SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
 
@@ -294,34 +322,6 @@ public abstract class BaseSocialActivityInterpreter
 		catch (Exception e) {
 			return StringPool.BLANK;
 		}
-	}
-
-	protected String getValue(String extraDataJSON, String key) {
-		return getValue(extraDataJSON, key, StringPool.BLANK);
-	}
-
-	protected String getValue(
-		String extraDataJSON, String key, String defaultValue) {
-
-		if (Validator.isNull(extraDataJSON)) {
-			return HtmlUtil.escape(defaultValue);
-		}
-
-		try {
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
-				extraDataJSON);
-
-			String value = extraDataJSONObject.getString(key);
-
-			if (Validator.isNotNull(value)) {
-				return HtmlUtil.escape(value);
-			}
-		}
-		catch (JSONException jsone) {
-			_log.error("Unable to create a JSON object from " + extraDataJSON);
-		}
-
-		return HtmlUtil.escape(defaultValue);
 	}
 
 	protected boolean hasPermissions(
