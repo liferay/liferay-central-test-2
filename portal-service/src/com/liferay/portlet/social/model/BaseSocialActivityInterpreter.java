@@ -217,7 +217,7 @@ public abstract class BaseSocialActivityInterpreter
 		return sb.toString();
 	}
 
-	protected String getPath(SocialActivity activity) throws Exception {
+	protected String getPath(SocialActivity activity) {
 		return StringPool.BLANK;
 	}
 

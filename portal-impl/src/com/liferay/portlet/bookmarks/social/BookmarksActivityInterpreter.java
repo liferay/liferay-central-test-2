@@ -61,7 +61,7 @@ public class BookmarksActivityInterpreter
 	}
 
 	@Override
-	protected String getPath(SocialActivity activity) throws Exception {
+	protected String getPath(SocialActivity activity) {
 		if (activity.isClassName(BookmarksEntry.class.getName())) {
 			return "/bookmarks/find_entry?entryId=";
 		}

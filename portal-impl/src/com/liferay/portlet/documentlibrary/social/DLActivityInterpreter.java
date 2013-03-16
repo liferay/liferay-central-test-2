@@ -138,7 +138,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	@Override
-	protected String getPath(SocialActivity activity) throws Exception {
+	protected String getPath(SocialActivity activity) {
 		if (activity.isClassName(DLFileEntry.class.getName())) {
 			return "/document_library/find_file_entry?fileEntryId=";
 		}

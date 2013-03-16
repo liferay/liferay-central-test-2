@@ -124,7 +124,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	@Override
-	protected String getPath(SocialActivity activity) throws Exception {
+	protected String getPath(SocialActivity activity) {
 		return "/wiki/find_page?pageResourcePrimKey=";
 	}
 
