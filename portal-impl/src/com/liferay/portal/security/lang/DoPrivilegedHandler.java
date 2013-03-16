@@ -70,27 +70,6 @@ public class DoPrivilegedHandler
 		}
 	}
 
-	public class InvokePrivilegedExceptionAction
-		implements PrivilegedExceptionAction<Object> {
-
-		public InvokePrivilegedExceptionAction(
-			Object bean, Method method, Object[] arguments) {
-
-			_bean = bean;
-			_method = method;
-			_arguments = arguments;
-		}
-
-		public Object run() throws Exception {
-			return _method.invoke(_bean, _arguments);
-		}
-
-		private Object[] _arguments;
-		private Object _bean;
-		private Method _method;
-
-	}
-
 	private boolean _isNotPrivileged(Class<?> clazz, Method method)
 		throws SecurityException {
 
@@ -120,5 +99,26 @@ public class DoPrivilegedHandler
 	}
 
 	private Object _bean;
+
+	private class InvokePrivilegedExceptionAction
+		implements PrivilegedExceptionAction<Object> {
+
+		public InvokePrivilegedExceptionAction(
+			Object bean, Method method, Object[] arguments) {
+
+			_bean = bean;
+			_method = method;
+			_arguments = arguments;
+		}
+
+		public Object run() throws Exception {
+			return _method.invoke(_bean, _arguments);
+		}
+
+		private Object[] _arguments;
+		private Object _bean;
+		private Method _method;
+
+	}
 
 }

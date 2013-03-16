@@ -36,7 +36,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class DoPrivilegedFactory implements BeanPostProcessor {
 
 	public static <T> T wrap(T bean) {
-		return AccessController.doPrivileged(new WrapPrivilegedAction<T>(bean));
+		return AccessController.doPrivileged(new BeanPrivilegedAction<T>(bean));
 	}
 
 	public DoPrivilegedFactory() {
@@ -68,50 +68,6 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 		throws BeansException {
 
 		return bean;
-	}
-
-	public static class WrapPrivilegedAction <T>
-		implements PrivilegedAction<T> {
-
-		public WrapPrivilegedAction(T bean) {
-			_bean = bean;
-		}
-
-		public T run() {
-			Class<?> clazz = _bean.getClass();
-
-			Package pkg = clazz.getPackage();
-
-			String packageName = pkg.getName();
-
-			if (clazz.isPrimitive() || packageName.startsWith("java.")) {
-				return _bean;
-			}
-
-			Class<?>[] interfaces = _getInterfaces(_bean);
-
-			if (interfaces.length <= 0) {
-				return _bean;
-			}
-
-			interfaces = ArrayUtil.append(interfaces, DoPrivilegedBean.class);
-
-			try {
-				return (T)ProxyUtil.newProxyInstance(
-					ClassLoaderUtil.getPortalClassLoader(), interfaces,
-					new DoPrivilegedHandler(_bean));
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
-			}
-
-			return _bean;
-		}
-
-		private T _bean;
-
 	}
 
 	/**
@@ -165,5 +121,49 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DoPrivilegedFactory.class);
+
+	private static class BeanPrivilegedAction <T>
+		implements PrivilegedAction<T> {
+
+		public BeanPrivilegedAction(T bean) {
+			_bean = bean;
+		}
+
+		public T run() {
+			Class<?> clazz = _bean.getClass();
+
+			Package pkg = clazz.getPackage();
+
+			String packageName = pkg.getName();
+
+			if (clazz.isPrimitive() || packageName.startsWith("java.")) {
+				return _bean;
+			}
+
+			Class<?>[] interfaces = _getInterfaces(_bean);
+
+			if (interfaces.length <= 0) {
+				return _bean;
+			}
+
+			interfaces = ArrayUtil.append(interfaces, DoPrivilegedBean.class);
+
+			try {
+				return (T)ProxyUtil.newProxyInstance(
+					ClassLoaderUtil.getPortalClassLoader(), interfaces,
+					new DoPrivilegedHandler(_bean));
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+
+			return _bean;
+		}
+
+		private T _bean;
+
+	}
 
 }
