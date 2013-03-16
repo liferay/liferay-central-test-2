@@ -65,7 +65,7 @@ public class PACLUtil {
 		ProtectionDomain protectionDomain = AccessController.doPrivileged(
 			new ProtectionDomainPrivilegedAction(callerClass));
 
-		return isTrustedCaller(protectionDomain, permission, paclPolicy);
+		return _isTrustedCaller(protectionDomain, permission, paclPolicy);
 	}
 
 	public static class Exception extends SecurityException {
@@ -90,31 +90,31 @@ public class PACLUtil {
 
 	}
 
-	private static boolean hasSameOrigin(
+	private static boolean _hasSameOrigin(
 		ProtectionDomain protectionDomain,
 		PermissionCollection permissionCollection, PACLPolicy paclPolicy) {
 
-		PACLPolicy callerPaclPolicy = null;
+		PACLPolicy callerPACLPolicy = null;
 
 		if (permissionCollection instanceof PortalPermissionCollection) {
 			PortalPermissionCollection portalPermissionCollection =
 				(PortalPermissionCollection)permissionCollection;
 
-			callerPaclPolicy = portalPermissionCollection.getPaclPolicy();
+			callerPACLPolicy = portalPermissionCollection.getPACLPolicy();
 		}
 		else {
-			callerPaclPolicy = PACLPolicyManager.getPACLPolicy(
+			callerPACLPolicy = PACLPolicyManager.getPACLPolicy(
 				protectionDomain.getClassLoader());
 		}
 
-		if (paclPolicy == callerPaclPolicy) {
+		if (paclPolicy == callerPACLPolicy) {
 			return true;
 		}
 
 		return false;
 	}
 
-	private static boolean isTrustedCaller(
+	private static boolean _isTrustedCaller(
 		ProtectionDomain protectionDomain, java.security.Permission permission,
 		PACLPolicy paclPolicy) {
 
@@ -130,10 +130,10 @@ public class PACLUtil {
 		PermissionCollection permissionCollection = portalPolicy.getPermissions(
 			protectionDomain);
 
-		boolean hasSameOrigin = hasSameOrigin(
-			protectionDomain, permissionCollection, paclPolicy);
+		if (!_hasSameOrigin(
+				protectionDomain, permissionCollection, paclPolicy) &&
+			permissionCollection.implies(permission)) {
 
-		if (!hasSameOrigin && permissionCollection.implies(permission)) {
 			return true;
 		}
 

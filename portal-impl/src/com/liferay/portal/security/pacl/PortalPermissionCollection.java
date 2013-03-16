@@ -49,7 +49,7 @@ public class PortalPermissionCollection extends PermissionCollection {
 		return null;
 	}
 
-	public PACLPolicy getPaclPolicy() {
+	public PACLPolicy getPACLPolicy() {
 		return _paclPolicy;
 	}
 
