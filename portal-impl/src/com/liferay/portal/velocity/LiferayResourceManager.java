@@ -95,7 +95,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 				try {
 					return AccessController.doPrivileged(
-						new ResourceActionPrivilegedAction(
+						new ResourcePrivilegedExceptionAction(
 							resourceName, resourceType, encoding));
 				}
 				catch (PrivilegedActionException pae) {
@@ -216,10 +216,10 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 
 	}
 
-	private class ResourceActionPrivilegedAction
+	private class ResourcePrivilegedExceptionAction
 		implements PrivilegedExceptionAction<Resource> {
 
-		public ResourceActionPrivilegedAction(
+		public ResourcePrivilegedExceptionAction(
 			String resourceName, int resourceType, String encoding) {
 
 			_resourceName = resourceName;

@@ -90,7 +90,7 @@ public class LiferayTemplateCache extends TemplateCache {
 
 				try {
 					return AccessController.doPrivileged(
-						new TemplateActionPrivilegedAction(
+						new TemplatePrivilegedExceptionAction(
 							macroTemplateId, locale, encoding, parse));
 				}
 				catch (PrivilegedActionException pae) {
@@ -170,10 +170,11 @@ public class LiferayTemplateCache extends TemplateCache {
 	private Configuration _configuration;
 	private Method _normalizeNameMethod;
 	private PortalCache<TemplateResource, Object> _portalCache;
-	private class TemplateActionPrivilegedAction
+
+	private class TemplatePrivilegedExceptionAction
 		implements PrivilegedExceptionAction<Template> {
 
-		public TemplateActionPrivilegedAction(
+		public TemplatePrivilegedExceptionAction(
 			String templateId, Locale locale, String encoding, boolean parse) {
 
 			_templateId = templateId;
