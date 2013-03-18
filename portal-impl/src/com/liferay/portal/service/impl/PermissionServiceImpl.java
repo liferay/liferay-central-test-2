@@ -258,18 +258,15 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 					getAssetRendererFactoryByClassName(name);
 
 			if (assetRendererFactory != null) {
-				boolean permission = false;
-
 				try {
-					permission = assetRendererFactory.hasPermission(
-						permissionChecker, GetterUtil.getLong(primKey),
-						ActionKeys.PERMISSIONS);
+					if (assetRendererFactory.hasPermission(
+							permissionChecker, GetterUtil.getLong(primKey),
+							ActionKeys.PERMISSIONS)) {
+
+						return;
+					}
 				}
 				catch (Exception e) {
-				}
-
-				if (permission) {
-					return;
 				}
 			}
 
