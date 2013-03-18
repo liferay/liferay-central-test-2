@@ -100,13 +100,15 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_ACCESS_DECLARED_MEMBERS)) {
+			if (!hasReflect(permission)) {
+				logSecurityException(
+					_log, "Attempted to access declared members");
 
-			// Temporarily return true
-
-			return true;
+				return false;
+			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_CREATE_CLASS_LOADER)) {
-			if (!hasCreateClassLoader()) {
+			if (!hasCreateClassLoader(permission)) {
 				logSecurityException(
 					_log, "Attempted to create a class loader");
 
@@ -114,7 +116,7 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_CREATE_SECURITY_MANAGER)) {
-			if (!hasCreateSecurityManager()) {
+			if (!hasCreateSecurityManager(permission)) {
 				logSecurityException(
 					_log, "Attempted to create a security manager");
 
@@ -122,14 +124,14 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 		else if (name.startsWith(RUNTIME_PERMISSION_GET_CLASSLOADER)) {
-			if (!hasGetClassLoader()) {
+			if (!hasGetClassLoader(permission)) {
 				logSecurityException(_log, "Attempted to get class loader");
 
 				return false;
 			}
 		}
 		else if (name.startsWith(RUNTIME_PERMISSION_GET_PROTECTION_DOMAIN)) {
-			if (!hasGetProtectionDomain()) {
+			if (!hasGetProtectionDomain(permission)) {
 				logSecurityException(
 					_log, "Attempted to get protection domain");
 
@@ -141,7 +143,7 @@ public class RuntimeChecker extends BaseChecker {
 
 			String envName = name.substring(pos + 1);
 
-			if (!hasGetEnv(envName)) {
+			if (!hasGetEnv(envName, permission)) {
 				logSecurityException(
 					_log, "Attempted to get environment name " + envName);
 
@@ -149,20 +151,26 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 		else if (name.startsWith(RUNTIME_PERMISSION_LOAD_LIBRARY)) {
-			if (!hasLoadLibrary()) {
+			if (!hasLoadLibrary(permission)) {
 				logSecurityException(_log, "Attempted to load library");
 
 				return false;
 			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_READ_FILE_DESCRIPTOR)) {
-			if (!hasReadFileDescriptor()) {
+			if (!hasReadFileDescriptor(permission)) {
 				logSecurityException(_log, "Attempted to read file descriptor");
 
 				return false;
 			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_SET_CONTEXT_CLASS_LOADER)) {
+			if (!hasSetContextClassLoader(permission)) {
+				logSecurityException(
+					_log, "Attempted to set the context class loader");
+
+				return false;
+			}
 		}
 		else if (name.equals(RUNTIME_PERMISSION_SET_SECURITY_MANAGER)) {
 			logSecurityException(
@@ -171,7 +179,7 @@ public class RuntimeChecker extends BaseChecker {
 			return false;
 		}
 		else if (name.equals(RUNTIME_PERMISSION_WRITE_FILE_DESCRIPTOR)) {
-			if (!hasWriteFileDescriptor()) {
+			if (!hasWriteFileDescriptor(permission)) {
 				logSecurityException(
 					_log, "Attempted to write file descriptor");
 
@@ -203,14 +211,14 @@ public class RuntimeChecker extends BaseChecker {
 		return true;
 	}
 
-	protected boolean hasCreateClassLoader() {
+	protected boolean hasCreateClassLoader(Permission permission) {
 
 		// Temporarily return true
 
 		return true;
 	}
 
-	protected boolean hasCreateSecurityManager() {
+	protected boolean hasCreateSecurityManager(Permission permission) {
 		Class<?> callerClass7 = Reflection.getCallerClass(7);
 
 		String callerClassName7 = callerClass7.getName();
@@ -224,14 +232,14 @@ public class RuntimeChecker extends BaseChecker {
 		return false;
 	}
 
-	protected boolean hasGetClassLoader() {
+	protected boolean hasGetClassLoader(Permission permission) {
 
 		// Temporarily return true
 
 		return true;
 	}
 
-	protected boolean hasGetEnv(String name) {
+	protected boolean hasGetEnv(String name, Permission permission) {
 		for (Pattern environmentVariablePattern :
 				_environmentVariablePatterns) {
 
@@ -259,7 +267,7 @@ public class RuntimeChecker extends BaseChecker {
 		return false;
 	}
 
-	protected boolean hasGetProtectionDomain() {
+	protected boolean hasGetProtectionDomain(Permission permission) {
 		Class<?> callerClass8 = Reflection.getCallerClass(8);
 
 		if (callerClass8 == AccessController.class) {
@@ -271,7 +279,7 @@ public class RuntimeChecker extends BaseChecker {
 		return false;
 	}
 
-	protected boolean hasLoadLibrary() {
+	protected boolean hasLoadLibrary(Permission permission) {
 		Class<?> callerClass10 = Reflection.getCallerClass(10);
 
 		if (callerClass10 == AccessController.class) {
@@ -281,14 +289,14 @@ public class RuntimeChecker extends BaseChecker {
 		return false;
 	}
 
-	protected boolean hasReadFileDescriptor() {
+	protected boolean hasReadFileDescriptor(Permission permission) {
 
 		// Temporarily return true
 
 		return true;
 	}
 
-	protected boolean hasWriteFileDescriptor() {
+	protected boolean hasWriteFileDescriptor(Permission permission) {
 
 		// Temporarily return true
 
