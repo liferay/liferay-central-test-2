@@ -41,23 +41,8 @@ public class DoPrivilegedUtil {
 		return _pacl.wrap(t, checkActive);
 	}
 
-	/**
-	 * This pattern allows the portal to provide an implementation which has
-	 * lowest possible cost when PACL is not enabled and still provide an
-	 * injection point for inserting a PACL aware implementation when it is
-	 * enabled. This will also allow complete decoupling of local code from the
-	 * PACL implementation.
-	 */
-
-	/**
-	 * This private static variable provides the injection point for inserting
-	 * a PACL aware implementation.
-	 */
 	private static PACL _pacl = new NoPACL();
 
-	/**
-	 * This interface defines the local operations where PACL is required.
-	 */
 	public static interface PACL {
 
 		public <T> T wrap(PrivilegedAction<T> privilegedAction);
@@ -72,11 +57,6 @@ public class DoPrivilegedUtil {
 
 	}
 
-	/**
-	 * This implementation is the minimal cost operation required for the class
-	 * to operate properly. The PACL aware implementation will implement the
-	 * interface be injected in place of the NoPACL implementation.
-	 */
 	private static class NoPACL implements PACL {
 
 		public <T> T wrap(PrivilegedAction<T> privilegedAction) {

@@ -234,43 +234,6 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		return _policy;
 	}
 
-	public static class DoDoPrivilegedPACL implements DoPrivilegedUtil.PACL {
-
-		public <T> T wrap(PrivilegedAction<T> privilegedAction) {
-			if (!PACLPolicyManager.isActive()) {
-				return privilegedAction.run();
-			}
-
-			return DoPrivilegedFactory.wrap(
-				AccessController.doPrivileged(privilegedAction));
-		}
-
-		public <T> T wrap(
-				PrivilegedExceptionAction<T> privilegedExceptionAction)
-			throws Exception {
-
-			if (!PACLPolicyManager.isActive()) {
-				return privilegedExceptionAction.run();
-			}
-
-			return DoPrivilegedFactory.wrap(
-				AccessController.doPrivileged(privilegedExceptionAction));
-		}
-
-		public <T> T wrap(T t) {
-			return DoPrivilegedFactory.wrap(t);
-		}
-
-		public <T> T wrap(T t, boolean checkActive) {
-			if (!PACLPolicyManager.isActive()) {
-				return t;
-			}
-
-			return DoPrivilegedFactory.wrap(t);
-		}
-
-	}
-
 	protected void initClass(Class<?> clazz) {
 		_log.debug(
 			"Loading " + clazz.getName() + " and " +
@@ -335,15 +298,15 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
-	protected void initPACLImpl(Class<?> clazz, Object paclImpl)
+	protected void initPACLImpl(Class<?> clazz, DoPrivilegedUtil.PACL pacl)
 		throws Exception {
 
-		Field paclImplField = clazz.getDeclaredField("_pacl");
+		Field field = clazz.getDeclaredField("_pacl");
 
-		synchronized (paclImplField) {
-			paclImplField.setAccessible(true);
+		synchronized (field) {
+			field.setAccessible(true);
 
-			paclImplField.set(null, paclImpl);
+			field.set(null, pacl);
 		}
 	}
 
@@ -360,5 +323,42 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				"._checkMembersAccessClassLoader");
 
 	private Policy _policy;
+
+	private static class DoDoPrivilegedPACL implements DoPrivilegedUtil.PACL {
+
+		public <T> T wrap(PrivilegedAction<T> privilegedAction) {
+			if (!PACLPolicyManager.isActive()) {
+				return privilegedAction.run();
+			}
+
+			return DoPrivilegedFactory.wrap(
+				AccessController.doPrivileged(privilegedAction));
+		}
+
+		public <T> T wrap(
+				PrivilegedExceptionAction<T> privilegedExceptionAction)
+			throws Exception {
+
+			if (!PACLPolicyManager.isActive()) {
+				return privilegedExceptionAction.run();
+			}
+
+			return DoPrivilegedFactory.wrap(
+				AccessController.doPrivileged(privilegedExceptionAction));
+		}
+
+		public <T> T wrap(T t) {
+			return DoPrivilegedFactory.wrap(t);
+		}
+
+		public <T> T wrap(T t, boolean checkActive) {
+			if (!PACLPolicyManager.isActive()) {
+				return t;
+			}
+
+			return DoPrivilegedFactory.wrap(t);
+		}
+
+	}
 
 }
