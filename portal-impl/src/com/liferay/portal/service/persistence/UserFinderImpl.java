@@ -221,8 +221,13 @@ public class UserFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
+		LinkedHashMap<String, Object> params1 = params;
+
+		LinkedHashMap<String, Object> params2 = null;
+
+		LinkedHashMap<String, Object> params3 = null;
+
 		Long[] groupIds = null;
-		Long[] roleIds = null;
 
 		if (params.get("usersGroups") instanceof Long) {
 			Long groupId = (Long)params.get("usersGroups");
@@ -234,6 +239,8 @@ public class UserFinderImpl
 		else {
 			groupIds = (Long[])params.get("usersGroups");
 		}
+
+		Long[] roleIds = null;
 
 		if (params.get("usersRoles") instanceof Long) {
 			Long roleId = (Long)params.get("usersRoles");
@@ -249,13 +256,6 @@ public class UserFinderImpl
 		boolean inherit = GetterUtil.getBoolean(params.get("inherit"));
 
 		boolean doUnionOnGroup = Validator.isNotNull(groupIds) && inherit;
-		boolean doUnionOnRole = Validator.isNotNull(roleIds) && inherit;
-
-		LinkedHashMap<String, Object> params1 = params;
-
-		LinkedHashMap<String, Object> params2 = null;
-
-		LinkedHashMap<String, Object> params3 = null;
 
 		if (doUnionOnGroup) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -298,6 +298,8 @@ public class UserFinderImpl
 				"usersUserGroups",
 				userGroupIds.toArray(new Long[userGroupIds.size()]));
 		}
+
+		boolean doUnionOnRole = Validator.isNotNull(roleIds) && inherit;
 
 		if (doUnionOnRole) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -493,8 +495,13 @@ public class UserFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
+		LinkedHashMap<String, Object> params1 = params;
+
+		LinkedHashMap<String, Object> params2 = null;
+
+		LinkedHashMap<String, Object> params3 = null;
+
 		Long[] groupIds = null;
-		Long[] roleIds = null;
 
 		if (params.get("usersGroups") instanceof Long) {
 			Long groupId = (Long)params.get("usersGroups");
@@ -506,6 +513,8 @@ public class UserFinderImpl
 		else {
 			groupIds = (Long[])params.get("usersGroups");
 		}
+
+		Long[] roleIds = null;
 
 		if (params.get("usersRoles") instanceof Long) {
 			Long roleId = (Long)params.get("usersRoles");
@@ -521,13 +530,6 @@ public class UserFinderImpl
 		boolean inherit = GetterUtil.getBoolean(params.get("inherit"));
 
 		boolean doUnionOnGroup = Validator.isNotNull(groupIds) && inherit;
-		boolean doUnionOnRole = Validator.isNotNull(roleIds) && inherit;
-
-		LinkedHashMap<String, Object> params1 = params;
-
-		LinkedHashMap<String, Object> params2 = null;
-
-		LinkedHashMap<String, Object> params3 = null;
 
 		if (doUnionOnGroup) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -570,6 +572,8 @@ public class UserFinderImpl
 				"usersUserGroups",
 				userGroupIds.toArray(new Long[userGroupIds.size()]));
 		}
+
+		boolean doUnionOnRole = Validator.isNotNull(roleIds) && inherit;
 
 		if (doUnionOnRole) {
 			params2 = new LinkedHashMap<String, Object>(params1);
