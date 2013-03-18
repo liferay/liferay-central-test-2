@@ -99,7 +99,7 @@ public class PortalPolicy extends Policy {
 
 		Object key = _getKey(protectionDomain);
 
-		permissionCollection = _permissionCollections.get(key);
+		permissionCollection = _getPermissionCollection(key);
 
 		if (permissionCollection != null) {
 			return permissionCollection;
@@ -167,7 +167,7 @@ public class PortalPolicy extends Policy {
 
 		Object key = _getKey(protectionDomain);
 
-		PermissionCollection permissionCollection = _permissionCollections.get(
+		PermissionCollection permissionCollection = _getPermissionCollection(
 			key);
 
 		if (permissionCollection != null) {
@@ -270,6 +270,19 @@ public class PortalPolicy extends Policy {
 
 			return string.hashCode();
 		}
+	}
+
+	private PermissionCollection _getPermissionCollection(Object key) {
+		PermissionCollection permissionCollection = _permissionCollections.get(
+			key);
+
+		if (permissionCollection == null) {
+			permissionCollection = _rootPermissionCollections.get(key);
+
+			_permissionCollections.put(key, permissionCollection);
+		}
+
+		return permissionCollection;
 	}
 
 	private void _init() throws PrivilegedActionException {
