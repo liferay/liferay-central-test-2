@@ -205,7 +205,11 @@ public class PortalPolicy extends Policy {
 			_policy.refresh();
 		}
 
-		_permissionCollections.clear();
+		synchronized (_permissionCollections) {
+			_permissionCollections.clear();
+
+			_permissionCollections.putAll(_rootPermissionCollections);
+		}
 	}
 
 	private void _addExtraPermissions(
