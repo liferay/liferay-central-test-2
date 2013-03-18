@@ -56,7 +56,7 @@ public class PortalPolicy extends Policy {
 			throw new IllegalStateException(
 				"Liferay needs to be able to change the accessibility of the " +
 					"'key' field in " + ProtectionDomain.class.getName() +
-						" as well as get the protection domains of classes.",
+						" as well as get the protection domains of classes",
 				pae.getException());
 		}
 	}
@@ -287,7 +287,7 @@ public class PortalPolicy extends Policy {
 
 	private void _init() throws PrivilegedActionException {
 		_field = AccessController.doPrivileged(
-			new KeyFieldPrivilegedExceptionAction());
+			new FieldPrivilegedExceptionAction());
 
 		List<ProtectionDomain> protectionDomains =
 			AccessController.doPrivileged(
@@ -319,7 +319,7 @@ public class PortalPolicy extends Policy {
 
 	private Map<Object, PermissionCollection> _rootPermissionCollections;
 
-	private class KeyFieldPrivilegedExceptionAction
+	private class FieldPrivilegedExceptionAction
 		implements PrivilegedExceptionAction<Field> {
 
 		public Field run() throws Exception {
