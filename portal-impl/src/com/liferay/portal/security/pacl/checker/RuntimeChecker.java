@@ -358,62 +358,6 @@ public class RuntimeChecker extends BaseChecker {
 		}
 	}
 
-	protected void logCreateClassLoader(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to create a class loader");
-		}
-	}
-
-	protected void logCreateSecurityManager(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					"to create a security manager");
-		}
-	}
-
-	protected void logGetClassLoader(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to get the class loader");
-		}
-	}
-
-	protected void logGetEnv(Class<?> callerClass, int frame, String name) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to get environment " + name);
-		}
-	}
-
-	protected void logGetProtectionDomain(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to get the protection domain");
-		}
-	}
-
-	protected void logReadFileDescriptor(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to read a file descriptor");
-		}
-	}
-
-	protected void logWriteFileDescriptor(Class<?> callerClass, int frame) {
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Allowing frame " + frame + " with caller " + callerClass +
-					" to write a file descriptor");
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(RuntimeChecker.class);
 
 	private List<Pattern> _environmentVariablePatterns;
