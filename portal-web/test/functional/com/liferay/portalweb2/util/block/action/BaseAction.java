@@ -32,7 +32,8 @@ public class BaseAction {
 		if (locator != null) {
 			return locator;
 		}
-		else if (paths.containsKey(locatorKey)) {
+
+		if (paths.containsKey(locatorKey)) {
 			return paths.get(locatorKey);
 		}
 

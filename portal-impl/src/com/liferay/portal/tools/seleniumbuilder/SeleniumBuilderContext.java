@@ -74,6 +74,11 @@ public class SeleniumBuilderContext {
 				_functionJavaFileNames.put(
 					functionName, _getJavaFileName(fileName));
 
+				Element rootElement = _getRootElement(fileName);
+
+				_functionLocatorCounts.put(
+					functionName, _getLocatorCount(rootElement));
+
 				if (_functionNames.contains(functionName)) {
 					throw new Exception(
 						"Duplicate name " + functionName + " at " + fileName);
@@ -87,15 +92,10 @@ public class SeleniumBuilderContext {
 				_functionReturnTypes.put(
 					functionName, _getReturnType(functionName));
 
-				Element rootElement = _getRootElement(fileName);
-
 				_functionRootElements.put(functionName, rootElement);
 
 				_functionSimpleClassNames.put(
 					functionName, _getSimpleClassName(fileName));
-
-				_functionLocatorCounts.put(
-					functionName, _getLocatorCount(rootElement));
 			}
 			else if (fileName.endsWith(".macro")) {
 				String macroName = _getName(fileName);
