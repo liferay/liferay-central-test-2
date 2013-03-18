@@ -49,6 +49,15 @@ public class XSLManager extends BaseTemplateManager {
 		return TemplateConstants.LANG_TYPE_XSL;
 	}
 
+	public void init() {
+	}
+
+	public void setTemplateContextHelper(
+		TemplateContextHelper templateContextHelper) {
+
+		_templateContextHelper = templateContextHelper;
+	}
+
 	@Override
 	protected Template doGetTemplate(
 		TemplateResource templateResource,
@@ -80,15 +89,6 @@ public class XSLManager extends BaseTemplateManager {
 		}
 
 		return template;
-	}
-
-	public void init() {
-	}
-
-	public void setTemplateContextHelper(
-		TemplateContextHelper templateContextHelper) {
-
-		_templateContextHelper = templateContextHelper;
 	}
 
 	@Override

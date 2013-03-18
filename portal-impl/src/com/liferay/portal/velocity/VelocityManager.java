@@ -62,38 +62,6 @@ public class VelocityManager extends BaseTemplateManager {
 		return TemplateConstants.LANG_TYPE_VM;
 	}
 
-	@Override
-	protected Template doGetTemplate(
-		TemplateResource templateResource,
-		TemplateResource errorTemplateResource,
-		TemplateContextType templateContextType,
-		Map<String, Object> helperUtilities) {
-
-		Template template = null;
-
-		VelocityContext velocityContext = getVelocityContext(helperUtilities);
-
-		if (templateContextType.equals(TemplateContextType.EMPTY)) {
-			template = new VelocityTemplate(
-				templateResource, errorTemplateResource, null, _velocityEngine,
-				_templateContextHelper);
-		}
-		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
-			template = new RestrictedTemplate(
-				new VelocityTemplate(
-					templateResource, errorTemplateResource, velocityContext,
-					_velocityEngine, _templateContextHelper),
-				_templateContextHelper.getRestrictedVariables());
-		}
-		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
-			template = new VelocityTemplate(
-				templateResource, errorTemplateResource, velocityContext,
-				_velocityEngine, _templateContextHelper);
-		}
-
-		return template;
-	}
-
 	public void init() throws TemplateException {
 		if (_velocityEngine != null) {
 			return;
@@ -175,6 +143,38 @@ public class VelocityManager extends BaseTemplateManager {
 		TemplateContextHelper templateContextHelper) {
 
 		_templateContextHelper = templateContextHelper;
+	}
+
+	@Override
+	protected Template doGetTemplate(
+		TemplateResource templateResource,
+		TemplateResource errorTemplateResource,
+		TemplateContextType templateContextType,
+		Map<String, Object> helperUtilities) {
+
+		Template template = null;
+
+		VelocityContext velocityContext = getVelocityContext(helperUtilities);
+
+		if (templateContextType.equals(TemplateContextType.EMPTY)) {
+			template = new VelocityTemplate(
+				templateResource, errorTemplateResource, null, _velocityEngine,
+				_templateContextHelper);
+		}
+		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+			template = new RestrictedTemplate(
+				new VelocityTemplate(
+					templateResource, errorTemplateResource, velocityContext,
+					_velocityEngine, _templateContextHelper),
+				_templateContextHelper.getRestrictedVariables());
+		}
+		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
+			template = new VelocityTemplate(
+				templateResource, errorTemplateResource, velocityContext,
+				_velocityEngine, _templateContextHelper);
+		}
+
+		return template;
 	}
 
 	@Override

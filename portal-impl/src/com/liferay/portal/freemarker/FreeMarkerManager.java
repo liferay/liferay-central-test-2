@@ -66,36 +66,6 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		return TemplateConstants.LANG_TYPE_FTL;
 	}
 
-	@Override
-	protected Template doGetTemplate(
-		TemplateResource templateResource,
-		TemplateResource errorTemplateResource,
-		TemplateContextType templateContextType,
-		Map<String, Object> helperUtilities) {
-
-		Template template = null;
-
-		if (templateContextType.equals(TemplateContextType.EMPTY)) {
-			template = new FreeMarkerTemplate(
-				templateResource, errorTemplateResource, null, _configuration,
-				_templateContextHelper);
-		}
-		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
-			template = new RestrictedTemplate(
-				new FreeMarkerTemplate(
-					templateResource, errorTemplateResource, helperUtilities,
-					_configuration, _templateContextHelper),
-				_templateContextHelper.getRestrictedVariables());
-		}
-		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
-			template = new FreeMarkerTemplate(
-				templateResource, errorTemplateResource, helperUtilities,
-				_configuration, _templateContextHelper);
-		}
-
-		return template;
-	}
-
 	public void init() throws TemplateException {
 		if (_configuration != null) {
 			return;
@@ -140,6 +110,36 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		TemplateContextHelper templateContextHelper) {
 
 		_templateContextHelper = templateContextHelper;
+	}
+
+	@Override
+	protected Template doGetTemplate(
+		TemplateResource templateResource,
+		TemplateResource errorTemplateResource,
+		TemplateContextType templateContextType,
+		Map<String, Object> helperUtilities) {
+
+		Template template = null;
+
+		if (templateContextType.equals(TemplateContextType.EMPTY)) {
+			template = new FreeMarkerTemplate(
+				templateResource, errorTemplateResource, null, _configuration,
+				_templateContextHelper);
+		}
+		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+			template = new RestrictedTemplate(
+				new FreeMarkerTemplate(
+					templateResource, errorTemplateResource, helperUtilities,
+					_configuration, _templateContextHelper),
+				_templateContextHelper.getRestrictedVariables());
+		}
+		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
+			template = new FreeMarkerTemplate(
+				templateResource, errorTemplateResource, helperUtilities,
+				_configuration, _templateContextHelper);
+		}
+
+		return template;
 	}
 
 	@Override
