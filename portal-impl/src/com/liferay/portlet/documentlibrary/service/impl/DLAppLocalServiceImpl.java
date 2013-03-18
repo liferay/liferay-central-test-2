@@ -388,7 +388,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
@@ -475,7 +475,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFolder(folderId);
+		LocalRepository localRepository = getFolderLocalRepository(folderId);
 
 		localRepository.deleteFolder(folderId);
 	}
@@ -491,7 +491,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public FileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		return localRepository.getFileEntry(fileEntryId);
@@ -518,7 +518,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		catch (NoSuchFileEntryException nsfee) {
 		}
 
-		LocalRepository localRepository = getLocalRepositoryByFolder(folderId);
+		LocalRepository localRepository = getFolderLocalRepository(folderId);
 
 		return localRepository.getFileEntry(folderId, title);
 	}
@@ -610,7 +610,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileVersion(
+		LocalRepository localRepository = getFileVersionLocalRepository(
 			fileVersionId);
 
 		return localRepository.getFileVersion(fileVersionId);
@@ -627,7 +627,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFolder(folderId);
+		LocalRepository localRepository = getFolderLocalRepository(folderId);
 
 		return localRepository.getFolder(folderId);
 	}
@@ -685,9 +685,9 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LocalRepository fromLocalRepository = getLocalRepositoryByFileEntry(
+		LocalRepository fromLocalRepository = getFileEntryLocalRepository(
 			fileEntryId);
-		LocalRepository toLocalRepository = getLocalRepositoryByFolder(
+		LocalRepository toLocalRepository = getFolderLocalRepository(
 			newFolderId, serviceContext.getScopeGroupId());
 
 		if (fromLocalRepository.getRepositoryId() ==
@@ -717,7 +717,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public FileEntry moveFileEntryToTrash(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
@@ -736,7 +736,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void restoreFileEntryFromTrash(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
@@ -853,7 +853,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntry.getFileEntryId());
 
 		localRepository.updateAsset(
@@ -973,7 +973,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		mimeType = DLAppUtil.getMimeType(sourceFileName, mimeType, title, file);
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		FileEntry fileEntry = localRepository.updateFileEntry(
@@ -1062,7 +1062,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			}
 		}
 
-		LocalRepository localRepository = getLocalRepositoryByFileEntry(
+		LocalRepository localRepository = getFileEntryLocalRepository(
 			fileEntryId);
 
 		FileEntry oldFileEntry = localRepository.getFileEntry(fileEntryId);
@@ -1180,7 +1180,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepositoryByFolder(folderId);
+		LocalRepository localRepository = getFolderLocalRepository(folderId);
 
 		return localRepository.updateFolder(
 			folderId, parentFolderId, name, description, serviceContext);
@@ -1260,24 +1260,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		}
 	}
 
-	protected LocalRepository getLocalRepository(long repositoryId)
-		throws PortalException, SystemException {
-
-		try {
-			return repositoryLocalService.getLocalRepositoryImpl(repositoryId);
-		}
-		catch (InvalidRepositoryIdException irie) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("No Group exists with the key {repositoryId=");
-			sb.append(repositoryId);
-			sb.append("}");
-
-			throw new NoSuchGroupException(sb.toString(), irie);
-		}
-	}
-
-	protected LocalRepository getLocalRepositoryByFileEntry(long fileEntryId)
+	protected LocalRepository getFileEntryLocalRepository(long fileEntryId)
 		throws PortalException, SystemException {
 
 		try {
@@ -1295,8 +1278,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		}
 	}
 
-	protected LocalRepository getLocalRepositoryByFileVersion(
-			long fileVersionId)
+	protected LocalRepository getFileVersionLocalRepository(long fileVersionId)
 		throws PortalException, SystemException {
 
 		try {
@@ -1314,7 +1296,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		}
 	}
 
-	protected LocalRepository getLocalRepositoryByFolder(long folderId)
+	protected LocalRepository getFolderLocalRepository(long folderId)
 		throws PortalException, SystemException {
 
 		try {
@@ -1332,7 +1314,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		}
 	}
 
-	protected LocalRepository getLocalRepositoryByFolder(
+	protected LocalRepository getFolderLocalRepository(
 			long folderId, long groupId)
 		throws PortalException, SystemException {
 
@@ -1342,10 +1324,27 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			localRepository = getLocalRepository(groupId);
 		}
 		else {
-			localRepository = getLocalRepositoryByFolder(folderId);
+			localRepository = getFolderLocalRepository(folderId);
 		}
 
 		return localRepository;
+	}
+
+	protected LocalRepository getLocalRepository(long repositoryId)
+		throws PortalException, SystemException {
+
+		try {
+			return repositoryLocalService.getLocalRepositoryImpl(repositoryId);
+		}
+		catch (InvalidRepositoryIdException irie) {
+			StringBundler sb = new StringBundler(3);
+
+			sb.append("No Group exists with the key {repositoryId=");
+			sb.append(repositoryId);
+			sb.append("}");
+
+			throw new NoSuchGroupException(sb.toString(), irie);
+		}
 	}
 
 	protected FileEntry moveFileEntries(
