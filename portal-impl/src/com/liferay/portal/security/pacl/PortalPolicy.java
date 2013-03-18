@@ -91,15 +91,14 @@ public class PortalPolicy extends Policy {
 	public PermissionCollection getPermissions(
 		ProtectionDomain protectionDomain) {
 
-		PermissionCollection permissionCollection = null;
-
 		if (protectionDomain == null) {
 			return new Permissions();
 		}
 
 		Object key = _getKey(protectionDomain);
 
-		permissionCollection = _getPermissionCollection(key);
+		PermissionCollection permissionCollection = _getPermissionCollection(
+			key);
 
 		if (permissionCollection != null) {
 			return permissionCollection;
