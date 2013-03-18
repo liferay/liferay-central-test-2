@@ -16,10 +16,8 @@ package com.liferay.portal.security.pacl.checker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.security.AccessController;
 import java.security.Permission;
 
 import java.util.ArrayList;
@@ -27,8 +25,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.springframework.context.support.AbstractApplicationContext;
 
 import sun.reflect.Reflection;
 
@@ -212,20 +208,23 @@ public class RuntimeChecker extends BaseChecker {
 	}
 
 	protected boolean hasCreateClassLoader(Permission permission) {
+		int stackIndex = getStackIndex(15, 11);
 
-		// Temporarily return true
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		return true;
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected boolean hasCreateSecurityManager(Permission permission) {
-		Class<?> callerClass7 = Reflection.getCallerClass(7);
+		int stackIndex = getStackIndex(11, 10);
 
-		String callerClassName7 = callerClass7.getName();
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		if (callerClassName7.startsWith("javax.crypto")) {
-			logCreateSecurityManager(callerClass7, 7);
-
+		if (isTrustedCaller(callerClass, permission)) {
 			return true;
 		}
 
@@ -233,10 +232,15 @@ public class RuntimeChecker extends BaseChecker {
 	}
 
 	protected boolean hasGetClassLoader(Permission permission) {
+		int stackIndex = getStackIndex(11, 10);
 
-		// Temporarily return true
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		return true;
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected boolean hasGetEnv(String name, Permission permission) {
@@ -250,29 +254,23 @@ public class RuntimeChecker extends BaseChecker {
 			}
 		}
 
-		Class<?> callerClass7 = Reflection.getCallerClass(7);
+		int stackIndex = getStackIndex(11, 10);
 
-		if (callerClass7 == AbstractApplicationContext.class) {
-			logGetEnv(callerClass7, 7, name);
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
+		if (isTrustedCaller(callerClass, permission)) {
 			return true;
-		}
-
-		if (ServerDetector.isWebSphere()) {
-			if (name.equals("USER_INSTALL_ROOT")) {
-				return true;
-			}
 		}
 
 		return false;
 	}
 
 	protected boolean hasGetProtectionDomain(Permission permission) {
-		Class<?> callerClass8 = Reflection.getCallerClass(8);
+		int stackIndex = getStackIndex(11, 10);
 
-		if (callerClass8 == AccessController.class) {
-			logGetProtectionDomain(callerClass8, 8);
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
+		if (isTrustedCaller(callerClass, permission)) {
 			return true;
 		}
 
@@ -280,9 +278,11 @@ public class RuntimeChecker extends BaseChecker {
 	}
 
 	protected boolean hasLoadLibrary(Permission permission) {
-		Class<?> callerClass10 = Reflection.getCallerClass(10);
+		int stackIndex = getStackIndex(13, 12);
 
-		if (callerClass10 == AccessController.class) {
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+
+		if (isTrustedCaller(callerClass, permission)) {
 			return true;
 		}
 
@@ -290,17 +290,51 @@ public class RuntimeChecker extends BaseChecker {
 	}
 
 	protected boolean hasReadFileDescriptor(Permission permission) {
+		int stackIndex = getStackIndex(12, 11);
 
-		// Temporarily return true
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		return true;
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean hasReflect(Permission permission) {
+		int stackIndex = getStackIndex(13, 12);
+
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean hasSetContextClassLoader(Permission permission) {
+		int stackIndex = getStackIndex(11, 10);
+
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected boolean hasWriteFileDescriptor(Permission permission) {
+		int stackIndex = getStackIndex(12, 11);
 
-		// Temporarily return true
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		return true;
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected void initEnvironmentVariables() {
