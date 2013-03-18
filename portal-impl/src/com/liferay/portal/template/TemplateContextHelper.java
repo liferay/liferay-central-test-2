@@ -352,29 +352,6 @@ public class TemplateContextHelper {
 		return helperUtilities;
 	}
 
-	public class DoGetHelperUtilitiesPrivilegedAction
-		implements PrivilegedAction<Map<String, Object>> {
-
-		public DoGetHelperUtilitiesPrivilegedAction(
-			ClassLoader classLoader, TemplateContextType templateContextType) {
-
-			_classLoader = classLoader;
-			_templateContextType = templateContextType;
-		}
-
-		public Map<String, Object> run() {
-			return doGetHelperUtilities(_classLoader, _templateContextType);
-		}
-
-		public void setClassLoader(ClassLoader classLoader) {
-			_classLoader = classLoader;
-		}
-
-		private ClassLoader _classLoader;
-		private TemplateContextType _templateContextType;
-
-	}
-
 	protected void populateCommonHelperUtilities(
 		Map<String, Object> variables) {
 
@@ -864,6 +841,25 @@ public class TemplateContextHelper {
 	private Map<ClassLoader, HelperUtilitiesMap>
 		_helperUtilitiesMaps = new ConcurrentHashMap
 			<ClassLoader, HelperUtilitiesMap>();
+
+	private class DoGetHelperUtilitiesPrivilegedAction
+		implements PrivilegedAction<Map<String, Object>> {
+
+		public DoGetHelperUtilitiesPrivilegedAction(
+			ClassLoader classLoader, TemplateContextType templateContextType) {
+
+			_classLoader = classLoader;
+			_templateContextType = templateContextType;
+		}
+
+		public Map<String, Object> run() {
+			return doGetHelperUtilities(_classLoader, _templateContextType);
+		}
+
+		private ClassLoader _classLoader;
+		private TemplateContextType _templateContextType;
+
+	}
 
 	private class HelperUtilitiesMap
 		extends EnumMap<TemplateContextType, Map<String, Object>> {

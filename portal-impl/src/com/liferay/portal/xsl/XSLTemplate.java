@@ -93,6 +93,14 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 		_templateContextHelper.prepare(this, request);
 	}
 
+	public void put(String key, Object value) {
+		if (value == null) {
+			return;
+		}
+
+		_context.put(key, value);
+	}
+
 	@Override
 	protected void doProcessTemplate(Writer writer) throws TemplateException {
 		TransformerFactory transformerFactory =
@@ -186,14 +194,6 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 					e2);
 			}
 		}
-	}
-
-	public void put(String key, Object value) {
-		if (value == null) {
-			return;
-		}
-
-		_context.put(key, value);
 	}
 
 	private Transformer _getTransformer(
