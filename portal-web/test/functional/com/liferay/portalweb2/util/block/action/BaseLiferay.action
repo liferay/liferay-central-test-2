@@ -4,7 +4,6 @@
 			<execute function="AssertElementNotPresent#assertElementNotPresent" />
 		</default>
 	</command>
-
 	<command name="Click">
 		<case comparator="contains" locator="/input">
 			<execute function="Click#clickAtAndWait" />
@@ -13,25 +12,21 @@
 			<execute function="Click#clickAt" />
 		</default>
 	</command>
-
 	<command name="Confirm">
 		<default>
 			<execute function="Confirm#assertConfirmation" />
 		</default>
 	</command>
-
 	<command name="DragAndDrop">
 		<default>
 			<execute function="DragAndDrop#dragAndDrop" />
 		</default>
 	</command>
-
 	<command name="IsElementPresent">
 		<default>
 			<execute function="IsElementPresent#isElementPresent" />
 		</default>
 	</command>
-
 	<command name="Type">
 		<default>
 			<execute function="Type#type" />

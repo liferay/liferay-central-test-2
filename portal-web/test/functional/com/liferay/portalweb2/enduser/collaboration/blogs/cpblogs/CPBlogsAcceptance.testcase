@@ -2,15 +2,12 @@
 	<set-up>
 		<execute macro="CPBlogs#advancedSearch" />
 	</set-up>
-
 	<command name="AddBlogsEntry">
 		<execute macro="BlogsEntry#cpAdd" />
 	</command>
-	
 	<command name="DeleteBlogsEntry">
 		<execute macro="BlogsEntry#cpAdd" />
 	</command>
-
 	<tear-down>
 		<execute macro="BlogsEntry#cpTearDown" />
 	</tear-down>

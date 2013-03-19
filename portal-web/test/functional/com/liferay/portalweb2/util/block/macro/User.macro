@@ -2,7 +2,7 @@
 	<command name="pgFirstLogin">
 		<steps>
 			<execute macro="User#pgLogin">
-				<param name="email" value="test@liferay.com" />
+				<param name="emailAddress" value="test@liferay.com" />
 				<param name="password" value="test" />
 			</execute>
 
@@ -23,14 +23,13 @@
 			</if>
 		</steps>
 	</command>
-
 	<command name="pgLogin">
 		<params>
-			<param name="email" />
+			<param name="emailAddress" />
 			<param name="password" />
 		</params>
 		<steps>
-			<execute action="PGLogin#Type" locator-key1="EMAIL_ADDRESS" value1="${email}" />
+			<execute action="PGLogin#Type" locator-key1="EMAIL_ADDRESS" value1="${emailAddress}" />
 
 			<execute action="PGLogin#Type" locator-key1="PASSWORD" value1="${password}" />
 
@@ -39,7 +38,6 @@
 			<execute action="PGLogin#Click" locator-key1="SIGN_IN" />
 		</steps>
 	</command>
-
 	<command name="pgLogout">
 		<steps>
 			<if>

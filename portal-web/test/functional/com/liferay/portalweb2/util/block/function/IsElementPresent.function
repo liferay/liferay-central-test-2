@@ -2,7 +2,6 @@
 	<command name="isElementPresent">
 		<execute selenium="isElementPresent" />
 	</command>
-
 	<command name="isVisible">
 		<execute selenium="isVisible" />
 	</command>

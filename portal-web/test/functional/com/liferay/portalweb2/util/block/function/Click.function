@@ -4,13 +4,11 @@
 
 		<execute selenium="clickAt" />
 	</command>
-
 	<command name="clickAtAndWait">
 		<execute selenium="waitForVisible" />
 
 		<execute selenium="clickAtAndWait" />
 	</command>
-
 	<command name="textClickAt">
 		<execute selenium="waitForVisible" />
 
@@ -20,7 +18,6 @@
 
 		<execute selenium="clickAt" />
 	</command>
-
 	<command name="textClickAtAndWait">
 		<execute selenium="waitForVisible" />
 
@@ -30,7 +27,6 @@
 
 		<execute selenium="clickAtAndWait" />
 	</command>
-
 	<command name="textClickAtClickDockbar">
 		<execute selenium="pause" argument1="1000" />
 
@@ -40,7 +36,6 @@
 
 		<execute function="Click#textClickAt" />
 	</command>
-
 	<command name="valueClickAtAndWait">
 		<execute selenium="waitForVisible" />
 

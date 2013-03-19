@@ -4,7 +4,6 @@
 
 		<execute action="CPBlogs#Click" locator-key="ADD_ENTRY" />
 	</command>
-	
 	<command name="cpTearDown">
 		<execute action="CPBlogs#Click" locator-key="DELETE_ENTRY" />
 	</command>
