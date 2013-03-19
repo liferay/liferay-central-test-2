@@ -66,7 +66,7 @@ public class MBBanStagedModelDataHandler
 		if (user == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Could not find banned user with uuid " +
+					"Unable to find banned user with uuid " +
 						ban.getBanUserUuid());
 			}
 

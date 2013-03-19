@@ -54,8 +54,6 @@ public class MBThreadFlagStagedModelDataHandler
 		MBThread thread = MBThreadLocalServiceUtil.getThread(
 			threadFlag.getThreadId());
 
-		// Parent thread
-
 		MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(
 			thread.getRootMessageId());
 
@@ -72,8 +70,6 @@ public class MBThreadFlagStagedModelDataHandler
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext,
 			new Element[] {categoriesElement, messagesElement}, rootMessage);
-
-		// Thread flag
 
 		Element threadFlagsElement = elements[2];
 
@@ -93,8 +89,6 @@ public class MBThreadFlagStagedModelDataHandler
 			PortletDataContext portletDataContext, Element element, String path,
 			MBThreadFlag threadFlag)
 		throws Exception {
-
-		// Parent thread
 
 		Map<Long, Long> threadIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
@@ -125,8 +119,6 @@ public class MBThreadFlagStagedModelDataHandler
 		if (thread == null) {
 			return;
 		}
-
-		// Thread flag
 
 		long userId = portletDataContext.getUserId(threadFlag.getUserUuid());
 

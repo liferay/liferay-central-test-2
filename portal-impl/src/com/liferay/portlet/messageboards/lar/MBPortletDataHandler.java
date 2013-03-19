@@ -111,8 +111,6 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		// Categories
-
 		final Element categoriesElement = rootElement.addElement("categories");
 
 		ActionableDynamicQuery categoriesActionableDynamicQuery =
@@ -138,8 +136,6 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getScopeGroupId());
 
 		categoriesActionableDynamicQuery.performActions();
-
-		// Messages & Threads
 
 		final Element messagesElement = rootElement.addElement("messages");
 
@@ -168,8 +164,6 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getScopeGroupId());
 
 		messagesActionableDynamicQuery.performActions();
-
-		// Thread flags
 
 		final Element threadFlagsElement = rootElement.addElement(
 			"thread-flags");
@@ -208,8 +202,6 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 
 			threadFlagsActionableDynamicQuery.performActions();
 		}
-
-		// Bans
 
 		final Element userBansElement = rootElement.addElement("user-bans");
 

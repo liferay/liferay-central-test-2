@@ -67,14 +67,10 @@ public class MBMessageStagedModelDataHandler
 			return;
 		}
 
-		// Category
-
 		Element categoriesElement = elements[0];
 
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, categoriesElement, message.getCategory());
-
-		// Message
 
 		Element messagesElement = elements[1];
 
@@ -93,8 +89,6 @@ public class MBMessageStagedModelDataHandler
 		messageElement.addAttribute(
 			"hasAttachmentsFileEntries",
 			String.valueOf(hasAttachmentsFileEntries));
-
-		// Attachments
 
 		if (portletDataContext.getBooleanParameter(
 				MBPortletDataHandler.NAMESPACE, "attachments") &&
@@ -166,8 +160,6 @@ public class MBMessageStagedModelDataHandler
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
-			// Category
-
 			if ((parentCategoryId !=
 					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 				(parentCategoryId !=
@@ -189,8 +181,6 @@ public class MBMessageStagedModelDataHandler
 					categoryIds, message.getCategoryId(),
 					message.getCategoryId());
 			}
-
-			// Message & Attachment & Thread
 
 			MBMessage importedMessage = null;
 
