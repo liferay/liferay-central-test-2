@@ -51,7 +51,7 @@ public class FilterDefinitionTest {
 			urlPatterns.add(urlPattern + "/" + i);
 		}
 
-		_filterDefinition.setURLPattern(urlPatterns);
+		_filterDefinition.setURLPatterns(urlPatterns);
 
 		urlPatterns = _filterDefinition.getURLPatterns();
 
@@ -75,6 +75,22 @@ public class FilterDefinitionTest {
 	}
 
 	@Test
+	public void testSetFilter() {
+		_filterDefinition.setFilter(_filter);
+
+		Assert.assertEquals(_filter, _filterDefinition.getFilter());
+	}
+
+	@Test
+	public void testSetFilterName() {
+		String filterName = "Module Filter";
+
+		_filterDefinition.setName(filterName);
+
+		Assert.assertEquals(filterName, _filterDefinition.getName());
+	}
+
+	@Test
 	public void testSetMultipleInitParameter() {
 		Map<String, String> initParameters = new HashMap<String, String>();
 
@@ -94,22 +110,6 @@ public class FilterDefinitionTest {
 
 			Assert.assertEquals(expectedValue, value);
 		}
-	}
-
-	@Test
-	public void testSetServlet() {
-		_filterDefinition.setFilter(_filter);
-
-		Assert.assertEquals(_filter, _filterDefinition.getFilter());
-	}
-
-	@Test
-	public void testSetServletName() {
-		String servletName = "Module Servlet";
-
-		_filterDefinition.setName(servletName);
-
-		Assert.assertEquals(servletName, _filterDefinition.getName());
 	}
 
 	@Test

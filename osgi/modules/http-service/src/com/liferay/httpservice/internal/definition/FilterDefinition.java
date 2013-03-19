@@ -62,7 +62,7 @@ public class FilterDefinition {
 		_name = name;
 	}
 
-	public void setURLPattern(List<String> urlPatterns) {
+	public void setURLPatterns(List<String> urlPatterns) {
 		_urlPatterns = urlPatterns;
 	}
 
