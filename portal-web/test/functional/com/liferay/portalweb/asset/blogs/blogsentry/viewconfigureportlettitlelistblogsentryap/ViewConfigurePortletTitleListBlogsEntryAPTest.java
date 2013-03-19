@@ -26,6 +26,7 @@ public class ViewConfigurePortletTitleListBlogsEntryAPTest extends BaseTestCase 
 		selenium.selectWindow("null");
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
+		selenium.waitForVisible("link=Asset Publisher Test Page");
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -37,8 +38,8 @@ public class ViewConfigurePortletTitleListBlogsEntryAPTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//h1[@class='header-title']"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//div[@class='asset-content']/p"));
+		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
+				"Blogs Entry Content"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[@class='asset-more']/a"));
 		selenium.clickAt("//div[@class='asset-more']/a",
@@ -47,6 +48,6 @@ public class ViewConfigurePortletTitleListBlogsEntryAPTest extends BaseTestCase 
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//div[@class='entry-body']/div/p"));
+			selenium.getText("//div[@class='entry-body']/div"));
 	}
 }

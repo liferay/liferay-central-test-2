@@ -29,7 +29,7 @@ public class DeleteBlogsEntry2Test extends BaseTestCase {
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs Entry2 Title"),
-			selenium.getText("//h3[@class='asset-title']/a"));
+			selenium.getText("//div[@class='entry-title']/h2"));
 		selenium.clickAt("//h3[@class='asset-title']/a",
 			RuntimeVariables.replace("Blogs Entry2 Title"));
 		selenium.waitForPageToLoad("30000");

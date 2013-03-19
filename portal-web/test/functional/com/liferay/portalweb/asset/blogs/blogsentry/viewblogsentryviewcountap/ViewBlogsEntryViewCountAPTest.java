@@ -25,6 +25,7 @@ public class ViewBlogsEntryViewCountAPTest extends BaseTestCase {
 		selenium.selectWindow("null");
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
+		selenium.waitForVisible("link=Asset Publisher Test Page");
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -50,7 +51,7 @@ public class ViewBlogsEntryViewCountAPTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//div[@class='entry-title']/h2/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//div[@class='entry-body']/div/p"));
+			selenium.getText("//div[@class='entry-body']/div"));
 		selenium.clickAt("//div[@class='entry-title']/h2/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
