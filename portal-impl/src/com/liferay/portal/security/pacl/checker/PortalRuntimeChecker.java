@@ -341,7 +341,7 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 		Class<?> superClass = callerClass.getSuperclass();
 
-		// Handle the case for our CLP classes (hopefully this goes away soon)
+		// Handle the case for our CLP classes
 
 		if (Modifier.isAbstract(callerClass.getModifiers()) &&
 			(superClass.equals(BaseLocalServiceImpl.class) ||
