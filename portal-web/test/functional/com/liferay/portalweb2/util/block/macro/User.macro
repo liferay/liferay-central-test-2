@@ -24,10 +24,6 @@
 		</steps>
 	</command>
 	<command name="pgLogin">
-		<params>
-			<param name="emailAddress" />
-			<param name="password" />
-		</params>
 		<steps>
 			<execute action="PGLogin#Type" locator-key1="EMAIL_ADDRESS" value1="${emailAddress}" />
 
