@@ -51,7 +51,7 @@ public class ServletDefinitionTest {
 			urlPatterns.add(urlPattern + "/" + i);
 		}
 
-		_servletDefinition.setURLPattern(urlPatterns);
+		_servletDefinition.setURLPatterns(urlPatterns);
 
 		urlPatterns = _servletDefinition.getURLPatterns();
 

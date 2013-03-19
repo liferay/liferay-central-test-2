@@ -62,7 +62,7 @@ public class ServletDefinition {
 		_servlet = servlet;
 	}
 
-	public void setURLPattern(List<String> urlPatterns) {
+	public void setURLPatterns(List<String> urlPatterns) {
 		_urlPatterns = urlPatterns;
 	}
 
