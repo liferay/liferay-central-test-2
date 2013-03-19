@@ -42,32 +42,6 @@ public class DoPrivilegedHandler
 		_initNotPrivilegedMethods();
 	}
 
-	private void _initNotPrivilegedMethods() {
-		_notPrivilegedMethods = new ArrayList<MethodKey>();
-
-		Class<?> beanClass = _bean.getClass();
-
-		Method[] methods = beanClass.getMethods();
-
-		for (Method curMethod : methods) {
-			NotPrivileged notPrivileged = curMethod.getAnnotation(
-				NotPrivileged.class);
-
-			if (notPrivileged == null) {
-				continue;
-			}
-
-			_notPrivilegedMethods.add(new MethodKey(curMethod));
-		}
-
-		_notPrivilegedMethods = Collections.unmodifiableList(
-			_notPrivilegedMethods);
-
-		if (!_notPrivilegedMethods.isEmpty()) {
-			_hasNotPrivilegedMethods = true;
-		}
-	}
-
 	public Object getActualBean() {
 		return _bean;
 	}
@@ -101,6 +75,32 @@ public class DoPrivilegedHandler
 			}
 
 			throw e;
+		}
+	}
+
+	private void _initNotPrivilegedMethods() {
+		_notPrivilegedMethods = new ArrayList<MethodKey>();
+
+		Class<?> beanClass = _bean.getClass();
+
+		Method[] methods = beanClass.getMethods();
+
+		for (Method method : methods) {
+			NotPrivileged notPrivileged = method.getAnnotation(
+				NotPrivileged.class);
+
+			if (notPrivileged == null) {
+				continue;
+			}
+
+			_notPrivilegedMethods.add(new MethodKey(method));
+		}
+
+		_notPrivilegedMethods = Collections.unmodifiableList(
+			_notPrivilegedMethods);
+
+		if (!_notPrivilegedMethods.isEmpty()) {
+			_hasNotPrivilegedMethods = true;
 		}
 	}
 
@@ -143,7 +143,7 @@ public class DoPrivilegedHandler
 	 * This is not the typical MethodKey. It matches on overload conditions
 	 * rather than on equality. The key in the cache should always be an
 	 * implementation, while the method being checked will be from an interface,
-	 * therefore the 'equals' check is not symmetrical.
+	 * therefore the <code>equals</code> check is not symmetrical.
 	 */
 	private class MethodKey {
 
@@ -165,8 +165,8 @@ public class DoPrivilegedHandler
 
 			MethodKey methodKey = (MethodKey)obj;
 
-			// Note again that this check is not symmetrical. 'this' method
-			// key's class must be assignable from the cached method key's class
+			// Note again that this check is not symmetrical. This method key's
+			// class must be assignable from the cached method key's class
 
 			if (_declaringClass.isAssignableFrom(methodKey._declaringClass) &&
 				Validator.equals(_methodName, methodKey._methodName) &&
