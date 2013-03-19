@@ -38,6 +38,8 @@ import com.liferay.portlet.messageboards.service.persistence.MBCategoryActionabl
 import com.liferay.portlet.messageboards.service.persistence.MBMessageActionableDynamicQuery;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFlagActionableDynamicQuery;
 
+import java.util.List;
+
 import javax.portlet.PortletPreferences;
 
 /**
@@ -251,14 +253,18 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 
 		Element categoriesElement = rootElement.element("categories");
 
-		for (Element categoryElement : categoriesElement.elements("category")) {
+		List<Element> categoryElements = categoriesElement.elements("category");
+
+		for (Element categoryElement : categoryElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, categoryElement);
 		}
 
 		Element messagesElement = rootElement.element("messages");
 
-		for (Element messageElement : messagesElement.elements("message")) {
+		List<Element> messageElements = messagesElement.elements("message");
+
+		for (Element messageElement : messageElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, messageElement);
 		}
@@ -266,9 +272,10 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "thread-flags")) {
 			Element threadFlagsElement = rootElement.element("thread-flags");
 
-			for (Element threadFlagElement :
-					threadFlagsElement.elements("thread-flag")) {
+			List<Element> threadFlagElements = threadFlagsElement.elements(
+				"thread-flag");
 
+			for (Element threadFlagElement : threadFlagElements) {
 				StagedModelDataHandlerUtil.importStagedModel(
 					portletDataContext, threadFlagElement);
 			}
@@ -277,9 +284,10 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
 			Element userBansElement = rootElement.element("user-bans");
 
-			for (Element userBanElement :
-					userBansElement.elements("user-ban")) {
+			List<Element> userBanElements = userBansElement.elements(
+				"user-ban");
 
+			for (Element userBanElement : userBanElements) {
 				StagedModelDataHandlerUtil.importStagedModel(
 					portletDataContext, userBanElement);
 			}
