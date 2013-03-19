@@ -200,20 +200,19 @@ public class FileChecker extends BaseChecker {
 
 		int stackIndex = getStackIndex(10, 9);
 
-		Class<?> callerClassA = Reflection.getCallerClass(stackIndex);
-		Class<?> callerClassB = Reflection.getCallerClass(stackIndex + 1);
+		Class<?> callerClass1 = Reflection.getCallerClass(stackIndex);
+		Class<?> callerClass2 = Reflection.getCallerClass(stackIndex + 1);
 
-		if (callerClassA.equals(File.class) &&
-			isTrustedCaller(callerClassB, permission)) {
+		if (callerClass1.equals(File.class) &&
+			isTrustedCaller(callerClass2, permission)) {
 
 			return true;
 		}
 
-		String name = permission.getName();
-		String actions = permission.getActions();
-
 		logSecurityException(
-			_log, "Attempted to " + actions + " on file " + name);
+			_log,
+			"Attempted to " + permission.getActions() + " on file " +
+				permission.getName());
 
 		return false;
 	}
@@ -250,13 +249,13 @@ public class FileChecker extends BaseChecker {
 		addCanonicalPath(
 			paths, directory.getCanonicalPath() + StringPool.SLASH);
 
-		File[] listFiles = directory.listFiles();
+		File[] files = directory.listFiles();
 
-		if ((listFiles == null) || (listFiles.length == 0)) {
+		if ((files == null) || (files.length == 0)) {
 			return;
 		}
 
-		for (File file : listFiles) {
+		for (File file : files) {
 			if (file.isDirectory()) {
 				addCanonicalPaths(paths, file);
 			}
