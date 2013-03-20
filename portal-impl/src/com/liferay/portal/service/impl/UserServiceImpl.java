@@ -526,11 +526,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 		checkMembership(
-			new long[] {user.getUserId()}, organizationIds, roleIds, groupIds,
+			new long[] {user.getUserId()}, groupIds, organizationIds, roleIds,
 			userGroupIds);
 
 		propagateMembership(
-			new long[]{user.getUserId()}, organizationIds, roleIds, groupIds,
+			new long[]{user.getUserId()}, groupIds, organizationIds, roleIds,
 			userGroupIds);
 
 		return user;
@@ -2193,9 +2193,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	protected void checkMembership(
-			long[] userIds, long[] organizationIds, long[] roleIds,
-			long[] groupIds, long[] userGroupIds)
+			long[] userIds, long[] groupIds, long[] organizationIds,
+			long[] roleIds, long[] userGroupIds)
 		throws PortalException, SystemException {
+
+		if (groupIds != null) {
+			SiteMembershipPolicyUtil.checkMembership(userIds, groupIds, null);
+		}
 
 		if (organizationIds != null) {
 			OrganizationMembershipPolicyUtil.checkMembership(
@@ -2204,10 +2208,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if (roleIds != null) {
 			RoleMembershipPolicyUtil.checkRoles(userIds, roleIds, null);
-		}
-
-		if (groupIds != null) {
-			SiteMembershipPolicyUtil.checkMembership(userIds, groupIds, null);
 		}
 
 		if (userGroupIds != null) {
@@ -2454,9 +2454,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	protected void propagateMembership(
-			long[] userIds, long[] organizationIds, long[] roleIds,
-			long[] groupIds, long[] userGroupIds)
+			long[] userIds, long[] groupIds, long[] organizationIds,
+			long[] roleIds, long[] userGroupIds)
 		throws PortalException, SystemException {
+
+		if (groupIds != null) {
+			SiteMembershipPolicyUtil.propagateMembership(
+				userIds, groupIds, null);
+		}
 
 		if (organizationIds != null) {
 			OrganizationMembershipPolicyUtil.propagateMembership(
@@ -2467,13 +2472,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			RoleMembershipPolicyUtil.propagateRoles(userIds, roleIds, null);
 		}
 
-		if (groupIds != null) {
-			SiteMembershipPolicyUtil.propagateMembership(
-				userIds, groupIds, null);
-		}
-
 		if (userGroupIds != null) {
-
 			UserGroupMembershipPolicyUtil.propagateMembership(
 				userIds, userGroupIds, null);
 		}

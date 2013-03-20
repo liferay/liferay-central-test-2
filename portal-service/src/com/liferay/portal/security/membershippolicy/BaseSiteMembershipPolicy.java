@@ -149,9 +149,7 @@ public abstract class BaseSiteMembershipPolicy implements SiteMembershipPolicy {
 		return false;
 	}
 
-	public boolean isRoleRequired(long userId, long groupId, long roleId)
-		throws PortalException, SystemException {
-
+	public boolean isRoleRequired(long userId, long groupId, long roleId) {
 		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
 		UserGroupRolePK userGroupRolePK = new UserGroupRolePK(

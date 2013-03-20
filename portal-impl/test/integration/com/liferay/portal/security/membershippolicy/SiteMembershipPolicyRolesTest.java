@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.membershippolicy;
 
-import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
@@ -39,9 +38,10 @@ import org.junit.Test;
 public class SiteMembershipPolicyRolesTest
 	extends BaseSiteMembershipPolicyTestCase {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		FinderCacheUtil.clearCache();
+		super.setUp();
 
 		_group = GroupTestUtil.addGroup();
 	}

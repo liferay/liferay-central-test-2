@@ -15,7 +15,6 @@
 package com.liferay.portal.security.membershippolicy.membershippolicysamples;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
@@ -36,11 +35,11 @@ import org.junit.Assert;
 /**
  * @author Roberto Díaz
  */
-public class SiteMembershipPolicyTestImpl extends BaseSiteMembershipPolicy {
+public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 
 	public void checkMembership(
 			long[] userIds, long[] addGroupIds, long[] removeGroupIds)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		for (long forbiddenGroupId :
 				BaseSiteMembershipPolicyTestCase.getForbiddenSiteIds()) {
@@ -72,7 +71,7 @@ public class SiteMembershipPolicyTestImpl extends BaseSiteMembershipPolicy {
 	public void checkRoles(
 			List<UserGroupRole> addUserGroupRoles,
 			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		long[] addUserGroupRoleIds = new long[2];
 		long[] removeUserGroupRoleIds = new long[2];
@@ -119,37 +118,33 @@ public class SiteMembershipPolicyTestImpl extends BaseSiteMembershipPolicy {
 	}
 
 	public void propagateMembership(
-			long[] userIds, long[] addGroupIds, long[] removeGroupIds)
-		throws PortalException, SystemException {
+		long[] userIds, long[] addGroupIds, long[] removeGroupIds) {
 
 		BaseSiteMembershipPolicyTestCase.setPropagateMembershipMethodFlag(true);
 	}
 
 	public void propagateRoles(
-			List<UserGroupRole> addUserGroupRoles,
-			List<UserGroupRole> removeUserGroupRoles)
-		throws PortalException, SystemException {
+		List<UserGroupRole> addUserGroupRoles,
+		List<UserGroupRole> removeUserGroupRoles) {
 
 		BaseSiteMembershipPolicyTestCase.setPropagateRolesMethodFlag(true);
 	}
 
-	public void verifyPolicy() throws PortalException, SystemException {
+	@Override
+	public void verifyPolicy() {
 		BaseSiteMembershipPolicyTestCase.setVerifyMethodFlag(true);
 	}
 
 	@Override
-	public void verifyPolicy(Group group)
-		throws PortalException, SystemException {
-
+	public void verifyPolicy(Group group) {
 		verifyPolicy();
 	}
 
 	public void verifyPolicy(
-			Group group, Group oldGroup, List<AssetCategory> oldAssetCategories,
-			List<AssetTag> oldAssetTags,
-			Map<String, Serializable> oldExpandoAttributes,
-			String oldTypeSettings)
-		throws PortalException, SystemException {
+		Group group, Group oldGroup, List<AssetCategory> oldAssetCategories,
+		List<AssetTag> oldAssetTags,
+		Map<String, Serializable> oldExpandoAttributes,
+		String oldTypeSettings) {
 
 		Assert.assertNotNull(group);
 		Assert.assertNotNull(oldGroup);
@@ -168,16 +163,13 @@ public class SiteMembershipPolicyTestImpl extends BaseSiteMembershipPolicy {
 		verifyPolicy(group);
 	}
 
-	public void verifyPolicy(Role role)
-		throws PortalException, SystemException {
-
+	public void verifyPolicy(Role role) {
 		verifyPolicy();
 	}
 
 	public void verifyPolicy(
-			Role role, Role oldRole, Map<String,
-			Serializable> oldExpandoAttributes)
-		throws PortalException, SystemException {
+		Role role, Role oldRole, Map<String,
+		Serializable> oldExpandoAttributes) {
 
 		Assert.assertNotNull(role);
 		Assert.assertNotNull(oldRole);
