@@ -42,22 +42,6 @@ public class PortletURLFactoryUtil {
 			portletRequest, portletId, plid, lifecycle);
 	}
 
-	public static LiferayPortletURL createControlPanel(
-		HttpServletRequest request, String portletId, long referrerPlid,
-		String lifecycle) {
-
-		return getPortletURLFactory().createControlPanel(
-			request, portletId, referrerPlid, lifecycle);
-	}
-
-	public static LiferayPortletURL createControlPanel(
-		PortletRequest portletRequest, String portletId, long referrerPlid,
-		String lifecycle) {
-
-		return getPortletURLFactory().createControlPanel(
-			portletRequest, portletId, referrerPlid, lifecycle);
-	}
-
 	public static PortletURLFactory getPortletURLFactory() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			PortletURLFactoryUtil.class);
