@@ -301,9 +301,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
-	protected void initPACLImpl(Class<?> clazz, Object pacl)
-		throws Exception {
-
+	protected void initPACLImpl(Class<?> clazz, Object pacl) throws Exception {
 		Field field = clazz.getDeclaredField("_pacl");
 
 		synchronized (field) {
@@ -338,6 +336,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 			return new PACLInvocationHandler(invocationHandler);
 		}
+
 	}
 
 	private static class DoDoPrivilegedPACL implements DoPrivilegedUtil.PACL {

@@ -88,7 +88,9 @@ public class PACLInvocationHandler implements InvocationHandler {
 		}
 	}
 
-	private AdvisedSupport _advisedSupport; // this field is used in reflection
+	@SuppressWarnings("unused")
+	private AdvisedSupport _advisedSupport;
+
 	private InvocationHandler _invocationHandler;
 
 	private class InvokePrivilegedExceptionAction
