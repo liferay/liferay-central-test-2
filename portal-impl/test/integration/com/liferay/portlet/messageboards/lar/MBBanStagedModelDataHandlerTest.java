@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.messageboards.lar;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.lar.BaseStagedModelDataHandlerTestCase;
 import com.liferay.portal.model.Group;
@@ -46,8 +45,8 @@ public class MBBanStagedModelDataHandlerTest
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String,
-			List<StagedModel>> dependentStagedModelsMap)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		return MBTestUtil.addBan(group.getGroupId());
@@ -63,17 +62,16 @@ public class MBBanStagedModelDataHandlerTest
 		List<MBBan> bans = null;
 
 		try {
-			bans = MBBanLocalServiceUtil.getBans(
-				group.getGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			bans = MBBanLocalServiceUtil.getBans(group.getGroupId(), 0, 1);
+
+			if (!bans.isEmpty()) {
+				return bans.get(0);
+			}
 		}
-		catch (Exception ex) {
+		catch (Exception e) {
 		}
 
-		if ((bans == null) || bans.isEmpty()) {
-			return null;
-		}
-
-		return bans.get(0);
+		return null;
 	}
 
 	@Override
@@ -87,12 +85,12 @@ public class MBBanStagedModelDataHandlerTest
 			Group group)
 		throws Exception {
 
-		MBBan ban = (MBBan)getStagedModel(stagedModel.getUuid(), group);
+		super.validateImport(stagedModel, dependentStagedModelsMap, group);
 
-		Assert.assertNotNull(ban);
+		MBBan ban = (MBBan)stagedModel;
+		MBBan importBan = (MBBan)getStagedModel(stagedModel.getUuid(), group);
 
-		Assert.assertEquals(
-			((MBBan)stagedModel).getBanUserUuid(), ban.getBanUserUuid());
+		Assert.assertEquals(ban.getBanUserUuid(), importBan.getBanUserUuid());
 	}
 
 }

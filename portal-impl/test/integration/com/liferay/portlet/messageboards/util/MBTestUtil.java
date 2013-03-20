@@ -106,9 +106,6 @@ public class MBTestUtil {
 	public static MBMessage addMessage(long groupId, long categoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			groupId);
-
 		long userId = TestPropsValues.getUserId();
 		String userName = ServiceTestUtil.randomString();
 		long threadId = 0;
@@ -121,6 +118,9 @@ public class MBTestUtil {
 		boolean anonymous = false;
 		double priority = 0.0;
 		boolean allowPingbacks = false;
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			groupId);
 
 		return MBMessageLocalServiceUtil.addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
@@ -182,16 +182,6 @@ public class MBTestUtil {
 			boolean approved, ServiceContext serviceContext)
 		throws Exception {
 
-		if (workflowEnabled) {
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
-
-			if (approved) {
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_PUBLISH);
-			}
-		}
-
 		long userId = TestPropsValues.getUserId();
 		String userName = ServiceTestUtil.randomString();
 		long threadId = 0;
@@ -204,6 +194,16 @@ public class MBTestUtil {
 		boolean anonymous = false;
 		double priority = 0.0;
 		boolean allowPingbacks = false;
+
+		if (workflowEnabled) {
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
+
+			if (approved) {
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_PUBLISH);
+			}
+		}
 
 		MBMessage message = MBMessageLocalServiceUtil.addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
