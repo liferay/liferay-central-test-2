@@ -38,14 +38,6 @@ import org.junit.Test;
 public class SiteMembershipPolicyRolesTest
 	extends BaseSiteMembershipPolicyTestCase {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_group = GroupTestUtil.addGroup();
-	}
-
 	@Test(expected = MembershipPolicyException.class)
 	public void testAssignUsersToForbiddenRole() throws Exception {
 		long[] forbiddenRoleIds = addForbiddenRoles();
