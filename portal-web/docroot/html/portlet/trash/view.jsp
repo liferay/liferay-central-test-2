@@ -45,27 +45,27 @@ portletURL.setParameter("tabs1", tabs1);
 	TrashPermissionException tpe = (TrashPermissionException)errorException;
 	%>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_DELETE %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.DELETE %>">
 		<liferay-ui:message key="you-do-not-have-permission-to-delete-this-item" />
 	</c:if>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_EMPTY_TRASH %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.EMPTY_TRASH %>">
 		<liferay-ui:message key="unable-to-completely-empty-trash-you-do-not-have-permission-to-delete-one-or-more-items" />
 	</c:if>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_MOVE %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.MOVE %>">
 		<liferay-ui:message key="you-do-not-have-permission-to-move-this-item-to-the-selected-destination" />
 	</c:if>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_RESTORE %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.RESTORE %>">
 		<liferay-ui:message key="you-do-not-have-permission-to-restore-this-item" />
 	</c:if>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_RESTORE_OVERWRITE %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.RESTORE_OVERWRITE %>">
 		<liferay-ui:message key="you-do-not-have-permission-to-replace-an-existing-item-with-the-selected-one" />
 	</c:if>
 
-	<c:if test="<%= tpe.getType() == TrashPermissionException.ERROR_RESTORE_RENAME %>">
+	<c:if test="<%= tpe.getType() == TrashPermissionException.RESTORE_RENAME %>">
 		<liferay-ui:message key="you-do-not-have-permission-to-rename-this-item" />
 	</c:if>
 

@@ -21,17 +21,17 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class TrashPermissionException extends PortalException {
 
-	public static final int ERROR_DELETE = 1;
+	public static final int DELETE = 1;
 
-	public static final int ERROR_EMPTY_TRASH = 2;
+	public static final int EMPTY_TRASH = 2;
 
-	public static final int ERROR_MOVE = 3;
+	public static final int MOVE = 3;
 
-	public static final int ERROR_RESTORE = 4;
+	public static final int RESTORE = 4;
 
-	public static final int ERROR_RESTORE_OVERWRITE = 5;
+	public static final int RESTORE_OVERWRITE = 5;
 
-	public static final int ERROR_RESTORE_RENAME = 6;
+	public static final int RESTORE_RENAME = 6;
 
 	public TrashPermissionException(int type) {
 		_type = type;

@@ -58,11 +58,11 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * @throws PrincipalException if a principal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Transactional(noRollbackFor={TrashPermissionException.class})
+	@Transactional(noRollbackFor = {TrashPermissionException.class})
 	public void deleteEntries(long groupId)
 		throws PortalException, SystemException {
 
-		boolean error = false;
+		boolean throwTrashPermissionException = false;
 
 		List<TrashEntry> entries = trashEntryPersistence.findByGroupId(groupId);
 
@@ -84,37 +84,37 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				deleteEntry(entry);
 			}
 			catch (TrashPermissionException tpe) {
-				error = true;
+				throwTrashPermissionException = true;
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
-		if (error) {
+		if (throwTrashPermissionException) {
 			throw new TrashPermissionException(
-				TrashPermissionException.ERROR_EMPTY_TRASH);
+				TrashPermissionException.EMPTY_TRASH);
 		}
 	}
 
-	@Transactional(noRollbackFor={TrashPermissionException.class})
+	@Transactional(noRollbackFor = {TrashPermissionException.class})
 	public void deleteEntries(long[] entryIds)
 		throws PortalException, SystemException {
 
-		boolean error = false;
+		boolean throwTrashPermissionException = false;
 
 		for (long entryId : entryIds) {
 			try {
 				deleteEntry(entryId);
 			}
 			catch (TrashPermissionException tpe) {
-				error = true;
+				throwTrashPermissionException = true;
 			}
 		}
 
-		if (error) {
+		if (throwTrashPermissionException) {
 			throw new TrashPermissionException(
-				TrashPermissionException.ERROR_EMPTY_TRASH);
+				TrashPermissionException.EMPTY_TRASH);
 		}
 	}
 
@@ -236,8 +236,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				permissionChecker, entry.getGroupId(),
 				destinationContainerModelId, TrashActionKeys.MOVE)) {
 
-			throw new TrashPermissionException(
-				TrashPermissionException.ERROR_MOVE);
+			throw new TrashPermissionException(TrashPermissionException.MOVE);
 		}
 
 		if (trashHandler.isInTrash(classPK) &&
@@ -245,7 +244,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				permissionChecker, 0, classPK, TrashActionKeys.RESTORE)) {
 
 			throw new TrashPermissionException(
-					TrashPermissionException.ERROR_RESTORE);
+					TrashPermissionException.RESTORE);
 		}
 
 		trashHandler.checkDuplicateTrashEntry(
@@ -285,7 +284,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 				TrashActionKeys.RESTORE)) {
 
 			throw new TrashPermissionException(
-				TrashPermissionException.ERROR_RESTORE);
+				TrashPermissionException.RESTORE);
 		}
 
 		if (overrideClassPK > 0) {
@@ -294,7 +293,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					TrashActionKeys.OVERWRITE)) {
 
 				throw new TrashPermissionException(
-					TrashPermissionException.ERROR_RESTORE_OVERWRITE);
+					TrashPermissionException.RESTORE_OVERWRITE);
 			}
 
 			trashHandler.deleteTrashEntry(overrideClassPK);
@@ -305,7 +304,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 					TrashActionKeys.RENAME)) {
 
 				throw new TrashPermissionException(
-					TrashPermissionException.ERROR_RESTORE_RENAME);
+					TrashPermissionException.RESTORE_RENAME);
 			}
 
 			trashHandler.updateTitle(entry.getClassPK(), name);
@@ -330,8 +329,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		if (!trashHandler.hasTrashPermission(
 				permissionChecker, 0, entry.getClassPK(), ActionKeys.DELETE)) {
 
-			throw new TrashPermissionException(
-				TrashPermissionException.ERROR_DELETE);
+			throw new TrashPermissionException(TrashPermissionException.DELETE);
 		}
 
 		trashHandler.deleteTrashEntry(entry.getClassPK());
