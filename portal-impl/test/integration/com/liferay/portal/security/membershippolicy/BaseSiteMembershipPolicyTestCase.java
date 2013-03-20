@@ -178,8 +178,8 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 	private static long[] _forbiddenGroupIds = new long[2];
 	private static long[] _forbiddenRoleIds = new long[2];
 	private static Group _group;
-	private static boolean _propagateMembership = false;
-	private static boolean _propagateRoles = false;
+	private static boolean _propagateMembership;
+	private static boolean _propagateRoles;
 	private static long[] _requiredGroupIds = new long[2];
 	private static long[] _requiredRoleIds = new long[2];
 	private static long[] _standardGroupIds = new long[2];
