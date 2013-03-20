@@ -727,10 +727,10 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				_plid, _portletName, _lifecycle, _includeLinkToLayoutUuid);
 		}
 
+		private boolean _includeLinkToLayoutUuid;
+		private String _lifecycle;
 		private long _plid;
 		private String _portletName;
-		private String _lifecycle;
-		private boolean _includeLinkToLayoutUuid;
 
 	}
 

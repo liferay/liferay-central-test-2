@@ -31,8 +31,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.Log4jLogFactoryImpl;
-import com.liferay.portal.security.lang.SecurityManagerUtil;
 import com.liferay.portal.security.lang.DoPrivilegedUtil;
+import com.liferay.portal.security.lang.SecurityManagerUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.log4j.Log4JUtil;
 
@@ -114,9 +114,6 @@ public class InitUtil {
 		SecurityManagerUtil.init();
 
 		if (!SecurityManagerUtil.isPACLDisabled()) {
-
-			// we have to reassign wrapped version of these
-
 			com.liferay.portal.kernel.util.PropsUtil.setProps(
 				DoPrivilegedUtil.wrap(
 					com.liferay.portal.kernel.util.PropsUtil.getProps()));

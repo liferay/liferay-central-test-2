@@ -153,6 +153,7 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 		private String _alias;
 		private Class<?> _clazz;
+
 	}
 
 }
