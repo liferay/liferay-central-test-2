@@ -57,8 +57,7 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 
 		try {
 			plid = PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			_log.error("Unable to determine control panel layout id", e);
 		}
 
@@ -82,8 +81,7 @@ public class PortletURLFactoryImpl implements PortletURLFactory {
 
 		try {
 			plid = PortalUtil.getControlPanelPlid(themeDisplay.getCompanyId());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			_log.error("Unable to determine control panel layout id", e);
 		}
 
