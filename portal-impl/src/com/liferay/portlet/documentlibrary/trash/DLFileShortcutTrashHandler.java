@@ -48,7 +48,7 @@ public class DLFileShortcutTrashHandler extends DLBaseTrashHandler {
 	public void deleteTrashEntry(long classPK)
 		throws PortalException, SystemException {
 
-		DLFileShortcutLocalServiceUtil.deleteFileShortcut(classPK);
+		DLAppLocalServiceUtil.deleteFileShortcut(classPK);
 	}
 
 	public String getClassName() {

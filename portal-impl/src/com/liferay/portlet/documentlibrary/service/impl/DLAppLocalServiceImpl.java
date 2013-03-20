@@ -447,7 +447,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void deleteFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 
-		dlFileShortcutLocalService.deleteDLFileShortcut(fileShortcutId);
+		dlFileShortcutLocalService.deleteFileShortcut(fileShortcutId);
 	}
 
 	/**
