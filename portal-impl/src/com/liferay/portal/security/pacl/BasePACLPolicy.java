@@ -127,8 +127,33 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		return sb.toString();
 	}
 
+	protected void checkForAllPermission(Policy policy, String rootDir)
+		throws MalformedURLException {
+
+		URL rootURL = new URL("file", null, rootDir);
+
+		ProtectionDomain protectionDomain = new ProtectionDomain(
+			new CodeSource(rootURL, new Certificate[0]), new Permissions());
+
+		if (policy.implies(protectionDomain, new AllPermission())) {
+			throw new IllegalStateException(
+				"The plugin's Java policy tried to declared all " +
+					"permissions");
+		}
+	}
+
 	protected Checker getChecker(Class<? extends Permission> clazz) {
 		return _checkers.get(clazz.getName());
+	}
+
+	protected Provider getProvider() {
+		String providerName = "SUN";
+
+		if (JavaDetector.isIBM() && JavaDetector.isJDK6()) {
+			providerName = "Policy";
+		}
+
+		return Security.getProvider(providerName);
 	}
 
 	protected Checker initChecker(Checker checker) {
@@ -181,32 +206,8 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		}
 	}
 
-	protected void checkForAllPermission(Policy policy, String rootDir)
-		throws MalformedURLException {
-
-		URL rootURL = new URL("file", null, rootDir);
-
-		ProtectionDomain protectionDomain = new ProtectionDomain(
-			new CodeSource(rootURL, new Certificate[0]), new Permissions());
-
-		if (policy.implies(protectionDomain, new AllPermission())) {
-			throw new IllegalStateException(
-				"The plugin's Java policy tried to declared all " +
-					"permissions");
-		}
-	}
-
-	protected Provider getProvider() {
-		String providerName = "SUN";
-
-		if (JavaDetector.isIBM() && JavaDetector.isJDK6()) {
-			providerName = "Policy";
-		}
-
-		return Security.getProvider(providerName);
-	}
-
-	protected void initPolicy(String servletContextName, ClassLoader classLoader)
+	protected void initPolicy(
+			String servletContextName, ClassLoader classLoader)
 		throws Exception {
 
 		ServletContext servletContext = ServletContextPool.get(
