@@ -114,10 +114,10 @@ public class PACLRequestDispatcherWrapper implements RequestDispatcher {
 			return null;
 		}
 
+		private boolean _include;
 		private RequestDispatcher _requestDispatcher;
 		private ServletRequest _servletRequest;
 		private ServletResponse _servletResponse;
-		private boolean _include;
 
 	}
 
