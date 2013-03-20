@@ -46,8 +46,6 @@ public class PollsChoiceStagedModelDataHandler
 			PollsChoice choice)
 		throws Exception {
 
-		// Question
-
 		Element questionsElement = elements[0];
 
 		PollsQuestion question = PollsQuestionLocalServiceUtil.getQuestion(
@@ -55,8 +53,6 @@ public class PollsChoiceStagedModelDataHandler
 
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, questionsElement, question);
-
-		// Choice
 
 		Element choicesElement = elements[1];
 
@@ -75,8 +71,6 @@ public class PollsChoiceStagedModelDataHandler
 
 		long userId = portletDataContext.getUserId(choice.getUserUuid());
 
-		// Question
-
 		String questionPath = StagedModelPathUtil.getPath(
 			portletDataContext, PollsQuestion.class.getName(),
 			choice.getQuestionId());
@@ -93,8 +87,6 @@ public class PollsChoiceStagedModelDataHandler
 
 		long questionId = MapUtil.getLong(
 			questionIds, choice.getQuestionId(), choice.getQuestionId());
-
-		// Choice
 
 		PollsChoice importedChoice = null;
 

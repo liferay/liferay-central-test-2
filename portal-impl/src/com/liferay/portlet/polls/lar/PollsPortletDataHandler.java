@@ -83,8 +83,6 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		// Questions
-
 		final Element questionsElement = rootElement.addElement("questions");
 
 		ActionableDynamicQuery questionActionableDynamicQuery =
@@ -111,8 +109,6 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getGroupId());
 
 		questionActionableDynamicQuery.performActions();
-
-		// Choices
 
 		final Element choicesElement = rootElement.addElement("choices");
 
@@ -141,8 +137,6 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getGroupId());
 
 		choiceActionableDynamicQuery.performActions();
-
-		// Votes
 
 		final Element votesElement = rootElement.addElement("votes");
 
