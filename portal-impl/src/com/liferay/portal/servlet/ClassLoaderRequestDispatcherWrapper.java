@@ -39,7 +39,7 @@ public class ClassLoaderRequestDispatcherWrapper implements RequestDispatcher {
 
 	public void forward(
 			ServletRequest servletRequest, ServletResponse servletResponse)
-		throws ServletException, IOException {
+		throws IOException, ServletException {
 
 		doDispatch(servletRequest, servletResponse, false);
 	}

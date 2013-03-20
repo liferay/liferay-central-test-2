@@ -30,7 +30,6 @@ public class PACLRequestDispatcherWrapper implements RequestDispatcher {
 	public PACLRequestDispatcherWrapper(
 		ServletContext servletContext, RequestDispatcher requestDispatcher) {
 
-		_servletContext = servletContext;
 		_requestDispatcher = requestDispatcher;
 	}
 
@@ -64,6 +63,5 @@ public class PACLRequestDispatcherWrapper implements RequestDispatcher {
 	}
 
 	private RequestDispatcher _requestDispatcher;
-	private ServletContext _servletContext;
 
 }
