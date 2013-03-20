@@ -20,13 +20,13 @@ import org.junit.Test;
 /**
  * @author Roberto Díaz
  */
-public class SiteMembershipPolicyBaseImplTest
+public class SiteMembershipPolicyBasicTest
 	extends BaseSiteMembershipPolicyTestCase {
 
 	@Test
 	public void testIsMembershipAllowed() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 
 		Assert.assertTrue(
 			SiteMembershipPolicyUtil.isMembershipAllowed(
@@ -36,7 +36,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsMembershipNotAllowed() throws Exception {
 		long[] userIds = addUsers();
-		long[] forbiddenSiteIds = addForbiddenSites();
+		long[] forbiddenSiteIds = addForbiddenGroups();
 
 		Assert.assertFalse(
 			SiteMembershipPolicyUtil.isMembershipAllowed(
@@ -46,7 +46,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsMembershipNotRequired() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 
 		Assert.assertFalse(
 			SiteMembershipPolicyUtil.isMembershipRequired(
@@ -56,7 +56,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsMembershipRequired() throws Exception {
 		long[] userIds = addUsers();
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		Assert.assertTrue(
 			SiteMembershipPolicyUtil.isMembershipRequired(
@@ -66,7 +66,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsRoleAllowed() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 		long[] standardRoleIds = addStandardRoles();
 
 		Assert.assertTrue(
@@ -77,7 +77,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsRoleNotAllowed() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 		long[] forbiddenRoleIds = addForbiddenRoles();
 
 		Assert.assertFalse(
@@ -88,7 +88,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsRoleNotRequired() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 		long[] standardRoleIds = addStandardRoles();
 
 		Assert.assertFalse(
@@ -99,7 +99,7 @@ public class SiteMembershipPolicyBaseImplTest
 	@Test
 	public void testIsRoleRequired() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 		long[] requiredRoleIds = addRequiredRoles();
 
 		Assert.assertTrue(
