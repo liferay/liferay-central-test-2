@@ -106,7 +106,7 @@ public class SiteMembershipPolicyRolesTest
 		MembershipPolicyTestUtil.updateUser(
 			user, null, null, null, null, userGroupRoleList);
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class SiteMembershipPolicyRolesTest
 		UserGroupRoleServiceUtil.addUserGroupRoles(
 			addUsers(), _group.getGroupId(), standardRoleIds[0]);
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class SiteMembershipPolicyRolesTest
 		UserGroupRoleServiceUtil.addUserGroupRoles(
 			userIds[0], _group.getGroupId(), addStandardRoles());
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class SiteMembershipPolicyRolesTest
 			user, null, null, null, null,
 			Collections.<UserGroupRole>emptyList());
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	@Test
@@ -152,7 +152,7 @@ public class SiteMembershipPolicyRolesTest
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(
 			userIds[0], _group.getGroupId(), addStandardRoles());
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	@Test
@@ -203,7 +203,7 @@ public class SiteMembershipPolicyRolesTest
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(
 			addUsers(), _group.getGroupId(), standardRoleIds[0]);
 
-		Assert.assertTrue(getPropagateRolesMethodFlag());
+		Assert.assertTrue(isPropagateRoles());
 	}
 
 	private Group _group = null;

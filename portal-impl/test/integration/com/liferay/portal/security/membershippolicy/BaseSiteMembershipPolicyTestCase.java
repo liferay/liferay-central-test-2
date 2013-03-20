@@ -50,14 +50,6 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _forbiddenSiteIds;
 	}
 
-	public static boolean getPropagateMembershipMethodFlag() {
-		return _propagateMembershipMethodFlag;
-	}
-
-	public static boolean getPropagateRolesMethodFlag() {
-		return _propagateRolesMethodFlag;
-	}
-
 	public static long[] getRequiredRoleIds() {
 		return _requiredRoleIds;
 	}
@@ -78,24 +70,28 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _userIds;
 	}
 
-	public static boolean getVerifyMethodFlag() {
-		return _verifyMethodFlag;
+	public static boolean isPropagateMembership() {
+		return _propagateMembership;
 	}
 
-	public static void setPropagateMembershipMethodFlag(
-		boolean propagateMembershipMethodFlag) {
-
-		_propagateMembershipMethodFlag = propagateMembershipMethodFlag;
+	public static boolean isPropagateRoles() {
+		return _propagateRoles;
 	}
 
-	public static void setPropagateRolesMethodFlag(
-		boolean propagateRolesMethodFlag) {
-
-		_propagateRolesMethodFlag = propagateRolesMethodFlag;
+	public static boolean isVerifyMethod() {
+		return _verify;
 	}
 
-	public static void setVerifyMethodFlag(boolean verifyMethodFlag) {
-		_verifyMethodFlag = verifyMethodFlag;
+	public static void setPropagateMembership(boolean propagateMembership) {
+		_propagateMembership = propagateMembership;
+	}
+
+	public static void setPropagateRoles(boolean propagateRoles) {
+		_propagateRoles = propagateRoles;
+	}
+
+	public static void setVerify(boolean verify) {
+		_verify = verify;
 	}
 
 	@Before
@@ -175,13 +171,13 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 	private static long[] _forbiddenRoleIds = new long[2];
 	private static long[] _forbiddenSiteIds = new long[2];
 	private static Group _group;
-	private static boolean _propagateMembershipMethodFlag = false;
-	private static boolean _propagateRolesMethodFlag = false;
+	private static boolean _propagateMembership = false;
+	private static boolean _propagateRoles = false;
 	private static long[] _requiredRoleIds = new long[2];
 	private static long[] _requiredSiteIds = new long[2];
 	private static long[] _standardRoleIds = new long[2];
 	private static long[] _standardSiteIds = new long[2];
 	private static long[] _userIds = new long[2];
-	private static boolean _verifyMethodFlag;
+	private static boolean _verify;
 
 }

@@ -120,19 +120,19 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 	public void propagateMembership(
 		long[] userIds, long[] addGroupIds, long[] removeGroupIds) {
 
-		BaseSiteMembershipPolicyTestCase.setPropagateMembershipMethodFlag(true);
+		BaseSiteMembershipPolicyTestCase.setPropagateMembership(true);
 	}
 
 	public void propagateRoles(
 		List<UserGroupRole> addUserGroupRoles,
 		List<UserGroupRole> removeUserGroupRoles) {
 
-		BaseSiteMembershipPolicyTestCase.setPropagateRolesMethodFlag(true);
+		BaseSiteMembershipPolicyTestCase.setPropagateRoles(true);
 	}
 
 	@Override
 	public void verifyPolicy() {
-		BaseSiteMembershipPolicyTestCase.setVerifyMethodFlag(true);
+		BaseSiteMembershipPolicyTestCase.setVerify(true);
 	}
 
 	@Override

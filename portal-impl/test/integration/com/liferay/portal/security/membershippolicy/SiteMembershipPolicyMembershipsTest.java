@@ -78,7 +78,7 @@ public class SiteMembershipPolicyMembershipsTest
 		Assert.assertEquals(
 			initialUserGroupCountInRequiredSite + 2,
 			UserLocalServiceUtil.getGroupUsersCount(requiredSiteIds[0]));
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test(expected = MembershipPolicyException.class)
@@ -109,14 +109,14 @@ public class SiteMembershipPolicyMembershipsTest
 		Assert.assertEquals(
 			initialUserGroupCount + 1,
 			UserLocalServiceUtil.getGroupUsersCount(requiredSiteIds[0]));
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test
 	public void testPropagateWhenAddingUserToRequiredSites() throws Exception {
 		MembershipPolicyTestUtil.addUser(null, null, addRequiredSites(), null);
 
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test
@@ -129,7 +129,7 @@ public class SiteMembershipPolicyMembershipsTest
 			requiredSiteIds[0], addUsers(),
 			ServiceTestUtil.getServiceContext());
 
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test
@@ -144,7 +144,7 @@ public class SiteMembershipPolicyMembershipsTest
 			user, null, null, addRequiredSites(), null,
 			Collections.<UserGroupRole>emptyList());
 
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test
@@ -243,14 +243,14 @@ public class SiteMembershipPolicyMembershipsTest
 		Assert.assertEquals(
 			initialUserGroupCount - 1,
 			UserLocalServiceUtil.getGroupUsersCount(standardSiteIds[0]));
-		Assert.assertTrue(getPropagateMembershipMethodFlag());
+		Assert.assertTrue(isPropagateMembership());
 	}
 
 	@Test
 	public void testVerifyWhenAddingGroup() throws Exception {
 		MembershipPolicyTestUtil.addGroup();
 
-		Assert.assertTrue(getVerifyMethodFlag());
+		Assert.assertTrue(isVerifyMethod());
 	}
 
 	@Test
@@ -263,7 +263,7 @@ public class SiteMembershipPolicyMembershipsTest
 			group.getType(), group.getFriendlyURL(), group.isActive(),
 			ServiceTestUtil.getServiceContext());
 
-		Assert.assertTrue(getVerifyMethodFlag());
+		Assert.assertTrue(isVerifyMethod());
 	}
 
 	@Test
@@ -274,7 +274,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		GroupServiceUtil.updateGroup(group.getGroupId(), typeSettings);
 
-		Assert.assertTrue(getVerifyMethodFlag());
+		Assert.assertTrue(isVerifyMethod());
 	}
 
 }
