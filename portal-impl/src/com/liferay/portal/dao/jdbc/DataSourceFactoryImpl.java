@@ -400,17 +400,17 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 
 	private static PACL _pacl = new NoPACL();
 
-	public static interface PACL {
-
-		public DataSource getDataSource(DataSource dataSource);
-
-	}
-
 	private static class NoPACL implements PACL {
 
 		public DataSource getDataSource(DataSource dataSource) {
 			return dataSource;
 		}
+
+	}
+
+	public static interface PACL {
+
+		public DataSource getDataSource(DataSource dataSource);
 
 	}
 

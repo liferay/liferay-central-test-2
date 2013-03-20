@@ -27,9 +27,7 @@ import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.security.lang.DoPrivilegedFactory;
 import com.liferay.portal.security.lang.DoPrivilegedUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
-import com.liferay.portal.security.pacl.dao.jdbc.PACLConnectionHandler;
 import com.liferay.portal.security.pacl.dao.jdbc.PACLDataSource;
-import com.liferay.portal.security.pacl.dao.jdbc.PACLStatementHandler;
 import com.liferay.portal.security.pacl.jndi.PACLInitialContextFactoryBuilder;
 
 import java.lang.reflect.Field;
