@@ -170,6 +170,7 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 
 		User user2 = UserTestUtil.addUser(
 			ServiceTestUtil.randomString(), _group.getGroupId());
+
 		_userIds[1] = user2.getUserId();
 
 		return _userIds;
