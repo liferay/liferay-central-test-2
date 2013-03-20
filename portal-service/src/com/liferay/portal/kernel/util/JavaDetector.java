@@ -64,7 +64,9 @@ public class JavaDetector {
 	}
 
 	public static boolean isJDK4() {
-		if (getJavaVersion().startsWith(_JAVA_VERSION_JDK_4)) {
+		String javaVersion = getJavaVersion();
+
+		if (javaVersion.startsWith(_JAVA_VERSION_JDK_4)) {
 			return true;
 		}
 		else {
@@ -73,7 +75,9 @@ public class JavaDetector {
 	}
 
 	public static boolean isJDK5() {
-		if (getJavaVersion().startsWith(_JAVA_VERSION_JDK_5)) {
+		String javaVersion = getJavaVersion();
+
+		if (javaVersion.startsWith(_JAVA_VERSION_JDK_5)) {
 			return true;
 		}
 		else {
@@ -82,7 +86,9 @@ public class JavaDetector {
 	}
 
 	public static boolean isJDK6() {
-		if (getJavaVersion().startsWith(_JAVA_VERSION_JDK_6)) {
+		String javaVersion = getJavaVersion();
+
+		if (javaVersion.startsWith(_JAVA_VERSION_JDK_6)) {
 			return true;
 		}
 		else {
@@ -91,7 +97,9 @@ public class JavaDetector {
 	}
 
 	public static boolean isJDK7() {
-		if (getJavaVersion().startsWith(_JAVA_VERSION_JDK_7)) {
+		String javaVersion = getJavaVersion();
+
+		if (javaVersion.startsWith(_JAVA_VERSION_JDK_7)) {
 			return true;
 		}
 		else {
