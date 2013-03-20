@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.security.membershippolicy.util;
+package com.liferay.portal.util;
 
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
