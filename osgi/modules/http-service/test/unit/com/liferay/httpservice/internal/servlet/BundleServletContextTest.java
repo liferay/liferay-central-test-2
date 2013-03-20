@@ -18,8 +18,6 @@ import com.liferay.httpservice.servlet.ResourceServlet;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 
-import java.io.IOException;
-
 import java.text.SimpleDateFormat;
 
 import java.util.Arrays;
@@ -42,8 +40,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingListener;
@@ -115,26 +111,26 @@ public class BundleServletContextTest extends PowerMockito {
 	public void testGetFilterChain() throws Exception {
 		mockBundleWiring();
 
-		String cssFilterName = "CSS Filter";
-		String jsFilterName = "JS Filter";
-
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			MockFilter.class.getName(), Level.INFO);
 
+		String cssFilterName = "CSS Filter";
+
 		registerFilter(
 			cssFilterName, new MockFilter(cssFilterName), null, "/css/*");
+
+		String jsFilterName = "JS Filter";
+
 		registerFilter(
 			jsFilterName, new MockFilter(jsFilterName), null, "/js/*");
 
-		BundleFilterChain filterChain = _bundleServletContext.getFilterChain(
+		FilterChain filterChain = _bundleServletContext.getFilterChain(
 			"/js/main.js");
 
 		Assert.assertNotNull(filterChain);
 
-		HttpServletRequest httpServletRequest = new MockHttpServletRequest();
-		HttpServletResponse httpServletResponse = new MockHttpServletResponse();
-
-		filterChain.doFilter(httpServletRequest, httpServletResponse);
+		filterChain.doFilter(
+			new MockHttpServletRequest(), new MockHttpServletResponse());
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -600,20 +596,20 @@ public class BundleServletContextTest extends PowerMockito {
 
 		@Override
 		public void doFilter(
-				ServletRequest servletRequest, ServletResponse servletResponse,
-				FilterChain filterChain)
-			throws IOException, ServletException {
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain filterChain) {
 
 			_logger.info(_message);
 		}
 
 		@Override
-		public void init(FilterConfig arg0) throws ServletException {
+		public void init(FilterConfig filterConfig) {
 		}
 
 		private Logger _logger = Logger.getLogger(MockFilter.class.getName());
 
 		private String _message;
+
 	}
 
 }
