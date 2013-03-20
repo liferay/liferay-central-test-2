@@ -147,7 +147,7 @@ public class PollsVoteStagedModelDataHandlerTest
 		List<StagedModel> choices = dependentStagedModelsMap.get(
 			PollsChoice.class.getName());
 
-		Assert.assertEquals(1, questions.size());
+		Assert.assertEquals(1, choices.size());
 
 		PollsChoice choice = (PollsChoice)choices.get(0);
 
