@@ -41,7 +41,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 
 			<#assign blockElement = setUpElement>
 
-			<#include "testcase_block_element.ftl">
+			<#include "test_case_block_element.ftl">
 		</#if>
 	}
 
@@ -65,7 +65,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 
 			<#assign blockElement = commandElement>
 
-			<#include "testcase_block_element.ftl">
+			<#include "test_case_block_element.ftl">
 		}
 	</#list>
 
@@ -88,7 +88,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 
 			<#assign blockElement = tearDownElement>
 
-			<#include "testcase_block_element.ftl">
+			<#include "test_case_block_element.ftl">
 		</#if>
 	}
 
