@@ -79,6 +79,7 @@ public class MBBanStagedModelDataHandlerTest
 		return MBBan.class.getName();
 	}
 
+	@Override
 	protected void validateImport(
 			StagedModel stagedModel,
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
