@@ -69,10 +69,10 @@ public class PollsChoiceStagedModelDataHandlerTest
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
-		List<StagedModel> questions = dependentStagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			PollsQuestion.class.getName());
 
-		PollsQuestion question = (PollsQuestion)questions.get(0);
+		PollsQuestion question = (PollsQuestion)dependentStagedModels.get(0);
 
 		return PollsTestUtil.addChoice(
 			group.getGroupId(), question.getQuestionId());
@@ -105,12 +105,12 @@ public class PollsChoiceStagedModelDataHandlerTest
 			Group group)
 		throws Exception {
 
-		List<StagedModel> questions = dependentStagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			PollsQuestion.class.getName());
 
-		Assert.assertEquals(1, questions.size());
+		Assert.assertEquals(1, dependentStagedModels.size());
 
-		PollsQuestion question = (PollsQuestion)questions.get(0);
+		PollsQuestion question = (PollsQuestion)dependentStagedModels.get(0);
 
 		PollsQuestionLocalServiceUtil.getPollsQuestionByUuidAndGroupId(
 			question.getUuid(), group.getGroupId());

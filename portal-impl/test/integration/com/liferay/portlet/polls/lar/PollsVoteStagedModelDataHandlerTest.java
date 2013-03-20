@@ -82,15 +82,15 @@ public class PollsVoteStagedModelDataHandlerTest
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
-		List<StagedModel> questions = dependentStagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			PollsQuestion.class.getName());
 
-		PollsQuestion question = (PollsQuestion)questions.get(0);
+		PollsQuestion question = (PollsQuestion)dependentStagedModels.get(0);
 
-		List<StagedModel> choices = dependentStagedModelsMap.get(
+		dependentStagedModels = dependentStagedModelsMap.get(
 			PollsChoice.class.getName());
 
-		PollsChoice choice = (PollsChoice)choices.get(0);
+		PollsChoice choice = (PollsChoice)dependentStagedModels.get(0);
 
 		return PollsTestUtil.addVote(
 			group.getGroupId(), question.getQuestionId(), choice.getChoiceId());
@@ -134,25 +134,25 @@ public class PollsVoteStagedModelDataHandlerTest
 			Group group)
 		throws Exception {
 
-		List<StagedModel> questions = dependentStagedModelsMap.get(
-			PollsQuestion.class.getName());
-
-		Assert.assertEquals(1, questions.size());
-
-		PollsQuestion question = (PollsQuestion)questions.get(0);
-
-		PollsQuestionLocalServiceUtil.getPollsQuestionByUuidAndGroupId(
-			question.getUuid(), group.getGroupId());
-
-		List<StagedModel> choices = dependentStagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			PollsChoice.class.getName());
 
-		Assert.assertEquals(1, choices.size());
+		Assert.assertEquals(1, dependentStagedModels.size());
 
-		PollsChoice choice = (PollsChoice)choices.get(0);
+		PollsChoice choice = (PollsChoice)dependentStagedModels.get(0);
 
 		PollsChoiceLocalServiceUtil.getPollsChoiceByUuidAndGroupId(
 			choice.getUuid(), group.getGroupId());
+
+		dependentStagedModels = dependentStagedModelsMap.get(
+			PollsQuestion.class.getName());
+
+		Assert.assertEquals(1, dependentStagedModels.size());
+
+		PollsQuestion question = (PollsQuestion)dependentStagedModels.get(0);
+
+		PollsQuestionLocalServiceUtil.getPollsQuestionByUuidAndGroupId(
+			question.getUuid(), group.getGroupId());
 	}
 
 }
