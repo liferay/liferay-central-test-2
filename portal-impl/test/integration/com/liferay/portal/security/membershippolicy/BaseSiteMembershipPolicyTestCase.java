@@ -42,28 +42,28 @@ import org.junit.runner.RunWith;
 @Transactional
 public abstract class BaseSiteMembershipPolicyTestCase {
 
+	public static long[] getForbiddenGroupIds() {
+		return _forbiddenGroupIds;
+	}
+
 	public static long[] getForbiddenRoleIds() {
 		return _forbiddenRoleIds;
 	}
 
-	public static long[] getForbiddenSiteIds() {
-		return _forbiddenSiteIds;
+	public static long[] getRequiredGroupIds() {
+		return _requiredGroupIds;
 	}
 
 	public static long[] getRequiredRoleIds() {
 		return _requiredRoleIds;
 	}
 
-	public static long[] getRequiredSiteIds() {
-		return _requiredSiteIds;
+	public static long[] getStandardGroupIds() {
+		return _standardGroupIds;
 	}
 
 	public static long[] getStandardRoleIds() {
 		return _standardRoleIds;
-	}
-
-	public static long[] getStandardSiteIds() {
-		return _standardSiteIds;
 	}
 
 	public static long[] getUserIds() {
@@ -78,7 +78,7 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _propagateRoles;
 	}
 
-	public static boolean isVerifyMethod() {
+	public static boolean isVerify() {
 		return _verify;
 	}
 
@@ -99,6 +99,20 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		FinderCacheUtil.clearCache();
 	}
 
+	protected long[] addForbiddenGroups() throws Exception {
+		Group forbiddenGroup1 = GroupTestUtil.addGroup(
+			ServiceTestUtil.randomString());
+
+		_forbiddenGroupIds[0] = forbiddenGroup1.getGroupId();
+
+		Group forbiddenGroup2 = GroupTestUtil.addGroup(
+			ServiceTestUtil.randomString());
+
+		_forbiddenGroupIds[1] = forbiddenGroup2.getGroupId();
+
+		return _forbiddenGroupIds;
+	}
+
 	protected long[] addForbiddenRoles() throws Exception {
 		_forbiddenRoleIds[0] = RoleTestUtil.addGroupRole(_group.getGroupId());
 		_forbiddenRoleIds[1] = RoleTestUtil.addGroupRole(_group.getGroupId());
@@ -106,16 +120,18 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _forbiddenRoleIds;
 	}
 
-	protected long[] addForbiddenSites() throws Exception {
-		Group forbiddenSite1 = GroupTestUtil.addGroup(
+	protected long[] addRequiredGroups() throws Exception {
+		Group requiredGroup1 = GroupTestUtil.addGroup(
 			ServiceTestUtil.randomString());
-		_forbiddenSiteIds[0] = forbiddenSite1.getGroupId();
 
-		Group forbiddenSite2 = GroupTestUtil.addGroup(
+		_requiredGroupIds[0] = requiredGroup1.getGroupId();
+
+		Group requiredGroup2 = GroupTestUtil.addGroup(
 			ServiceTestUtil.randomString());
-		_forbiddenSiteIds[1] = forbiddenSite2.getGroupId();
 
-		return _forbiddenSiteIds;
+		_requiredGroupIds[1] = requiredGroup2.getGroupId();
+
+		return _requiredGroupIds;
 	}
 
 	protected long[] addRequiredRoles() throws Exception {
@@ -125,16 +141,18 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _requiredRoleIds;
 	}
 
-	protected long[] addRequiredSites() throws Exception {
-		Group requiredSite1 = GroupTestUtil.addGroup(
+	protected long[] addStandardGroups() throws Exception {
+		Group standardGroup1 = GroupTestUtil.addGroup(
 			ServiceTestUtil.randomString());
-		_requiredSiteIds[0] = requiredSite1.getGroupId();
 
-		Group requiredSite2 = GroupTestUtil.addGroup(
+		_standardGroupIds[0] = standardGroup1.getGroupId();
+
+		Group standardGroup2 = GroupTestUtil.addGroup(
 			ServiceTestUtil.randomString());
-		_requiredSiteIds[1] = requiredSite2.getGroupId();
 
-		return _requiredSiteIds;
+		_standardGroupIds[1] = standardGroup2.getGroupId();
+
+		return _standardGroupIds;
 	}
 
 	protected long[] addStandardRoles() throws Exception {
@@ -144,21 +162,10 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _standardRoleIds;
 	}
 
-	protected long[] addStandardSites() throws Exception {
-		Group standardSite1 = GroupTestUtil.addGroup(
-			ServiceTestUtil.randomString());
-		_standardSiteIds[0] = standardSite1.getGroupId();
-
-		Group standardSite2 = GroupTestUtil.addGroup(
-			ServiceTestUtil.randomString());
-		_standardSiteIds[1] = standardSite2.getGroupId();
-
-		return _standardSiteIds;
-	}
-
 	protected long[] addUsers() throws Exception {
 		User user1= UserTestUtil.addUser(
 			ServiceTestUtil.randomString(), _group.getGroupId());
+
 		_userIds[0] = user1.getUserId();
 
 		User user2 = UserTestUtil.addUser(
@@ -168,15 +175,15 @@ public abstract class BaseSiteMembershipPolicyTestCase {
 		return _userIds;
 	}
 
+	private static long[] _forbiddenGroupIds = new long[2];
 	private static long[] _forbiddenRoleIds = new long[2];
-	private static long[] _forbiddenSiteIds = new long[2];
 	private static Group _group;
 	private static boolean _propagateMembership = false;
 	private static boolean _propagateRoles = false;
+	private static long[] _requiredGroupIds = new long[2];
 	private static long[] _requiredRoleIds = new long[2];
-	private static long[] _requiredSiteIds = new long[2];
+	private static long[] _standardGroupIds = new long[2];
 	private static long[] _standardRoleIds = new long[2];
-	private static long[] _standardSiteIds = new long[2];
 	private static long[] _userIds = new long[2];
 	private static boolean _verify;
 

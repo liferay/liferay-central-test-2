@@ -38,11 +38,11 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test(expected = MembershipPolicyException.class)
 	public void testAddUserToForbiddenSites() throws Exception {
-		MembershipPolicyTestUtil.addUser(null, null, addForbiddenSites(), null);
+		MembershipPolicyTestUtil.addUser(null, null, addForbiddenGroups(), null);
 	}
 
 	public void testAddUserToRequiredSites() throws Exception {
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		int initialUserGroupCount = UserLocalServiceUtil.getGroupUsersCount(
 			requiredSiteIds[0]);
@@ -57,7 +57,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test(expected = MembershipPolicyException.class)
 	public void testAssignUsersToForbiddenSite() throws Exception {
-		long[] forbiddenSiteIds = addForbiddenSites();
+		long[] forbiddenSiteIds = addForbiddenGroups();
 
 		UserServiceUtil.addGroupUsers(
 			forbiddenSiteIds[0], addUsers(),
@@ -66,7 +66,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test
 	public void testAssignUsersToRequiredSite() throws Exception {
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		int initialUserGroupCountInRequiredSite =
 			UserLocalServiceUtil.getGroupUsersCount(requiredSiteIds[0]);
@@ -88,14 +88,14 @@ public class SiteMembershipPolicyMembershipsTest
 		User user = UserLocalServiceUtil.getUser(userIds[0]);
 
 		MembershipPolicyTestUtil.updateUser(
-			user, null, null, addForbiddenSites(), null,
+			user, null, null, addForbiddenGroups(), null,
 			Collections.<UserGroupRole>emptyList());
 	}
 
 	@Test
 	public void testAssignUserToRequiredSites() throws Exception {
 		long[] userIds = addUsers();
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		int initialUserGroupCount = UserLocalServiceUtil.getGroupUsersCount(
 			requiredSiteIds[0]);
@@ -114,7 +114,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test
 	public void testPropagateWhenAddingUserToRequiredSites() throws Exception {
-		MembershipPolicyTestUtil.addUser(null, null, addRequiredSites(), null);
+		MembershipPolicyTestUtil.addUser(null, null, addRequiredGroups(), null);
 
 		Assert.assertTrue(isPropagateMembership());
 	}
@@ -123,7 +123,7 @@ public class SiteMembershipPolicyMembershipsTest
 	public void testPropagateWhenAssigningUsersToRequiredSite()
 		throws Exception {
 
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		UserServiceUtil.addGroupUsers(
 			requiredSiteIds[0], addUsers(),
@@ -141,7 +141,7 @@ public class SiteMembershipPolicyMembershipsTest
 		User user = UserLocalServiceUtil.getUser(userIds[0]);
 
 		MembershipPolicyTestUtil.updateUser(
-			user, null, null, addRequiredSites(), null,
+			user, null, null, addRequiredGroups(), null,
 			Collections.<UserGroupRole>emptyList());
 
 		Assert.assertTrue(isPropagateMembership());
@@ -150,8 +150,8 @@ public class SiteMembershipPolicyMembershipsTest
 	@Test
 	public void testUnassignUserFromRequiredSites() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
-		long[] requiredSiteIds = addRequiredSites();
+		long[] standardSiteIds = addStandardGroups();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		User user = UserLocalServiceUtil.getUser(userIds[0]);
 
@@ -180,8 +180,8 @@ public class SiteMembershipPolicyMembershipsTest
 	@Test
 	public void testUnassignUserFromSites() throws Exception {
 		long[] userIds = addUsers();
-		long[] standardSiteIds = addStandardSites();
-		long[] requiredSiteIds = addRequiredSites();
+		long[] standardSiteIds = addStandardGroups();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		User user = UserLocalServiceUtil.getUser(userIds[0]);
 
@@ -216,7 +216,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test(expected = MembershipPolicyException.class)
 	public void testUnassignUsersFromRequiredSite() throws Exception {
-		long[] requiredSiteIds = addRequiredSites();
+		long[] requiredSiteIds = addRequiredGroups();
 
 		User user = MembershipPolicyTestUtil.addUser(
 			null, null, requiredSiteIds, null);
@@ -228,7 +228,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 	@Test
 	public void testUnassignUsersFromSite() throws Exception {
-		long[] standardSiteIds = addStandardSites();
+		long[] standardSiteIds = addStandardGroups();
 
 		User user = MembershipPolicyTestUtil.addUser(
 			null, null, standardSiteIds, null);
@@ -250,7 +250,7 @@ public class SiteMembershipPolicyMembershipsTest
 	public void testVerifyWhenAddingGroup() throws Exception {
 		MembershipPolicyTestUtil.addGroup();
 
-		Assert.assertTrue(isVerifyMethod());
+		Assert.assertTrue(isVerify());
 	}
 
 	@Test
@@ -263,7 +263,7 @@ public class SiteMembershipPolicyMembershipsTest
 			group.getType(), group.getFriendlyURL(), group.isActive(),
 			ServiceTestUtil.getServiceContext());
 
-		Assert.assertTrue(isVerifyMethod());
+		Assert.assertTrue(isVerify());
 	}
 
 	@Test
@@ -274,7 +274,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		GroupServiceUtil.updateGroup(group.getGroupId(), typeSettings);
 
-		Assert.assertTrue(isVerifyMethod());
+		Assert.assertTrue(isVerify());
 	}
 
 }

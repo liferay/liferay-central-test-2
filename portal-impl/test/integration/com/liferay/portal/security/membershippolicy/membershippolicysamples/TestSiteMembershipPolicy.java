@@ -42,7 +42,7 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		throws PortalException {
 
 		for (long forbiddenGroupId :
-				BaseSiteMembershipPolicyTestCase.getForbiddenSiteIds()) {
+				BaseSiteMembershipPolicyTestCase.getForbiddenGroupIds()) {
 
 			if (forbiddenGroupId == 0) {
 				continue;
@@ -55,7 +55,7 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		}
 
 		for (long requiredGroupId :
-				BaseSiteMembershipPolicyTestCase.getRequiredSiteIds()) {
+				BaseSiteMembershipPolicyTestCase.getRequiredGroupIds()) {
 
 			if (requiredGroupId == 0) {
 				continue;
