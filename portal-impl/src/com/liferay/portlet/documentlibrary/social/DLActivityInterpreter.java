@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -51,8 +50,6 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		if (!activity.isClassName(DLFileEntry.class.getName())) {
 			return StringPool.BLANK;
 		}
@@ -75,13 +72,14 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
 			fileEntry.getFileEntryId());
 
-		String fileEntryLink = assetRenderer.getURLDownload(themeDisplay);
+		String fileEntryLink = assetRenderer.getURLDownload(
+			serviceContext.getThemeDisplay());
 
 		sb.append(wrapLink(fileEntryLink, "download-file", serviceContext));
 
 		sb.append(StringPool.SPACE);
 
-		String folderLink = getFolderLink(fileEntry, themeDisplay);
+		String folderLink = getFolderLink(fileEntry, serviceContext);
 
 		sb.append(wrapLink(folderLink, "go-to-folder", serviceContext));
 
@@ -128,12 +126,12 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	protected String getFolderLink(
-		FileEntry fileEntry, ThemeDisplay themeDisplay) {
+		FileEntry fileEntry, ServiceContext serviceContext) {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
+		sb.append(serviceContext.getPortalURL());
+		sb.append(serviceContext.getPathMain());
 		sb.append("/document_library/find_folder?groupId=");
 		sb.append(fileEntry.getRepositoryId());
 		sb.append("&folderId=");

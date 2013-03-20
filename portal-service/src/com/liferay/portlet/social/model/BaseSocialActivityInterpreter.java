@@ -147,18 +147,16 @@ public abstract class BaseSocialActivityInterpreter
 				return StringPool.BLANK;
 			}
 
-			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 			String groupName = group.getDescriptiveName();
 
-			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (group.getGroupId() == serviceContext.getScopeGroupId()) {
 				return HtmlUtil.escape(groupName);
 			}
 
 			String groupDisplayURL =
-				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
+				serviceContext.getPortalURL() + serviceContext.getPathMain() +
 					"/my_sites/view?groupId=" + group.getGroupId();
 
 			if (group.hasPublicLayouts()) {
@@ -214,8 +212,6 @@ public abstract class BaseSocialActivityInterpreter
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			getClassName(activity));
 
@@ -225,13 +221,14 @@ public abstract class BaseSocialActivityInterpreter
 			trashHandler.isInTrashContainer(classPK))) {
 
 			return TrashUtil.getViewContentURL(
-				getClassName(activity), classPK, themeDisplay);
+				getClassName(activity), classPK,
+				serviceContext.getThemeDisplay());
 		}
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
+		sb.append(serviceContext.getPortalURL());
+		sb.append(serviceContext.getPathMain());
 		sb.append(getPath(activity));
 		sb.append(classPK);
 
@@ -246,11 +243,9 @@ public abstract class BaseSocialActivityInterpreter
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		String groupName = StringPool.BLANK;
 
-		if (activity.getGroupId() != themeDisplay.getScopeGroupId()) {
+		if (activity.getGroupId() != serviceContext.getScopeGroupId()) {
 			groupName = getGroupName(activity.getGroupId(), serviceContext);
 		}
 
@@ -263,7 +258,7 @@ public abstract class BaseSocialActivityInterpreter
 
 		String titlePattern = getTitlePattern(groupName, activity);
 
-		return themeDisplay.translate(titlePattern, titleArguments);
+		return serviceContext.translate(titlePattern, titleArguments);
 	}
 
 	protected Object[] getTitleArguments(
@@ -292,11 +287,9 @@ public abstract class BaseSocialActivityInterpreter
 				return StringPool.BLANK;
 			}
 
-			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			if (user.getUserId() == themeDisplay.getUserId()) {
+			if (user.getUserId() == serviceContext.getUserId()) {
 				return HtmlUtil.escape(user.getFirstName());
 			}
 
@@ -304,11 +297,12 @@ public abstract class BaseSocialActivityInterpreter
 
 			Group group = user.getGroup();
 
-			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
+			if (group.getGroupId() == serviceContext.getScopeGroupId()) {
 				return HtmlUtil.escape(userName);
 			}
 
-			String userDisplayURL = user.getDisplayURL(themeDisplay);
+			String userDisplayURL = user.getDisplayURL(
+				serviceContext.getThemeDisplay());
 
 			userName =
 				"<a class=\"user\" href=\"" + userDisplayURL + "\">" +
@@ -344,9 +338,7 @@ public abstract class BaseSocialActivityInterpreter
 	protected String wrapLink(
 		String link, String key, ServiceContext serviceContext) {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
-		return wrapLink(link, themeDisplay.translate(key));
+		return wrapLink(link, serviceContext.translate(key));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

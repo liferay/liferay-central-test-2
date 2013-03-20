@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -46,8 +45,6 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		MBMessage message = getMessage(activity);
 
 		if (message.getCategoryId() <= 0) {
@@ -56,8 +53,8 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
+		sb.append(serviceContext.getPortalURL());
+		sb.append(serviceContext.getPathMain());
 		sb.append("/message_boards/find_category?mbCategoryId=");
 		sb.append(message.getCategoryId());
 
@@ -81,21 +78,20 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		MBMessage message = getMessage(activity);
 
 		MBThread thread = message.getThread();
 
 		if (thread.isInTrash()) {
 			return TrashUtil.getViewContentURL(
-				MBThread.class.getName(), thread.getThreadId(), themeDisplay);
+				MBThread.class.getName(), thread.getThreadId(),
+				serviceContext.getThemeDisplay());
 		}
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
+		sb.append(serviceContext.getPortalURL());
+		sb.append(serviceContext.getPathMain());
 		sb.append("/message_boards/find_message?messageId=");
 		sb.append(message.getMessageId());
 

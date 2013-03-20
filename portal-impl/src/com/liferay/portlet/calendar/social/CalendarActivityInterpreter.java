@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
@@ -53,14 +52,12 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathMain());
+		sb.append(serviceContext.getPortalURL());
+		sb.append(serviceContext.getPathMain());
 		sb.append("/calendar/find_event?redirect=");
-		sb.append(HtmlUtil.escapeURL(themeDisplay.getURLCurrent()));
+		sb.append(HtmlUtil.escapeURL(serviceContext.getCurrentURL()));
 		sb.append("&eventId=");
 		sb.append(activity.getClassPK());
 

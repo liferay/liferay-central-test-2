@@ -77,6 +77,7 @@ public class ServiceContextFactory {
 			serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
 			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 			serviceContext.setSignedIn(themeDisplay.isSignedIn());
+			serviceContext.setTimeZone(themeDisplay.getTimeZone());
 
 			User user = themeDisplay.getUser();
 
@@ -288,6 +289,7 @@ public class ServiceContextFactory {
 			serviceContext.setPortalURL(
 				PortalUtil.getPortalURL(portletRequest));
 			serviceContext.setSignedIn(themeDisplay.isSignedIn());
+			serviceContext.setTimeZone(themeDisplay.getTimeZone());
 
 			User user = themeDisplay.getUser();
 

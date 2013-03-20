@@ -27,7 +27,6 @@ import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityConstants;
@@ -51,7 +50,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	protected String getAttachmentTitle(
 			SocialActivity activity, WikiPageResource pageResource,
-			ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws Exception {
 
 		int activityType = activity.getType();
@@ -85,9 +84,9 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			if ((fileVersion != null) && !fileVersion.isInTrash()) {
 				StringBundler sb = new StringBundler(9);
 
-				sb.append(themeDisplay.getPathMain());
+				sb.append(serviceContext.getPathMain());
 				sb.append("/wiki/get_page_attachment?p_l_id=");
-				sb.append(themeDisplay.getPlid());
+				sb.append(serviceContext.getPlid());
 				sb.append("&nodeId=");
 				sb.append(pageResource.getNodeId());
 				sb.append("&title=");
@@ -135,8 +134,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			String title, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		WikiPageResource pageResource =
 			WikiPageResourceLocalServiceUtil.getPageResource(
 				activity.getClassPK());
@@ -152,7 +149,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		return new Object[] {
 			groupName, creatorUserName, title,
-			getAttachmentTitle(activity, pageResource, themeDisplay)
+			getAttachmentTitle(activity, pageResource, serviceContext)
 		};
 	}
 

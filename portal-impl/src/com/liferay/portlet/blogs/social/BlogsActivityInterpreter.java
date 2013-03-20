@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
@@ -52,8 +51,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			String title, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		String creatorUserName = getUserName(
 			activity.getUserId(), serviceContext);
 		String receiverUserName = getUserName(
@@ -72,8 +69,8 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			Format dateFormatDate =
 				FastDateFormatFactoryUtil.getSimpleDateFormat(
-					"MMMM d", themeDisplay.getLocale(),
-					themeDisplay.getTimeZone());
+					"MMMM d", serviceContext.getLocale(),
+					serviceContext.getTimeZone());
 
 			displayDate = dateFormatDate.format(entry.getDisplayDate());
 		}

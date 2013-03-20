@@ -45,6 +45,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -622,6 +623,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		return PortletConstants.getRootPortletId(portletId);
 	}
 
+	public Group getScopeGroup() throws PortalException, SystemException {
+		return GroupLocalServiceUtil.getGroup(_scopeGroupId);
+	}
+
 	/**
 	 * Returns the ID of the group corresponding to the current data scope of
 	 * this service context.
@@ -639,6 +644,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		}
 
 		return (ThemeDisplay)_request.getAttribute(WebKeys.THEME_DISPLAY);
+	}
+
+	public TimeZone getTimeZone() {
+		return _timeZone;
 	}
 
 	/**
@@ -1197,6 +1206,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		_signedIn = signedIn;
 	}
 
+	public void setTimeZone(TimeZone timeZone) {
+		_timeZone = timeZone;
+	}
+
 	/**
 	 * Sets the complete URL of this service context's current user's profile
 	 * page.
@@ -1293,6 +1306,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private transient HttpServletRequest _request;
 	private long _scopeGroupId;
 	private boolean _signedIn;
+	private TimeZone _timeZone;
 	private String _userDisplayURL;
 	private long _userId;
 	private String _uuid;

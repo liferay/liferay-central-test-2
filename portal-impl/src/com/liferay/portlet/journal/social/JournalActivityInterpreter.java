@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
@@ -45,20 +44,16 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			activity.getClassPK());
 
-		return article.getTitle(themeDisplay.getLocale());
+		return article.getTitle(serviceContext.getLocale());
 	}
 
 	@Override
 	protected String getLink(
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
-
-		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			activity.getClassPK());
@@ -68,7 +63,7 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			return TrashUtil.getViewContentURL(
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
-				themeDisplay);
+				serviceContext.getThemeDisplay());
 		}
 
 		JournalArticle lastestArticle =
@@ -79,7 +74,8 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 			!article.isInTrash()) {
 
 			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
-				themeDisplay.getScopeGroup(), false, themeDisplay);
+				serviceContext.getScopeGroup(), false,
+				serviceContext.getThemeDisplay());
 
 			return groupFriendlyURL.concat(
 				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
