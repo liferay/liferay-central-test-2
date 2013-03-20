@@ -231,13 +231,6 @@ public class BeanLocatorImpl implements BeanLocator {
 	private Map<String, Object> _velocityBeans =
 		new ConcurrentHashMap<String, Object>();
 
-	public static interface PACL {
-
-		public InvocationHandler getInvocationHandler(
-			Object bean, ClassLoader classLoader);
-
-	}
-
 	private static class NoPACL implements PACL {
 
 		public InvocationHandler getInvocationHandler(
@@ -245,6 +238,13 @@ public class BeanLocatorImpl implements BeanLocator {
 
 			return new VelocityBeanHandler(bean, classLoader);
 		}
+
+	}
+
+	public static interface PACL {
+
+		public InvocationHandler getInvocationHandler(
+			Object bean, ClassLoader classLoader);
 
 	}
 
