@@ -44,7 +44,6 @@ public class CaptureAppender extends AppenderSkeleton {
 		}
 	}
 
-	@Override
 	public void close() {
 		_logger.removeAppender(this);
 
@@ -60,7 +59,6 @@ public class CaptureAppender extends AppenderSkeleton {
 		return _loggingEvents;
 	}
 
-	@Override
 	public boolean requiresLayout() {
 		return false;
 	}
