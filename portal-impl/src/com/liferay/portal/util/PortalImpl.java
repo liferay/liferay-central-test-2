@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
@@ -1444,6 +1445,56 @@ public class PortalImpl implements Portal {
 			themeDisplay.getCompanyId(), category);
 
 		return filterControlPanelPortlets(portlets, themeDisplay);
+	}
+
+	public PortletURL getControlPanelPortletURL(
+		HttpServletRequest request, String portletId, long referrerPlid,
+		String lifecycle) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long plid = 0;
+
+		try {
+			plid = getControlPanelPlid(themeDisplay.getCompanyId());
+		}
+		catch (Exception e) {
+			_log.error("Unable to determine control panel layout id", e);
+		}
+
+		LiferayPortletURL liferayPortletURL = new PortletURLImpl(
+			request, portletId, plid, lifecycle);
+
+		liferayPortletURL.setDoAsGroupId(themeDisplay.getScopeGroupId());
+		liferayPortletURL.setRefererPlid(themeDisplay.getPlid());
+
+		return liferayPortletURL;
+	}
+
+	public PortletURL getControlPanelPortletURL(
+		PortletRequest portletRequest, String portletId, long referrerPlid,
+		String lifecycle) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long plid = 0;
+
+		try {
+			plid = getControlPanelPlid(themeDisplay.getCompanyId());
+		}
+		catch (Exception e) {
+			_log.error("Unable to determine control panel layout id", e);
+		}
+
+		LiferayPortletURL liferayPortletURL = new PortletURLImpl(
+			portletRequest, portletId, plid, lifecycle);
+
+		liferayPortletURL.setDoAsGroupId(themeDisplay.getScopeGroupId());
+		liferayPortletURL.setRefererPlid(themeDisplay.getPlid());
+
+		return liferayPortletURL;
 	}
 
 	public String getCreateAccountURL(
