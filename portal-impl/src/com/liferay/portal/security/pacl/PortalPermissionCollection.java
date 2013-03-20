@@ -49,12 +49,12 @@ public class PortalPermissionCollection extends PermissionCollection {
 		return _paclPolicy.getClassLoader();
 	}
 
-	public Policy getPolicy() {
-		return _paclPolicy.getPolicy();
-	}
-
 	public PACLPolicy getPACLPolicy() {
 		return _paclPolicy;
+	}
+
+	public Policy getPolicy() {
+		return _paclPolicy.getPolicy();
 	}
 
 	@Override

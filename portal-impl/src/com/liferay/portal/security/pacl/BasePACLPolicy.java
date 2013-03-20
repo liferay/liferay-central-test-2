@@ -67,7 +67,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		try {
 			initCheckers();
 
-			_initPolicy(servletContextName, classLoader);
+			initPolicy(servletContextName, classLoader);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -181,7 +181,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		}
 	}
 
-	private void _checkForAllPermission(Policy policy, String rootDir)
+	protected void checkForAllPermission(Policy policy, String rootDir)
 		throws MalformedURLException {
 
 		URL rootURL = new URL("file", null, rootDir);
@@ -191,12 +191,12 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 
 		if (policy.implies(protectionDomain, new AllPermission())) {
 			throw new IllegalStateException(
-				"The plugin's java.policy tried to declared all " +
+				"The plugin's Java policy tried to declared all " +
 					"permissions");
 		}
 	}
 
-	private Provider _getProvider() {
+	protected Provider getProvider() {
 		String providerName = "SUN";
 
 		if (JavaDetector.isIBM() && JavaDetector.isJDK6()) {
@@ -206,8 +206,7 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		return Security.getProvider(providerName);
 	}
 
-	private void _initPolicy(
-			String servletContextName, ClassLoader classLoader)
+	protected void initPolicy(String servletContextName, ClassLoader classLoader)
 		throws Exception {
 
 		ServletContext servletContext = ServletContextPool.get(
@@ -231,8 +230,8 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 		}
 
 		// Set a system property to match the servletContextName so that the
-		// plugin can use it in it's java security policy file for setting the
-		// codeBase(s)
+		// plugin can use it in it's Java security policy file for setting the
+		// code base
 
 		String rootDir = fileChecker.getRootDir();
 
@@ -242,16 +241,14 @@ public abstract class BasePACLPolicy implements PACLPolicy {
 			URIParameter parameter = new URIParameter(url.toURI());
 
 			Policy policy = Policy.getInstance(
-				"JavaPolicy", parameter, _getProvider());
+				"JavaPolicy", parameter, getProvider());
 
-			_checkForAllPermission(policy, rootDir);
+			checkForAllPermission(policy, rootDir);
 
 			_policy = policy;
 		}
 		catch (Exception e) {
-			_log.error(
-				"Java policy from " + url.toString() +
-					" could not be initialized", e);
+			_log.error("Unable to initialize Java policy " + url.toString(), e);
 		}
 	}
 
