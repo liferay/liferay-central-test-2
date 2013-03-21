@@ -63,7 +63,7 @@ import org.junit.runner.RunWith;
 		TransactionalCallbackAwareExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class UpgradePortletIdsTest extends UpgradePortletId {
+public class UpgradePortletIdTest extends UpgradePortletId {
 
 	@Before
 	public void setUp() throws Exception {
