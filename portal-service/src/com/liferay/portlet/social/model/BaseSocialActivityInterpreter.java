@@ -104,7 +104,7 @@ public abstract class BaseSocialActivityInterpreter
 		SocialActivityFeedEntry socialActivityFeedEntry = doInterpret(
 			activity, themeDisplay);
 
-		if (socialActivityFeedEntry ==
+		if (socialActivityFeedEntry !=
 				_deprecatedMarkerSocialActivityFeedEntry) {
 
 			return socialActivityFeedEntry;
