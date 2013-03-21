@@ -78,10 +78,10 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", false);
+			"Organization A", false);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
-			organizationA.getOrganizationId(), "organizationB", false);
+			organizationA.getOrganizationId(), "Organization B", false);
 
 		Assert.assertEquals(
 			organizationA.getOrganizationId(),
@@ -99,10 +99,10 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", true);
+			"Organization A", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
-				organizationA.getOrganizationId(), "organizationB", false);
+				organizationA.getOrganizationId(), "Organization B", false);
 
 		Assert.assertEquals(
 			organizationA.getOrganizationId(),
@@ -120,10 +120,10 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", false);
+			"Organization A", false);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
-				organizationA.getOrganizationId(), "organizationB", true);
+				organizationA.getOrganizationId(), "Organization B", true);
 
 		Assert.assertEquals(
 			organizationA.getOrganizationId(),
@@ -141,10 +141,10 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", true);
+			"Organization A", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
-				organizationA.getOrganizationId(), "organizationB", true);
+				organizationA.getOrganizationId(), "Organization B", true);
 
 		Assert.assertEquals(
 			organizationA.getOrganizationId(),
@@ -162,14 +162,14 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", false);
+			"Organization A", false);
 
 		Organization organizationAA = OrganizationTestUtil.addOrganization(
-			organizationA.getOrganizationId(), "organizationAA", true);
+			organizationA.getOrganizationId(), "Organization AA", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationB", false);
+			"Organization B", false);
 
 		organizationAA = OrganizationLocalServiceUtil.updateOrganization(
 			organizationAA.getCompanyId(), organizationAA.getOrganizationId(),
@@ -194,14 +194,14 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", false);
+			"Organization A", false);
 
 		Organization organizationAA = OrganizationTestUtil.addOrganization(
-				organizationA.getOrganizationId(), "organizationAA", true);
+				organizationA.getOrganizationId(), "Organization AA", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationB", true);
+			"Organization B", true);
 
 		organizationAA = OrganizationLocalServiceUtil.updateOrganization(
 			organizationAA.getCompanyId(), organizationAA.getOrganizationId(),
@@ -226,14 +226,14 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", true);
+			"Organization A", true);
 
 		Organization organizationAA = OrganizationTestUtil.addOrganization(
-				organizationA.getOrganizationId(), "organizationAA", true);
+				organizationA.getOrganizationId(), "Organization AA", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationB", false);
+			"Organization B", false);
 
 		organizationAA = OrganizationLocalServiceUtil.updateOrganization(
 			organizationAA.getCompanyId(), organizationAA.getOrganizationId(),
@@ -258,14 +258,14 @@ public class OrganizationLocalServiceTest {
 
 		Organization organizationA = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationA", true);
+			"Organization A", true);
 
 		Organization organizationAA = OrganizationTestUtil.addOrganization(
-			organizationA.getOrganizationId(), "organizationAA", true);
+			organizationA.getOrganizationId(), "Organization AA", true);
 
 		Organization organizationB = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			"organizationB", true);
+			"Organization B", true);
 
 		organizationAA = OrganizationLocalServiceUtil.updateOrganization(
 			organizationAA.getCompanyId(), organizationAA.getOrganizationId(),
