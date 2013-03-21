@@ -12,13 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.test;
+package com.liferay.portal.security.pacl.test;
 
 import com.liferay.portal.deploy.hot.HookHotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.net.MalformedURLException;
 import java.net.URL;
