@@ -25,10 +25,11 @@ public class ViewBlogsEntryViewCountAPTest extends BaseTestCase {
 		selenium.selectWindow("null");
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
-		selenium.waitForVisible("link=Asset Publisher Test Page");
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.waitForVisible(
+			"//span[@class='metadata-entry metadata-view-count']");
 
 		String viewCount1 = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
