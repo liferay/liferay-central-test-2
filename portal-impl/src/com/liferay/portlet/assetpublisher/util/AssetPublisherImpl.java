@@ -792,7 +792,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 		throws PortalException, SystemException {
 
 		long groupId = getGroupIdFromScopeId(
-				scopeId, layout.getGroupId(), layout.isPrivateLayout());
+			scopeId, layout.getGroupId(), layout.isPrivateLayout());
 
 		if (scopeId.startsWith(SCOPE_ID_CHILD_GROUP_PREFIX)) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -1077,7 +1077,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 		return recentFolderIds;
 	}
 
-	private Log _log = LogFactoryUtil.getLog(AssetPublisherUtil.class);
+	private Log _log = LogFactoryUtil.getLog(AssetPublisherImpl.class);
 
 	private Accessor<AssetEntry, String> _titleAccessor =
 		new Accessor<AssetEntry, String>() {
