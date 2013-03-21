@@ -511,6 +511,18 @@ public class ServiceContext implements Cloneable, Serializable {
 		}
 	}
 
+	public String getPathFriendlyURLPrivateGroup() {
+		return _pathFriendlyURLPrivateGroup;
+	}
+
+	public String getPathFriendlyURLPrivateUser() {
+		return _pathFriendlyURLPrivateUser;
+	}
+
+	public String getPathFriendlyURLPublic() {
+		return _pathFriendlyURLPublic;
+	}
+
 	/**
 	 * Returns the main context path of the portal, concatenated with
 	 * <code>/c</code>.
@@ -1100,6 +1112,22 @@ public class ServiceContext implements Cloneable, Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public void setPathFriendlyURLPrivateGroup(
+		String pathFriendlyURLPrivateGroup) {
+
+		_pathFriendlyURLPrivateGroup = pathFriendlyURLPrivateGroup;
+	}
+
+	public void setPathFriendlyURLPrivateUser(
+		String pathFriendlyURLPrivateUser) {
+
+		_pathFriendlyURLPrivateUser = pathFriendlyURLPrivateUser;
+	}
+
+	public void setPathFriendlyURLPublic(String pathFriendlyURLPublic) {
+		_pathFriendlyURLPublic = pathFriendlyURLPublic;
+	}
+
 	/**
 	 * Sets the main context path of the portal, concatenated with
 	 * <code>/c</code>.
@@ -1297,6 +1325,9 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String _layoutFullURL;
 	private String _layoutURL;
 	private Date _modifiedDate;
+	private String _pathFriendlyURLPrivateGroup;
+	private String _pathFriendlyURLPrivateUser;
+	private String _pathFriendlyURLPublic;
 	private String _pathMain;
 	private long _plid;
 	private String _portalURL;
