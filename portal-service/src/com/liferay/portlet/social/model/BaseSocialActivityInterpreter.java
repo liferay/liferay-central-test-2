@@ -101,6 +101,15 @@ public abstract class BaseSocialActivityInterpreter
 
 		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 
+		SocialActivityFeedEntry socialActivityFeedEntry = doInterpret(
+			activity, themeDisplay);
+
+		if (socialActivityFeedEntry ==
+				_deprecatedMarkerSocialActivityFeedEntry) {
+
+			return socialActivityFeedEntry;
+		}
+
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
@@ -117,6 +126,16 @@ public abstract class BaseSocialActivityInterpreter
 		String body = getBody(activity, serviceContext);
 
 		return new SocialActivityFeedEntry(link, title, body);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	protected SocialActivityFeedEntry doInterpret(
+			SocialActivity activity, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		return _deprecatedMarkerSocialActivityFeedEntry;
 	}
 
 	protected String getBody(
@@ -157,6 +176,49 @@ public abstract class BaseSocialActivityInterpreter
 
 			String groupDisplayURL =
 				serviceContext.getPortalURL() + serviceContext.getPathMain() +
+					"/my_sites/view?groupId=" + group.getGroupId();
+
+			if (group.hasPublicLayouts()) {
+				groupDisplayURL = groupDisplayURL + "&privateLayout=0";
+			}
+			else if (group.hasPrivateLayouts()) {
+				groupDisplayURL = groupDisplayURL + "&privateLayout=1";
+			}
+			else {
+				return HtmlUtil.escape(groupName);
+			}
+
+			groupName =
+				"<a class=\"group\" href=\"" + groupDisplayURL + "\">" +
+					HtmlUtil.escape(groupName) + "</a>";
+
+			return groupName;
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getGroupName(long,
+	 *             ServiceContext)}
+	 */
+	protected String getGroupName(long groupId, ThemeDisplay themeDisplay) {
+		try {
+			if (groupId <= 0) {
+				return StringPool.BLANK;
+			}
+
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			String groupName = group.getDescriptiveName();
+
+			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
+				return HtmlUtil.escape(groupName);
+			}
+
+			String groupDisplayURL =
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 					"/my_sites/view?groupId=" + group.getGroupId();
 
 			if (group.hasPublicLayouts()) {
@@ -315,6 +377,51 @@ public abstract class BaseSocialActivityInterpreter
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getUserName(long,
+	 *             ServiceContext)}
+	 */
+	protected String getUserName(long userId, ThemeDisplay themeDisplay) {
+		try {
+			if (userId <= 0) {
+				return StringPool.BLANK;
+			}
+
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			if (user.getUserId() == themeDisplay.getUserId()) {
+				return HtmlUtil.escape(user.getFirstName());
+			}
+
+			String userName = user.getFullName();
+
+			Group group = user.getGroup();
+
+			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
+				return HtmlUtil.escape(userName);
+			}
+
+			String userDisplayURL = user.getDisplayURL(themeDisplay);
+
+			userName =
+				"<a class=\"user\" href=\"" + userDisplayURL + "\">" +
+					HtmlUtil.escape(userName) + "</a>";
+
+			return userName;
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getJSONValue(String, String,
+	 *             String)}
+	 */
+	protected String getValue(String json, String key, String defaultValue) {
+		return getJSONValue(json, key, defaultValue);
+	}
+
 	protected boolean hasPermissions(
 			PermissionChecker permissionChecker, SocialActivity activity,
 			String actionId, ServiceContext serviceContext)
@@ -343,5 +450,8 @@ public abstract class BaseSocialActivityInterpreter
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseSocialActivityInterpreter.class);
+
+	private SocialActivityFeedEntry _deprecatedMarkerSocialActivityFeedEntry =
+		new SocialActivityFeedEntry(StringPool.BLANK, StringPool.BLANK);
 
 }
