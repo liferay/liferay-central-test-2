@@ -25,5 +25,5 @@ executeScopeVariables.putAll(commandScopeVariables);
 ${seleniumBuilderFileUtil.getVariableName(macro?substring(0, x))}Macro.${macro?substring(x + 1)}(executeScopeVariables)
 
 <#if macroElement.getName() == "execute">
-;
+	;
 </#if>

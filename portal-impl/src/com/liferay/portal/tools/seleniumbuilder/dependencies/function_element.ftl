@@ -19,5 +19,5 @@ ${seleniumBuilderFileUtil.getVariableName(function?substring(0, x))}Function.${f
 )
 
 <#if functionElement.getName() == "execute">
-;
+	;
 </#if>

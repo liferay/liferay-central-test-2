@@ -47,5 +47,5 @@ liferaySelenium.${selenium}(
 )
 
 <#if seleniumElement.getName() == "execute">
-;
+	;
 </#if>

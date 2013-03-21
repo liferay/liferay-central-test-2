@@ -9,5 +9,5 @@
 ${seleniumBuilderFileUtil.getVariableName(action?substring(0, x))}Action.${seleniumBuilderFileUtil.getVariableName(action?substring(x + 1))}("", "", "")
 
 <#if actionElement.getName() == "execute">
-;
+	;
 </#if>
