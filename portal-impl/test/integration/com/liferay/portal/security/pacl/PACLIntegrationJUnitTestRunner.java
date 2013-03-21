@@ -53,7 +53,9 @@ public class PACLIntegrationJUnitTestRunner
 			return;
 		}
 
-		URL resource = getClass().getResource("pacl-test.properties");
+		Class<?> clazz = getClass();
+
+		URL resource = clazz.getResource("pacl-test.properties");
 
 		if (resource != null) {
 			System.setProperty("external-properties", resource.getPath());
