@@ -792,6 +792,8 @@ public class ServicePreAction extends Action {
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 
+		themeDisplay.setRequest(request);
+
 		// Set the CDN host, portal URL, and Facebook application ID first
 		// because other methods (setLookAndFeel) depend on them being set
 
