@@ -32,6 +32,13 @@ public class TestPACLMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
+		message.setPayload(getResults(message));
+
+		MessageBusUtil.sendMessage(
+			message.getResponseDestinationName(), message);
+	}
+
+	protected Map<String, Object> getResults(Message message) throws Exception {
 		Map<String, Object> results = new HashMap<String, Object>();
 
 		try {
@@ -51,10 +58,7 @@ public class TestPACLMessageListener extends BaseMessageListener {
 		catch (SecurityException se) {
 		}
 
-		message.setPayload(results);
-
-		MessageBusUtil.sendMessage(
-			message.getResponseDestinationName(), message);
+		return results;
 	}
 
 }
