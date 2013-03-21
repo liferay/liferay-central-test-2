@@ -1393,6 +1393,105 @@ public class Creole10Parser]]></replacevalue>
 		</java>
 	</target>
 
+	<target name="update-from-plugins-test-pacl-portlet">
+		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test">
+			<fileset
+				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src/com/liferay/testpacl"
+				includes="hook/**,messaging/**"
+			/>
+			<filterchain>
+				<tokenfilter>
+					<replacestring from="com.liferay.testpacl" to="com.liferay.portal.security.pacl.test" />
+				</tokenfilter>
+			</filterchain>
+		</copy>
+
+		<replace file="test/integration/com/liferay/portal/security/pacl/test/messaging/TestPACLMessageListener.java">
+			<replacetoken><![CDATA[import com.liferay.portal.security.pacl.test.util.TestPACLUtil;]]></replacetoken>
+			<replacevalue><![CDATA[import com.liferay.portal.model.User;
+import com.liferay.portal.service.PortalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.TestPropsValues;
+
+import java.util.HashMap;]]></replacevalue>
+		</replace>
+
+		<replace file="test/integration/com/liferay/portal/security/pacl/test/messaging/TestPACLMessageListener.java">
+			<replacetoken><![CDATA[protected Map<String, Boolean> getResults(Message message) {]]></replacetoken>
+			<replacevalue><![CDATA[protected Map<String, Object> getResults(Message message) throws Exception {
+		Map<String, Object> results = new HashMap<String, Object>();
+
+		try {
+			int buildNumber = PortalServiceUtil.getBuildNumber();
+
+			results.put("PortalServiceUtil#getBuildNumber", buildNumber);
+		}
+		catch (SecurityException se) {
+		}
+
+		try {
+			User user = UserLocalServiceUtil.getUser(
+				TestPropsValues.getUserId());
+
+			results.put("UserLocalServiceUtil#getUser", user);
+		}
+		catch (SecurityException se) {
+		}
+
+		return results;
+	}]]></replacevalue>
+		</replace>
+ 
+ 		<replaceregexp
+			flags="s"
+			file="test/integration/com/liferay/portal/security/pacl/test/messaging/TestPACLMessageListener.java"
+			match="long userId = (.*)"
+			replace="${line.separator}}"
+		/>
+
+		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies">
+			<fileset
+				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot"
+				includes="WEB-INF/liferay-hook.xml,WEB-INF/liferay-plugin-package.properties"
+			/>
+			<fileset
+				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src"
+				includes="content/**,portal.properties"
+			/>
+			<filterchain>
+				<tokenfilter>
+					<replacestring from="com.liferay.testpacl" to="com.liferay.portal.security.pacl.test" />
+				</tokenfilter>
+			</filterchain>
+		</copy>
+
+		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF">
+			<fileset
+				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src/META-INF"
+				includes="base-spring.xml,hibernate-spring.xml,infrastructure-spring.xml,messaging-spring.xml"
+			/>
+			<filterchain>
+				<tokenfilter>
+					<replacestring from="com.liferay.testpacl" to="com.liferay.portal.security.pacl.test" />
+				</tokenfilter>
+			</filterchain>
+		</copy>
+
+		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF/hibernate-spring.xml">
+			<replacetoken><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil" factory-method="newBean">]]></replacetoken>
+			<replacevalue><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
+		<property name="dataSource" ref="liferayDataSource" />
+	</bean>]]></replacevalue>
+		</replace>
+
+		<replaceregexp
+			flags="s"
+			file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF/hibernate-spring.xml"
+			match="&lt;/bean(.*)&lt;bean id=&quot;liferaySessionFactory"
+			replace="&lt;/bean>${line.separator}&#x9;&lt;bean id=&quot;liferaySessionFactory"
+		/>
+	</target>
+
 	<target name="upgrade-db">
 		<java
 			classname="com.liferay.portal.tools.DBUpgrader"
