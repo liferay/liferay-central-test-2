@@ -1394,6 +1394,9 @@ public class Creole10Parser]]></replacevalue>
 	</target>
 
 	<target name="update-from-plugins-test-pacl-portlet">
+
+		<!-- Copy Java files -->
+
 		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test">
 			<fileset
 				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src/com/liferay/testpacl"
@@ -1405,6 +1408,8 @@ public class Creole10Parser]]></replacevalue>
 				</tokenfilter>
 			</filterchain>
 		</copy>
+
+		<!-- Update TestPACLMessageListener.java -->
 
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/messaging/TestPACLMessageListener.java">
 			<replacetoken><![CDATA[import com.liferay.portal.security.pacl.test.util.TestPACLUtil;]]></replacetoken>
@@ -1449,6 +1454,8 @@ import java.util.HashMap;]]></replacevalue>
 			replace="${line.separator}}"
 		/>
 
+		<!-- Copy WEB-INF files -->
+
 		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies">
 			<fileset
 				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot"
@@ -1460,6 +1467,8 @@ import java.util.HashMap;]]></replacevalue>
 				</tokenfilter>
 			</filterchain>
 		</copy>
+
+		<!-- Update liferay-plugin-package.properties -->
 
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/liferay-plugin-package.properties">
 			<replacetoken>Test Portal Access Control List</replacetoken>
@@ -1580,6 +1589,8 @@ security-manager-search-engine-ids=\</replacevalue>
 security-manager-sockets-accept=\</replacevalue>
 		</replace>
 
+		<!-- Copy WEB-INF/classes files -->
+
 		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes">
 			<fileset
 				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src"
@@ -1591,6 +1602,8 @@ security-manager-sockets-accept=\</replacevalue>
 				</tokenfilter>
 			</filterchain>
 		</copy>
+
+		<!-- Update hibernate-spring.xml -->
 
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF/hibernate-spring.xml">
 			<replacetoken><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil" factory-method="newBean">]]></replacetoken>
