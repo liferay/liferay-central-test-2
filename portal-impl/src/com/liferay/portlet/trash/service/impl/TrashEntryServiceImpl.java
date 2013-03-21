@@ -55,7 +55,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * permissions.
 	 *
 	 * @param  groupId the primary key of the group
-	 * @throws PrincipalException if a principal exception occurred
+	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Transactional(noRollbackFor = {TrashPermissionException.class})
