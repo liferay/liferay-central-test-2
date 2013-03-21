@@ -30,6 +30,10 @@ public interface ColorSchemeFactory {
 
 	public ColorScheme getDefaultRegularColorScheme();
 
+	public String getDefaultRegularColorSchemeId();
+
 	public ColorScheme getDefaultWapColorScheme();
+
+	public String getDefaultWapColorSchemeId();
 
 }

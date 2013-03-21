@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ColorSchemeFactoryUtil;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -734,7 +735,8 @@ public class ServicePreAction extends Action {
 		if ((layout != null) && group.isControlPanel()) {
 			String themeId = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-			String colorSchemeId = ColorScheme.DEFAULT_REGULAR_COLOR_SCHEME_ID;
+			String colorSchemeId =
+				ColorSchemeFactoryUtil.getDefaultRegularColorSchemeId();
 
 			theme = ThemeLocalServiceUtil.getTheme(
 				companyId, themeId, wapTheme);

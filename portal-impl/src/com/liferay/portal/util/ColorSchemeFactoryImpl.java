@@ -40,14 +40,21 @@ public class ColorSchemeFactoryImpl implements ColorSchemeFactory {
 
 	public ColorScheme getDefaultRegularColorScheme() {
 		return new ColorSchemeImpl(
-			ColorScheme.DEFAULT_REGULAR_COLOR_SCHEME_ID, StringPool.BLANK,
+			getDefaultRegularColorSchemeId(), StringPool.BLANK,
 			StringPool.BLANK);
+	}
+
+	public String getDefaultRegularColorSchemeId() {
+		return PropsValues.DEFAULT_REGULAR_COLOR_SCHEME_ID;
 	}
 
 	public ColorScheme getDefaultWapColorScheme() {
 		return new ColorSchemeImpl(
-			ColorScheme.DEFAULT_WAP_COLOR_SCHEME_ID, StringPool.BLANK,
-			StringPool.BLANK);
+			getDefaultWapColorSchemeId(), StringPool.BLANK, StringPool.BLANK);
+	}
+
+	public String getDefaultWapColorSchemeId() {
+		return PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID;
 	}
 
 }

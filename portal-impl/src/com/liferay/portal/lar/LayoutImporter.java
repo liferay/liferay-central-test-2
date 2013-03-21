@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ColorSchemeFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -61,7 +62,6 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -549,7 +549,8 @@ public class LayoutImporter {
 
 			if (importThemeId != null) {
 				themeId = importThemeId;
-				colorSchemeId = ColorScheme.DEFAULT_REGULAR_COLOR_SCHEME_ID;
+				colorSchemeId =
+					ColorSchemeFactoryUtil.getDefaultRegularColorSchemeId();
 			}
 
 			if (_log.isDebugEnabled()) {

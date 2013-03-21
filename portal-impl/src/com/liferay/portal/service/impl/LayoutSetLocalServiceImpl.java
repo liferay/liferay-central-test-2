@@ -19,11 +19,11 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ColorSchemeFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
@@ -109,11 +109,11 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			layoutSet.setThemeId(
 				ThemeImpl.getDefaultRegularThemeId(group.getCompanyId()));
 			layoutSet.setColorSchemeId(
-				ColorScheme.DEFAULT_REGULAR_COLOR_SCHEME_ID);
+				ColorSchemeFactoryUtil.getDefaultRegularColorSchemeId());
 			layoutSet.setWapThemeId(
 				ThemeImpl.getDefaultWapThemeId(group.getCompanyId()));
 			layoutSet.setWapColorSchemeId(
-				ColorScheme.DEFAULT_WAP_COLOR_SCHEME_ID);
+				ColorSchemeFactoryUtil.getDefaultWapColorSchemeId());
 			layoutSet.setCss(StringPool.BLANK);
 			layoutSet.setSettings(StringPool.BLANK);
 		}
@@ -390,7 +390,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNull(colorSchemeId)) {
-			colorSchemeId = ColorScheme.DEFAULT_REGULAR_COLOR_SCHEME_ID;
+			colorSchemeId =
+				ColorSchemeFactoryUtil.getDefaultRegularColorSchemeId();
 		}
 
 		if (wapTheme) {
