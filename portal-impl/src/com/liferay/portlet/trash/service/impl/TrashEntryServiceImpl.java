@@ -97,15 +97,17 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		}
 	}
 
-	@Transactional(noRollbackFor = {TrashPermissionException.class})
+	
 	/**
 	 * Deletes the trash entries with the primary keys.
 	 *
 	 * @param  entryIds the primary keys of the trash entries
-	 * @throws PortalException if the user didn't have permission to delete one
-	 *         or more entries
+	 * @throws PortalException if a trash entry with the primary key could not
+	 *         be found or if the user didn't have permission to delete the
+	 *         entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Transactional(noRollbackFor = {TrashPermissionException.class})
 	public void deleteEntries(long[] entryIds)
 		throws PortalException, SystemException {
 
@@ -130,19 +132,20 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * Deletes the trash entry with the primary key.
 	 *
 	 * <p>
-	 * This method throws a PrincipalException if the user didn't have the
-	 * permissions to perform the necessary operation. The exception is created
-	 * with different messages for different operations:
+	 * This method throws a {@link TrashPermissionException} if the user didn't
+	 * have the permissions to perform the necessary operation. The exception is
+	 * created with different messages for different operations:
 	 * </p>
 	 *
 	 * <ul>
 	 * <li>
-	 * trash.delete.error - if the permission to delete the item was missing
+	 * <code>DELETE</code> - if the permission to delete the item was missing
 	 * </li>
 	 * </ul>
 	 *
 	 * @param  entryId the primary key of the trash entry
-	 * @throws PortalException if the user didn't have permission to delete the
+	 * @throws PortalException if a trash entry with the primary key could not
+	 *         be found or if the user didn't have permission to delete the
 	 *         entry
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -158,20 +161,21 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * Deletes the trash entry with the entity class name and primary key.
 	 *
 	 * <p>
-	 * This method throws a PrincipalException if the user didn't have the
-	 * permissions to perform the necessary operation. The exception is created
-	 * with different messages for different operations:
+	 * This method throws a {@link TrashPermissionException} if the user didn't
+	 * have the permissions to perform the necessary operation. The exception is
+	 * created with different messages for different operations:
 	 * </p>
 	 *
 	 * <ul>
 	 * <li>
-	 * trash.delete.error - if the permission to delete the item was missing
+	 * <code>DELETE</code> - if the permission to delete the item was missing
 	 * </li>
 	 * </ul>
 	 *
 	 * @param  className the class name of the entity
 	 * @param  classPK the primary key of the entity
-	 * @throws PortalException if the user didn't have permission to delete the
+	 * @throws PortalException if a trash entry with the primary key could not
+	 *         be found or if the user didn't have permission to delete the
 	 *         entry
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -271,21 +275,21 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 
 	/**
 	 * Restores the trash entry with the primary key by moving it to a new
-	 * location identified by destination container model ID.
+	 * location identified by the destination container model ID.
 	 *
 	 * <p>
-	 * This method throws a PrincipalException if the user didn't have the
-	 * permissions to perform one of the necessary operations. The exception is
-	 * created with different messages for different operations:
+	 * This method throws a {@link TrashPermissionException} if the user didn't
+	 * have the permissions to perform one of the necessary operations. The
+	 * exception is created with different messages for different operations:
 	 * </p>
 	 *
 	 * <ul>
 	 * <li>
-	 * trash.move.error - if the permission to add the item to the new
+	 * <code>MOVE</code> - if the permission to add the item to the new
 	 * destination was missing
 	 * </li>
 	 * <li>
-	 * trash.restore.error - if the permission to restore the item from trash
+	 * <code>RESTORE</code> - if the permission to restore the item from trash
 	 * was missing
 	 * </li>
 	 * </ul>
@@ -348,27 +352,27 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	}
 
 	/**
-	 * Restores to trash entry to its original location. In case of duplication,
-	 * on of the optional parameters are set indicating either to overwrite the
-	 * existing item or to rename the entry before restore.
+	 * Restores the trash entry to its original location. In case of
+	 * duplication, optional parameters are set indicating either to overwrite
+	 * the existing item or to rename the entry before its restoration.
 	 *
 	 * <p>
-	 * This method throws a PrincipalException if the user didn't have the
-	 * permissions to perform one of the necessary operations. The exception is
-	 * created with different messages for different operations:
+	 * This method throws a {@link TrashPermissionException} if the user didn't
+	 * have the permissions to perform one of the necessary operations. The
+	 * exception is created with different messages for different operations:
 	 * </p>
 	 *
 	 * <ul>
 	 * <li>
-	 * trash.restore.error - if the permission to restore the item from trash
+	 * <code>RESTORE</code> - if the permission to restore the item from trash
 	 * was missing
 	 * </li>
 	 * <li>
-	 * trash.restore.overwrite.error - if the permission to delete the existing
+	 * <code>RESTORE_OVERWRITE</code> - if the permission to delete the existing
 	 * item was missing
 	 * </li>
 	 * <li>
-	 * trash.restore.rename.error - if the permission to rename the entry was
+	 * <code>RESTORE_RENAME</code> - if the permission to rename the entry was
 	 * missing
 	 * </li>
 	 * </ul>
@@ -376,9 +380,9 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * @param  entryId the primary key of the trash entry
 	 * @param  overrideClassPK the primary key of the item to overwrite
 	 * @param  name the new name of the entry (optionally <code>null</code>)
-	 * @return the trash entry that was restored
+	 * @return the restored trash entry
 	 * @throws PortalException if the user didn't have permission to overwrite
-	 *         an existing item, to rename the entry or to restore the entry
+	 *         an existing item, to rename the entry, or to restore the entry
 	 *         from the trash in general
 	 * @throws SystemException if a system exception occurred
 	 */
