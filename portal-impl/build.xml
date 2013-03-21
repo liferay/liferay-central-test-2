@@ -1454,10 +1454,6 @@ import java.util.HashMap;]]></replacevalue>
 				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot"
 				includes="WEB-INF/liferay-hook.xml,WEB-INF/liferay-plugin-package.properties"
 			/>
-			<fileset
-				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src"
-				includes="content/**,portal.properties"
-			/>
 			<filterchain>
 				<tokenfilter>
 					<replacestring from="com.liferay.testpacl" to="com.liferay.portal.security.pacl.test" />
@@ -1465,10 +1461,10 @@ import java.util.HashMap;]]></replacevalue>
 			</filterchain>
 		</copy>
 
-		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF">
+		<copy overwrite="true" todir="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes">
 			<fileset
-				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src/META-INF"
-				includes="base-spring.xml,hibernate-spring.xml,infrastructure-spring.xml,messaging-spring.xml"
+				dir="${lp.plugins.dir}/portlets/test-pacl-portlet/docroot/WEB-INF/src"
+				includes="portal.properties,content/**,META-INF/base-spring.xml,META-INF/hibernate-spring.xml,META-INF/infrastructure-spring.xml,META-INF/messaging-spring.xml"
 			/>
 			<filterchain>
 				<tokenfilter>
