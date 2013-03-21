@@ -759,8 +759,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					</not>
 				</and>
 				<then>
-					<var name="test.type" value="functional" />
 					<var name="test.dir" value="functional-generated" />
+					<var name="test.type" value="functional" />
 				</then>
 			</elseif>
 			<elseif>
