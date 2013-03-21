@@ -88,6 +88,18 @@ public abstract class BaseSocialActivityInterpreter
 		return null;
 	}
 
+	protected String buildLink(String link, String text) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">");
+		sb.append(text);
+		sb.append("</a>");
+
+		return sb.toString();
+	}
+
 	/**
 	 * @deprecated As of 6.2.0
 	 */
@@ -433,7 +445,7 @@ public abstract class BaseSocialActivityInterpreter
 			return title;
 		}
 
-		return createLink(link, title);
+		return buildLink(link, title);
 	}
 
 	protected String wrapLink(
@@ -445,19 +457,7 @@ public abstract class BaseSocialActivityInterpreter
 			return title;
 		}
 
-		return createLink(link, title);
-	}
-
-	private String createLink(String link, String text) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("<a href=\"");
-		sb.append(link);
-		sb.append("\">");
-		sb.append(text);
-		sb.append("</a>");
-
-		return sb.toString();
+		return buildLink(link, title);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

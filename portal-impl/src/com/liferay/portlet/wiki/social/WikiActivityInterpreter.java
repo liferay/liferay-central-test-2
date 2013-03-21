@@ -60,6 +60,8 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			(activityType ==
 				SocialActivityConstants.TYPE_RESTORE_ATTACHMENT_FROM_TRASH)) {
 
+			String link = null;
+
 			FileEntry fileEntry = null;
 
 			try {
@@ -79,8 +81,6 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 
 			String fileEntryTitle = activity.getExtraDataValue("title");
-
-			String link = null;
 
 			if ((fileVersion != null) && !fileVersion.isInTrash()) {
 				StringBundler sb = new StringBundler(9);
