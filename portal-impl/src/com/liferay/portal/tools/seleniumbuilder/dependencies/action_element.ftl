@@ -7,7 +7,6 @@
 <#assign x = action?last_index_of("#")>
 
 ${seleniumBuilderFileUtil.getVariableName(action?substring(0, x))}Action.${seleniumBuilderFileUtil.getVariableName(action?substring(x + 1))}(
-
 	<#list 1..seleniumBuilderContext.getFunctionLocatorCount(action?substring(x + 1)) as i>
 		<#if actionElement.attributeValue("locator${i}")??>
 			<#assign actionLocator = actionElement.attributeValue("locator${i}")>
