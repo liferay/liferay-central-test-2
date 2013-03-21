@@ -697,6 +697,7 @@ public class DLImpl implements DL {
 		}
 
 		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title)));
+
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getUuid());
 
