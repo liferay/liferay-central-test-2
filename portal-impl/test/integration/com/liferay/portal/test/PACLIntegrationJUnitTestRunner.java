@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,7 +44,7 @@ public class PACLIntegrationJUnitTestRunner
 	public PACLIntegrationJUnitTestRunner(Class<?> clazz)
 		throws InitializationError {
 
-		super(wrapTestClass(clazz));
+		super(_wrapTestClass(clazz));
 	}
 
 	@Override
@@ -78,15 +81,19 @@ public class PACLIntegrationJUnitTestRunner
 		_initialized = true;
 	}
 
-	private static Class<?> wrapTestClass(Class<?> clazz)
+	protected static final String RESOURCE_PATH =
+		"com/liferay/portal/security/pacl/test/dependencies";
+
+	private static Class<?> _wrapTestClass(Class<?> clazz)
 		throws InitializationError {
 
 		try {
-			URL location =
-				clazz.getProtectionDomain().getCodeSource().getLocation();
+			ProtectionDomain protectionDomain = clazz.getProtectionDomain();
+
+			CodeSource codeSource = protectionDomain.getCodeSource();
 
 			ClassLoader classLoader = new PACLClassLoader(
-				new URL[] {location}, clazz.getClassLoader());
+				new URL[] {codeSource.getLocation()}, clazz.getClassLoader());
 
 			return Class.forName(clazz.getName(), true, classLoader);
 		}
@@ -95,10 +102,8 @@ public class PACLIntegrationJUnitTestRunner
 		}
 	}
 
-	private static final String _packageBasePath =
+	private static final String _PACKAGE_PATH =
 		"com.liferay.portal.security.pacl.test.";
-	protected static final String _resourceBasePath =
-		"com/liferay/portal/security/pacl/test/dependencies";
 
 	private static boolean _initialized = false;
 
@@ -118,7 +123,7 @@ public class PACLIntegrationJUnitTestRunner
 				String path = url.getPath();
 
 				path = path.substring(
-					0, path.length() - _resourceBasePath.length() - 1);
+					0, path.length() - RESOURCE_PATH.length() - 1);
 
 				path = path.concat(name);
 
@@ -129,12 +134,10 @@ public class PACLIntegrationJUnitTestRunner
 				}
 			}
 
-			// child first
+			URL url = findResource(name);
 
-			URL resource = findResource(name);
-
-			if (resource != null) {
-				return resource;
+			if (url != null) {
+				return url;
 			}
 
 			return super.getResource(name);
@@ -142,20 +145,20 @@ public class PACLIntegrationJUnitTestRunner
 
 		@Override
 		public URL findResource(String name) {
-			if (_resourceCache.containsKey(name)) {
-				return _resourceCache.get(name);
+			if (_urls.containsKey(name)) {
+				return _urls.get(name);
 			}
 
 			URL resource = null;
 
-			if (!name.contains(_resourceBasePath)) {
+			if (!name.contains(RESOURCE_PATH)) {
 				String newName = name;
 
 				if (!newName.startsWith(StringPool.SLASH)) {
 					newName = StringPool.SLASH.concat(newName);
 				}
 
-				newName = _resourceBasePath.concat(newName);
+				newName = RESOURCE_PATH.concat(newName);
 
 				resource = super.findResource(newName);
 			}
@@ -165,7 +168,7 @@ public class PACLIntegrationJUnitTestRunner
 			}
 
 			if (resource != null) {
-				_resourceCache.put(name, resource);
+				_urls.put(name, resource);
 			}
 
 			return resource;
@@ -173,14 +176,14 @@ public class PACLIntegrationJUnitTestRunner
 
 		@Override
 		public Class<?> loadClass(String name) throws ClassNotFoundException {
-			if (name.startsWith(_packageBasePath)) {
-				if (_classCache.containsKey(name)) {
-					return _classCache.get(name);
+			if (name.startsWith(_PACKAGE_PATH)) {
+				if (_classes.containsKey(name)) {
+					return _classes.get(name);
 				}
 
 				Class<?> clazz = super.findClass(name);
 
-				_classCache.put(name, clazz);
+				_classes.put(name, clazz);
 
 				return clazz;
 			}
@@ -192,14 +195,14 @@ public class PACLIntegrationJUnitTestRunner
 		protected synchronized Class<?> loadClass(String name, boolean resolve)
 			throws ClassNotFoundException {
 
-			if (name.startsWith(_packageBasePath)) {
-				if (_classCache.containsKey(name)) {
-					return _classCache.get(name);
+			if (name.startsWith(_PACKAGE_PATH)) {
+				if (_classes.containsKey(name)) {
+					return _classes.get(name);
 				}
 
 				Class<?> clazz = super.findClass(name);
 
-				_classCache.put(name, clazz);
+				_classes.put(name, clazz);
 
 				return clazz;
 			}
@@ -207,10 +210,9 @@ public class PACLIntegrationJUnitTestRunner
 			return super.loadClass(name, resolve);
 		}
 
-		private Map<String, Class<?>> _classCache =
+		private Map<String, Class<?>> _classes =
 			new ConcurrentHashMap<String, Class<?>>();
-		private Map<String, URL> _resourceCache =
-			new ConcurrentHashMap<String, URL>();
+		private Map<String, URL> _urls = new ConcurrentHashMap<String, URL>();
 
 	}
 

@@ -34,12 +34,11 @@ import org.springframework.mock.web.MockServletContext;
 /**
  * @author Raymond Augé
  */
-public class PACLExecutionTestListener
-	extends AbstractExecutionTestListener {
+public class PACLExecutionTestListener extends AbstractExecutionTestListener {
 
 	@Override
 	public void runAfterClass(TestContext testContext) {
-		HotDeployEvent hotDeployEvent = _eventsMap.remove(
+		HotDeployEvent hotDeployEvent = _hotDeployEvents.remove(
 			testContext.getClazz());
 
 		if (hotDeployEvent == null) {
@@ -99,13 +98,11 @@ public class PACLExecutionTestListener
 			PortletClassLoaderUtil.setServletContextName(null);
 		}
 
-		_eventsMap.put(clazz, hotDeployEvent);
+		_hotDeployEvents.put(clazz, hotDeployEvent);
 	}
 
-	private static Map<Class<?>, HotDeployEvent> _eventsMap =
+	private static Map<Class<?>, HotDeployEvent> _hotDeployEvents =
 		new HashMap<Class<?>, HotDeployEvent>();
-	private static final String _resourceBasePath =
-		PACLIntegrationJUnitTestRunner._resourceBasePath;
 
 	private static class PACLResourceLoader implements ResourceLoader {
 
@@ -117,7 +114,8 @@ public class PACLExecutionTestListener
 			ClassLoader classLoader = getClassLoader();
 
 			return new ClassPathResource(
-				_resourceBasePath.concat(location), classLoader);
+				PACLIntegrationJUnitTestRunner.RESOURCE_PATH + location,
+				classLoader);
 		}
 
 		public ClassLoader getClassLoader() {
