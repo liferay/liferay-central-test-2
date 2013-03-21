@@ -32,18 +32,18 @@ public class UpgradePortletId extends UpgradeProcess {
 
 		// This is only tested to work on instanceable portlets
 
-		String[][] portletIdsArray = getPortletIdsArray();
+		String[][] renamePortletIdsArray = getRenamePortletIdsArray();
 
-		for (String[] portletIds : portletIdsArray) {
-			String oldRootPortletId = portletIds[0];
-			String newRootPortletId = portletIds[1];
+		for (String[] renamePortletIds : renamePortletIdsArray) {
+			String oldRootPortletId = renamePortletIds[0];
+			String newRootPortletId = renamePortletIds[1];
 
 			updatePortlet(oldRootPortletId, newRootPortletId);
 			updateLayouts(oldRootPortletId, newRootPortletId);
 		}
 	}
 
-	protected String[][] getPortletIdsArray() {
+	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
 			new String[] {
 				"109", "1_WAR_webformportlet"

@@ -161,7 +161,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 	}
 
 	@Override
-	protected String[][] getPortletIdsArray() {
+	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
 			new String[] {
 				_OLD_ROOT_PORTLET_ID, _NEW_ROOT_PORTLET_ID
