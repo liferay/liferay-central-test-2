@@ -3177,6 +3177,10 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringDynamicDataSourceXml() throws Exception {
+		if (Validator.isNull(_springDynamicDataSourceFileName)) {
+			return;
+		}
+
 		File ejbFile = new File(_springDynamicDataSourceFileName);
 
 		if (ejbFile.exists()) {
