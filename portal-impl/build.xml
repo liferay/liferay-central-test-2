@@ -1441,8 +1441,8 @@ import java.util.HashMap;]]></replacevalue>
 		return results;
 	}]]></replacevalue>
 		</replace>
- 
- 		<replaceregexp
+
+		<replaceregexp
 			flags="s"
 			file="test/integration/com/liferay/portal/security/pacl/test/messaging/TestPACLMessageListener.java"
 			match="long userId = (.*)"
