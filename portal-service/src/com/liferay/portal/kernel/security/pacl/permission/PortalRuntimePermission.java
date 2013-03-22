@@ -160,6 +160,33 @@ public class PortalRuntimePermission extends BasicPermission {
 	private String _servletContextName;
 	private Object _subject;
 
+	private static class NoPACL implements PACL {
+
+		public void checkExpandoBridge(String className) {
+		}
+
+		public void checkGetBeanProperty(
+			String servletContextName, Class<?> clazz, String property) {
+		}
+
+		public void checkGetClassLoader(String classLoaderReferenceId) {
+		}
+
+		public void checkPortletBagPool(String portletId) {
+		}
+
+		public void checkSearchEngine(String searchEngineId) {
+		}
+
+		public void checkSetBeanProperty(
+			String servletContextName, Class<?> clazz, String property) {
+		}
+
+		public void checkThreadPoolExecutor(String name) {
+		}
+
+	}
+
 	public static interface PACL {
 
 		public void checkExpandoBridge(String className);
@@ -177,54 +204,6 @@ public class PortalRuntimePermission extends BasicPermission {
 			String servletContextName, Class<?> clazz, String property);
 
 		public void checkThreadPoolExecutor(String name);
-
-	}
-
-	private static class NoPACL implements PACL {
-
-		public void checkExpandoBridge(String className) {
-
-			// no operation
-
-		}
-
-		public void checkGetBeanProperty(
-			String servletContextName, Class<?> clazz, String property) {
-
-			// no operation
-
-		}
-
-		public void checkGetClassLoader(String classLoaderReferenceId) {
-
-			// no operation
-
-		}
-
-		public void checkPortletBagPool(String portletId) {
-
-			// no operation
-
-		}
-
-		public void checkSearchEngine(String searchEngineId) {
-
-			// no operation
-
-		}
-
-		public void checkSetBeanProperty(
-			String servletContextName, Class<?> clazz, String property) {
-
-			// no operation
-
-		}
-
-		public void checkThreadPoolExecutor(String name) {
-
-			// no operation
-
-		}
 
 	}
 
