@@ -380,6 +380,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 			return requestDispatcher;
 		}
+
 	}
 
 	private static class DoDoPrivilegedPACL implements DoPrivilegedUtil.PACL {
