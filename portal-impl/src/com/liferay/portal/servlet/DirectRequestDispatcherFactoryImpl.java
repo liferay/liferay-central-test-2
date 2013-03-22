@@ -125,13 +125,6 @@ public class DirectRequestDispatcherFactoryImpl
 
 	private static PACL _pacl = new NoPACL();
 
-	public static interface PACL {
-
-		public RequestDispatcher getRequestDispatcher(
-			ServletContext servletContext, RequestDispatcher requestDispatcher);
-
-	}
-
 	private static class NoPACL implements PACL {
 
 		public RequestDispatcher getRequestDispatcher(
@@ -140,6 +133,14 @@ public class DirectRequestDispatcherFactoryImpl
 
 			return requestDispatcher;
 		}
+
+	}
+
+	public static interface PACL {
+
+		public RequestDispatcher getRequestDispatcher(
+			ServletContext servletContext, RequestDispatcher requestDispatcher);
+
 	}
 
 }
