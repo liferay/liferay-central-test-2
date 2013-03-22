@@ -97,7 +97,6 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		}
 	}
 
-	
 	/**
 	 * Deletes the trash entries with the primary keys.
 	 *
