@@ -43,27 +43,22 @@ public class PortalMessageBusPermission extends BasicPermission {
 
 	private String _destinationName;
 
+	private static class NoPACL implements PACL {
+
+		public void checkListen(String destinationName) {
+		}
+
+		public void checkSend(String destinationName) {
+		}
+
+	}
+
 	public static interface PACL {
 
 		public void checkListen(String destinationName);
 
 		public void checkSend(String destinationName);
 
-	}
-
-	private static class NoPACL implements PACL {
-
-		public void checkListen(String destinationName) {
-
-			// no operation
-
-		}
-
-		public void checkSend(String destinationName) {
-
-			// no operation
-
-		}
 	}
 
 }
