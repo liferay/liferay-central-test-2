@@ -293,7 +293,9 @@ public class SeleniumBuilderFileUtil {
 		for (Attribute attribute : attributes) {
 			String attributeName = attribute.getName();
 
-			if (ArrayUtil.contains(allowedExecuteAttributeNames, attributeName)) {
+			if (ArrayUtil.contains(
+					allowedExecuteAttributeNames, attributeName)) {
+
 				hasAllowedAttributeName = true;
 
 				break;
