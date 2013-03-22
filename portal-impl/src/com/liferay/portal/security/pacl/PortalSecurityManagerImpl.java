@@ -60,6 +60,7 @@ import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import sun.reflect.Reflection;
+
 import sun.security.util.SecurityConstants;
 
 /**
@@ -624,7 +625,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 			if (clazz == callerClass) {
 
-				// The bean is calling it's own getBean method.
+				// The bean is calling its own getBean method
 
 				return;
 			}
