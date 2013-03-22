@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 public class BeanLocatorTest {
 
 	@Test
-	public void plugin1() throws Exception {
+	public void testPlugin1() throws Exception {
 		try {
 			PortletBeanLocatorUtil.getBeanLocator("a-test-hook");
 		}
@@ -48,7 +48,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin2() throws Exception {
+	public void testPlugin2() throws Exception {
 		try {
 			PortletBeanLocatorUtil.getBeanLocator("chat-portlet");
 
@@ -59,7 +59,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin3() throws Exception {
+	public void testPlugin3() throws Exception {
 		try {
 			PortletBeanLocatorUtil.getBeanLocator("flash-portlet");
 
@@ -70,7 +70,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin4() throws Exception {
+	public void testPlugin4() throws Exception {
 		try {
 			PortletBeanLocatorUtil.locate("a-test-hook", "liferayDataSource");
 		}
@@ -80,7 +80,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin5() throws Exception {
+	public void testPlugin5() throws Exception {
 		try {
 			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
 				"a-test-hook");
@@ -93,7 +93,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin6() throws Exception {
+	public void testPlugin6() throws Exception {
 		try {
 			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
 				"a-test-hook");
@@ -107,7 +107,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void plugin7() throws Exception {
+	public void testPlugin7() throws Exception {
 		try {
 			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
 				"a-test-hook");
@@ -120,7 +120,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal1() throws Exception {
+	public void testPortal1() throws Exception {
 		try {
 			PortalBeanLocatorUtil.getBeanLocator();
 
@@ -131,7 +131,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal2() throws Exception {
+	public void testPortal2() throws Exception {
 		try {
 			PortalBeanLocatorUtil.locate(PortalUUID.class);
 
@@ -142,7 +142,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal3() throws Exception {
+	public void testPortal3() throws Exception {
 		try {
 			PortalBeanLocatorUtil.locate(PortalUUID.class.getName());
 
@@ -154,7 +154,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal4() throws Exception {
+	public void testPortal4() throws Exception {
 		try {
 			PortalBeanLocatorUtil.locate(SAXReader.class);
 		}
@@ -164,7 +164,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal5() throws Exception {
+	public void testPortal5() throws Exception {
 		try {
 			PortalBeanLocatorUtil.locate(SAXReader.class.getName());
 		}
@@ -174,7 +174,7 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal6() throws Exception {
+	public void testPortal6() throws Exception {
 		try {
 			PortalBeanLocatorUtil.reset();
 
@@ -185,14 +185,20 @@ public class BeanLocatorTest {
 	}
 
 	@Test
-	public void portal7() throws Exception {
+	public void testPortal7() throws Exception {
 		try {
 			PortalBeanLocatorUtil.setBeanLocator(
 				new BeanLocator() {
 
-					public Object locate(String name)
-						throws BeanLocatorException {
+					public ClassLoader getClassLoader() {
+						return null;
+					}
 
+					public String[] getNames() {
+						return null;
+					}
+
+					public Class<?> getType(String name) {
 						return null;
 					}
 
@@ -202,17 +208,7 @@ public class BeanLocatorTest {
 						return null;
 					}
 
-					public Class<?> getType(String name)
-						throws BeanLocatorException {
-
-						return null;
-					}
-
-					public String[] getNames() {
-						return null;
-					}
-
-					public ClassLoader getClassLoader() {
+					public Object locate(String name) {
 						return null;
 					}
 

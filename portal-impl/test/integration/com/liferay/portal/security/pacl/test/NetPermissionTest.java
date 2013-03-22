@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.security.pacl.PACLExecutionTestListener;
 import com.liferay.portal.security.pacl.PACLIntegrationJUnitTestRunner;
 
-import java.io.IOException;
-
 import java.net.Authenticator;
 import java.net.ProxySelector;
 import java.net.URL;
@@ -57,9 +55,7 @@ public class NetPermissionTest {
 				new URLStreamHandler() {
 
 					@Override
-					protected URLConnection openConnection(URL u)
-						throws IOException {
-
+					protected URLConnection openConnection(URL url) {
 						return null;
 					}
 

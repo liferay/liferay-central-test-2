@@ -40,85 +40,81 @@ import org.junit.runner.RunWith;
 public class HookTest {
 
 	@Test
-	public void indexer1()
-		throws Exception {
-
+	public void testIndexer1() throws Exception {
 		Assert.assertFalse(OrganizationIndexerPostProcessor.isInstantiated());
 	}
 
 	@Test
-	public void indexer2() throws Exception {
+	public void testIndexer2() throws Exception {
 		Assert.assertTrue(UserIndexerPostProcessor.isInstantiated());
 	}
 
 	@Test
-	public void language1() throws Exception {
+	public void testLanguage1() throws Exception {
 		Assert.assertEquals(
 			LanguageUtil.get(new Locale("es"), "stars"), "Estrellas");
 	}
 
 	@Test
-	public void language2() throws Exception {
+	public void testLanguage2() throws Exception {
 		Assert.assertEquals(LanguageUtil.get(Locale.ITALY, "stars"), "Stelle");
 	}
 
 	@Test
-	public void language3() throws Exception {
+	public void testLanguage3() throws Exception {
 		Assert.assertEquals(
 			LanguageUtil.get(new Locale("pt", "BR"), "stars"), "Ricardo Kaka");
 	}
 
 	@Test
-	public void language4() throws Exception {
+	public void testLanguage4() throws Exception {
 		Assert.assertEquals(
 			LanguageUtil.get(new Locale("pt", "PT"), "stars"),
 			"Cristiano Ronaldo");
 	}
 
 	@Test
-	public void language5() throws Exception {
+	public void testLanguage5() throws Exception {
 		Assert.assertEquals(
 			LanguageUtil.get(Locale.UK, "stars"), "David Beckham");
 	}
 
 	@Test
-	public void language6() throws Exception {
+	public void testLanguage6() throws Exception {
 		Assert.assertEquals(LanguageUtil.get(Locale.US, "stars"), "Stars");
 	}
 
 	@Test
-	public void portalProperties1() throws Exception {
+	public void testPortalProperties1() throws Exception {
 		Assert.assertFalse(LanguageUtil.isBetaLocale(Locale.US));
 	}
 
 	@Test
-	public void portalProperties2() throws Exception {
+	public void testPortalProperties2() throws Exception {
 		String phoneNumber = PhoneNumberFormatUtil.format("123");
 
 		Assert.assertTrue(phoneNumber.startsWith("(TEST"));
 	}
 
 	@Test
-	public void services1() throws Exception {
+	public void testServices1() throws Exception {
 		Assert.assertTrue(
 			BlogsEntryLocalServiceUtil.getBlogsEntriesCount() < 0);
 	}
 
 	@Test
-	public void services2()
-		throws Exception {
-
+	public void testServices2() throws Exception {
 		Assert.assertTrue(
 			BlogsStatsUserLocalServiceUtil.getBlogsStatsUsersCount() >= 0);
 	}
 
 	@Test
-	public void struts1() throws Exception {
+	public void testStruts1() throws Exception {
 		Assert.assertFalse(FailureStrutsAction.isInstantiated());
 	}
 
 	@Test
-	public void struts2() throws Exception {
+	public void testStruts2() throws Exception {
 		Assert.assertTrue(SuccessStrutsAction.isInstantiated());
 	}
 

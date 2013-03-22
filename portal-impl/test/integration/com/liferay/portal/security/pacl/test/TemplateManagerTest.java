@@ -37,9 +37,7 @@ import org.junit.runner.RunWith;
 public class TemplateManagerTest {
 
 	@Test
-	public void test1()
-		throws Exception {
-
+	public void test1() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL,
 			new StringTemplateResource("123.ftl", "Hello World!"),
@@ -55,9 +53,23 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test2()
-		throws Exception {
+	public void test10() throws Exception {
+		Template template = TemplateManagerUtil.getTemplate(
+			TemplateConstants.LANG_TYPE_VM,
+			new StringTemplateResource("123.vm", "#set($sum = 5 + 6)$sum"),
+			TemplateContextType.STANDARD);
 
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+
+		template.processTemplate(unsyncStringWriter);
+
+		String result = unsyncStringWriter.toString();
+
+		Assert.assertEquals(11, GetterUtil.getInteger(result));
+	}
+
+	@Test
+	public void test2() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL,
 			new StringTemplateResource(
@@ -74,9 +86,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test3()
-		throws Exception {
-
+	public void test3() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL,
 			new StringTemplateResource(
@@ -93,9 +103,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test4()
-		throws Exception {
-
+	public void test4() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL,
 			new StringTemplateResource(
@@ -112,9 +120,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test5()
-		throws Exception {
-
+	public void test5() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_FTL,
 			new StringTemplateResource(
@@ -131,9 +137,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test6()
-		throws Exception {
-
+	public void test6() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_VM,
 			new StringTemplateResource("123.vm", "Hello World!"),
@@ -149,9 +153,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test7()
-		throws Exception {
-
+	public void test7() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_VM,
 			new StringTemplateResource(
@@ -168,9 +170,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test8()
-		throws Exception {
-
+	public void test8() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_VM,
 			new StringTemplateResource("123.vm", "#if (!$httpUtil)PASS#end"),
@@ -186,9 +186,7 @@ public class TemplateManagerTest {
 	}
 
 	@Test
-	public void test9()
-		throws Exception {
-
+	public void test9() throws Exception {
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateConstants.LANG_TYPE_VM,
 			new StringTemplateResource(
@@ -202,24 +200,6 @@ public class TemplateManagerTest {
 		String result = unsyncStringWriter.toString();
 
 		Assert.assertEquals("PASS", result);
-	}
-
-	@Test
-	public void test10()
-		throws Exception {
-
-		Template template = TemplateManagerUtil.getTemplate(
-			TemplateConstants.LANG_TYPE_VM,
-			new StringTemplateResource("123.vm", "#set($sum = 5 + 6)$sum"),
-			TemplateContextType.STANDARD);
-
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-
-		template.processTemplate(unsyncStringWriter);
-
-		String result = unsyncStringWriter.toString();
-
-		Assert.assertEquals(11, GetterUtil.getInteger(result));
 	}
 
 }

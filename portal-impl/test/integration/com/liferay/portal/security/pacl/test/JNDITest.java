@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
 public class JNDITest {
 
 	@Test
-	public void bind1() throws Exception {
+	public void testBind1() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -46,7 +46,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind2() throws Exception {
+	public void testBind2() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -58,7 +58,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind3() throws Exception {
+	public void testBind3() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -70,7 +70,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind4() throws Exception {
+	public void testBind4() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -82,7 +82,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind5() throws Exception {
+	public void testBind5() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -94,7 +94,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind6() throws Exception {
+	public void testBind6() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -106,7 +106,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void bind7() throws Exception {
+	public void testBind7() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -119,7 +119,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup1() throws Exception {
+	public void testLookup1() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -132,7 +132,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup2() throws Exception {
+	public void testLookup2() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -146,7 +146,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup3() throws Exception {
+	public void testLookup3() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -160,7 +160,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup4() throws Exception {
+	public void testLookup4() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -174,7 +174,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup5() throws Exception {
+	public void testLookup5() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -188,7 +188,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup6() throws Exception {
+	public void testLookup6() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -202,7 +202,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void lookup7() throws Exception {
+	public void testLookup7() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -216,7 +216,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind1() throws Exception {
+	public void testUnbind1() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -230,7 +230,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind2() throws Exception {
+	public void testUnbind2() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -244,7 +244,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind3() throws Exception {
+	public void testUnbind3() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -258,7 +258,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind4() throws Exception {
+	public void testUnbind4() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -272,7 +272,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind5() throws Exception {
+	public void testUnbind5() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -286,7 +286,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind6() throws Exception {
+	public void testUnbind6() throws Exception {
 		try {
 			Context context = new InitialContext();
 
@@ -300,7 +300,7 @@ public class JNDITest {
 	}
 
 	@Test
-	public void unbind7() throws Exception {
+	public void testUnbind7() throws Exception {
 		try {
 			Context context = new InitialContext();
 

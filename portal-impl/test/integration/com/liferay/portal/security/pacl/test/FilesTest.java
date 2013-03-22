@@ -37,11 +37,10 @@ import org.junit.runner.RunWith;
 public class FilesTest {
 
 	@Test
-	public void delete1()
-		throws Exception {
-
+	public void testDelete1() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			PortalFilePermission.checkDelete(file.getPath());
@@ -52,11 +51,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete2()
-		throws Exception {
-
+	public void testDelete2() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			SecurityManager securityManager = System.getSecurityManager();
@@ -69,11 +67,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete3()
-		throws Exception {
-
+	public void testDelete3() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			file.delete();
@@ -84,11 +81,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete4()
-		throws Exception {
-
+	public void testDelete4() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			FileUtil.delete(file);
@@ -99,9 +95,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete5()
-		throws Exception {
-
+	public void testDelete5() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -114,9 +108,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete6()
-		throws Exception {
-
+	public void testDelete6() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -131,7 +123,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete7() throws Exception {
+	public void testDelete7() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -144,7 +136,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void delete8() throws Exception {
+	public void testDelete8() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -157,7 +149,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute1() throws Exception {
+	public void testExecute1() throws Exception {
 		if (OSDetector.isWindows()) {
 			return;
 		}
@@ -174,7 +166,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute2() throws Exception {
+	public void testExecute2() throws Exception {
 		if (OSDetector.isWindows()) {
 			return;
 		}
@@ -190,7 +182,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute3() throws Exception {
+	public void testExecute3() throws Exception {
 		if (OSDetector.isWindows()) {
 			return;
 		}
@@ -207,9 +199,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute4() throws Exception {
+	public void testExecute4() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			Runtime runtime = Runtime.getRuntime();
@@ -223,7 +216,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute5() throws Exception {
+	public void testExecute5() throws Exception {
 		if (!OSDetector.isWindows()) {
 			return;
 		}
@@ -239,7 +232,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute6() throws Exception {
+	public void testExecute6() throws Exception {
 		if (!OSDetector.isWindows()) {
 			return;
 		}
@@ -256,7 +249,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void execute7() throws Exception {
+	public void testExecute7() throws Exception {
 		if (!OSDetector.isWindows()) {
 			return;
 		}
@@ -273,7 +266,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read1() throws Exception {
+	public void testRead1() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -285,7 +278,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read2() throws Exception {
+	public void testRead2() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -299,7 +292,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read3() throws Exception {
+	public void testRead3() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -311,7 +304,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read4() throws Exception {
+	public void testRead4() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
 
@@ -325,7 +318,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read5() throws Exception {
+	public void testRead5() throws Exception {
 		try {
 			PortalFilePermission.checkRead(PropsValues.LIFERAY_HOME);
 
@@ -336,7 +329,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read6() throws Exception {
+	public void testRead6() throws Exception {
 		try {
 			SecurityManager securityManager = System.getSecurityManager();
 
@@ -349,7 +342,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read7() throws Exception {
+	public void testRead7() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME);
 
@@ -362,7 +355,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void read8() throws Exception {
+	public void testRead8() throws Exception {
 		try {
 			FileUtil.read(PropsValues.LIFERAY_HOME);
 
@@ -373,11 +366,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write1()
-		throws Exception {
-
+	public void testWrite1() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			PortalFilePermission.checkWrite(file.getPath());
@@ -388,11 +380,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write2()
-		throws Exception {
-
+	public void testWrite2() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			SecurityManager securityManager = System.getSecurityManager();
@@ -405,11 +396,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write3()
-		throws Exception {
-
+	public void testWrite3() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			file.canWrite();
@@ -420,11 +410,10 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write4()
-		throws Exception {
-
+	public void testWrite4() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "pacl-test");
+
 			file = new File(file, "file1");
 
 			FileUtil.write(file, new byte[0]);
@@ -437,9 +426,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write5()
-		throws Exception {
-
+	public void testWrite5() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "file");
 
@@ -452,9 +439,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write6()
-		throws Exception {
-
+	public void testWrite6() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "file");
 
@@ -469,7 +454,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write7() throws Exception {
+	public void testWrite7() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "file");
 
@@ -482,7 +467,7 @@ public class FilesTest {
 	}
 
 	@Test
-	public void write8() throws Exception {
+	public void testWrite8() throws Exception {
 		try {
 			File file = new File(PropsValues.LIFERAY_HOME, "file");
 

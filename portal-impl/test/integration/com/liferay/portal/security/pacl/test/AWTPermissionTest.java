@@ -34,11 +34,11 @@ import org.junit.runner.RunWith;
 public class AWTPermissionTest {
 
 	@Test
-	public void test1()
-		throws Exception {
-
+	public void test1() throws Exception {
 		try {
-			Toolkit.getDefaultToolkit().addAWTEventListener(
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+			toolkit.addAWTEventListener(
 				new AWTEventListener() {
 
 					public void eventDispatched(AWTEvent event) {
@@ -54,11 +54,11 @@ public class AWTPermissionTest {
 	}
 
 	@Test
-	public void test2()
-		throws Exception {
-
+	public void test2() throws Exception {
 		try {
-			Toolkit.getDefaultToolkit().getSystemEventQueue();
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+			toolkit.getSystemEventQueue();
 		}
 		catch (SecurityException se) {
 			Assert.fail();

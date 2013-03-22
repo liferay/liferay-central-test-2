@@ -36,8 +36,9 @@ public class PortalServicesTest {
 	@Test
 	public void test1() throws Exception {
 
-		// We need getCompanyId() to work for our MessageBus listeners. Test a
-		// different, undeclared, method.
+		// We need CompanyLocalServiceUtil#getCompanyId to work for our message
+		// bus listeners. Test CompanyLocalServiceUtil#getCompanyByWebId since
+		// it is an unallowed method.
 
 		try {
 			CompanyLocalServiceUtil.getCompanyByWebId("liferay.com");

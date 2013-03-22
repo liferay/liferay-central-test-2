@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
 public class MessageBusTest {
 
 	@Test
-	public void listen1() throws Exception {
+	public void testListen1() throws Exception {
 		try {
 			Object value = MessageBusUtil.sendSynchronousMessage(
 				"liferay/test_pacl_listen_failure", "Listen Failure");
@@ -44,7 +44,7 @@ public class MessageBusTest {
 	}
 
 	@Test
-	public void listen2() throws Exception {
+	public void testListen2() throws Exception {
 		try {
 			Object value = MessageBusUtil.sendSynchronousMessage(
 				"liferay/test_pacl_listen_success", "Listen Success");
@@ -57,7 +57,7 @@ public class MessageBusTest {
 	}
 
 	@Test
-	public void send1() throws Exception {
+	public void testSend1() throws Exception {
 		try {
 			MessageBusUtil.sendMessage(
 				"liferay/test_pacl_send_failure", "Send Failure");
@@ -69,7 +69,7 @@ public class MessageBusTest {
 	}
 
 	@Test
-	public void send2() throws Exception {
+	public void testSend2() throws Exception {
 		try {
 			MessageBusUtil.sendMessage(
 				"liferay/test_pacl_send_success", "Send Success");

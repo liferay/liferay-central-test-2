@@ -41,7 +41,7 @@ import org.junit.runner.RunWith;
 public class BeanPropertyTest {
 
 	@Test
-	public void get1() throws Exception {
+	public void testGet1() throws Exception {
 		try {
 			PortalRuntimePermission.checkGetBeanProperty(HttpUtil.class);
 
@@ -52,7 +52,7 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void get2() throws Exception {
+	public void testGet2() throws Exception {
 		try {
 			JournalContentUtil.getJournalContent();
 
@@ -63,7 +63,7 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void get3() throws Exception {
+	public void testGet3() throws Exception {
 		try {
 			LanguageUtil.getLanguage();
 		}
@@ -73,7 +73,7 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void get4() throws Exception {
+	public void testGet4() throws Exception {
 		try {
 			PortalRuntimePermission.checkGetBeanProperty(PortalUtil.class);
 		}
@@ -83,7 +83,7 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void get5() throws Exception {
+	public void testGet5() throws Exception {
 		try {
 			LanguageUtil.getLocale("en_US");
 		}
@@ -93,11 +93,11 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void set1() throws Exception {
+	public void testSet1() throws Exception {
 		try {
-			EntityCacheUtil entityCacheUtil = new EntityCacheUtil();
+			EntityCache entityCache = EntityCacheUtil.getEntityCache();
 
-			EntityCache entityCache = entityCacheUtil.getEntityCache();
+			EntityCacheUtil entityCacheUtil = new EntityCacheUtil();
 
 			entityCacheUtil.setEntityCache(entityCache);
 
@@ -108,11 +108,11 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void set2() throws Exception {
+	public void testSet2() throws Exception {
 		try {
 			FinderCacheUtil finderCacheUtil = new FinderCacheUtil();
 
-			FinderCache finderCache = finderCacheUtil.getFinderCache();
+			FinderCache finderCache = FinderCacheUtil.getFinderCache();
 
 			finderCacheUtil.setFinderCache(finderCache);
 
@@ -123,12 +123,12 @@ public class BeanPropertyTest {
 	}
 
 	@Test
-	public void set3() throws Exception {
+	public void testSet3() throws Exception {
 		try {
 			PortalCustomSQLUtil portalCustomSQLUtil = new PortalCustomSQLUtil();
 
 			PortalCustomSQL portalCustomSQL =
-				portalCustomSQLUtil.getPortalCustomSQL();
+				PortalCustomSQLUtil.getPortalCustomSQL();
 
 			portalCustomSQLUtil.setPortalCustomSQL(portalCustomSQL);
 		}

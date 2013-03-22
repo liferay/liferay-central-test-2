@@ -36,8 +36,10 @@ import org.junit.runner.RunWith;
 @RunWith(PACLIntegrationJUnitTestRunner.class)
 public class ReflectionTest {
 
+	public static final String TEST_FIELD_1 = "TEST_FIELD_1";
+
 	@Test
-	public void plugin1() throws Exception {
+	public void testPlugin1() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -49,9 +51,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void plugin2()
-		throws Exception {
-
+	public void testPlugin2() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -67,9 +67,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void plugin3()
-		throws Exception {
-
+	public void testPlugin3() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -85,7 +83,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void plugin4() throws Exception {
+	public void testPlugin4() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -97,9 +95,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void plugin5()
-		throws Exception {
-
+	public void testPlugin5() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -113,7 +109,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void portal1() throws Exception {
+	public void testPortal1() throws Exception {
 		try {
 			Class<?> clazz = PropsKeys.class;
 
@@ -125,9 +121,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void portal2()
-		throws Exception {
-
+	public void testPortal2() throws Exception {
 		try {
 			Class<?> clazz = PropsKeys.class;
 
@@ -142,9 +136,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void portal3()
-		throws Exception {
-
+	public void testPortal3() throws Exception {
 		try {
 			Class<?> clazz = ReleaseInfo.class;
 
@@ -161,9 +153,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void portal4()
-		throws Exception {
-
+	public void testPortal4() throws Exception {
 		try {
 			Class<?> clazz = ReleaseInfo.class;
 
@@ -180,7 +170,7 @@ public class ReflectionTest {
 	}
 
 	@Test
-	public void portal5() throws Exception {
+	public void testPortal5() throws Exception {
 		try {
 			Class<?> clazz = UserLocalServiceUtil.class;
 
@@ -191,8 +181,6 @@ public class ReflectionTest {
 		catch (SecurityException se) {
 		}
 	}
-
-	public static final String TEST_FIELD_1 = "TEST_FIELD_1";
 
 	private static final String TEST_FIELD_2 = "TEST_FIELD_2";
 

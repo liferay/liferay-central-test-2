@@ -53,7 +53,7 @@ import org.junit.runner.RunWith;
 public class JavaSecurityTest {
 
 	@Test
-	public void accessController1() throws Exception {
+	public void testAccessController1() throws Exception {
 		try {
 			Permissions permissions = new Permissions();
 
@@ -85,7 +85,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void accessController2() throws Exception {
+	public void testAccessController2() throws Exception {
 		try {
 			Permissions permissions = new Permissions();
 
@@ -139,7 +139,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void accessController3() throws Exception {
+	public void testAccessController3() throws Exception {
 		try {
 			Permissions permissions = new Permissions();
 
@@ -184,7 +184,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void crypto1() throws Exception {
+	public void testCrypto1() throws Exception {
 		try {
 			KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
 
@@ -206,7 +206,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void crypto2() throws Exception {
+	public void testCrypto2() throws Exception {
 		try {
 			Mac mac = Mac.getInstance("HmacMD5");
 
@@ -227,7 +227,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void fileDescriptor1() throws Exception {
+	public void testFileDescriptor1() throws Exception {
 		try {
 			new FileInputStream(FileDescriptor.in);
 
@@ -238,7 +238,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void fileDescriptor2() throws Exception {
+	public void testFileDescriptor2() throws Exception {
 		try {
 			new FileOutputStream(FileDescriptor.out);
 
@@ -249,7 +249,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void loadLibrary1() throws Exception {
+	public void testLoadLibrary1() throws Exception {
 		try {
 			System.loadLibrary("test_a");
 
@@ -262,7 +262,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void loadLibrary2() throws Exception {
+	public void testLoadLibrary2() throws Exception {
 		try {
 			System.loadLibrary("test_b");
 		}
@@ -274,7 +274,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void policy1() throws Exception {
+	public void testPolicy1() throws Exception {
 		try {
 			Policy.getPolicy();
 
@@ -285,7 +285,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void policy2() throws Exception {
+	public void testPolicy2() throws Exception {
 		try {
 			Policy.setPolicy(null);
 
@@ -296,7 +296,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void protectionDomain1() throws Exception {
+	public void testProtectionDomain1() throws Exception {
 		try {
 			PortalUtil.class.getProtectionDomain();
 
@@ -307,7 +307,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void protectionDomain2() throws Exception {
+	public void testProtectionDomain2() throws Exception {
 		try {
 			getClass().getProtectionDomain();
 
@@ -318,7 +318,7 @@ public class JavaSecurityTest {
 	}
 
 	@Test
-	public void securityManager1() throws Exception {
+	public void testSecurityManager1() throws Exception {
 		try {
 			new SecurityManager();
 

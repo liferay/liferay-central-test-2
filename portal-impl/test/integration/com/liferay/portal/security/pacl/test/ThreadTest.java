@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 public class ThreadTest {
 
 	@Test
-	public void current1() throws Exception {
+	public void testCurrent1() throws Exception {
 		try {
 			Thread.currentThread().checkAccess();
 		}
@@ -48,7 +48,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void current2() throws Exception {
+	public void testCurrent2() throws Exception {
 		try {
 			Thread.currentThread().getContextClassLoader();
 
@@ -59,7 +59,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void current3() throws Exception {
+	public void testCurrent3() throws Exception {
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 
@@ -72,7 +72,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void current4() throws Exception {
+	public void testCurrent4() throws Exception {
 		try {
 			Thread.getAllStackTraces();
 
@@ -83,7 +83,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void current5() throws Exception {
+	public void testCurrent5() throws Exception {
 		try {
 			Thread.setDefaultUncaughtExceptionHandler(null);
 
@@ -94,7 +94,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void messageBus1() throws Exception {
+	public void testMessageBus1() throws Exception {
 		Message message = new Message();
 
 		Map<String, Object> results =
@@ -105,7 +105,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void messageBus2() throws Exception {
+	public void testMessageBus2() throws Exception {
 		Message message = new Message();
 
 		Map<String, Object> results =
@@ -116,7 +116,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void new1() throws Exception {
+	public void testNew1() throws Exception {
 		try {
 			Thread thread = new Thread() {
 
@@ -134,202 +134,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void new2()
-		throws Exception {
-
-		try {
-			Thread thread = new Thread() {
-
-				@Override
-				public ClassLoader getContextClassLoader() {
-					return super.getContextClassLoader();
-				}
-
-				@Override
-				public void run() {
-				}
-
-			};
-
-			thread.start();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void new3()
-		throws Exception {
-
-		try {
-			Thread thread = new Thread() {
-
-				@Override
-				public void setContextClassLoader(ClassLoader cl) {
-					super.setContextClassLoader(cl);
-				}
-
-				@Override
-				public void run() {
-				}
-
-			};
-
-			thread.start();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void new4() throws Exception {
-		try {
-			Thread thread = new Thread();
-
-			thread.start();
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void new5() throws Exception {
-		try {
-			Thread thread = new Thread();
-
-			thread.getStackTrace();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void new6() throws Exception {
-		FutureTask<Exception> futureTask = new FutureTask<Exception>(
-			new Callable<Exception>() {
-
-				public Exception call() throws Exception {
-					try {
-						Thread.currentThread().checkAccess();
-					}
-					catch (SecurityException se) {
-						return se;
-					}
-
-					return null;
-				}
-
-			}
-		);
-
-		Thread thread = new Thread(futureTask);
-
-		thread.start();
-
-		Exception exception = futureTask.get();
-
-		Assert.assertNull(exception);
-	}
-
-	@Test
-	public void new7() throws Exception {
-		FutureTask<Exception> futureTask = new FutureTask<Exception>(
-			new Callable<Exception>() {
-
-				public Exception call() throws Exception {
-					try {
-						Thread.getAllStackTraces();
-					}
-					catch (SecurityException se) {
-						return se;
-					}
-
-					return null;
-				}
-
-			}
-		);
-
-		Thread thread = new Thread(futureTask);
-
-		thread.start();
-
-		Exception exception = futureTask.get();
-
-		Assert.assertNotNull(exception);
-		Assert.assertTrue(exception instanceof SecurityException);
-	}
-
-	@Test
-	public void new8()
-		throws Exception {
-
-		FutureTask<Exception> futureTask = new FutureTask<Exception>(
-			new Callable<Exception>() {
-
-				public Exception call() throws Exception {
-					try {
-						Thread.currentThread().getContextClassLoader();
-					}
-					catch (SecurityException se) {
-						return se;
-					}
-
-					return null;
-				}
-
-			}
-		);
-
-		Thread thread = new Thread(futureTask);
-
-		thread.start();
-
-		Exception exception = futureTask.get();
-
-		Assert.assertNotNull(exception);
-		Assert.assertTrue(exception instanceof SecurityException);
-	}
-
-	@Test
-	public void new9() throws Exception {
-		FutureTask<Exception> futureTask = new FutureTask<Exception>(
-			new Callable<Exception>() {
-
-				public Exception call() throws Exception {
-					try {
-						Thread.currentThread().getStackTrace();
-					}
-					catch (SecurityException se) {
-						return se;
-					}
-
-					return null;
-				}
-
-			}
-		);
-
-		Thread thread = new Thread(futureTask);
-
-		thread.start();
-
-		Exception exception = futureTask.get();
-
-		Assert.assertNull(exception);
-	}
-
-	@Test
-	public void new10()
-		throws Exception {
-
+	public void testNew10() throws Exception {
 		final ClassLoader classLoader = getClass().getClassLoader();
 
 		FutureTask<Exception> futureTask = new FutureTask<Exception>(
@@ -361,9 +166,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void new11()
-		throws Exception {
-
+	public void testNew11() throws Exception {
 		FutureTask<Exception> futureTask = new FutureTask<Exception>(
 			new Callable<Exception>() {
 
@@ -392,7 +195,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void new12() throws Exception {
+	public void testNew12() throws Exception {
 		try {
 			Thread thread = new Thread(
 				new Runnable() {
@@ -411,7 +214,194 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor1() throws Exception {
+	public void testNew2() throws Exception {
+		try {
+			Thread thread = new Thread() {
+
+				@Override
+				public ClassLoader getContextClassLoader() {
+					return super.getContextClassLoader();
+				}
+
+				@Override
+				public void run() {
+				}
+
+			};
+
+			thread.start();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testNew3() throws Exception {
+		try {
+			Thread thread = new Thread() {
+
+				@Override
+				public void setContextClassLoader(ClassLoader cl) {
+					super.setContextClassLoader(cl);
+				}
+
+				@Override
+				public void run() {
+				}
+
+			};
+
+			thread.start();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testNew4() throws Exception {
+		try {
+			Thread thread = new Thread();
+
+			thread.start();
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testNew5() throws Exception {
+		try {
+			Thread thread = new Thread();
+
+			thread.getStackTrace();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testNew6() throws Exception {
+		FutureTask<Exception> futureTask = new FutureTask<Exception>(
+			new Callable<Exception>() {
+
+				public Exception call() throws Exception {
+					try {
+						Thread.currentThread().checkAccess();
+					}
+					catch (SecurityException se) {
+						return se;
+					}
+
+					return null;
+				}
+
+			}
+		);
+
+		Thread thread = new Thread(futureTask);
+
+		thread.start();
+
+		Exception exception = futureTask.get();
+
+		Assert.assertNull(exception);
+	}
+
+	@Test
+	public void testNew7() throws Exception {
+		FutureTask<Exception> futureTask = new FutureTask<Exception>(
+			new Callable<Exception>() {
+
+				public Exception call() throws Exception {
+					try {
+						Thread.getAllStackTraces();
+					}
+					catch (SecurityException se) {
+						return se;
+					}
+
+					return null;
+				}
+
+			}
+		);
+
+		Thread thread = new Thread(futureTask);
+
+		thread.start();
+
+		Exception exception = futureTask.get();
+
+		Assert.assertNotNull(exception);
+		Assert.assertTrue(exception instanceof SecurityException);
+	}
+
+	@Test
+	public void testNew8() throws Exception {
+		FutureTask<Exception> futureTask = new FutureTask<Exception>(
+			new Callable<Exception>() {
+
+				public Exception call() throws Exception {
+					try {
+						Thread.currentThread().getContextClassLoader();
+					}
+					catch (SecurityException se) {
+						return se;
+					}
+
+					return null;
+				}
+
+			}
+		);
+
+		Thread thread = new Thread(futureTask);
+
+		thread.start();
+
+		Exception exception = futureTask.get();
+
+		Assert.assertNotNull(exception);
+		Assert.assertTrue(exception instanceof SecurityException);
+	}
+
+	@Test
+	public void testNew9() throws Exception {
+		FutureTask<Exception> futureTask = new FutureTask<Exception>(
+			new Callable<Exception>() {
+
+				public Exception call() throws Exception {
+					try {
+						Thread.currentThread().getStackTrace();
+					}
+					catch (SecurityException se) {
+						return se;
+					}
+
+					return null;
+				}
+
+			}
+		);
+
+		Thread thread = new Thread(futureTask);
+
+		thread.start();
+
+		Exception exception = futureTask.get();
+
+		Assert.assertNull(exception);
+	}
+
+	@Test
+	public void testPortalExecutor1() throws Exception {
 		try {
 			PortalExecutorManagerUtil.execute(
 				"liferay/hot_deploy",
@@ -431,7 +421,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor2() throws Exception {
+	public void testPortalExecutor2() throws Exception {
 		try {
 			PortalExecutorManagerUtil.execute(
 				"liferay/test_pacl",
@@ -450,7 +440,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor3() throws Exception {
+	public void testPortalExecutor3() throws Exception {
 		try {
 			PortalExecutorManagerUtil.getPortalExecutor("liferay/hot_deploy");
 
@@ -461,7 +451,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor4() throws Exception {
+	public void testPortalExecutor4() throws Exception {
 		try {
 			PortalExecutorManagerUtil.getPortalExecutor("liferay/test_pacl");
 		}
@@ -471,7 +461,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor5() throws Exception {
+	public void testPortalExecutor5() throws Exception {
 		try {
 			PortalExecutorManagerUtil.shutdown("liferay/hot_deploy");
 
@@ -482,7 +472,7 @@ public class ThreadTest {
 	}
 
 	@Test
-	public void portalExecutor6() throws Exception {
+	public void testPortalExecutor6() throws Exception {
 		try {
 			PortalExecutorManagerUtil.shutdown("liferay/test_pacl");
 

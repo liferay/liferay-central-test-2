@@ -35,7 +35,7 @@ import org.junit.runner.RunWith;
 public class SocketTest {
 
 	@Test
-	public void accept1() throws Exception {
+	public void testAccept1() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4316);
 
@@ -89,7 +89,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void accept2() throws Exception {
+	public void testAccept2() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4316);
 
@@ -144,7 +144,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect1() throws Exception {
+	public void testConnect1() throws Exception {
 		try {
 			HttpUtil.URLtoString("http://www.abc.com");
 
@@ -155,7 +155,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect2() throws Exception {
+	public void testConnect2() throws Exception {
 		try {
 			HttpUtil.URLtoString("http://www.cbs.com");
 		}
@@ -165,7 +165,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect3() throws Exception {
+	public void testConnect3() throws Exception {
 		try {
 			Socket socket = new Socket("www.google.com", 443);
 
@@ -177,7 +177,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect4() throws Exception {
+	public void testConnect4() throws Exception {
 		try {
 			Socket socket = new Socket("www.google.com", 80);
 
@@ -189,7 +189,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect5() throws Exception {
+	public void testConnect5() throws Exception {
 		try {
 			Socket socket = new Socket("www.msn.com", 80);
 
@@ -202,7 +202,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect6() throws Exception {
+	public void testConnect6() throws Exception {
 		try {
 			Socket socket = new Socket("www.yahoo.com", 443);
 
@@ -214,7 +214,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void connect7() throws Exception {
+	public void testConnect7() throws Exception {
 		try {
 			Socket socket = new Socket("www.yahoo.com", 80);
 
@@ -227,7 +227,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen1() throws Exception {
+	public void testListen1() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4315);
 
@@ -240,7 +240,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen2() throws Exception {
+	public void testListen2() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4316);
 
@@ -252,7 +252,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen3() throws Exception {
+	public void testListen3() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4317);
 
@@ -264,7 +264,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen4() throws Exception {
+	public void testListen4() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4318);
 
@@ -276,7 +276,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen5() throws Exception {
+	public void testListen5() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4319);
 
@@ -289,7 +289,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen6() throws Exception {
+	public void testListen6() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4320);
 
@@ -301,7 +301,7 @@ public class SocketTest {
 	}
 
 	@Test
-	public void listen7() throws Exception {
+	public void testListen7() throws Exception {
 		try {
 			ServerSocket serverSocket = new ServerSocket(4321);
 

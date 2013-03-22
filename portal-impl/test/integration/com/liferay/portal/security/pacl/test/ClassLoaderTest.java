@@ -44,7 +44,7 @@ import org.junit.runner.RunWith;
 public class ClassLoaderTest {
 
 	@Test
-	public void create1() throws Exception {
+	public void testCreate1() throws Exception {
 		try {
 			new URLClassLoader(new URL[0], getClass().getClassLoader());
 
@@ -55,7 +55,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get1() throws Exception {
+	public void testGet1() throws Exception {
 		try {
 			BlogsEntryLocalService blogsEntryLocalService =
 				BlogsEntryLocalServiceUtil.getService();
@@ -71,7 +71,116 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get2() throws Exception {
+	public void testGet10() throws Exception {
+		try {
+			PortalRuntimePermission.checkGetClassLoader("");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet11() throws Exception {
+		try {
+			PortalRuntimePermission.checkGetClassLoader("flash-portlet");
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testGet12() throws Exception {
+		try {
+			PortalRuntimePermission.checkGetClassLoader(null);
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet13() throws Exception {
+		try {
+			PortalRuntimePermission.checkGetClassLoader("portal");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet14() throws Exception {
+		try {
+			PortalRuntimePermission.class.getClassLoader();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet15() throws Exception {
+		try {
+			PortletClassLoaderUtil.getClassLoader("1_WAR_chatportlet");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet16() throws Exception {
+		try {
+			PortletClassLoaderUtil.getClassLoader("1_WAR_flashportlet");
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testGet17() throws Exception {
+		try {
+			PortletClassLoaderUtil.getClassLoader("chat-portlet");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet18() throws Exception {
+		try {
+			PortletClassLoaderUtil.getClassLoader("flash-portlet");
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testGet19() throws Exception {
+		try {
+			Thread thread = Thread.currentThread();
+
+			thread.getContextClassLoader();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet2() throws Exception {
 		try {
 			ClassLoader.getSystemClassLoader();
 
@@ -82,7 +191,34 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get3() throws Exception {
+	public void testGet20() throws Exception {
+		try {
+			User.class.getClassLoader();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet21() throws Exception {
+		try {
+			UserLocalService userLocalService =
+				UserLocalServiceUtil.getService();
+
+			Class<?> clazz = userLocalService.getClass();
+
+			clazz.getClassLoader();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testGet3() throws Exception {
 		try {
 			User defaultUser = UserLocalServiceUtil.getDefaultUser(
 				TestPropsValues.getCompanyId());
@@ -95,7 +231,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get4() throws Exception {
+	public void testGet4() throws Exception {
 		try {
 			BeanPropertyTest.class.getClassLoader();
 		}
@@ -105,7 +241,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get5() throws Exception {
+	public void testGet5() throws Exception {
 		try {
 			Class<?> clazz = getClass();
 
@@ -117,7 +253,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get6() throws Exception {
+	public void testGet6() throws Exception {
 		try {
 			Object.class.getClassLoader();
 		}
@@ -127,7 +263,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get7() throws Exception {
+	public void testGet7() throws Exception {
 		try {
 			Object object = new Object();
 
@@ -141,7 +277,7 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get8() throws Exception {
+	public void testGet8() throws Exception {
 		try {
 			Portal portal = PortalUtil.getPortal();
 
@@ -156,163 +292,9 @@ public class ClassLoaderTest {
 	}
 
 	@Test
-	public void get9() throws Exception {
+	public void testGet9() throws Exception {
 		try {
 			PortalClassLoaderUtil.getClassLoader();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get10()
-		throws Exception {
-
-		try {
-			PortalRuntimePermission.checkGetClassLoader("");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get11()
-		throws Exception {
-
-		try {
-			PortalRuntimePermission.checkGetClassLoader("flash-portlet");
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void get12()
-		throws Exception {
-
-		try {
-			PortalRuntimePermission.checkGetClassLoader(null);
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get13()
-		throws Exception {
-
-		try {
-			PortalRuntimePermission.checkGetClassLoader("portal");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get14()
-		throws Exception {
-
-		try {
-			PortalRuntimePermission.class.getClassLoader();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get15()
-		throws Exception {
-
-		try {
-			PortletClassLoaderUtil.getClassLoader("1_WAR_chatportlet");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get16()
-		throws Exception {
-
-		try {
-			PortletClassLoaderUtil.getClassLoader("1_WAR_flashportlet");
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void get17()
-		throws Exception {
-
-		try {
-			PortletClassLoaderUtil.getClassLoader("chat-portlet");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get18()
-		throws Exception {
-
-		try {
-			PortletClassLoaderUtil.getClassLoader("flash-portlet");
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void get19() throws Exception {
-		try {
-			Thread thread = Thread.currentThread();
-
-			thread.getContextClassLoader();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get20() throws Exception {
-		try {
-			User.class.getClassLoader();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void get21() throws Exception {
-		try {
-			UserLocalService userLocalService =
-				UserLocalServiceUtil.getService();
-
-			Class<?> clazz = userLocalService.getClass();
-
-			clazz.getClassLoader();
 
 			Assert.fail();
 		}

@@ -36,45 +36,43 @@ public class DoPrivilegedFactoryTest {
 	}
 
 	@Test
-	public void test_boolean() {
-		boolean testBoolean = Boolean.TRUE;
-
-		Boolean wrappedBoolean = DoPrivilegedFactory.wrap(testBoolean);
+	public void testBoolean() {
+		Boolean wrappedBoolean = DoPrivilegedFactory.wrap(Boolean.TRUE);
 
 		Assert.assertTrue(wrappedBoolean);
 		Assert.assertEquals(wrappedBoolean.getClass(), Boolean.class);
 	}
 
 	@Test
-	public void test_NoInterfaces() {
-		NoInterfaces testNoInterfaces = new NoInterfaces();
+	public void testClassWithNoInterfaces() {
+		ClassWithNoInterfaces classWithNoInterfaces =
+			new ClassWithNoInterfaces();
 
-		NoInterfaces wrappedNoInterfaces = DoPrivilegedFactory.wrap(
-			testNoInterfaces);
+		ClassWithNoInterfaces wrappedClassWithNoInterfaces =
+			DoPrivilegedFactory.wrap(classWithNoInterfaces);
 
-		Assert.assertEquals(wrappedNoInterfaces, testNoInterfaces);
-		Assert.assertFalse(wrappedNoInterfaces instanceof DoPrivilegedBean);
+		Assert.assertEquals(
+			wrappedClassWithNoInterfaces, classWithNoInterfaces);
+		Assert.assertFalse(
+			wrappedClassWithNoInterfaces instanceof DoPrivilegedBean);
 	}
 
 	@Test
-	public void test_String() {
-		String testString = "test string";
+	public void testString() {
+		String string = DoPrivilegedFactory.wrap("Test");
 
-		String wrappedString = DoPrivilegedFactory.wrap(testString);
-
-		Assert.assertEquals(wrappedString, testString);
-		Assert.assertEquals(wrappedString.getClass(), String.class);
+		Assert.assertEquals(string, "Test");
+		Assert.assertEquals(string.getClass(), String.class);
 	}
 
 	@Test
-	public void test_User() {
-		User user = new UserImpl();
+	public void testUser() {
+		User user = DoPrivilegedFactory.wrap(new UserImpl());
 
-		User wrappedUser = DoPrivilegedFactory.wrap(user);
-
-		Assert.assertTrue(wrappedUser instanceof DoPrivilegedBean);
+		Assert.assertTrue(user instanceof DoPrivilegedBean);
 	}
 
-	private class NoInterfaces {}
+	private class ClassWithNoInterfaces {
+	}
 
 }
