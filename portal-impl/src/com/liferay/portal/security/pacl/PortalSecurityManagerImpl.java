@@ -829,6 +829,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				_classes.put(clazz.getName(), clazz);
 			}
 		}
+
 	}
 
 }
