@@ -294,16 +294,20 @@ public class HotDeployImpl implements HotDeploy {
 		public void initPolicy(
 			String servletContextName, ClassLoader classLoader,
 			Properties properties) {
-
-			// no operation
-
 		}
 
 		public void unregister(ClassLoader classLoader) {
-
-			// no operation
-
 		}
+
+	}
+
+	public static interface PACL {
+
+		public void initPolicy(
+			String servletContextName, ClassLoader classLoader,
+			Properties properties);
+
+		public void unregister(ClassLoader classLoader);
 
 	}
 
@@ -343,16 +347,6 @@ public class HotDeployImpl implements HotDeploy {
 
 		private ClassLoader _classLoader;
 		private ServletContext _servletContext;
-
-	}
-
-	public static interface PACL {
-
-		public void initPolicy(
-			String servletContextName, ClassLoader classLoader,
-			Properties properties);
-
-		public void unregister(ClassLoader classLoader);
 
 	}
 
