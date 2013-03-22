@@ -72,7 +72,6 @@ public class JournalTemplateHandler extends BaseTemplateHandler {
 		templateVariableGroups.put("util", getUtilTemplateVariableGroup());
 
 		return templateVariableGroups;
-
 	}
 
 	protected TemplateVariableGroup getGeneralVariablesTemplateVariableGroup() {
@@ -111,8 +110,8 @@ public class JournalTemplateHandler extends BaseTemplateHandler {
 			}
 
 			String label = ddmStructure.getFieldLabel(fieldName, locale);
-			String dataType = ddmStructure.getFieldDataType(fieldName);
 			String tip = ddmStructure.getFieldTip(fieldName, locale);
+			String dataType = ddmStructure.getFieldDataType(fieldName);
 			boolean repeatable = ddmStructure.getFieldRepeatable(fieldName);
 
 			fieldsTemplateVariableGroup.addFieldVariable(

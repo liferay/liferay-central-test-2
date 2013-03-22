@@ -214,12 +214,12 @@ public class PortletImpl extends PortletBaseImpl {
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_stagedModelDataHandlerClasses = stagedModelDataHandlerClasses;
+		_templateHandlerClass = templateHandlerClass;
 		_portletLayoutListenerClass = portletLayoutListenerClass;
 		_pollerProcessorClass = pollerProcessorClass;
 		_popMessageListenerClass = popMessageListenerClass;
 		_socialActivityInterpreterClasses = socialActivityInterpreterClasses;
 		_socialRequestInterpreterClass = socialRequestInterpreterClass;
-		_templateHandlerClass =templateHandlerClass;
 		_webDAVStorageToken = webDAVStorageToken;
 		_webDAVStorageClass = webDAVStorageClass;
 		_xmlRpcMethodClass = xmlRpcMethodClass;

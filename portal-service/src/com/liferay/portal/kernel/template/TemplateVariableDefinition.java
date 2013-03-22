@@ -92,6 +92,6 @@ public class TemplateVariableDefinition {
 	private TemplateVariableDefinition _itemTemplateVariableDefinition;
 	private String _label;
 	private String _name;
-	private boolean _repeatable = false;
+	private boolean _repeatable;
 
 }
