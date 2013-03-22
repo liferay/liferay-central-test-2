@@ -41,6 +41,25 @@ public class PortalFilePermission {
 
 	private static PACL _pacl = new NoPACL();
 
+	private static class NoPACL implements PACL {
+
+		public void checkCopy(String source, String destination) {
+		}
+
+		public void checkDelete(String path) {
+		}
+
+		public void checkMove(String source, String destination) {
+		}
+
+		public void checkRead(String path) {
+		}
+
+		public void checkWrite(String path) {
+		}
+
+	}
+
 	public static interface PACL {
 
 		public void checkCopy(String source, String destination);
@@ -52,40 +71,6 @@ public class PortalFilePermission {
 		public void checkRead(String path);
 
 		public void checkWrite(String path);
-
-	}
-
-	private static class NoPACL implements PACL {
-
-		public void checkCopy(String source, String destination) {
-
-			// no operation
-
-		}
-
-		public void checkDelete(String path) {
-
-			// no operation
-
-		}
-
-		public void checkMove(String source, String destination) {
-
-			// no operation
-
-		}
-
-		public void checkRead(String path) {
-
-			// no operation
-
-		}
-
-		public void checkWrite(String path) {
-
-			// no operation
-
-		}
 
 	}
 
