@@ -83,19 +83,16 @@ public class PortalSocketPermission {
 
 	private static PACL _pacl = new NoPACL();
 
-	public static interface PACL {
-
-		public void checkPermission(String host, String action);
-
-	}
-
 	private static class NoPACL implements PACL {
 
 		public void checkPermission(String host, String action) {
-
-			// no operation
-
 		}
+
+	}
+
+	public static interface PACL {
+
+		public void checkPermission(String host, String action);
 
 	}
 
