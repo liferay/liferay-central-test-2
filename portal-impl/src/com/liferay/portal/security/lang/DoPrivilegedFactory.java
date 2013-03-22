@@ -146,12 +146,18 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 		public T run() {
 			Class<?> clazz = _bean.getClass();
 
+			if (clazz.isPrimitive()) {
+				rerturn _bean;
+			}
+
 			Package pkg = clazz.getPackage();
 
-			if (clazz.isPrimitive() ||
-				((pkg != null) && (pkg.getName().startsWith("java.")))) {
+			if (pkg != null) {
+				String packageName = pkg.getName();
 
-				return _bean;
+				if (packageName.startsWith("java.")) {
+					return _bean;
+				}
 			}
 
 			Class<?>[] interfaces = _getInterfaces(_bean);
