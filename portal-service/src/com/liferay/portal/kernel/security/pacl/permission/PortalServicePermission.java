@@ -65,29 +65,23 @@ public class PortalServicePermission extends BasicPermission {
 	private transient Method _method;
 	private transient Object _object;
 
+	private static class NoPACL implements PACL {
+
+		public void checkDynamicQuery(Class<?> implClass) {
+		}
+
+		public void checkService(
+			Object object, Method method, Object[] arguments) {
+		}
+
+	}
+
 	public static interface PACL {
 
 		public void checkDynamicQuery(Class<?> implClass);
 
 		public void checkService(
 			Object object, Method method, Object[] arguments);
-
-	}
-
-	private static class NoPACL implements PACL {
-
-		public void checkDynamicQuery(Class<?> implClass) {
-
-			// no operation
-
-		}
-
-		public void checkService(
-			Object object, Method method, Object[] arguments) {
-
-			// no operation
-
-		}
 
 	}
 
