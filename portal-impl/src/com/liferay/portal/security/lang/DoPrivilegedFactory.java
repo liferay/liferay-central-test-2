@@ -147,7 +147,7 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 			Class<?> clazz = _bean.getClass();
 
 			if (clazz.isPrimitive()) {
-				rerturn _bean;
+				return _bean;
 			}
 
 			Package pkg = clazz.getPackage();
