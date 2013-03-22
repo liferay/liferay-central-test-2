@@ -140,12 +140,6 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	private static PACL _pacl = new NoPACL();
 
-	public static interface PACL {
-
-		public ClassLoader getBeanClassLoader();
-
-	}
-
 	private static class NoPACL implements PACL {
 
 		public ClassLoader getBeanClassLoader() {
@@ -158,6 +152,12 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 
 			return new FilterClassLoader(beanClassLoader);
 		}
+
+	}
+
+	public static interface PACL {
+
+		public ClassLoader getBeanClassLoader();
 
 	}
 
