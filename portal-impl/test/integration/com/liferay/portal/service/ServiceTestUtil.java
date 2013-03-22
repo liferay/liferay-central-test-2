@@ -250,7 +250,6 @@ public class ServiceTestUtil {
 
 		IndexerRegistryUtil.register(new BlogsIndexer());
 		IndexerRegistryUtil.register(new ContactIndexer());
-		IndexerRegistryUtil.register(new UserIndexer());
 		IndexerRegistryUtil.register(new BookmarksEntryIndexer());
 		IndexerRegistryUtil.register(new BookmarksFolderIndexer());
 		IndexerRegistryUtil.register(new DLFileEntryIndexer());
@@ -260,6 +259,7 @@ public class ServiceTestUtil {
 		IndexerRegistryUtil.register(new MBMessageIndexer());
 		IndexerRegistryUtil.register(new OrganizationIndexer());
 		IndexerRegistryUtil.register(new TrashIndexer());
+		IndexerRegistryUtil.register(new UserIndexer());
 		IndexerRegistryUtil.register(new WikiNodeIndexer());
 		IndexerRegistryUtil.register(new WikiPageIndexer());
 
