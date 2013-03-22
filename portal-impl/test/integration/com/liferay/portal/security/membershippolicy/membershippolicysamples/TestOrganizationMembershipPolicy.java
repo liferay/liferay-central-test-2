@@ -170,8 +170,8 @@ public class TestOrganizationMembershipPolicy
 	}
 
 	public void verifyPolicy(
-			Role role, Role oldRole, Map<String,
-			Serializable> oldExpandoAttributes) {
+			Role role, Role oldRole,
+			Map<String, Serializable> oldExpandoAttributes) {
 
 		Assert.assertNotNull(role);
 		Assert.assertNotNull(oldRole);
