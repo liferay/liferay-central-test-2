@@ -43,11 +43,15 @@ public class SchemeAwareContextWrapper implements Context {
 	}
 
 	public void bind(Name name, Object obj) throws NamingException {
-		getURLOrDefaultInitCtx(name).bind(name, obj);
+		Context context = getContext(name);
+
+		context.bind(name, obj);
 	}
 
 	public void bind(String name, Object obj) throws NamingException {
-		getURLOrDefaultInitCtx(name).bind(name, obj);
+		Context context = getContext(name);
+
+		context.bind(name, obj);
 	}
 
 	public void close() throws NamingException {
@@ -65,25 +69,27 @@ public class SchemeAwareContextWrapper implements Context {
 	}
 
 	public Context createSubcontext(Name name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).createSubcontext(name);
+		Context context = getContext(name);
+
+		return context.createSubcontext(name);
 	}
 
 	public Context createSubcontext(String name) throws NamingException {
-		getURLOrDefaultInitCtx(name);
+		Context context = getContext(name);
 
-		return getURLOrDefaultInitCtx(name).createSubcontext(name);
+		return context.createSubcontext(name);
 	}
 
 	public void destroySubcontext(Name name) throws NamingException {
-		getURLOrDefaultInitCtx(name);
+		Context context = getContext(name);
 
-		getURLOrDefaultInitCtx(name).destroySubcontext(name);
+		context.destroySubcontext(name);
 	}
 
 	public void destroySubcontext(String name) throws NamingException {
-		getURLOrDefaultInitCtx(name);
+		Context context = getContext(name);
 
-		getURLOrDefaultInitCtx(name).destroySubcontext(name);
+		context.destroySubcontext(name);
 	}
 
 	@Override
@@ -114,11 +120,15 @@ public class SchemeAwareContextWrapper implements Context {
 	}
 
 	public NameParser getNameParser(Name name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).getNameParser(name);
+		Context context = getContext(name);
+
+		return context.getNameParser(name);
 	}
 
 	public NameParser getNameParser(String name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).getNameParser(name);
+		Context context = getContext(name);
+
+		return context.getNameParser(name);
 	}
 
 	@Override
@@ -129,49 +139,69 @@ public class SchemeAwareContextWrapper implements Context {
 	public NamingEnumeration<NameClassPair> list(Name name)
 		throws NamingException {
 
-		return getURLOrDefaultInitCtx(name).list(name);
+		Context context = getContext(name);
+
+		return context.list(name);
 	}
 
 	public NamingEnumeration<NameClassPair> list(String name)
 		throws NamingException {
 
-		return getURLOrDefaultInitCtx(name).list(name);
+		Context context = getContext(name);
+
+		return context.list(name);
 	}
 
 	public NamingEnumeration<Binding> listBindings(Name name)
 		throws NamingException {
 
-		return getURLOrDefaultInitCtx(name).listBindings(name);
+		Context context = getContext(name);
+
+		return context.listBindings(name);
 	}
 
 	public NamingEnumeration<Binding> listBindings(String name)
 		throws NamingException {
 
-		return getURLOrDefaultInitCtx(name).listBindings(name);
+		Context context = getContext(name);
+
+		return context.listBindings(name);
 	}
 
 	public Object lookup(Name name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).lookup(name);
+		Context context = getContext(name);
+
+		return context.lookup(name);
 	}
 
 	public Object lookup(String name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).lookup(name);
+		Context context = getContext(name);
+
+		return context.lookup(name);
 	}
 
 	public Object lookupLink(Name name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).lookupLink(name);
+		Context context = getContext(name);
+
+		return context.lookupLink(name);
 	}
 
 	public Object lookupLink(String name) throws NamingException {
-		return getURLOrDefaultInitCtx(name).lookupLink(name);
+		Context context = getContext(name);
+
+		return context.lookupLink(name);
 	}
 
 	public void rebind(Name name, Object obj) throws NamingException {
-		getURLOrDefaultInitCtx(name).rebind(name, obj);
+		Context context = getContext(name);
+
+		context.rebind(name, obj);
 	}
 
 	public void rebind(String name, Object obj) throws NamingException {
-		getURLOrDefaultInitCtx(name).rebind(name, obj);
+		Context context = getContext(name);
+
+		context.rebind(name, obj);
 	}
 
 	public Object removeFromEnvironment(String propName)
@@ -181,43 +211,49 @@ public class SchemeAwareContextWrapper implements Context {
 	}
 
 	public void rename(Name oldName, Name newName) throws NamingException {
-		getURLOrDefaultInitCtx(oldName).rename(oldName, newName);
+		Context context = getContext(oldName);
+
+		context.rename(oldName, newName);
 	}
 
 	public void rename(String oldName, String newName) throws NamingException {
-		getURLOrDefaultInitCtx(oldName).rename(oldName, newName);
+		Context context = getContext(oldName);
+
+		context.rename(oldName, newName);
 	}
 
 	public void unbind(Name name) throws NamingException {
-		getURLOrDefaultInitCtx(name).unbind(name);
+		Context context = getContext(name);
+
+		context.unbind(name);
 	}
 
 	public void unbind(String name) throws NamingException {
-		getURLOrDefaultInitCtx(name).unbind(name);
+		Context context = getContext(name);
+
+		context.unbind(name);
 	}
 
-	protected Context getURLOrDefaultInitCtx(Name name) throws NamingException {
-		return getURLOrDefaultInitCtx(name.toString());
+	protected Context getContext(Name name) throws NamingException {
+		return getContext(name.toString());
 	}
 
-	protected Context getURLOrDefaultInitCtx(String name)
-		throws NamingException {
-
+	protected Context getContext(String name) throws NamingException {
 		String scheme = null;
 
-		int colon_posn = name.indexOf(':');
-		int slash_posn = name.indexOf('/');
+		int x = name.indexOf(':');
+		int y = name.indexOf('/');
 
-		if (colon_posn > 0 && (slash_posn == -1 || colon_posn < slash_posn)) {
-			scheme = name.substring(0, colon_posn);
+		if ((x > 0) && ((y == -1) || (x < y))) {
+			scheme = name.substring(0, x);
 		}
 
 		if (scheme != null) {
-			Context ctx = NamingManager.getURLContext(
+			Context context = NamingManager.getURLContext(
 				scheme, _context.getEnvironment());
 
-			if (ctx != null) {
-				return ctx;
+			if (context != null) {
+				return context;
 			}
 		}
 
