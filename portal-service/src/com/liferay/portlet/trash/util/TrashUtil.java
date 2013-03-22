@@ -103,10 +103,10 @@ public class TrashUtil {
 	}
 
 	public static PortletURL getViewContentURL(
-			String className, long classPK, HttpServletRequest request)
+			HttpServletRequest request, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return getTrash().getViewContentURL(className, classPK, request);
+		return getTrash().getViewContentURL(request, className, classPK);
 	}
 
 	public static boolean isInTrash(String className, long classPK)

@@ -297,7 +297,7 @@ public abstract class BaseSocialActivityInterpreter
 			trashHandler.isInTrashContainer(classPK))) {
 
 			PortletURL portletURL = TrashUtil.getViewContentURL(
-				getClassName(activity), classPK, serviceContext.getRequest());
+				serviceContext.getRequest(), getClassName(activity), classPK);
 
 			return portletURL.toString();
 		}

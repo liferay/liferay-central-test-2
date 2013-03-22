@@ -64,8 +64,8 @@ public class JournalActivityInterpreter extends BaseSocialActivityInterpreter {
 				JournalArticle.class.getName(), article.getResourcePrimKey())) {
 
 			PortletURL portletURL = TrashUtil.getViewContentURL(
-				JournalArticle.class.getName(), article.getResourcePrimKey(),
-				serviceContext.getRequest());
+				serviceContext.getRequest(), JournalArticle.class.getName(),
+				article.getResourcePrimKey());
 
 			return portletURL.toString();
 		}

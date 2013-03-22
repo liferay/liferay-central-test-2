@@ -264,7 +264,7 @@ public class TrashImpl implements Trash {
 	}
 
 	public PortletURL getViewContentURL(
-			String className, long classPK, HttpServletRequest request)
+			HttpServletRequest request, String className, long classPK)
 		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(

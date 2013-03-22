@@ -86,8 +86,8 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		if (thread.isInTrash()) {
 			PortletURL portletURL = TrashUtil.getViewContentURL(
-				MBThread.class.getName(), thread.getThreadId(),
-				serviceContext.getRequest());
+				serviceContext.getRequest(), MBThread.class.getName(),
+				thread.getThreadId());
 
 			return portletURL.toString();
 		}
