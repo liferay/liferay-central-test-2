@@ -259,11 +259,6 @@
 	<bean id="com.liferay.portal.kernel.portlet.PortletContainerUtil" class="com.liferay.portal.kernel.portlet.PortletContainerUtil">
 		<property name="portletContainer" ref="com.liferay.portlet.RestrictPortletContainerWrapper" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil" class="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil">
-		<property name="templateHandlerRegistry">
-			<bean class="com.liferay.portal.template.TemplateHandlerRegistryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.sanitizer.SanitizerUtil" class="com.liferay.portal.kernel.sanitizer.SanitizerUtil">
 		<property name="sanitizer">
 			<bean class="com.liferay.portal.sanitizer.SanitizerImpl" />
@@ -324,6 +319,11 @@
 	</bean>
 	<bean id="com.liferay.portal.kernel.spring.util.SpringFactoryUtil" class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil">
 		<property name="springFactory" ref="com.liferay.portal.kernel.spring.util.SpringFactory" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil" class="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil">
+		<property name="templateHandlerRegistry">
+			<bean class="com.liferay.portal.template.TemplateHandlerRegistryImpl" />
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.template.TemplateManagerUtil" class="com.liferay.portal.kernel.template.TemplateManagerUtil">
 		<property name="templateManagers">
