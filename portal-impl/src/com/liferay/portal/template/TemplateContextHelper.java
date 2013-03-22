@@ -843,6 +843,17 @@ public class TemplateContextHelper {
 		_helperUtilitiesMaps = new ConcurrentHashMap
 			<ClassLoader, HelperUtilitiesMap>();
 
+	private static class NoPACL implements PACL {
+
+		public TemplateControlContext getTemplateControlContext() {
+			ClassLoader contextClassLoader =
+				ClassLoaderUtil.getContextClassLoader();
+
+			return new TemplateControlContext(null, contextClassLoader);
+		}
+
+	}
+
 	public static interface PACL {
 
 		public TemplateControlContext getTemplateControlContext();
@@ -865,17 +876,6 @@ public class TemplateContextHelper {
 
 		private ClassLoader _classLoader;
 		private TemplateContextType _templateContextType;
-
-	}
-
-	private static class NoPACL implements PACL {
-
-		public TemplateControlContext getTemplateControlContext() {
-			ClassLoader contextClassLoader =
-				ClassLoaderUtil.getContextClassLoader();
-
-			return new TemplateControlContext(null, contextClassLoader);
-		}
 
 	}
 
