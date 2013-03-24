@@ -78,12 +78,12 @@ public class ReflectionUtil {
 
 		Class<?> clazz = object.getClass();
 
-		getInterfaces(interfaceClasses, clazz, classLoader);
+		_getInterfaces(interfaceClasses, clazz, classLoader);
 
 		Class<?> superClass = clazz.getSuperclass();
 
 		while (superClass != null) {
-			getInterfaces(interfaceClasses, superClass, classLoader);
+			_getInterfaces(interfaceClasses, superClass, classLoader);
 
 			superClass = superClass.getSuperclass();
 		}
@@ -152,7 +152,7 @@ public class ReflectionUtil {
 		return false;
 	}
 
-	private static void getInterfaces(
+	private static void _getInterfaces(
 		List<Class<?>> interfaceClasses, Class<?> clazz,
 		ClassLoader classLoader) {
 
