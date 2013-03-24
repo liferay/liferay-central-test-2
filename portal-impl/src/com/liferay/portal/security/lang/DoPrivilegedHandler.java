@@ -80,8 +80,8 @@ public class DoPrivilegedHandler
 
 		String declaringClassName = methodDeclaringClass.getName();
 
-		if (declaringClassName.endsWith(_FINDER_SUFFIX) ||
-			declaringClassName.endsWith(_PERSISTENCE_SUFFIX)) {
+		if (declaringClassName.endsWith(_BEAN_NAME_SUFFIX_FINDER) ||
+			declaringClassName.endsWith(_BEAN_NAME_SUFFIX_PERSISTENCE)) {
 
 			PortalServicePermission.checkService(_bean, method, arguments);
 		}
@@ -91,7 +91,9 @@ public class DoPrivilegedHandler
 				new InvokePrivilegedExceptionAction(_bean, method, arguments));
 		}
 		catch (PrivilegedActionException pae) {
-			throw pae.getException().getCause();
+			Exception e = pae.getException();
+
+			throw e.getCause();
 		}
 	}
 
@@ -131,8 +133,9 @@ public class DoPrivilegedHandler
 		return false;
 	}
 
-	private static final String _FINDER_SUFFIX = "Finder";
-	private static final String _PERSISTENCE_SUFFIX = "Persistence";
+	private static final String _BEAN_NAME_SUFFIX_FINDER = "Finder";
+
+	private static final String _BEAN_NAME_SUFFIX_PERSISTENCE = "Persistence";
 
 	private Object _bean;
 	private boolean _hasNotPrivilegedMethods = false;
