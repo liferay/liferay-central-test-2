@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.security.pacl.permission;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
 
@@ -63,39 +64,31 @@ public class PortalServicePermission extends BasicPermission {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(14);
+		StringBundler sb = new StringBundler(11);
 
-		sb.append("{class=");
+		if (_arguments != null) {
+			sb.append("{arguments=[");
+			sb.append(StringUtil.merge(_arguments, ", "));
+			sb.append("]");
+			sb.append(", class=");
+		}
+		else {
+			sb.append("{class=");
+		}
 
 		Class<?> clazz = getClass();
 
 		sb.append(clazz.getName());
-
-		sb.append(", name=");
-		sb.append(getName());
-		sb.append(", object=");
-		sb.append(getObject());
 
 		if (_method != null) {
 			sb.append(", method=");
 			sb.append(_method.getName());
 		}
 
-		if (_arguments != null) {
-			sb.append(", arguments=[");
-
-			for (Object argument : _arguments) {
-				sb.append(argument);
-				sb.append(", ");
-			}
-
-			if (_arguments.length > 0) {
-				sb.setIndex(sb.index() - 1);
-			}
-
-			sb.append("]");
-		}
-
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", object=");
+		sb.append(getObject());
 		sb.append("}");
 
 		return sb.toString();
