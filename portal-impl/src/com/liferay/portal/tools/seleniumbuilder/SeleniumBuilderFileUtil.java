@@ -225,6 +225,11 @@ public class SeleniumBuilderFileUtil {
 		}
 	}
 
+	protected void throwValidationException(int errorCode, String fileName) {
+		throw new IllegalArgumentException(
+			"Error " + errorCode + ": " + fileName);
+	}
+
 	protected void validate(String fileName, Element rootElement)
 		throws Exception {
 
@@ -248,7 +253,7 @@ public class SeleniumBuilderFileUtil {
 		List<Element> elements = commandElement.elements();
 
 		if (elements.isEmpty()) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		for (Element element : elements) {
@@ -257,12 +262,12 @@ public class SeleniumBuilderFileUtil {
 			if (!ArrayUtil.contains(
 					allowedCommandChildElementNames, elementName)) {
 
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 
 			if (elementName.equals("execute")) {
 				validateExecuteElement(
-					fileName, element, allowedExecuteAttributeNames, ".*",
+					fileName, element, allowedExecuteAttributeNames, ".+",
 					allowedExecuteChildElementNames);
 			}
 			else if (elementName.equals("if")) {
@@ -275,7 +280,7 @@ public class SeleniumBuilderFileUtil {
 				validateVarElement(fileName, element);
 			}
 			else {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 	}
@@ -286,7 +291,7 @@ public class SeleniumBuilderFileUtil {
 		String allowedExecuteAttributeValuesRegex,
 		String[] allowedExecuteChildElementNames) {
 
-		boolean hasAllowedAttributeName = true;
+		boolean hasAllowedAttributeName = false;
 
 		List<Attribute> attributes = executeElement.attributes();
 
@@ -303,7 +308,7 @@ public class SeleniumBuilderFileUtil {
 		}
 
 		if (!hasAllowedAttributeName) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		String action = executeElement.attributeValue("action");
@@ -324,14 +329,14 @@ public class SeleniumBuilderFileUtil {
 					!attributeName.startsWith("locator-key") &&
 					!attributeName.startsWith("value")) {
 
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 
 				if (attributeName.equals("locator") ||
 					attributeName.equals("locator-key") ||
 					attributeName.equals("value")) {
 
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 			}
 		}
@@ -345,21 +350,21 @@ public class SeleniumBuilderFileUtil {
 					!attributeName.equals("function") &&
 					!attributeName.startsWith("value")) {
 
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 
 				if (attributeName.equals("locator") ||
 					attributeName.equals("value")) {
 
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 			}
 		}
 		else if (Validator.isNotNull(macro) &&
-				 selenium.matches(allowedExecuteAttributeValuesRegex)) {
+				 macro.matches(allowedExecuteAttributeValuesRegex)) {
 
 			if (attributes.size() != 1) {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 		else if (Validator.isNotNull(selenium) &&
@@ -372,33 +377,33 @@ public class SeleniumBuilderFileUtil {
 					!attributeName.equals("argument2") &&
 					!attributeName.equals("selenium")) {
 
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 			}
 		}
 		else if (Validator.isNotNull(testCase) &&
-				 selenium.matches(allowedExecuteAttributeValuesRegex)) {
+				 testCase.matches(allowedExecuteAttributeValuesRegex)) {
 
 			if (attributes.size() != 1) {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 		else if (Validator.isNotNull(testSuite) &&
-				 selenium.matches(allowedExecuteAttributeValuesRegex)) {
+				 testSuite.matches(allowedExecuteAttributeValuesRegex)) {
 
 			if (attributes.size() != 1) {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 		else {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		List<Element> elements = executeElement.elements();
 
 		if (allowedExecuteChildElementNames.length == 0) {
 			if (!elements.isEmpty()) {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 		else {
@@ -409,7 +414,7 @@ public class SeleniumBuilderFileUtil {
 					validateVarElement(fileName, element);
 				}
 				else {
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 			}
 		}
@@ -419,7 +424,7 @@ public class SeleniumBuilderFileUtil {
 		String fileName, Element rootElement) {
 
 		if (!Validator.equals(rootElement.getName(), "definition")) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		List<Element> elements = rootElement.elements();
@@ -429,7 +434,7 @@ public class SeleniumBuilderFileUtil {
 
 			if (elementName.equals("command")) {
 				if (Validator.isNull(element.attributeValue("name"))) {
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 
 				validateCommandElement(
@@ -437,7 +442,7 @@ public class SeleniumBuilderFileUtil {
 					new String[] {"function", "selenium"}, new String[0]);
 			}
 			else {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 	}
@@ -450,13 +455,17 @@ public class SeleniumBuilderFileUtil {
 
 		List<Element> elements = ifElement.elements();
 
+		if (elements.isEmpty()) {
+			throwValidationException(0, fileName);
+		}
+
 		for (Element element : elements) {
 			String elementName = element.getName();
 
 			if (elementName.equals("condition")) {
 				validateExecuteElement(
-					fileName, element, allowedExecuteAttributeNames, ".*",
-					allowedExecuteChildElementNames);
+					fileName, element, allowedExecuteAttributeNames,
+					"(is|Is).+", allowedExecuteChildElementNames);
 			}
 			else if (elementName.equals("else") || elementName.equals("then")) {
 				validateCommandElement(
@@ -465,14 +474,14 @@ public class SeleniumBuilderFileUtil {
 					allowedExecuteChildElementNames);
 			}
 			else {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 	}
 
 	protected void validateMacroDocument(String fileName, Element rootElement) {
 		if (!Validator.equals(rootElement.getName(), "definition")) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		List<Element> elements = rootElement.elements();
@@ -482,7 +491,7 @@ public class SeleniumBuilderFileUtil {
 
 			if (elementName.equals("command")) {
 				if (Validator.isNull(element.attributeValue("name"))) {
-					throw new IllegalArgumentException(fileName);
+					throwValidationException(0, fileName);
 				}
 
 				validateCommandElement(
@@ -493,7 +502,7 @@ public class SeleniumBuilderFileUtil {
 				validateVarElement(fileName, element);
 			}
 			else {
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 	}
@@ -511,7 +520,7 @@ public class SeleniumBuilderFileUtil {
 		String shortFileName = fileName.substring(x + 1, y);
 
 		if ((title == null) || !shortFileName.equals(title)) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		Element bodyElement = rootElement.element("body");
@@ -527,7 +536,7 @@ public class SeleniumBuilderFileUtil {
 		String tdText = tdElement.getText();
 
 		if ((tdText == null) || !shortFileName.equals(tdText)) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 	}
 
@@ -535,7 +544,7 @@ public class SeleniumBuilderFileUtil {
 		List<Attribute> attributes = varElement.attributes();
 
 		if (attributes.isEmpty()) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 
 		for (Attribute attribute : attributes) {
@@ -544,14 +553,14 @@ public class SeleniumBuilderFileUtil {
 			if (!attributeName.equals("name") &&
 				!attributeName.equals("value")) {
 
-				throw new IllegalArgumentException(fileName);
+				throwValidationException(0, fileName);
 			}
 		}
 
 		List<Element> elements = varElement.elements();
 
 		if (!elements.isEmpty()) {
-			throw new IllegalArgumentException(fileName);
+			throwValidationException(0, fileName);
 		}
 	}
 
