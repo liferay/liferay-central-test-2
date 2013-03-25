@@ -64,8 +64,8 @@ public class CallbackPreferringTransactionExecutor
 			TransactionAttribute transactionAttribute,
 			MethodInvocation methodInvocation) {
 
-			_methodInvocation = methodInvocation;
 			_transactionAttribute = transactionAttribute;
+			_methodInvocation = methodInvocation;
 		}
 
 		public Object doInTransaction(TransactionStatus transactionStatus) {
