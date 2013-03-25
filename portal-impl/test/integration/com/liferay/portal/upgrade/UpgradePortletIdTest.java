@@ -80,7 +80,12 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 	public void testUpgradeUninstanceablePortletId() throws Exception {
 		_testUninstanceable = true;
 
-		doTestUpgrade();
+		try {
+			doTestUpgrade();
+		}
+		finally {
+			_testUninstanceable = false;
+		}
 	}
 
 	protected Layout addLayout() throws Exception {
@@ -246,6 +251,6 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 
 	private static final String _UNINSTANCEABLE_PORTLET_ID = "20";
 
-	private boolean _testUninstanceable = false;
+	private boolean _testUninstanceable;
 
 }
