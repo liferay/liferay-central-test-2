@@ -131,7 +131,9 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testDeleteTemplateReferencedByWebContents() throws Exception {
+	public void testDeleteTemplateReferencedByJournalArticles()
+		throws Exception {
+
 		DDMStructure structure = addStructure(
 			PortalUtil.getClassNameId(JournalArticle.class.getName()),
 			"Test Structure");
