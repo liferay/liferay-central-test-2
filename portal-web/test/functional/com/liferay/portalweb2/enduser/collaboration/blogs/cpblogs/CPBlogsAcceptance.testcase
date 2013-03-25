@@ -4,12 +4,12 @@
 	</set-up>
 	<command name="AddBlogsEntry">
 		<execute macro="Page#pgAdd">
-			<var name="page-name" value="Blogs Page" />
+			<var name="pageName" value="Blogs Page" />
 		</execute>
 	</command>
 	<command name="DeleteBlogsEntry">
 		<execute macro="Page#pgAdd">
-			<var name="page-name" value="Blogs Page" />
+			<var name="pageName" value="Blogs Page" />
 		</execute>
 	</command>
 	<tear-down>
