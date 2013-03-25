@@ -40,7 +40,7 @@ for (String path : paths) {
 		<portlet:param name="action" value="touch" />
 	</portlet:resourceURL>
 
-	<iframe height="0" src="<%= resourceURL %>" style="visibility: hidden;" width="0"></iframe>
+	<iframe height="0" src="<%= resourceURL %>" style="display: none; visibility: hidden;" width="0"></iframe>
 
 <%
 }
