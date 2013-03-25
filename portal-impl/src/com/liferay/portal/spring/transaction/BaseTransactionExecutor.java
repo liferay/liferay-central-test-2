@@ -43,7 +43,7 @@ public abstract class BaseTransactionExecutor implements TransactionExecutor {
 				callable.call();
 			}
 			catch (Exception e) {
-				_log.error("Failed to execute transaction commit callback", e);
+				_log.error("Unable to execute transaction commit callback", e);
 			}
 		}
 	}
@@ -60,7 +60,7 @@ public abstract class BaseTransactionExecutor implements TransactionExecutor {
 			return _throwable;
 		}
 
-		private final Throwable _throwable;
+		private Throwable _throwable;
 
 	}
 

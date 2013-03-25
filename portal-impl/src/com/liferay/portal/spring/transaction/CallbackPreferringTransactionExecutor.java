@@ -34,8 +34,8 @@ public class CallbackPreferringTransactionExecutor
 	extends BaseTransactionExecutor {
 
 	public Object execute(
-			final TransactionAttribute transactionAttribute,
-			final MethodInvocation methodInvocation)
+			TransactionAttribute transactionAttribute,
+			MethodInvocation methodInvocation)
 		throws Throwable {
 
 		CallbackPreferringPlatformTransactionManager
@@ -44,71 +44,84 @@ public class CallbackPreferringTransactionExecutor
 					platformTransactionManager;
 
 		Object result = callbackPreferringPlatformTransactionManager.execute(
-			transactionAttribute, new TransactionCallback<Object>() {
-
-				public Object doInTransaction(
-					TransactionStatus transactionStatus) {
-
-					boolean newTransaction =
-						transactionStatus.isNewTransaction();
-
-					if (newTransaction) {
-						TransactionalPortalCacheHelper.begin();
-
-						TransactionCommitCallbackUtil.pushCallbackList();
-					}
-
-					boolean rollback = false;
-
-					try {
-						if (newTransaction) {
-							LastSessionRecorderUtil.syncLastSessionState();
-						}
-
-						return methodInvocation.proceed();
-					}
-					catch (Throwable throwable) {
-						if (transactionAttribute.rollbackOn(throwable)) {
-							if (newTransaction) {
-								TransactionalPortalCacheHelper.rollback();
-
-								TransactionCommitCallbackUtil.popCallbackList();
-
-								EntityCacheUtil.clearLocalCache();
-								FinderCacheUtil.clearLocalCache();
-
-								rollback = true;
-							}
-
-							if (throwable instanceof RuntimeException) {
-								throw (RuntimeException)throwable;
-							}
-							else {
-								throw new RuntimeException(throwable);
-							}
-						}
-						else {
-							return new ThrowableHolder(throwable);
-						}
-					}
-					finally {
-						if (newTransaction && !rollback) {
-							TransactionalPortalCacheHelper.commit();
-
-							invokeCallbacks();
-						}
-					}
-				}
-			});
+			transactionAttribute,
+			new CallbackPreferringTransactionCallback(
+				transactionAttribute, methodInvocation));
 
 		if (result instanceof ThrowableHolder) {
 			ThrowableHolder throwableHolder = (ThrowableHolder)result;
 
 			throw throwableHolder.getThrowable();
 		}
-		else {
-			return result;
+
+		return result;
+	}
+
+	private class CallbackPreferringTransactionCallback
+		implements TransactionCallback<Object> {
+
+		private CallbackPreferringTransactionCallback(
+			TransactionAttribute transactionAttribute,
+			MethodInvocation methodInvocation) {
+
+			_transactionAttribute = transactionAttribute;
+			_transactionAttribute = transactionAttribute;
 		}
+
+		public Object doInTransaction(TransactionStatus transactionStatus) {
+			boolean newTransaction = transactionStatus.isNewTransaction();
+
+			if (newTransaction) {
+				TransactionalPortalCacheHelper.begin();
+
+				TransactionCommitCallbackUtil.pushCallbackList();
+			}
+
+			boolean rollback = false;
+
+			try {
+				if (newTransaction) {
+					LastSessionRecorderUtil.syncLastSessionState();
+				}
+
+				return _methodInvocation.proceed();
+			}
+			catch (Throwable throwable) {
+				if (_transactionAttribute.rollbackOn(throwable)) {
+					if (newTransaction) {
+						TransactionalPortalCacheHelper.rollback();
+
+						TransactionCommitCallbackUtil.popCallbackList();
+
+						EntityCacheUtil.clearLocalCache();
+						FinderCacheUtil.clearLocalCache();
+
+						rollback = true;
+					}
+
+					if (throwable instanceof RuntimeException) {
+						throw (RuntimeException)throwable;
+					}
+					else {
+						throw new RuntimeException(throwable);
+					}
+				}
+				else {
+					return new ThrowableHolder(throwable);
+				}
+			}
+			finally {
+				if (newTransaction && !rollback) {
+					TransactionalPortalCacheHelper.commit();
+
+					invokeCallbacks();
+				}
+			}
+		}
+
+		private MethodInvocation _methodInvocation;
+		private TransactionAttribute _transactionAttribute;
+
 	}
 
 }

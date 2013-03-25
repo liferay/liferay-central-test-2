@@ -56,7 +56,7 @@ public class TransactionInterceptor implements MethodInterceptor {
 		PlatformTransactionManager platformTransactionManager) {
 
 		if (platformTransactionManager instanceof
-			CallbackPreferringPlatformTransactionManager) {
+				CallbackPreferringPlatformTransactionManager) {
 
 			transactionExecutor = new CallbackPreferringTransactionExecutor();
 		}
