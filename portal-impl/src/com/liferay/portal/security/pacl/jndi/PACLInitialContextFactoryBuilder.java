@@ -46,6 +46,9 @@ public class PACLInitialContextFactoryBuilder
 	}
 
 	private InitialContextFactoryBuilder _initialContextFactoryBuilder;
+
+	// This must not be static because of LPS-33404
+
 	private Log _log = LogFactoryUtil.getLog(
 		PACLInitialContextFactoryBuilder.class.getName());
 
