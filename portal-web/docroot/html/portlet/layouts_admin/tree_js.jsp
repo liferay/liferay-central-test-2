@@ -171,7 +171,7 @@ if (!selectableTree) {
 					var type = 'task';
 
 					<c:if test="<%= !selectableTree %>">
-						type = (nodeChildren && expanded) ? 'normal' : 'io';
+						type = (nodeChildren && expanded) ? 'node' : 'io';
 					</c:if>
 
 					var newNode = {
