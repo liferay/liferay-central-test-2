@@ -387,6 +387,8 @@ public class DDMTemplateLocalServiceImpl
 	public void deleteTemplate(DDMTemplate template)
 		throws PortalException, SystemException {
 
+		// Template
+
 		if (template.getClassNameId() ==
 				PortalUtil.getClassNameId(DDMStructure.class.getName())) {
 
@@ -403,8 +405,6 @@ public class DDMTemplateLocalServiceImpl
 				throw new RequiredTemplateException();
 			}
 		}
-
-		// Template
 
 		ddmTemplatePersistence.remove(template);
 
