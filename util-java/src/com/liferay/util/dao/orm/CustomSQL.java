@@ -158,10 +158,10 @@ public class CustomSQL {
 	}
 
 	/**
-	 * Returns <code>true</code> if Hibernate is connecting to an HSQL
+	 * Returns <code>true</code> if Hibernate is connecting to a Hypersonic
 	 * database.
 	 *
-	 * @return <code>true</code> if Hibernate is connecting to an HSQL
+	 * @return <code>true</code> if Hibernate is connecting to a Hypersonic
 	 *         database
 	 */
 	public boolean isVendorHSQL() {
