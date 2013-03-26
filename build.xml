@@ -544,8 +544,8 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 	<target name="deploy-properties">
 		<if>
 			<and>
-				<equals arg1="${app.server.type}" arg2="glassfish" />
 				<equals arg1="${app.server.bundled}" arg2="true" />
+				<equals arg1="${app.server.type}" arg2="glassfish" />
 			</and>
 			<then>
 				<war destfile="${app.server.glassfish.portal.dir}" update="true">
