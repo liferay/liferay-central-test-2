@@ -22,11 +22,7 @@ LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)request.getAttribute
 boolean privateLayoutSet = GetterUtil.getBoolean((String)request.getAttribute("edit_layout_set_prototype.jsp-privateLayoutSet"));
 String redirect = (String)request.getAttribute("edit_layout_set_prototype.jsp-redirect");
 
-int mergeFailCount = 0;
-
-if ((layoutSetPrototype != null) && (layoutSetPrototype.getLayoutSetPrototypeId() != 0)) {
-	mergeFailCount = SitesUtil.getMergeFailCount(layoutSetPrototype);
-}
+int mergeFailCount = SitesUtil.getMergeFailCount(layoutSetPrototype);
 %>
 
 <c:if test="<%= mergeFailCount > PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_FAIL_THRESHOLD %>">
