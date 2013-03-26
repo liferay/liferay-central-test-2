@@ -100,7 +100,7 @@ public class JournalFolderAssetRenderer
 		int foldersCount = JournalFolderServiceUtil.getFoldersCount(
 			_folder.getGroupId(), _folder.getFolderId());
 
-		if ((articlesCount + foldersCount) > 0) {
+		if ((articlesCount > 0) || (foldersCount > 0)) {
 			return themeDisplay.getPathThemeImages() +
 				"/file_system/large/folder_full_article.png";
 		}

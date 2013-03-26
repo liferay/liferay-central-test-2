@@ -101,7 +101,7 @@ public class BookmarksFolderAssetRenderer
 		int foldersCount = BookmarksFolderServiceUtil.getFoldersCount(
 			_folder.getGroupId(), _folder.getFolderId());
 
-		if ((entriesCount + foldersCount) > 0) {
+		if ((entriesCount > 0) || (foldersCount > 0)) {
 			return themeDisplay.getPathThemeImages() +
 				"/file_system/large/folder_full_bookmark.png";
 		}

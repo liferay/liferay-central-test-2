@@ -102,7 +102,7 @@ public class DLFolderAssetRenderer
 				_folder.getRepositoryId(), _folder.getFolderId(),
 				WorkflowConstants.STATUS_APPROVED);
 
-		if ((entriesCount + foldersCount) > 0) {
+		if ((entriesCount > 0) || (foldersCount > 0)) {
 			return themeDisplay.getPathThemeImages() +
 				"/file_system/large/folder_full_document.png";
 		}
