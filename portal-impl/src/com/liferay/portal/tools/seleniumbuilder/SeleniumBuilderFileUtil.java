@@ -264,24 +264,23 @@ public class SeleniumBuilderFileUtil {
 	protected void throwValidationException(
 		int errorCode, String fileName, Element element) {
 
+		String prefix = "Error " + errorCode + ": ";
+		String suffix = fileName + ":" + element.attributeValue("line-number");
+
 		if (errorCode == 1000) {
 			throw new IllegalArgumentException(
-				"Error " + errorCode + ": Invalid root element at " +
-					fileName + ":" + element.attributeValue("line-number"));
+				prefix + "Invalid root element in " + suffix);
 		}
 		else if (errorCode == 1001) {
 			throw new IllegalArgumentException(
-				"Error " + errorCode + ": Missing child elements at " +
-					fileName + ":" + element.attributeValue("line-number"));
+				prefix + "Missing child elements in " + suffix);
 		}
 		else if (errorCode == 1002) {
 			throw new IllegalArgumentException(
-				"Error " + errorCode + ": Invalid child element at " +
-					fileName + ":" + element.attributeValue("line-number"));
+				prefix + "Invalid child element in " + suffix);
 		}
 		else {
-			throw new IllegalArgumentException(
-				"Error " + errorCode + ": " + fileName);
+			throw new IllegalArgumentException(prefix + suffix);
 		}
 	}
 

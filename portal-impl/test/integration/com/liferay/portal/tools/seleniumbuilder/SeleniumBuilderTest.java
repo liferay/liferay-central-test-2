@@ -41,27 +41,24 @@ public class SeleniumBuilderTest {
 	public void testFunctionDefinitionElement1000() throws Exception {
 		test(
 			"FunctionDefinitionElement1000.function",
-			"Error 1000: Invalid root element at portal-impl/test/" +
-				"integration/com/liferay/portal/tools/seleniumbuilder/" +
-				"dependencies/FunctionDefinitionElement1000.function:1");
+			"Error 1000: Invalid root element in " + _DIR_NAME +
+				"/FunctionDefinitionElement1000.function:1");
 	}
 
 	@Test
 	public void testFunctionDefinitionElement1001() throws Exception {
 		test(
 			"FunctionDefinitionElement1001.function",
-			"Error 1001: Missing child elements at portal-impl/test/" +
-				"integration/com/liferay/portal/tools/seleniumbuilder/" +
-				"dependencies/FunctionDefinitionElement1001.function:1");
+			"Error 1001: Missing child elements in " + _DIR_NAME +
+				"/FunctionDefinitionElement1001.function:1");
 	}
 
 	@Test
 	public void testFunctionDefinitionElement1002() throws Exception {
 		test(
 			"FunctionDefinitionElement1002.function",
-			"Error 1002: Invalid child element at portal-impl/test/" +
-				"integration/com/liferay/portal/tools/seleniumbuilder/" +
-				"dependencies/FunctionDefinitionElement1002.function:1");
+			"Error 1002: Invalid child element in " + _DIR_NAME +
+				"/FunctionDefinitionElement1002.function:1");
 	}
 
 	protected void test(String fileName) throws Exception {
@@ -69,17 +66,17 @@ public class SeleniumBuilderTest {
 	}
 
 	protected void test(String fileName, String errorMessage) throws Exception {
-		fileName =
-			"portal-impl/test/integration/com/liferay/portal/tools/" +
-				"seleniumbuilder/dependencies/" + fileName;
-
 		try {
-			_seleniumBuilderFileUtil.getRootElement(fileName);
+			_seleniumBuilderFileUtil.getRootElement(_DIR_NAME + "/" + fileName);
 		}
 		catch (IllegalArgumentException e) {
 			Assert.assertEquals(e.getMessage(), errorMessage);
 		}
 	}
+
+	private static final String _DIR_NAME =
+		"portal-impl/test/integration/com/liferay/portal/tools/" +
+			"seleniumbuilder/dependencies";
 
 	private SeleniumBuilderFileUtil _seleniumBuilderFileUtil;
 
