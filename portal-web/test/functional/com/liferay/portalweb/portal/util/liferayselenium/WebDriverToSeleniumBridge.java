@@ -376,7 +376,7 @@ public class WebDriverToSeleniumBridge
 			return confirmation;
 		}
 		catch (Exception e) {
-			throw new WebDriverException("Error: There were no confirmations");
+			throw new WebDriverException();
 		}
 	}
 
