@@ -691,8 +691,7 @@ public class SourceFormatter {
 	}
 
 	private static String _fixAntXMLProjectName(
-			String basedir, String fileName, String content)
-		throws IOException {
+		String basedir, String fileName, String content) {
 
 		int x = 0;
 
