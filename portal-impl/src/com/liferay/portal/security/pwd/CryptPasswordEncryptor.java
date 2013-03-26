@@ -15,6 +15,7 @@
 package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PwdEncryptorException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -31,73 +32,65 @@ import org.vps.crypt.Crypt;
 public class CryptPasswordEncryptor
 	extends BasePasswordEncryptor implements PasswordEncryptor {
 
-	public static final char[] SALT_CHARS =
-		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
-			.toCharArray();
-
+	@SuppressWarnings("deprecation")
 	public String[] getSupportedAlgorithmTypes() {
 		return new String[] {
 			PasswordEncryptorUtil.TYPE_CRYPT,
-			PasswordEncryptorUtil.TYPE_UFC_CRYPT };
+			PasswordEncryptorUtil.TYPE_UFC_CRYPT
+		};
 	}
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException {
 
-		byte[] saltBytes = getSalt(currentEncryptedPassword);
+		byte[] saltBytes = getSalt(encryptedPassword);
 
 		try {
 			return Crypt.crypt(
-				saltBytes, clearTextPassword.getBytes(Digester.ENCODING));
+				saltBytes, plainTextPassword.getBytes(Digester.ENCODING));
 		}
 		catch (UnsupportedEncodingException uee) {
-			throw new PwdEncryptorException(uee.getMessage());
+			throw new PwdEncryptorException(uee.getMessage(), uee);
 		}
 	}
 
-	protected byte[] getSalt(String cryptString) throws PwdEncryptorException {
+	protected byte[] getSalt(String encryptedPassword)
+		throws PwdEncryptorException {
+
 		byte[] saltBytes = null;
 
 		try {
-			if (Validator.isNull(cryptString)) {
-
-				// Generate random salt
-
+			if (Validator.isNull(encryptedPassword)) {
 				Random random = new Random();
 
-				int numSaltChars = SALT_CHARS.length;
+				int x = random.nextInt(Integer.MAX_VALUE) % _SALT.length;
+				int y = random.nextInt(Integer.MAX_VALUE) % _SALT.length;
 
-				StringBuilder sb = new StringBuilder();
-
-				int x = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
-				int y = random.nextInt(Integer.MAX_VALUE) % numSaltChars;
-
-				sb.append(SALT_CHARS[x]);
-				sb.append(SALT_CHARS[y]);
-
-				String salt = sb.toString();
+				String salt = _SALT[x].concat(_SALT[y]);
 
 				saltBytes = salt.getBytes(Digester.ENCODING);
 			}
 			else {
-
-				// Extract salt from encrypted password
-
-				String salt = cryptString.substring(0, 2);
+				String salt = encryptedPassword.substring(0, 2);
 
 				saltBytes = salt.getBytes(Digester.ENCODING);
 			}
 		}
 		catch (UnsupportedEncodingException uee) {
 			throw new PwdEncryptorException(
-				"Unable to extract salt from encrypted password: " +
-					uee.getMessage());
+				"Unable to extract salt from encrypted password " +
+					uee.getMessage(),
+				uee);
 		}
 
 		return saltBytes;
 	}
+
+	private static final String[] _SALT = ArrayUtil.toStringArray(
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
+			.toCharArray());
 
 }

@@ -27,6 +27,7 @@ import java.security.SecureRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -38,13 +39,13 @@ public class PBKDF2PasswordEncryptor
 	extends BasePasswordEncryptor implements PasswordEncryptor {
 
 	public String[] getSupportedAlgorithmTypes() {
-		return new String[] { PasswordEncryptorUtil.TYPE_PBKDF2 };
+		return new String[] {PasswordEncryptorUtil.TYPE_PBKDF2};
 	}
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException {
 
 		try {
@@ -52,70 +53,67 @@ public class PBKDF2PasswordEncryptor
 				new PBKDF2EncryptionConfiguration();
 
 			pbkdf2EncryptionConfiguration.configure(
-				algorithm, currentEncryptedPassword);
+				algorithm, encryptedPassword);
 
 			byte[] saltBytes = pbkdf2EncryptionConfiguration.getSaltBytes();
 
-			PBEKeySpec keySpec = new PBEKeySpec(
-				clearTextPassword.toCharArray(), saltBytes,
+			PBEKeySpec pbeKeySpec = new PBEKeySpec(
+				plainTextPassword.toCharArray(), saltBytes,
 				pbkdf2EncryptionConfiguration.getRounds(),
 				pbkdf2EncryptionConfiguration.getKeySize());
 
 			String algorithmName = algorithm;
 
-			int slashIndex = algorithm.indexOf(CharPool.SLASH);
+			int index = algorithm.indexOf(CharPool.SLASH);
 
-			if (slashIndex > -1) {
-				algorithmName = algorithm.substring(0, slashIndex);
+			if (index > -1) {
+				algorithmName = algorithm.substring(0, index);
 			}
 
-			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(
+			SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(
 				algorithmName);
 
-			byte[] key = keyFactory.generateSecret(keySpec).getEncoded();
+			SecretKey secretKey = secretKeyFactory.generateSecret(pbeKeySpec);
 
-			ByteBuffer result = ByteBuffer.allocate(
-				2 * 4 + saltBytes.length + key.length);
+			byte[] secretKeyBytes = secretKey.getEncoded();
 
-			result.putInt(pbkdf2EncryptionConfiguration.getKeySize());
+			ByteBuffer byteBuffer = ByteBuffer.allocate(
+				2 * 4 + saltBytes.length + secretKeyBytes.length);
 
-			result.putInt(pbkdf2EncryptionConfiguration.getRounds());
+			byteBuffer.putInt(pbkdf2EncryptionConfiguration.getKeySize());
+			byteBuffer.putInt(pbkdf2EncryptionConfiguration.getRounds());
+			byteBuffer.put(saltBytes);
+			byteBuffer.put(secretKeyBytes);
 
-			result.put(saltBytes);
-
-			result.put(key);
-
-			return Base64.encode(result.array());
+			return Base64.encode(byteBuffer.array());
 		}
 		catch (Exception e) {
-			throw new PwdEncryptorException(
-				"Unable to generate hash: " + e.getMessage(), e);
+			throw new PwdEncryptorException(e.getMessage(), e);
 		}
 	}
 
-	private static final int _DEFAULT_PBKDF2_KEY_SIZE = 160;
+	private static final int _KEY_SIZE = 160;
 
-	private static final int _DEFAULT_PBKDF2_ROUNDS = 128000;
+	private static final int _ROUNDS = 128000;
 
-	private static final int _DEFAULT_PBKDF2_SALT_SIZE = 8;
+	private static final int _SALT_BYTES_LENGTH = 8;
 
-	private static final Pattern _PBKDF2_PATTERN = Pattern.compile(
+	private static Pattern _pattern = Pattern.compile(
 		"^.*/?([0-9]+)?/([0-9]+)$");
 
 	private class PBKDF2EncryptionConfiguration {
 
-		public void configure(String algorithm, String currentEncryptedPassword)
+		public void configure(String algorithm, String encryptedPassword)
 			throws PwdEncryptorException {
 
-			if (Validator.isNull(currentEncryptedPassword)) {
-				Matcher pbkdf2Matcher = _PBKDF2_PATTERN.matcher(algorithm);
+			if (Validator.isNull(encryptedPassword)) {
+				Matcher matcher = _pattern.matcher(algorithm);
 
-				if (pbkdf2Matcher.matches()) {
+				if (matcher.matches()) {
 					_keySize = GetterUtil.getInteger(
-						pbkdf2Matcher.group(1), _DEFAULT_PBKDF2_KEY_SIZE);
+						matcher.group(1), _KEY_SIZE);
 
-					_rounds = GetterUtil.getInteger(
-						pbkdf2Matcher.group(2), _DEFAULT_PBKDF2_ROUNDS);
+					_rounds = GetterUtil.getInteger(matcher.group(2), _ROUNDS);
 				}
 
 				SecureRandom random = new SecureRandom();
@@ -123,29 +121,28 @@ public class PBKDF2PasswordEncryptor
 				random.nextBytes(_saltBytes);
 			}
 			else {
-				byte[] configAndSalt = new byte[16];
+				byte[] bytes = new byte[16];
 
 				try {
-					byte[] passwordBytes = Base64.decode(
-						currentEncryptedPassword);
+					byte[] encryptedPasswordBytes = Base64.decode(
+						encryptedPassword);
 
 					System.arraycopy(
-						passwordBytes, 0, configAndSalt, 0,
-						configAndSalt.length);
+						encryptedPasswordBytes, 0, bytes, 0, bytes.length);
 				}
 				catch (Exception e) {
 					throw new PwdEncryptorException(
-						"Unable to extract salt from encrypted password: " +
-							e.getMessage());
+						"Unable to extract salt from encrypted password " +
+							e.getMessage(),
+						e);
 				}
 
-				ByteBuffer buff = ByteBuffer.wrap(configAndSalt);
+				ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 
-				_keySize = buff.getInt();
+				_keySize = byteBuffer.getInt();
+				_rounds = byteBuffer.getInt();
 
-				_rounds = buff.getInt();
-
-				buff.get(_saltBytes);
+				byteBuffer.get(_saltBytes);
 			}
 		}
 
@@ -161,11 +158,10 @@ public class PBKDF2PasswordEncryptor
 			return _saltBytes;
 		}
 
-		private int _keySize = _DEFAULT_PBKDF2_KEY_SIZE;
+		private int _keySize = _KEY_SIZE;
+		private int _rounds = _ROUNDS;
+		private byte[] _saltBytes = new byte[_SALT_BYTES_LENGTH];
 
-		private int _rounds = _DEFAULT_PBKDF2_ROUNDS;
-
-		private byte[] _saltBytes = new byte[_DEFAULT_PBKDF2_SALT_SIZE];
 	}
 
 }

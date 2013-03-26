@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -31,39 +30,36 @@ public class BCryptPasswordEncryptor
 	extends BasePasswordEncryptor implements PasswordEncryptor {
 
 	public String[] getSupportedAlgorithmTypes() {
-		return new String[] { PasswordEncryptorUtil.TYPE_BCRYPT };
+		return new String[] {PasswordEncryptorUtil.TYPE_BCRYPT};
 	}
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
-		throws PwdEncryptorException {
+		String algorithm, String plainTextPassword, String encryptedPassword) {
 
 		String salt = null;
 
-		if (Validator.isNull(currentEncryptedPassword)) {
-			int rounds = _DEFAULT_BCRYPT_ROUNDS;
+		if (Validator.isNull(encryptedPassword)) {
+			int rounds = _ROUNDS;
 
-			Matcher algorithmRoundsMatcher = _BCRYPT_PATTERN.matcher(algorithm);
+			Matcher matcher = _pattern.matcher(algorithm);
 
-			if (algorithmRoundsMatcher.matches()) {
-				rounds = GetterUtil.getInteger(
-					algorithmRoundsMatcher.group(1), rounds);
+			if (matcher.matches()) {
+				rounds = GetterUtil.getInteger(matcher.group(1), rounds);
 			}
 
 			salt = BCrypt.gensalt(rounds);
 		}
 		else {
-			salt = currentEncryptedPassword.substring(0, 29);
+			salt = encryptedPassword.substring(0, 29);
 		}
 
-		return BCrypt.hashpw(clearTextPassword, salt);
+		return BCrypt.hashpw(plainTextPassword, salt);
 	}
 
-	private static final Pattern _BCRYPT_PATTERN = Pattern.compile(
-		"^BCrypt/([0-9]+)$", Pattern.CASE_INSENSITIVE);
+	private static final int _ROUNDS = 10;
 
-	private static final int _DEFAULT_BCRYPT_ROUNDS = 10;
+	private static Pattern _pattern = Pattern.compile(
+		"^BCrypt/([0-9]+)$", Pattern.CASE_INSENSITIVE);
 
 }

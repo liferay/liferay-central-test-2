@@ -59,40 +59,43 @@ public class PasswordEncryptorUtil {
 
 	public static final String TYPE_UFC_CRYPT = "UFC-CRYPT";
 
-	public static String encrypt(String clearTextPassword)
+	public static String encrypt(String plainTextPassword)
 		throws PwdEncryptorException {
 
-		return encrypt(clearTextPassword, null);
+		return encrypt(plainTextPassword, null);
 	}
 
 	public static String encrypt(
-			String clearTextPassword, String currentEncryptedPassword)
+			String plainTextPassword, String encryptedPassword)
 		throws PwdEncryptorException {
 
-		long clock = 0;
-		if (_log.isDebugEnabled()) {
-			clock = System.currentTimeMillis();
-		}
-
-		String encryptedPassword = encrypt(
-			PASSWORDS_ENCRYPTION_ALGORITHM, clearTextPassword,
-			currentEncryptedPassword);
+		long startTime = 0;
 
 		if (_log.isDebugEnabled()) {
-			clock = System.currentTimeMillis() - clock;
-			_log.debug("Password encrypted in " + clock + "ms.");
+			startTime = System.currentTimeMillis();
 		}
 
-		return encryptedPassword;
+		try {
+			return encrypt(
+				PASSWORDS_ENCRYPTION_ALGORITHM, plainTextPassword,
+				encryptedPassword);
+		}
+		finally {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Password encrypted in " +
+						(System.currentTimeMillis() - startTime) + "ms");
+			}
+		}
 	}
 
 	public static String encrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException {
 
 		return _passwordEncryptor.encrypt(
-			algorithm, clearTextPassword, currentEncryptedPassword);
+			algorithm, plainTextPassword, encryptedPassword);
 	}
 
 	public PasswordEncryptor getPasswordEncryptor() {

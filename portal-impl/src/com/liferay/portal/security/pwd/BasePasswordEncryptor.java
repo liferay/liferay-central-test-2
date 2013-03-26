@@ -23,23 +23,21 @@ import com.liferay.portal.kernel.util.Validator;
 public abstract class BasePasswordEncryptor implements PasswordEncryptor {
 
 	public String encrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException {
 
-		if (Validator.isNull(clearTextPassword)) {
-			throw new PwdEncryptorException(
-				"Unable to encrypt empty passwords.");
+		if (Validator.isNull(plainTextPassword)) {
+			throw new PwdEncryptorException("Unable to encrypt blank password");
 		}
 
-		return doEncrypt(
-			algorithm, clearTextPassword, currentEncryptedPassword);
+		return doEncrypt(algorithm, plainTextPassword, encryptedPassword);
 
 	}
 
 	protected abstract String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException;
 
 }

@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.PwdEncryptorException;
-
 /**
  * @author Michael C. Han
  * @author Tomas Polesovsky
@@ -24,16 +22,14 @@ public class NullPasswordEncryptor
 	extends BasePasswordEncryptor implements PasswordEncryptor {
 
 	public String[] getSupportedAlgorithmTypes() {
-		return new String[] { PasswordEncryptorUtil.TYPE_NONE };
+		return new String[] {PasswordEncryptorUtil.TYPE_NONE};
 	}
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
-		throws PwdEncryptorException {
+		String algorithm, String plainTextPassword, String encryptedPassword) {
 
-		return clearTextPassword;
+		return plainTextPassword;
 	}
 
 }

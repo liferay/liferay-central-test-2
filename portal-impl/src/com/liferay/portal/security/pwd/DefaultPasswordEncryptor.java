@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.pwd;
 
-import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.util.DigesterUtil;
 
 /**
@@ -30,11 +29,9 @@ public class DefaultPasswordEncryptor
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
-		throws PwdEncryptorException {
+		String algorithm, String plainTextPassword, String encryptedPassword) {
 
-		return DigesterUtil.digest(algorithm, clearTextPassword);
+		return DigesterUtil.digest(algorithm, plainTextPassword);
 	}
 
 }

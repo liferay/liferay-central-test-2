@@ -17,6 +17,7 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.PwdEncryptorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -67,17 +68,12 @@ public class CompositePasswordEncryptor
 
 	@Override
 	protected String doEncrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException {
 
 		if (Validator.isNull(algorithm)) {
-			throw new IllegalArgumentException(
-				"Must specify an encryption algorithm.");
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Searching passwordEncryptor for " + algorithm);
+			throw new IllegalArgumentException("Invalid algorithm");
 		}
 
 		PasswordEncryptor passwordEncryptor = null;
@@ -96,9 +92,7 @@ public class CompositePasswordEncryptor
 
 		if (passwordEncryptor == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"No passwordEncryptor found for " + algorithm +
-						", using default");
+				_log.debug("No password encryptor found for " + algorithm);
 			}
 
 			passwordEncryptor = _defaultPasswordEncryptor;
@@ -106,16 +100,17 @@ public class CompositePasswordEncryptor
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Found " + passwordEncryptor.getClass().getName() +
+				"Found " + ClassUtil.getClassName(passwordEncryptor) +
 					" to encrypt password using " + algorithm);
 		}
 
 		return passwordEncryptor.encrypt(
-			algorithm, clearTextPassword, currentEncryptedPassword);
+			algorithm, plainTextPassword, encryptedPassword);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		CompositePasswordEncryptor.class);
+
 	private PasswordEncryptor _defaultPasswordEncryptor;
 	private Map<String, PasswordEncryptor> _passwordEncryptors =
 		new HashMap<String, PasswordEncryptor>();

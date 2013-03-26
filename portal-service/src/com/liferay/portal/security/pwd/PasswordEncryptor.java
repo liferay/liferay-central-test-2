@@ -22,8 +22,8 @@ import com.liferay.portal.PwdEncryptorException;
 public interface PasswordEncryptor {
 
 	public String encrypt(
-			String algorithm, String clearTextPassword,
-			String currentEncryptedPassword)
+			String algorithm, String plainTextPassword,
+			String encryptedPassword)
 		throws PwdEncryptorException;
 
 	public String[] getSupportedAlgorithmTypes();
