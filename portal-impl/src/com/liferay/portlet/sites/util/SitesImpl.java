@@ -636,6 +636,12 @@ public class SitesImpl implements Sites {
 	public int getMergeFailCount(LayoutPrototype layoutPrototype)
 		throws PortalException, SystemException {
 
+		if ((layoutPrototype == null) ||
+			(layoutPrototype.getLayoutPrototypeId() == 0)) {
+
+			return 0;
+		}
+
 		Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
 		UnicodeProperties prototypeTypeSettingsProperties =
