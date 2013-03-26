@@ -187,8 +187,8 @@ public class JournalArticleAssetRenderer
 		String linkToLayoutUuid = GetterUtil.getString(
 			portletSetup.getValue("portletSetupLinkToLayoutUuid", null));
 
-		if (Validator.isNull(linkToLayoutUuid) &&
-			Validator.isNotNull(_article.getLayoutUuid())) {
+		if (Validator.isNotNull(_article.getLayoutUuid()) &&
+			Validator.isNull(linkToLayoutUuid)) {
 
 			Group group = themeDisplay.getScopeGroup();
 
