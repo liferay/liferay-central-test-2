@@ -150,12 +150,12 @@ public class SeleniumBuilderFileUtil {
 
 		StringBundler sb = new StringBundler();
 
+		int lineNumber = 1;
+
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
 
 		String line = null;
-
-		int lineNumber = 1;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
 			Pattern pattern = Pattern.compile("<[a-z\\-]+");
