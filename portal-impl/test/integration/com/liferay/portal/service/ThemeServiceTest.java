@@ -45,10 +45,10 @@ public class ThemeServiceTest {
 	public void testGetTheme() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		LayoutSet publicLayoutSet = group.getPublicLayoutSet();
+		LayoutSet layoutSet = group.getPublicLayoutSet();
 
 		Theme theme = ThemeLocalServiceUtil.getTheme(
-			group.getCompanyId(), publicLayoutSet.getThemeId(), false);
+			group.getCompanyId(), layoutSet.getThemeId(), false);
 
 		Assert.notNull(theme);
 	}
