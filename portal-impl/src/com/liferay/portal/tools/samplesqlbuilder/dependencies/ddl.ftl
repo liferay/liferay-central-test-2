@@ -34,7 +34,7 @@
 		<#list portletPreferencesList as portletPreferences>
 			insert into PortletPreferences values (${portletPreferences.portletPreferencesId}, ${portletPreferences.ownerId}, ${portletPreferences.ownerType}, ${portletPreferences.plid}, '${portletPreferences.portletId}', '${portletPreferences.preferences}');
 
-			<#assign primKey = dataFactory.getPermissionPrimaryKey(layout.plid, portletPreferences.portletId)>
+			<#assign primKey = dataFactory.getPortletPermissionPrimaryKey(layout.plid, portletPreferences.portletId)>
 
 			${sampleSQLBuilder.insertResourcePermission(portletPreferences.portletId, primKey)}
 		</#list>
