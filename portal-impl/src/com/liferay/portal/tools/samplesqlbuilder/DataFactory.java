@@ -756,8 +756,16 @@ public class DataFactory {
 	}
 
 	public DDMContent newDDMContent(DLFileEntry dlFileEntry) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<?xml version=\"1.0\"?><root><dynamic-element ");
+		sb.append("name=\"CONTENT_TYPE\"><dynamic-content>");
+		sb.append("<![CDATA[text/plain]]></dynamic-content></dynamic-element>");
+		sb.append("<dynamic-element <![CDATA[ISO-8859-1]]></dynamic-content>");
+		sb.append("</dynamic-element></root>");
+
 		return newDDMContent(
-			_counter.get(), dlFileEntry.getGroupId(), _DL_DDM_CONTENT);
+			_counter.get(), dlFileEntry.getGroupId(), sb.toString());
 	}
 
 	public DDMStorageLink newDDMStorageLink(
@@ -1695,13 +1703,6 @@ public class DataFactory {
 	private static final String _DEPENDENCIES_DIR=
 		"../portal-impl/src/com/liferay/portal/tools/samplesqlbuilder/" +
 			"dependencies/";
-
-	private static final String _DL_DDM_CONTENT =
-		"<?xml version=\"1.0\"?><root><dynamic-element " +
-			"name=\"CONTENT_TYPE\"><dynamic-content><![CDATA[text/plain]]>" +
-				"</dynamic-content></dynamic-element><dynamic-element " +
-					"<![CDATA[ISO-8859-1]]></dynamic-content>" +
-						"</dynamic-element></root>";
 
 	private static final long _FUTURE_TIME =
 		System.currentTimeMillis() + Time.YEAR;
