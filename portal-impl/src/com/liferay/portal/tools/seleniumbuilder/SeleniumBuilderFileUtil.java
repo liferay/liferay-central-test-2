@@ -261,15 +261,64 @@ public class SeleniumBuilderFileUtil {
 		}
 	}
 
+	protected String arrayToString(String[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return "()";
+		}
+
+		StringBundler sb = new StringBundler();
+
+		sb.append("(");
+
+		for (int i = 0; i < array.length; i++) {
+			String value = array[i];
+
+			if (value != null) {
+				sb.append(value);
+			}
+
+			if ((i + 1) != array.length) {
+				sb.append("|");
+			}
+		}
+
+		sb.append(")");
+
+		return sb.toString();
+	}
+
 	protected void throwValidationException(int errorCode, String fileName) {
-		throwValidationException(errorCode, fileName, null);
+		throwValidationException(errorCode, fileName, null, null, null);
 	}
 
 	protected void throwValidationException(
 		int errorCode, String fileName, Element element) {
 
+		throwValidationException(errorCode, fileName, element, null, null);
+	}
+
+	protected void throwValidationException(
+		int errorCode, String fileName, Element element, String string) {
+
+		throwValidationException(errorCode, fileName, element, null, string);
+	}
+
+	protected void throwValidationException(
+		int errorCode, String fileName, Element element, String[] array) {
+
+		throwValidationException(errorCode, fileName, element, array, null);
+	}
+
+	protected void throwValidationException(
+		int errorCode, String fileName, Element element, String[] array,
+		String string) {
+
 		String prefix = "Error " + errorCode + ": ";
-		String suffix = fileName + ":" + element.attributeValue("line-number");
+		String suffix = fileName;
+
+		if (element != null) {
+			suffix += ":" + element.attributeValue("line-number");
+		}
 
 		if (errorCode == 1000) {
 			throw new IllegalArgumentException(
@@ -285,7 +334,16 @@ public class SeleniumBuilderFileUtil {
 		}
 		else if (errorCode == 1003) {
 			throw new IllegalArgumentException(
-				prefix + "Missing name attribute in " + suffix);
+				prefix + "Missing " + string + " attribute in " + suffix);
+		}
+		else if (errorCode == 1004) {
+			throw new IllegalArgumentException(
+				prefix + "Missing " + arrayToString(array) + " attribute in " +
+					suffix);
+		}
+		else if (errorCode == 1005) {
+			throw new IllegalArgumentException(
+				prefix + "Invalid " + string + " attribute in " + suffix);
 		}
 		else {
 			throw new IllegalArgumentException(prefix + suffix);
@@ -376,7 +434,8 @@ public class SeleniumBuilderFileUtil {
 		}
 
 		if (!hasAllowedAttributeName) {
-			throwValidationException(0, fileName);
+			throwValidationException(
+				1004, fileName, executeElement, allowedExecuteAttributeNames);
 		}
 
 		String action = executeElement.attributeValue("action");
@@ -409,8 +468,13 @@ public class SeleniumBuilderFileUtil {
 				}
 			}
 		}
-		else if (Validator.isNotNull(function) &&
-				function.matches(allowedExecuteAttributeValuesRegex)) {
+		else if (function != null) {
+			if (Validator.isNull(function) ||
+				!function.matches(allowedExecuteAttributeValuesRegex)) {
+
+				throwValidationException(
+					1005, fileName, executeElement, "function");
+			}
 
 			for (Attribute attribute : attributes) {
 				String attributeName = attribute.getName();
@@ -509,7 +573,7 @@ public class SeleniumBuilderFileUtil {
 
 			if (elementName.equals("command")) {
 				if (Validator.isNull(element.attributeValue("name"))) {
-					throwValidationException(1003, fileName, element);
+					throwValidationException(1003, fileName, element, "name");
 				}
 
 				validateCommandElement(
@@ -570,7 +634,7 @@ public class SeleniumBuilderFileUtil {
 
 			if (elementName.equals("command")) {
 				if (Validator.isNull(element.attributeValue("name"))) {
-					throwValidationException(1003, fileName, element);
+					throwValidationException(1003, fileName, element, "name");
 				}
 
 				validateCommandElement(
