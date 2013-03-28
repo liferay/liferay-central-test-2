@@ -261,32 +261,6 @@ public class SeleniumBuilderFileUtil {
 		}
 	}
 
-	protected String arrayToString(String[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return "()";
-		}
-
-		StringBundler sb = new StringBundler();
-
-		sb.append("(");
-
-		for (int i = 0; i < array.length; i++) {
-			String value = array[i];
-
-			if (value != null) {
-				sb.append(value);
-			}
-
-			if ((i + 1) != array.length) {
-				sb.append("|");
-			}
-		}
-
-		sb.append(")");
-
-		return sb.toString();
-	}
-
 	protected void throwValidationException(int errorCode, String fileName) {
 		throwValidationException(errorCode, fileName, null, null, null);
 	}
@@ -338,8 +312,8 @@ public class SeleniumBuilderFileUtil {
 		}
 		else if (errorCode == 1004) {
 			throw new IllegalArgumentException(
-				prefix + "Missing " + arrayToString(array) + " attribute in " +
-					suffix);
+				prefix + "Missing (" + StringUtil.merge(array, "|") +
+					") attribute in " + suffix);
 		}
 		else if (errorCode == 1005) {
 			throw new IllegalArgumentException(
