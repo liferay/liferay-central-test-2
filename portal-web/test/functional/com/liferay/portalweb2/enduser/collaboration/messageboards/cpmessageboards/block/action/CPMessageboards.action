@@ -7,6 +7,7 @@
 			<execute function="Click#valueClickAtAndWait" value1="Move to the Recycle Bin" />
 		</case>
 	</command>
+
 	<command name="isElementPresent">
 		<case locator-key="THREADS_SELECT_ALL">
 			<execute function="IsElementPresent#isVisible" />

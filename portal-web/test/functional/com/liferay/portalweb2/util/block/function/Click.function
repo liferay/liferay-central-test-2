@@ -1,12 +1,4 @@
 <definition>
-	<command name="actionsClickAt">
-		<execute selenium="pause" argument1="1000" />
-
-		<execute function="AssertTextEquals#assertText" />
-
-		<execute selenium="clickAt" />
-	</command>
-
 	<command name="clickAt">
 		<execute selenium="waitForVisible" />
 
@@ -29,6 +21,12 @@
 		<execute function="AssertTextEquals#assertPartialText" />
 
 		<execute selenium="clickAtAndWait" />
+	</command>
+
+	<command name="pauseTextClickAt">
+		<execute selenium="pause" argument1="1000" />
+
+		<execute function="Click#textClickAt" />
 	</command>
 
 	<command name="textClick">

@@ -4,6 +4,7 @@
 			<execute function="AssertTextEquals#assertPartialText" />
 		</case>
 	</command>
+
 	<command name="click">
 		<case locator-key="ACTIONS_MOVE_TO_THE_RECYCLE_BIN">
 			<execute function="Click#textClickAtAndWait" />
@@ -18,7 +19,7 @@
 			<execute function="Click#valueClickAtAndWait" value1="Post New Thread" />
 		</case>
 		<case locator-key="THREADS_ACTIONS">
-			<execute function="Click#actionsClickAt" />
+			<execute function="Click#pauseTextClickAt" />
 		</case>
 		<case locator-key="THREADS_THREAD">
 			<execute function="Click#textClickAtAndWait" />
