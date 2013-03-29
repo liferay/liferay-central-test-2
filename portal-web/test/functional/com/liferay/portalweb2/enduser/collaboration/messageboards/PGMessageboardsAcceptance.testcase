@@ -1,0 +1,69 @@
+<definition>
+	<set-up>
+		<execute macro="User#pgFirstLogin" />
+	</set-up>
+	<command name="AddMBCategory">
+		<var name="pageName" value="Message Boards Test Page" />
+		<var name="portletName" value="Message Boards" />
+		<var name="categoryName" value="MB Category Name" />
+
+		<execute macro="Page#pgAdd" />
+
+		<execute macro="Portlet#pgAdd" />
+
+		<execute macro="Messageboards#pgAddCategory" />
+
+	</command>
+
+	<command name="AddMBThread">
+		<var name="pageName" value="Message Boards Test Page" />
+		<var name="portletName" value="Message Boards" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+		<var name="threadBody" value="MB Thread Message Body" />
+
+		<execute macro="Page#pgAdd" />
+
+		<execute macro="Portlet#pgAdd" />
+
+		<execute macro="Messageboards#pgAddThread" />
+	</command>
+
+	<command name="DeleteMBThread">
+		<var name="pageName" value="Message Boards Test Page" />
+		<var name="portletName" value="Message Boards" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+		<var name="threadBody" value="MB Thread Message Body" />
+
+		<execute macro="Page#pgAdd" />
+
+		<execute macro="Portlet#pgAdd" />
+
+		<execute macro="Messageboards#pgAddThread" />
+
+		<execute macro="Messageboards#pgDeleteThread" />
+	</command>
+
+	<command name="ReplyMBThread">
+		<var name="pageName" value="Message Boards Test Page" />
+		<var name="portletName" value="Message Boards" />
+		<var name="threadSubject" value="MB Thread Message Subject" />
+		<var name="threadBody" value="MB Thread Message Body" />
+		<var name="threadReplyBody" value="MB Thread Reply Body" />
+
+		<execute macro="Page#pgAdd" />
+
+		<execute macro="Portlet#pgAdd" />
+
+		<execute macro="Messageboards#pgAddThread" />
+
+		<execute macro="Messageboards#pgReplyThread" />
+	</command>
+
+	<tear-down>
+		<execute macro="Messageboards#cpTearDown" />
+
+		<execute macro="Page#pgTearDown" />
+
+		<execute macro="User#pgLogout" />
+	</tear-down>
+</definition>
