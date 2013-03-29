@@ -14,7 +14,7 @@
 
 				insert into WikiPageResource values ('${wikiPageResource.uuid}', ${wikiPageResource.resourcePrimKey}, ${wikiPageResource.nodeId}, '${wikiPageResource.title}');
 
-				<@insertAssetEntry _entry = wikiPage/>
+				<@insertAssetEntry _entry = wikiPage />
 
 				<#assign mbRootMessageId = counter.get()>
 				<#assign mbThreadId = counter.get()>

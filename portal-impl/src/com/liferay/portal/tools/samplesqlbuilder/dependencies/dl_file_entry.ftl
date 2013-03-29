@@ -6,20 +6,20 @@ insert into DLFileEntry values ('${dlFileEntry.uuid}', ${dlFileEntry.fileEntryId
 
 insert into DLFileVersion values ('${dlFileVersion.uuid}', ${dlFileVersion.fileVersionId}, ${dlFileVersion.groupId}, ${dlFileVersion.companyId}, ${dlFileVersion.userId}, '${dlFileVersion.userName}', '${dataFactory.getDateString(dlFileVersion.createDate)}', '${dataFactory.getDateString(dlFileVersion.modifiedDate)}', ${dlFileVersion.repositoryId}, ${dlFileVersion.folderId}, ${dlFileVersion.fileEntryId}, '${dlFileVersion.extension}', '${dlFileVersion.mimeType}', '${dlFileVersion.title}','${dlFileVersion.description}', '${dlFileVersion.changeLog}', '${dlFileVersion.extraSettings}', ${dlFileVersion.fileEntryTypeId}, '${dlFileVersion.version}', ${dlFileVersion.size}, '${dlFileVersion.checksum}', ${dlFileVersion.status}, ${dlFileVersion.statusByUserId}, '${dlFileVersion.statusByUserName}', ${dlFileVersion.statusDate!'null'});
 
-<@insertDLSync _entry = dlFileEntry/>
+<@insertDLSync _entry = dlFileEntry />
 
-<@insertAssetEntry _entry = dlFileEntry/>
+<@insertAssetEntry _entry = dlFileEntry />
 
 <#assign ddmStorageLinkId = counter.get()>
 
-<@insertDDMContent _entry = dlFileEntry _ddmStorageLinkId = ddmStorageLinkId _ddmStructureId = ddmStructureId/>
+<@insertDDMContent _ddmStorageLinkId = ddmStorageLinkId _ddmStructureId = ddmStructureId _entry = dlFileEntry />
 
 ${sampleSQLBuilder.insertMBDiscussion(dlFileEntry.groupId, dataFactory.DLFileEntryClassNameId, dlFileEntry.fileEntryId, counter.get(), counter.get(), 0)}
 
-<@insertSocialActivity _entry = dlFileEntry/>
+<@insertSocialActivity _entry = dlFileEntry />
 
 <#assign dlFileEntryMetadata = dataFactory.newDLFileEntryMetadata(ddmStorageLinkId, ddmStructureId, dlFileVersion)>
 
 insert into DLFileEntryMetadata values ('${dlFileEntryMetadata.uuid}', ${dlFileEntryMetadata.fileEntryMetadataId}, ${dlFileEntryMetadata.DDMStorageId}, ${dlFileEntryMetadata.DDMStructureId}, ${dlFileEntryMetadata.fileEntryTypeId}, ${dlFileEntryMetadata.fileEntryId}, ${dlFileEntryMetadata.fileVersionId});
 
-<@insertDDMStructureLink _entry = dlFileEntryMetadata/>
+<@insertDDMStructureLink _entry = dlFileEntryMetadata />

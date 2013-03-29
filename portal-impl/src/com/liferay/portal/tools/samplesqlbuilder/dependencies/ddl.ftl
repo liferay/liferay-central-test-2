@@ -15,7 +15,7 @@
 
 		insert into DDLRecordSet values ('${ddlRecordSet.uuid}', ${ddlRecordSet.recordSetId}, ${ddlRecordSet.groupId}, ${ddlRecordSet.companyId}, ${ddlRecordSet.userId}, '${ddlRecordSet.userName}', '${dataFactory.getDateString(ddlRecordSet.createDate)}', '${dataFactory.getDateString(ddlRecordSet.modifiedDate)}', ${ddlRecordSet.DDMStructureId}, '${ddlRecordSet.recordSetKey}', '${ddlRecordSet.name}', '${ddlRecordSet.description}', ${ddlRecordSet.minDisplayRows}, ${ddlRecordSet.scope});
 
-		<@insertDDMStructureLink _entry = ddlRecordSet/>
+		<@insertDDMStructureLink _entry = ddlRecordSet />
 
 		<#if (maxDDLRecordCount > 0)>
 			<#list 1..maxDDLRecordCount as ddlRecordCount>
@@ -27,6 +27,6 @@
 			</#list>
 		</#if>
 
-		<@insertPortletPreferences _plid = layout.plid _entry = ddlRecordSet _portletId = portletId/>
+		<@insertPortletPreferences _entry = ddlRecordSet _plid = layout.plid _portletId = portletId />
 	</#list>
 </#if>

@@ -18,6 +18,6 @@
 
 		${sampleSQLBuilder.insertDLFolders(groupId, dlFolder.folderId, dlFolderDepth + 1, ddmStructureId)}
 
-		<@insertDLSync _entry = dlFolder/>
+		<@insertDLSync _entry = dlFolder />
 	</#list>
 </#if>
