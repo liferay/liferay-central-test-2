@@ -568,12 +568,12 @@ public class SeleniumBuilderFileUtil {
 			String elementName = element.getName();
 
 			if (elementName.equals("command")) {
-				String attributeName = element.attributeValue("name");
+				String attributeValue = element.attributeValue("name");
 
-				if (attributeName == null) {
+				if (attributeValue == null) {
 					throwValidationException(1003, fileName, element, "name");
 				}
-				else if (Validator.isNull(attributeName)) {
+				else if (Validator.isNull(attributeValue)) {
 					throwValidationException(1006, fileName, element, "name");
 				}
 
