@@ -300,8 +300,6 @@ public abstract class BaseWebDriverImpl
 	}
 
 	public void makeVisible(String locator) {
-		WebElement webElement = getWebElement(locator);
-
 		WebElement bodyElement = getWebElement("//body");
 
 		WrapsDriver wrapsDriver = (WrapsDriver)bodyElement;
@@ -310,13 +308,16 @@ public abstract class BaseWebDriverImpl
 
 		JavascriptExecutor javascriptExecutor = (JavascriptExecutor)webDriver;
 
-		String code =
-			"var element = arguments[0];" +
-			"element.style.display='inline-block';" +
-			"element.style.overflow='visible';" +
-			"element.style.visibility='visible';";
+		StringBundler sb = new StringBundler(4);
 
-		javascriptExecutor.executeScript(code, webElement);
+		sb.append("var element = arguments[0];");
+		sb.append("element.style.display = 'inline-block';");
+		sb.append("element.style.overflow = 'visible';");
+		sb.append("element.style.visibility = 'visible';");
+
+		WebElement webElement = getWebElement(locator);
+
+		javascriptExecutor.executeScript(sb.toString(), webElement);
 	}
 
 	public void paste(String location) {

@@ -29,16 +29,15 @@ Selenium.prototype.doLabel = function() {
 };
 
 Selenium.prototype.doMakeVisible = function(locator) {
-	var xpathResult = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+	var xPathResult = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
 
-	if (xpathResult.singleNodeValue) {
-		var element = xpathResult.singleNodeValue;
+	if (xPathResult.singleNodeValue) {
+		var element = xPathResult.singleNodeValue;
 
-		element.style.display="inline-block";
-		element.style.overflow="visible";
-		element.style.visibility="visible";
+		element.style.display = "inline-block";
+		element.style.overflow = "visible";
+		element.style.visibility = "visible";
 	}
-
 };
 
 Selenium.prototype.doSetBrowserOption = function(value) {

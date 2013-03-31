@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.util.liferayselenium;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 import com.liferay.portalweb.portal.util.TestPropsValues;
@@ -253,18 +254,21 @@ public abstract class BaseSeleniumImpl
 	}
 
 	public void makeVisible(String locator) {
-		String script =
-			"var xpathResult =" +
-			"document.evaluate(" + locator + ", document, null," +
-			"XPathResult.FIRST_ORDERED_NODE_TYPE, null);" +
-			"if (xpathResult.singleNodeValue) {" +
-			"var element = xpathResult.singleNodeValue;" +
-			"element.style.display='inline-block';" +
-			"element.style.overflow='visible';" +
-			"element.style.visibility='visible';" +
-			"}";
+		StringBundler sb = new StringBundler(10);
 
-		super.runScript(script);
+		sb.append("var xpathResult = document.evaluate(");
+		sb.append(locator);
+		sb.append(", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, ");
+		sb.append("null);");
+
+		sb.append("if (xpathResult.singleNodeValue) {");
+		sb.append("var element = xpathResult.singleNodeValue;");
+		sb.append("element.style.display = 'inline-block';");
+		sb.append("element.style.overflow = 'visible';");
+		sb.append("element.style.visibility = 'visible';");
+		sb.append("}");
+
+		super.runScript(sb.toString());
 	}
 
 	public void paste(String location) {
