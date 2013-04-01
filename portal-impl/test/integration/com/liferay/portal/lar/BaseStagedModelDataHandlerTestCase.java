@@ -116,7 +116,7 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 
 		portletDataContext.setImportDataRootElement(rootElement);
 
-		// Re-read staged model for import from ZIP for true testing
+		// Reread the staged model for import from ZIP for true testing
 
 		String stagedModelPath = StagedModelPathUtil.getPath(stagedModel);
 
