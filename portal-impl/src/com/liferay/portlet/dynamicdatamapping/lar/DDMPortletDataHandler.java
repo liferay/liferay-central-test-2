@@ -714,8 +714,6 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = portletDataContext.getImportDataRootElement();
-
 		Element structuresElement =
 			portletDataContext.getImportDataGroupElement(DDMStructure.class);
 
