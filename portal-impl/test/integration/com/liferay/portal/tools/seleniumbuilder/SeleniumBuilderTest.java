@@ -33,6 +33,11 @@ public class SeleniumBuilderTest {
 	}
 
 	@Test
+	public void testAction() throws Exception {
+		test("Action.action");
+	}
+
+	@Test
 	public void testFunction() throws Exception {
 		test("Function.function");
 	}
