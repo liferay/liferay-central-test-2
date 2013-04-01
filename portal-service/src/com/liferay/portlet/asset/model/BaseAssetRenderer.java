@@ -89,12 +89,6 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return getIconPath(themeDisplay);
 	}
 
-	public String getImagePreviewURL(PortletRequest portletRequest)
-		throws Exception {
-
-		return getThumbnailPath(portletRequest);
-	}
-
 	public String getPreviewPath(
 			PortletRequest portletRequest, PortletResponse PortletResponse)
 		throws Exception {
@@ -189,6 +183,12 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		throws Exception {
 
 		return null;
+	}
+
+	public String getURLImagePreview(PortletRequest portletRequest)
+		throws Exception {
+
+		return getThumbnailPath(portletRequest);
 	}
 
 	public String getUrlTitle() {

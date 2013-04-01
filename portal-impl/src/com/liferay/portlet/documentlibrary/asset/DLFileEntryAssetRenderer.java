@@ -106,17 +106,6 @@ public class DLFileEntryAssetRenderer
 			_fileEntry.getIcon() + ".png";
 	}
 
-	@Override
-	public String getImagePreviewURL(PortletRequest portletRequest)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		return DLUtil.getImagePreviewURL(
-			_fileEntry, _fileVersion, themeDisplay);
-	}
-
 	public String getPortletId() {
 		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
 
@@ -201,6 +190,17 @@ public class DLFileEntryAssetRenderer
 		portletURL.setParameter("title", String.valueOf(_fileEntry.getTitle()));
 
 		return portletURL;
+	}
+
+	@Override
+	public String getURLImagePreview(PortletRequest portletRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return DLUtil.getImagePreviewURL(
+			_fileEntry, _fileVersion, themeDisplay);
 	}
 
 	@Override

@@ -58,9 +58,6 @@ public interface AssetRenderer {
 
 	public String getIconPath(PortletRequest portletRequest);
 
-	public String getImagePreviewURL(PortletRequest portletRequest)
-		throws Exception;
-
 	public String getPreviewPath(
 			PortletRequest portletRequest, PortletResponse PortletResponse)
 		throws Exception;
@@ -90,6 +87,9 @@ public interface AssetRenderer {
 	public PortletURL getURLExport(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
+		throws Exception;
+
+	public String getURLImagePreview(PortletRequest portletRequest)
 		throws Exception;
 
 	public String getUrlTitle();
