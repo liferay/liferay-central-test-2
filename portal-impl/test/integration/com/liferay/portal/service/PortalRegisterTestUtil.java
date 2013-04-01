@@ -67,7 +67,7 @@ import com.liferay.portlet.wiki.workflow.WikiPageWorkflowHandler;
 /**
  * @author Roberto Díaz
  */
-public class FrameworkRegisterTestUtil {
+public class PortalRegisterTestUtil {
 
 	protected static void registerAssetRendererFactories() {
 		AssetRendererFactoryRegistryUtil.register(
