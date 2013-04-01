@@ -717,7 +717,7 @@ serverURL.setParameter("tabs3", tabs3);
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
-				<liferay-ui:error key="minutes" message="please-enter-the-number-of-minutes" />
+				<liferay-ui:error key="shutdownMinutes" message="please-enter-the-number-of-minutes" />
 
 				<aui:button-row>
 

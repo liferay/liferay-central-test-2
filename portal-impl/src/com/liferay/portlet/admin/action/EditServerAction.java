@@ -525,7 +525,7 @@ public class EditServerAction extends PortletAction {
 				ParamUtil.getInteger(actionRequest, "minutes") * Time.MINUTE;
 
 			if (minutes <= 0) {
-				SessionErrors.add(actionRequest, "minutes");
+				SessionErrors.add(actionRequest, "shutdownMinutes");
 			}
 			else {
 				String message = ParamUtil.getString(actionRequest, "message");
