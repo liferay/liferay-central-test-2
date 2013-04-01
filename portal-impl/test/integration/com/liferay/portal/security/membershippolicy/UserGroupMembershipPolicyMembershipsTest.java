@@ -211,9 +211,6 @@ public class UserGroupMembershipPolicyMembershipsTest
 			user, null, null, null, standardUserGroupIds,
 			Collections.<UserGroupRole>emptyList());
 
-		// We have tried to remove the user from his required User Groups, but
-		// they are kept
-
 		userGroups = user.getUserGroups();
 
 		Assert.assertEquals(userUserGroupIds.length, userGroups.size());
