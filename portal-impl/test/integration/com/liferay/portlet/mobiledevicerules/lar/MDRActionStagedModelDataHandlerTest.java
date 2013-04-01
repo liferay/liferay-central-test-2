@@ -58,18 +58,18 @@ public class MDRActionStagedModelDataHandlerTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		layout = LayoutTestUtil.addLayout(
+		_layout = LayoutTestUtil.addLayout(
 			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setUuid(layout.getUuid());
+		serviceContext.setUuid(_layout.getUuid());
 
 		LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), liveGroup.getGroupId(),
-			layout.getPrivateLayout(), layout.getParentLayoutId(),
-			layout.getName(), layout.getTitle(), layout.getDescription(),
-			layout.getType(), layout.getHidden(), layout.getFriendlyURL(),
+			_layout.getPrivateLayout(), _layout.getParentLayoutId(),
+			_layout.getName(), _layout.getTitle(), _layout.getDescription(),
+			_layout.getType(), _layout.getHidden(), _layout.getFriendlyURL(),
 			serviceContext);
 	}
 
@@ -88,7 +88,7 @@ public class MDRActionStagedModelDataHandlerTest
 
 		MDRRuleGroupInstance ruleGroupInstance =
 			MDRTestUtil.addRuleGroupInstance(
-				group.getGroupId(), Layout.class.getName(), layout.getPlid(),
+				group.getGroupId(), Layout.class.getName(), _layout.getPlid(),
 				ruleGroup.getRuleGroupId());
 
 		addDependentStagedModel(
@@ -159,6 +159,6 @@ public class MDRActionStagedModelDataHandlerTest
 				ruleGroupInstance.getUuid(), ruleGroupInstance.getGroupId());
 	}
 
-	protected Layout layout;
+	private Layout _layout;
 
 }
