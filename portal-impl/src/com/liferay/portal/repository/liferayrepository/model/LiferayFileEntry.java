@@ -76,16 +76,16 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.getCompanyId();
 	}
 
-	public InputStream getContentStream(String version)
-		throws PortalException, SystemException {
-
-		return _dlFileEntry.getContentStream(version);
-	}
-
 	public InputStream getContentStream()
 		throws PortalException, SystemException {
 
 		return _dlFileEntry.getContentStream();
+	}
+
+	public InputStream getContentStream(String version)
+		throws PortalException, SystemException {
+
+		return _dlFileEntry.getContentStream(version);
 	}
 
 	public Date getCreateDate() {
@@ -163,6 +163,10 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.getLock();
 	}
 
+	public String getMimeType() {
+		return _dlFileEntry.getMimeType();
+	}
+
 	public String getMimeType(String version) {
 		try {
 			DLFileVersion dlFileVersion =
@@ -175,10 +179,6 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		}
 
 		return ContentTypes.APPLICATION_OCTET_STREAM;
-	}
-
-	public String getMimeType() {
-		return _dlFileEntry.getMimeType();
 	}
 
 	public Object getModel() {
