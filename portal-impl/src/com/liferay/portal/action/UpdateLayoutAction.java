@@ -537,7 +537,7 @@ public class UpdateLayoutAction extends JSONAction {
 		String[] portletData = StringUtil.split(
 			ParamUtil.getString(request, "portletData"));
 
-		if ((portletData.length == 0)) {
+		if (portletData.length == 0) {
 			return;
 		}
 
