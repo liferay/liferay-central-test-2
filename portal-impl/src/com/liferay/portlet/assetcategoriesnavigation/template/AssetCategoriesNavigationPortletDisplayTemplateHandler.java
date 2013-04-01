@@ -65,12 +65,12 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			super.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup fieldsTemplateVariableGroup =
+		TemplateVariableGroup templateVariableGroup =
 			templateVariableGroups.get("fields");
 
-		fieldsTemplateVariableGroup.empty();
+		templateVariableGroup.empty();
 
-		fieldsTemplateVariableGroup.addCollectionVariable(
+		templateVariableGroup.addCollectionVariable(
 			"vocabularies", List.class, PortletDisplayTemplateConstants.ENTRIES,
 			"vocabulary", AssetVocabulary.class, "curVocabulary");
 

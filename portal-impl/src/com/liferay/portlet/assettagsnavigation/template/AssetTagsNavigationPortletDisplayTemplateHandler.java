@@ -64,12 +64,12 @@ public class AssetTagsNavigationPortletDisplayTemplateHandler
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			super.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup fieldsTemplateVariableGroup =
+		TemplateVariableGroup templateVariableGroup =
 			templateVariableGroups.get("fields");
 
-		fieldsTemplateVariableGroup.empty();
+		templateVariableGroup.empty();
 
-		fieldsTemplateVariableGroup.addCollectionVariable(
+		templateVariableGroup.addCollectionVariable(
 			"tags", List.class, PortletDisplayTemplateConstants.ENTRIES, "tag",
 			AssetTag.class, "curTag");
 

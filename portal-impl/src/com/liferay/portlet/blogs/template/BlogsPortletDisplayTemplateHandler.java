@@ -64,12 +64,12 @@ public class BlogsPortletDisplayTemplateHandler
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			super.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup fieldsTemplateVariableGroup =
+		TemplateVariableGroup templateVariableGroup =
 			templateVariableGroups.get("fields");
 
-		fieldsTemplateVariableGroup.empty();
+		templateVariableGroup.empty();
 
-		fieldsTemplateVariableGroup.addCollectionVariable(
+		templateVariableGroup.addCollectionVariable(
 			"blog-entries", List.class, PortletDisplayTemplateConstants.ENTRIES,
 			"blog-entry", BlogsEntry.class, "curBlogEntry");
 
