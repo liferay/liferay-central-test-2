@@ -133,15 +133,15 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			return;
 		}
 
-		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
-
-		liferayFileEntry.setCachedFileVersion(fileVersion);
-
 		String path = getFileEntryPath(portletDataContext, fileEntry);
 
 		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
+
+		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
+
+		liferayFileEntry.setCachedFileVersion(fileVersion);
 
 		Element fileEntryElement = fileEntriesElement.addElement("file-entry");
 
