@@ -534,21 +534,16 @@ public class UpdateLayoutAction extends JSONAction {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String portletData = ParamUtil.getString(request, "portletData");
+		String[] portletData = StringUtil.split(
+			ParamUtil.getString(request, "portletData"));
 
-		if (Validator.isNull(portletData)) {
+		if ((portletData.length == 0)) {
 			return;
 		}
 
-		String[] portletDataArray = StringUtil.split(portletData);
+		long classPK = GetterUtil.getLong(portletData[0]);
 
-		if (Validator.isNull(portletDataArray)) {
-			return;
-		}
-
-		long classPK = GetterUtil.getLong(portletDataArray[0]);
-
-		String className = GetterUtil.getString(portletDataArray[1]);
+		String className = GetterUtil.getString(portletData[1]);
 
 		if ((classPK <= 0) || Validator.isNull(className)) {
 			return;
