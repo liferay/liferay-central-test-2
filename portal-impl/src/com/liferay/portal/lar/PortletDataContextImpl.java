@@ -760,8 +760,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Element getExportDataStagedModelElement(StagedModel stagedModel) {
-		Element groupElement = getExportDataGroupElement(
-			stagedModel.getModelClass().getSimpleName());
+		Class<?> clazz = stagedModel.getModelClass();
+
+		Element groupElement = getExportDataGroupElement(clazz.getSimpleName());
 
 		return groupElement.addElement("staged-model");
 	}
@@ -789,8 +790,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public Element getImportDataStagedModelElement(
 		StagedModel stagedModel, String attribute, String value) {
 
-		Element groupElement = getImportDataGroupElement(
-			stagedModel.getModelClass().getSimpleName());
+		Class<?> clazz = stagedModel.getModelClass();
+
+		Element groupElement = getImportDataGroupElement(clazz.getSimpleName());
 
 		if (groupElement == null) {
 			return null;
