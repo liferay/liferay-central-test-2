@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.template;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Jorge Ferrer
@@ -52,20 +53,18 @@ public class TemplateVariableDefinition {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof TemplateVariableDefinition)) {
 			return false;
 		}
 
-		TemplateVariableDefinition addressImpl = null;
+		TemplateVariableDefinition templateVariableDefinition =
+			(TemplateVariableDefinition)obj;
 
-		try {
-			addressImpl = (TemplateVariableDefinition)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
-
-		if (_name.equals(addressImpl._name)) {
+		if (Validator.equals(_name, templateVariableDefinition._name)) {
 			return true;
 		}
 
