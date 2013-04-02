@@ -32,10 +32,10 @@ public class MergeLayoutPrototypesThreadLocal {
 	public static boolean isMergeComplete(
 		String methodName, Object[] arguments, Class<?>[] parameterTypes) {
 
+		Set<String> methodKeys = _mergeComplete.get();
+
 		String methodKey = _buildMethodKey(
 			methodName, arguments, parameterTypes);
-
-		Set<String> methodKeys = _completedMerges.get();
 
 		return methodKeys.contains(methodKey);
 	}
@@ -47,10 +47,10 @@ public class MergeLayoutPrototypesThreadLocal {
 	public static void setMergeComplete(
 		String methodName, Object[] arguments, Class<?>[] parameterTypes) {
 
+		Set<String> methodKeys = _mergeComplete.get();
+
 		String methodKey = _buildMethodKey(
 			methodName, arguments, parameterTypes);
-
-		Set<String> methodKeys = _completedMerges.get();
 
 		methodKeys.add(methodKey);
 
@@ -60,27 +60,25 @@ public class MergeLayoutPrototypesThreadLocal {
 	private static String _buildMethodKey(
 		String methodName, Object[] arguments, Class<?>[] parameterTypes) {
 
-		StringBundler stringBundler = new StringBundler(
-			arguments.length * 2 + 1);
+		StringBundler sb = new StringBundler(arguments.length * 2 + 1);
 
-		stringBundler.append(methodName);
+		sb.append(methodName);
 
 		for (int i = 0; i < arguments.length; i++) {
-			stringBundler.append(parameterTypes[0].getClass().getName());
+			sb.append(parameterTypes[0].getClass().getName());
 
-			stringBundler.append(arguments.toString());
+			sb.append(arguments.toString());
 		}
 
-		return stringBundler.toString();
+		return sb.toString();
 	}
 
-	private static ThreadLocal<Set<String>> _completedMerges =
-		new AutoResetThreadLocal<Set<String>>(
-			MergeLayoutPrototypesThreadLocal.class + "._completedMerges",
-			new HashSet<String>());
 	private static ThreadLocal<Boolean> _inProgress =
 		new AutoResetThreadLocal<Boolean>(
 			MergeLayoutPrototypesThreadLocal.class + "._inProgress", false);
-
+	private static ThreadLocal<Set<String>> _mergeComplete =
+		new AutoResetThreadLocal<Set<String>>(
+			MergeLayoutPrototypesThreadLocal.class + "._mergeComplete",
+			new HashSet<String>());
 
 }
