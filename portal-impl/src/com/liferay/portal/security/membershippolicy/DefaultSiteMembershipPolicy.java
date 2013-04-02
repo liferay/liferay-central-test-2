@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -209,19 +210,28 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		}
 	}
 
-	protected void verifyLimitedParentMembership(Group group)
+	protected void verifyLimitedParentMembership(final Group group)
 		throws PortalException, SystemException {
 
-		List<User> users = UserLocalServiceUtil.getGroupUsers(
-			group.getGroupId());
+		int count = UserLocalServiceUtil.getGroupUsersCount(group.getGroupId());
 
-		for (User user : users) {
-			if (!UserLocalServiceUtil.hasGroupUser(
-					group.getParentGroupId(), user.getUserId())) {
+		int pages = count / Indexer.DEFAULT_INTERVAL;
 
-				UserLocalServiceUtil.unsetGroupUsers(
-					group.getGroupId(), new long[] {user.getUserId()},
-					null);
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<User> users = UserLocalServiceUtil.getGroupUsers(
+				group.getGroupId(), start, end);
+
+			for (User user : users) {
+				if (!UserLocalServiceUtil.hasGroupUser(
+						group.getParentGroupId(), user.getUserId())) {
+
+					UserLocalServiceUtil.unsetGroupUsers(
+						group.getGroupId(), new long[] {user.getUserId()},
+						null);
+				}
 			}
 		}
 	}
