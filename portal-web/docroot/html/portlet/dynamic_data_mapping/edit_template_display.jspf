@@ -113,7 +113,7 @@ templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNa
 											if (templateVariableDefinition.isCollection()) {
 												TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
 
-												String[] listCodeArray = _getListCodeArray(templateVariableDefinition.getName() + ".getSiblings()", itemName, language);
+												String[] listCodeArray = _getListCodeArray(templateVariableDefinition.getName() + ".getSiblings()", itemTemplateVariableDefinition.getName(), language);
 
 												dataContent1 = listCodeArray[0];
 												dataContent2 = listCodeArray[1];
