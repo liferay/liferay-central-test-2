@@ -156,7 +156,7 @@ else {
 
 <%!
 private List<BlogsEntry> _convertToBlogEntries(List results) throws PortalException, SystemException {
-	if ((results == null) || (results.isEmpty()) || (results.get(0) instanceof BlogsEntry)) {
+	if (results.isEmpty() || (results.get(0) instanceof BlogsEntry)) {
 		return results;
 	}
 
