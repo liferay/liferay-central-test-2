@@ -145,6 +145,12 @@ public class GroupServiceWrapper implements GroupService,
 		_groupService.addRoleGroups(roleId, groupIds);
 	}
 
+	public void checkRemoteStagingGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_groupService.checkRemoteStagingGroup(groupId);
+	}
+
 	/**
 	* Deletes the group.
 	*

@@ -156,6 +156,12 @@ public class GroupServiceUtil {
 		getService().addRoleGroups(roleId, groupIds);
 	}
 
+	public static void checkRemoteStagingGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkRemoteStagingGroup(groupId);
+	}
+
 	/**
 	* Deletes the group.
 	*

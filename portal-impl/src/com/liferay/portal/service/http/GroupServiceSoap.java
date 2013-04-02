@@ -195,6 +195,18 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static void checkRemoteStagingGroup(long groupId)
+		throws RemoteException {
+		try {
+			GroupServiceUtil.checkRemoteStagingGroup(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	/**
 	* Deletes the group.
 	*
