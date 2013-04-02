@@ -44,8 +44,10 @@ public class ETagFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isEligibleForEtag(int responseStatusCode) {
-		if ((responseStatusCode >= 200) && (responseStatusCode < 300)) {
+	protected boolean isEligibleForEtag(int status) {
+		if ((status >= HttpServletResponse.SC_OK) &&
+			(status < HttpServletResponse.SC_MULTIPLE_CHOICES)) {
+
 			return true;
 		}
 		else {
