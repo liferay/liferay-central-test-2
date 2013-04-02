@@ -130,7 +130,7 @@ public class PortalRegisterTestUtil {
 		WorkflowHandlerRegistryUtil.register(new WikiPageWorkflowHandler());
 	}
 
-	private static final Class[] _ASSET_RENDERER_FACTORY_CLASSES = {
+	private static final Class<?>[] _ASSET_RENDERER_FACTORY_CLASSES = {
 		BlogsEntryAssetRendererFactory.class,
 		BookmarksEntryAssetRendererFactory.class,
 		BookmarksFolderAssetRendererFactory.class,
