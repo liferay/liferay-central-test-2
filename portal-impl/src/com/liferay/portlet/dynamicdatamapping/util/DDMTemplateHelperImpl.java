@@ -70,12 +70,12 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		for (TemplateVariableDefinition variableDefinition :
-				getAutocompleteVariableDefinitions(request)) {
+		for (TemplateVariableDefinition templateVariableDefinition :
+				getAutocompleteTemplateVariableDefinitions(request)) {
 
 			JSONObject valueJSONObject = JSONFactoryUtil.createJSONObject();
 
-			Class<?> clazz = variableDefinition.getClazz();
+			Class<?> clazz = templateVariableDefinition.getClazz();
 
 			if (clazz == null) {
 				continue;
@@ -111,17 +111,19 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 					sb.toString(), JSONFactoryUtil.getUnmodifiableJSONObject());
 			}
 
-			jsonObject.put(variableDefinition.getName(), valueJSONObject);
+			jsonObject.put(
+				templateVariableDefinition.getName(), valueJSONObject);
 		}
 
 		return jsonObject.toString();
 	}
 
 	protected List<TemplateVariableDefinition>
-			getAutocompleteVariableDefinitions(HttpServletRequest request)
+			getAutocompleteTemplateVariableDefinitions(
+				HttpServletRequest request)
 		throws Exception {
 
-		List<TemplateVariableDefinition> variableDefinitions =
+		List<TemplateVariableDefinition> templateVariableDefinitions =
 			new UniqueList<TemplateVariableDefinition>();
 
 		// Declared variables
@@ -153,7 +155,7 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 		for (TemplateVariableGroup templateVariableGroup :
 				templateVariableGroups.values()) {
 
-			variableDefinitions.addAll(
+			templateVariableDefinitions.addAll(
 				templateVariableGroup.getTemplateVariableDefinitions());
 		}
 
@@ -178,10 +180,10 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 			TemplateVariableDefinition variableDefinition =
 				new TemplateVariableDefinition(key, value.getClass(), key);
 
-			variableDefinitions.add(variableDefinition);
+			templateVariableDefinitions.add(variableDefinition);
 		}
 
-		return variableDefinitions;
+		return templateVariableDefinitions;
 	}
 
 	private static final String _TEMPLATE_CONTENT = "# Placeholder";
