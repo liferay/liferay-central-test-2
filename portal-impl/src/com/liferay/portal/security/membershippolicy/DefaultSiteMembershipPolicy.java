@@ -215,11 +215,10 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		List<User> users = UserLocalServiceUtil.getGroupUsers(
 			group.getGroupId());
 
-		List<User> parentUsers = UserLocalServiceUtil.getGroupUsers(
-			group.getParentGroupId());
-
 		for (User user : users) {
-			if (!parentUsers.contains(user)) {
+			if (!UserLocalServiceUtil.hasGroupUser(
+					group.getParentGroupId(), user.getUserId())) {
+
 				UserLocalServiceUtil.unsetGroupUsers(
 					group.getGroupId(), new long[] {user.getUserId()},
 					null);
