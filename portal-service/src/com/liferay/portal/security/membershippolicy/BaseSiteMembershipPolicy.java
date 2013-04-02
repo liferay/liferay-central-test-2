@@ -43,6 +43,7 @@ import java.util.Map;
  */
 public abstract class BaseSiteMembershipPolicy implements SiteMembershipPolicy {
 
+	@SuppressWarnings("unused")
 	public void checkRoles(
 			List<UserGroupRole> addUserGroupRoles,
 			List<UserGroupRole> removeUserGroupRoles)
@@ -179,6 +180,7 @@ public abstract class BaseSiteMembershipPolicy implements SiteMembershipPolicy {
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	public void propagateRoles(
 			List<UserGroupRole> addUserGroupRoles,
 			List<UserGroupRole> removeUserGroupRoles)

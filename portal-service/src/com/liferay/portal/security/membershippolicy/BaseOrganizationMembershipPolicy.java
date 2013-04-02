@@ -43,6 +43,7 @@ import java.util.Map;
 public abstract class BaseOrganizationMembershipPolicy
 	implements OrganizationMembershipPolicy {
 
+	@SuppressWarnings("unused")
 	public void checkRoles(
 			List<UserGroupRole> addUserGroupRoles,
 			List<UserGroupRole> removeUserGroupRoles)

@@ -69,6 +69,7 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		}
 	}
 
+	@Override
 	public void checkRoles(
 			List<UserGroupRole> addUserGroupRoles,
 			List<UserGroupRole> removeUserGroupRoles)
@@ -124,6 +125,7 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		BaseSiteMembershipPolicyTestCase.setPropagateMembership(true);
 	}
 
+	@Override
 	public void propagateRoles(
 		List<UserGroupRole> addUserGroupRoles,
 		List<UserGroupRole> removeUserGroupRoles) {
@@ -164,10 +166,12 @@ public class TestSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		verifyPolicy(group);
 	}
 
+	@Override
 	public void verifyPolicy(Role role) {
 		verifyPolicy();
 	}
 
+	@Override
 	public void verifyPolicy(
 		Role role, Role oldRole,
 		Map<String, Serializable> oldExpandoAttributes) {

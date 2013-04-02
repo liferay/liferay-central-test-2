@@ -65,7 +65,7 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return true;
@@ -105,10 +105,10 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 				verifyPolicy(group);
 			}
 			else {
-				List<Group> children = getLimitedChildrenGroups(group);
+				List<Group> childrenGroups = getLimitedChildrenGroups(group);
 
-				for (Group child : children) {
-					verifyPolicy(child);
+				for (Group childrenGroup : childrenGroups) {
+					verifyPolicy(childrenGroup);
 				}
 			}
 		}
@@ -168,25 +168,25 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 		groupParams.put(
 			"type", GroupConstants.TYPE_SITE_LIMITED_TO_PARENT_SITE_MEMBERS);
 
-		List<Group> children = GroupLocalServiceUtil.search(
+		List<Group> childrenGroups = GroupLocalServiceUtil.search(
 			group.getCompanyId(), null, StringPool.BLANK, groupParams,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		List<Group> filteredChildren = ListUtil.copy(children);
+		List<Group> filteredChildrenGroups = ListUtil.copy(childrenGroups);
 
-		for (Group child : children) {
-			for (Group ancestor : child.getAncestors()) {
-				if ((ancestor.getGroupId() != group.getGroupId()) &&
-					!ancestor.isLimitedToParentSiteMembers()) {
+		for (Group childrenGroup : childrenGroups) {
+			for (Group ancestorGroup : childrenGroup.getAncestors()) {
+				if ((ancestorGroup.getGroupId() != group.getGroupId()) &&
+					!ancestorGroup.isLimitedToParentSiteMembers()) {
 
-					filteredChildren.remove(child);
+					filteredChildrenGroups.remove(childrenGroup);
 
 					break;
 				}
 			}
 		}
 
-		return filteredChildren;
+		return filteredChildrenGroups;
 	}
 
 	protected void removeUsersFromLimitedChildrenGroups(
@@ -195,16 +195,16 @@ public class DefaultSiteMembershipPolicy extends BaseSiteMembershipPolicy {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		List<Group> children = getLimitedChildrenGroups(group);
+		List<Group> childrenGroups = getLimitedChildrenGroups(group);
 
-		for (Group child : children) {
-			if (!child.isLimitedToParentSiteMembers()) {
+		for (Group childrenGroup : childrenGroups) {
+			if (!childrenGroup.isLimitedToParentSiteMembers()) {
 				continue;
 			}
 
 			for (long userId : userIds) {
 				UserLocalServiceUtil.unsetGroupUsers(
-					child.getGroupId(), new long[] {userId}, null);
+					childrenGroup.getGroupId(), new long[] {userId}, null);
 			}
 		}
 	}
