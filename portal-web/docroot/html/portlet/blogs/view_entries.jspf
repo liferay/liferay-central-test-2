@@ -173,4 +173,3 @@ private List<BlogsEntry> _convertToBlogEntries(List results) throws PortalExcept
 	return entries;
 }
 %>
-%>
