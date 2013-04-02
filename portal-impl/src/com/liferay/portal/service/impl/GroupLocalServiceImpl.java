@@ -3657,7 +3657,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected void validateParentGroup(long groupId, long parentGroupId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (parentGroupId == GroupConstants.DEFAULT_PARENT_GROUP_ID) {
 			return;
