@@ -55,29 +55,27 @@ public abstract class BaseDDMTemplateHandler extends BaseTemplateHandler {
 	}
 
 	protected TemplateVariableGroup getGeneralVariablesTemplateVariableGroup() {
-		TemplateVariableGroup generalVariablesTemplateVariableGroup =
-			new TemplateVariableGroup("general-variables");
+		TemplateVariableGroup templateVariableGroup = new TemplateVariableGroup(
+			"general-variables");
 
-		generalVariablesTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"portal-instance", Company.class, "company");
-		generalVariablesTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"portal-instance-id", null, "companyId");
-		generalVariablesTemplateVariableGroup.addVariable(
-			"device", Device.class, "device");
-		generalVariablesTemplateVariableGroup.addVariable(
-			"site-id", null, "groupId");
-		generalVariablesTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable("device", Device.class, "device");
+		templateVariableGroup.addVariable("site-id", null, "groupId");
+		templateVariableGroup.addVariable(
 			"view-mode", String.class, "viewMode");
 
-		return generalVariablesTemplateVariableGroup;
+		return templateVariableGroup;
 	}
 
 	protected TemplateVariableGroup getStructureFieldsTemplateVariableGroup(
 			long ddmStructureId, Locale locale)
 		throws PortalException, SystemException {
 
-		TemplateVariableGroup fieldsTemplateVariableGroup =
-			new TemplateVariableGroup("fields");
+		TemplateVariableGroup templateVariableGroup = new TemplateVariableGroup(
+			"fields");
 
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
 			ddmStructureId);
@@ -94,28 +92,28 @@ public abstract class BaseDDMTemplateHandler extends BaseTemplateHandler {
 			String dataType = ddmStructure.getFieldDataType(fieldName);
 			boolean repeatable = ddmStructure.getFieldRepeatable(fieldName);
 
-			fieldsTemplateVariableGroup.addFieldVariable(
+			templateVariableGroup.addFieldVariable(
 				label, TemplateNode.class, fieldName, tip, dataType,
 				repeatable);
 		}
 
-		return fieldsTemplateVariableGroup;
+		return templateVariableGroup;
 	}
 
 	protected TemplateVariableGroup getUtilTemplateVariableGroup() {
-		TemplateVariableGroup utilTemplateVariableGroup =
-			new TemplateVariableGroup("util");
+		TemplateVariableGroup templateVariableGroup = new TemplateVariableGroup(
+			"util");
 
-		utilTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"permission-checker", PermissionChecker.class, "permissionChecker");
-		utilTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"random-namespace", String.class, "randomNamespace");
-		utilTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"templates-path", String.class, "templatesPath");
-		utilTemplateVariableGroup.addVariable(
+		templateVariableGroup.addVariable(
 			"xml-request", String.class, "xmlRequest");
 
-		return utilTemplateVariableGroup;
+		return templateVariableGroup;
 	}
 
 }
