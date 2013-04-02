@@ -113,7 +113,7 @@ templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNa
 											if (templateVariableDefinition.isCollection()) {
 												TemplateVariableDefinition itemTemplateVariableDefinition = templateVariableDefinition.getItemTemplateVariableDefinition();
 
-												String[] listCodeArray = _getListCode(templateVariableDefinition.getName() + ".getSiblings()", itemName, language);
+												String[] listCodeArray = _getListCodeArray(templateVariableDefinition.getName() + ".getSiblings()", itemName, language);
 
 												dataContent1 = listCodeArray[0];
 												dataContent2 = listCodeArray[1];
@@ -121,7 +121,7 @@ templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNa
 											else if (templateVariableDefinition.isRepeatable()) {
 												String itemName = "cur_" + templateVariableDefinition.getName();
 
-												String[] listCodeArray = _getListCode(templateVariableDefinition.getName(), itemName, language);
+												String[] listCodeArray = _getListCodeArray(templateVariableDefinition.getName(), itemName, language);
 
 												dataContent1 = listCodeArray[0];
 												dataContent2 = _getVariableCode(templateVariableDefinition.getName() + ".getData()", language);
@@ -594,7 +594,7 @@ private String _getPaletteItemTitle(PageContext pageContext, TemplateVariableDef
 	return sb.toString();
 }
 
-private String[] _getListCode(String variableName, String itemName, String language) {
+private String[] _getListCodeArray(String variableName, String itemName, String language) {
 	String[] listCodeArray = new String[2];
 
 	if (language.equalsIgnoreCase("ftl")) {
