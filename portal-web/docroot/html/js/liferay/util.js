@@ -722,6 +722,7 @@
 
 		_defaultSubmitFormFn: function(event) {
 			var form = event.form;
+
 			var hasErrors = false;
 
 			var liferayForm = Liferay.Form.get(form.attr('id'));
