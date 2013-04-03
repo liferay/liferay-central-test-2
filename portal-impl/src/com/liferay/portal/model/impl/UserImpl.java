@@ -188,13 +188,8 @@ public class UserImpl extends UserBaseImpl {
 		String profileFriendlyURL = getProfileFriendlyURL();
 
 		if (Validator.isNotNull(profileFriendlyURL)) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(portalURL);
-			sb.append(PortalUtil.getPathContext());
-			sb.append(profileFriendlyURL);
-
-			return sb.toString();
+			return portalURL.concat(PortalUtil.getPathContext()).concat(
+				profileFriendlyURL);
 		}
 
 		Group group = getGroup();
