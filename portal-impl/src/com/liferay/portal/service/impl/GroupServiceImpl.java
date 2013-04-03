@@ -186,12 +186,14 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	/**
-	 * Checks if the group is valid for Remote Staging.
+	 * Checks that the current user is permitted to use the group for Remote
+	 * Staging.
 	 *
 	 * @param  groupId the primary key of the group
-	 * @throws PortalException if the user did not have permission to view the
-	 *         group or if the group belongs to a company different to the
-	 *         users's company
+	 * @throws PortalException if a group with the primary key could not be
+	 *         found, if the current user did not have permission to view the
+	 *         group, or if the group's company was different from the current
+	 *         user's company
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void checkRemoteStagingGroup(long groupId)
