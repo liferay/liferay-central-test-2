@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.model.Group;
@@ -194,15 +193,9 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (group.getCompanyId() != permissionChecker.getCompanyId()) {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("No Group exists with the key {groupId=");
-			sb.append(groupId);
-			sb.append("} in the Company {companyId=");
-			sb.append(permissionChecker.getCompanyId());
-			sb.append("}");
-
-			throw new NoSuchGroupException(sb.toString());
+			throw new NoSuchGroupException(
+				"Group " + groupId + " does not belong in company " +
+					permissionChecker.getCompanyId());
 		}
 	}
 
