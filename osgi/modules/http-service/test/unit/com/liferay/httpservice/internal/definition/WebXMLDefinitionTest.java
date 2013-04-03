@@ -58,41 +58,15 @@ public class WebXMLDefinitionTest {
 		testAddServletDefinitions(1);
 	}
 
-	protected FilterDefinition buildFilterDefinition(
-		String name, String urlPattern) {
-
-		FilterDefinition filterDefinition = new FilterDefinition();
-
-		filterDefinition.addURLPattern(urlPattern);
-		filterDefinition.setName(name);
-
-		return filterDefinition;
-	}
-
-	protected ListenerDefinition buildListenerDefinition() {
-		ListenerDefinition listenerDefinition = new ListenerDefinition();
-
-		listenerDefinition.setListener(new Object());
-
-		return listenerDefinition;
-	}
-
-	protected ServletDefinition buildServletDefinition(
-		String name, String urlPattern) {
-
-		ServletDefinition servletDefinition = new ServletDefinition();
-
-		servletDefinition.addURLPattern(urlPattern);
-		servletDefinition.setName(name);
-
-		return servletDefinition;
-	}
-
 	protected void testAddFilterDefinitions(int count) {
 		for (int i = 0; i < count; i++) {
 			String s = String.valueOf(i);
 
-			FilterDefinition filterDefinition = buildFilterDefinition(s, s);
+			FilterDefinition filterDefinition = new FilterDefinition();
+
+			filterDefinition.addURLPattern(s);
+
+			filterDefinition.setName(s);
 
 			_webXmlDefinition.setFilterDefinition(s, filterDefinition);
 		}
@@ -103,7 +77,9 @@ public class WebXMLDefinitionTest {
 
 	protected void testAddListenerDefinition(int count) {
 		for (int i = 0; i < count; i++) {
-			ListenerDefinition listenerDefinition = buildListenerDefinition();
+			ListenerDefinition listenerDefinition = new ListenerDefinition();
+
+			listenerDefinition.setListener(new Object());
 
 			_webXmlDefinition.addListenerDefinition(listenerDefinition);
 		}
@@ -116,7 +92,11 @@ public class WebXMLDefinitionTest {
 		for (int i = 0; i < count; i++) {
 			String s = String.valueOf(i);
 
-			ServletDefinition servletDefinition = buildServletDefinition(s, s);
+			ServletDefinition servletDefinition = new ServletDefinition();
+
+			servletDefinition.addURLPattern(s);
+
+			servletDefinition.setName(s);
 
 			_webXmlDefinition.setServletDefinition(s, servletDefinition);
 		}
