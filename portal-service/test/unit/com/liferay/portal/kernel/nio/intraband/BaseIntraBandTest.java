@@ -297,7 +297,7 @@ public class BaseIntraBandTest {
 
 		LogRecord logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Broken read channel, unregister ");
+		assertMessageStartWith(logRecord, "Broken read channel, unregister ");
 
 		Assert.assertTrue(logRecord.getThrown() instanceof IOException);
 
@@ -321,7 +321,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Broken read channel, unregister ");
+		assertMessageStartWith(logRecord, "Broken read channel, unregister ");
 
 		Assert.assertNull(logRecord.getThrown());
 
@@ -409,7 +409,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Dropped ownerless request ");
+		assertMessageStartWith(logRecord, "Dropped ownerless request ");
 
 		// Read ownerless datagram, without log
 
@@ -457,7 +457,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Dropped ownerless ACK response ");
+		assertMessageStartWith(logRecord, "Dropped ownerless ACK response ");
 
 		// Ownerless ACK response, without log
 
@@ -532,7 +532,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Dropped ownerless response ");
+		assertMessageStartWith(logRecord, "Dropped ownerless response ");
 
 		// Ownerless response, without log
 
@@ -564,11 +564,11 @@ public class BaseIntraBandTest {
 
 		requestDatagram.setSequenceId(sequenceId);
 
-		requestDatagram.completionTypes = BaseIntraBand.REPLIED_ENUM_SET;
-
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
 
 		requestDatagram.completionHandler = recordCompletionHandler;
+
+		requestDatagram.completionTypes = BaseIntraBand.REPLIED_ENUM_SET;
 		requestDatagram.timeout = 10000;
 
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
@@ -602,11 +602,11 @@ public class BaseIntraBandTest {
 
 		requestDatagram.setSequenceId(sequenceId);
 
-		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
-
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
 
 		requestDatagram.completionHandler = recordCompletionHandler;
+
+		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
 		requestDatagram.timeout = 10000;
 
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
@@ -632,7 +632,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Dropped unconcerned response ");
+		assertMessageStartWith(logRecord, "Dropped unconcerned response ");
 
 		// Unconcerned response, without log
 
@@ -643,11 +643,11 @@ public class BaseIntraBandTest {
 
 		requestDatagram.setSequenceId(sequenceId);
 
-		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
-
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
 
 		requestDatagram.completionHandler = recordCompletionHandler;
+
+		requestDatagram.completionTypes = EnumSet.noneOf(CompletionType.class);
 		requestDatagram.timeout = 10000;
 
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
@@ -707,7 +707,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Dropped ownerless request ");
+		assertMessageStartWith(logRecord, "Dropped ownerless request ");
 
 		Assert.assertSame(
 			mockRegistrationReference,
@@ -731,12 +731,13 @@ public class BaseIntraBandTest {
 
 		requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
-		recordCompletionHandler = new RecordCompletionHandler<Object>();
-
 		requestDatagram.setAckRequest(true);
 		requestDatagram.setSequenceId(sequenceId);
 
+		recordCompletionHandler = new RecordCompletionHandler<Object>();
+
 		requestDatagram.completionHandler = recordCompletionHandler;
+
 		requestDatagram.timeout = 10000;
 
 		_mockIntraBand.addResponseWaitingDatagram(requestDatagram);
@@ -769,7 +770,7 @@ public class BaseIntraBandTest {
 
 		logRecord = logRecords.get(0);
 
-		_assertMessageStartWith(logRecord, "Unable to dispatch");
+		assertMessageStartWith(logRecord, "Unable to dispatch");
 
 		Assert.assertTrue(logRecord.getThrown() instanceof RuntimeException);
 
@@ -777,12 +778,12 @@ public class BaseIntraBandTest {
 		sinkChannel.close();
 	}
 
-	private void _assertMessageStartWith(
-		LogRecord logRecord, String startWith) {
+	protected void assertMessageStartWith(
+		LogRecord logRecord, String messagePrefix) {
 
 		String message = logRecord.getMessage();
 
-		Assert.assertTrue(message.startsWith(startWith));
+		Assert.assertTrue(message.startsWith(messagePrefix));
 	}
 
 	private static final String _DATA_STRING =
