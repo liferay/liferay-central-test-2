@@ -45,9 +45,7 @@ public class DefaultHttpContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetExistingResourceWithNoSlash()
-		throws MalformedURLException {
-
+	public void testGetExistingResourceWithNoSlash() throws Exception {
 		mockBundleFindEntries();
 
 		getResourceAndVerify("existingResource");
@@ -56,9 +54,7 @@ public class DefaultHttpContextTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetExistingResourceWithSlash()
-		throws MalformedURLException {
-
+	public void testGetExistingResourceWithSlash() throws Exception {
 		mockBundleFindEntries();
 
 		getResourceAndVerify("/existingResource");
@@ -91,17 +87,15 @@ public class DefaultHttpContextTest extends PowerMockito {
 	}
 
 	protected void getResourceAndVerify(String path) {
-		URL resource = _defaultHttpContext.getResource(path);
+		URL url = _defaultHttpContext.getResource(path);
 
-		Assert.assertNotNull(resource);
-
-		Assert.assertEquals(_FILE, resource.getFile());
-		Assert.assertEquals(_HOST, resource.getHost());
-		Assert.assertEquals(_PROTOCOL, resource.getProtocol());
+		Assert.assertNotNull(url);
+		Assert.assertEquals(_FILE, url.getFile());
+		Assert.assertEquals(_HOST, url.getHost());
+		Assert.assertEquals(_PROTOCOL, url.getProtocol());
 	}
 
 	protected void mockBundleFindEntries() throws MalformedURLException {
-
 		when(
 			_bundle.getResource(Mockito.anyString())
 		).thenReturn(
@@ -116,7 +110,9 @@ public class DefaultHttpContextTest extends PowerMockito {
 	}
 
 	private static final String _FILE = "/tmp/foo";
+
 	private static final String _HOST = "localhost";
+
 	private static final String _PROTOCOL = "file";
 
 	@Mock
