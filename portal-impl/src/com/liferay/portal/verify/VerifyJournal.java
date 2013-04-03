@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -42,7 +41,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.portlet.PortletPreferences;
 
@@ -201,8 +199,12 @@ public class VerifyJournal extends VerifyProcess {
 
 	}
 
-	protected void verifyPermissionsAndAsset(List<JournalArticle> articles)
-		throws Exception {
+	protected void verifyPermissionsAndAssets() throws Exception {
+
+		// Articles
+
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getArticles();
 
 		for (JournalArticle article : articles) {
 			long groupId = article.getGroupId();
@@ -275,38 +277,6 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
-	protected void verifyPermissionsAndAssets() throws Exception {
-		int journalArticlesCount =
-			JournalArticleLocalServiceUtil.getJournalArticlesCount();
-
-		int counter = 0;
-
-		while (counter <= journalArticlesCount) {
-			long start = System.nanoTime();
-
-			List<JournalArticle> articles =
-				JournalArticleLocalServiceUtil.getJournalArticles(
-					counter, counter + _JOURNAL_ARTICLE_PAGE_SIZE);
-
-			verifyPermissionsAndAsset(articles);
-
-			if (_log.isDebugEnabled()) {
-				long end = System.nanoTime();
-
-				long elapsedTime = TimeUnit.SECONDS.convert(
-					end - start, TimeUnit.NANOSECONDS);
-
-				_log.debug(
-					"Rows [" + counter + "," +
-						(counter + _JOURNAL_ARTICLE_PAGE_SIZE) +
-							"] have been verified. Time elapsed: " +
-								elapsedTime + " seconds");
-			}
-
-			counter += _JOURNAL_ARTICLE_PAGE_SIZE + 1;
-		}
-	}
-
 	protected void verifySearch() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -333,11 +303,6 @@ public class VerifyJournal extends VerifyProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static final int _JOURNAL_ARTICLE_PAGE_SIZE = GetterUtil.get(
-		PropsUtil.get(
-			"verify." + VerifyJournal.class.getName() + ".pagination.size"),
-			5000);
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyJournal.class);
 
