@@ -663,9 +663,9 @@ public class UserImpl extends UserBaseImpl {
 
 		return StringUtil.replace(
 			PropsValues.USERS_PROFILE_FRIENDLY_URL,
-			new String[] {"${liferay:userId}", "${liferay:userScreenName}"},
+			new String[] {"${liferay:screenName}", "${liferay:userId}"},
 			new String[] {
-				String.valueOf(getUserId()), HtmlUtil.escapeURL(getScreenName())
+				HtmlUtil.escapeURL(getScreenName()), String.valueOf(getUserId())
 			});
 	}
 
