@@ -133,6 +133,7 @@ public class AnnouncementsUtil {
 
 		if (PropsValues.PERMISSIONS_CHECK_GUEST_ENABLED) {
 			User user = UserLocalServiceUtil.getUserById(userId);
+
 			Role guestRole = RoleLocalServiceUtil.getRole(
 				user.getCompanyId(), RoleConstants.GUEST);
 
