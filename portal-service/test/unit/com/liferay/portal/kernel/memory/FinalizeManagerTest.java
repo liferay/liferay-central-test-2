@@ -41,7 +41,7 @@ public class FinalizeManagerTest {
 
 	@Test
 	public void testRegisterWithoutThread() throws InterruptedException {
-		System.setProperty(_THREAD_ENABLED_KEY, "false");
+		System.setProperty(_THREAD_ENABLED_KEY, Boolean.FALSE.toString());
 
 		Object testObject = new Object();
 
@@ -71,7 +71,7 @@ public class FinalizeManagerTest {
 
 	@Test
 	public void testRegisterWithThread() throws InterruptedException {
-		System.setProperty(_THREAD_ENABLED_KEY, "true");
+		System.setProperty(_THREAD_ENABLED_KEY, Boolean.TRUE.toString());
 
 		Object testObject = new Object();
 
@@ -97,41 +97,43 @@ public class FinalizeManagerTest {
 
 		Assert.assertTrue(markFinalizeAction.isMarked());
 
-		Thread finializeThread = null;
+		Thread finalizeThread = null;
 
 		for (Thread thread : ThreadUtil.getThreads()) {
-			if (thread.getName().equals("Finalize Thread")) {
-				finializeThread = thread;
+			String name = thread.getName();
+
+			if (name.equals("Finalize Thread")) {
+				finalizeThread = thread;
 
 				break;
 			}
 		}
 
-		Assert.assertNotNull(finializeThread);
+		Assert.assertNotNull(finalizeThread);
 
-		// First waiting
+		// First waiting state
 
 		startTime = System.currentTimeMillis();
 
-		while (finializeThread.getState() != Thread.State.WAITING) {
+		while (finalizeThread.getState() != Thread.State.WAITING) {
 			if ((System.currentTimeMillis() - startTime) > 10000) {
 				Assert.fail(
 					"Timeout on waiting finialize thread to enter waiting " +
-						"state.");
+						"state");
 			}
 		}
 
 		// Interrupt to wake up
 
-		finializeThread.interrupt();
+		finalizeThread.interrupt();
 
-		// Second waiting
+		// Second waiting state
 
-		while (finializeThread.getState() != Thread.State.WAITING) {
+		while (finalizeThread.getState() != Thread.State.WAITING) {
 			if ((System.currentTimeMillis() - startTime) > 10000) {
 				Assert.fail(
 					"Timeout on waiting finialize thread to enter waiting " +
-						"state.");
+						"state");
 			}
 		}
 	}
