@@ -66,10 +66,7 @@ portletURL.setParameter("displayStyle", String.valueOf(displayStyle));
 int entryStart = ParamUtil.getInteger(request, "entryStart");
 int entryEnd = ParamUtil.getInteger(request, "entryEnd", entriesPerPage);
 
-int delta = entryEnd - entryStart;
-int cur = entryEnd / (entryEnd - entryStart);
-
-SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, null, null, "cur2", cur, delta, portletURL, null, null);
+SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, null, null, "cur2", entryEnd / (entryEnd - entryStart), entryEnd - entryStart, portletURL, null, null);
 
 List<String> headerNames = new ArrayList<String>();
 
@@ -241,9 +238,10 @@ else {
 
 searchContainer.setResults(results);
 
+request.setAttribute("view.jsp-total", String.valueOf(total));
+
 request.setAttribute("view_entries.jsp-entryStart", String.valueOf(entryStart));
 request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(entryEnd));
-request.setAttribute("view.jsp-total", String.valueOf(total));
 %>
 
 <div class="subscribe-action">
