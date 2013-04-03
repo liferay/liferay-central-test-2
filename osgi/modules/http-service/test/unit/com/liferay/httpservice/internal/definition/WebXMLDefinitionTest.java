@@ -58,6 +58,36 @@ public class WebXMLDefinitionTest {
 		testAddServletDefinitions(1);
 	}
 
+	protected FilterDefinition buildFilterDefinition(
+		String name, String urlPattern) {
+
+		FilterDefinition filterDefinition = new FilterDefinition();
+
+		filterDefinition.addURLPattern(urlPattern);
+		filterDefinition.setName(name);
+
+		return filterDefinition;
+	}
+
+	protected ListenerDefinition buildListenerDefinition() {
+		ListenerDefinition listenerDefinition = new ListenerDefinition();
+
+		listenerDefinition.setListener(new Object());
+
+		return listenerDefinition;
+	}
+
+	protected ServletDefinition buildServletDefinition(
+		String name, String urlPattern) {
+
+		ServletDefinition servletDefinition = new ServletDefinition();
+
+		servletDefinition.addURLPattern(urlPattern);
+		servletDefinition.setName(name);
+
+		return servletDefinition;
+	}
+
 	protected void testAddFilterDefinitions(int count) {
 		for (int i = 0; i < count; i++) {
 			String s = String.valueOf(i);
@@ -93,36 +123,6 @@ public class WebXMLDefinitionTest {
 
 		Assert.assertEquals(
 			count, _webXmlDefinition.getServletDefinitions().size());
-	}
-
-	protected FilterDefinition buildFilterDefinition(
-		String name, String urlPattern) {
-
-		FilterDefinition filterDefinition = new FilterDefinition();
-
-		filterDefinition.addURLPattern(urlPattern);
-		filterDefinition.setName(name);
-
-		return filterDefinition;
-	}
-
-	protected ListenerDefinition buildListenerDefinition() {
-		ListenerDefinition listenerDefinition = new ListenerDefinition();
-
-		listenerDefinition.setListener(new Object());
-
-		return listenerDefinition;
-	}
-
-	protected ServletDefinition buildServletDefinition(
-		String name, String urlPattern) {
-
-		ServletDefinition servletDefinition = new ServletDefinition();
-
-		servletDefinition.addURLPattern(urlPattern);
-		servletDefinition.setName(name);
-
-		return servletDefinition;
 	}
 
 	private WebXMLDefinition _webXmlDefinition;
