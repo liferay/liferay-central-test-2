@@ -237,11 +237,9 @@ public class BaseIntraBandTest {
 		getSequenceIdCallables.add(getSequenceIdCallable);
 		getSequenceIdCallables.add(getSequenceIdCallable);
 
-		int testCount = 10240;
-
 		ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-		for (int i = 0; i < testCount; i++) {
+		for (int i = 0; i < 10240; i++) {
 			sequenceIdGenerator.set(Long.MAX_VALUE);
 
 			List<Future<Long>> getSequenceIdFutures = executorService.invokeAll(
