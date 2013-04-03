@@ -30,35 +30,35 @@ public class WebXMLDefinitionTest {
 
 	@Test
 	public void testAddMultipleFilterDefinition() {
-		addFilterDefinitionsAndVerify(5);
+		testAddFilterDefinitions(5);
 	}
 
 	@Test
 	public void testAddMultipleListenerDefinition() {
-		addListenerDefinitionsAndVerify(5);
+		testAddListenerDefinition(5);
 	}
 
 	@Test
-	public void testAddMultipleServletDefinition() {
-		addServletDefinitionAndVerify(5);
+	public void testAddMultipleServletDefinitions() {
+		testAddServletDefinitions(5);
 	}
 
 	@Test
-	public void testAddOneFilterDefinition() {
-		addFilterDefinitionsAndVerify(1);
+	public void testAddSingleFilterDefinition() {
+		testAddFilterDefinitions(1);
 	}
 
 	@Test
-	public void testAddOneListenerDefinition() {
-		addListenerDefinitionsAndVerify(1);
+	public void testAddSingleListenerDefinition() {
+		testAddListenerDefinition(1);
 	}
 
 	@Test
-	public void testAddOneServletDefinition() {
-		addServletDefinitionAndVerify(1);
+	public void testAddSingleServletDefinition() {
+		testAddServletDefinitions(1);
 	}
 
-	protected void addFilterDefinitionsAndVerify(int count) {
+	protected void testAddFilterDefinitions(int count) {
 		for (int i = 0; i < count; i++) {
 			String s = String.valueOf(i);
 
@@ -71,7 +71,7 @@ public class WebXMLDefinitionTest {
 			count, _webXmlDefinition.getFilterDefinitions().size());
 	}
 
-	protected void addListenerDefinitionsAndVerify(int count) {
+	protected void testAddListenerDefinition(int count) {
 		for (int i = 0; i < count; i++) {
 			ListenerDefinition listenerDefinition = buildListenerDefinition();
 
@@ -82,7 +82,7 @@ public class WebXMLDefinitionTest {
 			count, _webXmlDefinition.getListenerDefinitions().size());
 	}
 
-	protected void addServletDefinitionAndVerify(int count) {
+	protected void testAddServletDefinitions(int count) {
 		for (int i = 0; i < count; i++) {
 			String s = String.valueOf(i);
 
