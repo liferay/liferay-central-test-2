@@ -15,7 +15,6 @@
 package com.liferay.portal.security.membershippolicy.samples;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.security.membershippolicy.BaseRoleMembershipPolicy;
@@ -36,7 +35,7 @@ public class TestRoleMembershipPolicy extends BaseRoleMembershipPolicy {
 	@Override
 	public void checkRoles(
 			long[] userIds, long[] addRoleIds, long[] removeRoleIds)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		for (long forbiddenRoleId :
 				BaseRoleMembershipPolicyTestCase.getForbiddenRoleIds()) {
