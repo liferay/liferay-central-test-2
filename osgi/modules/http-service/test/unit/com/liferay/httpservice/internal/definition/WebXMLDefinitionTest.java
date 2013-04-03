@@ -14,6 +14,9 @@
 
 package com.liferay.httpservice.internal.definition;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,8 +74,10 @@ public class WebXMLDefinitionTest {
 			_webXmlDefinition.setFilterDefinition(s, filterDefinition);
 		}
 
-		Assert.assertEquals(
-			count, _webXmlDefinition.getFilterDefinitions().size());
+		Map<String, FilterDefinition> filterDefinitions =
+			_webXmlDefinition.getFilterDefinitions();
+
+		Assert.assertEquals(count, filterDefinitions.size());
 	}
 
 	protected void testAddListenerDefinition(int count) {
@@ -84,8 +89,10 @@ public class WebXMLDefinitionTest {
 			_webXmlDefinition.addListenerDefinition(listenerDefinition);
 		}
 
-		Assert.assertEquals(
-			count, _webXmlDefinition.getListenerDefinitions().size());
+		List<ListenerDefinition> listenerDefinitions =
+			_webXmlDefinition.getListenerDefinitions();
+
+		Assert.assertEquals(count, listenerDefinitions.size());
 	}
 
 	protected void testAddServletDefinitions(int count) {
@@ -101,8 +108,10 @@ public class WebXMLDefinitionTest {
 			_webXmlDefinition.setServletDefinition(s, servletDefinition);
 		}
 
-		Assert.assertEquals(
-			count, _webXmlDefinition.getServletDefinitions().size());
+		Map<String, ServletDefinition> servletDefinitions =
+			_webXmlDefinition.getServletDefinitions();
+
+		Assert.assertEquals(count, servletDefinitions.size());
 	}
 
 	private WebXMLDefinition _webXmlDefinition;
