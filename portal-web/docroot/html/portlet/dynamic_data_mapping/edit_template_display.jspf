@@ -549,18 +549,18 @@ templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNa
 
 <%!
 private String[] _getBooleanCodeArray(String testClause, String language) {
-	String[] ifCodeArray = new String[2];
+	String[] booleanCodeArray = new String[2];
 
 	if (language.equalsIgnoreCase("ftl")) {
-		ifCodeArray[0] = "<#if getterUtil.getBoolean(" + testClause + ".getData())>";
-		ifCodeArray[1] = "</#if>";
+		booleanCodeArray[0] = "<#if getterUtil.getBoolean(" + testClause + ".getData())>";
+		booleanCodeArray[1] = "</#if>";
 	}
 	else if (language.equalsIgnoreCase("vm")) {
-		ifCodeArray[0] = "#if ($getterUtil.getBoolean($" + testClause + ".getData())";
-		ifCodeArray[1] = "#end";
+		booleanCodeArray[0] = "#if ($getterUtil.getBoolean($" + testClause + ".getData())";
+		booleanCodeArray[1] = "#end";
 	}
 
-	return ifCodeArray;
+	return booleanCodeArray;
 }
 
 private String[] _getDateCodeArray(String variableName, String language) {
