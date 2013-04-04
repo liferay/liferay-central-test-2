@@ -3674,12 +3674,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			return;
 		}
 
-		Group parentGroup = groupLocalService.fetchGroup(parentGroupId);
-
-		if (parentGroup == null) {
-			throw new GroupParentException(
-				"Site " + parentGroupId + " doesn't exist");
-		}
+		Group parentGroup = groupLocalService.getGroup(parentGroupId);
 
 		if (group.isStagingGroup()) {
 			Group stagingGroup = parentGroup.getStagingGroup();
