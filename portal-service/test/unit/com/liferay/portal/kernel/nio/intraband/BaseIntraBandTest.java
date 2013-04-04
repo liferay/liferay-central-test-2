@@ -1009,7 +1009,7 @@ public class BaseIntraBandTest {
 		Assert.assertTrue(responseWaitingMap.isEmpty());
 		Assert.assertTrue(timeoutSequenceIds.isEmpty());
 
-		// Cleanup timeout, hit, with log
+		// Clean up timeout, hit, with log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
@@ -1066,7 +1066,7 @@ public class BaseIntraBandTest {
 		recordCompletionHandler1.waitUntilTimeouted();
 		recordCompletionHandler2.waitUntilTimeouted();
 
-		// Cleanup timeout, hit, without log
+		// Clean up timeout, hit, without log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.OFF);
@@ -1114,7 +1114,7 @@ public class BaseIntraBandTest {
 		recordCompletionHandler1.waitUntilTimeouted();
 		recordCompletionHandler2.waitUntilTimeouted();
 
-		// Cleanup timeout, miss
+		// Clean up timeout, miss
 
 		_mockIntraBand.cleanUpTimeoutResponseWaitingDatagrams();
 	}
