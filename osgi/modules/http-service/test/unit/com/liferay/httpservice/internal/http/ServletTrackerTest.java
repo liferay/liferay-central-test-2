@@ -16,11 +16,8 @@ package com.liferay.httpservice.internal.http;
 
 import com.liferay.httpservice.internal.servlet.BundleServletContext;
 
-import java.io.IOException;
-
 import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
@@ -36,8 +33,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * @author Miguel Pastor
  */
 @RunWith(PowerMockRunner.class)
-public class ServletTrackerTest
-	extends TestTracker<Servlet, ServiceTrackerCustomizer<Servlet, Servlet>> {
+public class ServletTrackerTest extends BaseTrackerTestCase<Servlet> {
 
 	@Override
 	protected Servlet buildService() {
@@ -46,23 +42,23 @@ public class ServletTrackerTest
 
 	@Override
 	protected ServiceTrackerCustomizer<Servlet, Servlet> buildTracker() {
-		return new ServletTracker(_httpSupport);
+		return new ServletTracker(httpSupport);
 	}
 
 	@Override
 	protected void verifyRegisterServiceAction() throws Exception {
 		BundleServletContext bundleServletContext = Mockito.verify(
-			_bundleServletContext);
+			this.bundleServletContext);
 
 		bundleServletContext.registerServlet(
-			Mockito.anyString(), Mockito.anyString(), Mockito.eq(_service),
-			Mockito.anyMap(), Mockito.eq(_httpContext));
+			Mockito.anyString(), Mockito.anyString(), Mockito.eq(service),
+			Mockito.anyMap(), Mockito.eq(httpContext));
 	}
 
 	@Override
 	protected void verifyUnRegisterServiceAction() throws Exception {
 		BundleServletContext bundleServletContext = Mockito.verify(
-			_bundleServletContext);
+			this.bundleServletContext);
 
 		bundleServletContext.unregisterServlet(Mockito.anyString());
 	}
@@ -71,9 +67,9 @@ public class ServletTrackerTest
 
 		@Override
 		public void service(
-				ServletRequest servletRequest, ServletResponse servletResponse)
-			throws IOException, ServletException {
+			ServletRequest servletRequest, ServletResponse servletResponse) {
 		}
+
 	}
 
 }

@@ -16,12 +16,9 @@ package com.liferay.httpservice.internal.http;
 
 import com.liferay.httpservice.internal.servlet.BundleServletContext;
 
-import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
@@ -37,8 +34,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * @author Miguel Pastor
  */
 @RunWith(PowerMockRunner.class)
-public class FilterTrackerTest
-	extends TestTracker<Filter, ServiceTrackerCustomizer<Filter, Filter>> {
+public class FilterTrackerTest extends BaseTrackerTestCase<Filter> {
 
 	@Override
 	protected Filter buildService() {
@@ -47,23 +43,23 @@ public class FilterTrackerTest
 
 	@Override
 	protected ServiceTrackerCustomizer<Filter, Filter> buildTracker() {
-		return new FilterTracker(_httpSupport);
+		return new FilterTracker(httpSupport);
 	}
 
 	@Override
 	protected void verifyRegisterServiceAction() throws Exception {
 		BundleServletContext bundleServletContext = Mockito.verify(
-			_bundleServletContext);
+			this.bundleServletContext);
 
 		bundleServletContext.registerFilter(
-			Mockito.anyString(), Mockito.anyString(), Mockito.eq(_service),
-			Mockito.anyMap(), Mockito.eq(_httpContext));
+			Mockito.anyString(), Mockito.anyString(), Mockito.eq(service),
+			Mockito.anyMap(), Mockito.eq(httpContext));
 	}
 
 	@Override
 	protected void verifyUnRegisterServiceAction() throws Exception {
 		BundleServletContext bundleServletContext = Mockito.verify(
-			_bundleServletContext);
+			this.bundleServletContext);
 
 		bundleServletContext.unregisterFilter(Mockito.anyString());
 	}
@@ -76,13 +72,12 @@ public class FilterTrackerTest
 
 		@Override
 		public void doFilter(
-				ServletRequest servletRequest, ServletResponse servletResponse,
-				FilterChain filterChain)
-			throws IOException, ServletException {
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain filterChain) {
 		}
 
 		@Override
-		public void init(FilterConfig filterConfig) throws ServletException {
+		public void init(FilterConfig filterConfig) {
 		}
 
 	}

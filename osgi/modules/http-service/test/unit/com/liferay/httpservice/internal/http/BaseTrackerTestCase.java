@@ -34,19 +34,17 @@ import org.powermock.api.mockito.PowerMockito;
 /**
  * @author Miguel Pastor
  */
-public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
-	extends PowerMockito {
+public abstract class BaseTrackerTestCase<S> extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		_service = buildService();
+		service = buildService();
 		_tracker = buildTracker();
 	}
 
 	@Test
 	public void testAddingServiceWithEmptyInitParameters() throws Exception {
-
-		mockAddingService(new String[] {});
+		mockAddingService(new String[0]);
 
 		_tracker.addingService(_serviceReference);
 
@@ -55,7 +53,6 @@ public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
 
 	@Test
 	public void testAddingServiceWithInitParameters() throws Exception {
-
 		mockAddingService(new String[] {"init.a", "init.b", "foo.c"});
 
 		_tracker.addingService(_serviceReference);
@@ -67,48 +64,48 @@ public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
 	public void testRemovedService() throws Exception {
 		mockRemovedService();
 
-		_tracker.removedService(_serviceReference, _service);
+		_tracker.removedService(_serviceReference, service);
 
 		verifyRemovedService();
 	}
 
-	abstract protected S buildService();
+	protected abstract S buildService();
 
-	abstract protected T buildTracker();
+	protected abstract ServiceTrackerCustomizer<S, S> buildTracker();
 
 	protected void mockAction(String[] initParameters)
 		throws InvalidSyntaxException {
 
 		when(
-			_bundleContext.getService(_serviceReference)
+			bundleContext.getService(_serviceReference)
 		).thenReturn(
-			_service
+			service
 		);
 
 		when(
-			_httpSupport.getBundleServletContext(_bundle)
+			httpSupport.getBundleServletContext(bundle)
 		).thenReturn(
-			_bundleServletContext
+			bundleServletContext
 		);
 
 		when(
-			_httpSupport.getHttpContext(Mockito.anyString())
+			httpSupport.getHttpContext(Mockito.anyString())
 		).thenReturn(
-			_httpContext
+			httpContext
 		);
 
 		when(
 			_serviceReference.getBundle()
 		).thenReturn(
-			_bundle
+			bundle
 		);
 	}
 
 	protected void mockAddingService(String[] initParameters) throws Exception {
 		when(
-			_httpSupport.getBundleContext()
+			httpSupport.getBundleContext()
 		).thenReturn(
-			_bundleContext
+			bundleContext
 		);
 
 		when(
@@ -125,14 +122,14 @@ public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
 	}
 
 	protected void verifyAddingService() throws Exception {
-		BundleContext bundleContext = Mockito.verify(_bundleContext);
+		BundleContext bundleContext = Mockito.verify(this.bundleContext);
 
 		bundleContext.getService(_serviceReference);
 
-		HttpSupport httpSupport = Mockito.verify(_httpSupport);
+		HttpSupport httpSupport = Mockito.verify(this.httpSupport);
 
 		httpSupport.getBundleContext();
-		httpSupport.getBundleServletContext(_bundle);
+		httpSupport.getBundleServletContext(bundle);
 		httpSupport.getHttpContext(Mockito.anyString());
 
 		verifyRegisterServiceAction();
@@ -146,7 +143,7 @@ public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
 		verifyUnRegisterServiceAction();
 	}
 
-	protected void verifyServiceReference() throws InvalidSyntaxException {
+	protected void verifyServiceReference() {
 		ServiceReference<S> serviceReference = Mockito.verify(
 			_serviceReference);
 
@@ -157,25 +154,25 @@ public abstract class TestTracker<S, T extends ServiceTrackerCustomizer<S, S>>
 	protected abstract void verifyUnRegisterServiceAction() throws Exception;
 
 	@Mock
-	protected Bundle _bundle;
+	protected Bundle bundle;
 
 	@Mock
-	protected BundleContext _bundleContext;
+	protected BundleContext bundleContext;
 
 	@Mock
-	protected BundleServletContext _bundleServletContext;
+	protected BundleServletContext bundleServletContext;
 
 	@Mock
-	protected HttpContext _httpContext;
+	protected HttpContext httpContext;
 
 	@Mock
-	protected HttpSupport _httpSupport;
+	protected HttpSupport httpSupport;
 
-	protected S _service;
+	protected S service;
 
 	@Mock
-	protected ServiceReference<S> _serviceReference;
+	private ServiceReference<S> _serviceReference;
 
-	protected T _tracker;
+	private ServiceTrackerCustomizer<S, S> _tracker;
 
 }
