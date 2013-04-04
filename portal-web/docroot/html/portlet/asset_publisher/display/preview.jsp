@@ -40,17 +40,17 @@ String shortTitle = StringUtil.shorten(assetRenderer.getTitle(themeDisplay.getLo
 	</div>
 
 	<%
-	String displayDate = StringPool.BLANK;
+	String displayDateString = StringPool.BLANK;
 
 	if (Validator.isNotNull(assetRenderer.getDisplayDate())) {
 		Format displayFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMM d, yyyy", locale, timeZone);
 
-		displayDate = CharPool.OPEN_PARENTHESIS + displayFormatDate.format(assetRenderer.getDisplayDate()) + CharPool.CLOSE_PARENTHESIS;
+		displayDateString = CharPool.OPEN_PARENTHESIS + displayFormatDate.format(assetRenderer.getDisplayDate()) + CharPool.CLOSE_PARENTHESIS;
 	}
 	%>
 
 	<div class="asset-information">
-		<span class="user-name"><%= assetRenderer.getUserName() %></span>&nbsp; <span class="display-date"><%= displayDate %></span>
+		<span class="user-name"><%= assetRenderer.getUserName() %></span>&nbsp; <span class="display-date"><%= displayDateString %></span>
 	</div>
 
 	<div class="asset-summary">
