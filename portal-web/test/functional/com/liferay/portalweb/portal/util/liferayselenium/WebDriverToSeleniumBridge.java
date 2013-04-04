@@ -57,6 +57,7 @@ public class WebDriverToSeleniumBridge
 		super(webDriver);
 
 		initKeys();
+		initKeysSpecialChars();
 
 		_defaultWindowHandle = getWindowHandle();
 	}
@@ -1225,46 +1226,39 @@ public class WebDriverToSeleniumBridge
 	public void typeKeys(String locator, String value) {
 		WebElement webElement = getWebElement(locator);
 
-		if (webElement.isEnabled()) {
-			Map<String, String> specialChars = new HashMap<String, String>();
+		if (!webElement.isEnabled()) {
+			return;
+		}
 
-			specialChars.put("&", "7");
-			specialChars.put("$", "4");
-			specialChars.put("<", ",");
-			specialChars.put(">", ".");
-			specialChars.put("(", "9");
-			specialChars.put(")", "0");
+		StringBundler sb = new StringBundler();
 
-			StringBundler sb = new StringBundler();
+		sb.append(".*[");
 
-			sb.append(".*[");
+		Set<String> keysSpecialCharsSet = _keysSpecialChars.keySet();
 
-			Set<String> specialCharsSet = specialChars.keySet();
+		for (String specialChar : keysSpecialCharsSet) {
+			sb.append("\\");
+			sb.append(specialChar);
+		}
 
-			for (String specialChar : specialCharsSet) {
-				sb.append("\\");
-				sb.append(specialChar);
-			}
+		sb.append("]*.*");
 
-			sb.append("]*.*");
+		if (value.matches(sb.toString())) {
+			char[] chars = value.toCharArray();
 
-			if (value.matches(sb.toString())) {
-				char[] chars = value.toCharArray();
+			for (char c : chars) {
+				String s = String.valueOf(c);
 
-				for (char c : chars) {
-					String s = String.valueOf(c);
-
-					if (specialCharsSet.contains(s)) {
-						webElement.sendKeys(Keys.SHIFT, specialChars.get(s));
-					}
-					else {
-						webElement.sendKeys(s);
-					}
+				if (keysSpecialCharsSet.contains(s)) {
+					webElement.sendKeys(Keys.SHIFT, _keysSpecialChars.get(s));
+				}
+				else {
+					webElement.sendKeys(s);
 				}
 			}
-			else {
-				webElement.sendKeys(value);
-			}
+		}
+		else {
+			webElement.sendKeys(value);
 		}
 	}
 
@@ -1501,7 +1495,18 @@ public class WebDriverToSeleniumBridge
 		//keyTable[] = Keys.UP;
 	}
 
+	protected void initKeysSpecialChars() {
+		_keysSpecialChars.put("&", "7");
+		_keysSpecialChars.put("$", "4");
+		_keysSpecialChars.put("<", ",");
+		_keysSpecialChars.put(">", ".");
+		_keysSpecialChars.put("(", "9");
+		_keysSpecialChars.put(")", "0");
+	}
+
 	private String _defaultWindowHandle;
 	private Keys[] _keysArray = new Keys[128];
+	private Map<String, String> _keysSpecialChars =
+		new HashMap<String, String>();
 
 }
