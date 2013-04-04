@@ -1832,8 +1832,6 @@ public class JournalArticleLocalServiceImpl
 
 		article = journalArticlePersistence.update(article);
 
-		// Social
-
 		socialActivityCounterLocalService.disableActivityCounters(
 			JournalFolder.class.getName(), article.getFolderId());
 
@@ -1952,8 +1950,6 @@ public class JournalArticleLocalServiceImpl
 		updateStatus(
 			userId, article, trashEntry.getStatus(), null, workflowContext,
 			serviceContext);
-
-		// Social
 
 		socialActivityCounterLocalService.enableActivityCounters(
 			JournalFolder.class.getName(), article.getFolderId());

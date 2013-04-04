@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.messageboards.social;
 
-import javax.portlet.PortletURL;
-
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,6 +28,8 @@ import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.trash.util.TrashUtil;
+
+import javax.portlet.PortletURL;
 
 /**
  * @author Zsolt Berentey
