@@ -64,20 +64,20 @@ public class LayoutSetPrototypePropagationTest
 
 	@Test
 	public void testIsLayoutDeleteable() throws Exception {
-		Assert.assertFalse(SitesUtil.isLayoutDeleteable(_layout));
+		Assert.assertFalse(SitesUtil.isLayoutDeleteable(layout));
 
 		setLinkEnabled(false);
 
-		Assert.assertTrue(SitesUtil.isLayoutDeleteable(_layout));
+		Assert.assertTrue(SitesUtil.isLayoutDeleteable(layout));
 	}
 
 	@Test
 	public void testIsLayoutSortable() throws Exception {
-		Assert.assertFalse(SitesUtil.isLayoutSortable(_layout));
+		Assert.assertFalse(SitesUtil.isLayoutSortable(layout));
 
 		setLinkEnabled(false);
 
-		Assert.assertTrue(SitesUtil.isLayoutSortable(_layout));
+		Assert.assertTrue(SitesUtil.isLayoutSortable(layout));
 	}
 
 	@Test
@@ -135,31 +135,32 @@ public class LayoutSetPrototypePropagationTest
 
 	@Test
 	public void testReset() throws Exception {
+		SitesUtil.resetPrototype(layout);
 		SitesUtil.resetPrototype(_layout);
-		SitesUtil.resetPrototype(_layout2);
 
-		propagateChanges(_group);
+		propagateChanges(group);
+
+		layout = LayoutTestUtil.updateLayoutTemplateId(layout, "1_column");
+
+		Assert.assertTrue(SitesUtil.isLayoutModifiedSinceLastMerge(layout));
+		Assert.assertFalse(SitesUtil.isLayoutModifiedSinceLastMerge(_layout));
 
 		_layout = LayoutTestUtil.updateLayoutTemplateId(_layout, "1_column");
 
+		SitesUtil.resetPrototype(layout);
+
+		layout = propagateChanges(layout);
+
+		Assert.assertFalse(SitesUtil.isLayoutModifiedSinceLastMerge(layout));
+		Assert.assertEquals(
+			initialLayoutTemplateId,
+			LayoutTestUtil.getLayoutTemplateId(layout));
 		Assert.assertTrue(SitesUtil.isLayoutModifiedSinceLastMerge(_layout));
-		Assert.assertFalse(SitesUtil.isLayoutModifiedSinceLastMerge(_layout2));
-
-		_layout2 = LayoutTestUtil.updateLayoutTemplateId(_layout2, "1_column");
-
-		SitesUtil.resetPrototype(_layout);
-
-		_layout = propagateChanges(_layout);
-
-		Assert.assertFalse(SitesUtil.isLayoutModifiedSinceLastMerge(_layout));
 		Assert.assertEquals(
-			_initialLayoutTemplateId,
-			LayoutTestUtil.getLayoutTemplateId(_layout));
-		Assert.assertTrue(SitesUtil.isLayoutModifiedSinceLastMerge(_layout2));
-		Assert.assertEquals(
-			"1_column", LayoutTestUtil.getLayoutTemplateId(_layout2));
+			"1_column", LayoutTestUtil.getLayoutTemplateId(_layout));
 	}
 
+	@Override
 	protected void doSetUp() throws Exception {
 
 		// Layout set prototype
@@ -169,28 +170,28 @@ public class LayoutSetPrototypePropagationTest
 
 		_layoutSetPrototypeGroup = _layoutSetPrototype.getGroup();
 
-		_prototypeLayout = LayoutTestUtil.addLayout(
+		prototypeLayout = LayoutTestUtil.addLayout(
 			_layoutSetPrototypeGroup.getGroupId(),
 			ServiceTestUtil.randomString(), true);
 
 		LayoutTestUtil.updateLayoutTemplateId(
-			_prototypeLayout, _initialLayoutTemplateId);
+			prototypeLayout, initialLayoutTemplateId);
 
 		_layoutSetPrototypeJournalArticle = JournalTestUtil.addArticle(
 			_layoutSetPrototypeGroup.getGroupId(), "Test Article",
 			"Test Content");
 
-		_journalContentPortletId =
+		journalContentPortletId =
 			addJournalContentPortletToLayout(
-				TestPropsValues.getUserId(), _prototypeLayout,
+				TestPropsValues.getUserId(), prototypeLayout,
 				_layoutSetPrototypeJournalArticle, "column-1");
 
-		_prototypeLayout2 = LayoutTestUtil.addLayout(
+		_prototypeLayout = LayoutTestUtil.addLayout(
 			_layoutSetPrototypeGroup.getGroupId(),
 			ServiceTestUtil.randomString(), true);
 
 		LayoutTestUtil.updateLayoutTemplateId(
-				_prototypeLayout2, _initialLayoutTemplateId);
+				_prototypeLayout, initialLayoutTemplateId);
 
 		_initialPrototypeLayoutCount =
 			LayoutLocalServiceUtil.getLayoutsCount(
@@ -200,40 +201,40 @@ public class LayoutSetPrototypePropagationTest
 
 		setLinkEnabled(true);
 
-		propagateChanges(_group);
+		propagateChanges(group);
+
+		layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+			group.getGroupId(), false, prototypeLayout.getFriendlyURL());
 
 		_layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			_group.getGroupId(), false, _prototypeLayout.getFriendlyURL());
-
-		_layout2 = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			_group.getGroupId(), false, _prototypeLayout2.getFriendlyURL());
+			group.getGroupId(), false, _prototypeLayout.getFriendlyURL());
 
 		_initialLayoutCount = getGroupLayoutCount();
 
-		_journalArticle =
+		journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				_group.getGroupId(),
+				group.getGroupId(),
 				_layoutSetPrototypeJournalArticle.getUrlTitle());
 	}
 
 	protected void doTestIsLayoutUpdateable() throws Exception {
+		Assert.assertTrue(SitesUtil.isLayoutUpdateable(layout));
 		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout));
-		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout2));
 
-		setLayoutUpdateable(_prototypeLayout, false);
+		setLayoutUpdateable(prototypeLayout, false);
 
-		Assert.assertFalse(SitesUtil.isLayoutUpdateable(_layout));
-		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout2));
+		Assert.assertFalse(SitesUtil.isLayoutUpdateable(layout));
+		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout));
 
 		setLayoutsUpdateable(false);
 
+		Assert.assertFalse(SitesUtil.isLayoutUpdateable(layout));
 		Assert.assertFalse(SitesUtil.isLayoutUpdateable(_layout));
-		Assert.assertFalse(SitesUtil.isLayoutUpdateable(_layout2));
 
 		setLinkEnabled(false);
 
+		Assert.assertTrue(SitesUtil.isLayoutUpdateable(layout));
 		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout));
-		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout2));
 	}
 
 	protected void doTestLayoutPropagation(boolean linkEnabled)
@@ -248,7 +249,7 @@ public class LayoutSetPrototypePropagationTest
 		Assert.assertEquals(
 			_initialPrototypeLayoutCount, getGroupLayoutCount());
 
-		propagateChanges(_group);
+		propagateChanges(group);
 
 		if (linkEnabled) {
 			Assert.assertEquals(
@@ -271,7 +272,7 @@ public class LayoutSetPrototypePropagationTest
 				_initialPrototypeLayoutCount, getGroupLayoutCount());
 		}
 
-		propagateChanges(_group);
+		propagateChanges(group);
 
 		Assert.assertEquals(
 				_initialPrototypeLayoutCount, getGroupLayoutCount());
@@ -283,29 +284,29 @@ public class LayoutSetPrototypePropagationTest
 
 		Layout layoutSetPrototypeLayout = LayoutTestUtil.addLayout(
 			_layoutSetPrototypeGroup.getGroupId(),
-			ServiceTestUtil.randomString(), true, _layoutPrototype,
+			ServiceTestUtil.randomString(), true, layoutPrototype,
 			layoutSetLayoutLinkEnabled);
 
 		layoutSetPrototypeLayout = propagateChanges(layoutSetPrototypeLayout);
 
-		propagateChanges(_group);
+		propagateChanges(group);
 
 		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-			_group.getGroupId(), false,
+			group.getGroupId(), false,
 			layoutSetPrototypeLayout.getFriendlyURL());
 
 		LayoutTestUtil.updateLayoutTemplateId(
-				_layoutPrototypeLayout, "1_column");
+				layoutPrototypeLayout, "1_column");
 
 		if (layoutSetLayoutLinkEnabled) {
 			Assert.assertEquals(
-				_initialLayoutTemplateId,
+				initialLayoutTemplateId,
 				LayoutTestUtil.getLayoutTemplateId(layout));
 		}
 
 		layout = propagateChanges(layout);
 
-		propagateChanges(_group);
+		propagateChanges(group);
 
 		if (layoutSetLayoutLinkEnabled) {
 			Assert.assertEquals(
@@ -313,7 +314,7 @@ public class LayoutSetPrototypePropagationTest
 		}
 		else {
 			Assert.assertEquals(
-				_initialLayoutTemplateId,
+				initialLayoutTemplateId,
 				LayoutTestUtil.getLayoutTemplateId(layout));
 		}
 	}
@@ -325,17 +326,17 @@ public class LayoutSetPrototypePropagationTest
 
 		String content = _layoutSetPrototypeJournalArticle.getContent();
 
-		Assert.assertEquals(content, _journalArticle.getContent());
+		Assert.assertEquals(content, journalArticle.getContent());
 
 		JournalTestUtil.updateArticle(
 			_layoutSetPrototypeJournalArticle, "New Test Title",
 			"New Test Content");
 
-		propagateChanges(_group);
+		propagateChanges(group);
 
 		// Portlet data is no longer propagated once the group has been created
 
-		Assert.assertEquals(content, _journalArticle.getContent());
+		Assert.assertEquals(content, journalArticle.getContent());
 	}
 
 	@Override
@@ -346,7 +347,7 @@ public class LayoutSetPrototypePropagationTest
 	}
 
 	protected int getGroupLayoutCount() throws Exception {
-		return LayoutLocalServiceUtil.getLayoutsCount(_group, false);
+		return LayoutLocalServiceUtil.getLayoutsCount(group, false);
 	}
 
 	protected void propagateChanges(Group group) throws Exception {
@@ -384,23 +385,24 @@ public class LayoutSetPrototypePropagationTest
 		return LayoutLocalServiceUtil.updateLayout(layout);
 	}
 
+	@Override
 	protected void setLinkEnabled(boolean linkEnabled) throws Exception {
 		SitesUtil.updateLayoutSetPrototypesLinks(
-			_group, _layoutSetPrototype.getLayoutSetPrototypeId(), 0,
+			group, _layoutSetPrototype.getLayoutSetPrototypeId(), 0,
 			linkEnabled, linkEnabled);
 
-		if ((_layout != null) && (_layout2 != null)) {
+		if ((layout != null) && (_layout != null)) {
+			layout = LayoutLocalServiceUtil.getLayout(layout.getPlid());
 			_layout = LayoutLocalServiceUtil.getLayout(_layout.getPlid());
-			_layout2 = LayoutLocalServiceUtil.getLayout(_layout2.getPlid());
 		}
 	}
 
 	private int _initialLayoutCount;
 	private int _initialPrototypeLayoutCount;
-	private Layout _layout2;
+	private Layout _layout;
 	private LayoutSetPrototype _layoutSetPrototype;
 	private Group _layoutSetPrototypeGroup;
 	private JournalArticle _layoutSetPrototypeJournalArticle;
-	private Layout _prototypeLayout2;
+	private Layout _prototypeLayout;
 
 }

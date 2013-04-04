@@ -56,26 +56,26 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 
 		// Group
 
-		_group = GroupTestUtil.addGroup();
+		group = GroupTestUtil.addGroup();
 
 		// Global scope article
 
-		Company company = CompanyUtil.fetchByPrimaryKey(_group.getCompanyId());
+		Company company = CompanyUtil.fetchByPrimaryKey(group.getCompanyId());
 
-		_globalGroupId = company.getGroup().getGroupId();
+		globalGroupId = company.getGroup().getGroupId();
 
-		_globalJournalArticle = JournalTestUtil.addArticle(
-			_globalGroupId, "Global Article", "Global Content");
+		globalJournalArticle = JournalTestUtil.addArticle(
+			globalGroupId, "Global Article", "Global Content");
 
 		// Layout prototype
 
-		_layoutPrototype = LayoutTestUtil.addLayoutPrototype(
+		layoutPrototype = LayoutTestUtil.addLayoutPrototype(
 			ServiceTestUtil.randomString());
 
-		_layoutPrototypeLayout = _layoutPrototype.getLayout();
+		layoutPrototypeLayout = layoutPrototype.getLayout();
 
 		LayoutTestUtil.updateLayoutTemplateId(
-			_layoutPrototypeLayout, _initialLayoutTemplateId);
+			layoutPrototypeLayout, initialLayoutTemplateId);
 
 		doSetUp();
 	}
@@ -131,55 +131,53 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 
 		setLinkEnabled(linkEnabled);
 
-		int initialPortletCount = LayoutTestUtil.getPortlets(_layout).size();
+		int initialPortletCount = LayoutTestUtil.getPortlets(layout).size();
 
-		_prototypeLayout = LayoutTestUtil.updateLayoutTemplateId(
-			_prototypeLayout, "1_column");
+		prototypeLayout = LayoutTestUtil.updateLayoutTemplateId(
+			prototypeLayout, "1_column");
 
 		LayoutTestUtil.updateLayoutColumnCustomizable(
-			_prototypeLayout, "column-1", true);
+			prototypeLayout, "column-1", true);
 
 		addJournalContentPortletToLayout(
-			TestPropsValues.getUserId(), _prototypeLayout,
-			_globalJournalArticle, "column-1");
+			TestPropsValues.getUserId(), prototypeLayout, globalJournalArticle,
+			"column-1");
 
 		if (linkEnabled) {
 			Assert.assertEquals(
-				_initialLayoutTemplateId,
-				LayoutTestUtil.getLayoutTemplateId(_layout));
+				initialLayoutTemplateId,
+				LayoutTestUtil.getLayoutTemplateId(layout));
 
 			Assert.assertFalse(
-				LayoutTestUtil.isLayoutColumnCustomizable(_layout, "column-1"));
+				LayoutTestUtil.isLayoutColumnCustomizable(layout, "column-1"));
 
 			Assert.assertEquals(
-				initialPortletCount,
-				LayoutTestUtil.getPortlets(_layout).size());
+				initialPortletCount, LayoutTestUtil.getPortlets(layout).size());
 		}
 
-		_layout = propagateChanges(_layout);
+		layout = propagateChanges(layout);
 
 		if (linkEnabled) {
 			Assert.assertEquals(
-				"1_column", LayoutTestUtil.getLayoutTemplateId(_layout));
+				"1_column", LayoutTestUtil.getLayoutTemplateId(layout));
 
 			Assert.assertTrue(
-				LayoutTestUtil.isLayoutColumnCustomizable(_layout, "column-1"));
+				LayoutTestUtil.isLayoutColumnCustomizable(layout, "column-1"));
 
 			Assert.assertEquals(
 				initialPortletCount + 1,
-				LayoutTestUtil.getPortlets(_layout).size());
+				LayoutTestUtil.getPortlets(layout).size());
 		}
 		else {
 			Assert.assertEquals(
-				_initialLayoutTemplateId,
-				LayoutTestUtil.getLayoutTemplateId(_layout));
+				initialLayoutTemplateId,
+				LayoutTestUtil.getLayoutTemplateId(layout));
 
 			Assert.assertFalse(
-				LayoutTestUtil.isLayoutColumnCustomizable(_layout, "column-1"));
+				LayoutTestUtil.isLayoutColumnCustomizable(layout, "column-1"));
 
 			Assert.assertEquals(
-				initialPortletCount,
-				LayoutTestUtil.getPortlets(_layout).size());
+				initialPortletCount, LayoutTestUtil.getPortlets(layout).size());
 		}
 	}
 
@@ -197,7 +195,7 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 
 		PortletPreferences layoutSetPrototypePortletPreferences =
 			LayoutTestUtil.getPortletPreferences(
-				_prototypeLayout, _journalContentPortletId);
+				prototypeLayout, journalContentPortletId);
 
 		layoutSetPrototypePortletPreferences.setValue(
 			"articleId", StringPool.BLANK);
@@ -207,18 +205,18 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 
 		if (globalScope) {
 			layoutSetPrototypePortletPreferences.setValue(
-				"groupId", String.valueOf(_globalGroupId));
+				"groupId", String.valueOf(globalGroupId));
 			layoutSetPrototypePortletPreferences.setValue(
 				"lfrScopeType", "company");
 		}
 
 		LayoutTestUtil.updatePortletPreferences(
-			_prototypeLayout.getPlid(), _journalContentPortletId,
+			prototypeLayout.getPlid(), journalContentPortletId,
 			layoutSetPrototypePortletPreferences);
 
 		PortletPreferences portletPreferences =
 			LayoutTestUtil.getPortletPreferences(
-				_layout, _journalContentPortletId);
+				layout, journalContentPortletId);
 
 		if (linkEnabled) {
 			if (globalScope) {
@@ -231,7 +229,7 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 				// Changes in preferences of local ids are not propagated
 
 				Assert.assertEquals(
-					_journalArticle.getArticleId(),
+					journalArticle.getArticleId(),
 					portletPreferences.getValue("articleId", StringPool.BLANK));
 			}
 
@@ -242,7 +240,7 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 		}
 		else {
 			Assert.assertEquals(
-				_journalArticle.getArticleId(),
+				journalArticle.getArticleId(),
 				portletPreferences.getValue("articleId", StringPool.BLANK));
 		}
 	}
@@ -254,15 +252,15 @@ public abstract class BasePrototypePropagationTestCase extends PowerMockito {
 	protected abstract void setLinkEnabled(boolean linkEnabled)
 		throws Exception;
 
-	protected long _globalGroupId;
-	protected JournalArticle _globalJournalArticle;
-	protected Group _group;
-	protected String _initialLayoutTemplateId = "2_2_columns";
-	protected JournalArticle _journalArticle;
-	protected String _journalContentPortletId;
-	protected Layout _layout;
-	protected LayoutPrototype _layoutPrototype;
-	protected Layout _layoutPrototypeLayout;
-	protected Layout _prototypeLayout;
+	protected long globalGroupId;
+	protected JournalArticle globalJournalArticle;
+	protected Group group;
+	protected String initialLayoutTemplateId = "2_2_columns";
+	protected JournalArticle journalArticle;
+	protected String journalContentPortletId;
+	protected Layout layout;
+	protected LayoutPrototype layoutPrototype;
+	protected Layout layoutPrototypeLayout;
+	protected Layout prototypeLayout;
 
 }

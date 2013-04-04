@@ -43,27 +43,29 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 public class LayoutPrototypePropagationTest
 	extends BasePrototypePropagationTestCase {
 
+	@Override
 	protected void doSetUp() throws Exception {
-		_prototypeLayout = _layoutPrototypeLayout;
+		prototypeLayout = layoutPrototypeLayout;
 
-		_journalArticle = _globalJournalArticle;
+		journalArticle = globalJournalArticle;
 
-		_journalContentPortletId =
+		journalContentPortletId =
 			addJournalContentPortletToLayout(
-				TestPropsValues.getUserId(), _layoutPrototypeLayout,
-				_journalArticle, "column-1");
+				TestPropsValues.getUserId(), layoutPrototypeLayout,
+				journalArticle, "column-1");
 
-		_layout = LayoutTestUtil.addLayout(
-			_group.getGroupId(), ServiceTestUtil.randomString(), true,
-			_layoutPrototype, true);
+		layout = LayoutTestUtil.addLayout(
+			group.getGroupId(), ServiceTestUtil.randomString(), true,
+			layoutPrototype, true);
 
-		_layout = propagateChanges(_layout);
+		layout = propagateChanges(layout);
 	}
 
+	@Override
 	protected void setLinkEnabled(boolean linkEnabled) throws Exception {
-		_layout.setLayoutPrototypeLinkEnabled(linkEnabled);
+		layout.setLayoutPrototypeLinkEnabled(linkEnabled);
 
-		LayoutLocalServiceUtil.updateLayout(_layout);
+		LayoutLocalServiceUtil.updateLayout(layout);
 	}
 
 }
