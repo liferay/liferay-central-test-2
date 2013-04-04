@@ -189,7 +189,7 @@ public class GroupServiceTest {
 
 	@Test
 	public void testSelectLiveGroupAsParentSite() throws Exception {
-		Group group = GroupTestUtil.addGroup("Test 1");
+		Group group = GroupTestUtil.addGroup();
 
 		GroupTestUtil.enableLocalStaging(group);
 
@@ -204,30 +204,29 @@ public class GroupServiceTest {
 				stagingGroup.getType(), stagingGroup.getFriendlyURL(),
 				stagingGroup.isActive(), ServiceTestUtil.getServiceContext());
 
-			Assert.fail("A group cannot has its live group as parent.");
+			Assert.fail("A group cannot have its live group as parent");
 		}
-		catch (GroupParentException pe) {
+		catch (GroupParentException gpe) {
 			Assert.assertEquals(
-				GroupParentException.STAGING_DESCENDANT, pe.getType());
+				GroupParentException.STAGING_DESCENDANT, gpe.getType());
 		}
 	}
 
 	@Test
 	public void testSelectOwnGroupAsParentSite() throws Exception {
-		Group group1 = GroupTestUtil.addGroup("Test 1");
+		Group group = GroupTestUtil.addGroup();
 
 		try {
 			GroupLocalServiceUtil.updateGroup(
-				group1.getGroupId(), group1.getGroupId(), group1.getName(),
-				group1.getDescription(), group1.getType(),
-				group1.getFriendlyURL(), group1.isActive(),
-				ServiceTestUtil.getServiceContext());
+				group.getGroupId(), group.getGroupId(), group.getName(),
+				group.getDescription(), group.getType(), group.getFriendlyURL(),
+				group.isActive(), ServiceTestUtil.getServiceContext());
 
-			Assert.fail("A group cannot be its own parent.");
+			Assert.fail("A group cannot be its own parent");
 		}
-		catch (GroupParentException pe) {
+		catch (GroupParentException gpe) {
 			Assert.assertEquals(
-				GroupParentException.SELF_DESCENDANT, pe.getType());
+				GroupParentException.SELF_DESCENDANT, gpe.getType());
 		}
 	}
 
@@ -509,8 +508,7 @@ public class GroupServiceTest {
 			}
 			else if (staging) {
 				if (selectableGroupId == group.getLiveGroupId()) {
-					Assert.fail(
-						"A group cannot have its live group as parent");
+					Assert.fail("A group cannot have its live group as parent");
 				}
 			}
 		}
