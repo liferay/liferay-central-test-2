@@ -908,7 +908,7 @@ public class BaseIntraBandTest {
 		sourceChannel.configureBlocking(true);
 		sinkChannel.configureBlocking(true);
 
-		// SUBMITTED callback
+		// Submitted callback
 
 		channelContext = new ChannelContext(new LinkedList<Datagram>());
 
@@ -933,7 +933,7 @@ public class BaseIntraBandTest {
 
 		Assert.assertSame(attachment, recordCompletionHandler.getAttachment());
 
-		// REPLIED callback
+		// Replied callback
 
 		Queue<Datagram> sendingQueue = new LinkedList<Datagram>();
 
@@ -956,8 +956,6 @@ public class BaseIntraBandTest {
 
 		sourceChannel.close();
 		sinkChannel.close();
-
-		// Satisfy code coverage
 
 		Assert.assertSame(sendingQueue, channelContext.getSendingQueue());
 	}
