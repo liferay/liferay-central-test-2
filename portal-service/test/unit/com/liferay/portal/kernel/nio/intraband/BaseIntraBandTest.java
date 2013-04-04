@@ -1123,7 +1123,7 @@ public class BaseIntraBandTest {
 	@Test
 	public void testSendDatagramWithCallback() {
 
-		// RegistrationReference is null
+		// Registration reference is null
 
 		try {
 			_mockIntraBand.sendDatagram(null, null, null, null, null);
@@ -1135,7 +1135,7 @@ public class BaseIntraBandTest {
 				"Registration reference is null", npe.getMessage());
 		}
 
-		// RegistrationReference is cancelled
+		// Registration reference is invalid
 
 		try {
 			RegistrationReference registrationReference =
@@ -1209,7 +1209,7 @@ public class BaseIntraBandTest {
 			Assert.assertEquals("Complete handler is null", npe.getMessage());
 		}
 
-		// TimeUnit is null
+		// Time unit is null
 
 		try {
 			_mockIntraBand.sendDatagram(
@@ -1224,7 +1224,7 @@ public class BaseIntraBandTest {
 			Assert.assertEquals("Time unit is null", npe.getMessage());
 		}
 
-		// None positive timeout
+		// Nonpositive timeout
 
 		Datagram requestDatagram = Datagram.createRequestDatagram(_type, _data);
 
