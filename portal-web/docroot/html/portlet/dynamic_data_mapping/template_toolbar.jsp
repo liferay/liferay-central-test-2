@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 long classNameId = ParamUtil.getLong(request, "classNameId");
