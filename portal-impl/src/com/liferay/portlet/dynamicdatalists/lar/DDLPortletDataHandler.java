@@ -71,7 +71,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
-		ActionableDynamicQuery recordSetActionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			new DDLRecordSetActionableDynamicQuery() {
 
 			@Override
@@ -90,10 +90,9 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 		};
 
-		recordSetActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
+		actionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
 
-		recordSetActionableDynamicQuery.performActions();
+		actionableDynamicQuery.performActions();
 
 		return getExportDataRootElementString(rootElement);
 	}
