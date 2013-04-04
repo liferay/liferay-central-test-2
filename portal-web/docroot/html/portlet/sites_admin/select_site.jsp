@@ -67,12 +67,13 @@ portletURL.setParameter("target", target);
 			if (groupId > 0) {
 				List<Long> excludedGroupIds = new ArrayList<Long>();
 
-				excludedGroupIds.add(groupId);
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-				Group selGroup = GroupLocalServiceUtil.getGroup(groupId);
-
-				if (selGroup.isStagingGroup()) {
-					excludedGroupIds.add(selGroup.getLiveGroupId());
+				if (group.isStagingGroup()) {
+					excludedGroupIds.add(group.getLiveGroupId());
+				}
+				else {
+					excludedGroupIds.add(groupId);
 				}
 
 				groupParams.put("excludedGroupIds", excludedGroupIds);
