@@ -46,14 +46,10 @@ public class DDLRecordSetStagedModelDataHandler
 			PortletDataContext portletDataContext, DDLRecordSet recordSet)
 		throws Exception {
 
-		// Structure
-
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 		StagedModelDataHandlerUtil.exportStagedModel(
 			portletDataContext, ddmStructure);
-
-		// Templates
 
 		List<DDMTemplate> ddmTemplates = ddmStructure.getTemplates();
 
@@ -80,8 +76,6 @@ public class DDLRecordSetStagedModelDataHandler
 
 		long userId = portletDataContext.getUserId(recordSet.getUserUuid());
 
-		// Structure
-
 		Map<Long, Long> ddmStructureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
@@ -100,8 +94,6 @@ public class DDLRecordSetStagedModelDataHandler
 			ddmStructureIds, recordSet.getDDMStructureId(),
 			recordSet.getDDMStructureId());
 
-		// Templates
-
 		List<Element> templateElements =
 			portletDataContext.getReferencedDataElements(
 				recordSet, DDMTemplate.class);
@@ -110,8 +102,6 @@ public class DDLRecordSetStagedModelDataHandler
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, templateElement);
 		}
-
-		// Record set
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			recordSet, DDLPortletDataHandler.NAMESPACE);

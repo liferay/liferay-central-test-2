@@ -183,8 +183,6 @@ public class DDMTemplateStagedModelDataHandler
 
 		long userId = portletDataContext.getUserId(template.getUserUuid());
 
-		// Structure
-
 		Map<Long, Long> structureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);

@@ -586,7 +586,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Element addReferenceElement(
-		Element element, ClassedModel referencedModel) {
+		Element element, ClassedModel referencedClassedModel) {
 
 		Element referencesElement = element.element("references");
 
@@ -597,11 +597,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		Element refElement = referencesElement.addElement("ref");
 
 		refElement.addAttribute(
-			"class-name", referencedModel.getModelClassName());
+			"class-name", referencedClassedModel.getModelClassName());
 
-		Serializable primaryKeyObj = referencedModel.getPrimaryKeyObj();
+		Serializable primaryKeyObj = referencedClassedModel.getPrimaryKeyObj();
 
-		refElement.addAttribute("class-pk", primaryKeyObj.toString());
+		refElement.addAttribute("class-pk", String.valueOf(primaryKeyObj));
 
 		return refElement;
 	}
@@ -887,19 +887,19 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public List<Element> getReferencedDataElements(
-		StagedModel parentModel, Class<? extends StagedModel> clazz) {
+		StagedModel parentStagedModel, Class<? extends StagedModel> clazz) {
 
 		List<Element> referencedElements = new ArrayList<Element>();
 
 		List<Element> referenceElements = getReferenceElements(
-			parentModel, clazz);
+			parentStagedModel, clazz);
 
 		for (Element referenceElement : referenceElements) {
-			long classPk = GetterUtil.getLong(
+			long classPK = GetterUtil.getLong(
 				referenceElement.attributeValue("class-pk"));
 
 			String path = StagedModelPathUtil.getPath(
-				this, clazz.getName(), classPk);
+				this, clazz.getName(), classPK);
 
 			Element referencedElement = getImportDataStagedModelElement(
 				clazz.getSimpleName(), "path", path);
@@ -1011,16 +1011,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getZipReader().getEntryAsString(path);
 	}
 
+	public List<String> getZipFolderEntries() {
+		return getZipFolderEntries(StringPool.SLASH);
+	}
+
 	public List<String> getZipFolderEntries(String path) {
 		if (!Validator.isFilePath(path, false)) {
 			return null;
 		}
 
 		return getZipReader().getFolderEntries(path);
-	}
-
-	public List<String> getZipFolderEntries() {
-		return getZipFolderEntries(StringPool.SLASH);
 	}
 
 	public ZipReader getZipReader() {
@@ -1632,10 +1632,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected List<Element> getReferenceElements(
-		StagedModel parentModel, Class<? extends StagedModel> clazz) {
+		StagedModel parentStagedModel, Class<? extends StagedModel> clazz) {
 
 		Element stagedModelElement = getImportDataStagedModelElement(
-			parentModel);
+			parentStagedModel);
 
 		if (stagedModelElement == null) {
 			return null;
