@@ -526,11 +526,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return role;
 	}
 
-	public List<Role> getGroupRoles(long groupId) throws SystemException {
-
-		return groupPersistence.getRoles(groupId);
-	}
-
 	public List<Role> getResourceBlockRoles(
 			long resourceBlockId, String className, String actionId)
 		throws SystemException {
