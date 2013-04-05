@@ -169,7 +169,7 @@ public class SeleniumBuilderFileUtil {
 			if (!content.equals(newContent)) {
 				content = newContent;
 
-				writeFile(fileName, newContent, false, getBaseDir());
+				writeFile(getBaseDir(), fileName, newContent, false);
 			}
 		}
 
@@ -281,12 +281,12 @@ public class SeleniumBuilderFileUtil {
 	public void writeFile(String fileName, String content, boolean format)
 		throws Exception {
 
-		writeFile(fileName, content, format, getBaseDir() + "-generated");
+		writeFile(getBaseDir() + "-generated", fileName, content, format);
 	}
 
 	public void writeFile(
-		String fileName, String content, boolean format, String baseDir)
-			throws Exception {
+			String baseDir, String fileName, String content, boolean format)
+		throws Exception {
 
 		File file = new File(baseDir + "/" + fileName);
 
