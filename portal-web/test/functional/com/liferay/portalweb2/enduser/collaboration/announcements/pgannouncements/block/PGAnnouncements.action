@@ -1,0 +1,10 @@
+<definition>
+	<command name="click">
+		<case locator-key1="MANAGE_ENTRIES">
+			<execute function="Click#textClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="ENTRY_DELETE_">
+			<execute function="Click#textClickAndWait" />
+		</case>
+	</command>
+</definition>
