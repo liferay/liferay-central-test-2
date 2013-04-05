@@ -42,7 +42,7 @@ public class SearchContainerTest {
 
 	@Test
 	public void testCalculateCurWhenEmptyResultsPage() {
-		createSearchContainer(2);
+		buildSearchContainer(2);
 
 		_searchContainer.setTotal(10);
 
@@ -51,7 +51,7 @@ public class SearchContainerTest {
 
 	@Test
 	public void testCalculateCurWhenFullResultsPage() {
-		createSearchContainer(2);
+		buildSearchContainer(2);
 
 		_searchContainer.setTotal(20);
 
@@ -60,7 +60,7 @@ public class SearchContainerTest {
 
 	@Test
 	public void testCalculateCurWhenNoResults() {
-		createSearchContainer(2);
+		buildSearchContainer(2);
 
 		_searchContainer.setTotal(0);
 
@@ -69,25 +69,25 @@ public class SearchContainerTest {
 
 	@Test
 	public void testCalculateCurWhenResultsPage() {
-		createSearchContainer(2);
+		buildSearchContainer(2);
 
 		_searchContainer.setTotal(80);
 
 		Assert.assertEquals(2, _searchContainer.getCur());
 	}
 
-	protected void createSearchContainer(int cur) {
+	protected void buildSearchContainer(int cur) {
 		PortletRequest portletRequest= PowerMockito.mock(PortletRequest.class);
 
 		PortletURL portletURL = PowerMockito.mock(PortletURL.class);
 
-		_searchContainer = new SearchContainer(
+		_searchContainer = new SearchContainer<Object>(
 			portletRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, cur,
 			_DEFAULT_DELTA, portletURL, null, null);
 	}
 
 	private final static int _DEFAULT_DELTA = 20;
 
-	private SearchContainer _searchContainer;
+	private SearchContainer<?> _searchContainer;
 
 }

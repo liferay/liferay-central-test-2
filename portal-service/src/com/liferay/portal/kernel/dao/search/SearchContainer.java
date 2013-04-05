@@ -340,13 +340,13 @@ public class SearchContainer<R> {
 	}
 
 	public boolean recalculateCur(int total) {
-		boolean isRecalculateCur = isRecalculateCur(total);
-
-		if (isRecalculateCur) {
+		if (isRecalculateCur(total)) {
 			setTotal(total);
+
+			return true;
 		}
 
-		return isRecalculateCur;
+		return false;
 	}
 
 	public void setClassName(String className) {
