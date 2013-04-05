@@ -157,12 +157,13 @@ public class DLFileEntryLocalServiceImpl
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = DLAppUtil.getExtension(title, sourceFileName);
-		Date now = new Date();
 
 		if (fileEntryTypeId == -1) {
 			fileEntryTypeId =
 				dlFileEntryTypeLocalService.getDefaultFileEntryTypeId(folderId);
 		}
+
+		Date now = new Date();
 
 		validateFileEntryTypeId(
 			PortalUtil.getSiteAndCompanyGroupIds(groupId), folderId,
