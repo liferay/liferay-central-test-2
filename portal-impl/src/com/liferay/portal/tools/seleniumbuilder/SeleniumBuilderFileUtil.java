@@ -225,8 +225,8 @@ public class SeleniumBuilderFileUtil {
 
 			return rootElement;
 		}
-		catch (DocumentException e) {
-			throwValidationException(1007, fileName, e);
+		catch (DocumentException de) {
+			throwValidationException(1007, fileName, de);
 		}
 
 		return null;
