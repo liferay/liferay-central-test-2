@@ -403,8 +403,8 @@ alter table Organization_ add uuid_ VARCHAR(75) null;
 
 drop table OrgGroupPermission;
 
-alter table PasswordPolicy add regex VARCHAR(75) null;
 alter table PasswordPolicy add uuid_ VARCHAR(75) null;
+alter table PasswordPolicy add regex VARCHAR(75) null;
 
 drop index IX_C3A17327 on PasswordPolicyRel;
 drop index IX_ED7CF243 on PasswordPolicyRel;
