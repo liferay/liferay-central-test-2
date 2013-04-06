@@ -42,6 +42,7 @@ import java.io.Serializable;
 
 import java.sql.Connection;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -383,17 +384,18 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 		query.append(ORDER_BY_CLAUSE);
 
-		Set<String> badColumnNames = getBadColumnNames();
 		String[] orderByFields = orderByComparator.getOrderByFields();
 
 		for (int i = 0; i < orderByFields.length; i++) {
 			query.append(entityAlias);
 			query.append(orderByFields[i]);
 
-			if (sqlQuery && (badColumnNames != null) &&
-				badColumnNames.contains(orderByFields[i])) {
+			if (sqlQuery) {
+				Set<String> badColumnNames = getBadColumnNames();
 
-				query.append(StringPool.UNDERLINE);
+				if (badColumnNames.contains(orderByFields[i])) {	
+					query.append(StringPool.UNDERLINE);
+				}
 			}
 
 			if ((i + 1) < orderByFields.length) {
@@ -416,7 +418,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	}
 
 	protected Set<String> getBadColumnNames() {
-		return null;
+		return Collections.emptySet();
 	}
 
 	protected ClassLoader getClassLoader() {

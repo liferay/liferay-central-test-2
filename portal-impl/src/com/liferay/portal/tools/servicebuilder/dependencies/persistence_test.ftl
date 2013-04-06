@@ -305,7 +305,7 @@ public class ${entity.name}PersistenceTest {
 		}
 
 		<#list entity.getFinderList() as finder>
-			<#if finder.name == "GroupId" && entity.isPermissionCheckEnabled(finder)>
+			<#if (finder.name == "GroupId") && entity.isPermissionCheckEnabled(finder)>
 				@Test
 				public void testFilterFindByGroupId() throws Exception {
 					try {
@@ -322,20 +322,19 @@ public class ${entity.name}PersistenceTest {
 
 		protected OrderByComparator getOrderByComparator() {
 			return OrderByComparatorFactoryUtil.create(
+				"${entity.table}",
 
-			"${entity.table}",
+				<#list entity.regularColList as column>
+					<#if column.type != "Blob">
+						"${column.name}", true
 
-			<#list entity.regularColList as column>
-				<#if column.type != "Blob">
-					"${column.name}", true
-
-					<#if column_has_next>
-						,
+						<#if column_has_next>
+							,
+						</#if>
 					</#if>
-				</#if>
-			</#list>
+				</#list>
 
-			);
+				);
 		}
 	</#if>
 

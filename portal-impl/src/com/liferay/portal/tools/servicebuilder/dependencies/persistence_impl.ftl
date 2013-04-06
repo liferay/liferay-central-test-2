@@ -1464,7 +1464,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	</#list>
 
-	<#if entity.getBadNamedColumns()?size != 0>
+	<#if entity.badNamedColumnsList?size != 0>
 		@Override
 	    protected Set<String> getBadColumnNames() {
 			return _badColumnNames;
@@ -2093,18 +2093,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceImpl.class);
 
-	<#if entity.getBadNamedColumns()?size != 0>
-		private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+	<#if entity.badNamedColumnsList?size != 0>
+		private static Set<String> _badColumnNames = SetUtil.fromArray(
+			new String[] {
+				<#list entity.badNamedColumnsList as column>
+					"${column.name}"
 
-			<#list entity.getBadNamedColumns() as column>
-				"${column.name}"
-
-				<#if column_has_next>
-					,
-				</#if>
-			</#list>
-
-		});
+					<#if column_has_next>
+						,
+					</#if>
+				</#list>
+			});
 	</#if>
 
 	private static ${entity.name} _null${entity.name} = new ${entity.name}Impl() {
