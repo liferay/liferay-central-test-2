@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 public class SQLTest {
 
 	@Test
-	public void testCreateInde1() throws Exception {
+	public void testCreateIndex1() throws Exception {
 		try {
 			executePreparedStatement(
 				"create index index1 ON TestPACL_CreateFailure (userId)");

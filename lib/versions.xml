@@ -2328,9 +2328,7 @@
 			</license>
 		</licenses>
 		<comments>
-			The following pull requests were added:
-			    https://github.com/wumpz/JSqlParser/pull/15
-			    https://github.com/wumpz/JSqlParser/pull/16
+			See LPS-34240.
 		</comments>
 	</library>
 	<library>

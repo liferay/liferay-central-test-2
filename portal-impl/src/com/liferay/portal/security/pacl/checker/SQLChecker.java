@@ -249,7 +249,7 @@ public class SQLChecker extends BaseChecker {
 	}
 
 	protected boolean hasSQL(CreateIndex createIndex) {
-		return isAllowedTable(createIndex.getTable(), _createIndexTableNames);
+		return isAllowedTable(createIndex.getTable(), _indexTableNames);
 	}
 
 	protected boolean hasSQL(CreateTable createTable) {
@@ -306,13 +306,12 @@ public class SQLChecker extends BaseChecker {
 
 	protected void initTableNames() {
 		_allTableNames = getPropertySet("security-manager-sql-tables-all");
-		_createIndexTableNames = getPropertySet(
-			"security-manager-sql-tables-index-create");
 		_createTableNames = getPropertySet(
 			"security-manager-sql-tables-create");
 		_deleteTableNames = getPropertySet(
 			"security-manager-sql-tables-delete");
 		_dropTableNames = getPropertySet("security-manager-sql-tables-drop");
+		_indexTableNames = getPropertySet("security-manager-sql-tables-index");
 		_insertTableNames = getPropertySet(
 			"security-manager-sql-tables-insert");
 		_replaceTableNames = getPropertySet(
@@ -360,10 +359,10 @@ public class SQLChecker extends BaseChecker {
 	private static Log _log = LogFactoryUtil.getLog(SQLChecker.class);
 
 	private Set<String> _allTableNames;
-	private Set<String> _createIndexTableNames;
 	private Set<String> _createTableNames;
 	private Set<String> _deleteTableNames;
 	private Set<String> _dropTableNames;
+	private Set<String> _indexTableNames;
 	private Set<String> _insertTableNames;
 	private JSqlParser _jSqlParser = new CCJSqlParserManager();
 	private Set<String> _replaceTableNames;
