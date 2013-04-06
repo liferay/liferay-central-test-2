@@ -38,53 +38,7 @@ import org.junit.runner.RunWith;
 public class SQLTest {
 
 	@Test
-	public void testCreateIndex1() throws Exception {
-		try {
-			executePreparedStatement(
-				"create index index1 ON TestPACL_CreateFailure (userId)");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void testCreateIndex2() throws Exception {
-		try {
-			executeStatement(
-				"create index index1 ON TestPACL_CreateFailure (userId)");
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
-	public void testCreateIndex3() throws Exception {
-		try {
-			executePreparedStatement(
-				"create index index1 ON TestPACL_CreateSuccess (userId)");
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testCreateIndex4() throws Exception {
-		try {
-			executeStatement(
-				"create index index1 ON TestPACL_CreateSuccess (userId)");
-		}
-		catch (SecurityException se) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testCreateTable1() throws Exception {
+	public void testCreate1() throws Exception {
 		try {
 			executePreparedStatement(
 				"create table TestPACL_CreateFailure (userId bigint)");
@@ -96,7 +50,7 @@ public class SQLTest {
 	}
 
 	@Test
-	public void testCreateTable2() throws Exception {
+	public void testCreate2() throws Exception {
 		try {
 			executeStatement(
 				"create table TestPACL_CreateFailure (userId bigint)");
@@ -108,7 +62,7 @@ public class SQLTest {
 	}
 
 	@Test
-	public void testCreateTable3() throws Exception {
+	public void testCreate3() throws Exception {
 		try {
 			executePreparedStatement(
 				"create table TestPACL_CreateSuccess (userId bigint)");
@@ -121,7 +75,7 @@ public class SQLTest {
 	}
 
 	@Test
-	public void testCreateTable4() throws Exception {
+	public void testCreate4() throws Exception {
 		try {
 			executeStatement(
 				"create table TestPACL_CreateSuccess (userId bigint)");
@@ -175,6 +129,52 @@ public class SQLTest {
 				"create table TestPACL_DropSuccess (userId bigint)");
 
 			executeStatement("drop table TestPACL_DropSuccess");
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testIndex1() throws Exception {
+		try {
+			executePreparedStatement(
+				"create index index1 ON TestPACL_CreateFailure (userId)");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testIndex2() throws Exception {
+		try {
+			executeStatement(
+				"create index index1 ON TestPACL_CreateFailure (userId)");
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testIndex3() throws Exception {
+		try {
+			executePreparedStatement(
+				"create index index1 ON TestPACL_CreateSuccess (userId)");
+		}
+		catch (SecurityException se) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testIndex4() throws Exception {
+		try {
+			executeStatement(
+				"create index index1 ON TestPACL_CreateSuccess (userId)");
 		}
 		catch (SecurityException se) {
 			Assert.fail();
