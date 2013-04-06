@@ -42,20 +42,12 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadFactory;
 
 /**
- * A NIO {@link Selector} based implementation for {@link IntraBand}. Requires
- * to work with {@link SelectableChannel}.
- *
  * @author Shuyang Zhou
  */
 public class SelectorIntraBand extends BaseIntraBand {
 
 	public SelectorIntraBand(long defaultTimeout) throws IOException {
 		super(defaultTimeout);
-
-		selector = Selector.open();
-		registerQueue =
-			new ConcurrentLinkedQueue<FutureTask<RegistrationReference>>();
-		pollingThread = THREAD_FACTORY.newThread(new PollingJob());
 
 		pollingThread.start();
 	}
@@ -65,6 +57,7 @@ public class SelectorIntraBand extends BaseIntraBand {
 		selector.close();
 
 		pollingThread.interrupt();
+
 		pollingThread.join(defaultTimeout);
 
 		super.close();
@@ -184,6 +177,7 @@ public class SelectorIntraBand extends BaseIntraBand {
 		}
 	}
 
+	@Override
 	protected void doSendDatagram(
 		RegistrationReference registrationReference, Datagram datagram) {
 
@@ -221,14 +215,16 @@ public class SelectorIntraBand extends BaseIntraBand {
 		}
 	}
 
-	protected static final ThreadFactory THREAD_FACTORY =
+	protected static final ThreadFactory threadFactory =
 		new NamedThreadFactory(
-			SelectorIntraBand.class.getSimpleName().concat("-SelectorPoller"),
-			Thread.NORM_PRIORITY, SelectorIntraBand.class.getClassLoader());
+			SelectorIntraBand.class + ".threadFactory", Thread.NORM_PRIORITY,
+			SelectorIntraBand.class.getClassLoader());
 
-	protected final Thread pollingThread;
-	protected final Queue<FutureTask<RegistrationReference>> registerQueue;
-	protected final Selector selector;
+	protected final Thread pollingThread = threadFactory.newThread(
+		new PollingJob());
+	protected final Queue<FutureTask<RegistrationReference>> registerQueue =
+		new ConcurrentLinkedQueue<FutureTask<RegistrationReference>>();
+	protected final Selector selector = Selector.open();
 
 	protected class RegisterCallable
 		implements Callable<RegistrationReference> {
@@ -245,8 +241,8 @@ public class SelectorIntraBand extends BaseIntraBand {
 			if (_readSelectableChannel == _writeSelectableChannel) {
 
 				// Register channel with zero interest, no dispatch will happen
-				// before ChannelContext is ready. This ensures thread safe
-				// publication for ChannelContext._registrationReference
+				// before channel context is ready. This ensures thread safe
+				// publication for ChannelContext#_registrationReference.
 
 				SelectionKey selectionKey = _readSelectableChannel.register(
 					selector, 0);
@@ -264,7 +260,7 @@ public class SelectorIntraBand extends BaseIntraBand {
 
 				selectionKey.attach(channelContext);
 
-				// Alter interest ops after ChannelContext preparation
+				// Alter interest ops after preparing the channel context
 
 				selectionKey.interestOps(
 					SelectionKey.OP_READ | SelectionKey.OP_WRITE);
@@ -274,8 +270,8 @@ public class SelectorIntraBand extends BaseIntraBand {
 			else {
 
 				// Register channels with zero interest, no dispatch will happen
-				// before ChannelContexts are ready. This ensures thread safe
-				// publication for ChannelContext._registrationReference
+				// before channel contexts are ready. This ensures thread safe
+				// publication for ChannelContext#_registrationReference.
 
 				SelectionKey readSelectionKey = _readSelectableChannel.register(
 					selector, 0);
@@ -351,7 +347,7 @@ public class SelectorIntraBand extends BaseIntraBand {
 				if (sendingQueue.isEmpty()) {
 
 					// Channel is still writable, but there is nothing to send,
-					// backoff to prevent unnecessary busy spinning.
+					// back off to prevent unnecessary busy spinning.
 
 					int ops = selectionKey.interestOps();
 
@@ -414,28 +410,27 @@ public class SelectorIntraBand extends BaseIntraBand {
 					}
 				}
 				finally {
-
-					// Protection, no matter for what reason, leaving the above
-					// while loop must follow by selector closure.
-
 					selector.close();
 				}
 			}
 			catch (ClosedSelectorException cse) {
 				if (_log.isInfoEnabled()) {
+					Thread currentThread = Thread.currentThread();
+
 					_log.info(
-						Thread.currentThread().getName() +
-							" exiting gracefully on Selector closure");
+						currentThread.getName() +
+							" exiting gracefully on selector closure");
 				}
 			}
 			catch (Throwable t) {
+				Thread currentThread = Thread.currentThread();
+
 				_log.error(
-					Thread.currentThread().getName() + " exiting exceptionally",
-					t);
+					currentThread.getName() + " exiting exceptionally", t);
 			}
 
 			// Flush out pending register requests to unblock their invokers,
-			// this will cause them to receive ClosedSelectorException
+			// this will cause them to receive a ClosedSelectorException
 
 			registerChannels();
 
