@@ -49,9 +49,8 @@ public class CalUtil {
 
 		TimeZone eventTimeZone = recurrence.getTimeZone();
 
-		if (Validator.equals(
-				eventTimeZone.inDaylightTime(cal.getTime()),
-				userTimeZone.inDaylightTime(cal.getTime()))) {
+		if (eventTimeZone.inDaylightTime(cal.getTime()) ==
+				userTimeZone.inDaylightTime(cal.getTime())) {
 
 			return date;
 		}
