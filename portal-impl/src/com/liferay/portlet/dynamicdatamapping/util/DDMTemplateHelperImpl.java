@@ -105,18 +105,14 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 		JSONObject typeJSONObject = JSONFactoryUtil.createJSONObject();
 
 		for (Field field : clazz.getFields()) {
-			JSONObject fieldJSONObject =
-				getAutocompleteVariableJSONObject(field.getType());
+			JSONObject fieldJSONObject = getAutocompleteVariableJSONObject(
+				field.getType());
 
 			typeJSONObject.put(field.getName(), fieldJSONObject);
 		}
 
 		for (Method method : clazz.getMethods()) {
 			JSONObject methodJSONObject = JSONFactoryUtil.createJSONObject();
-
-			methodJSONObject.put("type", "Method");
-			methodJSONObject.put(
-				"returnType", method.getReturnType().getName());
 
 			JSONArray parametersTypesArray = JSONFactoryUtil.createJSONArray();
 
@@ -128,8 +124,13 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
 			methodJSONObject.put("argumentTypes", parametersTypesArray);
 
-			typeJSONObject.put(method.getName(), methodJSONObject);
+			Class<?> returnTypeClass = method.getReturnType();
 
+			methodJSONObject.put("returnType", returnTypeClass.getName());
+
+			methodJSONObject.put("type", "Method");
+
+			typeJSONObject.put(method.getName(), methodJSONObject);
 		}
 
 		return typeJSONObject;
@@ -204,11 +205,11 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 	}
 
 	protected JSONObject getAutocompleteVariableJSONObject(Class<?> clazz) {
-		JSONObject variableJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		variableJSONObject.put("type", clazz.getName());
+		jsonObject.put("type", clazz.getName());
 
-		return variableJSONObject;
+		return jsonObject;
 	}
 
 	private static final String _TEMPLATE_CONTENT = "# Placeholder";
