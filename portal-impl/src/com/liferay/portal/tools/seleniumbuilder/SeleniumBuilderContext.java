@@ -470,9 +470,9 @@ public class SeleniumBuilderContext {
 
 		String[] seleniumFileNames = {
 			"com/liferay/portalweb/portal/util/liferayselenium/" +
-				"SeleniumWrapper.java",
+				"LiferaySelenium.java",
 			"com/liferay/portalweb/portal/util/liferayselenium/" +
-				"LiferaySelenium.java"
+				"SeleniumWrapper.java"
 		};
 
 		for (String seleniumFileName : seleniumFileNames) {

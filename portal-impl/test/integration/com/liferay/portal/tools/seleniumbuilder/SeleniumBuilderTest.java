@@ -1753,8 +1753,9 @@ public class SeleniumBuilderTest {
 	}
 
 	protected void test(
-		String fileName, String expectedErrorMessage, boolean expectException)
-			throws Exception {
+			String fileName, String expectedErrorMessage,
+			boolean expectException)
+		throws Exception {
 
 		String actualErrorMessage = null;
 
