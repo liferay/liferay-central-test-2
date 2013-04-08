@@ -71,6 +71,9 @@ public class SelectorIntraBandTest {
 	@AdviseWith(adviceClasses = {Jdk14LogImplAdvice.class})
 	@Test
 	public void testReceiveDatagram() throws Exception {
+
+		// Receive ACK response, no ACK request, with log
+
 		Pipe readPipe = Pipe.open();
 		Pipe writePipe = Pipe.open();
 
@@ -83,8 +86,6 @@ public class SelectorIntraBandTest {
 					writePipe.source(), readPipe.sink());
 
 		long sequenceId = 100;
-
-		// Receive ACK response, no ACK request, with log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraBand.class.getName(), Level.WARNING);
