@@ -149,6 +149,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		// User group
 
+		Date now = new Date();
+
 		validate(0, companyId, name);
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -157,10 +159,15 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		UserGroup userGroup = userGroupPersistence.create(userGroupId);
 
-		Date now = new Date();
-
 		if (serviceContext != null) {
 			userGroup.setUuid(serviceContext.getUuid());
+		}
+
+		userGroup.setCompanyId(companyId);
+		userGroup.setUserId(user.getUserId());
+		userGroup.setUserName(user.getFullName());
+
+		if (serviceContext != null) {
 			userGroup.setCreateDate(serviceContext.getCreateDate(now));
 			userGroup.setModifiedDate(serviceContext.getModifiedDate(now));
 		}
@@ -169,13 +176,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			userGroup.setModifiedDate(now);
 		}
 
-		if (serviceContext != null) {
-			userGroup.setUuid(serviceContext.getUuid());
-		}
-
-		userGroup.setCompanyId(companyId);
-		userGroup.setUserId(user.getUserId());
-		userGroup.setUserName(user.getFullName());
 		userGroup.setParentUserGroupId(
 			UserGroupConstants.DEFAULT_PARENT_USER_GROUP_ID);
 		userGroup.setName(name);
@@ -762,9 +762,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 			userGroupId);
 
-		Date now = new Date();
-
-		userGroup.setModifiedDate(now);
+		userGroup.setModifiedDate(new Date());
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 		userGroup.setExpandoBridgeAttributes(serviceContext);

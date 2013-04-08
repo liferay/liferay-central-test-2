@@ -185,14 +185,21 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			classPK = roleId;
 		}
 
-		validate(0, user.getCompanyId(), classNameId, name);
-
 		Date now = new Date();
+
+		validate(0, user.getCompanyId(), classNameId, name);
 
 		Role role = rolePersistence.create(roleId);
 
 		if (serviceContext != null) {
 			role.setUuid(serviceContext.getUuid());
+		}
+
+		role.setCompanyId(user.getCompanyId());
+		role.setUserId(user.getUserId());
+		role.setUserName(user.getFullName());
+
+		if (serviceContext != null) {
 			role.setCreateDate(serviceContext.getCreateDate(now));
 			role.setModifiedDate(serviceContext.getModifiedDate(now));
 		}
@@ -201,9 +208,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			role.setModifiedDate(now);
 		}
 
-		role.setCompanyId(user.getCompanyId());
-		role.setUserId(user.getUserId());
-		role.setUserName(user.getFullName());
 		role.setClassNameId(classNameId);
 		role.setClassPK(classPK);
 		role.setName(name);
@@ -1278,9 +1282,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			subtype = null;
 		}
 
-		Date now = new Date();
-
-		role.setModifiedDate(now);
+		role.setModifiedDate(new Date());
 		role.setName(name);
 		role.setTitleMap(titleMap);
 		role.setDescriptionMap(descriptionMap);

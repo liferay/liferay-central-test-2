@@ -1689,15 +1689,13 @@ public class OrganizationLocalServiceImpl
 		long oldParentOrganizationId = organization.getParentOrganizationId();
 		String oldName = organization.getName();
 
+		organization.setModifiedDate(new Date());
 		organization.setParentOrganizationId(parentOrganizationId);
 
 		String treePath = organization.buildTreePath();
 
 		organization.setTreePath(treePath);
 
-		Date now = new Date();
-
-		organization.setModifiedDate(now);
 		organization.setName(name);
 		organization.setType(type);
 		organization.setRecursable(true);

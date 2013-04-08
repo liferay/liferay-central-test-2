@@ -38,7 +38,7 @@ public class StagedModelPathUtil {
 		String dependentFileName) {
 
 		return getPath(
-			portletDataContext.getSourceGroupId(), _GROUPS_PATH_PREFIX,
+			_PATH_PREFIX_GROUP, portletDataContext.getSourceGroupId(),
 			className, classPK, dependentFileName);
 	}
 
@@ -54,20 +54,20 @@ public class StagedModelPathUtil {
 				(StagedGroupedModel)stagedModel;
 
 			return getPath(
-				stagedGroupedModel.getGroupId(), _GROUPS_PATH_PREFIX,
+				_PATH_PREFIX_GROUP, stagedGroupedModel.getGroupId(),
 				stagedModel.getModelClassName(), stagedModel.getPrimaryKeyObj(),
 				dependentFileName);
 		}
 		else {
 			return getPath(
-				stagedModel.getCompanyId(), _COMPANY_PATH_PREFIX,
+				_PATH_PREFIX_COMPANY, stagedModel.getCompanyId(),
 				stagedModel.getModelClassName(), stagedModel.getPrimaryKeyObj(),
 				dependentFileName);
 		}
 	}
 
 	protected static String getPath(
-			long companyId, String pathPrefix, String className,
+			String pathPrefix, long pathPrimaryKey, String className,
 			Serializable primaryKeyObj,
 		String dependentFileName) {
 
@@ -76,7 +76,7 @@ public class StagedModelPathUtil {
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(pathPrefix);
 		sb.append(StringPool.FORWARD_SLASH);
-		sb.append(companyId);
+		sb.append(pathPrimaryKey);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(className);
 		sb.append(StringPool.FORWARD_SLASH);
@@ -93,7 +93,8 @@ public class StagedModelPathUtil {
 		return sb.toString();
 	}
 
-	private static final String _COMPANY_PATH_PREFIX = "company";
-	private static final String _GROUPS_PATH_PREFIX = "groups";
+	private static final String _PATH_PREFIX_COMPANY = "company";
+
+	private static final String _PATH_PREFIX_GROUP = "group";
 
 }

@@ -14,8 +14,8 @@ import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ContainerModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.model.ResourcedModel;
-import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.StagedGroupedModel;
+import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -69,7 +69,7 @@ public interface ${entity.name}Model extends
 		, StagedGroupedModel
 	</#if>
 
-	<#if entity.isStagedModel() && !entity.isStagedGroupedModel()>
+	<#if !entity.isStagedGroupedModel()&& entity.isStagedModel()>
 		, StagedModel
 	</#if>
 
