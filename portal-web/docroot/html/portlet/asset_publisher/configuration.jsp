@@ -96,7 +96,6 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 					className="com.liferay.portal.model.Group"
 					modelVar="group"
 				>
-
 					<liferay-ui:search-container-column-text
 						name="name"
 					>
