@@ -617,9 +617,11 @@ AUI.add(
 				}
 
 				instance._backgroundColorPicker.destroy();
-				instance._fontColorPicker.destroy();
 
 				instance._backgroundColorPicker = null;
+
+				instance._fontColorPicker.destroy();
+
 				instance._fontColorPicker = null;
 			},
 
