@@ -128,8 +128,6 @@ public class GroupTestUtil {
 				parameterName, parameters.get(parameterName)[0]);
 		}
 
-		// Enable staging: group has been promoted to live
-
 		StagingUtil.enableLocalStaging(
 			TestPropsValues.getUserId(), group, group, false, false,
 			serviceContext);

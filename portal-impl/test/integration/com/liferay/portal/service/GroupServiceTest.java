@@ -476,10 +476,10 @@ public class GroupServiceTest {
 
 		Assert.assertTrue(group.isRoot());
 
-		LinkedHashMap<String, Object> groupParams =
+		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		groupParams.put("site", Boolean.TRUE);
+		params.put("site", Boolean.TRUE);
 
 		List<Long> excludedGroupIds = new ArrayList<Long>();
 
@@ -494,10 +494,10 @@ public class GroupServiceTest {
 			excludedGroupIds.add(group.getGroupId());
 		}
 
-		groupParams.put("excludedGroupIds", excludedGroupIds);
+		params.put("excludedGroupIds", excludedGroupIds);
 
 		List<Group> selectableGroups = GroupLocalServiceUtil.search(
-			group.getCompanyId(), null, StringPool.BLANK, groupParams,
+			group.getCompanyId(), null, StringPool.BLANK, params,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		for (Group selectableGroup : selectableGroups) {
