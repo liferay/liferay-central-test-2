@@ -2620,7 +2620,7 @@
 
 	<target name="generate-test-properties">
 		<xmlproperty
-			file="portal-web/test-data/database-data.xml"
+			file="portal-web/test-config/database.xml"
 			keeproot="true"
 		/>
 
