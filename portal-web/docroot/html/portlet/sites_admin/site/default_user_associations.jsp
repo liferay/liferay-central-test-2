@@ -100,7 +100,7 @@ for (long defaultTeamId : defaultTeamIds) {
 	image="add"
 	label="<%= true %>"
 	message="select"
-	url='javascript:;'
+	url="javascript:;"
 />
 
 <br /><br />
@@ -198,24 +198,25 @@ for (long defaultTeamId : defaultTeamIds) {
 					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/sites_admin/select_site_role" /><portlet:param name="step" value="2" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 				},
 				function(event){
-					searchContainer = Liferay.SearchContainer.get('<portlet:namespace />' + event.searchcontainername + 'SearchContainer');
+					searchContainer = Liferay.SearchContainer.get('<portlet:namespace />' + event.searchContainerName + 'SearchContainer');
 
 					var rowColumns = [];
 
-					rowColumns.push(A.Escape.html(event.roletitle));
+					rowColumns.push(A.Escape.html(event.roleTitle));
 
-					if (event.groupid) {
-						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+					if (event.groupId) {
+						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
 
-						<portlet:namespace />siteRolesRoleIds.push(event.roleid);
+						<portlet:namespace />siteRolesRoleIds.push(event.roleId);
 
 						document.<portlet:namespace />fm.<portlet:namespace />siteRolesRoleIds.value = <portlet:namespace />siteRolesRoleIds.join(',');
 					}
 					else {
-						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
 					}
 
-					searchContainer.addRow(rowColumns, event.roleid);
+					searchContainer.addRow(rowColumns, event.roleId);
+
 					searchContainer.updateDataStore();
 				}
 			);
