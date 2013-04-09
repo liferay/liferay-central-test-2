@@ -58,31 +58,31 @@ public class DDLRecordSetStagedModelDataHandlerTest
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
 			new HashMap<String, List<StagedModel>>();
 
-		DDMStructure structure = DDMStructureTestUtil.addStructure(
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), DDLRecordSet.class.getName());
 
 		addDependentStagedModel(
-			dependentStagedModelsMap, DDMStructure.class, structure);
+			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
 
-		DDMTemplate template1 = DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), structure.getStructureId());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMTemplate.class, template1);
-
-		DDMTemplate template2 = DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), structure.getStructureId());
+		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
+			group.getGroupId(), ddmStructure.getStructureId());
 
 		addDependentStagedModel(
-			dependentStagedModelsMap, DDMTemplate.class, template2);
+			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate1);
+
+		DDMTemplate ddmTemplate2 = DDMTemplateTestUtil.addTemplate(
+			group.getGroupId(), ddmStructure.getStructureId());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate2);
 
 		return dependentStagedModelsMap;
 	}
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String,
-			List<StagedModel>> dependentStagedModelsMap)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
@@ -121,19 +121,19 @@ public class DDLRecordSetStagedModelDataHandlerTest
 
 		Assert.assertEquals(1, dependentStagedModels.size());
 
-		DDMStructure structure = (DDMStructure)dependentStagedModels.get(0);
+		DDMStructure ddmStructure = (DDMStructure)dependentStagedModels.get(0);
 
 		DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId(
-			structure.getUuid(), group.getGroupId());
+			ddmStructure.getUuid(), group.getGroupId());
 
 		dependentStagedModels = dependentStagedModelsMap.get(
 			DDMTemplate.class.getSimpleName());
 
 		Assert.assertEquals(2, dependentStagedModels.size());
 
-		for (StagedModel template : dependentStagedModels) {
+		for (StagedModel dependentStagedModel : dependentStagedModels) {
 			DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
-				template.getUuid(), group.getGroupId());
+				dependentStagedModel.getUuid(), group.getGroupId());
 		}
 	}
 

@@ -45,8 +45,8 @@ public class DDMStructureStagedModelDataHandlerTest
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String,
-			List<StagedModel>> dependentStagedModelsMap)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		return DDMStructureTestUtil.addStructure(

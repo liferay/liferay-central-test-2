@@ -67,17 +67,17 @@ public class DDMTemplateStagedModelDataHandlerTest
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String,
-			List<StagedModel>> dependentStagedModelsMap)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			DDMStructure.class.getSimpleName());
 
-		DDMStructure ddmStructure = (DDMStructure)dependentStagedModels.get(0);
+		DDMStructure structure = (DDMStructure)dependentStagedModels.get(0);
 
 		return DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), ddmStructure.getStructureId());
+			group.getGroupId(), structure.getStructureId());
 	}
 
 	@Override
