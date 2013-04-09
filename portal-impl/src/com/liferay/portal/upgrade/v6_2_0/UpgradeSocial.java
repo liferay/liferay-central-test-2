@@ -86,16 +86,21 @@ public class UpgradeSocial extends UpgradeProcess {
 	protected void updateJournalActivities() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(JournalArticle.class);
 
-		runSQL(
-			"update SocialActivity set classPK = (select resourcePrimKey " +
-				"from JournalArticle where id_ = SocialActivity.classPK) " +
-					"where classNameId = " + classNameId);
+		String[] tableNames = {"SocialActivity", "SocialActivityCounter"};
 
-		runSQL(
-			"update SocialActivityCounter set classPK = (select " +
-				"resourcePrimKey from JournalArticle where id_ = " +
-					"SocialActivityCounter.classPK) where classNameId = " +
-						classNameId);
+		for (String tableName : tableNames) {
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("update ");
+			sb.append(tableName);
+			sb.append(" set classPK = (select resourcePrimKey ");
+			sb.append("from JournalArticle where id_ = ");
+			sb.append(tableName);
+			sb.append(".classPK) where classNameId = ");
+			sb.append(classNameId);
+
+			runSQL(sb.toString());
+		}
 	}
 
 	protected void updateWikiPageActivities() throws Exception {
