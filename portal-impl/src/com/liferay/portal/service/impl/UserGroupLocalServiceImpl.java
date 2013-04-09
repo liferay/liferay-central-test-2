@@ -149,9 +149,9 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		// User group
 
-		validate(0, companyId, name);
-
 		Date now = new Date();
+
+		validate(0, companyId, name);
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
