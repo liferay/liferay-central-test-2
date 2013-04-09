@@ -1353,6 +1353,13 @@ public class GroupLocalServiceUtil {
 		return getService().getOrganizationsRelatedGroups(organizations);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getParentGroups(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getParentGroups(groupId);
+	}
+
 	/**
 	* Returns the staging group.
 	*

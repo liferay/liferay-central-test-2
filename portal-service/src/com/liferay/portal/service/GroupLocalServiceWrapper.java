@@ -1341,6 +1341,13 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		return _groupLocalService.getOrganizationsRelatedGroups(organizations);
 	}
 
+	public java.util.List<com.liferay.portal.model.Group> getParentGroups(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.getParentGroups(groupId);
+	}
+
 	/**
 	* Returns the staging group.
 	*
