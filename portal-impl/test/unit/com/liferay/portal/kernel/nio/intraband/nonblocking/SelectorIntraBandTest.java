@@ -482,7 +482,7 @@ public class SelectorIntraBandTest {
 			Assert.assertEquals("Channel is null", npe.getMessage());
 		}
 
-		// Channel is not type of ScatteringByteChannel
+		// Channel is not of type ScatteringByteChannel
 
 		try {
 			_selectorIntraBand.registerChannel(
@@ -492,11 +492,11 @@ public class SelectorIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"Channel is not type of ScatteringByteChannel",
+				"Channel is not of type ScatteringByteChannel",
 				iae.getMessage());
 		}
 
-		// Channel is not type of GatheringByteChannel
+		// Channel is not of type GatheringByteChannel
 
 		try {
 			_selectorIntraBand.registerChannel(
@@ -507,11 +507,11 @@ public class SelectorIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"Channel is not type of GatheringByteChannel",
+				"Channel is not of type GatheringByteChannel",
 				iae.getMessage());
 		}
 
-		// Channel is not type of SelectableChannel
+		// Channel is not of type SelectableChannel
 
 		try {
 			_selectorIntraBand.registerChannel(
@@ -522,7 +522,7 @@ public class SelectorIntraBandTest {
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
-				"Channel is not type of SelectableChannel", iae.getMessage());
+				"Channel is not of type SelectableChannel", iae.getMessage());
 		}
 
 		// Channel is not valid for reading
@@ -551,11 +551,11 @@ public class SelectorIntraBandTest {
 				"Channel is not valid for writing", iae.getMessage());
 		}
 
-		SocketChannel[] socketChannelPeers =
+		SocketChannel[] peerSocketChannels =
 			IntraBandTestUtil.createSocketChannelPeers();
 
 		try {
-			SocketChannel socketChannel = socketChannelPeers[0];
+			SocketChannel socketChannel = peerSocketChannels[0];
 
 			// Interruptted on register
 
@@ -633,8 +633,8 @@ public class SelectorIntraBandTest {
 			}
 		}
 		finally {
-			socketChannelPeers[0].close();
-			socketChannelPeers[1].close();
+			peerSocketChannels[0].close();
+			peerSocketChannels[1].close();
 		}
 	}
 
@@ -761,7 +761,7 @@ public class SelectorIntraBandTest {
 
 	private static class MockDuplexSelectableChannel
 		extends SelectableChannel
-		implements ScatteringByteChannel, GatheringByteChannel {
+		implements GatheringByteChannel, ScatteringByteChannel {
 
 		public MockDuplexSelectableChannel(boolean readable, boolean writable) {
 			_readable = readable;

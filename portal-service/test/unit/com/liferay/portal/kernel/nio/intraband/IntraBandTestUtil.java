@@ -46,6 +46,7 @@ public class IntraBandTestUtil {
 
 					throw new UnsupportedOperationException();
 				}
+
 			});
 	}
 
