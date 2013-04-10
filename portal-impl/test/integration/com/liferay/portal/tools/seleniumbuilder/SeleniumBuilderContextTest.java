@@ -14,6 +14,8 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import org.junit.Assert;
@@ -25,6 +27,16 @@ import org.junit.runner.RunWith;
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class SeleniumBuilderContextTest {
+
+	public SeleniumBuilderContextTest() {
+		try {
+			_seleniumBuilderContext = new SeleniumBuilderContext(
+				"./portal-web/test/functional/");
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
 	@Test
 	public void testAction() throws Exception {
@@ -141,12 +153,10 @@ public class SeleniumBuilderContextTest {
 		String actualErrorMessage = null;
 
 		try {
-			SeleniumBuilderContext seleniumBuilderContext =
-				new SeleniumBuilderContext(_BASE_DIR);
+			_seleniumBuilderContext.addFile(_DIR_NAME + "/" + fileName);
 
-			seleniumBuilderContext.addFile(_DIR_NAME + "/" + fileName);
-
-			seleniumBuilderContext.validateElements(_DIR_NAME + "/" + fileName);
+			_seleniumBuilderContext.validateElements(
+				_DIR_NAME + "/" + fileName);
 		}
 		catch (IllegalArgumentException iae) {
 			actualErrorMessage = iae.getMessage();
@@ -161,10 +171,13 @@ public class SeleniumBuilderContextTest {
 		}
 	}
 
-	private static final String _BASE_DIR = "./portal-web/test/functional/";
-
 	private static final String _DIR_NAME =
 		"/../../../portal-impl/test/integration/com/liferay/portal/tools/" +
 			"seleniumbuilder/dependencies";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		SeleniumBuilderContextTest.class);
+
+	private SeleniumBuilderContext _seleniumBuilderContext;
 
 }
