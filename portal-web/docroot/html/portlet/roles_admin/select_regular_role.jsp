@@ -91,9 +91,9 @@ portletURL.setParameter("eventName", eventName);
 					<%
 					Map<String, Object> data = new HashMap<String, Object>();
 
-					data.put("roleid", role.getRoleId());
-					data.put("roletitle", HtmlUtil.escapeAttribute(role.getTitle(locale)));
-					data.put("searchcontainername", "roles");
+					data.put("role-id", role.getRoleId());
+					data.put("role-title", HtmlUtil.escapeAttribute(role.getTitle(locale)));
+					data.put("search-container-name", "roles");
 					%>
 
 					<aui:button cssClass="selector-button" data="<%= data %>" value="choose" />

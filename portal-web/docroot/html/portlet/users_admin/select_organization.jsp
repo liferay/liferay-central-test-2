@@ -135,9 +135,9 @@ if (Validator.isNotNull(target)) {
 					<%
 					Map<String, Object> data = new HashMap<String, Object>();
 
-					data.put("groupid", organization.getGroupId());
+					data.put("group-id", organization.getGroupId());
 					data.put("name", HtmlUtil.escapeAttribute(organization.getName()));
-					data.put("organizationid", organization.getOrganizationId());
+					data.put("organization-id", organization.getOrganizationId());
 					data.put("type", LanguageUtil.get(pageContext, organization.getType()));
 					%>
 

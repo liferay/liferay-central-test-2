@@ -172,9 +172,9 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 			function(event){
 				var A = AUI();
 
-				document.<portlet:namespace />fm1.<portlet:namespace />ddmStructureKey.value = event.ddmstructurekey;
+				document.<portlet:namespace />fm1.<portlet:namespace />ddmStructureKey.value = event.ddm-structure-key;
 
-				A.one('#<portlet:namespace />structure').html(event.name + ' <em>(' + event.ddmstructureid + ')</em>');
+				A.one('#<portlet:namespace />structure').html(event.name + ' <em>(' + event.ddm-structure-id + ')</em>');
 			}
 		);
 	}
