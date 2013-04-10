@@ -238,10 +238,10 @@ public class EditArticleAction extends PortletAction {
 					"portlet.journal.update_translation_redirect");
 			}
 
-			if ((article != null) &&
-				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) &&
-				!cmd.equals(Constants.DELETE_TRANSLATION) &&
-				!cmd.equals(Constants.TRANSLATE)) {
+			if (!cmd.equals(Constants.DELETE_TRANSLATION) &&
+				!cmd.equals(Constants.TRANSLATE) &&
+				(article != null) &&
+				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 				redirect = getSaveAndContinueRedirect(
 					portletConfig, actionRequest, article, redirect);
