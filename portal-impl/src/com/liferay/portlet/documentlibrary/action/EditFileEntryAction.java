@@ -647,8 +647,6 @@ public class EditFileEntryAction extends PortletAction {
 			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(actionRequest.getWindowState());
-
 		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
@@ -666,6 +664,7 @@ public class EditFileEntryAction extends PortletAction {
 			"fileEntryId", String.valueOf(fileEntry.getFileEntryId()), false);
 		portletURL.setParameter(
 			"version", String.valueOf(fileEntry.getVersion()), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}
@@ -835,8 +834,6 @@ public class EditFileEntryAction extends PortletAction {
 			}
 		}
 
-		FileEntry fileEntry = null;
-
 		InputStream inputStream = null;
 
 		try {
@@ -884,6 +881,8 @@ public class EditFileEntryAction extends PortletAction {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				DLFileEntry.class.getName(), uploadPortletRequest);
 
+			FileEntry fileEntry = null;
+
 			if (cmd.equals(Constants.ADD) ||
 				cmd.equals(Constants.ADD_DYNAMIC)) {
 
@@ -926,6 +925,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			AssetPublisherUtil.addRecentFolderId(
 				actionRequest, DLFileEntry.class.getName(), folderId);
+
+			return fileEntry;
 		}
 		catch (Exception e) {
 			UploadException uploadException =
@@ -943,8 +944,6 @@ public class EditFileEntryAction extends PortletAction {
 		finally {
 			StreamUtil.cleanUp(inputStream);
 		}
-
-		return fileEntry;
 	}
 
 	private static final String _TEMP_FOLDER_NAME =

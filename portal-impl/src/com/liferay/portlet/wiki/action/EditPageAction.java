@@ -322,8 +322,6 @@ public class EditPageAction extends PortletAction {
 			(PortletResponseImpl)actionResponse, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(actionRequest.getWindowState());
-
 		portletURL.setParameter("struts_action", "/wiki/edit_page");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
@@ -333,6 +331,7 @@ public class EditPageAction extends PortletAction {
 		portletURL.setParameter(
 			"nodeId", String.valueOf(page.getNodeId()), false);
 		portletURL.setParameter("title", page.getTitle(), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}
