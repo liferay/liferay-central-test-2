@@ -74,9 +74,9 @@ public class MBAttachmentsTest {
 
 	@After
 	public void tearDown() throws Exception {
+		_category = null;
 		_group = null;
 		_message = null;
-		_category = null;
 	}
 
 	@Test
@@ -180,8 +180,6 @@ public class MBAttachmentsTest {
 		int foldersCount = DLFolderLocalServiceUtil.getDLFoldersCount();
 
 		addMessageAttachment();
-
-		// One folder per group, thread and message
 
 		Assert.assertEquals(
 			foldersCount + 3, DLFolderLocalServiceUtil.getDLFoldersCount());
@@ -363,18 +361,18 @@ public class MBAttachmentsTest {
 				addCategory();
 			}
 
+			User user = TestPropsValues.getUser();
+
 			if (_group == null) {
 				_group = GroupTestUtil.addGroup();
 			}
 
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-				_group.getGroupId());
-
-			User user = TestPropsValues.getUser();
-
 			List<ObjectValuePair<String, InputStream>> objectValuePairs =
 				MBTestUtil.getInputStreamOVPs(
 					"company_logo.png", getClass(), StringPool.BLANK);
+
+			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+				_group.getGroupId());
 
 			_message = MBMessageLocalServiceUtil.addMessage(
 				user.getUserId(), user.getFullName(), _group.getGroupId(),
@@ -386,23 +384,22 @@ public class MBAttachmentsTest {
 			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 				_group.getGroupId());
 
-			User user = TestPropsValues.getUser();
-
 			List<ObjectValuePair<String, InputStream>> objectValuePairs =
 				MBTestUtil.getInputStreamOVPs(
 					"OSX_Test.docx", getClass(), StringPool.BLANK);
 
-			List<FileEntry> fileEntries = _message.getAttachmentsFileEntries();
-
 			List<String> existingFiles = new ArrayList<String>();
+
+			List<FileEntry> fileEntries = _message.getAttachmentsFileEntries();
 
 			for (FileEntry fileEntry : fileEntries) {
 				existingFiles.add(String.valueOf(fileEntry.getFileEntryId()));
 			}
 
 			_message = MBMessageLocalServiceUtil.updateMessage(
-				user.getUserId(), _message.getMessageId(), "Subject", "Body",
-				objectValuePairs, existingFiles, 0, false, serviceContext);
+				TestPropsValues.getUserId(), _message.getMessageId(), "Subject",
+				"Body", objectValuePairs, existingFiles, 0, false,
+				serviceContext);
 		}
 	}
 

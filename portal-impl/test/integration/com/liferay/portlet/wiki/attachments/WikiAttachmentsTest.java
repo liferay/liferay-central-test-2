@@ -173,8 +173,6 @@ public class WikiAttachmentsTest {
 
 		addWikiPageAttachment();
 
-		// One folder per group, node and page
-
 		Assert.assertEquals(
 			foldersCount + 3, DLFolderLocalServiceUtil.getDLFoldersCount());
 
@@ -189,8 +187,8 @@ public class WikiAttachmentsTest {
 
 		foldersCount = DLFolderLocalServiceUtil.getDLFoldersCount();
 
-		_page = null;
 		_node = null;
+		_page = null;
 
 		addWikiPageAttachment();
 
@@ -200,8 +198,8 @@ public class WikiAttachmentsTest {
 		foldersCount = DLFolderLocalServiceUtil.getDLFoldersCount();
 
 		_group = null;
-		_page = null;
 		_node = null;
+		_page = null;
 
 		addWikiPageAttachment();
 

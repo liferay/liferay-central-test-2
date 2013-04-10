@@ -66,7 +66,9 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		Repository repository = PortletFileRepositoryUtil.addPortletRepository(
 			getGroupId(), PortletKeys.MESSAGE_BOARDS, serviceContext);
 
-		Folder threadFolder = getThread().addAttachmentsFolder();
+		MBThread thread = getThread();
+
+		Folder threadFolder = thread.addAttachmentsFolder();
 
 		Folder folder = PortletFileRepositoryUtil.addPortletFolder(
 			getUserId(), repository.getRepositoryId(),

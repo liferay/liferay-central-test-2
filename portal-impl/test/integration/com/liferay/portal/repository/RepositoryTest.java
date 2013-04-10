@@ -109,7 +109,8 @@ public class RepositoryTest {
 
 		if (!hidden) {
 			repositoryIds = new long[] {
-				defaultRepositoryId, dlRepository.getRepositoryId()};
+				defaultRepositoryId, dlRepository.getRepositoryId()
+			};
 		}
 
 		long[] fileEntryIds = new long[4];

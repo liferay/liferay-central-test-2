@@ -179,26 +179,22 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			String folderName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Folder folder = null;
-
 		boolean dlAppHelperEnabled = DLAppHelperThreadLocal.isEnabled();
 
 		try {
 			DLAppHelperThreadLocal.setEnabled(false);
 
-			folder = DLAppLocalServiceUtil.getFolder(
+			return DLAppLocalServiceUtil.getFolder(
 				repositoryId, parentFolderId, folderName);
 		}
 		catch (NoSuchFolderException nsfe) {
-			folder = DLAppLocalServiceUtil.addFolder(
+			return DLAppLocalServiceUtil.addFolder(
 				userId, repositoryId, parentFolderId, folderName,
 				StringPool.BLANK, serviceContext);
 		}
 		finally {
 			DLAppHelperThreadLocal.setEnabled(dlAppHelperEnabled);
 		}
-
-		return folder;
 	}
 
 	public Repository addPortletRepository(

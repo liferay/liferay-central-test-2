@@ -70,9 +70,7 @@ public class MBThreadImpl extends MBThreadBaseImpl {
 		return folder;
 	}
 
-	public long getAttachmentsFolderId()
-		throws PortalException, SystemException {
-
+	public long getAttachmentsFolderId() throws SystemException {
 		if (_attachmentsFolderId !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
