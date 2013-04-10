@@ -142,7 +142,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 
 		append("<div class=\"toc\">");
 		append("<div class=\"collapsebox\">");
-
 		append("<h4>");
 
 		String title = tableOfContentsNode.getTitle();
