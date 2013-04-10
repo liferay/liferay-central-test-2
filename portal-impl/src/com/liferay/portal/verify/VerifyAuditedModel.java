@@ -299,21 +299,18 @@ public class VerifyAuditedModel extends VerifyProcess {
 			"LayoutSetPrototype", "layoutSetPrototypeId", null, null, null,
 			"false"
 		},
-
-		new String[] {
-			"MBThread", "threadId", "rootMessageId", "MBMessage", "messageId",
-			"true"
-		},
-
 		new String[] {
 			"MBDiscussion", "discussionId", "threadId", "MBThread", "threadId",
+			"true"
+		},
+		new String[] {
+			"MBThread", "threadId", "rootMessageId", "MBMessage", "messageId",
 			"true"
 		},
 		new String[] {
 			"MBThreadFlag", "threadFlagId", "threadId", "MBThread", "threadId",
 			"true"
 		},
-
 		new String[] {
 			"Organization_", "organizationId", null, null, null, "true"
 		},
