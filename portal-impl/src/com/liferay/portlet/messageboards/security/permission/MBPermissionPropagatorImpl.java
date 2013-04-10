@@ -71,7 +71,7 @@ public class MBPermissionPropagatorImpl extends BasePermissionPropagator {
 
 				messages = new ArrayList<MBMessage>();
 
-				for (Long addCategoryId : categoryIds) {
+				for (long addCategoryId : categoryIds) {
 					categories.add(
 						MBCategoryLocalServiceUtil.getCategory(addCategoryId));
 
