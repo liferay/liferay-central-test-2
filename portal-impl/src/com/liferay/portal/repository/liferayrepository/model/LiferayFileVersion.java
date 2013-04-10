@@ -47,6 +47,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		_escapedModel = escapedModel;
 	}
 
+	@Override
 	public Object clone() {
 		LiferayFileVersion fileVersion = new LiferayFileVersion(
 			_dlFileVersion, _escapedModel);

@@ -38,6 +38,7 @@ public class FolderProxyBean
 		_folder = folder;
 	}
 
+	@Override
 	public Object clone() {
 		FolderProxyBean folderProxyBean = newFolderProxyBean(_folder);
 

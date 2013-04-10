@@ -40,6 +40,7 @@ public class FileVersionProxyBean
 		_fileVersion = fileVersion;
 	}
 
+	@Override
 	public Object clone() {
 		FileVersionProxyBean fileVersionProxyBean = newFileVersionProxyBean(
 			_fileVersion);

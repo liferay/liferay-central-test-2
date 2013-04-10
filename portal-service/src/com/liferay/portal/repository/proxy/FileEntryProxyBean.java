@@ -42,6 +42,7 @@ public class FileEntryProxyBean
 		_fileEntry = fileEntry;
 	}
 
+	@Override
 	public Object clone() {
 		FileEntryProxyBean fileEntryProxyBean = newFileEntryProxyBean(
 			_fileEntry);

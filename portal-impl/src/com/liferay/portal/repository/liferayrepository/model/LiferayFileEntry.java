@@ -49,6 +49,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		_escapedModel = escapedModel;
 	}
 
+	@Override
 	public Object clone() {
 		LiferayFileEntry fileEntry = new LiferayFileEntry(
 			_dlFileEntry, _escapedModel);

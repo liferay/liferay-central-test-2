@@ -75,6 +75,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		_document = document;
 	}
 
+	@Override
 	public Object clone() {
 		CMISFileEntry fileEntry = new CMISFileEntry(
 			_cmisRepository, _uuid, _fileEntryId, _document);

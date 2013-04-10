@@ -42,6 +42,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		_escapedModel = escapedModel;
 	}
 
+	@Override
 	public Object clone() {
 		LiferayFolder folder = new LiferayFolder(_dlFolder, _escapedModel);
 

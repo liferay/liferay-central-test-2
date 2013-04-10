@@ -59,6 +59,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		_cmisFolder = cmisFolder;
 	}
 
+	@Override
 	public Object clone() {
 		CMISFolder folder = new CMISFolder(
 			_cmisRepository, _uuid, _folderId, _cmisFolder);

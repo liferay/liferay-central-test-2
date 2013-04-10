@@ -64,6 +64,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		_document = document;
 	}
 
+	@Override
 	public Object clone() {
 		CMISFileVersion fileVersion = new CMISFileVersion(
 			_cmisRepository, _uuid, _fileVersionId, _document);
