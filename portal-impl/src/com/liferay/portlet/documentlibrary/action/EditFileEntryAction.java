@@ -667,10 +667,6 @@ public class EditFileEntryAction extends PortletAction {
 		portletURL.setParameter(
 			"version", String.valueOf(fileEntry.getVersion()), false);
 
-		String languageId = ParamUtil.getString(actionRequest, "languageId");
-
-		portletURL.setParameter("languageId", languageId, false);
-
 		return portletURL.toString();
 	}
 
