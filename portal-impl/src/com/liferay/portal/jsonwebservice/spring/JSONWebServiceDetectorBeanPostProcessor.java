@@ -36,6 +36,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -178,8 +180,10 @@ public class JSONWebServiceDetectorBeanPostProcessor
 			PortletClassLoaderUtil.getServletContextName();
 
 		if (servletContextName != null) {
-			servletContextName = ServletContextPool.get(
-				servletContextName).getContextPath();
+			ServletContext servletContext = ServletContextPool.get(
+				servletContextName);
+
+			servletContextName = servletContext.getContextPath();
 		}
 		else {
 			servletContextName = PropsValues.PORTAL_CTX;
@@ -209,18 +213,16 @@ public class JSONWebServiceDetectorBeanPostProcessor
 			httpMethod);
 	}
 
-	private static Set<String> _excludedMethodNames = SetUtil.fromArray(
-		new String[] {"getBeanIdentifier", "setBeanIdentifier"});
-
 	private static Log _log = LogFactoryUtil.getLog(
 		JSONWebServiceDetectorBeanPostProcessor.class);
 
+	private static Set<String> _excludedMethodNames = SetUtil.fromArray(
+		new String[] {"getBeanIdentifier", "setBeanIdentifier"});
+
 	private Set<String> _invalidHttpMethods = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS));
-
 	private JSONWebServiceMappingResolver _jsonWebServiceMappingResolver =
 		new JSONWebServiceMappingResolver();
-
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 
