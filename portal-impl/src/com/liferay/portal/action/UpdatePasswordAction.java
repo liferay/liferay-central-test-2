@@ -99,13 +99,13 @@ public class UpdatePasswordAction extends Action {
 		try {
 			updatePassword(request, response, themeDisplay, ticket);
 
+			String defaultLandingPagePath = PrefsPropsUtil.getString(
+				themeDisplay.getCompanyId(),
+				PropsKeys.DEFAULT_LANDING_PAGE_PATH);
+
 			String redirect = ParamUtil.getString(request, WebKeys.REFERER);
 
 			if (Validator.isNull(redirect)) {
-				String defaultLandingPagePath = PrefsPropsUtil.getString(
-					themeDisplay.getCompanyId(),
-					PropsKeys.DEFAULT_LANDING_PAGE_PATH);
-
 				if (Validator.isNotNull(defaultLandingPagePath)) {
 					redirect = defaultLandingPagePath;
 				}
