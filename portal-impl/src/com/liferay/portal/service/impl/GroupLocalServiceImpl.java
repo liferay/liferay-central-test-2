@@ -825,12 +825,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the group with the UUID.
+	 * Returns the group with the matching UUID and company.
 	 *
-	 * @param  uuid the group's UUID
-	 * @param  companyId the primary key of the group's company
-	 * @return the group with the UUID, or <code>null</code> if a group
-	 *         with the UUID could not be found
+	 * @param  uuid the UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching group, or <code>null</code> if a matching group
+	 *         could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Group fetchGroupByUuidandCompanyId(String uuid, long companyId)
