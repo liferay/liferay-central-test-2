@@ -1241,11 +1241,9 @@ public class PortletImporter {
 	protected void readAssetCategories(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/categories-hierarchy.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/categories-hierarchy.xml");
 
 		if (xml == null) {
 			return;
@@ -1351,11 +1349,9 @@ public class PortletImporter {
 	protected void readAssetLinks(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/links.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/links.xml");
 
 		if (xml == null) {
 			return;
@@ -1412,11 +1408,9 @@ public class PortletImporter {
 	protected void readAssetTags(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/tags.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/tags.xml");
 
 		if (xml == null) {
 			return;
@@ -1464,11 +1458,9 @@ public class PortletImporter {
 	protected void readComments(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/comments.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/comments.xml");
 
 		if (xml == null) {
 			return;
@@ -1508,11 +1500,9 @@ public class PortletImporter {
 	protected void readExpandoTables(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/expando-tables.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/expando-tables.xml");
 
 		if (xml == null) {
 			return;
@@ -1584,11 +1574,9 @@ public class PortletImporter {
 	protected void readLocks(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/locks.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/locks.xml");
 
 		if (xml == null) {
 			return;
@@ -1616,11 +1604,9 @@ public class PortletImporter {
 	protected void readRatingsEntries(PortletDataContext portletDataContext)
 		throws Exception {
 
-		String sourceRootPath = ExportImportPathUtil.getSourceRootPath(
-			portletDataContext);
-
 		String xml = portletDataContext.getZipEntryAsString(
-			sourceRootPath.concat("/ratings.xml"));
+			ExportImportPathUtil.getSourceRootPath(portletDataContext) +
+				"/ratings.xml");
 
 		if (xml == null) {
 			return;

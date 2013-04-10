@@ -102,10 +102,10 @@ public class WordPressImporter {
 	protected static String getWordPressPath(
 		PortletDataContext context, String fileName) {
 
-		String portletPath = ExportImportPathUtil.getSourcePortletPath(
+		String path = ExportImportPathUtil.getSourcePortletPath(
 			context, PortletKeys.BLOGS);
 
-		return portletPath.concat(StringPool.SLASH).concat(fileName);
+		return path.concat(StringPool.SLASH).concat(fileName);
 	}
 
 	protected static Map<String, Long> getWordPressUserMap(

@@ -39,23 +39,17 @@ public class ExportImportPathUtil {
 	public static String getExpandoPath(String path) {
 		if (!Validator.isFilePath(path, false)) {
 			throw new IllegalArgumentException(
-				path + " is located outside of the lar");
+				path + " is located outside of the LAR");
 		}
 
 		int pos = path.lastIndexOf(".xml");
 
 		if (pos == -1) {
-			throw new IllegalArgumentException(
-				path + " does not end with .xml");
+			throw new IllegalArgumentException(path + " is not an XML file");
 		}
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(path.substring(0, pos));
-		sb.append("-expando");
-		sb.append(path.substring(pos));
-
-		return sb.toString();
+		return path.substring(0, pos).concat("-expando").concat(
+			path.substring(pos));
 	}
 
 	public static String getLayoutPath(
@@ -169,7 +163,7 @@ public class ExportImportPathUtil {
 		String pathPrefix, long pathPrimaryKey, String className,
 		Serializable primaryKeyObj, String dependentFileName) {
 
-		StringBundler sb = new StringBundler(8);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(getRootPath(pathPrefix, pathPrimaryKey));
 		sb.append(StringPool.FORWARD_SLASH);
@@ -191,7 +185,7 @@ public class ExportImportPathUtil {
 	protected static String getRootPath(
 		String pathPrefix, long pathPrimaryKey) {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(pathPrefix);
