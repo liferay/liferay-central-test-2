@@ -82,8 +82,8 @@ public class SeleniumBuilderContextTest {
 	public void testTestCaseFileName1008() throws Exception {
 		test(
 			"CPBlogsAcceptance.testcase",
-			"Error 1008: Duplicate file name CPBlogsAcceptance at " + _DIR_NAME +
-				"/CPBlogsAcceptance.testcase");
+			"Error 1008: Duplicate file name CPBlogsAcceptance at " +
+				_DIR_NAME + "/CPBlogsAcceptance.testcase");
 	}
 
 	@Test
