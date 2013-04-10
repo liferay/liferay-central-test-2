@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
@@ -291,7 +290,6 @@ public class WikiAttachmentsTest {
 
 		_trashWikiAttachments(false);
 
-		RepositoryLocalServiceUtil.deleteRepositories(_group.getGroupId());
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
@@ -301,7 +299,6 @@ public class WikiAttachmentsTest {
 
 		_trashWikiAttachments(true);
 
-		RepositoryLocalServiceUtil.deleteRepositories(_group.getGroupId());
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 

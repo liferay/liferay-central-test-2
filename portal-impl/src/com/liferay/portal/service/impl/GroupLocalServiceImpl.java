@@ -642,6 +642,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		membershipRequestLocalService.deleteMembershipRequests(
 			group.getGroupId());
 
+		// Repositories
+
+		repositoryLocalService.deleteRepositories(group.getGroupId());
+
 		// Subscriptions
 
 		subscriptionLocalService.deleteSubscriptions(

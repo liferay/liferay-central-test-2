@@ -24,7 +24,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
@@ -318,7 +317,6 @@ public class MBAttachmentsTest {
 
 		_trashMBAttachments(false);
 
-		RepositoryLocalServiceUtil.deleteRepositories(_group.getGroupId());
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
@@ -328,7 +326,6 @@ public class MBAttachmentsTest {
 
 		_trashMBAttachments(true);
 
-		RepositoryLocalServiceUtil.deleteRepositories(_group.getGroupId());
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
