@@ -43,7 +43,11 @@ public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link #addPasswordPolicy(long,
+	 *             boolean, String, String, boolean, boolean, long, boolean,
+	 *             boolean, int, int, int, int, int, int, String, boolean, int,
+	 *             boolean, long, long, int, boolean, int, long, long, long,
+	 *             ServiceContext)}
 	 */
 	public PasswordPolicy addPasswordPolicy(
 			long userId, boolean defaultPolicy, String name, String description,
@@ -81,10 +85,9 @@ public class PasswordPolicyLocalServiceImpl
 		// Password policy
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
 
 		validate(0, user.getCompanyId(), name);
-
-		Date now = new Date();
 
 		long passwordPolicyId = counterLocalService.increment();
 
@@ -332,7 +335,11 @@ public class PasswordPolicyLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link #updatePasswordPolicy(long,
+	 *             String, String, boolean, boolean, long, boolean, boolean,
+	 *             int, int, int, int, int, int, String, boolean, int, boolean,
+	 *             long, long, int, boolean, int, long, long, long,
+	 *             ServiceContext)}
 	 */
 	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,

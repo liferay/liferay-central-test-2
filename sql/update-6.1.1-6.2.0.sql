@@ -359,9 +359,6 @@ create table JournalFolder (
 	statusDate DATE null
 );
 
-drop index IX_228562AD on Lock_;
-drop index IX_DD635956 on Lock_;
-
 alter table LayoutPrototype add userId LONG;
 alter table LayoutPrototype add userName VARCHAR(75) null;
 alter table LayoutPrototype add createDate DATE null;
@@ -369,6 +366,9 @@ alter table LayoutPrototype add modifiedDate DATE null;
 
 alter table LayoutSetPrototype add userId LONG;
 alter table LayoutSetPrototype add userName VARCHAR(75) null;
+
+drop index IX_228562AD on Lock_;
+drop index IX_DD635956 on Lock_;
 
 alter table MBBan add uuid_ VARCHAR(75) null;
 

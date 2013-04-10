@@ -221,12 +221,11 @@ public class OrganizationLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		parentOrganizationId = getParentOrganizationId(
 			user.getCompanyId(), parentOrganizationId);
+		Date now = new Date();
 
 		validate(
 			user.getCompanyId(), parentOrganizationId, name, type, countryId,
 			statusId);
-
-		Date now = new Date();
 
 		long organizationId = counterLocalService.increment();
 
@@ -251,10 +250,7 @@ public class OrganizationLocalServiceImpl
 		}
 
 		organization.setParentOrganizationId(parentOrganizationId);
-
-		String treePath = organization.buildTreePath();
-
-		organization.setTreePath(treePath);
+		organization.setTreePath(organization.buildTreePath());
 		organization.setName(name);
 		organization.setType(type);
 		organization.setRecursable(true);
@@ -988,9 +984,7 @@ public class OrganizationLocalServiceImpl
 			organizationPersistence.findByCompanyId(companyId);
 
 		for (Organization organization : organizations) {
-			String treePath = organization.buildTreePath();
-
-			organization.setTreePath(treePath);
+			organization.setTreePath(organization.buildTreePath());
 
 			organizationPersistence.update(organization);
 		}
@@ -1704,11 +1698,7 @@ public class OrganizationLocalServiceImpl
 
 		organization.setModifiedDate(new Date());
 		organization.setParentOrganizationId(parentOrganizationId);
-
-		String treePath = organization.buildTreePath();
-
-		organization.setTreePath(treePath);
-
+		organization.setTreePath(organization.buildTreePath());
 		organization.setName(name);
 		organization.setType(type);
 		organization.setRecursable(true);
@@ -1881,9 +1871,7 @@ public class OrganizationLocalServiceImpl
 		for (int i = 0; i < organizations.size(); i++) {
 			Organization curOrganization = organizations.get(i);
 
-			String treePath = curOrganization.buildTreePath();
-
-			curOrganization.setTreePath(treePath.toString());
+			curOrganization.setTreePath(curOrganization.buildTreePath());
 
 			organizationPersistence.update(curOrganization);
 

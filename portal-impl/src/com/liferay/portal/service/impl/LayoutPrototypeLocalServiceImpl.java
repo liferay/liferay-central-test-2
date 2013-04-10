@@ -42,6 +42,10 @@ import java.util.Map;
 public class LayoutPrototypeLocalServiceImpl
 	extends LayoutPrototypeLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addLayoutPrototype(long,
+	 *             long, Map, String, boolean, ServiceContext)}
+	 */
 	public LayoutPrototype addLayoutPrototype(
 			long userId, long companyId, Map<Locale, String> nameMap,
 			String description, boolean active)
@@ -60,7 +64,6 @@ public class LayoutPrototypeLocalServiceImpl
 		// Layout prototype
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		long layoutPrototypeId = counterLocalService.increment();
@@ -69,14 +72,11 @@ public class LayoutPrototypeLocalServiceImpl
 			layoutPrototypeId);
 
 		layoutPrototype.setUuid(serviceContext.getUuid());
-
 		layoutPrototype.setCompanyId(companyId);
 		layoutPrototype.setUserId(userId);
 		layoutPrototype.setUserName(user.getFullName());
-
 		layoutPrototype.setCreateDate(serviceContext.getCreateDate(now));
 		layoutPrototype.setModifiedDate(serviceContext.getModifiedDate(now));
-
 		layoutPrototype.setNameMap(nameMap);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
@@ -210,12 +210,14 @@ public class LayoutPrototypeLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #updateLayoutPrototype(long,
+	 *             Map, String, boolean, ServiceContext)}
+	 */
 	public LayoutPrototype updateLayoutPrototype(
 			long layoutPrototypeId, Map<Locale, String> nameMap,
 			String description, boolean active)
 		throws PortalException, SystemException {
-
-		// Layout prototype
 
 		return updateLayoutPrototype(
 			layoutPrototypeId, nameMap, description, active, null);
@@ -233,7 +235,6 @@ public class LayoutPrototypeLocalServiceImpl
 
 		layoutPrototype.setModifiedDate(
 			serviceContext.getModifiedDate(new Date()));
-
 		layoutPrototype.setNameMap(nameMap);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);

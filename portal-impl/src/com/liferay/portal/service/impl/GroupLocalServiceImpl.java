@@ -1699,9 +1699,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		List<Group> groups = groupPersistence.findByCompanyId(companyId);
 
 		for (Group group : groups) {
-			String treePath = group.buildTreePath();
-
-			group.setTreePath(treePath);
+			group.setTreePath(group.buildTreePath());
 
 			groupPersistence.update(group);
 		}

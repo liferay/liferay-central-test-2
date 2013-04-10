@@ -33,8 +33,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		for (String[] model : _MODELS) {
-			verifyModel(model[0], model[1],
-				GetterUtil.getBoolean(model[2], true));
+			verifyModel(model[0], model[1], GetterUtil.getBoolean(model[2]));
 		}
 	}
 
@@ -81,8 +80,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 	}
 
 	protected void verifyModel(
-			String modelName, String pkColumnName,
-			boolean updateCreateModifiedDate)
+			String modelName, String pkColumnName, boolean updateDates)
 		throws Exception {
 
 		Connection con = null;
@@ -116,11 +114,12 @@ public class VerifyAuditedModel extends VerifyProcess {
 				}
 
 				StringBundler sb = new StringBundler(7);
+
 				sb.append("update ");
 				sb.append(modelName);
 				sb.append(" set userId = ?, userName = ?");
 
-				if (updateCreateModifiedDate) {
+				if (updateDates) {
 					sb.append(", createDate = ?, modifiedDate = ?");
 				}
 
@@ -133,7 +132,7 @@ public class VerifyAuditedModel extends VerifyProcess {
 				ps.setLong(1, (Long)defaultUserArray[0]);
 				ps.setString(2, (String)defaultUserArray[1]);
 
-				if (updateCreateModifiedDate) {
+				if (updateDates) {
 					ps.setTimestamp(3, createDate);
 					ps.setTimestamp(4, createDate);
 					ps.setLong(5, tablePrimaryKey);
