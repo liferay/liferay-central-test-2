@@ -77,22 +77,22 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	@Override
 	public Object clone() {
-		CMISFileEntry fileEntry = new CMISFileEntry(
+		CMISFileEntry cmisFileEntry = new CMISFileEntry(
 			_cmisRepository, _uuid, _fileEntryId, _document);
 
-		fileEntry.setCompanyId(getCompanyId());
-		fileEntry.setFileEntryId(getFileEntryId());
-		fileEntry.setGroupId(getGroupId());
+		cmisFileEntry.setCompanyId(getCompanyId());
+		cmisFileEntry.setFileEntryId(getFileEntryId());
+		cmisFileEntry.setGroupId(getGroupId());
 
 		try {
-			fileEntry.setParentFolder(getParentFolder());
+			cmisFileEntry.setParentFolder(getParentFolder());
 		}
 		catch (Exception e) {
 		}
 
-		fileEntry.setPrimaryKey(getPrimaryKey());
+		cmisFileEntry.setPrimaryKey(getPrimaryKey());
 
-		return fileEntry;
+		return cmisFileEntry;
 	}
 
 	public boolean containsPermission(

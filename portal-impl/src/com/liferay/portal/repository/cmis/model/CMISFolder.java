@@ -61,22 +61,22 @@ public class CMISFolder extends CMISModel implements Folder {
 
 	@Override
 	public Object clone() {
-		CMISFolder folder = new CMISFolder(
+		CMISFolder cmisFolder = new CMISFolder(
 			_cmisRepository, _uuid, _folderId, _cmisFolder);
 
-		folder.setCompanyId(getCompanyId());
-		folder.setFolderId(getFolderId());
-		folder.setGroupId(getGroupId());
+		cmisFolder.setCompanyId(getCompanyId());
+		cmisFolder.setFolderId(getFolderId());
+		cmisFolder.setGroupId(getGroupId());
 
 		try {
-			folder.setParentFolder(getParentFolder());
+			cmisFolder.setParentFolder(getParentFolder());
 		}
 		catch (Exception e) {
 		}
 
-		folder.setPrimaryKey(getPrimaryKey());
+		cmisFolder.setPrimaryKey(getPrimaryKey());
 
-		return folder;
+		return cmisFolder;
 	}
 
 	public boolean containsPermission(

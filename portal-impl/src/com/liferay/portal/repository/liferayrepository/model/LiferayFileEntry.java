@@ -51,27 +51,27 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	@Override
 	public Object clone() {
-		LiferayFileEntry fileEntry = new LiferayFileEntry(
+		LiferayFileEntry liferayFileEntry = new LiferayFileEntry(
 			_dlFileEntry, _escapedModel);
 
-		fileEntry.setCachedFileVersion(getCachedFileVersion());
-		fileEntry.setCompanyId(getCompanyId());
-		fileEntry.setCreateDate(getCreateDate());
-		fileEntry.setGroupId(getGroupId());
-		fileEntry.setModifiedDate(getModifiedDate());
-		fileEntry.setPrimaryKey(getPrimaryKey());
-		fileEntry.setUserId(getUserId());
-		fileEntry.setUserName(getUserName());
+		liferayFileEntry.setCachedFileVersion(getCachedFileVersion());
+		liferayFileEntry.setCompanyId(getCompanyId());
+		liferayFileEntry.setCreateDate(getCreateDate());
+		liferayFileEntry.setGroupId(getGroupId());
+		liferayFileEntry.setModifiedDate(getModifiedDate());
+		liferayFileEntry.setPrimaryKey(getPrimaryKey());
+		liferayFileEntry.setUserId(getUserId());
+		liferayFileEntry.setUserName(getUserName());
 
 		try {
-			fileEntry.setUserUuid(getUserUuid());
+			liferayFileEntry.setUserUuid(getUserUuid());
 		}
 		catch (SystemException se) {
 		}
 
-		fileEntry.setUuid(getUuid());
+		liferayFileEntry.setUuid(getUuid());
 
-		return fileEntry;
+		return liferayFileEntry;
 	}
 
 	public boolean containsPermission(

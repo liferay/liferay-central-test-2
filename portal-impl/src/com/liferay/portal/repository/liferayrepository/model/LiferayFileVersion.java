@@ -49,25 +49,25 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 
 	@Override
 	public Object clone() {
-		LiferayFileVersion fileVersion = new LiferayFileVersion(
+		LiferayFileVersion liferayFileVersion = new LiferayFileVersion(
 			_dlFileVersion, _escapedModel);
 
-		fileVersion.setCompanyId(getCompanyId());
-		fileVersion.setCreateDate(getCreateDate());
-		fileVersion.setGroupId(getGroupId());
-		fileVersion.setPrimaryKey(getPrimaryKey());
-		fileVersion.setUserId(getUserId());
-		fileVersion.setUserName(getUserName());
+		liferayFileVersion.setCompanyId(getCompanyId());
+		liferayFileVersion.setCreateDate(getCreateDate());
+		liferayFileVersion.setGroupId(getGroupId());
+		liferayFileVersion.setPrimaryKey(getPrimaryKey());
+		liferayFileVersion.setUserId(getUserId());
+		liferayFileVersion.setUserName(getUserName());
 
 		try {
-			fileVersion.setUserUuid(getUserUuid());
+			liferayFileVersion.setUserUuid(getUserUuid());
 		}
 		catch (Exception e) {
 		}
 
-		fileVersion.setUuid(getUuid());
+		liferayFileVersion.setUuid(getUuid());
 
-		return fileVersion;
+		return liferayFileVersion;
 	}
 
 	public Map<String, Serializable> getAttributes() {

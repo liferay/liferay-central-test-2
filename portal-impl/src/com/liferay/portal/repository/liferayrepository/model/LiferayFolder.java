@@ -44,25 +44,26 @@ public class LiferayFolder extends LiferayModel implements Folder {
 
 	@Override
 	public Object clone() {
-		LiferayFolder folder = new LiferayFolder(_dlFolder, _escapedModel);
+		LiferayFolder liferayFolder = new LiferayFolder(
+			_dlFolder, _escapedModel);
 
-		folder.setCompanyId(getCompanyId());
-		folder.setCreateDate(getCreateDate());
-		folder.setGroupId(getGroupId());
-		folder.setModifiedDate(getModifiedDate());
-		folder.setPrimaryKey(getPrimaryKey());
-		folder.setUserId(getUserId());
-		folder.setUserName(getUserName());
+		liferayFolder.setCompanyId(getCompanyId());
+		liferayFolder.setCreateDate(getCreateDate());
+		liferayFolder.setGroupId(getGroupId());
+		liferayFolder.setModifiedDate(getModifiedDate());
+		liferayFolder.setPrimaryKey(getPrimaryKey());
+		liferayFolder.setUserId(getUserId());
+		liferayFolder.setUserName(getUserName());
 
 		try {
-			folder.setUserUuid(getUserUuid());
+			liferayFolder.setUserUuid(getUserUuid());
 		}
 		catch (SystemException se) {
 		}
 
-		folder.setUuid(getUuid());
+		liferayFolder.setUuid(getUuid());
 
-		return folder;
+		return liferayFolder;
 	}
 
 	public boolean containsPermission(
