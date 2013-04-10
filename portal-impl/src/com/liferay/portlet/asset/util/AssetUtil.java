@@ -364,6 +364,12 @@ public class AssetUtil {
 
 		assetSearcher.setAssetEntryQuery(assetEntryQuery);
 
+		Layout layout = assetEntryQuery.getLayout();
+
+		if (layout != null) {
+			searchContext.setAttribute(Field.LAYOUT_UUID, layout.getUuid());
+		}
+
 		String ddmStructureFieldName = (String)assetEntryQuery.getAttribute(
 			"ddmStructureFieldName");
 		String ddmStructureFieldValue = (String)assetEntryQuery.getAttribute(
@@ -376,12 +382,6 @@ public class AssetUtil {
 				"ddmStructureFieldName", ddmStructureFieldName);
 			searchContext.setAttribute(
 				"ddmStructureFieldValue", ddmStructureFieldValue);
-		}
-
-		Layout layout = assetEntryQuery.getLayout();
-
-		if (layout != null) {
-			searchContext.setAttribute(Field.LAYOUT_UUID, layout.getUuid());
 		}
 
 		searchContext.setClassTypeIds(assetEntryQuery.getClassTypeIds());
