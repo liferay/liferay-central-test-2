@@ -970,13 +970,6 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
-		String manageSiteURL = urlControlPanel;
-
-		manageSiteURL = HttpUtil.addParameter(
-			manageSiteURL, "controlPanelCategory", PortletCategoryKeys.CONTENT);
-
-		themeDisplay.setURLManageSite(manageSiteURL);
-
 		String currentURL = PortalUtil.getCurrentURL(request);
 
 		themeDisplay.setURLCurrent(currentURL);
@@ -984,6 +977,13 @@ public class ServicePreAction extends Action {
 		String urlHome = PortalUtil.getHomeURL(request);
 
 		themeDisplay.setURLHome(urlHome);
+
+		String manageSiteURL = urlControlPanel;
+
+		manageSiteURL = HttpUtil.addParameter(
+			manageSiteURL, "controlPanelCategory", PortletCategoryKeys.CONTENT);
+
+		themeDisplay.setURLManageSite(manageSiteURL);
 
 		if (layout != null) {
 			if (layout.isTypePortlet()) {
