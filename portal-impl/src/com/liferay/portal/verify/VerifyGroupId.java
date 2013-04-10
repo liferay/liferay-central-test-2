@@ -55,9 +55,8 @@ public class VerifyGroupId extends VerifyProcess {
 			}
 
 			if (pendingModels.size() == count) {
-				_log.error("Circular dependency detected " + pendingModels);
-
-				break;
+				throw new VerifyException(
+					"Circular dependency detected " + pendingModels);
 			}
 		}
 	}
