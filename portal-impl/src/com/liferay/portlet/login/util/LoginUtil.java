@@ -221,11 +221,10 @@ public class LoginUtil {
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.LOGIN, plid, PortletRequest.RENDER_PHASE);
 
-		portletURL.setPortletMode(PortletMode.VIEW);
-		portletURL.setWindowState(WindowState.MAXIMIZED);
-
 		portletURL.setParameter("saveLastPath", Boolean.FALSE.toString());
 		portletURL.setParameter("struts_action", "/login/login");
+		portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		return portletURL;
 	}
