@@ -198,24 +198,24 @@ for (long defaultTeamId : defaultTeamIds) {
 					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/sites_admin/select_site_role" /><portlet:param name="step" value="2" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 				},
 				function(event){
-					searchContainer = Liferay.SearchContainer.get('<portlet:namespace />' + event.search-container-name + 'SearchContainer');
+					searchContainer = Liferay.SearchContainer.get('<portlet:namespace />' + event.searchcontainername + 'SearchContainer');
 
 					var rowColumns = [];
 
-					rowColumns.push(A.Escape.html(event.role-title));
+					rowColumns.push(A.Escape.html(event.roletitle));
 
-					if (event.group-id) {
-						rowColumns.push('<a class="modify-link" data-rowId="' + event.role-id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+					if (event.groupid) {
+						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
 
-						<portlet:namespace />siteRolesRoleIds.push(event.role-id);
+						<portlet:namespace />siteRolesRoleIds.push(event.roleid);
 
 						document.<portlet:namespace />fm.<portlet:namespace />siteRolesRoleIds.value = <portlet:namespace />siteRolesRoleIds.join(',');
 					}
 					else {
-						rowColumns.push('<a class="modify-link" data-rowId="' + event.role-id + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
+						rowColumns.push('<a class="modify-link" data-rowId="' + event.roleid + '" href="javascript:;"><%= UnicodeFormatter.toString(removeRoleIcon) %></a>');
 					}
 
-					searchContainer.addRow(rowColumns, event.role-id);
+					searchContainer.addRow(rowColumns, event.roleid);
 
 					searchContainer.updateDataStore();
 				}

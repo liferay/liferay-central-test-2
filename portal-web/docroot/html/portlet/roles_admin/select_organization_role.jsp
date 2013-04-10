@@ -152,9 +152,9 @@ if (step == 1) {
 
 						Group group = organization.getGroup();
 
-						data.put("group-id", group.getGroupId());
+						data.put("groupid", group.getGroupId());
 
-						data.put("organization-id", organization.getOrganizationId());
+						data.put("organizationid", organization.getOrganizationId());
 						%>
 
 						<aui:button cssClass="organization-selector-button" data="<%= data %>" value="choose" />
@@ -168,7 +168,7 @@ if (step == 1) {
 				A.one('#<portlet:namespace />selectOrganizationRoleFm').delegate(
 					'click',
 					function(event) {
-						var organizationId = event.currentTarget.attr('data-organization-id');
+						var organizationId = event.currentTarget.attr('data-organizationid');
 
 						document.<portlet:namespace />selectOrganizationRoleFm.<portlet:namespace />organizationId.value = organizationId;
 
@@ -267,11 +267,11 @@ if (step == 1) {
 							<%
 							Map<String, Object> data = new HashMap<String, Object>();
 
-							data.put("group-id", organization.getGroup().getGroupId());
+							data.put("groupid", organization.getGroup().getGroupId());
 							data.put("groupname", HtmlUtil.escapeAttribute(organization.getGroup().getDescriptiveName(locale)));
-							data.put("role-id", role.getRoleId());
-							data.put("role-title", HtmlUtil.escapeAttribute(role.getTitle(locale)));
-							data.put("search-container-name", "organizationRoles");
+							data.put("roleid", role.getRoleId());
+							data.put("roletitle", HtmlUtil.escapeAttribute(role.getTitle(locale)));
+							data.put("searchcontainername", "organizationRoles");
 							%>
 
 							<aui:button cssClass="selector-button" data="<%= data %>" value="choose" />
