@@ -282,12 +282,14 @@ public class PortletExporter {
 				"end-date", String.valueOf(portletDataContext.getEndDate()));
 		}
 
+		headerElement.addAttribute("type", "portlet");
+
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			layout.getCompanyId());
 
 		headerElement.addAttribute(
 			"company-group-id", String.valueOf(companyGroup.getGroupId()));
-		headerElement.addAttribute("type", "portlet");
+
 		headerElement.addAttribute("group-id", String.valueOf(scopeGroupId));
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(layout.isPrivateLayout()));

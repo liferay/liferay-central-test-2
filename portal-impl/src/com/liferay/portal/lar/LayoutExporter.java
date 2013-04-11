@@ -319,6 +319,7 @@ public class LayoutExporter {
 
 		headerElement.addAttribute(
 			"company-group-id", String.valueOf(companyGroup.getGroupId()));
+
 		headerElement.addAttribute("group-id", String.valueOf(groupId));
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));

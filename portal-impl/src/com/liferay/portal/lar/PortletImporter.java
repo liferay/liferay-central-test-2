@@ -369,7 +369,7 @@ public class PortletImporter {
 			}
 		}
 
-		// Company Group id
+		// Company group id
 
 		long sourceCompanyGroupId = GetterUtil.getLong(
 			headerElement.attributeValue("company-group-id"));

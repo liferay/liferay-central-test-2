@@ -1762,8 +1762,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		new HashMap<String, String[]>();
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
-	private long _companyId;
 	private long _companyGroupId;
+	private long _companyId;
 	private String _dataStrategy;
 	private Date _endDate;
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
