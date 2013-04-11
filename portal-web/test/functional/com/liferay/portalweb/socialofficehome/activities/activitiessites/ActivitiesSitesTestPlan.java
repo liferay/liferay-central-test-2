@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portalweb.socialofficehome.activities;
+package com.liferay.portalweb.socialofficehome.activities.activitiessites;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.socialofficehome.activities.activitiesblockedsouser.ActivitiesBlockedSOUserTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.activitiessites.ActivitiesSitesTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.dashboardactivity.DashboardActivityTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.mbentryactivity.MBEntryActivityTestPlan;
+import com.liferay.portalweb.socialofficehome.activities.activitiessites.viewactivitiessitesactivities.ViewActivitiesSitesActivitiesTests;
+import com.liferay.portalweb.socialofficehome.activities.activitiessites.viewdmfolderdocumentsiteactivities.ViewDMFolderDocumentSiteActivitiesTests;
+import com.liferay.portalweb.socialofficehome.activities.activitiessites.viewmbcategorythreadmessagesiteactivities.ViewMBCategoryThreadMessageSiteActivitiesTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,15 +25,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ActivitiesTestPlan extends BaseTestSuite {
+public class ActivitiesSitesTestPlan extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ActivitiesBlockedSOUserTestPlan.suite());
-		testSuite.addTest(ActivitiesSitesTestPlan.suite());
-		testSuite.addTest(DashboardActivityTestPlan.suite());
-		testSuite.addTest(MBEntryActivityTestPlan.suite());
+		testSuite.addTest(ViewActivitiesSitesActivitiesTests.suite());
+		testSuite.addTest(ViewDMFolderDocumentSiteActivitiesTests.suite());
+		testSuite.addTest(
+			ViewMBCategoryThreadMessageSiteActivitiesTests.suite());
 
 		return testSuite;
 	}

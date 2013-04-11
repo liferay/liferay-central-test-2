@@ -12,13 +12,12 @@
  * details.
  */
 
-package com.liferay.portalweb.socialofficehome.activities;
+package com.liferay.portalweb.socialofficesite.wiki.wikipage.editwikifrontpagesite;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.socialofficehome.activities.activitiesblockedsouser.ActivitiesBlockedSOUserTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.activitiessites.ActivitiesSitesTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.dashboardactivity.DashboardActivityTestPlan;
-import com.liferay.portalweb.socialofficehome.activities.mbentryactivity.MBEntryActivityTestPlan;
+import com.liferay.portalweb.socialofficehome.sites.site.addsitessite.AddSitesSiteTest;
+import com.liferay.portalweb.socialofficehome.sites.site.addsitessite.TearDownSOSitesTest;
+import com.liferay.portalweb.socialofficesite.wiki.wikipage.addwikifrontpagesite.AddWikiFrontPageSiteTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,17 +25,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ActivitiesTestPlan extends BaseTestSuite {
-
+public class EditWikiFrontPageSiteTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTest(ActivitiesBlockedSOUserTestPlan.suite());
-		testSuite.addTest(ActivitiesSitesTestPlan.suite());
-		testSuite.addTest(DashboardActivityTestPlan.suite());
-		testSuite.addTest(MBEntryActivityTestPlan.suite());
+		testSuite.addTestSuite(AddSitesSiteTest.class);
+		testSuite.addTestSuite(AddWikiFrontPageSiteTest.class);
+		testSuite.addTestSuite(EditWikiFrontPageSiteTest.class);
+		testSuite.addTestSuite(TearDownSOSitesTest.class);
 
 		return testSuite;
 	}
-
 }
