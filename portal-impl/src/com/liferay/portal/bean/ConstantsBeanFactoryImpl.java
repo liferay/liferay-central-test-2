@@ -14,7 +14,7 @@
 
 package com.liferay.portal.bean;
 
-import com.liferay.portal.kernel.bean.ConstantsBean;
+import com.liferay.portal.kernel.bean.ConstantsBeanFactory;
 import com.liferay.portal.kernel.memory.EqualityWeakReference;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 
@@ -36,9 +36,9 @@ import org.objectweb.asm.Type;
 /**
  * @author Shuyang Zhou
  */
-public class ConstantsBeanImpl implements ConstantsBean {
+public class ConstantsBeanFactoryImpl implements ConstantsBeanFactory {
 
-	public Object toConstantsBean(Class<?> constantsClass) {
+	public Object getConstantsBean(Class<?> constantsClass) {
 		Reference<?> constantsBeanReference = constantsBeans.get(
 			new EqualityWeakReference<Class<?>>(constantsClass));
 

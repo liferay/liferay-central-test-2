@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
  * @author Shuyang Zhou
  */
 @RunWith(AspectJMockingNewClassLoaderJUnitTestRunner.class)
-public class ConstantsBeanImplTest {
+public class ConstantsBeanFactoryImplTest {
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -61,7 +61,7 @@ public class ConstantsBeanImplTest {
 		ReflectionUtilAdvice.setThrowException(true);
 
 		try {
-			ConstantsBeanImpl.createConstantsBean(Constants.class);
+			ConstantsBeanFactoryImpl.createConstantsBean(Constants.class);
 
 			Assert.fail();
 		}
@@ -76,7 +76,7 @@ public class ConstantsBeanImplTest {
 
 		ReflectionUtilAdvice.setThrowException(false);
 
-		Object constantsBean = ConstantsBeanImpl.createConstantsBean(
+		Object constantsBean = ConstantsBeanFactoryImpl.createConstantsBean(
 			Constants.class);
 
 		Class<?> constantsBeanClass = constantsBean.getClass();
@@ -211,15 +211,15 @@ public class ConstantsBeanImplTest {
 
 		// Ensure using same cached generated class
 
-		Object testConstantsBean2 = ConstantsBeanImpl.createConstantsBean(
-			Constants.class);
+		Object testConstantsBean2 =
+			ConstantsBeanFactoryImpl.createConstantsBean(Constants.class);
 
 		Assert.assertSame(constantsBeanClass, testConstantsBean2.getClass());
 	}
 
 	@Test
 	public void testSynchronizedConstantsUpdate() throws Exception {
-		Object constantsBean = ConstantsBeanImpl.createConstantsBean(
+		Object constantsBean = ConstantsBeanFactoryImpl.createConstantsBean(
 			Constants.class);
 
 		Class<?> constantsBeanClass = constantsBean.getClass();
@@ -260,9 +260,10 @@ public class ConstantsBeanImplTest {
 		Class<?> constantsClass1 = classLoader1.loadClass(
 			Constants.class.getName());
 
-		ConstantsBeanImpl constantsBeanImpl = new ConstantsBeanImpl();
+		ConstantsBeanFactoryImpl constantsBeanImpl =
+			new ConstantsBeanFactoryImpl();
 
-		Object constantsBean1 = constantsBeanImpl.toConstantsBean(
+		Object constantsBean1 = constantsBeanImpl.getConstantsBean(
 			constantsClass1);
 
 		Class<?> constantsBeanClass1 = constantsBean1.getClass();
@@ -270,14 +271,15 @@ public class ConstantsBeanImplTest {
 		Assert.assertSame(classLoader1, constantsBeanClass1.getClassLoader());
 
 		Map<EqualityWeakReference<Class<?>>, Reference<?>> constantsBeans =
-			ConstantsBeanImpl.constantsBeans;
+			ConstantsBeanFactoryImpl.constantsBeans;
 
 		Assert.assertEquals(1, constantsBeans.size());
 
 		// Hit cache
 
 		Assert.assertSame(
-			constantsBean1, constantsBeanImpl.toConstantsBean(constantsClass1));
+			constantsBean1,
+			constantsBeanImpl.getConstantsBean(constantsClass1));
 		Assert.assertEquals(1, constantsBeans.size());
 
 		// Second create
@@ -287,7 +289,7 @@ public class ConstantsBeanImplTest {
 		Class<?> constantsClass2 = classLoader2.loadClass(
 			Constants.class.getName());
 
-		Object constantsBean2 = constantsBeanImpl.toConstantsBean(
+		Object constantsBean2 = constantsBeanImpl.getConstantsBean(
 			constantsClass2);
 
 		Assert.assertNotSame(constantsBean1, constantsBean2);
@@ -297,7 +299,8 @@ public class ConstantsBeanImplTest {
 		// Hit cache
 
 		Assert.assertSame(
-			constantsBean2, constantsBeanImpl.toConstantsBean(constantsClass2));
+			constantsBean2,
+			constantsBeanImpl.getConstantsBean(constantsClass2));
 		Assert.assertEquals(2, constantsBeans.size());
 
 		// Weak reference release
@@ -316,7 +319,7 @@ public class ConstantsBeanImplTest {
 
 			Assert.assertSame(
 				constantsBean2,
-				constantsBeanImpl.toConstantsBean(constantsClass2));
+				constantsBeanImpl.getConstantsBean(constantsClass2));
 
 			if (constantsBeans.size() == 1) {
 				break;

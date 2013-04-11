@@ -14,23 +14,11 @@
 
 package com.liferay.portal.kernel.bean;
 
-import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
-
 /**
  * @author Shuyang Zhou
  */
-public class ConstantsBeanUtil {
+public interface ConstantsBeanFactory {
 
-	public static Object toConstantsBean(Class<?> constantsClass) {
-		return _constantsBean.toConstantsBean(constantsClass);
-	}
-
-	public void setConstantsBean(ConstantsBean constantsBean) {
-		PortalRuntimePermission.checkSetBeanProperty(getClass());
-
-		_constantsBean = constantsBean;
-	}
-
-	private static ConstantsBean _constantsBean;
+	public Object getConstantsBean(Class<?> constantsClass);
 
 }
