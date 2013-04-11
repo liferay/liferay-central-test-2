@@ -464,20 +464,7 @@ public class SeleniumBuilderContext {
 
 			commandElementNames.add(commandName);
 
-			boolean isFunctionName = false;
-
-			for (String functionName : _functionNames) {
-				String upperCaseCommandName = StringUtil.upperCaseFirstLetter(
-					commandName);
-
-				if (upperCaseCommandName.equals(functionName)) {
-					isFunctionName = true;
-
-					break;
-				}
-			}
-
-			if (!isFunctionName) {
+			if (!_isFunctionName(commandName)) {
 				_seleniumBuilderFileUtil.throwValidationException(
 					2001, actionFileName, commandElement, commandName);
 			}
@@ -628,6 +615,16 @@ public class SeleniumBuilderContext {
 	private String _getSimpleClassName(String fileName, String classSuffix) {
 		return _seleniumBuilderFileUtil.getSimpleClassName(
 			fileName, classSuffix);
+	}
+
+	private boolean _isFunctionName(String name) {
+		for (String functionName : _functionNames) {
+			if (functionName.equals(StringUtil.upperCaseFirstLetter(name))) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private String _normalizeFileName(String fileName) {
