@@ -524,7 +524,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 		throws Exception {
 
 		List<DLFileEntry> dlFileEntries =
-			DLFileEntryLocalServiceUtil.getFileEntriesByStructureIds(
+			DLFileEntryLocalServiceUtil.getDDMStructureFileEntries(
 				ArrayUtil.toLongArray(ddmStructureIds));
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
