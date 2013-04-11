@@ -37,7 +37,7 @@ public class FIFOUtil {
 
 			if (result != 0) {
 				throw new Exception(
-					"Failed to create FIFO with command \"mkfifo\", " +
+					"Unable to create FIFO with command \"mkfifo\", " +
 						"external process returned " + result);
 			}
 		}
@@ -49,12 +49,12 @@ public class FIFOUtil {
 	}
 
 	public static boolean isFIFOSupported() {
-		return _isFIFOSupported;
+		return _fifoSupported;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FIFOUtil.class);
 
-	private static boolean _isFIFOSupported;
+	private static boolean _fifoSupported;
 
 	static {
 		try {
@@ -73,14 +73,14 @@ public class FIFOUtil {
 				}
 			}
 
-			_isFIFOSupported = true;
+			_fifoSupported = true;
 		}
 		catch (Throwable t) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("FIFO support poking failed.", t);
+				_log.warn("Unable to detect FIFO support", t);
 			}
 
-			_isFIFOSupported = false;
+			_fifoSupported = false;
 		}
 	}
 

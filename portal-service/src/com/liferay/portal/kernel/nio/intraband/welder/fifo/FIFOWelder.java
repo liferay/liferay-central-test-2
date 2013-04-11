@@ -36,7 +36,7 @@ public class FIFOWelder extends BaseWelder {
 	public FIFOWelder() throws IOException {
 		String tempFolderName = System.getProperty("java.io.tmpdir");
 
-		long id = ID_COUNTER.getAndIncrement();
+		long id = idCounter.getAndIncrement();
 
 		inputFIFOFile = new File(tempFolderName, "FIFO-INPUT-" + id);
 		outputFIFOFile = new File(tempFolderName, "FIFO-OUTPUT-" + id);
@@ -56,41 +56,45 @@ public class FIFOWelder extends BaseWelder {
 		writeFileChannel.close();
 	}
 
-	// Warning! Don't try to abstract a common method for weldClient() and
-	// weldServer(), the files open order matters, reverse them will cause
-	// deadlock.
-
+	@Override
 	protected RegistrationReference weldClient(IntraBand intraBand)
 		throws IOException {
 
+		// Write, then read
+
 		FileOutputStream fileOutputStream = new FileOutputStream(inputFIFOFile);
+
+		writeFileChannel = fileOutputStream.getChannel();
+
 		FileInputStream fileInputStream = new AutoRemoveFileInputStream(
 			outputFIFOFile);
 
-		writeFileChannel = fileOutputStream.getChannel();
 		readFileChannel = fileInputStream.getChannel();
 
 		return intraBand.registerChannel(readFileChannel, writeFileChannel);
 	}
 
+	@Override
 	protected RegistrationReference weldServer(IntraBand intraBand)
 		throws IOException {
 
+		// Read, then write
+
 		FileInputStream fileInputStream = new AutoRemoveFileInputStream(
 			inputFIFOFile);
+
+		readFileChannel = fileInputStream.getChannel();
+
 		FileOutputStream fileOutputStream = new FileOutputStream(
 			outputFIFOFile);
 
-		readFileChannel = fileInputStream.getChannel();
 		writeFileChannel = fileOutputStream.getChannel();
 
 		return intraBand.registerChannel(readFileChannel, writeFileChannel);
 	}
 
-	protected static final AtomicLong ID_COUNTER = new AtomicLong(
+	protected static final AtomicLong idCounter = new AtomicLong(
 		System.currentTimeMillis());
-
-	// Input/Output is relative to server, it is contrary on client side
 
 	protected final File inputFIFOFile;
 	protected final File outputFIFOFile;
