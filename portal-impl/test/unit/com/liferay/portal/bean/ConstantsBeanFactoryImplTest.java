@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.test.AdviseWith;
 import com.liferay.portal.test.AspectJMockingNewClassLoaderJUnitTestRunner;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
 import java.lang.ref.Reference;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -30,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
@@ -56,7 +55,7 @@ public class ConstantsBeanFactoryImplTest {
 	@Test
 	public void testCreateConstantsBean() {
 
-		// Force failure
+		// Exception on create
 
 		ReflectionUtilAdvice.setThrowException(true);
 
@@ -69,7 +68,7 @@ public class ConstantsBeanFactoryImplTest {
 			Throwable throwable = re.getCause();
 
 			Assert.assertEquals(Exception.class, throwable.getClass());
-			Assert.assertEquals("Force failure", throwable.getMessage());
+			Assert.assertEquals("Forced Exception", throwable.getMessage());
 		}
 
 		// Normal create
@@ -90,16 +89,18 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(9, methods.length);
 
-		Arrays.sort(methods, new Comparator<Method>() {
+		Arrays.sort(
+			methods,
+			new Comparator<Method>() {
 
-			public int compare(Method method1, Method method2) {
-				String name1 = method1.getName();
-				String name2 = method2.getName();
+				public int compare(Method method1, Method method2) {
+					String name1 = method1.getName();
+					String name2 = method2.getName();
 
-				return name1.compareTo(name2);
-			}
+					return name1.compareTo(name2);
+				}
 
-		});
+			});
 
 		// public boolean getBOOLEAN_VALUE();
 
@@ -137,7 +138,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getDOUBLE_VALUE();
+		// public double getDOUBLE_VALUE();
 
 		method = methods[3];
 
@@ -149,7 +150,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getFLOAT_VALUE();
+		// public float getFLOAT_VALUE();
 
 		method = methods[4];
 
@@ -161,7 +162,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getINT_VALUE();
+		// public int getINT_VALUE();
 
 		method = methods[5];
 
@@ -173,7 +174,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getLONG_VALUE();
+		// public long getLONG_VALUE();
 
 		method = methods[6];
 
@@ -185,7 +186,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getOBJECT_VALUE();
+		// public Object getOBJECT_VALUE();
 
 		method = methods[7];
 
@@ -197,7 +198,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// public char getSHORT_VALUE();
+		// public short getSHORT_VALUE();
 
 		method = methods[8];
 
@@ -209,7 +210,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		Assert.assertEquals(0, parameterTypes.length);
 
-		// Ensure using same cached generated class
+		// Ensure reuse of cached generated class
 
 		Object testConstantsBean2 =
 			ConstantsBeanFactoryImpl.createConstantsBean(Constants.class);
@@ -351,7 +352,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		public Object NON_STATIC_VALUE = new Object();
 
-		static Object NON_PUBLIC_VALUE = new Object();
+		protected static Object NON_PUBLIC_VALUE = new Object();
 
 	}
 
@@ -370,7 +371,7 @@ public class ConstantsBeanFactoryImplTest {
 			throws Throwable {
 
 			if (_throwException) {
-				throw new Exception("Force failure");
+				throw new Exception("Forced Exception");
 			}
 
 			return proceedingJoinPoint.proceed();

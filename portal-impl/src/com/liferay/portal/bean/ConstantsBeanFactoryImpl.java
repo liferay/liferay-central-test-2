@@ -170,6 +170,7 @@ public class ConstantsBeanFactoryImpl implements ConstantsBeanFactory {
 				}
 
 				methodVisitor.visitInsn(returnOpcode);
+
 				methodVisitor.visitMaxs(fieldType.getSize(), 1);
 				methodVisitor.visitEnd();
 			}
@@ -191,7 +192,6 @@ public class ConstantsBeanFactoryImpl implements ConstantsBeanFactory {
 			constantsBeans =
 				new ConcurrentHashMap
 					<EqualityWeakReference<Class<?>>, Reference<?>>();
-
 	protected static ReferenceQueue<Class<?>> constantsClassReferenceQueue =
 		new ReferenceQueue<Class<?>>();
 
