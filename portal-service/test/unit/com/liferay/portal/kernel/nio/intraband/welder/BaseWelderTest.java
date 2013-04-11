@@ -54,7 +54,8 @@ public class BaseWelderTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"Can not destroy a welder at state CREATED", ise.getMessage());
+				"Unable to destroy a welder with state CREATED",
+				ise.getMessage());
 		}
 
 		RegistrationReference registrationReference =
@@ -106,7 +107,7 @@ public class BaseWelderTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"Can not weld a welder at state DESTROYED", ise.getMessage());
+				"Unable to weld a welder with state DESTROYED", ise.getMessage());
 		}
 
 		testWelder.state = BaseWelder.State.CREATED;
