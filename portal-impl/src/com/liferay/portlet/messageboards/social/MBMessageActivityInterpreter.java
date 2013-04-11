@@ -74,8 +74,7 @@ public class MBMessageActivityInterpreter
 
 	@Override
 	protected String getPath(
-			SocialActivity activity, ServiceContext serviceContext)
-		throws Exception {
+		SocialActivity activity, ServiceContext serviceContext) {
 
 		return "/message_boards/find_message?messageId=" +
 			activity.getClassPK();
@@ -83,9 +82,8 @@ public class MBMessageActivityInterpreter
 
 	@Override
 	protected Object[] getTitleArguments(
-			String groupName, SocialActivity activity, String link,
-			String title, ServiceContext serviceContext)
-		throws Exception {
+		String groupName, SocialActivity activity, String link, String title,
+		ServiceContext serviceContext) {
 
 		String userName = getUserName(activity.getUserId(), serviceContext);
 		String receiverUserName = StringPool.BLANK;
@@ -96,7 +94,8 @@ public class MBMessageActivityInterpreter
 		}
 
 		return new Object[] {
-			groupName, userName, receiverUserName, wrapLink(link, title)};
+			groupName, userName, receiverUserName, wrapLink(link, title)
+		};
 	}
 
 	@Override

@@ -91,9 +91,8 @@ public class MBThreadActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	@Override
 	protected Object[] getTitleArguments(
-			String groupName, SocialActivity activity, String link,
-			String title, ServiceContext serviceContext)
-		throws Exception {
+		String groupName, SocialActivity activity, String link, String title,
+		ServiceContext serviceContext) {
 
 		String userName = getUserName(activity.getUserId(), serviceContext);
 		String receiverUserName = StringPool.BLANK;
@@ -104,12 +103,13 @@ public class MBThreadActivityInterpreter extends BaseSocialActivityInterpreter {
 		}
 
 		return new Object[] {
-			groupName, userName, receiverUserName, wrapLink(link, title)};
+			groupName, userName, receiverUserName, wrapLink(link, title)
+		};
 	}
 
 	@Override
-	protected String getTitlePattern(String groupName, SocialActivity activity)
-		throws Exception {
+	protected String getTitlePattern(
+		String groupName, SocialActivity activity) {
 
 		int activityType = activity.getType();
 

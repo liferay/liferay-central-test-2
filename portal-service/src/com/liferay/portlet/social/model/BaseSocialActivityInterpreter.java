@@ -133,13 +133,13 @@ public abstract class BaseSocialActivityInterpreter
 			return null;
 		}
 
+		String link = getLink(activity, serviceContext);
+
 		String title = getTitle(activity, serviceContext);
 
 		if (Validator.isNull(title)) {
 			return null;
 		}
-
-		String link = getLink(activity, serviceContext);
 
 		String body = getBody(activity, serviceContext);
 
@@ -313,13 +313,8 @@ public abstract class BaseSocialActivityInterpreter
 			return path;
 		}
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(serviceContext.getPortalURL());
-		sb.append(serviceContext.getPathMain());
-		sb.append(path);
-
-		return sb.toString();
+		return serviceContext.getPortalURL() + serviceContext.getPathMain() +
+			path;
 	}
 
 	protected String getPath(
