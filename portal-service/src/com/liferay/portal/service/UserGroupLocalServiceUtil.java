@@ -774,8 +774,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static com.liferay.portal.model.UserGroup fetchUserGroup(
 		long companyId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchUserGroup(companyId, name);
 	}
 

@@ -763,8 +763,7 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService,
 
 	public com.liferay.portal.model.UserGroup fetchUserGroup(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupLocalService.fetchUserGroup(companyId, name);
 	}
 
