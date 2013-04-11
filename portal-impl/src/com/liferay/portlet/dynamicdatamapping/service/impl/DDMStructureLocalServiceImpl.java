@@ -1389,16 +1389,16 @@ public class DDMStructureLocalServiceImpl
 			structure.getClassName());
 
 		if (indexer != null) {
-			List<Long> structureIds = getChildStructureIds(
+			List<Long> ddmStructureIds = getChildrenStructureIds(
 				structure.getGroupId(), structure.getStructureId());
 
-			indexer.reindexStructures(structureIds);
+			indexer.reindexDDMStructures(ddmStructureIds);
 		}
 
 		return structure;
 	}
 
-	protected void getChildStructureIds(
+	protected void getChildrenStructureIds(
 			List<Long> structureIds, long groupId, long structureId)
 		throws PortalException, SystemException {
 
@@ -1408,18 +1408,18 @@ public class DDMStructureLocalServiceImpl
 		for (DDMStructure structure : structures) {
 			structureIds.add(structure.getStructureId());
 
-			getChildStructureIds(
+			getChildrenStructureIds(
 				structureIds, structure.getGroupId(),
 				structure.getParentStructureId());
 		}
 	}
 
-	protected List<Long> getChildStructureIds(long groupId, long structureId)
+	protected List<Long> getChildrenStructureIds(long groupId, long structureId)
 		throws PortalException, SystemException {
 
 		List<Long> structureIds = new ArrayList<Long>();
 
-		getChildStructureIds(structureIds, groupId, structureId);
+		getChildrenStructureIds(structureIds, groupId, structureId);
 
 		structureIds.add(0, structureId);
 

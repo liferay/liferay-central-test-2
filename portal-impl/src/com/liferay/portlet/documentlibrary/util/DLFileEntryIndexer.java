@@ -520,12 +520,12 @@ public class DLFileEntryIndexer extends BaseIndexer {
 	}
 
 	@Override
-	protected void doReindexStructures(List<Long> structureIds)
+	protected void doReindexDDMStructures(List<Long> ddmStructureIds)
 		throws Exception {
 
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getFileEntriesByStructureIds(
-				ArrayUtil.toLongArray(structureIds));
+				ArrayUtil.toLongArray(ddmStructureIds));
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			doReindex(dlFileEntry);

@@ -434,7 +434,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
-	public void reindexStructures(List<Long> structureIds)
+	public void reindexDDMStructures(List<Long> ddmStructureIds)
 		throws SearchException {
 
 		try {
@@ -442,7 +442,7 @@ public abstract class BaseIndexer implements Indexer {
 				return;
 			}
 
-			doReindexStructures(structureIds);
+			doReindexDDMStructures(ddmStructureIds);
 		}
 		catch (SearchException se) {
 			throw se;
@@ -1249,7 +1249,7 @@ public abstract class BaseIndexer implements Indexer {
 
 	protected abstract void doReindex(String[] ids) throws Exception;
 
-	protected void doReindexStructures(List<Long> structureIds)
+	protected void doReindexDDMStructures(List<Long> structureIds)
 		throws Exception {
 	}
 

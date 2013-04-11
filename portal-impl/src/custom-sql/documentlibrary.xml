@@ -57,6 +57,23 @@
 				(DLFileEntry.custom2ImageId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByDDMStructureIds">
+		<![CDATA[
+			SELECT
+				{DLFileEntry.*}
+			FROM
+				DLFileEntry
+			WHERE
+				(DLFileEntry.fileEntryTypeId IN (
+					SELECT
+						DLFileEntryTypes_DDMStructures.fileEntryTypeId
+					FROM
+						DLFileEntryTypes_DDMStructures
+					WHERE
+						[$DDM_STRUCTURE_ID$]
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByMisversioned">
 		<![CDATA[
 			SELECT
@@ -106,23 +123,6 @@
 				(CAST_TEXT(DLFileVersion.extraSettings) != '')
 			ORDER BY
 				DLFileEntry.modifiedDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByStructureIds">
-		<![CDATA[
-			SELECT
-				{DLFileEntry.*}
-			FROM
-				DLFileEntry
-			WHERE
-				(DLFileEntry.fileEntryTypeId IN (
-					SELECT
-						DLFileEntryTypes_DDMStructures.fileEntryTypeId
-					FROM
-						DLFileEntryTypes_DDMStructures
-					WHERE
-						[$STRUCTURE_ID$]
-				))
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByOrphanedFileEntries">

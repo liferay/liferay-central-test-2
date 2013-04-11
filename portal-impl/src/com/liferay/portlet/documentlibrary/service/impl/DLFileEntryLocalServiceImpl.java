@@ -922,6 +922,13 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.fetchByG_F_N(groupId, folderId, name);
 	}
 
+	public List<DLFileEntry> getDDMStructureFileEntries(long[] ddmStructureIds)
+		throws SystemException {
+
+		return dlFileEntryFinder.findByDDMStructureIds(
+			ddmStructureIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
 	public List<DLFileEntry> getExtraSettingsFileEntries(int start, int end)
 		throws SystemException {
 
@@ -1034,13 +1041,6 @@ public class DLFileEntryLocalServiceImpl
 		throws SystemException {
 
 		return dlFileEntryPersistence.findByF_N(folderId, name);
-	}
-
-	public List<DLFileEntry> getFileEntriesByStructureIds(long[] structureIds)
-		throws SystemException {
-
-		return dlFileEntryFinder.findByStructureIds(
-			structureIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public int getFileEntriesCount() throws SystemException {

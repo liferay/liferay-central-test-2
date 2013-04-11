@@ -89,7 +89,7 @@ public interface Indexer {
 
 	public void reindex(String[] ids) throws SearchException;
 
-	public void reindexStructures(List<Long> structureIds)
+	public void reindexDDMStructures(List<Long> ddmStructureIds)
 		throws SearchException;
 
 	public Hits search(SearchContext searchContext) throws SearchException;

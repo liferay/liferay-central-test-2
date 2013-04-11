@@ -459,22 +459,23 @@ public class JournalArticleIndexer extends BaseIndexer {
 	}
 
 	@Override
-	protected void doReindexStructures(List<Long> structureIds)
+	protected void doReindexDDMStructures(List<Long> ddmStructureIds)
 		throws Exception {
 
-		String[] structureKeys = new String[structureIds.size()];
+		String[] ddmStructureKeys = new String[ddmStructureIds.size()];
 
-		for (int i = 0; i < structureIds.size(); i++) {
-			long structureId = structureIds.get(i);
+		for (int i = 0; i < ddmStructureIds.size(); i++) {
+			long structureId = ddmStructureIds.get(i);
 
-			DDMStructure structure =
+			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.getDDMStructure(structureId);
 
-			structureKeys[i] = structure.getStructureKey();
+			ddmStructureKeys[i] = ddmStructure.getStructureKey();
 		}
 
 		List<JournalArticle> articles =
-			JournalArticleLocalServiceUtil.getStructureArticles(structureKeys);
+			JournalArticleLocalServiceUtil.getStructureArticles(
+				ddmStructureKeys);
 
 		for (JournalArticle article : articles) {
 			doReindex(article);

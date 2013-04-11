@@ -59,8 +59,8 @@ public class DLFileEntryFinderImpl
 	public static final String FIND_BY_EXTRA_SETTINGS =
 		DLFileEntryFinder.class.getName() + ".findByExtraSettings";
 
-	public static final String FIND_BY_STRUCTURE_IDS =
-		DLFileEntryFinder.class.getName() + ".findByStructureIds";
+	public static final String FIND_BY_DDM_STRUCTURE_IDS =
+		DLFileEntryFinder.class.getName() + ".findByDDMStructureIds";
 
 	public static final String FIND_BY_MISVERSIONED =
 		DLFileEntryFinder.class.getName() + ".findByMisversioned";
@@ -190,6 +190,44 @@ public class DLFileEntryFinderImpl
 			"No DLFileEntry exists with the imageId " + imageId);
 	}
 
+	public List<DLFileEntry> findByDDMStructureIds(
+			long[] ddmStructureIds, int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_DDM_STRUCTURE_IDS);
+
+			if ((ddmStructureIds == null) || (ddmStructureIds.length <= 0)) {
+				return Collections.emptyList();
+			}
+
+			sql = StringUtil.replace(
+				sql, "[$DDM_STRUCTURE_ID$]",
+				getDDMStructureIds(ddmStructureIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(ddmStructureIds);
+
+			return (List<DLFileEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<DLFileEntry> findByExtraSettings(int start, int end)
 		throws SystemException {
 
@@ -203,50 +241,6 @@ public class DLFileEntryFinderImpl
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity(DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.class);
-
-			return (List<DLFileEntry>)QueryUtil.list(
-				q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<DLFileEntry> findByStructureIds(
-			long[] structureIds, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_STRUCTURE_IDS);
-
-			if ((structureIds == null) || (structureIds.length <= 0)) {
-				return Collections.EMPTY_LIST;
-			}
-
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(
-				getStructureIds(
-					structureIds, "DLFileEntryTypes_DDMStructures"));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			sql = StringUtil.replace(sql, "[$STRUCTURE_ID$]", sb.toString());
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity(DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(structureIds);
 
 			return (List<DLFileEntry>)QueryUtil.list(
 				q, getDialect(), start, end);
@@ -469,6 +463,25 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	protected String getDDMStructureIds(long[] ddmStructureIds) {
+		StringBundler sb = new StringBundler(
+			(ddmStructureIds.length * 2 - 1) + 2);
+
+		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		for (int i = 0; i < ddmStructureIds.length; i++) {
+			sb.append("DLFileEntryTypes_DDMStructures.structureId = ?");
+
+			if ((i + 1) != ddmStructureIds.length) {
+				sb.append(WHERE_OR);
+			}
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
+	}
+
 	protected String getFileEntriesSQL(
 		String id, long groupId, List<Long> folderIds, String[] mimeTypes,
 		QueryDefinition queryDefinition, boolean inlineSQLHelper) {
@@ -548,25 +561,6 @@ public class DLFileEntryFinderImpl
 			sb.append(".mimeType = ?");
 
 			if ((i + 1) != mimeTypes.length) {
-				sb.append(WHERE_OR);
-			}
-		}
-
-		return sb.toString();
-	}
-
-	protected String getStructureIds(long[] structureIds, String tableName) {
-		if (structureIds.length == 0) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(structureIds.length * 2 - 1);
-
-		for (int i = 0; i < structureIds.length; i++) {
-			sb.append(tableName);
-			sb.append(".structureId = ?");
-
-			if ((i + 1) != structureIds.length) {
 				sb.append(WHERE_OR);
 			}
 		}
