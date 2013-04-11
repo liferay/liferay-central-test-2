@@ -39,10 +39,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * An {@link ExecutorService} based implementation for {@link IntraBand}. Works
- * in blocking way with any {@link GatheringByteChannel}/
- * {@link ScatteringByteChannel}.
- *
  * @author Shuyang Zhou
  */
 public class ExecutorIntraBand extends BaseIntraBand {
@@ -54,6 +50,7 @@ public class ExecutorIntraBand extends BaseIntraBand {
 	@Override
 	public void close() throws InterruptedException, IOException {
 		executorService.shutdownNow();
+
 		executorService.awaitTermination(defaultTimeout, TimeUnit.MILLISECONDS);
 
 		super.close();
@@ -64,14 +61,14 @@ public class ExecutorIntraBand extends BaseIntraBand {
 			throw new NullPointerException("Channel is null");
 		}
 
-		if (!(channel instanceof ScatteringByteChannel)) {
-			throw new IllegalArgumentException(
-				"Channel is not of type ScatteringByteChannel");
-		}
-
 		if (!(channel instanceof GatheringByteChannel)) {
 			throw new IllegalArgumentException(
 				"Channel is not of type GatheringByteChannel");
+		}
+
+		if (!(channel instanceof ScatteringByteChannel)) {
+			throw new IllegalArgumentException(
+				"Channel is not of type ScatteringByteChannel");
 		}
 
 		if (channel instanceof SelectableChannel) {
@@ -80,7 +77,7 @@ public class ExecutorIntraBand extends BaseIntraBand {
 			if (!selectableChannel.isBlocking()) {
 				throw new IllegalArgumentException(
 					"Channel is of type SelectableChannel and " +
-						"configured in non-blocking mode");
+						"configured in nonblocking mode");
 			}
 		}
 
@@ -94,12 +91,12 @@ public class ExecutorIntraBand extends BaseIntraBand {
 		ScatteringByteChannel scatteringByteChannel,
 		GatheringByteChannel gatheringByteChannel) {
 
-		if (scatteringByteChannel == null) {
-			throw new NullPointerException("Scattering byte channel is null");
-		}
-
 		if (gatheringByteChannel == null) {
 			throw new NullPointerException("Gathering byte channel is null");
+		}
+
+		if (scatteringByteChannel == null) {
+			throw new NullPointerException("Scattering byte channel is null");
 		}
 
 		if (scatteringByteChannel instanceof SelectableChannel) {
@@ -109,7 +106,7 @@ public class ExecutorIntraBand extends BaseIntraBand {
 			if (!selectableChannel.isBlocking()) {
 				throw new IllegalArgumentException(
 					"Scattering byte channel is of type SelectableChannel " +
-						"and configured in non-blocking mode");
+						"and configured in nonblocking mode");
 			}
 		}
 
@@ -120,7 +117,7 @@ public class ExecutorIntraBand extends BaseIntraBand {
 			if (!selectableChannel.isBlocking()) {
 				throw new IllegalArgumentException(
 					"Gathering byte channel is of type SelectableChannel and " +
-						"configured in non-blocking mode");
+						"configured in nonblocking mode");
 			}
 		}
 
@@ -144,8 +141,8 @@ public class ExecutorIntraBand extends BaseIntraBand {
 			gatheringByteChannel, channelContext);
 
 		// Submit the polling jobs, no dispatch will happen until latches are
-		// open. This is ensuring ChannelContext._registrationReference thread
-		// safe publication
+		// open. This ensures a thread safe publication of
+		// ChannelContext#_registrationReference.
 
 		Future<Void> readFuture = executorService.submit(readingCallable);
 		Future<Void> writeFuture = executorService.submit(writingCallable);
@@ -247,11 +244,11 @@ public class ExecutorIntraBand extends BaseIntraBand {
 						if (_gatheringByteChannel.isOpen()) {
 
 							// Still open but no longer writable, typical
-							// behavior of non-blocking channel
+							// behavior of nonblocking channel
 
 							throw new IllegalStateException(
 								_gatheringByteChannel +
-									" behaved in non-blocking way.");
+									" behaved in nonblocking way.");
 						}
 						else {
 							break;
