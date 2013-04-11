@@ -60,11 +60,15 @@ public class ExecutorIntraBandTest {
 			};
 
 		Datagram datagram1 = Datagram.createRequestDatagram(_type, _data);
-		Datagram datagram2 = Datagram.createRequestDatagram(_type, _data);
-		Datagram datagram3 = Datagram.createRequestDatagram(_type, _data);
 
 		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram1);
+
+		Datagram datagram2 = Datagram.createRequestDatagram(_type, _data);
+
 		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram2);
+
+		Datagram datagram3 = Datagram.createRequestDatagram(_type, _data);
+
 		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram3);
 
 		Assert.assertEquals(3, sendingQueue.size());
