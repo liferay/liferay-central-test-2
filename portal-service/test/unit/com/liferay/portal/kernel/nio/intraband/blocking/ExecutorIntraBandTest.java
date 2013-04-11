@@ -517,7 +517,7 @@ public class ExecutorIntraBandTest {
 		sourceChannel.close();
 		sinkChannel.close();
 
-		// Async close on blocking write
+		// Asynchronous close on blocking write
 
 		pipe = Pipe.open();
 
@@ -557,7 +557,7 @@ public class ExecutorIntraBandTest {
 		sourceChannel.close();
 		sinkChannel.close();
 
-		// Change to non-blocking at runtime
+		// Change to nonblocking at runtime
 
 		pipe = Pipe.open();
 
