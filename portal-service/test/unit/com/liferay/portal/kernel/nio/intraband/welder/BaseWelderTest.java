@@ -107,7 +107,8 @@ public class BaseWelderTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"Unable to weld a welder with state DESTROYED", ise.getMessage());
+				"Unable to weld a welder with state DESTROYED",
+				ise.getMessage());
 		}
 
 		testWelder.state = BaseWelder.State.CREATED;
