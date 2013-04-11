@@ -392,7 +392,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup fetchUserGroup(long companyId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupPersistence.fetchByC_N(companyId, name);
 	}
