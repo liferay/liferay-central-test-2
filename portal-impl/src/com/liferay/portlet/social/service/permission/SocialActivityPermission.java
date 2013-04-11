@@ -15,7 +15,6 @@
 package com.liferay.portlet.social.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
@@ -27,7 +26,7 @@ public class SocialActivityPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, groupId, actionId)) {
 			throw new PrincipalException();
@@ -35,8 +34,7 @@ public class SocialActivityPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, long groupId, String actionId) {
 
 		if (permissionChecker.isGroupAdmin(groupId) ||
 			permissionChecker.isGroupOwner(groupId)) {
