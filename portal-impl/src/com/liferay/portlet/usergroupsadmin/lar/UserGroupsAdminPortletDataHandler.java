@@ -21,6 +21,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
  */
 public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 
-	public static final String NAMESPACE = "usergroup";
+	public static final String NAMESPACE = "user_groups_admin";
 
 }

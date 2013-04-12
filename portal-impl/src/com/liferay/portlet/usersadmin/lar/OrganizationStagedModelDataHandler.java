@@ -45,26 +45,24 @@ public class OrganizationStagedModelDataHandler
 			PortletDataContext portletDataContext, Organization organization)
 		throws Exception {
 
-		Queue<Organization> organizationQueue = new LinkedList<Organization>();
+		Queue<Organization> organizations = new LinkedList<Organization>();
 
-		organizationQueue.add(organization);
+		organizations.add(organization);
 
-		while (!organizationQueue.isEmpty()) {
-			Organization exportingOrganization = organizationQueue.remove();
+		while (!organizations.isEmpty()) {
+			Organization exportedOrganization = organizations.remove();
 
 			Element organizationElement =
 				portletDataContext.getExportDataStagedModelElement(
-					exportingOrganization);
+					exportedOrganization);
 
 			portletDataContext.addClassedModel(
 				organizationElement,
-				ExportImportPathUtil.getModelPath(exportingOrganization),
-				exportingOrganization, UsersAdminPortletDataHandler.NAMESPACE);
+				ExportImportPathUtil.getModelPath(exportedOrganization),
+				exportedOrganization, UsersAdminPortletDataHandler.NAMESPACE);
 
-			organizationQueue.addAll(
-				exportingOrganization.getSuborganizations());
+			organizations.addAll(exportedOrganization.getSuborganizations());
 		}
-
 	}
 
 	@Override
@@ -73,8 +71,6 @@ public class OrganizationStagedModelDataHandler
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(organization.getUserUuid());
-
-		long companyId = portletDataContext.getCompanyId();
 
 		Map<Long, Long> organizationIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
@@ -101,7 +97,6 @@ public class OrganizationStagedModelDataHandler
 			parentOrganizationId = MapUtil.getLong(
 				organizationIds, organization.getParentOrganizationId(),
 				organization.getParentOrganizationId());
-
 		}
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
@@ -109,12 +104,12 @@ public class OrganizationStagedModelDataHandler
 
 		Organization existingOrganization = OrganizationLocalServiceUtil
 			.fetchOrganizationByUuidAndCompanyId(
-				organization.getUuid(), companyId);
+				organization.getUuid(), portletDataContext.getCompanyId());
 
 		if (existingOrganization == null) {
 			existingOrganization =
 				OrganizationLocalServiceUtil.fetchOrganization(
-					companyId, organization.getName());
+					portletDataContext.getCompanyId(), organization.getName());
 		}
 
 		Organization importedOrganization = null;
@@ -132,7 +127,8 @@ public class OrganizationStagedModelDataHandler
 		else {
 			importedOrganization =
 				OrganizationLocalServiceUtil.updateOrganization(
-					companyId, existingOrganization.getOrganizationId(),
+					portletDataContext.getCompanyId(),
+					existingOrganization.getOrganizationId(),
 					parentOrganizationId, organization.getName(),
 					organization.getType(), organization.getRegionId(),
 					organization.getCountryId(), organization.getStatusId(),

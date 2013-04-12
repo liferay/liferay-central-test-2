@@ -21,6 +21,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
  */
 public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 
-	public static final String NAMESPACE = "role";
+	public static final String NAMESPACE = "roles_admin";
 
 }
