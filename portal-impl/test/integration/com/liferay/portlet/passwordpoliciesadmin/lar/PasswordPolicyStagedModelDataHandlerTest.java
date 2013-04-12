@@ -47,8 +47,8 @@ public class PasswordPolicyStagedModelDataHandlerTest
 
 	@Override
 	protected StagedModel addStagedModel(
-			Group group, Map<String,
-			List<StagedModel>> dependentStagedModelsMap)
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(

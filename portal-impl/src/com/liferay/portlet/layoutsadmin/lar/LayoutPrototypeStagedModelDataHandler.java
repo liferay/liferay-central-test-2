@@ -44,8 +44,8 @@ public class LayoutPrototypeStagedModelDataHandler
 
 		portletDataContext.addClassedModel(
 			layoutPrototypeElement,
-			ExportImportPathUtil.getModelPath(layoutPrototype),
-			layoutPrototype, LayoutPrototypePortletDataHandler.NAMESPACE);
+			ExportImportPathUtil.getModelPath(layoutPrototype), layoutPrototype,
+			LayoutPrototypePortletDataHandler.NAMESPACE);
 	}
 
 	@Override
@@ -53,8 +53,6 @@ public class LayoutPrototypeStagedModelDataHandler
 			PortletDataContext portletDataContext,
 			LayoutPrototype layoutPrototype)
 		throws Exception {
-
-		long companyId = portletDataContext.getCompanyId();
 
 		long userId = portletDataContext.getUserId(
 			layoutPrototype.getUserUuid());
@@ -68,14 +66,16 @@ public class LayoutPrototypeStagedModelDataHandler
 			LayoutPrototype existingLayoutPrototype =
 				LayoutPrototypeLocalServiceUtil.
 					fetchLayoutPrototypeByUuidAndCompanyId(
-						layoutPrototype.getUuid(), companyId);
+						layoutPrototype.getUuid(),
+						portletDataContext.getCompanyId());
 
 			if (existingLayoutPrototype == null) {
 				serviceContext.setUuid(layoutPrototype.getUuid());
 
 				importedLayoutPrototype =
 					LayoutPrototypeLocalServiceUtil.addLayoutPrototype(
-						userId, companyId, layoutPrototype.getNameMap(),
+						userId, portletDataContext.getCompanyId(),
+						layoutPrototype.getNameMap(),
 						layoutPrototype.getDescription(),
 						layoutPrototype.isActive(), serviceContext);
 			}
@@ -91,7 +91,8 @@ public class LayoutPrototypeStagedModelDataHandler
 		else {
 			importedLayoutPrototype =
 				LayoutPrototypeLocalServiceUtil.addLayoutPrototype(
-					userId, companyId, layoutPrototype.getNameMap(),
+					userId, portletDataContext.getCompanyId(),
+					layoutPrototype.getNameMap(),
 					layoutPrototype.getDescription(),
 					layoutPrototype.isActive(), serviceContext);
 		}

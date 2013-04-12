@@ -39,12 +39,13 @@ public class PasswordPolicyStagedModelDataHandler
 			PasswordPolicy passwordPolicy)
 		throws Exception {
 
-		Element policyElement =
+		Element passwordPolicyElement =
 			portletDataContext.getExportDataStagedModelElement(passwordPolicy);
 
 		portletDataContext.addClassedModel(
-			policyElement, ExportImportPathUtil.getModelPath(passwordPolicy),
-			passwordPolicy, PasswordPolicyPortletDataHandler.NAMESPACE);
+			passwordPolicyElement,
+			ExportImportPathUtil.getModelPath(passwordPolicy), passwordPolicy,
+			PasswordPolicyPortletDataHandler.NAMESPACE);
 	}
 
 	@Override
@@ -52,8 +53,6 @@ public class PasswordPolicyStagedModelDataHandler
 			PortletDataContext portletDataContext,
 			PasswordPolicy passwordPolicy)
 		throws Exception {
-
-		long companyId = portletDataContext.getCompanyId();
 
 		long userId = portletDataContext.getUserId(
 			passwordPolicy.getUserUuid());
@@ -64,12 +63,14 @@ public class PasswordPolicyStagedModelDataHandler
 		PasswordPolicy existingPasswordPolicy =
 			PasswordPolicyLocalServiceUtil.
 				fetchPasswordPolicyByUuidAndCompanyId(
-					passwordPolicy.getUuid(), companyId);
+					passwordPolicy.getUuid(),
+					portletDataContext.getCompanyId());
 
 		if (existingPasswordPolicy == null) {
 			existingPasswordPolicy =
 				PasswordPolicyLocalServiceUtil.fetchPasswordPolicy(
-					companyId, passwordPolicy.getName());
+					portletDataContext.getCompanyId(),
+					passwordPolicy.getName());
 		}
 
 		PasswordPolicy importedPasswordPolicy = null;

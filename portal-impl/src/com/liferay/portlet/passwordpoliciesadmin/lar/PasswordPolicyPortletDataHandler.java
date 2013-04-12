@@ -21,6 +21,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
  */
 public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 
-	public static final String NAMESPACE = "password-policy";
+	public static final String NAMESPACE = "password_policies_admin";
 
 }

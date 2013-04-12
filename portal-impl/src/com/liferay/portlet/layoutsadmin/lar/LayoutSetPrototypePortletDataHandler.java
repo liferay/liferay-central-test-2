@@ -22,6 +22,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 public class LayoutSetPrototypePortletDataHandler
 	extends BasePortletDataHandler {
 
-	public static final String NAMESPACE = "layout-set-prototype";
+	public static final String NAMESPACE = "layout_set_prototypes";
 
 }

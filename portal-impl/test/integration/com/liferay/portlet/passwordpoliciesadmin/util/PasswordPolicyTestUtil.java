@@ -28,27 +28,21 @@ public class PasswordPolicyTestUtil {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		String regex = "(?=.{4})(?:[a-zA-Z0-9]*)";
-
-		PasswordPolicy passwordPolicy =
-			PasswordPolicyLocalServiceUtil.addPasswordPolicy(
-				serviceContext.getUserId(), ServiceTestUtil.randomBoolean(),
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-				ServiceTestUtil.randomBoolean(),
-				ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomLong(),
-				ServiceTestUtil.randomBoolean(),
-				ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.nextInt(), regex,
-				ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomLong(),
-				ServiceTestUtil.randomLong(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-				ServiceTestUtil.randomLong(), ServiceTestUtil.randomLong(),
-				ServiceTestUtil.randomLong(), serviceContext);
-
-		return passwordPolicy;
+		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
+			serviceContext.getUserId(), ServiceTestUtil.randomBoolean(),
+			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomBoolean(),
+			ServiceTestUtil.randomLong(), ServiceTestUtil.randomBoolean(),
+			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.nextInt(), "(?=.{4})(?:[a-zA-Z0-9]*)",
+			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomLong(),
+			ServiceTestUtil.randomLong(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
+			ServiceTestUtil.randomLong(), ServiceTestUtil.randomLong(),
+			ServiceTestUtil.randomLong(), serviceContext);
 	}
 
 }

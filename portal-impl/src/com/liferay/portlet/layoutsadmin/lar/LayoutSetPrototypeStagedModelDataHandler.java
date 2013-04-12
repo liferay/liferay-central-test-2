@@ -57,15 +57,13 @@ public class LayoutSetPrototypeStagedModelDataHandler
 			LayoutSetPrototype layoutSetPrototype)
 		throws Exception {
 
-		long companyId = portletDataContext.getCompanyId();
-
 		long userId = portletDataContext.getUserId(
 			layoutSetPrototype.getUserUuid());
 
 		UnicodeProperties settingsProperties =
 			layoutSetPrototype.getSettingsProperties();
 
-		Boolean layoutsUpdateable = GetterUtil.getBoolean(
+		boolean layoutsUpdateable = GetterUtil.getBoolean(
 			settingsProperties.getProperty("layoutsUpdateable"), true);
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
@@ -78,14 +76,16 @@ public class LayoutSetPrototypeStagedModelDataHandler
 			LayoutSetPrototype existingLayoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.
 					fetchLayoutSetPrototypeByUuidAndCompanyId(
-						layoutSetPrototype.getUuid(), companyId);
+						layoutSetPrototype.getUuid(),
+						portletDataContext.getCompanyId());
 
 			if (existingLayoutSetPrototype == null) {
 				serviceContext.setUuid(layoutSetPrototype.getUuid());
 
 				importedLayoutSetPrototype =
 					LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
-						userId, companyId, layoutSetPrototype.getNameMap(),
+						userId, portletDataContext.getCompanyId(),
+						layoutSetPrototype.getNameMap(),
 						layoutSetPrototype.getDescription(),
 						layoutSetPrototype.isActive(), layoutsUpdateable,
 						serviceContext);
@@ -103,7 +103,8 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		else {
 			importedLayoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
-					userId, companyId, layoutSetPrototype.getNameMap(),
+					userId, portletDataContext.getCompanyId(),
+					layoutSetPrototype.getNameMap(),
 					layoutSetPrototype.getDescription(),
 					layoutSetPrototype.isActive(), layoutsUpdateable,
 					serviceContext);
