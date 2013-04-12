@@ -579,7 +579,6 @@ public class SeleniumBuilderContext {
 					functionFileName, conditionAndExecuteElement);
 			}
 		}
-
 	}
 
 	public void validateMacroElements(String macroName) {
