@@ -33,6 +33,7 @@ public class RoleStagedModelDataHandler
 		return Role.class.getName();
 	}
 
+	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, Role role)
 		throws Exception {

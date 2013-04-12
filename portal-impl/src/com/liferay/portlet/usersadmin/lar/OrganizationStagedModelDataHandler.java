@@ -40,15 +40,16 @@ public class OrganizationStagedModelDataHandler
 		return Organization.class.getName();
 	}
 
+	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, Organization organization)
 		throws Exception {
 
 		Queue<Organization> organizationQueue = new LinkedList<Organization>();
+
 		organizationQueue.add(organization);
 
 		while (!organizationQueue.isEmpty()) {
-
 			Organization exportingOrganization = organizationQueue.remove();
 
 			Element organizationElement =
