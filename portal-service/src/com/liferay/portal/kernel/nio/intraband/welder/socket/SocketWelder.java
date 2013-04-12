@@ -41,19 +41,18 @@ public class SocketWelder extends BaseWelder {
 
 	public SocketWelder() throws IOException {
 
-		// These assignments have to stay in the constructor because we need to
-		// differentiate between a constructor created SocketWelder and a
-		// deserialization created SocketWelder. Only the constructor created
-		// welder needs an initialization from Configuration. The
-		// deserialization created welder has the configuration from the
-		// original SocketWelder.
+		// Assignments have to stay in the constructor because we need to
+		// differentiate between a constructor created class and a
+		// deserialization class. Only the constructor created class needs to
+		// assign values. The deserialization created class gets its values from
+		// the original class.
 
 		bufferSize = Configuration.bufferSize;
 		keepAlive = Configuration.keepAlive;
 		reuseAddress = Configuration.reuseAddress;
-		solinger = Configuration.solinger;
-		sotimeout = Configuration.sotimeout;
-		tcpNodeplay = Configuration.tcpNodeplay;
+		soLinger = Configuration.soLinger;
+		soTimeout = Configuration.soTimeout;
+		tcpNoDelay = Configuration.tcpNoDelay;
 
 		serverSocketChannel = SocketUtil.createServerSocketChannel(
 			InetAddressUtil.getLoopbackInetAddress(),
@@ -104,24 +103,10 @@ public class SocketWelder extends BaseWelder {
 	protected final int serverPort;
 	protected final transient ServerSocketChannel serverSocketChannel;
 	protected transient SocketChannel socketChannel;
-	protected final int solinger;
-	protected final int sotimeout;
-	protected final boolean tcpNodeplay;
+	protected final int soLinger;
+	protected final int soTimeout;
+	protected final boolean tcpNoDelay;
 
-	/**
-	 * This inner static class is used for lazy properties loading.
-	 *
-	 * On MPI side, this class loads exactly once to fetch up all required
-	 * properties, so all following created SockerWelders won't have to reload
-	 * them.
-	 *
-	 * On SPI side, this class never load (unless this SPI launches its own SPI,
-	 * which turns itself to MPI). The properties values are directly injected
-	 * into the SockerWelders by deserilaization. This is crucial, because
-	 * deserilaization of SockerWelders happens before Portal initialization, if
-	 * these configuration properties are held as SockerWelder's static field,
-	 * the invocation to PropsUtil will fail the deserilaization.
-	 */
 	protected static class Configuration {
 
 		protected static final int bufferSize = GetterUtil.getInteger(
@@ -136,14 +121,14 @@ public class SocketWelder extends BaseWelder {
 		protected static final int serverStartPort = GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_SERVER_START_PORT));
 
-		protected static final int solinger = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_SOLINGER));
+		protected static final int soLinger = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_SO_LINGER));
 
-		protected static final int sotimeout = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_SOTIMEOUT));
+		protected static final int soTimeout = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_SO_TIMEOUT));
 
-		protected static final boolean tcpNodeplay = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_TCP_NODELAY));
+		protected static final boolean tcpNoDelay = GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.INTRABAND_WELDER_SOCKET_TCP_NO_DELAY));
 
 	}
 
@@ -155,7 +140,7 @@ public class SocketWelder extends BaseWelder {
 
 			serverSocket.setReceiveBufferSize(bufferSize);
 			serverSocket.setReuseAddress(reuseAddress);
-			serverSocket.setSoTimeout(sotimeout);
+			serverSocket.setSoTimeout(soTimeout);
 		}
 
 	}
@@ -166,15 +151,15 @@ public class SocketWelder extends BaseWelder {
 		socket.setReuseAddress(reuseAddress);
 		socket.setSendBufferSize(bufferSize);
 
-		if (solinger <= 0) {
-			socket.setSoLinger(false, solinger);
+		if (soLinger <= 0) {
+			socket.setSoLinger(false, soLinger);
 		}
 		else {
-			socket.setSoLinger(true, solinger);
+			socket.setSoLinger(true, soLinger);
 		}
 
-		socket.setSoTimeout(sotimeout);
-		socket.setTcpNoDelay(tcpNodeplay);
+		socket.setSoTimeout(soTimeout);
+		socket.setTcpNoDelay(tcpNoDelay);
 	}
 
 }
