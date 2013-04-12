@@ -330,7 +330,6 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 	private static final String[] _AVAILABLE_LOCALES = new String[0];
 
 	private AssetRendererFactory _assetRendererFactory;
-
 	private int _assetRendererType = AssetRendererFactory.TYPE_LATEST_APPROVED;
 
 }
