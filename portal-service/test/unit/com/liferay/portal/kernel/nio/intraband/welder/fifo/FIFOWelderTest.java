@@ -55,14 +55,10 @@ public class FIFOWelderTest {
 				file.delete();
 			}
 		}
-
 	}
 
 	@Test
 	public void testAutoRemoveFileInputStream() throws Exception {
-
-		// Normal delete
-
 		File tempFile = new File("tempFile");
 
 		Assert.assertTrue(tempFile.createNewFile());
@@ -99,8 +95,6 @@ public class FIFOWelderTest {
 		Assert.assertFalse(tempFile.exists());
 		Assert.assertEquals(1, checkDeleteCount.get());
 
-		// Close after manual delete
-
 		checkDeleteCount.set(0);
 
 		Assert.assertTrue(tempFile.createNewFile());
@@ -124,9 +118,6 @@ public class FIFOWelderTest {
 
 	@Test
 	public void testConstructor() throws IOException {
-
-		// Normal create
-
 		AtomicLong idCounter = FIFOWelder.idCounter;
 
 		idCounter.set(0);
@@ -174,9 +165,6 @@ public class FIFOWelderTest {
 
 	@Test
 	public void testWeld() throws Exception {
-
-		// Normal weld
-
 		final FIFOWelder serverFifoWelder = new FIFOWelder();
 		final FIFOWelder clientFIFOWelder = WelderTestUtil.transform(
 			serverFifoWelder);
@@ -191,7 +179,9 @@ public class FIFOWelderTest {
 					}
 				});
 
-		new Thread(serverWeldingTask).start();
+		Thread serverWeldingThread = new Thread(serverWeldingTask);
+
+		serverWeldingThread.start();
 
 		FutureTask<MockRegistrationReference> clientWeldingTask =
 			new FutureTask<MockRegistrationReference>(
@@ -203,7 +193,9 @@ public class FIFOWelderTest {
 					}
 				});
 
-		new Thread(clientWeldingTask).start();
+		Thread clientWeldingThread = new Thread(clientWeldingTask);
+
+		clientWeldingThread.start();
 
 		MockRegistrationReference serverMockRegistrationReference =
 			serverWeldingTask.get();
@@ -220,8 +212,6 @@ public class FIFOWelderTest {
 
 		serverFifoWelder.destroy();
 		clientFIFOWelder.destroy();
-
-		// Weld on used Welder
 
 		try {
 			serverFifoWelder.weld(new MockIntraBand());

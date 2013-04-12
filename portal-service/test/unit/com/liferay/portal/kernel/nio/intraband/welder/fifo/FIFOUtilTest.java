@@ -58,157 +58,167 @@ public class FIFOUtilTest {
 
 	@Test
 	public void testCreateFIFOWithBrokenFile() throws Exception {
-		if (_shouldTest()) {
-			try {
-				FIFOUtil.createFIFO(
-					new File("") {
+		if (!_shouldTest()) {
+			return;
+		}
 
-						@Override
-						public String getAbsolutePath() {
-							return null;
-						}
+		try {
+			FIFOUtil.createFIFO(
+				new File("") {
 
-					});
+					@Override
+					public String getAbsolutePath() {
+						return null;
+					}
 
-				Assert.fail();
-			}
-			catch (NullPointerException npe) {
-			}
+				});
+
+			Assert.fail();
+		}
+		catch (NullPointerException npe) {
 		}
 	}
 
 	@Test
-	public void testNormal() {
-		if (_shouldTest()) {
-			Assert.assertTrue(FIFOUtil.isFIFOSupported());
+	public void testIsFIFOSupported() {
+		if (!_shouldTest()) {
+			return;
 		}
+
+		Assert.assertTrue(FIFOUtil.isFIFOSupported());
 	}
 
 	@Test
 	public void testPhantomDeleteOnDetecting() {
-		if (_shouldTest()) {
-			final AtomicInteger checkDeleteCount = new AtomicInteger();
-			final AtomicBoolean checkFlag = new AtomicBoolean();
+		if (!_shouldTest()) {
+			return;
+		}
 
-			SecurityManager securityManager = new SecurityManager() {
+		final AtomicInteger checkDeleteCount = new AtomicInteger();
+		final AtomicBoolean checkFlag = new AtomicBoolean();
 
-				@Override
-				public void checkDelete(String file) {
-					if (!checkFlag.get() && file.contains("temp-fifo-")) {
+		SecurityManager securityManager = new SecurityManager() {
+
+			@Override
+			public void checkDelete(String file) {
+				if (!checkFlag.get() && file.contains("temp-fifo-")) {
+					checkFlag.set(true);
+
+					if (checkDeleteCount.getAndIncrement() == 0) {
+						Assert.assertTrue(new File(file).delete());
+					}
+
+					checkFlag.set(false);
+				}
+			}
+
+			@Override
+			public void checkRead(String file) {
+				if (!checkFlag.get() && file.contains("temp-fifo-")) {
+
+					try {
 						checkFlag.set(true);
 
-						if (checkDeleteCount.getAndIncrement() == 0) {
-							Assert.assertTrue(new File(file).delete());
-						}
+						new File(file).createNewFile();
 
 						checkFlag.set(false);
 					}
-				}
-
-				@Override
-				public void checkRead(String file) {
-					if (!checkFlag.get() && file.contains("temp-fifo-")) {
-
-						try {
-							checkFlag.set(true);
-
-							new File(file).createNewFile();
-
-							checkFlag.set(false);
-						}
-						catch (IOException ioe) {
-							Assert.fail(ioe.getMessage());
-						}
+					catch (IOException ioe) {
+						Assert.fail(ioe.getMessage());
 					}
 				}
-
-				@Override
-				public void checkPermission(Permission permission) {
-				}
-
-			};
-
-			System.setSecurityManager(securityManager);
-
-			try {
-				Assert.assertTrue(FIFOUtil.isFIFOSupported());
-			}
-			finally {
-				System.setSecurityManager(null);
 			}
 
-			Assert.assertEquals(2, checkDeleteCount.get());
+			@Override
+			public void checkPermission(Permission permission) {
+			}
+
+		};
+
+		System.setSecurityManager(securityManager);
+
+		try {
+			Assert.assertTrue(FIFOUtil.isFIFOSupported());
 		}
+		finally {
+			System.setSecurityManager(null);
+		}
+
+		Assert.assertEquals(2, checkDeleteCount.get());
 	}
 
 	@Test
 	public void testReadOnlyTempFolderWithLog() {
-		if (_shouldTest()) {
-			List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
-				FIFOUtil.class.getName(), Level.WARNING);
-
-			File tempFolder = new File("tempFolder");
-
-			tempFolder.mkdirs();
-
-			tempFolder.setReadOnly();
-
-			String oldTempFolder = System.getProperty("java.io.tmpdir");
-
-			System.setProperty("java.io.tmpdir", tempFolder.getAbsolutePath());
-
-			try {
-				Assert.assertFalse(FIFOUtil.isFIFOSupported());
-			}
-			finally {
-				System.setProperty("java.io.tmpdir", oldTempFolder);
-			}
-
-			Assert.assertEquals(1, logRecords.size());
-
-			LogRecord logRecord = logRecords.get(0);
-
-			Assert.assertEquals(
-				"Unable to detect FIFO support", logRecord.getMessage());
-
-			Throwable throwable = logRecord.getThrown();
-
-			Assert.assertEquals(Exception.class, throwable.getClass());
-
-			String message = throwable.getMessage();
-
-			Assert.assertTrue(
-				message.startsWith(
-					"Unable to create FIFO with command \"mkfifo\", external " +
-						"process returned "));
+		if (!_shouldTest()) {
+			return;
 		}
+
+		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
+			FIFOUtil.class.getName(), Level.WARNING);
+
+		File tempFolder = new File("tempFolder");
+
+		tempFolder.mkdirs();
+
+		tempFolder.setReadOnly();
+
+		String oldTempFolder = System.getProperty("java.io.tmpdir");
+
+		System.setProperty("java.io.tmpdir", tempFolder.getAbsolutePath());
+
+		try {
+			Assert.assertFalse(FIFOUtil.isFIFOSupported());
+		}
+		finally {
+			System.setProperty("java.io.tmpdir", oldTempFolder);
+		}
+
+		Assert.assertEquals(1, logRecords.size());
+
+		LogRecord logRecord = logRecords.get(0);
+
+		Assert.assertEquals(
+			"Unable to detect FIFO support", logRecord.getMessage());
+
+		Throwable throwable = logRecord.getThrown();
+
+		Assert.assertEquals(Exception.class, throwable.getClass());
+
+		String message = throwable.getMessage();
+
+		Assert.assertTrue(
+			message.startsWith(
+				"Unable to create FIFO with command \"mkfifo\", external " +
+					"process returned "));
 	}
 
 	@Test
 	public void testReadOnlyTempFolderWithoutLog() {
-		if (_shouldTest()) {
-			List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
-				FIFOUtil.class.getName(), Level.OFF);
-
-			File tempFolder = new File("tempFolder");
-
-			tempFolder.mkdirs();
-
-			tempFolder.setReadOnly();
-
-			String oldTempFolder = System.getProperty("java.io.tmpdir");
-
-			System.setProperty("java.io.tmpdir", tempFolder.getAbsolutePath());
-
-			try {
-				Assert.assertFalse(FIFOUtil.isFIFOSupported());
-			}
-			finally {
-				System.setProperty("java.io.tmpdir", oldTempFolder);
-			}
-
-			Assert.assertTrue(logRecords.isEmpty());
+		if (!_shouldTest()) {
+			return;
 		}
+
+		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
+			FIFOUtil.class.getName(), Level.OFF);
+
+		File tempFolder = new File("tempFolder");
+
+		tempFolder.mkdirs();
+
+		tempFolder.setReadOnly();
+
+		String oldTempFolder = System.getProperty("java.io.tmpdir");
+
+		System.setProperty("java.io.tmpdir", tempFolder.getAbsolutePath());
+
+		try {
+			Assert.assertFalse(FIFOUtil.isFIFOSupported());
+		}
+		finally {
+			System.setProperty("java.io.tmpdir", oldTempFolder);
+		}
+
+		Assert.assertTrue(logRecords.isEmpty());
 	}
 
 	private static boolean _shouldTest() {
@@ -217,9 +227,8 @@ public class FIFOUtilTest {
 
 			return false;
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FIFOUtilTest.class);

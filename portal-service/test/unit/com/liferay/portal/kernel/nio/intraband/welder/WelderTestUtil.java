@@ -60,6 +60,10 @@ public class WelderTestUtil {
 				}
 			});
 
+		Thread writeThread = new Thread(writeFutureTask);
+
+		writeThread.start();
+
 		FutureTask<byte[]> readFutureTask = new FutureTask<byte[]>(
 			new Callable<byte[]>() {
 
@@ -74,8 +78,9 @@ public class WelderTestUtil {
 				}
 			});
 
-		new Thread(writeFutureTask).start();
-		new Thread(readFutureTask).start();
+		Thread readThread = new Thread(readFutureTask);
+
+		readThread.start();
 
 		writeFutureTask.get();
 
