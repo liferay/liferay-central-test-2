@@ -42,10 +42,10 @@ public class SocketWelder extends BaseWelder {
 	public SocketWelder() throws IOException {
 
 		// Assignments have to stay in the constructor because we need to
-		// differentiate between a constructor created class and a
-		// deserialization class. Only the constructor created class needs to
-		// assign values. The deserialization created class gets its values from
-		// the original class.
+		// differentiate between a constructor created object and a
+		// deserialization created object. Only the constructor created object
+		// needs to assign values. The deserialization created object gets its
+		// values from the original object.
 
 		bufferSize = Configuration.bufferSize;
 		keepAlive = Configuration.keepAlive;
