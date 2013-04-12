@@ -104,10 +104,11 @@ public class WorkflowHandlerRegistryUtil {
 				companyId, groupId, className, classPK);
 
 		if (workflowInstanceLink != null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Workflow already started for: " + className + " " +
-						classPK + " from group " + groupId);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Workflow already started for class " + className +
+						" with primary key " + classPK + " in group " +
+							groupId);
 			}
 
 			return;
