@@ -186,7 +186,7 @@ for (long defaultTeamId : defaultTeamIds) {
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 </portlet:renderURL>
 
-<aui:script use="liferay-search-container, escape">
+<aui:script use="liferay-search-container,escape">
 	A.one('#<portlet:namespace />selectSiteRoleLink').on(
 		'click',
 		function(event) {
@@ -246,8 +246,6 @@ for (long defaultTeamId : defaultTeamIds) {
 					uri: '<%= selectTeamURL.toString() %>'
 				},
 				function(event) {
-					var A = AUI();
-
 					searchContainer = Liferay.SearchContainer.get('<portlet:namespace />' + event.teamsearchcontainername + 'SearchContainer');
 
 					var rowColumns = [];

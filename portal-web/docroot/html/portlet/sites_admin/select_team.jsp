@@ -39,7 +39,6 @@ String eventName = ParamUtil.getString(request, "eventName", "selectTeam");
 	<liferay-ui:search-container
 		searchContainer="<%= new TeamSearch(renderRequest, portletURL) %>"
 	>
-
 		<liferay-ui:search-form
 			page="/html/portlet/sites_admin/team_search.jsp"
 		/>
@@ -64,12 +63,12 @@ String eventName = ParamUtil.getString(request, "eventName", "selectTeam");
 			rowVar="row"
 		>
 			<liferay-ui:search-container-column-text
-				name="num-of-folders"
+				name="name"
 				value="<%= curTeam.getName() %>"
 			/>
 
 			<liferay-ui:search-container-column-text
-				name="num-of-folders"
+				name="description"
 				value="<%= curTeam.getDescription() %>"
 			/>
 
