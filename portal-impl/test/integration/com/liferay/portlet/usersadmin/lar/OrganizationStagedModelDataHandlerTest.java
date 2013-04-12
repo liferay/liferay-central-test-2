@@ -71,27 +71,25 @@ public class OrganizationStagedModelDataHandlerTest
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			Organization.class.getSimpleName());
 
-		Organization subOrganization = (Organization)dependentStagedModels.get(
-			0);
+		Organization organization = (Organization)dependentStagedModels.get(0);
 
-		Organization organization = OrganizationTestUtil.addOrganization(
+		Organization parentOrganization = OrganizationTestUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 			ServiceTestUtil.randomString(), false);
 
-		subOrganization.setParentOrganizationId(
-			organization.getOrganizationId());
+		organization.setParentOrganizationId(
+			parentOrganization.getOrganizationId());
 
-		OrganizationTestUtil.updateOrganization(subOrganization);
+		OrganizationLocalServiceUtil.updateOrganization(organization);
 
-		return organization;
+		return parentOrganization;
 	}
 
 	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
-			return OrganizationLocalServiceUtil
-				.fetchOrganizationByUuidAndCompanyId(
-					uuid, group.getCompanyId());
+			return OrganizationLocalServiceUtil.
+				fetchOrganizationByUuidAndCompanyId(uuid, group.getCompanyId());
 		}
 		catch (Exception e) {
 			return null;
@@ -116,11 +114,9 @@ public class OrganizationStagedModelDataHandlerTest
 
 		Organization organization = (Organization)dependentStagedModels.get(0);
 
-		Organization importedSubOrganization =
+		Assert.assertNotNull(
 			OrganizationLocalServiceUtil.fetchOrganizationByUuidAndCompanyId(
-			organization.getUuid(), group.getCompanyId());
-
-		Assert.assertNotNull(importedSubOrganization);
+				organization.getUuid(), group.getCompanyId()));
 	}
 
 }
