@@ -28,8 +28,6 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 public class UserGroupStagedModelDataHandler
 	extends BaseStagedModelDataHandler<UserGroup> {
 
-	public static final String NAMESPACE = "usergroup";
-
 	@Override
 	public String getClassName() {
 		return UserGroup.class.getName();
@@ -55,18 +53,16 @@ public class UserGroupStagedModelDataHandler
 
 		long userId = portletDataContext.getUserId(userGroup.getUserUuid());
 
-		long companyId = portletDataContext.getCompanyId();
-
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			userGroup, UserGroupsAdminPortletDataHandler.NAMESPACE);
 
 		UserGroup existingUserGroup =
 			UserGroupLocalServiceUtil.fetchUserGroupByUuidAndCompanyId(
-				userGroup.getUuid(), companyId);
+				userGroup.getUuid(), portletDataContext.getCompanyId());
 
 		if (existingUserGroup == null) {
 			existingUserGroup = UserGroupLocalServiceUtil.fetchUserGroup(
-				companyId, userGroup.getName());
+				portletDataContext.getCompanyId(), userGroup.getName());
 		}
 
 		UserGroup importedUserGroup = null;
@@ -75,14 +71,14 @@ public class UserGroupStagedModelDataHandler
 			serviceContext.setUuid(userGroup.getUuid());
 
 			importedUserGroup = UserGroupLocalServiceUtil.addUserGroup(
-				userId, companyId, userGroup.getName(),
+				userId, portletDataContext.getCompanyId(), userGroup.getName(),
 				userGroup.getDescription(), serviceContext);
 		}
 		else {
 			importedUserGroup = UserGroupLocalServiceUtil.updateUserGroup(
-				companyId, existingUserGroup.getUserGroupId(),
-				userGroup.getName(), userGroup.getDescription(),
-				serviceContext);
+				portletDataContext.getCompanyId(),
+				existingUserGroup.getUserGroupId(), userGroup.getName(),
+				userGroup.getDescription(), serviceContext);
 		}
 
 		portletDataContext.importClassedModel(
