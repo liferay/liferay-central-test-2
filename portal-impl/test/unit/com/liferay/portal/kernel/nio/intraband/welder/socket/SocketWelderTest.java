@@ -118,9 +118,6 @@ public class SocketWelderTest {
 	@AdviseWith(adviceClasses = {PropsUtilAdvice.class})
 	@Test
 	public void testWeldSolingerOn() throws Exception {
-
-		// Normal weld
-
 		final SocketWelder serverSocketWelder = new SocketWelder();
 		final SocketWelder clientSocketWelder = WelderTestUtil.transform(
 			serverSocketWelder);
@@ -168,8 +165,6 @@ public class SocketWelderTest {
 
 		serverSocketWelder.destroy();
 		clientSocketWelder.destroy();
-
-		// Weld on used Welder
 
 		try {
 			serverSocketWelder.weld(new MockIntraBand());
