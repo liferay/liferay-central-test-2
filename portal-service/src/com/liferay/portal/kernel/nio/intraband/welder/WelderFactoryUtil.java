@@ -40,15 +40,15 @@ public class WelderFactoryUtil {
 	}
 
 	public static Class<? extends Welder> getWelderClass() {
-		if (Validator.isNotNull(_WELDER_IMPL_CLASS)) {
+		if (Validator.isNotNull(INTRABAND_WELDER_IMPL)) {
 			try {
 				return (Class<? extends Welder>)Class.forName(
-					_WELDER_IMPL_CLASS);
+					INTRABAND_WELDER_IMPL);
 			}
 			catch (ClassNotFoundException cnfe) {
 				throw new RuntimeException(
-					"Unable to load Welder class with name " +
-						_WELDER_IMPL_CLASS, cnfe);
+					"Unable to load class with name " + INTRABAND_WELDER_IMPL,
+					cnfe);
 			}
 		}
 		else {
@@ -61,7 +61,7 @@ public class WelderFactoryUtil {
 		}
 	}
 
-	private static final String _WELDER_IMPL_CLASS = GetterUtil.getString(
-		System.getProperty(PropsKeys.INTRABAND_WELDER_IMPL_CLASS));
+	private static final String INTRABAND_WELDER_IMPL = GetterUtil.getString(
+		System.getProperty(PropsKeys.INTRABAND_WELDER_IMPL));
 
 }
