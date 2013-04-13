@@ -140,7 +140,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 						value="<%= folder.getName() %>"
 					/>
 
-					<c:if test="<%= showEntryAction %>">
+					<c:if test='<%= ArrayUtil.contains(entryColumns, "action") %>'>
 						<liferay-ui:search-container-column-jsp
 							path="/html/portlet/bookmarks/entry_action.jsp"
 						/>
@@ -186,7 +186,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 						value='<%= (parentFolder != null) ? parentFolder.getName() : LanguageUtil.get(locale, "home") %>'
 					/>
 
-					<c:if test="<%= showFolderAction %>">
+					<c:if test='<%= ArrayUtil.contains(folderColumns, "action") %>'>
 						<liferay-ui:search-container-column-jsp
 							path="/html/portlet/bookmarks/folder_action.jsp"
 						/>
