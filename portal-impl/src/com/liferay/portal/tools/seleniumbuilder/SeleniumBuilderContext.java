@@ -513,13 +513,13 @@ public class SeleniumBuilderContext {
 	}
 
 	public void validateFunctionElements(String functionName) {
-		String functionFileName = getFunctionFileName(functionName);
-
 		Element rootElement = getFunctionRootElement(functionName);
 
 		if (rootElement == null) {
 			return;
 		}
+
+		String functionFileName = getFunctionFileName(functionName);
 
 		List<Element> commandElements =
 			_seleniumBuilderFileUtil.getAllChildElements(
@@ -565,13 +565,13 @@ public class SeleniumBuilderContext {
 	}
 
 	public void validateMacroElements(String macroName) {
-		String macroFileName = getMacroFileName(macroName);
-
 		Element rootElement = getMacroRootElement(macroName);
 
 		if (rootElement == null) {
 			return;
 		}
+
+		String macroFileName = getMacroFileName(macroName);
 
 		List<Element> commandElements =
 			_seleniumBuilderFileUtil.getAllChildElements(
@@ -615,13 +615,13 @@ public class SeleniumBuilderContext {
 	}
 
 	public void validateTestCaseElements(String testCaseName) {
-		String testCaseFileName = getTestCaseFileName(testCaseName);
-
 		Element rootElement = getTestCaseRootElement(testCaseName);
 
 		if (rootElement == null) {
 			return;
 		}
+
+		String testCaseFileName = getTestCaseFileName(testCaseName);
 
 		List<Element> commandElements =
 			_seleniumBuilderFileUtil.getAllChildElements(
