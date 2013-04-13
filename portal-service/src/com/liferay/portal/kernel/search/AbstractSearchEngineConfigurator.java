@@ -200,10 +200,6 @@ public abstract class AbstractSearchEngineConfigurator {
 
 			parallelDestination.setName(searchWriterDestinationName);
 
-			parallelDestination.setWorkersCoreSize(1);
-
-			parallelDestination.setWorkersMaxSize(1);
-
 			parallelDestination.open();
 
 			searchWriterDestination = parallelDestination;
