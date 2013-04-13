@@ -109,8 +109,8 @@ public class WelderFactoryUtilTest {
 	@AdviseWith(adviceClasses = {FIFOUtilAdvice.class, OSDetectorAdvice.class})
 	@Test
 	public void testGetWelderClassOnNonWindowsWithFIFO() {
-		OSDetectorAdvice._windows = false;
 		FIFOUtilAdvice._fifoSupported = true;
+		OSDetectorAdvice._windows = false;
 
 		Assert.assertSame(FIFOWelder.class, WelderFactoryUtil.getWelderClass());
 	}
@@ -118,8 +118,8 @@ public class WelderFactoryUtilTest {
 	@AdviseWith(adviceClasses = {FIFOUtilAdvice.class, OSDetectorAdvice.class})
 	@Test
 	public void testGetWelderClassOnNonWindowsWithoutFIFO() {
-		OSDetectorAdvice._windows = false;
 		FIFOUtilAdvice._fifoSupported = false;
+		OSDetectorAdvice._windows = false;
 
 		Assert.assertSame(
 			SocketWelder.class, WelderFactoryUtil.getWelderClass());
