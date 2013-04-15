@@ -103,7 +103,6 @@ portletURL.setParameter("keywords", keywords);
 
 		<liferay-ui:search-container-results
 			results="<%= SearchResultUtil.getSearchResults(hits, locale, hitURL) %>"
-
 		/>
 
 		<liferay-ui:search-container-row
