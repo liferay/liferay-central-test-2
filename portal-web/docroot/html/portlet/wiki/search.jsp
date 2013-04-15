@@ -88,17 +88,17 @@ portletURL.setParameter("keywords", keywords);
 
 		Hits hits = indexer.search(searchContext);
 
-		PortletURL hitURL = renderResponse.createRenderURL();
-
-		hitURL.setParameter("struts_action", "/wiki/view");
-		hitURL.setParameter("redirect", currentURL);
-
 		if (searchContainer.recalculateCur(hits.getLength())) {
 			searchContext.setEnd(searchContainer.getEnd());
 			searchContext.setStart(searchContainer.getStart());
 
 			hits = indexer.search(searchContext);
 		}
+
+		PortletURL hitURL = renderResponse.createRenderURL();
+
+		hitURL.setParameter("struts_action", "/wiki/view");
+		hitURL.setParameter("redirect", currentURL);
 		%>
 
 		<liferay-ui:search-container-results
