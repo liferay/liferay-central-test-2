@@ -104,31 +104,6 @@ public class SocialActivityInterpreterLocalServiceImpl
 		return _activityInterpreters;
 	}
 
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException {
-
-		List<SocialActivityInterpreter> activityInterpreters =
-			_activityInterpreters.get(
-				PropsValues.SOCIAL_ACTIVITY_SETS_SELECTOR);
-
-		if (activityInterpreters != null) {
-			SocialActivity activity =
-				socialActivityPersistence.findByPrimaryKey(activityId);
-
-			String className = PortalUtil.getClassName(
-				activity.getClassNameId());
-
-			for (int i = 0; i < activityInterpreters.size(); i++) {
-				SocialActivityInterpreterImpl activityInterpreter =
-					(SocialActivityInterpreterImpl)activityInterpreters.get(i);
-
-				if (activityInterpreter.hasClassName(className)) {
-					activityInterpreter.updateActivitySet(activityId);
-				}
-			}
-		}
-	}
-
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #interpret(String,
 	 *             SocialActivity, ServiceContext)}
@@ -280,6 +255,31 @@ public class SocialActivityInterpreterLocalServiceImpl
 		}
 
 		return null;
+	}
+
+	public void updateActivitySet(long activityId)
+		throws PortalException, SystemException {
+
+		List<SocialActivityInterpreter> activityInterpreters =
+			_activityInterpreters.get(
+				PropsValues.SOCIAL_ACTIVITY_SETS_SELECTOR);
+
+		if (activityInterpreters != null) {
+			SocialActivity activity =
+				socialActivityPersistence.findByPrimaryKey(activityId);
+
+			String className = PortalUtil.getClassName(
+				activity.getClassNameId());
+
+			for (int i = 0; i < activityInterpreters.size(); i++) {
+				SocialActivityInterpreterImpl activityInterpreter =
+					(SocialActivityInterpreterImpl)activityInterpreters.get(i);
+
+				if (activityInterpreter.hasClassName(className)) {
+					activityInterpreter.updateActivitySet(activityId);
+				}
+			}
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

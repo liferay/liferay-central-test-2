@@ -52,27 +52,6 @@ import javax.portlet.PortletURL;
 public abstract class BaseSocialActivityInterpreter
 	implements SocialActivityInterpreter {
 
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException {
-
-		SocialActivity activity = SocialActivityUtil.fetchByPrimaryKey(
-			activityId);
-
-		if ((activity == null) || (activity.getActivitySetId() > 0)) {
-			return;
-		}
-
-		long activitySetId = getActivitySetId(activityId);
-
-		if (activitySetId > 0) {
-			SocialActivitySetLocalServiceUtil.incrementActivityCount(
-				activitySetId, activityId);
-		}
-		else {
-			SocialActivitySetLocalServiceUtil.addActivitySet(activityId);
-		}
-	}
-
 	public String getSelector() {
 		return StringPool.BLANK;
 	}
@@ -109,6 +88,27 @@ public abstract class BaseSocialActivityInterpreter
 		}
 
 		return null;
+	}
+
+	public void updateActivitySet(long activityId)
+		throws PortalException, SystemException {
+
+		SocialActivity activity = SocialActivityUtil.fetchByPrimaryKey(
+			activityId);
+
+		if ((activity == null) || (activity.getActivitySetId() > 0)) {
+			return;
+		}
+
+		long activitySetId = getActivitySetId(activityId);
+
+		if (activitySetId > 0) {
+			SocialActivitySetLocalServiceUtil.incrementActivityCount(
+				activitySetId, activityId);
+		}
+		else {
+			SocialActivitySetLocalServiceUtil.addActivitySet(activityId);
+		}
 	}
 
 	protected String buildLink(String link, String text) {

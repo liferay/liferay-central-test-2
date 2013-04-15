@@ -23,9 +23,6 @@ import com.liferay.portal.service.ServiceContext;
  */
 public interface SocialActivityInterpreter {
 
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException;
-
 	public String[] getClassNames();
 
 	public String getSelector();
@@ -35,5 +32,8 @@ public interface SocialActivityInterpreter {
 
 	public SocialActivityFeedEntry interpret(
 		SocialActivitySet activitySet, ServiceContext serviceContext);
+
+	public void updateActivitySet(long activityId)
+		throws PortalException, SystemException;
 
 }

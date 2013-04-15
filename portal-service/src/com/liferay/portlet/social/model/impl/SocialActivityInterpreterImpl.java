@@ -44,12 +44,6 @@ public class SocialActivityInterpreterImpl
 		}
 	}
 
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException {
-
-		_activityInterpreter.updateActivitySet(activityId);
-	}
-
 	public String[] getClassNames() {
 		return _activityInterpreter.getClassNames();
 	}
@@ -81,6 +75,12 @@ public class SocialActivityInterpreterImpl
 		SocialActivitySet activitySet, ServiceContext serviceContext) {
 
 		return _activityInterpreter.interpret(activitySet, serviceContext);
+	}
+
+	public void updateActivitySet(long activityId)
+		throws PortalException, SystemException {
+
+		_activityInterpreter.updateActivitySet(activityId);
 	}
 
 	private SocialActivityInterpreter _activityInterpreter;
