@@ -104,10 +104,8 @@ public class SocialActivityInterpreterLocalServiceImpl
 		return _activityInterpreters;
 	}
 
-	public long getActivitySetId(long activityId)
+	public void updateActivitySet(long activityId)
 		throws PortalException, SystemException {
-
-		long activitySetId = 0;
 
 		List<SocialActivityInterpreter> activityInterpreters =
 			_activityInterpreters.get(
@@ -125,22 +123,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 					(SocialActivityInterpreterImpl)activityInterpreters.get(i);
 
 				if (activityInterpreter.hasClassName(className)) {
-					activitySetId = activityInterpreter.getActivitySetId(
-						activityId);
-
-					break;
+					activityInterpreter.updateActivitySet(activityId);
 				}
 			}
 		}
-
-		if (activitySetId == 0) {
-			SocialActivitySet activitySet =
-				socialActivitySetLocalService.addActivitySet(activityId);
-
-			activitySetId = activitySet.getActivitySetId();
-		}
-
-		return activitySetId;
 	}
 
 	/**
