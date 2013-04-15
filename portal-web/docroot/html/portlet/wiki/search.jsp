@@ -93,9 +93,7 @@ portletURL.setParameter("keywords", keywords);
 		hitURL.setParameter("struts_action", "/wiki/view");
 		hitURL.setParameter("redirect", currentURL);
 
-		total = hits.getLength();
-
-		if (searchContainer.recalculateCur(total)) {
+		if (searchContainer.recalculateCur(hits.getLength())) {
 			searchContext.setEnd(searchContainer.getEnd());
 			searchContext.setStart(searchContainer.getStart());
 
