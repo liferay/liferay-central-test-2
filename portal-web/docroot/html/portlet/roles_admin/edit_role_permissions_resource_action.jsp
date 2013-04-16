@@ -22,6 +22,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Object[] objArray = (Object[])row.getObject();
 
 String target = (String)objArray[3];
+
 String targetId = target.replace(".", "");
 
 Boolean supportsFilterByGroup = (Boolean)objArray[5];
