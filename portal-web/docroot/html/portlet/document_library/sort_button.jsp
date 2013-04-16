@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String navigation = ParamUtil.getString(request, "navigation", "home");
+
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 String orderByType = ParamUtil.getString(request, "orderByType");
@@ -26,8 +28,6 @@ String reverseOrderByType = "asc";
 if (orderByType.equals("asc")) {
 	reverseOrderByType = "desc";
 }
-
-String navigation = ParamUtil.getString(request, "navigation", "home");
 %>
 
 <liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
