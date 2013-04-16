@@ -78,13 +78,14 @@ public class BundleServletContextTest extends PowerMockito {
 	@Before
 	public void setUp() {
 		mockStatic(FastDateFormatFactoryUtil.class);
-		mockStatic(PortalUtil.class);
 
 		when(
 			FastDateFormatFactoryUtil.getSimpleDateFormat(Mockito.anyString())
 		).thenReturn(
 			new SimpleDateFormat()
 		);
+
+		mockStatic(PortalUtil.class);
 
 		when(
 			PortalUtil.getPathContext()
