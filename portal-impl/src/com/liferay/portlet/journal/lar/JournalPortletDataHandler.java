@@ -982,9 +982,9 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		List<Element> dlRepositoryEntryElements =
 			dlRepositoryEntriesElement.elements();
 
-		for (Element repositoryEntryElement : dlRepositoryEntryElements) {
+		for (Element dlRepositoryEntryElement : dlRepositoryEntryElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, entityElement);
+				portletDataContext, dlRepositoryEntryElement);
 		}
 
 		Element dlFoldersElement = portletDataContext.getImportDataGroupElement(
@@ -1002,9 +1002,9 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		List<Element> dlFileEntryElements = dlFileEntriesElement.elements();
 
-		for (Element fileEntryElement : dlFileEntryElements) {
+		for (Element dlFileEntryElement : dlFileEntryElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, entityElement);
+				portletDataContext, dlFileEntryElement);
 		}
 
 		Element dlFileRanksElement =
@@ -1012,9 +1012,9 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		List<Element> dlFileRankElements = dlFileRanksElement.elements();
 
-		for (Element fileRankElement : dlFileRankElements) {
+		for (Element dlFileRankElement : dlFileRankElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, entityElement);
+				portletDataContext, dlFileRankElement);
 		}
 	}
 
