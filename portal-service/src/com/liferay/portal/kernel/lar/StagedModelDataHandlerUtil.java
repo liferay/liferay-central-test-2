@@ -60,7 +60,7 @@ public class StagedModelDataHandlerUtil {
 	private static <T extends StagedModel> StagedModelDataHandler<T>
 		_getStagedModelDataHandler(T stagedModel) {
 
-		ClassedModel classedModel = (ClassedModel)stagedModel;
+		ClassedModel classedModel = stagedModel;
 
 		StagedModelDataHandler<T> stagedModelDataHandler =
 			(StagedModelDataHandler<T>)
