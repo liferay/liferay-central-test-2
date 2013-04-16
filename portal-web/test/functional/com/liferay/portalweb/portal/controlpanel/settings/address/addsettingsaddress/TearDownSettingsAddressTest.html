@@ -59,6 +59,11 @@
 	<td>Addresses</td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='_130_addressStreet1_0']</td>
+	<td>Street 1</td>
+</tr>
+<tr>
 	<td>storeElementPresent</td>
 	<td>//input[@id='_130_addressStreet1_0']</td>
 	<td>addressStreet1Present</td>
@@ -157,6 +162,26 @@
 	<td>label</td>
 	<td>addressStreet5NotPresent</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@id='_130_addresses']/div[@class='portlet-msg-info']</td>
+	<td>Street 1 and city are required fields.</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[@id='_130_addresses']/div[@class='portlet-msg-info']</td>
+	<td>Street 1 and city are required fields.</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[@id='_130_addresses']/fieldset/div/div/a[@class='lfr-action-undo']</td>
+	<td>Undo</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[@id='_130_addresses']/fieldset/div/div/a[@class='lfr-action-clear']</td>
+	<td>Clear History</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>

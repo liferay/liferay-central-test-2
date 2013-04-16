@@ -59,6 +59,11 @@
 	<td>Additional Email Addresses</td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='_130_emailAddressAddress0']</td>
+	<td>Email Address</td>
+</tr>
+<tr>
 	<td>storeElementPresent</td>
 	<td>//input[@id='_130_emailAddressAddress0']</td>
 	<td>emailAddress1Present</td>
@@ -157,6 +162,16 @@
 	<td>label</td>
 	<td>emailAddress5NotPresent</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='_130_additionalEmailAddresses']/div[@class='portlet-msg-info']</td>
+	<td>Email address and type are required fields.</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div[@id='_130_additionalEmailAddresses']/fieldset/div/div/a[@class='lfr-action-undo']</td>
+	<td>Undo</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>

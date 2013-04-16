@@ -49,6 +49,8 @@ public class TearDownSettingsEmailAddressTest extends BaseTestCase {
 						"Additional Email Addresses"));
 				selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 					RuntimeVariables.replace("Additional Email Addresses"));
+				selenium.waitForVisible(
+					"//input[@id='_130_emailAddressAddress0']");
 
 				boolean emailAddress1Present = selenium.isElementPresent(
 						"//input[@id='_130_emailAddressAddress0']");
@@ -115,6 +117,13 @@ public class TearDownSettingsEmailAddressTest extends BaseTestCase {
 			case 4:
 			case 5:
 			case 6:
+				assertEquals(RuntimeVariables.replace(
+						"Email address and type are required fields."),
+					selenium.getText(
+						"//div[@id='_130_additionalEmailAddresses']/div[@class='portlet-msg-info']"));
+				assertTrue(selenium.isPartialText(
+						"//div[@id='_130_additionalEmailAddresses']/fieldset/div/div/a[@class='lfr-action-undo']",
+						"Undo"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");

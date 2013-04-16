@@ -48,6 +48,7 @@ public class TearDownSettingsAddressTest extends BaseTestCase {
 						"//a[@id='_130_addressesLink']", "Addresses"));
 				selenium.clickAt("//a[@id='_130_addressesLink']",
 					RuntimeVariables.replace("Addresses"));
+				selenium.waitForVisible("//input[@id='_130_addressStreet1_0']");
 
 				boolean addressStreet1Present = selenium.isElementPresent(
 						"//input[@id='_130_addressStreet1_0']");
@@ -114,6 +115,17 @@ public class TearDownSettingsAddressTest extends BaseTestCase {
 			case 4:
 			case 5:
 			case 6:
+				selenium.waitForVisible(
+					"//div[@id='_130_addresses']/div[@class='portlet-msg-info']");
+				assertTrue(selenium.isPartialText(
+						"//div[@id='_130_addresses']/div[@class='portlet-msg-info']",
+						"Street 1 and city are required fields."));
+				assertTrue(selenium.isPartialText(
+						"//div[@id='_130_addresses']/fieldset/div/div/a[@class='lfr-action-undo']",
+						"Undo"));
+				assertTrue(selenium.isPartialText(
+						"//div[@id='_130_addresses']/fieldset/div/div/a[@class='lfr-action-clear']",
+						"Clear History"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
