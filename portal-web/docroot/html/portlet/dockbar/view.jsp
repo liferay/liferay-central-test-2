@@ -56,7 +56,6 @@ boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChec
 
 							<c:if test="<%= !themeDisplay.isStateMaximized() && layout.isTypePortlet() && !layout.isLayoutPrototypeLinkActive() %>">
 								<li class="add-application last">
-
 									<portlet:renderURL var="addContentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 										<portlet:param name="struts_action" value="/dockbar/add_panel" />
 										<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />

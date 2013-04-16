@@ -73,7 +73,7 @@ AUI.add(
 
 						var errorMsg = Lang.sub(
 							TPL_ERROR,
-							[Liferay.Language.get('failed-to-load-content')]
+							[Liferay.Language.get('unable-to-load-content')]
 						);
 
 						instance._tooltip.set('bodyContent', errorMsg);
