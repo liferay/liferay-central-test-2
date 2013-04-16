@@ -239,22 +239,24 @@ public class BundleServletContext extends LiferayServletContext {
 
 	@Override
 	public String getContextPath() {
-		if (_contextPath == null) {
-			StringBundler sb = new StringBundler(5);
-
-			String contextPath = super.getContextPath();
-
-			if (!contextPath.equals(StringPool.SLASH)) {
-				sb.append(contextPath);
-			}
-
-			sb.append(PortalUtil.getPathContext());
-			sb.append(Portal.PATH_MODULE);
-			sb.append(StringPool.SLASH);
-			sb.append(getServletContextName());
-
-			_contextPath = sb.toString();
+		if (_contextPath != null) {
+			return _contextPath;
 		}
+
+		StringBundler sb = new StringBundler(5);
+
+		String contextPath = super.getContextPath();
+
+		if (!contextPath.equals(StringPool.SLASH)) {
+			sb.append(contextPath);
+		}
+
+		sb.append(PortalUtil.getPathContext());
+		sb.append(Portal.PATH_MODULE);
+		sb.append(StringPool.SLASH);
+		sb.append(getServletContextName());
+
+		_contextPath = sb.toString();
 
 		return _contextPath;
 	}
