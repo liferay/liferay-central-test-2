@@ -75,15 +75,14 @@ public class FilterMappingTest extends PowerMockito {
 
 		String uri = "/c/portal/login;jsessionid=ACD311312312323BF.worker1";
 
-		MockHttpServletRequest request = new MockHttpServletRequest(
-			HttpMethods.GET, uri);
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest(HttpMethods.GET, uri);
 
-		boolean isMatch = filterMapping.isMatch(
-			request, Dispatcher.REQUEST, uri);
-
-		Assert.assertEquals(true, isMatch);
+		Assert.assertEquals(
+			true,
+			filterMapping.isMatch(
+				mockHttpServletRequest, Dispatcher.REQUEST, uri));
 	}
-
 
 	@Test
 	public void testIsMatchWithoutJSessionId() {
@@ -96,13 +95,13 @@ public class FilterMappingTest extends PowerMockito {
 
 		String uri = "/c/portal/login";
 
-		MockHttpServletRequest request = new MockHttpServletRequest(
-			HttpMethods.GET, uri);
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest(HttpMethods.GET, uri);
 
-		boolean isMatch = filterMapping.isMatch(
-			request, Dispatcher.REQUEST, uri);
-
-		Assert.assertEquals(true, isMatch);
+		Assert.assertEquals(
+			true,
+			filterMapping.isMatch(
+				mockHttpServletRequest, Dispatcher.REQUEST, uri));
 	}
 
 	private List<String> _dispatchers;
