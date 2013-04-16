@@ -90,25 +90,24 @@ public class DLFileEntryTypeStagedModelDataHandler
 			fileEntryType.getUuid(), portletDataContext.getScopeGroupId(),
 			fileEntryType.getName(), 2);
 
-		List<Element> referencedElements =
+		List<Element> ddmStructureElements =
 			portletDataContext.getReferencedDataElements(
 				fileEntryType, DDMStructure.class);
 
-		for (Element referencedElement : referencedElements) {
+		for (Element ddmStructureElement : ddmStructureElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, referencedElement);
+				portletDataContext, ddmStructureElement);
 		}
 
-		Map<Long, Long> ddmStructureIdsMap =
+		Map<Long, Long> ddmStructureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
 
-		Collection<Long> ddmStructureIdsCollection =
-			ddmStructureIdsMap.values();
+		Collection<Long> ddmStructureIdsCollection = ddmStructureIds.values();
 
-		long[] ddmStructureIds = ArrayUtil.toArray(
+		long[] ddmStructureIdsArray = ArrayUtil.toArray(
 			ddmStructureIdsCollection.toArray(
-				new Long[ddmStructureIdsMap.size()]));
+				new Long[ddmStructureIds.size()]));
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			fileEntryType, DLPortletDataHandler.NAMESPACE);
@@ -135,7 +134,7 @@ public class DLFileEntryTypeStagedModelDataHandler
 				importedDLFileEntryType =
 					DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 						userId, portletDataContext.getScopeGroupId(), name,
-						fileEntryType.getDescription(), ddmStructureIds,
+						fileEntryType.getDescription(), ddmStructureIdsArray,
 						serviceContext);
 			}
 			else {
@@ -145,8 +144,8 @@ public class DLFileEntryTypeStagedModelDataHandler
 
 					DLFileEntryTypeLocalServiceUtil.updateFileEntryType(
 						userId, existingDLFileEntryType.getFileEntryTypeId(),
-						name, fileEntryType.getDescription(), ddmStructureIds,
-						serviceContext);
+						name, fileEntryType.getDescription(),
+						ddmStructureIdsArray, serviceContext);
 				}
 
 				importedDLFileEntryType = existingDLFileEntryType;
@@ -156,7 +155,7 @@ public class DLFileEntryTypeStagedModelDataHandler
 			importedDLFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
 					userId, portletDataContext.getScopeGroupId(), name,
-					fileEntryType.getDescription(), ddmStructureIds,
+					fileEntryType.getDescription(), ddmStructureIdsArray,
 					serviceContext);
 		}
 

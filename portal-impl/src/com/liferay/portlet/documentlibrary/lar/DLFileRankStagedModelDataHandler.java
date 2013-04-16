@@ -49,11 +49,11 @@ public class DLFileRankStagedModelDataHandler
 			PortletDataContext portletDataContext, DLFileRank fileRank)
 		throws Exception {
 
-		DLFileEntry fileEntry = DLFileEntryUtil.fetchByPrimaryKey(
+		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByPrimaryKey(
 			fileRank.getFileEntryId());
 
 		StagedModelDataHandlerUtil.exportStagedModel(
-			portletDataContext, fileEntry);
+			portletDataContext, dlFileEntry);
 
 		Element fileRankElement =
 			portletDataContext.getExportDataStagedModelElement(fileRank);
@@ -72,11 +72,11 @@ public class DLFileRankStagedModelDataHandler
 			portletDataContext, DLFileEntry.class.getName(),
 			fileRank.getFileEntryId());
 
-		DLFileEntry fileEntry =
+		DLFileEntry dlFileEntry =
 			(DLFileEntry)portletDataContext.getZipEntryAsObject(fileEntryPath);
 
 		StagedModelDataHandlerUtil.importStagedModel(
-			portletDataContext, fileEntry);
+			portletDataContext, dlFileEntry);
 
 		long userId = portletDataContext.getUserId(fileRank.getUserUuid());
 

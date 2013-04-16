@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -66,14 +65,14 @@ public class DLDisplayPortletDataHandler extends DLPortletDataHandler {
 			return portletPreferences;
 		}
 
+		portletPreferences.setValue("enable-comment-ratings", StringPool.BLANK);
+		portletPreferences.setValue("fileEntriesPerPage", StringPool.BLANK);
+		portletPreferences.setValue("fileEntryColumns", StringPool.BLANK);
+		portletPreferences.setValue("folderColumns", StringPool.BLANK);
+		portletPreferences.setValue("foldersPerPage", StringPool.BLANK);
 		portletPreferences.setValue("rootFolderId", StringPool.BLANK);
 		portletPreferences.setValue("showFoldersSearch", StringPool.BLANK);
 		portletPreferences.setValue("showSubfolders", StringPool.BLANK);
-		portletPreferences.setValue("foldersPerPage", StringPool.BLANK);
-		portletPreferences.setValue("folderColumns", StringPool.BLANK);
-		portletPreferences.setValue("fileEntriesPerPage", StringPool.BLANK);
-		portletPreferences.setValue("fileEntryColumns", StringPool.BLANK);
-		portletPreferences.setValue("enable-comment-ratings", StringPool.BLANK);
 
 		return portletPreferences;
 	}
@@ -158,24 +157,27 @@ public class DLDisplayPortletDataHandler extends DLPortletDataHandler {
 			return getExportDataRootElementString(rootElement);
 		}
 
-		// Displayed folder is different from default parent folder
+		Folder rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
 
-		List<Long> folderIds = new ArrayList<Long>();
+		rootElement.addAttribute(
+			"root-folder-id", String.valueOf(rootFolder.getFolderId()));
+		rootElement.addAttribute(
+			"default-repository",
+			String.valueOf(rootFolder.isDefaultRepository()));
+
+		final List<Long> folderIds = new ArrayList<Long>();
 
 		DLFolderLocalServiceUtil.getSubfolderIds(
 			folderIds, portletDataContext.getScopeGroupId(), rootFolderId);
 
 		folderIds.add(rootFolderId);
 
-		for (Long folderId : folderIds) {
+		for (long folderId : folderIds) {
 			Folder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			StagedModelDataHandlerUtil.exportStagedModel(
 				portletDataContext, folder);
 		}
-
-		final List<Long> fileEntryParentFolderIds = new ArrayList<Long>(
-			folderIds);
 
 		ActionableDynamicQuery fileEntryActionableDynamicQuery =
 			new DLFileEntryActionableDynamicQuery() {
@@ -187,10 +189,10 @@ public class DLDisplayPortletDataHandler extends DLPortletDataHandler {
 
 				Property property = PropertyFactoryUtil.forName("folderId");
 
-				Long[] folderIds = ArrayUtil.toArray(
-					ArrayUtil.toLongArray(fileEntryParentFolderIds));
+				Long[] folderIdsArray = folderIds.toArray(
+					new Long[folderIds.size()]);
 
-				dynamicQuery.add(property.in(folderIds));
+				dynamicQuery.add(property.in(folderIdsArray));
 			}
 
 			@Override
@@ -212,14 +214,6 @@ public class DLDisplayPortletDataHandler extends DLPortletDataHandler {
 			portletDataContext.getScopeGroupId());
 
 		fileEntryActionableDynamicQuery.performActions();
-
-		Folder rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
-
-		rootElement.addAttribute(
-			"root-folder-id", String.valueOf(rootFolder.getFolderId()));
-		rootElement.addAttribute(
-			"default-repository",
-			String.valueOf(rootFolder.isDefaultRepository()));
 
 		return getExportDataRootElementString(rootElement);
 	}

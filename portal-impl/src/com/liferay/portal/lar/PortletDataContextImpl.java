@@ -616,16 +616,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 			referencesElement = element.addElement("references");
 		}
 
-		Element refElement = referencesElement.addElement("ref");
+		Element referenceElement = referencesElement.addElement("reference");
 
-		refElement.addAttribute(
+		referenceElement.addAttribute(
 			"class-name", referencedClassedModel.getModelClassName());
 
 		Serializable primaryKeyObj = referencedClassedModel.getPrimaryKeyObj();
 
-		refElement.addAttribute("class-pk", String.valueOf(primaryKeyObj));
+		referenceElement.addAttribute(
+			"class-pk", String.valueOf(primaryKeyObj));
 
-		return refElement;
+		return referenceElement;
 	}
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {

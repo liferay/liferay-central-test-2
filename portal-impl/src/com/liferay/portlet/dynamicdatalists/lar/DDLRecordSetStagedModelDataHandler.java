@@ -96,13 +96,13 @@ public class DDLRecordSetStagedModelDataHandler
 			ddmStructureIds, recordSet.getDDMStructureId(),
 			recordSet.getDDMStructureId());
 
-		List<Element> templateElements =
+		List<Element> ddmTemplateElements =
 			portletDataContext.getReferencedDataElements(
 				recordSet, DDMTemplate.class);
 
-		for (Element templateElement : templateElements) {
+		for (Element ddmTemplateElement : ddmTemplateElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, templateElement);
+				portletDataContext, ddmTemplateElement);
 		}
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(

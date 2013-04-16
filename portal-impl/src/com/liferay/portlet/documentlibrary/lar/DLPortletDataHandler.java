@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Group;
@@ -136,13 +135,12 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 				Property property = PropertyFactoryUtil.forName("groupId");
 
-				Object[] fileEntryTypesGroups = new Object[] {
-					portletDataContext.getScopeGroupId(),
-					companyGroup.getGroupId()
-				};
-
 				dynamicQuery.add(
-					property.in(ListUtil.fromArray(fileEntryTypesGroups)));
+					property.in(
+						new Long[] {
+							portletDataContext.getScopeGroupId(),
+							companyGroup.getGroupId()
+						}));
 			}
 
 			@Override

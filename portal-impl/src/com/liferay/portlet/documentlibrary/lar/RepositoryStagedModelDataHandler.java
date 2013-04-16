@@ -169,15 +169,13 @@ public class RepositoryStagedModelDataHandler
 		portletDataContext.importClassedModel(
 			repository, importedRepository, DLPortletDataHandler.NAMESPACE);
 
-		// Repository Entries
-
-		List<Element> referencedElements =
+		List<Element> repositoryEntryElements =
 			portletDataContext.getReferencedDataElements(
 				repository, RepositoryEntry.class);
 
-		for (Element referencedElement : referencedElements) {
+		for (Element repositoryEntryElement : repositoryEntryElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, referencedElement);
+				portletDataContext, repositoryEntryElement);
 		}
 	}
 
