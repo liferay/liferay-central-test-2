@@ -50,17 +50,8 @@ public class StagedModelDataHandlerRegistryImpl
 	public void register(StagedModelDataHandler<?> stagedModelDataHandler) {
 		for (String className : stagedModelDataHandler.getClassNames()) {
 			if (_stagedModelDataHandlers.containsKey(className)) {
-				if (_log.isDebugEnabled()) {
-					StringBundler sb = new StringBundler(6);
-
-					sb.append("Skipping registration of: ");
-					sb.append(stagedModelDataHandler);
-					sb.append(" for class: ");
-					sb.append(className);
-					sb.append(". This class already has a registered ");
-					sb.append("staged model data handler.");
-
-					_log.debug(sb.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn("Duplicate class " + className);
 				}
 
 				continue;
