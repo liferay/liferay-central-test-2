@@ -131,13 +131,13 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		return LANGUAGE;
 	}
 
-	public void setResetThreadLocalRubyRuntime(
-		boolean resetThreadLocalRubyRuntime) {
+	public void setResetRubyRuntimeThreadLocal(
+		boolean resetRubyRuntimeThreadLocal) {
 
-		_resetThreadLocalRubyRuntime = resetThreadLocalRubyRuntime;
+		_resetRubyRuntimeThreadLocal = resetRubyRuntimeThreadLocal;
 	}
 
-	protected static void resetThreadLocalRubyRuntime(
+	protected static void resetRubyRuntimeThreadLocal(
 		ScriptingContainer scriptingContainer) {
 
 		LocalContextProvider localContextProvider =
@@ -227,8 +227,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			throw new ScriptingException(fnfe);
 		}
 		finally {
-			if (_resetThreadLocalRubyRuntime) {
-				resetThreadLocalRubyRuntime(_scriptingContainer);
+			if (_resetRubyRuntimeThreadLocal) {
+				resetRubyRuntimeThreadLocal(_scriptingContainer);
 			}
 		}
 	}
@@ -269,12 +269,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 	private static Log _log = LogFactoryUtil.getLog(RubyExecutor.class);
 
 	private static Field _contextHolderField;
-
 	private static Field _runtimeField;
-
-	private String _basePath;
-	private List<String> _loadPaths;
-	private boolean _resetThreadLocalRubyRuntime = true;
 
 	static {
 		try {
@@ -289,6 +284,9 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 	}
 
+	private String _basePath;
+	private List<String> _loadPaths;
+	private boolean _resetRubyRuntimeThreadLocal = true;
 	private ScriptingContainer _scriptingContainer;
 
 }

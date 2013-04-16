@@ -131,7 +131,7 @@ public class SassToCssBuilder {
 
 			_rubyExecutor = new RubyExecutor();
 
-			_rubyExecutor.setResetThreadLocalRubyRuntime(false);
+			_rubyExecutor.setResetRubyRuntimeThreadLocal(false);
 
 			_parseSassDirectory(dirName);
 		}
