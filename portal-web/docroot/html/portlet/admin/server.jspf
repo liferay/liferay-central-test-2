@@ -252,22 +252,15 @@ serverURL.setParameter("tabs3", tabs3);
 				if (tabs3.equals("portal-properties")) {
 					properties = PropsUtil.getProperties();
 
-					PortletPreferences serverPreferences =
-						PrefsPropsUtil.getPreferences();
+					PortletPreferences serverPreferences = PrefsPropsUtil.getPreferences();
 
-					PortletPreferences companyPreferences =
-						PrefsPropsUtil.getPreferences(company.getCompanyId());
+					request.setAttribute("server.jspf-serverPreferences", serverPreferences);
+					request.setAttribute("server.jspf-serverPreferencesMap", serverPreferences.getMap());
 
-					request.setAttribute(
-						"server.jspf-serverPreferences", serverPreferences);
-					request.setAttribute(
-						"server.jspf-serverPreferencesMap",
-						serverPreferences.getMap());
-					request.setAttribute(
-						"server.jspf-companyPreferences", companyPreferences);
-					request.setAttribute(
-						"server.jspf-companyPreferencesMap",
-						companyPreferences.getMap());
+					PortletPreferences companyPreferences = PrefsPropsUtil.getPreferences(company.getCompanyId());
+
+					request.setAttribute("server.jspf-companyPreferences", companyPreferences);
+					request.setAttribute("server.jspf-companyPreferencesMap", companyPreferences.getMap());
 				}
 				else {
 					properties = System.getProperties();

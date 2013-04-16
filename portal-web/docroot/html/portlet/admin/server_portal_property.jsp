@@ -26,26 +26,27 @@ String value = (String)entry.getValue();
 
 PortletPreferences serverPreferences = (PortletPreferences)request.getAttribute("server.jspf-serverPreferences");
 Map<String, String[]> serverPreferencesMap = (Map<String, String[]>)request.getAttribute("server.jspf-serverPreferencesMap");
+
 PortletPreferences companyPreferences = (PortletPreferences)request.getAttribute("server.jspf-companyPreferences");
 Map<String, String[]> companyPreferencesMap = (Map<String, String[]>)request.getAttribute("server.jspf-companyPreferencesMap");
 
-boolean isPropertyValueOverridden = false;
+boolean overriddenPropertyValue = false;
 
 if (serverPreferencesMap.containsKey(property)) {
 	value = serverPreferences.getValue(property, StringPool.BLANK);
 
-	isPropertyValueOverridden = true;
+	overriddenPropertyValue = true;
 }
 
 if (companyPreferencesMap.containsKey(property)) {
 	value = companyPreferences.getValue(property, StringPool.BLANK);
 
-	isPropertyValueOverridden = true;
+	overriddenPropertyValue = true;
 }
 %>
 
 <%= HtmlUtil.escape(StringUtil.shorten(value, 80)) %>
 
-<c:if test="<%= isPropertyValueOverridden %>">
-	 <liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "this-property-was-stored-in-portal-preferences-using-control-panel-and-its-original-value-x-from-portal-ext-properties-was-overridden-by-this-value", HtmlUtil.escape(value)) %>' />
+<c:if test="<%= overriddenPropertyValue %>">
+	 <liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "this-property-was-stored-in-portal-preferences-using-the-control-panel-and-its-original-value-x-from-portal-ext-properties-was-overridden-by-this-value", HtmlUtil.escape(value)) %>' />
 </c:if>
