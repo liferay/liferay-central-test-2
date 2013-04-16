@@ -2,17 +2,17 @@
 
 <#include "class_names.ftl">
 
+<#include "counters.ftl">
+
 <#include "company.ftl">
-
-<#include "default_user.ftl">
-
-<#include "roles.ftl">
-
-<#include "asset_category.ftl">
 
 <#include "groups.ftl">
 
-<#include "counters.ftl">
+<#include "roles.ftl">
+
+<#include "default_user.ftl">
+
+<#include "asset_category.ftl">
 
 <#include "default_dl_file_type.ftl">
 

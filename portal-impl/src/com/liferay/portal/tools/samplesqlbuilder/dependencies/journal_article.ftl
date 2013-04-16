@@ -1,7 +1,7 @@
 <#list 1..maxJournalArticlePageCount as journalArticlePageCount>
 	<#assign portletIdPrefix = "56_INSTANCE_TEST_" + journalArticlePageCount + "_">
 
-	<#assign layout = dataFactory.newLayout(groupId, groupId + "_journal_article_" + journalArticlePageCount, "", dataFactory.getJournalArticleLayoutColum(portletIdPrefix))>
+	<#assign layout = dataFactory.newLayout(groupId, groupId + "_journal_article_" + journalArticlePageCount, "", dataFactory.getJournalArticleLayoutColumn(portletIdPrefix))>
 
 	${writerLayoutCSV.write(layout.friendlyURL + "\n")}
 

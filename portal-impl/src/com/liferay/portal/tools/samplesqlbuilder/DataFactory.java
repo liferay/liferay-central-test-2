@@ -241,9 +241,12 @@ public class DataFactory {
 
 	public long getAssetCategoryId(long groupId, int currentIndex) {
 		int index = (currentIndex - 1) % _maxAssetCategoryCount;
+
 		index = _maxAssetCategoryCount * ((int)groupId - 1) + index;
 
-		return _assetCategories.get(index).getCategoryId();
+		AssetCategory assetCategory = _assetCategories.get(index);
+
+		return assetCategory.getCategoryId();
 	}
 
 	public List<AssetVocabulary> getAssetVocabularies() {
@@ -322,7 +325,7 @@ public class DataFactory {
 		return _classNamesMap.get(JournalArticle.class.getName());
 	}
 
-	public String getJournalArticleLayoutColum(String portletPrefix) {
+	public String getJournalArticleLayoutColumn(String portletPrefix) {
 		StringBundler sb = new StringBundler(3 * _maxJournalArticleCount);
 
 		for (int i = 1; i <= _maxJournalArticleCount; i++) {
@@ -1795,10 +1798,10 @@ public class DataFactory {
 			new ArrayList<ResourcePermission>(3);
 
 		resourcePermissions.add(
+			newResourcePermission(name, primKey, _guestRole.getRoleId(), 0));
+		resourcePermissions.add(
 			newResourcePermission(
 				name, primKey, _ownerRole.getRoleId(), ownerId));
-		resourcePermissions.add(
-			newResourcePermission(name, primKey, _guestRole.getRoleId(), 0));
 		resourcePermissions.add(
 			newResourcePermission(
 				name, primKey, _siteMemberRole.getRoleId(), 0));
