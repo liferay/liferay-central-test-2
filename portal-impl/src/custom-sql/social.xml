@@ -196,9 +196,12 @@
 						SELECT
 							groupId
 						FROM
-							Users_Groups
+							Groups_Orgs
+						INNER JOIN
+							Users_Orgs ON
+								Users_Orgs.organizationId = Groups_Orgs.organizationId
 						WHERE
-							userId = ?
+							Users_Orgs.userId = ?
 					) OR
 					groupId IN (
 						SELECT
@@ -215,12 +218,9 @@
 						SELECT
 							groupId
 						FROM
-							Groups_Orgs
-						INNER JOIN
-							Users_Orgs ON
-								Users_Orgs.organizationId = Groups_Orgs.organizationId
+							Users_Groups
 						WHERE
-							Users_Orgs.userId = ?
+							userId = ?
 					)
 				) AND
 				(mirrorActivityId = 0)
@@ -407,9 +407,12 @@
 						SELECT
 							groupId
 						FROM
-							Users_Groups
+							Groups_Orgs
+						INNER JOIN
+							Users_Orgs ON
+								Users_Orgs.organizationId = Groups_Orgs.organizationId
 						WHERE
-							userId = ?
+							Users_Orgs.userId = ?
 					) OR
 					groupId IN (
 						SELECT
@@ -426,12 +429,9 @@
 						SELECT
 							groupId
 						FROM
-							Groups_Orgs
-						INNER JOIN
-							Users_Orgs ON
-								Users_Orgs.organizationId = Groups_Orgs.organizationId
+							Users_Groups
 						WHERE
-							Users_Orgs.userId = ?
+							userId = ?
 					)
 				) AND
 				(mirrorActivityId = 0)
