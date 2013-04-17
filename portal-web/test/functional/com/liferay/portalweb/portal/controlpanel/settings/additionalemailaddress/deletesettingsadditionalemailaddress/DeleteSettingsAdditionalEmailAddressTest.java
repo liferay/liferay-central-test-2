@@ -50,6 +50,7 @@ public class DeleteSettingsAdditionalEmailAddressTest extends BaseTestCase {
 			"xpath=(//div[@id='_130_additionalEmailAddresses']/fieldset/div[2]/div/span/span/button[2])[1]");
 		selenium.clickAt("xpath=(//div[@id='_130_additionalEmailAddresses']/fieldset/div[2]/div/span/span/button[2])[1]",
 			RuntimeVariables.replace("Delete"));
+		Thread.sleep(1000);
 		assertFalse(selenium.isTextPresent("Admin@Liferay.com"));
 	}
 }

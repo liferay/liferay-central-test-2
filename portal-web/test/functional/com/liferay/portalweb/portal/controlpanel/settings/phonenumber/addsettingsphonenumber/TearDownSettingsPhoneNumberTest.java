@@ -130,6 +130,8 @@ public class TearDownSettingsPhoneNumberTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
+				assertEquals("",
+					selenium.getValue("//input[@id='_130_phoneNumber0']"));
 
 			case 100:
 				label = -1;

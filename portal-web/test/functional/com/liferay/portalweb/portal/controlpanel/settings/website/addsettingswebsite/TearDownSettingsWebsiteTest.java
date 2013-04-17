@@ -130,6 +130,8 @@ public class TearDownSettingsWebsiteTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
+				assertEquals("",
+					selenium.getValue("//input[@id='_130_websiteUrl0']"));
 
 			case 100:
 				label = -1;
