@@ -250,69 +250,13 @@ public class AssetPublisherExportImportTest
 	}
 
 	@Test
-	public void testSortByGlobalAssetVocabulary() throws Exception {
-		doTestSortByAssetVocabulary(true);
+	public void testSortByAssetVocabulary() throws Exception {
+		testSortByAssetVocabulary(false);
 	}
 
 	@Test
-	public void testSortByAssetVocabulary() throws Exception {
-		doTestSortByAssetVocabulary(false);
-	}
-
-	protected void doTestSortByAssetVocabulary(boolean globalVocabulary)
-		throws Exception {
-
-		long groupId = group.getGroupId();
-
-		if (globalVocabulary) {
-			Company company = CompanyLocalServiceUtil.getCompany(
-				layout.getCompanyId());
-
-			Group companyGroup = company.getGroup();
-
-			groupId = companyGroup.getGroupId();
-		}
-
-		AssetVocabulary assetVocabulary =
-			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
-				ServiceTestUtil.getServiceContext(groupId));
-
-		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
-
-		preferenceMap.put(
-			"assetVocabularyId",
-			new String[] {String.valueOf(assetVocabulary.getVocabularyId())});
-
-		PortletPreferences portletPreferences = getImportedPortletPreferences(
-			layout, preferenceMap);
-
-		Assert.assertNotNull(
-			"assetVocabularyId preference has been lost after export/import",
-			portletPreferences.getValue("assetVocabularyId", null));
-
-		long importedAssetVocabularyId = GetterUtil.getLong(
-			portletPreferences.getValue("assetVocabularyId", null));
-
-		AssetVocabulary importedVocabulary =
-			AssetVocabularyLocalServiceUtil.fetchAssetVocabulary(
-				importedAssetVocabularyId);
-
-		Assert.assertNotNull(
-			"The vocabulary referenced by asset publisher doesn't exist",
-			importedVocabulary);
-
-		long expectedGroupId = groupId;
-
-		if (!globalVocabulary) {
-			expectedGroupId = importedGroup.getGroupId();
-		}
-
-		Assert.assertEquals(
-			"The vocabulary has been imported to the wrong group",
-			expectedGroupId, importedVocabulary.getGroupId());
-
-		AssetVocabularyLocalServiceUtil.deleteAssetVocabulary(assetVocabulary);
+	public void testSortByGlobalAssetVocabulary() throws Exception {
+		testSortByAssetVocabulary(true);
 	}
 
 	protected PortletPreferences getImportedPortletPreferences(
@@ -355,6 +299,63 @@ public class AssetPublisherExportImportTest
 		return LayoutTestUtil.getPortletPreferences(
 			importedLayout.getCompanyId(), importedLayout.getPlid(),
 			assetPublisherPortletId);
+	}
+
+	protected void testSortByAssetVocabulary(boolean globalVocabulary)
+		throws Exception {
+
+		long groupId = group.getGroupId();
+
+		if (globalVocabulary) {
+			Company company = CompanyLocalServiceUtil.getCompany(
+				layout.getCompanyId());
+
+			Group companyGroup = company.getGroup();
+
+			groupId = companyGroup.getGroupId();
+		}
+
+		AssetVocabulary assetVocabulary =
+			AssetVocabularyLocalServiceUtil.addVocabulary(
+				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				ServiceTestUtil.getServiceContext(groupId));
+
+		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
+
+		preferenceMap.put(
+			"assetVocabularyId",
+			new String[] {String.valueOf(assetVocabulary.getVocabularyId())});
+
+		PortletPreferences portletPreferences = getImportedPortletPreferences(
+			layout, preferenceMap);
+
+		Assert.assertNotNull(
+			"Portlet preference \"assetVocabularyId\" is null",
+			portletPreferences.getValue("assetVocabularyId", null));
+
+		long importedAssetVocabularyId = GetterUtil.getLong(
+			portletPreferences.getValue("assetVocabularyId", null));
+
+		AssetVocabulary importedVocabulary =
+			AssetVocabularyLocalServiceUtil.fetchAssetVocabulary(
+				importedAssetVocabularyId);
+
+		Assert.assertNotNull(
+			"Vocabulary " + importedAssetVocabularyId + " does not exist",
+			importedVocabulary);
+
+		long expectedGroupId = groupId;
+
+		if (!globalVocabulary) {
+			expectedGroupId = importedGroup.getGroupId();
+		}
+
+		Assert.assertEquals(
+			"Vocabulary " + importedAssetVocabularyId +
+				" does not belong to group " + expectedGroupId,
+			expectedGroupId, importedVocabulary.getGroupId());
+
+		AssetVocabularyLocalServiceUtil.deleteAssetVocabulary(assetVocabulary);
 	}
 
 }
