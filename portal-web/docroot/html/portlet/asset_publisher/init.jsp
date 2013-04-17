@@ -261,11 +261,13 @@ Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 <%@ include file="/html/portlet/asset_publisher/init-ext.jsp" %>
 
 <%!
-private String _checkViewURL(String viewURL, String currentURL, ThemeDisplay themeDisplay, String targetLayoutUuid, boolean viewInContext) {
+private String _checkViewURL(AssetEntry assetEntry, boolean viewInContext, String viewURL, String currentURL, ThemeDisplay themeDisplay) {
 	if (Validator.isNotNull(viewURL)) {
-		Layout currentLayout = themeDisplay.getLayout();
+		Layout layout = themeDisplay.getLayout();
 
-		if (!viewInContext || (Validator.isNotNull(targetLayoutUuid) && !Validator.equals(currentLayout.getUuid(), targetLayoutUuid))) {
+		String assetEntryLayoutUuid = assetEntry.getLayoutUuid();
+
+		if (!viewInContext || (Validator.isNotNull(assetEntryLayoutUuid) && !assetEntryLayoutUuid.equals(layout.getUuid()))) {
 			viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
 		}
 	}
