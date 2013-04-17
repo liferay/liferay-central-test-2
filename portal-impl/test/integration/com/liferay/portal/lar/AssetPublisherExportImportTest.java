@@ -255,7 +255,7 @@ public class AssetPublisherExportImportTest
 	}
 
 	@Test
-	public void testSortyByAssetVocabulary() throws Exception {
+	public void testSortByAssetVocabulary() throws Exception {
 		doTestSortByAssetVocabulary(false);
 	}
 
