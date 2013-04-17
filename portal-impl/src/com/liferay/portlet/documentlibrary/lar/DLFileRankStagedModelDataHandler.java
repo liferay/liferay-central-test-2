@@ -68,6 +68,8 @@ public class DLFileRankStagedModelDataHandler
 			PortletDataContext portletDataContext, DLFileRank fileRank)
 		throws Exception {
 
+		long userId = portletDataContext.getUserId(fileRank.getUserUuid());
+
 		String fileEntryPath = ExportImportPathUtil.getModelPath(
 			portletDataContext, DLFileEntry.class.getName(),
 			fileRank.getFileEntryId());
@@ -77,8 +79,6 @@ public class DLFileRankStagedModelDataHandler
 
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, dlFileEntry);
-
-		long userId = portletDataContext.getUserId(fileRank.getUserUuid());
 
 		Map<Long, Long> fileEntryIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(

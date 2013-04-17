@@ -109,6 +109,8 @@ public class FolderStagedModelDataHandler
 			PortletDataContext portletDataContext, Folder folder)
 		throws Exception {
 
+		long userId = portletDataContext.getUserId(folder.getUserUuid());
+
 		String path = ExportImportPathUtil.getModelPath(
 			portletDataContext, Folder.class.getName(), folder.getFolderId());
 
@@ -142,8 +144,6 @@ public class FolderStagedModelDataHandler
 					portletDataContext, referenceStagedModel);
 			}
 		}
-
-		long userId = portletDataContext.getUserId(folder.getUserUuid());
 
 		if (folder.getParentFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -236,7 +236,6 @@ public class FolderStagedModelDataHandler
 		String defaultFileEntryTypeUuid = StringPool.BLANK;
 
 		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
-
 			if (dlFileEntryType.getFileEntryTypeId() ==
 					DLFileEntryTypeConstants.
 						FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
@@ -309,22 +308,22 @@ public class FolderStagedModelDataHandler
 			return;
 		}
 
-		List<Element> referencedElements = referencesElement.elements();
+		List<Element> referenceElements = referencesElement.elements();
 
-		for (Element referencedElement : referencedElements) {
-			String className = referencedElement.attributeValue("class-name");
+		for (Element referenceElement : referenceElements) {
+			String className = referenceElement.attributeValue("class-name");
 
 			if (!className.equals(DLFileEntryType.class.getSimpleName())) {
 				continue;
 			}
 
-			String referencedPath = referencedElement.attributeValue("path");
+			String referencePath = referenceElement.attributeValue("path");
 
-			DLFileEntryType referencedFileEntryType =
+			DLFileEntryType referenceDLFileEntryType =
 				(DLFileEntryType)portletDataContext.getZipEntryAsObject(
-					referencedPath);
+					referencePath);
 
-			String fileEntryTypeUuid = referencedFileEntryType.getUuid();
+			String fileEntryTypeUuid = referenceDLFileEntryType.getUuid();
 
 			DLFileEntryType dlFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
 				fileEntryTypeUuid, portletDataContext.getScopeGroupId());

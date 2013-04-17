@@ -217,6 +217,8 @@ public class FileEntryStagedModelDataHandler
 			PortletDataContext portletDataContext, FileEntry fileEntry)
 		throws Exception {
 
+		long userId = portletDataContext.getUserId(fileEntry.getUserUuid());
+
 		String path = ExportImportPathUtil.getModelPath(
 			portletDataContext, FileEntry.class.getName(),
 			fileEntry.getFileEntryId());
@@ -246,8 +248,6 @@ public class FileEntryStagedModelDataHandler
 					portletDataContext, referenceStagedModel);
 			}
 		}
-
-		long userId = portletDataContext.getUserId(fileEntry.getUserUuid());
 
 		if ((fileEntry.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
