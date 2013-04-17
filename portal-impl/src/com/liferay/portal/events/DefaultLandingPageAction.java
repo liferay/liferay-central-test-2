@@ -69,7 +69,8 @@ public class DefaultLandingPageAction extends Action {
 
 		HttpSession session = request.getSession();
 
-		if (path.contains("[$SCREEN_NAME$]")) {
+		if (path.contains("${liferay:screenName}") ||
+			path.contains("${liferay:userId}")) {
 
 			User user = (User)session.getAttribute(WebKeys.USER);
 
@@ -77,9 +78,12 @@ public class DefaultLandingPageAction extends Action {
 				return;
 			}
 
-			String screenName = user.getScreenName();
-
-			path = StringUtil.replace(path, "[$SCREEN_NAME$]", screenName);
+			path = StringUtil.replace(
+				path,
+				new String[] {"${liferay:screenName}", "${liferay:userId}"},
+				new String[] {
+					user.getScreenName(), String.valueOf(user.getUserId())
+				});
 		}
 
 		LastPath lastPath = new LastPath(StringPool.BLANK, path);
