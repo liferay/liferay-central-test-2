@@ -88,7 +88,6 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 
 		MBMessageServiceUtil.restoreMessageAttachmentFromTrash(
 			message.getMessageId(), fileEntry.getTitle());
-
 	}
 
 	public void restoreTrashEntry(long userId, long classPK) {
