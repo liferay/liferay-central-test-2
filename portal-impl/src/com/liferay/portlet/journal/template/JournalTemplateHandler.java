@@ -60,26 +60,19 @@ public class JournalTemplateHandler extends BaseDDMTemplateHandler {
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			super.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup tagsServicesTemplateVariableGroup =
+		TemplateVariableGroup journalServicesTemplateVariableGroup =
 			new TemplateVariableGroup("web-content-services");
 
-		tagsServicesTemplateVariableGroup.setAutocompleteEnabled(false);
+		journalServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			JournalArticleService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			JournalArticleLocalService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMStructureService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMStructureLocalService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMTemplateService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMTemplateLocalService.class);
+		journalServicesTemplateVariableGroup.addServiceLocatorVariables(
+			JournalArticleLocalService.class, JournalArticleService.class,
+			DDMStructureLocalService.class, DDMStructureService.class,
+			DDMTemplateLocalService.class, DDMTemplateService.class);
 
 		templateVariableGroups.put(
-			"web-content-services", tagsServicesTemplateVariableGroup);
+			journalServicesTemplateVariableGroup.getLabel(),
+			journalServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

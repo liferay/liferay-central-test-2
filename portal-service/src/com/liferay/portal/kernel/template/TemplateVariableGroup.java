@@ -58,22 +58,20 @@ public class TemplateVariableGroup {
 		return templateVariableDefinition;
 	}
 
-	public TemplateVariableDefinition addServiceLocatorVariable(
-		Class serviceClass) {
+	public void addServiceLocatorVariables(Class<?>... serviceClasses) {
+		for (Class<?> serviceClass : serviceClasses) {
+			String label = TextFormatter.format(
+				serviceClass.getSimpleName(), TextFormatter.I);
 
-		String label = TextFormatter.format(
-			serviceClass.getSimpleName(), TextFormatter.I);
+			label = TextFormatter.format(label, TextFormatter.K);
 
-		label = TextFormatter.format(label, TextFormatter.K);
+			TemplateVariableDefinition templateVariableDefinition =
+				new TemplateVariableDefinition(
+					label, serviceClass, "service-locator",
+					serviceClass.getCanonicalName(), label + "-help", false);
 
-		TemplateVariableDefinition templateVariableDefinition =
-			new TemplateVariableDefinition(
-				label, serviceClass, "service-locator",
-				serviceClass.getCanonicalName(), label + "-help", false);
-
-		_templateVariableDefinitions.add(templateVariableDefinition);
-
-		return templateVariableDefinition;
+			_templateVariableDefinitions.add(templateVariableDefinition);
+		}
 	}
 
 	public TemplateVariableDefinition addVariable(

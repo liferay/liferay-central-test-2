@@ -134,36 +134,26 @@ public class TemplateContextHelper {
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			templateHandler.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup portalServicesTemplateVariableGroup =
-			new TemplateVariableGroup("portal-services");
-
-		portalServicesTemplateVariableGroup.setAutocompleteEnabled(false);
-
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			GroupService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			GroupLocalService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			LayoutService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			LayoutLocalService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			OrganizationService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			OrganizationLocalService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			UserService.class);
-		portalServicesTemplateVariableGroup.addServiceLocatorVariable(
-			UserLocalService.class);
-
-		templateVariableGroups.put(
-			"portal-services", portalServicesTemplateVariableGroup);
-
 		TemplateVariableGroup utilTemplateVariableGroup =
 			templateVariableGroups.get("util");
 
 		utilTemplateVariableGroup.addVariable(
 			"http-request", HttpServletRequest.class, "request");
+
+		TemplateVariableGroup portalServicesTemplateVariableGroup =
+			new TemplateVariableGroup("portal-services");
+
+		portalServicesTemplateVariableGroup.setAutocompleteEnabled(false);
+
+		portalServicesTemplateVariableGroup.addServiceLocatorVariables(
+			GroupLocalService.class, GroupService.class,
+			LayoutLocalService.class, LayoutService.class,
+			OrganizationLocalService.class, OrganizationService.class,
+			UserLocalService.class, UserService.class);
+
+		templateVariableGroups.put(
+			portalServicesTemplateVariableGroup.getLabel(),
+			portalServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

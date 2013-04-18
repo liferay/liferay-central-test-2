@@ -62,30 +62,20 @@ public class DDLTemplateHandler extends BaseDDMTemplateHandler {
 		Map<String, TemplateVariableGroup> templateVariableGroups =
 			super.getTemplateVariableGroups(classPK, locale);
 
-		TemplateVariableGroup dataListsServicesTemplateVariableGroup =
+		TemplateVariableGroup ddlServicesTemplateVariableGroup =
 			new TemplateVariableGroup("data-list-services");
 
-		dataListsServicesTemplateVariableGroup.setAutocompleteEnabled(false);
+		ddlServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDLRecordService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDLRecordLocalService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDLRecordSetService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDLRecordSetLocalService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMStructureService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMStructureLocalService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMTemplateService.class);
-		dataListsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DDMTemplateLocalService.class);
+		ddlServicesTemplateVariableGroup.addServiceLocatorVariables(
+			DDLRecordLocalService.class, DDLRecordService.class,
+			DDLRecordSetLocalService.class, DDLRecordSetService.class,
+			DDMStructureLocalService.class, DDMStructureService.class,
+			DDMTemplateLocalService.class, DDMTemplateService.class);
 
 		templateVariableGroups.put(
-			"data-list-services", dataListsServicesTemplateVariableGroup);
+			ddlServicesTemplateVariableGroup.getLabel(),
+			ddlServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

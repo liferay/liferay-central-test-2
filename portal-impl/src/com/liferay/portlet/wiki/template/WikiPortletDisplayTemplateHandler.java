@@ -71,22 +71,18 @@ public class WikiPortletDisplayTemplateHandler
 		fieldsTemplateVariableGroup.addVariable(
 			"wiki-page-content", String.class, "formattedContent");
 
-		TemplateVariableGroup assetTagsServicesTemplateVariableGroup =
+		TemplateVariableGroup wikiServicesTemplateVariableGroup =
 			new TemplateVariableGroup("wiki-services");
 
-		assetTagsServicesTemplateVariableGroup.setAutocompleteEnabled(false);
+		wikiServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		assetTagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			WikiPageService.class);
-		assetTagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			WikiPageLocalService.class);
-		assetTagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			WikiNodeService.class);
-		assetTagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			WikiNodeLocalService.class);
+		wikiServicesTemplateVariableGroup.addServiceLocatorVariables(
+			WikiPageLocalService.class, WikiPageService.class,
+			WikiNodeLocalService.class, WikiNodeService.class);
 
 		templateVariableGroups.put(
-			"wiki-services", assetTagsServicesTemplateVariableGroup);
+			wikiServicesTemplateVariableGroup.getLabel(),
+			wikiServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

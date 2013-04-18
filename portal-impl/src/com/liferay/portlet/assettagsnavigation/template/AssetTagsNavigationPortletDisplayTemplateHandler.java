@@ -70,20 +70,18 @@ public class AssetTagsNavigationPortletDisplayTemplateHandler
 			"tags", List.class, PortletDisplayTemplateConstants.ENTRIES, "tag",
 			AssetTag.class, "curTag");
 
-		TemplateVariableGroup tagsServicesTemplateVariableGroup =
+		TemplateVariableGroup assetServicesTemplateVariableGroup =
 			new TemplateVariableGroup("tag-services");
 
-		tagsServicesTemplateVariableGroup.setAutocompleteEnabled(false);
+		assetServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetTagService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetTagLocalService.class);
-		tagsServicesTemplateVariableGroup.addServiceLocatorVariable(
+		assetServicesTemplateVariableGroup.addServiceLocatorVariables(
+			AssetTagLocalService.class, AssetTagService.class,
 			AssetTagStatsLocalService.class);
 
 		templateVariableGroups.put(
-			"tag-services", tagsServicesTemplateVariableGroup);
+			assetServicesTemplateVariableGroup.getLabel(),
+			assetServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

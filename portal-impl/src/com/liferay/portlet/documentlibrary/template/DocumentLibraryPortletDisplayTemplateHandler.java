@@ -76,17 +76,13 @@ public class DocumentLibraryPortletDisplayTemplateHandler
 
 		documentServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		documentServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DLAppLocalService.class);
-		documentServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DLAppService.class);
-		documentServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DLFileEntryTypeLocalService.class);
-		documentServicesTemplateVariableGroup.addServiceLocatorVariable(
-			DLFileEntryTypeService.class);
+		documentServicesTemplateVariableGroup.addServiceLocatorVariables(
+			DLAppLocalService.class, DLAppService.class,
+			DLFileEntryTypeLocalService.class, DLFileEntryTypeService.class);
 
 		templateVariableGroups.put(
-			"document-services", documentServicesTemplateVariableGroup);
+			documentServicesTemplateVariableGroup.getLabel(),
+			documentServicesTemplateVariableGroup);
 
 		return templateVariableGroups;
 	}

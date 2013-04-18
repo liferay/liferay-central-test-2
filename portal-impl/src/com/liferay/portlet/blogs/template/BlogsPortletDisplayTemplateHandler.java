@@ -74,13 +74,13 @@ public class BlogsPortletDisplayTemplateHandler
 
 		blogServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		blogServicesTemplateVariableGroup.addServiceLocatorVariable(
-			BlogsEntryService.class);
-		blogServicesTemplateVariableGroup.addServiceLocatorVariable(
-			BlogsEntryLocalService.class);
+		blogServicesTemplateVariableGroup.addServiceLocatorVariables(
+			BlogsEntryLocalService.class, BlogsEntryService.class);
 
 		templateVariableGroups.put(
-			"blog-services", blogServicesTemplateVariableGroup);
+			blogServicesTemplateVariableGroup.getLabel(),
+			blogServicesTemplateVariableGroup);
+
 		return templateVariableGroups;
 	}
 

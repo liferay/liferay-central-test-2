@@ -77,17 +77,14 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 
 		categoriesServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		categoriesServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetVocabularyService.class);
-		categoriesServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetVocabularyLocalService.class);
-		categoriesServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetCategoryService.class);
-		categoriesServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetCategoryLocalService.class);
+		categoriesServicesTemplateVariableGroup.addServiceLocatorVariables(
+			AssetVocabularyLocalService.class, AssetVocabularyService.class,
+			AssetCategoryLocalService.class, AssetCategoryService.class);
 
 		templateVariableGroups.put(
-			"category-services", categoriesServicesTemplateVariableGroup);
+			categoriesServicesTemplateVariableGroup.getLabel(),
+			categoriesServicesTemplateVariableGroup);
+
 		return templateVariableGroups;
 	}
 

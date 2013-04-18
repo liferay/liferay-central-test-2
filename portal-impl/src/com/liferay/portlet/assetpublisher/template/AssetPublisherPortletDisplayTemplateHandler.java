@@ -96,27 +96,17 @@ public class AssetPublisherPortletDisplayTemplateHandler
 
 		assetServicesTemplateVariableGroup.setAutocompleteEnabled(false);
 
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetEntryService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetEntryLocalService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetVocabularyService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetVocabularyLocalService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetCategoryService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetCategoryLocalService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetTagService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
-			AssetTagLocalService.class);
-		assetServicesTemplateVariableGroup.addServiceLocatorVariable(
+		assetServicesTemplateVariableGroup.addServiceLocatorVariables(
+			AssetEntryLocalService.class, AssetEntryService.class,
+			AssetVocabularyLocalService.class, AssetVocabularyService.class,
+			AssetCategoryLocalService.class, AssetCategoryService.class,
+			AssetTagLocalService.class, AssetTagService.class,
 			AssetTagStatsLocalService.class);
 
 		templateVariableGroups.put(
-			"asset-services", assetServicesTemplateVariableGroup);
+			assetServicesTemplateVariableGroup.getLabel(),
+			assetServicesTemplateVariableGroup);
+
 		return templateVariableGroups;
 	}
 
