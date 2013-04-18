@@ -118,8 +118,7 @@ public class WebXMLDefinitionLoader {
 				clazz = bundle.loadClass(filterClassName);
 			}
 			catch (Exception e) {
-				_log.error(
-					"Filter " + filterClassName + " can not be processed");
+				_log.error("Unable to load filter " + filterClassName);
 
 				continue;
 			}
@@ -179,10 +178,9 @@ public class WebXMLDefinitionLoader {
 				clazz = bundle.loadClass(listenerClassName);
 			}
 			catch (Exception e) {
-				_log.error(
-					"Listener " + listenerClassName + " can not be processed");
+				_log.error("Unable to load listener " + listenerClassName);
 
-					continue;
+				continue;
 			}
 
 			Object listener = clazz.newInstance();
@@ -212,8 +210,7 @@ public class WebXMLDefinitionLoader {
 				servletClass = bundle.loadClass(servletClassName);
 			}
 			catch (Exception e) {
-				_log.error(
-					"Servlet " + servletClassName + " can not be processed");
+				_log.error("Unable to load servlet " + servletClassName);
 
 				continue;
 			}
