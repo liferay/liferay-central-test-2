@@ -49,8 +49,8 @@ public class WebXMLDefinitionLoader {
 	}
 
 	public WebXMLDefinition loadWebXML(Bundle bundle)
-		throws ClassNotFoundException, DocumentException,
-			   IllegalAccessException, InstantiationException {
+		throws DocumentException, IllegalAccessException,
+			   InstantiationException {
 
 		WebXMLDefinition webXML = new WebXMLDefinition();
 
@@ -102,8 +102,7 @@ public class WebXMLDefinitionLoader {
 
 	protected void readFilters(
 			Bundle bundle, Element rootElement, WebXMLDefinition webXML)
-		throws ClassNotFoundException, IllegalAccessException,
-		   	   InstantiationException {
+		throws IllegalAccessException, InstantiationException {
 
 		List<Element> filterElements = rootElement.elements("filter");
 
@@ -161,8 +160,7 @@ public class WebXMLDefinitionLoader {
 
 	protected void readListeners(
 			Bundle bundle, Element rootElement, WebXMLDefinition webXML)
-		throws ClassNotFoundException, IllegalAccessException,
-			   InstantiationException {
+		throws IllegalAccessException, InstantiationException {
 
 		List<Element> listenerElements = rootElement.elements("listener");
 
@@ -193,8 +191,7 @@ public class WebXMLDefinitionLoader {
 
 	protected void readServlets(
 			Bundle bundle, Element rootElement, WebXMLDefinition webXML)
-		throws ClassNotFoundException, IllegalAccessException,
-			   InstantiationException {
+		throws IllegalAccessException, InstantiationException {
 
 		List<Element> servletElements = rootElement.elements("servlet");
 
