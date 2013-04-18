@@ -46,7 +46,7 @@ searchContainer.setResults(results);
 
 <liferay-ui:trash-undo portletURL="<%= undoTrashURL %>" />
 
-<liferay-ui:error exception="<%= NodeDeletionException.class %>" message="the-last-main-node-is-required-and-cannot-be-deleted" />
+<liferay-ui:error exception="<%= RequiredNodeException.class %>" message="the-last-main-node-is-required-and-cannot-be-deleted" />
 
 <liferay-portlet:renderURL var="searchURL">
 	<portlet:param name="struts_action" value="/wiki/search" />
