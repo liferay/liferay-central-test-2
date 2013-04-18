@@ -29,8 +29,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.NodeDeletionException;
 import com.liferay.portlet.wiki.NodeNameException;
+import com.liferay.portlet.wiki.RequiredNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
@@ -149,7 +149,7 @@ public class EditNodeAction extends PortletAction {
 			themeDisplay.getScopeGroupId());
 
 		if (nodeCount == 1) {
-			SessionErrors.add(actionRequest, NodeDeletionException.class);
+			SessionErrors.add(actionRequest, RequiredNodeException.class);
 
 			return;
 		}

@@ -20,21 +20,21 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Brian Wing Shun Chan
  * @author Levente Hudák
  */
-public class NodeDeletionException extends PortalException {
+public class RequiredNodeException extends PortalException {
 
-	public NodeDeletionException() {
+	public RequiredNodeException() {
 		super();
 	}
 
-	public NodeDeletionException(String msg) {
+	public RequiredNodeException(String msg) {
 		super(msg);
 	}
 
-	public NodeDeletionException(String msg, Throwable cause) {
+	public RequiredNodeException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public NodeDeletionException(Throwable cause) {
+	public RequiredNodeException(Throwable cause) {
 		super(cause);
 	}
 
