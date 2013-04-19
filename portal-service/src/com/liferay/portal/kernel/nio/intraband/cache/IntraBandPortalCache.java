@@ -44,15 +44,14 @@ public class IntraBandPortalCache
 	public IntraBandPortalCache(
 		String name, RegistrationReference registrationReference) {
 
-		_intraBand = registrationReference.getIntraBand();
-
 		_name = name;
+		_registrationReference = registrationReference;
+
+		_intraBand = registrationReference.getIntraBand();
 
 		SystemDataType systemDataType = SystemDataType.PORTAL_CACHE;
 
 		_portalCacheType = systemDataType.getValue();
-
-		_registrationReference = registrationReference;
 	}
 
 	public void destroy() {

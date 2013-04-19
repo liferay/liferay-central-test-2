@@ -36,6 +36,7 @@ import java.util.Collection;
 public class PortalCacheDatagramReceiveHandler
 	extends BaseAsyncDatagramReceiveHandler {
 
+	@Override
 	protected void doReceive(
 			RegistrationReference registrationReference, Datagram datagram)
 		throws Exception {
@@ -43,13 +44,13 @@ public class PortalCacheDatagramReceiveHandler
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
 
-		PortalCacheActionType actionType =
+		PortalCacheActionType portalCacheActionType =
 			PortalCacheActionType.values()[deserializer.readInt()];
 
 		PortalCacheManager<Serializable, Serializable> portalCacheManager =
 			IntraBandPortalCacheManager.getPortalCacheManager();
 
-		if (actionType == PortalCacheActionType.RECONFIGURE) {
+		if (portalCacheActionType == PortalCacheActionType.RECONFIGURE) {
 			portalCacheManager.reconfigureCaches(
 				new URL(deserializer.readString()));
 
@@ -59,11 +60,12 @@ public class PortalCacheDatagramReceiveHandler
 		PortalCache<Serializable, Serializable> portalCache =
 			portalCacheManager.getCache(deserializer.readString());
 
-		switch (actionType) {
+		switch (portalCacheActionType) {
 			case DESTROY :
 				portalCache.destroy();
 
 				break;
+
 			case GET_BULK :
 				Collection<Serializable> keys =
 					(Collection<Serializable>)deserializer.readObject();
@@ -74,6 +76,7 @@ public class PortalCacheDatagramReceiveHandler
 					registrationReference, datagram, (Serializable)values);
 
 				break;
+
 			case GET :
 				Serializable key = deserializer.readObject();
 
@@ -82,6 +85,7 @@ public class PortalCacheDatagramReceiveHandler
 				_sendResponse(registrationReference, datagram, value);
 
 				break;
+
 			case PUT :
 				key = deserializer.readObject();
 				value = deserializer.readObject();
@@ -89,6 +93,7 @@ public class PortalCacheDatagramReceiveHandler
 				portalCache.put(key, value);
 
 				break;
+
 			case PUT_TTL :
 				key = deserializer.readObject();
 				value = deserializer.readObject();
@@ -97,26 +102,29 @@ public class PortalCacheDatagramReceiveHandler
 				portalCache.put(key, value, ttl);
 
 				break;
+
 			case REMOVE :
 				key = deserializer.readObject();
 
 				portalCache.remove(key);
 
 				break;
+
 			case REMOVE_ALL :
 				portalCache.removeAll();
 
 				break;
+
 			default :
 
 				// This should never happen, for corrupt input, the ordinal
-				// indexing should already caught it. The only reason to have
-				// this dead block is to prevent adding new type to
-				// PortalCacheActionType in the future, but forget to update
-				// this switch.
+				// indexing should already have caught it. The only reason to
+				// have this dead block is to ensure that we never add a new
+				// PortalCacheActionType without updating this switch.
 
 				throw new PortalCacheException(
-					"Unsupported portal cache action type " + actionType);
+					"Unsupported portal cache action type " +
+						portalCacheActionType);
 		}
 	}
 

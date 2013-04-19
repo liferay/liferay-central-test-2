@@ -44,7 +44,7 @@ public class IntraBandPortalCacheManager
 
 	public static void setPortalCacheManager(
 		PortalCacheManager<? extends Serializable, ? extends Serializable>
-			portalCacheManager) {
+		portalCacheManager) {
 
 		_portalCacheManager = portalCacheManager;
 	}
@@ -54,8 +54,6 @@ public class IntraBandPortalCacheManager
 
 		_intraBand = registrationReference.getIntraBand();
 		_registrationReference = registrationReference;
-
-		_portalCaches = new ConcurrentHashMap<String, PortalCache<K, V>>();
 	}
 
 	public void clearAll() {
@@ -101,7 +99,8 @@ public class IntraBandPortalCacheManager
 		<? extends Serializable, ? extends Serializable> _portalCacheManager;
 
 	private final IntraBand _intraBand;
-	private final Map<String, PortalCache<K, V>> _portalCaches;
+	private final Map<String, PortalCache<K, V>> _portalCaches =
+		new ConcurrentHashMap<String, PortalCache<K, V>>();
 	private final RegistrationReference _registrationReference;
 
 }
