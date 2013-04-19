@@ -35,7 +35,7 @@ public class JavadocManagerUtil {
 		getJavadocManager().load(servletContextName, classLoader);
 	}
 
-	public static JavadocClass lookupJavadocClass(Class clazz) {
+	public static JavadocClass lookupJavadocClass(Class<?> clazz) {
 		return getJavadocManager().lookupJavadocClass(clazz);
 	}
 

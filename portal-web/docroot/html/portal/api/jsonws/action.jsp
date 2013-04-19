@@ -62,13 +62,10 @@ String signature = ParamUtil.getString(request, "signature");
 				</span>
 
 				<%
-				Class serviceClass = actionClass;
+				Class<?> serviceClass = actionClass;
 
 				if (actionClassName.contains(".service.") && actionClassName.endsWith("ServiceUtil")) {
-
-					String implClassName = StringUtil.replace(
-						actionClassName, new String[] {".service.", "ServiceUtil"},
-						new String[] {".service.impl.", "ServiceImpl"});
+					String implClassName = StringUtil.replace(actionClassName, new String[] {".service.", "ServiceUtil"}, new String[] {".service.impl.", "ServiceImpl"});
 
 					try {
 						serviceClass = JavadocUtil.loadClass(actionClass.getClassLoader(), implClassName);
@@ -79,19 +76,18 @@ String signature = ParamUtil.getString(request, "signature");
 
 				JavadocClass javadocClass = JavadocManagerUtil.lookupJavadocClass(serviceClass);
 
-				String comment = null;
+				String javadocClassComment = null;
 
 				if (javadocClass != null) {
-					comment = javadocClass.getComment();
+					javadocClassComment = javadocClass.getComment();
 				}
 				%>
 
-				<c:if test="<%= Validator.isNotNull(comment) %>">
+				<c:if test="<%= Validator.isNotNull(javadocClassComment) %>">
 					<p class="lfr-api-param-comment">
-						<%= comment %>
+						<%= javadocClassComment %>
 					</p>
 				</c:if>
-
 			</div>
 			<div class="lfr-api-param">
 				<span class="lfr-api-param-name">
@@ -101,16 +97,16 @@ String signature = ParamUtil.getString(request, "signature");
 				<%
 				JavadocMethod javadocMethod = JavadocManagerUtil.lookupJavadocMethod(actionMethod);
 
-				comment = null;
+				String javadocMethodComment = null;
 
 				if (javadocMethod != null) {
-					comment = javadocMethod.getComment();
+					javadocMethodComment = javadocMethod.getComment();
 				}
 				%>
 
-				<c:if test="<%= Validator.isNotNull(comment) %>">
+				<c:if test="<%= Validator.isNotNull(javadocMethodComment) %>">
 					<p class="lfr-api-param-comment">
-						<%= comment %>
+						<%= javadocMethodComment %>
 					</p>
 				</c:if>
 			</div>
@@ -195,7 +191,7 @@ String signature = ParamUtil.getString(request, "signature");
 				<%
 				Class<?> returnTypeClass = actionMethod.getReturnType();
 
-				String returnTypeName = "";
+				String returnTypeName = StringPool.BLANK;
 
 				while (returnTypeClass.isArray()) {
 					returnTypeClass = returnTypeClass.getComponentType();
