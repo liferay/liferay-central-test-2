@@ -1,5 +1,7 @@
 package ${packagePath}.model;
 
+import ${packagePath}.service.ClpSerializer;
+
 <#if entity.hasLocalService() && entity.hasColumns()>
 	import ${packagePath}.service.${entity.name}LocalServiceUtil;
 </#if>
@@ -27,6 +29,8 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Method;
 
 import java.sql.Blob;
 
@@ -222,7 +226,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 				try {
 					Class<?> clazz = _${entity.varName}RemoteModel.getClass();
 
-					java.lang.reflect.Method method = clazz.getMethod("set${column.methodName}", ${column.type}.class);
+					Method method = clazz.getMethod("set${column.methodName}", ${column.type}.class);
 
 					method.invoke(_${entity.varName}RemoteModel, ${column.name});
 				}
@@ -335,6 +339,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			{
 				try {
 					String methodName = "${method.name}";
+
 					Class<?>[] parameterTypes = new Class<?>[] {
 						<#list parameters as parameter>
 							${parameter.type.getValue()}.class
@@ -515,14 +520,12 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 		_${entity.varName}RemoteModel = ${entity.varName}RemoteModel;
 	}
 
-	public Object invokeOnRemoteModel(String methodName, Class<?>[] parameterTypes, Object[] parameterValues)
-		throws Exception {
-
+	public Object invokeOnRemoteModel(String methodName, Class<?>[] parameterTypes, Object[] parameterValues) throws Exception {
 		Object[] remoteParameterValues = new Object[parameterValues.length];
 
 		for (int i = 0; i < parameterValues.length; i++) {
 			if (parameterValues[i] != null) {
-				remoteParameterValues[i] = ${packagePath}.service.ClpSerializer.translateInput(parameterValues[i]);
+				remoteParameterValues[i] = ClpSerializer.translateInput(parameterValues[i]);
 			}
 		}
 
@@ -538,16 +541,17 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			}
 			else {
 				String parameterTypeName = parameterTypes[i].getName();
+
 				remoteParameterTypes[i] = remoteModelClassLoader.loadClass(parameterTypeName);
 			}
 		}
 
-		java.lang.reflect.Method method = remoteModelClass.getMethod(methodName, remoteParameterTypes);
+		Method method = remoteModelClass.getMethod(methodName, remoteParameterTypes);
 
 		Object returnValue = method.invoke(_${entity.varName}RemoteModel, remoteParameterValues);
 
 		if (returnValue != null) {
-			returnValue = ${packagePath}.service.ClpSerializer.translateOutput(returnValue);
+			returnValue = ClpSerializer.translateOutput(returnValue);
 		}
 
 		return returnValue;
