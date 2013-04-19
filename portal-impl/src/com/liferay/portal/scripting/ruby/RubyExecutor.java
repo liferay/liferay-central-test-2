@@ -246,8 +246,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			return futureTask.get();
 		}
 		catch (Exception e) {
-			oneTimeExecutorThread.interrupt();
 			futureTask.cancel(true);
+			oneTimeExecutorThread.interrupt();
 
 			throw new ScriptingException(e);
 		}
