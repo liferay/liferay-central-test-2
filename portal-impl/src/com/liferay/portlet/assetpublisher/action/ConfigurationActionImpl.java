@@ -192,15 +192,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			resourceRequest);
 
-		String fieldsNamespace = ParamUtil.getString(
-			resourceRequest, "fieldsNamespace");
-
 		long structureId = ParamUtil.getLong(resourceRequest, "structureId");
 
 		Fields fields = (Fields)serviceContext.getAttribute(
 			Fields.class.getName() + structureId);
 
 		if (fields == null) {
+			String fieldsNamespace = ParamUtil.getString(
+				resourceRequest, "fieldsNamespace");
+
 			fields = DDMUtil.getFields(
 				structureId, fieldsNamespace, serviceContext);
 		}

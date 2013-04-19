@@ -23,7 +23,7 @@ String eventName = ParamUtil.getString(request, "eventName", "selectDDMStructure
 
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
-List<Tuple> classTypeFields = assetRendererFactory.getClassTypeFieldNames(classTypeId, locale);
+List<Tuple> classTypeFieldNames = assetRendererFactory.getClassTypeFieldNames(classTypeId, locale);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -38,8 +38,8 @@ portletURL.setParameter("classTypeId", String.valueOf(classTypeId));
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= classTypeFields %>"
-			total="<%= classTypeFields.size() %>"
+			results="<%= classTypeFieldNames %>"
+			total="<%= classTypeFieldNames.size() %>"
 		/>
 
 		<liferay-ui:search-container-row
@@ -66,10 +66,10 @@ portletURL.setParameter("classTypeId", String.valueOf(classTypeId));
 			>
 				<liferay-portlet:resourceURL portletConfiguration="true" var="structureFieldURL">
 					<portlet:param name="<%= Constants.CMD %>" value="getFieldValue" />
-					<portlet:param name="fieldsNamespace" value="<%= fieldsNamespace %>" />
-					<portlet:param name="name" value="<%= name %>" />
 					<portlet:param name="portletResource" value="<%= portletResource %>" />
 					<portlet:param name="structureId" value="<%= String.valueOf(classTypeId) %>" />
+					<portlet:param name="name" value="<%= name %>" />
+					<portlet:param name="fieldsNamespace" value="<%= fieldsNamespace %>" />
 				</liferay-portlet:resourceURL>
 
 				<aui:form action="<%= structureFieldURL %>" name='<%= name + "fieldForm" %>'>
@@ -87,9 +87,9 @@ portletURL.setParameter("classTypeId", String.valueOf(classTypeId));
 				<%
 				Map<String, Object> data = new HashMap<String, Object>();
 
-				data.put("name", name);
-				data.put("label", label);
 				data.put("form", renderResponse.getNamespace() + name + "fieldForm");
+				data.put("label", label);
+				data.put("name", name);
 				%>
 
 				<aui:button cssClass="selector-button" data="<%= data %>" value="choose" />
