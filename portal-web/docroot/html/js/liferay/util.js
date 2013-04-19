@@ -1664,13 +1664,10 @@
 
 			var selectionEvent = Liferay.on(eventName, callback);
 
-			Util.openWindow(config,
-				function(dialogWindow){
-					dialogWindow.after(
-						'close',
-						selectionEvent.detach,
-						selectionEvent
-					);
+			Util.openWindow(
+				config,
+				function(dialogWindow) {
+					dialogWindow.after('close', selectionEvent.detach, selectionEvent);
 				}
 			);
 		},
