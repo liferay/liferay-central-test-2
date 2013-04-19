@@ -363,10 +363,10 @@ templateVariableGroups = TemplateContextHelper.getTemplateVariableGroups(classNa
 		var AutoComplete;
 
 		<c:choose>
-			<c:when test="<%= language.equals(TemplateConstants.LANG_TYPE_FTL )%>">
+			<c:when test="<%= language.equals(TemplateConstants.LANG_TYPE_FTL ) %>">
 				AutoComplete = A.AceEditor.AutoCompleteFreemarker;
 			</c:when>
-			<c:when test="<%= language.equals(TemplateConstants.LANG_TYPE_VM )%>">
+			<c:when test="<%= language.equals(TemplateConstants.LANG_TYPE_VM ) %>">
 				AutoComplete = new A.AceEditor.AutoCompleteVelocity;
 			</c:when>
 		</c:choose>

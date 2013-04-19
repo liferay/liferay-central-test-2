@@ -497,30 +497,30 @@ public class AssetUtil {
 
 		int sortType = getSortType(sortField);
 
-		if (sortField.equals("modifiedDate")) {
-			sortField = Field.MODIFIED_DATE;
-		}
-		else if (sortField.equals("title")) {
-			sortField = "localized_title_".concat(
-				LocaleUtil.toLanguageId(locale));
-		}
-		else if (sortField.startsWith(
-					DDMIndexerImpl.DDM_FIELD_NAMESPACE +
-						StringPool.FORWARD_SLASH)) {
+		if (sortField.startsWith(
+				DDMIndexerImpl.DDM_FIELD_NAMESPACE +
+					StringPool.FORWARD_SLASH)) {
 
 			String[] sortFields = sortField.split(StringPool.FORWARD_SLASH);
 
-			long structureId = GetterUtil.getLong(sortFields[1]);
+			long ddmStructureId = GetterUtil.getLong(sortFields[1]);
 			String fieldName = sortFields[2];
 
-			DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
-				structureId);
+			DDMStructure ddmStructure =
+				DDMStructureLocalServiceUtil.getStructure(ddmStructureId);
 
-			String fieldType = structure.getFieldType(fieldName);
+			String fieldType = ddmStructure.getFieldType(fieldName);
 
 			sortType = getSortType(fieldType);
 
 			sortField = sortField.concat(StringPool.UNDERLINE).concat(
+				LocaleUtil.toLanguageId(locale));
+		}
+		else if (sortField.equals("modifiedDate")) {
+			sortField = Field.MODIFIED_DATE;
+		}
+		else if (sortField.equals("title")) {
+			sortField = "localized_title_".concat(
 				LocaleUtil.toLanguageId(locale));
 		}
 
