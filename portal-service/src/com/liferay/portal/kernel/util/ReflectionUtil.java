@@ -55,31 +55,35 @@ public class ReflectionUtil {
 			return method;
 		}
 
-		Method :
+		bridge:
 		for (Method currentMethod : clazz.getMethods()) {
-			if (currentMethod.isBridge() &&
+			if (!currentMethod.isBridge() ||
 				name.equals(currentMethod.getName())) {
 
-				Class<?>[] currentParameterTypes =
-					currentMethod.getParameterTypes();
+				continue;
+			}
 
-				if (currentParameterTypes.length == parameterTypes.length) {
-					for (int i = 0; i < currentParameterTypes.length; i++) {
-						if (!currentParameterTypes[i].isAssignableFrom(
-								parameterTypes[i])) {
+			Class<?>[] currentParameterTypes =
+				currentMethod.getParameterTypes();
 
-							continue Method;
-						}
-					}
+			if (currentParameterTypes.length != parameterTypes.length) {
+				continue;
+			}
 
-					return currentMethod;
+			for (int i = 0; i < currentParameterTypes.length; i++) {
+				if (!currentParameterTypes[i].isAssignableFrom(
+						parameterTypes[i])) {
+
+					continue bridge;
 				}
 			}
+
+			return currentMethod;
 		}
 
 		throw new NoSuchMethodException(
-			"No such bridge method on class " + clazz + " with name " + name +
-				" parameter types " + Arrays.toString(parameterTypes));
+			"No bridge method on " + clazz + " with name " + name +
+				" and parameter types " + Arrays.toString(parameterTypes));
 	}
 
 	public static Field getDeclaredField(Class<?> clazz, String name)

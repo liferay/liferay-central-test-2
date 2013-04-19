@@ -80,12 +80,11 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	@Test
 	public void testDestroy() throws Exception {
 		MockPortalCache mockPortalCache =
-			(MockPortalCache)_mockPortalCacheManager.getCache(_testName);
+			(MockPortalCache)_mockPortalCacheManager.getCache(_TEST_NAME);
 
 		Assert.assertFalse(mockPortalCache._destroyed);
 
-		Serializer serializer = _createSerializer(
-			PortalCacheActionType.DESTROY);
+		Serializer serializer = createSerializer(PortalCacheActionType.DESTROY);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -101,9 +100,9 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGet() throws Exception {
-		Serializer serializer = _createSerializer(PortalCacheActionType.GET);
+		Serializer serializer = createSerializer(PortalCacheActionType.GET);
 
-		serializer.writeObject(_testKey);
+		serializer.writeObject(_TEST_KEY);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -118,13 +117,13 @@ public class PortalCacheDatagramReceiveHandlerTest {
 		Deserializer deserializer = new Deserializer(
 			responseDatagram.getDataByteBuffer());
 
-		Assert.assertEquals(_testValue, deserializer.readObject());
+		Assert.assertEquals(_TEST_VALUE, deserializer.readObject());
 	}
 
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGetBulk() throws Exception {
-		Serializer serializer = _createSerializer(
+		Serializer serializer = createSerializer(
 			PortalCacheActionType.GET_BULK);
 
 		serializer.writeObject((Serializable)_testKeys);
@@ -148,10 +147,10 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGetPut() throws Exception {
-		Serializer serializer = _createSerializer(PortalCacheActionType.PUT);
+		Serializer serializer = createSerializer(PortalCacheActionType.PUT);
 
-		serializer.writeObject(_testKey);
-		serializer.writeObject(_testValue);
+		serializer.writeObject(_TEST_KEY);
+		serializer.writeObject(_TEST_VALUE);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -162,20 +161,19 @@ public class PortalCacheDatagramReceiveHandlerTest {
 				_portalCacheType, serializer.toByteBuffer()));
 
 		MockPortalCache mockPortalCache =
-			(MockPortalCache)_mockPortalCacheManager.getCache(_testName);
+			(MockPortalCache)_mockPortalCacheManager.getCache(_TEST_NAME);
 
-		Assert.assertEquals(_testKey, mockPortalCache._key);
-		Assert.assertEquals(_testValue, mockPortalCache._value);
+		Assert.assertEquals(_TEST_KEY, mockPortalCache._key);
+		Assert.assertEquals(_TEST_VALUE, mockPortalCache._value);
 	}
 
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGetPutTTL() throws Exception {
-		Serializer serializer = _createSerializer(
-			PortalCacheActionType.PUT_TTL);
+		Serializer serializer = createSerializer(PortalCacheActionType.PUT_TTL);
 
-		serializer.writeObject(_testKey);
-		serializer.writeObject(_testValue);
+		serializer.writeObject(_TEST_KEY);
+		serializer.writeObject(_TEST_VALUE);
 		serializer.writeInt(100);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
@@ -187,19 +185,19 @@ public class PortalCacheDatagramReceiveHandlerTest {
 				_portalCacheType, serializer.toByteBuffer()));
 
 		MockPortalCache mockPortalCache =
-			(MockPortalCache)_mockPortalCacheManager.getCache(_testName);
+			(MockPortalCache)_mockPortalCacheManager.getCache(_TEST_NAME);
 
-		Assert.assertEquals(_testKey, mockPortalCache._key);
-		Assert.assertEquals(_testValue, mockPortalCache._value);
+		Assert.assertEquals(_TEST_KEY, mockPortalCache._key);
+		Assert.assertEquals(_TEST_VALUE, mockPortalCache._value);
 		Assert.assertEquals(100, mockPortalCache._timeToLive);
 	}
 
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGetRemove() throws Exception {
-		Serializer serializer = _createSerializer(PortalCacheActionType.REMOVE);
+		Serializer serializer = createSerializer(PortalCacheActionType.REMOVE);
 
-		serializer.writeObject(_testKey);
+		serializer.writeObject(_TEST_KEY);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -210,18 +208,18 @@ public class PortalCacheDatagramReceiveHandlerTest {
 				_portalCacheType, serializer.toByteBuffer()));
 
 		MockPortalCache mockPortalCache =
-			(MockPortalCache)_mockPortalCacheManager.getCache(_testName);
+			(MockPortalCache)_mockPortalCacheManager.getCache(_TEST_NAME);
 
-		Assert.assertEquals(_testKey, mockPortalCache._key);
+		Assert.assertEquals(_TEST_KEY, mockPortalCache._key);
 	}
 
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testGetRemoveAll() throws Exception {
-		Serializer serializer = _createSerializer(
+		Serializer serializer = createSerializer(
 			PortalCacheActionType.REMOVE_ALL);
 
-		serializer.writeObject(_testKey);
+		serializer.writeObject(_TEST_KEY);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -232,7 +230,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 				_portalCacheType, serializer.toByteBuffer()));
 
 		MockPortalCache mockPortalCache =
-			(MockPortalCache)_mockPortalCacheManager.getCache(_testName);
+			(MockPortalCache)_mockPortalCacheManager.getCache(_TEST_NAME);
 
 		Assert.assertTrue(mockPortalCache._removeAll);
 	}
@@ -248,9 +246,9 @@ public class PortalCacheDatagramReceiveHandlerTest {
 		PortalCacheActionType portalCacheActionType =
 			portalCacheActionTypes[portalCacheActionTypes.length - 1];
 
-		Serializer serializer = _createSerializer(portalCacheActionType);
+		Serializer serializer = createSerializer(portalCacheActionType);
 
-		serializer.writeObject(_testKey);
+		serializer.writeObject(_TEST_KEY);
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -269,7 +267,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 				pce.getMessage());
 		}
 
-		Method enumSwitchTableMethod = _getEnumSwitchTableMethod();
+		Method enumSwitchTableMethod = getEnumSwitchTableMethod();
 
 		int[] switchTable = (int[])enumSwitchTableMethod.invoke(null);
 
@@ -281,6 +279,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	public void testReconfigureCaches() throws Exception {
 		String className =
 			PortalCacheDatagramReceiveHandlerTest.class.getName();
+
 		String resourcePath = className.replace('.', '/');
 
 		resourcePath = resourcePath.concat(".class");
@@ -288,12 +287,12 @@ public class PortalCacheDatagramReceiveHandlerTest {
 		ClassLoader classLoader =
 			PortalCacheDatagramReceiveHandlerTest.class.getClassLoader();
 
-		URL testURL = classLoader.getResource(resourcePath);
+		URL url = classLoader.getResource(resourcePath);
 
 		Serializer serializer = new Serializer();
 
 		serializer.writeInt(PortalCacheActionType.RECONFIGURE.ordinal());
-		serializer.writeString(testURL.toString());
+		serializer.writeString(url.toString());
 
 		PortalCacheDatagramReceiveHandler portalCacheDatagramReceiveHandler =
 			new PortalCacheDatagramReceiveHandler();
@@ -303,9 +302,9 @@ public class PortalCacheDatagramReceiveHandlerTest {
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 
-		Assert.assertEquals(testURL, _mockPortalCacheManager._configurationURL);
+		Assert.assertEquals(url, _mockPortalCacheManager._configurationURL);
 
-		Method enumSwitchTableMethod = _getEnumSwitchTableMethod();
+		Method enumSwitchTableMethod = getEnumSwitchTableMethod();
 
 		int[] switchTable = (int[])enumSwitchTableMethod.invoke(null);
 
@@ -345,25 +344,31 @@ public class PortalCacheDatagramReceiveHandlerTest {
 
 	}
 
-	private static Method _getEnumSwitchTableMethod() throws Exception {
-		String enumClassName = PortalCacheActionType.class.getName();
+	protected static Method getEnumSwitchTableMethod() throws Exception {
+		String className = PortalCacheActionType.class.getName();
 
-		String methodName = "$SWITCH_TABLE$" + enumClassName.replace('.', '$');
+		String methodName = "$SWITCH_TABLE$" + className.replace('.', '$');
 
 		return ReflectionUtil.getDeclaredMethod(
 			PortalCacheDatagramReceiveHandler.class, methodName);
 	}
 
-	private Serializer _createSerializer(
+	protected Serializer createSerializer(
 		PortalCacheActionType portalCacheActionType) {
 
 		Serializer serializer = new Serializer();
 
 		serializer.writeInt(portalCacheActionType.ordinal());
-		serializer.writeString(_testName);
+		serializer.writeString(_TEST_NAME);
 
 		return serializer;
 	}
+
+	private static final String _TEST_KEY = "testKey";
+
+	private static final String _TEST_NAME = "testName";
+
+	private static final String _TEST_VALUE = "testValue";
 
 	private MockIntraBand _mockIntraBand = new MockIntraBand();
 	private MockPortalCacheManager _mockPortalCacheManager =
@@ -373,14 +378,10 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	private SystemDataType _portalCacheSystemDataType =
 		SystemDataType.PORTAL_CACHE;
 	private byte _portalCacheType = _portalCacheSystemDataType.getValue();
-	private String _testKey = "testKey";
 	private List<String> _testKeys = Arrays.asList(
-			"testKey1", "testKey2", "testKey3");
-	private String _testName = "testName";
-	private String _testValue = "testValue";
+		"testKey1", "testKey2", "testKey3");
 	private List<String> _testValues = Arrays.asList(
-			"testValue1", "testValue2", "testValue3");
-
+		"testValue1", "testValue2", "testValue3");
 	private class MockPortalCache implements PortalCache<String, String> {
 
 		public MockPortalCache(String name) {
@@ -400,8 +401,8 @@ public class PortalCacheDatagramReceiveHandlerTest {
 		}
 
 		public String get(String key) {
-			if (_testKey.equals(key)) {
-				return _testValue;
+			if (_TEST_KEY.equals(key)) {
+				return _TEST_VALUE;
 			}
 
 			return null;

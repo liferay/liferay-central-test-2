@@ -106,6 +106,9 @@ public class IntraBandPortalCacheTest {
 
 	@Test
 	public void testGet() {
+
+		// Normal get
+
 		final String testKey = "testKey";
 		final String testValue = "testValue";
 
@@ -138,8 +141,7 @@ public class IntraBandPortalCacheTest {
 				Assert.assertEquals(_testName, deserializer.readString());
 
 				try {
-					Assert.assertEquals(
-						testKey, (String)deserializer.readObject());
+					Assert.assertEquals(testKey, deserializer.readObject());
 				}
 				catch (ClassNotFoundException cnfe) {
 					Assert.fail();
@@ -162,8 +164,6 @@ public class IntraBandPortalCacheTest {
 		IntraBandPortalCache<String, String> intraBandPortalCache =
 			new IntraBandPortalCache<String, String>(
 				_testName, new MockRegistrationReference(mockIntraBand));
-
-		// Normal get
 
 		Assert.assertEquals(testValue, intraBandPortalCache.get(testKey));
 
@@ -196,9 +196,11 @@ public class IntraBandPortalCacheTest {
 
 	@Test
 	public void testGetBulk() {
+
+		// Normal bulk get
+
 		final List<String> testKeys = Arrays.asList(
 			"testKey1", "testKey2", "testKey3");
-
 		final List<String> testValues = Arrays.asList(
 			"testValue1", "testValue2", "testValue3");
 
@@ -233,8 +235,7 @@ public class IntraBandPortalCacheTest {
 				Assert.assertEquals(_testName, deserializer.readString());
 
 				try {
-					Assert.assertEquals(
-						testKeys, (List<String>)deserializer.readObject());
+					Assert.assertEquals(testKeys, deserializer.readObject());
 				}
 				catch (ClassNotFoundException cnfe) {
 					Assert.fail();
@@ -257,8 +258,6 @@ public class IntraBandPortalCacheTest {
 		IntraBandPortalCache<String, String> intraBandPortalCache =
 			new IntraBandPortalCache<String, String>(
 				_testName, new MockRegistrationReference(mockIntraBand));
-
-		// Normal bulk get
 
 		Assert.assertEquals(testValues, intraBandPortalCache.get(testKeys));
 

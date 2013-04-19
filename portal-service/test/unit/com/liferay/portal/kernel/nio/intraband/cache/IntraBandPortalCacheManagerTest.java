@@ -90,7 +90,7 @@ public class IntraBandPortalCacheManagerTest {
 		Assert.assertEquals(1, portalCaches.size());
 		Assert.assertSame(portalCache, portalCaches.get(portalCacheName));
 
-		// Get exist
+		// Get existing
 
 		PortalCache<?, ?> portalCache2 = intraBandPortalCacheManager.getCache(
 			portalCacheName);
@@ -125,14 +125,14 @@ public class IntraBandPortalCacheManagerTest {
 		ClassLoader classLoader =
 			IntraBandPortalCacheManagerTest.class.getClassLoader();
 
-		URL testURL = classLoader.getResource(resourcePath);
+		URL url = classLoader.getResource(resourcePath);
 
 		IntraBandPortalCacheManager<String, String>
 			intraBandPortalCacheManager =
 				new IntraBandPortalCacheManager<String, String>(
 					_mockRegistrationReference);
 
-		intraBandPortalCacheManager.reconfigureCaches(testURL);
+		intraBandPortalCacheManager.reconfigureCaches(url);
 
 		Datagram datagram = _mockIntraBand.getDatagram();
 
@@ -147,8 +147,7 @@ public class IntraBandPortalCacheManagerTest {
 		Assert.assertEquals(
 			PortalCacheActionType.RECONFIGURE,
 			portalCacheActionTypes[actionTypeOrdinal]);
-		Assert.assertEquals(
-			testURL.toExternalForm(), deserializer.readString());
+		Assert.assertEquals(url.toExternalForm(), deserializer.readString());
 	}
 
 	@Test
@@ -175,14 +174,10 @@ public class IntraBandPortalCacheManagerTest {
 		Assert.assertSame(portalCache1, portalCaches.get(portalCacheName1));
 		Assert.assertSame(portalCache2, portalCaches.get(portalCacheName2));
 
-		// Remove
-
 		intraBandPortalCacheManager.removeCache(portalCacheName1);
 
 		Assert.assertEquals(1, portalCaches.size());
 		Assert.assertSame(portalCache2, portalCaches.get(portalCacheName2));
-
-		// Clear
 
 		intraBandPortalCacheManager.clearAll();
 
