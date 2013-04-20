@@ -37,18 +37,12 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class MailboxUtil {
 
-	public static final boolean REAPER_THREAD_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED));
-
-	public static final long STORAGE_LIFE = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE));
-
 	public static ByteBuffer receiveMail(long receipt) {
 		ByteBuffer byteBuffer = _mailMap.remove(receipt);
 
 		_overdueMailQueue.remove(new ReceiptStub(receipt));
 
-		if (!REAPER_THREAD_ENABLED) {
+		if (!_INTRABAND_MAILBOX_REAPER_THREAD_ENABLED) {
 			_pollingCleanup();
 		}
 
@@ -85,7 +79,7 @@ public class MailboxUtil {
 
 		_overdueMailQueue.offer(new ReceiptStub(receipt, System.nanoTime()));
 
-		if (!REAPER_THREAD_ENABLED) {
+		if (!_INTRABAND_MAILBOX_REAPER_THREAD_ENABLED) {
 			_pollingCleanup();
 		}
 
@@ -100,13 +94,19 @@ public class MailboxUtil {
 		}
 	}
 
-	private static final Map<Long, ByteBuffer> _mailMap =
+	private static final boolean _INTRABAND_MAILBOX_REAPER_THREAD_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED));
+
+	private static final long _INTRABAND_MAILBOX_STORAGE_LIFE =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE));
+
+	private static Map<Long, ByteBuffer> _mailMap =
 		new ConcurrentHashMap<Long, ByteBuffer>();
-
-	private static final BlockingQueue<ReceiptStub> _overdueMailQueue =
+	private static BlockingQueue<ReceiptStub> _overdueMailQueue =
 		new DelayQueue<ReceiptStub>();
-
-	private static final AtomicLong _receiptGenerator = new AtomicLong();
+	private static AtomicLong _receiptGenerator = new AtomicLong();
 
 	private static class OverdueMailReaperThread extends Thread {
 
@@ -136,7 +136,7 @@ public class MailboxUtil {
 
 		public ReceiptStub(long receipt, long currentNanoTime) {
 			_expireTime = currentNanoTime + TimeUnit.MILLISECONDS.toNanos(
-				STORAGE_LIFE);
+				_INTRABAND_MAILBOX_STORAGE_LIFE);
 			_receipt = receipt;
 		}
 
@@ -169,12 +169,11 @@ public class MailboxUtil {
 	}
 
 	static {
-		if (REAPER_THREAD_ENABLED) {
+		if (_INTRABAND_MAILBOX_REAPER_THREAD_ENABLED) {
 			Thread thread = new OverdueMailReaperThread(
-				"Overdue Mail Reaper Thread");
+				MailboxUtil.class.getName());
 
 			thread.setContextClassLoader(MailboxUtil.class.getClassLoader());
-
 			thread.setDaemon(true);
 
 			thread.start();
