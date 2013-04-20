@@ -60,9 +60,9 @@ public class IntraBandBridgeMessageListenerTest {
 
 		Message message = new Message();
 
-		String testPayload = "testPayload";
+		String payload = "payload";
 
-		message.setPayload(testPayload);
+		message.setPayload(payload);
 
 		intraBandBridgeMessageListener.receive(message);
 
@@ -74,7 +74,7 @@ public class IntraBandBridgeMessageListenerTest {
 		Message receivedMessage = deserializer.readObject();
 
 		Assert.assertNotNull(receivedMessage);
-		Assert.assertEquals(testPayload, receivedMessage.getPayload());
+		Assert.assertEquals(payload, receivedMessage.getPayload());
 	}
 
 	private static MockIntraBand getIntraBand(

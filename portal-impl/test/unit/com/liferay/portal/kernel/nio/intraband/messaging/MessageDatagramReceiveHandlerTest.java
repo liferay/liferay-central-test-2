@@ -54,38 +54,39 @@ public class MessageDatagramReceiveHandlerTest {
 		PortalClassLoaderUtil.setClassLoader(
 			MessageDatagramReceiveHandlerTest.class.getClassLoader());
 
-		Message message = new Message();
-
-		String testDestinationName = "testDestination";
-
-		message.setDestinationName(testDestinationName);
-
-		String testPayload = "testPayload";
-
-		message.setPayload(testPayload);
-
-		Serializer serializer = new Serializer();
-
-		serializer.writeObject(message);
+		MessageDatagramReceiveHandler messageDatagramReceiveHandler =
+			new MessageDatagramReceiveHandler();
 
 		SystemDataType systemDataType = SystemDataType.MESSAGE;
 
+		Serializer serializer = new Serializer();
+
+		Message message = new Message();
+
+		String destinationName =
+			MessageDatagramReceiveHandlerTest.class.getName();
+
+		message.setDestinationName(destinationName);
+
+		String payload = "payload";
+
+		message.setPayload(payload);
+
+		serializer.writeObject(message);
+
 		Datagram datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), serializer.toByteBuffer());
-
-		MessageDatagramReceiveHandler messageDatagramReceiveHandler =
-			new MessageDatagramReceiveHandler();
 
 		messageDatagramReceiveHandler.doReceive(
 			_mockRegistrationReference, datagram);
 
 		Assert.assertEquals(
-			testDestinationName, MessageBusUtilAdvice._destinationNamse);
+			destinationName, MessageBusUtilAdvice._destinationNamse);
 		Assert.assertNotNull(MessageBusUtilAdvice._message);
 
 		Message recordedMessage = MessageBusUtilAdvice._message;
 
-		Assert.assertEquals(testPayload, recordedMessage.getPayload());
+		Assert.assertEquals(payload, recordedMessage.getPayload());
 	}
 
 	@Aspect
