@@ -16,6 +16,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -28,6 +29,7 @@ import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
 import com.liferay.util.xml.DocUtil;
+
 import com.thoughtworks.qdox.JavaDocBuilder;
 import com.thoughtworks.qdox.model.AbstractBaseJavaEntity;
 import com.thoughtworks.qdox.model.AbstractJavaEntity;
@@ -49,6 +51,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -161,12 +164,13 @@ public class JavadocFormatter {
 			System.out.println(sb.toString());
 		}
 
-		File propertiesFile = new File(_LANGUAGE_PROPERTIES_PATH);
-		if (propertiesFile.exists()) {
-			_portalLanguageKeysProperties = new Properties();
+		_languagePropertiesFile = new File("src/content/Language.properties");
 
-			_portalLanguageKeysProperties.load(
-				new FileInputStream(propertiesFile.getAbsolutePath()));
+		if (_languagePropertiesFile.exists()) {
+			_languageProperties = new Properties();
+
+			_languageProperties.load(
+				new FileInputStream(_languagePropertiesFile.getAbsolutePath()));
 		}
 
 		for (String fileName : fileNames) {
@@ -221,7 +225,7 @@ public class JavadocFormatter {
 	}
 
 	private void _addClassCommentElement(
-		Element rootElement, JavaClass javaClass) throws IOException {
+		Element rootElement, JavaClass javaClass) {
 
 		String comment = _getCDATA(javaClass);
 
@@ -1491,7 +1495,7 @@ public class JavadocFormatter {
 		JavaClass javaClass = _getJavaClass(
 			fileName, new UnsyncStringReader(javadocLessContent));
 
-		_writeClassCommentToLanguageProperties(document, javaClass.getName());
+		_updateLanguageProperties(document, javaClass.getName());
 
 		List<JavaClass> ancestorJavaClasses = _getAncestorJavaClasses(
 			javaClass);
@@ -1593,6 +1597,113 @@ public class JavadocFormatter {
 		}
 	}
 
+	private void _updateLanguageProperties(Document document, String className)
+		throws IOException {
+
+		if (_languageProperties == null) {
+			return;
+		}
+
+		int index = className.indexOf("ServiceImpl");
+
+		if (index <= 0) {
+			return;
+		}
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(Character.toLowerCase(className.charAt(0)));
+
+		for (int i = 1; i < index; i++) {
+			char c = className.charAt(i);
+
+			if (Character.isUpperCase(c)) {
+				sb.append(CharPool.DASH);
+				sb.append(Character.toLowerCase(c));
+			}
+			else {
+				sb.append(c);
+			}
+		}
+
+		sb.append("-service-help");
+
+		String key = sb.toString();
+
+		String value = _languageProperties.getProperty(key);
+
+		if (value == null) {
+			return;
+		}
+
+		Element rootElement = document.getRootElement();
+
+		String comment = rootElement.elementText("comment");
+
+		if ((comment == null) || value.equals(comment)) {
+			return;
+		}
+
+		index = comment.indexOf("\n\n");
+
+		if (index != -1) {
+			value = comment.substring(0, index);
+		}
+		else {
+			value = comment;
+		}
+
+		_updateLanguageProperties(key, value);
+	}
+
+	private void _updateLanguageProperties(String key, String value)
+		throws IOException {
+
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(_languagePropertiesFile));
+
+		StringBundler sb = new StringBundler();
+
+		boolean begin = false;
+		boolean firstLine = true;
+		String linePrefix = key + "=";
+
+		String line = null;
+
+		while ((line = unsyncBufferedReader.readLine()) != null) {
+			if (line.equals(StringPool.BLANK)) {
+				begin = !begin;
+			}
+
+			if (firstLine) {
+				firstLine = false;
+			}
+			else {
+				sb.append(StringPool.NEW_LINE);
+			}
+
+			if (line.startsWith(linePrefix)) {
+				sb.append(linePrefix + value);
+			}
+			else {
+				sb.append(line);
+			}
+		}
+
+		unsyncBufferedReader.close();
+
+		Writer writer = new OutputStreamWriter(
+			new FileOutputStream(_languagePropertiesFile, false),
+			StringPool.UTF8);
+
+		writer.write(sb.toString());
+
+		writer.close();
+
+		System.out.println(
+			"Updating " + _languagePropertiesFile + " key " + key);
+	}
+
 	private String _wrapText(String text, String indent) {
 		int indentLength = _getIndentLength(indent);
 
@@ -1632,104 +1743,6 @@ public class JavadocFormatter {
 		return text;
 	}
 
-	private void _writeClassCommentToLanguageProperties(Document document, String className)
-		throws IOException {
-
-		File propertiesFile = new File(_LANGUAGE_PROPERTIES_PATH);
-		if (!propertiesFile.exists()) {
-			return;
-		}
-
-		int pos = className.indexOf("ServiceImpl");
-		if (pos > 0) {
-
-			StringBundler sb = new StringBundler();
-			sb.append(Character.toLowerCase(className.charAt(0)));
-
-			for (int i = 1; i < pos; i++) {
-				char ch = className.charAt(i);
-
-				if (Character.isUpperCase(ch)) {
-					sb.append("-");
-					sb.append(Character.toLowerCase(ch));
-				}
-				else {
-					sb.append(ch);
-				}
-			}
-
-			String key = sb.toString() + "-service-help";
-			String currValue = _portalLanguageKeysProperties.getProperty(key);
-
-			if (currValue != null) {
-				String comment = document.getRootElement().elementText("comment");
-
-				if (comment != null && !currValue.equals(comment)) {
-					int endPos = comment.indexOf("\n\n");
-
-					String value;
-					if (endPos != -1) {
-						value = comment.substring(0, endPos);
-					}
-					else {
-						value = comment;
-					}
-
-					_writeLanguageProperty(propertiesFile, key, value);
-				}
-			}
-		}
-	}
-
-	private void _writeLanguageProperty(File propertiesFile, String key, String value)
-		throws IOException {
-
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new FileReader(propertiesFile));
-
-		StringBundler sb = new StringBundler();
-
-		boolean begin = false;
-		boolean firstLine = true;
-
-		String line = null;
-
-		while ((line = unsyncBufferedReader.readLine()) != null) {
-
-			if (line.equals("")) {
-				begin = !begin;
-			}
-
-			if (firstLine) {
-				firstLine = false;
-			}
-			else {
-				sb.append(StringPool.NEW_LINE);
-			}
-
-			if (line.startsWith(key)) {
-				String newLine = key + "=" + value;
-				sb.append(newLine);
-			}
-			else {
-				sb.append(line);
-			}
-		}
-
-		unsyncBufferedReader.close();
-
-		Writer writer = new OutputStreamWriter(
-			new FileOutputStream(propertiesFile, false), StringPool.UTF8);
-
-		writer.write(sb.toString());
-
-		writer.close();
-
-		System.out.println("Writing " + key + " property to " + propertiesFile);
-	}
-
-	private static final String _LANGUAGE_PROPERTIES_PATH = "src/content/Language.properties";
-
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
@@ -1738,8 +1751,9 @@ public class JavadocFormatter {
 	private String _inputDir;
 	private Map<String, Tuple> _javadocxXmlTuples =
 		new HashMap<String, Tuple>();
+	private Properties _languageProperties;
+	private File _languagePropertiesFile;
 	private String _outputFilePrefix;
-	private Properties _portalLanguageKeysProperties;
 	private boolean _updateJavadocs;
 
 }
