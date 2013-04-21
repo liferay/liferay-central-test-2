@@ -772,7 +772,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 			Permission permission = new PortalRuntimePermission(
 				PACLConstants.PORTAL_RUNTIME_PERMISSION_GET_BEAN_PROPERTY,
-				servletContextName, clazz, property);
+				servletContextName, clazz.getName(), property);
 
 			securityManager.checkPermission(permission);
 		}
@@ -836,7 +836,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 			Permission permission = new PortalRuntimePermission(
 				PACLConstants.PORTAL_RUNTIME_PERMISSION_SET_BEAN_PROPERTY,
-				servletContextName, clazz, property);
+				servletContextName, clazz.getName(), property);
 
 			securityManager.checkPermission(permission);
 		}
@@ -869,10 +869,36 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				return;
 			}
 
+			String methodName = method.getName();
+
+			if (methodName.equals("invokeMethod")) {
+				methodName = (String)arguments[0];
+			}
+
+			Class<?> clazz = PACLUtil.getClass(object);
+
+			String className = PACLUtil.getServiceInterfaceName(
+				clazz.getName());
+
+			ClassLoader classLoader = ClassLoaderUtil.getClassLoader(clazz);
+
+			PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
+				classLoader);
+
+			if (paclPolicy == PACLUtil.getPACLPolicy()) {
+				return;
+			}
+
+			String servletContextName = "portal";
+
+			if (paclPolicy != null) {
+				servletContextName = paclPolicy.getServletContextName();
+			}
+
 			PortalServicePermission portalServicePermission =
 				new PortalServicePermission(
-					PACLConstants.PORTAL_SERVICE_PERMISSION_SERVICE, object,
-					method, arguments);
+					PACLConstants.PORTAL_SERVICE_PERMISSION_SERVICE,
+					servletContextName, className, methodName);
 
 			securityManager.checkPermission(portalServicePermission);
 		}
