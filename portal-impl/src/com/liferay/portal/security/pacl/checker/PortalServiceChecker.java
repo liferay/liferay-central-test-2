@@ -88,7 +88,7 @@ public class PortalServiceChecker extends BaseChecker {
 					StringPool.CLOSE_BRACKET;
 		}
 
-		String className = getInterfaceName(clazz.getName());
+		String className = PACLUtil.getServiceInterfaceName(clazz.getName());
 
 		String methodName = method.getName();
 
@@ -134,21 +134,6 @@ public class PortalServiceChecker extends BaseChecker {
 		}
 
 		return true;
-	}
-
-	protected String getInterfaceName(String className) {
-		int pos = className.indexOf(".impl.");
-
-		if (pos != -1) {
-			className =
-				className.substring(0, pos + 1) + className.substring(pos + 6);
-		}
-
-		if (className.endsWith("Impl")) {
-			className = className.substring(0, className.length() - 4);
-		}
-
-		return className;
 	}
 
 	protected Set<String> getServices(PACLPolicy paclPolicy) {
@@ -220,7 +205,7 @@ public class PortalServiceChecker extends BaseChecker {
 
 		Set<String> services = getServices(paclPolicy);
 
-		String className = getInterfaceName(clazz.getName());
+		String className = PACLUtil.getServiceInterfaceName(clazz.getName());
 
 		if (services.contains(className)) {
 			return true;
