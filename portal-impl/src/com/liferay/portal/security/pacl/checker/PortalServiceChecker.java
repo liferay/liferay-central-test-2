@@ -113,18 +113,7 @@ public class PortalServiceChecker extends BaseChecker {
 		String name = portalServicePermission.getName();
 		Object object = portalServicePermission.getObject();
 
-		if (name.equals(PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY)) {
-			Class<?> implClass = (Class<?>)object;
-
-			if (!hasDynamicQuery(implClass)) {
-				logSecurityException(
-					_log,
-					"Attempted to create a dynamic query for " + implClass);
-
-				return false;
-			}
-		}
-		else if (name.equals(PORTAL_SERVICE_PERMISSION_SERVICE)) {
+		if (name.equals(PORTAL_SERVICE_PERMISSION_SERVICE)) {
 			Method method = portalServicePermission.getMethod();
 			Object[] arguments = portalServicePermission.getArguments();
 
@@ -151,26 +140,6 @@ public class PortalServiceChecker extends BaseChecker {
 		}
 
 		return services;
-	}
-
-	protected boolean hasDynamicQuery(Class<?> clazz) {
-		ClassLoader classLoader = ClassLoaderUtil.getClassLoader(clazz);
-
-		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(classLoader);
-
-		if (paclPolicy == getPACLPolicy()) {
-			return true;
-		}
-
-		/*Set<String> services = getServices(paclPolicy);
-
-		String className = getInterfaceName(clazz.getName());
-
-		if (services.contains(className)) {
-			return true;
-		}*/
-
-		return false;
 	}
 
 	protected boolean hasService(

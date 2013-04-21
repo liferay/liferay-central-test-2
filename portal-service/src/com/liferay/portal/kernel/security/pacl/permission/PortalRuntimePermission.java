@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.security.pacl.permission;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.security.BasicPermission;
@@ -24,6 +26,10 @@ import java.security.BasicPermission;
  * @author Raymond Augé
  */
 public class PortalRuntimePermission extends BasicPermission {
+
+	public static void checkDynamicQuery(Class<?> implClass) {
+		_pacl.checkDynamicQuery(implClass);
+	}
 
 	public static void checkExpandoBridge(String className) {
 		_pacl.checkExpandoBridge(className);
@@ -154,13 +160,38 @@ public class PortalRuntimePermission extends BasicPermission {
 		_pacl.checkGetBeanProperty(servletContextName, clazz, property);
 	}
 
+	private static String _createLongName(
+		String name, String servletContextName, String subject) {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(name);
+		sb.append(StringPool.POUND);
+
+		if (Validator.isNull(servletContextName)) {
+			sb.append("portal");
+		}
+		else {
+			sb.append(servletContextName);
+		}
+
+		sb.append(StringPool.POUND);
+		sb.append(subject);
+
+		return sb.toString();
+	}
+
 	private static PACL _pacl = new NoPACL();
 
 	private String _property;
 	private String _servletContextName;
-	private Object _subject;
+	private String _shortName;
+	private String _subject;
 
 	private static class NoPACL implements PACL {
+
+		public void checkDynamicQuery(Class<?> implClass) {
+		}
 
 		public void checkExpandoBridge(String className) {
 		}
@@ -188,6 +219,8 @@ public class PortalRuntimePermission extends BasicPermission {
 	}
 
 	public static interface PACL {
+
+		public void checkDynamicQuery(Class<?> implClass);
 
 		public void checkExpandoBridge(String className);
 

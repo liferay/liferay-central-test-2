@@ -707,6 +707,35 @@ public class PortalSecurityManagerImpl extends SecurityManager
 	private static class DoPortalRuntimePermissionPACL
 		implements PortalRuntimePermission.PACL {
 
+		public void checkDynamicQuery(Class<?> implClass) {
+			SecurityManager securityManager = System.getSecurityManager();
+
+			if (securityManager == null) {
+				return;
+			}
+
+			ClassLoader classLoader = ClassLoaderUtil.getClassLoader(implClass);
+
+			PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
+				classLoader);
+
+			if (paclPolicy == PACLUtil.getPACLPolicy()) {
+				return;
+			}
+
+			String classLoaderReferenceId = "portal";
+
+			if (paclPolicy != null) {
+				classLoaderReferenceId = paclPolicy.getServletContextName();
+			}
+
+			Permission permission = new PortalRuntimePermission(
+				PACLConstants.PORTAL_RUNTIME_PERMISSION_GET_CLASSLOADER, null,
+				classLoaderReferenceId);
+
+			securityManager.checkPermission(permission);
+		}
+
 		public void checkExpandoBridge(String className) {
 			SecurityManager securityManager = System.getSecurityManager();
 
@@ -830,20 +859,6 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	private static class DoPortalServicePermissionPACL
 		implements PortalServicePermission.PACL {
-
-		public void checkDynamicQuery(Class<?> implClass) {
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager == null) {
-				return;
-			}
-
-			Permission permission = new PortalServicePermission(
-				PACLConstants.PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY,
-				implClass, null);
-
-			securityManager.checkPermission(permission);
-		}
 
 		public void checkService(
 			Object object, Method method, Object[] arguments) {

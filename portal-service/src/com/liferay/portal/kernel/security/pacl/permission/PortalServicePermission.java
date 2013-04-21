@@ -26,10 +26,6 @@ import java.security.BasicPermission;
  */
 public class PortalServicePermission extends BasicPermission {
 
-	public static void checkDynamicQuery(Class<?> implClass) {
-		_pacl.checkDynamicQuery(implClass);
-	}
-
 	public static void checkService(
 		Object object, Method method, Object[] arguments) {
 
@@ -102,9 +98,6 @@ public class PortalServicePermission extends BasicPermission {
 
 	private static class NoPACL implements PACL {
 
-		public void checkDynamicQuery(Class<?> implClass) {
-		}
-
 		public void checkService(
 			Object object, Method method, Object[] arguments) {
 		}
@@ -112,8 +105,6 @@ public class PortalServicePermission extends BasicPermission {
 	}
 
 	public static interface PACL {
-
-		public void checkDynamicQuery(Class<?> implClass);
 
 		public void checkService(
 			Object object, Method method, Object[] arguments);
