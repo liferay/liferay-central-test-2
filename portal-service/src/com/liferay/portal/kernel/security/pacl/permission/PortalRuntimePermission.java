@@ -91,21 +91,32 @@ public class PortalRuntimePermission extends BasicPermission {
 		_pacl.checkThreadPoolExecutor(name);
 	}
 
+	public PortalRuntimePermission(String name, String property) {
+		super(name);
+
+		_init();
+		_property = property;
+	}
+
 	public PortalRuntimePermission(
-		String name, String servletContextName, Object subject) {
+		String name, String servletContextName, String subject) {
 
 		this(name, servletContextName, subject, null);
 	}
 
 	public PortalRuntimePermission(
-		String name, String servletContextName, Object subject,
+		String name, String servletContextName, String subject,
 		String property) {
 
-		super(name);
+		super(_createLongName(name, servletContextName, subject));
 
-		_servletContextName = servletContextName;
+		_init();
 		_property = property;
-		_subject = subject;
+	}
+
+	@Override
+	public String getActions() {
+		return _property;
 	}
 
 	public String getProperty() {
@@ -113,42 +124,30 @@ public class PortalRuntimePermission extends BasicPermission {
 	}
 
 	public String getServletContextName() {
-		if (Validator.isNull(_servletContextName)) {
-			return "portal";
-		}
-
 		return _servletContextName;
 	}
 
-	public Object getSubject() {
+	public String getShortName() {
+		return _shortName;
+	}
+
+	public String getSubject() {
 		return _subject;
 	}
 
-	@Override
-	public String toString() {
-		StringBundler sb = new StringBundler(11);
+	private void _init() {
+		String[] nameParts = StringUtil.split(getName(), StringPool.POUND);
 
-		sb.append("{class=");
-
-		Class<?> clazz = getClass();
-
-		sb.append(clazz.getName());
-
-		sb.append(", name=");
-		sb.append(getName());
-
-		if (_property != null) {
-			sb.append(", property=");
-			sb.append(_property);
+		if (nameParts.length != 3) {
+			throw new IllegalArgumentException(
+				"The format for name is: " +
+					"[name]#[servletContextName]#[subject], was " +
+						getName());
 		}
 
-		sb.append(", servletContextName=");
-		sb.append(getServletContextName());
-		sb.append(", subject=");
-		sb.append(getSubject());
-		sb.append("}");
-
-		return sb.toString();
+		_shortName = nameParts[0];
+		_servletContextName = nameParts[1];
+		_subject = nameParts[2];
 	}
 
 	/**
