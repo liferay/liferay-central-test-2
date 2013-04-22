@@ -37,8 +37,9 @@ public class PortalServicePermission extends BasicPermission {
 	public PortalServicePermission(String name, String methodName) {
 		super(name);
 
-		_init();
 		_methodName = methodName;
+
+		_init();
 	}
 
 	public PortalServicePermission(
@@ -47,8 +48,9 @@ public class PortalServicePermission extends BasicPermission {
 
 		super(_createLongName(name, servletContextName, className));
 
-		_init();
 		_methodName = methodName;
+
+		_init();
 	}
 
 	@Override
@@ -72,21 +74,6 @@ public class PortalServicePermission extends BasicPermission {
 		return _shortName;
 	}
 
-	private void _init() {
-		String[] nameParts = StringUtil.split(getName(), StringPool.POUND);
-
-		if (nameParts.length != 3) {
-			throw new IllegalArgumentException(
-				"The format for name is: " +
-					"[name]#[servletContextName]#[className], was " +
-						getName());
-		}
-
-		_shortName = nameParts[0];
-		_servletContextName = nameParts[1];
-		_className = nameParts[2];
-	}
-
 	private static String _createLongName(
 		String name, String servletContextName, String className) {
 
@@ -106,6 +93,20 @@ public class PortalServicePermission extends BasicPermission {
 		sb.append(className);
 
 		return sb.toString();
+	}
+
+	private void _init() {
+		String[] nameParts = StringUtil.split(getName(), StringPool.POUND);
+
+		if (nameParts.length != 3) {
+			throw new IllegalArgumentException(
+				"Name " + getName() + " does not follow the format " +
+					"[name]#[servletContextName]#[subject]");
+		}
+
+		_shortName = nameParts[0];
+		_servletContextName = nameParts[1];
+		_className = nameParts[2];
 	}
 
 	private static PACL _pacl = new NoPACL();

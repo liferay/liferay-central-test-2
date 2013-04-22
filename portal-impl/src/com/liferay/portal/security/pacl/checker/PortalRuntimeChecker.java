@@ -297,14 +297,16 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		if (callerClass.getName().equals(
+		String callerClassName = callerClass.getName();
+
+		if (callerClassName.equals(
 				PortalClassLoaderUtil.class.getName()) ||
-			callerClass.getName().equals(
+			callerClassName.equals(
 				PortletClassLoaderUtil.class.getName())) {
 
 			callerClass = Reflection.getCallerClass(stackIndex + 1);
 		}
-		else if (callerClass.getName().equals(
+		else if (callerClassName.equals(
 					DynamicQueryFactoryImpl.class.getName())) {
 
 			callerClass = Reflection.getCallerClass(stackIndex + 3);

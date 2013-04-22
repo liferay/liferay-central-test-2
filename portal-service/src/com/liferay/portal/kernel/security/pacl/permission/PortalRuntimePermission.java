@@ -94,8 +94,9 @@ public class PortalRuntimePermission extends BasicPermission {
 	public PortalRuntimePermission(String name, String property) {
 		super(name);
 
-		_init();
 		_property = property;
+
+		_init();
 	}
 
 	public PortalRuntimePermission(
@@ -110,8 +111,9 @@ public class PortalRuntimePermission extends BasicPermission {
 
 		super(_createLongName(name, servletContextName, subject));
 
-		_init();
 		_property = property;
+
+		_init();
 	}
 
 	@Override
@@ -133,21 +135,6 @@ public class PortalRuntimePermission extends BasicPermission {
 
 	public String getSubject() {
 		return _subject;
-	}
-
-	private void _init() {
-		String[] nameParts = StringUtil.split(getName(), StringPool.POUND);
-
-		if (nameParts.length != 3) {
-			throw new IllegalArgumentException(
-				"The format for name is: " +
-					"[name]#[servletContextName]#[subject], was " +
-						getName());
-		}
-
-		_shortName = nameParts[0];
-		_servletContextName = nameParts[1];
-		_subject = nameParts[2];
 	}
 
 	/**
@@ -178,6 +165,20 @@ public class PortalRuntimePermission extends BasicPermission {
 		sb.append(subject);
 
 		return sb.toString();
+	}
+
+	private void _init() {
+		String[] nameParts = StringUtil.split(getName(), StringPool.POUND);
+
+		if (nameParts.length != 3) {
+			throw new IllegalArgumentException(
+				"Name " + getName() + " does not follow the format " +
+					"[name]#[servletContextName]#[subject]");
+		}
+
+		_shortName = nameParts[0];
+		_servletContextName = nameParts[1];
+		_subject = nameParts[2];
 	}
 
 	private static PACL _pacl = new NoPACL();

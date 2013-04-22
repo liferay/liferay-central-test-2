@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.pacl.checker;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.permission.PortalServicePermission;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,27 +51,26 @@ public class PortalServiceChecker extends BaseChecker {
 			return null;
 		}
 
-		PortalServicePermission portalServicePermission =
-			(PortalServicePermission)arguments[0];
-
-		String servletContextName =
-			portalServicePermission.getServletContextName();
-		String className = portalServicePermission.getClassName();
-		String methodName = portalServicePermission.getMethodName();
+		AuthorizationProperty authorizationProperty =
+			new AuthorizationProperty();
 
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("security-manager-services");
 		sb.append(StringPool.OPEN_BRACKET);
-		sb.append(servletContextName);
+
+		PortalServicePermission portalServicePermission =
+			(PortalServicePermission)arguments[0];
+
+		sb.append(portalServicePermission.getServletContextName());
+
 		sb.append(StringPool.CLOSE_BRACKET);
 
-		AuthorizationProperty authorizationProperty =
-			new AuthorizationProperty();
-
 		authorizationProperty.setKey(sb.toString());
+
 		authorizationProperty.setValue(
-			className + StringPool.POUND + methodName);
+			portalServicePermission.getClassName() + StringPool.POUND +
+				portalServicePermission.getMethodName());
 
 		return authorizationProperty;
 	}
@@ -83,14 +80,12 @@ public class PortalServiceChecker extends BaseChecker {
 			(PortalServicePermission)permission;
 
 		String name = portalServicePermission.getShortName();
-		String servletContextName =
-			portalServicePermission.getServletContextName();
-		String className = portalServicePermission.getClassName();
-		String methodName = portalServicePermission.getMethodName();
 
 		if (name.equals(PORTAL_SERVICE_PERMISSION_SERVICE)) {
 			if (!hasService(
-					servletContextName, className, methodName, permission)) {
+					portalServicePermission.getServletContextName(),
+					portalServicePermission.getClassName(),
+					portalServicePermission.getMethodName(), permission)) {
 
 				return false;
 			}
@@ -181,8 +176,6 @@ public class PortalServiceChecker extends BaseChecker {
 	}
 
 	private static final String _PORTAL_SERVLET_CONTEXT_NAME = "portal";
-
-	private static Log _log = LogFactoryUtil.getLog(PortalServiceChecker.class);
 
 	private Map<String, Set<String>> _pluginServices =
 		new HashMap<String, Set<String>>();
