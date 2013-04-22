@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collections;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
