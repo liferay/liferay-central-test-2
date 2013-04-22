@@ -287,6 +287,21 @@ public class EditGroupAction extends PortletAction {
 		return teams;
 	}
 
+	/**
+	 * Resets the counter of failed merge attempts for specified layout set
+	 * prototype (fetched based on param <code>layoutSetPrototypeId</code>) and
+	 * performs the merge from this site template into layout set specified with
+	 * <code>groupId</code> and <code>privateLayoutSet</code> params in given
+	 * <code>actionRequest</code> .
+	 *
+	 * <p>
+	 * If the counter of failed merge attempts is not equal to zero after the
+	 * merge, error key is put into <code>SessionErrors</code>.
+	 * </p>
+	 *
+	 * @param  actionRequest
+	 * @throws Exception
+	 */
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 

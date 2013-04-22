@@ -687,6 +687,20 @@ public class EditLayoutsAction extends PortletAction {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
+	/**
+	 * Resets the counter of failed merge attempts for specified layout
+	 * prototype (fetched based on param <code>layoutPrototypeId</code>) and
+	 * performs the merge from this page template into layout specified with
+	 * <code>selPlid</code> param in given <code>actionRequest</code> .
+	 *
+	 * <p>
+	 * If the counter of failed merge attempts is not equal to zero after the
+	 * merge, error key is put into <code>SessionErrors</code>.
+	 * </p>
+	 *
+	 * @param  actionRequest
+	 * @throws Exception
+	 */
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 

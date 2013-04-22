@@ -133,6 +133,18 @@ public class EditLayoutPrototypeAction extends PortletAction {
 		}
 	}
 
+	/**
+	 * Resets the counter of failed merge attempts for for specified layout
+	 * prototype (fetched based on param <code>layoutPrototypeId</code>).
+	 *
+	 * <p>
+	 * No merge from the page template to the actual page(s) is performed at
+	 * this point.
+	 * </p>
+	 *
+	 * @param  actionRequest
+	 * @throws Exception
+	 */
 	protected void resetMergeFailCount(ActionRequest actionRequest)
 		throws Exception {
 
