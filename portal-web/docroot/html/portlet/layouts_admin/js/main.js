@@ -488,6 +488,7 @@ AUI.add(
 						if (Lang.isString(val)) {
 							val = instance.one(val);
 						}
+
 						return val;
 					}
 				}
