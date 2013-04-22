@@ -2459,7 +2459,6 @@ public class HookHotDeployListener
 		}
 
 		if (containsKey(portalProperties, LOCALES_ENABLED)) {
-
 			PropsValues.LOCALES_ENABLED = PropsUtil.getArray(LOCALES_ENABLED);
 
 			LanguageUtil.init();
