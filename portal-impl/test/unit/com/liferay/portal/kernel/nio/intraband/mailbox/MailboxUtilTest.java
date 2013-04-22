@@ -62,9 +62,9 @@ public class MailboxUtilTest {
 	public void testDepositMailWithReaperThreadDisabled() {
 		PropsUtilAdvice.setProps(
 			PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED,
-			Boolean.toString(false));
+			Boolean.FALSE.toString());
 		PropsUtilAdvice.setProps(
-			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, Integer.toString(0));
+			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, String.valueOf(0));
 
 		Assert.assertEquals(0, MailboxUtil.depositMail(ByteBuffer.allocate(0)));
 		Assert.assertEquals(1, MailboxUtil.depositMail(ByteBuffer.allocate(0)));
@@ -74,9 +74,13 @@ public class MailboxUtilTest {
 		Thread reaperThread = null;
 
 		for (Thread thread : ThreadUtil.getThreads()) {
-			if ((thread != null) &&
-				thread.getName().equals(MailboxUtil.class.getName())) {
+			if (thread == null) {
+				continue;
+			}
 
+			String name = thread.getName();
+			
+			if (name.equals(MailboxUtil.class.getName())) {
 				reaperThread = thread;
 
 				break;
@@ -93,9 +97,9 @@ public class MailboxUtilTest {
 	public void testDepositMailWithReaperThreadEnabled() throws Exception {
 		PropsUtilAdvice.setProps(
 			PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED,
-			Boolean.toString(true));
+			Boolean.TRUE.toString());
 		PropsUtilAdvice.setProps(
-			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, Integer.toString(0));
+			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, String.valueOf(0));
 
 		Assert.assertEquals(0, MailboxUtil.depositMail(ByteBuffer.allocate(0)));
 		Assert.assertEquals(1, MailboxUtil.depositMail(ByteBuffer.allocate(0)));
@@ -140,9 +144,9 @@ public class MailboxUtilTest {
 	public void testReceiveMailWithReaperThreadDisabled() {
 		PropsUtilAdvice.setProps(
 			PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED,
-			Boolean.toString(false));
+			Boolean.FALSE.toString());
 		PropsUtilAdvice.setProps(
-			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, Integer.toString(10000));
+			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, String.valueOf(10000));
 
 		Assert.assertNull(MailboxUtil.receiveMail(0));
 
@@ -163,9 +167,9 @@ public class MailboxUtilTest {
 	public void testReceiveMailWithReaperThreadEnabled() {
 		PropsUtilAdvice.setProps(
 			PropsKeys.INTRABAND_MAILBOX_REAPER_THREAD_ENABLED,
-			Boolean.toString(true));
+			Boolean.TRUE.toString());
 		PropsUtilAdvice.setProps(
-			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, Integer.toString(10000));
+			PropsKeys.INTRABAND_MAILBOX_STORAGE_LIFE, String.valueOf(10000));
 
 		Assert.assertNull(MailboxUtil.receiveMail(0));
 
