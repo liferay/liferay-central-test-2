@@ -407,7 +407,7 @@ public class AssetUtil {
 	}
 
 	public static boolean hasSubtype(
-			String subtypeClassName, Map<String, PortletURL> addPortletURLs) {
+		String subtypeClassName, Map<String, PortletURL> addPortletURLs) {
 
 		for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 			String className = entry.getKey();
