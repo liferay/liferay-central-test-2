@@ -1618,9 +1618,9 @@ public class JavadocFormatter {
 			char c = className.charAt(i);
 
 			if (Character.isUpperCase(c)) {
-				if (((i+1) < index) &&
-					Character.isLowerCase(className.charAt(i+1)))
-				{
+				if (((i + 1) < index) &&
+					Character.isLowerCase(className.charAt(i + 1))) {
+
 					sb.append(CharPool.DASH);
 				}
 
