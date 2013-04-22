@@ -80,6 +80,23 @@ public class OrganizationIndexer extends BaseIndexer {
 			return;
 		}
 
+		List<Long> excludedOrganizationIds = (List<Long>)params.get(
+			"excludedOrganizationIds");
+
+		if ((excludedOrganizationIds != null) &&
+			!excludedOrganizationIds.isEmpty()) {
+
+			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create(
+				searchContext);
+
+			for (long excludedOrganizationId : excludedOrganizationIds) {
+				booleanQuery.addTerm(
+					"organizationId", String.valueOf(excludedOrganizationId));
+			}
+
+			contextQuery.add(booleanQuery, BooleanClauseOccur.MUST_NOT);
+		}
+
 		List<Organization> organizationsTree = (List<Organization>)params.get(
 			"organizationsTree");
 
@@ -103,23 +120,6 @@ public class OrganizationIndexer extends BaseIndexer {
 				contextQuery.addRequiredTerm(
 					"parentOrganizationId", parentOrganizationId);
 			}
-		}
-
-		List<Long> excludedOrganizationIds = (List<Long>)params.get(
-			"excludedOrganizationIds");
-
-		if ((excludedOrganizationIds != null) &&
-			!excludedOrganizationIds.isEmpty()) {
-
-			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create(
-				searchContext);
-
-			for (long excludedOrganizationId : excludedOrganizationIds) {
-				booleanQuery.addTerm(
-					"organizationId", String.valueOf(excludedOrganizationId));
-			}
-
-			contextQuery.add(booleanQuery, BooleanClauseOccur.MUST_NOT);
 		}
 	}
 
