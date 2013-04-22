@@ -249,24 +249,14 @@ request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(searchContainer
 	<div class="entries-empty portlet-msg-info">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-				<c:choose>
-					<c:when test="<%= total == 0 %>">
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(ddmStructureName) %>" key="there-is-no-web-content-with-structure-x" />
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(ddmStructureName) %>" key="there-is-no-web-content-with-structure-x-on-this-page" />
-					</c:otherwise>
-				</c:choose>
+				<c:if test="<%= total == 0 %>">
+					<liferay-ui:message arguments="<%= HtmlUtil.escape(ddmStructureName) %>" key="there-is-no-web-content-with-structure-x" />
+				</c:if>
 			</c:when>
 			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= total == 0 %>">
-						<liferay-ui:message key="no-web-content-were-found" />
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message key="there-is-no-web-content-on-this-page" />
-					</c:otherwise>
-				</c:choose>
+				<c:if test="<%= total == 0 %>">
+					<liferay-ui:message key="no-web-content-were-found" />
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 	</div>
