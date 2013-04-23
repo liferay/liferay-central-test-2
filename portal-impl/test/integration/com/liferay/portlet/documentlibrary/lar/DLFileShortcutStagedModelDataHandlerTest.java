@@ -136,16 +136,6 @@ public class DLFileShortcutStagedModelDataHandlerTest
 		throws Exception {
 
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
-			Folder.class.getSimpleName());
-
-		Assert.assertEquals(1, dependentStagedModels.size());
-
-		Folder folder = (Folder)dependentStagedModels.get(0);
-
-		DLFolderLocalServiceUtil.getDLFolderByUuidAndGroupId(
-			folder.getUuid(), group.getGroupId());
-
-		dependentStagedModels = dependentStagedModelsMap.get(
 			FileEntry.class.getSimpleName());
 
 		Assert.assertEquals(1, dependentStagedModels.size());
@@ -154,6 +144,16 @@ public class DLFileShortcutStagedModelDataHandlerTest
 
 		DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
 			fileEntry.getUuid(), group.getGroupId());
+
+		dependentStagedModels = dependentStagedModelsMap.get(
+			Folder.class.getSimpleName());
+
+		Assert.assertEquals(1, dependentStagedModels.size());
+
+		Folder folder = (Folder)dependentStagedModels.get(0);
+
+		DLFolderLocalServiceUtil.getDLFolderByUuidAndGroupId(
+			folder.getUuid(), group.getGroupId());
 	}
 
 }

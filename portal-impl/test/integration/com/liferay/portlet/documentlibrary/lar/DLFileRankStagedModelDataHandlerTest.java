@@ -86,12 +86,12 @@ public class DLFileRankStagedModelDataHandlerTest
 	@Override
 	protected StagedModel getStagedModel(String uuid, Group group) {
 		try {
-			List<DLFileRank> fileRanks =
+			List<DLFileRank> dlFileRanks =
 				DLFileRankLocalServiceUtil.getFileRanks(
 					group.getGroupId(), TestPropsValues.getUserId());
 
-			if (fileRanks.size() == 1) {
-				return fileRanks.get(0);
+			if (dlFileRanks.size() == 1) {
+				return dlFileRanks.get(0);
 			}
 
 			return null;

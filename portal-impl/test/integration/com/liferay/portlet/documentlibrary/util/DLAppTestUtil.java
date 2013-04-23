@@ -44,6 +44,7 @@ public abstract class DLAppTestUtil {
 		long userId = TestPropsValues.getUserId();
 		String name = ServiceTestUtil.randomString();
 		String description = ServiceTestUtil.randomString();
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
