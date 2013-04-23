@@ -79,7 +79,7 @@ public class MailboxUtilTest {
 			}
 
 			String name = thread.getName();
-			
+
 			if (name.equals(MailboxUtil.class.getName())) {
 				reaperThread = thread;
 
