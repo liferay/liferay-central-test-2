@@ -1107,7 +1107,7 @@ AUI.add(
 									limit: 10,
 									moreResultsLabel: Liferay.Language.get('load-more-results'),
 									offsetParam: 'start',
-									total: item.numChildren
+									total: item.childrenCount
 								};
 
 								return {
