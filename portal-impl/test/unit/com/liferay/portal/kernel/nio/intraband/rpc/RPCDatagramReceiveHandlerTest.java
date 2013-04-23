@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.PortalExecutorManagerUtilAdvice;
 import com.liferay.portal.kernel.nio.intraband.SystemDataType;
 import com.liferay.portal.kernel.process.ProcessCallable;
-import com.liferay.portal.kernel.process.ProcessException;
 import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.test.AdviseWith;
@@ -77,7 +76,7 @@ public class RPCDatagramReceiveHandlerTest {
 		implements ProcessCallable<String> {
 
 		@Override
-		public String call() throws ProcessException {
+		public String call() {
 			return TestProcessCallable.class.getName();
 		}
 

@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.nio.intraband.MockIntraBand;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.RegistrationReference;
 import com.liferay.portal.kernel.process.ProcessCallable;
-import com.liferay.portal.kernel.process.ProcessException;
 import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
@@ -150,7 +149,7 @@ public class IntraBandRPCUtilTest {
 		implements ProcessCallable<String> {
 
 		@Override
-		public String call() throws ProcessException {
+		public String call() {
 			return TestProcessCallable.class.getName();
 		}
 
