@@ -1666,7 +1666,8 @@
 
 			if (dialog) {
 				dialog.show();
-			} else {
+			}
+			else {
 				Util.openWindow(
 					config,
 					function(dialogWindow) {
