@@ -161,7 +161,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			}
 			catch (NoSuchImageException nsie) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No image found for: " + layoutSet.getLogoId());
+					_log.warn("Unable to delete image " + user.getPortraitId());
 				}
 			}
 		}
@@ -527,7 +527,5 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LayoutSetLocalServiceImpl.class);
-
-
 
 }
