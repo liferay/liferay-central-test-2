@@ -40,9 +40,9 @@ public class RPCDatagramReceiveHandler extends BaseAsyncDatagramReceiveHandler {
 		ProcessCallable<? extends Serializable> processCallable =
 			deserializer.readObject();
 
-		Serializable result = processCallable.call();
-
 		Serializer serializer = new Serializer();
+
+		Serializable result = processCallable.call();
 
 		serializer.writeObject(result);
 
