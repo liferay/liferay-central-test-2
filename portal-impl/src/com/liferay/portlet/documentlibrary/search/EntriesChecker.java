@@ -63,13 +63,13 @@ public class EntriesChecker extends RowChecker {
 		String portletName = portletDisplay.getPortletName();
 
 		if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
-			_isDocumentLibraryDisplayPortlet = true;
+			_documentLibraryDisplayPortlet = true;
 		}
 	}
 
 	@Override
 	public String getAllRowsCheckBox() {
-		if (_isDocumentLibraryDisplayPortlet) {
+		if (_documentLibraryDisplayPortlet) {
 			return getAllRowsCheckbox(getAllRowIds(), getEntryRowIds());
 		}
 
@@ -177,7 +177,7 @@ public class EntriesChecker extends RowChecker {
 		String checkBoxAllRowIds = StringPool.BLANK;
 		String checkBoxPostOnClick = StringPool.BLANK;
 
-		if (_isDocumentLibraryDisplayPortlet) {
+		if (_documentLibraryDisplayPortlet) {
 			checkBoxAllRowIds = "'" + getAllRowIds() + "'";
 		}
 		else {
@@ -214,7 +214,7 @@ public class EntriesChecker extends RowChecker {
 		return sb.toString();
 	}
 
-	private boolean _isDocumentLibraryDisplayPortlet;
+	private boolean _documentLibraryDisplayPortlet;
 	private LiferayPortletResponse _liferayPortletResponse;
 	private PermissionChecker _permissionChecker;
 
