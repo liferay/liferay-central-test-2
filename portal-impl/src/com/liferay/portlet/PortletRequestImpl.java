@@ -93,18 +93,18 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		PortletRequest portletRequest) {
 
 		while (!(portletRequest instanceof PortletRequestImpl)) {
-			if (portletRequest instanceof PortletRequestWrapper) {
+			if (portletRequest instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)portletRequest;
+
+				portletRequest =
+					(PortletRequest)doPrivilegedBean.getActualBean();
+			}
+			else if (portletRequest instanceof PortletRequestWrapper) {
 				PortletRequestWrapper portletRequestWrapper =
 					(PortletRequestWrapper)portletRequest;
 
 				portletRequest = portletRequestWrapper.getRequest();
-			}
-			else if (portletRequest instanceof DoPrivilegedBean) {
-				DoPrivilegedBean doPrivilegedBean =
-						(DoPrivilegedBean)portletRequest;
-
-				portletRequest =
-						(PortletRequest)doPrivilegedBean.getActualBean();
 			}
 			else {
 				throw new RuntimeException(
