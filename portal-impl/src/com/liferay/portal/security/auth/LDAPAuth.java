@@ -364,14 +364,12 @@ public class LDAPAuth implements Authenticator {
 
 		if (preferredLDAPServerResult == SUCCESS) {
 			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
+					companyId, PropsKeys.LDAP_IMPORT_USER_PASSWORD_ENABLED)) {
 
 				return preferredLDAPServerResult;
 			}
-			else {
-				return Authenticator.SKIP_LIFERAY_CHECK;
-			}
 
+			return Authenticator.SKIP_LIFERAY_CHECK;
 		}
 
 		long[] ldapServerIds = StringUtil.split(
@@ -384,14 +382,13 @@ public class LDAPAuth implements Authenticator {
 
 			if (result == SUCCESS) {
 				if (PrefsPropsUtil.getBoolean(
-						companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
+						companyId,
+						PropsKeys.LDAP_IMPORT_USER_PASSWORD_ENABLED)) {
 
 					return result;
 				}
-				else {
-					return Authenticator.SKIP_LIFERAY_CHECK;
-				}
 
+				return Authenticator.SKIP_LIFERAY_CHECK;
 			}
 		}
 
@@ -411,13 +408,13 @@ public class LDAPAuth implements Authenticator {
 
 			if (result == SUCCESS) {
 				if (PrefsPropsUtil.getBoolean(
-						companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
+						companyId,
+						PropsKeys.LDAP_IMPORT_USER_PASSWORD_ENABLED)) {
 
 					return result;
 				}
-				else {
-					return Authenticator.SKIP_LIFERAY_CHECK;
-				}
+
+				return Authenticator.SKIP_LIFERAY_CHECK;
 			}
 		}
 
