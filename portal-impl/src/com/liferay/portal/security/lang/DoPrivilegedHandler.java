@@ -68,7 +68,7 @@ public class DoPrivilegedHandler
 		if (methodDeclaringClass.equals(DoPrivilegedBean.class) &&
 			methodName.equals("getActualBean")) {
 
-			return getActualBean();
+			return _bean;
 		}
 		else if (methodDeclaringClass.equals(Object.class) &&
 				 methodName.equals("equals")) {
@@ -81,7 +81,7 @@ public class DoPrivilegedHandler
 				object = doPrivilegedBean.getActualBean();
 			}
 
-			return getActualBean().equals(object);
+			return _bean.equals(object);
 		}
 		else if (!PACLPolicyManager.isActive() || _isNotPrivileged(method)) {
 			return method.invoke(_bean, arguments);
