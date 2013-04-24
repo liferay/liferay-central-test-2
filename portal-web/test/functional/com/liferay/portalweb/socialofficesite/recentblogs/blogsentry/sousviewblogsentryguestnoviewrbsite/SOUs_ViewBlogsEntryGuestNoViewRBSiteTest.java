@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.socialofficesite.recentblogs.blogsentry.sousviewblogsentryguestnoviewsiterb;
+package com.liferay.portalweb.socialofficesite.recentblogs.blogsentry.sousviewblogsentryguestnoviewrbsite;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SOUs_ViewBlogsEntryGuestNoViewSiteRBTest extends BaseTestCase {
-	public void testSOUs_ViewBlogsEntryGuestNoViewSiteRB()
+public class SOUs_ViewBlogsEntryGuestNoViewRBSiteTest extends BaseTestCase {
+	public void testSOUs_ViewBlogsEntryGuestNoViewRBSite()
 		throws Exception {
 		selenium.selectWindow("null");
 		selenium.selectFrame("relative=top");
