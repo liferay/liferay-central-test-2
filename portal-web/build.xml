@@ -1112,8 +1112,6 @@
 	<target name="compile-common-jsp">
 		<delete dir="${jspc.classes.dir}" quiet="true" />
 
-		<property name="touch.jsp" value="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp" />
-
 		<if>
 			<and>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
@@ -1128,9 +1126,13 @@
 		</if>
 
 		<if>
-			<available file="${touch.jsp}" />
+			<available file="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp" />
 			<then>
-				<move file="${touch.jsp}" tofile="${touch.jsp}.tmp" quiet="true" failonerror="false" />
+				<move
+					failonerror="false"
+					file="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp"
+					tofile="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp.tmp"
+				/>
 			</then>
 		</if>
 
@@ -1146,9 +1148,13 @@
 		</java>
 
 		<if>
-			<available file="${touch.jsp}.tmp" />
+			<available file="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp.tmp" />
 			<then>
-				<move file="${touch.jsp}.tmp" tofile="${touch.jsp}" quiet="true" failonerror="false" />
+				<move
+					failonerror="false"
+					file="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp.tmp"
+					tofile="${app.server.portal.dir}/WEB-INF/classes/com/liferay/portal/deploy/dependencies/touch.jsp"
+				/>
 			</then>
 		</if>
 
