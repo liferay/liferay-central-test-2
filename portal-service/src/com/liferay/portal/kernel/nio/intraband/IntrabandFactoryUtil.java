@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.nio.intraband.welder.WelderFactoryUtil;
 import com.liferay.portal.kernel.nio.intraband.welder.socket.SocketWelder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -63,9 +62,9 @@ public class IntrabandFactoryUtil {
 	}
 
 	private static final String _INTRABAND_IMPL = GetterUtil.getString(
-		PropsUtil.get(PropsKeys.INTRABAND_IMPL));
+		System.getProperty(PropsKeys.INTRABAND_IMPL));
 
 	private static final long _INTRABAND_TIMEOUT_DEFAULT = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.INTRABAND_TIMEOUT_DEFAULT));
+		System.getProperty(PropsKeys.INTRABAND_TIMEOUT_DEFAULT));
 
 }
