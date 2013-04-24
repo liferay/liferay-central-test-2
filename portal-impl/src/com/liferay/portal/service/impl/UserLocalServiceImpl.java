@@ -4817,11 +4817,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Groups and organizations
 
+		// See LPS-33205. Adding or removing groups may add or remove
+		// userGroupRoles depending on the site default user associations.
+
 		List<UserGroupRole> previousUserGroupRoles =
 			userGroupRolePersistence.findByUserId(userId);
-
-		// See LPS-33205. Adding or removing groups may add or remove
-		// userGroupRoles depending on the Site Default User Associations.
 
 		updateGroups(userId, groupIds, serviceContext, false);
 		updateOrganizations(userId, organizationIds, false);
