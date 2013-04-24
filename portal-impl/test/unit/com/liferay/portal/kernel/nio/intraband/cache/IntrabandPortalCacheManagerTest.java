@@ -62,7 +62,7 @@ public class IntrabandPortalCacheManagerTest {
 			_mockRegistrationReference,
 			getRegistrationReference(intraBandPortalCacheManager));
 		Assert.assertSame(
-			_mockIntraBand, getIntraBand(intraBandPortalCacheManager));
+			_mockIntraband, getIntraband(intraBandPortalCacheManager));
 	}
 
 	@Test
@@ -134,7 +134,7 @@ public class IntrabandPortalCacheManagerTest {
 
 		intraBandPortalCacheManager.reconfigureCaches(url);
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -184,7 +184,7 @@ public class IntrabandPortalCacheManagerTest {
 		Assert.assertTrue(portalCaches.isEmpty());
 	}
 
-	private static MockIntraband getIntraBand(
+	private static MockIntraband getIntraband(
 			IntrabandPortalCacheManager<?, ?> intraBandPortalCacheManager)
 		throws Exception {
 
@@ -216,8 +216,8 @@ public class IntrabandPortalCacheManagerTest {
 			intraBandPortalCacheManager);
 	}
 
-	private MockIntraband _mockIntraBand = new MockIntraband();
+	private MockIntraband _mockIntraband = new MockIntraband();
 	private MockRegistrationReference _mockRegistrationReference =
-		new MockRegistrationReference(_mockIntraBand);
+		new MockRegistrationReference(_mockIntraband);
 
 }

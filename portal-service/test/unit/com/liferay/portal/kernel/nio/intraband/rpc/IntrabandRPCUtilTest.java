@@ -52,7 +52,7 @@ public class IntrabandRPCUtilTest {
 	public void testExecuteFail() {
 		PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
 
-		MockIntraband mockIntraBand = new MockIntraband() {
+		MockIntraband mockIntraband = new MockIntraband() {
 
 			@Override
 			protected void doSendDatagram(
@@ -66,7 +66,7 @@ public class IntrabandRPCUtilTest {
 
 		try {
 			IntrabandRPCUtil.execute(
-				new MockRegistrationReference(mockIntraBand),
+				new MockRegistrationReference(mockIntraband),
 				new TestProcessCallable());
 
 			Assert.fail();
@@ -79,7 +79,7 @@ public class IntrabandRPCUtilTest {
 
 		try {
 			IntrabandRPCUtil.execute(
-				new MockRegistrationReference(mockIntraBand),
+				new MockRegistrationReference(mockIntraband),
 				new TestProcessCallable(), 1, TimeUnit.MILLISECONDS);
 
 			Assert.fail();
@@ -95,7 +95,7 @@ public class IntrabandRPCUtilTest {
 	public void testExecuteSuccess() throws IntrabandRPCException {
 		PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
 
-		MockIntraband mockIntraBand = new MockIntraband() {
+		MockIntraband mockIntraband = new MockIntraband() {
 
 			@Override
 			protected void doSendDatagram(
@@ -131,7 +131,7 @@ public class IntrabandRPCUtilTest {
 		};
 
 		MockRegistrationReference mockRegistrationReference =
-			new MockRegistrationReference(mockIntraBand);
+			new MockRegistrationReference(mockIntraband);
 
 		String result = IntrabandRPCUtil.execute(
 			mockRegistrationReference, new TestProcessCallable());

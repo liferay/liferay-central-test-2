@@ -52,16 +52,16 @@ public class MailboxDatagramReceiveHandlerTest {
 		MailboxDatagramReceiveHandler mailboxDatagramReceiveHandler =
 			new MailboxDatagramReceiveHandler();
 
-		MockIntraband mockIntraBand = new MockIntraband();
+		MockIntraband mockIntraband = new MockIntraband();
 
 		SystemDataType systemDataType = SystemDataType.MAILBOX;
 
 		mailboxDatagramReceiveHandler.doReceive(
-			new MockRegistrationReference(mockIntraBand),
+			new MockRegistrationReference(mockIntraband),
 			Datagram.createRequestDatagram(
 				systemDataType.getValue(), ByteBuffer.allocate(0)));
 
-		Datagram responseDatagram = mockIntraBand.getDatagram();
+		Datagram responseDatagram = mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			responseDatagram.getDataByteBuffer());

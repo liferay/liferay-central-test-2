@@ -30,7 +30,7 @@ class FutureRegistrationReference implements RegistrationReference {
 		writeFuture.cancel(true);
 	}
 
-	public Intraband getIntraBand() {
+	public Intraband getIntraband() {
 		return intraBand;
 	}
 

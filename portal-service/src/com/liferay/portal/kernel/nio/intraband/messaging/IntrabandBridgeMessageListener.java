@@ -32,7 +32,7 @@ public class IntrabandBridgeMessageListener implements MessageListener {
 
 		_registrationReference = registrationReference;
 
-		_intraBand = registrationReference.getIntraBand();
+		_intraBand = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.MESSAGE;
 

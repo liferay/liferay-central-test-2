@@ -42,7 +42,7 @@ public class MockRegistrationReference implements RegistrationReference {
 		return _gatheringByteChannel;
 	}
 
-	public Intraband getIntraBand() {
+	public Intraband getIntraband() {
 		return _intraBand;
 	}
 

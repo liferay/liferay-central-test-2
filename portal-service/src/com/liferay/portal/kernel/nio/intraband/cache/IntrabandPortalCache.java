@@ -47,7 +47,7 @@ public class IntrabandPortalCache
 		_name = name;
 		_registrationReference = registrationReference;
 
-		_intraBand = registrationReference.getIntraBand();
+		_intraBand = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.PORTAL_CACHE;
 

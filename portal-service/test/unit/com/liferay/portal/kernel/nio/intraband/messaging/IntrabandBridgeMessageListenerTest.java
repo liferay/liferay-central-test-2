@@ -44,7 +44,7 @@ public class IntrabandBridgeMessageListenerTest {
 			new IntrabandBridgeMessageListener(_mockRegistrationReference);
 
 		Assert.assertSame(
-			_mockIntraBand, getIntraBand(intraBandBridgeMessageListener));
+			_mockIntraband, getIntraband(intraBandBridgeMessageListener));
 		Assert.assertSame(
 			_mockRegistrationReference,
 			getRegistrationReference(intraBandBridgeMessageListener));
@@ -66,7 +66,7 @@ public class IntrabandBridgeMessageListenerTest {
 
 		intraBandBridgeMessageListener.receive(message);
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -77,7 +77,7 @@ public class IntrabandBridgeMessageListenerTest {
 		Assert.assertEquals(payload, receivedMessage.getPayload());
 	}
 
-	private static MockIntraband getIntraBand(
+	private static MockIntraband getIntraband(
 			IntrabandBridgeMessageListener intraBandBridgeMessageListener)
 		throws Exception {
 
@@ -99,8 +99,8 @@ public class IntrabandBridgeMessageListenerTest {
 			intraBandBridgeMessageListener);
 	}
 
-	private MockIntraband _mockIntraBand = new MockIntraband();
+	private MockIntraband _mockIntraband = new MockIntraband();
 	private MockRegistrationReference _mockRegistrationReference =
-		new MockRegistrationReference(_mockIntraBand);
+		new MockRegistrationReference(_mockIntraband);
 
 }

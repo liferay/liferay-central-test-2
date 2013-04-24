@@ -50,7 +50,7 @@ public class RPCDatagramReceiveHandlerTest {
 		RPCDatagramReceiveHandler rpcDatagramReceiveHandler =
 			new RPCDatagramReceiveHandler();
 
-		MockIntraband mockIntraBand = new MockIntraband();
+		MockIntraband mockIntraband = new MockIntraband();
 
 		Serializer serializer = new Serializer();
 
@@ -59,11 +59,11 @@ public class RPCDatagramReceiveHandlerTest {
 		SystemDataType systemDataType = SystemDataType.RPC;
 
 		rpcDatagramReceiveHandler.doReceive(
-			new MockRegistrationReference(mockIntraBand),
+			new MockRegistrationReference(mockIntraband),
 			Datagram.createRequestDatagram(
 				systemDataType.getValue(), serializer.toByteBuffer()));
 
-		Datagram responseDatagram = mockIntraBand.getDatagram();
+		Datagram responseDatagram = mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			responseDatagram.getDataByteBuffer());

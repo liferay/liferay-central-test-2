@@ -52,7 +52,7 @@ public class IntrabandPortalCacheManager
 	public IntrabandPortalCacheManager(
 		RegistrationReference registrationReference) {
 
-		_intraBand = registrationReference.getIntraBand();
+		_intraBand = registrationReference.getIntraband();
 		_registrationReference = registrationReference;
 	}
 

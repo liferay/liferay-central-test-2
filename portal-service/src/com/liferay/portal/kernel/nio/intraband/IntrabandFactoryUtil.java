@@ -33,7 +33,7 @@ import java.lang.reflect.Constructor;
  */
 public class IntrabandFactoryUtil {
 
-	public static Intraband createIntraBand() throws IOException {
+	public static Intraband createIntraband() throws IOException {
 		if (Validator.isNotNull(_INTRABAND_IMPL)) {
 			try {
 				Class<? extends Intraband> intraBandClass =

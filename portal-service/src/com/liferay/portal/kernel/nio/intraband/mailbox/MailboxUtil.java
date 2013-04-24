@@ -53,7 +53,7 @@ public class MailboxUtil {
 			RegistrationReference registrationReference, ByteBuffer byteBuffer)
 		throws MailboxException {
 
-		Intraband intraBand = registrationReference.getIntraBand();
+		Intraband intraBand = registrationReference.getIntraband();
 
 		try {
 			SystemDataType systemDataType = SystemDataType.MAILBOX;

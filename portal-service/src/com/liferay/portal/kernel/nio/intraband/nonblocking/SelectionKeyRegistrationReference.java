@@ -29,7 +29,7 @@ class SelectionKeyRegistrationReference implements RegistrationReference {
 		writeSelectionKey.cancel();
 	}
 
-	public Intraband getIntraBand() {
+	public Intraband getIntraband() {
 		return intraBand;
 	}
 

@@ -84,12 +84,12 @@ public class SelectorIntrabandTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_selectorIntraBand = new SelectorIntraband(_DEFAULT_TIMEOUT);
+		_selectorIntraband = new SelectorIntraband(_DEFAULT_TIMEOUT);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		_selectorIntraBand.close();
+		_selectorIntraband.close();
 	}
 
 	@Test
@@ -101,13 +101,13 @@ public class SelectorIntrabandTest {
 			SelectorIntraband.class.getName(), Level.INFO);
 
 		Thread wakeUpThread = new Thread(
-			new WakeUpRunnable(_selectorIntraBand));
+			new WakeUpRunnable(_selectorIntraband));
 
 		wakeUpThread.start();
 
-		Thread pollingThread = _selectorIntraBand.pollingThread;
+		Thread pollingThread = _selectorIntraband.pollingThread;
 
-		Selector selector = _selectorIntraBand.selector;
+		Selector selector = _selectorIntraband.selector;
 
 		synchronized (selector) {
 			wakeUpThread.interrupt();
@@ -133,18 +133,18 @@ public class SelectorIntrabandTest {
 
 		// Close selector, without log
 
-		_selectorIntraBand = new SelectorIntraband(1000);
+		_selectorIntraband = new SelectorIntraband(1000);
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SelectorIntraband.class.getName(), Level.OFF);
 
-		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraBand));
+		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraband));
 
 		wakeUpThread.start();
 
-		pollingThread = _selectorIntraBand.pollingThread;
+		pollingThread = _selectorIntraband.pollingThread;
 
-		selector = _selectorIntraBand.selector;
+		selector = _selectorIntraband.selector;
 
 		synchronized (selector) {
 			wakeUpThread.interrupt();
@@ -175,7 +175,7 @@ public class SelectorIntrabandTest {
 
 		SelectionKeyRegistrationReference registrationReference =
 			(SelectionKeyRegistrationReference)
-				_selectorIntraBand.registerChannel(
+				_selectorIntraband.registerChannel(
 					writePipe.source(), readPipe.sink());
 
 		long sequenceId = 100;
@@ -233,7 +233,7 @@ public class SelectorIntrabandTest {
 		DatagramHelper.setTimeout(requestDatagram, 10000);
 
 		BaseIntrabandHelper.addResponseWaitingDatagram(
-			_selectorIntraBand, requestDatagram);
+			_selectorIntraband, requestDatagram);
 
 		DatagramHelper.writeTo(
 			DatagramHelper.createACKResponseDatagram(sequenceId),
@@ -305,7 +305,7 @@ public class SelectorIntrabandTest {
 		DatagramHelper.setTimeout(requestDatagram, 10000);
 
 		BaseIntrabandHelper.addResponseWaitingDatagram(
-			_selectorIntraBand, requestDatagram);
+			_selectorIntraband, requestDatagram);
 
 		DatagramHelper.writeTo(
 			Datagram.createResponseDatagram(requestDatagram, _data),
@@ -337,7 +337,7 @@ public class SelectorIntrabandTest {
 		DatagramHelper.setTimeout(requestDatagram, 10000);
 
 		BaseIntrabandHelper.addResponseWaitingDatagram(
-			_selectorIntraBand, requestDatagram);
+			_selectorIntraband, requestDatagram);
 
 		Jdk14LogImplAdvice.reset();
 
@@ -375,7 +375,7 @@ public class SelectorIntrabandTest {
 		DatagramHelper.setTimeout(requestDatagram, 10000);
 
 		BaseIntrabandHelper.addResponseWaitingDatagram(
-			_selectorIntraBand, requestDatagram);
+			_selectorIntraband, requestDatagram);
 
 		Jdk14LogImplAdvice.reset();
 
@@ -455,7 +455,7 @@ public class SelectorIntrabandTest {
 		RecordDatagramReceiveHandler recordDatagramReceiveHandler =
 			new RecordDatagramReceiveHandler();
 
-		_selectorIntraBand.registerDatagramReceiveHandler(
+		_selectorIntraband.registerDatagramReceiveHandler(
 			_type, recordDatagramReceiveHandler);
 
 		Jdk14LogImplAdvice.reset();
@@ -493,7 +493,7 @@ public class SelectorIntrabandTest {
 		// Channel is null
 
 		try {
-			_selectorIntraBand.registerChannel(null);
+			_selectorIntraband.registerChannel(null);
 
 			Assert.fail();
 		}
@@ -504,7 +504,7 @@ public class SelectorIntrabandTest {
 		// Channel is not of type GatheringByteChannel
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				IntrabandTestUtil.<Channel>createProxy(Channel.class));
 
 			Assert.fail();
@@ -518,7 +518,7 @@ public class SelectorIntrabandTest {
 		// Channel is not of type ScatteringByteChannel
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				IntrabandTestUtil.<Channel>createProxy(
 					GatheringByteChannel.class));
 
@@ -533,7 +533,7 @@ public class SelectorIntrabandTest {
 		// Channel is not of type SelectableChannel
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				IntrabandTestUtil.<Channel>createProxy(
 					ScatteringByteChannel.class, GatheringByteChannel.class));
 
@@ -547,7 +547,7 @@ public class SelectorIntrabandTest {
 		// Channel is not valid for reading
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				new MockDuplexSelectableChannel(false, true));
 
 			Assert.fail();
@@ -560,7 +560,7 @@ public class SelectorIntrabandTest {
 		// Channel is not valid for writing
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				new MockDuplexSelectableChannel(true, false));
 
 			Assert.fail();
@@ -581,7 +581,7 @@ public class SelectorIntrabandTest {
 			final Thread mainThread = Thread.currentThread();
 
 			Thread wakeUpThread = new Thread(
-				new WakeUpRunnable(_selectorIntraBand));
+				new WakeUpRunnable(_selectorIntraband));
 
 			Thread interruptThread = new Thread() {
 
@@ -596,7 +596,7 @@ public class SelectorIntrabandTest {
 
 			wakeUpThread.start();
 
-			Selector selector = _selectorIntraBand.selector;
+			Selector selector = _selectorIntraband.selector;
 
 			synchronized (selector) {
 				wakeUpThread.interrupt();
@@ -605,7 +605,7 @@ public class SelectorIntrabandTest {
 				interruptThread.start();
 
 				try {
-					_selectorIntraBand.registerChannel(socketChannel);
+					_selectorIntraband.registerChannel(socketChannel);
 
 					Assert.fail();
 				}
@@ -623,7 +623,7 @@ public class SelectorIntrabandTest {
 			SelectionKeyRegistrationReference
 				selectionKeyRegistrationReference =
 					(SelectionKeyRegistrationReference)
-						_selectorIntraBand.registerChannel(socketChannel);
+						_selectorIntraband.registerChannel(socketChannel);
 
 			Assert.assertNotNull(selectionKeyRegistrationReference);
 			Assert.assertSame(
@@ -641,10 +641,10 @@ public class SelectorIntrabandTest {
 
 			// Register after close
 
-			_selectorIntraBand.close();
+			_selectorIntraband.close();
 
 			try {
-				_selectorIntraBand.registerChannel(socketChannel);
+				_selectorIntraband.registerChannel(socketChannel);
 
 				Assert.fail();
 			}
@@ -663,7 +663,7 @@ public class SelectorIntrabandTest {
 		// Scattering byte channel is null
 
 		try {
-			_selectorIntraBand.registerChannel(null, null);
+			_selectorIntraband.registerChannel(null, null);
 
 			Assert.fail();
 		}
@@ -675,7 +675,7 @@ public class SelectorIntrabandTest {
 		// Gathering byte channel is null
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				IntrabandTestUtil.<ScatteringByteChannel>createProxy(
 					ScatteringByteChannel.class), null);
 
@@ -689,7 +689,7 @@ public class SelectorIntrabandTest {
 		// Scattering byte channel is not of type SelectableChannel
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				IntrabandTestUtil.<ScatteringByteChannel>createProxy(
 					ScatteringByteChannel.class),
 				IntrabandTestUtil.<GatheringByteChannel>createProxy(
@@ -706,7 +706,7 @@ public class SelectorIntrabandTest {
 		// Gathering byte channel is not of type SelectableChannel
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				new MockDuplexSelectableChannel(false, false),
 				IntrabandTestUtil.<GatheringByteChannel>createProxy(
 					GatheringByteChannel.class));
@@ -722,7 +722,7 @@ public class SelectorIntrabandTest {
 		// Scattering byte channel is not valid for reading
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				new MockDuplexSelectableChannel(false, true),
 				new MockDuplexSelectableChannel(true, true));
 
@@ -737,7 +737,7 @@ public class SelectorIntrabandTest {
 		// Gathering byte channel is not valid for writing
 
 		try {
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				new MockDuplexSelectableChannel(true, true),
 				new MockDuplexSelectableChannel(true, false));
 
@@ -759,7 +759,7 @@ public class SelectorIntrabandTest {
 		final Thread mainThread = Thread.currentThread();
 
 		Thread wakeUpThread = new Thread(
-			new WakeUpRunnable(_selectorIntraBand));
+			new WakeUpRunnable(_selectorIntraband));
 
 		Thread interruptThread = new Thread() {
 
@@ -774,7 +774,7 @@ public class SelectorIntrabandTest {
 
 		wakeUpThread.start();
 
-		Selector selector = _selectorIntraBand.selector;
+		Selector selector = _selectorIntraband.selector;
 
 		synchronized (selector) {
 			wakeUpThread.interrupt();
@@ -783,7 +783,7 @@ public class SelectorIntrabandTest {
 			interruptThread.start();
 
 			try {
-				_selectorIntraBand.registerChannel(sourceChannel, sinkChannel);
+				_selectorIntraband.registerChannel(sourceChannel, sinkChannel);
 
 				Assert.fail();
 			}
@@ -800,7 +800,7 @@ public class SelectorIntrabandTest {
 
 		SelectionKeyRegistrationReference selectionKeyRegistrationReference =
 			(SelectionKeyRegistrationReference)
-				_selectorIntraBand.registerChannel(sourceChannel, sinkChannel);
+				_selectorIntraband.registerChannel(sourceChannel, sinkChannel);
 
 		Assert.assertNotNull(selectionKeyRegistrationReference);
 
@@ -826,10 +826,10 @@ public class SelectorIntrabandTest {
 
 		// Register after close
 
-		_selectorIntraBand.close();
+		_selectorIntraband.close();
 
 		try {
-			_selectorIntraBand.registerChannel(sourceChannel, sinkChannel);
+			_selectorIntraband.registerChannel(sourceChannel, sinkChannel);
 
 			Assert.fail();
 		}
@@ -853,7 +853,7 @@ public class SelectorIntrabandTest {
 		ScatteringByteChannel scatteringByteChannel = readPipe.source();
 
 		RegistrationReference registrationReference =
-			_selectorIntraBand.registerChannel(
+			_selectorIntraband.registerChannel(
 				writePipe.source(), readPipe.sink());
 
 		Object attachment = new Object();
@@ -861,7 +861,7 @@ public class SelectorIntrabandTest {
 		RecordCompletionHandler<Object> recordCompletionHandler =
 			new RecordCompletionHandler<Object>();
 
-		_selectorIntraBand.sendDatagram(
+		_selectorIntraband.sendDatagram(
 			registrationReference, Datagram.createRequestDatagram(_type, _data),
 			attachment, EnumSet.of(CompletionType.SUBMITTED),
 			recordCompletionHandler);
@@ -884,12 +884,12 @@ public class SelectorIntrabandTest {
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
 
-		_selectorIntraBand.sendDatagram(
+		_selectorIntraband.sendDatagram(
 			registrationReference, Datagram.createRequestDatagram(_type, _data),
 			attachment, EnumSet.of(CompletionType.DELIVERED),
 			recordCompletionHandler, 10, TimeUnit.MILLISECONDS);
 
-		Selector selector = _selectorIntraBand.selector;
+		Selector selector = _selectorIntraband.selector;
 
 		recordCompletionHandler.waitUntilTimeouted(selector);
 
@@ -906,7 +906,7 @@ public class SelectorIntrabandTest {
 
 		recordCompletionHandler = new RecordCompletionHandler<Object>();
 
-		_selectorIntraBand.sendDatagram(
+		_selectorIntraband.sendDatagram(
 			registrationReference, Datagram.createRequestDatagram(_type, _data),
 			attachment, EnumSet.of(CompletionType.DELIVERED),
 			recordCompletionHandler, 10, TimeUnit.MILLISECONDS);
@@ -935,7 +935,7 @@ public class SelectorIntrabandTest {
 		Jdk14LogImplAdvice.reset();
 
 		try {
-			_selectorIntraBand.sendDatagram(
+			_selectorIntraband.sendDatagram(
 				registrationReference,
 				Datagram.createRequestDatagram(_type, _data), attachment,
 				EnumSet.of(CompletionType.DELIVERED), recordCompletionHandler,
@@ -971,15 +971,15 @@ public class SelectorIntrabandTest {
 
 		SelectionKeyRegistrationReference registrationReference =
 			(SelectionKeyRegistrationReference)
-				_selectorIntraBand.registerChannel(
+				_selectorIntraband.registerChannel(
 					writePipe.source(), readPipe.sink());
 
 		Thread wakeUpThread = new Thread(
-			new WakeUpRunnable(_selectorIntraBand));
+			new WakeUpRunnable(_selectorIntraband));
 
 		wakeUpThread.start();
 
-		Selector selector = _selectorIntraBand.selector;
+		Selector selector = _selectorIntraband.selector;
 
 		synchronized (selector) {
 			wakeUpThread.interrupt();
@@ -988,7 +988,7 @@ public class SelectorIntrabandTest {
 			Datagram requestDatagram = Datagram.createRequestDatagram(
 				_type, _data);
 
-			_selectorIntraBand.sendDatagram(
+			_selectorIntraband.sendDatagram(
 				registrationReference, requestDatagram);
 
 			SelectionKey writeSelectionKey =
@@ -1018,7 +1018,7 @@ public class SelectorIntrabandTest {
 		Datagram requestDatagram2 = Datagram.createRequestDatagram(
 			_type, _data);
 
-		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraBand));
+		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraband));
 
 		wakeUpThread.start();
 
@@ -1026,9 +1026,9 @@ public class SelectorIntrabandTest {
 			wakeUpThread.interrupt();
 			wakeUpThread.join();
 
-			_selectorIntraBand.sendDatagram(
+			_selectorIntraband.sendDatagram(
 				registrationReference, requestDatagram1);
-			_selectorIntraBand.sendDatagram(
+			_selectorIntraband.sendDatagram(
 				registrationReference, requestDatagram2);
 
 			SelectionKey writeSelectionKey =
@@ -1068,7 +1068,7 @@ public class SelectorIntrabandTest {
 		requestDatagram1 = Datagram.createRequestDatagram(_type, _data);
 		requestDatagram2 = Datagram.createRequestDatagram(_type, _data);
 
-		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraBand));
+		wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraband));
 
 		wakeUpThread.start();
 
@@ -1085,7 +1085,7 @@ public class SelectorIntrabandTest {
 				wakeUpThread.interrupt();
 				wakeUpThread.join();
 
-				_selectorIntraBand.sendDatagram(
+				_selectorIntraband.sendDatagram(
 					registrationReference, requestDatagram1);
 
 				Assert.assertEquals(1, sendingQueue.size());
@@ -1100,11 +1100,11 @@ public class SelectorIntrabandTest {
 
 			Assert.assertArrayEquals(_data, dataByteBuffer.array());
 
-			Thread pollingThread = _selectorIntraBand.pollingThread;
+			Thread pollingThread = _selectorIntraband.pollingThread;
 
 			while (pollingThread.getState() == Thread.State.RUNNABLE);
 
-			_selectorIntraBand.sendDatagram(
+			_selectorIntraband.sendDatagram(
 				registrationReference, requestDatagram2);
 
 			Assert.assertEquals(1, sendingQueue.size());
@@ -1129,7 +1129,7 @@ public class SelectorIntrabandTest {
 			hugeBuffer.put(i, (byte)i);
 		}
 
-		_selectorIntraBand.sendDatagram(
+		_selectorIntraband.sendDatagram(
 			registrationReference,
 			Datagram.createRequestDatagram(_type, hugeBuffer));
 
@@ -1246,10 +1246,10 @@ public class SelectorIntrabandTest {
 
 		registrationReference.cancelRegistration();
 
-		SelectorIntraband defaultIntraBand =
-			(SelectorIntraband)registrationReference.getIntraBand();
+		SelectorIntraband defaultIntraband =
+			(SelectorIntraband)registrationReference.getIntraband();
 
-		Selector selector = defaultIntraBand.selector;
+		Selector selector = defaultIntraband.selector;
 
 		Set<SelectionKey> keys = selector.keys();
 
@@ -1278,7 +1278,7 @@ public class SelectorIntrabandTest {
 
 	private byte[] _data = _DATA_STRING.getBytes(Charset.defaultCharset());
 
-	private SelectorIntraband _selectorIntraBand;
+	private SelectorIntraband _selectorIntraband;
 
 	private byte _type = 1;
 
@@ -1379,19 +1379,19 @@ public class SelectorIntrabandTest {
 
 	private class WakeUpRunnable implements Runnable {
 
-		public WakeUpRunnable(SelectorIntraband selectorIntraBand) {
-			_selectorIntraBand = selectorIntraBand;
+		public WakeUpRunnable(SelectorIntraband selectorIntraband) {
+			_selectorIntraband = selectorIntraband;
 		}
 
 		public void run() {
 			Thread currentThread = Thread.currentThread();
 
 			while (!currentThread.isInterrupted()) {
-				_selectorIntraBand.selector.wakeup();
+				_selectorIntraband.selector.wakeup();
 			}
 		}
 
-		private final SelectorIntraband _selectorIntraBand;
+		private final SelectorIntraband _selectorIntraband;
 
 	}
 

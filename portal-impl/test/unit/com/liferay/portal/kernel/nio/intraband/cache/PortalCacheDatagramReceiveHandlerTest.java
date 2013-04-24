@@ -112,7 +112,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 
-		Datagram responseDatagram = _mockIntraBand.getDatagram();
+		Datagram responseDatagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			responseDatagram.getDataByteBuffer());
@@ -136,7 +136,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 
-		Datagram responseDatagram = _mockIntraBand.getDatagram();
+		Datagram responseDatagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			responseDatagram.getDataByteBuffer());
@@ -370,11 +370,11 @@ public class PortalCacheDatagramReceiveHandlerTest {
 
 	private static final String _TEST_VALUE = "testValue";
 
-	private MockIntraband _mockIntraBand = new MockIntraband();
+	private MockIntraband _mockIntraband = new MockIntraband();
 	private MockPortalCacheManager _mockPortalCacheManager =
 		new MockPortalCacheManager();;
 	private MockRegistrationReference _mockRegistrationReference =
-		new MockRegistrationReference(_mockIntraBand);
+		new MockRegistrationReference(_mockIntraband);
 	private SystemDataType _portalCacheSystemDataType =
 		SystemDataType.PORTAL_CACHE;
 	private byte _portalCacheType = _portalCacheSystemDataType.getValue();

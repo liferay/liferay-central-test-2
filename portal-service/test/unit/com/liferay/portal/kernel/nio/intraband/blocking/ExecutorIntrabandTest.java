@@ -72,12 +72,12 @@ public class ExecutorIntrabandTest {
 
 	@Before
 	public void setUp() {
-		_executorIntraBand = new ExecutorIntraband(_DEFAULT_TIMEOUT);
+		_executorIntraband = new ExecutorIntraband(_DEFAULT_TIMEOUT);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		_executorIntraBand.close();
+		_executorIntraband.close();
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class ExecutorIntrabandTest {
 
 		FutureRegistrationReference futureRegistrationReference =
 			new FutureRegistrationReference(
-				_executorIntraBand, new ChannelContext(sendingQueue), null,
+				_executorIntraband, new ChannelContext(sendingQueue), null,
 				null) {
 
 				@Override
@@ -98,15 +98,15 @@ public class ExecutorIntrabandTest {
 
 		Datagram datagram1 = Datagram.createRequestDatagram(_type, _data);
 
-		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram1);
+		_executorIntraband.sendDatagram(futureRegistrationReference, datagram1);
 
 		Datagram datagram2 = Datagram.createRequestDatagram(_type, _data);
 
-		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram2);
+		_executorIntraband.sendDatagram(futureRegistrationReference, datagram2);
 
 		Datagram datagram3 = Datagram.createRequestDatagram(_type, _data);
 
-		_executorIntraBand.sendDatagram(futureRegistrationReference, datagram3);
+		_executorIntraband.sendDatagram(futureRegistrationReference, datagram3);
 
 		Assert.assertEquals(3, sendingQueue.size());
 		Assert.assertSame(datagram1, sendingQueue.poll());
@@ -126,7 +126,7 @@ public class ExecutorIntrabandTest {
 
 		try {
 			MockRegistrationReference mockRegistrationReference =
-				new MockRegistrationReference(_executorIntraBand);
+				new MockRegistrationReference(_executorIntraband);
 
 			ChannelContext channelContext = new ChannelContext(
 				new LinkedList<Datagram>());
@@ -134,7 +134,7 @@ public class ExecutorIntrabandTest {
 			channelContext.setRegistrationReference(mockRegistrationReference);
 
 			ReadingCallable readingCallable =
-				_executorIntraBand.new ReadingCallable(
+				_executorIntraband.new ReadingCallable(
 					sourceChannel, channelContext);
 
 			Thread closeThread = new Thread() {
@@ -176,7 +176,7 @@ public class ExecutorIntrabandTest {
 		// Channel is null
 
 		try {
-			_executorIntraBand.registerChannel(null);
+			_executorIntraband.registerChannel(null);
 
 			Assert.fail();
 		}
@@ -187,7 +187,7 @@ public class ExecutorIntrabandTest {
 		// Channel is not of type GatheringByteChannel
 
 		try {
-			_executorIntraBand.registerChannel(
+			_executorIntraband.registerChannel(
 				IntrabandTestUtil.<Channel>createProxy(Channel.class));
 
 			Assert.fail();
@@ -201,7 +201,7 @@ public class ExecutorIntrabandTest {
 		// Channel is not of type ScatteringByteChannel
 
 		try {
-			_executorIntraBand.registerChannel(
+			_executorIntraband.registerChannel(
 				IntrabandTestUtil.<Channel>createProxy(
 					GatheringByteChannel.class));
 
@@ -224,7 +224,7 @@ public class ExecutorIntrabandTest {
 		socketChannel.configureBlocking(false);
 
 		try {
-			_executorIntraBand.registerChannel(socketChannel);
+			_executorIntraband.registerChannel(socketChannel);
 
 			Assert.fail();
 		}
@@ -240,11 +240,11 @@ public class ExecutorIntrabandTest {
 
 		try {
 			FutureRegistrationReference futureRegistrationReference =
-				(FutureRegistrationReference)_executorIntraBand.registerChannel(
+				(FutureRegistrationReference)_executorIntraband.registerChannel(
 					socketChannel);
 
 			Assert.assertSame(
-				_executorIntraBand, futureRegistrationReference.getIntraBand());
+				_executorIntraband, futureRegistrationReference.getIntraband());
 			Assert.assertTrue(futureRegistrationReference.isValid());
 
 			futureRegistrationReference.cancelRegistration();
@@ -252,7 +252,7 @@ public class ExecutorIntrabandTest {
 			Assert.assertFalse(futureRegistrationReference.isValid());
 
 			ThreadPoolExecutor threadPoolExecutor =
-				(ThreadPoolExecutor)_executorIntraBand.executorService;
+				(ThreadPoolExecutor)_executorIntraband.executorService;
 
 			while (threadPoolExecutor.getActiveCount() != 0);
 		}
@@ -274,11 +274,11 @@ public class ExecutorIntrabandTest {
 
 		try {
 			FutureRegistrationReference futureRegistrationReference =
-				(FutureRegistrationReference)_executorIntraBand.registerChannel(
+				(FutureRegistrationReference)_executorIntraband.registerChannel(
 					fileChannel);
 
 			Assert.assertSame(
-				_executorIntraBand, futureRegistrationReference.getIntraBand());
+				_executorIntraband, futureRegistrationReference.getIntraband());
 			Assert.assertTrue(futureRegistrationReference.isValid());
 
 			futureRegistrationReference.cancelRegistration();
@@ -286,7 +286,7 @@ public class ExecutorIntrabandTest {
 			Assert.assertFalse(futureRegistrationReference.isValid());
 
 			ThreadPoolExecutor threadPoolExecutor =
-				(ThreadPoolExecutor)_executorIntraBand.executorService;
+				(ThreadPoolExecutor)_executorIntraband.executorService;
 
 			while (threadPoolExecutor.getActiveCount() != 0);
 		}
@@ -302,7 +302,7 @@ public class ExecutorIntrabandTest {
 		// Gathering byte channel is null
 
 		try {
-			_executorIntraBand.registerChannel(null, null);
+			_executorIntraband.registerChannel(null, null);
 
 			Assert.fail();
 		}
@@ -314,7 +314,7 @@ public class ExecutorIntrabandTest {
 		// Scattering byte channel is null
 
 		try {
-			_executorIntraBand.registerChannel(
+			_executorIntraband.registerChannel(
 				null, IntrabandTestUtil.<GatheringByteChannel>createProxy(
 					GatheringByteChannel.class));
 
@@ -336,7 +336,7 @@ public class ExecutorIntrabandTest {
 		sourceChannel.configureBlocking(false);
 
 		try {
-			_executorIntraBand.registerChannel(sourceChannel, sinkChannel);
+			_executorIntraband.registerChannel(sourceChannel, sinkChannel);
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
@@ -351,7 +351,7 @@ public class ExecutorIntrabandTest {
 		sinkChannel.configureBlocking(false);
 
 		try {
-			_executorIntraBand.registerChannel(sourceChannel, sinkChannel);
+			_executorIntraband.registerChannel(sourceChannel, sinkChannel);
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
@@ -366,11 +366,11 @@ public class ExecutorIntrabandTest {
 
 		try {
 			FutureRegistrationReference futureRegistrationReference =
-				(FutureRegistrationReference)_executorIntraBand.registerChannel(
+				(FutureRegistrationReference)_executorIntraband.registerChannel(
 					sourceChannel, sinkChannel);
 
 			Assert.assertSame(
-				_executorIntraBand, futureRegistrationReference.getIntraBand());
+				_executorIntraband, futureRegistrationReference.getIntraband());
 			Assert.assertTrue(futureRegistrationReference.isValid());
 
 			futureRegistrationReference.writeFuture.cancel(true);
@@ -382,7 +382,7 @@ public class ExecutorIntrabandTest {
 			Assert.assertFalse(futureRegistrationReference.isValid());
 
 			ThreadPoolExecutor threadPoolExecutor =
-				(ThreadPoolExecutor)_executorIntraBand.executorService;
+				(ThreadPoolExecutor)_executorIntraband.executorService;
 
 			while (threadPoolExecutor.getActiveCount() != 0);
 		}
@@ -406,11 +406,11 @@ public class ExecutorIntrabandTest {
 
 		try {
 			FutureRegistrationReference futureRegistrationReference =
-				(FutureRegistrationReference)_executorIntraBand.registerChannel(
+				(FutureRegistrationReference)_executorIntraband.registerChannel(
 					readFileChannel, writeFileChannel);
 
 			Assert.assertSame(
-				_executorIntraBand, futureRegistrationReference.getIntraBand());
+				_executorIntraband, futureRegistrationReference.getIntraband());
 			Assert.assertTrue(futureRegistrationReference.isValid());
 
 			futureRegistrationReference.writeFuture.cancel(true);
@@ -422,7 +422,7 @@ public class ExecutorIntrabandTest {
 			Assert.assertFalse(futureRegistrationReference.isValid());
 
 			ThreadPoolExecutor threadPoolExecutor =
-				(ThreadPoolExecutor)_executorIntraBand.executorService;
+				(ThreadPoolExecutor)_executorIntraband.executorService;
 
 			while (threadPoolExecutor.getActiveCount() != 0);
 		}
@@ -447,10 +447,10 @@ public class ExecutorIntrabandTest {
 		ChannelContext channelContext = new ChannelContext(sendingQueue);
 
 		channelContext.setRegistrationReference(
-			new MockRegistrationReference(_executorIntraBand));
+			new MockRegistrationReference(_executorIntraband));
 
 		WritingCallable writingCallable =
-			_executorIntraBand.new WritingCallable(sinkChannel, channelContext);
+			_executorIntraband.new WritingCallable(sinkChannel, channelContext);
 
 		writingCallable.openLatch();
 
@@ -498,7 +498,7 @@ public class ExecutorIntrabandTest {
 		sourceChannel = pipe.source();
 		sinkChannel = pipe.sink();
 
-		writingCallable = _executorIntraBand.new WritingCallable(
+		writingCallable = _executorIntraband.new WritingCallable(
 			sinkChannel, channelContext);
 
 		writingCallable.openLatch();
@@ -538,7 +538,7 @@ public class ExecutorIntrabandTest {
 		sourceChannel = pipe.source();
 		sinkChannel = pipe.sink();
 
-		writingCallable = _executorIntraBand.new WritingCallable(
+		writingCallable = _executorIntraband.new WritingCallable(
 			sinkChannel, channelContext);
 
 		writingCallable.openLatch();
@@ -580,7 +580,7 @@ public class ExecutorIntrabandTest {
 
 		sinkChannel.configureBlocking(false);
 
-		writingCallable = _executorIntraBand.new WritingCallable(
+		writingCallable = _executorIntraband.new WritingCallable(
 			sinkChannel, channelContext);
 
 		writingCallable.openLatch();
@@ -626,7 +626,7 @@ public class ExecutorIntrabandTest {
 
 	private byte[] _data = _DATA_STRING.getBytes(Charset.defaultCharset());
 
-	private ExecutorIntraband _executorIntraBand;
+	private ExecutorIntraband _executorIntraband;
 
 	private byte _type = 1;
 

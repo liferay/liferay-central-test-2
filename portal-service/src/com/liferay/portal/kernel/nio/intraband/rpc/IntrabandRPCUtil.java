@@ -36,7 +36,7 @@ public class IntrabandRPCUtil {
 			ProcessCallable<V> processCallable)
 		throws IntrabandRPCException {
 
-		Intraband intraBand = registrationReference.getIntraBand();
+		Intraband intraBand = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.RPC;
 
@@ -65,7 +65,7 @@ public class IntrabandRPCUtil {
 			ProcessCallable<V> processCallable, long timeout, TimeUnit timeUnit)
 		throws IntrabandRPCException {
 
-		Intraband intraBand = registrationReference.getIntraBand();
+		Intraband intraBand = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.RPC;
 

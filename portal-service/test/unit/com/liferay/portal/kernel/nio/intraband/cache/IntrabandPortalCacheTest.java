@@ -78,7 +78,7 @@ public class IntrabandPortalCacheTest {
 		Assert.assertSame(
 			_mockRegistrationReference,
 			getRegistrationReference(intraBandPortalCache));
-		Assert.assertSame(_mockIntraBand, getIntraBand(intraBandPortalCache));
+		Assert.assertSame(_mockIntraband, getIntraband(intraBandPortalCache));
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class IntrabandPortalCacheTest {
 
 		intraBandPortalCache.destroy();
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -115,7 +115,7 @@ public class IntrabandPortalCacheTest {
 		final AtomicReference<RuntimeException> runtimeExceptionReference =
 			new AtomicReference<RuntimeException>();
 
-		MockIntraband mockIntraBand = new MockIntraband() {
+		MockIntraband mockIntraband = new MockIntraband() {
 
 			@Override
 			protected void doSendDatagram(
@@ -163,7 +163,7 @@ public class IntrabandPortalCacheTest {
 
 		IntrabandPortalCache<String, String> intraBandPortalCache =
 			new IntrabandPortalCache<String, String>(
-				_testName, new MockRegistrationReference(mockIntraBand));
+				_testName, new MockRegistrationReference(mockIntraband));
 
 		Assert.assertEquals(testValue, intraBandPortalCache.get(testKey));
 
@@ -207,7 +207,7 @@ public class IntrabandPortalCacheTest {
 		final AtomicReference<RuntimeException> runtimeExceptionReference =
 			new AtomicReference<RuntimeException>();
 
-		MockIntraband mockIntraBand = new MockIntraband() {
+		MockIntraband mockIntraband = new MockIntraband() {
 
 			@Override
 			protected void doSendDatagram(
@@ -257,7 +257,7 @@ public class IntrabandPortalCacheTest {
 
 		IntrabandPortalCache<String, String> intraBandPortalCache =
 			new IntrabandPortalCache<String, String>(
-				_testName, new MockRegistrationReference(mockIntraBand));
+				_testName, new MockRegistrationReference(mockIntraband));
 
 		Assert.assertEquals(testValues, intraBandPortalCache.get(testKeys));
 
@@ -308,7 +308,7 @@ public class IntrabandPortalCacheTest {
 
 		bridgePutMethod.invoke(intraBandPortalCache, testKey, testValue);
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -338,7 +338,7 @@ public class IntrabandPortalCacheTest {
 
 		intraBandPortalCache.put(testKey, testValue, testTTL);
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -367,7 +367,7 @@ public class IntrabandPortalCacheTest {
 
 		intraBandPortalCache.remove(testKey);
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -392,7 +392,7 @@ public class IntrabandPortalCacheTest {
 
 		intraBandPortalCache.removeAll();
 
-		Datagram datagram = _mockIntraBand.getDatagram();
+		Datagram datagram = _mockIntraband.getDatagram();
 
 		Deserializer deserializer = new Deserializer(
 			datagram.getDataByteBuffer());
@@ -408,7 +408,7 @@ public class IntrabandPortalCacheTest {
 		Assert.assertEquals(_testName, deserializer.readString());
 	}
 
-	private static MockIntraband getIntraBand(
+	private static MockIntraband getIntraband(
 			IntrabandPortalCache<?, ?> intraBandPortalCache)
 		throws Exception {
 
@@ -429,9 +429,9 @@ public class IntrabandPortalCacheTest {
 			intraBandPortalCache);
 	}
 
-	private MockIntraband _mockIntraBand = new MockIntraband();
+	private MockIntraband _mockIntraband = new MockIntraband();
 	private MockRegistrationReference _mockRegistrationReference =
-		new MockRegistrationReference(_mockIntraBand);
+		new MockRegistrationReference(_mockIntraband);
 	private String _testName = "testName";
 
 }

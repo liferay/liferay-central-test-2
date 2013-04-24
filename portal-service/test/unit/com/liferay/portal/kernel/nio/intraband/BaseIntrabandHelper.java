@@ -20,9 +20,9 @@ package com.liferay.portal.kernel.nio.intraband;
 public class BaseIntrabandHelper {
 
 	public static void addResponseWaitingDatagram(
-		BaseIntraband baseIntraBand, Datagram datagram) {
+		BaseIntraband baseIntraband, Datagram datagram) {
 
-		baseIntraBand.addResponseWaitingDatagram(datagram);
+		baseIntraband.addResponseWaitingDatagram(datagram);
 	}
 
 }
