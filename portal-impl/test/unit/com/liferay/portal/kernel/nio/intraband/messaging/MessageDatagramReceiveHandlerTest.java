@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.nio.intraband.messaging;
 import com.liferay.portal.kernel.io.Serializer;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.nio.intraband.Datagram;
-import com.liferay.portal.kernel.nio.intraband.MockIntraBand;
+import com.liferay.portal.kernel.nio.intraband.MockIntraband;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.PortalExecutorManagerUtilAdvice;
 import com.liferay.portal.kernel.nio.intraband.SystemDataType;
@@ -107,7 +107,7 @@ public class MessageDatagramReceiveHandlerTest {
 
 	}
 
-	private MockIntraBand _mockIntraBand = new MockIntraBand();
+	private MockIntraband _mockIntraBand = new MockIntraband();
 	private MockRegistrationReference _mockRegistrationReference =
 		new MockRegistrationReference(_mockIntraBand);
 

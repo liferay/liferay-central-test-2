@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.nio.intraband.rpc;
 import com.liferay.portal.kernel.io.Deserializer;
 import com.liferay.portal.kernel.io.Serializer;
 import com.liferay.portal.kernel.nio.intraband.Datagram;
-import com.liferay.portal.kernel.nio.intraband.MockIntraBand;
+import com.liferay.portal.kernel.nio.intraband.MockIntraband;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.PortalExecutorManagerUtilAdvice;
 import com.liferay.portal.kernel.nio.intraband.SystemDataType;
@@ -50,7 +50,7 @@ public class RPCDatagramReceiveHandlerTest {
 		RPCDatagramReceiveHandler rpcDatagramReceiveHandler =
 			new RPCDatagramReceiveHandler();
 
-		MockIntraBand mockIntraBand = new MockIntraBand();
+		MockIntraband mockIntraBand = new MockIntraband();
 
 		Serializer serializer = new Serializer();
 

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.io.Deserializer;
 import com.liferay.portal.kernel.io.Serializer;
 import com.liferay.portal.kernel.nio.intraband.Datagram;
-import com.liferay.portal.kernel.nio.intraband.MockIntraBand;
+import com.liferay.portal.kernel.nio.intraband.MockIntraband;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.PortalExecutorManagerUtilAdvice;
 import com.liferay.portal.kernel.nio.intraband.SystemDataType;
@@ -72,7 +72,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 
 	@Before
 	public void setUp() {
-		IntraBandPortalCacheManager.setPortalCacheManager(
+		IntrabandPortalCacheManager.setPortalCacheManager(
 			_mockPortalCacheManager);
 	}
 
@@ -370,7 +370,7 @@ public class PortalCacheDatagramReceiveHandlerTest {
 
 	private static final String _TEST_VALUE = "testValue";
 
-	private MockIntraBand _mockIntraBand = new MockIntraBand();
+	private MockIntraband _mockIntraBand = new MockIntraband();
 	private MockPortalCacheManager _mockPortalCacheManager =
 		new MockPortalCacheManager();;
 	private MockRegistrationReference _mockRegistrationReference =

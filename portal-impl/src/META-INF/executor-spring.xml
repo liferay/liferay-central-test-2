@@ -37,7 +37,7 @@
 		<property name="portalExecutors">
 			<map>
 
-				<!-- IntraBand mailbox dispatching -->
+				<!-- Intraband mailbox dispatching -->
 
 				<entry>
 					<key>

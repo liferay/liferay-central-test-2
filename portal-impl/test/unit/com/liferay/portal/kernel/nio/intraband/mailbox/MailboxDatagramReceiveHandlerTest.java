@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.nio.intraband.mailbox;
 
 import com.liferay.portal.kernel.io.Deserializer;
 import com.liferay.portal.kernel.nio.intraband.Datagram;
-import com.liferay.portal.kernel.nio.intraband.MockIntraBand;
+import com.liferay.portal.kernel.nio.intraband.MockIntraband;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.PortalExecutorManagerUtilAdvice;
 import com.liferay.portal.kernel.nio.intraband.SystemDataType;
@@ -52,7 +52,7 @@ public class MailboxDatagramReceiveHandlerTest {
 		MailboxDatagramReceiveHandler mailboxDatagramReceiveHandler =
 			new MailboxDatagramReceiveHandler();
 
-		MockIntraBand mockIntraBand = new MockIntraBand();
+		MockIntraband mockIntraBand = new MockIntraband();
 
 		SystemDataType systemDataType = SystemDataType.MAILBOX;
 
