@@ -91,7 +91,7 @@ public class DLFileEntryTypeStagedModelDataHandler
 			fileEntryType.getName(), 2);
 
 		List<Element> ddmStructureElements =
-			portletDataContext.getReferencedDataElements(
+			portletDataContext.getReferenceDataElements(
 				fileEntryType, DDMStructure.class);
 
 		for (Element ddmStructureElement : ddmStructureElements) {

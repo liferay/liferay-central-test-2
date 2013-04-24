@@ -77,10 +77,6 @@ public class DDMStructureStagedModelDataHandler
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			structure, DDMPortletDataHandler.NAMESPACE);
 
-		Map<String, String> ddmStructureKeys =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				DDMStructure.class + ".ddmStructureKey");
-
 		DDMStructure importedStructure = null;
 
 		if (portletDataContext.isDataStrategyMirror()) {
@@ -134,6 +130,10 @@ public class DDMStructureStagedModelDataHandler
 
 		portletDataContext.importClassedModel(
 			structure, importedStructure, DDMPortletDataHandler.NAMESPACE);
+
+		Map<String, String> ddmStructureKeys =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				DDMStructure.class + ".ddmStructureKey");
 
 		ddmStructureKeys.put(
 			structure.getStructureKey(), importedStructure.getStructureKey());

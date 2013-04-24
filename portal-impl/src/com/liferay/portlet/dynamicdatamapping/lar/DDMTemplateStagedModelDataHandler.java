@@ -137,7 +137,7 @@ public class DDMTemplateStagedModelDataHandler
 
 			if (Validator.isNotNull(template.getSmallImageURL())) {
 				String smallImageURL =
-					DDMPortletDataHandler.exportReferencedContent(
+					DDMPortletDataHandler.exportReferenceContent(
 						portletDataContext, dlFileEntryTypesElement,
 						dlFoldersElement, dlFileEntriesElement,
 						dlFileRanksElement, dlRepositoriesElement,
@@ -164,7 +164,7 @@ public class DDMTemplateStagedModelDataHandler
 		if (portletDataContext.getBooleanParameter(
 				DDMPortletDataHandler.NAMESPACE, "embedded-assets")) {
 
-			String content = DDMPortletDataHandler.exportReferencedContent(
+			String content = DDMPortletDataHandler.exportReferenceContent(
 				portletDataContext, dlFileEntryTypesElement, dlFoldersElement,
 				dlFileEntriesElement, dlFileRanksElement, dlRepositoriesElement,
 				dlRepositoryEntriesElement, templateElement,
@@ -212,7 +212,7 @@ public class DDMTemplateStagedModelDataHandler
 
 			if (Validator.isNotNull(template.getSmallImageURL())) {
 				String smallImageURL =
-					JournalPortletDataHandler.importReferencedContent(
+					JournalPortletDataHandler.importReferenceContent(
 						portletDataContext, element,
 						template.getSmallImageURL());
 
@@ -233,10 +233,6 @@ public class DDMTemplateStagedModelDataHandler
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			template, DDMPortletDataHandler.NAMESPACE);
-
-		Map<String, String> ddmTemplateKeys =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				DDMTemplate.class + ".ddmTemplateKey");
 
 		DDMTemplate importedTemplate = null;
 
@@ -269,6 +265,10 @@ public class DDMTemplateStagedModelDataHandler
 
 		portletDataContext.importClassedModel(
 			template, importedTemplate, DDMPortletDataHandler.NAMESPACE);
+
+		Map<String, String> ddmTemplateKeys =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				DDMTemplate.class + ".ddmTemplateKey");
 
 		ddmTemplateKeys.put(
 			template.getTemplateKey(), importedTemplate.getTemplateKey());

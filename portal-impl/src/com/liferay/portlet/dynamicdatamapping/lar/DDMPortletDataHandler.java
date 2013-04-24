@@ -71,7 +71,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 
 	public static final String NAMESPACE = "dynamic_data_mapping";
 
-	public static String exportReferencedContent(
+	public static String exportReferenceContent(
 			PortletDataContext portletDataContext,
 			Element dlFileEntryTypesElement, Element dlFoldersElement,
 			Element dlFileEntriesElement, Element dlFileRanksElement,
@@ -87,6 +87,7 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 		content = exportLinksToLayout(portletDataContext, content);
 
 		Element groupElement = entityElement.getParent();
+
 		String groupElementName = groupElement.getName();
 
 		if (!groupElementName.equals(JournalArticle.class.getSimpleName())) {

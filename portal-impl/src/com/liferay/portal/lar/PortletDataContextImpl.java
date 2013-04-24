@@ -608,14 +608,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Element addReferenceElement(
-		Element element, ClassedModel referencedClassedModel) {
+		Element element, ClassedModel classedModel) {
 
-		return addReferenceElement(
-			element, referencedClassedModel, StringPool.BLANK);
+		return addReferenceElement(element, classedModel, StringPool.BLANK);
 	}
 
 	public Element addReferenceElement(
-		Element element, ClassedModel referencedClassedModel, String binPath) {
+		Element element, ClassedModel classedModel, String binPath) {
 
 		Element referencesElement = element.element("references");
 
@@ -626,9 +625,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		Element referenceElement = referencesElement.addElement("reference");
 
 		referenceElement.addAttribute(
-			"class-name", referencedClassedModel.getModelClassName());
+			"class-name", classedModel.getModelClassName());
 
-		Serializable primaryKeyObj = referencedClassedModel.getPrimaryKeyObj();
+		Serializable primaryKeyObj = classedModel.getPrimaryKeyObj();
 
 		referenceElement.addAttribute(
 			"class-pk", String.valueOf(primaryKeyObj));
@@ -926,22 +925,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _ratingsEntriesMap;
 	}
 
-	public List<Element> getReferencedDataElements(
+	public List<Element> getReferenceDataElements(
 		Element parentElement, Class<?> clazz) {
 
 		List<Element> referenceElements = getReferenceElements(
 			parentElement, clazz);
 
-		return getReferencedDataElements(referenceElements, clazz);
+		return getReferenceDataElements(referenceElements, clazz);
 	}
 
-	public List<Element> getReferencedDataElements(
+	public List<Element> getReferenceDataElements(
 		StagedModel parentStagedModel, Class<?> clazz) {
 
 		List<Element> referenceElements = getReferenceElements(
 			parentStagedModel, clazz);
 
-		return getReferencedDataElements(referenceElements, clazz);
+		return getReferenceDataElements(referenceElements, clazz);
 	}
 
 	public String getRootPath() {
@@ -1680,25 +1679,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return className.concat(StringPool.POUND).concat(primaryKey);
 	}
 
-	protected List<Element> getReferencedDataElements(
+	protected List<Element> getReferenceDataElements(
 		List<Element> referenceElements, Class<?> clazz) {
 
-		List<Element> referencedDataElements = new ArrayList<Element>();
+		List<Element> referenceDataElements = new ArrayList<Element>();
 
 		for (Element referenceElement : referenceElements) {
-			Element referencedElement = null;
+			Element referenceDataElement = null;
 
 			String binPath = referenceElement.attributeValue("bin-path");
 
 			if (Validator.isNotNull(binPath)) {
-				referencedElement = getImportDataElement(
+				referenceDataElement = getImportDataElement(
 					clazz.getSimpleName(), "path", binPath);
 			}
 			else {
 				long classPK = GetterUtil.getLong(
 					referenceElement.attributeValue("class-pk"));
 
-				StringBuilder sb = new StringBuilder(7);
+				StringBuilder sb = new StringBuilder(6);
 
 				sb.append("staged-model[contains(@path, '/");
 				sb.append(clazz.getName());
@@ -1712,18 +1711,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 				Element groupElement = getImportDataGroupElement(
 					clazz.getSimpleName());
 
-				referencedElement = (Element)xPath.selectSingleNode(
+				referenceDataElement = (Element)xPath.selectSingleNode(
 					groupElement);
 			}
 
-			if (referencedElement == null) {
+			if (referenceDataElement == null) {
 				continue;
 			}
 
-			referencedDataElements.add(referencedElement);
+			referenceDataElements.add(referenceDataElement);
 		}
 
-		return referencedDataElements;
+		return referenceDataElements;
 	}
 
 	protected List<Element> getReferenceElements(

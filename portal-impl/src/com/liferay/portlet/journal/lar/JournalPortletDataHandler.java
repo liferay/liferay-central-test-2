@@ -105,7 +105,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 	public static final String NAMESPACE = "journal";
 
-	public static String importReferencedContent(
+	public static String importReferenceContent(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
 		throws Exception {
@@ -118,7 +118,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		return content;
 	}
 
-	public static void importReferencedData(
+	public static void importReferenceData(
 			PortletDataContext portletDataContext, Element entityElement)
 		throws Exception {
 
@@ -256,9 +256,8 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			FileEntry fileEntry = null;
 
 			try {
-				fileEntry =
-					DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-						fileEntryUUID, portletDataContext.getScopeGroupId());
+				fileEntry = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					fileEntryUUID, portletDataContext.getScopeGroupId());
 			}
 			catch (NoSuchFileEntryException nsfee) {
 				continue;
@@ -450,8 +449,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		// Structures & Templates
-
 		ActionableDynamicQuery structureActionableDynamicQuery =
 			new DDMStructureActionableDynamicQuery() {
 
@@ -497,8 +494,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		structureActionableDynamicQuery.performActions();
 
-		// Feeds
-
 		ActionableDynamicQuery feedActionableDynamicQuery =
 			new JournalFeedActionableDynamicQuery() {
 
@@ -526,8 +521,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		if (!portletDataContext.getBooleanParameter(NAMESPACE, "web-content")) {
 			getExportDataRootElementString(rootElement);
 		}
-
-		// Folders
 
 		ActionableDynamicQuery folderActionableDynamicQuery =
 			new JournalFolderActionableDynamicQuery() {
@@ -557,8 +550,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext.getScopeGroupId());
 
 		folderActionableDynamicQuery.performActions();
-
-		// Articles
 
 		ActionableDynamicQuery articleActionableDynamicQuery =
 			new JournalArticleActionableDynamicQuery() {
@@ -625,9 +616,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		Element rootElement = portletDataContext.getImportDataRootElement();
 
-		importReferencedData(portletDataContext, rootElement);
-
-		// Structures
+		importReferenceData(portletDataContext, rootElement);
 
 		Element ddmStructuresElement =
 			portletDataContext.getImportDataGroupElement(DDMStructure.class);
@@ -639,8 +628,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				portletDataContext, ddmStructureElement);
 		}
 
-		// Templates
-
 		Element ddmTemplatesElement =
 			portletDataContext.getImportDataGroupElement(DDMTemplate.class);
 
@@ -651,8 +638,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				portletDataContext, ddmTemplateElement);
 		}
 
-		// Feeds
-
 		Element feedsElement = portletDataContext.getImportDataGroupElement(
 			JournalFeed.class);
 
@@ -662,8 +647,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, feedElement);
 		}
-
-		// Folders & Articles
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "web-content")) {
 			Element foldersElement =

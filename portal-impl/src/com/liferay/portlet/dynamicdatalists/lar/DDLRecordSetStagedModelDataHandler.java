@@ -97,7 +97,7 @@ public class DDLRecordSetStagedModelDataHandler
 			recordSet.getDDMStructureId());
 
 		List<Element> ddmTemplateElements =
-			portletDataContext.getReferencedDataElements(
+			portletDataContext.getReferenceDataElements(
 				recordSet, DDMTemplate.class);
 
 		for (Element ddmTemplateElement : ddmTemplateElements) {

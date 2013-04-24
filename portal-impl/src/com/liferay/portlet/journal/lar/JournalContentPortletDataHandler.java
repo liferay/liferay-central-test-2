@@ -233,7 +233,7 @@ public class JournalContentPortletDataHandler
 
 		Element rootElement = portletDataContext.getImportDataRootElement();
 
-		JournalPortletDataHandler.importReferencedData(
+		JournalPortletDataHandler.importReferenceData(
 			portletDataContext, rootElement);
 
 		Element ddmStructuresElement =

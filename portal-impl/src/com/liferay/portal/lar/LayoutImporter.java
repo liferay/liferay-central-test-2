@@ -947,16 +947,16 @@ public class LayoutImporter {
 
 		portletDataContext.setImportDataRootElement(rootElement);
 
-		JournalPortletDataHandler.importReferencedData(
+		JournalPortletDataHandler.importReferenceData(
 			portletDataContext, rootElement);
 
-		List<Element> articleElements =
-			portletDataContext.getReferencedDataElements(
+		List<Element> referenceDataElements =
+			portletDataContext.getReferenceDataElements(
 				layoutElement, JournalArticle.class);
 
-		if (!articleElements.isEmpty()) {
+		if (!referenceDataElements.isEmpty()) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, articleElements.get(0));
+				portletDataContext, referenceDataElements.get(0));
 		}
 
 		Map<String, String> articleIds =

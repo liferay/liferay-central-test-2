@@ -223,7 +223,7 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 
 		Element rootElement = portletDataContext.getImportDataRootElement();
 
-		JournalPortletDataHandler.importReferencedData(
+		JournalPortletDataHandler.importReferenceData(
 			portletDataContext, rootElement);
 
 		Map<String, String> articleIds =
@@ -235,7 +235,7 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 
 		Element footerArticleElement = rootElement.element("footer-article");
 
-		importReferencedArticle(portletDataContext, footerArticleElement);
+		importReferenceArticle(portletDataContext, footerArticleElement);
 
 		String[] footerArticleValues = portletPreferences.getValues(
 			"footerArticleValues", new String[] {"0", ""});
@@ -263,7 +263,7 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 
 		Element headerArticleElement = rootElement.element("header-article");
 
-		importReferencedArticle(portletDataContext, headerArticleElement);
+		importReferenceArticle(portletDataContext, headerArticleElement);
 
 		String[] headerArticleValues = portletPreferences.getValues(
 			"headerArticleValues", new String[] {"0", ""});
@@ -292,21 +292,21 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
-	protected void importReferencedArticle(
+	protected void importReferenceArticle(
 			PortletDataContext portletDataContext, Element parentElement)
 		throws PortletDataException {
 
-		List<Element> referencedStagedModels =
-			portletDataContext.getReferencedDataElements(
+		List<Element> referenceDataElements =
+			portletDataContext.getReferenceDataElements(
 				parentElement, JournalArticle.class);
 
-		if (referencedStagedModels.isEmpty()) {
+		if (referenceDataElements.isEmpty()) {
 			return;
 		}
 
-		for (Element element : referencedStagedModels) {
+		for (Element referenceDataElement : referenceDataElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, element);
+				portletDataContext, referenceDataElement);
 		}
 	}
 

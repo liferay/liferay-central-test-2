@@ -119,10 +119,10 @@ public interface PortletDataContext extends Serializable {
 		String className, long classPK, List<RatingsEntry> ratingsEntries);
 
 	public Element addReferenceElement(
-		Element element, ClassedModel referencedClassedModel);
+		Element element, ClassedModel classedModel);
 
 	public Element addReferenceElement(
-		Element element, ClassedModel referencedClassedModel, String binPath);
+		Element element, ClassedModel classedModel, String binPath);
 
 	public void addZipEntry(String path, byte[] bytes) throws SystemException;
 
@@ -228,10 +228,10 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, List<RatingsEntry>> getRatingsEntries();
 
-	public List<Element> getReferencedDataElements(
+	public List<Element> getReferenceDataElements(
 		Element parentElement, Class<?> clazz);
 
-	public List<Element> getReferencedDataElements(
+	public List<Element> getReferenceDataElements(
 		StagedModel parentStagedModel, Class<?> clazz);
 
 	/**

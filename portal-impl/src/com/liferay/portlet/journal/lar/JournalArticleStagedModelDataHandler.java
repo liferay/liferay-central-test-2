@@ -105,16 +105,12 @@ public class JournalArticleStagedModelDataHandler
 		articleElement.addAttribute(
 			"article-resource-uuid", article.getArticleResourceUuid());
 
-		// Folder
-
 		if (article.getFolderId() !=
 				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 			StagedModelDataHandlerUtil.exportStagedModel(
 				portletDataContext, article.getFolder());
 		}
-
-		// Structure
 
 		if (Validator.isNotNull(article.getStructureId())) {
 			DDMStructure ddmStructure =
@@ -129,8 +125,6 @@ public class JournalArticleStagedModelDataHandler
 			portletDataContext.addReferenceElement(
 				articleElement, ddmStructure);
 		}
-
-		// Template
 
 		if (Validator.isNotNull(article.getTemplateId())) {
 			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
@@ -157,15 +151,13 @@ public class JournalArticleStagedModelDataHandler
 		Element dlRepositoryEntriesElement =
 			portletDataContext.getExportDataGroupElement(RepositoryEntry.class);
 
-		// Small image
-
 		if (article.isSmallImage()) {
 			Image smallImage = ImageUtil.fetchByPrimaryKey(
 				article.getSmallImageId());
 
 			if (Validator.isNotNull(article.getSmallImageURL())) {
 				String smallImageURL =
-					DDMPortletDataHandler.exportReferencedContent(
+					DDMPortletDataHandler.exportReferenceContent(
 						portletDataContext, dlFileEntryTypesElement,
 						dlFoldersElement, dlFileEntriesElement,
 						dlFileRanksElement, dlRepositoriesElement,
@@ -188,8 +180,6 @@ public class JournalArticleStagedModelDataHandler
 			}
 		}
 
-		// Images
-
 		if (portletDataContext.getBooleanParameter(
 				JournalPortletDataHandler.NAMESPACE, "images")) {
 
@@ -206,12 +196,10 @@ public class JournalArticleStagedModelDataHandler
 
 		article.setStatusByUserUuid(article.getStatusByUserUuid());
 
-		// Embedded assets
-
 		if (portletDataContext.getBooleanParameter(
 				JournalPortletDataHandler.NAMESPACE, "embedded-assets")) {
 
-			String content = DDMPortletDataHandler.exportReferencedContent(
+			String content = DDMPortletDataHandler.exportReferenceContent(
 				portletDataContext, dlFileEntryTypesElement, dlFoldersElement,
 				dlFileEntriesElement, dlFileRanksElement, dlRepositoriesElement,
 				dlRepositoryEntriesElement, articleElement,
@@ -246,8 +234,6 @@ public class JournalArticleStagedModelDataHandler
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
-		// Parent folder
-
 		Map<Long, Long> folderIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				JournalFolder.class);
@@ -270,9 +256,8 @@ public class JournalArticleStagedModelDataHandler
 		long folderId = MapUtil.getLong(
 			folderIds, article.getFolderId(), article.getFolderId());
 
-		// Article
-
 		String articleId = article.getArticleId();
+
 		boolean autoArticleId = false;
 
 		if (Validator.isNumber(articleId) ||
@@ -303,7 +288,7 @@ public class JournalArticleStagedModelDataHandler
 		Element articleElement =
 			portletDataContext.getImportDataStagedModelElement(article);
 
-		content = JournalPortletDataHandler.importReferencedContent(
+		content = JournalPortletDataHandler.importReferenceContent(
 			portletDataContext, articleElement, content);
 
 		article.setContent(content);
@@ -397,14 +382,12 @@ public class JournalArticleStagedModelDataHandler
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			portletDataContext.getCompanyId());
 
-		// Structure
-
 		String parentDDMStructureKey = StringPool.BLANK;
 
 		long ddmStructureId = 0;
 
 		List<Element> structureElements =
-			portletDataContext.getReferencedDataElements(
+			portletDataContext.getReferenceDataElements(
 				article, DDMStructure.class);
 
 		if (!structureElements.isEmpty()) {
@@ -416,19 +399,13 @@ public class JournalArticleStagedModelDataHandler
 				(DDMStructure)portletDataContext.getZipEntryAsObject(
 					structurePath);
 
-			// Try to fetch from target group
-
 			DDMStructure existingDDMStructure = DDMStructureUtil.fetchByUUID_G(
 				ddmStructure.getUuid(), portletDataContext.getScopeGroupId());
-
-			// Try to fetch from global scope
 
 			if (existingDDMStructure == null) {
 				existingDDMStructure = DDMStructureUtil.fetchByUUID_G(
 					ddmStructure.getUuid(), companyGroup.getGroupId());
 			}
-
-			// Import if not exist
 
 			if (existingDDMStructure == null) {
 				StagedModelDataHandlerUtil.importStagedModel(
@@ -466,12 +443,10 @@ public class JournalArticleStagedModelDataHandler
 			parentDDMStructureKey = existingDDMStructure.getStructureKey();
 		}
 
-		// Template
-
 		String parentDDMTemplateKey = StringPool.BLANK;
 
 		List<Element> ddmTemplateElements =
-			portletDataContext.getReferencedDataElements(
+			portletDataContext.getReferenceDataElements(
 				article, DDMTemplate.class);
 
 		if (!ddmTemplateElements.isEmpty()) {
@@ -483,19 +458,13 @@ public class JournalArticleStagedModelDataHandler
 				(DDMTemplate)portletDataContext.getZipEntryAsObject(
 					ddmTemplatePath);
 
-			// Try to fetch from target group
-
 			DDMTemplate existingDDMTemplate = DDMTemplateUtil.fetchByUUID_G(
 				ddmTemplate.getUuid(), portletDataContext.getScopeGroupId());
-
-			// Try to fetch from global scope
 
 			if (existingDDMTemplate == null) {
 				existingDDMTemplate = DDMTemplateUtil.fetchByUUID_G(
 					ddmTemplate.getUuid(), companyGroup.getGroupId());
 			}
-
-			// Import if not exist
 
 			if (existingDDMTemplate == null) {
 				StagedModelDataHandlerUtil.importStagedModel(
@@ -532,8 +501,6 @@ public class JournalArticleStagedModelDataHandler
 			parentDDMTemplateKey = existingDDMTemplate.getTemplateKey();
 		}
 
-		// Small image
-
 		File smallFile = null;
 
 		if (article.isSmallImage()) {
@@ -542,7 +509,7 @@ public class JournalArticleStagedModelDataHandler
 
 			if (Validator.isNotNull(article.getSmallImageURL())) {
 				String smallImageURL =
-					JournalPortletDataHandler.importReferencedContent(
+					JournalPortletDataHandler.importReferenceContent(
 						portletDataContext, articleElement,
 						article.getSmallImageURL());
 
@@ -561,15 +528,13 @@ public class JournalArticleStagedModelDataHandler
 			}
 		}
 
-		// Images
-
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
 		if (portletDataContext.getBooleanParameter(
 				JournalPortletDataHandler.NAMESPACE, "images")) {
 
 			List<Element> imagesElements =
-				portletDataContext.getReferencedDataElements(
+				portletDataContext.getReferenceDataElements(
 					article, Image.class);
 
 			for (Element imageElement : imagesElements) {
@@ -582,8 +547,6 @@ public class JournalArticleStagedModelDataHandler
 					portletDataContext.getZipEntryAsByteArray(imagePath));
 			}
 		}
-
-		// Article
 
 		String articleURL = null;
 

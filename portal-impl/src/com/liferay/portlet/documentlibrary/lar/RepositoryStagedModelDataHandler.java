@@ -170,7 +170,7 @@ public class RepositoryStagedModelDataHandler
 			repository, importedRepository, DLPortletDataHandler.NAMESPACE);
 
 		List<Element> repositoryEntryElements =
-			portletDataContext.getReferencedDataElements(
+			portletDataContext.getReferenceDataElements(
 				repository, RepositoryEntry.class);
 
 		for (Element repositoryEntryElement : repositoryEntryElements) {
