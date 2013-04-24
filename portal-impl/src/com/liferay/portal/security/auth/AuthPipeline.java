@@ -210,9 +210,9 @@ public class AuthPipeline {
 			Map<String, String[]> parameterMap)
 		throws AuthException {
 
-		Authenticator[] authenticators = _authenticators.get(key);
-
 		boolean skipLiferayCheck = false;
+
+		Authenticator[] authenticators = _authenticators.get(key);
 
 		if ((authenticators == null) || (authenticators.length == 0)) {
 			return Authenticator.SUCCESS;
@@ -255,9 +255,8 @@ public class AuthPipeline {
 		if (skipLiferayCheck) {
 			return Authenticator.SKIP_LIFERAY_CHECK;
 		}
-		else {
-			return Authenticator.SUCCESS;
-		}
+
+		return Authenticator.SUCCESS;
 	}
 
 	private void _onFailure(
