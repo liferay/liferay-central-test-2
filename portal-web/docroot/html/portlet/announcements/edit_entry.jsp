@@ -25,7 +25,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 String content = BeanParamUtil.getString(entry, request, "content");
 
-boolean autoDisplayDate = ParamUtil.getBoolean(request, "autoDisplayDate", false);
+boolean autoDisplayDate = ParamUtil.getBoolean(request, "autoDisplayDate");
 
 if (entry == null) {
 	autoDisplayDate = true;

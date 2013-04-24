@@ -111,6 +111,11 @@ public class AnnouncementsEntryServiceImpl
 			expirationDateMinute, priority, alert);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addEntry(long, long, long,
+	 *             String, String, String, String, int, int, int, int, int,
+	 *             boolean, int, int, int, int, int, int, boolean)}
+	 */
 	public AnnouncementsEntry addEntry(
 			long plid, long classNameId, long classPK, String title,
 			String content, String url, String type, int displayDateMonth,
