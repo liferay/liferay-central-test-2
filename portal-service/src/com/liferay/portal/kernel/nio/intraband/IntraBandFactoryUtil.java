@@ -42,7 +42,7 @@ public class IntraBandFactoryUtil {
 				Constructor<? extends IntraBand> constructor =
 					intraBandClass.getConstructor(long.class);
 
-				return constructor.newInstance(_INTRABAND_DEFAULT_TIMEOUT);
+				return constructor.newInstance(_INTRABAND_TIMEOUT_DEFAULT);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(
@@ -55,18 +55,18 @@ public class IntraBandFactoryUtil {
 				WelderFactoryUtil.getWelderClass();
 
 			if (welderClass.equals(SocketWelder.class)) {
-				return new SelectorIntraBand(_INTRABAND_DEFAULT_TIMEOUT);
+				return new SelectorIntraBand(_INTRABAND_TIMEOUT_DEFAULT);
 			}
 			else {
-				return new ExecutorIntraBand(_INTRABAND_DEFAULT_TIMEOUT);
+				return new ExecutorIntraBand(_INTRABAND_TIMEOUT_DEFAULT);
 			}
 		}
 	}
 
-	private static final long _INTRABAND_DEFAULT_TIMEOUT = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.INTRABAND_DEFAULT_TIMEOUT));
-
 	private static final String _INTRABAND_IMPL = GetterUtil.getString(
 		PropsUtil.get(PropsKeys.INTRABAND_IMPL));
+
+	private static final long _INTRABAND_TIMEOUT_DEFAULT = GetterUtil.getLong(
+		PropsUtil.get(PropsKeys.INTRABAND_TIMEOUT_DEFAULT));
 
 }

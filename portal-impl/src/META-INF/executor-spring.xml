@@ -37,7 +37,7 @@
 		<property name="portalExecutors">
 			<map>
 
-				<!-- IntraBand Mailbox Dispatching -->
+				<!-- IntraBand mailbox dispatching -->
 
 				<entry>
 					<key>
@@ -80,7 +80,7 @@
 					</bean>
 				</entry>
 
-				<!-- IntraBand Message Bridging Dispatching -->
+				<!-- Intraband message bridging dispatching -->
 
 				<entry>
 					<key>
@@ -123,7 +123,7 @@
 					</bean>
 				</entry>
 
-				<!-- Server Side Parallel Rendering-->
+				<!-- Server side parallel rendering -->
 
 				<entry>
 					<key>
