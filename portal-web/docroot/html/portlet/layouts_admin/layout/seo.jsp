@@ -51,7 +51,7 @@ if (selLayout != null) {
 		String sitemapPriority = layoutTypeSettings.getProperty("sitemap-priority", PropsValues.SITES_SITEMAP_DEFAULT_PRIORITY);
 		%>
 
-		<liferay-ui:error exception="<%= InvalidSitemapIncludeException.class %>" message="please-select-a-valid-include" />
+		<liferay-ui:error exception="<%= InvalidSitemapIncludeException.class %>" message="please-select-a-valid-include-value" />
 
 		<aui:select label="include" name="TypeSettingsProperties--sitemap-include--">
 			<aui:option label="yes" selected="<%= include %>" value="1" />

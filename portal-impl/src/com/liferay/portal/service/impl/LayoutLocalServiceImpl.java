@@ -2408,22 +2408,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			UnicodeProperties typeSettingsProperties)
 		throws PortalException {
 
-		String sitemapPriority = typeSettingsProperties.getProperty(
-			"sitemap-priority");
 		String sitemapInclude = typeSettingsProperties.getProperty(
 			"sitemap-include");
+		String sitemapPriority = typeSettingsProperties.getProperty(
+			"sitemap-priority");
 		String sitemapChangeFrequency = typeSettingsProperties.getProperty(
 			"sitemap-changefreq");
 
 		if (Validator.isNotNull(sitemapInclude) &&
-			!(sitemapInclude.equals("0") || sitemapInclude.equals("1"))) {
+			!sitemapInclude.equals("0") && !sitemapInclude.equals("1")) {
 
 			throw new InvalidSitemapIncludeException();
 		}
 
 		if (Validator.isNotNull(sitemapPriority)) {
 			try {
-				Float priority = Float.valueOf(sitemapPriority);
+				double priority = Double.parseDouble(sitemapPriority);
 
 				if ((priority < 0) || (priority > 1)) {
 					throw new InvalidSitemapPagePriorityException();
@@ -2435,13 +2435,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNotNull(sitemapChangeFrequency) &&
-			!(sitemapChangeFrequency.equals("always") ||
-			sitemapChangeFrequency.equals("hourly") ||
-			sitemapChangeFrequency.equals("daily") ||
-			sitemapChangeFrequency.equals("weekly") ||
-			sitemapChangeFrequency.equals("monthly") ||
-			sitemapChangeFrequency.equals("yearly") ||
-			sitemapChangeFrequency.equals("never"))) {
+			!sitemapChangeFrequency.equals("always") &&
+			!sitemapChangeFrequency.equals("hourly") &&
+			!sitemapChangeFrequency.equals("daily") &&
+			!sitemapChangeFrequency.equals("weekly") &&
+			!sitemapChangeFrequency.equals("monthly") &&
+			!sitemapChangeFrequency.equals("yearly") &&
+			!sitemapChangeFrequency.equals("never")) {
 
 			throw new InvalidSitemapChangeFrequencyException();
 		}
