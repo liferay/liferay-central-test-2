@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
@@ -103,11 +104,19 @@ public class DLFileEntryTypeStagedModelDataHandler
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
 
-		Collection<Long> ddmStructureIdsCollection = ddmStructureIds.values();
+		List<DDMStructure> originalDDMStructures =
+			fileEntryType.getDDMStructures();
 
-		long[] ddmStructureIdsArray = ArrayUtil.toArray(
-			ddmStructureIdsCollection.toArray(
-				new Long[ddmStructureIds.size()]));
+		long[] ddmStructureIdsArray = new long[originalDDMStructures.size()];
+
+		for (int i = 0; i < originalDDMStructures.size(); i++) {
+			DDMStructure newStructure = originalDDMStructures.get(i);
+
+			long newStructureId =
+				MapUtil.getLong(ddmStructureIds, newStructure.getStructureId());
+
+			ddmStructureIdsArray[i] = newStructureId;
+		}
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			fileEntryType, DLPortletDataHandler.NAMESPACE);
