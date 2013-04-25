@@ -152,7 +152,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 	</portlet:renderURL>
 
 	<liferay-ui:header
-		backURL="<%= ((portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES) || refererPortletName.equals(PortletKeys.JOURNAL) || Validator.isNotNull(portletResource)) && Validator.isNotNull(backURL)) ? backURL : viewTemplatesURL %>"
+		backURL="<%= ((portletName.equals(PortletKeys.JOURNAL) || refererPortletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES) || Validator.isNotNull(portletResource)) && Validator.isNotNull(backURL)) ? backURL : viewTemplatesURL %>"
 		localizeTitle="<%= false %>"
 		title="<%= title %>"
 	/>
@@ -176,7 +176,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 								/>
 							</c:when>
 							<c:otherwise>
-								<%= structure == null ? "" : structure.getName(locale) %>
+								<%= (structure == null) ? "" : structure.getName(locale) %>
 							</c:otherwise>
 						</c:choose>
 					</aui:field-wrapper>
@@ -407,7 +407,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= classPK < 0 && !portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES) %>">
+<c:if test="<%= (classPK < 0) && !portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES) %>">
 	<aui:script>
 		function <portlet:namespace />openDDMStructureSelector() {
 			Liferay.Util.openDDMPortlet(
