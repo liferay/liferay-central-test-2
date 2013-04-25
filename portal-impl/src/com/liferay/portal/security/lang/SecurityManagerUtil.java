@@ -62,7 +62,7 @@ public class SecurityManagerUtil {
 			return;
 		}
 		else if (_portalSecurityManagerStrategy ==
-				PortalSecurityManagerStrategy.LIFERAY) {
+					PortalSecurityManagerStrategy.LIFERAY) {
 
 			System.setSecurityManager((SecurityManager)_portalSecurityManager);
 		}
@@ -154,6 +154,7 @@ public class SecurityManagerUtil {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SecurityManagerUtil.class);
+
 	private static PortalSecurityManager _portalSecurityManager;
 	private static PortalSecurityManagerStrategy _portalSecurityManagerStrategy;
 

@@ -293,12 +293,12 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
-	public boolean isActive() {
-		return PACLPolicyManager.isActive();
-	}
-
 	public Policy getPolicy() {
 		return _policy;
+	}
+
+	public boolean isActive() {
+		return PACLPolicyManager.isActive();
 	}
 
 	protected void initClass(Class<?> clazz) {
