@@ -120,22 +120,6 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t\t</attributes>\n\t</classpathentry>\n");
 	}
 
-	protected void addOsgiClasspathEntries(StringBundler sb, String projectDir)
-		throws Exception {
-
-		DirectoryScanner directoryScanner = new DirectoryScanner();
-
-		directoryScanner.setBasedir(projectDir + "/lib/");
-		directoryScanner.setExcludes(new String[] {"*-shared-*.jar"});
-		directoryScanner.setIncludes(new String[] {"**\\*.jar"});
-
-		directoryScanner.scan();
-
-		for (String file : directoryScanner.getIncludedFiles()) {
-			addClasspathEntry(sb, "lib/" + file);
-		}
-	}
-
 	protected List<String> getCommonJars() {
 		List<String> jars = new ArrayList<String>();
 
@@ -486,8 +470,6 @@ public class PluginsEnvironmentBuilder {
 				addClasspathEntry(sb, "lib/" + jar);
 			}
 		}
-
-		addOsgiClasspathEntries(sb, projectDirName);
 
 		sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
 		sb.append("</classpath>");
