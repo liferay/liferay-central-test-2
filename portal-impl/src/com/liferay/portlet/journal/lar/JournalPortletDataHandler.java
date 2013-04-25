@@ -264,8 +264,8 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			try {
 				long importGroupId = portletDataContext.getScopeGroupId();
 
-				if( fileEntryGroupId ==
-					portletDataContext.getSourceCompanyGroupId()) {
+				if (fileEntryGroupId ==
+						portletDataContext.getSourceCompanyGroupId()) {
 
 					importGroupId =
 						portletDataContext.getSourceCompanyGroupId();
