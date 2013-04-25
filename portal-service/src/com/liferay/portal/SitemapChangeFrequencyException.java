@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class InvalidSitemapChangeFrequencyException extends PortalException {
+public class SitemapChangeFrequencyException extends PortalException {
 
-	public InvalidSitemapChangeFrequencyException() {
+	public SitemapChangeFrequencyException() {
 		super();
 	}
 
-	public InvalidSitemapChangeFrequencyException(String msg) {
+	public SitemapChangeFrequencyException(String msg) {
 		super(msg);
 	}
 
-	public InvalidSitemapChangeFrequencyException(String msg, Throwable cause) {
+	public SitemapChangeFrequencyException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidSitemapChangeFrequencyException(Throwable cause) {
+	public SitemapChangeFrequencyException(Throwable cause) {
 		super(cause);
 	}
 

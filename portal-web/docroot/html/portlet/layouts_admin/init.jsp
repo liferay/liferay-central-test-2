@@ -18,9 +18,6 @@
 
 <%@ page import="com.liferay.portal.DuplicateLockException" %><%@
 page import="com.liferay.portal.ImageTypeException" %><%@
-page import="com.liferay.portal.InvalidSitemapChangeFrequencyException" %><%@
-page import="com.liferay.portal.InvalidSitemapIncludeException" %><%@
-page import="com.liferay.portal.InvalidSitemapPagePriorityException" %><%@
 page import="com.liferay.portal.LARFileException" %><%@
 page import="com.liferay.portal.LARFileSizeException" %><%@
 page import="com.liferay.portal.LARTypeException" %><%@
@@ -38,6 +35,9 @@ page import="com.liferay.portal.NoSuchRoleException" %><%@
 page import="com.liferay.portal.RemoteExportException" %><%@
 page import="com.liferay.portal.RemoteOptionsException" %><%@
 page import="com.liferay.portal.RequiredLayoutException" %><%@
+page import="com.liferay.portal.SitemapChangeFrequencyException" %><%@
+page import="com.liferay.portal.SitemapIncludeException" %><%@
+page import="com.liferay.portal.SitemapPagePriorityException" %><%@
 page import="com.liferay.portal.kernel.lar.PortletDataException" %><%@
 page import="com.liferay.portal.kernel.lar.PortletDataHandler" %><%@
 page import="com.liferay.portal.kernel.lar.PortletDataHandlerBoolean" %><%@

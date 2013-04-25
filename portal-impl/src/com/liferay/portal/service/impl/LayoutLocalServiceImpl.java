@@ -14,12 +14,12 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.InvalidSitemapChangeFrequencyException;
-import com.liferay.portal.InvalidSitemapIncludeException;
-import com.liferay.portal.InvalidSitemapPagePriorityException;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
+import com.liferay.portal.SitemapChangeFrequencyException;
+import com.liferay.portal.SitemapIncludeException;
+import com.liferay.portal.SitemapPagePriorityException;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -2418,7 +2418,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (Validator.isNotNull(sitemapInclude) &&
 			!sitemapInclude.equals("0") && !sitemapInclude.equals("1")) {
 
-			throw new InvalidSitemapIncludeException();
+			throw new SitemapIncludeException();
 		}
 
 		if (Validator.isNotNull(sitemapPriority)) {
@@ -2426,11 +2426,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				double priority = Double.parseDouble(sitemapPriority);
 
 				if ((priority < 0) || (priority > 1)) {
-					throw new InvalidSitemapPagePriorityException();
+					throw new SitemapPagePriorityException();
 				}
 			}
 			catch (NumberFormatException nfe) {
-				throw new InvalidSitemapPagePriorityException();
+				throw new SitemapPagePriorityException();
 			}
 		}
 
@@ -2443,7 +2443,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			!sitemapChangeFrequency.equals("yearly") &&
 			!sitemapChangeFrequency.equals("never")) {
 
-			throw new InvalidSitemapChangeFrequencyException();
+			throw new SitemapChangeFrequencyException();
 		}
 	}
 
