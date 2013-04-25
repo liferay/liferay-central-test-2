@@ -2408,18 +2408,32 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			UnicodeProperties typeSettingsProperties)
 		throws PortalException {
 
-		String sitemapInclude = typeSettingsProperties.getProperty(
-			"sitemap-include");
-		String sitemapPriority = typeSettingsProperties.getProperty(
-			"sitemap-priority");
 		String sitemapChangeFrequency = typeSettingsProperties.getProperty(
 			"sitemap-changefreq");
+
+		if (Validator.isNotNull(sitemapChangeFrequency) &&
+			!sitemapChangeFrequency.equals("always") &&
+			!sitemapChangeFrequency.equals("hourly") &&
+			!sitemapChangeFrequency.equals("daily") &&
+			!sitemapChangeFrequency.equals("weekly") &&
+			!sitemapChangeFrequency.equals("monthly") &&
+			!sitemapChangeFrequency.equals("yearly") &&
+			!sitemapChangeFrequency.equals("never")) {
+
+			throw new SitemapChangeFrequencyException();
+		}
+
+		String sitemapInclude = typeSettingsProperties.getProperty(
+			"sitemap-include");
 
 		if (Validator.isNotNull(sitemapInclude) &&
 			!sitemapInclude.equals("0") && !sitemapInclude.equals("1")) {
 
 			throw new SitemapIncludeException();
 		}
+
+		String sitemapPriority = typeSettingsProperties.getProperty(
+			"sitemap-priority");
 
 		if (Validator.isNotNull(sitemapPriority)) {
 			try {
@@ -2432,18 +2446,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			catch (NumberFormatException nfe) {
 				throw new SitemapPagePriorityException();
 			}
-		}
-
-		if (Validator.isNotNull(sitemapChangeFrequency) &&
-			!sitemapChangeFrequency.equals("always") &&
-			!sitemapChangeFrequency.equals("hourly") &&
-			!sitemapChangeFrequency.equals("daily") &&
-			!sitemapChangeFrequency.equals("weekly") &&
-			!sitemapChangeFrequency.equals("monthly") &&
-			!sitemapChangeFrequency.equals("yearly") &&
-			!sitemapChangeFrequency.equals("never")) {
-
-			throw new SitemapChangeFrequencyException();
 		}
 	}
 
