@@ -662,8 +662,8 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			try {
 				return FileUtil.read(cacheFile);
 			}
-			catch (IOException e) {
-				_log.error(e, e);
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
 			}
 		}
 
@@ -719,8 +719,8 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		try {
 			FileUtil.write(cacheFile, sb.toString());
 		}
-		catch (IOException e) {
-			_log.error(e, e);
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 		}
 
 		return sb.toString();
