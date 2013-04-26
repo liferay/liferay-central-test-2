@@ -96,6 +96,26 @@ public class VerifyJournal extends VerifyProcess {
 		}
 	}
 
+	protected void updateURLTitle(String urlTitle) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update JournalArticle set urlTitle = ? where urlTitle = ?");
+
+			ps.setString(1, FriendlyURLNormalizerUtil.normalize(urlTitle));
+			ps.setString(2, urlTitle);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	protected void verifyContentSearch(long groupId, String portletId)
 		throws Exception {
 
@@ -337,14 +357,7 @@ public class VerifyJournal extends VerifyProcess {
 			while (rs.next()) {
 				String urlTitle = rs.getString("urlTitle");
 
-				ps = con.prepareStatement(
-					"update JournalArticle set urlTitle = ? where urlTitle " +
-						"= ?");
-
-				ps.setString(1, FriendlyURLNormalizerUtil.normalize(urlTitle));
-				ps.setString(2, urlTitle);
-
-				ps.executeUpdate();
+				updateURLTitle(urlTitle);
 			}
 		}
 		finally {
