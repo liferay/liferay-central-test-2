@@ -63,12 +63,13 @@ public class VerifyLayout extends VerifyProcess {
 
 		sb.append("update ");
 		sb.append(tableName);
-		sb.append(" set layoutUuid = (select sourcePrototypeLayoutUuid from ");
-		sb.append("Layout where ");
+		sb.append(" inner join Layout on ");
 		sb.append(tableName);
-		sb.append(".layoutUuid = Layout.uuid_ and ");
+		sb.append(".layoutUuid = Layout.uuid_ set ");
+		sb.append(tableName);
+		sb.append(".layoutUuid = Layout.sourcePrototypeLayoutUuid where ");
 		sb.append("Layout.sourcePrototypeLayoutUuid != '' and ");
-		sb.append("Layout.uuid_ != Layout.sourcePrototypeLayoutUuid)");
+		sb.append("Layout.uuid_ != Layout.sourcePrototypeLayoutUuid");
 
 		runSQL(sb.toString());
 	}
