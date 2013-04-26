@@ -1,17 +1,17 @@
 <html>
 <head>
-<title>PGMessageboardsCategory</title>
+<title>CPBlogsEntry</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">PGMessageboardsCategory</td></tr>
+<tr><td rowspan="1" colspan="3">CPBlogsEntry</td></tr>
 </thead>
 <tbody>
 <tr>
 	<td>PAGE_NAME</td>
 	<td></td>
-	<td>PGMessageboardsCategory</td>
+	<td>CPBlogsEntry</td>
 </tr>
 <tr>
 	<td></td>
@@ -19,13 +19,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>NAME_HEADER</td>
+	<td>ENTRY_TITLE_HEADER</td>
 	<td>//h1[@class='header-title']/span</td>
 	<td></td>
 </tr>
 <tr>
-	<td>PORTLET_MESSAGE</td>
-	<td>//div[@class='portlet-msg-info']</td>
+	<td>ENTRY_CONTENT</td>
+	<td>//div[@class='entry-body']/div</td>
 	<td></td>
 </tr>
 </tbody>
