@@ -336,9 +336,10 @@ public class VerifyJournal extends VerifyProcess {
 
 			while (rs.next()) {
 				String urlTitle = rs.getString("urlTitle");
-				
-				ps = con.prepareStatement("update JournalArticle set " +
-					"urlTitle = ? where urlTitle = ?");
+
+				ps = con.prepareStatement(
+					"update JournalArticle set urlTitle = ? where urlTitle " +
+						"= ?");
 
 				ps.setString(1, FriendlyURLNormalizerUtil.normalize(urlTitle));
 				ps.setString(2, urlTitle);
