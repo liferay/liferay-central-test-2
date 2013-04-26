@@ -330,12 +330,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 		Class<?> clazz = object.getClass();
 
-		HashMap destinationMap = new HashMap();
+		HashMap<Object, Object> destinationMap = new HashMap<Object, Object>();
 
-		BeanCopy
-			.beans(object, destinationMap)
-			.exclude(JSONIncludesManagerUtil.lookupExcludes(clazz))
-			.copy();
+		BeanCopy beanCopy = BeanCopy.beans(object, destinationMap);
+
+		beanCopy.exclude(JSONIncludesManagerUtil.lookupExcludes(clazz));
+
+		beanCopy.copy();
 
 		object = destinationMap;
 
