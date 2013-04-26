@@ -133,6 +133,8 @@ for (int i = 0; i < results.size(); i++) {
 	<aui:button onClick="<%= taglibURL %>" value='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' />
 </aui:button-row>
 
+<aui:input helpMessage="delete-missing-layouts-staging-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" />
+
 <aui:script use="aui-io-request">
 	var searchContainer = A.one('#<portlet:namespace /><%= searchContainer.getId(request, renderResponse.getNamespace()) %>');
 
@@ -161,5 +163,3 @@ for (int i = 0; i < results.size(); i++) {
 		);
 	}
 </aui:script>
-
-<aui:input helpMessage="delete-missing-layouts-staging-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" />
