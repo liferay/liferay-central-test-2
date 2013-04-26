@@ -96,7 +96,7 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		ActionableDynamicQuery entryActionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			new BlogsEntryActionableDynamicQuery() {
 
 			@Override
@@ -114,10 +114,10 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 
 		};
 
-		entryActionableDynamicQuery.setGroupId(
+		actionableDynamicQuery.setGroupId(
 			portletDataContext.getScopeGroupId());
 
-		entryActionableDynamicQuery.performActions();
+		actionableDynamicQuery.performActions();
 
 		return getExportDataRootElementString(rootElement);
 	}
