@@ -106,11 +106,10 @@ public class JournalArticleStagedModelDataHandlerTest
 
 		DDMTemplate ddmTemplate = (DDMTemplate)dependentStagedModels.get(0);
 
-		String content = DDMStructureTestUtil.getSampleStructuredContent();
-
 		return JournalTestUtil.addArticleWithXMLContent(
 			group.getGroupId(), folder.getFolderId(),
-			PortalUtil.getClassNameId(DDMStructure.class), content,
+			PortalUtil.getClassNameId(DDMStructure.class),
+			DDMStructureTestUtil.getSampleStructuredContent(),
 			ddmStructure.getStructureKey(), ddmTemplate.getTemplateKey());
 	}
 
@@ -137,16 +136,6 @@ public class JournalArticleStagedModelDataHandlerTest
 		throws Exception {
 
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
-			JournalFolder.class.getSimpleName());
-
-		Assert.assertEquals(1, dependentStagedModels.size());
-
-		JournalFolder folder = (JournalFolder)dependentStagedModels.get(0);
-
-		JournalFolderLocalServiceUtil.getJournalFolderByUuidAndGroupId(
-			folder.getUuid(), group.getGroupId());
-
-		dependentStagedModels = dependentStagedModelsMap.get(
 			DDMStructure.class.getSimpleName());
 
 		Assert.assertEquals(1, dependentStagedModels.size());
@@ -165,6 +154,16 @@ public class JournalArticleStagedModelDataHandlerTest
 
 		DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
 			ddmTemplate.getUuid(), group.getGroupId());
+
+		dependentStagedModels = dependentStagedModelsMap.get(
+			JournalFolder.class.getSimpleName());
+
+		Assert.assertEquals(1, dependentStagedModels.size());
+
+		JournalFolder folder = (JournalFolder)dependentStagedModels.get(0);
+
+		JournalFolderLocalServiceUtil.getJournalFolderByUuidAndGroupId(
+			folder.getUuid(), group.getGroupId());
 	}
 
 	@Override

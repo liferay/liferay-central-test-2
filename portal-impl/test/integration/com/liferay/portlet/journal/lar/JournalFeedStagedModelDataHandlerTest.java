@@ -90,17 +90,13 @@ public class JournalFeedStagedModelDataHandlerTest
 		addDependentStagedModel(
 			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
 
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), ddmStructure.getStructureId());
+		for (int i = 0; i < 2; i++) {
+			DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
+				group.getGroupId(), ddmStructure.getStructureId());
 
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
-
-		ddmTemplate = DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), ddmStructure.getStructureId());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
+			addDependentStagedModel(
+				dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
+		}
 
 		return dependentStagedModelsMap;
 	}
@@ -121,13 +117,13 @@ public class JournalFeedStagedModelDataHandlerTest
 
 		DDMTemplate ddmTemplate = (DDMTemplate)dependentStagedModels.get(0);
 
-		DDMTemplate rendererTemplate = (DDMTemplate)dependentStagedModels.get(
-			1);
+		DDMTemplate rendererDDMTemplate =
+			(DDMTemplate)dependentStagedModels.get(1);
 
 		return JournalTestUtil.addFeed(
 			group.getGroupId(), _layout.getPlid(),
 			ServiceTestUtil.randomString(), ddmStructure.getStructureKey(),
-			ddmTemplate.getTemplateKey(), rendererTemplate.getTemplateKey());
+			ddmTemplate.getTemplateKey(), rendererDDMTemplate.getTemplateKey());
 	}
 
 	@Override
@@ -153,18 +149,6 @@ public class JournalFeedStagedModelDataHandlerTest
 		throws Exception {
 
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
-			DDMTemplate.class.getSimpleName());
-
-		Assert.assertEquals(2, dependentStagedModels.size());
-
-		for (StagedModel stagedModel : dependentStagedModels) {
-			DDMTemplate ddmTemplate = (DDMTemplate)stagedModel;
-
-			DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
-				ddmTemplate.getUuid(), group.getGroupId());
-		}
-
-		dependentStagedModels = dependentStagedModelsMap.get(
 			DDMStructure.class.getSimpleName());
 
 		Assert.assertEquals(1, dependentStagedModels.size());
@@ -173,6 +157,18 @@ public class JournalFeedStagedModelDataHandlerTest
 
 		DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId(
 			ddmStructure.getUuid(), group.getGroupId());
+
+		dependentStagedModels = dependentStagedModelsMap.get(
+			DDMTemplate.class.getSimpleName());
+
+		Assert.assertEquals(2, dependentStagedModels.size());
+
+		for (StagedModel dependentStagedModel : dependentStagedModels) {
+			DDMTemplate ddmTemplate = (DDMTemplate)dependentStagedModel;
+
+			DDMTemplateLocalServiceUtil.getDDMTemplateByUuidAndGroupId(
+				ddmTemplate.getUuid(), group.getGroupId());
+		}
 	}
 
 	private Layout _layout;

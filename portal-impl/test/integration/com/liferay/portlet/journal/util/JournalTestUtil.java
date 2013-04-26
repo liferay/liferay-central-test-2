@@ -362,35 +362,13 @@ public class JournalTestUtil {
 		int delta = 0;
 		String orderByCol = "modified-date";
 		String orderByType = "asc";
+		String friendlyURL = _getFeedFriendlyURL(groupId, plid);
 		String targetPortletId = StringPool.BLANK;
 		String contentField = JournalFeedConstants.WEB_CONTENT_DESCRIPTION;
 		String feedFormat = RSSUtil.getFeedTypeFormat(
 			RSSUtil.FEED_TYPE_DEFAULT);
 		double feedVersion = RSSUtil.getFeedTypeVersion(
 			RSSUtil.FEED_TYPE_DEFAULT);
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-		String friendlyURL = StringPool.BLANK;
-
-		if (layout.isPrivateLayout()) {
-			if (group.isUser()) {
-				friendlyURL = friendlyURL.concat(
-					PortalUtil.getPathFriendlyURLPrivateUser());
-			}
-			else {
-				friendlyURL = friendlyURL.concat(
-					PortalUtil.getPathFriendlyURLPrivateGroup());
-			}
-		}
-		else {
-			friendlyURL = friendlyURL.concat(
-				PortalUtil.getPathFriendlyURLPublic());
-		}
-
-		friendlyURL = friendlyURL.concat(group.getFriendlyURL());
-		friendlyURL = friendlyURL.concat(layout.getFriendlyURL());
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
@@ -514,6 +492,35 @@ public class JournalTestUtil {
 			article.getDescriptionMap(),
 			createLocalizedContent(content, LocaleUtil.getDefault()),
 			article.getLayoutUuid(), serviceContext);
+	}
+
+	private static String _getFeedFriendlyURL(long groupId, long plid)
+		throws Exception {
+
+		String friendlyURL = StringPool.BLANK;
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		if (layout.isPrivateLayout()) {
+			if (group.isUser()) {
+				friendlyURL = friendlyURL.concat(
+					PortalUtil.getPathFriendlyURLPrivateUser());
+			}
+			else {
+				friendlyURL = friendlyURL.concat(
+					PortalUtil.getPathFriendlyURLPrivateGroup());
+			}
+		}
+		else {
+			friendlyURL = friendlyURL.concat(
+				PortalUtil.getPathFriendlyURLPublic());
+		}
+
+		friendlyURL = friendlyURL.concat(group.getFriendlyURL());
+		friendlyURL = friendlyURL.concat(layout.getFriendlyURL());
+
+		return friendlyURL;
 	}
 
 	private static Locale[] _locales = {
