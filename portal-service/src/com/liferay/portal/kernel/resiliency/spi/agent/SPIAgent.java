@@ -29,31 +29,33 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface SPIAgent {
 
-	@Distributed(direction = Direction.Response)
-	public static final String ACTION_RESULT = "SPIAGENT_ACTION_RESULT";
+	@Distributed(direction = Direction.RESPONSE)
+	public static final String SPI_AGENT_ACTION_RESULT =
+		"SPI_AGENT_ACTION_RESULT";
 
-	public static final String AGENT_REQUEST = "AGENT_REQUEST";
+	@Distributed(direction = Direction.REQUEST)
+	public static final String SPI_AGENT_EVENT = "SPI_AGENT_EVENT";
 
-	public static final String AGENT_RESPONSE = "AGENT_RESPONSE";
+	@Distributed(direction = Direction.RESPONSE)
+	public static final String SPI_AGENT_EVENT_RESULT =
+		"SPI_AGENT_EVENT_RESULT";
 
-	@Distributed(direction = Direction.Request)
-	public static final String EVENT = "SPIAGENT_EVENT";
+	@Distributed(direction = Direction.REQUEST)
+	public static final String SPI_AGENT_LAYOUT = "SPI_AGENT__LAYOUT";
 
-	@Distributed(direction = Direction.Response)
-	public static final String EVENT_RESULT = "SPIAGENT_EVENT_RESULT";
+	@Distributed(direction = Direction.RESPONSE)
+	public static final String SPI_AGENT_LAYOUT_TYPE_SETTINGS =
+		"SPI_AGENT_LAYOUT_TYPE_SETTINGS";
 
-	@Distributed(direction = Direction.Request)
-	public static final String LAYOUT = "SPIAGENT_LAYOUT";
+	@Distributed(direction = Direction.REQUEST)
+	public static final String SPI_AGENT_LIFECYCLE = "SPI_AGENT_LIFECYCLE";
 
-	@Distributed(direction = Direction.Response)
-	public static final String LAYOUT_TYPE_SETTINGS =
-		"SPIAGENT_LAYOUT_TYPE_SETTINGS";
+	@Distributed(direction = Direction.REQUEST)
+	public static final String SPI_AGENT_PORTLET = "SPI_AGENT_PORTLET";
 
-	@Distributed(direction = Direction.Request)
-	public static final String LIFECYCLE = "SPIAGENT_LIFECYCLE";
+	public static final String SPI_AGENT_REQUEST = "SPI_AGENT_REQUEST";
 
-	@Distributed(direction = Direction.Request)
-	public static final String PORTLET = "SPIAGENT_PORTLET";
+	public static final String SPI_AGENT_RESPONSE = "SPI_AGENT_RESPONSE";
 
 	public void destroy();
 
@@ -76,14 +78,14 @@ public interface SPIAgent {
 
 	public enum Lifecycle {
 
-		Render("0"), Action("1"), Resource("2"), Event("3");
-
-		private Lifecycle(String value) {
-			_value = value;
-		}
+		ACTION("0"), EVENT("1"), RENDER("2"), RESOURCE("3");
 
 		public String getValue() {
 			return _value;
+		}
+
+		private Lifecycle(String value) {
+			_value = value;
 		}
 
 		private String _value;

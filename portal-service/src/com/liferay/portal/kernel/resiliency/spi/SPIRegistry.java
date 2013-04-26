@@ -21,20 +21,20 @@ import java.util.Set;
 /**
  * @author Shuyang Zhou
  */
-public interface SPIRuntimeMapping {
+public interface SPIRegistry {
 
-	public void addSkipMappingPortletId(String portletId);
+	public void addExcludedPortletId(String portletId);
 
-	public SPI getMappingSPIForPortlet(String portletId);
+	public Set<String> getExcludedPortletIds();
 
-	public SPI getMappingSPIForServletContext(String servletContextName);
+	public SPI getPortletSPI(String portletId);
 
-	public Set<String> getSkipMappingPortletIds();
+	public SPI getServletContextSPI(String servletContextName);
 
-	public void register(SPI spi) throws RemoteException;
+	public void registerSPI(SPI spi) throws RemoteException;
 
-	public void removeSkipMappingPortletId(String portletId);
+	public void removeExcludedPortletId(String portletId);
 
-	public void unregister(SPI spi);
+	public void unregisterSPI(SPI spi);
 
 }

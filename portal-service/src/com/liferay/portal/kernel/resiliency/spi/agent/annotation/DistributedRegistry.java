@@ -27,45 +27,47 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DistributedRegistry {
 
-	public static boolean hasDistributed(String name, Direction direction) {
-		Direction registeredDirection = _exactMatchMap.get(name);
+	public static boolean isDistributed(String name, Direction direction) {
+		Direction registeredDirection = _exactDirections.get(name);
 
 		if ((registeredDirection == direction) ||
-			(registeredDirection == Direction.Duplex)) {
+			(registeredDirection == Direction.DUPLEX)) {
 
 			return true;
 		}
 
-		if (registeredDirection == null) {
-			for (Map.Entry<String, Direction> entry :
-					_postfixMatchMap.entrySet()) {
+		if (registeredDirection != null) {
+			return false;
+		}
 
-				String postfix = entry.getKey();
+		for (Map.Entry<String, Direction> entry :
+				_postfixDirections.entrySet()) {
 
-				if (name.endsWith(postfix)) {
-					registeredDirection = entry.getValue();
+			String postfix = entry.getKey();
 
-					if ((registeredDirection == direction) ||
-						(registeredDirection == Direction.Duplex)) {
+			if (name.endsWith(postfix)) {
+				registeredDirection = entry.getValue();
 
-						return true;
-					}
+				if ((registeredDirection == direction) ||
+					(registeredDirection == Direction.DUPLEX)) {
+
+					return true;
 				}
 			}
+		}
 
-			for (Map.Entry<String, Direction> entry :
-					_prefixMatchMap.entrySet()) {
+		for (Map.Entry<String, Direction> entry :
+				_prefixDirections.entrySet()) {
 
-				String prefix = entry.getKey();
+			String prefix = entry.getKey();
 
-				if (name.startsWith(prefix)) {
-					registeredDirection = entry.getValue();
+			if (name.startsWith(prefix)) {
+				registeredDirection = entry.getValue();
 
-					if ((registeredDirection == direction) ||
-						(registeredDirection == Direction.Duplex)) {
+				if ((registeredDirection == direction) ||
+					(registeredDirection == Direction.DUPLEX)) {
 
-						return true;
-					}
+					return true;
 				}
 			}
 		}
@@ -87,25 +89,28 @@ public class DistributedRegistry {
 				Distributed distributed = field.getAnnotation(
 					Distributed.class);
 
-				if (distributed != null) {
-					int modifiers = field.getModifiers();
+				if (distributed == null) {
+					continue;
+				}
 
-					if (Modifier.isPublic(modifiers) &&
-						Modifier.isStatic(modifiers) &&
-						Modifier.isFinal(modifiers) &&
-						(field.getType() == String.class)) {
+				int modifiers = field.getModifiers();
 
-						try {
-							String name = (String)field.get(null);
+				if (!Modifier.isPublic(modifiers) ||
+					!Modifier.isStatic(modifiers) ||
+					!Modifier.isFinal(modifiers) ||
+					(field.getType() != String.class)) {
 
-							registerDistributed(
-								name, distributed.direction(),
-								distributed.matchType());
-						}
-						catch (Throwable t) {
-							throw new RuntimeException(t);
-						}
-					}
+					continue;
+				}
+
+				try {
+					String name = (String)field.get(null);
+
+					registerDistributed(
+						name, distributed.direction(), distributed.matchType());
+				}
+				catch (Throwable t) {
+					throw new RuntimeException(t);
 				}
 			}
 
@@ -128,25 +133,22 @@ public class DistributedRegistry {
 	public static void registerDistributed(
 		String name, Direction direction, MatchType matchType) {
 
-		switch (matchType) {
-			case Postfix:
-				_postfixMatchMap.put(name, direction);
-				break;
-			case Prefix:
-				_prefixMatchMap.put(name, direction);
-				break;
-			default:
-				_exactMatchMap.put(name, direction);
+		if (matchType.equals(MatchType.POSTFIX)) {
+			_postfixDirections.put(name, direction);
+		}
+		else if (matchType.equals(MatchType.PREFIX)) {
+			_prefixDirections.put(name, direction);
+		}
+		else {
+			_exactDirections.put(name, direction);
 		}
 	}
 
-	private static final Map<String, Direction> _exactMatchMap =
+	private static Map<String, Direction> _exactDirections =
 		new ConcurrentHashMap<String, Direction>();
-
-	private static final Map<String, Direction> _postfixMatchMap =
+	private static Map<String, Direction> _postfixDirections =
 		new ConcurrentHashMap<String, Direction>();
-
-	private static final Map<String, Direction> _prefixMatchMap =
+	private static Map<String, Direction> _prefixDirections =
 		new ConcurrentHashMap<String, Direction>();
 
 }

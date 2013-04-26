@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.resiliency.spi.agent.annotation;
  */
 public enum MatchType {
 
-	Exact, Postfix, Prefix
+	EXACT, POSTFIX, PREFIX
 
 }

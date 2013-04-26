@@ -32,23 +32,23 @@ public class SPIAgentFactoryUtil {
 		SPIConfiguration spiConfiguration,
 		RegistrationReference registrationReference) {
 
-		String agentClassName = spiConfiguration.getAgentClassName();
+		String spiAgentClassName = spiConfiguration.getSPIAgentClassName();
 
-		if (agentClassName == null) {
-			throw new NullPointerException("Missing agentClassName");
+		if (spiAgentClassName == null) {
+			throw new NullPointerException("Missing SPI agent class name");
 		}
 
-		Class<? extends SPIAgent> agentClass = _spiAgentClassMap.get(
-			agentClassName);
+		Class<? extends SPIAgent> spiAgentClass = _spiAgentClasses.get(
+			spiAgentClassName);
 
-		if (agentClass == null) {
+		if (spiAgentClass == null) {
 			throw new IllegalArgumentException(
-				"Unkown SPIAgent class name " + agentClassName);
+				"Unkown SPI agent class name " + spiAgentClassName);
 		}
 
 		try {
 			Constructor<? extends SPIAgent> constructor =
-				agentClass.getConstructor(
+				spiAgentClass.getConstructor(
 					SPIConfiguration.class, RegistrationReference.class);
 
 			return constructor.newInstance(
@@ -56,44 +56,44 @@ public class SPIAgentFactoryUtil {
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
-				"Unable to create instance of class " + agentClass, e);
+				"Unable to instantiate " + spiAgentClass, e);
 		}
 	}
 
-	public static Set<String> getAgentClassNames() {
-		return _spiAgentClassMap.keySet();
+	public static Set<String> getSPIAgentClassNames() {
+		return _spiAgentClasses.keySet();
 	}
 
-	public static Class<? extends SPIAgent> registerAgentClass(
-		Class<? extends SPIAgent> agentClass) {
+	public static Class<? extends SPIAgent> registerSPIAgentClass(
+		Class<? extends SPIAgent> spiAgentClass) {
 
-		return _spiAgentClassMap.put(agentClass.getName(), agentClass);
+		return _spiAgentClasses.put(spiAgentClass.getName(), spiAgentClass);
 	}
 
-	public static Class<? extends SPIAgent> unregisterAgentClass(
-		String agentClassName) {
+	public static Class<? extends SPIAgent> unregisterSPIAgentClass(
+		String spiAgentClassName) {
 
-		return _spiAgentClassMap.remove(agentClassName);
+		return _spiAgentClasses.remove(spiAgentClassName);
 	}
 
-	public void setAgentClasses(Set<String> agentClassNames)
+	public void setSPIAgentClasses(Set<String> spiAgentClassNames)
 		throws ClassNotFoundException {
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader classLoader = currentThread.getContextClassLoader();
 
-		for (String agentClassName : agentClassNames) {
+		for (String spiAgentClassName : spiAgentClassNames) {
 			Class<? extends SPIAgent> agentClass =
 				(Class<? extends SPIAgent>)classLoader.loadClass(
-					agentClassName);
+					spiAgentClassName);
 
-			_spiAgentClassMap.put(agentClassName, agentClass);
+			_spiAgentClasses.put(spiAgentClassName, agentClass);
 		}
 	}
 
 	private static final Map<String, Class<? extends SPIAgent>>
-		_spiAgentClassMap =
+		_spiAgentClasses =
 			new ConcurrentHashMap<String, Class<? extends SPIAgent>>();
 
 }

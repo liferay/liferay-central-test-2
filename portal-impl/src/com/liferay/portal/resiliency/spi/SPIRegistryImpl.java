@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.resiliency.spi.SPIConfiguration;
-import com.liferay.portal.kernel.resiliency.spi.SPIRuntimeMapping;
+import com.liferay.portal.kernel.resiliency.spi.SPIRegistry;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -38,55 +38,53 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author Shuyang Zhou
  */
-public class SPIRuntimeMappingImpl implements SPIRuntimeMapping {
+public class SPIRegistryImpl implements SPIRegistry {
 
 	@Override
-	public void addSkipMappingPortletId(String portletId) {
-		_skipMappingPortletIds.add(portletId);
+	public void addExcludedPortletId(String portletId) {
+		_excludedPortletIds.add(portletId);
 	}
 
 	@Override
-	public SPI getMappingSPIForPortlet(String portletId) {
-		if (_skipMappingPortletIds.contains(portletId)) {
+	public Set<String> getExcludedPortletIds() {
+		return _excludedPortletIds;
+	}
+
+	@Override
+	public SPI getPortletSPI(String portletId) {
+		if (_excludedPortletIds.contains(portletId)) {
 			return null;
 		}
 
-		return _portletIdToSPIMap.get(portletId);
+		return _portletSPIs.get(portletId);
 	}
 
 	@Override
-	public SPI getMappingSPIForServletContext(String servletContextName) {
-		return _servletContextNameToSPIMap.get(servletContextName);
+	public SPI getServletContextSPI(String servletContextName) {
+		return _servletContextSPIs.get(servletContextName);
 	}
 
 	@Override
-	public Set<String> getSkipMappingPortletIds() {
-		return _skipMappingPortletIds;
-	}
-
-	@Override
-	public void register(SPI spi) throws RemoteException {
-		SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
-
-		String[] corePortletIds = spiConfiguration.getPortletIds();
-		String[] servletContextNames =
-			spiConfiguration.getServletContextNames();
-
+	public void registerSPI(SPI spi) throws RemoteException {
 		List<String> portletIds = new ArrayList<String>();
 
-		for (String corePortletId : corePortletIds) {
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				corePortletId);
+		SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
+
+		for (String portletId : spiConfiguration.getPortletIds()) {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(portletId);
 
 			if (portlet == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Skip unknown core portlet id " + corePortletId);
+					_log.warn("Skip unknown portlet id " + portletId);
 				}
 			}
 			else {
-				portletIds.add(corePortletId);
+				portletIds.add(portletId);
 			}
 		}
+
+		String[] servletContextNames =
+			spiConfiguration.getServletContextNames();
 
 		for (String servletContextName : servletContextNames) {
 			PortletApp portletApp = PortletLocalServiceUtil.getPortletApp(
@@ -95,7 +93,7 @@ public class SPIRuntimeMappingImpl implements SPIRuntimeMapping {
 			if (portletApp == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Skip unknow plugin servlet context name " +
+						"Skip unknown servlet context name " +
 							servletContextName);
 				}
 			}
@@ -108,74 +106,71 @@ public class SPIRuntimeMappingImpl implements SPIRuntimeMapping {
 			}
 		}
 
-		_modifyLock.lock();
+		_lock.lock();
 
 		try {
 			for (String portletId : portletIds) {
-				_portletIdToSPIMap.put(portletId, spi);
+				_portletSPIs.put(portletId, spi);
 			}
 
-			_spiToPortletIdsMap.put(
+			_portletIds.put(
 				spi, portletIds.toArray(new String[portletIds.size()]));
 
 			for (String servletContextName : servletContextNames) {
-				_servletContextNameToSPIMap.put(servletContextName, spi);
+				_servletContextSPIs.put(servletContextName, spi);
 			}
 
-			_spiToServletContextNamesMap.put(spi, servletContextNames.clone());
+			_servletContextNames.put(spi, servletContextNames.clone());
 
 			ServiceBeanAopCacheManagerUtil.reset();
 		}
 		finally {
-			_modifyLock.unlock();
+			_lock.unlock();
 		}
 	}
 
 	@Override
-	public void removeSkipMappingPortletId(String portletId) {
-		_skipMappingPortletIds.remove(portletId);
+	public void removeExcludedPortletId(String portletId) {
+		_excludedPortletIds.remove(portletId);
 	}
 
 	@Override
-	public void unregister(SPI spi) {
-		_modifyLock.lock();
+	public void unregisterSPI(SPI spi) {
+		_lock.lock();
 
 		try {
-			String[] portletIds = _spiToPortletIdsMap.remove(spi);
+			String[] portletIds = _portletIds.remove(spi);
 
 			if (portletIds != null) {
 				for (String portletId : portletIds) {
-					_portletIdToSPIMap.remove(portletId);
+					_portletSPIs.remove(portletId);
 				}
 			}
 
-			String[] servletContextNames = _spiToServletContextNamesMap.remove(
-				spi);
+			String[] servletContextNames = _servletContextNames.remove(spi);
 
 			if (servletContextNames != null) {
 				for (String servletContextName : servletContextNames) {
-					_servletContextNameToSPIMap.remove(servletContextName);
+					_servletContextSPIs.remove(servletContextName);
 				}
 			}
 		}
 		finally {
-			_modifyLock.unlock();
+			_lock.unlock();
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		SPIRuntimeMappingImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SPIRegistryImpl.class);
 
-	private final Lock _modifyLock = new ReentrantLock();
-	private final Map<String, SPI> _portletIdToSPIMap =
-		new ConcurrentHashMap<String, SPI>();
-	private final Map<String, SPI> _servletContextNameToSPIMap =
-		new ConcurrentHashMap<String, SPI>();
-	private final Set<String> _skipMappingPortletIds =
-		new ConcurrentHashSet<String>();
-	private final Map<SPI, String[]> _spiToPortletIdsMap =
+	private Set<String> _excludedPortletIds = new ConcurrentHashSet<String>();
+	private Lock _lock = new ReentrantLock();
+	private Map<SPI, String[]> _portletIds =
 		new ConcurrentHashMap<SPI, String[]>();
-	private final Map<SPI, String[]> _spiToServletContextNamesMap =
+	private Map<String, SPI> _portletSPIs =
+		new ConcurrentHashMap<String, SPI>();
+	private Map<SPI, String[]> _servletContextNames =
 		new ConcurrentHashMap<SPI, String[]>();
+	private Map<String, SPI> _servletContextSPIs =
+		new ConcurrentHashMap<String, SPI>();
 
 }

@@ -28,8 +28,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Distributed {
 
-	public Direction direction() default Direction.Duplex;
+	public Direction direction() default Direction.DUPLEX;
 
-	public MatchType matchType() default MatchType.Exact;
+	public MatchType matchType() default MatchType.EXACT;
 
 }

@@ -20,11 +20,12 @@ import com.liferay.portal.kernel.nio.intraband.Intraband;
 import com.liferay.portal.kernel.nio.intraband.IntrabandFactoryUtil;
 import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.resiliency.spi.SPIConfiguration;
-import com.liferay.portal.kernel.resiliency.spi.SPIRuntimeMappingUtil;
+import com.liferay.portal.kernel.resiliency.spi.SPIRegistryUtil;
 import com.liferay.portal.kernel.resiliency.spi.provider.SPIProvider;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
@@ -41,20 +42,20 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author Shuyang Zhou
  */
-public class MPIUtil {
+public class MPIHelperUtil {
 
 	public static Intraband getIntraband() {
 		return _intraband;
 	}
 
-	public static MPI getMPIStub() {
-		return _mpiStub;
+	public static MPI getMPI() {
+		return _mpi;
 	}
 
 	public static SPI getSPI(String spiProviderName, String spiId) {
 		SPIKey spiKey = new SPIKey(spiProviderName, spiId);
 
-		SPI spi = _spiMap.get(spiKey);
+		SPI spi = _spis.get(spiKey);
 
 		if (spi != null) {
 			spi = _checkSPILiveness(spi);
@@ -64,59 +65,60 @@ public class MPIUtil {
 	}
 
 	public static SPIProvider getSPIProvider(String spiProviderName) {
-		return _spiProviderMap.get(spiProviderName);
+		return _spiProviders.get(spiProviderName);
 	}
 
 	public static List<SPIProvider> getSPIProviders() {
-		return new ArrayList<SPIProvider>(_spiProviderMap.values());
+		return new ArrayList<SPIProvider>(_spiProviders.values());
 	}
 
 	public static List<SPI> getSPIs() {
-		List<SPI> spiList = new ArrayList<SPI>();
+		List<SPI> spis = new ArrayList<SPI>();
 
-		for (SPI spi : _spiMap.values()) {
+		for (SPI spi : _spis.values()) {
 			spi = _checkSPILiveness(spi);
 
 			if (spi != null) {
-				spiList.add(spi);
+				spis.add(spi);
 			}
 		}
 
-		return spiList;
+		return spis;
 	}
 
 	public static List<SPI> getSPIs(String spiProviderName) {
-		List<SPI> spiList = new ArrayList<SPI>();
+		List<SPI> spis = new ArrayList<SPI>();
 
-		for (Map.Entry<SPIKey, SPI> entry : _spiMap.entrySet()) {
+		for (Map.Entry<SPIKey, SPI> entry : _spis.entrySet()) {
 			SPIKey spiKey = entry.getKey();
 
-			if (spiKey._spiProviderName.equals(spiProviderName)) {
-				SPI spi = entry.getValue();
+			if (!spiProviderName.equals(spiKey._spiProviderName)) {
+				continue;
+			}
 
-				spi = _checkSPILiveness(spi);
+			SPI spi = entry.getValue();
 
-				if (spi != null) {
-					spiList.add(spi);
-				}
+			spi = _checkSPILiveness(spi);
+
+			if (spi != null) {
+				spis.add(spi);
 			}
 		}
 
-		return spiList;
+		return spis;
 	}
 
 	public static boolean registerSPI(SPI spi) {
-		_registerLock.lock();
+		_lock.lock();
 
 		try {
 			MPI mpi = spi.getMPI();
 
-			if (mpi != _mpiStub) {
+			if (mpi != _mpi) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to register SPI instance " + spi +
-							". It was created by a foreign MPI " + mpi +
-								", not by " + _mpiStub);
+						"Not registering SPI " + spi + " with foreign MPI " +
+							mpi + " versus " + _mpi);
 				}
 
 				return false;
@@ -124,15 +126,13 @@ public class MPIUtil {
 
 			String spiProviderName = spi.getSPIProviderName();
 
-			SPIProvider registeredSPIProvider = _spiProviderMap.get(
-				spiProviderName);
+			SPIProvider spiProvider = _spiProviders.get(spiProviderName);
 
-			if (registeredSPIProvider == null) {
+			if (spiProvider == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to register SPI instance " + spi +
-							". No such SPIProvider registered with name " +
-								spiProviderName);
+						"Not registering SPI " + spi +
+							" with unknown SPI provider " + spiProviderName);
 				}
 
 				return false;
@@ -140,29 +140,25 @@ public class MPIUtil {
 
 			SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
 
-			String spiId = spiConfiguration.getId();
+			SPIKey spiKey = new SPIKey(
+				spiProviderName, spiConfiguration.getSPIId());
 
-			SPIKey spiKey = new SPIKey(spiProviderName, spiId);
-
-			SPI previousSPI = _spiMap.putIfAbsent(spiKey, spi);
+			SPI previousSPI = _spis.putIfAbsent(spiKey, spi);
 
 			if (previousSPI != null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to register SPI instance " + spi +
-							" with key " + spiKey + ". There is already a " +
-								"spi with the same key registered " +
-									previousSPI);
+						"Not registering SPI " + spi +
+							" because it duplicates " + previousSPI);
 				}
 
 				return false;
 			}
 			else {
-				SPIRuntimeMappingUtil.register(spi);
+				SPIRegistryUtil.registerSPI(spi);
 
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Registered new SPI " + spi + " with key " + spiKey);
+					_log.info("Registered SPI " + spi);
 				}
 
 				return true;
@@ -172,7 +168,7 @@ public class MPIUtil {
 			throw new RuntimeException(re);
 		}
 		finally {
-			_registerLock.unlock();
+			_lock.unlock();
 		}
 	}
 
@@ -181,32 +177,28 @@ public class MPIUtil {
 
 		SPIProvider previousSPIProvider = null;
 
-		_registerLock.lock();
+		_lock.lock();
 
 		try {
-			previousSPIProvider = _spiProviderMap.putIfAbsent(
+			previousSPIProvider = _spiProviders.putIfAbsent(
 				spiProviderName, spiProvider);
 		}
 		finally {
-			_registerLock.unlock();
+			_lock.unlock();
 		}
 
 		if (previousSPIProvider != null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Can not register SPIProvider " + spiProvider +
-						" with name " + spiProviderName +
-							". There is already a SPIProvider with the " +
-								"same name registered " + previousSPIProvider);
+					"Not registering SPI provider " + spiProvider +
+						" because it duplicates " + previousSPIProvider);
 			}
 
 			return false;
 		}
 		else {
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Registered new SPIProvider " + spiProvider +
-						" with name " + spiProviderName);
+				_log.info("Registered SPI provider " + spiProvider);
 			}
 
 			return true;
@@ -219,23 +211,22 @@ public class MPIUtil {
 		}
 		catch (NoSuchObjectException nsoe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to unexport MPIImpl", nsoe);
+				_log.warn("Unable to unexport " + _mpiImpl, nsoe);
 			}
 		}
 	}
 
 	public static boolean unregisterSPI(SPI spi) {
-		_registerLock.lock();
+		_lock.lock();
 
 		try {
 			MPI mpi = spi.getMPI();
 
-			if (mpi != _mpiStub) {
+			if (mpi != _mpi) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to unregister SPI instance " + spi +
-							". It was created by a foreign MPI " + mpi +
-								", not by " + _mpiStub);
+						"Not unregistering SPI " + spi + " with foreign MPI " +
+							mpi + " versus " + _mpi);
 				}
 
 				return false;
@@ -243,15 +234,13 @@ public class MPIUtil {
 
 			String spiProviderName = spi.getSPIProviderName();
 
-			SPIProvider registeredSPIProvider = _spiProviderMap.get(
-				spiProviderName);
+			SPIProvider spiProvider = _spiProviders.get(spiProviderName);
 
-			if (registeredSPIProvider == null) {
+			if (spiProvider == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to unregister SPI instance " + spi +
-							". No such SPIProvider registered with name " +
-								spiProviderName);
+						"Not unregistering SPI " + spi +
+							" with unknown SPI provider " + spiProviderName);
 				}
 
 				return false;
@@ -259,88 +248,89 @@ public class MPIUtil {
 
 			SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
 
-			String spiId = spiConfiguration.getId();
+			String spiId = spiConfiguration.getSPIId();
 
 			SPIKey spiKey = new SPIKey(spiProviderName, spiId);
 
-			boolean result = _spiMap.remove(spiKey, spi);
+			if (_spis.remove(spiKey, spi)) {
+				SPIRegistryUtil.unregisterSPI(spi);
 
-			if (result) {
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Unregistered SPI " + spi + " with key " + spiKey);
+					_log.info("Unregistered SPI " + spi);
 				}
-			}
-			else if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to unregister SPI " + spi + " with key " + spiKey +
-						". It is not registered");
-			}
 
-			SPIRuntimeMappingUtil.unregister(spi);
+				return true;
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Not unregistering unregistered SPI " + spi);
+				}
 
-			return result;
+				return false;
+			}
 		}
 		catch (RemoteException re) {
 			throw new RuntimeException(re);
 		}
 		finally {
-			_registerLock.unlock();
+			_lock.unlock();
 		}
 	}
 
 	public static boolean unregisterSPIProvider(SPIProvider spiProvider) {
-		String spiProviderName = spiProvider.getName();
-
-		boolean result = false;
-
-		_registerLock.lock();
+		_lock.lock();
 
 		try {
-			result = _spiProviderMap.remove(spiProviderName, spiProvider);
+			String spiProviderName = spiProvider.getName();
 
-			if (result) {
-				for (Map.Entry<SPIKey, SPI> entry : _spiMap.entrySet()) {
+			if (_spiProviders.remove(spiProviderName, spiProvider)) {
+				for (Map.Entry<SPIKey, SPI> entry : _spis.entrySet()) {
 					SPIKey spiKey = entry.getKey();
 
-					if (spiKey._spiProviderName.equals(spiProviderName)) {
-						SPI spi = entry.getValue();
+					if (!spiProviderName.equals(spiKey._spiProviderName)) {
+						continue;
+					}
 
-						try {
-							spi.destroy();
+					SPI spi = entry.getValue();
 
-							if (_log.isInfoEnabled()) {
-								_log.info(
-									"Cascaded unregistered SPI " + spi +
-										" with key " + spiKey);
-							}
+					try {
+						spi.destroy();
+
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Unregistered SPI " + spi +
+									" while unregistering SPI provider " +
+										spiProvider);
 						}
-						catch (RemoteException re) {
-							_log.error(
-								"Failed cascaded unregister SPI " + spi +
-									" with key " + spiKey, re);
-						}
+					}
+					catch (RemoteException re) {
+						_log.error(
+							"Unable to unregister SPI " + spi +
+								" while unregistering SPI provider " +
+									spiProvider,
+							re);
 					}
 				}
 
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Unregistered SPIProvider " + spiProvider +
-							" with name " + spiProviderName);
+					_log.info("Unregistered SPI provider " + spiProvider);
 				}
+
+				return true;
 			}
-			else if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to unregister SPIProvider " + spiProvider +
-						" with name " + spiProviderName +
-							". It is not registered");
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Not unregistering unregistered SPI provider " +
+							spiProvider);
+				}
+
+				return false;
 			}
 		}
 		finally {
-			_registerLock.unlock();
+			_lock.unlock();
 		}
-
-		return result;
 	}
 
 	private static SPI _checkSPILiveness(SPI spi) {
@@ -362,21 +352,16 @@ public class MPIUtil {
 		return null;
 	}
 
-	private static final Intraband _intraband;
+	private static Log _log = LogFactoryUtil.getLog(MPIHelperUtil.class);
 
-	private static final MPI _mpiImpl;
-
-	private static final MPI _mpiStub;
-
-	private static final Lock _registerLock = new ReentrantLock();
-
-	private static final ConcurrentMap<SPIKey, SPI> _spiMap =
-		new ConcurrentHashMap<SPIKey, SPI>();
-
-	private static final ConcurrentMap<String, SPIProvider> _spiProviderMap =
+	private static Intraband _intraband;
+	private static Lock _lock = new ReentrantLock();
+	private static MPI _mpi;
+	private static MPI _mpiImpl;
+	private static ConcurrentMap<String, SPIProvider> _spiProviders =
 		new ConcurrentHashMap<String, SPIProvider>();
-
-	private static Log _log = LogFactoryUtil.getLog(MPIUtil.class);
+	private static ConcurrentMap<SPIKey, SPI> _spis =
+		new ConcurrentHashMap<SPIKey, SPI>();
 
 	private static class MPIImpl implements MPI {
 
@@ -396,21 +381,31 @@ public class MPIUtil {
 
 		@Override
 		public boolean equals(Object obj) {
-			SPIKey spiKey = (SPIKey)obj;
+			if (this == obj) {
+				return true;
+			}
 
-			if (_spiProviderName.equals(spiKey._spiProviderName) &&
-				_spiId.equals(spiKey._spiId)) {
+			if (!(obj instanceof SPIKey)) {
+				return false;
+			}
+
+			SPIKey clusterNode = (SPIKey)obj;
+
+			if (Validator.equals(
+					_spiProviderName, clusterNode._spiProviderName) &&
+				Validator.equals(_spiId, clusterNode._spiId)) {
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override
 		public int hashCode() {
-			return _spiProviderName.hashCode() * 11 + _spiId.hashCode();
+			String string = toString();
+
+			return string.hashCode();
 		}
 
 		@Override
@@ -418,28 +413,25 @@ public class MPIUtil {
 			return _spiProviderName.concat(StringPool.POUND).concat(_spiId);
 		}
 
-		private final String _spiId;
-		private final String _spiProviderName;
+		private String _spiId;
+		private String _spiProviderName;
 
 	}
 
 	static {
 
-		// Keep strong reference to stop gc
+		// Keep strong reference to prevent garbage collection
 
 		_mpiImpl = new MPIImpl();
 
 		try {
 			if (PropsUtil.getProps() != null) {
-
-				// This is MPI, propagate portal.properties to System properties
-
-				System.setProperty(
-					PropsKeys.INTRABAND_TIMEOUT_DEFAULT,
-					PropsUtil.get(PropsKeys.INTRABAND_TIMEOUT_DEFAULT));
 				System.setProperty(
 					PropsKeys.INTRABAND_IMPL,
 					PropsUtil.get(PropsKeys.INTRABAND_IMPL));
+				System.setProperty(
+					PropsKeys.INTRABAND_TIMEOUT_DEFAULT,
+					PropsUtil.get(PropsKeys.INTRABAND_TIMEOUT_DEFAULT));
 				System.setProperty(
 					PropsKeys.INTRABAND_WELDER_IMPL,
 					PropsUtil.get(PropsKeys.INTRABAND_WELDER_IMPL));
@@ -447,7 +439,7 @@ public class MPIUtil {
 
 			_intraband = IntrabandFactoryUtil.createIntraband();
 
-			_mpiStub = (MPI)UnicastRemoteObject.exportObject(_mpiImpl, 0);
+			_mpi = (MPI)UnicastRemoteObject.exportObject(_mpiImpl, 0);
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);

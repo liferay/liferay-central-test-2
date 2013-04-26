@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.resiliency.spi;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -32,16 +33,16 @@ import java.util.List;
  */
 public class SPIConfiguration implements Serializable {
 
-	public static final String DEFAULT_JAVA_EXECUTABLE = "java";
+	public static final String JAVA_EXECUTABLE_DEFAULT = "java";
 
-	public static final String DEFAULT_JVM_ARGUMENTS =
+	public static final String JVM_ARGUMENTS_DEFAULT =
 		"-Xmx1024m -XX:PermSize=200m";
 
-	public static final long DEFAULT_PING_INTERVAL = 5000;
+	public static final long PING_INTERVAL_DEFAULT = 5000;
 
-	public static final long DEFAULT_REGISTER_TIMEOUT = 10000;
+	public static final long REGISTER_TIMEOUT_DEFAULT = 10000;
 
-	public static final long DEFAULT_SHUTDOWN_TIMEOUT = 10000;
+	public static final long SHUTDOWN_TIMEOUT_DEFAULT = 10000;
 
 	public static SPIConfiguration fromXMLString(String xmlString)
 		throws DocumentException {
@@ -50,57 +51,51 @@ public class SPIConfiguration implements Serializable {
 
 		Element rootElement = document.getRootElement();
 
-		try {
-			String id = rootElement.elementText("id");
-			String javaExecutable = rootElement.elementText("javaExecutable");
-			String jvmArguments = rootElement.elementText("jvmArguments");
-			String agentClassName = rootElement.elementText("agentClassName");
-			int connectorPort = Integer.parseInt(
-				rootElement.elementText("connectorPort"));
-			String baseDir = rootElement.elementText("baseDir");
-			String[] portletIds = StringUtil.split(
-				rootElement.elementText("portletIds"));
-			String[] servletContextNames = StringUtil.split(
-				rootElement.elementText("servletContextNames"));
-			long pingInterval = Long.parseLong(
-				rootElement.elementText("pingInterval"));
-			long registerTimeout = Long.parseLong(
-				rootElement.elementText("registerTimeout"));
-			long shutdownTimeout = Long.parseLong(
-				rootElement.elementText("shutdownTimeout"));
+		String id = rootElement.elementText("id");
+		String javaExecutable = rootElement.elementText("javaExecutable");
+		String jvmArguments = rootElement.elementText("jvmArguments");
+		String spiAgentClassName = rootElement.elementText("spiAgentClassName");
+		int connectorPort = Integer.parseInt(
+			rootElement.elementText("connectorPort"));
+		String baseDir = rootElement.elementText("baseDir");
+		String[] portletIds = StringUtil.split(
+			rootElement.elementText("portletIds"));
+		String[] servletContextNames = StringUtil.split(
+			rootElement.elementText("servletContextNames"));
+		long pingInterval = GetterUtil.getLong(
+			rootElement.elementText("pingInterval"));
+		long registerTimeout = GetterUtil.getLong(
+			rootElement.elementText("registerTimeout"));
+		long shutdownTimeout = GetterUtil.getLong(
+			rootElement.elementText("shutdownTimeout"));
 
-			return new SPIConfiguration(
-				id, javaExecutable, jvmArguments, agentClassName, connectorPort,
-				baseDir, portletIds, servletContextNames, pingInterval,
-				registerTimeout, shutdownTimeout);
-		}
-		catch (NumberFormatException nfe) {
-			throw new DocumentException(
-				"Unable to parse xml to SPIConfiguration", nfe);
-		}
+		return new SPIConfiguration(
+			id, javaExecutable, jvmArguments, spiAgentClassName, connectorPort,
+			baseDir, portletIds, servletContextNames, pingInterval,
+			registerTimeout, shutdownTimeout);
 	}
 
 	public SPIConfiguration(
-		String id, String agentClassName, int connectorPort, String baseDir,
-		String[] portletIds, String[] servletContextNames) {
+		String spiId, String spiAgentClassName, int connectorPort,
+		String baseDir, String[] portletIds, String[] servletContextNames) {
 
 		this(
-			id, DEFAULT_JAVA_EXECUTABLE, DEFAULT_JVM_ARGUMENTS, agentClassName,
-			connectorPort, baseDir, portletIds, servletContextNames,
-			DEFAULT_PING_INTERVAL, DEFAULT_REGISTER_TIMEOUT,
-			DEFAULT_SHUTDOWN_TIMEOUT);
+			spiId, JAVA_EXECUTABLE_DEFAULT, JVM_ARGUMENTS_DEFAULT,
+			spiAgentClassName, connectorPort, baseDir, portletIds,
+			servletContextNames, PING_INTERVAL_DEFAULT,
+			REGISTER_TIMEOUT_DEFAULT, SHUTDOWN_TIMEOUT_DEFAULT);
 	}
 
 	public SPIConfiguration(
-		String id, String javaExecutable, String jvmArguments,
-		String agentClassName, int connectorPort, String baseDir,
+		String spiId, String javaExecutable, String jvmArguments,
+		String spiAgentClassName, int connectorPort, String baseDir,
 		String[] portletIds, String[] servletContextNames, long pingInterval,
 		long registerTimeout, long shutdownTimeout) {
 
-		_id = id;
+		_spiId = spiId;
 		_javaExecutable = javaExecutable;
 		_jvmArguments = jvmArguments;
-		_agentClassName = agentClassName;
+		_spiAgentClassName = spiAgentClassName;
 		_connectorPort = connectorPort;
 		_baseDir = baseDir;
 		_portletIds = portletIds;
@@ -110,20 +105,12 @@ public class SPIConfiguration implements Serializable {
 		_shutdownTimeout = shutdownTimeout;
 	}
 
-	public String getAgentClassName() {
-		return _agentClassName;
-	}
-
 	public String getBaseDir() {
 		return _baseDir;
 	}
 
 	public int getConnectorPort() {
 		return _connectorPort;
-	}
-
-	public String getId() {
-		return _id;
 	}
 
 	public String getJavaExecutable() {
@@ -154,32 +141,40 @@ public class SPIConfiguration implements Serializable {
 		return _shutdownTimeout;
 	}
 
+	public String getSPIAgentClassName() {
+		return _spiAgentClassName;
+	}
+
+	public String getSPIId() {
+		return _spiId;
+	}
+
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{id=");
-		sb.append(_id);
+		sb.append("{baseDir=");
+		sb.append(_baseDir);
+		sb.append(", connectorPort=");
+		sb.append(_connectorPort);
 		sb.append(", javaExecutable=");
 		sb.append(_javaExecutable);
 		sb.append(", jvmArguments=");
 		sb.append(_jvmArguments);
-		sb.append(", agentClassName=");
-		sb.append(_agentClassName);
-		sb.append(", connectorPort=");
-		sb.append(_connectorPort);
-		sb.append(", baseDir=");
-		sb.append(_baseDir);
+		sb.append(", pingInterval=");
+		sb.append(_pingInterval);
 		sb.append(", portletIds=[");
 		sb.append(StringUtil.merge(_portletIds));
-		sb.append("], servletContextName=[");
-		sb.append(StringUtil.merge(_servletContextNames));
-		sb.append("], pingInterval=");
-		sb.append(_pingInterval);
-		sb.append(", registerTimeout=");
+		sb.append("], registerTimeout=");
 		sb.append(_registerTimeout);
-		sb.append(", shutdownTimeout=");
+		sb.append(", servletContextName=[");
+		sb.append(StringUtil.merge(_servletContextNames));
+		sb.append("], shutdownTimeout=");
 		sb.append(_shutdownTimeout);
+		sb.append(", spiAgentClassName=");
+		sb.append(_spiAgentClassName);
+		sb.append(", spiId=");
+		sb.append(_spiId);
 		sb.append("}");
 
 		return sb.toString();
@@ -190,10 +185,10 @@ public class SPIConfiguration implements Serializable {
 			new com.liferay.portal.kernel.xml.simple.Element(
 				"SPIConfiguration");
 
-		element.addElement("id", _id);
+		element.addElement("id", _spiId);
 		element.addElement("javaExecutable", _javaExecutable);
 		element.addElement("jvmArguments", _jvmArguments);
-		element.addElement("agentClassName", _agentClassName);
+		element.addElement("spiAgentClassName", _spiAgentClassName);
 		element.addElement("connectorPort", _connectorPort);
 		element.addElement("baseDir", _baseDir);
 		element.addElement("portletIds", StringUtil.merge(_portletIds));
@@ -208,16 +203,16 @@ public class SPIConfiguration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String _agentClassName;
-	private final String _baseDir;
-	private final int _connectorPort;
-	private final String _id;
-	private final String _javaExecutable;
-	private final String _jvmArguments;
-	private final long _pingInterval;
-	private final String[] _portletIds;
-	private final long _registerTimeout;
-	private final String[] _servletContextNames;
-	private final long _shutdownTimeout;
+	private String _baseDir;
+	private int _connectorPort;
+	private String _javaExecutable;
+	private String _jvmArguments;
+	private long _pingInterval;
+	private String[] _portletIds;
+	private long _registerTimeout;
+	private String[] _servletContextNames;
+	private long _shutdownTimeout;
+	private String _spiAgentClassName;
+	private String _spiId;
 
 }

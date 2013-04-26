@@ -26,7 +26,7 @@ public class SPIUtil {
 	public static SPI getSPI() {
 		if (_spi == null) {
 			throw new IllegalStateException(
-				"Current process is not a spi instance");
+				"Current process is not an SPI instance");
 		}
 
 		return _spi;

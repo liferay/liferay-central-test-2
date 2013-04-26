@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.resiliency.spi.agent.annotation;
  */
 public enum Direction {
 
-	Duplex, Request, Response
+	DUPLEX, REQUEST, RESPONSE
 
 }
