@@ -20,25 +20,25 @@
 	<c:if test="<%= !group.isLayoutPrototype() %>">
 		<aui:fieldset cssClass="options-group" label="pages">
 			<div class="selected-labels" id="<portlet:namespace />selectedPages">
-				<liferay-ui:message key="site-pages-settings"></liferay-ui:message>,
-				<liferay-ui:message key="theme"></liferay-ui:message>,
-				<liferay-ui:message key="theme-settings"></liferay-ui:message>,
-				<liferay-ui:message key="logo"></liferay-ui:message>
+				<liferay-ui:message key="site-pages-settings" />,
+				<liferay-ui:message key="theme" />,
+				<liferay-ui:message key="theme-settings" />,
+				<liferay-ui:message key="logo" />
 			</div>
 
 			<aui:a cssClass="modify-link" href="javascript:;" id="pagesLink" label="change" method="get" />
 
 			<div class="aui-helper-hidden" id="<portlet:namespace />pages">
 				<aui:fieldset cssClass="portlet-data-section" label="pages">
-						<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
+					<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
 
-						<aui:input label="site-pages-settings" name="<%= PortletDataHandlerKeys.LAYOUT_SET_SETTINGS %>" type="checkbox" value="<%= true %>" />
+					<aui:input label="site-pages-settings" name="<%= PortletDataHandlerKeys.LAYOUT_SET_SETTINGS %>" type="checkbox" value="<%= true %>" />
 
-						<aui:input helpMessage="export-import-theme-help" label="theme" name="<%= PortletDataHandlerKeys.THEME %>" type="checkbox" value="<%= true %>" />
+					<aui:input helpMessage="export-import-theme-help" label="theme" name="<%= PortletDataHandlerKeys.THEME %>" type="checkbox" value="<%= true %>" />
 
-						<aui:input helpMessage="export-import-theme-settings-help" label="theme-settings" name="<%= PortletDataHandlerKeys.THEME_REFERENCE %>" type="checkbox" value="<%= true %>" />
+					<aui:input helpMessage="export-import-theme-settings-help" label="theme-settings" name="<%= PortletDataHandlerKeys.THEME_REFERENCE %>" type="checkbox" value="<%= true %>" />
 
-						<aui:input label="logo" name="<%= PortletDataHandlerKeys.LOGO %>" type="checkbox" value="<%= true %>" />
+					<aui:input label="logo" name="<%= PortletDataHandlerKeys.LOGO %>" type="checkbox" value="<%= true %>" />
 				</aui:fieldset>
 			</div>
 		</aui:fieldset>
@@ -52,8 +52,8 @@
 				<ul id="<portlet:namespace />showGlobalConfiguration">
 					<li class="tree-item">
 						<div class="selected-labels" id="<portlet:namespace />selectedGlobalConfiguration">
-							<liferay-ui:message key="archived-setups"></liferay-ui:message>,
-							<liferay-ui:message key="user-preferences"></liferay-ui:message>
+							<liferay-ui:message key="archived-setups" />,
+							<liferay-ui:message key="user-preferences" />
 						</div>
 
 						<aui:a cssClass="modify-link" href="javascript:;" id="globalConfigurationLink" label="change" method="get" />
@@ -83,8 +83,8 @@
 				<ul id="<portlet:namespace />showChangeGlobalContent">
 					<li>
 						<div class="selected-labels" id="<portlet:namespace />selectedGlobalContent">
-							<liferay-ui:message key="mirror"></liferay-ui:message>,
-							<liferay-ui:message key="use-the-original-author"></liferay-ui:message>
+							<liferay-ui:message key="mirror" />,
+							<liferay-ui:message key="use-the-original-author" />
 						</div>
 
 						<aui:a cssClass="modify-link" href="javascript:;" id="globalContentLink" label="change" method="get" />
