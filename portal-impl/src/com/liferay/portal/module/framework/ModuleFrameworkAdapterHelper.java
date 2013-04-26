@@ -145,17 +145,19 @@ public class ModuleFrameworkAdapterHelper {
 
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		URL jarsListURL = classLoader.getResource(sourcePath + "/jars.txt");
+		URL url = classLoader.getResource(sourcePath + "/jars.txt");
 
-		URLConnection connection = jarsListURL.openConnection();
+		URLConnection urlConnection = url.openConnection();
 
 		String[] jarFileNames = StringUtil.split(
-			StringUtil.read(connection.getInputStream()));
+			StringUtil.read(urlConnection.getInputStream()));
 
 		for (String jarFileName : jarFileNames) {
 			File distinationFile = new File(destinationPath, jarFileName);
 
-			if (distinationFile.lastModified() < connection.getLastModified()) {
+			if (distinationFile.lastModified() <
+					urlConnection.getLastModified()) {
+
 				byte[] bytes = FileUtil.getBytes(
 					classLoader.getResourceAsStream(
 						sourcePath + "/" + jarFileName));
