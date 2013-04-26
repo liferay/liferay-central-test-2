@@ -115,8 +115,7 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 
 		};
 
-		actionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
+		actionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
 
 		actionableDynamicQuery.performActions();
 
