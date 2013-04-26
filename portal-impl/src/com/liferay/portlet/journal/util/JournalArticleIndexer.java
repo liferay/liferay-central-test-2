@@ -128,30 +128,31 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 		addSearchClassTypeIds(contextQuery, searchContext);
 
-		String structureField = (String)searchContext.getAttribute(
+		String ddmStructureFieldName = (String)searchContext.getAttribute(
 			"ddmStructureFieldName");
-		Serializable structureValue = searchContext.getAttribute(
+		Serializable ddmStructureFieldValue = searchContext.getAttribute(
 			"ddmStructureFieldValue");
 
-		if (Validator.isNotNull(structureField) &&
-			Validator.isNotNull(structureValue)) {
+		if (Validator.isNotNull(ddmStructureFieldName) &&
+			Validator.isNotNull(ddmStructureFieldValue)) {
 
-			String[] split = StringUtil.split(structureField, StringPool.SLASH);
+			String[] ddmStructureFieldNameParts = StringUtil.split(
+				ddmStructureFieldName, StringPool.SLASH);
 
 			DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
-				GetterUtil.getLong(split[1]));
+				GetterUtil.getLong(ddmStructureFieldNameParts[1]));
 
 			String fieldName = StringUtil.replaceLast(
-				split[2],
+				ddmStructureFieldNameParts[2],
 				StringPool.UNDERLINE.concat(
 					LocaleUtil.toLanguageId(searchContext.getLocale())),
 				StringPool.BLANK);
 
-			structureValue = DDMUtil.getIndexedFieldValue(
-				structureValue, structure.getFieldType(fieldName));
+			ddmStructureFieldValue = DDMUtil.getIndexedFieldValue(
+				ddmStructureFieldValue, structure.getFieldType(fieldName));
 
 			contextQuery.addRequiredTerm(
-				structureField, (String)structureValue);
+				ddmStructureFieldName, (String)ddmStructureFieldValue);
 		}
 
 		long[] folderIds = searchContext.getFolderIds();

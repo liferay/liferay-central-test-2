@@ -97,12 +97,12 @@ AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 long[] allAssetCategoryIds = new long[0];
 String[] allAssetTagNames = new String[0];
 
+String ddmStructureDisplayFieldValue = StringPool.BLANK;
 String ddmStructureFieldLabel = StringPool.BLANK;
 String ddmStructureFieldName = StringPool.BLANK;
 Serializable ddmStructureFieldValue = null;
-String ddmStructureDisplayFieldValue = StringPool.BLANK;
 
-boolean subTypeFieldsFilterEnabled = GetterUtil.getBoolean(preferences.getValue("subTypeFieldsFilterEnabled", Boolean.FALSE.toString()));
+boolean subtypeFieldsFilterEnabled = GetterUtil.getBoolean(preferences.getValue("subtypeFieldsFilterEnabled", Boolean.FALSE.toString()));
 
 DDMStructure ddmStructure = null;
 
@@ -122,16 +122,16 @@ if (selectionStyle.equals("dynamic")) {
 		ddmStructure = DDMStructureLocalServiceUtil.fetchDDMStructure(classTypeIds[0]);
 
 		if (ddmStructure != null) {
+			ddmStructureDisplayFieldValue = GetterUtil.getString(preferences.getValue("ddmStructureDisplayFieldValue", StringPool.BLANK));
 			ddmStructureFieldName = GetterUtil.getString(preferences.getValue("ddmStructureFieldName", StringPool.BLANK));
 			ddmStructureFieldValue = preferences.getValue("ddmStructureFieldValue", StringPool.BLANK);
-			ddmStructureDisplayFieldValue = GetterUtil.getString(preferences.getValue("ddmStructureDisplayFieldValue", StringPool.BLANK));
 
 			Set<String> fieldNames = ddmStructure.getFieldNames();
 
 			if (Validator.isNotNull(ddmStructureFieldName) && fieldNames.contains(ddmStructureFieldName) && Validator.isNotNull(ddmStructureFieldValue)) {
 				ddmStructureFieldLabel = ddmStructure.getFieldProperty(ddmStructureFieldName, "label");
 
-				if (subTypeFieldsFilterEnabled) {
+				if (subtypeFieldsFilterEnabled) {
 					assetEntryQuery.setAttribute("ddmStructureFieldName", DDMIndexerUtil.encodeName(ddmStructure.getStructureId(), ddmStructureFieldName, locale));
 					assetEntryQuery.setAttribute("ddmStructureFieldValue", ddmStructureFieldValue);
 				}

@@ -119,6 +119,14 @@ public class DDMImpl implements DDM {
 
 			fieldValue = dateFormat.format(valueDate);
 		}
+		else if (type.equals(DDMImpl.TYPE_CHECKBOX)) {
+			if ((Boolean)fieldValue) {
+				fieldValue = LanguageUtil.get(locale, "yes");
+			}
+			else {
+				fieldValue = LanguageUtil.get(locale, "no");
+			}
+		}
 		else if (type.equals(DDMImpl.TYPE_RADIO) ||
 				 type.equals(DDMImpl.TYPE_SELECT)) {
 
@@ -129,14 +137,6 @@ public class DDMImpl implements DDM {
 			String[] stringArray = ArrayUtil.toStringArray(jsonArray);
 
 			fieldValue = stringArray[0];
-		}
-		else if (type.equals(DDMImpl.TYPE_CHECKBOX)) {
-			if ((Boolean)fieldValue) {
-				fieldValue = LanguageUtil.get(locale, "yes");
-			}
-			else {
-				fieldValue = LanguageUtil.get(locale, "no");
-			}
 		}
 
 		return fieldValue;

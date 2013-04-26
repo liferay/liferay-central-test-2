@@ -215,6 +215,11 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+		Serializable displayValue = DDMUtil.getDisplayFieldValue(
+			fieldValue, type, themeDisplay.getLocale());
+
+		jsonObject.put("displayValue", String.valueOf(displayValue));
+
 		if (fieldValue instanceof Boolean) {
 			jsonObject.put("value", (Boolean)fieldValue);
 		}
@@ -227,11 +232,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		else {
 			jsonObject.put("value", (String)fieldValue);
 		}
-
-		Serializable displayValue = DDMUtil.getDisplayFieldValue(
-			fieldValue, type, themeDisplay.getLocale());
-
-		jsonObject.put("displayValue", String.valueOf(displayValue));
 
 		resourceResponse.setContentType(ContentTypes.APPLICATION_JSON);
 
@@ -519,21 +519,16 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String[] classNameIds = StringUtil.split(
 			getParameter(actionRequest, "classNameIds"));
 		String[] classTypeIds = getClassTypeIds(actionRequest, classNameIds);
-
-		String subTypeFieldsFilterEnabledString = getParameter(
-			actionRequest, "subTypeFieldsFilterEnabled");
-
-		boolean subTypeFieldsFilterEnabled = GetterUtil.getBoolean(
-			subTypeFieldsFilterEnabledString);
-
 		String[] extensions = actionRequest.getParameterValues("extensions");
+		boolean subtypeFieldsFilterEnabled = GetterUtil.getBoolean(
+			getParameter(actionRequest, "subtypeFieldsFilterEnabled"));
 
 		setPreference(actionRequest, "classNameIds", classNameIds);
 		setPreference(actionRequest, "classTypeIds", classTypeIds);
-		setPreference(
-			actionRequest, "subTypeFieldsFilterEnabled",
-			String.valueOf(subTypeFieldsFilterEnabled));
 		setPreference(actionRequest, "extensions", extensions);
+		setPreference(
+			actionRequest, "subtypeFieldsFilterEnabled",
+			String.valueOf(subtypeFieldsFilterEnabled));
 	}
 
 	protected void updateQueryLogic(
