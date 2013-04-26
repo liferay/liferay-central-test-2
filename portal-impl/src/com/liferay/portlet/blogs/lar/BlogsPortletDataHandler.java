@@ -105,6 +105,7 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 					dynamicQuery, "modifiedDate");
 			}
 
+			@Override
 			protected void performAction(Object object) throws PortalException {
 				BlogsEntry entry = (BlogsEntry)object;
 
