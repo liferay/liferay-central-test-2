@@ -70,7 +70,7 @@ public class AssetVocabularyLocalServiceImpl
 
 		serviceContext.setScopeGroupId(groupId);
 
-		return assetVocabularyLocalService.addVocabulary(
+		return addVocabulary(
 			defaultUserId, StringPool.BLANK, titleMap, null, StringPool.BLANK,
 			serviceContext);
 	}
