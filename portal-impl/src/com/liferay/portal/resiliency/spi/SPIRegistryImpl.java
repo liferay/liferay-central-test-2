@@ -162,16 +162,15 @@ public class SPIRegistryImpl implements SPIRegistry {
 
 	private static Log _log = LogFactoryUtil.getLog(SPIRegistryImpl.class);
 
-	private final Set<String> _excludedPortletIds =
-		new ConcurrentHashSet<String>();
-	private final Lock _lock = new ReentrantLock();
-	private final Map<SPI, String[]> _portletIds =
+	private Set<String> _excludedPortletIds = new ConcurrentHashSet<String>();
+	private Lock _lock = new ReentrantLock();
+	private Map<SPI, String[]> _portletIds =
 		new ConcurrentHashMap<SPI, String[]>();
-	private final Map<String, SPI> _portletSPIs =
+	private Map<String, SPI> _portletSPIs =
 		new ConcurrentHashMap<String, SPI>();
-	private final Map<SPI, String[]> _servletContextNames =
+	private Map<SPI, String[]> _servletContextNames =
 		new ConcurrentHashMap<SPI, String[]>();
-	private final Map<String, SPI> _servletContextSPIs =
+	private Map<String, SPI> _servletContextSPIs =
 		new ConcurrentHashMap<String, SPI>();
 
 }

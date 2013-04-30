@@ -407,8 +407,8 @@ public class MPIHelperUtil {
 			return _spiProviderName.concat(StringPool.POUND).concat(_spiId);
 		}
 
-		private final String _spiId;
-		private final String _spiProviderName;
+		private String _spiId;
+		private String _spiProviderName;
 
 	}
 
