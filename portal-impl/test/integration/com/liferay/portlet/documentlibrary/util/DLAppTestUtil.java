@@ -319,6 +319,7 @@ public abstract class DLAppTestUtil {
 			ServiceTestUtil.randomString());
 
 		long parentFolderId = folder.getFolderId();
+
 		String name = ServiceTestUtil.randomString();
 		String description = ServiceTestUtil.randomString();
 		String portletId = PortletKeys.DOCUMENT_LIBRARY;

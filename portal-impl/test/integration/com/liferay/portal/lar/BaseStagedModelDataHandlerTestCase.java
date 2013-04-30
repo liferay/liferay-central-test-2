@@ -190,16 +190,14 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 
 	protected void initImport() throws Exception {
 		userIdStrategy = new CurrentUserIdStrategy(TestPropsValues.getUser());
-
 		zipReader = ZipReaderFactoryUtil.getZipReader(zipWriter.getFile());
 
 		portletDataContext = new PortletDataContextImpl(
 			liveGroup.getCompanyId(), liveGroup.getGroupId(), getParameterMap(),
 			new HashSet<String>(), userIdStrategy, zipReader);
 
-		portletDataContext.setSourceGroupId(stagingGroup.getGroupId());
-
 		portletDataContext.setImportDataRootElement(rootElement);
+		portletDataContext.setSourceGroupId(stagingGroup.getGroupId());
 	}
 
 	protected StagedModel readExportedStagedModel(StagedModel stagedModel) {
