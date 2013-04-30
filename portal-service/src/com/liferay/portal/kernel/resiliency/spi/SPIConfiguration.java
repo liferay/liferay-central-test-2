@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.resiliency.spi;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -50,35 +51,28 @@ public class SPIConfiguration implements Serializable {
 
 		Element rootElement = document.getRootElement();
 
-		try {
-			String id = rootElement.elementText("id");
-			String javaExecutable = rootElement.elementText("javaExecutable");
-			String jvmArguments = rootElement.elementText("jvmArguments");
-			String spiAgentClassName = rootElement.elementText(
-				"spiAgentClassName");
-			int connectorPort = Integer.parseInt(
-				rootElement.elementText("connectorPort"));
-			String baseDir = rootElement.elementText("baseDir");
-			String[] portletIds = StringUtil.split(
-				rootElement.elementText("portletIds"));
-			String[] servletContextNames = StringUtil.split(
-				rootElement.elementText("servletContextNames"));
-			long pingInterval = Long.parseLong(
-				rootElement.elementText("pingInterval"));
-			long registerTimeout = Long.parseLong(
-				rootElement.elementText("registerTimeout"));
-			long shutdownTimeout = Long.parseLong(
-				rootElement.elementText("shutdownTimeout"));
+		String id = rootElement.elementText("id");
+		String javaExecutable = rootElement.elementText("javaExecutable");
+		String jvmArguments = rootElement.elementText("jvmArguments");
+		String spiAgentClassName = rootElement.elementText("spiAgentClassName");
+		int connectorPort = Integer.parseInt(
+			rootElement.elementText("connectorPort"));
+		String baseDir = rootElement.elementText("baseDir");
+		String[] portletIds = StringUtil.split(
+			rootElement.elementText("portletIds"));
+		String[] servletContextNames = StringUtil.split(
+			rootElement.elementText("servletContextNames"));
+		long pingInterval = GetterUtil.getLong(
+			rootElement.elementText("pingInterval"));
+		long registerTimeout = GetterUtil.getLong(
+			rootElement.elementText("registerTimeout"));
+		long shutdownTimeout = GetterUtil.getLong(
+			rootElement.elementText("shutdownTimeout"));
 
-			return new SPIConfiguration(
-				id, javaExecutable, jvmArguments, spiAgentClassName,
-				connectorPort, baseDir, portletIds, servletContextNames,
-				pingInterval, registerTimeout, shutdownTimeout);
-		}
-		catch (NumberFormatException nfe) {
-			throw new DocumentException(
-				"Unable to parse XML to SPI configuration", nfe);
-		}
+		return new SPIConfiguration(
+			id, javaExecutable, jvmArguments, spiAgentClassName, connectorPort,
+			baseDir, portletIds, servletContextNames, pingInterval,
+			registerTimeout, shutdownTimeout);
 	}
 
 	public SPIConfiguration(
