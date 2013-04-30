@@ -385,6 +385,10 @@ public class MPIHelperUtil {
 				return true;
 			}
 
+			if (!(obj instanceof SPIKey)) {
+				return false;
+			}
+
 			SPIKey clusterNode = (SPIKey)obj;
 
 			if (Validator.equals(
