@@ -72,12 +72,12 @@ for (String portletId : portletIds) {
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
 if (!categories.isEmpty() || !portlets.isEmpty()) {
-	String id = renderResponse.getNamespace() + "portletCategory" + portletCategoryIndex;
+	String panelId = renderResponse.getNamespace() + "portletCategory" + portletCategoryIndex;
 	String title = Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName());
 %>
 
 	<div class="lfr-add-content">
-		<liferay-ui:panel collapsible="<%= layout.isTypePortlet() %>" cssClass="lfr-content-category lfr-component panel-page-category" defaultState="closed" extended="<%= true %>" id="<%= id %>" persistState="<%= true %>" title="<%= title %>">
+		<liferay-ui:panel collapsible="<%= layout.isTypePortlet() %>" cssClass="lfr-content-category lfr-component panel-page-category" defaultState="closed" extended="<%= true %>" id="<%= panelId %>" persistState="<%= true %>" title="<%= title %>">
 
 			<%
 			for (PortletCategory category : categories) {

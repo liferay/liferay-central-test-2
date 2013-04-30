@@ -144,11 +144,11 @@
 								<c:if test="<%= portlets.size() > 0 %>">
 
 									<%
-									String id = renderResponse.getNamespace() + "portletCategory" + portletCategoryIndex;
+									String panelId = renderResponse.getNamespace() + "portletCategory" + portletCategoryIndex;
 									%>
 
 									<div class="lfr-add-content">
-										<liferay-ui:panel collapsible="<%= layout.isTypePortlet() %>" cssClass="lfr-content-category lfr-component panel-page-category" extended="<%= true %>" id="<%= id %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "highlighted") %>'>
+										<liferay-ui:panel collapsible="<%= layout.isTypePortlet() %>" cssClass="lfr-content-category lfr-component panel-page-category" extended="<%= true %>" id="<%= panelId %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "highlighted") %>'>
 
 											<%
 											for (Portlet portlet : portlets) {
