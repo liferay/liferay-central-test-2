@@ -124,6 +124,20 @@ public class JournalArticleStagedModelDataHandler
 
 			portletDataContext.addReferenceElement(
 				articleElement, ddmStructure);
+
+			long parentId = ddmStructure.getParentStructureId();
+
+			while (parentId > 0){
+				DDMStructure parentStructure = null;
+
+				parentStructure =
+					DDMStructureLocalServiceUtil.getStructure(parentId);
+
+				StagedModelDataHandlerUtil.exportStagedModel(
+					portletDataContext, parentStructure);
+
+				parentId = parentStructure.getParentStructureId();
+			}
 		}
 
 		if (Validator.isNotNull(article.getTemplateId())) {
