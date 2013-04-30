@@ -223,9 +223,6 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	@Override
 	public void checkPermission(Permission permission) {
-		boolean clearCheckMemberAccessClassLoader = true;
-
-		try {
 			String name = permission.getName();
 
 			if ((permission instanceof ReflectPermission) &&
@@ -268,29 +265,11 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				if (_checkMemberAccessClassLoader.get() ==
 						ClassLoaderUtil.getClassLoader(stack[2])) {
 
-					// The clearCheckMemberAccessClassLoader variable is set to
-					// false to support the calls to getDeclared*s that return
-					// an array.
-
-					// T[] t = clazz.getDeclared*s(..);
-
-					// We will hang onto the class loader as long as subsequent
-					// checks are for "suppressAccessChecks" and the class
-					// loader still matches.
-
-					clearCheckMemberAccessClassLoader = false;
-
 					return;
 				}
 			}
 
 			AccessController.checkPermission(permission);
-		}
-		finally {
-			if (clearCheckMemberAccessClassLoader) {
-				_checkMemberAccessClassLoader.set(null);
-			}
-		}
 	}
 
 	public Policy getPolicy() {
