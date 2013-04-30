@@ -56,6 +56,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import java.security.CodeSource;
+import java.security.ProtectionDomain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -500,14 +501,16 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			Constants.FRAMEWORK_STORAGE,
 			PropsValues.MODULE_FRAMEWORK_STATE_DIR);
 
-		CodeSource codeSource = clazz.getProtectionDomain().getCodeSource();
+		ProtectionDomain protectionDomain = clazz.getProtectionDomain();
 
-		URL location = codeSource.getLocation();
+		CodeSource codeSource = protectionDomain.getCodeSource();
+
+		URL codeSourceURL = codeSource.getLocation();
 
 		properties.put(
-			FrameworkPropsKeys.OSGI_FRAMEWORK, location.toExternalForm());
+			FrameworkPropsKeys.OSGI_FRAMEWORK, codeSourceURL.toExternalForm());
 
-		File frameworkFile = new File(location.getFile());
+		File frameworkFile = new File(codeSourceURL.getFile());
 
 		properties.put(
 			FrameworkPropsKeys.OSGI_INSTALL_AREA, frameworkFile.getParent());
