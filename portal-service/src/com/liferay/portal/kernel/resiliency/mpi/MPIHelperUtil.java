@@ -399,7 +399,9 @@ public class MPIHelperUtil {
 
 		@Override
 		public int hashCode() {
-			return _spiProviderName.hashCode() * 11 + _spiId.hashCode();
+			String string = toString();
+
+			return string.hashCode();
 		}
 
 		@Override
