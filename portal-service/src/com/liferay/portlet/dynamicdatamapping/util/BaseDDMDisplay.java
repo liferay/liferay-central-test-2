@@ -85,7 +85,7 @@ public class BaseDDMDisplay implements DDMDisplay {
 	}
 
 	public String getViewTemplatesTitle(
-		DDMStructure structure, boolean isControlPanel, Locale locale) {
+		DDMStructure structure, boolean controlPanel, Locale locale) {
 
 		if (structure != null) {
 			return LanguageUtil.format(

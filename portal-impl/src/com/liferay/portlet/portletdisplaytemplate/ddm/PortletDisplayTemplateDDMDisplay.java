@@ -53,13 +53,13 @@ public class PortletDisplayTemplateDDMDisplay extends BaseDDMDisplay {
 
 	@Override
 	public String getViewTemplatesTitle(
-		DDMStructure structure, boolean isControlPanel, Locale locale) {
+		DDMStructure structure, boolean controlPanel, Locale locale) {
 
-		if (isControlPanel) {
+		if (controlPanel) {
 			return StringPool.BLANK;
 		}
 
-		return super.getViewTemplatesTitle(structure, isControlPanel, locale);
+		return super.getViewTemplatesTitle(structure, controlPanel, locale);
 	}
 
 	@Override

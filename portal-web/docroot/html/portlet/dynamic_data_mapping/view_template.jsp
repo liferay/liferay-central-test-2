@@ -40,17 +40,17 @@ portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("classNameId", String.valueOf(classNameId));
 portletURL.setParameter("classPK", String.valueOf(classPK));
 
-boolean isControlPanel = false;
+DDMDisplay ddmDisplay = DDMDisplayRegistryUtil.getDDMDisplay(refererPortletName);
+
+boolean controlPanel = false;
 
 if (layout != null) {
 	Group group = layout.getGroup();
 
-	isControlPanel = group.isControlPanel();
+	controlPanel = group.isControlPanel();
 }
 
-DDMDisplay ddmDisplay = DDMDisplayRegistryUtil.getDDMDisplay(refererPortletName);
-
-String title = ddmDisplay.getViewTemplatesTitle(structure, isControlPanel, locale);
+String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale);
 %>
 
 <liferay-ui:error exception="<%= RequiredTemplateException.class %>">
