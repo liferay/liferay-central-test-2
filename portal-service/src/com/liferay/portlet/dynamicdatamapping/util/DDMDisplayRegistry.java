@@ -21,40 +21,14 @@ import java.util.List;
  */
 public interface DDMDisplayRegistry {
 
-	/**
-	 * Returns the ddm display associated with the portlet id.
-	 *
-	 * @param  portletId the portlet id
-	 * @return the ddm display associated with the portlet id
-	 */
 	public DDMDisplay getDDMDisplay(String portletId);
 
-	/**
-	 * Returns all the ddm displays.
-	 *
-	 * @return the ddm displays
-	 */
 	public List<DDMDisplay> getDDMDisplays();
 
-	/**
-	 * Returns the portlet ids of the registered ddm displays.
-	 *
-	 * @return the portlet ids of the registered ddm displays
-	 */
 	public String[] getPortletIds();
 
-	/**
-	 * Registers the ddm display.
-	 *
-	 * @param ddmDisplay the ddm display to register
-	 */
 	public void register(DDMDisplay ddmDisplay);
 
-	/**
-	 * Unregisters the ddm display.
-	 *
-	 * @param ddmDisplay the ddm display to unregister
-	 */
 	public void unregister(DDMDisplay ddmDisplay);
 
 }
