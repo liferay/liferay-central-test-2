@@ -31,11 +31,11 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 	}
 
 	@Override
-	public Set<String> getViewTemplatesExcludedColumns() {
-		return _viewTemplateExcludedColumns;
+	public Set<String> getViewTemplatesExcludedColumnNames() {
+		return _viewTemplateExcludedColumnNames;
 	}
 
-	private static Set<String> _viewTemplateExcludedColumns = SetUtil.fromArray(
-		new String[] {"mode"});
+	private static Set<String> _viewTemplateExcludedColumnNames =
+		SetUtil.fromArray(new String[] {"mode"});
 
 }

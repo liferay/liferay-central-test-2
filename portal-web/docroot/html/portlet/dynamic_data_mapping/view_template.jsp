@@ -137,10 +137,10 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 			/>
 
 			<%
-			Set<String> excludedColumns = ddmDisplay.getViewTemplatesExcludedColumns();
+			Set<String> excludedColumnNames = ddmDisplay.getViewTemplatesExcludedColumnNames();
 			%>
 
-			<c:if test='<%= !excludedColumns.contains("id") %>'>
+			<c:if test='<%= !excludedColumnNames.contains("id") %>'>
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="id"
@@ -150,7 +150,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				/>
 			</c:if>
 
-			<c:if test='<%= !excludedColumns.contains("name") %>'>
+			<c:if test='<%= !excludedColumnNames.contains("name") %>'>
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="name"
@@ -163,7 +163,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				path="/html/portlet/dynamic_data_mapping/template_description.jsp"
 			/>
 
-			<c:if test='<%= !excludedColumns.contains("structure") && (structure == null) %>'>
+			<c:if test='<%= !excludedColumnNames.contains("structure") && (structure == null) %>'>
 
 				<%
 				String structureName = StringPool.BLANK;
@@ -182,7 +182,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				/>
 			</c:if>
 
-			<c:if test='<%= !excludedColumns.contains("type") && Validator.isNull(templateTypeValue) && (classNameId == 0) %>'>
+			<c:if test='<%= !excludedColumnNames.contains("type") && Validator.isNull(templateTypeValue) && (classNameId == 0) %>'>
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="type"
@@ -190,7 +190,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				/>
 			</c:if>
 
-			<c:if test='<%= !excludedColumns.contains("mode") %>'>
+			<c:if test='<%= !excludedColumnNames.contains("mode") %>'>
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="mode"
@@ -198,7 +198,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				/>
 			</c:if>
 
-			<c:if test='<%= !excludedColumns.contains("language") %>'>
+			<c:if test='<%= !excludedColumnNames.contains("language") %>'>
 				<liferay-ui:search-container-column-text
 					href="<%= rowHREF %>"
 					name="language"
@@ -206,7 +206,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 				/>
 			</c:if>
 
-			<c:if test='<%= !excludedColumns.contains("modified-date") %>'>
+			<c:if test='<%= !excludedColumnNames.contains("modified-date") %>'>
 				<liferay-ui:search-container-column-text
 					buffer="buffer"
 					href="<%= rowHREF %>"

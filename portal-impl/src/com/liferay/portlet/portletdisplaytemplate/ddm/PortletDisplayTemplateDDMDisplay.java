@@ -47,8 +47,8 @@ public class PortletDisplayTemplateDDMDisplay extends BaseDDMDisplay {
 	}
 
 	@Override
-	public Set<String> getViewTemplatesExcludedColumns() {
-		return _viewTemplateExcludedColumns;
+	public Set<String> getViewTemplatesExcludedColumnNames() {
+		return _viewTemplateExcludedColumnNames;
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class PortletDisplayTemplateDDMDisplay extends BaseDDMDisplay {
 		return LanguageUtil.get(locale, "application-display-templates");
 	}
 
-	private static Set<String> _viewTemplateExcludedColumns = SetUtil.fromArray(
-		new String[] {"language", "mode", "structure"});
+	private static Set<String> _viewTemplateExcludedColumnNames =
+		SetUtil.fromArray(new String[] {"language", "mode", "structure"});
 
 }

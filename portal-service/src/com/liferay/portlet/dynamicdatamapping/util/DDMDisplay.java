@@ -34,7 +34,7 @@ public interface DDMDisplay {
 
 	public String getTemplateType(DDMTemplate template, Locale locale);
 
-	public Set<String> getViewTemplatesExcludedColumns();
+	public Set<String> getViewTemplatesExcludedColumnNames();
 
 	public String getViewTemplatesTitle(
 		DDMStructure structure, boolean controlPanel, Locale locale);

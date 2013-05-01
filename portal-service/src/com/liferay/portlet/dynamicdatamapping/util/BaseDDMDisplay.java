@@ -80,8 +80,8 @@ public class BaseDDMDisplay implements DDMDisplay {
 		return LanguageUtil.get(locale, template.getType());
 	}
 
-	public Set<String> getViewTemplatesExcludedColumns() {
-		return _viewTemplateExcludedColumns;
+	public Set<String> getViewTemplatesExcludedColumnNames() {
+		return _viewTemplateExcludedColumnNames;
 	}
 
 	public String getViewTemplatesTitle(
@@ -108,7 +108,7 @@ public class BaseDDMDisplay implements DDMDisplay {
 		return LanguageUtil.get(locale, "templates");
 	}
 
-	private static Set<String> _viewTemplateExcludedColumns = SetUtil.fromArray(
-		new String[] {"structure"});
+	private static Set<String> _viewTemplateExcludedColumnNames =
+		SetUtil.fromArray(new String[] {"structure"});
 
 }
