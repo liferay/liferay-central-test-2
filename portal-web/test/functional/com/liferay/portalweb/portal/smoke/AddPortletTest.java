@@ -49,10 +49,10 @@ public class AddPortletTest extends BaseTestCase {
 				selenium.clickAt("//li[contains(@class,'add-application')]/a",
 					RuntimeVariables.replace("Content and Applications"));
 				selenium.waitForElementPresent(
-					"//script[contains(@src,'/aui/aui-live-search/aui-live-search-min.js')]");
+					"//script[contains(@src,'/autocomplete-filters/autocomplete-filters-min.js')]");
 
 				boolean searchApplicationsNotVisible = selenium.isVisible(
-						"//input[@id='layout_configuration_content']");
+						"//input[@id='_145_searchApplication']");
 
 				if (searchApplicationsNotVisible) {
 					label = 2;
@@ -62,17 +62,17 @@ public class AddPortletTest extends BaseTestCase {
 
 				assertEquals(RuntimeVariables.replace("Applications"),
 					selenium.getText(
-						"//div[@id='portal_add_panel']/ul/li/span/a[contains(.,'Applications')]"));
-				selenium.clickAt("//div[@id='portal_add_panel']/ul/li/span/a[contains(.,'Applications')]",
+						"//div[@id='_145_addPanelContainer']/ul/li/span/a[contains(.,'Applications')]"));
+				selenium.clickAt("//div[@id='_145_addPanelContainer']/ul/li/span/a[contains(.,'Applications')]",
 					RuntimeVariables.replace("Applications"));
 
 			case 2:
-				selenium.waitForVisible(
-					"//input[@id='layout_configuration_content']");
-				selenium.sendKeys("//input[@id='layout_configuration_content']",
+				selenium.waitForVisible("//input[@id='_145_searchApplication']");
+				selenium.sendKeys("//input[@id='_145_searchApplication']",
 					RuntimeVariables.replace("b"));
-				selenium.waitForVisible("//li[@title='Blogs']/p/a");
-				selenium.clickAt("//li[@title='Blogs']/p/a",
+				selenium.waitForElementPresent("//span[@data-title='Blogs']");
+				selenium.makeVisible("//span[@data-title='Blogs']");
+				selenium.clickAt("//span[@data-title='Blogs']",
 					RuntimeVariables.replace("Add"));
 				selenium.waitForVisible("//section");
 				assertTrue(selenium.isVisible("//section"));
