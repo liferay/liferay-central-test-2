@@ -533,9 +533,7 @@ public class DLAppHelperLocalServiceImpl
 		return dlFileShortcut;
 	}
 
-	public void moveFolder(Folder folder)
-		throws PortalException, SystemException {
-
+	public void moveFolder(Folder folder) {
 		if (!isStagingGroup(folder.getGroupId())) {
 			registerDLSyncCallback(
 				DLSyncConstants.EVENT_UPDATE, DLSyncConstants.TYPE_FOLDER,
