@@ -717,9 +717,10 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
-	 * Returns the name of the ddm display class of the portlet.
+	 * Returns the name of the dynamic data mapping display class of the
+	 * portlet.
 	 *
-	 * @return the name of the ddm display class of the portlet
+	 * @return the name of the dynamic data mapping display class of the portlet
 	 */
 	public String getDDMDisplayClass() {
 		return _ddmDisplayClass;
@@ -2522,9 +2523,10 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
-	 * Sets the name of the ddm display class of the portlet.
+	 * Sets the name of the dynamic data mapping display class of the portlet.
 	 *
-	 * @param ddmDisplayClass the name of ddm display class of the portlet
+	 * @param ddmDisplayClass the name of dynamic data mapping display class of
+	 * the portlet
 	 */
 	public void setDDMDisplayClass(String ddmDisplayClass) {
 		_ddmDisplayClass = ddmDisplayClass;
@@ -3511,7 +3513,7 @@ public class PortletImpl extends PortletBaseImpl {
 	private List<String> _customAttributesDisplayClasses;
 
 	/**
-	 * The name of the ddm display class of the portlet.
+	 * The name of the dynamic data mapping display class of the portlet.
 	 */
 	private String _ddmDisplayClass;
 
