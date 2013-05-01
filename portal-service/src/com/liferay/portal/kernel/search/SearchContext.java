@@ -112,12 +112,12 @@ public class SearchContext implements Serializable {
 		return _groupIds;
 	}
 
-	public Layout getLayout() {
-		return _layout;
-	}
-
 	public String getKeywords() {
 		return _keywords;
+	}
+
+	public Layout getLayout() {
+		return _layout;
 	}
 
 	public Locale getLocale() {
