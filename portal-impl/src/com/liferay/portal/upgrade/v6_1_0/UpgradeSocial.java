@@ -280,7 +280,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected long[] getAssetEntry(long assetEntryId) throws Exception {
+	protected long[] getAssetEntryArray(long assetEntryId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -313,7 +313,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected long[] getAssetEntry(String className, long classPK)
+	protected long[] getAssetEntryArray(String className, long classPK)
 		throws Exception {
 
 		Connection con = null;
@@ -354,7 +354,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected long getThreadRootMessageId(long threadId) throws Exception {
+	protected long getMBThreadRootMessageId(long mbThreadId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -364,7 +364,7 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select rootMessageId from MBThread where threadId = " +
-					threadId);
+					mbThreadId);
 
 			rs = ps.executeQuery();
 
@@ -496,32 +496,32 @@ public class UpgradeSocial extends UpgradeProcess {
 	protected void migrateEquityLog(ResultSet rs) throws Exception {
 		long assetEntryId = rs.getLong("assetEntryId");
 
-		long[] assetEntry = getAssetEntry(assetEntryId);
+		long[] assetEntryArray = getAssetEntryArray(assetEntryId);
 
-		if (assetEntry == null) {
+		if (assetEntryArray == null) {
 			return;
 		}
 
 		String actionId = rs.getString("actionId");
 
 		if (actionId.equals(ActionKeys.SUBSCRIBE)) {
-			long classNameId = assetEntry[3];
+			long classNameId = assetEntryArray[3];
 
 			String className = PortalUtil.getClassName(classNameId);
 
 			if (className.equals(MBThread.class.getName())) {
-				long classPK = assetEntry[4];
+				long classPK = assetEntryArray[4];
 
-				long threadRootMessageId = getThreadRootMessageId(classPK);
+				long mbThreadRootMessageId = getMBThreadRootMessageId(classPK);
 
-				if (threadRootMessageId == -1) {
+				if (mbThreadRootMessageId == -1) {
 					return;
 				}
 
-				assetEntry = getAssetEntry(
-					MBMessage.class.getName(), threadRootMessageId);
+				assetEntryArray = getAssetEntryArray(
+					MBMessage.class.getName(), mbThreadRootMessageId);
 
-				if (assetEntry == null) {
+				if (assetEntryArray == null) {
 					return;
 				}
 			}
@@ -548,21 +548,21 @@ public class UpgradeSocial extends UpgradeProcess {
 		int type = rs.getInt("type_");
 		int value = rs.getInt("value");
 
-		long groupId = assetEntry[0];
-		long companyId = assetEntry[1];
+		long groupId = assetEntryArray[0];
+		long companyId = assetEntryArray[1];
 
 		if (type == 1) {
+			long userId = assetEntryArray[2];
+
 			name = SocialActivityCounterConstants.NAME_CONTRIBUTION;
 			ownerType = SocialActivityCounterConstants.TYPE_CREATOR;
-
-			long userId = assetEntry[2];
 
 			updateActivityCounter(
 				increment(), groupId, companyId, classNameId, userId, name,
 				ownerType, startPeriod, endPeriod, value);
 
-			classNameId = assetEntry[3];
-			classPK = assetEntry[4];
+			classNameId = assetEntryArray[3];
+			classPK = assetEntryArray[4];
 			name = SocialActivityCounterConstants.NAME_POPULARITY;
 			ownerType = SocialActivityCounterConstants.TYPE_ASSET;
 		}
