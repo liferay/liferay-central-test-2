@@ -38,13 +38,13 @@ public class SecurityManagerUtil {
 			return;
 		}
 
-		if (!PropsValues.TCK_URL) {
+		if (PropsValues.TCK_URL) {
+			_portalSecurityManagerStrategy = PortalSecurityManagerStrategy.NONE;
+		}
+		else {
 			_portalSecurityManagerStrategy =
 				PortalSecurityManagerStrategy.parse(
 					PropsValues.PORTAL_SECURITY_MANAGER_STRATEGY);
-		}
-		else {
-			_portalSecurityManagerStrategy = PortalSecurityManagerStrategy.NONE;
 		}
 
 		if ((_portalSecurityManagerStrategy ==
