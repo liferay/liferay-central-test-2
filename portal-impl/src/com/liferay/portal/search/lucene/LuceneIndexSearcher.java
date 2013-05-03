@@ -419,40 +419,42 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		return hits;
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void close(BoboBrowser boboBrowser) {
-		if (boboBrowser != null) {
+		if (boboBrowser == null) {
+			return;
+		}
+
+		try {
+			boboBrowser.close();
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+
+		Browsable[] browsables = boboBrowser.getSubBrowsers();
+
+		for (Browsable browsable : browsables) {
+			if (!(browsable instanceof BoboSubBrowser)) {
+				continue;
+			}
+
+			BoboSubBrowser boboSubBrowser = (BoboSubBrowser)browsable;
+
+			BoboIndexReader boboIndexReader = boboSubBrowser.getIndexReader();
+
 			try {
-				boboBrowser.close();
+				ThreadLocal<?> threadLocal =
+					(ThreadLocal<?>)_runtimeFacetDataMapField.get(
+						boboIndexReader);
+
+				threadLocal.remove();
+
+				_runtimeFacetDataMapField.set(boboIndexReader, null);
 			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-			}
-
-			Browsable[] browsables = boboBrowser.getSubBrowsers();
-
-			for (Browsable browsable : browsables) {
-				if (browsable instanceof BoboSubBrowser) {
-					BoboSubBrowser boboSubBrowser = (BoboSubBrowser)browsable;
-
-					BoboIndexReader boboIndexReader =
-						boboSubBrowser.getIndexReader();
-
-					try {
-						ThreadLocal<?> threadLocal =
-							(ThreadLocal<?>)_runtimeFacetDataMapField.get(
-								boboIndexReader);
-
-						threadLocal.remove();
-
-						_runtimeFacetDataMapField.set(boboIndexReader, null);
-					}
-					catch (Exception e) {
-						_log.error(
-							"Unable to cleanup BoboIndexReader's ThreadLocal" +
-								"field _runtimeFacetDataMap", e);
-					}
-				}
+			catch (Exception e) {
+				_log.error(
+					"Unable to clean up BoboIndexReader#_runtimeFacetDataMap",
+					e);
 			}
 		}
 	}
@@ -672,7 +674,9 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		return hits;
 	}
 
-	private static final java.lang.reflect.Field _runtimeFacetDataMapField;
+	private static Log _log = LogFactoryUtil.getLog(LuceneIndexSearcher.class);
+
+	private static java.lang.reflect.Field _runtimeFacetDataMapField;
 
 	static {
 		try {
@@ -683,8 +687,6 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(LuceneIndexSearcher.class);
 
 	private class HitDocs {
 
