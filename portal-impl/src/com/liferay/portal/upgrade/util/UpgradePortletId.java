@@ -79,6 +79,56 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 	}
 
+	protected String getNewTypeSettings(
+		String typeSettings, String oldRootPortletId, String newRootPortletId,
+		boolean exactMatch) {
+
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
+
+		typeSettingsProperties.fastLoad(typeSettings);
+
+		for (int i = 1; i <= 10; i++) {
+			String column = LayoutTypePortletConstants.COLUMN_PREFIX + i;
+
+			if (!typeSettingsProperties.containsKey(column)) {
+				continue;
+			}
+
+			String[] portletIds = StringUtil.split(
+				typeSettingsProperties.getProperty(column));
+
+			for (int j = 0; j < portletIds.length; j++) {
+				String portletId = portletIds[j];
+
+				if (exactMatch) {
+					if (portletId.equals(oldRootPortletId)) {
+						portletIds[j] = newRootPortletId;
+					}
+
+					continue;
+				}
+
+				String rootPortletId = PortletConstants.getRootPortletId(
+					portletId);
+
+				if (!rootPortletId.equals(oldRootPortletId)) {
+					continue;
+				}
+
+				long userId = PortletConstants.getUserId(portletId);
+				String instanceId = PortletConstants.getInstanceId(portletId);
+
+				portletIds[j] = PortletConstants.assemblePortletId(
+					newRootPortletId, userId, instanceId);
+			}
+
+			typeSettingsProperties.setProperty(
+				column, StringUtil.merge(portletIds).concat(StringPool.COMMA));
+		}
+
+		return typeSettingsProperties.toString();
+	}
+
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
 			new String[] {
@@ -114,13 +164,18 @@ public class UpgradePortletId extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(
-				"select portletPreferencesId, portletId from " +
-					"PortletPreferences where portletId = '" +
-						oldRootPortletId + "' OR portletId like '" +
-							oldRootPortletId + "_INSTANCE_%' OR " +
-								"portletId like '" + oldRootPortletId +
-									"_USER_%_INSTANCE_%'");
+			StringBundler sb = new StringBundler(8);
+
+			sb.append("select portletPreferencesId, portletId from ");
+			sb.append("PortletPreferences where portletId = '");
+			sb.append(oldRootPortletId);
+			sb.append("' OR portletId like '");
+			sb.append(oldRootPortletId);
+			sb.append("_INSTANCE_%' OR portletId like '");
+			sb.append(oldRootPortletId);
+			sb.append("_USER_%_INSTANCE_%'");
+
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
@@ -237,57 +292,6 @@ public class UpgradePortletId extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-	}
-
-	private String getNewTypeSettings(
-		String typeSettings, String oldRootPortletId, String newRootPortletId,
-		boolean exactMatch) {
-
-		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
-
-		typeSettingsProperties.fastLoad(typeSettings);
-
-		for (int i = 1; i <= 10; i++) {
-			String column = LayoutTypePortletConstants.COLUMN_PREFIX + i;
-
-			if (!typeSettingsProperties.containsKey(column)) {
-				continue;
-			}
-
-			String[] portletIds = StringUtil.split(
-				typeSettingsProperties.getProperty(column));
-
-			for (int j = 0; j < portletIds.length; j++) {
-				String portletId = portletIds[j];
-
-				if (exactMatch) {
-					if (portletId.equals(oldRootPortletId)) {
-						portletIds[j] = newRootPortletId;
-					}
-
-					continue;
-				}
-
-				String rootPortletId = PortletConstants.getRootPortletId(
-					portletId);
-
-				if (!rootPortletId.equals(oldRootPortletId)) {
-					continue;
-				}
-
-				String instanceId = PortletConstants.getInstanceId(portletId);
-				long userId = PortletConstants.getUserId(portletId);
-
-				portletIds[j] = PortletConstants.assemblePortletId(
-					newRootPortletId, userId, instanceId);
-			}
-
-			typeSettingsProperties.setProperty(
-				column,
-				StringUtil.merge(portletIds).concat(StringPool.COMMA));
-		}
-
-		return typeSettingsProperties.toString();
 	}
 
 	protected void updatePortlet(

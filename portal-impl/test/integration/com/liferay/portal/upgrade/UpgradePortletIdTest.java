@@ -125,31 +125,27 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 	protected void doTestUpgrade() throws Exception {
 		Layout layout = addLayout();
 
-		long companyId = TestPropsValues.getCompanyId();
-		long userId = TestPropsValues.getUserId();
-
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
 
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
 		Role role = RoleLocalServiceUtil.getRole(
-			companyId, RoleConstants.GUEST);
+			TestPropsValues.getCompanyId(), RoleConstants.GUEST);
 
 		roleIdsToActionIds.put(
 			role.getRoleId(), new String[] {ActionKeys.CONFIGURATION});
 
 		Portlet portlet = null;
 
-		String[] portletIds = _PORTLET_IDS;
-
-		for (String oldPortletId : portletIds) {
+		for (String oldPortletId : _PORTLET_IDS) {
 			String portletId = getPortletId(oldPortletId);
 
 			portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, portletId);
+				TestPropsValues.getCompanyId(), portletId);
 
-			layoutTypePortlet.addPortletId(userId, portletId, false);
+			layoutTypePortlet.addPortletId(
+				TestPropsValues.getUserId(), portletId, false);
 
 			addPortletPreferences(layout, portletId);
 
@@ -157,8 +153,8 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 				layout.getPlid(), portletId);
 
 			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-				layout.getGroupId(), companyId, oldPortletId, portletPrimaryKey,
-				roleIdsToActionIds);
+				layout.getGroupId(), TestPropsValues.getCompanyId(),
+				oldPortletId, portletPrimaryKey, roleIdsToActionIds);
 
 			PortletLocalServiceUtil.destroyPortlet(portlet);
 		}
@@ -175,7 +171,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 
 		layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
-		for (String portletId : portletIds) {
+		for (String portletId : _PORTLET_IDS) {
 			String newRootPortletId = portletId;
 
 			if (_testInstanceable) {
@@ -185,7 +181,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 			String newPortletId = getNewPortletId(
 				layoutTypePortlet, newRootPortletId);
 
-			portlet.setCompanyId(companyId);
+			portlet.setCompanyId(TestPropsValues.getCompanyId());
 			portlet.setPortletId(newPortletId);
 
 			List<String> portletActions =
@@ -203,7 +199,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 
 			boolean hasViewPermission =
 				ResourcePermissionLocalServiceUtil.hasResourcePermission(
-					companyId, newRootPortletId,
+					TestPropsValues.getCompanyId(), newRootPortletId,
 					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey,
 					role.getRoleId(), ActionKeys.VIEW);
 
@@ -211,7 +207,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 
 			boolean hasConfigurationPermission =
 				ResourcePermissionLocalServiceUtil.hasResourcePermission(
-					companyId, newRootPortletId,
+					TestPropsValues.getCompanyId(), newRootPortletId,
 					ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey,
 					role.getRoleId(), ActionKeys.CONFIGURATION);
 
@@ -219,14 +215,6 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 		}
 
 		GroupLocalServiceUtil.deleteGroup(layout.getGroup());
-	}
-
-	protected String getPortletId(String portletId) {
-		if (_testInstanceable) {
-			return portletId + _INSTANCE_ID;
-		}
-
-		return portletId;
 	}
 
 	protected String getNewPortletId(
@@ -241,6 +229,14 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 		}
 
 		return oldPortletId;
+	}
+
+	protected String getPortletId(String portletId) {
+		if (_testInstanceable) {
+			return portletId + _INSTANCE_ID;
+		}
+
+		return portletId;
 	}
 
 	@Override
