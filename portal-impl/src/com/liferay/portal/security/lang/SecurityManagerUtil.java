@@ -70,7 +70,7 @@ public class SecurityManagerUtil {
 		}
 
 		if (_portalSecurityManagerStrategy ==
-					PortalSecurityManagerStrategy.LIFERAY) {
+				PortalSecurityManagerStrategy.LIFERAY) {
 
 			System.setSecurityManager((SecurityManager)_portalSecurityManager);
 		}
