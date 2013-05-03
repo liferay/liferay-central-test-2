@@ -98,8 +98,8 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 		org.apache.lucene.search.IndexSearcher indexSearcher = null;
 		Map<String, Facet> facets = null;
-		BrowseRequest browseRequest = null;
 		BoboBrowser boboBrowser = null;
+		BrowseRequest browseRequest = null;
 
 		try {
 			indexSearcher = LuceneHelperUtil.getSearcher(
@@ -250,9 +250,9 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			try {
 				long startTime = System.currentTimeMillis();
 
-				BrowseResult result = boboBrowser.browse(browseRequest);
+				BrowseResult browseResult = boboBrowser.browse(browseRequest);
 
-				BrowseHit[] browseHits = result.getHits();
+				BrowseHit[] browseHits = browseResult.getHits();
 
 				long endTime = System.currentTimeMillis();
 
@@ -263,7 +263,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 					searchTime, searchContext.getStart(),
 					searchContext.getEnd());
 
-				Map<String, FacetAccessible> facetMap = result.getFacetMap();
+				Map<String, FacetAccessible> facetMap = browseResult.getFacetMap();
 
 				for (Map.Entry<String, FacetAccessible> entry :
 						facetMap.entrySet()) {
