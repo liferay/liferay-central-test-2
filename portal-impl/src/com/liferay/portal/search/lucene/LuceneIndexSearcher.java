@@ -263,7 +263,8 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 					searchTime, searchContext.getStart(),
 					searchContext.getEnd());
 
-				Map<String, FacetAccessible> facetMap = browseResult.getFacetMap();
+				Map<String, FacetAccessible> facetMap =
+					browseResult.getFacetMap();
 
 				for (Map.Entry<String, FacetAccessible> entry :
 						facetMap.entrySet()) {
