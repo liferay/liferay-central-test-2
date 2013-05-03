@@ -786,7 +786,7 @@ public class DataFactory {
 			sb.append(
 				"<dynamic-element dataType=\"string\" indexType=\"keyword\"");
 			sb.append(" name=\"");
-			sb.append(_generateCustomFieldName(groupId, i));
+			sb.append(nextDDLCustomFieldName(groupId, i));
 			sb.append(
 				"\" readOnly=\"false\" repeatable=\"false\" required=\"false");
 			sb.append(
@@ -887,7 +887,7 @@ public class DataFactory {
 
 		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
 			sb.append("<dynamic-element default-language-id=\"en_US\" name=\"");
-			sb.append(_generateCustomFieldName(ddlRecord.getGroupId(), i));
+			sb.append(nextDDLCustomFieldName(ddlRecord.getGroupId(), i));
 			sb.append("\"><dynamic-content language-id=\"en_US\">");
 			sb.append("<![CDATA[Test Record ");
 			sb.append(currentIndex);
@@ -1883,12 +1883,7 @@ public class DataFactory {
 		return user;
 	}
 
-	protected Date nextFutureDate() {
-		return new Date(
-			_FUTURE_TIME + (_futureDateCounter.get() * Time.SECOND));
-	}
-
-	private String _generateCustomFieldName(
+	protected String nextDDLCustomFieldName(
 		long groupId, int customFieldIndex) {
 
 		StringBundler sb = new StringBundler(4);
@@ -1899,6 +1894,11 @@ public class DataFactory {
 		sb.append(customFieldIndex);
 
 		return sb.toString();
+	}
+
+	protected Date nextFutureDate() {
+		return new Date(
+			_FUTURE_TIME + (_futureDateCounter.get() * Time.SECOND));
 	}
 
 	private static final String _DEPENDENCIES_DIR=
