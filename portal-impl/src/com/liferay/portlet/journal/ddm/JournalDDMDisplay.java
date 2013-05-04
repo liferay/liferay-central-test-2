@@ -73,7 +73,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 	}
 
 	@Override
-	public boolean showStructureSelector() {
+	public boolean isShowStructureSelector() {
 		return true;
 	}
 

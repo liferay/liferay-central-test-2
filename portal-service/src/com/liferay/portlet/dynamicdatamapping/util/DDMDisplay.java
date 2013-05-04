@@ -54,6 +54,6 @@ public interface DDMDisplay {
 
 	public String getViewTemplatesTitle(DDMStructure structure, Locale locale);
 
-	public boolean showStructureSelector();
+	public boolean isShowStructureSelector();
 
 }

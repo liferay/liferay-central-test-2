@@ -141,7 +141,7 @@ public class BaseDDMDisplay implements DDMDisplay {
 		return getViewTemplatesTitle(structure, false, locale);
 	}
 
-	public boolean showStructureSelector() {
+	public boolean isShowStructureSelector() {
 		return false;
 	}
 
