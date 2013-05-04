@@ -32,15 +32,6 @@ if (Validator.isNull(redirect) && results.isEmpty()) {
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-
-String assetEntryClassName = assetEntry.getClassName();
-
-String ratingsType = "stars";
-
-if (assetEntryClassName.equals(MBDiscussion.class.getName()) || assetEntryClassName.equals(MBMessage.class.getName())) {
-	ratingsType = "thumbs";
-}
-
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 
@@ -196,6 +187,17 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:if test="<%= enableRatings %>">
 			<div class="asset-ratings">
+
+				<%
+				String assetEntryClassName = assetEntry.getClassName();
+
+				String ratingsType = "stars";
+
+				if (assetEntryClassName.equals(MBDiscussion.class.getName()) || assetEntryClassName.equals(MBMessage.class.getName())) {
+					ratingsType = "thumbs";
+				}
+				%>
+
 				<liferay-ui:ratings
 					className="<%= assetEntry.getClassName() %>"
 					classPK="<%= assetEntry.getClassPK() %>"
