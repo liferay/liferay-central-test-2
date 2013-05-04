@@ -651,7 +651,7 @@ public class GetterUtil {
 			throw new NumberFormatException("Unable to parse " + value);
 		}
 
-		int pos = 0;
+		int index = 0;
 		int limit = -Integer.MAX_VALUE;
 		boolean negative = false;
 
@@ -670,19 +670,19 @@ public class GetterUtil {
 				throw new NumberFormatException("Unable to parse " + value);
 			}
 
-			pos++;
+			index++;
 		}
 
 		int smallLimit = limit / 10;
 
 		int result = 0;
 
-		while (pos < length) {
+		while (index < length) {
 			if (result < smallLimit) {
 				throw new NumberFormatException("Unable to parse " + value);
 			}
 
-			c = value.charAt(pos++);
+			c = value.charAt(index++);
 
 			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
 				throw new NumberFormatException("Unable to parse " + value);
@@ -769,7 +769,7 @@ public class GetterUtil {
 			throw new NumberFormatException("Unable to parse " + value);
 		}
 
-		int pos = 0;
+		int index = 0;
 		long limit = -Long.MAX_VALUE;
 		boolean negative = false;
 
@@ -788,19 +788,19 @@ public class GetterUtil {
 				throw new NumberFormatException("Unable to parse " + value);
 			}
 
-			pos++;
+			index++;
 		}
 
 		long smallLimit = limit / 10;
 
 		long result = 0;
 
-		while (pos < length) {
+		while (index < length) {
 			if (result < smallLimit) {
 				throw new NumberFormatException("Unable to parse " + value);
 			}
 
-			c = value.charAt(pos++);
+			c = value.charAt(index++);
 
 			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
 				throw new NumberFormatException("Unable to parse " + value);
@@ -966,8 +966,7 @@ public class GetterUtil {
 		int i = getIntegerStrict(value);
 
 		if ((i < Short.MIN_VALUE) || (i > Short.MAX_VALUE)) {
-			throw new NumberFormatException(
-				"Value out of short range." + value);
+			throw new NumberFormatException("Out of range value " + value);
 		}
 
 		return (short)i;
