@@ -5930,8 +5930,9 @@ public class PortalImpl implements Portal {
 		if (portletActions) {
 			Group layoutGroup = layout.getGroup();
 
-			addGuestPermissions =
-				layoutGroup.isLayoutPrototype() || !layout.isPrivateLayout();
+			if (layout.isPrivateLayout() && !layoutGroup.isLayoutPrototype()) {
+				addGuestPermissions = false;
+			}
 		}
 
 		ResourceLocalServiceUtil.addResources(
