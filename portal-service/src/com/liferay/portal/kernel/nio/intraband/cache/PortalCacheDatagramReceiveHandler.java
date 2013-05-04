@@ -51,13 +51,7 @@ public class PortalCacheDatagramReceiveHandler
 			IntrabandPortalCacheManager.getPortalCacheManager();
 
 		switch (portalCacheActionType) {
-			case RECONFIGURE :
-				portalCacheManager.reconfigureCaches(
-					new URL(deserializer.readString()));
-
-				break;
-
-			case DESTROY :
+			case DESTROY:
 				PortalCache<Serializable, Serializable> portalCache =
 					portalCacheManager.getCache(deserializer.readString());
 
@@ -65,7 +59,19 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			case GET_BULK :
+			case GET:
+				portalCache = portalCacheManager.getCache(
+					deserializer.readString());
+
+				Serializable key = deserializer.readObject();
+
+				Serializable value = portalCache.get(key);
+
+				_sendResponse(registrationReference, datagram, value);
+
+				break;
+
+			case GET_BULK:
 				portalCache = portalCacheManager.getCache(
 					deserializer.readString());
 
@@ -79,19 +85,7 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			case GET :
-				portalCache = portalCacheManager.getCache(
-					deserializer.readString());
-
-				Serializable key = deserializer.readObject();
-
-				Serializable value = portalCache.get(key);
-
-				_sendResponse(registrationReference, datagram, value);
-
-				break;
-
-			case PUT :
+			case PUT:
 				portalCache = portalCacheManager.getCache(
 					deserializer.readString());
 
@@ -102,7 +96,7 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			case PUT_TTL :
+			case PUT_TTL:
 				portalCache = portalCacheManager.getCache(
 					deserializer.readString());
 
@@ -114,7 +108,13 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			case REMOVE :
+			case RECONFIGURE:
+				portalCacheManager.reconfigureCaches(
+					new URL(deserializer.readString()));
+
+				break;
+
+			case REMOVE:
 				portalCache = portalCacheManager.getCache(
 					deserializer.readString());
 
@@ -124,7 +124,7 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			case REMOVE_ALL :
+			case REMOVE_ALL:
 				portalCache = portalCacheManager.getCache(
 					deserializer.readString());
 
@@ -132,7 +132,7 @@ public class PortalCacheDatagramReceiveHandler
 
 				break;
 
-			default :
+			default:
 
 				// This should never happen, for corrupt input, the ordinal
 				// indexing should already have caught it. The only reason to
