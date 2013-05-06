@@ -73,7 +73,7 @@ public class ManifestHelperTask extends Task {
 	protected void doExecute() throws Exception {
 		if (_projectDirPropertyName == null) {
 			throw new BuildException(
-				"attribute projectDirPropertyName must be set");
+				"Attribute projectDirPropertyName must be set");
 		}
 
 		Project project = getProject();
