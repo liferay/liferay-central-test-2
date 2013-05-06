@@ -101,7 +101,7 @@ public class DistributedRegistryTest {
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed(name, Direction.REQUEST));
 
-		// Exact match name, but not match Direction
+		// Exact match name, but no direction
 
 		DistributedRegistry.registerDistributed(
 			name, Direction.REQUEST, MatchType.EXACT);
@@ -109,12 +109,12 @@ public class DistributedRegistryTest {
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed(name, Direction.RESPONSE));
 
-		// Exact match name, direct match Direction
+		// Exact match name, direct match direction
 
 		Assert.assertTrue(
 			DistributedRegistry.isDistributed(name, Direction.REQUEST));
 
-		// Exact match name, indirect match Direction
+		// Exact match name, indirect match direction
 
 		DistributedRegistry.registerDistributed(
 			name, Direction.DUPLEX, MatchType.EXACT);
@@ -127,24 +127,24 @@ public class DistributedRegistryTest {
 		DistributedRegistry.registerDistributed(
 			prefix, Direction.REQUEST, MatchType.PREFIX);
 
-		// Prefix dismatch name
+		// Prefix mismatch name
 
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed("PrefixName", Direction.REQUEST));
 
-		// Prefix match name, but not match Direction
+		// Prefix match name, but no direction
 
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed(
 				prefix + "Name", Direction.RESPONSE));
 
-		// Prefix match name, direct match Direction
+		// Prefix match name, direct match direction
 
 		Assert.assertTrue(
 			DistributedRegistry.isDistributed(
 				prefix + "Name", Direction.REQUEST));
 
-		// Prefix match name, indirect match Direction
+		// Prefix match name, indirect match direction
 
 		DistributedRegistry.registerDistributed(
 			prefix, Direction.DUPLEX, MatchType.PREFIX);
@@ -158,25 +158,25 @@ public class DistributedRegistryTest {
 		DistributedRegistry.registerDistributed(
 			postfix, Direction.REQUEST, MatchType.POSTFIX);
 
-		// Postfix dismatch name
+		// Postfix mismatch name
 
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed(
 				"NamePostfix", Direction.REQUEST));
 
-		// Postfix match name, but not match Direction
+		// Postfix match name, but no direction
 
 		Assert.assertFalse(
 			DistributedRegistry.isDistributed(
 				"name" + postfix, Direction.RESPONSE));
 
-		// Postfix match name, direct match Direction
+		// Postfix match name, direct match direction
 
 		Assert.assertTrue(
 			DistributedRegistry.isDistributed(
 				"name" + postfix, Direction.REQUEST));
 
-		// Postfix match name, indirect match Direction
+		// Postfix match name, indirect match direction
 
 		DistributedRegistry.registerDistributed(
 			postfix, Direction.DUPLEX, MatchType.POSTFIX);
@@ -302,6 +302,7 @@ public class DistributedRegistryTest {
 		@Distributed(direction = Direction.DUPLEX, matchType = MatchType.PREFIX)
 		public static final String name3 = "name3";
 
+		@SuppressWarnings("unused")
 		public static final String name4 = "name4";
 
 		@Distributed
