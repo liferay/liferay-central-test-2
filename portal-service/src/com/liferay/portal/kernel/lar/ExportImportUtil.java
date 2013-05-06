@@ -61,11 +61,11 @@ public class ExportImportUtil {
 			String content)
 		throws Exception {
 
-		content = exportDLReferences(
-			portletDataContext, entityElement, content);
-
 		content = exportLayoutReferences(portletDataContext, content);
 		content = exportLinksToLayouts(portletDataContext, content);
+
+		content = exportDLReferences(
+			portletDataContext, entityElement, content);
 
 		Element groupElement = entityElement.getParent();
 
@@ -84,11 +84,11 @@ public class ExportImportUtil {
 			String content)
 		throws Exception {
 
-		content = importDLReferences(
-			portletDataContext, entityElement, content);
-
 		content = importLayoutReferences(portletDataContext, content);
 		content = importLinksToLayouts(portletDataContext, content);
+
+		content = importDLReferences(
+			portletDataContext, entityElement, content);
 
 		return content;
 	}
@@ -363,9 +363,9 @@ public class ExportImportUtil {
 
 		StringBuilder sb = new StringBuilder(content);
 
-		String privateGroupServletMapping = _privateGroupServletMapping;
-		String privateUserServletMapping = _privateUserServletMapping;
-		String publicServletMapping = _publicServletMapping;
+		String privateGroupServletMapping = _PRIVATE_GROUP_SERVLET_MAPPING;
+		String privateUserServletMapping = _PRIVATE_USER_SERVLET_MAPPING;
+		String publicServletMapping = _PUBLIC_GROUP_SERVLET_MAPPING;
 
 		String portalContextPath = PortalUtil.getPathContext();
 
@@ -640,9 +640,9 @@ public class ExportImportUtil {
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
 
-		String privateGroupServletMapping = _privateGroupServletMapping;
-		String privateUserServletMapping = _privateUserServletMapping;
-		String publicServletMapping = _publicServletMapping;
+		String privateGroupServletMapping = _PRIVATE_GROUP_SERVLET_MAPPING;
+		String privateUserServletMapping = _PRIVATE_USER_SERVLET_MAPPING;
+		String publicServletMapping = _PUBLIC_GROUP_SERVLET_MAPPING;
 
 		String portalContextPath = PortalUtil.getPathContext();
 
@@ -772,18 +772,17 @@ public class ExportImportUtil {
 
 	private static Pattern _exportLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
-
 	private static Pattern _importLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)@(\\p{XDigit}{8}\\-" +
 		"(?:\\p{XDigit}{4}\\-){3}\\p{XDigit}{12})@([^\\]]*)\\]");
+	private static String _PRIVATE_GROUP_SERVLET_MAPPING = PropsUtil.get(
+		PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
 
-	private static String _privateGroupServletMapping = PropsUtil.get(
-			PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+	private static String _PRIVATE_USER_SERVLET_MAPPING = PropsUtil.get(
+		PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
 
-	private static String _privateUserServletMapping = PropsUtil.get(
-			PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING);
+	private static String _PUBLIC_GROUP_SERVLET_MAPPING = PropsUtil.get(
+		PropsKeys.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
-	private static String _publicServletMapping = PropsUtil.get(
-			PropsKeys.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
 
 }
