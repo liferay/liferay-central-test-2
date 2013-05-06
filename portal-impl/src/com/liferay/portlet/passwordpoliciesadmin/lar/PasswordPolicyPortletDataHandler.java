@@ -54,7 +54,7 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 			return portletPreferences;
 		}
 
-		PasswordPolicyLocalServiceUtil.deleteNonDefaultPasswordPolicies(
+		PasswordPolicyLocalServiceUtil.deleteNondefaultPasswordPolicies(
 			portletDataContext.getCompanyId());
 
 		return portletPreferences;
@@ -90,6 +90,7 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 				StagedModelDataHandlerUtil.exportStagedModel(
 					portletDataContext, passwordPolicy);
 			}
+
 		};
 
 		actionableDynamicQuery.performActions();
