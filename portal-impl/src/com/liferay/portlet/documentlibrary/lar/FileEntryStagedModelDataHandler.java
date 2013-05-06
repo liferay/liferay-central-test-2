@@ -131,7 +131,7 @@ public class FileEntryStagedModelDataHandler
 				portletDataContext, repository);
 
 			portletDataContext.addReferenceElement(
-				fileEntry, fileEntryElement, repository, false);
+				fileEntry, fileEntryElement, repository, PortletDataContext.TYPE_STRONG_REFERENCE, false);
 
 			portletDataContext.addClassedModel(
 				fileEntryElement, fileEntryPath, fileEntry,
@@ -207,7 +207,7 @@ public class FileEntryStagedModelDataHandler
 					portletDataContext, fileRank);
 
 				portletDataContext.addReferenceElement(
-					fileEntry, fileEntryElement, fileRank, false);
+					fileEntry, fileEntryElement, fileRank, PortletDataContext.TYPE_EMBEDDED, false);
 			}
 		}
 
