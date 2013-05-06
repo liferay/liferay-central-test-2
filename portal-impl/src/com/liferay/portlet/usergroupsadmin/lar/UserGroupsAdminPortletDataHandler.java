@@ -43,6 +43,7 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 		setDataPortalLevel(true);
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -60,13 +61,14 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
+	@Override
 	protected String doExportData(
 			final PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			_RESOURCE_OBJECT_ID, portletDataContext.getScopeGroupId());
+			_RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -106,7 +108,7 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			_RESOURCE_OBJECT_ID, portletDataContext.getSourceGroupId(),
+			_RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element userGroupsElement =
@@ -122,7 +124,7 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 		return null;
 	}
 
-	private static final String _RESOURCE_OBJECT_ID =
+	private static final String _RESOURCE_NAME =
 		"com.liferay.portlet.usergroupsadmin";
 
 }

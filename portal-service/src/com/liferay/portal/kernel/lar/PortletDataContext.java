@@ -318,7 +318,7 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public void importPermissions(
-			String resourceObj, long resourcePK, long newResourcePK)
+			String resourceName, long resourcePK, long newResourcePK)
 		throws PortalException, SystemException;
 
 	public void importRatingsEntries(
