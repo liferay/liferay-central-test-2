@@ -32,16 +32,16 @@ public class Log4JLoggerTestUtil {
 
 		LogWrapper logWrapper = (LogWrapper)LogFactoryUtil.getLog(name);
 
-		Log log = logWrapper.getLog();
+		Log log = logWrapper.getWrappedLog();
 
 		if (!(log instanceof Log4jLogImpl)) {
 			throw new IllegalStateException(
-				"Log " + name + " is not a log4j logger");
+				"Log " + name + " is not a Log4j logger");
 		}
 
 		Log4jLogImpl log4jLogImpl = (Log4jLogImpl)log;
 
-		Logger logger = log4jLogImpl.getLog();
+		Logger logger = log4jLogImpl.getWrappedLogger();
 
 		CaptureAppender captureAppender = new CaptureAppender(logger);
 

@@ -34,16 +34,16 @@ public class JDKLoggerTestUtil {
 	public static List<LogRecord> configureJDKLogger(String name, Level level) {
 		LogWrapper logWrapper = (LogWrapper)LogFactoryUtil.getLog(name);
 
-		Log log = logWrapper.getLog();
+		Log log = logWrapper.getWrappedLog();
 
 		if (!(log instanceof Jdk14LogImpl)) {
 			throw new IllegalStateException(
-				"Log " + name + " is not a jdk logger");
+				"Log " + name + " is not a JDK logger");
 		}
 
 		Jdk14LogImpl jdk14LogImpl = (Jdk14LogImpl)log;
 
-		Logger logger = jdk14LogImpl.getLog();
+		Logger logger = jdk14LogImpl.getWrappedLogger();
 
 		for (Handler handler : logger.getHandlers()) {
 			logger.removeHandler(handler);

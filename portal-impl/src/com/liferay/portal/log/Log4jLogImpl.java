@@ -65,7 +65,7 @@ public class Log4jLogImpl implements Log {
 		_logger.log(_FQCN, Level.FATAL, null, t);
 	}
 
-	public Logger getLog() {
+	public Logger getWrappedLogger() {
 		return _logger;
 	}
 

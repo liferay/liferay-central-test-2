@@ -62,7 +62,7 @@ public class Jdk14LogImpl implements Log {
 		_log.log(Level.SEVERE, t.getMessage(), t);
 	}
 
-	public Logger getLog() {
+	public Logger getWrappedLogger() {
 		return _log;
 	}
 

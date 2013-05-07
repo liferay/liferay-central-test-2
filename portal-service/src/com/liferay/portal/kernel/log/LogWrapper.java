@@ -104,7 +104,7 @@ public class LogWrapper implements Log {
 		}
 	}
 
-	public Log getLog() {
+	public Log getWrappedLog() {
 		return _log;
 	}
 
