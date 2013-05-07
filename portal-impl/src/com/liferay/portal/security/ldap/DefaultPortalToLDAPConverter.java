@@ -413,7 +413,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			user.getCompanyId(),
 			PropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
-		if (Validator.isNotNull(algorithm)) {
+		if (Validator.isNotNull(algorithm) && Validator.isNotNull(password)) {
 			try {
 				StringBundler sb = new StringBundler(4);
 
