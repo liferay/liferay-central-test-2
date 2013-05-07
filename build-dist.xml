@@ -741,10 +741,10 @@ release was successful.</echo>
 	</target>
 
 	<target name="prepare-generated-files">
-		<delete file="portal-impl/src/meta-inf/javadocs-all.xml" />
-		<delete file="portal-impl/src/meta-inf/javadocs-rt.xml" />
-		<delete file="portal-impl/classes/meta-inf/javadocs-all.xml" />
-		<delete file="portal-impl/classes/meta-inf/javadocs-rt.xml" />
+		<delete file="portal-impl/src/META-INF/javadocs-all.xml" />
+		<delete file="portal-impl/src/META-INF/javadocs-rt.xml" />
+		<delete file="portal-impl/classes/META-INF/javadocs-all.xml" />
+		<delete file="portal-impl/classes/META-INF/javadocs-rt.xml" />
 
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
 		<ant dir="portal-impl" target="build-lib-versions" inheritAll="false" />
