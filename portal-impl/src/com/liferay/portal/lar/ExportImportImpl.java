@@ -57,7 +57,7 @@ import java.util.regex.Pattern;
 /**
  * @author Zsolt Berentey
  */
-public class ExportImportImpl implements ExportImport  {
+public class ExportImportImpl implements ExportImport {
 
 	public String exportContentReferences(
 			PortletDataContext portletDataContext, Element entityElement,
@@ -78,20 +78,6 @@ public class ExportImportImpl implements ExportImport  {
 			content = StringUtil.replace(
 				content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 		}
-
-		return content;
-	}
-
-	public String importContentReferences(
-			PortletDataContext portletDataContext, Element entityElement,
-			String content)
-		throws Exception {
-
-		content = importLayoutReferences(portletDataContext, content);
-		content = importLinksToLayouts(portletDataContext, content);
-
-		content = importDLReferences(
-			portletDataContext, entityElement, content);
 
 		return content;
 	}
@@ -582,6 +568,20 @@ public class ExportImportImpl implements ExportImport  {
 		return content;
 	}
 
+	public String importContentReferences(
+			PortletDataContext portletDataContext, Element entityElement,
+			String content)
+		throws Exception {
+
+		content = importLayoutReferences(portletDataContext, content);
+		content = importLinksToLayouts(portletDataContext, content);
+
+		content = importDLReferences(
+			portletDataContext, entityElement, content);
+
+		return content;
+	}
+
 	public String importDLReferences(
 			PortletDataContext portletDataContext, Element entityElement,
 			String content)
@@ -771,6 +771,8 @@ public class ExportImportImpl implements ExportImport  {
 		return content;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(ExportImportImpl.class);
+
 	private static String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
 
@@ -780,13 +782,10 @@ public class ExportImportImpl implements ExportImport  {
 	private static String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
-	private static Log _log = LogFactoryUtil.getLog(ExportImportImpl.class);
-
 	private Pattern _exportLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
 	private Pattern _importLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)@(\\p{XDigit}{8}\\-" +
 		"(?:\\p{XDigit}{4}\\-){3}\\p{XDigit}{12})@([^\\]]*)\\]");
-
 
 }

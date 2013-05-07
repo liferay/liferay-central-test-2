@@ -19,14 +19,9 @@ import com.liferay.portal.kernel.xml.Element;
 /**
  * @author Zsolt Berentey
  */
-public interface ExportImport  {
+public interface ExportImport {
 
 	public String exportContentReferences(
-			PortletDataContext portletDataContext, Element entityElement,
-			String content)
-		throws Exception;
-
-	public String importContentReferences(
 			PortletDataContext portletDataContext, Element entityElement,
 			String content)
 		throws Exception;
@@ -41,6 +36,11 @@ public interface ExportImport  {
 
 	public String exportLinksToLayouts(
 			PortletDataContext portletDataContext, String content)
+		throws Exception;
+
+	public String importContentReferences(
+			PortletDataContext portletDataContext, Element entityElement,
+			String content)
 		throws Exception;
 
 	public String importDLReferences(

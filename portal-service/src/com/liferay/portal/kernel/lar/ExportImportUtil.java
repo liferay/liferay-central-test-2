@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.xml.Element;
 /**
  * @author Zsolt Berentey
  */
-public class ExportImportUtil  {
+public class ExportImportUtil {
 
 	public static String exportContentReferences(
 			PortletDataContext portletDataContext, Element entityElement,
@@ -28,15 +28,6 @@ public class ExportImportUtil  {
 		throws Exception {
 
 		return getExportImport().exportContentReferences(
-			portletDataContext, entityElement, content);
-	}
-
-	public static String importContentReferences(
-			PortletDataContext portletDataContext, Element entityElement,
-			String content)
-		throws Exception {
-
-		return getExportImport().importContentReferences(
 			portletDataContext, entityElement, content);
 	}
 
@@ -64,6 +55,21 @@ public class ExportImportUtil  {
 			portletDataContext, content);
 	}
 
+	public static ExportImport getExportImport() {
+		PortalRuntimePermission.checkGetBeanProperty(ExportImportUtil.class);
+
+		return _exportImport;
+	}
+
+	public static String importContentReferences(
+			PortletDataContext portletDataContext, Element entityElement,
+			String content)
+		throws Exception {
+
+		return getExportImport().importContentReferences(
+			portletDataContext, entityElement, content);
+	}
+
 	public static String importDLReferences(
 			PortletDataContext portletDataContext, Element entityElement,
 			String content)
@@ -87,12 +93,6 @@ public class ExportImportUtil  {
 
 		return getExportImport().importLinksToLayouts(
 			portletDataContext, content);
-	}
-
-	public static ExportImport getExportImport() {
-		PortalRuntimePermission.checkGetBeanProperty(ExportImportUtil.class);
-
-		return _exportImport;
 	}
 
 	public void setExportImport(ExportImport exportImport) {
