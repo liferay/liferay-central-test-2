@@ -140,7 +140,7 @@ public class SPIAgentFactoryUtilTest {
 		Assert.assertTrue(
 			spiAgentClassNames.contains(MockSPIAgent.class.getName()));
 
-		// Individual unregister/register
+		// Individual unregister and register
 
 		Assert.assertSame(
 			MockSPIAgent.class,
