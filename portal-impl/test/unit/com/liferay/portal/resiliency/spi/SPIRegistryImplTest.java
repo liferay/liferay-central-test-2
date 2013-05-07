@@ -62,14 +62,40 @@ public class SPIRegistryImplTest {
 	public void setUp() throws Exception {
 		_spiRegistryImpl = new SPIRegistryImpl();
 
-		_portletIdToSPIMap = _getPortletSPIs(_spiRegistryImpl);
-		_skipMappingPortletIds = _getExcludedPortletIds(_spiRegistryImpl);
-		_spiToPortletIdsMap = _getPortletIds(_spiRegistryImpl);
+		_excludedPortletIds = _getExcludedPortletIds(_spiRegistryImpl);
+		_portletIds = _getPortletIds(_spiRegistryImpl);
+		_portletSPIs = _getPortletSPIs(_spiRegistryImpl);
+	}
+
+	@Test
+	public void testExcludedPortletIds() {
+		Assert.assertSame(
+			_excludedPortletIds, _spiRegistryImpl.getExcludedPortletIds());
+
+		String portlet1 = "portlet1";
+
+		_spiRegistryImpl.addExcludedPortletId(portlet1);
+
+		Assert.assertEquals(1, _excludedPortletIds.size());
+		Assert.assertTrue(_excludedPortletIds.contains(portlet1));
+
+		String portlet2 = "portlet2";
+
+		SPI spi = new MockSPI();
+
+		_portletSPIs.put(portlet2, spi);
+
+		Assert.assertNull(_spiRegistryImpl.getPortletSPI(portlet1));
+		Assert.assertSame(spi, _spiRegistryImpl.getPortletSPI(portlet2));
+
+		_spiRegistryImpl.removeExcludedPortletId(portlet1);
+
+		Assert.assertTrue(_excludedPortletIds.isEmpty());
 	}
 
 	@AdviseWith(adviceClasses = {PortletLocalServiceUtilAdvice.class})
 	@Test
-	public void testRegisteration() throws Exception {
+	public void testRegistration() throws Exception {
 
 		// With log
 
@@ -102,18 +128,17 @@ public class SPIRegistryImplTest {
 
 		_spiRegistryImpl.registerSPI(mockSPI);
 
-		Assert.assertEquals(3, _portletIdToSPIMap.size());
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet1"));
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet3"));
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet4"));
+		Assert.assertEquals(3, _portletSPIs.size());
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet1"));
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet3"));
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet4"));
 		Assert.assertSame(
 			mockSPI, _spiRegistryImpl.getServletContextSPI("portletApp1"));
 		Assert.assertSame(
 			mockSPI, _spiRegistryImpl.getServletContextSPI("portletApp2"));
 		Assert.assertNull(_spiRegistryImpl.getServletContextSPI("portletApp3"));
 
-		List<String> portletIds = Arrays.asList(
-			_spiToPortletIdsMap.remove(mockSPI));
+		List<String> portletIds = Arrays.asList(_portletIds.remove(mockSPI));
 
 		Assert.assertTrue(portletIds.contains("portlet1"));
 		Assert.assertTrue(portletIds.contains("portlet3"));
@@ -139,12 +164,12 @@ public class SPIRegistryImplTest {
 
 		_spiRegistryImpl.registerSPI(mockSPI);
 
-		Assert.assertEquals(3, _portletIdToSPIMap.size());
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet1"));
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet3"));
-		Assert.assertEquals(mockSPI, _portletIdToSPIMap.remove("portlet4"));
+		Assert.assertEquals(3, _portletSPIs.size());
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet1"));
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet3"));
+		Assert.assertEquals(mockSPI, _portletSPIs.remove("portlet4"));
 
-		portletIds = Arrays.asList(_spiToPortletIdsMap.remove(mockSPI));
+		portletIds = Arrays.asList(_portletIds.remove(mockSPI));
 
 		Assert.assertTrue(portletIds.contains("portlet1"));
 		Assert.assertTrue(portletIds.contains("portlet3"));
@@ -164,7 +189,7 @@ public class SPIRegistryImplTest {
 		catch (RuntimeException re) {
 		}
 
-		_portletIdToSPIMap.clear();
+		_portletSPIs.clear();
 
 		// Unregister, normal
 
@@ -174,15 +199,15 @@ public class SPIRegistryImplTest {
 
 		_spiRegistryImpl.unregisterSPI(mockSPI);
 
-		Assert.assertTrue(_spiToPortletIdsMap.isEmpty());
-		Assert.assertTrue(_portletIdToSPIMap.isEmpty());
+		Assert.assertTrue(_portletIds.isEmpty());
+		Assert.assertTrue(_portletSPIs.isEmpty());
 
 		// Unregister, again
 
 		_spiRegistryImpl.unregisterSPI(mockSPI);
 
-		Assert.assertTrue(_spiToPortletIdsMap.isEmpty());
-		Assert.assertTrue(_portletIdToSPIMap.isEmpty());
+		Assert.assertTrue(_portletIds.isEmpty());
+		Assert.assertTrue(_portletSPIs.isEmpty());
 
 		// Hash failure
 
@@ -195,31 +220,6 @@ public class SPIRegistryImplTest {
 		}
 		catch (RuntimeException re) {
 		}
-	}
-
-	@Test
-	public void testSkipMappingPortletIds() {
-		Assert.assertSame(
-			_skipMappingPortletIds, _spiRegistryImpl.getExcludedPortletIds());
-
-		String portlet1 = "portlet1";
-
-		_spiRegistryImpl.addExcludedPortletId(portlet1);
-
-		Assert.assertEquals(1, _skipMappingPortletIds.size());
-		Assert.assertTrue(_skipMappingPortletIds.contains(portlet1));
-
-		String portlet2 = "portlet2";
-		SPI spi = new MockSPI();
-
-		_portletIdToSPIMap.put(portlet2, spi);
-
-		Assert.assertNull(_spiRegistryImpl.getPortletSPI(portlet1));
-		Assert.assertSame(spi, _spiRegistryImpl.getPortletSPI(portlet2));
-
-		_spiRegistryImpl.removeExcludedPortletId(portlet1);
-
-		Assert.assertTrue(_skipMappingPortletIds.isEmpty());
 	}
 
 	@Aspect
@@ -257,7 +257,8 @@ public class SPIRegistryImplTest {
 		final List<String> portletIds) {
 
 		return (PortletApp)ProxyUtil.newProxyInstance(
-			PortletApp.class.getClassLoader(), new Class<?>[]{PortletApp.class},
+			PortletApp.class.getClassLoader(),
+			new Class<?>[] {PortletApp.class},
 			new InvocationHandler() {
 
 				@Override
@@ -279,12 +280,13 @@ public class SPIRegistryImplTest {
 
 					throw new UnsupportedOperationException();
 				}
+
 			});
 	}
 
 	private static Portlet _createPortletProxy(final String portletId) {
 		return (Portlet)ProxyUtil.newProxyInstance(
-			Portlet.class.getClassLoader(), new Class<?>[]{Portlet.class},
+			Portlet.class.getClassLoader(), new Class<?>[] {Portlet.class},
 			new InvocationHandler() {
 
 				@Override
@@ -299,6 +301,7 @@ public class SPIRegistryImplTest {
 
 					throw new UnsupportedOperationException();
 				}
+
 			});
 	}
 
@@ -332,9 +335,9 @@ public class SPIRegistryImplTest {
 		return (Map<String, SPI>)portletSPIsField.get(spiRegistryImpl);
 	}
 
-	private Map<String, SPI> _portletIdToSPIMap;
-	private Set<String> _skipMappingPortletIds;
+	private Set<String> _excludedPortletIds;
+	private Map<SPI, String[]> _portletIds;
+	private Map<String, SPI> _portletSPIs;
 	private SPIRegistryImpl _spiRegistryImpl;
-	private Map<SPI, String[]> _spiToPortletIdsMap;
 
 }
