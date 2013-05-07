@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.ExportImport;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
+import com.liferay.portal.kernel.lar.ExportImportUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -64,10 +65,12 @@ public class ExportImportImpl implements ExportImport {
 			String content)
 		throws Exception {
 
-		content = exportLayoutReferences(portletDataContext, content);
-		content = exportLinksToLayouts(portletDataContext, content);
+		content = ExportImportUtil.exportLayoutReferences(
+			portletDataContext, content);
+		content = ExportImportUtil.exportLinksToLayouts(
+			portletDataContext, content);
 
-		content = exportDLReferences(
+		content = ExportImportUtil.exportDLReferences(
 			portletDataContext, entityElement, content);
 
 		Element groupElement = entityElement.getParent();
@@ -573,10 +576,12 @@ public class ExportImportImpl implements ExportImport {
 			String content)
 		throws Exception {
 
-		content = importLayoutReferences(portletDataContext, content);
-		content = importLinksToLayouts(portletDataContext, content);
+		content = ExportImportUtil.importLayoutReferences(
+			portletDataContext, content);
+		content = ExportImportUtil.importLinksToLayouts(
+			portletDataContext, content);
 
-		content = importDLReferences(
+		content = ExportImportUtil.importDLReferences(
 			portletDataContext, entityElement, content);
 
 		return content;
