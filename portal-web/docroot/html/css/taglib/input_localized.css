@@ -1,34 +1,32 @@
+@import "compass";
+
 .input-localized {
 	.palette-item {
-	    border: 0;
+		border-width: 0;
 	}
 
 	.palette-item-inner {
-	    height: 11px;
-	    width: 16px;
+		height: 11px;
+		width: 16px;
 
-	    img {
-    	    display: block;
-    	}
+		img {
+			display: block;
+		}
 	}
 
-	.palette-item,
-	.palette-item-inner,
-	.palette-item-hover,
-	.palette-item-hover .palette-item-inner {
-	    border-color: transparent;
+	.palette-item, .palette-item-inner, .palette-item-hover, .palette-item-hover .palette-item-inner {
+		border-color: transparent;
 	}
 
 	.lfr-input-localized-flag {
-	    opacity: 0.15;
+		@include opacity(0.15);
 	}
 
-	.palette-item-selected .lfr-input-localized-flag,
-	.palette-item-hover .lfr-input-localized-flag {
-	    opacity: 1;
+	.palette-item-selected .lfr-input-localized-flag, .palette-item-hover .lfr-input-localized-flag {
+		@include opacity(1);
 	}
 
 	.palette-container {
-	    margin-bottom: 12px;
+		margin-bottom: 12px;
 	}
 }

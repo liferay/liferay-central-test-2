@@ -41,7 +41,7 @@ AUI.add(
 
 					instance._ensureDefaultId(config);
 
-					var modal = instance._fetchOrCreateWindow(config);
+					var modal = instance._getWindow(config);
 
 					instance._setWindowDefaultSizeIfNeeded(modal);
 
@@ -145,7 +145,7 @@ AUI.add(
 					config.iframeId = config.id + instance.IFRAME_SUFFIX;
 				},
 
-				_fetchOrCreateWindow: function(config) {
+				_getWindow: function(config) {
 					var instance = this;
 
 					var id = config.id;

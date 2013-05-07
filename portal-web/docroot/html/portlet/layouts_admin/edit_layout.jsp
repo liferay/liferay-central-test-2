@@ -293,9 +293,7 @@ String[][] categorySections = {mainSections};
 					var layoutToolbar = new A.Toolbar(
 						{
 							boundingBox: buttonRow,
-							children: [
-								layoutToolbarButtonGroup
-							]
+							children: [layoutToolbarButtonGroup]
 						}
 					).render();
 

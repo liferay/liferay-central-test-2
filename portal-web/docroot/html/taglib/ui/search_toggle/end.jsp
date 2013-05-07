@@ -22,71 +22,67 @@
 </div>
 
 <aui:script position="inline" use="aui-popover,event-key">
-var popover;
+	var popover;
 
-var simpleNode = A.one('#<%= id %>simple');
+	var simpleNode = A.one('#<%= id %>simple');
+	var advancedNode = A.one('#<%= id %>advanced');
+	var toggleAdvancedNode = A.one('#<%= id %>toggleAdvanced');
+	var keywordsNode = A.one('#<%= id + displayTerms.KEYWORDS %>');
 
-var advancedNode = A.one('#<%= id %>advanced');
-
-var toggleAdvancedNode = A.one('#<%= id %>toggleAdvanced');
-
-var keywordsNode = A.one('#<%= id + displayTerms.KEYWORDS %>');
-
-function enableOrDisableElements(event) {
-	simpleNode.all('input').set('disabled', event.newVal);
-	advancedNode.all('input').set('disabled', !event.newVal);
-}
-
-function fetchOrCreatePopover() {
-	if (!popover) {
-		popover = new A.Popover(
-			{
-				after: {
-					visibleChange: enableOrDisableElements
-				},
-				align: {
-					node: toggleAdvancedNode,
-					points:[A.WidgetPositionAlign.TR, A.WidgetPositionAlign.BR]
-				},
-				bodyContent: A.one('#<%= id %>advancedBodyNode'),
-				boundingBox: advancedNode,
-				srcNode: '#<%= id %>advancedContent',
-				visible: false,
-				width: 500,
-				zIndex: Liferay.zIndex.ALERT
-			}
-		);
+	function enableOrDisableElements(event) {
+		simpleNode.all('input').set('disabled', event.newVal);
+		advancedNode.all('input').set('disabled', !event.newVal);
 	}
 
-	return popover;
-}
-
-function togglePopover(event) {
-	popover = fetchOrCreatePopover().render();
-
-	var visible = popover.get('visible');
-
-	popover.set('visible', !visible);
-
-	if (visible) {
-		keywordsNode.focus();
-	}
-	else {
-		var inputTextNode = advancedNode.one('input[type=text]');
-
-		if (inputTextNode) {
-			inputTextNode.focus();
+	function getPopover() {
+		if (!popover) {
+			popover = new A.Popover(
+				{
+					after: {
+						visibleChange: enableOrDisableElements
+					},
+					align: {
+						node: toggleAdvancedNode,
+						points:[A.WidgetPositionAlign.TR, A.WidgetPositionAlign.BR]
+					},
+					bodyContent: A.one('#<%= id %>advancedBodyNode'),
+					boundingBox: advancedNode,
+					srcNode: '#<%= id %>advancedContent',
+					visible: false,
+					width: 500,
+					zIndex: Liferay.zIndex.ALERT
+				}
+			);
 		}
+
+		return popover;
 	}
 
-	var advancedSearchNode = advancedNode.one('#<%= id + displayTerms.ADVANCED_SEARCH %>');
+	function togglePopover(event) {
+		popover = getPopover().render();
 
-	advancedSearchNode.val(!visible);
+		var visible = popover.get('visible');
 
-	event.preventDefault();
-}
+		popover.set('visible', !visible);
 
-toggleAdvancedNode.on('click', togglePopover);
+		if (visible) {
+			keywordsNode.focus();
+		}
+		else {
+			var inputTextNode = advancedNode.one('input[type=text]');
 
-keywordsNode.on('key', togglePopover, 'down:38,40');
+			if (inputTextNode) {
+				inputTextNode.focus();
+			}
+		}
+
+		var advancedSearchNode = advancedNode.one('#<%= id + displayTerms.ADVANCED_SEARCH %>');
+
+		advancedSearchNode.val(!visible);
+
+		event.preventDefault();
+	}
+
+	toggleAdvancedNode.on('click', togglePopover);
+	keywordsNode.on('key', togglePopover, 'down:38,40');
 </aui:script>

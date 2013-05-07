@@ -1050,9 +1050,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		var fileEntryToolbar = new A.Toolbar(
 			{
 				boundingBox: buttonRow,
-				children: [
-					fileEntryButtonGroup
-				]
+				children: [fileEntryButtonGroup]
 			}
 		).render();
 

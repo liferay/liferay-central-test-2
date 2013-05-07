@@ -360,9 +360,7 @@
 		var entryToolbar = new A.Toolbar(
 			{
 				boundingBox: buttonRow,
-				children: [
-					entryToolbarGroup
-				]
+				children: [entryToolbarGroup]
 			}
 		).render();
 

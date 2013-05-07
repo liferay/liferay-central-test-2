@@ -150,9 +150,7 @@ if ((article != null) && article.isDraft()) {
 	new A.Toolbar(
 		{
 			boundingBox: '#<portlet:namespace />articleToolbar',
-			children: [
-				toolbarButtonGroup
-			]
+			children: [toolbarButtonGroup]
 		}
 	).render();
 </aui:script>

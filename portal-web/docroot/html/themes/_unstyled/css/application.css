@@ -1,20 +1,4 @@
-/* ---------- Main ---------- */
-
-.results-grid {
-}
-
-.context-pane-content .results-grid {
-}
-
-.taglib-search-iterator .results-row {
-	td, th {
-		&.first {
-		}
-
-		&.last {
-		}
-	}
-}
+@import "compass";
 
 /* ---------- Dragging/sorting indicators ---------- */
 
@@ -28,17 +12,20 @@
 }
 
 .portlet-boundary.yui3-dd-dragging {
+
 	.portlet {
 	}
 }
 
 .sortable-layout-proxy {
+
 	.portlet-topper {
 	}
 }
 
 .proxy {
 	&.generic-portlet {
+
 		.portlet-title {
 		}
 	}
@@ -67,6 +54,7 @@
 /* ---------- Tags ---------- */
 
 .tagselector-content {
+
 	.textboxlistentry-holder {
 	}
 }
@@ -76,9 +64,6 @@
 	}
 
 	.field .field-content {
-	}
-
-	.toolbar {
 	}
 
 	.textboxlist-input-container {
@@ -94,6 +79,7 @@
 /* ---------- Tag cloud and tag list ---------- */
 
 .tag-items {
+
 	li {
 	}
 
@@ -105,11 +91,11 @@
 }
 
 .tag-cloud {
-	.tag-asset-count {
-	}
+
 
 	@for $i from 1 through 6 {
 		.tag-popularity-#{$i} {
+			/*font-size: $tag-popularity-font-size + ($i * 0.3);*/
 		}
 	}
 }
@@ -117,6 +103,7 @@
 /* ---------- Underlay ---------- */
 
 .underlay {
+
 	.yui3-widget-hd {
 	}
 
@@ -174,33 +161,38 @@
 
 .lfr-page-templates li {
 	a {
+
 		label {
 		}
 	}
 }
 
 .menu {
+
 	.notice-message {
 	}
 }
 
 .menu-content {
+
 	li {
+
 		.disabled {
 		}
 	}
 }
 
-.menu-content, .lfr-menu-list ul {
+.menu-content {
 }
 
 .menugroup-content .menu-label {
 }
 
-.menugroup-content ul, .lfr-menu-list ul ul {
+.menugroup-content ul {
 }
 
-.menu-content li, .lfr-menu-list ul li {
+.menu-content li {
+
 	&.first {
 	}
 
@@ -208,24 +200,10 @@
 	}
 }
 
-.menu-content li a, .lfr-menu-list ul li .taglib-icon, .menu-content li .disabled {
+.menu-content li a, .menu-content li .disabled {
 }
 
-.lfr-menu-list ul li.disabled .taglib-icon {
-}
-
-.menu-content li a.focus, .lfr-menu-expanded li a:focus, .lfr-menu-list ul .taglib-icon.focus {
-}
-
-.menu-content a, .lfr-menu-list li .taglib-icon, .menu-content .disabled {
-}
-
-/* ---------- Toolbar ---------- */
-
-.toolbar li {
-}
-
-.toolbar-separator {
+.menu-content li a.focus, .lfr-menu-expanded li a:focus {
 }
 
 /* ---------- Loading Mask ---------- */
@@ -247,6 +225,7 @@
 }
 
 .customizable-layout-column-content {
+
 	&.yui3-widget-content-expanded {
 	}
 }
@@ -255,6 +234,8 @@
 }
 
 .layout-customizable-controls {
+
+
 }
 
 /* ---------- Pagination ---------- */
@@ -292,13 +273,12 @@
 /* ---------- Application Column View ---------- */
 
 .lfr-app-column-view {
-	.layout-content {
-	}
 
 	.column:before {
 	}
 
 	.column-content {
+
 		.lfr-message-response {
 		}
 	}
@@ -307,29 +287,36 @@
 /* ---------- Header row ---------- */
 
 .lfr-header-row {
-	.toolbar {
-		.toolbar-content {
+}
+
+/* ---------- Inline editing ---------- */
+
+.lfr-editable {
+
+
+	&:after {
+	}
+
+	&:focus {
+		&:after {
 		}
 
-		.toolbar-item {
+		&:hover {
 		}
+	}
 
-		.toolbar-last {
+	&:hover {
+
+		&:after {
 		}
 	}
 }
 
+.lfr-editable-notice-close {
+}
+
 .ie {
-	.portlet-boundary.yui3-dd-dragging {
-	}
-
-	.proxy {
-	}
-
 	.proxy.not-intersecting .forbidden-action {
-	}
-
-	.layout-customizable-controls {
 	}
 }
 
@@ -344,15 +331,5 @@
 	}
 
 	.paginator-current-page {
-	}
-}
-
-.ie6, .ie7 {
-	.toolbar li {
-	}
-
-	.lfr-header-row .buttonitem-content {
-		.buttonitem-label {
-		}
 	}
 }

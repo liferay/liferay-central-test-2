@@ -1,7 +1,5 @@
 @import "compass";
 
-/* ---------- Main ---------- */
-
 /* ---------- Dragging/sorting indicators ---------- */
 
 .portlet-layout.dragging {
@@ -340,8 +338,6 @@
 	color: #FFF;
 	text-shadow: -1px -1px #2C2F34;
 }
-
-/* ---------- Toolbar ---------- */
 
 /* ---------- Loading Mask ---------- */
 

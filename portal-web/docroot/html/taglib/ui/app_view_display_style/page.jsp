@@ -83,9 +83,7 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 		displayStyleToolbar = new A.Toolbar(
 			{
 				boundingBox: buttonRow,
-				children: [
-					displayStyleButtonGroup
-				]
+				children: [displayStyleButtonGroup]
 			}
 		).render();
 

@@ -15,11 +15,7 @@
 --%>
 
 <%@ include file="/html/taglib/ui/search_toggle/init.jsp" %>
-<style>
-	.taglib-search-toggle .popover .arrow {
-		left: 70%;
-	}
-</style>
+
 <div class="taglib-search-toggle">
 	<div class="form-search">
 		<div class="input-append" id="<%= id %>simple">

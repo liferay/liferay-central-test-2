@@ -460,9 +460,7 @@ AUI.add(
 
 						instance.icons = new A.Toolbar(
 							{
-								children: [
-									buttonGroup
-								]
+								children: [buttonGroup]
 							}
 						).render(contentBox);
 

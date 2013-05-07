@@ -15,28 +15,30 @@
 --%>
 
 <aui:script use="aui-toggler,liferay-store">
-	new A.TogglerDelegate({
-		animated: true,
-		container: '#<%= id %>',
-		content: '.toggler-content',
-		header: '.toggler-header',
-		on: {
-			'toggler:expandedChange': function(event) {
-				var header = event.target.get('header');
+	new A.TogglerDelegate(
+		{
+			animated: true,
+			container: '#<%= id %>',
+			content: '.toggler-content',
+			header: '.toggler-header',
+			on: {
+				'toggler:expandedChange': function(event) {
+					var header = event.target.get('header');
 
-				var persistId = header.getData('persist-id');
+					var persistId = header.getData('persist-id');
 
-				if (persistId) {
-					var data = {};
+					if (persistId) {
+						var data = {};
 
-					data[persistId] = event.newVal ? "open" : "closed";
+						data[persistId] = event.newVal ? 'open' : 'closed';
 
-					Liferay.Store(data);
+						Liferay.Store(data);
+					}
 				}
+			},
+			transition: {
+				duration: .3
 			}
-		},
-		transition: {
-			duration: .3
 		}
-	});
+	);
 </aui:script>

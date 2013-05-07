@@ -18,13 +18,13 @@
 
 <div class="accordion-group <%= cssClass %>" id="<%= id %>">
 	<div class="accordion-heading <%= headerCssClass %>" data-persist-id="<%= persistState ? id : StringPool.BLANK %>">
-		<a class="accordion-toggle" href="#<%= id %>Content">
+		<div class="accordion-toggle">
 			<liferay-ui:message key="<%= title %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 				<liferay-ui:icon-help message="<%= helpMessage %>" />
 			</c:if>
-		</a>
+		</div>
 	</div>
 	<div class="<%= contentCssClass %>" id="<%= id %>Content">
 		<div class="accordion-inner">

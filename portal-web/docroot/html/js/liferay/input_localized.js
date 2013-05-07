@@ -1,19 +1,16 @@
 AUI.add(
 	'liferay-input-localized',
 	function(A) {
-
 		var defaultLanguageId = themeDisplay.getLanguageId();
 
 		var availableLanguages = Liferay.Language.available;
 
 		var availableLanguageIds = A.Array.dedupe(
-			[ defaultLanguageId ].concat(A.Object.keys(availableLanguages))
+			[defaultLanguageId].concat(A.Object.keys(availableLanguages))
 		);
 
 		var InputLocalized = A.Component.create(
 			{
-				NAME: 'input-localized',
-
 				ATTRS: {
 					animateClass: {
 						value: 'highlight-animation'
@@ -38,25 +35,23 @@ AUI.add(
 
 				EXTENDS: A.Palette,
 
+				NAME: 'input-localized',
+
 				prototype: {
 					BOUNDING_TEMPLATE: '<span />',
 
 					INPUT_HIDDEN_TEMPLATE: '<input id="{inputNamespace}{value}" name="{inputNamespace}{value}" type="hidden" value="" />',
 
-					ITEM_TEMPLATE:  '<td class="palette-item {selectedClassName}" data-column={column} data-index={index} data-row={row} data-value="{value}">' +
-										'<a href="" class="palette-item-inner" onclick="return false;">' +
-											'<img class="lfr-input-localized-flag" data-languageId="{value}" src="' + themeDisplay.getPathThemeImages() + '/language/{value}.png" />' +
-										'</a>' +
-									'</td>',
+					ITEM_TEMPLATE: '<td class="palette-item {selectedClassName}" data-column={column} data-index={index} data-row={row} data-value="{value}">' +
+						'<a href="" class="palette-item-inner" onclick="return false;">' +
+							'<img class="lfr-input-localized-flag" data-languageId="{value}" src="' + themeDisplay.getPathThemeImages() + '/language/{value}.png" />' +
+						'</a>' +
+					'</td>',
 
-					TOOLTIP_TEMPLATE:   '<div class="tooltip top">' +
-											'<div class="tooltip-arrow"></div>' +
-											'<div class="tooltip-inner"></div>' +
-										'</div>',
-
-					_animating: null,
-					_flags: null,
-					_tooltip: null,
+					TOOLTIP_TEMPLATE: '<div class="tooltip top">' +
+						'<div class="tooltip-arrow"></div>' +
+						'<div class="tooltip-inner"></div>' +
+					'</div>',
 
 					initializer: function() {
 						var instance = this;
@@ -74,7 +69,7 @@ AUI.add(
 							}
 						);
 
-						inputPlaceholder.on('input', A.debounce(instance._onInputValueChange, 100), instance);
+						inputPlaceholder.on('input', A.debounce('_onInputValueChange', 100, instance));
 					},
 
 					getSelectedLanguageId: function() {
@@ -95,7 +90,7 @@ AUI.add(
 					hideTooltip: function() {
 						var instance = this;
 
-						var tooltip = instance._fetchOrCreateTooltip();
+						var tooltip = instance._getTooltip();
 
 						tooltip.setStyle('opacity', 0);
 					},
@@ -109,7 +104,7 @@ AUI.add(
 					showTooltip: function(alignNode, content) {
 						var instance = this;
 
-						var tooltip = instance._fetchOrCreateTooltip();
+						var tooltip = instance._getTooltip();
 
 						tooltip.one('.tooltip-inner').html(content);
 
@@ -118,10 +113,12 @@ AUI.add(
 
 						tooltip.setStyle('opacity', 0.7);
 
-						tooltip.setXY([
-							nodeRegion.left + nodeRegion.width/2 - tooltipRegion.width/2,
-							nodeRegion.top - tooltipRegion.height
-						]);
+						tooltip.setXY(
+							[
+								nodeRegion.left + nodeRegion.width/2 - tooltipRegion.width/2,
+								nodeRegion.top - tooltipRegion.height
+							]
+						);
 					},
 
 					_afterRenderUI: function() {
@@ -138,26 +135,26 @@ AUI.add(
 						var animateClass = instance.get('animateClass');
 
 						if (!animateClass) {
-							return;
+							input.removeClass(animateClass);
+
+							clearTimeout(instance._animating);
+
+							setTimeout(
+								function() {
+									input.addClass(animateClass).focus();
+								},
+								0
+							);
+
+							instance._animating = setTimeout(
+								function() {
+									input.removeClass(animateClass);
+
+									clearTimeout(instance._animating);
+								},
+								700
+							);
 						}
-
-						input.removeClass(animateClass);
-						clearTimeout(instance._animating);
-
-						setTimeout(
-							function() {
-								input.addClass(animateClass).focus();
-							},
-							0
-						);
-
-						instance._animating = setTimeout(
-							function() {
-								input.removeClass(animateClass);
-								clearTimeout(instance._animating);
-							},
-							700
-						);
 					},
 
 					_clearFormValidator: function(input) {
@@ -176,11 +173,10 @@ AUI.add(
 						}
 					},
 
-					_fetchOrCreateInputLanguage: function(languageId) {
+					_getInputLanguage: function(languageId) {
 						var instance = this;
 
 						var boundingBox = instance.get('boundingBox');
-
 						var inputNamespace = instance.get('inputNamespace');
 
 						var inputLanguage = boundingBox.one('#' + inputNamespace + languageId);
@@ -202,13 +198,13 @@ AUI.add(
 						return inputLanguage;
 					},
 
-					_fetchOrCreateTooltip: function() {
+					_getTooltip: function() {
 						var instance = this;
 
 						var tooltip = instance._tooltip;
 
 						if (!tooltip) {
-							tooltip = instance._tooltip = A.Node.create(instance.TOOLTIP_TEMPLATE).appendTo('body');
+							tooltip = instance._tooltip = A.Node.create(instance.TOOLTIP_TEMPLATE).appendTo(A.getBody());
 						}
 
 						return tooltip;
@@ -230,7 +226,7 @@ AUI.add(
 
 						var selectedLanguageId = instance.getSelectedLanguageId();
 
-						var inputLanguage = instance._fetchOrCreateInputLanguage(selectedLanguageId);
+						var inputLanguage = instance._getInputLanguage(selectedLanguageId);
 
 						instance.showFlags();
 
@@ -252,22 +248,25 @@ AUI.add(
 					_onSelectFlag: function(event) {
 						var instance = this;
 
-						if (event.domEvent) {
-							return;
+						if (!event.domEvent) {
+							var inputPlaceholder = instance.get('inputPlaceholder');
+
+							var inputLanguage = instance._getInputLanguage(event.value);
+
+							var defaultInputLanguage = instance._getInputLanguage(defaultLanguageId);
+
+							inputPlaceholder.val(inputLanguage.val());
+
+							inputPlaceholder.attr('placeholder', defaultInputLanguage.val());
+
+							instance._animate(inputPlaceholder);
+							instance._clearFormValidator(inputPlaceholder);
 						}
+					},
 
-						var inputPlaceholder = instance.get('inputPlaceholder');
-
-						var inputLanguage = instance._fetchOrCreateInputLanguage(event.value);
-
-						var defaultInputLanguage = instance._fetchOrCreateInputLanguage(defaultLanguageId);
-
-						inputPlaceholder.val(inputLanguage.val());
-						inputPlaceholder.attr('placeholder', defaultInputLanguage.val());
-
-						instance._animate(inputPlaceholder);
-						instance._clearFormValidator(inputPlaceholder);
-					}
+					_animating: null,
+					_flags: null,
+					_tooltip: null
 				},
 
 				_handleDoc: null,
@@ -287,15 +286,17 @@ AUI.add(
 					var instance = this;
 
 					var input = event.currentTarget;
-					var inputId = input.attr('id');
-					var config = InputLocalized._registered[inputId];
+
+					var id = input.attr('id');
+
+					var config = InputLocalized._registered[id];
 
 					if (config) {
 						var inputLocalized = new InputLocalized(config).render();
 
 						inputLocalized._onDocFocus(event);
 
-						delete InputLocalized._registered[inputId];
+						delete InputLocalized._registered[id];
 					}
 				}
 			}
