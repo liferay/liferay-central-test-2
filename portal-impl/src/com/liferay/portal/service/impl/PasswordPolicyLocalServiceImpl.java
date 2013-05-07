@@ -186,7 +186,7 @@ public class PasswordPolicyLocalServiceImpl
 		}
 	}
 
-	public void deleteNonDefaultPasswordPolicies(long companyId)
+	public void deleteNondefaultPasswordPolicies(long companyId)
 		throws PortalException, SystemException {
 
 		List<PasswordPolicy> passwordPolicies =

@@ -78,23 +78,21 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 		ActionableDynamicQuery userGroupActionableDynamicQuery =
 			new UserGroupActionableDynamicQuery() {
 
-				@Override
-				protected void addCriteria(DynamicQuery dynamicQuery) {
-					portletDataContext.addDateRangeCriteria(
-						dynamicQuery, "modifiedDate");
-				}
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				portletDataContext.addDateRangeCriteria(
+					dynamicQuery, "modifiedDate");
+			}
 
-				@Override
-				protected void performAction(Object object)
-					throws PortalException {
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				UserGroup userGroup = (UserGroup)object;
 
-					UserGroup userGroup = (UserGroup)object;
+				StagedModelDataHandlerUtil.exportStagedModel(
+					portletDataContext, userGroup);
+			}
 
-					StagedModelDataHandlerUtil.exportStagedModel(
-						portletDataContext, userGroup);
-				}
-
-			};
+		};
 
 		userGroupActionableDynamicQuery.performActions();
 
