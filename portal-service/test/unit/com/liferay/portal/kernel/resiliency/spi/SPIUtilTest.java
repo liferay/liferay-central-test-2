@@ -60,7 +60,6 @@ public class SPIUtilTest {
 		attributes.put(SPI.SPI_INSTANCE_PUBLICATION_KEY, mockSPI);
 
 		Assert.assertTrue(SPIUtil.isSPI());
-
 		Assert.assertSame(mockSPI, SPIUtil.getSPI());
 	}
 
