@@ -148,7 +148,7 @@ AUI.add(
 							}
 
 							if (event.categoryVisible === false) {
-								sessionData[instance.get('persistenceCategory')] = false;
+								sessionData[instance.get('persistenceCategory')] = true;
 							}
 
 							sessionData[instance.get('id')] = messageVisible;
