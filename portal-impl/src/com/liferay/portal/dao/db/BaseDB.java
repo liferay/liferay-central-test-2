@@ -792,33 +792,16 @@ public abstract class BaseDB implements DB {
 		if (_log.isDebugEnabled()) {
 			StringBundler sb = new StringBundler(18);
 
-			sb.append("\n------------[ SQLException details ]------------\n");
-			sb.append("Failing SQL:\n");
-
+			sb.append("SQL: ");
 			sb.append(sql);
-			sb.append(StringPool.NEW_LINE);
-			sb.append(StringPool.NEW_LINE);
-
-			sb.append("Standard SQLSTATE: ");
+			sb.append("\nSQL state: ");
 			sb.append(sqle.getSQLState());
-			sb.append(StringPool.NEW_LINE);
-
-			sb.append("Vendor type: ");
-			sb.append(getType().toUpperCase());
-			sb.append(StringPool.NEW_LINE);
-
-			sb.append("Vendor error code: ");
+			sb.append("\nVendor: ");
+			sb.append(getType());
+			sb.append("\nVendor error code: ");
 			sb.append(sqle.getErrorCode());
-			sb.append(StringPool.NEW_LINE);
-
-			sb.append("Vendor error message: ");
+			sb.append("\nVendor error message: ");
 			sb.append(sqle.getMessage());
-
-			if (!sqle.getMessage().endsWith(StringPool.NEW_LINE)) {
-				sb.append(StringPool.NEW_LINE);
-			}
-
-			sb.append("------------[ SQLException details ]------------");
 
 			_log.debug(sb.toString());
 		}
