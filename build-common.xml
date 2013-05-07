@@ -794,8 +794,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</if>
 
 		<ant target="test-cmd">
-			<property name="test.type" value="${test.type}" />
 			<property name="junit.forkmode" value="once" />
+			<property name="test.type" value="${test.type}" />
 		</ant>
 
 		<antcall target="report-test-coverage">
@@ -854,16 +854,16 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<var name="class" value="*Test" />
 
 		<ant target="test-cmd">
+			<property name="junit.forkmode" value="once" />
 			<property name="test.excludes" value="**/*PersistenceTest.class" />
 			<property name="test.type" value="integration" />
-			<property name="junit.forkmode" value="once" />
 		</ant>
 
 		<var name="class" value="*PersistenceTest" />
 
 		<ant target="test-cmd">
-			<property name="test.type" value="integration" />
 			<property name="junit.forkmode" value="once" />
+			<property name="test.type" value="integration" />
 		</ant>
 
 		<antcall target="report-test-coverage">
@@ -896,8 +896,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<property name="class" value="*Test" />
 
 		<ant target="test-cmd">
-			<property name="test.type" value="unit" />
 			<property name="junit.forkmode" value="perTest" />
+			<property name="test.type" value="unit" />
 		</ant>
 
 		<antcall target="report-test-coverage" >
