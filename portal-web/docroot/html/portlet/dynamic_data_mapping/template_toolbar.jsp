@@ -90,6 +90,7 @@ long classPK = ParamUtil.getLong(request, "classPK");
 				%>
 
 					<aui:nav-item dropdown="<%= true %>" iconClass="icon-plus" label="add">
+
 						<liferay-portlet:renderURL varImpl="addPortletDisplayTemplateURL">
 							<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 							<portlet:param name="redirect" value="<%= redirect %>" />
@@ -106,7 +107,10 @@ long classPK = ParamUtil.getLong(request, "classPK");
 							addPortletDisplayTemplateURL.setParameter("ddmResource", templateHandler.getResourceName());
 						%>
 
-							<aui:nav-item href="<%= addPortletDisplayTemplateURL.toString() %>" label="<%= templateHandler.getName(locale) %>" />
+							<aui:nav-item 
+								href="<%= addPortletDisplayTemplateURL.toString() %>"
+								iconClass="icon-list-alt"
+								label="<%= templateHandler.getName(locale) %>" />
 
 						<%
 						}
