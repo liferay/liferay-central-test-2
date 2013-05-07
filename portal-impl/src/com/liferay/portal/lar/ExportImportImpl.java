@@ -106,28 +106,29 @@ public class ExportImportImpl implements ExportImport {
 
 		String contextPath = PortalUtil.getPathContext();
 
-		String[] dlRefs = new String[] {
+		String[] patterns = {
 			contextPath.concat("/c/document_library/get_file?"),
 			contextPath.concat("/documents/"),
 			contextPath.concat("/image/image_gallery?")
 		};
 
-		int endPos = content.length();
 		int beginPos = -1;
+		int endPos = content.length();
 
 		while (true) {
-			beginPos = StringUtil.lastIndexOfAny(content, dlRefs, endPos);
+			beginPos = StringUtil.lastIndexOfAny(content, patterns, endPos);
 
 			if (beginPos == -1) {
 				break;
 			}
 
-			Map<String, String[]> refParameters = getDLReferenceParameters(
-				portletDataContext, content, beginPos + contextPath.length(),
-				endPos);
+			Map<String, String[]> dlReferenceParameters =
+				getDLReferenceParameters(
+					portletDataContext, content,
+					beginPos + contextPath.length(), endPos);
 
 			FileEntry fileEntry = getFileEntry(
-				portletDataContext, refParameters);
+				portletDataContext, dlReferenceParameters);
 
 			if (fileEntry == null) {
 				endPos = beginPos - 1;
@@ -135,7 +136,7 @@ public class ExportImportImpl implements ExportImport {
 				continue;
 			}
 
-			endPos = MapUtil.getInteger(refParameters, "endPos");
+			endPos = MapUtil.getInteger(dlReferenceParameters, "endPos");
 
 			try {
 				StagedModelDataHandlerUtil.exportStagedModel(
@@ -174,7 +175,7 @@ public class ExportImportImpl implements ExportImport {
 
 		StringBuilder sb = new StringBuilder(content);
 
-		String[] patterns = new String[] {"href=", "[["};
+		String[] patterns = {"href=", "[["};
 
 		int beginPos = -1;
 		int endPos = content.length();
@@ -201,7 +202,8 @@ public class ExportImportImpl implements ExportImport {
 			}
 
 			endPos = StringUtil.indexOfAny(
-				content, _LAYOUT_REF_STOP_CHARS, beginPos + offset, endPos);
+				content, _LAYOUT_REFERENCE_STOP_CHARS, beginPos + offset,
+				endPos);
 
 			if (endPos == -1) {
 				endPos = beginPos - 1;
@@ -211,8 +213,8 @@ public class ExportImportImpl implements ExportImport {
 
 			String url = content.substring(beginPos + offset, endPos);
 
-			String servletMapping;
-			String servletMappingParam;
+			String servletMapping = null;
+			String servletMappingParam = null;
 
 			if (url.startsWith(PortalUtil.getPathFriendlyURLPrivateGroup())) {
 				servletMapping = PortalUtil.getPathFriendlyURLPrivateGroup();
@@ -443,7 +445,6 @@ public class ExportImportImpl implements ExportImport {
 			boolean privateLayout = type.startsWith("private");
 
 			String layoutUuid = matcher.group(3);
-
 			String friendlyURL = matcher.group(4);
 
 			try {
@@ -485,10 +486,17 @@ public class ExportImportImpl implements ExportImport {
 				}
 			}
 			catch (SystemException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
+				if (_log.isDebugEnabled() || _log.isWarnEnabled()) {
+					String message =
 						"Unable to get layout in group " +
-							portletDataContext.getScopeGroupId(), se);
+							portletDataContext.getScopeGroupId();
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(message);
+					}
+					else {
+						_log.debug(message, se);
+					}
 				}
 			}
 
@@ -522,11 +530,11 @@ public class ExportImportImpl implements ExportImport {
 		int endPos) {
 
 		boolean legacyURL = true;
-		char[] stopChars = _DL_REF_STOP_CHARS_LEGACY;
+		char[] stopChars = _DL_REFERENCE_LEGACY_STOP_CHARS;
 
 		if (content.startsWith("/documents/", beginPos)) {
 			legacyURL = false;
-			stopChars = _DL_REF_STOP_CHARS;
+			stopChars = _DL_REFFERENCE_STOP_CHARS;
 		}
 
 		endPos = StringUtil.indexOfAny(content, stopChars, beginPos, endPos);
@@ -590,17 +598,17 @@ public class ExportImportImpl implements ExportImport {
 	}
 
 	protected FileEntry getFileEntry(
-		PortletDataContext portletDataContext, Map<String, String[]> args) {
+		PortletDataContext portletDataContext, Map<String, String[]> map) {
 
-		if (args == null) {
+		if (map == null) {
 			return null;
 		}
 
 		FileEntry fileEntry = null;
 
 		try {
-			String uuid = MapUtil.getString(args, "uuid");
-			long groupId = MapUtil.getLong(args, "groupId");
+			String uuid = MapUtil.getString(map, "uuid");
+			long groupId = MapUtil.getLong(map, "groupId");
 
 			if (Validator.isNotNull(uuid)) {
 				fileEntry =
@@ -608,10 +616,10 @@ public class ExportImportImpl implements ExportImport {
 						uuid, groupId);
 			}
 			else {
-				if (args.containsKey("folderId")) {
-					long folderId = MapUtil.getLong(args, "folderId");
-					String name = MapUtil.getString(args, "name");
-					String title = MapUtil.getString(args, "title");
+				if (map.containsKey("folderId")) {
+					long folderId = MapUtil.getLong(map, "folderId");
+					String name = MapUtil.getString(map, "name");
+					String title = MapUtil.getString(map, "title");
 
 					if (Validator.isNotNull(title)) {
 						fileEntry = DLAppLocalServiceUtil.getFileEntry(
@@ -628,10 +636,10 @@ public class ExportImportImpl implements ExportImport {
 						}
 					}
 				}
-				else if (args.containsKey("image_id")) {
+				else if (map.containsKey("image_id")) {
 					DLFileEntry dlFileEntry =
 						DLFileEntryLocalServiceUtil.fetchFileEntryByAnyImageId(
-							MapUtil.getLong(args, "image_id"));
+							MapUtil.getLong(map, "image_id"));
 
 					if (dlFileEntry != null) {
 						fileEntry = DLAppLocalServiceUtil.getFileEntry(
@@ -641,9 +649,10 @@ public class ExportImportImpl implements ExportImport {
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
-
-			if (_log.isWarnEnabled()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
+			else if (_log.isWarnEnabled()) {
 				_log.warn(e.getMessage());
 			}
 		}
@@ -651,19 +660,19 @@ public class ExportImportImpl implements ExportImport {
 		return fileEntry;
 	}
 
-	private static final char[] _DL_REF_STOP_CHARS = new char[] {
-		CharPool.APOSTROPHE, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
-		CharPool.CLOSE_PARENTHESIS, CharPool.GREATER_THAN, CharPool.LESS_THAN,
-		CharPool.PIPE, CharPool.QUESTION, CharPool.QUOTE, CharPool.SPACE
-	};
-
-	private static final char[] _DL_REF_STOP_CHARS_LEGACY = new char[] {
+	private static final char[] _DL_REFERENCE_LEGACY_STOP_CHARS = {
 		CharPool.APOSTROPHE, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
 		CharPool.CLOSE_PARENTHESIS, CharPool.GREATER_THAN, CharPool.LESS_THAN,
 		CharPool.PIPE, CharPool.QUOTE, CharPool.SPACE
 	};
 
-	private static final char[] _LAYOUT_REF_STOP_CHARS = new char[] {
+	private static final char[] _DL_REFFERENCE_STOP_CHARS = {
+		CharPool.APOSTROPHE, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
+		CharPool.CLOSE_PARENTHESIS, CharPool.GREATER_THAN, CharPool.LESS_THAN,
+		CharPool.PIPE, CharPool.QUESTION, CharPool.QUOTE, CharPool.SPACE
+	};
+
+	private static final char[] _LAYOUT_REFERENCE_STOP_CHARS = {
 		CharPool.APOSTROPHE, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
 		CharPool.CLOSE_PARENTHESIS, CharPool.GREATER_THAN, CharPool.LESS_THAN,
 		CharPool.PIPE, CharPool.QUESTION, CharPool.QUOTE, CharPool.SPACE

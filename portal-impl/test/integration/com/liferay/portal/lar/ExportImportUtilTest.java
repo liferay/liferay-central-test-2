@@ -46,7 +46,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -91,20 +90,21 @@ public class ExportImportUtilTest {
 			ServiceTestUtil.randomString() + ".txt",
 			ServiceTestUtil.randomString(), true);
 
-		DLFileEntry dlFileEntry =
-			((LiferayFileEntry)_fileEntry).getDLFileEntry();
+		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)_fileEntry;
+
+		DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
 
 		dlFileEntry.setLargeImageId(dlFileEntry.getFileEntryId());
 
 		DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
 
-		TestWriterReader testWriter = new TestWriterReader();
+		TestReaderWriter testReaderWriter = new TestReaderWriter();
 
 		_portletDataContextExport = new PortletDataContextImpl(
 			_stagingGroup.getCompanyId(), _stagingGroup.getGroupId(),
 			new HashMap<String, String[]>(), new HashSet<String>(),
 			new Date(System.currentTimeMillis() - Time.HOUR), new Date(),
-			testWriter);
+			testReaderWriter);
 
 		Element rootElement = SAXReaderUtil.createElement("root");
 
@@ -113,7 +113,8 @@ public class ExportImportUtilTest {
 		_portletDataContextImport = new PortletDataContextImpl(
 			_stagingGroup.getCompanyId(), _stagingGroup.getGroupId(),
 			new HashMap<String, String[]>(), new HashSet<String>(),
-			new CurrentUserIdStrategy(TestPropsValues.getUser()), testWriter);
+			new CurrentUserIdStrategy(TestPropsValues.getUser()),
+			testReaderWriter);
 
 		_portletDataContextImport.setImportDataRootElement(rootElement);
 		_portletDataContextImport.setSourceGroupId(_stagingGroup.getGroupId());
@@ -129,13 +130,13 @@ public class ExportImportUtilTest {
 
 	@Test
 	public void testExportDLReferences() throws Exception {
+		Element rootElement =
+			_portletDataContextExport.getExportDataRootElement();
+
 		String content = replaceParameters(
 			getContent("dl_references.txt"), _fileEntry);
 
-		List<String> urls = getUrls(content);
-
-		Element rootElement =
-			_portletDataContextExport.getExportDataRootElement();
+		List<String> urls = getURLs(content);
 
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, rootElement.element("entry"), content);
@@ -144,16 +145,18 @@ public class ExportImportUtilTest {
 			Assert.assertFalse(content.contains(url));
 		}
 
-		TestWriterReader testWriter =
-			(TestWriterReader)_portletDataContextExport.getZipWriter();
+		TestReaderWriter testReaderWriter =
+			(TestReaderWriter)_portletDataContextExport.getZipWriter();
 
-		List<String> binaryEntries = testWriter.getBinaryEntries();
-		List<String> entries = testWriter.getEntries();
+		List<String> entries = testReaderWriter.getEntries();
 
 		Assert.assertEquals(entries.size(), 1);
+
+		List<String> binaryEntries = testReaderWriter.getBinaryEntries();
+
 		Assert.assertEquals(binaryEntries.size(), entries.size());
 
-		for (String entry : testWriter.getEntries()) {
+		for (String entry : testReaderWriter.getEntries()) {
 			Assert.assertTrue(
 				content.contains("[$dl-reference=" + entry + "$]"));
 		};
@@ -161,11 +164,11 @@ public class ExportImportUtilTest {
 
 	@Test
 	public void testExportLayoutReferences() throws Exception {
-		String content = replaceParameters(
-			getContent("layout_references.txt"), _fileEntry);
-
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
+
+		String content = replaceParameters(
+			getContent("layout_references.txt"), _fileEntry);
 
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, rootElement.element("entry"), content);
@@ -181,22 +184,31 @@ public class ExportImportUtilTest {
 
 	@Test
 	public void testExportLinksToLayouts() throws Exception {
-		String content = replaceParameters(
-			getContent("layout_links.txt"), _fileEntry);
-
 		Layout publicLayout = LayoutTestUtil.addLayout(
 			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), false);
-
 		Layout privateLayout = LayoutTestUtil.addLayout(
 			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), true);
 
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
 
+		String content = replaceParameters(
+			getContent("layout_links.txt"), _fileEntry);
+
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, rootElement.element("entry"), content);
 
 		StringBundler sb = new StringBundler(5);
+
+		sb.append("[1@private-group@");
+		sb.append(privateLayout.getUuid());
+		sb.append(StringPool.AT);
+		sb.append(privateLayout.getFriendlyURL());
+		sb.append(StringPool.CLOSE_BRACKET);
+
+		Assert.assertTrue(content.contains(sb.toString()));
+
+		sb.setIndex(0);
 
 		sb.append("[1@public@");
 		sb.append(publicLayout.getUuid());
@@ -205,27 +217,20 @@ public class ExportImportUtilTest {
 		sb.append(StringPool.CLOSE_BRACKET);
 
 		Assert.assertTrue(content.contains(sb.toString()));
-
-		sb.setStringAt("[1@private-group@", 0);
-		sb.setStringAt(privateLayout.getUuid(), 1);
-		sb.setStringAt(privateLayout.getFriendlyURL(), 3);
-
-		Assert.assertTrue(content.contains(sb.toString()));
 	}
 
 	@Test
 	public void testImportDLReferences() throws Exception {
-		String content = replaceParameters(
-			getContent("dl_references.txt"), _fileEntry);
-
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
 
 		Element entryElement = rootElement.element("entry");
 
+		String content = replaceParameters(
+			getContent("dl_references.txt"), _fileEntry);
+
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, entryElement, content);
-
 		content = ExportImportUtil.importContentReferences(
 			_portletDataContextImport, entryElement, content);
 
@@ -234,17 +239,16 @@ public class ExportImportUtilTest {
 
 	@Test
 	public void testImportLayoutReferences() throws Exception {
-		String content = replaceParameters(
-			getContent("layout_references.txt"), _fileEntry);
-
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
 
 		Element entryElement = rootElement.element("entry");
 
+		String content = replaceParameters(
+			getContent("layout_references.txt"), _fileEntry);
+
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, entryElement, content);
-
 		content = ExportImportUtil.importContentReferences(
 			_portletDataContextExport, entryElement, content);
 
@@ -260,12 +264,8 @@ public class ExportImportUtilTest {
 
 	@Test
 	public void testImportLinksToLayouts() throws Exception {
-		String content = replaceParameters(
-			getContent("layout_links.txt"), _fileEntry);
-
 		LayoutTestUtil.addLayout(
 			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), false);
-
 		LayoutTestUtil.addLayout(
 			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), true);
 
@@ -273,6 +273,9 @@ public class ExportImportUtilTest {
 			_portletDataContextExport.getExportDataRootElement();
 
 		Element entryElement = rootElement.element("entry");
+
+		String content = replaceParameters(
+			getContent("layout_links.txt"), _fileEntry);
 
 		content = ExportImportUtil.exportContentReferences(
 			_portletDataContextExport, entryElement, content);
@@ -296,42 +299,40 @@ public class ExportImportUtilTest {
 		return scanner.next();
 	}
 
-	protected List<String> getUrls(String content) {
-		Pattern urlPatter = Pattern.compile(
-			"(?:href=|\\{|\\[)(.*?)" +
-				"(?:>|\\}|\\]|Link\\]\\])");
+	protected List<String> getURLs(String content) {
+		Pattern pattern = Pattern.compile(
+			"(?:href=|\\{|\\[)(.*?)(?:>|\\}|\\]|Link\\]\\])");
 
-		Matcher m = urlPatter.matcher(content);
+		Matcher matcher = pattern.matcher(content);
 
 		List<String> urls = new ArrayList<String>();
 
-		while (m.find()) {
-			urls.add(m.group(1));
+		while (matcher.find()) {
+			String url = matcher.group(1);
+
+			urls.add(url);
 		}
 
 		return urls;
 	}
 
 	protected String replaceParameters(String content, FileEntry fileEntry) {
-		String groupFriendlyURL = _stagingGroup.getFriendlyURL();
-		String groupId = String.valueOf(fileEntry.getGroupId());
-		String imageId = String.valueOf(fileEntry.getFileEntryId());
-		String smPrivateGroup = PortalUtil.getPathFriendlyURLPrivateGroup();
-		String smPrivateUser = PortalUtil.getPathFriendlyURLPrivateUser();
-		String smPublic = PortalUtil.getPathFriendlyURLPublic();
-		String title = fileEntry.getTitle();
-		String uuid = fileEntry.getUuid();
-
 		return StringUtil.replace(
 			content,
 			new String[] {
-				"[$GROUP_ID$]", "[$GROUP_FRIENDLY_URL$]", "[$IMAGE_ID$]",
-				"[$SM_PRIVATE_GROUP$]", "[$SM_PRIVATE_USER$]", "[$SM_PUBLIC$]",
-				"[$TITLE$]", "[$UUID$]"
+				"[$GROUP_FRIENDLY_URL$]", "[$GROUP_ID$]", "[$IMAGE_ID$]",
+				"[$PATH_FRIENDLY_URL_PRIVATE_GROUP$]",
+				"[$PATH_FRIENDLY_URL_PRIVATE_USER$]",
+				"[$PATH_FRIENDLY_URL_PUBLIC$]", "[$TITLE$]", "[$UUID$]"
 			},
 			new String[] {
-				groupId, groupFriendlyURL, imageId, smPrivateGroup,
-				smPrivateUser, smPublic, title, uuid
+				_stagingGroup.getFriendlyURL(),
+				String.valueOf(fileEntry.getGroupId()),
+				String.valueOf(fileEntry.getFileEntryId()),
+				PortalUtil.getPathFriendlyURLPrivateGroup(),
+				PortalUtil.getPathFriendlyURLPrivateUser(),
+				PortalUtil.getPathFriendlyURLPublic(), fileEntry.getTitle(),
+				fileEntry.getUuid()
 			});
 	}
 
@@ -340,30 +341,29 @@ public class ExportImportUtilTest {
 	private PortletDataContext _portletDataContextExport;
 	private PortletDataContext _portletDataContextImport;
 	private Group _stagingGroup;
-	private class TestWriterReader implements ZipReader, ZipWriter {
 
-		public void addEntry(String name, byte[] bytes) throws IOException {
+	private class TestReaderWriter implements ZipReader, ZipWriter {
+
+		public void addEntry(String name, byte[] bytes) {
 			_binaryEntries.add(name);
 		}
 
-		public void addEntry(String name, InputStream inputStream)
-			throws IOException {
-
+		public void addEntry(String name, InputStream inputStream) {
 			_binaryEntries.add(name);
 		}
 
-		public void addEntry(String name, String s) throws IOException {
+		public void addEntry(String name, String s) {
 			_entries.put(name, s);
 		}
 
-		public void addEntry(String name, StringBuilder sb) throws IOException {
+		public void addEntry(String name, StringBuilder sb) {
 			_entries.put(name, sb.toString());
 		}
 
 		public void close() {
 		}
 
-		public byte[] finish() throws IOException {
+		public byte[] finish() {
 			return new byte[0];
 		}
 
@@ -403,6 +403,5 @@ public class ExportImportUtilTest {
 		private Map<String, String> _entries = new HashMap<String, String>();
 
 	}
-
 
 }
