@@ -184,9 +184,10 @@ public class BaseDDMDisplay implements DDMDisplay {
 	}
 
 	private static Set<String> _templateLanguageTypes =
-		SetUtil.fromArray(new String[] {
-			TemplateConstants.LANG_TYPE_FTL, TemplateConstants.LANG_TYPE_VM});
-
+		SetUtil.fromArray(
+			new String[] {
+				TemplateConstants.LANG_TYPE_FTL, TemplateConstants.LANG_TYPE_VM
+			});
 	private static Set<String> _viewTemplateExcludedColumnNames =
 		SetUtil.fromArray(new String[] {"structure"});
 
