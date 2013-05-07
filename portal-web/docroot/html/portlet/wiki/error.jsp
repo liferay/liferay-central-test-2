@@ -27,7 +27,6 @@
 
 	<%
 	long nodeId = ParamUtil.getLong(request, "nodeId");
-	String title = ParamUtil.getString(request, "title");
 
 	if (nodeId == 0) {
 		WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
@@ -36,6 +35,8 @@
 			nodeId = node.getNodeId();
 		}
 	}
+
+	String title = ParamUtil.getString(request, "title");
 
 	boolean hasDraftPage = false;
 
