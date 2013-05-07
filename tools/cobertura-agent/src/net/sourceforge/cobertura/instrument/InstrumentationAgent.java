@@ -284,15 +284,19 @@ public class InstrumentationAgent {
 			Set<CoverageData> coverageDatas = classData.getLines();
 
 			for (CoverageData coverageData : coverageDatas) {
-				if (coverageData instanceof LineData) {
-					LineData lineData = (LineData)coverageData;
-
-					if (!lineData.isCovered()) {
-						System.out.printf(
-							"[Cobertura] %s line %d is not covered %n",
-							classData.getName(), lineData.getLineNumber());
-					}
+				if (!(coverageData instanceof LineData)) {
+					continue;
 				}
+
+				LineData lineData = (LineData)coverageData;
+
+				if (lineData.isCovered()) {
+					continue;
+				}
+
+				System.out.printf(
+					"[Cobertura] %s line %d is not covered %n",
+					classData.getName(), lineData.getLineNumber());
 			}
 
 			throw new AssertionError(
