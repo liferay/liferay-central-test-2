@@ -833,7 +833,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	);
 </aui:script>
 
-<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && DLUtil.isOfficeExtension(extension) && portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIeOnWin32Bit(request) %>">
+<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && DLUtil.isOfficeExtension(extension) && portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIeOnWin32(request) %>">
 	<%@ include file="/html/portlet/document_library/action/open_document_js.jspf" %>
 </c:if>
 
@@ -880,7 +880,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			);
 
 			<%
-			if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && DLUtil.isOfficeExtension(extension) && portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIeOnWin32Bit(request)) {
+			if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) && DLUtil.isOfficeExtension(extension) && portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIeOnWin32(request)) {
 			%>
 
 				fileEntryToolbarChildren.push(

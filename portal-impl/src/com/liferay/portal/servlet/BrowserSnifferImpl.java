@@ -169,7 +169,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return isIe(getUserAgent(request));
 	}
 
-	public boolean isIeOnWin32Bit(HttpServletRequest request) {
+	public boolean isIeOnWin32(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
 		if (isIe(userAgent) &&
@@ -181,7 +181,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
-	public boolean isIeOnWin64Bit(HttpServletRequest request) {
+	public boolean isIeOnWin64(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
 		if (isIe(userAgent) &&
