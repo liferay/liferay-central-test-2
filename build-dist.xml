@@ -741,6 +741,9 @@ release was successful.</echo>
 	</target>
 
 	<target name="prepare-generated-files">
+		<antcall target="clean" />
+		<antcall target="start" />
+
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
 		<ant dir="portal-impl" target="build-lib-versions" inheritAll="false" />
 		<ant dir="portal-impl" target="build-services" inheritAll="false" />
