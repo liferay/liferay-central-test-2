@@ -647,7 +647,7 @@
 		<column name="plid" type="long" />
 		<column name="privateLayout" type="boolean" />
 		<column name="friendlyURL" type="String" />
-		<column name="locale" type="String" />
+		<column name="languageId" type="String" />
 
 		<!-- Finder methods -->
 
@@ -659,13 +659,13 @@
 		</finder>
 		<finder name="P_L" return-type="LayoutFriendlyURL" unique="true">
 			<finder-column name="plid" />
-			<finder-column name="locale" />
+			<finder-column name="languageId" />
 		</finder>
 		<finder name="G_P_F_L" return-type="LayoutFriendlyURL" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="friendlyURL" />
-			<finder-column name="locale" />
+			<finder-column name="languageId" />
 		</finder>
 	</entity>
 	<entity name="LayoutPrototype" uuid="true" local-service="true" remote-service="true">
