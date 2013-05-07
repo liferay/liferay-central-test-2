@@ -102,8 +102,8 @@ public class AssetRendererFactoryRegistryImpl
 	}
 
 	private Map<String, AssetRendererFactory> filterAssetRendererFactories(
-		long companyId, Map<String,
-		AssetRendererFactory> assetRendererFactories) {
+		long companyId,
+		Map<String, AssetRendererFactory> assetRendererFactories) {
 
 		Map<String, AssetRendererFactory> filteredAssetRendererFactories =
 			new ConcurrentHashMap<String, AssetRendererFactory>();

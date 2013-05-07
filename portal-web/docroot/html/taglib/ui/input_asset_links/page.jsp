@@ -26,9 +26,9 @@ List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 String assetLinksSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinksSearchContainerPrimaryKeys");
 
 if (Validator.isNull(assetLinksSearchContainerPrimaryKeys) && SessionErrors.isEmpty(portletRequest) && (assetEntryId > 0)) {
-	List<AssetLink> allAassetLinks = AssetLinkLocalServiceUtil.getDirectLinks(assetEntryId);
+	List<AssetLink> directAssetLinks = AssetLinkLocalServiceUtil.getDirectLinks(assetEntryId);
 
-	for (AssetLink assetLink : allAassetLinks) {
+	for (AssetLink assetLink : directAssetLinks) {
 		AssetEntry assetLinkEntry = null;
 
 		if ((assetEntryId > 0) || (assetLink.getEntryId1() == assetEntryId)) {
