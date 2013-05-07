@@ -515,7 +515,7 @@ AUI.add(
 										icon: 'icon-search',
 										label: Liferay.Language.get('select'),
 										on: {
-											click: A.bind(instance._showSelectPopup, instance)
+											click: A.bind('_showSelectPopup', instance)
 										},
 										title: instance.get('title')
 									}

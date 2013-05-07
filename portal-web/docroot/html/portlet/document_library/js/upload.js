@@ -188,7 +188,7 @@ AUI.add(
 
 				var folderId = instance.ns('folderId');
 
-				A.getWin()._node.onbeforeunload = A.bind(instance._confirmUnload, instance);
+				A.getWin()._node.onbeforeunload = A.bind('_confirmUnload', instance);
 
 				Liferay.on(instance.ns('dataRequest'), instance._onDataRequest, instance);
 

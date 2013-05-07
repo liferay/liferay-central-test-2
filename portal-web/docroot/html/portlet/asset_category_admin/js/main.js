@@ -522,9 +522,9 @@ AUI.add(
 								},
 								io: {
 									cfg: {
-										data: A.bind(instance._formatRequestData, instance)
+										data: A.bind('_formatRequestData', instance)
 									},
-									formatter: A.bind(instance._formatJSONResult, instance),
+									formatter: A.bind('_formatJSONResult', instance),
 									url: themeDisplay.getPathMain() + '/asset/get_categories'
 								},
 								paginator: paginatorConfig,

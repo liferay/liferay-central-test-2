@@ -45,7 +45,7 @@ if (!themeDisplay.isStatePopUp()) {
 					Liferay.publish(
 						'focusSearchBar',
 						{
-							defaultFn: A.bind(instance._focusSearchBar, instance)
+							defaultFn: A.bind('_focusSearchBar', instance)
 						}
 					);
 

@@ -431,7 +431,7 @@ AUI.add(
 								icon: 'icon-plus',
 								label: Liferay.Language.get('add'),
 								on: {
-									click: A.bind(instance._onAddEntryClick, instance)
+									click: A.bind('_onAddEntryClick', instance)
 								},
 								title: Liferay.Language.get('add-tags')
 							},
@@ -439,7 +439,7 @@ AUI.add(
 								icon: 'icon-search',
 								label: Liferay.Language.get('select'),
 								on: {
-									click: A.bind(instance._showSelectPopup, instance)
+									click: A.bind('_showSelectPopup', instance)
 								},
 								title: Liferay.Language.get('select-tags')
 							}
@@ -451,7 +451,7 @@ AUI.add(
 									icon: 'icon-comment',
 									label: Liferay.Language.get('suggestions'),
 									on: {
-										click: A.bind(instance._showSuggestionsPopup, instance)
+										click: A.bind('_showSuggestionsPopup', instance)
 									},
 									title: Liferay.Language.get('suggestions')
 								}
