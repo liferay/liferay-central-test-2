@@ -54,39 +54,48 @@ body {
 		border-bottom-width: 2px;
 	}
 
-	.nav > li > a {
-		color: #FFF;
-		text-shadow: 0 1px #000;
+	.nav {
+		> li > a {
+			color: #FFF;
+			text-shadow: 0 1px #000;
 
-		&:focus, &:hover {
-			color: #3EA9DB;
-		}
-	}
-
-	%dockbar-caret {
-		&, &:hover {
-			.caret {
-				border-bottom-color: #FFF;
-				border-top-color: #FFF;
+			&:focus, &:hover {
+				color: #3EA9DB;
 			}
 		}
-	}
 
-	.nav li.dropdown {
-		> .dropdown-toggle {
-			@extend %dockbar-caret;
+		%dockbar-caret {
+			&, &:hover {
+				.caret {
+					border-bottom-color: #FFF;
+					border-top-color: #FFF;
+				}
+			}
 		}
 
-		&.open, &.active, &.open.active {
+		li.dropdown {
 			> .dropdown-toggle {
-				background-color: #3EA9DB;
-				color: #FFF;
-				text-shadow: 0 -1px #000;
-
 				@extend %dockbar-caret;
 			}
+
+			&.open, &.active, &.open.active {
+				> .dropdown-toggle {
+					background-color: #3EA9DB;
+					color: #FFF;
+					text-shadow: 0 -1px #000;
+
+					@extend %dockbar-caret;
+				}
+			}
+		}
+
+		.add-link, .back-link, .manage-content-link, .toggle-controls-link {
+			[class^="icon-"], [class*=" icon-"] {
+				background-image: url(../images/aui/glyphicons-halflings-white.png);
+			}
 		}
 	}
+
 
 	.divider-vertical {
 		border-left-color: #222;

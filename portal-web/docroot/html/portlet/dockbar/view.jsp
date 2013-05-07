@@ -84,11 +84,11 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 			}
 			%>
 
-			<aui:nav-item href="<%= backURL %>" iconClass="icon-arrow-left" id="backLink" label='<%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName), false) %>' />
+			<aui:nav-item anchorCssClass="back-link" href="<%= backURL %>" iconClass="icon-arrow-left" id="backLink" label='<%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName), false) %>' />
 		</c:if>
 
 		<c:if test="<%= !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ADD_LAYOUT) || hasLayoutUpdatePermission || (layoutTypePortlet.isCustomizable() && layoutTypePortlet.isCustomizedView() && hasLayoutCustomizePermission)) %>">
-			<aui:nav-item dropdown="<%= true %>" iconClass="icon-plus" id="addContent" label="add">
+			<aui:nav-item anchorCssClass="add-link" dropdown="<%= true %>" iconClass="icon-plus" id="addContent" label="add">
 				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT) && !group.isLayoutPrototype() %>">
 					<aui:nav-item anchorId="addPage" label="page" />
 				</c:if>
@@ -105,7 +105,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 		</c:if>
 
 		<c:if test="<%= !group.isControlPanel() && (themeDisplay.isShowLayoutTemplatesIcon() || themeDisplay.isShowManageSiteIcon() || themeDisplay.isShowPageSettingsIcon()) %>">
-			<aui:nav-item dropdown="<%= true %>" iconClass="icon-cog" id="manageContent" label="manage">
+			<aui:nav-item anchorCssClass="manage-content-link" dropdown="<%= true %>" iconClass="icon-cog" id="manageContent" label="manage">
 
 				<%
 				String useDialogFullDialog = StringPool.BLANK;
@@ -149,7 +149,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 					<liferay-ui:message key="edit-controls" />
 				</liferay-util:buffer>
 
-				<aui:nav-item cssClass="toggle-controls" id="toggleControls" label="<%= editControlsLabel %>" />
+				<aui:nav-item anchorCssClass="toggle-controls-link" cssClass="toggle-controls" id="toggleControls" label="<%= editControlsLabel %>" />
 			</c:if>
 		</c:if>
 	</aui:nav>
@@ -210,7 +210,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 
 		<c:choose>
 			<c:when test="<%= themeDisplay.isSignedIn() %>">
-				<aui:nav-item cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" id="userAvatar" label="<%= userName %>">
+				<aui:nav-item anchorCssClass="user-avatar-link" cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" id="userAvatar" label="<%= userName %>">
 					<c:choose>
 						<c:when test="<%= themeDisplay.isImpersonated() %>">
 
