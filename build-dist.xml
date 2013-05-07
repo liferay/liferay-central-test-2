@@ -741,29 +741,29 @@ release was successful.</echo>
 	</target>
 
 	<target name="prepare-generated-files">
-		<delete file="portal-impl/src/META-INF/javadocs-all.xml" />
-		<delete file="portal-impl/src/META-INF/javadocs-rt.xml" />
-		<delete file="portal-impl/classes/META-INF/javadocs-all.xml" />
-		<delete file="portal-impl/classes/META-INF/javadocs-rt.xml" />
-
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
 		<ant dir="portal-impl" target="build-lib-versions" inheritAll="false" />
 		<ant dir="portal-impl" target="build-services" inheritAll="false" />
 		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
 
+		<delete file="portal-impl/classes/META-INF/javadocs-all.xml" />
+		<delete file="portal-impl/classes/META-INF/javadocs-rt.xml" />
+		<delete file="portal-impl/src/META-INF/javadocs-all.xml" />
+		<delete file="portal-impl/src/META-INF/javadocs-rt.xml" />
+
 		<ant dir="portal-impl" inheritall="false" target="compile-test" />
+
 		<ant inheritall="false" target="format-javadoc" />
-		<ant inheritall="false" target="doc" />
 
 		<delete>
 			<fileset dir="${lp.plugins.dir}" includes="**/javadocs-all.xml,**/javadocs-rt.xml" />
 		</delete>
 
-		<antcall target="unzip-tomcat" />
-		<antcall target="all" />
-
 		<ant dir="${lp.plugins.dir}" inheritall="false" target="clean" />
 		<ant dir="${lp.plugins.dir}" inheritall="false" target="compile" />
+		<ant dir="${lp.plugins.dir}" inheritall="false" target="format-javadoc" />
+
+		<antcall target="all" />
 
 		<parallel>
 			<if>
@@ -785,7 +785,7 @@ release was successful.</echo>
 					<socket server="localhost" port="8080" />
 				</waitfor>
 
-				<ant dir="${lp.plugins.dir}" inheritall="false" target="format-javadoc" />
+				<ant dir="portal-client" target="build-client" inheritAll="false" />
 
 				<if>
 					<os family="windows" />
