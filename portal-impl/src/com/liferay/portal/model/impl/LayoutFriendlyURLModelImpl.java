@@ -65,7 +65,7 @@ public class LayoutFriendlyURLModelImpl extends BaseModelImpl<LayoutFriendlyURL>
 			{ "friendlyURL", Types.VARCHAR },
 			{ "languageId", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutFriendlyURL (uuid_ VARCHAR(75) null,layoutFriendlyURLId LONG not null primary key,groupId LONG,companyId LONG,plid LONG,privateLayout BOOLEAN,friendlyURL VARCHAR(75) null,languageId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutFriendlyURL (uuid_ VARCHAR(75) null,layoutFriendlyURLId LONG not null primary key,groupId LONG,companyId LONG,plid LONG,privateLayout BOOLEAN,friendlyURL VARCHAR(255) null,languageId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutFriendlyURL";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutFriendlyURL.layoutFriendlyURLId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutFriendlyURL.layoutFriendlyURLId ASC";

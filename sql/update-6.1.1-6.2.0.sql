@@ -366,7 +366,7 @@ create table LayoutFriendlyURL (
 	companyId LONG,
 	plid LONG,
 	privateLayout BOOLEAN,
-	friendlyURL VARCHAR(75) null,
+	friendlyURL VARCHAR(255) null,
 	languageId VARCHAR(75) null
 );
 
