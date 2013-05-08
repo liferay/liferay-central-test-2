@@ -412,6 +412,16 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Resources
 
+		List<ResourceBlockPermission> resourceBlockPermissions =
+			resourceBlockPermissionPersistence.findByRoleId(role.getRoleId());
+
+		for (ResourceBlockPermission resourceBlockPermission :
+				resourceBlockPermissions) {
+
+			resourceBlockPermissionLocalService.deleteResourceBlockPermission(
+				resourceBlockPermission);
+		}
+
 		List<ResourcePermission> resourcePermissions =
 			resourcePermissionPersistence.findByRoleId(role.getRoleId());
 
@@ -421,25 +431,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		List<ResourceTypePermission> resourceTypePermissions =
-			resourceTypePermissionLocalService.getRoleResourceTypePermissions(
-				role.getRoleId());
+			resourceTypePermissionPersistence.findByRoleId(role.getRoleId());
 
 		for (ResourceTypePermission resourceTypePermission :
 				resourceTypePermissions) {
 
 			resourceTypePermissionLocalService.deleteResourceTypePermission(
 				resourceTypePermission);
-		}
-
-		List<ResourceBlockPermission> resourceBlockPermissions =
-			resourceBlockPermissionLocalService.getRoleResourceBlockPermissions(
-				role.getRoleId());
-
-		for (ResourceBlockPermission resourceBlockPermission :
-				resourceBlockPermissions) {
-
-			resourceBlockPermissionLocalService.deleteResourceBlockPermission(
-				resourceBlockPermission);
 		}
 
 		String className = role.getClassName();
