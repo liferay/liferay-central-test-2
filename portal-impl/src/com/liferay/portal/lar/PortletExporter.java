@@ -426,6 +426,12 @@ public class PortletExporter {
 		headerElement.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
+		Element missingReferencesElement = rootElement.addElement(
+			"missing-references");
+
+		portletDataContext.setMissingReferencesElement(
+			missingReferencesElement);
+
 		exportPortlet(
 			portletDataContext, layoutCache, portletId, layout, rootElement,
 			defaultUserId, exportPermissions, exportPortletArchivedSetups,
