@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.CookieKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.util.PropsImpl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -31,11 +30,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
  */
 public class CookieKeysTest {
 
-	@Before
-	public void setup() {
-		PropsUtil.setProps(new PropsImpl());
-	}
-
 	@Test
 	public void domainTest1() throws Exception {
 		String domain = CookieKeys.getDomain("www.liferay.com");
@@ -45,105 +39,104 @@ public class CookieKeysTest {
 
 	@Test
 	public void domainTest2() throws Exception {
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
-		httpServletRequest.setServerName("www.liferay.com");
+		mockHttpServletRequest.setServerName("www.liferay.com");
 
-		String domain = CookieKeys.getDomain(httpServletRequest);
+		String domain = CookieKeys.getDomain(mockHttpServletRequest);
 
 		Assert.assertEquals(".liferay.com", domain);
 	}
 
 	@Test
 	public void domainTest3() throws Exception {
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
-		httpServletRequest.setServerName("www.liferay.com");
+		mockHttpServletRequest.setServerName("www.liferay.com");
 
-		Field field = CookieKeys.class.getDeclaredField(
-			"_SESSION_COOKIE_DOMAIN");
+		Field field = getField("_SESSION_COOKIE_DOMAIN");
 
-		setAccessible(field);
-
-		Object originalValue = field.get(null);
+		Object value = field.get(null);
 
 		try {
 			field.set(null, "www.example.com");
 
-			String domain = CookieKeys.getDomain(httpServletRequest);
+			String domain = CookieKeys.getDomain(mockHttpServletRequest);
 
 			Assert.assertEquals("www.example.com", domain);
 		}
 		finally {
-			field.set(null, originalValue);
+			field.set(null, value);
 		}
 	}
 
 	@Test
 	public void domainTest4() throws Exception {
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
-		httpServletRequest.setServerName("www.liferay.com");
+		mockHttpServletRequest.setServerName("www.liferay.com");
 
-		Field field = CookieKeys.class.getDeclaredField(
-			"_SESSION_COOKIE_USE_FULL_HOSTNAME");
+		Field field = getField("_SESSION_COOKIE_USE_FULL_HOSTNAME");
 
-		setAccessible(field);
-
-		Object originalValue = field.get(null);
+		Object value = field.get(null);
 
 		try {
 			field.set(null, Boolean.FALSE);
 
-			String domain = CookieKeys.getDomain(httpServletRequest);
+			String domain = CookieKeys.getDomain(mockHttpServletRequest);
 
 			Assert.assertEquals(".liferay.com", domain);
 		}
 		finally {
-			field.set(null, originalValue);
+			field.set(null, value);
 		}
 	}
 
 	@Test
 	public void domainTest5() throws Exception {
-		MockHttpServletRequest httpServletRequest =
+		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
-		httpServletRequest.setServerName("www.liferay.com");
+		mockHttpServletRequest.setServerName("www.liferay.com");
 
-		Field field = CookieKeys.class.getDeclaredField(
-			"_SESSION_COOKIE_USE_FULL_HOSTNAME");
+		Field field = getField("_SESSION_COOKIE_USE_FULL_HOSTNAME");
 
-		setAccessible(field);
-
-		Object originalValue = field.get(null);
+		Object value = field.get(null);
 
 		try {
 			field.set(null, Boolean.TRUE);
 
-			String domain = CookieKeys.getDomain(httpServletRequest);
+			String domain = CookieKeys.getDomain(mockHttpServletRequest);
 
 			Assert.assertEquals("www.liferay.com", domain);
 		}
 		finally {
-			field.set(null, originalValue);
+			field.set(null, value);
 		}
 	}
 
-	protected void setAccessible(Field field) throws Exception {
-		field.setAccessible(true);
+	@Before
+	public void setup() {
+		PropsUtil.setProps(new PropsImpl());
+	}
+
+	protected Field getField(String fieldName) throws Exception {
+		Field field = ReflectionUtil.getDeclaredField(
+			CookieKeys.class, fieldName);
 
 		int modifiers = field.getModifiers();
 
 		if ((modifiers & Modifier.FINAL) == Modifier.FINAL) {
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
+			Field modifiersField = ReflectionUtil.getDeclaredField(
+				Field.class, "modifiers");
 
-			modifiersField.setAccessible(true);
 			modifiersField.setInt(field, modifiers & ~Modifier.FINAL);
 		}
+
+		return field;
 	}
 
 }
