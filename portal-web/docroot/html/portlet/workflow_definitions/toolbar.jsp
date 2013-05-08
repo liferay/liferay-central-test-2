@@ -37,7 +37,12 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		</portlet:renderURL>
 
 		<c:if test='<%= DeployManagerUtil.isDeployed("kaleo-designer-portlet") %>'>
-			<aui:nav-item href='<%= "javascript:Liferay.Util.getOpener()." + renderResponse.getNamespace() + "openKaleoDesigner(\'\', \'0\', \'\', Liferay.Util.getWindowName());" %>' iconClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-new-x", "definition") %>' />
+
+			<%
+			String taglibHREF = "javascript:Liferay.Util.getOpener()." + renderResponse.getNamespace() + "openKaleoDesigner('', '0', '', Liferay.Util.getWindowName());";
+			%>
+
+			<aui:nav-item href="<%= taglibHREF %>" iconClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-new-x", "definition") %>' />
 		</c:if>
 		<aui:nav-item href="<%= addWorkflowDefinitionURL %>" iconClass="icon-upload" label="file-upload" selected='<%= toolbarItem.equals("add") %>' />
 	</aui:nav>
