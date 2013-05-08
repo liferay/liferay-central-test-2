@@ -105,12 +105,6 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 					}
 				}
 
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
-
-				if (!assetRendererFactory.isActive(company.getCompanyId())){
-					deleteAssetEntry = true;
-				}
-
 				if (deleteAssetEntry) {
 					deletedAssets.add(assetEntryUuid);
 
@@ -120,6 +114,8 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 				ResultRow row = new ResultRow(doc, null, assetEntryOrder);
 
 				// Title
+
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
 
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
@@ -183,7 +179,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							assetBrowserURL.setPortletMode(PortletMode.VIEW);
 							assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
-							for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId())) {
+							for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 								if (!curRendererFactory.isSelectable()) {
 									continue;
 								}

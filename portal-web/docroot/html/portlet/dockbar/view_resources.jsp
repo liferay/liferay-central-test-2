@@ -46,7 +46,7 @@ boolean viewPreview = ParamUtil.getBoolean(request, "viewPreview");
 
 				long[] groupIds = new long[]{scopeGroupId};
 
-				long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(company.getCompanyId());
+				long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
 
 				for (long classNameId : availableClassNameIds) {
 					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(classNameId));

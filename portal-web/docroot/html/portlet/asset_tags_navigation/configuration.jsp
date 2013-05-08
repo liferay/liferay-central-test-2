@@ -41,7 +41,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
 							<%
-							List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId());
+							List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 
 							for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
 							%>
