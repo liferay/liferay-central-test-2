@@ -113,11 +113,13 @@ public class Transformer {
 		long companyId = 0;
 		long companyGroupId = 0;
 		long scopeGroupId = 0;
+		long siteGroupId = 0;
 
 		if (themeDisplay != null) {
 			companyId = themeDisplay.getCompanyId();
 			companyGroupId = themeDisplay.getCompanyGroupId();
 			scopeGroupId = themeDisplay.getScopeGroupId();
+			siteGroupId = themeDisplay.getSiteGroupId();
 		}
 
 		String templateId = String.valueOf(contextObjects.get("template_id"));
@@ -139,7 +141,6 @@ public class Transformer {
 			template.put("company", getCompany(themeDisplay, companyId));
 			template.put("companyId", companyId);
 			template.put("device", getDevice(themeDisplay));
-			template.put("scopeGroupId", scopeGroupId);
 
 			String templatesPath = getTemplatesPath(companyId, scopeGroupId);
 
@@ -151,6 +152,8 @@ public class Transformer {
 				"randomNamespace",
 				PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 					StringPool.UNDERLINE);
+			template.put("scopeGroupId", scopeGroupId);
+			template.put("siteGroupId", siteGroupId);
 			template.put("templatesPath", templatesPath);
 
 			// Deprecated variables
@@ -261,8 +264,6 @@ public class Transformer {
 			long companyId = 0;
 			long companyGroupId = 0;
 			long articleGroupId = 0;
-			long scopeGroupId = 0;
-			long siteGroupId = 0;
 
 			if (tokens != null) {
 				companyId = GetterUtil.getLong(tokens.get("company_id"));
@@ -271,6 +272,9 @@ public class Transformer {
 				articleGroupId = GetterUtil.getLong(
 					tokens.get("article_group_id"));
 			}
+
+			long scopeGroupId = 0;
+			long siteGroupId = 0;
 
 			if (themeDisplay != null) {
 				companyId = themeDisplay.getCompanyId();
@@ -316,8 +320,6 @@ public class Transformer {
 				template.put("company", getCompany(themeDisplay, companyId));
 				template.put("companyId", companyId);
 				template.put("device", getDevice(themeDisplay));
-				template.put("scopeGroupId", scopeGroupId);
-				template.put("siteGroupId", siteGroupId);
 
 				String templatesPath = getTemplatesPath(
 					companyId, articleGroupId);
@@ -335,6 +337,8 @@ public class Transformer {
 					"randomNamespace",
 					PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 						StringPool.UNDERLINE);
+				template.put("scopeGroupId", scopeGroupId);
+				template.put("siteGroupId", siteGroupId);
 				template.put("templatesPath", templatesPath);
 				template.put("viewMode", viewMode);
 
