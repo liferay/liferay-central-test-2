@@ -1617,7 +1617,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPassword(PasswordEncryptorUtil.encrypt(password));
 			user.setPasswordEncrypted(true);
 			user.setPasswordUnencrypted(password);
-
 			user.setPasswordModified(true);
 			user.setPasswordModifiedDate(new Date());
 
