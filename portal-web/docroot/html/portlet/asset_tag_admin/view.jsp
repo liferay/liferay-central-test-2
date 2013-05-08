@@ -41,7 +41,6 @@
 
 				<aui:nav-item iconCssClass="icon-random" id="mergeSelectedTags" label="merge" />
 			</aui:nav-item>
-
 		</aui:nav>
 
 		<div class="navbar-search pull-right">
@@ -49,33 +48,31 @@
 				<input class="search-query span9" id="<portlet:namespace/>tagsAdminSearchInput" name="<portlet:namespace/>tagsAdminSearchInput" type="text" />
 			</div>
 		</div>
-
 	</aui:nav-bar>
 
-<div class="tags-admin-container lfr-app-column-view">
-	<div class="tags-admin-content-wrapper">
-		<aui:row cssClass="tags-admin-content">
-			<aui:col cssClass="tags-admin-list-container" width="<%= 35 %>">
-				<span>
-					<aui:input cssClass="select-tags" inline="<%= true %>" label="" name="checkAllTags" title='<%= LanguageUtil.get(pageContext, "check-all-tags") %>' type="checkbox" />
-				</span>
+	<div class="tags-admin-container lfr-app-column-view">
+		<div class="tags-admin-content-wrapper">
+			<aui:row cssClass="tags-admin-content">
+				<aui:col cssClass="tags-admin-list-container" width="<%= 35 %>">
+					<span>
+						<aui:input cssClass="select-tags" inline="<%= true %>" label="" name="checkAllTags" title='<%= LanguageUtil.get(pageContext, "check-all-tags") %>' type="checkbox" />
+					</span>
 
-				<h3 class="tags-header"><%= LanguageUtil.get(pageContext, "tags") %></h3>
+					<h3 class="tags-header"><%= LanguageUtil.get(pageContext, "tags") %></h3>
 
-				<div class="tags-admin-list lfr-component"></div>
+					<div class="tags-admin-list lfr-component"></div>
 
-				<div class="tags-pagination"></div>
-			</aui:col>
+					<div class="tags-pagination"></div>
+				</aui:col>
 
-			<aui:col cssClass="tags-admin-edit-tag" width="<%= 65 %>">
-				<h3><%= LanguageUtil.get(pageContext, "tag-details") %></h3>
+				<aui:col cssClass="tags-admin-edit-tag" width="<%= 65 %>">
+					<h3><%= LanguageUtil.get(pageContext, "tag-details") %></h3>
 
-				<div class="tag-view-container"></div>
-			</aui:col>
-		</aui:row>
+					<div class="tag-view-container"></div>
+				</aui:col>
+			</aui:row>
+		</div>
 	</div>
-</div>
-
 </aui:form>
 
 <aui:script use="liferay-tags-admin">

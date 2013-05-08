@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -41,11 +42,9 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -83,16 +82,14 @@ public class ComboServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		String contextPath = PortalUtil.getPathContext();
+		Set<String> modulePathsSet = new LinkedHashSet<String>();
 
 		Enumeration<String> enu = request.getParameterNames();
-
-		Set<String> modulePathsSet = new LinkedHashSet<String>();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			if (_PROTECTED_PARAMETERS.contains(name)) {
+			if (_protectedParameters.contains(name)) {
 				continue;
 			}
 
@@ -159,7 +156,8 @@ public class ComboServlet extends HttpServlet {
 
 				if (Validator.isNotNull(modulePath)) {
 					modulePath = StringUtil.replaceFirst(
-						modulePath, contextPath, StringPool.BLANK);
+						modulePath, PortalUtil.getPathContext(),
+						StringPool.BLANK);
 
 					URL url = getResourceURL(
 						servletContext, rootPath, modulePath);
@@ -344,16 +342,14 @@ public class ComboServlet extends HttpServlet {
 
 	private static final String _JAVASCRIPT_MINIFIED_SUFFIX = "-min.js";
 
-	private static final List<String> _PROTECTED_PARAMETERS =
-		new ArrayList<String>(
-			Arrays.asList("b", "browserId", "minifierType", "languageId", "t"));
-
 	private static Log _log = LogFactoryUtil.getLog(ComboServlet.class);
 
 	private PortalCache<String, byte[][]> _bytesArrayPortalCache =
 		SingleVMPoolUtil.getCache(ComboServlet.class.getName());
 	private PortalCache<String, FileContentBag> _fileContentBagPortalCache =
 		SingleVMPoolUtil.getCache(FileContentBag.class.getName());
+	private Set<String> _protectedParameters = SetUtil.fromArray(
+		new String[] {"b", "browserId", "minifierType", "languageId", "t"});
 
 	private static class FileContentBag implements Serializable {
 

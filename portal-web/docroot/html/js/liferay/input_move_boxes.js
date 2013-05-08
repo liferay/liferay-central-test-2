@@ -10,7 +10,7 @@ AUI.add(
 
 		var CONFIG_REORDER = {
 			children: [
-					[
+				[
 					{
 						cssClass: 'reorder-up',
 						icon: 'icon-circle-arrow-up'

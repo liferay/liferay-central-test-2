@@ -85,7 +85,6 @@ portletURL.setParameter("tag", StringPool.BLANK);
 	</c:if>
 </aui:nav-bar>
 
-
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>
 		Liferay.Util.focusFormField(document.<portlet:namespace />searchFm.<portlet:namespace />keywords);

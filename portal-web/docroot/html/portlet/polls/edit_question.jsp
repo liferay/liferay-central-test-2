@@ -97,7 +97,6 @@ if (choiceName > 0) {
 			<aui:input name="neverExpire" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" value="<%= neverExpire %>" />
 
 			<aui:input disabled="<%= neverExpire %>" label="" name="expirationDate" />
-
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="choices">

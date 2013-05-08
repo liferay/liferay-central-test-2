@@ -5,10 +5,6 @@
 
 	<property name="war.file" value="${ant.project.name}" />
 
-	<property name="alloy.version" value="2.0.0pr5" />
-
-	<property name="alloy.file" value="alloy-${alloy.version}.zip" />
-
 	<!--
 	When upgrading CKEditor, make sure to delete
 	docroot/html/js/editor/ckeditor_diffs/ckeditor.js.
@@ -58,6 +54,10 @@
 	</path>
 
 	<target name="build-alloy">
+		<property name="alloy.version" value="2.0.0pr5" />
+
+		<property name="alloy.file" value="alloy-${alloy.version}.zip" />
+
 		<if>
 			<not>
 				<uptodate
@@ -70,23 +70,17 @@
 				<!-- Prepare -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
-				<delete dir="docroot/html/css/portal/bootstrap.css" />
 				<delete dir="docroot/html/css/portal/aui_deprecated.css" />
+				<delete dir="docroot/html/css/portal/bootstrap.css" />
 				<delete dir="docroot/html/js/aui" />
 				<delete dir="docroot/html/themes/_unstyled/images/aui" />
 
 				<unzip src="third-party/${alloy.file}" dest="docroot/html/ALLOY_ZIP" />
 
+				<!-- CSS -->
+
 				<property name="alloy.build.dir" value="docroot/html/ALLOY_ZIP/alloy-${alloy.version}/build" />
 				<property name="alloy.temp.dir" value="docroot/html/ALLOY_ZIP/temp" />
-
-				<!-- JavaScript -->
-
-				<copy todir="docroot/html/js/aui" overwrite="true" preservelastmodified="true">
-					<fileset dir="${alloy.build.dir}/" />
-				</copy>
-
-				<!-- CSS -->
 
 				<concat destfile="${alloy.temp.dir}/bootstrap.css">
 					<filelist
@@ -176,6 +170,12 @@
 					tofile="docroot/html/css/portal/aui_deprecated.css"
 					overwrite="true"
 				/>
+
+				<!-- JavaScript -->
+
+				<copy todir="docroot/html/js/aui" overwrite="true" preservelastmodified="true">
+					<fileset dir="${alloy.build.dir}/" />
+				</copy>
 
 				<!-- Images -->
 

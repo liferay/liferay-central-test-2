@@ -352,12 +352,13 @@ public class DynamicCSSUtil {
 
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 
+		inputObjects.put("content", content);
+		inputObjects.put("cssRealPath", resourcePath);
+
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
 		String cssThemePath = _getCssThemePath(request, themeDisplay, theme);
 
-		inputObjects.put("content", content);
-		inputObjects.put("cssRealPath", resourcePath);
 		inputObjects.put("cssThemePath", portalWebDir.concat(cssThemePath));
 
 		File sassTempDir = _getSassTempDir(servletContext);
