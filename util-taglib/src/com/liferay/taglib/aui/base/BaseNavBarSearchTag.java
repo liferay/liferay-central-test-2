@@ -45,7 +45,7 @@ public class BaseNavBarSearchTag extends com.liferay.taglib.util.IncludeTag {
 		return _file;
 	}
 
-	public com.liferay.portal.kernel.dao.search.SearchContainer getSearchContainer() {
+	public com.liferay.portal.kernel.dao.search.SearchContainer<?> getSearchContainer() {
 		return _searchContainer;
 	}
 
@@ -67,7 +67,7 @@ public class BaseNavBarSearchTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("file", file);
 	}
 
-	public void setSearchContainer(com.liferay.portal.kernel.dao.search.SearchContainer searchContainer) {
+	public void setSearchContainer(com.liferay.portal.kernel.dao.search.SearchContainer<?> searchContainer) {
 		_searchContainer = searchContainer;
 
 		setScopedAttribute("searchContainer", searchContainer);
@@ -110,6 +110,6 @@ public class BaseNavBarSearchTag extends com.liferay.taglib.util.IncludeTag {
 	private java.lang.String _cssClass = null;
 	private java.lang.String _id = null;
 	private java.lang.String _file = null;
-	private com.liferay.portal.kernel.dao.search.SearchContainer _searchContainer = null;
+	private com.liferay.portal.kernel.dao.search.SearchContainer<?> _searchContainer = null;
 
 }
