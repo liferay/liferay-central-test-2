@@ -459,6 +459,8 @@ public class PortletExporter {
 			_log.info("Exporting portlet took " + stopWatch.getTime() + " ms");
 		}
 
+		portletDataContext.clearScopedPrimaryKeys();
+
 		try {
 			portletDataContext.addZipEntry(
 				"/manifest.xml", document.formattedString());
