@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.TempFileUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 
-import java.io.IOException;
-
 /**
  * @author Julio Camarero
  */
@@ -31,7 +29,7 @@ public class ExportImportUtil {
 		ExportImportUtil.class.getName();
 
 	public static FileEntry getTempFileEntry(long groupId, long userId)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(
 			groupId, TEMP_FOLDER_NAME);

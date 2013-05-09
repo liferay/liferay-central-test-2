@@ -254,6 +254,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		}
 	}
 
+	@Override
 	protected void deleteTempFileEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -295,6 +296,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		}
 	}
 
+	@Override
 	protected void handleUploadException(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse, String cmd, Exception e)
