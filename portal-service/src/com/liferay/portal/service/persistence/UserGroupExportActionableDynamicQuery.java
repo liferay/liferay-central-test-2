@@ -40,6 +40,7 @@ public class UserGroupExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		UserGroup stagedModel = (UserGroup)object;

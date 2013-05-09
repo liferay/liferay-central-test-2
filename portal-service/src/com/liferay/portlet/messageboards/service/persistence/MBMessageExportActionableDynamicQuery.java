@@ -41,6 +41,7 @@ public class MBMessageExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MBMessage stagedModel = (MBMessage)object;

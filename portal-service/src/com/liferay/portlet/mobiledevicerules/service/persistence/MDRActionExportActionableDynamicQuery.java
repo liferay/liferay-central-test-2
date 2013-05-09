@@ -41,6 +41,7 @@ public class MDRActionExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MDRAction stagedModel = (MDRAction)object;

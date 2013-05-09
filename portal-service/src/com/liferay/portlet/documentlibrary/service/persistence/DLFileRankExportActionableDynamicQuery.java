@@ -41,6 +41,7 @@ public class DLFileRankExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		DLFileRank stagedModel = (DLFileRank)object;

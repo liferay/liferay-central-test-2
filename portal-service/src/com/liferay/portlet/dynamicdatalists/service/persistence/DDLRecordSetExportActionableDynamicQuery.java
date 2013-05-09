@@ -41,6 +41,7 @@ public class DDLRecordSetExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		DDLRecordSet stagedModel = (DDLRecordSet)object;

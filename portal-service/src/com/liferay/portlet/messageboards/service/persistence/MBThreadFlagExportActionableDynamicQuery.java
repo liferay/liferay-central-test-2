@@ -41,6 +41,7 @@ public class MBThreadFlagExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MBThreadFlag stagedModel = (MBThreadFlag)object;

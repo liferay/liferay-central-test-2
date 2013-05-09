@@ -41,6 +41,7 @@ public class DDMTemplateExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		DDMTemplate stagedModel = (DDMTemplate)object;

@@ -41,6 +41,7 @@ public class JournalFolderExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		JournalFolder stagedModel = (JournalFolder)object;

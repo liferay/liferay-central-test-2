@@ -41,6 +41,7 @@ public class DLFolderExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		DLFolder stagedModel = (DLFolder)object;

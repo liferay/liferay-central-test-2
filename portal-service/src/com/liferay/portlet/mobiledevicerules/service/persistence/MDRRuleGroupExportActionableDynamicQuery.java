@@ -41,6 +41,7 @@ public class MDRRuleGroupExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MDRRuleGroup stagedModel = (MDRRuleGroup)object;

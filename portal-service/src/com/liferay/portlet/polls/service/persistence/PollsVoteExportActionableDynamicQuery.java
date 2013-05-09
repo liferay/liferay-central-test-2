@@ -41,6 +41,7 @@ public class PollsVoteExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		PollsVote stagedModel = (PollsVote)object;

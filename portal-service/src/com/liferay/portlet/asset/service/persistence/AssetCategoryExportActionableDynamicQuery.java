@@ -41,6 +41,7 @@ public class AssetCategoryExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		AssetCategory stagedModel = (AssetCategory)object;

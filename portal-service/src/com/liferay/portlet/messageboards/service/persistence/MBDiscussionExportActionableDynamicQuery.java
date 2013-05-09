@@ -41,6 +41,7 @@ public class MBDiscussionExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MBDiscussion stagedModel = (MBDiscussion)object;

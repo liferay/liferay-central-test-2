@@ -41,6 +41,7 @@ public class CalEventExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		CalEvent stagedModel = (CalEvent)object;

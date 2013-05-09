@@ -40,6 +40,7 @@ public class LayoutSetPrototypeExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		LayoutSetPrototype stagedModel = (LayoutSetPrototype)object;

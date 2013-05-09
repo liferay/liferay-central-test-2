@@ -40,6 +40,7 @@ public class RepositoryExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		Repository stagedModel = (Repository)object;

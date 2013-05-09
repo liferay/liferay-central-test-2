@@ -41,6 +41,7 @@ public class JournalFeedExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		JournalFeed stagedModel = (JournalFeed)object;

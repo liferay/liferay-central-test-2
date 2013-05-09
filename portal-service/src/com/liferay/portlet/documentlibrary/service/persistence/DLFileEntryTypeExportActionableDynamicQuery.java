@@ -41,6 +41,7 @@ public class DLFileEntryTypeExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		DLFileEntryType stagedModel = (DLFileEntryType)object;

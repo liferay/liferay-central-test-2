@@ -41,6 +41,7 @@ public class MBCategoryExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MBCategory stagedModel = (MBCategory)object;

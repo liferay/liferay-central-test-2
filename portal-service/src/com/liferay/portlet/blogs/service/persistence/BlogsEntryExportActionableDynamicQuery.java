@@ -41,6 +41,7 @@ public class BlogsEntryExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		BlogsEntry stagedModel = (BlogsEntry)object;

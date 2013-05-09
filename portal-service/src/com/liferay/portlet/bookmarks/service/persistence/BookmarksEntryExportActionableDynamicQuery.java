@@ -41,6 +41,7 @@ public class BookmarksEntryExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		BookmarksEntry stagedModel = (BookmarksEntry)object;

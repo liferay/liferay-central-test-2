@@ -39,6 +39,7 @@ public class RoleExportActionableDynamicQuery extends RoleActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		Role stagedModel = (Role)object;

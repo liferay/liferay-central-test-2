@@ -41,6 +41,7 @@ public class MBBanExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		MBBan stagedModel = (MBBan)object;

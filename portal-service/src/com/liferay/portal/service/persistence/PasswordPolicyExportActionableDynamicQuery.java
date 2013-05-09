@@ -40,6 +40,7 @@ public class PasswordPolicyExportActionableDynamicQuery
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
 		PasswordPolicy stagedModel = (PasswordPolicy)object;
