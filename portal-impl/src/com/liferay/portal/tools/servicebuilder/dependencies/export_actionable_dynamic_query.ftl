@@ -29,9 +29,8 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 	}
 
 	@Override
-	protected void performAction(Object object)
-		throws PortalException, SystemException {
-
+	@SuppressWarnings("unused")
+	protected void performAction(Object object) throws PortalException, SystemException {
 		${entity.name} stagedModel = (${entity.name})object;
 
 		StagedModelDataHandlerUtil.exportStagedModel(_portletDataContext, stagedModel);
