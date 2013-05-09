@@ -1523,7 +1523,7 @@ public class LayoutImporter {
 		throws Exception {
 
 		if ((_rootElement != null) && (_headerElement != null) &&
-			(_layoutsElement != null) && (_layoutsElement != null)) {
+			(_layoutsElement != null) && (_layoutElements != null)) {
 
 			return;
 		}
