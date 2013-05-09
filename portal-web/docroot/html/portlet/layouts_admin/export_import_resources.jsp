@@ -19,8 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String cmd = Constants.IMPORT;
-
 long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = null;
@@ -131,7 +129,7 @@ boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 	</aui:button-row>
 </aui:form>
 
-<c:if test='<%= cmd.equals(Constants.IMPORT) && SessionMessages.contains(liferayPortletRequest, "requestProcessed") %>'>
+<c:if test='<%= SessionMessages.contains(liferayPortletRequest, "requestProcessed") %>'>
 	<aui:script>
 		var opener = Liferay.Util.getOpener();
 
