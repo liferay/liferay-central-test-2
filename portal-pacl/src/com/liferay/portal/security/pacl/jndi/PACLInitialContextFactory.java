@@ -126,7 +126,6 @@ public class PACLInitialContextFactory implements InitialContextFactory {
 
 		context = DoPrivilegedFactory.wrap(
 			new SchemeAwareContextWrapper(context));
-
 		paclPolicy = DoPrivilegedFactory.wrap(paclPolicy);
 
 		return new PACLContext(context, paclPolicy);
