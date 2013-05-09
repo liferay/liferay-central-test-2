@@ -19,8 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String redirectWindowState = ParamUtil.getString(request, "redirectWindowState");
-
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
 
 long groupId = ParamUtil.getLong(request, "groupId");
