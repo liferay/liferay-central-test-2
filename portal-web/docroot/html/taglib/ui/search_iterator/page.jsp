@@ -241,6 +241,7 @@ int sortColumnIndex = -1;
 
 			if (rowChecker != null) {
 				rowIsChecked = rowChecker.isChecked(row.getObject());
+
 				boolean rowIsDisabled = rowChecker.isDisabled(row.getObject());
 
 				if (!rowIsChecked) {
