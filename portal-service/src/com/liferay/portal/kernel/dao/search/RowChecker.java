@@ -199,8 +199,8 @@ public class RowChecker {
 			sb.append(", ");
 			sb.append(checkBoxAllRowIds);
 			sb.append(");");
-			sb.append("AUI().one(this).ancestor('tr:not(.lfr-template)').toggleClass('");
-			sb.append("info');");
+			sb.append("AUI().one(this).ancestor('tr:not(.lfr-template)').");
+			sb.append("toggleClass('info');");
 
 			if (Validator.isNotNull(checkBoxPostOnClick)) {
 				sb.append(checkBoxPostOnClick);
