@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
+
+String redirect = ParamUtil.getString(request, "redirect");
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
