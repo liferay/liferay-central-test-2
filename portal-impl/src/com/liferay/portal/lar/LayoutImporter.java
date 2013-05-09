@@ -163,13 +163,11 @@ public class LayoutImporter {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
-		long companyId = layoutSet.getCompanyId();
-
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext portletDataContext = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, new HashSet<String>(), null,
-			zipReader);
+			layoutSet.getCompanyId(), groupId, parameterMap,
+			new HashSet<String>(), null, zipReader);
 
 		validateFile(portletDataContext);
 	}
@@ -1528,8 +1526,6 @@ public class LayoutImporter {
 			return;
 		}
 
-		// Manifest
-
 		String xml = portletDataContext.getZipEntryAsString("/manifest.xml");
 
 		if (xml == null) {
@@ -1692,12 +1688,11 @@ public class LayoutImporter {
 	private static MethodHandler _loadThemesMethodHandler = new MethodHandler(
 		new MethodKey(ThemeLoaderFactory.class, "loadThemes"));
 
-	private Element _headerElement = null;
-	private List<Element> _layoutElements = null;
-
-	private Element _layoutsElement = null;
+	private Element _headerElement;
+	private List<Element> _layoutElements;
+	private Element _layoutsElement;
 	private PermissionImporter _permissionImporter = new PermissionImporter();
 	private PortletImporter _portletImporter = new PortletImporter();
-	private Element _rootElement = null;
+	private Element _rootElement;
 
 }
