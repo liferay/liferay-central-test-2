@@ -7,11 +7,11 @@ AUI.add(
 
 		var formatSelectorNS = A.Node.formatSelectorNS;
 
-		var STRINGS = 'strings';
-
 		var STR_BLANK = '';
 
 		var STR_PARAM_FALLBACK = 'uploader=fallback';
+
+		var STRINGS = 'strings';
 
 		var TPL_ERROR_MESSAGE = '<div class="alert alert-error">{0}</div>';
 
