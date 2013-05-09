@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.resiliency.spi.SPIConfiguration;
 import com.liferay.portal.kernel.resiliency.spi.agent.SPIAgent;
 import com.liferay.portal.kernel.resiliency.spi.agent.SPIAgentFactoryUtil;
-import com.liferay.portal.kernel.resiliency.spi.provider.SPIRegisterSynchronizer;
+import com.liferay.portal.kernel.resiliency.spi.provider.SPISynchronousQueueUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 
 import java.io.IOException;
@@ -148,7 +148,7 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 		@Override
 		public SPI call() throws ProcessException {
 			try {
-				SPIRegisterSynchronizer.notifySynchronizer(_spiUUID, _spi);
+				SPISynchronousQueueUtil.notifySynchronousQueue(_spiUUID, _spi);
 			}
 			catch (InterruptedException ie) {
 				throw new ProcessException(ie);
@@ -172,14 +172,14 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 				RemoteSPI.this.stop();
 			}
 			catch (RemoteException re) {
-				_log.error("Failed stop SPI.", re);
+				_log.error("Unable to stop SPI", re);
 			}
 
 			try {
 				RemoteSPI.this.destroy();
 			}
 			catch (RemoteException re) {
-				_log.error("Failed destroy SPI.", re);
+				_log.error("Unable to destroy SPI", re);
 			}
 
 			return true;
@@ -211,7 +211,7 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 
 		// Log4j log file postfix
 
-		System.setProperty("spi.id", "-".concat(spiConfiguration.getSPIId()));
+		System.setProperty("spi.id", "-" + spiConfiguration.getSPIId());
 	}
 
 	private void writeObject(ObjectOutputStream objectOutputStream)

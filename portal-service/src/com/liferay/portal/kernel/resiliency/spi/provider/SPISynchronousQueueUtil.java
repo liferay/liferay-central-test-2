@@ -23,36 +23,35 @@ import java.util.concurrent.SynchronousQueue;
 /**
  * @author Shuyang Zhou
  */
-public class SPIRegisterSynchronizer {
+public class SPISynchronousQueueUtil {
 
-	public static SynchronousQueue<SPI> createSynchronizer(String spiUUID) {
-		SynchronousQueue<SPI> spiSynchronizer = new SynchronousQueue<SPI>();
+	public static SynchronousQueue<SPI> createSynchronousQueue(String spiUUID) {
+		SynchronousQueue<SPI> synchronousQueue = new SynchronousQueue<SPI>();
 
-		_synchronizerRegistry.put(spiUUID, spiSynchronizer);
+		_synchronousQueues.put(spiUUID, synchronousQueue);
 
-		return spiSynchronizer;
+		return synchronousQueue;
 	}
 
-	public static void destroySynchronizer(String spiUUID) {
-		_synchronizerRegistry.remove(spiUUID);
+	public static void destroySynchronousQueue(String spiUUID) {
+		_synchronousQueues.remove(spiUUID);
 	}
 
-	public static void notifySynchronizer(String spiUUID, SPI spi)
+	public static void notifySynchronousQueue(String spiUUID, SPI spi)
 		throws InterruptedException {
 
-		SynchronousQueue<SPI> spiSynchronizer = _synchronizerRegistry.remove(
+		SynchronousQueue<SPI> synchronousQueue = _synchronousQueues.remove(
 			spiUUID);
 
-		if (spiSynchronizer == null) {
+		if (synchronousQueue == null) {
 			throw new IllegalStateException(
-				"No such SPI synchronizer with uuid : " + spiUUID);
+				"No SPI synchronous queue with uuid " + spiUUID);
 		}
 
-		spiSynchronizer.put(spi);
+		synchronousQueue.put(spi);
 	}
 
-	private static final Map<String, SynchronousQueue<SPI>>
-		_synchronizerRegistry =
-			new ConcurrentHashMap<String, SynchronousQueue<SPI>>();
+	private static Map<String, SynchronousQueue<SPI>> _synchronousQueues =
+		new ConcurrentHashMap<String, SynchronousQueue<SPI>>();
 
 }
