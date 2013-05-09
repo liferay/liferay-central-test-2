@@ -448,19 +448,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Children
 
-		List<WikiPage> children = wikiPagePersistence.findByN_P(
+		List<WikiPage> childrenPages = wikiPagePersistence.findByN_P(
 			page.getNodeId(), page.getTitle());
 
-		for (WikiPage curPage : children) {
-			if ((!curPage.isInTrash() && page.isInTrash()) ||
-				!curPage.isApproved()) {
+		for (WikiPage childrenPage : childrenPages) {
+			if (!childrenPage.isApproved() ||
+				(!childrenPage.isInTrash() && page.isInTrash())) {
 
-				curPage.setParentTitle(StringPool.BLANK);
+				childrenPage.setParentTitle(StringPool.BLANK);
 
-				wikiPagePersistence.update(curPage);
+				wikiPagePersistence.update(childrenPage);
 			}
 			else {
-				deletePage(curPage);
+				deletePage(childrenPage);
 			}
 		}
 
