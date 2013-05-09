@@ -26,9 +26,9 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class BookmarksFolderExportingActionableDynamicQuery
+public class BookmarksFolderExportActionableDynamicQuery
 	extends BookmarksFolderActionableDynamicQuery {
-	public BookmarksFolderExportingActionableDynamicQuery(
+	public BookmarksFolderExportActionableDynamicQuery(
 		PortletDataContext portletDataContext) throws SystemException {
 		_portletDataContext = portletDataContext;
 

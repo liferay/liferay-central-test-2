@@ -179,11 +179,11 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		return _publishToLiveByDefault;
 	}
 
-	public void prepareSummary(PortletDataContext portletDataContext)
+	public void prepareManifestSummary(PortletDataContext portletDataContext)
 		throws PortletDataException {
 
 		try {
-			doPrepareSummary(portletDataContext);
+			doPrepareManifestSummary(portletDataContext);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -228,7 +228,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		return null;
 	}
 
-	protected void doPrepareSummary(PortletDataContext portletDataContext)
+	protected void doPrepareManifestSummary(
+			PortletDataContext portletDataContext)
 		throws Exception {
 	}
 

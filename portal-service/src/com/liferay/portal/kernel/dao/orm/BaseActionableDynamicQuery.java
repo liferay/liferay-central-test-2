@@ -118,7 +118,6 @@ public abstract class BaseActionableDynamicQuery
 		try {
 			_dynamicQueryMethod = clazz.getMethod(
 				"dynamicQuery", DynamicQuery.class);
-
 			_dynamicQueryCountMethod = clazz.getMethod(
 				"dynamicQueryCount", DynamicQuery.class);
 		}
@@ -168,7 +167,6 @@ public abstract class BaseActionableDynamicQuery
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	protected Object executeDynamicQuery(
 			DynamicQuery dynamicQuery, Method dynamicQueryMethod)
 		throws PortalException, SystemException {

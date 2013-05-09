@@ -27,8 +27,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryExportingActionableDynamicQuery;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderExportingActionableDynamicQuery;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryExportActionableDynamicQuery;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderExportActionableDynamicQuery;
 
 import java.util.List;
 
@@ -98,17 +98,15 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		ActionableDynamicQuery folderActionableDynamicQuery =
-			new BookmarksFolderExportingActionableDynamicQuery(
-				portletDataContext);
+		ActionableDynamicQuery folderExportActionableDynamicQuery =
+			new BookmarksFolderExportActionableDynamicQuery(portletDataContext);
 
-		ActionableDynamicQuery entryActionableDynamicQuery =
-			new BookmarksEntryExportingActionableDynamicQuery(
-				portletDataContext);
+		folderExportActionableDynamicQuery.performActions();
 
-		folderActionableDynamicQuery.performActions();
+		ActionableDynamicQuery entryExportActionableDynamicQuery =
+			new BookmarksEntryExportActionableDynamicQuery(portletDataContext);
 
-		entryActionableDynamicQuery.performActions();
+		entryExportActionableDynamicQuery.performActions();
 
 		return getExportDataRootElementString(rootElement);
 	}
@@ -147,27 +145,26 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Override
-	protected void doPrepareSummary(PortletDataContext portletDataContext)
+	protected void doPrepareManifestSummary(
+			PortletDataContext portletDataContext)
 		throws Exception {
 
-		ActionableDynamicQuery folderActionableDynamicQuery =
-			new BookmarksFolderExportingActionableDynamicQuery(
-				portletDataContext);
+		ActionableDynamicQuery folderExportActionableDynamicQuery =
+			new BookmarksFolderExportActionableDynamicQuery(portletDataContext);
 
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		long folderCount = folderActionableDynamicQuery.performCount();
+		manifestSummary.addModelCount(
+			BookmarksFolder.class,
+			folderExportActionableDynamicQuery.performCount());
 
-		manifestSummary.addModelCount(BookmarksFolder.class, folderCount);
+		ActionableDynamicQuery entryExportActionableDynamicQuery =
+			new BookmarksEntryExportActionableDynamicQuery(portletDataContext);
 
-		ActionableDynamicQuery entryActionableDynamicQuery =
-			new BookmarksEntryExportingActionableDynamicQuery(
-				portletDataContext);
-
-		long entryCount = entryActionableDynamicQuery.performCount();
-
-		manifestSummary.addModelCount(BookmarksEntry.class, entryCount);
+		manifestSummary.addModelCount(
+			BookmarksEntry.class,
+			entryExportActionableDynamicQuery.performCount());
 	}
 
 	private static final String _RESOURCE_NAME =
