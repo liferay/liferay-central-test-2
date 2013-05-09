@@ -28,8 +28,6 @@ public class Logger {
 	public Logger(String projectDir) {
 		_projectDir = projectDir;
 
-		_webDriver = new FirefoxDriver();
-
 		WebDriver.Options options = _webDriver.manage();
 
 		WebDriver.Window window = options.window();
@@ -52,6 +50,6 @@ public class Logger {
 	}
 
 	private String _projectDir;
-	private WebDriver _webDriver;
+	private WebDriver _webDriver = new FirefoxDriver();
 
 }
