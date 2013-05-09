@@ -4267,6 +4267,7 @@ public class SourceFormatter {
 			"**\\service\\**\\service\\messaging\\*ClpMessageListener.java",
 			"**\\service\\**\\service\\persistence\\*Finder.java",
 			"**\\service\\**\\service\\persistence\\*Persistence.java",
+			"**\\service\\**\\service\\persistence\\*PersistenceImpl.java",
 			"**\\service\\**\\service\\persistence\\*Util.java",
 			"**\\service\\base\\*ServiceBaseImpl.java",
 			"**\\service\\base\\*ServiceClpInvoker.java",
