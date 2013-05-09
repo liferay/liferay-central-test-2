@@ -130,20 +130,20 @@ AUI.add(
 							cancelUploadsText: Liferay.Language.get('cancel-all-uploads'),
 							clearRecentUploadsText: Liferay.Language.get('clear-documents-already-saved'),
 							deleteFileText: Liferay.Language.get('delete-file'),
-							dropFileText: Liferay.Language.get('drop-file-here-to-upload'),
 							dropFilesText: Liferay.Language.get('drop-files-here-to-upload'),
-							fileCanNotBeSavedText: Liferay.Language.get('the-file-can-not-be-saved'),
+							dropFileText: Liferay.Language.get('drop-file-here-to-upload'),
+							fileCannotBeSavedText: Liferay.Language.get('the-file-cannot-be-saved'),
 							invalidFileNameText: Liferay.Language.get('please-enter-a-file-with-a-valid-file-name'),
 							invalidFileSizeText: Liferay.Language.get('please-enter-a-file-with-a-valid-file-size-no-larger-than-x'),
 							noFilesSelectedText: Liferay.Language.get('no-files-selected'),
 							notAvailableText: Liferay.Language.get('multiple-file-uploading-is-not-available'),
 							orText: Liferay.Language.get('or'),
 							pendingFileText: Liferay.Language.get('these-files-have-been-previously-uploaded-but-not-actually-saved.-please-save-or-delete-them-before-they-are-removed'),
-							selectFileText: Liferay.Language.get('select-file'),
 							selectFilesText: Liferay.Language.get('select-files'),
+							selectFileText: Liferay.Language.get('select-file'),
 							unexpectedErrorOnDeleteText: Liferay.Language.get('an-unexpected-error-occurred-while-deleting-the-file'),
 							unexpectedErrorOnUploadText: Liferay.Language.get('an-unexpected-error-occurred-while-uploading-your-file'),
-							uploadingFileXText: Liferay.Language.get('uploading-file-x-of-x'),
+							uploadingFileXofXText: Liferay.Language.get('uploading-file-x-of-x'),
 							uploadingText: Liferay.Language.get('uploading'),
 							uploadsCompleteText: Liferay.Language.get('all-files-ready-to-be-saved'),
 							xFilesReadyText: Liferay.Language.get('x-files-ready-to-be-uploaded'),
@@ -543,7 +543,7 @@ AUI.add(
 							uploadsCompleteText = strings.uploadsCompleteText;
 						}
 						else {
-							uploadsCompleteText = strings.fileCanNotBeSavedText;
+							uploadsCompleteText = strings.fileCannotBeSavedText;
 						}
 
 						instance._updateList(0, uploadsCompleteText);
@@ -770,7 +770,7 @@ AUI.add(
 						var currentListText;
 
 						if (instance.get('multipleFiles')) {
-							currentListText = Lang.sub(strings.uploadingFileXText, [position, filesTotal]);
+							currentListText = Lang.sub(strings.uploadingFileXofXText, [position, filesTotal]);
 						}
 						else {
 							currentListText = strings.uploadingText;

@@ -144,7 +144,7 @@ String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(groupId, I
 								}
 							);
 
-							liferayUpload.set('strings.fileCanNotBeSavedText', '<liferay-ui:message key="the-file-cannot-be-imported" />');
+							liferayUpload.set('strings.fileCannotBeSavedText', '<liferay-ui:message key="the-file-cannot-be-imported" />');
 							liferayUpload.set('strings.pendingFileText', '<liferay-ui:message key="this-file-was-previously-uploaded-but-not-actually-imported" />');
 							liferayUpload.set('strings.uploadsCompleteText', '<liferay-ui:message key="the-file-is-ready-to-be-imported" />');
 
