@@ -695,6 +695,12 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		if ((attributes != null) && !attributes.isEmpty()) {
+			searchContext.setAttributes(attributes);
+		}
+
+		searchContext.setEnd(searchContainer.getEnd());
+
 		Class<?> indexerClass = Class.forName(indexerClassName);
 
 		try {
@@ -703,12 +709,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		catch (Exception e) {
 			searchContext.setGroupIds(null);
 		}
-
-		if ((attributes != null) && !attributes.isEmpty()) {
-			searchContext.setAttributes(attributes);
-		}
-
-		searchContext.setEnd(searchContainer.getEnd());
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);
