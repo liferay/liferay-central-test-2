@@ -196,8 +196,6 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		// Delete existing fileEntries
-
 		deleteTempFileEntry(themeDisplay.getScopeGroupId());
 
 		InputStream inputStream = null;
@@ -317,41 +315,36 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		if (e instanceof DuplicateFileException ||
 			e instanceof FileExtensionException ||
 			e instanceof FileNameException ||
+			e instanceof FileSizeException ||
 			e instanceof LARFileException ||
 			e instanceof LARFileSizeException ||
 			e instanceof LARTypeException ||
 			e instanceof LayoutPrototypeException ||
-			e instanceof LocaleException ||
-			e instanceof FileSizeException) {
+			e instanceof LocaleException) {
 
 			if (e instanceof DuplicateFileException) {
-				errorType =
-					ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
-
 				errorMessage = themeDisplay.translate(
 					"please-enter-a-unique-document-name");
+				errorType =
+					ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
 			}
 			else if (e instanceof FileExtensionException) {
-				errorType =
-					ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
-
 				errorMessage = themeDisplay.translate(
 					"document-names-must-end-with-one-of-the-following-" +
 						"extensions",
 					StringUtil.merge(
 						getAllowedFileExtensions(
 							portletConfig, actionRequest, actionResponse)));
+				errorType =
+					ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
 			}
 			else if (e instanceof FileNameException) {
-				errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
-
 				errorMessage = themeDisplay.translate(
 					"please-enter-a-file-with-a-valid-file-name");
+				errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
 			}
 			else if (e instanceof FileSizeException ||
 					 e instanceof LARFileSizeException) {
-
-				errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 
 				long fileMaxSize = PrefsPropsUtil.getLong(
 					PropsKeys.DL_FILE_MAX_SIZE);
@@ -364,59 +357,43 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				fileMaxSize /= 1024;
 
 				errorMessage = themeDisplay.translate(
-					"please-enter-a-file-with-a-valid-file-size-no-larger" +
-						"-than-x", fileMaxSize);
+					"please-enter-a-file-with-a-valid-file-size-no-larger-" +
+						"than-x",
+					fileMaxSize);
+				errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 			}
 			else if (e instanceof LARTypeException) {
 				LARTypeException lte = (LARTypeException)e;
 
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-
 				errorMessage = themeDisplay.translate(
-					"please-import-a-lar-file-of-the-correct-type" +
-						"-x-is-not-valid",
+					"please-import-a-lar-file-of-the-correct-type-x-is-not-" +
+						"valid",
 					lte.getMessage());
-
+				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 			}
 			else if (e instanceof LARFileException) {
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-
 				errorMessage = themeDisplay.translate(
 					"please-specify-a-lar-file-to-import");
-			}
-			else if (e instanceof LocaleException) {
-				LocaleException le = (LocaleException)e;
-
 				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-
-				errorMessage = themeDisplay.translate(
-					"the-available-languages-in-the-lar-file-x-do" +
-						"-not-match-the-portal's-available-languages-x",
-					new String[] {
-						StringUtil.merge(
-							le.getSourceAvailableLocales(),
-							StringPool.COMMA_AND_SPACE),
-						StringUtil.merge(
-							le.getTargetAvailableLocales(),
-							StringPool.COMMA_AND_SPACE)});
 			}
 			else if (e instanceof LayoutPrototypeException) {
 				LayoutPrototypeException lpe = (LayoutPrototypeException)e;
-
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 
 				List<Tuple> missingLayoutPrototypes =
 					lpe.getMissingLayoutPrototypes();
 
 				StringBundler sb = new StringBundler(
-					3 + (10 * missingLayoutPrototypes.size()));
+					3 + (11 * missingLayoutPrototypes.size()));
 
-				sb.append(
-					themeDisplay.translate(
-						"the-lar-file-could-not-be-imported-because-it-" +
-							"requires-page-templates-or-site-templates-" +
-							"that-could-not-be-found.-please-import-the-" +
-							"following-templates-manually"));
+				StringBundler languageKeySB = new StringBundler(5);
+
+				languageKeySB.append("the-lar-file-could-not-be-imported-");
+				languageKeySB.append("because-it-requires-page-templates-or-");
+				languageKeySB.append("site-templates-that-could-not-be-");
+				languageKeySB.append("found.-please-import-the-following-");
+				languageKeySB.append("templates-manually");
+
+				sb.append(themeDisplay.translate(languageKeySB.toString()));
 
 				sb.append("<ul>");
 
@@ -441,13 +418,30 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 					sb.append(StringPool.OPEN_PARENTHESIS);
 					sb.append(layoutPrototypeUuid);
 					sb.append(StringPool.CLOSE_PARENTHESIS);
-
 					sb.append("</li>");
 				}
 
 				sb.append("</ul>");
 
 				errorMessage = sb.toString();
+
+				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+			}
+			else if (e instanceof LocaleException) {
+				LocaleException le = (LocaleException)e;
+
+				errorMessage = themeDisplay.translate(
+					"the-available-languages-in-the-lar-file-x-do-not-match-" +
+						"the-portal's-available-languages-x",
+					new String[] {
+						StringUtil.merge(
+							le.getSourceAvailableLocales(),
+							StringPool.COMMA_AND_SPACE),
+						StringUtil.merge(
+							le.getTargetAvailableLocales(),
+							StringPool.COMMA_AND_SPACE)
+					});
+				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 			}
 		}
 		else {
@@ -458,8 +452,8 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("status", errorType);
 		jsonObject.put("message", errorMessage);
+		jsonObject.put("status", errorType);
 
 		writeJSON(actionRequest, actionResponse, jsonObject);
 
@@ -474,8 +468,6 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
 
 		FileEntry fileEntry = ExportImportUtil.getTempFileEntry(
 			groupId, themeDisplay.getUserId());
@@ -493,10 +485,13 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		File newFile = null;
 
 		try {
-			String newFilePath = StringUtil.replace(
+			boolean privateLayout = ParamUtil.getBoolean(
+				actionRequest, "privateLayout");
+
+			String newFileName = StringUtil.replace(
 				file.getPath(), file.getName(), fileEntry.getTitle());
 
-			newFile = new File(newFilePath);
+			newFile = new File(newFileName);
 
 			successfulRename = file.renameTo(newFile);
 
@@ -530,8 +525,6 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
 
 		FileEntry fileEntry = ExportImportUtil.getTempFileEntry(
 			groupId, themeDisplay.getUserId());
@@ -549,10 +542,13 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		File newFile = null;
 
 		try {
-			String newFilePath = StringUtil.replace(
+			boolean privateLayout = ParamUtil.getBoolean(
+				actionRequest, "privateLayout");
+
+			String newFileName = StringUtil.replace(
 				file.getPath(), file.getName(), fileEntry.getTitle());
 
-			newFile = new File(newFilePath);
+			newFile = new File(newFileName);
 
 			successfulRename = file.renameTo(newFile);
 
