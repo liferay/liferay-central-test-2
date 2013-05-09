@@ -83,7 +83,7 @@ for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
 
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
 
-String[] uploadedFiles = LayoutServiceUtil.getTempFileEntryNames(groupId, ImportLayoutsAction.class.getName());
+String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(groupId, ImportLayoutsAction.class.getName());
 %>
 
 <div id="<portlet:namespace />exportImportOptions">
@@ -98,7 +98,7 @@ String[] uploadedFiles = LayoutServiceUtil.getTempFileEntryNames(groupId, Import
 					<aui:button type="submit" value="export" />
 				</aui:button-row>
 			</c:when>
-			<c:when test="<%= cmd.equals(Constants.IMPORT) && (uploadedFiles.length > 0) %>">
+			<c:when test="<%= cmd.equals(Constants.IMPORT) && (tempFileEntryNames.length > 0) %>">
 				<liferay-util:include page="/html/portlet/layouts_admin/export_import_resources.jsp" />
 			</c:when>
 			<c:otherwise>
@@ -187,7 +187,7 @@ String[] uploadedFiles = LayoutServiceUtil.getTempFileEntryNames(groupId, Import
 	</aui:form>
 </div>
 
-<aui:script use="aui-base,aui-loading-mask-deprecated,json-stringify,aui-io-plugin-deprecated">
+<aui:script use="aui-base,aui-io-plugin-deprecated,aui-loading-mask-deprecated,json-stringify">
 	var form = A.one('#<portlet:namespace />fm1');
 
 	form.on(
