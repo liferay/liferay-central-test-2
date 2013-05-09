@@ -658,10 +658,9 @@ public class EditFileEntryAction extends PortletAction {
 
 			return extensions.toArray(new String[extensions.size()]);
 		}
-		else {
-			return com.liferay.portal.kernel.util.PrefsPropsUtil.getStringArray(
-				PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
-		}
+
+		return PrefsPropsUtil.getStringArray(
+			PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA);
 	}
 
 	protected String getSaveAndContinueRedirect(
@@ -738,40 +737,35 @@ public class EditFileEntryAction extends PortletAction {
 				response.setContentType(ContentTypes.TEXT_HTML);
 				response.setStatus(HttpServletResponse.SC_OK);
 
-				int errorType = 0;
 				String errorMessage = StringPool.BLANK;
+				int errorType = 0;
 
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)actionRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
 
 				if (e instanceof DuplicateFileException) {
-					errorType =
-						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
-
 					errorMessage = themeDisplay.translate(
 						"please-enter-a-unique-document-name");
+					errorType =
+						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
 				}
 				else if (e instanceof FileExtensionException) {
-					errorType =
-						ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
-
 					errorMessage = themeDisplay.translate(
 						"document-names-must-end-with-one-of-the-following-" +
 							"extensions",
 						StringUtil.merge(
 							getAllowedFileExtensions(
 								portletConfig, actionRequest, actionResponse)));
+					errorType =
+						ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
 				}
 				else if (e instanceof FileNameException) {
-					errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
-
 					errorMessage = themeDisplay.translate(
 						"please-enter-a-file-with-a-valid-file-name");
+					errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
 				}
 				else if (e instanceof FileSizeException) {
-					errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
-
 					long fileMaxSize = PrefsPropsUtil.getLong(
 						PropsKeys.DL_FILE_MAX_SIZE);
 
@@ -784,13 +778,16 @@ public class EditFileEntryAction extends PortletAction {
 
 					errorMessage = themeDisplay.translate(
 						"please-enter-a-file-with-a-valid-file-size-no-larger" +
-							"-than-x", fileMaxSize);
+							"-than-x",
+						fileMaxSize);
+
+					errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 				}
 
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObject.put("status", errorType);
 				jsonObject.put("message", errorMessage);
+				jsonObject.put("status", errorType);
 
 				writeJSON(actionRequest, actionResponse, jsonObject);
 			}
