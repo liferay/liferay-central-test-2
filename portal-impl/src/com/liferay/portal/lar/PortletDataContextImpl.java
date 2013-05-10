@@ -941,8 +941,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getImportDataElement(clazz.getSimpleName(), "path", path);
 	}
 
-	public String getLayoutPath(long layoutId) {
-		return ExportImportPathUtil.getLayoutPath(this, layoutId);
+	public String getLayoutPath(long plid) {
+		return ExportImportPathUtil.getLayoutPath(this, plid);
 	}
 
 	public Map<String, Lock> getLocks() {

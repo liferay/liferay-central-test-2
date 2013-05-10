@@ -42,7 +42,7 @@ public class ExportImportPathUtil {
 				path + " is located outside of the LAR");
 		}
 
-		int pos = path.lastIndexOf(_FILE_ENDING_XML);
+		int pos = path.lastIndexOf(_FILE_EXTENSION_XML);
 
 		if (pos == -1) {
 			throw new IllegalArgumentException(path + " is not an XML file");
@@ -62,7 +62,7 @@ public class ExportImportPathUtil {
 		sb.append(PATH_PREFIX_LAYOUT);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(plid);
-		sb.append(_FILE_ENDING_XML);
+		sb.append(_FILE_EXTENSION_XML);
 
 		return sb.toString();
 	}
@@ -180,7 +180,7 @@ public class ExportImportPathUtil {
 		sb.append(primaryKeyObj.toString());
 
 		if (dependentFileName == null) {
-			sb.append(_FILE_ENDING_XML);
+			sb.append(_FILE_EXTENSION_XML);
 		}
 		else {
 			sb.append(StringPool.FORWARD_SLASH);
@@ -203,6 +203,6 @@ public class ExportImportPathUtil {
 		return sb.toString();
 	}
 
-	private static final String _FILE_ENDING_XML = ".xml";
+	private static final String _FILE_EXTENSION_XML = ".xml";
 
 }

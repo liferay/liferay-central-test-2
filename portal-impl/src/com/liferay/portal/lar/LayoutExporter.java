@@ -657,7 +657,9 @@ public class LayoutExporter {
 		throws Exception {
 
 		String path = ExportImportPathUtil.getLayoutPath(
-			portletDataContext, layout.getLayoutId()) + "/layout.xml";
+			portletDataContext, layout.getPlid());
+
+		path += "/layout.xml";
 
 		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
@@ -1135,7 +1137,7 @@ public class LayoutExporter {
 
 		sb.append(
 			ExportImportPathUtil.getLayoutPath(
-				portletDataContext, layout.getLayoutId()));
+				portletDataContext, layout.getPlid()));
 		sb.append("/icons/");
 		sb.append(image.getImageId());
 		sb.append(StringPool.PERIOD);

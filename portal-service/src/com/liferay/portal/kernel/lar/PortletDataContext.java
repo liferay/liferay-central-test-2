@@ -211,7 +211,7 @@ public interface PortletDataContext extends Serializable {
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             ExportImportPathUtil#getLayoutPath(PortletDataContext, long)}
 	 */
-	public String getLayoutPath(long layoutId);
+	public String getLayoutPath(long plid);
 
 	public Map<String, Lock> getLocks();
 
