@@ -15,6 +15,7 @@
 package com.liferay.portal.struts;
 
 import javax.servlet.jsp.PageContext;
+
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
 
