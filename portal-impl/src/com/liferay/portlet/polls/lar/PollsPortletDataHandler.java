@@ -154,11 +154,11 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 			PortletDataContext portletDataContext)
 		throws Exception {
 
+		ManifestSummary manifestSummary =
+			portletDataContext.getManifestSummary();
+
 		ActionableDynamicQuery questionActionableDynamicQuery =
 			new PollsQuestionExportActionableDynamicQuery(portletDataContext);
-
-		ManifestSummary manifestSummary =
-				portletDataContext.getManifestSummary();
 
 		manifestSummary.addModelCount(
 			PollsQuestion.class, questionActionableDynamicQuery.performCount());
