@@ -31,7 +31,6 @@ public class ModelResourceComparator
 		_locale = locale;
 	}
 
-	@Override
 	public int compare(String resource1, String resource2) {
 		resource1 = ResourceActionsUtil.getModelResource(_locale, resource1);
 		resource2 = ResourceActionsUtil.getModelResource(_locale, resource2);

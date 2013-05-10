@@ -30,7 +30,6 @@ public class NotificationEventComparator
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(
 		NotificationEvent notificationEvent1,
 		NotificationEvent notificationEvent2) {

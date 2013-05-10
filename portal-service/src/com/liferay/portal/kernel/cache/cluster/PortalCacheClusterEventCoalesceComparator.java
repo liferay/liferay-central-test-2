@@ -24,7 +24,6 @@ import java.util.Comparator;
 public class PortalCacheClusterEventCoalesceComparator
 	implements Comparator<PortalCacheClusterEvent> {
 
-	@Override
 	public int compare(
 		PortalCacheClusterEvent portalCacheClusterEvent1,
 		PortalCacheClusterEvent portalCacheClusterEvent2) {

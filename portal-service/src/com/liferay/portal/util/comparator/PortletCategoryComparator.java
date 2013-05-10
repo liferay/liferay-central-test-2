@@ -32,7 +32,6 @@ public class PortletCategoryComparator
 		_locale = locale;
 	}
 
-	@Override
 	public int compare(
 		PortletCategory portletCategory1, PortletCategory portletCategory2) {
 

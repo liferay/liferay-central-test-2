@@ -31,7 +31,6 @@ public class GGroupEmailAddressComparator implements Comparator<GGroup> {
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(GGroup user1, GGroup user2) {
 		String emailAddress1 = user1.getEmailAddress();
 		String emailAddress2 = user2.getEmailAddress();

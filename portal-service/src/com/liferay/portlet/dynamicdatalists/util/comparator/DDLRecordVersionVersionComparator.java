@@ -34,7 +34,6 @@ public class DDLRecordVersionVersionComparator
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(
 		DDLRecordVersion recordVersion1, DDLRecordVersion recordVersion2) {
 

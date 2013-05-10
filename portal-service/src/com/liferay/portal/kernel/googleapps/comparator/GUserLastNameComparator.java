@@ -31,7 +31,6 @@ public class GUserLastNameComparator implements Comparator<GUser> {
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(GUser user1, GUser user2) {
 		String lastName1 = user1.getLastName();
 		String lastName2 = user2.getLastName();

@@ -35,7 +35,6 @@ public class UserTrackerModifiedDateComparator
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(UserTracker userTracker1, UserTracker userTracker2) {
 		int value = DateUtil.compareTo(
 			userTracker1.getModifiedDate(), userTracker2.getModifiedDate());

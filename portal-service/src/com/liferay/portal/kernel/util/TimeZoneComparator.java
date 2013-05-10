@@ -27,7 +27,6 @@ public class TimeZoneComparator implements Comparator<TimeZone> {
 		_locale = locale;
 	}
 
-	@Override
 	public int compare(TimeZone timeZone1, TimeZone timeZone2) {
 		Integer rawOffset1 = timeZone1.getRawOffset();
 		Integer rawOffset2 = timeZone2.getRawOffset();

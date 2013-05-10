@@ -26,7 +26,6 @@ import java.util.Comparator;
 public class PortletControlPanelWeightComparator
 	implements Comparator<Portlet> {
 
-	@Override
 	public int compare(Portlet portlet1, Portlet portlet2) {
 		double portletWeight1 = portlet1.getControlPanelEntryWeight();
 		double portletWeight2 = portlet2.getControlPanelEntryWeight();

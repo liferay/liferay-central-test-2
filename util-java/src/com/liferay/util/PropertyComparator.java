@@ -51,7 +51,6 @@ public class PropertyComparator implements Comparator<Object> {
 		_caseSensitive = caseSensitive;
 	}
 
-	@Override
 	public int compare(Object obj1, Object obj2) {
 		try {
 			for (String propertyName : _propertyNames) {

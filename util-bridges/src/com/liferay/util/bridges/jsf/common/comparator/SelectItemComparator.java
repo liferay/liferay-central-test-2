@@ -31,7 +31,6 @@ public class SelectItemComparator implements Comparator<SelectItem> {
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(SelectItem selectItem1, SelectItem selectItem2) {
 		int value = selectItem1.getLabel().compareTo(selectItem2.getLabel());
 

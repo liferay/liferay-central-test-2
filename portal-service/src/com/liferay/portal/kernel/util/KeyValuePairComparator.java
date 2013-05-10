@@ -34,7 +34,6 @@ public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(KeyValuePair kvp1, KeyValuePair kvp2) {
 		if (_byKey) {
 			String key1 = kvp1.getKey();

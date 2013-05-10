@@ -34,7 +34,6 @@ public class FileVersionVersionComparator implements Comparator<DLFileVersion> {
 		_ascending = ascending;
 	}
 
-	@Override
 	public int compare(
 		DLFileVersion dlFileVersion1, DLFileVersion dlFileVersion2) {
 
