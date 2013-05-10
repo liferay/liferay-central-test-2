@@ -663,23 +663,6 @@ public class JournalArticleStagedModelDataHandler
 		}
 	}
 
-	@Override
-	protected boolean doValidateMissingReference(String uuid, long groupId) {
-		try {
-			JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
-				uuid, groupId);
-
-			if (journalArticle == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-
 	protected void exportArticleImage(
 			PortletDataContext portletDataContext,
 			JournalArticleImage articleImage, JournalArticle article,
@@ -738,6 +721,23 @@ public class JournalArticleStagedModelDataHandler
 			articleDefaultLocale, articleAvailableLocales);
 
 		article.prepareLocalizedFieldsForImport(defaultImportLocale);
+	}
+
+	@Override
+	protected boolean validateMissingReference(String uuid, long groupId) {
+		try {
+			JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
+				uuid, groupId);
+
+			if (journalArticle == null) {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

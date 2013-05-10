@@ -668,10 +668,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			referenceElement = referencesElement.addElement(
 				"missing-reference");
 
-			referenceElement.addAttribute(
-				"referrer-display-name",
-				StagedModelDataHandlerUtil.getDisplayName(referrerStagedModel));
-
 			if (classedModel instanceof StagedModel) {
 				referenceElement.addAttribute(
 					"display-name",
@@ -683,6 +679,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 					"display-name",
 					String.valueOf(classedModel.getPrimaryKeyObj()));
 			}
+
+			referenceElement.addAttribute(
+				"referrer-display-name",
+				StagedModelDataHandlerUtil.getDisplayName(referrerStagedModel));
 		}
 
 		referenceElement.addAttribute("class-name", className);

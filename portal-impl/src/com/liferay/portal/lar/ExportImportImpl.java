@@ -48,8 +48,8 @@ import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -554,22 +554,18 @@ public class ExportImportImpl implements ExportImport {
 		final List<MissingReference> missingReferences =
 			new ArrayList<MissingReference>();
 
-		User user = UserUtil.findByPrimaryKey(userId);
-
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
-
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext portletDataContext = new PortletDataContextImpl(
 			group.getCompanyId(), groupId, new HashMap<String, String[]>(),
-			_getUserIdStrategy(user, userIdStrategy), zipReader);
+			getUserIdStrategy(userId, userIdStrategy), zipReader);
 
 		SAXParser saxParser = new SAXParser();
 
-		ElementHandler elementParser = new ElementHandler(
+		ElementHandler elementHandler = new ElementHandler(
 			new ElementProcessor() {
 
 				@Override
@@ -581,9 +577,11 @@ public class ExportImportImpl implements ExportImport {
 						missingReferences.add(missingReference);
 					}
 				}
-			}, new String[] {"missing-reference"});
 
-		saxParser.setContentHandler(elementParser);
+			},
+			new String[] {"missing-reference"});
+
+		saxParser.setContentHandler(elementHandler);
 
 		saxParser.parse(
 			new InputSource(
@@ -727,6 +725,19 @@ public class ExportImportImpl implements ExportImport {
 		return fileEntry;
 	}
 
+	protected UserIdStrategy getUserIdStrategy(
+			long userId, String userIdStrategy)
+		throws Exception {
+
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
+			return new AlwaysCurrentUserIdStrategy(user);
+		}
+
+		return new CurrentUserIdStrategy(user);
+	}
+
 	protected MissingReference validateMissingReference(Element element) {
 		String className = element.attributeValue("class-name");
 
@@ -741,16 +752,6 @@ public class ExportImportImpl implements ExportImport {
 		}
 
 		return null;
-	}
-
-	private UserIdStrategy _getUserIdStrategy(
-		User user, String userIdStrategy) {
-
-		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
-			return new AlwaysCurrentUserIdStrategy(user);
-		}
-
-		return new CurrentUserIdStrategy(user);
 	}
 
 	private static final char[] _DL_REFERENCE_LEGACY_STOP_CHARS = {

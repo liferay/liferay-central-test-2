@@ -513,23 +513,6 @@ public class FileEntryStagedModelDataHandler
 			fileEntry.getFileEntryId(), importedFileEntry.getFileEntryId());
 	}
 
-	@Override
-	protected boolean doValidateMissingReference(String uuid, long groupId) {
-		try {
-			DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
-				uuid, groupId);
-
-			if (dlFileEntry == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-
 	protected void exportMetaData(
 			PortletDataContext portletDataContext, Element fileEntryElement,
 			FileEntry fileEntry)
@@ -631,6 +614,23 @@ public class FileEntryStagedModelDataHandler
 			serviceContext.setAttribute(
 				Fields.class.getName() + ddmStructure.getStructureId(), fields);
 		}
+	}
+
+	@Override
+	protected boolean validateMissingReference(String uuid, long groupId) {
+		try {
+			DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
+				uuid, groupId);
+
+			if (dlFileEntry == null) {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
