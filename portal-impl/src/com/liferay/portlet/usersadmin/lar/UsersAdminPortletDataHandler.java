@@ -116,11 +116,11 @@ public class UsersAdminPortletDataHandler extends BasePortletDataHandler {
 			PortletDataContext portletDataContext)
 		throws Exception {
 
-		ActionableDynamicQuery actionableDynamicQuery =
-			new OrganizationExportActionableDynamicQuery(portletDataContext);
-
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
+
+		ActionableDynamicQuery actionableDynamicQuery =
+			new OrganizationExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			Organization.class, actionableDynamicQuery.performCount());
