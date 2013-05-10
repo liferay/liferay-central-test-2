@@ -102,10 +102,10 @@ AUI.add(
 						if (cssClass.indexOf('move-right') !== -1) {
 							from = instance._rightBox;
 							to = instance._leftBox;
-							sort = instance.get('rightReorder');
+							sort = !instance.get('rightReorder');
 						}
 						else {
-							sort = instance.get('leftReorder');
+							sort = !instance.get('leftReorder');
 						}
 
 						Util.moveItem(from, to, sort);
@@ -170,12 +170,12 @@ AUI.add(
 											'vertical',
 											{
 												cssClass: 'move-left',
-												icon: 'icon-circle-arrow-left',
+												icon: 'icon-circle-arrow-right',
 												title: strings.MOVE_LEFT
 											},
 											{
 												cssClass: 'move-right',
-												icon: 'icon-circle-arrow-right',
+												icon: 'icon-circle-arrow-left',
 												title: strings.MOVE_RIGHT
 											}
 										]
