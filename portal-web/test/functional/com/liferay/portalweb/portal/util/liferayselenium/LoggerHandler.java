@@ -36,10 +36,10 @@ public class LoggerHandler implements InvocationHandler {
 
 		try {
 			if (methodName.equals("startLogger")) {
-				_startLogger();
+				_logger.start();
 			}
 			else if (methodName.equals("stopLogger")) {
-				_stopLogger();
+				_logger.stop();
 			}
 			else {
 				_logger.logCommand(method, arguments);
@@ -52,14 +52,6 @@ public class LoggerHandler implements InvocationHandler {
 
 			throw ite.getTargetException();
 		}
-	}
-
-	private void _startLogger() {
-		_logger.start();
-	}
-
-	private void _stopLogger() {
-		_logger.stop();
 	}
 
 	private LiferaySelenium _liferaySelenium;

@@ -23,7 +23,6 @@ import java.util.Map;
 
 public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} extends BaseTestCase {
 
-
 	<#if rootElement.element("var")??>
 		public ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)}() {
 			super();

@@ -52,51 +52,65 @@ public class Logger {
 
 		sb.append("Running <b>");
 		sb.append(method.getName());
-		sb.append("</b> using parameters(s) ");
+		sb.append("</b>");
 
-		if (arguments != null) {
-			for (Object argument : arguments) {
-				sb.append("<b>");
-				sb.append((String)argument);
-				sb.append("</b> ");
-			}
+		if (arguments.length == 1) {
+			sb.append(" with parameter ");
+		}
+		else if (arguments.length > 1) {
+			sb.append(" with parameters ");
 		}
 
-		_log(sb.toString());
+		for (Object argument : arguments) {
+			sb.append("<b>");
+			sb.append(String.valueOf(argument));
+			sb.append("</b> ");
+		}
+
+		log(sb.toString());
 	}
 
 	public void logError(Method method, Object[] arguments) {
-		StringBundler logMessage = new StringBundler();
+		StringBundler sb = new StringBundler();
 
-		logMessage.append("<font color=red>");
-		logMessage.append("Command failure <b>");
-		logMessage.append(method.getName());
-		logMessage.append("</b> using parameters(s) ");
+		sb.append("<font color=\"red\">");
+		sb.append("Command failure <b>");
+		sb.append(method.getName());
+		sb.append("</b>");
 
-		if (arguments != null) {
-			for (Object argument : arguments) {
-				logMessage.append("<b>");
-				logMessage.append((String)argument);
-				logMessage.append("</b> ");
-			}
+		if (arguments.length == 1) {
+			sb.append(" with parameter ");
+		}
+		else if (arguments.length > 1) {
+			sb.append(" with parameters ");
 		}
 
-		_log(logMessage.toString());
-
-		StringBundler failMessage = new StringBundler();
-
-		failMessage.append("Command failure ");
-		failMessage.append(method.getName());
-		failMessage.append(" using parameters(s) ");
-
-		if (arguments != null) {
-			for (Object argument : arguments) {
-				failMessage.append((String)argument);
-				failMessage.append(" ");
-			}
+		for (Object argument : arguments) {
+			sb.append("<b>");
+			sb.append(String.valueOf(argument));
+			sb.append("</b> ");
 		}
 
-		BaseTestCase.fail(failMessage.toString());
+		log(sb.toString());
+
+		sb = new StringBundler();
+
+		sb.append("Command failure ");
+		sb.append(method.getName());
+
+		if (arguments.length == 1) {
+			sb.append(" with parameter ");
+		}
+		else if (arguments.length > 1) {
+			sb.append(" with parameters ");
+		}
+
+		for (Object argument : arguments) {
+			sb.append(String.valueOf(argument));
+			sb.append(" ");
+		}
+
+		BaseTestCase.fail(sb.toString());
 	}
 
 	public void start() {
@@ -116,10 +130,12 @@ public class Logger {
 		_webDriver.quit();
 	}
 
-	private void _log(String message) {
+	protected void log(String message) {
 		WebDriver.TargetLocator targetLocator = _webDriver.switchTo();
 
-		targetLocator.window("log window");
+		targetLocator.window("Log Window");
+
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor)_webDriver;
 
 		StringBundler sb = new StringBundler();
 
@@ -132,8 +148,6 @@ public class Logger {
 		sb.append(formattedMessage);
 		sb.append("<br /><hr />';");
 		sb.append("logger.scrollTop = logger.scrollHeight;");
-
-		JavascriptExecutor javascriptExecutor = (JavascriptExecutor)_webDriver;
 
 		javascriptExecutor.executeScript(sb.toString());
 	}
