@@ -20,7 +20,6 @@ import java.util.Set;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
-import org.xml.sax.SAXException;
 
 /**
  * @author Zsolt Berentey
@@ -38,41 +37,35 @@ public class ElementHandler implements ContentHandler {
 	}
 
 	@Override
-	public void characters(char[] ch, int start, int length)
-		throws SAXException {
-
-		if (_currentElement != null) {
-			_currentElement.setText(new String(ch, start, length));
+	public void characters(char[] chars, int start, int length) {
+		if (_element != null) {
+			_element.setText(new String(chars, start, length));
 		}
 	}
 
 	@Override
-	public void endDocument() throws SAXException {
+	public void endDocument() {
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName)
-		throws SAXException {
+	public void endElement(String uri, String localName, String qName) {
+		if (_element != null) {
+			_elementProcessor.processElement(_element);
 
-		if (_currentElement != null) {
-			_elementProcessor.processElement(_currentElement);
-
-			_currentElement = null;
+			_element = null;
 		}
 	}
 
 	@Override
-	public void endPrefixMapping(String prefix) throws SAXException {
+	public void endPrefixMapping(String prefix) {
 	}
 
 	@Override
-	public void ignorableWhitespace(char[] ch, int start, int length)
-		throws SAXException {
+	public void ignorableWhitespace(char[] chars, int start, int length) {
 	}
 
 	@Override
-	public void processingInstruction(String target, String data)
-		throws SAXException {
+	public void processingInstruction(String target, String data) {
 	}
 
 	@Override
@@ -80,22 +73,21 @@ public class ElementHandler implements ContentHandler {
 	}
 
 	@Override
-	public void skippedEntity(String name) throws SAXException {
+	public void skippedEntity(String name) {
 	}
 
 	@Override
-	public void startDocument() throws SAXException {
+	public void startDocument() {
 	}
 
 	@Override
 	public void startElement(
-			String uri, String localName, String qName, Attributes attributes)
-		throws SAXException {
+		String uri, String localName, String qName, Attributes attributes) {
 
-		if (_currentElement != null) {
-			_elementProcessor.processElement(_currentElement);
+		if (_element != null) {
+			_elementProcessor.processElement(_element);
 
-			_currentElement = null;
+			_element = null;
 		}
 
 		if (!_triggers.contains(localName)) {
@@ -109,15 +101,14 @@ public class ElementHandler implements ContentHandler {
 				attributes.getQName(i), attributes.getValue(i));
 		}
 
-		_currentElement = element;
+		_element = element;
 	}
 
 	@Override
-	public void startPrefixMapping(String prefix, String uri)
-		throws SAXException {
+	public void startPrefixMapping(String prefix, String uri) {
 	}
 
-	private Element _currentElement;
+	private Element _element;
 	private ElementProcessor _elementProcessor;
 	private Set<String> _triggers = new HashSet<String>();
 
