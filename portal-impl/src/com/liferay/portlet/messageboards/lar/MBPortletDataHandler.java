@@ -205,14 +205,6 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		if (portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
-			ActionableDynamicQuery userBansActionableDynamicQuery =
-				new MBBanExportActionableDynamicQuery(portletDataContext);
-
-			manifestSummary.addModelCount(
-				MBBan.class, userBansActionableDynamicQuery.performCount());
-		}
-
 		ActionableDynamicQuery categoriesActionableDynamicQuery =
 			new MBCategoryExportActionableDynamicQuery(portletDataContext);
 
@@ -233,6 +225,14 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 			manifestSummary.addModelCount(
 				MBThreadFlag.class,
 				threadFlagsActionableDynamicQuery.performCount());
+		}
+
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
+			ActionableDynamicQuery userBansActionableDynamicQuery =
+				new MBBanExportActionableDynamicQuery(portletDataContext);
+
+			manifestSummary.addModelCount(
+				MBBan.class, userBansActionableDynamicQuery.performCount());
 		}
 	}
 
