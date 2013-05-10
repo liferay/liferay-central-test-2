@@ -135,11 +135,11 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			PortletDataContext portletDataContext)
 		throws Exception {
 
-		ActionableDynamicQuery actionsActionableDynamicQuery =
-			new MDRActionExportActionableDynamicQuery(portletDataContext);
-
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
+
+		ActionableDynamicQuery actionsActionableDynamicQuery =
+			new MDRActionExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			MDRAction.class, actionsActionableDynamicQuery.performCount());

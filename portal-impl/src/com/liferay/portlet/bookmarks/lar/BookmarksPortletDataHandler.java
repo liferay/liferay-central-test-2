@@ -152,19 +152,19 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		ActionableDynamicQuery folderExportActionableDynamicQuery =
-			new BookmarksFolderExportActionableDynamicQuery(portletDataContext);
-
-		manifestSummary.addModelCount(
-			BookmarksFolder.class,
-			folderExportActionableDynamicQuery.performCount());
-
 		ActionableDynamicQuery entryExportActionableDynamicQuery =
 			new BookmarksEntryExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			BookmarksEntry.class,
 			entryExportActionableDynamicQuery.performCount());
+
+		ActionableDynamicQuery folderExportActionableDynamicQuery =
+			new BookmarksFolderExportActionableDynamicQuery(portletDataContext);
+
+		manifestSummary.addModelCount(
+			BookmarksFolder.class,
+			folderExportActionableDynamicQuery.performCount());
 	}
 
 	private static final String _RESOURCE_NAME =

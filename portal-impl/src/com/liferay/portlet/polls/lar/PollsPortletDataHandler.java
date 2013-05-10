@@ -157,17 +157,17 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		ActionableDynamicQuery questionActionableDynamicQuery =
-			new PollsQuestionExportActionableDynamicQuery(portletDataContext);
-
-		manifestSummary.addModelCount(
-			PollsQuestion.class, questionActionableDynamicQuery.performCount());
-
 		ActionableDynamicQuery choiceActionableDynamicQuery =
 			new PollsChoiceExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			PollsChoice.class, choiceActionableDynamicQuery.performCount());
+
+		ActionableDynamicQuery questionActionableDynamicQuery =
+			new PollsQuestionExportActionableDynamicQuery(portletDataContext);
+
+		manifestSummary.addModelCount(
+			PollsQuestion.class, questionActionableDynamicQuery.performCount());
 
 		if (portletDataContext.getBooleanParameter(
 				PollsPortletDataHandler.NAMESPACE, "votes")) {
