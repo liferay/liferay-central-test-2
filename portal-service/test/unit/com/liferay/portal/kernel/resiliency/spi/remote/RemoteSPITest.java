@@ -102,6 +102,8 @@ public class RemoteSPITest {
 	public void testCall() throws Exception {
 		final AtomicBoolean throwIOException = new AtomicBoolean();
 
+		// Sucess
+
 		ProcessOutputStream processOutputStream = new ProcessOutputStream(
 			new ObjectOutputStream(new UnsyncByteArrayOutputStream())) {
 
@@ -123,8 +125,6 @@ public class RemoteSPITest {
 
 		ConcurrentMap<String, Object> attributes =
 			ProcessExecutor.ProcessContext.getAttributes();
-
-		// Sucess
 
 		Method bridgeCallMethod = ReflectionUtil.getBridgeMethod(
 			RemoteSPI.class, "call");
@@ -160,7 +160,7 @@ public class RemoteSPITest {
 
 		Assert.assertNull(attributes.remove(SPI.SPI_INSTANCE_PUBLICATION_KEY));
 
-		// Unable to write ProcessCallable
+		// Unable to write process callable
 
 		UnicastRemoteObject.unexportObject(_mockRemoteSPI, true);
 
@@ -209,7 +209,7 @@ public class RemoteSPITest {
 	@Test
 	public void testRegisterCallback() throws Exception {
 
-		// Success transfer
+		// Success
 
 		String uuid = "uuid";
 
@@ -320,7 +320,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSerializationSignature() throws Exception {
 
-		// readObject
+		// Read object
 
 		Method readObjectMethod = RemoteSPI.class.getDeclaredMethod(
 			"readObject", ObjectInputStream.class);
@@ -342,7 +342,7 @@ public class RemoteSPITest {
 			exceptionTypes.contains(ClassNotFoundException.class));
 		Assert.assertTrue(exceptionTypes.contains(IOException.class));
 
-		// writeObject
+		// Write object
 
 		Method writeObjectMethod = RemoteSPI.class.getDeclaredMethod(
 			"writeObject", ObjectOutputStream.class);
@@ -444,7 +444,7 @@ public class RemoteSPITest {
 		processOutputStreamField.set(null, processOutputStream);
 	}
 
-	private static final File _currentDir = new File(".");
+	private static File _currentDir = new File(".");
 
 	private MockRemoteSPI _mockRemoteSPI;
 	private SPIConfiguration _spiConfiguration;

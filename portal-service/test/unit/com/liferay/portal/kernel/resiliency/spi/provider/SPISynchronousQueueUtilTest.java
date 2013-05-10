@@ -52,10 +52,10 @@ public class SPISynchronousQueueUtilTest {
 
 		Assert.assertSame(synchronousQueue, synchronizerRegistry.get(spiUUID));
 
-		// Notify not exist spiUUID
+		// Notify nonexistent
 
 		try {
-			SPISynchronousQueueUtil.notifySynchronousQueue("not exist", null);
+			SPISynchronousQueueUtil.notifySynchronousQueue("Nonexistent", null);
 
 			Assert.fail();
 		}
@@ -65,7 +65,7 @@ public class SPISynchronousQueueUtilTest {
 				ise.getMessage());
 		}
 
-		// Notify exist spiUUID
+		// Notify existent
 
 		final MockSPI mockSPI = new MockSPI();
 
