@@ -90,7 +90,8 @@ public class FolderStagedModelDataHandler
 				portletDataContext, repository);
 
 			portletDataContext.addReferenceElement(
-				folder, folderElement, repository, PortletDataContext.TYPE_STRONG_REFERENCE, false);
+				folder, folderElement, repository,
+				PortletDataContext.REFERENCE_TYPE_STRONG, false);
 
 			portletDataContext.addClassedModel(
 				folderElement, folderPath, folder,
@@ -260,7 +261,8 @@ public class FolderStagedModelDataHandler
 					portletDataContext, dlFileEntryType);
 
 				portletDataContext.addReferenceElement(
-					folder, folderElement, dlFileEntryType, PortletDataContext.TYPE_STRONG_REFERENCE, false);
+					folder, folderElement, dlFileEntryType,
+					PortletDataContext.REFERENCE_TYPE_STRONG, false);
 			}
 		}
 

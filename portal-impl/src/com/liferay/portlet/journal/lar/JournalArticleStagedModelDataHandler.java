@@ -122,7 +122,8 @@ public class JournalArticleStagedModelDataHandler
 				portletDataContext, ddmStructure);
 
 			portletDataContext.addReferenceElement(
-				article, articleElement, ddmStructure, PortletDataContext.TYPE_STRONG_REFERENCE, false);
+				article, articleElement, ddmStructure,
+				PortletDataContext.REFERENCE_TYPE_STRONG, false);
 
 			long parentStructureId = ddmStructure.getParentStructureId();
 
@@ -148,7 +149,8 @@ public class JournalArticleStagedModelDataHandler
 				portletDataContext, ddmTemplate);
 
 			portletDataContext.addReferenceElement(
-				article, articleElement, ddmTemplate, PortletDataContext.TYPE_STRONG_REFERENCE, false);
+				article, articleElement, ddmTemplate,
+				PortletDataContext.REFERENCE_TYPE_STRONG, false);
 		}
 
 		if (article.isSmallImage()) {
