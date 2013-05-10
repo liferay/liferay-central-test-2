@@ -1400,8 +1400,6 @@ public class PortletImporter {
 			List<Element> assetLinksElements = assetLinkGroupElement.elements(
 				"asset-link");
 
-			List<Long> entryIds = new ArrayList<Long>();
-
 			for (Element assetLinkElement : assetLinksElements) {
 				String path = assetLinkElement.attributeValue("path");
 

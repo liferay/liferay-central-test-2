@@ -42,8 +42,6 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUti
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 import com.liferay.portlet.journal.util.JournalTestUtil;
 
-import java.io.File;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -254,7 +252,5 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 
 		return article.getArticleResourceUuid();
 	}
-
-	private File _larFile;
 
 }

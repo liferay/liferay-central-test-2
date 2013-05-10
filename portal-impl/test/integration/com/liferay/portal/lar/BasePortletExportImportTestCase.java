@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -183,12 +184,14 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 		return parameterMap;
 	}
 
+	@SuppressWarnings("unused")
 	protected StagedModel getStagedModel(String uuid, long groupId)
 		throws PortalException, SystemException {
 
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	protected String getStagedModelUuid(StagedModel stagedModel)
 		throws PortalException, SystemException {
 
