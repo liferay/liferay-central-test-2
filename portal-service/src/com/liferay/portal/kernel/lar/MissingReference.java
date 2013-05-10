@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.lar;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 
 /**
@@ -49,8 +48,8 @@ public class MissingReference {
 	}
 
 	private String _className;
-	private String _displayName = StringPool.BLANK;
-	private String _referrerClassName = StringPool.BLANK;
-	private String _referrerDisplayName = StringPool.BLANK;
+	private String _displayName;
+	private String _referrerClassName;
+	private String _referrerDisplayName;
 
 }
