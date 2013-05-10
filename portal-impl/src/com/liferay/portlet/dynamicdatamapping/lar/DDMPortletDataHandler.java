@@ -138,11 +138,11 @@ public class DDMPortletDataHandler extends BasePortletDataHandler {
 			PortletDataContext portletDataContext)
 		throws Exception {
 
-		ActionableDynamicQuery structureActionableDynamicQuery =
-			new DDMStructureExportActionableDynamicQuery(portletDataContext);
-
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
+
+		ActionableDynamicQuery structureActionableDynamicQuery =
+			new DDMStructureExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			DDMStructure.class, structureActionableDynamicQuery.performCount());
