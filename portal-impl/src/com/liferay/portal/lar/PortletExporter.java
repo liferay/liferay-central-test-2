@@ -635,7 +635,7 @@ public class PortletExporter {
 			String[] assetLinkNameParts = StringUtil.split(
 				entry.getKey(), CharPool.POUND);
 
-			List<AssetLink> links = entry.getValue();
+			List<AssetLink> assetLinks = entry.getValue();
 
 			String sourceAssetEntryUuid = assetLinkNameParts[0];
 
@@ -643,7 +643,7 @@ public class PortletExporter {
 
 			assetElement.addAttribute("source-uuid", sourceAssetEntryUuid);
 
-			for (AssetLink assetLink : links) {
+			for (AssetLink assetLink : assetLinks) {
 				String path = getAssetLinkPath(
 					portletDataContext, assetLink.getLinkId());
 
@@ -1304,7 +1304,7 @@ public class PortletExporter {
 	}
 
 	protected String getAssetLinkPath(
-			PortletDataContext portletDataContext, long assetLinkId) {
+		PortletDataContext portletDataContext, long assetLinkId) {
 
 		StringBundler sb = new StringBundler(6);
 

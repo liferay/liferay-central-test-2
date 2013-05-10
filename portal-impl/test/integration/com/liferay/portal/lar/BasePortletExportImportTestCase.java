@@ -102,7 +102,6 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 		addAssetLink(
 			group.getGroupId(), getStagedModelUuid(stagedModel),
 			getStagedModelUuid(relatedStagedModel1), 1);
-
 		addAssetLink(
 			group.getGroupId(), getStagedModelUuid(stagedModel),
 			getStagedModelUuid(relatedStagedModel2), 2);
@@ -124,7 +123,6 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 
 		AssetEntry originAssetEntry = AssetEntryLocalServiceUtil.getEntry(
 			groupId, sourceStagedModelUuid);
-
 		AssetEntry targetAssetEntry = AssetEntryLocalServiceUtil.getEntry(
 			groupId, targetStagedModelUuid);
 
@@ -160,7 +158,6 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
@@ -176,11 +173,9 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			new String[] {
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE});
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
-
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
@@ -233,7 +228,6 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 				AssetEntry importedLinkSourceAssetEntry =
 					AssetEntryLocalServiceUtil.getEntry(
 						importedLink.getEntryId1());
-
 				AssetEntry importedLinkTargetAssetEntry =
 					AssetEntryLocalServiceUtil.getEntry(
 						importedLink.getEntryId2());

@@ -182,13 +182,13 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 			"_journal_tags", new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			"_journal_web-content", new String[] {Boolean.TRUE.toString()});
-		parameterMap.put("doAsGroupId", new String[]{String.valueOf(groupId)});
+		parameterMap.put("doAsGroupId", new String[] {String.valueOf(groupId)});
 		parameterMap.put("groupId", new String[] {String.valueOf(groupId)});
 		parameterMap.put(
 			"permissionsAssignedToRoles",
-			new String[]{Boolean.TRUE.toString()});
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put("plid", new String[] {String.valueOf(plid)});
-		parameterMap.put("portletResource", new String[]{PortletKeys.JOURNAL});
+		parameterMap.put("portletResource", new String[] {PortletKeys.JOURNAL});
 
 		return parameterMap;
 	}
