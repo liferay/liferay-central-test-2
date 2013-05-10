@@ -217,15 +217,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_companyId = themeDisplay.getCompanyId();
 		_groupId = themeDisplay.getScopeGroupId();
 		_scopeGroupId = themeDisplay.getScopeGroupId();
-		_startDate = startDate;
-		_endDate = endDate;
-
 		_parameterMap = null;
 		_primaryKeys = null;
 		_dataStrategy = null;
 		_userIdStrategy = null;
+		_startDate = startDate;
+		_endDate = endDate;
 		_zipReader = null;
 		_zipWriter = null;
+
+		initXStream();
 	}
 
 	public void addAssetCategories(Class<?> clazz, long classPK)
