@@ -91,10 +91,6 @@ public class ExportImportUtilTest {
 			ServiceTestUtil.randomString() + ".txt",
 			ServiceTestUtil.randomString(), true);
 
-		_referrerStagedModel = JournalTestUtil.addArticle(
-			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
-
 		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)_fileEntry;
 
 		DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
@@ -125,6 +121,10 @@ public class ExportImportUtilTest {
 		_portletDataContextImport.setSourceGroupId(_stagingGroup.getGroupId());
 
 		rootElement.addElement("entry");
+
+		_referrerStagedModel = JournalTestUtil.addArticle(
+			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString());
 	}
 
 	@After
