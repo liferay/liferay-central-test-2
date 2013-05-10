@@ -9,14 +9,14 @@
 	</command>
 
 	<command name="click">
-		<case locator-key1="AVAILABLE">
-			<execute function="Click#textClickAtAndWait" value1="Available" />
-		</case>
 		<case locator-key1="ADVANCED_SEARCH_BASIC">
 			<execute function="Click#partialTextClickAt" value1="Basic" />
 		</case>
 		<case locator-key1="ADVANCED_SEARCH_BUTTON">
 			<execute function="Click#valueClickAtAndWait" value1="Search" />
+		</case>
+		<case locator-key1="AVAILABLE">
+			<execute function="Click#textClickAtAndWait" value1="Available" />
 		</case>
 		<case locator-key1="BASIC_SEARCH_ADVANCED">
 			<execute function="Click#partialTextClickAt" value1="Advanced" />
