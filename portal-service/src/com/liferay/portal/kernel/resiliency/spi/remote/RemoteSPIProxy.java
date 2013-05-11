@@ -47,9 +47,9 @@ public class RemoteSPIProxy implements SPI {
 		_cancelHandlerFuture = cancelHandlerFuture;
 		_registrationReference = registrationReference;
 
+		_mpi = MPIHelperUtil.getMPI();
 		_spiAgent = SPIAgentFactoryUtil.createSPIAgent(
 			spiConfiguration, registrationReference);
-		_mpi = MPIHelperUtil.getMPI();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class RemoteSPIProxy implements SPI {
 	}
 
 	@Override
-	public void destroy() throws RemoteException {
+	public void destroy() {
 		try {
 			_spi.destroy();
 
@@ -124,7 +124,7 @@ public class RemoteSPIProxy implements SPI {
 			_spiAgent.init(this);
 		}
 		catch (PortalResiliencyException pre) {
-			throw new RemoteException("Unable to initialize SPIAgent", pre);
+			throw new RemoteException("Unable to initialize SPI agent", pre);
 		}
 	}
 
@@ -139,7 +139,7 @@ public class RemoteSPIProxy implements SPI {
 			}
 			catch (Exception e) {
 				throw new RemoteException(
-					"SPI " + toString() + " dead unexpectedly", e);
+					"SPI " + toString() + " died unexpectedly", e);
 			}
 
 			return false;

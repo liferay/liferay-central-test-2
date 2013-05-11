@@ -78,32 +78,31 @@ public abstract class BaseSPIProvider implements SPIProvider {
 						spiConfiguration.getRegisterTimeout(),
 						TimeUnit.MILLISECONDS);
 
-				RemoteSPIProxy remoteSPIHolder =
-					new RemoteSPIProxy(
-						spi, spiConfiguration, getName(), cancelHandlerFuture,
-						registrationReference);
+				RemoteSPIProxy remoteSPIProxy = new RemoteSPIProxy(
+					spi, spiConfiguration, getName(), cancelHandlerFuture,
+					registrationReference);
 
-				if (!MPIHelperUtil.registerSPI(remoteSPIHolder)) {
+				if (!MPIHelperUtil.registerSPI(remoteSPIProxy)) {
 					cancelHandlerFuture.cancel(true);
 
 					throw new PortalResiliencyException(
-						"Unable to register SPI " + remoteSPIHolder +
-							". Forcibly cancelled spi process launching.");
+						"Unable to register SPI " + remoteSPIProxy +
+							". Forcibly cancelled SPI process launch.");
 				}
 
-				return remoteSPIHolder;
+				return remoteSPIProxy;
 			}
 			else {
 				cancelHandlerFuture.cancel(true);
 
 				throw new PortalResiliencyException(
 					"SPI synchronous queue waiting timeout. Forcibly " +
-						"cancelled spi process launching.");
+						"cancelled SPI process launch.");
 			}
 		}
 		catch (InterruptedException ie) {
 			throw new PortalResiliencyException(
-				"Interrupted on waiting SPI process registering back RMI Stub",
+				"Interrupted on waiting SPI process, registering back RMI stub",
 				ie);
 		}
 		catch (PortalResiliencyException pre) {
