@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetExportActionableDynamicQuery;
 
 import java.util.List;
@@ -65,7 +66,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			DDLPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -84,7 +85,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			DDLPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element recordSetsElement =
@@ -114,8 +115,5 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		manifestSummary.addModelCount(
 			DDLRecordSet.class, actionableDynamicQuery.performCount());
 	}
-
-	protected static final String RESOURCE_NAME =
-		"com.liferay.portlet.dynamicdatalist";
 
 }

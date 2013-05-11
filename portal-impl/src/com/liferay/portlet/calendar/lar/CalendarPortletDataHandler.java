@@ -33,6 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
 import java.util.Calendar;
@@ -92,7 +93,8 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			CalendarPermission.RESOURCE_NAME,
+			portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -116,7 +118,8 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			CalendarPermission.RESOURCE_NAME,
+			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element rootElement = portletDataContext.getImportDataRootElement();
@@ -269,8 +272,5 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(event, importedEvent, NAMESPACE);
 	}
-
-	protected static final String RESOURCE_NAME =
-		"com.liferay.portlet.calendar";
 
 }

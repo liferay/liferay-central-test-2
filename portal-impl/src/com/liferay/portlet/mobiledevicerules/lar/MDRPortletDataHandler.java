@@ -27,6 +27,7 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRule;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
+import com.liferay.portlet.mobiledevicerules.service.permission.MDRPermission;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRActionExportActionableDynamicQuery;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleExportActionableDynamicQuery;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleGroupExportActionableDynamicQuery;
@@ -80,7 +81,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			MDRPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -104,7 +105,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			MDRPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element rulesElement = portletDataContext.getImportDataGroupElement(
@@ -165,8 +166,5 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 			MDRRuleGroupInstance.class,
 			ruleGroupInstancesActionableDynamicQuery.performCount());
 	}
-
-	protected static final String RESOURCE_NAME =
-		"com.liferay.portlet.mobiledevicerules";
 
 }

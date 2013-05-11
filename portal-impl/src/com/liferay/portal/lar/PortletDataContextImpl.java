@@ -656,7 +656,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		Element referenceElement = null;
 
-		if (!missing) {
+		if (missing) {
+			Element referencesElement = _missingReferencesElement;
+
+			referenceElement = referencesElement.addElement(
+				"missing-reference");
+		}
+		else {
 			Element referencesElement = element.element("references");
 
 			if (referencesElement == null) {
@@ -665,12 +671,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			referenceElement = referencesElement.addElement("reference");
 		}
-		else {
-			Element referencesElement = _missingReferencesElement;
 
-			referenceElement = referencesElement.addElement(
-				"missing-reference");
+		referenceElement.addAttribute("class-name", className);
 
+		if (missing) {
 			if (classedModel instanceof StagedModel) {
 				referenceElement.addAttribute(
 					"display-name",
@@ -682,17 +686,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 					"display-name",
 					String.valueOf(classedModel.getPrimaryKeyObj()));
 			}
-
-			referenceElement.addAttribute(
-				"referrer-display-name",
-				StagedModelDataHandlerUtil.getDisplayName(referrerStagedModel));
-		}
-
-		referenceElement.addAttribute("type", referenceType);
-		referenceElement.addAttribute("class-name", className);
-
-		if (Validator.isNotNull(binPath)) {
-			referenceElement.addAttribute("path", binPath);
 		}
 
 		if (classedModel instanceof StagedGroupedModel) {
@@ -701,17 +694,32 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			referenceElement.addAttribute(
 				"group-id", String.valueOf(stagedGroupedModel.getGroupId()));
+		}
+
+		if (Validator.isNotNull(binPath)) {
+			referenceElement.addAttribute("path", binPath);
+		}
+
+		referenceElement.addAttribute("type", referenceType);
+
+		if (missing) {
+			referenceElement.addAttribute(
+				"referrer-class-name", referrerStagedModel.getModelClassName());
+			referenceElement.addAttribute(
+				"referrer-display-name",
+				StagedModelDataHandlerUtil.getDisplayName(referrerStagedModel));
+		}
+
+		if (classedModel instanceof StagedGroupedModel) {
+			StagedGroupedModel stagedGroupedModel =
+				(StagedGroupedModel)classedModel;
+
 			referenceElement.addAttribute("uuid", stagedGroupedModel.getUuid());
 		}
 		else if (classedModel instanceof StagedModel) {
 			StagedModel stagedModel = (StagedModel)classedModel;
 
 			referenceElement.addAttribute("uuid", stagedModel.getUuid());
-		}
-
-		if (missing) {
-			referenceElement.addAttribute(
-				"referrer-class-name", referrerStagedModel.getModelClassName());
 		}
 
 		return referenceElement;

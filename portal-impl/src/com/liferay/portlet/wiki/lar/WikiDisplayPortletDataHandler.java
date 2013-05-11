@@ -27,6 +27,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiPermission;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 
 import java.util.List;
@@ -103,7 +104,7 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		}
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			WikiPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -130,7 +131,7 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			WikiPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		super.importData(

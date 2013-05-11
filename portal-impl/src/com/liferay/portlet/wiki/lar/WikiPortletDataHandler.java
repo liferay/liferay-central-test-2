@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiPermission;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeExportActionableDynamicQuery;
 import com.liferay.portlet.wiki.service.persistence.WikiPageExportActionableDynamicQuery;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
@@ -111,7 +112,7 @@ public class WikiPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			WikiPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -138,7 +139,7 @@ public class WikiPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			WikiPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element nodesElement = portletDataContext.getImportDataGroupElement(
@@ -212,7 +213,5 @@ public class WikiPortletDataHandler extends BasePortletDataHandler {
 
 		};
 	}
-
-	protected static final String RESOURCE_NAME = "com.liferay.portlet.wiki";
 
 }

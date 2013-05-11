@@ -26,6 +26,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
+import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryExportActionableDynamicQuery;
 
 import java.util.List;
@@ -87,7 +88,8 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			BlogsPermission.RESOURCE_NAME,
+			portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
@@ -109,7 +111,8 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			BlogsPermission.RESOURCE_NAME,
+			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element entriesElement = portletDataContext.getImportDataGroupElement(
@@ -139,7 +142,5 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 		manifestSummary.addModelCount(
 			BlogsEntry.class, entryActionableDynamicQuery.performCount());
 	}
-
-	protected static final String RESOURCE_NAME = "com.liferay.portlet.blogs";
 
 }

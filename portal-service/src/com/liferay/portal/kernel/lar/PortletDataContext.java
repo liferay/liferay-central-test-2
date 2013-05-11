@@ -50,10 +50,15 @@ import java.util.Set;
 public interface PortletDataContext extends Serializable {
 
 	public static final String REFERENCE_TYPE_CHILD = "child";
+
 	public static final String REFERENCE_TYPE_DEPENDENCY = "dependency";
+
 	public static final String REFERENCE_TYPE_EMBEDDED = "embedded";
+
 	public static final String REFERENCE_TYPE_PARENT = "parent";
+
 	public static final String REFERENCE_TYPE_STRONG = "strong";
+
 	public static final String REFERENCE_TYPE_WEAK = "weak";
 
 	/**

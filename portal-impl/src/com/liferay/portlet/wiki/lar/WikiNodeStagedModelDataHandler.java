@@ -105,7 +105,7 @@ public class WikiNodeStagedModelDataHandler
 				}
 			}
 
-			String nodeName = _getNodeName(
+			String nodeName = getNodeName(
 				portletDataContext, node, node.getName(), 2);
 
 			importedNode = WikiNodeLocalServiceUtil.addNode(
@@ -116,7 +116,7 @@ public class WikiNodeStagedModelDataHandler
 			node, importedNode, WikiPortletDataHandler.NAMESPACE);
 	}
 
-	private String _getNodeName(
+	protected String getNodeName(
 			PortletDataContext portletDataContext, WikiNode node, String name,
 			int count)
 		throws Exception {
@@ -130,7 +130,7 @@ public class WikiNodeStagedModelDataHandler
 
 		String nodeName = node.getName();
 
-		return _getNodeName(
+		return getNodeName(
 			portletDataContext, node,
 			nodeName.concat(StringPool.SPACE).concat(String.valueOf(count)),
 			++count);

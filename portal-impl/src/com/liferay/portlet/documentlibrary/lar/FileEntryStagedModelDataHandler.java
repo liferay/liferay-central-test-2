@@ -140,10 +140,10 @@ public class FileEntryStagedModelDataHandler
 				fileEntryElement, fileEntryPath, fileEntry,
 				DLPortletDataHandler.NAMESPACE);
 
-			if (repository.getClassNameId() !=
-					PortalUtil.getClassNameId(
-						LiferayRepository.class.getName())) {
+			long liferayRepositoryClassNameId = PortalUtil.getClassNameId(
+				LiferayRepository.class.getName());
 
+			if (repository.getClassNameId() != liferayRepositoryClassNameId) {
 				return;
 			}
 		}

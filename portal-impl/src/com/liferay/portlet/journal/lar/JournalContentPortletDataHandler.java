@@ -37,6 +37,7 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import java.util.List;
 import java.util.Map;
@@ -115,7 +116,8 @@ public class JournalContentPortletDataHandler
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			RESOURCE_NAME, portletDataContext.getScopeGroupId());
+			JournalPermission.RESOURCE_NAME,
+			portletDataContext.getScopeGroupId());
 
 		String articleId = portletPreferences.getValue("articleId", null);
 
@@ -219,7 +221,8 @@ public class JournalContentPortletDataHandler
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			RESOURCE_NAME, portletDataContext.getSourceGroupId(),
+			JournalPermission.RESOURCE_NAME,
+			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		long previousScopeGroupId = portletDataContext.getScopeGroupId();

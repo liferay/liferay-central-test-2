@@ -95,9 +95,10 @@ public class WikiPageStagedModelDataHandlerTest
 			TestPropsValues.getUserId(), node.getNodeId(), page.getTitle(),
 			WikiAttachmentsTest.class);
 
-		List<FileEntry> attachments = page.getAttachmentsFileEntries();
+		List<FileEntry> attachmentsFileEntries =
+			page.getAttachmentsFileEntries();
 
-		FileEntry fileEntry = attachments.get(0);
+		FileEntry fileEntry = attachmentsFileEntries.get(0);
 
 		Folder folder = fileEntry.getFolder();
 
@@ -109,7 +110,8 @@ public class WikiPageStagedModelDataHandlerTest
 		}
 
 		addDependentStagedModel(
-			dependentStagedModelsMap, FileEntry.class, attachments.get(0));
+			dependentStagedModelsMap, FileEntry.class,
+			attachmentsFileEntries.get(0));
 
 		Repository repository = RepositoryUtil.fetchByPrimaryKey(
 			fileEntry.getRepositoryId());
@@ -180,9 +182,10 @@ public class WikiPageStagedModelDataHandlerTest
 
 		WikiPage page = (WikiPage)stagedModel;
 
-		List<FileEntry> attachments = page.getAttachmentsFileEntries();
+		List<FileEntry> attachmentFileEntries =
+			page.getAttachmentsFileEntries();
 
-		Assert.assertEquals(1, attachments.size());
+		Assert.assertEquals(1, attachmentFileEntries.size());
 
 		validateImport(dependentStagedModelsMap, group);
 	}
