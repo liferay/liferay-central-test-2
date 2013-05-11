@@ -359,10 +359,8 @@ public class ExportImportImpl implements ExportImport {
 		throws Exception {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
-
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext portletDataContext = new PortletDataContextImpl(
@@ -370,6 +368,8 @@ public class ExportImportImpl implements ExportImport {
 			getUserIdStrategy(userId, userIdStrategy), zipReader);
 
 		final ManifestSummary manifestSummary = new ManifestSummary();
+
+		SAXParser saxParser = new SAXParser();
 
 		ElementHandler elementHandler = new ElementHandler(
 			new ElementProcessor() {
@@ -381,9 +381,9 @@ public class ExportImportImpl implements ExportImport {
 
 					manifestSummary.addModelCount(className, count);
 				}
-			}, new String[] {"staged-model"});
 
-		SAXParser saxParser = new SAXParser();
+			},
+			new String[] {"staged-model"});
 
 		saxParser.setContentHandler(elementHandler);
 
@@ -647,14 +647,16 @@ public class ExportImportImpl implements ExportImport {
 
 		Element summaryElement = rootElement.addElement("summary");
 
-		Map<String, Long> modelCountMap = manifestSummary.getModelCounters();
+		Map<String, Long> modelCounters = manifestSummary.getModelCounters();
 
-		for (String modelClassName : modelCountMap.keySet()) {
+		for (String modelClassName : modelCounters.keySet()) {
 			Element element = summaryElement.addElement("staged-model");
 
 			element.addAttribute("class-name", modelClassName);
 
-			element.addText(String.valueOf(modelCountMap.get(modelClassName)));
+			String count = String.valueOf(modelCounters.get(modelClassName));
+
+			element.addText(count);
 		}
 	}
 

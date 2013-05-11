@@ -51,18 +51,14 @@ public class ManifestSummaryTest
 		Map<String, Long> modelCountMap = manifestSummary.getModelCounters();
 
 		Assert.assertEquals(4, modelCountMap.size());
-
-		Assert.assertEquals(
-			1, manifestSummary.getModelCount(DDMTemplate.class));
-
 		Assert.assertEquals(
 			1, manifestSummary.getModelCount(DDMStructure.class));
-
 		Assert.assertEquals(
-			1, manifestSummary.getModelCount(JournalFolder.class));
-
+			1, manifestSummary.getModelCount(DDMTemplate.class));
 		Assert.assertEquals(
 			1, manifestSummary.getModelCount(JournalArticle.class));
+		Assert.assertEquals(
+			1, manifestSummary.getModelCount(JournalFolder.class));
 
 		Document document = SAXReaderUtil.createDocument();
 
@@ -87,18 +83,14 @@ public class ManifestSummaryTest
 		Map<String, Long> modelCountMap = manifestSummary.getModelCounters();
 
 		Assert.assertEquals(4, modelCountMap.size());
-
-		Assert.assertEquals(
-			1, manifestSummary.getModelCount(DDMTemplate.class));
-
 		Assert.assertEquals(
 			1, manifestSummary.getModelCount(DDMStructure.class));
-
 		Assert.assertEquals(
-			1, manifestSummary.getModelCount(JournalFolder.class));
-
+			1, manifestSummary.getModelCount(DDMTemplate.class));
 		Assert.assertEquals(
 			1, manifestSummary.getModelCount(JournalArticle.class));
+		Assert.assertEquals(
+			1, manifestSummary.getModelCount(JournalFolder.class));
 	}
 
 }
