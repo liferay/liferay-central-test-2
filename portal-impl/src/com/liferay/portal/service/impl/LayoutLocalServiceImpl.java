@@ -142,7 +142,153 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		// Layout
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		long layoutId = getNextLayoutId(groupId, privateLayout);
+		parentLayoutId = layoutLocalServiceHelper.getParentLayoutId(
+			groupId, privateLayout, parentLayoutId);
+		String name = nameMap.get(LocaleUtil.getDefault());
+		friendlyURL = layoutLocalServiceHelper.getFriendlyURL(
+			groupId, privateLayout, layoutId, name, friendlyURL);
+		int priority = layoutLocalServiceHelper.getNextPriority(
+			groupId, privateLayout, parentLayoutId, null, -1);
+
+		layoutLocalServiceHelper.validate(
+			groupId, privateLayout, layoutId, parentLayoutId, name, type,
+			hidden, friendlyURL);
+
+		Date now = new Date();
+
+		long plid = counterLocalService.increment();
+
+		Layout layout = layoutPersistence.create(plid);
+
+		layout.setUuid(serviceContext.getUuid());
+		layout.setGroupId(groupId);
+		layout.setCompanyId(user.getCompanyId());
+		layout.setUserId(user.getUserId());
+		layout.setUserName(user.getFullName());
+		layout.setCreateDate(serviceContext.getCreateDate(now));
+		layout.setModifiedDate(serviceContext.getModifiedDate(now));
+		layout.setPrivateLayout(privateLayout);
+		layout.setLayoutId(layoutId);
+		layout.setParentLayoutId(parentLayoutId);
+		layout.setNameMap(nameMap);
+		layout.setTitleMap(titleMap);
+		layout.setDescriptionMap(descriptionMap);
+		layout.setKeywordsMap(keywordsMap);
+		layout.setRobotsMap(robotsMap);
+		layout.setType(type);
+		layout.setHidden(hidden);
+		layout.setFriendlyURL(friendlyURL);
+		layout.setPriority(priority);
+
+		boolean layoutUpdateable = ParamUtil.getBoolean(
+			serviceContext, Sites.LAYOUT_UPDATEABLE, true);
+
+		if (!layoutUpdateable) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			typeSettingsProperties.put(
+				Sites.LAYOUT_UPDATEABLE, String.valueOf(layoutUpdateable));
+
+			layout.setTypeSettingsProperties(typeSettingsProperties);
+		}
+
+		String layoutPrototypeUuid = ParamUtil.getString(
+			serviceContext, "layoutPrototypeUuid");
+		boolean layoutPrototypeLinkEnabled = ParamUtil.getBoolean(
+			serviceContext, "layoutPrototypeLinkEnabled",
+			PropsValues.LAYOUT_PROTOTYPE_LINK_ENABLED_DEFAULT);
+
+		if (Validator.isNotNull(layoutPrototypeUuid)) {
+			layout.setLayoutPrototypeUuid(layoutPrototypeUuid);
+			layout.setLayoutPrototypeLinkEnabled(layoutPrototypeLinkEnabled);
+		}
+
+		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			layoutTypePortlet.setLayoutTemplateId(
+				0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
+		}
+
+		layout.setExpandoBridgeAttributes(serviceContext);
+
+		layoutPersistence.update(layout);
+
+		if (Validator.isNotNull(layoutPrototypeUuid) &&
+			!layoutPrototypeLinkEnabled) {
+
+			LayoutPrototype layoutPrototype =
+				layoutPrototypeLocalService.
+					getLayoutPrototypeByUuidAndCompanyId(
+						layoutPrototypeUuid, layout.getCompanyId());
+
+			try {
+				SitesUtil.applyLayoutPrototype(
+					layoutPrototype, layout, layoutPrototypeLinkEnabled);
+			}
+			catch (PortalException pe) {
+				throw pe;
+			}
+			catch (SystemException se) {
+				throw se;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
+		// Resources
+
+		boolean addGroupPermissions = true;
+
+		Group group = groupLocalService.getGroup(groupId);
+
+		if (privateLayout && group.isUser()) {
+			addGroupPermissions = false;
+		}
+
+		boolean addGuestPermissions = false;
+
+		if (!privateLayout ||
+			type.equals(LayoutConstants.TYPE_CONTROL_PANEL) ||
+			group.isLayoutSetPrototype()) {
+
+			addGuestPermissions = true;
+		}
+
+		resourceLocalService.addResources(
+			user.getCompanyId(), groupId, user.getUserId(),
+			Layout.class.getName(), layout.getPlid(), false,
+			addGroupPermissions, addGuestPermissions);
+
+		// Group
+
+		groupLocalService.updateSite(groupId, true);
+
+		// Layout set
+
+		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+
+		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
+			groupId, privateLayout);
+
+		layout.setLayoutSet(layoutSet);
+
+		// Message boards
+
+		if (PropsValues.LAYOUT_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, user.getFullName(), groupId, Layout.class.getName(),
+				plid, WorkflowConstants.ACTION_PUBLISH);
+		}
+
+		return layout;
 	}
 
 	/**
@@ -365,7 +511,25 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		Locale locale = LocaleUtil.getDefault();
+
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+		descriptionMap.put(locale, description);
+
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(locale, name);
+
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
+
+		titleMap.put(locale, title);
+
+		return addLayout(
+			userId, groupId, privateLayout, parentLayoutId, nameMap, titleMap,
+			descriptionMap, new HashMap<Locale, String>(),
+			new HashMap<Locale, String>(), type, hidden, friendlyURL,
+			serviceContext);
 	}
 
 	/**
@@ -1755,7 +1919,107 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Boolean iconImage, byte[] iconBytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		// Layout
+
+		parentLayoutId = layoutLocalServiceHelper.getParentLayoutId(
+			groupId, privateLayout, parentLayoutId);
+		String name = nameMap.get(LocaleUtil.getDefault());
+		friendlyURL = layoutLocalServiceHelper.getFriendlyURL(
+			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURL);
+
+		layoutLocalServiceHelper.validate(
+			groupId, privateLayout, layoutId, parentLayoutId, name, type,
+			hidden, friendlyURL);
+
+		layoutLocalServiceHelper.validateParentLayoutId(
+			groupId, privateLayout, layoutId, parentLayoutId);
+
+		Date now = new Date();
+
+		Layout layout = layoutPersistence.findByG_P_L(
+			groupId, privateLayout, layoutId);
+
+		List<Locale> modifiedLocales = LocalizationUtil.getModifiedLocales(
+			layout.getNameMap(), nameMap);
+
+		if (parentLayoutId != layout.getParentLayoutId()) {
+			int priority = layoutLocalServiceHelper.getNextPriority(
+				groupId, privateLayout, parentLayoutId,
+				layout.getSourcePrototypeLayoutUuid(), -1);
+
+			layout.setPriority(priority);
+		}
+
+		layout.setModifiedDate(serviceContext.getModifiedDate(now));
+		layout.setParentLayoutId(parentLayoutId);
+		layout.setNameMap(nameMap);
+		layout.setTitleMap(titleMap);
+		layout.setDescriptionMap(descriptionMap);
+		layout.setKeywordsMap(keywordsMap);
+		layout.setRobotsMap(robotsMap);
+		layout.setType(type);
+		layout.setHidden(hidden);
+		layout.setFriendlyURL(friendlyURL);
+
+		if (iconImage != null) {
+			layout.setIconImage(iconImage.booleanValue());
+
+			if (iconImage.booleanValue()) {
+				long iconImageId = layout.getIconImageId();
+
+				if (iconImageId <= 0) {
+					iconImageId = counterLocalService.increment();
+
+					layout.setIconImageId(iconImageId);
+				}
+			}
+		}
+
+		boolean layoutUpdateable = ParamUtil.getBoolean(
+			serviceContext, Sites.LAYOUT_UPDATEABLE, true);
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.put(
+			Sites.LAYOUT_UPDATEABLE, String.valueOf(layoutUpdateable));
+
+		layout.setTypeSettingsProperties(typeSettingsProperties);
+
+		String layoutPrototypeUuid = ParamUtil.getString(
+			serviceContext, "layoutPrototypeUuid");
+		boolean layoutPrototypeLinkEnabled = ParamUtil.getBoolean(
+			serviceContext, "layoutPrototypeLinkEnabled");
+
+		if (Validator.isNotNull(layoutPrototypeUuid)) {
+			layout.setLayoutPrototypeUuid(layoutPrototypeUuid);
+			layout.setLayoutPrototypeLinkEnabled(layoutPrototypeLinkEnabled);
+		}
+
+		layout.setExpandoBridgeAttributes(serviceContext);
+
+		layoutPersistence.update(layout);
+
+		// Icon
+
+		if (iconImage != null) {
+			if (!iconImage.booleanValue()) {
+				imageLocalService.deleteImage(layout.getIconImageId());
+			}
+			else if ((iconBytes != null) && (iconBytes.length > 0)) {
+				imageLocalService.updateImage(
+					layout.getIconImageId(), iconBytes);
+			}
+		}
+
+		// Portlet preferences
+
+		if (!modifiedLocales.isEmpty()) {
+			updateScopedPortletNames(
+				groupId, privateLayout, layoutId, nameMap, modifiedLocales);
+		}
+
+		return layout;
 	}
 
 	/**
