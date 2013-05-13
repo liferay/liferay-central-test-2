@@ -149,8 +149,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		parentLayoutId = layoutLocalServiceHelper.getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
 		String name = nameMap.get(LocaleUtil.getDefault());
-		friendlyURL = layoutLocalServiceHelper.getFriendlyURL(
-			groupId, privateLayout, layoutId, name, friendlyURL);
+		friendlyURLMap = layoutLocalServiceHelper.getFriendlyURLMap(
+			groupId, privateLayout, layoutId, name, friendlyURLMap);
+
+		String friendlyURL = friendlyURLMap.get(LocaleUtil.getDefault());
+
 		int priority = layoutLocalServiceHelper.getNextPriority(
 			groupId, privateLayout, parentLayoutId, null, -1);
 
@@ -270,6 +273,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Group
 
 		groupLocalService.updateSite(groupId, true);
+
+		// Layout friendly URLs
+
+		layoutFriendlyURLLocalService.addLayoutFriendlyURLs(
+			user.getCompanyId(), groupId, plid, privateLayout, friendlyURLMap,
+			serviceContext);
 
 		// Layout set
 
@@ -528,7 +537,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, nameMap, titleMap,
 			descriptionMap, new HashMap<Locale, String>(),
-			new HashMap<Locale, String>(), type, hidden, friendlyURL,
+			new HashMap<Locale, String>(), type, hidden, friendlyURLMap,
 			serviceContext);
 	}
 
@@ -1924,8 +1933,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		parentLayoutId = layoutLocalServiceHelper.getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
 		String name = nameMap.get(LocaleUtil.getDefault());
-		friendlyURL = layoutLocalServiceHelper.getFriendlyURL(
-			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURL);
+		friendlyURLMap = layoutLocalServiceHelper.getFriendlyURLMap(
+			groupId, privateLayout, layoutId, StringPool.BLANK, friendlyURLMap);
+
+		String friendlyURL = friendlyURLMap.get(LocaleUtil.getDefault());
 
 		layoutLocalServiceHelper.validate(
 			groupId, privateLayout, layoutId, parentLayoutId, name, type,
@@ -2018,6 +2029,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			updateScopedPortletNames(
 				groupId, privateLayout, layoutId, nameMap, modifiedLocales);
 		}
+
+		// Layout friendly URLs
+
+		layoutFriendlyURLLocalService.updateLayoutFriendlyURLs(
+			layout.getCompanyId(), layout.getGroupId(), layout.getPlid(),
+			layout.isPrivateLayout(), friendlyURLMap, serviceContext);
 
 		return layout;
 	}
