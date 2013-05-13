@@ -77,11 +77,11 @@ public class BaseSPIProviderTest {
 		System.setProperty(
 			PropsKeys.LIFERAY_HOME, currentDir.getAbsolutePath());
 
+		MPIHelperUtil.registerSPIProvider(_testSPIProvider);
+
 		SPIAgentFactoryUtil.registerSPIAgentClass(MockSPIAgent.class);
 
 		_testSPIProvider = new TestSPIProvider();
-
-		MPIHelperUtil.registerSPIProvider(_testSPIProvider);
 
 		SPIRegistryUtil spiRegistryUtil = new SPIRegistryUtil();
 
@@ -148,7 +148,7 @@ public class BaseSPIProviderTest {
 			Assert.assertSame(InterruptedException.class, throwable.getClass());
 		}
 
-		// ProcessExecutor failure
+		// Process executor failure
 
 		ProcessExecutorAdvice.setInterrupt(false);
 		ProcessExecutorAdvice.setRegisterBack(false);
@@ -254,7 +254,6 @@ public class BaseSPIProviderTest {
 	private SPIConfiguration _spiConfiguration = new SPIConfiguration(
 		"testId", "java", "", MockSPIAgent.class.getName(), 8081, "",
 		new String[0], new String[0], 10, 10, 10);
-
 	private TestSPIProvider _testSPIProvider;
 
 	private static class TestSPIProvider extends BaseSPIProvider {
@@ -267,6 +266,7 @@ public class BaseSPIProviderTest {
 				public String getUUID() {
 					return MockRemoteSPI.class.getName();
 				}
+
 			};
 		}
 
