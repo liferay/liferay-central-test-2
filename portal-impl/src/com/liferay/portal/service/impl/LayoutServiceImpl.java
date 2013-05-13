@@ -90,7 +90,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		return layoutLocalService.addLayout(
 			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
-			hidden, friendlyURL, serviceContext);
+			hidden, friendlyURLMap, serviceContext);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.addLayout(
 			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
-			description, type, hidden, friendlyURL, serviceContext);
+			description, type, hidden, friendlyURLMap, serviceContext);
 	}
 
 	/**
@@ -1096,7 +1096,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		return layoutLocalService.updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
 			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
-			hidden, friendlyURL, iconImage, iconBytes, serviceContext);
+			hidden, friendlyURLMap, iconImage, iconBytes, serviceContext);
 	}
 
 	/**
