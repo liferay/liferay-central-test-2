@@ -140,6 +140,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         found, if the group did not have permission to manage the layouts
 	 *         involved, or if layout values were invalid
 	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #addLayout(long, boolean, long, Map, Map, Map, Map, Map, String, boolean, String, ServiceContext)}
 	 */
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
@@ -1114,6 +1115,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         valid parent layout ID to use could not be found, or if the
 	 *         layout parameters were invalid
 	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #updateLayout(long, boolean, long, long, Map, Map, Map, Map, Map, String, boolean, Map, Boolean, byte[], ServiceContext)}
 	 */
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,

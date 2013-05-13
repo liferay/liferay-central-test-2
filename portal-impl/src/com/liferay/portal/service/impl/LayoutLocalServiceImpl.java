@@ -353,6 +353,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 * @throws PortalException if a group or user with the primary key could not
 	 *         be found, or if layout values were invalid
 	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #addLayout(long, long, boolean, long, Map, Map, Map, Map, Map, String, boolean, Map, ServiceContext)}
 	 */
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
@@ -1922,6 +1923,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         a valid parent layout ID to use could not be found, or if the
 	 *         layout parameters were invalid
 	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #updateLayout(long, boolean, long, long, Map, Map, Map, Map, Map, String, boolean, Map, Boolean, byte[], ServiceContext)}
 	 */
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
