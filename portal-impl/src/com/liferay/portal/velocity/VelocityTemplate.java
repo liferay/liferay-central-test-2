@@ -33,6 +33,7 @@ import java.security.PrivilegedExceptionAction;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.context.Context;
 import org.apache.velocity.exception.ParseErrorException;
 
 /**
@@ -66,15 +67,10 @@ public class VelocityTemplate extends AbstractTemplate {
 	}
 
 	public String[] getKeys() {
-		Object[] keyObjects = _velocityContext.getKeys();
-		Object[] innerKeyObjects =
-			_velocityContext.getChainedContext().getKeys();
+		Context context = _velocityContext.getChainedContext();
 
-		String[] keys = new String[keyObjects.length + innerKeyObjects.length];
-
-		ArrayUtil.combine(keyObjects, innerKeyObjects, keys);
-
-		return keys;
+		return ArrayUtil.append(
+			(String[])_velocityContext.getKeys(), (String[])context.getKeys());
 	}
 
 	public void put(String key, Object value) {

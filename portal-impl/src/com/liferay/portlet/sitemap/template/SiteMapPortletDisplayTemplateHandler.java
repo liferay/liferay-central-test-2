@@ -53,7 +53,7 @@ public class SiteMapPortletDisplayTemplateHandler
 
 	@Override
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
-		long classPK, String language, Locale locale)
+			long classPK, String language, Locale locale)
 		throws Exception {
 
 		Map<String, TemplateVariableGroup> templateVariableGroups =
