@@ -47,9 +47,7 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 	List<String> headerNames = new ArrayList<String>();
 
 	for (Map<String, String> fields : fieldsMap.values()) {
-		boolean privateField = GetterUtil.getBoolean(fields.get(FieldConstants.PRIVATE));
-
-		if (privateField) {
+		if (GetterUtil.getBoolean(fields.get(FieldConstants.PRIVATE))) {
 			continue;
 		}
 
@@ -112,9 +110,7 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 			// Columns
 
 			for (Map<String, String> fields : fieldsMap.values()) {
-				boolean privateField = GetterUtil.getBoolean(fields.get(FieldConstants.PRIVATE));
-
-				if (privateField) {
+				if (GetterUtil.getBoolean(fields.get(FieldConstants.PRIVATE))) {
 					continue;
 				}
 			%>
