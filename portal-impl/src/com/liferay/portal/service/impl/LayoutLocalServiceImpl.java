@@ -614,7 +614,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layout Friendly URLs
 
-		layoutFriendlyURLLocalService.deleteLayoutFriendlyURLsByPlid(
+		layoutFriendlyURLLocalService.deleteLayoutFriendlyURLs(
 			layout.getPlid());
 
 		// Portlet preferences

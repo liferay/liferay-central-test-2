@@ -659,7 +659,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="Layout" return-type="Collection">
+		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
 		<finder name="P_L" return-type="LayoutFriendlyURL" unique="true">

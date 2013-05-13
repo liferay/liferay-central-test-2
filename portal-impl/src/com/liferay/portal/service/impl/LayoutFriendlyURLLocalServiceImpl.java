@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -29,18 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * The implementation of the layout friendly u r l local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.service.LayoutFriendlyURLLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portal.service.base.LayoutFriendlyURLLocalServiceBaseImpl
- * @see com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil
  */
 public class LayoutFriendlyURLLocalServiceImpl
 	extends LayoutFriendlyURLLocalServiceBaseImpl {
@@ -80,16 +68,26 @@ public class LayoutFriendlyURLLocalServiceImpl
 		for (Locale locale : locales) {
 			String friendlyURL = friendlyURLMap.get(locale);
 
-			if (Validator.isNotNull(friendlyURL)) {
-				LayoutFriendlyURL layoutFriendlyURL = addLayoutFriendlyURL(
-					companyId, groupId, plid, privateLayout, friendlyURL,
-					LocaleUtil.toLanguageId(locale), serviceContext);
-
-				layoutFriendlyURLs.add(layoutFriendlyURL);
+			if (Validator.isNull(friendlyURL)) {
+				continue;
 			}
+
+			LayoutFriendlyURL layoutFriendlyURL = addLayoutFriendlyURL(
+				companyId, groupId, plid, privateLayout, friendlyURL,
+				LocaleUtil.toLanguageId(locale), serviceContext);
+
+			layoutFriendlyURLs.add(layoutFriendlyURL);
 		}
 
 		return layoutFriendlyURLs;
+	}
+
+	@Override
+	public LayoutFriendlyURL deleteLayoutFriendlyURL(
+			LayoutFriendlyURL layoutFriendlyURL)
+		throws SystemException {
+
+		return layoutFriendlyURLPersistence.remove(layoutFriendlyURL);
 	}
 
 	public void deleteLayoutFriendlyURL(long plid, String languageId)
@@ -99,32 +97,30 @@ public class LayoutFriendlyURLLocalServiceImpl
 			layoutFriendlyURLPersistence.fetchByP_L(plid, languageId);
 
 		if (layoutFriendlyURL != null) {
-			layoutFriendlyURLPersistence.remove(layoutFriendlyURL);
+			deleteLayoutFriendlyURL(layoutFriendlyURL);
 		}
 	}
 
-	public void deleteLayoutFriendlyURLsByPlid(long plid)
-		throws SystemException {
-
+	public void deleteLayoutFriendlyURLs(long plid) throws SystemException {
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
-			layoutFriendlyURLPersistence.findByLayout(plid);
+			layoutFriendlyURLPersistence.findByPlid(plid);
 
 		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
-			layoutFriendlyURLPersistence.remove(layoutFriendlyURL);
+			deleteLayoutFriendlyURL(layoutFriendlyURL);
 		}
 	}
 
-	public List<LayoutFriendlyURL> getLayoutFriendlyURLsByPlid(long plid)
+	public List<LayoutFriendlyURL> getLayoutFriendlyURLs(long plid)
 		throws SystemException {
 
-		return layoutFriendlyURLPersistence.findByLayout(plid);
+		return layoutFriendlyURLPersistence.findByPlid(plid);
 	}
 
 	public LayoutFriendlyURL updateLayoutFriendlyURL(
 			long companyId, long groupId, long plid, boolean privateLayout,
 			String friendlyURL, String languageId,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		LayoutFriendlyURL layoutFriendlyURL =
 			layoutFriendlyURLPersistence.fetchByP_L(plid, languageId);
@@ -143,7 +139,7 @@ public class LayoutFriendlyURLLocalServiceImpl
 	public List<LayoutFriendlyURL> updateLayoutFriendlyURLs(
 			long companyId, long groupId, long plid, boolean privateLayout,
 			Map<Locale, String> friendlyURLMap, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
 			new ArrayList<LayoutFriendlyURL>();
@@ -154,15 +150,15 @@ public class LayoutFriendlyURLLocalServiceImpl
 			String friendlyURL = friendlyURLMap.get(locale);
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			if (Validator.isNotNull(friendlyURL)) {
+			if (Validator.isNull(friendlyURL)) {
+				deleteLayoutFriendlyURL(plid, languageId);
+			}
+			else {
 				LayoutFriendlyURL layoutFriendlyURL = updateLayoutFriendlyURL(
 					companyId, groupId, plid, privateLayout, friendlyURL,
 					languageId, serviceContext);
 
 				layoutFriendlyURLs.add(layoutFriendlyURL);
-			}
-			else {
-				deleteLayoutFriendlyURL(plid, languageId);
 			}
 		}
 

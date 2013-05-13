@@ -138,8 +138,6 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 		Object thisObject = methodInvocation.getThis();
 		Object[] arguments = methodInvocation.getArguments();
 
-		Class<?>[] parameterTypes = method.getParameterTypes();
-
 		if (methodName.equals("deleteLayout")) {
 			if (arguments.length == 3) {
 				deleteLayout(
@@ -165,7 +163,10 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 
 			Map<Locale, String> friendlyURLMap = null;
 
-			if (Arrays.equals(parameterTypes, _updateLayoutParameterTypes)) {
+			if (Arrays.equals(
+					method.getParameterTypes(),
+					_UPDATE_LAYOUT_PARAMETER_TYPES)) {
+
 				friendlyURLMap = new HashMap<Locale, String>();
 
 				friendlyURLMap.put(
@@ -190,7 +191,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 			try {
 				Class<?> clazz = getClass();
 
-				parameterTypes = ArrayUtil.append(
+				Class<?>[] parameterTypes = ArrayUtil.append(
 					new Class<?>[] {LayoutLocalService.class},
 					method.getParameterTypes());
 
@@ -579,7 +580,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 	@BeanReference(type = LayoutLocalServiceHelper.class)
 	protected LayoutLocalServiceHelper layoutLocalServiceHelper;
 
-	private static final Class<?>[] _updateLayoutParameterTypes = {
+	private static final Class<?>[] _UPDATE_LAYOUT_PARAMETER_TYPES = {
 		long.class, boolean.class, long.class, long.class, Map.class, Map.class,
 		Map.class, Map.class, Map.class, String.class, boolean.class,
 		String.class, Boolean.class, byte[].class, ServiceContext.class

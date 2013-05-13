@@ -267,8 +267,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 	public String getFriendlyURLsXML() throws SystemException {
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
-			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLsByPlid(
-				getPlid());
+			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(getPlid());
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
@@ -279,7 +278,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 		}
 
 		return LocalizationUtil.updateLocalization(
-			friendlyURLMap, StringPool.BLANK, "FriendlyURL",
+			friendlyURLMap, StringPool.BLANK, "friendlyURL",
 			LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 	}
 
