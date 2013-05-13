@@ -280,12 +280,12 @@ public class PortletPermissionUtil {
 			permissionChecker, scopeGroupId, layout, portlet, portletMode);
 	}
 
-	public static boolean hasAnyConfigurationPermission(
+	public static boolean hasConfigurationPermission(
 			PermissionChecker permissionChecker, long groupId, Layout layout,
 			String actionId)
 		throws PortalException, SystemException {
 
-		return getPortletPermission().hasAnyConfigurationPermission(
+		return getPortletPermission().hasConfigurationPermission(
 			permissionChecker, groupId, layout, actionId);
 	}
 
