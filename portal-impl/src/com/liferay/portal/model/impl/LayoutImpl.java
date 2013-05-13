@@ -265,17 +265,23 @@ public class LayoutImpl extends LayoutBaseImpl {
 		}
 	}
 
-	public String getFriendlyURLsXML() throws SystemException {
+	public Map<Locale, String> getFriendlyURLMap() throws SystemException {
+		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
+
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
 			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(getPlid());
-
-		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
 			friendlyURLMap.put(
 				LocaleUtil.fromLanguageId(layoutFriendlyURL.getLanguageId()),
 				layoutFriendlyURL.getFriendlyURL());
 		}
+
+		return friendlyURLMap;
+	}
+
+	public String getFriendlyURLsXML() throws SystemException {
+		Map<Locale, String> friendlyURLMap = getFriendlyURLMap();
 
 		return LocalizationUtil.updateLocalization(
 			friendlyURLMap, StringPool.BLANK, "friendlyURL",
