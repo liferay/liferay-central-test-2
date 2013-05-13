@@ -1634,10 +1634,10 @@ public class DataFactory {
 		else {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("{\"title\":\"");
-			sb.append(mbMessage.getSubject());
-			sb.append("\", \"messageId\":");
+			sb.append("{\"messageId\":\"");
 			sb.append(mbMessage.getMessageId());
+			sb.append("\", \"title\":");
+			sb.append(mbMessage.getSubject());
 			sb.append("}");
 
 			extraData = sb.toString();
