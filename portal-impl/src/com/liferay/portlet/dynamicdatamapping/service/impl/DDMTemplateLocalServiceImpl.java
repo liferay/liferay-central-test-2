@@ -177,9 +177,9 @@ public class DDMTemplateLocalServiceImpl
 			templateKey = templateKey.trim().toUpperCase();
 		}
 
-		if (language.equals(TemplateConstants.LANG_TYPE_XSL) || 
-				type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
-			
+		if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM) ||
+			language.equals(TemplateConstants.LANG_TYPE_XSL)) {
+
 			try {
 				script = DDMXMLUtil.formatXML(script);
 			}

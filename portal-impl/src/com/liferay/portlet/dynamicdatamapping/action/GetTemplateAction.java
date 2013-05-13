@@ -49,17 +49,16 @@ public class GetTemplateAction extends Action {
 			DDMTemplate template = DDMTemplateServiceUtil.getTemplate(
 				templateId);
 
-			String extension = GetterUtil.getString(
-				template.getLanguage(), TemplateConstants.LANG_TYPE_VM);
-
 			String script = template.getScript();
-
-			String type = template.getType();
 
 			String contentType = null;
 
-			if (extension.equals(TemplateConstants.LANG_TYPE_XSL) || 
-					type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
+			String type = template.getType();
+			String language = GetterUtil.getString(
+				template.getLanguage(), TemplateConstants.LANG_TYPE_VM);
+
+			if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM) ||
+				language.equals(TemplateConstants.LANG_TYPE_XSL)) {
 
 				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
