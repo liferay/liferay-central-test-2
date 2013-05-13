@@ -75,7 +75,22 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			Map<Locale, String> friendlyURLMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			GroupPermissionUtil.check(
+				permissionChecker, groupId, ActionKeys.ADD_LAYOUT);
+		}
+		else {
+			LayoutPermissionUtil.check(
+				permissionChecker, groupId, privateLayout, parentLayoutId,
+				ActionKeys.ADD_LAYOUT);
+		}
+
+		return layoutLocalService.addLayout(
+			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
+			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
+			hidden, friendlyURL, serviceContext);
 	}
 
 	/**
@@ -161,7 +176,21 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			GroupPermissionUtil.check(
+				permissionChecker, groupId, ActionKeys.ADD_LAYOUT);
+		}
+		else {
+			LayoutPermissionUtil.check(
+				permissionChecker, groupId, privateLayout, parentLayoutId,
+				ActionKeys.ADD_LAYOUT);
+		}
+
+		return layoutLocalService.addLayout(
+			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
+			description, type, hidden, friendlyURL, serviceContext);
 	}
 
 	/**
@@ -1060,7 +1089,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			byte[] iconBytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return null;
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), groupId, privateLayout, layoutId,
+			ActionKeys.UPDATE);
+
+		return layoutLocalService.updateLayout(
+			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
+			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
+			hidden, friendlyURL, iconImage, iconBytes, serviceContext);
 	}
 
 	/**
