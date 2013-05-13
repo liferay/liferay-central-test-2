@@ -132,6 +132,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return sb.toString();
 	}
 
+	@Override
+	public Layout addLayout(
+			long userId, long groupId, boolean privateLayout,
+			long parentLayoutId, Map<Locale, String> nameMap,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
+			String type, boolean hidden, Map<Locale, String> friendlyURLMap,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
+	}
+
 	/**
 	 * Adds a layout with additional parameters.
 	 *
@@ -342,6 +355,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return layout;
+	}
+
+	@Override
+	public Layout addLayout(
+			long userId, long groupId, boolean privateLayout,
+			long parentLayoutId, String name, String title, String description,
+			String type, boolean hidden, Map<Locale, String> friendlyURLMap,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
 	}
 
 	/**
@@ -1719,6 +1743,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layoutPersistence.update(layout);
 
 		return layout;
+	}
+
+	@Override
+	public Layout updateLayout(
+			long groupId, boolean privateLayout, long layoutId,
+			long parentLayoutId, Map<Locale, String> nameMap,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
+			String type, boolean hidden, Map<Locale, String> friendlyURLMap,
+			Boolean iconImage, byte[] iconBytes, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
 	}
 
 	/**

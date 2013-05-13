@@ -65,6 +65,19 @@ import java.util.Map;
  */
 public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
+	@Override
+	public Layout addLayout(
+			long groupId, boolean privateLayout, long parentLayoutId,
+			Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap,
+			Map<Locale, String> descriptionMap, Map<Locale, String> keywordsMap,
+			Map<Locale, String> robotsMap, String type, boolean hidden,
+			Map<Locale, String> friendlyURLMap, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
+	}
+
 	/**
 	 * Adds a layout with additional parameters.
 	 *
@@ -138,6 +151,17 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
 			hidden, friendlyURL, serviceContext);
+	}
+
+	@Override
+	public Layout addLayout(
+			long groupId, boolean privateLayout, long parentLayoutId,
+			String name, String title, String description, String type,
+			boolean hidden, Map<Locale, String> friendlyURLMap,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
 	}
 
 	/**
@@ -1023,6 +1047,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		SchedulerEngineHelperUtil.delete(
 			jobName, groupName, StorageType.PERSISTED);
+	}
+
+	@Override
+	public Layout updateLayout(
+			long groupId, boolean privateLayout, long layoutId,
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap,
+			Map<Locale, String> descriptionMap, Map<Locale, String> keywordsMap,
+			Map<Locale, String> robotsMap, String type, boolean hidden,
+			Map<Locale, String> friendlyURLMap, Boolean iconImage,
+			byte[] iconBytes, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return null;
 	}
 
 	/**
