@@ -168,31 +168,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			hidden, friendlyURL, serviceContext);
 	}
 
-	@Override
-	public Layout addLayout(
-			long groupId, boolean privateLayout, long parentLayoutId,
-			String name, String title, String description, String type,
-			boolean hidden, Map<Locale, String> friendlyURLMap,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			GroupPermissionUtil.check(
-				permissionChecker, groupId, ActionKeys.ADD_LAYOUT);
-		}
-		else {
-			LayoutPermissionUtil.check(
-				permissionChecker, groupId, privateLayout, parentLayoutId,
-				ActionKeys.ADD_LAYOUT);
-		}
-
-		return layoutLocalService.addLayout(
-			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
-			description, type, hidden, friendlyURLMap, serviceContext);
-	}
-
 	/**
 	 * Adds a layout with single entry maps for name, title, and description to
 	 * the default locale.

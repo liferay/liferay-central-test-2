@@ -373,35 +373,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			friendlyURLMap, serviceContext);
 	}
 
-	@Override
-	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, String name, String title, String description,
-			String type, boolean hidden, Map<Locale, String> friendlyURLMap,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, description);
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
-
-		nameMap.put(locale, name);
-
-		Map<Locale, String> titleMap = new HashMap<Locale, String>();
-
-		titleMap.put(locale, title);
-
-		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, nameMap, titleMap,
-			descriptionMap, new HashMap<Locale, String>(),
-			new HashMap<Locale, String>(), type, hidden, friendlyURLMap,
-			serviceContext);
-	}
-
 	/**
 	 * Adds a layout with single entry maps for name, title, and description to
 	 * the default locale.
@@ -465,13 +436,29 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		Locale locale = LocaleUtil.getDefault();
+
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(locale, name);
+
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
+
+		titleMap.put(locale, title);
+
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+		descriptionMap.put(locale, description);
+
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(LocaleUtil.getDefault(), friendlyURL);
 
 		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, name, title,
-			description, type, hidden, friendlyURLMap, serviceContext);
+			userId, groupId, privateLayout, parentLayoutId, nameMap, titleMap,
+			descriptionMap, new HashMap<Locale, String>(),
+			new HashMap<Locale, String>(), type, hidden, friendlyURLMap,
+			serviceContext);
 	}
 
 	/**
