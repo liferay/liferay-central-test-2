@@ -778,9 +778,12 @@ public class LayoutImporter {
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, layout);
 
-		newLayouts.addAll(portletDataContext.getNewLayouts());
+		List<Layout> portletDataContextNewLayouts =
+			portletDataContext.getNewLayouts();
 
-		portletDataContext.getNewLayouts().clear();
+		newLayouts.addAll(portletDataContextNewLayouts);
+
+		portletDataContextNewLayouts.clear();
 	}
 
 	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)
