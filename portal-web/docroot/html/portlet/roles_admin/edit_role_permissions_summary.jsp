@@ -42,9 +42,7 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, permissionsSummaryURL, headerNames, "this-role-does-not-have-any-permissions");
 
-PermissionConverter permissionConverter = PermissionConverterUtil.getPermissionConverter();
-
-List<Permission> permissions = permissionConverter.convertPermissions(role);
+List<Permission> permissions = PermissionConverterUtil.convertPermissions(role);
 
 List<PermissionDisplay> permissionDisplays = new ArrayList<PermissionDisplay>(permissions.size());
 

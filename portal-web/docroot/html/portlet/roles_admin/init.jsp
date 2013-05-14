@@ -25,7 +25,6 @@ page import="com.liferay.portal.RolePermissionsException" %><%@
 page import="com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyUtil" %><%@
 page import="com.liferay.portal.security.membershippolicy.RoleMembershipPolicyUtil" %><%@
 page import="com.liferay.portal.security.membershippolicy.SiteMembershipPolicyUtil" %><%@
-page import="com.liferay.portal.security.permission.PermissionConverter" %><%@
 page import="com.liferay.portal.security.permission.PermissionConverterUtil" %><%@
 page import="com.liferay.portal.security.permission.comparator.ActionComparator" %><%@
 page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %><%@

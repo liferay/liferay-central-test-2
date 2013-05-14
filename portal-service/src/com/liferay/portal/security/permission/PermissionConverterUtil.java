@@ -14,18 +14,52 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Role;
+
+import java.util.List;
 
 /**
  * @author Michael C. Han
  */
 public class PermissionConverterUtil {
 
+	public static List<Permission> convertPermissions(
+			Role role, PermissionConversionFilter permissionConversionFilter)
+		throws PortalException, SystemException {
+
+		return getPermissionConverter().convertPermissions(
+			role, permissionConversionFilter);
+	}
+
 	public static PermissionConverter getPermissionConverter() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			PermissionConverterUtil.class);
 
 		return _permissionConverter;
+	}
+
+	public List<Permission> convertPermissions(long roleId)
+		throws PortalException, SystemException {
+
+		return getPermissionConverter().convertPermissions(roleId);
+	}
+
+	public List<Permission> convertPermissions(
+			long roleId, PermissionConversionFilter permissionConversionFilter)
+		throws PortalException, SystemException {
+
+		return getPermissionConverter().convertPermissions(
+			roleId, permissionConversionFilter);
+	}
+
+	public List<Permission> convertPermissions(Role role)
+		throws PortalException, SystemException {
+
+		return getPermissionConverter().convertPermissions(role);
 	}
 
 	public void setPermissionConverter(
