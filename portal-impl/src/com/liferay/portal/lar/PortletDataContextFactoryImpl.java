@@ -46,8 +46,6 @@ public class PortletDataContextFactoryImpl
 
 		PortletDataContext portletDataContext = new PortletDataContextImpl();
 
-		portletDataContext.setCompanyId(companyId);
-
 		try {
 			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 				companyId);
@@ -58,26 +56,22 @@ public class PortletDataContextFactoryImpl
 			throw new IllegalStateException(e);
 		}
 
+		portletDataContext.setCompanyId(companyId);
+		portletDataContext.setEndDate(endDate);
 		portletDataContext.setGroupId(groupId);
 		portletDataContext.setScopeGroupId(groupId);
 		portletDataContext.setParameterMap(parameterMap);
-
 		portletDataContext.setStartDate(startDate);
-		portletDataContext.setEndDate(endDate);
-
 		portletDataContext.setZipWriter(zipWriter);
 
 		return portletDataContext;
 	}
 
 	public PortletDataContext createImportPortletDataContext(
-			long companyId, long groupId, Map<String, String[]> parameterMap,
-			UserIdStrategy userIdStrategy, ZipReader zipReader)
-		throws PortletDataException {
+		long companyId, long groupId, Map<String, String[]> parameterMap,
+		UserIdStrategy userIdStrategy, ZipReader zipReader) {
 
 		PortletDataContext portletDataContext = new PortletDataContextImpl();
-
-		portletDataContext.setCompanyId(companyId);
 
 		try {
 			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
@@ -89,16 +83,18 @@ public class PortletDataContextFactoryImpl
 			throw new IllegalStateException(e);
 		}
 
-		portletDataContext.setGroupId(groupId);
-		portletDataContext.setScopeGroupId(groupId);
-		portletDataContext.setNewLayouts(new ArrayList<Layout>());
-		portletDataContext.setParameterMap(parameterMap);
+		portletDataContext.setCompanyId(companyId);
 
 		String dataStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 
 		portletDataContext.setDataStrategy(dataStrategy);
+
+		portletDataContext.setGroupId(groupId);
+		portletDataContext.setNewLayouts(new ArrayList<Layout>());
+		portletDataContext.setParameterMap(parameterMap);
+		portletDataContext.setScopeGroupId(groupId);
 		portletDataContext.setUserIdStrategy(userIdStrategy);
 		portletDataContext.setZipReader(zipReader);
 

@@ -350,7 +350,9 @@ public class LayoutExporter {
 
 			if ((image != null) && (image.getTextObj() != null)) {
 				String logoPath = ExportImportPathUtil.getRootPath(
-					portletDataContext).concat("/logo");
+					portletDataContext);
+
+				logoPath += "/logo";
 
 				headerElement.addAttribute("logo-path", logoPath);
 
@@ -616,12 +618,14 @@ public class LayoutExporter {
 						String key = PortletPermissionUtil.getPrimaryKey(
 							layout.getPlid(), portlet.getPortletId());
 
+						Group scopeGroup = layout.getScopeGroup();
+
 						portletIds.put(
 							key,
 							new Object[] {
 								portlet.getPortletId(), layout.getPlid(),
-								layout.getScopeGroup().getGroupId(),
-								StringPool.BLANK, layout.getUuid()
+								scopeGroup.getGroupId(), StringPool.BLANK,
+								layout.getUuid()
 							});
 					}
 				}
@@ -747,9 +751,10 @@ public class LayoutExporter {
 					servletContextName + " does not map to a theme loader");
 			}
 			else {
+				File file = themeLoader.getFileStorage();
+
 				String realPath =
-					themeLoader.getFileStorage().getPath() + StringPool.SLASH +
-						theme.getName();
+					file.getPath() + StringPool.SLASH + theme.getName();
 
 				cssPath = new File(realPath + "/css");
 				imagesPath = new File(realPath + "/images");

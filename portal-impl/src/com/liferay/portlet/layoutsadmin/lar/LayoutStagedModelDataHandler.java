@@ -47,6 +47,7 @@ import com.liferay.portal.lar.PermissionImporter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutBranch;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutRevision;
@@ -164,9 +165,11 @@ public class LayoutStagedModelDataHandler
 			layoutElement.addAttribute(
 				"layout-branch-id",
 				String.valueOf(layoutRevision.getLayoutBranchId()));
+
+			LayoutBranch layoutBranch = layoutRevision.getLayoutBranch();
+
 			layoutElement.addAttribute(
-				"layout-branch-name",
-				String.valueOf(layoutRevision.getLayoutBranch().getName()));
+				"layout-branch-name", String.valueOf(layoutBranch.getName()));
 		}
 
 		layoutElement.addAttribute("layout-uuid", layout.getUuid());
@@ -226,13 +229,14 @@ public class LayoutStagedModelDataHandler
 					portletDataContext.getScopeGroupId(), Image.class.getName(),
 					image.getImageId());
 
-				layoutElement.addElement("icon-image-path").addText(iconPath);
+				Element iconImagePathElement = layoutElement.addElement(
+					"icon-image-path");
+
+				iconImagePathElement.addText(iconPath);
 
 				portletDataContext.addZipEntry(iconPath, image.getTextObj());
 			}
 		}
-
-		// Layout permissions
 
 		boolean exportPermissions = MapUtil.getBoolean(
 			portletDataContext.getParameterMap(),
@@ -461,8 +465,6 @@ public class LayoutStagedModelDataHandler
 			importedLayout.setPrivateLayout(privateLayout);
 			importedLayout.setLayoutId(layoutId);
 
-			// Resources
-
 			boolean addGroupPermissions = true;
 
 			Group group = importedLayout.getGroup();
@@ -682,9 +684,9 @@ public class LayoutStagedModelDataHandler
 		portletDataContext.setPlid(importedLayout.getPlid());
 		portletDataContext.setOldPlid(layout.getPlid());
 
-		portletDataContext.getNewLayouts().add(importedLayout);
+		List<Layout> newLayouts = portletDataContext.getNewLayouts();
 
-		// Layout permissions
+		newLayouts.add(importedLayout);
 
 		boolean importPermissions = MapUtil.getBoolean(
 			portletDataContext.getParameterMap(),
@@ -805,7 +807,10 @@ public class LayoutStagedModelDataHandler
 		}
 
 		String friendlyURL = url.substring(x, y);
-		String groupFriendlyURL = layout.getGroup().getFriendlyURL();
+
+		Group group = layout.getGroup();
+
+		String groupFriendlyURL = group.getFriendlyURL();
 
 		if (!friendlyURL.equals(groupFriendlyURL)) {
 			return;

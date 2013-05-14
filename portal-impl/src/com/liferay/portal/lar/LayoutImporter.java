@@ -554,7 +554,10 @@ public class LayoutImporter {
 				String portletId = portletElement.attributeValue("portlet-id");
 				long layoutId = GetterUtil.getLong(
 					portletElement.attributeValue("layout-id"));
-				long plid = newLayoutsMap.get(layoutId).getPlid();
+
+				Layout layout = newLayoutsMap.get(layoutId);
+
+				long plid = layout.getPlid();
 
 				portletDataContext.setPlid(plid);
 
@@ -768,10 +771,9 @@ public class LayoutImporter {
 			Element layoutElement)
 		throws Exception {
 
-		String layoutPath = layoutElement.attributeValue("path");
+		String path = layoutElement.attributeValue("path");
 
-		Layout layout = (Layout)portletDataContext.getZipEntryAsObject(
-			layoutPath);
+		Layout layout = (Layout)portletDataContext.getZipEntryAsObject(path);
 
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, layout);
