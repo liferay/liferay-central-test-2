@@ -311,7 +311,7 @@ public class PortletResponseUtil {
 			HttpHeaders.CACHE_CONTROL, HttpHeaders.CACHE_CONTROL_PRIVATE_VALUE);
 
 		if (Validator.isNotNull(fileName)) {
-			String contentDispositionFilename = "filename=\"" + fileName + "\"";
+			String contentDispositionFileName = "filename=\"" + fileName + "\"";
 
 			// If necessary for non-ASCII characters, encode based on RFC 2184.
 			// However, not all browsers support RFC 2184. See LEP-3127.
@@ -334,11 +334,11 @@ public class PortletResponseUtil {
 						PortalUtil.getHttpServletRequest(portletRequest);
 
 					if (BrowserSnifferUtil.isIe(request)) {
-						contentDispositionFilename =
+						contentDispositionFileName =
 							"filename=\"" + encodedFileName + "\"";
 					}
 					else {
-						contentDispositionFilename =
+						contentDispositionFileName =
 							"filename*=UTF-8''" + encodedFileName;
 					}
 				}
@@ -380,7 +380,7 @@ public class PortletResponseUtil {
 			sb.append(contentDispositionType);
 			sb.append(StringPool.SEMICOLON);
 			sb.append(StringPool.SPACE);
-			sb.append(contentDispositionFilename);
+			sb.append(contentDispositionFileName);
 
 			mimeResponse.setProperty(
 				HttpHeaders.CONTENT_DISPOSITION, sb.toString());

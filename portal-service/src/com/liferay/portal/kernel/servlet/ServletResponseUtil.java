@@ -632,7 +632,7 @@ public class ServletResponseUtil {
 		}
 
 		if (Validator.isNotNull(fileName)) {
-			String contentDispositionFilename = "filename=\"" + fileName + "\"";
+			String contentDispositionFileName = "filename=\"" + fileName + "\"";
 
 			// If necessary for non-ASCII characters, encode based on RFC 2184.
 			// However, not all browsers support RFC 2184. See LEP-3127.
@@ -651,11 +651,11 @@ public class ServletResponseUtil {
 				String encodedFileName = HttpUtil.encodeURL(fileName, true);
 
 				if (BrowserSnifferUtil.isIe(request)) {
-					contentDispositionFilename =
+					contentDispositionFileName =
 						"filename=\"" + encodedFileName + "\"";
 				}
 				else {
-					contentDispositionFilename =
+					contentDispositionFileName =
 						"filename*=UTF-8''" + encodedFileName;
 				}
 			}
@@ -691,7 +691,7 @@ public class ServletResponseUtil {
 			sb.append(contentDispositionType);
 			sb.append(StringPool.SEMICOLON);
 			sb.append(StringPool.SPACE);
-			sb.append(contentDispositionFilename);
+			sb.append(contentDispositionFileName);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
