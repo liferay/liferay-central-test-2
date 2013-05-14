@@ -80,12 +80,13 @@ public class RoleStagedModelDataHandlerTest
 		rootElement.addAttribute(
 			"company-group-id", String.valueOf(companyGroup.getGroupId()));
 
-		Group userSiteGroup = GroupLocalServiceUtil.getUserPersonalSiteGroup(
-			portletDataContext.getCompanyId());
+		Group userPersonalSiteGroup =
+			GroupLocalServiceUtil.getUserPersonalSiteGroup(
+				portletDataContext.getCompanyId());
 
 		rootElement.addAttribute(
 			"user-personal-site-group-id",
-			String.valueOf(userSiteGroup.getGroupId()));
+			String.valueOf(userPersonalSiteGroup.getGroupId()));
 	}
 
 }

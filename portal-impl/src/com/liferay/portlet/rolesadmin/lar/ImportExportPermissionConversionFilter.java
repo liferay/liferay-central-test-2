@@ -46,7 +46,9 @@ public class ImportExportPermissionConversionFilter
 			Group group = GroupLocalServiceUtil.fetchGroup(
 				Long.valueOf(resourcePermission.getPrimKey()));
 
-			return (group.isCompany() || group.isUserPersonalSite());
+			if (group.isCompany() || group.isUserPersonalSite()) {
+				return true;
+			}
 		}
 
 		return false;

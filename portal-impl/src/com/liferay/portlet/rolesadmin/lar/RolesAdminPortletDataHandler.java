@@ -48,10 +48,9 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 		super();
 
 		setDataPortalLevel(true);
-
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, _SYSTEM_ROLES_PARAMETER, true, false));
+				NAMESPACE, "system-roles", true, false));
 	}
 
 	@Override
@@ -92,14 +91,7 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		final boolean exportSystemRoles =
-			portletDataContext.getBooleanParameter(
-				NAMESPACE, _SYSTEM_ROLES_PARAMETER);
-
-		final long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-			portletDataContext.getCompanyId());
-
-		ActionableDynamicQuery roleActionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			new RoleExportActionableDynamicQuery(portletDataContext) {
 
 				@Override
@@ -120,9 +112,16 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 
 					Role role = (Role)object;
 
-					if (!exportSystemRoles &&
-						(role.getUserId() == defaultUserId)) {
+					if (!portletDataContext.getBooleanParameter(
+							NAMESPACE, "system-roles")) {
 
+						return;
+					}
+
+					long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+						portletDataContext.getCompanyId());
+
+					if (role.getUserId() == defaultUserId) {
 						return;
 					}
 
@@ -131,7 +130,7 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 
 			};
 
-		roleActionableDynamicQuery.performActions();
+		actionableDynamicQuery.performActions();
 
 		return getExportDataRootElementString(rootElement);
 	}
@@ -161,7 +160,5 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 
 	private static final String _RESOURCE_NAME =
 		"com.liferay.portlet.rolesadmin";
-
-	private static final String _SYSTEM_ROLES_PARAMETER = "system-roles";
 
 }

@@ -310,7 +310,7 @@ public class LayoutImporter {
 
 		portletDataContext.setSourceGroupId(sourceGroupId);
 
-		// user personal site group id
+		// User personal site group id
 
 		long sourceUserPersonalSiteGroupId = GetterUtil.getLong(
 			_headerElement.attributeValue("user-personal-site-group-id"));

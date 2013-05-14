@@ -417,17 +417,13 @@ public class PortletExporter {
 		}
 
 		headerElement.addAttribute("type", "portlet");
-
 		headerElement.addAttribute(
 			"company-group-id",
 			String.valueOf(portletDataContext.getCompanyGroupId()));
-
 		headerElement.addAttribute("group-id", String.valueOf(scopeGroupId));
-
 		headerElement.addAttribute(
 			"user-personal-site-group-id",
 			String.valueOf(portletDataContext.getUserPersonalSiteGroupId()));
-
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(layout.isPrivateLayout()));
 		headerElement.addAttribute(

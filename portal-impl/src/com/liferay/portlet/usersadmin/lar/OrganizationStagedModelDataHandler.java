@@ -75,16 +75,16 @@ public class OrganizationStagedModelDataHandler
 			Element organizationElement =
 				portletDataContext.getExportDataElement(exportedOrganization);
 
-			portletDataContext.addClassedModel(
-				organizationElement,
-				ExportImportPathUtil.getModelPath(exportedOrganization),
-				exportedOrganization, UsersAdminPortletDataHandler.NAMESPACE);
-
 			exportAddresses(portletDataContext, exportedOrganization);
 			exportEmailAddresses(portletDataContext, exportedOrganization);
 			exportPhones(portletDataContext, exportedOrganization);
 			exportOrgLabors(portletDataContext, exportedOrganization);
 			exportWebsites(portletDataContext, exportedOrganization);
+
+			portletDataContext.addClassedModel(
+				organizationElement,
+				ExportImportPathUtil.getModelPath(exportedOrganization),
+				exportedOrganization, UsersAdminPortletDataHandler.NAMESPACE);
 
 			organizations.addAll(exportedOrganization.getSuborganizations());
 		}
