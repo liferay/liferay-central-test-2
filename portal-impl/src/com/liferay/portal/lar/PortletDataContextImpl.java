@@ -594,6 +594,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		referenceElement.addAttribute("class-name", className);
 
+		if ((classedModel instanceof StagedGroupedModel) ||
+			(classedModel instanceof StagedModel)) {
+
+			referenceElement.addAttribute(
+				"class-pk", String.valueOf(classedModel.getPrimaryKeyObj()));
+		}
+
 		if (missing) {
 			if (classedModel instanceof StagedModel) {
 				referenceElement.addAttribute(
@@ -606,6 +613,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 					"display-name",
 					String.valueOf(classedModel.getPrimaryKeyObj()));
 			}
+		}
+
+		if (classedModel instanceof StagedGroupedModel) {
+			StagedGroupedModel stagedGroupedModel =
+				(StagedGroupedModel)classedModel;
+
+			referenceElement.addAttribute(
+				"group-id", String.valueOf(stagedGroupedModel.getGroupId()));
 		}
 
 		if (Validator.isNotNull(binPath)) {
@@ -627,18 +642,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			StagedModel stagedModel = (StagedModel)classedModel;
 
-			if (stagedModel instanceof StagedGroupedModel) {
-				StagedGroupedModel stagedGroupedModel =
-					(StagedGroupedModel)classedModel;
-
-				referenceElement.addAttribute(
-					"group-id",
-					String.valueOf(stagedGroupedModel.getGroupId()));
-			}
-
 			referenceElement.addAttribute("uuid", stagedModel.getUuid());
-			referenceElement.addAttribute(
-				"class-pk", String.valueOf(stagedModel.getPrimaryKeyObj()));
 		}
 
 		return referenceElement;
