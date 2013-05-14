@@ -68,8 +68,10 @@ public class VelocityTemplate extends AbstractTemplate {
 
 	public String[] getKeys() {
 		Object[] keyObjects = _velocityContext.getKeys();
-		Object[] innerKeyObjects =
-			_velocityContext.getChainedContext().getKeys();
+
+		Context context = _velocityContext.getChainedContext();
+
+		Object[] innerKeyObjects = context.getKeys();
 
 		String[] keys = new String[keyObjects.length + innerKeyObjects.length];
 
