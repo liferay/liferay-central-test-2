@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>CPWebcontentTemplatesAddtemplate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPWebcontentTemplatesAddtemplate</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPWebcontentTemplatesAddtemplate</td>
+</tr>
+<!---->
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//button[contains(@onclick, '_166_saveTemplate')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_AND_CONTINUE_BUTTON</td>
+	<td>//button[contains(@onclick, '_166_saveAndContinueTemplate')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//button[contains(., 'Cancel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADVANCED_SEARCH</td>
+	<td>//button[@id='toggle_id_ddm_template_searchtoggleAdvanced']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CLOSE_WINDOW</td>
+	<td>//button[contains(@class, 'btn close')]</td>
+	<td></td>
+</tr>
+<!---->
+<!--ADVANCED_SEARCH_MENU-->
+<tr>
+	<td>ADVANCED_SEARCH_MENU_MATCH_SELECT</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADVANCED_SEARCH_MENU_NAME_FIELD</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADVANCED_SEARCH_MENU_DESCRIPTION_FIELD</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NEW_TEMPLATE-->
+<tr>
+	<td>NEW_TEMPLATE_NAME</td>
+	<td>//span[@id='_166_nameBoundingBox']/input[@id='_166_name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEW_TEMPLATE_STRUCTURE_SELECT</td>
+	<td>//a[@id='_166_ctvk']</td>
+	<td>Select</td>
+</tr>
+<tr>
+	<td>NEW_TEMPLATE_LANGUAGE</td>
+	<td>//select[@id='_166_language']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEW_TEMPLATE_DESCRIPTION</td>
+	<td>//textarea[@id='_166_description']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEW_TEMPLATE_SMALL_IMAGE_CHECKBOX</td>
+	<td>//input[@id='_166_smallImageCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SMALL_IMAGE_MENU-->
+<tr>
+	<td>SMALL_IMAGE_MENU_URL_RADIO</td>
+	<td>//input[@id='_166_vapp']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SMALL_IMAGE_MENU_URL</td>
+	<td>//input[@id='_166_smallImageURL']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SMALL_IMAGE_FILE_UPLOAD_RADIO</td>
+	<td>//input[@id='_166_nmjz']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SMALL_IMAGE_FILE_UPLOAD</td>
+	<td>//input[@id='_166_smallImageFile']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SCRIPT-->
+<tr>
+	<td>SCRIPT_TEXTAREA</td>
+	<td>//div[@id='_166_richEditor']/textarea</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCRIPT_CHOOSE_FILE</td>
+	<td>//input[@id='_166_script']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SCRIPT_VARIABLE_MENU-->
+</tbody>
+</table>
+</body>
+</html>
