@@ -48,8 +48,6 @@ else {
 	}
 }
 
-String publishDialogTitle = null;
-
 Group liveGroup = null;
 Group stagingGroup = null;
 
@@ -74,6 +72,8 @@ else if (group.isStaged()) {
 if (groupId <= 0) {
 	privateLayout = layout.isPrivateLayout();
 }
+
+String publishDialogTitle = null;
 
 if (group.isCompany()) {
 	publishDialogTitle = "publish-to-remote-live";
