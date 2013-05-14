@@ -886,10 +886,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _exportDataRootElement;
 	}
 
-	public Map<String, String[]> getgetAssetCategoryUuidsMap() {
-		return _assetCategoryUuidsMap;
-	}
-
 	public long getGroupId() {
 		return _groupId;
 	}
