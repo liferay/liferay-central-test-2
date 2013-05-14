@@ -55,14 +55,14 @@ public class PermissionConverterImpl implements PermissionConverter {
 	}
 
 	public List<Permission> convertPermissions(Role role)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return convertPermissions(role, null);
 	}
 
 	public List<Permission> convertPermissions(
 			Role role, PermissionConversionFilter permissionConversionFilter)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		int[] scopes = new int[0];
 

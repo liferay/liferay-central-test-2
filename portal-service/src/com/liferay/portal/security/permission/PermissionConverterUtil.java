@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
 public class PermissionConverterUtil {
 
 	public static PermissionConverter getPermissionConverter() {
-
 		PortalRuntimePermission.checkGetBeanProperty(
 			PermissionConverterUtil.class);
 
