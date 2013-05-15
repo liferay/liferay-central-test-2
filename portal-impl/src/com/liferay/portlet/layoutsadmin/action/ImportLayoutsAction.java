@@ -406,13 +406,13 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 					JSONObject errorMessageJSONObject =
 						JSONFactoryUtil.createJSONObject();
 
+					errorMessageJSONObject.put("info", layoutPrototypeUuid);
+					errorMessageJSONObject.put("name", layoutPrototypeName);
 					errorMessageJSONObject.put(
 						"type",
 						ResourceActionsUtil.getModelResource(
 							themeDisplay.getLocale(),
 							layoutPrototypeClassName));
-					errorMessageJSONObject.put("name", layoutPrototypeName);
-					errorMessageJSONObject.put("info", layoutPrototypeUuid);
 
 					errorMessageJSONArray.put(errorMessageJSONObject);
 				}
