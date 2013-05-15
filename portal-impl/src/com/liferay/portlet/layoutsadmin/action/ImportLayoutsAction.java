@@ -308,7 +308,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		String errorMessage = StringPool.BLANK;
-		JSONArray errorMessageListItems = null;
+		JSONArray errorMessageJSONArray = null;
 		int errorType = 0;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -390,7 +390,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 				errorMessage = themeDisplay.translate(sb.toString());
 
-				errorMessageListItems = JSONFactoryUtil.createJSONArray();
+				errorMessageJSONArray = JSONFactoryUtil.createJSONArray();
 
 				List<Tuple> missingLayoutPrototypes =
 					lpe.getMissingLayoutPrototypes();
@@ -403,18 +403,18 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 					String layoutPrototypeName =
 						(String)missingLayoutPrototype.getObject(2);
 
-					JSONObject errorMessageListItem =
+					JSONObject errorMessageJSONObject =
 						JSONFactoryUtil.createJSONObject();
 
-					errorMessageListItem.put(
+					errorMessageJSONObject.put(
 						"type",
 						ResourceActionsUtil.getModelResource(
 							themeDisplay.getLocale(),
 							layoutPrototypeClassName));
-					errorMessageListItem.put("name", layoutPrototypeName);
-					errorMessageListItem.put("info", layoutPrototypeUuid);
+					errorMessageJSONObject.put("name", layoutPrototypeName);
+					errorMessageJSONObject.put("info", layoutPrototypeUuid);
 
-					errorMessageListItems.put(errorMessageListItem);
+					errorMessageJSONArray.put(errorMessageJSONObject);
 				}
 
 				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
@@ -446,10 +446,10 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 		jsonObject.put("message", errorMessage);
 
-		if ((errorMessageListItems != null) &&
-			(errorMessageListItems.length() > 0)) {
+		if ((errorMessageJSONArray != null) &&
+			(errorMessageJSONArray.length() > 0)) {
 
-			jsonObject.put("messageListItems", errorMessageListItems);
+			jsonObject.put("messageListItems", errorMessageJSONArray);
 		}
 
 		jsonObject.put("status", errorType);
