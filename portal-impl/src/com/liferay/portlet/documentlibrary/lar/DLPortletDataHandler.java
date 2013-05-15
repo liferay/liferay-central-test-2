@@ -125,7 +125,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 		}
 
 		ActionableDynamicQuery fileEntryTypeActionableDynamicQuery =
-			getFileEntryTypeActionableDynamicQuery(portletDataContext);
+			getDLFileEntryTypeActionableDynamicQuery(portletDataContext);
 
 		fileEntryTypeActionableDynamicQuery.performActions();
 
@@ -144,7 +144,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 		}
 
 		ActionableDynamicQuery fileShortcutActionableDynamicQuery =
-			getFileShortcutActionableDynamicQuery(portletDataContext);
+			getDLFileShortcutActionableDynamicQuery(portletDataContext);
 
 		fileShortcutActionableDynamicQuery.performActions();
 
@@ -251,12 +251,12 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 		manifestSummary.addModelCount(
 			FileEntry.class, fileEntryActionableDynamicQuery.performCount());
 
-		ActionableDynamicQuery fileShortcutActionableDynamicQuery =
-			getFileShortcutActionableDynamicQuery(portletDataContext);
+		ActionableDynamicQuery dlFileShortcutActionableDynamicQuery =
+			getDLFileShortcutActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			DLFileShortcut.class,
-			fileShortcutActionableDynamicQuery.performCount());
+			dlFileShortcutActionableDynamicQuery.performCount());
 
 		ActionableDynamicQuery folderActionableDynamicQuery =
 			getFolderActionableDynamicQuery(portletDataContext);
@@ -287,7 +287,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 		};
 	}
 
-	protected ActionableDynamicQuery getFileEntryTypeActionableDynamicQuery(
+	protected ActionableDynamicQuery getDLFileEntryTypeActionableDynamicQuery(
 			final PortletDataContext portletDataContext)
 		throws Exception {
 
@@ -313,18 +313,18 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
-				DLFileEntryType fileEntryType = (DLFileEntryType)object;
+				DLFileEntryType dlFileEntryType = (DLFileEntryType)object;
 
-				if (fileEntryType.isExportable()) {
+				if (dlFileEntryType.isExportable()) {
 					StagedModelDataHandlerUtil.exportStagedModel(
-						portletDataContext, fileEntryType);
+						portletDataContext, dlFileEntryType);
 				}
 			}
 
 		};
 	}
 
-	protected ActionableDynamicQuery getFileShortcutActionableDynamicQuery(
+	protected ActionableDynamicQuery getDLFileShortcutActionableDynamicQuery(
 			final PortletDataContext portletDataContext)
 		throws Exception {
 
