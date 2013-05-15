@@ -858,7 +858,6 @@ public class SelectorIntrabandTest {
 			selectionKeyRegistrationReference.writeSelectionKey;
 
 		Assert.assertTrue(writeSelectionKey.isValid());
-
 		Assert.assertEquals(0, writeSelectionKey.interestOps());
 		Assert.assertNotNull(writeSelectionKey.attachment());
 		Assert.assertSame(
