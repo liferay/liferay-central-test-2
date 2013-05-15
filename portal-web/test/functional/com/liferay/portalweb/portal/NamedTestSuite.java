@@ -14,28 +14,30 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.logout.LogoutTests;
-import com.liferay.portalweb.portal.smoke.SmokeTests;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portalweb.portal.util.SeleniumUtil;
+import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
 
-import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class SmokeTestSuite extends BaseTestSuite {
+public class NamedTestSuite extends TestSuite {
 
-	public static Test suite() {
-		TestSuite testSuite = new NamedTestSuite();
+	public NamedTestSuite() {
+		LiferaySelenium liferaySelenium = SeleniumUtil.getSelenium();
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(SmokeTests.suite());
-		testSuite.addTest(LogoutTests.suite());
+		if (Validator.isNotNull(liferaySelenium.getPrimaryTestSuiteName())) {
+			return;
+		}
 
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		Thread currentThread = Thread.currentThread();
 
-		return testSuite;
+		StackTraceElement stackTraceElement = currentThread.getStackTrace()[1];
+
+		liferaySelenium.setPrimaryTestSuiteName(
+			stackTraceElement.getClassName());
 	}
 
 }
