@@ -396,18 +396,22 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 					lpe.getMissingLayoutPrototypes();
 
 				for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
-					String layoutPrototypeClassName =
-						(String)missingLayoutPrototype.getObject(0);
-					String layoutPrototypeUuid =
-						(String)missingLayoutPrototype.getObject(1);
-					String layoutPrototypeName =
-						(String)missingLayoutPrototype.getObject(2);
-
 					JSONObject errorMessageJSONObject =
 						JSONFactoryUtil.createJSONObject();
 
+					String layoutPrototypeUuid =
+						(String)missingLayoutPrototype.getObject(1);
+
 					errorMessageJSONObject.put("info", layoutPrototypeUuid);
+
+					String layoutPrototypeName =
+						(String)missingLayoutPrototype.getObject(2);
+
 					errorMessageJSONObject.put("name", layoutPrototypeName);
+
+					String layoutPrototypeClassName =
+						(String)missingLayoutPrototype.getObject(0);
+
 					errorMessageJSONObject.put(
 						"type",
 						ResourceActionsUtil.getModelResource(
