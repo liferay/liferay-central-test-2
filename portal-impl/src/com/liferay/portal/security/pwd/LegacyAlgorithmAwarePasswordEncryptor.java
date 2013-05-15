@@ -59,10 +59,13 @@ public class LegacyAlgorithmAwarePasswordEncryptor
 			try {
 				return _parentPasswordEncryptor.encrypt(
 					algorithm, plainTextPassword, encryptedPassword);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				throw new PwdEncryptorException(
-					"Please make sure to configure passwords.encryption." +
-						"algorithm.legacy after upgrade!", e);
+					"Password upgrade has not been successfully configured. " +
+					"Please configure passwords.encryption.algorithm.legacy " +
+					"with your previous password encryption algorithm and " +
+					"restart", e);
 			}
 		}
 
