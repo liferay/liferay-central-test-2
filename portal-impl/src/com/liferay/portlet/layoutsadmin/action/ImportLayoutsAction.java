@@ -381,7 +381,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			else if (e instanceof LayoutPrototypeException) {
 				LayoutPrototypeException lpe = (LayoutPrototypeException)e;
 
-				StringBundler sb = new StringBundler(5);
+				StringBundler sb = new StringBundler(4);
 
 				sb.append("the-lar-file-could-not-be-imported-because-it-");
 				sb.append("requires-page-templates-or-site-templates-that-");
