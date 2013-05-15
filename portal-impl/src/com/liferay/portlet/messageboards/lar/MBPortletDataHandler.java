@@ -112,29 +112,29 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		ActionableDynamicQuery categoriesActionableDynamicQuery =
+		ActionableDynamicQuery categoryActionableDynamicQuery =
 			new MBCategoryExportActionableDynamicQuery(portletDataContext);
 
-		categoriesActionableDynamicQuery.performActions();
+		categoryActionableDynamicQuery.performActions();
 
-		ActionableDynamicQuery messagesActionableDynamicQuery =
+		ActionableDynamicQuery messageActionableDynamicQuery =
 			new MBMessageExportActionableDynamicQuery(portletDataContext);
 
-		messagesActionableDynamicQuery.performActions();
+		messageActionableDynamicQuery.performActions();
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "thread-flags")) {
-			ActionableDynamicQuery threadFlagsActionableDynamicQuery =
+			ActionableDynamicQuery threadFlagActionableDynamicQuery =
 				new MBThreadFlagExportActionableDynamicQuery(
 					portletDataContext);
 
-			threadFlagsActionableDynamicQuery.performActions();
+			threadFlagActionableDynamicQuery.performActions();
 		}
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
-			ActionableDynamicQuery userBansActionableDynamicQuery =
+			ActionableDynamicQuery banActionableDynamicQuery =
 				new MBBanExportActionableDynamicQuery(portletDataContext);
 
-			userBansActionableDynamicQuery.performActions();
+			banActionableDynamicQuery.performActions();
 		}
 
 		return getExportDataRootElementString(rootElement);
@@ -206,30 +206,30 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		ActionableDynamicQuery categoriesActionableDynamicQuery =
+		ActionableDynamicQuery banActionableDynamicQuery =
+			new MBBanExportActionableDynamicQuery(portletDataContext);
+
+		manifestSummary.addModelCount(
+			MBBan.class, banActionableDynamicQuery.performCount());
+
+		ActionableDynamicQuery categoryActionableDynamicQuery =
 			new MBCategoryExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
-			MBCategory.class, categoriesActionableDynamicQuery.performCount());
+			MBCategory.class, categoryActionableDynamicQuery.performCount());
 
-		ActionableDynamicQuery messagesActionableDynamicQuery =
+		ActionableDynamicQuery messageActionableDynamicQuery =
 			new MBMessageExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
-			MBMessage.class, messagesActionableDynamicQuery.performCount());
+			MBMessage.class, messageActionableDynamicQuery.performCount());
 
-		ActionableDynamicQuery threadFlagsActionableDynamicQuery =
+		ActionableDynamicQuery threadFlagActionableDynamicQuery =
 			new MBThreadFlagExportActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			MBThreadFlag.class,
-			threadFlagsActionableDynamicQuery.performCount());
-
-		ActionableDynamicQuery userBansActionableDynamicQuery =
-			new MBBanExportActionableDynamicQuery(portletDataContext);
-
-		manifestSummary.addModelCount(
-			MBBan.class, userBansActionableDynamicQuery.performCount());
+			threadFlagActionableDynamicQuery.performCount());
 	}
 
 }

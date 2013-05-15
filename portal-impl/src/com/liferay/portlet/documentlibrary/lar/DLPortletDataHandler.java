@@ -245,12 +245,6 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		ActionableDynamicQuery fileEntryActionableDynamicQuery =
-			getFileEntryActionableDynamicQuery(portletDataContext);
-
-		manifestSummary.addModelCount(
-			FileEntry.class, fileEntryActionableDynamicQuery.performCount());
-
 		ActionableDynamicQuery dlFileShortcutActionableDynamicQuery =
 			getDLFileShortcutActionableDynamicQuery(portletDataContext);
 
@@ -258,33 +252,17 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			DLFileShortcut.class,
 			dlFileShortcutActionableDynamicQuery.performCount());
 
+		ActionableDynamicQuery fileEntryActionableDynamicQuery =
+			getFileEntryActionableDynamicQuery(portletDataContext);
+
+		manifestSummary.addModelCount(
+			FileEntry.class, fileEntryActionableDynamicQuery.performCount());
+
 		ActionableDynamicQuery folderActionableDynamicQuery =
 			getFolderActionableDynamicQuery(portletDataContext);
 
 		manifestSummary.addModelCount(
 			Folder.class, folderActionableDynamicQuery.performCount());
-	}
-
-	protected ActionableDynamicQuery getFileEntryActionableDynamicQuery(
-			final PortletDataContext portletDataContext)
-		throws Exception {
-
-		return new DLFileEntryExportActionableDynamicQuery(portletDataContext) {
-
-			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
-				DLFileEntry dlFileEntry = (DLFileEntry)object;
-
-				FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-					dlFileEntry.getFileEntryId());
-
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, fileEntry);
-			}
-
-		};
 	}
 
 	protected ActionableDynamicQuery getDLFileEntryTypeActionableDynamicQuery(
@@ -338,6 +316,28 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 				Property property = PropertyFactoryUtil.forName("active");
 
 				dynamicQuery.add(property.eq(Boolean.TRUE));
+			}
+
+		};
+	}
+
+	protected ActionableDynamicQuery getFileEntryActionableDynamicQuery(
+			final PortletDataContext portletDataContext)
+		throws Exception {
+
+		return new DLFileEntryExportActionableDynamicQuery(portletDataContext) {
+
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
+
+				DLFileEntry dlFileEntry = (DLFileEntry)object;
+
+				FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
+					dlFileEntry.getFileEntryId());
+
+				StagedModelDataHandlerUtil.exportStagedModel(
+					portletDataContext, fileEntry);
 			}
 
 		};
