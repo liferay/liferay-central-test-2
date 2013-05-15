@@ -159,7 +159,7 @@ public class JournalArticleStagedModelDataHandler
 
 			if (Validator.isNotNull(article.getSmallImageURL())) {
 				String smallImageURL =
-					ExportImportUtil.exportContentReferences(
+					ExportImportUtil.replaceExportContentReferences(
 						portletDataContext, article, articleElement,
 						article.getSmallImageURL().concat(StringPool.SPACE));
 
@@ -194,7 +194,7 @@ public class JournalArticleStagedModelDataHandler
 		if (portletDataContext.getBooleanParameter(
 				JournalPortletDataHandler.NAMESPACE, "embedded-assets")) {
 
-			String content = ExportImportUtil.exportContentReferences(
+			String content = ExportImportUtil.replaceExportContentReferences(
 				portletDataContext, article, articleElement,
 				article.getContent());
 
@@ -281,7 +281,7 @@ public class JournalArticleStagedModelDataHandler
 		Element articleElement =
 			portletDataContext.getImportDataStagedModelElement(article);
 
-		content = ExportImportUtil.importContentReferences(
+		content = ExportImportUtil.replaceImportContentReferences(
 			portletDataContext, articleElement, content);
 
 		article.setContent(content);
@@ -502,7 +502,7 @@ public class JournalArticleStagedModelDataHandler
 
 			if (Validator.isNotNull(article.getSmallImageURL())) {
 				String smallImageURL =
-					ExportImportUtil.importContentReferences(
+					ExportImportUtil.replaceImportContentReferences(
 						portletDataContext, articleElement,
 						article.getSmallImageURL());
 
