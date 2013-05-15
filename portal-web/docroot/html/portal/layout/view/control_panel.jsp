@@ -103,14 +103,14 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 			panelCategory += " panel-manage-my";
 			categoryTitle = user.getFullName();
 		}
+		else if (category.equals(PortletCategoryKeys.SERVER)) {
+			panelCategory += " panel-manage-server";
+		}
 		else if (category.equals(PortletCategoryKeys.SITES)) {
 			panelCategory += " panel-manage-sites";
 		}
 		else if (category.equals(PortletCategoryKeys.USERS)) {
 			panelCategory += " panel-manage-users";
-		}
-		else if (category.equals(PortletCategoryKeys.SERVER)) {
-			panelCategory += " panel-manage-server";
 		}
 		else {
 			panelCategory += " panel-manage-frontpage";
@@ -131,8 +131,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 
 		<div id="content-wrapper">
 			<div class="<%= panelCategory %>">
-
-				<%@include file="/html/portal/layout/view/control_panel_nav_main.jspf" %>
+				<%@ include file="/html/portal/layout/view/control_panel_nav_main.jspf" %>
 
 				<div class="<%= panelBodyCssClass %>">
 					<c:choose>
