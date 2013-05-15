@@ -161,7 +161,8 @@ public class JournalArticleStagedModelDataHandler
 				String smallImageURL =
 					ExportImportUtil.replaceExportContentReferences(
 						portletDataContext, article, articleElement,
-						article.getSmallImageURL().concat(StringPool.SPACE));
+						article.getSmallImageURL().concat(StringPool.SPACE),
+						true);
 
 				article.setSmallImageURL(smallImageURL);
 			}
@@ -196,7 +197,7 @@ public class JournalArticleStagedModelDataHandler
 
 			String content = ExportImportUtil.replaceExportContentReferences(
 				portletDataContext, article, articleElement,
-				article.getContent());
+				article.getContent(), true);
 
 			article.setContent(content);
 		}
@@ -282,7 +283,7 @@ public class JournalArticleStagedModelDataHandler
 			portletDataContext.getImportDataStagedModelElement(article);
 
 		content = ExportImportUtil.replaceImportContentReferences(
-			portletDataContext, articleElement, content);
+			portletDataContext, articleElement, content, true);
 
 		article.setContent(content);
 
@@ -504,7 +505,7 @@ public class JournalArticleStagedModelDataHandler
 				String smallImageURL =
 					ExportImportUtil.replaceImportContentReferences(
 						portletDataContext, articleElement,
-						article.getSmallImageURL());
+						article.getSmallImageURL(), true);
 
 				article.setSmallImageURL(smallImageURL);
 			}
