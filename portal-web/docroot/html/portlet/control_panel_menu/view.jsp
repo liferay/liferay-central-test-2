@@ -41,7 +41,6 @@
 		%>
 
 				<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" title="<%= title %>">
-
 					<c:if test='<%= curCategory.equals("site.content") %>'>
 
 						<%
@@ -60,7 +59,7 @@
 										message="default"
 										src="<%= curSite.getIconURL(themeDisplay) %>"
 										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curSite.getGroupId()) %>'
-										/>
+									/>
 
 									<%
 									for (Layout curScopeLayout : scopeLayouts) {

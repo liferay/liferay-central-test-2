@@ -67,12 +67,14 @@
 				<%
 				for (Portlet curPortlet : portlets) {
 					String curPortletId = curPortlet.getPortletId();
-					boolean selected = curPortletId.equals(ppid);
-					String portletControlPanelEntryCategory = curPortlet.getControlPanelEntryCategory();
 
 					String urlControlPanelSitesPortlet = HttpUtil.setParameter(themeDisplay.getURLControlPanel(), "p_p_id", curPortletId);
 
 					urlControlPanelSitesPortlet = HttpUtil.setParameter(urlControlPanelSitesPortlet, "controlPanelCategory", controlPanelCategory);
+
+					boolean selected = curPortletId.equals(ppid);
+
+					String portletControlPanelEntryCategory = curPortlet.getControlPanelEntryCategory();
 
 					if (curPortletId.equals(PortletKeys.SITES_ADMIN) && portletControlPanelEntryCategory.startsWith("site.")) {
 						selected = true;
