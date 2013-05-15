@@ -61,11 +61,15 @@ public class LegacyAlgorithmAwarePasswordEncryptor
 					algorithm, plainTextPassword, encryptedPassword);
 			}
 			catch (Exception e) {
-				throw new PwdEncryptorException(
-					"Password upgrade has not been successfully configured. " +
-					"Please configure passwords.encryption.algorithm.legacy " +
-					"with your previous password encryption algorithm and " +
-					"restart", e);
+				StringBundler sb = new StringBundler(5);
+
+				sb.append("Password upgrade was not successfully configured. ");
+				sb.append("Please set the property ");
+				sb.append("\"passwords.encryption.algorithm.legacy\" with the");
+				sb.append("previous password encryption algorithm and ");
+				sb.append("restart.");
+
+				throw new PwdEncryptorException(sb.toString(), e);
 			}
 		}
 
