@@ -1315,15 +1315,6 @@ public class Validator {
 		}
 	}
 
-	/**
-	 * Returns <code>true</code> if the string starts with the prefix.
-	 *
-	 * @param  string the first object
-	 * @param  prefix the second object
-	 * @return <code>true</code> if the string starts with the prefix.
-	 *         <code>false</code> otherwise and if any of the two is
-	 *         <code>null</code>
-	 */
 	public static boolean startsWith(String string, String prefix) {
 		if ((string == null) || (prefix == null)) {
 			return false;
