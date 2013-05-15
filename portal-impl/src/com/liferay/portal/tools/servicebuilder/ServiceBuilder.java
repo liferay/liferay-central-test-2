@@ -347,12 +347,12 @@ public class ServiceBuilder {
 
 		Class<ServiceBuilder> serviceBuilderClass = ServiceBuilder.class;
 
-		Set<URL> serviceBuilderClassPathURLs = ClassPathUtil.getClassPathURLs(
+		Set<URL> literalClassPathURLs = ClassPathUtil.getClassPathURLs(
 			serviceBuilderClass.getClassLoader());
 
 		Set<URL> mergedURLs = new LinkedHashSet<URL>();
 
-		mergedURLs.addAll(serviceBuilderClassPathURLs);
+		mergedURLs.addAll(literalClassPathURLs);
 		mergedURLs.addAll(contextClassPathURLs);
 		mergedURLs.addAll(Arrays.asList(jvmClassPathURLs));
 
@@ -361,7 +361,6 @@ public class ServiceBuilder {
 
 		class ReenterableCallable implements Callable<Void> {
 
-			@SuppressWarnings("unused")
 			public ReenterableCallable(String[] args) {
 				_args = args;
 			}
