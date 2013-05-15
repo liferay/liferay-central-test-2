@@ -44,14 +44,10 @@ public class PortletDataContextFactoryImpl
 
 		validateDateRange(startDate, endDate);
 
-		PortletDataContext portletDataContext = new PortletDataContextImpl();
+		PortletDataContext portletDataContext = createPortletDataContext(
+			companyId, groupId);
 
-		populateGroupIds(companyId, portletDataContext);
-
-		portletDataContext.setCompanyId(companyId);
 		portletDataContext.setEndDate(endDate);
-		portletDataContext.setGroupId(groupId);
-		portletDataContext.setScopeGroupId(groupId);
 		portletDataContext.setParameterMap(parameterMap);
 		portletDataContext.setStartDate(startDate);
 		portletDataContext.setZipWriter(zipWriter);
@@ -63,11 +59,8 @@ public class PortletDataContextFactoryImpl
 		long companyId, long groupId, Map<String, String[]> parameterMap,
 		UserIdStrategy userIdStrategy, ZipReader zipReader) {
 
-		PortletDataContext portletDataContext = new PortletDataContextImpl();
-
-		populateGroupIds(companyId, portletDataContext);
-
-		portletDataContext.setCompanyId(companyId);
+		PortletDataContext portletDataContext = createPortletDataContext(
+			companyId, groupId);
 
 		String dataStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
@@ -75,10 +68,8 @@ public class PortletDataContextFactoryImpl
 
 		portletDataContext.setDataStrategy(dataStrategy);
 
-		portletDataContext.setGroupId(groupId);
 		portletDataContext.setNewLayouts(new ArrayList<Layout>());
 		portletDataContext.setParameterMap(parameterMap);
-		portletDataContext.setScopeGroupId(groupId);
 		portletDataContext.setUserIdStrategy(userIdStrategy);
 		portletDataContext.setZipReader(zipReader);
 
@@ -91,26 +82,34 @@ public class PortletDataContextFactoryImpl
 
 		validateDateRange(startDate, endDate);
 
-		PortletDataContext portletDataContext = new PortletDataContextImpl();
-
-		populateGroupIds(themeDisplay.getCompanyId(), portletDataContext);
+		PortletDataContext portletDataContext = createPortletDataContext(
+			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 
 		portletDataContext.setCompanyId(themeDisplay.getCompanyId());
-		portletDataContext.setGroupId(themeDisplay.getScopeGroupId());
-		portletDataContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 
 		return portletDataContext;
 	}
 
-	protected void populateGroupIds(
-		long companyId, PortletDataContext portletDataContext) {
+	protected PortletDataContext createPortletDataContext(
+		long companyId, long groupId) {
+
+		PortletDataContext portletDataContext = new PortletDataContextImpl();
 
 		try {
 			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 				companyId);
 
 			portletDataContext.setCompanyGroupId(companyGroup.getGroupId());
+		}
+		catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
 
+		portletDataContext.setCompanyId(companyId);
+		portletDataContext.setGroupId(groupId);
+		portletDataContext.setScopeGroupId(groupId);
+
+		try {
 			Group userPersonalSiteGroup =
 				GroupLocalServiceUtil.getUserPersonalSiteGroup(companyId);
 
@@ -120,6 +119,8 @@ public class PortletDataContextFactoryImpl
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
+
+		return portletDataContext;
 	}
 
 	protected void validateDateRange(Date startDate, Date endDate)
