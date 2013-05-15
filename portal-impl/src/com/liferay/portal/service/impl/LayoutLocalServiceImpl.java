@@ -512,14 +512,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			deleteLayout(childLayout, updateLayoutSet, serviceContext);
 		}
 
+		// Layout friendly URLs
+
+		layoutFriendlyURLLocalService.deleteLayoutFriendlyURLs(
+			layout.getPlid());
+
 		// Portlet preferences
 
 		portletPreferencesLocalService.deletePortletPreferencesByPlid(
-			layout.getPlid());
-
-		// Layout Friendly URLs
-
-		layoutFriendlyURLLocalService.deleteLayoutFriendlyURLs(
 			layout.getPlid());
 
 		// Subscriptions
