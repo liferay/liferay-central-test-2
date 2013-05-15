@@ -83,9 +83,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.lang.reflect.Constructor;
-
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -95,7 +93,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -109,7 +106,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.dom4j.DocumentException;
-
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
@@ -337,27 +333,15 @@ public class ServiceBuilder {
 	public static void reenterableMain(String[] args) throws Exception {
 		Properties properties = new Properties(System.getProperties());
 
-		URL[] jvmClassPathURLs = ClassPathUtil.getClassPathURLs(
-			ClassPathUtil.getJVMClassPath(true));
+		URL[] jvmUrls = ClassPathUtil.getClassPathURLs(ClassPathUtil.getJVMClassPath(true));
+		URL[] parentUrls = ((URLClassLoader)Thread.currentThread().getContextClassLoader()).getURLs();
 
-		Thread currentThread = Thread.currentThread();
+		URL[] mergedUrls = new URL[jvmUrls.length + parentUrls.length];
 
-		Set<URL> contextClassPathURLs = ClassPathUtil.getClassPathURLs(
-			currentThread.getContextClassLoader());
+		System.arraycopy( jvmUrls, 0, mergedUrls, 0, jvmUrls.length );
+		System.arraycopy( parentUrls, 0, mergedUrls, jvmUrls.length, parentUrls.length );
 
-		Class<ServiceBuilder> serviceBuilderClass = ServiceBuilder.class;
-
-		Set<URL> literalClassPathURLs = ClassPathUtil.getClassPathURLs(
-			serviceBuilderClass.getClassLoader());
-
-		Set<URL> mergedURLs = new LinkedHashSet<URL>();
-
-		mergedURLs.addAll(literalClassPathURLs);
-		mergedURLs.addAll(contextClassPathURLs);
-		mergedURLs.addAll(Arrays.asList(jvmClassPathURLs));
-
-		ClassLoader classLoader = new URLClassLoader(
-			mergedURLs.toArray(new URL[mergedURLs.size()]), null);
+		ClassLoader classLoader = new URLClassLoader(mergedUrls, null );
 
 		class ReenterableCallable implements Callable<Void> {
 
