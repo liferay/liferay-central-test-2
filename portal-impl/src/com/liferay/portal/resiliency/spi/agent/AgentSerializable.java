@@ -70,14 +70,14 @@ public class AgentSerializable implements Serializable {
 				}
 				else if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Non-serializable distributed request attribute " +
-							"name : " + name + " value : " + value);
+						"Nonserializable distributed request attribute name " +
+							" " + name + " with value " + value);
 				}
 			}
 			else if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Non-distributed request attribute name : " + name +
-						" direction : " + direction + " value : " +
+					"Nondistributed request attribute name " + name +
+						" with direction " + direction + " and value " +
 							request.getAttribute(name));
 			}
 		}
@@ -95,7 +95,7 @@ public class AgentSerializable implements Serializable {
 		while (nameEnumeration.hasMoreElements()) {
 			String headerName = nameEnumeration.nextElement();
 
-			// Remove Accept-Encoding header, to prevent content modification.
+			// Remove Accept-Encoding header, to prevent content modification
 
 			if (HttpHeaders.ACCEPT_ENCODING.equalsIgnoreCase(headerName)) {
 				continue;
@@ -149,8 +149,8 @@ public class AgentSerializable implements Serializable {
 			}
 			else if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Non-serializable session attribute name : " + name +
-						" value : " + value);
+					"Nonserializable session attribute name " + name +
+						" with value " + value);
 			}
 		}
 
@@ -161,8 +161,8 @@ public class AgentSerializable implements Serializable {
 			InputStream inputStream)
 		throws IOException {
 
-		int length = 0;
 		byte[] data = new byte[8];
+		int length = 0;
 
 		while (length < 8) {
 			int count = inputStream.read(data, length, 8 - length);
@@ -180,7 +180,7 @@ public class AgentSerializable implements Serializable {
 
 		if (byteBuffer == null) {
 			throw new IllegalArgumentException(
-				"No such mail with receipt " + receipt);
+				"No mail with receipt " + receipt);
 		}
 
 		Deserializer deserializer = new Deserializer(byteBuffer);
@@ -202,17 +202,18 @@ public class AgentSerializable implements Serializable {
 
 		serializer.writeObject(this);
 
-		ByteBuffer byteBuffer = serializer.toByteBuffer();
-
 		try {
+			byte[] data = new byte[8];
+
+			ByteBuffer byteBuffer = serializer.toByteBuffer();
+
 			long receipt = MailboxUtil.sendMail(
 				registrationReference, byteBuffer);
-
-			byte[] data = new byte[8];
 
 			BigEndianCodec.putLong(data, 0, receipt);
 
 			outputStream.write(data);
+
 			outputStream.flush();
 		}
 		catch (MailboxException me) {
