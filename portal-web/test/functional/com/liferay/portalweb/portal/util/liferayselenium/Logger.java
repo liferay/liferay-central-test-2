@@ -175,7 +175,6 @@ public class Logger {
 	}
 
 	private LiferaySelenium _liferaySelenium;
-	private boolean _loggerStarted;
 	private WebDriver _webDriver = new FirefoxDriver();
 
 }
