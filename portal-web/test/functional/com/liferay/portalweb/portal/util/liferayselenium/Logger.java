@@ -139,10 +139,12 @@ public class Logger {
 				"return window.document.getElementsByTagName('html')[0]." +
 					"outerHTML;");
 
-			File file = new File(
+			String fileName =
 				_liferaySelenium.getProjectDir() +
 					"portal-web\\test-results\\functional\\TEST-" +
-					primaryTestSuiteName + ".html");
+						primaryTestSuiteName + ".html";
+
+			File file = new File(fileName);
 
 			try {
 				FileUtil.write(file, content);
