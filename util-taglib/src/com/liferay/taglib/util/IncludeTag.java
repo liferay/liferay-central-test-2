@@ -227,7 +227,7 @@ public class IncludeTag extends AttributesTagSupport {
 			return null;
 		}
 
-		Group group;
+		Group group = null;
 
 		try {
 			group = StagingUtil.getLiveGroup(themeDisplay.getScopeGroupId());
