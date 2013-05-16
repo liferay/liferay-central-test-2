@@ -82,11 +82,12 @@ public class AgentSerializableTest {
 		// Without log
 
 		String distributedSerializable = "DISTRIBUTED_SERIALIZABLE";
-		final String distributedNonserializable = "DISTRIBUTED_NONSERIALIZABLE";
-		String nondistributed = "NONDISTRIBUTED";
 
 		DistributedRegistry.registerDistributed(
 			distributedSerializable, Direction.DUPLEX, MatchType.EXACT);
+
+		final String distributedNonserializable = "DISTRIBUTED_NONSERIALIZABLE";
+
 		DistributedRegistry.registerDistributed(
 			distributedNonserializable, Direction.DUPLEX, MatchType.EXACT);
 
@@ -105,6 +106,9 @@ public class AgentSerializableTest {
 				}
 
 			});
+
+		String nondistributed = "NONDISTRIBUTED";
+
 		mockHttpServletRequest.setAttribute(nondistributed, nondistributed);
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
@@ -239,10 +243,12 @@ public class AgentSerializableTest {
 		MockHttpSession mockHttpSession = new MockHttpSession();
 
 		String serializeableAttribute = "serializeableAttribute";
-		final String nonserializableAttribute = "nonserializableAttribute";
 
 		mockHttpSession.setAttribute(
 			serializeableAttribute, serializeableAttribute);
+
+		final String nonserializableAttribute = "nonserializableAttribute";
+
 		mockHttpSession.setAttribute(
 			nonserializableAttribute,
 			new Object() {
@@ -446,7 +452,7 @@ public class AgentSerializableTest {
 			ClassLoaderPool.register(StringPool.BLANK, oldClassLoader);
 		}
 
-		// Success receive
+		// Successfully receive
 
 		unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
 
