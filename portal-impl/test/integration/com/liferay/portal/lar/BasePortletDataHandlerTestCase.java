@@ -77,7 +77,7 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 
 		Map<String, Long> modelCounters = manifestSummary.getModelCounters();
 
-		Map<String, Long> prepareCounters = new HashMap<String, Long>(
+		Map<String, Long> expectedModelCounters = new HashMap<String, Long>(
 			modelCounters);
 
 		modelCounters.clear();
@@ -85,7 +85,7 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 		portletDataHandler.exportData(
 			portletDataContext, portletId, new PortletPreferencesImpl());
 
-		checkManifestSummary(prepareCounters);
+		checkManifestSummary(expectedModelCounters);
 	}
 
 	protected void addBooleanParameter(
@@ -105,26 +105,28 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 
 	protected abstract void addStagedModels() throws Exception;
 
-	protected void checkManifestSummary(Map<String, Long> prepareCounters) {
+	protected void checkManifestSummary(
+		Map<String, Long> expectedModelCounters) {
+
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
 		Map<String, Long> modelCounters = manifestSummary.getModelCounters();
 
-		int prepareCountersSize = prepareCounters.size();
+		int expectedModelCountersSize = expectedModelCounters.size();
 
-		for (String className : prepareCounters.keySet()) {
-			if (prepareCounters.get(className) == 0) {
-				prepareCountersSize--;
+		for (String className : expectedModelCounters.keySet()) {
+			if (expectedModelCounters.get(className) == 0) {
+				expectedModelCountersSize--;
 			}
 			else {
 				Assert.assertEquals(
-					modelCounters.get(className),
-					prepareCounters.get(className));
+					expectedModelCounters.get(className),
+					modelCounters.get(className));
 			}
 		}
 
-		Assert.assertEquals(modelCounters.size(), prepareCountersSize);
+		Assert.assertEquals(modelCounters.size(), expectedModelCountersSize);
 	}
 
 	protected abstract PortletDataHandler createPortletDataHandler();

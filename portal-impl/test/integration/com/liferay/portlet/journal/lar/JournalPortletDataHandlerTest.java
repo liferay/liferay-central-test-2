@@ -60,15 +60,15 @@ public class JournalPortletDataHandlerTest
 
 	@Override
 	protected void addStagedModels() throws Exception {
+		Layout layout = LayoutTestUtil.addLayout(
+			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
 
 		JournalTestUtil.addArticle(
 			stagingGroup.getGroupId(), folder.getFolderId(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
-
-		Layout layout = LayoutTestUtil.addLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
 
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			stagingGroup.getGroupId(), JournalArticle.class.getName());

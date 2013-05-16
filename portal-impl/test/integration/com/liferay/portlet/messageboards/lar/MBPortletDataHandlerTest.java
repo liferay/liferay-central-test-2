@@ -44,7 +44,6 @@ public class MBPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 	protected void addParameters(Map<String, String[]> parameterMap) {
 		addBooleanParameter(
 			parameterMap, MBPortletDataHandler.NAMESPACE, "thread-flags", true);
-
 		addBooleanParameter(
 			parameterMap, MBPortletDataHandler.NAMESPACE, "user-bans", true);
 	}
