@@ -2169,7 +2169,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public Portlet getFirstSiteAdministrationPortlet(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Portlet siteAdministrationPortlet = null;
 
@@ -4086,7 +4086,7 @@ public class PortalImpl implements Portal {
 
 	public PortletURL getSiteAdministrationURL(
 			PortletResponse portletResponse, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;

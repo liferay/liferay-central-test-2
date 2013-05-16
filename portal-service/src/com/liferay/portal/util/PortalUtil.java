@@ -543,7 +543,7 @@ public class PortalUtil {
 
 	public static Portlet getFirstSiteAdministrationPortlet(
 			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getPortal().getFirstSiteAdministrationPortlet(themeDisplay);
 	}
@@ -1225,7 +1225,7 @@ public class PortalUtil {
 
 	public static PortletURL getSiteAdministrationURL(
 			PortletResponse portletResponse, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getPortal().getSiteAdministrationURL(
 			portletResponse, themeDisplay);

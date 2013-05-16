@@ -649,7 +649,7 @@ public interface Portal {
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
 	public Portlet getFirstSiteAdministrationPortlet(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public String getFullName(
 		String firstName, String middleName, String lastName);
@@ -973,7 +973,7 @@ public interface Portal {
 
 	public PortletURL getSiteAdministrationURL(
 			PortletResponse portletResponse, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public long[] getSiteAndCompanyGroupIds(long groupId)
 		throws PortalException, SystemException;
