@@ -126,7 +126,7 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		if (isMatchingFile(file, "WEB-INF/liferay-look-and-feel.xml") &&
 			!isJarFile(file)) {
 
-				return true;
+			return true;
 		}
 
 		String fileName = file.getName();

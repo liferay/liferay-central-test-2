@@ -23,11 +23,11 @@ import com.liferay.portal.kernel.deploy.auto.BaseAutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -40,6 +40,10 @@ import java.util.jar.Manifest;
  * @author Miguel Pastor
  */
 public class ModuleAutoDeployListener extends BaseAutoDeployListener {
+
+	public ModuleAutoDeployListener() {
+		_autoDeployer = new ThreadSafeAutoDeployer(new ModuleAutoDeployer());
+	}
 
 	public void deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
@@ -54,16 +58,27 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 			return;
 		}
 
-		_autoDeployer.autoDeploy(autoDeploymentContext);
+		if (_log.isInfoEnabled()) {
+			_log.info("Copied module for " + file.getPath());
+		}
+
+		int code = _autoDeployer.autoDeploy(autoDeploymentContext);
+
+		if ((code == AutoDeployer.CODE_DEFAULT) && _log.isInfoEnabled()) {
+			_log.info(
+				"Module for " + file.getPath() + " copied successfully. " +
+					"Deployment will start in a few seconds.");
+		}
 	}
 
-	public boolean isModule(File file) throws AutoDeployException {
-		InputStream inputStream = null;
+	protected boolean isModule(File file) throws AutoDeployException {
 		Manifest manifest = null;
 
 		try {
-			inputStream = new FileInputStream(file);
-			manifest = new JarInputStream(inputStream).getManifest();
+			JarInputStream jarInputStream = new JarInputStream(
+				new FileInputStream(file));
+
+			manifest = jarInputStream.getManifest();
 		}
 		catch (IOException ioe) {
 			throw new AutoDeployException(ioe);
@@ -79,22 +94,21 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 
 		Set<String> bundleSymbolicNameSet = bundleSymbolicNameMap.keySet();
 
+		if (bundleSymbolicNameSet.isEmpty()) {
+			return false;
+		}
+
 		Iterator<String> bundleSymbolicNameIterator =
 			bundleSymbolicNameSet.iterator();
 
 		String bundleSymbolicName = bundleSymbolicNameIterator.next();
 
-		if (bundleSymbolicName != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return Validator.isNotNull(bundleSymbolicName);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ModuleAutoDeployListener.class);
 
-	private AutoDeployer _autoDeployer = new ModuleAutoDeployer();
+	private AutoDeployer _autoDeployer;
 
 }

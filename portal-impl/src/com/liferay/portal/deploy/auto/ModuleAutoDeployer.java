@@ -34,15 +34,6 @@ public class ModuleAutoDeployer extends BaseDeployer {
 	public int deployFile(AutoDeploymentContext autoDeploymentContext)
 		throws Exception {
 
-		copyToModuleFolder(autoDeploymentContext);
-
-		return AutoDeployer.CODE_DEFAULT;
-	}
-
-	protected void copyToModuleFolder(
-			AutoDeploymentContext autoDeploymentContext)
-		throws AutoDeployException {
-
 		String destDir = PropsValues.MODULE_FRAMEWORK_AUTO_DEPLOY_DIRS[0];
 
 		if (!FileUtil.exists(destDir)) {
@@ -56,6 +47,8 @@ public class ModuleAutoDeployer extends BaseDeployer {
 		catch (IOException ioe) {
 			throw new AutoDeployException(ioe);
 		}
+
+		return AutoDeployer.CODE_DEFAULT;
 	}
 
 }
