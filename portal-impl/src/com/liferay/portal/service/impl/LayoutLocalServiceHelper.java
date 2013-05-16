@@ -256,8 +256,9 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 	}
 
 	public void validateFriendlyURL(
-		long groupId, boolean privateLayout, long layoutId, String friendlyURL)
-	throws PortalException, SystemException {
+			long groupId, boolean privateLayout, long layoutId,
+			String friendlyURL)
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(friendlyURL)) {
 			return;
@@ -319,10 +320,8 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 			Map<Locale, String> friendlyURLMap)
 		throws PortalException, SystemException {
 
-		for (Map.Entry<Locale, String> friendlyURLEntry :
-				friendlyURLMap.entrySet()) {
-
-			String friendlyURL = friendlyURLEntry.getValue();
+		for (Map.Entry<Locale, String> entry : friendlyURLMap.entrySet()) {
+			String friendlyURL = entry.getValue();
 
 			validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
 		}

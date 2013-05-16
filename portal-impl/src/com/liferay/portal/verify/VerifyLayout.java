@@ -14,7 +14,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -23,7 +22,6 @@ import com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Brian Wing Shun Chan
@@ -49,13 +47,10 @@ public class VerifyLayout extends VerifyProcess {
 			for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
 				String friendlyURL = StringPool.SLASH + layout.getLayoutId();
 
-				Locale locale = LocaleUtil.fromLanguageId(
-					layoutFriendlyURL.getLanguageId());
-
 				LayoutLocalServiceUtil.updateFriendlyURL(
-					layout.getPlid(), friendlyURL, locale);
+					layout.getPlid(), friendlyURL,
+					layoutFriendlyURL.getLanguageId());
 			}
-
 		}
 	}
 
