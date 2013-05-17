@@ -121,14 +121,14 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 
 		try {
-			PortalLifecycleUtil.reset();
+			ModuleFrameworkUtilAdapter.stopRuntime();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
 		try {
-			ModuleFrameworkUtilAdapter.stopRuntime();
+			PortalLifecycleUtil.reset();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
