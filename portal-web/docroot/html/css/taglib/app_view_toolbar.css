@@ -34,8 +34,8 @@
 		}
 
 		.select-all-entries {
-			position: absolute;
 			left: 10px;
+			position: absolute;
 			top: 10px;
 		}
 	}

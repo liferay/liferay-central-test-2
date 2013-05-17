@@ -124,9 +124,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 				</aui:form>
 			</div>
 		</div>
-
 	</div>
-
 </aui:nav-bar>
 
 <aui:script>
