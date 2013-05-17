@@ -43,7 +43,7 @@
 	</header>
 
 	<div id="content">
-		<div id="main-content" class="row-fluid">
+		<div class="row-fluid" id="main-content">
 
 			<%
 			String defaultEmailAddress = PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + StringPool.AT + company.getMx();
