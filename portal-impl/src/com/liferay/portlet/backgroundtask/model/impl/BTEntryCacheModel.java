@@ -37,7 +37,7 @@ import java.util.Date;
 public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{btEntryId=");
 		sb.append(btEntryId);
@@ -53,16 +53,18 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", completionDate=");
-		sb.append(completionDate);
-		sb.append(", taskContext=");
-		sb.append(taskContext);
-		sb.append(", taskExecutorClassName=");
-		sb.append(taskExecutorClassName);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", servletContextNames=");
 		sb.append(servletContextNames);
+		sb.append(", taskExecutorClassName=");
+		sb.append(taskExecutorClassName);
+		sb.append(", taskContext=");
+		sb.append(taskContext);
+		sb.append(", completed=");
+		sb.append(completed);
+		sb.append(", completionDate=");
+		sb.append(completionDate);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append("}");
@@ -99,27 +101,6 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 			btEntryImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (completionDate == Long.MIN_VALUE) {
-			btEntryImpl.setCompletionDate(null);
-		}
-		else {
-			btEntryImpl.setCompletionDate(new Date(completionDate));
-		}
-
-		if (taskContext == null) {
-			btEntryImpl.setTaskContext(StringPool.BLANK);
-		}
-		else {
-			btEntryImpl.setTaskContext(taskContext);
-		}
-
-		if (taskExecutorClassName == null) {
-			btEntryImpl.setTaskExecutorClassName(StringPool.BLANK);
-		}
-		else {
-			btEntryImpl.setTaskExecutorClassName(taskExecutorClassName);
-		}
-
 		if (name == null) {
 			btEntryImpl.setName(StringPool.BLANK);
 		}
@@ -132,6 +113,29 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 		}
 		else {
 			btEntryImpl.setServletContextNames(servletContextNames);
+		}
+
+		if (taskExecutorClassName == null) {
+			btEntryImpl.setTaskExecutorClassName(StringPool.BLANK);
+		}
+		else {
+			btEntryImpl.setTaskExecutorClassName(taskExecutorClassName);
+		}
+
+		if (taskContext == null) {
+			btEntryImpl.setTaskContext(StringPool.BLANK);
+		}
+		else {
+			btEntryImpl.setTaskContext(taskContext);
+		}
+
+		btEntryImpl.setCompleted(completed);
+
+		if (completionDate == Long.MIN_VALUE) {
+			btEntryImpl.setCompletionDate(null);
+		}
+		else {
+			btEntryImpl.setCompletionDate(new Date(completionDate));
 		}
 
 		btEntryImpl.setStatus(status);
@@ -149,11 +153,12 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		completionDate = objectInput.readLong();
-		taskContext = objectInput.readUTF();
-		taskExecutorClassName = objectInput.readUTF();
 		name = objectInput.readUTF();
 		servletContextNames = objectInput.readUTF();
+		taskExecutorClassName = objectInput.readUTF();
+		taskContext = objectInput.readUTF();
+		completed = objectInput.readBoolean();
+		completionDate = objectInput.readLong();
 		status = objectInput.readInt();
 	}
 
@@ -173,21 +178,6 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-		objectOutput.writeLong(completionDate);
-
-		if (taskContext == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(taskContext);
-		}
-
-		if (taskExecutorClassName == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(taskExecutorClassName);
-		}
 
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -203,6 +193,22 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 			objectOutput.writeUTF(servletContextNames);
 		}
 
+		if (taskExecutorClassName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(taskExecutorClassName);
+		}
+
+		if (taskContext == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(taskContext);
+		}
+
+		objectOutput.writeBoolean(completed);
+		objectOutput.writeLong(completionDate);
 		objectOutput.writeInt(status);
 	}
 
@@ -213,10 +219,11 @@ public class BTEntryCacheModel implements CacheModel<BTEntry>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long completionDate;
-	public String taskContext;
-	public String taskExecutorClassName;
 	public String name;
 	public String servletContextNames;
+	public String taskExecutorClassName;
+	public String taskContext;
+	public boolean completed;
+	public long completionDate;
 	public int status;
 }

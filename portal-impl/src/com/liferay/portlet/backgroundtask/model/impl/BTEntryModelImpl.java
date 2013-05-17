@@ -67,14 +67,15 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "completionDate", Types.TIMESTAMP },
-			{ "taskContext", Types.CLOB },
-			{ "taskExecutorClassName", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "servletContextNames", Types.VARCHAR },
+			{ "taskExecutorClassName", Types.VARCHAR },
+			{ "taskContext", Types.CLOB },
+			{ "completed", Types.BOOLEAN },
+			{ "completionDate", Types.TIMESTAMP },
 			{ "status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BTEntry (btEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,completionDate DATE null,taskContext TEXT null,taskExecutorClassName VARCHAR(200) null,name VARCHAR(75) null,servletContextNames VARCHAR(255) null,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BTEntry (btEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,servletContextNames VARCHAR(255) null,taskExecutorClassName VARCHAR(200) null,taskContext TEXT null,completed BOOLEAN,completionDate DATE null,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table BTEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY btEntry.btEntryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BTEntry.btEntryId ASC";
@@ -135,11 +136,12 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("completionDate", getCompletionDate());
-		attributes.put("taskContext", getTaskContext());
-		attributes.put("taskExecutorClassName", getTaskExecutorClassName());
 		attributes.put("name", getName());
 		attributes.put("servletContextNames", getServletContextNames());
+		attributes.put("taskExecutorClassName", getTaskExecutorClassName());
+		attributes.put("taskContext", getTaskContext());
+		attributes.put("completed", getCompleted());
+		attributes.put("completionDate", getCompletionDate());
 		attributes.put("status", getStatus());
 
 		return attributes;
@@ -189,25 +191,6 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 			setModifiedDate(modifiedDate);
 		}
 
-		Date completionDate = (Date)attributes.get("completionDate");
-
-		if (completionDate != null) {
-			setCompletionDate(completionDate);
-		}
-
-		String taskContext = (String)attributes.get("taskContext");
-
-		if (taskContext != null) {
-			setTaskContext(taskContext);
-		}
-
-		String taskExecutorClassName = (String)attributes.get(
-				"taskExecutorClassName");
-
-		if (taskExecutorClassName != null) {
-			setTaskExecutorClassName(taskExecutorClassName);
-		}
-
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
@@ -219,6 +202,31 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 
 		if (servletContextNames != null) {
 			setServletContextNames(servletContextNames);
+		}
+
+		String taskExecutorClassName = (String)attributes.get(
+				"taskExecutorClassName");
+
+		if (taskExecutorClassName != null) {
+			setTaskExecutorClassName(taskExecutorClassName);
+		}
+
+		String taskContext = (String)attributes.get("taskContext");
+
+		if (taskContext != null) {
+			setTaskContext(taskContext);
+		}
+
+		Boolean completed = (Boolean)attributes.get("completed");
+
+		if (completed != null) {
+			setCompleted(completed);
+		}
+
+		Date completionDate = (Date)attributes.get("completionDate");
+
+		if (completionDate != null) {
+			setCompletionDate(completionDate);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -309,25 +317,30 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		_modifiedDate = modifiedDate;
 	}
 
-	public Date getCompletionDate() {
-		return _completionDate;
-	}
-
-	public void setCompletionDate(Date completionDate) {
-		_completionDate = completionDate;
-	}
-
-	public String getTaskContext() {
-		if (_taskContext == null) {
+	public String getName() {
+		if (_name == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _taskContext;
+			return _name;
 		}
 	}
 
-	public void setTaskContext(String taskContext) {
-		_taskContext = taskContext;
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public String getServletContextNames() {
+		if (_servletContextNames == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _servletContextNames;
+		}
+	}
+
+	public void setServletContextNames(String servletContextNames) {
+		_servletContextNames = servletContextNames;
 	}
 
 	public String getTaskExecutorClassName() {
@@ -353,30 +366,37 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		return GetterUtil.getString(_originalTaskExecutorClassName);
 	}
 
-	public String getName() {
-		if (_name == null) {
+	public String getTaskContext() {
+		if (_taskContext == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _name;
+			return _taskContext;
 		}
 	}
 
-	public void setName(String name) {
-		_name = name;
+	public void setTaskContext(String taskContext) {
+		_taskContext = taskContext;
 	}
 
-	public String getServletContextNames() {
-		if (_servletContextNames == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _servletContextNames;
-		}
+	public boolean getCompleted() {
+		return _completed;
 	}
 
-	public void setServletContextNames(String servletContextNames) {
-		_servletContextNames = servletContextNames;
+	public boolean isCompleted() {
+		return _completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		_completed = completed;
+	}
+
+	public Date getCompletionDate() {
+		return _completionDate;
+	}
+
+	public void setCompletionDate(Date completionDate) {
+		_completionDate = completionDate;
 	}
 
 	public int getStatus() {
@@ -437,11 +457,12 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		btEntryImpl.setUserName(getUserName());
 		btEntryImpl.setCreateDate(getCreateDate());
 		btEntryImpl.setModifiedDate(getModifiedDate());
-		btEntryImpl.setCompletionDate(getCompletionDate());
-		btEntryImpl.setTaskContext(getTaskContext());
-		btEntryImpl.setTaskExecutorClassName(getTaskExecutorClassName());
 		btEntryImpl.setName(getName());
 		btEntryImpl.setServletContextNames(getServletContextNames());
+		btEntryImpl.setTaskExecutorClassName(getTaskExecutorClassName());
+		btEntryImpl.setTaskContext(getTaskContext());
+		btEntryImpl.setCompleted(getCompleted());
+		btEntryImpl.setCompletionDate(getCompletionDate());
 		btEntryImpl.setStatus(getStatus());
 
 		btEntryImpl.resetOriginalValues();
@@ -545,32 +566,6 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 			btEntryCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		Date completionDate = getCompletionDate();
-
-		if (completionDate != null) {
-			btEntryCacheModel.completionDate = completionDate.getTime();
-		}
-		else {
-			btEntryCacheModel.completionDate = Long.MIN_VALUE;
-		}
-
-		btEntryCacheModel.taskContext = getTaskContext();
-
-		String taskContext = btEntryCacheModel.taskContext;
-
-		if ((taskContext != null) && (taskContext.length() == 0)) {
-			btEntryCacheModel.taskContext = null;
-		}
-
-		btEntryCacheModel.taskExecutorClassName = getTaskExecutorClassName();
-
-		String taskExecutorClassName = btEntryCacheModel.taskExecutorClassName;
-
-		if ((taskExecutorClassName != null) &&
-				(taskExecutorClassName.length() == 0)) {
-			btEntryCacheModel.taskExecutorClassName = null;
-		}
-
 		btEntryCacheModel.name = getName();
 
 		String name = btEntryCacheModel.name;
@@ -588,6 +583,34 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 			btEntryCacheModel.servletContextNames = null;
 		}
 
+		btEntryCacheModel.taskExecutorClassName = getTaskExecutorClassName();
+
+		String taskExecutorClassName = btEntryCacheModel.taskExecutorClassName;
+
+		if ((taskExecutorClassName != null) &&
+				(taskExecutorClassName.length() == 0)) {
+			btEntryCacheModel.taskExecutorClassName = null;
+		}
+
+		btEntryCacheModel.taskContext = getTaskContext();
+
+		String taskContext = btEntryCacheModel.taskContext;
+
+		if ((taskContext != null) && (taskContext.length() == 0)) {
+			btEntryCacheModel.taskContext = null;
+		}
+
+		btEntryCacheModel.completed = getCompleted();
+
+		Date completionDate = getCompletionDate();
+
+		if (completionDate != null) {
+			btEntryCacheModel.completionDate = completionDate.getTime();
+		}
+		else {
+			btEntryCacheModel.completionDate = Long.MIN_VALUE;
+		}
+
 		btEntryCacheModel.status = getStatus();
 
 		return btEntryCacheModel;
@@ -595,7 +618,7 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{btEntryId=");
 		sb.append(getBtEntryId());
@@ -611,16 +634,18 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", completionDate=");
-		sb.append(getCompletionDate());
-		sb.append(", taskContext=");
-		sb.append(getTaskContext());
-		sb.append(", taskExecutorClassName=");
-		sb.append(getTaskExecutorClassName());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", servletContextNames=");
 		sb.append(getServletContextNames());
+		sb.append(", taskExecutorClassName=");
+		sb.append(getTaskExecutorClassName());
+		sb.append(", taskContext=");
+		sb.append(getTaskContext());
+		sb.append(", completed=");
+		sb.append(getCompleted());
+		sb.append(", completionDate=");
+		sb.append(getCompletionDate());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append("}");
@@ -629,7 +654,7 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.backgroundtask.model.BTEntry");
@@ -664,24 +689,28 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>completionDate</column-name><column-value><![CDATA[");
-		sb.append(getCompletionDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>taskContext</column-name><column-value><![CDATA[");
-		sb.append(getTaskContext());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>taskExecutorClassName</column-name><column-value><![CDATA[");
-		sb.append(getTaskExecutorClassName());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>servletContextNames</column-name><column-value><![CDATA[");
 		sb.append(getServletContextNames());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>taskExecutorClassName</column-name><column-value><![CDATA[");
+		sb.append(getTaskExecutorClassName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>taskContext</column-name><column-value><![CDATA[");
+		sb.append(getTaskContext());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>completed</column-name><column-value><![CDATA[");
+		sb.append(getCompleted());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>completionDate</column-name><column-value><![CDATA[");
+		sb.append(getCompletionDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -707,12 +736,13 @@ public class BTEntryModelImpl extends BaseModelImpl<BTEntry>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private Date _completionDate;
-	private String _taskContext;
-	private String _taskExecutorClassName;
-	private String _originalTaskExecutorClassName;
 	private String _name;
 	private String _servletContextNames;
+	private String _taskExecutorClassName;
+	private String _originalTaskExecutorClassName;
+	private String _taskContext;
+	private boolean _completed;
+	private Date _completionDate;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;

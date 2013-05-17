@@ -176,50 +176,6 @@ public interface BTEntryModel extends BaseModel<BTEntry>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the completion date of this b t entry.
-	 *
-	 * @return the completion date of this b t entry
-	 */
-	public Date getCompletionDate();
-
-	/**
-	 * Sets the completion date of this b t entry.
-	 *
-	 * @param completionDate the completion date of this b t entry
-	 */
-	public void setCompletionDate(Date completionDate);
-
-	/**
-	 * Returns the task context of this b t entry.
-	 *
-	 * @return the task context of this b t entry
-	 */
-	@AutoEscape
-	public String getTaskContext();
-
-	/**
-	 * Sets the task context of this b t entry.
-	 *
-	 * @param taskContext the task context of this b t entry
-	 */
-	public void setTaskContext(String taskContext);
-
-	/**
-	 * Returns the task executor class name of this b t entry.
-	 *
-	 * @return the task executor class name of this b t entry
-	 */
-	@AutoEscape
-	public String getTaskExecutorClassName();
-
-	/**
-	 * Sets the task executor class name of this b t entry.
-	 *
-	 * @param taskExecutorClassName the task executor class name of this b t entry
-	 */
-	public void setTaskExecutorClassName(String taskExecutorClassName);
-
-	/**
 	 * Returns the name of this b t entry.
 	 *
 	 * @return the name of this b t entry
@@ -248,6 +204,71 @@ public interface BTEntryModel extends BaseModel<BTEntry>, GroupedModel {
 	 * @param servletContextNames the servlet context names of this b t entry
 	 */
 	public void setServletContextNames(String servletContextNames);
+
+	/**
+	 * Returns the task executor class name of this b t entry.
+	 *
+	 * @return the task executor class name of this b t entry
+	 */
+	@AutoEscape
+	public String getTaskExecutorClassName();
+
+	/**
+	 * Sets the task executor class name of this b t entry.
+	 *
+	 * @param taskExecutorClassName the task executor class name of this b t entry
+	 */
+	public void setTaskExecutorClassName(String taskExecutorClassName);
+
+	/**
+	 * Returns the task context of this b t entry.
+	 *
+	 * @return the task context of this b t entry
+	 */
+	@AutoEscape
+	public String getTaskContext();
+
+	/**
+	 * Sets the task context of this b t entry.
+	 *
+	 * @param taskContext the task context of this b t entry
+	 */
+	public void setTaskContext(String taskContext);
+
+	/**
+	 * Returns the completed of this b t entry.
+	 *
+	 * @return the completed of this b t entry
+	 */
+	public boolean getCompleted();
+
+	/**
+	 * Returns <code>true</code> if this b t entry is completed.
+	 *
+	 * @return <code>true</code> if this b t entry is completed; <code>false</code> otherwise
+	 */
+	public boolean isCompleted();
+
+	/**
+	 * Sets whether this b t entry is completed.
+	 *
+	 * @param completed the completed of this b t entry
+	 */
+	public void setCompleted(boolean completed);
+
+	/**
+	 * Returns the completion date of this b t entry.
+	 *
+	 * @return the completion date of this b t entry
+	 */
+	public Date getCompletionDate();
+
+	/**
+	 * Sets the completion date of this b t entry.
+	 *
+	 * @param completionDate the completion date of this b t entry
+	 */
+	public void setCompletionDate(Date completionDate);
 
 	/**
 	 * Returns the status of this b t entry.

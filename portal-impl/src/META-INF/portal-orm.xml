@@ -1755,13 +1755,14 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="name" />
+			<basic name="servletContextNames" />
+			<basic name="taskExecutorClassName" />
+			<basic name="taskContext" />
+			<basic name="completed" />
 			<basic name="completionDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="taskContext" />
-			<basic name="taskExecutorClassName" />
-			<basic name="name" />
-			<basic name="servletContextNames" />
 			<basic name="status" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

@@ -1330,11 +1330,12 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="completionDate" type="org.hibernate.type.TimestampType" />
-		<property name="taskContext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="taskExecutorClassName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="servletContextNames" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="taskExecutorClassName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="taskContext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="completed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="completionDate" type="org.hibernate.type.TimestampType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" table="BlogsEntry">

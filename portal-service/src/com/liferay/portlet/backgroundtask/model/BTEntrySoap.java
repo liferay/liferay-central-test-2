@@ -37,11 +37,12 @@ public class BTEntrySoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setCompletionDate(model.getCompletionDate());
-		soapModel.setTaskContext(model.getTaskContext());
-		soapModel.setTaskExecutorClassName(model.getTaskExecutorClassName());
 		soapModel.setName(model.getName());
 		soapModel.setServletContextNames(model.getServletContextNames());
+		soapModel.setTaskExecutorClassName(model.getTaskExecutorClassName());
+		soapModel.setTaskContext(model.getTaskContext());
+		soapModel.setCompleted(model.getCompleted());
+		soapModel.setCompletionDate(model.getCompletionDate());
 		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
@@ -151,30 +152,6 @@ public class BTEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public Date getCompletionDate() {
-		return _completionDate;
-	}
-
-	public void setCompletionDate(Date completionDate) {
-		_completionDate = completionDate;
-	}
-
-	public String getTaskContext() {
-		return _taskContext;
-	}
-
-	public void setTaskContext(String taskContext) {
-		_taskContext = taskContext;
-	}
-
-	public String getTaskExecutorClassName() {
-		return _taskExecutorClassName;
-	}
-
-	public void setTaskExecutorClassName(String taskExecutorClassName) {
-		_taskExecutorClassName = taskExecutorClassName;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -189,6 +166,42 @@ public class BTEntrySoap implements Serializable {
 
 	public void setServletContextNames(String servletContextNames) {
 		_servletContextNames = servletContextNames;
+	}
+
+	public String getTaskExecutorClassName() {
+		return _taskExecutorClassName;
+	}
+
+	public void setTaskExecutorClassName(String taskExecutorClassName) {
+		_taskExecutorClassName = taskExecutorClassName;
+	}
+
+	public String getTaskContext() {
+		return _taskContext;
+	}
+
+	public void setTaskContext(String taskContext) {
+		_taskContext = taskContext;
+	}
+
+	public boolean getCompleted() {
+		return _completed;
+	}
+
+	public boolean isCompleted() {
+		return _completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		_completed = completed;
+	}
+
+	public Date getCompletionDate() {
+		return _completionDate;
+	}
+
+	public void setCompletionDate(Date completionDate) {
+		_completionDate = completionDate;
 	}
 
 	public int getStatus() {
@@ -206,10 +219,11 @@ public class BTEntrySoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private Date _completionDate;
-	private String _taskContext;
-	private String _taskExecutorClassName;
 	private String _name;
 	private String _servletContextNames;
+	private String _taskExecutorClassName;
+	private String _taskContext;
+	private boolean _completed;
+	private Date _completionDate;
 	private int _status;
 }

@@ -34,11 +34,12 @@ create table BTEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	completionDate DATE null,
-	taskContext TEXT null,
-	taskExecutorClassName VARCHAR(200) null,
 	name VARCHAR(75) null,
 	servletContextNames VARCHAR(255) null,
+	taskExecutorClassName VARCHAR(200) null,
+	taskContext TEXT null,
+	completed BOOLEAN,
+	completionDate DATE null,
 	status INTEGER
 );
 

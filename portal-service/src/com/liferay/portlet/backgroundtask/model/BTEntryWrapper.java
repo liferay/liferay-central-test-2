@@ -52,11 +52,12 @@ public class BTEntryWrapper implements BTEntry, ModelWrapper<BTEntry> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("completionDate", getCompletionDate());
-		attributes.put("taskContext", getTaskContext());
-		attributes.put("taskExecutorClassName", getTaskExecutorClassName());
 		attributes.put("name", getName());
 		attributes.put("servletContextNames", getServletContextNames());
+		attributes.put("taskExecutorClassName", getTaskExecutorClassName());
+		attributes.put("taskContext", getTaskContext());
+		attributes.put("completed", getCompleted());
+		attributes.put("completionDate", getCompletionDate());
 		attributes.put("status", getStatus());
 
 		return attributes;
@@ -105,25 +106,6 @@ public class BTEntryWrapper implements BTEntry, ModelWrapper<BTEntry> {
 			setModifiedDate(modifiedDate);
 		}
 
-		Date completionDate = (Date)attributes.get("completionDate");
-
-		if (completionDate != null) {
-			setCompletionDate(completionDate);
-		}
-
-		String taskContext = (String)attributes.get("taskContext");
-
-		if (taskContext != null) {
-			setTaskContext(taskContext);
-		}
-
-		String taskExecutorClassName = (String)attributes.get(
-				"taskExecutorClassName");
-
-		if (taskExecutorClassName != null) {
-			setTaskExecutorClassName(taskExecutorClassName);
-		}
-
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
@@ -135,6 +117,31 @@ public class BTEntryWrapper implements BTEntry, ModelWrapper<BTEntry> {
 
 		if (servletContextNames != null) {
 			setServletContextNames(servletContextNames);
+		}
+
+		String taskExecutorClassName = (String)attributes.get(
+				"taskExecutorClassName");
+
+		if (taskExecutorClassName != null) {
+			setTaskExecutorClassName(taskExecutorClassName);
+		}
+
+		String taskContext = (String)attributes.get("taskContext");
+
+		if (taskContext != null) {
+			setTaskContext(taskContext);
+		}
+
+		Boolean completed = (Boolean)attributes.get("completed");
+
+		if (completed != null) {
+			setCompleted(completed);
+		}
+
+		Date completionDate = (Date)attributes.get("completionDate");
+
+		if (completionDate != null) {
+			setCompletionDate(completionDate);
 		}
 
 		Integer status = (Integer)attributes.get("status");
@@ -309,60 +316,6 @@ public class BTEntryWrapper implements BTEntry, ModelWrapper<BTEntry> {
 	}
 
 	/**
-	* Returns the completion date of this b t entry.
-	*
-	* @return the completion date of this b t entry
-	*/
-	public java.util.Date getCompletionDate() {
-		return _btEntry.getCompletionDate();
-	}
-
-	/**
-	* Sets the completion date of this b t entry.
-	*
-	* @param completionDate the completion date of this b t entry
-	*/
-	public void setCompletionDate(java.util.Date completionDate) {
-		_btEntry.setCompletionDate(completionDate);
-	}
-
-	/**
-	* Returns the task context of this b t entry.
-	*
-	* @return the task context of this b t entry
-	*/
-	public java.lang.String getTaskContext() {
-		return _btEntry.getTaskContext();
-	}
-
-	/**
-	* Sets the task context of this b t entry.
-	*
-	* @param taskContext the task context of this b t entry
-	*/
-	public void setTaskContext(java.lang.String taskContext) {
-		_btEntry.setTaskContext(taskContext);
-	}
-
-	/**
-	* Returns the task executor class name of this b t entry.
-	*
-	* @return the task executor class name of this b t entry
-	*/
-	public java.lang.String getTaskExecutorClassName() {
-		return _btEntry.getTaskExecutorClassName();
-	}
-
-	/**
-	* Sets the task executor class name of this b t entry.
-	*
-	* @param taskExecutorClassName the task executor class name of this b t entry
-	*/
-	public void setTaskExecutorClassName(java.lang.String taskExecutorClassName) {
-		_btEntry.setTaskExecutorClassName(taskExecutorClassName);
-	}
-
-	/**
 	* Returns the name of this b t entry.
 	*
 	* @return the name of this b t entry
@@ -396,6 +349,87 @@ public class BTEntryWrapper implements BTEntry, ModelWrapper<BTEntry> {
 	*/
 	public void setServletContextNames(java.lang.String servletContextNames) {
 		_btEntry.setServletContextNames(servletContextNames);
+	}
+
+	/**
+	* Returns the task executor class name of this b t entry.
+	*
+	* @return the task executor class name of this b t entry
+	*/
+	public java.lang.String getTaskExecutorClassName() {
+		return _btEntry.getTaskExecutorClassName();
+	}
+
+	/**
+	* Sets the task executor class name of this b t entry.
+	*
+	* @param taskExecutorClassName the task executor class name of this b t entry
+	*/
+	public void setTaskExecutorClassName(java.lang.String taskExecutorClassName) {
+		_btEntry.setTaskExecutorClassName(taskExecutorClassName);
+	}
+
+	/**
+	* Returns the task context of this b t entry.
+	*
+	* @return the task context of this b t entry
+	*/
+	public java.lang.String getTaskContext() {
+		return _btEntry.getTaskContext();
+	}
+
+	/**
+	* Sets the task context of this b t entry.
+	*
+	* @param taskContext the task context of this b t entry
+	*/
+	public void setTaskContext(java.lang.String taskContext) {
+		_btEntry.setTaskContext(taskContext);
+	}
+
+	/**
+	* Returns the completed of this b t entry.
+	*
+	* @return the completed of this b t entry
+	*/
+	public boolean getCompleted() {
+		return _btEntry.getCompleted();
+	}
+
+	/**
+	* Returns <code>true</code> if this b t entry is completed.
+	*
+	* @return <code>true</code> if this b t entry is completed; <code>false</code> otherwise
+	*/
+	public boolean isCompleted() {
+		return _btEntry.isCompleted();
+	}
+
+	/**
+	* Sets whether this b t entry is completed.
+	*
+	* @param completed the completed of this b t entry
+	*/
+	public void setCompleted(boolean completed) {
+		_btEntry.setCompleted(completed);
+	}
+
+	/**
+	* Returns the completion date of this b t entry.
+	*
+	* @return the completion date of this b t entry
+	*/
+	public java.util.Date getCompletionDate() {
+		return _btEntry.getCompletionDate();
+	}
+
+	/**
+	* Sets the completion date of this b t entry.
+	*
+	* @param completionDate the completion date of this b t entry
+	*/
+	public void setCompletionDate(java.util.Date completionDate) {
+		_btEntry.setCompletionDate(completionDate);
 	}
 
 	/**

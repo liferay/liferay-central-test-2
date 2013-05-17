@@ -640,89 +640,89 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	private static final String _FINDER_COLUMN_G_T_TASKEXECUTORCLASSNAME_1 = "btEntry.taskExecutorClassName IS NULL";
 	private static final String _FINDER_COLUMN_G_T_TASKEXECUTORCLASSNAME_2 = "btEntry.taskExecutorClassName = ?";
 	private static final String _FINDER_COLUMN_G_T_TASKEXECUTORCLASSNAME_3 = "(btEntry.taskExecutorClassName IS NULL OR btEntry.taskExecutorClassName = '')";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_S_T = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T_S = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BTEntryModelImpl.FINDER_CACHE_ENABLED, BTEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_S_T",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_T_S",
 			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				String.class.getName(),
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_S_T = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T_S = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BTEntryModelImpl.FINDER_CACHE_ENABLED, BTEntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_S_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_T_S",
 			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				String.class.getName()
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
 			},
 			BTEntryModelImpl.GROUPID_COLUMN_BITMASK |
-			BTEntryModelImpl.STATUS_COLUMN_BITMASK |
-			BTEntryModelImpl.TASKEXECUTORCLASSNAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_S_T = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BTEntryModelImpl.TASKEXECUTORCLASSNAME_COLUMN_BITMASK |
+			BTEntryModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_T_S = new FinderPath(BTEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BTEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_S_T",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_T_S",
 			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				String.class.getName()
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
 			});
 
 	/**
-	 * Returns all the b t entries where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns all the b t entries where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @return the matching b t entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<BTEntry> findByG_S_T(long groupId, int status,
-		String taskExecutorClassName) throws SystemException {
-		return findByG_S_T(groupId, status, taskExecutorClassName,
+	public List<BTEntry> findByG_T_S(long groupId,
+		String taskExecutorClassName, int status) throws SystemException {
+		return findByG_T_S(groupId, taskExecutorClassName, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the b t entries where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns a range of all the b t entries where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portlet.backgroundtask.model.impl.BTEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param start the lower bound of the range of b t entries
 	 * @param end the upper bound of the range of b t entries (not inclusive)
 	 * @return the range of matching b t entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<BTEntry> findByG_S_T(long groupId, int status,
-		String taskExecutorClassName, int start, int end)
+	public List<BTEntry> findByG_T_S(long groupId,
+		String taskExecutorClassName, int status, int start, int end)
 		throws SystemException {
-		return findByG_S_T(groupId, status, taskExecutorClassName, start, end,
+		return findByG_T_S(groupId, taskExecutorClassName, status, start, end,
 			null);
 	}
 
 	/**
-	 * Returns an ordered range of all the b t entries where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns an ordered range of all the b t entries where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portlet.backgroundtask.model.impl.BTEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param start the lower bound of the range of b t entries
 	 * @param end the upper bound of the range of b t entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching b t entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<BTEntry> findByG_S_T(long groupId, int status,
-		String taskExecutorClassName, int start, int end,
+	public List<BTEntry> findByG_T_S(long groupId,
+		String taskExecutorClassName, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -731,13 +731,13 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_S_T;
-			finderArgs = new Object[] { groupId, status, taskExecutorClassName };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T_S;
+			finderArgs = new Object[] { groupId, taskExecutorClassName, status };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_S_T;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T_S;
 			finderArgs = new Object[] {
-					groupId, status, taskExecutorClassName,
+					groupId, taskExecutorClassName, status,
 					
 					start, end, orderByComparator
 				};
@@ -749,9 +749,9 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		if ((list != null) && !list.isEmpty()) {
 			for (BTEntry btEntry : list) {
 				if ((groupId != btEntry.getGroupId()) ||
-						(status != btEntry.getStatus()) ||
 						!Validator.equals(taskExecutorClassName,
-							btEntry.getTaskExecutorClassName())) {
+							btEntry.getTaskExecutorClassName()) ||
+						(status != btEntry.getStatus())) {
 					list = null;
 
 					break;
@@ -772,23 +772,23 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 			query.append(_SQL_SELECT_BTENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_S_T_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_S_T_STATUS_2);
+			query.append(_FINDER_COLUMN_G_T_S_GROUPID_2);
 
 			boolean bindTaskExecutorClassName = false;
 
 			if (taskExecutorClassName == null) {
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_1);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_1);
 			}
 			else if (taskExecutorClassName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_3);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_3);
 			}
 			else {
 				bindTaskExecutorClassName = true;
 
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_2);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_2);
 			}
+
+			query.append(_FINDER_COLUMN_G_T_S_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -812,11 +812,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 				qPos.add(groupId);
 
-				qPos.add(status);
-
 				if (bindTaskExecutorClassName) {
 					qPos.add(taskExecutorClassName);
 				}
+
+				qPos.add(status);
 
 				if (!pagination) {
 					list = (List<BTEntry>)QueryUtil.list(q, getDialect(),
@@ -849,21 +849,22 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Returns the first b t entry in the ordered set where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the first b t entry in the ordered set where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching b t entry
 	 * @throws com.liferay.portlet.backgroundtask.NoSuchEntryException if a matching b t entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public BTEntry findByG_S_T_First(long groupId, int status,
-		String taskExecutorClassName, OrderByComparator orderByComparator)
+	public BTEntry findByG_T_S_First(long groupId,
+		String taskExecutorClassName, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
-		BTEntry btEntry = fetchByG_S_T_First(groupId, status,
-				taskExecutorClassName, orderByComparator);
+		BTEntry btEntry = fetchByG_T_S_First(groupId, taskExecutorClassName,
+				status, orderByComparator);
 
 		if (btEntry != null) {
 			return btEntry;
@@ -876,11 +877,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		msg.append("groupId=");
 		msg.append(groupId);
 
-		msg.append(", status=");
-		msg.append(status);
-
 		msg.append(", taskExecutorClassName=");
 		msg.append(taskExecutorClassName);
+
+		msg.append(", status=");
+		msg.append(status);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -888,20 +889,20 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Returns the first b t entry in the ordered set where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the first b t entry in the ordered set where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching b t entry, or <code>null</code> if a matching b t entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public BTEntry fetchByG_S_T_First(long groupId, int status,
-		String taskExecutorClassName, OrderByComparator orderByComparator)
-		throws SystemException {
-		List<BTEntry> list = findByG_S_T(groupId, status,
-				taskExecutorClassName, 0, 1, orderByComparator);
+	public BTEntry fetchByG_T_S_First(long groupId,
+		String taskExecutorClassName, int status,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<BTEntry> list = findByG_T_S(groupId, taskExecutorClassName,
+				status, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -911,21 +912,21 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Returns the last b t entry in the ordered set where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the last b t entry in the ordered set where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching b t entry
 	 * @throws com.liferay.portlet.backgroundtask.NoSuchEntryException if a matching b t entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public BTEntry findByG_S_T_Last(long groupId, int status,
-		String taskExecutorClassName, OrderByComparator orderByComparator)
+	public BTEntry findByG_T_S_Last(long groupId, String taskExecutorClassName,
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
-		BTEntry btEntry = fetchByG_S_T_Last(groupId, status,
-				taskExecutorClassName, orderByComparator);
+		BTEntry btEntry = fetchByG_T_S_Last(groupId, taskExecutorClassName,
+				status, orderByComparator);
 
 		if (btEntry != null) {
 			return btEntry;
@@ -938,11 +939,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		msg.append("groupId=");
 		msg.append(groupId);
 
-		msg.append(", status=");
-		msg.append(status);
-
 		msg.append(", taskExecutorClassName=");
 		msg.append(taskExecutorClassName);
+
+		msg.append(", status=");
+		msg.append(status);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -950,22 +951,22 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Returns the last b t entry in the ordered set where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the last b t entry in the ordered set where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching b t entry, or <code>null</code> if a matching b t entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public BTEntry fetchByG_S_T_Last(long groupId, int status,
-		String taskExecutorClassName, OrderByComparator orderByComparator)
-		throws SystemException {
-		int count = countByG_S_T(groupId, status, taskExecutorClassName);
+	public BTEntry fetchByG_T_S_Last(long groupId,
+		String taskExecutorClassName, int status,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByG_T_S(groupId, taskExecutorClassName, status);
 
-		List<BTEntry> list = findByG_S_T(groupId, status,
-				taskExecutorClassName, count - 1, count, orderByComparator);
+		List<BTEntry> list = findByG_T_S(groupId, taskExecutorClassName,
+				status, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -975,19 +976,19 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Returns the b t entries before and after the current b t entry in the ordered set where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the b t entries before and after the current b t entry in the ordered set where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param btEntryId the primary key of the current b t entry
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next b t entry
 	 * @throws com.liferay.portlet.backgroundtask.NoSuchEntryException if a b t entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public BTEntry[] findByG_S_T_PrevAndNext(long btEntryId, long groupId,
-		int status, String taskExecutorClassName,
+	public BTEntry[] findByG_T_S_PrevAndNext(long btEntryId, long groupId,
+		String taskExecutorClassName, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
 		BTEntry btEntry = findByPrimaryKey(btEntryId);
@@ -999,13 +1000,13 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 			BTEntry[] array = new BTEntryImpl[3];
 
-			array[0] = getByG_S_T_PrevAndNext(session, btEntry, groupId,
-					status, taskExecutorClassName, orderByComparator, true);
+			array[0] = getByG_T_S_PrevAndNext(session, btEntry, groupId,
+					taskExecutorClassName, status, orderByComparator, true);
 
 			array[1] = btEntry;
 
-			array[2] = getByG_S_T_PrevAndNext(session, btEntry, groupId,
-					status, taskExecutorClassName, orderByComparator, false);
+			array[2] = getByG_T_S_PrevAndNext(session, btEntry, groupId,
+					taskExecutorClassName, status, orderByComparator, false);
 
 			return array;
 		}
@@ -1017,8 +1018,8 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		}
 	}
 
-	protected BTEntry getByG_S_T_PrevAndNext(Session session, BTEntry btEntry,
-		long groupId, int status, String taskExecutorClassName,
+	protected BTEntry getByG_T_S_PrevAndNext(Session session, BTEntry btEntry,
+		long groupId, String taskExecutorClassName, int status,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1032,23 +1033,23 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 		query.append(_SQL_SELECT_BTENTRY_WHERE);
 
-		query.append(_FINDER_COLUMN_G_S_T_GROUPID_2);
-
-		query.append(_FINDER_COLUMN_G_S_T_STATUS_2);
+		query.append(_FINDER_COLUMN_G_T_S_GROUPID_2);
 
 		boolean bindTaskExecutorClassName = false;
 
 		if (taskExecutorClassName == null) {
-			query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_1);
+			query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_1);
 		}
 		else if (taskExecutorClassName.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_3);
+			query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_3);
 		}
 		else {
 			bindTaskExecutorClassName = true;
 
-			query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_2);
+			query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_2);
 		}
+
+		query.append(_FINDER_COLUMN_G_T_S_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1120,11 +1121,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 		qPos.add(groupId);
 
-		qPos.add(status);
-
 		if (bindTaskExecutorClassName) {
 			qPos.add(taskExecutorClassName);
 		}
+
+		qPos.add(status);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(btEntry);
@@ -1145,37 +1146,36 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 	}
 
 	/**
-	 * Removes all the b t entries where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63; from the database.
+	 * Removes all the b t entries where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_S_T(long groupId, int status,
-		String taskExecutorClassName) throws SystemException {
-		for (BTEntry btEntry : findByG_S_T(groupId, status,
-				taskExecutorClassName, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null)) {
+	public void removeByG_T_S(long groupId, String taskExecutorClassName,
+		int status) throws SystemException {
+		for (BTEntry btEntry : findByG_T_S(groupId, taskExecutorClassName,
+				status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(btEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of b t entries where groupId = &#63; and status = &#63; and taskExecutorClassName = &#63;.
+	 * Returns the number of b t entries where groupId = &#63; and taskExecutorClassName = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param status the status
 	 * @param taskExecutorClassName the task executor class name
+	 * @param status the status
 	 * @return the number of matching b t entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_S_T(long groupId, int status,
-		String taskExecutorClassName) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_S_T;
+	public int countByG_T_S(long groupId, String taskExecutorClassName,
+		int status) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_T_S;
 
 		Object[] finderArgs = new Object[] {
-				groupId, status, taskExecutorClassName
+				groupId, taskExecutorClassName, status
 			};
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
@@ -1186,23 +1186,23 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 			query.append(_SQL_COUNT_BTENTRY_WHERE);
 
-			query.append(_FINDER_COLUMN_G_S_T_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_S_T_STATUS_2);
+			query.append(_FINDER_COLUMN_G_T_S_GROUPID_2);
 
 			boolean bindTaskExecutorClassName = false;
 
 			if (taskExecutorClassName == null) {
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_1);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_1);
 			}
 			else if (taskExecutorClassName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_3);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_3);
 			}
 			else {
 				bindTaskExecutorClassName = true;
 
-				query.append(_FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_2);
+				query.append(_FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_2);
 			}
+
+			query.append(_FINDER_COLUMN_G_T_S_STATUS_2);
 
 			String sql = query.toString();
 
@@ -1217,11 +1217,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 
 				qPos.add(groupId);
 
-				qPos.add(status);
-
 				if (bindTaskExecutorClassName) {
 					qPos.add(taskExecutorClassName);
 				}
+
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 
@@ -1240,11 +1240,11 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_S_T_GROUPID_2 = "btEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_S_T_STATUS_2 = "btEntry.status = ? AND ";
-	private static final String _FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_1 = "btEntry.taskExecutorClassName IS NULL";
-	private static final String _FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_2 = "btEntry.taskExecutorClassName = ?";
-	private static final String _FINDER_COLUMN_G_S_T_TASKEXECUTORCLASSNAME_3 = "(btEntry.taskExecutorClassName IS NULL OR btEntry.taskExecutorClassName = '')";
+	private static final String _FINDER_COLUMN_G_T_S_GROUPID_2 = "btEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_1 = "btEntry.taskExecutorClassName IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_2 = "btEntry.taskExecutorClassName = ? AND ";
+	private static final String _FINDER_COLUMN_G_T_S_TASKEXECUTORCLASSNAME_3 = "(btEntry.taskExecutorClassName IS NULL OR btEntry.taskExecutorClassName = '') AND ";
+	private static final String _FINDER_COLUMN_G_T_S_STATUS_2 = "btEntry.status = ?";
 
 	/**
 	 * Caches the b t entry in the entity cache if it is enabled.
@@ -1483,25 +1483,25 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 			}
 
 			if ((btEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_S_T.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T_S.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						btEntryModelImpl.getOriginalGroupId(),
-						btEntryModelImpl.getOriginalStatus(),
-						btEntryModelImpl.getOriginalTaskExecutorClassName()
+						btEntryModelImpl.getOriginalTaskExecutorClassName(),
+						btEntryModelImpl.getOriginalStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_S_T, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_S_T,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_T_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T_S,
 					args);
 
 				args = new Object[] {
 						btEntryModelImpl.getGroupId(),
-						btEntryModelImpl.getStatus(),
-						btEntryModelImpl.getTaskExecutorClassName()
+						btEntryModelImpl.getTaskExecutorClassName(),
+						btEntryModelImpl.getStatus()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_S_T, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_S_T,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_T_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T_S,
 					args);
 			}
 		}
@@ -1529,11 +1529,12 @@ public class BTEntryPersistenceImpl extends BasePersistenceImpl<BTEntry>
 		btEntryImpl.setUserName(btEntry.getUserName());
 		btEntryImpl.setCreateDate(btEntry.getCreateDate());
 		btEntryImpl.setModifiedDate(btEntry.getModifiedDate());
-		btEntryImpl.setCompletionDate(btEntry.getCompletionDate());
-		btEntryImpl.setTaskContext(btEntry.getTaskContext());
-		btEntryImpl.setTaskExecutorClassName(btEntry.getTaskExecutorClassName());
 		btEntryImpl.setName(btEntry.getName());
 		btEntryImpl.setServletContextNames(btEntry.getServletContextNames());
+		btEntryImpl.setTaskExecutorClassName(btEntry.getTaskExecutorClassName());
+		btEntryImpl.setTaskContext(btEntry.getTaskContext());
+		btEntryImpl.setCompleted(btEntry.isCompleted());
+		btEntryImpl.setCompletionDate(btEntry.getCompletionDate());
 		btEntryImpl.setStatus(btEntry.getStatus());
 
 		return btEntryImpl;
