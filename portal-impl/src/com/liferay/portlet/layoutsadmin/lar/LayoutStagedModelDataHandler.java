@@ -664,11 +664,11 @@ public class LayoutStagedModelDataHandler
 			return;
 		}
 
+		String friendlyURL = (String)friendlyURLInfo[0];
+
 		Group group = layout.getGroup();
 
 		String groupFriendlyURL = group.getFriendlyURL();
-
-		String friendlyURL = (String)friendlyURLInfo[0];
 
 		if (!friendlyURL.equals(groupFriendlyURL)) {
 			return;
