@@ -43,8 +43,8 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 <aui:nav-bar>
 	<aui:nav>
-		<%
 
+		<%
 		String label = "message-boards-home";
 
 		portletURL.setParameter("topLink", label);
@@ -113,6 +113,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 <c:choose>
 	<c:when test='<%= topLink.equals("message-boards-home") %>'>
+
 		<%
 		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 		boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
@@ -256,7 +257,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 					<%
 					portletURL.setParameter("topLink", ParamUtil.getString(request, "topLink"));
-					%> 
+					%>
 
 					<aui:input name="<%= Constants.CMD %>" type="hidden" />
 					<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
