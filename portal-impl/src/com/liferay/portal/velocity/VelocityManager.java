@@ -156,12 +156,7 @@ public class VelocityManager extends BaseTemplateManager {
 
 		VelocityContext velocityContext = getVelocityContext(helperUtilities);
 
-		if (templateContextType.equals(TemplateContextType.EMPTY)) {
-			template = new VelocityTemplate(
-				templateResource, errorTemplateResource, null, _velocityEngine,
-				_templateContextHelper);
-		}
-		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+		if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
 			template = new RestrictedTemplate(
 				new VelocityTemplate(
 					templateResource, errorTemplateResource, velocityContext,

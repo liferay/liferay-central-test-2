@@ -121,12 +121,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 		Template template = null;
 
-		if (templateContextType.equals(TemplateContextType.EMPTY)) {
-			template = new FreeMarkerTemplate(
-				templateResource, errorTemplateResource, null, _configuration,
-				_templateContextHelper);
-		}
-		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+		if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
 			template = new RestrictedTemplate(
 				new FreeMarkerTemplate(
 					templateResource, errorTemplateResource, helperUtilities,

@@ -448,12 +448,9 @@ public class Transformer {
 		TemplateResource errorTemplateResource = getErrorTemplateResource(
 			langType);
 
-		TemplateContextType templateContextType = getTemplateContextType(
-			langType);
-
 		return TemplateManagerUtil.getTemplate(
 			langType, templateResource, errorTemplateResource,
-			templateContextType);
+			_defaultTemplateContextType);
 	}
 
 	protected Template getTemplate(
@@ -466,20 +463,9 @@ public class Transformer {
 		TemplateResource errorTemplateResource = getErrorTemplateResource(
 			langType);
 
-		TemplateContextType templateContextType = getTemplateContextType(
-			langType);
-
 		return TemplateManagerUtil.getTemplate(
 			langType, templateResource, errorTemplateResource,
-			templateContextType);
-	}
-
-	protected TemplateContextType getTemplateContextType(String langType) {
-		if (langType.equals(TemplateConstants.LANG_TYPE_XSL)) {
-			return TemplateContextType.EMPTY;
-		}
-
-		return _defaultTemplateContextType;
+			_defaultTemplateContextType);
 	}
 
 	protected String getTemplateId(
