@@ -72,6 +72,10 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	protected boolean isModule(File file) throws AutoDeployException {
+		if (!isJarFile(file)) {
+			return false;
+		}
+
 		Manifest manifest = null;
 
 		try {
