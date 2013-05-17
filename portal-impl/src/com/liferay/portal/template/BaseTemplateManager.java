@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
+import java.util.Map;
+
 /**
  * @author Raymond Augé
  */
@@ -39,33 +41,47 @@ public abstract class BaseTemplateManager implements TemplateManager {
 		TemplateResource templateResource,
 		TemplateResource errorTemplateResource, boolean restricted) {
 
+		TemplateContextHelper templateContextHelper =
+			getTemplateContextHelper();
+
+		Map<String, Object> helperUtilities =
+			templateContextHelper.getHelperUtilities(restricted);
+
 		return AccessController.doPrivileged(
 			new DoGetTemplatePrivilegedAction(
-				templateResource, errorTemplateResource, restricted));
+				templateResource, errorTemplateResource, restricted,
+				helperUtilities));
 	}
 
 	protected abstract Template doGetTemplate(
 		TemplateResource templateResource,
-		TemplateResource errorTemplateResource, boolean restricted);
+		TemplateResource errorTemplateResource, boolean restricted,
+		Map<String, Object> helperUtilities);
+
+	protected abstract TemplateContextHelper getTemplateContextHelper();
 
 	private class DoGetTemplatePrivilegedAction
 		implements PrivilegedAction<Template> {
 
 		public DoGetTemplatePrivilegedAction(
 			TemplateResource templateResource,
-			TemplateResource errorTemplateResource, boolean restricted) {
+			TemplateResource errorTemplateResource, boolean restricted,
+			Map<String, Object> helperUtilities) {
 
 			_templateResource = templateResource;
 			_errorTemplateResource = errorTemplateResource;
 			_restricted = restricted;
+			_helperUtilities = helperUtilities;
 		}
 
 		public Template run() {
 			return doGetTemplate(
-				_templateResource, _errorTemplateResource, _restricted);
+				_templateResource, _errorTemplateResource, _restricted,
+				_helperUtilities);
 		}
 
 		private TemplateResource _errorTemplateResource;
+		private Map<String, Object> _helperUtilities;
 		private boolean _restricted;
 		private TemplateResource _templateResource;
 

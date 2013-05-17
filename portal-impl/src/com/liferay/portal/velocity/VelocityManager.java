@@ -147,10 +147,8 @@ public class VelocityManager extends BaseTemplateManager {
 	@Override
 	protected Template doGetTemplate(
 		TemplateResource templateResource,
-		TemplateResource errorTemplateResource, boolean restricted) {
-
-		Map<String, Object> helperUtilities =
-			_templateContextHelper.getHelperUtilities(restricted);
+		TemplateResource errorTemplateResource, boolean restricted,
+		Map<String, Object> helperUtilities) {
 
 		VelocityContext velocityContext = getVelocityContext(helperUtilities);
 
@@ -164,6 +162,11 @@ public class VelocityManager extends BaseTemplateManager {
 		}
 
 		return template;
+	}
+
+	@Override
+	protected TemplateContextHelper getTemplateContextHelper() {
+		return _templateContextHelper;
 	}
 
 	protected VelocityContext getVelocityContext(
