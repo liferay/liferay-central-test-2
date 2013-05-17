@@ -252,7 +252,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 	protected String getGroupIds(Map<String, Object> params) {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler();
 
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
 			String key = entry.getKey();
