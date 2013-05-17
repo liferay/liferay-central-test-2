@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Edward Han
@@ -99,21 +98,15 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 			String cacheKey = _buildCacheKey(COUNT_BY_G_N, params);
 
-			String sql = _countByG_NSQLCache.get(cacheKey);
+			String countByG_N = CustomSQLUtil.get(COUNT_BY_G_N);
 
-			if (sql == null) {
-				String countByG_N = CustomSQLUtil.get(COUNT_BY_G_N);
+			StringBundler sb = new StringBundler();
 
-				StringBundler sb = new StringBundler();
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(replaceGroupIds(countByG_N, cacheKey, params));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(replaceGroupIds(countByG_N, cacheKey, params));
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-
-				sql = sb.toString();
-
-				_countByG_NSQLCache.put(cacheKey, sql);
-			}
+			String sql = sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, true, names);
@@ -207,21 +200,15 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 			String cacheKey = _buildCacheKey(FIND_BY_G_N, params);
 
-			String sql = _findByG_NSQLCache.get(cacheKey);
+			String findByG_N = CustomSQLUtil.get(FIND_BY_G_N);
 
-			if (sql == null) {
-				String findByG_N = CustomSQLUtil.get(FIND_BY_G_N);
+			StringBundler sb = new StringBundler();
 
-				StringBundler sb = new StringBundler();
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(replaceGroupIds(findByG_N, cacheKey, params));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(replaceGroupIds(findByG_N, cacheKey, params));
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-
-				sql = sb.toString();
-
-				_findByG_NSQLCache.put(cacheKey, sql);
-			}
+			String sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, true, names);
@@ -286,16 +273,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 				});
 		}
 
-		String resultSQL = _replaceWhereSQLCache.get(cacheKey);
-
-		if (resultSQL == null) {
-			resultSQL = StringUtil.replace(
-				sql, "[$GROUP_ID$]", getGroupIds(params));
-
-			_replaceWhereSQLCache.put(cacheKey, resultSQL);
-		}
-
-		return resultSQL;
+		return StringUtil.replace(sql, "[$GROUP_ID$]", getGroupIds(params));
 	}
 
 	protected void setParams(QueryPos qPos, Map<String, Object> params)
@@ -339,13 +317,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		return sb.toString();
 	}
 
-	private Map<String, String> _countByG_NSQLCache =
-		new ConcurrentHashMap<String, String>();
 	private LinkedHashMap<String, Object> _emptyLinkedHashMap =
 		new LinkedHashMap<String, Object>(0);
-	private Map<String, String> _findByG_NSQLCache =
-		new ConcurrentHashMap<String, String>();
-	private Map<String, String> _replaceWhereSQLCache =
-		new ConcurrentHashMap<String, String>();
 
 }
