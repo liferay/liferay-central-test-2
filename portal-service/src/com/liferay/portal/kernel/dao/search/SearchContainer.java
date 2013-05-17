@@ -335,7 +335,8 @@ public class SearchContainer<R> {
 		if (total == 0) {
 			return false;
 		}
-		else if (((_cur - 1) * _delta) >= total) {
+
+		if (((_cur - 1) * _delta) >= total) {
 			return true;
 		}
 
