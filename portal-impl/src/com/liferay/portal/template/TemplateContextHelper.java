@@ -321,7 +321,6 @@ public class TemplateContextHelper {
 		_helperUtilitiesMaps.remove(classLoader);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected Map<String, Object> doGetHelperUtilities(
 		ClassLoader classLoader, boolean restricted) {
 
