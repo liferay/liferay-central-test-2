@@ -15,12 +15,6 @@
 package com.liferay.portlet.backgroundtask.model.impl;
 
 /**
- * The extended model implementation for the BTEntry service. Represents a row in the &quot;BTEntry&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.backgroundtask.model.BTEntry} interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 public class BTEntryImpl extends BTEntryBaseImpl {
