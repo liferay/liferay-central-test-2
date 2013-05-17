@@ -84,6 +84,10 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 			throw new AutoDeployException(ioe);
 		}
 
+		if (manifest == null) {
+			return false;
+		}
+
 		Attributes attributes = manifest.getMainAttributes();
 
 		String bundleSymbolicNameAttributeValue = attributes.getValue(
