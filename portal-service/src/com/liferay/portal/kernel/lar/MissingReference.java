@@ -30,7 +30,6 @@ public class MissingReference {
 		_className = element.attributeValue("class-name");
 		_displayName = GetterUtil.getString(
 			element.attributeValue("display-name"));
-		_referrers = new HashMap<String, String>();
 
 		String referrerClassName = element.attributeValue(
 			"referrer-class-name");
@@ -68,6 +67,6 @@ public class MissingReference {
 
 	private String _className;
 	private String _displayName;
-	private Map<String, String> _referrers;
+	private Map<String, String> _referrers = new HashMap<String, String>();
 
 }

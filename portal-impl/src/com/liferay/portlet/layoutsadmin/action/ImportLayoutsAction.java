@@ -65,8 +65,10 @@ import com.liferay.portlet.sites.action.ActionUtil;
 import java.io.File;
 import java.io.InputStream;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -449,7 +451,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				StringBundler sb = new StringBundler(4);
 
 				sb.append("the-lar-file-could-not-be-imported-because-there-");
-				sb.append("are-missing-references-that-can-not-be-found-in-");
+				sb.append("are-missing-references-that-could-not-be-found-in-");
 				sb.append("the-current-site.-please-import-another-lar-file");
 				sb.append("-containing-the-following-elements");
 
@@ -473,36 +475,37 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 						missingReference.getReferrers();
 
 					if (referrers.size() == 1) {
-						for (String referrerDisplayName : referrers.keySet()) {
-							String referrerClasName = referrers.get(
-								referrerDisplayName);
+						Set<Map.Entry<String, String>> referrerDisplayNames =
+							referrers.entrySet();
 
-							errorMessageJSONObject.put(
-								"info",
-								themeDisplay.translate(
-									"referenced-by-a-x-x",
-									new String[] {
-										ResourceActionsUtil.getModelResource(
-											themeDisplay.getLocale(),
-											referrerClasName),
-										referrerDisplayName
-									}
-								));
+						Iterator<Map.Entry<String, String>> iterator =
+							referrerDisplayNames.iterator();
 
-							break;
-						}
+						Map.Entry<String, String> entry = iterator.next();
+
+						String referrerDisplayName = entry.getKey();
+						String referrerClasName = entry.getValue();
+
+						errorMessageJSONObject.put(
+							"info",
+							themeDisplay.translate(
+								"referenced-by-a-x-x",
+								new String[] {
+									ResourceActionsUtil.getModelResource(
+										themeDisplay.getLocale(),
+										referrerClasName), referrerDisplayName
+								}
+							));
 					}
 					else {
 						errorMessageJSONObject.put(
 							"info",
 							themeDisplay.translate(
 								"referenced-by-x-elements", referrers.size()));
-
 					}
 
 					errorMessageJSONObject.put(
 						"name", missingReferenceDisplayName);
-
 					errorMessageJSONObject.put(
 						"type",
 						ResourceActionsUtil.getModelResource(
