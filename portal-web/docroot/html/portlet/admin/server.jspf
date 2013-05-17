@@ -821,21 +821,6 @@ serverURL.setParameter("tabs3", tabs3);
 
 				<br />
 
-				<%
-				String taglibGarbageCollect = renderResponse.getNamespace() + "saveServer('gc');";
-				String taglibCacheSingle = renderResponse.getNamespace() + "saveServer('cacheSingle');";
-				String taglibCacheMulti = renderResponse.getNamespace() + "saveServer('cacheMulti');";
-				String taglibDb = renderResponse.getNamespace() + "saveServer('cacheDb');";
-				String taglibCacheServlet = renderResponse.getNamespace() + "saveServer('cacheServlet');";
-				String taglibReindex = renderResponse.getNamespace() + "saveServer('reindex');";
-				String taglibReindexDictionaries = renderResponse.getNamespace() + "saveServer('reindexDictionaries');";
-				String taglibDlPreviews = renderResponse.getNamespace() + "saveServer('dlPreviews');";
-				String taglibThreadDump = renderResponse.getNamespace() + "saveServer('threadDump');";
-				String taglibVerifyPluginTables = renderResponse.getNamespace() + "saveServer('verifyPluginTables');";
-				String taglibVerifyMembershipPolicies = renderResponse.getNamespace() + "saveServer('verifyMembershipPolicies');";
-				String taglibCleanUpPermissions = renderResponse.getNamespace() + "saveServer('cleanUpPermissions');";
-				%>
-
 				<liferay-ui:panel-container extended="<%= true %>" id="adminServerAdministrationActionsPanelContainer" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminServerAdministrationActionsPanel" persistState="<%= true %>" title="actions">
 						<table class="table table-condensed">
@@ -844,7 +829,12 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="run-the-garbage-collector-to-free-up-memory" />
 							</td>
 							<td>
-								<aui:button onClick="<%= taglibGarbageCollect %>" value="execute" />
+
+								<%
+								String taglibGC = renderResponse.getNamespace() + "saveServer('gc');";
+								%>
+
+								<aui:button onClick="<%= taglibGC %>" value="execute" />
 							</td>
 						</tr>
 						<tr>
@@ -852,6 +842,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="clear-content-cached-by-this-vm" />
 							</td>
 							<td>
+
+								<%
+								String taglibCacheSingle = renderResponse.getNamespace() + "saveServer('cacheSingle');";
+								%>
+
 								<aui:button onClick="<%= taglibCacheSingle %>" value="execute" />
 							</td>
 						</tr>
@@ -860,6 +855,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="clear-content-cached-across-the-cluster" />
 							</td>
 							<td>
+
+								<%
+								String taglibCacheMulti = renderResponse.getNamespace() + "saveServer('cacheMulti');";
+								%>
+
 								<aui:button onClick="<%= taglibCacheMulti %>" value="execute" />
 							</td>
 						</tr>
@@ -868,7 +868,12 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="clear-the-database-cache" />
 							</td>
 							<td>
-								<aui:button onClick="<%= taglibDb %>" value="execute" />
+
+								<%
+								String taglibCacheDb = renderResponse.getNamespace() + "saveServer('cacheDb');";
+								%>
+
+								<aui:button onClick="<%= taglibCacheDb %>" value="execute" />
 							</td>
 						</tr>
 						<tr>
@@ -876,6 +881,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="clear-the-direct-servlet-cache" />
 							</td>
 							<td>
+
+								<%
+								String taglibCacheServlet = renderResponse.getNamespace() + "saveServer('cacheServlet');";
+								%>
+
 								<aui:button onClick="<%= taglibCacheServlet %>" value="execute" />
 							</td>
 						</tr>
@@ -884,6 +894,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="reindex-all-search-indexes" />
 							</td>
 							<td>
+
+								<%
+								String taglibReindex = renderResponse.getNamespace() + "saveServer('reindex');";
+								%>
+
 								<aui:button onClick="<%= taglibReindex %>" value="execute" />
 							</td>
 						</tr>
@@ -892,6 +907,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="reindex-all-spell-check-indexes" />
 							</td>
 							<td>
+
+								<%
+								String taglibReindexDictionaries = renderResponse.getNamespace() + "saveServer('reindexDictionaries');";
+								%>
+
 								<aui:button onClick="<%= taglibReindexDictionaries %>" value="execute" />
 							</td>
 						</tr>
@@ -900,7 +920,12 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="reset-preview-and-thumbnail-files-for-documents-and-media-portlet" />
 							</td>
 							<td>
-								<aui:button onClick="<%= taglibDlPreviews %>" value="execute" />
+
+								<%
+								String taglibDLPreviews = renderResponse.getNamespace() + "saveServer('dlPreviews');";
+								%>
+
+								<aui:button onClick="<%= taglibDLPreviews %>" value="execute" />
 							</td>
 						</tr>
 						<tr>
@@ -908,6 +933,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="generate-thread-dump" />
 							</td>
 							<td>
+
+								<%
+								String taglibThreadDump = renderResponse.getNamespace() + "saveServer('threadDump');";
+								%>
+
 								<aui:button onClick="<%= taglibThreadDump %>" value="execute" />
 							</td>
 						</tr>
@@ -916,6 +946,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="verify-database-tables-of-all-plugins" />
 							</td>
 							<td>
+
+								<%
+								String taglibVerifyPluginTables = renderResponse.getNamespace() + "saveServer('verifyPluginTables');";
+								%>
+
 								<aui:button onClick="<%= taglibVerifyPluginTables %>" value="execute" />
 							</td>
 						</tr>
@@ -924,6 +959,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="verify-membership-policies" />
 							</td>
 							<td>
+
+								<%
+								String taglibVerifyMembershipPolicies = renderResponse.getNamespace() + "saveServer('verifyMembershipPolicies');";
+								%>
+
 								<aui:button onClick="<%= taglibVerifyMembershipPolicies %>" value="execute" />
 							</td>
 						</tr>
@@ -932,6 +972,11 @@ serverURL.setParameter("tabs3", tabs3);
 								<liferay-ui:message key="clean-up-permissions" /> <liferay-ui:icon-help message="clean-up-permissions-help" />
 							</td>
 							<td>
+
+								<%
+								String taglibCleanUpPermissions = renderResponse.getNamespace() + "saveServer('cleanUpPermissions');";
+								%>
+
 								<aui:button onClick="<%= taglibCleanUpPermissions %>" value="execute" />
 							</td>
 						</tr>
