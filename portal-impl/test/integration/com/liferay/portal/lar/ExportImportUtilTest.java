@@ -313,7 +313,7 @@ public class ExportImportUtilTest {
 
 		zipWriter.addEntry("/manifest.xml", xml);
 
-		List<MissingReference> missingReferences =
+		Map<String, MissingReference> missingReferences =
 			ExportImportUtil.validateMissingReferences(
 				TestPropsValues.getUserId(), _stagingGroup.getGroupId(),
 				new HashMap<String, String[]>(), zipWriter.getFile());
