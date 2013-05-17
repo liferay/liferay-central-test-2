@@ -107,8 +107,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 				StringBundler sb = new StringBundler();
 
 				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(
-					replaceGroupIdComparator(countByG_N, cacheKey, params));
+				sb.append(replaceGroupIds(countByG_N, cacheKey, params));
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				sql = sb.toString();
@@ -216,8 +215,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 				StringBundler sb = new StringBundler();
 
 				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(
-					replaceGroupIdComparator(findByG_N, cacheKey, params));
+				sb.append(replaceGroupIds(findByG_N, cacheKey, params));
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				sql = sb.toString();
@@ -252,7 +250,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		}
 	}
 
-	protected String getGroupIdComparator(Map<String, Object> params) {
+	protected String getGroupIds(Map<String, Object> params) {
 
 		StringBundler sb = new StringBundler(5);
 
@@ -274,7 +272,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		return sb.toString();
 	}
 
-	protected String replaceGroupIdComparator(
+	protected String replaceGroupIds(
 		String sql, String cacheKey, Map<String, Object> params) {
 
 		if (params.isEmpty()) {
@@ -292,7 +290,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 		if (resultSQL == null) {
 			resultSQL = StringUtil.replace(
-				sql, "[$GROUP_ID$]", getGroupIdComparator(params));
+				sql, "[$GROUP_ID$]", getGroupIds(params));
 
 			_replaceWhereSQLCache.put(cacheKey, resultSQL);
 		}
