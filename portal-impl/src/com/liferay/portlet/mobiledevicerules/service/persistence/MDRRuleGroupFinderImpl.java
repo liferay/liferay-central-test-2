@@ -262,13 +262,11 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 			if (key.equals("includeGlobalScope")) {
 				boolean includeGlobalScope = (Boolean)entry.getValue();
 
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append("(groupId = ?)");
+				sb.append("((groupId = ?)");
 
 				if (includeGlobalScope) {
 					sb.append(" OR ");
-					sb.append("(groupId = ?)");
-					sb.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append("(groupId = ?))");
 				}
 			}
 		}
