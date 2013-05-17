@@ -44,6 +44,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 <aui:nav-bar>
 	<aui:nav>
 		<%
+
 		String label = "message-boards-home";
 
 		portletURL.setParameter("topLink", label);
@@ -252,6 +253,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			<liferay-ui:panel collapsible="<%= true %>" cssClass="threads-panel" extended="<%= true %>" id="messageBoardsThreadsPanel" persistState="<%= true %>" title="threads">
 				<aui:form action="<%= portletURL.toString() %>" method="get" name="fm1">
+
 					<%
 					portletURL.setParameter("topLink", ParamUtil.getString(request, "topLink"));
 					%> 
@@ -450,6 +452,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		</c:if>
 
 		<aui:form action="<%= portletURL.toString() %>" method="get" name="fm1">
+
 			<%
 			portletURL.setParameter("topLink", ParamUtil.getString(request, "topLink"));
 			%>
