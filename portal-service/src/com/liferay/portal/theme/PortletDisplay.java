@@ -46,8 +46,8 @@ public class PortletDisplay implements Serializable {
 		_columnId = master.getColumnId();
 		_columnPos = master.getColumnPos();
 		_content = master.getContent();
-		_customCSSClassName = master.getCustomCSSClassName();
 		_controlPanelCategory = master.getControlPanelCategory();
+		_customCSSClassName = master.getCustomCSSClassName();
 		_description = master.getDescription();
 		_id = master.getId();
 		_instanceId = master.getInstanceId();
@@ -455,8 +455,8 @@ public class PortletDisplay implements Serializable {
 		_columnId = StringPool.BLANK;
 		_columnPos = 0;
 		_content.setIndex(0);
-		_customCSSClassName = StringPool.BLANK;
 		_controlPanelCategory = StringPool.BLANK;
+		_customCSSClassName = StringPool.BLANK;
 		_description = StringPool.BLANK;
 		_id = StringPool.BLANK;
 		_instanceId = StringPool.BLANK;
