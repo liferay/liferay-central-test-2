@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.util;
+package com.liferay.portlet.backgroundtask.model;
 
 /**
  * @author Daniel Kocsis
  */
-public class BackgroundTaskConstants {
+public class BTEntryConstants {
 
 	public static final int STATUS_FAILED = 2;
 
