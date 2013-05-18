@@ -99,7 +99,8 @@ public class SeleniumUtil extends TestPropsValues {
 						new FirefoxWebDriverImpl(projectDir, PORTAL_URL));
 				}
 				else {
-					_selenium = new FirefoxWebDriverImpl(projectDir, PORTAL_URL);
+					_selenium = new FirefoxWebDriverImpl(
+						projectDir, PORTAL_URL);
 				}
 			}
 			else if (BROWSER_TYPE.equals("*googlechrome")) {
