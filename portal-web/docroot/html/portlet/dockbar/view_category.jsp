@@ -144,8 +144,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 								data="<%= data %>"
 								href=""
 								iconClass='<%= portletInstanceable ? "icon-th-large" : "icon-stop" %>'
-								label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>">
-
+								label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>"
+							>
 								<span <%= AUIUtil.buildData(data) %> class='add-content-item <%= portletLocked ? "lfr-portlet-used" : StringPool.BLANK %>'>
 									<liferay-ui:message key="add" />
 								</span>
@@ -203,7 +203,6 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 				%>
 
 			</aui:nav>
-
 		 </liferay-ui:panel>
 	</div>
 

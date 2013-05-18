@@ -118,8 +118,8 @@ boolean viewPreview = ParamUtil.getBoolean(request, "viewPreview");
 							data="<%= data %>"
 							href=""
 							iconClass='<%= displayStyle.equals("icon") ? "" : "icon-file" %>'
-							label='<%= displayStyle.equals("list") ? title : "" %>' >
-
+							label='<%= displayStyle.equals("list") ? title : "" %>'
+						>
 							<c:choose>
 								<c:when test='<%= !displayStyle.equals("list") %>' >
 									<img class='<%= displayStyle.equals("descriptive") ? "span4" : StringPool.BLANK %>' src="<%= assetRenderer.getThumbnailPath(liferayPortletRequest) %>" />
@@ -127,8 +127,13 @@ boolean viewPreview = ParamUtil.getBoolean(request, "viewPreview");
 									<c:choose>
 										<c:when test='<%= displayStyle.equals("descriptive") %>' >
 											<div class="span8">
-												<div><%= title %></div>
-												<div><%= StringUtil.shorten(assetRenderer.getSummary(themeDisplay.getLocale()), 120) %></div>
+												<div>
+													<%= title %>
+												</div>
+
+												<div>
+													<%= StringUtil.shorten(assetRenderer.getSummary(themeDisplay.getLocale()), 120) %>
+												</div>
 											</div>
 										</c:when>
 										<c:when test='<%= displayStyle.equals("icon") %>' >
@@ -142,7 +147,6 @@ boolean viewPreview = ParamUtil.getBoolean(request, "viewPreview");
 									</div>
 								</c:otherwise>
 							</c:choose>
-
 						</aui:nav-item>
 
 					<%
