@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.lar.executor;
+package com.liferay.portal.lar.backgroundtask.executor;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portlet.backgroundtask.BaseBackgroundTaskExecutor;
+import com.liferay.portlet.backgroundtask.executor.BaseBackgroundTaskExecutor;
 import com.liferay.portlet.backgroundtask.model.BTEntry;
 
 import java.io.Serializable;
@@ -27,26 +27,26 @@ import java.util.Map;
 /**
  * @author Daniel Kocsis
  */
-public class LayoutImportBackgroundTaskExecutor
+public class PortletImportBackgroundTaskExecutor
 	extends BaseBackgroundTaskExecutor {
 
 	@Override
 	protected void doExecute(BTEntry btEntry) throws Exception {
 		Map<String, Serializable> taskContextMap = btEntry.getTaskContextMap();
 
+		long plid = (Long)taskContextMap.get("plid");
 		long groupId = (Long)taskContextMap.get("groupId");
-		boolean privateLayout = (Boolean)taskContextMap.get("privateLayout");
-
+		String portletId = (String)taskContextMap.get("portletId");
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
 
-		List<FileEntry> btEntryAttachments =
+		List<FileEntry> attachmentsFileEntries =
 			btEntry.getAttachmentsFileEntries();
 
-		for (FileEntry btEntryAttachment : btEntryAttachments) {
-			LayoutServiceUtil.importLayouts(
-				groupId, privateLayout, parameterMap,
-				btEntryAttachment.getContentStream());
+		for (FileEntry attachmentsFileEntry : attachmentsFileEntries) {
+			LayoutServiceUtil.importPortletInfo(
+				plid, groupId, portletId, parameterMap,
+				attachmentsFileEntry.getContentStream());
 		}
 	}
 

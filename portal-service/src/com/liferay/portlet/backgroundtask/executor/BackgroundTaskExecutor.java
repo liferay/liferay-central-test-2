@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask;
+package com.liferay.portlet.backgroundtask.executor;
 
 import com.liferay.portlet.backgroundtask.model.BTEntry;
 
@@ -21,7 +21,7 @@ import com.liferay.portlet.backgroundtask.model.BTEntry;
  */
 public interface BackgroundTaskExecutor {
 
-	public void execute(BTEntry btEntry, ClassLoader classLoader)
+	public void execute(BTEntry entry, ClassLoader classLoader)
 		throws Exception;
 
 }

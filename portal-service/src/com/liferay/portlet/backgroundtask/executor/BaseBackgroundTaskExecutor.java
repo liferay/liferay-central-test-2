@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask;
+package com.liferay.portlet.backgroundtask.executor;
 
 import com.liferay.portlet.backgroundtask.model.BTEntry;
 
@@ -22,31 +22,27 @@ import com.liferay.portlet.backgroundtask.model.BTEntry;
 public abstract class BaseBackgroundTaskExecutor
 	implements BackgroundTaskExecutor {
 
-	public void execute(BTEntry btEntry, ClassLoader classLoader)
+	public void execute(BTEntry entry, ClassLoader classLoader)
 		throws Exception {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
 
-		boolean overridenClassLoader = false;
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		if (!contextClassLoader.equals(classLoader)) {
-			Thread.currentThread().setContextClassLoader(classLoader);
-
-			overridenClassLoader = true;
+		if (classLoader != contextClassLoader) {
+			currentThread.setContextClassLoader(classLoader);
 		}
 
 		try {
-			doExecute(btEntry);
+			doExecute(entry);
 		}
 		finally {
-			if (overridenClassLoader) {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+			if (classLoader != contextClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
-	protected abstract void doExecute(BTEntry btEntry) throws Exception;
+	protected abstract void doExecute(BTEntry entry) throws Exception;
 
 }
