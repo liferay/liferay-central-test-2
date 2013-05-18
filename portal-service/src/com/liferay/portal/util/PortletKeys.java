@@ -37,7 +37,7 @@ public class PortletKeys {
 
 	public static final String ASSET_PUBLISHER = "101";
 
-	public static final String BACKGROUND_TASK = "BTEntry";
+	public static final String BACKGROUND_TASK = "189";
 
 	public static final String BLOGS = "33";
 
