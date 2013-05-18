@@ -21,14 +21,11 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.impl.MDRRuleGroupImpl;
@@ -96,18 +93,9 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		try {
 			session = openSession();
 
-			String cacheKey = _buildCacheKey(COUNT_BY_G_N, params);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_N);
 
-			String countByG_N = CustomSQLUtil.get(COUNT_BY_G_N);
-
-			StringBundler sb = new StringBundler();
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(replaceGroupIds(countByG_N, cacheKey, params));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			String sql = sql = sb.toString();
-
+			sql = StringUtil.replace(sql, "[$GROUP_ID$]", getGroupIds(params));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, true, names);
 			sql = CustomSQLUtil.replaceAndOperator(sql, false);
@@ -118,9 +106,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
-
-			setParams(qPos, params);
+			setGroupIds(qPos, groupId, params);
 
 			qPos.add(names, 2);
 
@@ -198,18 +184,9 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		try {
 			session = openSession();
 
-			String cacheKey = _buildCacheKey(FIND_BY_G_N, params);
+			String sql = CustomSQLUtil.get(FIND_BY_G_N);
 
-			String findByG_N = CustomSQLUtil.get(FIND_BY_G_N);
-
-			StringBundler sb = new StringBundler();
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(replaceGroupIds(findByG_N, cacheKey, params));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			String sql = sb.toString();
-
+			sql = StringUtil.replace(sql, "[$GROUP_ID$]", getGroupIds(params));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, true, names);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -220,9 +197,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
-
-			setParams(qPos, params);
+			setGroupIds(qPos, groupId, params);
 
 			qPos.add(names, 2);
 
@@ -238,83 +213,35 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 	}
 
 	protected String getGroupIds(Map<String, Object> params) {
+		Boolean includeGlobalScope = (Boolean)params.get("includeGlobalScope");
 
-		StringBundler sb = new StringBundler();
-
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			String key = entry.getKey();
-
-			if (key.equals("includeGlobalScope")) {
-				boolean includeGlobalScope = (Boolean)entry.getValue();
-
-				sb.append("((groupId = ?)");
-
-				if (includeGlobalScope) {
-					sb.append(" OR ");
-					sb.append("(groupId = ?))");
-				}
-			}
+		if ((includeGlobalScope != null) && includeGlobalScope) {
+			return "((groupId = ?) OR (groupId = ?))";
 		}
-
-		return sb.toString();
+		else {
+			return "(groupId = ?)";
+		}
 	}
 
-	protected String replaceGroupIds(
-		String sql, String cacheKey, Map<String, Object> params) {
-
-		if (params.isEmpty()) {
-			return StringUtil.replace(
-				sql,
-				new String[] {
-					"[$GROUP_ID$]"
-				},
-				new String[] {
-					"(groupId = ?)"
-				});
-		}
-
-		return StringUtil.replace(sql, "[$GROUP_ID$]", getGroupIds(params));
-	}
-
-	protected void setParams(QueryPos qPos, Map<String, Object> params)
+	protected void setGroupIds(
+			QueryPos qPos, long groupId, Map<String, Object> params)
 		throws PortalException, SystemException {
 
-		if ((params == null) || params.isEmpty()) {
-			return;
+		Boolean includeGlobalScope = (Boolean)params.get("includeGlobalScope");
+
+		if ((includeGlobalScope != null) && includeGlobalScope) {
+			qPos.add(groupId);
+
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+				group.getCompanyId());
+
+			qPos.add(companyGroup.getGroupId());
 		}
-
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			String key = entry.getKey();
-
-			if (key.equals("includeGlobalScope")) {
-				boolean includeGlobalScope = (Boolean)entry.getValue();
-
-				if (includeGlobalScope) {
-					long currentCompanyId = CompanyThreadLocal.getCompanyId();
-
-					Company company = CompanyLocalServiceUtil.getCompany(
-						currentCompanyId);
-
-					Group globalGroup = company.getGroup();
-
-					qPos.add(globalGroup.getGroupId());
-				}
-			}
+		else {
+			qPos.add(groupId);
 		}
-	}
-
-	private String _buildCacheKey(
-		String keyPrefix, Map<String, Object> param1) {
-
-		StringBundler sb = new StringBundler(param1.size() + 2);
-
-		sb.append(keyPrefix);
-
-		for (Map.Entry<String, Object> entry : param1.entrySet()) {
-			sb.append(entry.getKey());
-		}
-
-		return sb.toString();
 	}
 
 	private LinkedHashMap<String, Object> _emptyLinkedHashMap =
