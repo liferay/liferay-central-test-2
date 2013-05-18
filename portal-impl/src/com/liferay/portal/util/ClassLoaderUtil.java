@@ -32,7 +32,7 @@ import javax.servlet.ServletContext;
  */
 public class ClassLoaderUtil {
 
-	public static ClassLoader getAggregatedPluginsClassLoader(
+	public static ClassLoader getAggregatePluginsClassLoader(
 		final String[] servletContextNames,
 		final boolean addContextClassLoader) {
 
@@ -43,10 +43,9 @@ public class ClassLoaderUtil {
 					List<ClassLoader> classLoaders = new ArrayList<ClassLoader>(
 						servletContextNames.length + 2);
 
-					ClassLoader contextClassLoader = null;
-
 					if (addContextClassLoader) {
-						contextClassLoader = _getContextClassLoader();
+						ClassLoader contextClassLoader =
+							_getContextClassLoader();
 
 						classLoaders.add(contextClassLoader);
 					}
@@ -64,6 +63,7 @@ public class ClassLoaderUtil {
 					return AggregateClassLoader.getAggregateClassLoader(
 						classloaders);
 				}
+
 			}
 		);
 	}
@@ -104,6 +104,7 @@ public class ClassLoaderUtil {
 
 					return pluginClassLoader;
 				}
+
 			}
 		);
 	}

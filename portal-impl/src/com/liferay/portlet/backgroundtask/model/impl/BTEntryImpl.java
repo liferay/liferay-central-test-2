@@ -139,13 +139,14 @@ public class BTEntryImpl extends BTEntryBaseImpl {
 	}
 
 	public Map<String, Serializable> getTaskContextMap() {
-		if (_taskContextMap == null) {
-			String taskContext = getTaskContext();
-
-			_taskContextMap =
-				(Map<String, Serializable>)JSONFactoryUtil.deserialize(
-					taskContext);
+		if (_taskContextMap != null) {
+			return _taskContextMap;
 		}
+
+		String taskContext = getTaskContext();
+
+		_taskContextMap =
+			(Map<String, Serializable>)JSONFactoryUtil.deserialize(taskContext);
 
 		return _taskContextMap;
 	}
