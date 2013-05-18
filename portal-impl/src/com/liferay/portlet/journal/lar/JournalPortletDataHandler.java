@@ -169,14 +169,14 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 			ddmStructureActionableDynamicQuery.performActions();
 
-			// Export templates belong to structures
+			// Export templates that belong to structures
 
 			for (DDMTemplate ddmTemplate : ddmTemplates) {
 				StagedModelDataHandlerUtil.exportStagedModel(
 					portletDataContext, ddmTemplate);
 			}
 
-			// Export structure independent generic templates
+			// Export templates that do not belong to structures
 
 			ActionableDynamicQuery ddmTemplateActionableDynamicQuery =
 				getDDMTemplateActionableDynamicQuery(portletDataContext);
