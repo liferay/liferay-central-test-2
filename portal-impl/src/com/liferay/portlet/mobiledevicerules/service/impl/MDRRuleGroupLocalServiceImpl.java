@@ -181,7 +181,7 @@ public class MDRRuleGroupLocalServiceImpl
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #search(long, String,
-	 *             java.util.LinkedHashMap, boolean, int, int)}
+	 *             LinkedHashMap, boolean, int, int)}
 	 */
 	public List<MDRRuleGroup> search(
 			long groupId, String name, boolean andOperator, int start, int end)
@@ -190,7 +190,7 @@ public class MDRRuleGroupLocalServiceImpl
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("includeGlobalScope", true);
+		params.put("includeGlobalScope", Boolean.TRUE);
 
 		return mdrRuleGroupFinder.findByG_N(
 			groupId, name, params, andOperator, start, end);
@@ -207,7 +207,7 @@ public class MDRRuleGroupLocalServiceImpl
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #searchByKeywords(long,
-	 *             String, java.util.LinkedHashMap, boolean, int, int)}
+	 *             String, LinkedHashMap, boolean, int, int)}
 	 */
 	public List<MDRRuleGroup> searchByKeywords(
 			long groupId, String keywords, boolean andOperator, int start,
@@ -217,7 +217,7 @@ public class MDRRuleGroupLocalServiceImpl
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("includeGlobalScope", true);
+		params.put("includeGlobalScope", Boolean.TRUE);
 
 		return mdrRuleGroupFinder.findByKeywords(
 			groupId, keywords, params, start, end);
@@ -234,7 +234,7 @@ public class MDRRuleGroupLocalServiceImpl
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #searchByKeywordsCount(long,
-	 *             String, java.util.LinkedHashMap, boolean)}
+	 *             String, LinkedHashMap, boolean)}
 	 */
 	public int searchByKeywordsCount(
 			long groupId, String keywords, boolean andOperator)
@@ -243,7 +243,7 @@ public class MDRRuleGroupLocalServiceImpl
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("includeGlobalScope", true);
+		params.put("includeGlobalScope", Boolean.TRUE);
 
 		return mdrRuleGroupFinder.countByKeywords(groupId, keywords, params);
 	}
@@ -257,8 +257,8 @@ public class MDRRuleGroupLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #searchCount(long,
-	 *             String, java.util.LinkedHashMap, boolean)}
+	 * @deprecated As of 6.2.0, replaced by {@link #searchCount(long, String,
+	 *             LinkedHashMap, boolean)}
 	 */
 	public int searchCount(long groupId, String name, boolean andOperator)
 		throws SystemException {
@@ -266,7 +266,7 @@ public class MDRRuleGroupLocalServiceImpl
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("includeGlobalScope", true);
+		params.put("includeGlobalScope", Boolean.TRUE);
 
 		return mdrRuleGroupFinder.countByG_N(
 			groupId, name, params, andOperator);

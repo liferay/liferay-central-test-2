@@ -59,20 +59,20 @@ public class MDRRuleGroupLocalServiceTest {
 
 		Group companyGroup = company.getGroup();
 
-		_companyRuleGroup = MDRTestUtil.addRuleGroup(companyGroup.getGroupId());
+		_ruleGroup = MDRTestUtil.addRuleGroup(companyGroup.getGroupId());
 	}
 
 	@Test
-	public void testSelectGlobalMDRRulesNotPresent() throws Exception {
-		testSelectableMDRRuleGroups(false);
+	public void testSelectGlobalRulesNotPresent() throws Exception {
+		testSelectableRuleGroups(false);
 	}
 
 	@Test
-	public void testSelectGlobalMDRRulesPresent() throws Exception {
-		testSelectableMDRRuleGroups(true);
+	public void testSelectGlobalRulesPresent() throws Exception {
+		testSelectableRuleGroups(true);
 	}
 
-	protected void testSelectableMDRRuleGroups(boolean includeGlobalGroup)
+	protected void testSelectableRuleGroups(boolean includeGlobalGroup)
 		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
@@ -84,7 +84,7 @@ public class MDRRuleGroupLocalServiceTest {
 			new LinkedHashMap<String, Object>();
 
 		if (includeGlobalGroup) {
-			params.put("includeGlobalScope", true);
+			params.put("includeGlobalScope", Boolean.TRUE);
 		}
 
 		List<MDRRuleGroup> ruleGroups =
@@ -93,13 +93,13 @@ public class MDRRuleGroupLocalServiceTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (includeGlobalGroup) {
-			Assert.assertTrue(ruleGroups.contains(_companyRuleGroup));
+			Assert.assertTrue(ruleGroups.contains(_ruleGroup));
 		}
 		else {
-			Assert.assertFalse(ruleGroups.contains(_companyRuleGroup));
+			Assert.assertFalse(ruleGroups.contains(_ruleGroup));
 		}
 	}
 
-	private MDRRuleGroup _companyRuleGroup;
+	private MDRRuleGroup _ruleGroup;
 
 }
