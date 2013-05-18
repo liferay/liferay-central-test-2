@@ -22,16 +22,14 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.backgroundtask.model.BTEntry;
+import com.liferay.portlet.backgroundtask.model.BTEntryConstants;
 import com.liferay.portlet.backgroundtask.service.base.BTEntryLocalServiceBaseImpl;
-import com.liferay.portlet.backgroundtask.util.BackgroundTaskConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.io.File;
@@ -50,77 +48,47 @@ import java.util.concurrent.Callable;
  */
 public class BTEntryLocalServiceImpl extends BTEntryLocalServiceBaseImpl {
 
-	public BTEntry addBTEntry(
-			long userId, long groupId, Class taskExecutorClass, String name,
-			Map<String, Serializable> taskContext,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addBTEntry(
-			userId, groupId, taskExecutorClass, StringPool.EMPTY_ARRAY, name,
-			taskContext, serviceContext);
-	}
-
-	public BTEntry addBTEntry(
-			long userId, long groupId, Class taskExecutorClass, String name,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addBTEntry(
-			userId, groupId, taskExecutorClass, StringPool.EMPTY_ARRAY, name,
-			null, serviceContext);
-	}
-
-	public BTEntry addBTEntry(
-			long userId, long groupId, Class taskExecutorClass,
-			String[] servletContextNames, String name,
-			Map<String, Serializable> taskContext,
+	public BTEntry addEntry(
+			long userId, long groupId, String name,
+			String[] servletContextNames, Class<?> taskExecutorClass,
+			Map<String, Serializable> taskContextMap,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		final long btEntryId = counterLocalService.increment();
+		final long entryId = counterLocalService.increment();
 
-		BTEntry btEntry = btEntryPersistence.create(btEntryId);
+		BTEntry entry = btEntryPersistence.create(entryId);
 
-		btEntry.setCompanyId(user.getCompanyId());
-		btEntry.setCreateDate(serviceContext.getCreateDate(now));
-		btEntry.setGroupId(groupId);
-		btEntry.setModifiedDate(serviceContext.getModifiedDate(now));
-		btEntry.setUserId(userId);
-		btEntry.setUserName(user.getFullName());
+		entry.setCompanyId(user.getCompanyId());
+		entry.setCreateDate(serviceContext.getCreateDate(now));
+		entry.setGroupId(groupId);
+		entry.setModifiedDate(serviceContext.getModifiedDate(now));
+		entry.setUserId(userId);
+		entry.setUserName(user.getFullName());
+		entry.setName(name);
+		entry.setServletContextNames(StringUtil.merge(servletContextNames));
+		entry.setTaskExecutorClassName(taskExecutorClass.getName());
 
-		// Model attributes
+		if (taskContextMap != null) {
+			String taskContext = JSONFactoryUtil.serialize(taskContextMap);
 
-		btEntry.setName(name);
-
-		String servletContextNamesString = StringUtil.merge(
-			servletContextNames, StringPool.COMMA);
-
-		if (Validator.isNotNull(servletContextNamesString)) {
-			btEntry.setServletContextNames(servletContextNamesString);
+			entry.setTaskContext(taskContext);
 		}
 
-		btEntry.setStatus(BackgroundTaskConstants.STATUS_NEW);
+		entry.setStatus(BTEntryConstants.STATUS_NEW);
 
-		if (taskContext != null) {
-			String taskContextString = JSONFactoryUtil.serialize(taskContext);
-
-			btEntry.setTaskContext(taskContextString);
-		}
-
-		btEntry.setTaskExecutorClassName(taskExecutorClass.getName());
-
-		btEntryPersistence.update(btEntry);
+		btEntryPersistence.update(entry);
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
 				public Void call() throws Exception {
 					Message message = new Message();
-					message.put("btEntryId", btEntryId);
+
+					message.put("entryId", entryId);
 
 					MessageBusUtil.sendMessage(
 						DestinationNames.BACKGROUND_TASK, message);
@@ -130,63 +98,60 @@ public class BTEntryLocalServiceImpl extends BTEntryLocalServiceBaseImpl {
 
 			});
 
-		return btEntry;
+		return entry;
 	}
 
-	public void addBTEntryAttachment(
-			long userId, long btEntryId, String fileName, File file)
+	public void addEntryAttachment(
+			long userId, long entryId, String fileName, File file)
 		throws PortalException, SystemException {
 
-		BTEntry btEntry = getBTEntry(btEntryId);
+		BTEntry entry = getBTEntry(entryId);
 
-		Folder folder = btEntry.addAttachmentsFolder();
+		Folder folder = entry.addAttachmentsFolder();
 
 		PortletFileRepositoryUtil.addPortletFileEntry(
-			btEntry.getGroupId(), userId, BTEntry.class.getName(),
-			btEntry.getPrimaryKey(), PortletKeys.BACKGROUND_TASK,
+			entry.getGroupId(), userId, BTEntry.class.getName(),
+			entry.getPrimaryKey(), PortletKeys.BACKGROUND_TASK,
 			folder.getFolderId(), file, fileName, null);
 	}
 
-	public void addBTEntryAttachment(
-			long userId, long btEntryId, String fileName,
-			InputStream inputStream)
+	public void addEntryAttachment(
+			long userId, long entryId, String fileName, InputStream inputStream)
 		throws PortalException, SystemException {
 
-		BTEntry btEntry = getBTEntry(btEntryId);
+		BTEntry entry = getBTEntry(entryId);
 
-		Folder folder = btEntry.addAttachmentsFolder();
+		Folder folder = entry.addAttachmentsFolder();
 
 		PortletFileRepositoryUtil.addPortletFileEntry(
-			btEntry.getGroupId(), userId, BTEntry.class.getName(),
-			btEntry.getPrimaryKey(), PortletKeys.BACKGROUND_TASK,
+			entry.getGroupId(), userId, BTEntry.class.getName(),
+			entry.getPrimaryKey(), PortletKeys.BACKGROUND_TASK,
 			folder.getFolderId(), inputStream, fileName, null);
 	}
 
-	@Override
-	public BTEntry deleteBTEntry(BTEntry btEntry)
+	public BTEntry deleteEntry(BTEntry entry)
 		throws PortalException, SystemException {
 
-		long folderId = btEntry.getAttachmentsFolderId();
+		long folderId = entry.getAttachmentsFolderId();
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			PortletFileRepositoryUtil.deleteFolder(folderId);
 		}
 
-		return btEntryPersistence.remove(btEntry);
+		return btEntryPersistence.remove(entry);
 	}
 
-	public BTEntry fetchBTEntry(long btEntryId) throws SystemException {
-		return btEntryPersistence.fetchByPrimaryKey(btEntryId);
+	public BTEntry fetchEntry(long entryId) throws SystemException {
+		return btEntryPersistence.fetchByPrimaryKey(entryId);
 	}
 
-	public List<BTEntry> getBTEntries(
-			long groupId, String taskExecutorClassName)
+	public List<BTEntry> getEntries(long groupId, String taskExecutorClassName)
 		throws SystemException {
 
 		return btEntryPersistence.findByG_T(groupId, taskExecutorClassName);
 	}
 
-	public List<BTEntry> getBTEntries(
+	public List<BTEntry> getEntries(
 			long groupId, String taskExecutorClassName, int status)
 		throws SystemException {
 
@@ -194,42 +159,41 @@ public class BTEntryLocalServiceImpl extends BTEntryLocalServiceBaseImpl {
 			groupId, taskExecutorClassName, status);
 	}
 
-	public BTEntry updateBTEntry(
-			long btEntryId, int status, Map<String, Serializable> taskContext,
+	public BTEntry getEntry(long entryId)
+		throws PortalException, SystemException {
+
+		return btEntryPersistence.findByPrimaryKey(entryId);
+	}
+
+	public BTEntry updateEntry(
+			long entryId, Map<String, Serializable> taskContextMap, int status,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Date now = new Date();
 
-		BTEntry btEntry = btEntryPersistence.findByPrimaryKey(btEntryId);
+		BTEntry entry = btEntryPersistence.findByPrimaryKey(entryId);
 
-		if ((status == BackgroundTaskConstants.STATUS_SUCCESSFUL) ||
-			(status == BackgroundTaskConstants.STATUS_FAILED)) {
+		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 
-			btEntry.setCompleted(true);
+		if (taskContextMap != null) {
+			String taskContext = JSONFactoryUtil.serialize(taskContextMap);
 
-			btEntry.setCompletionDate(now);
+			entry.setTaskContext(taskContext);
 		}
 
-		btEntry.setModifiedDate(serviceContext.getModifiedDate(now));
-		btEntry.setStatus(status);
+		if ((status == BTEntryConstants.STATUS_FAILED) ||
+			(status == BTEntryConstants.STATUS_SUCCESSFUL)) {
 
-		if (taskContext != null) {
-			String taskContextString = JSONFactoryUtil.serialize(taskContext);
-
-			btEntry.setTaskContext(taskContextString);
+			entry.setCompleted(true);
+			entry.setCompletionDate(now);
 		}
 
-		btEntryPersistence.update(btEntry);
+		entry.setStatus(status);
 
-		return btEntry;
-	}
+		btEntryPersistence.update(entry);
 
-	public BTEntry updateBTEntry(
-			long btEntryId, int status, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return updateBTEntry(btEntryId, status, null, serviceContext);
+		return entry;
 	}
 
 }
