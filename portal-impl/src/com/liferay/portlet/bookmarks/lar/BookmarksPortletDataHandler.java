@@ -48,7 +48,6 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "bookmarks";
 
 	public BookmarksPortletDataHandler() {
-		setAlwaysExportable(true);
 		setExportControls(new PortletDataHandlerBoolean(NAMESPACE, "entries"));
 		setExportMetadataControls(
 			new PortletDataHandlerBoolean(
