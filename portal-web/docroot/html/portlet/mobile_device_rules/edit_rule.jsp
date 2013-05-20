@@ -75,8 +75,7 @@ if (ruleGroup != null) {
 
 		<aui:input name="description" />
 
-		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>'>
-			<aui:option disabled="<%= true %>" label="select-a-type" selected="<%= Validator.isNull(type) %>" />
+		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>' showEmptyOption="<%= true %>">
 
 			<%
 			for (String ruleHandlerType : RuleGroupProcessorUtil.getRuleHandlerTypes()) {
@@ -110,8 +109,6 @@ if (ruleGroup != null) {
 		function() {
 			var A = AUI();
 
-			var typeNode = A.one('#<portlet:namespace /><%= "type" %>');
-
 			A.io.request(
 				<portlet:resourceURL var="editorURL">
 					<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_editor" />
@@ -120,15 +117,15 @@ if (ruleGroup != null) {
 				'<%= editorURL.toString() %>',
 				{
 					data: {
-						<%= "ruleId" %>: <%= ruleId %>,
-						<%= "type" %>: (typeNode && typeNode.val())
+						type: document.<portlet:namespace />fm.<portlet:namespace />type.value,
+						<%= "ruleId" %>: <%= ruleId %>
 					},
 					on: {
-						complete: function <portlet:namespace />displayForm(id, obj) {
-							var typeSettingsNode = A.one('#<portlet:namespace />typeSettings');
+						success: function(id, obj) {
+							var typeSettings = A.one('#<portlet:namespace />typeSettings');
 
-							if (typeSettingsNode) {
-								typeSettingsNode.setContent(obj.responseText);
+							if (typeSettings) {
+								typeSettings.html(this.get('responseData'));
 							}
 						}
 					}
