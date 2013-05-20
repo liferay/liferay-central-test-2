@@ -101,14 +101,14 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 					>
 						<liferay-ui:icon
 							label="<%= true %>"
-							message="<%= group.getScopeName(themeDisplay) %>"
+							message="<%= group.getScopeDescriptiveName(themeDisplay) %>"
 							src="<%= group.getIconURL(themeDisplay) %>"
 						/>
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
 						name="type"
-						value="<%= LanguageUtil.get(pageContext, group.getScopeType(themeDisplay)) %>"
+						value="<%= LanguageUtil.get(pageContext, group.getScopeLabel(themeDisplay)) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -148,7 +148,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 						<liferay-ui:icon
 							id='<%= "scope" + group.getGroupId() %>'
-							message="<%= group.getScopeName(themeDisplay) %>"
+							message="<%= group.getScopeDescriptiveName(themeDisplay) %>"
 							method="post"
 							src="<%= group.getIconURL(themeDisplay) %>"
 							url="<%= addScopeURL %>"

@@ -163,88 +163,92 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testGroupHasCurrentPageScopeName() throws Exception {
+	public void testGroupHasCurrentPageScopeDescriptiveName() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = addGroup(false, true, false);
 
-		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
-
 		themeDisplay.setPlid(group.getClassPK());
 
-		String scopeName = group.getScopeName(themeDisplay);
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
 
-		Assert.assertTrue(scopeName.contains("current-page"));
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
+
+		Assert.assertTrue(scopeDescriptiveName.contains("current-page"));
 	}
 
 	@Test
-	public void testGroupHasCurrentSiteScopeName() throws Exception {
+	public void testGroupHasCurrentSiteScopeDescriptiveName() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = addGroup(true, false, false);
 
 		themeDisplay.setScopeGroupId(group.getGroupId());
 
-		String scopeName = group.getScopeName(themeDisplay);
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
 
-		Assert.assertTrue(scopeName.contains("current-site"));
+		Assert.assertTrue(scopeDescriptiveName.contains("current-site"));
 	}
 
 	@Test
-	public void testGroupHasDefaultScopeName() throws Exception {
+	public void testGroupHasDefaultScopeDescriptiveName() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = addGroup(false, false, true);
 
 		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
 
-		String scopeName = group.getScopeName(themeDisplay);
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
 
-		Assert.assertTrue(scopeName.contains("default"));
+		Assert.assertTrue(scopeDescriptiveName.contains("default"));
 	}
 
 	@Test
 	public void testGroupHasLocalizedName() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
-		Group group = GroupTestUtil.addGroup("Localized name");
+		Group group = GroupTestUtil.addGroup("Localized Name");
 
-		String scopeName = group.getScopeName(themeDisplay);
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
 
-		Assert.assertTrue(scopeName.equals("Localized name"));
+		Assert.assertTrue(scopeDescriptiveName.equals("Localized Name"));
 	}
 
 	@Test
-	public void testGroupIsChildSiteScopeType() throws Exception {
+	public void testGroupIsChildSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = GroupTestUtil.addGroup();
 
-		Group childrenGroup = GroupTestUtil.addGroup(
-			group.getGroupId(), ServiceTestUtil.randomString());
-
 		themeDisplay.setScopeGroupId(group.getGroupId());
 
-		String scopeType = childrenGroup.getScopeType(themeDisplay);
+		Group subgroup = GroupTestUtil.addGroup(
+			group.getGroupId(), ServiceTestUtil.randomString());
 
-		Assert.assertEquals("child-site", scopeType);
+		String scopeLabel = subgroup.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("child-site", scopeLabel);
 	}
 
 	@Test
-	public void testGroupIsCurrentSiteScopeType() throws Exception {
+	public void testGroupIsCurrentSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = addGroup(true, false, false);
 
 		themeDisplay.setScopeGroupId(group.getGroupId());
 
-		String scopeType = group.getScopeType(themeDisplay);
+		String scopeLabel = group.getScopeLabel(themeDisplay);
 
-		Assert.assertEquals(scopeType, "current-site");
+		Assert.assertEquals(scopeLabel, "current-site");
 	}
 
 	@Test
-	public void testGroupIsGlobalScopeType() throws Exception {
+	public void testGroupIsGlobalScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group  = addGroup(false, false, false);
@@ -256,53 +260,53 @@ public class GroupServiceTest {
 
 		Group companyGroup = company.getGroup();
 
-		String scopeType = companyGroup.getScopeType(themeDisplay);
+		String scopeLabel = companyGroup.getScopeLabel(themeDisplay);
 
-		Assert.assertEquals("global", scopeType);
+		Assert.assertEquals("global", scopeLabel);
 	}
 
 	@Test
-	public void testGroupIsPageScopeType() throws Exception {
+	public void testGroupIsPageScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = addGroup(false, true, false);
 
-		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
-
 		themeDisplay.setPlid(group.getClassPK());
 
-		String scopeType = group.getScopeType(themeDisplay);
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
 
-		Assert.assertEquals("page", scopeType);
+		String scopeLabel = group.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("page", scopeLabel);
 	}
 
 	@Test
-	public void testGroupIsParentSiteScopeType() throws Exception {
+	public void testGroupIsParentSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = GroupTestUtil.addGroup();
 
-		Group childrenGroup = GroupTestUtil.addGroup(
+		Group subgroup = GroupTestUtil.addGroup(
 			group.getGroupId(), ServiceTestUtil.randomString());
 
-		themeDisplay.setScopeGroupId(childrenGroup.getGroupId());
+		themeDisplay.setScopeGroupId(subgroup.getGroupId());
 
-		String scopeType = group.getScopeType(themeDisplay);
+		String scopeLabel = group.getScopeLabel(themeDisplay);
 
-		Assert.assertEquals("parent-site", scopeType);
+		Assert.assertEquals("parent-site", scopeLabel);
 	}
 
 	@Test
-	public void testGroupIsSiteScopeType() throws Exception {
+	public void testGroupIsSiteScopeLabel() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		Group group = GroupTestUtil.addGroup();
 
 		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
 
-		String scopeType = group.getScopeType(themeDisplay);
+		String scopeLabel = group.getScopeLabel(themeDisplay);
 
-		Assert.assertEquals("site", scopeType);
+		Assert.assertEquals("site", scopeLabel);
 	}
 
 	@Test

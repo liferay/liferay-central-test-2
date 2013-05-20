@@ -58,7 +58,7 @@ portletURL.setParameter("struts_action", "/document_library/view_file_entry_type
 
 		<liferay-ui:search-container-column-text
 			name="scope"
-			value="<%= LanguageUtil.get(pageContext, group.getScopeType(themeDisplay)) %>"
+			value="<%= LanguageUtil.get(pageContext, group.getScopeLabel(themeDisplay)) %>"
 		/>
 
 		<liferay-ui:search-container-column-text

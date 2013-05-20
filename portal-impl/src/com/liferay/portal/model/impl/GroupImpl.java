@@ -16,7 +16,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.staging.StagingConstants;
@@ -320,74 +319,66 @@ public class GroupImpl extends GroupBaseImpl {
 		return 0;
 	}
 
-	public String getScopeName(ThemeDisplay themeDisplay)
+	public String getScopeDescriptiveName(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
-
-		String name = null;
 
 		if (getGroupId() == themeDisplay.getScopeGroupId()) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(
-				LanguageUtil.get(themeDisplay.getLocale(), "current-site"));
+			sb.append(themeDisplay.translate("current-site"));
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(
 				HtmlUtil.escape(getDescriptiveName(themeDisplay.getLocale())));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			name = sb.toString();
+			return sb.toString();
 		}
 		else if (isLayout() && (getClassPK() == themeDisplay.getPlid())) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(
-				LanguageUtil.get(themeDisplay.getLocale(), "current-page"));
+			sb.append(themeDisplay.translate("current-page"));
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(
 				HtmlUtil.escape(getDescriptiveName(themeDisplay.getLocale())));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
-			name = sb.toString();
+			return sb.toString();
 		}
 		else if (isLayoutPrototype()) {
-			name = LanguageUtil.get(themeDisplay.getLocale(), "default");
+			return themeDisplay.translate("default");
 		}
 		else {
-			name = HtmlUtil.escape(
+			return HtmlUtil.escape(
 				getDescriptiveName(themeDisplay.getLocale()));
 		}
-
-		return name;
 	}
 
-	public String getScopeType(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		String type = "site";
+	public String getScopeLabel(ThemeDisplay themeDisplay) {
+		String label = "site";
 
 		if (getGroupId() == themeDisplay.getScopeGroupId()) {
-			type = "current-site";
+			label = "current-site";
 		}
 		else if (getGroupId() == themeDisplay.getCompanyGroupId()) {
-			type = "global";
+			label = "global";
 		}
 		else if (isLayout()) {
-			type = "page";
+			label = "page";
 		}
 		else {
 			Group scopeGroup = themeDisplay.getScopeGroup();
 
 			if (scopeGroup.hasAncestor(getGroupId())) {
-				type = "parent-site";
+				label = "parent-site";
 			}
 			else if (hasAncestor(scopeGroup.getGroupId())) {
-				type = "child-site";
+				label = "child-site";
 			}
 		}
 
-		return type;
+		return label;
 	}
 
 	public Group getStagingGroup() {
