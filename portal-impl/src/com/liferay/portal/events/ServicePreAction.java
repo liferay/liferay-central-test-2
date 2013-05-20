@@ -1598,8 +1598,9 @@ public class ServicePreAction extends Action {
 
 				Group group = null;
 
-				if (layouts.size() > 0) {
+				if (!layouts.isEmpty()) {
 					layout = layouts.get(0);
+
 					group = layout.getGroup();
 				}
 
@@ -1608,7 +1609,7 @@ public class ServicePreAction extends Action {
 						group.getGroupId(), false,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-					if (layouts.size() > 0) {
+					if (!layouts.isEmpty()) {
 						layout = layouts.get(0);
 					}
 					else {
@@ -1624,7 +1625,7 @@ public class ServicePreAction extends Action {
 						liveGroup.getGroupId(), false,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-					if (layouts.size() > 0) {
+					if (!layouts.isEmpty()) {
 						layout = layouts.get(0);
 					}
 					else {
