@@ -260,6 +260,18 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	protected void setAlwaysExportable(boolean alwaysExportable) {
+	}
+
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	protected void setAlwaysStaged(boolean alwaysStaged) {
+	}
+
 	protected void setDataLevel(DataLevel dataLevel) {
 		_dataLevel = dataLevel;
 	}
