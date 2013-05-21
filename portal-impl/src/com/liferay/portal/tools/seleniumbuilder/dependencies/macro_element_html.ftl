@@ -12,9 +12,9 @@
 
 <#assign macroCommand = macro?substring(x + 1)>
 
-<#assign blank = macroNameStack.push(macroName)>
+<#assign void = macroNameStack.push(macroName)>
 
-<#assign blank = macroNameStack.pop()>
+<#assign void = macroNameStack.pop()>
 
 <div>
 	<span class="arrow">&lt;/</span><span class="tag">execute</span><span class="arrow">&gt;</span>

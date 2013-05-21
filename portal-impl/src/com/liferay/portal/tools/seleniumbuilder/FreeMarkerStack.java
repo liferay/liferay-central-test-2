@@ -14,12 +14,14 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.util.Stack;
 
 /**
  * @author Michael Hashimoto
  */
-public class StackWrapper {
+public class FreeMarkerStack {
 
 	public boolean empty() {
 		return _stack.empty();
@@ -36,7 +38,7 @@ public class StackWrapper {
 	public String push(String string) {
 		_stack.push(string);
 
-		return "";
+		return StringPool.BLANK;
 	}
 
 	private Stack<String> _stack = new Stack<String>();
