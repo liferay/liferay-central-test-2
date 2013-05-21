@@ -50,11 +50,11 @@ else if (tabs2.equals("document-updated-email")) {
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 
-String subjectParam = emailParam + "Subject_" + currentLanguageId;
-String bodyParam = emailParam + "Body_" + currentLanguageId;
+String emailSubjectParam = emailParam + "Subject_" + currentLanguageId;
+String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 
-String emailSubject = PrefsParamUtil.getString(preferences, request, subjectParam, defaultEmailSubject);
-String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, defaultEmailBody);
+String emailSubject = PrefsParamUtil.getString(preferences, request, emailSubjectParam, defaultEmailSubject);
+String emailBody = PrefsParamUtil.getString(preferences, request, emailBodyParam, defaultEmailBody);
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -355,12 +355,12 @@ String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, def
 
 				</aui:select>
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + subjectParam + "--" %>' value="<%= emailSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailSubjectParam + "--" %>' value="<%= emailSubject %>" />
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-					<aui:input name='<%= "preferences--" + bodyParam + "--" %>' type="hidden" />
+					<aui:input name='<%= "preferences--" + emailBodyParam + "--" %>' type="hidden" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 
@@ -483,7 +483,7 @@ String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, def
 		function() {
 			<c:choose>
 				<c:when test='<%= tabs2.startsWith("document-") %>'>
-					document.<portlet:namespace />fm.<portlet:namespace /><%= bodyParam %>.value = window.<portlet:namespace />editor.getHTML();
+					document.<portlet:namespace />fm.<portlet:namespace /><%= emailBodyParam %>.value = window.<portlet:namespace />editor.getHTML();
 				</c:when>
 				<c:when test='<%= tabs2.equals("display-settings") %>'>
 					document.<portlet:namespace />fm.<portlet:namespace />displayViews.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentDisplayViews);

@@ -70,11 +70,11 @@ else if (tabs2.equals("web-content-updated-email")) {
 	defaultEmailBody = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_BODY));
 }
 
-String subjectParam = emailParam + "Subject";
-String bodyParam = emailParam + "Body";
+String emailSubjectParam = emailParam + "Subject";
+String emailBodyParam = emailParam + "Body";
 
-String emailSubject = PrefsParamUtil.getString(preferences, request, subjectParam, defaultEmailSubject);
-String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, defaultEmailBody);
+String emailSubject = PrefsParamUtil.getString(preferences, request, emailSubjectParam, defaultEmailSubject);
+String emailBody = PrefsParamUtil.getString(preferences, request, emailBodyParam, defaultEmailBody);
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -149,12 +149,12 @@ String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, def
 					</c:when>
 				</c:choose>
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + subjectParam + "--" %>' value="<%= emailSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailSubjectParam + "--" %>' value="<%= emailSubject %>" />
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-					<aui:input name='<%= "preferences--" + bodyParam + "--" %>' type="hidden" />
+					<aui:input name='<%= "preferences--" + emailBodyParam + "--" %>' type="hidden" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 
@@ -243,7 +243,7 @@ String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, def
 
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.startsWith("web-content-added-") || tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") || tabs2.startsWith("web-content-updated-") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= bodyParam %>.value = window.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= emailBodyParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);

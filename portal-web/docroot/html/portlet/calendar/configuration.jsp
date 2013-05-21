@@ -26,11 +26,11 @@ String emailFromAddress = ParamUtil.getString(request, "preferences--emailFromAd
 
 boolean emailEventReminderEnabled = ParamUtil.getBoolean(request, "preferences--emailEventReminderEnabled--", CalUtil.getEmailEventReminderEnabled(preferences));
 
-String subjectParam = "emailEventReminderSubject";
-String bodyParam = "emailEventReminderBody";
+String emailSubjectParam = "emailEventReminderSubject";
+String emailBodyParam = "emailEventReminderBody";
 
-String emailSubject = ParamUtil.getString(request, "preferences--" + subjectParam + "--", CalUtil.getEmailEventReminderSubject(preferences));
-String emailBody = ParamUtil.getString(request, "preferences--" + bodyParam + "--", CalUtil.getEmailEventReminderBody(preferences));
+String emailSubject = ParamUtil.getString(request, "preferences--" + emailSubjectParam + "--", CalUtil.getEmailEventReminderSubject(preferences));
+String emailBody = ParamUtil.getString(request, "preferences--" + emailBodyParam + "--", CalUtil.getEmailEventReminderBody(preferences));
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -68,7 +68,7 @@ String emailBody = ParamUtil.getString(request, "preferences--" + bodyParam + "-
 			<aui:fieldset>
 				<aui:input label="enabled" name="preferences--emailEventReminderEnabled--" type="checkbox" value="<%= emailEventReminderEnabled %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + subjectParam + "--" %>' type="text" value="<%= emailSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailSubjectParam + "--" %>' type="text" value="<%= emailSubject %>" />
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -192,7 +192,7 @@ String emailBody = ParamUtil.getString(request, "preferences--" + bodyParam + "-
 
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.equals("event-reminder-email") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= bodyParam %>.value = window.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= emailBodyParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);

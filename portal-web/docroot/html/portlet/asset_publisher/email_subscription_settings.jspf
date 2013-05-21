@@ -26,11 +26,11 @@ String defaultEmailBody = ContentUtil.get(PropsUtil.get(PropsKeys.ASSET_PUBLISHE
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 
-String subjectParam = (String)request.getAttribute("configuration.jsp-subjectParam");
-String bodyParam = (String)request.getAttribute("configuration.jsp-bodyParam");
+String emailSubjectParam = (String)request.getAttribute("configuration.jsp-emailSubjectParam");
+String emailBodyParam = (String)request.getAttribute("configuration.jsp-emailBodyParam");
 
-String emailSubject = PrefsParamUtil.getString(preferences, request, subjectParam, defaultEmailSubject);
-String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, defaultEmailBody);
+String emailSubject = PrefsParamUtil.getString(preferences, request, emailSubjectParam, defaultEmailSubject);
+String emailBody = PrefsParamUtil.getString(preferences, request, emailBodyParam, defaultEmailBody);
 %>
 
 <liferay-ui:error key="emailAssetEntryAddedBody" message="please-enter-a-valid-body" />
@@ -69,12 +69,12 @@ String emailBody = PrefsParamUtil.getString(preferences, request, bodyParam, def
 
 		</aui:select>
 
-		<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + subjectParam + "--" %>' value="<%= emailSubject %>" />
+		<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailSubjectParam + "--" %>' value="<%= emailSubject %>" />
 
 		<aui:field-wrapper label="body">
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-			<aui:input name='<%= "preferences--" + bodyParam + "--" %>' type="hidden" />
+			<aui:input name='<%= "preferences--" + emailBodyParam + "--" %>' type="hidden" />
 		</aui:field-wrapper>
 
 		<div class="definition-of-terms">
