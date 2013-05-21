@@ -101,7 +101,7 @@ public class NavigationTag extends IncludeTag {
 	private String _headerType = "none";
 	private String _includedLayouts = "auto";
 	private boolean _nestedChildren = true;
-	private boolean _preview = false;
+	private boolean _preview;
 	private int _rootLayoutLevel = 1;
 	private String _rootLayoutType = "absolute";
 
