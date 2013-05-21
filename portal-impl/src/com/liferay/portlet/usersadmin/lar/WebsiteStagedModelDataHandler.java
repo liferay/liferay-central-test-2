@@ -76,7 +76,6 @@ public class WebsiteStagedModelDataHandler
 			importedWebsite = WebsiteLocalServiceUtil.updateWebsite(
 				existingWebsite.getWebsiteId(), website.getUrl(),
 				website.getTypeId(), website.isPrimary());
-
 		}
 
 		portletDataContext.importClassedModel(

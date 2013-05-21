@@ -52,7 +52,7 @@ public class UserGroupStagedModelDataHandlerTest
 	}
 
 	@Override
-	protected void clearStagedModel(
+	protected void deleteStagedModel(
 			StagedModel stagedModel,
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)

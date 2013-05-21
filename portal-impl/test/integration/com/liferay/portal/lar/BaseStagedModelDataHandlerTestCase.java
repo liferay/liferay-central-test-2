@@ -95,9 +95,7 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 
 		initImport();
 
-		// Clear database
-
-		clearStagedModel(stagedModel, dependentStagedModelsMap, stagingGroup);
+		deleteStagedModel(stagedModel, dependentStagedModelsMap, stagingGroup);
 
 		// Reread the staged model for import from ZIP for true testing
 
@@ -142,11 +140,12 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception;
 
-	protected void clearStagedModel(
+	protected void deleteStagedModel(
 			StagedModel stagedModel,
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
-		throws Exception {};
+		throws Exception {
+	}
 
 	protected Date getEndDate() {
 		return new Date();

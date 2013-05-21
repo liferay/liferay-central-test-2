@@ -47,28 +47,24 @@ public class OrganizationTestUtil {
 	public static Address addAddress(Organization organization)
 		throws Exception {
 
-		List<ListType> listTypeIds = ListTypeServiceUtil.getListTypes(
-			ListTypeConstants.ORGANIZATION_ADDRESS);
-
 		return AddressLocalServiceUtil.addAddress(
 			organization.getUserId(), organization.getModelClassName(),
-			organization.getPrimaryKey(), ServiceTestUtil.randomString(),
+			organization.getOrganizationId(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.nextLong(), ServiceTestUtil.randomLong(),
-			listTypeIds.get(0).getListTypeId(), false, false, null);
+			_getListTypeId(ListTypeConstants.ORGANIZATION_ADDRESS), false,
+			false, new ServiceContext());
 	}
 
 	public static EmailAddress addEmailAddress(Organization organization)
 		throws Exception {
 
-		List<ListType> listTypeIds = ListTypeServiceUtil.getListTypes(
-			ListTypeConstants.ORGANIZATION_EMAIL_ADDRESS);
-
 		return EmailAddressLocalServiceUtil.addEmailAddress(
 			organization.getUserId(), organization.getModelClassName(),
-			organization.getPrimaryKey(), "test@liferay.com",
-			listTypeIds.get(0).getListTypeId(), false, null);
+			organization.getOrganizationId(), "test@liferay.com",
+			_getListTypeId(ListTypeConstants.ORGANIZATION_EMAIL_ADDRESS), false,
+			new ServiceContext());
 	}
 
 	public static Organization addOrganization() throws Exception {
@@ -97,19 +93,16 @@ public class OrganizationTestUtil {
 	public static OrgLabor addOrgLabor(Organization organization)
 		throws Exception {
 
-		List<ListType> listTypeIds = ListTypeServiceUtil.getListTypes(
-			ListTypeConstants.ORGANIZATION_SERVICE);
-
 		return OrgLaborLocalServiceUtil.addOrgLabor(
 			organization.getOrganizationId(),
-			listTypeIds.get(0).getListTypeId(), ServiceTestUtil.nextInt(),
+			_getListTypeId(ListTypeConstants.ORGANIZATION_SERVICE),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
 			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt());
+			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt());
 	}
 
 	public static PasswordPolicy addPasswordPolicyRel(
@@ -121,32 +114,35 @@ public class OrganizationTestUtil {
 
 		PasswordPolicyRelLocalServiceUtil.addPasswordPolicyRel(
 			passwordPolicy.getPasswordPolicyId(),
-			organization.getModelClassName(), organization.getPrimaryKey());
+			organization.getModelClassName(), organization.getOrganizationId());
 
 		return passwordPolicy;
 	}
 
 	public static Phone addPhone(Organization organization) throws Exception {
-
-		List<ListType> listTypeIds = ListTypeServiceUtil.getListTypes(
-			ListTypeConstants.ORGANIZATION_PHONE);
-
 		return PhoneLocalServiceUtil.addPhone(
 			organization.getUserId(), organization.getModelClassName(),
-			organization.getPrimaryKey(), "0000000000", "000",
-			listTypeIds.get(0).getListTypeId(), false, null);
+			organization.getOrganizationId(), "0000000000", "000",
+			_getListTypeId(ListTypeConstants.ORGANIZATION_PHONE), false,
+			new ServiceContext());
 	}
 
 	public static Website addWebsite(Organization organization)
 		throws Exception {
 
-		List<ListType> listTypeIds = ListTypeServiceUtil.getListTypes(
-			ListTypeConstants.ORGANIZATION_WEBSITE);
-
 		return WebsiteLocalServiceUtil.addWebsite(
 			organization.getUserId(), organization.getModelClassName(),
-			organization.getPrimaryKey(), "http://www.test.com",
-			listTypeIds.get(0).getListTypeId(), false, null);
+			organization.getOrganizationId(), "http://www.test.com",
+			_getListTypeId(ListTypeConstants.ORGANIZATION_WEBSITE), false,
+			new ServiceContext());
+	}
+
+	private static int _getListTypeId(String type) throws Exception {
+		List<ListType> listTypes = ListTypeServiceUtil.getListTypes(type);
+
+		ListType listType = listTypes.get(0);
+
+		return listType.getListTypeId();
 	}
 
 }

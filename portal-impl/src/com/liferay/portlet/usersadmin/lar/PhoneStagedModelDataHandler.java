@@ -45,7 +45,6 @@ public class PhoneStagedModelDataHandler
 		portletDataContext.addClassedModel(
 			phoneElement, ExportImportPathUtil.getModelPath(phone), phone,
 			UsersAdminPortletDataHandler.NAMESPACE);
-
 	}
 
 	@Override

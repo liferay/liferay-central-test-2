@@ -39,14 +39,14 @@ public class EmailAddressLocalServiceImpl
 	 * @deprecated As of 6.2.0, replaced by {@link #addEmailAddress(long,
 	 *             String, long, String, int, boolean, ServiceContext)}
 	 */
-	@Deprecated
 	public EmailAddress addEmailAddress(
 			long userId, String className, long classPK, String address,
 			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		return addEmailAddress(
-			userId, className, classPK, address, typeId, primary, null);
+			userId, className, classPK, address, typeId, primary,
+			new ServiceContext());
 	}
 
 	public EmailAddress addEmailAddress(
@@ -67,23 +67,12 @@ public class EmailAddressLocalServiceImpl
 		EmailAddress emailAddress = emailAddressPersistence.create(
 			emailAddressId);
 
-		if (serviceContext != null) {
-			emailAddress.setUuid(serviceContext.getUuid());
-		}
-
+		emailAddress.setUuid(serviceContext.getUuid());
 		emailAddress.setCompanyId(user.getCompanyId());
 		emailAddress.setUserId(user.getUserId());
 		emailAddress.setUserName(user.getFullName());
-
-		if (serviceContext != null) {
-			emailAddress.setCreateDate(serviceContext.getCreateDate(now));
-			emailAddress.setModifiedDate(serviceContext.getModifiedDate(now));
-		}
-		else {
-			emailAddress.setCreateDate(now);
-			emailAddress.setModifiedDate(now);
-		}
-
+		emailAddress.setCreateDate(serviceContext.getCreateDate(now));
+		emailAddress.setModifiedDate(serviceContext.getModifiedDate(now));
 		emailAddress.setClassNameId(classNameId);
 		emailAddress.setClassPK(classPK);
 		emailAddress.setAddress(address);

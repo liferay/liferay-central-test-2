@@ -46,7 +46,6 @@ public class AddressStagedModelDataHandler
 		portletDataContext.addClassedModel(
 			addressElement, ExportImportPathUtil.getModelPath(address), address,
 			UsersAdminPortletDataHandler.NAMESPACE);
-
 	}
 
 	@Override

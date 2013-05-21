@@ -39,7 +39,6 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.util.OrganizationTestUtil;
-import com.liferay.portal.util.TestPropsValues;
 
 import java.util.List;
 import java.util.Map;
@@ -67,12 +66,12 @@ public class OrganizationStagedModelDataHandlerTest
 
 		Organization organization = OrganizationTestUtil.addOrganization();
 
-		Organization childOrganization = OrganizationTestUtil.addOrganization(
+		Organization suborganization = OrganizationTestUtil.addOrganization(
 			organization.getOrganizationId(), ServiceTestUtil.randomString(),
 			false);
 
 		addDependentStagedModel(
-			dependentStagedModelsMap, Organization.class, childOrganization);
+			dependentStagedModelsMap, Organization.class, suborganization);
 
 		Address address = OrganizationTestUtil.addAddress(organization);
 
@@ -88,7 +87,7 @@ public class OrganizationStagedModelDataHandlerTest
 		OrganizationTestUtil.addOrgLabor(organization);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId(), TestPropsValues.getUserId());
+			group.getGroupId());
 
 		PasswordPolicy passwordPolicy =
 			OrganizationTestUtil.addPasswordPolicyRel(
@@ -110,7 +109,7 @@ public class OrganizationStagedModelDataHandlerTest
 	}
 
 	@Override
-	protected void clearStagedModel(
+	protected void deleteStagedModel(
 			StagedModel stagedModel,
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
@@ -119,10 +118,10 @@ public class OrganizationStagedModelDataHandlerTest
 		List<StagedModel> dependentOrganizationStagedModels =
 			dependentStagedModelsMap.get(Organization.class.getSimpleName());
 
-		Organization childOrganization =
+		Organization suborganization =
 			(Organization)dependentOrganizationStagedModels.get(0);
 
-		OrganizationLocalServiceUtil.deleteOrganization(childOrganization);
+		OrganizationLocalServiceUtil.deleteOrganization(suborganization);
 
 		OrganizationLocalServiceUtil.deleteOrganization(
 			(Organization)stagedModel);
@@ -155,84 +154,97 @@ public class OrganizationStagedModelDataHandlerTest
 			OrganizationLocalServiceUtil.fetchOrganizationByUuidAndCompanyId(
 				stagedModel.getUuid(), group.getCompanyId());
 
-		List<StagedModel> dependentAddressStagedModels =
+		List<StagedModel> addressDependentStagedModels =
 			dependentStagedModelsMap.get(Address.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentAddressStagedModels.size());
+		Assert.assertEquals(1, addressDependentStagedModels.size());
 
-		Address address = (Address)dependentAddressStagedModels.get(0);
+		Address address = (Address)addressDependentStagedModels.get(0);
+
 		Address importedAddress =
 			AddressLocalServiceUtil.fetchAddressByUuidAndCompanyId(
 				address.getUuid(), group.getCompanyId());
 
 		Assert.assertNotNull(importedAddress);
 		Assert.assertEquals(
-			organization.getPrimaryKey(), importedAddress.getClassPK());
+			organization.getOrganizationId(), importedAddress.getClassPK());
 
-		List<StagedModel> dependentEmailAddressStagedModels =
+		List<StagedModel> emailAddressDependentStagedModels =
 			dependentStagedModelsMap.get(EmailAddress.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentEmailAddressStagedModels.size());
+		Assert.assertEquals(1, emailAddressDependentStagedModels.size());
 
 		EmailAddress emailAddress =
-			(EmailAddress)dependentEmailAddressStagedModels.get(0);
+			(EmailAddress)emailAddressDependentStagedModels.get(0);
+
 		EmailAddress importedEmailAddress =
 			EmailAddressLocalServiceUtil.fetchEmailAddressByUuidAndCompanyId(
 				emailAddress.getUuid(), group.getCompanyId());
 
 		Assert.assertNotNull(importedEmailAddress);
 		Assert.assertEquals(
-			organization.getPrimaryKey(), importedEmailAddress.getClassPK());
+			organization.getOrganizationId(),
+			importedEmailAddress.getClassPK());
 
-		List<OrgLabor> orgLabors = OrgLaborLocalServiceUtil.getOrgLabors(
-			organization.getOrganizationId());
+		List<OrgLabor> importedOrgLabors =
+			OrgLaborLocalServiceUtil.getOrgLabors(
+				organization.getOrganizationId());
 
-		Assert.assertEquals(1, orgLabors.size());
+		Assert.assertEquals(1, importedOrgLabors.size());
+
+		OrgLabor importedOrgLabor = importedOrgLabors.get(0);
+
 		Assert.assertEquals(
-			organization.getPrimaryKey(), orgLabors.get(0).getOrganizationId());
+			organization.getOrganizationId(),
+			importedOrgLabor.getOrganizationId());
 
-		List<StagedModel> dependentPasswordPolicyStagedModels =
+		List<StagedModel> passwordPolicyDependentStagedModels =
 			dependentStagedModelsMap.get(PasswordPolicy.class.getSimpleName());
-		Assert.assertEquals(1, dependentPasswordPolicyStagedModels.size());
+
+		Assert.assertEquals(1, passwordPolicyDependentStagedModels.size());
 
 		PasswordPolicy passwordPolicy =
-			(PasswordPolicy)dependentPasswordPolicyStagedModels.get(0);
-		PasswordPolicyRel passwordPolicyRel =
-			PasswordPolicyRelLocalServiceUtil.fetchPasswordPolicyRel(
-				organization.getModelClassName(), organization.getPrimaryKey());
+			(PasswordPolicy)passwordPolicyDependentStagedModels.get(0);
 
-		Assert.assertNotNull(passwordPolicyRel);
+		PasswordPolicyRel importedPasswordPolicyRel =
+			PasswordPolicyRelLocalServiceUtil.fetchPasswordPolicyRel(
+				organization.getModelClassName(),
+				organization.getOrganizationId());
+
+		Assert.assertNotNull(importedPasswordPolicyRel);
 		Assert.assertEquals(
 			passwordPolicy.getPasswordPolicyId(),
-			passwordPolicyRel.getPasswordPolicyId());
+			importedPasswordPolicyRel.getPasswordPolicyId());
 
-		List<StagedModel> dependentPhoneStagedModels =
+		List<StagedModel> phoneDependentStagedModels =
 			dependentStagedModelsMap.get(Phone.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentPhoneStagedModels.size());
+		Assert.assertEquals(1, phoneDependentStagedModels.size());
 
-		Phone phone = (Phone)dependentPhoneStagedModels.get(0);
+		Phone phone = (Phone)phoneDependentStagedModels.get(0);
+
 		Phone importedPhone =
 			PhoneLocalServiceUtil.fetchPhoneByUuidAndCompanyId(
 				phone.getUuid(), group.getCompanyId());
 
 		Assert.assertNotNull(importedPhone);
 		Assert.assertEquals(
-			organization.getPrimaryKey(), importedPhone.getClassPK());
+			organization.getOrganizationId(), importedPhone.getClassPK());
 
-		List<StagedModel> dependentWebsiteStagedModels =
+		List<StagedModel> websiteDependentStagedModels =
 			dependentStagedModelsMap.get(Website.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentWebsiteStagedModels.size());
+		Assert.assertEquals(1, websiteDependentStagedModels.size());
 
-		Website website = (Website)dependentWebsiteStagedModels.get(0);
+		Website website = (Website)websiteDependentStagedModels.get(0);
+
 		Website importedWebsite =
 			WebsiteLocalServiceUtil.fetchWebsiteByUuidAndCompanyId(
 				website.getUuid(), group.getCompanyId());
 
 		Assert.assertNotNull(importedWebsite);
 		Assert.assertEquals(
-			organization.getPrimaryKey(), importedWebsite.getClassPK());
+			organization.getOrganizationId(), importedWebsite.getClassPK());
 	}
 
 }

@@ -41,11 +41,10 @@ import java.util.List;
 public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #addAddress(long,
-	 *             String, long, String, String, String, String, String, long,
-	 *             long, int, boolean, boolean, ServiceContext)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addAddress(long, String,
+	 *             long, String, String, String, String, String, long, long,
+	 *             int, boolean, boolean, ServiceContext)}
 	 */
-	@Deprecated
 	public Address addAddress(
 			long userId, String className, long classPK, String street1,
 			String street2, String street3, String city, String zip,
@@ -55,7 +54,8 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		return addAddress(
 			userId, className, classPK, street1, street2, street3, city, zip,
-			regionId, countryId, typeId, mailing, primary, null);
+			regionId, countryId, typeId, mailing, primary,
+			new ServiceContext());
 	}
 
 	public Address addAddress(
@@ -77,23 +77,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		Address address = addressPersistence.create(addressId);
 
-		if (serviceContext != null) {
-			address.setUuid(serviceContext.getUuid());
-		}
-
+		address.setUuid(serviceContext.getUuid());
 		address.setCompanyId(user.getCompanyId());
 		address.setUserId(user.getUserId());
 		address.setUserName(user.getFullName());
-
-		if (serviceContext != null) {
-			address.setCreateDate(serviceContext.getCreateDate(now));
-			address.setModifiedDate(serviceContext.getModifiedDate(now));
-		}
-		else {
-			address.setCreateDate(now);
-			address.setModifiedDate(now);
-		}
-
+		address.setCreateDate(serviceContext.getCreateDate(now));
+		address.setModifiedDate(serviceContext.getModifiedDate(now));
 		address.setClassNameId(classNameId);
 		address.setClassPK(classPK);
 		address.setStreet1(street1);

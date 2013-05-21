@@ -38,10 +38,9 @@ import java.util.List;
 public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #addPhone(long,
-	 *             String, long, String, String, int, boolean, ServiceContext)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addPhone(long, String, long,
+	 *             String, String, int, boolean, ServiceContext)}
 	 */
-	@Deprecated
 	public Phone addPhone(
 			long userId, String className, long classPK, String number,
 			String extension, int typeId, boolean primary)
@@ -49,7 +48,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		return addPhone(
 			userId, className, classPK, number, extension, typeId, primary,
-			null);
+			new ServiceContext());
 	}
 
 	public Phone addPhone(
@@ -70,23 +69,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		Phone phone = phonePersistence.create(phoneId);
 
-		if (serviceContext != null) {
-			phone.setUuid(serviceContext.getUuid());
-		}
-
+		phone.setUuid(serviceContext.getUuid());
 		phone.setCompanyId(user.getCompanyId());
 		phone.setUserId(user.getUserId());
 		phone.setUserName(user.getFullName());
-
-		if (serviceContext != null) {
-			phone.setCreateDate(serviceContext.getCreateDate(now));
-			phone.setModifiedDate(serviceContext.getModifiedDate(now));
-		}
-		else {
-			phone.setCreateDate(now);
-			phone.setModifiedDate(now);
-		}
-
+		phone.setCreateDate(serviceContext.getCreateDate(now));
+		phone.setModifiedDate(serviceContext.getModifiedDate(now));
 		phone.setClassNameId(classNameId);
 		phone.setClassPK(classPK);
 		phone.setNumber(number);
