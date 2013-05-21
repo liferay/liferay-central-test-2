@@ -212,6 +212,8 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
+import com.liferay.portlet.backgroundtask.service.BTEntryLocalService;
+import com.liferay.portlet.backgroundtask.service.persistence.BTEntryPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -3816,6 +3818,42 @@ public abstract class LayoutLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the b t entry local service.
+	 *
+	 * @return the b t entry local service
+	 */
+	public BTEntryLocalService getBTEntryLocalService() {
+		return btEntryLocalService;
+	}
+
+	/**
+	 * Sets the b t entry local service.
+	 *
+	 * @param btEntryLocalService the b t entry local service
+	 */
+	public void setBTEntryLocalService(BTEntryLocalService btEntryLocalService) {
+		this.btEntryLocalService = btEntryLocalService;
+	}
+
+	/**
+	 * Returns the b t entry persistence.
+	 *
+	 * @return the b t entry persistence
+	 */
+	public BTEntryPersistence getBTEntryPersistence() {
+		return btEntryPersistence;
+	}
+
+	/**
+	 * Sets the b t entry persistence.
+	 *
+	 * @param btEntryPersistence the b t entry persistence
+	 */
+	public void setBTEntryPersistence(BTEntryPersistence btEntryPersistence) {
+		this.btEntryPersistence = btEntryPersistence;
+	}
+
+	/**
 	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
@@ -4589,6 +4627,10 @@ public abstract class LayoutLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = BTEntryLocalService.class)
+	protected BTEntryLocalService btEntryLocalService;
+	@BeanReference(type = BTEntryPersistence.class)
+	protected BTEntryPersistence btEntryPersistence;
 	@BeanReference(type = ExpandoValueLocalService.class)
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(type = ExpandoValueService.class)
