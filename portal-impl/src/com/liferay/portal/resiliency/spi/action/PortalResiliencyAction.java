@@ -43,9 +43,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class PortalResiliencyAction extends Action {
 
-	public static final String PORTAL_RESILIENCY_ACTION =
-		"PORTAL_RESILIENCY_ACTION";
-
 	@Override
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -53,24 +50,26 @@ public class PortalResiliencyAction extends Action {
 		throws Exception {
 
 		AgentRequest agentRequest = (AgentRequest)request.getAttribute(
-			SPIAgent.SPI_AGENT_REQUEST);
-		AgentResponse agentResponse = (AgentResponse)request.getAttribute(
-			SPIAgent.SPI_AGENT_RESPONSE);
+			WebKeys.SPI_AGENT_REQUEST);
 
-		HttpSession httpSession = request.getSession();
+		HttpSession session = request.getSession();
 
-		agentRequest.populateSessionAttributes(httpSession);
+		agentRequest.populateSessionAttributes(session);
 
 		PrincipalThreadLocal.setPassword(
-			(String)httpSession.getAttribute(WebKeys.USER_PASSWORD));
+			(String)session.getAttribute(WebKeys.USER_PASSWORD));
 
 		try {
 			_doExecute(request, response);
 		}
 		finally {
+			AgentResponse agentResponse = (AgentResponse)request.getAttribute(
+				WebKeys.SPI_AGENT_RESPONSE);
+
 			agentResponse.captureRequestSessionAttributes(request);
 
-			request.setAttribute(PORTAL_RESILIENCY_ACTION, Boolean.TRUE);
+			request.setAttribute(
+				WebKeys.PORTAL_RESILIENCY_ACTION, Boolean.TRUE);
 		}
 
 		return null;
@@ -84,21 +83,21 @@ public class PortalResiliencyAction extends Action {
 			PortletContainerUtil.getPortletContainer();
 
 		Portlet portlet = (Portlet)request.getAttribute(
-			SPIAgent.SPI_AGENT_PORTLET);
+			WebKeys.SPI_AGENT_PORTLET);
 
 		portletContainer.preparePortlet(request, portlet);
 
 		SPIAgent.Lifecycle lifecycle = (SPIAgent.Lifecycle)request.getAttribute(
-			SPIAgent.SPI_AGENT_LIFECYCLE);
+			WebKeys.SPI_AGENT_LIFECYCLE);
 
 		switch (lifecycle) {
-
 			case ACTION :
 
-				// Action and event may make a transient change to Layout type
-				// setting, this really should be done via regular request
-				// attribute. But to avoid massive refactor, spi simply sends
-				// back changed layout type setting to mpi.
+				// Action and event requests can make a transient change to a
+				// layout's type settings. The fix should be done via a regular
+				// request attribute, but to avoid a massive refactor, the SPI
+				// simply sends back the modified layout type settings to the
+				// MPI.
 
 				Layout requestLayout = (Layout)request.getAttribute(
 					WebKeys.LAYOUT);
@@ -112,26 +111,25 @@ public class PortalResiliencyAction extends Action {
 
 				if (!newTypeSettings.equals(typeSettings)) {
 					request.setAttribute(
-						SPIAgent.SPI_AGENT_LAYOUT_TYPE_SETTINGS,
+						WebKeys.SPI_AGENT_LAYOUT_TYPE_SETTINGS,
 						newTypeSettings);
 				}
 
 				request.setAttribute(
-					SPIAgent.SPI_AGENT_ACTION_RESULT, actionResult);
+					WebKeys.SPI_AGENT_ACTION_RESULT, actionResult);
 
 				break;
 
 			case EVENT :
-
 				requestLayout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 				typeSettings = requestLayout.getTypeSettings();
 
 				Layout layout = (Layout)request.getAttribute(
-					SPIAgent.SPI_AGENT_LAYOUT);
+					WebKeys.SPI_AGENT_LAYOUT);
 
 				Event event = (Event)request.getAttribute(
-					SPIAgent.SPI_AGENT_EVENT);
+					WebKeys.SPI_AGENT_EVENT);
 
 				List<Event> events = portletContainer.processEvent(
 					request, response, portlet, layout, event);
@@ -140,22 +138,20 @@ public class PortalResiliencyAction extends Action {
 
 				if (!newTypeSettings.equals(typeSettings)) {
 					request.setAttribute(
-						SPIAgent.SPI_AGENT_LAYOUT_TYPE_SETTINGS,
+						WebKeys.SPI_AGENT_LAYOUT_TYPE_SETTINGS,
 						newTypeSettings);
 				}
 
-				request.setAttribute(SPIAgent.SPI_AGENT_EVENT_RESULT, events);
+				request.setAttribute(WebKeys.SPI_AGENT_EVENT_RESULT, events);
 
 				break;
 
 			case RENDER :
-
 				portletContainer.render(request, response, portlet);
 
 				break;
 
 			case RESOURCE :
-
 				portletContainer.serveResource(request, response, portlet);
 
 				break;

@@ -15,7 +15,6 @@
 package com.liferay.portal.resiliency.spi.agent;
 
 import com.liferay.portal.kernel.resiliency.PortalResiliencyException;
-import com.liferay.portal.kernel.resiliency.spi.agent.SPIAgent;
 import com.liferay.portal.kernel.resiliency.spi.agent.annotation.Direction;
 import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
 import com.liferay.portal.kernel.servlet.MetaInfoCacheServletResponse.MetaData;
@@ -23,11 +22,10 @@ import com.liferay.portal.kernel.servlet.MetaInfoCacheServletResponse;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.resiliency.spi.action.PortalResiliencyAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -53,7 +51,7 @@ public class AgentResponse extends AgentSerializable {
 			request, Direction.RESPONSE);
 
 		AgentRequest agentRequest = (AgentRequest)request.getAttribute(
-			SPIAgent.SPI_AGENT_REQUEST);
+			WebKeys.SPI_AGENT_REQUEST);
 
 		Map<String, Serializable> originalSessionAttributes =
 			agentRequest.getOriginalSessionAttributes();
@@ -84,7 +82,7 @@ public class AgentResponse extends AgentSerializable {
 		throws IOException {
 
 		Boolean portalResiliencyAction = (Boolean)request.getAttribute(
-			PortalResiliencyAction.PORTAL_RESILIENCY_ACTION);
+			WebKeys.PORTAL_RESILIENCY_ACTION);
 
 		if (portalResiliencyAction != Boolean.TRUE) {
 			portalResiliencyResponse = false;
@@ -134,10 +132,10 @@ public class AgentResponse extends AgentSerializable {
 						StringBundler sb = new StringBundler(6);
 
 						sb.append(content.substring(0, index));
-						sb.append("<div class='portlet-msg-info'>");
-						sb.append("<b>Above portlet is from SPI ");
+						sb.append("<div class=\"portlet-msg-info\"><strong>");
+						sb.append("This portlet is from SPI ");
 						sb.append(PortalUtil.getPortalPort(false));
-						sb.append("</b></div>");
+						sb.append("</strong></div>");
 						sb.append(content.substring(index));
 
 						content = sb.toString();
@@ -154,52 +152,53 @@ public class AgentResponse extends AgentSerializable {
 		throws PortalResiliencyException {
 
 		if (exception != null) {
-			throw new PortalResiliencyException("SPI Exception", exception);
+			throw new PortalResiliencyException("SPI exception", exception);
 		}
 
-		if (portalResiliencyResponse) {
-			String typeSetting = (String)distributedRequestAttributes.remove(
-				SPIAgent.SPI_AGENT_LAYOUT_TYPE_SETTINGS);
-
-			if (typeSetting != null) {
-				Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
-
-				layout.setTypeSettings(typeSetting);
-			}
-
-			for (Map.Entry<String, Serializable> entry :
-					distributedRequestAttributes.entrySet()) {
-
-				request.setAttribute(entry.getKey(), entry.getValue());
-			}
-
-			HttpSession session = request.getSession();
-
-			for (Map.Entry<String, Serializable> entry :
-					deltaSessionAttributes.entrySet()) {
-
-				session.setAttribute(entry.getKey(), entry.getValue());
-			}
-
-			try {
-				MetaInfoCacheServletResponse.finishResponse(metaData, response);
-
-				if (byteData != null) {
-					ServletResponseUtil.write(
-						response, ByteBuffer.wrap(byteData));
-				}
-
-				if (stringData != null) {
-					ServletResponseUtil.write(
-						response, CharBuffer.wrap(stringData));
-				}
-			}
-			catch (IOException ioe) {
-				throw new PortalResiliencyException(ioe);
-			}
-
-			restoreThreadLocals();
+		if (!portalResiliencyResponse) {
+			return;
 		}
+
+		String typeSettings = (String)distributedRequestAttributes.remove(
+			WebKeys.SPI_AGENT_LAYOUT_TYPE_SETTINGS);
+
+		if (typeSettings != null) {
+			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+			layout.setTypeSettings(typeSettings);
+		}
+
+		for (Map.Entry<String, Serializable> entry :
+				distributedRequestAttributes.entrySet()) {
+
+			request.setAttribute(entry.getKey(), entry.getValue());
+		}
+
+		HttpSession session = request.getSession();
+
+		for (Map.Entry<String, Serializable> entry :
+				deltaSessionAttributes.entrySet()) {
+
+			session.setAttribute(entry.getKey(), entry.getValue());
+		}
+
+		try {
+			MetaInfoCacheServletResponse.finishResponse(metaData, response);
+
+			if (byteData != null) {
+				ServletResponseUtil.write(response, ByteBuffer.wrap(byteData));
+			}
+
+			if (stringData != null) {
+				ServletResponseUtil.write(
+					response, CharBuffer.wrap(stringData));
+			}
+		}
+		catch (IOException ioe) {
+			throw new PortalResiliencyException(ioe);
+		}
+
+		restoreThreadLocals();
 	}
 
 	public void setException(Exception exception) {
