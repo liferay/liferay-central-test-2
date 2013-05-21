@@ -44,7 +44,7 @@ import org.junit.runner.RunWith;
 public class BookmarksExportImportTest extends BasePortletExportImportTestCase {
 
 	@Override
-	public String getNameSpace() {
+	public String getNamespace() {
 		return BookmarksPortletDataHandler.NAMESPACE;
 	}
 
@@ -62,7 +62,7 @@ public class BookmarksExportImportTest extends BasePortletExportImportTestCase {
 	protected Map<String, String[]> getExportParameterMap() throws Exception {
 		Map<String, String[]> parameterMap = super.getExportParameterMap();
 
-		addBooleanParameter(parameterMap, "entries", true);
+		addParameter(parameterMap, "entries", true);
 
 		return parameterMap;
 	}
@@ -71,7 +71,7 @@ public class BookmarksExportImportTest extends BasePortletExportImportTestCase {
 	protected Map<String, String[]> getImportParameterMap() throws Exception {
 		Map<String, String[]> parameterMap = super.getImportParameterMap();
 
-		addBooleanParameter(parameterMap, "entries", true);
+		addParameter(parameterMap, "entries", true);
 
 		return parameterMap;
 	}

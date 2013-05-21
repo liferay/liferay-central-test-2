@@ -62,7 +62,7 @@ import org.junit.runner.RunWith;
 public class JournalExportImportTest extends BasePortletExportImportTestCase {
 
 	@Override
-	public String getNameSpace() {
+	public String getNamespace() {
 		return JournalPortletDataHandler.NAMESPACE;
 	}
 
@@ -170,23 +170,22 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 			PortletDataHandlerKeys.PORTLET_METADATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
 
-		addBooleanParameter(parameterMap, "categories", true);
-		addBooleanParameter(parameterMap, "comments", true);
-		addBooleanParameter(parameterMap, "embedded-assets", true);
-		addBooleanParameter(parameterMap, "feeds", true);
-		addBooleanParameter(parameterMap, "ratings", true);
-		addBooleanParameter(parameterMap, "structures-and-templates", true);
-		addBooleanParameter(parameterMap, "tags", true);
-		addBooleanParameter(parameterMap, "version-history", true);
-		addBooleanParameter(parameterMap, "web-content", true);
-
+		addParameter(parameterMap, "categories", true);
+		addParameter(parameterMap, "comments", true);
 		addParameter(parameterMap, "doAsGroupId", String.valueOf(groupId));
+		addParameter(parameterMap, "embedded-assets", true);
+		addParameter(parameterMap, "feeds", true);
 		addParameter(parameterMap, "groupId", String.valueOf(groupId));
 		addParameter(
 			parameterMap, "permissionsAssignedToRoles",
 			Boolean.TRUE.toString());
 		addParameter(parameterMap, "plid", String.valueOf(plid));
 		addParameter(parameterMap, "portletResource", PortletKeys.JOURNAL);
+		addParameter(parameterMap, "ratings", true);
+		addParameter(parameterMap, "structures-and-templates", true);
+		addParameter(parameterMap, "tags", true);
+		addParameter(parameterMap, "version-history", true);
+		addParameter(parameterMap, "web-content", true);
 
 		return parameterMap;
 	}

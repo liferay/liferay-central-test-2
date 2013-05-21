@@ -54,7 +54,7 @@ import org.powermock.api.mockito.PowerMockito;
  */
 public class BasePortletExportImportTestCase extends PowerMockito {
 
-	public String getNameSpace() {
+	public String getNamespace() {
 		return null;
 	}
 
@@ -137,13 +137,19 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 			targetAssetEntry.getEntryId(), 0, weight);
 	}
 
-	protected void addBooleanParameter(
+	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, boolean value) {
 
-		addBooleanParameter(parameterMap, getNameSpace(), name, value);
+		addParameter(parameterMap, getNamespace(), name, value);
 	}
 
-	protected void addBooleanParameter(
+	protected void addParameter(
+		Map<String, String[]> parameterMap, String name, String value) {
+
+		parameterMap.put(name, new String[] {value});
+	}
+
+	protected void addParameter(
 		Map<String, String[]> parameterMap, String namespace, String name,
 		boolean value) {
 
@@ -153,12 +159,6 @@ public class BasePortletExportImportTestCase extends PowerMockito {
 		addParameter(
 			parameterMap, portletDataHandlerBoolean.getNamespacedControlName(),
 			String.valueOf(value));
-	}
-
-	protected void addParameter(
-		Map<String, String[]> parameterMap, String name, String value) {
-
-		parameterMap.put(name, new String[] {value});
 	}
 
 	protected StagedModel addStagedModel(long groupId) throws Exception {

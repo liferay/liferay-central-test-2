@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 public class BlogsExportImportTest extends BasePortletExportImportTestCase {
 
 	@Override
-	public String getNameSpace() {
+	public String getNamespace() {
 		return BlogsPortletDataHandler.NAMESPACE;
 	}
 
@@ -66,8 +66,8 @@ public class BlogsExportImportTest extends BasePortletExportImportTestCase {
 	protected Map<String, String[]> getExportParameterMap() throws Exception {
 		Map<String, String[]> parameterMap = super.getExportParameterMap();
 
-		addBooleanParameter(parameterMap, "entries", true);
-		addBooleanParameter(parameterMap, "embedded-assets", true);
+		addParameter(parameterMap, "embedded-assets", true);
+		addParameter(parameterMap, "entries", true);
 
 		return parameterMap;
 	}
@@ -76,8 +76,8 @@ public class BlogsExportImportTest extends BasePortletExportImportTestCase {
 	protected Map<String, String[]> getImportParameterMap() throws Exception {
 		Map<String, String[]> parameterMap = super.getImportParameterMap();
 
-		addBooleanParameter(parameterMap, "entries", true);
-		addBooleanParameter(parameterMap, "embedded-assets", true);
+		addParameter(parameterMap, "embedded-assets", true);
+		addParameter(parameterMap, "entries", true);
 
 		return parameterMap;
 	}
