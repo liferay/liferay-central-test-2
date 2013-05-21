@@ -356,7 +356,7 @@ if (feed != null) {
 				ddmResource: '<%= ddmResource %>',
 				dialog: {
 					destroyOnHide: true,
-					zIndex: Liferay.zIndex.WINDOW + 2
+					zIndex: (++Liferay.zIndex.WINDOW)
 				},
 				eventName: '<portlet:namespace />selectStructure',
 				groupId: <%= groupId %>,
