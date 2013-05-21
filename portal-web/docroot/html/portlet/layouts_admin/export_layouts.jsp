@@ -40,15 +40,17 @@ boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 String rootNodeName = ParamUtil.getString(request, "rootNodeName");
 
-long startDateTime = ParamUtil.getLong(request, "startDate");
-long endDateTime = ParamUtil.getLong(request, "endDate");
-
 Date startDate = null;
-Date endDate = null;
+
+long startDateTime = ParamUtil.getLong(request, "startDate");
 
 if (startDateTime > 0) {
 	startDate = new Date(startDateTime);
 }
+
+Date endDate = null;
+
+long endDateTime = ParamUtil.getLong(request, "endDate");
 
 if (endDateTime > 0) {
 	endDate = new Date(endDateTime);

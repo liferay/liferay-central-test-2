@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-ManifestSummary manifestSummary = (ManifestSummary)request.getAttribute("render_controls.jsp-manifestSummary");
 PortletDataHandlerControl[] controls = (PortletDataHandlerControl[])request.getAttribute("render_controls.jsp-controls");
+ManifestSummary manifestSummary = (ManifestSummary)request.getAttribute("render_controls.jsp-manifestSummary");
 
 for (int i = 0; i < controls.length; i++) {
 %>
