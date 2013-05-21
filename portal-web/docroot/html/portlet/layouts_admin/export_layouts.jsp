@@ -105,10 +105,10 @@ if (endDateTime > 0) {
 			</c:if>
 
 			<%
-			List<Portlet> instanciatedPortlets = LayoutExporter.getInstanciatedPortlets(liveGroupId, privateLayout);
+			List<Portlet> portletDataHandlerPortlets = LayoutExporter.getPortletDataHandlerPortlets(liveGroupId, privateLayout);
 			%>
 
-			<c:if test="<%= !instanciatedPortlets.isEmpty() %>">
+			<c:if test="<%= !portletDataHandlerPortlets.isEmpty() %>">
 				<aui:fieldset cssClass="options-group" label="application-configuration">
 					<ul class="lfr-tree unstyled">
 						<li class="tree-item">
@@ -139,9 +139,9 @@ if (endDateTime > 0) {
 									<%
 									Set<String> portletDataHandlerClasses = new HashSet<String>();
 
-									instanciatedPortlets = ListUtil.sort(instanciatedPortlets, new PortletTitleComparator(application, locale));
+									portletDataHandlerPortlets = ListUtil.sort(portletDataHandlerPortlets, new PortletTitleComparator(application, locale));
 
-									for (Portlet portlet : instanciatedPortlets) {
+									for (Portlet portlet : portletDataHandlerPortlets) {
 										String portletDataHandlerClass = portlet.getPortletDataHandlerClass();
 
 										if (!portletDataHandlerClasses.contains(portletDataHandlerClass)) {

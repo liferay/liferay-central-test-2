@@ -136,48 +136,53 @@ public class LayoutExporter {
 		return portlets;
 	}
 
-	public static List<Portlet> getInstanciatedPortlets(List<Layout> layouts)
+	public static List<Portlet> getPortletDataHandlerPortlets(
+			List<Layout> layouts)
 		throws SystemException {
 
-		List<Portlet> portletsList = new ArrayList<Portlet>();
-		Set<String> portletIdsSet = new HashSet<String>();
+		List<Portlet> portlets = new ArrayList<Portlet>();
+		Set<String> rootPortletIds = new HashSet<String>();
 
 		for (Layout curLayout : layouts) {
-			if (curLayout.isTypePortlet()) {
-				LayoutTypePortlet curLayoutTypePortlet =
-					(LayoutTypePortlet)curLayout.getLayoutType();
+			if (!curLayout.isTypePortlet()) {
+				continue;
+			}
 
-				for (String portletId : curLayoutTypePortlet.getPortletIds()) {
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						curLayout.getCompanyId(), portletId);
+			LayoutTypePortlet curLayoutTypePortlet =
+				(LayoutTypePortlet)curLayout.getLayoutType();
 
-					if (portlet == null) {
-						continue;
-					}
+			for (String portletId : curLayoutTypePortlet.getPortletIds()) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					curLayout.getCompanyId(), portletId);
 
-					PortletDataHandler portletDataHandler =
-						portlet.getPortletDataHandlerInstance();
-
-					if ((portletDataHandler != null) &&
-						!portletIdsSet.contains(portlet.getRootPortletId())) {
-
-						portletIdsSet.add(portlet.getRootPortletId());
-
-						portletsList.add(portlet);
-					}
+				if (portlet == null) {
+					continue;
 				}
+
+				PortletDataHandler portletDataHandler =
+					portlet.getPortletDataHandlerInstance();
+
+				if ((portletDataHandler == null) ||
+					rootPortletIds.contains(portlet.getRootPortletId())) {
+
+					continue;
+				}
+
+				rootPortletIds.add(portlet.getRootPortletId());
+
+				portlets.add(portlet);
 			}
 		}
 
-		return portletsList;
+		return portlets;
 	}
 
-	public static List<Portlet> getInstanciatedPortlets(
-			long liveGroupId, boolean privateLayout)
+	public static List<Portlet> getPortletDataHandlerPortlets(
+			long groupId, boolean privateLayout)
 		throws SystemException {
 
-		return getInstanciatedPortlets(
-			LayoutLocalServiceUtil.getLayouts(liveGroupId, privateLayout));
+		return getPortletDataHandlerPortlets(
+			LayoutLocalServiceUtil.getLayouts(groupId, privateLayout));
 	}
 
 	public static void updateLastPublishDate(

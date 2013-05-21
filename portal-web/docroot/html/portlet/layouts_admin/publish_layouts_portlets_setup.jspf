@@ -27,10 +27,10 @@ else {
 	exportLayouts = LayoutLocalServiceUtil.getLayouts(selGroup.getGroupId(), privateLayout);
 }
 
-List<Portlet> instanciatedPortlets = LayoutExporter.getInstanciatedPortlets(exportLayouts);
+List<Portlet> portletDataHandlerPortlets = LayoutExporter.getPortletDataHandlerPortlets(exportLayouts);
 %>
 
-<c:if test="<%= !instanciatedPortlets.isEmpty() %>">
+<c:if test="<%= !portletDataHandlerPortlets.isEmpty() %>">
 	<ul class="lfr-tree unstyled">
 		<li class="tree-item">
 			<aui:input checked="<%= true %>" helpMessage="all-applications-publish-help" id="allApplications" label="all-applications" name="<%= PortletDataHandlerKeys.PORTLET_SETUP_ALL %>" type="radio" value="<%= true %>" />
@@ -57,9 +57,9 @@ List<Portlet> instanciatedPortlets = LayoutExporter.getInstanciatedPortlets(expo
 				<%
 				Set<String> portletDataHandlerClasses = new HashSet<String>();
 
-				instanciatedPortlets = ListUtil.sort(instanciatedPortlets, new PortletTitleComparator(application, locale));
+				portletDataHandlerPortlets = ListUtil.sort(portletDataHandlerPortlets, new PortletTitleComparator(application, locale));
 
-				for (Portlet portlet : instanciatedPortlets) {
+				for (Portlet portlet : portletDataHandlerPortlets) {
 					String portletDataHandlerClass = portlet.getPortletDataHandlerClass();
 
 					if (!portletDataHandlerClasses.contains(portletDataHandlerClass)) {
