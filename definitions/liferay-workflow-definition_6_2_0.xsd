@@ -376,7 +376,7 @@
 	</xs:group>
 	<xs:simpleType name="email-address-type">
 		<xs:restriction base="xs:string">
-			<xs:pattern value="[^@]+@[^\.]+\..+"/>
+			<xs:pattern value="[^@]+@[^\.]+\..+" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="execution-type">
