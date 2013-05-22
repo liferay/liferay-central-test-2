@@ -76,7 +76,8 @@ public class ServletContextUtil {
 		String lastModifiedCacheKey = null;
 
 		if (cache) {
-			lastModifiedCacheKey = ServletContextUtil.class.getName().concat(
+			lastModifiedCacheKey = ServletContextUtil.class.getName();
+			lastModifiedCacheKey = lastModifiedCacheKey.concat(
 				StringPool.PERIOD).concat(path);
 
 			Long lastModified = (Long)servletContext.getAttribute(
@@ -113,10 +114,8 @@ public class ServletContextUtil {
 					else {
 						URLConnection urlConnection = url.openConnection();
 
-						long curLastModified = urlConnection.getLastModified();
-
-						if (curLastModified > lastModified) {
-							lastModified = curLastModified;
+						if (urlConnection.getLastModified() > lastModified) {
+							lastModified = urlConnection.getLastModified();
 						}
 					}
 				}
