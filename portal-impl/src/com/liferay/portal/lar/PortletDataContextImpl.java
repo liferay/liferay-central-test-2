@@ -281,8 +281,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		addLocks(clazz, String.valueOf(classPK));
 		addPermissions(clazz, classPK);
 
-		boolean portletMetadataAll = getBooleanParameter(
-			namespace, PortletDataHandlerKeys.PORTLET_METADATA_ALL);
+		boolean portletMetadataAll = MapUtil.getBoolean(
+			getParameterMap(), PortletDataHandlerKeys.PORTLET_METADATA_ALL);
 
 		if (portletMetadataAll ||
 			getBooleanParameter(namespace, "categories")) {
@@ -1243,8 +1243,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		importLocks(clazz, String.valueOf(classPK), String.valueOf(newClassPK));
 		importPermissions(clazz, classPK, newClassPK);
 
-		boolean portletMetadataAll = getBooleanParameter(
-			namespace, PortletDataHandlerKeys.PORTLET_METADATA_ALL);
+		boolean portletMetadataAll = MapUtil.getBoolean(
+			getParameterMap(), PortletDataHandlerKeys.PORTLET_METADATA_ALL);
 
 		if (portletMetadataAll || getBooleanParameter(namespace, "comments")) {
 			importComments(clazz, classPK, newClassPK, getScopeGroupId());
@@ -1725,8 +1725,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		// Asset
 
-		boolean portletMetadataAll = getBooleanParameter(
-			namespace, PortletDataHandlerKeys.PORTLET_METADATA_ALL);
+		boolean portletMetadataAll = MapUtil.getBoolean(
+			getParameterMap(), PortletDataHandlerKeys.PORTLET_METADATA_ALL);
 
 		if (isResourceMain(classedModel)) {
 			if (portletMetadataAll ||
