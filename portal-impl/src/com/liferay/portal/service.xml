@@ -579,6 +579,7 @@
 
 		<!-- References -->
 
+		<reference package-path="com.liferay.portlet.backgroundtask" entity="BTEntry" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />

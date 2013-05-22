@@ -80,7 +80,6 @@ import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.backgroundtask.model.BTEntry;
-import com.liferay.portlet.backgroundtask.service.BTEntryLocalService;
 import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
@@ -805,7 +804,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> taskContextMap = createTaskContextMap(
+		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
@@ -900,7 +899,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> taskContextMap = createTaskContextMap(
+		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
 		BTEntry btEntry = btEntryLocalService.addEntry(
@@ -909,7 +908,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			new ServiceContext());
 
 		return btEntry.getBtEntryId();
-
 	}
 
 	public Layout fetchFirstLayout(
@@ -1602,7 +1600,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> taskContextMap = createTaskContextMap(
+		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			groupId, privateLayout, null, parameterMap, null, null);
 
 		BTEntry btEntry = btEntryLocalService.addEntry(
@@ -1747,7 +1745,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId, Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> taskContextMap = createTaskContextMap(
+		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			plid, groupId, portletId, parameterMap, null, null);
 
 		BTEntry btEntry = btEntryLocalService.addEntry(
@@ -2656,7 +2654,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected Map<String, Serializable> createTaskContextMap(
+	protected Map<String, Serializable> buildTaskContextMap(
 		long groupId, boolean privateLayout, long[] layoutIds,
 		Map<String, String[]> parameterMap, Date startDate, Date endDate) {
 
@@ -2665,7 +2663,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		taskContextMap.put("groupId", groupId);
 
-		taskContextMap.put("privateLayout", privateLayout);
+		if (endDate != null) {
+			taskContextMap.put("endDate", endDate);
+		}
 
 		if (layoutIds != null) {
 			taskContextMap.put("layoutIds", layoutIds);
@@ -2678,30 +2678,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			taskContextMap.put("parameterMap", serializableParameterMap);
 		}
 
+		taskContextMap.put("privateLayout", privateLayout);
+
 		if (startDate != null) {
 			taskContextMap.put("startDate", startDate);
-		}
-
-		if (endDate != null) {
-			taskContextMap.put("endDate", endDate);
 		}
 
 		return taskContextMap;
 	}
 
-	protected Map<String, Serializable> createTaskContextMap(
+	protected Map<String, Serializable> buildTaskContextMap(
 		long plid, long groupId, String portletId,
 		Map<String, String[]> parameterMap, Date startDate, Date endDate) {
 
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();
 
-		taskContextMap.put("plid", plid);
-
 		taskContextMap.put("groupId", groupId);
 
-		if (Validator.isNotNull(portletId)) {
-			taskContextMap.put("portletId", portletId);
+		if (endDate != null) {
+			taskContextMap.put("endDate", endDate);
 		}
 
 		if (parameterMap != null) {
@@ -2711,12 +2707,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			taskContextMap.put("parameterMap", serializableParameterMap);
 		}
 
-		if (startDate != null) {
-			taskContextMap.put("startDate", startDate);
+		taskContextMap.put("plid", plid);
+
+		if (Validator.isNotNull(portletId)) {
+			taskContextMap.put("portletId", portletId);
 		}
 
-		if (endDate != null) {
-			taskContextMap.put("endDate", endDate);
+		if (startDate != null) {
+			taskContextMap.put("startDate", startDate);
 		}
 
 		return taskContextMap;
@@ -2766,9 +2764,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 	}
-
-	@BeanReference(type = BTEntryLocalService.class)
-	protected BTEntryLocalService btEntryLocalService;
 
 	@BeanReference(type = LayoutLocalServiceHelper.class)
 	protected LayoutLocalServiceHelper layoutLocalServiceHelper;
