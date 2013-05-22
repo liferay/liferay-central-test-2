@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatalists.ddm;
 
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission;
 import com.liferay.portlet.dynamicdatamapping.util.BaseDDMDisplay;
 
 /**
@@ -27,7 +28,7 @@ public class DDLDDMDisplay extends BaseDDMDisplay {
 	}
 
 	public String getResourceName() {
-		return "com.liferay.portlet.dynamicdatalists";
+		return DDLPermission.RESOURCE_NAME;
 	}
 
 }
