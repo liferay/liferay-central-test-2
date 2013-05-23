@@ -319,6 +319,54 @@ public class AssetPublisherExportImportTest
 	}
 
 	@Test
+	public void testSeveralJournalStructures() throws Exception {
+		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
+			group.getGroupId(), JournalArticle.class.getName());
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		serviceContext.setUuid(ddmStructure1.getUuid());
+
+		DDMStructure importedDDMStructure1 = DDMStructureTestUtil.addStructure(
+			importedGroup.getGroupId(), JournalArticle.class.getName(),
+			ddmStructure1.getXsd(), LocaleUtil.getDefault(), serviceContext);
+
+		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
+			group.getGroupId(), JournalArticle.class.getName());
+
+		serviceContext.setUuid(ddmStructure2.getUuid());
+
+		DDMStructure importedDDMStructure2 = DDMStructureTestUtil.addStructure(
+			importedGroup.getGroupId(), JournalArticle.class.getName(),
+			ddmStructure1.getXsd(), LocaleUtil.getDefault(), serviceContext);
+
+		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
+
+		preferenceMap.put(
+			"anyClassTypeJournalArticleAssetRendererFactory",
+			new String[] {
+				String.valueOf(Boolean.FALSE)
+			});
+
+		preferenceMap.put(
+			"classTypeIdsJournalArticleAssetRendererFactory",
+			new String[] {
+				String.valueOf(ddmStructure1.getStructureId()),
+				String.valueOf(ddmStructure2.getStructureId())
+			});
+
+		PortletPreferences portletPreferences = getImportedPortletPreferences(
+			preferenceMap);
+
+		Assert.assertEquals(
+			importedDDMStructure1.getStructureId() + StringPool.COMMA +
+				importedDDMStructure2.getStructureId(),
+			StringUtil.merge(
+				portletPreferences.getValues(
+					"classTypeIdsJournalArticleAssetRendererFactory", null)));
+	}
+
+	@Test
 	public void testSeveralLayoutScopeIds() throws Exception {
 		Company company = CompanyLocalServiceUtil.getCompany(
 			layout.getCompanyId());
@@ -410,54 +458,6 @@ public class AssetPublisherExportImportTest
 		Assert.assertEquals(
 			sb.toString(),
 			StringUtil.merge(portletPreferences.getValues("scopeIds", null)));
-	}
-
-	@Test
-	public void testSeveralJournalStructures() throws Exception {
-		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
-			group.getGroupId(), JournalArticle.class.getName());
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
-		serviceContext.setUuid(ddmStructure1.getUuid());
-
-		DDMStructure importedDDMStructure1 = DDMStructureTestUtil.addStructure(
-			importedGroup.getGroupId(), JournalArticle.class.getName(),
-			ddmStructure1.getXsd(), LocaleUtil.getDefault(), serviceContext);
-
-		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
-			group.getGroupId(), JournalArticle.class.getName());
-
-		serviceContext.setUuid(ddmStructure2.getUuid());
-
-		DDMStructure importedDDMStructure2 = DDMStructureTestUtil.addStructure(
-			importedGroup.getGroupId(), JournalArticle.class.getName(),
-			ddmStructure1.getXsd(), LocaleUtil.getDefault(), serviceContext);
-
-		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
-
-		preferenceMap.put(
-			"anyClassTypeJournalArticleAssetRendererFactory",
-			new String[] {
-				String.valueOf(Boolean.FALSE)
-			});
-
-		preferenceMap.put(
-			"classTypeIdsJournalArticleAssetRendererFactory",
-			new String[] {
-				String.valueOf(ddmStructure1.getStructureId()),
-				String.valueOf(ddmStructure2.getStructureId())
-			});
-
-		PortletPreferences portletPreferences = getImportedPortletPreferences(
-			preferenceMap);
-
-		Assert.assertEquals(
-			importedDDMStructure1.getStructureId() + StringPool.COMMA +
-				importedDDMStructure2.getStructureId(),
-			StringUtil.merge(
-				portletPreferences.getValues(
-					"classTypeIdsJournalArticleAssetRendererFactory", null)));
 	}
 
 	@Test
