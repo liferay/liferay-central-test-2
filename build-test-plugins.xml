@@ -263,44 +263,20 @@ print AdminConfig.save()</echo>
 		<if>
 			<equals arg1="${scm.tool}" arg2="git" />
 			<then>
-				<if>
-					<os family="windows" />
-					<then>
-						<exec dir="${lp.plugins.dir}" executable="${shell.executable}">
-							<arg line="-c &quot;git checkout portlets/sample-service-builder-portlet&quot;" />
-						</exec>
-					</then>
-					<else>
-						<exec dir="${lp.plugins.dir}" executable="${shell.executable}">
-							<arg line="git checkout portlets/sample-service-builder-portlet" />
-						</exec>
-					</else>
-				</if>
+				<exec dir="${lp.plugins.dir}" executable="git">
+					<arg line="checkout portlets/sample-service-builder-portlet" />
+				</exec>
 			</then>
 			<elseif>
 				<equals arg1="${scm.tool}" arg2="svn" />
 				<then>
-					<if>
-						<os family="windows" />
-						<then>
-							<exec executable="${shell.executable}">
-								<arg line="/c svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
-							</exec>
+					<exec executable="svn">
+						<arg line="--username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
+					</exec>
 
-							<exec executable="${shell.executable}">
-								<arg line="/c svn revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
-							</exec>
-						</then>
-						<else>
-							<exec executable="${shell.executable}">
-								<arg line="svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
-							</exec>
-
-							<exec executable="${shell.executable}">
-								<arg line="svn revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
-							</exec>
-						</else>
-					</if>
+					<exec executable="svn">
+						<arg line="revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
+					</exec>
 				</then>
 			</elseif>
 		</if>
