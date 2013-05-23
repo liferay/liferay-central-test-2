@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.PropsUtilAdvice;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.SocketUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.test.AdviseWith;
 import com.liferay.portal.test.AspectJMockingNewClassLoaderJUnitTestRunner;
@@ -117,9 +118,9 @@ public class HttpClientSPIAgentTest {
 
 		Socket socket = httpClientSPIAgent.borrowSocket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
-		// Clean up isClosed()
+		// Clean up when closed
 
 		Queue<Socket> socketBlockingQueue =
 			httpClientSPIAgent.socketBlockingQueue;
@@ -128,17 +129,17 @@ public class HttpClientSPIAgentTest {
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
-		// Clean up !isConnected()
+		// Clean up not connected
 
 		socketBlockingQueue.add(new Socket());
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
-		// Clean up isInputShutdown()
+		// Clean up when input is shutdown
 
 		socket = httpClientSPIAgent.borrowSocket();
 
@@ -148,13 +149,13 @@ public class HttpClientSPIAgentTest {
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		socket = serverSocket.accept();
 
 		socket.close();
 
-		// Clean up isInputShutdown(), failed without log
+		// Clean up when input is shutdown, failed without log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.OFF);
@@ -172,9 +173,9 @@ public class HttpClientSPIAgentTest {
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closeSocketChannel(socketChannel, fileDescriptor);
+		closeSocketChannel(socketChannel, fileDescriptor);
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		socket = serverSocket.accept();
 
@@ -182,7 +183,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(logRecords.isEmpty());
 
-		// Clean up isInputShutdown(), failed with log
+		// Clean up when input is shutdown, failed with log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.WARNING);
@@ -199,9 +200,9 @@ public class HttpClientSPIAgentTest {
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closeSocketChannel(socketChannel, fileDescriptor);
+		closeSocketChannel(socketChannel, fileDescriptor);
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		socket = serverSocket.accept();
 
@@ -215,7 +216,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertSame(IOException.class, throwable.getClass());
 
-		// Clean up isOutputShutdown()
+		// Clean up when output is shutdown()
 
 		socket = httpClientSPIAgent.borrowSocket();
 
@@ -225,7 +226,7 @@ public class HttpClientSPIAgentTest {
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		socket = serverSocket.accept();
 
@@ -239,7 +240,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertSame(socket, httpClientSPIAgent.borrowSocket());
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		serverSocket.close();
 	}
@@ -265,20 +266,23 @@ public class HttpClientSPIAgentTest {
 			httpClientSPIAgent.socketBlockingQueue;
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
-
 		Assert.assertEquals(
 			PropsValues.PORTAL_RESILIENCY_SPI_AGENT_CLIENT_POOL_MAX_SIZE,
 			socketBlockingQueue.remainingCapacity());
 
-		String httpRequestContentString =
-			"POST " + HttpClientSPIAgent.SPI_AGENT_CONTEXT_PATH +
-				HttpClientSPIAgent.MAPPING_PATTERN +
-					" HTTP/1.1\r\nHost: localhost:" +
-						_spiConfiguration.getConnectorPort() + "\r\n" +
-							"Content-Length: 8\r\n\r\n";
+		StringBundler sb = new StringBundler();
+
+		sb.append("POST ");
+		sb.append(HttpClientSPIAgent.SPI_AGENT_CONTEXT_PATH);
+		sb.append(HttpClientSPIAgent.MAPPING_PATTERN);
+		sb.append(" HTTP/1.1\r\nHost: localhost:");
+		sb.append(_spiConfiguration.getConnectorPort());
+		sb.append("\r\nContent-Length: 8\r\n\r\n");
+
+		String httpServletRequestContentString = sb.toString();
 
 		Assert.assertArrayEquals(
-			httpRequestContentString.getBytes("US-ASCII"),
+			httpServletRequestContentString.getBytes("US-ASCII"),
 			httpClientSPIAgent.httpServletRequestContent);
 	}
 
@@ -375,7 +379,7 @@ public class HttpClientSPIAgentTest {
 
 		httpClientSPIAgent.destroy();
 
-		_closeSocketChannel(socketChannels[0], fileDescriptor);
+		closeSocketChannel(socketChannels[0], fileDescriptor);
 
 		Assert.assertTrue(logRecords.isEmpty());
 
@@ -399,7 +403,7 @@ public class HttpClientSPIAgentTest {
 
 		httpClientSPIAgent.destroy();
 
-		_closeSocketChannel(socketChannels[0], fileDescriptor);
+		closeSocketChannel(socketChannels[0], fileDescriptor);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -525,8 +529,7 @@ public class HttpClientSPIAgentTest {
 			mockHttpServletRequest.getAttribute(
 				WebKeys.SPI_AGENT_ORIGINAL_RESPONSE));
 		Assert.assertNotNull(
-			(SPIAgentResponse)mockHttpServletRequest.getAttribute(
-				WebKeys.SPI_AGENT_RESPONSE));
+			mockHttpServletRequest.getAttribute(WebKeys.SPI_AGENT_RESPONSE));
 
 		Assert.assertSame(
 			BufferCacheServletResponse.class, httpServletResponse.getClass());
@@ -579,7 +582,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// Force close, failed without log
 
@@ -596,8 +599,8 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		_closeSocketChannel(socketChannel, fileDescriptor);
-		_closePeers(socket, serverSocket);
+		closeSocketChannel(socketChannel, fileDescriptor);
+		closePeers(socket, serverSocket);
 
 		Assert.assertTrue(logRecords.isEmpty());
 
@@ -616,8 +619,8 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		_closeSocketChannel(socketChannel, fileDescriptor);
-		_closePeers(socket, serverSocket);
+		closeSocketChannel(socketChannel, fileDescriptor);
+		closePeers(socket, serverSocket);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -645,7 +648,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// socket.isOutputShutdown()
 
@@ -659,7 +662,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// Successfully return
 
@@ -672,7 +675,7 @@ public class HttpClientSPIAgentTest {
 		Assert.assertEquals(1, socketBlockingQueue.size());
 		Assert.assertSame(socket, socketBlockingQueue.poll());
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		serverSocket.close();
 	}
@@ -736,7 +739,7 @@ public class HttpClientSPIAgentTest {
 
 		ServerSocket serverSocket = serverSocketChannel.socket();
 
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// Unable to send, unable to close, without log
 
@@ -771,9 +774,9 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(logRecords.isEmpty());
 
-		_closeSocketChannel(
+		closeSocketChannel(
 			socketChannel, directMailboxIntraBand._fileDescriptor);
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// Unable to send, unable to close, with log
 
@@ -814,9 +817,9 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertSame(IOException.class, throwable.getClass());
 
-		_closeSocketChannel(
+		closeSocketChannel(
 			socketChannel, directMailboxIntraBand._fileDescriptor);
-		_closePeers(socket, serverSocket);
+		closePeers(socket, serverSocket);
 
 		// Successfully send
 
@@ -966,6 +969,28 @@ public class HttpClientSPIAgentTest {
 			recordSPIAgentResponse._outputStream);
 	}
 
+	protected void closePeers(Socket socket, ServerSocket serverSocket)
+		throws IOException {
+
+		socket.close();
+
+		socket = serverSocket.accept();
+
+		socket.close();
+	}
+
+	protected void closeSocketChannel(
+			SocketChannel socketChannel, FileDescriptor fileDescriptor)
+		throws Exception {
+
+		Field fileDescriptorField = ReflectionUtil.getDeclaredField(
+			socketChannel.getClass(), "fd");
+
+		fileDescriptorField.set(socketChannel, fileDescriptor);
+
+		socketChannel.close();
+	}
+
 	private static FileDescriptor _injectFileDescriptor(
 			SocketChannel socketChannel)
 		throws Exception {
@@ -987,28 +1012,6 @@ public class HttpClientSPIAgentTest {
 		fileOutputStream.close();
 
 		return fileDescriptor;
-	}
-
-	private void _closePeers(Socket socket, ServerSocket serverSocket)
-		throws IOException {
-
-		socket.close();
-
-		socket = serverSocket.accept();
-
-		socket.close();
-	}
-
-	private void _closeSocketChannel(
-			SocketChannel socketChannel, FileDescriptor fileDescriptor)
-		throws Exception {
-
-		Field fileDescriptorField = ReflectionUtil.getDeclaredField(
-			socketChannel.getClass(), "fd");
-
-		fileDescriptorField.set(socketChannel, fileDescriptor);
-
-		socketChannel.close();
 	}
 
 	private SPIConfiguration _spiConfiguration = new SPIConfiguration(

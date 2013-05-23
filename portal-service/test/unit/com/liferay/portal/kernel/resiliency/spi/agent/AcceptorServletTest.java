@@ -98,7 +98,7 @@ public class AcceptorServletTest {
 					public void forward(
 							ServletRequest servletRequest,
 							ServletResponse servletResponse)
-						throws IOException, ServletException {
+						throws IOException {
 
 						forwardPathReference.set(path);
 
