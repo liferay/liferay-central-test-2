@@ -73,7 +73,6 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 				includeDisplayStyle="<%= true %>"
 				includeSelectAll="<%= true %>"
 			>
-
 				<liferay-util:include page="/html/portlet/journal/toolbar.jsp" />
 			</liferay-ui:app-view-toolbar>
 

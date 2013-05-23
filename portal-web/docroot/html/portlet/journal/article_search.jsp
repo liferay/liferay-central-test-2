@@ -35,7 +35,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		displayTerms="<%= displayTerms %>"
 		id="<%= renderResponse.getNamespace() %>"
 	>
-
 		<aui:fieldset>
 			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
 
