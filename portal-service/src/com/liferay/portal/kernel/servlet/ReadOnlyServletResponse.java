@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import java.io.IOException;
-
 import java.util.Locale;
 
 import javax.servlet.http.Cookie;
@@ -36,7 +34,7 @@ public class ReadOnlyServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void addDateHeader(String name, long date) {
+	public void addDateHeader(String name, long value) {
 	}
 
 	@Override
@@ -48,7 +46,7 @@ public class ReadOnlyServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void flushBuffer() throws IOException {
+	public void flushBuffer() {
 	}
 
 	@Override
@@ -60,31 +58,31 @@ public class ReadOnlyServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void sendError(int sc) throws IOException {
+	public void sendError(int status) {
 	}
 
 	@Override
-	public void sendError(int sc, String msg) throws IOException {
+	public void sendError(int status, String message) {
 	}
 
 	@Override
-	public void sendRedirect(String location) throws IOException {
+	public void sendRedirect(String location) {
 	}
 
 	@Override
-	public void setBufferSize(int size) {
+	public void setBufferSize(int bufferSize) {
 	}
 
 	@Override
-	public void setCharacterEncoding(String charset) {
+	public void setCharacterEncoding(String characterEncoding) {
 	}
 
 	@Override
-	public void setContentLength(int len) {
+	public void setContentLength(int contentLength) {
 	}
 
 	@Override
-	public void setContentType(String type) {
+	public void setContentType(String contentType) {
 	}
 
 	@Override
@@ -100,16 +98,15 @@ public class ReadOnlyServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void setLocale(Locale loc) {
+	public void setLocale(Locale locale) {
 	}
 
 	@Override
-	public void setStatus(int sc) {
+	public void setStatus(int status) {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
-	public void setStatus(int sc, String sm) {
+	public void setStatus(int status, String message) {
 	}
 
 }

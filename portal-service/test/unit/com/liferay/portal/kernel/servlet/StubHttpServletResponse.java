@@ -134,7 +134,7 @@ public class StubHttpServletResponse implements HttpServletResponse {
 	}
 
 	@SuppressWarnings("unused")
-	public void sendError(int status, String errorMessage) throws IOException {
+	public void sendError(int status, String message) throws IOException {
 		throw new UnsupportedOperationException();
 	}
 

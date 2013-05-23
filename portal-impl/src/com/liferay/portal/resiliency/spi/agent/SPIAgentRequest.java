@@ -40,9 +40,9 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Shuyang Zhou
  */
-public class AgentRequest extends AgentSerializable {
+public class SPIAgentRequest extends SPIAgentSerializable {
 
-	public AgentRequest(HttpServletRequest request) {
+	public SPIAgentRequest(HttpServletRequest request) {
 		cookies = request.getCookies();
 		distributedRequestAttributes = extractDistributedRequestAttributes(
 			request, Direction.REQUEST);

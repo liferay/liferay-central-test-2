@@ -22,7 +22,6 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +35,7 @@ public class AcceptorServlet extends HttpServlet {
 	@Override
 	protected void service(
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws IOException {
 
 		PortalUtil.setPortalPort(request);
 
@@ -51,28 +50,26 @@ public class AcceptorServlet extends HttpServlet {
 
 		SPIAgent spiAgent = spi.getSPIAgent();
 
-		HttpServletRequest agentServletRequest = spiAgent.prepareRequest(
+		HttpServletRequest spiAgentHttpServletRequest = spiAgent.prepareRequest(
 			request);
 
-		HttpServletResponse agentServletResponse = spiAgent.prepareResponse(
-			request, response);
+		HttpServletResponse spiAgentHttpServletResponse =
+			spiAgent.prepareResponse(request, response);
 
 		Exception exception = null;
 
 		try {
 			requestDispatcher.forward(
-				agentServletRequest, agentServletResponse);
+				spiAgentHttpServletRequest, spiAgentHttpServletResponse);
 		}
 		catch (Exception e) {
 			exception = e;
 		}
 
 		spiAgent.transferResponse(
-			agentServletRequest, agentServletResponse, exception);
+			spiAgentHttpServletRequest, spiAgentHttpServletResponse, exception);
 
-		// Invalidate Session to free up memory
-
-		HttpSession session = agentServletRequest.getSession();
+		HttpSession session = spiAgentHttpServletRequest.getSession();
 
 		session.invalidate();
 	}

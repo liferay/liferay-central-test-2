@@ -44,17 +44,17 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Shuyang Zhou
  */
-public class AgentResponse extends AgentSerializable {
+public class SPIAgentResponse extends SPIAgentSerializable {
 
 	public void captureRequestSessionAttributes(HttpServletRequest request) {
 		distributedRequestAttributes = extractDistributedRequestAttributes(
 			request, Direction.RESPONSE);
 
-		AgentRequest agentRequest = (AgentRequest)request.getAttribute(
+		SPIAgentRequest spiAgentRequest = (SPIAgentRequest)request.getAttribute(
 			WebKeys.SPI_AGENT_REQUEST);
 
 		Map<String, Serializable> originalSessionAttributes =
-			agentRequest.getOriginalSessionAttributes();
+			spiAgentRequest.getOriginalSessionAttributes();
 
 		Map<String, Serializable> newSessionAttributes =
 			extractSessionAttributes(request.getSession());

@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.portlet.PortletContainerUtil;
 import com.liferay.portal.kernel.resiliency.spi.agent.SPIAgent;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.resiliency.spi.agent.AgentRequest;
-import com.liferay.portal.resiliency.spi.agent.AgentResponse;
+import com.liferay.portal.resiliency.spi.agent.SPIAgentRequest;
+import com.liferay.portal.resiliency.spi.agent.SPIAgentResponse;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.util.WebKeys;
 
@@ -49,12 +49,12 @@ public class PortalResiliencyAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		AgentRequest agentRequest = (AgentRequest)request.getAttribute(
+		SPIAgentRequest spiAgentRequest = (SPIAgentRequest)request.getAttribute(
 			WebKeys.SPI_AGENT_REQUEST);
 
 		HttpSession session = request.getSession();
 
-		agentRequest.populateSessionAttributes(session);
+		spiAgentRequest.populateSessionAttributes(session);
 
 		PrincipalThreadLocal.setPassword(
 			(String)session.getAttribute(WebKeys.USER_PASSWORD));
@@ -63,10 +63,11 @@ public class PortalResiliencyAction extends Action {
 			_doExecute(request, response);
 		}
 		finally {
-			AgentResponse agentResponse = (AgentResponse)request.getAttribute(
-				WebKeys.SPI_AGENT_RESPONSE);
+			SPIAgentResponse spiAgentResponse =
+				(SPIAgentResponse)request.getAttribute(
+					WebKeys.SPI_AGENT_RESPONSE);
 
-			agentResponse.captureRequestSessionAttributes(request);
+			spiAgentResponse.captureRequestSessionAttributes(request);
 
 			request.setAttribute(
 				WebKeys.PORTAL_RESILIENCY_ACTION, Boolean.TRUE);

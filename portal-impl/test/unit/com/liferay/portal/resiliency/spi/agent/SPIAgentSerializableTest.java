@@ -70,7 +70,7 @@ import org.springframework.mock.web.MockHttpSession;
  * @author Shuyang Zhou
  */
 @RunWith(AspectJMockingNewClassLoaderJUnitTestRunner.class)
-public class AgentSerializableTest {
+public class SPIAgentSerializableTest {
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -112,10 +112,10 @@ public class AgentSerializableTest {
 		mockHttpServletRequest.setAttribute(nondistributed, nondistributed);
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			AgentSerializable.class.getName(), Level.OFF);
+			SPIAgentSerializable.class.getName(), Level.OFF);
 
 		Map<String, Serializable> distributedRequestAttributes =
-			AgentSerializable.extractDistributedRequestAttributes(
+			SPIAgentSerializable.extractDistributedRequestAttributes(
 				mockHttpServletRequest, Direction.DUPLEX);
 
 		Assert.assertTrue(logRecords.isEmpty());
@@ -127,10 +127,10 @@ public class AgentSerializableTest {
 		// With log, warn
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			AgentSerializable.class.getName(), Level.WARNING);
+			SPIAgentSerializable.class.getName(), Level.WARNING);
 
 		distributedRequestAttributes =
-			AgentSerializable.extractDistributedRequestAttributes(
+			SPIAgentSerializable.extractDistributedRequestAttributes(
 				mockHttpServletRequest, Direction.DUPLEX);
 
 		Assert.assertEquals(1, logRecords.size());
@@ -150,10 +150,10 @@ public class AgentSerializableTest {
 		// With log, debug
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			AgentSerializable.class.getName(), Level.FINE);
+			SPIAgentSerializable.class.getName(), Level.FINE);
 
 		distributedRequestAttributes =
-			AgentSerializable.extractDistributedRequestAttributes(
+			SPIAgentSerializable.extractDistributedRequestAttributes(
 				mockHttpServletRequest, Direction.DUPLEX);
 
 		Assert.assertEquals(2, logRecords.size());
@@ -201,7 +201,7 @@ public class AgentSerializableTest {
 		mockHttpServletRequest.addHeader(nullHeaderName, nullHeaderName);
 
 		Map<String, List<String>> headers =
-			AgentSerializable.extractRequestHeaders(mockHttpServletRequest);
+			SPIAgentSerializable.extractRequestHeaders(mockHttpServletRequest);
 
 		Assert.assertTrue(headers.isEmpty());
 
@@ -216,7 +216,7 @@ public class AgentSerializableTest {
 
 		mockHttpServletRequest.addHeader(headerName, headerValues);
 
-		headers = AgentSerializable.extractRequestHeaders(
+		headers = SPIAgentSerializable.extractRequestHeaders(
 			mockHttpServletRequest);
 
 		Assert.assertEquals(2, headers.size());
@@ -238,7 +238,7 @@ public class AgentSerializableTest {
 		// Without log
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			AgentSerializable.class.getName(), Level.OFF);
+			SPIAgentSerializable.class.getName(), Level.OFF);
 
 		MockHttpSession mockHttpSession = new MockHttpSession();
 
@@ -261,7 +261,7 @@ public class AgentSerializableTest {
 			});
 
 		Map<String, Serializable> sessionAttributes =
-			AgentSerializable.extractSessionAttributes(mockHttpSession);
+			SPIAgentSerializable.extractSessionAttributes(mockHttpSession);
 
 		Assert.assertTrue(logRecords.isEmpty());
 		Assert.assertEquals(1, sessionAttributes.size());
@@ -272,9 +272,9 @@ public class AgentSerializableTest {
 		// With log
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			AgentSerializable.class.getName(), Level.WARNING);
+			SPIAgentSerializable.class.getName(), Level.WARNING);
 
-		sessionAttributes = AgentSerializable.extractSessionAttributes(
+		sessionAttributes = SPIAgentSerializable.extractSessionAttributes(
 			mockHttpSession);
 
 		Assert.assertEquals(1, logRecords.size());
@@ -345,7 +345,7 @@ public class AgentSerializableTest {
 
 		};
 
-		AgentSerializable agentSerializable = new AgentSerializable();
+		SPIAgentSerializable agentSerializable = new SPIAgentSerializable();
 
 		try {
 			agentSerializable.writeTo(
@@ -384,7 +384,7 @@ public class AgentSerializableTest {
 		// Incomplete receipt
 
 		try {
-			AgentSerializable.readFrom(
+			SPIAgentSerializable.readFrom(
 				new UnsyncByteArrayInputStream(new byte[7]));
 
 			Assert.fail();
@@ -399,7 +399,7 @@ public class AgentSerializableTest {
 		BigEndianCodec.putLong(badReceiptData, 0, actualReceipt + 1);
 
 		try {
-			AgentSerializable.readFrom(
+			SPIAgentSerializable.readFrom(
 				new UnsyncByteArrayInputStream(badReceiptData));
 
 			Assert.fail();
@@ -418,7 +418,7 @@ public class AgentSerializableTest {
 			public Class<?> loadClass(String name)
 				throws ClassNotFoundException {
 
-				if (name.equals(AgentSerializable.class.getName())) {
+				if (name.equals(SPIAgentSerializable.class.getName())) {
 					throw new ClassNotFoundException();
 				}
 
@@ -437,7 +437,7 @@ public class AgentSerializableTest {
 		BigEndianCodec.putLong(receiptData, 0, actualReceipt);
 
 		try {
-			AgentSerializable.readFrom(
+			SPIAgentSerializable.readFrom(
 				new UnsyncByteArrayInputStream(receiptData));
 
 			Assert.fail();
@@ -467,8 +467,8 @@ public class AgentSerializableTest {
 
 		BigEndianCodec.putLong(receiptData, 0, actualReceipt);
 
-		AgentSerializable receivedAgentSerializable =
-			AgentSerializable.readFrom(
+		SPIAgentSerializable receivedAgentSerializable =
+			SPIAgentSerializable.readFrom(
 				new UnsyncByteArrayInputStream(receiptData));
 
 		Assert.assertNotNull(receivedAgentSerializable);
@@ -482,7 +482,7 @@ public class AgentSerializableTest {
 		threadLocalDistributor.setThreadLocalSources(
 			Arrays.asList(
 				new KeyValuePair(
-					AgentSerializableTest.class.getName(), "_threadLocal")));
+					SPIAgentSerializableTest.class.getName(), "_threadLocal")));
 
 		threadLocalDistributor.afterPropertiesSet();
 
@@ -500,7 +500,7 @@ public class AgentSerializableTest {
 
 		_threadLocal.set(threadLocalValue);
 
-		AgentSerializable agentSerializable = new AgentSerializable();
+		SPIAgentSerializable agentSerializable = new SPIAgentSerializable();
 
 		Assert.assertNull(agentSerializable.threadLocalDistributors);
 

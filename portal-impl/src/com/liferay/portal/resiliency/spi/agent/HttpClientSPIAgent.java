@@ -65,23 +65,22 @@ public class HttpClientSPIAgent implements SPIAgent {
 		socketAddress = new InetSocketAddress(
 			InetAddressUtil.getLoopbackInetAddress(),
 			spiConfiguration.getConnectorPort());
+		socketBlockingQueue = new ArrayBlockingQueue<Socket>(
+			PropsValues.PORTAL_RESILIENCY_SPI_AGENT_CLIENT_POOL_MAX_SIZE);
 
-		socketPool = new ArrayBlockingQueue<Socket>(
-			PropsValues.PORTAL_RESILIENCY_SPI_AGENT_HTTPCLIENTSPIAGENT_SOCKETPOOL_MAX_SIZE);
-
-		String httpRequestContentString =
-			"POST " + AGENT_CONTEXT_PATH + MAPPING_PATTERN +
+		String httpServletRequestContentString =
+			"POST " + SPI_AGENT_CONTEXT_PATH + MAPPING_PATTERN +
 				" HTTP/1.1\r\nHost: localhost:" +
 					spiConfiguration.getConnectorPort() + "\r\n" +
 						"Content-Length: 8\r\n\r\n";
 
-		httpRequestContent = httpRequestContentString.getBytes(
+		httpServletRequestContent = httpServletRequestContentString.getBytes(
 			Charset.forName("US-ASCII"));
 	}
 
 	@Override
 	public void destroy() {
-		Iterator<Socket> iterator = socketPool.iterator();
+		Iterator<Socket> iterator = socketBlockingQueue.iterator();
 
 		while (iterator.hasNext()) {
 			Socket socket = iterator.next();
@@ -105,7 +104,7 @@ public class HttpClientSPIAgent implements SPIAgent {
 			SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
 
 			spi.addServlet(
-				AGENT_CONTEXT_PATH, spiConfiguration.getBaseDir(),
+				SPI_AGENT_CONTEXT_PATH, spiConfiguration.getBaseDir(),
 				MAPPING_PATTERN, AcceptorServlet.class.getName());
 		}
 		catch (Exception e) {
@@ -117,30 +116,31 @@ public class HttpClientSPIAgent implements SPIAgent {
 	public HttpServletRequest prepareRequest(HttpServletRequest request)
 		throws IOException {
 
-		AgentRequest agentRequest = AgentRequest.readFrom(
+		SPIAgentRequest spiAgentRequest = SPIAgentRequest.readFrom(
 			request.getInputStream());
 
-		HttpServletRequest agentServletRequest = agentRequest.populateRequest(
-			request);
+		HttpServletRequest spiAgentHttpServletRequest =
+			spiAgentRequest.populateRequest(request);
 
-		agentServletRequest.setAttribute(
-			WebKeys.SPI_AGENT_REQUEST, agentRequest);
+		spiAgentHttpServletRequest.setAttribute(
+			WebKeys.SPI_AGENT_REQUEST, spiAgentRequest);
 
-		return agentServletRequest;
+		return spiAgentHttpServletRequest;
 	}
 
 	@Override
 	public HttpServletResponse prepareResponse(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		BufferCacheServletResponse agentServletResponse =
+		HttpServletResponse spiAgentHttpServletResponse =
 			new BufferCacheServletResponse(
 				new ReadOnlyServletResponse(response));
 
 		request.setAttribute(WebKeys.SPI_AGENT_ORIGINAL_RESPONSE, response);
-		request.setAttribute(WebKeys.SPI_AGENT_RESPONSE, new AgentResponse());
+		request.setAttribute(
+			WebKeys.SPI_AGENT_RESPONSE, new SPIAgentResponse());
 
-		return agentServletResponse;
+		return spiAgentHttpServletResponse;
 	}
 
 	@Override
@@ -153,13 +153,13 @@ public class HttpClientSPIAgent implements SPIAgent {
 		try {
 			socket = borrowSocket();
 
+			SPIAgentRequest spiAgentRequest = new SPIAgentRequest(request);
+
 			OutputStream outputStream = socket.getOutputStream();
 
-			outputStream.write(httpRequestContent);
+			outputStream.write(httpServletRequestContent);
 
-			AgentRequest agentRequest = new AgentRequest(request);
-
-			agentRequest.writeTo(registrationReference, outputStream);
+			spiAgentRequest.writeTo(registrationReference, outputStream);
 
 			InputStream inputStream = socket.getInputStream();
 
@@ -167,10 +167,10 @@ public class HttpClientSPIAgent implements SPIAgent {
 
 			boolean forceCloseSocket = consumeHttpResponseHead(dataInputStream);
 
-			AgentResponse agentResponse = AgentResponse.readFrom(
+			SPIAgentResponse spiAgentResponse = SPIAgentResponse.readFrom(
 				dataInputStream);
 
-			agentResponse.populate(request, response);
+			spiAgentResponse.populate(request, response);
 
 			returnSocket(socket, forceCloseSocket);
 
@@ -201,19 +201,20 @@ public class HttpClientSPIAgent implements SPIAgent {
 
 		request.removeAttribute(WebKeys.SPI_AGENT_REQUEST);
 
-		AgentResponse agentResponse = (AgentResponse)request.getAttribute(
-			WebKeys.SPI_AGENT_RESPONSE);
+		SPIAgentResponse spiAgentResponse =
+			(SPIAgentResponse)request.getAttribute(WebKeys.SPI_AGENT_RESPONSE);
 
 		request.removeAttribute(WebKeys.SPI_AGENT_RESPONSE);
 
 		if (exception != null) {
-			agentResponse.setException(exception);
+			spiAgentResponse.setException(exception);
 		}
 		else {
 			BufferCacheServletResponse bufferCacheServletResponse =
 				(BufferCacheServletResponse)response;
 
-			agentResponse.captureResponse(request, bufferCacheServletResponse);
+			spiAgentResponse.captureResponse(
+				request, bufferCacheServletResponse);
 		}
 
 		HttpServletResponse originalResponse =
@@ -224,12 +225,12 @@ public class HttpClientSPIAgent implements SPIAgent {
 
 		originalResponse.setContentLength(8);
 
-		agentResponse.writeTo(
+		spiAgentResponse.writeTo(
 			registrationReference, originalResponse.getOutputStream());
 	}
 
 	protected Socket borrowSocket() throws IOException {
-		Socket socket = socketPool.poll();
+		Socket socket = socketBlockingQueue.poll();
 
 		if (socket != null) {
 			if (socket.isClosed() || !socket.isConnected() ||
@@ -263,7 +264,7 @@ public class HttpClientSPIAgent implements SPIAgent {
 		String statusLine = dataInput.readLine();
 
 		if (!statusLine.equals("HTTP/1.1 200 OK")) {
-			throw new IOException("Error Status Line : " + statusLine);
+			throw new IOException("Error status line: " + statusLine);
 		}
 
 		boolean forceCloseSocket = false;
@@ -298,7 +299,7 @@ public class HttpClientSPIAgent implements SPIAgent {
 		if (!forceCloseSocket && socket.isConnected() &&
 			!socket.isInputShutdown() && !socket.isOutputShutdown()) {
 
-			pooled = socketPool.offer(socket);
+			pooled = socketBlockingQueue.offer(socket);
 		}
 
 		if (!pooled) {
@@ -313,13 +314,14 @@ public class HttpClientSPIAgent implements SPIAgent {
 		}
 	}
 
-	protected static final String AGENT_CONTEXT_PATH = "/spiagent";
 	protected static final String MAPPING_PATTERN = "/acceptor";
 
-	protected final byte[] httpRequestContent;
+	protected static final String SPI_AGENT_CONTEXT_PATH = "/spi_agent";
+
+	protected final byte[] httpServletRequestContent;
 	protected final RegistrationReference registrationReference;
 	protected final SocketAddress socketAddress;
-	protected final BlockingQueue<Socket> socketPool;
+	protected final BlockingQueue<Socket> socketBlockingQueue;
 
 	private static Log _log = LogFactoryUtil.getLog(HttpClientSPIAgent.class);
 
