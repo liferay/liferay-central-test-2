@@ -53,12 +53,7 @@ public class PropertiesSection {
 	}
 
 	public boolean hasComments() {
-		if ((_comments != null) && !_comments.isEmpty()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return !_comments.isEmpty();
 	}
 
 	public boolean hasDefaultProperties() {
@@ -70,12 +65,7 @@ public class PropertiesSection {
 	}
 
 	public boolean hasPropertyComments() {
-		if ((_propertyComments != null) && !_propertyComments.isEmpty()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return !_propertyComments.isEmpty();
 	}
 
 	public boolean hasTitle() {

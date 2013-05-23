@@ -29,8 +29,8 @@ public class PropertyComment {
 		String[] lines = comment.split(StringPool.NEW_LINE);
 
 		for (String line : lines) {
-			if (line.startsWith(PropertiesDocBuilder._INDENT)) {
-				_isPreFormatted = true;
+			if (line.startsWith(PropertiesDocBuilder.INDENT)) {
+				_preformatted = true;
 
 				return;
 			}
@@ -41,11 +41,11 @@ public class PropertyComment {
 		return _comment;
 	}
 
-	public boolean isPreFormatted() {
-		return _isPreFormatted;
+	public boolean isPreformatted() {
+		return _preformatted;
 	}
 
 	private String _comment;
-	private boolean _isPreFormatted;
+	private boolean _preformatted;
 
 }

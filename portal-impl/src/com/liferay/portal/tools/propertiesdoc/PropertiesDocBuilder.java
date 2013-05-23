@@ -63,12 +63,9 @@ public class PropertiesDocBuilder {
 
 		File propertiesFile = new File(propertiesFileName);
 
-		// Create a data model for Freemarker
-
 		Map<String, Object> context = new HashMap<String, Object>();
 
 		context.put("pageTitle", title);
-		context.put("toc", toc);
 
 		int pos = propertiesFileName.lastIndexOf(StringPool.SLASH);
 
@@ -78,7 +75,7 @@ public class PropertiesDocBuilder {
 
 		context.put("propertiesFileName", propertiesFileName);
 
-		List<PropertiesSection> propertiesSections = _getPropertiesSections(
+		List<PropertiesSection> propertiesSections = getPropertiesSections(
 			propertiesFile);
 
 		if (propertiesSections == null) {
@@ -86,6 +83,8 @@ public class PropertiesDocBuilder {
 		}
 
 		context.put("sections", propertiesSections);
+
+		context.put("toc", toc);
 
 		try {
 			StringBundler sb = new StringBundler(4);
@@ -95,18 +94,19 @@ public class PropertiesDocBuilder {
 			sb.append(propertiesFileName);
 			sb.append(".html");
 
-			String htmlFileName = sb.toString();
+			String propertiesHTMLFileName = sb.toString();
 
-			System.out.println("Writing " + htmlFileName);
+			System.out.println("Writing " + propertiesHTMLFileName);
 
-			File propertiesHTMLFile = new File(htmlFileName);
+			File propertiesHTMLFile = new File(propertiesHTMLFileName);
 
 			Writer writer = new FileWriter(propertiesHTMLFile);
 
-			// Get the Freemarker template and merge it with the data model
-
 			try {
-				FreeMarkerUtil.process(_TPL_PROPERTIES_HTML, context, writer);
+				FreeMarkerUtil.process(
+					"com/liferay/portal/tools/propertiesdoc/dependencies/" +
+						"properties_html.ftl",
+					context, writer);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -119,29 +119,22 @@ public class PropertiesDocBuilder {
 		}
 	}
 
-	protected static final String _DOUBLE_INDENT =
-		PropertiesDocBuilder._INDENT + PropertiesDocBuilder._INDENT;
+	protected void addPropertyComment(
+		List<PropertyComment> propertyComments, String comment) {
 
-	protected static final String _INDENT = StringPool.FOUR_SPACES;
+		if (Validator.isNotNull(comment)) {
+			PropertyComment propertyComment = new PropertyComment(comment);
 
-	protected static final String _TPL_PROPERTIES_HTML =
-		"com/liferay/portal/tools/propertiesdoc/dependencies/" +
-			"properties_html.ftl";
-
-	private void _addParagraph(
-		List<PropertyComment> propertyComments, String paragraph) {
-
-		if (Validator.isNotNull(paragraph)) {
-			propertyComments.add(new PropertyComment(paragraph));
+			propertyComments.add(propertyComment);
 		}
 	}
 
-	private List<String> _extractComments(String[] sectionLines) {
+	protected List<String> extractComments(String[] lines) {
 		List<String> comments = new ArrayList<String>();
 
 		StringBundler sb = new StringBundler();
 
-		for (String line : sectionLines) {
+		for (String line : lines) {
 			String trimmedLine = line.trim();
 
 			if (trimmedLine.startsWith("## ")) {
@@ -164,14 +157,14 @@ public class PropertiesDocBuilder {
 		return comments;
 	}
 
-	private String _extractDefaultProperties(String[] sectionLines) {
+	protected String extractDefaultProperties(String[] lines) {
 		StringBundler sb = new StringBundler();
 
 		boolean previousLineIsDefaultProperty = false;
 
-		for (String line : sectionLines) {
+		for (String line : lines) {
 			if (!previousLineIsDefaultProperty) {
-				if (!line.startsWith("#") && !line.startsWith(_INDENT + "#")) {
+				if (!line.startsWith("#") && !line.startsWith(INDENT + "#")) {
 					previousLineIsDefaultProperty = true;
 
 					sb.append(line);
@@ -179,7 +172,7 @@ public class PropertiesDocBuilder {
 				}
 			}
 			else {
-				if (line.startsWith("#") || line.startsWith(_INDENT + "#")) {
+				if (line.startsWith("#") || line.startsWith(INDENT + "#")) {
 					previousLineIsDefaultProperty = false;
 
 					continue;
@@ -193,22 +186,20 @@ public class PropertiesDocBuilder {
 		return sb.toString();
 	}
 
-	private String _extractExampleProperties(String[] sectionLines) {
+	protected String extractExampleProperties(String[] lines) {
 		StringBundler sb = new StringBundler();
 
 		boolean previousLineIsExample = false;
 
-		for (String line : sectionLines) {
+		for (String line : lines) {
 			String trimmedLine = line.trim();
 
 			if (!previousLineIsExample) {
-				if (line.startsWith(_INDENT + "# ") ||
-					trimmedLine.equals("#")) {
-
+				if (line.startsWith(INDENT + "# ") || trimmedLine.equals("#")) {
 					continue;
 				}
 
-				if (line.startsWith(_INDENT + "#")) {
+				if (line.startsWith(INDENT + "#")) {
 					previousLineIsExample = true;
 
 					String exampleProperty =
@@ -236,9 +227,7 @@ public class PropertiesDocBuilder {
 		return sb.toString();
 	}
 
-	private List<PropertyComment> _extractPropertyComments(
-		String[] sectionLines) {
-
+	protected List<PropertyComment> extractPropertyComments(String[] lines) {
 		List<PropertyComment> propertyComments =
 			new ArrayList<PropertyComment>();
 
@@ -246,26 +235,23 @@ public class PropertiesDocBuilder {
 
 		boolean previousLineIsPreformatted = false;
 
-		// Add property comments as paragraphs. Stop on the first property
-		// assignment.
-
-		for (String line : sectionLines) {
+		for (String line : lines) {
 			line = StringUtil.trimTrailing(line);
 
-			if (line.startsWith(_DOUBLE_INDENT + "#")) {
+			if (line.startsWith(DOUBLE_INDENT + "#")) {
 				break;
 			}
 
 			String trimmedLine = line.trim();
 
-			if (trimmedLine.startsWith("# " + _INDENT)) {
+			if (trimmedLine.startsWith("# " + INDENT)) {
 				if (previousLineIsPreformatted) {
 					sb.append(
 						StringUtil.replaceFirst(
 							trimmedLine, "#", StringPool.BLANK));
 				}
 				else {
-					_addParagraph(propertyComments, sb.toString());
+					addPropertyComment(propertyComments, sb.toString());
 
 					sb = new StringBundler();
 
@@ -280,7 +266,7 @@ public class PropertiesDocBuilder {
 			}
 			else if (trimmedLine.startsWith("# ")) {
 				if (previousLineIsPreformatted) {
-					_addParagraph(propertyComments, sb.toString());
+					addPropertyComment(propertyComments, sb.toString());
 
 					sb = new StringBundler();
 
@@ -306,12 +292,12 @@ public class PropertiesDocBuilder {
 			else if (trimmedLine.startsWith("#") &&
 					 (trimmedLine.length() < 2)) {
 
-				_addParagraph(propertyComments, sb.toString());
+				addPropertyComment(propertyComments, sb.toString());
 
 				sb = new StringBundler();
 			}
 			else {
-				_addParagraph(propertyComments, sb.toString());
+				addPropertyComment(propertyComments, sb.toString());
 
 				break;
 			}
@@ -320,68 +306,64 @@ public class PropertiesDocBuilder {
 		return propertyComments;
 	}
 
-	private String _extractTitle(String[] sectionLines) {
-		if ((sectionLines == null) || (sectionLines.length <= 1)) {
+	protected String extractTitle(String[] lines) {
+		if ((lines == null) || (lines.length <= 1)) {
 			return null;
 		}
 
-		String title = sectionLines[1];
+		String title = lines[1];
 
 		title = StringUtil.replaceFirst(title, "##", StringPool.BLANK);
 
 		return title.trim();
 	}
 
-	private int _getLineCount(String s) {
-		String[] lines = s.split("\r\n|\r|\n");
+	protected int getLineCount(String sectionString) {
+		String[] lines = sectionString.split("\r\n|\r|\n");
 
 		return lines.length;
 	}
 
-	private List<PropertiesSection> _getPropertiesSections(File propertiesFile)
+	protected List<PropertiesSection> getPropertiesSections(File propertiesFile)
 		throws IOException {
 
-		String propertiesFileString = _fileUtil.read(propertiesFile);
+		String content = _fileUtil.read(propertiesFile);
 
-		String[] sectionStrings = propertiesFileString.split("\n\n");
+		String[] sections = content.split("\n\n");
 
 		List<PropertiesSection> propertiesSections =
-			new ArrayList<PropertiesSection>(sectionStrings.length);
+			new ArrayList<PropertiesSection>(sections.length);
 
-		for (String sectionString : sectionStrings) {
-			sectionString = StringUtil.trimLeading(
-				sectionString, CharPool.SPACE);
+		for (String section : sections) {
+			section = StringUtil.trimLeading(section, CharPool.SPACE);
 
 			PropertiesSection propertiesSection = new PropertiesSection(
-				sectionString);
+				section);
 
-			String sectionText = propertiesSection.getText();
+			String[] lines = section.split(StringPool.NEW_LINE);
 
-			String[] sectionLines = sectionText.split(StringPool.NEW_LINE);
-
-			if (sectionString.startsWith("##")) {
-				int lineCount = _getLineCount(sectionString);
+			if (section.startsWith("##")) {
+				int lineCount = getLineCount(section);
 
 				if (lineCount == 3) {
-					propertiesSection.setTitle(_extractTitle(sectionLines));
+					propertiesSection.setTitle(extractTitle(lines));
 
 					propertiesSections.add(propertiesSection);
 				}
 				else if (lineCount > 3) {
-					propertiesSection.setComments(
-						_extractComments(sectionLines));
+					propertiesSection.setComments(extractComments(lines));
 
 					propertiesSections.add(propertiesSection);
 				}
 				else {
 					StringBundler sb = new StringBundler(8);
 
-					sb.append("Error: PropertiesSection should consist of 3 ");
+					sb.append("Properties section should consist of 3 ");
 					sb.append("or more lines:");
 					sb.append(StringPool.NEW_LINE);
 					sb.append("##");
 					sb.append(StringPool.NEW_LINE);
-					sb.append("## Comment(s)");
+					sb.append("## Comments");
 					sb.append(StringPool.NEW_LINE);
 					sb.append("##");
 
@@ -392,11 +374,11 @@ public class PropertiesDocBuilder {
 			}
 			else {
 				propertiesSection.setDefaultProperties(
-					_extractDefaultProperties(sectionLines));
+					extractDefaultProperties(lines));
 				propertiesSection.setExampleProperties(
-					_extractExampleProperties(sectionLines));
+					extractExampleProperties(lines));
 				propertiesSection.setPropertyComments(
-					_extractPropertyComments(sectionLines));
+					extractPropertyComments(lines));
 
 				propertiesSections.add(propertiesSection);
 			}
@@ -404,6 +386,11 @@ public class PropertiesDocBuilder {
 
 		return propertiesSections;
 	}
+
+	protected static final String DOUBLE_INDENT =
+		PropertiesDocBuilder.INDENT + PropertiesDocBuilder.INDENT;
+
+	protected static final String INDENT = StringPool.FOUR_SPACES;
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
