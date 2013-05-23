@@ -1872,15 +1872,8 @@ public class PortletImporter {
 			String value = GetterUtil.getString(
 				jxPreferences.getValue(name, null));
 
-			if (name.equals(
-					"anyClassTypeJournalArticleAssetRendererFactory") ||
-				name.equals(
-					"classTypeIdsJournalArticleAssetRendererFactory") ||
-				name.equals("classTypeIds")) {
-
-				updatePreferencesClassPKs(
-					portletDataContext, jxPreferences, name, DDMStructure.class,
-					companyGroup.getGroupId());
+			if (name.equals("anyAssetType") || name.equals("classNameIds")) {
+				updateAssetPublisherClassNameIds(jxPreferences, name);
 			}
 			else if (name.equals(
 						"anyClassTypeDLFileEntryAssetRendererFactory") ||
@@ -1891,10 +1884,15 @@ public class PortletImporter {
 					portletDataContext, jxPreferences, name,
 					DLFileEntryType.class, companyGroup.getGroupId());
 			}
-			else if (name.equals("anyAssetType") ||
-					 name.equals("classNameIds")) {
+			else if (name.equals(
+						"anyClassTypeJournalArticleAssetRendererFactory") ||
+					 name.equals(
+						"classTypeIdsJournalArticleAssetRendererFactory") ||
+					 name.equals("classTypeIds")) {
 
-				updateAssetPublisherClassNameIds(jxPreferences, name);
+				updatePreferencesClassPKs(
+					portletDataContext, jxPreferences, name, DDMStructure.class,
+					companyGroup.getGroupId());
 			}
 			else if (name.equals("assetVocabularyId")) {
 				updatePreferencesClassPKs(
