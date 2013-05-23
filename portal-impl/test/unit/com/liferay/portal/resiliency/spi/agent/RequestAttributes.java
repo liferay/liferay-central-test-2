@@ -27,23 +27,21 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestAttributes {
 
 	@Distributed(direction = Direction.DUPLEX, matchType = MatchType.EXACT)
-	public static final String ATTRIBUTE1 = "ATTRIBUTE1";
+	public static final String ATTRIBUTE_1 = "ATTRIBUTE_1";
 
 	@Distributed(direction = Direction.REQUEST, matchType = MatchType.EXACT)
-	public static final String ATTRIBUTE2 = "ATTRIBUTE2";
+	public static final String ATTRIBUTE_2 = "ATTRIBUTE_2";
 
 	@Distributed(
 		direction = Direction.RESPONSE, matchType = MatchType.EXACT)
-	public static final String ATTRIBUTE3 = "ATTRIBUTE3";
+	public static final String ATTRIBUTE_3 = "ATTRIBUTE_3";
 
-	public static void setRequestAttributes(
-		HttpServletRequest httpServletRequest) {
-
+	public static void setRequestAttributes(HttpServletRequest request) {
 		DistributedRegistry.registerDistributed(RequestAttributes.class);
 
-		httpServletRequest.setAttribute(ATTRIBUTE1, ATTRIBUTE1);
-		httpServletRequest.setAttribute(ATTRIBUTE2, ATTRIBUTE2);
-		httpServletRequest.setAttribute(ATTRIBUTE3, ATTRIBUTE3);
+		request.setAttribute(ATTRIBUTE_1, ATTRIBUTE_1);
+		request.setAttribute(ATTRIBUTE_2, ATTRIBUTE_2);
+		request.setAttribute(ATTRIBUTE_3, ATTRIBUTE_3);
 	}
 
 }

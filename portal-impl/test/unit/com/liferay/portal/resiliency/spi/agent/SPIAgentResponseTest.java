@@ -89,8 +89,8 @@ public class SPIAgentResponseTest {
 
 		HttpSession session = originalRequest.getSession();
 
-		session.setAttribute(_sessionAttribute1, _sessionAttribute1);
-		session.setAttribute(_sessionAttribute2, _sessionAttribute2);
+		session.setAttribute(_SESSION_ATTRIBUTE_1, _SESSION_ATTRIBUTE_1);
+		session.setAttribute(_SESSION_ATTRIBUTE_2, _SESSION_ATTRIBUTE_2);
 
 		_mockHttpServletRequest = new MockHttpServletRequest();
 
@@ -110,9 +110,9 @@ public class SPIAgentResponseTest {
 
 		HttpSession session = _mockHttpServletRequest.getSession();
 
-		session.setAttribute(_sessionAttribute1, _sessionAttribute1);
-		session.setAttribute(_sessionAttribute2, null);
-		session.setAttribute(_sessionAttribute3, _sessionAttribute3);
+		session.setAttribute(_SESSION_ATTRIBUTE_1, _SESSION_ATTRIBUTE_1);
+		session.setAttribute(_SESSION_ATTRIBUTE_2, null);
+		session.setAttribute(_SESSION_ATTRIBUTE_3, _SESSION_ATTRIBUTE_3);
 
 		spiAgentResponse.captureRequestSessionAttributes(
 			_mockHttpServletRequest);
@@ -124,21 +124,23 @@ public class SPIAgentResponseTest {
 
 		Assert.assertEquals(2, distributedRequestAttributes.size());
 		Assert.assertEquals(
-			RequestAttributes.ATTRIBUTE1,
-			distributedRequestAttributes.get(RequestAttributes.ATTRIBUTE1));
+			RequestAttributes.ATTRIBUTE_1,
+			distributedRequestAttributes.get(RequestAttributes.ATTRIBUTE_1));
 		Assert.assertEquals(
-			RequestAttributes.ATTRIBUTE3,
-			distributedRequestAttributes.get(RequestAttributes.ATTRIBUTE3));
+			RequestAttributes.ATTRIBUTE_3,
+			distributedRequestAttributes.get(RequestAttributes.ATTRIBUTE_3));
 
 		Map<String, Serializable> deltaSessionAttributes =
 			spiAgentResponse.deltaSessionAttributes;
 
 		Assert.assertEquals(3, deltaSessionAttributes.size());
 		Assert.assertEquals(
-			_sessionAttribute1, deltaSessionAttributes.get(_sessionAttribute1));
-		Assert.assertNull(deltaSessionAttributes.get(_sessionAttribute2));
+			_SESSION_ATTRIBUTE_1,
+			deltaSessionAttributes.get(_SESSION_ATTRIBUTE_1));
+		Assert.assertNull(deltaSessionAttributes.get(_SESSION_ATTRIBUTE_2));
 		Assert.assertEquals(
-			_sessionAttribute3, deltaSessionAttributes.get(_sessionAttribute3));
+			_SESSION_ATTRIBUTE_3,
+			deltaSessionAttributes.get(_SESSION_ATTRIBUTE_3));
 
 		spiAgentResponse.restoreThreadLocals();
 
@@ -150,7 +152,7 @@ public class SPIAgentResponseTest {
 	@Test
 	public void testCaptureResponse() throws IOException {
 
-		// Not portal resiliency action
+		// Not a portal resiliency action
 
 		SPIAgentResponse spiAgentResponse = new SPIAgentResponse();
 
@@ -257,7 +259,7 @@ public class SPIAgentResponseTest {
 		Assert.assertNull(spiAgentResponse.byteData);
 		Assert.assertSame(content, spiAgentResponse.stringData);
 
-		// Portal resiliency action, char model output, not html, without footer
+		// Portal resiliency action, char model output, not HTML, without footer
 
 		bufferCacheServletResponse.setString(content);
 
@@ -317,7 +319,7 @@ public class SPIAgentResponseTest {
 			Assert.assertSame(exception, pre.getCause());
 		}
 
-		// Not portal resiliency response
+		// Not a portal resiliency response
 
 		spiAgentResponse.setException(null);
 
@@ -332,9 +334,9 @@ public class SPIAgentResponseTest {
 			new HashMap<String, Serializable>();
 
 		distributedRequestAttributes.put(
-			RequestAttributes.ATTRIBUTE1, RequestAttributes.ATTRIBUTE1);
+			RequestAttributes.ATTRIBUTE_1, RequestAttributes.ATTRIBUTE_1);
 		distributedRequestAttributes.put(
-			RequestAttributes.ATTRIBUTE3, RequestAttributes.ATTRIBUTE3);
+			RequestAttributes.ATTRIBUTE_3, RequestAttributes.ATTRIBUTE_3);
 
 		spiAgentResponse.distributedRequestAttributes =
 			distributedRequestAttributes;
@@ -342,8 +344,8 @@ public class SPIAgentResponseTest {
 		Map<String, Serializable> deltaSessionAttributes =
 			new HashMap<String, Serializable>();
 
-		deltaSessionAttributes.put(_sessionAttribute1, _sessionAttribute1);
-		deltaSessionAttributes.put(_sessionAttribute2, _sessionAttribute2);
+		deltaSessionAttributes.put(_SESSION_ATTRIBUTE_1, _SESSION_ATTRIBUTE_1);
+		deltaSessionAttributes.put(_SESSION_ATTRIBUTE_2, _SESSION_ATTRIBUTE_2);
 
 		spiAgentResponse.deltaSessionAttributes = deltaSessionAttributes;
 
@@ -369,15 +371,15 @@ public class SPIAgentResponseTest {
 
 		Assert.assertEquals(2, requestAttributeNames.size());
 		Assert.assertTrue(
-			requestAttributeNames.contains(RequestAttributes.ATTRIBUTE1));
+			requestAttributeNames.contains(RequestAttributes.ATTRIBUTE_1));
 		Assert.assertTrue(
-			requestAttributeNames.contains(RequestAttributes.ATTRIBUTE3));
+			requestAttributeNames.contains(RequestAttributes.ATTRIBUTE_3));
 		Assert.assertEquals(
-			RequestAttributes.ATTRIBUTE1,
-			mockHttpServletRequest.getAttribute(RequestAttributes.ATTRIBUTE1));
+			RequestAttributes.ATTRIBUTE_1,
+			mockHttpServletRequest.getAttribute(RequestAttributes.ATTRIBUTE_1));
 		Assert.assertEquals(
-			RequestAttributes.ATTRIBUTE1,
-			mockHttpServletRequest.getAttribute(RequestAttributes.ATTRIBUTE1));
+			RequestAttributes.ATTRIBUTE_1,
+			mockHttpServletRequest.getAttribute(RequestAttributes.ATTRIBUTE_1));
 
 		// Distributed request attributes, with type setting
 
@@ -398,7 +400,7 @@ public class SPIAgentResponseTest {
 
 		Assert.assertEquals(typeSetting, layout.getTypeSettings());
 
-		// Successfully output byteData
+		// Successfully output byte data
 
 		byte[] outputData = new byte[10];
 
@@ -414,7 +416,7 @@ public class SPIAgentResponseTest {
 
 		Assert.assertSame(outputData, byteBuffer.array());
 
-		// Unable to output byteData
+		// Unable to output byte data
 
 		final IOException ioException = new IOException();
 
@@ -447,7 +449,7 @@ public class SPIAgentResponseTest {
 			Assert.assertSame(ioException, pre.getCause());
 		}
 
-		// Successfully output stringData
+		// Successfully output string data
 
 		String stringData = "stringData";
 
@@ -463,7 +465,7 @@ public class SPIAgentResponseTest {
 
 		Assert.assertEquals(stringData, charBuffer.toString());
 
-		// Unable to output stringData
+		// Unable to output string data
 
 		try {
 			spiAgentResponse.populate(
@@ -476,9 +478,12 @@ public class SPIAgentResponseTest {
 		}
 	}
 
-	private static String _sessionAttribute1 = "sessionAttribute1";
-	private static String _sessionAttribute2 = "sessionAttribute2";
-	private static String _sessionAttribute3 = "sessionAttribute3";
+	private static final String _SESSION_ATTRIBUTE_1 = "SESSION_ATTRIBUTE_1";
+
+	private static final String _SESSION_ATTRIBUTE_2 = "SESSION_ATTRIBUTE_2";
+
+	private static final String _SESSION_ATTRIBUTE_3 = "SESSION_ATTRIBUTE_3";
+
 	private static ThreadLocal<String> _threadLocal = new ThreadLocal<String>();
 
 	private MockHttpServletRequest _mockHttpServletRequest;

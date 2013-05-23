@@ -75,27 +75,28 @@ public class PortalResiliencyActionTest {
 
 		_request = new MockHttpServletRequest();
 
-		_request.setAttribute(
-			WebKeys.SPI_AGENT_REQUEST,
-			new SPIAgentRequest(new MockHttpServletRequest()));
-		_request.setAttribute(
-			WebKeys.SPI_AGENT_RESPONSE, new SPIAgentResponse());
-
-		_portlet = new PortletImpl();
-
-		_request.setAttribute(WebKeys.SPI_AGENT_PORTLET, _portlet);
-
 		_layout = new LayoutImpl();
 
 		_layout.setTypeSettings(_DEFAULT_LAYOUT_TYPE_SETTINGS);
 
 		_request.setAttribute(WebKeys.LAYOUT, _layout);
 
+		_portlet = new PortletImpl();
+
+		_request.setAttribute(WebKeys.SPI_AGENT_PORTLET, _portlet);
+
+		_request.setAttribute(
+			WebKeys.SPI_AGENT_REQUEST,
+			new SPIAgentRequest(new MockHttpServletRequest()));
+		_request.setAttribute(
+			WebKeys.SPI_AGENT_RESPONSE, new SPIAgentResponse());
+
+		_response = new MockHttpServletResponse();
+
 		HttpSession session = _request.getSession();
 
 		session.setAttribute(WebKeys.USER_PASSWORD, "password");
 
-		_response = new MockHttpServletResponse();
 	}
 
 	@After
