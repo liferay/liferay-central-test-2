@@ -124,7 +124,7 @@ public class EditGroupAction extends PortletAction {
 
 				Group layoutGroup = layout.getGroup();
 
-				if (layoutGroup.isControlPanel() && cmd.equals(Constants.ADD)) {
+				if (cmd.equals(Constants.ADD) && layoutGroup.isControlPanel()) {
 					themeDisplay.setScopeGroupId(group.getGroupId());
 
 					PortletURL siteAdministrationURL =
