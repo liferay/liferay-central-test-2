@@ -118,7 +118,7 @@ public class AssetPublisherExportImportTest
 	}
 
 	@Test
-	public void testAnyWebContentStructure() throws Exception {
+	public void testAnyJournalStructure() throws Exception {
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
 
@@ -413,7 +413,7 @@ public class AssetPublisherExportImportTest
 	}
 
 	@Test
-	public void testSeveralWebContentStructures() throws Exception {
+	public void testSeveralJournalStructures() throws Exception {
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
 
