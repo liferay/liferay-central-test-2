@@ -4107,9 +4107,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public PortletURL getSiteAdministrationURL(
-			PortletResponse portletResponse, ThemeDisplay themeDisplay,
-			String portletName)
-		throws SystemException {
+		PortletResponse portletResponse, ThemeDisplay themeDisplay,
+		String portletName) {
 
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
