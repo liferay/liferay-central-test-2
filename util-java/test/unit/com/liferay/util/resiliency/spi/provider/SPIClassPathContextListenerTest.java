@@ -126,7 +126,6 @@ public class SPIClassPathContextListenerTest {
 
 		Assert.assertEquals(
 			spiClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
-
 		Assert.assertEquals(3, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
