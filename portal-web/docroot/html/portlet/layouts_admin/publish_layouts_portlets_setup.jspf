@@ -72,9 +72,7 @@ List<Portlet> portletDataHandlerPortlets = LayoutExporter.getPortletDataHandlerP
 					PortletDataHandler portletDataHandler = portlet.getPortletDataHandlerInstance();
 
 					try {
-						boolean isStagedPortlet = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + portlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
-
-						if (isStagedPortlet && (portletDataHandler.getExportControls() != null)) {
+						if (GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + portlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault()) && (portletDataHandler.getExportControls() != null)) {
 							String rootPortletId = portlet.getRootPortletId();
 				%>
 

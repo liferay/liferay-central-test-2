@@ -189,11 +189,9 @@ List<Portlet> dataSiteLevelPortlets = LayoutExporter.getDataSiteLevelPortlets(co
 					String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
 					PortletDataHandler portletDataHandler = portlet.getPortletDataHandlerInstance();
-
-					boolean isStagedPortlet = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + portlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
 				%>
 
-					<c:if test="<%= isStagedPortlet %>">
+					<c:if test="<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + portlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault()) %>">
 						<li>
 							<aui:input label="<%= portletTitle %>" name="<%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + portlet.getPortletId() %>" type="checkbox" value="<%= true %>" />
 
