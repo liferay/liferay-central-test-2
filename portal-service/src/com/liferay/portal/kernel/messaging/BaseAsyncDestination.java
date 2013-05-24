@@ -70,6 +70,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		PortalExecutorManagerUtil.shutdown(getName(), force);
 	}
 
+	@Override
 	public DestinationStatistics getDestinationStatistics() {
 		DestinationStatistics destinationStatistics =
 			new DestinationStatistics();
@@ -144,6 +145,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		_threadPoolExecutor = threadPoolExecutor;
 	}
 
+	@Override
 	public void send(Message message) {
 		if (messageListeners.isEmpty()) {
 			if (_log.isDebugEnabled()) {
