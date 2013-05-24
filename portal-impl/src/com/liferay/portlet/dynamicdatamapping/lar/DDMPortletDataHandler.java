@@ -14,13 +14,11 @@
 
 package com.liferay.portlet.dynamicdatamapping.lar;
 
-import com.liferay.portal.kernel.lar.BasePortletDataHandler;
-
 /**
  * @author Marcellus Tavares
  * @author Juan Fernández
  */
-public class DDMPortletDataHandler extends BasePortletDataHandler {
+public abstract class DDMPortletDataHandler {
 
 	public static final String NAMESPACE = "dynamic_data_mapping";
 
