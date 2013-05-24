@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.io.BigEndianCodec;
 import com.liferay.portal.kernel.io.Serializer;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.nio.intraband.Datagram;
-import com.liferay.portal.kernel.nio.intraband.IntrabandTestUtil;
 import com.liferay.portal.kernel.nio.intraband.MockIntraband;
 import com.liferay.portal.kernel.nio.intraband.MockRegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.RegistrationReference;
@@ -46,9 +45,7 @@ import com.liferay.portal.util.PropsImpl;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.DataInputStream;
-import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -59,6 +56,7 @@ import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketImpl;
 import java.net.UnknownHostException;
 
 import java.nio.ByteBuffer;
@@ -160,20 +158,19 @@ public class HttpClientSPIAgentTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.OFF);
 
-		SocketChannel socketChannel = SocketChannel.open(
-			httpClientSPIAgent.socketAddress);
-
-		socket = socketChannel.socket();
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
 		socket.shutdownInput();
 
-		FileDescriptor fileDescriptor = _injectFileDescriptor(socketChannel);
+		SocketImpl socketImpl = swapSocketImpl(socket, null);
 
 		socketBlockingQueue.add(socket);
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		closeSocketChannel(socketChannel, fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
 
 		closePeers(socket, serverSocket);
 
@@ -188,19 +185,19 @@ public class HttpClientSPIAgentTest {
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.WARNING);
 
-		socketChannel = SocketChannel.open(httpClientSPIAgent.socketAddress);
-
-		socket = socketChannel.socket();
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
 		socket.shutdownInput();
 
-		fileDescriptor = _injectFileDescriptor(socketChannel);
+		socketImpl = swapSocketImpl(socket, null);
 
 		socketBlockingQueue.add(socket);
 
 		socket = httpClientSPIAgent.borrowSocket();
 
-		closeSocketChannel(socketChannel, fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
 
 		closePeers(socket, serverSocket);
 
@@ -361,6 +358,21 @@ public class HttpClientSPIAgentTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.OFF);
 
+		ServerSocketChannel serverSocketChannel =
+			SocketUtil.createServerSocketChannel(
+				InetAddressUtil.getLoopbackInetAddress(),
+				_spiConfiguration.getConnectorPort(), null);
+
+		serverSocketChannel.configureBlocking(true);
+
+		ServerSocket serverSocket = serverSocketChannel.socket();
+
+		Socket socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
+
+		SocketImpl socketImpl = swapSocketImpl(socket, null);
+
 		HttpClientSPIAgent httpClientSPIAgent = new HttpClientSPIAgent(
 			_spiConfiguration,
 			new MockRegistrationReference(new MockIntraband()));
@@ -368,18 +380,13 @@ public class HttpClientSPIAgentTest {
 		Queue<Socket> socketBlockingQueue =
 			httpClientSPIAgent.socketBlockingQueue;
 
-		SocketChannel[] socketChannels =
-			IntrabandTestUtil.createSocketChannelPeers();
-
-		FileDescriptor fileDescriptor = _injectFileDescriptor(
-			socketChannels[0]);
-
-		socketBlockingQueue.add(socketChannels[0].socket());
-		socketBlockingQueue.add(socketChannels[1].socket());
+		socketBlockingQueue.add(socket);
 
 		httpClientSPIAgent.destroy();
 
-		closeSocketChannel(socketChannels[0], fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
+		closePeers(socket, serverSocket);
 
 		Assert.assertTrue(logRecords.isEmpty());
 
@@ -394,16 +401,19 @@ public class HttpClientSPIAgentTest {
 
 		socketBlockingQueue = httpClientSPIAgent.socketBlockingQueue;
 
-		socketChannels = IntrabandTestUtil.createSocketChannelPeers();
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
-		fileDescriptor = _injectFileDescriptor(socketChannels[0]);
+		socketImpl = swapSocketImpl(socket, null);
 
-		socketBlockingQueue.add(socketChannels[0].socket());
-		socketBlockingQueue.add(socketChannels[1].socket());
+		socketBlockingQueue.add(socket);
 
 		httpClientSPIAgent.destroy();
 
-		closeSocketChannel(socketChannels[0], fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
+		closePeers(socket, serverSocket);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -412,6 +422,8 @@ public class HttpClientSPIAgentTest {
 		Throwable throwable = logRecord.getThrown();
 
 		Assert.assertSame(IOException.class, throwable.getClass());
+
+		serverSocket.close();
 	}
 
 	@Test
@@ -589,17 +601,18 @@ public class HttpClientSPIAgentTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.OFF);
 
-		socketChannel = SocketChannel.open(httpClientSPIAgent.socketAddress);
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
-		FileDescriptor fileDescriptor = _injectFileDescriptor(socketChannel);
-
-		socket = socketChannel.socket();
+		SocketImpl socketImpl = swapSocketImpl(socket, null);
 
 		httpClientSPIAgent.returnSocket(socket, true);
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		closeSocketChannel(socketChannel, fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
 		closePeers(socket, serverSocket);
 
 		Assert.assertTrue(logRecords.isEmpty());
@@ -609,17 +622,18 @@ public class HttpClientSPIAgentTest {
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.WARNING);
 
-		socketChannel = SocketChannel.open(httpClientSPIAgent.socketAddress);
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
-		fileDescriptor = _injectFileDescriptor(socketChannel);
-
-		socket = socketChannel.socket();
+		socketImpl = swapSocketImpl(socket, null);
 
 		httpClientSPIAgent.returnSocket(socket, true);
 
 		Assert.assertTrue(socketBlockingQueue.isEmpty());
 
-		closeSocketChannel(socketChannel, fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
 		closePeers(socket, serverSocket);
 
 		Assert.assertEquals(1, logRecords.size());
@@ -707,7 +721,7 @@ public class HttpClientSPIAgentTest {
 		httpClientSPIAgent = new HttpClientSPIAgent(
 			_spiConfiguration,
 			new MockRegistrationReference(
-				new DirectMailboxIntraBand(null, new IOException())));
+				new DirectMailboxIntraBand(new IOException())));
 
 		ServerSocketChannel serverSocketChannel =
 			SocketUtil.createServerSocketChannel(
@@ -746,18 +760,20 @@ public class HttpClientSPIAgentTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.OFF);
 
-		socketChannel = SocketChannel.open(httpClientSPIAgent.socketAddress);
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
+
+		SocketImpl socketImpl = swapSocketImpl(socket, null);
 
 		DirectMailboxIntraBand directMailboxIntraBand =
-			new DirectMailboxIntraBand(socketChannel, new IOException());
+			new DirectMailboxIntraBand(new IOException());
 
 		httpClientSPIAgent = new HttpClientSPIAgent(
 			_spiConfiguration,
 			new MockRegistrationReference(directMailboxIntraBand));
 
 		socketBlockingQueue = httpClientSPIAgent.socketBlockingQueue;
-
-		socket = socketChannel.socket();
 
 		socketBlockingQueue.add(socket);
 
@@ -774,8 +790,8 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertTrue(logRecords.isEmpty());
 
-		closeSocketChannel(
-			socketChannel, directMailboxIntraBand._fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
 		closePeers(socket, serverSocket);
 
 		// Unable to send, unable to close, with log
@@ -783,18 +799,19 @@ public class HttpClientSPIAgentTest {
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.WARNING);
 
-		socketChannel = SocketChannel.open(httpClientSPIAgent.socketAddress);
+		socket = new Socket(
+			InetAddressUtil.getLoopbackInetAddress(),
+			_spiConfiguration.getConnectorPort());
 
-		directMailboxIntraBand = new DirectMailboxIntraBand(
-			socketChannel, new IOException());
+		socketImpl = swapSocketImpl(socket, null);
+
+		directMailboxIntraBand = new DirectMailboxIntraBand(new IOException());
 
 		httpClientSPIAgent = new HttpClientSPIAgent(
 			_spiConfiguration,
 			new MockRegistrationReference(directMailboxIntraBand));
 
 		socketBlockingQueue = httpClientSPIAgent.socketBlockingQueue;
-
-		socket = socketChannel.socket();
 
 		socketBlockingQueue.add(socket);
 
@@ -817,8 +834,8 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertSame(IOException.class, throwable.getClass());
 
-		closeSocketChannel(
-			socketChannel, directMailboxIntraBand._fileDescriptor);
+		swapSocketImpl(socket, socketImpl);
+
 		closePeers(socket, serverSocket);
 
 		// Successfully send
@@ -829,8 +846,7 @@ public class HttpClientSPIAgentTest {
 
 		httpClientSPIAgent = new HttpClientSPIAgent(
 			_spiConfiguration,
-			new MockRegistrationReference(
-				new DirectMailboxIntraBand(null, null)));
+			new MockRegistrationReference(new DirectMailboxIntraBand(null)));
 
 		socketBlockingQueue = httpClientSPIAgent.socketBlockingQueue;
 
@@ -991,27 +1007,34 @@ public class HttpClientSPIAgentTest {
 		socketChannel.close();
 	}
 
-	private static FileDescriptor _injectFileDescriptor(
-			SocketChannel socketChannel)
+	protected SocketImpl swapSocketImpl(Socket socket, SocketImpl socketImpl)
 		throws Exception {
 
-		Field fileDescriptorField = ReflectionUtil.getDeclaredField(
-			socketChannel.getClass(), "fd");
+		Field implField = ReflectionUtil.getDeclaredField(Socket.class, "impl");
 
-		FileDescriptor fileDescriptor = (FileDescriptor)fileDescriptorField.get(
-			socketChannel);
+		SocketImpl oldSocketImpl = (SocketImpl)implField.get(socket);
 
-		File tempFile = new File("temp-" + System.nanoTime());
+		if (socketImpl == null) {
+			Socket unbindSocket = new Socket();
 
-		tempFile.deleteOnExit();
+			socketImpl = (SocketImpl)implField.get(unbindSocket);
 
-		FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
+			Field cmdsockField = ReflectionUtil.getDeclaredField(
+				socketImpl.getClass(), "cmdsock");
 
-		fileDescriptorField.set(socketChannel, fileOutputStream.getFD());
+			cmdsockField.set(socketImpl, new Socket() {
 
-		fileOutputStream.close();
+				@Override
+				public synchronized void close() throws IOException {
+					throw new IOException();
+				}
 
-		return fileDescriptor;
+			});
+		}
+
+		implField.set(socket, socketImpl);
+
+		return oldSocketImpl;
 	}
 
 	private SPIConfiguration _spiConfiguration = new SPIConfiguration(
@@ -1019,10 +1042,7 @@ public class HttpClientSPIAgentTest {
 
 	private static class DirectMailboxIntraBand extends MockIntraband {
 
-		public DirectMailboxIntraBand(
-			SocketChannel socketChannel, IOException ioException) {
-
-			_socketChannel = socketChannel;
+		public DirectMailboxIntraBand(IOException ioException) {
 			_ioException = ioException;
 		}
 
@@ -1030,15 +1050,6 @@ public class HttpClientSPIAgentTest {
 		public Datagram sendSyncDatagram(
 				RegistrationReference registrationReference, Datagram datagram)
 			throws IOException {
-
-			if (_socketChannel != null) {
-				try {
-					_fileDescriptor = _injectFileDescriptor(_socketChannel);
-				}
-				catch (Exception e) {
-					throw new IOException(e);
-				}
-			}
 
 			if (_ioException != null) {
 				throw _ioException;
@@ -1063,10 +1074,8 @@ public class HttpClientSPIAgentTest {
 			}
 		}
 
-		private FileDescriptor _fileDescriptor;
 		private IOException _ioException;
 		private byte[] _receiptData;
-		private SocketChannel _socketChannel;
 
 	}
 
