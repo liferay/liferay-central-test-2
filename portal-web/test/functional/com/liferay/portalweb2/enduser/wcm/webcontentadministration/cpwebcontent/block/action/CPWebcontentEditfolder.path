@@ -9,24 +9,9 @@
 </thead>
 <tbody>
 <tr>
-	<td>OPTIONS</td>
+	<td>PAGE_NAME</td>
 	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>BACK</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>SAVE_BUTTON</td>
-	<td>//button[@type='submit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>CANCEL_BUTTON</td>
-	<td>//button[contains(., 'Cancel')]</td>
-	<td></td>
+	<td>WCWebcontentEditwebcontent</td>
 </tr>
 <tr>
 	<td></td>
@@ -56,6 +41,16 @@
 <tr>
 	<td>DESCRIPTION_FIELD</td>
 	<td>//textarea[@id='_15_description']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//button[contains(.,'Save')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//button[contains(.,'Cancel')]</td>
 	<td></td>
 </tr>
 </tbody>

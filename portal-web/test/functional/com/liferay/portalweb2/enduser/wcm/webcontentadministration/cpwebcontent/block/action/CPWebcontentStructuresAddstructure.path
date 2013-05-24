@@ -10,18 +10,33 @@
 <tbody>
 <tr>
 	<td>PAGE_NAME</td>
-	<td></td>
+	<td>//div[contains(@class,'dialog-iframe-bd')]/iframe</td>
 	<td>CPWebcontentStructures</td>
 </tr>
 <!---->
 <tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>CLOSE_WINDOW</td>
+	<td>//button[contains(@class, 'close-content')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>BACK</td>
+	<td>NAME_FIELD</td>
+	<td>//input[@id='_166_name']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>DESCRIPTION_FIELD</td>
+	<td>//textarea[@id='_166_description']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PARENT_STRUCTURE_SELECT_BUTTON</td>
+	<td>//input[@value='Select']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PARENT_STRUCTURE_REMOVE_BUTTON</td>
+	<td>//input[@id='_166_removeParentStructureButton']</td>
 	<td></td>
 </tr>
 <tr>
@@ -32,62 +47,6 @@
 <tr>
 	<td>CANCEL_BUTTON</td>
 	<td>//button[contains(., 'Cancel')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<!--NEW_STRUCTURE-->
-<tr>
-	<td>NEW_STRUCTURE_NAME_FIELD</td>
-	<td>//input[@id='_166_name_en_US']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>NEW_STRUCTURE_NAME_OTHER_LANGUAGES</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>NEW_STRUCTURE_DESCRIPTION</td>
-	<td>//textarea[@id='_166_description_en_US']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>NEW_STRUCTURE_DESCRIPTION_OTHER_LANGUAGES</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>NEW_STRUCTURE_PARENT_STRUCTURE_SELECT_BUTTON</td>
-	<td>//input[@value='Select']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>NEW_STRUCTURE_PARENT_STRUCTURE_REMOVE_BUTTON</td>
-	<td>//input[@id='_166_removeParentStructureButton']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>VIEW_TAB</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>SOURCE_TAB</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>FIELDS_TAB</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>SETTINGS_TAB</td>
-	<td></td>
 	<td></td>
 </tr>
 <tr>
@@ -169,7 +128,7 @@
 <!--DIAGRAM_BUILDER-->
 <tr>
 	<td>DIAGRAM_BUILDER_DROP_CONTAINER</td>
-	<td>//div[@class='aui-diagram-builder-drop-container']</td>
+	<td>//div[@class='diagram-builder-drop-container']</td>
 	<td></td>
 </tr>
 </tbody>

@@ -10,33 +10,33 @@
 <tbody>
 <tr>
 	<td>PAGE_NAME</td>
-	<td></td>
+	<td>//div[contains(@class,'dialog-iframe-bd')]/iframe</td>
 	<td>CPWebcontentTemplates</td>
 </tr>
 <!---->
 <tr>
-	<td>REQUEST_SUCCESS_MESSAGE</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>CLOSE_WINDOW</td>
+	<td>//button[contains(@class, 'close-content')]</td>
+	<td></td>
 </tr>
 <tr>
-	<td>CLOSE_WINDOW</td>
-	<td>//span[@class='aui-buttonitem-icon aui-icon aui-icon-closethick']</td>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='alert alert-success']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>VIEW_ALL</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td>ADD</td>
-	<td>//span[@class='lfr-toolbar-button add-button ']</td>
+	<td>//div[@class='container']/ul[contains(@class,'nav')]/li/a[contains(.,'View All')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>SEARCH_SUBMIT_BUTTON</td>
-	<td>//div[@id='toggle_id_ddm_template_searchsimple']/button</td>
+	<td>ADD_TEMPLATE</td>
+	<td>//div[@class='container']/ul[contains(@class,'nav')]/li/a[contains(.,'Add')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//button[contains(., 'Search')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -45,95 +45,79 @@
 	<td></td>
 </tr>
 <tr>
-	<td>REQUEST_SUCCESS_MESSAGE</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>DELETE_BUTTON</td>
+	<td>//button[@class='btn delete-templates-button']</td>
+	<td></td>
 </tr>
 <tr>
-	<td>NO_RESULTS_MESSAGE</td>
-	<td>//div[@class='portlet-msg-info']</td>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='alert alert-info']</td>
 	<td>There are no results.</td>
 </tr>
-<tr>
-	<td>BACK</td>
-	<td></td>
-	<td></td>
-</tr>
 <!---->
-<!--ENTRY_TABLE-->
+<!--TEMPLATE_TABLE-->
 <tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ENTRY_TABLE_ENTRY1</td>
-	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>ENTRY_TABLE_ENTRY1_CHECKBOX</td>
+	<td>TEMPLATE_TABLE_CHECKBOX_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[1]/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_ID</td>
+	<td>TEMPLATE_TABLE_ID_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[2]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_NAME</td>
+	<td>TEMPLATE_TABLE_NAME_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[3]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_DESCRIPTION</td>
+	<td>TEMPLATE_TABLE_DESCRIPTION_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[4]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_STRUCTURE</td>
+	<td>TEMPLATE_TABLE_STRUCTURE_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[5]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_LANGUAGE</td>
+	<td>TEMPLATE_TABLE_LANGUAGE_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[6]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_MODIFIED_DATE</td>
+	<td>TEMPLATE_TABLE_MODIFIED_DATE_1</td>
 	<td>//div[@id='_166_ddmTemplatesSearchContainerSearchContainer']/table/tbody/tr[1]/td[7]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY_TABLE_ENTRY1_ACTIONS</td>
+	<td>TEMPLATE_TABLE_ACTIONS_1</td>
 	<td>//a[@id='_166_ddmTemplatesSearchContainer_1_menu']</td>
 	<td></td>
 </tr>
 <!---->
-<!--ENTRY1_ACTIONS_MENULIST-->
+<!--TEMPLATE_MENULIST-->
 <tr>
-	<td>ENTRY1_ACTIONS_MENULIST_EDIT</td>
+	<td>TEMPLATE_MENULIST_EDIT</td>
 	<td>//a[@id='_166_ddmTemplatesSearchContainer_1_menu_edit']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY1_ACTIONS_MENULIST_PERMISSIONS</td>
+	<td>TEMPLATE_MENULIST_PERMISSIONS</td>
 	<td>//a[@id='_166_ddmTemplatesSearchContainer_1_menu_permissions]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY1_ACTIONS_MENULIST_COPY</td>
+	<td>TEMPLATE_MENULIST_COPY</td>
 	<td>//a[id='_166_ddmTemplatesSearchContainer_1_menu_copy']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ENTRY1_ACTIONS_MENULIST_DELETE</td>
+	<td>TEMPLATE_MENULIST_DELETE</td>
 	<td>//a[@id='_166_ddmTemplatesSearchContainer_1_menu_delete']</td>
 	<td></td>
 </tr>
-
 </tbody>
 </table>
 </body>
