@@ -1473,6 +1473,7 @@ public class PortletURLImpl
 
 	private class ToStringPrivilegedAction implements PrivilegedAction<String> {
 
+		@Override
 		public String run() {
 			if (_wsrp) {
 				return generateWSRPToString();

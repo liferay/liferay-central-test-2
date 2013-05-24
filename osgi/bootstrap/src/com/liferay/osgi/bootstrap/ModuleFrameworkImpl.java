@@ -1076,6 +1076,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	private class ModuleFrameworkServiceLoaderCondition
 		implements ServiceLoaderCondition {
 
+		@Override
 		public boolean isLoad(URL url) {
 			String path = url.getPath();
 
@@ -1094,6 +1095,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			_lazyActivationBundles = lazyActivationBundles;
 		}
 
+		@Override
 		public void frameworkEvent(FrameworkEvent frameworkEvent) {
 			if (frameworkEvent.getType() != FrameworkEvent.PACKAGES_REFRESHED) {
 				return;

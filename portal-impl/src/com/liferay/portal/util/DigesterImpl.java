@@ -77,6 +77,7 @@ public class DigesterImpl implements Digester {
 		}
 	}
 
+	@Override
 	public String digest(String algorithm, String... text) {
 		if (_BASE_64) {
 			return digestBase64(algorithm, text);
@@ -115,6 +116,7 @@ public class DigesterImpl implements Digester {
 		return Base64.encode(bytes);
 	}
 
+	@Override
 	public String digestBase64(String algorithm, String... text) {
 		byte[] bytes = digestRaw(algorithm, text);
 
@@ -150,6 +152,7 @@ public class DigesterImpl implements Digester {
 		return Hex.encodeHexString(bytes);
 	}
 
+	@Override
 	public String digestHex(String algorithm, String... text) {
 		byte[] bytes = digestRaw(algorithm, text);
 
@@ -212,6 +215,7 @@ public class DigesterImpl implements Digester {
 		return messageDigest.digest();
 	}
 
+	@Override
 	public byte[] digestRaw(String algorithm, String... text) {
 		MessageDigest messageDigest = null;
 

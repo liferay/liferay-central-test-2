@@ -51,6 +51,7 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		return values;
 	}
 
+	@Override
 	public V get(K key) {
 		V result = null;
 
@@ -74,6 +75,7 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		return _portalCache.getName();
 	}
 
+	@Override
 	public void put(K key, V value) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (value == null) {
@@ -89,6 +91,7 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		}
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (value == null) {
@@ -117,6 +120,7 @@ public class TransactionalPortalCache<K extends Serializable, V>
 		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
 	}
 
+	@Override
 	public void remove(K key) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			TransactionalPortalCacheHelper.remove(_portalCache, key);

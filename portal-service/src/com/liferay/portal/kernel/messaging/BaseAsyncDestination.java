@@ -189,6 +189,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 	protected RejectedExecutionHandler createRejectionExecutionHandler() {
 		return new RejectedExecutionHandler() {
 
+			@Override
 			public void rejectedExecution(
 				Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
 

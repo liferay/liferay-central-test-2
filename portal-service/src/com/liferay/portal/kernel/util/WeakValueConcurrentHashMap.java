@@ -105,6 +105,7 @@ public class WeakValueConcurrentHashMap<K, V>
 		return _map.keySet();
 	}
 
+	@Override
 	public V put(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
 
@@ -129,6 +130,7 @@ public class WeakValueConcurrentHashMap<K, V>
 		}
 	}
 
+	@Override
 	public V putIfAbsent(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
 
@@ -159,6 +161,7 @@ public class WeakValueConcurrentHashMap<K, V>
 		return _map.remove(key, valueReference);
 	}
 
+	@Override
 	public V replace(K key, V value) {
 		Reference<V> valueReference = wrapValue(key, value);
 
@@ -171,6 +174,7 @@ public class WeakValueConcurrentHashMap<K, V>
 		return null;
 	}
 
+	@Override
 	public boolean replace(K key, V oldValue, V newValue) {
 		Reference<V> oldValueReference = wrapValue(key, oldValue);
 		Reference<V> newValueReference = wrapValue(key, newValue);
@@ -207,6 +211,7 @@ public class WeakValueConcurrentHashMap<K, V>
 			_key = key;
 		}
 
+		@Override
 		public void doFinalize() {
 			remove(_key);
 		}
@@ -221,10 +226,12 @@ public class WeakValueConcurrentHashMap<K, V>
 			_entry = entry;
 		}
 
+		@Override
 		public K getKey() {
 			return _entry.getKey();
 		}
 
+		@Override
 		public V getValue() {
 			Reference<V> valueReference = _entry.getValue();
 
@@ -235,6 +242,7 @@ public class WeakValueConcurrentHashMap<K, V>
 			return null;
 		}
 
+		@Override
 		public V setValue(V value) {
 			return WeakValueConcurrentHashMap.this.put(_entry.getKey(), value);
 		}
@@ -249,14 +257,17 @@ public class WeakValueConcurrentHashMap<K, V>
 			_iterator = _map.entrySet().iterator();
 		}
 
+		@Override
 		public boolean hasNext() {
 			return _iterator.hasNext();
 		}
 
+		@Override
 		public Entry<K, V> next() {
 			return new UnwrapEntry(_iterator.next());
 		}
 
+		@Override
 		public void remove() {
 			_iterator.remove();
 		}
@@ -346,10 +357,12 @@ public class WeakValueConcurrentHashMap<K, V>
 			_iterator = _map.values().iterator();
 		}
 
+		@Override
 		public boolean hasNext() {
 			return _iterator.hasNext();
 		}
 
+		@Override
 		public V next() {
 			Reference<V> valueReference = _iterator.next();
 
@@ -360,6 +373,7 @@ public class WeakValueConcurrentHashMap<K, V>
 			return null;
 		}
 
+		@Override
 		public void remove() {
 			_iterator.remove();
 		}

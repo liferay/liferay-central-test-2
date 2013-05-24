@@ -59,6 +59,7 @@ public class JSONWebServiceActionConfig
 		_signature = sb.toString();
 	}
 
+	@Override
 	public int compareTo(
 		JSONWebServiceActionConfig jsonWebServiceActionConfig) {
 

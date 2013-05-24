@@ -85,6 +85,7 @@ public class CallbackPreferringTransactionExecutor
 			_methodInvocation = methodInvocation;
 		}
 
+		@Override
 		public Object doInTransaction(TransactionStatus transactionStatus) {
 			boolean newTransaction = transactionStatus.isNewTransaction();
 

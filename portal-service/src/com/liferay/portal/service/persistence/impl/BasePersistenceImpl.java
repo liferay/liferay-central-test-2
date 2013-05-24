@@ -73,6 +73,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void clearCache(List<T> model) {
 	}
 
+	@Override
 	public void clearCache(T model) {
 	}
 
@@ -249,6 +250,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public T remove(T model) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -290,6 +292,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
+	@Override
 	public T update(T model) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -325,6 +328,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #update(BaseModel)}}
 	 */
+	@Override
 	public T update(T model, boolean merge) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -361,12 +365,14 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 * @deprecated As of 6.2.0, replaced by {@link #update(BaseModel,
 	 *             ServiceContext)}}
 	 */
+	@Override
 	public T update(T model, boolean merge, ServiceContext serviceContext)
 		throws SystemException {
 
 		return update(model, serviceContext);
 	}
 
+	@Override
 	public T update(T model, ServiceContext serviceContext)
 		throws SystemException {
 

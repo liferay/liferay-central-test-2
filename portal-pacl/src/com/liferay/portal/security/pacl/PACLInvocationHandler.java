@@ -107,6 +107,7 @@ public class PACLInvocationHandler implements InvocationHandler {
 			_arguments = arguments;
 		}
 
+		@Override
 		public Object run() throws Exception {
 			try {
 				return _invocationHandler.invoke(_proxy, _method, _arguments);

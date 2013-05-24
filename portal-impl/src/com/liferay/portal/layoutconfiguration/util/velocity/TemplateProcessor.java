@@ -66,6 +66,7 @@ public class TemplateProcessor implements ColumnProcessor {
 		_portletRenderers = new TreeMap<Integer, List<PortletRenderer>>(
 			new Comparator<Integer>() {
 
+				@Override
 				public int compare(
 					Integer renderWeight1, Integer renderWeight2) {
 

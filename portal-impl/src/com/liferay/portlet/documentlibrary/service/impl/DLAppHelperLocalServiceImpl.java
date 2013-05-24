@@ -1656,6 +1656,7 @@ public class DLAppHelperLocalServiceImpl
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
+				@Override
 				public Void call() throws Exception {
 					DLProcessorRegistryUtil.trigger(
 						fileEntry, fileVersion, true);
@@ -1672,6 +1673,7 @@ public class DLAppHelperLocalServiceImpl
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
+				@Override
 				public Void call() throws Exception {
 					Message message = new Message();
 

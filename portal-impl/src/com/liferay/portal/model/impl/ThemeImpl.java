@@ -74,6 +74,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_themeSettingsMap.put(key, themeSetting);
 	}
 
+	@Override
 	public int compareTo(Theme theme) {
 		return getName().compareTo(theme.getName());
 	}

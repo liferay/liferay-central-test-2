@@ -53,6 +53,7 @@ public class BlogsEntryAtomCollectionAdapter
 		return _COLLECTION_NAME;
 	}
 
+	@Override
 	public List<String> getEntryAuthors(BlogsEntry blogsEntry) {
 		List<String> authors = new ArrayList<String>();
 
@@ -61,24 +62,29 @@ public class BlogsEntryAtomCollectionAdapter
 		return authors;
 	}
 
+	@Override
 	public AtomEntryContent getEntryContent(
 		BlogsEntry blogsEntry, AtomRequestContext atomRequestContext) {
 
 		return new AtomEntryContent(blogsEntry.getContent());
 	}
 
+	@Override
 	public String getEntryId(BlogsEntry blogsEntry) {
 		return String.valueOf(blogsEntry.getEntryId());
 	}
 
+	@Override
 	public String getEntrySummary(BlogsEntry blogsEntry) {
 		return blogsEntry.getDescription();
 	}
 
+	@Override
 	public String getEntryTitle(BlogsEntry blogsEntry) {
 		return blogsEntry.getTitle();
 	}
 
+	@Override
 	public Date getEntryUpdated(BlogsEntry blogsEntry) {
 		return blogsEntry.getModifiedDate();
 	}

@@ -192,6 +192,7 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public Object getBean(Object bean, ClassLoader classLoader) {
 			return bean;
 		}

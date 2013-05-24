@@ -85,6 +85,7 @@ public class BTEntryLocalServiceImpl extends BTEntryLocalServiceBaseImpl {
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
+				@Override
 				public Void call() throws Exception {
 					Message message = new Message();
 

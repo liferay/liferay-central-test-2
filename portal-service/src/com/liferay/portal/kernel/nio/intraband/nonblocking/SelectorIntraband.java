@@ -239,6 +239,7 @@ public class SelectorIntraband extends BaseIntraband {
 			_writeSelectableChannel = writeSelectableChannel;
 		}
 
+		@Override
 		public RegistrationReference call() throws Exception {
 			if (_readSelectableChannel == _writeSelectableChannel) {
 
@@ -365,6 +366,7 @@ public class SelectorIntraband extends BaseIntraband {
 
 	private class PollingJob implements Runnable {
 
+		@Override
 		public void run() {
 			try {
 				try {

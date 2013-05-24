@@ -254,6 +254,7 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public InvocationHandler getInvocationHandler(
 			InvocationHandler invocationHandler,
 			AdvisedSupport advisedSupport) {

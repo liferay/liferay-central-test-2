@@ -754,6 +754,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			return _terms;
 		}
 
+		@Override
 		public String highlightTerm(
 			String originalText, TokenGroup tokenGroup) {
 

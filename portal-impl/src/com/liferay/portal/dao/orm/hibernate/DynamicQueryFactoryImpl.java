@@ -146,6 +146,7 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 			_alias = alias;
 		}
 
+		@Override
 		public DynamicQuery run() {
 			if (_alias != null) {
 				return new DynamicQueryImpl(

@@ -61,6 +61,7 @@ public class MemoryPortalCache<K extends Serializable, V>
 		return values;
 	}
 
+	@Override
 	public V get(K key) {
 		return _map.get(key);
 	}
@@ -70,12 +71,14 @@ public class MemoryPortalCache<K extends Serializable, V>
 		return _name;
 	}
 
+	@Override
 	public void put(K key, V value) {
 		V oldValue = _map.put(key, value);
 
 		notifyPutEvents(key, value, oldValue != null);
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		V oldValue = _map.put(key, value);
 
@@ -95,6 +98,7 @@ public class MemoryPortalCache<K extends Serializable, V>
 		registerCacheListener(cacheListener);
 	}
 
+	@Override
 	public void remove(K key) {
 		V value = _map.remove(key);
 

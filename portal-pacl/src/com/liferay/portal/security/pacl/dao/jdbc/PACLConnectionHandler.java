@@ -121,6 +121,7 @@ public class PACLConnectionHandler implements InvocationHandler {
 			_returnValue = returnValue;
 		}
 
+		@Override
 		public Statement run() {
 			return (Statement)ProxyUtil.newProxyInstance(
 				_paclPolicy.getClassLoader(),

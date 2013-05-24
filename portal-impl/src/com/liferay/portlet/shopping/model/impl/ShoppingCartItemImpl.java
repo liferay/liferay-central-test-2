@@ -35,6 +35,7 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		_fields = fields;
 	}
 
+	@Override
 	public int compareTo(ShoppingCartItem cartItem) {
 		if (cartItem == null) {
 			return -1;

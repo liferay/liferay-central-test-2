@@ -41,10 +41,12 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		_list = list;
 	}
 
+	@Override
 	public boolean add(E element) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
+	@Override
 	public void add(int index, E element) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
@@ -105,14 +107,17 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 
 			Iterator<? extends E> itr = _list.iterator();
 
+			@Override
 			public boolean hasNext() {
 				return itr.hasNext();
 			}
 
+			@Override
 			public E next() {
 				return itr.next();
 			}
 
+			@Override
 			public void remove() {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
@@ -136,38 +141,47 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 
 			ListIterator<? extends E> itr = _list.listIterator(index);
 
+			@Override
 			public void add(E element) {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
 
+			@Override
 			public boolean hasNext() {
 				return itr.hasNext();
 			}
 
+			@Override
 			public E next() {
 				return itr.next();
 			}
 
+			@Override
 			public boolean hasPrevious() {
 				return itr.hasPrevious();
 			}
 
+			@Override
 			public E previous() {
 				return itr.previous();
 			}
 
+			@Override
 			public int nextIndex() {
 				return itr.nextIndex();
 			}
 
+			@Override
 			public int previousIndex() {
 				return itr.previousIndex();
 			}
 
+			@Override
 			public void remove() {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
 
+			@Override
 			public void set(E element) {
 				throw new UnsupportedOperationException(_MESSAGE);
 			}
@@ -195,6 +209,7 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
 
+	@Override
 	public E set(int index, E element) {
 		throw new UnsupportedOperationException(_MESSAGE);
 	}
@@ -214,6 +229,7 @@ public class UnmodifiableList<E> implements List<E>, Serializable {
 		return _list.toArray();
 	}
 
+	@Override
 	public <T> T[] toArray(T[] a) {
 		return _list.toArray(a);
 	}

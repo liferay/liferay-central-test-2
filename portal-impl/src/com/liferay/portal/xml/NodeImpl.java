@@ -39,6 +39,7 @@ public class NodeImpl implements Node {
 		_node = node;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitNode(this);
 	}

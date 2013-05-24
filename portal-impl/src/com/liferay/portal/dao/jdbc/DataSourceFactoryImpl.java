@@ -405,6 +405,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public DataSource getDataSource(DataSource dataSource) {
 			return dataSource;
 		}

@@ -106,6 +106,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		return (Collection<V>)values.values();
 	}
 
+	@Override
 	public V get(String key) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -151,10 +152,12 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		return _name;
 	}
 
+	@Override
 	public void put(String key, V value) {
 		put(key, value, _timeToLive);
 	}
 
+	@Override
 	public void put(String key, V value, int timeToLive) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -193,6 +196,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void remove(String key) {
 		MemcachedClientIF memcachedClient = null;
 

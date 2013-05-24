@@ -32,6 +32,7 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return new DummyImpl();
 	}
 
+	@Override
 	public int compareTo(Dummy dummy) {
 		return 0;
 	}

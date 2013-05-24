@@ -124,6 +124,7 @@ public class DirectRequestDispatcherFactoryImpl
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public RequestDispatcher getRequestDispatcher(
 			ServletContext servletContext,
 			RequestDispatcher requestDispatcher) {

@@ -90,6 +90,7 @@ public class IntrabandPortalCache
 		}
 	}
 
+	@Override
 	public V get(K key) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.GET);
 
@@ -112,6 +113,7 @@ public class IntrabandPortalCache
 		return _name;
 	}
 
+	@Override
 	public void put(K key, V value) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.PUT);
 
@@ -124,6 +126,7 @@ public class IntrabandPortalCache
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		Serializer serializer = _createSerializer(
 			PortalCacheActionType.PUT_TTL);
@@ -148,6 +151,7 @@ public class IntrabandPortalCache
 		CacheListenerScope cacheListenerScope) {
 	}
 
+	@Override
 	public void remove(K key) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.REMOVE);
 

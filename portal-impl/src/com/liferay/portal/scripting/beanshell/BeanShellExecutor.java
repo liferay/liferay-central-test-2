@@ -33,6 +33,7 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 
 	public static final String LANGUAGE = "beanshell";
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script, ClassLoader... classLoaders)

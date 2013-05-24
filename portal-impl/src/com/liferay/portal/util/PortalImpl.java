@@ -3096,6 +3096,7 @@ public class PortalImpl implements Portal {
 		return getLocale(getHttpServletRequest(renderRequest));
 	}
 
+	@Override
 	public String getMailId(String mx, String popPortletPrefix, Object... ids) {
 		StringBundler sb = new StringBundler(ids.length * 2 + 7);
 

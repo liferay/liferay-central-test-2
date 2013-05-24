@@ -415,6 +415,7 @@ public class PrefsPropsImpl implements PrefsProps {
 		return PrefsPropsUtil.getStringArray(name, delimiter, defaultValue);
 	}
 
+	@Override
 	public String getStringFromNames(long companyId, String... names)
 		throws SystemException {
 

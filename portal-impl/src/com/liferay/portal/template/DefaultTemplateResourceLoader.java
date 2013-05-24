@@ -244,22 +244,27 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		public NullHolderTemplateResource() {
 		}
 
+		@Override
 		public long getLastModified() {
 			return _lastModified;
 		}
 
+		@Override
 		public Reader getReader() {
 			return null;
 		}
 
+		@Override
 		public String getTemplateId() {
 			return null;
 		}
 
+		@Override
 		public void readExternal(ObjectInput objectInput) throws IOException {
 			_lastModified = objectInput.readLong();
 		}
 
+		@Override
 		public void writeExternal(ObjectOutput objectOutput)
 			throws IOException {
 

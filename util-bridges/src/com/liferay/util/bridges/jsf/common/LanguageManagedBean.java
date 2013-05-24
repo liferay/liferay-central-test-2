@@ -89,6 +89,7 @@ public class LanguageManagedBean implements Map<String, String> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String put(String key, String value) {
 		throw new UnsupportedOperationException();
 	}

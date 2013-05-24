@@ -34,6 +34,7 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 		new Accessor<FileEntry, Long>() {
 
+			@Override
 			public Long get(FileEntry fileEntry) {
 				return fileEntry.getFileEntryId();
 			}

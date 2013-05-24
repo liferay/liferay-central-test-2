@@ -936,6 +936,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	private class PortletPreferencesPrivilegedAction
 		implements PrivilegedAction<PortletPreferences> {
 
+		@Override
 		public PortletPreferences run() {
 			return new PortletPreferencesWrapper(
 				getPreferencesImpl(), getLifecycle());

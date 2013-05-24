@@ -50,10 +50,12 @@ public class InvokerFilterConfig implements FilterConfig {
 	public Enumeration<String> getInitParameterNames() {
 		return new Enumeration<String>() {
 
+			@Override
 			public boolean hasMoreElements() {
 				return _keys.hasNext();
 			}
 
+			@Override
 			public String nextElement() {
 				return _keys.next();
 			}

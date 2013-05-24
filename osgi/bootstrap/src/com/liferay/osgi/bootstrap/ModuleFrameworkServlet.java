@@ -86,6 +86,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 		}
 	}
 
+	@Override
 	public void modifiedService(
 		ServiceReference<HttpServlet> serviceReference,
 		HttpServlet httpService) {
@@ -93,6 +94,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 		_httpServlet = _bundleContext.getService(serviceReference);
 	}
 
+	@Override
 	public void removedService(
 		ServiceReference<HttpServlet> serviceReference,
 		HttpServlet httpService) {

@@ -30,6 +30,7 @@ import java.util.Map;
 @DoPrivileged
 public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 
+	@Override
 	public void add(
 		String domainName, RulesResourceRetriever RulesResourceRetriever,
 		ClassLoader... clientClassLoaders) {
@@ -42,6 +43,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void execute(
 		RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
 		ClassLoader... clientClassLoaders) {
@@ -49,6 +51,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, ?> execute(
 		RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
 		Query query, ClassLoader... clientClassLoaders) {
@@ -56,6 +59,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void execute(
 		String domainName, List<Fact<?>> facts,
 		ClassLoader... clientClassLoaders) {
@@ -63,6 +67,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, ?> execute(
 		String domainName, List<Fact<?>> facts, Query query,
 		ClassLoader... clientClassLoaders) {
@@ -75,6 +80,7 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void update(
 		String domainName, RulesResourceRetriever RulesResourceRetriever,
 		ClassLoader... clientClassLoaders) {

@@ -63,6 +63,7 @@ public class PluginPackageImpl
 		_moduleId = ModuleId.getInstance(moduleId);
 	}
 
+	@Override
 	public int compareTo(PluginPackage pluginPackage) {
 		return getName().compareTo(pluginPackage.getName());
 	}

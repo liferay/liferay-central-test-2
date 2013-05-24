@@ -109,6 +109,7 @@ public class DoPrivilegedFactory implements BeanPostProcessor {
 			_bean = bean;
 		}
 
+		@Override
 		public T run() {
 			Class<?> clazz = _bean.getClass();
 

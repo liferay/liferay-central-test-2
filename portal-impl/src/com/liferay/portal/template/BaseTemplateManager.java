@@ -76,6 +76,7 @@ public abstract class BaseTemplateManager implements TemplateManager {
 			_helperUtilities = helperUtilities;
 		}
 
+		@Override
 		public Template run() {
 			return doGetTemplate(
 				_templateResource, _errorTemplateResource, _restricted,

@@ -43,6 +43,7 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> eval(
 		Set<String> allowedClasses, Map<String, Object> inputObjects,
 		Set<String> outputNames, String language, String script,
@@ -51,6 +52,7 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void exec(
 		Set<String> allowedClasses, Map<String, Object> inputObjects,
 		String language, String script, ClassLoader... classLoaders) {

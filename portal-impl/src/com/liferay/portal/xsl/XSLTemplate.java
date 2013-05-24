@@ -242,6 +242,7 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 			_scriptSource = scriptSource;
 		}
 
+		@Override
 		public Transformer run() throws Exception {
 			return _transformerFactory.newTransformer(_scriptSource);
 		}

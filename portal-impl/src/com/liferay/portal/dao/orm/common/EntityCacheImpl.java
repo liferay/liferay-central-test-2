@@ -398,6 +398,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			return _shardName.hashCode() * 11 + _primaryKey.hashCode();
 		}
 
+		@Override
 		public void readExternal(ObjectInput objectInput)
 			throws ClassNotFoundException, IOException {
 
@@ -405,6 +406,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			_shardName = objectInput.readUTF();
 		}
 
+		@Override
 		public void writeExternal(ObjectOutput objectOutput)
 			throws IOException {
 

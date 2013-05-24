@@ -65,6 +65,7 @@ public abstract class AbstractProcessingTemplate implements Template {
 			_writer = writer;
 		}
 
+		@Override
 		public Void run() throws Exception {
 			doProcessTemplate(_writer);
 

@@ -31,6 +31,7 @@ import java.util.Set;
  */
 public abstract class BaseChecker implements Checker, PACLConstants {
 
+	@Override
 	public AuthorizationProperty generateAuthorizationProperty(
 		Object... arguments) {
 

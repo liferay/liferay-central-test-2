@@ -988,6 +988,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			_data = data;
 		}
 
+		@Override
 		public String call() throws ProcessException {
 			Tika tika = new Tika();
 

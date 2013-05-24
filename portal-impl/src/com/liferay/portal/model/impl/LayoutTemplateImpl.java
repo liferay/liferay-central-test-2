@@ -51,6 +51,7 @@ public class LayoutTemplateImpl
 		_name = name;
 	}
 
+	@Override
 	public int compareTo(LayoutTemplate layoutTemplate) {
 		if (layoutTemplate == null) {
 			return -1;

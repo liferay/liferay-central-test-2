@@ -162,6 +162,7 @@ public class DoPrivilegedHandler
 			_arguments = arguments;
 		}
 
+		@Override
 		public Object run() throws Exception {
 			return _method.invoke(_bean, _arguments);
 		}

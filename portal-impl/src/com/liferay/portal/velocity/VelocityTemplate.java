@@ -157,6 +157,7 @@ public class VelocityTemplate extends AbstractTemplate {
 			_templateResource = templateResource;
 		}
 
+		@Override
 		public Template run() throws Exception {
 			return _velocityEngine.getTemplate(
 				getTemplateResourceUUID(_templateResource),

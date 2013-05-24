@@ -196,6 +196,7 @@ public class ExecutorIntraband extends BaseIntraband {
 			_countDownLatch = new CountDownLatch(1);
 		}
 
+		@Override
 		public Void call() throws Exception {
 			_countDownLatch.await();
 
@@ -228,6 +229,7 @@ public class ExecutorIntraband extends BaseIntraband {
 			_countDownLatch = new CountDownLatch(1);
 		}
 
+		@Override
 		public Void call() throws Exception {
 			_countDownLatch.await();
 

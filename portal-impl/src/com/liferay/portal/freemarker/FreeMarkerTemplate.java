@@ -163,6 +163,7 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 			_templateResource = templateResource;
 		}
 
+		@Override
 		public Template run() throws Exception {
 			return _configuration.getTemplate(
 				getTemplateResourceUUID(_templateResource),

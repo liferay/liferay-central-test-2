@@ -820,6 +820,7 @@ public class ThemeDisplay
 		return _widget;
 	}
 
+	@Override
 	public ThemeDisplay merge(ThemeDisplay themeDisplay) {
 		if ((themeDisplay == null) || (themeDisplay == this)) {
 			return this;

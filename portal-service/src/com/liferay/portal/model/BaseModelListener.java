@@ -30,10 +30,12 @@ public class BaseModelListener<T extends BaseModel<T>>
 		throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onAfterCreate(T model) throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onAfterRemove(T model) throws ModelListenerException {
 	}
@@ -46,6 +48,7 @@ public class BaseModelListener<T extends BaseModel<T>>
 		throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onAfterUpdate(T model) throws ModelListenerException {
 	}
@@ -58,10 +61,12 @@ public class BaseModelListener<T extends BaseModel<T>>
 		throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onBeforeCreate(T model) throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onBeforeRemove(T model) throws ModelListenerException {
 	}
@@ -74,6 +79,7 @@ public class BaseModelListener<T extends BaseModel<T>>
 		throws ModelListenerException {
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void onBeforeUpdate(T model) throws ModelListenerException {
 	}

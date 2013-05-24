@@ -204,6 +204,7 @@ public class ServiceComponentLocalServiceImpl
 		AccessController.doPrivileged(
 			new PrivilegedExceptionAction<Void>() {
 
+				@Override
 				public Void run() throws Exception {
 					doUpgradeDB(
 						classLoader, buildNamespace, buildNumber,

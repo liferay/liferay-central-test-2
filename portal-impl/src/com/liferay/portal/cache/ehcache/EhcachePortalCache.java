@@ -59,6 +59,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 		return values;
 	}
 
+	@Override
 	public V get(K key) {
 		Element element = _ehcache.get(key);
 
@@ -75,12 +76,14 @@ public class EhcachePortalCache<K extends Serializable, V>
 		return _ehcache.getName();
 	}
 
+	@Override
 	public void put(K key, V value) {
 		Element element = new Element(key, value);
 
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		Element element = new Element(key, value);
 
@@ -118,6 +121,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 			cacheEventListener, notificationScope);
 	}
 
+	@Override
 	public void remove(K key) {
 		_ehcache.remove(key);
 	}

@@ -670,6 +670,7 @@ public class ImageToolImpl implements ImageTool {
 			_type = type;
 		}
 
+		@Override
 		public boolean cancel(boolean mayInterruptIfRunning) {
 			if (_future.isCancelled() || _future.isDone()) {
 				return false;
@@ -680,6 +681,7 @@ public class ImageToolImpl implements ImageTool {
 			return true;
 		}
 
+		@Override
 		public RenderedImage get()
 			throws ExecutionException, InterruptedException {
 
@@ -697,6 +699,7 @@ public class ImageToolImpl implements ImageTool {
 			return read(bytes, _type);
 		}
 
+		@Override
 		public RenderedImage get(long timeout, TimeUnit timeUnit)
 			throws ExecutionException, InterruptedException, TimeoutException {
 
@@ -714,10 +717,12 @@ public class ImageToolImpl implements ImageTool {
 			return read(bytes, _type);
 		}
 
+		@Override
 		public boolean isCancelled() {
 			return _future.isCancelled();
 		}
 
+		@Override
 		public boolean isDone() {
 			return _future.isDone();
 		}

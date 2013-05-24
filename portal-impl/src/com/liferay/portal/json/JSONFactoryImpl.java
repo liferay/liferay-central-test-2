@@ -266,6 +266,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		return jsonSerializer.serialize(object);
 	}
 
+	@Override
 	public String looseSerialize(Object object, String... includes) {
 		JSONSerializer jsonSerializer = createJSONSerializer();
 

@@ -31,6 +31,7 @@ public interface Folder extends RepositoryModel<Folder> {
 
 		new Accessor<Folder, Long>() {
 
+			@Override
 			public Long get(Folder folder) {
 				return folder.getFolderId();
 			}

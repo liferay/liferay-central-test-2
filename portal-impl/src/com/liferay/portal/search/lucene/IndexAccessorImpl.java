@@ -373,6 +373,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		Runnable runnable = new Runnable() {
 
+			@Override
 			public void run() {
 				try {
 					if (_batchCount > 0) {

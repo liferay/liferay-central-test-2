@@ -40,6 +40,7 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 		_portalCache.removeAll();
 	}
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script, ClassLoader... classLoaders)

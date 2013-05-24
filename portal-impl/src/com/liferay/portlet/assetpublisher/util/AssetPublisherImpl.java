@@ -1111,6 +1111,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 	private Accessor<AssetEntry, String> _titleAccessor =
 		new Accessor<AssetEntry, String>() {
 
+			@Override
 			public String get(AssetEntry assetEntry) {
 				return assetEntry.getTitle(LocaleUtil.getDefault());
 			}

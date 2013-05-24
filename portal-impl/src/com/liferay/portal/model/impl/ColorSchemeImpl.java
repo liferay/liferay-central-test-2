@@ -45,6 +45,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		_cssClass = cssClass;
 	}
 
+	@Override
 	public int compareTo(ColorScheme colorScheme) {
 		return getName().compareTo(colorScheme.getName());
 	}

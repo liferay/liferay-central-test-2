@@ -118,6 +118,7 @@ public abstract class BaseIntraband implements Intraband {
 		doSendDatagram(registrationReference, datagram);
 	}
 
+	@Override
 	public <A> void sendDatagram(
 		RegistrationReference registrationReference, Datagram datagram,
 		A attachment, EnumSet<CompletionHandler.CompletionType> completionTypes,
@@ -128,6 +129,7 @@ public abstract class BaseIntraband implements Intraband {
 			completionHandler, defaultTimeout, TimeUnit.MILLISECONDS);
 	}
 
+	@Override
 	public <A> void sendDatagram(
 		RegistrationReference registrationReference, Datagram datagram,
 		A attachment, EnumSet<CompletionType> completionTypes,
@@ -541,9 +543,11 @@ public abstract class BaseIntraband implements Intraband {
 	protected static class SendSyncDatagramCompletionHandler
 		implements CompletionHandler<Object> {
 
+		@Override
 		public void delivered(Object attachment) {
 		}
 
+		@Override
 		public void failed(Object attachment, IOException ioe) {
 
 			// Must set before count down to ensure memory visibility
@@ -553,6 +557,7 @@ public abstract class BaseIntraband implements Intraband {
 			_countDownLatch.countDown();
 		}
 
+		@Override
 		public void replied(Object attachment, Datagram datagram) {
 
 			// Must set before count down to ensure memory visibility
@@ -562,9 +567,11 @@ public abstract class BaseIntraband implements Intraband {
 			_countDownLatch.countDown();
 		}
 
+		@Override
 		public void submitted(Object attachment) {
 		}
 
+		@Override
 		public void timeouted(Object attachment) {
 		}
 
