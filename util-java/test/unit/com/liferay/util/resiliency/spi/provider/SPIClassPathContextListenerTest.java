@@ -63,25 +63,25 @@ public class SPIClassPathContextListenerTest {
 
 	@After
 	public void tearDown() {
-		Queue<File> deleteQueue = new LinkedList<File>();
+		Queue<File> fileQueue = new LinkedList<File>();
 
-		deleteQueue.offer(new File(_contextPath, _embeddedLibDir));
+		fileQueue.offer(new File(_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME));
 
-		File deleteFile = null;
+		File file = null;
 
-		while ((deleteFile = deleteQueue.poll()) != null) {
-			if (deleteFile.isFile()) {
-				deleteFile.delete();
+		while ((file = fileQueue.poll()) != null) {
+			if (file.isFile()) {
+				file.delete();
 			}
-			else if (deleteFile.isDirectory()) {
-				File[] files = deleteFile.listFiles();
+			else if (file.isDirectory()) {
+				File[] files = file.listFiles();
 
 				if (files.length == 0) {
-					deleteFile.delete();
+					file.delete();
 				}
 				else {
-					deleteQueue.addAll(Arrays.asList(files));
-					deleteQueue.add(deleteFile);
+					fileQueue.addAll(Arrays.asList(files));
+					fileQueue.add(file);
 				}
 			}
 		}
@@ -95,22 +95,23 @@ public class SPIClassPathContextListenerTest {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SPIClassPathContextListener.class.getName(), Level.FINE);
 
-		File embeddedLibDir = new File(_contextPath, _embeddedLibDir);
+		File spiEmbeddedLibDir = new File(
+			_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME);
 
-		embeddedLibDir.mkdir();
+		spiEmbeddedLibDir.mkdir();
 
-		File jarFile = new File(embeddedLibDir, "jarfile.jar");
+		File jarFile = new File(spiEmbeddedLibDir, "jarfile.jar");
 
 		jarFile.createNewFile();
 
-		File notJarFile = new File(embeddedLibDir, "notJarFile.zip");
+		File notJarFile = new File(spiEmbeddedLibDir, "notjarfile.zip");
 
 		notJarFile.createNewFile();
 
-		String wrongSPIProviderClassName = "wrongSPIProviderClassName";
+		String invalidSPIProviderClassName = "InvalidSPIProvider";
 
 		_mockServletContext.addInitParameter(
-			"spiProviderClassName", wrongSPIProviderClassName);
+			"spiProviderClassName", invalidSPIProviderClassName);
 
 		SPIClassPathContextListener spiClassPathContextListener =
 			new SPIClassPathContextListener();
@@ -118,31 +119,31 @@ public class SPIClassPathContextListenerTest {
 		spiClassPathContextListener.contextInitialized(
 			new ServletContextEvent(_mockServletContext));
 
-		String expectedClassPath =
-			jarFile.getAbsolutePath() + File.pathSeparator + _contextPath +
+		String spiClassPath =
+			jarFile.getAbsolutePath() + File.pathSeparator + _CONTEXT_PATH +
 				"/WEB-INF/classes" + File.pathSeparator +
 					ClassPathUtil.getGlobalClassPath();
 
 		Assert.assertEquals(
-			expectedClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
+			spiClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
 
 		Assert.assertEquals(3, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
 
 		Assert.assertEquals(
-			"Embedded lib class path " + jarFile.getAbsolutePath() +
+			"SPI embedded lib class path " + jarFile.getAbsolutePath() +
 				File.pathSeparator, logRecord.getMessage());
 
 		logRecord = logRecords.get(1);
 
 		Assert.assertEquals(
-			"SPI class path " + expectedClassPath, logRecord.getMessage());
+			"SPI class path " + spiClassPath, logRecord.getMessage());
 
 		logRecord = logRecords.get(2);
 
 		Assert.assertEquals(
-			"Unable to create SPI provider with name wrongSPIProviderClassName",
+			"Unable to create SPI provider with name InvalidSPIProvider",
 			logRecord.getMessage());
 
 		// Without log
@@ -154,15 +155,12 @@ public class SPIClassPathContextListenerTest {
 			new ServletContextEvent(_mockServletContext));
 
 		Assert.assertEquals(
-			expectedClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
-
+			spiClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
 		Assert.assertTrue(logRecords.isEmpty());
 	}
 
 	@Test
 	public void testLoadClassDirectly() throws Exception {
-		class TestClass {
-		}
 
 		String jvmClassPath = ClassPathUtil.getJVMClassPath(false);
 
@@ -197,9 +195,9 @@ public class SPIClassPathContextListenerTest {
 	}
 
 	@Test
-	public void testMissingEmbeddedLibsFolder() throws IOException {
+	public void testMissingSPIEmbeddedLibDir() throws IOException {
 
-		// Embedded libs folder does not exist
+		// SPI embedded lib directory does not exist
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SPIClassPathContextListener.class.getName(), Level.SEVERE);
@@ -217,22 +215,21 @@ public class SPIClassPathContextListenerTest {
 			SPIClassPathContextListener.spiProviderReference;
 
 		Assert.assertNull(spiProviderReference.get());
-
 		Assert.assertEquals(1, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
 
 		Assert.assertEquals(
-			"Unable to find embedded lib directory " + _contextPath +
-				_embeddedLibDir,
+			"Unable to find SPI embedded lib directory " + _CONTEXT_PATH +
+				_EMBEDDED_LIB_DIR_NAME,
 			logRecord.getMessage());
 
-		// Embedded libs folder is not a folder
+		// SPI embedded lib directory is not a directory
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SPIClassPathContextListener.class.getName(), Level.SEVERE);
 
-		File file = new File(_contextPath, _embeddedLibDir);
+		File file = new File(_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME);
 
 		file.deleteOnExit();
 
@@ -248,25 +245,23 @@ public class SPIClassPathContextListenerTest {
 
 		Assert.assertSame(
 			StringPool.BLANK, SPIClassPathContextListener.SPI_CLASS_PATH);
-
 		Assert.assertNull(spiProviderReference.get());
-
 		Assert.assertEquals(1, logRecords.size());
 
 		logRecord = logRecords.get(0);
 
 		Assert.assertEquals(
-			"Unable to find embedded lib directory " + _contextPath +
-				_embeddedLibDir,
+			"Unable to find SPI embedded lib directory " + _CONTEXT_PATH +
+				_EMBEDDED_LIB_DIR_NAME,
 			logRecord.getMessage());
 	}
 
 	@Test
-	public void testRegisteration() {
+	public void testRegistration() {
 
 		// Register
 
-		File embeddedLibDir = new File(_contextPath, _embeddedLibDir);
+		File embeddedLibDir = new File(_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME);
 
 		embeddedLibDir.mkdir();
 
@@ -351,20 +346,24 @@ public class SPIClassPathContextListenerTest {
 
 	}
 
-	private String _contextPath = System.getProperty("java.io.tmpdir");
-	private String _embeddedLibDir = "/embeddedLibDir";
+	private String _CONTEXT_PATH = System.getProperty("java.io.tmpdir");
+
+	private String _EMBEDDED_LIB_DIR_NAME = "/embeddedLibDir";
 
 	private MockServletContext _mockServletContext = new MockServletContext() {
 
-		@Override
-		public String getRealPath(String path) {
-			return _contextPath;
+		{
+			addInitParameter("spiEmbeddedLibDir", _EMBEDDED_LIB_DIR_NAME);
 		}
 
-		{
-			addInitParameter("embeddedLibDir", _embeddedLibDir);
+		@Override
+		public String getRealPath(String path) {
+			return _CONTEXT_PATH;
 		}
 
 	};
+
+	private class TestClass {
+	}
 
 }

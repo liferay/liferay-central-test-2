@@ -57,22 +57,22 @@ public class SPIClassPathContextListener implements ServletContextListener {
 		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		String contextPath = servletContext.getRealPath(StringPool.BLANK);
-		String embeddedLibDirName = servletContext.getInitParameter(
-			"embeddedLibDir");
+		String spiEmbeddedLibDirName = servletContext.getInitParameter(
+			"spiEmbeddedLibDir");
 
-		File embeddedLibDir = new File(contextPath, embeddedLibDirName);
+		File spiEmbeddedLibDir = new File(contextPath, spiEmbeddedLibDirName);
 
-		if (!embeddedLibDir.exists() || !embeddedLibDir.isDirectory()) {
+		if (!spiEmbeddedLibDir.exists() || !spiEmbeddedLibDir.isDirectory()) {
 			_log.error(
-				"Unable to find embedded lib directory " +
-					embeddedLibDir.getAbsolutePath());
+				"Unable to find SPI embedded lib directory " +
+					spiEmbeddedLibDir.getAbsolutePath());
 
 			return;
 		}
 
 		List<File> jarFiles = new ArrayList<File>();
 
-		for (File file : embeddedLibDir.listFiles()) {
+		for (File file : spiEmbeddedLibDir.listFiles()) {
 			String fileName = file.getName();
 
 			if (fileName.endsWith(".jar")) {
@@ -88,7 +88,7 @@ public class SPIClassPathContextListener implements ServletContextListener {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Embedded lib class path " + sb.toString());
+			_log.debug("SPI embedded lib class path " + sb.toString());
 		}
 
 		sb.append(contextPath);
