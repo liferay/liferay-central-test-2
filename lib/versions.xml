@@ -1099,7 +1099,7 @@
 			Classes were modified for better support in WebLogic. See LPS-28561
 			and LPS-34308.
 
-			Axis was patched to support non-axis clients (like dotNet). See
+			Classes were modified for better support for .NET clients. See
 			LPS-35125.
 		</comments>
 	</library>
