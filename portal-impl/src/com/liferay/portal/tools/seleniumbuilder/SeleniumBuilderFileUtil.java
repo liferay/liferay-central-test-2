@@ -51,30 +51,6 @@ public class SeleniumBuilderFileUtil {
 
 	public SeleniumBuilderFileUtil(String baseDir) {
 		_baseDir = baseDir;
-
-		_reservedTags = new ArrayList<String>();
-
-		_reservedTags.add("case");
-		_reservedTags.add("command");
-		_reservedTags.add("condition");
-		_reservedTags.add("contains");
-		_reservedTags.add("default");
-		_reservedTags.add("definition");
-		_reservedTags.add("echo");
-		_reservedTags.add("else");
-		_reservedTags.add("elseif");
-		_reservedTags.add("equals");
-		_reservedTags.add("execute");
-		_reservedTags.add("fail");
-		_reservedTags.add("if");
-		_reservedTags.add("isset");
-		_reservedTags.add("set-up");
-		_reservedTags.add("td");
-		_reservedTags.add("tear-down");
-		_reservedTags.add("then");
-		_reservedTags.add("tr");
-		_reservedTags.add("while");
-		_reservedTags.add("var");
 	}
 
 	public List<Element> getAllChildElements(
@@ -1377,8 +1353,13 @@ public class SeleniumBuilderFileUtil {
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/seleniumbuilder/dependencies/";
 
-	private String _baseDir;
+	private static List<String> _reservedTags = ListUtil.fromArray(
+		new String[] {
+			"case", "command", "condition", "contains", "default", "definition",
+			"echo", "else", "elseif", "equals", "execute", "fail", "if",
+			"isset", "set-up", "td", "tear-down", "then", "tr", "while", "var"
+		});
 
-	private List<String> _reservedTags;
+	private String _baseDir;
 
 }
