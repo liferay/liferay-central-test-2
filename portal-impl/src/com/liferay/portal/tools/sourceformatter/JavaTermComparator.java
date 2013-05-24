@@ -12,10 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools.comparator;
-
-import com.liferay.portal.kernel.sourceformatter.JavaTerm;
-import com.liferay.portal.tools.SourceFormatter;
+package com.liferay.portal.tools.sourceformatter;
 
 import java.util.Comparator;
 import java.util.List;

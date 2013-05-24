@@ -1284,7 +1284,7 @@ public class Creole10Parser]]></replacevalue>
 		</copy>
 
 		<java
-			classname="com.liferay.portal.tools.SourceFormatter"
+			classname="com.liferay.portal.tools.sourceformatter.SourceFormatter"
 			classpathref="project.classpath"
 			dir="${project.dir}"
 			fork="true"

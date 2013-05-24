@@ -44,7 +44,7 @@ import com.liferay.portal.model.CacheField;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.tools.ArgumentsUtil;
-import com.liferay.portal.tools.SourceFormatter;
+import com.liferay.portal.tools.sourceformatter.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.xml.XMLFormatter;
