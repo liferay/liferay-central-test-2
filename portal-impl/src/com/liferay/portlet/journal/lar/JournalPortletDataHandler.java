@@ -92,7 +92,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				NAMESPACE, "web-content", true, false, null,
 				JournalArticle.class.getName()),
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "structures-and-templates", true, true),
+				NAMESPACE, "structures-and-templates"),
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "feeds", true, false, null,
 				JournalFeed.class.getName()),
