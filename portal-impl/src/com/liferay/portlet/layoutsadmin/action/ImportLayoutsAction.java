@@ -448,13 +448,10 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			else if (e instanceof MissingReferenceException) {
 				MissingReferenceException mre = (MissingReferenceException)e;
 
-				StringBundler sb = new StringBundler(4);
-
-				sb.append("there-are-missing-references-that-could-not-be-");;
-				sb.append("found-in-the-current-site.-please-import-another-");
-				sb.append("lar-file-containing-the-following-elements");
-
-				errorMessage = themeDisplay.translate(sb.toString());
+				errorMessage = themeDisplay.translate(
+					"there-are-missing-references-that-could-not-be-found-" +
+						"in-the-current-site.-please-import-another-lar-file-" +
+							"containing-the-following-elements");
 
 				errorMessageJSONArray = JSONFactoryUtil.createJSONArray();
 
