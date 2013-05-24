@@ -54,22 +54,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -78,11 +69,7 @@ public class LayoutFriendlyURLTest {
 		group = GroupTestUtil.addGroup();
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -96,22 +83,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -120,11 +98,7 @@ public class LayoutFriendlyURLTest {
 		group = GroupTestUtil.addGroup();
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), true, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -138,22 +112,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -167,22 +132,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/home");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/home");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -191,11 +147,7 @@ public class LayoutFriendlyURLTest {
 		group = GroupTestUtil.addGroup();
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -209,22 +161,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(new Locale("en", "US"), "/home");
 		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -236,11 +179,7 @@ public class LayoutFriendlyURLTest {
 		friendlyURLMap.put(new Locale("es", "ES"), "/home");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 
 			Assert.fail();
 		}
@@ -255,33 +194,20 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(new Locale("en", "US"), "/home");
 		friendlyURLMap.put(new Locale("es", "ES"), "/home");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
 		}
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), true, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -295,22 +221,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/home");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/home");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -324,22 +241,13 @@ public class LayoutFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Map<Locale, String> randomMap = ServiceTestUtil.randomLocaleStringMap();
-
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/home");
-		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
+		friendlyURLMap.put(_enLocale, "/home");
+		friendlyURLMap.put(_esLocale, "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			Assert.fail();
@@ -347,20 +255,39 @@ public class LayoutFriendlyURLTest {
 
 		friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(new Locale("en", "US"), "/house");
-		friendlyURLMap.put(new Locale("es", "ES"), "/casa");
+		friendlyURLMap.put(_enLocale, "/house");
+		friendlyURLMap.put(_esLocale, "/casa");
 
 		try {
-			LayoutLocalServiceUtil.addLayout(
-				TestPropsValues.getUserId(), group.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, randomMap, randomMap,
-				randomMap, randomMap, randomMap, LayoutConstants.TYPE_PORTLET,
-				false, friendlyURLMap, serviceContext);
+			addLayout(group.getGroupId(), false, friendlyURLMap);
 
 			Assert.fail();
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 		}
 	}
+
+	protected void addLayout(
+			long groupId, boolean privateLayout,
+			Map<Locale, String> friendlyURLMap)
+		throws Exception {
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			groupId);
+
+		LayoutLocalServiceUtil.addLayout(
+			TestPropsValues.getUserId(), groupId, privateLayout,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
+			ServiceTestUtil.randomLocaleStringMap(),
+			LayoutConstants.TYPE_PORTLET, false, friendlyURLMap,
+			serviceContext);
+	}
+
+	private static Locale _enLocale = Locale.ENGLISH;
+	private static Locale _esLocale = new Locale("es", "ES");
 
 }
