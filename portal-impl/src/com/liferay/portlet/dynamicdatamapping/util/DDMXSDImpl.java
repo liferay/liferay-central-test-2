@@ -710,9 +710,9 @@ public class DDMXSDImpl implements DDMXSD {
 		freeMarkerContext.put("namespace", namespace);
 		freeMarkerContext.put("parentFieldStructure", parentFieldContext);
 		freeMarkerContext.put("portletNamespace", portletNamespace);
-		freeMarkerContext.put("requestedLocale", locale);
 		freeMarkerContext.put(
-			"requestedLocaleLangDir", LanguageUtil.get(locale, "lang.dir"));
+			"requestedLanguageDir", LanguageUtil.get(locale, "lang.dir"));
+		freeMarkerContext.put("requestedLocale", locale);
 
 		return freeMarkerContext;
 	}
