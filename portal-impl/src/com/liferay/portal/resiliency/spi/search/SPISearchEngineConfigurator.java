@@ -38,17 +38,17 @@ public class SPISearchEngineConfigurator {
 		Set<String> searchEngineIds = SearchEngineUtil.getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
-			String searchWriterDestinationName =
+			String destinationName =
 				SearchEngineUtil.getSearchWriterDestinationName(searchEngineId);
 
-			Destination searchWriterDestination = _messageBus.getDestination(
-				searchWriterDestinationName);
+			Destination destination = _messageBus.getDestination(
+				destinationName);
 
-			searchWriterDestination.unregisterMessageListeners();
+			destination.unregisterMessageListeners();
 
 			SPI spi = SPIUtil.getSPI();
 
-			searchWriterDestination.register(
+			destination.register(
 				new IntrabandBridgeMessageListener(
 					spi.getRegistrationReference()));
 		}
