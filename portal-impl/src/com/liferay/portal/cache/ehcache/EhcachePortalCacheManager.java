@@ -275,7 +275,7 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		new HashMap<String, EhcachePortalCache<K, V>>();
 	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;
-	private boolean _mpiOnly = false;
+	private boolean _mpiOnly;
 	private boolean _registerCacheConfigurations = true;
 	private boolean _registerCacheManager = true;
 	private boolean _registerCaches = true;
