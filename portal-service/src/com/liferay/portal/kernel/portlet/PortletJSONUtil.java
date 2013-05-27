@@ -41,12 +41,6 @@ public class PortletJSONUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		jsonObject.put("portletHTML", portletHTML);
-		jsonObject.put("refresh", !portlet.isAjaxable());
-
 		Set<String> footerCssSet = new LinkedHashSet<String>();
 		Set<String> footerJavaScriptSet = new LinkedHashSet<String>();
 		Set<String> headerCssSet = new LinkedHashSet<String>();
@@ -56,6 +50,9 @@ public class PortletJSONUtil {
 
 		String rootPortletId = getRootPortletId(portlet);
 		String portletId = portlet.getPortletId();
+
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
 
 		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
 
@@ -214,12 +211,15 @@ public class PortletJSONUtil {
 		jsonObject.put(
 			"headerJavaScriptPaths",
 			JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
+
+		jsonObject.put("portletHTML", portletHTML);
+		jsonObject.put("refresh", !portlet.isAjaxable());
 	}
 
 	protected static String getRootPortletId(Portlet portlet) {
 
-		// Workaround for portlet.getRootPortletId() because that does not
-		// return the proper root portlet ID for OpenSocial and WSRP portlets
+		// Workaround for portlet#getRootPortletId because that does not return
+		// the proper root portlet ID for OpenSocial and WSRP portlets
 
 		Portlet rootPortlet = portlet.getRootPortlet();
 

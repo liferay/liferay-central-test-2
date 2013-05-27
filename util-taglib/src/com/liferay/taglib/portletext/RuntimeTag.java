@@ -139,13 +139,13 @@ public class RuntimeTag extends TagSupport {
 			}
 
 			if (jsonObject != null) {
-				doHeader(response, jsonObject);
+				writeHeaderPaths(response, jsonObject);
 			}
 
 			PortletContainerUtil.render(request, response, portlet);
 
 			if (jsonObject != null) {
-				doFooter(response, jsonObject);
+				writeFooterPaths(response, jsonObject);
 			}
 		}
 		finally {
@@ -193,66 +193,6 @@ public class RuntimeTag extends TagSupport {
 		_queryString = queryString;
 	}
 
-	protected static void doFooter(
-			HttpServletResponse response, JSONObject jsonObject)
-		throws IOException {
-
-		PrintWriter writer = response.getWriter();
-
-		JSONArray jsonArray = jsonObject.getJSONArray("footerCssPaths");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			String value = jsonArray.getString(i);
-
-			writer.print("<link href=\"");
-			writer.print(HtmlUtil.escape(value));
-			writer.println(
-				"\" rel=\"stylesheet\" type=\"text/css\" />");
-		}
-
-		jsonArray = jsonObject.getJSONArray("footerJavaScriptPaths");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			String value = jsonArray.getString(i);
-
-			writer.print("<script src=\"");
-			writer.print(HtmlUtil.escape(value));
-			writer.println("\" type=\"text/javascript\"></script>");
-		}
-
-		writer.flush();
-	}
-
-	protected static void doHeader(
-			HttpServletResponse response, JSONObject jsonObject)
-		throws IOException {
-
-		PrintWriter writer = response.getWriter();
-
-		JSONArray jsonArray = jsonObject.getJSONArray("headerCssPaths");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			String value = jsonArray.getString(i);
-
-			writer.print("<link href=\"");
-			writer.print(HtmlUtil.escape(value));
-			writer.println(
-				"\" rel=\"stylesheet\" type=\"text/css\" />");
-		}
-
-		jsonArray = jsonObject.getJSONArray("headerJavaScriptPaths");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			String value = jsonArray.getString(i);
-
-			writer.print("<script src=\"");
-			writer.print(HtmlUtil.escape(value));
-			writer.println("\" type=\"text/javascript\"></script>");
-		}
-
-		writer.flush();
-	}
-
 	/**
 	 * @see com.liferay.portal.model.impl.LayoutTypePortletImpl#getStaticPortlets(
 	 *      String)
@@ -273,6 +213,68 @@ public class RuntimeTag extends TagSupport {
 		portlet.setStatic(true);
 
 		return portlet;
+	}
+
+	protected static void writeFooterPaths(
+			HttpServletResponse response, JSONObject jsonObject)
+		throws IOException {
+
+		PrintWriter printWriter = response.getWriter();
+
+		JSONArray footerCssPathsJSONArray = jsonObject.getJSONArray(
+			"footerCssPaths");
+
+		for (int i = 0; i < footerCssPathsJSONArray.length(); i++) {
+			String value = footerCssPathsJSONArray.getString(i);
+
+			printWriter.print("<link href=\"");
+			printWriter.print(HtmlUtil.escape(value));
+			printWriter.println("\" rel=\"stylesheet\" type=\"text/css\" />");
+		}
+
+		JSONArray footerJavaScriptPathsJSONArray = jsonObject.getJSONArray(
+			"footerJavaScriptPaths");
+
+		for (int i = 0; i < footerJavaScriptPathsJSONArray.length(); i++) {
+			String value = footerJavaScriptPathsJSONArray.getString(i);
+
+			printWriter.print("<script src=\"");
+			printWriter.print(HtmlUtil.escape(value));
+			printWriter.println("\" type=\"text/javascript\"></script>");
+		}
+
+		printWriter.flush();
+	}
+
+	protected static void writeHeaderPaths(
+			HttpServletResponse response, JSONObject jsonObject)
+		throws IOException {
+
+		PrintWriter printWriter = response.getWriter();
+
+		JSONArray headerCssPathsJSONArray = jsonObject.getJSONArray(
+			"headerCssPaths");
+
+		for (int i = 0; i < headerCssPathsJSONArray.length(); i++) {
+			String value = headerCssPathsJSONArray.getString(i);
+
+			printWriter.print("<link href=\"");
+			printWriter.print(HtmlUtil.escape(value));
+			printWriter.println("\" rel=\"stylesheet\" type=\"text/css\" />");
+		}
+
+		JSONArray headerJavaScriptPathsJSONArray = jsonObject.getJSONArray(
+			"headerJavaScriptPaths");
+
+		for (int i = 0; i < headerJavaScriptPathsJSONArray.length(); i++) {
+			String value = headerJavaScriptPathsJSONArray.getString(i);
+
+			printWriter.print("<script src=\"");
+			printWriter.print(HtmlUtil.escape(value));
+			printWriter.println("\" type=\"text/javascript\"></script>");
+		}
+
+		printWriter.flush();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RuntimeTag.class);
