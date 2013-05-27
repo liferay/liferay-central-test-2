@@ -27,13 +27,11 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 String content = BeanParamUtil.getString(entry, request, "content");
-
-boolean preview = ParamUtil.getBoolean(request, "preview");
-
 boolean allowPingbacks = PropsValues.BLOGS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowPingbacks", true);
 boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
-
 boolean smallImage = BeanParamUtil.getBoolean(entry, request, "smallImage");
+
+boolean preview = ParamUtil.getBoolean(request, "preview");
 %>
 
 <liferay-ui:header
