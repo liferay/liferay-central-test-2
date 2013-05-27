@@ -241,7 +241,6 @@ create index IX_D49AB5D1 on DLFileEntryMetadata (uuid_);
 
 create index IX_4501FD9C on DLFileEntryType (groupId);
 create unique index IX_5B6BEF5F on DLFileEntryType (groupId, fileEntryTypeKey);
-create unique index IX_E9B6A85B on DLFileEntryType (groupId, name);
 create index IX_90724726 on DLFileEntryType (uuid_);
 create index IX_5B03E942 on DLFileEntryType (uuid_, companyId);
 create unique index IX_1399D844 on DLFileEntryType (uuid_, groupId);
