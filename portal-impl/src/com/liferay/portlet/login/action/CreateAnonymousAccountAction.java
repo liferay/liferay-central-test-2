@@ -96,7 +96,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 			actionRequest, "emailAddress");
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
-			actionRequest, PortletKeys.LOGIN, themeDisplay.getPlid(),
+			actionRequest, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/login/login_redirect");
