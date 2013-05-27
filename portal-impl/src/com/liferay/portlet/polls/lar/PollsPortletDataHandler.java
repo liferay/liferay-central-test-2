@@ -130,7 +130,7 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 			PollsQuestion.class);
 
 		if (portletDataContext.getBooleanParameter(
-				PollsPortletDataHandler.NAMESPACE, "votes")) {
+				PollsPortletDataHandler.NAMESPACE, "questions")) {
 
 			List<Element> questionElements = questionsElement.elements();
 
