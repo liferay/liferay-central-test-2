@@ -67,9 +67,8 @@ public class PortletDataHandlerControl {
 	}
 
 	public String getHelpMessage(Locale locale, String action) {
-		String key = action + "-" + _controlName + "-help";
-
-		return LanguageUtil.get(locale, key, StringPool.BLANK);
+		return LanguageUtil.get(
+			locale, action + "-" + _controlName + "-help", StringPool.BLANK);
 	}
 
 	public String getNamespace() {
