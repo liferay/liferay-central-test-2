@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -98,7 +99,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileEntryTypeTable.TABLE_SQL_ADD_INDEXES);
 		}
 
-		updateDLFileEntryTypes();
+		updateFileEntryTypes();
 
 		// DLFileRank
 
@@ -172,8 +173,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			LocaleUtil.toLanguageId(locale));
 	}
 
-	protected void updateDLFileEntryType(
-			long dlFileEntryTypeId, String dlFileEntryTypeKey, String name,
+	protected void updateFileEntryType(
+			long fileEntryTypeId, String fileEntryTypeKey, String name,
 			String description)
 		throws Exception {
 
@@ -187,10 +188,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				"update DLFileEntryType set fileEntryTypeKey = ?, name = ?, " +
 					"description = ? where fileEntryTypeId = ?");
 
-			ps.setString(1, dlFileEntryTypeKey);
+			ps.setString(1, fileEntryTypeKey);
 			ps.setString(2, localize(name, "Name"));
 			ps.setString(3, localize(description, "Description"));
-			ps.setLong(4, dlFileEntryTypeId);
+			ps.setLong(4, fileEntryTypeId);
 
 			ps.executeUpdate();
 		}
@@ -199,7 +200,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
-	protected void updateDLFileEntryTypes() throws Exception {
+	protected void updateFileEntryTypes() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -214,21 +215,19 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long dlFileEntryTypeId = rs.getLong("fileEntryTypeId");
-				String name = rs.getString("name");
+				long fileEntryTypeId = rs.getLong("fileEntryTypeId");
+				String name = GetterUtil.getString(rs.getString("name"));
 				String description = rs.getString("description");
 
-				if (dlFileEntryTypeId ==
+				if (fileEntryTypeId ==
 						DLFileEntryTypeConstants.
 							FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT) {
 
 					name = DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT;
 				}
 
-				String dlFileEntryTypeKey = name.trim().toUpperCase();
-
-				updateDLFileEntryType(
-					dlFileEntryTypeId, dlFileEntryTypeKey, name, description);
+				updateFileEntryType(
+					fileEntryTypeId, name.toUpperCase(), name, description);
 			}
 		}
 		finally {

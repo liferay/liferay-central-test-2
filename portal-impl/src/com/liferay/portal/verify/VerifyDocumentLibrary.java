@@ -126,14 +126,10 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		dlFileEntryType = DLFileEntryTypeLocalServiceUtil.createDLFileEntryType(
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
 
-		String dlFileEntryTypeKey =
-			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT;
-
-		dlFileEntryTypeKey = dlFileEntryTypeKey.trim().toUpperCase();
-
 		dlFileEntryType.setCreateDate(now);
 		dlFileEntryType.setModifiedDate(now);
-		dlFileEntryType.setFileEntryTypeKey(dlFileEntryTypeKey);
+		dlFileEntryType.setFileEntryTypeKey(
+			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT.toUpperCase());
 		dlFileEntryType.setName(
 			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT,
 			LocaleUtil.getDefault());

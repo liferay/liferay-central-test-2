@@ -68,6 +68,13 @@ public class DLFileEntryTypeLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
+		if (Validator.isNull(fileEntryTypeKey)) {
+			fileEntryTypeKey = String.valueOf(counterLocalService.increment());
+		}
+		else {
+			fileEntryTypeKey = fileEntryTypeKey.trim().toUpperCase();
+		}
+
 		String fileEntryTypeUuid = serviceContext.getUuid();
 
 		if (Validator.isNull(fileEntryTypeUuid)) {
@@ -75,13 +82,6 @@ public class DLFileEntryTypeLocalServiceImpl
 		}
 
 		long fileEntryTypeId = counterLocalService.increment();
-
-		if (Validator.isNull(fileEntryTypeKey)) {
-			fileEntryTypeKey = String.valueOf(counterLocalService.increment());
-		}
-		else {
-			fileEntryTypeKey = fileEntryTypeKey.trim().toUpperCase();
-		}
 
 		long ddmStructureId = updateDDMStructure(
 			userId, fileEntryTypeUuid, fileEntryTypeId, groupId, nameMap,
