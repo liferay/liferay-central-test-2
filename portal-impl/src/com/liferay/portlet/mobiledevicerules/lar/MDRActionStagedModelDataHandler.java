@@ -202,7 +202,7 @@ public class MDRActionStagedModelDataHandler
 				sb.append(layoutUuid);
 				sb.append(" in group ");
 				sb.append(groupId);
-				sb.append(". Site redirect may not match target layout.");
+				sb.append(". Site redirect may not match the target layout.");
 
 				_log.warn(sb.toString(), e);
 			}
