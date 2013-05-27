@@ -160,6 +160,45 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
+	protected String localize(String content, String key) {
+		Locale locale = LocaleUtil.getDefault();
+
+		Map<Locale, String> localizationMap = new HashMap<Locale, String>();
+
+		localizationMap.put(locale, content);
+
+		return LocalizationUtil.updateLocalization(
+			localizationMap, StringPool.BLANK, key,
+			LocaleUtil.toLanguageId(locale));
+	}
+
+	protected void updateDLFileEntryType(
+			long dlFileEntryTypeId, String dlFileEntryTypeKey, String name,
+			String description)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update DLFileEntryType set fileEntryTypeKey = ?, name = ?, " +
+					"description = ? where fileEntryTypeId = ?");
+
+			ps.setString(1, dlFileEntryTypeKey);
+			ps.setString(2, localize(name, "Name"));
+			ps.setString(3, localize(description, "Description"));
+			ps.setLong(4, dlFileEntryTypeId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
 	protected void updateDLFileEntryTypes() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -245,45 +284,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	private String localize(String content, String key) {
-		Locale locale = LocaleUtil.getDefault();
-
-		Map<Locale, String> localizedMap = new HashMap<Locale, String>();
-
-		localizedMap.put(locale, content);
-
-		return LocalizationUtil.updateLocalization(
-			localizedMap, StringPool.BLANK, key,
-			LocaleUtil.toLanguageId(locale));
-	}
-
-	private void updateDLFileEntryType(
-			long dlFileEntryTypeId, String dlFileEntryTypeKey, String name,
-			String description)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update DLFileEntryType set fileEntryTypeKey = ?, name = ?, " +
-					"description = ? where fileEntryTypeId = ?");
-
-			ps.setString(1, dlFileEntryTypeKey);
-			ps.setString(2, localize(name, "Name"));
-			ps.setString(3, localize(description, "Description"));
-			ps.setLong(4, dlFileEntryTypeId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
