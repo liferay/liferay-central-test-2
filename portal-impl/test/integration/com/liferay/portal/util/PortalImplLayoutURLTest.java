@@ -164,9 +164,9 @@ public class PortalImplLayoutURLTest {
 	protected Layout controlPanelLayout;
 	protected Group group;
 	protected Layout layout;
-	private final String _LOCALHOST = "localhost";
 
-	private final String _VIRTUAL_HOSTNAME = "test.com";
+	private static final String _LOCALHOST = "localhost";
 
+	private static final String _VIRTUAL_HOSTNAME = "test.com";
 
 }
