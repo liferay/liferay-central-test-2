@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -78,6 +77,12 @@ public class CreateAnonymousAccountAction extends PortletAction {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String portletName = portletConfig.getPortletName();
+
+		if (!portletName.equals(PortletKeys.FAST_LOGIN)) {
+			throw new PrincipalException();
+		}
 
 		if (actionRequest.getRemoteUser() != null) {
 			actionResponse.sendRedirect(themeDisplay.getPathMain());
@@ -161,6 +166,12 @@ public class CreateAnonymousAccountAction extends PortletAction {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String portletName = portletConfig.getPortletName();
+
+		if (!portletName.equals(PortletKeys.FAST_LOGIN)) {
+			return mapping.findForward("portlet.login.login");
+		}
 
 		renderResponse.setTitle(themeDisplay.translate("anonymous-account"));
 
