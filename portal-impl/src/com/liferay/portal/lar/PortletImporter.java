@@ -582,12 +582,6 @@ public class PortletImporter {
 		zipReader.close();
 	}
 
-	/**
-	 * @see com.liferay.portlet.documentlibrary.lar.DLFileEntryTypeStagedModelDataHandler#getFileEntryTypeName(
-	 *      String, long, String, int)
-	 * @see com.liferay.portlet.documentlibrary.lar.DLFileEntryTypeStagedModelDataHandler#getFolderName(
-	 *      String, long, long, String, int)
-	 */
 	protected String getAssetCategoryName(
 			String uuid, long groupId, long parentCategoryId, String name,
 			long vocabularyId, int count)
@@ -642,12 +636,6 @@ public class PortletImporter {
 		return titleMap;
 	}
 
-	/**
-	 * @see com.liferay.portlet.documentlibrary.lar.DLPortletDataHandler#getFileEntryTypeName(
-	 *      String, long, String, int)
-	 * @see com.liferay.portlet.documentlibrary.lar.DLPortletDataHandler#getFolderName(
-	 *      String, long, long, String, int)
-	 */
 	protected String getAssetVocabularyName(
 			String uuid, long groupId, String name, int count)
 		throws Exception {
