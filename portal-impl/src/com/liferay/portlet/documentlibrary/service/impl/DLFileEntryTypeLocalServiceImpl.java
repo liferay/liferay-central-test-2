@@ -402,6 +402,7 @@ public class DLFileEntryTypeLocalServiceImpl
 			fileEntryTypeId, ddmStructureIds);
 	}
 
+	@Override
 	public void updateFileEntryType(
 			long userId, long fileEntryTypeId, String name, String description,
 			long[] ddmStructureIds, ServiceContext serviceContext)

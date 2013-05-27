@@ -154,6 +154,7 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 			ddmStructureIds, serviceContext);
 	}
 
+	@Override
 	public void updateFileEntryType(
 			long fileEntryTypeId, String name, String description,
 			long[] ddmStructureIds, ServiceContext serviceContext)
