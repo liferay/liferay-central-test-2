@@ -799,10 +799,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Social
 
+		socialActivityLocalService.deleteActivities(group.getGroupId());
 		socialActivitySettingLocalService.deleteActivitySettings(
 			group.getGroupId());
-
-		socialActivityLocalService.deleteActivities(group.getGroupId());
 
 		// Software catalog
 

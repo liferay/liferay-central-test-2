@@ -338,16 +338,17 @@ public class SocialActivityLocalServiceImpl
 	/**
 	 * Removes stored activities for the asset.
 	 *
-	 * @param  assetEntry the asset from which to remove stored activities
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}. Activities should only be deleted when the group is deleted.
+	 * @param      assetEntry the asset from which to remove stored activities
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
 	@Override
 	public void deleteActivities(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 	}
 
+	@Override
 	public void deleteActivities(long groupId) throws SystemException {
 		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 			socialActivitySetPersistence.removeByGroupId(groupId);
@@ -366,12 +367,13 @@ public class SocialActivityLocalServiceImpl
 	 * Removes stored activities for the asset identified by the class name and
 	 * class primary key.
 	 *
-	 * @param  className the target asset's class name
-	 * @param  classPK the primary key of the target asset
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}. Activities should only be deleted when the group is deleted.
+	 * @param      className the target asset's class name
+	 * @param      classPK the primary key of the target asset
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
 	@Override
+	@SuppressWarnings("unused")
 	public void deleteActivities(String className, long classPK)
 		throws PortalException, SystemException {
 	}
@@ -379,10 +381,10 @@ public class SocialActivityLocalServiceImpl
 	/**
 	 * Removes the stored activity from the database.
 	 *
-	 * @param  activityId the primary key of the stored activity
-	 * @throws PortalException if the activity could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}. Activities should only be deleted when the group is deleted.
+	 * @param      activityId the primary key of the stored activity
+	 * @throws     PortalException if the activity could not be found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
 	@Override
 	public void deleteActivity(long activityId)
@@ -392,11 +394,12 @@ public class SocialActivityLocalServiceImpl
 	/**
 	 * Removes the stored activity and its mirror activity from the database.
 	 *
-	 * @param  activity the activity to be removed
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}. Activities should only be deleted when the group is deleted.
+	 * @param      activity the activity to be removed
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
 	@Override
+	@SuppressWarnings("unused")
 	public void deleteActivity(SocialActivity activity)
 		throws PortalException, SystemException {
 	}
