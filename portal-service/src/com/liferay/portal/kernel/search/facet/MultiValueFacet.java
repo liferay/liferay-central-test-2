@@ -130,14 +130,6 @@ public class MultiValueFacet extends BaseFacet {
 		doSetValues(valuesJSONArray);
 	}
 
-	private void doSetValues(JSONArray valuesJSONArray) {
-		FacetConfiguration facetConfiguration = getFacetConfiguration();
-
-		JSONObject dataJSONObject = facetConfiguration.getData();
-
-		dataJSONObject.put("values", valuesJSONArray);
-	}
-
 	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
@@ -197,6 +189,14 @@ public class MultiValueFacet extends BaseFacet {
 
 		return BooleanClauseFactoryUtil.create(
 			searchContext, facetQuery, BooleanClauseOccur.MUST.getName());
+	}
+
+	protected void doSetValues(JSONArray valuesJSONArray) {
+		FacetConfiguration facetConfiguration = getFacetConfiguration();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
+
+		dataJSONObject.put("values", valuesJSONArray);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MultiValueFacet.class);
