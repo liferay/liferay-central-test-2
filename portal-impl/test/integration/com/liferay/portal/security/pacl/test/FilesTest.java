@@ -401,7 +401,7 @@ public class FilesTest {
 
 			File file = new File(
 				System.getenv("JAVA_HOME"),
-				"bin".concat(File.separator).concat(javaCommand));
+				"bin" + File.separator + javaCommand);
 
 			file.canRead();
 		}

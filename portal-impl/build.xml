@@ -1527,6 +1527,9 @@ security-manager-awt-operations=\
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/liferay-plugin-package.properties">
 			<replacetoken>security-manager-files-read=</replacetoken>
 			<replacevalue>security-manager-files-read=\
+    ${env:JAVA_HOME}${/},\
+    ${java.home}${/}bin${/}java,\
+    ${java.home}${/}bin${/}java.exe,\
     ${liferay.home}${/}pacl-test${/},\
     ${liferay.home}${/}pacl-test${/}-,</replacevalue>
 		</replace>
