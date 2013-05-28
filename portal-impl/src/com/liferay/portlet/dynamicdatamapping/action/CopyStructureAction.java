@@ -208,11 +208,11 @@ public class CopyStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"classPK", String.valueOf(structure.getStructureId()), false);
 		portletURL.setParameter(
-			"copyDisplayTemplates",
-			ParamUtil.getString(actionRequest, "copyDisplayTemplates"), false);
-		portletURL.setParameter(
 			"copyFormTemplates",
 			ParamUtil.getString(actionRequest, "copyFormTemplates"), false);
+		portletURL.setParameter(
+			"copyDisplayTemplates",
+			ParamUtil.getString(actionRequest, "copyDisplayTemplates"), false);
 		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
