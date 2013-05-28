@@ -71,6 +71,12 @@
 		<execute selenium="clickAtAndWait" />
 	</command>
 
+	<command name="textClickAtAndWaitCKEditor">
+		<execute selenium="waitForVisible" argument1="//a[contains(@class,'cke_button cke_button__cut') and contains(@class,'cke_button_disabled')]" />
+
+		<execute function="Click#textClickAtAndWait" />
+	</command>
+
 	<command name="textClickAtClickDockbar">
 		<execute selenium="clickAt" argument1="//div[@id='dockbar']" argument2="" />
 
