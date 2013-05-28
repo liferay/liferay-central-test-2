@@ -1837,8 +1837,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			// LPS-32878
 
 			throw new PortletIdException(
-				"Portlet id " + portletId + " is too long. The max length is " +
-					_PORTLET_ID_MAX_LENGTH);
+				"Portlet id " + portletId + " has more than " +
+					_PORTLET_ID_MAX_LENGTH + " characters");
 		}
 
 		if (_log.isDebugEnabled()) {
