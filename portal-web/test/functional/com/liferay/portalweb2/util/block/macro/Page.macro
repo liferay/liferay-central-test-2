@@ -2,11 +2,19 @@
 	<command name="cpGoto">
 		<execute action="Home#open" locator-key1="HOME_URL" />
 
-		<execute action="Dockbar#mouseOver" locator-key1="GO_TO" />
-		<execute action="Dockbar#click" locator-key1="GO_TO" />
-		<execute action="Dockbar#click" locator-key1="GO_TO_CONTROL_PANEL" />
+		<execute action="Dockbar#mouseOver" locator-key1="ADMIN" />
+		<execute action="Dockbar#click" locator-key1="ADMIN" />
+		<execute action="Dockbar#click" locator-key1="ADMIN_CONTROL_PANEL" />
 
 		<execute action="Home#click" locator1="//div[@class='navbar control-panel-bar-main']//a[contains(.,'${categoryName}')]" />
+	</command>
+
+	<command name="cpGotoApps">
+		<execute macro="Page#cpGoto">
+			<var name="categoryName" value="Apps" />
+		</execute>
+
+		<execute action="Home#click" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,'${portletName}')]" />
 	</command>
 
 	<command name="cpGotoConfiguration">
@@ -14,7 +22,7 @@
 			<var name="categoryName" value="Configuration" />
 		</execute>
 
-		<execute action="Home#click" locator1="//div[@class='navbar control-panel-bar-secondary']//a[contains(.,'${portletName}')]" />
+		<execute action="Home#click" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,'${portletName}')]" />
 	</command>
 
 	<command name="cpGotoContent">
@@ -42,19 +50,11 @@
 
 		<execute action="Home#open" locator-key1="HOME_URL" />
 
-		<execute action="Dockbar#mouseOver" locator-key1="MANAGE" />
-		<execute action="Dockbar#click" locator-key1="MANAGE" />
-		<execute action="Dockbar#click" locator-key1="MANAGE_SITE" />
+		<execute action="Dockbar#mouseOver" locator-key1="ADMIN" />
+		<execute action="Dockbar#click" locator-key1="ADMIN" />
+		<execute action="Dockbar#click" locator-key1="ADMIN_SITE_ADMINISTRATION" />
 
 		<execute action="Home#click" locator1="//ul[@class='category-portlets']/li[contains(.,'${portletName}')]/a" />
-	</command>
-
-	<command name="cpGotoServer">
-		<execute macro="Page#cpGoto">
-			<var name="categoryName" value="Server" />
-		</execute>
-
-		<execute action="Home#click" locator1="//div[@class='navbar control-panel-bar-secondary']//a[contains(.,'${portletName}')]" />
 	</command>
 
 	<command name="cpGotoSites">
@@ -62,7 +62,7 @@
 			<var name="categoryName" value="Sites" />
 		</execute>
 
-		<execute action="Home#click" locator1="//div[@class='navbar control-panel-bar-secondary']//a[contains(.,'${portletName}')]" />
+		<execute action="Home#click" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,'${portletName}')]" />
 	</command>
 
 	<command name="cpGotoUsers">
@@ -70,7 +70,7 @@
 			<var name="categoryName" value="Users" />
 		</execute>
 
-		<execute action="Home#click" locator1="//div[@class='navbar control-panel-bar-secondary']//a[contains(.,'${portletName}')]" />
+		<execute action="Home#click" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,'${portletName}')]" />
 	</command>
 
 	<command name="isPresent">

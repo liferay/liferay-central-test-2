@@ -21,7 +21,10 @@
 		<case comparator="startsWith" locator1="//div[@class='navbar control-panel-bar-main']//a[contains(.,">
 			<execute function="Click#clickAtAndWait" />
 		</case>
-		<case comparator="startsWith" locator1="//div[@class='navbar control-panel-bar-secondary']//a[contains(.,">
+		<case comparator="startsWith" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="//ul[@class='category-portlets']/li[contains(.,">
 			<execute function="Click#clickAtAndWait" />
 		</case>
 	</command>
