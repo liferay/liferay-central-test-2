@@ -108,7 +108,7 @@ if (ruleGroup != null) {
 
 	typeNode.on(
 		'change',
-		function(event){
+		function(event) {
 			A.io.request(
 				<portlet:resourceURL var="editorURL">
 					<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_editor" />
@@ -117,8 +117,8 @@ if (ruleGroup != null) {
 				'<%= editorURL.toString() %>',
 				{
 					data: {
-						ruleId: <%= ruleId %>
-						type: typeNode.val(),
+						ruleId: <%= ruleId %>,
+						type: typeNode.val()
 					},
 					on: {
 						success: function(event, id, obj) {
