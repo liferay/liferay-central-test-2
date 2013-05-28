@@ -1,17 +1,17 @@
 <html>
 <head>
-<title>CPUsergroupsAddusergroup</title>
+<title>CPUsergroupsEdit</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CPUsergroupsAddusergroup</td></tr>
+<tr><td rowspan="1" colspan="3">CPUsergroupsEdit</td></tr>
 </thead>
 <tbody>
 <tr>
 	<td>PAGE_NAME</td>
 	<td></td>
-	<td>CPUsergroupsAddusergroup</td>
+	<td>CPUsergroupsEdit</td>
 </tr>
 <tr>
 	<td></td>
@@ -40,12 +40,12 @@
 </tr>
 <tr>
 	<td>SAVE_BUTTON</td>
-	<td>//input[@value='Save']</td>
+	<td>//button[contains(.,'Save')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>CANCEL_BUTTON</td>
-	<td>//input[@value='Cancel']</td>
+	<td>//button[contains(.,'Cancel')]</td>
 	<td></td>
 </tr>
 </tbody>
