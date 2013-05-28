@@ -2,7 +2,6 @@
 	<command name="cpGoto">
 		<execute action="Home#open" locator-key1="HOME_URL" />
 
-		<execute action="Dockbar#mouseOver" locator-key1="ADMIN" />
 		<execute action="Dockbar#click" locator-key1="ADMIN" />
 		<execute action="Dockbar#click" locator-key1="ADMIN_CONTROL_PANEL" />
 
@@ -50,7 +49,6 @@
 
 		<execute action="Home#open" locator-key1="HOME_URL" />
 
-		<execute action="Dockbar#mouseOver" locator-key1="ADMIN" />
 		<execute action="Dockbar#click" locator-key1="ADMIN" />
 		<execute action="Dockbar#click" locator-key1="ADMIN_SITE_ADMINISTRATION" />
 
