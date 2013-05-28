@@ -406,35 +406,6 @@ public class PortletContainerSecurityImpl
 		return false;
 	}
 
-	protected boolean isAccessGrantedByPortletOnPage(
-			HttpServletRequest request, Portlet portlet)
-		throws PortalException, SystemException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
-
-		String portletId = portlet.getPortletId();
-
-		if (layout.isTypePanel() &&
-			isPanelSelectedPortlet(themeDisplay, portletId)) {
-
-			return true;
-		}
-
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		if ((layoutTypePortlet != null) &&
-			layoutTypePortlet.hasPortletId(portletId)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	protected boolean isAccessGrantedByPortletAuthenticationToken(
 		HttpServletRequest request, Portlet portlet) {
 
@@ -488,6 +459,35 @@ public class PortletContainerSecurityImpl
 
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	protected boolean isAccessGrantedByPortletOnPage(
+			HttpServletRequest request, Portlet portlet)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String portletId = portlet.getPortletId();
+
+		if (layout.isTypePanel() &&
+			isPanelSelectedPortlet(themeDisplay, portletId)) {
+
+			return true;
+		}
+
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
+
+		if ((layoutTypePortlet != null) &&
+			layoutTypePortlet.hasPortletId(portletId)) {
+
+			return true;
 		}
 
 		return false;
