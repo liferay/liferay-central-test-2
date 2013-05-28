@@ -773,24 +773,25 @@ public class JavadocFormatter {
 	}
 
 	private String _formatCDATA(String cdata, String exclude) {
+		StringBundler sb = new StringBundler();
+
 		String startTag = "<" + exclude + ">";
 		String endTag = "</" + exclude + ">";
 
-		String[] sections = cdata.split(startTag);
-		for (int i=0; i < sections.length; i++) {
-			if (!sections[i].contains(endTag)) {
-				sections[i] = _getCDATA(sections[i]);
+		String[] cdataParts = cdata.split(startTag);
+
+		for (int i = 0; i < cdataParts.length; i++) {
+			if (!cdataParts[i].contains(endTag)) {
+				cdataParts[i] = _getCDATA(cdataParts[i]);
 			}
-		}
 
-		StringBundler sb = new StringBundler();
+			String cdataPart = cdataParts[i];
 
-		for (String section : sections) {
-			if (section.contains("</" + exclude + ">")) {
+			if (cdataPart.contains("</" + exclude + ">")) {
 				sb.append(startTag);
 			}
 
-			sb.append(section);
+			sb.append(cdataPart);
 		}
 
 		return sb.toString();
@@ -818,16 +819,16 @@ public class JavadocFormatter {
 		if (cdata == null) {
 			return StringPool.BLANK;
 		}
-		else if (cdata.contains("<table>")) {
-			cdata = _formatCDATA(cdata, "table");
-		}
 		else if (cdata.contains("<pre>")) {
 			cdata = _formatCDATA(cdata, "pre");
+		}
+		else if (cdata.contains("<table>")) {
+			cdata = _formatCDATA(cdata, "table");
 		}
 		else {
 			cdata = cdata.replaceAll(
 				"(?s)\\s*<(p|[ou]l)>\\s*(.*?)\\s*</\\1>\\s*",
-							"\n\n<$1>\n$2\n</$1>\n\n");
+				"\n\n<$1>\n$2\n</$1>\n\n");
 			cdata = cdata.replaceAll(
 				"(?s)\\s*<li>\\s*(.*?)\\s*</li>\\s*", "\n<li>\n$1\n</li>\n");
 			cdata = StringUtil.replace(cdata, "</li>\n\n<li>", "</li>\n<li>");
@@ -1812,39 +1813,19 @@ public class JavadocFormatter {
 			"Updating " + _languagePropertiesFile + " key " + key);
 	}
 
-	private String _wrapText(String text, String indent) {
-		int indentLength = _getIndentLength(indent);
-
-		if (text.contains("<table>")) {
-			text = _wrapText(text, indentLength, "table");
-		}
-		else if (text.contains("<pre>")) {
-			text = _wrapText(text, indentLength, "pre");
-		}
-		else {
-			text = _formatInlines(text);
-			text = StringUtil.wrap(text, 80 - indentLength, "\n");
-		}
-
-		text = text.replaceAll("(?m)^", indent);
-		text = text.replaceAll("(?m) +$", StringPool.BLANK);
-
-		return text;
-	}
-
 	private String _wrapText(String text, int indentLength, String exclude) {
-		StringBundler regexSb = new StringBundler("(?<=^|</");
-		regexSb.append(exclude);
-		regexSb.append(">).+?(?=$|<");
-		regexSb.append(exclude);
-		regexSb.append(">)");
+		StringBuffer sb = new StringBuffer();
 
-		Pattern pattern = Pattern.compile(
-			regexSb.toString(), Pattern.DOTALL);
+		StringBundler regexSB = new StringBundler("(?<=^|</");
+
+		regexSB.append(exclude);
+		regexSB.append(">).+?(?=$|<");
+		regexSB.append(exclude);
+		regexSB.append(">)");
+
+		Pattern pattern = Pattern.compile(regexSB.toString(), Pattern.DOTALL);
 
 		Matcher matcher = pattern.matcher(text);
-
-		StringBuffer sb = new StringBuffer();
 
 		while (matcher.find()) {
 			String wrapped = _formatInlines(matcher.group());
@@ -1857,6 +1838,26 @@ public class JavadocFormatter {
 		matcher.appendTail(sb);
 
 		return sb.toString();
+	}
+
+	private String _wrapText(String text, String indent) {
+		int indentLength = _getIndentLength(indent);
+
+		if (text.contains("<pre>")) {
+			text = _wrapText(text, indentLength, "pre");
+		}
+		else if (text.contains("<table>")) {
+			text = _wrapText(text, indentLength, "table");
+		}
+		else {
+			text = _formatInlines(text);
+			text = StringUtil.wrap(text, 80 - indentLength, "\n");
+		}
+
+		text = text.replaceAll("(?m)^", indent);
+		text = text.replaceAll("(?m) +$", StringPool.BLANK);
+
+		return text;
 	}
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
