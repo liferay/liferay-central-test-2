@@ -14,17 +14,28 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.SetUtil;
+
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class HotDeployMessageListener extends BaseMessageListener {
 
-	public HotDeployMessageListener(String[] servletContextNames) {
-		_servletContextNames = servletContextNames;
+	public HotDeployMessageListener() {
+		this((String[])null);
+	}
+
+	public HotDeployMessageListener(String... servletContextNames) {
+		if (servletContextNames == null) {
+			_servletContextNames = Collections.emptySet();
+		}
+		else {
+			_servletContextNames = SetUtil.fromArray(servletContextNames);
+		}
 	}
 
 	@Override
@@ -32,8 +43,8 @@ public class HotDeployMessageListener extends BaseMessageListener {
 		String servletContextName = GetterUtil.getString(
 			message.getString("servletContextName"));
 
-		if (Validator.isNotNull(_servletContextNames) &&
-			!ArrayUtil.contains(_servletContextNames, servletContextName)) {
+		if (!_servletContextNames.isEmpty() &&
+			!_servletContextNames.contains(servletContextName)) {
 
 			return;
 		}
@@ -54,6 +65,6 @@ public class HotDeployMessageListener extends BaseMessageListener {
 	protected void onUndeploy(Message message) throws Exception {
 	}
 
-	private String[] _servletContextNames;
+	private Set<String> _servletContextNames;
 
 }
