@@ -73,6 +73,8 @@ public class DDLTemplateHandler extends BaseDDMTemplateHandler {
 
 		addTemplateVariableGroup(
 			templateVariableGroups, getDDLVariablesTemplateVariableGroups());
+		addTemplateVariableGroup(
+			templateVariableGroups, getGeneralVariablesTemplateVariableGroup());
 
 		TemplateVariableGroup structureFieldsTemplateVariableGroup =
 			getStructureFieldsTemplateVariableGroup(classPK, locale);
@@ -82,9 +84,6 @@ public class DDLTemplateHandler extends BaseDDMTemplateHandler {
 
 		addTemplateVariableGroup(
 			templateVariableGroups, structureFieldsTemplateVariableGroup);
-
-		addTemplateVariableGroup(
-			templateVariableGroups, getGeneralVariablesTemplateVariableGroup());
 
 		addTemplateVariableGroup(
 			templateVariableGroups, getUtilTemplateVariableGroup());
@@ -114,19 +113,18 @@ public class DDLTemplateHandler extends BaseDDMTemplateHandler {
 		templateVariableGroup.addVariable(
 			"data-definition-id", null, DDLConstants.RESERVED_DDM_STRUCTURE_ID);
 		templateVariableGroup.addVariable(
-			"template-id", null, DDLConstants.RESERVED_DDM_TEMPLATE_ID);
+			"data-list-description", String.class,
+			DDLConstants.RESERVED_RECORD_SET_DESCRIPTION);
 		templateVariableGroup.addVariable(
 			"data-list-id", null, DDLConstants.RESERVED_RECORD_SET_ID);
 		templateVariableGroup.addVariable(
 			"data-list-name", String.class,
 			DDLConstants.RESERVED_RECORD_SET_NAME);
-		templateVariableGroup.addVariable(
-			"data-list-description", String.class,
-			DDLConstants.RESERVED_RECORD_SET_DESCRIPTION);
-
 		templateVariableGroup.addCollectionVariable(
 			"data-list-records", List.class, "records", "record",
 			DDLRecord.class, "curRecord");
+		templateVariableGroup.addVariable(
+			"template-id", null, DDLConstants.RESERVED_DDM_TEMPLATE_ID);
 
 		return templateVariableGroup;
 	}

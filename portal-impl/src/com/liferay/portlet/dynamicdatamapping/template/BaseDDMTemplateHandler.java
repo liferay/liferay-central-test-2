@@ -45,12 +45,10 @@ public abstract class BaseDDMTemplateHandler extends BaseTemplateHandler {
 			new LinkedHashMap<String, TemplateVariableGroup>();
 
 		addTemplateVariableGroup(
+			templateVariableGroups, getGeneralVariablesTemplateVariableGroup());
+		addTemplateVariableGroup(
 			templateVariableGroups,
 			getStructureFieldsTemplateVariableGroup(classPK, locale));
-
-		addTemplateVariableGroup(
-			templateVariableGroups, getGeneralVariablesTemplateVariableGroup());
-
 		addTemplateVariableGroup(
 			templateVariableGroups, getUtilTemplateVariableGroup());
 

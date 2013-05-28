@@ -64,7 +64,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -300,17 +299,14 @@ public class DDLImpl implements DDL {
 			recordSet.getDDMStructureId());
 		contextObjects.put(
 			DDLConstants.RESERVED_DDM_TEMPLATE_ID, ddmTemplateId);
-
-		contextObjects.put(
-			DDLConstants.RESERVED_RECORD_SET_ID, recordSet.getRecordSetId());
-
-		Locale locale = themeDisplay.getLocale();
-
-		contextObjects.put(
-			DDLConstants.RESERVED_RECORD_SET_NAME, recordSet.getName(locale));
 		contextObjects.put(
 			DDLConstants.RESERVED_RECORD_SET_DESCRIPTION,
-			recordSet.getDescription(locale));
+			recordSet.getDescription(themeDisplay.getLocale()));
+		contextObjects.put(
+			DDLConstants.RESERVED_RECORD_SET_ID, recordSet.getRecordSetId());
+		contextObjects.put(
+			DDLConstants.RESERVED_RECORD_SET_NAME,
+			recordSet.getName(themeDisplay.getLocale()));
 
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");
 
@@ -320,12 +316,12 @@ public class DDLImpl implements DDL {
 
 		contextObjects.put("viewMode", viewMode);
 
-		DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
+		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 			ddmTemplateId);
 
 		return _transformer.transform(
-			themeDisplay, contextObjects, template.getScript(),
-			template.getLanguage());
+			themeDisplay, contextObjects, ddmTemplate.getScript(),
+			ddmTemplate.getLanguage());
 	}
 
 	@Override
