@@ -3207,7 +3207,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to #getSiteGroupId(groupId)
+	 * @deprecated As of 6.2.0 renamed to #getSiteGroupId(groupId)
 	 */
 	@Override
 	public long getParentGroupId(long groupId)
@@ -5233,7 +5233,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2 with no direct replacement
+	 * @deprecated As of 6.2.0 with no direct replacement
 	 */
 	@Override
 	public boolean isAllowAddPortletDefaultResource(
@@ -6956,7 +6956,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 6.2 with no direct replacement
+	 * @deprecated As of 6.2.0 with no direct replacement
 	 */
 	protected boolean isPanelSelectedPortlet(
 		ThemeDisplay themeDisplay, String portletId) {

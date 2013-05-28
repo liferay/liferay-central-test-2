@@ -50,7 +50,7 @@ PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getStrictLayoutP
 
 PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactoryUtil.getPortletPreferencesIds(request, portletId);
 
-PortletPreferences portletPreferences = null;
+PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
 
 Group group = null;
 boolean privateLayout = false;
@@ -67,8 +67,6 @@ else {
 	group = layout.getGroup();
 	privateLayout = layout.isPrivateLayout();
 }
-
-portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
 
 String scopeLayoutUuid = portletPreferences.getValue("lfrScopeLayoutUuid", null);
 

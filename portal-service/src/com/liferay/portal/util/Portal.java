@@ -798,7 +798,7 @@ public interface Portal {
 		HttpServletRequest request);
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupId(long)}
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupId(long)}
 	 */
 	public long getParentGroupId(long scopeGroupId)
 		throws PortalException, SystemException;
@@ -1104,7 +1104,7 @@ public interface Portal {
 		throws Exception;
 
 	/**
-	 * @deprecated As of 6.2 with no direct replacement
+	 * @deprecated As of 6.2.0 with no direct replacement
 	 */
 	public boolean isAllowAddPortletDefaultResource(
 			HttpServletRequest request, Portlet portlet)
