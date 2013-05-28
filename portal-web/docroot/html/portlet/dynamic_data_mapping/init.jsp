@@ -80,15 +80,6 @@ String scopeAvailableFields = ddmDisplay.getAvailableFields();
 String scopeStorageType = ddmDisplay.getStorageType();
 String scopeTemplateType = ddmDisplay.getTemplateType();
 
-String templateTypeValue = StringPool.BLANK;
-
-if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY)) {
-	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY;
-}
-else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
-	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_FORM;
-}
-
 String storageTypeValue = StringPool.BLANK;
 
 if (scopeStorageType.equals("expando")) {
@@ -96,6 +87,15 @@ if (scopeStorageType.equals("expando")) {
 }
 else if (scopeStorageType.equals("xml")) {
 	storageTypeValue = StorageType.XML.getValue();
+}
+
+String templateTypeValue = StringPool.BLANK;
+
+if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY)) {
+	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY;
+}
+else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_FORM)) {
+	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_FORM;
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
