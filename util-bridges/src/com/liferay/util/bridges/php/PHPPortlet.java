@@ -14,7 +14,6 @@
 
 package com.liferay.util.bridges.php;
 
-import com.caucho.quercus.servlet.QuercusServlet.PhpIni;
 import com.caucho.quercus.servlet.QuercusServlet;
 import com.caucho.vfs.Path;
 import com.caucho.vfs.SchemeMap;
@@ -184,7 +183,7 @@ public class PHPPortlet extends GenericPortlet {
 
 			servletConfig = new DynamicServletConfig(servletConfig, params);
 
-			PhpIni phpIni = quercusServlet.createPhpIni();
+			QuercusServlet.PhpIni phpIni = quercusServlet.createPhpIni();
 
 			phpIni.setProperty("unicode.http_input_encoding", StringPool.UTF8);
 			phpIni.setProperty("unicode.output_encoding", StringPool.UTF8);
