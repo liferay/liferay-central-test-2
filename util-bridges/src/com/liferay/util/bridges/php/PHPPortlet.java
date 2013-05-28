@@ -29,9 +29,8 @@ import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.bridges.common.ScriptPostProcess;
 
 import java.io.IOException;
@@ -42,7 +41,6 @@ import java.net.URI;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -54,7 +52,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -170,7 +167,7 @@ public class PHPPortlet extends GenericPortlet {
 
 			Path.setDefaultSchemeMap(schemeMap);
 
-			quercusServlet = (HttpServlet)InstanceFactory.newInstance(
+			quercusServlet = (QuercusServlet)InstanceFactory.newInstance(
 				_QUERCUS_SERVLET);
 
 			Map<String, String> params = new HashMap<String, String>();
@@ -187,24 +184,12 @@ public class PHPPortlet extends GenericPortlet {
 
 			servletConfig = new DynamicServletConfig(servletConfig, params);
 
-			Properties properties = PropsUtil.getProperties(
-				PropsKeys.PORTLET_BRIDGES_PHP_PROPERTIES, true);
+			PhpIni phpIni = quercusServlet.createPhpIni();
 
-			QuercusServlet qs = (QuercusServlet)quercusServlet;
-
-			PhpIni phpIni = qs.createPhpIni();
-
-			for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-				String key = (String)entry.getKey();
-				String value = (String)entry.getValue();
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Setting php.ini property: " + key + " = " + value);
-				}
-
-				phpIni.setProperty(key, value);
-			}
+			phpIni.setProperty("unicode.http_input_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.output_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.runtime_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.semantics", Boolean.TRUE.toString());
 
 			quercusServlet.init(servletConfig);
 		}
@@ -271,7 +256,7 @@ public class PHPPortlet extends GenericPortlet {
 	protected boolean addPortletParams;
 	protected String editUri;
 	protected String helpUri;
-	protected HttpServlet quercusServlet;
+	protected QuercusServlet quercusServlet;
 	protected ServletObjectsFactory servletObjectsFactory;
 	protected String viewUri;
 
