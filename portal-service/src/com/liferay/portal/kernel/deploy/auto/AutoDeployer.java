@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.deploy.auto;
+package com.liferay.portal.kernel.deploy.auto;
 
-import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 
 /**
