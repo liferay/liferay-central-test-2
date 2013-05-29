@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/portal_settings/init.jsp" %>
 
 <%
-int contentSharingWithChildrenEnabled = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED);
 boolean contentSharingWithSiteAdministratorsEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED);
+int contentSharingWithChildrenEnabled = PrefsPropsUtil.getInteger(company.getCompanyId(), PropsKeys.SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED);
 %>
 
 <h3><liferay-ui:message key="content-sharing" /></h3>
