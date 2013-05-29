@@ -73,7 +73,7 @@
 	if (GroupPermissionUtil.contains(permissionChecker, curGroup.getGroupId(), ActionKeys.VIEW)) {
 		List<Group> childSites = GroupServiceUtil.getGroups(company.getCompanyId(), curGroup.getGroupId(), true);
 
-		if (childSites.size() > 0) {
+		if (!childSites.isEmpty()) {
 	%>
 
 			<liferay-portlet:renderURL var="viewSubsitesURL">
