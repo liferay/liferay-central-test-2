@@ -165,25 +165,27 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         possible types can be found in {@link
 	 *         com.liferay.portal.model.LayoutConstants}.
 	 * @param  hidden whether the layout is hidden
-	 * @param  friendlyURLMap the layout's locales and localized friendly URLs. To see how the URL is
-	 *         normalized when accessed see {@link
+	 * @param  friendlyURLMap the layout's locales and localized friendly URLs.
+	 *         To see how the URL is normalized when accessed, see {@link
 	 *         com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil#normalize(
 	 *         String)}.
 	 * @param  serviceContext the service context to be applied. Must set the
-	 *         UUID for the layout. Can set the creation date, modification date
-	 *         and the expando bridge attributes for the layout. For layouts
+	 *         UUID for the layout. Can set the creation date, modification
+	 *         date, and expando bridge attributes for the layout. For layouts
 	 *         that belong to a layout set prototype, an attribute named
-	 *         'layoutUpdateable' can be set to specify whether site
+	 *         <code>layoutUpdateable</code> can be set to specify whether site
 	 *         administrators can modify this page within their site. For
 	 *         layouts that are created from a layout prototype, attributes
-	 *         named 'layoutPrototypeUuid' and 'layoutPrototypeLinkedEnabled'
-	 *         can be specified to provide the unique identifier of the source
-	 *         prototype and a boolean to determined whether a link to it should
-	 *         be enabled to activate propagation of changes made to the linked
-	 *         page in the prototype.
+	 *         named <code>layoutPrototypeUuid</code> and
+	 *         <code>layoutPrototypeLinkedEnabled</code> can be specified to
+	 *         provide the unique identifier of the source prototype and a
+	 *         boolean to determine whether a link to it should be enabled to
+	 *         activate propagation of changes made to the linked page in the
+	 *         prototype.
 	 * @return the layout
 	 * @throws PortalException if a group or user with the primary key could not
-	 *         be found, or if layout values were invalid
+	 *         be found, if layout values were invalid, or if a portal exception
+	 *         occurred
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -355,7 +357,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Adds a layout with additional parameters.
+	 * Adds a layout.
 	 *
 	 * <p>
 	 * This method handles the creation of the layout including its resources,
@@ -389,25 +391,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *             <code>portal-ext.properties</code> by specifying new values
 	 *             for the corresponding properties defined in {@link
 	 *             com.liferay.portal.util.PropsValues}. To see how the URL is
-	 *             normalized when accessed see {@link
+	 *             normalized when accessed, see {@link
 	 *             com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil#normalize(
 	 *             String)}.
 	 * @param      serviceContext the service context to be applied. Must set
 	 *             the UUID for the layout. Can set the creation date,
 	 *             modification date and the expando bridge attributes for the
 	 *             layout. For layouts that belong to a layout set prototype, an
-	 *             attribute named 'layoutUpdateable' can be set to specify
-	 *             whether site administrators can modify this page within their
-	 *             site. For layouts that are created from a layout prototype,
-	 *             attributes named 'layoutPrototypeUuid' and
-	 *             'layoutPrototypeLinkedEnabled' can be specified to provide
-	 *             the unique identifier of the source prototype and a boolean
-	 *             to determined whether a link to it should be enabled to
-	 *             activate propagation of changes made to the linked page in
-	 *             the prototype.
+	 *             attribute named <code>layoutUpdateable</code> can be set to
+	 *             specify whether site administrators can modify this page
+	 *             within their site. For layouts that are created from a layout
+	 *             prototype, attributes named <code>layoutPrototypeUuid</code>
+	 *             and <code>layoutPrototypeLinkedEnabled</code> can be
+	 *             specified to provide the unique identifier of the source
+	 *             prototype and a boolean to determine whether a link to it
+	 *             should be enabled to activate propagation of changes made to
+	 *             the linked page in the prototype.
 	 * @return     the layout
 	 * @throws     PortalException if a group or user with the primary key could
-	 *             not be found, or if layout values were invalid
+	 *             not be found, if layout values were invalid, or if a portal
+	 *             exception occurred
 	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #addLayout(long, long,
 	 *             boolean, long, Map, Map, Map, Map, Map, String, boolean, Map,
@@ -475,18 +478,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         <code>portal-ext.properties</code> by specifying new values for
 	 *         the corresponding properties defined in {@link
 	 *         com.liferay.portal.util.PropsValues}. To see how the URL is
-	 *         normalized when accessed see {@link
+	 *         normalized when accessed, see {@link
 	 *         com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil#normalize(
 	 *         String)}.
 	 * @param  serviceContext the service context to be applied. Must set the
 	 *         UUID for the layout. Can set the creation date and modification
 	 *         date for the layout. For layouts that belong to a layout set
-	 *         prototype, an attribute named 'layoutUpdateable' can be set to
-	 *         specify whether site administrators can modify this page within
-	 *         their site.
+	 *         prototype, an attribute named <code>layoutUpdateable</code> can
+	 *         be set to specify whether site administrators can modify this
+	 *         page within their site.
 	 * @return the layout
 	 * @throws PortalException if a group or user with the primary key could not
-	 *         be found
+	 *         be found, or if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1975,6 +1978,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *
 	 * @param  plid the primary key of the layout
 	 * @param  friendlyURL the friendly URL to be assigned
+	 * @param  languageId the primary key of the language
 	 * @return the updated layout
 	 * @throws PortalException if a group or layout with the primary key could
 	 *         not be found
@@ -2017,7 +2021,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Updates the layout.
+	 * Updates the layout with additional parameters.
 	 *
 	 * @param  groupId the primary key of the group
 	 * @param  privateLayout whether the layout is private to the group
@@ -2037,7 +2041,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         com.liferay.portal.model.LayoutConstants#TYPE_PORTLET})
 	 * @param  hidden whether the layout is hidden
 	 * @param  friendlyURLMap the layout's locales and localized friendly URLs.
-	 *         To see how the URL is normalized when accessed see {@link
+	 *         To see how the URL is normalized when accessed, see {@link
 	 *         com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil#normalize(
 	 *         String)}.
 	 * @param  iconImage whether the icon image will be updated
@@ -2045,16 +2049,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 * @param  serviceContext the service context to be applied. Can set the
 	 *         modification date and expando bridge attributes for the layout.
 	 *         For layouts that are linked to a layout prototype, attributes
-	 *         named 'layoutPrototypeUuid' and 'layoutPrototypeLinkedEnabled'
-	 *         can be specified to provide the unique identifier of the source
-	 *         prototype and a boolean to determined whether a link to it should
-	 *         be enabled to activate propagation of changes made to the linked
-	 *         page in the prototype.
+	 *         named <code>layoutPrototypeUuid</code> and
+	 *         <code>layoutPrototypeLinkedEnabled</code> can be specified to
+	 *         provide the unique identifier of the source prototype and a
+	 *         boolean to determine whether a link to it should be enabled to
+	 *         activate propagation of changes made to the linked page in the
+	 *         prototype.
 	 * @return the updated layout
 	 * @throws PortalException if a group or layout with the primary key could
 	 *         not be found, if a unique friendly URL could not be generated, if
-	 *         a valid parent layout ID to use could not be found, or if the
-	 *         layout parameters were invalid
+	 *         a valid parent layout ID to use could not be found, if the layout
+	 *         parameters were invalid, or if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -2208,7 +2213,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *             <code>portal-ext.properties</code> by specifying new values
 	 *             for the corresponding properties defined in {@link
 	 *             com.liferay.portal.util.PropsValues}. To see how the URL is
-	 *             normalized when accessed see {@link
+	 *             normalized when accessed, see {@link
 	 *             com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil#normalize(
 	 *             String)}.
 	 * @param      iconImage whether the icon image will be updated
@@ -2216,17 +2221,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 * @param      serviceContext the service context to be applied. Can set the
 	 *             modification date and expando bridge attributes for the
 	 *             layout. For layouts that are linked to a layout prototype,
-	 *             attributes named 'layoutPrototypeUuid' and
-	 *             'layoutPrototypeLinkedEnabled' can be specified to provide
-	 *             the unique identifier of the source prototype and a boolean
-	 *             to determined whether a link to it should be enabled to
-	 *             activate propagation of changes made to the linked page in
+	 *             attributes named <code>layoutPrototypeUuid</code> and
+	 *             <code>layoutPrototypeLinkedEnabled</code> can be specified to
+	 *             provide the unique identifier of the source prototype and a
+	 *             boolean to determine whether a link to it should be enabled
+	 *             to activate propagation of changes made to the linked page in
 	 *             the prototype.
 	 * @return     the updated layout
 	 * @throws     PortalException if a group or layout with the primary key
 	 *             could not be found, if a unique friendly URL could not be
 	 *             generated, if a valid parent layout ID to use could not be
-	 *             found, or if the layout parameters were invalid
+	 *             found, if the layout parameters were invalid, or if a portal
+	 *             exception occurred
 	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #updateLayout(long, boolean,
 	 *             long, long, Map, Map, Map, Map, Map, String, boolean, Map,
@@ -2262,7 +2268,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         See {@link com.liferay.portal.kernel.util.UnicodeProperties
 	 *         #fastLoad(String)}.
 	 * @return the updated layout
-	 * @throws PortalException if a matching layout could not be found
+	 * @throws PortalException if a matching layout could not be found or if a
+	 *         portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
