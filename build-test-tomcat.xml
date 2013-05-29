@@ -155,7 +155,7 @@ web.server.display.node=true</echo>
 			</then>
 		</if>
 
-		<exec executable="${unzip.executable}">
+		<exec executable="unzip">
 			<arg line="-qq ${app.server.parent.dir}/${bundled.file.name} -d ${app.server.parent.dir}" />
 		</exec>
 
