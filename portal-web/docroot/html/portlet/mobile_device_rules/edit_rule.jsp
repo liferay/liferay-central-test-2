@@ -48,6 +48,12 @@ if (ruleGroup != null) {
 	title="<%= title %>"
 />
 
+<c:if test="<%= rule == null %>">
+	<div class="alert alert-info">
+		<liferay-ui:message key="rule-help" />
+	</div>
+</c:if>
+
 <portlet:actionURL var="editRuleURL">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule" />
 </portlet:actionURL>
@@ -63,12 +69,6 @@ if (ruleGroup != null) {
 	<liferay-ui:error exception="<%= UnknownRuleHandlerException.class %>" message="please-select-a-rule-type" />
 
 	<aui:model-context bean="<%= rule %>" model="<%= MDRRule.class %>" />
-
-	<c:if test="<%= rule == null %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="rule-help" />
-		</div>
-	</c:if>
 
 	<aui:fieldset>
 		<aui:input name="name" />

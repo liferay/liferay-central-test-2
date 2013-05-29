@@ -35,6 +35,12 @@ MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.get
 	title='<%= (action == null) ? "new-action" : action.getName(locale) %>'
 />
 
+<c:if test="<%= action == null %>">
+	<div class="alert alert-info">
+		<liferay-ui:message key="action-help" />
+	</div>
+</c:if>
+
 <portlet:actionURL var="editActionURL">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_action" />
 </portlet:actionURL>
@@ -51,12 +57,6 @@ MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.get
 	<liferay-ui:error exception="<%= NoSuchRuleGroupInstanceException.class %>" message="rule-group-instance-does-not-exist" />
 
 	<aui:model-context bean="<%= action %>" model="<%= MDRAction.class %>" />
-
-	<c:if test="<%= action == null %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="action-help" />
-		</div>
-	</c:if>
 
 	<aui:fieldset>
 		<aui:input name="name" />
