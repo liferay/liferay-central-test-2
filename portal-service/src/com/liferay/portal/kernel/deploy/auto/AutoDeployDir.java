@@ -17,9 +17,12 @@ package com.liferay.portal.kernel.deploy.auto;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -40,8 +43,33 @@ public class AutoDeployDir {
 			List<AutoDeployListener> autoDeployListeners)
 		throws AutoDeployException {
 
+		List<String> duplicateApplicableAutoDeployListenerClassNames =
+			new ArrayList<String>();
+
 		for (AutoDeployListener autoDeployListener : autoDeployListeners) {
-			autoDeployListener.deploy(autoDeploymentContext);
+			if (autoDeployListener.deploy(autoDeploymentContext) !=
+					AutoDeployer.CODE_NOT_APPLICABLE) {
+
+				Class<?> autoDeployListenerClass =
+					autoDeployListener.getClass();
+
+				duplicateApplicableAutoDeployListenerClassNames.add(
+					autoDeployListenerClass.getName());
+			}
+		}
+
+		if (duplicateApplicableAutoDeployListenerClassNames.size() > 1) {
+			StringBundler sb = new StringBundler();
+
+			sb.append("The auto deploy listeners ");
+			sb.append(
+				StringUtil.merge(
+					duplicateApplicableAutoDeployListenerClassNames, ", "));
+			sb.append(" all deployed ");
+			sb.append(autoDeploymentContext.getFile());
+			sb.append(", but only one should have.");
+
+			throw new AutoDeployException(sb.toString());
 		}
 	}
 
