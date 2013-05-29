@@ -37,7 +37,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -72,7 +72,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			autoDeployer = getWaiDeployer();
 		}
 		else {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -92,6 +92,8 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 				"Portlets for " + file.getPath() + " copied successfully. " +
 					"Deployment will start in a few seconds.");
 		}
+
+		return code;
 	}
 
 	protected AutoDeployer getMvcDeployer() {

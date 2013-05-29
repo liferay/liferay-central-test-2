@@ -33,7 +33,7 @@ public class ExtAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -43,7 +43,7 @@ public class ExtAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isExtPlugin(file)) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -59,6 +59,8 @@ public class ExtAutoDeployListener extends BaseAutoDeployListener {
 					" copied successfully. Deployment will start in a few " +
 						"seconds.");
 		}
+
+		return code;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

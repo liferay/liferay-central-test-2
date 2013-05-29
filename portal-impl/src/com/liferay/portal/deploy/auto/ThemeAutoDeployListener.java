@@ -34,7 +34,7 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -44,7 +44,7 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isThemePlugin(file)) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -58,6 +58,8 @@ public class ThemeAutoDeployListener extends BaseAutoDeployListener {
 				"Themes for " + file.getPath() + " copied successfully. " +
 					"Deployment will start in a few seconds.");
 		}
+
+		return code;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

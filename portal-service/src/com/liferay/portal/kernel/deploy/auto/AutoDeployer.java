@@ -24,6 +24,8 @@ public interface AutoDeployer {
 
 	public static final int CODE_DEFAULT = 1;
 
+	public static final int CODE_NOT_APPLICABLE = 0;
+
 	public static final int CODE_SKIP_NEWER_VERSION = 2;
 
 	public int autoDeploy(AutoDeploymentContext autoDeploymentContext)

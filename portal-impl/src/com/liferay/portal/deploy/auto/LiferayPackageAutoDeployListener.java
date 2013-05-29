@@ -34,7 +34,7 @@ public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -44,7 +44,7 @@ public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isLiferayPackage(file)) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -58,6 +58,8 @@ public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 				"Liferay package for " + file.getPath() +" extracted " +
 					"successfully. Deployment will start in a few seconds.");
 		}
+
+		return code;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

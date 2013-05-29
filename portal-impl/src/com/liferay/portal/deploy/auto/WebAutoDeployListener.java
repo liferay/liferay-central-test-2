@@ -33,7 +33,7 @@ public class WebAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -43,7 +43,7 @@ public class WebAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isWebPlugin(file)) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -57,6 +57,8 @@ public class WebAutoDeployListener extends BaseAutoDeployListener {
 				"Web plugin for " + file.getPath() + " copied successfully. " +
 					"Deployment will start in a few seconds.");
 		}
+
+		return code;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
