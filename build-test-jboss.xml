@@ -74,9 +74,7 @@
 			</then>
 		</if>
 
-		<exec executable="unzip">
-			<arg line="-qq ${app.server.parent.dir}/${bundled.file.name} -d ${app.server.parent.dir}" />
-		</exec>
+		<unzip src="${app.server.parent.dir}/${bundled.file.name}" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss
 
