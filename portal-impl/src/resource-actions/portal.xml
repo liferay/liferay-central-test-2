@@ -371,10 +371,10 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
+				<action-key>ADD_COMMUNITY</action-key>
 				<action-key>ADD_LAYOUT</action-key>
 				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
-				<action-key>ADD_COMMUNITY</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>CONFIGURE_PORTLETS</action-key>
@@ -398,10 +398,10 @@
 			<site-member-defaults />
 			<guest-defaults />
 			<guest-unsupported>
+				<action-key>ADD_COMMUNITY</action-key>
 				<action-key>ADD_LAYOUT</action-key>
 				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
-				<action-key>ADD_COMMUNITY</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>DELETE</action-key>
