@@ -47,7 +47,7 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 	}
 
 	@Override
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -57,7 +57,7 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isModule(file)) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -71,6 +71,8 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 				"Module for " + file.getPath() + " copied successfully. " +
 					"Deployment will start in a few seconds.");
 		}
+
+		return code;
 	}
 
 	protected boolean isModule(File file) throws AutoDeployException {
