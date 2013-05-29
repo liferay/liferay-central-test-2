@@ -832,18 +832,20 @@ public class AssetPublisherImpl implements AssetPublisher {
 				return false;
 			}
 
-			if (!SitesUtil.isContentSharingWithChildrenEnabled(siteGroup)) {
-				if (!PrefsPropsUtil.getBoolean(
-						layout.getCompanyId(),
-						PropsKeys.
-							SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED)) {
-
-					return false;
-				}
-
-				return GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.UPDATE);
+			if (SitesUtil.isContentSharingWithChildrenEnabled(siteGroup)) {
+				return true;
 			}
+
+			if (!PrefsPropsUtil.getBoolean(
+					layout.getCompanyId(),
+					PropsKeys.
+					SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED)) {
+
+				return false;
+			}
+
+			return GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.UPDATE);
 		}
 		else if (groupId != companyGroupId) {
 			return GroupPermissionUtil.contains(
