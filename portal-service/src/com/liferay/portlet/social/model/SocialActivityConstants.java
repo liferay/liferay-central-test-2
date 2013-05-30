@@ -20,8 +20,6 @@ package com.liferay.portlet.social.model;
  */
 public class SocialActivityConstants {
 
-	public static final int INTERNAL_TYPES_START = 10001;
-
 	public static final int TYPE_ADD_ATTACHMENT = 10006;
 
 	public static final int TYPE_ADD_COMMENT = 10005;
@@ -42,6 +40,11 @@ public class SocialActivityConstants {
 
 	public static final int TYPE_UNSUBSCRIBE = 10003;
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl#isLogActivity(
+	 *      SocialActivity)}
+	 */
 	public static final int TYPE_VIEW = 10001;
 
 }

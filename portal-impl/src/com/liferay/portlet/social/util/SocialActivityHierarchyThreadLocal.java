@@ -25,29 +25,32 @@ import java.util.Stack;
 public class SocialActivityHierarchyThreadLocal {
 
 	public static void clear() {
-		Stack<SocialActivityHierarchyEntry> hierarchy = _hierarchy.get();
+		Stack<SocialActivityHierarchy> activityHierarchies =
+			_activityHierarchies.get();
 
-		hierarchy.clear();
+		activityHierarchies.clear();
 	}
 
-	public static SocialActivityHierarchyEntry peek() {
-		Stack<SocialActivityHierarchyEntry> hierarchy = _hierarchy.get();
+	public static SocialActivityHierarchy peek() {
+		Stack<SocialActivityHierarchy> activityHierarchies =
+			_activityHierarchies.get();
 
-		if (hierarchy.isEmpty()) {
+		if (activityHierarchies.isEmpty()) {
 			return null;
 		}
 
-		return hierarchy.peek();
+		return activityHierarchies.peek();
 	}
 
-	public static SocialActivityHierarchyEntry pop() {
-		Stack<SocialActivityHierarchyEntry> hierarchy = _hierarchy.get();
+	public static SocialActivityHierarchy pop() {
+		Stack<SocialActivityHierarchy> activityHierarchies =
+			_activityHierarchies.get();
 
-		if (hierarchy.isEmpty()) {
+		if (activityHierarchies.isEmpty()) {
 			return null;
 		}
 
-		return hierarchy.pop();
+		return activityHierarchies.pop();
 	}
 
 	public static void push(Class<?> clazz, long classPK) {
@@ -57,9 +60,11 @@ public class SocialActivityHierarchyThreadLocal {
 	}
 
 	public static void push(long classNameId, long classPK) {
-		Stack<SocialActivityHierarchyEntry> hierarchy = _hierarchy.get();
+		Stack<SocialActivityHierarchy> activityHierarchies =
+			_activityHierarchies.get();
 
-		hierarchy.push(new SocialActivityHierarchyEntry(classNameId, classPK));
+		activityHierarchies.push(
+			new SocialActivityHierarchy(classNameId, classPK));
 	}
 
 	public static void push(String className, long classPK) {
@@ -68,9 +73,11 @@ public class SocialActivityHierarchyThreadLocal {
 		push(classNameId, classPK);
 	}
 
-	private static ThreadLocal<Stack<SocialActivityHierarchyEntry>> _hierarchy =
-		new AutoResetThreadLocal<Stack<SocialActivityHierarchyEntry>>(
-			SocialActivityHierarchyThreadLocal.class + "._hierarchy",
-			new Stack<SocialActivityHierarchyEntry>());
+	private static ThreadLocal<Stack<SocialActivityHierarchy>>
+		_activityHierarchies =
+			new AutoResetThreadLocal<Stack<SocialActivityHierarchy>>(
+				SocialActivityHierarchyThreadLocal.class +
+					"._activityHierarchy",
+				new Stack<SocialActivityHierarchy>());
 
 }

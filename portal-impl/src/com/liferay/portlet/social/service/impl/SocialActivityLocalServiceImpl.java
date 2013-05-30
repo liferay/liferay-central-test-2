@@ -29,7 +29,7 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityDefinition;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
-import com.liferay.portlet.social.util.SocialActivityHierarchyEntry;
+import com.liferay.portlet.social.util.SocialActivityHierarchy;
 import com.liferay.portlet.social.util.SocialActivityHierarchyThreadLocal;
 
 import java.util.Date;
@@ -119,9 +119,6 @@ public class SocialActivityLocalServiceImpl
 			}
 		}
 
-		SocialActivityHierarchyEntry parentHierarchyEntry =
-			SocialActivityHierarchyThreadLocal.peek();
-
 		SocialActivity activity = socialActivityPersistence.create(0);
 
 		activity.setGroupId(groupId);
@@ -132,10 +129,12 @@ public class SocialActivityLocalServiceImpl
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
 
-		if (parentHierarchyEntry != null) {
-			activity.setParentClassNameId(
-				parentHierarchyEntry.getClassNameId());
-			activity.setParentClassPK(parentHierarchyEntry.getClassPK());
+		SocialActivityHierarchy activityHierarchy =
+			SocialActivityHierarchyThreadLocal.peek();
+
+		if (activityHierarchy != null) {
+			activity.setParentClassNameId(activityHierarchy.getClassNameId());
+			activity.setParentClassPK(activityHierarchy.getClassPK());
 		}
 
 		activity.setType(type);
@@ -159,17 +158,15 @@ public class SocialActivityLocalServiceImpl
 			mirrorActivity.setClassNameId(classNameId);
 			mirrorActivity.setClassPK(classPK);
 
-			if (parentHierarchyEntry != null) {
+			if (activityHierarchy != null) {
 				mirrorActivity.setParentClassNameId(
-					parentHierarchyEntry.getClassNameId());
-				mirrorActivity.setParentClassPK(
-					parentHierarchyEntry.getClassPK());
+					activityHierarchy.getClassNameId());
+				mirrorActivity.setParentClassPK(activityHierarchy.getClassPK());
 			}
 
 			mirrorActivity.setType(type);
 			mirrorActivity.setExtraData(extraData);
 			mirrorActivity.setReceiverUserId(user.getUserId());
-
 			mirrorActivity.setAssetEntry(assetEntry);
 		}
 
@@ -241,7 +238,7 @@ public class SocialActivityLocalServiceImpl
 				"Activity and mirror activity must not have primary keys set");
 		}
 
-		if (logActivity(activity)) {
+		if (isLogActivity(activity)) {
 			long activityId = counterLocalService.increment(
 				SocialActivity.class.getName());
 
@@ -1154,28 +1151,27 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityFinder.countByUserOrganizations(userId);
 	}
 
-	protected boolean logActivity(SocialActivity activity)
+	protected boolean isLogActivity(SocialActivity activity)
 		throws SystemException {
+
+		if (activity.getType() == SocialActivityConstants.TYPE_DELETE) {
+			if (activity.getParentClassPK() == 0) {
+				return true;
+			}
+
+			return false;
+		}
 
 		SocialActivityDefinition activityDefinition =
 			socialActivitySettingLocalService.getActivityDefinition(
 				activity.getGroupId(), activity.getClassName(),
 				activity.getType());
 
-		if (activity.getType() == SocialActivityConstants.TYPE_DELETE) {
-			if (activity.getParentClassPK() == 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-
 		if (activityDefinition != null) {
 			return activityDefinition.isLogActivity();
 		}
 
-		if (activity.getType() < SocialActivityConstants.INTERNAL_TYPES_START) {
+		if (activity.getType() < SocialActivityConstants.TYPE_VIEW) {
 			return true;
 		}
 
