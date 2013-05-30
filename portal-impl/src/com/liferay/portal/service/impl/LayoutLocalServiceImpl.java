@@ -1084,7 +1084,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
 			layoutFriendlyURLPersistence.findByG_P_F(
-				groupId, privateLayout, friendlyURL);
+				groupId, privateLayout, friendlyURL, 0, 1);
 
 		if (!layoutFriendlyURLs.isEmpty()) {
 			LayoutFriendlyURL layoutFriendlyURL = layoutFriendlyURLs.get(0);
