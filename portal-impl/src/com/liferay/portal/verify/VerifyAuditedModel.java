@@ -322,10 +322,6 @@ public class VerifyAuditedModel extends VerifyProcess {
 			"Layout", "plid", null, null, null, "false"
 		},
 		new String[] {
-			"LayoutFriendlyURL", "layoutFriendlyURLId", null, null, null,
-			"false"
-		},
-		new String[] {
 			"LayoutPrototype", "layoutPrototypeId", null, null, null, "true"
 		},
 		new String[] {
