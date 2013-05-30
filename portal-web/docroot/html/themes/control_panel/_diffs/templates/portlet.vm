@@ -34,7 +34,7 @@
 			#if ($portlet_display.isShowBackIcon())
 				<a class="portlet-icon-back" href="$portlet_back_url">#language ("return-to-full-page")</a>
 			#else
-				$theme.iconOptions()
+				$theme.portletIconOptions()
 			#end
 		</menu>
 	</header>
