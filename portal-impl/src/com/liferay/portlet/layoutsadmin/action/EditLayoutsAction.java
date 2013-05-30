@@ -167,9 +167,9 @@ public class EditLayoutsAction extends PortletAction {
 				oldFriendlyURL = (String)returnValue[1];
 
 				redirect = updateCloseRedirect(
-					redirect, null, layout, oldFriendlyURL, themeDisplay);
+					themeDisplay, redirect, null, layout, oldFriendlyURL);
 				closeRedirect = updateCloseRedirect(
-					closeRedirect, null, layout, oldFriendlyURL, themeDisplay);
+					themeDisplay, closeRedirect, null, layout, oldFriendlyURL);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				long plid = ParamUtil.getLong(actionRequest, "plid");
@@ -195,7 +195,7 @@ public class EditLayoutsAction extends PortletAction {
 				long newRefererPlid = (Long)returnValue[2];
 
 				redirect = updateCloseRedirect(
-					redirect, group, null, oldFriendlyURL, themeDisplay);
+					themeDisplay, redirect, group, null, oldFriendlyURL);
 
 				long refererPlid = themeDisplay.getRefererPlid();
 
@@ -205,7 +205,7 @@ public class EditLayoutsAction extends PortletAction {
 				}
 
 				closeRedirect = updateCloseRedirect(
-					closeRedirect, group, null, oldFriendlyURL, themeDisplay);
+					themeDisplay, closeRedirect, group, null, oldFriendlyURL);
 			}
 			else if (cmd.equals("copy_from_live")) {
 				StagingUtil.copyFromLive(actionRequest);
@@ -818,8 +818,8 @@ public class EditLayoutsAction extends PortletAction {
 	}
 
 	protected String updateCloseRedirect(
-		String closeRedirect, Group group, Layout layout,
-		String oldLayoutFriendlyURL, ThemeDisplay themeDisplay) {
+		ThemeDisplay themeDisplay, String closeRedirect, Group group,
+		Layout layout, String oldLayoutFriendlyURL) {
 
 		if (Validator.isNull(closeRedirect) ||
 			Validator.isNull(oldLayoutFriendlyURL)) {

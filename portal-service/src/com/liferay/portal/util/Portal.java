@@ -16,8 +16,6 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.layout.LayoutFriendlyURLComposite;
-import com.liferay.portal.kernel.layout.LayoutQueryStringComposite;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
@@ -27,6 +25,8 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutFriendlyURLComposite;
+import com.liferay.portal.model.LayoutQueryStringComposite;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.ResourcePermission;

@@ -44,7 +44,6 @@ public class LayoutFriendlyURLLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		long layoutFriendlyURLId = counterLocalService.increment();

@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.layout.LayoutFriendlyURLComposite;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.struts.LastPath;
@@ -24,6 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutFriendlyURLComposite;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -96,16 +96,16 @@ public class FriendlyURLServlet extends HttpServlet {
 		request.setAttribute(
 			WebKeys.FRIENDLY_URL, _friendlyURLPathPrefix.concat(pathInfo));
 
-		Object[] object = null;
+		Object[] redirectArray = null;
 
 		boolean forceRedirect = false;
 
 		try {
-			object = getRedirect(
+			redirectArray = getRedirect(
 				request, pathInfo, mainPath, request.getParameterMap());
 
-			redirect = (String)object[0];
-			forceRedirect = GetterUtil.getBoolean(object[1]);
+			redirect = (String)redirectArray[0];
+			forceRedirect = (Boolean)redirectArray[1];
 
 			if (request.getAttribute(WebKeys.LAST_PATH) == null) {
 				LastPath lastPath = new LastPath(
@@ -175,7 +175,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (Validator.isNull(friendlyURL)) {
-			return new Object[] {mainPath, false};
+			return new Object[] {mainPath, Boolean.FALSE};
 		}
 
 		long companyId = PortalInstances.getCompanyId(request);
@@ -225,7 +225,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (group == null) {
-			return new Object[] {mainPath, false};
+			return new Object[] {mainPath, Boolean.FALSE};
 		}
 
 		// Layout friendly URL
@@ -267,29 +267,18 @@ public class FriendlyURLServlet extends HttpServlet {
 					requestContext);
 
 			Layout layout = layoutFriendlyURLComposite.getLayout();
+
 			friendlyURL = layoutFriendlyURLComposite.getFriendlyURL();
 
-			if (isInvalidLocalizedFriendlyURL(layout, friendlyURL, locale)) {
+			if (!friendlyURL.startsWith(layout.getFriendlyURL(locale))) {
 				String redirect = PortalUtil.getLocalizedFriendlyURL(
 					request, layout, locale);
 
-				return new Object[] {redirect, true};
+				return new Object[] {redirect, Boolean.TRUE};
 			}
 		}
 
-		return new Object[] {actualURL, false};
-	}
-
-	protected boolean isInvalidLocalizedFriendlyURL(
-			Layout layout, String friendlyURL, Locale locale)
-		throws Exception {
-
-		if (!friendlyURL.startsWith(layout.getFriendlyURL(locale))) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return new Object[] {actualURL, Boolean.FALSE};
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FriendlyURLServlet.class);

@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.layout.LayoutFriendlyURLComposite;
-import com.liferay.portal.kernel.layout.LayoutQueryStringComposite;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -98,6 +96,8 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutFriendlyURLComposite;
+import com.liferay.portal.model.LayoutQueryStringComposite;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -855,8 +855,8 @@ public class PortalImpl implements Portal {
 
 			if (layout == null) {
 				throw new NoSuchLayoutException(
-					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
-						"} does not have any layouts");
+					"{groupId=" + groupId + ", privateLayout=" + privateLayout +
+						"}");
 			}
 		}
 		else {
@@ -1203,8 +1203,8 @@ public class PortalImpl implements Portal {
 		groupFriendlyURL = getGroupFriendlyURL(
 			group, layout.isPrivateLayout(), themeDisplay, true);
 
-		return groupFriendlyURL.concat(
-			canonicalLayoutFriendlyURL).concat(parametersURL);
+		return groupFriendlyURL.concat(canonicalLayoutFriendlyURL).concat(
+			parametersURL);
 	}
 
 	/**
@@ -2484,12 +2484,12 @@ public class PortalImpl implements Portal {
 			Map<String, Object> requestContext)
 		throws PortalException, SystemException {
 
-		String articleUrlTitle = friendlyURL.substring(
+		String urlTitle = friendlyURL.substring(
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR.length());
 
 		JournalArticle journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				groupId, articleUrlTitle);
+				groupId, urlTitle);
 
 		Layout layout = getJournalArticleLayout(
 			groupId, privateLayout, friendlyURL);
@@ -2587,17 +2587,15 @@ public class PortalImpl implements Portal {
 			long groupId, boolean privateLayout, String friendlyURL)
 		throws PortalException, SystemException {
 
-		String articleUrlTitle = friendlyURL.substring(
+		String urlTitle = friendlyURL.substring(
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR.length());
 
 		JournalArticle journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
-				groupId, articleUrlTitle);
+				groupId, urlTitle);
 
-		Layout layout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+		return LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
 			journalArticle.getLayoutUuid(), groupId, privateLayout);
-
-		return layout;
 	}
 
 	@Override
@@ -3260,7 +3258,7 @@ public class PortalImpl implements Portal {
 			locale, LocaleUtil.toLanguageId(locale));
 
 		String localizedFriendlyURL =
-			contextPath + StringPool.SLASH.concat(i18nPath) + requestURI;
+			contextPath + StringPool.SLASH + i18nPath + requestURI;
 
 		String queryString = request.getQueryString();
 

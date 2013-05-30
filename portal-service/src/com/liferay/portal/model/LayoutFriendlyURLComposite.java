@@ -12,37 +12,35 @@
  * details.
  */
 
-package com.liferay.portal.kernel.layout;
-
-import com.liferay.portal.model.Layout;
+package com.liferay.portal.model;
 
 /**
  * @author Sergio González
  */
-public class LayoutQueryStringComposite {
+public class LayoutFriendlyURLComposite {
 
-	public LayoutQueryStringComposite(Layout layout, String queryString) {
+	public LayoutFriendlyURLComposite(Layout layout, String friendlyURL) {
 		_layout = layout;
-		_queryString = queryString;
+		_friendlyURL = friendlyURL;
+	}
+
+	public String getFriendlyURL() {
+		return _friendlyURL;
 	}
 
 	public Layout getLayout() {
 		return _layout;
 	}
 
-	public String getQueryString() {
-		return _queryString;
+	public void setFriendlyURL(String friendlyURL) {
+		_friendlyURL = friendlyURL;
 	}
 
 	public void setLayout(Layout layout) {
 		_layout = layout;
 	}
 
-	public void setQueryString(String queryString) {
-		_queryString = queryString;
-	}
-
+	private String _friendlyURL;
 	private Layout _layout;
-	private String _queryString;
 
 }
