@@ -340,7 +340,7 @@ public class UserNotificationEventLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #getArchivedUserNotificationEvents(long, boolean)}
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEvents(long, boolean)}
 	*/
 	public static java.util.List<com.liferay.portal.model.UserNotificationEvent> getUserNotificationEvents(
 		long userId, boolean archived)
@@ -349,7 +349,7 @@ public class UserNotificationEventLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #getArchivedUserNotificationEvents(long, boolean, int,
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEvents(long, boolean, int,
 	int)}
 	*/
 	public static java.util.List<com.liferay.portal.model.UserNotificationEvent> getUserNotificationEvents(
@@ -371,7 +371,7 @@ public class UserNotificationEventLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #getArchivedUserNotificationEventsCount(long,
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEventsCount(long,
 	boolean)}
 	*/
 	public static int getUserNotificationEventsCount(long userId,
