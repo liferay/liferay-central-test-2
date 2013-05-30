@@ -74,28 +74,25 @@ public class StartupAction extends SimpleAction {
 
 		System.out.println("Starting " + ReleaseInfo.getReleaseInfo());
 
-		// Portal Resiliency
-
-		DistributedRegistry.registerDistributed(WebKeys.class);
+		// Portal resiliency
 
 		DistributedRegistry.registerDistributed(
 			PortletRequest.LIFECYCLE_PHASE, Direction.DUPLEX, MatchType.EXACT);
-
-		// Intraband
+		DistributedRegistry.registerDistributed(WebKeys.class);
 
 		Intraband intraband = MPIHelperUtil.getIntraband();
 
 		intraband.registerDatagramReceiveHandler(
-			SystemDataType.RPC.getValue(), new RPCDatagramReceiveHandler());
-		intraband.registerDatagramReceiveHandler(
-			SystemDataType.PORTAL_CACHE.getValue(),
-			new PortalCacheDatagramReceiveHandler());
+			SystemDataType.MAILBOX.getValue(),
+			new MailboxDatagramReceiveHandler());
 		intraband.registerDatagramReceiveHandler(
 			SystemDataType.MESSAGE.getValue(),
 			new MessageDatagramReceiveHandler());
 		intraband.registerDatagramReceiveHandler(
-			SystemDataType.MAILBOX.getValue(),
-			new MailboxDatagramReceiveHandler());
+			SystemDataType.PORTAL_CACHE.getValue(),
+			new PortalCacheDatagramReceiveHandler());
+		intraband.registerDatagramReceiveHandler(
+			SystemDataType.RPC.getValue(), new RPCDatagramReceiveHandler());
 
 		// Clear locks
 
