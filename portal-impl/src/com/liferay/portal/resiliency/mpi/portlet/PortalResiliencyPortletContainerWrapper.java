@@ -75,7 +75,7 @@ public class PortalResiliencyPortletContainerWrapper
 			Portlet portlet)
 		throws PortletContainerException {
 
-		SPIAgent spiAgent = _getSPIAgentForPortlet(portlet);
+		SPIAgent spiAgent = getSPIAgentForPortlet(portlet);
 
 		if (spiAgent == null) {
 			return _portletContainer.processAction(request, response, portlet);
@@ -97,9 +97,9 @@ public class PortalResiliencyPortletContainerWrapper
 			return ActionResult.EMPTY_ACTION_RESULT;
 		}
 		finally {
+			request.removeAttribute(WebKeys.SPI_AGENT_ACTION_RESULT);
 			request.removeAttribute(WebKeys.SPI_AGENT_LIFECYCLE);
 			request.removeAttribute(WebKeys.SPI_AGENT_PORTLET);
-			request.removeAttribute(WebKeys.SPI_AGENT_ACTION_RESULT);
 		}
 	}
 
@@ -109,18 +109,18 @@ public class PortalResiliencyPortletContainerWrapper
 			Portlet portlet, Layout layout, Event event)
 		throws PortletContainerException {
 
-		SPIAgent spiAgent = _getSPIAgentForPortlet(portlet);
+		SPIAgent spiAgent = getSPIAgentForPortlet(portlet);
 
 		if (spiAgent == null) {
 			return _portletContainer.processEvent(
 				request, response, portlet, layout, event);
 		}
 
+		request.setAttribute(WebKeys.SPI_AGENT_EVENT, event);
+		request.setAttribute(WebKeys.SPI_AGENT_LAYOUT, layout);
 		request.setAttribute(
 			WebKeys.SPI_AGENT_LIFECYCLE, SPIAgent.Lifecycle.EVENT);
 		request.setAttribute(WebKeys.SPI_AGENT_PORTLET, portlet);
-		request.setAttribute(WebKeys.SPI_AGENT_LAYOUT, layout);
-		request.setAttribute(WebKeys.SPI_AGENT_EVENT, event);
 
 		try {
 			spiAgent.service(request, response);
@@ -134,11 +134,11 @@ public class PortalResiliencyPortletContainerWrapper
 			return Collections.emptyList();
 		}
 		finally {
-			request.removeAttribute(WebKeys.SPI_AGENT_LIFECYCLE);
-			request.removeAttribute(WebKeys.SPI_AGENT_PORTLET);
-			request.removeAttribute(WebKeys.SPI_AGENT_LAYOUT);
 			request.removeAttribute(WebKeys.SPI_AGENT_EVENT);
 			request.removeAttribute(WebKeys.SPI_AGENT_EVENT_RESULT);
+			request.removeAttribute(WebKeys.SPI_AGENT_LAYOUT);
+			request.removeAttribute(WebKeys.SPI_AGENT_LIFECYCLE);
+			request.removeAttribute(WebKeys.SPI_AGENT_PORTLET);
 		}
 	}
 
@@ -148,7 +148,7 @@ public class PortalResiliencyPortletContainerWrapper
 			Portlet portlet)
 		throws PortletContainerException {
 
-		SPIAgent spiAgent = _getSPIAgentForPortlet(portlet);
+		SPIAgent spiAgent = getSPIAgentForPortlet(portlet);
 
 		if (spiAgent == null) {
 			_portletContainer.render(request, response, portlet);
@@ -178,7 +178,7 @@ public class PortalResiliencyPortletContainerWrapper
 			Portlet portlet)
 		throws PortletContainerException {
 
-		SPIAgent spiAgent = _getSPIAgentForPortlet(portlet);
+		SPIAgent spiAgent = getSPIAgentForPortlet(portlet);
 
 		if (spiAgent == null) {
 			_portletContainer.serveResource(request, response, portlet);
@@ -202,7 +202,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 	}
 
-	private SPIAgent _getSPIAgentForPortlet(Portlet portlet)
+	protected SPIAgent getSPIAgentForPortlet(Portlet portlet)
 		throws PortletContainerException {
 
 		SPI spi = SPIRegistryUtil.getPortletSPI(portlet.getRootPortletId());
@@ -212,7 +212,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Mapping portlet " + portlet + " to SPI " + spi);
+			_log.debug("Portlet " + portlet + " is registered to SPI " + spi);
 		}
 
 		try {
