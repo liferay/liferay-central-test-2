@@ -78,11 +78,13 @@ public class I18nFilter extends BasePortalFilter {
 	}
 
 	protected String getRedirect(HttpServletRequest request) throws Exception {
-		if (request.getMethod().equals(HttpMethods.POST)) {
+		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
 			return null;
 		}
 
-		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
+		String method = request.getMethod();
+
+		if (method.equals(HttpMethods.POST)) {
 			return null;
 		}
 
