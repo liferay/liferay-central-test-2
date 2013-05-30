@@ -29,8 +29,6 @@ boolean hasLayoutCustomizePermission = LayoutPermissionUtil.contains(permissionC
 boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE);
 
 String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", ""));
-
-String controlPanelCategory = themeDisplay.getControlPanelCategory();
 %>
 
 <aui:nav-bar cssClass="navbar-static-top dockbar" data-namespace="<%= renderResponse.getNamespace() %>" id="dockbar">
@@ -38,6 +36,8 @@ String controlPanelCategory = themeDisplay.getControlPanelCategory();
 		<c:if test="<%= group.isControlPanel() %>">
 
 			<%
+			String controlPanelCategory = themeDisplay.getControlPanelCategory();
+
 			String refererGroupDescriptiveName = null;
 			String backURL = null;
 
@@ -122,6 +122,7 @@ String controlPanelCategory = themeDisplay.getControlPanelCategory();
 				<%
 				}
 				%>
+
 			</c:if>
 		</c:if>
 
