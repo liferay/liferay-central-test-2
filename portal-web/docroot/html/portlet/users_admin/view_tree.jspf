@@ -489,8 +489,6 @@ private long _getParentOrganizationId(HttpServletRequest request, Organization o
 		return OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 	}
 
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-
-	return parentOrganizationId;
+	return ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 }
 %>
