@@ -83,20 +83,30 @@ public class SynchronousDestinationExecutionTestListener
 
 			MessageBus messageBus = MessageBusUtil.getMessageBus();
 
-			if (messageBus.hasDestination(_TARGET_ASYNC_DESTINATION_NAME)) {
+			if (messageBus.hasDestination(
+					_ASYNC_SERVICE_TEMP_DESTINATION_NAME)) {
+
 				return;
 			}
 
-			_oldAsyncDestination = (BaseDestination)messageBus.getDestination(
+			_asyncServiceDestination =
+				(BaseDestination)messageBus.getDestination(
+					DestinationNames.ASYNC_SERVICE);
+
+			SynchronizedAsyncServiceDestination
+				synchronizedAsyncServiceDestination =
+					new SynchronizedAsyncServiceDestination(
+						_ASYNC_SERVICE_TEMP_DESTINATION_NAME);
+
+			synchronizedAsyncServiceDestination.setName(
 				DestinationNames.ASYNC_SERVICE);
 
-			MessageBusUtil.addDestination(
-				new SynchronizedAsyncDestination(
-					_TARGET_ASYNC_DESTINATION_NAME));
+			MessageBusUtil.addDestination(synchronizedAsyncServiceDestination);
 
-			_oldAsyncDestination.setName(_TARGET_ASYNC_DESTINATION_NAME);
+			_asyncServiceDestination.setName(
+				_ASYNC_SERVICE_TEMP_DESTINATION_NAME);
 
-			MessageBusUtil.addDestination(_oldAsyncDestination);
+			MessageBusUtil.addDestination(_asyncServiceDestination);
 		}
 
 		public void restorePreviousSync() {
@@ -108,21 +118,22 @@ public class SynchronousDestinationExecutionTestListener
 
 			MessageBus messageBus = MessageBusUtil.getMessageBus();
 
-			if ((_oldAsyncDestination == null) ||
-				!messageBus.hasDestination(_TARGET_ASYNC_DESTINATION_NAME)) {
+			if ((_asyncServiceDestination == null) ||
+				!messageBus.hasDestination(
+					_ASYNC_SERVICE_TEMP_DESTINATION_NAME)) {
 
 				return;
 			}
 
 			Collection<Destination> destinations = messageBus.getDestinations();
 
-			destinations.remove(_oldAsyncDestination);
+			destinations.remove(_asyncServiceDestination);
 
 			MessageBusUtil.removeDestination(DestinationNames.ASYNC_SERVICE);
 
-			_oldAsyncDestination.setName(DestinationNames.ASYNC_SERVICE);
+			_asyncServiceDestination.setName(DestinationNames.ASYNC_SERVICE);
 
-			MessageBusUtil.addDestination(_oldAsyncDestination);
+			MessageBusUtil.addDestination(_asyncServiceDestination);
 		}
 
 		public void setForceSync(boolean forceSync) {
@@ -133,11 +144,11 @@ public class SynchronousDestinationExecutionTestListener
 			_sync = sync;
 		}
 
-		private String _TARGET_ASYNC_DESTINATION_NAME =
-			DestinationNames.ASYNC_SERVICE + "_orig";
+		private String _ASYNC_SERVICE_TEMP_DESTINATION_NAME =
+			DestinationNames.ASYNC_SERVICE + "_temp";
 
+		private BaseDestination _asyncServiceDestination;
 		private boolean _forceSync;
-		private BaseDestination _oldAsyncDestination;
 		private Sync _sync;
 
 	}

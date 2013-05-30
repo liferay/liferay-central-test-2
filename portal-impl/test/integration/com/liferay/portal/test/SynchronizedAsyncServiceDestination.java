@@ -16,46 +16,45 @@ package com.liferay.portal.test;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 /**
  * @author Zsolt Berentey
  */
-public class SynchronizedAsyncDestination extends SynchronousDestination {
+public class SynchronizedAsyncServiceDestination
+	extends SynchronousDestination {
 
-	public SynchronizedAsyncDestination(String asyncServiceDestinationName) {
-		_asyncServiceDestinationName = asyncServiceDestinationName;
+	public SynchronizedAsyncServiceDestination(String destinationName) {
+		_destinationName = destinationName;
 
-		_syncMessageSender.setMessageBus(MessageBusUtil.getMessageBus());
-		_syncMessageSender.setPortalUUID(PortalUUIDUtil.getPortalUUID());
-		_syncMessageSender.setTimeout(10000);
-
-		setName(DestinationNames.ASYNC_SERVICE);
+		_defaultSynchronousMessageSender.setMessageBus(
+			MessageBusUtil.getMessageBus());
+		_defaultSynchronousMessageSender.setPortalUUID(
+			PortalUUIDUtil.getPortalUUID());
+		_defaultSynchronousMessageSender.setTimeout(Time.SECOND * 10);
 	}
 
 	@Override
 	public void send(Message message) {
 		try {
-			_syncMessageSender.send(_asyncServiceDestinationName, message);
+			_defaultSynchronousMessageSender.send(_destinationName, message);
 		}
 		catch (MessageBusException mbe) {
 			_log.error("Unable to process message " + message, mbe);
 		}
-
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		SynchronizedAsyncDestination.class);
+		SynchronizedAsyncServiceDestination.class);
 
-	private String _asyncServiceDestinationName;
-
-	private DefaultSynchronousMessageSender _syncMessageSender =
+	private DefaultSynchronousMessageSender _defaultSynchronousMessageSender =
 		new DefaultSynchronousMessageSender();
+	private String _destinationName;
 
 }

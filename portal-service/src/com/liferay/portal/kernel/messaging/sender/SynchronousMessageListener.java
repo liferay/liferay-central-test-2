@@ -48,7 +48,7 @@ public class SynchronousMessageListener implements MessageListener {
 
 		synchronized (this) {
 			if (message.getPayload() == null) {
-				_results = _NULL_RESPONSE;
+				_results = _NULL_RESULTS;
 			}
 			else {
 				_results = message.getPayload();
@@ -76,7 +76,7 @@ public class SynchronousMessageListener implements MessageListener {
 				}
 			}
 
-			if (_results == _NULL_RESPONSE) {
+			if (_results == _NULL_RESULTS) {
 				return null;
 			}
 
@@ -96,7 +96,7 @@ public class SynchronousMessageListener implements MessageListener {
 		}
 	}
 
-	private static final String _NULL_RESPONSE = "NULL_RESPONSE";
+	private static final String _NULL_RESULTS = "NULL_RESULTS";
 
 	private Message _message;
 	private MessageBus _messageBus;

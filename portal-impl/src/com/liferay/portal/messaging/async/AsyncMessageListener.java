@@ -38,10 +38,7 @@ public class AsyncMessageListener extends BaseMessageListener {
 		}
 		catch (RuntimeException re) {
 			if (Validator.isNotNull(responseDestinationName)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(re, re);
-				}
-				else if (_log.isWarnEnabled()) {
+				if (_log.isWarnEnabled()) {
 					_log.warn(re, re);
 				}
 			}
