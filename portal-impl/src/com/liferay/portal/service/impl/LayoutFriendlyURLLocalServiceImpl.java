@@ -44,6 +44,8 @@ import java.util.Map;
  * </p>
  *
  * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.base.LayoutFriendlyURLLocalServiceBaseImpl
+ * @see    com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil
  */
 public class LayoutFriendlyURLLocalServiceImpl
 	extends LayoutFriendlyURLLocalServiceBaseImpl {
