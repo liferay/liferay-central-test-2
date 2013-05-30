@@ -477,7 +477,7 @@ private String[] _getDataContentArray(TemplateVariableDefinition templateVariabl
 			dataContentArray = templateVariableDefinition.generateCode(language);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
