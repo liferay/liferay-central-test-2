@@ -129,9 +129,9 @@ userGroupRoles.addAll(siteRoles);
 	<%
 	List<Group> roleGroups = new ArrayList<Group>();
 
-	for (Group curGroup : allGroups) {
-		if (RoleLocalServiceUtil.hasGroupRoles(curGroup.getGroupId())) {
-			roleGroups.add(curGroup);
+	for (Group group : allGroups) {
+		if (RoleLocalServiceUtil.hasGroupRoles(group.getGroupId())) {
+			roleGroups.add(group);
 		}
 	}
 	%>
