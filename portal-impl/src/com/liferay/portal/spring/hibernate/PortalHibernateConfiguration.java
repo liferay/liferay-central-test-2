@@ -132,9 +132,12 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 			Properties properties = PropsUtil.getProperties();
 
 			if (SPIUtil.isSPI()) {
-				properties.put("hibernate.cache.use_query_cache", "false");
 				properties.put(
-					"hibernate.cache.use_second_level_cache", "false");
+					"hibernate.cache.use_query_cache",
+					Boolean.FALSE.toString());
+				properties.put(
+					"hibernate.cache.use_second_level_cache",
+					Boolean.FALSE.toString());
 			}
 
 			configuration.setProperties(properties);
