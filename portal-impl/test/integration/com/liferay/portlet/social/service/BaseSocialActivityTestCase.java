@@ -61,7 +61,7 @@ public class BaseSocialActivityTestCase {
 		_actorUser = UserTestUtil.addUser("actor", _group.getGroupId());
 		_creatorUser = UserTestUtil.addUser("creator", _group.getGroupId());
 
-		_assetEntry = SocialActivityTestUtil.addAsset(
+		_assetEntry = SocialActivityTestUtil.addAssetEntry(
 			_creatorUser, _group, null);
 
 		SocialActivityHierarchyThreadLocal.clear();

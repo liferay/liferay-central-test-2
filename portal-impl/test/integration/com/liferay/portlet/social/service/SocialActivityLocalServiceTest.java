@@ -46,7 +46,7 @@ public class SocialActivityLocalServiceTest extends BaseSocialActivityTestCase {
 
 	@Test
 	public void testActivityHierarchy() throws Exception {
-		AssetEntry parentAssetEntry = SocialActivityTestUtil.addAsset(
+		AssetEntry parentAssetEntry = SocialActivityTestUtil.addAssetEntry(
 			_creatorUser, _group);
 
 		SocialActivityHierarchyThreadLocal.push(
@@ -65,7 +65,6 @@ public class SocialActivityLocalServiceTest extends BaseSocialActivityTestCase {
 
 		Assert.assertEquals(
 			parentAssetEntry.getClassNameId(), activity.getParentClassNameId());
-
 		Assert.assertEquals(
 			parentAssetEntry.getClassPK(), activity.getParentClassPK());
 

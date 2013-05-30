@@ -54,14 +54,16 @@ public class SocialActivityTestUtil {
 			assetEntry.getClassPK(), type, extraData, 0);
 	}
 
-	public static AssetEntry addAsset(User user, Group group) throws Exception {
+	public static AssetEntry addAssetEntry(User user, Group group)
+		throws Exception {
+
 		return AssetEntryLocalServiceUtil.updateEntry(
 			user.getUserId(), group.getGroupId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomPK(), null,
+			ServiceTestUtil.randomString(), ServiceTestUtil.randomLong(), null,
 			null);
 	}
 
-	public static AssetEntry addAsset(
+	public static AssetEntry addAssetEntry(
 			User user, Group group, AssetEntry assetEntry)
 		throws Exception {
 
@@ -126,7 +128,7 @@ public class SocialActivityTestUtil {
 			activityType, activityCounterName);
 	}
 
-	protected static SocialActivity createActivity(
+	protected static SocialActivity newActivity(
 		User user, Group group, AssetEntry assetEntry, int type) {
 
 		SocialActivity activity = new SocialActivityImpl();
@@ -134,13 +136,12 @@ public class SocialActivityTestUtil {
 		activity.setGroupId(group.getGroupId());
 		activity.setCompanyId(group.getCompanyId());
 		activity.setUserId(user.getUserId());
+		activity.setUserUuid(user.getUuid());
 		activity.setCreateDate(System.currentTimeMillis());
 		activity.setClassNameId(assetEntry.getClassNameId());
 		activity.setClassPK(assetEntry.getClassPK());
 		activity.setType(type);
-
 		activity.setAssetEntry(assetEntry);
-		activity.setUserUuid(user.getUuid());
 
 		return activity;
 	}
