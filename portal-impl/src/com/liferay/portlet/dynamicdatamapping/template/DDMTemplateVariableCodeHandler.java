@@ -145,12 +145,12 @@ public class DDMTemplateVariableCodeHandler
 
 		String[] lines = getContentLines(content);
 
-		String tmpDataContent = dataContentArray[0];
+		String tempDataContent0 = dataContentArray[0];
 
 		dataContentArray[0] =
 			lines[0] + StringPool.NEW_LINE + StringPool.TAB + lines[1];
 		dataContentArray[1] =
-			tmpDataContent + dataContentArray[1] + dataContentArray[2];
+			tempDataContent0 + dataContentArray[1] + dataContentArray[2];
 		dataContentArray[2] = lines[2] + StringPool.NEW_LINE + lines[3];
 
 		return dataContentArray;
@@ -174,10 +174,10 @@ public class DDMTemplateVariableCodeHandler
 
 		template.put("dataType", templateVariableDefinition.getDataType());
 		template.put("help", templateVariableDefinition.getHelp());
-		template.put("isRepeatable", templateVariableDefinition.isRepeatable());
 		template.put("label", templateVariableDefinition.getLabel());
 		template.put("language", language);
 		template.put("name", templateVariableDefinition.getName());
+		template.put("repeatable", templateVariableDefinition.isRepeatable());
 	}
 
 	private String _templatePath;

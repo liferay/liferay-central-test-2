@@ -1,8 +1,8 @@
-<#-- Common Variable -->
+<#-- Common -->
 
 <#assign variableName = name + ".getData()">
 
-<#if isRepeatable>
+<#if repeatable>
 	<#assign variableName = "cur_" + variableName>
 </#if>
 
