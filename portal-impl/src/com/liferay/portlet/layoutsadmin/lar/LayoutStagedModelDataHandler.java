@@ -162,6 +162,8 @@ public class LayoutStagedModelDataHandler
 			return;
 		}
 
+		portletDataContext.setPlid(layout.getPlid());
+
 		long parentLayoutId = layout.getParentLayoutId();
 
 		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
@@ -192,8 +194,6 @@ public class LayoutStagedModelDataHandler
 				layout, layoutElement, layoutFriendlyURL,
 				PortletDataContext.REFERENCE_TYPE_DEPENDENCY, false);
 		}
-
-		portletDataContext.setPlid(layout.getPlid());
 
 		if (layout.isIconImage()) {
 			exportLayoutIconImage(portletDataContext, layout, layoutElement);
@@ -478,6 +478,18 @@ public class LayoutStagedModelDataHandler
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);
 
+		importLayoutFriendlyURLs(portletDataContext, layout);
+
+		importedLayout.setIconImage(false);
+
+		if (layout.isIconImage()) {
+			importLayoutIconImage(
+				portletDataContext, importedLayout, layoutElement);
+		}
+		else {
+			ImageLocalServiceUtil.deleteImage(importedLayout.getIconImageId());
+		}
+
 		boolean importThemeSettings = MapUtil.getBoolean(
 			portletDataContext.getParameterMap(),
 			PortletDataHandlerKeys.THEME_REFERENCE);
@@ -499,16 +511,6 @@ public class LayoutStagedModelDataHandler
 		importedLayout.setLayoutPrototypeLinkEnabled(
 			layout.isLayoutPrototypeLinkEnabled());
 
-		importedLayout.setIconImage(false);
-
-		if (layout.isIconImage()) {
-			importLayoutIconImage(
-				portletDataContext, importedLayout, layoutElement);
-		}
-		else {
-			ImageLocalServiceUtil.deleteImage(importedLayout.getIconImageId());
-		}
-
 		StagingUtil.updateLastImportSettings(
 			layoutElement, importedLayout, portletDataContext);
 
@@ -525,8 +527,6 @@ public class LayoutStagedModelDataHandler
 
 		portletDataContext.importClassedModel(
 			layout, importedLayout, LayoutPortletDataHandler.NAMESPACE);
-
-		importLayoutFriendlyURLs(portletDataContext, layout);
 	}
 
 	protected void exportJournalArticle(
@@ -768,20 +768,6 @@ public class LayoutStagedModelDataHandler
 			layout.getLayoutId(), StringPool.BLANK, articleId, true);
 	}
 
-	protected void importLayoutFriendlyURL(
-			PortletDataContext portletDataContext,
-			Element layoutFriendlyURLElement)
-		throws Exception {
-
-		String path = layoutFriendlyURLElement.attributeValue("path");
-
-		LayoutFriendlyURL layoutFriendlyURL =
-			(LayoutFriendlyURL)portletDataContext.getZipEntryAsObject(path);
-
-		StagedModelDataHandlerUtil.importStagedModel(
-			portletDataContext, layoutFriendlyURL);
-	}
-
 	protected void importLayoutFriendlyURLs(
 			PortletDataContext portletDataContext, Layout layout)
 		throws Exception {
@@ -791,8 +777,15 @@ public class LayoutStagedModelDataHandler
 				layout, LayoutFriendlyURL.class);
 
 		for (Element layoutFriendlyURLElement : layoutFriendlyURLElements) {
-			importLayoutFriendlyURL(
-				portletDataContext, layoutFriendlyURLElement);
+			String layoutFriendlyURLPath =
+				layoutFriendlyURLElement.attributeValue("path");
+
+			LayoutFriendlyURL layoutFriendlyURL =
+				(LayoutFriendlyURL)portletDataContext.getZipEntryAsObject(
+					layoutFriendlyURLPath);
+
+			StagedModelDataHandlerUtil.importStagedModel(
+				portletDataContext, layoutFriendlyURL);
 		}
 	}
 
