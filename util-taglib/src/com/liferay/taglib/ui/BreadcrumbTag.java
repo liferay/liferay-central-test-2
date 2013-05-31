@@ -15,6 +15,8 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -102,26 +104,32 @@ public class BreadcrumbTag extends IncludeTag {
 		Group group = GroupLocalServiceUtil.getGroup(
 			themeDisplay.getCompanyId(), GroupConstants.GUEST);
 
-		if (group.getPublicLayoutsPageCount() > 0) {
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				group.getGroupId(), false);
-
-			String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(
-				layoutSet, themeDisplay);
-
-			if (themeDisplay.isAddSessionIdToURL()) {
-				layoutSetFriendlyURL = PortalUtil.getURLWithSessionId(
-					layoutSetFriendlyURL, themeDisplay.getSessionId());
-			}
-
-			Account account = themeDisplay.getAccount();
-
-			sb.append("<li><a href=\"");
-			sb.append(layoutSetFriendlyURL);
-			sb.append("\">");
-			sb.append(HtmlUtil.escape(account.getName()));
-			sb.append("</a><span class=\"divider\">/</span></li>");
+		if (group.getPublicLayoutsPageCount() == 0) {
+			return;
 		}
+
+		sb.append("<li><a href=\"");
+
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			group.getGroupId(), false);
+
+		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(
+			layoutSet, themeDisplay);
+
+		if (themeDisplay.isAddSessionIdToURL()) {
+			layoutSetFriendlyURL = PortalUtil.getURLWithSessionId(
+				layoutSetFriendlyURL, themeDisplay.getSessionId());
+		}
+
+		sb.append(layoutSetFriendlyURL);
+
+		sb.append("\">");
+
+		Account account = themeDisplay.getAccount();
+
+		sb.append(HtmlUtil.escape(account.getName()));
+
+		sb.append("</a><span class=\"divider\">/</span></li>");
 	}
 
 	protected void buildLayoutBreadcrumb(
@@ -140,7 +148,7 @@ public class BreadcrumbTag extends IncludeTag {
 				sb);
 		}
 
-		String target = PortalUtil.getLayoutTarget(selLayout);
+		sb.append("<li><a href=\"");
 
 		String layoutURL = getBreadcrumbLayoutURL(
 			selLayout, selLayoutParam, portletURL, themeDisplay);
@@ -155,8 +163,8 @@ public class BreadcrumbTag extends IncludeTag {
 				layoutURL, "controlPanelCategory");
 		}
 
-		sb.append("<li><a href=\"");
 		sb.append(layoutURL);
+
 		sb.append("\" ");
 
 		String layoutName = selLayout.getName(themeDisplay.getLocale());
@@ -170,6 +178,8 @@ public class BreadcrumbTag extends IncludeTag {
 			}
 		}
 		else {
+			String target = PortalUtil.getLayoutTarget(selLayout);
+
 			sb.append(target);
 		}
 
@@ -222,7 +232,7 @@ public class BreadcrumbTag extends IncludeTag {
 			}
 		}
 
-		int layoutsPageCount;
+		int layoutsPageCount = 0;
 
 		if (layoutSet.isPrivateLayout()) {
 			layoutsPageCount = group.getPrivateLayoutsPageCount();
@@ -261,10 +271,8 @@ public class BreadcrumbTag extends IncludeTag {
 			return;
 		}
 
-		int breadcrumbEntriesSize = breadcrumbEntries.size();
-
-		for (int index = 0; index < breadcrumbEntriesSize; index++) {
-			BreadcrumbEntry breadcrumbEntry = breadcrumbEntries.get(index);
+		for (int i = 0; i < breadcrumbEntries.size(); i++) {
+			BreadcrumbEntry breadcrumbEntry = breadcrumbEntries.get(i);
 
 			Map<String, Object> data = breadcrumbEntry.getData();
 
@@ -302,7 +310,7 @@ public class BreadcrumbTag extends IncludeTag {
 
 			sb.append("<li>");
 
-			if (index < (breadcrumbEntriesSize - 1)) {
+			if (i < (breadcrumbEntries.size() - 1)) {
 				if (Validator.isNotNull(breadcrumbURL)) {
 					sb.append("<a href=\"");
 					sb.append(HtmlUtil.escape(breadcrumbURL));
@@ -348,28 +356,25 @@ public class BreadcrumbTag extends IncludeTag {
 		if (portletURL == null) {
 			return PortalUtil.getLayoutFullURL(selLayout, themeDisplay);
 		}
-		else {
-			portletURL.setParameter(
-				selLayoutParam, String.valueOf(selLayout.getPlid()));
 
-			if (selLayout.isTypeControlPanel()) {
-				if (themeDisplay.getDoAsGroupId() > 0) {
-					portletURL.setParameter(
-						"doAsGroupId",
-						String.valueOf(themeDisplay.getDoAsGroupId()));
-				}
+		portletURL.setParameter(
+			selLayoutParam, String.valueOf(selLayout.getPlid()));
 
-				if (themeDisplay.getRefererPlid() !=
-						LayoutConstants.DEFAULT_PLID) {
-
-					portletURL.setParameter(
-						"refererPlid",
-						String.valueOf(themeDisplay.getRefererPlid()));
-				}
+		if (selLayout.isTypeControlPanel()) {
+			if (themeDisplay.getDoAsGroupId() > 0) {
+				portletURL.setParameter(
+					"doAsGroupId",
+					String.valueOf(themeDisplay.getDoAsGroupId()));
 			}
 
-			return portletURL.toString();
+			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
+				portletURL.setParameter(
+					"refererPlid",
+					String.valueOf(themeDisplay.getRefererPlid()));
+			}
 		}
+
+		return portletURL.toString();
 	}
 
 	protected String getBreadcrumbString(HttpServletRequest request) {
@@ -407,34 +412,35 @@ public class BreadcrumbTag extends IncludeTag {
 			}
 		}
 		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return insertClassOption(sb.toString());
+		String breadcrumbString = sb.toString();
+
+		if (Validator.isNull(breadcrumbString)) {
+			return StringPool.BLANK;
+		}
+
+		int x = breadcrumbString.indexOf("<li") + 3;
+		int y = breadcrumbString.lastIndexOf("<li") + 3;
+
+		if (x == y) {
+			breadcrumbString = StringUtil.insert(
+				breadcrumbString, " class=\"active only\"", x);
+		}
+		else {
+			breadcrumbString = StringUtil.insert(
+				breadcrumbString, " class=\"active last\"", y);
+			breadcrumbString = StringUtil.insert(
+				breadcrumbString, " class=\"first\"", x);
+		}
+
+		return breadcrumbString;
 	}
 
 	@Override
 	protected String getPage() {
 		return _PAGE;
-	}
-
-	protected String insertClassOption(String breadcrumbString) {
-		if (Validator.isNotNull(breadcrumbString)) {
-			int x = breadcrumbString.indexOf("<li") + 3;
-			int y = breadcrumbString.lastIndexOf("<li") + 3;
-
-			if (x == y) {
-				breadcrumbString = StringUtil.insert(
-					breadcrumbString, " class=\"active only\"", x);
-			}
-			else {
-				breadcrumbString = StringUtil.insert(
-					breadcrumbString, " class=\"active last\"", y);
-				breadcrumbString = StringUtil.insert(
-					breadcrumbString, " class=\"first\"", x);
-			}
-		}
-
-		return breadcrumbString;
 	}
 
 	@Override
@@ -472,6 +478,8 @@ public class BreadcrumbTag extends IncludeTag {
 
 	private static final boolean _SHOW_PARENT_GROUPS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
+
+	private static Log _log = LogFactoryUtil.getLog(BreadcrumbTag.class);
 
 	private PortletURL _portletURL;
 	private Layout _selLayout;
