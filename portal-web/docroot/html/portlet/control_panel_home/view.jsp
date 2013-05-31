@@ -20,10 +20,10 @@
 	<aui:row>
 
 		<%
-		for (String curCategory : PortletCategoryKeys.ALL) {
-			String title = LanguageUtil.get(pageContext, "category." + curCategory);
+		for (String category : PortletCategoryKeys.ALL) {
+			String title = LanguageUtil.get(pageContext, "category." + category);
 
-			List<Portlet> categoryPortlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
+			List<Portlet> categoryPortlets = PortalUtil.getControlPanelPortlets(category, themeDisplay);
 
 			if (categoryPortlets.isEmpty()) {
 				continue;
@@ -31,7 +31,7 @@
 		%>
 
 			<aui:col width="<%= 25 %>">
-				<h3 class="control-panel-home-category-header" id='<%= "control-panel-home-category-header" + curCategory %>'><%= title %></h3>
+				<h3 class="control-panel-home-category-header" id='<%= "control-panel-home-category-header" + category %>'><%= title %></h3>
 
 					<ul class="unstyled">
 
