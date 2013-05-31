@@ -86,7 +86,7 @@ public class ExportLayoutsAction extends PortletAction {
 				actionRequest, "exportFileName");
 
 			DateRange dateRange = ExportImportUtil.getDateRange(
-				actionRequest, groupId, -1, null, privateLayout, true);
+				actionRequest, groupId, privateLayout, 0, null);
 
 			Date startDate = dateRange.getStartDate();
 			Date endDate = dateRange.getEndDate();

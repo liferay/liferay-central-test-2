@@ -41,13 +41,12 @@ public class ExportImportUtil {
 	}
 
 	public static DateRange getDateRange(
-			PortletRequest portletRequest, long groupId, long plid,
-			String portletId, boolean privateLayout, boolean timeZoneSensitive)
+			PortletRequest portletRequest, long groupId, boolean privateLayout,
+			long plid, String portletId)
 		throws Exception {
 
 		return getExportImport().getDateRange(
-			portletRequest, groupId, plid, portletId, privateLayout,
-			timeZoneSensitive);
+			portletRequest, groupId, privateLayout, plid, portletId);
 	}
 
 	public static ExportImport getExportImport() {

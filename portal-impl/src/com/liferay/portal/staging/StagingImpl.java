@@ -1791,10 +1791,7 @@ public class StagingImpl implements Staging {
 		}
 
 		DateRange dateRange = ExportImportUtil.getDateRange(
-			portletRequest, sourceGroupId, -1, null, privateLayout, true);
-
-		Date startDate = dateRange.getStartDate();
-		Date endDate = dateRange.getEndDate();
+			portletRequest, sourceGroupId, privateLayout, 0, null);
 
 		if (schedule) {
 			String groupName = getSchedulerGroupName(
@@ -1826,8 +1823,9 @@ public class StagingImpl implements Staging {
 
 			LayoutServiceUtil.schedulePublishToLive(
 				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-				parameterMap, scope, startDate, endDate, groupName, cronText,
-				startCal.getTime(), schedulerEndDate, description);
+				parameterMap, scope, dateRange.getStartDate(),
+				dateRange.getEndDate(), groupName, cronText, startCal.getTime(),
+				schedulerEndDate, description);
 		}
 		else {
 			MessageStatus messageStatus = new MessageStatus();
@@ -1843,13 +1841,14 @@ public class StagingImpl implements Staging {
 
 					publishLayouts(
 						themeDisplay.getUserId(), sourceGroupId, targetGroupId,
-						privateLayout, parameterMap, startDate, endDate);
+						privateLayout, parameterMap, dateRange.getStartDate(),
+						dateRange.getEndDate());
 				}
 				else {
 					publishLayouts(
 						themeDisplay.getUserId(), sourceGroupId, targetGroupId,
-						privateLayout, layoutIdMap, parameterMap, startDate,
-						endDate);
+						privateLayout, layoutIdMap, parameterMap,
+						dateRange.getStartDate(), dateRange.getEndDate());
 				}
 			}
 			catch (Exception e) {
@@ -1864,7 +1863,7 @@ public class StagingImpl implements Staging {
 					new LayoutsLocalPublisherRequest(
 						command, themeDisplay.getUserId(), sourceGroupId,
 						targetGroupId, privateLayout, layoutIdMap, parameterMap,
-						startDate, endDate);
+						dateRange.getStartDate(), dateRange.getEndDate());
 
 				messageStatus.setPayload(publisherRequest);
 
@@ -1966,10 +1965,7 @@ public class StagingImpl implements Staging {
 		}
 
 		DateRange dateRange = ExportImportUtil.getDateRange(
-			portletRequest, groupId, -1, null, privateLayout, true);
-
-		Date startDate = dateRange.getStartDate();
-		Date endDate = dateRange.getEndDate();
+			portletRequest, groupId, privateLayout, 0, null);
 
 		if (schedule) {
 			String groupName = getSchedulerGroupName(
@@ -2002,9 +1998,9 @@ public class StagingImpl implements Staging {
 			LayoutServiceUtil.schedulePublishToRemote(
 				groupId, privateLayout, layoutIdMap, parameterMap,
 				remoteAddress, remotePort, remotePathContext, secureConnection,
-				remoteGroupId, remotePrivateLayout, startDate, endDate,
-				groupName, cronText, startCal.getTime(), schedulerEndDate,
-				description);
+				remoteGroupId, remotePrivateLayout, dateRange.getStartDate(),
+				dateRange.getEndDate(), groupName, cronText, startCal.getTime(),
+				schedulerEndDate, description);
 		}
 		else {
 			MessageStatus messageStatus = new MessageStatus();
@@ -2016,7 +2012,7 @@ public class StagingImpl implements Staging {
 					groupId, privateLayout, layoutIdMap, parameterMap,
 					remoteAddress, remotePort, remotePathContext,
 					secureConnection, remoteGroupId, remotePrivateLayout,
-					startDate, endDate);
+					dateRange.getStartDate(), dateRange.getEndDate());
 			}
 			catch (Exception e) {
 				messageStatus.setException(e);
@@ -2031,7 +2027,8 @@ public class StagingImpl implements Staging {
 						themeDisplay.getUserId(), groupId, privateLayout,
 						layoutIdMap, parameterMap, remoteAddress, remotePort,
 						remotePathContext, secureConnection, remoteGroupId,
-						remotePrivateLayout, startDate, endDate);
+						remotePrivateLayout, dateRange.getStartDate(),
+						dateRange.getEndDate());
 
 				messageStatus.setPayload(publisherRequest);
 

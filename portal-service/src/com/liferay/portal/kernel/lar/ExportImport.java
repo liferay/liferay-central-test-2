@@ -36,8 +36,8 @@ public interface ExportImport {
 		boolean timeZoneSensitive);
 
 	public DateRange getDateRange(
-			PortletRequest portletRequest, long groupId, long plid,
-			String portletId, boolean privateLayout, boolean timeZoneSensitive)
+			PortletRequest portletRequest, long groupId, boolean privateLayout,
+			long plid, String portletId)
 		throws Exception;
 
 	public ManifestSummary getManifestSummary(

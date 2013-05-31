@@ -119,16 +119,16 @@ public class ExportImportAction extends EditConfigurationAction {
 				long plid = ParamUtil.getLong(actionRequest, "plid");
 
 				DateRange dateRange = ExportImportUtil.getDateRange(
-					actionRequest, -1, plid, portlet.getPortletId(), false,
-					true);
+					actionRequest, 0, false, plid, portlet.getPortletId());
 
 				Date startDate = dateRange.getStartDate();
-				Date endDate = dateRange.getEndDate();
 
 				if (startDate != null) {
 					actionResponse.setRenderParameter(
 						"startDate", String.valueOf(startDate.getTime()));
 				}
+
+				Date endDate = dateRange.getEndDate();
 
 				if (endDate != null) {
 					actionResponse.setRenderParameter(
@@ -207,8 +207,7 @@ public class ExportImportAction extends EditConfigurationAction {
 				actionRequest, "exportFileName");
 
 			DateRange dateRange = ExportImportUtil.getDateRange(
-				actionRequest, groupId, plid, portlet.getPortletId(), false,
-				true);
+				actionRequest, groupId, false, plid, portlet.getPortletId());
 
 			file = LayoutServiceUtil.exportPortletInfoAsFile(
 				plid, groupId, portlet.getPortletId(),

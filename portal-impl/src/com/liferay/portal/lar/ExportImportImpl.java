@@ -135,23 +135,23 @@ public class ExportImportImpl implements ExportImport {
 			timeZone = TimeZoneUtil.getTimeZone(StringPool.UTC);
 		}
 
-		Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+		Calendar calendar = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-		cal.set(Calendar.MONTH, dateMonth);
-		cal.set(Calendar.DATE, dateDay);
-		cal.set(Calendar.YEAR, dateYear);
-		cal.set(Calendar.HOUR_OF_DAY, dateHour);
-		cal.set(Calendar.MINUTE, dateMinute);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.MONTH, dateMonth);
+		calendar.set(Calendar.DATE, dateDay);
+		calendar.set(Calendar.YEAR, dateYear);
+		calendar.set(Calendar.HOUR_OF_DAY, dateHour);
+		calendar.set(Calendar.MINUTE, dateMinute);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 
-		return cal;
+		return calendar;
 	}
 
 	@Override
 	public DateRange getDateRange(
-			PortletRequest portletRequest, long groupId, long plid,
-			String portletId, boolean privateLayout, boolean timeZoneSensitive)
+			PortletRequest portletRequest, long groupId, boolean privateLayout,
+			long plid, String portletId)
 		throws Exception {
 
 		Date startDate = null;
