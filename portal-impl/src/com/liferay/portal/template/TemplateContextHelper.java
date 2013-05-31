@@ -421,7 +421,7 @@ public class TemplateContextHelper {
 
 		variables.put("dateUtil", DateUtil_IW.getInstance());
 
-		// Dynamic data mapping
+		// Dynamic data mapping util
 
 		try {
 			variables.put("ddmUtil", DDMUtil.getDDM());

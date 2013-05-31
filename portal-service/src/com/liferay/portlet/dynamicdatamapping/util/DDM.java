@@ -36,7 +36,7 @@ public interface DDM {
 	public DDMDisplay getDDMDisplay(ServiceContext serviceContext);
 
 	public Serializable getDisplayFieldValue(
-			Serializable fieldValue, String type, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, Serializable fieldValue, String type)
 		throws Exception;
 
 	public Fields getFields(

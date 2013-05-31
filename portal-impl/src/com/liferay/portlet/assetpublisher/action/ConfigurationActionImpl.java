@@ -216,7 +216,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		Serializable displayValue = DDMUtil.getDisplayFieldValue(
-			fieldValue, type, themeDisplay);
+			themeDisplay, fieldValue, type);
 
 		jsonObject.put("displayValue", String.valueOf(displayValue));
 

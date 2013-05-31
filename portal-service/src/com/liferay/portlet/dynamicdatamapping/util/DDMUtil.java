@@ -45,10 +45,10 @@ public class DDMUtil {
 	}
 
 	public static Serializable getDisplayFieldValue(
-			Serializable fieldValue, String type, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, Serializable fieldValue, String type)
 		throws Exception {
 
-		return getDDM().getDisplayFieldValue(fieldValue, type, themeDisplay);
+		return getDDM().getDisplayFieldValue(themeDisplay, fieldValue, type);
 	}
 
 	public static Fields getFields(

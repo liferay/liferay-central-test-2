@@ -128,7 +128,7 @@ public class DDMImpl implements DDM {
 
 	@Override
 	public Serializable getDisplayFieldValue(
-			Serializable fieldValue, String type, ThemeDisplay themeDisplay)
+			ThemeDisplay themeDisplay, Serializable fieldValue, String type)
 		throws Exception {
 
 		if (fieldValue instanceof Date) {
@@ -137,7 +137,7 @@ public class DDMImpl implements DDM {
 			DateFormat dateFormat = DateFormatFactoryUtil.getDate(
 				themeDisplay.getLocale());
 
-			fieldValue = dateFormat.format((Date)valueDate);
+			fieldValue = dateFormat.format(valueDate);
 		}
 		else if (type.equals(DDMImpl.TYPE_CHECKBOX)) {
 			Boolean valueBoolean = (Boolean)fieldValue;

@@ -136,7 +136,7 @@ public class Transformer {
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
-			prepareTemplate(template, themeDisplay);
+			prepareTemplate(themeDisplay, template);
 
 			if (contextObjects != null) {
 				for (String key : contextObjects.keySet()) {
@@ -639,7 +639,7 @@ public class Transformer {
 		template.processTemplate(unsyncStringWriter);
 	}
 
-	protected void prepareTemplate(Template template, ThemeDisplay themeDisplay)
+	protected void prepareTemplate(ThemeDisplay themeDisplay, Template template)
 		throws Exception {
 
 		if (themeDisplay == null) {
