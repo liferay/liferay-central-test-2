@@ -69,11 +69,11 @@
 								PortletURL siteAdministrationURL = PortalUtil.getSiteAdministrationURL(renderResponse, siteThemeDisplay);
 						%>
 
-						<p>
-							<liferay-ui:message key="you-can-manage-the-site-you-are-coming-from" />
-						</p>
+								<p>
+									<liferay-ui:message key="you-can-manage-the-site-you-are-coming-from" />
+								</p>
 
-						<aui:button cssClass="btn-primary" href="<%= siteAdministrationURL.toString() %>" value="<%= buttonLabel %>" />
+								<aui:button cssClass="btn-primary" href="<%= siteAdministrationURL.toString() %>" value="<%= buttonLabel %>" />
 
 						<%
 							}
