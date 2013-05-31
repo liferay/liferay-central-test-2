@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -1238,7 +1237,7 @@ public class GroupFinderImpl
 
 	protected int countByGroupId(
 			Session session, long groupId, LinkedHashMap<String, Object> params)
-		throws PortalException {
+		throws Exception {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
@@ -1272,7 +1271,7 @@ public class GroupFinderImpl
 			long parentGroupId, String parentGroupIdComparator, String[] names,
 			String[] realNames, String[] descriptions,
 			LinkedHashMap<String, Object> params, boolean andOperator)
-		throws PortalException {
+		throws Exception {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_C_PG_N_D);
 
@@ -1490,7 +1489,7 @@ public class GroupFinderImpl
 	}
 
 	protected void setJoin(QueryPos qPos, LinkedHashMap<String, Object> params)
-		throws PortalException {
+		throws Exception {
 
 		if (params == null) {
 			return;
