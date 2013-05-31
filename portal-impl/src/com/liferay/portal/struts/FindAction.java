@@ -113,7 +113,7 @@ public abstract class FindAction extends Action {
 			portletURL = processPortletURL(request, portletURL);
 
 			response.setHeader("Location", portletURL.toString());
-			response.setStatus(response.SC_MOVED_PERMANENTLY);
+			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 
 			return null;
 		}
@@ -125,7 +125,7 @@ public abstract class FindAction extends Action {
 				(e instanceof NoSuchLayoutException)) {
 
 				response.setHeader("Location", noSuchEntryRedirect);
-				response.setStatus(response.SC_MOVED_PERMANENTLY);
+				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			}
 			else {
 				PortalUtil.sendError(e, request, response);
