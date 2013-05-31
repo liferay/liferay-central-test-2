@@ -503,13 +503,11 @@ public class ValidatorTest extends PowerMockito {
 		String[] validUris = {
 			"ftp://ftp.liferay.com/file.txt",
 			"gopher://gopher.liferay.com/California/Los%20Angeles",
-			"http://liferay.com:valid",
-			"http://www.ietf.org/rfc/rfc2396.txt",
+			"http://liferay.com:valid", "http://www.ietf.org/rfc/rfc2396.txt",
 			"mailto:info@liferay.com.broken",
 			"my-androidapp://liferay.com/authorize",
 			"myiosapp://liferay.com/application-page/.app",
-			"news:comp.infosystems.www.servers.unix",
-			"telnet://in.liferay.com/"
+			"news:comp.infosystems.www.servers.unix", "telnet://in.liferay.com/"
 		};
 
 		for (String validUri : validUris) {
