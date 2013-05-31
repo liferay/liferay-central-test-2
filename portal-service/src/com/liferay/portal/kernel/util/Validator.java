@@ -685,7 +685,7 @@ public class Validator {
 	}
 
 	public static boolean isFilePath(String path, boolean isParentDirAllowed) {
-		if (Validator.isNull(path)) {
+		if (isNull(path)) {
 			return false;
 		}
 
