@@ -85,7 +85,7 @@ public class PanelTag extends IncludeTag {
 		_endPage = endPage;
 	}
 
-	public void setExtended(Boolean extended) {
+	public void setExtended(boolean extended) {
 		_extended = extended;
 	}
 
@@ -115,7 +115,7 @@ public class PanelTag extends IncludeTag {
 		_cssClass = null;
 		_defaultState = "open";
 		_endPage = null;
-		_extended = null;
+		_extended = false;
 		_helpMessage = null;
 		_id = null;
 		_persistState = true;
@@ -151,7 +151,7 @@ public class PanelTag extends IncludeTag {
 	private String _cssClass;
 	private String _defaultState = "open";
 	private String _endPage;
-	private Boolean _extended;
+	private boolean _extended;
 	private String _helpMessage;
 	private String _id;
 	private boolean _persistState = true;
