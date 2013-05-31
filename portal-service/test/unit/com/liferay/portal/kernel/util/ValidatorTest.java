@@ -509,7 +509,7 @@ public class ValidatorTest extends PowerMockito {
 			"my-androidapp://liferay.com/authorize",
 			"myiosapp://liferay.com/application-page/.app",
 			"news:comp.infosystems.www.servers.unix",
-			"telnet://in.liferay.com/",
+			"telnet://in.liferay.com/"
 		};
 
 		for (String validUri : validUris) {
