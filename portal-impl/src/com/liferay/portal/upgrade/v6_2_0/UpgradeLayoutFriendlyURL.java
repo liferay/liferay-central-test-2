@@ -30,44 +30,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeLayoutFriendlyURL extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select plid, groupId, companyId, userId, userName, " +
-					"createDate, modifiedDate, privateLayout, friendlyURL " +
-						"from Layout");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long plid = rs.getLong("plid");
-				long groupId = rs.getLong("groupId");
-				long companyId = rs.getLong("companyId");
-				long userId = rs.getLong("userId");
-				String userName = rs.getString("userName");
-				Date createDate = rs.getDate("createDate");
-				Date modifiedDate = rs.getDate("modifiedDate");
-				boolean privateLayout = rs.getBoolean("privateLayout");
-				String friendlyURL = rs.getString("friendlyURL");
-
-				updateLayoutFriendlyURL(
-					groupId, companyId, userId, userName, createDate,
-					modifiedDate, plid, privateLayout, friendlyURL);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateLayoutFriendlyURL(
+	protected void addLayoutFriendlyURL(
 			long groupId, long companyId, long userId, String userName,
 			Date createDate, Date modifiedDate, long plid,
 			boolean privateLayout, String friendlyURL)
@@ -108,5 +71,43 @@ public class UpgradeLayoutFriendlyURL extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps);
 		}
 	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select plid, groupId, companyId, userId, userName, " +
+					"createDate, modifiedDate, privateLayout, friendlyURL " +
+						"from Layout");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long plid = rs.getLong("plid");
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+				long userId = rs.getLong("userId");
+				String userName = rs.getString("userName");
+				Date createDate = rs.getDate("createDate");
+				Date modifiedDate = rs.getDate("modifiedDate");
+				boolean privateLayout = rs.getBoolean("privateLayout");
+				String friendlyURL = rs.getString("friendlyURL");
+
+				addLayoutFriendlyURL(
+					groupId, companyId, userId, userName, createDate,
+					modifiedDate, plid, privateLayout, friendlyURL);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 
 }
