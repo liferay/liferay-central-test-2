@@ -3382,7 +3382,7 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>189</portlet-name>
+		<portlet-name>190</portlet-name>
 		<display-name>Control Panel Home</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>

@@ -2115,7 +2115,7 @@
 		<css-class-wrapper>portlet-directory</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>189</portlet-name>
+		<portlet-name>190</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>control_panel_home</struts-path>
 		<use-default-template>false</use-default-template>
