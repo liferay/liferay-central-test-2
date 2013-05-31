@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,8 +20,6 @@ import com.liferay.portal.upgrade.v6_2_0.util.PortletItemTable;
 import java.sql.SQLException;
 
 /**
- * <a href="UpgradePortletItem.java.html"><b><i>View Source</i></b></a>
- *
  * @author Alberto Montero
  */
 public class UpgradePortletItem extends UpgradeProcess {
@@ -38,4 +36,5 @@ public class UpgradePortletItem extends UpgradeProcess {
 				PortletItemTable.TABLE_SQL_ADD_INDEXES);
 		}
 	}
+
 }
