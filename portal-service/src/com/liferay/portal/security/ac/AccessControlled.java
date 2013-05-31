@@ -34,24 +34,24 @@ public @interface AccessControlled {
 
 	public boolean hostAllowedValidationEnabled() default true;
 
-	public AccessControlled NULL_ACCESS_CONTROLLED =
-		new AccessControlled() {
+	public AccessControlled NULL_ACCESS_CONTROLLED = new AccessControlled() {
 
-			@Override
-			public Class<? extends Annotation> annotationType() {
-				return AccessControlled.class;
-			}
+		@Override
+		public Class<? extends Annotation> annotationType() {
+			return AccessControlled.class;
+		}
 
-			@Override
-			public boolean guestAccessEnabled() {
-				return false;
-			}
+		@Override
+		public boolean guestAccessEnabled() {
+			return false;
+		}
 
-			@Override
-			public boolean hostAllowedValidationEnabled() {
-				return false;
-			}
+		@Override
+		public boolean hostAllowedValidationEnabled() {
+			return false;
+		}
 
-		};
+	};
+
 
 }

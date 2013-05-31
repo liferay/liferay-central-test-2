@@ -73,9 +73,8 @@ public class PortalResiliencyAdvice
 
 			_log.error(
 				"Unable to bridge portal resiliency call for " +
-					clazz.getName() +
-						" because it does not implement " +
-							IdentifiableBean.class.getName());
+					clazz.getName() + " because it does not implement " +
+						IdentifiableBean.class.getName());
 
 			return null;
 		}

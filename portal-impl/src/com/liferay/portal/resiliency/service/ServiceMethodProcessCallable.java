@@ -63,7 +63,6 @@ public class ServiceMethodProcessCallable
 	@Override
 	public Serializable call() throws ProcessException {
 		String oldName = PrincipalThreadLocal.getName();
-
 		PermissionChecker oldPermissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
@@ -100,18 +99,18 @@ public class ServiceMethodProcessCallable
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 
-		_userId = objectInput.readLong();
-		_servletContextName = objectInput.readUTF();
 		_beanIdentifier = objectInput.readUTF();
 		_methodHandler = (MethodHandler)objectInput.readObject();
+		_servletContextName = objectInput.readUTF();
+		_userId = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
-		objectOutput.writeLong(_userId);
-		objectOutput.writeUTF(_servletContextName);
 		objectOutput.writeUTF(_beanIdentifier);
 		objectOutput.writeObject(_methodHandler);
+		objectOutput.writeUTF(_servletContextName);
+		objectOutput.writeLong(_userId);
 	}
 
 	private String _beanIdentifier;
