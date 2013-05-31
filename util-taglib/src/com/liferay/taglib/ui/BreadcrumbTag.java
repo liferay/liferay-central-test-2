@@ -442,6 +442,27 @@ public class BreadcrumbTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:breadcrumb:breadcrumbString",
 			getBreadcrumbString(request));
+		request.setAttribute("liferay-ui:breadcrumb:portletURL", _portletURL);
+		request.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
+		request.setAttribute(
+			"liferay-ui:breadcrumb:selLayoutParam", _selLayoutParam);
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showCurrentGroup",
+			String.valueOf(_showCurrentGroup));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showCurrentPortlet",
+			String.valueOf(_showCurrentPortlet));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showGuestGroup",
+			String.valueOf(_showGuestGroup));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showLayout", String.valueOf(_showLayout));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showParentGroups",
+			String.valueOf(_showParentGroups));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showPortletBreadcrumb",
+			String.valueOf(_showPortletBreadcrumb));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
