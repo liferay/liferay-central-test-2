@@ -14,8 +14,8 @@
 
 package com.liferay.portal.kernel.lar;
 
-import com.liferay.portal.kernel.cal.DateRange;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.StagedModel;

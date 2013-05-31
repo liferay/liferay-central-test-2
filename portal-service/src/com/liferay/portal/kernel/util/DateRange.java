@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cal;
+package com.liferay.portal.kernel.util;
 
 import java.util.Date;
 
@@ -42,6 +42,7 @@ public class DateRange {
 		_startDate = startDate;
 	}
 
-	private Date _endDate; private Date _startDate;
+	private Date _endDate;
+	private Date _startDate;
 
 }

@@ -15,7 +15,6 @@
 package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.cal.DateRange;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -27,6 +26,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;

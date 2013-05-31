@@ -15,7 +15,6 @@
 package com.liferay.portal.lar;
 
 import com.liferay.portal.LARFileException;
-import com.liferay.portal.kernel.cal.DateRange;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.ExportImport;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
@@ -35,6 +34,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
