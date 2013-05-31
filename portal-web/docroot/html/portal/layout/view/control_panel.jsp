@@ -136,7 +136,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 				<div class="<%= panelBodyCssClass %>">
 					<c:choose>
 						<c:when test="<%= Validator.isNull(controlPanelCategory) %>">
-							<liferay-portlet:runtime portletName="<%= PropsValues.CONTROL_PANEL_HOME_PORTLET_NAME %>" />
+							<liferay-portlet:runtime portletName="<%= PropsValues.CONTROL_PANEL_HOME_PORTLET_ID %>" />
 						</c:when>
 						<c:when test="<%= ((portlet != null) && !portlet.getControlPanelEntryCategory().startsWith(PortletCategoryKeys.SITE_ADMINISTRATION)) %>">
 							<%@ include file="/html/portal/layout/view/panel_content.jspf" %>
