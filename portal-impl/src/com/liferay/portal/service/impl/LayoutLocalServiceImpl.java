@@ -1465,6 +1465,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutFinder.findByNullFriendlyURL();
 	}
 
+	@Override
 	public Layout getParentLayout(Layout layout)
 		throws PortalException, SystemException {
 
