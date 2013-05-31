@@ -94,6 +94,7 @@ AUI.add(
 							);
 
 							uriData.pop();
+
 							uriData.push('#', QueryString.stringify(protectedHashMap));
 						}
 					}
