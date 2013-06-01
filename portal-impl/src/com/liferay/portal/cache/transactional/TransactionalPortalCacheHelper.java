@@ -38,7 +38,6 @@ public class TransactionalPortalCacheHelper {
 		_pushPortalCacheMap();
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void commit() {
 		if (!PropsValues.TRANSACTIONAL_CACHE_ENABLED) {
 			return;
@@ -83,7 +82,6 @@ public class TransactionalPortalCacheHelper {
 		portalCacheMap.clear();
 	}
 
-	@SuppressWarnings("unchecked")
 	protected static <K extends Serializable, V> V get(
 		PortalCache<K, V> portalCache, K key) {
 
@@ -170,19 +168,17 @@ public class TransactionalPortalCacheHelper {
 				portalCache.removeAll();
 			}
 
-			for (Map.Entry<? extends Serializable, ?> uncommittedMapEntry :
+			for (Map.Entry<? extends Serializable, ?> entry :
 					_uncommittedMap.entrySet()) {
 
-				Serializable key = uncommittedMapEntry.getKey();
-				Object value = uncommittedMapEntry.getValue();
+				Serializable key = entry.getKey();
+				Object value = entry.getValue();
 
 				if (value == TransactionalPortalCache.NULL_HOLDER) {
 					portalCache.remove(key);
 				}
 				else {
-					portalCache.put(
-						uncommittedMapEntry.getKey(),
-						uncommittedMapEntry.getValue());
+					portalCache.put(entry.getKey(), entry.getValue());
 				}
 			}
 		}
@@ -203,12 +199,13 @@ public class TransactionalPortalCacheHelper {
 
 		public void removeAll() {
 			_uncommittedMap.clear();
+
 			_removeAll = true;
 		}
 
+		private boolean _removeAll;
 		private Map<Serializable, Object> _uncommittedMap =
 			new HashMap<Serializable, Object>();
-		private boolean _removeAll;
 
 	}
 
