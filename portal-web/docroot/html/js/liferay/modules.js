@@ -179,7 +179,6 @@ window.YUI_config = {
 					]
 				},
 				'liferay-form-placeholders': {
-					path: 'form_placeholders.js',
 					condition: {
 						name: 'liferay-form-placeholders',
 						test: function(A) {
@@ -187,6 +186,7 @@ window.YUI_config = {
 						},
 						trigger: 'liferay-form',
 					},
+					path: 'form_placeholders.js',
 					requires: [
 						'liferay-form',
 						'plugin'
