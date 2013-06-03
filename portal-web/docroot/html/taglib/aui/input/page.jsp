@@ -189,14 +189,14 @@
 				</c:if>
 
 				<c:if test="<%= resizable %>">
-					<aui:script use="resize-base,liferay-store">
+					<aui:script use="liferay-store,resize-base">
 						var textareaNode = A.one('#<%= namespace + id %>');
 
 						var resizeInstance = new A.Resize(
 							{
 								after: {
 									'end': function(event) {
-										Liferay.Store('<%= _TEXTAREA_WIDTH_HEIGHT_PREFIX %><%= namespace + id %>', textareaNode.getStyle('height') + ',' + textareaNode.getStyle('width'))
+										Liferay.Store('<%= _TEXTAREA_WIDTH_HEIGHT_PREFIX %><%= namespace + id %>', textareaNode.getStyle('height') + ',' + textareaNode.getStyle('width'));
 									}
 								},
 								autoHide: true,
