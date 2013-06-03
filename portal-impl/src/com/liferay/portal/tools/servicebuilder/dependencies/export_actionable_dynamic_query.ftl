@@ -29,7 +29,6 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public long performCount() throws PortalException, SystemException {
 		long count = super.performCount();
 
@@ -46,7 +45,7 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 	}
 
 	protected String getManifestSummaryKey() {
-		StagedModelDataHandler stagedModelDataHandler = StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(${entity.name}.class.getName());
+		StagedModelDataHandler<?> stagedModelDataHandler = StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(${entity.name}.class.getName());
 
 		return stagedModelDataHandler.getManifestSummaryKey(null);
 	}

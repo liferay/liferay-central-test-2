@@ -42,10 +42,10 @@ public class ManifestSummary implements Serializable {
 
 	public void addModelCount(
 		Class<? extends ClassedModel> clazz,
-		Class<? extends ClassedModel> referrerClazz, long modelCount) {
+		Class<? extends ClassedModel> referrerClass, long modelCount) {
 
 		String manifestSummaryKey = getManifestSummaryKey(
-			clazz.getName(), referrerClazz.getName());
+			clazz.getName(), referrerClass.getName());
 
 		addModelCount(manifestSummaryKey, modelCount);
 	}
@@ -70,10 +70,10 @@ public class ManifestSummary implements Serializable {
 
 	public long getModelCount(
 		Class<? extends ClassedModel> clazz,
-		Class<? extends ClassedModel> referrerClazz) {
+		Class<? extends ClassedModel> referrerClass) {
 
 		String manifestSummaryKey = getManifestSummaryKey(
-			clazz.getName(), referrerClazz.getName());
+			clazz.getName(), referrerClass.getName());
 
 		return getModelCount(manifestSummaryKey);
 	}
@@ -96,10 +96,10 @@ public class ManifestSummary implements Serializable {
 
 	public void incrementModelCount(
 		Class<? extends ClassedModel> clazz,
-		Class<? extends ClassedModel> referrerClazz) {
+		Class<? extends ClassedModel> referrerClass) {
 
 		String manifestSummaryKey = getManifestSummaryKey(
-			clazz.getName(), referrerClazz.getName());
+			clazz.getName(), referrerClass.getName());
 
 		incrementModelCount(manifestSummaryKey);
 	}

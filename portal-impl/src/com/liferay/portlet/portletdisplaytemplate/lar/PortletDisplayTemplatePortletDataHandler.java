@@ -59,11 +59,11 @@ public class PortletDisplayTemplatePortletDataHandler
 
 		long[] classNameIds = TemplateHandlerRegistryUtil.getClassNameIds();
 
-		ActionableDynamicQuery ddmTemplateActionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			getDDMTemplateActionableDynamicQuery(
 				portletDataContext, ArrayUtil.toArray(classNameIds), null);
 
-		ddmTemplateActionableDynamicQuery.performActions();
+		actionableDynamicQuery.performActions();
 
 		return getExportDataRootElementString(rootElement);
 	}
@@ -93,12 +93,12 @@ public class PortletDisplayTemplatePortletDataHandler
 		throws Exception {
 
 		for (long classNameId : TemplateHandlerRegistryUtil.getClassNameIds()) {
-			ActionableDynamicQuery ddmTemplateActionableDynamicQuery =
+			ActionableDynamicQuery actionableDynamicQuery =
 				getDDMTemplateActionableDynamicQuery(
 					portletDataContext, new Long[] {classNameId},
 					PortalUtil.getClassName(classNameId));
 
-			ddmTemplateActionableDynamicQuery.performCount();
+			actionableDynamicQuery.performCount();
 		}
 	}
 
