@@ -38,7 +38,6 @@ page import="com.liferay.portal.RequiredLayoutException" %><%@
 page import="com.liferay.portal.SitemapChangeFrequencyException" %><%@
 page import="com.liferay.portal.SitemapIncludeException" %><%@
 page import="com.liferay.portal.SitemapPagePriorityException" %><%@
-page import="com.liferay.portal.kernel.lar.ExportImportUtil" %><%@
 page import="com.liferay.portal.kernel.lar.ManifestSummary" %><%@
 page import="com.liferay.portal.kernel.lar.PortletDataContext" %><%@
 page import="com.liferay.portal.kernel.lar.PortletDataContextFactoryUtil" %><%@
