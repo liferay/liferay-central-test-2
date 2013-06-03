@@ -68,9 +68,9 @@ public class ManifestSummaryTest
 
 		Element headerElement = rootElement.addElement("header");
 
-		_exportDate = Time.getRFC822();
+		_exportDateString = Time.getRFC822();
 
-		headerElement.addAttribute("export-date", _exportDate);
+		headerElement.addAttribute("export-date", _exportDateString);
 
 		ExportImportUtil.writeManifestSummary(document, manifestSummary);
 
@@ -100,11 +100,12 @@ public class ManifestSummaryTest
 		Assert.assertEquals(
 			1, manifestSummary.getModelCount(JournalFolder.class));
 
-		String exportedDate = Time.getRFC822(manifestSummary.getExportDate());
+		String exportedDateString = Time.getRFC822(
+			manifestSummary.getExportDate());
 
-		Assert.assertEquals(_exportDate, exportedDate);
+		Assert.assertEquals(_exportDateString, exportedDateString);
 	}
 
-	private String _exportDate;
+	private String _exportDateString;
 
 }

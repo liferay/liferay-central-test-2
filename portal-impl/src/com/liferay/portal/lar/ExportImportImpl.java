@@ -78,6 +78,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -252,22 +253,23 @@ public class ExportImportImpl implements ExportImport {
 			"/manifest.xml");
 
 		if (is == null) {
-			throw new LARFileException("manifest.xml not found in the LAR");
+			throw new LARFileException("manifest.xml is not in the LAR");
 		}
 
-		saxParser.parse(new InputSource(is));
+		String manifestXMLContent = StringUtil.read(is);
 
-		is = portletDataContext.getZipEntryAsInputStream("/manifest.xml");
+		saxParser.parse(new InputSource(new StringReader(manifestXMLContent)));
 
-		Document document = SAXReaderUtil.read(is);
+		Document document = SAXReaderUtil.read(manifestXMLContent);
 
 		Element rootElement = document.getRootElement();
+
 		Element headerElement = rootElement.element("header");
 
-		String dateRFC822 = headerElement.attributeValue("export-date");
+		String exportDateString = headerElement.attributeValue("export-date");
 
 		Date exportDate = GetterUtil.getDate(
-			dateRFC822,
+			exportDateString,
 			DateFormatFactoryUtil.getSimpleDateFormat(Time.RFC822_FORMAT));
 
 		manifestSummary.setExportDate(exportDate);
@@ -283,10 +285,8 @@ public class ExportImportImpl implements ExportImport {
 
 		File file = DLFileEntryLocalServiceUtil.getFile(
 			userId, fileEntry.getFileEntryId(), fileEntry.getVersion(), false);
-
-		boolean successfulRename = false;
-
 		File newFile = null;
+		boolean rename = false;
 
 		ManifestSummary manifestSummary = null;
 
@@ -296,9 +296,9 @@ public class ExportImportImpl implements ExportImport {
 
 			newFile = new File(newFileName);
 
-			successfulRename = file.renameTo(newFile);
+			rename = file.renameTo(newFile);
 
-			if (!successfulRename) {
+			if (!rename) {
 				newFile = FileUtil.createTempFile(fileEntry.getExtension());
 
 				FileUtil.copyFile(file, newFile);
@@ -309,7 +309,7 @@ public class ExportImportImpl implements ExportImport {
 
 		}
 		finally {
-			if (successfulRename) {
+			if (rename) {
 				newFile.renameTo(file);
 			}
 			else {
