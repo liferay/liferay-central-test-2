@@ -16,15 +16,17 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.security.jaas.PortalPrincipal;
 import com.liferay.portal.kernel.security.jaas.PortalRole;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.jaas.JAASHelper;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -34,8 +36,6 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
-
-import java.io.IOException;
 
 import java.lang.reflect.Field;
 
@@ -47,20 +47,20 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.callback.UnsupportedCallbackException;
-import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
+import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import javax.security.auth.login.LoginContext;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -83,6 +83,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 
 	@Before
 	public void setup() throws Exception {
+		_jaasAuthTypeField = ReflectionUtil.getDeclaredField(
+			PropsValues.class, "PORTAL_JAAS_AUTH_TYPE");
+
+		_jaasAuthType = (String)_jaasAuthTypeField.get(null);
+
 		_jaasEnabledField = ReflectionUtil.getDeclaredField(
 			PropsValues.class, "PORTAL_JAAS_ENABLE");
 
@@ -90,27 +95,25 @@ public class JAASTest extends MainServletExecutionTestListener {
 
 		_jaasEnabledField.set(null, true);
 
-		_jaasAuthTypeField = ReflectionUtil.getDeclaredField(
-			PropsValues.class, "PORTAL_JAAS_AUTH_TYPE");
-
-		_jaasAuthType = (String)_jaasAuthTypeField.get(null);
-
 		Configuration.setConfiguration(new JAASConfiguration());
+
+		_user = TestPropsValues.getUser();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		Configuration.setConfiguration(null);
+
+		_jaasAuthTypeField.set(null, _jaasAuthType);
+		_jaasEnabledField.set(null, _jaasEnabled);
 	}
 
 	@Test
-	public void login_emailAddress_jaasAuthType_emailAddress()
-		throws Exception {
-
+	public void testLoginEmailAddressWithEmailAddress() throws Exception {
 		_jaasAuthTypeField.set(null, "emailAddress");
 
-		User user = TestPropsValues.getUser();
-		String emailAddress = user.getEmailAddress();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				emailAddress, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getEmailAddress(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -119,20 +122,16 @@ public class JAASTest extends MainServletExecutionTestListener {
 			Assert.fail();
 		}
 
-		validateSubject(loginContext.getSubject(), userIdString);
+		validateSubject(
+			loginContext.getSubject(), String.valueOf(_user.getUserId()));
 	}
 
 	@Test
-	public void login_emailAddress_jaasAuthType_login() throws Exception {
+	public void testLoginEmailAddressWithLogin() throws Exception {
 		_jaasAuthTypeField.set(null, "login");
 
-		User user = TestPropsValues.getUser();
-		String emailAddress = user.getEmailAddress();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				emailAddress, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getEmailAddress(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -141,19 +140,16 @@ public class JAASTest extends MainServletExecutionTestListener {
 			Assert.fail();
 		}
 
-		validateSubject(loginContext.getSubject(), userIdString);
+		validateSubject(
+			loginContext.getSubject(), String.valueOf(_user.getUserId()));
 	}
 
 	@Test
-	public void login_emailAddress_jaasAuthType_screenName() throws Exception {
+	public void testLoginEmailAddressWithScreenName() throws Exception {
 		_jaasAuthTypeField.set(null, "screenName");
 
-		User user = TestPropsValues.getUser();
-		String emailAddress = user.getEmailAddress();
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				emailAddress, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getEmailAddress(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -165,15 +161,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_emailAddress_jaasAuthType_userId() throws Exception {
+	public void testLoginEmailAddressWithUserId() throws Exception {
 		_jaasAuthTypeField.set(null, "userId");
 
-		User user = TestPropsValues.getUser();
-		String emailAddress = user.getEmailAddress();
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				emailAddress, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getEmailAddress(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -185,15 +177,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_screenName_jaasAuthType_emailAddress() throws Exception {
+	public void testLoginScreenNameWithEmailAddress() throws Exception {
 		_jaasAuthTypeField.set(null, "emailAddress");
 
-		User user = TestPropsValues.getUser();
-		String screenName = user.getScreenName();
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				screenName, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getScreenName(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -205,15 +193,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_screenName_jaasAuthType_login() throws Exception {
+	public void testLoginScreenNameWithLogin() throws Exception {
 		_jaasAuthTypeField.set(null, "login");
 
-		User user = TestPropsValues.getUser();
-		String screenName = user.getScreenName();
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				screenName, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getScreenName(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -225,16 +209,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_screenName_jaasAuthType_screenName() throws Exception {
+	public void testLoginScreenNameWithScreenName() throws Exception {
 		_jaasAuthTypeField.set(null, "screenName");
 
-		User user = TestPropsValues.getUser();
-		String screenName = user.getScreenName();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				screenName, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getScreenName(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -243,19 +222,16 @@ public class JAASTest extends MainServletExecutionTestListener {
 			Assert.fail();
 		}
 
-		validateSubject(loginContext.getSubject(), userIdString);
+		validateSubject(
+			loginContext.getSubject(), String.valueOf(_user.getUserId()));
 	}
 
 	@Test
-	public void login_screenName_jaasAuthType_userId() throws Exception {
+	public void testLoginScreenNameWithUserId() throws Exception {
 		_jaasAuthTypeField.set(null, "userId");
 
-		User user = TestPropsValues.getUser();
-		String screenName = user.getScreenName();
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				screenName, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			_user.getScreenName(), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -267,15 +243,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_userId_jaasAuthType_emailAddress() throws Exception {
+	public void testLoginUserIdWithEmailAddress() throws Exception {
 		_jaasAuthTypeField.set(null, "emailAddress");
 
-		User user = TestPropsValues.getUser();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				userIdString, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			String.valueOf(_user.getUserId()), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -287,15 +259,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_userId_jaasAuthType_login() throws Exception {
+	public void testLoginUserIdWithLogin() throws Exception {
 		_jaasAuthTypeField.set(null, "login");
 
-		User user = TestPropsValues.getUser();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				userIdString, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			String.valueOf(_user.getUserId()), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -307,15 +275,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_userId_jaasAuthType_screenName() throws Exception {
+	public void testLoginUserIdWithScreenName() throws Exception {
 		_jaasAuthTypeField.set(null, "screenName");
 
-		User user = TestPropsValues.getUser();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				userIdString, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			String.valueOf(_user.getUserId()), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -327,15 +291,11 @@ public class JAASTest extends MainServletExecutionTestListener {
 	}
 
 	@Test
-	public void login_userId_jaasAuthType_userId() throws Exception {
+	public void testLoginUserIdWithUserId() throws Exception {
 		_jaasAuthTypeField.set(null, "userId");
 
-		User user = TestPropsValues.getUser();
-		String userIdString = String.valueOf(user.getUserId());
-
-		LoginContext loginContext = new LoginContext(
-			_PORTAL_REALM, new JAASCallbackHandler(
-				userIdString, user.getPassword()));
+		LoginContext loginContext = getLoginContext(
+			String.valueOf(_user.getUserId()), _user.getPassword());
 
 		try {
 			loginContext.login();
@@ -344,26 +304,28 @@ public class JAASTest extends MainServletExecutionTestListener {
 			Assert.fail();
 		}
 
-		validateSubject(loginContext.getSubject(), userIdString);
+		validateSubject(
+			loginContext.getSubject(), String.valueOf(_user.getUserId()));
 	}
 
 	@Test
-	public void firePostAndPreLoginEvents() throws Exception {
-		final Counter counter = new Counter();
+	public void testProcessLoginEvents() throws Exception {
+		final IntegerWrapper counter = new IntegerWrapper();
 
-		JAASHelper originalInstance = JAASHelper.getInstance();
+		JAASHelper jaasHelper = JAASHelper.getInstance();
+
 		JAASHelper.setInstance(
 			new JAASHelper() {
 
 				@Override
-				protected long _getJaasUserId(long companyId, String name)
+				protected long doGetJaasUserId(long companyId, String name)
 					throws PortalException, SystemException {
 
 					try {
-						return super._getJaasUserId(companyId, name);
+						return super.doGetJaasUserId(companyId, name);
 					}
 					finally {
-						counter.count();
+						counter.increment();
 					}
 				}
 
@@ -386,55 +348,49 @@ public class JAASTest extends MainServletExecutionTestListener {
 				"The main servlet could not be initialized");
 		}
 
-		MockHttpServletRequest request = new MockHttpServletRequest(
-			_mockServletContext, "GET", "/");
-		MockHttpServletResponse response = new MockHttpServletResponse();
+		Date lastLoginDate = _user.getLastLoginDate();
 
-		User user = TestPropsValues.getUser();
-		Date lastLoginDate = user.getLastLoginDate();
-		long userId = user.getUserId();
-		String userIdString = String.valueOf(userId);
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest(
+				_mockServletContext, HttpMethods.GET, StringPool.SLASH);
 
-		request.setRemoteUser(userIdString);
+		mockHttpServletRequest.setRemoteUser(String.valueOf(_user.getUserId()));
 
-		JAASAction preAction = new JAASAction();
-		JAASAction postAction = new JAASAction();
+		JAASAction preJAASAction = new JAASAction();
+		JAASAction postJAASAction = new JAASAction();
 
 		try {
 			EventsProcessorUtil.registerEvent(
-				PropsKeys.LOGIN_EVENTS_PRE, preAction);
+				PropsKeys.LOGIN_EVENTS_PRE, preJAASAction);
 			EventsProcessorUtil.registerEvent(
-				PropsKeys.LOGIN_EVENTS_POST, postAction);
+				PropsKeys.LOGIN_EVENTS_POST, postJAASAction);
 
-			mainServlet.service(request, response);
+			mainServlet.service(
+				mockHttpServletRequest, new MockHttpServletResponse());
 
-			Assert.assertEquals(2, counter.getCount());
+			Assert.assertEquals(2, counter.getValue());
+			Assert.assertTrue(preJAASAction.isRan());
+			Assert.assertTrue(postJAASAction.isRan());
 
-			Assert.assertTrue(preAction.wasFired());
-			Assert.assertTrue(postAction.wasFired());
+			_user = UserLocalServiceUtil.getUser(_user.getUserId());
 
-			// Last login date
-
-			user = UserLocalServiceUtil.getUser(userId);
-
-			Assert.assertTrue(lastLoginDate.before(user.getLastLoginDate()));
+			Assert.assertTrue(lastLoginDate.before(_user.getLastLoginDate()));
 		}
 		finally {
 			EventsProcessorUtil.unregisterEvent(
-				PropsKeys.LOGIN_EVENTS_PRE, postAction);
+				PropsKeys.LOGIN_EVENTS_PRE, postJAASAction);
 			EventsProcessorUtil.unregisterEvent(
-				PropsKeys.LOGIN_EVENTS_POST, postAction);
+				PropsKeys.LOGIN_EVENTS_POST, postJAASAction);
 
-			JAASHelper.setInstance(originalInstance);
+			JAASHelper.setInstance(jaasHelper);
 		}
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		Configuration.setConfiguration(null);
+	protected LoginContext getLoginContext(String name, String password)
+		throws Exception {
 
-		_jaasAuthTypeField.set(null, _jaasAuthType);
-		_jaasEnabledField.set(null, _jaasEnabled);
+		return new LoginContext(
+			"PortalRealm", new JAASCallbackHandler(name, password));
 	}
 
 	protected void validateSubject(Subject subject, String userIdString) {
@@ -464,61 +420,46 @@ public class JAASTest extends MainServletExecutionTestListener {
 		}
 	}
 
-	private static final String _PORTAL_REALM = "PortalRealm";
-
-	private Field _jaasAuthTypeField;
 	private String _jaasAuthType;
+	private Field _jaasAuthTypeField;
 	private Boolean _jaasEnabled;
 	private Field _jaasEnabledField;
 	private MockServletContext _mockServletContext;
-
-	private class Counter {
-
-		public void count() {
-			_count++;
-		}
-
-		public int getCount() {
-			return _count;
-		}
-
-		private int _count = 0;
-
-	}
+	private User _user;
 
 	private class JAASAction extends Action {
 
 		@Override
 		public void run(
-				HttpServletRequest request, HttpServletResponse response)
-			throws ActionException {
+			HttpServletRequest request, HttpServletResponse response) {
 
-			_wasFired = true;
+			_ran = true;
 		}
 
-		public boolean wasFired() {
-			return _wasFired;
+		public boolean isRan() {
+			return _ran;
 		}
 
-		private boolean _wasFired = false;
+		private boolean _ran;
 
 	}
 
 	private class JAASCallbackHandler implements CallbackHandler {
 
-		public JAASCallbackHandler(String username, String password) {
-			_username = username;
+		public JAASCallbackHandler(String name, String password) {
+			_name = name;
 			_password = password;
 		}
 
+		@Override
 		public void handle(Callback[] callbacks)
-			throws IOException, UnsupportedCallbackException {
+			throws UnsupportedCallbackException {
 
 			for (Callback callback : callbacks) {
 				if (callback instanceof NameCallback) {
 					NameCallback nameCallback = (NameCallback)callback;
 
-					nameCallback.setName(_username);
+					nameCallback.setName(_name);
 				}
 				else if (callback instanceof PasswordCallback) {
 					String password = GetterUtil.getString(_password);
@@ -534,8 +475,8 @@ public class JAASTest extends MainServletExecutionTestListener {
 			}
 		}
 
+		private String _name;
 		private String _password;
-		private String _username;
 
 	}
 
@@ -543,17 +484,18 @@ public class JAASTest extends MainServletExecutionTestListener {
 
 		@Override
 		public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
-			AppConfigurationEntry[] entries = new AppConfigurationEntry[1];
+			AppConfigurationEntry[] appConfigurationEntries =
+				new AppConfigurationEntry[1];
 
 			Map<String, Object> options = new HashMap<String, Object>();
 
 			options.put("debug", Boolean.TRUE);
 
-			entries[0] = new AppConfigurationEntry(
+			appConfigurationEntries[0] = new AppConfigurationEntry(
 				"com.liferay.portal.kernel.security.jaas.PortalLoginModule",
 				LoginModuleControlFlag.REQUIRED, options);
 
-			return entries;
+			return appConfigurationEntries;
 		}
 
 	}

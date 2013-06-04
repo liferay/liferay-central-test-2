@@ -27,17 +27,18 @@ String jUserName = (String)session.getAttribute("j_username");
 String jPassword = (String)session.getAttribute("j_password");
 
 if (PropsValues.PORTAL_JAAS_ENABLE && (jUserName != null)) {
-	long remoteUserId = GetterUtil.getLong(jUserName);
-	User remoteUser = UserLocalServiceUtil.getUser(remoteUserId);
+	long jUserId = GetterUtil.getLong(jUserName);
+
+	User jUser = UserLocalServiceUtil.getUser(jUserId);
 
 	if (PropsValues.PORTAL_JAAS_AUTH_TYPE.equals("emailAddress")) {
-		jUserName = remoteUser.getEmailAddress();
+		jUserName = jUser.getEmailAddress();
 	}
 	else if (PropsValues.PORTAL_JAAS_AUTH_TYPE.equals("screenName")) {
-		jUserName = remoteUser.getScreenName();
+		jUserName = jUser.getScreenName();
 	}
 	else if (PropsValues.PORTAL_JAAS_AUTH_TYPE.equals("login")) {
-		jUserName = remoteUser.getLogin();
+		jUserName = jUser.getLogin();
 	}
 }
 %>
