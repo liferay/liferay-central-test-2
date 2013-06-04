@@ -1,20 +1,20 @@
 <html>
 	<head>
-		<title>Liferay Portal ${lpVersion} Properties</title>
+		<title>Liferay Portal ${releaseInfoVersion} Properties</title>
 	</head>
 	<body>
 		<p>
-			<strong>Liferay Portal ${lpVersion} Properties</strong>
+			<strong>Liferay Portal ${releaseInfoVersion} Properties</strong>
 		</p>
 
 		<p>
-			Here is a listing of Liferay Portal ${lpVersion} properties files and properties definition files:
+			Here is a listing of Liferay Portal ${releaseInfoVersion} properties files and properties definition files:
 		</p>
 
 		<ul>
-			<#list htmlFileNames as fileName>
+			<#list propertiesHTMLFileNames as propertiesHTMLFileName>
 				<li>
-					<a href="${fileName}.html" title="${fileName}.html">${fileName}</a>
+					<a href="${propertiesHTMLFileName}.html" title="${propertiesHTMLFileName}.html">${propertiesHTMLFileName}</a>
 				</li>
 			</#list>
 		</ul>

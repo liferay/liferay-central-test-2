@@ -52,7 +52,7 @@ public class PropertiesDocBuilder {
 	public PropertiesDocBuilder(String[] args) throws IOException {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		String propertiesDestDir = GetterUtil.getString(
+		String propertiesDestDirName = GetterUtil.getString(
 			arguments.get("properties.dest.dir"));
 		String propertiesFileName = GetterUtil.getString(
 			arguments.get("properties.file"));
@@ -83,12 +83,13 @@ public class PropertiesDocBuilder {
 		}
 
 		context.put("sections", propertiesSections);
+
 		context.put("toc", toc);
 
 		try {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(propertiesDestDir);
+			sb.append(propertiesDestDirName);
 			sb.append(StringPool.SLASH);
 			sb.append(propertiesFileName);
 			sb.append(".html");
@@ -97,18 +98,14 @@ public class PropertiesDocBuilder {
 
 			File propertiesHTMLFile = new File(propertiesHTMLFileName);
 
-			propertiesHTMLFileName = StringUtil.replace(
-				propertiesHTMLFileName, StringPool.BACK_SLASH,
-				StringPool.SLASH);
-
-			System.out.println("Writing " + propertiesHTMLFileName);
+			System.out.println("Writing " + propertiesHTMLFile);
 
 			Writer writer = new FileWriter(propertiesHTMLFile);
 
 			try {
 				FreeMarkerUtil.process(
 					"com/liferay/portal/tools/propertiesdoc/dependencies/" +
-						"properties_html.ftl",
+						"properties.ftl",
 					context, writer);
 			}
 			catch (Exception e) {

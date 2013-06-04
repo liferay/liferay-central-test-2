@@ -16,8 +16,7 @@ package com.liferay.portal.tools.propertiesdoc;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.tools.ArgumentsUtil;
 
 import java.io.File;
@@ -48,63 +47,62 @@ public class PropertiesDocIndexBuilder {
 	public PropertiesDocIndexBuilder(String[] args) {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		String lpVersion = GetterUtil.getString(arguments.get("lp.version"));
-		String propertiesDir = GetterUtil.getString(
+		String propertiesDirName = GetterUtil.getString(
 			arguments.get("properties.dir"));
 
-		File propertiesDirectory = new File(propertiesDir);
+		File propertiesDir = new File(propertiesDirName);
 
-		if (!propertiesDirectory.exists()) {
-			System.out.println(propertiesDir + " not found");
+		if (!propertiesDir.exists()) {
+			System.out.println(propertiesDirName + " not found");
 
 			return;
 		}
 
-		File[] files = propertiesDirectory.listFiles();
+		List<String> propertiesHTMLFileNames = new ArrayList<String>();
 
-		List<String> htmlFileNames = new ArrayList<String>();
+		File[] files = propertiesDir.listFiles();
 
 		for (File file : files) {
 			String fileName = file.getName();
 
 			if (fileName.endsWith(".properties.html")) {
-				htmlFileNames.add(fileName.substring(0, fileName.length() - 5));
+				String propertiesHTMLFileName = fileName.substring(
+					0, fileName.length() - 5);
+
+				propertiesHTMLFileNames.add(propertiesHTMLFileName);
 			}
 		}
 
-		if (htmlFileNames.isEmpty()) {
+		if (propertiesHTMLFileNames.isEmpty()) {
 			System.out.println(
-				"No *.properties.html files found in " + propertiesDir);
+				"No properties HTML files found in " + propertiesDirName);
 
 			return;
 		}
 
 		Map<String, Object> context = new HashMap<String, Object>();
 
-		context.put("htmlFileNames", htmlFileNames);
-		context.put("lpVersion", lpVersion);
+		context.put("propertiesHTMLFileNames", propertiesHTMLFileNames);
+		context.put("releaseInfoVersion", ReleaseInfo.getVersion());
 
 		try {
-			String indexHTMLFileName = propertiesDir + "/index.html";
+			String indexHTMLFileName = propertiesDirName + "/index.html";
 
 			File indexHTMLFile = new File(indexHTMLFileName);
 
-			indexHTMLFileName = StringUtil.replace(
-				indexHTMLFileName, StringPool.BACK_SLASH, StringPool.SLASH);
+			System.out.println("Writing " + indexHTMLFile);
 
 			Writer writer = new FileWriter(indexHTMLFile);
 
 			try {
 				FreeMarkerUtil.process(
-					"com/liferay/portal/tools/propertiesdoc" +
-						"/dependencies/index.ftl",
+					"com/liferay/portal/tools/propertiesdoc/dependencies" +
+						"/index.ftl",
 					context, writer);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			System.out.println("Writing " + indexHTMLFileName);
 
 			writer.flush();
 		}
