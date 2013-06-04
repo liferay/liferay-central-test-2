@@ -591,9 +591,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			referrerStagedModel, element, classedModel, className, binPath,
 			referenceType, false);
 
-		String referenceKey =
-			classedModel.getModelClassName().concat(StringPool.POUND).concat(
-				String.valueOf(classedModel.getPrimaryKeyObj()));
+		String referenceKey = classedModel.getModelClassName();
+
+		referenceKey = referenceKey.concat(StringPool.POUND).concat(
+			String.valueOf(classedModel.getPrimaryKeyObj()));
 
 		if (missing) {
 			if (_missingReferences.contains(referenceKey) ||
