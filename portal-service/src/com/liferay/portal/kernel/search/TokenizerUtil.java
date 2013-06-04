@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -22,19 +24,23 @@ import java.util.Locale;
  */
 public class TokenizerUtil {
 
+	public static Tokenizer getTokenizer() {
+		PortalRuntimePermission.checkGetBeanProperty(TokenizerUtil.class);
+
+		return _tokenizer;
+	}
+
 	public static List<String> tokenize(
 			String fieldName, String input, Locale locale)
 		throws SearchException {
 
-		return _getTokenizer().tokenize(fieldName, input, locale);
+		return getTokenizer().tokenize(fieldName, input, locale);
 	}
 
 	public void setTokenizer(Tokenizer tokenizer) {
-		_tokenizer = tokenizer;
-	}
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-	private static Tokenizer _getTokenizer() {
-		return _tokenizer;
+		_tokenizer = tokenizer;
 	}
 
 	private static Tokenizer _tokenizer;

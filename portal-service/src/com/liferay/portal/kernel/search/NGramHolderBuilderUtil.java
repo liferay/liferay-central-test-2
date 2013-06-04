@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 /**
  * @author Michael C. Han
  */
@@ -22,15 +24,20 @@ public class NGramHolderBuilderUtil {
 	public static NGramHolder buildNGramHolder(String input)
 		throws SearchException {
 
-		return _getNGramHolderBuilder().buildNGramHolder(input);
+		return getNGramHolderBuilder().buildNGramHolder(input);
+	}
+
+	public static NGramHolderBuilder getNGramHolderBuilder() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			NGramHolderBuilderUtil.class);
+
+		return _nGramHolderBuilder;
 	}
 
 	public void setNGramHolderBuilder(NGramHolderBuilder nGramHolderBuilder) {
-		_nGramHolderBuilder = nGramHolderBuilder;
-	}
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-	private static NGramHolderBuilder _getNGramHolderBuilder() {
-		return _nGramHolderBuilder;
+		_nGramHolderBuilder = nGramHolderBuilder;
 	}
 
 	private static NGramHolderBuilder _nGramHolderBuilder;
