@@ -126,6 +126,12 @@ public class SeleniumBuilderFileUtil {
 				getSimpleClassName(fileName, classSuffix);
 	}
 
+	public String getClassSimpleClassName(String className) {
+		int x = className.lastIndexOf(CharPool.PERIOD);
+
+		return className.substring(x + 1);
+	}
+
 	public String getClassSuffix(String fileName) {
 		int x = fileName.indexOf(CharPool.PERIOD);
 
@@ -327,12 +333,6 @@ public class SeleniumBuilderFileUtil {
 
 	public String getSimpleClassName(String fileName, String classSuffix) {
 		return getName(fileName) + classSuffix;
-	}
-
-	public String getSimpleClassNameFromClassName(String className) {
-		int x = className.lastIndexOf(CharPool.PERIOD);
-
-		return className.substring(x + 1);
 	}
 
 	public String getVariableName(String name) {

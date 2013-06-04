@@ -44,7 +44,7 @@ public class ${seleniumBuilderContext.getTestSuiteSimpleClassName(testSuiteName)
 			<#elseif executeElement.attributeValue("test-class")??>
 				<#assign importTestSuiteName = executeElement.attributeValue("test-class")>
 
-				<#assign importTestSuiteSimpleClassName = seleniumBuilderFileUtil.getSimpleClassNameFromClassName(importTestSuiteName)>
+				<#assign importTestSuiteSimpleClassName = seleniumBuilderFileUtil.getClassSimpleClassName(importTestSuiteName)>
 
 				testSuite.addTest(${importTestSuiteSimpleClassName}.suite());
 			<#elseif executeElement.attributeValue("test-suite")??>
