@@ -16,21 +16,46 @@ package com.liferay.portlet.social.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portlet.social.model.SocialRequest;
+import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 
 /**
- * @author Zsolt Berentey
+ * @author Shinn Lok
  */
-public interface SocialRequestPermission {
+public class SocialRequestPermission {
 
-	public void check(
+	public static void check(
 			PermissionChecker permissionChecker, long requestId,
 			String actionId)
-		throws PortalException, SystemException;
+		throws PortalException, SystemException {
 
-	public boolean contains(
+		if (!contains(permissionChecker, requestId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static boolean contains(
 			PermissionChecker permissionChecker, long requestId,
 			String actionId)
-		throws PortalException, SystemException;
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isOmniadmin()) {
+			return true;
+		}
+
+		if (actionId.equals(ActionKeys.UPDATE)) {
+			SocialRequest request =
+				SocialRequestLocalServiceUtil.getSocialRequest(requestId);
+
+			if (permissionChecker.getUserId() == request.getReceiverUserId()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 }
