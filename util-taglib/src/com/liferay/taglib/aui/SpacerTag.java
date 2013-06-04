@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.taglib.aui.base.BaseSpacerTag;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Eduardo Lundgren
@@ -27,7 +28,9 @@ public class SpacerTag extends BaseSpacerTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			pageContext.getOut().print(CharPool.SPACE);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.print(CharPool.SPACE);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
