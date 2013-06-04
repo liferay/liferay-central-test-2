@@ -39,7 +39,7 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 	}
 
 	@Override
-	public void clearDictionaryIndices(SearchContext searchContext) {
+	public void clearDictionaryIndexes(SearchContext searchContext) {
 		throw new UnsupportedOperationException();
 	}
 

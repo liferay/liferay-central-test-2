@@ -24,7 +24,7 @@ public abstract class BaseIndexWriter
 	implements IndexWriter, SpellCheckIndexWriter {
 
 	@Override
-	public void clearDictionaryIndices(SearchContext searchContext)
+	public void clearDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -33,7 +33,7 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.clearDictionaryIndices(searchContext);
+		_spellCheckIndexWriter.clearDictionaryIndexes(searchContext);
 	}
 
 	@Override
