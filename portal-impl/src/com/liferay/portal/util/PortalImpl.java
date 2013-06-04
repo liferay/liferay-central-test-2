@@ -5056,7 +5056,18 @@ public class PortalImpl implements Portal {
 
 		HttpSession session = request.getSession();
 
-		userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
+		String jRemoteUser = null;
+
+		if (PropsValues.PORTAL_JAAS_ENABLE) {
+			jRemoteUser = (String)session.getAttribute("j_remoteuser");
+		}
+
+		if (Validator.isNotNull(jRemoteUser)) {
+			userIdObj = GetterUtil.getLong(jRemoteUser);
+		}
+		else {
+			userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
+		}
 
 		if (userIdObj != null) {
 			request.setAttribute(WebKeys.USER_ID, userIdObj);

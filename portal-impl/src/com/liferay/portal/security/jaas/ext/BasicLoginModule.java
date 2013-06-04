@@ -17,17 +17,14 @@ package com.liferay.portal.security.jaas.ext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.jaas.PortalPrincipal;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.security.jaas.JAASHelper;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.IOException;
 
 import java.security.Principal;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -137,21 +134,10 @@ public class BasicLoginModule implements LoginModule {
 		}
 
 		try {
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+			long userId = GetterUtil.getLong(name);
 
-			for (Company company : companies) {
-				long userId = JAASHelper.getJaasUserId(
-					company.getCompanyId(), name);
-
-				if (userId == 0) {
-					continue;
-				}
-
-				if (UserLocalServiceUtil.authenticateForJAAS(
-						userId, password)) {
-
-					return new String[] {String.valueOf(userId), password};
-				}
+			if (UserLocalServiceUtil.authenticateForJAAS(userId, password)) {
+				return new String[] {name, password};
 			}
 		}
 		catch (Exception e) {
