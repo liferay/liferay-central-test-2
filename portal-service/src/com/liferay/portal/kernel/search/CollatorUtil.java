@@ -23,10 +23,10 @@ import java.util.Map;
 public class CollatorUtil {
 
 	public static String collate(
-			Map<String, List<String>> mapSuggestions, List<String> tokens)
+			Map<String, List<String>> suggestions, List<String> tokens)
 		throws SearchException {
 
-		return _getCollator().collate(mapSuggestions, tokens);
+		return _getCollator().collate(suggestions, tokens);
 	}
 
 	public void setCollator(Collator collator) {

@@ -330,6 +330,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return _analyzer;
 	}
 
+	@Override
 	public IndexAccessor getIndexAccessor(long companyId) {
 		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 

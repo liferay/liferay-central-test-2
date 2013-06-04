@@ -27,10 +27,11 @@ import java.util.Map;
  */
 public class DefaultCollatorImpl implements Collator {
 
+	@Override
 	public String collate(
 		Map<String, List<String>> suggestionsMap, List<String> tokens) {
 
-		StringBundler collationBundler = new StringBundler(tokens.size() * 2);
+		StringBundler sb = new StringBundler(tokens.size() * 2);
 
 		for (String token : tokens) {
 			List<String> suggestions = suggestionsMap.get(token);
@@ -43,16 +44,16 @@ public class DefaultCollatorImpl implements Collator {
 						0, 1).toUpperCase().concat(suggestion.substring(1));
 				}
 
-				collationBundler.append(suggestion);
-				collationBundler.append(StringPool.SPACE);
+				sb.append(suggestion);
+				sb.append(StringPool.SPACE);
 			}
 			else {
-				collationBundler.append(token);
-				collationBundler.append(StringPool.SPACE);
+				sb.append(token);
+				sb.append(StringPool.SPACE);
 			}
 		}
 
-		String collatedValue = collationBundler.toString();
+		String collatedValue = sb.toString();
 
 		return collatedValue.trim();
 	}

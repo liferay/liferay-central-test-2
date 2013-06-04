@@ -16,10 +16,8 @@ package com.liferay.portal.kernel.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Michael C. Han
@@ -27,29 +25,25 @@ import java.util.Set;
 public class NGramHolder {
 
 	public void addNGram(int number, String gram) {
-		String gramKey = "gram".concat(String.valueOf(number));
+		String key = "gram" + number;
 
-		List<String> grams = _nGrams.get(gramKey);
+		List<String> grams = _nGrams.get(key);
 
 		if (grams == null) {
 			grams = new ArrayList<String>();
 
-			_nGrams.put(gramKey, grams);
+			_nGrams.put(key, grams);
 		}
 
 		grams.add(gram);
 	}
 
 	public void addNGramEnd(int number, String gram) {
-		String endKey = "end".concat(String.valueOf(number));
-
-		_nGramEnds.put(endKey, gram);
+		_nGramEnds.put("end" + number, gram);
 	}
 
 	public void addNGramStart(int number, String gram) {
-		String startKey = "start".concat(String.valueOf(number));
-
-		_nGramStarts.put(startKey, gram);
+		_nGramStarts.put("start" + number, gram);
 	}
 
 	public Map<String, String> getNGramEnds() {
@@ -68,6 +62,5 @@ public class NGramHolder {
 	private Map<String, List<String>> _nGrams =
 		new HashMap<String, List<String>>();
 	private Map<String, String> _nGramStarts = new HashMap<String, String>();
-	private Set<String> _nGramStrings = new HashSet<String>();
 
 }

@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.search.NGramHolder;
 import com.liferay.portal.kernel.search.NGramHolderBuilder;
 import com.liferay.portal.kernel.search.SearchException;
 
-import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.lucene.analysis.ngram.NGramTokenizer;
@@ -30,26 +29,23 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
  */
 public class NGramHolderBuilderImpl implements NGramHolderBuilder {
 
+	@Override
 	public NGramHolder buildNGramHolder(String input) throws SearchException {
-
-		int length = input.length();
-
-		int nGramMinLength = getNGramMinLength(length);
-
-		int nGramMaxLength = getNGramMaxLength(length);
-
-		NGramTokenizer nGramTokenizer = new NGramTokenizer(
-			new StringReader(input), nGramMinLength, nGramMaxLength);
-
-		CharTermAttribute charTermAttribute = nGramTokenizer.getAttribute(
-			CharTermAttribute.class);
-
-		OffsetAttribute offsetAttribute = nGramTokenizer.getAttribute(
-			OffsetAttribute.class);
-
-		NGramHolder nGramHolder = new NGramHolder();
-
 		try {
+			NGramHolder nGramHolder = new NGramHolder();
+
+			int nGramMinLength = getNGramMinLength(input.length());
+			int nGramMaxLength = getNGramMaxLength(input.length());
+
+			NGramTokenizer nGramTokenizer = new NGramTokenizer(
+				new StringReader(input), nGramMinLength, nGramMaxLength);
+
+			CharTermAttribute charTermAttribute = nGramTokenizer.getAttribute(
+				CharTermAttribute.class);
+
+			OffsetAttribute offsetAttribute = nGramTokenizer.getAttribute(
+				OffsetAttribute.class);
+
 			while (nGramTokenizer.incrementToken()) {
 				String nGram = charTermAttribute.toString();
 
@@ -61,7 +57,7 @@ public class NGramHolderBuilderImpl implements NGramHolderBuilder {
 					if (offsetAttribute.startOffset() == 0) {
 						nGramHolder.addNGramStart(currentNGramSize, nGram);
 					}
-					else if (offsetAttribute.endOffset() == length) {
+					else if (offsetAttribute.endOffset() == input.length()) {
 						nGramHolder.addNGramEnd(currentNGramSize, nGram);
 					}
 					else {
@@ -75,7 +71,7 @@ public class NGramHolderBuilderImpl implements NGramHolderBuilder {
 
 			return nGramHolder;
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new SearchException(e);
 		}
 	}

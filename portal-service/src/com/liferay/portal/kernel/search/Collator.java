@@ -24,7 +24,7 @@ import java.util.Map;
 public interface Collator {
 
 	public String collate(
-			Map<String, List<String>> mapSuggestions, List<String> tokens)
+			Map<String, List<String>> suggestionsMap, List<String> tokens)
 		throws SearchException;
 
 }
