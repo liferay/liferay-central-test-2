@@ -261,18 +261,18 @@ public class ExportImportImpl implements ExportImport {
 								PortletLocalServiceUtil.getPortletById(
 									group.getCompanyId(), portletId);
 
-							if (GetterUtil.getBoolean(
-									element.attributeValue("portlet-setup"))) {
-
-								manifestSummary.addSetupPortlet(portlet);
-							}
-
-							if ((portlet.
-									getPortletDataHandlerInstance() != null) &&
+							if ((portlet.getPortletDataHandlerInstance() !=
+									null) &&
 								GetterUtil.getBoolean(
 									element.attributeValue("portlet-data"))) {
 
 								manifestSummary.addDataPortlet(portlet);
+							}
+
+							if (GetterUtil.getBoolean(
+									element.attributeValue("portlet-setup"))) {
+
+								manifestSummary.addSetupPortlet(portlet);
 							}
 						}
 						catch (SystemException se) {
@@ -638,8 +638,8 @@ public class ExportImportImpl implements ExportImport {
 		}
 
 		content = StringUtil.replace(
-				content, ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
-				ArrayUtil.toStringArray(newLinksToLayout.toArray()));
+			content, ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
+			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
 
 		return content;
 	}
@@ -859,7 +859,7 @@ public class ExportImportImpl implements ExportImport {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		String userIdStrategy = MapUtil.getString(
-				parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
+			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext portletDataContext =

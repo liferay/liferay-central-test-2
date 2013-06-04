@@ -423,6 +423,7 @@ ManifestSummary manifestSummary = com.liferay.portal.kernel.lar.ExportImportUtil
 				</portlet:renderURL>
 
 				<aui:button href="<%= importPagesURL %>" name="back1" value="back" />
+
 				<aui:button cssClass="btn-primary" name="continue" value="continue" />
 			</aui:button-row>
 		</div>
@@ -444,11 +445,19 @@ ManifestSummary manifestSummary = com.liferay.portal.kernel.lar.ExportImportUtil
 
 			<aui:button-row>
 				<aui:button name="back" value="back" />
+
 				<aui:button type="submit" value="import" />
 			</aui:button-row>
 		</div>
 	</div>
 </aui:form>
+
+<aui:script>
+	Liferay.Util.toggleRadio('<portlet:namespace />allContent', '<portlet:namespace />showChangeGlobalContent', ['<portlet:namespace />selectContents']);
+	Liferay.Util.toggleRadio('<portlet:namespace />allApplications', '', ['<portlet:namespace />selectApplications']);
+	Liferay.Util.toggleRadio('<portlet:namespace />chooseApplications', '<portlet:namespace />selectApplications', '');
+	Liferay.Util.toggleRadio('<portlet:namespace />chooseContent', '<portlet:namespace />selectContents', ['<portlet:namespace />showChangeGlobalContent']);
+</aui:script>
 
 <aui:script use="aui-base">
 	A.one(<portlet:namespace />continue).on(
@@ -490,12 +499,4 @@ ManifestSummary manifestSummary = com.liferay.portal.kernel.lar.ExportImportUtil
 			userPreferencesNode: '#<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox'
 		}
 	);
-</aui:script>
-
-<aui:script>
-	Liferay.Util.toggleRadio('<portlet:namespace />chooseApplications', '<portlet:namespace />selectApplications', '');
-	Liferay.Util.toggleRadio('<portlet:namespace />allApplications', '', ['<portlet:namespace />selectApplications']);
-
-	Liferay.Util.toggleRadio('<portlet:namespace />chooseContent', '<portlet:namespace />selectContents', ['<portlet:namespace />showChangeGlobalContent']);
-	Liferay.Util.toggleRadio('<portlet:namespace />allContent', '<portlet:namespace />showChangeGlobalContent', ['<portlet:namespace />selectContents']);
 </aui:script>
