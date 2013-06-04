@@ -30,7 +30,7 @@ public class SpacerTag extends TagSupport {
 		try {
 			JspWriter jspWriter = pageContext.getOut();
 
-			jspWriter.print(StringPool.SPACE);
+			jspWriter.write(StringPool.SPACE);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
