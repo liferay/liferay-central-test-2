@@ -333,7 +333,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void checkEvents() throws PortalException, SystemException {
+	public void checkEvents() throws SystemException {
 		List<CalEvent> events = calEventFinder.findByFutureReminders();
 
 		for (CalEvent event : events) {
