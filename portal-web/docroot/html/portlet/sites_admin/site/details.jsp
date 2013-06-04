@@ -155,7 +155,7 @@ if (showPrototypes && (group != null)) {
 	boolean directoryIndexingEnabled = PropertiesParamUtil.getBoolean(typeSettingsProperties, request, "directoryIndexingEnabled");
 	%>
 
-	<aui:input helpMessage="directory-indexing-help" label="directory-indexing-enabled" name="TypeSettingsProperties--directoryIndexingEnabled--" type="checkbox" value="<%= directoryIndexingEnabled %>" />
+	<aui:input label="directory-indexing-enabled" name="TypeSettingsProperties--directoryIndexingEnabled--" type="checkbox" value="<%= directoryIndexingEnabled %>" />
 
 	<c:if test="<%= liveGroup != null %>">
 		<aui:field-wrapper label="site-id">
