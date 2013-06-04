@@ -2383,9 +2383,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		if (userId != CompanyConstants.SYSTEM) {
 			return UsersAdminUtil.addRequiredRoles(userId, roleIds);
 		}
-		else {
-			return roleIds;
-		}
+
+		return roleIds;
 	}
 
 	protected long[] checkUserGroupIds(long userId, long[] userGroupIds)
