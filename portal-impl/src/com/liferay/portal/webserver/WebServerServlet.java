@@ -739,9 +739,7 @@ public class WebServerServlet extends HttpServlet {
 			typeSettingsProperties.getProperty("directoryIndexingEnabled"),
 			PropsValues.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED);
 
-		if (!PropsValues.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED &&
-			!directoryIndexingEnabled) {
-
+		if (!directoryIndexingEnabled) {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
 			return;
