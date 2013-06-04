@@ -95,12 +95,14 @@ public class PerFieldAnalyzer extends Analyzer implements Tokenizer {
 	public List<String> tokenize(String fieldName, String input, Locale locale)
 		throws SearchException {
 
-		List<String> result = new ArrayList<String>();
+		List<String> tokens = new ArrayList<String>();
 
 		TokenStream tokenStream = null;
 
 		try {
-			tokenStream = getAnalyzer(fieldName).tokenStream(
+			Analyzer analyzer = getAnalyzer(fieldName);
+
+			tokenStream = analyzer.tokenStream(
 				locale.toString(), new StringReader(input));
 
 			CharTermAttribute charTermAttribute = tokenStream.addAttribute(
@@ -109,29 +111,29 @@ public class PerFieldAnalyzer extends Analyzer implements Tokenizer {
 			tokenStream.reset();
 
 			while (tokenStream.incrementToken()) {
-				result.add(charTermAttribute.toString());
+				tokens.add(charTermAttribute.toString());
 			}
 
 			tokenStream.end();
 		}
-		catch (IOException e) {
-			throw new SearchException(e);
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
 		}
 		finally {
 			if (tokenStream != null) {
 				try {
 					tokenStream.close();
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Unable to close token stream", e);
+						_log.warn("Unable to close token stream", ioe);
 					}
 				}
 			}
 
 		}
 
-		return result;
+		return tokens;
 	}
 
 	@Override
