@@ -27,7 +27,9 @@ public abstract class BaseVerifyTestCase {
 	}
 
 	protected void doVerify() throws Exception {
-		getVerifyProcess().verify();
+		VerifyProcess verifyProcess = getVerifyProcess();
+
+		verifyProcess.verify();
 	}
 
 	protected abstract VerifyProcess getVerifyProcess();

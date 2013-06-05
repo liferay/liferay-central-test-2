@@ -14,8 +14,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
@@ -29,17 +27,11 @@ public class CompanyTestUtil {
 		return addCompany(ServiceTestUtil.randomString());
 	}
 
-	public static Company addCompany(String companyName) throws Exception {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(companyName);
-		sb.append(StringPool.PERIOD);
-		sb.append(ServiceTestUtil.randomString(3));
-
-		String virtualHostname = sb.toString();
+	public static Company addCompany(String name) throws Exception {
+		String virtualHostname = name + "." +  ServiceTestUtil.randomString(3);
 
 		return CompanyLocalServiceUtil.addCompany(
-			companyName, virtualHostname, virtualHostname,
+			name, virtualHostname, virtualHostname,
 			PropsValues.SHARD_DEFAULT_NAME, false, 0, true);
 	}
 

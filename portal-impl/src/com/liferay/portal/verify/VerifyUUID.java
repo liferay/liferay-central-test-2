@@ -64,8 +64,8 @@ public class VerifyUUID extends VerifyProcess {
 		DB db = DBFactoryUtil.getDB();
 
 		db.runSQL(
-			"update " + modelName + " set uuid_ = '" + uuid +
-			"' where " + pkColumnName + " = " + pk);
+			"update " + modelName + " set uuid_ = '" + uuid + "' where " +
+				pkColumnName + " = " + pk);
 	}
 
 	@Override
