@@ -367,7 +367,7 @@ public class LayoutImporter {
 			}
 
 			if (existingLayoutPrototype == null) {
-				List<Layout> layoutsWithPreviousPrototype =
+				List<Layout> layouts =
 					LayoutLocalServiceUtil.getLayoutsByLayoutPrototypeUuid(
 						layoutPrototype.getUuid());
 
@@ -376,7 +376,7 @@ public class LayoutImporter {
 				LayoutPrototypeLocalServiceUtil.updateLayoutPrototype(
 					layoutPrototype);
 
-				for (Layout layout : layoutsWithPreviousPrototype) {
+				for (Layout layout : layouts) {
 					layout.setLayoutPrototypeUuid(layoutPrototypeUuid);
 
 					LayoutLocalServiceUtil.updateLayout(layout);
