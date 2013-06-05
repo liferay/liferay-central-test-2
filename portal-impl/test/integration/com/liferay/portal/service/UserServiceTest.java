@@ -39,7 +39,6 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.UserTestUtil;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 
 import java.util.Calendar;
 import java.util.List;
@@ -69,19 +68,13 @@ public class UserServiceTest {
 
 	@Test
 	public void testAddUser() throws Exception {
-		addUser();
+		addUser(true);
 	}
 
 	@Test
-	public void testDeleteUser() throws Exception {
-		User user = addUser();
-
-		UserServiceUtil.deleteUser(user.getUserId());
-	}
-
-	@Test
-	public void testEmailSecurityAddUser() throws Exception {
-		Field field = getDeclaredField("COMPANY_SECURITY_STRANGERS_WITH_MX");
+	public void testCompanySecurityStrangersWithMX1() throws Exception {
+		Field field = ReflectionUtil.getDeclaredField(
+			PropsValues.class, "COMPANY_SECURITY_STRANGERS_WITH_MX");
 
 		Object value = field.get(null);
 
@@ -92,7 +85,7 @@ public class UserServiceTest {
 
 			PrincipalThreadLocal.setName(0);
 
-			addUser();
+			addUser(true);
 
 			Assert.fail();
 		}
@@ -106,8 +99,9 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void testEmailSecurityUpdateEmailAddress() throws Exception {
-		Field field = getDeclaredField("COMPANY_SECURITY_STRANGERS_WITH_MX");
+	public void testCompanySecurityStrangersWithMX2() throws Exception {
+		Field field = ReflectionUtil.getDeclaredField(
+			PropsValues.class, "COMPANY_SECURITY_STRANGERS_WITH_MX");
 
 		Object value = field.get(null);
 
@@ -116,7 +110,36 @@ public class UserServiceTest {
 		try {
 			field.set(null, Boolean.FALSE);
 
-			User user = addUserWithoutPermissions();
+			User user = addUser(false);
+
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			updateUser(user);
+
+			Assert.fail();
+		}
+		catch (ReservedUserEmailAddressException rueae) {
+		}
+		finally {
+			field.set(null, value);
+
+			PrincipalThreadLocal.setName(name);
+		}
+	}
+
+	@Test
+	public void testCompanySecurityStrangersWithMX3() throws Exception {
+		Field field = ReflectionUtil.getDeclaredField(
+			PropsValues.class, "COMPANY_SECURITY_STRANGERS_WITH_MX");
+
+		Object value = field.get(null);
+
+		String name = PrincipalThreadLocal.getName();
+
+		try {
+			field.set(null, Boolean.FALSE);
+
+			User user = addUser(false);
 
 			PrincipalThreadLocal.setName(user.getUserId());
 
@@ -140,36 +163,15 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void testEmailSecurityUpdateUser() throws Exception {
-		Field field = getDeclaredField("COMPANY_SECURITY_STRANGERS_WITH_MX");
+	public void testDeleteUser() throws Exception {
+		User user = addUser(true);
 
-		Object value = field.get(null);
-
-		String name = PrincipalThreadLocal.getName();
-
-		try {
-			field.set(null, Boolean.FALSE);
-
-			User user = addUserWithoutPermissions();
-
-			PrincipalThreadLocal.setName(user.getUserId());
-
-			updateUser(user);
-
-			Assert.fail();
-		}
-		catch (ReservedUserEmailAddressException rueae) {
-		}
-		finally {
-			field.set(null, value);
-
-			PrincipalThreadLocal.setName(name);
-		}
+		UserServiceUtil.deleteUser(user.getUserId());
 	}
 
 	@Test
 	public void testGetUser() throws Exception {
-		User user = addUser();
+		User user = addUser(true);
 
 		UserServiceUtil.getUserByEmailAddress(
 			TestPropsValues.getCompanyId(), user.getEmailAddress());
@@ -419,7 +421,7 @@ public class UserServiceTest {
 				group.getGroupId(), objectUser.getUserId()));
 	}
 
-	protected User addUser() throws Exception {
+	protected User addUser(boolean secure) throws Exception {
 		boolean autoPassword = true;
 		String password1 = StringPool.BLANK;
 		String password2 = StringPool.BLANK;
@@ -448,66 +450,24 @@ public class UserServiceTest {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		return UserServiceUtil.addUser(
-			TestPropsValues.getCompanyId(), autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, facebookId, openId,
-			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-			organizationIds, roleIds, userGroupIds, sendMail, serviceContext);
-	}
-
-	protected User addUserWithoutPermissions() throws Exception {
-		boolean autoPassword = true;
-		String password1 = StringPool.BLANK;
-		String password2 = StringPool.BLANK;
-		boolean autoScreenName = true;
-		String screenName = StringPool.BLANK;
-		String emailAddress =
-			"UserServiceTest." + ServiceTestUtil.nextLong() + "@test.com";
-		long facebookId = 0;
-		String openId = StringPool.BLANK;
-		Locale locale = LocaleUtil.getDefault();
-		String firstName = "UserServiceTest";
-		String middleName = StringPool.BLANK;
-		String lastName = "UserServiceTest";
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = StringPool.BLANK;
-		long[] groupIds = null;
-		long[] organizationIds = null;
-		long[] roleIds = null;
-		long[] userGroupIds = null;
-		boolean sendMail = false;
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		return UserLocalServiceUtil.addUser(
-			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
-			autoPassword, password1, password2, autoScreenName, screenName,
-			emailAddress, facebookId, openId, locale, firstName, middleName,
-			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
-			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
-			userGroupIds, sendMail, serviceContext);
-	}
-
-	protected Field getDeclaredField(String fieldName) throws Exception {
-		Field field = ReflectionUtil.getDeclaredField(
-			PropsValues.class, fieldName);
-
-		int modifiers = field.getModifiers();
-
-		if ((modifiers & Modifier.FINAL) == Modifier.FINAL) {
-			Field modifiersField = ReflectionUtil.getDeclaredField(
-				Field.class, "modifiers");
-
-			modifiersField.setInt(field, modifiers & ~Modifier.FINAL);
+		if (true) {
+			return UserServiceUtil.addUser(
+				TestPropsValues.getCompanyId(), autoPassword, password1,
+				password2, autoScreenName, screenName, emailAddress, facebookId,
+				openId, locale, firstName, middleName, lastName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+				jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+				sendMail, serviceContext);
 		}
-
-		return field;
+		else {
+			return UserLocalServiceUtil.addUser(
+				TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
+				autoPassword, password1, password2, autoScreenName, screenName,
+				emailAddress, facebookId, openId, locale, firstName, middleName,
+				lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+				userGroupIds, sendMail, serviceContext);
+		}
 	}
 
 	protected void unsetGroupUsers(
@@ -540,8 +500,8 @@ public class UserServiceTest {
 
 	protected User updateUser(User user) throws Exception {
 		String oldPassword = StringPool.BLANK;
-		String newPassword1 =StringPool.BLANK;
-		String newPassword2 =StringPool.BLANK;
+		String newPassword1 = StringPool.BLANK;
+		String newPassword2 = StringPool.BLANK;
 		Boolean passwordReset = false;
 		String reminderQueryQuestion = StringPool.BLANK;
 		String reminderQueryAnswer = StringPool.BLANK;
