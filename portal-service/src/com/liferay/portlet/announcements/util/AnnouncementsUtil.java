@@ -16,7 +16,10 @@ package com.liferay.portlet.announcements.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -30,7 +33,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -133,7 +135,7 @@ public class AnnouncementsUtil {
 			roles = ListUtil.copy(roles);
 		}
 
-		if (PropsValues.PERMISSIONS_CHECK_GUEST_ENABLED) {
+		if (_PERMISSIONS_CHECK_GUEST_ENABLED) {
 			User user = UserLocalServiceUtil.getUserById(userId);
 
 			Role guestRole = RoleLocalServiceUtil.getRole(
@@ -204,6 +206,10 @@ public class AnnouncementsUtil {
 
 	private static final long _ORGANIZATION_CLASS_NAME_ID =
 		PortalUtil.getClassNameId(Organization.class.getName());
+
+	private static final boolean _PERMISSIONS_CHECK_GUEST_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.PERMISSIONS_CHECK_GUEST_ENABLED));
 
 	private static final long _ROLE_CLASS_NAME_ID = PortalUtil.getClassNameId(
 		Role.class.getName());
