@@ -3207,9 +3207,6 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
-		<comments>
-			See the Ant target "build-struts-jar" in portal-impl/build.xml.
-		</comments>
 	</library>
 	<library>
 		<file-name>lib/portal/stax.jar</file-name>
@@ -3265,6 +3262,9 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See the Ant target "build-struts-jar" in portal-impl/build.xml.
+		</comments>
 	</library>
 	<library>
 		<file-name>lib/portal/struts-el.jar</file-name>
