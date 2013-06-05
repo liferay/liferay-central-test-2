@@ -12,16 +12,15 @@
  * details.
  */
 
-package com.liferay.portlet.layoutsadmin.lar;
+package com.liferay.portlet.layoutprototypes.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 
 /**
  * @author Daniela Zapata Riesco
  */
-public class LayoutSetPrototypePortletDataHandler
-	extends BasePortletDataHandler {
+public class LayoutPrototypePortletDataHandler extends BasePortletDataHandler {
 
-	public static final String NAMESPACE = "layout_set_prototypes";
+	public static final String NAMESPACE = "layout_prototypes";
 
 }
