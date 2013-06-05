@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Arrays;
@@ -33,8 +34,8 @@ public class QueryIndexingHitsProcessor implements HitsProcessor {
 		if ((scores != null) && (scores.length != 0)) {
 			Arrays.sort(scores);
 
-			if (scores[0] >= _scoringThreshold) {
-				indexKeywordQuery(
+			if (scores[0] >= _scoresThreshold) {
+				addDocument(
 					searchContext.getCompanyId(), searchContext.getKeywords(),
 					searchContext.getLocale());
 			}
@@ -43,32 +44,31 @@ public class QueryIndexingHitsProcessor implements HitsProcessor {
 		return true;
 	}
 
-	public void setDocumentPrototype(Document documentPrototype) {
-		_documentPrototype = documentPrototype;
+	public void setDocument(Document document) {
+		_document = document;
 	}
 
-	public void setScoringThreshold(float scoringThreshold) {
-		_scoringThreshold = scoringThreshold;
+	public void setScoresThreshold(float scoresThreshold) {
+		_scoresThreshold = scoresThreshold;
 	}
 
-	protected void indexKeywordQuery(
-			long companyId, String keywords, Locale locale)
+	protected void addDocument(long companyId, String keywords, Locale locale)
 		throws SearchException {
 
-		Document document = (Document) _documentPrototype.clone();
+		Document document = (Document)_document.clone();
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.KEYWORD_SEARCH, keywords);
-		document.addKeyword(Field.LOCALE, locale.toString());
+		document.addKeyword(Field.LANGUAGE_ID, LocaleUtil.toLanguageId(locale));
 		document.addKeyword(Field.PORTLET_ID, PortletKeys.SEARCH);
 
 		SearchEngineUtil.addDocument(
 			SearchEngineUtil.getDefaultSearchEngineId(), companyId, document);
 	}
 
-	private static final float _DEFAULT_SCORING_THRESHOLD = 0.5f;
+	private static final float _DEFAULT_SCORES_THRESHOLD = 0.5f;
 
-	private Document _documentPrototype;
-	private float _scoringThreshold = _DEFAULT_SCORING_THRESHOLD;
+	private Document _document;
+	private float _scoresThreshold = _DEFAULT_SCORES_THRESHOLD;
 
 }

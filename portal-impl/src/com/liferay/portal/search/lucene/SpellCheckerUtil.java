@@ -26,18 +26,20 @@ import org.apache.lucene.index.Term;
  */
 public class SpellCheckerUtil {
 
-	public static boolean validateWordExists(
+	public static boolean isValidWord(
 			String localizedFieldName, String word,
 			List<IndexReader> indexReaders)
 		throws IOException {
 
-		if (!indexReaders.isEmpty()) {
-			Term term = new Term(localizedFieldName, word);
+		if (indexReaders.isEmpty()) {
+			return false;
+		}
 
-			for (IndexReader indexReader : indexReaders) {
-				if (indexReader.docFreq(term) > 0) {
-					return true;
-				}
+		Term term = new Term(localizedFieldName, word);
+
+		for (IndexReader indexReader : indexReaders) {
+			if (indexReader.docFreq(term) > 0) {
+				return true;
 			}
 		}
 

@@ -23,10 +23,8 @@ import com.liferay.portal.kernel.search.NGramHolderBuilderUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.SpellCheckIndexWriter;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -40,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.lucene.document.Document;
@@ -62,33 +59,28 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 	public void clearDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
-		long companyId = searchContext.getCompanyId();
-
 		Term term = new Term(
 			com.liferay.portal.kernel.search.Field.PORTLET_ID,
 			PortletKeys.SEARCH);
 
 		try {
-			LuceneHelperUtil.deleteDocuments(companyId, term);
+			LuceneHelperUtil.deleteDocuments(
+				searchContext.getCompanyId(), term);
 		}
 		catch (IOException e) {
 			throw new SearchException(e);
 		}
 	}
 
+	@Override
 	public void indexDictionaries(SearchContext searchContext)
 		throws SearchException {
 
-		long companyId = searchContext.getCompanyId();
-
-		String[] supportedLocales =
-			PropsValues.LUCENE_SPELL_CHECKER_SUPPORTED_LOCALES;
-
 		try {
-			for (String supportedLocale : supportedLocales) {
-				Locale locale = LocaleUtil.fromLanguageId(supportedLocale);
+			for (String languageId :
+					PropsValues.LUCENE_SPELL_CHECKER_SUPPORTED_LOCALES) {
 
-				doIndexDictionary(companyId, locale);
+				indexDictionary(searchContext.getCompanyId(), languageId);
 			}
 		}
 		catch (Exception e) {
@@ -96,15 +88,13 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 		}
 	}
 
+	@Override
 	public void indexDictionary(SearchContext searchContext)
 		throws SearchException {
 
 		try {
-			long companyId = searchContext.getCompanyId();
-
-			Locale locale = searchContext.getLocale();
-
-			doIndexDictionary(companyId, locale);
+			indexDictionary(
+				searchContext.getCompanyId(), searchContext.getLanguageId());
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -120,7 +110,6 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 			fieldName, fieldValue, fieldStore, Field.Index.NOT_ANALYZED);
 
 		field.setIndexOptions(indexOptions);
-
 		field.setOmitNorms(omitNorms);
 
 		document.add(field);
@@ -129,9 +118,9 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 	protected void addNGramFields(
 		Document document, Map<String, String> nGrams) {
 
-		for (Map.Entry<String, String> nGramsEntry : nGrams.entrySet()) {
-			String fieldName = nGramsEntry.getKey();
-			String fieldValue = nGramsEntry.getValue();
+		for (Map.Entry<String, String> entry : nGrams.entrySet()) {
+			String fieldName = entry.getKey();
+			String fieldValue = entry.getValue();
 
 			addField(
 				document, fieldName, fieldValue, Field.Store.NO,
@@ -140,81 +129,87 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 	}
 
 	protected Document createDocument(
-			String localizedFieldName, String word, Locale locale)
+			String localizedFieldName, String word, String languageId)
 		throws SearchException {
 
 		Document document = new Document();
 
 		addField(
+			document, com.liferay.portal.kernel.search.Field.LANGUAGE_ID,
+			languageId, Field.Store.NO, FieldInfo.IndexOptions.DOCS_ONLY, true);
+		addField(
 			document, com.liferay.portal.kernel.search.Field.PORTLET_ID,
 			PortletKeys.SEARCH, Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
-
 		addField(
 			document, localizedFieldName, word, Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
 
-		addField(
-			document, com.liferay.portal.kernel.search.Field.LOCALE,
-			locale.toString(), Field.Store.NO,
-			FieldInfo.IndexOptions.DOCS_ONLY, true);
-
 		NGramHolder nGramHolder = NGramHolderBuilderUtil.buildNGramHolder(word);
 
-		Map<String, String> nGramEnds = nGramHolder.getNGramEnds();
-		addNGramFields(document, nGramEnds);
+		addNGramFields(document, nGramHolder.getNGramEnds());
 
 		Map<String, List<String>> nGrams = nGramHolder.getNGrams();
 
-		for (Map.Entry<String, List<String>> nGramsEntry : nGrams.entrySet()) {
-			String fieldName = nGramsEntry.getKey();
+		for (Map.Entry<String, List<String>> entry : nGrams.entrySet()) {
+			String fieldName = entry.getKey();
 
-			for (String nGram : nGramsEntry.getValue()) {
+			for (String nGram : entry.getValue()) {
 				addField(
 					document, fieldName, nGram, Field.Store.NO,
 					FieldInfo.IndexOptions.DOCS_AND_FREQS, false);
 			}
 		}
 
-		Map<String, String> nGramStarts = nGramHolder.getNGramStarts();
-		addNGramFields(document, nGramStarts);
+		addNGramFields(document, nGramHolder.getNGramStarts());
 
 		return document;
 	}
 
-	protected void doIndexDictionary(long companyId, Locale locale)
+	protected URL getResource(String name) {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		return classLoader.getResource(name);
+	}
+
+	protected void indexDictionary(long companyId, String languageId)
 		throws Exception {
 
-		String dictionaryFileNameList = PropsUtil.get(
-			PropsKeys.LUCENE_SPELL_CHECKER_DICTIONARY,
-			new Filter(locale.toString()));
-
-		String[] dictionaryFileNames = StringUtil.split(dictionaryFileNameList);
+		if (_log.isInfoEnabled()) {
+			_log.info("Start indexing dictionaries for " + languageId);
+		}
 
 		IndexAccessor indexAccessor = LuceneHelperUtil.getIndexAccessor(
 			companyId);
 
+		String[] dictionaryFileNames = PropsUtil.getArray(
+			PropsKeys.LUCENE_SPELL_CHECKER_DICTIONARY, new Filter(languageId));
+
 		for (String dictionaryFileName : dictionaryFileNames) {
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Commencing dictionary indexing for: " + locale + " - " +
-					dictionaryFileName);
+				_log.info("Indexing dictionary " + dictionaryFileName);
 			}
 
-			URL dictionaryURL = getResource(dictionaryFileName);
-
-			InputStream dictionaryInputStream = null;
+			InputStream inputStream = null;
 
 			try {
-				dictionaryInputStream = dictionaryURL.openStream();
+				URL url = getResource(dictionaryFileName);
 
-				if (dictionaryInputStream == null) {
+				inputStream = url.openStream();
+
+				if (inputStream == null) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("No dictionary defined for: " + locale);
+						_log.warn("Unable to read " + dictionaryFileName);
 					}
 
 					continue;
 				}
+
+				String localizedFieldName = DocumentImpl.getLocalizedName(
+					languageId,
+					com.liferay.portal.kernel.search.Field.SPELL_CHECK_WORD);
 
 				IndexSearcher indexSearcher = LuceneHelperUtil.getSearcher(
 					indexAccessor.getCompanyId(), true);
@@ -226,21 +221,16 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 						indexReaders, indexSearcher.getIndexReader());
 				}
 
-				String localizedFieldName = DocumentImpl.getLocalizedName(
-					locale,
-					com.liferay.portal.kernel.search.Field.SPELL_CHECK_WORD);
-
 				Collection<Document> documents = new ArrayList<Document>();
 
-				Dictionary dictionary = new PlainTextDictionary(
-					dictionaryInputStream);
+				Dictionary dictionary = new PlainTextDictionary(inputStream);
 
-				Iterator<String> wordsIterator = dictionary.getWordsIterator();
+				Iterator<String> iterator = dictionary.getWordsIterator();
 
-				while (wordsIterator.hasNext()) {
-					String word = wordsIterator.next();
+				while (iterator.hasNext()) {
+					String word = iterator.next();
 
-					boolean validWord = validateWord(
+					boolean validWord = isValidWord(
 						localizedFieldName, word, indexReaders);
 
 					if (!validWord) {
@@ -248,7 +238,7 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 					}
 
 					Document document = createDocument(
-						localizedFieldName, word, locale);
+						localizedFieldName, word, languageId);
 
 					documents.add(document);
 				}
@@ -256,35 +246,25 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 				indexAccessor.addDocuments(documents);
 			}
 			finally {
-				StreamUtil.cleanUp(dictionaryInputStream);
+				StreamUtil.cleanUp(inputStream);
 			}
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Completing text file based dictionary: " + locale);
+			_log.info("Finished indexing dictionaries for " + languageId);
 		}
 	}
 
-	protected URL getResource(String name) {
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
-
-		return classLoader.getResource(name);
-	}
-
-	protected boolean validateWord(
+	protected boolean isValidWord(
 			String localizedFieldName, String word,
 			List<IndexReader> indexReaders)
 		throws IOException {
 
-		int length = word.length();
-
-		if (length < _MINIMUM_WORD_LENGTH) {
+		if (word.length() < _MINIMUM_WORD_LENGTH) {
 			return false;
 		}
 
-		if (SpellCheckerUtil.validateWordExists(
+		if (SpellCheckerUtil.isValidWord(
 				localizedFieldName, word, indexReaders)) {
 
 			return false;
@@ -293,8 +273,9 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 		return true;
 	}
 
+	private static final int _MINIMUM_WORD_LENGTH = 3;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		LuceneSpellCheckIndexWriter.class);
-	private static final int _MINIMUM_WORD_LENGTH = 3;
 
 }
