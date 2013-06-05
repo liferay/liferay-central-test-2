@@ -60,8 +60,7 @@ public class LayoutPrototypeLocalServiceImpl
 	@Override
 	public LayoutPrototype addLayoutPrototype(
 			long userId, long companyId, Map<Locale, String> nameMap,
-			String description, boolean active, boolean addDefaultLayout,
-			ServiceContext serviceContext)
+			String description, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout prototype
@@ -107,26 +106,13 @@ public class LayoutPrototypeLocalServiceImpl
 			layoutPrototype.getName(LocaleUtil.getDefault()), null, 0,
 			friendlyURL, false, true, null);
 
-		if (addDefaultLayout) {
-			layoutLocalService.addLayout(
-				userId, group.getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-				layoutPrototype.getName(LocaleUtil.getDefault()), null, null,
-				LayoutConstants.TYPE_PORTLET, false, "/layout", serviceContext);
-		}
+		layoutLocalService.addLayout(
+			userId, group.getGroupId(), true,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			layoutPrototype.getName(LocaleUtil.getDefault()), null, null,
+			LayoutConstants.TYPE_PORTLET, false, "/layout", serviceContext);
 
 		return layoutPrototype;
-	}
-
-	@Override
-	public LayoutPrototype addLayoutPrototype(
-			long userId, long companyId, Map<Locale, String> nameMap,
-			String description, boolean active, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addLayoutPrototype(
-			userId, companyId, nameMap, description, active, true,
-			serviceContext);
 	}
 
 	@Override
