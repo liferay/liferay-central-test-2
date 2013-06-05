@@ -23,6 +23,7 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
 long organizationId = BeanParamUtil.getLong(organization, request, "organizationId");
+
 long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationSearchContainerPrimaryKeys", (organization != null) ? organization.getParentOrganizationId() : OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 String type = BeanParamUtil.getString(organization, request, "type");
 
@@ -37,18 +38,6 @@ if (organization != null) {
 }
 
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
-
-String headerTitle = null;
-
-if (organization != null) {
-	headerTitle = LanguageUtil.format(pageContext, "edit-x", organization.getName());
-}
-else if (Validator.isNotNull(type)) {
-	headerTitle = LanguageUtil.format(pageContext, "add-x", type);
-}
-else {
-	headerTitle = LanguageUtil.get(pageContext, "add-organization");
-}
 
 if (organization != null) {
 	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
@@ -69,6 +58,20 @@ else if (parentOrganizationId > 0) {
 <div id="breadcrumb">
 	<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showCurrentPortlet="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showPortletBreadcrumb="<%= true %>" />
 </div>
+
+<%
+String headerTitle = null;
+
+if (organization != null) {
+	headerTitle = LanguageUtil.format(pageContext, "edit-x", organization.getName());
+}
+else if (Validator.isNotNull(type)) {
+	headerTitle = LanguageUtil.format(pageContext, "add-x", type);
+}
+else {
+	headerTitle = LanguageUtil.get(pageContext, "add-organization");
+}
+%>
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
