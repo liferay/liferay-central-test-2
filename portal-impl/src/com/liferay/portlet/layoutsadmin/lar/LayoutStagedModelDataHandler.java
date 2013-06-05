@@ -1036,7 +1036,7 @@ public class LayoutStagedModelDataHandler
 	protected void updateTypeSettings(Layout importedLayout, Layout layout)
 		throws PortalException, SystemException {
 
-		long currentGroupId = layout.getGroupId();
+		long groupId = layout.getGroupId();
 
 		try {
 			LayoutTypePortlet importedLayoutType =
@@ -1064,7 +1064,7 @@ public class LayoutStagedModelDataHandler
 
 		}
 		finally {
-			layout.setGroupId(currentGroupId);
+			layout.setGroupId(groupId);
 		}
 	}
 
