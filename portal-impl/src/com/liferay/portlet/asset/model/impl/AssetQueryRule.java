@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * @author Roberto Díaz
  */
@@ -29,27 +31,14 @@ public class AssetQueryRule {
 	}
 
 	public boolean equals(AssetQueryRule assetQueryRule) {
-		if (!_name.equals(assetQueryRule.getName())) {
-			return false;
+		if (Validator.equals(_name, assetQueryRule._name) &&
+			Validator.equals(_contains, assetQueryRule._contains) &&
+			Validator.equals(_andOperator, assetQueryRule._andOperator)) {
+
+			return true;
 		}
 
-		if (_contains != assetQueryRule.isContains()) {
-			return false;
-		}
-
-		if (_andOperator != assetQueryRule.isAndOperator()) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public boolean isAndOperator() {
-		return _andOperator;
-	}
-
-	public boolean isContains() {
-		return _contains;
+		return false;
 	}
 
 	public String getName() {
@@ -60,22 +49,30 @@ public class AssetQueryRule {
 		return _values;
 	}
 
+	public boolean isAndOperator() {
+		return _andOperator;
+	}
+
+	public boolean isContains() {
+		return _contains;
+	}
+
 	public void setAndOperator(boolean andOperator) {
 		_andOperator = andOperator;
 	}
-
+	
 	public void setContains(boolean contains) {
 		_contains = contains;
 	}
-
+	
 	public void setName(String name) {
 		_name = name;
 	}
-
+	
 	public void setValues(String[] values) {
 		_values = values;
 	}
-
+	
 	private boolean _andOperator;
 	private boolean _contains;
 	private String _name;
