@@ -95,7 +95,6 @@ public interface UserModel extends BaseModel<User>, StagedModel {
 	 * @return the user uuid of this user
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -103,7 +102,6 @@ public interface UserModel extends BaseModel<User>, StagedModel {
 	 *
 	 * @param userUuid the user uuid of this user
 	 */
-	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
