@@ -1419,6 +1419,8 @@ public interface PropsKeys {
 
 	public static final String LUCENE_ANALYZER_MAX_TOKENS = "lucene.analyzer.max.tokens";
 
+	public static final String LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE = "lucene.boolean.query.clause.max.size";
+
 	public static final String LUCENE_BUFFER_SIZE = "lucene.buffer.size";
 
 	public static final String LUCENE_CLUSTER_INDEX_LOADING_SYNC_TIMEOUT = "lucene.cluster.index.loading.sync.timeout";
@@ -1432,8 +1434,6 @@ public interface PropsKeys {
 	public static final String LUCENE_FILE_EXTRACTOR = "lucene.file.extractor";
 
 	public static final String LUCENE_FILE_EXTRACTOR_REGEXP_STRIP = "lucene.file.extractor.regexp.strip";
-
-	public static final String LUCENE_BOOLEAN_QUERY_MAX_CLAUSE_COUNT = "lucene.boolean.query.max.clause.count";
 
 	public static final String LUCENE_MERGE_FACTOR = "lucene.merge.factor";
 

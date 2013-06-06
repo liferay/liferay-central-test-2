@@ -698,7 +698,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 				_loadIndexClusterEventListener);
 		}
 
-		BooleanQuery.setMaxClauseCount(_BOOLEAN_QUERY_MAX_CLAUSE_COUNT);
+		BooleanQuery.setMaxClauseCount(_LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE);
 	}
 
 	private ObjectValuePair<String, URL>
@@ -841,12 +841,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 				indexAccessor, clusterNodeAddressesCount, localLastGeneration));
 	}
 
-	private static final int _BOOLEAN_QUERY_MAX_CLAUSE_COUNT =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.LUCENE_BOOLEAN_QUERY_MAX_CLAUSE_COUNT),
-			BooleanQuery.getMaxClauseCount());
-
 	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
+
+	private static final int _LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE),
+			BooleanQuery.getMaxClauseCount());
 
 	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
 
