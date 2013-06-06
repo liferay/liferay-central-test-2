@@ -620,14 +620,14 @@ public class LayoutExporter {
 
 	protected void exportAssetCategories(
 			PortletDataContext portletDataContext, boolean exportPortletDataAll,
-			boolean exportCategories, boolean isCompanyGroup)
+			boolean exportCategories, boolean companyGroup)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("categories-hierarchy");
 
-		if (exportPortletDataAll || exportCategories || isCompanyGroup) {
+		if (exportPortletDataAll || exportCategories || companyGroup) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Export categories");
 			}

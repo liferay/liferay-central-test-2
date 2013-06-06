@@ -391,7 +391,7 @@ ManifestSummary manifestSummary = com.liferay.portal.kernel.lar.ExportImportUtil
 							%>
 
 							<li>
-								<aui:fieldset cssClass="comments-and-ratings" label="for-each-of-the-selected-content-types-import-their">
+								<aui:fieldset cssClass="comments-and-ratings" label="for-each-of-the-selected-content-types,-import-their">
 									<div class="selected-labels" id="<portlet:namespace />selectedCommentsAndRatings"></div>
 
 									<aui:a cssClass="modify-link" href="javascript:;" id="commentsAndRatingsLink" label="change" method="get" />

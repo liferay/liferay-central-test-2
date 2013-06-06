@@ -269,7 +269,6 @@ public class FileEntryStagedModelDataHandler
 
 		long[] assetCategoryIds = portletDataContext.getAssetCategoryIds(
 			DLFileEntry.class, fileEntry.getFileEntryId());
-
 		String[] assetTagNames = portletDataContext.getAssetTagNames(
 			DLFileEntry.class, fileEntry.getFileEntryId());
 
