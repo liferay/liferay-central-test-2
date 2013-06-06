@@ -20,12 +20,12 @@ package com.liferay.portlet.asset.model.impl;
 public class AssetQueryRule {
 
 	public AssetQueryRule(
-		boolean andOperator, boolean contains, String name, String[] values) {
+		String name, String[] values, boolean contains, boolean andOperator) {
 
-		_andOperator = andOperator;
-		_contains = contains;
 		_name = name;
 		_values = values;
+		_contains = contains;
+		_andOperator = andOperator;
 	}
 
 	public boolean equals(AssetQueryRule assetQueryRule) {
@@ -33,22 +33,22 @@ public class AssetQueryRule {
 			return false;
 		}
 
-		if (_contains != assetQueryRule.getContains()) {
+		if (_contains != assetQueryRule.isContains()) {
 			return false;
 		}
 
-		if (_andOperator != assetQueryRule.getAndOperator()) {
+		if (_andOperator != assetQueryRule.isAndOperator()) {
 			return false;
 		}
 
 		return true;
 	}
 
-	public boolean getAndOperator() {
+	public boolean isAndOperator() {
 		return _andOperator;
 	}
 
-	public boolean getContains() {
+	public boolean isContains() {
 		return _contains;
 	}
 

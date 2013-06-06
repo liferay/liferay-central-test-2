@@ -391,7 +391,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				ParamUtil.getString(actionRequest, "queryCategoryIds" + index));
 		}
 
-		return new AssetQueryRule(andOperator, contains, name, values);
+		return new AssetQueryRule(name, values, contains, andOperator);
 	}
 
 	protected boolean getSubtypesFieldsFilterEnabled(
@@ -625,10 +625,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 			setPreference(
 				actionRequest, "queryContains" + i,
-				String.valueOf(assetQueryRule.getContains()));
+				String.valueOf(assetQueryRule.isContains()));
 			setPreference(
 				actionRequest, "queryAndOperator" + i,
-				String.valueOf(assetQueryRule.getAndOperator()));
+				String.valueOf(assetQueryRule.isAndOperator()));
 			setPreference(
 				actionRequest, "queryName" + i, assetQueryRule.getName());
 			setPreference(
@@ -707,8 +707,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		for (AssetQueryRule addedAssetQueryRule : assetQueryRules) {
 			if (addedAssetQueryRule.equals(assetQueryRule)) {
 				throw new DuplicateAssetQueryRuleException(
-					assetQueryRule.getAndOperator(),
-					assetQueryRule.getContains(), assetQueryRule.getName());
+					assetQueryRule.isAndOperator(),
+					assetQueryRule.isContains(), assetQueryRule.getName());
 			}
 		}
 	}
