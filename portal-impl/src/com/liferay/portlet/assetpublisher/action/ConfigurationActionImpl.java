@@ -45,8 +45,8 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.asset.DuplicateAssetQueryRuleException;
+import com.liferay.portlet.asset.model.AssetQueryRule;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
-import com.liferay.portlet.asset.model.impl.AssetQueryRule;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisher;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -707,8 +707,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		for (AssetQueryRule addedAssetQueryRule : assetQueryRules) {
 			if (addedAssetQueryRule.equals(assetQueryRule)) {
 				throw new DuplicateAssetQueryRuleException(
-					assetQueryRule.isAndOperator(),
-					assetQueryRule.isContains(), assetQueryRule.getName());
+					assetQueryRule.isAndOperator(), assetQueryRule.isContains(),
+					assetQueryRule.getName());
 			}
 		}
 	}

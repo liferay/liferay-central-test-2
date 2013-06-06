@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.asset.model.impl;
+package com.liferay.portlet.asset.model;
 
 import com.liferay.portal.kernel.util.Validator;
 
@@ -60,19 +60,19 @@ public class AssetQueryRule {
 	public void setAndOperator(boolean andOperator) {
 		_andOperator = andOperator;
 	}
-	
+
 	public void setContains(boolean contains) {
 		_contains = contains;
 	}
-	
+
 	public void setName(String name) {
 		_name = name;
 	}
-	
+
 	public void setValues(String[] values) {
 		_values = values;
 	}
-	
+
 	private boolean _andOperator;
 	private boolean _contains;
 	private String _name;
