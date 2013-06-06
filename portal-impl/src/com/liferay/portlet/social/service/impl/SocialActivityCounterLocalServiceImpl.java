@@ -21,17 +21,14 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.lock.LockProtectedAction;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -50,7 +47,6 @@ import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,46 +68,6 @@ import java.util.Map;
  */
 public class SocialActivityCounterLocalServiceImpl
 	extends SocialActivityCounterLocalServiceBaseImpl {
-
-	/**
-	 * Adds an activity counter with a default period length.
-	 *
-	 * <p>
-	 * This method uses the lock service to guard against multiple threads
-	 * trying to insert the same counter because this service is called
-	 * asynchronously from the social activity service.
-	 * </p>
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  classNameId the primary key of the entity's class this counter
-	 *         belongs to
-	 * @param  classPK the primary key of the entity this counter belongs to
-	 * @param  name the counter's name
-	 * @param  ownerType the counter's owner type. Acceptable values are
-	 *         <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
-	 *         <code>TYPE_CREATOR</code> defined in {@link
-	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
-	 * @param  currentValue the counter's current value (optionally
-	 *         <code>0</code>)
-	 * @param  totalValue the counter's total value (optionally <code>0</code>)
-	 * @param  startPeriod the counter's start period
-	 * @param  endPeriod the counter's end period
-	 * @return the added activity counter
-	 * @throws PortalException if the group or the previous activity counter
-	 *         could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public SocialActivityCounter addActivityCounter(
-			long groupId, long classNameId, long classPK, String name,
-			int ownerType, int currentValue, int totalValue, int startPeriod,
-			int endPeriod)
-		throws PortalException, SystemException {
-
-		return addActivityCounter(
-			groupId, classNameId, classPK, name, ownerType, currentValue,
-			totalValue, startPeriod, endPeriod, 0, 0);
-	}
 
 	/**
 	 * Adds an activity counter specifying a previous activity and period
@@ -153,98 +109,92 @@ public class SocialActivityCounterLocalServiceImpl
 	 */
 	@Override
 	public SocialActivityCounter addActivityCounter(
-			long groupId, long classNameId, long classPK, String name,
-			int ownerType, int currentValue, int totalValue, int startPeriod,
-			int endPeriod, long previousActivityCounterId, int periodLength)
+			final long groupId, final long classNameId, final long classPK,
+			final String name, final int ownerType, final int currentValue,
+			final int totalValue, final int startPeriod, final int endPeriod,
+			final long previousActivityCounterId, final int periodLength)
 		throws PortalException, SystemException {
-
-		SocialActivityCounter activityCounter = null;
 
 		String lockKey = getLockKey(
 			groupId, classNameId, classPK, name, ownerType);
 
-		Lock lock = null;
+		LockProtectedAction<SocialActivityCounter> lockProtectedAction =
+			new LockProtectedAction<SocialActivityCounter>(
+				SocialActivityCounter.class, lockKey,
+				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT,
+				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY) {
 
-		while (true) {
-			try {
-				lock = lockLocalService.lock(
-					SocialActivityCounter.class.getName(), lockKey, lockKey,
-					false);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to acquire activity counter lock. Retrying.");
+			@Override
+			protected SocialActivityCounter performProtectedAction()
+				throws PortalException, SystemException {
+
+				DB db = DBFactoryUtil.getDB();
+
+				String dbType = db.getType();
+
+				if (dbType.equals(DB.TYPE_HYPERSONIC)) {
+
+					// LPS-25408
+
+					return createActivityCounter(
+						groupId, classNameId, classPK, name, ownerType,
+						currentValue, totalValue, startPeriod, endPeriod,
+						previousActivityCounterId, periodLength);
 				}
-
-				continue;
-			}
-
-			if (lock.isNew()) {
-				try {
-					DB db = DBFactoryUtil.getDB();
-
-					String dbType = db.getType();
-
-					if (dbType.equals(DB.TYPE_HYPERSONIC)) {
-
-						// LPS-25408
-
-						activityCounter = createActivityCounter(
+				else {
+					return
+						socialActivityCounterLocalService.createActivityCounter(
 							groupId, classNameId, classPK, name, ownerType,
 							currentValue, totalValue, startPeriod, endPeriod,
 							previousActivityCounterId, periodLength);
-					}
-					else {
-						activityCounter =
-							socialActivityCounterLocalService.
-								createActivityCounter(
-									groupId, classNameId, classPK, name,
-									ownerType, currentValue, totalValue,
-									startPeriod, endPeriod,
-									previousActivityCounterId, periodLength);
-
-					}
-				}
-				finally {
-					lockLocalService.unlock(
-						SocialActivityCounter.class.getName(), lockKey, lockKey,
-						false);
-				}
-
-				break;
-			}
-
-			Date createDate = lock.getCreateDate();
-
-			if ((System.currentTimeMillis() - createDate.getTime()) >=
-					PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT) {
-
-				lockLocalService.unlock(
-					SocialActivityCounter.class.getName(), lockKey,
-					lock.getOwner(), false);
-
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Forcibly removed lock " + lock + ". See " +
-							PropsKeys.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT);
 				}
 			}
-			else {
-				try {
-					Thread.sleep(
-						PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY);
-				}
-				catch (InterruptedException ie) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Interrupted while waiting to reacquire lock", ie);
-					}
-				}
-			}
-		}
 
-		return activityCounter;
+		};
+
+		lockProtectedAction.performAction();
+
+		return lockProtectedAction.getReturnValue();
+	}
+
+	/**
+	 * Adds an activity counter with a default period length.
+	 *
+	 * <p>
+	 * This method uses the lock service to guard against multiple threads
+	 * trying to insert the same counter because this service is called
+	 * asynchronously from the social activity service.
+	 * </p>
+	 *
+	 * @param  groupId the primary key of the group
+	 * @param  classNameId the primary key of the entity's class this counter
+	 *         belongs to
+	 * @param  classPK the primary key of the entity this counter belongs to
+	 * @param  name the counter's name
+	 * @param  ownerType the counter's owner type. Acceptable values are
+	 *         <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
+	 *         <code>TYPE_CREATOR</code> defined in {@link
+	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
+	 * @param  currentValue the counter's current value (optionally
+	 *         <code>0</code>)
+	 * @param  totalValue the counter's total value (optionally <code>0</code>)
+	 * @param  startPeriod the counter's start period
+	 * @param  endPeriod the counter's end period
+	 * @return the added activity counter
+	 * @throws PortalException if the group or the previous activity counter
+	 *         could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SocialActivityCounter addActivityCounter(
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int currentValue, int totalValue, int startPeriod,
+			int endPeriod)
+		throws PortalException, SystemException {
+
+		return addActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, currentValue,
+			totalValue, startPeriod, endPeriod, 0, 0);
 	}
 
 	/**
@@ -1286,8 +1236,5 @@ public class SocialActivityCounterLocalServiceImpl
 				activityCounterDefinition.getPeriodLength());
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SocialActivityCounterLocalServiceImpl.class);
 
 }
