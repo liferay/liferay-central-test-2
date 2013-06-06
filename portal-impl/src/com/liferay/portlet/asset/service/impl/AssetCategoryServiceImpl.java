@@ -89,6 +89,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	 * @deprecated As of 6.2.0, Replaced by {@link #deleteCategories(long[],
 	 *             ServiceContext)}
 	 */
+	@Override
 	public void deleteCategories(long[] categoryIds)
 		throws PortalException, SystemException {
 

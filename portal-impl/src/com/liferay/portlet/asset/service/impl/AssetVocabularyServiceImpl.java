@@ -98,6 +98,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	 * @deprecated As of 6.2.0, Replaced by {@link #deleteVocabularies(long[],
 	 *             ServiceContext)}
 	 */
+	@Override
 	public void deleteVocabularies(long[] vocabularyIds)
 		throws PortalException, SystemException {
 
