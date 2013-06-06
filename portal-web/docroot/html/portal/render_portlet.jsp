@@ -762,10 +762,10 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 	PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
 }
 
-Boolean renderPortletBoundary = GetterUtil.getBoolean(request.getAttribute(WebKeys.RENDER_PORTLET_BOUNDARY), true);
+Boolean renderPortletBoundary = GetterUtil.getBoolean(request.getAttribute(WebKeys.RENDER_PORTLET_BOUNDARY), true) && !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme();
 %>
 
-<c:if test="<%= renderPortletBoundary && !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= renderPortletBoundary %>">
 
 	<%
 	if (themeDisplay.isStatePopUp() || themeDisplay.isWidget()) {
@@ -963,7 +963,7 @@ else {
 }
 %>
 
-<c:if test="<%= renderPortletBoundary && !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= renderPortletBoundary %>">
 		<aui:script position='<%= themeDisplay.isIsolated() ? "inline" : "auto" %>'>
 			Liferay.Portlet.onLoad(
 				{
