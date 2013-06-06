@@ -374,7 +374,21 @@ public class SocialActivityCounterLocalServiceImpl
 	 * @throws PortalException if the group or the previous activity counter
 	 *         could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #addActivityCounter(long, long, long, String, int, int, long, int)}
 	 */
+	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public SocialActivityCounter createActivityCounter(
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int currentValue, int totalValue, int startPeriod,
+			int endPeriod, long previousActivityCounterId, int periodLength)
+		throws PortalException, SystemException {
+
+		return addActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, totalValue,
+			previousActivityCounterId, periodLength);
+	}
+
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter addActivityCounter(
