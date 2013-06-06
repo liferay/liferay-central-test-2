@@ -410,11 +410,7 @@ public class SocialActivityCounterLocalServiceImpl
 	 *         <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
 	 *         <code>TYPE_CREATOR</code> defined in {@link
 	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
-	 * @param  currentValue the current value of the counter (optionally
-	 *         <code>0</code>)
 	 * @param  totalValue the counter's total value (optionally <code>0</code>)
-	 * @param  startPeriod the counter's start period
-	 * @param  endPeriod the counter's end period
 	 * @param  previousActivityCounterId the primary key of the activity counter
 	 *         for the previous time period (optionally <code>0</code>, if this
 	 *         is the first)
