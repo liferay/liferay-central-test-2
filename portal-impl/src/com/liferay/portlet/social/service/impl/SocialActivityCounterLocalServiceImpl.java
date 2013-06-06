@@ -109,51 +109,14 @@ public class SocialActivityCounterLocalServiceImpl
 	 */
 	@Override
 	public SocialActivityCounter addActivityCounter(
-			final long groupId, final long classNameId, final long classPK,
-			final String name, final int ownerType, final int currentValue,
-			final int totalValue, final int startPeriod, final int endPeriod,
-			final long previousActivityCounterId, final int periodLength)
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int currentValue, int totalValue, int startPeriod,
+			int endPeriod, long previousActivityCounterId, int periodLength)
 		throws PortalException, SystemException {
 
-		String lockKey = getLockKey(
-			groupId, classNameId, classPK, name, ownerType);
-
-		LockProtectedAction<SocialActivityCounter> lockProtectedAction =
-			new LockProtectedAction<SocialActivityCounter>(
-				SocialActivityCounter.class, lockKey,
-				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT,
-				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY) {
-
-			@Override
-			protected SocialActivityCounter performProtectedAction()
-				throws PortalException, SystemException {
-
-				DB db = DBFactoryUtil.getDB();
-
-				String dbType = db.getType();
-
-				if (dbType.equals(DB.TYPE_HYPERSONIC)) {
-
-					// LPS-25408
-
-					return addActivityCounter(
-						groupId, classNameId, classPK, name, ownerType,
-						totalValue, previousActivityCounterId, periodLength);
-				}
-				else {
-					return
-						socialActivityCounterLocalService.addActivityCounter(
-							groupId, classNameId, classPK, name, ownerType,
-							totalValue, previousActivityCounterId,
-							periodLength);
-				}
-			}
-
-		};
-
-		lockProtectedAction.performAction();
-
-		return lockProtectedAction.getReturnValue();
+		return createActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, totalValue,
+			previousActivityCounterId, periodLength);
 	}
 
 	/**
@@ -1208,6 +1171,53 @@ public class SocialActivityCounterLocalServiceImpl
 				SocialActivityCounterFinder.class.getName());
 
 		portalCache.removeAll();
+	}
+
+	protected SocialActivityCounter createActivityCounter(
+			final long groupId, final long classNameId, final long classPK,
+			final String name, final int ownerType, final int totalValue,
+			final long previousActivityCounterId, final int periodLength)
+		throws PortalException, SystemException {
+
+		String lockKey = getLockKey(
+			groupId, classNameId, classPK, name, ownerType);
+
+		LockProtectedAction<SocialActivityCounter> lockProtectedAction =
+			new LockProtectedAction<SocialActivityCounter>(
+				SocialActivityCounter.class, lockKey,
+				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT,
+				PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY) {
+
+			@Override
+			protected SocialActivityCounter performProtectedAction()
+				throws PortalException, SystemException {
+
+				DB db = DBFactoryUtil.getDB();
+
+				String dbType = db.getType();
+
+				if (dbType.equals(DB.TYPE_HYPERSONIC)) {
+
+					// LPS-25408
+
+					return addActivityCounter(
+						groupId, classNameId, classPK, name, ownerType,
+						totalValue, previousActivityCounterId, periodLength);
+				}
+				else {
+					return
+						socialActivityCounterLocalService.addActivityCounter(
+							groupId, classNameId, classPK, name, ownerType,
+							totalValue, previousActivityCounterId,
+							periodLength);
+				}
+			}
+
+		};
+
+		lockProtectedAction.performAction();
+
+		return lockProtectedAction.getReturnValue();
 	}
 
 	protected String getLockKey(
