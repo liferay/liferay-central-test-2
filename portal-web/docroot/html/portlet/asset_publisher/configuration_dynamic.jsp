@@ -1,4 +1,3 @@
-
 <%--
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
@@ -240,22 +239,22 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 						<liferay-ui:asset-tags-error />
 
 						<%
-						DuplicateAssetQueryRuleException daqre = null;
+						DuplicateQueryRuleException dqre = null;
 						%>
 
-						<liferay-ui:error exception="<%= DuplicateAssetQueryRuleException.class %>">
+						<liferay-ui:error exception="<%= DuplicateQueryRuleException.class %>">
 
 							<%
-							daqre = (DuplicateAssetQueryRuleException)errorException;
+							dqre = (DuplicateQueryRuleException)errorException;
 
-							String name = daqre.getName();
+							String name = dqre.getName();
 							%>
 
-							<liferay-util:buffer var="ruleType">
-								<em>(<liferay-ui:message key='<%= daqre.isContains() ? "contains" : "does-not-contain" %>' /> - <liferay-ui:message key='<%= daqre.isAndOperator() ? "all" : "any" %>' /> - <liferay-ui:message key='<%= name.equals(("assetTags")) ? "tags" : "categories" %>' />)</em>
+							<liferay-util:buffer var="messageArgument">
+								<em>(<liferay-ui:message key='<%= dqre.isContains() ? "contains" : "does-not-contain" %>' /> - <liferay-ui:message key='<%= dqre.isAndOperator() ? "all" : "any" %>' /> - <liferay-ui:message key='<%= name.equals(("assetTags")) ? "tags" : "categories" %>' />)</em>
 							</liferay-util:buffer>
 
-							<liferay-ui:message arguments="<%= ruleType %>" key="only-one-rule-with-the-combination-x-is-supported" translateArguments="<%= false %>" />
+							<liferay-ui:message arguments="<%= messageArgument %>" key="only-one-rule-with-the-combination-x-is-supported" translateArguments="<%= false %>" />
 						</liferay-ui:error>
 
 						<%
@@ -298,14 +297,14 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 
 								String cssClass = StringPool.BLANK;
 
-								if (daqre != null) {
+								if (dqre != null) {
 									boolean queryContains = PrefsParamUtil.getBoolean(preferences, request, "queryContains" + queryLogicIndex, true);
 									boolean queryAndOperator = PrefsParamUtil.getBoolean(preferences, request, "queryAndOperator" + queryLogicIndex);
 									String queryName = PrefsParamUtil.getString(preferences, request, "queryName" + queryLogicIndex, "assetTags");
 
-									String exceptionQueryName = daqre.getName();
+									String dqreQueryName = dqre.getName();
 
-									if ((daqre.getAndOperator() == queryAndOperator) && (daqre.getContains() == queryContains) && exceptionQueryName.equals(queryName)) {
+									if ((dqre.isContains() == queryContains) && (dqre.isAndOperator() == queryAndOperator) && dqreQueryName.equals(queryName)) {
 										cssClass = "asset-query-rule-error";
 									}
 								}

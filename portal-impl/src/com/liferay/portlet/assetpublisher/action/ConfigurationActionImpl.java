@@ -44,7 +44,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.AssetTagException;
-import com.liferay.portlet.asset.DuplicateAssetQueryRuleException;
+import com.liferay.portlet.asset.DuplicateQueryRuleException;
 import com.liferay.portlet.asset.model.AssetQueryRule;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -116,7 +116,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			}
 			catch (Exception e) {
 				if (e instanceof AssetTagException ||
-					e instanceof DuplicateAssetQueryRuleException) {
+					e instanceof DuplicateQueryRuleException) {
 
 					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
@@ -701,7 +701,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		}
 
 		if (queryRules.contains(queryRule)) {
-			throw new DuplicateAssetQueryRuleException(
+			throw new DuplicateQueryRuleException(
 				queryRule.isContains(), queryRule.isAndOperator(),
 				queryRule.getName());
 		}

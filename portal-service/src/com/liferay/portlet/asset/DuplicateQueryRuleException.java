@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Roberto Díaz
  */
-public class DuplicateAssetQueryRuleException extends PortalException {
+public class DuplicateQueryRuleException extends PortalException {
 
-	public DuplicateAssetQueryRuleException(
+	public DuplicateQueryRuleException(
 		boolean contains, boolean andOperator, String name) {
 
 		super();
