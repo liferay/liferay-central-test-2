@@ -6,12 +6,11 @@ import java.util.Arrays;
 
 /**
  * @author ${author}
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */
-
 public class ${entity.name}${sessionTypeName}ServiceClpInvoker {
 
 	public ${entity.name}${sessionTypeName}ServiceClpInvoker() {

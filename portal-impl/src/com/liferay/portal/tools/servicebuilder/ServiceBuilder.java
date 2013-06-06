@@ -4948,18 +4948,14 @@ public class ServiceBuilder {
 	private Map<String, Object> _putDeprecatedKeys(
 		Map<String, Object> context, JavaClass javaClass) {
 
-		boolean isDeprecated = false;
-		String deprecatedComment = StringPool.BLANK;
+		context.put("classDeprecated", false);
 
 		DocletTag tag = javaClass.getTagByName("deprecated");
 
 		if (tag != null) {
-			isDeprecated = true;
-			deprecatedComment = tag.getValue();
+			context.put("classDeprecated", true);
+			context.put("classDeprecatedComment", tag.getValue());
 		}
-
-		context.put("isDeprecated", isDeprecated);
-		context.put("deprecatedComment", deprecatedComment);
 
 		return context;
 	}

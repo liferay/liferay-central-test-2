@@ -76,8 +76,8 @@ import javax.sql.DataSource;
  * @author ${author}
  * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
  * @see ${packagePath}.service.${entity.name}LocalServiceUtil
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */
@@ -99,8 +99,8 @@ import javax.sql.DataSource;
  * @author ${author}
  * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
  * @see ${packagePath}.service.${entity.name}ServiceUtil
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */

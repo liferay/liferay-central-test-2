@@ -7,8 +7,8 @@ import com.liferay.portal.service.ServiceWrapper;
  *
  * @author ${author}
  * @see ${entity.name}${sessionTypeName}Service
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */

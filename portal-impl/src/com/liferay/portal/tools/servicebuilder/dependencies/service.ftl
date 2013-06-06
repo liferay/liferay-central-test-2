@@ -23,8 +23,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * @see ${entity.name}LocalServiceUtil
  * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */
@@ -38,8 +38,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * @see ${entity.name}ServiceUtil
  * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */

@@ -18,8 +18,8 @@ import com.liferay.portal.service.Invokable${sessionTypeName}Service;
  * @see ${entity.name}LocalService
  * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */
@@ -36,8 +36,8 @@ import com.liferay.portal.service.Invokable${sessionTypeName}Service;
  * @see ${entity.name}Service
  * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
-<#if isDeprecated>
- * @deprecated ${deprecatedComment}
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
 </#if>
  * @generated
  */
