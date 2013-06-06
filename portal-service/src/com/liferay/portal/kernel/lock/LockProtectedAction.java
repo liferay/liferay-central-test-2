@@ -29,9 +29,9 @@ import java.util.Date;
 public class LockProtectedAction<T> {
 
 	public LockProtectedAction(
-		String className, String lockKey, long timeout, long retryDelay) {
+		Class<?> clazz, String lockKey, long timeout, long retryDelay) {
 
-		_className = className;
+		_className = clazz.getName();
 		_lockKey = lockKey;
 		_timeout = timeout;
 		_retryDelay = retryDelay;
