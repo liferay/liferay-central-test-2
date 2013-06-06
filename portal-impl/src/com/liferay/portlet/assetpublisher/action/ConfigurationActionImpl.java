@@ -378,6 +378,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			actionRequest, "queryContains" + index);
 		boolean andOperator = ParamUtil.getBoolean(
 			actionRequest, "queryAndOperator" + index);
+
 		String name = ParamUtil.getString(actionRequest, "queryName" + index);
 
 		String[] values = null;
@@ -391,7 +392,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				ParamUtil.getString(actionRequest, "queryCategoryIds" + index));
 		}
 
-		return new AssetQueryRule(name, values, contains, andOperator);
+		return new AssetQueryRule(contains, andOperator, name, values);
 	}
 
 	protected boolean getSubtypesFieldsFilterEnabled(
@@ -613,26 +614,25 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		int i = 0;
 
-		List<AssetQueryRule> assetQueryRules = new ArrayList<AssetQueryRule>();
+		List<AssetQueryRule> queryRules = new ArrayList<AssetQueryRule>();
 
 		for (int queryRulesIndex : queryRulesIndexes) {
-			AssetQueryRule assetQueryRule = getQueryRule(
+			AssetQueryRule queryRule = getQueryRule(
 				actionRequest, queryRulesIndex);
 
-			validateQueryRule(userId, groupId, assetQueryRules, assetQueryRule);
+			validateQueryRule(userId, groupId, queryRules, queryRule);
 
-			assetQueryRules.add(assetQueryRule);
+			queryRules.add(queryRule);
 
 			setPreference(
 				actionRequest, "queryContains" + i,
-				String.valueOf(assetQueryRule.isContains()));
+				String.valueOf(queryRule.isContains()));
 			setPreference(
 				actionRequest, "queryAndOperator" + i,
-				String.valueOf(assetQueryRule.isAndOperator()));
+				String.valueOf(queryRule.isAndOperator()));
+			setPreference(actionRequest, "queryName" + i, queryRule.getName());
 			setPreference(
-				actionRequest, "queryName" + i, assetQueryRule.getName());
-			setPreference(
-				actionRequest, "queryValues" + i, assetQueryRule.getValues());
+				actionRequest, "queryValues" + i, queryRule.getValues());
 
 			i++;
 		}
@@ -689,26 +689,26 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	}
 
 	protected void validateQueryRule(
-			long userId, long groupId, List<AssetQueryRule> assetQueryRules,
-			AssetQueryRule assetQueryRule)
+			long userId, long groupId, List<AssetQueryRule> queryRules,
+			AssetQueryRule queryRule)
 		throws Exception {
 
-		String name = assetQueryRule.getName();
+		String name = queryRule.getName();
 
 		if (name.equals("assetTags")) {
 			AssetTagLocalServiceUtil.checkTags(
-				userId, groupId, assetQueryRule.getValues());
+				userId, groupId, queryRule.getValues());
 		}
 
-		if (assetQueryRules.isEmpty()) {
+		if (queryRules.isEmpty()) {
 			return;
 		}
 
-		for (AssetQueryRule addedAssetQueryRule : assetQueryRules) {
-			if (addedAssetQueryRule.equals(assetQueryRule)) {
+		for (AssetQueryRule addedAssetQueryRule : queryRules) {
+			if (addedAssetQueryRule.equals(queryRule)) {
 				throw new DuplicateAssetQueryRuleException(
-					assetQueryRule.isAndOperator(), assetQueryRule.isContains(),
-					assetQueryRule.getName());
+					queryRule.isAndOperator(), queryRule.isContains(),
+					queryRule.getName());
 			}
 		}
 	}

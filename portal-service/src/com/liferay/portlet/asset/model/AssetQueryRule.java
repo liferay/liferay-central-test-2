@@ -22,18 +22,18 @@ import com.liferay.portal.kernel.util.Validator;
 public class AssetQueryRule {
 
 	public AssetQueryRule(
-		String name, String[] values, boolean contains, boolean andOperator) {
+		boolean contains, boolean andOperator, String name, String[] values) {
 
-		_name = name;
-		_values = values;
 		_contains = contains;
 		_andOperator = andOperator;
+		_name = name;
+		_values = values;
 	}
 
 	public boolean equals(AssetQueryRule assetQueryRule) {
-		if (Validator.equals(_name, assetQueryRule._name) &&
-			Validator.equals(_contains, assetQueryRule._contains) &&
-			Validator.equals(_andOperator, assetQueryRule._andOperator)) {
+		if (Validator.equals(_contains, assetQueryRule._contains) &&
+			Validator.equals(_andOperator, assetQueryRule._andOperator) &&
+			Validator.equals(_name, assetQueryRule._name)) {
 
 			return true;
 		}
