@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.lock;
+package com.liferay.portal.kernel.lock;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
