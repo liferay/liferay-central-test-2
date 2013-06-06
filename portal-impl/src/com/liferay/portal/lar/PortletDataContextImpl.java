@@ -1964,6 +1964,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 			StagedModel stagedModel = (StagedModel)classedModel;
 
 			referenceElement.addAttribute("uuid", stagedModel.getUuid());
+			referenceElement.addAttribute(
+				"company-id", String.valueOf(stagedModel.getCompanyId()));
 		}
 
 		return referenceElement;
