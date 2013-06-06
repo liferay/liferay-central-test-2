@@ -1034,12 +1034,12 @@
 		<property name="sites" ref="com.liferay.portlet.sites.util.Sites" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.permission.SocialActivityPermissionUtil" class="com.liferay.portlet.social.service.permission.SocialActivityPermissionUtil">
-		<property name="SocialActivityPermission">
+		<property name="socialActivityPermission">
 			<bean class="com.liferay.portlet.social.service.permission.SocialActivityPermissionImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.permission.SocialRequestPermissionUtil" class="com.liferay.portlet.social.service.permission.SocialRequestPermissionUtil">
-		<property name="SocialRequestPermission">
+		<property name="socialRequestPermission">
 			<bean class="com.liferay.portlet.social.service.permission.SocialRequestPermissionImpl" />
 		</property>
 	</bean>
