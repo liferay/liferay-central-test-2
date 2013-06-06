@@ -52,11 +52,11 @@ if (Validator.isNotNull(languageId)) {
 	mainLanguageId = languageId;
 }
 
-String mainLanguageValue = LocalizationUtil.getLocalization(xml, mainLanguageId, false);
-
 Locale mainLocale = LocaleUtil.fromLanguageId(mainLanguageId);
 
 String mainLanguageDir = LanguageUtil.get(mainLocale, "lang.dir");
+
+String mainLanguageValue = LocalizationUtil.getLocalization(xml, mainLanguageId, false);
 
 if (!ignoreRequestValue) {
 	mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + mainLanguageId, mainLanguageValue);
