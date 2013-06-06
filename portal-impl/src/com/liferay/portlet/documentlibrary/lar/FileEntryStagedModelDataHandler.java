@@ -612,9 +612,7 @@ public class FileEntryStagedModelDataHandler
 	}
 
 	@Override
-	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
-
+	protected boolean validateMissingReference(String uuid, long groupId) {
 		try {
 			DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
 				uuid, groupId);

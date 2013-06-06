@@ -742,14 +742,6 @@ public class Entity {
 		}
 	}
 
-	public boolean isStagedAuditedModel() {
-		if (isAuditedModel() && isStagedModel()) {
-			return true;
-		}
-
-		return false;
-	}
-
 	public boolean isStagedGroupedModel() {
 		if (isGroupedModel() && isStagedModel()) {
 			return true;
@@ -759,10 +751,7 @@ public class Entity {
 	}
 
 	public boolean isStagedModel() {
-		if (hasUuid() && hasColumn("companyId") &&
-			hasColumn("createDate", "Date") &&
-			hasColumn("modifiedDate", "Date")) {
-
+		if (hasUuid() && isAuditedModel()) {
 			return true;
 		}
 

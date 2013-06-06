@@ -714,9 +714,7 @@ public class JournalArticleStagedModelDataHandler
 	}
 
 	@Override
-	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
-
+	protected boolean validateMissingReference(String uuid, long groupId) {
 		try {
 			JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
 				uuid, groupId);
