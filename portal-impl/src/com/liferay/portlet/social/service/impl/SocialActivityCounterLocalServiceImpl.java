@@ -136,17 +136,16 @@ public class SocialActivityCounterLocalServiceImpl
 
 					// LPS-25408
 
-					return createActivityCounter(
+					return addActivityCounter(
 						groupId, classNameId, classPK, name, ownerType,
-						currentValue, totalValue, startPeriod, endPeriod,
-						previousActivityCounterId, periodLength);
+						totalValue, previousActivityCounterId, periodLength);
 				}
 				else {
 					return
-						socialActivityCounterLocalService.createActivityCounter(
+						socialActivityCounterLocalService.addActivityCounter(
 							groupId, classNameId, classPK, name, ownerType,
-							currentValue, totalValue, startPeriod, endPeriod,
-							previousActivityCounterId, periodLength);
+							totalValue, previousActivityCounterId,
+							periodLength);
 				}
 			}
 
@@ -324,8 +323,8 @@ public class SocialActivityCounterLocalServiceImpl
 	 * @throws     PortalException if the group or a previous activity counter
 	 *             could not be found
 	 * @throws     SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #createActivityCounter(long,
-	 *             long, long, String, int, int, int, int, int, long, int)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addActivityCounter(long,
+	 *             long, long, String, int, int, long, int)}
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -335,9 +334,8 @@ public class SocialActivityCounterLocalServiceImpl
 			int endPeriod)
 		throws PortalException, SystemException {
 
-		return createActivityCounter(
-			groupId, classNameId, classPK, name, ownerType, currentValue,
-			totalValue, startPeriod, endPeriod, 0, 0);
+		return addActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, totalValue, 0, 0);
 	}
 
 	/**
@@ -379,10 +377,10 @@ public class SocialActivityCounterLocalServiceImpl
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public SocialActivityCounter createActivityCounter(
+	public SocialActivityCounter addActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
-			int ownerType, int currentValue, int totalValue, int startPeriod,
-			int endPeriod, long previousActivityCounterId, int periodLength)
+			int ownerType, int totalValue, long previousActivityCounterId,
+			int periodLength)
 		throws PortalException, SystemException {
 
 		SocialActivityCounter activityCounter = null;
@@ -406,7 +404,8 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		activityCounter = socialActivityCounterPersistence.fetchByG_C_C_N_O_E(
-			groupId, classNameId, classPK, name, ownerType, endPeriod, false);
+			groupId, classNameId, classPK, name, ownerType,
+			SocialActivityCounterConstants.END_PERIOD_UNDEFINED, false);
 
 		if (activityCounter != null) {
 			return activityCounter;
@@ -425,10 +424,21 @@ public class SocialActivityCounterLocalServiceImpl
 		activityCounter.setClassPK(classPK);
 		activityCounter.setName(name);
 		activityCounter.setOwnerType(ownerType);
-		activityCounter.setCurrentValue(currentValue);
 		activityCounter.setTotalValue(totalValue);
-		activityCounter.setStartPeriod(startPeriod);
-		activityCounter.setEndPeriod(endPeriod);
+
+		if (periodLength ==
+				SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM) {
+
+			activityCounter.setStartPeriod(
+				SocialCounterPeriodUtil.getStartPeriod());
+		}
+		else {
+			activityCounter.setStartPeriod(
+				SocialCounterPeriodUtil.getActivityDay());
+		}
+
+		activityCounter.setEndPeriod(
+			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 		activityCounter.setActive(true);
 
 		socialActivityCounterPersistence.update(activityCounter);
