@@ -91,7 +91,7 @@ public interface ${entity.name}Model extends
 	<#if !entity.isStagedAuditedModel() && !entity.isStagedGroupedModel() && entity.isStagedModel()>
 		, StagedModel
 
-		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "userUuid", "uuid"]>
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "uuid"]>
 	</#if>
 
 	<#if entity.isWorkflowEnabled()>
