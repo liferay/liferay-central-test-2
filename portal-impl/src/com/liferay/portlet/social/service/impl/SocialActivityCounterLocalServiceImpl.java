@@ -391,6 +391,44 @@ public class SocialActivityCounterLocalServiceImpl
 			previousActivityCounterId, periodLength);
 	}
 
+	/**
+	 * Adds an activity counter specifying a previous activity and period
+	 * length.
+	 *
+	 * <p>
+	 * This method uses the lock service to guard against multiple threads
+	 * trying to insert the same counter because this service is called
+	 * asynchronously from the social activity service.
+	 * </p>
+	 *
+	 * @param  groupId the primary key of the group
+	 * @param  classNameId the primary key of the entity's class this counter
+	 *         belongs to
+	 * @param  classPK the primary key of the entity this counter belongs to
+	 * @param  name the counter name
+	 * @param  ownerType the counter's owner type. Acceptable values are
+	 *         <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
+	 *         <code>TYPE_CREATOR</code> defined in {@link
+	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
+	 * @param  currentValue the current value of the counter (optionally
+	 *         <code>0</code>)
+	 * @param  totalValue the counter's total value (optionally <code>0</code>)
+	 * @param  startPeriod the counter's start period
+	 * @param  endPeriod the counter's end period
+	 * @param  previousActivityCounterId the primary key of the activity counter
+	 *         for the previous time period (optionally <code>0</code>, if this
+	 *         is the first)
+	 * @param  periodLength the period length in days,
+	 *         <code>PERIOD_LENGTH_INFINITE</code> for never ending counters or
+	 *         <code>PERIOD_LENGTH_SYSTEM</code> for the period length defined
+	 *         in <code>portal-ext.properties</code>. For more information see
+	 *         {@link
+	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
+	 * @return the added activity counter
+	 * @throws PortalException if the group or the previous activity counter
+	 *         could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter addActivityCounter(
