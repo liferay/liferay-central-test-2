@@ -222,7 +222,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 				if (like && (query instanceof TermQuery)) {
 
 					// LUCENE-89
+
 					TermQuery termQuery = (TermQuery)query;
+
 					Term term = termQuery.getTerm();
 
 					value = term.text();
