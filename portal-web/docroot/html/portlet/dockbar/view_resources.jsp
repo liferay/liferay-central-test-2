@@ -54,7 +54,7 @@ boolean viewPreview = ParamUtil.getBoolean(request, "viewPreview");
 				<%
 				long groupId = scopeGroupId;
 
-				long[] groupIds = new long[]{scopeGroupId};
+				long[] groupIds = new long[] {scopeGroupId};
 
 				boolean defaultAssetPublisher = false;
 

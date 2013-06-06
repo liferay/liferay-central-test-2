@@ -28,14 +28,14 @@
 
 <aui:form action="<%= editLayoutActionURL %>" enctype="multipart/form-data" method="post" name="addPageFm" onSubmit="event.preventDefault()">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input name="explicitCreation" type="hidden" value="<%= true %>" />
+	<aui:input name="redirect" type="hidden" value="<%= editLayoutRenderURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= scopeGroupId %>" />
-	<aui:input name="layoutPrototypeId" type="hidden" value="" />
 	<aui:input name="privateLayout" type="hidden" value="<%= layout.isPrivateLayout() %>" />
 	<aui:input name="parentPlid" type="hidden" value="<%= layout.getParentPlid() %>" />
 	<aui:input name="parentLayoutId" type="hidden" value="<%= layout.getParentLayoutId() %>" />
-	<aui:input name="redirect" type="hidden" value="<%= editLayoutRenderURL.toString() %>" />
 	<aui:input name="type" type="hidden" value="portlet" />
+	<aui:input name="layoutPrototypeId" type="hidden" value="" />
+	<aui:input name="explicitCreation" type="hidden" value="<%= true %>" />
 
 	<aui:fieldset>
 		<div class="row-fluid">
@@ -161,7 +161,7 @@ Layout addedLayout = (Layout)SessionMessages.get(renderRequest, portletDisplay.g
 		var navigation = A.one('#banner .nav');
 
 		if (navigation) {
-			var TPL_TAB_LINK = '<li class="lfr-nav-item lfr-nav-deletable lfr-nav-sortable lfr-nav-updateable yui3-dd-drop" aria-selected="true"> <a class="" href="{url}" tabindex="-1"><span> {pageTitle} </span> </a> </li>';
+			var TPL_TAB_LINK = '<li class="lfr-nav-item lfr-nav-deletable lfr-nav-sortable lfr-nav-updateable yui3-dd-drop" aria-selected="true"><aui:spacer /><a class="" href="{url}" tabindex="-1"><span> {pageTitle} </span><aui:spacer /></a><aui:spacer /></li>';
 
 			var tabHtml = A.Lang.sub(
 				TPL_TAB_LINK,

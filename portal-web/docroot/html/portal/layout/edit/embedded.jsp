@@ -17,8 +17,8 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-String description = StringPool.BLANK;
 String url = StringPool.BLANK;
+String description = StringPool.BLANK;
 
 if (selLayout != null) {
 	UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();

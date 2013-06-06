@@ -925,7 +925,7 @@ public class EditLayoutsAction extends PortletAction {
 			boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
 				uploadPortletRequest, "inheritFromParentLayoutId");
 
-			UnicodeProperties formTypeSettingsProperties =
+			UnicodeProperties typeSettingsProperties =
 				PropertiesParamUtil.getProperties(
 					actionRequest, "TypeSettingsProperties--");
 
@@ -970,8 +970,8 @@ public class EditLayoutsAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId, nameMap, titleMap,
 					descriptionMap, keywordsMap, robotsMap,
 					LayoutConstants.TYPE_PORTLET,
-					formTypeSettingsProperties.toString(), hidden,
-					friendlyURLMap, serviceContext);
+					typeSettingsProperties.toString(), hidden, friendlyURLMap,
+					serviceContext);
 			}
 			else {
 				long copyLayoutId = ParamUtil.getLong(
@@ -985,7 +985,7 @@ public class EditLayoutsAction extends PortletAction {
 							groupId, privateLayout, copyLayoutId);
 
 						if (copyLayout.isTypePortlet()) {
-							formTypeSettingsProperties =
+							typeSettingsProperties =
 								copyLayout.getTypeSettingsProperties();
 						}
 					}
@@ -996,8 +996,8 @@ public class EditLayoutsAction extends PortletAction {
 				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, nameMap, titleMap,
 					descriptionMap, keywordsMap, robotsMap, type,
-					formTypeSettingsProperties.toString(), hidden,
-					friendlyURLMap, serviceContext);
+					typeSettingsProperties.toString(), hidden, friendlyURLMap,
+					serviceContext);
 
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
