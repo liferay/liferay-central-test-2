@@ -25,7 +25,7 @@
 		/>
 	</#list>
 
-	<#list dataFactory.assetTagStats as tagStats>
-		insert into AssetTagStats values (${tagStats.tagStatsId}, ${tagStats.tagId}, ${tagStats.classNameId}, ${tagStats.assetCount});
+	<#list dataFactory.assetTagStatsList as assetTagStats>
+		insert into AssetTagStats values (${assetTagStats.tagStatsId}, ${assetTagStats.tagId}, ${assetTagStats.classNameId}, ${assetTagStats.assetCount});
 	</#list>
 </#if>

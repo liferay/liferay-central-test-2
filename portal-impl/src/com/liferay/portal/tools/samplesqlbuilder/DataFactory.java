@@ -174,8 +174,8 @@ public class DataFactory {
 
 	public DataFactory(
 			String baseDir, int maxAssetCategoryCount,
-			int maxAssetEntryAssetCategoryAssociationCount,
-			int maxAssetEntryAssetTagAssociationCount, int maxAssetTagCount,
+			int maxAssetEntryToAssetCategoryCount,
+			int maxAssetEntryToAssetTagCount, int maxAssetTagCount,
 			int maxAssetVocabularyCount, int maxBlogsEntryCount,
 			int maxDDLCustomFieldCount, int maxGroupsCount,
 			int maxJournalArticleCount, int maxJournalArticleSize,
@@ -185,10 +185,8 @@ public class DataFactory {
 
 		_baseDir = baseDir;
 		_maxAssetCategoryCount = maxAssetCategoryCount;
-		_maxAssetEntryAssetCategoryAssociationCount =
-			maxAssetEntryAssetCategoryAssociationCount;
-		_maxAssetEntryAssetTagAssociationCount =
-			maxAssetEntryAssetTagAssociationCount;
+		_maxAssetEntryToAssetCategoryCount = maxAssetEntryToAssetCategoryCount;
+		_maxAssetEntryToAssetTagCount = maxAssetEntryToAssetTagCount;
 		_maxAssetTagCount = maxAssetTagCount;
 		_maxAssetVocabularyCount = maxAssetVocabularyCount;
 		_maxBlogsEntryCount = maxBlogsEntryCount;
@@ -271,17 +269,16 @@ public class DataFactory {
 			_assetCategoryCounters.put(groupId, counter);
 		}
 
-		int assetCategoryCountPerGroup =
+		int maxAssetCategoryCount =
 			_maxAssetCategoryCount * _maxAssetVocabularyCount;
 
-		int startIndex = assetCategoryCountPerGroup * ((int)groupId - 1);
+		int startIndex = maxAssetCategoryCount * ((int)groupId - 1);
 
 		List<Long> assetCategoryIds = new ArrayList<Long>(
-			_maxAssetEntryAssetCategoryAssociationCount);
+			_maxAssetEntryToAssetCategoryCount);
 
-		for (int i = 0; i < _maxAssetEntryAssetCategoryAssociationCount; i++) {
-			int index =
-				startIndex + (int)counter.get() % assetCategoryCountPerGroup;
+		for (int i = 0; i < _maxAssetEntryToAssetCategoryCount; i++) {
+			int index = startIndex + (int)counter.get() % maxAssetCategoryCount;
 
 			AssetCategory assetCategory = _assetCategories.get(index);
 
@@ -303,9 +300,9 @@ public class DataFactory {
 		int startIndex = _maxAssetTagCount * ((int)groupId - 1);
 
 		List<Long> assetTagIds = new ArrayList<Long>(
-			_maxAssetEntryAssetTagAssociationCount);
+			_maxAssetEntryToAssetTagCount);
 
-		for (int i = 0; i < _maxAssetEntryAssetTagAssociationCount; i++) {
+		for (int i = 0; i < _maxAssetEntryToAssetTagCount; i++) {
 			int index = startIndex + (int)counter.get() % _maxAssetTagCount;
 
 			AssetTag assetTag = _assetTags.get(index);
@@ -320,8 +317,8 @@ public class DataFactory {
 		return _assetTags;
 	}
 
-	public List<AssetTagStats> getAssetTagStats() {
-		return _assetTagStats;
+	public List<AssetTagStats> getAssetTagStatsList() {
+		return _assetTagStatsList;
 	}
 
 	public List<AssetVocabulary> getAssetVocabularies() {
@@ -487,18 +484,17 @@ public class DataFactory {
 
 				_assetVocabularies.add(assetVocabulary);
 
-				long vocabularyId = assetVocabulary.getVocabularyId();
-
 				for (int k = 0; k < _maxAssetCategoryCount; k++) {
 					sb.setIndex(0);
 
 					sb.append("TestCategory_");
-					sb.append(vocabularyId);
+					sb.append(assetVocabulary.getVocabularyId());
 					sb.append(StringPool.UNDERLINE);
 					sb.append(k);
 
 					AssetCategory assetCategory = newAssetCategory(
-						i, lastRightCategoryId, sb.toString(), vocabularyId);
+						i, lastRightCategoryId, sb.toString(),
+						assetVocabulary.getVocabularyId());
 
 					lastRightCategoryId += 2;
 
@@ -510,7 +506,8 @@ public class DataFactory {
 
 	public void initAssetTags() {
 		_assetTags = new ArrayList<AssetTag>(_maxAssetTagCount);
-		_assetTagStats = new ArrayList<AssetTagStats>(_maxAssetTagCount * 3);
+		_assetTagStatsList = new ArrayList<AssetTagStats>(
+			_maxAssetTagCount * 3);
 
 		for (int i = 1; i <= _maxGroupsCount; i++) {
 			for (int j = 0; j < _maxAssetTagCount; j++) {
@@ -531,19 +528,19 @@ public class DataFactory {
 					assetTag.getTagId(),
 					_classNamesMap.get(BlogsEntry.class.getName()));
 
-				_assetTagStats.add(assetTagStats);
-
-				assetTagStats = newAssetTagStats(
-					assetTag.getTagId(),
-					_classNamesMap.get(WikiPage.class.getName()));
-
-				_assetTagStats.add(assetTagStats);
+				_assetTagStatsList.add(assetTagStats);
 
 				assetTagStats = newAssetTagStats(
 					assetTag.getTagId(),
 					_classNamesMap.get(JournalArticle.class.getName()));
 
-				_assetTagStats.add(assetTagStats);
+				_assetTagStatsList.add(assetTagStats);
+
+				assetTagStats = newAssetTagStats(
+					assetTag.getTagId(),
+					_classNamesMap.get(WikiPage.class.getName()));
+
+				_assetTagStatsList.add(assetTagStats);
 			}
 		}
 	}
@@ -1897,6 +1894,7 @@ public class DataFactory {
 		sb.append("</Title></root>");
 
 		assetCategory.setTitle(sb.toString());
+
 		assetCategory.setVocabularyId(vocabularyId);
 
 		return assetCategory;
@@ -1965,6 +1963,7 @@ public class DataFactory {
 		sb.append("</Title></root>");
 
 		assetVocabulary.setTitle(sb.toString());
+
 		assetVocabulary.setSettings(
 			"multiValued=true\\nselectedClassNameIds=0");
 
@@ -2312,7 +2311,7 @@ public class DataFactory {
 	private Map<Long, SimpleCounter> _assetTagCounters =
 		new HashMap<Long, SimpleCounter>();
 	private List<AssetTag> _assetTags;
-	private List<AssetTagStats> _assetTagStats;
+	private List<AssetTagStats> _assetTagStatsList;
 	private List<AssetVocabulary> _assetVocabularies;
 	private String _baseDir;
 	private List<ClassName> _classNames;
@@ -2339,8 +2338,8 @@ public class DataFactory {
 	private Map<Long, SimpleCounter> _layoutCounters =
 		new HashMap<Long, SimpleCounter>();
 	private int _maxAssetCategoryCount;
-	private int _maxAssetEntryAssetCategoryAssociationCount;
-	private int _maxAssetEntryAssetTagAssociationCount;
+	private int _maxAssetEntryToAssetCategoryCount;
+	private int _maxAssetEntryToAssetTagCount;
 	private int _maxAssetTagCount;
 	private int _maxAssetVocabularyCount;
 	private int _maxBlogsEntryCount;
