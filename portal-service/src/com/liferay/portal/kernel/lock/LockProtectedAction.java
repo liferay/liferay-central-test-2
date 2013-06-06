@@ -91,6 +91,7 @@ public class LockProtectedAction<T> {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	protected T performProtectedAction()
 		throws PortalException, SystemException {
 
