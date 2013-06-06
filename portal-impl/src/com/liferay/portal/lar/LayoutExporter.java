@@ -571,13 +571,6 @@ public class LayoutExporter {
 
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Export categories " +
-					(exportPortletDataAll || exportCategories ||
-						group.isCompany()));
-		}
-
 		exportAssetCategories(
 			portletDataContext, exportPortletDataAll, exportCategories,
 			group.isCompany());
@@ -635,6 +628,10 @@ public class LayoutExporter {
 		Element rootElement = document.addElement("categories-hierarchy");
 
 		if (exportPortletDataAll || exportCategories || isCompanyGroup) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Export categories");
+			}
+
 			Element assetVocabulariesElement = rootElement.addElement(
 				"vocabularies");
 
