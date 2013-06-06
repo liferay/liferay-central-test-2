@@ -186,5 +186,5 @@ Layout addedLayout = (Layout)SessionMessages.get(renderRequest, portletDisplay.g
 		}
 	);
 
-	A.one('#<portlet:namespace />addLayoutName').focus();
+	A.one('#<portlet:namespace />name').focus();
 </aui:script>
