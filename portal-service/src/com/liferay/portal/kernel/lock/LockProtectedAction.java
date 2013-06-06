@@ -78,7 +78,7 @@ public class LockProtectedAction<T> {
 					_className, _lockKey, lock.getOwner(), false);
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("Removed lock " + lock + " due to timeout.");
+					_log.warn("Removed lock " + lock + " due to timeout");
 				}
 			}
 			else {
