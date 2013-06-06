@@ -42,6 +42,7 @@ public interface StagedModel extends ClassedModel {
 	public void setModifiedDate(Date date);
 
 	public void setUserUuid(String userUuid);
+
 	public void setUuid(String uuid);
 
 }

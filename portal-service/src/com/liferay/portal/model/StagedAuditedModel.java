@@ -18,5 +18,4 @@ package com.liferay.portal.model;
  * @author Daniel Kocsis
  */
 public interface StagedAuditedModel extends AuditedModel, StagedModel {
-
 }
