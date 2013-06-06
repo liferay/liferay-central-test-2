@@ -252,7 +252,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 							%>
 
 							<liferay-util:buffer var="ruleType">
-								<em>(<liferay-ui:message key='<%= daqre.getContains() ? "contains" : "does-not-contain" %>' /> - <liferay-ui:message key='<%= daqre.getAndOperator() ? "all" : "any" %>' /> - <liferay-ui:message key='<%= name.equals(("assetTags")) ? "tags" : "categories" %>' />)</em>
+								<em>(<liferay-ui:message key='<%= daqre.isContains() ? "contains" : "does-not-contain" %>' /> - <liferay-ui:message key='<%= daqre.isAndOperator() ? "all" : "any" %>' /> - <liferay-ui:message key='<%= name.equals(("assetTags")) ? "tags" : "categories" %>' />)</em>
 							</liferay-util:buffer>
 
 							<liferay-ui:message arguments="<%= ruleType %>" key="only-one-rule-with-the-combination-x-is-supported" translateArguments="<%= false %>" />

@@ -700,16 +700,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				userId, groupId, queryRule.getValues());
 		}
 
-		if (queryRules.isEmpty()) {
-			return;
-		}
-
-		for (AssetQueryRule addedAssetQueryRule : queryRules) {
-			if (addedAssetQueryRule.equals(queryRule)) {
-				throw new DuplicateAssetQueryRuleException(
-					queryRule.isAndOperator(), queryRule.isContains(),
-					queryRule.getName());
-			}
+		if (queryRules.contains(queryRule)) {
+			throw new DuplicateAssetQueryRuleException(
+				queryRule.isContains(), queryRule.isAndOperator(),
+				queryRule.getName());
 		}
 	}
 

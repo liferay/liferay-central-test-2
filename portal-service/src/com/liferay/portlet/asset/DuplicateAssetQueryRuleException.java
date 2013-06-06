@@ -22,25 +22,25 @@ import com.liferay.portal.kernel.exception.PortalException;
 public class DuplicateAssetQueryRuleException extends PortalException {
 
 	public DuplicateAssetQueryRuleException(
-		boolean andOperator, boolean contains, String name) {
+		boolean contains, boolean andOperator, String name) {
 
 		super();
 
-		_andOperator = andOperator;
 		_contains = contains;
+		_andOperator = andOperator;
 		_name = name;
-	}
-
-	public boolean getAndOperator() {
-		return _andOperator;
-	}
-
-	public boolean getContains() {
-		return _contains;
 	}
 
 	public String getName() {
 		return _name;
+	}
+
+	public boolean isAndOperator() {
+		return _andOperator;
+	}
+
+	public boolean isContains() {
+		return _contains;
 	}
 
 	private boolean _andOperator;
