@@ -34,13 +34,14 @@ if ((group != null) && !group.isRoot()) {
 
 	parentGroupName = HtmlUtil.escape(parentGroup.getDescriptiveName());
 }
-
-if (group != null) {
-	SitesUtil.addPortletBreadcrumbEntries(group, request, renderResponse);
-}
 %>
 
 <c:if test="<%= group != null %>">
+
+	<%
+	SitesUtil.addPortletBreadcrumbEntries(group, request, renderResponse);
+	%>
+
 	<liferay-util:include page="/html/portlet/sites_admin/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "browse" %>' />
 	</liferay-util:include>
