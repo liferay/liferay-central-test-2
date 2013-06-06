@@ -1857,9 +1857,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		// Asset
 
-		boolean portletDataAll = MapUtil.getBoolean(
-			getParameterMap(), PortletDataHandlerKeys.PORTLET_DATA_ALL);
-
 		if (isResourceMain(classedModel)) {
 			long[] assetCategoryIds = getAssetCategoryIds(clazz, classPK);
 
