@@ -374,13 +374,13 @@ public class SocialActivityCounterLocalServiceImpl
 		if (assetActivitiesCounter != null) {
 			incrementActivityCounter(
 				assetActivitiesCounter,
-				SocialActivityCounterDefinition.ASSET_ACTIVITIES);
+				_assetActivitiesActivityCounterDefinition);
 		}
 
 		if (userActivitiesCounter != null) {
 			incrementActivityCounter(
 				userActivitiesCounter,
-				SocialActivityCounterDefinition.USER_ACTIVITIES);
+				_userActivitiesActivityCounterDefinition);
 		}
 
 		for (SocialAchievement achievement :
@@ -1018,10 +1018,10 @@ public class SocialActivityCounterLocalServiceImpl
 
 		SocialActivityCounter activityCounter = getActivityCounter(
 			groupId, user, new SocialActivityImpl(),
-			SocialActivityCounterDefinition.USER_ACHIEVEMENTS);
+			_userAchievementsActivityCounterDefinition);
 
 		incrementActivityCounter(
-			activityCounter, SocialActivityCounterDefinition.USER_ACHIEVEMENTS);
+			activityCounter, _userAchievementsActivityCounterDefinition);
 	}
 
 	protected boolean addActivityCounter(
@@ -1318,7 +1318,7 @@ public class SocialActivityCounterLocalServiceImpl
 
 		return getActivityCounter(
 			activity.getGroupId(), user, activity,
-			SocialActivityCounterDefinition.ASSET_ACTIVITIES);
+			_assetActivitiesActivityCounterDefinition);
 	}
 
 	protected long getClassNameId(AssetEntry assetEntry, int ownerType) {
@@ -1362,7 +1362,7 @@ public class SocialActivityCounterLocalServiceImpl
 
 		return getActivityCounter(
 			activity.getGroupId(), user, activity,
-			SocialActivityCounterDefinition.USER_ACTIVITIES);
+			_userActivitiesActivityCounterDefinition);
 	}
 
 	protected void incrementActivityCounter(
@@ -1381,5 +1381,21 @@ public class SocialActivityCounterLocalServiceImpl
 
 		socialActivityCounterPersistence.clearCache(activityCounter);
 	}
+
+	private SocialActivityCounterDefinition
+		_assetActivitiesActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_ASSET_ACTIVITIES,
+				SocialActivityCounterConstants.TYPE_ASSET);
+	private SocialActivityCounterDefinition
+		_userAchievementsActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_USER_ACHIEVEMENTS,
+				SocialActivityCounterConstants.TYPE_ACTOR);
+	private SocialActivityCounterDefinition
+		_userActivitiesActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_USER_ACTIVITIES,
+				SocialActivityCounterConstants.TYPE_ACTOR);
 
 }
