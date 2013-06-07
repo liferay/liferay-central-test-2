@@ -35,8 +35,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
 
-//pageContext.setAttribute("portletURL", portletURL);
-
 String portletURLString = portletURL.toString();
 
 request.setAttribute("view.jsp-usersListView", usersListView);
