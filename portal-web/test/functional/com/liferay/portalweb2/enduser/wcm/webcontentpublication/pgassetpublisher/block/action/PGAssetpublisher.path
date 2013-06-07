@@ -39,11 +39,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>ADD_ICON</td>
-	<td>//div[contains(@class,'add-asset-selector')]/div/div/div/ul/li/a[contains(@class,'dropdown-toggle')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>ADD_DROPDOWN</td>
 	<td>//div[contains(@class,'add-asset-selector')]/div/div/div/ul/li/a[contains(@class,'dropdown-toggle')]</td>
 	<td></td>
