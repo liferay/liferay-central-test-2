@@ -342,7 +342,7 @@ public class SocialActivityCounterLocalServiceImpl
 			if (isAddActivityCounter(
 					user, assetEntryUser, activityCounterDefinition)) {
 
-				SocialActivityCounter activityCounter = getActivityCounter(
+				SocialActivityCounter activityCounter = addActivityCounter(
 					activity.getGroupId(), user, activity,
 					activityCounterDefinition);
 
@@ -354,11 +354,11 @@ public class SocialActivityCounterLocalServiceImpl
 		SocialActivityCounter userActivitiesCounter = null;
 
 		if (!user.isDefaultUser() && user.isActive()) {
-			userActivitiesCounter = getUserActivitiesCounter(activity);
+			userActivitiesCounter = addUserActivitiesCounter(activity);
 		}
 
 		if (!assetEntryUser.isDefaultUser() && assetEntryUser.isActive()) {
-			assetActivitiesCounter = getAssetActivitiesCounter(activity);
+			assetActivitiesCounter = addAssetActivitiesCounter(activity);
 		}
 
 		for (SocialActivityCounter activityCounter : activityCounters) {
@@ -1017,7 +1017,7 @@ public class SocialActivityCounterLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		SocialActivityCounter activityCounter = getActivityCounter(
+		SocialActivityCounter activityCounter = addActivityCounter(
 			groupId, user, new SocialActivityImpl(),
 			_userAchievementsActivityCounterDefinition);
 
@@ -1176,7 +1176,7 @@ public class SocialActivityCounterLocalServiceImpl
 		portalCache.removeAll();
 	}
 
-	protected SocialActivityCounter getActivityCounter(
+	protected SocialActivityCounter addActivityCounter(
 			final long groupId, final User user, final SocialActivity activity,
 			final SocialActivityCounterDefinition activityCounterDefinition)
 		throws PortalException, SystemException {
@@ -1223,13 +1223,13 @@ public class SocialActivityCounterLocalServiceImpl
 		return activityCounter;
 	}
 
-	protected SocialActivityCounter getAssetActivitiesCounter(
+	protected SocialActivityCounter addAssetActivitiesCounter(
 			SocialActivity activity)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(activity.getUserId());
 
-		return getActivityCounter(
+		return addActivityCounter(
 			activity.getGroupId(), user, activity,
 			_assetActivitiesActivityCounterDefinition);
 	}
@@ -1267,13 +1267,13 @@ public class SocialActivityCounterLocalServiceImpl
 		return activity.getClassPK();
 	}
 
-	protected SocialActivityCounter getUserActivitiesCounter(
+	protected SocialActivityCounter addUserActivitiesCounter(
 			SocialActivity activity)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(activity.getUserId());
 
-		return getActivityCounter(
+		return addActivityCounter(
 			activity.getGroupId(), user, activity,
 			_userActivitiesActivityCounterDefinition);
 	}
