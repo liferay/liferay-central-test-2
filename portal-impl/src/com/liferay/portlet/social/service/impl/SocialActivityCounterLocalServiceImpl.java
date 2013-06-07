@@ -77,24 +77,25 @@ public class SocialActivityCounterLocalServiceImpl
 	 * asynchronously from the social activity service.
 	 * </p>
 	 *
-	 * @param  groupId the primary key of the group
-	 * @param  classNameId the primary key of the entity's class this counter
-	 *         belongs to
-	 * @param  classPK the primary key of the entity this counter belongs to
-	 * @param  name the counter's name
-	 * @param  ownerType the counter's owner type. Acceptable values are
-	 *         <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
-	 *         <code>TYPE_CREATOR</code> defined in {@link
-	 *         com.liferay.portlet.social.model.SocialActivityCounterConstants}.
-	 * @param  currentValue the counter's current value (optionally
-	 *         <code>0</code>)
-	 * @param  totalValue the counter's total value (optionally <code>0</code>)
-	 * @param  startPeriod the counter's start period
-	 * @param  endPeriod the counter's end period
-	 * @return the added activity counter
-	 * @throws PortalException if the group or the previous activity counter
-	 *         could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param      groupId the primary key of the group
+	 * @param      classNameId the primary key of the entity's class this
+	 *             counter belongs to
+	 * @param      classPK the primary key of the entity this counter belongs to
+	 * @param      name the counter's name
+	 * @param      ownerType the counter's owner type. Acceptable values are
+	 *             <code>TYPE_ACTOR</code>, <code>TYPE_ASSET</code> and
+	 *             <code>TYPE_CREATOR</code> defined in {@link
+	 *             com.liferay.portlet.social.model.SocialActivityCounterConstants}.
+	 * @param      currentValue the counter's current value (optionally
+	 *             <code>0</code>)
+	 * @param      totalValue the counter's total value (optionally
+	 *             <code>0</code>)
+	 * @param      startPeriod the counter's start period
+	 * @param      endPeriod the counter's end period
+	 * @return     the added activity counter
+	 * @throws     PortalException if the group or the previous activity counter
+	 *             could not be found
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #addActivityCounter(long,
 	 *             long, long, String, int, int, long, int)}
 	 */
