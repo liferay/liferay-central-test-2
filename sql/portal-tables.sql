@@ -2076,6 +2076,19 @@ create table Subscription (
 	frequency VARCHAR(75) null
 );
 
+create table SystemEvent (
+	systemEventId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	classUuid VARCHAR(75) null,
+	type_ INTEGER
+);
+
 create table Team (
 	teamId LONG not null primary key,
 	companyId LONG,

@@ -864,6 +864,10 @@ create unique index IX_2E1A92D4 on Subscription (companyId, userId, classNameId,
 create index IX_54243AFD on Subscription (userId);
 create index IX_E8F34171 on Subscription (userId, classNameId);
 
+create index IX_72D73D39 on SystemEvent (groupId);
+create index IX_7A2F0ECE on SystemEvent (groupId, classNameId, classPK);
+create index IX_FFCBB747 on SystemEvent (groupId, classNameId, classPK, type_);
+
 create index IX_AE6E9907 on Team (groupId);
 create unique index IX_143DC786 on Team (groupId, name);
 
