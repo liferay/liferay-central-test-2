@@ -1026,40 +1026,73 @@ public class SocialActivityCounterLocalServiceImpl
 			activityCounter, _userAchievementsActivityCounterDefinition);
 	}
 
-	protected boolean isAddActivityCounter(
-		User user, User assetEntryUser,
-		SocialActivityCounterDefinition activityCounterDefinition) {
+	protected SocialActivityCounter addActivityCounter(
+			final long groupId, final User user, final SocialActivity activity,
+			final SocialActivityCounterDefinition activityCounterDefinition)
+		throws PortalException, SystemException {
 
-		if ((user.isDefaultUser() || !user.isActive()) &&
-			(activityCounterDefinition.getOwnerType() !=
-				SocialActivityCounterConstants.TYPE_ASSET)) {
+		int ownerType = activityCounterDefinition.getOwnerType();
 
-			return false;
+		long classNameId = getClassNameId(activity.getAssetEntry(), ownerType);
+		long classPK = getClassPK(user, activity.getAssetEntry(), ownerType);
+
+		SocialActivityCounter activityCounter = fetchLatestActivityCounter(
+			groupId, classNameId, classPK, activityCounterDefinition.getName(),
+			ownerType);
+
+		if (activityCounter == null) {
+			activityCounter = lockProtectedAddActivityCounter(
+				groupId, classNameId, classPK,
+				activityCounterDefinition.getName(), ownerType, 0, 0,
+				activityCounterDefinition.getPeriodLength());
+		}
+		else if (!activityCounter.isActivePeriod(
+					activityCounterDefinition.getPeriodLength())) {
+
+			activityCounter = lockProtectedAddActivityCounter(
+				groupId, classNameId, classPK,
+				activityCounterDefinition.getName(), ownerType,
+				activityCounter.getTotalValue(),
+				activityCounter.getActivityCounterId(),
+				activityCounterDefinition.getPeriodLength());
 		}
 
-		if ((assetEntryUser.isDefaultUser() || !assetEntryUser.isActive()) &&
-			(activityCounterDefinition.getOwnerType() !=
-				SocialActivityCounterConstants.TYPE_ACTOR)) {
+		if (activityCounterDefinition.getLimitValue() > 0) {
+			SocialActivityLimit activityLimit =
+				socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
+					groupId, user.getUserId(), activity.getClassNameId(),
+					getLimitClassPK(activity, activityCounterDefinition),
+					activity.getType(), activityCounterDefinition.getName());
 
-			return false;
+			if (activityLimit == null) {
+				lockProtectedGetActivityLimit(
+					groupId, user, activity, activityCounterDefinition);
+			}
 		}
 
-		if (!activityCounterDefinition.isEnabled() ||
-			(activityCounterDefinition.getIncrement() == 0)) {
+		return activityCounter;
+	}
 
-			return false;
-		}
+	protected SocialActivityCounter addAssetActivitiesCounter(
+			SocialActivity activity)
+		throws PortalException, SystemException {
 
-		String name = activityCounterDefinition.getName();
+		User user = userPersistence.findByPrimaryKey(activity.getUserId());
 
-		if ((user.getUserId() == assetEntryUser.getUserId()) &&
-			(name.equals(SocialActivityCounterConstants.NAME_CONTRIBUTION) ||
-			 name.equals(SocialActivityCounterConstants.NAME_POPULARITY))) {
+		return addActivityCounter(
+			activity.getGroupId(), user, activity,
+			_assetActivitiesActivityCounterDefinition);
+	}
 
-			return false;
-		}
+	protected SocialActivityCounter addUserActivitiesCounter(
+			SocialActivity activity)
+		throws PortalException, SystemException {
 
-		return true;
+		User user = userPersistence.findByPrimaryKey(activity.getUserId());
+
+		return addActivityCounter(
+			activity.getGroupId(), user, activity,
+			_userActivitiesActivityCounterDefinition);
 	}
 
 	protected void adjustUserContribution(AssetEntry assetEntry, boolean enable)
@@ -1177,64 +1210,6 @@ public class SocialActivityCounterLocalServiceImpl
 		portalCache.removeAll();
 	}
 
-	protected SocialActivityCounter addActivityCounter(
-			final long groupId, final User user, final SocialActivity activity,
-			final SocialActivityCounterDefinition activityCounterDefinition)
-		throws PortalException, SystemException {
-
-		int ownerType = activityCounterDefinition.getOwnerType();
-
-		long classNameId = getClassNameId(activity.getAssetEntry(), ownerType);
-		long classPK = getClassPK(user, activity.getAssetEntry(), ownerType);
-
-		SocialActivityCounter activityCounter = fetchLatestActivityCounter(
-			groupId, classNameId, classPK, activityCounterDefinition.getName(),
-			ownerType);
-
-		if (activityCounter == null) {
-			activityCounter = lockProtectedAddActivityCounter(
-				groupId, classNameId, classPK,
-				activityCounterDefinition.getName(), ownerType, 0, 0,
-				activityCounterDefinition.getPeriodLength());
-		}
-		else if (!activityCounter.isActivePeriod(
-					activityCounterDefinition.getPeriodLength())) {
-
-			activityCounter = lockProtectedAddActivityCounter(
-				groupId, classNameId, classPK,
-				activityCounterDefinition.getName(), ownerType,
-				activityCounter.getTotalValue(),
-				activityCounter.getActivityCounterId(),
-				activityCounterDefinition.getPeriodLength());
-		}
-
-		if (activityCounterDefinition.getLimitValue() > 0) {
-			SocialActivityLimit activityLimit =
-				socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
-					groupId, user.getUserId(), activity.getClassNameId(),
-					getLimitClassPK(activity, activityCounterDefinition),
-					activity.getType(), activityCounterDefinition.getName());
-
-			if (activityLimit == null) {
-				lockProtectedGetActivityLimit(
-					groupId, user, activity, activityCounterDefinition);
-			}
-		}
-
-		return activityCounter;
-	}
-
-	protected SocialActivityCounter addAssetActivitiesCounter(
-			SocialActivity activity)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(activity.getUserId());
-
-		return addActivityCounter(
-			activity.getGroupId(), user, activity,
-			_assetActivitiesActivityCounterDefinition);
-	}
-
 	protected long getClassNameId(AssetEntry assetEntry, int ownerType) {
 		if (ownerType == SocialActivityCounterConstants.TYPE_ASSET) {
 			return assetEntry.getClassNameId();
@@ -1268,17 +1243,6 @@ public class SocialActivityCounterLocalServiceImpl
 		return activity.getClassPK();
 	}
 
-	protected SocialActivityCounter addUserActivitiesCounter(
-			SocialActivity activity)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(activity.getUserId());
-
-		return addActivityCounter(
-			activity.getGroupId(), user, activity,
-			_userActivitiesActivityCounterDefinition);
-	}
-
 	protected void incrementActivityCounter(
 			SocialActivityCounter activityCounter,
 			SocialActivityCounterDefinition activityCounterDefinition)
@@ -1296,21 +1260,42 @@ public class SocialActivityCounterLocalServiceImpl
 		socialActivityCounterPersistence.clearCache(activityCounter);
 	}
 
-	private SocialActivityCounterDefinition
-		_assetActivitiesActivityCounterDefinition =
-			new SocialActivityCounterDefinition(
-				SocialActivityCounterConstants.NAME_ASSET_ACTIVITIES,
-				SocialActivityCounterConstants.TYPE_ASSET);
-	private SocialActivityCounterDefinition
-		_userAchievementsActivityCounterDefinition =
-			new SocialActivityCounterDefinition(
-				SocialActivityCounterConstants.NAME_USER_ACHIEVEMENTS,
-				SocialActivityCounterConstants.TYPE_ACTOR);
-	private SocialActivityCounterDefinition
-		_userActivitiesActivityCounterDefinition =
-			new SocialActivityCounterDefinition(
-				SocialActivityCounterConstants.NAME_USER_ACTIVITIES,
-				SocialActivityCounterConstants.TYPE_ACTOR);
+	protected boolean isAddActivityCounter(
+		User user, User assetEntryUser,
+		SocialActivityCounterDefinition activityCounterDefinition) {
+
+		if ((user.isDefaultUser() || !user.isActive()) &&
+			(activityCounterDefinition.getOwnerType() !=
+				SocialActivityCounterConstants.TYPE_ASSET)) {
+
+			return false;
+		}
+
+		if ((assetEntryUser.isDefaultUser() || !assetEntryUser.isActive()) &&
+			(activityCounterDefinition.getOwnerType() !=
+				SocialActivityCounterConstants.TYPE_ACTOR)) {
+
+			return false;
+		}
+
+		if (!activityCounterDefinition.isEnabled() ||
+			(activityCounterDefinition.getIncrement() == 0)) {
+
+			return false;
+		}
+
+		String name = activityCounterDefinition.getName();
+
+		if ((user.getUserId() == assetEntryUser.getUserId()) &&
+			(name.equals(SocialActivityCounterConstants.NAME_CONTRIBUTION) ||
+			 name.equals(SocialActivityCounterConstants.NAME_POPULARITY))) {
+
+			return false;
+		}
+
+		return true;
+	}
+
 	protected SocialActivityCounter lockProtectedAddActivityCounter(
 			final long groupId, final long classNameId, final long classPK,
 			final String name, final int ownerType, final int totalValue,
@@ -1399,5 +1384,20 @@ public class SocialActivityCounterLocalServiceImpl
 			lockProtectedAction.getReturnValue());
 	}
 
+	private SocialActivityCounterDefinition
+		_assetActivitiesActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_ASSET_ACTIVITIES,
+				SocialActivityCounterConstants.TYPE_ASSET);
+	private SocialActivityCounterDefinition
+		_userAchievementsActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_USER_ACHIEVEMENTS,
+				SocialActivityCounterConstants.TYPE_ACTOR);
+	private SocialActivityCounterDefinition
+		_userActivitiesActivityCounterDefinition =
+			new SocialActivityCounterDefinition(
+				SocialActivityCounterConstants.NAME_USER_ACTIVITIES,
+				SocialActivityCounterConstants.TYPE_ACTOR);
 
 }
