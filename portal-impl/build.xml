@@ -715,12 +715,6 @@ public class Creole10Parser]]></replacevalue>
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-backgroundtask">
-		<antcall target="build-service">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/backgroundtask/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-blogs">
 		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/blogs/service.xml" />
@@ -832,7 +826,6 @@ public class Creole10Parser]]></replacevalue>
 	<target name="build-service-portlets">
 		<antcall target="build-service-portlet-announcements" />
 		<antcall target="build-service-portlet-asset" />
-		<antcall target="build-service-portlet-backgroundtask" />
 		<antcall target="build-service-portlet-blogs" />
 		<antcall target="build-service-portlet-bookmarks" />
 		<antcall target="build-service-portlet-calendar" />
@@ -1015,12 +1008,6 @@ public class Creole10Parser]]></replacevalue>
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-backgroundtask">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/backgroundtask/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-blogs">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/blogs/service.xml" />
@@ -1132,7 +1119,6 @@ public class Creole10Parser]]></replacevalue>
 	<target name="build-wsdd-portlets">
 		<antcall target="build-wsdd-portlet-announcements" />
 		<antcall target="build-wsdd-portlet-asset" />
-		<antcall target="build-wsdd-portlet-backgroundtask" />
 		<antcall target="build-wsdd-portlet-blogs" />
 		<antcall target="build-wsdd-portlet-bookmarks" />
 		<antcall target="build-wsdd-portlet-calendar" />
