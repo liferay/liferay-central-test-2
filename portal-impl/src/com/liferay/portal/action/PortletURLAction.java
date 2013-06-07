@@ -42,7 +42,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Eduardo Lundgren
+ * @author     Eduardo Lundgren
  * @deprecated As of 6.2.0 with no direct replacement
  */
 public class PortletURLAction extends Action {
@@ -54,7 +54,8 @@ public class PortletURLAction extends Action {
 		throws Exception {
 
 		if (!_enabled) {
-			response.sendError(404);
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+
 			return null;
 		}
 
