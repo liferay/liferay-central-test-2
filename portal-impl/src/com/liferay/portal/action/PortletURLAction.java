@@ -18,13 +18,11 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -53,7 +51,7 @@ public class PortletURLAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		if (!_enabled) {
+		if (!PropsValues.PORTLET_URL_GENERATE_BY_PATH_ENABLED) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 
 			return null;
@@ -186,8 +184,5 @@ public class PortletURLAction extends Action {
 
 		return portletURL.toString();
 	}
-
-	private static final boolean _enabled = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.PORTLET_URL_STRUTS_ACTION_ENABLED));
 
 }

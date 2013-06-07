@@ -3,7 +3,7 @@ AUI.add(
 	function(A) {
 		var Util = Liferay.Util;
 
-		var PortletURL = function(lifecycle, params, baseURL) {
+		var PortletURL = function(lifecycle, params, basePortletURL) {
 			var instance = this;
 
 			instance.params = {};
@@ -44,13 +44,13 @@ AUI.add(
 			};
 
 			instance.options = {
-				baseURL: baseURL,
+				basePortletURL: basePortletURL,
 				escapeXML: null,
 				secure: null
 			};
 
-			if (!baseURL) {
-				instance.options.baseURL = themeDisplay.getPathContext() + themeDisplay.getPathMain() + '/portal/layout?p_l_id=' + themeDisplay.getPlid();
+			if (!basePortletURL) {
+				instance.options.basePortletURL = themeDisplay.getPathContext() + themeDisplay.getPathMain() + '/portal/layout?p_l_id=' + themeDisplay.getPlid();
 			}
 
 			A.each(
@@ -219,7 +219,7 @@ AUI.add(
 
 				var reservedParams = instance.reservedParams;
 
-				var resultURL = new A.Url(options.baseURL);
+				var resultURL = new A.Url(options.basePortletURL);
 
 				var portletId = reservedParams.p_p_id;
 
@@ -314,8 +314,8 @@ AUI.add(
 					return new PortletURL(PortletURL.RESOURCE_PHASE);
 				},
 
-				createURL: function(baseURL, params) {
-					return new PortletURL(null, params, baseURL);
+				createURL: function(basePortletURL, params) {
+					return new PortletURL(null, params, basePortletURL);
 				}
 			}
 		);

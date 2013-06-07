@@ -1276,8 +1276,8 @@
 
 			var ddmURL;
 
-			if (config.baseURL) {
-				ddmURL = Liferay.PortletURL.createURL(config.baseURL);
+			if (config.basePortletURL) {
+				ddmURL = Liferay.PortletURL.createURL(config.basePortletURL);
 			}
 			else {
 				ddmURL = Liferay.PortletURL.createRenderURL();
