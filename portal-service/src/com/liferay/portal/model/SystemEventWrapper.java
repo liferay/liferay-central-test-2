@@ -445,7 +445,7 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public int compareTo(SystemEvent systemEvent) {
+	public int compareTo(com.liferay.portal.model.SystemEvent systemEvent) {
 		return _systemEvent.compareTo(systemEvent);
 	}
 
@@ -455,17 +455,17 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<SystemEvent> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.SystemEvent> toCacheModel() {
 		return _systemEvent.toCacheModel();
 	}
 
 	@Override
-	public SystemEvent toEscapedModel() {
+	public com.liferay.portal.model.SystemEvent toEscapedModel() {
 		return new SystemEventWrapper(_systemEvent.toEscapedModel());
 	}
 
 	@Override
-	public SystemEvent toUnescapedModel() {
+	public com.liferay.portal.model.SystemEvent toUnescapedModel() {
 		return new SystemEventWrapper(_systemEvent.toUnescapedModel());
 	}
 

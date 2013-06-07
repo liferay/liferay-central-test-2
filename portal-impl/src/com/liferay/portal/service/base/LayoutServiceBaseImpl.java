@@ -26,6 +26,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BackgroundTaskLocalService;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
@@ -130,6 +131,7 @@ import com.liferay.portal.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
+import com.liferay.portal.service.persistence.BackgroundTaskPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.ClusterGroupPersistence;
@@ -206,8 +208,6 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
-import com.liferay.portlet.backgroundtask.service.BTEntryLocalService;
-import com.liferay.portlet.backgroundtask.service.persistence.BTEntryPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -356,6 +356,44 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setAddressPersistence(AddressPersistence addressPersistence) {
 		this.addressPersistence = addressPersistence;
+	}
+
+	/**
+	 * Returns the background task local service.
+	 *
+	 * @return the background task local service
+	 */
+	public BackgroundTaskLocalService getBackgroundTaskLocalService() {
+		return backgroundTaskLocalService;
+	}
+
+	/**
+	 * Sets the background task local service.
+	 *
+	 * @param backgroundTaskLocalService the background task local service
+	 */
+	public void setBackgroundTaskLocalService(
+		BackgroundTaskLocalService backgroundTaskLocalService) {
+		this.backgroundTaskLocalService = backgroundTaskLocalService;
+	}
+
+	/**
+	 * Returns the background task persistence.
+	 *
+	 * @return the background task persistence
+	 */
+	public BackgroundTaskPersistence getBackgroundTaskPersistence() {
+		return backgroundTaskPersistence;
+	}
+
+	/**
+	 * Sets the background task persistence.
+	 *
+	 * @param backgroundTaskPersistence the background task persistence
+	 */
+	public void setBackgroundTaskPersistence(
+		BackgroundTaskPersistence backgroundTaskPersistence) {
+		this.backgroundTaskPersistence = backgroundTaskPersistence;
 	}
 
 	/**
@@ -3649,42 +3687,6 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the b t entry local service.
-	 *
-	 * @return the b t entry local service
-	 */
-	public BTEntryLocalService getBTEntryLocalService() {
-		return btEntryLocalService;
-	}
-
-	/**
-	 * Sets the b t entry local service.
-	 *
-	 * @param btEntryLocalService the b t entry local service
-	 */
-	public void setBTEntryLocalService(BTEntryLocalService btEntryLocalService) {
-		this.btEntryLocalService = btEntryLocalService;
-	}
-
-	/**
-	 * Returns the b t entry persistence.
-	 *
-	 * @return the b t entry persistence
-	 */
-	public BTEntryPersistence getBTEntryPersistence() {
-		return btEntryPersistence;
-	}
-
-	/**
-	 * Sets the b t entry persistence.
-	 *
-	 * @param btEntryPersistence the b t entry persistence
-	 */
-	public void setBTEntryPersistence(BTEntryPersistence btEntryPersistence) {
-		this.btEntryPersistence = btEntryPersistence;
-	}
-
-	/**
 	 * Returns the expando value local service.
 	 *
 	 * @return the expando value local service
@@ -4106,6 +4108,10 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	protected AddressService addressService;
 	@BeanReference(type = AddressPersistence.class)
 	protected AddressPersistence addressPersistence;
+	@BeanReference(type = BackgroundTaskLocalService.class)
+	protected BackgroundTaskLocalService backgroundTaskLocalService;
+	@BeanReference(type = BackgroundTaskPersistence.class)
+	protected BackgroundTaskPersistence backgroundTaskPersistence;
 	@BeanReference(type = BrowserTrackerLocalService.class)
 	protected BrowserTrackerLocalService browserTrackerLocalService;
 	@BeanReference(type = BrowserTrackerPersistence.class)
@@ -4460,10 +4466,6 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = BTEntryLocalService.class)
-	protected BTEntryLocalService btEntryLocalService;
-	@BeanReference(type = BTEntryPersistence.class)
-	protected BTEntryPersistence btEntryPersistence;
 	@BeanReference(type = ExpandoValueLocalService.class)
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(type = ExpandoValueService.class)
