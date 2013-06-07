@@ -16,8 +16,8 @@ package com.liferay.portal.lar.backgroundtask.executor;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portlet.backgroundtask.executor.BaseBackgroundTaskExecutor;
-import com.liferay.portlet.backgroundtask.model.BTEntry;
+import com.liferay.portal.backgroundtask.executor.BaseBackgroundTaskExecutor;
+import com.liferay.portal.model.BackgroundTask;
 
 import java.io.Serializable;
 
@@ -31,8 +31,9 @@ public class LayoutImportBackgroundTaskExecutor
 	extends BaseBackgroundTaskExecutor {
 
 	@Override
-	protected void doExecute(BTEntry entry) throws Exception {
-		Map<String, Serializable> taskContextMap = entry.getTaskContextMap();
+	protected void doExecute(BackgroundTask backgroundTask) throws Exception {
+		Map<String, Serializable> taskContextMap =
+			backgroundTask.getTaskContextMap();
 
 		long groupId = (Long)taskContextMap.get("groupId");
 		boolean privateLayout = (Boolean)taskContextMap.get("privateLayout");
@@ -40,7 +41,7 @@ public class LayoutImportBackgroundTaskExecutor
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
 
 		List<FileEntry> attachmentsFileEntries =
-			entry.getAttachmentsFileEntries();
+			backgroundTask.getAttachmentsFileEntries();
 
 		for (FileEntry attachmentsFileEntry : attachmentsFileEntries) {
 			LayoutServiceUtil.importLayouts(

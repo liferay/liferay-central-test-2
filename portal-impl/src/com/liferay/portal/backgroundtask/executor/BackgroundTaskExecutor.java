@@ -12,19 +12,16 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.model;
+package com.liferay.portal.backgroundtask.executor;
+
+import com.liferay.portal.model.BackgroundTask;
 
 /**
- * @author Daniel Kocsis
+ * @author Michael C. Han
  */
-public class BTEntryConstants {
+public interface BackgroundTaskExecutor {
 
-	public static final int STATUS_FAILED = 2;
-
-	public static final int STATUS_IN_PROGRESS = 1;
-
-	public static final int STATUS_NEW = 0;
-
-	public static final int STATUS_SUCCESSFUL = 3;
+	public void execute(BackgroundTask backgroundTask, ClassLoader classLoader)
+		throws Exception;
 
 }

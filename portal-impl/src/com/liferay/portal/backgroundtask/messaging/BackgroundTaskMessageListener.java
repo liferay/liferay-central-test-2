@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.messaging;
+package com.liferay.portal.backgroundtask.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ClassLoaderUtil;
-import com.liferay.portlet.backgroundtask.executor.BackgroundTaskExecutor;
-import com.liferay.portlet.backgroundtask.model.BTEntry;
-import com.liferay.portlet.backgroundtask.model.BTEntryConstants;
-import com.liferay.portlet.backgroundtask.service.BTEntryLocalServiceUtil;
+import com.liferay.portal.backgroundtask.executor.BackgroundTaskExecutor;
+import com.liferay.portal.model.BackgroundTask;
+import com.liferay.portal.model.BackgroundTaskConstants;
+import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
 
 /**
  * @author Michael C. Han
@@ -33,19 +33,22 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		long entryId = (Long)message.get("entryId");
+		long backgroundTaskId = (Long)message.get("backgroundTaskId");
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		BTEntryLocalServiceUtil.updateEntry(
-			entryId, null, BTEntryConstants.STATUS_IN_PROGRESS, serviceContext);
+		BackgroundTaskLocalServiceUtil.updateBackgroundTask(
+			backgroundTaskId, null, BackgroundTaskConstants.STATUS_IN_PROGRESS,
+			serviceContext);
 
 		try {
 			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-			BTEntry entry = BTEntryLocalServiceUtil.getBTEntry(entryId);
+			BackgroundTask backgroundTask =
+				BackgroundTaskLocalServiceUtil.getBackgroundTask(
+					backgroundTaskId);
 
-			String servletContextNames = entry.getServletContextNames();
+			String servletContextNames = backgroundTask.getServletContextNames();
 
 			if (Validator.isNotNull(servletContextNames)) {
 				classLoader = ClassLoaderUtil.getAggregatePluginsClassLoader(
@@ -54,17 +57,18 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 
 			BackgroundTaskExecutor backgroundTaskExecutor =
 				(BackgroundTaskExecutor)InstanceFactory.newInstance(
-					classLoader, entry.getTaskExecutorClassName());
+					classLoader, backgroundTask.getTaskExecutorClassName());
 
-			backgroundTaskExecutor.execute(entry, classLoader);
+			backgroundTaskExecutor.execute(backgroundTask, classLoader);
 
-			BTEntryLocalServiceUtil.updateEntry(
-				entryId, null, BTEntryConstants.STATUS_SUCCESSFUL,
-				serviceContext);
+			BackgroundTaskLocalServiceUtil.updateBackgroundTask(
+				backgroundTaskId, null,
+				BackgroundTaskConstants.STATUS_SUCCESSFUL, serviceContext);
 		}
 		catch (Exception e) {
-			BTEntryLocalServiceUtil.updateEntry(
-				entryId, null, BTEntryConstants.STATUS_FAILED, serviceContext);
+			BackgroundTaskLocalServiceUtil.updateBackgroundTask(
+				backgroundTaskId, null, BackgroundTaskConstants.STATUS_FAILED,
+				serviceContext);
 		}
 	}
 

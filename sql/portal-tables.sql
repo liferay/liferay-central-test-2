@@ -206,8 +206,8 @@ create table AssetVocabulary (
 	settings_ STRING null
 );
 
-create table BTEntry (
-	btEntryId LONG not null primary key,
+create table BackgroundTask (
+	backgroundTaskId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

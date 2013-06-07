@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.model.impl;
+package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -36,9 +36,9 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
-public class BTEntryImpl extends BTEntryBaseImpl {
+public class BackgroundTaskImpl extends BackgroundTaskBaseImpl {
 
-	public BTEntryImpl() {
+	public BackgroundTaskImpl() {
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class BTEntryImpl extends BTEntryBaseImpl {
 		Folder folder = PortletFileRepositoryUtil.addPortletFolder(
 			getUserId(), repository.getRepositoryId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			String.valueOf(getBtEntryId()), serviceContext);
+			String.valueOf(getBackgroundTaskId()), serviceContext);
 
 		_attachmentsFolderId = folder.getFolderId();
 
@@ -133,7 +133,7 @@ public class BTEntryImpl extends BTEntryBaseImpl {
 			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
 				getUserId(), repository.getRepositoryId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				String.valueOf(getBtEntryId()), serviceContext);
+				String.valueOf(getBackgroundTaskId()), serviceContext);
 
 			_attachmentsFolderId = folder.getFolderId();
 		}

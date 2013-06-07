@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.executor;
+package com.liferay.portal.backgroundtask.executor;
 
-import com.liferay.portlet.backgroundtask.model.BTEntry;
+import com.liferay.portal.model.BackgroundTask;
 
 /**
  * @author Michael C. Han
@@ -23,7 +23,7 @@ public abstract class BaseBackgroundTaskExecutor
 	implements BackgroundTaskExecutor {
 
 	@Override
-	public void execute(BTEntry entry, ClassLoader classLoader)
+	public void execute(BackgroundTask backgroundTask, ClassLoader classLoader)
 		throws Exception {
 
 		Thread currentThread = Thread.currentThread();
@@ -35,7 +35,7 @@ public abstract class BaseBackgroundTaskExecutor
 		}
 
 		try {
-			doExecute(entry);
+			doExecute(backgroundTask);
 		}
 		finally {
 			if (classLoader != contextClassLoader) {
@@ -44,6 +44,7 @@ public abstract class BaseBackgroundTaskExecutor
 		}
 	}
 
-	protected abstract void doExecute(BTEntry entry) throws Exception;
+	protected abstract void doExecute(BackgroundTask backgroundTask)
+		throws Exception;
 
 }

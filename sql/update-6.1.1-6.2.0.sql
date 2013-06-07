@@ -26,8 +26,8 @@ update BookmarksFolder set statusByUserId = userId;
 update BookmarksFolder set statusByUserName = userName;
 update BookmarksFolder set statusDate = modifiedDate;
 
-create table BTEntry (
-	btEntryId LONG not null primary key,
+create table BackgroundTask (
+	backgroundTaskId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

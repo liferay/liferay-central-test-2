@@ -95,6 +95,46 @@
 			<finder-column name="primary" />
 		</finder>
 	</entity>
+	<entity name="BackgroundTask" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="backgroundTaskId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="servletContextNames" type="String" />
+		<column name="taskExecutorClassName" type="String" />
+		<column name="taskContext" type="String" />
+		<column name="completed" type="boolean" />
+		<column name="completionDate" type="Date" />
+		<column name="status" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="G_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="taskExecutorClassName" />
+		</finder>
+		<finder name="G_T_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="taskExecutorClassName" />
+			<finder-column name="status" />
+		</finder>
+	</entity>
 	<entity name="BrowserTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -580,7 +620,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.portlet.backgroundtask" entity="BTEntry" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />

@@ -64,7 +64,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
-import com.liferay.portlet.backgroundtask.model.BTEntry;
+import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
@@ -858,12 +858,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
-		BTEntry btEntry = btEntryLocalService.addEntry(
-			userId, groupId, taskName, null,
-			LayoutExportBackgroundTaskExecutor.class, taskContextMap,
-			new ServiceContext());
+		BackgroundTask backgroundTask =
+			backgroundTaskLocalService.addBackgroundTask(
+				userId, groupId, taskName, null,
+				LayoutExportBackgroundTaskExecutor.class, taskContextMap,
+				new ServiceContext());
 
-		return btEntry.getBtEntryId();
+		return backgroundTask.getBackgroundTaskId();
 	}
 
 	/**
@@ -955,12 +956,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
-		BTEntry btEntry = btEntryLocalService.addEntry(
-			userId, groupId, taskName, null,
-			PortletExportBackgroundTaskExecutor.class, taskContextMap,
-			new ServiceContext());
+		BackgroundTask backgroundTask =
+			backgroundTaskLocalService.addBackgroundTask(
+				userId, groupId, taskName, null,
+				PortletExportBackgroundTaskExecutor.class, taskContextMap,
+				new ServiceContext());
 
-		return btEntry.getBtEntryId();
+		return backgroundTask.getBackgroundTaskId();
 	}
 
 	@Override
@@ -1736,15 +1738,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			groupId, privateLayout, null, parameterMap, null, null);
 
-		BTEntry btEntry = btEntryLocalService.addEntry(
-			userId, groupId, taskName, null,
-			LayoutImportBackgroundTaskExecutor.class, taskContextMap,
-			new ServiceContext());
+		BackgroundTask backgroundTask =
+			backgroundTaskLocalService.addBackgroundTask(
+				userId, groupId, taskName, null,
+				LayoutImportBackgroundTaskExecutor.class, taskContextMap,
+				new ServiceContext());
 
-		btEntryLocalService.addEntryAttachment(
-			userId, btEntry.getBtEntryId(), file.getName(), file);
+		backgroundTaskLocalService.addBackgroundTaskAttachment(
+			userId, backgroundTask.getBackgroundTaskId(), file.getName(), file);
 
-		return btEntry.getBtEntryId();
+		return backgroundTask.getBackgroundTaskId();
 	}
 
 	@Override
@@ -1885,15 +1888,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Map<String, Serializable> taskContextMap = buildTaskContextMap(
 			plid, groupId, portletId, parameterMap, null, null);
 
-		BTEntry btEntry = btEntryLocalService.addEntry(
-			userId, groupId, taskName, null,
-			PortletImportBackgroundTaskExecutor.class, taskContextMap,
-			new ServiceContext());
+		BackgroundTask backgroundTask =
+			backgroundTaskLocalService.addBackgroundTask(
+				userId, groupId, taskName, null,
+				PortletImportBackgroundTaskExecutor.class, taskContextMap,
+				new ServiceContext());
 
-		btEntryLocalService.addEntryAttachment(
-			userId, btEntry.getBtEntryId(), file.getName(), file);
+		backgroundTaskLocalService.addBackgroundTaskAttachment(
+			userId, backgroundTask.getBackgroundTaskId(), file.getName(), file);
 
-		return btEntry.getBtEntryId();
+		return backgroundTask.getBackgroundTaskId();
 	}
 
 	@Override
