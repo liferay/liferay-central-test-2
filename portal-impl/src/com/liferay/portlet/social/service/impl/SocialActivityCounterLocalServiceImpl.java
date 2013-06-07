@@ -1176,7 +1176,7 @@ public class SocialActivityCounterLocalServiceImpl
 		portalCache.removeAll();
 	}
 
-	protected SocialActivityCounter createActivityCounter(
+	protected SocialActivityCounter lockProtectedAddActivityCounter(
 			final long groupId, final long classNameId, final long classPK,
 			final String name, final int ownerType, final int totalValue,
 			final long previousActivityCounterId, final int periodLength)
@@ -1213,7 +1213,7 @@ public class SocialActivityCounterLocalServiceImpl
 		return lockProtectedAction.getReturnValue();
 	}
 
-	protected void createActivityLimit(
+	protected void lockProtectedGetActivityLimit(
 			final long groupId, final User user, final SocialActivity activity,
 			final SocialActivityCounterDefinition activityCounterDefinition)
 		throws PortalException, SystemException {
@@ -1279,7 +1279,7 @@ public class SocialActivityCounterLocalServiceImpl
 			ownerType);
 
 		if (activityCounter == null) {
-			activityCounter = createActivityCounter(
+			activityCounter = lockProtectedAddActivityCounter(
 				groupId, classNameId, classPK,
 				activityCounterDefinition.getName(), ownerType, 0, 0,
 				activityCounterDefinition.getPeriodLength());
@@ -1287,7 +1287,7 @@ public class SocialActivityCounterLocalServiceImpl
 		else if (!activityCounter.isActivePeriod(
 					activityCounterDefinition.getPeriodLength())) {
 
-			activityCounter = createActivityCounter(
+			activityCounter = lockProtectedAddActivityCounter(
 				groupId, classNameId, classPK,
 				activityCounterDefinition.getName(), ownerType,
 				activityCounter.getTotalValue(),
@@ -1303,7 +1303,7 @@ public class SocialActivityCounterLocalServiceImpl
 					activity.getType(), activityCounterDefinition.getName());
 
 			if (activityLimit == null) {
-				createActivityLimit(
+				lockProtectedGetActivityLimit(
 					groupId, user, activity, activityCounterDefinition);
 			}
 		}
