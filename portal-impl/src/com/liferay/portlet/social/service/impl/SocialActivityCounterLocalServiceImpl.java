@@ -351,14 +351,15 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		SocialActivityCounter assetActivitiesCounter = null;
+
+		if (!assetEntryUser.isDefaultUser() && assetEntryUser.isActive()) {
+			assetActivitiesCounter = addAssetActivitiesCounter(activity);
+		}
+
 		SocialActivityCounter userActivitiesCounter = null;
 
 		if (!user.isDefaultUser() && user.isActive()) {
 			userActivitiesCounter = addUserActivitiesCounter(activity);
-		}
-
-		if (!assetEntryUser.isDefaultUser() && assetEntryUser.isActive()) {
-			assetActivitiesCounter = addAssetActivitiesCounter(activity);
 		}
 
 		for (SocialActivityCounter activityCounter : activityCounters) {
