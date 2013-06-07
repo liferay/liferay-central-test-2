@@ -849,6 +849,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _deletionEventClassNameIds;
 	}
 
+	@Override
 	public Date getEndDate() {
 		return _endDate;
 	}
