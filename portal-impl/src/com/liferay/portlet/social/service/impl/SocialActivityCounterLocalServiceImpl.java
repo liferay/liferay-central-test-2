@@ -339,7 +339,7 @@ public class SocialActivityCounterLocalServiceImpl
 		for (SocialActivityCounterDefinition activityCounterDefinition :
 				activityDefinition.getActivityCounterDefinitions()) {
 
-			if (addActivityCounter(
+			if (isAddActivityCounter(
 					user, assetEntryUser, activityCounterDefinition)) {
 
 				SocialActivityCounter activityCounter = getActivityCounter(
@@ -1025,7 +1025,7 @@ public class SocialActivityCounterLocalServiceImpl
 			activityCounter, _userAchievementsActivityCounterDefinition);
 	}
 
-	protected boolean addActivityCounter(
+	protected boolean isAddActivityCounter(
 		User user, User assetEntryUser,
 		SocialActivityCounterDefinition activityCounterDefinition) {
 
