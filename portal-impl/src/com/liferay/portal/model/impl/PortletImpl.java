@@ -1983,7 +1983,7 @@ public class PortletImpl extends PortletBaseImpl {
 	public List<UserNotificationInterpreter>
 		getUserNotificationInterpreterInstances() {
 
-		if (_socialActivityInterpreterClasses.isEmpty()) {
+		if (_userNotificationInterpreterClasses.isEmpty()) {
 			return null;
 		}
 
