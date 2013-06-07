@@ -1176,94 +1176,6 @@ public class SocialActivityCounterLocalServiceImpl
 		portalCache.removeAll();
 	}
 
-	protected SocialActivityCounter lockProtectedAddActivityCounter(
-			final long groupId, final long classNameId, final long classPK,
-			final String name, final int ownerType, final int totalValue,
-			final long previousActivityCounterId, final int periodLength)
-		throws PortalException, SystemException {
-
-		String lockKey = StringUtil.merge(
-			new Object[] {
-				groupId, classNameId, classPK, name, ownerType
-			},
-			StringPool.POUND);
-
-		LockProtectedAction<SocialActivityCounter> lockProtectedAction =
-			new LockProtectedAction<SocialActivityCounter>(
-				SocialActivityCounter.class, lockKey,
-				PropsValues.SOCIAL_ACTIVITY_LOCK_TIMEOUT,
-				PropsValues.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY) {
-
-			@Override
-			protected SocialActivityCounter performProtectedAction()
-				throws PortalException, SystemException {
-
-				SocialActivityCounter activityCounter =
-					socialActivityCounterLocalService.addActivityCounter(
-						groupId, classNameId, classPK, name, ownerType,
-						totalValue, previousActivityCounterId, periodLength);
-
-				return activityCounter;
-			}
-
-		};
-
-		lockProtectedAction.performAction();
-
-		return lockProtectedAction.getReturnValue();
-	}
-
-	protected void lockProtectedGetActivityLimit(
-			final long groupId, final User user, final SocialActivity activity,
-			final SocialActivityCounterDefinition activityCounterDefinition)
-		throws PortalException, SystemException {
-
-		final long classPK = getLimitClassPK(
-			activity, activityCounterDefinition);
-
-		String lockKey = StringUtil.merge(
-			new Object[] {
-				groupId, user.getUserId(), activity.getClassNameId(), classPK,
-				activity.getType(), activityCounterDefinition.getName()
-			},
-			StringPool.POUND);
-
-		LockProtectedAction<SocialActivityLimit> lockProtectedAction =
-			new LockProtectedAction<SocialActivityLimit>(
-				SocialActivityLimit.class, lockKey,
-				PropsValues.SOCIAL_ACTIVITY_LOCK_TIMEOUT,
-				PropsValues.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY) {
-
-			@Override
-			protected SocialActivityLimit performProtectedAction()
-				throws PortalException, SystemException {
-
-				SocialActivityLimit activityLimit =
-					socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
-						groupId, user.getUserId(), activity.getClassNameId(),
-						classPK, activity.getType(),
-						activityCounterDefinition.getName());
-
-				if (activityLimit == null) {
-					activityLimit =
-						socialActivityLimitLocalService.addActivityLimit(
-							user.getUserId(), activity.getGroupId(),
-							activity.getClassNameId(), classPK,
-							activity.getType(),
-							activityCounterDefinition.getName(),
-							activityCounterDefinition.getLimitPeriod());
-				}
-
-				return activityLimit;
-			}
-		};
-
-		lockProtectedAction.performAction();
-
-		socialActivityLimitPersistence.cacheResult(
-			lockProtectedAction.getReturnValue());
-	}
-
 	protected SocialActivityCounter getActivityCounter(
 			final long groupId, final User user, final SocialActivity activity,
 			final SocialActivityCounterDefinition activityCounterDefinition)
@@ -1398,5 +1310,93 @@ public class SocialActivityCounterLocalServiceImpl
 			new SocialActivityCounterDefinition(
 				SocialActivityCounterConstants.NAME_USER_ACTIVITIES,
 				SocialActivityCounterConstants.TYPE_ACTOR);
+	protected SocialActivityCounter lockProtectedAddActivityCounter(
+			final long groupId, final long classNameId, final long classPK,
+			final String name, final int ownerType, final int totalValue,
+			final long previousActivityCounterId, final int periodLength)
+		throws PortalException, SystemException {
+
+		String lockKey = StringUtil.merge(
+			new Object[] {
+				groupId, classNameId, classPK, name, ownerType
+			},
+			StringPool.POUND);
+
+		LockProtectedAction<SocialActivityCounter> lockProtectedAction =
+			new LockProtectedAction<SocialActivityCounter>(
+				SocialActivityCounter.class, lockKey,
+				PropsValues.SOCIAL_ACTIVITY_LOCK_TIMEOUT,
+				PropsValues.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY) {
+
+			@Override
+			protected SocialActivityCounter performProtectedAction()
+				throws PortalException, SystemException {
+
+				SocialActivityCounter activityCounter =
+					socialActivityCounterLocalService.addActivityCounter(
+						groupId, classNameId, classPK, name, ownerType,
+						totalValue, previousActivityCounterId, periodLength);
+
+				return activityCounter;
+			}
+
+		};
+
+		lockProtectedAction.performAction();
+
+		return lockProtectedAction.getReturnValue();
+	}
+
+	protected void lockProtectedGetActivityLimit(
+			final long groupId, final User user, final SocialActivity activity,
+			final SocialActivityCounterDefinition activityCounterDefinition)
+		throws PortalException, SystemException {
+
+		final long classPK = getLimitClassPK(
+			activity, activityCounterDefinition);
+
+		String lockKey = StringUtil.merge(
+			new Object[] {
+				groupId, user.getUserId(), activity.getClassNameId(), classPK,
+				activity.getType(), activityCounterDefinition.getName()
+			},
+			StringPool.POUND);
+
+		LockProtectedAction<SocialActivityLimit> lockProtectedAction =
+			new LockProtectedAction<SocialActivityLimit>(
+				SocialActivityLimit.class, lockKey,
+				PropsValues.SOCIAL_ACTIVITY_LOCK_TIMEOUT,
+				PropsValues.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY) {
+
+			@Override
+			protected SocialActivityLimit performProtectedAction()
+				throws PortalException, SystemException {
+
+				SocialActivityLimit activityLimit =
+					socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
+						groupId, user.getUserId(), activity.getClassNameId(),
+						classPK, activity.getType(),
+						activityCounterDefinition.getName());
+
+				if (activityLimit == null) {
+					activityLimit =
+						socialActivityLimitLocalService.addActivityLimit(
+							user.getUserId(), activity.getGroupId(),
+							activity.getClassNameId(), classPK,
+							activity.getType(),
+							activityCounterDefinition.getName(),
+							activityCounterDefinition.getLimitPeriod());
+				}
+
+				return activityLimit;
+			}
+		};
+
+		lockProtectedAction.performAction();
+
+		socialActivityLimitPersistence.cacheResult(
+			lockProtectedAction.getReturnValue());
+	}
+
 
 }
