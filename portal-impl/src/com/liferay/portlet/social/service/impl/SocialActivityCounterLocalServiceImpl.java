@@ -341,10 +341,11 @@ public class SocialActivityCounterLocalServiceImpl
 			if (addActivityCounter(
 					user, assetEntryUser, activityCounterDefinition)) {
 
-				activityCounters.add(
-					getActivityCounter(
-						activity.getGroupId(), user, activity,
-						activityCounterDefinition));
+				SocialActivityCounter activityCounter = getActivityCounter(
+					activity.getGroupId(), user, activity,
+					activityCounterDefinition);
+
+				activityCounters.add(activityCounter);
 			}
 		}
 
@@ -1015,10 +1016,9 @@ public class SocialActivityCounterLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		SocialActivityCounter activityCounter =
-			getActivityCounter(
-				groupId, user, new SocialActivityImpl(),
-				SocialActivityCounterDefinition.USER_ACHIEVEMENTS);
+		SocialActivityCounter activityCounter = getActivityCounter(
+			groupId, user, new SocialActivityImpl(),
+			SocialActivityCounterDefinition.USER_ACHIEVEMENTS);
 
 		incrementActivityCounter(
 			activityCounter, SocialActivityCounterDefinition.USER_ACHIEVEMENTS);
@@ -1227,7 +1227,7 @@ public class SocialActivityCounterLocalServiceImpl
 			},
 			StringPool.POUND);
 
-		LockProtectedAction<SocialActivityLimit> protectedAction =
+		LockProtectedAction<SocialActivityLimit> lockProtectedAction =
 			new LockProtectedAction<SocialActivityLimit>(
 				SocialActivityLimit.class, lockKey,
 				PropsValues.SOCIAL_ACTIVITY_LOCK_TIMEOUT,
@@ -1237,7 +1237,7 @@ public class SocialActivityCounterLocalServiceImpl
 			protected SocialActivityLimit performProtectedAction()
 				throws PortalException, SystemException {
 
-				SocialActivityLimit activityLimit=
+				SocialActivityLimit activityLimit =
 					socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
 						groupId, user.getUserId(), activity.getClassNameId(),
 						classPK, activity.getType(),
@@ -1257,10 +1257,10 @@ public class SocialActivityCounterLocalServiceImpl
 			}
 		};
 
-		protectedAction.performAction();
+		lockProtectedAction.performAction();
 
 		socialActivityLimitPersistence.cacheResult(
-			protectedAction.getReturnValue());
+			lockProtectedAction.getReturnValue());
 	}
 
 	protected SocialActivityCounter getActivityCounter(
@@ -1295,7 +1295,7 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		if (activityCounterDefinition.getLimitValue() > 0) {
-			SocialActivityLimit activityLimit=
+			SocialActivityLimit activityLimit =
 				socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
 					groupId, user.getUserId(), activity.getClassNameId(),
 					getLimitClassPK(activity, activityCounterDefinition),
@@ -1337,9 +1337,8 @@ public class SocialActivityCounterLocalServiceImpl
 		if (ownerType == SocialActivityCounterConstants.TYPE_ASSET) {
 			return assetEntry.getClassPK();
 		}
-		else {
-			return assetEntry.getUserId();
-		}
+
+		return assetEntry.getUserId();
 	}
 
 	protected long getLimitClassPK(
@@ -1351,9 +1350,8 @@ public class SocialActivityCounterLocalServiceImpl
 		if (name.equals(SocialActivityCounterConstants.NAME_PARTICIPATION)) {
 			return 0;
 		}
-		else {
-			return activity.getClassPK();
-		}
+
+		return activity.getClassPK();
 	}
 
 	protected SocialActivityCounter getUserActivitiesCounter(
@@ -1370,12 +1368,11 @@ public class SocialActivityCounterLocalServiceImpl
 	protected void incrementActivityCounter(
 			SocialActivityCounter activityCounter,
 			SocialActivityCounterDefinition activityCounterDefinition)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		activityCounter.setCurrentValue(
 			activityCounter.getCurrentValue() +
 				activityCounterDefinition.getIncrement());
-
 		activityCounter.setTotalValue(
 			activityCounter.getTotalValue() +
 				activityCounterDefinition.getIncrement());
