@@ -843,8 +843,8 @@ public class PortletExporter {
 
 		Element rootElement = document.addElement("deletions");
 
-		Set<Long> deletionEventClassIds =
-			portletDataContext.getDeletionEventClassIds();
+		Set<Long> deletionEventClassNameIds =
+			portletDataContext.getDeletionEventClassNameIds();
 
 		portletDataContext.addZipEntry(
 			ExportImportPathUtil.getRootPath(portletDataContext) +

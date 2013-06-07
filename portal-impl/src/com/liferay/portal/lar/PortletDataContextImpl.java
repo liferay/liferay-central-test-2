@@ -368,14 +368,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	@Override
-	public void addDeletionEventClassNames(String[] deletionEventClassNames) {
-
-		if (Validator.isNull(deletionEventClassNames)) {
-			return;
-		}
-
+	public void addDeletionEventClassNames(String... deletionEventClassNames) {
 		for (String deletionEventClassName : deletionEventClassNames) {
-			_deletionEventClassIds.add(
+			_deletionEventClassNameIds.add(
 				PortalUtil.getClassNameId(deletionEventClassName));
 		}
 	}
@@ -850,8 +845,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	@Override
-	public Set<Long> getDeletionEventClassIds() {
-		return _deletionEventClassIds;
+	public Set<Long> getDeletionEventClassNameIds() {
+		return _deletionEventClassNameIds;
 	}
 
 	public Date getEndDate() {
@@ -2267,7 +2262,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyGroupId;
 	private long _companyId;
 	private String _dataStrategy;
-	private Set<Long> _deletionEventClassIds = new HashSet<Long>();
+	private Set<Long> _deletionEventClassNameIds = new HashSet<Long>();
 	private Date _endDate;
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
 		new HashMap<String, List<ExpandoColumn>>();
