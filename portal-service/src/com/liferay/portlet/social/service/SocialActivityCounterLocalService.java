@@ -240,8 +240,8 @@ public interface SocialActivityCounterLocalService extends BaseLocalService,
 	* </p>
 	*
 	* @param groupId the primary key of the group
-	* @param classNameId the primary key of the entity's class this counter
-	belongs to
+	* @param classNameId the primary key of the entity's class this
+	counter belongs to
 	* @param classPK the primary key of the entity this counter belongs to
 	* @param name the counter's name
 	* @param ownerType the counter's owner type. Acceptable values are
@@ -250,7 +250,8 @@ public interface SocialActivityCounterLocalService extends BaseLocalService,
 	com.liferay.portlet.social.model.SocialActivityCounterConstants}.
 	* @param currentValue the counter's current value (optionally
 	<code>0</code>)
-	* @param totalValue the counter's total value (optionally <code>0</code>)
+	* @param totalValue the counter's total value (optionally
+	<code>0</code>)
 	* @param startPeriod the counter's start period
 	* @param endPeriod the counter's end period
 	* @return the added activity counter
