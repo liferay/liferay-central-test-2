@@ -14,7 +14,13 @@
  */
 --%>
 
+<%@ include file="/html/portlet/users_admin/init.jsp" %>
+
 <%
+String usersListView = (String)request.getAttribute("view.jsp-usersListView");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+
 List<Organization> userOrganizations = user.getOrganizations(true);
 
 LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
