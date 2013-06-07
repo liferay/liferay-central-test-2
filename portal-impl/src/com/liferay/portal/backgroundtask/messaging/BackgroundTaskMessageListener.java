@@ -14,17 +14,17 @@
 
 package com.liferay.portal.backgroundtask.messaging;
 
+import com.liferay.portal.backgroundtask.executor.BackgroundTaskExecutor;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.ClassLoaderUtil;
-import com.liferay.portal.backgroundtask.executor.BackgroundTaskExecutor;
 import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portal.model.BackgroundTaskConstants;
 import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 /**
  * @author Michael C. Han
@@ -48,7 +48,8 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 				BackgroundTaskLocalServiceUtil.getBackgroundTask(
 					backgroundTaskId);
 
-			String servletContextNames = backgroundTask.getServletContextNames();
+			String servletContextNames =
+				backgroundTask.getServletContextNames();
 
 			if (Validator.isNotNull(servletContextNames)) {
 				classLoader = ClassLoaderUtil.getAggregatePluginsClassLoader(

@@ -14,10 +14,10 @@
 
 package com.liferay.portal.lar.backgroundtask.executor;
 
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.backgroundtask.executor.BaseBackgroundTaskExecutor;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.model.BackgroundTask;
+import com.liferay.portal.service.LayoutServiceUtil;
 
 import java.io.Serializable;
 

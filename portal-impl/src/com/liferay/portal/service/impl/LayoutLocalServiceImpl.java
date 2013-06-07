@@ -43,6 +43,7 @@ import com.liferay.portal.lar.backgroundtask.executor.LayoutExportBackgroundTask
 import com.liferay.portal.lar.backgroundtask.executor.LayoutImportBackgroundTaskExecutor;
 import com.liferay.portal.lar.backgroundtask.executor.PortletExportBackgroundTaskExecutor;
 import com.liferay.portal.lar.backgroundtask.executor.PortletImportBackgroundTaskExecutor;
+import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -64,7 +65,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
-import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;

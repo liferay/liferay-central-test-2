@@ -23,13 +23,13 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.BackgroundTask;
+import com.liferay.portal.model.BackgroundTaskConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.model.BackgroundTask;
-import com.liferay.portal.model.BackgroundTaskConstants;
 import com.liferay.portal.service.base.BackgroundTaskLocalServiceBaseImpl;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.io.File;
@@ -71,7 +71,8 @@ public class BackgroundTaskLocalServiceImpl
 		backgroundTask.setUserId(userId);
 		backgroundTask.setUserName(user.getFullName());
 		backgroundTask.setName(name);
-		backgroundTask.setServletContextNames(StringUtil.merge(servletContextNames));
+		backgroundTask.setServletContextNames(
+			StringUtil.merge(servletContextNames));
 		backgroundTask.setTaskExecutorClassName(taskExecutorClass.getName());
 
 		if (taskContextMap != null) {
@@ -156,6 +157,13 @@ public class BackgroundTaskLocalServiceImpl
 	}
 
 	@Override
+	public BackgroundTask getBackgroundTask(long backgroundTaskId)
+		throws PortalException, SystemException {
+
+		return backgroundTaskPersistence.findByPrimaryKey(backgroundTaskId);
+	}
+
+	@Override
 	public List<BackgroundTask> getBackgroundTasks(
 			long groupId, String taskExecutorClassName)
 		throws SystemException {
@@ -171,13 +179,6 @@ public class BackgroundTaskLocalServiceImpl
 
 		return backgroundTaskPersistence.findByG_T_S(
 			groupId, taskExecutorClassName, status);
-	}
-
-	@Override
-	public BackgroundTask getBackgroundTask(long backgroundTaskId)
-		throws PortalException, SystemException {
-
-		return backgroundTaskPersistence.findByPrimaryKey(backgroundTaskId);
 	}
 
 	@Override
