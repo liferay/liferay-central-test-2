@@ -280,7 +280,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		PortalContextLoaderListener.class);
 
 	private static Field _filteredPropertyDescriptorsCacheField;
-
 	private static String _portalServletContextPath = "/";
 
 	static {
