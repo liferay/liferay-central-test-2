@@ -19,13 +19,15 @@
 <%
 String usersListView = (String)request.getAttribute("view.jsp-usersListView");
 
-List<Organization> userOrganizations = user.getOrganizations(true);
+PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
 
 boolean showList = true;
 
 if (filterManageableOrganizations) {
+	List<Organization> userOrganizations = user.getOrganizations(true);
+
 	if (userOrganizations.isEmpty()) {
 		showList = false;
 	}
@@ -33,8 +35,6 @@ if (filterManageableOrganizations) {
 		organizationParams.put("organizationsTree", userOrganizations);
 	}
 }
-
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
 <c:choose>
