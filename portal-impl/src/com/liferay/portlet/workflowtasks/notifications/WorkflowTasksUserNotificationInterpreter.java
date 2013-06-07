@@ -64,13 +64,12 @@ public class WorkflowTasksUserNotificationInterpreter
 			PortalUtil.getControlPanelPlid(serviceContext.getCompanyId()),
 			PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
 		portletURL.setControlPanelCategory("my");
-
 		portletURL.setParameter(
 			"struts_action", "/my_workflow_tasks/edit_workflow_task");
 		portletURL.setParameter(
 			"workflowTaskId", jsonObject.getString("workflowInstanceId"));
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		return portletURL.toString();
 	}

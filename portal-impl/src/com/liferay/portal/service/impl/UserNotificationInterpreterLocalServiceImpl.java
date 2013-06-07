@@ -125,7 +125,7 @@ public class UserNotificationInterpreterLocalServiceImpl
 
 		if (userNotificationInterpreter == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No interpreter found for: " + userNotificationEvent);
+				_log.warn("No interpreter found for " + userNotificationEvent);
 			}
 
 			return null;

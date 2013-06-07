@@ -51,8 +51,8 @@ public class UserNotificationFeedEntry {
 		_portletId = GetterUtil.getString(portletId);
 	}
 
-	private String _body = StringPool.BLANK;
-	private String _link = StringPool.BLANK;
+	private String _body;
+	private String _link;
 	private String _portletId = StringPool.BLANK;
 
 }

@@ -1971,6 +1971,7 @@ public class PortletImpl extends PortletBaseImpl {
 	 * @return the names of the classes that represent user notification
 	 *         interpreters associated with the portlet
 	 */
+	@Override
 	public List<String> getUserNotificationInterpreterClasses() {
 		return _userNotificationInterpreterClasses;
 	}
@@ -1980,6 +1981,7 @@ public class PortletImpl extends PortletBaseImpl {
 	 *
 	 * @return the user notification interpreter instances of the portlet
 	 */
+	@Override
 	public List<UserNotificationInterpreter>
 		getUserNotificationInterpreterInstances() {
 
@@ -3663,6 +3665,7 @@ public class PortletImpl extends PortletBaseImpl {
 	 *        represent user notification interpreters associated with the
 	 *        portlet
 	 */
+	@Override
 	public void setUserNotificationInterpreterClasses(
 		List<String> userNotificationInterpreterClasses) {
 
