@@ -36,7 +36,7 @@ refererURL.setParameter("updateLayout", "true");
 		</c:if>
 
 		<%
-		int portletCategoryIndex = 0;
+		String panelContainerId = "addApplicationPanelContainer";
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
@@ -48,7 +48,7 @@ refererURL.setParameter("updateLayout", "true");
 			}
 		}
 
-		String panelContainerId = "addApplicationPanelContainer";
+		int portletCategoryIndex = 0;
 		%>
 
 		<liferay-ui:panel-container id="<%= panelContainerId %>">
