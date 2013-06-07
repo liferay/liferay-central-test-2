@@ -644,6 +644,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	@Override
+	public void shutdown(long companyId) {
+		IndexAccessor indexAccessor = getIndexAccessor(companyId);
+
+		_indexAccessors.remove(indexAccessor);
+
+		indexAccessor.close();
+	}
+
+	@Override
 	public void startup(long companyId) {
 		if (!PropsValues.INDEX_ON_STARTUP) {
 			return;
