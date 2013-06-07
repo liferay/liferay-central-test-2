@@ -33,6 +33,7 @@ public abstract class BaseUserNotificationInterpreter
 		return _portletId;
 	}
 
+	@Override
 	public String getSelector() {
 		return _selector;
 	}

@@ -941,7 +941,7 @@ public class PortletBagFactory {
 
 	protected UserNotificationInterpreter
 			newUserNotificationInterpreterInstance(
-				Portlet portlet, String userNotificationInterpreterClass)
+				String userNotificationInterpreterClass)
 		throws Exception {
 
 		UserNotificationInterpreter userNotificationInterpreterInstance =
@@ -951,7 +951,7 @@ public class PortletBagFactory {
 
 		userNotificationInterpreterInstance =
 			new UserNotificationInterpreterImpl(
-				portlet.getPortletId(), userNotificationInterpreterInstance);
+				userNotificationInterpreterInstance);
 
 		UserNotificationInterpreterLocalServiceUtil.
 			addUserNotificationInterpreter(userNotificationInterpreterInstance);
@@ -971,7 +971,7 @@ public class PortletBagFactory {
 
 			UserNotificationInterpreter userNotificationInterpreterInstance =
 				newUserNotificationInterpreterInstance(
-					portlet, userNotificationInterpreterClass);
+					userNotificationInterpreterClass);
 
 			userNotificationInterpreterInstances.add(
 				userNotificationInterpreterInstance);

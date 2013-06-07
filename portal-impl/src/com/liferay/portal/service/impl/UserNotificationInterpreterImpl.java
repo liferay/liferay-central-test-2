@@ -27,10 +27,8 @@ public class UserNotificationInterpreterImpl
 	implements UserNotificationInterpreter {
 
 	public UserNotificationInterpreterImpl(
-		String portletId,
 		UserNotificationInterpreter userNotificationInterpreter) {
 
-		_portletId = portletId;
 		_userNotificationInterpreter = userNotificationInterpreter;
 	}
 
@@ -54,8 +52,6 @@ public class UserNotificationInterpreterImpl
 			userNotificationEvent, serviceContext);
 	}
 
-	private String _portletId;
-	private String _selector;
 	private UserNotificationInterpreter _userNotificationInterpreter;
 
 }
