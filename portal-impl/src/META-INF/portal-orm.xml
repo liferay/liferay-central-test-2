@@ -1171,6 +1171,7 @@
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
+			<basic name="extraData" />
 			<transient name="className" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
