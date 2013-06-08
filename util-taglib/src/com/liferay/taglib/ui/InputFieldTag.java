@@ -135,7 +135,7 @@ public class InputFieldTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-field:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:input-field:dateTogglerCheckboxLabel",
-			String.valueOf(_dateTogglerCheckboxLabel));
+			_dateTogglerCheckboxLabel);
 		request.setAttribute(
 			"liferay-ui:input-field:defaultLanguageId", _defaultLanguageId);
 		request.setAttribute(
