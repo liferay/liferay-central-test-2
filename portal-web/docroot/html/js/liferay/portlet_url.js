@@ -231,7 +231,7 @@ AUI.add(
 
 				A.each(
 					reservedParams,
-					function (item, index, collection) {
+					function(item, index, collection) {
 						if (item) {
 							resultURL.setParameter(index, item);
 						}
