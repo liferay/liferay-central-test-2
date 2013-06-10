@@ -307,7 +307,6 @@ public class DDLImpl implements DDL {
 		contextObjects.put(
 			DDLConstants.RESERVED_RECORD_SET_NAME,
 			recordSet.getName(themeDisplay.getLocale()));
-
 		contextObjects.put(TemplateConstants.TEMPLATE_ID, ddmTemplateId);
 
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");
