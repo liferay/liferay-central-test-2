@@ -16,10 +16,10 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.SystemEvent;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.base.SystemEventLocalServiceBaseImpl;
 
@@ -33,26 +33,27 @@ public class SystemEventLocalServiceImpl
 	extends SystemEventLocalServiceBaseImpl {
 
 	@Override
-	public void addEvent(
-			long userId, long groupId, int type, long classNameId, long classPK,
-			String classUuid)
+	public void addSystemEvent(
+			long userId, long groupId, long classNameId, long classPK,
+			String classUuid, int type)
 		throws PortalException, SystemException {
 
-		addEvent(userId, groupId, type, classNameId, classPK, classUuid, null);
+		addSystemEvent(
+			userId, groupId, classNameId, classPK, classUuid, type, null);
 	}
 
 	@Override
-	public void addEvent(
-			long userId, long groupId, int type, long classNameId, long classPK,
-			String classUuid, String extraData)
+	public void addSystemEvent(
+			long userId, long groupId, long classNameId, long classPK,
+			String classUuid, int type, String extraData)
 		throws PortalException, SystemException {
-
-		long companyId = 0;
-		String userName;
 
 		if (userId == 0) {
 			userId = PrincipalThreadLocal.getUserId();
 		}
+
+		long companyId = 0;
+		String userName = StringPool.BLANK;
 
 		if (userId > 0) {
 			User user = userPersistence.findByPrimaryKey(userId);
@@ -60,19 +61,16 @@ public class SystemEventLocalServiceImpl
 			companyId = user.getCompanyId();
 			userName = user.getFullName();
 		}
-		else {
-			userName = UserConstants.SYSTEM_USER_NAME;
-		}
 
 		if (companyId == 0) {
 			if (groupId > 0) {
-				Group group = groupLocalService.getGroup(groupId);
+				Group group = groupPersistence.findByPrimaryKey(groupId);
 
 				companyId = group.getCompanyId();
 			}
 			else {
 				throw new IllegalArgumentException(
-					"No company id can be determined");
+					"Unable to determine company");
 			}
 		}
 
@@ -80,28 +78,27 @@ public class SystemEventLocalServiceImpl
 
 		SystemEvent systemEvent = systemEventPersistence.create(systemEventId);
 
-		systemEvent.setCompanyId(companyId);
-		systemEvent.setCreateDate(new Date());
 		systemEvent.setGroupId(groupId);
+		systemEvent.setCompanyId(companyId);
 		systemEvent.setUserId(userId);
 		systemEvent.setUserName(userName);
-
+		systemEvent.setCreateDate(new Date());
 		systemEvent.setClassNameId(classNameId);
 		systemEvent.setClassPK(classPK);
 		systemEvent.setClassUuid(classUuid);
-		systemEvent.setExtraData(extraData);
 		systemEvent.setType(type);
+		systemEvent.setExtraData(extraData);
 
 		systemEventPersistence.update(systemEvent);
 	}
 
 	@Override
-	public void deleteEvents(long groupId) throws SystemException {
+	public void deleteSystemEvents(long groupId) throws SystemException {
 		systemEventPersistence.removeByGroupId(groupId);
 	}
 
 	@Override
-	public SystemEvent fetchEvent(
+	public SystemEvent fetchSystemEvent(
 			long groupId, long classNameId, long classPK, int type)
 		throws SystemException {
 
@@ -110,7 +107,7 @@ public class SystemEventLocalServiceImpl
 	}
 
 	@Override
-	public List<SystemEvent> getEvents(
+	public List<SystemEvent> getSystemEvents(
 			long groupId, long classNameId, long classPK)
 		throws SystemException {
 
@@ -119,7 +116,7 @@ public class SystemEventLocalServiceImpl
 	}
 
 	@Override
-	public List<SystemEvent> getEvents(
+	public List<SystemEvent> getSystemEvents(
 			long groupId, long classNameId, long classPK, int type)
 		throws SystemException {
 
