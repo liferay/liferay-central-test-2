@@ -130,9 +130,7 @@ public class JournalStructureServiceImpl
 			int end, OrderByComparator obc)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		List<DDMStructure> ddmStructures =
 			ddmStructureFinder.filterFindByKeywords(
@@ -148,9 +146,7 @@ public class JournalStructureServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		List<DDMStructure> ddmStructures =
 			ddmStructureFinder.filterFindByC_G_C_N_D_S_T(
@@ -165,9 +161,7 @@ public class JournalStructureServiceImpl
 	public int searchCount(long companyId, long[] groupIds, String keywords)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		return ddmStructureFinder.filterCountByKeywords(
 			companyId, groupIds, classNameIds, keywords);
@@ -179,9 +173,7 @@ public class JournalStructureServiceImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		return ddmStructureFinder.filterCountByC_G_C_N_D_S_T(
 			companyId, groupIds, classNameIds, name, description, null,

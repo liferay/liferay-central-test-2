@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -75,9 +76,9 @@ public class JournalStructureAdapter implements JournalStructure {
 
 	@Override
 	public int compareTo(JournalStructure journalStructure) {
-		int value = 0;
+		String structureId = getStructureId();
 
-		value = getStructureId().compareTo(journalStructure.getStructureId());
+		int value = structureId.compareTo(journalStructure.getStructureId());
 
 		if (value != 0) {
 			return value;
@@ -98,14 +99,11 @@ public class JournalStructureAdapter implements JournalStructure {
 
 		JournalStructure journalStructure = (JournalStructure)obj;
 
-		long primaryKey = journalStructure.getPrimaryKey();
-
-		if (getPrimaryKey() == primaryKey) {
+		if (Validator.equals(getId(), journalStructure.getId())) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	@Override
@@ -178,20 +176,22 @@ public class JournalStructureAdapter implements JournalStructure {
 				JournalStructureLocalServiceUtil.getStructure(
 					getGroupId(), parentStructureId, true);
 
-			Document doc = SAXReaderUtil.read(getXsd());
+			Document document = SAXReaderUtil.read(getXsd());
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			Document parentDoc = SAXReaderUtil.read(
+			Document parentDocument = SAXReaderUtil.read(
 				parentStructure.getMergedXsd());
 
-			Element parentRoot = parentDoc.getRootElement();
+			Element parentRootElement = parentDocument.getRootElement();
 
-			addParentStructureId(parentRoot, parentStructureId);
+			addParentStructureId(parentRootElement, parentStructureId);
 
-			root.content().addAll(0, parentRoot.content());
+			List<Node> nodes = rootElement.content();
 
-			xsd = root.asXML();
+			nodes.addAll(0, parentRootElement.content());
+
+			xsd = rootElement.asXML();
 		}
 		catch (Exception e) {
 		}
@@ -279,7 +279,7 @@ public class JournalStructureAdapter implements JournalStructure {
 			return parentDDMStructure.getStructureKey();
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return null;
@@ -381,12 +381,13 @@ public class JournalStructureAdapter implements JournalStructure {
 
 	@Override
 	public void setExpandoBridgeAttributes(JournalStructure journalStructure) {
-		ExpandoBridge thisExpandoBridge = getExpandoBridge();
+		ExpandoBridge expandoBridge = getExpandoBridge();
 
-		ExpandoBridge baseModelExpandoBridge =
+		ExpandoBridge journalStructureExpandoBridge =
 			journalStructure.getExpandoBridge();
 
-		thisExpandoBridge.setAttributes(baseModelExpandoBridge.getAttributes());
+		expandoBridge.setAttributes(
+			journalStructureExpandoBridge.getAttributes());
 	}
 
 	@Override
@@ -537,7 +538,7 @@ public class JournalStructureAdapter implements JournalStructure {
 				parentDDMStructure.getStructureId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
@@ -617,15 +618,16 @@ public class JournalStructureAdapter implements JournalStructure {
 	}
 
 	protected void addParentStructureId(
-		Element parentEl, String parentStructureId) {
+		Element parentElement, String parentStructureId) {
 
-		List<Element> dynamicElements = parentEl.elements("dynamic-element");
+		List<Element> dynamicElementElements = parentElement.elements(
+			"dynamic-element");
 
-		for (Element dynamicElement : dynamicElements) {
-			dynamicElement.addAttribute(
+		for (Element dynamicElementElement : dynamicElementElements) {
+			dynamicElementElement.addAttribute(
 				"parent-structure-id", parentStructureId);
 
-			addParentStructureId(dynamicElement, parentStructureId);
+			addParentStructureId(dynamicElementElement, parentStructureId);
 		}
 	}
 

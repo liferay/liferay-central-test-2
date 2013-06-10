@@ -607,7 +607,7 @@ public class JournalConverterImpl implements JournalConverter {
 			return;
 		}
 
-		// Index Type
+		// Index type
 
 		String indexType = GetterUtil.getString(
 			dynamicElementElement.attributeValue("indexType"));

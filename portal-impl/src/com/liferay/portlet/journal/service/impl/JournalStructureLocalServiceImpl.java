@@ -59,7 +59,7 @@ public class JournalStructureLocalServiceImpl
 
 		structure.setNew(true);
 
-		return update(structure);
+		return updateStructure(structure);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class JournalStructureLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = findByG_S(groupId, structureId);
+		JournalStructure structure = doGetStructure(groupId, structureId);
 
 		addStructureResources(
 			structure, addGroupPermissions, addGuestPermissions);
@@ -133,7 +133,7 @@ public class JournalStructureLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = findByG_S(groupId, structureId);
+		JournalStructure structure = doGetStructure(groupId, structureId);
 
 		addStructureResources(structure, groupPermissions, guestPermissions);
 	}
@@ -142,7 +142,7 @@ public class JournalStructureLocalServiceImpl
 	public void checkNewLine(long groupId, String structureId)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = findByG_S(groupId, structureId);
+		JournalStructure structure = doGetStructure(groupId, structureId);
 
 		String xsd = structure.getXsd();
 
@@ -152,7 +152,7 @@ public class JournalStructureLocalServiceImpl
 
 			structure.setXsd(xsd);
 
-			update(structure);
+			updateStructure(structure);
 		}
 	}
 
@@ -169,7 +169,7 @@ public class JournalStructureLocalServiceImpl
 		newStructureId = newStructureId.trim().toUpperCase();
 		Date now = new Date();
 
-		JournalStructure oldStructure = findByG_S(groupId, oldStructureId);
+		JournalStructure oldStructure = doGetStructure(groupId, oldStructureId);
 
 		if (autoStructureId) {
 			newStructureId = String.valueOf(counterLocalService.increment());
@@ -177,7 +177,7 @@ public class JournalStructureLocalServiceImpl
 		else {
 			validateStructureId(newStructureId);
 
-			JournalStructure newStructure = fetchByG_S(groupId, newStructureId);
+			JournalStructure newStructure = fetchStructure(groupId, newStructureId);
 
 			if (newStructure != null) {
 				throw new DuplicateStructureIdException();
@@ -200,7 +200,7 @@ public class JournalStructureLocalServiceImpl
 		newStructure.setXsd(oldStructure.getXsd());
 		newStructure.setExpandoBridgeAttributes(oldStructure);
 
-		return update(newStructure);
+		return updateStructure(newStructure);
 	}
 
 	@Override
@@ -226,7 +226,7 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
-		JournalStructure structure = findByG_S(groupId, structureId);
+		JournalStructure structure = doGetStructure(groupId, structureId);
 
 		deleteStructure(structure);
 	}
@@ -235,7 +235,7 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
-		List<JournalStructure> structures = findByGroupId(
+		List<JournalStructure> structures = doGetStructures(
 			groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (JournalStructure structure : structures) {
@@ -267,7 +267,7 @@ public class JournalStructureLocalServiceImpl
 
 		structureId = structureId.trim().toUpperCase();
 
-		JournalStructure structure = fetchByG_S(groupId, structureId);
+		JournalStructure structure = fetchStructure(groupId, structureId);
 
 		if (structure != null) {
 			return structure;
@@ -284,7 +284,7 @@ public class JournalStructureLocalServiceImpl
 		Group companyGroup = groupLocalService.getCompanyGroup(
 			group.getCompanyId());
 
-		return findByG_S(companyGroup.getGroupId(), structureId);
+		return doGetStructure(companyGroup.getGroupId(), structureId);
 	}
 
 	@Override
@@ -296,7 +296,7 @@ public class JournalStructureLocalServiceImpl
 	public List<JournalStructure> getStructures(long groupId)
 		throws SystemException {
 
-		return findByGroupId(groupId);
+		return doGetStructures(groupId);
 	}
 
 	@Override
@@ -304,12 +304,12 @@ public class JournalStructureLocalServiceImpl
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return findByGroupId(groupId, start, end);
+		return doGetStructures(groupId, start, end);
 	}
 
 	@Override
 	public int getStructuresCount(long groupId) throws SystemException {
-		return countByGroupId(groupId);
+		return doGetStructuresCount(groupId);
 	}
 
 	@Override
@@ -318,9 +318,7 @@ public class JournalStructureLocalServiceImpl
 			int end, OrderByComparator obc)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		List<DDMStructure> ddmStructures = ddmStructureFinder.findByKeywords(
 			companyId, groupIds, classNameIds, keywords, start, end, obc);
@@ -335,9 +333,7 @@ public class JournalStructureLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		List<DDMStructure> ddmStructures =
 			ddmStructureFinder.findByC_G_C_N_D_S_T(
@@ -352,9 +348,7 @@ public class JournalStructureLocalServiceImpl
 	public int searchCount(long companyId, long[] groupIds, String keywords)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		return ddmStructureFinder.countByKeywords(
 			companyId, groupIds, classNameIds, keywords);
@@ -366,9 +360,7 @@ public class JournalStructureLocalServiceImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
-		long[] classNameIds = new long[] {
-			PortalUtil.getClassNameId(JournalArticle.class)
-		};
+		long[] classNameIds = {PortalUtil.getClassNameId(JournalArticle.class)};
 
 		return ddmStructureFinder.countByC_G_C_N_D_S_T(
 			companyId, groupIds, classNameIds, name, description, null,
@@ -379,7 +371,7 @@ public class JournalStructureLocalServiceImpl
 	public JournalStructure updateJournalStructure(JournalStructure structure)
 			throws PortalException, SystemException {
 
-		return update(structure);
+		return updateStructure(structure);
 	}
 
 	@Override
@@ -408,12 +400,12 @@ public class JournalStructureLocalServiceImpl
 		return new JournalStructureAdapter(ddmStructure);
 	}
 
-	protected int countByGroupId(long groupId) throws SystemException {
+	protected int doGetStructuresCount(long groupId) throws SystemException {
 		return ddmStructureLocalService.getStructuresCount(
 			groupId, PortalUtil.getClassNameId(JournalArticle.class));
 	}
 
-	protected JournalStructure fetchByG_S(long groupId, String structureId)
+	protected JournalStructure fetchStructure(long groupId, String structureId)
 		throws SystemException {
 
 		DDMStructure ddmStructure = fetchDDMStructure(groupId, structureId);
@@ -440,7 +432,7 @@ public class JournalStructureLocalServiceImpl
 			structureId);
 	}
 
-	protected JournalStructure findByG_S(long groupId, String structureId)
+	protected JournalStructure doGetStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		DDMStructure ddmStructure = getDDMStructure(groupId, structureId);
@@ -448,13 +440,13 @@ public class JournalStructureLocalServiceImpl
 		return new JournalStructureAdapter(ddmStructure);
 	}
 
-	protected List<JournalStructure> findByGroupId(long groupId)
+	protected List<JournalStructure> doGetStructures(long groupId)
 		throws SystemException {
 
-		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return doGetStructures(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	protected List<JournalStructure> findByGroupId(
+	protected List<JournalStructure> doGetStructures(
 			long groupId, int start, int end)
 		throws SystemException {
 
@@ -510,7 +502,7 @@ public class JournalStructureLocalServiceImpl
 		return PortalUUIDUtil.generate();
 	}
 
-	protected JournalStructure update(JournalStructure structure)
+	protected JournalStructure updateStructure(JournalStructure structure)
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = new ServiceContext();

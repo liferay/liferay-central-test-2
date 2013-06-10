@@ -468,7 +468,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 	}
 
 	@Test
-	public void testGetJournalSD() throws Exception {
+	public void testGetJournalXSD() throws Exception {
 		String expectedXSD = readText("test-journal-structure-all-fields.xml");
 
 		Map<String, Map<String, String>> expectedMap =

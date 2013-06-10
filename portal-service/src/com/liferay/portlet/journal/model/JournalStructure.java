@@ -94,7 +94,9 @@ public interface JournalStructure {
 
 	public String getXsd();
 
+	@Override
 	public int hashCode();
+
 	public boolean isNew();
 
 	public void setCompanyId(long companyId);
