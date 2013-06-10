@@ -104,7 +104,8 @@ public class PluginsEnvironmentBuilder {
 			}
 
 			if (osgiProject || sharedProject) {
-				setupJarProject(dirName, fileName, dependencyJars);
+				setupJarProject(
+					dirName, fileName, dependencyJars, sharedProject);
 			}
 		}
 	}
@@ -229,7 +230,8 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	protected void setupJarProject(
-			String dirName, String fileName, List<String> dependencyJars)
+			String dirName, String fileName, List<String> dependencyJars,
+			boolean sharedProject)
 		throws Exception {
 
 		File buildFile = new File(dirName + "/" + fileName);
@@ -241,6 +243,14 @@ public class PluginsEnvironmentBuilder {
 		writeEclipseFiles(libDir, projectDir, dependencyJars);
 
 		List<String> importSharedJars = getImportSharedJars(projectDir);
+
+		if (sharedProject) {
+			if (!importSharedJars.contains("portal-compat-shared.jar")) {
+				importSharedJars = new ArrayList<String>(importSharedJars);
+
+				importSharedJars.add("portal-compat-shared.jar");
+			}
+		}
 
 		File gitignoreFile = new File(
 			projectDir.getCanonicalPath() + "/.gitignore");
