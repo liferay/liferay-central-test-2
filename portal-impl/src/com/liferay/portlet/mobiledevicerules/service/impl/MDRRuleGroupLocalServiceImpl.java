@@ -141,6 +141,13 @@ public class MDRRuleGroupLocalServiceImpl
 
 		mdrRuleGroupPersistence.remove(ruleGroup);
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			ruleGroup.getGroupId(), MDRRuleGroup.class.getName(),
+			ruleGroup.getRuleGroupId(), ruleGroup.getUuid(),
+			SystemEventConstants.TYPE_DELETE);
+
 		// Rules
 
 		mdrRuleLocalService.deleteRules(ruleGroup.getRuleGroupId());
@@ -149,13 +156,6 @@ public class MDRRuleGroupLocalServiceImpl
 
 		mdrRuleGroupInstanceLocalService.deleteRuleGroupInstances(
 			ruleGroup.getRuleGroupId());
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			ruleGroup.getGroupId(), MDRRuleGroup.class.getName(),
-			ruleGroup.getRuleGroupId(), ruleGroup.getUuid(),
-			SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

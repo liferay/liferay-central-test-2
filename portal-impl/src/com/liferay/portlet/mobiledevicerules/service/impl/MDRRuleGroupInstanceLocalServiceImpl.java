@@ -124,18 +124,18 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 
 		mdrRuleGroupInstancePersistence.remove(ruleGroupInstance);
 
-		// Rule actions
-
-		mdrActionLocalService.deleteActions(
-			ruleGroupInstance.getRuleGroupInstanceId());
-
-		// System Event
+		// System event
 
 		systemEventLocalService.addSystemEvent(
 			ruleGroupInstance.getGroupId(),
 			MDRRuleGroupInstance.class.getName(),
 			ruleGroupInstance.getRuleGroupInstanceId(),
 			ruleGroupInstance.getUuid(), SystemEventConstants.TYPE_DELETE);
+
+		// Rule actions
+
+		mdrActionLocalService.deleteActions(
+			ruleGroupInstance.getRuleGroupInstanceId());
 	}
 
 	@Override

@@ -186,22 +186,22 @@ public class JournalFeedLocalServiceImpl
 
 		journalFeedPersistence.remove(feed);
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			JournalFeed.class.getName(), feed.getId());
-
 		// Resources
 
 		resourceLocalService.deleteResource(
 			feed.getCompanyId(), JournalFeed.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, feed.getId());
 
-		// System Event
+		// System event
 
 		systemEventLocalService.addSystemEvent(
 			feed.getGroupId(), JournalFeed.class.getName(), feed.getId(),
 			feed.getUuid(), SystemEventConstants.TYPE_DELETE);
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			JournalFeed.class.getName(), feed.getId());
 	}
 
 	@Override

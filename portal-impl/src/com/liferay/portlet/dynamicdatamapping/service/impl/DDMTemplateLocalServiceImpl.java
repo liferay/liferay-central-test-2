@@ -452,7 +452,7 @@ public class DDMTemplateLocalServiceImpl
 			template.getCompanyId(), DDMTemplate.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, template.getTemplateId());
 
-		// System Event
+		// System event
 
 		systemEventLocalService.addSystemEvent(
 			template.getGroupId(), DDMTemplate.class.getName(),

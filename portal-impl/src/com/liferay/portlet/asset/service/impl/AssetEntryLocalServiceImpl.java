@@ -86,6 +86,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		assetEntryPersistence.remove(entry);
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			entry.getGroupId(), entry.getClassName(), entry.getClassPK(),
+			entry.getClassUuid(), SystemEventConstants.TYPE_DELETE);
+
 		// Links
 
 		assetLinkLocalService.deleteLinks(entry.getEntryId());
@@ -98,12 +104,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 					tag.getTagId(), entry.getClassNameId());
 			}
 		}
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			entry.getGroupId(), entry.getClassName(), entry.getClassPK(),
-			entry.getClassUuid(), SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

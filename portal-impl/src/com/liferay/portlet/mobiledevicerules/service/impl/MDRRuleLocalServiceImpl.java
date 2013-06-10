@@ -129,6 +129,10 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 
 		mdrRulePersistence.remove(rule);
 
+		systemEventLocalService.addSystemEvent(
+			rule.getGroupId(), MDRRule.class.getName(), rule.getRuleId(),
+			rule.getUuid(), SystemEventConstants.TYPE_DELETE);
+
 		MDRRuleGroup ruleGroup = mdrRuleGroupPersistence.fetchByPrimaryKey(
 			rule.getRuleGroupId());
 
@@ -137,12 +141,6 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 
 			mdrRuleGroupPersistence.update(ruleGroup);
 		}
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			rule.getGroupId(), MDRRule.class.getName(), rule.getRuleId(),
-			rule.getUuid(), SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

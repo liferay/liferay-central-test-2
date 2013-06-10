@@ -211,6 +211,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			node.getCompanyId(), WikiNode.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, node.getNodeId());
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
+			node.getUuid(), SystemEventConstants.TYPE_DELETE);
+
 		// Attachments
 
 		long folderId = node.getAttachmentsFolderId();
@@ -246,12 +252,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			WikiPage.class);
 
 		wikiPageIndexer.delete(node);
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
-			node.getUuid(), SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

@@ -423,7 +423,7 @@ public class DDMStructureLocalServiceImpl
 			structure.getCompanyId(), DDMStructure.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, structure.getStructureId());
 
-		// System Event
+		// System event
 
 		systemEventLocalService.addSystemEvent(
 			structure.getGroupId(), DDMStructure.class.getName(),

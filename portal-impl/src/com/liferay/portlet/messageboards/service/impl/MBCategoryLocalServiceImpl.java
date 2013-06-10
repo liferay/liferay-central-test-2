@@ -273,6 +273,13 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			category.getCompanyId(), MBCategory.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			category.getGroupId(), MBCategory.class.getName(),
+			category.getCategoryId(), category.getUuid(),
+			SystemEventConstants.TYPE_DELETE);
+
 		// Trash
 
 		trashEntryLocalService.deleteEntry(
@@ -281,13 +288,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Category
 
 		mbCategoryPersistence.remove(category);
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			category.getGroupId(), MBCategory.class.getName(),
-			category.getCategoryId(), category.getUuid(),
-			SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

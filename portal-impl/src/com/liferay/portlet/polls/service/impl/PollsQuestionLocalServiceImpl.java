@@ -190,6 +190,13 @@ public class PollsQuestionLocalServiceImpl
 			question.getCompanyId(), PollsQuestion.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, question.getQuestionId());
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			question.getGroupId(), PollsQuestion.class.getName(),
+			question.getQuestionId(), question.getUuid(),
+			SystemEventConstants.TYPE_DELETE);
+
 		// Choices
 
 		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
@@ -197,13 +204,6 @@ public class PollsQuestionLocalServiceImpl
 		// Votes
 
 		pollsVotePersistence.removeByQuestionId(question.getQuestionId());
-
-		// System Event
-
-		systemEventLocalService.addSystemEvent(
-			question.getGroupId(), PollsQuestion.class.getName(),
-			question.getQuestionId(), question.getUuid(),
-			SystemEventConstants.TYPE_DELETE);
 	}
 
 	@Override

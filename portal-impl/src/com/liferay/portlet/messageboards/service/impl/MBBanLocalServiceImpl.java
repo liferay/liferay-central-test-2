@@ -106,8 +106,6 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	public void deleteBan(MBBan ban) throws PortalException, SystemException {
 		mbBanPersistence.remove(ban);
 
-		// System Event
-
 		systemEventLocalService.addSystemEvent(
 			ban.getGroupId(), MBBan.class.getName(), ban.getBanId(),
 			ban.getUuid(), SystemEventConstants.TYPE_DELETE);
