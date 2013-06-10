@@ -799,7 +799,26 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				</then>
 			</elseif>
 			<else>
-				<fail>The property "test.type" is invalid.</fail>
+				<if>
+					<not>
+						<isset property="class" />
+					</not>
+					<then>
+						<fail>
+							Please specify test class by its name: -Dclass=TestClassName, to execute only one class, or by package name to execute all tests under it: -Dclass=documentlibrary/*Test
+						</fail>
+					</then>
+					<elseif>
+						<not>
+							<isset property="test.type" />
+						</not>
+						<then>
+							<fail>
+								Please move to test class source folder (portal-impl, portal-service, util-java...) and specify test class by its name: -Dclass=TestClassName, to execute only one class, or by package name to execute all tests under it: -Dclass=documentlibrary/*Test
+							</fail>
+						</then>
+					</elseif>
+				</if>
 			</else>
 		</if>
 
