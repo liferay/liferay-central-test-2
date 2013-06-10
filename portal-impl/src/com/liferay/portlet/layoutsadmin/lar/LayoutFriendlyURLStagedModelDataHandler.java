@@ -65,13 +65,12 @@ public class LayoutFriendlyURLStagedModelDataHandler
 		long userId = portletDataContext.getUserId(
 			layoutFriendlyURL.getUserUuid());
 
-		Map<Long, Long> layoutPlids =
+		Map<Long, Long> plids =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				Layout.class);
 
 		long plid = MapUtil.getLong(
-			layoutPlids, layoutFriendlyURL.getPlid(),
-			layoutFriendlyURL.getPlid());
+			plids, layoutFriendlyURL.getPlid(), layoutFriendlyURL.getPlid());
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			layoutFriendlyURL, LayoutPortletDataHandler.NAMESPACE);

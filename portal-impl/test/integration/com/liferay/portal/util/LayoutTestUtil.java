@@ -130,43 +130,6 @@ public class LayoutTestUtil {
 			nameMap, null, true, true, ServiceTestUtil.getServiceContext());
 	}
 
-	public static Layout addLayoutTypeArticle(
-			long groupId, String name, String articleId)
-		throws Exception {
-
-		Layout layout = addLayout(groupId, name);
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty("article-id", articleId);
-
-		layout.setType(LayoutConstants.TYPE_ARTICLE);
-
-		LayoutLocalServiceUtil.updateLayout(layout);
-
-		return layout;
-	}
-
-	public static Layout addLayoutTypeLinkedToLayout(
-			long groupId, String name, long linkedToLayoutId)
-		throws Exception {
-
-		Layout layout = addLayout(groupId, name);
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"linkToLayoutId", String.valueOf(linkedToLayoutId));
-
-		layout.setType(LayoutConstants.TYPE_LINK_TO_LAYOUT);
-
-		LayoutLocalServiceUtil.updateLayout(layout);
-
-		return layout;
-	}
-
 	public static String addPortletToLayout(
 			long userId, Layout layout, String portletId, String columnId,
 			Map<String, String[]> preferenceMap)
@@ -193,6 +156,43 @@ public class LayoutTestUtil {
 			layout.getPlid(), newPortletId, portletPreferences);
 
 		return newPortletId;
+	}
+
+	public static Layout addTypeArticleLayout(
+			long groupId, String name, String articleId)
+		throws Exception {
+
+		Layout layout = addLayout(groupId, name);
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty("article-id", articleId);
+
+		layout.setType(LayoutConstants.TYPE_ARTICLE);
+
+		LayoutLocalServiceUtil.updateLayout(layout);
+
+		return layout;
+	}
+
+	public static Layout addTypeLinkToLayoutLayout(
+			long groupId, String name, long linkedToLayoutId)
+		throws Exception {
+
+		Layout layout = addLayout(groupId, name);
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"linkToLayoutId", String.valueOf(linkedToLayoutId));
+
+		layout.setType(LayoutConstants.TYPE_LINK_TO_LAYOUT);
+
+		LayoutLocalServiceUtil.updateLayout(layout);
+
+		return layout;
 	}
 
 	public static String getLayoutTemplateId(Layout layout) {

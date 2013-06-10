@@ -73,7 +73,7 @@ public class LayoutStagedModelDataHandlerTest
 		addDependentStagedModel(
 			dependentStagedModelsMap, JournalArticle.class, journalArticle);
 
-		Layout layout = LayoutTestUtil.addLayoutTypeArticle(
+		Layout layout = LayoutTestUtil.addTypeArticleLayout(
 			stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
 			journalArticle.getArticleId());
 
@@ -108,7 +108,7 @@ public class LayoutStagedModelDataHandlerTest
 
 		addDependentLayoutFriendlyURLs(dependentStagedModelsMap, linkedLayout);
 
-		Layout layout = LayoutTestUtil.addLayoutTypeLinkedToLayout(
+		Layout layout = LayoutTestUtil.addTypeLinkToLayoutLayout(
 			stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
 			linkedLayout.getLayoutId());
 
@@ -210,7 +210,7 @@ public class LayoutStagedModelDataHandlerTest
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
-		serviceContext.setAttribute("exportLAR", true);
+		serviceContext.setAttribute("exportLAR", Boolean.TRUE);
 
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 	}

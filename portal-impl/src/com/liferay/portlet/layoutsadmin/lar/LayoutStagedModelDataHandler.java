@@ -484,7 +484,6 @@ public class LayoutStagedModelDataHandler
 
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);
-
 		importedLayout.setIconImage(false);
 
 		if (layout.isIconImage()) {
