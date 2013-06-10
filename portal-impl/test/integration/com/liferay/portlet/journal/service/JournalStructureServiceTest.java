@@ -215,15 +215,15 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 		nameMap.put(Locale.US, "New Test Structure");
-		
+
 		StringBundler sb = new StringBundler(5);
-		
+
 		sb.append("<root><dynamic-element name=\"abc\" index-type=\"\" ");
 		sb.append("type=\"text\"><meta-data><entry name=\"label\">");
 		sb.append("<![CDATA[abc]]></entry><entry name=\"required\">");
 		sb.append("<![CDATA[false]]></entry></meta-data></dynamic-element>");
 		sb.append("</root>");
-		
+
 		String xsd = sb.toString();
 
 		JournalStructure structure =

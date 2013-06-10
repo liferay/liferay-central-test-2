@@ -177,7 +177,8 @@ public class JournalStructureLocalServiceImpl
 		else {
 			validateStructureId(newStructureId);
 
-			JournalStructure newStructure = fetchStructure(groupId, newStructureId);
+			JournalStructure newStructure = fetchStructure(
+				groupId, newStructureId);
 
 			if (newStructure != null) {
 				throw new DuplicateStructureIdException();
@@ -400,38 +401,6 @@ public class JournalStructureLocalServiceImpl
 		return new JournalStructureAdapter(ddmStructure);
 	}
 
-	protected int doGetStructuresCount(long groupId) throws SystemException {
-		return ddmStructureLocalService.getStructuresCount(
-			groupId, PortalUtil.getClassNameId(JournalArticle.class));
-	}
-
-	protected JournalStructure fetchStructure(long groupId, String structureId)
-		throws SystemException {
-
-		DDMStructure ddmStructure = fetchDDMStructure(groupId, structureId);
-
-		if (ddmStructure != null) {
-			return new JournalStructureAdapter(ddmStructure);
-		}
-
-		return null;
-	}
-
-	protected DDMStructure fetchDDMStructure(JournalStructure structure)
-		throws SystemException {
-
-		return fetchDDMStructure(
-			structure.getGroupId(), structure.getStructureId());
-	}
-
-	protected DDMStructure fetchDDMStructure(long groupId, String structureId)
-		throws SystemException {
-
-		return ddmStructureLocalService.fetchStructure(
-			groupId, PortalUtil.getClassNameId(JournalArticle.class),
-			structureId);
-	}
-
 	protected JournalStructure doGetStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
@@ -456,6 +425,38 @@ public class JournalStructureLocalServiceImpl
 				end);
 
 		return JournalUtil.toJournalStructures(ddmStructures);
+	}
+
+	protected int doGetStructuresCount(long groupId) throws SystemException {
+		return ddmStructureLocalService.getStructuresCount(
+			groupId, PortalUtil.getClassNameId(JournalArticle.class));
+	}
+
+	protected DDMStructure fetchDDMStructure(JournalStructure structure)
+		throws SystemException {
+
+		return fetchDDMStructure(
+			structure.getGroupId(), structure.getStructureId());
+	}
+
+	protected DDMStructure fetchDDMStructure(long groupId, String structureId)
+		throws SystemException {
+
+		return ddmStructureLocalService.fetchStructure(
+			groupId, PortalUtil.getClassNameId(JournalArticle.class),
+			structureId);
+	}
+
+	protected JournalStructure fetchStructure(long groupId, String structureId)
+		throws SystemException {
+
+		DDMStructure ddmStructure = fetchDDMStructure(groupId, structureId);
+
+		if (ddmStructure != null) {
+			return new JournalStructureAdapter(ddmStructure);
+		}
+
+		return null;
 	}
 
 	protected DDMStructure getDDMStructure(JournalStructure structure)
