@@ -49,41 +49,11 @@ public class PortletDisplayTemplatePortletDataHandlerTest
 
 	@Override
 	protected void addStagedModels() throws Exception {
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(AssetCategory.class), 0);
+		for (Class<?> clazz : _DDM_TEPMLATE_CLASSES) {
+			DDMTemplateTestUtil.addTemplate(
+				stagingGroup.getGroupId(), PortalUtil.getClassNameId(clazz), 0);
 
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(AssetEntry.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(AssetTag.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(BlogsEntry.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(DDLRecordSet.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(FileEntry.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(JournalArticle.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(LayoutSet.class), 0);
-
-		DDMTemplateTestUtil.addTemplate(
-			stagingGroup.getGroupId(),
-			PortalUtil.getClassNameId(WikiPage.class), 0);
+		}
 	}
 
 	@Override
@@ -95,5 +65,11 @@ public class PortletDisplayTemplatePortletDataHandlerTest
 	protected String getPortletId() {
 		return PortletKeys.PORTLET_DISPLAY_TEMPLATES;
 	}
+
+	private Class<?>[] _DDM_TEPMLATE_CLASSES = {
+		AssetCategory.class, AssetEntry.class, AssetTag.class, BlogsEntry.class,
+		DDLRecordSet.class, FileEntry.class, JournalArticle.class,
+		LayoutSet.class, WikiPage.class
+	};
 
 }
