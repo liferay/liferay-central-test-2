@@ -195,7 +195,7 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.PREVIEW)) {
 			}
 			else if (!cmd.equals(Constants.MOVE_FROM_TRASH) &&
-					!windowState.equals(LiferayWindowState.POP_UP)) {
+					 !windowState.equals(LiferayWindowState.POP_UP)) {
 
 				sendRedirect(actionRequest, actionResponse);
 			}
