@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.PortletDataContextFactoryUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -77,11 +78,11 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		Map<String, Long> modelAdditionCounters =
+		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
 
-		Map<String, Long> expectedModelAdditionCounters =
-			new HashMap<String, Long>(modelAdditionCounters);
+		Map<String, LongWrapper> expectedModelAdditionCounters =
+			new HashMap<String, LongWrapper>(modelAdditionCounters);
 
 		modelAdditionCounters.clear();
 
@@ -109,19 +110,22 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 	protected abstract void addStagedModels() throws Exception;
 
 	protected void checkManifestSummary(
-		Map<String, Long> expectedModelAdditionCounters) {
+		Map<String, LongWrapper> expectedModelAdditionCounters) {
 
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		Map<String, Long> modelAdditionCounters =
+		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
 
 		int expectedModelAdditionCountersSize =
 			expectedModelAdditionCounters.size();
 
 		for (String className : expectedModelAdditionCounters.keySet()) {
-			if (expectedModelAdditionCounters.get(className) == 0) {
+			LongWrapper expectedModelAdditionCounter =
+				expectedModelAdditionCounters.get(className);
+
+			if (expectedModelAdditionCounter.getValue() == 0) {
 				expectedModelAdditionCountersSize--;
 			}
 			else {

@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.kernel.lar.ExportImportUtil;
 import com.liferay.portal.kernel.lar.ManifestSummary;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -50,7 +51,7 @@ public class ManifestSummaryTest
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		Map<String, Long> modelAdditionCounters =
+		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
 
 		Assert.assertEquals(4, modelAdditionCounters.size());
@@ -93,7 +94,7 @@ public class ManifestSummaryTest
 			TestPropsValues.getUserId(), liveGroup.getGroupId(),
 			getParameterMap(), zipWriter.getFile());
 
-		Map<String, Long> modelAdditionCounters =
+		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
 
 		Assert.assertEquals(4, modelAdditionCounters.size());

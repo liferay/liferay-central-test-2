@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -68,7 +69,19 @@ public class ManifestSummary implements Serializable {
 	}
 
 	public void addModelAdditionCount(String manifestSummaryKey, long count) {
-		_modelAdditionCounters.put(manifestSummaryKey, count);
+		LongWrapper modelAdditionCounter = _modelAdditionCounters.get(
+			manifestSummaryKey);
+
+		if (modelAdditionCounter == null) {
+			modelAdditionCounter = new LongWrapper();
+
+			_modelAdditionCounters.put(
+				manifestSummaryKey, modelAdditionCounter);
+		}
+
+		modelAdditionCounter.setValue(count);
+
+		_modelNames.add(manifestSummaryKey);
 	}
 
 	public void addModelAdditionCount(
@@ -87,7 +100,16 @@ public class ManifestSummary implements Serializable {
 	}
 
 	public void addModelDeletionCount(String modelName, long count) {
-		_modelDeletionCounters.put(modelName, count);
+		LongWrapper modelDeletionCounter = _modelDeletionCounters.get(
+			modelName);
+
+		if (modelDeletionCounter == null) {
+			modelDeletionCounter = new LongWrapper();
+
+			_modelDeletionCounters.put(modelName, modelDeletionCounter);
+		}
+
+		modelDeletionCounter.setValue(count);
 
 		_modelNames.add(modelName);
 	}
@@ -120,7 +142,10 @@ public class ManifestSummary implements Serializable {
 			return -1;
 		}
 
-		return _modelAdditionCounters.get(manifestSummaryKey);
+		LongWrapper modelAdditionCounter = _modelAdditionCounters.get(
+			manifestSummaryKey);
+
+		return modelAdditionCounter.getValue();
 	}
 
 	public long getModelAdditionCount(
@@ -132,7 +157,7 @@ public class ManifestSummary implements Serializable {
 		return getModelAdditionCount(manifestSummaryKey);
 	}
 
-	public Map<String, Long> getModelAdditionCounters() {
+	public Map<String, LongWrapper> getModelAdditionCounters() {
 		return _modelAdditionCounters;
 	}
 
@@ -145,10 +170,13 @@ public class ManifestSummary implements Serializable {
 			return -1;
 		}
 
-		return _modelDeletionCounters.get(modelName);
+		LongWrapper modelDeletionCounter = _modelDeletionCounters.get(
+			modelName);
+
+		return modelDeletionCounter.getValue();
 	}
 
-	public Map<String, Long> getModelDeletionCounters() {
+	public Map<String, LongWrapper> getModelDeletionCounters() {
 		return _modelDeletionCounters;
 	}
 
@@ -178,18 +206,17 @@ public class ManifestSummary implements Serializable {
 
 	public void incrementModelAdditionCount(String manifestSummaryKey) {
 		if (!_modelAdditionCounters.containsKey(manifestSummaryKey)) {
-			_modelAdditionCounters.put(manifestSummaryKey, 1L);
+			_modelAdditionCounters.put(manifestSummaryKey, new LongWrapper(1));
 
 			_modelNames.add(manifestSummaryKey);
 
 			return;
 		}
 
-		long modelAdditionCounter = _modelAdditionCounters.get(
+		LongWrapper modelAdditionCounter = _modelAdditionCounters.get(
 			manifestSummaryKey);
 
-		_modelAdditionCounters.put(
-			manifestSummaryKey, modelAdditionCounter + 1);
+		modelAdditionCounter.increment();
 	}
 
 	public void incrementModelDeletionCount(
@@ -200,16 +227,17 @@ public class ManifestSummary implements Serializable {
 
 	public void incrementModelDeletionCount(String modelName) {
 		if (!_modelDeletionCounters.containsKey(modelName)) {
-			_modelDeletionCounters.put(modelName, 1L);
+			_modelDeletionCounters.put(modelName, new LongWrapper(1));
 
 			_modelNames.add(modelName);
 
 			return;
 		}
 
-		long modelDeletionCounter = _modelDeletionCounters.get(modelName);
+		LongWrapper modelDeletionCounter = _modelDeletionCounters.get(
+			modelName);
 
-		_modelDeletionCounters.put(modelName, modelDeletionCounter + 1);
+		modelDeletionCounter.decrement();
 	}
 
 	public void setExportDate(Date exportDate) {
@@ -231,10 +259,10 @@ public class ManifestSummary implements Serializable {
 
 	private List<Portlet> _dataPortlets = new ArrayList<Portlet>();
 	private Date _exportDate;
-	private Map<String, Long> _modelAdditionCounters =
-		new HashMap<String, Long>();
-	private Map<String, Long> _modelDeletionCounters =
-		new HashMap<String, Long>();
+	private Map<String, LongWrapper> _modelAdditionCounters =
+		new HashMap<String, LongWrapper>();
+	private Map<String, LongWrapper> _modelDeletionCounters =
+		new HashMap<String, LongWrapper>();
 	private Set<String> _modelNames = new HashSet<String>();
 	private List<Portlet> _setupPortlets = new ArrayList<Portlet>();
 
