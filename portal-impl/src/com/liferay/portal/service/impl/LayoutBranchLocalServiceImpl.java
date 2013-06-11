@@ -101,24 +101,6 @@ public class LayoutBranchLocalServiceImpl
 	}
 
 	@Override
-	public LayoutBranch getMasterLayoutBranch(
-			long layoutSetBranchId, long plid, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		LayoutBranch layoutBranch = layoutBranchPersistence.fetchByL_P_M_First(
-			layoutSetBranchId, plid, true, null);
-
-		if (layoutBranch != null) {
-			return layoutBranch;
-		}
-
-		return layoutBranchLocalService.addLayoutBranch(
-			layoutSetBranchId, plid, LayoutBranchConstants.MASTER_BRANCH_NAME,
-			LayoutBranchConstants.MASTER_BRANCH_DESCRIPTION, true,
-			serviceContext);
-	}
-
-	@Override
 	public LayoutBranch deleteLayoutBranch(long layoutBranchId)
 		throws PortalException, SystemException {
 
@@ -169,6 +151,24 @@ public class LayoutBranchLocalServiceImpl
 
 		return layoutBranchPersistence.findByL_P_M_First(
 			layoutSetBranchId, plid, true, null);
+	}
+
+	@Override
+	public LayoutBranch getMasterLayoutBranch(
+			long layoutSetBranchId, long plid, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		LayoutBranch layoutBranch = layoutBranchPersistence.fetchByL_P_M_First(
+			layoutSetBranchId, plid, true, null);
+
+		if (layoutBranch != null) {
+			return layoutBranch;
+		}
+
+		return layoutBranchLocalService.addLayoutBranch(
+			layoutSetBranchId, plid, LayoutBranchConstants.MASTER_BRANCH_NAME,
+			LayoutBranchConstants.MASTER_BRANCH_DESCRIPTION, true,
+			serviceContext);
 	}
 
 	@Override
