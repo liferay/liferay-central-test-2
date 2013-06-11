@@ -178,64 +178,64 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		long layoutRevisionId = ParamUtil.getLong(
 			serviceContext, "layoutRevisionId");
 
-			if (layoutRevisionId <= 0) {
-				User user = UserLocalServiceUtil.getUser(
-					serviceContext.getUserId());
+		if (layoutRevisionId <= 0) {
+			User user = UserLocalServiceUtil.getUser(
+				serviceContext.getUserId());
 
-				layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
-					user, layoutSetBranchId, layout.getPlid());
-
-				if (layoutRevisionId > 0) {
-					try {
-						layoutRevision =
-							LayoutRevisionLocalServiceUtil.getLayoutRevision(
-								layoutRevisionId);
-
-						if (layoutRevision.getStatus() !=
-								WorkflowConstants.STATUS_INACTIVE) {
-
-							return layoutRevision;
-						}
-
-						StagingUtil.setRecentLayoutRevisionId(
-							user, layoutSetBranchId, layout.getPlid(),
-							LayoutRevisionConstants.
-								DEFAULT_PARENT_LAYOUT_REVISION_ID);
-
-						layoutRevisionId =
-							StagingUtil.getRecentLayoutRevisionId(
-								user, layoutSetBranchId, layout.getPlid());
-					}
-					catch (NoSuchLayoutRevisionException nslre) {
-					}
-				}
-			}
+			layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
+				user, layoutSetBranchId, layout.getPlid());
 
 			if (layoutRevisionId > 0) {
 				try {
-					return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-						layoutRevisionId);
+					layoutRevision =
+						LayoutRevisionLocalServiceUtil.getLayoutRevision(
+							layoutRevisionId);
+
+					if (layoutRevision.getStatus() !=
+							WorkflowConstants.STATUS_INACTIVE) {
+
+						return layoutRevision;
+					}
+
+					StagingUtil.setRecentLayoutRevisionId(
+						user, layoutSetBranchId, layout.getPlid(),
+						LayoutRevisionConstants.
+							DEFAULT_PARENT_LAYOUT_REVISION_ID);
+
+					layoutRevisionId =
+						StagingUtil.getRecentLayoutRevisionId(
+							user, layoutSetBranchId, layout.getPlid());
 				}
 				catch (NoSuchLayoutRevisionException nslre) {
 				}
 			}
+		}
 
+		if (layoutRevisionId > 0) {
 			try {
 				return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-					layoutSetBranchId, layout.getPlid(), true);
+					layoutRevisionId);
 			}
 			catch (NoSuchLayoutRevisionException nslre) {
-				List<LayoutRevision> layoutRevisions =
-					LayoutRevisionLocalServiceUtil.getChildLayoutRevisions(
-						layoutSetBranchId,
-						LayoutRevisionConstants.
-							DEFAULT_PARENT_LAYOUT_REVISION_ID,
-						layout.getPlid());
-
-				if (!layoutRevisions.isEmpty()) {
-					return layoutRevisions.get(0);
-				}
 			}
+		}
+
+		try {
+			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
+				layoutSetBranchId, layout.getPlid(), true);
+		}
+		catch (NoSuchLayoutRevisionException nslre) {
+			List<LayoutRevision> layoutRevisions =
+				LayoutRevisionLocalServiceUtil.getChildLayoutRevisions(
+					layoutSetBranchId,
+					LayoutRevisionConstants.
+						DEFAULT_PARENT_LAYOUT_REVISION_ID,
+					layout.getPlid());
+
+			if (!layoutRevisions.isEmpty()) {
+				return layoutRevisions.get(0);
+			}
+		}
 
 		LayoutBranch layoutBranch =
 			LayoutBranchLocalServiceUtil.addOrFetchMasterLayoutBranch(
