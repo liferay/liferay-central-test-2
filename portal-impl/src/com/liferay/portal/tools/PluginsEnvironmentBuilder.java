@@ -191,8 +191,8 @@ public class PluginsEnvironmentBuilder {
 				continue;
 			}
 
-			for (File f : currentImportSharedLibDir.listFiles()) {
-				jars.add(f.getName());
+			for (File file : currentImportSharedLibDir.listFiles()) {
+				jars.add(file.getName());
 			}
 		}
 
@@ -246,8 +246,6 @@ public class PluginsEnvironmentBuilder {
 
 		if (sharedProject) {
 			if (!importSharedJars.contains("portal-compat-shared.jar")) {
-				importSharedJars = new ArrayList<String>(importSharedJars);
-
 				importSharedJars.add("portal-compat-shared.jar");
 			}
 		}
