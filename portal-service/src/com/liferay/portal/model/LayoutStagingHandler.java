@@ -186,9 +186,8 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		}
 
 		if (layoutRevisionId > 0) {
-			try {
 				layoutRevision =
-					LayoutRevisionLocalServiceUtil.getLayoutRevision(
+					LayoutRevisionLocalServiceUtil.fetchLayoutRevision(
 						layoutRevisionId);
 
 				if (layoutRevision.getStatus() !=
@@ -205,9 +204,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 				layoutRevisionId =
 					StagingUtil.getRecentLayoutRevisionId(
 						user, layoutSetBranchId, layout.getPlid());
-			}
-			catch (NoSuchLayoutRevisionException nslre) {
-			}
 		}
 
 		if (layoutRevisionId > 0) {
