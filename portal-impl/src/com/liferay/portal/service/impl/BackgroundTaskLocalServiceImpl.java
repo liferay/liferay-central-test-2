@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -32,7 +31,6 @@ import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.BackgroundTaskLocalServiceBaseImpl;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.comparator.BackgroundTaskCreateDateComparator;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.io.File;
@@ -164,9 +162,7 @@ public class BackgroundTaskLocalServiceImpl
 			String taskExecutorClassName, int status)
 		throws SystemException {
 
-		return fetchFirstBackgroundTask(
-			taskExecutorClassName, status,
-			new BackgroundTaskCreateDateComparator(true));
+		return fetchFirstBackgroundTask(taskExecutorClassName, status, null);
 	}
 
 	@Override
@@ -209,9 +205,8 @@ public class BackgroundTaskLocalServiceImpl
 			String taskExecutorClassName, int status)
 		throws SystemException {
 
-		return getBackgroundTasks(
-			taskExecutorClassName, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new BackgroundTaskCreateDateComparator(true));
+		return backgroundTaskPersistence.findByT_S(
+			taskExecutorClassName, status);
 	}
 
 	@Override

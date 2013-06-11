@@ -123,18 +123,24 @@
 		<column name="completionDate" type="Date" />
 		<column name="status" type="int" />
 
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
 		<!-- Finder methods -->
 
 		<finder name="G_T" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="taskExecutorClassName" />
 		</finder>
-		<finder name="G_T_S" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="T_S" return-type="Collection">
 			<finder-column name="taskExecutorClassName" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="T_S" return-type="Collection">
+		<finder name="G_T_S" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="taskExecutorClassName" />
 			<finder-column name="status" />
 		</finder>
