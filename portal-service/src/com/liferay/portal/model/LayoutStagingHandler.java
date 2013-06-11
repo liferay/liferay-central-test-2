@@ -162,6 +162,8 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 			return lastLayoutRevision;
 		}
 
+		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+
 		long layoutSetBranchId = ParamUtil.getLong(
 			serviceContext, "layoutSetBranchId");
 
@@ -179,9 +181,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 			serviceContext, "layoutRevisionId");
 
 		if (layoutRevisionId <= 0) {
-			User user = UserLocalServiceUtil.getUser(
-				serviceContext.getUserId());
-
 			layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
 				user, layoutSetBranchId, layout.getPlid());
 
