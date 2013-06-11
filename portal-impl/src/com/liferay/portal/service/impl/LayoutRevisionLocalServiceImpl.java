@@ -430,10 +430,6 @@ public class LayoutRevisionLocalServiceImpl
 				layoutRevision, layoutRevision.getParentLayoutRevisionId(),
 				serviceContext);
 
-			StagingUtil.deleteRecentLayoutRevisionId(
-				user, layoutRevision.getLayoutSetBranchId(),
-				layoutRevision.getPlid());
-
 			StagingUtil.setRecentLayoutBranchId(
 				user, layoutRevision.getLayoutSetBranchId(),
 				layoutRevision.getPlid(), layoutRevision.getLayoutBranchId());
