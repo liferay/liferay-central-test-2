@@ -25,14 +25,16 @@ public class StringDistanceRelevancyChecker implements RelevancyChecker {
 	public StringDistanceRelevancyChecker(
 		String word, float scoresThreshold, StringDistance stringDistance) {
 
+		_word = word;
 		_scoresThreshold = scoresThreshold;
 		_stringDistance = stringDistance;
-		_word = word;
 	}
 
 	@Override
 	public boolean isRelevant(SuggestWord suggestWord) {
-		if (suggestWord.string.equals(_word)) {
+		String word = suggestWord.string;
+
+		if (word.equals(_word)) {
 			return false;
 		}
 

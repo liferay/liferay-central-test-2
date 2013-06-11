@@ -149,9 +149,9 @@ public class LuceneQuerySuggester implements QuerySuggester {
 				suggestKeywordQuery, Field.PORTLET_ID, PortletKeys.SEARCH, null,
 				BooleanClause.Occur.MUST);
 
-			return performSearch(
+			return search(
 				indexSearcher, suggestKeywordQuery, localizedKeywordFieldName,
-				_defaultRelevancyChecker, max);
+				_relevancyChecker, max);
 		}
 		catch (Exception e) {
 			throw new SearchException("Unable to suggest query", e);
@@ -242,26 +242,26 @@ public class LuceneQuerySuggester implements QuerySuggester {
 		return suggestWordQuery;
 	}
 
-	protected String[] performSearch(
+	protected String[] search(
 			IndexSearcher indexSearcher, Query query, String fieldName,
-			RelevancyChecker relevancyChecker, int maxResults)
+			RelevancyChecker relevancyChecker, int max)
 		throws IOException {
 
-		int maxHits = 10 * maxResults;
+		int maxScoreDocs = max * 10;
 
-		TopDocs topDocs = indexSearcher.search(query, null, maxHits);
+		TopDocs topDocs = indexSearcher.search(query, null, maxScoreDocs);
 
-		ScoreDoc[] hits = topDocs.scoreDocs;
+		ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 
 		SuggestWordQueue suggestWordQueue = new SuggestWordQueue(
-			maxResults, _suggestWordComparator);
+			max, _suggestWordComparator);
 
-		int stop = Math.min(hits.length, maxHits);
+		int stop = Math.min(scoreDocs.length, maxScoreDocs);
 
 		for (int i = 0; i < stop; i++) {
 			SuggestWord suggestWord = new SuggestWord();
 
-			Document document = indexSearcher.doc(hits[i].doc);
+			Document document = indexSearcher.doc(scoreDocs[i].doc);
 
 			Fieldable fieldable = document.getFieldable(fieldName);
 
@@ -274,13 +274,15 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			}
 		}
 
-		String[] list = new String[suggestWordQueue.size()];
+		String[] words = new String[suggestWordQueue.size()];
 
 		for (int i = suggestWordQueue.size() - 1; i >= 0; i--) {
-			list[i] = suggestWordQueue.pop().string;
+			SuggestWord suggestWord = suggestWordQueue.pop();
+
+			words[i] = suggestWord.string;
 		}
 
-		return list;
+		return words;
 	}
 
 	protected Map<String, List<String>> spellCheckKeywords(
@@ -310,7 +312,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			}
 
 			for (String keyword : keywords) {
-				List<String> spellCheckSuggestions = Collections.emptyList();
+				List<String> suggestionsList = Collections.emptyList();
 
 				if (!SpellCheckerUtil.isValidWord(
 						localizedFieldName, keyword, indexReaders)) {
@@ -321,7 +323,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 					String[] suggestionsArray = null;
 
 					if (frequency > 0) {
-						suggestionsArray = new String[]{ keyword };
+						suggestionsArray = new String[] {keyword};
 					}
 					else {
 						BooleanQuery suggestWordQuery = buildSpellCheckQuery(
@@ -331,28 +333,27 @@ public class LuceneQuerySuggester implements QuerySuggester {
 							new StringDistanceRelevancyChecker(
 								keyword, scoresThreshold, _stringDistance);
 
-						suggestionsArray = performSearch(
+						suggestionsArray = search(
 							indexSearcher, suggestWordQuery, localizedFieldName,
 							relevancyChecker, max);
 					}
 
-					spellCheckSuggestions = Arrays.asList(suggestionsArray);
+					suggestionsList = Arrays.asList(suggestionsArray);
 				}
 
-				suggestions.put(keyword, spellCheckSuggestions);
+				suggestions.put(keyword, suggestionsList);
 			}
 
 			return suggestions;
 		}
-		catch (IOException e) {
-			throw new SearchException("Unable to find alternative queries", e);
+		catch (IOException ioe) {
+			throw new SearchException("Unable to find suggestions", ioe);
 		}
 	}
 
 	private float _boostEnd = 1.0f;
 	private float _boostStart = 2.0f;
-	private RelevancyChecker _defaultRelevancyChecker =
-		new DefaultRelevancyChecker();
+	private RelevancyChecker _relevancyChecker = new DefaultRelevancyChecker();
 	private StringDistance _stringDistance;
 	private Comparator<SuggestWord> _suggestWordComparator =
 		SuggestWordQueue.DEFAULT_COMPARATOR;
