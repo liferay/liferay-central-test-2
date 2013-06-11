@@ -198,11 +198,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 				return layoutRevision;
 			}
 
-			StagingUtil.setRecentLayoutRevisionId(
-				user, layoutSetBranchId, layout.getPlid(),
-				LayoutRevisionConstants.
-					DEFAULT_PARENT_LAYOUT_REVISION_ID);
-
 			layoutRevisionId =
 				StagingUtil.getRecentLayoutRevisionId(
 					user, layoutSetBranchId, layout.getPlid());
@@ -236,6 +231,10 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		}
 
 		if (layoutRevision != null) {
+			StagingUtil.setRecentLayoutRevisionId(
+				user, layoutSetBranchId, layout.getPlid(),
+				layoutRevision.getLayoutRevisionId());
+
 			return layoutRevision;
 		}
 
