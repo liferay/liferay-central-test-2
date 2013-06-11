@@ -259,7 +259,7 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		layoutRevision = LayoutRevisionLocalServiceUtil.addLayoutRevision(
+		return LayoutRevisionLocalServiceUtil.addLayoutRevision(
 			serviceContext.getUserId(), layoutSetBranchId,
 			layoutBranch.getLayoutBranchId(),
 			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, false,
@@ -270,8 +270,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 			layout.getIconImageId(), layout.getThemeId(),
 			layout.getColorSchemeId(), layout.getWapThemeId(),
 			layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
-
-		return layoutRevision;
 	}
 
 	private LayoutType _getLayoutType() {
