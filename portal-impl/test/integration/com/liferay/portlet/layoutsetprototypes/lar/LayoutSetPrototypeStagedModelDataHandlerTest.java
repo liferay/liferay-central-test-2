@@ -393,11 +393,11 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		}
 	}
 
-	private Map<String, List<Layout>> _dependentLayoutsMap =
-		new HashMap<String, List<Layout>>();
-
 	private Map<String, List<LayoutFriendlyURL>>
 		_dependentLayoutFriendlyURLsMap =
 			new HashMap<String, List<LayoutFriendlyURL>>();
+	private Map<String, List<Layout>> _dependentLayoutsMap =
+		new HashMap<String, List<Layout>>();
+
 
 }

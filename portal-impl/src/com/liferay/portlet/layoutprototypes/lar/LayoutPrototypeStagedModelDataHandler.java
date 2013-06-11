@@ -15,7 +15,6 @@
 package com.liferay.portlet.layoutprototypes.lar;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -145,7 +144,7 @@ public class LayoutPrototypeStagedModelDataHandler
 	protected void importLayouts(
 			PortletDataContext portletDataContext,
 			LayoutPrototype layoutPrototype, long importedGroupId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		long groupId = portletDataContext.getGroupId();
 
