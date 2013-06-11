@@ -283,16 +283,6 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 	}
 
 	@Override
-	public com.liferay.portal.model.LayoutBranch addOrFetchMasterLayoutBranch(
-		long layoutSetBranchId, long plid,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutBranchLocalService.addOrFetchMasterLayoutBranch(layoutSetBranchId,
-			plid, serviceContext);
-	}
-
-	@Override
 	public void deleteLayoutSetBranchLayoutBranches(long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -322,6 +312,16 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutBranchLocalService.getMasterLayoutBranch(layoutSetBranchId,
 			plid);
+	}
+
+	@Override
+	public com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(
+		long layoutSetBranchId, long plid,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutBranchLocalService.getMasterLayoutBranch(layoutSetBranchId,
+			plid, serviceContext);
 	}
 
 	@Override
