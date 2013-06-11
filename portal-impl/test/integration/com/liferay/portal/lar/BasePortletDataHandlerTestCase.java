@@ -77,17 +77,18 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		Map<String, Long> modelCounters = manifestSummary.getModelCounters();
+		Map<String, Long> modelAdditionCounters =
+			manifestSummary.getModelAdditionCounters();
 
-		Map<String, Long> expectedModelCounters = new HashMap<String, Long>(
-			modelCounters);
+		Map<String, Long> expectedModelAdditionCounters =
+			new HashMap<String, Long>(modelAdditionCounters);
 
-		modelCounters.clear();
+		modelAdditionCounters.clear();
 
 		portletDataHandler.exportData(
 			portletDataContext, portletId, new PortletPreferencesImpl());
 
-		checkManifestSummary(expectedModelCounters);
+		checkManifestSummary(expectedModelAdditionCounters);
 	}
 
 	protected void addBooleanParameter(
@@ -108,27 +109,30 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 	protected abstract void addStagedModels() throws Exception;
 
 	protected void checkManifestSummary(
-		Map<String, Long> expectedModelCounters) {
+		Map<String, Long> expectedModelAdditionCounters) {
 
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		Map<String, Long> modelCounters = manifestSummary.getModelCounters();
+		Map<String, Long> modelAdditionCounters =
+			manifestSummary.getModelAdditionCounters();
 
-		int expectedModelCountersSize = expectedModelCounters.size();
+		int expectedModelAdditionCountersSize =
+			expectedModelAdditionCounters.size();
 
-		for (String className : expectedModelCounters.keySet()) {
-			if (expectedModelCounters.get(className) == 0) {
-				expectedModelCountersSize--;
+		for (String className : expectedModelAdditionCounters.keySet()) {
+			if (expectedModelAdditionCounters.get(className) == 0) {
+				expectedModelAdditionCountersSize--;
 			}
 			else {
 				Assert.assertEquals(
-					expectedModelCounters.get(className),
-					modelCounters.get(className));
+					expectedModelAdditionCounters.get(className),
+					modelAdditionCounters.get(className));
 			}
 		}
 
-		Assert.assertEquals(modelCounters.size(), expectedModelCountersSize);
+		Assert.assertEquals(
+			modelAdditionCounters.size(), expectedModelAdditionCountersSize);
 	}
 
 	protected abstract PortletDataHandler createPortletDataHandler();

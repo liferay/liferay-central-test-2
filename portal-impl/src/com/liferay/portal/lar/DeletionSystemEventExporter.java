@@ -135,7 +135,7 @@ public class DeletionSystemEventExporter {
 		ManifestSummary manifestSummary =
 			portletDataContext.getManifestSummary();
 
-		manifestSummary.incrementDeletionCount(
+		manifestSummary.incrementModelDeletionCount(
 			PortalUtil.getClassName(systemEvent.getClassNameId()));
 	}
 

@@ -282,7 +282,7 @@ public class ExportImportImpl implements ExportImport {
 						String className = element.attributeValue("class-name");
 						long count = GetterUtil.getLong(element.getText());
 
-						manifestSummary.addModelCount(className, count);
+						manifestSummary.addModelAdditionCount(className, count);
 					}
 				}
 
@@ -919,17 +919,20 @@ public class ExportImportImpl implements ExportImport {
 
 			element.addAttribute("class-name", modelClassName);
 
-			long modelCount = manifestSummary.getModelCount(modelClassName);
-
-			if (modelCount > 0) {
-				element.addAttribute("added", String.valueOf(modelCount));
-			}
-
-			long deletionCount = manifestSummary.getDeletionCount(
+			long modelAdditionCount = manifestSummary.getModelAdditionCount(
 				modelClassName);
 
-			if (deletionCount > 0) {
-				element.addAttribute("deleted", String.valueOf(deletionCount));
+			if (modelAdditionCount > 0) {
+				element.addAttribute(
+					"addition-count", String.valueOf(modelAdditionCount));
+			}
+
+			long modelDeletionCount = manifestSummary.getModelDeletionCount(
+				modelClassName);
+
+			if (modelDeletionCount > 0) {
+				element.addAttribute(
+					"deletion-count", String.valueOf(modelDeletionCount));
 			}
 		}
 	}

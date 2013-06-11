@@ -36,17 +36,17 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 
 	@Override
 	public long performCount() throws PortalException, SystemException {
-		long count = super.performCount();
-
 		ManifestSummary manifestSummary = _portletDataContext.getManifestSummary();
 
-		manifestSummary.addModelCount(getManifestSummaryKey(), count);
+		long modelAdditionCount = super.performCount();
 
-		long deletionCount = getDeletionCount();
+		manifestSummary.addModelAdditionCount(getManifestSummaryKey(), modelAdditionCount);
 
-		manifestSummary.addDeletionCount(getManifestSummaryKey(), deletionCount);
+		long modelDeletionCount = getModelDeletionCount();
 
-		return count;
+		manifestSummary.addModelDeletionCount(getManifestSummaryKey(), modelDeletionCount);
+
+		return modelAdditionCount;
 	}
 
 	@Override
@@ -54,26 +54,18 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 		_portletDataContext.addDateRangeCriteria(dynamicQuery, "modifiedDate");
 	}
 
-	protected long getDeletionCount()
-		throws PortalException, SystemException {
-
-		ActionableDynamicQuery actionableDynamicQuery =
-			new SystemEventActionableDynamicQuery() {
+	protected long getModelDeletionCount() throws PortalException, SystemException {
+		ActionableDynamicQuery actionableDynamicQuery = new SystemEventActionableDynamicQuery() {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
-				Property classNameIdProperty = PropertyFactoryUtil.forName(
-					"classNameId");
+				Property classNameIdProperty = PropertyFactoryUtil.forName("classNameId");
 
-				dynamicQuery.add(
-					classNameIdProperty.eq(
-						PortalUtil.getClassNameId(
-							${entity.name}.class.getName())));
+				dynamicQuery.add(classNameIdProperty.eq(PortalUtil.getClassNameId(${entity.name}.class.getName())));
 
 				Property typeProperty = PropertyFactoryUtil.forName("type");
 
-				dynamicQuery.add(
-					typeProperty.eq(SystemEventConstants.TYPE_DELETE));
+				dynamicQuery.add(typeProperty.eq(SystemEventConstants.TYPE_DELETE));
 
 				_addCreateDateProperty(dynamicQuery);
 			}
@@ -87,8 +79,7 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 					return;
 				}
 
-				Property createDateProperty = PropertyFactoryUtil.forName(
-					"createDate");
+				Property createDateProperty = PropertyFactoryUtil.forName("createDate");
 
 				Date startDate = _portletDataContext.getStartDate();
 
