@@ -44,7 +44,7 @@ public class PortletDisplayTemplatePortletDataHandler
 	public static final String NAMESPACE = "portlet_display_templates";
 
 	public PortletDisplayTemplatePortletDataHandler() {
-		setDeletionEventClassNames(DDMTemplate.class.getName());
+		setDeletionSystemEventClassNames(DDMTemplate.class.getName());
 	}
 
 	@Override
