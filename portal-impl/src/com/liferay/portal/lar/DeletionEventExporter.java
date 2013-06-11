@@ -68,53 +68,53 @@ public class DeletionEventExporter {
 		ActionableDynamicQuery actionableDynamicQuery =
 			new SystemEventActionableDynamicQuery() {
 
-				@Override
-				protected void addCriteria(DynamicQuery dynamicQuery) {
-					if (deletionEventClassNameIds.isEmpty()) {
-						return;
-					}
-
-					setGroupId(portletDataContext.getScopeGroupId());
-
-					Property classNameIdProperty = PropertyFactoryUtil.forName(
-						"classNameId");
-
-					dynamicQuery.add(
-						classNameIdProperty.in(
-							deletionEventClassNameIds.toArray()));
-
-					Property typeProperty = PropertyFactoryUtil.forName("type");
-
-					dynamicQuery.add(
-						typeProperty.eq(SystemEventConstants.TYPE_DELETE));
-
-					_addCreateDateProperty(dynamicQuery);
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				if (deletionEventClassNameIds.isEmpty()) {
+					return;
 				}
 
-				@Override
-				protected void performAction(Object object) {
-					SystemEvent systemEvent = (SystemEvent)object;
+				setGroupId(portletDataContext.getScopeGroupId());
 
-					exportDeletion(systemEvent, rootElement);
+				Property classNameIdProperty = PropertyFactoryUtil.forName(
+					"classNameId");
+
+				dynamicQuery.add(
+					classNameIdProperty.in(
+						deletionEventClassNameIds.toArray()));
+
+				Property typeProperty = PropertyFactoryUtil.forName("type");
+
+				dynamicQuery.add(
+					typeProperty.eq(SystemEventConstants.TYPE_DELETE));
+
+				_addCreateDateProperty(dynamicQuery);
+			}
+
+			@Override
+			protected void performAction(Object object) {
+				SystemEvent systemEvent = (SystemEvent)object;
+
+				exportDeletion(systemEvent, rootElement);
+			}
+
+			private void _addCreateDateProperty(DynamicQuery dynamicQuery) {
+				if (!portletDataContext.hasDateRange()) {
+					return;
 				}
 
-				private void _addCreateDateProperty(DynamicQuery dynamicQuery) {
-					if (!portletDataContext.hasDateRange()) {
-						return;
-					}
+				Property createDateProperty = PropertyFactoryUtil.forName(
+					"createDate");
 
-					Property createDateProperty = PropertyFactoryUtil.forName(
-						"createDate");
+				Date startDate = portletDataContext.getStartDate();
 
-					Date startDate = portletDataContext.getStartDate();
-					Date endDate = portletDataContext.getEndDate();
+				dynamicQuery.add(createDateProperty.ge(startDate.getTime()));
 
-					dynamicQuery.add(
-						createDateProperty.ge(startDate.getTime()));
-					dynamicQuery.add(
-						createDateProperty.le(endDate.getTime()));
-				}
-			};
+				Date endDate = portletDataContext.getEndDate();
+
+				dynamicQuery.add(createDateProperty.le(endDate.getTime()));
+			}
+		};
 
 		actionableDynamicQuery.performActions();
 	}
@@ -127,10 +127,8 @@ public class DeletionEventExporter {
 		deletionElement.addAttribute(
 			"class-name",
 			PortalUtil.getClassName(systemEvent.getClassNameId()));
-
 		deletionElement.addAttribute(
 			"group-id", String.valueOf(systemEvent.getGroupId()));
-
 		deletionElement.addAttribute("uuid", systemEvent.getClassUuid());
 	}
 
