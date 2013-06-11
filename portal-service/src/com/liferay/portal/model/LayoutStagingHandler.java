@@ -15,6 +15,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.NoSuchLayoutRevisionException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -33,6 +34,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.LayoutTypePortletFactoryUtil;
+import com.liferay.portal.util.comparator.LayoutRevisionCreateDateComparator;
 
 import java.io.Serializable;
 
@@ -215,21 +217,26 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 			}
 		}
 
-		try {
-			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-				layoutSetBranchId, layout.getPlid(), true);
-		}
-		catch (NoSuchLayoutRevisionException nslre) {
-			List<LayoutRevision> layoutRevisions =
-				LayoutRevisionLocalServiceUtil.getChildLayoutRevisions(
-					layoutSetBranchId,
-					LayoutRevisionConstants.
-						DEFAULT_PARENT_LAYOUT_REVISION_ID,
-					layout.getPlid());
+		List<LayoutRevision> layoutRevisions =
+			LayoutRevisionLocalServiceUtil.getLayoutRevisions(
+				layoutSetBranchId, layout.getPlid(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS,
+				new LayoutRevisionCreateDateComparator(true));
 
-			if (!layoutRevisions.isEmpty()) {
-				return layoutRevisions.get(0);
+		if (!layoutRevisions.isEmpty()) {
+			layoutRevision = layoutRevisions.get(0);
+
+			for (LayoutRevision curLayoutRevision : layoutRevisions) {
+				if (curLayoutRevision.isHead()) {
+					layoutRevision = curLayoutRevision;
+
+					break;
+				}
 			}
+		}
+
+		if (layoutRevision != null) {
+			return layoutRevision;
 		}
 
 		LayoutBranch layoutBranch =
