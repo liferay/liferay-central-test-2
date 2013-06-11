@@ -78,7 +78,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 
 		try {
-			portletDataContext.addDeletionEventClassNames(
+			portletDataContext.addDeletionSystemEventClassNames(
 				getDeletionEventClassNames());
 
 			return doExportData(

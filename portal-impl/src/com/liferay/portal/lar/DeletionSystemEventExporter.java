@@ -43,10 +43,10 @@ public class DeletionSystemEventExporter {
 
 		Document document = SAXReaderUtil.createDocument();
 
-		Element rootElement = document.addElement("deletions");
+		Element rootElement = document.addElement("deletion-system-events");
 
 		Set<Long> deletionEventClassNameIds =
-			portletDataContext.getDeletionEventClassNameIds();
+			portletDataContext.getDeletionSystemEventClassNameIds();
 
 		if (!deletionEventClassNameIds.isEmpty()) {
 			doExport(
@@ -55,7 +55,7 @@ public class DeletionSystemEventExporter {
 
 		portletDataContext.addZipEntry(
 			ExportImportPathUtil.getRootPath(portletDataContext) +
-				"/deletions.xml",
+				"/deletion-system-events.xml",
 			document.formattedString());
 	}
 
@@ -120,16 +120,18 @@ public class DeletionSystemEventExporter {
 	}
 
 	protected void exportDeletionSystemEvent(
-		SystemEvent systemEvent, Element deletionsElement) {
+		SystemEvent systemEvent, Element deletionSystemEventsElement) {
 
-		Element deletionElement = deletionsElement.addElement("deletion");
+		Element deletionSystemEventElement =
+			deletionSystemEventsElement.addElement("deletion-system-event");
 
-		deletionElement.addAttribute(
+		deletionSystemEventElement.addAttribute(
 			"class-name",
 			PortalUtil.getClassName(systemEvent.getClassNameId()));
-		deletionElement.addAttribute(
+		deletionSystemEventElement.addAttribute(
 			"group-id", String.valueOf(systemEvent.getGroupId()));
-		deletionElement.addAttribute("uuid", systemEvent.getClassUuid());
+		deletionSystemEventElement.addAttribute(
+			"uuid", systemEvent.getClassUuid());
 	}
 
 }
