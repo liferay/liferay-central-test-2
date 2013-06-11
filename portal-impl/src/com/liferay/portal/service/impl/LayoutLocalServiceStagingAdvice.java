@@ -484,22 +484,22 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 		return layout;
 	}
 
-	protected Layout createProxyIfNotInThreadLocalCache(Layout layout) {
-		Map<Layout, Object> map = _layoutStagingHandlerProxyCache.get();
+	protected Layout getProxiedLayout(Layout layout) {
+		Map<Layout, Object> proxiedLayouts = _proxiedLayouts.get();
 
-		Object proxy = map.get(layout);
+		Object proxiedLayout = proxiedLayouts.get(layout);
 
-		if (proxy != null) {
-			return (Layout)proxy;
+		if (proxiedLayout != null) {
+			return (Layout)proxiedLayout;
 		}
 
-		proxy = ProxyUtil.newProxyInstance(
+		proxiedLayout = ProxyUtil.newProxyInstance(
 			ClassLoaderUtil.getPortalClassLoader(), new Class[] {Layout.class},
 			new LayoutStagingHandler(layout));
 
-		map.put(layout, proxy);
+		proxiedLayouts.put(layout, proxiedLayout);
 
-		return (Layout)proxy;
+		return (Layout)proxiedLayout;
 	}
 
 	protected Layout unwrapLayout(Layout layout) {
@@ -525,7 +525,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 			return layout;
 		}
 
-		return createProxyIfNotInThreadLocalCache(layout);
+		return getProxiedLayout(layout);
 	}
 
 	protected List<Layout> wrapLayouts(
@@ -615,13 +615,10 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 
 	private static Set<String> _layoutLocalServiceStagingAdviceMethodNames =
 		new HashSet<String>();
-
-	private static ThreadLocal<Map<Layout, Object>>
-		_layoutStagingHandlerProxyCache =
-			new AutoResetThreadLocal<Map<Layout, Object>>(
-				LayoutLocalServiceStagingAdvice.class +
-					"._layoutStagingHandlerProxyCache",
-				new HashMap<Layout, Object>());
+	private static ThreadLocal<Map<Layout, Object>> _proxiedLayouts =
+		new AutoResetThreadLocal<Map<Layout, Object>>(
+			LayoutLocalServiceStagingAdvice.class + "._proxiedLayouts",
+			new HashMap<Layout, Object>());
 
 	static {
 		_layoutLocalServiceStagingAdviceMethodNames.add("deleteLayout");
