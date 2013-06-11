@@ -38,15 +38,14 @@ import java.util.Set;
  */
 public class DeletionEventExporter {
 
-	public void export(
-			final PortletDataContext portletDataContext)
+	public void export(PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
 
-		final Element rootElement = document.addElement("deletions");
+		Element rootElement = document.addElement("deletions");
 
-		final Set<Long> deletionEventClassNameIds =
+		Set<Long> deletionEventClassNameIds =
 			portletDataContext.getDeletionEventClassNameIds();
 
 		if (!deletionEventClassNameIds.isEmpty()) {
