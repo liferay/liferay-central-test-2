@@ -178,7 +178,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		long layoutRevisionId = ParamUtil.getLong(
 			serviceContext, "layoutRevisionId");
 
-		if (layoutSetBranchId > 0) {
 			if (layoutRevisionId <= 0) {
 				User user = UserLocalServiceUtil.getUser(
 					serviceContext.getUserId());
@@ -237,7 +236,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 					return layoutRevisions.get(0);
 				}
 			}
-		}
 
 		LayoutBranch layoutBranch =
 			LayoutBranchLocalServiceUtil.addOrFetchMasterLayoutBranch(
