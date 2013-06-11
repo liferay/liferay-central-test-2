@@ -27,6 +27,7 @@ import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.TemplateCache;
+
 import freemarker.debug.impl.DebuggerService;
 
 import freemarker.template.Configuration;
@@ -58,8 +59,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 		_templateContextHelper = null;
 
-		if (System.getProperty("freemarker.debug.password") != null &&
-				System.getProperty("freemarker.debug.port") != null) {
+		if (isEnableDebuggerService()) {
 			DebuggerService.shutdown();
 		}
 	}
@@ -114,8 +114,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 			throw new TemplateException("Unable to init freemarker manager", e);
 		}
 
-		if (System.getProperty("freemarker.debug.password") != null &&
-				System.getProperty("freemarker.debug.port") != null) {
+		if (isEnableDebuggerService()) {
 			DebuggerService.getBreakpoints("*");
 		}
 	}
@@ -147,6 +146,16 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	@Override
 	protected TemplateContextHelper getTemplateContextHelper() {
 		return _templateContextHelper;
+	}
+
+	protected boolean isEnableDebuggerService() {
+		if ((System.getProperty("freemarker.debug.password") != null) &&
+			(System.getProperty("freemarker.debug.port") != null)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private Configuration _configuration;
