@@ -183,6 +183,7 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		if (layoutRevisionId <= 0) {
 			layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
 				user, layoutSetBranchId, layout.getPlid());
+		}
 
 			if (layoutRevisionId > 0) {
 				try {
@@ -208,7 +209,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 				catch (NoSuchLayoutRevisionException nslre) {
 				}
 			}
-		}
 
 		if (layoutRevisionId > 0) {
 			try {
