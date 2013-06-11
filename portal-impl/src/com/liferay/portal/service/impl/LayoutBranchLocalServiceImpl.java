@@ -101,7 +101,7 @@ public class LayoutBranchLocalServiceImpl
 	}
 
 	@Override
-	public LayoutBranch addOrFetchMasterLayoutBranch(
+	public LayoutBranch getMasterLayoutBranch(
 			long layoutSetBranchId, long plid, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -112,7 +112,7 @@ public class LayoutBranchLocalServiceImpl
 			return layoutBranch;
 		}
 
-		return addLayoutBranch(
+		return layoutBranchLocalService.addLayoutBranch(
 			layoutSetBranchId, plid, LayoutBranchConstants.MASTER_BRANCH_NAME,
 			LayoutBranchConstants.MASTER_BRANCH_DESCRIPTION, true,
 			serviceContext);

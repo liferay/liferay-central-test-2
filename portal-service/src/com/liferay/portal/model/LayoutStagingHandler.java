@@ -227,7 +227,7 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		}
 
 		LayoutBranch layoutBranch =
-			LayoutBranchLocalServiceUtil.addOrFetchMasterLayoutBranch(
+			LayoutBranchLocalServiceUtil.getMasterLayoutBranch(
 				layoutSetBranchId, layout.getPlid(), serviceContext);
 
 		if (!MergeLayoutPrototypesThreadLocal.isInProgress()) {
