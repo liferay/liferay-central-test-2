@@ -14,7 +14,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.NoSuchLayoutRevisionException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -196,19 +195,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 					WorkflowConstants.STATUS_INACTIVE) {
 
 				return layoutRevision;
-			}
-
-			layoutRevisionId =
-				StagingUtil.getRecentLayoutRevisionId(
-					user, layoutSetBranchId, layout.getPlid());
-		}
-
-		if (layoutRevisionId > 0) {
-			try {
-				return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-					layoutRevisionId);
-			}
-			catch (NoSuchLayoutRevisionException nslre) {
 			}
 		}
 
