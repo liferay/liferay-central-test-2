@@ -38,9 +38,7 @@ import java.util.Set;
  */
 public class DeletionSystemEventExporter {
 
-	public void export(PortletDataContext portletDataContext)
-		throws Exception {
-
+	public void export(PortletDataContext portletDataContext) throws Exception {
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("deletion-system-events");

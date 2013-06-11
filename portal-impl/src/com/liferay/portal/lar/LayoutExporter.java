@@ -979,9 +979,9 @@ public class LayoutExporter {
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutExporter.class);
 
-	private PermissionExporter _permissionExporter = new PermissionExporter();
-	private PortletExporter _portletExporter = new PortletExporter();
 	private DeletionSystemEventExporter _deletionSystemEventExporter =
 		new DeletionSystemEventExporter();
+	private PermissionExporter _permissionExporter = new PermissionExporter();
+	private PortletExporter _portletExporter = new PortletExporter();
 
 }
