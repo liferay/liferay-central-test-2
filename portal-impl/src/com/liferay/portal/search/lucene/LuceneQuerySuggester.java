@@ -76,6 +76,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 		_suggestWordComparator = suggestWordComparator;
 	}
 
+	@Override
 	public String spellCheckKeywords(SearchContext searchContext)
 		throws SearchException {
 
@@ -87,14 +88,15 @@ public class LuceneQuerySuggester implements QuerySuggester {
 		List<String> keywords = TokenizerUtil.tokenize(
 			localizedFieldName, searchContext.getKeywords(), languageId);
 
-		Map<String, List<String>> results = spellCheckKeywords(
+		Map<String, List<String>> suggestions = spellCheckKeywords(
 			keywords, localizedFieldName, searchContext, languageId, 1);
 
-		return CollatorUtil.collate(results, keywords);
+		return CollatorUtil.collate(suggestions, keywords);
 	}
 
+	@Override
 	public Map<String, List<String>> spellCheckKeywords(
-			SearchContext searchContext, int maxResults)
+			SearchContext searchContext, int max)
 		throws SearchException {
 
 		String languageId = searchContext.getLanguageId();
@@ -106,12 +108,11 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			localizedFieldName, searchContext.getKeywords(), languageId);
 
 		return spellCheckKeywords(
-			keywords, localizedFieldName, searchContext, languageId,
-			maxResults);
+			keywords, localizedFieldName, searchContext, languageId, max);
 	}
 
-	public String[] suggestKeywordQueries(
-			SearchContext searchContext, int maxResults)
+	@Override
+	public String[] suggestKeywordQueries(SearchContext searchContext, int max)
 		throws SearchException {
 
 		try {
@@ -155,7 +156,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 			return performSearch(
 				indexSearcher, suggestKeywordQuery, localizedKeywordFieldName,
-				_defaultRelevancyChecker, maxResults);
+				_defaultRelevancyChecker, max);
 		}
 		catch (Exception e) {
 			throw new SearchException("Unable to suggest query", e);
