@@ -331,8 +331,7 @@ public class LayoutFriendlyURLLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.LayoutFriendlyURL> getLayoutFriendlyURLs(
 		long plid, java.lang.String friendlyURL, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLayoutFriendlyURLs(plid, friendlyURL, start, end);
 	}
 
