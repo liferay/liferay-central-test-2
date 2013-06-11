@@ -36,7 +36,7 @@ import java.util.Set;
 /**
  * @author Zsolt Berentey
  */
-public class DeletionEventExporter {
+public class DeletionSystemEventExporter {
 
 	public void export(PortletDataContext portletDataContext)
 		throws Exception {
@@ -95,7 +95,7 @@ public class DeletionEventExporter {
 			protected void performAction(Object object) {
 				SystemEvent systemEvent = (SystemEvent)object;
 
-				exportDeletion(systemEvent, rootElement);
+				exportDeletionSystemEvent(systemEvent, rootElement);
 			}
 
 			private void _addCreateDateProperty(DynamicQuery dynamicQuery) {
@@ -119,7 +119,7 @@ public class DeletionEventExporter {
 		actionableDynamicQuery.performActions();
 	}
 
-	protected void exportDeletion(
+	protected void exportDeletionSystemEvent(
 		SystemEvent systemEvent, Element deletionsElement) {
 
 		Element deletionElement = deletionsElement.addElement("deletion");

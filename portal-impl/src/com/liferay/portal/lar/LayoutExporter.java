@@ -578,7 +578,7 @@ public class LayoutExporter {
 		_portletExporter.exportAssetLinks(portletDataContext);
 		_portletExporter.exportAssetTags(portletDataContext);
 		_portletExporter.exportComments(portletDataContext);
-		_deletionEventExporter.export(portletDataContext);
+		_deletionSystemEventExporter.export(portletDataContext);
 		_portletExporter.exportExpandoTables(portletDataContext);
 		_portletExporter.exportLocks(portletDataContext);
 
@@ -981,7 +981,7 @@ public class LayoutExporter {
 
 	private PermissionExporter _permissionExporter = new PermissionExporter();
 	private PortletExporter _portletExporter = new PortletExporter();
-	private DeletionEventExporter _deletionEventExporter =
-		new DeletionEventExporter();
+	private DeletionSystemEventExporter _deletionSystemEventExporter =
+		new DeletionSystemEventExporter();
 
 }

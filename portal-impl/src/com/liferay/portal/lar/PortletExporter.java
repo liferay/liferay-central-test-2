@@ -446,7 +446,7 @@ public class PortletExporter {
 		exportAssetLinks(portletDataContext);
 		exportAssetTags(portletDataContext);
 		exportComments(portletDataContext);
-		_deletionEventExporter.export(portletDataContext);
+		_deletionSystemEventExporter.export(portletDataContext);
 		exportExpandoTables(portletDataContext);
 		exportLocks(portletDataContext);
 
@@ -1736,8 +1736,8 @@ public class PortletExporter {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletExporter.class);
 
-	private DeletionEventExporter _deletionEventExporter =
-		new DeletionEventExporter();
+	private DeletionSystemEventExporter _deletionSystemEventExporter =
+		new DeletionSystemEventExporter();
 	private PermissionExporter _permissionExporter = new PermissionExporter();
 
 }
