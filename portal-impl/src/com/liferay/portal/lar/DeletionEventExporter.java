@@ -76,17 +76,17 @@ public class DeletionEventExporter {
 
 					setGroupId(portletDataContext.getScopeGroupId());
 
-					Property typeProperty = PropertyFactoryUtil.forName("type");
-
-					dynamicQuery.add(
-						typeProperty.eq(SystemEventConstants.TYPE_DELETE));
-
 					Property classNameIdProperty = PropertyFactoryUtil.forName(
 						"classNameId");
 
 					dynamicQuery.add(
 						classNameIdProperty.in(
 							deletionEventClassNameIds.toArray()));
+
+					Property typeProperty = PropertyFactoryUtil.forName("type");
+
+					dynamicQuery.add(
+						typeProperty.eq(SystemEventConstants.TYPE_DELETE));
 
 					_addCreateDateProperty(dynamicQuery);
 				}
