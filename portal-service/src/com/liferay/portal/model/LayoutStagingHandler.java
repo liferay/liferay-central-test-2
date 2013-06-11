@@ -196,6 +196,8 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 
 				return layoutRevision;
 			}
+
+			layoutRevision = null;
 		}
 
 		List<LayoutRevision> layoutRevisions =
