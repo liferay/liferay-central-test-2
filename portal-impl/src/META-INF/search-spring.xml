@@ -63,6 +63,11 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.search.NGramHolderBuilderUtil" class="com.liferay.portal.kernel.search.NGramHolderBuilderUtil">
+		<property name="NGramHolderBuilder">
+			<bean class="com.liferay.portal.search.NGramHolderBuilderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.search.QueryTranslator" class="com.liferay.portal.search.lucene.QueryTranslatorImpl" />
 	<bean id="com.liferay.portal.kernel.search.QueryTranslatorUtil" class="com.liferay.portal.kernel.search.QueryTranslatorUtil">
 		<property name="queryTranslator" ref="com.liferay.portal.kernel.search.QueryTranslator" />
@@ -84,11 +89,6 @@
 	<bean id="com.liferay.portal.kernel.search.StringQueryFactory" class="com.liferay.portal.kernel.search.StringQueryFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.search.StringQueryFactoryUtil" class="com.liferay.portal.kernel.search.StringQueryFactoryUtil">
 		<property name="stringQueryFactory" ref="com.liferay.portal.kernel.search.StringQueryFactory" />
-	</bean>
-	<bean id="com.liferay.portal.kernel.search.NGramHolderBuilderUtil" class="com.liferay.portal.kernel.search.NGramHolderBuilderUtil">
-		<property name="NGramHolderBuilder">
-			<bean class="com.liferay.portal.search.NGramHolderBuilderImpl" />
-		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.search.TokenizerUtil" class="com.liferay.portal.kernel.search.TokenizerUtil">
 		<property name="tokenizer" ref="com.liferay.portal.search.lucene.PerFieldAnalyzer" />
@@ -157,7 +157,6 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.search.lucene.LuceneSpellCheckIndexWriter" class="com.liferay.portal.search.lucene.LuceneSpellCheckIndexWriter" />
-
 
 	<!-- Lucene analyzers -->
 
