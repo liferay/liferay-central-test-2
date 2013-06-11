@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.NGramHolder;
 import com.liferay.portal.kernel.search.NGramHolderBuilderUtil;
+import com.liferay.portal.kernel.search.QueryIndexingHitsProcessor;
 import com.liferay.portal.kernel.search.QuerySuggester;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
@@ -35,7 +36,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.IndexReader;
@@ -116,9 +116,8 @@ public class LuceneQuerySuggester implements QuerySuggester {
 		throws SearchException {
 
 		try {
-			String keywords = searchContext.getKeywords();
-
-			Analyzer analyzer = LuceneHelperUtil.getAnalyzer();
+			IndexSearcher indexSearcher = LuceneHelperUtil.getSearcher(
+				searchContext.getCompanyId(), true);
 
 			BooleanQuery suggestKeywordQuery = new BooleanQuery();
 
@@ -132,9 +131,9 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 			QueryParser queryParser = new QueryParser(
 				LuceneHelperUtil.getVersion(), localizedKeywordFieldName,
-				analyzer);
+				LuceneHelperUtil.getAnalyzer());
 
-			Query query = queryParser.parse(keywords);
+			Query query = queryParser.parse(searchContext.getKeywords());
 
 			BooleanClause keywordTermQuery = new BooleanClause(
 				query, BooleanClause.Occur.MUST);
@@ -146,13 +145,9 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			addTermQuery(
 				suggestKeywordQuery, Field.LANGUAGE_ID, languageId, null,
 				BooleanClause.Occur.MUST);
-
 			addTermQuery(
 				suggestKeywordQuery, Field.PORTLET_ID, PortletKeys.SEARCH, null,
 				BooleanClause.Occur.MUST);
-
-			IndexSearcher indexSearcher = LuceneHelperUtil.getSearcher(
-				searchContext.getCompanyId(), true);
 
 			return performSearch(
 				indexSearcher, suggestKeywordQuery, localizedKeywordFieldName,
@@ -191,7 +186,6 @@ public class LuceneQuerySuggester implements QuerySuggester {
 	}
 
 	protected BooleanQuery buildNGramQuery(String word) throws SearchException {
-
 		NGramHolder nGramHolder = NGramHolderBuilderUtil.buildNGramHolder(word);
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -205,10 +199,10 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 		Map<String, List<String>> nGrams = nGramHolder.getNGrams();
 
-		for (Map.Entry<String, List<String>> nGramsEntry : nGrams.entrySet()) {
-			String fieldName = nGramsEntry.getKey();
+		for (Map.Entry<String, List<String>> entry : nGrams.entrySet()) {
+			String fieldName = entry.getKey();
 
-			for (String nGram : nGramsEntry.getValue()) {
+			for (String nGram : entry.getValue()) {
 				addTermQuery(
 					booleanQuery, fieldName, nGram, null,
 					BooleanClause.Occur.SHOULD);
@@ -241,7 +235,6 @@ public class LuceneQuerySuggester implements QuerySuggester {
 		addTermQuery(
 			suggestWordQuery, Field.LANGUAGE_ID, languageId, null,
 			BooleanClause.Occur.MUST);
-
 		addTermQuery(
 			suggestWordQuery, Field.PORTLET_ID, PortletKeys.SEARCH, null,
 			BooleanClause.Occur.MUST);
@@ -292,23 +285,22 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 	protected Map<String, List<String>> spellCheckKeywords(
 			List<String> keywords, String localizedFieldName,
-			SearchContext searchContext, String languageId, int maxResults)
+			SearchContext searchContext, String languageId, int max)
 		throws SearchException {
 
 		try {
-			Map<String, List<String>> spellCheckResults =
+			Map<String, List<String>> suggestions =
 				new LinkedHashMap<String, List<String>>();
-
-			long companyId = searchContext.getCompanyId();
 
 			float scoresThreshold = searchContext.getScoresThreshold();
 
 			if (scoresThreshold == 0) {
-				scoresThreshold = _DEFAULT_SCORING_THRESHOLD;
+				scoresThreshold =
+					QueryIndexingHitsProcessor.SCORES_THRESHOLD_DEFAULT;
 			}
 
 			IndexSearcher indexSearcher = LuceneHelperUtil.getSearcher(
-				companyId, true);
+				searchContext.getCompanyId(), true);
 
 			List<IndexReader> indexReaders = new ArrayList<IndexReader>();
 
@@ -341,23 +333,21 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 						suggestionsArray = performSearch(
 							indexSearcher, suggestWordQuery, localizedFieldName,
-							relevancyChecker, maxResults);
+							relevancyChecker, max);
 					}
 
 					spellCheckSuggestions = Arrays.asList(suggestionsArray);
 				}
 
-				spellCheckResults.put(keyword, spellCheckSuggestions);
+				suggestions.put(keyword, spellCheckSuggestions);
 			}
 
-			return spellCheckResults;
+			return suggestions;
 		}
 		catch (IOException e) {
 			throw new SearchException("Unable to find alternative queries", e);
 		}
 	}
-
-	private static final float _DEFAULT_SCORING_THRESHOLD = 0.5f;
 
 	private float _boostEnd = 1.0f;
 	private float _boostStart = 2.0f;
