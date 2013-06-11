@@ -82,7 +82,7 @@ int delta = ParamUtil.getInteger(request, "delta", deltaDefault);
 			%>
 
 			<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-		</span>		
+		</span>
 
 		<div id="<portlet:namespace />entriesContainer">
 			<liferay-util:include page="/html/portlet/dockbar/view_resources.jsp" />
