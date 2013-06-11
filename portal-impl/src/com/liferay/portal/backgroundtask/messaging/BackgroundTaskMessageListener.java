@@ -83,17 +83,18 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 			BackgroundTaskLocalServiceUtil.updateBackgroundTask(
 				backgroundTaskId, null, status, serviceContext);
 
-			Message completionMessage = new Message();
-			completionMessage.put(
+			Message responseMessage = new Message();
+
+			responseMessage.put(
 				"backgroundTaskId", backgroundTask.getBackgroundTaskId());
-			completionMessage.put("name", backgroundTask.getName());
-			completionMessage.put("status", status);
-			completionMessage.put(
+			responseMessage.put("name", backgroundTask.getName());
+			responseMessage.put("status", status);
+			responseMessage.put(
 				"taskExecutorClassName",
 				backgroundTask.getTaskExecutorClassName());
 
 			MessageBusUtil.sendMessage(
-				DestinationNames.BACKGROUND_TASK_STATUS, completionMessage);
+				DestinationNames.BACKGROUND_TASK_STATUS, responseMessage);
 		}
 	}
 

@@ -223,7 +223,8 @@ public class BackgroundTaskLocalServiceImpl
 	public void resumeBackgroundTask(long backgroundTaskId)
 		throws SystemException {
 
-		BackgroundTask backgroundTask = fetchBackgroundTask(backgroundTaskId);
+		BackgroundTask backgroundTask =
+			backgroundTaskPersistence.fetchByPrimaryKey(backgroundTaskId);
 
 		if ((backgroundTask == null) ||
 			(backgroundTask.getStatus() !=

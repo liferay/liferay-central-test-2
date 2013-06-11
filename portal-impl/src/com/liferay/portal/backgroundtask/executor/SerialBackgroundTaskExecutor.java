@@ -14,6 +14,7 @@
 
 package com.liferay.portal.backgroundtask.executor;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
@@ -36,7 +37,7 @@ public class SerialBackgroundTaskExecutor implements BackgroundTaskExecutor {
 		try {
 			if (isSerial()) {
 				String owner =
-					backgroundTask.getName() +
+					backgroundTask.getName() + StringPool.POUND +
 						backgroundTask.getBackgroundTaskId();
 
 				lock = LockLocalServiceUtil.lock(
@@ -51,8 +52,7 @@ public class SerialBackgroundTaskExecutor implements BackgroundTaskExecutor {
 			if (lock != null) {
 				LockLocalServiceUtil.unlock(
 					BaseBackgroundTaskExecutor.class.getName(),
-					backgroundTask.getTaskExecutorClassName()
-				);
+					backgroundTask.getTaskExecutorClassName());
 			}
 		}
 	}

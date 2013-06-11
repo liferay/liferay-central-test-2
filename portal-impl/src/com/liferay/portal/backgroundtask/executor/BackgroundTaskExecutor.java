@@ -21,8 +21,7 @@ import com.liferay.portal.model.BackgroundTask;
  */
 public interface BackgroundTaskExecutor {
 
-	public void execute(BackgroundTask backgroundTask)
-		throws Exception;
+	public void execute(BackgroundTask backgroundTask) throws Exception;
 
 	public boolean isSerial();
 
