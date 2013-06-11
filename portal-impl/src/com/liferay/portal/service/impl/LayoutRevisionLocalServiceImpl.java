@@ -324,6 +324,16 @@ public class LayoutRevisionLocalServiceImpl
 
 	@Override
 	public List<LayoutRevision> getLayoutRevisions(
+			long layoutSetBranchId, long plid, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_P(
+			layoutSetBranchId, plid, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<LayoutRevision> getLayoutRevisions(
 			long layoutSetBranchId, long layoutBranchId, long plid, int start,
 			int end, OrderByComparator orderByComparator)
 		throws SystemException {
