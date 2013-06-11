@@ -63,7 +63,7 @@ public class BackgroundTaskQueuingMessageListener extends BaseMessageListener {
 			_backgroundTaskLocalService.fetchFirstBackgroundTask(
 				taskExecutorClassName, BackgroundTaskConstants.STATUS_QUEUED);
 
-		if (backgroundTask != null) {
+		if (backgroundTask == null) {
 			return;
 		}
 
