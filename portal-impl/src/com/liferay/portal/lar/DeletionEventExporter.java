@@ -93,9 +93,7 @@ public class DeletionEventExporter {
 				}
 
 				@Override
-				protected void performAction(Object object)
-					throws PortalException, SystemException {
-
+				protected void performAction(Object object) {
 					SystemEvent systemEvent = (SystemEvent)object;
 
 					exportDeletion(systemEvent, rootElement);
