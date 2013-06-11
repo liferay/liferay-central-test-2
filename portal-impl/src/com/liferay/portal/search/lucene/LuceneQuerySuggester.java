@@ -300,10 +300,10 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 			long companyId = searchContext.getCompanyId();
 
-			float scoringThreshold = searchContext.getScoringThreshold();
+			float scoresThreshold = searchContext.getScoresThreshold();
 
-			if (scoringThreshold == 0) {
-				scoringThreshold = _DEFAULT_SCORING_THRESHOLD;
+			if (scoresThreshold == 0) {
+				scoresThreshold = _DEFAULT_SCORING_THRESHOLD;
 			}
 
 			IndexSearcher indexSearcher = LuceneHelperUtil.getSearcher(
@@ -336,7 +336,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 
 						RelevancyChecker relevancyChecker =
 							new StringDistanceRelevancyChecker(
-								keyword, scoringThreshold, _stringDistance);
+								keyword, scoresThreshold, _stringDistance);
 
 						suggestionsArray = performSearch(
 							indexSearcher, suggestWordQuery, localizedFieldName,

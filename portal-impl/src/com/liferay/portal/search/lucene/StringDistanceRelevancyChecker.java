@@ -23,9 +23,9 @@ import org.apache.lucene.search.spell.SuggestWord;
 public class StringDistanceRelevancyChecker implements RelevancyChecker {
 
 	public StringDistanceRelevancyChecker(
-		String word, float scoringThreshold, StringDistance stringDistance) {
+		String word, float scoresThreshold, StringDistance stringDistance) {
 
-		_scoringThreshold = scoringThreshold;
+		_scoresThreshold = scoresThreshold;
 		_stringDistance = stringDistance;
 		_word = word;
 	}
@@ -39,14 +39,14 @@ public class StringDistanceRelevancyChecker implements RelevancyChecker {
 		suggestWord.score = _stringDistance.getDistance(
 			_word, suggestWord.string);
 
-		if (suggestWord.score <= _scoringThreshold) {
+		if (suggestWord.score <= _scoresThreshold) {
 			return false;
 		}
 
 		return true;
 	}
 
-	private float _scoringThreshold;
+	private float _scoresThreshold;
 	private StringDistance _stringDistance;
 	private String _word;
 
