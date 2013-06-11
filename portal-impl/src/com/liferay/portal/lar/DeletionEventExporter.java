@@ -103,16 +103,16 @@ public class DeletionEventExporter {
 						return;
 					}
 
-					Property modifiedDateProperty = PropertyFactoryUtil.forName(
+					Property createDateProperty = PropertyFactoryUtil.forName(
 						"createDate");
 
 					Date startDate = portletDataContext.getStartDate();
 					Date endDate = portletDataContext.getEndDate();
 
 					dynamicQuery.add(
-						modifiedDateProperty.ge(startDate.getTime()));
+						createDateProperty.ge(startDate.getTime()));
 					dynamicQuery.add(
-						modifiedDateProperty.le(endDate.getTime()));
+						createDateProperty.le(endDate.getTime()));
 				}
 			};
 
