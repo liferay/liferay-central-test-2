@@ -483,12 +483,13 @@ public class RoleFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(resourceBlockId);
+			qPos.add(className);
+
 			ResourceAction resourceAction =
 				ResourceActionLocalServiceUtil.getResourceAction(
 					className, actionId);
 
-			qPos.add(resourceBlockId);
-			qPos.add(className);
 			qPos.add(resourceAction.getBitwiseValue());
 
 			return q.list(true);
@@ -646,14 +647,15 @@ public class RoleFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			ResourceAction resourceAction =
-				ResourceActionLocalServiceUtil.getResourceAction(
-					name, actionId);
-
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(scope);
 			qPos.add(primKey);
+
+			ResourceAction resourceAction =
+				ResourceActionLocalServiceUtil.getResourceAction(
+					name, actionId);
+
 			qPos.add(resourceAction.getBitwiseValue());
 
 			return q.list(true);
