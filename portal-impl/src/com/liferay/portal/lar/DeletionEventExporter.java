@@ -39,8 +39,7 @@ import java.util.Set;
 public class DeletionEventExporter {
 
 	public void export(
-			final com.liferay.portal.kernel.lar.PortletDataContext
-				portletDataContext)
+			final PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
