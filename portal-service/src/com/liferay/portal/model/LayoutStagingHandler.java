@@ -271,16 +271,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 			layout.getColorSchemeId(), layout.getWapThemeId(),
 			layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
 
-		boolean explicitCreation = ParamUtil.getBoolean(
-			serviceContext, "explicitCreation");
-
-		if (!explicitCreation) {
-			LayoutRevisionLocalServiceUtil.updateStatus(
-				serviceContext.getUserId(),
-				layoutRevision.getLayoutRevisionId(),
-				WorkflowConstants.STATUS_INCOMPLETE, serviceContext);
-		}
-
 		return layoutRevision;
 	}
 
