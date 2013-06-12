@@ -308,7 +308,7 @@ public class ExportImportImpl implements ExportImport {
 					}
 					else if (elementName.equals("staged-model")) {
 						String manifestSummaryKey = element.attributeValue(
-							"key");
+							"manifest-summary-key");
 
 						long modelAdditionCount = GetterUtil.getLong(
 							element.attributeValue("addition-count"));
@@ -950,14 +950,15 @@ public class ExportImportImpl implements ExportImport {
 
 		Element rootElement = document.getRootElement();
 
-		Element summaryElement = rootElement.addElement("summary");
+		Element manifestSummaryElement = rootElement.addElement(
+			"manifest-summary");
 
 		for (String manifestSummaryKey :
 				manifestSummary.getManifestSummaryKeys()) {
 
-			Element element = summaryElement.addElement("staged-model");
+			Element element = manifestSummaryElement.addElement("staged-model");
 
-			element.addAttribute("key", manifestSummaryKey);
+			element.addAttribute("manifest-summary-key", manifestSummaryKey);
 
 			long modelAdditionCount = manifestSummary.getModelAdditionCount(
 				manifestSummaryKey);
