@@ -24,6 +24,14 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public abstract class AbstractDevice implements Device {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getScreenResolution()}
+	 */
+	@Override
+	public Dimensions getScreenSize() {
+		return getScreenResolution();
+	}
+
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
@@ -57,11 +65,4 @@ public abstract class AbstractDevice implements Device {
 		return sb.toString();
 	}
 
-	/**
-	 * @deprecated As of 6.2.0 please use {@link #getScreenResolution()} instead
-	 */
-	@Deprecated
-	public Dimensions getScreenSize() {
-		return getScreenResolution();
-	}
 }

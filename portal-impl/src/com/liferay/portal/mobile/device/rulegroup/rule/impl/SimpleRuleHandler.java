@@ -39,19 +39,25 @@ public class SimpleRuleHandler implements RuleHandler {
 
 	public static final String PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX =
 		"screen-physical-height-max";
+
 	public static final String PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN =
 		"screen-physical-height-min";
-	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX = 
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX =
 		"screen-physical-width-max";
-	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN = 
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN =
 		"screen-physical-width-min";
 
 	public static final String PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX =
 		"screen-resolution-height-max";
+
 	public static final String PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN =
 		"screen-resolution-height-min";
+
 	public static final String PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX =
 		"screen-resolution-width-max";
+
 	public static final String PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN =
 		"screen-resolution-width-min";
 
@@ -97,9 +103,9 @@ public class SimpleRuleHandler implements RuleHandler {
 		if (!isValidValue(
 				screenPhysicalSize.getHeight(),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN),
+					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX))) {
+					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN))) {
 
 			return false;
 		}
@@ -107,9 +113,9 @@ public class SimpleRuleHandler implements RuleHandler {
 		if (!isValidValue(
 				screenPhysicalSize.getWidth(),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN),
+					PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX))) {
+					PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN))) {
 
 			return false;
 		}
@@ -119,9 +125,9 @@ public class SimpleRuleHandler implements RuleHandler {
 		if (!isValidValue(
 				screenResolution.getHeight(),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN),
+					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX))) {
+					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN))) {
 
 			return false;
 		}
@@ -129,9 +135,9 @@ public class SimpleRuleHandler implements RuleHandler {
 		if (!isValidValue(
 				screenResolution.getWidth(),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN),
+					PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX),
 				typeSettingsProperties.get(
-					PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX))) {
+					PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN))) {
 
 			return false;
 		}
@@ -149,23 +155,23 @@ public class SimpleRuleHandler implements RuleHandler {
 		return getHandlerType();
 	}
 
-	protected boolean isValidValue(float value, String min, String max) {
+	protected boolean isValidValue(float value, String max, String min) {
 		if (Validator.isNull(max) && Validator.isNull(min)) {
 			return true;
 		}
 
 		if (Validator.isNotNull(max)) {
-			float maxInt = GetterUtil.getFloat(max);
+			float maxFloat = GetterUtil.getFloat(max);
 
-			if (value > maxInt) {
+			if (value > maxFloat) {
 				return false;
 			}
 		}
 
 		if (Validator.isNotNull(min)) {
-			float minInt = GetterUtil.getFloat(min);
+			float minFLoat = GetterUtil.getFloat(min);
 
-			if (value < minInt) {
+			if (value < minFLoat) {
 				return false;
 			}
 		}

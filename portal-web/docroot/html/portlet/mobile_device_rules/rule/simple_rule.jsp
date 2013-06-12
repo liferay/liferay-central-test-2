@@ -94,9 +94,10 @@ if (rule != null) {
 			label="width"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN %>"
 			placeholder="mm"
-			value="<%= screenPhysicalWidthMin %>" />
+			value="<%= screenPhysicalWidthMin %>"
+		/>
 
-		<%= _SEPARATOR %>
+		x
 
 		<aui:input
 			cssClass="physical-screen-size-field-field aui-field-digits"
@@ -118,9 +119,10 @@ if (rule != null) {
 			label="width"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX %>"
 			placeholder="mm"
-			value="<%= screenPhysicalWidthMax %>" />
+			value="<%= screenPhysicalWidthMax %>"
+		/>
 
-		<%= _SEPARATOR %>
+		x
 
 		<aui:input
 			cssClass="screen-physical-size-field-field aui-field-digits"
@@ -129,7 +131,8 @@ if (rule != null) {
 			label="height"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX %>"
 			placeholder="mm"
-			value="<%= screenPhysicalHeightMax %>" />
+			value="<%= screenPhysicalHeightMax %>"
+		/>
 	</div>
 </aui:fieldset>
 
@@ -144,9 +147,10 @@ if (rule != null) {
 			label="width"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN %>"
 			placeholder="px"
-			value="<%= screenResolutionWidthMin %>" />
+			value="<%= screenResolutionWidthMin %>"
+		/>
 
-		<%= _SEPARATOR %>
+		x
 
 		<aui:input
 			cssClass="screen-resolution-field aui-field-digits"
@@ -155,7 +159,8 @@ if (rule != null) {
 			label="height"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN %>"
 			placeholder="px"
-			value="<%= screenResolutionHeightMin %>" />
+			value="<%= screenResolutionHeightMin %>"
+		/>
 	</div>
 
 	<div class="row-fields">
@@ -168,9 +173,10 @@ if (rule != null) {
 			label="width"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX %>"
 			placeholder="px"
-			value="<%= screenResolutionWidthMax %>" />
+			value="<%= screenResolutionWidthMax %>"
+		/>
 
-		<%= _SEPARATOR %>
+		x
 
 		<aui:input
 			cssClass="screen-resolution-field aui-field-digits"
@@ -179,10 +185,7 @@ if (rule != null) {
 			label="height"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX %>"
 			placeholder="px"
-			value="<%= screenResolutionHeightMax %>" />
+			value="<%= screenResolutionHeightMax %>"
+		/>
 	</div>
 </aui:fieldset>
-
-<%!
-private final static String _SEPARATOR = " x ";
-%>

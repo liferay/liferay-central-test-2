@@ -17,7 +17,6 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil" %><%@
-page import="com.liferay.portal.kernel.mobile.device.Dimensions" %><%@
 page import="com.liferay.portal.kernel.mobile.device.VersionableName" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.ActionHandlerManagerUtil" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.RuleGroupProcessorUtil" %><%@
