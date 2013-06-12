@@ -71,11 +71,7 @@
 			);
 		</aui:script>
 
-		<%
-		Locale curLocale = LocaleUtil.fromLanguageId(themeDisplay.getLanguageId());
-		%>
-
 		<c:if test="<%= wrapDropDownMenu %>">
-			<ul class='dropdown-menu <%= LanguageUtil.get(curLocale, "lang.dir").equals("rtl") ? "pull-right" : StringPool.BLANK %>'>
+			<ul class='dropdown-menu <%= LanguageUtil.get(locale, "lang.dir").equals("rtl") ? "pull-right" : StringPool.BLANK %>'>
 		</c:if>
 	</c:if>
