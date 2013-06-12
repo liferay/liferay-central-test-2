@@ -111,12 +111,13 @@ public class PublishLayoutsAction extends EditLayoutsAction {
 					actionRequest, groupId, privateLayout, 0, null);
 
 				Date startDate = dateRange.getStartDate();
-				Date endDate = dateRange.getEndDate();
 
 				if (startDate != null) {
 					actionResponse.setRenderParameter(
 						"startDate", String.valueOf(startDate.getTime()));
 				}
+
+				Date endDate = dateRange.getEndDate();
 
 				if (endDate != null) {
 					actionResponse.setRenderParameter(

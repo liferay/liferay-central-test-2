@@ -88,6 +88,7 @@ public class DefaultLicenseManagerImpl
 			byte[] serverIdBytes = LicenseUtil.getServerIdBytes();
 
 			jsonObject.put(Constants.CMD, "GET_LICENSE_STATE");
+
 			jsonObject.put("hostName", getHostName());
 			jsonObject.put("ipAddresses", StringUtil.merge(getIpAddresses()));
 			jsonObject.put("macAddresses", StringUtil.merge(getMacAddresses()));
