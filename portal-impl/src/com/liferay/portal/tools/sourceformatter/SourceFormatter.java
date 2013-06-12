@@ -1697,6 +1697,8 @@ public class SourceFormatter {
 				"source_formatter_javaterm_sort_exclusions.properties");
 			_lineLengthExclusions = _getPluginExclusionsProperties(
 				"source_formatter_line_length_exclusions.properties");
+			staticLogVariableExclusions = _getPluginExclusionsProperties(
+				"source_formatter_static_log_exclusions.properties");
 		}
 
 		for (String fileName : fileNames) {
