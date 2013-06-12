@@ -33,6 +33,7 @@ import java.util.Map;
 public interface JournalTemplate
 	extends Cloneable, Comparable<JournalTemplate>, Serializable {
 
+	@Override
 	public boolean equals(Object obj);
 
 	public boolean getCacheable();
@@ -109,6 +110,7 @@ public interface JournalTemplate
 
 	public String getXsl();
 
+	@Override
 	public int hashCode();
 
 	public boolean isCacheable();
