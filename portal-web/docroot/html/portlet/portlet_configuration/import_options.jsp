@@ -27,14 +27,13 @@ Layout exportableLayout = ExportImportUtil.getExportableLayout(themeDisplay);
 </portlet:actionURL>
 
 <aui:form action="<%= importPortletURL %>" cssClass="lfr-export-dialog" enctype="multipart/form-data" method="post" name="fm1">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.IMPORT %>" />
 	<aui:input name="tabs1" type="hidden" value="export_import" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="plid" type="hidden" value="<%= exportableLayout.getPlid() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= themeDisplay.getScopeGroupId() %>" />
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.IMPORT %>" />
 
 	<div class="export-dialog-tree">
 		<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
