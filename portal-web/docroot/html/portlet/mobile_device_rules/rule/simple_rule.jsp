@@ -106,7 +106,8 @@ if (rule != null) {
 			label="height"
 			name="<%= SimpleRuleHandler.PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN %>"
 			placeholder="mm"
-			value="<%= screenPhysicalHeightMin %>" />
+			value="<%= screenPhysicalHeightMin %>"
+		/>
 	</div>
 
 	<div class="row-fields">
