@@ -1689,8 +1689,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 			new String[] {
 				destDir,
 				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY,
-				pluginApplicationName,
-				pluginServletContextName
+				pluginApplicationName, pluginServletContextName
 			});
 
 		String wsadminFileName = FileUtil.createTempFileName("py");
