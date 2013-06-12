@@ -173,6 +173,7 @@ public class SocialActivitySetLocalServiceImpl
 			new SocialActivitySetModifiedDateComparator());
 	}
 
+	@Override
 	public SocialActivitySet getUserActivitySet(
 			long groupId, long userId, long classNameId, int type)
 		throws SystemException {
