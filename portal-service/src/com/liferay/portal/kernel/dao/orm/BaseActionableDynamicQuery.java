@@ -88,6 +88,7 @@ public abstract class BaseActionableDynamicQuery
 		dynamicQuery.add(property.lt(endPrimaryKey));
 
 		addDefaultCriteria(dynamicQuery);
+
 		addCriteria(dynamicQuery);
 
 		List<Object> objects = (List<Object>)executeDynamicQuery(
