@@ -228,9 +228,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	@Override
-	public JournalTemplate createJournalTemplate(long id)
-		throws SystemException {
-
+	public JournalTemplate createJournalTemplate(long id) {
 		DDMTemplate ddmTemplate = ddmTemplateLocalService.createDDMTemplate(id);
 
 		return new JournalTemplateAdapter(ddmTemplate);
