@@ -94,7 +94,6 @@ public class JournalTemplateServiceTest extends BaseJournalServiceTestCase {
 			false);
 
 		Assert.assertEquals(newTemplateId, template.getTemplateId());
-
 		Assert.assertEquals(xsl, template.getXsl());
 	}
 
@@ -116,7 +115,6 @@ public class JournalTemplateServiceTest extends BaseJournalServiceTestCase {
 	public void testDeleteTemplates() throws Exception {
 		addTemplate(
 			groupId, generateId(), StringPool.BLANK, "Template Content 1");
-
 		addTemplate(
 			groupId, generateId(), StringPool.BLANK, "Template Content 2");
 
@@ -155,7 +153,6 @@ public class JournalTemplateServiceTest extends BaseJournalServiceTestCase {
 		addStructure(groupId, structureId, getDefultXsd());
 
 		addTemplate(groupId, generateId(), structureId, "Template Content 1");
-
 		addTemplate(groupId, generateId(), structureId, "Template Content 2");
 
 		int templatesCount =
@@ -172,7 +169,6 @@ public class JournalTemplateServiceTest extends BaseJournalServiceTestCase {
 		addStructure(getCompanyGroupId(), structureId, getDefultXsd());
 
 		addTemplate(groupId, generateId(), structureId, "Template Content 1");
-
 		addTemplate(
 			getCompanyGroupId(), generateId(), structureId,
 			"Template Content 2");
@@ -267,7 +263,6 @@ public class JournalTemplateServiceTest extends BaseJournalServiceTestCase {
 				true, false, null, null, getServiceContext());
 
 		Assert.assertEquals("New Test Template", template.getName(Locale.US));
-
 		Assert.assertEquals("New Template Content", template.getXsl());
 	}
 

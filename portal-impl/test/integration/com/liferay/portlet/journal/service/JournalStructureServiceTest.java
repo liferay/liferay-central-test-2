@@ -98,7 +98,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 				newStructureId, false);
 
 		Assert.assertEquals(newStructureId, structure.getStructureId());
-
 		Assert.assertEquals(
 			JournalTestUtil.getXsdMap(xsd),
 			JournalTestUtil.getXsdMap(structure.getXsd()));
@@ -121,7 +120,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 	@Test
 	public void testDeleteStructures() throws Exception {
 		addStructure(groupId, generateId(), getDefultXsd());
-
 		addStructure(groupId, generateId(), getDefultXsd());
 
 		int structuresCount =
@@ -162,7 +160,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 	@Test
 	public void testGetStructures() throws Exception {
 		addStructure(groupId, generateId(), getDefultXsd());
-
 		addStructure(groupId, generateId(), getDefultXsd());
 
 		List<JournalStructure> structures =
@@ -174,7 +171,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 	@Test
 	public void testSearchByKeywords() throws Exception {
 		addStructure(groupId, generateId(), "First Structure", getDefultXsd());
-
 		addStructure(
 			getCompanyGroupId(), generateId(), "Second Structure",
 			getDefultXsd());
@@ -192,7 +188,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 	@Test
 	public void testSearchCountByKeywords() throws Exception {
 		addStructure(groupId, generateId(), "First Structure", getDefultXsd());
-
 		addStructure(
 			getCompanyGroupId(), generateId(), "Second Structure",
 			getDefultXsd());
@@ -232,7 +227,6 @@ public class JournalStructureServiceTest extends BaseJournalServiceTestCase {
 				getServiceContext());
 
 		Assert.assertEquals("New Test Structure", structure.getName(Locale.US));
-
 		Assert.assertEquals(
 			JournalTestUtil.getXsdMap(xsd),
 			JournalTestUtil.getXsdMap(structure.getXsd()));
