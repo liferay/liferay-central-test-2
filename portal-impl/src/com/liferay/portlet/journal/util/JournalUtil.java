@@ -961,7 +961,7 @@ public class JournalUtil {
 					groupId, structureId);
 
 			if (structure != null) {
-				classPKs.add(Long.valueOf(structure.getPrimaryKey()));
+				classPKs.add(structure.getId());
 			}
 		}
 
