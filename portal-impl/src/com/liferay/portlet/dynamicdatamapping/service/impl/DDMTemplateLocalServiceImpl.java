@@ -758,14 +758,6 @@ public class DDMTemplateLocalServiceImpl
 			groupId, classNameId, classPK, type, mode);
 	}
 
-	/**
-	 * Returns all the templates matching the group and class PK.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  classPK the primary key of the template's related entity
-	 * @return the matching templates
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public List<DDMTemplate> getTemplatesByClassPK(long groupId, long classPK)
 		throws SystemException {
@@ -773,27 +765,6 @@ public class DDMTemplateLocalServiceImpl
 		return ddmTemplatePersistence.findByG_CPK(groupId, classPK);
 	}
 
-	/**
-	 * Returns a range of all the templates matching the group and class PK.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances. <code>start</code> and <code>end</code> are not
-	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
-	 * refers to the first result in the set. Setting both <code>start</code>
-	 * and <code>end</code> to {@link
-	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
-	 * result set.
-	 * </p>
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  classPK the primary key of the template's related entity
-	 * @param  start the lower bound of the range of templates to return
-	 * @param  end the upper bound of the range of templates to return (not
-	 *         inclusive)
-	 * @return the matching templates
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public List<DDMTemplate> getTemplatesByClassPK(
 			long groupId, long classPK, int start, int end)
@@ -802,14 +773,6 @@ public class DDMTemplateLocalServiceImpl
 		return ddmTemplatePersistence.findByG_CPK(groupId, classPK, start, end);
 	}
 
-	/**
-	 * Returns all the templates matching the group IDs and class PK.
-	 *
-	 * @param  groupIds the primary keys of the groups
-	 * @param  classPK the primary key of the template's related entity
-	 * @return the matching templates
-	 * @throws SystemException if a system exception occurred
-	 */
 	@Override
 	public List<DDMTemplate> getTemplatesByClassPK(
 			long[] groupIds, long classPK)
