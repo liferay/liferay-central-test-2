@@ -163,12 +163,11 @@
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductEntry" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductScreenshot" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductVersion" />
+	<import class="com.liferay.portlet.trash.model.TrashEntry" />
+	<import class="com.liferay.portlet.trash.model.TrashVersion" />
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
-	<import class="com.liferay.portlet.trash.model.TrashEntry" />
-	<import class="com.liferay.portlet.trash.model.TrashVersion" />
-	<import class="com.liferay.portlet.calendar.model.CalEvent" />
 	<class name="com.liferay.counter.model.impl.CounterImpl" table="Counter">
 		<id name="name" type="java.lang.String">
 			<generator class="assigned" />
