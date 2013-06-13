@@ -243,13 +243,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the company group for the specified company.
+	 * Returns the company group.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @return the group for the specified company
-	 * @throws PortalException if a group with the companyId could not be
-	 *         found or if the current user did not have permission to view the
-	 *         group
+	 * @return the group associated with the company
+	 * @throws PortalException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
     @Override
@@ -259,7 +257,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		Group group = groupLocalService.getCompanyGroup(companyId);
 
 		GroupPermissionUtil.check(
-				getPermissionChecker(), group.getGroupId(), ActionKeys.VIEW);
+			getPermissionChecker(), group.getGroupId(), ActionKeys.VIEW);
 
 		return group;
 	}
