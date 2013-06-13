@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @see JournalTemplateLocalService
  * @see com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl
  * @see com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl
- * @deprecated As of 6.2.0, since Web Content Administration now uses the DDM
-framework to handle templates
+ * @deprecated As of 6.2.0, since Web Content Administration now uses the
+Dynamic Data Mapping framework to handle templates
  * @generated
  */
 public class JournalTemplateLocalServiceUtil {

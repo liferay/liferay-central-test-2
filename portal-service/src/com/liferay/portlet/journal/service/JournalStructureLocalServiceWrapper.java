@@ -21,8 +21,8 @@ import com.liferay.portal.service.ServiceWrapper;
  *
  * @author Brian Wing Shun Chan
  * @see JournalStructureLocalService
- * @deprecated As of 6.2.0, since Web Content Administration now uses the DDM
-framework to handle structures
+ * @deprecated As of 6.2.0, since Web Content Administration now uses the
+Dynamic Data Mapping framework to handle structures
  * @generated
  */
 public class JournalStructureLocalServiceWrapper
