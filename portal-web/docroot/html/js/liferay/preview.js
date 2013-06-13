@@ -214,7 +214,7 @@ AUI.add(
 
 							maxPreviewControls.append(arrowLeft);
 							maxPreviewControls.append(arrowRight);
-							
+
 							maxPreviewControls.delegate('click', instance._onMaxPreviewControlsClick, '.lfr-preview-file-arrow', instance);
 
 							instance._maxPreviewControls = maxPreviewControls;
