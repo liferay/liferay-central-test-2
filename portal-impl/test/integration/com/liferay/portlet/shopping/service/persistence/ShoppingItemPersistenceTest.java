@@ -220,8 +220,7 @@ public class ShoppingItemPersistenceTest {
 			newShoppingItem.getMinQuantity());
 		Assert.assertEquals(existingShoppingItem.getMaxQuantity(),
 			newShoppingItem.getMaxQuantity());
-		AssertUtils.assertEquals(
-			existingShoppingItem.getPrice(),
+		AssertUtils.assertEquals(existingShoppingItem.getPrice(),
 			newShoppingItem.getPrice());
 		AssertUtils.assertEquals(existingShoppingItem.getDiscount(),
 			newShoppingItem.getDiscount());

@@ -136,8 +136,7 @@ public class RatingsStatsPersistenceTest {
 			newRatingsStats.getClassPK());
 		Assert.assertEquals(existingRatingsStats.getTotalEntries(),
 			newRatingsStats.getTotalEntries());
-		AssertUtils.assertEquals(
-			existingRatingsStats.getTotalScore(),
+		AssertUtils.assertEquals(existingRatingsStats.getTotalScore(),
 			newRatingsStats.getTotalScore());
 		AssertUtils.assertEquals(existingRatingsStats.getAverageScore(),
 			newRatingsStats.getAverageScore());

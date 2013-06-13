@@ -186,8 +186,7 @@ public class WikiPagePersistenceTest {
 		Assert.assertEquals(existingWikiPage.getNodeId(),
 			newWikiPage.getNodeId());
 		Assert.assertEquals(existingWikiPage.getTitle(), newWikiPage.getTitle());
-		AssertUtils.assertEquals(
-			existingWikiPage.getVersion(),
+		AssertUtils.assertEquals(existingWikiPage.getVersion(),
 			newWikiPage.getVersion());
 		Assert.assertEquals(existingWikiPage.getMinorEdit(),
 			newWikiPage.getMinorEdit());

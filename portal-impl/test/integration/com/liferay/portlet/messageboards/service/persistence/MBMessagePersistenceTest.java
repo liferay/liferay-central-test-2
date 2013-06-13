@@ -204,8 +204,7 @@ public class MBMessagePersistenceTest {
 			newMBMessage.getFormat());
 		Assert.assertEquals(existingMBMessage.getAnonymous(),
 			newMBMessage.getAnonymous());
-		AssertUtils.assertEquals(
-			existingMBMessage.getPriority(),
+		AssertUtils.assertEquals(existingMBMessage.getPriority(),
 			newMBMessage.getPriority());
 		Assert.assertEquals(existingMBMessage.getAllowPingbacks(),
 			newMBMessage.getAllowPingbacks());

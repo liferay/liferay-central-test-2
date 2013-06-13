@@ -153,8 +153,7 @@ public class RatingsEntryPersistenceTest {
 			newRatingsEntry.getClassNameId());
 		Assert.assertEquals(existingRatingsEntry.getClassPK(),
 			newRatingsEntry.getClassPK());
-		AssertUtils.assertEquals(
-			existingRatingsEntry.getScore(),
+		AssertUtils.assertEquals(existingRatingsEntry.getScore(),
 			newRatingsEntry.getScore());
 	}
 

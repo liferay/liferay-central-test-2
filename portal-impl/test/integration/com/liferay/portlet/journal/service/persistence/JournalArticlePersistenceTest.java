@@ -212,8 +212,7 @@ public class JournalArticlePersistenceTest {
 			newJournalArticle.getClassPK());
 		Assert.assertEquals(existingJournalArticle.getArticleId(),
 			newJournalArticle.getArticleId());
-		AssertUtils.assertEquals(
-			existingJournalArticle.getVersion(),
+		AssertUtils.assertEquals(existingJournalArticle.getVersion(),
 			newJournalArticle.getVersion());
 		Assert.assertEquals(existingJournalArticle.getTitle(),
 			newJournalArticle.getTitle());

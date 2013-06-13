@@ -223,8 +223,7 @@ public class AssetEntryPersistenceTest {
 			newAssetEntry.getHeight());
 		Assert.assertEquals(existingAssetEntry.getWidth(),
 			newAssetEntry.getWidth());
-		AssertUtils.assertEquals(
-			existingAssetEntry.getPriority(),
+		AssertUtils.assertEquals(existingAssetEntry.getPriority(),
 			newAssetEntry.getPriority());
 		Assert.assertEquals(existingAssetEntry.getViewCount(),
 			newAssetEntry.getViewCount());

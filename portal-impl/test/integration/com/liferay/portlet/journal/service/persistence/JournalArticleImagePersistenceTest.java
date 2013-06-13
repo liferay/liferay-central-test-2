@@ -139,8 +139,7 @@ public class JournalArticleImagePersistenceTest {
 			newJournalArticleImage.getGroupId());
 		Assert.assertEquals(existingJournalArticleImage.getArticleId(),
 			newJournalArticleImage.getArticleId());
-		AssertUtils.assertEquals(
-			existingJournalArticleImage.getVersion(),
+		AssertUtils.assertEquals(existingJournalArticleImage.getVersion(),
 			newJournalArticleImage.getVersion());
 		Assert.assertEquals(existingJournalArticleImage.getElInstanceId(),
 			newJournalArticleImage.getElInstanceId());
