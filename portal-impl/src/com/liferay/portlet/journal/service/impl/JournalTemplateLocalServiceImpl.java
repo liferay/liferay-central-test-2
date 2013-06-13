@@ -52,8 +52,8 @@ import java.util.Map;
  * @author     Brian Wing Shun Chan
  * @author     Raymond Augé
  * @author     Marcellus Tavares
- * @deprecated As of 6.2.0, since Web Content Administration now uses the DDM
- *             framework to handle templates
+ * @deprecated As of 6.2.0, since Web Content Administration now uses the
+ *             Dynamic Data Mapping framework to handle templates
  */
 public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
