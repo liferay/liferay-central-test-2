@@ -210,9 +210,8 @@ public class DynamicCSSUtil {
 			String cdnHost = PortalUtil.getCDNHost(request);
 
 			if (Validator.isNotNull(cdnHost)) {
-				return
-					cdnHost + theme.getStaticResourcePath() +
-						theme.getCssPath();
+				return cdnHost.concat(theme.getStaticResourcePath()).concat(
+					theme.getCssPath());
 			}
 		}
 
