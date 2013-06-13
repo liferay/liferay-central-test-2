@@ -195,7 +195,7 @@ public interface Sites {
 		throws Exception;
 
 	public void removeMergeFailFriendlyURLLayouts(LayoutSet layoutSet)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public void resetPrototype(Layout layout)
 		throws PortalException, SystemException;

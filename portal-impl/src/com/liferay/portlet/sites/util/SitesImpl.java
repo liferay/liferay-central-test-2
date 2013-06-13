@@ -133,17 +133,17 @@ public class SitesImpl implements Sites {
 		layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			layoutSet.getGroupId(), layoutSet.isPrivateLayout());
 
-		UnicodeProperties layoutSetSettingsProperties =
+		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
 
 		String mergeFailFriendlyURLLayouts =
-			layoutSetSettingsProperties.getProperty(
+			settingsProperties.getProperty(
 				MERGE_FAIL_FRIENDLY_URL_LAYOUTS, StringPool.BLANK);
 
 		mergeFailFriendlyURLLayouts = StringUtil.add(
 			mergeFailFriendlyURLLayouts, layout.getUuid());
 
-		layoutSetSettingsProperties.setProperty(
+		settingsProperties.setProperty(
 			MERGE_FAIL_FRIENDLY_URL_LAYOUTS, mergeFailFriendlyURLLayouts);
 
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
@@ -764,7 +764,7 @@ public class SitesImpl implements Sites {
 			return layouts;
 		}
 
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -1288,12 +1288,12 @@ public class SitesImpl implements Sites {
 
 	@Override
 	public void removeMergeFailFriendlyURLLayouts(LayoutSet layoutSet)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		UnicodeProperties layoutSetSettingsProperties =
+		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
 
-		layoutSetSettingsProperties.remove(MERGE_FAIL_FRIENDLY_URL_LAYOUTS);
+		settingsProperties.remove(MERGE_FAIL_FRIENDLY_URL_LAYOUTS);
 
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 	}

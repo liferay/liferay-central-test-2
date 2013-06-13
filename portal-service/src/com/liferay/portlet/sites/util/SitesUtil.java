@@ -288,7 +288,7 @@ public class SitesUtil {
 	}
 
 	public static void removeMergeFailFriendlyURLLayouts(LayoutSet layoutSet)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		getSites().removeMergeFailFriendlyURLLayouts(layoutSet);
 	}
