@@ -656,8 +656,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * <p>
 	 * The group is unstaged and its assets and resources including layouts,
-	 * membership requests, subscriptions, teams, blogs, bookmarks,
-	 * events, image gallery, journals, message boards, polls, shopping related
+	 * membership requests, subscriptions, teams, blogs, bookmarks, events,
+	 * image gallery, journals, message boards, polls, shopping related
 	 * entities, software catalog, and wikis are also deleted.
 	 * </p>
 	 *
@@ -856,8 +856,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *
 	 * <p>
 	 * The group is unstaged and its assets and resources including layouts,
-	 * membership requests, subscriptions, teams, blogs, bookmarks,
-	 * events, image gallery, journals, message boards, polls, shopping related
+	 * membership requests, subscriptions, teams, blogs, bookmarks, events,
+	 * image gallery, journals, message boards, polls, shopping related
 	 * entities, software catalog, and wikis are also deleted.
 	 * </p>
 	 *
