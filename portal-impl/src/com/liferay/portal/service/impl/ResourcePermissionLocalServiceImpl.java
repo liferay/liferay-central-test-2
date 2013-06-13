@@ -1202,12 +1202,9 @@ public class ResourcePermissionLocalServiceImpl
 
 		PermissionThreadLocal.setIndexEnabled(false);
 
-		Set<Long> roleIdSet = roleIdsToActionIds.keySet();
-
-		long[] roleIds = ArrayUtil.toArray(
-			roleIdSet.toArray(new Long[roleIdSet.size()]));
-
 		try {
+			long[] roleIds = ArrayUtil.toLongArray(roleIdsToActionIds.keySet());
+
 			List<ResourcePermission> resourcePermissions =
 				resourcePermissionPersistence.findByC_N_S_P_R(
 					companyId, name, scope, primKey, roleIds);
