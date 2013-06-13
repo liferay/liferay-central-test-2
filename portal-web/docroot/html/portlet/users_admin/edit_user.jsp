@@ -187,7 +187,7 @@ if (selUser != null) {
 		escapeXml="<%= false %>"
 		localizeTitle="<%= (selUser == null) %>"
 		title='<%= (selUser == null) ? "add-user" : LanguageUtil.format(pageContext, "edit-user-x", HtmlUtil.escape(selUser.getFullName())) %>'
-		/>
+	/>
 </c:if>
 
 <portlet:actionURL var="editUserActionURL">
