@@ -44,15 +44,16 @@
 					<c:if test="<%= curCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
 
 						<%
-						Group curSite = themeDisplay.getSiteGroup();
-						Group curScopeGroup = themeDisplay.getScopeGroup();
-
 						List<Layout> scopeLayouts = new ArrayList<Layout>();
+
+						Group curSite = themeDisplay.getSiteGroup();
 
 						scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curSite.getGroupId(), false));
 						scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curSite.getGroupId(), true));
 
 						String scopeLabel = null;
+
+						Group curScopeGroup = themeDisplay.getScopeGroup();
 
 						if (curScopeGroup.isLayout()) {
 							Layout scopeLayout = LayoutLocalServiceUtil.getLayout(curScopeGroup.getClassPK());
