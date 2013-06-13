@@ -344,14 +344,14 @@ private String _getStatusCssClass(int status) {
 	if (status == WorkflowConstants.STATUS_APPROVED) {
 		labelCssClass += " label-success";
 	}
+	else if (status == WorkflowConstants.STATUS_DRAFT) {
+		labelCssClass += " label-info";
+	}
 	else if (status == WorkflowConstants.STATUS_EXPIRED) {
 		labelCssClass += " label-important";
 	}
 	else if (status == WorkflowConstants.STATUS_PENDING) {
 		labelCssClass += " label-warning";
-	}
-	else if (status == WorkflowConstants.STATUS_DRAFT) {
-		labelCssClass += " label-info";
 	}
 
 	return labelCssClass;
