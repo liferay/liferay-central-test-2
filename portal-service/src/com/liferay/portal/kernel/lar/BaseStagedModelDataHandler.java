@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.lar;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.StagedModel;
 
@@ -95,7 +94,8 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 	@Override
 	public boolean validateReference(
-		Element rootElement, Element referenceElement) {
+		PortletDataContext portletDataContext, Element rootElement,
+		Element referenceElement) {
 
 		String elementName = referenceElement.getName();
 
