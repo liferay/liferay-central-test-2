@@ -804,14 +804,14 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<isset property="class" />
 					</not>
 					<then>
-						<fail>Missing class argument. Use ant test-class -Dclass=TestClassName</fail>
+						<fail>Missing class argument. Use "ant test-class -Dclass=TestClassName".</fail>
 					</then>
 					<elseif>
 						<not>
 							<isset property="test.type" />
 						</not>
 						<then>
-							<fail>Class ${class} cannot be found</fail>
+							<fail>Class ${class} cannot be found.</fail>
 						</then>
 					</elseif>
 				</if>
