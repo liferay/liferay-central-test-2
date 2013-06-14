@@ -458,12 +458,15 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				ClassLoader callerClassLoader = ClassLoaderUtil.getClassLoader(
 					callerClass);
 
-				if ((callerClassLoader == classLoader) &&
-					(!callerClass.getName().equals(
-						BeanReferenceAnnotationBeanPostProcessor.class.
-							getName()))) {
+				if (callerClassLoader == classLoader) {
+					String callerClassName = callerClass.getName();
 
-					return bean;
+					if (!callerClassName.equals(
+							BeanReferenceAnnotationBeanPostProcessor.class.
+								getName())) {
+
+						return bean;
+					}
 				}
 			}
 

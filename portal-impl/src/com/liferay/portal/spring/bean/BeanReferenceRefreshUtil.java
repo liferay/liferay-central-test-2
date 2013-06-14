@@ -80,15 +80,14 @@ public class BeanReferenceRefreshUtil {
 
 		Object newReferencedBean = beanFactory.getBean(referencedBeanName);
 
-		Object doPrivilegedBean = _doPrivilegedBeanRegistry.get(
-			newReferencedBean);
+		Object doPrivilegedBean = _doPrivilegedBeans.get(newReferencedBean);
 
 		if ((doPrivilegedBean == null) &&
 			DoPrivilegedFactory.isEarlyBeanReference(referencedBeanName)) {
 
 			doPrivilegedBean = DoPrivilegedFactory.wrap(newReferencedBean);
 
-			_doPrivilegedBeanRegistry.put(newReferencedBean, doPrivilegedBean);
+			_doPrivilegedBeans.put(newReferencedBean, doPrivilegedBean);
 		}
 
 		if (doPrivilegedBean != null) {
@@ -112,9 +111,8 @@ public class BeanReferenceRefreshUtil {
 	private static Log _log = LogFactoryUtil.getLog(
 		BeanReferenceRefreshUtil.class);
 
-	private static Map<Object, Object> _doPrivilegedBeanRegistry =
+	private static Map<Object, Object> _doPrivilegedBeans =
 		new IdentityHashMap<Object, Object>();
-
 	private static Map<Object, List<RefreshPoint>> _registeredRefreshPoints =
 		new IdentityHashMap<Object, List<RefreshPoint>>();
 

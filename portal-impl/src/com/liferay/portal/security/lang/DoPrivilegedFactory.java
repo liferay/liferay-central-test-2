@@ -75,7 +75,7 @@ public class DoPrivilegedFactory
 	public Object getEarlyBeanReference(Object bean, String beanName)
 		throws BeansException {
 
-		if (_shouldWrap(bean, beanName)) {
+		if (_isWrap(bean, beanName)) {
 			_earlyBeanReferenceNames.add(beanName);
 		}
 
@@ -90,15 +90,13 @@ public class DoPrivilegedFactory
 			return bean;
 		}
 
-		if (!_shouldWrap(bean, beanName)) {
+		if (!_isWrap(bean, beanName)) {
 			return bean;
 		}
 
 		if (isEarlyBeanReference(beanName)) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Postpone wrapping as bean " + beanName +
-						" is just an early reference now");
+				_log.debug("Postpone wrapping early reference of " + beanName);
 			}
 
 			return bean;
@@ -148,7 +146,7 @@ public class DoPrivilegedFactory
 		return false;
 	}
 
-	private boolean _shouldWrap(Object bean, String beanName) {
+	private boolean _isWrap(Object bean, String beanName) {
 		Class<?> clazz = bean.getClass();
 
 		if (_isDoPrivileged(clazz) || _isFinderOrPersistence(beanName)) {
