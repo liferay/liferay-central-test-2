@@ -391,7 +391,7 @@
 
 .ie8 {
 	.question-details {
-		float: none;
+		white-space: normal;
 	}
 }
 
