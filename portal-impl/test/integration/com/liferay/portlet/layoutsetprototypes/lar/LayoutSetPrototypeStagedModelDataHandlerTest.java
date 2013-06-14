@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.layoutsetprototypes.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -85,19 +83,19 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 
 		Layout layout = layouts.get(0);
 
-		_addLayout(LayoutSetPrototype.class, layout);
-		_addLayoutFriendlyURLs(LayoutSetPrototype.class, layout.getPlid());
+		addLayout(LayoutSetPrototype.class, layout);
+		addLayoutFriendlyURLs(LayoutSetPrototype.class, layout.getPlid());
 
-		LayoutPrototype layoutPrototype = _addLayoutPrototype(
+		LayoutPrototype layoutPrototype = addLayoutPrototype(
 			dependentStagedModelsMap);
 
-		Layout layoutPrototypeBasedLayout = LayoutTestUtil.addLayout(
+		Layout prototypedLayout = LayoutTestUtil.addLayout(
 			layoutSetPrototype.getGroupId(), ServiceTestUtil.randomString(),
 			true, layoutPrototype, true);
 
-		_addLayout(LayoutSetPrototype.class, layoutPrototypeBasedLayout);
-		_addLayoutFriendlyURLs(
-			LayoutSetPrototype.class, layoutPrototypeBasedLayout.getPlid());
+		addLayout(LayoutSetPrototype.class, prototypedLayout);
+		addLayoutFriendlyURLs(
+			LayoutSetPrototype.class, prototypedLayout.getPlid());
 
 		return layoutSetPrototype;
 	}
@@ -150,18 +148,18 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 
 		Assert.assertNotNull(importedLayoutSetPrototype);
 
-		LayoutPrototype importedLayoutPrototype = _getImportedLayoutPrototype(
+		LayoutPrototype importedLayoutPrototype = getImportedLayoutPrototype(
 			dependentStagedModelsMap, group);
 
-		Layout importedLayout = _importLayoutFromLAR(stagedModel);
+		Layout importedLayout = importLayoutFromLAR(stagedModel);
 
-		_validateLayouts(
+		validateLayouts(
 			importedLayoutSetPrototype, importedLayoutPrototype,
 			importedLayout);
 	}
 
-	private void _addLayout(Class<?> clazz, Layout layout)
-		throws SystemException {
+	protected void addLayout(Class<?> clazz, Layout layout)
+		throws Exception {
 
 		List<Layout> layouts = _layouts.get(clazz.getSimpleName());
 
@@ -182,8 +180,8 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		LayoutLocalServiceUtil.updateLayout(layout);
 	}
 
-	private void _addLayoutFriendlyURLs(Class<?> clazz, long plid)
-		throws SystemException {
+	protected void addLayoutFriendlyURLs(Class<?> clazz, long plid)
+		throws Exception {
 
 		List<LayoutFriendlyURL> layoutFriendlyURLs = _layoutFriendlyURLs.get(
 			clazz.getSimpleName());
@@ -202,7 +200,7 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		layoutFriendlyURLs.add(layoutLayoutFriendlyURLs.get(0));
 	}
 
-	private LayoutPrototype _addLayoutPrototype(
+	protected LayoutPrototype addLayoutPrototype(
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
@@ -222,7 +220,7 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 
 		addDependentStagedModel(dependentStagedModelsMap, Layout.class, layout);
 
-		_addLayout(LayoutPrototype.class, layout);
+		addLayout(LayoutPrototype.class, layout);
 
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
 			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
@@ -234,15 +232,15 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 			dependentStagedModelsMap, LayoutFriendlyURL.class,
 			layoutFriendlyURLs.get(0));
 
-		_addLayoutFriendlyURLs(LayoutPrototype.class, layout.getPlid());
+		addLayoutFriendlyURLs(LayoutPrototype.class, layout.getPlid());
 
 		return layoutPrototype;
 	}
 
-	private LayoutPrototype _getImportedLayoutPrototype(
+	protected LayoutPrototype getImportedLayoutPrototype(
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
-		throws SystemException {
+		throws Exception {
 
 		List<StagedModel> dependentLayoutPrototypeStagedModels =
 			dependentStagedModelsMap.get(LayoutPrototype.class.getSimpleName());
@@ -262,15 +260,15 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		return importedLayoutPrototype;
 	}
 
-	private List<LayoutFriendlyURL> _getLayoutFriendlyURLs(Class<?> clazz) {
+	protected List<LayoutFriendlyURL> getLayoutFriendlyURLs(Class<?> clazz) {
 		return _layoutFriendlyURLs.get(clazz.getSimpleName());
 	}
 
-	private List<Layout> _getLayouts(Class<?> clazz) {
+	protected List<Layout> getLayouts(Class<?> clazz) {
 		return _layouts.get(clazz.getSimpleName());
 	}
 
-	private Layout _importLayoutFromLAR(StagedModel stagedModel)
+	protected Layout importLayoutFromLAR(StagedModel stagedModel)
 		throws DocumentException, IOException {
 
 		LayoutSetPrototypeStagedModelDataHandler
@@ -320,15 +318,15 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		return importedLayouts.get(0);
 	}
 
-	private void _validateLayouts(
+	protected void validateLayouts(
 			LayoutSetPrototype importedLayoutSetPrototype,
 			LayoutPrototype importedLayoutPrototype,
 			Layout layoutSetPrototypeLayout)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		_validatePrototypedLayouts(
+		validatePrototypedLayouts(
 			LayoutSetPrototype.class, importedLayoutSetPrototype.getGroupId());
-		_validatePrototypedLayouts(
+		validatePrototypedLayouts(
 			LayoutPrototype.class, importedLayoutPrototype.getGroupId());
 
 		Assert.assertNotNull(layoutSetPrototypeLayout.getLayoutPrototypeUuid());
@@ -347,10 +345,10 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 			importedLayout.getLayoutPrototypeUuid());
 	}
 
-	private void _validatePrototypedLayouts(Class<?> clazz, long groupId)
-		throws SystemException {
+	protected void validatePrototypedLayouts(Class<?> clazz, long groupId)
+		throws Exception {
 
-		List<Layout> layouts = _getLayouts(clazz);
+		List<Layout> layouts = getLayouts(clazz);
 
 		for (Layout layout : layouts) {
 			Layout importedLayout =
@@ -367,7 +365,7 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 						getName()));
 		}
 
-		List<LayoutFriendlyURL> layoutFriendlyURLs = _getLayoutFriendlyURLs(
+		List<LayoutFriendlyURL> layoutFriendlyURLs = getLayoutFriendlyURLs(
 			clazz);
 
 		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
