@@ -255,10 +255,9 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 				dependentStagedModels = ListUtil.copy(dependentStagedModels);
 			}
 
-			String stagedModelClassSimpleName =
-				getStagedModelClass().getSimpleName();
+			Class<?> stagedModelClass = getStagedModelClass();
 
-			if (className.equals(stagedModelClassSimpleName)) {
+			if (className.equals(stagedModelClass.getSimpleName())) {
 				dependentStagedModels.add(stagedModel);
 			}
 
