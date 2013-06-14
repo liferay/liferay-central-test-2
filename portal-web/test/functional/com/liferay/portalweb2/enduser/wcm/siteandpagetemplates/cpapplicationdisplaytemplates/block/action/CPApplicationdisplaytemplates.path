@@ -1,17 +1,17 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CPApplicationdisplaytemplate</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
 <tr><td rowspan="1" colspan="3">CPApplicationdisplaytemplate</td></tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 	<td>PAGE_NAME</td>
 	<td></td>
-	<td>CPApplicationdisplaytemplate</td>
+	<td>CPApplicationdisplaytemplates</td>
 </tr>
 <tr>
 	<td></td>
@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>VIEW_ALL</td>
-	<td>//div[@class='navbar ']/div/div/ul/li/a</td>
+	<td>//div[@class='navbar ']/div/div/ul/li/a[contains(.,'View All')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/a</td>
+	<td>//div[@class='navbar ']/div/div/ul/li/a[contains(.,'Add')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -45,7 +45,7 @@
 </tr>
 <tr>
 	<td>SEARCH_BUTTON</td>
-	<td>//button[@type='submit']</td>
+	<td>//button[contains(.,'Search')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -77,37 +77,37 @@
 <!--ADD_MENULIST-->
 <tr>
 	<td>ADD_MENULIST_WIKI_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Wiki Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_CATEGORIES_NAVIGATION_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[2]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Categories Navigation Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_DOCUMENTS_AND_MEDIA_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[3]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Documents and Media Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_ASSET_PUBLISHER_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[4]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Asset Publisher Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_SITE_MAP_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[5]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Site Map Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_TAGS_NAVIGATION_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[6]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Tags Navigation Template')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_MENULIST_BLOGS_TEMPLATE</td>
-	<td>//div[@class='navbar ']/div/div/ul/li[2]/ul/li[7]/a</td>
+	<td>//div[@class='navbar ']//li/a[contains(.,'Blogs Template')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -115,40 +115,40 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--TABLE-->
+<!--ADT_TABLE-->
 <tr>
-	<td>TABLE_ADT_CHECKBOX</td>
-	<td>//tr/td[1]/input</td>
+	<td>ADT_TABLE_CHECKBOX_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[1]/input</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_ID</td>
-	<td>//tr/td[2]/a</td>
+	<td>ADT_TABLE_ID_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[2]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_NAME</td>
-	<td>//tr/td[3]/a</td>
+	<td>ADT_TABLE_NAME_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[3]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_DESCRIPTION</td>
-	<td>//tr/td[4]/a</td>
+	<td>ADT_TABLE_DESCRIPTION_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[4]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_TYPE</td>
-	<td>//tr/td[5]/a</td>
+	<td>ADT_TABLE_TYPE_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[5]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_MODIFIED_DATE</td>
-	<td>//tr/td[6]/a</td>
+	<td>ADT_TABLE_MODIFIED_DATE_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[6]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>TABLE_ADT_ACTIONS</td>
-	<td>//tr/td[7]/div/a</td>
+	<td>ADT_TABLE_ACTIONS_1</td>
+	<td>//div[@id='_183_ddmTemplatesSearchContainer']//tr/td[7]/div/a[@title='Actions']</td>
 	<td></td>
 </tr>
 <tr>
@@ -156,24 +156,24 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--ACTIONS_MENULIST-->
+<!--ADT_MENULIST-->
 <tr>
-	<td>ACTIONS_MENULIST_EDIT</td>
+	<td>ADT_MENULIST_EDIT</td>
 	<td>//ul[contains(@class,'dropdown-menu lfr-menu-list')]/li/a[contains(.,'Edit')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ACTIONS_MENULIST_PERMISSIONS</td>
+	<td>ADT_MENULIST_PERMISSIONS</td>
 	<td>//ul[contains(@class,'dropdown-menu lfr-menu-list')]/li/a[contains(.,'Permissions')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ACTIONS_MENULIST_COPY</td>
+	<td>ADT_MENULIST_COPY</td>
 	<td>//ul[contains(@class,'dropdown-menu lfr-menu-list')]/li/a[contains(.,'Copy')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>ACTIONS_MENULIST_DELETE</td>
+	<td>ADT_MENULIST_DELETE</td>
 	<td>//ul[contains(@class,'dropdown-menu lfr-menu-list')]/li/a[contains(.,'Delete')]</td>
 	<td></td>
 </tr>
