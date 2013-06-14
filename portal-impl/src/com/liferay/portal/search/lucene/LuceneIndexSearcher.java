@@ -297,9 +297,9 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			throw new SearchException(e);
 		}
 		finally {
-			close(boboBrowser);
+			cleanUp(boboBrowser);
 
-			LuceneHelperUtil.closeSearcher(indexSearcher);
+			LuceneHelperUtil.cleanUp(indexSearcher);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -397,7 +397,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			throw new SearchException(e);
 		}
 		finally {
-			LuceneHelperUtil.closeSearcher(indexSearcher);
+			LuceneHelperUtil.cleanUp(indexSearcher);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -409,7 +409,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		return hits;
 	}
 
-	protected void close(BoboBrowser boboBrowser) {
+	protected void cleanUp(BoboBrowser boboBrowser) {
 		if (boboBrowser == null) {
 			return;
 		}

@@ -159,7 +159,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			throw new SearchException("Unable to suggest query", e);
 		}
 		finally {
-			LuceneHelperUtil.closeSearcher(indexSearcher);
+			LuceneHelperUtil.cleanUp(indexSearcher);
 		}
 	}
 
@@ -357,7 +357,7 @@ public class LuceneQuerySuggester implements QuerySuggester {
 			throw new SearchException("Unable to find suggestions", ioe);
 		}
 		finally {
-			LuceneHelperUtil.closeSearcher(indexSearcher);
+			LuceneHelperUtil.cleanUp(indexSearcher);
 		}
 	}
 

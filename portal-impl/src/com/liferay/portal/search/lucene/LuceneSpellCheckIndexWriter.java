@@ -249,7 +249,7 @@ public class LuceneSpellCheckIndexWriter implements SpellCheckIndexWriter {
 			finally {
 				StreamUtil.cleanUp(inputStream);
 
-				LuceneHelperUtil.closeSearcher(indexSearcher);
+				LuceneHelperUtil.cleanUp(indexSearcher);
 			}
 		}
 

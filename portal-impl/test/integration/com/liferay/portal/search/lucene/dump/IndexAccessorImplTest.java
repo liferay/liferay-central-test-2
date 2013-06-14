@@ -239,6 +239,7 @@ public class IndexAccessorImplTest extends PowerMockito {
 		}
 
 		indexSearcher.close();
+
 		indexReader.close();
 	}
 

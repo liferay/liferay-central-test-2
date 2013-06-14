@@ -269,7 +269,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	@Override
-	public void closeSearcher(IndexSearcher indexSearcher) {
+	public void cleanUp(IndexSearcher indexSearcher) {
 		if (indexSearcher == null) {
 			return;
 		}

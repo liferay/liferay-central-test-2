@@ -319,6 +319,7 @@ public class DumpIndexDeletionPolicyTest {
 		Assert.assertEquals(totalHits, topDocs.totalHits);
 
 		indexSearcher.close();
+
 		indexReader.close();
 	}
 
