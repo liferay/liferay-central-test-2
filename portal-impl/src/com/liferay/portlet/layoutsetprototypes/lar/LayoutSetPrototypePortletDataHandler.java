@@ -37,9 +37,6 @@ import javax.portlet.PortletPreferences;
 public class LayoutSetPrototypePortletDataHandler
 	extends BasePortletDataHandler {
 
-	public static final String LAYOUT_PROTOTYPE_EXPORT_CONTROL =
-		"layout-prototypes";
-
 	public static final String NAMESPACE = "layout_set_prototypes";
 
 	public LayoutSetPrototypePortletDataHandler() {
@@ -48,7 +45,7 @@ public class LayoutSetPrototypePortletDataHandler
 		setDataLevel(DataLevel.PORTAL);
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, LAYOUT_PROTOTYPE_EXPORT_CONTROL, true, false));
+				NAMESPACE, "layout-prototypes", true, false));
 	}
 
 	@Override
@@ -129,7 +126,7 @@ public class LayoutSetPrototypePortletDataHandler
 			new LayoutSetPrototypeExportActionableDynamicQuery(
 				portletDataContext);
 
-		manifestSummary.addModelCount(
+		manifestSummary.addModelAdditionCount(
 			LayoutSetPrototype.class,
 			layoutSetPrototypeExportActionableDynamicQuery.performCount());
 	}

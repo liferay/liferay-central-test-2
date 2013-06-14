@@ -118,7 +118,7 @@ public class LayoutPrototypePortletDataHandler extends BasePortletDataHandler {
 		ActionableDynamicQuery layoutPrototypeExportActionableDynamicQuery =
 			new LayoutPrototypeExportActionableDynamicQuery(portletDataContext);
 
-		manifestSummary.addModelCount(
+		manifestSummary.addModelAdditionCount(
 			LayoutPrototype.class,
 			layoutPrototypeExportActionableDynamicQuery.performCount());
 	}

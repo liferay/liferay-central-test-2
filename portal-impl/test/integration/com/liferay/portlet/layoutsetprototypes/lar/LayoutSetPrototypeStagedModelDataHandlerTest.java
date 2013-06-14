@@ -77,10 +77,9 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 			LayoutTestUtil.addLayoutSetPrototype(
 				ServiceTestUtil.randomString());
 
-		List<Layout> layouts =
-			LayoutLocalServiceUtil.getLayouts(
-				layoutSetPrototype.getGroup().getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			layoutSetPrototype.getGroup().getGroupId(), true,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		Assert.assertEquals(1, layouts.size());
 
@@ -263,7 +262,7 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 
 		String fileName =
 			layoutSetPrototypeStagedModelDataHandler.
-				getLayoutSetPrototypeLarFileName(
+				getLayoutSetPrototypeLARFileName(
 					(LayoutSetPrototype)stagedModel);
 
 		String modelPath = ExportImportPathUtil.getModelPath(
@@ -398,6 +397,5 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 			new HashMap<String, List<LayoutFriendlyURL>>();
 	private Map<String, List<Layout>> _dependentLayoutsMap =
 		new HashMap<String, List<Layout>>();
-
 
 }

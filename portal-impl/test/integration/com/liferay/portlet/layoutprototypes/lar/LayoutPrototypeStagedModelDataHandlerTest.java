@@ -61,7 +61,9 @@ public class LayoutPrototypeStagedModelDataHandlerTest
 		Layout layout = layoutPrototype.getLayout();
 
 		UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
-		typeSettings.setProperty("layoutPrototypeExportTest", "true");
+
+		typeSettings.setProperty(
+			"layoutPrototypeExportTest", Boolean.TRUE.toString());
 
 		LayoutLocalServiceUtil.updateLayout(layout);
 
@@ -120,31 +122,30 @@ public class LayoutPrototypeStagedModelDataHandlerTest
 
 		Assert.assertNotNull(importedLayoutPrototype);
 
-		List<StagedModel> dependentLayouts = dependentStagedModelsMap.get(
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			Layout.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentLayouts.size());
+		Assert.assertEquals(1, dependentStagedModels.size());
 
-		Layout dependentLayout = (Layout)dependentLayouts.get(0);
+		Layout layout = (Layout)dependentStagedModels.get(0);
 
 		Layout importedLayout =
 			LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
-				dependentLayout.getUuid(), importedLayoutPrototype.getGroupId(),
-				dependentLayout.isPrivateLayout());
+				layout.getUuid(), importedLayoutPrototype.getGroupId(),
+				layout.isPrivateLayout());
 
 		Assert.assertNotNull(importedLayout);
-
 		Assert.assertEquals(
-			dependentLayout.getTypeSettingsProperty(
+			layout.getTypeSettingsProperty(
 				"layoutPrototypeExportTest"),
 			importedLayout.getTypeSettingsProperty(
 				"layoutPrototypeExportTest"));
 
-		List<StagedModel> layoutFriendlyURLs = dependentStagedModelsMap.get(
+		dependentStagedModels = dependentStagedModelsMap.get(
 			LayoutFriendlyURL.class.getSimpleName());
 
 		LayoutFriendlyURL layoutFriendlyURL =
-			(LayoutFriendlyURL)layoutFriendlyURLs.get(0);
+			(LayoutFriendlyURL)dependentStagedModels.get(0);
 
 		LayoutFriendlyURL importedLayoutFriendlyURL =
 			LayoutFriendlyURLLocalServiceUtil.
@@ -152,7 +153,6 @@ public class LayoutPrototypeStagedModelDataHandlerTest
 					layoutFriendlyURL.getUuid(), importedLayout.getGroupId());
 
 		Assert.assertNotNull(importedLayoutFriendlyURL);
-
 		Assert.assertEquals(
 			layoutFriendlyURL.getFriendlyURL(),
 			importedLayoutFriendlyURL.getFriendlyURL());

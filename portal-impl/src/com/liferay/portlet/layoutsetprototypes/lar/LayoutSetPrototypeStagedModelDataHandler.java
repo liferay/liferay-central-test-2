@@ -90,16 +90,16 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		long userId = portletDataContext.getUserId(
 			layoutSetPrototype.getUserUuid());
 
-		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			layoutSetPrototype, LayoutSetPrototypePortletDataHandler.NAMESPACE);
-
-		serviceContext.setAttribute("addDefaultLayout", false);
-
 		UnicodeProperties settingsProperties =
 			layoutSetPrototype.getSettingsProperties();
 
 		boolean layoutsUpdateable = GetterUtil.getBoolean(
 			settingsProperties.getProperty("layoutsUpdateable"), true);
+
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			layoutSetPrototype, LayoutSetPrototypePortletDataHandler.NAMESPACE);
+
+		serviceContext.setAttribute("addDefaultLayout", false);
 
 		LayoutSetPrototype importedLayoutSetPrototype = null;
 
@@ -141,15 +141,14 @@ public class LayoutSetPrototypeStagedModelDataHandler
 					serviceContext);
 		}
 
-		portletDataContext.importClassedModel(
-			layoutSetPrototype, importedLayoutSetPrototype,
-			LayoutSetPrototypePortletDataHandler.NAMESPACE);
-
 		importLayoutPrototypes(portletDataContext, layoutSetPrototype);
-
 		importLayouts(
 			portletDataContext, layoutSetPrototype, importedLayoutSetPrototype,
 			serviceContext);
+
+		portletDataContext.importClassedModel(
+			layoutSetPrototype, importedLayoutSetPrototype,
+			LayoutSetPrototypePortletDataHandler.NAMESPACE);
 	}
 
 	protected void exportLayoutPrototypes(
@@ -167,7 +166,6 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		dynamicQuery.add(groupIdProperty.eq(group.getGroupId()));
 
 		Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
-		dynamicQuery.add(conjunction);
 
 		Property layoutPrototypeUuidProperty = PropertyFactoryUtil.forName(
 			"layoutPrototypeUuid");
@@ -175,15 +173,14 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		conjunction.add(layoutPrototypeUuidProperty.isNotNull());
 		conjunction.add(layoutPrototypeUuidProperty.ne(StringPool.BLANK));
 
+		dynamicQuery.add(conjunction);
+
 		List<Layout> layouts = LayoutLocalServiceUtil.dynamicQuery(
 			dynamicQuery);
 
 		boolean exportLayoutPrototypes = portletDataContext.getBooleanParameter(
 			LayoutSetPrototypePortletDataHandler.NAMESPACE,
-			LayoutSetPrototypePortletDataHandler.
-				LAYOUT_PROTOTYPE_EXPORT_CONTROL);
-
-		boolean missingReference = !exportLayoutPrototypes;
+			"layout-prototypes");
 
 		for (Layout layout : layouts) {
 			String layoutPrototypeUuid = layout.getLayoutPrototypeUuid();
@@ -195,7 +192,8 @@ public class LayoutSetPrototypeStagedModelDataHandler
 
 			portletDataContext.addReferenceElement(
 				layout, layoutSetPrototypeElement, layoutPrototype,
-				PortletDataContext.REFERENCE_TYPE_DEPENDENCY, missingReference);
+				PortletDataContext.REFERENCE_TYPE_DEPENDENCY,
+				!exportLayoutPrototypes);
 
 			if (exportLayoutPrototypes) {
 				StagedModelDataHandlerUtil.exportStagedModel(
@@ -218,11 +216,13 @@ public class LayoutSetPrototypeStagedModelDataHandler
 
 			inputStream = new FileInputStream(file);
 
-			String path = ExportImportPathUtil.getModelPath(
-				layoutSetPrototype,
-				getLayoutSetPrototypeLarFileName(layoutSetPrototype));
+			String layoutSetPrototypeLARPath =
+				ExportImportPathUtil.getModelPath(
+					layoutSetPrototype,
+					getLayoutSetPrototypeLARFileName(layoutSetPrototype));
 
-			portletDataContext.addZipEntry(path, inputStream);
+			portletDataContext.addZipEntry(
+				layoutSetPrototypeLARPath, inputStream);
 
 			List<Layout> layoutSetPrototypeLayouts =
 				LayoutLocalServiceUtil.getLayouts(
@@ -247,11 +247,10 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		}
 	}
 
-	protected String getLayoutSetPrototypeLarFileName(
+	protected String getLayoutSetPrototypeLARFileName(
 		LayoutSetPrototype layoutSetPrototype) {
 
-		return layoutSetPrototype.getLayoutSetPrototypeId() +
-			_LAR_FILE_NAME_SUFFIX;
+		return layoutSetPrototype.getLayoutSetPrototypeId() + ".lar";
 	}
 
 	protected void importLayoutPrototypes(
@@ -279,11 +278,13 @@ public class LayoutSetPrototypeStagedModelDataHandler
 		InputStream inputStream = null;
 
 		try {
-			String path = ExportImportPathUtil.getModelPath(
-				layoutSetPrototype,
-				getLayoutSetPrototypeLarFileName(layoutSetPrototype));
+			String layoutSetPrototypeLARPath =
+				ExportImportPathUtil.getModelPath(
+					layoutSetPrototype,
+					getLayoutSetPrototypeLARFileName(layoutSetPrototype));
 
-			inputStream = portletDataContext.getZipEntryAsInputStream(path);
+			inputStream = portletDataContext.getZipEntryAsInputStream(
+				layoutSetPrototypeLARPath);
 
 			SitesUtil.importLayoutSetPrototype(
 				importedLayoutSetPrototype, inputStream, serviceContext);
@@ -292,7 +293,5 @@ public class LayoutSetPrototypeStagedModelDataHandler
 			StreamUtil.cleanUp(inputStream);
 		}
 	}
-
-	private static final String _LAR_FILE_NAME_SUFFIX = ".lar";
 
 }
