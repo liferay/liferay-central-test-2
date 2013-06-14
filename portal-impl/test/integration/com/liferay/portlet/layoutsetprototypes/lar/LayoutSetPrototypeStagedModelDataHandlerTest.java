@@ -65,102 +65,7 @@ import org.junit.runner.RunWith;
 public class LayoutSetPrototypeStagedModelDataHandlerTest
 	extends BaseStagedModelDataHandlerTestCase {
 
-	@Override
-	protected StagedModel addStagedModel(
-			Group group,
-			Map<String, List<StagedModel>> dependentStagedModelsMap)
-		throws Exception {
-
-		LayoutSetPrototype layoutSetPrototype =
-			LayoutTestUtil.addLayoutSetPrototype(
-				ServiceTestUtil.randomString());
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			layoutSetPrototype.getGroupId(), true,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-		Assert.assertEquals(1, layouts.size());
-
-		Layout layout = layouts.get(0);
-
-		addLayout(LayoutSetPrototype.class, layout);
-		addLayoutFriendlyURLs(LayoutSetPrototype.class, layout.getPlid());
-
-		LayoutPrototype layoutPrototype = addLayoutPrototype(
-			dependentStagedModelsMap);
-
-		Layout prototypedLayout = LayoutTestUtil.addLayout(
-			layoutSetPrototype.getGroupId(), ServiceTestUtil.randomString(),
-			true, layoutPrototype, true);
-
-		addLayout(LayoutSetPrototype.class, prototypedLayout);
-		addLayoutFriendlyURLs(
-			LayoutSetPrototype.class, prototypedLayout.getPlid());
-
-		return layoutSetPrototype;
-	}
-
-	@Override
-	protected void deleteStagedModel(
-			StagedModel stagedModel,
-			Map<String, List<StagedModel>> dependentStagedModelsMap,
-			Group group)
-		throws Exception {
-
-		LayoutSetPrototypeLocalServiceUtil.deleteLayoutSetPrototype(
-			(LayoutSetPrototype)stagedModel);
-
-		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
-			LayoutPrototype.class.getSimpleName());
-
-		LayoutPrototype layoutPrototype =
-			(LayoutPrototype)dependentStagedModels.get(0);
-
-		LayoutPrototypeLocalServiceUtil.deleteLayoutPrototype(layoutPrototype);
-	}
-
-	@Override
-	protected StagedModel getStagedModel(String uuid, Group group) {
-		try {
-			return LayoutSetPrototypeLocalServiceUtil.
-				fetchLayoutSetPrototypeByUuidAndCompanyId(
-					uuid, group.getCompanyId());
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
-
-	@Override
-	protected Class<? extends StagedModel> getStagedModelClass() {
-		return LayoutSetPrototype.class;
-	}
-
-	@Override
-	protected void validateImport(
-			StagedModel stagedModel,
-			Map<String, List<StagedModel>> dependentStagedModelsMap,
-			Group group)
-		throws Exception {
-
-		LayoutSetPrototype importedLayoutSetPrototype =
-			(LayoutSetPrototype)getStagedModel(stagedModel.getUuid(), group);
-
-		Assert.assertNotNull(importedLayoutSetPrototype);
-
-		LayoutPrototype importedLayoutPrototype = getImportedLayoutPrototype(
-			dependentStagedModelsMap, group);
-
-		Layout importedLayout = importLayoutFromLAR(stagedModel);
-
-		validateLayouts(
-			importedLayoutSetPrototype, importedLayoutPrototype,
-			importedLayout);
-	}
-
-	protected void addLayout(Class<?> clazz, Layout layout)
-		throws Exception {
-
+	protected void addLayout(Class<?> clazz, Layout layout) throws Exception {
 		List<Layout> layouts = _layouts.get(clazz.getSimpleName());
 
 		if (layouts == null) {
@@ -237,6 +142,60 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		return layoutPrototype;
 	}
 
+	@Override
+	protected StagedModel addStagedModel(
+			Group group,
+			Map<String, List<StagedModel>> dependentStagedModelsMap)
+		throws Exception {
+
+		LayoutSetPrototype layoutSetPrototype =
+			LayoutTestUtil.addLayoutSetPrototype(
+				ServiceTestUtil.randomString());
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			layoutSetPrototype.getGroupId(), true,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+		Assert.assertEquals(1, layouts.size());
+
+		Layout layout = layouts.get(0);
+
+		addLayout(LayoutSetPrototype.class, layout);
+		addLayoutFriendlyURLs(LayoutSetPrototype.class, layout.getPlid());
+
+		LayoutPrototype layoutPrototype = addLayoutPrototype(
+			dependentStagedModelsMap);
+
+		Layout prototypedLayout = LayoutTestUtil.addLayout(
+			layoutSetPrototype.getGroupId(), ServiceTestUtil.randomString(),
+			true, layoutPrototype, true);
+
+		addLayout(LayoutSetPrototype.class, prototypedLayout);
+		addLayoutFriendlyURLs(
+			LayoutSetPrototype.class, prototypedLayout.getPlid());
+
+		return layoutSetPrototype;
+	}
+
+	@Override
+	protected void deleteStagedModel(
+			StagedModel stagedModel,
+			Map<String, List<StagedModel>> dependentStagedModelsMap,
+			Group group)
+		throws Exception {
+
+		LayoutSetPrototypeLocalServiceUtil.deleteLayoutSetPrototype(
+			(LayoutSetPrototype)stagedModel);
+
+		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
+			LayoutPrototype.class.getSimpleName());
+
+		LayoutPrototype layoutPrototype =
+			(LayoutPrototype)dependentStagedModels.get(0);
+
+		LayoutPrototypeLocalServiceUtil.deleteLayoutPrototype(layoutPrototype);
+	}
+
 	protected LayoutPrototype getImportedLayoutPrototype(
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
@@ -266,6 +225,23 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 
 	protected List<Layout> getLayouts(Class<?> clazz) {
 		return _layouts.get(clazz.getSimpleName());
+	}
+
+	@Override
+	protected StagedModel getStagedModel(String uuid, Group group) {
+		try {
+			return LayoutSetPrototypeLocalServiceUtil.
+				fetchLayoutSetPrototypeByUuidAndCompanyId(
+					uuid, group.getCompanyId());
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	protected Class<? extends StagedModel> getStagedModelClass() {
+		return LayoutSetPrototype.class;
 	}
 
 	protected Layout importLayoutFromLAR(StagedModel stagedModel)
@@ -316,6 +292,28 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 		Assert.assertEquals(1, importedLayouts.size());
 
 		return importedLayouts.get(0);
+	}
+
+	@Override
+	protected void validateImport(
+			StagedModel stagedModel,
+			Map<String, List<StagedModel>> dependentStagedModelsMap,
+			Group group)
+		throws Exception {
+
+		LayoutSetPrototype importedLayoutSetPrototype =
+			(LayoutSetPrototype)getStagedModel(stagedModel.getUuid(), group);
+
+		Assert.assertNotNull(importedLayoutSetPrototype);
+
+		LayoutPrototype importedLayoutPrototype = getImportedLayoutPrototype(
+			dependentStagedModelsMap, group);
+
+		Layout importedLayout = importLayoutFromLAR(stagedModel);
+
+		validateLayouts(
+			importedLayoutSetPrototype, importedLayoutPrototype,
+			importedLayout);
 	}
 
 	protected void validateLayouts(
