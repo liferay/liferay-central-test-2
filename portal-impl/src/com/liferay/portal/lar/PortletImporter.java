@@ -1105,10 +1105,9 @@ public class PortletImporter {
 			LocaleUtil.getMostRelevantLocale());
 
 		long plid = 0;
+		String portletSetupTitle = StringPool.BLANK;
 		String scopeType = StringPool.BLANK;
 		String scopeLayoutUuid = StringPool.BLANK;
-
-		String portletSetupTitle = StringPool.BLANK;
 
 		if (layout != null) {
 			plid = layout.getPlid();
@@ -1251,10 +1250,10 @@ public class PortletImporter {
 					layout, portletId);
 
 			try {
-				jxPreferences.setValue("lfrScopeType", scopeType);
-				jxPreferences.setValue("lfrScopeLayoutUuid", scopeLayoutUuid);
 				jxPreferences.setValue(
 					"portletSetupTitle_" + languageId, portletSetupTitle);
+				jxPreferences.setValue("lfrScopeType", scopeType);
+				jxPreferences.setValue("lfrScopeLayoutUuid", scopeLayoutUuid);
 
 				jxPreferences.store();
 			}
