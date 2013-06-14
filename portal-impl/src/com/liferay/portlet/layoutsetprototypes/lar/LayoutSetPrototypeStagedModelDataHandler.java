@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -161,9 +160,7 @@ public class LayoutSetPrototypeStagedModelDataHandler
 
 		Property groupIdProperty = PropertyFactoryUtil.forName("groupId");
 
-		Group group = layoutSetPrototype.getGroup();
-
-		dynamicQuery.add(groupIdProperty.eq(group.getGroupId()));
+		dynamicQuery.add(groupIdProperty.eq(layoutSetPrototype.getGroupId()));
 
 		Conjunction conjunction = RestrictionsFactoryUtil.conjunction();
 
@@ -226,7 +223,7 @@ public class LayoutSetPrototypeStagedModelDataHandler
 
 			List<Layout> layoutSetPrototypeLayouts =
 				LayoutLocalServiceUtil.getLayouts(
-					layoutSetPrototype.getGroup().getGroupId(), true);
+					layoutSetPrototype.getGroupId(), true);
 
 			Element layoutSetPrototypeElement =
 				portletDataContext.getExportDataElement(layoutSetPrototype);
