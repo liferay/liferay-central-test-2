@@ -259,11 +259,11 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		}
 
 		/**
-		 * Returns the number of rows that match the dynamic query with the given projection.
+		 * Returns the number of rows that match the dynamic query.
 		 *
 		 * @param dynamicQuery the dynamic query
-		 * @param projection the count projection that applied to the query
-		 * @return the number of rows that match the dynamic query with the given projection
+		 * @param projection the projection to apply to the query
+		 * @return the number of rows that match the dynamic query
 		 * @throws SystemException if a system exception occurred
 		 */
 		@Override
