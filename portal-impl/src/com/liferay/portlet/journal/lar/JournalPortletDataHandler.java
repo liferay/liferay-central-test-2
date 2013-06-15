@@ -333,6 +333,11 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 			}
 
 			@Override
+			protected Projection getCountProjection() {
+				return ProjectionFactoryUtil.countDistinct("articleId");
+			}
+
+			@Override
 			protected void performAction(Object object) throws PortalException {
 				JournalArticle article = (JournalArticle)object;
 
@@ -354,11 +359,6 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 					StagedModelDataHandlerUtil.exportStagedModel(
 						portletDataContext, article);
 				}
-			}
-
-			@Override
-			protected Projection getCountProjection() {
-				return ProjectionFactoryUtil.countDistinct("articleId");
 			}
 
 		};
