@@ -1,11 +1,11 @@
 <html>
 <head>
-<title>CPApplicationdisplaytemplateAdd</title>
+<title>CPApplicationdisplaytemplatesAdd</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CPApplicationdisplaytemplateAdd</td></tr>
+<tr><td rowspan="1" colspan="3">CPApplicationdisplaytemplatesAdd</td></tr>
 </thead>
 <tbody>
 <tr>
@@ -53,6 +53,7 @@
 	<td>//div[@class='button-holder ']/button[contains(.,' Cancel ')]</td>
 	<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </body>
 </html>
