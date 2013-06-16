@@ -74,7 +74,7 @@
 
 		<c:if test="<%= categoriesMap.isEmpty() %>">
 			<div class="alert alert-info">
-				<liferay-ui:message key="you-do-not-have-permission-to-access-any-control-panel-application" />
+				<liferay-ui:message key="you-do-not-have-permission-to-access-any-control-panel-applications" />
 			</div>
 		</c:if>
 	</aui:row>

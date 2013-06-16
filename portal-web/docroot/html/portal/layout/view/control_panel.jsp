@@ -138,10 +138,10 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 
 							if (categoriesMap.size() == 1) {
 								for (String curCategory : categoriesMap.keySet()) {
-									List<Portlet> curCategoryPortlets = categoriesMap.get(curCategory);
+									List<Portlet> categoryPortlets = categoriesMap.get(curCategory);
 
-									if (curCategoryPortlets.size() == 1) {
-										Portlet firstPortlet = curCategoryPortlets.get(0);
+									if (categoryPortlets.size() == 1) {
+										Portlet firstPortlet = categoryPortlets.get(0);
 
 										PortletURL redirectURL = PortalUtil.getSiteAdministrationURL(request, themeDisplay, firstPortlet.getPortletName());
 
