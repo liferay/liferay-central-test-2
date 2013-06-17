@@ -18,7 +18,7 @@ AUI.add(
 		var TPL_FILE_LIST = [
 			'<tpl for=".">',
 				'<tpl if="!values.error">',
-					'<li class="upload-file {[ values.temp ? "upload-complete pending-file selectable" : "" ]} {[ values.selected ? "selected" : "" ]}" data-fileId="{id}" data-fileName="{name}" id="{id}">',
+					'<li class="upload-file {[ values.temp ? "upload-complete pending-file selectable" : "" ]} {[values.selected ? "selected" : ""]}" data-fileId="{id}" data-fileName="{name}" id="{id}">',
 						'<input class="{[ !values.temp ? "hide" : "" ]} select-file" data-fileName="{name}" id="{id}checkbox" name="{$ns}selectUploadedFileCheckbox" type="{[ this.multipleFiles ? "checkbox" : "hidden" ]}" value="{name}" />',
 						'<span class="file-title" title="{name}">{name}</span>',
 						'<span class="progress-bar">',
@@ -175,7 +175,6 @@ AUI.add(
 							fileCannotBeSavedText: Liferay.Language.get('the-file-x-cannot-be-saved'),
 							invalidFileNameText: Liferay.Language.get('please-enter-a-file-with-a-valid-file-name'),
 							invalidFileSizeText: Liferay.Language.get('please-enter-a-file-with-a-valid-file-size-no-larger-than-x'),
-							warningText: Liferay.Language.get('the-following-data-would-not-be-imported'),
 							noFilesSelectedText: Liferay.Language.get('no-files-selected'),
 							notAvailableText: Liferay.Language.get('multiple-file-uploading-is-not-available'),
 							orText: Liferay.Language.get('or'),
@@ -187,6 +186,7 @@ AUI.add(
 							uploadingFileXofXText: Liferay.Language.get('uploading-file-x-of-x'),
 							uploadingText: Liferay.Language.get('uploading'),
 							uploadsCompleteText: Liferay.Language.get('all-files-ready-to-be-saved'),
+							warningText: Liferay.Language.get('the-following-data-would-not-be-imported'),
 							xFilesReadyText: Liferay.Language.get('x-files-ready-to-be-uploaded'),
 							xFilesSelectedText: Liferay.Language.get('x-files-selected'),
 							zeroByteSizeText: Liferay.Language.get('the-file-contains-no-data-and-cannot-be-uploaded.-please-use-the-classic-uploader')
