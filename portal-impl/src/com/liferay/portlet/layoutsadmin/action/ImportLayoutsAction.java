@@ -427,8 +427,8 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 		String errorMessage = StringPool.BLANK;
 		JSONArray errorMessagesJSONArray = null;
-		JSONArray warningMessagesJSONArray = null;
 		int errorType = 0;
+		JSONArray warningMessagesJSONArray = null;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -573,10 +573,9 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				errorMessagesJSONArray = getErrorMessagesJSONArray(
 					themeDisplay,
 					missingReferences.getDependencyMissingReferences());
+				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 				warningMessagesJSONArray = getWarningMessagesJSONArray(
 					themeDisplay, missingReferences.getWeakMissingReferences());
-
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 			}
 		}
 		else {
@@ -595,13 +594,13 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			jsonObject.put("messageListItems", errorMessagesJSONArray);
 		}
 
+		jsonObject.put("status", errorType);
+
 		if ((warningMessagesJSONArray != null) &&
 			(warningMessagesJSONArray.length() > 0)) {
 
 			jsonObject.put("warningMessages", warningMessagesJSONArray);
 		}
-
-		jsonObject.put("status", errorType);
 
 		writeJSON(actionRequest, actionResponse, jsonObject);
 
