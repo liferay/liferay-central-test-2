@@ -56,9 +56,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class PortalImplLocalizedFriendlyURLTest {
 
 	@Test
-	public void testLocalizedSitePrivateLayoutFriendlyURL()
-		throws Exception {
-
+	public void testLocalizedSitePrivateLayoutFriendlyURL() throws Exception {
 		testLocalizedSiteLayoutFriendlyURL(true);
 	}
 
@@ -75,9 +73,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	}
 
 	@Test
-	public void testLocalizedVirtualPublicLayoutFriendlyURL()
-		throws Exception {
-
+	public void testLocalizedVirtualPublicLayoutFriendlyURL() throws Exception {
 		testLocalizedVirtualLayoutFriendlyURL(false);
 	}
 
@@ -148,8 +144,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedSiteLayoutPrivateFriendlyURL2()
 		throws Exception {
 
-		testWronglyLocalizedSiteLayoutFriendlyURL(
-			true, _frLocale, "/accueil");
+		testWronglyLocalizedSiteLayoutFriendlyURL(true, _frLocale, "/accueil");
 	}
 
 	@Test
@@ -163,16 +158,14 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedSiteLayoutPublicFriendlyURL2()
 		throws Exception {
 
-		testWronglyLocalizedSiteLayoutFriendlyURL(
-			false, _frLocale, "/accueil");
+		testWronglyLocalizedSiteLayoutFriendlyURL(false, _frLocale, "/accueil");
 	}
 
 	@Test
 	public void testWronglyLocalizedVirtualPrivateLayoutFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			true, _enLocale, "/home");
+		testWronglyLocalizedVirtualLayoutFriendlyURL(true, _enLocale, "/home");
 	}
 
 	@Test
@@ -187,8 +180,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedVirtualPublicLayoutFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			false, _enLocale, "/home");
+		testWronglyLocalizedVirtualLayoutFriendlyURL(false, _enLocale, "/home");
 	}
 
 	@Test
@@ -336,8 +328,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 			group.getGroupId(), layout, "/inicio", _esLocale, "/inicio");
 	}
 
-	protected void testLocalizedVirtualLayoutFriendlyURL(
-			boolean privateLayout)
+	protected void testLocalizedVirtualLayoutFriendlyURL(boolean privateLayout)
 		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
