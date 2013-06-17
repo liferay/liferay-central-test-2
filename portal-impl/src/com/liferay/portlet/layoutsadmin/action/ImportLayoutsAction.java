@@ -364,7 +364,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		ThemeDisplay themeDisplay,
 		Map<String, MissingReference> missingReferences) {
 
-		JSONArray errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONArray warningMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (String missingReferenceReferrerClassName :
 				missingReferences.keySet()) {
@@ -407,10 +407,10 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				);
 			}
 
-			errorMessagesJSONArray.put(errorMessage);
+			warningMessagesJSONArray.put(errorMessage);
 		}
 
-		return errorMessagesJSONArray;
+		return warningMessagesJSONArray;
 	}
 
 	@Override
