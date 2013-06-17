@@ -230,9 +230,13 @@ public class PortalImplLocalizedFriendlyURLTest {
 			Locale locale, String expectedLayoutFriendlyURL)
 		throws Exception {
 
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest();
+
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		String groupFriendlyURL = group.getFriendlyURL();
+		mockHttpServletRequest.setPathInfo(
+			group.getFriendlyURL() + layoutFriendlyURL);
 
 		String groupServletMapping = _PUBLIC_GROUP_SERVLET_MAPPING;
 
@@ -240,16 +244,8 @@ public class PortalImplLocalizedFriendlyURLTest {
 			groupServletMapping = _PRIVATE_GROUP_SERVLET_MAPPING;
 		}
 
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
 		mockHttpServletRequest.setRequestURI(
-			groupServletMapping + groupFriendlyURL + layoutFriendlyURL);
-		mockHttpServletRequest.setPathInfo(
-			groupFriendlyURL + layoutFriendlyURL);
-
-		String localizedFriendlyURL = PortalUtil.getLocalizedFriendlyURL(
-			mockHttpServletRequest, layout, locale);
+			groupServletMapping + group.getFriendlyURL() + layoutFriendlyURL);
 
 		StringBundler sb = new StringBundler();
 
@@ -259,6 +255,9 @@ public class PortalImplLocalizedFriendlyURLTest {
 		sb.append(group.getFriendlyURL());
 		sb.append(expectedLayoutFriendlyURL);
 
+		String localizedFriendlyURL = PortalUtil.getLocalizedFriendlyURL(
+			mockHttpServletRequest, layout, locale);
+
 		Assert.assertEquals(sb.toString(), localizedFriendlyURL);
 	}
 
@@ -267,11 +266,28 @@ public class PortalImplLocalizedFriendlyURLTest {
 			Locale locale, String expectedLayoutFriendlyURL)
 		throws Exception {
 
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest();
+
+		StringBundler sb = new StringBundler(4);
+
 		User user = TestPropsValues.getUser();
 
 		Group groupUser = user.getGroup();
 
+		sb.append(groupUser.getFriendlyURL());
+
+		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
+
 		Group userGroupGroup = GroupLocalServiceUtil.getGroup(userGroupGroupId);
+
+		sb.append(userGroupGroup.getFriendlyURL());
+
+		sb.append(layoutFriendlyURL);
+
+		mockHttpServletRequest.setPathInfo(sb.toString());
+
+		sb = new StringBundler(5);
 
 		String groupServletMapping = _PUBLIC_GROUP_SERVLET_MAPPING;
 
@@ -279,30 +295,14 @@ public class PortalImplLocalizedFriendlyURLTest {
 			groupServletMapping = _PRIVATE_GROUP_SERVLET_MAPPING;
 		}
 
-		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest();
-
-		StringBundler sb = new StringBundler(5);
-
 		sb.append(groupServletMapping);
+
 		sb.append(groupUser.getFriendlyURL());
 		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 		sb.append(userGroupGroup.getFriendlyURL());
 		sb.append(layoutFriendlyURL);
 
 		mockHttpServletRequest.setRequestURI(sb.toString());
-
-		sb = new StringBundler(4);
-
-		sb.append(groupUser.getFriendlyURL());
-		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
-		sb.append(userGroupGroup.getFriendlyURL());
-		sb.append(layoutFriendlyURL);
-
-		mockHttpServletRequest.setPathInfo(sb.toString());
-
-		String localizedFriendlyURL = PortalUtil.getLocalizedFriendlyURL(
-			mockHttpServletRequest, layout, locale);
 
 		sb = new StringBundler(7);
 
@@ -313,6 +313,9 @@ public class PortalImplLocalizedFriendlyURLTest {
 		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 		sb.append(userGroupGroup.getFriendlyURL());
 		sb.append(expectedLayoutFriendlyURL);
+
+		String localizedFriendlyURL = PortalUtil.getLocalizedFriendlyURL(
+			mockHttpServletRequest, layout, locale);
 
 		Assert.assertEquals(sb.toString(), localizedFriendlyURL);
 	}
