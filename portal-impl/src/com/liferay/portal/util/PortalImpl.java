@@ -3610,7 +3610,7 @@ public class PortalImpl implements Portal {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Portlet " + portletId +
-					" does not exist on a page in group " + groupId);
+						" does not exist on a page in group " + groupId);
 			}
 		}
 
@@ -6828,7 +6828,7 @@ public class PortalImpl implements Portal {
 
 	protected Map<String, List<Portlet>> getCategoriesMap(
 			HttpServletRequest request, String attributeName,
-			String[] categoriesArray)
+			String[] categories)
 		throws SystemException {
 
 		Map<String, List<Portlet>> categoriesMap =
@@ -6843,7 +6843,7 @@ public class PortalImpl implements Portal {
 
 		categoriesMap = new LinkedHashMap<String, List<Portlet>>();
 
-		for (String category : categoriesArray) {
+		for (String category : categories) {
 			List<Portlet> portlets = getControlPanelPortlets(
 				category, themeDisplay);
 

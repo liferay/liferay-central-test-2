@@ -16,10 +16,6 @@
 
 <%@ include file="/html/portlet/control_panel_menu/init.jsp" %>
 
-<%
-Map<String, List<Portlet>> categoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
-%>
-
 <div class="portal-add-content">
 	<div class="control-panel-tools">
 		<div class="search-panels">
@@ -33,6 +29,8 @@ Map<String, List<Portlet>> categoriesMap = PortalUtil.getSiteAdministrationCateg
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
+
+		Map<String, List<Portlet>> categoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
 
 		for (String curCategory : categoriesMap.keySet()) {
 			String title = LanguageUtil.get(pageContext, "category." + curCategory);
