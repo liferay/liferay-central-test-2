@@ -303,11 +303,11 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		}
 	}
 
-	protected JSONArray getMissingReferencesJSONArray(
+	protected JSONArray getErrorMessagesJSONArray(
 		ThemeDisplay themeDisplay,
 		Map<String, MissingReference> missingReferences) {
 
-		JSONArray errorMessageJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONArray errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (String missingReferenceDisplayName : missingReferences.keySet()) {
 			MissingReference missingReference = missingReferences.get(
@@ -354,17 +354,17 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				ResourceActionsUtil.getModelResource(
 					themeDisplay.getLocale(), missingReference.getClassName()));
 
-			errorMessageJSONArray.put(errorMessageJSONObject);
+			errorMessagesJSONArray.put(errorMessageJSONObject);
 		}
 
-		return errorMessageJSONArray;
+		return errorMessagesJSONArray;
 	}
 
 	protected JSONArray getWarningMessagesJSONArray(
 		ThemeDisplay themeDisplay,
 		Map<String, MissingReference> missingReferences) {
 
-		JSONArray errorMessageJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONArray errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (String missingReferenceReferrerClassName :
 				missingReferences.keySet()) {
@@ -407,10 +407,10 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				);
 			}
 
-			errorMessageJSONArray.put(errorMessage);
+			errorMessagesJSONArray.put(errorMessage);
 		}
 
-		return errorMessageJSONArray;
+		return errorMessagesJSONArray;
 	}
 
 	@Override
@@ -426,8 +426,8 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 		response.setStatus(HttpServletResponse.SC_OK);
 
 		String errorMessage = StringPool.BLANK;
-		JSONArray errorMessageJSONArray = null;
-		JSONArray warningMessageJSONArray = null;
+		JSONArray errorMessagesJSONArray = null;
+		JSONArray warningMessagesJSONArray = null;
 		int errorType = 0;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -510,7 +510,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 				errorMessage = themeDisplay.translate(sb.toString());
 
-				errorMessageJSONArray = JSONFactoryUtil.createJSONArray();
+				errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
 
 				List<Tuple> missingLayoutPrototypes =
 					lpe.getMissingLayoutPrototypes();
@@ -538,7 +538,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 							themeDisplay.getLocale(),
 							layoutPrototypeClassName));
 
-					errorMessageJSONArray.put(errorMessageJSONObject);
+					errorMessagesJSONArray.put(errorMessageJSONObject);
 				}
 
 				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
@@ -570,11 +570,12 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 				MissingReferences missingReferences =
 					mre.getMissingReferences();
 
-				errorMessageJSONArray = getMissingReferencesJSONArray(
+				errorMessagesJSONArray = getErrorMessagesJSONArray(
 					themeDisplay,
 					missingReferences.getDependencyMissingReferences());
-				warningMessageJSONArray = getWarningMessagesJSONArray(
+				warningMessagesJSONArray = getWarningMessagesJSONArray(
 					themeDisplay, missingReferences.getWeakMissingReferences());
+
 				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 			}
 		}
@@ -588,16 +589,16 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 		jsonObject.put("message", errorMessage);
 
-		if ((errorMessageJSONArray != null) &&
-			(errorMessageJSONArray.length() > 0)) {
+		if ((errorMessagesJSONArray != null) &&
+			(errorMessagesJSONArray.length() > 0)) {
 
-			jsonObject.put("messageListItems", errorMessageJSONArray);
+			jsonObject.put("messageListItems", errorMessagesJSONArray);
 		}
 
-		if ((warningMessageJSONArray != null) &&
-			(warningMessageJSONArray.length() > 0)) {
+		if ((warningMessagesJSONArray != null) &&
+			(warningMessagesJSONArray.length() > 0)) {
 
-			jsonObject.put("warningMessages", warningMessageJSONArray);
+			jsonObject.put("warningMessages", warningMessagesJSONArray);
 		}
 
 		jsonObject.put("status", errorType);

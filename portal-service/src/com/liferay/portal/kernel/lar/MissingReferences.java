@@ -46,7 +46,7 @@ public class MissingReferences {
 	}
 
 	protected void add(
-		Map<String, MissingReference> missingReferencesMap,
+		Map<String, MissingReference> missingReferences,
 		MissingReference missingReference) {
 
 		String missingReferenceType = missingReference.getType();
@@ -64,7 +64,7 @@ public class MissingReferences {
 			missingReferenceKey = missingReference.getReferrerClassName();
 		}
 
-		MissingReference existingMissingReference = missingReferencesMap.get(
+		MissingReference existingMissingReference = missingReferences.get(
 			missingReferenceKey);
 
 		if (existingMissingReference != null) {
@@ -72,7 +72,7 @@ public class MissingReferences {
 				missingReference.getReferrers());
 		}
 		else {
-			missingReferencesMap.put(missingReferenceKey, missingReference);
+			missingReferences.put(missingReferenceKey, missingReference);
 		}
 	}
 

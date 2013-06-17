@@ -30,9 +30,9 @@ public class MissingReference {
 		_className = element.attributeValue("class-name");
 		_displayName = GetterUtil.getString(
 			element.attributeValue("display-name"));
+		_referrerClassName = element.attributeValue("referrer-class-name");
 		_type = GetterUtil.getString(element.attributeValue("type"));
 
-		_referrerClassName = element.attributeValue("referrer-class-name");
 		String referrerDisplayName = GetterUtil.getString(
 			element.attributeValue("referrer-display-name"));
 
