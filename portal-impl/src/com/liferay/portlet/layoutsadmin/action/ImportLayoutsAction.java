@@ -378,7 +378,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 
 			if (referrers.size() == 1) {
 				errorMessage = themeDisplay.translate(
-					"1-entry-of-type-x-would-not-be-imported-because-the-" +
+					"1-entry-of-type-x-could-not-be-imported-because-the-" +
 						"original-x-does-not-exist-in-the-current-environment",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
@@ -392,7 +392,7 @@ public class ImportLayoutsAction extends EditFileEntryAction {
 			}
 			else {
 				errorMessage = themeDisplay.translate(
-					"x-entries-of-type-x-would-not-be-imported-because-the-" +
+					"x-entries-of-type-x-could-not-be-imported-because-the-" +
 						"original-x-does-not-exist-in-the-current-environment",
 					new String[] {
 						String.valueOf(referrers.size()),
