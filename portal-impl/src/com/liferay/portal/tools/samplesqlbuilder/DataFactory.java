@@ -174,10 +174,11 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-			String baseDir, boolean assetPublisherFilterEnabled,
-			int maxAssetCategoryCount, int maxAssetEntryToAssetCategoryCount,
+			String baseDir, int maxAssetCategoryCount,
+			int maxAssetEntryToAssetCategoryCount,
 			int maxAssetEntryToAssetTagCount,
-			int maxAssetPublisherFilterRuleCount, int maxAssetTagCount,
+			int maxAssetPublisherFilterRuleCount,
+			int maxAssetPublisherPageCount, int maxAssetTagCount,
 			int maxAssetVocabularyCount, int maxBlogsEntryCount,
 			int maxDDLCustomFieldCount, int maxGroupsCount,
 			int maxJournalArticleCount, int maxJournalArticleSize,
@@ -186,11 +187,11 @@ public class DataFactory {
 		throws Exception {
 
 		_baseDir = baseDir;
-		_assetPublisherFilterEnabled = assetPublisherFilterEnabled;
 		_maxAssetCategoryCount = maxAssetCategoryCount;
 		_maxAssetEntryToAssetCategoryCount = maxAssetEntryToAssetCategoryCount;
 		_maxAssetEntryToAssetTagCount = maxAssetEntryToAssetTagCount;
 		_maxAssetPublisherFilterRuleCount = maxAssetPublisherFilterRuleCount;
+		_maxAssetPublisherPageCount = maxAssetPublisherPageCount;
 		_maxAssetTagCount = maxAssetTagCount;
 		_maxAssetVocabularyCount = maxAssetVocabularyCount;
 		_maxBlogsEntryCount = maxBlogsEntryCount;
@@ -1573,8 +1574,16 @@ public class DataFactory {
 
 		List<AssetCategory> assetCategories =
 			_assetCategoriesArray[(int)groupId - 1];
+			
+		boolean assetPublisherFilterEnabled = false;
 
-		if (!_assetPublisherFilterEnabled || (currentIndex == 1) ||
+		if ((_maxAssetPublisherPageCount * _maxAssetPublisherFilterRuleCount) >
+				0) {
+
+			assetPublisherFilterEnabled = true;
+		}
+
+		if (!assetPublisherFilterEnabled || (currentIndex == 1) ||
 			(assetCategories == null) || assetCategories.isEmpty()) {
 
 			return newPortletPreferences(
@@ -2438,7 +2447,6 @@ public class DataFactory {
 	private List<AssetCategory>[] _assetCategoriesArray;
 	private Map<Long, SimpleCounter> _assetCategoryCounters =
 		new HashMap<Long, SimpleCounter>();
-	private boolean _assetPublisherFilterEnabled;
 	private Map<Long, SimpleCounter> _assetPublisherRuleCounter =
 		new HashMap<Long, SimpleCounter>();
 	private Map<Long, SimpleCounter> _assetTagCounters =
@@ -2475,6 +2483,7 @@ public class DataFactory {
 	private int _maxAssetEntryToAssetCategoryCount;
 	private int _maxAssetEntryToAssetTagCount;
 	private int _maxAssetPublisherFilterRuleCount;
+	private int _maxAssetPublisherPageCount;
 	private int _maxAssetTagCount;
 	private int _maxAssetVocabularyCount;
 	private int _maxBlogsEntryCount;

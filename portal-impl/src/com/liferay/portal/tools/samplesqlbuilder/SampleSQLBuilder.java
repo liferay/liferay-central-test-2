@@ -83,12 +83,12 @@ public class SampleSQLBuilder {
 				"sample.sql.max.asset.entry.to.asset.category.count"));
 		_maxAssetEntryToAssetTagCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.max.asset.entry.to.asset.tag.count"));
-		_maxAssetTagCount = GetterUtil.getInteger(
-			arguments.get("sample.sql.max.asset.tag.count"));
 		_maxAssetPublisherFilterRuleCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.max.asset.publisher.filter.rule.count"));
 		_maxAssetPublisherPageCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.max.asset.publisher.page.count"));
+		_maxAssetTagCount = GetterUtil.getInteger(
+			arguments.get("sample.sql.max.asset.tag.count"));
 		_maxAssetVocabularyCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.max.asset.vocabulary.count"));
 		_maxBlogsEntryCommentCount = GetterUtil.getInteger(
@@ -141,18 +141,10 @@ public class SampleSQLBuilder {
 		_outputMerge = GetterUtil.getBoolean(
 			arguments.get("sample.sql.output.merge"));
 
-		boolean assetPublisherFilterEnabled = false;
-
-		if ((_maxAssetPublisherPageCount * _maxAssetPublisherFilterRuleCount) >
-				0) {
-
-			assetPublisherFilterEnabled = true;
-		}
-
 		_dataFactory = new DataFactory(
-			baseDir, assetPublisherFilterEnabled, _maxAssetCategoryCount,
+			baseDir, _maxAssetCategoryCount,
 			_maxAssetEntryToAssetCategoryCount, _maxAssetEntryToAssetTagCount,
-			_maxAssetPublisherFilterRuleCount, _maxAssetTagCount,
+			_maxAssetPublisherFilterRuleCount, _maxAssetPublisherPageCount, _maxAssetTagCount,
 			_maxAssetVocabularyCount, _maxBlogsEntryCount,
 			_maxDDLCustomFieldCount, _maxGroupCount, _maxJournalArticleCount,
 			_maxJournalArticleSize, _maxMBCategoryCount, _maxMBThreadCount,
