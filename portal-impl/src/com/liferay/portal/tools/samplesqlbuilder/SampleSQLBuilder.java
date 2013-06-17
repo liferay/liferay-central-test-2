@@ -142,9 +142,9 @@ public class SampleSQLBuilder {
 			arguments.get("sample.sql.output.merge"));
 
 		_dataFactory = new DataFactory(
-			baseDir, _maxAssetCategoryCount,
-			_maxAssetEntryToAssetCategoryCount, _maxAssetEntryToAssetTagCount,
-			_maxAssetPublisherFilterRuleCount, _maxAssetPublisherPageCount, _maxAssetTagCount,
+			baseDir, _maxAssetCategoryCount, _maxAssetEntryToAssetCategoryCount,
+			_maxAssetEntryToAssetTagCount, _maxAssetPublisherFilterRuleCount,
+			_maxAssetPublisherPageCount, _maxAssetTagCount,
 			_maxAssetVocabularyCount, _maxBlogsEntryCount,
 			_maxDDLCustomFieldCount, _maxGroupCount, _maxJournalArticleCount,
 			_maxJournalArticleSize, _maxMBCategoryCount, _maxMBThreadCount,

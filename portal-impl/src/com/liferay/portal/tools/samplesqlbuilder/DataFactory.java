@@ -262,8 +262,7 @@ public class DataFactory {
 	}
 
 	public List<AssetCategory> getAssetCategories() {
-		List<AssetCategory> allAssetCategories =
-			new ArrayList<AssetCategory>();
+		List<AssetCategory> allAssetCategories = new ArrayList<AssetCategory>();
 
 		for (List<AssetCategory> assetCategories : _assetCategoriesArray) {
 			allAssetCategories.addAll(assetCategories);
@@ -864,6 +863,30 @@ public class DataFactory {
 			wikiPage.getModifiedDate(), getWikiPageClassNameId(),
 			wikiPage.getResourcePrimKey(), wikiPage.getUuid(), 0, true,
 			ContentTypes.TEXT_HTML, wikiPage.getTitle());
+	}
+
+	public List<PortletPreferences> newAssetPublisherPortletPreferences(
+		long plid) {
+
+		List<PortletPreferences> portletPreferencesList =
+			new ArrayList<PortletPreferences>(4);
+
+		portletPreferencesList.add(
+			newPortletPreferences(
+				plid, PortletKeys.BLOGS, PortletConstants.DEFAULT_PREFERENCES));
+		portletPreferencesList.add(
+			newPortletPreferences(
+				plid, PortletKeys.DOCKBAR,
+				PortletConstants.DEFAULT_PREFERENCES));
+		portletPreferencesList.add(
+			newPortletPreferences(
+				plid, PortletKeys.JOURNAL,
+				PortletConstants.DEFAULT_PREFERENCES));
+		portletPreferencesList.add(
+			newPortletPreferences(
+				plid, PortletKeys.WIKI, PortletConstants.DEFAULT_PREFERENCES));
+
+		return portletPreferencesList;
 	}
 
 	public BlogsEntry newBlogsEntry(long groupId, int index) {
@@ -1570,7 +1593,7 @@ public class DataFactory {
 
 		List<AssetCategory> assetCategories =
 			_assetCategoriesArray[(int)groupId - 1];
-			
+
 		boolean assetPublisherFilterEnabled = false;
 
 		if ((_maxAssetPublisherPageCount * _maxAssetPublisherFilterRuleCount) >
@@ -1655,30 +1678,6 @@ public class DataFactory {
 		return newPortletPreferences(
 			plid, portletId,
 			PortletPreferencesFactoryUtil.toXML(jxPreferences));
-	}
-
-	public List<PortletPreferences> newAssetPublisherPortletPreferences(
-		long plid) {
-
-		List<PortletPreferences> portletPreferencesList =
-			new ArrayList<PortletPreferences>(4);
-
-		portletPreferencesList.add(
-			newPortletPreferences(
-				plid, PortletKeys.BLOGS, PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesList.add(
-			newPortletPreferences(
-				plid, PortletKeys.DOCKBAR,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesList.add(
-			newPortletPreferences(
-				plid, PortletKeys.JOURNAL,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesList.add(
-			newPortletPreferences(
-				plid, PortletKeys.WIKI, PortletConstants.DEFAULT_PREFERENCES));
-
-		return portletPreferencesList;
 	}
 
 	public List<Layout> newPublicLayouts(long groupId) {
