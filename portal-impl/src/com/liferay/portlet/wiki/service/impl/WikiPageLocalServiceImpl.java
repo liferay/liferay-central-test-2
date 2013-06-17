@@ -2149,23 +2149,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			if (previousVersionPage != null) {
 				String portletId = null;
-
 				long plid = LayoutConstants.DEFAULT_PLID;
-
 				String strutsAction = null;
 
 				if (wikiPlid != LayoutConstants.DEFAULT_PLID) {
 					portletId = PortletKeys.WIKI;
-
 					plid = wikiPlid;
-
 					strutsAction = "/wiki/compare_versions";
 				}
 				else {
 					portletId = PortletKeys.WIKI_ADMIN;
-
 					plid = controlPanelPlid;
-
 					strutsAction = "/wiki_admin/compare_versions";
 				}
 
