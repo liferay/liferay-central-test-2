@@ -262,14 +262,14 @@ public class DataFactory {
 	}
 
 	public List<AssetCategory> getAssetCategories() {
-		List<AssetCategory> mergedAssetCategories =
+		List<AssetCategory> allAssetCategories =
 			new ArrayList<AssetCategory>();
 
 		for (List<AssetCategory> assetCategories : _assetCategoriesArray) {
-			mergedAssetCategories.addAll(assetCategories);
+			allAssetCategories.addAll(assetCategories);
 		}
 
-		return mergedAssetCategories;
+		return allAssetCategories;
 	}
 
 	public List<Long> getAssetCategoryIds(long groupId) {
@@ -332,39 +332,39 @@ public class DataFactory {
 	}
 
 	public List<AssetTag> getAssetTags() {
-		List<AssetTag> mergedAssetTags = new ArrayList<AssetTag>();
+		List<AssetTag> allAssetTags = new ArrayList<AssetTag>();
 
 		for (List<AssetTag> assetTags : _assetTagsArray) {
-			mergedAssetTags.addAll(assetTags);
+			allAssetTags.addAll(assetTags);
 		}
 
-		return mergedAssetTags;
+		return allAssetTags;
 	}
 
 	public List<AssetTagStats> getAssetTagStatsList() {
-		List<AssetTagStats> mergedAssetTagStatsList =
+		List<AssetTagStats> allAssetTagStatsList =
 			new ArrayList<AssetTagStats>();
 
 		for (List<AssetTagStats> assetTagStatsList : _assetTagStatsListArray) {
-			mergedAssetTagStatsList.addAll(assetTagStatsList);
+			allAssetTagStatsList.addAll(assetTagStatsList);
 		}
 
-		return mergedAssetTagStatsList;
+		return allAssetTagStatsList;
 	}
 
 	public List<AssetVocabulary> getAssetVocabularies() {
-		List<AssetVocabulary> mergedAssetVocabularies =
+		List<AssetVocabulary> allAssetVocabularies =
 			new ArrayList<AssetVocabulary>();
 
-		mergedAssetVocabularies.add(_defaultAssetVocabulary);
+		allAssetVocabularies.add(_defaultAssetVocabulary);
 
 		for (List<AssetVocabulary> assetVocabularies :
 				_assetVocabulariesArray) {
 
-			mergedAssetVocabularies.addAll(assetVocabularies);
+			allAssetVocabularies.addAll(assetVocabularies);
 		}
 
-		return mergedAssetVocabularies;
+		return allAssetVocabularies;
 	}
 
 	public long getBlogsEntryClassNameId() {
@@ -499,16 +499,14 @@ public class DataFactory {
 		return _classNamesMap.get(WikiPage.class.getName());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void initAssetCateogries() {
+		_assetCategoriesArray =
+			(List<AssetCategory>[])new List<?>[_maxGroupsCount];
+		_assetVocabulariesArray =
+			(List<AssetVocabulary>[])new List<?>[_maxGroupsCount];
 		_defaultAssetVocabulary = newAssetVocabulary(
 			_globalGroupId, _defaultUserId, null,
 			PropsValues.ASSET_VOCABULARY_DEFAULT);
-
-		_assetVocabulariesArray =
-			(List<AssetVocabulary>[])new List<?>[_maxGroupsCount];
-		_assetCategoriesArray =
-			(List<AssetCategory>[])new List<?>[_maxGroupsCount];
 
 		StringBundler sb = new StringBundler(4);
 
@@ -551,12 +549,11 @@ public class DataFactory {
 				}
 			}
 
-			_assetVocabulariesArray[i - 1] = assetVocabularies;
 			_assetCategoriesArray[i - 1] = assetCategories;
+			_assetVocabulariesArray[i - 1] = assetVocabularies;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void initAssetTags() {
 		_assetTagsArray = (List<AssetTag>[])new List<?>[_maxGroupsCount];
 		_assetTagStatsListArray =
@@ -1559,7 +1556,6 @@ public class DataFactory {
 			newPortletPreferences(
 				plid, PortletKeys.DOCKBAR,
 				PortletConstants.DEFAULT_PREFERENCES));
-
 		portletPreferencesList.add(
 			newPortletPreferences(
 				plid, PortletKeys.PORTLET_CONFIGURATION,
@@ -1606,12 +1602,12 @@ public class DataFactory {
 
 			AssetCategory assetCategory = assetCategories.get(index);
 
+			jxPreferences.setValue("queryAndOperator" + i, "false");
+			jxPreferences.setValue("queryContains" + i, "false");
 			jxPreferences.setValue("queryName" + i, "assetCategories");
 			jxPreferences.setValue(
 				"queryValues" + i,
 				String.valueOf(assetCategory.getCategoryId()));
-			jxPreferences.setValue("queryAndOperator" + i, "false");
-			jxPreferences.setValue("queryContains" + i, "false");
 		}
 
 		return newPortletPreferences(
@@ -1661,7 +1657,7 @@ public class DataFactory {
 			PortletPreferencesFactoryUtil.toXML(jxPreferences));
 	}
 
-	public List<PortletPreferences> newPortletPreferencesForAssetPublisher(
+	public List<PortletPreferences> newAssetPublisherPortletPreferences(
 		long plid) {
 
 		List<PortletPreferences> portletPreferencesList =
@@ -1669,18 +1665,15 @@ public class DataFactory {
 
 		portletPreferencesList.add(
 			newPortletPreferences(
-				plid, PortletKeys.DOCKBAR,
-				PortletConstants.DEFAULT_PREFERENCES));
-
+				plid, PortletKeys.BLOGS, PortletConstants.DEFAULT_PREFERENCES));
 		portletPreferencesList.add(
 			newPortletPreferences(
-				plid, PortletKeys.BLOGS, PortletConstants.DEFAULT_PREFERENCES));
-
+				plid, PortletKeys.DOCKBAR,
+				PortletConstants.DEFAULT_PREFERENCES));
 		portletPreferencesList.add(
 			newPortletPreferences(
 				plid, PortletKeys.JOURNAL,
 				PortletConstants.DEFAULT_PREFERENCES));
-
 		portletPreferencesList.add(
 			newPortletPreferences(
 				plid, PortletKeys.WIKI, PortletConstants.DEFAULT_PREFERENCES));

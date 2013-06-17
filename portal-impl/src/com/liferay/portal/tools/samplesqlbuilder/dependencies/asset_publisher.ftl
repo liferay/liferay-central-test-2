@@ -9,7 +9,7 @@
 		_layout = layout
 	/>
 
-	<#assign portletPreferencesList = dataFactory.newPortletPreferencesForAssetPublisher(layout.plid)>
+	<#assign portletPreferencesList = dataFactory.newAssetPublisherPortletPreferences(layout.plid)>
 
 	<#list portletPreferencesList as portletPreferences>
 		<@insertPortletPreferences
