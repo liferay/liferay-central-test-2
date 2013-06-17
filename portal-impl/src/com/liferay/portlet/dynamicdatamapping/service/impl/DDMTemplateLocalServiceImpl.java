@@ -1300,8 +1300,8 @@ public class DDMTemplateLocalServiceImpl
 		File smallImageFile = copySmallImage(template);
 
 		return addTemplate(
-			userId, template.getGroupId(), template.getClassNameId(),
-			classPK, null, nameMap, descriptionMap, template.getType(),
+			userId, template.getGroupId(), template.getClassNameId(), classPK,
+			null, nameMap, descriptionMap, template.getType(),
 			template.getMode(), template.getLanguage(), template.getScript(),
 			template.isCacheable(), template.isSmallImage(),
 			template.getSmallImageURL(), smallImageFile, serviceContext);
