@@ -1292,9 +1292,8 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	protected DDMTemplate copyTemplate(
-			long userId, DDMTemplate template, long newClassPK,
-			Map<Locale, String> newNameMap,
-			Map<Locale, String> newDescriptionMap,
+			long userId, DDMTemplate template, long classPK,
+			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -1302,7 +1301,7 @@ public class DDMTemplateLocalServiceImpl
 
 		return addTemplate(
 			userId, template.getGroupId(), template.getClassNameId(),
-			newClassPK, null, newNameMap, newDescriptionMap, template.getType(),
+			classPK, null, nameMap, descriptionMap, template.getType(),
 			template.getMode(), template.getLanguage(), template.getScript(),
 			template.isCacheable(), template.isSmallImage(),
 			template.getSmallImageURL(), smallImageFile, serviceContext);
