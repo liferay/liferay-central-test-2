@@ -54,6 +54,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
@@ -811,8 +812,12 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/liferay-layout-templates-ext.xml"))
 		};
 
-		LayoutTemplateLocalServiceUtil.init(
-			servletContext, xmls, pluginPackage);
+		List<LayoutTemplate> layoutTemplates =
+			LayoutTemplateLocalServiceUtil.init(
+				servletContext, xmls, pluginPackage);
+
+		servletContext.setAttribute(
+			WebKeys.PLUGIN_LAYOUT_TEMPLATES, layoutTemplates);
 	}
 
 	protected PluginPackage initPluginPackage() throws Exception {

@@ -324,6 +324,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PHONE = "PHONE";
 
+	public static final String PLUGIN_LAYOUT_TEMPLATES = "PLUGIN_LAYOUT_TEMPLATES";
+
 	public static final String PLUGIN_PORTLETS = "PLUGIN_PORTLETS";
 
 	public static final String PLUGIN_REPOSITORY_REPORT = "PLUGIN_REPOSITORY_REPORT";
