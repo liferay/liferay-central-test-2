@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.ThemeFactoryUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -253,28 +254,23 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		String themesPath, boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List<Theme> themeList = new ArrayList<Theme>();
+		List<Theme> themes = new UniqueList<Theme>();
 
 		try {
 			for (String xml : xmls) {
-				Set<Theme> themes = _readThemes(
-					servletContextName, servletContext, themesPath,
-					loadFromServletContext, xml, pluginPackage);
-
-				for (Theme theme : themes) {
-					if (!themeList.contains(theme)) {
-						themeList.add(theme);
-					}
-				}
+				themes.addAll(
+					_readThemes(
+						servletContextName, servletContext, themesPath,
+						loadFromServletContext, xml, pluginPackage));
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		_themesPool.clear();
 
-		return themeList;
+		return themes;
 	}
 
 	@Override

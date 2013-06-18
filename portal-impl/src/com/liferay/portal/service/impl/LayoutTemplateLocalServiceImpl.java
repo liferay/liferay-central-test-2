@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -270,18 +271,14 @@ public class LayoutTemplateLocalServiceImpl
 		String servletContextName, ServletContext servletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List<LayoutTemplate> layoutTemplates = new ArrayList<LayoutTemplate>();
+		List<LayoutTemplate> layoutTemplates = new UniqueList<LayoutTemplate>();
 
 		try {
-			for (int i = 0; i < xmls.length; i++) {
-				Set<LayoutTemplate> curLayoutTemplates = _readLayoutTemplates(
-					servletContextName, servletContext, xmls[i], pluginPackage);
-
-				for (LayoutTemplate layoutTemplate : curLayoutTemplates) {
-					if (!layoutTemplates.contains(layoutTemplate)) {
-						layoutTemplates.add(layoutTemplate);
-					}
-				}
+			for (String xml : xmls) {
+				layoutTemplates.addAll(
+					_readLayoutTemplates(
+						servletContextName, servletContext, xml,
+						pluginPackage));
 			}
 		}
 		catch (Exception e) {
