@@ -901,6 +901,8 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 
+		servletContext.setAttribute(WebKeys.PLUGIN_PORTLETS, portlets);
+
 		return portlets;
 	}
 
