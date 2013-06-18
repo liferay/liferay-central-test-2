@@ -58,6 +58,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -972,8 +973,10 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/liferay-look-and-feel-ext.xml"))
 		};
 
-		ThemeLocalServiceUtil.init(
+		List<Theme> themes = ThemeLocalServiceUtil.init(
 			servletContext, null, true, xmls, pluginPackage);
+
+		servletContext.setAttribute(WebKeys.PLUGIN_THEMES, themes);
 	}
 
 	protected void initWebSettings() throws Exception {
