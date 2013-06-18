@@ -43,7 +43,7 @@ public class ServiceBeanAutoProxyCreator
 		ServiceBeanAopCacheManagerUtil.registerServiceBeanAopCacheManager(
 			_serviceBeanAopCacheManager);
 
-		// For backward compatibility
+		// Backwards compatibility
 
 		if (_beanMatcher == null) {
 			_beanMatcher = new ServiceBeanMatcher();
