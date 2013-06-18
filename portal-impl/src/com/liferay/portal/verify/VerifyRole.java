@@ -36,18 +36,18 @@ public class VerifyRole extends VerifyProcess {
 
 		String name = Group.class.getName();
 
-		Group userPersonalSite = GroupLocalServiceUtil.getGroup(
+		Group group = GroupLocalServiceUtil.getGroup(
 			role.getCompanyId(), GroupConstants.USER_PERSONAL_SITE);
 
-		String primKey = String.valueOf(userPersonalSite.getGroupId());
+		String primKey = String.valueOf(group.getGroupId());
 
-		if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+		if (!ResourcePermissionLocalServiceUtil.hasResourcePermission(
+				role.getCompanyId(), name, ResourceConstants.SCOPE_GROUP,
+				primKey, role.getRoleId(), ActionKeys.MANAGE_LAYOUTS) ||
+			ResourcePermissionLocalServiceUtil.hasResourcePermission(
 				role.getCompanyId(), name, ResourceConstants.SCOPE_GROUP,
 				primKey, role.getRoleId(),
-				ActionKeys.VIEW_SITE_ADMINISTRATION) ||
-			!ResourcePermissionLocalServiceUtil.hasResourcePermission(
-				role.getCompanyId(), name, ResourceConstants.SCOPE_GROUP,
-				primKey, role.getRoleId(), ActionKeys.MANAGE_LAYOUTS)) {
+				ActionKeys.VIEW_SITE_ADMINISTRATION)) {
 
 			return;
 		}
@@ -81,10 +81,10 @@ public class VerifyRole extends VerifyProcess {
 			}
 
 			try {
-				Role powerUser = RoleLocalServiceUtil.getRole(
+				Role powerUserRole = RoleLocalServiceUtil.getRole(
 					companyId, RoleConstants.POWER_USER);
 
-				addViewSiteAdministrationPermission(powerUser);
+				addViewSiteAdministrationPermission(powerUserRole);
 			}
 			catch (NoSuchRoleException nsre) {
 			}

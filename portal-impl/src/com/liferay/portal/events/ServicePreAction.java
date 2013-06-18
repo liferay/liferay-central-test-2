@@ -793,12 +793,6 @@ public class ServicePreAction extends Action {
 		// Icons
 
 		themeDisplay.setShowAddContentIcon(false);
-		themeDisplay.setShowHomeIcon(true);
-		themeDisplay.setShowMyAccountIcon(signedIn);
-		themeDisplay.setShowPageSettingsIcon(false);
-		themeDisplay.setShowPortalIcon(true);
-		themeDisplay.setShowSignInIcon(!signedIn);
-		themeDisplay.setShowSignOutIcon(signedIn);
 
 		boolean showControlPanelIcon = false;
 
@@ -810,6 +804,14 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setShowControlPanelIcon(showControlPanelIcon);
+
+		themeDisplay.setShowHomeIcon(true);
+		themeDisplay.setShowMyAccountIcon(signedIn);
+		themeDisplay.setShowPageSettingsIcon(false);
+		themeDisplay.setShowPortalIcon(true);
+		themeDisplay.setShowSignInIcon(!signedIn);
+		themeDisplay.setShowSignOutIcon(signedIn);
+		themeDisplay.setShowStagingIcon(false);
 
 		boolean showSiteAdministrationIcon = false;
 
@@ -826,8 +828,6 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setShowSiteAdministrationIcon(showSiteAdministrationIcon);
-
-		themeDisplay.setShowStagingIcon(false);
 
 		// Session
 
@@ -1683,14 +1683,6 @@ public class ServicePreAction extends Action {
 
 		Group group = layout.getGroup();
 
-		String controlPanelCategory = null;
-
-		if (group.isControlPanel()) {
-			controlPanelCategory = ParamUtil.getString(
-				request, "controlPanelCategory");
-
-		}
-
 		boolean hasViewLayoutPermission = false;
 		boolean hasViewStagingPermission =
 			(group.isStagingGroup() || group.isStagedRemotely()) &&
@@ -1703,6 +1695,13 @@ public class ServicePreAction extends Action {
 			hasViewStagingPermission) {
 
 			hasViewLayoutPermission = true;
+		}
+
+		String controlPanelCategory = null;
+
+		if (group.isControlPanel()) {
+			controlPanelCategory = ParamUtil.getString(
+				request, "controlPanelCategory");
 		}
 
 		List<Layout> accessibleLayouts = new ArrayList<Layout>();
