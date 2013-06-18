@@ -399,13 +399,13 @@ public class PortalMessages {
 
 		try {
 			map = (Map<String, Object>)session.getAttribute(
-				WebKeys.LIFERAY_SHARED_PORTAL_MESSAGES);
+				WebKeys.PORTAL_MESSAGES);
 
 			if ((map == null) && createIfAbsent) {
 				map = new LinkedHashMap<String, Object>();
 
 				session.setAttribute(
-					WebKeys.LIFERAY_SHARED_PORTAL_MESSAGES, map);
+					WebKeys.PORTAL_MESSAGES, map);
 			}
 		}
 		catch (IllegalStateException ise) {
@@ -424,13 +424,13 @@ public class PortalMessages {
 
 		try {
 			map = (Map<String, Object>)portletSession.getAttribute(
-				WebKeys.LIFERAY_SHARED_PORTAL_MESSAGES);
+				WebKeys.PORTAL_MESSAGES);
 
 			if ((map == null) && createIfAbsent) {
 				map = new LinkedHashMap<String, Object>();
 
 				portletSession.setAttribute(
-					WebKeys.LIFERAY_SHARED_PORTAL_MESSAGES, map);
+					WebKeys.PORTAL_MESSAGES, map);
 			}
 		}
 		catch (IllegalStateException ise) {
