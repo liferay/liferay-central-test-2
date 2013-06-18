@@ -166,7 +166,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\b*.xml"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
@@ -175,13 +175,13 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, true);
 
 			newContent = fixAntXMLProjectName(basedir, fileName, newContent);
 
-			Document document = getSaxReaderUtil().read(newContent);
+			Document document = saxReaderUtil.read(newContent);
 
 			Element rootElement = document.getRootElement();
 
@@ -208,9 +208,9 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			}
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
@@ -221,7 +221,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		String basedir =
 			"./portal-impl/src/com/liferay/portal/events/dependencies/";
 
-		if (!getFileUtil().exists(basedir)) {
+		if (!fileUtil.exists(basedir)) {
 			return;
 		}
 
@@ -231,25 +231,25 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		directoryScanner.setExcludes(getExcludes());
 		directoryScanner.setIncludes(new String[] {"**\\*structures.xml"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, false);
 
 			newContent = formatDDLStructuresXML(content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
 				fileName = StringUtil.replace(
 					fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
@@ -257,7 +257,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected String formatDDLStructuresXML(String content)
 		throws DocumentException, IOException {
 
-		Document document = getSaxReaderUtil().read(content);
+		Document document = saxReaderUtil.read(content);
 
 		Element rootElement = document.getRootElement();
 
@@ -304,13 +304,13 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\*routes.xml"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			if (content.contains("<!-- SourceFormatter.Ignore -->")) {
 				continue;
@@ -321,12 +321,12 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			newContent = formatFriendlyURLRoutesXML(content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
 				fileName = StringUtil.replace(
 					fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
@@ -334,7 +334,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected String formatFriendlyURLRoutesXML(String content)
 		throws DocumentException {
 
-		Document document = getSaxReaderUtil().read(content);
+		Document document = saxReaderUtil.read(content);
 
 		Element rootElement = document.getRootElement();
 
@@ -462,14 +462,14 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			File file = new File(
 				basedir + "portal-web/docroot/WEB-INF/portlet-custom.xml");
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = formatPortletXML(content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(file.toString(), file);
+				sourceFormatterHelper.printError(file.toString(), file);
 			}
 		}
 		else {
@@ -479,25 +479,25 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			directoryScanner.setExcludes(getExcludes());
 			directoryScanner.setIncludes(new String[] {"**\\portlet.xml"});
 
-			List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+			List<String> fileNames = sourceFormatterHelper.scanForFiles(
 				directoryScanner);
 
 			for (String fileName : fileNames) {
 				File file = new File(basedir + fileName);
 
-				String content = getFileUtil().read(file);
+				String content = fileUtil.read(file);
 
 				String newContent = trimContent(content, false);
 
 				newContent = formatPortletXML(content);
 
 				if ((newContent != null) && !content.equals(newContent)) {
-					getFileUtil().write(file, newContent);
+					fileUtil.write(file, newContent);
 
 					fileName = StringUtil.replace(
 						fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-					getSourceFormatterHelper().printError(fileName, file);
+					sourceFormatterHelper.printError(fileName, file);
 				}
 			}
 		}
@@ -506,7 +506,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected String formatPortletXML(String content)
 		throws DocumentException, IOException {
 
-		Document document = getSaxReaderUtil().read(content);
+		Document document = saxReaderUtil.read(content);
 
 		Element rootElement = document.getRootElement();
 
@@ -538,7 +538,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		directoryScanner.setExcludes(getExcludes());
 		directoryScanner.setIncludes(new String[] {"**\\service.xml"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
@@ -547,16 +547,16 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, false);
 
 			formatServiceXML(fileName, content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
@@ -564,7 +564,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected void formatServiceXML(String fileName, String content)
 		throws DocumentException {
 
-		Document document = getSaxReaderUtil().read(content);
+		Document document = saxReaderUtil.read(content);
 
 		Element rootElement = document.getRootElement();
 
@@ -653,11 +653,11 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		File file = new File(basedir + fileName);
 
-		String content = getFileUtil().read(file);
+		String content = fileUtil.read(file);
 
 		String newContent = trimContent(content, false);
 
-		Document document = getSaxReaderUtil().read(newContent);
+		Document document = saxReaderUtil.read(newContent);
 
 		Element rootElement = document.getRootElement();
 
@@ -682,9 +682,9 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		}
 
 		if ((newContent != null) && !content.equals(newContent)) {
-			getFileUtil().write(file, newContent);
+			fileUtil.write(file, newContent);
 
-			getSourceFormatterHelper().printError(fileName, file);
+			sourceFormatterHelper.printError(fileName, file);
 		}
 	}
 
@@ -699,11 +699,11 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		File file = new File(basedir + fileName);
 
-		String content = getFileUtil().read(file);
+		String content = fileUtil.read(file);
 
 		String newContent = trimContent(content, false);
 
-		Document document = getSaxReaderUtil().read(newContent);
+		Document document = saxReaderUtil.read(newContent);
 
 		Element rootElement = document.getRootElement();
 
@@ -726,9 +726,9 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		}
 
 		if ((newContent != null) && !content.equals(newContent)) {
-			getFileUtil().write(file, newContent);
+			fileUtil.write(file, newContent);
 
-			getSourceFormatterHelper().printError(fileName, file);
+			sourceFormatterHelper.printError(fileName, file);
 		}
 	}
 
@@ -738,7 +738,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		if (isPortalSource()) {
 			Properties properties = new Properties();
 
-			String propertiesContent = getFileUtil().read(
+			String propertiesContent = fileUtil.read(
 				basedir + "portal-impl/src/portal.properties");
 
 			PropertiesUtil.load(properties, propertiesContent);
@@ -772,7 +772,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			File file = new File(
 				basedir + "portal-web/docroot/WEB-INF/web.xml");
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, false);
 
@@ -819,7 +819,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 					newContent.substring(y);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
 				System.out.println(file);
 			}
@@ -834,11 +834,11 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			directoryScanner.setExcludes(getExcludes());
 			directoryScanner.setIncludes(new String[] {"**\\web.xml"});
 
-			List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+			List<String> fileNames = sourceFormatterHelper.scanForFiles(
 				directoryScanner);
 
 			for (String fileName : fileNames) {
-				String content = getFileUtil().read(basedir + fileName);
+				String content = fileUtil.read(basedir + fileName);
 
 				if (content.equals(webXML)) {
 					fileName = StringUtil.replace(

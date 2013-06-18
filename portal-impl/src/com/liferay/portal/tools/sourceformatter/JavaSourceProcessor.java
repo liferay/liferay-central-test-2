@@ -522,7 +522,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			if (isGenerated(content) &&
 				!fileName.endsWith("JavadocFormatter.java")) {
@@ -769,9 +769,9 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			}
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
@@ -2184,8 +2184,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
-		fileNames.addAll(
-			getSourceFormatterHelper().scanForFiles(directoryScanner));
+		fileNames.addAll(sourceFormatterHelper.scanForFiles(directoryScanner));
 
 		return fileNames;
 	}
@@ -2243,7 +2242,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
-		fileNames.addAll(getSourceFormatterHelper().scanForFiles(directoryScanner));
+		fileNames.addAll(sourceFormatterHelper.scanForFiles(directoryScanner));
 
 		directoryScanner = new DirectoryScanner();
 
@@ -2283,8 +2282,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				"**\\util-bridges\\**\\*.java"
 			});
 
-		fileNames.addAll(
-			getSourceFormatterHelper().scanForFiles(directoryScanner));
+		fileNames.addAll(sourceFormatterHelper.scanForFiles(directoryScanner));
 
 		return fileNames;
 	}

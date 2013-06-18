@@ -53,7 +53,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 		doFormat();
 
-		_sourceFormatterHelper.close();
+		sourceFormatterHelper.close();
 	}
 
 	@Override
@@ -212,7 +212,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			String fileName, String content, Pattern pattern)
 		throws IOException {
 
-		String fileExtension = _fileUtil.getExtension(fileName);
+		String fileExtension = fileUtil.getExtension(fileName);
 
 		if (!_portalSource || fileExtension.equals("vm")) {
 			return;
@@ -401,21 +401,21 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	}
 
 	protected String getCopyright() throws IOException {
-		String copyright = _fileUtil.read("copyright.txt");
+		String copyright = fileUtil.read("copyright.txt");
 
 		if (Validator.isNull(copyright)) {
-			copyright = _fileUtil.read("../copyright.txt");
+			copyright = fileUtil.read("../copyright.txt");
 		}
 
 		if (Validator.isNull(copyright)) {
-			copyright = _fileUtil.read("../../copyright.txt");
+			copyright = fileUtil.read("../../copyright.txt");
 		}
 
 		return copyright;
 	}
 
 	protected String getCustomCopyright(File file) throws IOException {
-		String absolutePath = _fileUtil.getAbsolutePath(file);
+		String absolutePath = fileUtil.getAbsolutePath(file);
 
 		for (int x = absolutePath.length();;) {
 			x = absolutePath.lastIndexOf(StringPool.SLASH, x);
@@ -424,7 +424,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 				break;
 			}
 
-			String copyright = _fileUtil.read(
+			String copyright = fileUtil.read(
 				absolutePath.substring(0, x + 1) + "copyright.txt");
 
 			if (Validator.isNotNull(copyright)) {
@@ -439,10 +439,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 	protected String[] getExcludes() {
 		return _excludes;
-	}
-
-	protected FileImpl getFileUtil() {
-		return _fileUtil;
 	}
 
 	protected Pattern getLanguageKeyPattern() {
@@ -511,29 +507,21 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	}
 
 	protected String getOldCopyright() throws IOException {
-		String copyright = _fileUtil.read("old-copyright.txt");
+		String copyright = fileUtil.read("old-copyright.txt");
 
 		if (Validator.isNull(copyright)) {
-			copyright = _fileUtil.read("../old-copyright.txt");
+			copyright = fileUtil.read("../old-copyright.txt");
 		}
 
 		if (Validator.isNull(copyright)) {
-			copyright = _fileUtil.read("../../old-copyright.txt");
+			copyright = fileUtil.read("../../old-copyright.txt");
 		}
 
 		return copyright;
 	}
 
-	protected SAXReaderImpl getSaxReaderUtil() {
-		return _saxReaderUtil;
-	}
-
 	protected Pattern getSessionKeyPattern() {
 		return _sessionKeyPattern;
-	}
-
-	protected SourceFormatterHelper getSourceFormatterHelper() {
-		return _sourceFormatterHelper;
 	}
 
 	protected Pattern getTaglibSessionKeyPattern() {
@@ -605,7 +593,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			_errorMessages.add(message);
 		}
 		else {
-			_sourceFormatterHelper.printError(fileName, message);
+			sourceFormatterHelper.printError(fileName, message);
 		}
 	}
 
@@ -735,14 +723,20 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return line;
 	}
 
+	protected static FileImpl fileUtil = FileImpl.getInstance();
+
+	protected static SAXReaderImpl saxReaderUtil = SAXReaderImpl.getInstance();
+
+	protected static SourceFormatterHelper sourceFormatterHelper;
+
 	private void _init(boolean useProperties, boolean throwException)
 		throws IOException {
 
 		_errorMessages = new ArrayList<String>();
 
-		_sourceFormatterHelper = new SourceFormatterHelper(useProperties);
+		sourceFormatterHelper = new SourceFormatterHelper(useProperties);
 
-		_sourceFormatterHelper.init();
+		sourceFormatterHelper.init();
 
 		if (_initialized) {
 			return;
@@ -754,7 +748,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 		String basedir = "./";
 
-		if (_fileUtil.exists(basedir + "portal-impl")) {
+		if (fileUtil.exists(basedir + "portal-impl")) {
 			_portalSource = true;
 		}
 		else {
@@ -768,18 +762,15 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 	private static List<String> _errorMessages = new ArrayList<String>();
 	private static String[] _excludes;
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static boolean _initialized;
 	private static Pattern _languageKeyPattern = Pattern.compile(
 		"LanguageUtil.(?:get|format)\\([^;%]+|Liferay.Language.get\\('([^']+)");
 	private static Properties _portalLanguageKeysProperties;
 	private static boolean _portalSource;
-	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 	private static Pattern _sessionKeyPattern = Pattern.compile(
 		"SessionErrors.(?:add|contains|get)\\([^;%&|!]+|".concat(
 			"SessionMessages.(?:add|contains|get)\\([^;%&|!]+"),
 		Pattern.MULTILINE);
-	private static SourceFormatterHelper _sourceFormatterHelper;
 	private static Pattern _taglibSessionKeyPattern = Pattern.compile(
 		"<liferay-ui:error [^>]+>|<liferay-ui:success [^>]+>",
 		Pattern.MULTILINE);

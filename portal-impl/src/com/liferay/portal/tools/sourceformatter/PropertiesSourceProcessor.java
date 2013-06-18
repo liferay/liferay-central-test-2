@@ -47,7 +47,7 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 			File portalPortalPropertiesFile = new File(
 				basedir + "portal-impl/src/portal.properties");
 
-			portalPortalProperties = getFileUtil().read(
+			portalPortalProperties = fileUtil.read(
 				portalPortalPropertiesFile);
 		}
 		else {
@@ -79,7 +79,7 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setExcludes(excludes);
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
@@ -88,7 +88,7 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			formatPortalProperties(fileName, content, portalPortalProperties);
 		}

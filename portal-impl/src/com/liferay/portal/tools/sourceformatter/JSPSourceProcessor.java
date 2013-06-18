@@ -250,7 +250,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		directoryScanner.setIncludes(
 			new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
@@ -259,7 +259,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			_jspContents.put(fileName, content);
 		}
@@ -272,7 +272,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String oldContent = content;
 			String newContent = StringPool.BLANK;
@@ -367,9 +367,9 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 			checkXSS(fileName, newContent);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}

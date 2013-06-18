@@ -51,7 +51,7 @@ public class JSSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\*.js"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
@@ -60,7 +60,7 @@ public class JSSourceProcessor extends BaseSourceProcessor {
 			fileName = StringUtil.replace(
 				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, false);
 
@@ -106,9 +106,9 @@ public class JSSourceProcessor extends BaseSourceProcessor {
 			checkLanguageKeys(fileName, newContent, getLanguageKeyPattern());
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}

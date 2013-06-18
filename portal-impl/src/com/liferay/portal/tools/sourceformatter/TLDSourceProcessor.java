@@ -47,23 +47,23 @@ public class TLDSourceProcessor extends BaseSourceProcessor {
 
 		directoryScanner.setIncludes(new String[] {"**\\*.tld"});
 
-		List<String> fileNames = getSourceFormatterHelper().scanForFiles(
+		List<String> fileNames = sourceFormatterHelper.scanForFiles(
 			directoryScanner);
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
 
-			String content = getFileUtil().read(file);
+			String content = fileUtil.read(file);
 
 			String newContent = trimContent(content, false);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				getFileUtil().write(file, newContent);
+				fileUtil.write(file, newContent);
 
 				fileName = StringUtil.replace(
 					fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
-				getSourceFormatterHelper().printError(fileName, file);
+				sourceFormatterHelper.printError(fileName, file);
 			}
 		}
 	}
