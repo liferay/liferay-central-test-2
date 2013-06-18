@@ -27,11 +27,11 @@ AUI.add(
 		 * content {string}: The content of the toolbar.
 		 *
 		 * Optional
+		 * animationConfig {Object}: The Transition config, defaults to {easing: 'ease-out', duration: 2, top: '50px'}. If 'left' property is not specified, it will be automatically calculated.
 		 * closeText {string}: Use for the "close" button. Set to false to not have a close button. If set to false but in the provided markup (via content property) there is an element with class "close", a click listener on this element will be added. As result, the notice will be closed.
-		 * toggleText {object}: The text to use for the "hide" and "show" button. Set to false to not have a hide button.
 		 * noticeClass {string}: A class to add to the notice toolbar.
 		 * timeout {Number}: The timeout in milliseconds, after it the notice will be automatically closed. Set it to -1, or do not add this property to disable this functionality.
-		 * animationConfig {Object}: The Transition config, defaults to {easing: 'ease-out', duration: 2, top: '50px'}. If 'left' property is not specified, it will be automatically calculated.
+		 * toggleText {object}: The text to use for the "hide" and "show" button. Set to false to not have a hide button.
 		 * useAnimation {boolean}: To animate show/hide of the notice, defaults to true. If useAnimation is set to true, but there is no timeout, 5000 will be used as timeout.
 		 *
 		 * Callbacks
@@ -43,12 +43,12 @@ AUI.add(
 
 			options = options || {};
 
+			instance._closeText = options.closeText;
 			instance._node = options.node;
 			instance._noticeType = options.type || 'notice';
 			instance._noticeClass = 'alert-block popup-alert-notice';
-			instance._useCloseButton = true;
 			instance._onClose = options.onClose;
-			instance._closeText = options.closeText;
+			instance._useCloseButton = true;
 
 			if (options.useAnimation && !Lang.isNumber(options.timeout)) {
 				options.timeout = 5000;
