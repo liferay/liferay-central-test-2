@@ -190,8 +190,8 @@ AUI.add(
 							uploadingFileXofXText: Liferay.Language.get('uploading-file-x-of-x'),
 							uploadingText: Liferay.Language.get('uploading'),
 							uploadsCompleteText: Liferay.Language.get('all-files-ready-to-be-saved'),
-							warningText: Liferay.Language.get('the-following-data-will-not-be-imported'),
 							warningFailureText: Liferay.Language.get('consider-that-the-following-data-would-not-have-been-imported-either'),
+							warningText: Liferay.Language.get('the-following-data-will-not-be-imported'),
 							xFilesReadyText: Liferay.Language.get('x-files-ready-to-be-uploaded'),
 							xFilesSelectedText: Liferay.Language.get('x-files-selected'),
 							zeroByteSizeText: Liferay.Language.get('the-file-contains-no-data-and-cannot-be-uploaded.-please-use-the-classic-uploader')
