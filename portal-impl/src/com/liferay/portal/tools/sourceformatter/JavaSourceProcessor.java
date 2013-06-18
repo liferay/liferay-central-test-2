@@ -56,80 +56,80 @@ import org.apache.tools.ant.DirectoryScanner;
  */
 public class JavaSourceProcessor extends BaseSourceProcessor {
 
-	public static final int _TYPE_CLASS_PRIVATE = 24;
+	public static final int TYPE_CLASS_PRIVATE = 24;
 
-	public static final int _TYPE_CLASS_PRIVATE_STATIC = 23;
+	public static final int TYPE_CLASS_PRIVATE_STATIC = 23;
 
-	public static final int _TYPE_CLASS_PROTECTED = 16;
+	public static final int TYPE_CLASS_PROTECTED = 16;
 
-	public static final int _TYPE_CLASS_PROTECTED_STATIC = 15;
+	public static final int TYPE_CLASS_PROTECTED_STATIC = 15;
 
-	public static final int _TYPE_CLASS_PUBLIC = 8;
+	public static final int TYPE_CLASS_PUBLIC = 8;
 
-	public static final int _TYPE_CLASS_PUBLIC_STATIC = 7;
+	public static final int TYPE_CLASS_PUBLIC_STATIC = 7;
 
-	public static final int[] _TYPE_CONSTRUCTOR = {
-		JavaSourceProcessor._TYPE_CONSTRUCTOR_PRIVATE,
-		JavaSourceProcessor._TYPE_CONSTRUCTOR_PROTECTED,
-		JavaSourceProcessor._TYPE_CONSTRUCTOR_PUBLIC
+	public static final int[] TYPE_CONSTRUCTOR = {
+		JavaSourceProcessor.TYPE_CONSTRUCTOR_PRIVATE,
+		JavaSourceProcessor.TYPE_CONSTRUCTOR_PROTECTED,
+		JavaSourceProcessor.TYPE_CONSTRUCTOR_PUBLIC
 	};
 
-	public static final int _TYPE_CONSTRUCTOR_PRIVATE = 18;
+	public static final int TYPE_CONSTRUCTOR_PRIVATE = 18;
 
-	public static final int _TYPE_CONSTRUCTOR_PROTECTED = 10;
+	public static final int TYPE_CONSTRUCTOR_PROTECTED = 10;
 
-	public static final int _TYPE_CONSTRUCTOR_PUBLIC = 4;
+	public static final int TYPE_CONSTRUCTOR_PUBLIC = 4;
 
-	public static final int[] _TYPE_METHOD = {
-		JavaSourceProcessor._TYPE_METHOD_PRIVATE,
-		JavaSourceProcessor._TYPE_METHOD_PRIVATE_STATIC,
-		JavaSourceProcessor._TYPE_METHOD_PROTECTED,
-		JavaSourceProcessor._TYPE_METHOD_PROTECTED_STATIC,
-		JavaSourceProcessor._TYPE_METHOD_PUBLIC,
-		JavaSourceProcessor._TYPE_METHOD_PUBLIC_STATIC
+	public static final int[] TYPE_METHOD = {
+		JavaSourceProcessor.TYPE_METHOD_PRIVATE,
+		JavaSourceProcessor.TYPE_METHOD_PRIVATE_STATIC,
+		JavaSourceProcessor.TYPE_METHOD_PROTECTED,
+		JavaSourceProcessor.TYPE_METHOD_PROTECTED_STATIC,
+		JavaSourceProcessor.TYPE_METHOD_PUBLIC,
+		JavaSourceProcessor.TYPE_METHOD_PUBLIC_STATIC
 	};
 
-	public static final int _TYPE_METHOD_PRIVATE = 19;
+	public static final int TYPE_METHOD_PRIVATE = 19;
 
-	public static final int _TYPE_METHOD_PRIVATE_STATIC = 17;
+	public static final int TYPE_METHOD_PRIVATE_STATIC = 17;
 
-	public static final int _TYPE_METHOD_PROTECTED = 11;
+	public static final int TYPE_METHOD_PROTECTED = 11;
 
-	public static final int _TYPE_METHOD_PROTECTED_STATIC = 9;
+	public static final int TYPE_METHOD_PROTECTED_STATIC = 9;
 
-	public static final int _TYPE_METHOD_PUBLIC = 5;
+	public static final int TYPE_METHOD_PUBLIC = 5;
 
-	public static final int _TYPE_METHOD_PUBLIC_STATIC = 3;
+	public static final int TYPE_METHOD_PUBLIC_STATIC = 3;
 
-	public static final int[] _TYPE_VARIABLE = {
-		JavaSourceProcessor._TYPE_VARIABLE_PRIVATE,
-		JavaSourceProcessor._TYPE_VARIABLE_PRIVATE_STATIC,
-		JavaSourceProcessor._TYPE_VARIABLE_PRIVATE_STATIC_FINAL,
-		JavaSourceProcessor._TYPE_VARIABLE_PROTECTED,
-		JavaSourceProcessor._TYPE_VARIABLE_PROTECTED_STATIC,
-		JavaSourceProcessor._TYPE_VARIABLE_PROTECTED_STATIC_FINAL,
-		JavaSourceProcessor._TYPE_VARIABLE_PUBLIC,
-		JavaSourceProcessor._TYPE_VARIABLE_PUBLIC_STATIC,
-		JavaSourceProcessor._TYPE_VARIABLE_PUBLIC_STATIC_FINAL
+	public static final int[] TYPE_VARIABLE = {
+		JavaSourceProcessor.TYPE_VARIABLE_PRIVATE,
+		JavaSourceProcessor.TYPE_VARIABLE_PRIVATE_STATIC,
+		JavaSourceProcessor.TYPE_VARIABLE_PRIVATE_STATIC_FINAL,
+		JavaSourceProcessor.TYPE_VARIABLE_PROTECTED,
+		JavaSourceProcessor.TYPE_VARIABLE_PROTECTED_STATIC,
+		JavaSourceProcessor.TYPE_VARIABLE_PROTECTED_STATIC_FINAL,
+		JavaSourceProcessor.TYPE_VARIABLE_PUBLIC,
+		JavaSourceProcessor.TYPE_VARIABLE_PUBLIC_STATIC,
+		JavaSourceProcessor.TYPE_VARIABLE_PUBLIC_STATIC_FINAL
 	};
 
-	public static final int _TYPE_VARIABLE_PRIVATE = 22;
+	public static final int TYPE_VARIABLE_PRIVATE = 22;
 
-	public static final int _TYPE_VARIABLE_PRIVATE_STATIC = 21;
+	public static final int TYPE_VARIABLE_PRIVATE_STATIC = 21;
 
-	public static final int _TYPE_VARIABLE_PRIVATE_STATIC_FINAL = 20;
+	public static final int TYPE_VARIABLE_PRIVATE_STATIC_FINAL = 20;
 
-	public static final int _TYPE_VARIABLE_PROTECTED = 14;
+	public static final int TYPE_VARIABLE_PROTECTED = 14;
 
-	public static final int _TYPE_VARIABLE_PROTECTED_STATIC = 13;
+	public static final int TYPE_VARIABLE_PROTECTED_STATIC = 13;
 
-	public static final int _TYPE_VARIABLE_PROTECTED_STATIC_FINAL = 12;
+	public static final int TYPE_VARIABLE_PROTECTED_STATIC_FINAL = 12;
 
-	public static final int _TYPE_VARIABLE_PUBLIC = 6;
+	public static final int TYPE_VARIABLE_PUBLIC = 6;
 
-	public static final int _TYPE_VARIABLE_PUBLIC_STATIC = 2;
+	public static final int TYPE_VARIABLE_PUBLIC_STATIC = 2;
 
-	public static final int _TYPE_VARIABLE_PUBLIC_STATIC_FINAL = 1;
+	public static final int TYPE_VARIABLE_PUBLIC_STATIC_FINAL = 1;
 
 	public static String stripJavaImports(
 			String content, String packageDir, String className)
@@ -865,7 +865,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		if (previousJavaTerm.getType() != javaTerm.getType()) {
 			requiresEmptyLine = true;
 		}
-		else if (!isInJavaTermTypeGroup(javaTerm.getType(), _TYPE_VARIABLE)) {
+		else if (!isInJavaTermTypeGroup(javaTerm.getType(), TYPE_VARIABLE)) {
 			requiresEmptyLine = true;
 		}
 		else if (previousJavaTermName.equals(
@@ -880,7 +880,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			requiresEmptyLine = true;
 		}
 		else if ((previousJavaTerm.getType() ==
-					_TYPE_VARIABLE_PRIVATE_STATIC) &&
+					TYPE_VARIABLE_PRIVATE_STATIC) &&
 				 (previousJavaTermName.equals("_log") ||
 				  previousJavaTermName.equals("_instance"))) {
 
@@ -1075,9 +1075,9 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 					if (Validator.isNotNull(javaTermName)) {
 						if (isInJavaTermTypeGroup(
-								javaTermType, _TYPE_CONSTRUCTOR) ||
+								javaTermType, TYPE_CONSTRUCTOR) ||
 							isInJavaTermTypeGroup(
-								javaTermType, _TYPE_METHOD)) {
+								javaTermType, TYPE_METHOD)) {
 
 							readParameterTypes = true;
 
@@ -1872,33 +1872,33 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			 (line.endsWith(StringPool.SEMICOLON) && (pos == -1)))) {
 
 			return new Tuple(
-				getVariableName(line), _TYPE_VARIABLE_PUBLIC_STATIC_FINAL);
+				getVariableName(line), TYPE_VARIABLE_PUBLIC_STATIC_FINAL);
 		}
 		else if (line.startsWith(StringPool.TAB + "public static ")) {
 			if (line.contains(StringPool.EQUAL) ||
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
 				return new Tuple(
-					getVariableName(line), _TYPE_VARIABLE_PUBLIC_STATIC);
+					getVariableName(line), TYPE_VARIABLE_PUBLIC_STATIC);
 			}
 
 			if (pos != -1) {
 				return new Tuple(
 					getConstructorOrMethodName(line, pos),
-					_TYPE_METHOD_PUBLIC_STATIC);
+					TYPE_METHOD_PUBLIC_STATIC);
 			}
 
 			if (line.startsWith(StringPool.TAB + "public static class ") ||
 				line.startsWith(StringPool.TAB + "public static enum")) {
 
-				return new Tuple(getClassName(line), _TYPE_CLASS_PUBLIC_STATIC);
+				return new Tuple(getClassName(line), TYPE_CLASS_PUBLIC_STATIC);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "public ")) {
 			if (line.contains(StringPool.EQUAL) ||
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
-				return new Tuple(getVariableName(line), _TYPE_VARIABLE_PUBLIC);
+				return new Tuple(getVariableName(line), TYPE_VARIABLE_PUBLIC);
 			}
 
 			if (pos != -1) {
@@ -1908,19 +1908,19 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				if (spaceCount == 1) {
 					return new Tuple(
 						getConstructorOrMethodName(line, pos),
-						_TYPE_CONSTRUCTOR_PUBLIC);
+						TYPE_CONSTRUCTOR_PUBLIC);
 				}
 
 				if (spaceCount > 1) {
 					return new Tuple(
 						getConstructorOrMethodName(line, pos),
-						_TYPE_METHOD_PUBLIC);
+						TYPE_METHOD_PUBLIC);
 				}
 			}
 			else if (line.startsWith(StringPool.TAB + "public class ") ||
 					 line.startsWith(StringPool.TAB + "public enum")) {
 
-				return new Tuple(getClassName(line), _TYPE_CLASS_PUBLIC);
+				return new Tuple(getClassName(line), TYPE_CLASS_PUBLIC);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "protected static final ")) {
@@ -1929,7 +1929,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 				return new Tuple(
 					getVariableName(line),
-					_TYPE_VARIABLE_PROTECTED_STATIC_FINAL);
+					TYPE_VARIABLE_PROTECTED_STATIC_FINAL);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "protected static ")) {
@@ -1937,20 +1937,20 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
 				return new Tuple(
-					getVariableName(line), _TYPE_VARIABLE_PROTECTED_STATIC);
+					getVariableName(line), TYPE_VARIABLE_PROTECTED_STATIC);
 			}
 
 			if (pos != -1) {
 				return new Tuple(
 					getConstructorOrMethodName(line, pos),
-					_TYPE_METHOD_PROTECTED_STATIC);
+					TYPE_METHOD_PROTECTED_STATIC);
 			}
 
 			if (line.startsWith(StringPool.TAB + "protected static class ") ||
 				line.startsWith(StringPool.TAB + "protected static enum ")) {
 
 				return new Tuple(
-					getClassName(line), _TYPE_CLASS_PROTECTED_STATIC);
+					getClassName(line), TYPE_CLASS_PROTECTED_STATIC);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "protected ")) {
@@ -1962,30 +1962,30 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 					if (spaceCount == 1) {
 						return new Tuple(
 							getConstructorOrMethodName(line, pos),
-							_TYPE_CONSTRUCTOR_PROTECTED);
+							TYPE_CONSTRUCTOR_PROTECTED);
 					}
 
 					if (spaceCount > 1) {
 						return new Tuple(
 							getConstructorOrMethodName(line, pos),
-							_TYPE_METHOD_PROTECTED);
+							TYPE_METHOD_PROTECTED);
 					}
 				}
 			}
 			else if (line.startsWith(StringPool.TAB + "protected class ") ||
 					 line.startsWith(StringPool.TAB + "protected enum ")) {
 
-				return new Tuple(getClassName(line), _TYPE_CLASS_PROTECTED);
+				return new Tuple(getClassName(line), TYPE_CLASS_PROTECTED);
 			}
 
-			return new Tuple(getVariableName(line), _TYPE_VARIABLE_PROTECTED);
+			return new Tuple(getVariableName(line), TYPE_VARIABLE_PROTECTED);
 		}
 		else if (line.startsWith(StringPool.TAB + "private static final ")) {
 			if (line.contains(StringPool.EQUAL) ||
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
 				return new Tuple(
-					getVariableName(line), _TYPE_VARIABLE_PRIVATE_STATIC_FINAL);
+					getVariableName(line), TYPE_VARIABLE_PRIVATE_STATIC_FINAL);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "private static ")) {
@@ -1993,27 +1993,27 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
 				return new Tuple(
-					getVariableName(line), _TYPE_VARIABLE_PRIVATE_STATIC);
+					getVariableName(line), TYPE_VARIABLE_PRIVATE_STATIC);
 			}
 
 			if (pos != -1) {
 				return new Tuple(
 					getConstructorOrMethodName(line, pos),
-					_TYPE_METHOD_PRIVATE_STATIC);
+					TYPE_METHOD_PRIVATE_STATIC);
 			}
 
 			if (line.startsWith(StringPool.TAB + "private static class ") ||
 				line.startsWith(StringPool.TAB + "private static enum ")) {
 
 				return new Tuple(
-					getClassName(line), _TYPE_CLASS_PRIVATE_STATIC);
+					getClassName(line), TYPE_CLASS_PRIVATE_STATIC);
 			}
 		}
 		else if (line.startsWith(StringPool.TAB + "private ")) {
 			if (line.contains(StringPool.EQUAL) ||
 				(line.endsWith(StringPool.SEMICOLON) && (pos == -1))) {
 
-				return new Tuple(getVariableName(line), _TYPE_VARIABLE_PRIVATE);
+				return new Tuple(getVariableName(line), TYPE_VARIABLE_PRIVATE);
 			}
 
 			if (pos != -1) {
@@ -2023,19 +2023,19 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				if (spaceCount == 1) {
 					return new Tuple(
 						getConstructorOrMethodName(line, pos),
-						_TYPE_CONSTRUCTOR_PRIVATE);
+						TYPE_CONSTRUCTOR_PRIVATE);
 				}
 
 				if (spaceCount > 1) {
 					return new Tuple(
 						getConstructorOrMethodName(line, pos),
-						_TYPE_METHOD_PRIVATE);
+						TYPE_METHOD_PRIVATE);
 				}
 			}
 			else if (line.startsWith(StringPool.TAB + "private class ") ||
 					 line.startsWith(StringPool.TAB + "private enum ")) {
 
-				return new Tuple(getClassName(line), _TYPE_CLASS_PRIVATE);
+				return new Tuple(getClassName(line), TYPE_CLASS_PRIVATE);
 			}
 		}
 
