@@ -404,8 +404,7 @@ public class PortalMessages {
 			if ((map == null) && createIfAbsent) {
 				map = new LinkedHashMap<String, Object>();
 
-				session.setAttribute(
-					WebKeys.PORTAL_MESSAGES, map);
+				session.setAttribute(WebKeys.PORTAL_MESSAGES, map);
 			}
 		}
 		catch (IllegalStateException ise) {
@@ -429,8 +428,7 @@ public class PortalMessages {
 			if ((map == null) && createIfAbsent) {
 				map = new LinkedHashMap<String, Object>();
 
-				portletSession.setAttribute(
-					WebKeys.PORTAL_MESSAGES, map);
+				portletSession.setAttribute(WebKeys.PORTAL_MESSAGES, map);
 			}
 		}
 		catch (IllegalStateException ise) {
