@@ -316,7 +316,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	protected String fixSessionKey(
 		String fileName, String content, Pattern pattern) {
 
-		if (_version.equals(VERSION_6_1_0)) {
+		if (mainReleaseVersion.equals(MAIN_RELEASE_VERSION_6_1_0)) {
 			return content;
 		}
 
@@ -533,10 +533,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return _taglibSessionKeyPattern;
 	}
 
-	protected String getVersion() {
-		return _version;
-	}
-
 	protected boolean hasMissingParentheses(String s) {
 		if (Validator.isNull(s)) {
 			return false;
@@ -732,11 +728,12 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return line;
 	}
 
-	protected static final String VERSION_6_1_0 = "6.1.0";
+	protected static final String MAIN_RELEASE_VERSION_6_1_0 = "6.1.0";
 
-	protected static final String VERSION_6_2_0 = "6.2.0";
+	protected static final String MAIN_RELEASE_VERSION_6_2_0 = "6.2.0";
 
 	protected static FileImpl fileUtil = FileImpl.getInstance();
+	protected static String mainReleaseVersion;
 	protected static SAXReaderImpl saxReaderUtil = SAXReaderImpl.getInstance();
 	protected static SourceFormatterHelper sourceFormatterHelper;
 
@@ -777,10 +774,10 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		String releaseInfoVersion = ReleaseInfo.getVersion();
 
 		if (releaseInfoVersion.startsWith("6.1")) {
-			_version = VERSION_6_1_0;
+			mainReleaseVersion = MAIN_RELEASE_VERSION_6_1_0;
 		}
 		else if (releaseInfoVersion.startsWith("6.2")) {
-			_version = VERSION_6_2_0;
+			mainReleaseVersion = MAIN_RELEASE_VERSION_6_2_0;
 		}
 		else {
 			throw new Exception(
@@ -803,6 +800,5 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		"<liferay-ui:error [^>]+>|<liferay-ui:success [^>]+>",
 		Pattern.MULTILINE);
 	private static boolean _throwException;
-	private static String _version;
 
 }

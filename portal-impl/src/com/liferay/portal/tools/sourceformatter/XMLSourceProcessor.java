@@ -391,12 +391,12 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		sb.append("<?xml version=\"1.0\"?>\n");
 		sb.append("<!DOCTYPE routes PUBLIC \"-//Liferay//DTD Friendly URL ");
 		sb.append("Routes ");
-		sb.append(getVersion());
+		sb.append(mainReleaseVersion);
 		sb.append("//EN\" \"http://www.liferay.com/dtd/");
 		sb.append("liferay-friendly-url-routes_");
 		sb.append(
 			StringUtil.replace(
-				getVersion(), StringPool.PERIOD, StringPool.UNDERLINE));
+				mainReleaseVersion, StringPool.PERIOD, StringPool.UNDERLINE));
 		sb.append(".dtd\">\n\n<routes>\n");
 
 		for (ComparableRoute comparableRoute : comparableRoutes) {
