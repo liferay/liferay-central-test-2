@@ -214,9 +214,11 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		Long ddmStructureId = _ddmStructureIds.get(groupId + "#" + structureId);
 
 		if (ddmStructureId == null) {
-			_log.error(
-				"Unable to find the DDM structure ID with the key {groupId=" +
-					groupId + ", structureKey=" + structureId + "}");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to get the DDM structure ID for group " +
+						groupId + " and journal structure ID " + structureId);
+			}
 
 			return 0;
 		}
