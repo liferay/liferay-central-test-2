@@ -32,7 +32,7 @@ public interface Patcher {
 
 	public static final String PROPERTY_PATCH_DIRECTORY = "patch.directory";
 
-	public static final String PROPERTY_PATCH_LEVEL = "patch.level";
+	public static final String PROPERTY_PATCH_LEVELS = "patch.levels";
 
 	public boolean applyPatch(File patchFile);
 
@@ -42,7 +42,7 @@ public interface Patcher {
 
 	public File getPatchDirectory();
 
-	public String[] getPatchLevel();
+	public String[] getPatchLevels();
 
 	public Properties getProperties();
 

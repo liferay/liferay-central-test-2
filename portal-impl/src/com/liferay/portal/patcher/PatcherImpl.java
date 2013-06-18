@@ -116,17 +116,17 @@ public class PatcherImpl implements Patcher {
 	}
 
 	@Override
-	public String[] getPatchLevel() {
-		if (_patchLevel != null) {
-			return _patchLevel;
+	public String[] getPatchLevels() {
+		if (_patchLevels != null) {
+			return _patchLevels;
 		}
 
 		Properties properties = getProperties();
 
-		_patchLevel = StringUtil.split(
-			properties.getProperty(PROPERTY_PATCH_LEVEL));
+		_patchLevels = StringUtil.split(
+			properties.getProperty(PROPERTY_PATCH_LEVELS));
 
-		return _patchLevel;
+		return _patchLevels;
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class PatcherImpl implements Patcher {
 	private static String[] _fixedIssueKeys;
 	private static String[] _installedPatchNames;
 	private static File _patchDirectory;
-	private static String[] _patchLevel;
+	private static String[] _patchLevels;
 	private static Properties _properties;
 
 }
