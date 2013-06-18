@@ -39,7 +39,7 @@ public class CompanyTestUtil {
 			PropsValues.SHARD_DEFAULT_NAME, false, 0, true);
 	}
 
-	public static void resetCompanyLanguages(long companyId, String newLocales)
+	public static void resetCompanyLocales(long companyId, String languageIds)
 		throws Exception {
 
 		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
@@ -47,7 +47,7 @@ public class CompanyTestUtil {
 
 		LanguageUtil.resetAvailableLocales(companyId);
 
-		preferences.setValue(PropsKeys.LOCALES, newLocales);
+		preferences.setValue(PropsKeys.LOCALES, languageIds);
 
 		preferences.store();
 	}

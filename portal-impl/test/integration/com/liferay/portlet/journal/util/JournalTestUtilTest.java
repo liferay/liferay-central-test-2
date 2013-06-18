@@ -126,7 +126,7 @@ public class JournalTestUtilTest {
 	@Test
 	public void testAddDDMStructureWithNonexistingLocale() throws Exception {
 		try {
-			CompanyTestUtil.resetCompanyLanguages(
+			CompanyTestUtil.resetCompanyLocales(
 				PortalUtil.getDefaultCompanyId(), "en_US");
 
 			DDMStructureTestUtil.addStructure(
