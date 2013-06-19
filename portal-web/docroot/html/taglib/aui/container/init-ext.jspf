@@ -15,7 +15,7 @@
 --%>
 
 <%
-if (Validator.isNotNull(id) && (portletResponse != null)) {
+if ((portletResponse != null) && Validator.isNotNull(id)) {
 	id = portletResponse.getNamespace() + id;
 }
 %>

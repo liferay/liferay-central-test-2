@@ -24,7 +24,7 @@ else if (portletResponse != null) {
 	id = portletResponse.getNamespace() + id;
 }
 
-if (Validator.isNotNull(anchorId) && (portletResponse != null)) {
+if ((portletResponse != null) && Validator.isNotNull(anchorId)) {
 	anchorId = portletResponse.getNamespace() + anchorId;
 }
 
