@@ -51,27 +51,29 @@ public class ScopeFacet extends MultiValueFacet {
 
 	protected long[] addScopeGroup(long groupId) {
 		try {
-			List<Long> scopeLayoutGroupIds = new ArrayList<Long>();
+			List<Long> groupIds = new ArrayList<Long>();
 
-			scopeLayoutGroupIds.add(groupId);
+			groupIds.add(groupId);
 
-			for (Layout layout : LayoutLocalServiceUtil.getScopeGroupLayouts(
-					groupId, false)) {
+			List<Layout> publicLayouts =
+				LayoutLocalServiceUtil.getScopeGroupLayouts(groupId, false);
 
+			for (Layout layout :publicLayouts) {
 				Group group = layout.getScopeGroup();
 
-				scopeLayoutGroupIds.add(group.getGroupId());
+				groupIds.add(group.getGroupId());
 			}
 
-			for (Layout layout : LayoutLocalServiceUtil.getScopeGroupLayouts(
-					groupId, true)) {
+			List<Layout> privateLayouts =
+				LayoutLocalServiceUtil.getScopeGroupLayouts(groupId, true);
 
+			for (Layout layout : privateLayouts) {
 				Group group = layout.getScopeGroup();
 
-				scopeLayoutGroupIds.add(group.getGroupId());
+				groupIds.add(group.getGroupId());
 			}
 
-			return ArrayUtil.toLongArray(scopeLayoutGroupIds);
+			return ArrayUtil.toLongArray(groupIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
