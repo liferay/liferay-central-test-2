@@ -124,8 +124,15 @@ public class PortletDataContextAddReferenceElementTest {
 
 	@Test
 	public void testMultipleMissingNotMissingReference() throws Exception {
-		Element bookmarksEntryElement =
+		Element bookmarksEntryElement1 =
 			_portletDataContext.getExportDataElement(_bookmarksEntry);
+
+		_portletDataContext.addReferenceElement(
+			_bookmarksEntry, bookmarksEntryElement1, _bookmarksFolder,
+			PortletDataContext.REFERENCE_TYPE_PARENT, true);
+		_portletDataContext.addReferenceElement(
+			_bookmarksEntry, bookmarksEntryElement1, _bookmarksFolder,
+			PortletDataContext.REFERENCE_TYPE_PARENT, false);
 
 		BookmarksEntry bookmarksEntry = BookmarksTestUtil.addEntry(true);
 
@@ -133,14 +140,8 @@ public class PortletDataContextAddReferenceElementTest {
 			_portletDataContext.getExportDataElement(bookmarksEntry);
 
 		_portletDataContext.addReferenceElement(
-			_bookmarksEntry, bookmarksEntryElement, _bookmarksFolder,
-			PortletDataContext.REFERENCE_TYPE_PARENT, true);
-		_portletDataContext.addReferenceElement(
 			bookmarksEntry, bookmarksEntryElement2, _bookmarksFolder,
 			PortletDataContext.REFERENCE_TYPE_PARENT, true);
-		_portletDataContext.addReferenceElement(
-			_bookmarksEntry, bookmarksEntryElement, _bookmarksFolder,
-			PortletDataContext.REFERENCE_TYPE_PARENT, false);
 
 		Element missingReferencesElement =
 			_portletDataContext.getMissingReferencesElement();
