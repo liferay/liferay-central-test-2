@@ -14,6 +14,8 @@
 
 package com.liferay.portal.test;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.InitUtil;
 
@@ -46,8 +48,11 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 			DBUpgrader.upgrade();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		LiferayPersistenceIntegrationJUnitTestRunner.class);
 
 }
