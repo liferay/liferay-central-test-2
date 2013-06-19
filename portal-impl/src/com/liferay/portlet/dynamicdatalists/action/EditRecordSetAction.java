@@ -178,19 +178,19 @@ public class EditRecordSetAction extends PortletAction {
 			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			preferences.reset("displayDDMTemplateId");
-			preferences.reset("editable");
-			preferences.reset("formDDMTemplateId");
-			preferences.reset("spreadsheet");
+			portletPreferences.reset("displayDDMTemplateId");
+			portletPreferences.reset("editable");
+			portletPreferences.reset("formDDMTemplateId");
+			portletPreferences.reset("spreadsheet");
 
-			preferences.setValue(
+			portletPreferences.setValue(
 				"recordSetId", String.valueOf(recordSet.getRecordSetId()));
 
-			preferences.store();
+			portletPreferences.store();
 		}
 
 		return recordSet;

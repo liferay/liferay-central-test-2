@@ -136,11 +136,11 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Enumeration<String> enu = preferences.getNames();
+		Enumeration<String> enu = portletPreferences.getNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -150,7 +150,7 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 				name.startsWith(
 					PublicRenderParameterConfiguration.MAPPING_PREFIX)) {
 
-				preferences.reset(name);
+				portletPreferences.reset(name);
 			}
 		}
 
@@ -164,7 +164,8 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 				actionRequest, ignoreKey);
 
 			if (ignoreValue) {
-				preferences.setValue(ignoreKey, String.valueOf(Boolean.TRUE));
+				portletPreferences.setValue(
+					ignoreKey, String.valueOf(Boolean.TRUE));
 			}
 			else {
 				String mappingKey =
@@ -175,13 +176,13 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 					actionRequest, mappingKey);
 
 				if (Validator.isNotNull(mappingValue)) {
-					preferences.setValue(mappingKey, mappingValue);
+					portletPreferences.setValue(mappingKey, mappingValue);
 				}
 			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.store();
+			portletPreferences.store();
 		}
 	}
 

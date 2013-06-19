@@ -192,14 +192,14 @@ public class EditQuestionAction extends PortletAction {
 		Layout layout = LayoutLocalServiceUtil.getLayout(
 			themeDisplay.getRefererPlid());
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				layout, referringPortletResource, StringPool.BLANK);
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"questionId", String.valueOf(question.getQuestionId()));
 
-		preferences.store();
+		portletPreferences.store();
 
 		LiferayPortletConfig liferayPortletConfig =
 			(LiferayPortletConfig)portletConfig;

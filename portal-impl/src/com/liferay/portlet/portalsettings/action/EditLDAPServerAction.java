@@ -140,10 +140,10 @@ public class EditLDAPServerAction extends PortletAction {
 			}
 		}
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
 			companyId);
 
-		String ldapServerIds = preferences.getValue(
+		String ldapServerIds = portletPreferences.getValue(
 			"ldap.server.ids", StringPool.BLANK);
 
 		ldapServerIds = StringUtil.add(
@@ -162,7 +162,7 @@ public class EditLDAPServerAction extends PortletAction {
 
 		long ldapServerId = ParamUtil.getLong(actionRequest, "ldapServerId");
 
-		// Remove preferences
+		// Remove portletPreferences
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -174,14 +174,14 @@ public class EditLDAPServerAction extends PortletAction {
 
 		CompanyServiceUtil.removePreferences(themeDisplay.getCompanyId(), keys);
 
-		// Update preferences
+		// Update portletPreferences
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences(
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
 			themeDisplay.getCompanyId());
 
 		UnicodeProperties properties = new UnicodeProperties();
 
-		String ldapServerIds = preferences.getValue(
+		String ldapServerIds = portletPreferences.getValue(
 			"ldap.server.ids", StringPool.BLANK);
 
 		ldapServerIds = StringUtil.remove(

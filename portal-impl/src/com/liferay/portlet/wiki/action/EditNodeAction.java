@@ -251,22 +251,22 @@ public class EditNodeAction extends PortletAction {
 			ActionRequest actionRequest, String oldName, String newName)
 		throws Exception {
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
-		String hiddenNodes = preferences.getValue(
+		String hiddenNodes = portletPreferences.getValue(
 			"hiddenNodes", StringPool.BLANK);
-		String visibleNodes = preferences.getValue(
+		String visibleNodes = portletPreferences.getValue(
 			"visibleNodes", StringPool.BLANK);
 
 		String regex = oldName + ",?";
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"hiddenNodes", hiddenNodes.replaceFirst(regex, newName));
-		preferences.setValue(
+		portletPreferences.setValue(
 			"visibleNodes",
 			visibleNodes.replaceFirst(regex, newName));
 
-		preferences.store();
+		portletPreferences.store();
 	}
 
 }

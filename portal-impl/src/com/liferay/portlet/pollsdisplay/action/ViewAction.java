@@ -44,10 +44,11 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletPreferences preferences = renderRequest.getPreferences();
+			PortletPreferences portletPreferences =
+				renderRequest.getPreferences();
 
 			long questionId = GetterUtil.getLong(
-				preferences.getValue("questionId", StringPool.BLANK));
+				portletPreferences.getValue("questionId", StringPool.BLANK));
 
 			if (questionId > 0) {
 				PollsQuestion question = PollsQuestionServiceUtil.getQuestion(

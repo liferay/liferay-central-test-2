@@ -248,12 +248,13 @@ public class ForgotPasswordAction extends PortletAction {
 			}
 		}
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String languageId = LanguageUtil.getLanguageId(actionRequest);
 
-		String emailFromName = preferences.getValue("emailFromName", null);
-		String emailFromAddress = preferences.getValue(
+		String emailFromName = portletPreferences.getValue(
+			"emailFromName", null);
+		String emailFromAddress = portletPreferences.getValue(
 			"emailFromAddress", null);
 		String emailToAddress = user.getEmailAddress();
 
@@ -263,9 +264,9 @@ public class ForgotPasswordAction extends PortletAction {
 			emailParam = "emailPasswordReset";
 		}
 
-		String subject = preferences.getValue(
+		String subject = portletPreferences.getValue(
 			emailParam + "Subject_" + languageId, null);
-		String body = preferences.getValue(
+		String body = portletPreferences.getValue(
 			emailParam + "Body_" + languageId, null);
 
 		LoginUtil.sendPassword(

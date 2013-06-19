@@ -66,29 +66,29 @@ public class EditSharingAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("any-website")) {
-			updateAnyWebsite(actionRequest, preferences);
+			updateAnyWebsite(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("facebook")) {
-			updateFacebook(actionRequest, preferences);
+			updateFacebook(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("friends")) {
-			updateFriends(actionRequest, preferences);
+			updateFriends(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("opensocial-gadget")) {
-			updateGoogleGadget(actionRequest, preferences);
+			updateGoogleGadget(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("netvibes")) {
-			updateNetvibes(actionRequest, preferences);
+			updateNetvibes(actionRequest, portletPreferences);
 		}
 
-		preferences.store();
+		portletPreferences.store();
 
 		if (!SessionErrors.isEmpty(actionRequest)) {
 			return;
@@ -145,18 +145,18 @@ public class EditSharingAction extends EditConfigurationAction {
 	}
 
 	protected void updateAnyWebsite(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean widgetShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "widgetShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrWidgetShowAddAppLink", String.valueOf(widgetShowAddAppLink));
 	}
 
 	protected void updateFacebook(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		String facebookAPIKey = ParamUtil.getString(
@@ -166,44 +166,45 @@ public class EditSharingAction extends EditConfigurationAction {
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "facebookShowAddAppLink");
 
-		preferences.setValue("lfrFacebookApiKey", facebookAPIKey);
-		preferences.setValue("lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
-		preferences.setValue(
+		portletPreferences.setValue("lfrFacebookApiKey", facebookAPIKey);
+		portletPreferences.setValue(
+			"lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
+		portletPreferences.setValue(
 			"lfrFacebookShowAddAppLink",
 			String.valueOf(facebookShowAddAppLink));
 	}
 
 	protected void updateFriends(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean appShowShareWithFriendsLink = ParamUtil.getBoolean(
 			actionRequest, "appShowShareWithFriendsLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrAppShowShareWithFriendsLink",
 			String.valueOf(appShowShareWithFriendsLink));
 	}
 
 	protected void updateGoogleGadget(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean iGoogleShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "iGoogleShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrIgoogleShowAddAppLink", String.valueOf(iGoogleShowAddAppLink));
 	}
 
 	protected void updateNetvibes(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean netvibesShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "netvibesShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrNetvibesShowAddAppLink",
 			String.valueOf(netvibesShowAddAppLink));
 	}

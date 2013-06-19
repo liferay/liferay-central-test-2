@@ -648,13 +648,13 @@ public class EditFileEntryAction extends PortletAction {
 			PortletResponse portletResponse)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = portletRequest.getPreferences();
+		PortletPreferences portletPreferences = portletRequest.getPreferences();
 
 		String portletResource = ParamUtil.getString(
 			portletRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			preferences = PortletPreferencesFactoryUtil.getPortletSetup(
+			portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(
 				portletRequest, portletResource);
 		}
 
@@ -664,7 +664,7 @@ public class EditFileEntryAction extends PortletAction {
 			Set<String> extensions = new HashSet<String>();
 
 			String[] mimeTypes = DLUtil.getMediaGalleryMimeTypes(
-				preferences, portletRequest);
+				portletPreferences, portletRequest);
 
 			for (String mimeType : mimeTypes) {
 				extensions.addAll(MimeTypesUtil.getExtensions(mimeType));

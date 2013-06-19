@@ -300,22 +300,22 @@ public class EditTemplateAction extends PortletAction {
 			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
 			if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY)) {
-				preferences.setValue(
+				portletPreferences.setValue(
 					"displayDDMTemplateId",
 					String.valueOf(template.getTemplateId()));
 			}
 			else {
-				preferences.setValue(
+				portletPreferences.setValue(
 					"formDDMTemplateId",
 					String.valueOf(template.getTemplateId()));
 			}
 
-			preferences.store();
+			portletPreferences.store();
 		}
 
 		return template;

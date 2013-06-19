@@ -295,7 +295,7 @@ public class EditMessageAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -311,7 +311,7 @@ public class EditMessageAction extends PortletAction {
 		String body = ParamUtil.getString(actionRequest, "body");
 
 		String format = GetterUtil.getString(
-			preferences.getValue("messageFormat", null),
+			portletPreferences.getValue("messageFormat", null),
 			MBMessageConstants.DEFAULT_FORMAT);
 
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =

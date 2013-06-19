@@ -51,16 +51,18 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletPreferences preferences = renderRequest.getPreferences();
+			PortletPreferences portletPreferences =
+				renderRequest.getPreferences();
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			long nodeId = GetterUtil.getLong(
-				preferences.getValue("nodeId", StringPool.BLANK));
+				portletPreferences.getValue("nodeId", StringPool.BLANK));
 			String title = ParamUtil.getString(
 				renderRequest, "title",
-				preferences.getValue("title", WikiPageConstants.FRONT_PAGE));
+				portletPreferences.getValue(
+					"title", WikiPageConstants.FRONT_PAGE));
 			double version = ParamUtil.getDouble(renderRequest, "version");
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);

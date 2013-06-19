@@ -70,9 +70,10 @@ public class ExportArticleAction extends PortletAction {
 			String targetExtension = ParamUtil.getString(
 				actionRequest, "targetExtension");
 
-			PortletPreferences preferences = actionRequest.getPreferences();
+			PortletPreferences portletPreferences =
+				actionRequest.getPreferences();
 
-			String[] allowedExtensions = preferences.getValues(
+			String[] allowedExtensions = portletPreferences.getValues(
 				"extensions", null);
 
 			String languageId = LanguageUtil.getLanguageId(actionRequest);

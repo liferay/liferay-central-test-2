@@ -17,7 +17,6 @@ package com.liferay.portlet.journalcontent.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -50,7 +49,7 @@ public class ViewAction extends WebContentAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -59,7 +58,7 @@ public class ViewAction extends WebContentAction {
 
 		if (groupId <= 0) {
 			groupId = GetterUtil.getLong(
-				preferences.getValue("groupId", StringPool.BLANK));
+				portletPreferences.getValue("groupId", null));
 		}
 
 		String articleId = ParamUtil.getString(renderRequest, "articleId");
@@ -68,9 +67,9 @@ public class ViewAction extends WebContentAction {
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-				preferences.getValue("articleId", StringPool.BLANK));
+				portletPreferences.getValue("articleId", null));
 			ddmTemplateKey = GetterUtil.getString(
-				preferences.getValue("ddmTemplateKey", StringPool.BLANK));
+				portletPreferences.getValue("ddmTemplateKey", null));
 		}
 
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");

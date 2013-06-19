@@ -104,12 +104,13 @@ public class ViewAction extends PortletAction {
 		String layoutFullURL = PortalUtil.getLayoutFullURL(
 			layout, themeDisplay);
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, PortletKeys.INVITATION);
 
-		String subject = InvitationUtil.getEmailMessageSubject(preferences);
-		String body = InvitationUtil.getEmailMessageBody(preferences);
+		String subject = InvitationUtil.getEmailMessageSubject(
+			portletPreferences);
+		String body = InvitationUtil.getEmailMessageBody(portletPreferences);
 
 		subject = StringUtil.replace(
 			subject,

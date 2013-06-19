@@ -132,7 +132,7 @@ public class UpdateLayoutAction extends JSONAction {
 				String top = ParamUtil.getString(request, "top");
 				String left = ParamUtil.getString(request, "left");
 
-				PortletPreferences preferences =
+				PortletPreferences portletPreferences =
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
@@ -151,9 +151,10 @@ public class UpdateLayoutAction extends JSONAction {
 				sb.append(left);
 				sb.append("\n");
 
-				preferences.setValue("portlet-freeform-styles", sb.toString());
+				portletPreferences.setValue(
+					"portlet-freeform-styles", sb.toString());
 
-				preferences.store();
+				portletPreferences.store();
 			}
 		}
 		else if (cmd.equals("minimize")) {

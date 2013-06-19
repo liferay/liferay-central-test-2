@@ -155,37 +155,39 @@ public class InstallPluginAction extends PortletAction {
 		String pluginPackagesIgnored = ParamUtil.getString(
 			actionRequest, "pluginPackagesIgnored");
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences();
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_ENABLED, String.valueOf(enabled));
-		preferences.setValue(PropsKeys.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
-		preferences.setValue(PropsKeys.AUTO_DEPLOY_DEST_DIR, destDir);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
+		portletPreferences.setValue(PropsKeys.AUTO_DEPLOY_DEST_DIR, destDir);
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_INTERVAL, String.valueOf(interval));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
 			String.valueOf(customPortletXml));
-		preferences.setValue(PropsKeys.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.PLUGIN_REPOSITORIES_UNTRUSTED,
 			pluginRepositoriesUntrusted);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED,
 			String.valueOf(pluginNotificationsEnabled));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			pluginPackagesIgnored);
 
-		preferences.store();
+		portletPreferences.store();
 
 		reloadRepositories(actionRequest);
 
@@ -229,21 +231,21 @@ public class InstallPluginAction extends PortletAction {
 		String oldPluginPackagesIgnored = PrefsPropsUtil.getString(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences();
 
 		if (Validator.isNotNull(oldPluginPackagesIgnored)) {
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 				oldPluginPackagesIgnored.concat(StringPool.NEW_LINE).concat(
 					pluginPackagesIgnored));
 		}
 		else {
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 				pluginPackagesIgnored);
 		}
 
-		preferences.store();
+		portletPreferences.store();
 
 		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
@@ -536,12 +538,12 @@ public class InstallPluginAction extends PortletAction {
 			}
 		}
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences();
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sb.toString());
 
-		preferences.store();
+		portletPreferences.store();
 
 		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
