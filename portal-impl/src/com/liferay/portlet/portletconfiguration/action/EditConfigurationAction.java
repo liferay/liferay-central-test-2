@@ -65,8 +65,9 @@ public class EditConfigurationAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
@@ -93,11 +94,11 @@ public class EditConfigurationAction extends PortletAction {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
-		PortletPreferences preferences = getPreferences(
+		PortletPreferences portletPreferences = getPortletPreferences(
 			request, actionRequest.getPreferences());
 
-		actionRequest = new ConfigurationActionRequestWrapper(
-			actionRequest, preferences);
+		actionRequest = new ConfigurationActionRequest(
+			actionRequest, portletPreferences);
 
 		configurationAction.processAction(
 			portletConfig, actionRequest, actionResponse);
@@ -105,8 +106,9 @@ public class EditConfigurationAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
@@ -118,7 +120,8 @@ public class EditConfigurationAction extends PortletAction {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
 		renderResponse.setTitle(getTitle(portlet, renderRequest));
@@ -141,11 +144,11 @@ public class EditConfigurationAction extends PortletAction {
 				HttpServletRequest request = PortalUtil.getHttpServletRequest(
 					renderRequest);
 
-				PortletPreferences preferences = getPreferences(
+				PortletPreferences portletPreferences = getPortletPreferences(
 					request, renderRequest.getPreferences());
 
-				renderRequest = new ConfigurationRenderRequestWrapper(
-					renderRequest, preferences);
+				renderRequest = new ConfigurationRenderRequest(
+					renderRequest, portletPreferences);
 
 				request.setAttribute(
 					JavaConstants.JAVAX_PORTLET_REQUEST, renderRequest);
@@ -155,7 +158,7 @@ public class EditConfigurationAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(
 				renderRequest,
 				"portlet.portlet_configuration.edit_configuration"));
@@ -163,8 +166,9 @@ public class EditConfigurationAction extends PortletAction {
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		Portlet portlet = null;
@@ -186,11 +190,11 @@ public class EditConfigurationAction extends PortletAction {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			resourceRequest);
 
-		PortletPreferences preferences = getPreferences(
+		PortletPreferences portletPreferences = getPortletPreferences(
 			request, resourceRequest.getPreferences());
 
-		resourceRequest = new ConfigurationResourceRequestWrapper(
-			resourceRequest, preferences);
+		resourceRequest = new ConfigurationResourceRequest(
+			resourceRequest, portletPreferences);
 
 		resourceServingConfigurationAction.serveResource(
 			portletConfig, resourceRequest, resourceResponse);
@@ -239,15 +243,15 @@ public class EditConfigurationAction extends PortletAction {
 		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
 	}
 
-	protected PortletPreferences getPreferences(
-			HttpServletRequest request, PortletPreferences preferences)
+	protected PortletPreferences getPortletPreferences(
+			HttpServletRequest request, PortletPreferences portletPreferences)
 		throws PortalException, SystemException {
 
 		String portletResource = ParamUtil.getString(
 			request, "portletResource");
 
 		if (Validator.isNull(portletResource)) {
-			return preferences;
+			return portletPreferences;
 		}
 
 		return PortletPreferencesFactoryUtil.getPortletSetup(
@@ -266,11 +270,11 @@ public class EditConfigurationAction extends PortletAction {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
 
-		PortletPreferences portletSetup = getPreferences(
+		PortletPreferences portletPreferences = getPortletPreferences(
 			request, renderRequest.getPreferences());
 
 		String title = PortletConfigurationUtil.getPortletTitle(
-			portletSetup, themeDisplay.getLanguageId());
+			portletPreferences, themeDisplay.getLanguageId());
 
 		if (Validator.isNull(title)) {
 			title = PortalUtil.getPortletTitle(
@@ -283,10 +287,9 @@ public class EditConfigurationAction extends PortletAction {
 	private static Log _log = LogFactoryUtil.getLog(
 		EditConfigurationAction.class);
 
-	private class ConfigurationActionRequestWrapper
-		extends ActionRequestWrapper {
+	private class ConfigurationActionRequest extends ActionRequestWrapper {
 
-		public ConfigurationActionRequestWrapper(
+		public ConfigurationActionRequest(
 			ActionRequest actionRequest,
 			PortletPreferences portletPreferences) {
 
@@ -304,10 +307,9 @@ public class EditConfigurationAction extends PortletAction {
 
 	}
 
-	private class ConfigurationRenderRequestWrapper
-		extends RenderRequestWrapper {
+	private class ConfigurationRenderRequest extends RenderRequestWrapper {
 
-		public ConfigurationRenderRequestWrapper(
+		public ConfigurationRenderRequest(
 			RenderRequest renderRequest,
 			PortletPreferences portletPreferences) {
 
@@ -325,10 +327,9 @@ public class EditConfigurationAction extends PortletAction {
 
 	}
 
-	private class ConfigurationResourceRequestWrapper
-		extends ResourceRequestWrapper {
+	private class ConfigurationResourceRequest extends ResourceRequestWrapper {
 
-		public ConfigurationResourceRequestWrapper(
+		public ConfigurationResourceRequest(
 			ResourceRequest resourceRequest,
 			PortletPreferences portletPreferences) {
 
