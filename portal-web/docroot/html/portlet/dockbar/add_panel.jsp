@@ -35,8 +35,6 @@
 				<button class="close pull-right" id="closePanel" type="button">&#x00D7;</button>
 
 				<%
-				String selectedTab = GetterUtil.getString(SessionClicks.get(request, "liferay_addpanel_tab", "content"));
-
 				String[] tabs1Names = new String[0];
 
 				boolean hasAddContentPermission = (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT) && !group.isLayoutPrototype());
@@ -50,6 +48,8 @@
 				if (hasAddApplicationsAndPagePermission) {
 					tabs1Names = ArrayUtil.append(tabs1Names, "applications,page");
 				}
+
+				String selectedTab = GetterUtil.getString(SessionClicks.get(request, "liferay_addpanel_tab", "content"));
 				%>
 
 				<liferay-ui:tabs
