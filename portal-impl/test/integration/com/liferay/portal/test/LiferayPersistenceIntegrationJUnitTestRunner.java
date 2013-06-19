@@ -42,8 +42,6 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 
 		InitUtil.initWithSpring(extraConfigLocations);
 
-		// Upgrade
-
 		try {
 			DBUpgrader.upgrade();
 		}
