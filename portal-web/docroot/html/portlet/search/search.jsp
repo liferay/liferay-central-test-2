@@ -118,10 +118,6 @@ request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack
 	</c:if>
 </aui:form>
 
-<portlet:renderURL copyCurrentRenderParameters="<%= false %>" var="clearSearchURL">
-	<portlet:param name="groupId" value="0" />
-</portlet:renderURL>
-
 <aui:script use="aui-base">
 	A.on(
 		'click',
@@ -132,6 +128,10 @@ request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack
 				<portlet:namespace />search();
 			}
 			else if (targetId === '<portlet:namespace />clearSearch') {
+				<portlet:renderURL copyCurrentRenderParameters="<%= false %>" var="clearSearchURL">
+					<portlet:param name="groupId" value="0" />
+				</portlet:renderURL>
+
 				window.location.href = '<%= clearSearchURL %>';
 			}
 		},
