@@ -600,11 +600,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @return the number of user's group &quot;places&quot;
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroupCount()}
+	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroupsCount()}
 	 */
 	@Override
 	public int getUserPlacesCount() throws PortalException, SystemException {
-		return getUserPlacesGroupCount();
+		return getUserPlacesGroupsCount();
 	}
 
 	/**
@@ -618,7 +618,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getUserPlacesGroupCount()
+	public int getUserPlacesGroupsCount()
 		throws PortalException, SystemException {
 
 		List<Group> userPlacesGroups = getUserPlacesGroups(
