@@ -517,14 +517,14 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * </li>
 	 * </ul>
 	 *
-	 * @param  userId the primary key of the user
-	 * @param  classNames the group entity class names (optionally
-	 *         <code>null</code>). For more information see {@link
-	 *         #getUserPlacesGroups(long, String[], int)}
-	 * @param  max the maximum number of groups to return
-	 * @return the user's group &quot;places&quot;
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      userId the primary key of the user
+	 * @param      classNames the group entity class names (optionally
+	 *             <code>null</code>). For more information see {@link
+	 *             #getUserPlacesGroups(long, String[], int)}
+	 * @param      max the maximum number of groups to return
+	 * @return     the user's group &quot;places&quot;
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroups(long,
 	 *             String[], int)}
 	 */
@@ -574,13 +574,13 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * </li>
 	 * </ul>
 	 *
-	 * @param  classNames the group entity class names (optionally
-	 *         <code>null</code>). For more information see {@link
-	 *         #getUserPlacesGroups(String[], int)}
-	 * @param  max the maximum number of groups to return
-	 * @return the user's group &quot;places&quot;
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      classNames the group entity class names (optionally
+	 *             <code>null</code>). For more information see {@link
+	 *             #getUserPlacesGroups(String[], int)}
+	 * @param      max the maximum number of groups to return
+	 * @return     the user's group &quot;places&quot;
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroups(
 	 *             String[], int)}
 	 */
@@ -597,9 +597,9 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * including the Control Panel group if the user is permitted to view the
 	 * Control Panel.
 	 *
-	 * @return the number of user's group &quot;places&quot;
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @return     the number of user's group &quot;places&quot;
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroupsCount()}
 	 */
 	@Override
@@ -837,10 +837,10 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * Returns the guest or current user's layout set group, organization
 	 * groups, inherited organization groups, and site groups.
 	 *
-	 * @return the user's layout set group, organization groups, and inherited
-	 *         organization groups, and site groups
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @return     the user's layout set group, organization groups, and
+	 *             inherited organization groups, and site groups
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #getUserPlacesGroups()}
 	 */
 	@Override
