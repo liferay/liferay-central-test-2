@@ -10,8 +10,6 @@
 	<#assign collapsed = false>
 </#if>
 
-<#assign lineFolds = lineFolds + 1>
-
 <div>
 	<#if collapsed>
 		<div id="toggle${lineFolds}" class="expand-toggle">+</div>
@@ -44,3 +42,5 @@
 <#else>
 	<ul id="collapseToggle${lineFolds}">
 </#if>
+
+<#assign lineFolds = lineFolds + 1>

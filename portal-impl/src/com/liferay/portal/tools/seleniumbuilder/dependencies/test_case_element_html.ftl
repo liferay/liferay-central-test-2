@@ -1,9 +1,6 @@
-<ul onclick="toggle(event);">
 	<#assign testCaseRootElement = seleniumBuilderContext.getTestCaseRootElement(testCaseName)>
 
 	<#assign testCaseCommandElements = testCaseRootElement.elements("command")>
-
-	<#assign lineFolds = 0>
 
 	<#list testCaseCommandElements as testCaseCommandElement>
 		<#assign testCaseCommand = testCaseCommandElement.attributeValue("name")>
@@ -92,4 +89,3 @@
 			</ul>
 		</li>
 	</#list>
-</ul>
