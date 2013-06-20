@@ -190,9 +190,9 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 											PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
 
 											portletURL.setParameter("struts_action", "/my_sites/view");
+											portletURL.setParameter("groupId", String.valueOf(curGroup.getGroupId()));
 											portletURL.setPortletMode(PortletMode.VIEW);
 											portletURL.setWindowState(WindowState.NORMAL);
-											portletURL.setParameter("groupId", String.valueOf(curGroup.getGroupId()));
 											%>
 
 											<ul class="visit-links">
