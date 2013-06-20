@@ -386,6 +386,26 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	/**
+	 * Returns a range of all the site groups for which the user has control
+	 * panel access.
+	 *
+	 * @param  portlets the portlets to manage
+	 * @param  max the upper bound of the range of groups to consider (not
+	 *         inclusive)
+	 * @return the range of site groups for which the user has Control Panel
+	 *         access
+	 * @throws PortalException if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #getManageableSiteGroups(Collection, int)}
+	 */
+	@Override
+	public List<Group> getManageableSites(Collection<Portlet> portlets, int max)
+		throws PortalException, SystemException {
+
+		return getManageableSiteGroups(portlets, max);
+	}
+
+	/**
 	 * Returns the groups associated with the organizations.
 	 *
 	 * @param  organizations the organizations
