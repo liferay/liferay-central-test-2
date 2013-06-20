@@ -33,19 +33,19 @@ if (PortalUtil.isCompanyControlPanelVisible(themeDisplay)) {
 	}
 }
 
-manageableSites.remove(curGroup);
+manageableSites.remove(group);
 %>
 
 <liferay-ui:icon-menu cssClass="control-panel-site-selector" direction="down" extended="<%= false %>" icon="" id="controlPanelSiteSelector" message="" showWhenSingleIcon="<%= true %>">
 
 	<%
-	for (Group group : manageableSites) {
+	for (Group manageableSite : manageableSites) {
 	%>
 
 		<liferay-ui:icon
-			message="<%= HtmlUtil.escape(group.getDescriptiveName(locale)) %>"
-			src="<%= group.getIconURL(themeDisplay) %>"
-			url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>'
+			message="<%= HtmlUtil.escape(manageableSite.getDescriptiveName(locale)) %>"
+			src="<%= manageableSite.getIconURL(themeDisplay) %>"
+			url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", manageableSite.getGroupId()) %>'
 		/>
 
 	<%

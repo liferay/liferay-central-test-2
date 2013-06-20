@@ -72,8 +72,6 @@ if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
 
 String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
-List<Layout> scopeLayouts = new ArrayList<Layout>();
-
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
 request.setAttribute("control_panel.jsp-ppid", ppid);
@@ -114,12 +112,12 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 			panelCategory += " panel-manage-frontpage";
 		}
 
-		Layout scopeLayout = null;
-		Group curGroup = themeDisplay.getScopeGroup();
+		Group group = themeDisplay.getScopeGroup();
 
-		if (curGroup.isLayout()) {
-			scopeLayout = LayoutLocalServiceUtil.getLayout(curGroup.getClassPK());
-			curGroup = scopeLayout.getGroup();
+		if (group.isLayout()) {
+			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+			group = scopeLayout.getGroup();
 		}
 		%>
 
@@ -178,29 +176,28 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 										</c:if>
 
 										<h1 class="site-title">
-											<%= curGroup.getDescriptiveName(themeDisplay.getLocale()) %>
+											<%= group.getDescriptiveName(themeDisplay.getLocale()) %>
 
 											<c:if test="<%= showControlPanelMenu && !Validator.equals(controlPanelCategory, PortletCategoryKeys.CURRENT_SITE) %>">
 												<%@ include file="/html/portal/layout/view/control_panel_site_selector.jspf" %>
 											</c:if>
 										</h1>
 
-										<c:if test="<%= curGroup.hasPrivateLayouts() || curGroup.hasPublicLayouts() %>">
-
-											<%
-											PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
-
-											portletURL.setParameter("struts_action", "/my_sites/view");
-											portletURL.setParameter("groupId", String.valueOf(curGroup.getGroupId()));
-											portletURL.setPortletMode(PortletMode.VIEW);
-											portletURL.setWindowState(WindowState.NORMAL);
-											%>
-
+										<c:if test="<%= group.hasPrivateLayouts() || group.hasPublicLayouts() %>">
 											<ul class="visit-links">
 												<li><liferay-ui:message key="visit" />:</li>
 
+												<%
+												PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
+
+												portletURL.setParameter("struts_action", "/my_sites/view");
+												portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+												portletURL.setPortletMode(PortletMode.VIEW);
+												portletURL.setWindowState(WindowState.NORMAL);
+												%>
+
 												<c:choose>
-													<c:when test="<%= curGroup.hasPrivateLayouts() && curGroup.hasPublicLayouts() %>">
+													<c:when test="<%= group.hasPrivateLayouts() && group.hasPublicLayouts() %>">
 
 														<%
 														portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
@@ -218,7 +215,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 													<c:otherwise>
 
 														<%
-														portletURL.setParameter("privateLayout", curGroup.hasPrivateLayouts() ? Boolean.TRUE.toString() : Boolean.FALSE.toString());
+														portletURL.setParameter("privateLayout", group.hasPrivateLayouts() ? Boolean.TRUE.toString() : Boolean.FALSE.toString());
 														%>
 
 														<li><a href="<%= portletURL.toString() %>"><liferay-ui:message key="site-pages" /></a></li>
