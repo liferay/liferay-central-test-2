@@ -98,8 +98,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public PortletDataHandlerControl[] getConfigurationControls(Portlet portlet)
-		throws PortletDataException {
+	public PortletDataHandlerControl[] getConfigurationControls(
+		Portlet portlet) {
 
 		if (Validator.isNull(portlet.getConfigurationActionClass())) {
 			return null;

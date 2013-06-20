@@ -24,27 +24,24 @@ public class DefaultConfigurationPortletDataHandler
 
 	@Override
 	public PortletPreferences deleteData(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, String portletId,
+		PortletPreferences portletPreferences) {
 
 		return null;
 	}
 
 	@Override
 	public String exportData(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, String portletId,
+		PortletPreferences portletPreferences) {
 
 		return null;
 	}
 
 	@Override
 	public PortletPreferences importData(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws PortletDataException {
+		PortletDataContext portletDataContext, String portletId,
+		PortletPreferences portletPreferences, String data) {
 
 		return null;
 	}
