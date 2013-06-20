@@ -255,16 +255,17 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
 
-		if (portlet != null) {
-			String portletDataHandlerClass =
-				portlet.getPortletDataHandlerClass();
-
-			if (portletDataHandlerClass != null) {
-				return PortletConstants.getRootPortletId(portletId);
-			}
+		if (portlet == null) {
+			return null;
 		}
 
-		return null;
+		String portletDataHandlerClass = portlet.getPortletDataHandlerClass();
+
+		if (portletDataHandlerClass == null) {
+			return null;
+		}
+
+		return PortletConstants.getRootPortletId(portletId);
 	}
 
 	@Override
