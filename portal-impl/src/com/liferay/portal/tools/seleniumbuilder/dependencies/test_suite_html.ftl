@@ -10,6 +10,8 @@
 		</div>
 
 		<ul onclick="toggle(event);">
+			<#assign lineFolds = 0>
+
 			<#assign testSuiteRootElement = seleniumBuilderContext.getTestSuiteRootElement(testSuiteName)>
 
 			<#assign testSuiteExecuteElements = testSuiteRootElement.elements("execute")>
