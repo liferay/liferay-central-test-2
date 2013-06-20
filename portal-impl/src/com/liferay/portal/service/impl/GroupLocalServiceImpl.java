@@ -1767,6 +1767,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, defaultUserId);
 	}
 
+	@Override
 	public List<Group> getUserSitesGroups(long userId)
 		throws PortalException, SystemException {
 
@@ -1784,6 +1785,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			QueryUtil.ALL_POS);
 	}
 
+	@Override
 	public List<Group> getUserSitesGroups(
 			long userId, boolean includeAdministrative)
 		throws PortalException, SystemException {
