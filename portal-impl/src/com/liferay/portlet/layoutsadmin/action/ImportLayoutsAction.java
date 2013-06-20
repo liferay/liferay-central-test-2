@@ -316,7 +316,7 @@ public class ImportLayoutsAction extends PortletAction {
 		}
 	}
 
-	protected void doImportData(ActionRequest actionRequest, File file)
+	protected void importData(ActionRequest actionRequest, File file)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -327,7 +327,7 @@ public class ImportLayoutsAction extends PortletAction {
 			groupId, privateLayout, actionRequest.getParameterMap(), file);
 	}
 
-	protected MissingReferences doValidateFile(
+	protected MissingReferences validateFile(
 			ActionRequest actionRequest, File file)
 		throws Exception {
 
@@ -673,7 +673,7 @@ public class ImportLayoutsAction extends PortletAction {
 				FileUtil.copyFile(file, newFile);
 			}
 
-			doImportData(actionRequest, newFile);
+			importData(actionRequest, newFile);
 
 			deleteTempFileEntry(groupId, folderName);
 
@@ -734,7 +734,7 @@ public class ImportLayoutsAction extends PortletAction {
 				FileUtil.copyFile(file, newFile);
 			}
 
-			MissingReferences missingReferences = doValidateFile(
+			MissingReferences missingReferences = validateFile(
 				actionRequest, newFile);
 
 			Map<String, MissingReference> weakMissingReferences =

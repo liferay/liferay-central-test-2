@@ -233,7 +233,7 @@ public class ExportImportAction extends ImportLayoutsAction {
 	}
 
 	@Override
-	protected void doImportData(ActionRequest actionRequest, File file)
+	protected void importData(ActionRequest actionRequest, File file)
 		throws Exception {
 
 		long plid = ParamUtil.getLong(actionRequest, "plid");
@@ -247,7 +247,7 @@ public class ExportImportAction extends ImportLayoutsAction {
 	}
 
 	@Override
-	protected MissingReferences doValidateFile(
+	protected MissingReferences validateFile(
 			ActionRequest actionRequest, File file)
 		throws Exception {
 
