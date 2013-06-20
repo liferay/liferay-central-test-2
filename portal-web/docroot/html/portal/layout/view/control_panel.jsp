@@ -163,6 +163,7 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 								<aui:row>
 									<div id="controlPanelSiteHeading">
 										<c:if test="<%= showControlPanelMenu %>">
+
 											<%
 											String backURL = HttpUtil.setParameter(themeDisplay.getURLControlPanel(), "p_p_id", PortletKeys.SITES_ADMIN);
 											%>
