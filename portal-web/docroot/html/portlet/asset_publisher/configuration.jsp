@@ -186,24 +186,24 @@ String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 					</c:if>
 
 					<%
-					List<String> typesList = new ArrayList<String>();
+					List<String> types = new ArrayList<String>();
 
 					if (PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED)) {
-						typesList.add("sites-that-i-administer");
+						types.add("sites-that-i-administer");
 					}
 
 					if (GroupLocalServiceUtil.getGroupsCount(company.getCompanyId(), layout.getGroupId(), Boolean.TRUE) > 0) {
-						typesList.add("child-sites");
+						types.add("child-sites");
 					}
 
 					Group siteGroup = themeDisplay.getSiteGroup();
 
 					if (!siteGroup.isRoot()) {
-						typesList.add("parent-sites");
+						types.add("parent-sites");
 					}
 					%>
 
-					<c:if test="<%= !typesList.isEmpty() %>">
+					<c:if test="<%= !types.isEmpty() %>">
 
 						<%
 						PortletURL siteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
@@ -211,7 +211,7 @@ String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 						siteBrowserURL.setParameter("struts_action", "/site_browser/view");
 						siteBrowserURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
 						siteBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
-						siteBrowserURL.setParameter("types", StringUtil.merge(typesList));
+						siteBrowserURL.setParameter("types", StringUtil.merge(types));
 						siteBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectGroup");
 						siteBrowserURL.setPortletMode(PortletMode.VIEW);
 						siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
