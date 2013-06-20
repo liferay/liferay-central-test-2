@@ -110,9 +110,9 @@ public class CounterLocalServiceTest {
 		public Long[] call() throws ProcessException {
 			System.setProperty("catalina.base", ".");
 
+			PropsUtil.set(PropsValues.COUNTER_INCREMENT + _COUNTER_NAME, "1");
 			PropsUtil.set(
 				PropsKeys.SCHEDULER_ENABLED, Boolean.FALSE.toString());
-			PropsUtil.set(PropsValues.COUNTER_INCREMENT + _COUNTER_NAME, "1");
 
 			InitUtil.initWithSpring();
 
