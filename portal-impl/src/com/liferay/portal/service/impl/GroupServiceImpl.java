@@ -336,7 +336,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Group> getManageableSites(Collection<Portlet> portlets, int max)
+	public List<Group> getManageableSiteGroups(
+			Collection<Portlet> portlets, int max)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
