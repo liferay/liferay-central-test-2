@@ -34,12 +34,6 @@ public class WorkflowLogCreateDateComparator extends OrderByComparator {
 		_orderByFields = orderByFields;
 	}
 
-	public WorkflowLogCreateDateComparator(
-		String orderByAsc, String orderByDesc, String[] orderByFields) {
-
-		this(false, orderByAsc, orderByDesc, orderByFields);
-	}
-
 	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowLog workflowLog1 = (WorkflowLog)obj1;

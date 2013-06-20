@@ -32,12 +32,6 @@ public class WorkflowInstanceStateComparator extends OrderByComparator {
 		_orderByFields = orderByFields;
 	}
 
-	public WorkflowInstanceStateComparator(
-		String orderByAsc, String orderByDesc, String[] orderByFields) {
-
-		this(false, orderByAsc, orderByDesc, orderByFields);
-	}
-
 	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;

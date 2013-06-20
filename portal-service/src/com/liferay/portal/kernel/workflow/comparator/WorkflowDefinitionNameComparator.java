@@ -32,12 +32,6 @@ public class WorkflowDefinitionNameComparator extends OrderByComparator {
 		_orderByFields = orderByFields;
 	}
 
-	public WorkflowDefinitionNameComparator(
-		String orderByAsc, String orderByDesc, String[] orderByFields) {
-
-		this(false, orderByAsc, orderByDesc, orderByFields);
-	}
-
 	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowDefinition workflowDefinition1 = (WorkflowDefinition)obj1;
