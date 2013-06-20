@@ -17,7 +17,8 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -215,17 +216,13 @@ public class PortletJSONUtil {
 			"headerJavaScriptPaths",
 			JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
 
-		List<String> markupHeadElements = (List<String>)
-			request.getAttribute(MimeResponse.MARKUP_HEAD_ELEMENT);
+		List<String> markupHeadElements = (List<String>)request.getAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
 
 		if (markupHeadElements != null) {
-			StringBundler sb = new StringBundler(markupHeadElements.size());
-
-			for (String markupHeadElement : markupHeadElements) {
-				sb.append(markupHeadElement);
-			}
-
-			jsonObject.put("markupHeadElements", sb.toString());
+			jsonObject.put(
+				"markupHeadElements",
+				StringUtil.merge(markupHeadElements, StringPool.BLANK));
 		}
 
 		jsonObject.put("portletHTML", portletHTML);
