@@ -18,8 +18,6 @@
 
 <%
 Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDisplay);
-
-PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
 %>
 
 <portlet:actionURL var="importPortletActionURL">
@@ -42,6 +40,11 @@ PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
 	<div class="export-dialog-tree">
+
+		<%
+		PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
+		%>
+
 		<c:if test="<%= (portletDataHandler != null) && (portletDataHandler.getConfigurationControls(selPortlet) != null) %>">
 			<aui:fieldset cssClass="options-group" label="application">
 				<ul class="lfr-tree unstyled">

@@ -18,24 +18,6 @@
 
 <%
 Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDisplay);
-
-Date startDate = null;
-
-long startDateTime = ParamUtil.getLong(request, "startDate");
-
-if (startDateTime > 0) {
-	startDate = new Date(startDateTime);
-}
-
-Date endDate = null;
-
-long endDateTime = ParamUtil.getLong(request, "endDate");
-
-if (endDateTime > 0) {
-	endDate = new Date(endDateTime);
-}
-
-PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
 %>
 
 <portlet:actionURL var="exportPortletURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
@@ -54,6 +36,10 @@ PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance
 
 	<div class="export-dialog-tree">
 		<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= StringUtil.replace(selPortlet.getDisplayName(), " ", "_") + "-" + Time.getShortTimestamp() + ".portlet.lar" %>' />
+
+		<%
+		PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance();
+		%>
 
 		<c:if test="<%= (portletDataHandler != null) && (portletDataHandler.getConfigurationControls(selPortlet) != null) %>">
 			<aui:fieldset cssClass="options-group" label="application">
@@ -103,6 +89,22 @@ PortletDataHandler portletDataHandler = selPortlet.getPortletDataHandlerInstance
 		<c:if test="<%= portletDataHandler != null %>">
 
 			<%
+			Date startDate = null;
+
+			long startDateTime = ParamUtil.getLong(request, "startDate");
+
+			if (startDateTime > 0) {
+				startDate = new Date(startDateTime);
+			}
+
+			Date endDate = null;
+
+			long endDateTime = ParamUtil.getLong(request, "endDate");
+
+			if (endDateTime > 0) {
+				endDate = new Date(endDateTime);
+			}
+
 			PortletDataContext portletDataContext = PortletDataContextFactoryUtil.createPreparePortletDataContext(themeDisplay, startDate, endDate);
 
 			portletDataHandler.prepareManifestSummary(portletDataContext);

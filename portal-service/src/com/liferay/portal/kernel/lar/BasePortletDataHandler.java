@@ -107,8 +107,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 		return new PortletDataHandlerBoolean[] {
 			new PortletDataHandlerBoolean(
-				null, PortletDataHandlerKeys.PORTLET_SETUP, "setup",
-				true, false, null, null, null),
+				null, PortletDataHandlerKeys.PORTLET_SETUP, "setup", true,
+				false, null, null, null),
 			new PortletDataHandlerBoolean(
 				null, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS,
 				"archived-setups", true, false, null, null, null),
