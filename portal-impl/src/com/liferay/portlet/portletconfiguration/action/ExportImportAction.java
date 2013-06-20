@@ -232,35 +232,6 @@ public class ExportImportAction extends ImportLayoutsAction {
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
-	@Override
-	protected void importData(ActionRequest actionRequest, File file)
-		throws Exception {
-
-		long plid = ParamUtil.getLong(actionRequest, "plid");
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		Portlet portlet = ActionUtil.getPortlet(actionRequest);
-
-		LayoutServiceUtil.importPortletInfo(
-			plid, groupId, portlet.getPortletId(),
-			actionRequest.getParameterMap(), file);
-	}
-
-	@Override
-	protected MissingReferences validateFile(
-			ActionRequest actionRequest, File file)
-		throws Exception {
-
-		long plid = ParamUtil.getLong(actionRequest, "plid");
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		Portlet portlet = ActionUtil.getPortlet(actionRequest);
-
-		return LayoutServiceUtil.validateImportPortletInfo(
-			plid, groupId, portlet.getPortletId(),
-			actionRequest.getParameterMap(), file);
-	}
-
 	protected void exportData(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			Portlet portlet)
@@ -303,6 +274,35 @@ public class ExportImportAction extends ImportLayoutsAction {
 		finally {
 			FileUtil.delete(file);
 		}
+	}
+
+	@Override
+	protected void importData(ActionRequest actionRequest, File file)
+		throws Exception {
+
+		long plid = ParamUtil.getLong(actionRequest, "plid");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		Portlet portlet = ActionUtil.getPortlet(actionRequest);
+
+		LayoutServiceUtil.importPortletInfo(
+			plid, groupId, portlet.getPortletId(),
+			actionRequest.getParameterMap(), file);
+	}
+
+	@Override
+	protected MissingReferences validateFile(
+			ActionRequest actionRequest, File file)
+		throws Exception {
+
+		long plid = ParamUtil.getLong(actionRequest, "plid");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		Portlet portlet = ActionUtil.getPortlet(actionRequest);
+
+		return LayoutServiceUtil.validateImportPortletInfo(
+			plid, groupId, portlet.getPortletId(),
+			actionRequest.getParameterMap(), file);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExportImportAction.class);

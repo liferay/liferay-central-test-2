@@ -316,29 +316,6 @@ public class ImportLayoutsAction extends PortletAction {
 		}
 	}
 
-	protected void importData(ActionRequest actionRequest, File file)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-
-		LayoutServiceUtil.importLayouts(
-			groupId, privateLayout, actionRequest.getParameterMap(), file);
-	}
-
-	protected MissingReferences validateFile(
-			ActionRequest actionRequest, File file)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-
-		return LayoutServiceUtil.validateImportLayoutsFile(
-			groupId, privateLayout, actionRequest.getParameterMap(), file);
-	}
-
 	protected JSONArray getErrorMessagesJSONArray(
 		ThemeDisplay themeDisplay,
 		Map<String, MissingReference> missingReferences) {
@@ -695,6 +672,17 @@ public class ImportLayoutsAction extends PortletAction {
 		}
 	}
 
+	protected void importData(ActionRequest actionRequest, File file)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+
+		LayoutServiceUtil.importLayouts(
+			groupId, privateLayout, actionRequest.getParameterMap(), file);
+	}
+
 	protected void validateFile(
 			ActionRequest actionRequest, ActionResponse actionResponse,
 			String folderName)
@@ -771,6 +759,18 @@ public class ImportLayoutsAction extends PortletAction {
 				FileUtil.delete(newFile);
 			}
 		}
+	}
+
+	protected MissingReferences validateFile(
+			ActionRequest actionRequest, File file)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+
+		return LayoutServiceUtil.validateImportLayoutsFile(
+			groupId, privateLayout, actionRequest.getParameterMap(), file);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImportLayoutsAction.class);
