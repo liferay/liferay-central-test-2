@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.cache.Lifecycle;
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.cache.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -325,22 +323,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		try {
 			roles = roleFinder.findBySystem(companyId);
 		}
-		catch (Exception e1) {
+		catch (Exception e) {
 
 			// LPS-34324
 
-			DB db = DBFactoryUtil.getDB();
-
-			try {
-				db.runSQL("alter table Role_ add uuid_ VARCHAR(75) null");
-				db.runSQL("alter table Role_ add userId LONG");
-				db.runSQL("alter table Role_ add userName VARCHAR(75) null");
-				db.runSQL("alter table Role_ add createDate DATE null");
-				db.runSQL("alter table Role_ add modifiedDate DATE null");
-			}
-			catch (Exception e2) {
-				throw new SystemException(e2);
-			}
+			runSQL("alter table Role_ add uuid_ VARCHAR(75) null");
+			runSQL("alter table Role_ add userId LONG");
+			runSQL("alter table Role_ add userName VARCHAR(75) null");
+			runSQL("alter table Role_ add createDate DATE null");
+			runSQL("alter table Role_ add modifiedDate DATE null");
 
 			roles = roleFinder.findBySystem(companyId);
 		}
