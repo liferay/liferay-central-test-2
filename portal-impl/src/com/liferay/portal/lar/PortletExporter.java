@@ -339,6 +339,7 @@ public class PortletExporter {
 					parameterMap,
 					PortletDataHandlerKeys.PORTLET_CONFIGURATION +
 						StringPool.UNDERLINE + rootPortletId);
+
 			exportPortletArchivedSetups =
 				exportPortletConfiguration &&
 				MapUtil.getBoolean(

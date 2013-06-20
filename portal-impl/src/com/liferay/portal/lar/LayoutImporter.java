@@ -866,6 +866,7 @@ public class LayoutImporter {
 					parameterMap,
 					PortletDataHandlerKeys.PORTLET_CONFIGURATION +
 						StringPool.UNDERLINE + rootPortletId);
+
 			importCurPortletArchivedSetups =
 				importCurPortletConfiguration &&
 				MapUtil.getBoolean(

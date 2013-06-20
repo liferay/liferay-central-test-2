@@ -928,6 +928,7 @@ public class LayoutExporter {
 					parameterMap,
 					PortletDataHandlerKeys.PORTLET_CONFIGURATION +
 						StringPool.UNDERLINE + rootPortletId);
+
 			exportCurPortletArchivedSetups =
 				exportCurPortletConfiguration &&
 				MapUtil.getBoolean(

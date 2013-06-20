@@ -398,6 +398,7 @@ public class PortletImporter {
 					parameterMap,
 					PortletDataHandlerKeys.PORTLET_CONFIGURATION +
 						StringPool.UNDERLINE + rootPortletId);
+
 			importPortletArchivedSetups =
 				importPortletConfiguration &&
 				MapUtil.getBoolean(
