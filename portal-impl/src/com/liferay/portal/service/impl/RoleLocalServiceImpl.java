@@ -325,7 +325,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		try {
 			roles = roleFinder.findBySystem(companyId);
 		}
-		catch (Exception e) {
+		catch (Exception e1) {
 
 			// LPS-34324
 
