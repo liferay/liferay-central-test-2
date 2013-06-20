@@ -121,11 +121,10 @@ public class GroupTestUtil {
 
 		parameters.put(
 			PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
-			new String[] {String.valueOf(false)});
-
+			new String[] {Boolean.FALSE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			new String[] {String.valueOf(false)});
+			new String[] {Boolean.FALSE.toString()});
 
 		for (String parameterName : parameters.keySet()) {
 			serviceContext.setAttribute(
