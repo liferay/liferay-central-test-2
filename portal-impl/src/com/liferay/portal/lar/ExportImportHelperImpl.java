@@ -318,7 +318,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 							String portletDataHandlerClass =
 								portlet.getPortletDataHandlerClass();
 
-							if (portletDataHandlerClass != null) {
+							if (Validator.isNotNull(portletDataHandlerClass)) {
 								if (!portletDataHandlerClass.equals(
 										DefaultConfigurationPortletDataHandler.
 											class.getName()) &&
