@@ -481,26 +481,9 @@ public class DDMTemplateServiceSoap {
 		}
 	}
 
-	public static int countTemplatesByStructureClassNameId(long groupId,
-		long structureClassNameId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws RemoteException {
-		try {
-			int returnValue = DDMTemplateServiceUtil.countTemplatesByStructureClassNameId(groupId,
-					structureClassNameId, start, end, orderByComparator);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	/**
 	* Returns an ordered range of all the templates matching the group and
-	* structure class name ID, including Generic Templates.
+	* structure class name ID.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end -
@@ -533,6 +516,21 @@ public class DDMTemplateServiceSoap {
 					structureClassNameId, start, end, orderByComparator);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getTemplatesByStructureClassNameIdCount(long groupId,
+		long structureClassNameId) throws RemoteException {
+		try {
+			int returnValue = DDMTemplateServiceUtil.getTemplatesByStructureClassNameIdCount(groupId,
+					structureClassNameId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
