@@ -1640,22 +1640,22 @@ public class PortletExporter {
 			}
 			else if (name.equals(
 						"anyClassTypeDLFileEntryAssetRendererFactory") ||
-					 name.equals(
-						"classTypeIdsDLFileEntryAssetRendererFactory") ||
 					 (name.equals("classTypeIds") &&
 					  anyAssetTypeClassName.equals(
-						  DLFileEntry.class.getName()))) {
+						  DLFileEntry.class.getName())) ||
+					 name.equals(
+						"classTypeIdsDLFileEntryAssetRendererFactory")) {
 
 				updatePreferencesClassPKs(
 					jxPreferences, name, DLFileEntryType.class.getName());
 			}
 			else if (name.equals(
 						"anyClassTypeJournalArticleAssetRendererFactory") ||
-					 name.equals(
-						"classTypeIdsJournalArticleAssetRendererFactory") ||
 					 (name.equals("classTypeIds") &&
 					  anyAssetTypeClassName.equals(
-						  JournalArticle.class.getName()))) {
+						  JournalArticle.class.getName())) ||
+					 name.equals(
+						"classTypeIdsJournalArticleAssetRendererFactory")) {
 
 				updatePreferencesClassPKs(
 					jxPreferences, name, DDMStructure.class.getName());
