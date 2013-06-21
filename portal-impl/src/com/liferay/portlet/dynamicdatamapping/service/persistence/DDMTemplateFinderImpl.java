@@ -44,17 +44,17 @@ import java.util.List;
 public class DDMTemplateFinderImpl
 	extends BasePersistenceImpl<DDMTemplate> implements DDMTemplateFinder {
 
+	public static final String COUNT_BY_G_C_SC =
+	DDMTemplateFinder.class.getName() + ".countByG_C_SC";
+
 	public static final String COUNT_BY_C_G_C_C_N_D_T_M_L =
 		DDMTemplateFinder.class.getName() + ".countByC_G_C_C_N_D_T_M_L";
 
-	public static final String COUNT_BY_G_C_SC =
-		DDMTemplateFinder.class.getName() + ".countByG_C_SC";
+	public static final String FIND_BY_G_C_SC =
+	DDMTemplateFinder.class.getName() + ".findByG_C_SC";
 
 	public static final String FIND_BY_C_G_C_C_N_D_T_M_L =
 		DDMTemplateFinder.class.getName() + ".findByC_G_C_C_N_D_T_M_L";
-
-	public static final String FIND_BY_G_C_SC =
-		DDMTemplateFinder.class.getName() + ".findByG_C_SC";
 
 	@Override
 	public int countByKeywords(
@@ -108,6 +108,17 @@ public class DDMTemplateFinderImpl
 		return countByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPKs, names, descriptions,
 			types, modes, languages, andOperator);
+	}
+
+	@Override
+	public int countByG_SC(long groupId, long structureClassNameId)
+		throws SystemException {
+
+		long[] groupIds = new long[] {groupId};
+		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+
+		return doCountByG_C_SC(
+			groupIds, classNameId, structureClassNameId, false);
 	}
 
 	@Override
@@ -173,17 +184,6 @@ public class DDMTemplateFinderImpl
 		return doCountByC_G_C_C_N_D_T_M_L(
 			companyId, groupIds, classNameIds, classPKs, names, descriptions,
 			types, modes, languages, andOperator, false);
-	}
-
-	@Override
-	public int countByG_SC(long groupId, long structureClassNameId)
-		throws SystemException {
-
-		long[] groupIds = new long[] {groupId};
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
-		return doCountByG_C_SC(
-			groupIds, classNameId, structureClassNameId, false);
 	}
 
 	@Override
@@ -543,6 +543,33 @@ public class DDMTemplateFinderImpl
 	}
 
 	@Override
+	public List<DDMTemplate> findByG_SC(
+			long groupId, long structureClassNameId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		long[] groupIds = new long[] {groupId};
+		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+
+		return doFindByG_C_SC(
+			groupIds, classNameId, structureClassNameId, start, end,
+			orderByComparator, false);
+	}
+
+	@Override
+	public List<DDMTemplate> findByG_SC(
+			long[] groupIds, long structureClassNameId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+
+		return doFindByG_C_SC(
+			groupIds, classNameId, structureClassNameId, start, end,
+			orderByComparator, false);
+	}
+
+	@Override
 	public List<DDMTemplate> findByC_G_C_C_N_D_T_M_L(
 			long companyId, long groupId, long classNameId, long classPK,
 			String name, String description, String type, String mode,
@@ -615,31 +642,60 @@ public class DDMTemplateFinderImpl
 			false);
 	}
 
-	@Override
-	public List<DDMTemplate> findByG_SC(
-			long groupId, long structureClassNameId, int start, int end,
-			OrderByComparator orderByComparator)
+	protected int doCountByG_C_SC(
+			long[] groupIds, long classNameId, long structureClassNameId,
+			boolean inlineSQLHelper)
 		throws SystemException {
 
-		long[] groupIds = new long[] {groupId};
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+		Session session = null;
 
-		return doFindByG_C_SC(
-			groupIds, classNameId, structureClassNameId, start, end,
-			orderByComparator, false);
-	}
+		try {
+			session = openSession();
 
-	@Override
-	public List<DDMTemplate> findByG_SC(
-			long[] groupIds, long structureClassNameId, int start, int end,
-			OrderByComparator orderByComparator)
-		throws SystemException {
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_SC);
 
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, DDMTemplate.class.getName(), "DDMTemplate.templateId",
+					groupIds);
+			}
 
-		return doFindByG_C_SC(
-			groupIds, classNameId, structureClassNameId, start, end,
-			orderByComparator, false);
+			if (groupIds.length <= 0) {
+				sql = StringUtil.replace(
+					sql, "(groupId IN ([$GROUP_ID$]))", StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(structureClassNameId);
+
+			Iterator<Long> itr = q.iterate();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	protected int doCountByC_G_C_C_N_D_T_M_L(
@@ -740,8 +796,9 @@ public class DDMTemplateFinderImpl
 		}
 	}
 
-	protected int doCountByG_C_SC(
+	protected List<DDMTemplate> doFindByG_C_SC(
 			long[] groupIds, long classNameId, long structureClassNameId,
+			int start, int end, OrderByComparator orderByComparator,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -750,7 +807,7 @@ public class DDMTemplateFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_SC);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_SC);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -767,26 +824,21 @@ public class DDMTemplateFinderImpl
 					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
 			}
 
+			if (orderByComparator != null) {
+				sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			q.addEntity("DDMTemplate", DDMTemplateImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(classNameId);
 			qPos.add(structureClassNameId);
 
-			Iterator<Long> itr = q.iterate();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
+			return (List<DDMTemplate>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -878,58 +930,6 @@ public class DDMTemplateFinderImpl
 			qPos.add(types, 2);
 			qPos.add(modes, 2);
 			qPos.add(languages, 2);
-
-			return (List<DDMTemplate>)QueryUtil.list(
-				q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected List<DDMTemplate> doFindByG_C_SC(
-			long[] groupIds, long classNameId, long structureClassNameId,
-			int start, int end, OrderByComparator orderByComparator,
-			boolean inlineSQLHelper)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_SC);
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, DDMTemplate.class.getName(), "DDMTemplate.templateId",
-					groupIds);
-			}
-
-			if (groupIds.length <= 0) {
-				sql = StringUtil.replace(
-					sql, "(groupId IN ([$GROUP_ID$]))", StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
-			}
-
-			if (orderByComparator != null) {
-				sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("DDMTemplate", DDMTemplateImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(classNameId);
-			qPos.add(structureClassNameId);
 
 			return (List<DDMTemplate>)QueryUtil.list(
 				q, getDialect(), start, end);
