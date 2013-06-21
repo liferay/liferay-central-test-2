@@ -79,6 +79,13 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 			destinationName = _defaultDestinationName;
 		}
 
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		String servletContextName = ClassLoaderPool.getContextName(
+			contextClassLoader);
+
 		MethodHandler methodHandler = new MethodHandler(
 			methodInvocation.getMethod(), methodInvocation.getArguments());
 
@@ -87,13 +94,6 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 		IdentifiableBean identifiableBean = (IdentifiableBean)thisObject;
 
 		String beanIdentifier = identifiableBean.getBeanIdentifier();
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		String servletContextName = ClassLoaderPool.getContextName(
-			contextClassLoader);
 
 		MessageBusUtil.sendMessage(
 			destinationName,
