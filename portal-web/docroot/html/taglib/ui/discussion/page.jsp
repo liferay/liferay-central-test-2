@@ -312,7 +312,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							</div>
 
 							<aui:row fluid="<%= true %>">
-								<aui:col cssClass="lfr-discussion-details" span="3">
+								<aui:col cssClass="lfr-discussion-details" width="25">
 									<liferay-ui:user-display
 										displayStyle="<%= 2 %>"
 										userId="<%= message.getUserId() %>"
@@ -320,7 +320,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									/>
 								</aui:col>
 
-								<aui:col cssClass="lfr-discussion-body" span="9">
+								<aui:col cssClass="lfr-discussion-body" width="75">
 									<c:if test="<%= (message != null) && !message.isApproved() %>">
 										<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
