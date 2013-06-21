@@ -109,14 +109,11 @@ public class LanguageServlet extends HttpServlet {
 			}
 		}
 
-		boolean cacheResponse = LanguageUtil.isValidLanguageKey(locale, key);
-
-		if (!cacheResponse) {
+		if (!LanguageUtil.isValidLanguageKey(locale, key)) {
+			response.setDateHeader(HttpHeaders.EXPIRES, 0);
 			response.setHeader(
 				HttpHeaders.CACHE_CONTROL,
 				HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
-
-			response.setDateHeader(HttpHeaders.EXPIRES, 0);
 			response.setHeader(
 				HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_NO_CACHE_VALUE);
 		}
