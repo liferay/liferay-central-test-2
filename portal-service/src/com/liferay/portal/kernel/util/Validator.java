@@ -579,7 +579,6 @@ public class Validator {
 		}
 
 		if (domainName.startsWith(StringPool.PERIOD)) {
-
 			return false;
 		}
 
