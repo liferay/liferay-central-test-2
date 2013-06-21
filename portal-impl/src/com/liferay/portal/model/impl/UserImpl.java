@@ -327,26 +327,28 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public List<Group> getMySites() throws PortalException, SystemException {
-		return getMySites(null, false, QueryUtil.ALL_POS);
-	}
-
-	@Override
-	public List<Group> getMySites(boolean includeControlPanel, int max)
+	public List<Group> getMySiteGroups()
 		throws PortalException, SystemException {
 
-		return getMySites(null, includeControlPanel, max);
+		return getMySiteGroups(null, false, QueryUtil.ALL_POS);
 	}
 
 	@Override
-	public List<Group> getMySites(int max)
+	public List<Group> getMySiteGroups(boolean includeControlPanel, int max)
 		throws PortalException, SystemException {
 
-		return getMySites(null, false, max);
+		return getMySiteGroups(null, includeControlPanel, max);
 	}
 
 	@Override
-	public List<Group> getMySites(
+	public List<Group> getMySiteGroups(int max)
+		throws PortalException, SystemException {
+
+		return getMySiteGroups(null, false, max);
+	}
+
+	@Override
+	public List<Group> getMySiteGroups(
 			String[] classNames, boolean includeControlPanel, int max)
 		throws PortalException, SystemException {
 
@@ -379,10 +381,10 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public List<Group> getMySites(String[] classNames, int max)
+	public List<Group> getMySiteGroups(String[] classNames, int max)
 		throws PortalException, SystemException {
 
-		return getMySites(classNames, false, max);
+		return getMySiteGroups(classNames, false, max);
 	}
 
 	@Override
@@ -537,12 +539,12 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public List<Group> getSites() throws PortalException, SystemException {
-		return getSites(false);
+	public List<Group> getSiteGroups() throws PortalException, SystemException {
+		return getSiteGroups(false);
 	}
 
 	@Override
-	public List<Group> getSites(boolean includeAdministrative)
+	public List<Group> getSiteGroups(boolean includeAdministrative)
 		throws PortalException, SystemException {
 
 		return GroupLocalServiceUtil.getUserSitesGroups(
@@ -635,7 +637,7 @@ public class UserImpl extends UserBaseImpl {
 			max++;
 		}
 
-		List<Group> groups = getMySites(true, max);
+		List<Group> groups = getMySiteGroups(true, max);
 
 		return !groups.isEmpty();
 	}
