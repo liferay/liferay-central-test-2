@@ -33,7 +33,6 @@ configParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
 Map<String,String> fileBrowserParams = new HashMap();
 
 fileBrowserParams.put("attachmentURLPrefix", attachmentURLPrefix);
-fileBrowserParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
 
 if (format.equals("html")) {
 	fileBrowserParams.put("Types", "Document,Page,Attachment");
@@ -41,4 +40,6 @@ if (format.equals("html")) {
 else {
 	fileBrowserParams.put("Type", "Attachment");
 }
+
+fileBrowserParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
 %>

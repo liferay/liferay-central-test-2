@@ -18,9 +18,9 @@
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
 
-String format = "html";
-
 String content = BeanParamUtil.getString(wikiPage, request, "content");
+
+String format = "html";
 %>
 
 <%@ include file="/html/portlet/wiki/edit/editor_config.jspf" %>
