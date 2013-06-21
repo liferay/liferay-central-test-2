@@ -387,6 +387,58 @@ public class UserImpl extends UserBaseImpl {
 		return getMySiteGroups(classNames, false, max);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getMySiteGroups}
+	 */
+	@Override
+	public List<Group> getMySites() throws PortalException, SystemException {
+		return getMySiteGroups();
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getMySiteGroups(boolean,
+	 *             int)}
+	 */
+	@Override
+	public List<Group> getMySites(boolean includeControlPanel, int max)
+		throws PortalException, SystemException {
+
+		return getMySiteGroups(includeControlPanel, max);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getMySiteGroups(int)}
+	 */
+	@Override
+	public List<Group> getMySites(int max)
+		throws PortalException, SystemException {
+
+		return getMySiteGroups(max);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getMySiteGroups(String[],
+	 *             boolean, int)}
+	 */
+	@Override
+	public List<Group> getMySites(
+			String[] classNames, boolean includeControlPanel, int max)
+		throws PortalException, SystemException {
+
+		return getMySiteGroups(classNames, includeControlPanel, max);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getMySiteGroups(String[],
+	 *             int)}
+	 */
+	@Override
+	public List<Group> getMySites(String[] classNames, int max)
+		throws PortalException, SystemException {
+
+		return getMySiteGroups(classNames, max);
+	}
+
 	@Override
 	public long[] getOrganizationIds() throws PortalException, SystemException {
 		return getOrganizationIds(false);
