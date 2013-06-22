@@ -200,7 +200,8 @@ public class ActionUtil {
 	}
 
 	public static ResourceRequest getWrappedResourceRequest(
-			ResourceRequest resourceRequest, PortletPreferences portletPreferences)
+			ResourceRequest resourceRequest,
+			PortletPreferences portletPreferences)
 		throws PortalException, SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -239,7 +240,7 @@ public class ActionUtil {
 
 	protected static PortletPreferences getPortletPreferences(
 			HttpServletRequest request,
-			PortletPreferences portletConfigPreferences,
+			PortletPreferences portletConfigPortletPreferences,
 			PortletPreferences portletPreferences)
 		throws PortalException, SystemException {
 
@@ -247,7 +248,7 @@ public class ActionUtil {
 			request, "portletResource");
 
 		if (Validator.isNull(portletResource)) {
-			return portletConfigPreferences;
+			return portletConfigPortletPreferences;
 		}
 
 		if (portletPreferences != null) {

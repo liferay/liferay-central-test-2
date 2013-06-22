@@ -174,11 +174,11 @@ public class EditArchivedSetupsAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		PortletPreferences setup = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		PortletPreferencesServiceUtil.restoreArchivedPreferences(
 			themeDisplay.getScopeGroupId(), name, themeDisplay.getLayout(),
-			portlet.getRootPortletId(), setup);
+			portlet.getRootPortletId(), portletPreferences);
 	}
 
 	protected void updateSetup(ActionRequest actionRequest, Portlet portlet)
@@ -189,11 +189,11 @@ public class EditArchivedSetupsAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		PortletPreferences setup = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		PortletPreferencesServiceUtil.updateArchivePreferences(
 			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), name,
-			portlet.getRootPortletId(), setup);
+			portlet.getRootPortletId(), portletPreferences);
 	}
 
 }
