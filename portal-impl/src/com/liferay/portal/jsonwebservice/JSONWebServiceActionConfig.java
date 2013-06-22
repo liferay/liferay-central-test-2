@@ -31,24 +31,6 @@ public class JSONWebServiceActionConfig
 	JSONWebServiceActionMapping {
 
 	public JSONWebServiceActionConfig(
-		String contextPath, Object actionObject, Class<?> actionClass,
-		Method actionMethod, String path, String method) {
-
-		this(contextPath, actionClass, actionMethod, path, method);
-
-		_actionObject = actionObject;
-
-		try {
-			Method realActionMethod = actionObject.getClass().getMethod(actionMethod.getName(), actionMethod.getParameterTypes());
-
-			_actionMethod = realActionMethod;
-		}
-		catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-
-	public JSONWebServiceActionConfig(
 		String contextPath, Class<?> actionClass, Method actionMethod,
 		String path, String method) {
 
@@ -75,6 +57,24 @@ public class JSONWebServiceActionConfig
 		}
 
 		_signature = sb.toString();
+	}
+
+	public JSONWebServiceActionConfig(
+		String contextPath, Object actionObject, Class<?> actionClass,
+		Method actionMethod, String path, String method) {
+
+		this(contextPath, actionClass, actionMethod, path, method);
+
+		_actionObject = actionObject;
+
+		try {
+			Method realActionMethod = actionObject.getClass().getMethod(actionMethod.getName(), actionMethod.getParameterTypes());
+
+			_actionMethod = realActionMethod;
+		}
+		catch (NoSuchMethodException e) {
+			throw new IllegalArgumentException(e);
+		}
 	}
 
 	@Override
