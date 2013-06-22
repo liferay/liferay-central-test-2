@@ -11,10 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -36,14 +38,26 @@ public class FileVersionWrapper
 
 	@Override
 	public Object clone() {
-		return new FileVersionWrapper((FileVersion) _fileVersion.clone());
+		return new FileVersionWrapper((FileVersion)_fileVersion.clone());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		FileVersionWrapper other = (FileVersionWrapper)obj;
+		if (this == obj) {
+			return true;
+		}
 
-		return _fileVersion.equals(other.getWrappedModel());
+		if (!(obj instanceof FileVersionWrapper)) {
+			return false;
+		}
+
+		FileVersionWrapper fileVersionWrapper = (FileVersionWrapper)obj;
+
+		if (Validator.equals(_fileVersion, fileVersionWrapper._fileVersion)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -328,6 +342,6 @@ public class FileVersionWrapper
 		return new FileVersionWrapper(_fileVersion.toUnescapedModel());
 	}
 
-	FileVersion _fileVersion;
+	private FileVersion _fileVersion;
 
 }

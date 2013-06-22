@@ -11,10 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.ModelWrapper;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -38,7 +40,7 @@ public class FileEntryWrapper implements FileEntry, ModelWrapper<FileEntry> {
 
 	@Override
 	public Object clone() {
-		return new FileEntryWrapper((FileEntry) _fileEntry.clone());
+		return new FileEntryWrapper((FileEntry)_fileEntry.clone());
 	}
 
 	@Override
@@ -51,9 +53,21 @@ public class FileEntryWrapper implements FileEntry, ModelWrapper<FileEntry> {
 
 	@Override
 	public boolean equals(Object obj) {
-		FileEntryWrapper other = (FileEntryWrapper)obj;
+		if (this == obj) {
+			return true;
+		}
 
-		return _fileEntry.equals(other.getWrappedModel());
+		if (!(obj instanceof FileEntryWrapper)) {
+			return false;
+		}
+
+		FileEntryWrapper fileEntryWrapper = (FileEntryWrapper)obj;
+
+		if (Validator.equals(_fileEntry, fileEntryWrapper._fileEntry)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -368,6 +382,6 @@ public class FileEntryWrapper implements FileEntry, ModelWrapper<FileEntry> {
 		return new FileEntryWrapper(_fileEntry.toUnescapedModel());
 	}
 
-	FileEntry _fileEntry;
+	private FileEntry _fileEntry;
 
 }

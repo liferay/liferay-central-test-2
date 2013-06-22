@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -37,7 +38,7 @@ public class FolderWrapper implements Folder, ModelWrapper<Folder> {
 
 	@Override
 	public Object clone() {
-		return new FolderWrapper((Folder) _folder.clone());
+		return new FolderWrapper((Folder)_folder.clone());
 	}
 
 	@Override
@@ -50,9 +51,21 @@ public class FolderWrapper implements Folder, ModelWrapper<Folder> {
 
 	@Override
 	public boolean equals(Object obj) {
-		FolderWrapper other = (FolderWrapper)obj;
+		if (this == obj) {
+			return true;
+		}
 
-		return _folder.equals(other.getWrappedModel());
+		if (!(obj instanceof FolderWrapper)) {
+			return false;
+		}
+
+		FolderWrapper folderWrapper = (FolderWrapper)obj;
+
+		if (Validator.equals(_folder, folderWrapper._folder)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
