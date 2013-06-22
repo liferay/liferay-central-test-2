@@ -46,6 +46,7 @@ public class FileVersionWrapper
 		return _fileVersion.equals(other.getWrappedModel());
 	}
 
+	@Override
 	public Map<String, Serializable> getAttributes() {
 		return _fileVersion.getAttributes();
 	}
@@ -55,6 +56,7 @@ public class FileVersionWrapper
 		return _fileVersion.getChangeLog();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _fileVersion.getCompanyId();
 	}
@@ -66,18 +68,22 @@ public class FileVersionWrapper
 		return _fileVersion.getContentStream(incrementCounter);
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _fileVersion.getCreateDate();
 	}
 
+	@Override
 	public String getDescription() {
 		return _fileVersion.getDescription();
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _fileVersion.getExpandoBridge();
 	}
 
+	@Override
 	public String getExtension() {
 		return _fileVersion.getExtension();
 	}
@@ -97,50 +103,62 @@ public class FileVersionWrapper
 		return _fileVersion.getFileEntryId();
 	}
 
+	@Override
 	public long getFileVersionId() {
 		return _fileVersion.getFileVersionId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _fileVersion.getGroupId();
 	}
 
+	@Override
 	public String getIcon() {
 		return _fileVersion.getIcon();
 	}
 
+	@Override
 	public String getMimeType() {
 		return _fileVersion.getMimeType();
 	}
 
+	@Override
 	public Object getModel() {
 		return _fileVersion.getModel();
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return FileVersion.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return FileVersion.class.getName();
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _fileVersion.getModifiedDate();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileVersion.getPrimaryKey();
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _fileVersion.getPrimaryKeyObj();
 	}
 
+	@Override
 	public long getRepositoryId() {
 		return _fileVersion.getRepositoryId();
 	}
 
+	@Override
 	public long getSize() {
 		return _fileVersion.getSize();
 	}
@@ -170,30 +188,37 @@ public class FileVersionWrapper
 		return _fileVersion.getStatusDate();
 	}
 
+	@Override
 	public String getTitle() {
 		return _fileVersion.getTitle();
 	}
 
+	@Override
 	public long getUserId() {
 		return _fileVersion.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _fileVersion.getUserName();
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return _fileVersion.getUserUuid();
 	}
 
+	@Override
 	public String getUuid() {
 		return _fileVersion.getUuid();
 	}
 
+	@Override
 	public String getVersion() {
 		return _fileVersion.getVersion();
 	}
 
+	@Override
 	public FileVersion getWrappedModel() {
 		return _fileVersion;
 	}
@@ -208,6 +233,7 @@ public class FileVersionWrapper
 		return _fileVersion.isApproved();
 	}
 
+	@Override
 	public boolean isDefaultRepository() {
 		return _fileVersion.isDefaultRepository();
 	}
@@ -217,6 +243,7 @@ public class FileVersionWrapper
 		return _fileVersion.isDraft();
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _fileVersion.isEscapedModel();
 	}
@@ -241,42 +268,52 @@ public class FileVersionWrapper
 		return _fileVersion.isPending();
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_fileVersion.setCompanyId(companyId);
 	}
 
+	@Override
 	public void setCreateDate(Date date) {
 		_fileVersion.setCreateDate(date);
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_fileVersion.setGroupId(groupId);
 	}
 
+	@Override
 	public void setModifiedDate(Date date) {
 		_fileVersion.setModifiedDate(date);
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_fileVersion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_fileVersion.setUserId(userId);
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_fileVersion.setUserName(userName);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_fileVersion.setUserUuid(userUuid);
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		_fileVersion.setUuid(uuid);
 	}
 
+	@Override
 	public FileVersion toEscapedModel() {
 		return new FileVersionWrapper(_fileVersion.toEscapedModel());
 	}
@@ -286,6 +323,7 @@ public class FileVersionWrapper
 		return _fileVersion.toString();
 	}
 
+	@Override
 	public FileVersion toUnescapedModel() {
 		return new FileVersionWrapper(_fileVersion.toUnescapedModel());
 	}
