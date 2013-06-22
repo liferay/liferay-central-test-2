@@ -68,12 +68,15 @@ public class JSONWebServiceActionConfig
 		_actionObject = actionObject;
 
 		try {
-			Method realActionMethod = actionObject.getClass().getMethod(actionMethod.getName(), actionMethod.getParameterTypes());
+			Class<?> actionObjectClass = actionObject.getClass(); 
+			
+			Method actionObjectClassActionMethod = actionObjectClass.getMethod(
+				actionMethod.getName(), actionMethod.getParameterTypes());
 
-			_actionMethod = realActionMethod;
+			_actionMethod = actionObjectClassActionMethod;
 		}
-		catch (NoSuchMethodException e) {
-			throw new IllegalArgumentException(e);
+		catch (NoSuchMethodException nsme) {
+			throw new IllegalArgumentException(nsme);
 		}
 	}
 
