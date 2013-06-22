@@ -67,7 +67,7 @@ public class JSONWebServiceRegistrator extends HookHotDeployListener {
 			return;
 		}
 
-		Object bean;
+		Object bean = null;
 
 		try {
 			bean = beanLocator.locate(beanName);
@@ -273,6 +273,6 @@ public class JSONWebServiceRegistrator extends HookHotDeployListener {
 	private String _serviceClassNameSuffix = "Service";
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
-	private boolean _wireViaUtil = false;
+	private boolean _wireViaUtil;
 
 }

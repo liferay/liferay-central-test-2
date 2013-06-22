@@ -139,11 +139,14 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
-		if (method.getName().equals("getTargetSource") &&
-			(arguments == null) &&
-			method.getDeclaringClass().equals(Advised.class)) {
+		String methodName = method.getName();
 
-			return _advisedSupport.getTargetSource();
+		if (methodName.equals("getTargetSource") && (arguments == null)) {
+			Class<?> clazz = method.getDeclaringClass();
+
+			if (clazz.equals(Advised.class)) {
+				return _advisedSupport.getTargetSource();
+			}
 		}
 
 		TargetSource targetSource = _advisedSupport.getTargetSource();

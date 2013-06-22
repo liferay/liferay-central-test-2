@@ -54,7 +54,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 		String contextName = _contextPath;
 
-		BeanLocator beanLocator;
+		BeanLocator beanLocator = null;
 
 		if (_contextPath.equals(
 				PortalContextLoaderListener.getPortalServletContextPath()) ||

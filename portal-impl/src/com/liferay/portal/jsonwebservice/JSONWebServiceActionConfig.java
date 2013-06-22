@@ -68,8 +68,8 @@ public class JSONWebServiceActionConfig
 		_actionObject = actionObject;
 
 		try {
-			Class<?> actionObjectClass = actionObject.getClass(); 
-			
+			Class<?> actionObjectClass = actionObject.getClass();
+
 			Method actionObjectClassActionMethod = actionObjectClass.getMethod(
 				actionMethod.getName(), actionMethod.getParameterTypes());
 
