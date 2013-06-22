@@ -78,6 +78,8 @@ public class ExportImportAction extends ImportLayoutsAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
+
 		Portlet portlet = null;
 
 		try {
@@ -93,9 +95,6 @@ public class ExportImportAction extends ImportLayoutsAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			actionRequest = ActionUtil.getWrappedActionRequest(
-				actionRequest, null);
-
 			if (Validator.isNotNull(cmd)) {
 				if (cmd.equals(Constants.ADD_TEMP)) {
 					addTempFileEntry(
