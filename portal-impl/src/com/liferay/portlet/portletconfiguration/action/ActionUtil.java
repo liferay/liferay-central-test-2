@@ -272,8 +272,8 @@ public class ActionUtil {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
 
-		PortletPreferences portletPreferences =
-			ActionUtil.getLayoutPortletSetup(renderRequest, portlet);
+		PortletPreferences portletPreferences = getLayoutPortletSetup(
+			renderRequest, portlet);
 
 		portletPreferences = getPortletPreferences(
 			request, renderRequest.getPreferences(), portletPreferences);
