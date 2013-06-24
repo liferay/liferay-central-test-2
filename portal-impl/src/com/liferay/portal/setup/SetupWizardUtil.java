@@ -332,9 +332,8 @@ public class SetupWizardUtil {
 
 		Class.forName(driverClassName);
 
-		Connection connection = null;
-
 		DataSource dataSource = null;
+		Connection connection = null;
 
 		try {
 			dataSource = DataSourceFactoryUtil.initDataSource(
