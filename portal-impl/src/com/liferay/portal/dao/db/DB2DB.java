@@ -140,6 +140,89 @@ public class DB2DB extends BaseDB {
 		return _DB2;
 	}
 
+	protected boolean isRequiresReorgTable(Connection con, String tableName)
+		throws SQLException {
+
+		boolean reorgTableRequired = false;
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select num_reorg_rec_alters from table(");
+			sb.append("sysproc.admin_get_tab_info(current_schema, '");
+			sb.append(tableName.toUpperCase());
+			sb.append("')) where reorg_pending = 'Y'");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int numReorgRecAlters = rs.getInt(1);
+
+				if (numReorgRecAlters >= 1) {
+					reorgTableRequired = true;
+				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(null, ps, rs);
+		}
+
+		return reorgTableRequired;
+	}
+
+	protected void reorgTable(Connection con, String tableName)
+		throws SQLException {
+
+		if (!isRequiresReorgTable(con, tableName)) {
+			return;
+		}
+
+		CallableStatement callableStatement = null;
+
+		try {
+			callableStatement = con.prepareCall("call sysproc.admin_cmd(?)");
+
+			callableStatement.setString(1, "reorg table " + tableName);
+
+			callableStatement.execute();
+		}
+		finally {
+			DataAccess.cleanUp(callableStatement);
+		}
+	}
+
+	protected void reorgTables(String[] templates) throws SQLException {
+		Set<String> tableNames = new HashSet<String>();
+
+		for (String template : templates) {
+			if (template.startsWith("alter table")) {
+				tableNames.add(template.split(" ")[2]);
+			}
+		}
+
+		if (tableNames.isEmpty()) {
+			return;
+		}
+
+		Connection con = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			for (String tableName : tableNames) {
+				reorgTable(con, tableName);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con);
+		}
+	}
+
 	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
@@ -186,90 +269,6 @@ public class DB2DB extends BaseDB {
 		unsyncBufferedReader.close();
 
 		return sb.toString();
-	}
-
-	protected boolean isRequiresReorgTable(Connection con, String tableName)
-		throws SQLException {
-
-		boolean reorgTableRequired = false;
-
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("select num_reorg_rec_alters from table(");
-			sb.append("sysproc.admin_get_tab_info(current_schema, '");
-			sb.append(tableName.toUpperCase());
-			sb.append("')) where reorg_pending = 'Y'");
-
-			ps = con.prepareStatement(sb.toString());
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				int numReorgRecAlters = rs.getInt(1);
-
-				if (numReorgRecAlters >= 1) {
-					reorgTableRequired = true;
-				}
-			}
-		}
-		finally {
-			DataAccess.cleanUp(null, ps, rs);
-		}
-
-		return reorgTableRequired;
-	}
-
-	protected void reorgTable(Connection con, String tableName)
-		throws SQLException {
-
-		if (!isRequiresReorgTable(con, tableName)) {
-			return;
-		}
-
-		CallableStatement callableStatement = null;
-
-		try {
-			callableStatement = con.prepareCall(
-				"call sysproc.admin_cmd(?)");
-
-			callableStatement.setString(1, "reorg table " + tableName);
-
-			callableStatement.execute();
-		}
-		finally {
-			DataAccess.cleanUp(callableStatement);
-		}
-	}
-
-	protected void reorgTables(String[] templates) throws SQLException {
-		Set<String> tableNames = new HashSet<String>();
-
-		for (String template : templates) {
-			if (template.startsWith("alter table")) {
-				tableNames.add(template.split(" ")[2]);
-			}
-		}
-
-		if (tableNames.isEmpty()) {
-			return;
-		}
-
-		Connection con = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			for (String tableName : tableNames) {
-				reorgTable(con, tableName);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con);
-		}
 	}
 
 	private static final String[] _DB2 = {
