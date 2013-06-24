@@ -96,7 +96,7 @@ public class DB2DB extends BaseDB {
 	public void runSQL(String[] templates) throws IOException, SQLException {
 		super.runSQL(templates);
 
-		_reorgTables(templates);
+		reorgTables(templates);
 	}
 
 	protected DB2DB() {
@@ -188,13 +188,13 @@ public class DB2DB extends BaseDB {
 		return sb.toString();
 	}
 
-	private boolean _isReorgTableRequired(Connection con, String tableName)
+	protected boolean isRequiresReorgTable(Connection con, String tableName)
 		throws SQLException {
+
+		boolean reorgTableRequired = false;
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		boolean isReorgTableRequired = false;
 
 		try {
 			StringBundler sb = new StringBundler(4);
@@ -212,44 +212,40 @@ public class DB2DB extends BaseDB {
 				int numReorgRecAlters = rs.getInt(1);
 
 				if (numReorgRecAlters >= 1) {
-					isReorgTableRequired = true;
+					reorgTableRequired = true;
 				}
 			}
 		}
 		finally {
-			DataAccess.cleanUp(ps);
-			DataAccess.cleanUp(rs);
+			DataAccess.cleanUp(null, ps, rs);
 		}
 
-		return isReorgTableRequired;
+		return reorgTableRequired;
 	}
 
-	private void _reorgTable(Connection con, String tableName)
+	protected void reorgTable(Connection con, String tableName)
 		throws SQLException {
 
-		if (!_isReorgTableRequired(con, tableName)) {
+		if (!isRequiresReorgTable(con, tableName)) {
 			return;
 		}
 
-		CallableStatement callStmt = null;
+		CallableStatement callableStatement = null;
 
 		try {
-			String sql = "call sysproc.admin_cmd(?)";
+			callableStatement = con.prepareCall(
+				"call sysproc.admin_cmd(?)");
 
-			callStmt = con.prepareCall(sql);
+			callableStatement.setString(1, "reorg table " + tableName);
 
-			String param = "reorg table " + tableName;
-
-			callStmt.setString(1, param);
-
-			callStmt.execute();
+			callableStatement.execute();
 		}
 		finally {
-			DataAccess.cleanUp(callStmt);
+			DataAccess.cleanUp(callableStatement);
 		}
 	}
 
-	private void _reorgTables(String[] templates) throws SQLException {
+	protected void reorgTables(String[] templates) throws SQLException {
 		Set<String> tableNames = new HashSet<String>();
 
 		for (String template : templates) {
@@ -258,7 +254,7 @@ public class DB2DB extends BaseDB {
 			}
 		}
 
-		if (tableNames.size() == 0) {
+		if (tableNames.isEmpty()) {
 			return;
 		}
 
@@ -268,7 +264,7 @@ public class DB2DB extends BaseDB {
 			con = DataAccess.getConnection();
 
 			for (String tableName : tableNames) {
-				_reorgTable(con, tableName);
+				reorgTable(con, tableName);
 			}
 		}
 		finally {
