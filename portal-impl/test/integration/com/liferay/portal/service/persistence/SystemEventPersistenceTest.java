@@ -129,6 +129,10 @@ public class SystemEventPersistenceTest {
 
 		newSystemEvent.setReferrerClassNameId(ServiceTestUtil.nextLong());
 
+		newSystemEvent.setParentSystemEventId(ServiceTestUtil.nextLong());
+
+		newSystemEvent.setSystemEventSetKey(ServiceTestUtil.nextLong());
+
 		newSystemEvent.setType(ServiceTestUtil.nextInt());
 
 		newSystemEvent.setExtraData(ServiceTestUtil.randomString());
@@ -158,6 +162,10 @@ public class SystemEventPersistenceTest {
 			newSystemEvent.getClassUuid());
 		Assert.assertEquals(existingSystemEvent.getReferrerClassNameId(),
 			newSystemEvent.getReferrerClassNameId());
+		Assert.assertEquals(existingSystemEvent.getParentSystemEventId(),
+			newSystemEvent.getParentSystemEventId());
+		Assert.assertEquals(existingSystemEvent.getSystemEventSetKey(),
+			newSystemEvent.getSystemEventSetKey());
 		Assert.assertEquals(existingSystemEvent.getType(),
 			newSystemEvent.getType());
 		Assert.assertEquals(existingSystemEvent.getExtraData(),
@@ -203,7 +211,8 @@ public class SystemEventPersistenceTest {
 			"systemEventId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
 			"classNameId", true, "classPK", true, "classUuid", true,
-			"referrerClassNameId", true, "type", true, "extraData", true);
+			"referrerClassNameId", true, "parentSystemEventId", true,
+			"systemEventSetKey", true, "type", true, "extraData", true);
 	}
 
 	@Test
@@ -340,6 +349,10 @@ public class SystemEventPersistenceTest {
 		systemEvent.setClassUuid(ServiceTestUtil.randomString());
 
 		systemEvent.setReferrerClassNameId(ServiceTestUtil.nextLong());
+
+		systemEvent.setParentSystemEventId(ServiceTestUtil.nextLong());
+
+		systemEvent.setSystemEventSetKey(ServiceTestUtil.nextLong());
 
 		systemEvent.setType(ServiceTestUtil.nextInt());
 

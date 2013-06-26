@@ -59,6 +59,8 @@ public class SystemEventWrapper implements SystemEvent,
 		attributes.put("classPK", getClassPK());
 		attributes.put("classUuid", getClassUuid());
 		attributes.put("referrerClassNameId", getReferrerClassNameId());
+		attributes.put("parentSystemEventId", getParentSystemEventId());
+		attributes.put("systemEventSetKey", getSystemEventSetKey());
 		attributes.put("type", getType());
 		attributes.put("extraData", getExtraData());
 
@@ -125,6 +127,18 @@ public class SystemEventWrapper implements SystemEvent,
 
 		if (referrerClassNameId != null) {
 			setReferrerClassNameId(referrerClassNameId);
+		}
+
+		Long parentSystemEventId = (Long)attributes.get("parentSystemEventId");
+
+		if (parentSystemEventId != null) {
+			setParentSystemEventId(parentSystemEventId);
+		}
+
+		Long systemEventSetKey = (Long)attributes.get("systemEventSetKey");
+
+		if (systemEventSetKey != null) {
+			setSystemEventSetKey(systemEventSetKey);
 		}
 
 		Integer type = (Integer)attributes.get("type");
@@ -395,6 +409,46 @@ public class SystemEventWrapper implements SystemEvent,
 	@Override
 	public void setReferrerClassNameId(long referrerClassNameId) {
 		_systemEvent.setReferrerClassNameId(referrerClassNameId);
+	}
+
+	/**
+	* Returns the parent system event ID of this system event.
+	*
+	* @return the parent system event ID of this system event
+	*/
+	@Override
+	public long getParentSystemEventId() {
+		return _systemEvent.getParentSystemEventId();
+	}
+
+	/**
+	* Sets the parent system event ID of this system event.
+	*
+	* @param parentSystemEventId the parent system event ID of this system event
+	*/
+	@Override
+	public void setParentSystemEventId(long parentSystemEventId) {
+		_systemEvent.setParentSystemEventId(parentSystemEventId);
+	}
+
+	/**
+	* Returns the system event set key of this system event.
+	*
+	* @return the system event set key of this system event
+	*/
+	@Override
+	public long getSystemEventSetKey() {
+		return _systemEvent.getSystemEventSetKey();
+	}
+
+	/**
+	* Sets the system event set key of this system event.
+	*
+	* @param systemEventSetKey the system event set key of this system event
+	*/
+	@Override
+	public void setSystemEventSetKey(long systemEventSetKey) {
+		_systemEvent.setSystemEventSetKey(systemEventSetKey);
 	}
 
 	/**

@@ -1173,6 +1173,8 @@
 			<basic name="classPK" />
 			<basic name="classUuid" />
 			<basic name="referrerClassNameId" />
+			<basic name="parentSystemEventId" />
+			<basic name="systemEventSetKey" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
