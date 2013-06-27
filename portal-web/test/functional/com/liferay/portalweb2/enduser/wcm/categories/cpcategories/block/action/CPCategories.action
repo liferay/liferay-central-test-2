@@ -1,31 +1,7 @@
 <definition>
-	<command name="assertTextEquals">
-		<case locator-key1="INFO_MESSAGE">
-			<execute function="AssertTextEquals#assertText" />
-		</case>
-		<case locator-key1="SUCCESS_MESSAGE">
-			<execute function="AssertTextEquals#assertText" />
-		</case>
-	</command>
-
-	<command name="assertClick">
-		<case locator-key1="ADD_CATEGORY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
-		</case>
-		<case locator-key1="ADD_SUBCATEGORY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
-		</case>
-		<case locator-key1="ADD_VOCABULARY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
-		</case>
-		<case locator-key1="EDIT_CATEGORY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
-		</case>
-		<case locator-key1="EDIT_SUBCATEGORY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
-		</case>
-		<case locator-key1="EDIT_VOCABULARY_SAVE_BUTTON">
-			<execute function="AssertClick#assertTextClickAt" />
+	<command name="isElementNotPresent">
+		<case locator-key1="ADD_VOCABULARY_CHOOSE_ASSET_TYPE_SELECT">
+			<execute function="IsElementNotPresent#isNotVisible" />
 		</case>
 	</command>
 </definition>

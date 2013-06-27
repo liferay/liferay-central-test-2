@@ -208,7 +208,7 @@
 </tr>
 <tr>
 	<td>ADD_VOCABULARY_ASSOCIATED_ASSET_TYPES</td>
-	<td>//div[@class='accordion-toggle']</td>
+	<td>//div[@id='vocabularyExtraFieldsPanelContainer']//div[@class='accordion-toggle']</td>
 	<td></td>
 </tr>
 <tr>

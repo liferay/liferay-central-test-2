@@ -13,6 +13,7 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 
@@ -27,10 +28,13 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Subcategory#addCP">
+			<var name="categoryName" value="${categoryName}" />
 			<var name="subcategoryName" value="${subcategoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 
@@ -60,10 +64,12 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Category#deleteCPByActions">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 
@@ -78,14 +84,19 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Subcategory#addCP">
+			<var name="categoryName" value="${categoryName}" />
 			<var name="subcategoryName" value="${subcategoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Subcategory#deleteCPByActions">
+			<var name="categoryName" value="${categoryName}" />
 			<var name="subcategoryName" value="${subcategoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 
@@ -112,11 +123,13 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Category#editCP">
 			<var name="categoryName" value="${categoryName}" />
 			<var name="categoryNameEdit" value="${categoryNameEdit}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 
@@ -132,15 +145,20 @@
 
 		<execute macro="Category#addCP">
 			<var name="categoryName" value="${categoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Subcategory#addCP">
+			<var name="categoryName" value="${categoryName}" />
 			<var name="subcategoryName" value="${subcategoryName}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
 		<execute macro="Subcategory#editCP">
+			<var name="categoryName" value="${categoryName}" />
 			<var name="subcategoryName" value="${subcategoryName}" />
 			<var name="subcategoryNameEdit" value="${subcategoryNameEdit}" />
+			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
 

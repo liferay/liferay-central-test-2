@@ -1,6 +1,6 @@
 <definition>
 	<command name="addCP">
-		<execute macro="Page#cpGotoContent">
+		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Categories" />
 		</execute>
 
@@ -13,13 +13,13 @@
 	</command>
 
 	<command name="deleteCPByActions">
-		<execute macro="Page#cpGotoContent">
+		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Categories" />
 		</execute>
 
 		<execute action="CPCategories#assertClick" locator-key1="VOCABULARY_ENTRY_2" value1="${vocabularyName}" />
 		<execute action="CPCategories#assertTextEquals" locator-key1="VOCABULARY_CATEGORY_1" value1="${categoryName}" />
-		<execute action="CPCategories#click" locator-key1="ALL_CATEGORIES_CHECKBOX" />
+		<execute action="CPCategories#check" locator-key1="ALL_CATEGORIES_CHECKBOX" />
 		<execute action="CPCategories#assertClick" locator-key1="ACTIONS_BUTTON" value1="Actions" />
 		<execute action="CPCategories#assertClick" locator-key1="ACTIONS_MENULIST_DELETE" value1="Delete" />
 		<execute action="CPCategories#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete the selected categories?" />
@@ -29,7 +29,7 @@
 	</command>
 
 	<command name="editCP">
-		<execute macro="Page#cpGotoContent">
+		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Categories" />
 		</execute>
 
