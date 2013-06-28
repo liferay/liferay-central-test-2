@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.lar;
 
-import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
@@ -38,9 +37,9 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
@@ -171,7 +170,7 @@ public class JournalArticleStagedModelDataHandler
 		}
 
 		if (article.isSmallImage()) {
-			Image smallImage = ImageUtil.fetchByPrimaryKey(
+			Image smallImage = ImageLocalServiceUtil.fetchImage(
 				article.getSmallImageId());
 
 			if (Validator.isNotNull(article.getSmallImageURL())) {
@@ -672,17 +671,10 @@ public class JournalArticleStagedModelDataHandler
 			Element articleElement)
 		throws SystemException {
 
-		Image image = null;
+		Image image = ImageLocalServiceUtil.fetchImage(
+			articleImage.getArticleImageId());
 
-		try {
-			image = ImageUtil.findByPrimaryKey(
-				articleImage.getArticleImageId());
-
-			if (image.getTextObj() == null) {
-				return;
-			}
-		}
-		catch (NoSuchImageException nsie) {
+		if ((image == null) || image.getTextObj() == null) {
 			return;
 		}
 
@@ -731,10 +723,11 @@ public class JournalArticleStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
-			uuid, groupId);
+		JournalArticle article =
+			JournalArticleLocalServiceUtil.fetchJournalArticleByUuidAndGroupId(
+				uuid, groupId);
 
-		if (journalArticle == null) {
+		if (article == null) {
 			return false;
 		}
 
