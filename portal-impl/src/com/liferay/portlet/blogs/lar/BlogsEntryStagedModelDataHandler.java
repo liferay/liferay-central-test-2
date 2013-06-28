@@ -29,7 +29,6 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 
 import java.io.InputStream;
 
@@ -172,8 +171,9 @@ public class BlogsEntryStagedModelDataHandler
 			if (portletDataContext.isDataStrategyMirror()) {
 				serviceContext.setAttribute("urlTitle", entry.getUrlTitle());
 
-				BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
-					entry.getUuid(), portletDataContext.getScopeGroupId());
+				BlogsEntry existingEntry =
+					BlogsEntryLocalServiceUtil.fetchBlogsEntryByUuidAndGroupId(
+						entry.getUuid(), portletDataContext.getScopeGroupId());
 
 				if (existingEntry == null) {
 					serviceContext.setUuid(entry.getUuid());

@@ -674,7 +674,7 @@ public class JournalArticleStagedModelDataHandler
 		Image image = ImageLocalServiceUtil.fetchImage(
 			articleImage.getArticleImageId());
 
-		if ((image == null) || image.getTextObj() == null) {
+		if ((image == null) || (image.getTextObj() == null)) {
 			return;
 		}
 
