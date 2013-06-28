@@ -31,8 +31,8 @@ import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.persistence.RepositoryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
@@ -41,7 +41,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +86,7 @@ public class FolderStagedModelDataHandler
 		Repository repository = null;
 
 		if (folder.isMountPoint() || !folder.isDefaultRepository()) {
-			repository = RepositoryUtil.findByPrimaryKey(
+			repository = RepositoryLocalServiceUtil.getRepository(
 				folder.getRepositoryId());
 
 			StagedModelDataHandlerUtil.exportStagedModel(
@@ -329,15 +328,20 @@ public class FolderStagedModelDataHandler
 
 			String fileEntryTypeUuid = referenceDLFileEntryType.getUuid();
 
-			DLFileEntryType dlFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
-				fileEntryTypeUuid, portletDataContext.getScopeGroupId());
+			DLFileEntryType dlFileEntryType =
+				DLFileEntryTypeLocalServiceUtil.
+					fetchDLFileEntryTypeByUuidAndGroupId(
+						fileEntryTypeUuid,
+						portletDataContext.getScopeGroupId());
 
 			if (dlFileEntryType == null) {
 				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 					portletDataContext.getCompanyId());
 
-				dlFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
-					fileEntryTypeUuid, companyGroup.getGroupId());
+				dlFileEntryType =
+					DLFileEntryTypeLocalServiceUtil.
+						fetchDLFileEntryTypeByUuidAndGroupId(
+							fileEntryTypeUuid, companyGroup.getGroupId());
 			}
 
 			if (dlFileEntryType == null) {

@@ -27,7 +27,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
@@ -114,16 +113,19 @@ public class DLFileEntryTypeStagedModelDataHandler
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			DLFileEntryType existingDLFileEntryType =
-				DLFileEntryTypeUtil.fetchByUUID_G(
-					fileEntryType.getUuid(),
-					portletDataContext.getScopeGroupId());
+				DLFileEntryTypeLocalServiceUtil.
+					fetchDLFileEntryTypeByUuidAndGroupId(
+						fileEntryType.getUuid(),
+						portletDataContext.getScopeGroupId());
 
 			if (existingDLFileEntryType == null) {
 				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 					portletDataContext.getCompanyId());
 
-				existingDLFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
-					fileEntryType.getUuid(), companyGroup.getGroupId());
+				existingDLFileEntryType =
+					DLFileEntryTypeLocalServiceUtil.
+						fetchDLFileEntryTypeByUuidAndGroupId(
+							fileEntryType.getUuid(), companyGroup.getGroupId());
 			}
 
 			if (existingDLFileEntryType == null) {

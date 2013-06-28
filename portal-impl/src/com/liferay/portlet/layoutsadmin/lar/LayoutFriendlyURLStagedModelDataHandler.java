@@ -23,7 +23,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutFriendlyURL;
 import com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.persistence.LayoutFriendlyURLUtil;
 
 import java.util.Map;
 
@@ -79,9 +78,10 @@ public class LayoutFriendlyURLStagedModelDataHandler
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			LayoutFriendlyURL existingLayoutFriendlyURL =
-				LayoutFriendlyURLUtil.fetchByUUID_G(
-					layoutFriendlyURL.getUuid(),
-					portletDataContext.getScopeGroupId());
+				LayoutFriendlyURLLocalServiceUtil.
+					fetchLayoutFriendlyURLByUuidAndGroupId(
+						layoutFriendlyURL.getUuid(),
+						portletDataContext.getScopeGroupId());
 
 			if (existingLayoutFriendlyURL == null) {
 				serviceContext.setUuid(layoutFriendlyURL.getUuid());

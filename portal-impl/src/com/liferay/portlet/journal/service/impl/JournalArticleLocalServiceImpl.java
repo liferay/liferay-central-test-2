@@ -1292,6 +1292,15 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	@Override
+	public JournalArticle fetchArticle(
+			long groupId, String articleId, double version)
+		throws SystemException {
+
+		return journalArticlePersistence.fetchByG_A_V(
+			groupId, articleId, version);
+	}
+
 	/**
 	 * Returns the web content article with the ID.
 	 *

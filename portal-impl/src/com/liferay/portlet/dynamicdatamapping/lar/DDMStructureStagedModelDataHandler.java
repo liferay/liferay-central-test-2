@@ -29,7 +29,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -117,11 +116,14 @@ public class DDMStructureStagedModelDataHandler
 			DDMStructure existingStructure = null;
 
 			if (!preloaded) {
-				existingStructure = DDMStructureUtil.fetchByUUID_G(
-					structure.getUuid(), portletDataContext.getScopeGroupId());
+				existingStructure =
+					DDMStructureLocalServiceUtil.
+						fetchDDMStructureByUuidAndGroupId(
+							structure.getUuid(),
+							portletDataContext.getScopeGroupId());
 			}
 			else {
-				existingStructure = DDMStructureUtil.fetchByG_C_S(
+				existingStructure = DDMStructureLocalServiceUtil.fetchStructure(
 					portletDataContext.getScopeGroupId(),
 					structure.getClassNameId(), structure.getStructureKey());
 			}
