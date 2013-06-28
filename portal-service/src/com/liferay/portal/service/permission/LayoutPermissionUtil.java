@@ -66,6 +66,10 @@ public class LayoutPermissionUtil {
 			permissionChecker, layout, actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #contains(PermissionChecker,
+	 *             Layout, boolean, String)}
+	 */
 	public static boolean contains(
 			PermissionChecker permissionChecker, Layout layout,
 			String controlPanelCategory, boolean checkViewableGroup,
@@ -77,6 +81,10 @@ public class LayoutPermissionUtil {
 			actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #contains(PermissionChecker,
+	 *             Layout, String)}
+	 */
 	public static boolean contains(
 			PermissionChecker permissionChecker, Layout layout,
 			String controlPanelCategory, String actionId)
@@ -95,6 +103,10 @@ public class LayoutPermissionUtil {
 			permissionChecker, groupId, privateLayout, layoutId, actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #contains(PermissionChecker,
+	 *             long, boolean, long, String)}
+	 */
 	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId,
 			boolean privateLayout, long layoutId, String controlPanelCategory,
@@ -123,6 +135,11 @@ public class LayoutPermissionUtil {
 			permissionChecker, layout, checkLayoutUpdateable, actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             String)}
+	 */
 	public static boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
@@ -142,6 +159,11 @@ public class LayoutPermissionUtil {
 			checkLayoutUpdateable, actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             String)}
+	 */
 	public static boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout,
 			String controlPanelCategory, String actionId)

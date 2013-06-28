@@ -93,8 +93,8 @@ public interface LayoutPermission {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #containsWithoutViewableGroup(PermissionChecker,
-	 *             Layout, boolean, String)}
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             boolean, String)}
 	 */
 	public boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout,
@@ -107,9 +107,9 @@ public interface LayoutPermission {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *             {@link #containsWithoutViewableGroup(PermissionChecker,
-	 *             Layout, String)}
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             String)}
 	 */
 	public boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout,

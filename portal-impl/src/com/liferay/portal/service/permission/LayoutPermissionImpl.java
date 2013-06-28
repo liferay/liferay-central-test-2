@@ -305,8 +305,8 @@ public class LayoutPermissionImpl implements LayoutPermission {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #containsWithoutViewableGroup(PermissionChecker,
-	 *             Layout, boolean, String)}
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             boolean, String)}
 	 */
 	@Override
 	public boolean containsWithoutViewableGroup(
@@ -320,9 +320,9 @@ public class LayoutPermissionImpl implements LayoutPermission {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *             {@link #containsWithoutViewableGroup(PermissionChecker,
-	 *             Layout, String)}
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             String)}
 	 */
 	@Override
 	public boolean containsWithoutViewableGroup(
