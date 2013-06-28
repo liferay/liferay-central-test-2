@@ -34,7 +34,7 @@ import java.io.ObjectOutput;
 public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -62,6 +62,10 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		sb.append(type);
 		sb.append(", typeSettings=");
 		sb.append(typeSettings);
+		sb.append(", manualMembership=");
+		sb.append(manualMembership);
+		sb.append(", membershipRestriction=");
+		sb.append(membershipRestriction);
 		sb.append(", friendlyURL=");
 		sb.append(friendlyURL);
 		sb.append(", site=");
@@ -122,6 +126,9 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 			groupImpl.setTypeSettings(typeSettings);
 		}
 
+		groupImpl.setManualMembership(manualMembership);
+		groupImpl.setMembershipRestriction(membershipRestriction);
+
 		if (friendlyURL == null) {
 			groupImpl.setFriendlyURL(StringPool.BLANK);
 		}
@@ -152,6 +159,8 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		description = objectInput.readUTF();
 		type = objectInput.readInt();
 		typeSettings = objectInput.readUTF();
+		manualMembership = objectInput.readBoolean();
+		membershipRestriction = objectInput.readInt();
 		friendlyURL = objectInput.readUTF();
 		site = objectInput.readBoolean();
 		active = objectInput.readBoolean();
@@ -205,6 +214,9 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 			objectOutput.writeUTF(typeSettings);
 		}
 
+		objectOutput.writeBoolean(manualMembership);
+		objectOutput.writeInt(membershipRestriction);
+
 		if (friendlyURL == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -229,6 +241,8 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 	public String description;
 	public int type;
 	public String typeSettings;
+	public boolean manualMembership;
+	public int membershipRestriction;
 	public String friendlyURL;
 	public boolean site;
 	public boolean active;

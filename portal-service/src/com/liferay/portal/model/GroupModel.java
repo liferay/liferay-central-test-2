@@ -273,6 +273,41 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	public void setTypeSettings(String typeSettings);
 
 	/**
+	 * Returns the manual membership of this group.
+	 *
+	 * @return the manual membership of this group
+	 */
+	public boolean getManualMembership();
+
+	/**
+	 * Returns <code>true</code> if this group is manual membership.
+	 *
+	 * @return <code>true</code> if this group is manual membership; <code>false</code> otherwise
+	 */
+	public boolean isManualMembership();
+
+	/**
+	 * Sets whether this group is manual membership.
+	 *
+	 * @param manualMembership the manual membership of this group
+	 */
+	public void setManualMembership(boolean manualMembership);
+
+	/**
+	 * Returns the membership restriction of this group.
+	 *
+	 * @return the membership restriction of this group
+	 */
+	public int getMembershipRestriction();
+
+	/**
+	 * Sets the membership restriction of this group.
+	 *
+	 * @param membershipRestriction the membership restriction of this group
+	 */
+	public void setMembershipRestriction(int membershipRestriction);
+
+	/**
 	 * Returns the friendly u r l of this group.
 	 *
 	 * @return the friendly u r l of this group

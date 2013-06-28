@@ -137,6 +137,10 @@ public class GroupPersistenceTest {
 
 		newGroup.setTypeSettings(ServiceTestUtil.randomString());
 
+		newGroup.setManualMembership(ServiceTestUtil.randomBoolean());
+
+		newGroup.setMembershipRestriction(ServiceTestUtil.nextInt());
+
 		newGroup.setFriendlyURL(ServiceTestUtil.randomString());
 
 		newGroup.setSite(ServiceTestUtil.randomBoolean());
@@ -167,6 +171,10 @@ public class GroupPersistenceTest {
 		Assert.assertEquals(existingGroup.getType(), newGroup.getType());
 		Assert.assertEquals(existingGroup.getTypeSettings(),
 			newGroup.getTypeSettings());
+		Assert.assertEquals(existingGroup.getManualMembership(),
+			newGroup.getManualMembership());
+		Assert.assertEquals(existingGroup.getMembershipRestriction(),
+			newGroup.getMembershipRestriction());
 		Assert.assertEquals(existingGroup.getFriendlyURL(),
 			newGroup.getFriendlyURL());
 		Assert.assertEquals(existingGroup.getSite(), newGroup.getSite());
@@ -211,8 +219,9 @@ public class GroupPersistenceTest {
 			"groupId", true, "companyId", true, "creatorUserId", true,
 			"classNameId", true, "classPK", true, "parentGroupId", true,
 			"liveGroupId", true, "treePath", true, "name", true, "description",
-			true, "type", true, "typeSettings", true, "friendlyURL", true,
-			"site", true, "active", true);
+			true, "type", true, "typeSettings", true, "manualMembership", true,
+			"membershipRestriction", true, "friendlyURL", true, "site", true,
+			"active", true);
 	}
 
 	@Test
@@ -408,6 +417,10 @@ public class GroupPersistenceTest {
 		group.setType(ServiceTestUtil.nextInt());
 
 		group.setTypeSettings(ServiceTestUtil.randomString());
+
+		group.setManualMembership(ServiceTestUtil.randomBoolean());
+
+		group.setMembershipRestriction(ServiceTestUtil.nextInt());
 
 		group.setFriendlyURL(ServiceTestUtil.randomString());
 

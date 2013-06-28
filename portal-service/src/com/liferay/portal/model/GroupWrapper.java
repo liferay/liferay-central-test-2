@@ -60,6 +60,8 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 		attributes.put("description", getDescription());
 		attributes.put("type", getType());
 		attributes.put("typeSettings", getTypeSettings());
+		attributes.put("manualMembership", getManualMembership());
+		attributes.put("membershipRestriction", getMembershipRestriction());
 		attributes.put("friendlyURL", getFriendlyURL());
 		attributes.put("site", getSite());
 		attributes.put("active", getActive());
@@ -145,6 +147,19 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 
 		if (typeSettings != null) {
 			setTypeSettings(typeSettings);
+		}
+
+		Boolean manualMembership = (Boolean)attributes.get("manualMembership");
+
+		if (manualMembership != null) {
+			setManualMembership(manualMembership);
+		}
+
+		Integer membershipRestriction = (Integer)attributes.get(
+				"membershipRestriction");
+
+		if (membershipRestriction != null) {
+			setMembershipRestriction(membershipRestriction);
 		}
 
 		String friendlyURL = (String)attributes.get("friendlyURL");
@@ -481,6 +496,56 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	@Override
 	public void setTypeSettings(java.lang.String typeSettings) {
 		_group.setTypeSettings(typeSettings);
+	}
+
+	/**
+	* Returns the manual membership of this group.
+	*
+	* @return the manual membership of this group
+	*/
+	@Override
+	public boolean getManualMembership() {
+		return _group.getManualMembership();
+	}
+
+	/**
+	* Returns <code>true</code> if this group is manual membership.
+	*
+	* @return <code>true</code> if this group is manual membership; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isManualMembership() {
+		return _group.isManualMembership();
+	}
+
+	/**
+	* Sets whether this group is manual membership.
+	*
+	* @param manualMembership the manual membership of this group
+	*/
+	@Override
+	public void setManualMembership(boolean manualMembership) {
+		_group.setManualMembership(manualMembership);
+	}
+
+	/**
+	* Returns the membership restriction of this group.
+	*
+	* @return the membership restriction of this group
+	*/
+	@Override
+	public int getMembershipRestriction() {
+		return _group.getMembershipRestriction();
+	}
+
+	/**
+	* Sets the membership restriction of this group.
+	*
+	* @param membershipRestriction the membership restriction of this group
+	*/
+	@Override
+	public void setMembershipRestriction(int membershipRestriction) {
+		_group.setMembershipRestriction(membershipRestriction);
 	}
 
 	/**

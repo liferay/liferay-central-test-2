@@ -228,6 +228,8 @@
 		<field name="typeSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="manualMembership" type="boolean" />
+		<field name="membershipRestriction" type="int" />
 		<field name="friendlyURL" type="String">
 			<hint name="max-length">255</hint>
 		</field>
