@@ -918,6 +918,11 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	}
 
 	@Override
+	public boolean hasLocalOrRemoteStagingGroup() {
+		return _group.hasLocalOrRemoteStagingGroup();
+	}
+
+	@Override
 	public boolean hasPrivateLayouts() {
 		return _group.hasPrivateLayouts();
 	}
@@ -925,11 +930,6 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	@Override
 	public boolean hasPublicLayouts() {
 		return _group.hasPublicLayouts();
-	}
-
-	@Override
-	public boolean hasLocalOrRemoteStagingGroup() {
-		return _group.hasLocalOrRemoteStagingGroup();
 	}
 
 	@Override
