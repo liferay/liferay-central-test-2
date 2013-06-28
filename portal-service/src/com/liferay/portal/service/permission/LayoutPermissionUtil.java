@@ -135,11 +135,6 @@ public class LayoutPermissionUtil {
 			permissionChecker, layout, checkLayoutUpdateable, actionId);
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
-	 *             String)}
-	 */
 	public static boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
@@ -148,6 +143,11 @@ public class LayoutPermissionUtil {
 			permissionChecker, layout, true, actionId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #containsWithoutViewableGroup(PermissionChecker, Layout,
+	 *             boolean, String)}
+	 */
 	public static boolean containsWithoutViewableGroup(
 			PermissionChecker permissionChecker, Layout layout,
 			String controlPanelCategory, boolean checkLayoutUpdateable,
