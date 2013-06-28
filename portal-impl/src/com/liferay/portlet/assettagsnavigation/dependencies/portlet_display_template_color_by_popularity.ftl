@@ -2,8 +2,8 @@
 	<ul class="tag-items tag-list">
 		<#assign assetTagService = serviceLocator.findService("com.liferay.portlet.asset.service.AssetTagService")>
 
-		<#assign classNameId = getterUtil.getLong(classNameId, 0) />
 		<#assign scopeGroupId = getterUtil.getLong(scopeGroupId, themeDisplay.getScopeGroupId()) />
+		<#assign classNameId = getterUtil.getLong(classNameId, 0) />
 
 		<#assign maxCount = 1 />
 		<#assign minCount = 1 />
