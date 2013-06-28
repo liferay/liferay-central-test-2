@@ -46,10 +46,8 @@ public class LayoutExportBackgroundTaskExecutor
 		long groupId = MapUtil.getLong(taskContextMap, "groupId");
 		boolean privateLayout = MapUtil.getBoolean(
 			taskContextMap, "privateLayout");
-
 		long[] layoutIds = GetterUtil.getLongValues(
 			taskContextMap.get("layoutIds"));
-
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
 		Date startDate = (Date)taskContextMap.get("startDate");

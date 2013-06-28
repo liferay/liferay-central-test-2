@@ -82,14 +82,11 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 		}
 		catch (Exception e) {
 			status = BackgroundTaskConstants.STATUS_FAILED;
-
 			statusMessage =
 				"Unable to executed background task: " +
 					StackTraceUtil.getStackTrace(e);
 
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to execute background task", e);
-			}
+			_log.error("Unable to execute background task", e);
 		}
 		finally {
 			BackgroundTaskLocalServiceUtil.updateBackgroundTask(

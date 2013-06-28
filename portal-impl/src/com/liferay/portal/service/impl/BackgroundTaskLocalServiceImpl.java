@@ -59,7 +59,6 @@ public class BackgroundTaskLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		final long backgroundTaskId = counterLocalService.increment();
@@ -278,11 +277,11 @@ public class BackgroundTaskLocalServiceImpl
 			backgroundTask.setCompletionDate(now);
 		}
 
+		backgroundTask.setStatus(status);
+
 		if (Validator.isNotNull(statusMessage)) {
 			backgroundTask.setStatusMessage(statusMessage);
 		}
-
-		backgroundTask.setStatus(status);
 
 		backgroundTaskPersistence.update(backgroundTask);
 
