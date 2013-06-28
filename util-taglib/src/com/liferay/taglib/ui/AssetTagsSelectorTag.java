@@ -90,7 +90,8 @@ public class AssetTagsSelectorTag extends IncludeTag {
 		}
 
 		request.setAttribute(
-			"liferay-ui:asset-tags-selector:autoFocus", String.valueOf(_autoFocus));
+			"liferay-ui:asset-tags-selector:autoFocus",
+			String.valueOf(_autoFocus));
 		request.setAttribute(
 			"liferay-ui:asset-tags-selector:className", _className);
 		request.setAttribute(
