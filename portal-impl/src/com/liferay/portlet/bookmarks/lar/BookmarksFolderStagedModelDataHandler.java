@@ -131,8 +131,9 @@ public class BookmarksFolderStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		BookmarksFolder folder = BookmarksFolderUtil.fetchByUUID_G(
-			uuid, groupId);
+		BookmarksFolder folder =
+			BookmarksFolderLocalServiceUtil.
+				fetchBookmarksFolderByUuidAndGroupId(uuid, groupId);
 
 		if (folder == null) {
 			return false;

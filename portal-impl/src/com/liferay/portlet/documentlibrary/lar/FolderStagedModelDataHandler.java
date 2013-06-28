@@ -42,7 +42,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -380,7 +379,9 @@ public class FolderStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		DLFolder dlFolder = DLFolderUtil.fetchByUUID_G(uuid, groupId);
+		DLFolder dlFolder =
+			DLFolderLocalServiceUtil.fetchDLFolderByUuidAndGroupId(
+				uuid, groupId);
 
 		if (dlFolder == null) {
 			return false;
