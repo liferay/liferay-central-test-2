@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -27,12 +26,10 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 public class AssetCategoryStagedModelDataHandler
 	extends BaseStagedModelDataHandler<AssetCategory> {
 
-	public static final String[] CLASS_NAMES = {
-		AssetCategory.class.getName()};
+	public static final String[] CLASS_NAMES = {AssetCategory.class.getName()};
 
 	public void deleteStagedModel(
-			String uuid, long groupId, String className, String extraData)
-		throws PortalException, SystemException {
+		String uuid, long groupId, String className, String extraData) {
 	}
 
 	@Override
