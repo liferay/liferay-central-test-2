@@ -184,7 +184,7 @@ public class SocialActivitySetLocalServiceImpl
 	}
 
 	@Override
-	public List<SocialActivitySet> getUserActivitySets(
+	public List<SocialActivitySet> getUserViewableActivitySets(
 			long userId, int start, int end)
 		throws SystemException {
 
@@ -192,7 +192,9 @@ public class SocialActivitySetLocalServiceImpl
 	}
 
 	@Override
-	public int getUserActivitySetsCount(long userId) throws SystemException {
+	public int getUserViewableActivitySetsCount(long userId)
+		throws SystemException {
+
 		return socialActivitySetFinder.countByUser(userId);
 	}
 
