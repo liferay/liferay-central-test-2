@@ -377,16 +377,12 @@ public class FolderStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			DLFolder dlFolder = DLFolderUtil.fetchByUUID_G(uuid, groupId);
+		DLFolder dlFolder = DLFolderUtil.fetchByUUID_G(uuid, groupId);
 
-			if (dlFolder == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
+		if (dlFolder == null) {
 			return false;
 		}
 

@@ -519,15 +519,11 @@ public class OrganizationStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			OrganizationLocalServiceUtil.getOrganizationByUuidAndCompanyId(
-				uuid, companyId);
-		}
-		catch (Exception e) {
-			return false;
-		}
+		OrganizationLocalServiceUtil.getOrganizationByUuidAndCompanyId(
+			uuid, companyId);
 
 		return true;
 	}

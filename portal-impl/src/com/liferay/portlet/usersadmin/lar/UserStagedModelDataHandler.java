@@ -55,14 +55,10 @@ public class UserStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			UserLocalServiceUtil.getUserByUuidAndCompanyId(uuid, companyId);
-		}
-		catch (Exception e) {
-			return false;
-		}
+		UserLocalServiceUtil.getUserByUuidAndCompanyId(uuid, companyId);
 
 		return true;
 	}

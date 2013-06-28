@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.lar;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -56,18 +55,14 @@ public class AssetCategoryStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			AssetCategory category =
-				AssetCategoryLocalServiceUtil.
-					fetchAssetCategoryByUuidAndGroupId(uuid, groupId);
+		AssetCategory category =
+			AssetCategoryLocalServiceUtil.fetchAssetCategoryByUuidAndGroupId(
+				uuid, groupId);
 
-			if (category == null) {
-				return false;
-			}
-		}
-		catch (SystemException se) {
+		if (category == null) {
 			return false;
 		}
 

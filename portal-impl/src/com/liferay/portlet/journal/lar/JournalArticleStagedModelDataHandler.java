@@ -728,17 +728,13 @@ public class JournalArticleStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
-				uuid, groupId);
+		JournalArticle journalArticle = JournalArticleUtil.fetchByUUID_G(
+			uuid, groupId);
 
-			if (journalArticle == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
+		if (journalArticle == null) {
 			return false;
 		}
 

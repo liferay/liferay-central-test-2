@@ -128,17 +128,13 @@ public class BookmarksFolderStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			BookmarksFolder folder = BookmarksFolderUtil.fetchByUUID_G(
-				uuid, groupId);
+		BookmarksFolder folder = BookmarksFolderUtil.fetchByUUID_G(
+			uuid, groupId);
 
-			if (folder == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
+		if (folder == null) {
 			return false;
 		}
 

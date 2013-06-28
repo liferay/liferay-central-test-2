@@ -604,17 +604,12 @@ public class FileEntryStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
-				uuid, groupId);
+		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(uuid, groupId);
 
-			if (dlFileEntry == null) {
-				return false;
-			}
-		}
-		catch (Exception e) {
+		if (dlFileEntry == null) {
 			return false;
 		}
 

@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.lar;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -57,18 +56,14 @@ public class AssetVocabularyStagedModelDataHandler
 
 	@Override
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
-		try {
-			AssetVocabulary vocabulary =
-				AssetVocabularyLocalServiceUtil.
-					fetchAssetVocabularyByUuidAndGroupId(uuid, groupId);
+		AssetVocabulary vocabulary =
+			AssetVocabularyLocalServiceUtil.
+				fetchAssetVocabularyByUuidAndGroupId(uuid, groupId);
 
-			if (vocabulary == null) {
-				return false;
-			}
-		}
-		catch (SystemException se) {
+		if (vocabulary == null) {
 			return false;
 		}
 

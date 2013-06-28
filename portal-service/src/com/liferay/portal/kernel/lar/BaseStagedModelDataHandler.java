@@ -122,9 +122,14 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		if (elementName.equals("missing-reference")) {
 			String uuid = referenceElement.attributeValue("uuid");
 
-			return validateMissingReference(
-				uuid, portletDataContext.getCompanyId(),
-				portletDataContext.getScopeGroupId());
+			try {
+				return validateMissingReference(
+					uuid, portletDataContext.getCompanyId(),
+					portletDataContext.getScopeGroupId());
+			}
+			catch (Exception e) {
+				return false;
+			}
 		}
 
 		return true;
@@ -145,7 +150,8 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		throws Exception;
 
 	protected boolean validateMissingReference(
-		String uuid, long companyId, long groupId) {
+			String uuid, long companyId, long groupId)
+		throws Exception {
 
 		return true;
 	}
