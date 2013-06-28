@@ -522,8 +522,13 @@ public class OrganizationStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		OrganizationLocalServiceUtil.getOrganizationByUuidAndCompanyId(
-			uuid, companyId);
+		Organization organization =
+			OrganizationLocalServiceUtil.fetchOrganizationByUuidAndCompanyId(
+				uuid, companyId);
+
+		if (organization == null) {
+			return false;
+		}
 
 		return true;
 	}

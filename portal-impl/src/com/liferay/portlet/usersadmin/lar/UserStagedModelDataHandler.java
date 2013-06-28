@@ -58,7 +58,12 @@ public class UserStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		UserLocalServiceUtil.getUserByUuidAndCompanyId(uuid, companyId);
+		User user = UserLocalServiceUtil.fetchUserByUuidAndCompanyId(
+			uuid, companyId);
+
+		if (user == null) {
+			return false;
+		}
 
 		return true;
 	}
