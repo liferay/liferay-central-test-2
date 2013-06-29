@@ -35,9 +35,22 @@ public abstract class BaseUserNotificationHandler
 			int deliveryType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return doDeliver(
-			userId, classNameId, notificationType, deliveryType,
-			serviceContext);
+		UserNotificationDefinition userNotificationDefinition =
+			UserNotificationManagerUtil.fetchUserNotificationDefinition(
+				_portletId, classNameId, notificationType);
+
+		UserNotificationDeliveryType userNotificationDeliveryType =
+			userNotificationDefinition.getUserNotificationDeliveryType(
+				deliveryType);
+
+		UserNotificationDelivery userNotificationDelivery =
+			UserNotificationDeliveryLocalServiceUtil.
+				getUserNotificationDelivery(
+					userId, _portletId, classNameId, notificationType,
+					deliveryType, userNotificationDeliveryType.isDefault()
+				);
+
+		return userNotificationDelivery.isDeliver();
 	}
 
 	@Override
@@ -67,29 +80,6 @@ public abstract class BaseUserNotificationHandler
 		catch (Exception e) {
 			throw new PortalException(e);
 		}
-	}
-
-	protected boolean doDeliver(
-			long userId, long classNameId, int notificationType,
-			int deliveryType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		UserNotificationDefinition userNotificationDefinition =
-			UserNotificationManagerUtil.fetchUserNotificationDefinition(
-				_portletId, classNameId, notificationType);
-
-		UserNotificationDeliveryType userNotificationDeliveryType =
-			userNotificationDefinition.getUserNotificationDeliveryType(
-				deliveryType);
-
-		UserNotificationDelivery userNotificationDelivery =
-			UserNotificationDeliveryLocalServiceUtil.
-				getUserNotificationDelivery(
-					userId, _portletId, classNameId, notificationType,
-					deliveryType, userNotificationDeliveryType.isDefault()
-				);
-
-		return userNotificationDelivery.isDeliver();
 	}
 
 	protected UserNotificationFeedEntry doInterpret(
