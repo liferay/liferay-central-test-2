@@ -581,7 +581,7 @@ create table UserNotificationDelivery (
 	userNotificationDeliveryId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
-	portletId VARCHAR(75) null,
+	portletId VARCHAR(200) null,
 	classNameId LONG,
 	notificationType INTEGER,
 	deliveryType INTEGER,
