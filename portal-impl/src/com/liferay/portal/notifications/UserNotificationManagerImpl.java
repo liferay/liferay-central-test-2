@@ -104,19 +104,19 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 	}
 
 	@Override
-	public boolean deliver(
-			String portletId, long userId, long classNameId,
+	public boolean isDeliver(
+			long userId, String portletId, long classNameId,
 			int notificationType, int deliveryType)
 		throws PortalException, SystemException {
 
-		return deliver(
-			StringPool.BLANK, portletId, userId, classNameId, notificationType,
+		return isDeliver(
+			userId, StringPool.BLANK, portletId, classNameId, notificationType,
 			deliveryType, null);
 	}
 
 	@Override
-	public boolean deliver(
-			String selector, String portletId, long userId, long classNameId,
+	public boolean isDeliver(
+			long userId, String selector, String portletId, long classNameId,
 			int notificationType, int deliveryType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -135,7 +135,7 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 			return false;
 		}
 
-		return userNotificationHandler.deliver(
+		return userNotificationHandler.isDeliver(
 			userId, classNameId, notificationType, deliveryType,
 			serviceContext);
 	}

@@ -30,7 +30,7 @@ public abstract class BaseUserNotificationHandler
 	implements UserNotificationHandler {
 
 	@Override
-	public boolean deliver(
+	public boolean isDeliver(
 			long userId, long classNameId, int notificationType,
 			int deliveryType, ServiceContext serviceContext)
 		throws PortalException, SystemException {

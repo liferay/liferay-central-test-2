@@ -83,23 +83,23 @@ public class UserNotificationManagerUtil {
 			selector, userNotificationEvent, serviceContext);
 	}
 
-	public boolean deliver(
-			String portletId, long userId, long classNameId,
+	public static boolean isDeliver(
+			long userId, String portletId, long classNameId,
 			int notificationType, int deliveryType)
 		throws PortalException, SystemException {
 
-		return getUserNotificationManager().deliver(
-			portletId, userId, classNameId, notificationType, deliveryType);
+		return getUserNotificationManager().isDeliver(
+			userId, portletId, classNameId, notificationType, deliveryType);
 	}
 
-	public boolean deliver(
-			String selector, String portletId, long userId, long classNameId,
+	public static boolean isDeliver(
+			long userId, String selector, String portletId, long classNameId,
 			int notificationType, int deliveryType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return getUserNotificationManager().deliver(
-			selector, portletId, userId, classNameId, notificationType,
+		return getUserNotificationManager().isDeliver(
+			userId, selector, portletId, classNameId, notificationType,
 			deliveryType, serviceContext);
 	}
 
