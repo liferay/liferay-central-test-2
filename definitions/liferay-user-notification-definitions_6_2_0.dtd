@@ -24,6 +24,3 @@ delivery-type*)>
 <!ELEMENT defualt (#PCDATA)>
 
 <!ELEMENT modifiable (#PCDATA)>
-
-
-

@@ -254,6 +254,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		SocialRequestInterpreterLocalServiceUtil.deleteRequestInterpreter(
 			portlet.getSocialRequestInterpreterInstance());
 
+		UserNotificationManagerUtil.deleteUserNotificationDefinitions(
+			portlet.getPortletId());
+
 		List<UserNotificationHandler> userNotificationHandlers =
 			portlet.getUserNotificationHandlerInstances();
 
@@ -265,9 +268,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					userNotificationHandler);
 			}
 		}
-
-		UserNotificationManagerUtil.deleteUserNotificationDefinitions(
-			portlet.getPortletId());
 
 		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
 
