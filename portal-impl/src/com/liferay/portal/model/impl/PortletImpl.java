@@ -1979,10 +1979,10 @@ public class PortletImpl extends PortletBaseImpl {
 
 	/**
 	 * Returns the names of the classes that represent user notification
-	 * interpreters associated with the portlet.
+	 * handlers associated with the portlet.
 	 *
 	 * @return the names of the classes that represent user notification
-	 *         interpreters associated with the portlet
+	 *         handlers associated with the portlet
 	 */
 	@Override
 	public List<String> getUserNotificationHandlerClasses() {
@@ -1990,9 +1990,9 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
-	 * Returns the user notification interpreter instances of the portlet.
+	 * Returns the user notification handler instances of the portlet.
 	 *
-	 * @return the user notification interpreter instances of the portlet
+	 * @return the user notification handler instances of the portlet
 	 */
 	@Override
 	public List<UserNotificationHandler>
@@ -3686,11 +3686,10 @@ public class PortletImpl extends PortletBaseImpl {
 
 	/**
 	 * Sets the names of the classes that represent user notification
-	 * interpreters associated with the portlet.
+	 * handlers associated with the portlet.
 	 *
 	 * @param userNotificationHandlerClasses the names of the classes that
-	 *        represent user notification interpreters associated with the
-	 *        portlet
+	 *        represent user notification handlers associated with the portlet
 	 */
 	@Override
 	public void setUserNotificationHandlerClasses(
@@ -4310,7 +4309,7 @@ public class PortletImpl extends PortletBaseImpl {
 	private String _userNotificationDefinitions;
 
 	/**
-	 * The names of the classes that represents user notification interpreters
+	 * The names of the classes that represents user notification handlers
 	 * associated with the portlet.
 	 */
 	private List<String> _userNotificationHandlerClasses;
