@@ -33,17 +33,6 @@ public class UserNotificationHandlerImpl implements UserNotificationHandler {
 	}
 
 	@Override
-	public boolean isDeliver(
-			long userId, long classNameId, int notificationType,
-			int deliveryType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return _userNotificationHandler.isDeliver(
-			userId, classNameId, notificationType, deliveryType,
-			serviceContext);
-	}
-
-	@Override
 	public String getPortletId() {
 		return _userNotificationHandler.getPortletId();
 	}
@@ -61,6 +50,17 @@ public class UserNotificationHandlerImpl implements UserNotificationHandler {
 
 		return _userNotificationHandler.interpret(
 			userNotificationEvent, serviceContext);
+	}
+
+	@Override
+	public boolean isDeliver(
+			long userId, long classNameId, int notificationType,
+			int deliveryType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return _userNotificationHandler.isDeliver(
+			userId, classNameId, notificationType, deliveryType,
+			serviceContext);
 	}
 
 	private UserNotificationHandler _userNotificationHandler;

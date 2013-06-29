@@ -24,11 +24,6 @@ import com.liferay.portal.service.ServiceContext;
  */
 public interface UserNotificationHandler {
 
-	public boolean isDeliver(
-			long userId, long classNameId, int notificationType,
-			int deliveryType, ServiceContext serviceContext)
-		throws PortalException, SystemException;
-
 	public String getPortletId();
 
 	public String getSelector();
@@ -37,5 +32,10 @@ public interface UserNotificationHandler {
 			UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)
 		throws PortalException;
+
+	public boolean isDeliver(
+			long userId, long classNameId, int notificationType,
+			int deliveryType, ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 }

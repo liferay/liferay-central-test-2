@@ -104,43 +104,6 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 	}
 
 	@Override
-	public boolean isDeliver(
-			long userId, String portletId, long classNameId,
-			int notificationType, int deliveryType)
-		throws PortalException, SystemException {
-
-		return isDeliver(
-			userId, StringPool.BLANK, portletId, classNameId, notificationType,
-			deliveryType, null);
-	}
-
-	@Override
-	public boolean isDeliver(
-			long userId, String selector, String portletId, long classNameId,
-			int notificationType, int deliveryType,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Map<String, UserNotificationHandler> userNotificationHandlers =
-			_userNotificationHandlers.get(selector);
-
-		if (userNotificationHandlers == null) {
-			return false;
-		}
-
-		UserNotificationHandler userNotificationHandler =
-			userNotificationHandlers.get(portletId);
-
-		if (userNotificationHandler == null) {
-			return false;
-		}
-
-		return userNotificationHandler.isDeliver(
-			userId, classNameId, notificationType, deliveryType,
-			serviceContext);
-	}
-
-	@Override
 	public UserNotificationDefinition fetchUserNotificationDefinition(
 		String portletId, long classNameId, int notificationType) {
 
@@ -214,6 +177,43 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 
 		return userNotificationHandler.interpret(
 			userNotificationEvent, serviceContext);
+	}
+
+	@Override
+	public boolean isDeliver(
+			long userId, String portletId, long classNameId,
+			int notificationType, int deliveryType)
+		throws PortalException, SystemException {
+
+		return isDeliver(
+			userId, StringPool.BLANK, portletId, classNameId, notificationType,
+			deliveryType, null);
+	}
+
+	@Override
+	public boolean isDeliver(
+			long userId, String selector, String portletId, long classNameId,
+			int notificationType, int deliveryType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Map<String, UserNotificationHandler> userNotificationHandlers =
+			_userNotificationHandlers.get(selector);
+
+		if (userNotificationHandlers == null) {
+			return false;
+		}
+
+		UserNotificationHandler userNotificationHandler =
+			userNotificationHandlers.get(portletId);
+
+		if (userNotificationHandler == null) {
+			return false;
+		}
+
+		return userNotificationHandler.isDeliver(
+			userId, classNameId, notificationType, deliveryType,
+			serviceContext);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

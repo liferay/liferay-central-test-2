@@ -38,17 +38,6 @@ public interface UserNotificationManager {
 	public void deleteUserNotificationHandler(
 		UserNotificationHandler userNotificationHandler);
 
-	public boolean isDeliver(
-			long userId, String portletId, long classNameId,
-			int notificationType, int deliveryType)
-		throws PortalException, SystemException;
-
-	public boolean isDeliver(
-			long userId, String selector, String portletId, long classNameId,
-			int notificationType, int deliveryType,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException;
-
 	public UserNotificationDefinition fetchUserNotificationDefinition(
 		String portletId, long classNameId, int notificationType);
 
@@ -59,5 +48,16 @@ public interface UserNotificationManager {
 			String selector, UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)
 		throws PortalException;
+
+	public boolean isDeliver(
+			long userId, String portletId, long classNameId,
+			int notificationType, int deliveryType)
+		throws PortalException, SystemException;
+
+	public boolean isDeliver(
+			long userId, String selector, String portletId, long classNameId,
+			int notificationType, int deliveryType,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 }
