@@ -24,8 +24,6 @@ public class WorkflowConstants {
 
 	public static final int ACTION_SAVE_DRAFT = 2;
 
-	public static final String CONTEXT_ACTIVITY_TYPE = "activityType";
-
 	public static final String CONTEXT_COMPANY_ID = "companyId";
 
 	public static final String CONTEXT_ENTRY_CLASS_NAME = "entryClassName";
