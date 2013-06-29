@@ -992,7 +992,9 @@
 		<field name="userNotificationDeliveryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
-		<field name="portletId" type="String" />
+		<field name="portletId" type="String">
+			<hint name="max-length">200</hint>
+		</field>
 		<field name="classNameId" type="long" />
 		<field name="notificationType" type="int" />
 		<field name="deliveryType" type="int" />
