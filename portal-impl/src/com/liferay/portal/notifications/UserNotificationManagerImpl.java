@@ -140,6 +140,7 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 			serviceContext);
 	}
 
+	@Override
 	public UserNotificationDefinition fetchUserNotificationDefinition(
 		String portletId, long classNameId, int notificationType) {
 

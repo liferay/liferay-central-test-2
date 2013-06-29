@@ -60,6 +60,7 @@ public class UserNotificationDeliveryLocalServiceImpl
 		userNotificationDeliveryPersistence.removeByUserId(userId);
 	}
 
+	@Override
 	public void deleteUserNotificationDelivery(
 			long userId, String portletId, long classNameId,
 			int notificationType, int deliveryType)
