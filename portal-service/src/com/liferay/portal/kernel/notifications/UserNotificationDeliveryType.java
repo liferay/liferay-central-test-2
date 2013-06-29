@@ -20,9 +20,9 @@ package com.liferay.portal.kernel.notifications;
 public class UserNotificationDeliveryType {
 
 	public UserNotificationDeliveryType(
-		String name, int type, boolean defualtValue, boolean modifiable) {
+		String name, int type, boolean defaultValue, boolean modifiable) {
 
-		_default = defualtValue;
+		_default = defaultValue;
 		_modifiable = modifiable;
 		_name = name;
 		_type = type;

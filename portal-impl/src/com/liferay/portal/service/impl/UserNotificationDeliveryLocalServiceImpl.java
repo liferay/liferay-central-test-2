@@ -91,7 +91,7 @@ public class UserNotificationDeliveryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		UserNotificationDelivery userNotificationDelivery =
-			fetchUserNotificationDelivery(
+			userNotificationDeliveryPersistence.fetchByU_P_C_N_D(
 				userId, portletId, classNameId, notificationType, deliveryType);
 
 		if (userNotificationDelivery != null) {

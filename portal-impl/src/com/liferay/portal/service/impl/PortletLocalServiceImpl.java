@@ -1419,6 +1419,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("social-request-interpreter-class"),
 				portletModel.getSocialRequestInterpreterClass()));
+		portletModel.setUserNotificationDefinitions(
+			GetterUtil.getString(
+				portletElement.elementText("user-notification-definitions"),
+				portletModel.getUserNotificationDefinitions()));
 
 		List<String> userNotificationHandlerClasses = new ArrayList<String>();
 
@@ -1432,11 +1436,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		portletModel.setUserNotificationHandlerClasses(
 			userNotificationHandlerClasses);
-
-		portletModel.setUserNotificationDefinitions(
-			GetterUtil.getString(
-				portletElement.elementText("user-notification-definitions"),
-				portletModel.getUserNotificationDefinitions()));
 
 		portletModel.setWebDAVStorageToken(
 			GetterUtil.getString(

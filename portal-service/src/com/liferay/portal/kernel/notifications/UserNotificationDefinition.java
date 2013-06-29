@@ -57,9 +57,9 @@ public class UserNotificationDefinition {
 	}
 
 	public UserNotificationDeliveryType getUserNotificationDeliveryType(
-		int type) {
+		int deliveryType) {
 
-		return _userNotificationDeliveryTypes.get(type);
+		return _userNotificationDeliveryTypes.get(deliveryType);
 	}
 
 	public Map<Integer, UserNotificationDeliveryType>

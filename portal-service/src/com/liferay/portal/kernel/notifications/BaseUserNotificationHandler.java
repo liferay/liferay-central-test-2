@@ -76,8 +76,7 @@ public abstract class BaseUserNotificationHandler
 			UserNotificationDeliveryLocalServiceUtil.
 				getUserNotificationDelivery(
 					userId, _portletId, classNameId, notificationType,
-					deliveryType, userNotificationDeliveryType.isDefault()
-				);
+					deliveryType, userNotificationDeliveryType.isDefault());
 
 		return userNotificationDelivery.isDeliver();
 	}

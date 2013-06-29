@@ -579,8 +579,8 @@ public class PortletBagFactory {
 
 		Element rootElement = document.getRootElement();
 
-		for (Element notificationElement : rootElement.elements("definition")) {
-			String modelName = notificationElement.elementText("model-name");
+		for (Element definitionElement : rootElement.elements("definition")) {
+			String modelName = definitionElement.elementText("model-name");
 
 			long classNameId = 0;
 
@@ -589,10 +589,10 @@ public class PortletBagFactory {
 			}
 
 			int notificationType = GetterUtil.getInteger(
-				notificationElement.elementText("notification-type"));
+				definitionElement.elementText("notification-type"));
 
 			String description = GetterUtil.getString(
-				notificationElement.elementText("description"));
+				definitionElement.elementText("description"));
 
 			UserNotificationDefinition userNotificationDefinition =
 				new UserNotificationDefinition(
@@ -600,22 +600,19 @@ public class PortletBagFactory {
 					description);
 
 			for (Element deliveryTypeElement :
-					notificationElement.elements("delivery-type")) {
+					definitionElement.elements("delivery-type")) {
 
 				String name = deliveryTypeElement.elementText("name");
-
 				int type = GetterUtil.getInteger(
 					deliveryTypeElement.elementText("type"));
-
-				boolean defualt = GetterUtil.getBoolean(
+				boolean defaultValue = GetterUtil.getBoolean(
 					deliveryTypeElement.elementText("default"));
-
 				boolean modifiable = GetterUtil.getBoolean(
 					deliveryTypeElement.elementText("modifiable"));
 
 				userNotificationDefinition.addUserNotificationDeliveryType(
 					new UserNotificationDeliveryType(
-						name, type, defualt, modifiable));
+						name, type, defaultValue, modifiable));
 			}
 
 			UserNotificationManagerUtil.addUserNotificationDefinition(
