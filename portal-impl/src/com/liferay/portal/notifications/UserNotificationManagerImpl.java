@@ -38,13 +38,6 @@ import java.util.Map;
  */
 public class UserNotificationManagerImpl implements UserNotificationManager {
 
-	/**
-	 * Adds the use notification definition to the list of available
-	 * definitions based on portletId.
-	 *
-	 * @param portletId the portletId of the user notifications definitions
-	 * @param userNotificationDefinition the user notification definitions
-	 */
 	@Override
 	public void addUserNotificationDefinition(
 		String portletId,
@@ -90,23 +83,11 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 			userNotificationHandler.getPortletId(), userNotificationHandler);
 	}
 
-	/**
-	 * Removes the user notification handler from the list of available
-	 * handlers.
-	 *
-	 * @param portletId the portletId of the user notifications definitions
-	 */
 	@Override
 	public void deleteUserNotificationDefinitions(String portletId) {
 		_userNotificationDefinitions.remove(portletId);
 	}
 
-	/**
-	 * Removes the user notification handler from the list of available
-	 * handlers.
-	 *
-	 * @param userNotificationHandler the user notification handler
-	 */
 	@Override
 	public void deleteUserNotificationHandler(
 		UserNotificationHandler userNotificationHandler) {
