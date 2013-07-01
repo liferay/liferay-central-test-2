@@ -440,12 +440,15 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		PortletDataHandlerBoolean portletDataHandlerBoolean =
 			(PortletDataHandlerBoolean)portletDataHandlerControl;
 
-		PortletDataHandlerControl[] children =
+		PortletDataHandlerControl[] childPortletDataHandlerControls =
 			portletDataHandlerBoolean.getChildren();
 
-		if (children != null) {
-			for (PortletDataHandlerControl child : children) {
-				addUncheckedModelAdditionCount(portletDataContext, child);
+		if (childPortletDataHandlerControls != null) {
+			for (PortletDataHandlerControl childPortletDataHandlerControl :
+					childPortletDataHandlerControls) {
+
+				addUncheckedModelAdditionCount(
+					portletDataContext, childPortletDataHandlerControl);
 			}
 		}
 
