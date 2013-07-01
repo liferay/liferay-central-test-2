@@ -71,23 +71,21 @@
 
 <%!
 private String _getStatusCssClass(int status) {
-	String statusLabel = WorkflowConstants.toLabel(status);
-
-	String labelCssClass = "label workflow-status-" + statusLabel;
+	String statusCssClass = "label workflow-status-" + WorkflowConstants.toLabel(status);
 
 	if (status == WorkflowConstants.STATUS_APPROVED) {
-		labelCssClass += " label-success";
+		statusCssClass += " label-success";
 	}
 	else if (status == WorkflowConstants.STATUS_DRAFT) {
-		labelCssClass += " label-info";
+		statusCssClass += " label-info";
 	}
 	else if (status == WorkflowConstants.STATUS_EXPIRED) {
-		labelCssClass += " label-important";
+		statusCssClass += " label-important";
 	}
 	else if (status == WorkflowConstants.STATUS_PENDING) {
-		labelCssClass += " label-warning";
+		statusCssClass += " label-warning";
 	}
 
-	return labelCssClass;
+	return statusCssClass;
 }
 %>

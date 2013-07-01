@@ -31,14 +31,6 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute("view_entries
 
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
 
-String rowCheckerName = FileEntry.class.getSimpleName();
-long rowCheckerId = fileEntry.getFileEntryId();
-
-if (fileShortcut != null) {
-	rowCheckerName = DLFileShortcut.class.getSimpleName();
-	rowCheckerId = fileShortcut.getFileShortcutId();
-}
-
 long assetClassPK = 0;
 
 if (!latestFileVersion.getVersion().equals(DLFileEntryConstants.VERSION_DEFAULT) && (latestFileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
@@ -46,6 +38,14 @@ if (!latestFileVersion.getVersion().equals(DLFileEntryConstants.VERSION_DEFAULT)
 }
 else {
 	assetClassPK = fileEntry.getFileEntryId();
+}
+
+String rowCheckerName = FileEntry.class.getSimpleName();
+long rowCheckerId = fileEntry.getFileEntryId();
+
+if (fileShortcut != null) {
+	rowCheckerName = DLFileShortcut.class.getSimpleName();
+	rowCheckerId = fileShortcut.getFileShortcutId();
 }
 %>
 
