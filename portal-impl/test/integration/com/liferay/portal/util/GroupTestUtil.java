@@ -116,8 +116,8 @@ public class GroupTestUtil {
 
 		return GroupServiceUtil.addGroup(
 			parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
-			description, type, friendlyURL, site, active, manualMembership,
-			membershipRestriction, serviceContext);
+			description, type, manualMembership, membershipRestriction,
+			friendlyURL, site, active, serviceContext);
 	}
 
 	public static void enableLocalStaging(Group group) throws Exception {
