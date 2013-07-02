@@ -14,9 +14,7 @@
 
 package com.liferay.portlet.polls.util;
 
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -33,11 +31,9 @@ public class PollsTestUtil {
 	public static PollsChoice addChoice(long groupId, long questionId)
 		throws Exception {
 
-		User user = UserLocalServiceUtil.getUser(TestPropsValues.getUserId());
-
 		return PollsChoiceLocalServiceUtil.addChoice(
-			user.getUserId(), questionId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(),
+			TestPropsValues.getUserId(), questionId,
+			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.getServiceContext(groupId));
 	}
 
@@ -53,10 +49,8 @@ public class PollsTestUtil {
 			long groupId, long questionId, long choiceId)
 		throws Exception {
 
-		User user = UserLocalServiceUtil.getUser(TestPropsValues.getUserId());
-
 		return PollsVoteLocalServiceUtil.addVote(
-			user.getUserId(), questionId, choiceId,
+			TestPropsValues.getUserId(), questionId, choiceId,
 			ServiceTestUtil.getServiceContext(groupId));
 	}
 
