@@ -396,11 +396,11 @@
 		<column name="description" type="String" />
 		<column name="type" type="int" />
 		<column name="typeSettings" type="String" />
+		<column name="manualMembership" type="boolean" />
+		<column name="membershipRestriction" type="int" />
 		<column name="friendlyURL" type="String" />
 		<column name="site" type="boolean" />
 		<column name="active" type="boolean" />
-		<column name="manualMembership" type="boolean" />
-		<column name="membershipRestriction" type="int" />
 
 		<!-- Relationships -->
 
