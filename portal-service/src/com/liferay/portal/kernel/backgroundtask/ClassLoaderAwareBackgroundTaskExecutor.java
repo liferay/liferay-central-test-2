@@ -12,51 +12,42 @@
  * details.
  */
 
-package com.liferay.portal.backgroundtask.executor;
+package com.liferay.portal.kernel.backgroundtask;
 
-import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;
-import com.liferay.portal.kernel.backgroundtask.BackgroundTaskResult;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BackgroundTask;
-import com.liferay.portal.model.Lock;
-import com.liferay.portal.service.LockLocalServiceUtil;
 
 /**
  * @author Michael C. Han
  */
-public class SerialBackgroundTaskExecutor implements BackgroundTaskExecutor {
+public class ClassLoaderAwareBackgroundTaskExecutor
+	implements BackgroundTaskExecutor {
 
-	public SerialBackgroundTaskExecutor(
-		BackgroundTaskExecutor backgroundTaskExecutor) {
+	public ClassLoaderAwareBackgroundTaskExecutor(
+		BackgroundTaskExecutor backgroundTaskExecutor,
+		ClassLoader classLoader) {
 
 		_backgroundTaskExecutor = backgroundTaskExecutor;
+		_classLoader = classLoader;
 	}
 
 	@Override
 	public BackgroundTaskResult execute(BackgroundTask backgroundTask)
 		throws Exception {
 
-		Lock lock = null;
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		if (_classLoader != contextClassLoader) {
+			currentThread.setContextClassLoader(_classLoader);
+		}
 
 		try {
-			if (isSerial()) {
-				String owner =
-					backgroundTask.getName() + StringPool.POUND +
-						backgroundTask.getBackgroundTaskId();
-
-				lock = LockLocalServiceUtil.lock(
-					backgroundTask.getUserId(),
-					BackgroundTaskExecutor.class.getName(),
-					backgroundTask.getTaskExecutorClassName(), owner, false, 0);
-			}
-
 			return _backgroundTaskExecutor.execute(backgroundTask);
 		}
 		finally {
-			if (lock != null) {
-				LockLocalServiceUtil.unlock(
-					BaseBackgroundTaskExecutor.class.getName(),
-					backgroundTask.getTaskExecutorClassName());
+			if (_classLoader != contextClassLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -67,5 +58,6 @@ public class SerialBackgroundTaskExecutor implements BackgroundTaskExecutor {
 	}
 
 	private BackgroundTaskExecutor _backgroundTaskExecutor;
+	private ClassLoader _classLoader;
 
 }

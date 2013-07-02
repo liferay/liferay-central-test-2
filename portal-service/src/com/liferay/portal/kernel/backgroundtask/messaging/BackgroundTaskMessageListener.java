@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.backgroundtask.messaging;
+package com.liferay.portal.kernel.backgroundtask.messaging;
 
 import com.liferay.portal.DuplicateLockException;
-import com.liferay.portal.backgroundtask.executor.ClassLoaderAwareBackgroundTaskExecutor;
-import com.liferay.portal.backgroundtask.executor.SerialBackgroundTaskExecutor;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskResult;
+import com.liferay.portal.kernel.backgroundtask.ClassLoaderAwareBackgroundTaskExecutor;
+import com.liferay.portal.kernel.backgroundtask.SerialBackgroundTaskExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;

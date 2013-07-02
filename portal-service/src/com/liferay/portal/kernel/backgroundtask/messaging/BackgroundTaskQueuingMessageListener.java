@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.backgroundtask.messaging;
+package com.liferay.portal.kernel.backgroundtask.messaging;
 
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;

@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.backgroundtask.executor;
-
-import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;
+package com.liferay.portal.kernel.backgroundtask;
 
 /**
  * @author Michael C. Han

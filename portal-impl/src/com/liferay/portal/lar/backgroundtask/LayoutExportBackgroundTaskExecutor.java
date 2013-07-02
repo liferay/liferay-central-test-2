@@ -12,27 +12,30 @@
  * details.
  */
 
-package com.liferay.portal.lar.backgroundtask.executor;
+package com.liferay.portal.lar.backgroundtask;
 
-import com.liferay.portal.backgroundtask.executor.BaseBackgroundTaskExecutor;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskResult;
-import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.backgroundtask.BaseBackgroundTaskExecutor;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.BackgroundTask;
+import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 
+import java.io.File;
 import java.io.Serializable;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 /**
  * @author Daniel Kocsis
+ * @author Michael C. Han
  */
-public class LayoutImportBackgroundTaskExecutor
+public class LayoutExportBackgroundTaskExecutor
 	extends BaseBackgroundTaskExecutor {
 
-	public LayoutImportBackgroundTaskExecutor() {
+	public LayoutExportBackgroundTaskExecutor() {
 		setSerial(true);
 	}
 
@@ -46,17 +49,22 @@ public class LayoutImportBackgroundTaskExecutor
 		long groupId = MapUtil.getLong(taskContextMap, "groupId");
 		boolean privateLayout = MapUtil.getBoolean(
 			taskContextMap, "privateLayout");
+		long[] layoutIds = GetterUtil.getLongValues(
+			taskContextMap.get("layoutIds"));
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
+		Date startDate = (Date)taskContextMap.get("startDate");
+		Date endDate = (Date)taskContextMap.get("endDate");
 
-		List<FileEntry> attachmentsFileEntries =
-			backgroundTask.getAttachmentsFileEntries();
+		File larFile = LayoutServiceUtil.exportLayoutsAsFile(
+			groupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
 
-		for (FileEntry attachmentsFileEntry : attachmentsFileEntries) {
-			LayoutServiceUtil.importLayouts(
-				groupId, privateLayout, parameterMap,
-				attachmentsFileEntry.getContentStream());
-		}
+		long userId = MapUtil.getLong(taskContextMap, "userId");
+
+		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
+			userId, backgroundTask.getBackgroundTaskId(), larFile.getName(),
+			larFile);
 
 		return BackgroundTaskResult.SUCCESS;
 	}
