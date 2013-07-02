@@ -171,18 +171,18 @@ public class I18nFilter extends BasePortalFilter {
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
 		if (layoutSet != null) {
-			int[] groupFriendlyURLPos = PortalUtil.getGroupFriendlyURLPos(
+			int[] groupFriendlyURLIndex = PortalUtil.getGroupFriendlyURLIndex(
 				requestURI);
 
-			if (groupFriendlyURLPos != null) {
-				int x = groupFriendlyURLPos[0];
-				int y = groupFriendlyURLPos[1];
+			if (groupFriendlyURLIndex != null) {
+				int x = groupFriendlyURLIndex[0];
+				int y = groupFriendlyURLIndex[1];
 
 				String groupFriendlyURL = requestURI.substring(x, y);
 
 				Group group = layoutSet.getGroup();
 
-				if (group.getFriendlyURL().equals(groupFriendlyURL)) {
+				if (groupFriendlyURL.equals(group.getFriendlyURL())) {
 					redirect = contextPath + i18nPath + requestURI.substring(y);
 				}
 			}

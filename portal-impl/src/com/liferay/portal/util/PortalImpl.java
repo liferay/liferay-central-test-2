@@ -972,10 +972,10 @@ public class PortalImpl implements Portal {
 			if ((pos > 0) && (pos < canonicalURL.length())) {
 				String friendlyURL = canonicalURL.substring(pos);
 
-				int[] friendlyURLPos = getGroupFriendlyURLPos(friendlyURL);
+				int[] friendlyURLIndex = getGroupFriendlyURLIndex(friendlyURL);
 
-				if (friendlyURLPos != null) {
-					int y = friendlyURLPos[1];
+				if (friendlyURLIndex != null) {
+					int y = friendlyURLIndex[1];
 
 					friendlyURL = friendlyURL.substring(y);
 
@@ -2374,7 +2374,8 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public int[] getGroupFriendlyURLPos(String requestURI) {
+	@Override
+	public int[] getGroupFriendlyURLIndex(String requestURI) {
 		int x = 0;
 		int y = 0;
 
