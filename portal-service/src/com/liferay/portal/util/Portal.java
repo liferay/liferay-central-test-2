@@ -257,13 +257,13 @@ public interface Portal {
 	 * Returns an array with the alternate locales, considering if the page is
 	 * showing just a content and the translations of this content.
 	 *
-	 * @param  request the servlet request for the page
-	 * @return the array of alternate locales
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
-	 *
+	 * @param      request the servlet request for the page
+	 * @return     the array of alternate locales
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales()}
+	 *             com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales(
+	 *             )}
 	 */
 	public Locale[] getAlternateLocales(HttpServletRequest request)
 		throws PortalException, SystemException;
@@ -897,13 +897,15 @@ public interface Portal {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelist()}
+	 *             com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelist(
+	 *             )}
 	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelist();
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelistActions()}
+	 *             com.liferay.portal.kernel.portlet.PortletSecurityUtil#getWhitelistActions(
+	 *             )}
 	 */
 	public Set<String> getPortletAddDefaultResourceCheckWhitelistActions();
 
@@ -1252,13 +1254,15 @@ public interface Portal {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelist()}
+	 *             com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelist(
+	 *             )}
 	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelist();
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelistActions()}
+	 *             com.liferay.portal.kernel.portlet.PortletSecurityUtil#resetWhitelistActions(
+	 *             )}
 	 */
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelistActions();
 

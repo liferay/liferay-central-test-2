@@ -219,7 +219,8 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 * com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales()}
+	 *             com.liferay.portal.kernel.language.LanguageUtil.getAvailableLocales(
+	 *             )}
 	 */
 	public static Locale[] getAlternateLocales(HttpServletRequest request)
 		throws PortalException, SystemException {
@@ -1053,7 +1054,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 6.2.0 replaced by {@link
-	 * PortletSecurityUtil#getWhitelist()}
+	 *             PortletSecurityUtil#getWhitelist()}
 	 */
 	public static Set<String> getPortletAddDefaultResourceCheckWhitelist() {
 		return getPortal().getPortletAddDefaultResourceCheckWhitelist();
@@ -1061,7 +1062,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 6.2.0 replaced by {@link
-	 * PortletSecurityUtil#getWhitelistActions()}
+	 *             PortletSecurityUtil#getWhitelistActions()}
 	 */
 	public static Set<String>
 		getPortletAddDefaultResourceCheckWhitelistActions() {
@@ -1745,7 +1746,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 6.2.0 replaced by {@link
-	 * PortletSecurityUtil#resetWhitelist()}
+	 *             PortletSecurityUtil#resetWhitelist()}
 	 */
 	public static Set<String> resetPortletAddDefaultResourceCheckWhitelist() {
 		return getPortal().resetPortletAddDefaultResourceCheckWhitelist();
@@ -1753,7 +1754,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated As of 6.2.0 replaced by {@link
-	 * PortletSecurityUtil#resetWhitelistActions()}
+	 *             PortletSecurityUtil#resetWhitelistActions()}
 	 */
 	public static Set<String>
 		resetPortletAddDefaultResourceCheckWhitelistActions() {
