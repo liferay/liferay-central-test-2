@@ -18,6 +18,7 @@
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
+
 String p_u_i_d = ParamUtil.getString(request, "p_u_i_d");
 long groupId = ParamUtil.getLong(request, "groupId");
 boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
@@ -82,11 +83,11 @@ portletURL.setParameter("target", target);
 				}
 			}
 
+			groupParams.put("excludedGroupIds", excludedGroupIds);
+
 			if (strutsAction.equals("/users_admin/select_site")) {
 				groupParams.put("manualMembership", Boolean.TRUE);
 			}
-
-			groupParams.put("excludedGroupIds", excludedGroupIds);
 
 			groupParams.put("site", Boolean.TRUE);
 
