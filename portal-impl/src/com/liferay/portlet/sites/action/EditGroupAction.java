@@ -465,10 +465,10 @@ public class EditGroupAction extends PortletAction {
 		int membershipRestriction =
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION;
 
-		boolean membershipRestrictionParam = ParamUtil.getBoolean(
+		boolean actionRequestMembershipRestriction = ParamUtil.getBoolean(
 			actionRequest, "membershipRestriction");
 
-		if (membershipRestrictionParam &&
+		if (actionRequestMembershipRestriction &&
 			(parentGroupId != GroupConstants.DEFAULT_PARENT_GROUP_ID)) {
 
 			membershipRestriction =
