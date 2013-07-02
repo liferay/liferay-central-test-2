@@ -19,7 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -43,6 +42,8 @@ else {
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-bookmark"), currentURL);
 	}
 }
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">

@@ -21,7 +21,6 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 DDMStructure structure = null;
 
@@ -30,6 +29,8 @@ long structureClassNameId = PortalUtil.getClassNameId(DDMStructure.class);
 if ((classPK > 0) && (structureClassNameId == classNameId)) {
 	structure = DDMStructureServiceUtil.getStructure(classPK);
 }
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

@@ -19,7 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -33,6 +32,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 boolean smallImage = BeanParamUtil.getBoolean(entry, request, "smallImage");
 
 boolean preview = ParamUtil.getBoolean(request, "preview");
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 %>
 
 <c:if test="<%= showHeader %>">

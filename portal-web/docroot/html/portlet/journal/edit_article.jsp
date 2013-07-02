@@ -42,8 +42,6 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
-
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
@@ -114,6 +112,8 @@ else {
 		defaultLanguageId = article.getDefaultLocale();
 	}
 }
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 
 String[] mainSections = PropsValues.JOURNAL_ARTICLE_FORM_ADD;
 
