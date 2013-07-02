@@ -32,18 +32,6 @@ LayoutSet publicLayoutSet = null;
 LayoutSetPrototype publicLayoutSetPrototype = null;
 boolean publicLayoutSetPrototypeLinkEnabled = true;
 
-boolean manualMembership = true;
-
-if (liveGroup != null) {
-	manualMembership = GetterUtil.getBoolean(liveGroup.isManualMembership(), true);
-}
-
-boolean membershipRestriction = false;
-
-if ((liveGroup != null) && (liveGroup.getMembershipRestriction() == GroupConstants.MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS)) {
-	membershipRestriction = true;
-}
-
 if (showPrototypes && (group != null)) {
 	try {
 		LayoutLocalServiceUtil.getLayouts(liveGroup.getGroupId(), true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -76,6 +64,18 @@ if (showPrototypes && (group != null)) {
 	}
 	catch (Exception e) {
 	}
+}
+
+boolean manualMembership = true;
+
+if (liveGroup != null) {
+	manualMembership = GetterUtil.getBoolean(liveGroup.isManualMembership(), true);
+}
+
+boolean membershipRestriction = false;
+
+if ((liveGroup != null) && (liveGroup.getMembershipRestriction() == GroupConstants.MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS)) {
+	membershipRestriction = true;
 }
 %>
 
