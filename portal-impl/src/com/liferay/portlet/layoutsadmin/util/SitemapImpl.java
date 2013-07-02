@@ -169,10 +169,10 @@ public class SitemapImpl implements Sitemap {
 
 				Element alternateURLElement = urlElement.addElement("link");
 
-				alternateURLElement.addAttribute("rel", "alternate");
+				alternateURLElement.addAttribute("href", href);
 				alternateURLElement.addAttribute(
 					"hreflang", LocaleUtil.toW3cLanguageId(locale));
-				alternateURLElement.addAttribute("href", href);
+				alternateURLElement.addAttribute("rel", "alternate");
 			}
 
 			Element alternateURLElement = urlElement.addElement("link");
@@ -188,11 +188,11 @@ public class SitemapImpl implements Sitemap {
 
 		Map<Locale, String> alternateURLs = new HashMap<Locale, String>();
 
-		for (Locale curLocale : LanguageUtil.getAvailableLocales()) {
+		for (Locale availableLocale : LanguageUtil.getAvailableLocales()) {
 			String alternateURL = PortalUtil.getAlternateURL(
-				canonicalURL, themeDisplay, curLocale, layout);
+				canonicalURL, themeDisplay, availableLocale, layout);
 
-			alternateURLs.put(curLocale, alternateURL);
+			alternateURLs.put(availableLocale, alternateURL);
 		}
 
 		return alternateURLs;
