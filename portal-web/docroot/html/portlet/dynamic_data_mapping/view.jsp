@@ -160,7 +160,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:if test="<%= total > 0 %>">
 			<aui:button-row>
-				<aui:button cssClass="delete-structures-button" disabled="true" name="delete" onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' value="delete" />
+				<aui:button cssClass="delete-structures-button" disabled="<%= true %>" name="delete" onClick='<%= renderResponse.getNamespace() + "deleteStructures();" %>' value="delete" />
 			</aui:button-row>
 
 			<div class="separator"><!-- --></div>

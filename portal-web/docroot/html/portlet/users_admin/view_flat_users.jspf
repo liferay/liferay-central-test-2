@@ -30,13 +30,13 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 
 <liferay-ui:search-container
 	searchContainer="<%= searchContainer %>"
-	var="userSearch"
+	var="userSearchContainer"
 >
 	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= currentURLObj.toString() %>" />
 	<aui:input name="deleteUserIds" type="hidden" />
 
 	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
+	UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerms();
 
 	if ((searchTerms.getOrganizationId() > 0) && !OrganizationPermissionUtil.contains(permissionChecker, searchTerms.getOrganizationId(), ActionKeys.MANAGE_USERS)) {
 		inactiveUsersCount = 0;
@@ -44,7 +44,7 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 		status = WorkflowConstants.STATUS_APPROVED;
 	}
 
-	UserDisplayTerms displayTerms = (UserDisplayTerms)userSearch.getDisplayTerms();
+	UserDisplayTerms displayTerms = (UserDisplayTerms)userSearchContainer.getDisplayTerms();
 
 	if (!searchTerms.isAdvancedSearch()) {
 		if (status == WorkflowConstants.STATUS_APPROVED) {
@@ -67,7 +67,7 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 		try {
 			userOrganization = OrganizationLocalServiceUtil.getOrganization(userOrganizationId);
 
-			userSearch.setEmptyResultsMessage("this-organization-does-not-have-any-users");
+			userSearchContainer.setEmptyResultsMessage("this-organization-does-not-have-any-users");
 		}
 		catch (NoSuchOrganizationException nsoe) {
 		}
@@ -212,7 +212,7 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/users_admin/edit_user" />
-			<portlet:param name="redirect" value="<%= userSearch.getIteratorURL().toString() %>" />
+			<portlet:param name="redirect" value="<%= userSearchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</liferay-portlet:renderURL>
 
@@ -272,7 +272,7 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 
 	<%
 	if (!showDeleteButton && !showRestoreButton) {
-		userSearch.setRowChecker(null);
+		userSearchContainer.setRowChecker(null);
 	}
 	%>
 
@@ -280,6 +280,6 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 </liferay-ui:search-container>
 
 <aui:script>
-	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deactivate', '#<portlet:namespace /><%= searchContainerReference.getId("userSearch") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
-	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />restore', '#<portlet:namespace /><%= searchContainerReference.getId("userSearch") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deactivate', '#<portlet:namespace /><%= searchContainerReference.getId("userSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />restore', '#<portlet:namespace /><%= searchContainerReference.getId("userSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 </aui:script>

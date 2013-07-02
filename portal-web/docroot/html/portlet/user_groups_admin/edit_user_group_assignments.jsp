@@ -64,14 +64,14 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	<liferay-ui:search-container
 		rowChecker="<%= new UserUserGroupChecker(renderResponse, userGroup) %>"
 		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-		var="userSearch"
+		var="userSearchContainer"
 	>
 		<liferay-ui:search-form
 			page="/html/portlet/users_admin/user_search.jsp"
 		/>
 
 		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
+		UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerms();
 
 		LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 

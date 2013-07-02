@@ -220,7 +220,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale)
 
 		<c:if test="<%= total > 0 %>">
 			<aui:button-row>
-				<aui:button cssClass="delete-templates-button" disabled="true" name="delete" onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' value="delete" />
+				<aui:button cssClass="delete-templates-button" disabled="<%= true %>" name="delete" onClick='<%= renderResponse.getNamespace() + "deleteTemplates();" %>' value="delete" />
 			</aui:button-row>
 
 			<div class="separator"><!-- --></div>

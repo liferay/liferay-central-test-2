@@ -268,11 +268,11 @@ if (organization != null) {
 
 							<liferay-ui:search-container
 								searchContainer="<%= searchContainer %>"
-								var="organizationSearch"
+								var="organizationSearchContainer"
 							>
 
 								<%
-								OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
+								OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearchContainer.getSearchTerms();
 
 								long parentOrganizationId = _getParentOrganizationId(request, organization, filterManageableOrganizations);
 
@@ -463,7 +463,7 @@ if (organization != null) {
 </c:choose>
 
 <aui:script>
-	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= searchContainerReference.getId("organizationSearch") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= searchContainerReference.getId("organizationSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 </aui:script>
 
 <%!

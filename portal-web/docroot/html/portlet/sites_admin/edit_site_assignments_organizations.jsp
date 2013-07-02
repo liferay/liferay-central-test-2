@@ -60,7 +60,7 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 <liferay-ui:search-container
 	rowChecker="<%= organizationGroupChecker %>"
 	searchContainer="<%= searchContainer %>"
-	var="organizationSearch"
+	var="organizationSearchContainer"
 >
 	<c:if test='<%= !tabs1.equals("summary") %>'>
 		<liferay-ui:search-form
@@ -71,7 +71,7 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 	</c:if>
 
 	<%
-	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
+	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearchContainer.getSearchTerms();
 
 	long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 

@@ -62,7 +62,7 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 <liferay-ui:search-container
 	rowChecker="<%= userGroupChecker %>"
 	searchContainer="<%= searchContainer %>"
-	var="userSearch"
+	var="userSearchContainer"
 >
 	<c:if test='<%= !tabs1.equals("summary") %>'>
 		<liferay-ui:search-form
@@ -73,7 +73,7 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 	</c:if>
 
 	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
+	UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerms();
 
 	LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
@@ -91,7 +91,7 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 			<c:otherwise>
 
 				<%
-				results = UserLocalServiceUtil.getGroupUsers(group.getParentGroupId(), userSearch.getStart(), userSearch.getEnd());
+				results = UserLocalServiceUtil.getGroupUsers(group.getParentGroupId(), userSearchContainer.getStart(), userSearchContainer.getEnd());
 				total = UserLocalServiceUtil.getGroupUsersCount(group.getParentGroupId());
 
 				pageContext.setAttribute("results", results);

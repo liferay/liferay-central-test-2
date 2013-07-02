@@ -34,11 +34,11 @@ public class SearchContainerReference {
 	}
 
 	public String getId() {
-		return getId(DEFAULT_VAR);
+		return getId(_DEFAULT_VAR);
 	}
 
 	public String getId(String var) {
-		SearchContainer searchContainer = _searchContainerMap.get(var);
+		SearchContainer<?> searchContainer = _searchContainers.get(var);
 
 		if (searchContainer == null) {
 			return StringPool.BLANK;
@@ -47,19 +47,19 @@ public class SearchContainerReference {
 		return searchContainer.getId(_request, _namespace);
 	}
 
-	public void register(SearchContainer searchContainer) {
-		register(DEFAULT_VAR, searchContainer);
+	public void register(SearchContainer<?> searchContainer) {
+		register(_DEFAULT_VAR, searchContainer);
 	}
 
-	public void register(String var, SearchContainer searchContainer) {
-		_searchContainerMap.put(var, searchContainer);
+	public void register(String var, SearchContainer<?> searchContainer) {
+		_searchContainers.put(var, searchContainer);
 	}
 
-	private static final String DEFAULT_VAR = "searchContainer";
+	private static final String _DEFAULT_VAR = "searchContainer";
 
 	private String _namespace;
 	private HttpServletRequest _request;
-	private Map<String, SearchContainer> _searchContainerMap =
-		new HashMap<String, SearchContainer>();
+	private Map<String, SearchContainer<?>> _searchContainers =
+		new HashMap<String, SearchContainer<?>>();
 
 }

@@ -42,7 +42,7 @@ if (filterManageableOrganizations) {
 		<liferay-ui:search-container
 			rowChecker="<%= new RowChecker(renderResponse) %>"
 			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-			var="organizationSearch"
+			var="organizationSearchContainer"
 		>
 			<aui:input disabled="<%= true %>" name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 			<aui:input name="deleteOrganizationIds" type="hidden" />
@@ -64,7 +64,7 @@ if (filterManageableOrganizations) {
 			</c:if>
 
 			<%
-			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
+			OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearchContainer.getSearchTerms();
 
 			long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
@@ -92,7 +92,7 @@ if (filterManageableOrganizations) {
 			>
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="struts_action" value="/users_admin/view" />
-					<portlet:param name="redirect" value="<%= organizationSearch.getIteratorURL().toString() %>" />
+					<portlet:param name="redirect" value="<%= organizationSearchContainer.getIteratorURL().toString() %>" />
 					<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 					<portlet:param name="usersListView" value="<%= UserConstants.LIST_VIEW_TREE %>" />
 				</liferay-portlet:renderURL>
@@ -128,5 +128,5 @@ if (filterManageableOrganizations) {
 </c:choose>
 
 <aui:script>
-	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= searchContainerReference.getId("organizationSearch") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />delete', '#<portlet:namespace /><%= searchContainerReference.getId("organizationSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 </aui:script>

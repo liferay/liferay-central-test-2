@@ -83,14 +83,14 @@ portletURL.setParameter("tabs3", tabs3);
 			<liferay-ui:search-container
 				rowChecker="<%= new UserPasswordPolicyChecker(renderResponse, passwordPolicy) %>"
 				searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-				var="userSearch"
+				var="userSearchContainer"
 			>
 				<liferay-ui:search-form
 					page="/html/portlet/users_admin/user_search.jsp"
 				/>
 
 				<%
-				UserSearchTerms searchTerms = (UserSearchTerms)userSearch.getSearchTerms();
+				UserSearchTerms searchTerms = (UserSearchTerms)userSearchContainer.getSearchTerms();
 
 				LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
@@ -147,14 +147,14 @@ portletURL.setParameter("tabs3", tabs3);
 			<liferay-ui:search-container
 				rowChecker="<%= new OrganizationPasswordPolicyChecker(renderResponse, passwordPolicy) %>"
 				searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-				var="organizationSearch"
+				var="organizationSearchContainer"
 			>
 				<liferay-ui:search-form
 					page="/html/portlet/users_admin/organization_search.jsp"
 				/>
 
 				<%
-				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearch.getSearchTerms();
+				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)organizationSearchContainer.getSearchTerms();
 
 				long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 
