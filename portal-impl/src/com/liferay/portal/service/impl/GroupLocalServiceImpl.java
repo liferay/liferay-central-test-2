@@ -223,6 +223,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *         <code>null</code>)
 	 * @param  type the group's type. For more information see {@link
 	 *         com.liferay.portal.model.GroupConstants}
+	 * @param  manualMembership whether manual membership is allowed
+	 * @param  membershipRestriction the membership restriction (by default
+	 *         {@link
+	 *         com.liferay.portal.model.GroupConstants#DEFAULT_MEMBERSHIP_RESTRICTION})
 	 * @param  friendlyURL the group's friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  site whether the group is to be associated with a main site
@@ -3337,6 +3341,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 *         <code>null</code>)
 	 * @param  type the group's new type. For more information see {@link
 	 *         com.liferay.portal.model.GroupConstants}
+	 * @param  manualMembership whether manual membership is allowed
+	 * @param  membershipRestriction the membership restriction (by default
+	 *         {@link
+	 *         com.liferay.portal.model.GroupConstants#DEFAULT_MEMBERSHIP_RESTRICTION})
 	 * @param  friendlyURL the group's new friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  active whether the group is active
