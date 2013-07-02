@@ -68,7 +68,7 @@ for (int i = 0; i < results.size(); i++) {
 			continue;
 		}
 
-		if (actionId.equals(ActionKeys.ADD_TO_PAGE) && _isPortletCategoryHidden(curPortlet)) {
+		if (actionId.equals(ActionKeys.ADD_TO_PAGE) && _hasHiddenPortletCategory(curPortlet)) {
 			continue;
 		}
 	}
@@ -166,12 +166,12 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
 
 <%!
-private boolean _isPortletCategoryHidden(Portlet portlet) {
+private boolean _hasHiddenPortletCategory(Portlet portlet) {
 	PortletCategory portletCategory = (PortletCategory)WebAppPool.get(portlet.getCompanyId(), WebKeys.PORTLET_CATEGORY);
 
-	PortletCategory undefinedCategory = portletCategory.getCategory("category.hidden");
+	PortletCategory hiddenPortletCategory = portletCategory.getCategory("category.hidden");
 
-	Set<String> portletIds = undefinedCategory.getPortletIds();
+	Set<String> portletIds = hiddenPortletCategory.getPortletIds();
 
 	if (portletIds.contains(portlet.getPortletId())) {
 		return true;

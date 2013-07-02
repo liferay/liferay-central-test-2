@@ -145,7 +145,6 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 						<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_resource.jsp" />
 
 						<c:if test="<%= (modelResources != null) && !modelResources.isEmpty() %>">
-
 							<h4><liferay-ui:message key="resource-permissions" /></h4>
 
 							<div class="permission-group">
