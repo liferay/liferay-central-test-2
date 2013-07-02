@@ -98,25 +98,26 @@ public class AssetRendererFactoryRegistryImpl
 	public void register(AssetRendererFactory assetRendererFactory) {
 		String className = assetRendererFactory.getClassName();
 
-		AssetRendererFactory oldByClassName =
+		AssetRendererFactory classNameAssetRendererFactory =
 			_assetRenderFactoriesMapByClassName.put(
 				className, assetRendererFactory);
 
-		if (_log.isWarnEnabled() && (oldByClassName != null)) {
+		if (_log.isWarnEnabled() && (classNameAssetRendererFactory != null)) {
 			_log.warn(
-				"Replacing " + oldByClassName + " for className " +
-				className + " with " + assetRendererFactory);
+				"Replacing " + classNameAssetRendererFactory +
+					" for class name " + className + " with " +
+						assetRendererFactory);
 		}
 
 		String type = assetRendererFactory.getType();
 
-		AssetRendererFactory oldByType =
+		AssetRendererFactory typeAssetRendererFactory =
 			_assetRenderFactoriesMapByClassType.put(type, assetRendererFactory);
 
-		if (_log.isWarnEnabled() && (oldByType != null)) {
+		if (_log.isWarnEnabled() && (typeAssetRendererFactory != null)) {
 			_log.warn(
-				"Replacing " + oldByType + " for type " + type +
-				" with " + assetRendererFactory);
+				"Replacing " + typeAssetRendererFactory + " for type " + type +
+					" with " + assetRendererFactory);
 		}
 	}
 
