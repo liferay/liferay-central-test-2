@@ -79,9 +79,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     CacheException
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -92,9 +89,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     CacheException
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -105,9 +99,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     CacheException
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -210,8 +201,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -236,8 +225,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -255,8 +242,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -270,8 +255,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @return
-	 * @throws     IllegalStateException
 	 * @deprecated As of 6.2.0
 	 */
 	@Override
@@ -370,8 +353,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @throws     TerracottaNotRunningException
-	 * @deprecated As of 6.1.0, replaced by {@link #isClusterBulkLoadEnabled()}
+	 * @deprecated As of 6.1.0, replaced by {@link #isClusterBulkLoadEnabled}
 	 */
 	@Override
 	public boolean isClusterCoherent() throws TerracottaNotRunningException {
@@ -423,8 +405,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @throws     TerracottaNotRunningException
-	 * @deprecated As of 6.1.0, replaced by {@link #isNodeBulkLoadEnabled()}
+	 * @deprecated As of 6.1.0, replaced by {@link #isNodeBulkLoadEnabled}
 	 */
 	@Override
 	public boolean isNodeCoherent() throws TerracottaNotRunningException {
@@ -524,7 +505,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 
 	@Override
 	public void registerCacheLoader(CacheLoader cacheLoader) {
-
 		_ehcache.registerCacheLoader(cacheLoader);
 	}
 
@@ -705,8 +685,6 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @throws     TerracottaNotRunningException
-	 * @throws     UnsupportedOperationException
 	 * @deprecated As of 6.1.0, replaced by {@link
 	 *             #setNodeBulkLoadEnabled(boolean)}
 	 */
@@ -770,10 +748,8 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	/**
-	 * @throws     TerracottaNotRunningException
-	 * @throws     UnsupportedOperationException
 	 * @deprecated As of 6.1.0, replaced by {@link
-	 *             #waitUntilClusterBulkLoadComplete()}
+	 *             #waitUntilClusterBulkLoadComplete}
 	 */
 	@Override
 	public void waitUntilClusterCoherent()
