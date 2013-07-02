@@ -46,7 +46,7 @@ public class LiferayBootstrapCacheLoaderFactory<T extends BootstrapCacheLoader>
 
 		try {
 			_bootstrapCacheLoaderFactory =
-				(BootstrapCacheLoaderFactory)InstanceFactory.newInstance(
+				(BootstrapCacheLoaderFactory<T>)InstanceFactory.newInstance(
 					className);
 		}
 		catch (Exception e) {
