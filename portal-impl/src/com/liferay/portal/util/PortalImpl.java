@@ -924,9 +924,7 @@ public class PortalImpl implements Portal {
 	 *             LanguageUtil.getAvailableLocales( )}
 	 */
 	@Override
-	public Locale[] getAlternateLocales(HttpServletRequest request)
-		throws PortalException, SystemException {
-
+	public Locale[] getAlternateLocales(HttpServletRequest request) {
 		return LanguageUtil.getAvailableLocales();
 	}
 
