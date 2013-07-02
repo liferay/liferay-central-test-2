@@ -33,7 +33,6 @@ public class PollsTestUtil {
 	public static PollsChoice addChoice(long groupId, long questionId)
 		throws Exception {
 
-
 		User user = UserLocalServiceUtil.getUser(TestPropsValues.getUserId());
 
 		return PollsChoiceLocalServiceUtil.addChoice(
