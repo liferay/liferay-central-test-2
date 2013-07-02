@@ -169,6 +169,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Map getAllWithLoader(Collection keys, Object argument)
 		throws CacheException {
 
