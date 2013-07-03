@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchBackgroundTaskException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.BackgroundTaskLocalServiceUtil;
@@ -43,12 +42,8 @@ public class DeleteBackgroundTaskAction extends PortletAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		try {
-			if (cmd.equals(Constants.DELETE)) {
-				deleteBackgroundTask(actionRequest);
-			}
+			deleteBackgroundTask(actionRequest);
 
 			sendRedirect(actionRequest, actionResponse);
 		}

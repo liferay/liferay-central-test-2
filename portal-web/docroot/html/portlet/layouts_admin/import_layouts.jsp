@@ -110,9 +110,8 @@ String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(groupId, E
 				<liferay-ui:search-container-column-text>
 					<portlet:actionURL var="deleteBackgroundTaskURL">
 						<portlet:param name="struts_action" value="/group_pages/delete_background_task" />
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="backgroundTaskId" value="<%= String.valueOf(backgroundTask.getBackgroundTaskId()) %>" />
 						<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
+						<portlet:param name="backgroundTaskId" value="<%= String.valueOf(backgroundTask.getBackgroundTaskId()) %>" />
 					</portlet:actionURL>
 
 					<liferay-ui:icon-delete
