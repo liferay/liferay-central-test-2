@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.backgroundtask.messaging;
+package com.liferay.portal.backgroundtask.messaging;
 
 import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
