@@ -72,7 +72,7 @@ public class StagingPermissionImpl implements StagingPermission {
 
 		if (!actionId.equals(ActionKeys.VIEW) &&
 			!actionId.equals(ActionKeys.DELETE) &&
-			group.hasRemoteOrLocalStagingGroup() &&
+			group.hasLocalOrRemoteStagingGroup() &&
 			group.isStagedPortlet(portletId)) {
 
 			return false;

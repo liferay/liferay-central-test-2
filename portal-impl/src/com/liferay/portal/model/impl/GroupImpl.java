@@ -486,6 +486,15 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
+	public boolean hasLocalOrRemoteStagingGroup() {
+		if (hasStagingGroup() || (getRemoteStagingGroupCount() > 0)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public boolean hasPrivateLayouts() {
 		if (getPrivateLayoutsPageCount() > 0) {
 			return true;
@@ -503,15 +512,6 @@ public class GroupImpl extends GroupBaseImpl {
 		else {
 			return false;
 		}
-	}
-
-	@Override
-	public boolean hasRemoteOrLocalStagingGroup() {
-		if (hasStagingGroup() || (getRemoteStagingGroupCount() > 0)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override
