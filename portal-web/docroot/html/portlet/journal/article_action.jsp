@@ -81,7 +81,6 @@ else {
 		</c:if>
 
 		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW) %>">
-
 			<portlet:actionURL var="previewURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 				<portlet:param name="struts_action" value="/journal/preview_article_content" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />

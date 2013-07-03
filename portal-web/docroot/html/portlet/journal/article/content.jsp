@@ -564,6 +564,7 @@ if (Validator.isNotNull(content)) {
 			</c:if>
 		</div>
 	</td>
+
 	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
 </table>
 

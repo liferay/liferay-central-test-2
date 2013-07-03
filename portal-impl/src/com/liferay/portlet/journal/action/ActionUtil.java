@@ -286,10 +286,9 @@ public class ActionUtil {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getStructure(
-				groupId, PortalUtil.getClassNameId(JournalArticle.class),
-				structureId, true);
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
+			groupId, PortalUtil.getClassNameId(JournalArticle.class),
+			structureId, true);
 
 		Fields fields = DDMUtil.getFields(
 			ddmStructure.getStructureId(), serviceContext);
@@ -297,7 +296,8 @@ public class ActionUtil {
 		Map<String, byte[]> images = getImages(fields, locale);
 
 		return new Object[] {
-			JournalConverterUtil.getContent(ddmStructure, fields), images};
+			JournalConverterUtil.getContent(ddmStructure, fields), images
+		};
 	}
 
 	public static void getFeed(HttpServletRequest request) throws Exception {
@@ -449,7 +449,6 @@ public class ActionUtil {
 
 		for (Field field : fields) {
 			String dataType = field.getDataType();
-			String name = field.getName();
 
 			if (!dataType.equals(FieldConstants.IMAGE)) {
 				continue;
@@ -467,7 +466,7 @@ public class ActionUtil {
 				StringBundler sb = new StringBundler(6);
 
 				sb.append(StringPool.UNDERLINE);
-				sb.append(name);
+				sb.append(field.getName());
 				sb.append(StringPool.UNDERLINE);
 				sb.append(i);
 				sb.append(StringPool.UNDERLINE);
