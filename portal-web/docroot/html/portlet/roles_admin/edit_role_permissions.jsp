@@ -35,7 +35,9 @@ String portletResourceLabel = null;
 if (Validator.isNotNull(portletResource)) {
 	portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-	if (portlet.getPortletId().equals(PortletKeys.PORTAL)) {
+	String portletId = portlet.getPortletId();
+
+	if (portletId.equals(PortletKeys.PORTAL)) {
 		portletResourceLabel = LanguageUtil.get(pageContext, "general-permissions");
 	}
 	else {

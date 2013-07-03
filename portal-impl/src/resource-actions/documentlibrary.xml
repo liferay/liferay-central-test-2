@@ -68,7 +68,7 @@
 		<model-name>com.liferay.portlet.documentlibrary.template</model-name>
 		<portlet-ref>
 			<portlet-name>20</portlet-name>
-            <portlet-name>183</portlet-name>
+			<portlet-name>183</portlet-name>
 		</portlet-ref>
 		<weight>1.5</weight>
 		<permissions>

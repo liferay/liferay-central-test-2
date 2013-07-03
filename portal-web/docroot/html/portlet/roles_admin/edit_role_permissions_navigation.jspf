@@ -64,6 +64,7 @@
 
 							<span><liferay-ui:message key="control-panel" /></span>
 						</div>
+
 						<div class="permission-navigation-item-content toggler-content toggler-content-expanded">
 
 							<div class="permission-navigation-section">

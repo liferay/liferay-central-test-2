@@ -102,7 +102,7 @@ The portlet-ref element is the name of the portlet that the model belongs to.
 
 <!--
 The weight element is a double number to control the position of the resource
-in the permission UIs. Higher values mean that the resource will appear lower.
+in the permission GUIs. Higher values mean that the resource will appear lower.
 -->
 <!ELEMENT weight (#PCDATA) >
 
