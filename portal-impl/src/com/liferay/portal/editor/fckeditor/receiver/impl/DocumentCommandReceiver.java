@@ -185,6 +185,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			fileElement.setAttribute("name", name);
 			fileElement.setAttribute("desc", name);
+
 			fileElement.setAttribute("size", getSize(fileEntry.getSize()));
 
 			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
