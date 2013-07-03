@@ -143,8 +143,8 @@ public class EditArticleAction extends PortletAction {
 
 				Object[] contentAndImages = updateArticle(actionRequest);
 
-				article = (JournalArticle)returnValue[0];
-				oldUrlTitle = ((String)returnValue[1]);
+				article = (JournalArticle)contentAndImages[0];
+				oldUrlTitle = ((String)contentAndImages[1]);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(
