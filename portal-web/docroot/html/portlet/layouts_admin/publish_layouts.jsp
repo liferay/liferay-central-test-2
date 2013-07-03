@@ -177,6 +177,14 @@ portletURL.setParameter("closeRedirect", closeRedirect);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
+PortletURL renderURL = renderResponse.createRenderURL();
+
+renderURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
+renderURL.setParameter("tabs2", "all-publication-processes");
+renderURL.setParameter("closeRedirect", closeRedirect);
+renderURL.setParameter("groupId", String.valueOf(stagingGroupId));
+renderURL.setParameter("privateLayout", String.valueOf(privateLayout));
+
 PortletURL selectURL = renderResponse.createRenderURL();
 
 selectURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
@@ -188,14 +196,6 @@ selectURL.setParameter("privateLayout", String.valueOf(privateLayout));
 selectURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
 selectURL.setParameter("selectPages", String.valueOf(!selectPages));
 selectURL.setWindowState(LiferayWindowState.POP_UP);
-
-PortletURL renderURL = renderResponse.createRenderURL();
-
-renderURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
-renderURL.setParameter("tabs2", "all-publication-processes");
-renderURL.setParameter("closeRedirect", closeRedirect);
-renderURL.setParameter("groupId", String.valueOf(stagingGroupId));
-renderURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 request.setAttribute("edit_pages.jsp-groupId", new Long(stagingGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
@@ -231,11 +231,11 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 			<aui:input name="originalCmd" type="hidden" value="<%= cmd %>" />
 			<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+			<aui:input name="redirect" type="hidden" value="<%= renderURL.toString() %>" />
 			<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 			<aui:input name="layoutSetBranchName" type="hidden" value="<%= layoutSetBranchName %>" />
 			<aui:input name="lastImportUserName" type="hidden" value="<%= user.getFullName() %>" />
 			<aui:input name="lastImportUserUuid" type="hidden" value="<%= String.valueOf(user.getUserUuid()) %>" />
-			<aui:input name="redirect" type="hidden" value="<%= renderURL.toString() %>" />
 
 			<liferay-ui:error exception="<%= DuplicateLockException.class %>" message="another-publishing-process-is-in-progress,-please-try-again-later" />
 
