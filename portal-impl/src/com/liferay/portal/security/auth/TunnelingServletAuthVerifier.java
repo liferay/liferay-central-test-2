@@ -53,7 +53,7 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 
 		AuthVerifierResult authVerifierResult = new AuthVerifierResult();
 
-		String[] credentials = doVerify(accessControlContext.getRequest());
+		String[] credentials = verify(accessControlContext.getRequest());
 
 		if (credentials != null) {
 			authVerifierResult.setPassword(credentials[1]);
@@ -64,11 +64,7 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 		return authVerifierResult;
 	}
 
-	protected String[] doVerify(HttpServletRequest request)
-		throws AuthException {
-
-		// Get the Authorization header, if one was supplied
-
+	protected String[] verify(HttpServletRequest request) throws AuthException {
 		String authorization = request.getHeader("Authorization");
 
 		if (authorization == null) {
@@ -83,8 +79,6 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 
 		String basic = st.nextToken();
 
-		// We only handle HTTP Basic authentication
-
 		if (!basic.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
 			return null;
 		}
@@ -92,43 +86,42 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 		String encodedCredentials = st.nextToken();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Encoded credentials are " + encodedCredentials);
+			_log.debug("Encoded credentials " + encodedCredentials);
 		}
 
 		String decodedCredentials = new String(
 			Base64.decode(encodedCredentials));
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Decoded credentials are " + decodedCredentials);
+			_log.debug("Decoded credentials " + decodedCredentials);
 		}
 
-		int pos = decodedCredentials.indexOf(CharPool.COLON);
+		int index = decodedCredentials.indexOf(CharPool.COLON);
 
-		if (pos == -1) {
+		if (index == -1) {
 			return null;
 		}
 
 		String login = GetterUtil.getString(
-			decodedCredentials.substring(0, pos));
-		String password = decodedCredentials.substring(pos + 1);
+			decodedCredentials.substring(0, index));
+		String password = decodedCredentials.substring(index + 1);
 
 		String expectedPassword = null;
 
 		try {
 			expectedPassword = Encryptor.encrypt(
-				TunnelUtil.getSharedKey(), login);
+				TunnelUtil.getSharedSecretKey(), login);
 		}
-		catch (EncryptorException e) {
-			throw new AuthException("Unable to decrypt login.", e);
+		catch (EncryptorException ee) {
+			throw new AuthException("Unable to decrypt login.", ee);
 		}
-		catch (InvalidKeyException e) {
-			throw new AuthException(e);
+		catch (InvalidKeyException ike) {
+			throw new AuthException(ike);
 		}
 
 		if (!password.equals(expectedPassword)) {
 			throw new AuthException(
-				"Tunneling servlet preshared keys do not match. " +
-					"Please check your configurations");
+				"Tunneling servlet shared secrets do not match");
 		}
 
 		User user = null;
@@ -149,10 +142,14 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 			}
 		}
 		catch (PortalException pe) {
-			_log.error("Unable to fetch company", pe);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to find company", pe);
+			}
 		}
 		catch (SystemException se) {
-			_log.error("Unable to fetch userId", se);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to find user", se);
+			}
 		}
 
 		if (user == null) {

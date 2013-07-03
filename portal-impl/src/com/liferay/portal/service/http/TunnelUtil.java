@@ -17,6 +17,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -54,24 +55,24 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TunnelUtil {
 
-	public static Key getSharedKey() throws InvalidKeyException {
-		String presharedKey = PropsValues.TUNNELING_SERVLET_SHARED_SECRET;
+	public static Key getSharedSecretKey() throws InvalidKeyException {
+		String sharedSecret = PropsValues.TUNNELING_SERVLET_SHARED_SECRET;
 
-		if (Validator.isNull(presharedKey)) {
+		if (Validator.isNull(sharedSecret)) {
 			throw new InvalidKeyException(
-				"The tunneling servlet shared key is not set");
+				"The tunneling servlet shared secret is not set");
 		}
 
-		if ((presharedKey.length() != 16) && (presharedKey.length() != 32) &&
-			(presharedKey.length() != 64)) {
+		if ((sharedSecret.length() != 16) && (sharedSecret.length() != 32) &&
+			(sharedSecret.length() != 64)) {
 
 			throw new InvalidKeyException(
-				"The configured preshared key must be either 16, 32 or 64 " +
-					"characters in length.");
+				"The tunneling servlet shared secret must be 16, 32 or 64 " +
+					"characters long");
 		}
 
 		return new SecretKeySpec(
-			presharedKey.getBytes(), _TUNNEL_ENCRYPTION_ALGORITHM);
+			sharedSecret.getBytes(), _TUNNEL_ENCRYPTION_ALGORITHM);
 	}
 
 	public static Object invoke(
@@ -79,34 +80,36 @@ public class TunnelUtil {
 		throws Exception {
 
 		String password = Encryptor.encrypt(
-			getSharedKey(), httpPrincipal.getLogin());
+			getSharedSecretKey(), httpPrincipal.getLogin());
 
 		httpPrincipal.setPassword(password);
 
-		HttpURLConnection urlc = _getConnection(httpPrincipal);
+		HttpURLConnection httpURLConnection = _getConnection(httpPrincipal);
 
-		ObjectOutputStream oos = new ObjectOutputStream(urlc.getOutputStream());
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+			httpURLConnection.getOutputStream());
 
-		oos.writeObject(
+		objectOutputStream.writeObject(
 			new ObjectValuePair<HttpPrincipal, MethodHandler>(
 				httpPrincipal, methodHandler));
 
-		oos.flush();
-		oos.close();
+		objectOutputStream.flush();
 
-		Object returnObj = null;
+		objectOutputStream.close();
+
+		Object returnObject = null;
 
 		try {
-			ObjectInputStream ois = new ObjectInputStream(
-				urlc.getInputStream());
+			ObjectInputStream objectInputStream = new ObjectInputStream(
+				httpURLConnection.getInputStream());
 
-			returnObj = ois.readObject();
+			returnObject = objectInputStream.readObject();
 
-			ois.close();
+			objectInputStream.close();
 		}
 		catch (EOFException eofe) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Error while reading object", eofe);
+				_log.debug("Unable to read object", eofe);
 			}
 		}
 		catch (IOException ioe) {
@@ -122,11 +125,11 @@ public class TunnelUtil {
 			}
 		}
 
-		if ((returnObj != null) && returnObj instanceof Exception) {
-			throw (Exception)returnObj;
+		if ((returnObject != null) && returnObject instanceof Exception) {
+			throw (Exception)returnObject;
 		}
 
-		return returnObj;
+		return returnObject;
 	}
 
 	private static HttpURLConnection _getConnection(HttpPrincipal httpPrincipal)
@@ -167,7 +170,7 @@ public class TunnelUtil {
 			ContentTypes.APPLICATION_X_JAVA_SERIALIZED_OBJECT);
 		httpURLConnection.setUseCaches(false);
 
-		httpURLConnection.setRequestMethod("POST");
+		httpURLConnection.setRequestMethod(HttpMethods.POST);
 
 		if (Validator.isNotNull(httpPrincipal.getLogin()) &&
 			Validator.isNotNull(httpPrincipal.getPassword())) {
