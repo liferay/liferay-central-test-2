@@ -141,7 +141,7 @@ public class EditArticleAction extends PortletAction {
 					 cmd.equals(Constants.TRANSLATE) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				Object[] returnValue = updateArticle(actionRequest);
+				Object[] contentAndImages = updateArticle(actionRequest);
 
 				article = (JournalArticle)returnValue[0];
 				oldUrlTitle = ((String)returnValue[1]);
@@ -615,11 +615,11 @@ public class EditArticleAction extends PortletAction {
 
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-			Object[] returnValue = ActionUtil.getContentAndImages(
+			Object[] contentAndImages = ActionUtil.getContentAndImages(
 				groupId, structureId, locale, serviceContext);
 
-			content = (String)returnValue[0];
-			images = (HashMap<String, byte[]>)returnValue[1];
+			content = (String)contentAndImages[0];
+			images = (HashMap<String, byte[]>)contentAndImages[1];
 		}
 
 		Boolean fileItemThresholdSizeExceeded =

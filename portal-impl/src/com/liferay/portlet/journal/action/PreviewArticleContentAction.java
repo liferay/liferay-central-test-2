@@ -97,11 +97,11 @@ public class PreviewArticleContentAction extends PortletAction {
 						ServiceContextFactory.getInstance(
 							JournalArticle.class.getName(), actionRequest);
 
-					Object[] returnValue = ActionUtil.getContentAndImages(
+					Object[] contentAndImages = ActionUtil.getContentAndImages(
 						groupId, structureId, themeDisplay.getLocale(),
 						serviceContext);
 
-					content = (String)returnValue[0];
+					content = (String)contentAndImages[0];
 
 					Map<String, String> tokens = JournalUtil.getTokens(
 						groupId, themeDisplay);
