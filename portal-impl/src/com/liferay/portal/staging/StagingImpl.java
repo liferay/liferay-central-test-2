@@ -1014,6 +1014,7 @@ public class StagingImpl implements Staging {
 		return false;
 	}
 
+	@Override
 	public void lockGroup(long userId, long groupId) throws Exception {
 		if (!PropsValues.STAGING_LOCK_ENABLED) {
 			return;
@@ -1328,6 +1329,7 @@ public class StagingImpl implements Staging {
 			String.valueOf(layoutSetBranchId));
 	}
 
+	@Override
 	public void unlockGroup(long groupId) throws SystemException {
 		if (!PropsValues.STAGING_LOCK_ENABLED) {
 			return;
