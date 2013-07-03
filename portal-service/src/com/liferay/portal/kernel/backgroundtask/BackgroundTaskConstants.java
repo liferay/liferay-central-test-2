@@ -42,7 +42,7 @@ public class BackgroundTaskConstants {
 
 	public static final int STATUS_SUCCESSFUL = 3;
 
-	public static String toLabel(int status) {
+	public static String getStatusLabel(int status) {
 		if (status == STATUS_FAILED) {
 			return LABEL_FAILED;
 		}
