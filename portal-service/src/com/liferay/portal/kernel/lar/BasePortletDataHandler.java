@@ -464,11 +464,11 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 		portletDataContext.setImportDataRootElement(rootElement);
 
-		long portletSourceGroupId = GetterUtil.getLong(
+		long groupId = GetterUtil.getLong(
 			rootElement.attributeValue("group-id"));
 
-		if (portletSourceGroupId != 0) {
-			portletDataContext.setSourceGroupId(portletSourceGroupId);
+		if (groupId != 0) {
+			portletDataContext.setSourceGroupId(groupId);
 		}
 
 		return rootElement;
@@ -576,7 +576,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 					getDisplayTemplatePreferenceName(), null);
 			}
 		}
-		catch (SystemException se) {
+		catch (Exception e) {
 		}
 
 		return null;
