@@ -122,17 +122,19 @@ public class DefineObjectsTag extends TagSupport {
 
 		pageContext.setAttribute(portletResponseAttrName, portletResponse);
 
-		if (request.getAttribute(WebKeys.SEARCH_CONTAINER_REFERENCE) == null) {
-			_searchContainerReference = new SearchContainerReference(
+		SearchContainerReference searchContainerReference =
+			(SearchContainerReference)request.getAttribute(
+				WebKeys.SEARCH_CONTAINER_REFERENCE);
+
+		if (searchContainerReference == null) {
+			searchContainerReference = new SearchContainerReference(
 				request, portletResponse.getNamespace());
 		}
 
 		pageContext.setAttribute(
-			"searchContainerReference", _searchContainerReference);
+			"searchContainerReference", searchContainerReference);
 
 		return SKIP_BODY;
 	}
-
-	private static SearchContainerReference _searchContainerReference;
 
 }
