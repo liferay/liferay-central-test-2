@@ -43,21 +43,21 @@ public class PortletStagingBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
-		long sourcePlid = MapUtil.getLong(taskContextMap, "sourcePlid");
+		long userId = MapUtil.getLong(taskContextMap, "userId");
 		long targetPlid = MapUtil.getLong(taskContextMap, "targetPlid");
-		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 		long targetGroupId = MapUtil.getLong(taskContextMap, "targetGroupId");
 		String portletId = MapUtil.getString(taskContextMap, "portletId");
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
+
+		long sourcePlid = MapUtil.getLong(taskContextMap, "sourcePlid");
+		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 		Date startDate = (Date)taskContextMap.get("startDate");
 		Date endDate = (Date)taskContextMap.get("endDate");
 
 		File larFile = LayoutLocalServiceUtil.exportPortletInfoAsFile(
 			sourcePlid, sourceGroupId, portletId, parameterMap, startDate,
 			endDate);
-
-		long userId = MapUtil.getLong(taskContextMap, "userId");
 
 		try {
 			LayoutLocalServiceUtil.importPortletInfo(

@@ -218,11 +218,11 @@ public class StagingImpl implements Staging {
 				dateRange.getStartDate(), dateRange.getEndDate(),
 				StringPool.BLANK);
 
-		taskContextMap.put("sourcePlid", sourcePlid);
-		taskContextMap.put("targetPlid", targetPlid);
 		taskContextMap.put("sourceGroupId", sourceGroupId);
-		taskContextMap.put("targetGroupId", targetGroupId);
+		taskContextMap.put("sourcePlid", sourcePlid);
 		taskContextMap.put("portletId", portletId);
+		taskContextMap.put("targetGroupId", targetGroupId);
+		taskContextMap.put("targetPlid", targetPlid);
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTask(
 			userId, sourceGroupId, portletId, null,

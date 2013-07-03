@@ -43,12 +43,12 @@ public class LayoutImportBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
+		long userId = MapUtil.getLong(taskContextMap, "userId");
 		long groupId = MapUtil.getLong(taskContextMap, "groupId");
 		boolean privateLayout = MapUtil.getBoolean(
 			taskContextMap, "privateLayout");
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
-		long userId = MapUtil.getLong(taskContextMap, "userId");
 
 		List<FileEntry> attachmentsFileEntries =
 			backgroundTask.getAttachmentsFileEntries();

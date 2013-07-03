@@ -43,12 +43,12 @@ public class PortletImportBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
+		long userId = MapUtil.getLong(taskContextMap, "userId");
 		long plid = MapUtil.getLong(taskContextMap, "plid");
 		long groupId = MapUtil.getLong(taskContextMap, "groupId");
 		String portletId = MapUtil.getString(taskContextMap, "portletId");
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
-		long userId = MapUtil.getLong(taskContextMap, "userId");
 
 		List<FileEntry> attachmentsFileEntries =
 			backgroundTask.getAttachmentsFileEntries();

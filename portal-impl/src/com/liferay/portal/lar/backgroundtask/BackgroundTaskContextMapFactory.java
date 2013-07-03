@@ -35,12 +35,12 @@ public class BackgroundTaskContextMapFactory {
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();
 
-		taskContextMap.put("fileName", fileName);
-		taskContextMap.put("groupId", groupId);
-
 		if (endDate != null) {
 			taskContextMap.put("endDate", endDate);
 		}
+
+		taskContextMap.put("fileName", fileName);
+		taskContextMap.put("groupId", groupId);
 
 		if ((layoutIds != null) && (layoutIds.length > 0)) {
 			taskContextMap.put("layoutIds", layoutIds);
@@ -72,12 +72,12 @@ public class BackgroundTaskContextMapFactory {
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();
 
-		taskContextMap.put("fileName", fileName);
-		taskContextMap.put("groupId", groupId);
-
 		if (endDate != null) {
 			taskContextMap.put("endDate", endDate);
 		}
+
+		taskContextMap.put("fileName", fileName);
+		taskContextMap.put("groupId", groupId);
 
 		if (parameterMap != null) {
 			HashMap<String, String[]> serializableParameterMap =

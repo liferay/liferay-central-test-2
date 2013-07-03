@@ -45,8 +45,12 @@ public class LayoutStagingBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
-		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
+		long userId = MapUtil.getLong(taskContextMap, "userId");
 		long targetGroupId = MapUtil.getLong(taskContextMap, "targetGroupId");
+
+		StagingUtil.lockGroup(userId, targetGroupId);
+
+		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 		boolean privateLayout = MapUtil.getBoolean(
 			taskContextMap, "privateLayout");
 		long[] layoutIds = GetterUtil.getLongValues(
@@ -55,10 +59,6 @@ public class LayoutStagingBackgroundTaskExecutor
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
 		Date startDate = (Date)taskContextMap.get("startDate");
 		Date endDate = (Date)taskContextMap.get("endDate");
-
-		long userId = MapUtil.getLong(taskContextMap, "userId");
-
-		StagingUtil.lockGroup(userId, targetGroupId);
 
 		File larFile = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,

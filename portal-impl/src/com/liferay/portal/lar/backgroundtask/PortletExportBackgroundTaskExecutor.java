@@ -45,6 +45,9 @@ public class PortletExportBackgroundTaskExecutor
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
+		long userId = MapUtil.getLong(taskContextMap, "userId");
+		String fileName = MapUtil.getString(taskContextMap, "fileName");
+
 		long plid = MapUtil.getLong(taskContextMap, "plid");
 		long groupId = MapUtil.getLong(taskContextMap, "groupId");
 		String portletId = MapUtil.getString(taskContextMap, "portletId");
@@ -55,9 +58,6 @@ public class PortletExportBackgroundTaskExecutor
 
 		File larFile = LayoutLocalServiceUtil.exportPortletInfoAsFile(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
-
-		long userId = MapUtil.getLong(taskContextMap, "userId");
-		String fileName = MapUtil.getString(taskContextMap, "fileName");
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
 			userId, backgroundTask.getBackgroundTaskId(), fileName, larFile);
