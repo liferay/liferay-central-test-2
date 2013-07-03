@@ -163,5 +163,4 @@ Collection<String> ruleHandlerTypes = RuleGroupProcessorUtil.getRuleHandlerTypes
 			);
 		</c:otherwise>
 	</c:choose>
-
 </aui:script>
