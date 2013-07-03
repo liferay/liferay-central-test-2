@@ -37,42 +37,42 @@ public class ScriptingHelperUtil {
 		PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		Map<String, Object> objects = new HashMap<String, Object>();
+		Map<String, Object> portletObjects = new HashMap<String, Object>();
 
-		objects.put("portletConfig", portletConfig);
-		objects.put("portletContext", portletContext);
-		objects.put("preferences", portletRequest.getPreferences());
+		portletObjects.put("portletConfig", portletConfig);
+		portletObjects.put("portletContext", portletContext);
+		portletObjects.put("preferences", portletRequest.getPreferences());
 
 		if (portletRequest instanceof ActionRequest) {
-			objects.put("actionRequest", portletRequest);
+			portletObjects.put("actionRequest", portletRequest);
 		}
 		else if (portletRequest instanceof RenderRequest) {
-			objects.put("renderRequest", portletRequest);
+			portletObjects.put("renderRequest", portletRequest);
 		}
 		else if (portletRequest instanceof ResourceRequest) {
-			objects.put("resourceRequest", portletRequest);
+			portletObjects.put("resourceRequest", portletRequest);
 		}
 		else {
-			objects.put("portletRequest", portletRequest);
+			portletObjects.put("portletRequest", portletRequest);
 		}
 
 		if (portletResponse instanceof ActionResponse) {
-			objects.put("actionResponse", portletResponse);
+			portletObjects.put("actionResponse", portletResponse);
 		}
 		else if (portletResponse instanceof RenderResponse) {
-			objects.put("renderResponse", portletResponse);
+			portletObjects.put("renderResponse", portletResponse);
 		}
 		else if (portletResponse instanceof ResourceResponse) {
-			objects.put("resourceResponse", portletResponse);
+			portletObjects.put("resourceResponse", portletResponse);
 		}
 		else {
-			objects.put("portletResponse", portletResponse);
+			portletObjects.put("portletResponse", portletResponse);
 		}
 
-		objects.put(
+		portletObjects.put(
 			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
 
-		return objects;
+		return portletObjects;
 	}
 
 }

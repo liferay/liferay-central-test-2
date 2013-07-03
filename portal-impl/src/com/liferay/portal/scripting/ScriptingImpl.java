@@ -89,7 +89,7 @@ public class ScriptingImpl implements Scripting {
 		try {
 			return scriptingExecutor.eval(
 				allowedClasses, inputObjects, outputNames, script,
-				toClassLoaders(servletContextNames));
+				getClassLoaders(servletContextNames));
 		}
 		catch (Exception e) {
 			throw new ScriptingException(getErrorMessage(script, e), e);
@@ -126,6 +126,18 @@ public class ScriptingImpl implements Scripting {
 
 			_scriptingExecutors.put(entry.getKey(), entry.getValue());
 		}
+	}
+
+	protected ClassLoader[] getClassLoaders(String[] servletContextNames) {
+		ClassLoader[] classLoaders =
+			new ClassLoader[servletContextNames.length];
+
+		for (int i = 0; i < servletContextNames.length; i++) {
+			classLoaders[i] = ClassLoaderPool.getClassLoader(
+				servletContextNames[i]);
+		}
+
+		return classLoaders;
 	}
 
 	protected String getErrorMessage(Exception e) {
@@ -181,18 +193,6 @@ public class ScriptingImpl implements Scripting {
 		}
 
 		return sb.toString();
-	}
-
-	protected ClassLoader[] toClassLoaders(String[] servletContextNames) {
-		ClassLoader[] classLoaders =
-			new ClassLoader[servletContextNames.length];
-
-		for (int i = 0; i < servletContextNames.length; i++) {
-			classLoaders[i] = ClassLoaderPool.getClassLoader(
-				servletContextNames[i]);
-		}
-
-		return classLoaders;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ScriptingImpl.class);

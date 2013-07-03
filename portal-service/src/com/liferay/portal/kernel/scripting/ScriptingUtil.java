@@ -39,7 +39,7 @@ public class ScriptingUtil {
 
 		return getScripting().eval(
 			allowedClasses, inputObjects, outputNames, language, script,
-			toServletContextNames(classLoaders));
+			_getServletContextNames(classLoaders));
 	}
 
 	public static void exec(
@@ -49,7 +49,7 @@ public class ScriptingUtil {
 
 		getScripting().exec(
 			allowedClasses, inputObjects, language, script,
-			toServletContextNames(classLoaders));
+			_getServletContextNames(classLoaders));
 	}
 
 	public static Scripting getScripting() {
@@ -68,7 +68,9 @@ public class ScriptingUtil {
 		_scripting = scripting;
 	}
 
-	private static String[] toServletContextNames(ClassLoader[] classLoaders) {
+	private static String[] _getServletContextNames(
+		ClassLoader[] classLoaders) {
+
 		String[] servletContextNames = new String[classLoaders.length];
 
 		for (int i = 0; i < classLoaders.length; i++) {
