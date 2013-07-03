@@ -30,7 +30,7 @@ public interface AuthToken {
 	public String getToken(
 		HttpServletRequest request, long plid, String portletId);
 
-	public boolean isPortletInvocationTokenValid(
+	public boolean isValidPortletInvocationToken(
 		HttpServletRequest request, long plid, String portletId,
 		String strutsAction, String tokenValue);
 

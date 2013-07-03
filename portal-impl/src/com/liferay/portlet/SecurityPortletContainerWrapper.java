@@ -419,7 +419,7 @@ public class SecurityPortletContainerWrapper implements PortletContainer {
 				originalRequest, "p_p_auth");
 		}
 
-		if (AuthTokenUtil.isPortletInvocationTokenValid(
+		if (AuthTokenUtil.isValidPortletInvocationToken(
 				request, themeDisplay.getPlid(), portletId, strutsAction,
 			requestPortletAuthenticationToken)) {
 

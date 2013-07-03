@@ -76,7 +76,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 			Set<String> whitelistActions = getPortletCSRFWhitelistActions();
 
 			if (whitelistActions.contains(strutsAction) &&
-				isStrutsActionValid(companyId, rootPortletId, strutsAction)) {
+				isValidStrutsAction(companyId, rootPortletId, strutsAction)) {
 
 				return true;
 			}
@@ -100,7 +100,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 				getPortletInvocationWhitelistActions();
 
 			if (whitelistActions.contains(strutsAction) &&
-				isStrutsActionValid(companyId, portletId, strutsAction)) {
+				isValidStrutsAction(companyId, portletId, strutsAction)) {
 
 				return true;
 			}
@@ -149,7 +149,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 		return _portletInvocationWhitelistActions;
 	}
 
-	protected boolean isStrutsActionValid(
+	protected boolean isValidStrutsAction(
 		long companyId, String portletId, String strutsAction) {
 
 		try {

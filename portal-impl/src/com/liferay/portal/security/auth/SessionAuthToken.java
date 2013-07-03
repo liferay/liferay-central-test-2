@@ -83,7 +83,7 @@ public class SessionAuthToken implements AuthToken {
 	}
 
 	@Override
-	public boolean isPortletInvocationTokenValid(
+	public boolean isValidPortletInvocationToken(
 		HttpServletRequest request, long plid, String portletId,
 		String strutsAction, String tokenValue) {
 
@@ -130,6 +130,6 @@ public class SessionAuthToken implements AuthToken {
 		return sessionAuthenticationToken;
 	}
 
-	private static final String _CSRF = "CSRF";
+	private static final String _CSRF = "#CSRF";
 
 }

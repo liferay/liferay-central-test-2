@@ -811,11 +811,11 @@ public class PortletURLImpl
 			}
 		}
 
-		String tokenValue = AuthTokenUtil.getToken(_request, _plid, _portletId);
-
 		sb.append("p_p_auth");
 		sb.append(StringPool.EQUAL);
-		sb.append(processValue(key, tokenValue));
+		sb.append(
+			processValue(
+				key, AuthTokenUtil.getToken(_request, _plid, _portletId)));
 		sb.append(StringPool.AMPERSAND);
 	}
 

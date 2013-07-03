@@ -46,11 +46,11 @@ public class AuthTokenUtil {
 		return getAuthToken().getToken(request, plid, portletId);
 	}
 
-	public static boolean isPortletInvocationTokenValid(
+	public static boolean isValidPortletInvocationToken(
 		HttpServletRequest request, long plid, String portletId,
 		String strutsAction, String tokenValue) {
 
-		return getAuthToken().isPortletInvocationTokenValid(
+		return getAuthToken().isValidPortletInvocationToken(
 			request, plid, portletId, strutsAction, tokenValue);
 	}
 

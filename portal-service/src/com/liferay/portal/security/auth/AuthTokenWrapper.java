@@ -46,11 +46,11 @@ public class AuthTokenWrapper implements AuthToken {
 	}
 
 	@Override
-	public boolean isPortletInvocationTokenValid(
+	public boolean isValidPortletInvocationToken(
 		HttpServletRequest request, long plid, String portletId,
 		String strutsAction, String tokenValue) {
 
-		return _authToken.isPortletInvocationTokenValid(
+		return _authToken.isValidPortletInvocationToken(
 			request, plid, portletId, strutsAction, tokenValue);
 	}
 
