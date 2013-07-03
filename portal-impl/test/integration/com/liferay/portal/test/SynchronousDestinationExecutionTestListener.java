@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.test.AbstractExecutionTestListener;
 import com.liferay.portal.kernel.test.TestContext;
 
 import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +117,7 @@ public class SynchronousDestinationExecutionTestListener
 			if (!_asyncServiceDestinations.isEmpty()) {
 				MessageBus messageBus = MessageBusUtil.getMessageBus();
 
-				for (Destination destination: _asyncServiceDestinations) {
+				for (Destination destination : _asyncServiceDestinations) {
 					messageBus.replace(destination);
 				}
 
