@@ -512,8 +512,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
 
 		GroupPermissionUtil.check(
-				getPermissionChecker(), companyGroup.getGroupId(),
-				ActionKeys.EXPORT_IMPORT_PORTLET_INFO);
+			getPermissionChecker(), companyGroup.getGroupId(),
+			ActionKeys.EXPORT_IMPORT_PORTLET_INFO);
 
 		return layoutLocalService.exportPortletInfo(
 			companyId, portletId, parameterMap, startDate, endDate);
@@ -564,8 +564,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
 
 		GroupPermissionUtil.check(
-				getPermissionChecker(), companyGroup.getGroupId(),
-				ActionKeys.EXPORT_IMPORT_PORTLET_INFO);
+			getPermissionChecker(), companyGroup.getGroupId(),
+			ActionKeys.EXPORT_IMPORT_PORTLET_INFO);
 
 		return layoutLocalService.exportPortletInfoAsFile(
 			companyId, portletId, parameterMap, startDate, endDate);
@@ -577,11 +577,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUser(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
-		long companyId = user.getCompanyId();
-
-		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			user.getCompanyId());
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), companyGroup.getGroupId(),

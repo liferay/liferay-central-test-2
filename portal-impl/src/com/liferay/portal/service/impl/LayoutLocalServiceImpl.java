@@ -1021,13 +1021,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUser(userId);
+		User user = userPersistence.findByPrimaryKey(userId);
 
-		long companyId = user.getCompanyId();
-
-		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			user.getCompanyId());
 		Group controlPanelGroup = groupPersistence.findByC_F(
-			companyId, GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
+			user.getCompanyId(), GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 
 		Layout controlPanelLayout = layoutPersistence.findByG_P_T_First(
 			controlPanelGroup.getGroupId(), true,
