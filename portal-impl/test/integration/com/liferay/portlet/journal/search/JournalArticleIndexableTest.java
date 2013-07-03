@@ -42,10 +42,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Specific test for ensuring that a JournalArticle claims to be not indexable
- * when className is set to DDMStructure. This currently means that this article
- * is a default values holder for a structure.
- *
  * @author Carlos Sierra
  */
 @ExecutionTestListeners(listeners = {
@@ -72,11 +68,11 @@ public class JournalArticleIndexableTest {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		Hits results = AssetUtil.search(
+		Hits hits = AssetUtil.search(
 			searchContext, assetEntryQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		int initialCount = results.getLength();
+		int total = hits.getLength();
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			group.getGroupId(), ServiceTestUtil.randomString(),
@@ -84,36 +80,33 @@ public class JournalArticleIndexableTest {
 
 		Assert.assertTrue(article.isIndexable());
 
-		results = AssetUtil.search(
+		hits = AssetUtil.search(
 			searchContext, assetEntryQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			"Regular articles should get indexed", initialCount + 1,
-			results.getLength());
+			"Regular articles should be indexed", total + 1, hits.getLength());
 	}
 
 	@Test
-	public void testJournalArticleWithClassNameIdDefaultNotIndexable()
-		throws Exception {
-
+	public void testJournalArticleIsUnindexableByDefault() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
 		AssetEntryQuery assetEntryQuery =
 			AssetEntryQueryTestUtil.createAssetEntryQuery(
 				group.getGroupId(), JournalArticle.class.getName(), null, null,
-				new long[] {}, null);
+				new long[0], null);
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
 			group.getGroupId());
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		Hits results = AssetUtil.search(
+		Hits hits = AssetUtil.search(
 			searchContext, assetEntryQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		int initial = results.getLength();
+		int total = hits.getLength();
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -123,16 +116,16 @@ public class JournalArticleIndexableTest {
 			true, ServiceTestUtil.getServiceContext(group.getGroupId()));
 
 		Assert.assertFalse(
-			"Default values holder articles should claim to be NOT indexable",
+			"Unindexable articles should not be indexable",
 			article.isIndexable());
 
-		results = AssetUtil.search(
+		hits = AssetUtil.search(
 			searchContext, assetEntryQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			"Default values holder articles should NOT get indexed", initial,
-			results.getLength());
+			"Unindexable articles should not be indexed", total,
+			hits.getLength());
 	}
 
 }
