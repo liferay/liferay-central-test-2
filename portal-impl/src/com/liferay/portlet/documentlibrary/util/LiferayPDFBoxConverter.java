@@ -38,25 +38,22 @@ public class LiferayPDFBoxConverter {
 
 	public LiferayPDFBoxConverter(
 		File inputFile, File thumbnailFile, File[] previewFiles,
-		String extension, String thumbnailExtension, int height, int width,
-		int dpi, boolean generatePreview, boolean generateThumbnail) {
+		String extension, String thumbnailExtension, int dpi, int height,
+		int width, boolean generatePreview, boolean generateThumbnail) {
 
 		_inputFile = inputFile;
 		_thumbnailFile = thumbnailFile;
 		_previewFiles = previewFiles;
 		_extension = extension;
 		_thumbnailExtension = thumbnailExtension;
+		_dpi = dpi;
 		_height = height;
 		_width = width;
-		_dpi = dpi;
 		_generatePreview = generatePreview;
 		_generateThumbnail = generateThumbnail;
 	}
 
 	public void generateImagesPB() throws Exception {
-		boolean generatePreview = _generatePreview;
-		boolean generateThumbnail = _generateThumbnail;
-
 		PDDocument pdDocument = null;
 
 		try {
@@ -70,12 +67,12 @@ public class LiferayPDFBoxConverter {
 			for (int i = 0; i < pdPages.size(); i++) {
 				PDPage pdPage = pdPages.get(i);
 
-				if (generateThumbnail && (i == 0)) {
+				if (_generateThumbnail && (i == 0)) {
 					_generateImagesPB(
 						pdPage, i, _thumbnailFile, _thumbnailExtension);
 				}
 
-				if (!generatePreview) {
+				if (!_generatePreview) {
 					break;
 				}
 

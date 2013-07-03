@@ -551,21 +551,19 @@ public class PDFProcessorImpl
 	private void _generateImagesPB(FileVersion fileVersion, File file)
 		throws Exception {
 
-		boolean generatePreview = _isGeneratePreview(fileVersion);
-		boolean generateThumbnail = _isGenerateThumbnail(fileVersion);
-
 		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
 		File thumbnailFile = getThumbnailTempFile(tempFileId);
 
-		File[] previewFiles = null;
+		int previewFilesCount = 0;
 
-		int numPages = 0;
 		PDDocument pdDocument = null;
+
 		try {
 			pdDocument = PDDocument.load(file);
-			numPages = pdDocument.getNumberOfPages();
+
+			previewFilesCount = pdDocument.getNumberOfPages();
 		}
 		finally {
 			if (pdDocument != null) {
@@ -573,11 +571,14 @@ public class PDFProcessorImpl
 			}
 		}
 
-		previewFiles = new File[numPages];
+		File[] previewFiles = new File[previewFilesCount];
 
-		for (int i = 0; i < numPages; i++) {
+		for (int i = 0; i < previewFilesCount; i++) {
 			previewFiles[i] = getPreviewTempFile(tempFileId, i);
 		}
+
+		boolean generatePreview = _isGeneratePreview(fileVersion);
+		boolean generateThumbnail = _isGenerateThumbnail(fileVersion);
 
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_FORK_PROCESS_ENABLED) {
 			ProcessCallable<String> processCallable =
@@ -607,9 +608,9 @@ public class PDFProcessorImpl
 				new LiferayPDFBoxConverter(
 					file, thumbnailFile, previewFiles,
 					getPreviewType(fileVersion), getThumbnailType(fileVersion),
+					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI,
 					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_HEIGHT,
 					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_MAX_WIDTH,
-					PropsValues.DL_FILE_ENTRY_PREVIEW_DOCUMENT_DPI,
 					generatePreview, generateThumbnail);
 
 			liferayConverter.generateImagesPB();
@@ -747,8 +748,6 @@ public class PDFProcessorImpl
 		}
 	}
 
-	private static final long serialVersionUID = 1L;
-
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessorImpl.class);
 
 	private List<Long> _fileVersionIds = new Vector<Long>();
@@ -770,11 +769,11 @@ public class PDFProcessorImpl
 			_inputFile = inputFile;
 			_thumbnailFile = thumbnailFile;
 			_previewFiles = previewFiles;
-			_dpi = dpi;
-			_width = width;
-			_height = height;
 			_extension = extension;
 			_thumbnailExtension = thumbnailExtension;
+			_dpi = dpi;
+			_height = height;
+			_width = width;
 			_generateThumbnail = generateThumbnail;
 			_generatePreview = generatePreview;
 		}
@@ -797,7 +796,7 @@ public class PDFProcessorImpl
 				LiferayPDFBoxConverter liferayConverter =
 					new LiferayPDFBoxConverter(
 						_inputFile, _thumbnailFile, _previewFiles, _extension,
-						_thumbnailExtension, _height, _width, _dpi,
+						_thumbnailExtension, _dpi, _height, _width,
 						_generatePreview, _generateThumbnail);
 
 				liferayConverter.generateImagesPB();
@@ -814,6 +813,8 @@ public class PDFProcessorImpl
 		private Map<String, String> _customLogSettings;
 		private int _dpi;
 		private String _extension;
+		private boolean _generatePreview;
+		private boolean _generateThumbnail;
 		private int _height;
 		private File _inputFile;
 		private String _liferayHome;
@@ -822,8 +823,6 @@ public class PDFProcessorImpl
 		private String _thumbnailExtension;
 		private File _thumbnailFile;
 		private int _width;
-		private boolean _generatePreview;
-		private boolean _generateThumbnail;
 
 	}
 
