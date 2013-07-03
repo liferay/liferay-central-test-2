@@ -58,7 +58,7 @@
 	</aui:nav>
 
 	<div class="alert">
-		<small><%= LanguageUtil.get(pageContext, "preview-may-not-be-really-accurate") %></small>
+		<small><%= LanguageUtil.get(pageContext, "preview-may-not-be-accurate") %></small>
 	</div>
 </div>
 
