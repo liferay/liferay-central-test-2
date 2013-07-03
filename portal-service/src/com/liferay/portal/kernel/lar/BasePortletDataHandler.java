@@ -516,18 +516,22 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 	protected long getExportModelCount(
 		ManifestSummary manifestSummary,
-		PortletDataHandlerControl[] exportControls) {
+		PortletDataHandlerControl[] portletDataHandlerControls) {
 
 		long totalModelCount = -1;
 
-		for (PortletDataHandlerControl exportControl : exportControls) {
-			long modelCount = manifestSummary.getModelAdditionCount(
-				exportControl.getClassName(),
-				exportControl.getReferrerClassName());
+		for (PortletDataHandlerControl portletDataHandlerControl :
+				portletDataHandlerControls) {
 
-			if (exportControl instanceof PortletDataHandlerBoolean) {
+			long modelCount = manifestSummary.getModelAdditionCount(
+				portletDataHandlerControl.getClassName(),
+				portletDataHandlerControl.getReferrerClassName());
+
+			if (portletDataHandlerControl
+					instanceof PortletDataHandlerBoolean) {
+
 				PortletDataHandlerBoolean portletDataHandlerBoolean =
-					(PortletDataHandlerBoolean)exportControl;
+					(PortletDataHandlerBoolean)portletDataHandlerControl;
 
 				PortletDataHandlerControl[] childPortletDataHandlerControls =
 					portletDataHandlerBoolean.getChildren();
