@@ -76,7 +76,9 @@ public class UpgradeSocial extends UpgradeProcess {
 			ps.executeUpdate();
 		}
 		catch (SQLException sqle) {
-			_log.warn("Error adding activity " + activityId, sqle);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to add activity " + activityId, sqle);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
