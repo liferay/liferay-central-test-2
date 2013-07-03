@@ -16,6 +16,7 @@ package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.SearchContainerReference;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.PortletConfig;
@@ -122,8 +123,13 @@ public class DefineObjectsTag extends TagSupport {
 		pageContext.setAttribute(portletResponseAttrName, portletResponse);
 
 		SearchContainerReference searchContainerReference =
-			new SearchContainerReference(
+			(SearchContainerReference)request.getAttribute(
+				WebKeys.SEARCH_CONTAINER_REFERENCE);
+
+		if (searchContainerReference == null) {
+			searchContainerReference = new SearchContainerReference(
 				request, portletResponse.getNamespace());
+		}
 
 		pageContext.setAttribute(
 			"searchContainerReference", searchContainerReference);
