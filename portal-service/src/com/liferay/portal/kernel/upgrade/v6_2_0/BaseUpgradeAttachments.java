@@ -33,7 +33,6 @@ import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -106,9 +105,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			return fileEntryId;
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to add file entry " + name, sqle);
+				_log.warn("Unable to add file entry " + name, e);
 			}
 
 			return 0;
@@ -172,12 +171,11 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			ps.executeUpdate();
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to add file version " + version +
-						" for file entry " + title,
-					sqle);
+					"Unable to add file version 1.0 for file entry " + title,
+					e);
 			}
 		}
 		finally {
@@ -239,9 +237,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			return folderId;
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to add folder " + name, sqle);
+				_log.warn("Unable to add folder " + name, e);
 			}
 
 			return 0;
@@ -263,7 +261,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			repositoryId, true, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			portletId, true);
 
-		if (folderId == 0) {
+		if (folderId <= 0) {
 			return 0;
 		}
 
@@ -302,10 +300,10 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			return repositoryId;
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to add repository for portlet " + portletId, sqle);
+					"Unable to add repository for portlet " + portletId, e);
 			}
 
 			return 0;
@@ -362,7 +360,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			String name, boolean hidden)
 		throws Exception {
 
-		if ((repositoryId == 0) || (parentFolderId == 0)) {
+		if ((repositoryId <= 0) || (parentFolderId <= 0)) {
 			return 0;
 		}
 
@@ -458,7 +456,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			PortalUtil.getClassNameId(_LIFERAY_REPOSITORY_CLASS_NAME),
 			getPortletId());
 
-		if (repositoryId == 0) {
+		if (repositoryId <= 0) {
 			return;
 		}
 
@@ -466,7 +464,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			groupId, companyId, resourcePrimKey, containerModelId, userId,
 			userName, createDate);
 
-		if (containerModelFolderId == 0) {
+		if (containerModelFolderId <= 0) {
 			return;
 		}
 
@@ -488,7 +486,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 				userName, createDate, repositoryId, containerModelFolderId,
 				name, extension, mimeType, title, size);
 
-			if (fileEntryId == 0) {
+			if (fileEntryId <= 0) {
 				continue;
 			}
 

@@ -29,7 +29,6 @@ import com.liferay.portlet.wiki.social.WikiActivityKeys;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 /**
@@ -75,9 +74,9 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			ps.executeUpdate();
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to add activity " + activityId, sqle);
+				_log.warn("Unable to add activity " + activityId, e);
 			}
 		}
 		finally {

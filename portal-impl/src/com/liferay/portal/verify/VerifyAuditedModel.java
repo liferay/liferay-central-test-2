@@ -26,7 +26,6 @@ import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -248,9 +247,9 @@ public class VerifyAuditedModel extends VerifyProcess {
 
 			ps.executeUpdate();
 		}
-		catch (SQLException sqle) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to verify model " + modelName, sqle);
+				_log.warn("Unable to verify model " + modelName, e);
 			}
 		}
 		finally {
