@@ -54,12 +54,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TunnelUtil {
 
-	public static Key getPresharedKey() throws InvalidKeyException {
-		String presharedKey = PropsValues.TUNNELING_SERVLET_PRESHARED_SECRET;
+	public static Key getSharedKey() throws InvalidKeyException {
+		String presharedKey = PropsValues.TUNNELING_SERVLET_SHARED_SECRET;
 
 		if (Validator.isNull(presharedKey)) {
 			throw new InvalidKeyException(
-				"The tunneling servlet preshared key is not set");
+				"The tunneling servlet shared key is not set");
 		}
 
 		if ((presharedKey.length() != 16) && (presharedKey.length() != 32) &&
@@ -79,7 +79,7 @@ public class TunnelUtil {
 		throws Exception {
 
 		String password = Encryptor.encrypt(
-			getPresharedKey(), httpPrincipal.getLogin());
+			getSharedKey(), httpPrincipal.getLogin());
 
 		httpPrincipal.setPassword(password);
 

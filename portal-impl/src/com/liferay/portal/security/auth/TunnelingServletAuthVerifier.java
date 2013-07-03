@@ -116,7 +116,7 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 
 		try {
 			expectedPassword = Encryptor.encrypt(
-				TunnelUtil.getPresharedKey(), login);
+				TunnelUtil.getSharedKey(), login);
 		}
 		catch (EncryptorException e) {
 			throw new AuthException("Unable to decrypt login.", e);
