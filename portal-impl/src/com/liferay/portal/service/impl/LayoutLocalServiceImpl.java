@@ -2829,9 +2829,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();
 
-		taskContextMap.put("groupId", groupId);
-
 		taskContextMap.put("fileName", fileName);
+		taskContextMap.put("groupId", groupId);
 
 		if (endDate != null) {
 			taskContextMap.put("endDate", endDate);
@@ -2867,9 +2866,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();
 
-		taskContextMap.put("groupId", groupId);
-
 		taskContextMap.put("fileName", fileName);
+		taskContextMap.put("groupId", groupId);
 
 		if (endDate != null) {
 			taskContextMap.put("endDate", endDate);

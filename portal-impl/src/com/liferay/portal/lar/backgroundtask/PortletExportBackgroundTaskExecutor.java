@@ -52,12 +52,12 @@ public class PortletExportBackgroundTaskExecutor
 			(Map<String, String[]>)taskContextMap.get("parameterMap");
 		Date startDate = (Date)taskContextMap.get("startDate");
 		Date endDate = (Date)taskContextMap.get("endDate");
-		String fileName = MapUtil.getString(taskContextMap, "fileName");
 
 		File larFile = LayoutServiceUtil.exportPortletInfoAsFile(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
 		long userId = MapUtil.getLong(taskContextMap, "userId");
+		String fileName = MapUtil.getString(taskContextMap, "fileName");
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
 			userId, backgroundTask.getBackgroundTaskId(), fileName, larFile);
