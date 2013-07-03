@@ -97,6 +97,7 @@ public class Fields implements Iterable<Field>, Serializable {
 		return _fieldsMap.keySet();
 	}
 
+	@Override
 	public Iterator<Field> iterator() {
 		return iterator(false);
 	}
