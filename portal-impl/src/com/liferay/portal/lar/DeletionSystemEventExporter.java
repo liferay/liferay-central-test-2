@@ -49,7 +49,7 @@ public class DeletionSystemEventExporter {
 		Element rootElement = document.addElement("deletion-system-events");
 
 		Set<StagedModelType> deletionSystemEventModelTypes =
-			portletDataContext.getDeletionSystemEventTypes();
+			portletDataContext.getDeletionSystemEventStagedModelTypes();
 
 		if (!deletionSystemEventModelTypes.isEmpty()) {
 			doExport(

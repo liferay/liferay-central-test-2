@@ -89,7 +89,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 
 		try {
-			portletDataContext.addDeletionSystemEventModelTypes(
+			portletDataContext.addDeletionSystemEventStagedModelTypes(
 				getDeletionSystemEventStagedModelTypes());
 
 			for (PortletDataHandlerControl portletDataHandlerControl :

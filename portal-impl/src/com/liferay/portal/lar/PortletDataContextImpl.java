@@ -366,7 +366,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	@Override
-	public void addDeletionSystemEventModelTypes(
+	public void addDeletionSystemEventStagedModelTypes(
 		StagedModelType... stagedModelTypes) {
 
 		for (StagedModelType stagedModelType : stagedModelTypes) {
@@ -855,7 +855,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	@Override
-	public Set<StagedModelType> getDeletionSystemEventTypes() {
+	public Set<StagedModelType> getDeletionSystemEventStagedModelTypes() {
 		return _deletionSystemEventModelTypes;
 	}
 

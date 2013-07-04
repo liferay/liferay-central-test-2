@@ -109,8 +109,8 @@ public interface PortletDataContext extends Serializable {
 	public void addDateRangeCriteria(
 		DynamicQuery dynamicQuery, String modifiedDatePropertyName);
 
-	public void addDeletionSystemEventModelTypes(
-		StagedModelType... stagedModelType);
+	public void addDeletionSystemEventStagedModelTypes(
+		StagedModelType... stagedModelTypes);
 
 	public void addExpando(
 			Element element, String path, ClassedModel classedModel)
@@ -214,7 +214,7 @@ public interface PortletDataContext extends Serializable {
 
 	public String getDataStrategy();
 
-	public Set<StagedModelType> getDeletionSystemEventTypes();
+	public Set<StagedModelType> getDeletionSystemEventStagedModelTypes();
 
 	public Date getEndDate();
 
