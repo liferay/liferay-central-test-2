@@ -408,7 +408,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 				dynamicQuery.add(createDateProperty.le(endDate));
 			}
-			
+
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
@@ -446,7 +446,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			@Override
 			protected void performAction(Object object) {
 			}
-			
+
 		};
 
 		actionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());

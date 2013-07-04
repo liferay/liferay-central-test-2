@@ -53,7 +53,8 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "calendar";
 
 	public CalendarPortletDataHandler() {
-		setDeletionSystemEventStagedModelTypes(new StagedModelType(CalEvent.class));
+		setDeletionSystemEventStagedModelTypes(
+			new StagedModelType(CalEvent.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "events", true, true, null,

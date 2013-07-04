@@ -92,7 +92,7 @@ public class StagedModelType {
 	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
-		
+
 		hashCode.append(_classNameId);
 		hashCode.append(_referrerClassNameId);
 
