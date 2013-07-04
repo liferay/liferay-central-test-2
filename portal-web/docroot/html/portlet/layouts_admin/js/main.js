@@ -1122,6 +1122,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-io-request', 'aui-dialog-iframe-deprecated', 'aui-modal', 'aui-parse-content', 'aui-tree-view', 'liferay-notice', 'liferay-portlet-base', 'liferay-util-window']
+		requires: ['aui-dialog-iframe-deprecated', 'aui-io-request', 'aui-modal', 'aui-parse-content', 'aui-tree-view', 'liferay-notice', 'liferay-portlet-base', 'liferay-util-window']
 	}
 );
