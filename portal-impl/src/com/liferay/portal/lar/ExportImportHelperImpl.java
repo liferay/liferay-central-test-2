@@ -423,14 +423,14 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				dynamicQuery.add(
 					typeProperty.eq(SystemEventConstants.TYPE_DELETE));
 
-				_addCreateDateProperty(dynamicQuery);
+				addCreateDateProperty(dynamicQuery);
 			}
 
 			@Override
 			protected void performAction(Object object) {
 			}
 
-			private void _addCreateDateProperty(DynamicQuery dynamicQuery) {
+			protected void addCreateDateProperty(DynamicQuery dynamicQuery) {
 				if (!portletDataContext.hasDateRange()) {
 					return;
 				}
