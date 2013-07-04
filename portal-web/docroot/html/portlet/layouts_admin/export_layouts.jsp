@@ -528,14 +528,15 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 
 	<liferay-ui:section>
 		<div id="<portlet:namespace />exportProcesses"></div>
-
-		<aui:script use="aui-base">
-			<portlet:namespace />renderExportProcesses();
-		</aui:script>
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
 <aui:script use="liferay-export-import">
+	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="exportProcessesURL">
+		<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
+		<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	</liferay-portlet:resourceURL>
+
 	new Liferay.ExportImport(
 		{
 			archivedSetupsNode: '#<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS_ALL %>Checkbox',
@@ -544,6 +545,8 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 			layoutSetSettingsNode: '#<%= PortletDataHandlerKeys.LAYOUT_SET_SETTINGS %>Checkbox',
 			logoNode: '#<%= PortletDataHandlerKeys.LOGO %>Checkbox',
 			namespace: '<portlet:namespace />',
+			processesNode: '#exportProcesses',
+			processesResourceURL: '<%= exportProcessesURL.toString() %>',
 			rangeAllNode: '#rangeAll',
 			rangeDateRangeNode: '#rangeDateRange',
 			rangeLastNode: '#rangeLast',
@@ -579,50 +582,4 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 
 	Liferay.Util.toggleRadio('<portlet:namespace />chooseContent', '<portlet:namespace />selectContents', ['<portlet:namespace />showChangeGlobalContent']);
 	Liferay.Util.toggleRadio('<portlet:namespace />allContent', '<portlet:namespace />showChangeGlobalContent', ['<portlet:namespace />selectContents']);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />renderExportProcesses',
-		function() {
-			var A = AUI();
-
-			var exportProcessesNode = A.one('#<portlet:namespace />exportProcesses');
-
-			A.io.request(
-				<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="renderExportProcessesURL">
-					<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
-					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-				</liferay-portlet:resourceURL>
-
-				'<%= renderExportProcessesURL.toString() %>',
-				{
-					on: {
-						failure: function() {
-							new Liferay.Notice(
-								{
-									closeText: false,
-									content: Liferay.Language.get('your-request-failed-to-complete') + '<button type="button" class="close">&times;</button>',
-									noticeClass: 'hide',
-									timeout: 10000,
-									toggleText: false,
-									type: 'warning',
-									useAnimation: true
-								}
-							).show();
-						},
-						success: function(event, id, obj) {
-							exportProcessesNode.empty();
-
-							exportProcessesNode.plug(A.Plugin.ParseContent);
-
-							exportProcessesNode.setContent(this.get('responseData'));
-
-							A.later(5000, A.config.win, <portlet:namespace />renderExportProcesses);
-						}
-					}
-				}
-			);
-		},
-		['aui-io-request', 'aui-parse-content', 'liferay-notice']
-	);
 </aui:script>
