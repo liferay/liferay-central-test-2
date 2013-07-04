@@ -76,6 +76,7 @@ public interface DLFileEntry extends DLFileEntryModel, PersistedModel {
 
 	public java.lang.String getLuceneProperties();
 
+	@Override
 	public com.liferay.portal.kernel.lar.StagedModelType getStagedModelType();
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getTrashContainer();
