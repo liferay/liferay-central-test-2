@@ -50,23 +50,25 @@ public class PortletDisplayTemplatePortletDataHandler
 			DDMTemplate.class);
 
 		for (long classNameId : TemplateHandlerRegistryUtil.getClassNameIds()) {
-			modelTypes.add(
+			stagedModelTypes.add(
 				new StagedModelType(ddmTemplateClassNameId, classNameId));
 		}
 	}
 
 	@Override
 	public StagedModelType[] getDeletionSystemEventStagedModelTypes() {
-		return modelTypes.toArray(new StagedModelType[modelTypes.size()]);
+		return stagedModelTypes.toArray(
+			new StagedModelType[stagedModelTypes.size()]);
 	}
 
 	@Override
 	public long getExportModelCount(ManifestSummary manifestSummary) {
 		long totalModelCount = -1;
 
-		for (StagedModelType modelType : modelTypes) {
+		for (StagedModelType stagedModelType : stagedModelTypes) {
 			long modelCount = manifestSummary.getModelAdditionCount(
-				modelType.getClassName(), modelType.getReferrerClassName());
+				stagedModelType.getClassName(),
+				stagedModelType.getReferrerClassName());
 
 			if (modelCount == -1) {
 				continue;
@@ -128,7 +130,7 @@ public class PortletDisplayTemplatePortletDataHandler
 			PortletDataContext portletDataContext)
 		throws Exception {
 
-		for (StagedModelType modeType : modelTypes) {
+		for (StagedModelType modeType : stagedModelTypes) {
 			ActionableDynamicQuery actionableDynamicQuery =
 				getDDMTemplateActionableDynamicQuery(
 					portletDataContext,
@@ -174,7 +176,7 @@ public class PortletDisplayTemplatePortletDataHandler
 		};
 	}
 
-	protected List<StagedModelType> modelTypes =
+	protected List<StagedModelType> stagedModelTypes =
 		new ArrayList<StagedModelType>();
 
 }
