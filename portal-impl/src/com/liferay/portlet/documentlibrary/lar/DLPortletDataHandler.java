@@ -69,7 +69,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 	public DLPortletDataHandler() {
 		setDataLocalized(true);
 		setDataPortletPreferences("rootFolderId");
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(DLFileEntryType.class),
 			new StagedModelType(DLFileRank.class),
 			new StagedModelType(DLFileShortcut.class),

@@ -48,7 +48,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "mobile_device_rules";
 
 	public MDRPortletDataHandler() {
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(MDRAction.class, Layout.class),
 			new StagedModelType(MDRRule.class),
 			new StagedModelType(MDRRuleGroup.class),

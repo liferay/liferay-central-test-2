@@ -39,7 +39,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 	public DDLPortletDataHandler() {
 		setDataLocalized(true);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(DDLRecordSet.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(

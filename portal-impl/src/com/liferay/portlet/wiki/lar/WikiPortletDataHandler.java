@@ -54,7 +54,7 @@ public class WikiPortletDataHandler extends BasePortletDataHandler {
 
 	public WikiPortletDataHandler() {
 		setDataPortletPreferences("hiddenNodes, visibleNodes");
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(WikiNode.class),
 			new StagedModelType(WikiPage.class));
 		setExportControls(

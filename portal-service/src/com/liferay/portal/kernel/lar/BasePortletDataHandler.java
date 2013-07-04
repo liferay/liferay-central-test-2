@@ -676,10 +676,11 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		_dataPortletPreferences = dataPortletPreferences;
 	}
 
-	protected void setDeletionSystemEventModelTypes(
-		StagedModelType... deletionSystemEventModelTypes) {
+	protected void setDeletionSystemEventStagedModelTypes(
+		StagedModelType... deletionSystemEventStagedModelTypes) {
 
-		_deletionSystemEventStagedModelTypes = deletionSystemEventModelTypes;
+		_deletionSystemEventStagedModelTypes =
+			deletionSystemEventStagedModelTypes;
 	}
 
 	protected void setExportControls(

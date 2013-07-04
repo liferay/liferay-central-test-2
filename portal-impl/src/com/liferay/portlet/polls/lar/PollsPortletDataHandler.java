@@ -46,7 +46,7 @@ public class PollsPortletDataHandler extends BasePortletDataHandler {
 
 	public PollsPortletDataHandler() {
 		setDataLocalized(true);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(PollsQuestion.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(

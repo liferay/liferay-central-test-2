@@ -52,7 +52,7 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "message_boards";
 
 	public MBPortletDataHandler() {
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(MBBan.class),
 			new StagedModelType(MBCategory.class),
 			new StagedModelType(MBMessage.class),

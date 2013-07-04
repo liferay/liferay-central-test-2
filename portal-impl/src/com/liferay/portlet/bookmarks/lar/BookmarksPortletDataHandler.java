@@ -54,7 +54,7 @@ public class BookmarksPortletDataHandler extends BasePortletDataHandler {
 
 	public BookmarksPortletDataHandler() {
 		setDataPortletPreferences("rootFolderId");
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(BookmarksEntry.class),
 			new StagedModelType(BookmarksFolder.class));
 		setExportControls(

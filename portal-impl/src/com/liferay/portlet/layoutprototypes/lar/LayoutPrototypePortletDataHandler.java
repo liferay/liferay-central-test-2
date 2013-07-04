@@ -39,7 +39,7 @@ public class LayoutPrototypePortletDataHandler extends BasePortletDataHandler {
 
 	public LayoutPrototypePortletDataHandler() {
 		setDataLevel(DataLevel.PORTAL);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(LayoutPrototype.class));
 	}
 

@@ -42,7 +42,7 @@ public class UsersAdminPortletDataHandler extends BasePortletDataHandler {
 
 	public UsersAdminPortletDataHandler() {
 		setDataLevel(DataLevel.PORTAL);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(Organization.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(

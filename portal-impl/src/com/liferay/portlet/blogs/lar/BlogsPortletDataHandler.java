@@ -44,7 +44,7 @@ public class BlogsPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "blogs";
 
 	public BlogsPortletDataHandler() {
-		setDeletionSystemEventModelTypes(new StagedModelType(BlogsEntry.class));
+		setDeletionSystemEventStagedModelTypes(new StagedModelType(BlogsEntry.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "entries", true, false,

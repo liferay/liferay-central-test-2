@@ -41,7 +41,7 @@ public class LayoutSetPrototypePortletDataHandler
 
 	public LayoutSetPrototypePortletDataHandler() {
 		setDataLevel(DataLevel.PORTAL);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(LayoutSetPrototype.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(

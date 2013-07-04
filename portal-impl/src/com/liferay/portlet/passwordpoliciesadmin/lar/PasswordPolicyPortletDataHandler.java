@@ -40,7 +40,7 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 
 	public PasswordPolicyPortletDataHandler() {
 		setDataLevel(DataLevel.PORTAL);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(PasswordPolicy.class));
 	}
 

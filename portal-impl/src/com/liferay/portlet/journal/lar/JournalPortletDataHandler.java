@@ -88,7 +88,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 	public JournalPortletDataHandler() {
 		setDataLocalized(true);
-		setDeletionSystemEventModelTypes(
+		setDeletionSystemEventStagedModelTypes(
 			new StagedModelType(DDMStructure.class, JournalArticle.class),
 			new StagedModelType(DDMTemplate.class, DDMStructure.class),
 			new StagedModelType(JournalArticle.class),
