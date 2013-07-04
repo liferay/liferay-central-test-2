@@ -468,6 +468,7 @@ public class LayoutExporter {
 
 		portletDataContext.setMissingReferencesElement(
 			missingReferencesElement);
+
 		portletDataContext.addDeletionSystemEventStagedModelTypes(
 			new StagedModelType(Layout.class));
 
