@@ -19,7 +19,7 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 
-PortletURL portletURL = renderResponse.createRenderURL();
+PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/layouts_admin/export_layouts");
 portletURL.setParameter("tabs2", "all-export-processes");
