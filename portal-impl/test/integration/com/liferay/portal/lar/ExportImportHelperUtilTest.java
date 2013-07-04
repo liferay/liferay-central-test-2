@@ -183,24 +183,28 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 	@Test
 	public void testExportLayoutReferencesWithContext() throws Exception {
-		_OLD_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING =
-			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
-
-		setFinalStaticField(
-			PropsValues.class.getField(
-				"LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING"), "/en");
-
 		PortalImpl portalImpl = spy(new PortalImpl());
 
 		when(
 			portalImpl.getPathContext()
 		).thenReturn("/de");
 
-		new PortalUtil().setPortal(portalImpl);
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(portalImpl);
+
+		_OLD_LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING =
+			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+
+		setFinalStaticField(
+			PropsValues.class.getField(
+				"LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING"),
+			"/en");
 
 		setFinalStaticField(
 			ExportImportHelperImpl.class.getDeclaredField(
-				"_PRIVATE_USER_SERVLET_MAPPING"), "/en/");
+				"_PRIVATE_USER_SERVLET_MAPPING"),
+			"/en/");
 
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
@@ -233,7 +237,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING +
 				StringPool.SLASH);
 
-		new PortalUtil().setPortal(new PortalImpl());
+		portalUtil.setPortal(new PortalImpl());
 	}
 
 	@Test
@@ -243,7 +247,8 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 		setFinalStaticField(
 			PropsValues.class.getField(
-				"LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING"), "/en");
+				"LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING"),
+			"/en");
 
 		setFinalStaticField(
 			ExportImportHelperImpl.class.getDeclaredField(
@@ -354,14 +359,14 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			_portletDataContextExport, entryElement, content, true);
 
 		Assert.assertFalse(
+			content.contains("@data_handler_group_friendly_url@"));
+		Assert.assertFalse(content.contains("@data_handler_path_context@"));
+		Assert.assertFalse(
 			content.contains("@data_handler_private_group_servlet_mapping@"));
 		Assert.assertFalse(
 			content.contains("@data_handler_private_user_servlet_mapping@"));
 		Assert.assertFalse(
 			content.contains("@data_handler_public_servlet_mapping@"));
-		Assert.assertFalse(
-			content.contains("@data_handler_group_friendly_url@"));
-		Assert.assertFalse(content.contains("@data_handler_path_context@"));
 	}
 
 	@Test
@@ -451,15 +456,16 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		return StringUtil.replace(
 			content,
 			new String[] {
-				"[$CTX$]", "[$GROUP_FRIENDLY_URL$]", "[$GROUP_ID$]",
-				"[$IMAGE_ID$]", "[$PATH_FRIENDLY_URL_PRIVATE_GROUP$]",
+				"[$GROUP_FRIENDLY_URL$]", "[$GROUP_ID$]", "[$IMAGE_ID$]",
+				"[$PATH_CONTEXT$]", "[$PATH_FRIENDLY_URL_PRIVATE_GROUP$]",
 				"[$PATH_FRIENDLY_URL_PRIVATE_USER$]",
 				"[$PATH_FRIENDLY_URL_PUBLIC$]", "[$TITLE$]", "[$UUID$]"
 			},
 			new String[] {
-				PortalUtil.getPathContext(), _stagingGroup.getFriendlyURL(),
+				_stagingGroup.getFriendlyURL(),
 				String.valueOf(fileEntry.getGroupId()),
 				String.valueOf(fileEntry.getFileEntryId()),
+				PortalUtil.getPathContext(),
 				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING,
 				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING,
 				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING,
