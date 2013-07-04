@@ -172,6 +172,7 @@ public class BackgroundTaskLocalServiceImpl
 		return backgroundTaskPersistence.fetchByPrimaryKey(backgroundTaskId);
 	}
 
+	@Override
 	public String fetchBackgroundTaskStatus(long backgroundTaskId) {
 		BackgroundTaskStatus backgroundTaskStatus =
 			_backgroundTaskStatusRegistry.fetch(backgroundTaskId);

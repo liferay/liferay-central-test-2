@@ -23,6 +23,7 @@ import com.liferay.portal.service.base.BackgroundTaskServiceBaseImpl;
 @JSONWebService
 public class BackgroundTaskServiceImpl extends BackgroundTaskServiceBaseImpl {
 
+	@Override
 	public String fetchBackgroundTaskStatus(long backgroundTaskId) {
 		return backgroundTaskLocalService.fetchBackgroundTaskStatus(
 			backgroundTaskId);
