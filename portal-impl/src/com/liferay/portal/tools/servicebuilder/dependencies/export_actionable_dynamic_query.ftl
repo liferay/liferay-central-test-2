@@ -37,9 +37,9 @@ public class ${entity.name}ExportActionableDynamicQuery extends ${entity.name}Ac
 
 	@Override
 	public long performCount() throws PortalException, SystemException {
-		StagedModelType stagedModelType = getStagedModelType();
-
 		ManifestSummary manifestSummary = _portletDataContext.getManifestSummary();
+
+		StagedModelType stagedModelType = getStagedModelType();
 
 		long modelAdditionCount = super.performCount();
 
