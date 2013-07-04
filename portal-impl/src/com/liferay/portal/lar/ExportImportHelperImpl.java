@@ -394,13 +394,12 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
+				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+
 				Property groupIdProperty = PropertyFactoryUtil.forName(
 					"groupId");
 
-				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
-
-				disjunction.add(groupIdProperty.eq(0L));
-
+				disjunction.add(groupIdProperty.eq(0));
 				disjunction.add(
 					groupIdProperty.eq(portletDataContext.getScopeGroupId()));
 
