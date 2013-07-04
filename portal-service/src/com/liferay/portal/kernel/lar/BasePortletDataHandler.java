@@ -90,7 +90,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 		try {
 			portletDataContext.addDeletionSystemEventModelTypes(
-				getDeletionSystemEventModelTypes());
+				getDeletionSystemEventStagedModelTypes());
 
 			for (PortletDataHandlerControl portletDataHandlerControl :
 					getExportControls()) {
@@ -125,7 +125,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public StagedModelType[] getDeletionSystemEventModelTypes() {
+	public StagedModelType[] getDeletionSystemEventStagedModelTypes() {
 		return _deletionSystemEventModelTypes;
 	}
 

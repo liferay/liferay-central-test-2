@@ -56,7 +56,7 @@ public class PortletDisplayTemplatePortletDataHandler
 	}
 
 	@Override
-	public StagedModelType[] getDeletionSystemEventModelTypes() {
+	public StagedModelType[] getDeletionSystemEventStagedModelTypes() {
 		return modelTypes.toArray(new StagedModelType[modelTypes.size()]);
 	}
 
