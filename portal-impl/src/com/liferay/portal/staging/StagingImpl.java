@@ -1968,11 +1968,11 @@ public class StagingImpl implements Staging {
 			int recurrenceType = ParamUtil.getInteger(
 				portletRequest, "recurrenceType");
 
-			Calendar startCal = ExportImportHelperUtil.getDate(
+			Calendar startCalendar = ExportImportHelperUtil.getCalendar(
 				portletRequest, "schedulerStartDate", true);
 
 			String cronText = SchedulerEngineHelperUtil.getCronText(
-				portletRequest, startCal, true, recurrenceType);
+				portletRequest, startCalendar, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
@@ -1980,10 +1980,10 @@ public class StagingImpl implements Staging {
 				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = ExportImportHelperUtil.getDate(
+				Calendar endCalendar = ExportImportHelperUtil.getCalendar(
 					portletRequest, "schedulerEndDate", true);
 
-				schedulerEndDate = endCal.getTime();
+				schedulerEndDate = endCalendar.getTime();
 			}
 
 			String description = ParamUtil.getString(
@@ -1992,8 +1992,8 @@ public class StagingImpl implements Staging {
 			LayoutServiceUtil.schedulePublishToLive(
 				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
 				parameterMap, scope, dateRange.getStartDate(),
-				dateRange.getEndDate(), groupName, cronText, startCal.getTime(),
-				schedulerEndDate, description);
+				dateRange.getEndDate(), groupName, cronText,
+				startCalendar.getTime(), schedulerEndDate, description);
 		}
 		else {
 			MessageStatus messageStatus = new MessageStatus();
@@ -2142,11 +2142,11 @@ public class StagingImpl implements Staging {
 			int recurrenceType = ParamUtil.getInteger(
 				portletRequest, "recurrenceType");
 
-			Calendar startCal = ExportImportHelperUtil.getDate(
+			Calendar startCalendar = ExportImportHelperUtil.getCalendar(
 				portletRequest, "schedulerStartDate", true);
 
 			String cronText = SchedulerEngineHelperUtil.getCronText(
-				portletRequest, startCal, true, recurrenceType);
+				portletRequest, startCalendar, true, recurrenceType);
 
 			Date schedulerEndDate = null;
 
@@ -2154,10 +2154,10 @@ public class StagingImpl implements Staging {
 				portletRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = ExportImportHelperUtil.getDate(
+				Calendar endCalendar = ExportImportHelperUtil.getCalendar(
 					portletRequest, "schedulerEndDate", true);
 
-				schedulerEndDate = endCal.getTime();
+				schedulerEndDate = endCalendar.getTime();
 			}
 
 			String description = ParamUtil.getString(
@@ -2167,8 +2167,8 @@ public class StagingImpl implements Staging {
 				groupId, privateLayout, layoutIdMap, parameterMap,
 				remoteAddress, remotePort, remotePathContext, secureConnection,
 				remoteGroupId, remotePrivateLayout, dateRange.getStartDate(),
-				dateRange.getEndDate(), groupName, cronText, startCal.getTime(),
-				schedulerEndDate, description);
+				dateRange.getEndDate(), groupName, cronText,
+				startCalendar.getTime(), schedulerEndDate, description);
 		}
 		else {
 			MessageStatus messageStatus = new MessageStatus();
