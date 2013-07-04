@@ -48,12 +48,13 @@ public class DeletionSystemEventExporter {
 
 		Element rootElement = document.addElement("deletion-system-events");
 
-		Set<StagedModelType> deletionSystemEventModelTypes =
+		Set<StagedModelType> deletionSystemEventStagedModelTypes =
 			portletDataContext.getDeletionSystemEventStagedModelTypes();
 
-		if (!deletionSystemEventModelTypes.isEmpty()) {
+		if (!deletionSystemEventStagedModelTypes.isEmpty()) {
 			doExport(
-				portletDataContext, rootElement, deletionSystemEventModelTypes);
+				portletDataContext, rootElement,
+				deletionSystemEventStagedModelTypes);
 		}
 
 		portletDataContext.addZipEntry(
@@ -65,7 +66,7 @@ public class DeletionSystemEventExporter {
 	protected void doExport(
 			final PortletDataContext portletDataContext,
 			final Element rootElement,
-			final Set<StagedModelType> deletionSystemEventModelTypes)
+			final Set<StagedModelType> deletionSystemEventStagedModelTypes)
 		throws PortalException, SystemException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
@@ -73,7 +74,7 @@ public class DeletionSystemEventExporter {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
-				if (!deletionSystemEventModelTypes.isEmpty()) {
+				if (!deletionSystemEventStagedModelTypes.isEmpty()) {
 					Property classNameIdProperty = PropertyFactoryUtil.forName(
 						"classNameId");
 
@@ -83,18 +84,19 @@ public class DeletionSystemEventExporter {
 					Disjunction disjunction =
 						RestrictionsFactoryUtil.disjunction();
 
-					for (StagedModelType modelType :
-							deletionSystemEventModelTypes) {
+					for (StagedModelType stagedModelType :
+							deletionSystemEventStagedModelTypes) {
 
 						Conjunction conjunction =
 							RestrictionsFactoryUtil.conjunction();
 
 						conjunction.add(
-							classNameIdProperty.eq(modelType.getClassNameId()));
+							classNameIdProperty.eq(
+								stagedModelType.getClassNameId()));
 
 						conjunction.add(
 							referrerClassNameIdProperty.eq(
-								modelType.getReferrerClassNameId()));
+								stagedModelType.getReferrerClassNameId()));
 
 						disjunction.add(conjunction);
 					}
