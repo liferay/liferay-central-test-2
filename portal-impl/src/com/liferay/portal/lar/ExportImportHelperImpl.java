@@ -392,6 +392,23 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		ActionableDynamicQuery actionableDynamicQuery =
 			new SystemEventActionableDynamicQuery() {
 
+			protected void addCreateDateProperty(DynamicQuery dynamicQuery) {
+				if (!portletDataContext.hasDateRange()) {
+					return;
+				}
+
+				Property createDateProperty = PropertyFactoryUtil.forName(
+					"createDate");
+
+				Date startDate = portletDataContext.getStartDate();
+
+				dynamicQuery.add(createDateProperty.ge(startDate));
+
+				Date endDate = portletDataContext.getEndDate();
+
+				dynamicQuery.add(createDateProperty.le(endDate));
+			}
+			
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
@@ -429,23 +446,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			@Override
 			protected void performAction(Object object) {
 			}
-
-			protected void addCreateDateProperty(DynamicQuery dynamicQuery) {
-				if (!portletDataContext.hasDateRange()) {
-					return;
-				}
-
-				Property createDateProperty = PropertyFactoryUtil.forName(
-					"createDate");
-
-				Date startDate = portletDataContext.getStartDate();
-
-				dynamicQuery.add(createDateProperty.ge(startDate));
-
-				Date endDate = portletDataContext.getEndDate();
-
-				dynamicQuery.add(createDateProperty.le(endDate));
-			}
+			
 		};
 
 		actionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
