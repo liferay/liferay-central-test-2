@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.util.HashCode;
+import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -89,12 +91,12 @@ public class StagedModelType {
 
 	@Override
 	public int hashCode() {
-		int hashCode = (int) _classNameId;
+		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
+		
+		hashCode.append(_classNameId);
+		hashCode.append(_referrerClassNameId);
 
-		hashCode = 31 * hashCode + (int)(_classNameId >>> 32);
-		hashCode = 31 * hashCode + (int)_referrerClassNameId;
-
-		return 31 * hashCode + (int)(_referrerClassNameId >>> 32);
+		return hashCode.toHashCode();
 	}
 
 	public void setClassName(String className) {
