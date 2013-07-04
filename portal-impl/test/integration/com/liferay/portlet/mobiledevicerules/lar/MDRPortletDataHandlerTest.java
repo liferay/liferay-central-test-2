@@ -46,9 +46,9 @@ public class MDRPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 	@Override
 	protected void addParameters(Map<String, String[]> parameterMap) {
 		addBooleanParameter(
-			parameterMap, MDRPortletDataHandler.NAMESPACE, "rules", true);
-		addBooleanParameter(
 			parameterMap, MDRPortletDataHandler.NAMESPACE, "actions", true);
+		addBooleanParameter(
+			parameterMap, MDRPortletDataHandler.NAMESPACE, "rules", true);
 	}
 
 	@Override
