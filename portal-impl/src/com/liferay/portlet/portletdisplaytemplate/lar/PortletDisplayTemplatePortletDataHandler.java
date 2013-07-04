@@ -99,7 +99,7 @@ public class PortletDisplayTemplatePortletDataHandler
 			getDDMTemplateActionableDynamicQuery(
 				portletDataContext, ArrayUtil.toArray(classNameIds),
 				new StagedModelType(
-					PortalUtil.getClassNameId(DDMTemplate.class), -1));
+					PortalUtil.getClassNameId(DDMTemplate.class)));
 
 		actionableDynamicQuery.performActions();
 
