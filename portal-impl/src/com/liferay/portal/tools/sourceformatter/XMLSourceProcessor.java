@@ -523,7 +523,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	}
 
 	protected void formatStrutsConfigXML(String fileName, String content)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Document document = saxReaderUtil.read(content);
 
@@ -551,7 +551,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	}
 
 	protected void formatTilesDefsXML(String fileName, String content)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Document document = saxReaderUtil.read(content);
 
