@@ -126,7 +126,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 	@Override
 	public StagedModelType[] getDeletionSystemEventStagedModelTypes() {
-		return _deletionSystemEventModelTypes;
+		return _deletionSystemEventStagedModelTypes;
 	}
 
 	@Override
@@ -679,7 +679,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	protected void setDeletionSystemEventModelTypes(
 		StagedModelType... deletionSystemEventModelTypes) {
 
-		_deletionSystemEventModelTypes = deletionSystemEventModelTypes;
+		_deletionSystemEventStagedModelTypes = deletionSystemEventModelTypes;
 	}
 
 	protected void setExportControls(
@@ -720,7 +720,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	private DataLevel _dataLevel = DataLevel.SITE;
 	private boolean _dataLocalized;
 	private String[] _dataPortletPreferences = StringPool.EMPTY_ARRAY;
-	private StagedModelType[] _deletionSystemEventModelTypes =
+	private StagedModelType[] _deletionSystemEventStagedModelTypes =
 		new StagedModelType[0];
 	private PortletDataHandlerControl[] _exportControls =
 		new PortletDataHandlerControl[0];
