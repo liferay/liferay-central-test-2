@@ -130,7 +130,7 @@ import org.xml.sax.InputSource;
 public class ExportImportHelperImpl implements ExportImportHelper {
 
 	@Override
-	public Calendar getDate(
+	public Calendar getCalendar(
 		PortletRequest portletRequest, String paramPrefix,
 		boolean timeZoneSensitive) {
 
@@ -190,9 +190,14 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		String range = ParamUtil.getString(portletRequest, "range");
 
 		if (range.equals("dateRange")) {
-			startDate = getDate(portletRequest, "startDate", true).getTime();
+			Calendar startCalendar = getCalendar(
+				portletRequest, "startDate", true);
 
-			endDate = getDate(portletRequest, "endDate", true).getTime();
+			startDate = startCalendar.getTime();
+
+			Calendar endCalendar = getCalendar(portletRequest, "endDate", true);
+
+			endDate = endCalendar.getTime();
 		}
 		else if (range.equals("fromLastPublishDate")) {
 			if (Validator.isNotNull(portletId) && (plid > 0)) {

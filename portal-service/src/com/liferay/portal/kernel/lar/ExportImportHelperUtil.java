@@ -39,11 +39,11 @@ import javax.portlet.PortletRequest;
  */
 public class ExportImportHelperUtil {
 
-	public static Calendar getDate(
+	public static Calendar getCalendar(
 		PortletRequest portletRequest, String paramPrefix,
 		boolean timeZoneSensitive) {
 
-		return getExportImportHelper().getDate(
+		return getExportImportHelper().getCalendar(
 			portletRequest, paramPrefix, timeZoneSensitive);
 	}
 
