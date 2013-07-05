@@ -67,7 +67,7 @@ else {
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
 <aui:fieldset>
-	<aui:input name="devices" type="hidden" value='<%= PropsValues.MOBILE_STYLING_WAP_ENABLED? "regular,wap" : "wap" %>' />
+	<aui:input name="devices" type="hidden" value='<%= PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED? "regular,wap" : "wap" %>' />
 
 	<%
 	String taglibLabel = null;
@@ -81,7 +81,7 @@ else {
 	%>
 
 	<c:choose>
-		<c:when test="<%= PropsValues.MOBILE_STYLING_WAP_ENABLED %>">
+		<c:when test="<%= PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED %>">
 			<liferay-ui:tabs
 				names="regular-browsers,mobile-devices"
 				refresh="<%= false %>"

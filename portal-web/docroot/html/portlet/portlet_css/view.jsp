@@ -19,17 +19,17 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-String tabNames = "portlet-configuration,text-styles,background-styles,border-styles,margin-and-padding,advanced-styling";
+String tabs1Names = "portlet-configuration,text-styles,background-styles,border-styles,margin-and-padding,advanced-styling";
 
 if (PropsValues.MOBILE_STYLING_WAP_ENABLED) {
-	tabNames = tabNames + ",wap-styling";
+	tabs1Names = tabs1Names + ",wap-styling";
 }
 %>
 
 <div id="lfr-look-and-feel">
 	<div class="tabbable-content" id="portlet-set-properties">
 		<liferay-ui:tabs
-			names="<%= tabNames %>"
+			names="<%= tabs1Names %>"
 			url="<%= portletURL.toString() %>"
 		/>
 

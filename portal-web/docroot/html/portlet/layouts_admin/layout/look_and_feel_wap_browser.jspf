@@ -19,15 +19,15 @@
 <aui:input checked="<%= !selLayout.isInheritWapLookAndFeel() %>" id="wapUniqueLookAndFeel" label="define-a-specific-look-and-feel-for-this-page" name="wapInheritLookAndFeel" type="radio" value="<%= false %>" />
 
 <%
-	List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
-	List<ColorScheme> colorSchemes = selWapTheme.getColorSchemes();
+List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
+List<ColorScheme> colorSchemes = selWapTheme.getColorSchemes();
 
-	request.setAttribute("edit_pages.jsp-themes", themes);
-	request.setAttribute("edit_pages.jsp-colorSchemes", colorSchemes);
-	request.setAttribute("edit_pages.jsp-selTheme", selWapTheme);
-	request.setAttribute("edit_pages.jsp-selColorScheme", selWapColorScheme);
-	request.setAttribute("edit_pages.jsp-device", "wap");
-	request.setAttribute("edit_pages.jsp-editable", false);
+request.setAttribute("edit_pages.jsp-themes", themes);
+request.setAttribute("edit_pages.jsp-colorSchemes", colorSchemes);
+request.setAttribute("edit_pages.jsp-selTheme", selWapTheme);
+request.setAttribute("edit_pages.jsp-selColorScheme", selWapColorScheme);
+request.setAttribute("edit_pages.jsp-device", "wap");
+request.setAttribute("edit_pages.jsp-editable", Boolean.FALSE);
 %>
 
 <div id="<portlet:namespace />inheritWapThemeOptions">
@@ -39,7 +39,7 @@
 <div id="<portlet:namespace />wapThemeOptions">
 
 	<%
-		request.setAttribute("edit_pages.jsp-editable", true);
+	request.setAttribute("edit_pages.jsp-editable", Boolean.TRUE);
 	%>
 
 	<liferay-util:include page="/html/portlet/layouts_admin/look_and_feel_themes.jsp" />

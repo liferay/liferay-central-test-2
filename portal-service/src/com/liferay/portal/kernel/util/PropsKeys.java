@@ -1605,7 +1605,7 @@ public interface PropsKeys {
 
 	public static final String MOBILE_DEVICE_SESSION_CACHE_ENABLED = "mobile.device.session.cache.enabled";
 
-	public static final String MOBILE_STYLING_WAP_ENABLED = "mobile.styling.wap.enabled";
+	public static final String MOBILE_DEVICE_STYLING_WAP_ENABLED = "mobile.device.styling.wap.enabled";
 
 	public static final String MODEL_HINTS_CONFIGS = "model.hints.configs";
 

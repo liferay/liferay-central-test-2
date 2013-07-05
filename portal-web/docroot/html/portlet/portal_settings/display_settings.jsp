@@ -125,7 +125,7 @@ boolean deployed = false;
 %>
 
 <aui:fieldset>
-	<aui:select label='<%= PropsValues.MOBILE_STYLING_WAP_ENABLED? "default-regular-theme" : "default-theme" %>' name='<%= "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--" %>'>
+	<aui:select label='<%= PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED? "default-regular-theme" : "default-theme" %>' name='<%= "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--" %>'>
 
 		<%
 		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
@@ -148,7 +148,7 @@ boolean deployed = false;
 		</c:if>
 	</aui:select>
 
-	<c:if test="<%= PropsValues.MOBILE_STYLING_WAP_ENABLED %>">
+	<c:if test="<%= PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED %>">
 		<aui:select helpMessage="default-mobile-theme-help" label="default-mobile-theme" name='<%= "settings--" + PropsKeys.DEFAULT_WAP_THEME_ID + "--" %>'>
 
 			<%

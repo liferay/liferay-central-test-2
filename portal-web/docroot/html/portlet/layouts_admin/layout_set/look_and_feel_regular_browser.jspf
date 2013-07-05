@@ -15,15 +15,15 @@
 --%>
 
 <%
-	List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
-	List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
+List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
+List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
 
-	request.setAttribute("edit_pages.jsp-themes", themes);
-	request.setAttribute("edit_pages.jsp-colorSchemes", colorSchemes);
-	request.setAttribute("edit_pages.jsp-selTheme", selTheme);
-	request.setAttribute("edit_pages.jsp-selColorScheme", selColorScheme);
-	request.setAttribute("edit_pages.jsp-device", "regular");
-	request.setAttribute("edit_pages.jsp-editable", true);
+request.setAttribute("edit_pages.jsp-themes", themes);
+request.setAttribute("edit_pages.jsp-colorSchemes", colorSchemes);
+request.setAttribute("edit_pages.jsp-selTheme", selTheme);
+request.setAttribute("edit_pages.jsp-selColorScheme", selColorScheme);
+request.setAttribute("edit_pages.jsp-device", "regular");
+request.setAttribute("edit_pages.jsp-editable", true);
 %>
 
 <liferay-util:include page="/html/portlet/layouts_admin/look_and_feel_themes.jsp" />
