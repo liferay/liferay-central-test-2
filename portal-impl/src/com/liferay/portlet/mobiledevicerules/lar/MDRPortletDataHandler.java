@@ -107,7 +107,7 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 				protected StagedModelType getStagedModelType() {
 					return new StagedModelType(
 						PortalUtil.getClassNameId(MDRAction.class),
-						StagedModelType.ALL_REFERRERS);
+						StagedModelType.REFERRER_CLASS_NAME_ID_ALL);
 				}
 
 			};

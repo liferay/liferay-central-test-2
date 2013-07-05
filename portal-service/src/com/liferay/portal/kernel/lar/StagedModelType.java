@@ -25,7 +25,7 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class StagedModelType {
 
-	public static final int ALL_REFERRERS = -1;
+	public static final int REFERRER_CLASS_NAME_ID_ALL = -1;
 
 	public StagedModelType(Class<?> clazz) {
 		setClassName(clazz.getName());

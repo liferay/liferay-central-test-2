@@ -100,7 +100,7 @@ public class PortletDisplayTemplatePortletDataHandler
 				portletDataContext, ArrayUtil.toArray(classNameIds),
 				new StagedModelType(
 					PortalUtil.getClassNameId(DDMTemplate.class),
-					StagedModelType.ALL_REFERRERS));
+					StagedModelType.REFERRER_CLASS_NAME_ID_ALL));
 
 		actionableDynamicQuery.performActions();
 
