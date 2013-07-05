@@ -17,6 +17,10 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
+PortletURL portletURL = currentURLObj;
+
+portletURL.setParameter("tabs3", "all-import-processes");
+
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
 
@@ -30,10 +34,6 @@ else {
 }
 
 OrderByComparator orderByComparator = BackgroundTaskUtil.getBackgroundTaskOrderByComparator(orderByCol, orderByType);
-
-PortletURL portletURL = currentURLObj;
-
-portletURL.setParameter("tabs3", "all-import-processes");
 %>
 
 <liferay-ui:search-container
