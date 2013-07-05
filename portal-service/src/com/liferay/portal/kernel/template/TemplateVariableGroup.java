@@ -80,18 +80,16 @@ public class TemplateVariableGroup {
 	}
 
 	public TemplateVariableDefinition addVariable(
-		String label, Class<?> clazz, String variableName) {
+		String label, Class<?> clazz, String name) {
 
-		return addVariable(label, clazz, variableName, null);
+		return addVariable(label, clazz, name, null);
 	}
 
 	public TemplateVariableDefinition addVariable(
-		String label, Class<?> clazz, String variableName,
-		String variableAccessor) {
+		String label, Class<?> clazz, String name, String accessor) {
 
 		TemplateVariableDefinition templateVariableDefinition =
-			new TemplateVariableDefinition(
-				label, clazz, variableName, variableAccessor);
+			new TemplateVariableDefinition(label, clazz, name, accessor);
 
 		_templateVariableDefinitions.add(templateVariableDefinition);
 

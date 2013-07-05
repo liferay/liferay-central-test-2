@@ -453,9 +453,10 @@ Map<String, TemplateVariableGroup> templateVariableGroups = TemplateContextHelpe
 <%!
 private String _getAccessor(String accessor, String language) {
 	if (language.equalsIgnoreCase("vm")) {
-		if (accessor.indexOf(StringPool.OPEN_PARENTHESIS) == -1) {
+		if (!accessor.contains(StringPool.OPEN_PARENTHESIS)) {
 			return accessor;
 		}
+
 		StringTokenizer st = new StringTokenizer(accessor, "(,");
 
 		StringBundler sb = new StringBundler(st.countTokens() * 2);
