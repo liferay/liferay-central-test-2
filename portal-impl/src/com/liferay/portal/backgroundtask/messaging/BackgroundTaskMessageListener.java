@@ -75,7 +75,8 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 			backgroundTaskExecutor = wrapBackgroundTaskExecutor(
 				backgroundTaskExecutor, classLoader);
 
-			BackgroundTaskStatusRegistryUtil.registerBackgroundTaskStatus(backgroundTaskId);
+			BackgroundTaskStatusRegistryUtil.registerBackgroundTaskStatus(
+				backgroundTaskId);
 
 			BackgroundTaskResult backgroundTaskResult =
 				backgroundTaskExecutor.execute(backgroundTask);
@@ -101,7 +102,8 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 			BackgroundTaskLocalServiceUtil.updateBackgroundTask(
 				backgroundTaskId, null, status, statusMessage, serviceContext);
 
-			BackgroundTaskStatusRegistryUtil.unregisterBackgroundTaskStatus(backgroundTaskId);
+			BackgroundTaskStatusRegistryUtil.unregisterBackgroundTaskStatus(
+				backgroundTaskId);
 
 			Message responseMessage = new Message();
 
