@@ -23,6 +23,8 @@ import java.io.UnsupportedEncodingException;
 
 import java.security.SecureRandom;
 
+import java.util.Random;
+
 import org.vps.crypt.Crypt;
 
 /**
@@ -65,7 +67,7 @@ public class CryptPasswordEncryptor
 
 		try {
 			if (Validator.isNull(encryptedPassword)) {
-				SecureRandom random = new SecureRandom();
+				Random random = new SecureRandom();
 
 				int x = random.nextInt(Integer.MAX_VALUE) % _SALT.length;
 				int y = random.nextInt(Integer.MAX_VALUE) % _SALT.length;
