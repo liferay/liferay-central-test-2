@@ -49,7 +49,8 @@
 	<command name="AddVocabularyAssetTypeWikiPage">
 		<var name="vocabularyName" value="Vocabulary Name" />
 
-		<execute macro="Vocabulary#addAssetTypeWikiPageCP">
+		<execute macro="Vocabulary#addCPWithAssociatedAssetType">
+			<var name="vocabularyAssociatedAssetType" value="Wiki Page" />
 			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 	</command>
