@@ -273,7 +273,7 @@ public class BackgroundTaskLocalServiceImpl
 	}
 
 	@Override
-	public String getBackgroundTaskStatus(long backgroundTaskId) {
+	public String getBackgroundTaskStatusJSON(long backgroundTaskId) {
 		BackgroundTaskStatus backgroundTaskStatus =
 			_backgroundTaskStatusRegistry.getBackgroundTaskStatus(
 				backgroundTaskId);
