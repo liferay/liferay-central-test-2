@@ -1,13 +1,13 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ApplicationdisplaytemplatesAddCP</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
 <tr><td rowspan="1" colspan="3">ApplicationdisplaytemplatesAddCP</td></tr>
-</thead><tbody>
+</thead>
+<tbody>
 <tr>
 	<td>PAGE_NAME</td>
 	<td>ApplicationdisplaytemplatesAddCP</td>
@@ -58,6 +58,7 @@
 	<td></td>
 	<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </body>
 </html>
