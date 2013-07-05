@@ -12,17 +12,19 @@
  * details.
  */
 
-package com.liferay.portal.kernel.backgroundtask.status;
+package com.liferay.portal.kernel.backgroundtask;
 
 /**
  * @author Michael C. Han
  */
 public interface BackgroundTaskStatusRegistry {
 
-	public BackgroundTaskStatus fetch(long backgroundTaskId);
+	public BackgroundTaskStatus getBackgroundTaskStatus(long backgroundTaskId);
 
-	public BackgroundTaskStatus register(long backgroundTaskId);
+	public BackgroundTaskStatus registerBackgroundTaskStatus(
+		long backgroundTaskId);
 
-	public BackgroundTaskStatus unregister(long backgroundTaskId);
+	public BackgroundTaskStatus unregisterBackgroundTaskStatus(
+		long backgroundTaskId);
 
 }

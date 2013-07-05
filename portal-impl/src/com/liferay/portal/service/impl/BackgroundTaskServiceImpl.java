@@ -14,18 +14,16 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.service.base.BackgroundTaskServiceBaseImpl;
 
 /**
  * @author Michael C. Han
  */
-@JSONWebService
 public class BackgroundTaskServiceImpl extends BackgroundTaskServiceBaseImpl {
 
 	@Override
-	public String fetchBackgroundTaskStatus(long backgroundTaskId) {
-		return backgroundTaskLocalService.fetchBackgroundTaskStatus(
+	public String getBackgroundTaskStatus(long backgroundTaskId) {
+		return backgroundTaskLocalService.getBackgroundTaskStatus(
 			backgroundTaskId);
 	}
 

@@ -14,8 +14,8 @@
 
 package com.liferay.portal.backgroundtask.status;
 
-import com.liferay.portal.kernel.backgroundtask.status.BackgroundTaskStatus;
-import com.liferay.portal.kernel.backgroundtask.status.BackgroundTaskStatusRegistry;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatus;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,61 +30,65 @@ public class BackgroundTaskStatusRegistryImpl
 	implements BackgroundTaskStatusRegistry {
 
 	@Override
-	public BackgroundTaskStatus fetch(long backgroundTaskId) {
-		Lock readLock = _readWriteLock.readLock();
+	public BackgroundTaskStatus getBackgroundTaskStatus(long backgroundTaskId) {
+		Lock lock = _readWriteLock.readLock();
 
-		readLock.lock();
+		lock.lock();
 
 		try {
-			return _backgroundTaskStatusMap.get(backgroundTaskId);
+			return _backgroundTaskStatuses.get(backgroundTaskId);
 		}
 		finally {
-			readLock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
-	public BackgroundTaskStatus register(long backgroundTaskId) {
-		Lock writeLock = _readWriteLock.writeLock();
+	public BackgroundTaskStatus registerBackgroundTaskStatus(
+		long backgroundTaskId) {
 
-		writeLock.lock();
+		Lock lock = _readWriteLock.writeLock();
+
+		lock.lock();
 
 		try {
 			BackgroundTaskStatus backgroundTaskStatus =
-				_backgroundTaskStatusMap.get(backgroundTaskId);
+				_backgroundTaskStatuses.get(backgroundTaskId);
 
 			if (backgroundTaskStatus == null) {
 				backgroundTaskStatus = new BackgroundTaskStatus();
 
-				_backgroundTaskStatusMap.put(
+				_backgroundTaskStatuses.put(
 					backgroundTaskId, backgroundTaskStatus);
 			}
 
 			return backgroundTaskStatus;
 		}
 		finally {
-			writeLock.unlock();
+			lock.unlock();
 		}
 	}
 
 	@Override
-	public BackgroundTaskStatus unregister(long backgroundTaskId) {
-		Lock writeLock = _readWriteLock.writeLock();
+	public BackgroundTaskStatus unregisterBackgroundTaskStatus(
+		long backgroundTaskId) {
 
-		writeLock.lock();
+		Lock lock = _readWriteLock.writeLock();
+
+		lock.lock();
 
 		try {
 			BackgroundTaskStatus backgroundTaskStatus =
-				_backgroundTaskStatusMap.remove(backgroundTaskId);
+				_backgroundTaskStatuses.remove(backgroundTaskId);
 
 			return backgroundTaskStatus;
 		}
 		finally {
-			writeLock.unlock();
+			lock.unlock();
 		}
 	}
 
-	private Map<Long, BackgroundTaskStatus> _backgroundTaskStatusMap =
+	private Map<Long, BackgroundTaskStatus> _backgroundTaskStatuses =
 		new HashMap<Long, BackgroundTaskStatus>();
 	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.backgroundtask.status;
+package com.liferay.portal.kernel.backgroundtask;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class BackgroundTaskStatus implements Serializable {
 
-	public Serializable get(String key) {
+	public Serializable getAttribute(String key) {
 		return _attributes.get(key);
 	}
 
@@ -35,11 +35,11 @@ public class BackgroundTaskStatus implements Serializable {
 		return Collections.unmodifiableMap(_attributes);
 	}
 
-	public String getJSONString() {
+	public String getAttributesJSON() {
 		return JSONFactoryUtil.serialize(_attributes);
 	}
 
-	public void put(String key, Serializable value) {
+	public void setAttribute(String key, Serializable value) {
 		_attributes.put(key, value);
 	}
 

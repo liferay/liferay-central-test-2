@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.backgroundtask.status;
+package com.liferay.portal.kernel.backgroundtask;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 
@@ -21,25 +21,34 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
  */
 public class BackgroundTaskStatusRegistryUtil {
 
-	public static BackgroundTaskStatus fetch(long backgroundTaskId) {
-		return getBackgroundTaskStatusRegistry().fetch(backgroundTaskId);
+	public static BackgroundTaskStatus getBackgroundTaskStatus(
+		long backgroundTaskId) {
+
+		return getBackgroundTaskStatusRegistry().getBackgroundTaskStatus(
+			backgroundTaskId);
 	}
 
 	public static BackgroundTaskStatusRegistry
 		getBackgroundTaskStatusRegistry() {
 
 		PortalRuntimePermission.checkGetBeanProperty(
-			BackgroundTaskStatusRegistry.class);
+			BackgroundTaskStatusRegistryUtil.class);
 
 		return _backgroundTaskStatusRegistry;
 	}
 
-	public static BackgroundTaskStatus register(long backgroundTaskId) {
-		return getBackgroundTaskStatusRegistry().register(backgroundTaskId);
+	public static BackgroundTaskStatus registerBackgroundTaskStatus(
+		long backgroundTaskId) {
+
+		return getBackgroundTaskStatusRegistry().registerBackgroundTaskStatus(
+			backgroundTaskId);
 	}
 
-	public static BackgroundTaskStatus unregister(long backgroundTaskId) {
-		return getBackgroundTaskStatusRegistry().unregister(backgroundTaskId);
+	public static BackgroundTaskStatus unregisterBackgroundTaskStatus(
+		long backgroundTaskId) {
+
+		return getBackgroundTaskStatusRegistry().unregisterBackgroundTaskStatus(
+			backgroundTaskId);
 	}
 
 	public void setBackgroundTaskStatusRegistry(

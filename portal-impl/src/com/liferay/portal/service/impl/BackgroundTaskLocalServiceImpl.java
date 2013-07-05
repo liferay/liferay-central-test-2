@@ -15,8 +15,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
-import com.liferay.portal.kernel.backgroundtask.status.BackgroundTaskStatus;
-import com.liferay.portal.kernel.backgroundtask.status.BackgroundTaskStatusRegistry;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatus;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusRegistry;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -173,12 +173,13 @@ public class BackgroundTaskLocalServiceImpl
 	}
 
 	@Override
-	public String fetchBackgroundTaskStatus(long backgroundTaskId) {
+	public String getBackgroundTaskStatus(long backgroundTaskId) {
 		BackgroundTaskStatus backgroundTaskStatus =
-			_backgroundTaskStatusRegistry.fetch(backgroundTaskId);
+			_backgroundTaskStatusRegistry.getBackgroundTaskStatus(
+				backgroundTaskId);
 
 		if (backgroundTaskStatus != null) {
-			return backgroundTaskStatus.getJSONString();
+			return backgroundTaskStatus.getAttributesJSON();
 		}
 
 		return StringPool.BLANK;
