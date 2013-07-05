@@ -173,19 +173,6 @@ public class BackgroundTaskLocalServiceImpl
 	}
 
 	@Override
-	public String getBackgroundTaskStatus(long backgroundTaskId) {
-		BackgroundTaskStatus backgroundTaskStatus =
-			_backgroundTaskStatusRegistry.getBackgroundTaskStatus(
-				backgroundTaskId);
-
-		if (backgroundTaskStatus != null) {
-			return backgroundTaskStatus.getAttributesJSON();
-		}
-
-		return StringPool.BLANK;
-	}
-
-	@Override
 	public BackgroundTask fetchFirstBackgroundTask(
 			String taskExecutorClassName, int status)
 		throws SystemException {
@@ -283,6 +270,19 @@ public class BackgroundTaskLocalServiceImpl
 
 		return backgroundTaskPersistence.countByG_N_T(
 			groupId, name, taskExecutorClassName);
+	}
+
+	@Override
+	public String getBackgroundTaskStatus(long backgroundTaskId) {
+		BackgroundTaskStatus backgroundTaskStatus =
+			_backgroundTaskStatusRegistry.getBackgroundTaskStatus(
+				backgroundTaskId);
+
+		if (backgroundTaskStatus != null) {
+			return backgroundTaskStatus.getAttributesJSON();
+		}
+
+		return StringPool.BLANK;
 	}
 
 	@Override
