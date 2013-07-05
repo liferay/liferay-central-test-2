@@ -38,8 +38,6 @@ String selResource = modelResource;
 String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
 
-String namespace = renderResponse.getNamespace();
-
 if (Validator.isNull(modelResource)) {
 	PortletURL portletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.ACTION_PHASE);
 
@@ -414,7 +412,7 @@ definePermissionsURL.setRefererPlid(plid);
 						buffer.append("\" ");
 
 						buffer.append("name=\"");
-						buffer.append(namespace);
+						buffer.append(renderResponse.getNamespace());
 						buffer.append(role.getRoleId());
 
 						if (Validator.isNotNull(preselectedMsg)) {
