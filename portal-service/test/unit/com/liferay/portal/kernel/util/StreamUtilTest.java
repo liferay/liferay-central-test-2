@@ -33,19 +33,19 @@ public class StreamUtilTest {
 
 	@Test
 	public void testTransferFileChannel() throws Exception {
-		byte[] data = new byte[1024 * 1024];
-
-		Random random = new Random();
-
-		random.nextBytes(data);
-
 		File fromFile = new File("from-file");
 
 		fromFile.deleteOnExit();
 
 		FileOutputStream fromFileOutputStream = new FileOutputStream(fromFile);
 
-		fromFileOutputStream.write(data);
+		Random random = new Random();
+
+		byte[] fromBytes = new byte[1024 * 1024];
+
+		random.nextBytes(fromBytes);
+
+		fromFileOutputStream.write(fromBytes);
 
 		fromFileOutputStream.close();
 
@@ -55,7 +55,7 @@ public class StreamUtilTest {
 
 		FileInputStream fromFileInputStream = new FileInputStream(fromFile);
 
-		byte[] buffer = new byte[data.length / 2];
+		byte[] buffer = new byte[fromBytes.length / 2];
 
 		int length = 0;
 
@@ -71,22 +71,23 @@ public class StreamUtilTest {
 
 		StreamUtil.transferFileChannel(
 			fromFileChannel, toFileOutputStream.getChannel(),
-			data.length - buffer.length);
+			fromBytes.length - buffer.length);
 
 		fromFileChannel.close();
+
 		toFileOutputStream.close();
 
 		RandomAccessFile toRandomAccessFile = new RandomAccessFile(toFile, "r");
 
-		Assert.assertEquals(data.length, toRandomAccessFile.length());
+		Assert.assertEquals(fromBytes.length, toRandomAccessFile.length());
 
-		byte[] toData = new byte[data.length];
+		byte[] toBytes = new byte[fromBytes.length];
 
-		toRandomAccessFile.readFully(toData);
+		toRandomAccessFile.readFully(toBytes);
 
 		toRandomAccessFile.close();
 
-		Assert.assertArrayEquals(data, toData);
+		Assert.assertArrayEquals(fromBytes, toBytes);
 	}
 
 }
