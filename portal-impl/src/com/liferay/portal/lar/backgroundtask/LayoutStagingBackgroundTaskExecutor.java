@@ -83,7 +83,7 @@ public class LayoutStagingBackgroundTaskExecutor
 			StagingUtil.unlockGroup(targetGroupId);
 		}
 
-		BackgroundTaskResult result = new BackgroundTaskResult(
+		BackgroundTaskResult backgroundTaskResult = new BackgroundTaskResult(
 			BackgroundTaskConstants.STATUS_SUCCESSFUL);
 
 		Map<String, MissingReference> weakMissingReferences =
@@ -96,10 +96,10 @@ public class LayoutStagingBackgroundTaskExecutor
 				getLocale(backgroundTask), weakMissingReferences,
 				backgroundTask.getTaskContextMap());
 
-			result.setStatusMessage(jsonArray.toString());
+			backgroundTaskResult.setStatusMessage(jsonArray.toString());
 		}
 
-		return result;
+		return backgroundTaskResult;
 	}
 
 	@Override
