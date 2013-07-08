@@ -50,7 +50,11 @@
 				<c:when test="<%= addPortletURLs.size() == 1 %>">
 
 					<%
-					Map.Entry<String, PortletURL> entry = addPortletURLs.entrySet().iterator().next();
+					Set<Map.Entry<String, PortletURL>> addPortletURLsSet = addPortletURLs.entrySet();
+
+					Iterator<Map.Entry<String, PortletURL>> iterator = addPortletURLsSet.iterator();
+
+					Map.Entry<String, PortletURL> entry = iterator.next();
 
 					String message = _getMessage(entry.getKey(), addPortletURLs, locale);
 					%>
