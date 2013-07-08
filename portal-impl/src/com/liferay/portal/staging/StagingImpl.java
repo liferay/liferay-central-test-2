@@ -742,167 +742,167 @@ public class StagingImpl implements Staging {
 		int errorType = 0;
 		JSONArray warningMessagesJSONArray = null;
 
-			if (e instanceof DuplicateFileException) {
-				errorMessage = LanguageUtil.get(
-					locale, "please-enter-a-unique-document-name");
-				errorType =
-					ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
-			}
-			else if (e instanceof FileExtensionException) {
-				errorMessage = LanguageUtil.format(
-					locale,
-					"document-names-must-end-with-one-of-the-following-" +
-						"extensions",
-					".lar");
-				errorType =
-					ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
-			}
-			else if (e instanceof FileNameException) {
-				errorMessage = LanguageUtil.get(
-					locale, "please-enter-a-file-with-a-valid-file-name");
-				errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
-			}
-			else if (e instanceof FileSizeException ||
-					 e instanceof LARFileSizeException) {
+		if (e instanceof DuplicateFileException) {
+			errorMessage = LanguageUtil.get(
+				locale, "please-enter-a-unique-document-name");
+			errorType =
+				ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
+		}
+		else if (e instanceof FileExtensionException) {
+			errorMessage = LanguageUtil.format(
+				locale,
+				"document-names-must-end-with-one-of-the-following-" +
+					"extensions",
+				".lar");
+			errorType =
+				ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
+		}
+		else if (e instanceof FileNameException) {
+			errorMessage = LanguageUtil.get(
+				locale, "please-enter-a-file-with-a-valid-file-name");
+			errorType = ServletResponseConstants.SC_FILE_NAME_EXCEPTION;
+		}
+		else if (e instanceof FileSizeException ||
+				 e instanceof LARFileSizeException) {
 
-				long fileMaxSize = PropsValues.DL_FILE_MAX_SIZE;
+			long fileMaxSize = PropsValues.DL_FILE_MAX_SIZE;
 
-				try {
+			try {
+				fileMaxSize = PrefsPropsUtil.getLong(
+					PropsKeys.DL_FILE_MAX_SIZE);
+
+				if (fileMaxSize == 0) {
 					fileMaxSize = PrefsPropsUtil.getLong(
-						PropsKeys.DL_FILE_MAX_SIZE);
-
-					if (fileMaxSize == 0) {
-						fileMaxSize = PrefsPropsUtil.getLong(
-							PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
-					}
+						PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 				}
-				catch (Exception ex) {
-				}
-
-				errorMessage = LanguageUtil.format(
-					locale,
-					"please-enter-a-file-with-a-valid-file-size-no-larger-" +
-						"than-x",
-					fileMaxSize/1024);
-				errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 			}
-			else if (e instanceof LARTypeException) {
-				LARTypeException lte = (LARTypeException)e;
-
-				errorMessage = LanguageUtil.format(
-					locale,
-					"please-import-a-lar-file-of-the-correct-type-x-is-not-" +
-						"valid",
-					lte.getMessage());
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+			catch (Exception ex) {
 			}
-			else if (e instanceof LARFileException) {
+
+			errorMessage = LanguageUtil.format(
+				locale,
+				"please-enter-a-file-with-a-valid-file-size-no-larger-" +
+					"than-x",
+				fileMaxSize/1024);
+			errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
+		}
+		else if (e instanceof LARTypeException) {
+			LARTypeException lte = (LARTypeException)e;
+
+			errorMessage = LanguageUtil.format(
+				locale,
+				"please-import-a-lar-file-of-the-correct-type-x-is-not-" +
+					"valid",
+				lte.getMessage());
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+		}
+		else if (e instanceof LARFileException) {
+			errorMessage = LanguageUtil.get(
+				locale, "please-specify-a-lar-file-to-import");
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+		}
+		else if (e instanceof LayoutPrototypeException) {
+			LayoutPrototypeException lpe = (LayoutPrototypeException)e;
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("the-lar-file-could-not-be-imported-because-it-");
+			sb.append("requires-page-templates-or-site-templates-that-");
+			sb.append("could-not-be-found.-please-import-the-following-");
+			sb.append("templates-manually");
+
+			errorMessage = LanguageUtil.get(locale, sb.toString());
+
+			errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
+
+			List<Tuple> missingLayoutPrototypes =
+				lpe.getMissingLayoutPrototypes();
+
+			for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
+				JSONObject errorMessageJSONObject =
+					JSONFactoryUtil.createJSONObject();
+
+				String layoutPrototypeUuid =
+					(String)missingLayoutPrototype.getObject(1);
+
+				errorMessageJSONObject.put("info", layoutPrototypeUuid);
+
+				String layoutPrototypeName =
+					(String)missingLayoutPrototype.getObject(2);
+
+				errorMessageJSONObject.put("name", layoutPrototypeName);
+
+				String layoutPrototypeClassName =
+					(String)missingLayoutPrototype.getObject(0);
+
+				errorMessageJSONObject.put(
+					"type",
+					ResourceActionsUtil.getModelResource(
+						locale, layoutPrototypeClassName));
+
+				errorMessagesJSONArray.put(errorMessageJSONObject);
+			}
+
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+		}
+		else if (e instanceof LocaleException) {
+			LocaleException le = (LocaleException)e;
+
+			errorMessage = LanguageUtil.format(
+				locale,
+				"the-available-languages-in-the-lar-file-x-do-not-match-" +
+					"the-portal's-available-languages-x",
+				new String[] {
+					StringUtil.merge(
+						le.getSourceAvailableLocales(),
+						StringPool.COMMA_AND_SPACE),
+					StringUtil.merge(
+						le.getTargetAvailableLocales(),
+						StringPool.COMMA_AND_SPACE)
+				});
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+		}
+		else if (e instanceof MissingReferenceException) {
+			MissingReferenceException mre = (MissingReferenceException)e;
+
+			String cmd = null;
+
+			if (contextMap != null) {
+				cmd = (String)contextMap.get(Constants.CMD);
+			}
+
+			if (Validator.equals(cmd, ActionKeys.PUBLISH_STAGING)) {
 				errorMessage = LanguageUtil.get(
-					locale, "please-specify-a-lar-file-to-import");
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-			}
-			else if (e instanceof LayoutPrototypeException) {
-				LayoutPrototypeException lpe = (LayoutPrototypeException)e;
-
-				StringBundler sb = new StringBundler(4);
-
-				sb.append("the-lar-file-could-not-be-imported-because-it-");
-				sb.append("requires-page-templates-or-site-templates-that-");
-				sb.append("could-not-be-found.-please-import-the-following-");
-				sb.append("templates-manually");
-
-				errorMessage = LanguageUtil.get(locale, sb.toString());
-
-				errorMessagesJSONArray = JSONFactoryUtil.createJSONArray();
-
-				List<Tuple> missingLayoutPrototypes =
-					lpe.getMissingLayoutPrototypes();
-
-				for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
-					JSONObject errorMessageJSONObject =
-						JSONFactoryUtil.createJSONObject();
-
-					String layoutPrototypeUuid =
-						(String)missingLayoutPrototype.getObject(1);
-
-					errorMessageJSONObject.put("info", layoutPrototypeUuid);
-
-					String layoutPrototypeName =
-						(String)missingLayoutPrototype.getObject(2);
-
-					errorMessageJSONObject.put("name", layoutPrototypeName);
-
-					String layoutPrototypeClassName =
-						(String)missingLayoutPrototype.getObject(0);
-
-					errorMessageJSONObject.put(
-						"type",
-						ResourceActionsUtil.getModelResource(
-							locale, layoutPrototypeClassName));
-
-					errorMessagesJSONArray.put(errorMessageJSONObject);
-				}
-
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-			}
-			else if (e instanceof LocaleException) {
-				LocaleException le = (LocaleException)e;
-
-				errorMessage = LanguageUtil.format(
 					locale,
-					"the-available-languages-in-the-lar-file-x-do-not-match-" +
-						"the-portal's-available-languages-x",
-					new String[] {
-						StringUtil.merge(
-							le.getSourceAvailableLocales(),
-							StringPool.COMMA_AND_SPACE),
-						StringUtil.merge(
-							le.getTargetAvailableLocales(),
-							StringPool.COMMA_AND_SPACE)
-					});
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+					"there-are-missing-references-that-could-not-be-" +
+						"found-in-the-live-environment.-please-publish-" +
+						"again-to-live-ensuring-the-following-elements-" +
+						"are-published");
 			}
-			else if (e instanceof MissingReferenceException) {
-				MissingReferenceException mre = (MissingReferenceException)e;
-
-				String cmd = null;
-
-				if (contextMap != null) {
-					cmd = (String)contextMap.get(Constants.CMD);
-				}
-
-				if (Validator.equals(cmd, ActionKeys.PUBLISH_STAGING)) {
-					errorMessage = LanguageUtil.get(
-						locale,
-						"there-are-missing-references-that-could-not-be-" +
-							"found-in-the-live-environment.-please-publish-" +
-							"again-to-live-ensuring-the-following-elements-" +
-							"are-published");
-				}
-				else {
-					errorMessage = LanguageUtil.get(
-						locale,
-						"there-are-missing-references-that-could-not-be-" +
-							"found-in-the-current-site.-please-import-another" +
-							"-lar-file-containing-the-following-elements");
-				}
-
-				MissingReferences missingReferences =
-					mre.getMissingReferences();
-
-				errorMessagesJSONArray = getErrorMessagesJSONArray(
-					locale, missingReferences.getDependencyMissingReferences(),
-					contextMap);
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-				warningMessagesJSONArray = getWarningMessagesJSONArray(
-					locale, missingReferences.getWeakMissingReferences(),
-					contextMap);
-			}
-			else if (e instanceof PortletIdException) {
+			else {
 				errorMessage = LanguageUtil.get(
-					locale, "please-import-a-lar-file-for-the-current-portlet");
-				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+					locale,
+					"there-are-missing-references-that-could-not-be-" +
+						"found-in-the-current-site.-please-import-another" +
+						"-lar-file-containing-the-following-elements");
 			}
+
+			MissingReferences missingReferences =
+				mre.getMissingReferences();
+
+			errorMessagesJSONArray = getErrorMessagesJSONArray(
+				locale, missingReferences.getDependencyMissingReferences(),
+				contextMap);
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+			warningMessagesJSONArray = getWarningMessagesJSONArray(
+				locale, missingReferences.getWeakMissingReferences(),
+				contextMap);
+		}
+		else if (e instanceof PortletIdException) {
+			errorMessage = LanguageUtil.get(
+				locale, "please-import-a-lar-file-for-the-current-portlet");
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
+		}
 		else {
 			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 		}
