@@ -47,7 +47,6 @@ import java.rmi.RemoteException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -87,7 +86,7 @@ public class IntrabandBridgeDestinationTest {
 			public Datagram sendSyncDatagram(
 					RegistrationReference registrationReference,
 					Datagram datagram)
-				throws InterruptedException, IOException, TimeoutException {
+				throws IOException {
 
 				if (_failSend) {
 					throw new IOException("Unable to send");

@@ -22,7 +22,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.io.Serializable;
 
 import java.nio.ByteBuffer;
 
@@ -135,7 +134,7 @@ public class MessageRoutingBag implements Externalizable {
 		serializer.writeString(_destinationName);
 		serializer.writeObject(getMessageData());
 		serializer.writeBoolean(_routingDowncast);
-		serializer.writeObject((Serializable)_routingTrace);
+		serializer.writeObject(_routingTrace);
 		serializer.writeBoolean(_synchronizedBridge);
 
 		ByteBuffer byteBuffer = serializer.toByteBuffer();
