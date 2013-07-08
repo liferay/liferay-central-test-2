@@ -29,22 +29,16 @@ if (showAddFileEntryTypes) {
 	fileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay), folderId, true);
 }
 
-boolean fileEntryTypesIsEmpty = fileEntryTypes.isEmpty();
-
 long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-repositoryId"));
 
+boolean showAddBasicDocument = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) && (fileEntryTypes.isEmpty() || showAddFileEntryTypes);
 boolean showAddFolder = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-
-boolean showAddShortcut = ((folder == null) || folder.isSupportsShortcuts()) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT);
-
-boolean showAddRepository = (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) && (DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_REPOSITORY));
-
 boolean showAddMultipleDocuments = ((folder == null) || folder.isSupportsMultipleUpload()) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT);
-
-boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) && (fileEntryTypesIsEmpty || showAddFileEntryTypes);
+boolean showAddRepository = (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) && (DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_REPOSITORY));
+boolean showAddShortcut = ((folder == null) || folder.isSupportsShortcuts()) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_SHORTCUT);
 %>
 
-<c:if test="<%= (showAddFolder || showAddShortcut || showAddRepository || showAddMultipleDocuments || showAddDocument) %>">
+<c:if test="<%= showAddBasicDocument || showAddFolder || showAddMultipleDocuments || showAddRepository || showAddShortcut %>">
 	<aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
 		<c:if test="<%= showAddFolder %>">
 			<portlet:renderURL var="addFolderURL">
@@ -89,9 +83,9 @@ boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGr
 			<aui:nav-item href="<%= editFileEntryURL %>" label="multiple-documents" />
 		</c:if>
 
-		<c:if test="<%= showAddDocument %>">
+		<c:if test="<%= showAddBasicDocument %>">
 			<c:choose>
-				<c:when test="<%= fileEntryTypesIsEmpty %>">
+				<c:when test="<%= fileEntryTypes.isEmpty() %>">
 					<portlet:renderURL var="editFileEntryURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
