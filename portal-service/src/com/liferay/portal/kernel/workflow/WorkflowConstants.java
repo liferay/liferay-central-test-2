@@ -193,4 +193,18 @@ public class WorkflowConstants {
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getStatusLabel(int)}
+	 */
+	public static String toLabel(int status) {
+		return getStatusLabel(status);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getLabelStatus(String)}
+	 */
+	public static int toStatus(String label) {
+		return getLabelStatus(label);
+	}
+
 }
