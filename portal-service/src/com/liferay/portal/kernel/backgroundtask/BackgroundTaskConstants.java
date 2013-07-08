@@ -61,7 +61,7 @@ public class BackgroundTaskConstants {
 		return StringPool.BLANK;
 	}
 
-	public static String toLabel(int status) {
+	public static String getStatusLabel(int status) {
 		if (status == STATUS_FAILED) {
 			return LABEL_FAILED;
 		}

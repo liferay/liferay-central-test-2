@@ -29,7 +29,7 @@
 	String additionalText = StringPool.BLANK;
 
 	if (Validator.isNull(statusMessage)) {
-		statusMessage = WorkflowConstants.toLabel(status);
+		statusMessage = WorkflowConstants.getStatusLabel(status);
 
 		if ((status == WorkflowConstants.STATUS_PENDING) && (bean != null) && (model != null)) {
 			long companyId = BeanPropertiesUtil.getLong(bean, "companyId");
@@ -59,7 +59,7 @@
 			<liferay-ui:message key="status" />:
 		</c:if>
 
-		<strong class="label workflow-status-<%= WorkflowConstants.toLabel(status) %> <%= WorkflowConstants.getStatusCssClass(status) %>">
+		<strong class="label workflow-status-<%= WorkflowConstants.getStatusLabel(status) %> <%= WorkflowConstants.getStatusCssClass(status) %>">
 			<liferay-ui:message key="<%= statusMessage %>" /><%= additionalText %>
 		</strong>
 	</span>

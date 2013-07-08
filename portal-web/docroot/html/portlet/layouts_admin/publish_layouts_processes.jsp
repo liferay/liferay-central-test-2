@@ -66,7 +66,7 @@ OrderByComparator orderByComparator = BackgroundTaskUtil.getBackgroundTaskOrderB
 		<liferay-ui:search-container-column-text
 			name="status" cssClass="background-task-status-column"
 		>
-			<strong class="label background-task-status-<%= BackgroundTaskConstants.toLabel(backgroundTask.getStatus()) %> <%= BackgroundTaskConstants.getStatusCssClass(backgroundTask.getStatus()) %>">
+			<strong class="label background-task-status-<%= BackgroundTaskConstants.getStatusLabel(backgroundTask.getStatus()) %> <%= BackgroundTaskConstants.getStatusCssClass(backgroundTask.getStatus()) %>">
 				<liferay-ui:message key="<%= backgroundTask.getStatusLabel() %>" />
 			</strong>
 

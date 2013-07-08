@@ -104,60 +104,7 @@ public class WorkflowConstants {
 
 	public static final int TYPE_COMPLETE = 10001;
 
-	public static String getStatusCssClass(int status) {
-		if (status == STATUS_APPROVED) {
-			return "label-success";
-		}
-		else if (status == STATUS_DRAFT) {
-			return "label-info";
-		}
-		else if (status == STATUS_EXPIRED) {
-			return "label-important";
-		}
-		else if (status == STATUS_PENDING) {
-			return "label-warning";
-		}
-
-		return StringPool.BLANK;
-	}
-
-	public static String toLabel(int status) {
-		if (status == STATUS_ANY) {
-			return LABEL_ANY;
-		}
-		else if (status == STATUS_APPROVED) {
-			return LABEL_APPROVED;
-		}
-		else if (status == STATUS_DENIED) {
-			return LABEL_DENIED;
-		}
-		else if (status == STATUS_DRAFT) {
-			return LABEL_DRAFT;
-		}
-		else if (status == STATUS_EXPIRED) {
-			return LABEL_EXPIRED;
-		}
-		else if (status == STATUS_IN_TRASH) {
-			return LABEL_IN_TRASH;
-		}
-		else if (status == STATUS_INACTIVE) {
-			return LABEL_INACTIVE;
-		}
-		else if (status == STATUS_INCOMPLETE) {
-			return LABEL_INCOMPLETE;
-		}
-		else if (status == STATUS_PENDING) {
-			return LABEL_PENDING;
-		}
-		else if (status == STATUS_SCHEDULED) {
-			return LABEL_SCHEDULED;
-		}
-		else {
-			return LABEL_ANY;
-		}
-	}
-
-	public static int toStatus(String label) {
+	public static int getLabelStatus(String label) {
 		if (label.equals(LABEL_ANY)) {
 			return STATUS_ANY;
 		}
@@ -190,6 +137,59 @@ public class WorkflowConstants {
 		}
 		else {
 			return STATUS_ANY;
+		}
+	}
+
+	public static String getStatusCssClass(int status) {
+		if (status == STATUS_APPROVED) {
+			return "label-success";
+		}
+		else if (status == STATUS_DRAFT) {
+			return "label-info";
+		}
+		else if (status == STATUS_EXPIRED) {
+			return "label-important";
+		}
+		else if (status == STATUS_PENDING) {
+			return "label-warning";
+		}
+
+		return StringPool.BLANK;
+	}
+
+	public static String getStatusLabel(int status) {
+		if (status == STATUS_ANY) {
+			return LABEL_ANY;
+		}
+		else if (status == STATUS_APPROVED) {
+			return LABEL_APPROVED;
+		}
+		else if (status == STATUS_DENIED) {
+			return LABEL_DENIED;
+		}
+		else if (status == STATUS_DRAFT) {
+			return LABEL_DRAFT;
+		}
+		else if (status == STATUS_EXPIRED) {
+			return LABEL_EXPIRED;
+		}
+		else if (status == STATUS_IN_TRASH) {
+			return LABEL_IN_TRASH;
+		}
+		else if (status == STATUS_INACTIVE) {
+			return LABEL_INACTIVE;
+		}
+		else if (status == STATUS_INCOMPLETE) {
+			return LABEL_INCOMPLETE;
+		}
+		else if (status == STATUS_PENDING) {
+			return LABEL_PENDING;
+		}
+		else if (status == STATUS_SCHEDULED) {
+			return LABEL_SCHEDULED;
+		}
+		else {
+			return LABEL_ANY;
 		}
 	}
 
