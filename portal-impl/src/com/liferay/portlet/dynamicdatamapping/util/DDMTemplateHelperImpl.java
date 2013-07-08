@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.template.TemplateVariableDefinition;
 import com.liferay.portal.kernel.template.TemplateVariableGroup;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UniqueList;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -107,8 +106,8 @@ public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
 	@Override
 	public boolean isAutocompleteEnabled(String language) {
-		if (Validator.equals(language, TemplateConstants.LANG_TYPE_FTL) ||
-			Validator.equals(language, TemplateConstants.LANG_TYPE_VM)) {
+		if (language.equals(TemplateConstants.LANG_TYPE_FTL) ||
+			language.equals(TemplateConstants.LANG_TYPE_VM)) {
 
 			return true;
 		}
