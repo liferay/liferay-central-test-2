@@ -69,7 +69,9 @@ public class StagedModelDataHandlerUtil {
 			if (Validator.isNotNull(className)) {
 				long classNameId = PortalUtil.getClassNameId(className);
 
-				((TypedModel)stagedModel).setClassNameId(classNameId);
+				TypedModel typedModel = (TypedModel)stagedModel;
+
+				typedModel.setClassNameId(classNameId);
 			}
 		}
 

@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.layoutsadmin.lar;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -121,7 +120,7 @@ public class LayoutFriendlyURLStagedModelDataHandler
 	protected LayoutFriendlyURL getExistingLayoutFriendlyURL(
 			PortletDataContext portletDataContext,
 			LayoutFriendlyURL layoutFriendlyURL, long plid)
-		throws SystemException {
+		throws Exception {
 
 		LayoutFriendlyURL existingLayoutFriendlyURL =
 			LayoutFriendlyURLLocalServiceUtil.
