@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.backgroundtask;
 
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.BackgroundTask;
 import com.liferay.portal.model.User;
@@ -56,7 +57,7 @@ public abstract class BaseBackgroundTaskExecutor
 			}
 		}
 
-		return Locale.getDefault();
+		return LocaleUtil.getDefault();
 	}
 
 	protected void setSerial(boolean serial) {
