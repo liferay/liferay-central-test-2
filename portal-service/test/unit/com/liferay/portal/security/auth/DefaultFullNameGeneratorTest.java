@@ -25,26 +25,24 @@ import org.junit.Test;
 public class DefaultFullNameGeneratorTest {
 
 	@Test
-	public void testBuildInvalidFullName() {
+	public void testNormalLengthGetFullName() {
+		String fullName = _defaultDefaultFullNameGenerator.getFullName(
+			"Test", "Test", "Test");
+
+		Assert.assertTrue(
+			fullName.length() < UserConstants.FULL_NAME_MAX_LENGTH);
+		Assert.assertEquals("Test Test Test", fullName);
+	}
+
+	@Test
+	public void testVeryLongLengthGetFullName() {
 		String fullName = _defaultDefaultFullNameGenerator.getFullName(
 			"ThisShouldBeAVeryLongName", "ThisShouldBeAVeryLongMiddleName",
 			"ThisShouldBeAVeryLongLastName");
 
 		Assert.assertTrue(
 			fullName.length() < UserConstants.FULL_NAME_MAX_LENGTH);
-
 		Assert.assertEquals("T T ThisShouldBeAVeryLongLastName", fullName);
-	}
-
-	@Test
-	public void testBuildValidFullName() {
-		String fullName = _defaultDefaultFullNameGenerator.getFullName(
-			"Test", "Test", "Test");
-
-		Assert.assertTrue(
-			fullName.length() < UserConstants.FULL_NAME_MAX_LENGTH);
-
-		Assert.assertEquals("Test Test Test", fullName);
 	}
 
 	private DefaultFullNameGenerator _defaultDefaultFullNameGenerator =
