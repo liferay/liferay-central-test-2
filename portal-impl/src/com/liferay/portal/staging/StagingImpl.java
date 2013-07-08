@@ -696,9 +696,9 @@ public class StagingImpl implements Staging {
 				Map.Entry<String, String> entry = iterator.next();
 
 				String referrerDisplayName = entry.getKey();
-				String referrerClasName = entry.getValue();
+				String referrerClassName = entry.getValue();
 
-				if (referrerClasName.equals(Portlet.class.getName())) {
+				if (referrerClassName.equals(Portlet.class.getName())) {
 					referrerDisplayName = PortalUtil.getPortletTitle(
 						referrerDisplayName, locale);
 				}
@@ -709,7 +709,7 @@ public class StagingImpl implements Staging {
 						locale, "referenced-by-a-x-x",
 						new String[] {
 							ResourceActionsUtil.getModelResource(
-								locale, referrerClasName),
+								locale, referrerClassName),
 							referrerDisplayName
 						}
 					));
