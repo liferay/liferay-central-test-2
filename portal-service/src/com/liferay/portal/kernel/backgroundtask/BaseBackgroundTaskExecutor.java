@@ -32,7 +32,7 @@ public abstract class BaseBackgroundTaskExecutor
 
 	@Override
 	public String handleException(BackgroundTask backgroundTask, Exception e) {
-		return "Unable to executed background task: " + e.getMessage();
+		return "Unable to execute background task: " + e.getMessage();
 	}
 
 	@Override
