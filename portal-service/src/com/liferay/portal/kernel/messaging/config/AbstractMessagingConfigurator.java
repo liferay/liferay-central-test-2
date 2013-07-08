@@ -83,7 +83,8 @@ public abstract class AbstractMessagingConfigurator
 		String servletContextName = ClassLoaderPool.getContextName(
 			operatingClassLoader);
 
-		MessagingConfiguratorRegistry.register(servletContextName, this);
+		MessagingConfiguratorRegistry.registerMessagingConfigurator(
+			servletContextName, this);
 	}
 
 	@Override
@@ -158,7 +159,8 @@ public abstract class AbstractMessagingConfigurator
 		String servletContextName = ClassLoaderPool.getContextName(
 			operatingClassLoader);
 
-		MessagingConfiguratorRegistry.unregister(servletContextName, this);
+		MessagingConfiguratorRegistry.unregisterMessagingConfigurator(
+			servletContextName, this);
 	}
 
 	@Override

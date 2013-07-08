@@ -163,7 +163,7 @@ public class MPIHelperUtil {
 						spiConfiguration.getServletContextNames()) {
 
 					List<MessagingConfigurator> messagingConfigurators =
-						MessagingConfiguratorRegistry.lookup(
+						MessagingConfiguratorRegistry.getMessagingConfigurators(
 							servletContextName);
 
 					if (messagingConfigurators != null) {
@@ -277,7 +277,7 @@ public class MPIHelperUtil {
 						spiConfiguration.getServletContextNames()) {
 
 					List<MessagingConfigurator> messagingConfigurators =
-						MessagingConfiguratorRegistry.lookup(
+						MessagingConfiguratorRegistry.getMessagingConfigurators(
 							servletContextName);
 
 					if (messagingConfigurators != null) {

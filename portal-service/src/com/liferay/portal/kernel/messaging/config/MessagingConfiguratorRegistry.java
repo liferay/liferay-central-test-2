@@ -24,13 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MessagingConfiguratorRegistry {
 
-	public static List<MessagingConfigurator> lookup(
+	public static List<MessagingConfigurator> getMessagingConfigurators(
 		String servletContextName) {
 
 		return _messagingConfigurators.get(servletContextName);
 	}
 
-	public static void register(
+	public static void registerMessagingConfigurator(
 		String servletContextName,
 		MessagingConfigurator messagingConfigurator) {
 
@@ -47,7 +47,7 @@ public class MessagingConfiguratorRegistry {
 		messagingConfigurators.add(messagingConfigurator);
 	}
 
-	public static void unregister(
+	public static void unregisterMessagingConfigurator(
 		String servletContextName,
 		MessagingConfigurator messagingConfigurator) {
 
