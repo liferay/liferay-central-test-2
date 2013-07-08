@@ -145,9 +145,6 @@ public class PortalLDAPUtil {
 			String groupFilter = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix);
 
-			Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
-				ldapServerId, companyId);
-
 			StringBundler sb = new StringBundler(
 				Validator.isNotNull(groupFilter) ? 11 : 5);
 
@@ -157,7 +154,12 @@ public class PortalLDAPUtil {
 			}
 
 			sb.append(StringPool.OPEN_PARENTHESIS);
+
+			Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+				ldapServerId, companyId);
+
 			sb.append(groupMappings.getProperty("groupName"));
+
 			sb.append(StringPool.EQUAL);
 			sb.append(groupName);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
@@ -451,6 +453,16 @@ public class PortalLDAPUtil {
 			String userFilter = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
+			StringBundler sb = new StringBundler(
+				Validator.isNotNull(userFilter) ? 11 : 5);
+
+			if (Validator.isNotNull(userFilter)) {
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(StringPool.AMPERSAND);
+			}
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+
 			String loginMapping = null;
 			String login = null;
 
@@ -474,18 +486,10 @@ public class PortalLDAPUtil {
 				login = emailAddress;
 			}
 
-			StringBundler sb = new StringBundler(
-				Validator.isNotNull(userFilter) ? 11 : 5);
-
-			if (Validator.isNotNull(userFilter)) {
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(StringPool.AMPERSAND);
-			}
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(loginMapping);
 			sb.append(StringPool.EQUAL);
 			sb.append(login);
+
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			if (Validator.isNotNull(userFilter)) {
