@@ -748,17 +748,14 @@ public class StagingImpl implements Staging {
 		if (e instanceof DuplicateFileException) {
 			errorMessage = LanguageUtil.get(
 				locale, "please-enter-a-unique-document-name");
-			errorType =
-				ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
+			errorType = ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION;
 		}
 		else if (e instanceof FileExtensionException) {
 			errorMessage = LanguageUtil.format(
 				locale,
-				"document-names-must-end-with-one-of-the-following-" +
-					"extensions",
+				"document-names-must-end-with-one-of-the-following-extensions",
 				".lar");
-			errorType =
-				ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
+			errorType = ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION;
 		}
 		else if (e instanceof FileNameException) {
 			errorMessage = LanguageUtil.get(
@@ -784,8 +781,7 @@ public class StagingImpl implements Staging {
 
 			errorMessage = LanguageUtil.format(
 				locale,
-				"please-enter-a-file-with-a-valid-file-size-no-larger-" +
-					"than-x",
+				"please-enter-a-file-with-a-valid-file-size-no-larger-than-x",
 				fileMaxSize/1024);
 			errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 		}
@@ -794,8 +790,7 @@ public class StagingImpl implements Staging {
 
 			errorMessage = LanguageUtil.format(
 				locale,
-				"please-import-a-lar-file-of-the-correct-type-x-is-not-" +
-					"valid",
+				"please-import-a-lar-file-of-the-correct-type-x-is-not-valid",
 				lte.getMessage());
 			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 		}
@@ -810,9 +805,9 @@ public class StagingImpl implements Staging {
 			StringBundler sb = new StringBundler(4);
 
 			sb.append("the-lar-file-could-not-be-imported-because-it-");
-			sb.append("requires-page-templates-or-site-templates-that-");
-			sb.append("could-not-be-found.-please-import-the-following-");
-			sb.append("templates-manually");
+			sb.append("requires-page-templates-or-site-templates-that-could-");
+			sb.append("not-be-found.-please-import-the-following-templates-");
+			sb.append("manually");
 
 			errorMessage = LanguageUtil.get(locale, sb.toString());
 
@@ -853,8 +848,8 @@ public class StagingImpl implements Staging {
 
 			errorMessage = LanguageUtil.format(
 				locale,
-				"the-available-languages-in-the-lar-file-x-do-not-match-" +
-					"the-portal's-available-languages-x",
+				"the-available-languages-in-the-lar-file-x-do-not-match-the-" +
+					"portal's-available-languages-x",
 				new String[] {
 					StringUtil.merge(
 						le.getSourceAvailableLocales(),
@@ -877,21 +872,19 @@ public class StagingImpl implements Staging {
 			if (Validator.equals(cmd, ActionKeys.PUBLISH_STAGING)) {
 				errorMessage = LanguageUtil.get(
 					locale,
-					"there-are-missing-references-that-could-not-be-" +
-						"found-in-the-live-environment.-please-publish-" +
-						"again-to-live-ensuring-the-following-elements-" +
-						"are-published");
+					"there-are-missing-references-that-could-not-be-found-in-" +
+						"the-live-environment.-please-publish-again-to-live-" +
+							"ensuring-the-following-elements-are-published");
 			}
 			else {
 				errorMessage = LanguageUtil.get(
 					locale,
-					"there-are-missing-references-that-could-not-be-" +
-						"found-in-the-current-site.-please-import-another" +
-						"-lar-file-containing-the-following-elements");
+					"there-are-missing-references-that-could-not-be-found-in-" +
+						"the-current-site.-please-import-another-lar-file-" +
+							"containing-the-following-elements");
 			}
 
-			MissingReferences missingReferences =
-				mre.getMissingReferences();
+			MissingReferences missingReferences = mre.getMissingReferences();
 
 			errorMessagesJSONArray = getErrorMessagesJSONArray(
 				locale, missingReferences.getDependencyMissingReferences(),
@@ -915,7 +908,8 @@ public class StagingImpl implements Staging {
 		if ((errorMessagesJSONArray != null) &&
 			(errorMessagesJSONArray.length() > 0)) {
 
-			exceptionMessagesJSONArray.put("messageListItems", errorMessagesJSONArray);
+			exceptionMessagesJSONArray.put(
+				"messageListItems", errorMessagesJSONArray);
 		}
 
 		exceptionMessagesJSONArray.put("status", errorType);
@@ -923,7 +917,8 @@ public class StagingImpl implements Staging {
 		if ((warningMessagesJSONArray != null) &&
 			(warningMessagesJSONArray.length() > 0)) {
 
-			exceptionMessagesJSONArray.put("warningMessages", warningMessagesJSONArray);
+			exceptionMessagesJSONArray.put(
+				"warningMessages", warningMessagesJSONArray);
 		}
 
 		return exceptionMessagesJSONArray;
