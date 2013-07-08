@@ -40,10 +40,6 @@ else {
 }
 
 OrderByComparator orderByComparator = BackgroundTaskUtil.getBackgroundTaskOrderByComparator(orderByCol, orderByType);
-
-String expandedBrackgroundTasks = GetterUtil.getString(SessionClicks.get(request, "publish-layout-task", null));
-
-long[] expandedBackgroundTasks = StringUtil.split(expandedBrackgroundTasks, 0L);
 %>
 
 <liferay-ui:search-container
@@ -75,9 +71,14 @@ long[] expandedBackgroundTasks = StringUtil.split(expandedBrackgroundTasks, 0L);
 			</strong>
 
 			<c:if test="<%= Validator.isNotNull(backgroundTask.getStatusMessage()) %>">
-				<a class="details-link toggler-header-<%= ArrayUtil.contains(expandedBackgroundTasks, backgroundTask.getBackgroundTaskId()) ? "expanded" : "collapsed" %>" data-persist-id="<%= backgroundTask.getBackgroundTaskId() %>" href="#"><liferay-ui:message key="details" /></a>
 
-				<div class="background-task-status-message toggler-content-<%= ArrayUtil.contains(expandedBackgroundTasks, backgroundTask.getBackgroundTaskId()) ? "expanded" : "collapsed" %>">
+				<%
+				long[] expandedBackgroundTaskIds = StringUtil.split(GetterUtil.getString(SessionClicks.get(request, "publish-layout-task", null)), 0L);
+				%>
+
+				<a class="details-link toggler-header-<%= ArrayUtil.contains(expandedBackgroundTaskIds, backgroundTask.getBackgroundTaskId()) ? "expanded" : "collapsed" %>" data-persist-id="<%= backgroundTask.getBackgroundTaskId() %>" href="#"><liferay-ui:message key="details" /></a>
+
+				<div class="background-task-status-message toggler-content-<%= ArrayUtil.contains(expandedBackgroundTaskIds, backgroundTask.getBackgroundTaskId()) ? "expanded" : "collapsed" %>">
 
 					<%
 					JSONObject jsonObject = null;
