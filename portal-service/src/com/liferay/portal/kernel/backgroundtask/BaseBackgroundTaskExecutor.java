@@ -46,7 +46,7 @@ public abstract class BaseBackgroundTaskExecutor
 
 		long userId = MapUtil.getLong(taskContextMap, "userId");
 
-		if (userId <= 0) {
+		if (userId > 0) {
 			try {
 				User user = UserLocalServiceUtil.getUser(userId);
 
