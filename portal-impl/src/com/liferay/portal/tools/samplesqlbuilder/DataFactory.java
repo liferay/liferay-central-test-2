@@ -324,9 +324,8 @@ public class DataFactory {
 		List<AssetCategoryModel> allAssetCategoryModels =
 			new ArrayList<AssetCategoryModel>();
 
-		for (
-			List<AssetCategoryModel> assetCategoryModels :
-			_assetCategoryModelsArray) {
+		for (List<AssetCategoryModel> assetCategoryModels :
+				_assetCategoryModelsArray) {
 
 			allAssetCategoryModels.addAll(assetCategoryModels);
 		}
@@ -378,9 +377,8 @@ public class DataFactory {
 		List<AssetTagStatsModel> allAssetTagStatsModels =
 			new ArrayList<AssetTagStatsModel>();
 
-		for (
-			List<AssetTagStatsModel> assetTagStatsModels :
-			_assetTagStatsModelsArray) {
+		for (List<AssetTagStatsModel> assetTagStatsModels :
+				_assetTagStatsModelsArray) {
 
 			allAssetTagStatsModels.addAll(assetTagStatsModels);
 		}
