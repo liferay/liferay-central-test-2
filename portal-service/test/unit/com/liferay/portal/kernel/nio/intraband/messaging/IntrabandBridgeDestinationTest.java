@@ -88,23 +88,23 @@ public class IntrabandBridgeDestinationTest {
 					Datagram datagram)
 				throws IOException {
 
-				if (_failSend) {
+				if (_throwRuntimeException) {
 					throw new IOException("Unable to send");
 				}
 
 				ByteBuffer byteBuffer = datagram.getDataByteBuffer();
 
 				try {
-					MessageRoutingBag receiveMessageRoutingBag =
+					MessageRoutingBag receivedMessageRoutingBag =
 						MessageRoutingBag.fromByteArray(byteBuffer.array());
 
 					Message receivedMessage =
-						receiveMessageRoutingBag.getMessage();
+						receivedMessageRoutingBag.getMessage();
 
 					receivedMessage.put(_RECEIVE_KEY, _RECEIVE_VALUE);
 
 					return Datagram.createResponseDatagram(
-						datagram, receiveMessageRoutingBag.toByteArray());
+						datagram, receivedMessageRoutingBag.toByteArray());
 				}
 				catch (ClassNotFoundException cnfe) {
 					throw new IOException(cnfe);
@@ -120,9 +120,9 @@ public class IntrabandBridgeDestinationTest {
 	@Test
 	public void testSendMessage() throws ClassNotFoundException {
 
-		// Automatically create MessageRoutingBag
+		// Automatically create message routing bag
 
-		final AtomicBoolean failToSend = new AtomicBoolean();
+		final AtomicBoolean throwRuntimeException = new AtomicBoolean();
 
 		final AtomicReference<Message> messageReference =
 			new AtomicReference<Message>();
@@ -131,12 +131,13 @@ public class IntrabandBridgeDestinationTest {
 
 			@Override
 			public void receive(Message message) {
-				if (failToSend.get()) {
+				if (throwRuntimeException.get()) {
 					throw new RuntimeException();
 				}
 
 				messageReference.set(message);
 			}
+
 		};
 
 		_baseDestination.register(messageListener);
@@ -150,7 +151,7 @@ public class IntrabandBridgeDestinationTest {
 
 		Assert.assertSame(message, messageReference.get());
 
-		// Exist MessageRoutingBag
+		// Existing message routing bag
 
 		MessageRoutingBag messageRoutingBag = _createMessageRoutingBag();
 
@@ -164,7 +165,7 @@ public class IntrabandBridgeDestinationTest {
 			messageRoutingBag,
 			message.get(MessageRoutingBag.MESSAGE_ROUTING_BAG));
 
-		// Unable to deserialize message
+		// Unserializable message
 
 		messageRoutingBag = _createMessageRoutingBag();
 
@@ -174,20 +175,23 @@ public class IntrabandBridgeDestinationTest {
 
 		messageRoutingBag.getMessageData();
 
-		ClassLoaderPool.register(StringPool.BLANK, new ClassLoader() {
+		ClassLoaderPool.register(
+			StringPool.BLANK,
+			new ClassLoader() {
 
-			@Override
-			public Class<?> loadClass(String name)
-				throws ClassNotFoundException {
+				@Override
+				public Class<?> loadClass(String name)
+					throws ClassNotFoundException {
 
-				if (name.equals(Message.class.getName())) {
-					throw new ClassNotFoundException();
+					if (name.equals(Message.class.getName())) {
+						throw new ClassNotFoundException();
+					}
+
+					return super.loadClass(name);
 				}
 
-				return super.loadClass(name);
 			}
-
-		});
+		);
 
 		try {
 			_intrabandBridgeDestination.send(message);
@@ -204,9 +208,9 @@ public class IntrabandBridgeDestinationTest {
 			ClassLoaderPool.unregister(StringPool.BLANK);
 		}
 
-		// Fail to send
+		// Throw runtime exception
 
-		failToSend.set(true);
+		throwRuntimeException.set(true);
 
 		try {
 			_intrabandBridgeDestination.send(new Message());
@@ -223,9 +227,9 @@ public class IntrabandBridgeDestinationTest {
 	@Test
 	public void testSendMessageBag1() {
 
-		// Is not spi, without child spi
+		// Is not SPI, without child SPI
 
-		_intrabandBridgeDestination.sendMessageBag(null);
+		_intrabandBridgeDestination.sendMessageRoutingBag(null);
 
 		Assert.assertSame(
 			_baseDestination,
@@ -235,18 +239,19 @@ public class IntrabandBridgeDestinationTest {
 	@Test
 	public void testSendMessageBag2() throws Exception {
 
-		// Is not spi, with child spi, not visited, fail to send
+		// Is not SPI, with child SPI, not visited, unable to send
 
 		MockSPI mockSPI = _createMockSPI("SPIProvider", "SPI1");
 
 		_installSPIs(mockSPI);
 
-		_failSend = true;
+		_throwRuntimeException = true;
 
 		try {
 			MessageRoutingBag messageRoutingBag = _createMessageRoutingBag();
 
-			_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+			_intrabandBridgeDestination.sendMessageRoutingBag(
+				messageRoutingBag);
 
 			Assert.fail();
 		}
@@ -260,26 +265,26 @@ public class IntrabandBridgeDestinationTest {
 			Assert.assertEquals(IOException.class, throwable.getClass());
 		}
 		finally {
-			_failSend = false;
+			_throwRuntimeException = false;
 		}
 
-		// Is not spi, with child spi, not visited, success to send
+		// Is not SPI, with child SPI, not visited, able to send
 
 		MessageRoutingBag messageRoutingBag = _createMessageRoutingBag();
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		Message message = messageRoutingBag.getMessage();
 
 		Assert.assertEquals(_RECEIVE_VALUE, message.get(_RECEIVE_KEY));
 
-		// Is not spi, with child spi, visited
+		// Is not SPI, with child SPI, visited
 
 		messageRoutingBag = _createMessageRoutingBag();
 
 		messageRoutingBag.appendRoutingId(_toRoutingId(mockSPI));
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		message = messageRoutingBag.getMessage();
 
@@ -289,7 +294,7 @@ public class IntrabandBridgeDestinationTest {
 	@Test
 	public void testSendMessageBag3() throws Exception {
 
-		// Is spi, without child spi, downcast
+		// Is SPI, without child SPI, downcast
 
 		ConcurrentMap<String, Object> attributes =
 			ProcessExecutor.ProcessContext.getAttributes();
@@ -302,7 +307,7 @@ public class IntrabandBridgeDestinationTest {
 
 		messageRoutingBag.setRoutingDowncast(true);
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		Assert.assertTrue(messageRoutingBag.isVisited(_toRoutingId(mockSPI1)));
 
@@ -310,14 +315,15 @@ public class IntrabandBridgeDestinationTest {
 
 		Assert.assertNull(message.get(_RECEIVE_KEY));
 
-		// Is spi. without child spi, upcast, fail to send
+		// Is SPI, without child SPI, upcast, unable to send
 
-		_failSend = true;
+		_throwRuntimeException = true;
 
 		try {
 			messageRoutingBag = _createMessageRoutingBag();
 
-			_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+			_intrabandBridgeDestination.sendMessageRoutingBag(
+				messageRoutingBag);
 
 			Assert.fail();
 		}
@@ -331,16 +337,16 @@ public class IntrabandBridgeDestinationTest {
 			Assert.assertEquals(IOException.class, throwable.getClass());
 		}
 		finally {
-			_failSend = false;
+			_throwRuntimeException = false;
 		}
 
 		Assert.assertTrue(messageRoutingBag.isVisited(_toRoutingId(mockSPI1)));
 
-		// Is spi. without child spi, upcast, success to send
+		// Is SPI, without child SPI, upcast, able to send
 
 		messageRoutingBag = _createMessageRoutingBag();
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		Assert.assertTrue(messageRoutingBag.isVisited(_toRoutingId(mockSPI1)));
 
@@ -348,7 +354,7 @@ public class IntrabandBridgeDestinationTest {
 
 		Assert.assertEquals(_RECEIVE_VALUE, message.get(_RECEIVE_KEY));
 
-		// Is spi, with child spi, not visited, downcast
+		// Is SPI, with child SPI, not visited, downcast
 
 		MockSPI mockSPI2 = _createMockSPI("SPIProvider", "SPI2");
 
@@ -358,7 +364,7 @@ public class IntrabandBridgeDestinationTest {
 
 		messageRoutingBag.setRoutingDowncast(true);
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		Assert.assertTrue(messageRoutingBag.isVisited(_toRoutingId(mockSPI1)));
 
@@ -366,14 +372,14 @@ public class IntrabandBridgeDestinationTest {
 
 		Assert.assertEquals(_RECEIVE_VALUE, message.get(_RECEIVE_KEY));
 
-		// Is spi, with child spi, visited, downcast
+		// Is SPI, with child SPI, visited, downcast
 
 		messageRoutingBag = _createMessageRoutingBag();
 
-		messageRoutingBag.setRoutingDowncast(true);
 		messageRoutingBag.appendRoutingId(_toRoutingId(mockSPI2));
+		messageRoutingBag.setRoutingDowncast(true);
 
-		_intrabandBridgeDestination.sendMessageBag(messageRoutingBag);
+		_intrabandBridgeDestination.sendMessageRoutingBag(messageRoutingBag);
 
 		Assert.assertTrue(messageRoutingBag.isVisited(_toRoutingId(mockSPI1)));
 
@@ -401,25 +407,26 @@ public class IntrabandBridgeDestinationTest {
 
 		};
 
-		mockSPI.spiProviderName = spiProviderName;
 		mockSPI.spiConfiguration = new SPIConfiguration(
 			spiId, null, -1, null, null, null);
+		mockSPI.spiProviderName = spiProviderName;
 
 		return mockSPI;
 	}
 
 	private void _installSPIs(SPI... spis) throws Exception {
-		Map<String, SPI> spiMap = new ConcurrentHashMap<String, SPI>();
+		Map<String, SPI> spisMap = new ConcurrentHashMap<String, SPI>();
 
 		for (SPI spi : spis) {
 			SPIConfiguration spiConfiguration = spi.getSPIConfiguration();
-			spiMap.put(spiConfiguration.getSPIId(), spi);
+
+			spisMap.put(spiConfiguration.getSPIId(), spi);
 		}
 
 		Field spisField = ReflectionUtil.getDeclaredField(
 			MPIHelperUtil.class, "_spis");
 
-		spisField.set(null, spiMap);
+		spisField.set(null, spisMap);
 	}
 
 	private String _toRoutingId(SPI spi) throws RemoteException {
@@ -437,10 +444,10 @@ public class IntrabandBridgeDestinationTest {
 	private static final String _RECEIVE_VALUE = "RECEIVE_VALUE";
 
 	private BaseDestination _baseDestination;
-	private boolean _failSend;
 	private IntrabandBridgeDestination _intrabandBridgeDestination;
 	private MessageBus _messageBus;
 	private MockIntraband _mockIntraband;
 	private MockRegistrationReference _mockRegistrationReference;
+	private boolean _throwRuntimeException;
 
 }

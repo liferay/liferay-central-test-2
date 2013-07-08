@@ -131,10 +131,16 @@ public abstract class AbstractMessagingConfigurator
 								destinationName));
 					}
 					catch (Exception e) {
-						_log.error(
-							"Unable to install " +
-								"DestinationConfigurationProcessCallable " +
-									"on MPI for " + destinationName, e);
+						StringBundler sb = new StringBundler();
+
+						sb.append("Unable to install ");
+						sb.append(
+							DestinationConfigurationProcessCallable.class.
+								getName());
+						sb.append(" on MPI for ");
+						sb.append(destinationName);
+
+						_log.error(sb.toString(), e);
 					}
 				}
 

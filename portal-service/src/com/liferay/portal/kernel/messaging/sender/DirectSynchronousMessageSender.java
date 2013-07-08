@@ -48,8 +48,8 @@ public class DirectSynchronousMessageSender
 			return null;
 		}
 
-		if ((destination instanceof SynchronousDestination) ||
-			(destination instanceof IntrabandBridgeDestination)) {
+		if ((destination instanceof IntrabandBridgeDestination) ||
+			(destination instanceof SynchronousDestination)) {
 
 			destination.send(message);
 		}

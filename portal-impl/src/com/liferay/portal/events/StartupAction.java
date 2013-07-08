@@ -97,6 +97,7 @@ public class StartupAction extends SimpleAction {
 		intraband.registerDatagramReceiveHandler(
 			SystemDataType.MESSAGE.getValue(),
 			new MessageDatagramReceiveHandler(messageBus));
+
 		intraband.registerDatagramReceiveHandler(
 			SystemDataType.PORTAL_CACHE.getValue(),
 			new PortalCacheDatagramReceiveHandler());

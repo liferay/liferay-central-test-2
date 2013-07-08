@@ -141,7 +141,9 @@ public class MessageDatagramReceiveHandlerTest {
 				public void receive(Message message) {
 					messageReference.set(message);
 				}
-			});
+
+			}
+		);
 
 		datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), messageRoutingBag.toByteArray());
@@ -163,7 +165,8 @@ public class MessageDatagramReceiveHandlerTest {
 
 		Assert.assertNotNull(receivedMessage);
 
-		// Normal destination, synchronized, with listener throws exception
+		// Normal destination, synchronized, with listener that throws an
+		// exception
 
 		final MessageListenerException messageListenerException =
 			new MessageListenerException();
@@ -177,7 +180,9 @@ public class MessageDatagramReceiveHandlerTest {
 
 					throw messageListenerException;
 				}
-			});
+
+			}
+		);
 
 		datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), messageRoutingBag.toByteArray());
@@ -192,7 +197,7 @@ public class MessageDatagramReceiveHandlerTest {
 			Assert.assertSame(messageListenerException, mbe.getCause());
 		}
 
-		// IntrabandBridgeDestination, not synchronized, no listener
+		// Intraband bridge destination, not synchronized, no listener
 
 		baseDestination = new SynchronousDestination();
 
@@ -206,11 +211,12 @@ public class MessageDatagramReceiveHandlerTest {
 			new IntrabandBridgeDestination(baseDestination) {
 
 				@Override
-				public void sendMessageBag(
+				public void sendMessageRoutingBag(
 					MessageRoutingBag messageRoutingBag) {
 
 					messageRoutingBagReference.set(messageRoutingBag);
 				}
+
 			};
 
 		messageBus.addDestination(intrabandBridgeDestination);
@@ -224,7 +230,7 @@ public class MessageDatagramReceiveHandlerTest {
 		assertMessageRoutingBagEquals(
 			messageRoutingBag, messageRoutingBagReference.get());
 
-		// IntrabandBridgeDestination, not synchronized, with listener
+		// Intraband bridge destination, not synchronized, with listener
 
 		messageReference.set(null);
 
@@ -235,7 +241,9 @@ public class MessageDatagramReceiveHandlerTest {
 				public void receive(Message message) {
 					messageReference.set(message);
 				}
-			});
+
+			}
+		);
 
 		datagram = Datagram.createRequestDatagram(
 			systemDataType.getValue(), messageRoutingBag.toByteArray());

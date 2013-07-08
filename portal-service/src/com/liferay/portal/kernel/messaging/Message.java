@@ -34,11 +34,10 @@ import java.util.Map;
  */
 public class Message implements Cloneable, Serializable {
 
-	public static Message fromByteArray(byte[] messageData)
+	public static Message fromByteArray(byte[] bytes)
 		throws ClassNotFoundException {
 
-		Deserializer deserializer = new Deserializer(
-			ByteBuffer.wrap(messageData));
+		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(bytes));
 
 		return deserializer.readObject();
 	}

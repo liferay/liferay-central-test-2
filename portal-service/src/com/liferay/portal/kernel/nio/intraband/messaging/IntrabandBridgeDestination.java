@@ -60,7 +60,7 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 				MessageRoutingBag.MESSAGE_ROUTING_BAG, messageRoutingBag);
 		}
 
-		sendMessageBag(messageRoutingBag);
+		sendMessageRoutingBag(messageRoutingBag);
 
 		try {
 			Message responseMessage = messageRoutingBag.getMessage();
@@ -86,25 +86,21 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 		}
 	}
 
-	public void sendMessageBag(MessageRoutingBag messageRoutingBag) {
+	public void sendMessageRoutingBag(MessageRoutingBag messageRoutingBag) {
 		if (SPIUtil.isSPI()) {
 			SPI spi = SPIUtil.getSPI();
 
 			try {
-
-				// Record current visiting
-
-				String routingId = _toRoutingId(spi);
+				String routingId = toRoutingId(spi);
 
 				messageRoutingBag.appendRoutingId(routingId);
-
-				// Push to MPI
 
 				if (!messageRoutingBag.isRoutingDowncast()) {
 					RegistrationReference registrationReference =
 						spi.getRegistrationReference();
 
-					_doSendMessageBag(registrationReference, messageRoutingBag);
+					sendMessageRoutingBag(
+						registrationReference, messageRoutingBag);
 				}
 			}
 			catch (Exception e) {
@@ -112,15 +108,9 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 			}
 		}
 
-		// Push to SPIs
-
 		List<SPI> spis = MPIHelperUtil.getSPIs();
 
 		if (spis.isEmpty() && !SPIUtil.isSPI()) {
-
-			// All spis dead and current process is the root MPI, recover back
-			// to original destination
-
 			MessageBusUtil.addDestination(destination);
 		}
 		else {
@@ -128,13 +118,13 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 
 			try {
 				for (SPI spi : spis) {
-					String routingId = _toRoutingId(spi);
+					String routingId = toRoutingId(spi);
 
 					if (!messageRoutingBag.isVisited(routingId)) {
 						RegistrationReference registrationReference =
 							spi.getRegistrationReference();
 
-						_doSendMessageBag(
+						sendMessageRoutingBag(
 							registrationReference, messageRoutingBag);
 					}
 				}
@@ -145,7 +135,7 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 		}
 	}
 
-	private void _doSendMessageBag(
+	protected void sendMessageRoutingBag(
 		RegistrationReference registrationReference,
 		MessageRoutingBag messageRoutingBag) {
 
@@ -160,10 +150,10 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 
 			ByteBuffer byteBuffer = datagram.getDataByteBuffer();
 
-			MessageRoutingBag receiveMessageRoutingBag =
+			MessageRoutingBag receivedMessageRoutingBag =
 				MessageRoutingBag.fromByteArray(byteBuffer.array());
 
-			Message receivedMessage = receiveMessageRoutingBag.getMessage();
+			Message receivedMessage = receivedMessageRoutingBag.getMessage();
 
 			Message message = messageRoutingBag.getMessage();
 
@@ -177,7 +167,7 @@ public class IntrabandBridgeDestination extends DestinationWrapper {
 		}
 	}
 
-	private String _toRoutingId(SPI spi) throws RemoteException {
+	protected String toRoutingId(SPI spi) throws RemoteException {
 		String spiProviderName = spi.getSPIProviderName();
 
 		SPIConfiguration spiConfiguration = spi.getSPIConfiguration();

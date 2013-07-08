@@ -60,7 +60,7 @@ public class MessageDatagramReceiveHandler
 					IntrabandBridgeDestination intrabandBridgeDestination =
 						(IntrabandBridgeDestination)destination;
 
-					intrabandBridgeDestination.sendMessageBag(
+					intrabandBridgeDestination.sendMessageRoutingBag(
 						messageRoutingBag);
 				}
 				else {

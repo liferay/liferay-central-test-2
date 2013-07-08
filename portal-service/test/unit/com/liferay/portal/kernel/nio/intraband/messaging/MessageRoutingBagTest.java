@@ -41,7 +41,7 @@ public class MessageRoutingBagTest {
 		new CodeCoverageAssertor();
 
 	@Test
-	public void testAutoSerialization() throws Exception {
+	public void testAutomaticSerialization() throws Exception {
 		Message message = new Message();
 
 		String destinationName = "destinationName";
@@ -54,9 +54,11 @@ public class MessageRoutingBagTest {
 			message, synchronizedBridge);
 
 		String routingId1 = "routingId1";
-		String routingId2 = "routingId2";
 
 		messageRoutingBag.appendRoutingId(routingId1);
+
+		String routingId2 = "routingId2";
+
 		messageRoutingBag.appendRoutingId(routingId2);
 
 		boolean routingDowncast = true;
@@ -73,10 +75,10 @@ public class MessageRoutingBagTest {
 
 		objectOutputStream.close();
 
-		byte[] data = unsyncByteArrayOutputStream.toByteArray();
+		byte[] bytes = unsyncByteArrayOutputStream.toByteArray();
 
 		ObjectInputStream objectInputStream = new ObjectInputStream(
-			new UnsyncByteArrayInputStream(data));
+			new UnsyncByteArrayInputStream(bytes));
 
 		MessageRoutingBag newMessageRoutingBag =
 			(MessageRoutingBag)objectInputStream.readObject();
@@ -88,7 +90,6 @@ public class MessageRoutingBagTest {
 			MessageRoutingBag.class, "_message");
 
 		Assert.assertNull(messageField.get(newMessageRoutingBag));
-
 		Assert.assertNotNull(newMessageRoutingBag.getMessageData());
 		Assert.assertEquals(
 			routingDowncast, newMessageRoutingBag.isRoutingDowncast());
@@ -102,7 +103,6 @@ public class MessageRoutingBagTest {
 		Assert.assertEquals(2, routingTrace.size());
 		Assert.assertEquals(routingId1, routingTrace.get(0));
 		Assert.assertEquals(routingId2, routingTrace.get(1));
-
 		Assert.assertTrue(newMessageRoutingBag.isVisited(routingId1));
 		Assert.assertTrue(newMessageRoutingBag.isVisited(routingId2));
 		Assert.assertFalse(newMessageRoutingBag.isVisited("routingId3"));
@@ -135,19 +135,21 @@ public class MessageRoutingBagTest {
 			message, synchronizedBridge);
 
 		String routingId1 = "routingId1";
-		String routingId2 = "routingId2";
 
 		messageRoutingBag.appendRoutingId(routingId1);
+
+		String routingId2 = "routingId2";
+
 		messageRoutingBag.appendRoutingId(routingId2);
 
 		boolean routingDowncast = true;
 
 		messageRoutingBag.setRoutingDowncast(routingDowncast);
 
-		byte[] data = messageRoutingBag.toByteArray();
+		byte[] bytes = messageRoutingBag.toByteArray();
 
 		MessageRoutingBag newMessageRoutingBag =
-			MessageRoutingBag.fromByteArray(data);
+			MessageRoutingBag.fromByteArray(bytes);
 
 		Assert.assertEquals(
 			destinationName, newMessageRoutingBag.getDestinationName());
@@ -156,7 +158,6 @@ public class MessageRoutingBagTest {
 			MessageRoutingBag.class, "_message");
 
 		Assert.assertNull(messageField.get(newMessageRoutingBag));
-
 		Assert.assertNotNull(newMessageRoutingBag.getMessageData());
 		Assert.assertEquals(
 			routingDowncast, newMessageRoutingBag.isRoutingDowncast());
@@ -170,7 +171,6 @@ public class MessageRoutingBagTest {
 		Assert.assertEquals(2, routingTrace.size());
 		Assert.assertEquals(routingId1, routingTrace.get(0));
 		Assert.assertEquals(routingId2, routingTrace.get(1));
-
 		Assert.assertTrue(newMessageRoutingBag.isVisited(routingId1));
 		Assert.assertTrue(newMessageRoutingBag.isVisited(routingId2));
 		Assert.assertFalse(newMessageRoutingBag.isVisited("routingId3"));
@@ -210,7 +210,7 @@ public class MessageRoutingBagTest {
 	}
 
 	@Test
-	public void testNoneSerializableMessage() {
+	public void testUnserializableMessage() {
 		Message message = new Message();
 
 		message.setPayload(new Object());

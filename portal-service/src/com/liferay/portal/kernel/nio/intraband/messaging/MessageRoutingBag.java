@@ -37,9 +37,9 @@ public class MessageRoutingBag implements Externalizable {
 	public static MessageRoutingBag fromByteArray(byte[] data)
 		throws ClassNotFoundException {
 
-		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(data));
-
 		MessageRoutingBag messageRoutingBag = new MessageRoutingBag();
+
+		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(data));
 
 		messageRoutingBag._destinationName = deserializer.readString();
 		messageRoutingBag._messageData = deserializer.readObject();
