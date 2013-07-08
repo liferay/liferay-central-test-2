@@ -742,18 +742,6 @@ public class StagingImpl implements Staging {
 		int errorType = 0;
 		JSONArray warningMessagesJSONArray = null;
 
-		if (e instanceof DuplicateFileException ||
-			e instanceof FileExtensionException ||
-			e instanceof FileNameException ||
-			e instanceof FileSizeException ||
-			e instanceof LARFileException ||
-			e instanceof LARFileSizeException ||
-			e instanceof LARTypeException ||
-			e instanceof LayoutPrototypeException ||
-			e instanceof LocaleException ||
-			e instanceof MissingReferenceException ||
-			e instanceof PortletIdException) {
-
 			if (e instanceof DuplicateFileException) {
 				errorMessage = LanguageUtil.get(
 					locale, "please-enter-a-unique-document-name");
@@ -915,7 +903,6 @@ public class StagingImpl implements Staging {
 					locale, "please-import-a-lar-file-for-the-current-portlet");
 				errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 			}
-		}
 		else {
 			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 		}
