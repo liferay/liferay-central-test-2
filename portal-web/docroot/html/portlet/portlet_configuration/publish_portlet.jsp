@@ -315,6 +315,7 @@ portletURL.setParameter("tabs3", "all-publication-processes");
 																						<div id="<portlet:namespace />showDeleteContentWarning">
 																							<div class="alert alert-block">
 																								<liferay-ui:message key="delete-content-before-importing-warning" />
+
 																								<liferay-ui:message key="delete-content-before-importing-suggestion" />
 																							</div>
 																						</div>
