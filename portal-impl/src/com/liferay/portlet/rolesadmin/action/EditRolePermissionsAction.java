@@ -126,6 +126,7 @@ public class EditRolePermissionsAction extends PortletAction {
 				renderRequest, "portlet.roles_admin.edit_role_permissions"));
 	}
 
+	@Override
 	public void serveResource(
 			ActionMapping actionMapping, ActionForm actionForm,
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
