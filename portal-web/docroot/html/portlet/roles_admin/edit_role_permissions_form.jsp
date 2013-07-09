@@ -66,16 +66,16 @@ if (Validator.isNotNull(portletResource)) {
 	<h3><%= portletResourceLabel %></h3>
 
 	<%
-		request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
+	request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 
-		String applicationPermissionsLabel = "application-permissions";
+	String applicationPermissionsLabel = "application-permissions";
 
-		if (portletResource.equals(PortletKeys.PORTAL)) {
-			applicationPermissionsLabel = StringPool.BLANK;
-		}
-		else if ((portlet != null) && Validator.isNotNull(portlet.getControlPanelEntryCategory())) {
-			applicationPermissionsLabel = "general-permissions";
-		}
+	if (portletResource.equals(PortletKeys.PORTAL)) {
+		applicationPermissionsLabel = StringPool.BLANK;
+	}
+	else if ((portlet != null) && Validator.isNotNull(portlet.getControlPanelEntryCategory())) {
+		applicationPermissionsLabel = "general-permissions";
+	}
 	%>
 
 	<c:if test="<%= Validator.isNotNull(applicationPermissionsLabel) %>">
@@ -90,25 +90,25 @@ if (Validator.isNotNull(portletResource)) {
 		<div class="permission-group">
 
 			<%
-				modelResources = ListUtil.sort(modelResources, new ModelResourceWeightComparator());
+			modelResources = ListUtil.sort(modelResources, new ModelResourceWeightComparator());
 
-				for (int i = 0; i < modelResources.size(); i++) {
-					String curModelResource = (String)modelResources.get(i);
+			for (int i = 0; i < modelResources.size(); i++) {
+				String curModelResource = (String)modelResources.get(i);
 
-					String curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
+				String curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
 			%>
 
-			<h5 id="<%= _getResourceHtmlId(curModelResource) %>"><%= curModelResourceName %></h5>
+				<h5 id="<%= _getResourceHtmlId(curModelResource) %>"><%= curModelResourceName %></h5>
 
-			<%
+				<%
 				request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
 				request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
-			%>
+				%>
 
-			<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_resource.jsp" />
+				<liferay-util:include page="/html/portlet/roles_admin/edit_role_permissions_resource.jsp" />
 
 			<%
-				}
+			}
 			%>
 
 		</div>
