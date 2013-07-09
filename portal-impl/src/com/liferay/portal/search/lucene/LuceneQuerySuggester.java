@@ -143,8 +143,8 @@ public class LuceneQuerySuggester implements QuerySuggester {
 				query = queryParser.parse(searchContext.getKeywords());
 			}
 			catch (ParseException e) {
-				query = queryParser.parse(KeywordsUtil.escape(
-					searchContext.getKeywords()));
+				query = queryParser.parse(
+					KeywordsUtil.escape(searchContext.getKeywords()));
 			}
 
 			BooleanClause keywordTermQuery = new BooleanClause(
