@@ -55,6 +55,7 @@ import java.util.regex.Pattern;
 import javax.net.SocketFactory;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.Cookie;
@@ -925,7 +926,7 @@ public class HttpImpl implements Http {
 			options.getCookies(), options.getAuth(), options.getBody(),
 			options.getFileParts(), options.getParts(), options.getResponse(),
 			options.isFollowRedirects(), options.getProgressId(),
-			options.getActionRequest());
+			options.getPortletRequest());
 	}
 
 	@Override
@@ -1170,7 +1171,7 @@ public class HttpImpl implements Http {
 			Cookie[] cookies, Http.Auth auth, Http.Body body,
 			List<Http.FilePart> fileParts, Map<String, String> parts,
 			Http.Response response, boolean followRedirects, String progressId,
-			ActionRequest actionRequest)
+			PortletRequest portletRequest)
 		throws IOException {
 
 		byte[] bytes = null;
@@ -1304,7 +1305,7 @@ public class HttpImpl implements Http {
 					return URLtoByteArray(
 						redirect, Http.Method.GET, headers, cookies, auth, body,
 						fileParts, parts, response, followRedirects, progressId,
-						actionRequest);
+						portletRequest);
 				}
 				else {
 					response.setRedirect(redirect);
@@ -1334,19 +1335,22 @@ public class HttpImpl implements Http {
 				}
 
 				if (Validator.isNotNull(progressId) &&
-					(actionRequest != null)) {
+					(portletRequest != null)) {
 
-					ProgressInputStream pis = new ProgressInputStream(
-						actionRequest, inputStream, contentLength, progressId);
+					ProgressInputStream progressInputStream =
+						new ProgressInputStream(
+							portletRequest, inputStream, contentLength,
+							progressId);
 
 					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 						new UnsyncByteArrayOutputStream(contentLength);
 
 					try {
-						pis.readAll(unsyncByteArrayOutputStream);
+						progressInputStream.readAll(
+						unsyncByteArrayOutputStream);
 					}
 					finally {
-						pis.clearProgress();
+						progressInputStream.clearProgress();
 					}
 
 					bytes = unsyncByteArrayOutputStream.unsafeGetByteArray();

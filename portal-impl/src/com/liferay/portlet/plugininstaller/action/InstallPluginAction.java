@@ -360,15 +360,16 @@ public class InstallPluginAction extends PortletAction {
 			PluginPackageUtil.registerPluginPackageInstallation(
 				deploymentContext);
 
+			Http.Options options = new Http.Options();
+
+			options.setFollowRedirects(false);
+			options.setLocation(url);
+			options.setPortletRequest(actionRequest);
+			options.setPost(false);
+
 			String progressId = ParamUtil.getString(
 				actionRequest, Constants.PROGRESS_ID);
 
-			Http.Options options = new Http.Options();
-
-			options.setActionRequest(actionRequest);
-			options.setFollowRedirects(false);
-			options.setLocation(url);
-			options.setPost(false);
 			options.setProgressId(progressId);
 
 			byte[] bytes = HttpUtil.URLtoByteArray(options);
@@ -494,8 +495,6 @@ public class InstallPluginAction extends PortletAction {
 
 		SessionMessages.add(actionRequest, "triggeredPortletUndeploy");
 	}
-
-	private static final String _DOWNLOAD_DIR = "download";
 
 	private static Log _log = LogFactoryUtil.getLog(InstallPluginAction.class);
 

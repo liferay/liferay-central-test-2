@@ -230,7 +230,7 @@ public class SCProductVersionLocalServiceImpl
 			options.setLocation(directDownloadURL);
 			options.setPost(false);
 
-			byte[] bytes = HttpUtil.URLtoByteArray(options);
+			HttpUtil.URLtoByteArray(options);
 
 			Http.Response response = options.getResponse();
 

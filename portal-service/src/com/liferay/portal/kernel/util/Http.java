@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
 import javax.servlet.http.Cookie;
@@ -335,10 +336,6 @@ public interface Http {
 			_parts.put(name, value);
 		}
 
-		public ActionRequest getActionRequest() {
-			return _actionRequest;
-		}
-
 		public Auth getAuth() {
 			return _auth;
 		}
@@ -369,6 +366,10 @@ public interface Http {
 
 		public Map<String, String> getParts() {
 			return _parts;
+		}
+
+		public PortletRequest getPortletRequest() {
+			return _portletRequest;
 		}
 
 		public String getProgressId() {
@@ -426,10 +427,6 @@ public interface Http {
 			else {
 				return false;
 			}
-		}
-
-		public void setActionRequest(ActionRequest actionRequest) {
-			_actionRequest = actionRequest;
 		}
 
 		public void setAuth(Http.Auth auth) {
@@ -503,6 +500,10 @@ public interface Http {
 			_parts = parts;
 		}
 
+		public void setPortletRequest(PortletRequest portletRequest) {
+			_portletRequest = portletRequest;
+		}
+
 		public void setPost(boolean post) {
 			if (post) {
 				_method = Method.POST;
@@ -529,7 +530,6 @@ public interface Http {
 			_response = response;
 		}
 
-		private ActionRequest _actionRequest;
 		private Auth _auth;
 		private Body _body;
 		private Cookie[] _cookies;
@@ -539,6 +539,7 @@ public interface Http {
 		private String _location;
 		private Method _method = Method.GET;
 		private Map<String, String> _parts;
+		private PortletRequest _portletRequest;
 		private String _progressId;
 		private Response _response = new Response();
 

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
 /**
@@ -33,11 +33,11 @@ import javax.portlet.PortletSession;
 public class ProgressInputStream extends InputStream {
 
 	public ProgressInputStream(
-		ActionRequest actionRequest, InputStream is, long totalSize,
+		PortletRequest portletRequest, InputStream inputStream, long totalSize,
 		String progressId) {
 
-		_portletSession = actionRequest.getPortletSession();
-		_is = is;
+		_portletSession = portletRequest.getPortletSession();
+		_inputStream = inputStream;
 		_totalSize = totalSize;
 		_progressId = progressId;
 
@@ -46,7 +46,7 @@ public class ProgressInputStream extends InputStream {
 
 	@Override
 	public int available() throws IOException {
-		return _is.available();
+		return _inputStream.available();
 	}
 
 	public void clearProgress() {
@@ -55,7 +55,7 @@ public class ProgressInputStream extends InputStream {
 
 	@Override
 	public void close() throws IOException {
-		_is.close();
+		_inputStream.close();
 	}
 
 	public long getTotalRead() {
@@ -71,17 +71,17 @@ public class ProgressInputStream extends InputStream {
 
 	@Override
 	public void mark(int readlimit) {
-		_is.mark(readlimit);
+		_inputStream.mark(readlimit);
 	}
 
 	@Override
 	public boolean markSupported() {
-		return _is.markSupported();
+		return _inputStream.markSupported();
 	}
 
 	@Override
 	public int read() throws IOException {
-		return _is.read();
+		return _inputStream.read();
 	}
 
 	@Override
@@ -98,26 +98,26 @@ public class ProgressInputStream extends InputStream {
 		return bytesRead;
 	}
 
-	public void readAll(OutputStream os) throws IOException {
+	public void readAll(OutputStream outputStream) throws IOException {
 		byte[] buffer = new byte[_DEFAULT_INITIAL_BUFFER_SIZE];
 
 		int len = 0;
 
 		while ((len = read(buffer)) > 0) {
-			os.write(buffer, 0, len);
+			outputStream.write(buffer, 0, len);
 		}
 
-		os.close();
+		outputStream.close();
 	}
 
 	@Override
 	public void reset() throws IOException {
-		_is.reset();
+		_inputStream.reset();
 	}
 
 	@Override
 	public long skip(long n) throws IOException {
-		long result = _is.skip(n);
+		long result = _inputStream.skip(n);
 
 		_updateProgress(result);
 
@@ -172,7 +172,7 @@ public class ProgressInputStream extends InputStream {
 
 	private static Log _log = LogFactoryUtil.getLog(ProgressInputStream.class);
 
-	private InputStream _is;
+	private InputStream _inputStream;
 	private PortletSession _portletSession;
 	private String _progressId;
 	private long _totalRead;
