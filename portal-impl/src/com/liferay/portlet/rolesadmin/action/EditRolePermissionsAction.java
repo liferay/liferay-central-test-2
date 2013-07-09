@@ -141,7 +141,6 @@ public class EditRolePermissionsAction extends PortletAction {
 		ActionUtil.getRole(resourceRequest);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
-
 	}
 
 	protected void deletePermission(

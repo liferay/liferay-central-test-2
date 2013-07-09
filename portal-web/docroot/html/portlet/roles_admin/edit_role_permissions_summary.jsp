@@ -169,30 +169,27 @@ for (int i = 0; i < results.size(); i++) {
 	editPermissionsURL.setParameter("redirect", permissionsAllURL.toString());
 	editPermissionsURL.setParameter("portletResource", curPortletName);
 
-	StringBundler permissionsSb = new StringBundler();
+	StringBundler sb = new StringBundler();
 
-	permissionsSb.append("<a class=\"permission-navigation-link\" href=\"");
-	permissionsSb.append(editPermissionsURL);
-	permissionsSb.append(StringPool.POUND);
-	permissionsSb.append(_getResourceHtmlId(curResource));
-	permissionsSb.append("\">");
-	permissionsSb.append(curPortletLabel);
+	sb.append("<a class=\"permission-navigation-link\" href=\"");
+	sb.append(editPermissionsURL);
+	sb.append(StringPool.POUND);
+	sb.append(_getResourceHtmlId(curResource));
+	sb.append("\">");
+	sb.append(curPortletLabel);
 
 	if (Validator.isNotNull(curModelLabel)) {
-		permissionsSb.append(StringPool.SPACE);
-		permissionsSb.append(StringPool.GREATER_THAN);
-		permissionsSb.append(StringPool.SPACE);
-		permissionsSb.append(curModelLabel);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.SPACE);
+		sb.append(curModelLabel);
 	}
 
-	permissionsSb.append("</a>");
+	sb.append("</a>: <strong>");
+	sb.append(actionLabel);
+	sb.append("</strong>");
 
-	permissionsSb.append(": ");
-	permissionsSb.append("<strong>");
-	permissionsSb.append(actionLabel);
-	permissionsSb.append("</strong>");
-
-	row.addText(permissionsSb.toString());
+	row.addText(sb.toString());
 
 	if (scope == ResourceConstants.SCOPE_COMPANY) {
 		row.addText(LanguageUtil.get(pageContext, _isShowScope(role, curResource, curPortletName)? "all-sites" : StringPool.BLANK));
@@ -200,7 +197,7 @@ for (int i = 0; i < results.size(); i++) {
 	else if (scope == ResourceConstants.SCOPE_GROUP_TEMPLATE) {
 	}
 	else if (scope == ResourceConstants.SCOPE_GROUP) {
-		StringBundler sb = new StringBundler(groups.size() * 3 - 2);
+		sb = new StringBundler(groups.size() * 3 - 2);
 
 		for (int j = 0; j < groups.size(); j++) {
 			Group group = (Group)groups.get(j);
