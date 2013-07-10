@@ -90,7 +90,7 @@ public class JournalArticleIndexableTest {
 
 	@Test
 	public void testJournalArticleWithClassNameDDMStructureIsUnindexable()
-			throws Exception {
+		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
 
