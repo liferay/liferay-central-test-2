@@ -89,35 +89,6 @@ public class JournalArticleStagedModelDataHandlerTest
 		validateCompanyDependenciesImport(dependentStagedModelsMap, liveGroup);
 	}
 
-	@Override
-	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
-			Group group)
-		throws Exception {
-
-		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			new HashMap<String, List<StagedModel>>();
-
-		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-			group.getGroupId(), JournalArticle.class.getName());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
-
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
-			group.getGroupId(), ddmStructure.getStructureId());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
-
-		JournalFolder folder = JournalTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, JournalFolder.class, folder);
-
-		return dependentStagedModelsMap;
-	}
-
 	protected Map<String, List<StagedModel>> addCompanyDependencies()
 		throws Exception {
 
@@ -143,6 +114,35 @@ public class JournalArticleStagedModelDataHandlerTest
 
 		JournalFolder folder = JournalTestUtil.addFolder(
 			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, JournalFolder.class, folder);
+
+		return dependentStagedModelsMap;
+	}
+
+	@Override
+	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
+			Group group)
+		throws Exception {
+
+		Map<String, List<StagedModel>> dependentStagedModelsMap =
+			new HashMap<String, List<StagedModel>>();
+
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+			group.getGroupId(), JournalArticle.class.getName());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
+
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
+			group.getGroupId(), ddmStructure.getStructureId());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
+
+		JournalFolder folder = JournalTestUtil.addFolder(
+			group.getGroupId(), ServiceTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, JournalFolder.class, folder);

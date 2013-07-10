@@ -123,35 +123,6 @@ public class FolderStagedModelDataHandlerTest
 			importedRepository.getRepositoryId());
 	}
 
-	@Override
-	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
-			Group group)
-		throws Exception {
-
-		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			new HashMap<String, List<StagedModel>>();
-
-		Folder folder = DLAppTestUtil.addFolder(
-			group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString());
-
-		addDependentStagedModel(dependentStagedModelsMap, Folder.class, folder);
-
-		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-			group.getGroupId(), DLFileEntryType.class.getName());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
-
-		DLFileEntryType dlFileEntryType = DLAppTestUtil.addDLFileEntryType(
-			group.getGroupId(), ddmStructure.getStructureId());
-
-		addDependentStagedModel(
-			dependentStagedModelsMap, DLFileEntryType.class, dlFileEntryType);
-
-		return dependentStagedModelsMap;
-	}
-
 	protected Map<String, List<StagedModel>> addCompanyDependencies()
 		throws Exception {
 
@@ -181,6 +152,35 @@ public class FolderStagedModelDataHandlerTest
 			ServiceTestUtil.randomString());
 
 		addDependentStagedModel(dependentStagedModelsMap, Folder.class, folder);
+
+		return dependentStagedModelsMap;
+	}
+
+	@Override
+	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
+			Group group)
+		throws Exception {
+
+		Map<String, List<StagedModel>> dependentStagedModelsMap =
+			new HashMap<String, List<StagedModel>>();
+
+		Folder folder = DLAppTestUtil.addFolder(
+			group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			ServiceTestUtil.randomString());
+
+		addDependentStagedModel(dependentStagedModelsMap, Folder.class, folder);
+
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+			group.getGroupId(), DLFileEntryType.class.getName());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, DDMStructure.class, ddmStructure);
+
+		DLFileEntryType dlFileEntryType = DLAppTestUtil.addDLFileEntryType(
+			group.getGroupId(), ddmStructure.getStructureId());
+
+		addDependentStagedModel(
+			dependentStagedModelsMap, DLFileEntryType.class, dlFileEntryType);
 
 		return dependentStagedModelsMap;
 	}
