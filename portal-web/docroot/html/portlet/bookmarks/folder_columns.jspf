@@ -19,16 +19,15 @@ List subfolderIds = new ArrayList();
 
 subfolderIds.add(new Long(curFolder.getFolderId()));
 
-boolean numEntriesColumn = ArrayUtil.contains(folderColumns, "num-of-entries");
-
-if (numEntriesColumn || ArrayUtil.contains(folderColumns, "num-of-folders")) {
+if (ArrayUtil.contains(folderColumns, "num-of-entries") || ArrayUtil.contains(folderColumns, "num-of-folders")) {
 	BookmarksFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 }
 
 int curFoldersCount = subfolderIds.size() - 1;
+
 int curEntriesCount = 0;
 
-if (numEntriesColumn) {
+if (ArrayUtil.contains(folderColumns, "num-of-entries")) {
 	curEntriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 }
 
@@ -76,7 +75,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 					buffer.append(curFolder.getDescription());
 				}
 
-				buffer.append("</a>");				
+				buffer.append("</a>");
 
 				if (showSubfolders) {
 					List subfolders = BookmarksFolderServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
