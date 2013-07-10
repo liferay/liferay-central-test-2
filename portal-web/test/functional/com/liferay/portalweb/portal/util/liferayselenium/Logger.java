@@ -106,7 +106,7 @@ public class Logger {
 			}
 		}
 
-		sb.append(" - ");
+		sb.append(": ");
 		sb.append(message);
 
 		log(sb.toString());
@@ -132,7 +132,7 @@ public class Logger {
 			}
 		}
 
-		sb.append(" - ");
+		sb.append(": ");
 		sb.append(message);
 
 		BaseTestCase.fail(sb.toString());
