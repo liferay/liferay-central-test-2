@@ -617,7 +617,7 @@ public class JournalArticleStagedModelDataHandler
 					smallFile, images, articleURL, serviceContext);
 			}
 			else {
-				if (portletDataContext.isStagedGroupedModelGlobal(
+				if (portletDataContext.isCompanyStagedGroupedModel(
 						existingArticle)) {
 
 					return;

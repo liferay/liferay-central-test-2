@@ -782,7 +782,7 @@ public class PortletImporter {
 					parentAssetCategoryId, assetCategory.getName(),
 					assetCategory.getVocabularyId(), 2);
 
-				if (portletDataContext.isStagedGroupedModelGlobal(
+				if (portletDataContext.isCompanyStagedGroupedModel(
 						existingAssetCategory)) {
 
 					return;
@@ -938,7 +938,7 @@ public class PortletImporter {
 				assetVocabulary.getUuid(), groupId, assetVocabulary.getName(),
 				2);
 
-			if (portletDataContext.isStagedGroupedModelGlobal(
+			if (portletDataContext.isCompanyStagedGroupedModel(
 					existingAssetVocabulary)) {
 
 				return;

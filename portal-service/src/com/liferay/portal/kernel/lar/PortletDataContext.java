@@ -423,7 +423,7 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean isPrivateLayout();
 
-	public boolean isStagedGroupedModelGlobal(
+	public boolean isCompanyStagedGroupedModel(
 		StagedGroupedModel stagedGroupedModel);
 
 	public boolean isWithinDateRange(Date modifiedDate);

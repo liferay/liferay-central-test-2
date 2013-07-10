@@ -1678,7 +1678,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _privateLayout;
 	}
 
-	public boolean isStagedGroupedModelGlobal(
+	@Override
+	public boolean isCompanyStagedGroupedModel(
 		StagedGroupedModel stagedGroupedModel) {
 
 		if ((stagedGroupedModel.getGroupId() == getCompanyGroupId()) &&

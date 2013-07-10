@@ -134,7 +134,7 @@ public class DLFileEntryTypeStagedModelDataHandler
 						serviceContext);
 			}
 			else {
-				if (portletDataContext.isStagedGroupedModelGlobal(
+				if (portletDataContext.isCompanyStagedGroupedModel(
 						existingDLFileEntryType)) {
 
 					return;
