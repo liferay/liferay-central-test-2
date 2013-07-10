@@ -31,8 +31,8 @@ int maxTerms = dataJSONObject.getInt("maxTerms");
 boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 %>
 
-<div class="<%= cssClass %>" data-facetFieldName="<%= fieldId %>" id="<%= randomNamespace %>facet">
-	<aui:input name="<%= fieldId %>" type="hidden" value="<%= fieldParam %>" />
+<div class="<%= cssClass %>" data-facetFieldName="<%= facet.getFieldId() %>" id="<%= randomNamespace %>facet">
+	<aui:input name="<%= facet.getFieldId() %>" type="hidden" value="<%= fieldParam %>" />
 
 	<ul class="scopes unstyled">
 		<li class="facet-value default <%= fieldParam.equals("0") ? "current-term" : StringPool.BLANK %>">
@@ -54,7 +54,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 				<aui:script use="liferay-token-list">
 					Liferay.Search.tokenList.add(
 						{
-							fieldValues: '<%= renderResponse.getNamespace() + fieldId + "|0" %>',
+							fieldValues: '<%= renderResponse.getNamespace() + facet.getFieldId() + "|0" %>',
 							text: '<%= HtmlUtil.escapeJS(group.getDescriptiveName(locale)) %>'
 						}
 					);

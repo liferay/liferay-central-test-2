@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/search/facets/init.jsp" %>
 
 <%
-String fieldParamFrom = ParamUtil.getString(request, fieldId + "from");
-String fieldParamTo = ParamUtil.getString(request, fieldId + "to");
+String fieldParamFrom = ParamUtil.getString(request, facet.getFieldId() + "from");
+String fieldParamTo = ParamUtil.getString(request, facet.getFieldId() + "to");
 
 String dateString = StringPool.BLANK;
 
@@ -62,19 +62,19 @@ if (Validator.isNotNull(fieldParam)) {
 	<aui:script use="liferay-token-list">
 		Liferay.Search.tokenList.add(
 			{
-				clearFields: '<%= renderResponse.getNamespace() + fieldId %>',
+				clearFields: '<%= renderResponse.getNamespace() + facet.getFieldId() %>',
 				html: '<%= UnicodeLanguageUtil.format(pageContext, "from-x-to-x", new Object[] {"<strong>" + HtmlUtil.escape(fieldParamFrom) + "</strong>", "<strong>" + HtmlUtil.escape(fieldParamTo) + "</strong>"}) %>'
 			}
 		);
 	</aui:script>
 </c:if>
 
-<div class="<%= cssClass %>" data-facetFieldName="<%= fieldId %>" id="<%= randomNamespace %>facet">
-	<aui:input name="<%= fieldId %>" type="hidden" value="<%= fieldParam %>" />
-	<aui:input name='<%= fieldId + "from" %>' type="hidden" />
-	<aui:input name='<%= fieldId + "to" %>' type="hidden" />
+<div class="<%= cssClass %>" data-facetFieldName="<%= facet.getFieldId() %>" id="<%= randomNamespace %>facet">
+	<aui:input name="<%= facet.getFieldId() %>" type="hidden" value="<%= fieldParam %>" />
+	<aui:input name='<%= facet.getFieldId() + "from" %>' type="hidden" />
+	<aui:input name='<%= facet.getFieldId() + "to" %>' type="hidden" />
 
-	<div class="date" id="<portlet:namespace /><%= fieldId %>PlaceHolder"></div>
+	<div class="date" id="<portlet:namespace /><%= facet.getFieldId() %>PlaceHolder"></div>
 </div>
 
 <aui:script use="aui-calendar-deprecated">
@@ -117,10 +117,10 @@ if (Validator.isNotNull(fieldParam)) {
 					var dates = instance.get('dates');
 
 					if (dates.length == 0) {
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>.value = null;
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>.value = null;
 
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>from.value = null;
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>to.value = null;
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>from.value = null;
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>to.value = null;
 					}
 					else {
 						var firstSelected = dates[0];
@@ -150,14 +150,14 @@ if (Validator.isNotNull(fieldParam)) {
 							}
 						);
 
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>.value = '[' + fromDate + ' TO ' + toDate + ']';
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>.value = '[' + fromDate + ' TO ' + toDate + ']';
 
 						var displayFormat = {
 							format: '%Y-%m-%d'
 						};
 
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>from.value = A.DataType.Date.format(firstSelected, displayFormat);
-						document.<portlet:namespace />fm.<portlet:namespace /><%= fieldId %>to.value = A.DataType.Date.format(lastSelected, displayFormat);
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>from.value = A.DataType.Date.format(firstSelected, displayFormat);
+						document.<portlet:namespace />fm.<portlet:namespace /><%= facet.getFieldId() %>to.value = A.DataType.Date.format(lastSelected, displayFormat);
 					}
 
 					checkDateRange.call(instance, event);
@@ -183,5 +183,5 @@ if (Validator.isNotNull(fieldParam)) {
 				today: '<liferay-ui:message key="today" />'
 			}
 		}
-	).render('#<portlet:namespace /><%= fieldId %>PlaceHolder');
+	).render('#<portlet:namespace /><%= facet.getFieldId() %>PlaceHolder');
 </aui:script>
