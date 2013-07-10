@@ -164,21 +164,21 @@ public class ClassLoaderPoolTest {
 	}
 
 	@Test
-	public void testUnregisterByInvalidClassLoader() {
+	public void testUnregisterWithInvalidClassLoader() {
 		ClassLoaderPool.unregister(new URLClassLoader(new URL[0]));
 
 		assertEmptyMaps();
 	}
 
 	@Test
-	public void testUnregisterByInvalidContextName() {
+	public void testUnregisterWithInvalidContextName() {
 		ClassLoaderPool.unregister(_CONTEXT_NAME);
 
 		assertEmptyMaps();
 	}
 
 	@Test
-	public void testUnregisterByValidClassLoader() {
+	public void testUnregisterWithValidClassLoader() {
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
 		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
@@ -189,7 +189,7 @@ public class ClassLoaderPoolTest {
 	}
 
 	@Test
-	public void testUnregisterByValidContextName() {
+	public void testUnregisterWithValidContextName() {
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
 		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
