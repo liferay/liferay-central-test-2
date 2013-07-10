@@ -110,7 +110,7 @@ public class JournalArticleIndexableTest {
 
 		int total = hits.getLength();
 
-		JournalArticle article = JournalTestUtil.addArticle(
+		JournalTestUtil.addArticle(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			PortalUtil.getClassNameId(DDMStructure.class),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
