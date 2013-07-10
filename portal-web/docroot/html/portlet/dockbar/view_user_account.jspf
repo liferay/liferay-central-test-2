@@ -90,7 +90,7 @@ if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 						%>
 
 							<c:if test="<%= (mySiteGroup.getPublicLayoutsPageCount() > 0) %>">
-								
+
 								<%
 								PortletURL myProfileURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
 
@@ -102,14 +102,13 @@ if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 								myProfileURL.setParameter("privateLayout", Boolean.FALSE.toString());
 								%>
 
-								<li class="my-sites-menu public-site"> 
-									<a href="<%= myProfileURL.toString() %>"> 
-										<span class="site-name"><liferay-ui:message key="my-profile" /></span> 
-										<span class="badge site-type"><liferay-ui:message key="public" /></span> 
-									</a> 
+								<li class="my-sites-menu public-site">
+									<a href="<%= myProfileURL.toString() %>">
+										<span class="site-name"><liferay-ui:message key="my-profile" /></span>
+										<span class="badge site-type"><liferay-ui:message key="public" /></span>
+									</a>
 								</li>
 							</c:if>
-
 
 							<c:if test="<%= (mySiteGroup.getPrivateLayoutsPageCount() > 0) %>">
 
@@ -124,16 +123,17 @@ if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 								myDashboardURL.setParameter("privateLayout", Boolean.TRUE.toString());
 								%>
 
-								<li class="my-sites-menu private-site"> 
-									<a href="<%= myDashboardURL %>"> 
-										<span class="site-name"><liferay-ui:message key="my-dashboard" /></span> 
-										<span class="badge site-type"><liferay-ui:message key="private" /></span> 
-									</a> 
+								<li class="my-sites-menu private-site">
+									<a href="<%= myDashboardURL %>">
+										<span class="site-name"><liferay-ui:message key="my-dashboard" /></span>
+										<span class="badge site-type"><liferay-ui:message key="private" /></span>
+									</a>
 								</li>
 							</c:if>
+
 						<%
 						}
-						%>				
+						%>
 
 						<%
 						String myAccountURL = themeDisplay.getURLMyAccount().toString();

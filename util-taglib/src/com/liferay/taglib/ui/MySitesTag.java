@@ -54,8 +54,7 @@ public class MySitesTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute(
-			"liferay-ui:my_sites:classNames", _classNames);
+		request.setAttribute("liferay-ui:my_sites:classNames", _classNames);
 		request.setAttribute(
 			"liferay-ui:my_sites:cssClass", String.valueOf(_cssClass));
 		request.setAttribute(
