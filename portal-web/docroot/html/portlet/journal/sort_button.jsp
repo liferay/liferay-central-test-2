@@ -17,10 +17,11 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-String structureId = ParamUtil.getString(request, "structureId");
 String navigation = ParamUtil.getString(request, "navigation", "home");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
+
+String structureId = ParamUtil.getString(request, "structureId");
 
 String orderByType = ParamUtil.getString(request, "orderByType");
 
