@@ -107,7 +107,7 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	@Override
 	public String handleException(BackgroundTask backgroundTask, Exception e) {
-		JSONObject jsonObject = StagingUtil.getExceptionMessagesJSONArray(
+		JSONObject jsonObject = StagingUtil.getExceptionMessagesJSONObject(
 			getLocale(backgroundTask), e, backgroundTask.getTaskContextMap());
 
 		return jsonObject.toString();
