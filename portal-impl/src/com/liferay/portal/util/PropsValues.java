@@ -678,7 +678,7 @@ public class PropsValues {
 
 	public static final String EHCACHE_CACHE_MANAGER_PEER_PROVIDER_FACTORY = PropsUtil.get(PropsKeys.EHCACHE_CACHE_MANAGER_PEER_PROVIDER_FACTORY);
 
-	public static final int EHCACHE_CACHE_MANAGER_STATISTICS_THREADPOOL_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.EHCACHE_CACHE_MANAGER_STATISTICS_THREADPOOL_SIZE));
+	public static final int EHCACHE_CACHE_MANAGER_STATISTICS_THREAD_POOL_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.EHCACHE_CACHE_MANAGER_STATISTICS_THREAD_POOL_SIZE));
 
 	public static final boolean EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED));
 

@@ -38,7 +38,7 @@ public class CacheManagerUtil {
 					cacheManager);
 
 			scheduledThreadPoolExecutor.setCorePoolSize(
-				PropsValues.EHCACHE_CACHE_MANAGER_STATISTICS_THREADPOOL_SIZE);
+				PropsValues.EHCACHE_CACHE_MANAGER_STATISTICS_THREAD_POOL_SIZE);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
