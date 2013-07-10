@@ -37,8 +37,8 @@ public class RuntimeChecker extends BaseChecker {
 	@Override
 	public void afterPropertiesSet() {
 		initCreateClassLoader();
-		initGetProtectionDomain();
 		initEnvironmentVariables();
+		initGetProtectionDomain();
 	}
 
 	@Override
@@ -63,11 +63,6 @@ public class RuntimeChecker extends BaseChecker {
 
 			value = "true";
 		}
-		else if (name.startsWith(RUNTIME_PERMISSION_GET_PROTECTION_DOMAIN)) {
-			key = "security-manager-get-protection-domain";
-
-			value = "true";
-		}
 		else if (name.startsWith(RUNTIME_PERMISSION_GET_ENV)) {
 			key = "security-manager-environment-variables";
 
@@ -79,6 +74,11 @@ public class RuntimeChecker extends BaseChecker {
 			if (value.equals(StringPool.STAR)) {
 				value = StringPool.DOUBLE_BACK_SLASH + value;
 			}
+		}
+		else if (name.startsWith(RUNTIME_PERMISSION_GET_PROTECTION_DOMAIN)) {
+			key = "security-manager-get-protection-domain";
+
+			value = "true";
 		}
 		else {
 			return null;
