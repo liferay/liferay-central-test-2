@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -48,10 +47,8 @@ public class SimpleFacet extends BaseFacet {
 			value = dataJSONObject.getString("value");
 		}
 
-		String fieldId = StringUtil.replace(getFieldName(), "/", "_");
-
 		String valueParam = GetterUtil.getString(
-			searchContext.getAttribute(fieldId));
+			searchContext.getAttribute(getFieldId()));
 
 		if (!isStatic() && Validator.isNotNull(valueParam)) {
 			value = valueParam;

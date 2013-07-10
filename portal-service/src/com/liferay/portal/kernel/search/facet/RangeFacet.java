@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.search.facet.util.RangeParserUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -62,12 +61,8 @@ public class RangeFacet extends BaseFacet {
 			end = range[1];
 		}
 
-		String fieldName = getFieldName();
-
-		String fieldId = StringUtil.replace(fieldName, "/", "_");
-
 		String rangeParam = GetterUtil.getString(
-			searchContext.getAttribute(fieldId));
+			searchContext.getAttribute(getFieldId()));
 
 		if (!isStatic() && Validator.isNotNull(rangeParam)) {
 			String[] range = RangeParserUtil.parserRange(rangeParam);
@@ -100,7 +95,7 @@ public class RangeFacet extends BaseFacet {
 		}
 
 		TermRangeQuery facetTermRangeQuery = TermRangeQueryFactoryUtil.create(
-			searchContext, fieldName, startString, endString, true, true);
+			searchContext, getFieldName(), startString, endString, true, true);
 
 		return BooleanClauseFactoryUtil.create(
 			searchContext, facetTermRangeQuery,
