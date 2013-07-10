@@ -92,13 +92,13 @@ public class JournalArticleStagedModelDataHandlerTest
 	protected Map<String, List<StagedModel>> addCompanyDependencies()
 		throws Exception {
 
+		Map<String, List<StagedModel>> dependentStagedModelsMap =
+			new HashMap<String, List<StagedModel>>();
+
 		Company company = CompanyLocalServiceUtil.fetchCompany(
 			stagingGroup.getCompanyId());
 
 		Group companyGroup = company.getGroup();
-
-		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			new HashMap<String, List<StagedModel>>();
 
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			companyGroup.getGroupId(), JournalArticle.class.getName());
@@ -236,7 +236,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			(DDMStructure)ddmStructureDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Company dependency should not be imported",
+			"Company DDM structure dependency should not be imported",
 			DDMStructureLocalServiceUtil.fetchDDMStructureByUuidAndGroupId(
 				ddmStructure.getUuid(), group.getGroupId()));
 
@@ -249,7 +249,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			(DDMTemplate)ddmTemplateDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Company dependency should not be imported",
+			"Company DDM template dependency should not be imported",
 			DDMTemplateLocalServiceUtil.fetchDDMTemplateByUuidAndGroupId(
 				ddmTemplate.getUuid(), group.getGroupId()));
 
