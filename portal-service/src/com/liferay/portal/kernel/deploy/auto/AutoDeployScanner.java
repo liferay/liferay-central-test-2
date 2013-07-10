@@ -59,8 +59,7 @@ public class AutoDeployScanner extends Thread {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to finish scanning auto deploy directory", e);
+					_log.warn("Unable to scan the auto deploy directory", e);
 				}
 			}
 		}
