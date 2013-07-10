@@ -2251,9 +2251,9 @@ public interface PropsKeys {
 
 	public static final String SOCIAL_ACTIVITY_PARTICIPATION_LIMIT_VALUES = "social.activity.participation.limit.values";
 
-	public static final String SOCIAL_ACTIVITY_SETS_ENABLED = "social.activity.sets.enabled";
+	public static final String SOCIAL_ACTIVITY_SETS_BUNDLING_ENABLED = "social.activity.sets.bundling.enabled";
 
-	public static final String SOCIAL_ACTIVITY_SETS_GROUPING_ENABLED = "social.activity.sets.grouping.enabled";
+	public static final String SOCIAL_ACTIVITY_SETS_ENABLED = "social.activity.sets.enabled";
 
 	public static final String SOCIAL_ACTIVITY_SETS_SELECTOR = "social.activity.sets.selector";
 
