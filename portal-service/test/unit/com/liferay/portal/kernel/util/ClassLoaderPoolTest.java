@@ -56,16 +56,13 @@ public class ClassLoaderPoolTest {
 		_contextNames = (Map<ClassLoader, String>)contextNamesField.get(null);
 
 		_contextNames.clear();
-
 	}
 
 	@Test
 	public void testGetClassLoaderWithInvalidContextName() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Class<?> clazz = getClass();
 
@@ -76,11 +73,9 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testGetClassLoaderWithInvalidContextNamePortalContextNotSet() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		PortalClassLoaderUtil.setClassLoader(null);
 
@@ -95,23 +90,19 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testGetClassLoaderWithValidContextName() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Assert.assertSame(
-			classLoader, ClassLoaderPool.getClassLoader(contextName));
+			classLoader, ClassLoaderPool.getClassLoader(_CONTEXT_NAME));
 	}
 
 	@Test
 	public void testGetContextNameWithInvalidClassLoader() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Assert.assertEquals(
 			StringPool.BLANK,
@@ -120,11 +111,9 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testGetContextNameWithNullClassLoader() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Assert.assertEquals(
 			StringPool.BLANK, ClassLoaderPool.getContextName(null));
@@ -132,28 +121,24 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testGetContextNameWithValidClassLoader() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Assert.assertEquals(
-			contextName, ClassLoaderPool.getContextName(classLoader));
+			_CONTEXT_NAME, ClassLoaderPool.getContextName(classLoader));
 	}
 
 	@Test
 	public void testRegister() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		Assert.assertEquals(1, _contextNames.size());
 		Assert.assertEquals(1, _classLoaders.size());
-		Assert.assertSame(classLoader, _classLoaders.get(contextName));
-		Assert.assertEquals(contextName, _contextNames.get(classLoader));
+		Assert.assertSame(classLoader, _classLoaders.get(_CONTEXT_NAME));
+		Assert.assertEquals(_CONTEXT_NAME, _contextNames.get(classLoader));
 	}
 
 	@Test
@@ -187,18 +172,16 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testUnregisterByInvalidContextName() {
-		ClassLoaderPool.unregister("contextName");
+		ClassLoaderPool.unregister(_CONTEXT_NAME);
 
 		assertEmptyMaps();
 	}
 
 	@Test
 	public void testUnregisterByValidClassLoader() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
 		ClassLoaderPool.unregister(classLoader);
 
@@ -207,13 +190,11 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testUnregisterByValidContextName() {
-		String contextName = "contextName";
-
 		ClassLoader classLoader = new URLClassLoader(new URL[0]);
 
-		ClassLoaderPool.register(contextName, classLoader);
+		ClassLoaderPool.register(_CONTEXT_NAME, classLoader);
 
-		ClassLoaderPool.unregister(contextName);
+		ClassLoaderPool.unregister(_CONTEXT_NAME);
 
 		assertEmptyMaps();
 	}
@@ -222,6 +203,8 @@ public class ClassLoaderPoolTest {
 		Assert.assertTrue(_contextNames.isEmpty());
 		Assert.assertTrue(_classLoaders.isEmpty());
 	}
+
+	private static final String _CONTEXT_NAME = "contextName";
 
 	private static Map<String, ClassLoader> _classLoaders;
 	private static Map<ClassLoader, String> _contextNames;
