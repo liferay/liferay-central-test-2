@@ -62,7 +62,7 @@ public class FolderStagedModelDataHandlerTest
 
 	@Test
 	@Transactional
-	public void testWithCompanyScopeDependencies() throws Exception {
+	public void testCompanyScopeDependencies() throws Exception {
 		initExport();
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
@@ -88,7 +88,7 @@ public class FolderStagedModelDataHandlerTest
 
 	@Test
 	@Transactional
-	public void testWithRepository() throws Exception {
+	public void testRepository() throws Exception {
 		initExport();
 
 		Map<String, List<StagedModel>> dependentStagedModelMap =

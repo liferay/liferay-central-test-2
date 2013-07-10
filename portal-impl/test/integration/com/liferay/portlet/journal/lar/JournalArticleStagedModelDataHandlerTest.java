@@ -65,7 +65,7 @@ public class JournalArticleStagedModelDataHandlerTest
 
 	@Test
 	@Transactional
-	public void testWithCompanyScopeDependencies() throws Exception {
+	public void testCompanyScopeDependencies() throws Exception {
 		initExport();
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
