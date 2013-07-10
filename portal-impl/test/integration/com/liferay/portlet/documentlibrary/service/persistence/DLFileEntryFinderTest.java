@@ -96,8 +96,8 @@ public class DLFileEntryFinderTest {
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			user.getUserId(), _group.getGroupId(), _folder.getFolderId(),
 			"FE1.txt", ContentTypes.TEXT_PLAIN, "FE1.txt", null,
-			WorkflowConstants.ACTION_PUBLISH,
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT,
+			WorkflowConstants.ACTION_PUBLISH);
 
 		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
 

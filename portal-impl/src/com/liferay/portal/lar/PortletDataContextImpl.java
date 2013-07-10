@@ -1621,6 +1621,19 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	@Override
+	public boolean isCompanyStagedGroupedModel(
+		StagedGroupedModel stagedGroupedModel) {
+
+		if ((stagedGroupedModel.getGroupId() == getCompanyGroupId()) &&
+			(getGroupId() != getCompanyGroupId())) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public boolean isDataStrategyMirror() {
 		if (_dataStrategy.equals(PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 			_dataStrategy.equals(
@@ -1676,19 +1689,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Override
 	public boolean isPrivateLayout() {
 		return _privateLayout;
-	}
-
-	@Override
-	public boolean isCompanyStagedGroupedModel(
-		StagedGroupedModel stagedGroupedModel) {
-
-		if ((stagedGroupedModel.getGroupId() == getCompanyGroupId()) &&
-			(getGroupId() != getCompanyGroupId())) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	/**

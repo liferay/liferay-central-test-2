@@ -300,8 +300,8 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 				dynamicQuery.add(
 					property.in(
 						new Long[] {
-							portletDataContext.getScopeGroupId(),
-							portletDataContext.getCompanyGroupId()
+							portletDataContext.getCompanyGroupId(),
+							portletDataContext.getScopeGroupId()
 						}));
 			}
 

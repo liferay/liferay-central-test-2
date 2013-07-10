@@ -407,6 +407,9 @@ public interface PortletDataContext extends Serializable {
 			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
+	public boolean isCompanyStagedGroupedModel(
+		StagedGroupedModel stagedGroupedModel);
+
 	public boolean isDataStrategyMirror();
 
 	public boolean isDataStrategyMirrorWithOverwriting();
@@ -422,9 +425,6 @@ public interface PortletDataContext extends Serializable {
 	public boolean isPerformDirectBinaryImport();
 
 	public boolean isPrivateLayout();
-
-	public boolean isCompanyStagedGroupedModel(
-		StagedGroupedModel stagedGroupedModel);
 
 	public boolean isWithinDateRange(Date modifiedDate);
 

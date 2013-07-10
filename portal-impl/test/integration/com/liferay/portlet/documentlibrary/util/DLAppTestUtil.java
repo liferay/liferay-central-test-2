@@ -129,8 +129,8 @@ public abstract class DLAppTestUtil {
 
 	public static FileEntry addFileEntry(
 			long userId, long groupId, long folderId, String sourceFileName,
-			String mimeType, String title, byte[] bytes, int workflowAction,
-			long fileEntryTypeId)
+			String mimeType, String title, byte[] bytes, long fileEntryTypeId,
+			int workflowAction)
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
@@ -177,7 +177,7 @@ public abstract class DLAppTestUtil {
 		return addFileEntry(
 			TestPropsValues.getUserId(), groupId, folderId, sourceFileName,
 			ContentTypes.TEXT_PLAIN, sourceFileName, null,
-			WorkflowConstants.ACTION_PUBLISH, fileEntryTypeId);
+			fileEntryTypeId, WorkflowConstants.ACTION_PUBLISH);
 	}
 
 	public static FileEntry addFileEntry(
@@ -245,7 +245,7 @@ public abstract class DLAppTestUtil {
 
 		return addFileEntry(
 			TestPropsValues.getUserId(), groupId, folderId, sourceFileName,
-			mimeType, title, bytes, workflowAction, fileEntryTypeId);
+			mimeType, title, bytes, fileEntryTypeId, workflowAction);
 	}
 
 	public static FileEntry addFileEntry(

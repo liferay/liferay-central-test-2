@@ -232,8 +232,8 @@ public class FolderStagedModelDataHandler
 		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(
 				new long[] {
-					portletDataContext.getScopeGroupId(),
-					portletDataContext.getCompanyGroupId()
+					portletDataContext.getCompanyGroupId(),
+					portletDataContext.getScopeGroupId()
 				},
 				folder.getFolderId(), false);
 
@@ -306,6 +306,10 @@ public class FolderStagedModelDataHandler
 
 		List<Long> currentFolderFileEntryTypeIds = new ArrayList<Long>();
 
+		Map<Long, Long> fileEntryTypeIds =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				DLFileEntryType.class);
+
 		String defaultFileEntryTypeUuid = GetterUtil.getString(
 			folderElement.attributeValue("defaultFileEntryTypeUuid"));
 
@@ -314,10 +318,6 @@ public class FolderStagedModelDataHandler
 		List<Element> referenceDataElements =
 			portletDataContext.getReferenceDataElements(
 				folderElement, DLFileEntryType.class);
-
-		Map<Long, Long> fileEntryTypeIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntryType.class);
 
 		for (Element referenceDataElement : referenceDataElements) {
 			String referencePath = referenceDataElement.attributeValue("path");

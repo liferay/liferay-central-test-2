@@ -61,11 +61,11 @@ public class FileEntryStagedModelDataHandlerTest
 
 	@Test
 	@Transactional
-	public void testWithGlobalScopeDependencies() throws Exception {
+	public void testWithCompanyScopeDependencies() throws Exception {
 		initExport();
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			addGlobalDependencies();
+			addCompanyDependencies();
 
 		StagedModel stagedModel = addStagedModel(
 			stagingGroup, dependentStagedModelsMap);
@@ -82,7 +82,7 @@ public class FileEntryStagedModelDataHandlerTest
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, exportedStagedModel);
 
-		validateGlobalDependenciesImport(dependentStagedModelsMap, liveGroup);
+		validateCompanyDependenciesImport(dependentStagedModelsMap, liveGroup);
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class FileEntryStagedModelDataHandlerTest
 		return dependentStagedModelsMap;
 	}
 
-	protected Map<String, List<StagedModel>> addGlobalDependencies()
+	protected Map<String, List<StagedModel>> addCompanyDependencies()
 		throws Exception {
 
 		Company company = CompanyLocalServiceUtil.fetchCompany(
@@ -204,7 +204,7 @@ public class FileEntryStagedModelDataHandlerTest
 		return super.getStagedModelPath(groupId, stagedModel);
 	}
 
-	protected void validateGlobalDependenciesImport(
+	protected void validateCompanyDependenciesImport(
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
 		throws Exception {
@@ -218,7 +218,7 @@ public class FileEntryStagedModelDataHandlerTest
 			(DDMStructure)ddmStructureDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Global dependency should not be imported",
+			"Company dependency should not be imported",
 			DDMStructureLocalServiceUtil.fetchDDMStructureByUuidAndGroupId(
 				structure.getUuid(), group.getGroupId()));
 
@@ -231,7 +231,7 @@ public class FileEntryStagedModelDataHandlerTest
 			(DLFileEntryType)dlFileEntryTypesDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Global dependency should not be imported",
+			"Company dependency should not be imported",
 			DLFileEntryTypeLocalServiceUtil.
 				fetchDLFileEntryTypeByUuidAndGroupId(
 					dlFileEntryType.getUuid(), group.getGroupId()));

@@ -65,11 +65,11 @@ public class JournalArticleStagedModelDataHandlerTest
 
 	@Test
 	@Transactional
-	public void testWithGlobalScopeDependencies() throws Exception {
+	public void testWithCompanyScopeDependencies() throws Exception {
 		initExport();
 
 		Map<String, List<StagedModel>> dependentStagedModelsMap =
-			addGlobalDependencies();
+			addCompanyDependencies();
 
 		StagedModel stagedModel = addStagedModel(
 			stagingGroup, dependentStagedModelsMap);
@@ -86,7 +86,7 @@ public class JournalArticleStagedModelDataHandlerTest
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, exportedStagedModel);
 
-		validateGlobalDependenciesImport(dependentStagedModelsMap, liveGroup);
+		validateCompanyDependenciesImport(dependentStagedModelsMap, liveGroup);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class JournalArticleStagedModelDataHandlerTest
 		return dependentStagedModelsMap;
 	}
 
-	protected Map<String, List<StagedModel>> addGlobalDependencies()
+	protected Map<String, List<StagedModel>> addCompanyDependencies()
 		throws Exception {
 
 		Company company = CompanyLocalServiceUtil.fetchCompany(
@@ -222,7 +222,7 @@ public class JournalArticleStagedModelDataHandlerTest
 		return JournalArticle.class;
 	}
 
-	protected void validateGlobalDependenciesImport(
+	protected void validateCompanyDependenciesImport(
 			Map<String, List<StagedModel>> dependentStagedModelsMap,
 			Group group)
 		throws Exception {
@@ -236,7 +236,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			(DDMStructure)ddmStructureDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Global dependency should not be imported",
+			"Company dependency should not be imported",
 			DDMStructureLocalServiceUtil.fetchDDMStructureByUuidAndGroupId(
 				ddmStructure.getUuid(), group.getGroupId()));
 
@@ -249,7 +249,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			(DDMTemplate)ddmTemplateDependentStagedModels.get(0);
 
 		Assert.assertNull(
-			"Global dependency should not be imported",
+			"Company dependency should not be imported",
 			DDMTemplateLocalServiceUtil.fetchDDMTemplateByUuidAndGroupId(
 				ddmTemplate.getUuid(), group.getGroupId()));
 
