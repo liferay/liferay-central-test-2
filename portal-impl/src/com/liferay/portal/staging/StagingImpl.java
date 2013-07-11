@@ -1828,12 +1828,16 @@ public class StagingImpl implements Staging {
 			ServiceContext serviceContext)
 		throws SystemException {
 
+		String masterBranchDescription =
+			LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PUBLIC;
+
+		if (privateLayout) {
+			masterBranchDescription =
+				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PRIVATE;
+		}
+
 		String description = LanguageUtil.format(
-			LocaleUtil.getDefault(),
-			privateLayout ?
-				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PRIVATE :
-				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PUBLIC,
-			groupName);
+			LocaleUtil.getDefault(), masterBranchDescription, groupName);
 
 		try {
 			LayoutSetBranch layoutSetBranch =
