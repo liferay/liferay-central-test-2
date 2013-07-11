@@ -2675,7 +2675,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		int newPriority = LayoutConstants.FIRST_PRIORITY;
 
-		Layout firstLayout = layouts.get(LayoutConstants.FIRST_PRIORITY);
+		Layout firstLayout = layouts.get(0);
 
 		layoutLocalServiceHelper.validateFirstLayout(firstLayout.getType());
 
