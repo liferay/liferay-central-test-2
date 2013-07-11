@@ -364,7 +364,7 @@ serverURL.setParameter("tabs3", tabs3);
 						sb.append(themeDisplay.getPathThemeImages());
 
 						if (overriddenPropertyValue) {
-							sb.append("/common/database_save.png");
+							sb.append("/common/saved_in_database.png");
 						}
 						else {
 							sb.append("/common/page.png");
