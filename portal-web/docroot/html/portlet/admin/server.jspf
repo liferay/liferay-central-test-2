@@ -317,27 +317,31 @@ serverURL.setParameter("tabs3", tabs3);
 
 					// Value
 
-					StringBundler sb = new StringBundler(5);
-
 					if (Validator.isNotNull(value)) {
 						if (value.length() > 80) {
+							StringBundler sb = new StringBundler(5);
+
 							sb.append("<span onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
 							sb.append(HtmlUtil.escape(value));
 							sb.append("')\">");
 							sb.append(HtmlUtil.escape(StringUtil.shorten(value, 80)));
 							sb.append("</span>");
+
+							row.addText(sb.toString());
 						}
 						else {
-							sb.append(HtmlUtil.escape(StringUtil.shorten(value, 80)));
+							row.addText(HtmlUtil.escape(StringUtil.shorten(value, 80)));
 						}
 					}
-
-					row.addText(sb.toString());
+					else {
+						row.addText(StringPool.BLANK);
+					}
 
 					// Source
 
 					if (tabs3.equals("portal-properties")) {
-						sb = new StringBundler(5);
+						StringBundler sb = new StringBundler(5);
+
 						sb.append("<span onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
 
 						if (overriddenPropertyValue) {
