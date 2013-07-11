@@ -97,8 +97,8 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 		catch (LayoutTypeException lte) {
 			jsonObject.put(
-				"message", getLayoutTypeExceptionMessage(
-					themeDisplay, lte, cmd));
+				"message",
+				getLayoutTypeExceptionMessage(themeDisplay, lte, cmd));
 			jsonObject.put("status", HttpServletResponse.SC_BAD_REQUEST);
 		}
 
