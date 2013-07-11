@@ -337,7 +337,7 @@ public class PortletPreferencesFinderImpl
 
 	private static final String _PREFERENCES_SQL =
 		"AND PortletPreferences.preferences != " +
-			"'[$PORTLET_DEFAULT_PREFERENCES$]'";
+			"'[$PORTLET_PREFERENCES_PREFERENCES_DEFAULT$]'";
 
 	private static final String _PRIVATE_LAYOUT_SQL =
 		"(Layout.privateLayout = ?) AND";
