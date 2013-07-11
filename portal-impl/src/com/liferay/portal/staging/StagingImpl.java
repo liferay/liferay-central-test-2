@@ -1829,7 +1829,8 @@ public class StagingImpl implements Staging {
 		throws SystemException {
 
 		String description = LanguageUtil.format(
-			LocaleUtil.getDefault(), privateLayout ?
+			LocaleUtil.getDefault(),
+			privateLayout ?
 				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PRIVATE :
 				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION_PUBLIC,
 			groupName);
