@@ -488,10 +488,10 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 <aui:script use="liferay-export-import">
 	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="publishProcessesURL">
 		<portlet:param name="struts_action" value="/layouts_admin/publish_layouts" />
-		<portlet:param name="closeRedirect" value="<%= closeRedirect %>" />
-		<portlet:param name="groupId" value="<%= String.valueOf(stagingGroupId) %>" />
 		<portlet:param name="<%= SearchContainer.DEFAULT_CUR_PARAM %>" value="<%= ParamUtil.getString(request, SearchContainer.DEFAULT_CUR_PARAM) %>" />
 		<portlet:param name="<%= SearchContainer.DEFAULT_DELTA_PARAM %>" value="<%= ParamUtil.getString(request, SearchContainer.DEFAULT_DELTA_PARAM) %>" />
+		<portlet:param name="closeRedirect" value="<%= closeRedirect %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(stagingGroupId) %>" />
 	</liferay-portlet:resourceURL>
 
 	new Liferay.ExportImport(
