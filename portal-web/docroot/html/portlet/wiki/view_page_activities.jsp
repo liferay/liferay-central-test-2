@@ -68,11 +68,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			<%
 			User socialActivityUser = UserLocalServiceUtil.getUserById(socialActivity.getUserId());
 
-			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-
-			if (Validator.isNotNull(socialActivity.getExtraData())) {
-				extraDataJSONObject = JSONFactoryUtil.createJSONObject(socialActivity.getExtraData());
-			}
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(socialActivity.getExtraData());
 
 			FileEntry fileEntry = null;
 			FileVersion fileVersion = null;
