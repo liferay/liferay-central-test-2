@@ -139,7 +139,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 						</c:choose>
 					</c:when>
 
-					<c:when test="<%= (socialActivity.getType() == WikiActivityKeys.ADD_PAGE) || (socialActivity.getType() == SocialActivityConstants.TYPE_MOVE_TO_TRASH) || (socialActivity.getType() == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) || (socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE) %>">
+					<c:when test="<%= (socialActivity.getType() == SocialActivityConstants.TYPE_MOVE_TO_TRASH) || (socialActivity.getType() == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) || (socialActivity.getType() == WikiActivityKeys.ADD_PAGE) || (socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE) %>">
 
 						<%
 						double version = extraDataJSONObject.getDouble("version");
@@ -155,17 +155,6 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 						</portlet:renderURL>
 
 						<c:choose>
-							<c:when test="<%= socialActivity.getType() == WikiActivityKeys.ADD_PAGE %>">
-								<liferay-util:buffer var="pageTitleLink">
-									<aui:a href="<%= viewPageURL.toString() %>"><%= socialActivityWikiPage.getTitle() %></aui:a>
-								</liferay-util:buffer>
-
-								<liferay-ui:icon
-									image="add_article"
-									label="<%= true %>"
-									message='<%= LanguageUtil.format(pageContext, "x-added-the-page-x", new Object[] {socialActivityUser.getFullName(), pageTitleLink}) %>'
-								/>
-							</c:when>
 							<c:when test="<%= socialActivity.getType() == SocialActivityConstants.TYPE_MOVE_TO_TRASH %>">
 								<liferay-ui:icon
 									image="trash"
@@ -182,6 +171,17 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 									image="undo"
 									label="<%= true %>"
 									message='<%= LanguageUtil.format(pageContext, "activity-wiki-page-restore-from-trash", new Object[] {StringPool.BLANK, socialActivityUser.getFullName(), pageTitleLink}) %>'
+								/>
+							</c:when>
+							<c:when test="<%= socialActivity.getType() == WikiActivityKeys.ADD_PAGE %>">
+								<liferay-util:buffer var="pageTitleLink">
+									<aui:a href="<%= viewPageURL.toString() %>"><%= socialActivityWikiPage.getTitle() %></aui:a>
+								</liferay-util:buffer>
+
+								<liferay-ui:icon
+									image="add_article"
+									label="<%= true %>"
+									message='<%= LanguageUtil.format(pageContext, "x-added-the-page-x", new Object[] {socialActivityUser.getFullName(), pageTitleLink}) %>'
 								/>
 							</c:when>
 							<c:when test="<%= socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE %>">
@@ -227,7 +227,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 						path="/html/portlet/wiki/page_activity_attachment_action.jsp"
 					/>
 				</c:when>
-				<c:when test="<%= (socialActivity.getType() == WikiActivityKeys.ADD_PAGE) || (socialActivity.getType() == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) || (socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE) %>">
+				<c:when test="<%= (socialActivity.getType() == SocialActivityConstants.TYPE_RESTORE_FROM_TRASH) || (socialActivity.getType() == WikiActivityKeys.ADD_PAGE) || (socialActivity.getType() == WikiActivityKeys.UPDATE_PAGE) %>">
 					<liferay-ui:search-container-column-jsp
 						align="right"
 						path="/html/portlet/wiki/page_activity_page_action.jsp"
