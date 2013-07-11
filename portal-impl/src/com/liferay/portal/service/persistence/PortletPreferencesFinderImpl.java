@@ -42,11 +42,11 @@ public class PortletPreferencesFinderImpl
 	extends BasePersistenceImpl<PortletPreferences>
 	implements PortletPreferencesFinder {
 
+	public static final String COUNT_BY_O_O_P =
+	PortletPreferencesFinder.class.getName() + ".countByO_O_P";
+
 	public static final String COUNT_BY_C_G_O_O_P_P_P =
 		PortletPreferencesFinder.class.getName() + ".countByC_G_O_O_P_P_P";
-
-	public static final String COUNT_BY_O_O_P =
-		PortletPreferencesFinder.class.getName() + ".countByO_O_P";
 
 	public static final String FIND_BY_PORTLET_ID =
 		PortletPreferencesFinder.class.getName() + ".findByPortletId";
@@ -68,6 +68,64 @@ public class PortletPreferencesFinderImpl
 				String.class.getName(), Boolean.class.getName()
 			}
 		);
+
+	@Override
+	public long countByO_O_P(
+			long ownerId, int ownerType, String portletId,
+			boolean excludeDefaultPreferences)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_O_O_P);
+
+			if (ownerId == -1) {
+				sql = StringUtil.replace(sql, _OWNER_ID_SQL, StringPool.BLANK);
+			}
+
+			if (!excludeDefaultPreferences) {
+				sql = StringUtil.replace(
+					sql, _PREFERENCES_SQL, StringPool.BLANK);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (ownerId != -1) {
+				qPos.add(ownerId);
+			}
+
+			qPos.add(ownerType);
+			qPos.add(portletId);
+			qPos.add(portletId.concat("%_INSTANCE_%"));
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	@Override
 	public long countByC_G_O_O_P_P_P(
@@ -126,64 +184,6 @@ public class PortletPreferencesFinderImpl
 				qPos.add(portletId.concat("%_INSTANCE_%"));
 				qPos.add(privateLayout);
 			}
-
-			int count = 0;
-
-			Iterator<Long> itr = q.iterate();
-
-			while (itr.hasNext()) {
-				Long l = itr.next();
-
-				if (l != null) {
-					count += l.intValue();
-				}
-			}
-
-			return count;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	@Override
-	public long countByO_O_P(
-			long ownerId, int ownerType, String portletId,
-			boolean excludeDefaultPreferences)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_O_O_P);
-
-			if (ownerId == -1) {
-				sql = StringUtil.replace(sql, _OWNER_ID_SQL, StringPool.BLANK);
-			}
-
-			if (!excludeDefaultPreferences) {
-				sql = StringUtil.replace(
-					sql, _PREFERENCES_SQL, StringPool.BLANK);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			if (ownerId != -1) {
-				qPos.add(ownerId);
-			}
-
-			qPos.add(ownerType);
-			qPos.add(portletId);
-			qPos.add(portletId.concat("%_INSTANCE_%"));
 
 			int count = 0;
 
