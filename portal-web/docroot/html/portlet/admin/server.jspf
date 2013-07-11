@@ -348,7 +348,7 @@ serverURL.setParameter("tabs3", tabs3);
 							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-was-overridden-using-the-control-panel-and-is-stored-in-the-database"));
 						}
 						else {
-							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-is-read-from-the-portal-ext-.properties"));
+							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-is-read-from-a-portal.properties-file-or-one-of-its-extension-files"));
 						}
 
 						sb.append("')\"><img alt=\"");
@@ -357,7 +357,7 @@ serverURL.setParameter("tabs3", tabs3);
 							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-was-overridden-using-the-control-panel-and-is-stored-in-the-database"));
 						}
 						else {
-							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-is-read-from-the-portal-ext-.properties"));
+							sb.append(LanguageUtil.get(pageContext, "the-value-of-this-property-is-read-from-a-portal.properties-file-or-one-of-its-extension-files"));
 						}
 
 						sb.append("\" src=\"");
