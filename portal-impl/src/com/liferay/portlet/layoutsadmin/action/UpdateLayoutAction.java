@@ -195,7 +195,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				return themeDisplay.translate(
 					"you-cannot-delete-this-page-because-the-next-page-is-of-" +
-						"type-x-and-it-cannot-be-placed-on-the-first-place",
+						"type-x-and-it-cannot-be-the-first-page",
 					"layout.types." + lte.getLayoutType());
 			}
 
@@ -204,7 +204,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				return themeDisplay.translate(
 					"you-cannot-move-this-page-because-the-resulting-order-" +
-						"would-place-a-page-of-type-x-on-the-first-place",
+						"would-place-a-page-of-type-x-as-the-first-page",
 					"layout.types." + lte.getLayoutType());
 			}
 		}
