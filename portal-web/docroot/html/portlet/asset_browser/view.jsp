@@ -19,7 +19,6 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selectedGroupIds"), 0L);
-
 long refererAssetEntryId = ParamUtil.getLong(request, "refererAssetEntryId");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 String callback = ParamUtil.getString(request, "callback");
