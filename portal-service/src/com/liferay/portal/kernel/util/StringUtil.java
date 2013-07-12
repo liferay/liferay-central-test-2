@@ -1904,14 +1904,17 @@ public class StringUtil {
 						"Unable to open resource at " + url.toString());
 				}
 
-				String s = read(is);
+				try {
+					String s = read(is);
 
-				if (s != null) {
-					sb.append(s);
-					sb.append(StringPool.NEW_LINE);
+					if (s != null) {
+						sb.append(s);
+						sb.append(StringPool.NEW_LINE);
+					}
 				}
-
-				is.close();
+				finally {
+					StreamUtil.cleanUp(is);
+				}
 			}
 
 			return sb.toString().trim();
@@ -1924,11 +1927,14 @@ public class StringUtil {
 					"Unable to open resource in class loader " + name);
 			}
 
-			String s = read(is);
+			try {
+				String s = read(is);
 
-			is.close();
-
-			return s;
+				return s;
+			}
+			finally {
+				StreamUtil.cleanUp(is);
+			}
 		}
 	}
 
