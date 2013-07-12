@@ -22,7 +22,6 @@ import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.RequiredCompanyException;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -1053,15 +1052,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 					LanguageUtil.resetAvailableLocales(companyId);
 
-					// Invalidate cache of all Layout Set Prototypes. See
-					// LPS-36403
+					// Invalidate cache of all layout set prototypes that belong to this
+					// company. See LPS-36403.
 
 					Date now = new Date();
 
 					for (LayoutSetPrototype layoutSetPrototype :
-							LayoutSetPrototypeLocalServiceUtil.
-								getLayoutSetPrototypes(
-									QueryUtil.ALL_POS, QueryUtil.ALL_POS)) {
+							layoutSetPrototypeLocalService.
+								getLayoutSetPrototypes(companyId)) {
 
 						layoutSetPrototype.setModifiedDate(now);
 
