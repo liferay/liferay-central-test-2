@@ -1,1 +1,1 @@
-def simple = "This is a very simple test"
+def simple = "This is a very simple test."

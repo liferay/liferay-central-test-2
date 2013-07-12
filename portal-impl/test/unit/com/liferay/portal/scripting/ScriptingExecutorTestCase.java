@@ -71,7 +71,8 @@ public abstract class ScriptingExecutorTestCase extends PowerMockito {
 	@Test
 	public void testBindingInputVariables() throws ScriptingException {
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
-		inputObjects.put("variable", "Passed through binding");
+
+		inputObjects.put("variable", "string");
 
 		Set<String> outputNames = Collections.emptySet();
 
@@ -91,29 +92,27 @@ public abstract class ScriptingExecutorTestCase extends PowerMockito {
 			String fileName)
 		throws ScriptingException {
 
-		String file = fileName + getScriptExtension();
+		String script = getScript(fileName + getScriptExtension());
 
-		String scriptContent = getScriptContent(file);
-
-		return _scriptingExecutor.eval(
-			null, inputObjects, outputNames, scriptContent);
+		return _scriptingExecutor.eval(null, inputObjects, outputNames, script);
 	}
 
-	protected String getScriptContent(String name) {
+	protected String getScript(String name) {
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
 			"dependencies/" + name);
 
-		String content = null;
+		String script = null;
+
 		try {
-			content = StringUtil.read(inputStream);
+			script = StringUtil.read(inputStream);
 		}
 		catch (IOException ioe) {
-			Assert.fail("Unexpected error processing file " + name);
+			Assert.fail("Unable to read " + name);
 		}
 
-		return content;
+		return script;
 	}
 
 	@Mock
