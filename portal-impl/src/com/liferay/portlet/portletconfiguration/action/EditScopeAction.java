@@ -281,9 +281,9 @@ public class EditScopeAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences portletPreferences = actionRequest.getPreferences();
-
 		String oldScopeName = getOldScopeName(actionRequest, portlet);
+
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
 
