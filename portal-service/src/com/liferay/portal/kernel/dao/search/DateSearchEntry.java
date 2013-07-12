@@ -45,10 +45,8 @@ public class DateSearchEntry extends TextSearchEntry {
 		if (Validator.isNotNull(_date)) {
 			Object[] localeAndTimeZone = getLocaleAndTimeZone(pageContext);
 
-			Format dateFormatDateTime =
-				FastDateFormatFactoryUtil.getDateTime(
-					(Locale)localeAndTimeZone[0],
-					(TimeZone)localeAndTimeZone[1]);
+			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
+				(Locale)localeAndTimeZone[0], (TimeZone)localeAndTimeZone[1]);
 
 			StringBundler sb = new StringBundler(5);
 
