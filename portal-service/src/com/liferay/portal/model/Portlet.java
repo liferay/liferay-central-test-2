@@ -1329,6 +1329,15 @@ public interface Portlet extends PortletModel, PersistedModel {
 	public boolean isRemoteable();
 
 	/**
+	* Returns <code>true</code> if the portlet will only process namespaced
+	* parameters.
+	*
+	* @return <code>true</code> if the portlet will only process namespaced
+	parameters
+	*/
+	public boolean isRequiresNamespacedParameters();
+
+	/**
 	* Returns <code>true</code> if the portlet restores to the current view
 	* from the maximized state.
 	*
@@ -1995,6 +2004,16 @@ public interface Portlet extends PortletModel, PersistedModel {
 	* @param renderWeight int value for the render weight of the portlet
 	*/
 	public void setRenderWeight(int renderWeight);
+
+	/**
+	* Set to <code>true</code> if the portlet will only process namespaced
+	* parameters.
+	*
+	* @param requiresNamespacedParameters boolean value for whether the portlet
+	will only process namespaced parameters
+	*/
+	public void setRequiresNamespacedParameters(
+		boolean requiresNamespacedParameters);
 
 	/**
 	* Sets the resource bundle of the portlet.

@@ -2091,6 +2091,18 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	}
 
 	/**
+	* Returns <code>true</code> if the portlet will only process namespaced
+	* parameters.
+	*
+	* @return <code>true</code> if the portlet will only process namespaced
+	parameters
+	*/
+	@Override
+	public boolean isRequiresNamespacedParameters() {
+		return _portlet.isRequiresNamespacedParameters();
+	}
+
+	/**
 	* Returns <code>true</code> if the portlet restores to the current view
 	* from the maximized state.
 	*
@@ -2990,6 +3002,19 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	@Override
 	public void setRenderWeight(int renderWeight) {
 		_portlet.setRenderWeight(renderWeight);
+	}
+
+	/**
+	* Set to <code>true</code> if the portlet will only process namespaced
+	* parameters.
+	*
+	* @param requiresNamespacedParameters boolean value for whether the portlet
+	will only process namespaced parameters
+	*/
+	@Override
+	public void setRequiresNamespacedParameters(
+		boolean requiresNamespacedParameters) {
+		_portlet.setRequiresNamespacedParameters(requiresNamespacedParameters);
 	}
 
 	/**
