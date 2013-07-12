@@ -763,7 +763,9 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 				String realName = removePortletNamespace(
 					invokerPortlet, portletNamespace, name);
 
-				if (!realName.equals(name)) {
+				if (!realName.equals(name) ||
+					!portlet.isRequiresNamespacedParameters()) {
+
 					dynamicRequest.setParameterValues(realName, values);
 				}
 			}

@@ -32,7 +32,8 @@ preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
 show-portlet-inactive?, action-url-redirect?, restore-current-view?,
 maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
 remoteable?, scopeable?, user-principal-strategy?, private-request-attributes?,
-private-session-attributes?, autopropagated-parameters?, action-timeout?,
+private-session-attributes?, autopropagated-parameters?,
+requires-namespaced-parameters?, action-timeout?,
 render-timeout?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
 footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
@@ -646,6 +647,12 @@ Set the autopropagated-parameters value to a comma delimited list of parameter
 names that will be automatically propagated through the portlet.
 -->
 <!ELEMENT autopropagated-parameters (#PCDATA)>
+
+<!--
+Set the requires-namespaced-parameters value to true if the portlet will only
+process namespaced parameters. The default value is true.
+-->
+<!ELEMENT requires-namespaced-parameters (#PCDATA)>
 
 <!--
 The default value of action-timeout is 0. If set to a value greater than 0,
