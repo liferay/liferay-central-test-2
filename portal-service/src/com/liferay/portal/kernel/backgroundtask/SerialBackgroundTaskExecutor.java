@@ -80,7 +80,7 @@ public class SerialBackgroundTaskExecutor
 				}
 
 				try {
-					Thread.currentThread().sleep(50);
+					Thread.sleep(50);
 				}
 				catch (InterruptedException e1) {
 				}
