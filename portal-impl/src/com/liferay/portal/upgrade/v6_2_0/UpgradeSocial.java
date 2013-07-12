@@ -130,6 +130,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateJournalActivities();
+		updateSOSocialActivities();
 		updateWikiPageActivities();
 
 		migrateActivities();
@@ -219,6 +220,44 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			runSQL(sb.toString());
 		}
+	}
+
+	protected void updateSOSocialActivities() throws Exception {
+		if (!hasTable("SO_SocialActivity")) {
+			return;
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select activityId, activitySetId from SO_SocialActivity");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long activityId = rs.getLong("activityId");
+				long activitySetId = rs.getLong("activitySetId");
+
+				StringBundler sb = new StringBundler(4);
+
+				sb.append("update SocialActivity set activitySetId = ");
+				sb.append(activitySetId);
+				sb.append(" where activityId = ");
+				sb.append(activityId);
+
+				runSQL(sb.toString());
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		runSQL("drop table SO_SocialActivity");
 	}
 
 	protected void updateWikiPageActivities() throws Exception {
