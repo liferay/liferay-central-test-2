@@ -55,16 +55,15 @@ public class BackgroundTaskMessageListener extends BaseMessageListener {
 			backgroundTaskId, null, BackgroundTaskConstants.STATUS_IN_PROGRESS,
 			serviceContext);
 
+		BackgroundTaskExecutor backgroundTaskExecutor = null;
+		BackgroundTaskStatusMessageListener
+			backgroundTaskStatusMessageListener = null;
+
 		BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.getBackgroundTask(backgroundTaskId);
 
-		BackgroundTaskExecutor backgroundTaskExecutor = null;
-
 		int status = backgroundTask.getStatus();
 		String statusMessage = null;
-
-		BackgroundTaskStatusMessageListener
-			backgroundTaskStatusMessageListener = null;
 
 		try {
 			ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();

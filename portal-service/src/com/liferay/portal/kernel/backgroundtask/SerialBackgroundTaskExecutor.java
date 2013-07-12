@@ -50,7 +50,10 @@ public class SerialBackgroundTaskExecutor
 				lock = acquireLock(backgroundTask, owner);
 			}
 
-			return getBackgroundTaskExecutor().execute(backgroundTask);
+			BackgroundTaskExecutor backgroundTaskExecutor =
+				getBackgroundTaskExecutor();
+
+			return backgroundTaskExecutor.execute(backgroundTask);
 		}
 		finally {
 			if (lock != null) {
@@ -74,15 +77,15 @@ public class SerialBackgroundTaskExecutor
 
 				break;
 			}
-			catch (SystemException e) {
+			catch (SystemException se) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Non-fatal error acquiring lock:", e);
+					_log.debug("Unable to acquire acquiring lock", se);
 				}
 
 				try {
 					Thread.sleep(50);
 				}
-				catch (InterruptedException e1) {
+				catch (InterruptedException ie) {
 				}
 			}
 		}

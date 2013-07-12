@@ -29,12 +29,11 @@ public class BackgroundTaskStatusMessageListener extends BaseMessageListener {
 
 	public BackgroundTaskStatusMessageListener(
 		long backgroundTaskId, BackgroundTaskStatusMessageTranslator
-			backgroundTaskStatusMessageTranslator) {
-
-		_backgroundTaskStatusMessageTranslator =
-			backgroundTaskStatusMessageTranslator;
+		backgroundTaskStatusMessageTranslator) {
 
 		_backgroundTaskId = backgroundTaskId;
+		_backgroundTaskStatusMessageTranslator =
+			backgroundTaskStatusMessageTranslator;
 	}
 
 	@Override
@@ -52,8 +51,8 @@ public class BackgroundTaskStatusMessageListener extends BaseMessageListener {
 		if (backgroundTaskStatus == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to locate backgroundTaskStatus for : " +
-						backgroundTaskId + " to process: " + message);
+					"Unable to locate status for background task " +
+						backgroundTaskId + " to process " + message);
 			}
 
 			return;

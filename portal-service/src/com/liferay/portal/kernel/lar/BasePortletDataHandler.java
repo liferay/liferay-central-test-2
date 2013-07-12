@@ -101,17 +101,17 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 					portletDataContext, portletDataHandlerControl);
 			}
 
-			if (BackgroundTaskThreadLocal.isBackgroundExecution()) {
-				PortletDataContext portletDataContextClone =
+			if (BackgroundTaskThreadLocal.hasBackgroundTask()) {
+				PortletDataContext clonePortletDataContext =
 					PortletDataContextFactoryUtil.clonePortletDataContext(
 						portletDataContext);
 
 				prepareManifestSummary(
-					portletDataContextClone, portletPreferences);
+					clonePortletDataContext, portletPreferences);
 
 				DataHandlerStatusMessageSenderUtil.sendStatusMessage(
 					"portletExport", portletId,
-					portletDataContextClone.getManifestSummary());
+					clonePortletDataContext.getManifestSummary());
 			}
 
 			return doExportData(

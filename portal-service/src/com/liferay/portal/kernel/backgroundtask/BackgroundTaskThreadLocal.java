@@ -25,7 +25,7 @@ public class BackgroundTaskThreadLocal {
 		return _backgroundTaskId.get();
 	}
 
-	public static boolean isBackgroundExecution() {
+	public static boolean hasBackgroundTask() {
 		long backgroundTaskId = getBackgroundTaskId();
 
 		if (backgroundTaskId > 0) {

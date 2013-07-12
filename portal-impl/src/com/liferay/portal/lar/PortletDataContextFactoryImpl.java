@@ -41,40 +41,29 @@ public class PortletDataContextFactoryImpl
 	public PortletDataContext clonePortletDataContext(
 		PortletDataContext portletDataContext) {
 
-		PortletDataContext portletDataContextClone =
+		PortletDataContext clonePortletDataContext =
 			new PortletDataContextImpl();
 
-		portletDataContextClone.setCompanyId(portletDataContext.getCompanyId());
-
-		portletDataContextClone.setCompanyGroupId(
+		clonePortletDataContext.setCompanyId(portletDataContext.getCompanyId());
+		clonePortletDataContext.setCompanyGroupId(
 			portletDataContext.getCompanyGroupId());
-
-		portletDataContextClone.setDataStrategy(
+		clonePortletDataContext.setDataStrategy(
 			portletDataContext.getDataStrategy());
-
-		portletDataContextClone.setEndDate(portletDataContext.getEndDate());
-
-		portletDataContextClone.setGroupId(portletDataContext.getGroupId());
-
-		portletDataContextClone.setNewLayouts(
+		clonePortletDataContext.setEndDate(portletDataContext.getEndDate());
+		clonePortletDataContext.setGroupId(portletDataContext.getGroupId());
+		clonePortletDataContext.setNewLayouts(
 			portletDataContext.getNewLayouts());
-
-		portletDataContextClone.setParameterMap(
+		clonePortletDataContext.setParameterMap(
 			portletDataContext.getParameterMap());
-
-		portletDataContextClone.setScopeGroupId(
+		clonePortletDataContext.setScopeGroupId(
 			portletDataContext.getScopeGroupId());
-
-		portletDataContextClone.setStartDate(portletDataContext.getStartDate());
-
-		portletDataContextClone.setUserIdStrategy(
+		clonePortletDataContext.setStartDate(portletDataContext.getStartDate());
+		clonePortletDataContext.setUserIdStrategy(
 			portletDataContext.getUserIdStrategy());
-
-		portletDataContextClone.setUserPersonalSiteGroupId(
+		clonePortletDataContext.setUserPersonalSiteGroupId(
 			portletDataContext.getUserPersonalSiteGroupId());
 
-		return portletDataContextClone;
-
+		return clonePortletDataContext;
 	}
 
 	@Override

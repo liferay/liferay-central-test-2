@@ -30,10 +30,11 @@ import java.util.Map;
 public class DataHandlerStatusMessageSenderImpl
 	implements DataHandlerStatusMessageSender {
 
+	@Override
 	public void sendStatusMessage(
 		String messageType, String portletId, ManifestSummary manifestSummary) {
 
-		if (!BackgroundTaskThreadLocal.isBackgroundExecution()) {
+		if (!BackgroundTaskThreadLocal.hasBackgroundTask()) {
 			return;
 		}
 
@@ -42,9 +43,7 @@ public class DataHandlerStatusMessageSenderImpl
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
-
 		message.put("messageType", messageType);
-
 		message.put("portletId", portletId);
 
 		Map<String, LongWrapper> modelAdditionCounters =
@@ -60,10 +59,11 @@ public class DataHandlerStatusMessageSenderImpl
 		_singleDestinationMessageSender.send(message);
 	}
 
+	@Override
 	public <T extends StagedModel> void sendStatusMessage(
 		String messageType, T stagedModel, ManifestSummary manifestSummary) {
 
-		if (!BackgroundTaskThreadLocal.isBackgroundExecution()) {
+		if (!BackgroundTaskThreadLocal.hasBackgroundTask()) {
 			return;
 		}
 
@@ -72,13 +72,7 @@ public class DataHandlerStatusMessageSenderImpl
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
-
 		message.put("messageType", messageType);
-
-		message.put(
-			"stagedModelType", stagedModel.getStagedModelType().toString());
-
-		message.put("uuid", stagedModel.getUuid());
 
 		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
@@ -89,6 +83,10 @@ public class DataHandlerStatusMessageSenderImpl
 			manifestSummary.getModelDeletionCounters();
 
 		message.put("modelDeletionCounters", modelDeletionCounters);
+
+		message.put(
+			"stagedModelType", stagedModel.getStagedModelType().toString());
+		message.put("uuid", stagedModel.getUuid());
 
 		_singleDestinationMessageSender.send(message);
 	}

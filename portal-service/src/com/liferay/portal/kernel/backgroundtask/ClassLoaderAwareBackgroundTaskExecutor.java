@@ -27,6 +27,7 @@ public class ClassLoaderAwareBackgroundTaskExecutor
 		ClassLoader classLoader) {
 
 		super(backgroundTaskExecutor);
+
 		_classLoader = classLoader;
 	}
 
@@ -43,7 +44,10 @@ public class ClassLoaderAwareBackgroundTaskExecutor
 		}
 
 		try {
-			return getBackgroundTaskExecutor().execute(backgroundTask);
+			BackgroundTaskExecutor backgroundTaskExecutor =
+				getBackgroundTaskExecutor();
+
+			return backgroundTaskExecutor.execute(backgroundTask);
 		}
 		finally {
 			if (_classLoader != contextClassLoader) {
