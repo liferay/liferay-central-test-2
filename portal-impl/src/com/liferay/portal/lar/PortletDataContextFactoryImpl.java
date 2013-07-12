@@ -46,10 +46,10 @@ public class PortletDataContextFactoryImpl
 
 		portletDataContextClone.setCompanyId(portletDataContext.getCompanyId());
 
-		portletDataContext.setCompanyGroupId(
+		portletDataContextClone.setCompanyGroupId(
 			portletDataContext.getCompanyGroupId());
 
-		portletDataContext.setDataStrategy(
+		portletDataContextClone.setDataStrategy(
 			portletDataContext.getDataStrategy());
 
 		portletDataContextClone.setEndDate(portletDataContext.getEndDate());
