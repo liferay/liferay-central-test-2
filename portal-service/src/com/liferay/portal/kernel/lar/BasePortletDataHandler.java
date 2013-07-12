@@ -109,7 +109,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 				prepareManifestSummary(
 					clonePortletDataContext, portletPreferences);
 
-				DataHandlerStatusMessageSenderUtil.sendStatusMessage(
+				PortletDataHandlerStatusMessageSenderUtil.sendStatusMessage(
 					"portletExport", portletId,
 					clonePortletDataContext.getManifestSummary());
 			}

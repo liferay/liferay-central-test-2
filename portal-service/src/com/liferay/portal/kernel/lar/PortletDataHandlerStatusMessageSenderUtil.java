@@ -20,13 +20,13 @@ import com.liferay.portal.model.StagedModel;
 /**
  * @author Michael C. Han
  */
-public class DataHandlerStatusMessageSenderUtil {
+public class PortletDataHandlerStatusMessageSenderUtil {
 
-	public static DataHandlerStatusMessageSender
-		getDataHandlerStatusMessageSender() {
+	public static PortletDataHandlerStatusMessageSender
+		getPortletDataHandlerStatusMessageSender() {
 
 		PortalRuntimePermission.checkGetBeanProperty(
-			DataHandlerStatusMessageSenderUtil.class);
+			PortletDataHandlerStatusMessageSenderUtil.class);
 
 		return _dataHandlerStatusMessageSender;
 	}
@@ -34,26 +34,27 @@ public class DataHandlerStatusMessageSenderUtil {
 	public static void sendStatusMessage(
 		String messageType, String portletId, ManifestSummary manifestSummary) {
 
-		getDataHandlerStatusMessageSender().sendStatusMessage(
+		getPortletDataHandlerStatusMessageSender().sendStatusMessage(
 			messageType, portletId, manifestSummary);
 	}
 
 	public static <T extends StagedModel> void sendStatusMessage(
 		String messageType, T stagedModel, ManifestSummary manifestSummary) {
 
-		getDataHandlerStatusMessageSender().sendStatusMessage(
+		getPortletDataHandlerStatusMessageSender().sendStatusMessage(
 			messageType, stagedModel, manifestSummary);
 	}
 
-	public void setDataHandlerStatusMessageSender(
-		DataHandlerStatusMessageSender dataHandlerStatusMessageSender) {
+	public void setPortletDataHandlerStatusMessageSender(
+		PortletDataHandlerStatusMessageSender
+		portletDataHandlerStatusMessageSender) {
 
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
-		_dataHandlerStatusMessageSender = dataHandlerStatusMessageSender;
+		_dataHandlerStatusMessageSender = portletDataHandlerStatusMessageSender;
 	}
 
-	private static DataHandlerStatusMessageSender
+	private static PortletDataHandlerStatusMessageSender
 		_dataHandlerStatusMessageSender;
 
 }

@@ -15,8 +15,8 @@
 package com.liferay.portal.lar;
 
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
-import com.liferay.portal.kernel.lar.DataHandlerStatusMessageSender;
 import com.liferay.portal.kernel.lar.ManifestSummary;
+import com.liferay.portal.kernel.lar.PortletDataHandlerStatusMessageSender;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.util.LongWrapper;
@@ -27,8 +27,8 @@ import java.util.Map;
 /**
  * @author Michael C. Han
  */
-public class DataHandlerStatusMessageSenderImpl
-	implements DataHandlerStatusMessageSender {
+public class PortletDataHandlerStatusMessageSenderImpl
+	implements PortletDataHandlerStatusMessageSender {
 
 	@Override
 	public void sendStatusMessage(

@@ -59,7 +59,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 				manifestSummary.incrementModelAdditionCount(
 					stagedModel.getStagedModelType());
 
-				DataHandlerStatusMessageSenderUtil.sendStatusMessage(
+				PortletDataHandlerStatusMessageSenderUtil.sendStatusMessage(
 					"stagedModelExport", stagedModel, manifestSummary);
 			}
 		}
