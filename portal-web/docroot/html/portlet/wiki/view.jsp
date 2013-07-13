@@ -399,7 +399,6 @@ long portletDisplayDDMTemplateId = PortletDisplayTemplateUtil.getPortletDisplayT
 
 <%
 if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) {
-
 	if (!portletName.equals(PortletKeys.WIKI_DISPLAY)) {
 		PortalUtil.setPageSubtitle(wikiPage.getTitle(), request);
 
