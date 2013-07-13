@@ -2,6 +2,7 @@ package ${seleniumBuilderContext.getMacroPackageName(macroName)};
 
 import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
 import com.liferay.portalweb2.util.block.macro.BaseMacro;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 <#assign rootElement = seleniumBuilderContext.getMacroRootElement(macroName)>
 
@@ -28,16 +29,10 @@ public class ${seleniumBuilderContext.getMacroSimpleClassName(macroName)} extend
 		<#if rootElement.element("var")??>
 			<#assign varElements = rootElement.elements("var")>
 
+			<#assign context = "definitionScopeVariables">
+
 			<#list varElements as varElement>
-				<#assign varName = varElement.attributeValue("name")>
-
-				<#if varElement.attributeValue("value")??>
-					<#assign varValue = varElement.attributeValue("value")>
-				<#else>
-					<#assign varValue = varElement.getText()>
-				</#if>
-
-				definitionScopeVariables.put("${varName}", "${varValue}");
+				<#include "var.ftl">
 			</#list>
 		</#if>
 	}

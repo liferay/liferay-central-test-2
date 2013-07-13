@@ -1188,6 +1188,39 @@ public class SeleniumBuilderFileUtil {
 					throwValidationException(
 						1006, fileName, element, attributeName);
 				}
+
+				String regex = "\\$\\{([^}]*?)\\}";
+
+				Pattern pattern = Pattern.compile(regex);
+
+				Matcher matcher = pattern.matcher(attributeValue);
+
+				while (matcher.find()) {
+					String statement = matcher.group(1);
+
+					String methodRegex = "(.*)\\?(.*)\\(([^\\(\\)]*?)\\)";
+
+					Pattern methodPattern = Pattern.compile(methodRegex);
+
+					Matcher methodMatcher = methodPattern.matcher(statement);
+
+					if (methodMatcher.find()) {
+						String operand = methodMatcher.group(1);
+
+						String method = methodMatcher.group(2);
+
+						if (operand.equals("") || method.equals("")) {
+							throwValidationException(
+								1006, fileName, element, attributeName);
+						}
+					}
+					else {
+						if (!statement.matches("[\\w]*")) {
+							throwValidationException(
+								1006, fileName, element, attributeName);
+						}
+					}
+				}
 			}
 			else {
 				if (Validator.isNull(attributeValue)) {

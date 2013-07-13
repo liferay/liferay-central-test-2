@@ -30,16 +30,10 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 
 			<#assign varElements = rootElement.elements("var")>
 
+			<#assign context = "definitionScopeVariables">
+
 			<#list varElements as varElement>
-				<#assign varName = varElement.attributeValue("name")>
-
-				<#if varElement.attributeValue("value")??>
-					<#assign varValue = varElement.attributeValue("value")>
-				<#elseif varElement.getText()??>
-					<#assign varValue = varElement.getText()>
-				</#if>
-
-				definitionScopeVariables.put("${varName}", "${varValue}");
+				<#include "var.ftl">
 			</#list>
 		}
 	</#if>
