@@ -113,7 +113,7 @@ public class FolderStagedModelDataHandler
 				portletDataContext, folder.getParentFolder());
 		}
 
-		exportFolderFileEntryTypes(portletDataContext, folder, folderElement);
+		exportFolderFileEntryTypes(portletDataContext, folderElement, folder);
 
 		portletDataContext.addClassedModel(
 			folderElement, folderPath, folder, DLPortletDataHandler.NAMESPACE);
@@ -218,8 +218,8 @@ public class FolderStagedModelDataHandler
 	}
 
 	protected void exportFolderFileEntryTypes(
-			PortletDataContext portletDataContext, Folder folder,
-			Element folderElement)
+			PortletDataContext portletDataContext, Element folderElement,
+			Folder folder)
 		throws Exception {
 
 		List<DLFileEntryType> dlFileEntryTypes =

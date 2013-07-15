@@ -293,7 +293,7 @@ public class FileEntryStagedModelDataHandler
 		}
 
 		importMetaData(
-			portletDataContext, fileEntry, fileEntryElement, serviceContext);
+			portletDataContext, fileEntryElement, fileEntry, serviceContext);
 
 		FileEntry importedFileEntry = null;
 
@@ -537,8 +537,8 @@ public class FileEntryStagedModelDataHandler
 	}
 
 	protected void importMetaData(
-			PortletDataContext portletDataContext, FileEntry fileEntry,
-			Element fileEntryElement, ServiceContext serviceContext)
+			PortletDataContext portletDataContext, Element fileEntryElement,
+			FileEntry fileEntry, ServiceContext serviceContext)
 		throws Exception {
 
 		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
