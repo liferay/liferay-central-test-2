@@ -6,4 +6,4 @@
 	<#assign varValue = varElement.getText()>
 </#if>
 
-${context}.put("${varName}", BaseTestCase.evaluateVariable("${varValue}", ${context}));
+${context}.put("${varName}", RuntimeVariables.evaluateVariable("${varValue}", ${context}));

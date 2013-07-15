@@ -1,8 +1,8 @@
 package ${seleniumBuilderContext.getMacroPackageName(macroName)};
 
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
 import com.liferay.portalweb2.util.block.macro.BaseMacro;
-import com.liferay.portalweb.portal.BaseTestCase;
 
 <#assign rootElement = seleniumBuilderContext.getMacroRootElement(macroName)>
 
@@ -32,7 +32,7 @@ public class ${seleniumBuilderContext.getMacroSimpleClassName(macroName)} extend
 			<#assign context = "definitionScopeVariables">
 
 			<#list varElements as varElement>
-				<#include "var.ftl">
+				<#include "var_element.ftl">
 			</#list>
 		</#if>
 	}

@@ -111,7 +111,7 @@
 
 		<#assign context = "commandScopeVariables">
 
-		<#include "var.ftl">
+		<#include "var_element.ftl">
 
 		<#assign lineNumber = element.attributeValue("line-number")>
 

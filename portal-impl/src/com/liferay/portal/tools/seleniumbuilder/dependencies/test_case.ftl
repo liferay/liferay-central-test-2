@@ -2,6 +2,7 @@ package ${seleniumBuilderContext.getTestCasePackageName(testCaseName)};
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 import com.liferay.portalweb.portal.util.SeleniumUtil;
 import com.liferay.portalweb.portal.util.liferayselenium.LiferaySelenium;
 
@@ -33,7 +34,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 			<#assign context = "definitionScopeVariables">
 
 			<#list varElements as varElement>
-				<#include "var.ftl">
+				<#include "var_element.ftl">
 			</#list>
 		}
 	</#if>

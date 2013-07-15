@@ -15,7 +15,7 @@
 		<#assign context = "executeScopeVariables">
 
 		<#list varElements as varElement>
-			<#include "var.ftl">
+			<#include "var_element.ftl">
 		</#list>
 	</#if>
 </#if>
