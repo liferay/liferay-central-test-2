@@ -28,24 +28,23 @@ public class SearchContainerTei extends TagExtraInfo {
 
 	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
-		String var = tagData.getAttributeString("var");
-
-		if (Validator.isNull(var)) {
-			var = SearchContainer.DEFAULT_VAR;
-		}
-
 		String totalVar = tagData.getAttributeString("totalVar");
 
 		if (Validator.isNull(totalVar)) {
 			totalVar = SearchContainer.DEFAULT_TOTAL_VAR;
 		}
 
+		String var = tagData.getAttributeString("var");
+
+		if (Validator.isNull(var)) {
+			var = SearchContainer.DEFAULT_VAR;
+		}
+
 		return new VariableInfo[] {
 			new VariableInfo(
-				var, SearchContainer.class.getName(), true,
-				VariableInfo.NESTED),
+				totalVar, Integer.class.getName(), true, VariableInfo.NESTED),
 			new VariableInfo(
-				totalVar, Integer.class.getName(), true, VariableInfo.NESTED)
+				var, SearchContainer.class.getName(), true, VariableInfo.NESTED)
 		};
 	}
 

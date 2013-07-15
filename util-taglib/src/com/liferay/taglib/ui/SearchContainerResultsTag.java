@@ -125,8 +125,8 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 		}
 
 		if (_results == null) {
-			pageContext.setAttribute(_resultsVar, new ArrayList<R>());
 			pageContext.setAttribute(_deprecatedTotalVar, 0);
+			pageContext.setAttribute(_resultsVar, new ArrayList<R>());
 		}
 
 		return EVAL_BODY_INCLUDE;
