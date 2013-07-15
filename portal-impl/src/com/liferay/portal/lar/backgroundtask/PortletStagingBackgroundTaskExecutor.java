@@ -40,7 +40,7 @@ public class PortletStagingBackgroundTaskExecutor
 
 	public PortletStagingBackgroundTaskExecutor() {
 		setBackgroundTaskStatusMessageTranslator(
-			new BaseExportImportBackgroundTaskStatusMessageTranslator());
+			new DefaultExportImportBackgroundTaskStatusMessageTranslator());
 		setSerial(true);
 	}
 

@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * @author Michael C. Han
  */
-public class BaseExportImportBackgroundTaskStatusMessageTranslator
+public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 	implements BackgroundTaskStatusMessageTranslator {
 
 	@Override

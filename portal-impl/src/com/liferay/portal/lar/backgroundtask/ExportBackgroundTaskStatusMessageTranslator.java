@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.messaging.Message;
  * @author Michael C. Han
  */
 public class ExportBackgroundTaskStatusMessageTranslator
-	extends BaseExportImportBackgroundTaskStatusMessageTranslator {
+	extends DefaultExportImportBackgroundTaskStatusMessageTranslator {
 
 	@Override
 	protected synchronized void translatePortletMessage(

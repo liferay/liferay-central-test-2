@@ -43,7 +43,7 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	public LayoutStagingBackgroundTaskExecutor() {
 		setBackgroundTaskStatusMessageTranslator(
-			new BaseExportImportBackgroundTaskStatusMessageTranslator());
+			new DefaultExportImportBackgroundTaskStatusMessageTranslator());
 
 		setSerial(true);
 	}
