@@ -84,18 +84,6 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 	public FileEntry addPortletFileEntry(
 			long groupId, long userId, String className, long classPK,
 			String portletId, long folderId, File file, String fileName,
-			String mimeType)
-		throws PortalException, SystemException {
-
-		return addPortletFileEntry(
-			groupId, userId, className, classPK, portletId, folderId, file,
-			fileName, mimeType, true);
-	}
-
-	@Override
-	public FileEntry addPortletFileEntry(
-			long groupId, long userId, String className, long classPK,
-			String portletId, long folderId, File file, String fileName,
 			String mimeType, boolean indexingEnabled)
 		throws PortalException, SystemException {
 
@@ -134,18 +122,6 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 		finally {
 			DLAppHelperThreadLocal.setEnabled(dlAppHelperEnabled);
 		}
-	}
-
-	@Override
-	public FileEntry addPortletFileEntry(
-			long groupId, long userId, String className, long classPK,
-			String portletId, long folderId, InputStream inputStream,
-			String fileName, String mimeType)
-		throws PortalException, SystemException {
-
-		return addPortletFileEntry(
-			groupId, userId, className, classPK, portletId, folderId,
-			inputStream, fileName, mimeType, true);
 	}
 
 	@Override
