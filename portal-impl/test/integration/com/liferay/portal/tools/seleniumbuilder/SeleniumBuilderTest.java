@@ -1394,11 +1394,27 @@ public class SeleniumBuilderTest {
 	}
 
 	@Test
+	public void testMacroVarElement1006_4() throws Exception {
+		test(
+			"MacroVarElement1006_4.macro",
+			"Error 1006: Invalid value attribute value in " + _DIR_NAME +
+				"/MacroVarElement1006_4.macro:2");
+	}
+
+	@Test
 	public void testMacroVarElement1007() throws Exception {
 		test(
 			"MacroVarElement1007.macro",
 			"Error 1007: Poorly formed XML in " + _DIR_NAME +
 				"/MacroVarElement1007.macro");
+	}
+
+	@Test
+	public void testMacroVarElement1013() throws Exception {
+		test(
+			"MacroVarElement1013.macro",
+			"Error 1013: Invalid method methodname at " + _DIR_NAME +
+				"/MacroVarElement1013.macro:2");
 	}
 
 	@Test
