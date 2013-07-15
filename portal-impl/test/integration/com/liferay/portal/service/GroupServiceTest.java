@@ -163,7 +163,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testDontFindNonExistingGroup() throws Exception {
+	public void testFindNonexistentGroup() throws Exception {
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
@@ -198,7 +198,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindGroupByDescriptionWithBlanks() throws Exception {
+	public void testFindGroupByDescriptionWithSpaces() throws Exception {
 		String description =
 			ServiceTestUtil.randomString() + StringPool.SPACE +
 				ServiceTestUtil.randomString();
@@ -239,7 +239,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindGroupByNameWithBlanks() throws Exception {
+	public void testFindGroupByNameWithSpaces() throws Exception {
 		String name =
 			ServiceTestUtil.randomString() + StringPool.SPACE +
 				ServiceTestUtil.randomString();
@@ -259,7 +259,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindGuestGroupUsingCompanyName() throws Exception {
+	public void testFindGuestGroupByCompanyName() throws Exception {
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
@@ -273,7 +273,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindGuestGroupUsingCompanyNameCapitalized()
+	public void testFindGuestGroupByCompanyNameCapitalized()
 		throws Exception {
 
 		LinkedHashMap<String, Object> groupParams =
