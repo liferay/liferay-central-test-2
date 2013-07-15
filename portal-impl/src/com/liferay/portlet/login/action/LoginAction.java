@@ -240,6 +240,11 @@ public class LoginAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
 
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
+
+		response.setStatus(HttpServletResponse.SC_FOUND);
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
@@ -249,10 +254,6 @@ public class LoginAction extends PortletAction {
 			actionRequest, PortletKeys.LOGIN, layout.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			actionResponse);
-
-		response.setStatus(HttpServletResponse.SC_FOUND);
 		response.sendRedirect(portletURL.toString());
 	}
 
