@@ -114,14 +114,14 @@ public class InternetAddressUtil {
 		return sb.toString();
 	}
 
-	public static void validateAddress(InternetAddress internetAddress)
+	public static void validateAddress(Address address)
 		throws AddressException {
 
-		if (internetAddress == null) {
+		if (address == null) {
 			throw new AddressException("Email address is null");
 		}
 
-		String addressString = internetAddress.toString();
+		String addressString = address.toString();
 
 		for (char c : addressString.toCharArray()) {
 			if ((c == CharPool.NEW_LINE) || (c == CharPool.RETURN)) {
@@ -136,14 +136,14 @@ public class InternetAddressUtil {
 		}
 	}
 
-	public static void validateAddresses(InternetAddress[] internetAddresses)
+	public static void validateAddresses(Address[] addresses)
 		throws AddressException {
 
-		if (internetAddresses == null) {
+		if (addresses == null) {
 			throw new AddressException();
 		}
 
-		for (InternetAddress internetAddress : internetAddresses) {
+		for (Address internetAddress : addresses) {
 			validateAddress(internetAddress);
 		}
 	}

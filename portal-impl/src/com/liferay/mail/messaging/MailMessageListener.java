@@ -15,8 +15,6 @@
 package com.liferay.mail.messaging;
 
 import com.liferay.mail.util.HookFactory;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -147,7 +145,5 @@ public class MailMessageListener extends BaseMessageListener {
 		return filteredInternetAddresses.toArray(
 			new InternetAddress[filteredInternetAddresses.size()]);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(MailMessageListener.class);
 
 }
