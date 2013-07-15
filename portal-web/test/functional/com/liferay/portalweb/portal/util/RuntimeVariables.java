@@ -53,48 +53,51 @@ public class RuntimeVariables {
 			if (statementMatcher.find()) {
 				String operand = statementMatcher.group(1);
 
-				if (context.containsKey(operand)) {
-					String arguments = statementMatcher.group(3);
+				if (!context.containsKey(operand)) {
+					continue;
+				}
 
-					String[] argumentArray = arguments.split("'");
+				String[] arguments = StringUtil.split(
+					statementMatcher.group(3));
 
-					List<String> argumentList = new ArrayList<String>();
+				List<String> argumentsList = new ArrayList<String>();
 
-					for (int i = 1; i < argumentArray.length; i++) {
-						if ((i % 2) == 1) {
-							argumentList.add(argumentArray[i]);
-						}
+				for (int i = 1; i < arguments.length; i++) {
+					if ((i % 2) == 1) {
+						argumentsList.add(arguments[i]);
 					}
+				}
 
-					String method = statementMatcher.group(2);
+				String method = statementMatcher.group(2);
 
-					String operandValue = context.get(operand);
+				String operandValue = context.get(operand);
 
-					String replaceRegex = "\\$\\{([^}]*?)\\}";
+				String replaceRegex = "\\$\\{([^}]*?)\\}";
 
-					if (method.startsWith("replace")) {
-						String result = operandValue.replace(
-							argumentList.get(0), argumentList.get(1));
+				if (method.startsWith("replace")) {
+					String result = operandValue.replace(
+						argumentsList.get(0), argumentsList.get(1));
 
-						varValue = varValue.replaceFirst(replaceRegex, result);
-					}
-					else if (method.startsWith("lowercase")) {
-						String result = operandValue.toLowerCase();
+					varValue = varValue.replaceFirst(replaceRegex, result);
+				}
+				else if (method.startsWith("lowercase")) {
+					String result = operandValue.toLowerCase();
 
-						varValue = varValue.replaceFirst(replaceRegex, result);
-					}
+					varValue = varValue.replaceFirst(replaceRegex, result);
 				}
 			}
 			else {
 				String varName = statement;
 
-				if (context.containsKey(varName)) {
-					String replaceRegex = "\\$\\{([^}]*?)\\}";
-
-					String result = context.get(varName);
-
-					varValue = varValue.replaceFirst(replaceRegex, result);
+				if (!context.containsKey(varName)) {
+					continue;
 				}
+
+				String replaceRegex = "\\$\\{([^}]*?)\\}";
+
+				String result = context.get(varName);
+
+				varValue = varValue.replaceFirst(replaceRegex, result);
 			}
 		}
 
