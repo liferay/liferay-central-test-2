@@ -69,9 +69,6 @@ public class BaseExportImportBackgroundTaskStatusMessageTranslator
 
 		backgroundTaskStatus.clearAttributes();
 
-		String portletId = message.getString("portletId");
-		backgroundTaskStatus.setAttribute("portletId", portletId);
-
 		Map<String, LongWrapper> modelAdditionCounters =
 			(Map<String, LongWrapper>)message.get("modelAdditionCounters");
 
@@ -85,6 +82,10 @@ public class BaseExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"allModelDeletionCounters",
 			new HashMap<String, LongWrapper>(modelDeletionCounters));
+
+		String portletId = message.getString("portletId");
+
+		backgroundTaskStatus.setAttribute("portletId", portletId);
 	}
 
 	protected synchronized void translateStagedModelMessage(
@@ -96,14 +97,6 @@ public class BaseExportImportBackgroundTaskStatusMessageTranslator
 		if (Validator.isNull(portletId)) {
 			return;
 		}
-
-		String uuid = message.getString("uuid");
-
-		backgroundTaskStatus.setAttribute("uuid", uuid);
-
-		String stagedModelType = message.getString("stagedModelType");
-
-		backgroundTaskStatus.setAttribute("stagedModelType", stagedModelType);
 
 		Map<String, LongWrapper> modelAdditionCounters =
 			(Map<String, LongWrapper>)message.get("modelAdditionCounters");
@@ -118,6 +111,14 @@ public class BaseExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"currentModelDeletionCounters",
 			new HashMap<String, LongWrapper>(modelDeletionCounters));
+
+		String stagedModelType = message.getString("stagedModelType");
+
+		backgroundTaskStatus.setAttribute("stagedModelType", stagedModelType);
+
+		String uuid = message.getString("uuid");
+
+		backgroundTaskStatus.setAttribute("uuid", uuid);
 	}
 
 }

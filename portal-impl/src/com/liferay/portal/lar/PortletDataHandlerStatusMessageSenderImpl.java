@@ -69,8 +69,8 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		Message message = createMessage(messageType, manifestSummary);
 
 		message.put(
-			"stagedModelType", stagedModel.getStagedModelType().toString());
-
+			"stagedModelType",
+			String.valueOf(stagedModel.getStagedModelType()));
 		message.put("uuid", stagedModel.getUuid());
 
 		_singleDestinationMessageSender.send(message);
@@ -90,7 +90,6 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		message.put(
 			"backgroundTaskId",
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
-
 		message.put("messageType", messageType);
 
 		Map<String, LongWrapper> modelAdditionCounters =
