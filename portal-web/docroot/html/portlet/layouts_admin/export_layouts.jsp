@@ -56,24 +56,22 @@ if (endDateTime > 0) {
 	endDate = new Date(endDateTime);
 }
 
-long[] selectedLayoutIds = new long[0];
+String treeId = "layoutsExportTree";
 
-String treeKey = "layoutsExportTree";
+long[] selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode"), ','));
 
-selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "SelectedNode"), ','));
-
-List<Layout> exportLayouts = new ArrayList<Layout>();
+List<Layout> selectedLayouts = new ArrayList<Layout>();
 
 for (int i = 0; i < selectedLayoutIds.length; i++) {
 	try {
-		exportLayouts.add(LayoutLocalServiceUtil.getLayout(groupId, privateLayout, selectedLayoutIds[i]));
+		selectedLayouts.add(LayoutLocalServiceUtil.getLayout(groupId, privateLayout, selectedLayoutIds[i]));
 	}
 	catch (NoSuchLayoutException nsle) {
 	}
 }
 
-if (exportLayouts.isEmpty()) {
-	exportLayouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
+if (selectedLayouts.isEmpty()) {
+	selectedLayouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -119,7 +117,7 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 								<aui:fieldset cssClass="portlet-data-section" label="pages-to-export">
 									<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">
 										<liferay-util:param name="tabs1" value='<%= privateLayout ? "private-pages" : "public-pages" %>' />
-										<liferay-util:param name="treeId" value="<%= treeKey %>" />
+										<liferay-util:param name="treeId" value="<%= treeId %>" />
 										<liferay-util:param name="defaultStateChecked" value="1" />
 										<liferay-util:param name="expandFirstNode" value="1" />
 										<liferay-util:param name="saveState" value="1" />
@@ -141,7 +139,7 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 					</c:if>
 
 					<%
-					List<Portlet> portletDataHandlerPortlets = LayoutExporter.getPortletDataHandlerPortlets(exportLayouts);
+					List<Portlet> portletDataHandlerPortlets = LayoutExporter.getPortletDataHandlerPortlets(selectedLayouts);
 					%>
 
 					<c:if test="<%= !portletDataHandlerPortlets.isEmpty() %>">
