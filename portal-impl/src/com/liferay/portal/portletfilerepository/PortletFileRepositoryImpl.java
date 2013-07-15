@@ -96,7 +96,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 	public FileEntry addPortletFileEntry(
 			long groupId, long userId, String className, long classPK,
 			String portletId, long folderId, File file, String fileName,
-			String mimeType, boolean indexEnabled)
+			String mimeType, boolean indexingEnabled)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(fileName)) {
@@ -113,7 +113,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		serviceContext.setAttribute("className", className);
 		serviceContext.setAttribute("classPK", String.valueOf(classPK));
-		serviceContext.setIndexingEnabled(indexEnabled);
+		serviceContext.setIndexingEnabled(indexingEnabled);
 
 		if (Validator.isNull(mimeType) ||
 			mimeType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
@@ -152,7 +152,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 	public FileEntry addPortletFileEntry(
 			long groupId, long userId, String className, long classPK,
 			String portletId, long folderId, InputStream inputStream,
-			String fileName, String mimeType, boolean indexEnabled)
+			String fileName, String mimeType, boolean indexingEnabled)
 		throws PortalException, SystemException {
 
 		if (inputStream == null) {
@@ -166,7 +166,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 			return addPortletFileEntry(
 				groupId, userId, className, classPK, portletId, folderId, file,
-				fileName, mimeType, indexEnabled);
+				fileName, mimeType, indexingEnabled);
 		}
 		catch (IOException ioe) {
 			throw new SystemException("Unable to write temporary file", ioe);
