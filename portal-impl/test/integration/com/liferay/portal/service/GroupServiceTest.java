@@ -163,20 +163,6 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindNonexistentGroup() throws Exception {
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
-
-		groupParams.put("manualMembership", Boolean.TRUE);
-		groupParams.put("site", Boolean.TRUE);
-
-		Assert.assertEquals(
-			0,
-			GroupLocalServiceUtil.searchCount(
-				TestPropsValues.getCompanyId(), null, "cabina14", groupParams));
-	}
-
-	@Test
 	public void testFindGroupByDescription() throws Exception {
 		String description = ServiceTestUtil.randomString();
 
@@ -273,9 +259,7 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testFindGuestGroupByCompanyNameCapitalized()
-		throws Exception {
-
+	public void testFindGuestGroupByCompanyNameCapitalized() throws Exception {
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
@@ -286,6 +270,20 @@ public class GroupServiceTest {
 			1,
 			GroupLocalServiceUtil.searchCount(
 				TestPropsValues.getCompanyId(), null, "Liferay", groupParams));
+	}
+
+	@Test
+	public void testFindNonexistentGroup() throws Exception {
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
+
+		groupParams.put("manualMembership", Boolean.TRUE);
+		groupParams.put("site", Boolean.TRUE);
+
+		Assert.assertEquals(
+			0,
+			GroupLocalServiceUtil.searchCount(
+				TestPropsValues.getCompanyId(), null, "cabina14", groupParams));
 	}
 
 	@Test
