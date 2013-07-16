@@ -196,13 +196,13 @@ public class StartupAction extends SimpleAction {
 
 		JspFactorySwapper.swap();
 
+		// Background tasks
+
+		BackgroundTaskLocalServiceUtil.cleanUpBackgroundTasks();
+
 		// Jericho
 
 		CachedLoggerProvider.install();
-
-		// Background Tasks
-
-		BackgroundTaskLocalServiceUtil.terminateZombieBackgroundTasks();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

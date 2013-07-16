@@ -723,12 +723,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			if (!backgroundTasks.isEmpty()) {
 				throw new PendingBackgroundTaskException(
-					"Cannot delete group with pending background tasks");
+					"Unable to delete group with pending background tasks");
 			}
 
 			// Background tasks
 
-			backgroundTaskLocalService.deleteBackgroundTasksByGroupId(
+			backgroundTaskLocalService.deleteGroupBackgroundTasks(
 				group.getGroupId());
 
 			// Layout set branches

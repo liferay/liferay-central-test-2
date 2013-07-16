@@ -132,13 +132,22 @@
 
 		<!-- Finder methods -->
 
-		<finder name="G_S" return-type="Collection">
+		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="Status" return-type="Collection">
 			<finder-column name="status" />
 		</finder>
 		<finder name="G_T" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="taskExecutorClassName" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="T_S" return-type="Collection">
 			<finder-column name="taskExecutorClassName" />
