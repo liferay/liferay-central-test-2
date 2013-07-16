@@ -314,8 +314,7 @@ public class BackgroundTaskLocalServiceWrapper
 
 	@Override
 	public void cleanUpBackgroundTasks()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_backgroundTaskLocalService.cleanUpBackgroundTasks();
 	}
 

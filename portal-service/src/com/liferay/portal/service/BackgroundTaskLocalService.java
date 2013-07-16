@@ -263,8 +263,7 @@ public interface BackgroundTaskLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void cleanUpBackgroundTasks()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteCompanyBackgroundTasks(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
