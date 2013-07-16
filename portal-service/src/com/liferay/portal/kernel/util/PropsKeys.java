@@ -949,7 +949,7 @@ public interface PropsKeys {
 
 	public static final String INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED = "index.search.collated.spell.check.result.enabled";
 
-	public static final String INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD = "index.search.collated.spell.check.result.scoring.threshold";
+	public static final String INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD = "index.search.collated.spell.check.result.scores.threshold";
 
 	public static final String INDEX_SEARCH_ENGINE_ID = "index.search.engine.id";
 
@@ -969,7 +969,7 @@ public interface PropsKeys {
 
 	public static final String INDEX_SEARCH_QUERY_SUGGESTION_MAX = "index.search.query.suggestion.max";
 
-	public static final String INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD = "index.search.query.suggestion.scoring.threshold";
+	public static final String INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD = "index.search.query.suggestion.scores.threshold";
 
 	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
 

@@ -44,8 +44,8 @@ public class QueryConfig implements Serializable {
 		return GetterUtil.getInteger(
 			_attributes.get(
 				PropsKeys.
-					INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD),
-				_INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD);
+					INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD),
+				_INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD);
 	}
 
 	public int getHighlightFragmentSize() {
@@ -87,8 +87,8 @@ public class QueryConfig implements Serializable {
 	public int getQuerySuggestionScoresThreshold() {
 		return GetterUtil.getInteger(
 			_attributes.get(
-				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD),
-			_INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD);
+				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD),
+				_INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD);
 	}
 
 	public boolean isCollatedSpellCheckResultEnabled() {
@@ -137,17 +137,19 @@ public class QueryConfig implements Serializable {
 
 	public void setCollatedSpellCheckResultEnabled(
 		boolean collatedSpellCheckResultEnabled) {
-			_attributes.put(
-				PropsKeys.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED,
-				collatedSpellCheckResultEnabled);
+
+		_attributes.put(
+			PropsKeys.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED,
+			collatedSpellCheckResultEnabled);
 	}
 
 	public void setCollatedSpellCheckResultScoresThreshold(
-		int collatedSpellCheckResultDisplayThreshold) {
-			_attributes.put(
-				PropsKeys.
-					INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD,
-				collatedSpellCheckResultDisplayThreshold);
+		int collatedSpellCheckResultScoresThreshold) {
+
+		_attributes.put(
+			PropsKeys.
+				INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD,
+			collatedSpellCheckResultScoresThreshold);
 	}
 
 	public void setHighlightEnabled(boolean highlightEnabled) {
@@ -190,21 +192,22 @@ public class QueryConfig implements Serializable {
 			queryIndexingThreshold);
 	}
 
+	public void setQuerySuggestionEnabled(boolean querySuggestionEnabled) {
+		_attributes.put(
+			PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_ENABLED,
+			querySuggestionEnabled);
+	}
+
 	public void setQuerySuggestionScoresThreshold(
 		int querySuggestionScoresThreshold) {
 			_attributes.put(
-				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD,
+				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD,
 				querySuggestionScoresThreshold);
 	}
 
-	public void setQuerySuggestionsEnabled(boolean querySuggestionsEnabled) {
+	public void setQuerySuggestionsMax(int querySuggestionMax) {
 		_attributes.put(
-			PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_ENABLED,
-			querySuggestionsEnabled);
-	}
-
-	public void setQuerySuggestionsMax(int max) {
-		_attributes.put(PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_MAX, max);
+			PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_MAX, querySuggestionMax);
 	}
 
 	public void setScoreEnabled(boolean scoreEnabled) {
@@ -216,18 +219,18 @@ public class QueryConfig implements Serializable {
 
 	private static final boolean
 		_INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED),
-			true);
+			GetterUtil.getBoolean(
+				PropsUtil.get(
+					PropsKeys.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED),
+				true);
 
 	private static final int
-		_INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD =
-		GetterUtil.getInteger(
-			PropsUtil.get(
-				PropsKeys.
-					INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORING_THRESHOLD),
-				50);
+		_INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD =
+			GetterUtil.getInteger(
+				PropsUtil.get(
+					PropsKeys.
+						INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD),
+					50);
 
 	private static final boolean _INDEX_SEARCH_HIGHLIGHT_ENABLED =
 		GetterUtil.getBoolean(
@@ -261,11 +264,9 @@ public class QueryConfig implements Serializable {
 			PropsUtil.get(PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_MAX), 5);
 
 	private static final int
-		_INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD =
-			GetterUtil.getInteger(
-				PropsUtil.get(
-					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORING_THRESHOLD),
-				50);
+		_INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD = GetterUtil.getInteger(
+			PropsUtil.get(
+				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD), 50);
 
 	private static final boolean _INDEX_SEARCH_SCORING_ENABLED =
 		GetterUtil.getBoolean(

@@ -32,17 +32,14 @@ public class QuerySuggestionHitsProcessor implements HitsProcessor {
 			return true;
 		}
 
-		int querySuggestionScoresThreshold =
-			queryConfig.getQuerySuggestionScoresThreshold();
+		if (hits.getLength() >=
+				queryConfig.getQuerySuggestionScoresThreshold()) {
 
-		if (hits.getLength() >= querySuggestionScoresThreshold) {
 			return true;
 		}
 
-		int maxSuggestions = queryConfig.getQuerySuggestionMax();
-
 		String[] querySuggestions = SearchEngineUtil.suggestKeywordQueries(
-			searchContext, maxSuggestions);
+			searchContext, queryConfig.getQuerySuggestionMax());
 
 		querySuggestions = ArrayUtil.remove(
 			querySuggestions, searchContext.getKeywords());
