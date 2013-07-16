@@ -348,6 +348,7 @@
 				<entry key="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" value="" />
 				<entry key="com.liferay.portal.spring.transaction.TransactionInterceptor" value="platformTransactionManager,transactionAttributeSource" />
 				<entry key="com.liferay.portal.spring.transaction.TransactionInterceptorFactoryBean" value="platformTransactionManager,transactionAttributeSource" />
+				<entry key="com.liferay.portal.systemevents.SystemEventAdvice" value="nextMethodInterceptor" />
 			</map>
 		</property>
 	</bean>
