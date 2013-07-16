@@ -28,12 +28,12 @@ public class SystemEventHierarchyEntry {
 		long systemEventId, long classNameId, long classPK,
 		long parentSystemEventId, long systemEventSetKey, int action) {
 
-		_action = action;
+		_systemEventId = systemEventId;
 		_classNameId = classNameId;
 		_classPK = classPK;
 		_parentSystemEventId = parentSystemEventId;
-		_systemEventId = systemEventId;
 		_systemEventSetKey = systemEventSetKey;
+		_action = action;
 	}
 
 	public int getAction() {
@@ -72,7 +72,7 @@ public class SystemEventHierarchyEntry {
 		return _uuid;
 	}
 
-	public boolean isCurrentAsset(long classNameId, long classPK) {
+	public boolean hasTypedModel(long classNameId, long classPK) {
 		if ((_classNameId == classNameId) && (_classPK == classPK)) {
 			return true;
 		}
@@ -80,10 +80,10 @@ public class SystemEventHierarchyEntry {
 		return false;
 	}
 
-	public boolean isCurrentAsset(String className, long classPK) {
+	public boolean hasTypedModel(String className, long classPK) {
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return isCurrentAsset(classNameId, classPK);
+		return hasTypedModel(classNameId, classPK);
 	}
 
 	public void setClassName(String className) {

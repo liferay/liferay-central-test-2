@@ -85,35 +85,38 @@ public class SystemEventHierarchyEntryThreadLocal {
 			long classNameId, long classPK, int action)
 		throws SystemException {
 
-		Stack<SystemEventHierarchyEntry> systemEventHierarchyEntries =
-			_systemEventHierarchyEntries.get();
-
-		SystemEventHierarchyEntry parentEntry = null;
-
-		if (!systemEventHierarchyEntries.isEmpty()) {
-			parentEntry = systemEventHierarchyEntries.peek();
-		}
-
 		long parentSystemEventId = 0;
 		long systemEventSetKey = 0;
 
-		if (parentEntry == null) {
+		Stack<SystemEventHierarchyEntry> systemEventHierarchyEntries =
+			_systemEventHierarchyEntries.get();
+
+		SystemEventHierarchyEntry parentSystemEventHierarchyEntry = null;
+
+		if (!systemEventHierarchyEntries.isEmpty()) {
+			parentSystemEventHierarchyEntry =
+				systemEventHierarchyEntries.peek();
+		}
+
+		if (parentSystemEventHierarchyEntry == null) {
 			systemEventSetKey = CounterLocalServiceUtil.increment();
 		}
-		else if (parentEntry.getAction() == SystemEventConstants.ACTION_SKIP) {
+		else if (parentSystemEventHierarchyEntry.getAction() ==
+					SystemEventConstants.ACTION_SKIP) {
+
 			return null;
 		}
 		else {
-			parentSystemEventId = parentEntry.getSystemEventId();
-			systemEventSetKey = parentEntry.getSystemEventSetKey();
+			parentSystemEventId =
+				parentSystemEventHierarchyEntry.getSystemEventId();
+			systemEventSetKey =
+				parentSystemEventHierarchyEntry.getSystemEventSetKey();
 		}
-
-		long systemEventId = CounterLocalServiceUtil.increment();
 
 		SystemEventHierarchyEntry systemEventHierarchyEntry =
 			new SystemEventHierarchyEntry(
-				systemEventId, classNameId, classPK, parentSystemEventId,
-				systemEventSetKey, action);
+				CounterLocalServiceUtil.increment(), classNameId, classPK,
+				parentSystemEventId, systemEventSetKey, action);
 
 		return systemEventHierarchyEntries.push(systemEventHierarchyEntry);
 	}

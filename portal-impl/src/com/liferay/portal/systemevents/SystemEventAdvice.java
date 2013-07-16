@@ -77,7 +77,7 @@ public class SystemEventAdvice
 			SystemEventHierarchyEntryThreadLocal.peek();
 
 		if ((systemEventHierarchyEntry != null) &&
-			systemEventHierarchyEntry.isCurrentAsset(className, classPK)) {
+			systemEventHierarchyEntry.hasTypedModel(className, classPK)) {
 
 			if (groupId > 0) {
 				SystemEventLocalServiceUtil.addSystemEvent(
@@ -163,7 +163,7 @@ public class SystemEventAdvice
 					return;
 				}
 
-				if (systemEventHierarchyEntry.isCurrentAsset(
+				if (systemEventHierarchyEntry.hasTypedModel(
 						getClassName(classedModel), classPK)) {
 
 					SystemEventHierarchyEntryThreadLocal.pop();

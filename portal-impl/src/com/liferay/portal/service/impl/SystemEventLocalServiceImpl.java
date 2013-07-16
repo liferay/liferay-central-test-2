@@ -126,7 +126,7 @@ public class SystemEventLocalServiceImpl
 			action = systemEventHierarchyEntry.getAction();
 
 			if ((action == SystemEventConstants.ACTION_SKIP) &&
-				!systemEventHierarchyEntry.isCurrentAsset(
+				!systemEventHierarchyEntry.hasTypedModel(
 					className, classPK)) {
 
 				return null;
@@ -150,7 +150,7 @@ public class SystemEventLocalServiceImpl
 		long systemEventId = 0;
 
 		if ((systemEventHierarchyEntry != null) &&
-			systemEventHierarchyEntry.isCurrentAsset(className, classPK)) {
+			systemEventHierarchyEntry.hasTypedModel(className, classPK)) {
 
 			systemEventId = systemEventHierarchyEntry.getSystemEventId();
 		}
@@ -174,7 +174,7 @@ public class SystemEventLocalServiceImpl
 		long parentSystemEventId = 0;
 
 		if (action == SystemEventConstants.ACTION_HIERARCHY) {
-			if (systemEventHierarchyEntry.isCurrentAsset(className, classPK)) {
+			if (systemEventHierarchyEntry.hasTypedModel(className, classPK)) {
 				parentSystemEventId =
 					systemEventHierarchyEntry.getParentSystemEventId();
 			}
