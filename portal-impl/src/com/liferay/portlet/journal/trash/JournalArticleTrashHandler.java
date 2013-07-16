@@ -54,7 +54,7 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getLatestArticle(classPK);
 
-		checkDuplicate(
+		checkDuplicateEntry(
 			classPK, 0, containerModelId, article.getArticleId(), newName);
 	}
 
@@ -63,7 +63,7 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 			TrashEntry trashEntry, long containerModelId, String newName)
 		throws PortalException, SystemException {
 
-		checkDuplicate(
+		checkDuplicateEntry(
 			trashEntry.getClassPK(), trashEntry.getEntryId(), containerModelId,
 			trashEntry.getTypeSettingsProperty("title"), newName);
 	}
@@ -251,7 +251,7 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 			articleResource);
 	}
 
-	protected void checkDuplicate(
+	protected void checkDuplicateEntry(
 			long classPK, long trashEntryId, long containerModelId,
 			String originalTitle, String newName)
 		throws PortalException, SystemException {

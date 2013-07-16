@@ -57,7 +57,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 
 		DLFolder dlFolder = getDLFolder(classPK);
 
-		checkDuplicate(
+		checkDuplicateEntry(
 			classPK, 0, containerModelId, dlFolder.getName(), newName);
 	}
 
@@ -66,7 +66,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 			TrashEntry trashEntry, long containerModelId, String newName)
 		throws PortalException, SystemException {
 
-		checkDuplicate(
+		checkDuplicateEntry(
 			trashEntry.getClassPK(), trashEntry.getEntryId(), containerModelId,
 			trashEntry.getTypeSettingsProperty("title"), newName);
 	}
@@ -259,7 +259,7 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 		DLFolderLocalServiceUtil.updateDLFolder(dlFolder);
 	}
 
-	protected void checkDuplicate(
+	protected void checkDuplicateEntry(
 			long classPK, long trashEntryId, long containerModelId,
 			String originalTitle, String newName)
 		throws PortalException, SystemException {

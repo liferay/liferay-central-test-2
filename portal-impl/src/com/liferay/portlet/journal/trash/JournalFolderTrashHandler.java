@@ -48,7 +48,7 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 
 		JournalFolder folder = JournalFolderLocalServiceUtil.getFolder(classPK);
 
-		checkDuplicate(classPK, 0, containerModelId, folder.getName(), newName);
+		checkDuplicateEntry(classPK, 0, containerModelId, folder.getName(), newName);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 			TrashEntry trashEntry, long containerModelId, String newName)
 		throws PortalException, SystemException {
 
-		checkDuplicate(
+		checkDuplicateEntry(
 			trashEntry.getClassPK(), trashEntry.getEntryId(), containerModelId,
 			trashEntry.getTypeSettingsProperty("title"), newName);
 	}
@@ -223,7 +223,7 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 		JournalFolderLocalServiceUtil.updateJournalFolder(folder);
 	}
 
-	protected void checkDuplicate(
+	protected void checkDuplicateEntry(
 			long classPK, long trashEntryId, long containerModelId,
 			String originalTitle, String newName)
 		throws PortalException, SystemException {
