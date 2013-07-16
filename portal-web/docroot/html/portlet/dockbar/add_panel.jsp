@@ -50,7 +50,7 @@
 				if (hasAddApplicationsPermission) {
 					tabs1Names = ArrayUtil.append(tabs1Names, "applications");
 				}
-				
+
 				boolean hasAddPagePermission = !layout.isLayoutPrototypeLinkActive();
 
 				if (hasAddPagePermission) {
