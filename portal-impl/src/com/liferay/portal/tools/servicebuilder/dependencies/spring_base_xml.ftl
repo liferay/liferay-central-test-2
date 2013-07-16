@@ -97,7 +97,7 @@
 		</constructor-arg>
 	</bean>
 	<bean id="systemEventAdvice" class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil" factory-method="newBean">
-		<constructor-arg value="com.liferay.portal.systemevents.SystemEventAdvice" />
+		<constructor-arg value="com.liferay.portal.systemevent.SystemEventAdvice" />
 		<constructor-arg>
 			<map>
 				<entry key="nextMethodInterceptor" value-ref="transactionAdvice" />
