@@ -149,7 +149,7 @@ public class BackgroundTaskLocalServiceImpl
 
 	@Override
 	public void cleanUpBackgroundTasks()
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<BackgroundTask> backgroundTasks =
 			backgroundTaskPersistence.findByStatus(
