@@ -86,8 +86,9 @@ public class TunnelServlet extends HttpServlet {
 				_log.error(ite, ite);
 
 				if (returnObj != null) {
-					returnObj = new SystemException(
-						((Throwable)returnObj).getMessage());
+					Throwable throwable = (Throwable)returnObj;
+
+					returnObj = new SystemException(throwable.getMessage());
 				}
 				else {
 					returnObj = new SystemException();
