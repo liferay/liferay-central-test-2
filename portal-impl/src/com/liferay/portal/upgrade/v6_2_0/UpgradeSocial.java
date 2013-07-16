@@ -190,10 +190,8 @@ public class UpgradeSocial extends UpgradeProcess {
 				long classPK = rs.getLong("classPK");
 				int type_ = rs.getInt("type_");
 
-				long activitySetId = increment();
-
 				addActivitySet(
-					activitySetId, groupId, companyId, userId, createDate,
+					increment(), groupId, companyId, userId, createDate,
 					classNameId, classPK, type_);
 			}
 		}
