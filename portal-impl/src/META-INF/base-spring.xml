@@ -50,7 +50,7 @@
 	<bean id="indexableAdvice" class="com.liferay.portal.search.IndexableAdvice">
 		<property name="nextMethodInterceptor" ref="systemEventAdvice" />
 	</bean>
-	<bean id="systemEventAdvice" class="com.liferay.portal.systemevents.SystemEventAdvice">
+	<bean id="systemEventAdvice" class="com.liferay.portal.systemevent.SystemEventAdvice">
 		<property name="nextMethodInterceptor" ref="transactionAdvice" />
 	</bean>
 	<bean id="counterTransactionAdvice" class="com.liferay.portal.spring.transaction.TransactionInterceptor">
