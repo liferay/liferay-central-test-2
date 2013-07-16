@@ -30,10 +30,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface SystemEvent {
 
-	public int childAction() default SystemEventConstants.ACTION_NONE;
+	public int action() default SystemEventConstants.ACTION_NONE;
 
-	public boolean sendEvent() default true;
+	public boolean send() default true;
 
-	public int type() default 0;
+	public int type() default SystemEventConstants.ACTION_NONE;
 
 }

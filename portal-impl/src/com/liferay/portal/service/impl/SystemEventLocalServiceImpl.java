@@ -169,7 +169,6 @@ public class SystemEventLocalServiceImpl
 		systemEvent.setClassPK(classPK);
 		systemEvent.setClassUuid(classUuid);
 		systemEvent.setReferrerClassName(referrerClassName);
-		systemEvent.setType(type);
 
 		long parentSystemEventId = 0;
 
@@ -184,6 +183,8 @@ public class SystemEventLocalServiceImpl
 			}
 		}
 
+		systemEvent.setParentSystemEventId(parentSystemEventId);
+
 		long systemEventSetKey = 0;
 
 		if ((action == SystemEventConstants.ACTION_GROUP) ||
@@ -196,8 +197,9 @@ public class SystemEventLocalServiceImpl
 			systemEventSetKey = counterLocalService.increment();
 		}
 
-		systemEvent.setParentSystemEventId(parentSystemEventId);
 		systemEvent.setSystemEventSetKey(systemEventSetKey);
+
+		systemEvent.setType(type);
 		systemEvent.setExtraData(extraData);
 
 		return systemEventPersistence.update(systemEvent);

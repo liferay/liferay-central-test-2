@@ -27,6 +27,8 @@ public class SystemEventConstants {
 
 	public static final int ACTION_SKIP = 1;
 
+	public static final int TYPE_DEFAULT = 0;
+
 	public static final int TYPE_DELETE = 1;
 
 }
