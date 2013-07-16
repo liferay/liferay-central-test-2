@@ -330,16 +330,12 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 
 	@Override
 	public boolean isInTrashContainer() {
-		boolean isInTrashContainer = false;
-
 		try {
-			isInTrashContainer = _dlFileVersion.isInTrashContainer();
+			return _dlFileVersion.isInTrashContainer();
 		}
 		catch (Exception e) {
 			return false;
 		}
-
-		return isInTrashContainer;
 	}
 
 	@Override

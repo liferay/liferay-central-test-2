@@ -620,10 +620,10 @@ public abstract class BaseTrashHandlerTestCase {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			getBaseModelClassName());
 
-		boolean isRestorable = trashHandler.isRestorable(
+		boolean restorable = trashHandler.isRestorable(
 			getAssetClassPK(baseModel));
 
-		Assert.assertEquals(isRestorable, true);
+		Assert.assertTrue(restorable);
 	}
 
 	protected void trashIsRestorableBaseModelWithParent(
@@ -662,14 +662,14 @@ public abstract class BaseTrashHandlerTestCase {
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
 			getBaseModelClassName());
 
-		boolean isRestorable = trashHandler.isRestorable(
+		boolean restorable = trashHandler.isRestorable(
 			getAssetClassPK(baseModel));
 
 		if (moveParentToTrash || deleteParent) {
-			Assert.assertEquals(false, isRestorable);
+			Assert.assertFalse(restorable);
 		}
 		else {
-			Assert.assertEquals(true, isRestorable);
+			Assert.assertTrue(restorable);
 		}
 	}
 

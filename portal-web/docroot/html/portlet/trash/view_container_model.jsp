@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/trash/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectFolder");
 String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectFolder");
 
 TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(className);
 
