@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.systemevents;
+package com.liferay.portal.systemevent;
 
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.systemevents.SystemEvent;
-import com.liferay.portal.kernel.systemevents.SystemEventHierarchyEntry;
-import com.liferay.portal.kernel.systemevents.SystemEventHierarchyEntryThreadLocal;
+import com.liferay.portal.kernel.systemevent.SystemEvent;
+import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntry;
+import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntryThreadLocal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.AuditedModel;

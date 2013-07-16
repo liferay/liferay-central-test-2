@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.systemevents;
+package com.liferay.portal.kernel.systemevent;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;

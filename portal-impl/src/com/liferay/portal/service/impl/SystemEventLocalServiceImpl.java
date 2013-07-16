@@ -16,8 +16,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.systemevents.SystemEventHierarchyEntry;
-import com.liferay.portal.kernel.systemevents.SystemEventHierarchyEntryThreadLocal;
+import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntry;
+import com.liferay.portal.kernel.systemevent.SystemEventHierarchyEntryThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
