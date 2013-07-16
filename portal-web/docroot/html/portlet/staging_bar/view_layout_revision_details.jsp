@@ -89,6 +89,8 @@ else {
 
 			stagingBar.layoutRevisionToolbar.add(
 				{
+					icon: 'shuffle',
+					label: '<%= UnicodeLanguageUtil.get(pageContext, "workflow") %>',
 					on: {
 						click: function(event) {
 
@@ -122,9 +124,7 @@ else {
 								}
 							);
 						}
-					},
-					icon: 'shuffle',
-					label: '<%= UnicodeLanguageUtil.get(pageContext, "workflow") %>'
+					}
 				}
 			);
 		</c:when>
