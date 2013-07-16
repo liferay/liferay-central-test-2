@@ -240,10 +240,7 @@ public class LoginAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		PortletURL portletURL = new PortletURLImpl(
 			actionRequest, PortletKeys.LOGIN, layout.getPlid(),
