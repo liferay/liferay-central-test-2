@@ -20,8 +20,6 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 
 		<%
-		boolean isStateMaximized = ParamUtil.getBoolean(request, "isStateMaximized");
-
 		Group group = null;
 
 		if (layout != null) {
@@ -39,13 +37,15 @@
 				<%
 				String[] tabs1Names = new String[0];
 
-				boolean hasAddContentPermission = !isStateMaximized && (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT) && !group.isLayoutPrototype() && !layout.isTypePanel());
+				boolean stateMaximized = ParamUtil.getBoolean(request, "stateMaximized");
+
+				boolean hasAddContentPermission = !stateMaximized && (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT) && !group.isLayoutPrototype() && !layout.isTypePanel());
 
 				if (hasAddContentPermission) {
 					tabs1Names = ArrayUtil.append(tabs1Names, "content");
 				}
 
-				boolean hasAddApplicationsPermission = !isStateMaximized && layout.isTypePortlet() && !layout.isLayoutPrototypeLinkActive();
+				boolean hasAddApplicationsPermission = !stateMaximized && layout.isTypePortlet() && !layout.isLayoutPrototypeLinkActive();
 
 				if (hasAddApplicationsPermission) {
 					tabs1Names = ArrayUtil.append(tabs1Names, "applications");
@@ -59,7 +59,7 @@
 
 				String selectedTab = GetterUtil.getString(SessionClicks.get(request, "liferay_addpanel_tab", "content"));
 
-				if (isStateMaximized) {
+				if (stateMaximized) {
 					selectedTab = "page";
 				}
 				%>
