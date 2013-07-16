@@ -24,9 +24,9 @@ String controlPanelCategory = themeDisplay.getControlPanelCategory();
 boolean showControlPanelMenu = true;
 
 if (controlPanelCategory.startsWith(PortletCategoryKeys.CURRENT_SITE)) {
-	showControlPanelMenu = false;
-
 	controlPanelCategory = StringUtil.replace(controlPanelCategory, PortletCategoryKeys.CURRENT_SITE + StringPool.PERIOD, PortletCategoryKeys.SITE_ADMINISTRATION);
+
+	showControlPanelMenu = false;
 }
 
 List<Portlet> portlets = PortalUtil.getControlPanelPortlets(controlPanelCategory, themeDisplay);
