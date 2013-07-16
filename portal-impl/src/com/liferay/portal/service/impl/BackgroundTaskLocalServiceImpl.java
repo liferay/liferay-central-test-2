@@ -148,9 +148,7 @@ public class BackgroundTaskLocalServiceImpl
 	}
 
 	@Override
-	public void cleanUpBackgroundTasks()
-		throws SystemException {
-
+	public void cleanUpBackgroundTasks() throws SystemException {
 		List<BackgroundTask> backgroundTasks =
 			backgroundTaskPersistence.findByStatus(
 				BackgroundTaskConstants.STATUS_IN_PROGRESS);
