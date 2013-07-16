@@ -119,14 +119,10 @@ if (Validator.isNotNull(structureAvailableFields)) {
 	}
 	%>
 
-	<%
-	title = HtmlUtil.escape(title);
-	%>
-
 	<liferay-ui:header
 		backURL="<%= ddmDisplay.getEditTemplateBackURL(liferayPortletRequest, liferayPortletResponse, classNameId, classPK, portletResource) %>"
 		localizeTitle="<%= false %>"
-		title="<%= title %>"
+		title="<%= HtmlUtil.escape(title) %>"
 	/>
 
 	<aui:model-context bean="<%= template %>" model="<%= DDMTemplate.class %>" />
