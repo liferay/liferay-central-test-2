@@ -44,7 +44,7 @@ public class IconConfigurationTag extends IconTag {
 		setMessage("configuration");
 		setMethod("get");
 
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("Liferay.Portlet.openWindow('#p_p_id_");
 		sb.append(portletDisplay.getId());
