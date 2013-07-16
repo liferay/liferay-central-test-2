@@ -48,7 +48,8 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 
 		JournalFolder folder = JournalFolderLocalServiceUtil.getFolder(classPK);
 
-		checkDuplicateEntry(classPK, 0, containerModelId, folder.getName(), newName);
+		checkDuplicateEntry(
+			classPK, 0, containerModelId, folder.getName(), newName);
 	}
 
 	@Override

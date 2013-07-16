@@ -765,7 +765,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			parentFolderId, serviceContext.getScopeGroupId());
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			Folder toFolder = destinationLocalRepository.getFolder(parentFolderId);
+			Folder toFolder = destinationLocalRepository.getFolder(
+				parentFolderId);
 
 			if (toFolder.isMountPoint()) {
 				destinationLocalRepository = getLocalRepository(

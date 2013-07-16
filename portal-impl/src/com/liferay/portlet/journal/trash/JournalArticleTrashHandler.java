@@ -282,6 +282,7 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 		}
 	}
 
+	@Override
 	protected long getGroupId(long classPK)
 		throws PortalException, SystemException {
 

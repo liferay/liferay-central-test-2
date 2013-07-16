@@ -643,7 +643,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		MBCategory oldCategory = null;
 
 		if (oldCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			oldCategory = mbCategoryPersistence.fetchByPrimaryKey(oldCategoryId);
+			oldCategory = mbCategoryPersistence.fetchByPrimaryKey(
+				oldCategoryId);
 		}
 
 		MBCategory category = null;

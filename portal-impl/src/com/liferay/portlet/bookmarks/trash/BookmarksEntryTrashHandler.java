@@ -169,6 +169,7 @@ public class BookmarksEntryTrashHandler extends BookmarksBaseTrashHandler {
 		BookmarksEntryLocalServiceUtil.restoreEntryFromTrash(userId, classPK);
 	}
 
+	@Override
 	protected long getGroupId(long classPK)
 		throws PortalException, SystemException {
 
