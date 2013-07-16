@@ -2371,20 +2371,6 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	protected String utilTaglibDTD;
 	protected List<String> wars;
 
-	private String _getAdminListOptions() {
-		String adminAppListOptions =
-			PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_LIST_OPTIONS;
-
-		if (Validator.isNull(adminAppListOptions)) {
-			return StringPool.BLANK;
-		}
-
-		adminAppListOptions =
-			StringPool.APOSTROPHE + adminAppListOptions + StringPool.APOSTROPHE;
-
-		return adminAppListOptions;
-	}
-
 	private static final String _PORTAL_CLASS_LOADER =
 		"com.liferay.support.tomcat.loader.PortalClassLoader";
 
