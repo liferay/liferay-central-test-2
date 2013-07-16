@@ -370,7 +370,7 @@ public class BackgroundTaskLocalServiceImpl
 	public BackgroundTask updateBackgroundTask(
 			long backgroundTaskId, Map<String, Serializable> taskContextMap,
 			int status, ServiceContext serviceContext)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return updateBackgroundTask(
 			backgroundTaskId, taskContextMap, status, null, serviceContext);
@@ -380,16 +380,12 @@ public class BackgroundTaskLocalServiceImpl
 	public BackgroundTask updateBackgroundTask(
 			long backgroundTaskId, Map<String, Serializable> taskContextMap,
 			int status, String statusMessage, ServiceContext serviceContext)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Date now = new Date();
 
 		BackgroundTask backgroundTask =
-			backgroundTaskPersistence.fetchByPrimaryKey(backgroundTaskId);
-
-		if (backgroundTask == null) {
-			return null;
-		}
+			backgroundTaskPersistence.findByPrimaryKey(backgroundTaskId);
 
 		backgroundTask.setModifiedDate(serviceContext.getModifiedDate(now));
 
