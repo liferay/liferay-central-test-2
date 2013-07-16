@@ -120,6 +120,8 @@ if (Validator.isNotNull(portletResource)) {
 		<div>
 
 			<%
+			Set<String> relatedPortletResources = new HashSet<String>();
+
 			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("permissions");
@@ -129,35 +131,22 @@ if (Validator.isNotNull(portletResource)) {
 
 			searchContainer.setRowChecker(new ResourceActionRowChecker(liferayPortletResponse));
 
-			List<TemplateHandler> templateHandlers = TemplateHandlerRegistryUtil.getTemplateHandlers();
-
-			String actionId = ActionKeys.ADD_PORTLET_DISPLAY_TEMPLATE;
-			int scope = ResourceConstants.SCOPE_COMPANY;
-			boolean supportsFilterByGroup = true;
-
 			List resultRows = searchContainer.getResultRows();
 
-			Set<String> relatedPortletResources = new HashSet<String>();
-
-			int count = 0;
-
-			for (int i = 0; i < templateHandlers.size(); i++) {
-				TemplateHandler templateHandler = templateHandlers.get(i);
-
+			for (TemplateHandler templateHandler : TemplateHandlerRegistryUtil.getTemplateHandlers()) {
 				if (!(templateHandler instanceof BasePortletDisplayTemplateHandler)) {
 					continue;
 				}
 
+				String actionId = ActionKeys.ADD_PORTLET_DISPLAY_TEMPLATE;
 				String resource = templateHandler.getResourceName();
+				int scope = ResourceConstants.SCOPE_COMPANY;
+				boolean supportsFilterByGroup = true;
 				String target = resource + actionId;
 				List<Group> groups = Collections.emptyList();
 				String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
 				long[] groupIdsArray = StringUtil.split(groupIds, 0L);
 				List<String> groupNames = new ArrayList<String>();
-
-				ResultRow row = new ResultRow(new Object[] {role, actionId, resource, target, scope,supportsFilterByGroup, groups, groupIdsArray, groupNames}, target, i);
-
-				StringBundler sb = new StringBundler(3);
 
 				Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), resource);
 
@@ -165,24 +154,18 @@ if (Validator.isNotNull(portletResource)) {
 					continue;
 				}
 
+				ResultRow row = new ResultRow(new Object[] {role, actionId, resource, target, scope, supportsFilterByGroup, groups, groupIdsArray, groupNames}, target, relatedPortletResources.size());
+
 				relatedPortletResources.add(curPortlet.getPortletId());
 
-				String curPortletLabel = PortalUtil.getPortletLongTitle(curPortlet, application, locale);
-
-				sb.append(curPortletLabel);
-				sb.append(": ");
-				sb.append(_getActionLabel(pageContext, themeDisplay, resource, actionId));
-
-				row.addText(sb.toString());
+				row.addText(PortalUtil.getPortletLongTitle(curPortlet, application, locale) + ": " + _getActionLabel(pageContext, themeDisplay, resource, actionId));
 
 				row.addJSP("/html/portlet/roles_admin/edit_role_permissions_resource_scope.jsp");
 
 				resultRows.add(row);
-
-				count++;
 			}
 
-			searchContainer.setTotal(count);
+			searchContainer.setTotal(relatedPortletResources.size());
 			%>
 
 			<aui:input name="relatedPortletResources" type="hidden" value="<%= StringUtil.merge(relatedPortletResources) %>" />

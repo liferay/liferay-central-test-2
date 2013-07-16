@@ -278,19 +278,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
-		String[] modelResources = StringUtil.split(
-			ParamUtil.getString(actionRequest, "modelResources"));
 		String[] relatedPortletResources = StringUtil.split(
 			ParamUtil.getString(actionRequest, "relatedPortletResources"));
+		String[] modelResources = StringUtil.split(
+			ParamUtil.getString(actionRequest, "modelResources"));
 
 		Map<String, List<String>> resourceActionsMap =
 			new HashMap<String, List<String>>();
-
-		for (String modelResource : modelResources) {
-			resourceActionsMap.put(
-				modelResource,
-				ResourceActionsUtil.getResourceActions(null, modelResource));
-		}
 
 		if (Validator.isNotNull(portletResource)) {
 			resourceActionsMap.put(
@@ -298,11 +292,17 @@ public class EditRolePermissionsAction extends PortletAction {
 				ResourceActionsUtil.getResourceActions(portletResource, null));
 		}
 
-		for (String extraPortletResource : relatedPortletResources) {
+		for (String relatedPortletResource : relatedPortletResources) {
 			resourceActionsMap.put(
-				extraPortletResource,
+				relatedPortletResource,
 				ResourceActionsUtil.getResourceActions(
 					extraPortletResource, null));
+		}
+
+		for (String modelResource : modelResources) {
+			resourceActionsMap.put(
+				modelResource,
+				ResourceActionsUtil.getResourceActions(null, modelResource));
 		}
 
 		String[] selectedTargets = StringUtil.split(
