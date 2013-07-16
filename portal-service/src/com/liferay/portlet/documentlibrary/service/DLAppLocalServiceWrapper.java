@@ -558,16 +558,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService,
 			newFolderId, serviceContext);
 	}
 
-	@Override
-	public com.liferay.portal.kernel.repository.model.Folder moveFolder(
-		long userId, long folderId, long newFolderId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.moveFolder(userId, folderId, newFolderId,
-			serviceContext);
-	}
-
 	/**
 	* Moves the file entry with the primary key to the trash portlet.
 	*
@@ -582,6 +572,16 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.moveFileEntryToTrash(userId, fileEntryId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.Folder moveFolder(
+		long userId, long folderId, long parentFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppLocalService.moveFolder(userId, folderId, parentFolderId,
+			serviceContext);
 	}
 
 	/**
