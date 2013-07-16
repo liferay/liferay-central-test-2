@@ -20,7 +20,7 @@
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 
 		<%
-		boolean isStateMaximized = ParamUtil.getBoolean(request, "isStateMaximized", false);
+		boolean isStateMaximized = ParamUtil.getBoolean(request, "isStateMaximized");
 
 		Group group = null;
 
