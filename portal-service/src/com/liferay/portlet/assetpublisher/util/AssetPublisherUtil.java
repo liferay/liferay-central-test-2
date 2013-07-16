@@ -100,13 +100,13 @@ public class AssetPublisherUtil {
 			PortletRequest portletRequest,
 			PortletPreferences portletPreferences,
 			PermissionChecker permissionChecker, long[] groupIds,
-			String[] assetEntryXmls, boolean deleteNotDisplayableAssets,
+			String[] assetEntryXmls, boolean deleteMissingAssetEntries,
 			boolean checkPermission)
 		throws Exception {
 
 		return getAssetPublisher().getAssetEntries(
-				portletRequest, portletPreferences, permissionChecker, groupIds,
-				assetEntryXmls, deleteNotDisplayableAssets, checkPermission);
+			portletRequest, portletPreferences, permissionChecker, groupIds,
+			assetEntryXmls, deleteMissingAssetEntries, checkPermission);
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(

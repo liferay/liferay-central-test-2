@@ -97,7 +97,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 				<liferay-ui:search-iterator paginate="<%= total > SearchContainer.DEFAULT_DELTA %>" />
 			</liferay-ui:search-container>
 
-			<c:if test='<%= SessionMessages.contains(renderRequest, "removedSelectedAssets") %>'>
+			<c:if test='<%= SessionMessages.contains(renderRequest, "deletedMissingAssetEntries") %>'>
 				<div class="alert alert-info">
 					<liferay-ui:message key="the-selected-assets-have-been-removed-from-the-list-because-they-do-not-belong-in-the-scope-of-this-portlet" />
 				</div>

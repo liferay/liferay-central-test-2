@@ -372,13 +372,13 @@ public class AssetPublisherImpl implements AssetPublisher {
 			PortletRequest portletRequest,
 			PortletPreferences portletPreferences,
 			PermissionChecker permissionChecker, long[] groupIds,
-			String[] assetEntryXmls, boolean deleteNotDisplayableAssetEntries,
+			String[] assetEntryXmls, boolean deleteMissingAssetEntries,
 			boolean checkPermission)
 		throws Exception {
 
-		List<String> deletedAssetEntrieUuids = new ArrayList<String>();
+		List<AssetEntry> aassetEntries = new ArrayList<AssetEntry>();
 
-		List<AssetEntry> viewableAssetEntries = new ArrayList<AssetEntry>();
+		List<String> missingAssetEntryUuids = new ArrayList<String>();
 
 		for (String assetEntryXml : assetEntryXmls) {
 			Document document = SAXReaderUtil.read(assetEntryXml);
@@ -399,8 +399,8 @@ public class AssetPublisherImpl implements AssetPublisher {
 			}
 
 			if (assetEntry == null) {
-				if (deleteNotDisplayableAssetEntries) {
-					deletedAssetEntrieUuids.add(assetEntryUuid);
+				if (deleteMissingAssetEntries) {
+					missingAssetEntryUuids.add(assetEntryUuid);
 				}
 
 				continue;
@@ -421,8 +421,8 @@ public class AssetPublisherImpl implements AssetPublisher {
 			if (!assetRendererFactory.isActive(
 					permissionChecker.getCompanyId())) {
 
-				if (deleteNotDisplayableAssetEntries) {
-					deletedAssetEntrieUuids.add(assetEntryUuid);
+				if (deleteMissingAssetEntries) {
+					missingAssetEntryUuids.add(assetEntryUuid);
 				}
 
 				continue;
@@ -435,21 +435,21 @@ public class AssetPublisherImpl implements AssetPublisher {
 				continue;
 			}
 
-			viewableAssetEntries.add(assetEntry);
+			aassetEntries.add(assetEntry);
 		}
 
-		if (deleteNotDisplayableAssetEntries) {
+		if (deleteMissingAssetEntries) {
 			AssetPublisherUtil.removeAndStoreSelection(
-				deletedAssetEntrieUuids, portletPreferences);
+				missingAssetEntryUuids, portletPreferences);
 
-			if (!deletedAssetEntrieUuids.isEmpty()) {
+			if (!missingAssetEntryUuids.isEmpty()) {
 				SessionMessages.add(
-					portletRequest, "removedSelectedAssets",
-					deletedAssetEntrieUuids);
+					portletRequest, "deletedMissingAssetEntries",
+					missingAssetEntryUuids);
 			}
 		}
 
-		return viewableAssetEntries;
+		return aassetEntries;
 	}
 
 	@Override
