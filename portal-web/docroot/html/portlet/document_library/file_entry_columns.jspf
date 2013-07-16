@@ -108,16 +108,16 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("tags") %>'>
 
 			<%
-			long assetClassPK = 0;
+			long classPK = 0;
 
 			if (!latestFileVersion.getVersion().equals(DLFileEntryConstants.VERSION_DEFAULT) && (latestFileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
-				assetClassPK = latestFileVersion.getFileVersionId();
+				classPK = latestFileVersion.getFileVersionId();
 			}
 			else {
-				assetClassPK = fileEntry.getFileEntryId();
+				classPK = fileEntry.getFileEntryId();
 			}
 
-			List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(DLFileEntryConstants.getClassName(), assetClassPK);
+			List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(DLFileEntryConstants.getClassName(), classPK);
 
 			AssetUtil.addLayoutTags(request, assetTags);
 			%>
