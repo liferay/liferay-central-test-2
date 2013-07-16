@@ -1664,10 +1664,14 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 		String wsadminContent = FileUtil.read(
 			DeployUtil.getResourcePath("wsadmin.py"));
 
-		String pluginServletContextName = deployDir.substring(
-			0, deployDir.length() - 4);
+		String adminAppListOptions =
+			PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_LIST_OPTIONS;
 
-		String adminAppListOptions = _getAdminListOptions();
+		if (Validator.isNotNull(adminAppListOptions)) {
+			adminAppListOptions =
+				StringPool.APOSTROPHE + adminAppListOptions +
+					StringPool.APOSTROPHE;
+		}
 
 		wsadminContent = StringUtil.replace(
 			wsadminContent,
@@ -1678,11 +1682,16 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 				"${auto.deploy.websphere.wsadmin.app.manager.update.options}"
 			},
 			new String[] {
-				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_INSTALL_OPTIONS,
+				PropsValues.
+					AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_INSTALL_OPTIONS,
 				adminAppListOptions,
 				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY,
-				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_UPDATE_OPTIONS
+				PropsValues.
+					AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_UPDATE_OPTIONS
 			});
+
+		String pluginServletContextName = deployDir.substring(
+			0, deployDir.length() - 4);
 
 		String pluginApplicationName = pluginServletContextName;
 
