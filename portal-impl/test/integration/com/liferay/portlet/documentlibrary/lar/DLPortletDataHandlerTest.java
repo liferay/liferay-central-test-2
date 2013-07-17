@@ -56,7 +56,7 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 
 	@Test
 	@Transactional
-	public void testNonDefaultRepositoryEntriesExport() throws Exception {
+	public void testCustomRepositoryEntriesExport() throws Exception {
 		initExport();
 
 		addRepositoryEntries();
@@ -71,15 +71,15 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 		Map<String, LongWrapper> modelAdditionCounters =
 			manifestSummary.getModelAdditionCounters();
 
-		LongWrapper foldersCount = modelAdditionCounters.get(
+		LongWrapper folderModelAdditionCounter = modelAdditionCounters.get(
 			Folder.class.getName());
 
-		Assert.assertEquals(0, foldersCount.getValue());
+		Assert.assertEquals(0, folderModelAdditionCounter.getValue());
 
-		LongWrapper fileEntriesCount = modelAdditionCounters.get(
+		LongWrapper fileEntryModelAdditionCounter = modelAdditionCounters.get(
 			FileEntry.class.getName());
 
-		Assert.assertEquals(0, fileEntriesCount.getValue());
+		Assert.assertEquals(0, fileEntryModelAdditionCounter.getValue());
 
 		modelAdditionCounters.clear();
 
@@ -92,9 +92,10 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 
 		Assert.assertNull(modelAdditionCounters.get(Folder.class.getName()));
 
-		fileEntriesCount = modelAdditionCounters.get(FileEntry.class.getName());
+		fileEntryModelAdditionCounter = modelAdditionCounters.get(
+			FileEntry.class.getName());
 
-		Assert.assertEquals(0, fileEntriesCount.getValue());
+		Assert.assertEquals(0, fileEntryModelAdditionCounter.getValue());
 	}
 
 	protected void addRepositoryEntries() throws Exception {

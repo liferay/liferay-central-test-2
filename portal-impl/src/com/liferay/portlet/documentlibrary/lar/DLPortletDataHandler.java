@@ -347,12 +347,10 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				super.addCriteria(dynamicQuery);
 
-				Property repositoryIdProperty = PropertyFactoryUtil.forName(
-					"repositoryId");
+				Property property = PropertyFactoryUtil.forName("repositoryId");
 
 				dynamicQuery.add(
-					repositoryIdProperty.eq(
-						portletDataContext.getScopeGroupId()));
+					property.eq(portletDataContext.getScopeGroupId()));
 			}
 
 			@Override
@@ -386,12 +384,10 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				super.addCriteria(dynamicQuery);
 
-				Property repositoryIdProperty = PropertyFactoryUtil.forName(
-					"repositoryId");
+				Property property = PropertyFactoryUtil.forName("repositoryId");
 
 				dynamicQuery.add(
-					repositoryIdProperty.eq(
-						portletDataContext.getScopeGroupId()));
+					property.eq(portletDataContext.getScopeGroupId()));
 			}
 
 			@Override
