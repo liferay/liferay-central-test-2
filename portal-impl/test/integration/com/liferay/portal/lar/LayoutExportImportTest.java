@@ -48,7 +48,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 
 		long[] layoutIds = new long[0];
 
-		doExportImportLayout(layoutIds);
+		exportImportLayouts(layoutIds);
 
 		Assert.assertEquals(
 			LayoutLocalServiceUtil.getLayoutsCount(group, false),
@@ -62,7 +62,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 
 		long[] layoutIds = new long[] {layout2.getLayoutId()};
 
-		doExportImportLayout(layoutIds);
+		exportImportLayouts(layoutIds);
 
 		Assert.assertEquals(
 			layoutIds.length,
@@ -74,7 +74,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		Assert.assertNotNull(importedLayout);
 	}
 
-	protected void doExportImportLayout(long[] layoutIds) throws Exception {
+	protected void exportImportLayouts(long[] layoutIds) throws Exception {
 		larFile = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			group.getGroupId(), false, layoutIds, getExportParameterMap(), null,
 			null);
