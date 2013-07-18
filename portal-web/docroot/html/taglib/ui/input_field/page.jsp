@@ -462,13 +462,13 @@ if (hints != null) {
 
 			<c:choose>
 				<c:when test="<%= editor %>">
-
 					<c:choose>
 						<c:when test="<%= localized %>">
 							<liferay-ui:input-localized autoFocus="<%= autoFocus %>" cssClass='<%= cssClass + " lfr-input-text" %>' defaultLanguageId="<%= defaultLanguageId %>" disabled="<%= disabled %>" displayWidth="<%= displayWidth %>" formName="<%= formName %>" id="<%= id %>" ignoreRequestValue="<%= ignoreRequestValue %>" languageId="<%= languageId %>" maxLength="<%= maxLength %>" name="<%= fieldParam %>" style='<%= "max-width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' type="editor" xml="<%= xml %>" />
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:input-editor cssClass='<%= cssClass + \" lfr-input-text\" %>' editorImpl="ckeditor" initMethod='<%= fieldParam + \"InitEditor\" %>' name="<%= fieldParam %>" toolbarSet="simple" />
+
 							<aui:script>
 								function <portlet:namespace /><%= fieldParam %>InitEditor() {
 									return "<%= UnicodeFormatter.toString(value) %>";
@@ -476,7 +476,6 @@ if (hints != null) {
 							</aui:script>
 						</c:otherwise>
 					</c:choose>
-
 				</c:when>
 				<c:when test="<%= displayHeight.equals(ModelHintsConstants.TEXT_DISPLAY_HEIGHT) %>">
 
