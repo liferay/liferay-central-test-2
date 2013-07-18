@@ -90,7 +90,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 				<aui:nav-item anchorCssClass="back-link" href="<%= backURL %>" iconClass="icon-arrow-left" id="backLink" label="<%= StringPool.NBSP %>" title='<%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName), false) %>' />
 
 				<c:if test="<%= controlPanelCategory.startsWith(PortletCategoryKeys.CURRENT_SITE) %>">
-				    <aui:nav-item href="" iconClass="" id="siteAdministrationTitle" label="site-administration" />
+					<aui:nav-item href="" iconClass="" id="siteAdministrationTitle" label="site-administration" />
 				</c:if>
 			</c:if>
 
