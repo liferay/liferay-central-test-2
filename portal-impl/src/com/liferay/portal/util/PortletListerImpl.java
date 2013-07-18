@@ -164,8 +164,7 @@ public class PortletListerImpl implements PortletLister {
 			}
 
 			nodeView.setName(
-				LanguageUtil.get(
-					getLocale(), portletCategory.getName()));
+				LanguageUtil.get(getLocale(), portletCategory.getName()));
 			nodeView.setObjId(portletCategory.getPath());
 			nodeView.setParentId(parentId);
 
