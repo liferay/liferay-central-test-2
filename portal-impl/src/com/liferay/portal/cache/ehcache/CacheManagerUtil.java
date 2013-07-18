@@ -69,7 +69,8 @@ public class CacheManagerUtil {
 			if (JavaDetector.isJDK6()) {
 				while (
 					scheduledThreadPoolExecutor.getPoolSize() >
-						PropsValues.EHCACHE_CACHE_MANAGER_STATISTICS_THREAD_POOL_SIZE);
+						PropsValues.
+							EHCACHE_CACHE_MANAGER_STATISTICS_THREAD_POOL_SIZE);
 
 				_workQueueField.set(scheduledThreadPoolExecutor, blockingQueue);
 			}
