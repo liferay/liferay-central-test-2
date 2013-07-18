@@ -58,6 +58,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
+import com.liferay.portlet.documentlibrary.model.DLSyncEvent;
 import com.liferay.portlet.documentlibrary.service.base.DLAppHelperLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.documentlibrary.util.DLAppHelperThreadLocal;
@@ -551,9 +552,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	@Override
-	public void moveFolder(Folder folder)
-		throws PortalException, SystemException {
-
+	public void moveFolder(Folder folder) throws SystemException {
 		if (!isStagingGroup(folder.getGroupId())) {
 			registerDLSyncCallback(
 				DLSyncConstants.EVENT_MOVE, DLSyncConstants.TYPE_FOLDER,
@@ -669,6 +668,12 @@ public class DLAppHelperLocalServiceImpl
 
 		dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
 
+		// Sync
+
+		registerDLSyncCallback(
+			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
+			fileEntry.getFileEntryId());
+
 		// Social
 
 		socialActivityCounterLocalService.enableActivityCounters(
@@ -679,12 +684,6 @@ public class DLAppHelperLocalServiceImpl
 			fileEntry.getFileEntryId(),
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH, StringPool.BLANK,
 			0);
-
-		// Sync
-
-		registerDLSyncCallback(
-			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
-			fileEntry.getFileEntryId());
 	}
 
 	@Override
@@ -737,6 +736,12 @@ public class DLAppHelperLocalServiceImpl
 
 		dlFileRankLocalService.enableFileRanksByFolderId(folder.getFolderId());
 
+		// Sync
+
+		registerDLSyncCallback(
+			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
+			folder.getFolderId());
+
 		// Social
 
 		socialActivityCounterLocalService.enableActivityCounters(
@@ -747,12 +752,6 @@ public class DLAppHelperLocalServiceImpl
 			folder.getFolderId(),
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH, StringPool.BLANK,
 			0);
-
-		// Sync
-
-		registerDLSyncCallback(
-			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
-			folder.getFolderId());
 	}
 
 	@Override
@@ -1342,6 +1341,12 @@ public class DLAppHelperLocalServiceImpl
 			fileEntry = dlAppService.moveFileEntry(
 				fileEntry.getFileEntryId(), newFolderId, serviceContext);
 
+			// Sync
+
+			registerDLSyncCallback(
+				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
+				fileEntry.getFileEntryId());
+
 			// Social
 
 			socialActivityCounterLocalService.enableActivityCounters(
@@ -1353,12 +1358,6 @@ public class DLAppHelperLocalServiceImpl
 				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 				SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 				StringPool.BLANK, 0);
-
-			// Sync
-
-			registerDLSyncCallback(
-				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
-				fileEntry.getFileEntryId());
 
 			return fileEntry;
 		}
@@ -1416,6 +1415,12 @@ public class DLAppHelperLocalServiceImpl
 
 		dlFileRankLocalService.disableFileRanks(fileEntry.getFileEntryId());
 
+		// Sync
+
+		registerDLSyncCallback(
+			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FILE,
+			fileEntry.getFileEntryId());
+
 		// Social
 
 		socialActivityCounterLocalService.disableActivityCounters(
@@ -1425,12 +1430,6 @@ public class DLAppHelperLocalServiceImpl
 			userId, fileEntry.getGroupId(), DLFileEntryConstants.getClassName(),
 			fileEntry.getFileEntryId(),
 			SocialActivityConstants.TYPE_MOVE_TO_TRASH, StringPool.BLANK, 0);
-
-		// Sync
-
-		registerDLSyncCallback(
-			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FILE,
-			fileEntry.getFileEntryId());
 
 		// Workflow
 
@@ -1467,6 +1466,12 @@ public class DLAppHelperLocalServiceImpl
 			dlFileRankLocalService.enableFileRanksByFolderId(
 				folder.getFolderId());
 
+			// Sync
+
+			registerDLSyncCallback(
+				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
+				folder.getFolderId());
+
 			// Social
 
 			socialActivityCounterLocalService.enableActivityCounters(
@@ -1477,12 +1482,6 @@ public class DLAppHelperLocalServiceImpl
 				folder.getFolderId(),
 				SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 				StringPool.BLANK, 0);
-
-			// Sync
-
-			registerDLSyncCallback(
-				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
-				folder.getFolderId());
 		}
 
 		return dlAppLocalService.moveFolder(
@@ -1511,6 +1510,12 @@ public class DLAppHelperLocalServiceImpl
 
 		dlFileRankLocalService.disableFileRanksByFolderId(folder.getFolderId());
 
+		// Sync
+
+		registerDLSyncCallback(
+			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FOLDER,
+			folder.getFolderId());
+
 		// Social
 
 		socialActivityCounterLocalService.disableActivityCounters(
@@ -1520,12 +1525,6 @@ public class DLAppHelperLocalServiceImpl
 			userId, folder.getGroupId(), DLFolderConstants.getClassName(),
 			folder.getFolderId(), SocialActivityConstants.TYPE_MOVE_TO_TRASH,
 			StringPool.BLANK, 0);
-
-		// Sync
-
-		registerDLSyncCallback(
-			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FOLDER,
-			folder.getFolderId());
 
 		return new LiferayFolder(dlFolder);
 	}
@@ -1716,13 +1715,13 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	protected void registerDLSyncCallback(
-			final String event, final String type, final long typeId)
-		throws PortalException, SystemException {
+			final String event, final String type, final long typePK)
+		throws SystemException {
 
-		final long modifiedDate = System.currentTimeMillis();
+		DLSyncEvent dlSyncEvent = dlSyncEventLocalService.addDLSyncEvent(
+			event, type, typePK);
 
-		dlSyncEventLocalService.addOrUpdateDLSyncEvent(
-			typeId, type, event, modifiedDate);
+		final long modifiedDate = dlSyncEvent.getModifiedDate();
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
@@ -1736,7 +1735,7 @@ public class DLAppHelperLocalServiceImpl
 					values.put("event", event);
 					values.put("modifiedDate", modifiedDate);
 					values.put("type", type);
-					values.put("typeId", typeId);
+					values.put("typePK", typePK);
 
 					message.setValues(values);
 

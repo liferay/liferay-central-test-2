@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.documentlibrary.model.DLSyncEvent;
 import com.liferay.portlet.documentlibrary.service.base.DLSyncEventLocalServiceBaseImpl;
@@ -28,37 +27,36 @@ public class DLSyncEventLocalServiceImpl
 	extends DLSyncEventLocalServiceBaseImpl {
 
 	@Override
-	public DLSyncEvent addOrUpdateDLSyncEvent(
-			long typeId, String type, String event, long modifiedDate)
-		throws PortalException, SystemException {
+	public DLSyncEvent addDLSyncEvent(String event, String type, long typePK)
+		throws SystemException {
 
-		DLSyncEvent dlSyncEvent = dlSyncEventPersistence.fetchByTypeId(typeId);
+		DLSyncEvent dlSyncEvent = dlSyncEventPersistence.fetchByTypePK(typePK);
 
 		if (dlSyncEvent == null) {
 			long dlSyncEventId = counterLocalService.increment();
 
 			dlSyncEvent = dlSyncEventPersistence.create(dlSyncEventId);
 
-			dlSyncEvent.setTypeId(typeId);
 			dlSyncEvent.setType(type);
+			dlSyncEvent.setTypePK(typePK);
 		}
 
-		dlSyncEvent.setModifiedDate(modifiedDate);
+		dlSyncEvent.setModifiedDate(System.currentTimeMillis());
 		dlSyncEvent.setEvent(event);
 
 		return dlSyncEventPersistence.update(dlSyncEvent);
 	}
 
 	@Override
-	public List<DLSyncEvent> getDLSyncEvents(long modifiedDate)
-		throws PortalException, SystemException {
-
-		return dlSyncEventPersistence.findByModifiedDate(modifiedDate);
+	public void deleteDLSyncEvents() throws SystemException {
+		dlSyncEventPersistence.removeAll();
 	}
 
 	@Override
-	public void removeAll() throws SystemException {
-		dlSyncEventPersistence.removeAll();
+	public List<DLSyncEvent> getDLSyncEvents(long modifiedDate)
+		throws SystemException {
+
+		return dlSyncEventPersistence.findByModifiedDate(modifiedDate);
 	}
 
 }
