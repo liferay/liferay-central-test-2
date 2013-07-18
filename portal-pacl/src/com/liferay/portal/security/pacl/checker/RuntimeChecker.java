@@ -246,6 +246,22 @@ public class RuntimeChecker extends BaseChecker {
 		return true;
 	}
 
+	protected boolean hasAccessDeclaredMembers(Permission permission) {
+		if (_accessDeclaredMembers) {
+			return true;
+		}
+
+		int stackIndex = getStackIndex(13, 12);
+
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	protected boolean hasCreateClassLoader(Permission permission) {
 		if (_createClassLoader) {
 			return true;
@@ -354,22 +370,6 @@ public class RuntimeChecker extends BaseChecker {
 
 	protected boolean hasReadFileDescriptor(Permission permission) {
 		int stackIndex = getStackIndex(12, 11);
-
-		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
-
-		if (isTrustedCaller(callerClass, permission)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	protected boolean hasAccessDeclaredMembers(Permission permission) {
-		if (_accessDeclaredMembers) {
-			return true;
-		}
-
-		int stackIndex = getStackIndex(13, 12);
 
 		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 

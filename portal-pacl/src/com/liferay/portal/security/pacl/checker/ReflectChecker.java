@@ -50,8 +50,7 @@ public class ReflectChecker extends BaseChecker {
 
 		if (name.startsWith(RUNTIME_PERMISSION_SUPPRESS_ACCESS_CHECKS)) {
 			key = "security-manager-suppress-access-checks";
-
-			value = "true";
+			value = Boolean.TRUE.toString();
 		}
 		else {
 			return null;
