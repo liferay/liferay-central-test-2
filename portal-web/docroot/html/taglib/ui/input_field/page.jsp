@@ -421,11 +421,11 @@ if (hints != null) {
 				autoEscape = GetterUtil.getBoolean(hints.get("auto-escape"), true);
 			}
 
+			boolean checkTab = false;
 			String displayHeight = ModelHintsConstants.TEXT_DISPLAY_HEIGHT;
 			String displayWidth = ModelHintsConstants.TEXT_DISPLAY_WIDTH;
-			String maxLength = ModelHintsConstants.TEXT_MAX_LENGTH;
-			boolean checkTab = false;
 			boolean editor = false;
+			String maxLength = ModelHintsConstants.TEXT_MAX_LENGTH;
 			boolean secret = false;
 			boolean upperCase = false;
 
@@ -464,7 +464,22 @@ if (hints != null) {
 				<c:when test="<%= editor %>">
 					<c:choose>
 						<c:when test="<%= localized %>">
-							<liferay-ui:input-localized autoFocus="<%= autoFocus %>" cssClass='<%= cssClass + " lfr-input-text" %>' defaultLanguageId="<%= defaultLanguageId %>" disabled="<%= disabled %>" displayWidth="<%= displayWidth %>" formName="<%= formName %>" id="<%= id %>" ignoreRequestValue="<%= ignoreRequestValue %>" languageId="<%= languageId %>" maxLength="<%= maxLength %>" name="<%= fieldParam %>" style='<%= "max-width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' type="editor" xml="<%= xml %>" />
+							<liferay-ui:input-localized
+								autoFocus="<%= autoFocus %>"
+								cssClass='<%= cssClass + " lfr-input-text" %>'
+								defaultLanguageId="<%= defaultLanguageId %>"
+								disabled="<%= disabled %>"
+								displayWidth="<%= displayWidth %>"
+								formName="<%= formName %>"
+								id="<%= id %>"
+								ignoreRequestValue="<%= ignoreRequestValue %>"
+								languageId="<%= languageId %>"
+								maxLength="<%= maxLength %>"
+								name="<%= fieldParam %>"
+								style='<%= "max-width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>'
+								type="editor"
+								xml="<%= xml %>"
+							/>
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:input-editor cssClass='<%= cssClass + \" lfr-input-text\" %>' editorImpl="ckeditor" initMethod='<%= fieldParam + \"InitEditor\" %>' name="<%= fieldParam %>" toolbarSet="simple" />

@@ -80,7 +80,16 @@ List<String> languageIds = new ArrayList<String>();
 			String fieldName = HtmlUtil.escapeAttribute(name + fieldSuffix);
 			%>
 
-			<liferay-ui:input-editor cssClass='<%= \"language-value \" + cssClass %>' editorImpl="ckeditor" initMethod='<%= fieldName + \"InitEditor\" %>' name="<%= fieldName %>" onBlurMethod='<%= fieldName + \"OnBlurEditor\" %>' onChangeMethod='<%= fieldName + \"OnChangeEditor\" %>' onFocusMethod='<%= fieldName + \"OnFocusEditor\" %>' toolbarSet="simple" />
+			<liferay-ui:input-editor
+				cssClass='<%= \"language-value \" + cssClass %>'
+				editorImpl="ckeditor"
+				initMethod='<%= fieldName + \"InitEditor\" %>'
+				name="<%= fieldName %>"
+				onBlurMethod='<%= fieldName + \"OnBlurEditor\" %>'
+				onChangeMethod='<%= fieldName + \"OnChangeEditor\" %>'
+				onFocusMethod='<%= fieldName + \"OnFocusEditor\" %>'
+				toolbarSet="simple"
+			/>
 
 			<aui:script>
 				function <portlet:namespace /><%= fieldName %>InitEditor() {
