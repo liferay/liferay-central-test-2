@@ -389,9 +389,9 @@ public abstract class BaseWebDriverImpl
 
 	@Override
 	public void makeVisible(String locator) {
-		WebElement bodyElement = getWebElement("//body");
+		WebElement webElement = getWebElement("//body");
 
-		WrapsDriver wrapsDriver = (WrapsDriver)bodyElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -443,9 +443,9 @@ public abstract class BaseWebDriverImpl
 			_screenshotFileName = fileName;
 		}
 
-		WebElement bodyElement = getWebElement("//body");
+		WebElement webElement = getWebElement("//body");
 
-		WrapsDriver wrapsDriver = (WrapsDriver)bodyElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 

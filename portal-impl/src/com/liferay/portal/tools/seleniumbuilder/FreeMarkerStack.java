@@ -35,8 +35,8 @@ public class FreeMarkerStack {
 		return _stack.pop();
 	}
 
-	public Object push(Object o) {
-		_stack.push(o);
+	public Object push(Object object) {
+		_stack.push(object);
 
 		return StringPool.BLANK;
 	}
