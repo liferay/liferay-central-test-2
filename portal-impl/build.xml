@@ -1048,6 +1048,7 @@ public class Creole10Parser]]></replacevalue>
 			fork="true"
 			maxmemory="512m"
 			newenvironment="true"
+			outputproperty="wsdd.output"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
@@ -1056,6 +1057,15 @@ public class Creole10Parser]]></replacevalue>
 			<arg value="wsdd.service.namespace=Portlet" />
 			<arg value="wsdd.input.file=${service.file}" />
 		</java>
+
+		<echo>${wsdd.output}</echo>
+
+		<if>
+			<contains string="${wsdd.output}" substring="IOException" />
+			<then>
+				<fail>WSDD Builder generated exceptions.</fail>
+			</then>
+		</if>
 	</target>
 
 	<target name="build-wsdd-portal">
