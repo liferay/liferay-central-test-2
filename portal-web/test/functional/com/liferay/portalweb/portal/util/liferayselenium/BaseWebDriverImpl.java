@@ -389,9 +389,9 @@ public abstract class BaseWebDriverImpl
 
 	@Override
 	public void makeVisible(String locator) {
-		WebElement webElement = getWebElement("//body");
+		WebElement bodyWebElement = getWebElement("//body");
 
-		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)bodyWebElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -407,9 +407,9 @@ public abstract class BaseWebDriverImpl
 		sb.append("element.style.opacity = '1';");
 		sb.append("element.style.visibility = 'visible';");
 
-		WebElement webElement = getWebElement(locator);
+		WebElement locatorWebElement = getWebElement(locator);
 
-		javascriptExecutor.executeScript(sb.toString(), webElement);
+		javascriptExecutor.executeScript(sb.toString(), locatorWebElement);
 	}
 
 	@Override
