@@ -121,11 +121,12 @@ public class PortletDisplayTemplatePortletDataHandler
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		for (StagedModelType modeType : getStagedModelTypes()) {
+		for (StagedModelType stagedModelType : getStagedModelTypes()) {
 			ActionableDynamicQuery actionableDynamicQuery =
 				getDDMTemplateActionableDynamicQuery(
 					portletDataContext,
-					new Long[] {modeType.getReferrerClassNameId()}, modeType);
+					new Long[] {stagedModelType.getReferrerClassNameId()},
+					stagedModelType);
 
 			actionableDynamicQuery.performCount();
 		}
@@ -168,27 +169,27 @@ public class PortletDisplayTemplatePortletDataHandler
 	}
 
 	protected StagedModelType[] getStagedModelTypes() {
-		if (stagedModelTypes != null) {
-			return stagedModelTypes;
+		if (_stagedModelTypes != null) {
+			return _stagedModelTypes;
 		}
 
 		long ddmTemplateClassNameId = PortalUtil.getClassNameId(
 			DDMTemplate.class);
 
-		List<StagedModelType> stagedModelTypeList =
+		List<StagedModelType> stagedModelTypes =
 			new ArrayList<StagedModelType>();
 
 		for (long classNameId : TemplateHandlerRegistryUtil.getClassNameIds()) {
-			stagedModelTypeList.add(
+			stagedModelTypes.add(
 				new StagedModelType(ddmTemplateClassNameId, classNameId));
 		}
 
-		stagedModelTypes = stagedModelTypeList.toArray(
-			new StagedModelType[stagedModelTypeList.size()]);
+		_stagedModelTypes = stagedModelTypes.toArray(
+			new StagedModelType[stagedModelTypes.size()]);
 
-		return stagedModelTypes;
+		return _stagedModelTypes;
 	}
 
-	protected StagedModelType[] stagedModelTypes;
+	private StagedModelType[] _stagedModelTypes;
 
 }
