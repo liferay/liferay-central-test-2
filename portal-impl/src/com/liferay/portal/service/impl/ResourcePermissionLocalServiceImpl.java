@@ -1160,13 +1160,13 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermission.setOwnerId(ownerId);
 		}
 
-		List<String> unsupportedActions = Collections.emptyList();
+		List<String> unsupportedActionIds = Collections.emptyList();
 
 		if (((operator == ResourcePermissionConstants.OPERATOR_ADD) ||
 			 (operator == ResourcePermissionConstants.OPERATOR_SET)) &&
-			 isGuestRoleId(companyId, roleId)) {
+			isGuestRoleId(companyId, roleId)) {
 
-			unsupportedActions =
+			unsupportedActionIds =
 				ResourceActionsUtil.getResourceGuestUnsupportedActions(
 					name, name);
 		}
@@ -1182,7 +1182,7 @@ public class ResourcePermissionLocalServiceImpl
 				break;
 			}
 
-			if (unsupportedActions.contains(actionId)) {
+			if (unsupportedActionIds.contains(actionId)) {
 				throw new PrincipalException(
 					actionId + "is not supported by role " + roleId);
 			}

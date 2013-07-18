@@ -1019,22 +1019,22 @@ public class ResourceBlockLocalServiceImpl
 			long companyId, String name, long roleId, List<String> actionIds)
 		throws PortalException, SystemException {
 
-		if (!isGuestRoleId(companyId, roleId)) {
+		if (!isGuestRole(companyId, roleId)) {
 			return;
 		}
 
-		List<String> unsupportedActions =
+		List<String> unsupportedActionIds =
 			ResourceActionsUtil.getResourceGuestUnsupportedActions(name, name);
 
 		for (String actionId : actionIds) {
-			if (unsupportedActions.contains(actionId)) {
+			if (unsupportedActionIds.contains(actionId)) {
 				throw new PrincipalException(
 					actionId + "is not supported by role " + roleId);
 			}
 		}
 	}
 
-	protected boolean isGuestRoleId(long companyId, long roleId)
+	protected boolean isGuestRole(long companyId, long roleId)
 		throws PortalException, SystemException {
 
 		Role guestRole = roleLocalService.getRole(
