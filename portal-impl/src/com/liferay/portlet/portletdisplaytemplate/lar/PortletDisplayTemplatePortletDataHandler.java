@@ -173,11 +173,11 @@ public class PortletDisplayTemplatePortletDataHandler
 			return _stagedModelTypes;
 		}
 
-		long ddmTemplateClassNameId = PortalUtil.getClassNameId(
-			DDMTemplate.class);
-
 		List<StagedModelType> stagedModelTypes =
 			new ArrayList<StagedModelType>();
+
+		long ddmTemplateClassNameId = PortalUtil.getClassNameId(
+			DDMTemplate.class);
 
 		for (long classNameId : TemplateHandlerRegistryUtil.getClassNameIds()) {
 			stagedModelTypes.add(
