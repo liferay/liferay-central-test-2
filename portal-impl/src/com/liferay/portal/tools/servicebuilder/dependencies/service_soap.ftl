@@ -232,7 +232,7 @@ public class ${entity.name}ServiceSoap {
 							<#elseif returnTypeGenericsName == "java.util.List<" + extendedModelName + ">">
 								return ${extendedModelName}Soap.toSoapModels(returnValue);
 							<#elseif stringUtil.startsWith(returnTypeGenericsName, "java.util.List<com.liferay.portal.kernel.repository.model.")>
-                            	return ${serviceBuilder.getListActualTypeArguments(method.getReturns())}Soap.toSoapModels(returnValue);
+								return ${serviceBuilder.getListActualTypeArguments(method.getReturns())}Soap.toSoapModels(returnValue);
 							<#elseif entity.hasColumns() && (extendedModelName == serviceBuilder.getListActualTypeArguments(method.getReturns()))>
 								return ${soapModelName}.toSoapModels(returnValue);
 							<#elseif !entity.hasColumns()>
