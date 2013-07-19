@@ -106,12 +106,12 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 		DDMStructure ddmStructure = null;
 		DDMTemplate ddmTemplate = null;
 
+		long groupId = group.getGroupId();
+
 		Company company = CompanyLocalServiceUtil.fetchCompany(
 			group.getCompanyId());
 
 		Group companyGroup = company.getGroup();
-
-		long groupId = group.getGroupId();
 
 		if (companyScopeDependencies) {
 			groupId = companyGroup.getGroupId();
