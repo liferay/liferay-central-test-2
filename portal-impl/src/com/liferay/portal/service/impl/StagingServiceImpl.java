@@ -30,54 +30,53 @@ import java.util.Map;
 public class StagingServiceImpl extends StagingServiceBaseImpl {
 
 	@Override
-	public void cleanup(long folderId) throws PortalException, SystemException {
-		checkPermission(folderId);
+	public void cleanUpStagingRequest(long stagingRequestId)
+		throws PortalException, SystemException {
 
-		stagingLocalService.cleanup(folderId);
+		checkPermission(stagingRequestId);
+
+		stagingLocalService.cleanUpStagingRequest(stagingRequestId);
 	}
 
 	@Override
-	public long prepare(long groupId, String checksum)
+	public long createStagingRequest(long groupId, String checksum)
 		throws PortalException, SystemException {
-
-		long userId = getUserId();
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.EXPORT_IMPORT_LAYOUTS);
 
-		return stagingLocalService.prepare(userId, groupId, checksum);
+		return stagingLocalService.createStagingRequest(
+			getUserId(), groupId, checksum);
 	}
 
 	@Override
-	public void publish(
-			long folderId, boolean privateLayout,
+	public void publishStagingRequest(
+			long stagingRequestId, boolean privateLayout,
 			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
-		long userId = getUserId();
+		checkPermission(stagingRequestId);
 
-		checkPermission(folderId);
-
-		stagingLocalService.publish(
-			userId, folderId, privateLayout, parameterMap);
+		stagingLocalService.publishStagingRequest(
+			getUserId(), stagingRequestId, privateLayout, parameterMap);
 	}
 
 	@Override
-	public void stage(long stagingRequestId, String fileName, byte[] byteBuffer)
+	public void updateStagingRequest(
+			long stagingRequestId, String fileName, byte[] bytes)
 		throws PortalException, SystemException {
-
-		long userId = getUserId();
 
 		checkPermission(stagingRequestId);
 
-		stagingLocalService.stage(
-			userId, stagingRequestId, fileName, byteBuffer);
+		stagingLocalService.updateStagingRequest(
+			getUserId(), stagingRequestId, fileName, bytes);
 	}
 
-	protected void checkPermission(long folderId)
+	protected void checkPermission(long stagingRequestId)
 		throws PortalException, SystemException {
 
-		Folder folder = PortletFileRepositoryUtil.getPortletFolder(folderId);
+		Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+			stagingRequestId);
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), folder.getGroupId(),

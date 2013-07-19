@@ -314,60 +314,59 @@ public class StagingImpl implements Staging {
 			throw ree;
 		}
 
+		long stagingRequestId = 0;
+
 		File file = null;
 
 		FileInputStream fileInputStream = null;
-
-		long folderId = 0;
 
 		try {
 			file = exportLayoutsAsFile(
 				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
 				remoteGroupId, startDate, endDate, httpPrincipal);
 
-			int bufferSize = PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE;
-
-			byte[] byteBuffer = new byte[bufferSize];
-
-			String fileName = file.getName();
-
-			String md5Checksum = FileUtil.getMD5Checksum(file);
+			String checksum = FileUtil.getMD5Checksum(file);
 
 			fileInputStream = new FileInputStream(file);
 
-			int readBytes = 0;
+			stagingRequestId = StagingServiceHttp.prepareStagingRequest(
+				httpPrincipal, remoteGroupId, checksum);
 
-			folderId = StagingServiceHttp.prepare(
-				httpPrincipal, remoteGroupId, md5Checksum);
+			byte[] bytes =
+				new byte[PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE];
 
-			while ((readBytes = fileInputStream.read(byteBuffer)) >= 0) {
-				if (readBytes < bufferSize) {
-					byte[] tempByteBuffer = new byte[readBytes];
+			int i = 0;
 
-					System.arraycopy(
-						byteBuffer, 0, tempByteBuffer, 0, readBytes);
+			while ((i = fileInputStream.read(bytes)) >= 0) {
+				if (i < PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE) {
+					byte[] tempBytes = new byte[i];
 
-					StagingServiceHttp.stage(
-						httpPrincipal, folderId, fileName, tempByteBuffer);
+					System.arraycopy(bytes, 0, tempBytes, 0, i);
+
+					StagingServiceHttp.updateStagingRequest(
+						httpPrincipal, stagingRequestId, file.getName(),
+						tempBytes);
 				}
 				else {
-					StagingServiceHttp.stage(
-						httpPrincipal, folderId, fileName, byteBuffer);
+					StagingServiceHttp.updateStagingRequest(
+						httpPrincipal, stagingRequestId, file.getName(), bytes);
 				}
 
-				byteBuffer = new byte[bufferSize];
+				bytes =
+					new byte[PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE];
 			}
 
-			StagingServiceHttp.publish(
-				httpPrincipal, folderId, privateLayout, parameterMap);
+			StagingServiceHttp.publishStagingRequest(
+				httpPrincipal, stagingRequestId, privateLayout, parameterMap);
 		}
 		finally {
 			StreamUtil.cleanUp(fileInputStream);
 
 			FileUtil.delete(file);
 
-			if (folderId > 0) {
-				StagingServiceHttp.cleanup(httpPrincipal, folderId);
+			if (stagingRequestId > 0) {
+				StagingServiceHttp.cleanUpStagingRequest(
+					httpPrincipal, stagingRequestId);
 			}
 		}
 	}

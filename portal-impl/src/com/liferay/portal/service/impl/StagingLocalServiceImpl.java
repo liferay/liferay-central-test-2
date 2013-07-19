@@ -47,20 +47,24 @@ import java.util.Map;
 public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 	@Override
-	public void cleanup(long folderId) throws PortalException, SystemException {
+	public void cleanUpStagingRequest(long stagingRequestId)
+		throws PortalException, SystemException {
+
 		try {
-			PortletFileRepositoryUtil.deleteFolder(folderId);
+			PortletFileRepositoryUtil.deleteFolder(stagingRequestId);
 		}
-		catch (NoSuchFolderException e) {
+		catch (NoSuchFolderException nsfe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Staging request already cleaned up: " + folderId, e);
+					"Unable to clean up staging request " + stagingRequestId,
+					nsfe);
 			}
 		}
 	}
 
 	@Override
-	public long prepare(long userId, long groupId, String checksum)
+	public long createStagingRequest(
+			long userId, long groupId, String checksum)
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -77,25 +81,26 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void publish(
-			long userId, long folderId, boolean privateLayout,
+	public void publishStagingRequest(
+			long userId, long stagingRequestId, boolean privateLayout,
 			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
-		Folder folder = PortletFileRepositoryUtil.getPortletFolder(folderId);
-
-		List<FileEntry> fileEntries =
-			PortletFileRepositoryUtil.getPortletFileEntries(
-				folder.getGroupId(), folder.getFolderId());
-
-		File tempFile = null;
+		File file = null;
 
 		FileOutputStream fileOutputStream = null;
 
 		try {
-			tempFile = FileUtil.createTempFile("lar");
+			file = FileUtil.createTempFile("lar");
 
-			fileOutputStream = new FileOutputStream(tempFile);
+			fileOutputStream = new FileOutputStream(file);
+
+			Folder folder = PortletFileRepositoryUtil.getPortletFolder(
+				stagingRequestId);
+
+			List<FileEntry> fileEntries =
+				PortletFileRepositoryUtil.getPortletFileEntries(
+					folder.getGroupId(), folder.getFolderId());
 
 			for (FileEntry fileEntry : fileEntries) {
 				InputStream inputStream = fileEntry.getContentStream();
@@ -108,47 +113,41 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 				}
 			}
 
-			StreamUtil.cleanUp(fileOutputStream);
+			String checksum = FileUtil.getMD5Checksum(file);
 
-			String md5Checksum = FileUtil.getMD5Checksum(tempFile);
-
-			if (!folder.getName().equals(md5Checksum)) {
-				throw new SystemException(
-					"Invalid checksum for LAR file. Please retry");
+			if (!checksum.equals(folder.getName())) {
+				throw new SystemException("Invalid checksum for LAR file");
 			}
 
 			layoutLocalService.importLayouts(
-				userId, folder.getGroupId(), privateLayout, parameterMap,
-				tempFile);
+				userId, folder.getGroupId(), privateLayout, parameterMap, file);
 		}
 		catch (IOException ioe) {
-			throw new SystemException("Unable to concatenate lar file", ioe);
+			throw new SystemException("Unable to reassemble LAR file", ioe);
 		}
 		finally {
 			StreamUtil.cleanUp(fileOutputStream);
 
-			FileUtil.delete(tempFile);
+			FileUtil.delete(file);
 		}
 	}
 
 	@Override
-	public void stage(
-			long userId, long stagingRequestId, String fileName,
-			byte[] byteBuffer)
+	public void updateStagingRequest(
+			long userId, long stagingRequestId, String fileName, byte[] bytes)
 		throws PortalException, SystemException {
 
 		Folder folder = PortletFileRepositoryUtil.getPortletFolder(
 			stagingRequestId);
 
-		long fileEntriesCount =
-			PortletFileRepositoryUtil.getPortletFileEntriesCount(
-				folder.getGroupId(), folder.getFolderId());
+		fileName += PortletFileRepositoryUtil.getPortletFileEntriesCount(
+			folder.getGroupId(), folder.getFolderId());
 
 		PortletFileRepositoryUtil.addPortletFileEntry(
 			folder.getGroupId(), userId, Group.class.getName(),
 			folder.getGroupId(), PortletKeys.SITES_ADMIN, folder.getFolderId(),
-			new UnsyncByteArrayInputStream(byteBuffer),
-			fileName + fileEntriesCount, ContentTypes.APPLICATION_ZIP, false);
+			new UnsyncByteArrayInputStream(bytes), fileName,
+			ContentTypes.APPLICATION_ZIP, false);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
