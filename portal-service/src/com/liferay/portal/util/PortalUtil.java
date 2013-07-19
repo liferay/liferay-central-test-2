@@ -196,7 +196,9 @@ public class PortalUtil {
 		return getPortal().generateRandomKey(request, input);
 	}
 
-	public static String getAbsoluteURL(HttpServletRequest request, String url) {
+	public static String getAbsoluteURL(
+		HttpServletRequest request, String url) {
+
 		return getPortal().getAbsoluteURL(request, url);
 	}
 

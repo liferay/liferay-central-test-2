@@ -843,9 +843,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (!CookieKeys.hasSessionId(request) &&
-			url.startsWith(portalURL)) {
-
+		if (!CookieKeys.hasSessionId(request) && url.startsWith(portalURL)) {
 			url = PortalUtil.getURLWithSessionId(
 				url, request.getSession().getId());
 		}
