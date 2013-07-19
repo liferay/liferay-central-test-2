@@ -39,11 +39,11 @@
 
 					portletCategory = PortletCategoryUtil.getRelevantPortletCategory(permissionChecker, user.getCompanyId(), layout, portletCategory, layoutTypePortlet);
 
-					List<PortletCategory> categories = ListUtil.fromCollection(portletCategory.getCategories());
+					List<PortletCategory> portletCategories = ListUtil.fromCollection(portletCategory.getCategories());
 
-					categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
+					portletCategories = ListUtil.sort(portletCategories, new PortletCategoryComparator(locale));
 
-					for (PortletCategory curPortletCategory : categories) {
+					for (PortletCategory curPortletCategory : portletCategories) {
 					%>
 
 						<c:if test="<%= !curPortletCategory.isHidden() %>">

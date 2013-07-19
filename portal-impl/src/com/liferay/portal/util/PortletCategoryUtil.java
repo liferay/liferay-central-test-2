@@ -43,18 +43,19 @@ public class PortletCategoryUtil {
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
-		Set panelSelectedPortlets = SetUtil.fromArray(
+		Set<String> panelSelectedPortletIds = SetUtil.fromArray(
 			StringUtil.split(
 				typeSettingsProperties.getProperty("panelSelectedPortlets")));
 
 		return getRelevantPortletCategory(
 			permissionChecker, companyId, layout, portletCategory,
-			panelSelectedPortlets, layoutTypePortlet);
+			panelSelectedPortletIds, layoutTypePortlet);
 	}
 
 	protected static PortletCategory getRelevantPortletCategory(
 			PermissionChecker permissionChecker, long companyId, Layout layout,
-			PortletCategory portletCategory, Set panelSelectedPortlets,
+			PortletCategory portletCategory,
+			Set<String> panelSelectedPortletIds,
 			LayoutTypePortlet layoutTypePortlet)
 		throws Exception {
 
@@ -81,13 +82,13 @@ public class PortletCategoryUtil {
 							 portlet.isUndeployedPortlet()) {
 					}
 					else if (layout.isTypePanel() &&
-							 panelSelectedPortlets.contains(
+							 panelSelectedPortletIds.contains(
 									portlet.getRootPortletId())) {
 
 						portletIds.add(portlet.getPortletId());
 					}
 					else if (layout.isTypePanel() &&
-							 !panelSelectedPortlets.contains(
+							 !panelSelectedPortletIds.contains(
 									portlet.getRootPortletId())) {
 					}
 					else if (!PortletPermissionUtil.contains(
@@ -109,7 +110,7 @@ public class PortletCategoryUtil {
 			PortletCategory curRelevantPortletCategory =
 				getRelevantPortletCategory(
 					permissionChecker, companyId, layout, curPortletCategory,
-					panelSelectedPortlets, layoutTypePortlet);
+					panelSelectedPortletIds, layoutTypePortlet);
 
 			curRelevantPortletCategory.setPortletIds(portletIds);
 

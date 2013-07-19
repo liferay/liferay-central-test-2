@@ -19,9 +19,9 @@
 <%
 PortletCategory portletCategory = (PortletCategory)request.getAttribute(WebKeys.PORTLET_CATEGORY);
 
-List<PortletCategory> categories = ListUtil.fromCollection(portletCategory.getCategories());
+List<PortletCategory> portletCategories = ListUtil.fromCollection(portletCategory.getCategories());
 
-categories = ListUtil.sort(categories, new PortletCategoryComparator(locale));
+portletCategories = ListUtil.sort(portletCategories, new PortletCategoryComparator(locale));
 
 List<Portlet> portlets = new ArrayList<Portlet>();
 
@@ -49,7 +49,7 @@ for (String portletId : portletIds) {
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
-if (!categories.isEmpty() || !portlets.isEmpty()) {
+if (!portletCategories.isEmpty() || !portlets.isEmpty()) {
 	String title = Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName());
 %>
 
@@ -57,8 +57,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 		<aui:nav cssClass="nav-list">
 
 			<%
-			for (PortletCategory category : categories) {
-				request.setAttribute(WebKeys.PORTLET_CATEGORY, category);
+			for (PortletCategory curPortletCategory : portletCategories) {
+				request.setAttribute(WebKeys.PORTLET_CATEGORY, curPortletCategory);
 			%>
 
 				<liferay-util:include page="/html/portal/layout/view/view_category.jsp" />
