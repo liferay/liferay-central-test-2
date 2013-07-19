@@ -162,7 +162,7 @@ public class DLAppHelperLocalServiceImpl
 			serviceContext.getAssetLinkEntryIds());
 
 		if (!isStagingGroup(folder.getGroupId())) {
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_ADD, DLSyncConstants.TYPE_FOLDER,
 				folder.getFolderId());
 		}
@@ -287,7 +287,7 @@ public class DLAppHelperLocalServiceImpl
 			// Sync
 
 			if (isUpdateSync(fileEntry)) {
-				registerDLSyncCallback(
+				registerDLSyncEventCallback(
 					DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FILE,
 					fileEntry.getFileEntryId());
 			}
@@ -331,7 +331,7 @@ public class DLAppHelperLocalServiceImpl
 		// Sync
 
 		if (!isStagingGroup(folder.getGroupId())) {
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FOLDER,
 				folder.getFolderId());
 		}
@@ -434,7 +434,7 @@ public class DLAppHelperLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (isUpdateSync(fileEntry)) {
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_MOVE, DLSyncConstants.TYPE_FILE,
 				fileEntry.getFileEntryId());
 		}
@@ -554,7 +554,7 @@ public class DLAppHelperLocalServiceImpl
 	@Override
 	public void moveFolder(Folder folder) throws SystemException {
 		if (!isStagingGroup(folder.getGroupId())) {
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_MOVE, DLSyncConstants.TYPE_FOLDER,
 				folder.getFolderId());
 		}
@@ -670,7 +670,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// Sync
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
 			fileEntry.getFileEntryId());
 
@@ -738,7 +738,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// Sync
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
 			folder.getFolderId());
 
@@ -1107,7 +1107,7 @@ public class DLAppHelperLocalServiceImpl
 
 		registerDLProcessorCallback(fileEntry, sourceFileVersion);
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_UPDATE, DLSyncConstants.TYPE_FILE,
 			fileEntry.getFileEntryId());
 	}
@@ -1130,7 +1130,7 @@ public class DLAppHelperLocalServiceImpl
 
 		registerDLProcessorCallback(fileEntry, sourceFileVersion);
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_UPDATE, DLSyncConstants.TYPE_FILE,
 			fileEntry.getFileEntryId());
 	}
@@ -1146,7 +1146,7 @@ public class DLAppHelperLocalServiceImpl
 			serviceContext.getAssetLinkEntryIds());
 
 		if (!isStagingGroup(folder.getGroupId())) {
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_UPDATE, DLSyncConstants.TYPE_FOLDER,
 				folder.getFolderId());
 		}
@@ -1233,7 +1233,7 @@ public class DLAppHelperLocalServiceImpl
 			if (!isStagingGroup(fileEntry.getGroupId()) &&
 				Validator.isNotNull(event)) {
 
-				registerDLSyncCallback(
+				registerDLSyncEventCallback(
 					event, DLSyncConstants.TYPE_FILE,
 					fileEntry.getFileEntryId());
 			}
@@ -1343,7 +1343,7 @@ public class DLAppHelperLocalServiceImpl
 
 			// Sync
 
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FILE,
 				fileEntry.getFileEntryId());
 
@@ -1417,7 +1417,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// Sync
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FILE,
 			fileEntry.getFileEntryId());
 
@@ -1468,7 +1468,7 @@ public class DLAppHelperLocalServiceImpl
 
 			// Sync
 
-			registerDLSyncCallback(
+			registerDLSyncEventCallback(
 				DLSyncConstants.EVENT_RESTORE, DLSyncConstants.TYPE_FOLDER,
 				folder.getFolderId());
 
@@ -1512,7 +1512,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// Sync
 
-		registerDLSyncCallback(
+		registerDLSyncEventCallback(
 			DLSyncConstants.EVENT_DELETE, DLSyncConstants.TYPE_FOLDER,
 			folder.getFolderId());
 
@@ -1714,7 +1714,7 @@ public class DLAppHelperLocalServiceImpl
 			});
 	}
 
-	protected void registerDLSyncCallback(
+	protected void registerDLSyncEventCallback(
 			final String event, final String type, final long typePK)
 		throws SystemException {
 
@@ -1740,7 +1740,7 @@ public class DLAppHelperLocalServiceImpl
 					message.setValues(values);
 
 					MessageBusUtil.sendMessage(
-						DestinationNames.DOCUMENT_LIBRARY_SYNC_PROCESSOR,
+						DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
 						message);
 
 					return null;
