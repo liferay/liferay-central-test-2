@@ -329,7 +329,7 @@ public class StagingImpl implements Staging {
 
 			fileInputStream = new FileInputStream(file);
 
-			stagingRequestId = StagingServiceHttp.prepareStagingRequest(
+			stagingRequestId = StagingServiceHttp.createStagingRequest(
 				httpPrincipal, remoteGroupId, checksum);
 
 			byte[] bytes =
