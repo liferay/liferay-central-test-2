@@ -13,55 +13,8 @@
  * details.
  */
 --%>
+
 <%@ include file="/html/portal/init.jsp" %>
-
-<liferay-util:buffer var="buffer">
-
-	<%
-	if (themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
-		String ppid = ParamUtil.getString(request, "p_p_id");
-
-		String velocityTemplateId = null;
-		String velocityTemplateContent = null;
-
-		if (themeDisplay.isStatePopUp()) {
-			velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
-			velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-		}
-		else {
-			ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
-
-			velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
-			velocityTemplateContent = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-		}
-
-		if (Validator.isNotNull(velocityTemplateId) && Validator.isNotNull(velocityTemplateContent)) {
-			RuntimePageUtil.processTemplate(pageContext, ppid, new StringTemplateResource(velocityTemplateId, velocityTemplateContent));
-		}
-	}
-	else {
-		UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
-
-		String description = typeSettingsProperties.getProperty("description");
-
-		if (Validator.isNull(description)) {
-			description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-		}
-	%>
-
-		<h2>
-			<%= HtmlUtil.escape(layout.getName(locale)) %>
-		</h2>
-
-		<div class="alert alert-info">
-			<%= HtmlUtil.escape(description) %>
-		</div>
-
-	<%
-	}
-	%>
-
-</liferay-util:buffer>
 
 <c:choose>
 	<c:when test="<%= !themeDisplay.isStatePopUp() %>">
@@ -108,13 +61,13 @@
 
 				</aui:col>
 				<aui:col cssClass="<%= panelBodyCssClass %>"  width="<%= 80 %>">
-					<%= buffer %>
+					<%@ include file="/html/portal/layout/view/panel_description.jspf" %>
 				</aui:col>
 			</aui:row>
 		</aui:container>
 	</c:when>
 	<c:otherwise>
-		<%= buffer %>
+		<%@ include file="/html/portal/layout/view/panel_description.jspf" %>
 	</c:otherwise>
 </c:choose>
 
