@@ -42,8 +42,7 @@ if (Validator.isNull(ppid)) {
 
 		String currentURL = PortalUtil.getCurrentURL(request);
 
-		String redirect = HttpUtil.setParameter(
-			currentURL, "p_p_id", firstPortlet.getPortletId());
+		String redirect = HttpUtil.setParameter(currentURL, "p_p_id", firstPortlet.getPortletId());
 
 		response.sendRedirect(PortalUtil.getAbsoluteURL(request, redirect));
 	}
