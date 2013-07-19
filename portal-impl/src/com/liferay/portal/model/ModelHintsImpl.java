@@ -251,9 +251,8 @@ public class ModelHintsImpl implements ModelHints {
 		if (fields == null) {
 			return false;
 		}
-		else {
-			return fields.containsKey(field + _ELEMENTS_SUFFIX);
-		}
+
+		return fields.containsKey(field + _ELEMENTS_SUFFIX);
 	}
 
 	@Override
