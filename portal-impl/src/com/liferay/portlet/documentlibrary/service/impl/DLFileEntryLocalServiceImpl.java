@@ -2406,6 +2406,8 @@ public class DLFileEntryLocalServiceImpl
 			int status, Date statusDate, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		dlFileVersion.setUserId(user.getUserId());
+		dlFileVersion.setUserName(user.getFullName());
 		dlFileVersion.setModifiedDate(statusDate);
 
 		if (Validator.isNotNull(sourceFileName)) {
@@ -2413,8 +2415,6 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersion.setMimeType(mimeType);
 		}
 
-		dlFileVersion.setUserId(user.getUserId());
-		dlFileVersion.setUserName(user.getFullName());
 		dlFileVersion.setTitle(title);
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);

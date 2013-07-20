@@ -327,7 +327,7 @@ public class FileEntryProxyBean
 	 * @deprecated As of 6.2.0, replaced by {@link FileVersionProxyBean#getUserUuid()}
 	 */
 	@Override
-	public String getVersionUserUuid() throws SystemException {
+	public String getVersionUserUuid() {
 		String versionUserUuid = StringPool.BLANK;
 
 		try {

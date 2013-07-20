@@ -385,7 +385,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	 * @deprecated As of 6.2.0, replaced by {@link DLFileVersion#getUserUuid()}
 	 */
 	@Override
-	public String getVersionUserUuid() throws SystemException {
+	public String getVersionUserUuid() {
 		String versionUserUuid = StringPool.BLANK;
 
 		try {
