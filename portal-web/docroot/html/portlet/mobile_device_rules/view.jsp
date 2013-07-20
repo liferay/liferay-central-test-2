@@ -81,7 +81,7 @@ portletURL.setParameter("chooseCallback", chooseCallback);
 
 			<%
 			String rowHREF = null;
-			String chooseOnClick = null;
+			String taglibOnClick = null;
 
 			if (Validator.isNull(chooseCallback)) {
 			%>
@@ -111,7 +111,7 @@ portletURL.setParameter("chooseCallback", chooseCallback);
 
 					rowHREF = sb.toString();
 
-					chooseOnClick = StringUtil.replaceFirst(sb.toString(), "javascript:", StringPool.BLANK);
+					taglibOnClick = StringUtil.replaceFirst(sb.toString(), "javascript:", StringPool.BLANK);
 				}
 			}
 			%>
