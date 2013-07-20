@@ -201,10 +201,11 @@
 		</propertyfile>
 
 		<ant antfile="${basedir}/../benchmarks/build.xml" inheritall="false" target="build-sample-sql">
-			<property name="properties.file" value="test-sample-sql.properties"/>
+			<property name="sample.sql.properties.file" value="test-sample-sql.properties"/>
 		</ant>
 
 		<delete file="test-sample-sql.properties" />
+
 		<delete dir="${tstamp.value}" />
 	</target>
 </project>

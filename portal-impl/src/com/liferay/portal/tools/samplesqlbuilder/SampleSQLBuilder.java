@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncTeeWriter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.InitUtil;
@@ -41,7 +42,6 @@ import java.io.Writer;
 import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +62,11 @@ public class SampleSQLBuilder {
 
 		InitUtil.initWithSpring(false, extraConfigLocations);
 
-		Properties properties = new Properties();
 		Reader reader = null;
 
 		try {
+			Properties properties = new SortedProperties();
+
 			reader = new FileReader(args[0]);
 
 			properties.load(reader);
@@ -206,13 +207,7 @@ public class SampleSQLBuilder {
 
 		StringBundler sb = new StringBundler();
 
-		Set<String> propertyNames = properties.stringPropertyNames();
-
-		List<String> keys = new ArrayList<String>(propertyNames);
-
-		Collections.sort(keys);
-
-		for (String key : keys) {
+		for (String key : properties.stringPropertyNames()) {
 			if (!key.startsWith("sample.sql")) {
 				continue;
 			}
@@ -329,7 +324,7 @@ public class SampleSQLBuilder {
 
 					processTemplate(_tplSample, context);
 
-					for (String fileName : _CSV_FILES) {
+					for (String fileName : _CSV_FILE_NAMES) {
 						Writer writer = (Writer)context.get(
 							fileName + "CSVWriter");
 
@@ -379,7 +374,7 @@ public class SampleSQLBuilder {
 		put(context, "maxWikiPageCommentCount", _maxWikiPageCommentCount);
 		put(context, "maxWikiPageCount", _maxWikiPageCount);
 
-		for (String fileName : _CSV_FILES) {
+		for (String fileName : _CSV_FILE_NAMES) {
 			Writer writer = createFileWriter(
 				new File(_outputDir, fileName + ".csv"));
 
@@ -493,9 +488,10 @@ public class SampleSQLBuilder {
 		writer.write(sql);
 	}
 
-	private static final String[] _CSV_FILES =
-		{"assetPublisher", "blog", "company", "documentLibrary",
-			"dynamicDataList", "layout", "messageBoard", "repository", "wiki"};
+	private static final String[] _CSV_FILE_NAMES = {
+		"assetPublisher", "blog", "company", "documentLibrary",
+		"dynamicDataList", "layout", "messageBoard", "repository", "wiki"
+	};
 
 	private static final int _PIPE_BUFFER_SIZE = 16 * 1024 * 1024;
 

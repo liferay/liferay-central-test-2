@@ -33,11 +33,12 @@ import java.util.Properties;
 public class TestSampleSQLBuilder {
 
 	public static void main(String[] args) throws Exception {
-		Properties properties = new Properties();
 		Reader reader = null;
 
 		try {
 			reader = new FileReader(args[0]);
+
+			Properties properties = new SortedProperties();
 
 			properties.load(reader);
 		}

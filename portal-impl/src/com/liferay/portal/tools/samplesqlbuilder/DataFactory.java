@@ -261,7 +261,7 @@ public class DataFactory {
 		_sampleUserId = _counter.get();
 
 		_dlDDMStructureContent = StringUtil.read(
-			_getResourceInputStream("ddm_structure_basic_document.xml"));
+			getResourceInputStream("ddm_structure_basic_document.xml"));
 
 		initAssetCategoryModels();
 		initAssetTagModels();
@@ -820,9 +820,9 @@ public class DataFactory {
 
 	public void initUserNames() throws IOException {
 		_firstNames = ListUtil.fromString(
-			StringUtil.read(_getResourceInputStream("first_names.txt")));
+			StringUtil.read(getResourceInputStream("first_names.txt")));
 		_lastNames = ListUtil.fromString(
-			StringUtil.read(_getResourceInputStream("last_names.txt")));
+			StringUtil.read(getResourceInputStream("last_names.txt")));
 	}
 
 	public void initVirtualHostModel() {
@@ -2126,6 +2126,15 @@ public class DataFactory {
 		return userName;
 	}
 
+	protected InputStream getResourceInputStream(String resourceName) {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		return classLoader.getResourceAsStream(
+			_DEPENDENCIES_DIR + resourceName);
+	}
+
 	protected AssetCategoryModel newAssetCategoryModel(
 		long groupId, long lastRightCategoryId, String name,
 		long vocabularyId) {
@@ -2564,17 +2573,6 @@ public class DataFactory {
 	protected Date nextFutureDate() {
 		return new Date(
 			_FUTURE_TIME + (_futureDateCounter.get() * Time.SECOND));
-	}
-
-	private InputStream _getResourceInputStream(String resourceName)
-		throws IOException {
-
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
-
-		return classLoader.getResourceAsStream(
-			_DEPENDENCIES_DIR + resourceName);
 	}
 
 	private static final long _CURRENT_TIME = System.currentTimeMillis();
