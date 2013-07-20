@@ -14,6 +14,7 @@
 
 package com.liferay.portal.tools.samplesqlbuilder;
 
+import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.tools.DBLoader;
 
 import java.io.FileReader;

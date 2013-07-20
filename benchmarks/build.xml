@@ -3,9 +3,9 @@
 <project name="benchmarks" basedir="." default="run">
 	<import file="../build-common.xml" />
 
-	<property name="sample.sql.properties.file" value="${basedir}/benchmarks.properties" />
-
 	<target name="build-sample-sql">
+		<property name="sample.sql.properties.file" value="${basedir}/benchmarks.properties" />
+
 		<java
 			classname="com.liferay.portal.tools.samplesqlbuilder.SampleSQLBuilder"
 			classpathref="project.classpath"
