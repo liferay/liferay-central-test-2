@@ -1968,8 +1968,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	protected String getDiffsURL(
 			WikiNode node, WikiPage page, WikiPage previousVersionPage,
-			HttpServletRequest request, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+		
+		HttpServletRequest request = serviceContext.getRequest();
+		
+		if (request == null) {
+			return StringPool.BLANK;
+		}
 
 		long wikiPlid = serviceContext.getPlid();
 
@@ -2007,9 +2013,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected String getPageURL(
-			WikiNode node, WikiPage page, HttpServletRequest request,
-			ServiceContext serviceContext)
+			WikiNode node, WikiPage page, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		HttpServletRequest request = serviceContext.getRequest();
+		
+		if (request == null) {
+			return StringPool.BLANK;
+		}
 
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
@@ -2017,13 +2028,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String layoutFullURL = getLayoutURL(
 			node.getGroupId(), PortletKeys.WIKI, serviceContext);
 
-		String pageURL = StringPool.BLANK;
-
 		if (Validator.isNotNull(layoutFullURL)) {
-			pageURL =
-				layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "wiki/" +
-					node.getNodeId() + StringPool.SLASH +
-						HttpUtil.encodeURL(page.getTitle());
+			return layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "wiki/" +
+				node.getNodeId() + StringPool.SLASH +
+					HttpUtil.encodeURL(page.getTitle());
 		}
 		else {
 			PortletURL portletURL = PortletURLFactoryUtil.create(
@@ -2035,10 +2043,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			portletURL.setParameter("title", page.getTitle());
 
-			pageURL = portletURL.toString();
+			return portletURL.toString();
 		}
-
-		return pageURL;
 	}
 
 	protected String getParentPageTitle(WikiPage page) {
@@ -2159,14 +2165,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String pageURL = StringPool.BLANK;
 		String diffsURL = StringPool.BLANK;
 
-		HttpServletRequest request = serviceContext.getRequest();
-
-		if (Validator.isNotNull(layoutFullURL) && (request != null)) {
-			pageURL = getPageURL(node, page, request, serviceContext);
+		if (Validator.isNotNull(layoutFullURL)) {
+			pageURL = getPageURL(node, page, serviceContext);
 
 			if (previousVersionPage != null) {
 				diffsURL = getDiffsURL(
-					node, page, previousVersionPage, request, serviceContext);
+					node, page, previousVersionPage, serviceContext);
 			}
 		}
 
