@@ -2014,7 +2014,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
 
-		String layoutFullURL = getPortletLayoutURL(
+		String layoutFullURL = getLayoutURL(
 			node.getGroupId(), PortletKeys.WIKI, serviceContext);
 
 		String pageURL = StringPool.BLANK;

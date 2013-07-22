@@ -36,7 +36,7 @@ public abstract class BaseLocalServiceImpl implements BaseLocalService {
 		return clazz.getClassLoader();
 	}
 
-	protected String getEntryLayoutURL(
+	protected String getLayoutURL(
 		Layout layout, ServiceContext serviceContext) {
 
 		HttpServletRequest request = serviceContext.getRequest();
@@ -56,28 +56,28 @@ public abstract class BaseLocalServiceImpl implements BaseLocalService {
 		}
 	}
 
-	protected String getPortletLayoutURL(
+	protected String getLayoutURL(
 			long groupId, String portletId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		String portletLayoutURL = StringPool.BLANK;
+		String layoutURL = StringPool.BLANK;
+
+		long plid = serviceContext.getPlid();
 
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
 
-		long portletPlid = serviceContext.getPlid();
+		if (plid == controlPanelPlid) {
+			plid = PortalUtil.getPlidFromPortletId(groupId, portletId);
 
-		if (portletPlid == controlPanelPlid) {
-			portletPlid = PortalUtil.getPlidFromPortletId(groupId, portletId);
+			if (plid != LayoutConstants.DEFAULT_PLID) {
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			if (portletPlid != LayoutConstants.DEFAULT_PLID) {
-				Layout layout = LayoutLocalServiceUtil.getLayout(portletPlid);
-
-				portletLayoutURL = getEntryLayoutURL(layout, serviceContext);
+				layoutURL = getLayoutURL(layout, serviceContext);
 			}
 		}
 
-		return portletLayoutURL;
+		return layoutURL;
 	}
 
 }

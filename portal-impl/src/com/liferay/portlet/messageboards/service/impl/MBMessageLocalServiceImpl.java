@@ -1813,7 +1813,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
 
-		String layoutFullURL = getPortletLayoutURL(
+		String layoutFullURL = getLayoutURL(
 			message.getGroupId(), PortletKeys.MESSAGE_BOARDS, serviceContext);
 
 		String messageURL = StringPool.BLANK;
