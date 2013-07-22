@@ -18,7 +18,13 @@
 
 <%
 Group liveGroup = (Group)request.getAttribute("site.liveGroup");
+%>
 
+<liferay-ui:error-marker key="errorSection" value="displaySettings" />
+
+<h3><liferay-ui:message key="language" /></h3>
+
+<%
 UnicodeProperties typeSettingsProperties = null;
 
 if (liveGroup != null) {
@@ -29,13 +35,7 @@ else {
 }
 
 boolean inheritLocales = GetterUtil.getBoolean(typeSettingsProperties.getProperty("inheritLocales"), true);
-
-Locale[] siteAavailableLocales = LanguageUtil.getAvailableLocales(liveGroup.getGroupId());
 %>
-
-<liferay-ui:error-marker key="errorSection" value="displaySettings" />
-
-<h3><liferay-ui:message key="language" /></h3>
 
 <aui:input checked="<%= inheritLocales %>" id="inheritLocales" label="use-the-default-language-options" name="TypeSettingsProperties--inheritLocales--" type="radio" value="<%= true %>" />
 
@@ -70,6 +70,10 @@ Locale[] siteAavailableLocales = LanguageUtil.getAvailableLocales(liveGroup.getG
 
 <aui:fieldset id="inheritLocalesFieldset">
 	<liferay-ui:error exception="<%= LocaleException.class %>" message="please-enter-a-valid-locale" />
+
+	<%
+	Locale[] siteAavailableLocales = LanguageUtil.getAvailableLocales(liveGroup.getGroupId());
+	%>
 
 	<aui:fieldset cssClass="default-language" label="default-language">
 		<aui:select label="" name="TypeSettingsProperties--languageId--">

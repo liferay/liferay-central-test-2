@@ -798,7 +798,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setUnfilteredLayouts(unfilteredLayouts);
 		themeDisplay.setUser(user);
 
-
 		// Icons
 
 		themeDisplay.setShowAddContentIcon(false);
