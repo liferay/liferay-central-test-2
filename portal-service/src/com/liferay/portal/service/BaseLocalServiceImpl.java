@@ -14,12 +14,14 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
@@ -71,7 +73,7 @@ public abstract class BaseLocalServiceImpl implements BaseLocalService {
 			plid = PortalUtil.getPlidFromPortletId(groupId, portletId);
 
 			if (plid != LayoutConstants.DEFAULT_PLID) {
-				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 				layoutURL = getLayoutURL(layout, serviceContext);
 			}
@@ -79,5 +81,8 @@ public abstract class BaseLocalServiceImpl implements BaseLocalService {
 
 		return layoutURL;
 	}
+
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
 
 }
