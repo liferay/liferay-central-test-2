@@ -1806,24 +1806,29 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	protected String getMessageURL(
-			MBMessage message, HttpServletRequest request,
-			ServiceContext serviceContext)
+			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		long controlPanelPlid = PortalUtil.getControlPanelPlid(
-			serviceContext.getCompanyId());
-
-		String layoutFullURL = getLayoutURL(
-			message.getGroupId(), PortletKeys.MESSAGE_BOARDS, serviceContext);
-
+		
 		String messageURL = StringPool.BLANK;
 
-		if (Validator.isNotNull(layoutFullURL)) {
+		HttpServletRequest request = serviceContext.getRequest();
+		
+		if (request == null) {
+			return messageURL;
+		}
+
+		String layoutURL = getLayoutURL(
+			message.getGroupId(), PortletKeys.MESSAGE_BOARDS, serviceContext);
+
+		if (Validator.isNotNull(layoutURL)) {
 			messageURL =
-				layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
+				layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
 					"message_boards/view_message/" + message.getMessageId();
 		}
 		else {
+			long controlPanelPlid = PortalUtil.getControlPanelPlid(
+				serviceContext.getCompanyId());
+
 			PortletURL portletURL = PortletURLFactoryUtil.create(
 				request, PortletKeys.MESSAGE_BOARDS_ADMIN, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
@@ -1991,10 +1996,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String messageURL = StringPool.BLANK;
 
-		HttpServletRequest request = serviceContext.getRequest();
-
-		if (Validator.isNotNull(layoutFullURL) && (request != null)) {
-			messageURL = getMessageURL(message, request, serviceContext);
+		if (Validator.isNotNull(layoutFullURL)) {
+			messageURL = getMessageURL(message, serviceContext);
 		}
 
 		String fromName = MBUtil.getEmailFromName(
@@ -2045,6 +2048,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (htmlFormat && message.isFormatBBCode()) {
 			try {
 				messageBody = BBCodeTranslatorUtil.getHTML(messageBody);
+
+				HttpServletRequest request = serviceContext.getRequest();
 
 				if (request != null) {
 					ThemeDisplay themeDisplay =
