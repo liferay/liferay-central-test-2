@@ -2132,7 +2132,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		String portalURL = serviceContext.getPortalURL();
-		String layoutFullURL = serviceContext.getLayoutFullURL();
 
 		WikiPage previousVersionPage = getPreviousVersionPage(page);
 
@@ -2165,7 +2164,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String pageURL = StringPool.BLANK;
 		String diffsURL = StringPool.BLANK;
 
-		if (Validator.isNotNull(layoutFullURL)) {
+		if (Validator.isNotNull(serviceContext.getLayoutFullURL())) {
 			pageURL = getPageURL(node, page, serviceContext);
 			diffsURL = getDiffsURL(
 				node, page, previousVersionPage, serviceContext);
