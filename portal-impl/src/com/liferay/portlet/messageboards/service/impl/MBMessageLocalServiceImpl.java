@@ -1808,9 +1808,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	protected String getMessageURL(
 			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-		
+
 		HttpServletRequest request = serviceContext.getRequest();
-		
+
 		if (request == null) {
 			return StringPool.BLANK;
 		}

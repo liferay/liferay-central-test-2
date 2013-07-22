@@ -1970,7 +1970,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiNode node, WikiPage page, WikiPage previousVersionPage,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
-		
+
 		if (previousVersionPage == null) {
 			return StringPool.BLANK;
 		}
@@ -1980,7 +1980,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		HttpServletRequest request = serviceContext.getRequest();
-		
+
 		if (request == null) {
 			return StringPool.BLANK;
 		}
@@ -2025,7 +2025,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		HttpServletRequest request = serviceContext.getRequest();
-		
+
 		if (request == null) {
 			return StringPool.BLANK;
 		}
@@ -2202,8 +2202,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			getDiffsURL(node, page, previousVersionPage, serviceContext),
 			"[$NODE_NAME$]", node.getName(), "[$PAGE_DATE_UPDATE$]",
 			page.getModifiedDate(), "[$PAGE_ID$]", page.getPageId(),
-			"[$PAGE_SUMMARY$]", page.getSummary(),
-			"[$PAGE_TITLE$]", page.getTitle(), "[$PAGE_URL$]",
+			"[$PAGE_SUMMARY$]", page.getSummary(), "[$PAGE_TITLE$]",
+			page.getTitle(), "[$PAGE_URL$]",
 			getPageURL(node, page, serviceContext));
 		subscriptionSender.setContextAttribute(
 			"[$PAGE_CONTENT$]", pageContent, false);
