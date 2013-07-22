@@ -1809,21 +1809,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 		
-		String messageURL = StringPool.BLANK;
-
 		HttpServletRequest request = serviceContext.getRequest();
 		
 		if (request == null) {
-			return messageURL;
+			return StringPool.BLANK;
 		}
 
 		String layoutURL = getLayoutURL(
 			message.getGroupId(), PortletKeys.MESSAGE_BOARDS, serviceContext);
 
 		if (Validator.isNotNull(layoutURL)) {
-			messageURL =
-				layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
-					"message_boards/view_message/" + message.getMessageId();
+			return layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+				"message_boards/view_message/" + message.getMessageId();
 		}
 		else {
 			long controlPanelPlid = PortalUtil.getControlPanelPlid(
@@ -1838,10 +1835,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			portletURL.setParameter(
 				"messageId", String.valueOf(message.getMessageId()));
 
-			messageURL = portletURL.toString();
+			return portletURL.toString();
 		}
-
-		return messageURL;
 	}
 
 	protected String getSubject(String subject, String body) {
