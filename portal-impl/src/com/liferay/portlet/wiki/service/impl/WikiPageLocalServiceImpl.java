@@ -1971,6 +1971,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 		
+		if (previousVersionPage == null) {
+			return StringPool.BLANK;
+		}
+		
 		HttpServletRequest request = serviceContext.getRequest();
 		
 		if (request == null) {
@@ -2163,11 +2167,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(layoutFullURL)) {
 			pageURL = getPageURL(node, page, serviceContext);
-
-			if (previousVersionPage != null) {
-				diffsURL = getDiffsURL(
-					node, page, previousVersionPage, serviceContext);
-			}
+			diffsURL = getDiffsURL(
+				node, page, previousVersionPage, serviceContext);
 		}
 
 		String fromName = WikiUtil.getEmailFromName(
