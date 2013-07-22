@@ -1977,23 +1977,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return StringPool.BLANK;
 		}
 
-		long wikiPlid = serviceContext.getPlid();
-
 		String portletId = null;
 		long plid = LayoutConstants.DEFAULT_PLID;
 		String strutsAction = null;
 
-		long controlPanelPlid = PortalUtil.getControlPanelPlid(
-			serviceContext.getCompanyId());
-
-		if (wikiPlid != LayoutConstants.DEFAULT_PLID) {
+		if (serviceContext.getPlid() != LayoutConstants.DEFAULT_PLID) {
 			portletId = PortletKeys.WIKI;
-			plid = wikiPlid;
+			plid = serviceContext.getPlid();
 			strutsAction = "/wiki/compare_versions";
 		}
 		else {
 			portletId = PortletKeys.WIKI_ADMIN;
-			plid = controlPanelPlid;
+			plid = PortalUtil.getControlPanelPlid(
+				serviceContext.getCompanyId());
 			strutsAction = "/wiki_admin/compare_versions";
 		}
 
@@ -2022,9 +2018,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return StringPool.BLANK;
 		}
 
-		long controlPanelPlid = PortalUtil.getControlPanelPlid(
-			serviceContext.getCompanyId());
-
 		String layoutFullURL = getLayoutURL(
 			node.getGroupId(), PortletKeys.WIKI, serviceContext);
 
@@ -2034,6 +2027,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 					HttpUtil.encodeURL(page.getTitle());
 		}
 		else {
+			long controlPanelPlid = PortalUtil.getControlPanelPlid(
+				serviceContext.getCompanyId());
+
 			PortletURL portletURL = PortletURLFactoryUtil.create(
 				request, PortletKeys.WIKI_ADMIN, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
