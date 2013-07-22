@@ -258,10 +258,10 @@ public class LanguageUtil {
 		return getLanguage().getTimeDescription(pageContext, milliseconds);
 	}
 
-	public static boolean hasInheritedLocales(long groupId)
+	public static boolean isInheritLocales(long groupId)
 		throws PortalException, SystemException {
 
-		return getLanguage().hasInheritedLocales(groupId);
+		return getLanguage().isInheritLocales(groupId);
 	}
 
 	public static void init() {

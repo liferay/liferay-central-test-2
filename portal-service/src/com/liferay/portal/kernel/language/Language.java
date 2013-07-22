@@ -136,7 +136,7 @@ public interface Language {
 	public String getTimeDescription(
 		PageContext pageContext, Long milliseconds);
 
-	public boolean hasInheritedLocales(long groupId)
+	public boolean isInheritLocales(long groupId)
 		throws PortalException, SystemException;
 
 	public void init();

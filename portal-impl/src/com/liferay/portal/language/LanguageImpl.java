@@ -454,7 +454,7 @@ public class LanguageImpl implements Language {
 		}
 
 		try {
-			if (hasInheritedLocales(groupId)) {
+			if (isInheritLocales(groupId)) {
 				return getAvailableLocales();
 			}
 		}
@@ -608,7 +608,7 @@ public class LanguageImpl implements Language {
 	}
 
 	@Override
-	public boolean hasInheritedLocales(long groupId)
+	public boolean isInheritLocales(long groupId)
 		throws PortalException, SystemException {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -648,7 +648,7 @@ public class LanguageImpl implements Language {
 		}
 
 		try {
-			if (hasInheritedLocales(groupId)) {
+			if (isInheritLocales(groupId)) {
 				return isAvailableLocale(locale);
 			}
 		}
