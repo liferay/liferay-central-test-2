@@ -1974,7 +1974,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (previousVersionPage == null) {
 			return StringPool.BLANK;
 		}
-		
+
+		if (Validator.isNotNull(serviceContext.getLayoutFullURL())) {
+			return StringPool.BLANK;
+		}
+
 		HttpServletRequest request = serviceContext.getRequest();
 		
 		if (request == null) {
@@ -2015,6 +2019,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	protected String getPageURL(
 			WikiNode node, WikiPage page, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(serviceContext.getLayoutFullURL())) {
+			return StringPool.BLANK;
+		}
 
 		HttpServletRequest request = serviceContext.getRequest();
 		
@@ -2161,14 +2169,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			pageContent = WikiUtil.processContent(pageContent);
 		}
 
-		String pageURL = StringPool.BLANK;
-		String diffsURL = StringPool.BLANK;
-
-		if (Validator.isNotNull(serviceContext.getLayoutFullURL())) {
-			pageURL = getPageURL(node, page, serviceContext);
-			diffsURL = getDiffsURL(
-				node, page, previousVersionPage, serviceContext);
-		}
+		String pageURL = getPageURL(node, page, serviceContext);
+		String diffsURL = getDiffsURL(
+			node, page, previousVersionPage, serviceContext);
 
 		String fromName = WikiUtil.getEmailFromName(
 			preferences, page.getCompanyId());
