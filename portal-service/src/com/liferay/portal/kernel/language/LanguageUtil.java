@@ -278,10 +278,6 @@ public class LanguageUtil {
 		return getLanguage().isAvailableLocale(groupId, languageId);
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #isAvailableLocale(long,
-	 *  String)}
-	 */
 	public static boolean isAvailableLocale(String languageId) {
 		return getLanguage().isAvailableLocale(languageId);
 	}
