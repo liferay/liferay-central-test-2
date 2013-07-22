@@ -106,9 +106,7 @@ public class RuntimeVariables {
 		}
 
 		varValue = varValue.replace("\\$", "$");
-
 		varValue = varValue.replace("\\{", "{");
-
 		varValue = varValue.replace("\\}", "}");
 
 		return StringEscapeUtils.escapeJava(varValue);
