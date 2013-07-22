@@ -1994,12 +1994,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			categoryIds.addAll(category.getAncestorCategoryIds());
 		}
 
-		String messageURL = StringPool.BLANK;
-
-		if (Validator.isNotNull(layoutFullURL)) {
-			messageURL = getMessageURL(message, serviceContext);
-		}
-
 		String fromName = MBUtil.getEmailFromName(
 			preferences, message.getCompanyId());
 		String fromAddress = MBUtil.getEmailFromAddress(
@@ -2090,8 +2084,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			"[$CATEGORY_NAME$]", categoryName, "[$MAILING_LIST_ADDRESS$]",
 			replyToAddress, "[$MESSAGE_ID$]", message.getMessageId(),
 			"[$MESSAGE_SUBJECT$]", message.getSubject(), "[$MESSAGE_URL$]",
-			messageURL, "[$MESSAGE_USER_ADDRESS$]", emailAddress,
-			"[$MESSAGE_USER_NAME$]", fullName);
+			getMessageURL(message, serviceContext), "[$MESSAGE_USER_ADDRESS$]",
+			emailAddress, "[$MESSAGE_USER_NAME$]", fullName);
 		subscriptionSenderPrototype.setFrom(fromAddress, fromName);
 		subscriptionSenderPrototype.setHtmlFormat(htmlFormat);
 		subscriptionSenderPrototype.setInReplyTo(inReplyTo);
