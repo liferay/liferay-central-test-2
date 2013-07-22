@@ -608,25 +608,6 @@ public class LanguageImpl implements Language {
 	}
 
 	@Override
-	public boolean isInheritLocales(long groupId)
-		throws PortalException, SystemException {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		Group liveGroup = group;
-
-		if (group.isStagingGroup()) {
-			liveGroup = group.getLiveGroup();
-		}
-
-		UnicodeProperties groupTypeSettings =
-			liveGroup.getTypeSettingsProperties();
-
-		return GetterUtil.getBoolean(
-			groupTypeSettings.getProperty("inheritLocales"), true);
-	}
-
-	@Override
 	public void init() {
 		_instances.clear();
 	}
@@ -702,6 +683,25 @@ public class LanguageImpl implements Language {
 	@Override
 	public boolean isDuplicateLanguageCode(String languageCode) {
 		return _getInstance()._duplicateLanguageCodes.contains(languageCode);
+	}
+
+	@Override
+	public boolean isInheritLocales(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		Group liveGroup = group;
+
+		if (group.isStagingGroup()) {
+			liveGroup = group.getLiveGroup();
+		}
+
+		UnicodeProperties groupTypeSettings =
+			liveGroup.getTypeSettingsProperties();
+
+		return GetterUtil.getBoolean(
+			groupTypeSettings.getProperty("inheritLocales"), true);
 	}
 
 	@Override
