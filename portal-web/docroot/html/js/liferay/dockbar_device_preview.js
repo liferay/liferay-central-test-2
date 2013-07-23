@@ -88,7 +88,7 @@ AUI.add(
 
 						var devicePreviewContainer = instance.byId('devicePreviewContainer');
 
-						instance._closePanelButton = devicePreviewContainer.one('#closePanel');
+						instance._closePanelButton = instance.byId('closePanelPreview');
 
 						instance._devicePreviewNode = A.Node.create(Lang.sub(TPL_DEVICE_PREVIEW));
 						instance._deviceSkin = A.Node.create(TPL_DEVICE_SKIN);

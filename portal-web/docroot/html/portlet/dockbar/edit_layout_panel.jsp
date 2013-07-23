@@ -42,7 +42,7 @@
 			</aui:script>
 		</c:when>
 		<c:otherwise>
-			<button class="close pull-right" id="closePanel" type="button">&times;</button>
+			<aui:button cssClass="close pull-right" name="closePanelEdit" value="&times;" />
 
 			<h1><liferay-ui:message key="edit-page" /></h1>
 
@@ -74,7 +74,7 @@
 			</c:if>
 
 			<aui:script use="aui-io-request,aui-loading-mask-deprecated,liferay-dockbar">
-				A.one('#closePanel').on('click', Liferay.Dockbar.toggleEditLayoutPanel, Liferay.Dockbar);
+				A.one('#<portlet:namespace />closePanelEdit').on('click', Liferay.Dockbar.toggleEditLayoutPanel, Liferay.Dockbar);
 
 				A.one('#<portlet:namespace />name').focus();
 
