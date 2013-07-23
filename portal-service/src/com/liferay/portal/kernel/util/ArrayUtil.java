@@ -23,7 +23,6 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
@@ -717,15 +716,16 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Boolean> survivors = new ArrayList<Boolean>();
+		List<Boolean> filteredArray = new ArrayList<Boolean>();
 
 		for (boolean b : array) {
 			if (predicateFilter.filter(b)) {
-				survivors.add(b);
+				filteredArray.add(b);
 			}
 		}
 
-		return toArray(survivors.toArray(new Boolean[survivors.size()]));
+		return toArray(
+			filteredArray.toArray(new Boolean[filteredArray.size()]));
 	}
 
 	public static byte[] filter(
@@ -735,15 +735,15 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Byte> survivors = new ArrayList<Byte>();
+		List<Byte> filteredArray = new ArrayList<Byte>();
 
 		for (byte b : array) {
 			if (predicateFilter.filter(b)) {
-				survivors.add(b);
+				filteredArray.add(b);
 			}
 		}
 
-		return toArray(survivors.toArray(new Byte[survivors.size()]));
+		return toArray(filteredArray.toArray(new Byte[filteredArray.size()]));
 	}
 
 	public static char[] filter(
@@ -753,15 +753,16 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Character> survivors = new ArrayList<Character>();
+		List<Character> filteredArray = new ArrayList<Character>();
 
 		for (char c : array) {
 			if (predicateFilter.filter(c)) {
-				survivors.add(c);
+				filteredArray.add(c);
 			}
 		}
 
-		return toArray(survivors.toArray(new Character[survivors.size()]));
+		return toArray(
+			filteredArray.toArray(new Character[filteredArray.size()]));
 	}
 
 	public static double[] filter(
@@ -771,15 +772,15 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Double> survivors = new ArrayList<Double>();
+		List<Double> filteredArray = new ArrayList<Double>();
 
 		for (double d : array) {
 			if (predicateFilter.filter(d)) {
-				survivors.add(d);
+				filteredArray.add(d);
 			}
 		}
 
-		return toArray(survivors.toArray(new Double[survivors.size()]));
+		return toArray(filteredArray.toArray(new Double[filteredArray.size()]));
 	}
 
 	public static float[] filter(
@@ -789,15 +790,15 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Float> survivors = new ArrayList<Float>();
+		List<Float> filteredArray = new ArrayList<Float>();
 
 		for (float f : array) {
 			if (predicateFilter.filter(f)) {
-				survivors.add(f);
+				filteredArray.add(f);
 			}
 		}
 
-		return toArray(survivors.toArray(new Float[survivors.size()]));
+		return toArray(filteredArray.toArray(new Float[filteredArray.size()]));
 	}
 
 	public static int[] filter(
@@ -807,15 +808,16 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Integer> survivors = new ArrayList<Integer>();
+		List<Integer> filteredArray = new ArrayList<Integer>();
 
 		for (int i : array) {
 			if (predicateFilter.filter(i)) {
-				survivors.add(i);
+				filteredArray.add(i);
 			}
 		}
 
-		return toArray(survivors.toArray(new Integer[survivors.size()]));
+		return toArray(
+			filteredArray.toArray(new Integer[filteredArray.size()]));
 	}
 
 	public static long[] filter(
@@ -825,15 +827,15 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Long> survivors = new ArrayList<Long>();
+		List<Long> filteredArray = new ArrayList<Long>();
 
 		for (long l : array) {
 			if (predicateFilter.filter(l)) {
-				survivors.add(l);
+				filteredArray.add(l);
 			}
 		}
 
-		return toArray(survivors.toArray(new Long[survivors.size()]));
+		return toArray(filteredArray.toArray(new Long[filteredArray.size()]));
 	}
 
 	public static short[] filter(
@@ -843,37 +845,15 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<Short> survivors = new ArrayList<Short>();
+		List<Short> filteredArray = new ArrayList<Short>();
 
 		for (short s : array) {
 			if (predicateFilter.filter(s)) {
-				survivors.add(s);
+				filteredArray.add(s);
 			}
 		}
 
-		return toArray(survivors.toArray(new Short[survivors.size()]));
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> T[] filter(
-		T[] array, PredicateFilter<T> predicateFilter) {
-
-		if ((array == null) || (array.length == 0)) {
-			return array;
-		}
-
-		List<T> origin = Arrays.asList(array);
-
-		ArrayList<T> survivors = new ArrayList<T>();
-
-		for (T item : origin) {
-			if (predicateFilter.filter(item)) {
-				survivors.add(item);
-			}
-		}
-
-		Object[] result = survivors.toArray();
-		return (T[])Arrays.copyOf(result, result.length, array.getClass());
+		return toArray(filteredArray.toArray(new Short[filteredArray.size()]));
 	}
 
 	public static int getLength(Object[] array) {
