@@ -81,6 +81,11 @@ public class WikiActivityInterpreterTest
 	}
 
 	@Override
+	protected boolean isSupportsRename(String className) {
+		return false;
+	}
+
+	@Override
 	protected void moveEntitiesToTrash() throws Exception {
 		long fileEntryId = WikiPageLocalServiceUtil.movePageAttachmentToTrash(
 			TestPropsValues.getUserId(), _page.getNodeId(), _page.getTitle(),
@@ -107,11 +112,6 @@ public class WikiActivityInterpreterTest
 		WikiPageLocalServiceUtil.restorePageAttachmentFromTrash(
 			TestPropsValues.getUserId(), _page.getNodeId(), _page.getTitle(),
 			_attachmentFileName);
-	}
-
-	@Override
-	protected boolean isSupportsRename(String className) {
-		return false;
 	}
 
 	private String _attachmentFileName;

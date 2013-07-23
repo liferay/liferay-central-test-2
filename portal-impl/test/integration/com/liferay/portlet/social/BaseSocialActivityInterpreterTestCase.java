@@ -241,12 +241,6 @@ public abstract class BaseSocialActivityInterpreterTestCase
 		return false;
 	}
 
-	protected abstract void moveEntitiesToTrash() throws Exception;
-
-	protected abstract void renameEntities() throws Exception;
-
-	protected abstract void restoreEntitiesFromTrash() throws Exception;
-
 	protected boolean isSupportsRename(String className) {
 		return true;
 	}
@@ -254,6 +248,12 @@ public abstract class BaseSocialActivityInterpreterTestCase
 	protected boolean isSupportsTrash() {
 		return true;
 	}
+
+	protected abstract void moveEntitiesToTrash() throws Exception;
+
+	protected abstract void renameEntities() throws Exception;
+
+	protected abstract void restoreEntitiesFromTrash() throws Exception;
 
 	protected Group group;
 	protected ServiceContext serviceContext;

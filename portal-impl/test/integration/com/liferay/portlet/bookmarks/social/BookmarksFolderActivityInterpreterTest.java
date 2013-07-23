@@ -59,6 +59,11 @@ public class BookmarksFolderActivityInterpreterTest
 	}
 
 	@Override
+	protected boolean isSupportsRename(String className) {
+		return false;
+	}
+
+	@Override
 	protected void moveEntitiesToTrash() throws Exception {
 		BookmarksFolderLocalServiceUtil.moveFolderToTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
@@ -72,11 +77,6 @@ public class BookmarksFolderActivityInterpreterTest
 	protected void restoreEntitiesFromTrash() throws Exception {
 		BookmarksFolderLocalServiceUtil.restoreFolderFromTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
-	}
-
-	@Override
-	protected boolean isSupportsRename(String className) {
-		return false;
 	}
 
 	private BookmarksFolder _folder;

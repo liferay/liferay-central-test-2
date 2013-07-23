@@ -61,6 +61,11 @@ public class MBThreadActivityInterpreterTest
 	}
 
 	@Override
+	protected boolean isSupportsRename(String className) {
+		return false;
+	}
+
+	@Override
 	protected void moveEntitiesToTrash() throws Exception {
 		MBThreadLocalServiceUtil.moveThreadsToTrash(
 			group.getGroupId(), TestPropsValues.getUserId());
@@ -74,11 +79,6 @@ public class MBThreadActivityInterpreterTest
 	protected void restoreEntitiesFromTrash() throws Exception {
 		MBThreadLocalServiceUtil.restoreThreadFromTrash(
 			TestPropsValues.getUserId(), _threadId);
-	}
-
-	@Override
-	protected boolean isSupportsRename(String className) {
-		return false;
 	}
 
 	private long _threadId;
