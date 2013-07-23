@@ -6,7 +6,7 @@
 	<#assign varValue = varElement.getText()>
 </#if>
 
-<#if varElement.attributeValue("path")?? && varElement.attributeValue("locator-key")??>
+<#if varElement.attributeValue("locator-key")?? && varElement.attributeValue("path")??>
 	<#assign pathRootElement = seleniumBuilderContext.getPathRootElement(varElement.attributeValue("path"))>
 
 	<#assign locatorKey = varElement.attributeValue("locator-key")>

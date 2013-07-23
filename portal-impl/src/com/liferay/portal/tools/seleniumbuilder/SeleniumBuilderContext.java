@@ -363,6 +363,8 @@ public class SeleniumBuilderContext {
 	}
 
 	public String getPath(Element rootElement, String locatorKey) {
+		String pathName = "";
+
 		Element bodyElement = rootElement.element("body");
 
 		Element tableElement = bodyElement.element("table");
@@ -371,12 +373,11 @@ public class SeleniumBuilderContext {
 
 		List<Element> trElements = tbodyElement.elements();
 
-		String pathName = "";
-
 		for (Element trElement : trElements) {
 			List<Element> tdElements = trElement.elements("td");
 
 			Element pathLocatorElement = tdElements.get(1);
+
 			Element pathLocatorKeyElement = tdElements.get(0);
 
 			String pathLocatorKey = pathLocatorKeyElement.getText();
