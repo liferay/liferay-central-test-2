@@ -38,15 +38,7 @@ Locale userLocale = user.getLocale();
 	String displayPreferredLanguageURLString = displayPreferredLanguageURL.toString();
 
 	displayPreferredLanguageURLString = HttpUtil.addParameter(displayPreferredLanguageURLString, "showUserLocaleOptionsMessage", false);
-	%>
 
-	<liferay-util:buffer var="displayPreferredLanguage">
-		<aui:a href="<%= displayPreferredLanguageURLString %>">
-			<%= LanguageUtil.format(userLocale, "display-the-page-in-x", userLocale.getDisplayName(userLocale)) %>
-		</aui:a>
-	</liferay-util:buffer>
-
-	<%
 	PortletURL changePreferredLanguageURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
 
 	changePreferredLanguageURL.setParameter("struts_action", "/language/view");
@@ -60,11 +52,9 @@ Locale userLocale = user.getLocale();
 	changePreferredLanguageURLString = HttpUtil.addParameter(changePreferredLanguageURLString, "showUserLocaleOptionsMessage", false);
 	%>
 
-	<liferay-util:buffer var="changePreferredLanguage">
-		<aui:a href="<%= changePreferredLanguageURLString %>">
-			<%= LanguageUtil.format(userLocale, "set-x-as-your-preferred-language", locale.getDisplayName(userLocale)) %>
-		</aui:a>
-	</liferay-util:buffer>
+	<%= LanguageUtil.format(userLocale, "this-page-is-displayed-in-x", locale.getDisplayName(userLocale))) %>
 
-	<%= LanguageUtil.format(userLocale, "this-page-is-being-displayed-in-x", new Object[] {locale.getDisplayName(userLocale), displayPreferredLanguage, changePreferredLanguage}) %>
+	<aui:a href="<%= displayPreferredLanguageURLString %>"><%= LanguageUtil.format(userLocale, "display-the-page-in-x", userLocale.getDisplayName(userLocale)) %></aui:a>
+
+	<aui:a href="<%= changePreferredLanguageURLString %>"><%= LanguageUtil.format(userLocale, "set-x-as-your-preferred-language", locale.getDisplayName(userLocale)) %></aui:a>
 </c:if>
