@@ -720,7 +720,7 @@ public class ArrayUtil {
 		List<Boolean> survivors = new ArrayList<Boolean>();
 
 		for (boolean b : array) {
-			if (!predicateFilter.filter(b)) {
+			if (predicateFilter.filter(b)) {
 				survivors.add(b);
 			}
 		}
@@ -738,7 +738,7 @@ public class ArrayUtil {
 		List<Byte> survivors = new ArrayList<Byte>();
 
 		for (byte b : array) {
-			if (!predicateFilter.filter(b)) {
+			if (predicateFilter.filter(b)) {
 				survivors.add(b);
 			}
 		}
@@ -756,7 +756,7 @@ public class ArrayUtil {
 		List<Character> survivors = new ArrayList<Character>();
 
 		for (char c : array) {
-			if (!predicateFilter.filter(c)) {
+			if (predicateFilter.filter(c)) {
 				survivors.add(c);
 			}
 		}
@@ -774,7 +774,7 @@ public class ArrayUtil {
 		List<Double> survivors = new ArrayList<Double>();
 
 		for (double d : array) {
-			if (!predicateFilter.filter(d)) {
+			if (predicateFilter.filter(d)) {
 				survivors.add(d);
 			}
 		}
@@ -792,7 +792,7 @@ public class ArrayUtil {
 		List<Float> survivors = new ArrayList<Float>();
 
 		for (float f : array) {
-			if (!predicateFilter.filter(f)) {
+			if (predicateFilter.filter(f)) {
 				survivors.add(f);
 			}
 		}
@@ -810,7 +810,7 @@ public class ArrayUtil {
 		List<Integer> survivors = new ArrayList<Integer>();
 
 		for (int i : array) {
-			if (!predicateFilter.filter(i)) {
+			if (predicateFilter.filter(i)) {
 				survivors.add(i);
 			}
 		}
@@ -828,7 +828,7 @@ public class ArrayUtil {
 		List<Long> survivors = new ArrayList<Long>();
 
 		for (long l : array) {
-			if (!predicateFilter.filter(l)) {
+			if (predicateFilter.filter(l)) {
 				survivors.add(l);
 			}
 		}
@@ -846,7 +846,7 @@ public class ArrayUtil {
 		List<Short> survivors = new ArrayList<Short>();
 
 		for (short s : array) {
-			if (!predicateFilter.filter(s)) {
+			if (predicateFilter.filter(s)) {
 				survivors.add(s);
 			}
 		}
@@ -867,7 +867,7 @@ public class ArrayUtil {
 		ArrayList<T> survivors = new ArrayList<T>();
 
 		for (T item : origin) {
-			if (!predicateFilter.filter(item)) {
+			if (predicateFilter.filter(item)) {
 				survivors.add(item);
 			}
 		}

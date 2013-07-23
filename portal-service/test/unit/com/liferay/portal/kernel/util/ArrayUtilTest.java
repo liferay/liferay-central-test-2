@@ -165,14 +165,14 @@ public class ArrayUtilTest {
 		new PredicateFilter<Double>() {
 			@Override
 			public boolean filter(Double item) {
-				return item < 1.1;
+				return item >= 1.1;
 			}
 		};
 	private PredicateFilter<Integer> _integerPredicateFilter =
 		new PredicateFilter<Integer>() {
 			@Override
 			public boolean filter(Integer item) {
-				return item < 5;
+				return item >= 5;
 			}
 		};
 

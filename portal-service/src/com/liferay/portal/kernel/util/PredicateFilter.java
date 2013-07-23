@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.util;
  */
 public interface PredicateFilter<T> {
 
-	public boolean filter(T item);
+	public boolean filter(T t);
 
 }

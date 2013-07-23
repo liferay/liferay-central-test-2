@@ -71,7 +71,7 @@ availableClassNameIds = ArrayUtil.filter(
 		public boolean filter(Long classNameId) {
 			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(classNameId));
 
-			return !assetRendererFactory.isSelectable();
+			return assetRendererFactory.isSelectable();
 		}
 
 	});
