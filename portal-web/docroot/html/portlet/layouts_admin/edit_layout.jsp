@@ -106,7 +106,7 @@ if (!group.isUser() && selLayout.isTypePortlet()) {
 String[][] categorySections = {mainSections};
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
-Boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
+boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 %>
 
 <c:if test="<%= !portletName.equals(PortletKeys.DOCKBAR) %>">
@@ -321,7 +321,6 @@ Boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 
 					A.one('#<portlet:namespace />layoutsNav').delegate('click', clickHandler, 'li a');
 				</aui:script>
-
 			</c:if>
 
 			<liferay-ui:form-navigator

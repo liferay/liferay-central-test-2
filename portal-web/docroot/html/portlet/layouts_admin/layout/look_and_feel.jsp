@@ -66,21 +66,21 @@ else {
 
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
-<liferay-util:buffer var="taglibLabelLink">
-	<c:choose>
-		<c:when test="<%= themeDisplay.isStateExclusive() %>">
-			<%= HtmlUtil.escape(rootNodeName) %>
-		</c:when>
-		<c:otherwise>
-			<aui:a href="<%= redirectURL.toString() %>">
-				<%= HtmlUtil.escape(rootNodeName) %>
-			</aui:a>
-		</c:otherwise>
-	</c:choose>
-</liferay-util:buffer>
-
 <aui:fieldset>
 	<aui:input name="devices" type="hidden" value='<%= PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED ? "regular,wap" : "regular" %>' />
+
+	<liferay-util:buffer var="rootNodeNameLink">
+		<c:choose>
+			<c:when test="<%= themeDisplay.isStateExclusive() %>">
+				<%= HtmlUtil.escape(rootNodeName) %>
+			</c:when>
+			<c:otherwise>
+				<aui:a href="<%= redirectURL.toString() %>">
+					<%= HtmlUtil.escape(rootNodeName) %>
+				</aui:a>
+			</c:otherwise>
+		</c:choose>
+	</liferay-util:buffer>
 
 	<%
 	String taglibLabel = null;
@@ -89,7 +89,7 @@ else {
 		taglibLabel = LanguageUtil.get(pageContext, "use-the-same-look-and-feel-of-the-pages-in-which-this-template-is-used");
 	}
 	else {
-		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x", taglibLabelLink);
+		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x", rootNodeNameLink);
 	}
 	%>
 

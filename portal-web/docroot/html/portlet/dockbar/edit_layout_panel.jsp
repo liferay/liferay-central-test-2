@@ -54,10 +54,10 @@
 
 				<c:if test="<%= themeDisplay.isShowSiteAdministrationIcon() %>">
 					<liferay-portlet:renderURL plid="<%= PortalUtil.getControlPanelPlid(company.getCompanyId()) %>" portletName="<%= PortletKeys.GROUP_PAGES %>" varImpl="siteAdministrationURL" windowState="<%= WindowState.NORMAL.toString() %>">
-						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-						<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
 						<portlet:param name="struts_action" value="/group_pages/edit_layouts" />
 						<portlet:param name="tabs1" value="public-pages" />
+						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+						<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
 						<portlet:param name="treeId" value="layoutsTree" />
 						<portlet:param name="viewLayout" value="true" />
 					</liferay-portlet:renderURL>

@@ -208,7 +208,6 @@ public class EditLayoutsAction extends PortletAction {
 				if (plid == refererPlid) {
 					redirect = HttpUtil.setParameter(
 						redirect, "refererPlid", newRefererPlid);
-
 					redirect = HttpUtil.setParameter(
 						redirect, actionResponse.getNamespace() + "selPlid", 0);
 				}

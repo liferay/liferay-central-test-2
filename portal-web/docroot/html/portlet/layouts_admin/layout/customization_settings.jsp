@@ -30,6 +30,7 @@ Group group = null;
 
 if (selLayout != null) {
 	group = selLayout.getGroup();
+
 	Theme curTheme = selLayout.getTheme();
 
 	String themeId = curTheme.getThemeId();
