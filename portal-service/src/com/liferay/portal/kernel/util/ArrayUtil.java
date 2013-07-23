@@ -725,8 +725,7 @@ public class ArrayUtil {
 			}
 		}
 
-		return toArray(
-			filteredList.toArray(new Boolean[filteredList.size()]));
+		return toArray(filteredList.toArray(new Boolean[filteredList.size()]));
 	}
 
 	public static byte[] filter(
@@ -817,8 +816,7 @@ public class ArrayUtil {
 			}
 		}
 
-		return toArray(
-			filteredList.toArray(new Integer[filteredList.size()]));
+		return toArray(filteredList.toArray(new Integer[filteredList.size()]));
 	}
 
 	public static long[] filter(
