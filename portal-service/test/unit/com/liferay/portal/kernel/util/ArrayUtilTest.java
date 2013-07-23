@@ -28,10 +28,10 @@ import org.junit.Test;
 public class ArrayUtilTest {
 
 	@Test
-	public void testFilterComplexTypeArray() {
+	public void testFilterUserArray() {
 		User[] array = ArrayUtil.filter(
 			new User[] {new User("james", 17), new User("john", 26)},
-			_complexTypePredicateFilter);
+			_userPredicateFilter);
 
 		Assert.assertEquals(1, array.length);
 
@@ -40,21 +40,18 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testFilterComplexTypeEmptyArray() {
+	public void testFilterUserEmptyArray() {
 		User[] array = ArrayUtil.filter(
-			new User[0], _complexTypePredicateFilter);
+			new User[0], _userPredicateFilter);
 
 		Assert.assertEquals(0, array.length);
 	}
 
 	@Test
-	public void testFilterComplexTypeNullArray() {
-		User[] array = null;
+	public void testFilterUserNullArray() {
+		User[] array = ArrayUtil.filter(null, _userPredicateFilter);
 
-		User[] filteredArray = ArrayUtil.filter(
-			array, _complexTypePredicateFilter);
-
-		Assert.assertNull(filteredArray);
+		Assert.assertNull(array);
 	}
 
 	@Test
@@ -183,17 +180,17 @@ public class ArrayUtilTest {
 		}
 	}
 
-	private static PredicateFilter<User> _complexTypePredicateFilter =
+	private PredicateFilter<User> _userPredicateFilter =
 		new PredicateFilter<User>() {
 
 			@Override
-			public boolean filter(User u) {
-				return u.getAge() > 18;
+			public boolean filter(User user) {
+				return user.getAge() > 18;
 			}
 
 		};
 
-	private static PredicateFilter<Double> _doublePredicateFilter =
+	private PredicateFilter<Double> _doublePredicateFilter =
 		new PredicateFilter<Double>() {
 
 			@Override
@@ -203,7 +200,7 @@ public class ArrayUtilTest {
 
 		};
 
-	private static PredicateFilter<Integer> _integerPredicateFilter =
+	private PredicateFilter<Integer> _integerPredicateFilter =
 		new PredicateFilter<Integer>() {
 
 			@Override
@@ -213,7 +210,8 @@ public class ArrayUtilTest {
 
 		};
 
-	private static class User {
+	private class User {
+
 		public User(String name, int age) {
 			_name = name;
 			_age = age;
