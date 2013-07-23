@@ -535,10 +535,10 @@ public class AssetCategoryLocalServiceImpl
 				boolean addCategoryProperty = true;
 				boolean updateCategoryProperty = false;
 
+				AssetCategoryProperty oldCategoryProperty = null;
+
 				Iterator<AssetCategoryProperty> iterator =
 					oldCategoryProperties.iterator();
-
-				AssetCategoryProperty oldCategoryProperty = null;
 
 				while (iterator.hasNext()) {
 					oldCategoryProperty = iterator.next();
