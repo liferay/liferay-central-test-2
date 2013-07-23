@@ -62,7 +62,7 @@ public class I18nFilterTest {
 	}
 
 	@Test
-	public void tesGuestSpanishSessionWithSpanishCookieAlgorithm3()
+	public void testGuestSpanishSessionWithSpanishCookieAlgorithm3()
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
