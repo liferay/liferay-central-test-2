@@ -155,18 +155,14 @@ public class InputTag extends BaseInputTag {
 		}
 
 		if (Validator.isNull(defaultLanguageId)) {
-			if (model != null) {
-				boolean hasGroupId = ModelHintsUtil.hasField(
-					model.getName(), "groupId");
+			if ((model != null) &&
+				ModelHintsUtil.hasField(model.getName(), "groupId")) {
 
-				if (hasGroupId) {
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)request.getAttribute(
-							WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
-					defaultLanguageId = LocaleUtil.toLanguageId(
-						themeDisplay.getSiteDefaultLocale());
-				}
+				defaultLanguageId = LocaleUtil.toLanguageId(
+					themeDisplay.getSiteDefaultLocale());
 			}
 		}
 
