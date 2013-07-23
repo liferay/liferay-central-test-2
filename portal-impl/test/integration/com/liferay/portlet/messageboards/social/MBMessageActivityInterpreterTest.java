@@ -77,7 +77,7 @@ public class MBMessageActivityInterpreterTest
 	}
 
 	@Override
-	protected boolean supportsRename(String className) {
+	protected boolean isSupportsRename(String className) {
 		return false;
 	}
 

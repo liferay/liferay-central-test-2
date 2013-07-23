@@ -66,13 +66,14 @@ public abstract class BaseSocialActivityInterpreterTestCase
 
 	@BeforeClass
 	public static void setUpClass() {
-		SynchronousDestination syncReplacement = new SynchronousDestination();
+		SynchronousDestination synchronousDestination =
+			new SynchronousDestination();
 
-		syncReplacement.setName(DestinationNames.ASYNC_SERVICE);
+		synchronousDestination.setName(DestinationNames.ASYNC_SERVICE);
 
 		MessageBus messageBus = MessageBusUtil.getMessageBus();
 
-		messageBus.replace(syncReplacement);
+		messageBus.replace(synchronousDestination);
 	}
 
 	@Before
@@ -85,9 +86,6 @@ public abstract class BaseSocialActivityInterpreterTestCase
 
 		request.setAttribute(
 			WebKeys.COMPANY_ID, TestPropsValues.getCompanyId());
-
-		request.setAttribute(WebKeys.USER, TestPropsValues.getUser());
-
 		request.setAttribute(
 			WebKeys.CURRENT_URL, "http://localhost:80/web/guest/home");
 
@@ -97,6 +95,8 @@ public abstract class BaseSocialActivityInterpreterTestCase
 			request, new MockHttpServletResponse());
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+
+		request.setAttribute(WebKeys.USER, TestPropsValues.getUser());
 
 		serviceContext = ServiceContextFactory.getInstance(request);
 	}
@@ -111,11 +111,11 @@ public abstract class BaseSocialActivityInterpreterTestCase
 	public void testActivityInterpreter() throws Exception {
 		addActivities();
 
-		long renameTime = System.currentTimeMillis();
+		long time = System.currentTimeMillis();
 
 		renameEntities();
 
-		if (supportsTrash()) {
+		if (isSupportsTrash()) {
 			moveEntitiesToTrash();
 
 			checkLinks();
@@ -123,12 +123,12 @@ public abstract class BaseSocialActivityInterpreterTestCase
 			restoreEntitiesFromTrash();
 		}
 
-		checkInterpret(renameTime);
+		checkInterpret(time);
 	}
 
 	protected abstract void addActivities() throws Exception;
 
-	protected void checkInterpret(long renameTime) throws Exception {
+	protected void checkInterpret(long time) throws Exception {
 		List<SocialActivity> activities = getActivities();
 
 		Assert.assertFalse(activities.isEmpty());
@@ -142,16 +142,15 @@ public abstract class BaseSocialActivityInterpreterTestCase
 			String title = activity.getExtraDataValue(
 				"title", serviceContext.getLocale());
 
-			if (supportsRename(activity.getClassName()) &&
+			if (isSupportsRename(activity.getClassName()) &&
 				Validator.isNotNull(title)) {
 
-				if (activity.getCreateDate() < renameTime) {
+				if (activity.getCreateDate() < time) {
 					entryTitles.put(activity.getClassName(), title);
 				}
 				else {
 					Assert.assertNotNull(
 						entryTitles.get(activity.getClassName()));
-
 					Assert.assertNotEquals(
 						entryTitles.get(activity.getClassName()), title);
 				}
@@ -168,8 +167,7 @@ public abstract class BaseSocialActivityInterpreterTestCase
 				title = activityFeedEntry.getTitle();
 
 				if (title.matches("\\{\\d\\}")) {
-					Assert.fail(
-						"One or more parameters were not replaced: " + title);
+					Assert.fail("Title contains parameters: " + title);
 				}
 			}
 		}
@@ -222,8 +220,8 @@ public abstract class BaseSocialActivityInterpreterTestCase
 	protected abstract int[] getActivityTypes();
 
 	protected boolean hasActivityType(int activityType) {
-		for (int type : getActivityTypes()) {
-			if (type == activityType) {
+		for (int curActivityType : getActivityTypes()) {
+			if (curActivityType == activityType) {
 				return true;
 			}
 		}
@@ -232,11 +230,10 @@ public abstract class BaseSocialActivityInterpreterTestCase
 	}
 
 	protected boolean hasClassName(
-		SocialActivityInterpreter activityInterpreter,
-		String activityClassName) {
+		SocialActivityInterpreter activityInterpreter, String className) {
 
-		for (String className : activityInterpreter.getClassNames()) {
-			if (className.equals(activityClassName)) {
+		for (String curClassName : activityInterpreter.getClassNames()) {
+			if (curClassName.equals(className)) {
 				return true;
 			}
 		}
@@ -250,11 +247,11 @@ public abstract class BaseSocialActivityInterpreterTestCase
 
 	protected abstract void restoreEntitiesFromTrash() throws Exception;
 
-	protected boolean supportsRename(String className) {
+	protected boolean isSupportsRename(String className) {
 		return true;
 	}
 
-	protected boolean supportsTrash() {
+	protected boolean isSupportsTrash() {
 		return true;
 	}
 

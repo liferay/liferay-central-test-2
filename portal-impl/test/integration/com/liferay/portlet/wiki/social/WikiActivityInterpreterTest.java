@@ -110,7 +110,7 @@ public class WikiActivityInterpreterTest
 	}
 
 	@Override
-	protected boolean supportsRename(String className) {
+	protected boolean isSupportsRename(String className) {
 		return false;
 	}
 
