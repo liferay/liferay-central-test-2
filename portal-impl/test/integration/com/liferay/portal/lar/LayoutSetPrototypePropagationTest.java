@@ -57,12 +57,12 @@ public class LayoutSetPrototypePropagationTest
 
 	@Test
 	public void testAddChildLayoutWithLinkDisabled() throws Exception {
-		doTestAddChildLayout(false);
+		testAddChildLayout(false);
 	}
 
 	@Test
 	public void testAddChildLayoutWithLinkEnabled() throws Exception {
-		doTestAddChildLayout(true);
+		testAddChildLayout(true);
 	}
 
 	@Test
@@ -225,7 +225,7 @@ public class LayoutSetPrototypePropagationTest
 				_layoutSetPrototypeJournalArticle.getUrlTitle());
 	}
 
-	protected void doTestAddChildLayout(boolean layoutSetPrototypeLinkEnabled)
+	protected void testAddChildLayout(boolean layoutSetPrototypeLinkEnabled)
 		throws Exception {
 
 		setLinkEnabled(layoutSetPrototypeLinkEnabled);
@@ -237,15 +237,15 @@ public class LayoutSetPrototypePropagationTest
 
 			if (layoutSetPrototypeLinkEnabled) {
 				Assert.fail(
-					"Should not be able to add a child page to a page" +
-						" associated to a site template with link enabled");
+					"Able to add a child page to a page associated to a site " +
+						"template with link enabled");
 			}
 		}
 		catch (LayoutParentLayoutIdException lplie) {
 			if (!layoutSetPrototypeLinkEnabled) {
 				Assert.fail(
-					"Should be able to add a child page to a page associated" +
-						" to a site template with link disabled");
+					"Unable to add a child page to a page associated to a " +
+						"template with link disabled");
 			}
 		}
 	}
