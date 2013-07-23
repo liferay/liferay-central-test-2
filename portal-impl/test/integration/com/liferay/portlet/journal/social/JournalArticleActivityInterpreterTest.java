@@ -67,20 +67,20 @@ public class JournalArticleActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		_article = JournalArticleLocalServiceUtil.moveArticleToTrash(
 			TestPropsValues.getUserId(), _article);
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		_article = JournalTestUtil.updateArticle(
 			_article, ServiceTestUtil.randomString(),
 			ServiceTestUtil.randomString());
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		JournalArticleLocalServiceUtil.restoreArticleFromTrash(
 			TestPropsValues.getUserId(), _article);
 	}

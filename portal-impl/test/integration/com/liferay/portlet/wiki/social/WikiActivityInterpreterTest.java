@@ -86,7 +86,7 @@ public class WikiActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		long fileEntryId = WikiPageLocalServiceUtil.movePageAttachmentToTrash(
 			TestPropsValues.getUserId(), _page.getNodeId(), _page.getTitle(),
 			_attachmentFileName);
@@ -101,11 +101,11 @@ public class WikiActivityInterpreterTest
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		WikiPageLocalServiceUtil.restorePageFromTrash(
 			TestPropsValues.getUserId(), _page);
 

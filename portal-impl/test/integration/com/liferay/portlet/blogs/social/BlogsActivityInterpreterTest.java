@@ -64,14 +64,13 @@ public class BlogsActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		BlogsEntryLocalServiceUtil.moveEntriesToTrash(
 			group.getGroupId(), TestPropsValues.getUserId());
-
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		_entry.setTitle(ServiceTestUtil.randomString());
 
 		serviceContext.setCommand(Constants.UPDATE);
@@ -84,10 +83,9 @@ public class BlogsActivityInterpreterTest
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		BlogsEntryLocalServiceUtil.restoreEntryFromTrash(
 			TestPropsValues.getUserId(), _entry.getEntryId());
-
 	}
 
 	private BlogsEntry _entry;

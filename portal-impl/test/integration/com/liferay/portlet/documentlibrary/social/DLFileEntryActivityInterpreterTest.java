@@ -63,19 +63,19 @@ public class DLFileEntryActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		DLAppServiceUtil.moveFileEntryToTrash(_fileEntry.getFileEntryId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		DLAppTestUtil.updateFileEntry(
 			group.getGroupId(), _fileEntry.getFileEntryId(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		DLAppServiceUtil.restoreFileEntryFromTrash(_fileEntry.getFileEntryId());
 	}
 

@@ -113,14 +113,14 @@ public abstract class BaseSocialActivityInterpreterTestCase
 
 		long time = System.currentTimeMillis();
 
-		renameEntities();
+		renameModels();
 
 		if (isSupportsTrash()) {
-			moveEntitiesToTrash();
+			moveModelsToTrash();
 
 			checkLinks();
 
-			restoreEntitiesFromTrash();
+			restoreModelsFromTrash();
 		}
 
 		checkInterpret(time);
@@ -249,11 +249,11 @@ public abstract class BaseSocialActivityInterpreterTestCase
 		return true;
 	}
 
-	protected abstract void moveEntitiesToTrash() throws Exception;
+	protected abstract void moveModelsToTrash() throws Exception;
 
-	protected abstract void renameEntities() throws Exception;
+	protected abstract void renameModels() throws Exception;
 
-	protected abstract void restoreEntitiesFromTrash() throws Exception;
+	protected abstract void restoreModelsFromTrash() throws Exception;
 
 	protected Group group;
 	protected ServiceContext serviceContext;

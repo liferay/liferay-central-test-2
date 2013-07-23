@@ -64,17 +64,17 @@ public class BookmarksFolderActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		BookmarksFolderLocalServiceUtil.moveFolderToTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() {
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		BookmarksFolderLocalServiceUtil.restoreFolderFromTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
 	}

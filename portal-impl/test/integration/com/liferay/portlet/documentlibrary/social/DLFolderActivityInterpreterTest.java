@@ -66,21 +66,20 @@ public class DLFolderActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		DLAppServiceUtil.moveFolderToTrash(_folder.getFolderId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		DLAppServiceUtil.updateFolder(
 			_folder.getFolderId(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.randomString(), serviceContext);
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		DLAppServiceUtil.restoreFolderFromTrash(_folder.getFolderId());
-
 	}
 
 	private Folder _folder;

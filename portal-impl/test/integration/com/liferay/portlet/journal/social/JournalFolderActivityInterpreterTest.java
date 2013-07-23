@@ -69,13 +69,13 @@ public class JournalFolderActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		JournalFolderLocalServiceUtil.moveFolderToTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		serviceContext.setCommand(Constants.UPDATE);
 
 		JournalFolderLocalServiceUtil.updateFolder(
@@ -86,7 +86,7 @@ public class JournalFolderActivityInterpreterTest
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		JournalFolderLocalServiceUtil.restoreFolderFromTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
 	}

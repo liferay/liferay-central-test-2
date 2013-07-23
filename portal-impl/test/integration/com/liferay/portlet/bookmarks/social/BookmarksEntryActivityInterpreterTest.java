@@ -63,13 +63,13 @@ public class BookmarksEntryActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		BookmarksEntryLocalServiceUtil.moveEntryToTrash(
 			TestPropsValues.getUserId(), _entry.getEntryId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 		_entry.setName(ServiceTestUtil.randomString());
 
 		serviceContext.setCommand(Constants.UPDATE);
@@ -81,7 +81,7 @@ public class BookmarksEntryActivityInterpreterTest
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		BookmarksEntryLocalServiceUtil.restoreEntryFromTrash(
 			TestPropsValues.getUserId(), _entry.getEntryId());
 	}

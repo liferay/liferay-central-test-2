@@ -66,17 +66,17 @@ public class MBThreadActivityInterpreterTest
 	}
 
 	@Override
-	protected void moveEntitiesToTrash() throws Exception {
+	protected void moveModelsToTrash() throws Exception {
 		MBThreadLocalServiceUtil.moveThreadsToTrash(
 			group.getGroupId(), TestPropsValues.getUserId());
 	}
 
 	@Override
-	protected void renameEntities() throws Exception {
+	protected void renameModels() throws Exception {
 	}
 
 	@Override
-	protected void restoreEntitiesFromTrash() throws Exception {
+	protected void restoreModelsFromTrash() throws Exception {
 		MBThreadLocalServiceUtil.restoreThreadFromTrash(
 			TestPropsValues.getUserId(), _threadId);
 	}
