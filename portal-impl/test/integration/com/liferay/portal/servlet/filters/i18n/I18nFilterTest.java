@@ -57,19 +57,8 @@ public class I18nFilterTest {
 	@Before
 	public void setUp() throws Exception {
 		_i18nFilter = new I18nFilter();
-		_request = new MockHttpServletRequest();
-		_response = new MockHttpServletResponse();
-	}
-
-	@Test
-	public void testGuestSpanishSessionWithSpanishCookieAlgorithm3()
-		throws Exception {
-
-		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, null, _esLocale, _esLocale);
-
-		Assert.assertEquals(
-			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
+		_mockHttpServletRequest = new MockHttpServletRequest();
+		_mockHttpServletResponse = new MockHttpServletResponse();
 	}
 
 	@Test
@@ -186,12 +175,23 @@ public class I18nFilterTest {
 		Assert.assertNull(prependI18nLanguageId);
 	}
 
+	@Test
+	public void testGuestSpanishSessionWithSpanishCookieAlgorithm3()
+		throws Exception {
+
+		String prependI18nLanguageId = getPrependI18nLanguageId(
+			3, null, _esLocale, _esLocale);
+
+		Assert.assertEquals(
+			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
+	}
+
 	protected String getPrependI18nLanguageId(
 			int localePrependFriendlyURLStyle, Locale userLocale,
 			Locale sessionLocale, Locale cookieLocale)
 		throws Exception {
 
-		HttpSession session = _request.getSession();
+		HttpSession session = _mockHttpServletRequest.getSession();
 
 		session.setAttribute(Globals.LOCALE_KEY, sessionLocale);
 
@@ -201,26 +201,30 @@ public class I18nFilterTest {
 				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 				new long[] {TestPropsValues.getGroupId()});
 
-			_request.setAttribute(WebKeys.USER, user);
+			_mockHttpServletRequest.setAttribute(WebKeys.USER, user);
 		}
 
 		if (cookieLocale != null) {
-			LanguageUtil.updateCookie(_request, _response, cookieLocale);
+			LanguageUtil.updateCookie(
+				_mockHttpServletRequest, _mockHttpServletResponse,
+				cookieLocale);
 
-			// passing cookies from mockresponse to mockrequest
+			// Passing cookies from mock HTTP servlet response to mock HTTP
+			// servlet request
 
-			_request.setCookies(_response.getCookies());
+			_mockHttpServletRequest.setCookies(
+				_mockHttpServletResponse.getCookies());
 		}
 
 		return _i18nFilter.prependI18nLanguageId(
-			_request, localePrependFriendlyURLStyle);
+			_mockHttpServletRequest, localePrependFriendlyURLStyle);
 	}
 
 	private static Locale _enLocale = new Locale("en", "US");
 	private static Locale _esLocale = new Locale("es", "ES");
 
 	private I18nFilter _i18nFilter;
-	private MockHttpServletRequest _request;
-	private MockHttpServletResponse _response;
+	private MockHttpServletRequest _mockHttpServletRequest;
+	private MockHttpServletResponse _mockHttpServletResponse;
 
 }
