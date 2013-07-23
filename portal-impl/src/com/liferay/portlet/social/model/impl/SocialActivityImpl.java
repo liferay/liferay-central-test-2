@@ -46,7 +46,7 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 
 	@Override
 	public String getExtraDataValue(String key) throws JSONException {
-		JSONObject extraDataJSONObject = _getExtraDataJSONObject();
+		JSONObject extraDataJSONObject = getExtraDataJSONObject();
 
 		return extraDataJSONObject.getString(key);
 	}
@@ -54,7 +54,7 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 	public String getExtraDataValue(String key, Locale locale)
 		throws JSONException {
 
-		JSONObject extraDataJSONObject = _getExtraDataJSONObject();
+		JSONObject extraDataJSONObject = getExtraDataJSONObject();
 
 		return LocalizationUtil.getLocalization(
 			extraDataJSONObject.getString(key),
@@ -85,14 +85,14 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 	public void setExtraDataValue(String key, String value)
 		throws JSONException {
 
-		JSONObject extraDataJSONObject = _getExtraDataJSONObject();
+		JSONObject extraDataJSONObject = getExtraDataJSONObject();
 
 		extraDataJSONObject.put(key, value);
 
 		super.setExtraData(extraDataJSONObject.toString());
 	}
 
-	private JSONObject _getExtraDataJSONObject() throws JSONException {
+	protected JSONObject getExtraDataJSONObject() throws JSONException {
 		if (_extraDataJSONObject != null) {
 			return _extraDataJSONObject;
 		}
