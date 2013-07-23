@@ -17,11 +17,10 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
-Locale curLocale = themeDisplay.getLocale();
 Locale userLocale = user.getLocale();
 %>
 
-<c:if test="<%= user.getLocale() != curLocale %>">
+<c:if test="<%= locale.equals(user.getLocale()) %>">
 	<button class="close" type="button">&times;</button>
 
 	<%
@@ -60,7 +59,7 @@ Locale userLocale = user.getLocale();
 
 	changePreferredLanguageURLString = HttpUtil.addParameter(changePreferredLanguageURLString, "showUserLocaleOptionsMessage", false);
 
-	String currentLanguageDisplayName = curLocale.getDisplayName(userLocale);
+	String currentLanguageDisplayName = locale.getDisplayName(userLocale);
 	%>
 
 	<liferay-util:buffer var="changePreferredLanguage">
