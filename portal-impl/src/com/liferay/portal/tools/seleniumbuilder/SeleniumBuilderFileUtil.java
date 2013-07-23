@@ -1186,7 +1186,6 @@ public class SeleniumBuilderFileUtil {
 		for (Attribute attribute : attributes) {
 			String attributeName = attribute.getName();
 			String attributeValue = attribute.getValue();
-			String elementName = element.getName();
 
 			if (Validator.isNull(attributeValue)) {
 				throwValidationException(
