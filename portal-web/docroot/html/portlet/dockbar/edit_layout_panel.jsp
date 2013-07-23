@@ -78,9 +78,7 @@
 
 				A.one('#<portlet:namespace />name').focus();
 
-				var BODY = A.getBody();
-
-				BODY.plug(A.LoadingMask);
+				var loadingMask = A.getBody().plug(A.LoadingMask).loadingmask;
 
 				Liferay.once(
 					'submitForm',
@@ -97,7 +95,7 @@
 
 							form.get('<portlet:namespace />redirect').set('value', '<%= HttpUtil.addParameter(redirectURL.toString(), liferayPortletResponse.getNamespace() + "selPlid", selPlid) %>');
 
-							BODY.loadingmask.show();
+							loadingMask.show();
 
 							A.io.request(
 								form.get('action'),
@@ -118,10 +116,10 @@
 
 											panel.setContent(response);
 
-											BODY.loadingmask.hide();
+											loadingMask.hide();
 										},
 										failure: function(event) {
-											BODY.loadingMask.hide();
+											loadingMask.hide();
 										}
 									}
 								}
