@@ -51,8 +51,6 @@ public class ClassLoaderUtil {
 		_pacl.setContextClassLoader(classLoader);
 	}
 
-	private static PACL _pacl = new NoPACL();
-
 	public static class NoPACL implements PACL {
 
 		public ClassLoader getAggregatePluginsClassLoader(
@@ -122,5 +120,7 @@ public class ClassLoaderUtil {
 		public void setContextClassLoader(ClassLoader classLoader);
 
 	}
+
+	private static PACL _pacl = new NoPACL();
 
 }

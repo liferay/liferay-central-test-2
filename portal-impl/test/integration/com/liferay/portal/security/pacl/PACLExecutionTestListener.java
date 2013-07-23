@@ -85,7 +85,9 @@ public class PACLExecutionTestListener
 		}
 
 		HotDeployUtil.reset();
+
 		HotDeployUtil.registerListener(new HookHotDeployListener());
+
 		HotDeployUtil.setCapturePrematureEvents(false);
 
 		PortalLifecycleUtil.flushInits();
