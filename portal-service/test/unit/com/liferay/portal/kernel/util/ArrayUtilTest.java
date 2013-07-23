@@ -29,64 +29,51 @@ public class ArrayUtilTest {
 
 	@Test
 	public void testFilterDoubleArray() {
-		double[] array = { 0.1, 0.2, 1.2, 1.3 };
+		double[] array = ArrayUtil.filter(
+			new double[] {0.1, 0.2, 1.2, 1.3}, _doublePredicateFilter);
 
-		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
-
-		Assert.assertEquals(2, result.length);
-
-		AssertUtils.assertEquals(new double[] { 1.2, 1.3 }, result);
+		Assert.assertEquals(2, array.length);
+		AssertUtils.assertEquals(new double[] {1.2, 1.3}, array);
 	}
 
 	@Test
 	public void testFilterDoubleEmptyArray() {
-		double[] array = {};
+		double[] array = ArrayUtil.filter(
+			new double[0], _doublePredicateFilter);
 
-		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
-
-		Assert.assertEquals(0, result.length);
-
-		AssertUtils.assertEquals(new double[] {}, result);
+		Assert.assertEquals(0, array.length);
+		AssertUtils.assertEquals(new double[0], array);
 	}
 
 	@Test
 	public void testFilterDoubleNullArray() {
-		double[] array = null;
+		double[] array = ArrayUtil.filter(null, _doublePredicateFilter);
 
-		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
-
-		Assert.assertNull(result);
+		Assert.assertNull(array);
 	}
 
 	@Test
 	public void testFilterIntegerArray() {
-		int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int[] array = ArrayUtil.filter(
+			new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, _integerPredicateFilter);
 
-		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
-
-		Assert.assertEquals(5, result.length);
-
-		Assert.assertArrayEquals(new int[] { 5, 6, 7, 8, 9 }, result);
+		Assert.assertEquals(5, array.length);
+		Assert.assertArrayEquals(new int[] {5, 6, 7, 8, 9}, array);
 	}
 
 	@Test
 	public void testFilterIntegerEmptyArray() {
-		int[] array = {};
+		int[] array = ArrayUtil.filter(new int[0], _integerPredicateFilter);
 
-		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
-
-		Assert.assertEquals(0, result.length);
-
-		Assert.assertArrayEquals(new int[] {}, result);
+		Assert.assertEquals(0, array.length);
+		Assert.assertArrayEquals(new int[] {}, array);
 	}
 
 	@Test
 	public void testFilterIntegerNullArray() {
-		int[] array = null;
+		int[] array = ArrayUtil.filter(null, _integerPredicateFilter);
 
-		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
-
-		Assert.assertNull(result);
+		Assert.assertNull(array);
 	}
 
 	@Test
@@ -161,19 +148,24 @@ public class ArrayUtilTest {
 		}
 	}
 
-	private PredicateFilter<Double> _doublePredicateFilter =
+	private static PredicateFilter<Double> _doublePredicateFilter =
 		new PredicateFilter<Double>() {
+
 			@Override
-			public boolean filter(Double item) {
-				return item >= 1.1;
+			public boolean filter(Double d) {
+				return d >= 1.1;
 			}
+
 		};
-	private PredicateFilter<Integer> _integerPredicateFilter =
+
+	private static PredicateFilter<Integer> _integerPredicateFilter =
 		new PredicateFilter<Integer>() {
+
 			@Override
-			public boolean filter(Integer item) {
-				return item >= 5;
+			public boolean filter(Integer i) {
+				return i >= 5;
 			}
+
 		};
 
 }
