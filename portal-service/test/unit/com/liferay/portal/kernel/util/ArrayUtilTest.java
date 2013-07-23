@@ -31,7 +31,7 @@ public class ArrayUtilTest {
 	public void testFilterDoubleArray() {
 		double[] array = { 0.1, 0.2, 1.2, 1.3 };
 
-		double[] result = ArrayUtil.filter(array, _doubleFilterPredicate);
+		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
 
 		Assert.assertEquals(2, result.length);
 
@@ -42,7 +42,7 @@ public class ArrayUtilTest {
 	public void testFilterDoubleEmptyArray() {
 		double[] array = {};
 
-		double[] result = ArrayUtil.filter(array, _doubleFilterPredicate);
+		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
 
 		Assert.assertEquals(0, result.length);
 
@@ -53,7 +53,7 @@ public class ArrayUtilTest {
 	public void testFilterDoubleNullArray() {
 		double[] array = null;
 
-		double[] result = ArrayUtil.filter(array, _doubleFilterPredicate);
+		double[] result = ArrayUtil.filter(array, _doublePredicateFilter);
 
 		Assert.assertNull(result);
 	}
@@ -62,7 +62,7 @@ public class ArrayUtilTest {
 	public void testFilterIntegerArray() {
 		int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-		int[] result = ArrayUtil.filter(array, _integerFilterPredicate);
+		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
 
 		Assert.assertEquals(5, result.length);
 
@@ -73,7 +73,7 @@ public class ArrayUtilTest {
 	public void testFilterIntegerEmptyArray() {
 		int[] array = {};
 
-		int[] result = ArrayUtil.filter(array, _integerFilterPredicate);
+		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
 
 		Assert.assertEquals(0, result.length);
 
@@ -84,7 +84,7 @@ public class ArrayUtilTest {
 	public void testFilterIntegerNullArray() {
 		int[] array = null;
 
-		int[] result = ArrayUtil.filter(array, _integerFilterPredicate);
+		int[] result = ArrayUtil.filter(array, _integerPredicateFilter);
 
 		Assert.assertNull(result);
 	}
@@ -161,15 +161,15 @@ public class ArrayUtilTest {
 		}
 	}
 
-	private FilterPredicate<Double> _doubleFilterPredicate =
-		new FilterPredicate<Double>() {
+	private PredicateFilter<Double> _doublePredicateFilter =
+		new PredicateFilter<Double>() {
 			@Override
 			public boolean filter(Double item) {
 				return item < 1.1;
 			}
 		};
-	private FilterPredicate<Integer> _integerFilterPredicate =
-		new FilterPredicate<Integer>() {
+	private PredicateFilter<Integer> _integerPredicateFilter =
+		new PredicateFilter<Integer>() {
 			@Override
 			public boolean filter(Integer item) {
 				return item < 5;

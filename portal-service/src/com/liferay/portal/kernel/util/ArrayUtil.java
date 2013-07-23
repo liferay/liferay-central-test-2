@@ -711,7 +711,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean[] filter(
-		boolean[] array, FilterPredicate<Boolean> filterPredicate) {
+		boolean[] array, PredicateFilter<Boolean> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -720,7 +720,7 @@ public class ArrayUtil {
 		List<Boolean> survivors = new ArrayList<Boolean>();
 
 		for (boolean b : array) {
-			if (!filterPredicate.filter(b)) {
+			if (!predicateFilter.filter(b)) {
 				survivors.add(b);
 			}
 		}
@@ -729,7 +729,7 @@ public class ArrayUtil {
 	}
 
 	public static byte[] filter(
-		byte[] array, FilterPredicate<Byte> filterPredicate) {
+		byte[] array, PredicateFilter<Byte> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -738,7 +738,7 @@ public class ArrayUtil {
 		List<Byte> survivors = new ArrayList<Byte>();
 
 		for (byte b : array) {
-			if (!filterPredicate.filter(b)) {
+			if (!predicateFilter.filter(b)) {
 				survivors.add(b);
 			}
 		}
@@ -747,7 +747,7 @@ public class ArrayUtil {
 	}
 
 	public static char[] filter(
-		char[] array, FilterPredicate<Character> filterPredicate) {
+		char[] array, PredicateFilter<Character> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -756,7 +756,7 @@ public class ArrayUtil {
 		List<Character> survivors = new ArrayList<Character>();
 
 		for (char c : array) {
-			if (!filterPredicate.filter(c)) {
+			if (!predicateFilter.filter(c)) {
 				survivors.add(c);
 			}
 		}
@@ -765,7 +765,7 @@ public class ArrayUtil {
 	}
 
 	public static double[] filter(
-		double[] array, FilterPredicate<Double> filterPredicate) {
+		double[] array, PredicateFilter<Double> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -774,7 +774,7 @@ public class ArrayUtil {
 		List<Double> survivors = new ArrayList<Double>();
 
 		for (double d : array) {
-			if (!filterPredicate.filter(d)) {
+			if (!predicateFilter.filter(d)) {
 				survivors.add(d);
 			}
 		}
@@ -783,7 +783,7 @@ public class ArrayUtil {
 	}
 
 	public static float[] filter(
-		float[] array, FilterPredicate<Float> filterPredicate) {
+		float[] array, PredicateFilter<Float> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -792,7 +792,7 @@ public class ArrayUtil {
 		List<Float> survivors = new ArrayList<Float>();
 
 		for (float f : array) {
-			if (!filterPredicate.filter(f)) {
+			if (!predicateFilter.filter(f)) {
 				survivors.add(f);
 			}
 		}
@@ -801,7 +801,7 @@ public class ArrayUtil {
 	}
 
 	public static int[] filter(
-		int[] array, FilterPredicate<Integer> filterPredicate) {
+		int[] array, PredicateFilter<Integer> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -810,7 +810,7 @@ public class ArrayUtil {
 		List<Integer> survivors = new ArrayList<Integer>();
 
 		for (int i : array) {
-			if (!filterPredicate.filter(i)) {
+			if (!predicateFilter.filter(i)) {
 				survivors.add(i);
 			}
 		}
@@ -819,7 +819,7 @@ public class ArrayUtil {
 	}
 
 	public static long[] filter(
-		long[] array, FilterPredicate<Long> filterPredicate) {
+		long[] array, PredicateFilter<Long> predicateFilter) {
 
 		if ((array == null) ||(array.length == 0)) {
 			return array;
@@ -828,7 +828,7 @@ public class ArrayUtil {
 		List<Long> survivors = new ArrayList<Long>();
 
 		for (long l : array) {
-			if (!filterPredicate.filter(l)) {
+			if (!predicateFilter.filter(l)) {
 				survivors.add(l);
 			}
 		}
@@ -837,7 +837,7 @@ public class ArrayUtil {
 	}
 
 	public static short[] filter(
-		short[] array, FilterPredicate<Short> filterPredicate) {
+		short[] array, PredicateFilter<Short> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -846,7 +846,7 @@ public class ArrayUtil {
 		List<Short> survivors = new ArrayList<Short>();
 
 		for (short s : array) {
-			if (!filterPredicate.filter(s)) {
+			if (!predicateFilter.filter(s)) {
 				survivors.add(s);
 			}
 		}
@@ -856,7 +856,7 @@ public class ArrayUtil {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T[] filter(
-		T[] array, FilterPredicate<T> filterPredicate) {
+		T[] array, PredicateFilter<T> predicateFilter) {
 
 		if ((array == null) || (array.length == 0)) {
 			return array;
@@ -867,7 +867,7 @@ public class ArrayUtil {
 		ArrayList<T> survivors = new ArrayList<T>();
 
 		for (T item : origin) {
-			if (!filterPredicate.filter(item)) {
+			if (!predicateFilter.filter(item)) {
 				survivors.add(item);
 			}
 		}

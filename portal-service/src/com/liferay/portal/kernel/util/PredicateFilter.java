@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.util;
 /**
  * @author Carlos Sierra Andrés
  */
-public interface FilterPredicate<T> {
+public interface PredicateFilter<T> {
 
 	public boolean filter(T item);
 
