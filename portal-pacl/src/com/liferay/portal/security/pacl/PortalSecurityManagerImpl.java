@@ -493,6 +493,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	private static class DoClassLoaderUtilPACL implements ClassLoaderUtil.PACL {
 
+		@Override
 		public ClassLoader getAggregatePluginsClassLoader(
 			final String[] servletContextNames,
 			final boolean addContextClassLoader) {
@@ -510,6 +511,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public ClassLoader getClassLoader(final Class<?> clazz) {
 			return AccessController.doPrivileged(
 				new PrivilegedAction<ClassLoader>() {
@@ -523,6 +525,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public ClassLoader getContextClassLoader() {
 			return AccessController.doPrivileged(
 				new PrivilegedAction<ClassLoader>() {
@@ -536,6 +539,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public ClassLoader getPluginClassLoader(
 			final String servletContextName) {
 
@@ -551,6 +555,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public ClassLoader getPortalClassLoader() {
 			return AccessController.doPrivileged(
 				new PrivilegedAction<ClassLoader>() {
@@ -564,6 +569,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public void setContextClassLoader(final ClassLoader classLoader) {
 			AccessController.doPrivileged(
 				new PrivilegedAction<Void>() {

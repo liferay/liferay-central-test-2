@@ -53,6 +53,7 @@ public class ClassLoaderUtil {
 
 	public static class NoPACL implements PACL {
 
+		@Override
 		public ClassLoader getAggregatePluginsClassLoader(
 			String[] servletContextNames, boolean addContextClassLoader) {
 
@@ -78,24 +79,29 @@ public class ClassLoaderUtil {
 			return AggregateClassLoader.getAggregateClassLoader(classLoaders);
 		}
 
+		@Override
 		public ClassLoader getClassLoader(Class<?> clazz) {
 			return clazz.getClassLoader();
 		}
 
+		@Override
 		public ClassLoader getContextClassLoader() {
 			Thread currentThread = Thread.currentThread();
 
 			return currentThread.getContextClassLoader();
 		}
 
+		@Override
 		public ClassLoader getPluginClassLoader(String servletContextName) {
 			return ClassLoaderPool.getClassLoader(servletContextName);
 		}
 
+		@Override
 		public ClassLoader getPortalClassLoader() {
 			return PortalClassLoaderUtil.getClassLoader();
 		}
 
+		@Override
 		public void setContextClassLoader(ClassLoader classLoader) {
 			Thread thread = Thread.currentThread();
 
