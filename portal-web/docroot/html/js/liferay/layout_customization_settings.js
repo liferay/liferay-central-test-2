@@ -17,12 +17,6 @@ AUI.add(
 
 				NAME: 'layoutcustomizationsettings',
 
-				ATTRS: {
-					strings: {
-						validator: A.Lang.isObject
-					}
-				},
-
 				prototype: {
 					initializer: function(config) {
 						var instance = this;
@@ -152,12 +146,12 @@ AUI.add(
 
 						var customizationsHandle = instance._customizationsHandle;
 
-						var strings = instance.get('strings');
+						var customizationString = Liferay.Language.get('show-customizable-sections');
 
 						if (!customizationsHandle) {
 							customizationsHandle = BODY.delegate(EVENT_CLICK, instance._onChangeCustomization, '.layout-customizable-checkbox', instance);
 
-							instance._manageCustomization.html(strings['HIDE']).toggleClass(CSS_ACTIVE);
+							customizationString = Liferay.Language.get('hide-customizable-sections');
 
 							instance._customizationsHandle = customizationsHandle;
 						}
@@ -165,9 +159,9 @@ AUI.add(
 							customizationsHandle.detach();
 
 							customizationsHandle = null;
-
-							instance._manageCustomization.html(strings['SHOW']).toggleClass(CSS_ACTIVE);
 						}
+
+						instance._manageCustomization.html(customizationString).toggleClass(CSS_ACTIVE);
 
 						var columns = A.all('.portlet-column');
 

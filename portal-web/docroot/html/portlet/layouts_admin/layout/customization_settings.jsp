@@ -113,11 +113,7 @@ if (selLayout != null) {
 	<aui:script use="liferay-layout-customization-settings">
 		new Liferay.LayoutCustomizationSettings(
 			{
-				namespace: '<portlet:namespace />',
-				strings: {
-					HIDE: '<liferay-ui:message key="hide-customizable-sections" />',
-					SHOW: '<liferay-ui:message key="show-customizable-sections" />'
-				}
+				namespace: '<portlet:namespace />'
 			}
 		);
 	</aui:script>
