@@ -110,15 +110,13 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 		}
 	}
 
-	protected List<Element> getDDMStructures(
-			String fileName, Locale defaultLocale)
+	protected List<Element> getDDMStructures(String fileName, Locale locale)
 		throws DocumentException {
 
 		String xml = ContentUtil.get(
 			"com/liferay/portal/events/dependencies/" + fileName);
 
-		xml = StringUtil.replace(
-			xml, "[$LOCALE_DEFAULT$]", defaultLocale.toString());
+		xml = StringUtil.replace(xml, "[$LOCALE_DEFAULT$]", locale.toString());
 
 		Document document = SAXReaderUtil.read(xml);
 
@@ -128,12 +126,10 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 	}
 
 	protected String getDynamicDDMStructureXSD(
-			String fileName, String dynamicDDMStructureName,
-			Locale defaultLocale)
+			String fileName, String dynamicDDMStructureName, Locale locale)
 		throws DocumentException {
 
-		List<Element> structureElements = getDDMStructures(
-			fileName, defaultLocale);
+		List<Element> structureElements = getDDMStructures(fileName, locale);
 
 		for (Element structureElement : structureElements) {
 			boolean dynamicStructure = GetterUtil.getBoolean(

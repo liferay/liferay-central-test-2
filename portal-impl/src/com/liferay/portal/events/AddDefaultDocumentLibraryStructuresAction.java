@@ -71,8 +71,6 @@ public class AddDefaultDocumentLibraryStructuresAction
 			List<String> ddmStructureNames, ServiceContext serviceContext)
 		throws Exception {
 
-		Locale locale = PortalUtil.getSiteDefaultLocale(groupId);
-
 		List<Long> ddmStructureIds = new ArrayList<Long>();
 
 		for (String ddmStructureName : ddmStructureNames) {
@@ -90,6 +88,8 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 			ddmStructureIds.add(ddmStructure.getStructureId());
 		}
+
+		Locale locale = PortalUtil.getSiteDefaultLocale(groupId);
 
 		String xsd = getDynamicDDMStructureXSD(
 			"document-library-structures.xml", dlFileEntryTypeKey, locale);
@@ -208,9 +208,7 @@ public class AddDefaultDocumentLibraryStructuresAction
 		}
 	}
 
-	protected String buildDLRawMetadataElementXML(
-		Field field, Locale defaultLocale) {
-
+	protected String buildDLRawMetadataElementXML(Field field, Locale locale) {
 		StringBundler sb = new StringBundler(16);
 
 		sb.append("<dynamic-element dataType=\"string\" name=\"");
@@ -222,7 +220,7 @@ public class AddDefaultDocumentLibraryStructuresAction
 		sb.append(field.getName());
 		sb.append("\" type=\"text\">");
 		sb.append("<meta-data locale=\"");
-		sb.append(defaultLocale);
+		sb.append(locale);
 		sb.append("\">");
 		sb.append("<entry name=\"label\"><![CDATA[metadata.");
 		sb.append(fieldClass.getSimpleName());
@@ -237,7 +235,7 @@ public class AddDefaultDocumentLibraryStructuresAction
 	}
 
 	protected String buildDLRawMetadataStructureXML(
-		String name, Field[] fields, Locale defaultLocale) {
+		String name, Field[] fields, Locale locale) {
 
 		StringBundler sb = new StringBundler(12 + fields.length);
 
@@ -248,13 +246,13 @@ public class AddDefaultDocumentLibraryStructuresAction
 		sb.append(name);
 		sb.append("]]></description>");
 		sb.append("<root available-locales=\"");
-		sb.append(defaultLocale);
+		sb.append(locale);
 		sb.append("\" default-locale=\"");
-		sb.append(defaultLocale);
+		sb.append(locale);
 		sb.append("\">");
 
 		for (Field field : fields) {
-			sb.append(buildDLRawMetadataElementXML(field, defaultLocale));
+			sb.append(buildDLRawMetadataElementXML(field, locale));
 		}
 
 		sb.append("</root></structure>");
@@ -263,7 +261,7 @@ public class AddDefaultDocumentLibraryStructuresAction
 	}
 
 	protected String buildDLRawMetadataXML(
-		Map<String, Field[]> fields, Locale defaultLocale) {
+		Map<String, Field[]> fields, Locale locale) {
 
 		StringBundler sb = new StringBundler(2 + fields.size());
 
@@ -271,8 +269,7 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		for (String key : fields.keySet()) {
 			sb.append(
-				buildDLRawMetadataStructureXML(
-					key, fields.get(key), defaultLocale));
+				buildDLRawMetadataStructureXML(key, fields.get(key), locale));
 		}
 
 		sb.append("</root>");
@@ -301,11 +298,11 @@ public class AddDefaultDocumentLibraryStructuresAction
 	}
 
 	protected Map<Locale, String> getLocalizationMap(
-		String content, Locale defaultLocale) {
+		String content, Locale locale) {
 
 		Map<Locale, String> localizationMap = new HashMap<Locale, String>();
 
-		localizationMap.put(defaultLocale, content);
+		localizationMap.put(locale, content);
 
 		return localizationMap;
 	}

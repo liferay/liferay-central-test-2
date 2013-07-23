@@ -101,8 +101,8 @@ public class JournalTestUtil {
 		throws Exception {
 
 		return addArticle(
-			groupId, folderId, title, title, content, LocaleUtil.getSiteDefault(),
-			false, false);
+			groupId, folderId, title, title, content,
+			LocaleUtil.getSiteDefault(), false, false);
 	}
 
 	public static JournalArticle addArticle(
@@ -179,8 +179,8 @@ public class JournalTestUtil {
 		throws Exception {
 
 		return addArticle(
-			groupId, folderId, title, content, LocaleUtil.getSiteDefault(), true,
-			approved);
+			groupId, folderId, title, content, LocaleUtil.getSiteDefault(),
+			true, approved);
 	}
 
 	public static JournalArticle addArticleWithWorkflow(
@@ -189,7 +189,8 @@ public class JournalTestUtil {
 
 		return addArticle(
 			groupId, JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, title,
-			"description", "content", LocaleUtil.getSiteDefault(), true, approved);
+			"description", "content", LocaleUtil.getSiteDefault(), true,
+			approved);
 	}
 
 	public static JournalArticle addArticleWithWorkflow(
@@ -200,7 +201,8 @@ public class JournalTestUtil {
 		return addArticle(
 			serviceContext.getScopeGroupId(), parentFolderId,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, title, "description",
-			"content", LocaleUtil.getSiteDefault(), true, approved, serviceContext);
+			"content", LocaleUtil.getSiteDefault(), true, approved,
+			serviceContext);
 	}
 
 	public static JournalArticle addArticleWithWorkflow(
