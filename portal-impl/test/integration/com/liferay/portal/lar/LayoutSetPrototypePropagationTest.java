@@ -225,31 +225,6 @@ public class LayoutSetPrototypePropagationTest
 				_layoutSetPrototypeJournalArticle.getUrlTitle());
 	}
 
-	protected void testAddChildLayout(boolean layoutSetPrototypeLinkEnabled)
-		throws Exception {
-
-		setLinkEnabled(layoutSetPrototypeLinkEnabled);
-
-		try {
-			LayoutTestUtil.addLayout(
-				group.getGroupId(), ServiceTestUtil.randomString(),
-				layout.getPlid());
-
-			if (layoutSetPrototypeLinkEnabled) {
-				Assert.fail(
-					"Able to add a child page to a page associated to a site " +
-						"template with link enabled");
-			}
-		}
-		catch (LayoutParentLayoutIdException lplie) {
-			if (!layoutSetPrototypeLinkEnabled) {
-				Assert.fail(
-					"Unable to add a child page to a page associated to a " +
-						"template with link disabled");
-			}
-		}
-	}
-
 	protected void doTestIsLayoutUpdateable() throws Exception {
 		Assert.assertTrue(SitesUtil.isLayoutUpdateable(layout));
 		Assert.assertTrue(SitesUtil.isLayoutUpdateable(_layout));
@@ -431,6 +406,31 @@ public class LayoutSetPrototypePropagationTest
 		if ((layout != null) && (_layout != null)) {
 			layout = LayoutLocalServiceUtil.getLayout(layout.getPlid());
 			_layout = LayoutLocalServiceUtil.getLayout(_layout.getPlid());
+		}
+	}
+
+	protected void testAddChildLayout(boolean layoutSetPrototypeLinkEnabled)
+		throws Exception {
+
+		setLinkEnabled(layoutSetPrototypeLinkEnabled);
+
+		try {
+			LayoutTestUtil.addLayout(
+				group.getGroupId(), ServiceTestUtil.randomString(),
+				layout.getPlid());
+
+			if (layoutSetPrototypeLinkEnabled) {
+				Assert.fail(
+					"Able to add a child page to a page associated to a site " +
+						"template with link enabled");
+			}
+		}
+		catch (LayoutParentLayoutIdException lplie) {
+			if (!layoutSetPrototypeLinkEnabled) {
+				Assert.fail(
+					"Unable to add a child page to a page associated to a " +
+						"template with link disabled");
+			}
 		}
 	}
 
