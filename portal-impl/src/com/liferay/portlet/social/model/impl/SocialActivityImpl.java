@@ -97,13 +97,7 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 			return _extraDataJSONObject;
 		}
 
-		if (Validator.isNull(getExtraData())) {
-			_extraDataJSONObject = JSONFactoryUtil.createJSONObject();
-		}
-		else {
-			_extraDataJSONObject = JSONFactoryUtil.createJSONObject(
-				getExtraData());
-		}
+		_extraDataJSONObject = JSONFactoryUtil.createJSONObject(getExtraData());
 
 		return _extraDataJSONObject;
 	}
