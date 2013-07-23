@@ -519,7 +519,7 @@ public class AssetUtil {
 
 	public static String substituteCategoryPropertyVariables(
 			long groupId, long categoryId, String s)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String result = s;
 
