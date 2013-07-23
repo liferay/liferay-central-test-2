@@ -446,11 +446,18 @@ if (hints != null) {
 
 			boolean localized = ModelHintsUtil.isLocalized(model, field);
 
-			String xml = StringPool.BLANK;
-
 			Locale[] availableLocales = null;
 
+			String xml = StringPool.BLANK;
+
 			if (localized) {
+				if (ModelHintsUtil.hasField(model, "groupId")) {
+					availableLocales = LanguageUtil.getAvailableLocales(themeDisplay.getSiteGroupId());
+				}
+				else {
+					availableLocales = LanguageUtil.getAvailableLocales();
+				}
+
 				if (Validator.isNotNull(bean)) {
 					xml = BeanPropertiesUtil.getString(bean, field);
 				}
@@ -458,15 +465,6 @@ if (hints != null) {
 					Map<Locale, String> localizationMap = LocalizationUtil.getLocalizationMap(portletRequest, field);
 
 					xml = LocalizationUtil.updateLocalization(localizationMap, xml, field, defaultLanguageId);
-				}
-
-				boolean hasGroupId = ModelHintsUtil.hasField(model, "groupId");
-
-				if (hasGroupId) {
-					availableLocales = LanguageUtil.getAvailableLocales(themeDisplay.getSiteGroupId());
-				}
-				else {
-					availableLocales = LanguageUtil.getAvailableLocales();
 				}
 			}
 			%>
