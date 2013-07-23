@@ -93,16 +93,16 @@
 								<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 							</liferay-portlet:renderURL>
 
-							form.get('<portlet:namespace />redirect').set('value', '<%= HttpUtil.addParameter(redirectURL.toString(), liferayPortletResponse.getNamespace() + "selPlid", selPlid) %>');
+							form.get('<portlet:namespace />redirect').val('<%= HttpUtil.addParameter(redirectURL.toString(), liferayPortletResponse.getNamespace() + "selPlid", selPlid) %>');
 
 							loadingMask.show();
 
 							A.io.request(
-								form.get('action'),
+								form.attr('action'),
 								{
 									dataType: 'json',
 									form: {
-										id: form.get('id')
+										id: form.attr('id')
 									},
 									after: {
 										success: function(event, id, obj) {

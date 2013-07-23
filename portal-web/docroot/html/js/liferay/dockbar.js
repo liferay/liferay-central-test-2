@@ -5,8 +5,6 @@ AUI.add(
 
 		var Lang = A.Lang;
 
-		var Portlet = Liferay.Portlet;
-
 		var Util = Liferay.Util;
 
 		var BODY = A.getBody();
@@ -16,12 +14,6 @@ AUI.add(
 		var CSS_EDIT_LAYOUT_CONTENT = 'lfr-has-edit-layout';
 
 		var CSS_PREVIEW_CONTENT = 'lfr-has-device-preview';
-
-		var BODY_CONTENT = 'bodyContent';
-
-		var BOUNDING_BOX = 'boundingBox';
-
-		var CONTENT_BOX = 'contentBox';
 
 		var EVENT_CLICK = 'click';
 
@@ -240,7 +232,7 @@ AUI.add(
 					);
 				}
 
-				var userAvatar = A.one('#' + namespace + 'userAvatar');
+				var userAvatar = A.oneNS(namespace, '#userAvatar');
 
 				if (userAvatar) {
 					userAvatar.delegate(
@@ -248,10 +240,7 @@ AUI.add(
 						function(event) {
 							event.preventDefault();
 
-							instance._openWindow(
-								{},
-								event.currentTarget
-							);
+							instance._openWindow({}, event.currentTarget);
 						},
 						'a.use-dialog'
 					);
@@ -259,7 +248,7 @@ AUI.add(
 
 				Liferay.fire('dockbarLoaded');
 			},
-			['aui-io-request', 'liferay-store', 'node-focusmanager']
+			['aui-io-request', 'liferay-node', 'liferay-store', 'node-focusmanager']
 		);
 
 		Liferay.provide(

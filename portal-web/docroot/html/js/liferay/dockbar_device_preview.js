@@ -86,8 +86,6 @@ AUI.add(
 
 						instance._dialogId = A.guid();
 
-						var devicePreviewContainer = instance.byId('devicePreviewContainer');
-
 						instance._closePanelButton = instance.byId('closePanelPreview');
 
 						instance._devicePreviewNode = A.Node.create(Lang.sub(TPL_DEVICE_PREVIEW));
@@ -109,6 +107,8 @@ AUI.add(
 								return selected;
 							}
 						);
+
+						var devicePreviewContainer = instance.byId('devicePreviewContainer');
 
 						instance._deviceItems = devicePreviewContainer.all(SELECTOR_DEVICE_ITEM);
 
