@@ -27,7 +27,7 @@ AUI.add(
 					initializer: function(config) {
 						var instance = this;
 
-						instance._controls = instance.byId('layout-customizable-controls');
+						instance._controls = instance.byId('layoutCustomizableControls');
 						instance._manageCustomization = instance.byId('manageCustomization');
 
 						instance._bindUI();
