@@ -672,10 +672,10 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public void addUserLocaleOptionsMessage(HttpServletRequest request) {
-		boolean showUserLocaleAlternateMessage = ParamUtil.getBoolean(
+		boolean showUserLocaleOptionsMessage = ParamUtil.getBoolean(
 			request, "showUserLocaleOptionsMessage", true);
 
-		if (!showUserLocaleAlternateMessage) {
+		if (!showUserLocaleOptionsMessage) {
 			return;
 		}
 
