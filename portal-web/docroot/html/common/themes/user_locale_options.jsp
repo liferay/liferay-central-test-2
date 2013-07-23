@@ -17,6 +17,8 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
+String currentURL = PortalUtil.getCurrentURL(request);
+
 Locale userLocale = user.getLocale();
 %>
 
@@ -24,8 +26,6 @@ Locale userLocale = user.getLocale();
 	<button class="close" type="button">&times;</button>
 
 	<%
-	String currentURL = PortalUtil.getCurrentURL(request);
-
 	PortletURL displayPreferredLanguageURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
 
 	displayPreferredLanguageURL.setParameter("struts_action", "/language/view");
@@ -58,15 +58,13 @@ Locale userLocale = user.getLocale();
 	String changePreferredLanguageURLString = changePreferredLanguageURL.toString();
 
 	changePreferredLanguageURLString = HttpUtil.addParameter(changePreferredLanguageURLString, "showUserLocaleOptionsMessage", false);
-
-	String currentLanguageDisplayName = locale.getDisplayName(userLocale);
 	%>
 
 	<liferay-util:buffer var="changePreferredLanguage">
 		<aui:a href="<%= changePreferredLanguageURLString %>">
-			<%= LanguageUtil.format(userLocale, "set-x-as-your-preferred-language", currentLanguageDisplayName) %>
+			<%= LanguageUtil.format(userLocale, "set-x-as-your-preferred-language", locale.getDisplayName(userLocale)) %>
 		</aui:a>
 	</liferay-util:buffer>
 
-	<%= LanguageUtil.format(userLocale, "this-page-is-being-displayed-in-x", new Object[] {currentLanguageDisplayName, displayPreferredLanguage, changePreferredLanguage}) %>
+	<%= LanguageUtil.format(userLocale, "this-page-is-being-displayed-in-x", new Object[] {locale.getDisplayName(userLocale), displayPreferredLanguage, changePreferredLanguage}) %>
 </c:if>
