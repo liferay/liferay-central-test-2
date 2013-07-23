@@ -51,6 +51,7 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 		return extraDataJSONObject.getString(key);
 	}
 
+	@Override
 	public String getExtraDataValue(String key, Locale locale)
 		throws JSONException {
 
@@ -82,6 +83,7 @@ public class SocialActivityImpl extends SocialActivityBaseImpl {
 		super.setExtraData(extraData);
 	}
 
+	@Override
 	public void setExtraDataValue(String key, String value)
 		throws JSONException {
 
