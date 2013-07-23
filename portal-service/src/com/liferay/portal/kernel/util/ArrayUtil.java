@@ -862,7 +862,8 @@ public class ArrayUtil {
 			return array;
 		}
 
-		List<T> origin = (List<T>)Arrays.asList(array);
+		List<T> origin = Arrays.asList(array);
+
 		ArrayList<T> survivors = new ArrayList<T>();
 
 		for (T item : origin) {
