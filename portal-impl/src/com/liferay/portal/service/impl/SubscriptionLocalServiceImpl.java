@@ -136,7 +136,7 @@ public class SubscriptionLocalServiceImpl
 
 			// Asset
 
-			AssetEntry assetEntry;
+			AssetEntry assetEntry = null;
 
 			try {
 				assetEntry = assetEntryLocalService.getEntry(

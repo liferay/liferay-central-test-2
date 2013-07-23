@@ -965,10 +965,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			MBMessage message = mbMessageLocalService.getMBMessage(
 				thread.getRootMessageId());
 
-			JSONObject extraDataJSON = JSONFactoryUtil.createJSONObject();
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
-			extraDataJSON.put("rootMessageId", thread.getRootMessageId());
-			extraDataJSON.put("title", message.getSubject());
+			extraDataJSONObject.put("rootMessageId", thread.getRootMessageId());
+			extraDataJSONObject.put("title", message.getSubject());
 
 			if (status == WorkflowConstants.STATUS_IN_TRASH) {
 
@@ -978,7 +978,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					userId, thread.getGroupId(), MBThread.class.getName(),
 					thread.getThreadId(),
 					SocialActivityConstants.TYPE_MOVE_TO_TRASH,
-					extraDataJSON.toString(), 0);
+					extraDataJSONObject.toString(), 0);
 
 				// Trash
 
@@ -994,7 +994,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 					userId, thread.getGroupId(), MBThread.class.getName(),
 					thread.getThreadId(),
 					SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
-					extraDataJSON.toString(), 0);
+					extraDataJSONObject.toString(), 0);
 
 				// Trash
 
