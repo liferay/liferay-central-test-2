@@ -567,6 +567,7 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 
 		if ((length > 0) && (start >= length)) {
 			int delta = end - start;
+
 			int cur = start / delta;
 
 			start = 0;

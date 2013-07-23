@@ -60,7 +60,7 @@ public class LuceneIndexSearchTest {
 			User user = UserTestUtil.addUser(
 				ServiceTestUtil.randomString(), false,
 				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-				new long[]{TestPropsValues.getGroupId()});
+				new long[] {TestPropsValues.getGroupId()});
 
 			_users.add(user);
 		}
@@ -89,7 +89,7 @@ public class LuceneIndexSearchTest {
 	}
 
 	@Test
-	public void testSearchWithOneResultWhenTotalSmallerThanStart()
+	public void testSearchWithOneResultWhenTotalLessThanStart()
 		throws Exception {
 
 		Hits hits = getSearchWithOneResult(1000, 1005);
@@ -115,7 +115,7 @@ public class LuceneIndexSearchTest {
 	}
 
 	@Test
-	public void testSearchWithoutResultsWhenTotalSmallerThanStart()
+	public void testSearchWithoutResultsWhenTotalLessThanStart()
 		throws Exception {
 
 		Hits hits = getSearchWithoutResults(1000, 1005);
@@ -125,64 +125,60 @@ public class LuceneIndexSearchTest {
 
 	@Test
 	public void testSearchWithResults() throws Exception {
-		Hits hits = getSearchWithResults(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		Hits hits = getHits(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertTrue(hits.getLength() == 5);
 	}
 
 	@Test
 	public void testSearchWithResultsWhenTotalEqualsStart() throws Exception {
-		Hits hits = getSearchWithResults(5, 10);
+		Hits hits = getHits(5, 10);
 
 		Assert.assertTrue(hits.getLength() == 5);
 	}
 
 	@Test
-	public void testSearchWithResultsWhenTotalSmallerThanStart()
-		throws Exception {
-
-		Hits hits = getSearchWithResults(1000, 1005);
+	public void testSearchWithResultsWhenTotalLessThanStart() throws Exception {
+		Hits hits = getHits(1000, 1005);
 
 		Assert.assertTrue(hits.getLength() == 5);
+	}
+
+	protected Hits getHits(int start, int end) throws Exception {
+		return getHits(StringPool.BLANK, start, end);
 	}
 
 	protected Hits getSearchWithOneResult(int start, int end) throws Exception {
 		User user = _users.get(0);
 
-		return _getSearch(start, end, user.getFirstName() );
+		return getHits(user.getFirstName(), start, end );
 	}
 
 	protected Hits getSearchWithoutResults(int start, int end)
 		throws Exception {
 
-		return _getSearch(start, end, "fakeKeyword");
+		return getHits("invalidKeyword", start, end);
 	}
 
-	protected Hits getSearchWithResults(int start, int end) throws Exception {
-		return _getSearch(start, end, StringPool.BLANK);
-	}
-
-	private Hits _getSearch(int start, int end, String keyword)
-		throws Exception {
-
+	private Hits getHits(String keyword, int start, int end) throws Exception {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setCompanyId(TestPropsValues.getCompanyId());
+		searchContext.setEnd(end);
 		searchContext.setGroupIds(new long[] {TestPropsValues.getGroupId()});
 		searchContext.setKeywords(keyword);
-
-		searchContext.setStart(start);
-		searchContext.setEnd(end);
 
 		QueryConfig queryConfig = new QueryConfig();
 
 		searchContext.setQueryConfig(queryConfig);
 
+		searchContext.setStart(start);
+
 		return indexer.search(searchContext);
 	}
 
-	List<User> _users = new ArrayList<User>();
+	private List<User> _users = new ArrayList<User>();
 
 }
