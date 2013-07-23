@@ -22,7 +22,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 Locale userLocale = user.getLocale();
 %>
 
-<c:if test="<%= locale.equals(user.getLocale()) %>">
+<c:if test="<%= !locale.equals(user.getLocale()) %>">
 	<button class="close" type="button">&times;</button>
 
 	<%
