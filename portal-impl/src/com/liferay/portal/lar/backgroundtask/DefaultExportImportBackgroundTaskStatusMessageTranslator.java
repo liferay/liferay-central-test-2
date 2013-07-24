@@ -71,7 +71,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"allModelAdditionCounters",
 			new HashMap<String, LongWrapper>(modelAdditionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"allModelAdditionCountersTotal", getTotal(modelAdditionCounters));
 
@@ -81,7 +80,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"allModelDeletionCounters",
 			new HashMap<String, LongWrapper>(modelDeletionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"allModelDeletionCountersTotal", getTotal(modelDeletionCounters));
 	}
@@ -97,7 +95,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"allModelAdditionCounters",
 			new HashMap<String, LongWrapper>(modelAdditionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"allModelAdditionCountersTotal", getTotal(modelAdditionCounters));
 
@@ -107,7 +104,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"allModelDeletionCounters",
 			new HashMap<String, LongWrapper>(modelDeletionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"allModelDeletionCountersTotal", getTotal(modelDeletionCounters));
 
@@ -132,7 +128,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"currentModelAdditionCounters",
 			new HashMap<String, LongWrapper>(modelAdditionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"currentModelAdditionCountersTotal", getTotal(modelAdditionCounters));
 
@@ -142,7 +137,6 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		backgroundTaskStatus.setAttribute(
 			"currentModelDeletionCounters",
 			new HashMap<String, LongWrapper>(modelDeletionCounters));
-
 		backgroundTaskStatus.setAttribute(
 			"currentModelDeletionCountersTotal",
 			getTotal(modelDeletionCounters));
