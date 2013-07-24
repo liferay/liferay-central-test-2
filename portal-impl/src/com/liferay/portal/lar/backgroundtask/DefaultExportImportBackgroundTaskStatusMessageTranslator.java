@@ -129,7 +129,8 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 			"currentModelAdditionCounters",
 			new HashMap<String, LongWrapper>(modelAdditionCounters));
 		backgroundTaskStatus.setAttribute(
-			"currentModelAdditionCountersTotal", getTotal(modelAdditionCounters));
+			"currentModelAdditionCountersTotal",
+			getTotal(modelAdditionCounters));
 
 		Map<String, LongWrapper> modelDeletionCounters =
 			(Map<String, LongWrapper>)message.get("modelDeletionCounters");
