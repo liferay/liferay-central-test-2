@@ -41,6 +41,7 @@ if (group != null) {
 %>
 
 <c:if test="<%= (group != null) %>">
+	<liferay-util:include page="/html/portlet/sites_admin/toolbar.jsp" />
 
 	<%
 	long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
@@ -55,8 +56,6 @@ if (group != null) {
 		}
 	}
 	%>
-
-	<liferay-util:include page="/html/portlet/sites_admin/toolbar.jsp" />
 
 	<portlet:renderURL var="headerBackURL">
 		<portlet:param name="struts_action" value="/sites_admin/view" />
@@ -108,16 +107,19 @@ if (group != null) {
 
 			GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-			long parentGroupId = _getParentGroupId(request, group, filterManageableGroups);
-
-			if (group != null) {
-				parentGroupId = group.getGroupId();
-			}
-
 			request.setAttribute("view_tree.jspf-searchTerms", searchTerms);
 			%>
 
 			<liferay-ui:search-container-results>
+
+				<%
+				long parentGroupId = _getParentGroupId(request, group, filterManageableGroups);
+
+				if (group != null) {
+					parentGroupId = group.getGroupId();
+				}
+				%>
+
 				<c:choose>
 					<c:when test="<%= !searchTerms.hasSearchTerms() && (parentGroupId <= 0) && (filterManageableGroups) %>">
 
