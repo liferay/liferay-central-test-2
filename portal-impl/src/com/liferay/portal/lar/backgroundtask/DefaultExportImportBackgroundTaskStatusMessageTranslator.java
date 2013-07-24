@@ -54,7 +54,9 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 		long total = 0;
 
 		for (Map.Entry<String, LongWrapper> entry : modelCounters.entrySet()) {
-			total += (entry.getValue()).getValue();
+			LongWrapper longWrapper = entry.getValue();
+
+			total += longWrapper.getValue();
 		}
 
 		return total;

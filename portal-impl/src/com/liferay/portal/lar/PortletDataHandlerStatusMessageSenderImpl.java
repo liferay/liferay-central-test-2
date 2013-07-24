@@ -77,6 +77,7 @@ public class PortletDataHandlerStatusMessageSenderImpl
 		message.put(
 			"stagedModelName",
 			stagedModelDataHandler.getDisplayName(stagedModel));
+
 		message.put(
 			"stagedModelType",
 			String.valueOf(stagedModel.getStagedModelType()));
