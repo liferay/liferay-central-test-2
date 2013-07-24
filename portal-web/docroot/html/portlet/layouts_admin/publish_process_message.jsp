@@ -35,13 +35,13 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 	<c:if test="<%= backgroundTaskStatus != null %>">
 
 		<%
+		double percentage = 100;
+
 		long allModelAdditionCountersTotal = GetterUtil.getLong(backgroundTaskStatus.getAttribute("allModelAdditionCountersTotal"));
 		long currentModelAdditionCountersTotal = GetterUtil.getLong(backgroundTaskStatus.getAttribute("currentModelAdditionCountersTotal"));
 
-		double percentage = 100;
-
 		if (allModelAdditionCountersTotal > 0) {
-			percentage = Math.round(Double.valueOf(currentModelAdditionCountersTotal)/Double.valueOf(allModelAdditionCountersTotal) * 100);
+			percentage = Math.round(currentModelAdditionCountersTotal / allModelAdditionCountersTotal * 100);
 		}
 		%>
 
@@ -49,7 +49,7 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 			<div class="bar" style="width: <%= percentage %>%;">
 
 			  <c:if test="<%= allModelAdditionCountersTotal > 0 %>">
-				  <%= currentModelAdditionCountersTotal %><%= StringPool.FORWARD_SLASH %><%= allModelAdditionCountersTotal %>
+				  <%= currentModelAdditionCountersTotal %> / <%= allModelAdditionCountersTotal %>
 			  </c:if>
 		  </div>
 		</div>
@@ -62,22 +62,22 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 		<c:if test="<%= Validator.isNotNull(stagedModelName) && Validator.isNotNull(stagedModelType) %>">
 
 			<%
+			String messageKey = "exporting";
+
 			Map<String, Serializable> taskContextMap = backgroundTask.getTaskContextMap();
 
 			String cmd = (String)taskContextMap.get(Constants.CMD);
 
-			String cmdKey = "exporting";
-
 			if (Validator.equals(cmd, Constants.IMPORT)) {
-				cmdKey = "importing";
+				messageKey = "importing";
 			}
 			else if (Validator.equals(cmd, Constants.PUBLISH)) {
-				cmdKey = "publishing";
+				messageKey = "publishing";
 			}
 			%>
 
 			<div class="progress-current-item">
-				<strong><liferay-ui:message key="<%= cmdKey %>" /><%= StringPool.TRIPLE_PERIOD %></strong> <%= ResourceActionsUtil.getModelResource(locale, stagedModelType) %> <em><%= stagedModelName %></em>
+				<strong><liferay-ui:message key="<%= messageKey %>" /><%= StringPool.TRIPLE_PERIOD %></strong> <%= ResourceActionsUtil.getModelResource(locale, stagedModelType) %> <em><%= stagedModelName %></em>
 			</div>
 		</c:if>
 	</c:if>
