@@ -920,7 +920,8 @@ public class StagingImpl implements Staging {
 	}
 
 	/**
-	 * @see LayoutRemoteStagingBackgroundTaskExecutor#getMissingRemoteParentLayouts(HttpPrincipal, Layout, long)
+	 * @see LayoutRemoteStagingBackgroundTaskExecutor#getMissingRemoteParentLayouts(
+	 *      HttpPrincipal, Layout, long)
 	 */
 	@Override
 	public List<Layout> getMissingParentLayouts(Layout layout, long liveGroupId)

@@ -18,6 +18,7 @@
 
 <%
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
+
 long groupId = ParamUtil.getLong(request, "groupId");
 boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing");
 

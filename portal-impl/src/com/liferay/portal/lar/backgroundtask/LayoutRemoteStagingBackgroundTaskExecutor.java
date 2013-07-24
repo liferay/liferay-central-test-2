@@ -83,10 +83,10 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 
 		backgroundTaskStatus.clearAttributes();
 
+		long stagingRequestId = 0;
+
 		File file = null;
 		FileInputStream fileInputStream = null;
-
-		long stagingRequestId = 0;
 
 		try {
 			file = exportLayoutsAsFile(
@@ -138,10 +138,8 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 			}
 		}
 
-		BackgroundTaskResult backgroundTaskResult = new BackgroundTaskResult(
+		return new BackgroundTaskResult(
 			BackgroundTaskConstants.STATUS_SUCCESSFUL);
-
-		return backgroundTaskResult;
 	}
 
 	@Override
