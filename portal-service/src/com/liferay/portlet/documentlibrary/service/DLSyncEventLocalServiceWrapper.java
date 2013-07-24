@@ -300,10 +300,9 @@ public class DLSyncEventLocalServiceWrapper implements DLSyncEventLocalService,
 	}
 
 	@Override
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLSyncEvent> getLastDLSyncEvents()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlSyncEventLocalService.getLastDLSyncEvents();
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLSyncEvent> getLatestDLSyncEvents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlSyncEventLocalService.getLatestDLSyncEvents();
 	}
 
 	/**

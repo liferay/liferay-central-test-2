@@ -285,10 +285,9 @@ public class DLSyncEventLocalServiceUtil {
 		return getService().getDLSyncEvents(modifiedDate);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLSyncEvent> getLastDLSyncEvents()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLastDLSyncEvents();
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLSyncEvent> getLatestDLSyncEvents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLatestDLSyncEvents();
 	}
 
 	public static DLSyncEventLocalService getService() {
