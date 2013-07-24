@@ -81,95 +81,69 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 		}
 
 		if (Validator.isNotNull(inferredClassName)) {
-			boolean hasViewPermission = false;
+			Boolean hasPermission = hasPermission(
+				permissionChecker, inferredClassName, inferredClassPK,
+				ActionKeys.VIEW);
 
-			if (inferredClassName.equals(BlogsEntry.class.getName())) {
-				hasViewPermission = BlogsPermission.contains(
-					permissionChecker, inferredClassPK, ActionKeys.VIEW);
-			}
-			else if (inferredClassName.equals(JournalArticle.class.getName())) {
-				hasViewPermission = JournalPermission.contains(
-					permissionChecker, inferredClassPK, ActionKeys.VIEW);
-			}
-			else if (inferredClassName.equals(MBCategory.class.getName())) {
-				Group group = GroupLocalServiceUtil.fetchGroup(inferredClassPK);
-
-				if (group == null) {
-					hasViewPermission = MBCategoryPermission.contains(
-						permissionChecker, inferredClassPK, ActionKeys.VIEW);
-				}
-				else {
-					hasViewPermission = MBPermission.contains(
-						permissionChecker, inferredClassPK, ActionKeys.VIEW);
-				}
-			}
-			else if (inferredClassName.equals(MBThread.class.getName())) {
-				MBThread mbThread = MBThreadLocalServiceUtil.fetchThread(
-					inferredClassPK);
-
-				if (mbThread == null) {
-					hasViewPermission = false;
-				}
-				else {
-					hasViewPermission = MBMessagePermission.contains(
-						permissionChecker, mbThread.getRootMessageId(),
-						ActionKeys.VIEW);
-				}
-			}
-			else if (inferredClassName.equals(WikiNode.class.getName())) {
-				hasViewPermission = WikiNodePermission.contains(
-					permissionChecker, inferredClassPK, ActionKeys.VIEW);
-			}
-			else if (inferredClassName.equals(WikiPage.class.getName())) {
-				hasViewPermission = WikiPagePermission.contains(
-					permissionChecker, inferredClassPK, ActionKeys.VIEW);
-			}
-
-			if (!hasViewPermission) {
+			if ((hasPermission == null) || !hasPermission) {
 				return false;
 			}
 		}
 
-		if (subscriptionClassName.equals(BlogsEntry.class.getName())) {
+		Boolean hasPermission = hasPermission(
+			permissionChecker, subscriptionClassName, subscriptionClassPK,
+			ActionKeys.SUBSCRIBE);
+
+		if (hasPermission != null) {
+			return hasPermission;
+		}
+
+		return true;
+	}
+
+	protected Boolean hasPermission(
+			PermissionChecker permissionChecker, String className, long classPK,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (className.equals(BlogsEntry.class.getName())) {
 			return BlogsPermission.contains(
-				permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+				permissionChecker, classPK, actionId);
 		}
-		else if (subscriptionClassName.equals(JournalArticle.class.getName())) {
+		else if (className.equals(JournalArticle.class.getName())) {
 			return JournalPermission.contains(
-				permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+				permissionChecker, classPK, actionId);
 		}
-		else if (subscriptionClassName.equals(MBCategory.class.getName())) {
-			Group group = GroupLocalServiceUtil.fetchGroup(subscriptionClassPK);
+		else if (className.equals(MBCategory.class.getName())) {
+			Group group = GroupLocalServiceUtil.fetchGroup(classPK);
 
 			if (group == null) {
 				return MBCategoryPermission.contains(
-					permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+					permissionChecker, classPK, actionId);
 			}
 
-			return MBPermission.contains(
-				permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+			return MBPermission.contains(permissionChecker, classPK, actionId);
 		}
-		else if (subscriptionClassName.equals(MBThread.class.getName())) {
-			MBThread mbThread = MBThreadLocalServiceUtil.fetchThread(subscriptionClassPK);
+		else if (className.equals(MBThread.class.getName())) {
+			MBThread mbThread = MBThreadLocalServiceUtil.fetchThread(classPK);
 
 			if (mbThread == null) {
 				return false;
 			}
 
 			return MBMessagePermission.contains(
-				permissionChecker, mbThread.getRootMessageId(),
-				ActionKeys.SUBSCRIBE);
+				permissionChecker, mbThread.getRootMessageId(), actionId);
 		}
-		else if (subscriptionClassName.equals(WikiNode.class.getName())) {
+		else if (className.equals(WikiNode.class.getName())) {
 			return WikiNodePermission.contains(
-				permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+				permissionChecker, classPK, actionId);
 		}
-		else if (subscriptionClassName.equals(WikiPage.class.getName())) {
+		else if (className.equals(WikiPage.class.getName())) {
 			return WikiPagePermission.contains(
-				permissionChecker, subscriptionClassPK, ActionKeys.SUBSCRIBE);
+				permissionChecker, classPK, actionId);
 		}
 
-		return true;
+		return null;
 	}
 
 }
