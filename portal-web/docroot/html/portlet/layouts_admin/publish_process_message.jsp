@@ -35,21 +35,21 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 	<c:if test="<%= backgroundTaskStatus != null %>">
 
 		<%
-		long allModelAdditionCount = GetterUtil.getLong(backgroundTaskStatus.getAttribute("allModelAdditionCount"));
-		long currentModelAdditionCount = GetterUtil.getLong(backgroundTaskStatus.getAttribute("currentModelAdditionCount"));
+		long allModelAdditionCountersTotal = GetterUtil.getLong(backgroundTaskStatus.getAttribute("allModelAdditionCountersTotal"));
+		long currentModelAdditionCountersTotal = GetterUtil.getLong(backgroundTaskStatus.getAttribute("currentModelAdditionCountersTotal"));
 
 		double percentage = 100;
 
-		if (allModelAdditionCount > 0) {
-			percentage = Math.round(Double.valueOf(currentModelAdditionCount)/Double.valueOf(allModelAdditionCount) * 100);
+		if (allModelAdditionCountersTotal > 0) {
+			percentage = Math.round(Double.valueOf(currentModelAdditionCountersTotal)/Double.valueOf(allModelAdditionCountersTotal) * 100);
 		}
 		%>
 
 		<div class="progress progress-striped active">
 			<div class="bar" style="width: <%= percentage %>%;">
 
-			  <c:if test="<%= allModelAdditionCount > 0 %>">
-				  <%= currentModelAdditionCount %><%= StringPool.FORWARD_SLASH %><%= allModelAdditionCount %>
+			  <c:if test="<%= allModelAdditionCountersTotal > 0 %>">
+				  <%= currentModelAdditionCountersTotal %><%= StringPool.FORWARD_SLASH %><%= allModelAdditionCountersTotal %>
 			  </c:if>
 		  </div>
 		</div>
