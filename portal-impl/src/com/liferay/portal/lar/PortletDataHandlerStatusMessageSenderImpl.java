@@ -70,9 +70,10 @@ public class PortletDataHandlerStatusMessageSenderImpl
 
 		Message message = createMessage(messageType, manifestSummary);
 
-		StagedModelDataHandler stagedModelDataHandler =
-			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
-				stagedModel.getModelClassName());
+		StagedModelDataHandler<T> stagedModelDataHandler =
+			(StagedModelDataHandler<T>)
+				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+					stagedModel.getModelClassName());
 
 		message.put(
 			"stagedModelName",
