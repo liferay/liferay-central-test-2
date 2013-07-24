@@ -315,6 +315,8 @@ public class StagingImpl implements Staging {
 				user.getUserId(), sourceGroupId, privateLayout, null,
 				parameterMap, Constants.PUBLISH, startDate, endDate, null);
 
+		taskContextMap.put("httpPrincipal", httpPrincipal);
+
 		if (layoutIdMap != null) {
 			HashMap<Long, Boolean> serializableLayoutIdMap =
 				new HashMap<Long, Boolean>(layoutIdMap);
@@ -322,7 +324,6 @@ public class StagingImpl implements Staging {
 			taskContextMap.put("layoutIdMap", serializableLayoutIdMap);
 		}
 
-		taskContextMap.put("httpPrincipal", httpPrincipal);
 		taskContextMap.put("remoteGroupId", remoteGroupId);
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTask(
