@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.documentlibrary.model.DLSyncEvent;
 import com.liferay.portlet.documentlibrary.service.base.DLSyncEventLocalServiceBaseImpl;
@@ -67,8 +66,11 @@ public class DLSyncEventLocalServiceImpl
 	}
 
 	@Override
-	public List<DLSyncEvent> getLastDLSyncEvents()
-		throws PortalException, SystemException {
+	public List<DLSyncEvent> getLatestDLSyncEvents() throws SystemException {
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			DLSyncEvent.class);
+
+		Property property = PropertyFactoryUtil.forName("modifiedDate");
 
 		DynamicQuery modifiedDateDynamicQuery =
 			DynamicQueryFactoryUtil.forClass(DLSyncEvent.class);
@@ -77,18 +79,9 @@ public class DLSyncEventLocalServiceImpl
 
 		modifiedDateDynamicQuery.setProjection(projection);
 
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			DLSyncEvent.class);
-
-		Property property = PropertyFactoryUtil.forName("modifiedDate");
-
 		dynamicQuery.add(property.eq(modifiedDateDynamicQuery));
 
-		List<DLSyncEvent> dlSyncEvents =
-			(List<DLSyncEvent>)dlSyncEventPersistence.findWithDynamicQuery(
-				dynamicQuery);
-
-		return dlSyncEvents;
+		return dlSyncEventPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 }
