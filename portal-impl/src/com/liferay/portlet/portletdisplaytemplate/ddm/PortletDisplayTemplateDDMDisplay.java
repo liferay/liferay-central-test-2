@@ -93,7 +93,8 @@ public class PortletDisplayTemplateDDMDisplay extends BaseDDMDisplay {
 
 		return new long[] {
 			PortletDisplayTemplateUtil.getDDMTemplateGroupId(
-				themeDisplay.getScopeGroupId())};
+				themeDisplay.getScopeGroupId())
+			};
 	}
 
 	@Override
