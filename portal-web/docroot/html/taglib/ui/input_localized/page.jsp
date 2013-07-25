@@ -257,11 +257,11 @@ List<String> languageIds = new ArrayList<String>();
 		var available = {};
 
 		<%
-		for (Locale curLocale : availableLocales) {
-			String selLanguageId = LocaleUtil.toLanguageId(curLocale);
+		for (Locale availableLocale : availableLocales) {
+			String availableLanguageId = LocaleUtil.toLanguageId(availableLocale);
 		%>
 
-			available['<%= selLanguageId %>'] = '<%= curLocale.getDisplayName(locale) %>';
+			available['<%= availableLanguageId %>'] = '<%= availableLocale.getDisplayName(locale) %>';
 
 		<%
 		}
