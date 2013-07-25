@@ -1101,7 +1101,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			return true;
 		}
 
-		for (String userType : PropsValues.FIELDS_EDITABLE_USER_TYPES) {
+		for (String userType : PropsValues.FIELD_EDITABLE_USER_TYPES) {
 			if (userType.equals("user-with-mx") && user.hasCompanyMx()) {
 				return true;
 			}
@@ -1111,7 +1111,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			}
 		}
 
-		for (String roleName : PropsValues.FIELDS_EDITABLE_ROLES) {
+		for (String roleName : PropsValues.FIELD_EDITABLE_ROLES) {
 			Role role = RoleLocalServiceUtil.fetchRole(
 				user.getCompanyId(), roleName);
 
@@ -1125,7 +1125,7 @@ public class UsersAdminImpl implements UsersAdmin {
 
 		String emailAddress = user.getEmailAddress();
 
-		for (String domainName : PropsValues.FIELDS_EDITABLE_DOMAINS) {
+		for (String domainName : PropsValues.FIELD_EDITABLE_DOMAINS) {
 			if (emailAddress.endsWith(domainName)) {
 				return true;
 			}
