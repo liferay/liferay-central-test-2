@@ -54,7 +54,7 @@ if (selContact != null) {
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
-	<liferay-ui:error exception="<%= UserPermissionException.class %>" message="you-do-not-have-permission-to-access-the-requested-resource" />
+	<liferay-ui:error exception="<%= UserFieldException.class %>" message="you-do-not-have-permission-to-access-the-requested-resource" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">

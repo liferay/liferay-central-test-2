@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Jonathan McCann
  */
-public class UserPermissionException extends PortalException {
+public class UserFieldException extends PortalException {
 
-	public UserPermissionException() {
+	public UserFieldException() {
 		super();
 	}
 
-	public UserPermissionException(String msg) {
+	public UserFieldException(String msg) {
 		super(msg);
 	}
 
-	public UserPermissionException(String msg, Throwable cause) {
+	public UserFieldException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public UserPermissionException(Throwable cause) {
+	public UserFieldException(Throwable cause) {
 		super(cause);
 	}
 

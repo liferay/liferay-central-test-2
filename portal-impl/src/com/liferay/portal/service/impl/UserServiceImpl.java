@@ -16,7 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
-import com.liferay.portal.UserPermissionException;
+import com.liferay.portal.UserFieldException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
@@ -2661,7 +2661,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		for (String field : fields) {
 			if (!UsersAdminUtil.hasUpdateFieldPermission(user, field)) {
-				throw new UserPermissionException();
+				throw new UserFieldException();
 			}
 		}
 	}

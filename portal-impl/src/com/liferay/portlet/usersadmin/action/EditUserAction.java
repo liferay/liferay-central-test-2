@@ -36,9 +36,9 @@ import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
 import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserFieldException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.UserPermissionException;
 import com.liferay.portal.UserReminderQueryException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
@@ -255,9 +255,9 @@ public class EditUserAction extends PortletAction {
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof ReservedUserScreenNameException ||
 					 e instanceof UserEmailAddressException ||
+					 e instanceof UserFieldException ||
 					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
-					 e instanceof UserPermissionException ||
 					 e instanceof UserReminderQueryException ||
 					 e instanceof UserScreenNameException ||
 					 e instanceof UserSmsException ||
