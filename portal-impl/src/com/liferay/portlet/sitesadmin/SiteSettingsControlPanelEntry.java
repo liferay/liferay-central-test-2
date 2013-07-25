@@ -32,17 +32,10 @@ public class SiteSettingsControlPanelEntry extends BaseControlPanelEntry {
 			PermissionChecker permissionChecker, Group group, Portlet portlet)
 		throws Exception {
 
-		if (group.isUser()) {
-			return true;
-		}
-
-		if (!GroupPermissionUtil.contains(
+		if (group.isUser() || group.isLayoutSetPrototype() ||
+			!GroupPermissionUtil.contains(
 				permissionChecker, group.getGroupId(), ActionKeys.UPDATE)) {
 
-			return true;
-		}
-
-		if (group.isLayoutSetPrototype()) {
 			return true;
 		}
 
