@@ -2608,7 +2608,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String jobTitle)
 		throws PortalException, SystemException {
 
-		List<String> changedFieldsList = new ArrayList<String>();
+		List<String> fields = new ArrayList<String>();
 
 		Contact contact = user.getContact();
 
@@ -2620,46 +2620,46 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			(birthdayDay != birthday.get(Calendar.DAY_OF_MONTH)) ||
 			(birthdayYear != birthday.get(Calendar.YEAR))) {
 
-			changedFieldsList.add("birthday");
+			fields.add("birthday");
 		}
 
 		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
-			changedFieldsList.add("emailAddress");
+			fields.add("emailAddress");
 		}
 
 		if (!firstName.equalsIgnoreCase(user.getFirstName())) {
-			changedFieldsList.add("firstName");
+			fields.add("firstName");
 		}
 
 		if (male != contact.getMale()) {
-			changedFieldsList.add("gender");
+			fields.add("gender");
 		}
 
 		if (!jobTitle.equalsIgnoreCase(user.getJobTitle())) {
-			changedFieldsList.add("jobTitle");
+			fields.add("jobTitle");
 		}
 
 		if (!lastName.equalsIgnoreCase(user.getLastName())) {
-			changedFieldsList.add("lastName");
+			fields.add("lastName");
 		}
 
 		if (!middleName.equalsIgnoreCase(user.getMiddleName())) {
-			changedFieldsList.add("middleName");
+			fields.add("middleName");
 		}
 
 		if (prefixId != contact.getPrefixId()) {
-			changedFieldsList.add("prefix");
+			fields.add("prefix");
 		}
 
 		if (!screenName.equalsIgnoreCase(user.getScreenName())) {
-			changedFieldsList.add("screenName");
+			fields.add("screenName");
 		}
 
 		if (suffixId != contact.getSuffixId()) {
-			changedFieldsList.add("suffix");
+			fields.add("suffix");
 		}
 
-		for (String field : changedFieldsList) {
+		for (String field : fields) {
 			if (!UsersAdminUtil.hasUpdateFieldPermission(user, field)) {
 				throw new UserPermissionException();
 			}
