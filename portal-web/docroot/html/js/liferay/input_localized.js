@@ -6,6 +6,7 @@ AUI.add(
 		var STR_INPUT_PLACEHOLDER = 'inputPlaceholder';
 
 		var STR_INPUT_VALUE_CHANGE = '_onInputValueChange';
+
 		var STR_SUBMIT = '_onSubmit';
 
 		var defaultLanguageId = themeDisplay.getDefaultLanguageId();
