@@ -24,9 +24,9 @@ String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultStat
 Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel:extended");
 String helpMessage = (String)request.getAttribute("liferay-ui:panel:helpMessage");
 String id = (String)request.getAttribute("liferay-ui:panel:id");
-String panelState = (String)request.getAttribute("liferay-ui:panel:state");
 String parentId = (String)request.getAttribute("liferay-ui:panel:parentId");
 boolean persistState = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:persistState"));
+String state = (String)request.getAttribute("liferay-ui:panel:state");
 String title = (String)request.getAttribute("liferay-ui:panel:title");
 
 IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:panel-container:panelCount" + parentId);
@@ -50,16 +50,16 @@ if ((extended != null) && extended) {
 String contentCssClass = StringPool.BLANK;
 String headerCssClass = StringPool.BLANK;
 
-if (panelState == null) {
-	panelState = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
-}
-
 if (collapsible) {
 	contentCssClass += "toggler-content";
 	headerCssClass += "toggler-header";
 }
 
-if (panelState.equals("open")) {
+if (state == null) {
+	state = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
+}
+
+if (state.equals("open")) {
 	contentCssClass += " toggler-content-expanded";
 	headerCssClass += " toggler-header-expanded";
 }

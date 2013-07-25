@@ -32,24 +32,24 @@
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
 
-		String curPortletCategory = null;
+		String portletCategory = null;
 
 		if (Validator.isNotNull(ppid)) {
-			Portlet curPortlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), ppid);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(themeDisplay.getCompanyId(), ppid);
 
-			curPortletCategory = curPortlet.getControlPanelEntryCategory();
+			portletCategory = portlet.getControlPanelEntryCategory();
 		}
 
-		Map<String, List<Portlet>> categoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
+		Map<String, List<Portlet>> siteAdministrationCategoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
 
-		for (String curCategory : categoriesMap.keySet()) {
-			String title = LanguageUtil.get(pageContext, "category." + curCategory);
+		for (String siteAdministrationCategory : siteAdministrationCategoriesMap.keySet()) {
+			String title = LanguageUtil.get(pageContext, "category." + siteAdministrationCategory);
 
-			List<Portlet> portlets = categoriesMap.get(curCategory);
+			List<Portlet> portlets = siteAdministrationCategoriesMap.get(siteAdministrationCategory);
 		%>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" state='<%= curCategory.equals(curPortletCategory) ? "open" : "closed" %>' title="<%= title %>">
-				<c:if test="<%= curCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" id='<%= "panel-manage-" + siteAdministrationCategory %>' persistState="<%= true %>" state='<%= siteAdministrationCategory.equals(portletCategory) ? "open" : "closed" %>' title="<%= title %>">
+				<c:if test="<%= siteAdministrationCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
 
 					<%
 					List<Layout> scopeLayouts = new ArrayList<Layout>();
@@ -73,7 +73,7 @@
 					}
 					%>
 
-					<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
+					<c:if test="<%= !scopeLayouts.isEmpty() && siteAdministrationCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
 						<div class="nobr lfr-title-scope-selector">
 							<liferay-ui:message key="scope" />:
 							<liferay-ui:icon-menu direction="down" icon="" message="<%= scopeLabel %>">
