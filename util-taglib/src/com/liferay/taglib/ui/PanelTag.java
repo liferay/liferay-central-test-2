@@ -129,6 +129,7 @@ public class PanelTag extends IncludeTag {
 		_parentId = StringPool.BLANK;
 		_persistState = true;
 		_startPage = null;
+		_state = null;
 		_title = null;
 	}
 
