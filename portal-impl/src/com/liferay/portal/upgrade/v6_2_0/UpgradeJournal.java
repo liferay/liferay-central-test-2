@@ -186,27 +186,6 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 		}
 	}
 
-	protected void disableJournalContentListPortlet() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"update Portlet set active_ = ? where portletId = ?");
-
-			ps.setBoolean(1, false);
-			ps.setString(2, PortletKeys.JOURNAL_CONTENT_LIST);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
 		try {
@@ -221,7 +200,6 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 				JournalFeedTable.TABLE_SQL_ADD_INDEXES);
 		}
 
-		disableJournalContentListPortlet();
 		updateStructures();
 		updateTemplates();
 
