@@ -943,17 +943,17 @@ public class HttpImpl implements Http {
 			return null;
 		}
 
-		char[] characters = header.toCharArray();
+		char[] chars = header.toCharArray();
 
-		for (int i = 0; i < characters.length; i++) {
-			char c = characters[i];
+		for (int i = 0; i < chars.length; i++) {
+			char c = chars[i];
 
 			if (((c <= 31) && (c != 9)) || (c == 127) || (c > 255)) {
-				characters[i] = CharPool.SPACE;
+				chars[i] = CharPool.SPACE;
 			}
 		}
 
-		return new String(characters);
+		return new String(chars);
 	}
 
 	@Override
