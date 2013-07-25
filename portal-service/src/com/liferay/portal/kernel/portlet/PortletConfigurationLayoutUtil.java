@@ -20,7 +20,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author Raymond Augé
  */
-public class ConfigurationUtil {
+public class PortletConfigurationLayoutUtil {
 
 	public static Layout getLayout(ThemeDisplay themeDisplay) {
 		Layout layout = themeDisplay.getLayout();

@@ -95,7 +95,7 @@ public class DefaultConfigurationAction
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		Layout layout = ConfigurationUtil.getLayout(themeDisplay);
+		Layout layout = PortletConfigurationLayoutUtil.getLayout(themeDisplay);
 
 		PortletPermissionUtil.check(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
