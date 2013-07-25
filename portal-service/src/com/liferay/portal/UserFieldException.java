@@ -37,4 +37,14 @@ public class UserFieldException extends PortalException {
 		super(cause);
 	}
 
+	public String getField() {
+		return _field;
+	}
+
+	public void setField(String field) {
+		_field = field;
+	}
+
+	private String _field;
+
 }

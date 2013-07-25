@@ -2661,7 +2661,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		for (String field : fields) {
 			if (!UsersAdminUtil.hasUpdateFieldPermission(user, field)) {
-				throw new UserFieldException();
+				UserFieldException ufe = new UserFieldException();
+
+				ufe.setField(field);
+
+				throw ufe;
 			}
 		}
 	}
