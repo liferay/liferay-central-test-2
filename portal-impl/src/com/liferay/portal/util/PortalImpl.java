@@ -1022,10 +1022,10 @@ public class PortalImpl implements Portal {
 						canonicalURLSuffix);
 				}
 
-				Locale defaultLocale = PortalUtil.getSiteDefaultLocale(
+				Locale siteDefaultLocale = PortalUtil.getSiteDefaultLocale(
 					layout.getGroupId());
 
-				if (defaultLocale.equals(locale)) {
+				if (siteDefaultLocale.equals(locale)) {
 					return canonicalURL;
 				}
 
