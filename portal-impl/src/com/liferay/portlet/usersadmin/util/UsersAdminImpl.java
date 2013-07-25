@@ -1097,7 +1097,7 @@ public class UsersAdminImpl implements UsersAdmin {
 	public boolean hasUpdateFieldPermission(User user, String field)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(user)) {
+		if (user == null) {
 			return true;
 		}
 
