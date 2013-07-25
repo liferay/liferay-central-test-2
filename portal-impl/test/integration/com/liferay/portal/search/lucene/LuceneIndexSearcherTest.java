@@ -157,22 +157,12 @@ public class LuceneIndexSearcherTest {
 	}
 
 	protected Hits getHits(int start, int end) throws Exception {
-		return _getHits(StringPool.BLANK, start, end);
+		return getHits(StringPool.BLANK, start, end);
 	}
 
-	protected Hits getSearchWithOneResult(int start, int end) throws Exception {
-		User user = _users.get(0);
-
-		return _getHits(user.getFirstName(), start, end);
-	}
-
-	protected Hits getSearchWithoutResults(int start, int end)
+	protected Hits getHits(String keyword, int start, int end)
 		throws Exception {
 
-		return _getHits("invalidKeyword", start, end);
-	}
-
-	private Hits _getHits(String keyword, int start, int end) throws Exception {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		SearchContext searchContext = new SearchContext();
@@ -189,6 +179,18 @@ public class LuceneIndexSearcherTest {
 		searchContext.setStart(start);
 
 		return indexer.search(searchContext);
+	}
+
+	protected Hits getSearchWithOneResult(int start, int end) throws Exception {
+		User user = _users.get(0);
+
+		return getHits(user.getFirstName(), start, end);
+	}
+
+	protected Hits getSearchWithoutResults(int start, int end)
+		throws Exception {
+
+		return getHits("invalidKeyword", start, end);
 	}
 
 	private static final int _NUMBER_OF_USERS = 5;
