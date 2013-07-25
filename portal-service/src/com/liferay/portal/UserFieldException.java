@@ -16,6 +16,9 @@ package com.liferay.portal;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Jonathan McCann
  */
@@ -37,14 +40,18 @@ public class UserFieldException extends PortalException {
 		super(cause);
 	}
 
-	public String getField() {
-		return _field;
+	public void addField(String field) {
+		_fields.add(field);
 	}
 
-	public void setField(String field) {
-		_field = field;
+	public List<String> getFields() {
+		return _fields;
 	}
 
-	private String _field;
+	public boolean hasFields() {
+		return !_fields.isEmpty();
+	}
+
+	private List<String> _fields = new ArrayList<String>();
 
 }

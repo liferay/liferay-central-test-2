@@ -2659,14 +2659,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			fields.add("suffix");
 		}
 
+		UserFieldException ufe = new UserFieldException();
+
 		for (String field : fields) {
 			if (!UsersAdminUtil.hasUpdateFieldPermission(user, field)) {
-				UserFieldException ufe = new UserFieldException();
-
-				ufe.setField(field);
-
-				throw ufe;
+				ufe.addField(field);
 			}
+		}
+
+		if (ufe.hasFields()) {
+			throw ufe;
 		}
 	}
 
