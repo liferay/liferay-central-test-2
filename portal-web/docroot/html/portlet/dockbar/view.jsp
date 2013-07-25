@@ -189,7 +189,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 		</c:if>
 
 		<c:if test="<%= !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (hasLayoutUpdatePermission || (layoutTypePortlet.isCustomizable() && layoutTypePortlet.isCustomizedView() && hasLayoutCustomizePermission) || PortletPermissionUtil.hasConfigurationPermission(permissionChecker, themeDisplay.getSiteGroupId(), layout, ActionKeys.CONFIGURATION)) %>">
-			<aui:nav-item anchorCssClass="toggle-controls-link" cssClass="toggle-controls" iconClass='<%= "controls-state-icon " +  (toggleControlsState.equals("visible") ? "icon-eye-open" : "icon-eye-close") %>' id="toggleControls" label="edit-controls" />
+			<aui:nav-item anchorCssClass="toggle-controls-link" cssClass="toggle-controls" iconClass='<%= "controls-state-icon " + (toggleControlsState.equals("visible") ? "icon-eye-open" : "icon-eye-close") %>' id="toggleControls" label="edit-controls" />
 		</c:if>
 	</aui:nav>
 
