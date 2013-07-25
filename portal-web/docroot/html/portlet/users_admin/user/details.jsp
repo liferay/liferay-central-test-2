@@ -54,7 +54,30 @@ if (selContact != null) {
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
-	<liferay-ui:error exception="<%= UserFieldException.class %>" message="you-do-not-have-permission-to-access-the-requested-resource" />
+
+	<liferay-ui:error exception="<%= UserFieldException.class %>">
+
+		<%
+		UserFieldException ufe = (UserFieldException)errorException;
+
+		StringBundler sb = new StringBundler();
+
+		List<String> fields = ufe.getFields();
+
+		for (int i = 0; i < fields.size(); i++) {
+			if ((i + 1) < fields.size()) {
+				sb.append(StringPool.COMMA_AND_SPACE);
+			}
+
+			String field = fields.get(i);
+
+			sb.append(LanguageUtil.get(pageContext, TextFormatter.format(field, TextFormatter.K)));
+		}
+		%>
+
+		<liferay-ui:message arguments="<%= sb.toString() %>" key="you-do-not-have-permission-to-modify-the-following-fields" />
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
