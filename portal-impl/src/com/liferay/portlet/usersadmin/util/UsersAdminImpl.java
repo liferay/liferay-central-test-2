@@ -1082,7 +1082,8 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #hasUpdateFieldPermission(User, String)}
 	 */
 	@Override
 	public boolean hasUpdateEmailAddress(
@@ -1143,7 +1144,8 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #hasUpdateFieldPermission(User, String)}
 	 */
 	@Override
 	public boolean hasUpdateScreenName(

@@ -144,7 +144,8 @@ public interface UsersAdmin {
 		ActionRequest actionRequest, List<Website> defaultWebsites);
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #hasUpdateFieldPermission(User, String)}
 	 */
 	public boolean hasUpdateEmailAddress(
 			PermissionChecker permissionChecker, User user)
@@ -154,7 +155,8 @@ public interface UsersAdmin {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #hasUpdateFieldPermission(User, String)}
 	 */
 	public boolean hasUpdateScreenName(
 			PermissionChecker permissionChecker, User user)
