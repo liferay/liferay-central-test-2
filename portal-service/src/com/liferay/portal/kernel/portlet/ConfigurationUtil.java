@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 
@@ -24,9 +22,7 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 public class ConfigurationUtil {
 
-	public static Layout getLayout(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
+	public static Layout getLayout(ThemeDisplay themeDisplay) {
 		Layout layout = themeDisplay.getLayout();
 
 		if (layout.isTypeControlPanel() &&
