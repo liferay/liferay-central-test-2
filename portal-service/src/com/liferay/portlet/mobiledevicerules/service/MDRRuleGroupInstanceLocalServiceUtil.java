@@ -355,14 +355,12 @@ public class MDRRuleGroupInstanceLocalServiceUtil {
 	}
 
 	public static void deleteGroupRuleGroupInstances(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteGroupRuleGroupInstances(groupId);
 	}
 
 	public static void deleteRuleGroupInstance(long ruleGroupInstanceId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroupInstance(ruleGroupInstanceId);
 	}
 
@@ -373,8 +371,7 @@ public class MDRRuleGroupInstanceLocalServiceUtil {
 	}
 
 	public static void deleteRuleGroupInstances(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroupInstances(ruleGroupId);
 	}
 
