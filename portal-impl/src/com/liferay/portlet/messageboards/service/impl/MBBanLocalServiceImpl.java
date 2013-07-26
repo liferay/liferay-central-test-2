@@ -89,7 +89,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
 	@Override
 	public void deleteBan(long banUserId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long groupId = serviceContext.getScopeGroupId();
 

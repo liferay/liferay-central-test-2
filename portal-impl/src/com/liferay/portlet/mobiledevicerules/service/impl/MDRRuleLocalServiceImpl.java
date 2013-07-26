@@ -114,9 +114,7 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteRule(long ruleId)
-		throws PortalException, SystemException {
-
+	public void deleteRule(long ruleId) throws SystemException {
 		MDRRule rule = mdrRulePersistence.fetchByPrimaryKey(ruleId);
 
 		if (rule != null) {
@@ -140,9 +138,7 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteRules(long ruleGroupId)
-		throws PortalException, SystemException {
-
+	public void deleteRules(long ruleGroupId) throws SystemException {
 		List<MDRRule> rules = mdrRulePersistence.findByRuleGroupId(ruleGroupId);
 
 		for (MDRRule rule : rules) {

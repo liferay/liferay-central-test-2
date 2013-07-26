@@ -91,9 +91,7 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteAction(long actionId)
-		throws PortalException, SystemException {
-
+	public void deleteAction(long actionId) throws SystemException {
 		MDRAction action = mdrActionPersistence.fetchByPrimaryKey(actionId);
 
 		if (action != null) {
@@ -118,9 +116,7 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteActions(long ruleGroupInstanceId)
-		throws PortalException, SystemException {
-
+	public void deleteActions(long ruleGroupInstanceId) throws SystemException {
 		List<MDRAction> actions =
 			mdrActionPersistence.findByRuleGroupInstanceId(ruleGroupInstanceId);
 
