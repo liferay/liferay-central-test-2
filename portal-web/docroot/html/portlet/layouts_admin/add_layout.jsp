@@ -57,8 +57,8 @@ else {
 	<aui:input id="addLayoutRedirect" name="redirect" type="hidden" value="<%= layout.isTypeControlPanel() ? currentURL : editLayoutRenderURL.toString() %>" />
 	<aui:input id="addLayoutGroupId" name="groupId" type="hidden" value="<%= scopeGroupId %>" />
 	<aui:input id="addLayoutPrivateLayout" name="privateLayout" type="hidden" value="<%= privateLayout %>" />
-	<aui:input id="addLayoutParentPlid" name="parentPlid" type="hidden" value="<%= selLayout != null ? selLayout.getPlid() : LayoutConstants.DEFAULT_PLID %>" />
-	<aui:input id="addLayoutParentLayoutId" name="parentLayoutId" type="hidden" value="<%= selLayout != null ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />
+	<aui:input id="addLayoutParentPlid" name="parentPlid" type="hidden" value="<%= (selLayout != null) ? selLayout.getPlid() : LayoutConstants.DEFAULT_PLID %>" />
+	<aui:input id="addLayoutParentLayoutId" name="parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />
 	<aui:input id="addLayoutType" name="type" type="hidden" value="portlet" />
 	<aui:input id="addLayoutPrototypeId" name="layoutPrototypeId" type="hidden" value="" />
 	<aui:input id="addLayoutExplicitCreation" name="explicitCreation" type="hidden" value="<%= true %>" />
@@ -90,12 +90,11 @@ else {
 
 									<%
 									String layoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
+									String layoutTemplateIdPrefix = "addLayout";
 
 									Theme selTheme = layout.getTheme();
 
 									List<LayoutTemplate> layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(selTheme.getThemeId());
-
-									String prefix = "addLayout";
 									%>
 
 									<%@ include file="/html/portlet/layouts_admin/layout/layout_templates_list.jspf" %>
