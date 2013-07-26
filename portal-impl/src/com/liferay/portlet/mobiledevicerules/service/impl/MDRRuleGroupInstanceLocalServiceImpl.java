@@ -96,7 +96,7 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 
 	@Override
 	public void deleteGroupRuleGroupInstances(long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<MDRRuleGroupInstance> ruleGroupInstances =
 			mdrRuleGroupInstancePersistence.findByGroupId(groupId);
@@ -109,7 +109,7 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 
 	@Override
 	public void deleteRuleGroupInstance(long ruleGroupInstanceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		MDRRuleGroupInstance ruleGroupInstance =
 			mdrRuleGroupInstancePersistence.fetchByPrimaryKey(
@@ -138,7 +138,7 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 
 	@Override
 	public void deleteRuleGroupInstances(long ruleGroupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<MDRRuleGroupInstance> ruleGroupInstances =
 			mdrRuleGroupInstancePersistence.findByRuleGroupId(ruleGroupId);
