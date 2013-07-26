@@ -310,8 +310,7 @@ public interface MBBanLocalService extends BaseLocalService,
 
 	public void deleteBan(long banUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteBan(com.liferay.portlet.messageboards.model.MBBan ban)
 		throws com.liferay.portal.kernel.exception.SystemException;

@@ -372,8 +372,7 @@ public class MDRRuleLocalServiceUtil {
 	}
 
 	public static void deleteRule(long ruleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRule(ruleId);
 	}
 
@@ -384,8 +383,7 @@ public class MDRRuleLocalServiceUtil {
 	}
 
 	public static void deleteRules(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRules(ruleGroupId);
 	}
 

@@ -389,8 +389,7 @@ public class MDRRuleLocalServiceWrapper implements MDRRuleLocalService,
 
 	@Override
 	public void deleteRule(long ruleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_mdrRuleLocalService.deleteRule(ruleId);
 	}
 
@@ -403,8 +402,7 @@ public class MDRRuleLocalServiceWrapper implements MDRRuleLocalService,
 
 	@Override
 	public void deleteRules(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_mdrRuleLocalService.deleteRules(ruleGroupId);
 	}
 

@@ -349,8 +349,7 @@ public class MBBanLocalServiceUtil {
 
 	public static void deleteBan(long banUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteBan(banUserId, serviceContext);
 	}
 
