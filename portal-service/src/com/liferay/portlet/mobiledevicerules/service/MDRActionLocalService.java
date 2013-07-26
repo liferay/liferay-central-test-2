@@ -324,8 +324,7 @@ public interface MDRActionLocalService extends BaseLocalService,
 
 	public void deleteAction(
 		com.liferay.portlet.mobiledevicerules.model.MDRAction action)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteActions(long ruleGroupInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException,

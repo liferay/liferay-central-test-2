@@ -336,8 +336,7 @@ public interface MDRRuleLocalService extends BaseLocalService,
 
 	public void deleteRule(
 		com.liferay.portlet.mobiledevicerules.model.MDRRule rule)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRules(long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
