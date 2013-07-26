@@ -199,7 +199,7 @@ public interface PortletDataHandler {
 	public PortletPreferences processImportPortletPreferences(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
-		throws Exception;
+		throws PortletDataException;
 
 	public void setPortletId(String portletId);
 

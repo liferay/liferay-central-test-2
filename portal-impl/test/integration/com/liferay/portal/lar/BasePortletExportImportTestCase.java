@@ -153,8 +153,6 @@ public class BasePortletExportImportTestCase extends BaseExportImportTestCase {
 			Map<String, String[]> preferenceMap)
 		throws Exception {
 
-		// Export site LAR
-
 		String portletId = LayoutTestUtil.addPortletToLayout(
 			TestPropsValues.getUserId(), this.layout, getPortletId(),
 			"column-1", preferenceMap);
@@ -201,15 +199,17 @@ public class BasePortletExportImportTestCase extends BaseExportImportTestCase {
 			PortletDisplayTemplate.DISPLAY_STYLE_PREFIX + ddmTemplate.getUuid();
 
 		preferenceMap.put("displayStyle", new String[] {displayStyle});
+
 		preferenceMap.put(
 			"displayStyleGroupId",
 			new String[] {String.valueOf(ddmTemplate.getGroupId())});
-		preferenceMap.put("lfrScopeType", new String[] {scopeType});
 
 		if (scopeType.equals("layout")) {
 			preferenceMap.put(
 				"lfrScopeLayoutUuid", new String[] {this.layout.getUuid()});
 		}
+
+		preferenceMap.put("lfrScopeType", new String[] {scopeType});
 
 		PortletPreferences portletPreferences = getImportedPortletPreferences(
 			preferenceMap);

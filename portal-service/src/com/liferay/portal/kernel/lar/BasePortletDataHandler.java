@@ -418,74 +418,77 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	public PortletPreferences processImportPortletPreferences(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
-		throws Exception {
-
-		String displayStyle = getDisplayTemplate(
-			portletDataContext, portletId, portletPreferences);
-
-		if (Validator.isNotNull(displayStyle) &&
-			displayStyle.startsWith(
-				PortletDisplayTemplate.DISPLAY_STYLE_PREFIX)) {
-
-			DDMTemplate ddmTemplate = null;
-
-			long displayStyleGroupId = getDisplayTemplateGroupId(
-				portletDataContext, portletId, portletPreferences);
-
-			if (displayStyleGroupId == portletDataContext.getCompanyGroupId()) {
-				ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
-					portletDataContext.getCompanyGroupId(), displayStyle);
-			}
-			else if (displayStyleGroupId ==
-						portletDataContext.getSourceGroupId()) {
-
-				ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
-					portletDataContext.getScopeGroupId(), displayStyle);
-			}
-			else {
-				ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
-					displayStyleGroupId, displayStyle);
-			}
-
-			long importedDisplayStyleGroupId =
-				portletDataContext.getScopeGroupId();
-
-			if (ddmTemplate == null) {
-				String ddmTemplateUuid =
-					PortletDisplayTemplateUtil.getDDMTemplateUuid(displayStyle);
-
-				Element ddmTemplateElement =
-					portletDataContext.getImportDataElement(
-						DDMTemplate.class.getSimpleName(), "uuid",
-						ddmTemplateUuid);
-
-				String ddmTemplatePath = ddmTemplateElement.attributeValue(
-					"path");
-
-				ddmTemplate =
-					(DDMTemplate)portletDataContext.getZipEntryAsObject(
-						ddmTemplatePath);
-
-				if (ddmTemplate != null) {
-					StagedModelDataHandlerUtil.importStagedModel(
-						portletDataContext, ddmTemplate);
-				}
-			}
-			else {
-				importedDisplayStyleGroupId = ddmTemplate.getGroupId();
-			}
-
-			portletPreferences.setValue(
-				"displayStyleGroupId",
-				String.valueOf(importedDisplayStyleGroupId));
-		}
-		else {
-			portletPreferences.setValue("displayStyle", StringPool.BLANK);
-			portletPreferences.setValue(
-				"displayStyleGroupId", StringPool.BLANK);
-		}
+		throws PortletDataException {
 
 		try {
+			String displayStyle = getDisplayTemplate(
+				portletDataContext, portletId, portletPreferences);
+
+			if (Validator.isNotNull(displayStyle) &&
+				displayStyle.startsWith(
+					PortletDisplayTemplate.DISPLAY_STYLE_PREFIX)) {
+
+				DDMTemplate ddmTemplate = null;
+
+				long displayStyleGroupId = getDisplayTemplateGroupId(
+					portletDataContext, portletId, portletPreferences);
+
+				if (displayStyleGroupId ==
+						portletDataContext.getCompanyGroupId()) {
+
+					ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
+						portletDataContext.getCompanyGroupId(), displayStyle);
+				}
+				else if (displayStyleGroupId ==
+							portletDataContext.getSourceGroupId()) {
+
+					ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
+						portletDataContext.getScopeGroupId(), displayStyle);
+				}
+				else {
+					ddmTemplate = PortletDisplayTemplateUtil.fetchDDMTemplate(
+						displayStyleGroupId, displayStyle);
+				}
+
+				long importedDisplayStyleGroupId =
+					portletDataContext.getScopeGroupId();
+
+				if (ddmTemplate == null) {
+					String ddmTemplateUuid =
+						PortletDisplayTemplateUtil.getDDMTemplateUuid(
+							displayStyle);
+
+					Element ddmTemplateElement =
+						portletDataContext.getImportDataElement(
+							DDMTemplate.class.getSimpleName(), "uuid",
+							ddmTemplateUuid);
+
+					String ddmTemplatePath = ddmTemplateElement.attributeValue(
+						"path");
+
+					ddmTemplate =
+						(DDMTemplate)portletDataContext.getZipEntryAsObject(
+							ddmTemplatePath);
+
+					if (ddmTemplate != null) {
+						StagedModelDataHandlerUtil.importStagedModel(
+							portletDataContext, ddmTemplate);
+					}
+				}
+				else {
+					importedDisplayStyleGroupId = ddmTemplate.getGroupId();
+				}
+
+				portletPreferences.setValue(
+					"displayStyleGroupId",
+					String.valueOf(importedDisplayStyleGroupId));
+			}
+			else {
+				portletPreferences.setValue("displayStyle", StringPool.BLANK);
+				portletPreferences.setValue(
+					"displayStyleGroupId", StringPool.BLANK);
+			}
+
 			return doProcessImportPortletPreferences(
 				portletDataContext, portletId, portletPreferences);
 		}
