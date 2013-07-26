@@ -3092,7 +3092,7 @@ public class JournalArticleLocalServiceImpl
 
 				if (urlTitle.length() > suffix.length()) {
 					prefix = urlTitle.substring(
-							0, urlTitle.length() - suffix.length());
+						0, urlTitle.length() - suffix.length());
 				}
 
 				urlTitle = prefix + suffix;

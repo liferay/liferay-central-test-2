@@ -100,29 +100,31 @@ public class VerifyJournal extends VerifyProcess {
 			long groupId, String articleId, String urlTitle)
 		throws Exception {
 
+		String normalizedURLTitle = FriendlyURLNormalizerUtil.normalize(
+			urlTitle, _friendlyURLPattern);
+
+		if (urlTitle.equals(normalizedURLTitle)) {
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 
 		try {
-			String normalizedURLTitle = FriendlyURLNormalizerUtil.normalize(
-				urlTitle, _friendlyURLPattern);
+			con = DataAccess.getUpgradeOptimizedConnection();
 
-			if (!urlTitle.equals(normalizedURLTitle)) {
-				normalizedURLTitle =
-					JournalArticleLocalServiceUtil.getUniqueUrlTitle(
-						groupId, articleId, normalizedURLTitle);
+			ps = con.prepareStatement(
+				"update JournalArticle set urlTitle = ? where urlTitle = ?");
 
-				con = DataAccess.getUpgradeOptimizedConnection();
+			normalizedURLTitle =
+				JournalArticleLocalServiceUtil.getUniqueUrlTitle(
+					groupId, articleId, normalizedURLTitle);
 
-				ps = con.prepareStatement(
-					"update JournalArticle set urlTitle = ? where urlTitle = " +
-						"?");
+			ps.setString(1, normalizedURLTitle);
 
-				ps.setString(1, normalizedURLTitle);
-				ps.setString(2, urlTitle);
+			ps.setString(2, urlTitle);
 
-				ps.executeUpdate();
-			}
+			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
@@ -365,7 +367,7 @@ public class VerifyJournal extends VerifyProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long groupId = Long.valueOf(rs.getString("groupId"));
+				long groupId = rs.getLong("groupId");
 				String articleId = rs.getString("articleId");
 				String urlTitle = rs.getString("urlTitle");
 
