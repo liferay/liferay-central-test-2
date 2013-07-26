@@ -374,7 +374,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 				indexAccessor = new IndexAccessorImpl(companyId);
 
 				if (isLoadIndexFromClusterEnabled()) {
-
 					indexAccessor = new SynchronizedIndexAccessorImpl(
 						indexAccessor);
 
