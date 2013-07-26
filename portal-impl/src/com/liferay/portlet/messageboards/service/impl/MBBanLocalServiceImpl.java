@@ -102,14 +102,12 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
-	public void deleteBan(MBBan ban) throws PortalException, SystemException {
+	public void deleteBan(MBBan ban) throws SystemException {
 		mbBanPersistence.remove(ban);
 	}
 
 	@Override
-	public void deleteBansByBanUserId(long banUserId)
-		throws PortalException, SystemException {
-
+	public void deleteBansByBanUserId(long banUserId) throws SystemException {
 		List<MBBan> bans = mbBanPersistence.findByBanUserId(banUserId);
 
 		for (MBBan ban : bans) {
@@ -118,9 +116,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void deleteBansByGroupId(long groupId)
-		throws PortalException, SystemException {
-
+	public void deleteBansByGroupId(long groupId) throws SystemException {
 		List<MBBan> bans = mbBanPersistence.findByGroupId(groupId);
 
 		for (MBBan ban : bans) {

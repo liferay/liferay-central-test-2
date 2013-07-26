@@ -103,9 +103,7 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
-	public void deleteAction(MDRAction action)
-		throws PortalException, SystemException {
-
+	public void deleteAction(MDRAction action) throws SystemException {
 		mdrActionPersistence.remove(action);
 
 		MDRRuleGroupInstance ruleGroupInstance =

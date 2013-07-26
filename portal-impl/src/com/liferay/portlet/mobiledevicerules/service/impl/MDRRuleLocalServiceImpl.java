@@ -126,9 +126,7 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
-	public void deleteRule(MDRRule rule)
-		throws PortalException, SystemException {
-
+	public void deleteRule(MDRRule rule) throws SystemException {
 		mdrRulePersistence.remove(rule);
 
 		MDRRuleGroup ruleGroup = mdrRuleGroupPersistence.fetchByPrimaryKey(
