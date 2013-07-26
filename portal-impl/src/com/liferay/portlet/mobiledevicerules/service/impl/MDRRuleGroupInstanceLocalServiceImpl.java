@@ -124,7 +124,7 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 		action = SystemEventConstants.ACTION_SKIP,
 		type = SystemEventConstants.TYPE_DELETE)
 	public void deleteRuleGroupInstance(MDRRuleGroupInstance ruleGroupInstance)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Rule group instance
 
