@@ -60,7 +60,7 @@ if (selContact != null) {
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
 		<c:choose>
 			<c:when test='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || !UsersAdminUtil.hasUpdateFieldPermission(selUser, "screenName") %>'>
-				<aui:input disabled="true" name="screenName" />
+				<aui:input disabled="<%= true %>" name="screenName" />
 			</c:when>
 			<c:otherwise>
 				<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="screenName" />
@@ -74,7 +74,7 @@ if (selContact != null) {
 
 	<c:choose>
 		<c:when test='<%= !UsersAdminUtil.hasUpdateFieldPermission(selUser, "emailAddress") %>'>
-			<aui:input disabled="true" name="emailAddress" />
+			<aui:input disabled="<%= true %>" name="emailAddress" />
 		</c:when>
 		<c:otherwise>
 
