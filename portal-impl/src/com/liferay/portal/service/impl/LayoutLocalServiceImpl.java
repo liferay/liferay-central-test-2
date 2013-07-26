@@ -670,6 +670,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layout.getGroupId(), layout.isPrivateLayout());
 		}
 
+		// System event
+
 		SystemEventHierarchyEntry systemEventHierarchyEntry =
 			SystemEventHierarchyEntryThreadLocal.peek();
 

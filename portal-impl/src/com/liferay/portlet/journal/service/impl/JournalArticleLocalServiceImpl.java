@@ -1075,7 +1075,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.remove(article);
 
-		// System Event
+		// System event
 
 		if (articleResource != null) {
 			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject();
