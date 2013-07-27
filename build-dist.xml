@@ -1951,7 +1951,7 @@ plugins.includes=</echo>
 				</or>
 			</and>
 			<then>
-				<echo append="true" file="${lp.plugins.dir}/build.${user.name}.properties">${plugins.includes.plugin.name},${plugins.includes.plugin.dependent-apps},</echo>
+				<echo append="true" file="${lp.plugins.dir}/build.${user.name}.properties">${plugins.includes.plugin.dependent-apps},${plugins.includes.plugin.name},</echo>
 			</then>
 		</if>
 	</target>
