@@ -393,6 +393,10 @@ public class DataFactory {
 		return _counter;
 	}
 
+	public long getCounterNext() {
+		return _counter.get();
+	}
+
 	public String getDateLong(Date date) {
 		return String.valueOf(date.getTime());
 	}

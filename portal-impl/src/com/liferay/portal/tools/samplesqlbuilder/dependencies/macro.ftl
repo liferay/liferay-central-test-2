@@ -87,7 +87,7 @@
 					_entry = dlFileEntryModel
 				/>
 
-				<#local ddmStorageLinkId = dataFactory.counter.get()>
+				<#local ddmStorageLinkId = dataFactory.counterNext()>
 
 				<@insertDDMContent
 					_ddmStorageLinkId = ddmStorageLinkId
@@ -100,8 +100,8 @@
 					_classPK = dlFileEntryModel.fileEntryId
 					_groupId = dlFileEntryModel.groupId
 					_maxCommentCount = 0
-					_mbRootMessageId = dataFactory.counter.get()
-					_mbThreadId = dataFactory.counter.get()
+					_mbRootMessageId = dataFactory.counterNext()
+					_mbThreadId = dataFactory.counterNext()
 				/>
 
 				<@insertSocialActivity

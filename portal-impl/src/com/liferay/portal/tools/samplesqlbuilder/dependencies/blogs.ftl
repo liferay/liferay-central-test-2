@@ -12,8 +12,8 @@
 		_categoryAndTag = true
 	/>
 
-	<#assign mbThreadId = dataFactory.counter.get()>
-	<#assign mbRootMessageId = dataFactory.counter.get()>
+	<#assign mbThreadId = dataFactory.counterNext()>
+	<#assign mbRootMessageId = dataFactory.counterNext()>
 
 	<@insertMBDiscussion
 		_classNameId = dataFactory.blogsEntryClassNameId
