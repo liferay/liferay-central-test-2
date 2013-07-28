@@ -39,16 +39,16 @@ boolean inheritLocales = GetterUtil.getBoolean(typeSettingsProperties.getPropert
 LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
 LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
 
-boolean disabledLocaleSettings = false;
+boolean disabledLocaleInput = false;
 
 if (publicLayoutSet.isLayoutSetPrototypeLinkEnabled() || privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) {
-	disabledLocaleSettings = true;
+	disabledLocaleInput = true;
 }
 %>
 
-<aui:input checked="<%= inheritLocales %>" disabled="<%= disabledLocaleSettings %>" id="inheritLocales" label="use-the-default-language-options" name="TypeSettingsProperties--inheritLocales--" type="radio" value="<%= true %>" />
+<aui:input checked="<%= inheritLocales %>" disabled="<%= disabledLocaleInput %>" id="inheritLocales" label="use-the-default-language-options" name="TypeSettingsProperties--inheritLocales--" type="radio" value="<%= true %>" />
 
-<aui:input checked="<%= !inheritLocales %>" disabled="<%= disabledLocaleSettings %>" id="customLocales" label="define-a-custom-default-language-and-additional-available-languages-for-this-site" name="TypeSettingsProperties--inheritLocales--" type="radio" value="<%= false %>" />
+<aui:input checked="<%= !inheritLocales %>" disabled="<%= disabledLocaleInput %>" id="customLocales" label="define-a-custom-default-language-and-additional-available-languages-for-this-site" name="TypeSettingsProperties--inheritLocales--" type="radio" value="<%= false %>" />
 
 <aui:fieldset id="customLocalesFieldset">
 	<aui:fieldset cssClass="default-language" label="default-language">
@@ -85,7 +85,7 @@ if (publicLayoutSet.isLayoutSetPrototypeLinkEnabled() || privateLayoutSet.isLayo
 	%>
 
 	<aui:fieldset cssClass="default-language" label="default-language">
-		<aui:select disabled="<%= disabledLocaleSettings %>"  label="" name="TypeSettingsProperties--languageId--">
+		<aui:select disabled="<%= disabledLocaleInput %>"  label="" name="TypeSettingsProperties--languageId--">
 
 			<%
 			Locale siteDefaultLocale = PortalUtil.getSiteDefaultLocale(liveGroup.getGroupId());

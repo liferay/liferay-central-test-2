@@ -183,13 +183,13 @@ if ((liveGroup != null) && (liveGroup.getMembershipRestriction() == GroupConstan
 </aui:fieldset>
 
 <%
-boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
+boolean disableLayoutSetPrototypeInput = false;
 
-boolean disableLayoutSetPrototypeSelect = false;
-
-if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
-	disableLayoutSetPrototypeSelect = true;
+if ((group != null) && !LanguageUtil.isInheritLocales(group.getGroupId())) {
+	disableLayoutSetPrototypeInput = true;
 }
+
+boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
 %>
 
 <c:if test="<%= (group == null) || !group.isCompany() %>">
@@ -200,13 +200,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 					<liferay-ui:panel collapsible="<%= true %>" defaultState='<%= ((group != null) && (group.getPublicLayoutsPageCount() > 0)) ? "open" : "closed" %>' title="public-pages">
 						<c:choose>
 							<c:when test="<%= ((group == null) || ((publicLayoutSetPrototype == null) && (group.getPublicLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
-								<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+								<c:if test="<%= disableLayoutSetPrototypeInput %>">
 									<div class="alert alert-info">
 										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-modified-the-display-settings-of-this-site" />
 									</div>
 								</c:if>
 
-								<aui:select disabled="<%= disableLayoutSetPrototypeSelect %>" helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="publicLayoutSetPrototypeId">
+								<aui:select disabled="<%= disableLayoutSetPrototypeInput %>" helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="publicLayoutSetPrototypeId">
 									<aui:option label="none" selected="<%= true %>" value="" />
 
 									<%
@@ -227,13 +227,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 								<c:choose>
 									<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 										<div class="hide" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
-											<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+											<c:if test="<%= disableLayoutSetPrototypeInput %>">
 												<div class="alert alert-info">
 													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 												</div>
 											</c:if>
 
-											<aui:input disabled="<%= disableLayoutSetPrototypeSelect %>" helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+											<aui:input disabled="<%= disableLayoutSetPrototypeInput %>" helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -268,13 +268,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 
 										<c:choose>
 											<c:when test="<%= (publicLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
-												<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+												<c:if test="<%= disableLayoutSetPrototypeInput %>">
 													<div class="alert alert-info">
 														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 													</div>
 												</c:if>
 
-												<aui:input disabled="<%= disableLayoutSetPrototypeSelect %>" label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(publicLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+												<aui:input disabled="<%= disableLayoutSetPrototypeInput %>" label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(publicLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 
 												<div class='<%= publicLayoutSetPrototypeLinkEnabled ? "" : "hide" %>' id="<portlet:namespace/>publicLayoutSetPrototypeMergeAlert">
 
@@ -302,13 +302,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 					<liferay-ui:panel collapsible="<%= true %>" defaultState='<%= ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) ? "open" : "closed" %>' title="private-pages">
 						<c:choose>
 							<c:when test="<%= ((group == null) || ((privateLayoutSetPrototype == null) && (group.getPrivateLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
-								<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+								<c:if test="<%= disableLayoutSetPrototypeInput %>">
 									<div class="alert alert-info">
 										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-modified-the-display-settings-of-this-site" />
 									</div>
 								</c:if>
 
-								<aui:select disabled="<%= disableLayoutSetPrototypeSelect %>" helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="privateLayoutSetPrototypeId">
+								<aui:select disabled="<%= disableLayoutSetPrototypeInput %>" helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="privateLayoutSetPrototypeId">
 									<aui:option label="none" selected="<%= true %>" value="" />
 
 									<%
@@ -329,13 +329,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 								<c:choose>
 									<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 										<div class="hide" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
-											<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+											<c:if test="<%= disableLayoutSetPrototypeInput %>">
 												<div class="alert alert-info">
 													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 												</div>
 											</c:if>
 
-											<aui:input disabled="<%= disableLayoutSetPrototypeSelect %>" helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+											<aui:input disabled="<%= disableLayoutSetPrototypeInput %>" helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 										</div>
 									</c:when>
 									<c:otherwise>
@@ -370,13 +370,13 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 
 										<c:choose>
 											<c:when test="<%= (privateLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
-												<c:if test="<%= disableLayoutSetPrototypeSelect %>">
+												<c:if test="<%= disableLayoutSetPrototypeInput %>">
 													<div class="alert alert-info">
 														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 													</div>
 												</c:if>
 
-												<aui:input disabled="<%= disableLayoutSetPrototypeSelect %>" label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(privateLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+												<aui:input disabled="<%= disableLayoutSetPrototypeInput %>" label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(privateLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 
 												<div class='<%= privateLayoutSetPrototypeLinkEnabled ? "" : "hide" %>' id="<portlet:namespace/>privateLayoutSetPrototypeMergeAlert">
 
