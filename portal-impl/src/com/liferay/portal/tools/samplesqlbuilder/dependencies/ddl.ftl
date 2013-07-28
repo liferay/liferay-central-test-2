@@ -10,6 +10,7 @@
 			_entry = ddmStructureModel
 		/>
 	</#if>
+
 	<#assign layoutName = "dynamic_data_list_display_" + ddlRecordSetCount>
 	<#assign portletId = "169_INSTANCE_TEST" + ddlRecordSetCount>
 

@@ -250,6 +250,7 @@ public class DataFactory {
 			properties.getProperty("sample.sql.max.journal.article.size"));
 
 		initJournalArticleContent(maxJournalArticleSize);
+
 		initRoleModels();
 		initUserNames();
 		initUserModels();
@@ -536,10 +537,10 @@ public class DataFactory {
 		return _sampleUserModel;
 	}
 
-	public List<Integer> getSequence(int maxCount) {
-		List<Integer> sequence = new ArrayList<Integer>(maxCount);
+	public List<Integer> getSequence(int size) {
+		List<Integer> sequence = new ArrayList<Integer>(size);
 
-		for (int i = 1; i <= maxCount; i++) {
+		for (int i = 1; i <= size; i++) {
 			sequence.add(i);
 		}
 
