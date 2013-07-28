@@ -24,7 +24,7 @@ public interface FriendlyURLNormalizer {
 	public String normalize(String friendlyURL);
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link #normalize(String, Pattern)}
 	 */
 	public String normalize(String friendlyURL, char[] replaceChars);
 

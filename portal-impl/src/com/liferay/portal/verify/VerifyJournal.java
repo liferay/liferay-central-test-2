@@ -107,6 +107,9 @@ public class VerifyJournal extends VerifyProcess {
 			return;
 		}
 
+		normalizedURLTitle = JournalArticleLocalServiceUtil.getUniqueUrlTitle(
+			groupId, articleId, normalizedURLTitle);
+
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -116,12 +119,7 @@ public class VerifyJournal extends VerifyProcess {
 			ps = con.prepareStatement(
 				"update JournalArticle set urlTitle = ? where urlTitle = ?");
 
-			normalizedURLTitle =
-				JournalArticleLocalServiceUtil.getUniqueUrlTitle(
-					groupId, articleId, normalizedURLTitle);
-
 			ps.setString(1, normalizedURLTitle);
-
 			ps.setString(2, urlTitle);
 
 			ps.executeUpdate();

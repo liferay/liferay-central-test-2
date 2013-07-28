@@ -40,7 +40,7 @@ public class FriendlyURLNormalizerImpl implements FriendlyURLNormalizer {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0
+	 * @deprecated As of 6.2.0, replaced by {@link #normalize(String, Pattern)}
 	 */
 	@Override
 	public String normalize(String friendlyURL, char[] replaceChars) {
@@ -109,10 +109,8 @@ public class FriendlyURLNormalizerImpl implements FriendlyURLNormalizer {
 
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
-
 		friendlyURL = friendlyURL.replaceAll(
 			friendlyURLPattern.pattern(), StringPool.DASH);
-
 		friendlyURL = friendlyURL.replaceAll(
 			_friendlyURLHyphenPattern.pattern(), StringPool.DASH);
 
