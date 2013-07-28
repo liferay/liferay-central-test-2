@@ -202,7 +202,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 							<c:when test="<%= ((group == null) || ((publicLayoutSetPrototype == null) && (group.getPublicLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
 								<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 									<div class="alert alert-info">
-										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-have-modified-the-display-settings-of-this-site" />
+										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-modified-the-display-settings-of-this-site" />
 									</div>
 								</c:if>
 
@@ -229,7 +229,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 										<div class="hide" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
 											<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 												<div class="alert alert-info">
-													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-have-modified-the-display-settings-of-this-site" />
+													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 												</div>
 											</c:if>
 
@@ -270,7 +270,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 											<c:when test="<%= (publicLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
 												<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 													<div class="alert alert-info">
-														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-have-modified-the-display-settings-of-this-site" />
+														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 													</div>
 												</c:if>
 
@@ -304,7 +304,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 							<c:when test="<%= ((group == null) || ((privateLayoutSetPrototype == null) && (group.getPrivateLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
 								<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 									<div class="alert alert-info">
-										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-have-modified-the-display-settings-of-this-site" />
+										<liferay-ui:message key="you-cannot-apply-a-site-template-because-you-modified-the-display-settings-of-this-site" />
 									</div>
 								</c:if>
 
@@ -331,7 +331,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 										<div class="hide" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
 											<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 												<div class="alert alert-info">
-													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-have-modified-the-display-settings-of-this-site" />
+													<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 												</div>
 											</c:if>
 
@@ -372,7 +372,7 @@ if ((group != null) && (!LanguageUtil.isInheritLocales(group.getGroupId()))) {
 											<c:when test="<%= (privateLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
 												<c:if test="<%= disableLayoutSetPrototypeSelect %>">
 													<div class="alert alert-info">
-														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-have-modified-the-display-settings-of-this-site" />
+														<liferay-ui:message key="you-cannot-enable-the-propagation-of-changes-because-you-modified-the-display-settings-of-this-site" />
 													</div>
 												</c:if>
 
