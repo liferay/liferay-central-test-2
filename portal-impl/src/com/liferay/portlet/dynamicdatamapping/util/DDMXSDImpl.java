@@ -299,6 +299,7 @@ public class DDMXSDImpl implements DDMXSD {
 			locale);
 	}
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, String xml, Fields fields,
 			String portletNamespace, String namespace, String mode,
