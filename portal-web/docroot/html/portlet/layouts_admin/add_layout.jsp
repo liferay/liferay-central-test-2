@@ -18,10 +18,10 @@
 
 <%
 Layout selLayout = null;
-long parentPlid = LayoutConstants.DEFAULT_PLID;
-long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = false;
+long parentPlid = LayoutConstants.DEFAULT_PLID;
+long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 if (layout.isTypeControlPanel()) {
 	long selPlid = ParamUtil.getLong(liferayPortletRequest, "selPlid");
@@ -30,7 +30,6 @@ if (layout.isTypeControlPanel()) {
 		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 
 		privateLayout = selLayout.isPrivateLayout();
-
 		parentPlid = selLayout.getPlid();
 		parentLayoutId = selLayout.getLayoutId();
 	}
@@ -44,7 +43,6 @@ else {
 	selLayout = layout;
 
 	privateLayout = selLayout.isPrivateLayout();
-
 	parentPlid = layout.getParentPlid();
 	parentLayoutId = layout.getParentLayoutId();
 }
