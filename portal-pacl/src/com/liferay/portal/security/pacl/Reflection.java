@@ -19,6 +19,10 @@ import com.liferay.portal.kernel.util.JavaDetector;
 import java.lang.reflect.Method;
 
 /**
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-38327.
+ * </p>
+ *
  * @author Raymond Augé
  */
 public class Reflection extends SecurityManager {
@@ -35,11 +39,13 @@ public class Reflection extends SecurityManager {
 		return _instance._getStackIndex(oracle, ibm);
 	}
 
-	Reflection() {
+	private Reflection() {
 		Method[] methods = sun.reflect.Reflection.class.getMethods();
 
 		for (Method method : methods) {
-			if (method.getName().equals("isCallerSensitive")) {
+			String methodName = method.getName();
+
+			if (methodName.equals("isCallerSensitive")) {
 				_useOldReflection = false;
 
 				break;
@@ -47,8 +53,7 @@ public class Reflection extends SecurityManager {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	protected Class<?> _getCallerClass(int depth) {
+	private Class<?> _getCallerClass(int depth) {
 		if (_useOldReflection) {
 
 			// This operation is faster, so leave it here for legacy versions
@@ -56,18 +61,18 @@ public class Reflection extends SecurityManager {
 			return sun.reflect.Reflection.getCallerClass(depth + 2);
 		}
 
-		Class<?> stack[] = getClassContext();
+		Class<?>[] callerClasses = getClassContext();
 
 		// [0] Reflection._getCallerClass
 		// [1] Reflection.getCallerClass
 
-		return stack[depth + 1];
+		return callerClasses[depth + 1];
 	}
 
-	protected int _getStackIndex(int[] oracle, int[] ibm) {
+	private int _getStackIndex(int[] oracle, int[] ibm) {
 		if ((oracle.length != ibm.length) && (oracle.length == 0)) {
 			throw new IllegalArgumentException(
-				"both arrays must be the same length and at least length 1");
+				"Both arrays must not be empty and have the same length");
 		}
 
 		int index = 0;
@@ -102,7 +107,7 @@ public class Reflection extends SecurityManager {
 
 		// Case 3: JDK7 >= u25
 
-		if (JavaDetector.isJDK7() && (!_useOldReflection)) {
+		if (JavaDetector.isJDK7() && !_useOldReflection) {
 			if (JavaDetector.isIBM()) {
 				index = ibm[2];
 			}

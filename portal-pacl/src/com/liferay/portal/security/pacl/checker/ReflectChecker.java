@@ -20,8 +20,6 @@ import com.liferay.portal.security.pacl.Reflection;
 
 import java.security.Permission;
 
-
-
 /**
  * @author Brian Wing Shun Chan
  */

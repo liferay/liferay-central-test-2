@@ -27,8 +27,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
 /**
  * @author Raymond Augé
  * @author Brian Wing Shun Chan

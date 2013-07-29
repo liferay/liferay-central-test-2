@@ -47,8 +47,6 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
