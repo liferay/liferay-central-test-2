@@ -210,7 +210,8 @@ public class SessionMessages {
 	public static boolean contains(
 		PortletRequest portletRequest, Class<?> clazz) {
 
-		return contains(portletRequest.getPortletSession(false), clazz.getName());
+		return contains(
+			portletRequest.getPortletSession(false), clazz.getName());
 	}
 
 	public static boolean contains(PortletRequest portletRequest, String key) {
