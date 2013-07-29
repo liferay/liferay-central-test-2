@@ -1037,7 +1037,7 @@ public abstract class BaseIndexer implements Indexer {
 			searchContext.getAttribute(Field.USER_ID));
 
 		if (userId > 0) {
-			multiValueFacet.setValues(new long[]{userId});
+			multiValueFacet.setValues(new long[] {userId});
 		}
 
 		searchContext.addFacet(multiValueFacet);

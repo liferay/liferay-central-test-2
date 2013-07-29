@@ -422,12 +422,11 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			document.addKeyword("extension", dlFileEntry.getExtension());
 			document.addKeyword(
 				"fileEntryTypeId", dlFileEntry.getFileEntryTypeId());
-
-			String tmp = StringUtil.replace(
-				dlFileEntry.getMimeType(), CharPool.FORWARD_SLASH,
-				CharPool.UNDERLINE);
-
-			document.addKeyword("mimeType", tmp);
+			document.addKeyword(
+				"mimeType",
+				StringUtil.replace(
+					dlFileEntry.getMimeType(), CharPool.FORWARD_SLASH,
+					CharPool.UNDERLINE));
 			document.addKeyword("path", dlFileEntry.getTitle());
 			document.addKeyword("readCount", dlFileEntry.getReadCount());
 			document.addKeyword("size", dlFileEntry.getSize());
