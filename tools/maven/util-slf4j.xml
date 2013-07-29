@@ -11,7 +11,7 @@
 	<artifactId>util-slf4j</artifactId>
 	<name>Liferay Util SLF4J</name>
 	<version>@version@</version>
-	<description>Contains Liferay SLF4J Binding. Classes are loaded separately for each plugin.</description>
+	<description>Contains Liferay SLF4J binding. Classes are loaded separately for each plugin.</description>
 	<dependencies>
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
