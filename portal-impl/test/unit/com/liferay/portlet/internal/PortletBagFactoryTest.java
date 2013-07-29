@@ -105,16 +105,15 @@ public class PortletBagFactoryTest extends TestCase {
 		try {
 			PortletImpl portletImpl = new PortletImpl();
 
-			final Portlet concretePortlet = new MVCPortlet();
+			final MVCPortlet mvcPortlet = new MVCPortlet();
 
 			PortletBagFactory portletBagFactory = new PortletBagFactory() {
 
 				@Override
 				protected Portlet getPortletInstance(
-						com.liferay.portal.model.Portlet portlet)
-					throws InstantiationException, IllegalAccessException {
+					com.liferay.portal.model.Portlet portlet) {
 
-					return concretePortlet;
+					return mvcPortlet;
 				}
 
 			};

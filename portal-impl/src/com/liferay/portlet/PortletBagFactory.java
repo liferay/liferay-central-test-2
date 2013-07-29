@@ -398,7 +398,7 @@ public class PortletBagFactory {
 	}
 
 	protected javax.portlet.Portlet getPortletInstance(Portlet portlet)
-		throws InstantiationException, IllegalAccessException {
+		throws IllegalAccessException, InstantiationException {
 
 		Class<?> portletClass = null;
 
@@ -1035,15 +1035,15 @@ public class PortletBagFactory {
 
 	protected void validate() {
 		if (_classLoader == null) {
-			throw new IllegalStateException("classLoader must not be bull");
+			throw new IllegalStateException("Class loader is null");
 		}
 
 		if (_servletContext == null) {
-			throw new IllegalStateException("servletContext must not be bull");
+			throw new IllegalStateException("Servlet context is null");
 		}
 
 		if (_warFile == null) {
-			throw new IllegalStateException("warFile must not be bull");
+			throw new IllegalStateException("WAR file is null");
 		}
 	}
 
