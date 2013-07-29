@@ -3984,113 +3984,119 @@ public class StringUtil {
 		return String.valueOf(obj);
 	}
 
-	public static boolean wildMatch(
-		String wild, String s, char singleWild, char multipleWild, char escape,
-		boolean ignoreCase) {
+	public static boolean wildcardMatches(
+		String s, String wildcard, char singleWildcardCharacter,
+		char multipleWildcardCharacter, char escapeWildcardCharacter,
+		boolean caseSensitive) {
 
-		if (ignoreCase) {
-			wild = wild.toLowerCase();
+		if (!caseSensitive) {
 			s = s.toLowerCase();
+			wildcard = wildcard.toLowerCase();
 		}
 
-		int index = wild.indexOf(escape);
+		// Update the wildcard, single whildcard character, and multiple
+		// wildcard character so that they no longer have escaped wildcard
+		// characters
 
-		// Purify wild
+		int index = wildcard.indexOf(escapeWildcardCharacter);
 
 		if (index != -1) {
 
 			// Search for safe wildcard replacement
 
-			char newSingleWild = 0;
+			char newSingleWildcardCharacter = 0;
 
-			while (wild.indexOf(newSingleWild) != -1) {
-				newSingleWild++;
+			while (wildcard.indexOf(newSingleWildcardCharacter) != -1) {
+				newSingleWildcardCharacter++;
 			}
 
-			char newMultipleWild = (char)(newSingleWild + 1);
+			char newMultipleWildcardCharacter =
+				(char)(newSingleWildcardCharacter + 1);
 
-			while (wild.indexOf(newMultipleWild) != -1) {
-				newMultipleWild++;
+			while (wildcard.indexOf(newMultipleWildcardCharacter) != -1) {
+				newMultipleWildcardCharacter++;
 			}
 
-			// Purification
+			// Purify
 
-			StringBuilder sb = new StringBuilder(wild);
+			StringBuilder sb = new StringBuilder(wildcard);
 
 			for (int i = 0; i < sb.length(); i++) {
 				char c = sb.charAt(i);
 
-				if (c == escape) {
+				if (c == escapeWildcardCharacter) {
 					sb.deleteCharAt(i);
 				}
-				else if (c == singleWild) {
-					sb.setCharAt(i, newSingleWild);
+				else if (c == singleWildcardCharacter) {
+					sb.setCharAt(i, newSingleWildcardCharacter);
 				}
-				else if (c == multipleWild) {
-					sb.setCharAt(i, newMultipleWild);
+				else if (c == multipleWildcardCharacter) {
+					sb.setCharAt(i, newMultipleWildcardCharacter);
 				}
 			}
 
-			wild = sb.toString();
+			wildcard = sb.toString();
 
-			singleWild = newSingleWild;
-			multipleWild = newMultipleWild;
+			singleWildcardCharacter = newSingleWildcardCharacter;
+			multipleWildcardCharacter = newMultipleWildcardCharacter;
 		}
 
 		// Align head
 
 		for (index = 0; index < s.length(); index++) {
-			char w = wild.charAt(index);
+			char c = wildcard.charAt(index);
 
-			if (w == multipleWild) {
+			if (c == multipleWildcardCharacter) {
 				break;
 			}
 
-			if ((s.charAt(index) != w) && (w != singleWild)) {
+			if ((s.charAt(index) != c) && (c != singleWildcardCharacter)) {
 				return false;
 			}
 		}
 
 		// Match body
 
-		int wildIndex = index;
 		int sIndex = index;
+		int wildcardIndex = index;
 
 		int matchPoint = 0;
 		int comparePoint = 0;
 
 		while (sIndex < s.length()) {
-			char w = wild.charAt(wildIndex);
+			char c = wildcard.charAt(wildcardIndex);
 
-			if (w == multipleWild) {
-				if (++wildIndex == wild.length()) {
+			if (c == multipleWildcardCharacter) {
+				if (++wildcardIndex == wildcard.length()) {
 					return true;
 				}
 
-				matchPoint = wildIndex;
+				matchPoint = wildcardIndex;
 				comparePoint = sIndex + 1;
 			}
-			else if ((w == s.charAt(sIndex)) || (w == singleWild)) {
-				wildIndex++;
+			else if ((c == s.charAt(sIndex)) ||
+					 (c == singleWildcardCharacter)) {
+
 				sIndex++;
+				wildcardIndex++;
 			}
 			else {
-				wildIndex = matchPoint;
+				wildcardIndex = matchPoint;
 				sIndex = comparePoint++;
 			}
 		}
 
 		// Match tail
 
-		while (wildIndex < wild.length()) {
-			if (wild.charAt(wildIndex) != multipleWild) {
+		while (wildcardIndex < wildcard.length()) {
+			if (wildcard.charAt(wildcardIndex) != multipleWildcardCharacter) {
 				break;
 			}
 
-			wildIndex++;
+			wildcardIndex++;
 		}
 
-		if (wildIndex == wild.length()) {
+		if (wildcardIndex == wildcard.length()) {
 			return true;
 		}
 		else {
