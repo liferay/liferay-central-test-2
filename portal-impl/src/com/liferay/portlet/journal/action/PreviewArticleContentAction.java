@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
@@ -30,8 +29,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -79,10 +76,7 @@ public class PreviewArticleContentAction extends PortletAction {
 		JournalArticle article = JournalArticleServiceUtil.getArticle(
 			groupId, articleId, version);
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		request.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
+		portletRequest.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
 
 		JournalUtil.addRecentArticle(portletRequest, article);
 	}
