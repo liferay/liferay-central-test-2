@@ -64,21 +64,21 @@ public class SessionErrors {
 	public static void add(HttpSession session, String key) {
 		Map<String, Object> map = _getMap(session, true);
 
-        if (map == null) {
-            return;
-        }
+		if (map == null) {
+			return;
+		}
 
-        map.put(key, key);
+		map.put(key, key);
 	}
 
 	public static void add(HttpSession session, String key, Object value) {
 		Map<String, Object> map = _getMap(session, true);
 
-        if (map == null) {
-            return;
-        }
+		if (map == null) {
+			return;
+		}
 
-        map.put(key, value);
+		map.put(key, value);
 	}
 
 	public static void add(PortletRequest portletRequest, Class<?> clazz) {
@@ -114,11 +114,11 @@ public class SessionErrors {
 	public static void add(PortletSession portletSession, String key) {
 		Map<String, Object> map = _getMap(portletSession, true);
 
-        if (map == null) {
-            return;
-        }
+		if (map == null) {
+			return;
+		}
 
-         map.put(key, key);
+		map.put(key, key);
 	}
 
 	public static void add(
@@ -126,11 +126,11 @@ public class SessionErrors {
 
 		Map<String, Object> map = _getMap(portletSession, true);
 
-        if (map == null) {
-            return;
-        }
+		if (map == null) {
+			return;
+		}
 
-        map.put(key, value);
+		map.put(key, value);
 	}
 
 	public static void clear(HttpServletRequest request) {
@@ -396,9 +396,9 @@ public class SessionErrors {
 	private static Map<String, Object> _getMap(
 		HttpSession session, boolean createIfAbsent) {
 
-        if (session == null) {
-            return null;
-        }
+		if (session == null) {
+			return null;
+		}
 
 		Map<String, Object> map = null;
 
@@ -423,9 +423,9 @@ public class SessionErrors {
 	private static Map<String, Object> _getMap(
 		PortletSession portletSession, boolean createIfAbsent) {
 
-        if (portletSession == null) {
-            return null;
-        }
+		if (portletSession == null) {
+			return null;
+		}
 
 		Map<String, Object> map = null;
 
