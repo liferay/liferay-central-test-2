@@ -20,7 +20,6 @@
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
-
 long classPK = ParamUtil.getLong(request, "classPK");
 String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 %>
