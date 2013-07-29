@@ -758,9 +758,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (path.equals(_PATH_PORTAL_UPDATE_EMAIL_ADDRESS)) {
 					return _PATH_PORTAL_UPDATE_EMAIL_ADDRESS;
-				} else {
-					return _PATH_PORTAL_VERIFY_EMAIL_ADDRESS;
 				}
+
+				return _PATH_PORTAL_VERIFY_EMAIL_ADDRESS;
 			}
 
 			// Authenticated users must have a current password
