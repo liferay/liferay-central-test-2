@@ -416,12 +416,12 @@ public class EditArticleAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		String referringPortletResource = ParamUtil.getString(
 			actionRequest, "referringPortletResource");
 
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			actionRequest, portletConfig.getPortletName(),
@@ -808,7 +808,7 @@ public class EditArticleAction extends PortletAction {
 
 			String tempOldUrlTitle = article.getUrlTitle();
 
-			if (cmd.equals(Constants.UPDATE) || cmd.equals(Constants.PREVIEW)) {
+			if (cmd.equals(Constants.PREVIEW) || cmd.equals(Constants.UPDATE)) {
 				titleMap.put(defaultLocale, title);
 				descriptionMap.put(defaultLocale, description);
 

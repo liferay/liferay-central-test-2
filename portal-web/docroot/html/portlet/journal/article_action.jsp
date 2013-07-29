@@ -89,12 +89,12 @@ else {
 			</liferay-portlet:renderURL>
 
 			<%
-			String previewOnClick = "Liferay.fire('previewArticle', {title: '" + article.getTitle(locale) + "', uri: '" + previewArticleContentURL.toString() + "'});";
+			String taglibOnClick = "Liferay.fire('previewArticle', {title: '" + article.getTitle(locale) + "', uri: '" + previewArticleContentURL.toString() + "'});";
 			%>
 
 			<liferay-ui:icon
 				image="preview"
-				onClick="<%= previewOnClick %>"
+				onClick="<%= taglibOnClick %>"
 				url="javascript:;"
 			/>
 

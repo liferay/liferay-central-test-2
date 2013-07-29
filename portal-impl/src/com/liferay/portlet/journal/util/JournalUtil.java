@@ -899,23 +899,22 @@ public class JournalUtil {
 
 			return layout.getPlid();
 		}
-		else {
-			Layout layout = LayoutLocalServiceUtil.fetchFirstLayout(
-				themeDisplay.getScopeGroupId(), false,
+
+		Layout layout = LayoutLocalServiceUtil.fetchFirstLayout(
+			themeDisplay.getScopeGroupId(), false,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+		if (layout == null) {
+			layout = LayoutLocalServiceUtil.fetchFirstLayout(
+				themeDisplay.getScopeGroupId(), true,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-			if (layout == null) {
-				layout = LayoutLocalServiceUtil.fetchFirstLayout(
-					themeDisplay.getScopeGroupId(), true,
-					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-			}
-
-			if (layout != null) {
-				return layout.getPlid();
-			}
-
-			return themeDisplay.getPlid();
 		}
+
+		if (layout != null) {
+			return layout.getPlid();
+		}
+
+		return themeDisplay.getPlid();
 	}
 
 	public static Stack<JournalArticle> getRecentArticles(
