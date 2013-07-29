@@ -58,12 +58,12 @@ public class JournalFeedStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
 
-		JournalFeed journalFeed =
+		JournalFeed feed =
 			JournalFeedLocalServiceUtil.fetchJournalFeedByUuidAndGroupId(
 				uuid, groupId);
 
-		if (journalFeed != null) {
-			JournalFeedLocalServiceUtil.deleteFeed(journalFeed);
+		if (feed != null) {
+			JournalFeedLocalServiceUtil.deleteFeed(feed);
 		}
 	}
 

@@ -51,12 +51,12 @@ public class MDRActionStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws SystemException {
 
-		MDRAction mdrAction =
+		MDRAction action =
 			MDRActionLocalServiceUtil.fetchMDRActionByUuidAndGroupId(
 				uuid, groupId);
 
-		if (mdrAction != null) {
-			MDRActionLocalServiceUtil.deleteAction(mdrAction);
+		if (action != null) {
+			MDRActionLocalServiceUtil.deleteAction(action);
 		}
 	}
 

@@ -41,12 +41,12 @@ public class PollsQuestionStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
 
-		PollsQuestion pollsQuestion =
+		PollsQuestion question =
 			PollsQuestionLocalServiceUtil.fetchPollsQuestionByUuidAndGroupId(
 				uuid, groupId);
 
-		if (pollsQuestion != null) {
-			PollsQuestionLocalServiceUtil.deleteQuestion(pollsQuestion);
+		if (question != null) {
+			PollsQuestionLocalServiceUtil.deleteQuestion(question);
 		}
 	}
 

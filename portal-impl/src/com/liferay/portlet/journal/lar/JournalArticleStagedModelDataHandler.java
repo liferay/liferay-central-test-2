@@ -96,11 +96,10 @@ public class JournalArticleStagedModelDataHandler
 
 			double version = extraDataJSONObject.getDouble("version");
 
-			JournalArticle journalArticle =
-				JournalArticleLocalServiceUtil.getArticle(
-					groupId, articleResource.getArticleId(), version);
+			JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+				groupId, articleResource.getArticleId(), version);
 
-			JournalArticleLocalServiceUtil.deleteArticle(journalArticle);
+			JournalArticleLocalServiceUtil.deleteArticle(article);
 		}
 	}
 

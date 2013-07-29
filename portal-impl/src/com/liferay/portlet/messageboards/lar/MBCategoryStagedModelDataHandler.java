@@ -42,12 +42,12 @@ public class MBCategoryStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
 
-		MBCategory mbCategory =
+		MBCategory category =
 			MBCategoryLocalServiceUtil.fetchMBCategoryByUuidAndGroupId(
 				uuid, groupId);
 
-		if (mbCategory != null) {
-			MBCategoryLocalServiceUtil.deleteCategory(mbCategory);
+		if (category != null) {
+			MBCategoryLocalServiceUtil.deleteCategory(category);
 		}
 	}
 

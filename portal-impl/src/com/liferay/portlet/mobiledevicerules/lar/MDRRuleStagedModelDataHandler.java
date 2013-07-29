@@ -42,11 +42,11 @@ public class MDRRuleStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws SystemException {
 
-		MDRRule mdrRule = MDRRuleLocalServiceUtil.fetchMDRRuleByUuidAndGroupId(
+		MDRRule rule = MDRRuleLocalServiceUtil.fetchMDRRuleByUuidAndGroupId(
 			uuid, groupId);
 
-		if (mdrRule != null) {
-			MDRRuleLocalServiceUtil.deleteRule(mdrRule);
+		if (rule != null) {
+			MDRRuleLocalServiceUtil.deleteRule(rule);
 		}
 	}
 

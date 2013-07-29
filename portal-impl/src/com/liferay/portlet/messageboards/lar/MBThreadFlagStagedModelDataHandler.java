@@ -47,12 +47,12 @@ public class MBThreadFlagStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws SystemException {
 
-		MBThreadFlag mbThreadFlag =
+		MBThreadFlag threadFlag =
 			MBThreadFlagLocalServiceUtil.fetchMBThreadFlagByUuidAndGroupId(
 				uuid, groupId);
 
-		if (mbThreadFlag != null) {
-			MBThreadFlagLocalServiceUtil.deleteThreadFlag(mbThreadFlag);
+		if (threadFlag != null) {
+			MBThreadFlagLocalServiceUtil.deleteThreadFlag(threadFlag);
 		}
 	}
 

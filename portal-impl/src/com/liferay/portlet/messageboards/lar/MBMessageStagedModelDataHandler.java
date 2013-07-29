@@ -57,12 +57,12 @@ public class MBMessageStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
 
-		MBMessage mbMessage =
+		MBMessage message =
 			MBMessageLocalServiceUtil.fetchMBMessageByUuidAndGroupId(
 				uuid, groupId);
 
-		if (mbMessage != null) {
-			MBMessageLocalServiceUtil.deleteMessage(mbMessage);
+		if (message != null) {
+			MBMessageLocalServiceUtil.deleteMessage(message);
 		}
 	}
 

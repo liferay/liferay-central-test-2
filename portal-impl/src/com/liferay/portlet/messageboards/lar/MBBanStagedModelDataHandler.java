@@ -40,11 +40,11 @@ public class MBBanStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws SystemException {
 
-		MBBan mbBan = MBBanLocalServiceUtil.fetchMBBanByUuidAndGroupId(
+		MBBan ban = MBBanLocalServiceUtil.fetchMBBanByUuidAndGroupId(
 			uuid, groupId);
 
-		if (mbBan != null) {
-			MBBanLocalServiceUtil.deleteBan(mbBan);
+		if (ban != null) {
+			MBBanLocalServiceUtil.deleteBan(ban);
 		}
 	}
 

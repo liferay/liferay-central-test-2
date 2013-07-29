@@ -51,13 +51,13 @@ public class MDRRuleGroupInstanceStagedModelDataHandler
 			String uuid, long groupId, String className, String extraData)
 		throws SystemException {
 
-		MDRRuleGroupInstance mdrRuleGroupInstance =
+		MDRRuleGroupInstance ruleGroupInstance =
 			MDRRuleGroupInstanceLocalServiceUtil.
 				fetchMDRRuleGroupInstanceByUuidAndGroupId(uuid, groupId);
 
-		if (mdrRuleGroupInstance != null) {
+		if (ruleGroupInstance != null) {
 			MDRRuleGroupInstanceLocalServiceUtil.deleteRuleGroupInstance(
-				mdrRuleGroupInstance);
+				ruleGroupInstance);
 		}
 	}
 
