@@ -163,7 +163,7 @@ public class LayoutFriendlyURLStagedModelDataHandler
 			if ((duplicateLayoutFriendlyURL == null) ||
 				((existingLayoutFriendlyURL != null) &&
 				 (existingLayoutFriendlyURL.getLayoutFriendlyURLId() ==
-						duplicateLayoutFriendlyURL.getLayoutFriendlyURLId()))) {
+					duplicateLayoutFriendlyURL.getLayoutFriendlyURLId()))) {
 
 				break;
 			}

@@ -92,8 +92,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		layoutB = LayoutLocalServiceUtil.updateFriendlyURL(
 			layoutB.getPlid(), "/layoutB-de", "de");
 
-		long[] layoutIds = new long[] {
-			layoutA.getLayoutId(), layoutB.getLayoutId()};
+		long[] layoutIds = {layoutA.getLayoutId(), layoutB.getLayoutId()};
 
 		exportImportLayouts(layoutIds);
 
