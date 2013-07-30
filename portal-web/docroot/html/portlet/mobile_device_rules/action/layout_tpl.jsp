@@ -19,7 +19,7 @@
 <%
 String layoutTemplateId = GetterUtil.getString(typeSettingsProperties.getProperty("layoutTemplateId"));
 
-if (Validator.isBlank(layoutTemplateId)) {
+if (Validator.isNull(layoutTemplateId)) {
 	layoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
 }
 
