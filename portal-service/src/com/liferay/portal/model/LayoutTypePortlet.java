@@ -79,10 +79,10 @@ public interface LayoutTypePortlet extends LayoutType {
 	public List<Portlet> getAllPortlets()
 		throws PortalException, SystemException;
 
-	public List<Portlet> getAllPortlets(String columnId)
+	public List<Portlet> getAllPortlets(boolean includeSystem)
 		throws PortalException, SystemException;
 
-	public List<Portlet> getAllPortlets(boolean includeSystem)
+	public List<Portlet> getAllPortlets(String columnId)
 		throws PortalException, SystemException;
 
 	public Layout getLayoutSetPrototypeLayout();
