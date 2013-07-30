@@ -166,8 +166,8 @@ public class LayoutExporter {
 
 				PortletDataHandlerControl[] portletDataHandlerControls =
 					portletDataHandler.getExportConfigurationControls(
-						layout.getCompanyId(), layout.getGroupId(),
-						portlet, layout.getPrivateLayout());
+						layout.getCompanyId(), layout.getGroupId(), portlet,
+						layout.getPrivateLayout());
 
 				if ((portletDataHandlerControls != null) &&
 					(portletDataHandlerControls.length > 0)) {
