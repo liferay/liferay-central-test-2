@@ -94,13 +94,13 @@ public class JournalArticleServiceTest {
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"version1", "This is a test article.");
+			"Version 1", "This is a test article.");
 
 		Assert.assertTrue(article.isApproved());
 		Assert.assertEquals(1.0, article.getVersion(), 0);
 
 		article = JournalTestUtil.updateArticle(
-			article, "version2", article.getContent());
+			article, "Version 2", article.getContent());
 
 		Assert.assertTrue(article.isApproved());
 		Assert.assertEquals(1.1, article.getVersion(), 0);
@@ -126,7 +126,7 @@ public class JournalArticleServiceTest {
 			if (status == WorkflowConstants.STATUS_APPROVED) {
 				Assert.assertTrue(latestArticle.isApproved());
 				Assert.assertEquals(
-					"version1",
+					"Version 1",
 					latestArticle.getTitle(LocaleUtil.getDefault()));
 				Assert.assertEquals(1.0, latestArticle.getVersion(), 0);
 			}
@@ -135,7 +135,7 @@ public class JournalArticleServiceTest {
 
 				Assert.assertTrue(latestArticle.isExpired());
 				Assert.assertEquals(
-					"version2",
+					"Version 2",
 					latestArticle.getTitle(LocaleUtil.getDefault()));
 				Assert.assertEquals(1.1, latestArticle.getVersion(), 0);
 			}
@@ -146,7 +146,7 @@ public class JournalArticleServiceTest {
 
 				Assert.assertTrue(latestArticle.isApproved());
 				Assert.assertEquals(
-					"version2",
+					"Version 2",
 					latestArticle.getTitle(LocaleUtil.getDefault()));
 				Assert.assertEquals(1.1, latestArticle.getVersion(), 0);
 			}
