@@ -186,7 +186,7 @@ public class EditActionAction extends EditRuleAction {
 		}
 
 		for (long deleteActionId : deleteActionIds) {
-			MDRActionServiceUtil.deleteAction(curActionId);
+			MDRActionServiceUtil.deleteAction(deleteActionId);
 		}
 	}
 
