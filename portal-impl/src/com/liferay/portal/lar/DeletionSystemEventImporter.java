@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.ElementHandler;
 import com.liferay.portal.kernel.xml.ElementProcessor;
@@ -39,7 +38,8 @@ import org.xml.sax.InputSource;
  */
 public class DeletionSystemEventImporter {
 
-	public void importDeletions(final PortletDataContext portletDataContext)
+	public void importDeletionSystemEvents(
+			final PortletDataContext portletDataContext)
 		throws Exception {
 
 		String xml = portletDataContext.getZipEntryAsString(
@@ -50,25 +50,25 @@ public class DeletionSystemEventImporter {
 			return;
 		}
 
+		SAXParser saxParser = new SAXParser();
+
 		ElementHandler elementHandler = new ElementHandler(
 			new ElementProcessor() {
 
 				@Override
 				public void processElement(Element element) {
-					doImport(portletDataContext, element);
+					doImportDeletionSystemEvents(portletDataContext, element);
 				}
 
 			},
 			new String[] {"deletion-system-event"});
-
-		SAXParser saxParser = new SAXParser();
 
 		saxParser.setContentHandler(elementHandler);
 
 		saxParser.parse(new InputSource(new StringReader(xml)));
 	}
 
-	protected void doImport(
+	protected void doImportDeletionSystemEvents(
 		PortletDataContext portletDataContext, Element element) {
 
 		Set<StagedModelType> stagedModelTypes =
@@ -88,13 +88,12 @@ public class DeletionSystemEventImporter {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				StringBundler sb = new StringBundler(5);
+				StringBundler sb = new StringBundler(4);
 
 				sb.append("Unable to process deletion for ");
 				sb.append(stagedModelType);
-				sb.append(" (uuid: ");
+				sb.append(" with UUID ");
 				sb.append(element.attributeValue("uuid"));
-				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				_log.warn(sb.toString());
 			}

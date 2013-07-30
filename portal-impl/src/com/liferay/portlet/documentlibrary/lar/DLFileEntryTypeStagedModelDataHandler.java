@@ -121,15 +121,14 @@ public class DLFileEntryTypeStagedModelDataHandler
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
 
-		int i = 0;
-
-		for (Element ddmStructureReferenceElement :
-				ddmStructureReferenceElements) {
+		for (int i = 0; i < ddmStructureReferenceElements.size(); i++) {
+			Element ddmStructureReferenceElement =
+				ddmStructureReferenceElements.get(i);
 
 			long ddmStructureId = GetterUtil.getLong(
 				ddmStructureReferenceElement.attributeValue("class-pk"));
 
-			ddmStructureIdsArray[i++] = MapUtil.getLong(
+			ddmStructureIdsArray[i] = MapUtil.getLong(
 				ddmStructureIds, ddmStructureId);
 		}
 

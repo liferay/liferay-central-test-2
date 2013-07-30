@@ -1124,6 +1124,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getReferenceDataElements(referenceElements, clazz);
 	}
 
+	@Override
 	public List<Element> getReferenceElements(
 		StagedModel parentStagedModel, Class<?> clazz) {
 

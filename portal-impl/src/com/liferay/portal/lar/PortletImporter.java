@@ -578,11 +578,14 @@ public class PortletImporter {
 
 		readAssetLinks(portletDataContext);
 
+		// Deletion system events
+
+		_deletionSystemEventImporter.importDeletionSystemEvents(
+			portletDataContext);
+
 		if (_log.isInfoEnabled()) {
 			_log.info("Importing portlet takes " + stopWatch.getTime() + " ms");
 		}
-
-		_deletionSystemEventImporter.importDeletions(portletDataContext);
 
 		zipReader.close();
 	}

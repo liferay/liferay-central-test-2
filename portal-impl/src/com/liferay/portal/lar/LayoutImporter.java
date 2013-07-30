@@ -735,10 +735,6 @@ public class LayoutImporter {
 		layoutSet = LayoutSetLocalServiceUtil.updatePageCount(
 			groupId, privateLayout);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Importing layouts takes " + stopWatch.getTime() + " ms");
-		}
-
 		// Site
 
 		GroupLocalServiceUtil.updateSite(groupId, true);
@@ -809,7 +805,14 @@ public class LayoutImporter {
 			}
 		}
 
-		_deletionSystemEventImporter.importDeletions(portletDataContext);
+		// Deletion system events
+
+		_deletionSystemEventImporter.importDeletionSystemEvents(
+			portletDataContext);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing layouts takes " + stopWatch.getTime() + " ms");
+		}
 
 		zipReader.close();
 	}
