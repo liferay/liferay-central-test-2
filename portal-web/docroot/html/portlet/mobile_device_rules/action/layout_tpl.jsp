@@ -23,6 +23,8 @@ if (Validator.isNull(layoutTemplateId)) {
 	layoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
 }
 
+String layoutTemplateIdPrefix = StringPool.BLANK;
+
 List<LayoutTemplate> layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates();
 %>
 
