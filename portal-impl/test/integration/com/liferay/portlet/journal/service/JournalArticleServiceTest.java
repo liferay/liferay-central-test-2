@@ -70,13 +70,6 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testFetchLatestArticleExpiredWichDoesNotExist()
-		throws Exception {
-
-		testFetchLatestArticle(false, WorkflowConstants.STATUS_APPROVED);
-	}
-
-	@Test
 	public void testFetchLatestArticleExpiredWithAnyStatus() throws Exception {
 		testFetchLatestArticle(true, WorkflowConstants.STATUS_ANY);
 	}
