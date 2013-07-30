@@ -31,16 +31,16 @@ public class ImportPackage implements Comparable<ImportPackage> {
 
 		_line = line;
 
-		Matcher jspMatcher = _jspImportPattern.matcher(line);
-
-		if (jspMatcher.find()) {
-			_import = jspMatcher.group(1);
-		}
-
 		Matcher javaMatcher = _javaImportPattern.matcher(line);
 
 		if (javaMatcher.find()) {
 			_import = javaMatcher.group(1);
+		}
+
+		Matcher jspMatcher = _jspImportPattern.matcher(line);
+
+		if (jspMatcher.find()) {
+			_import = jspMatcher.group(1);
 		}
 	}
 
@@ -55,10 +55,14 @@ public class ImportPackage implements Comparable<ImportPackage> {
 			return true;
 		}
 
-		if (obj instanceof ImportPackage) {
-			ImportPackage importPackage = (ImportPackage)obj;
+		if (!(obj instanceof ImportPackage)) {
+			return false;
+		}
 
-			return _import.equals(importPackage._import);
+		ImportPackage importPackage = (ImportPackage)obj;
+
+		if (Validator.equals(_import, importPackage._import)) {
+			return true;
 		}
 
 		return false;
