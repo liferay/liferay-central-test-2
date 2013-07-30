@@ -334,7 +334,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		document.addUID(
 			PORTLET_ID, article.getGroupId(), article.getArticleId());
 
-		String articleDefaultLanguageId = LocalizationUtil.getDefaultLocale(
+		String articleDefaultLanguageId = LocalizationUtil.getDefaultLanguageId(
 			article.getContent());
 
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
@@ -551,7 +551,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 	protected String[] getLanguageIds(
 		String defaultLanguageId, String content) {
 
-		String[] languageIds = LocalizationUtil.getAvailableLocales(content);
+		String[] languageIds = LocalizationUtil.getAvailableLanguageIds(
+			content);
 
 		if (languageIds.length == 0) {
 			languageIds = new String[] {defaultLanguageId};

@@ -338,7 +338,7 @@ public class JournalArticleLocalServiceImpl
 			serviceContext, "defaultLanguageId");
 
 		if (Validator.isNull(defaultLanguageId)) {
-			defaultLanguageId = LocalizationUtil.getDefaultLocale(content);
+			defaultLanguageId = LocalizationUtil.getDefaultLanguageId(content);
 		}
 
 		if (Validator.isNotNull(defaultLanguageId)) {
@@ -1951,11 +1951,11 @@ public class JournalArticleLocalServiceImpl
 			article.getResourcePrimKey(), article.getGroupId(),
 			article.getUserId(), article.getArticleId(), article.getVersion(),
 			article.getTitle(languageId), article.getUrlTitle(),
-			article.getDescription(languageId), article.getAvailableLocales(),
-			content, article.getType(), article.getStructureId(),
-			ddmTemplateKey, article.isSmallImage(), article.getSmallImageId(),
-			article.getSmallImageURL(), numberOfPages, page, paginate,
-			cacheable);
+			article.getDescription(languageId),
+			article.getAvailableLanguageIds(), content, article.getType(),
+			article.getStructureId(), ddmTemplateKey, article.isSmallImage(),
+			article.getSmallImageId(), article.getSmallImageURL(),
+			numberOfPages, page, paginate, cacheable);
 	}
 
 	/**
@@ -4604,7 +4604,7 @@ public class JournalArticleLocalServiceImpl
 			serviceContext, "defaultLanguageId");
 
 		if (Validator.isNull(defaultLanguageId)) {
-			defaultLanguageId = LocalizationUtil.getDefaultLocale(content);
+			defaultLanguageId = LocalizationUtil.getDefaultLanguageId(content);
 		}
 
 		if (Validator.isNotNull(defaultLanguageId)) {
@@ -6357,7 +6357,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		Locale articleDefaultLocale = LocaleUtil.fromLanguageId(
-			LocalizationUtil.getDefaultLocale(content));
+			LocalizationUtil.getDefaultLanguageId(content));
 
 		Locale[] availableLocales = LanguageUtil.getAvailableLocales(groupId);
 
