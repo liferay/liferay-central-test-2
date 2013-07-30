@@ -53,29 +53,29 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testFetchLatestArticleApproved() throws Exception {
+	public void testFetchLatestArticleWithStatusApproved() throws Exception {
 		testFetchLatestArticle(false, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	@Test
-	public void testFetchLatestArticleApprovedWithExpiredVersion()
+	public void testFetchLatestArticleExpiredWithStatusApproved()
 		throws Exception {
 
 		testFetchLatestArticle(true, WorkflowConstants.STATUS_APPROVED);
 	}
 
 	@Test
-	public void testFetchLatestArticleExpired() throws Exception {
+	public void testFetchLatestArticleExpiredWithStatusExpired() throws Exception {
 		testFetchLatestArticle(true, WorkflowConstants.STATUS_EXPIRED);
 	}
 
 	@Test
-	public void testFetchLatestArticleExpiredWithAnyStatus() throws Exception {
+	public void testFetchLatestArticleExpiredWithStatusAny() throws Exception {
 		testFetchLatestArticle(true, WorkflowConstants.STATUS_ANY);
 	}
 
 	@Test
-	public void testFetchLatestArticleWithAnyStatus() throws Exception {
+	public void testFetchLatestArticleWithStatusAny() throws Exception {
 		testFetchLatestArticle(false, WorkflowConstants.STATUS_ANY);
 	}
 
