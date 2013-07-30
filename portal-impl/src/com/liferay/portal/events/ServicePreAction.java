@@ -1268,7 +1268,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLUpdateManager(updateManagerURL);
 
-		// Control Panel Redirects
+		// Control Panel redirects
 
 		if (group.isControlPanel() && Validator.isNull(ppid)) {
 			if (controlPanelCategory.startsWith(
