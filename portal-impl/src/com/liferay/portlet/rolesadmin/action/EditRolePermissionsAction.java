@@ -424,8 +424,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			role.getCompanyId(), portletId);
 
-		String controlPanelCategory =
-			portlet.getControlPanelEntryCategory();
+		String controlPanelCategory = portlet.getControlPanelEntryCategory();
 
 		if (Validator.isNull(controlPanelCategory)) {
 			return;
@@ -434,9 +433,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		String selResource = null;
 		String actionId = null;
 
-		if (ArrayUtil.contains(
-				PortletCategoryKeys.ALL, controlPanelCategory)) {
-
+		if (ArrayUtil.contains(PortletCategoryKeys.ALL, controlPanelCategory)) {
 			selResource = PortletKeys.PORTAL;
 			actionId = ActionKeys.VIEW_CONTROL_PANEL;
 		}
