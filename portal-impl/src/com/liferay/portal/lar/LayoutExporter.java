@@ -143,17 +143,17 @@ public class LayoutExporter {
 		List<Portlet> portlets = new ArrayList<Portlet>();
 		Set<String> rootPortletIds = new HashSet<String>();
 
-		for (Layout curLayout : layouts) {
-			if (!curLayout.isTypePortlet()) {
+		for (Layout layout : layouts) {
+			if (!layout.isTypePortlet()) {
 				continue;
 			}
 
-			LayoutTypePortlet curLayoutTypePortlet =
-				(LayoutTypePortlet)curLayout.getLayoutType();
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
 
-			for (String portletId : curLayoutTypePortlet.getPortletIds()) {
+			for (String portletId : layoutTypePortlet.getPortletIds()) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					curLayout.getCompanyId(), portletId);
+					layout.getCompanyId(), portletId);
 
 				if ((portlet == null) ||
 					rootPortletIds.contains(portlet.getRootPortletId())) {
@@ -164,13 +164,13 @@ public class LayoutExporter {
 				PortletDataHandler portletDataHandler =
 					portlet.getPortletDataHandlerInstance();
 
-				PortletDataHandlerControl[] configurationControls =
+				PortletDataHandlerControl[] portletDataHandlerControls =
 					portletDataHandler.getExportConfigurationControls(
-						curLayout.getCompanyId(), curLayout.getGroupId(),
-						portlet, curLayout.getPrivateLayout());
+						layout.getCompanyId(), layout.getGroupId(),
+						portlet, layout.getPrivateLayout());
 
-				if ((configurationControls != null) &&
-					(configurationControls.length > 0)) {
+				if ((portletDataHandlerControls != null) &&
+					(portletDataHandlerControls.length > 0)) {
 
 					rootPortletIds.add(portlet.getRootPortletId());
 
