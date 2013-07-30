@@ -177,7 +177,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 		if (trashHandler != null) {
 			try {
-				Long classPK = (Long)stagedModel.getPrimaryKeyObj();
+				long classPK = (Long)stagedModel.getPrimaryKeyObj();
 
 				if (trashHandler.isInTrash(classPK) ||
 					trashHandler.isInTrashContainer(classPK)) {
@@ -188,7 +188,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to check trashed status for " +
+						"Unable to check trash status for " +
 							stagedModel.getModelClassName());
 				}
 			}
