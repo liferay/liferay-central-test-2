@@ -134,8 +134,8 @@ public class JournalArticleServiceTest {
 			}
 		}
 		else {
-			if ((status == WorkflowConstants.STATUS_APPROVED) ||
-				(status == WorkflowConstants.STATUS_ANY)) {
+			if ((status == WorkflowConstants.STATUS_ANY) ||
+				(status == WorkflowConstants.STATUS_APPROVED)) {
 
 				Assert.assertTrue(latestArticle.isApproved());
 				Assert.assertEquals(
