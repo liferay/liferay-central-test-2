@@ -67,7 +67,7 @@ public class JournalArticleServiceTest {
 	@Test
 	public void testFetchLatestArticleExpiredWithStatusExpired()
 		throws Exception {
-		
+
 		testFetchLatestArticle(true, WorkflowConstants.STATUS_EXPIRED);
 	}
 
