@@ -832,17 +832,21 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		SearchContext searchContext = new SearchContext();
 
-		if ((endDate > 0) && (startDate > 0)) {
+		searchContext.setAttribute(Field.STATUS, status);
+
+		if (endDate > 0) {
 			searchContext.setAttribute("endDate", endDate);
-			searchContext.setAttribute("startDate", startDate);
 		}
 
 		searchContext.setAttribute("paginationType", "none");
-		searchContext.setAttribute(Field.STATUS, status);
 
 		if (creatorUserId > 0) {
 			searchContext.setAttribute(
-				"participantId", String.valueOf(creatorUserId));
+				"participantUserId", String.valueOf(creatorUserId));
+		}
+
+		if (startDate > 0) {
+			searchContext.setAttribute("startDate", startDate);
 		}
 
 		Group group = groupLocalService.getGroup(groupId);

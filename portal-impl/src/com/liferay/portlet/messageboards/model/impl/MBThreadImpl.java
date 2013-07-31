@@ -140,17 +140,17 @@ public class MBThreadImpl extends MBThreadBaseImpl {
 	}
 
 	@Override
-	public long[] getParticipantsIds() throws SystemException {
+	public long[] getParticipantUserIds() throws SystemException {
+		Set<Long> participantUserIds = new HashSet<Long>();
+
 		List<MBMessage> messages = MBMessageLocalServiceUtil.getThreadMessages(
 			getThreadId(), WorkflowConstants.STATUS_ANY);
 
-		Set<Long> userIds = new HashSet<Long>();
-
 		for (MBMessage message : messages) {
-			userIds.add(message.getUserId());
+			participantUserIds.add(message.getUserId());
 		}
 
-		return ArrayUtil.toLongArray(userIds);
+		return ArrayUtil.toLongArray(participantUserIds);
 	}
 
 	@Override

@@ -106,11 +106,12 @@ public class MBThreadIndexer extends BaseIndexer {
 			contextQuery.addRangeTerm("lastPostDate", startDate, endDate);
 		}
 
-		long participantId = GetterUtil.getLong(
-			searchContext.getAttribute("participantId"));
+		long participantUserId = GetterUtil.getLong(
+			searchContext.getAttribute("participantUserId"));
 
-		if (participantId > 0) {
-			contextQuery.addRequiredTerm("participantsIds", participantId);
+		if (participantUserId > 0) {
+			contextQuery.addRequiredTerm(
+				"participantUserIds", participantUserId);
 		}
 	}
 
@@ -148,7 +149,8 @@ public class MBThreadIndexer extends BaseIndexer {
 		}
 
 		document.addKeyword("lastPostDate", thread.getLastPostDate().getTime());
-		document.addKeyword("participantsIds", thread.getParticipantsIds());
+		document.addKeyword(
+			"participantUserIds", thread.getParticipantUserIds());
 
 		if (!thread.isInTrash() && thread.isInTrashContainer()) {
 			addTrashFields(
