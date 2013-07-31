@@ -24,10 +24,6 @@ String dateString = StringPool.BLANK;
 
 Calendar cal = Calendar.getInstance();
 
-Calendar localeCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
-
 if (Validator.isNotNull(fieldParam)) {
 	DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("yyyyMMddHHmmss", timeZone);
 
@@ -60,6 +56,10 @@ if (Validator.isNotNull(fieldParam)) {
 		dateString += ",new Date(" + endCal.get(Calendar.YEAR) + "," + endCal.get(Calendar.MONTH) + "," + endCal.get(Calendar.DAY_OF_MONTH) + ",23,59,0,0)";
 	}
 }
+
+Calendar localeCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 %>
 
 <c:if test="<%= Validator.isNotNull(fieldParamFrom) && Validator.isNotNull(fieldParamTo) %>">

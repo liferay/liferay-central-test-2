@@ -298,9 +298,7 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 			},
 			calendar: {
 				dateFormat: '%Y-%m-%d',
-
 				firstDayOfWeek: <%= firstDayOfWeek %>,
-
 				locale: '<%= locale %>',
 
 				<c:if test='<%= fieldParamSelection.equals("6") && Validator.isNotNull(fieldParamFrom) %>'>
@@ -336,9 +334,7 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 			},
 			calendar: {
 				dateFormat: '%Y-%m-%d',
-
 				firstDayOfWeek: <%= firstDayOfWeek %>,
-
 				locale: '<%= locale %>',
 
 				<c:if test='<%= fieldParamSelection.equals("6") && Validator.isNotNull(fieldParamTo) %>'>
