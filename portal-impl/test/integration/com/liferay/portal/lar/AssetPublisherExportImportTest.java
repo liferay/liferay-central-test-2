@@ -168,16 +168,15 @@ public class AssetPublisherExportImportTest
 	public void testDisplayStyle() throws Exception {
 		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
 
-		String initialDisplayStyle = ServiceTestUtil.randomString();
+		String displayStyle = ServiceTestUtil.randomString();
 
-		preferenceMap.put("displayStyle", new String[] {initialDisplayStyle});
+		preferenceMap.put("displayStyle", new String[] {displayStyle});
 
 		PortletPreferences portletPreferences = getImportedPortletPreferences(
 			preferenceMap);
 
 		Assert.assertEquals(
-			initialDisplayStyle,
-			portletPreferences.getValue("displayStyle", null));
+			displayStyle, portletPreferences.getValue("displayStyle", null));
 		Assert.assertTrue(
 			"The display style should not be null",
 			Validator.isNotNull(
