@@ -826,7 +826,7 @@ public class ServicePreAction extends Action {
 			showSignOutIcon = false;
 		}
 
-		themeDisplay.setShowSignOutIcon(themeDisplay.isImpersonated());
+		themeDisplay.setShowSignOutIcon(showSignOutIcon);
 
 		themeDisplay.setShowStagingIcon(false);
 
