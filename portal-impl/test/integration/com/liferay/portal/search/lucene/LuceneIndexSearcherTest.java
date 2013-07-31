@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -58,14 +57,21 @@ public class LuceneIndexSearcherTest {
 	public void setUp() throws Exception {
 		FinderCacheUtil.clearCache();
 
-		Hits hits = getHits(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		int initialUsersCount = 0;
 
-		_initialUsersCount = hits.getLength();
+		do {
+			_randomLastName = ServiceTestUtil.randomString(10);
+
+			Hits hits = getHits(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			initialUsersCount = hits.getLength();
+		}
+		while (initialUsersCount > 0);
 
 		for (int i = 0; i < _USERS_COUNT; i ++) {
 			User user = UserTestUtil.addUser(
 				ServiceTestUtil.randomString(), false,
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+				ServiceTestUtil.randomString(), _randomLastName,
 				new long[] {TestPropsValues.getGroupId()});
 
 			_users.add(user);
@@ -133,28 +139,25 @@ public class LuceneIndexSearcherTest {
 	public void testSearchWithResults() throws Exception {
 		Hits hits = getHits(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Assert.assertEquals(
-			_initialUsersCount + _USERS_COUNT, hits.getLength());
+		Assert.assertEquals(_USERS_COUNT, hits.getLength());
 	}
 
 	@Test
 	public void testSearchWithResultsWhenTotalEqualsStart() throws Exception {
 		Hits hits = getHits(_USERS_COUNT, 2 * _USERS_COUNT);
 
-		Assert.assertEquals(
-			_initialUsersCount + _USERS_COUNT, hits.getLength());
+		Assert.assertEquals(_USERS_COUNT, hits.getLength());
 	}
 
 	@Test
 	public void testSearchWithResultsWhenTotalLessThanStart() throws Exception {
 		Hits hits = getHits(1000, 1000 + _USERS_COUNT);
 
-		Assert.assertEquals(
-			_initialUsersCount + _USERS_COUNT, hits.getLength());
+		Assert.assertEquals(_USERS_COUNT, hits.getLength());
 	}
 
 	protected Hits getHits(int start, int end) throws Exception {
-		return getHits(StringPool.BLANK, start, end);
+		return getHits(_randomLastName, start, end);
 	}
 
 	protected Hits getHits(String keyword, int start, int end)
@@ -192,7 +195,7 @@ public class LuceneIndexSearcherTest {
 
 	private static final int _USERS_COUNT = 5;
 
-	private int _initialUsersCount;
+	private String _randomLastName;
 	private List<User> _users = new ArrayList<User>();
 
 }
