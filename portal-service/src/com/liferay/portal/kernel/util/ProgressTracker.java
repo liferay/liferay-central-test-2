@@ -45,8 +45,8 @@ public class ProgressTracker implements Serializable {
 		_progress.put(status, tuple);
 	}
 
-	public void finish(HttpServletRequest httpServletRequest) {
-		finish(httpServletRequest.getSession());
+	public void finish(HttpServletRequest request) {
+		finish(request.getSession());
 	}
 
 	public void finish(HttpSession session) {
@@ -59,7 +59,7 @@ public class ProgressTracker implements Serializable {
 
 	public void finish(PortletSession portletSession) {
 		portletSession.removeAttribute(
-				PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
+			PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
 	}
 
 	public String getMessage() {
@@ -78,8 +78,8 @@ public class ProgressTracker implements Serializable {
 		return _status;
 	}
 
-	public void initialize(HttpServletRequest httpServletRequest) {
-		initialize(httpServletRequest.getSession());
+	public void initialize(HttpServletRequest request) {
+		initialize(request.getSession());
 	}
 
 	public void initialize(HttpSession session) {
@@ -107,12 +107,13 @@ public class ProgressTracker implements Serializable {
 		_percent = GetterUtil.getInteger(tuple.getObject(0));
 	}
 
-	public void start(HttpServletRequest httpServletRequest) {
-		start(httpServletRequest.getSession());
+	public void start(HttpServletRequest request) {
+		start(request.getSession());
 	}
 
 	public void start(HttpSession session) {
 		initialize(session);
+
 		setPercent(1);
 	}
 
@@ -122,6 +123,7 @@ public class ProgressTracker implements Serializable {
 
 	public void start(PortletSession portletSession) {
 		initialize(portletSession);
+
 		setPercent(1);
 	}
 
