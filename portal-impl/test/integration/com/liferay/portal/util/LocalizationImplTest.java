@@ -71,6 +71,20 @@ public class LocalizationImplTest {
 	}
 
 	@Test
+	public void testChunkedText() {
+		String translation = LocalizationUtil.getLocalization(_xml, "es_ES");
+
+		Assert.assertNotNull(translation);
+		Assert.assertEquals("foo&bar", translation);
+		Assert.assertEquals(7, translation.length());
+
+		translation = LocalizationUtil.getLocalization(_xml, "en_US");
+
+		Assert.assertNotNull(translation);
+		Assert.assertEquals(18, translation.length());
+	}
+
+	@Test
 	public void testGetAvailableLanguageIds() throws DocumentException {
 		Document document = SAXReaderUtil.read(_xml);
 
@@ -91,20 +105,6 @@ public class LocalizationImplTest {
 			"Available language IDs between the document and XML do not match",
 			Arrays.equals(
 				documentAvailableLanguageIds, xmlAvailableLanguageIds));
-	}
-
-	@Test
-	public void testChunkedText() {
-		String translation = LocalizationUtil.getLocalization(_xml, "es_ES");
-
-		Assert.assertNotNull(translation);
-		Assert.assertEquals("foo&bar", translation);
-		Assert.assertEquals(7, translation.length());
-
-		translation = LocalizationUtil.getLocalization(_xml, "en_US");
-
-		Assert.assertNotNull(translation);
-		Assert.assertEquals(18, translation.length());
 	}
 
 	@Test
