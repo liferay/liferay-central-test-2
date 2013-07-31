@@ -1419,11 +1419,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		searchContext.setGroupIds(new long[] {groupId});
-
-		Sort sort = new Sort("modified", true);
-
-		searchContext.setSorts(new Sort[] {sort});
-
+		searchContext.setSorts(new Sort(Field.MODIFIED_DATE, true));
 		searchContext.setStart(start);
 		searchContext.setUserId(userId);
 
