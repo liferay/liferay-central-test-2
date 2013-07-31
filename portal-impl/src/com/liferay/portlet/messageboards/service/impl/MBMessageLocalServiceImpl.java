@@ -534,8 +534,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		int count = mbMessagePersistence.countByThreadId(message.getThreadId());
 
 		if (count == 1) {
-			MBThread thread = mbThreadPersistence.findByPrimaryKey(
-				message.getThreadId());
 
 			// Attachments
 
@@ -570,10 +568,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), message.getCategoryId());
 			}
 
-			// Index Thread
+			// Indexer
 
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				MBThread.class);
+
+			MBThread thread = mbThreadPersistence.findByPrimaryKey(
+				message.getThreadId());
 
 			indexer.delete(thread);
 		}
@@ -681,7 +682,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					message.getCompanyId(), message.getCategoryId());
 			}
 
-			// Index Thread
+			// Indexer
 
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				MBThread.class);
@@ -2298,7 +2299,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		// Index
+		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			MBThread.class);

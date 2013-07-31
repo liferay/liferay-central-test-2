@@ -967,7 +967,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				category.getCompanyId(), category.getCategoryId());
 		}
 
-		//Indexer
+		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			MBThread.class);
@@ -1087,7 +1087,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			updateDependentStatus(thread.getGroupId(), threadId, status);
 		}
 
-		// Index
+		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			MBThread.class);
@@ -1170,7 +1170,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				socialActivityCounterLocalService.disableActivityCounters(
 					MBMessage.class.getName(), message.getMessageId());
 
-				// Index
+				// Indexer
 
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					MBMessage.class);
@@ -1204,7 +1204,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				socialActivityCounterLocalService.enableActivityCounters(
 					MBMessage.class.getName(), message.getMessageId());
 
-				// Index
+				// Indexer
 
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					MBMessage.class);

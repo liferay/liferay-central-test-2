@@ -250,8 +250,8 @@ public class MBThreadIndexer extends BaseIndexer {
 				Group group = (Group)object;
 
 				reindexThreads(
-						companyId, group.getGroupId(),
-						MBCategoryConstants.DISCUSSION_CATEGORY_ID);
+					companyId, group.getGroupId(),
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID);
 			}
 
 		};
@@ -274,8 +274,8 @@ public class MBThreadIndexer extends BaseIndexer {
 				Group group = (Group)object;
 
 				reindexThreads(
-						companyId, group.getGroupId(),
-						MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+					companyId, group.getGroupId(),
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 			}
 
 		};
