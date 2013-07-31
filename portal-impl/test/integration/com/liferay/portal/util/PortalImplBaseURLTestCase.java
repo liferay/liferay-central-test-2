@@ -88,14 +88,13 @@ public class PortalImplBaseURLTestCase {
 		return themeDisplay;
 	}
 
+	protected static final String LOCALHOST = "localhost";
+
+	protected static final String VIRTUAL_HOSTNAME = "test.com";
+
 	protected Company company;
 	protected Layout controlPanelLayout;
 	protected Group group;
-
 	protected Layout layout;
-
-	static final String LOCALHOST = "localhost";
-
-	static final String VIRTUAL_HOSTNAME = "test.com";
 
 }

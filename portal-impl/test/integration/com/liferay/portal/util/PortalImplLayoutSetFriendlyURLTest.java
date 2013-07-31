@@ -29,7 +29,7 @@ public class PortalImplLayoutSetFriendlyURLTest
 	extends PortalImplBaseURLTestCase {
 
 	@Test
-	public void testPreservesParameters() throws Exception {
+	public void testPreserveParameters() throws Exception {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, controlPanelLayout, VIRTUAL_HOSTNAME);
 

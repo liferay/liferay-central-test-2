@@ -46,7 +46,7 @@ public class PortalImplLayoutURLTest extends PortalImplBaseURLTestCase {
 	}
 
 	@Test
-	public void testNotPreservesParameters() throws Exception {
+	public void testNotPreserveParameters() throws Exception {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, layout, VIRTUAL_HOSTNAME);
 
@@ -61,7 +61,7 @@ public class PortalImplLayoutURLTest extends PortalImplBaseURLTestCase {
 	}
 
 	@Test
-	public void testPreservesParameters() throws Exception {
+	public void testPreserveParameters() throws Exception {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, layout, VIRTUAL_HOSTNAME);
 
