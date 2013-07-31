@@ -71,24 +71,26 @@ public class LocalizationImplTest {
 	}
 
 	@Test
-	public void testAvailableLanguageIds() throws DocumentException {
+	public void testGetAvailableLanguageIds() throws DocumentException {
 		Document document = SAXReaderUtil.read(_xml);
 
-		String[] languageIdsFromDoc = LocalizationUtil.getAvailableLanguageIds(
-			document);
+		String[] documentAvailableLanguageIds =
+			LocalizationUtil.getAvailableLanguageIds(document);
 
-		String[] languageIdsFromXml = LocalizationUtil.getAvailableLanguageIds(
-			_xml);
+		Assert.assertEquals(documentAvailableLanguageIds.length, 2);
 
-		Assert.assertEquals(languageIdsFromDoc.length, 2);
-		Assert.assertEquals(languageIdsFromXml.length, 2);
+		String[] xmlAvailableLanguageIds =
+			LocalizationUtil.getAvailableLanguageIds(_xml);
 
-		Arrays.sort(languageIdsFromDoc);
-		Arrays.sort(languageIdsFromXml);
+		Assert.assertEquals(xmlAvailableLanguageIds.length, 2);
+
+		Arrays.sort(documentAvailableLanguageIds);
+		Arrays.sort(xmlAvailableLanguageIds);
 
 		Assert.assertTrue(
-			"Available language ids from Document and XML don't match",
-			Arrays.equals(languageIdsFromDoc, languageIdsFromXml));
+			"Available language IDs between the document and XML do not match",
+			Arrays.equals(
+				documentAvailableLanguageIds, xmlAvailableLanguageIds));
 	}
 
 	@Test
@@ -106,7 +108,7 @@ public class LocalizationImplTest {
 	}
 
 	@Test
-	public void testDefaultLanguageId() throws DocumentException {
+	public void testGetDefaultLanguageId() throws DocumentException {
 		Document document = SAXReaderUtil.read(_xml);
 
 		String languageIdsFromDoc = LocalizationUtil.getDefaultLanguageId(
