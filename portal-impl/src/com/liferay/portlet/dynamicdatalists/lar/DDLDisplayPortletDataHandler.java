@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission;
@@ -86,13 +85,8 @@ public class DDLDisplayPortletDataHandler extends DDLPortletDataHandler {
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
-		DDLRecordSet recordSet = null;
-
-		try {
-			recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(recordSetId);
-		}
-		catch (NoSuchRecordSetException nsrse) {
-		}
+		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.fetchRecordSet(
+			recordSetId);
 
 		if (recordSet == null) {
 			return getExportDataRootElementString(rootElement);
