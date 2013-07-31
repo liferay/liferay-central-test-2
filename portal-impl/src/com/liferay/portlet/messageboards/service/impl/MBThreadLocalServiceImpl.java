@@ -852,13 +852,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		Group group = groupLocalService.getGroup(groupId);
 
 		searchContext.setCompanyId(group.getCompanyId());
-		searchContext.setEnd(end);
 
-		searchContext.setGroupIds(new long[]{groupId});
+		searchContext.setEnd(end);
+		searchContext.setGroupIds(new long[] {groupId});
 
 		Sort sort = new Sort("lastPostDate", true);
 
 		searchContext.setSorts(new Sort[] {sort});
+
 		searchContext.setStart(start);
 		searchContext.setUserId(userId);
 

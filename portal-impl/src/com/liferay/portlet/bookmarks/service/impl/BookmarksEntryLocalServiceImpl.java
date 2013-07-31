@@ -403,7 +403,6 @@ public class BookmarksEntryLocalServiceImpl
 
 		SearchContext searchContext = new SearchContext();
 
-		searchContext.setAttribute("paginationType", "none");
 		searchContext.setAttribute(Field.STATUS, status);
 
 		if (creatorUserId > 0) {
@@ -411,16 +410,19 @@ public class BookmarksEntryLocalServiceImpl
 				Field.USER_ID, String.valueOf(creatorUserId));
 		}
 
+		searchContext.setAttribute("paginationType", "none");
+
 		Group group = groupLocalService.getGroup(groupId);
 
 		searchContext.setCompanyId(group.getCompanyId());
-		searchContext.setEnd(end);
 
-		searchContext.setGroupIds(new long[]{groupId});
+		searchContext.setEnd(end);
+		searchContext.setGroupIds(new long[] {groupId});
 
 		Sort sort = new Sort("modified", true);
 
 		searchContext.setSorts(new Sort[] {sort});
+
 		searchContext.setStart(start);
 		searchContext.setUserId(userId);
 

@@ -4022,8 +4022,9 @@ public class JournalArticleLocalServiceImpl
 
 		SearchContext searchContext = new SearchContext();
 
-		searchContext.setAttribute("paginationType", "none");
 		searchContext.setAttribute(Field.STATUS, status);
+
+		searchContext.setAttribute("paginationType", "none");
 
 		if (creatorUserId > 0) {
 			searchContext.setAttribute(
@@ -4033,13 +4034,14 @@ public class JournalArticleLocalServiceImpl
 		Group group = groupLocalService.getGroup(groupId);
 
 		searchContext.setCompanyId(group.getCompanyId());
-		searchContext.setEnd(end);
 
-		searchContext.setGroupIds(new long[]{groupId});
+		searchContext.setEnd(end);
+		searchContext.setGroupIds(new long[] {groupId});
 
 		Sort sort = new Sort("modified", true);
 
 		searchContext.setSorts(new Sort[] {sort});
+
 		searchContext.setStart(start);
 		searchContext.setUserId(userId);
 
