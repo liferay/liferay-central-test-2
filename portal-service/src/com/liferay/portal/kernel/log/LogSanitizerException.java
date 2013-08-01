@@ -17,33 +17,38 @@ package com.liferay.portal.kernel.log;
 /**
  * @author Tomas Polesovsky
  */
-public class SanitizedException extends Exception {
+public class LogSanitizerException extends Exception {
 
-	public SanitizedException() {
+	public LogSanitizerException() {
 	}
 
-	public SanitizedException(String message) {
+	public LogSanitizerException(String message) {
 		super(message);
 	}
 
-	public SanitizedException(
-		String message, StackTraceElement[] stackTrace, Throwable cause) {
+	public LogSanitizerException(
+		String message, StackTraceElement[] stackTraceElements,
+		Throwable throwable) {
 
-		super(message, cause);
-		setStackTrace(stackTrace);
+		super(message, throwable);
+
+		setStackTrace(stackTraceElements);
 	}
 
-	public SanitizedException(String message, Throwable cause) {
-		super(message, cause);
+	public LogSanitizerException(String message, Throwable throwable) {
+		super(message, throwable);
 	}
 
-	public SanitizedException(Throwable cause) {
-		super(cause);
+	public LogSanitizerException(Throwable throwable) {
+		super(throwable);
 	}
 
 	@Override
 	public String toString() {
-		String className = getClass().getName();
+		Class<?> clazz = getClass();
+
+		String className = clazz.getName();
+
 		String localizedMessage = getLocalizedMessage();
 
 		if (localizedMessage != null) {

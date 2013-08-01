@@ -38,22 +38,24 @@ public class SanitizingLogWrapper extends LogWrapper {
 		}
 
 		_LOG_SANITIZER_ESCAPE_HTML_ENABLED = GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.LOG_SANITIZER_ESCAPE_HTML_ENABLED));
+			PropsUtil.get(PropsKeys.LOG_SANITIZER_ESCAPE_HTML_ENABLED));
 
 		_LOG_SANITIZER_REPLACEMENT_CHARACTER = (char)GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.LOG_SANITIZER_REPLACEMENT_CHARACTER));
 
-		int[] whitelist = GetterUtil.getIntegerValues(
+		int[] whitelistCharacters = GetterUtil.getIntegerValues(
 			PropsUtil.getArray(PropsKeys.LOG_SANITIZER_WHITELIST_CHARACTERS));
 
-		for (int codePoint : whitelist) {
-			if ((codePoint >= 0) && (codePoint < _logMessageWhitelist.length)) {
-				_logMessageWhitelist[codePoint] = 1;
+		for (int whitelistCharacter : whitelistCharacters) {
+			if ((whitelistCharacter >= 0) &&
+				(whitelistCharacter < _whitelistCharacters.length)) {
+
+				_whitelistCharacters[whitelistCharacter] = 1;
 			}
 			else {
 				System.err.println(
-					"Unable to register log whitelisted character: " +
-						codePoint);
+					"Unable to register log whitelist character " +
+						whitelistCharacter);
 			}
 		}
 	}
@@ -229,10 +231,12 @@ public class SanitizingLogWrapper extends LogWrapper {
 			return null;
 		}
 
-		return sanitize(obj.toString(), false);
+		String message = obj.toString();
+
+		return sanitize(message, message);
 	}
 
-	protected String sanitize(String message, boolean returnNull) {
+	protected String sanitize(String message, String defaultResult) {
 		if (!_LOG_SANITIZER_ENABLED) {
 			return message;
 		}
@@ -241,35 +245,33 @@ public class SanitizingLogWrapper extends LogWrapper {
 			return null;
 		}
 
+		char[] chars = message.toCharArray();
 		boolean sanitized = false;
-		char[] characters = message.toCharArray();
 
-		for (int i = 0; i < characters.length; i++) {
-			int codePoint = characters[i];
+		for (int i = 0; i < chars.length; i++) {
+			int c = chars[i];
 
-			if ((codePoint >= 0) && (codePoint < _logMessageWhitelist.length) &&
-				(_logMessageWhitelist[codePoint] == 0)) {
+			if ((c >= 0) && (c < _whitelistCharacters.length) &&
+				(_whitelistCharacters[c] == 0)) {
 
-				characters[i] = _LOG_SANITIZER_REPLACEMENT_CHARACTER;
+				chars[i] = _LOG_SANITIZER_REPLACEMENT_CHARACTER;
 				sanitized = true;
 			}
 		}
 
 		if (sanitized) {
-			String result = new String(characters).concat(_SANITIZED);
+			String sanitizedMessage = new String(chars);
+
+			sanitizedMessage = sanitizedMessage.concat(_SANITIZED);
 
 			if (_LOG_SANITIZER_ESCAPE_HTML_ENABLED) {
-				return HtmlUtil.escape(result);
+				return HtmlUtil.escape(sanitizedMessage);
 			}
 
-			return result;
+			return sanitizedMessage;
 		}
 
-		if (returnNull) {
-			return null;
-		}
-
-		return message;
+		return defaultResult;
 	}
 
 	protected Throwable sanitize(Throwable throwable) {
@@ -277,28 +279,30 @@ public class SanitizingLogWrapper extends LogWrapper {
 			return throwable;
 		}
 
-		List<Throwable> throwableStack = new ArrayList<Throwable>();
+		List<Throwable> throwables = new ArrayList<Throwable>();
 
-		Throwable causeOnStack = throwable;
+		Throwable tempThrowable = throwable;
 
-		while (causeOnStack != null) {
-			throwableStack.add(causeOnStack);
+		while (tempThrowable != null) {
+			throwables.add(tempThrowable);
 
-			causeOnStack = causeOnStack.getCause();
+			tempThrowable = tempThrowable.getCause();
 		}
 
-		Throwable cause = null;
+		Throwable resultThrowable = null;
 
 		boolean sanitized = false;
 
-		for (int i = throwableStack.size() - 1; i > - 1; i--) {
-			Throwable t = throwableStack.get(i);
-			String message = t.toString();
+		for (int i = throwables.size() - 1; i > - 1; i--) {
+			Throwable curThrowable = throwables.get(i);
 
-			String sanitizedMessage = sanitize(message, true);
+			String message = curThrowable.toString();
+
+			String sanitizedMessage = sanitize(message, null);
 
 			if (!sanitized && (sanitizedMessage == null)) {
-				cause = t;
+				resultThrowable = curThrowable;
+
 				continue;
 			}
 
@@ -308,11 +312,12 @@ public class SanitizingLogWrapper extends LogWrapper {
 
 			sanitized = true;
 
-			cause = new SanitizedException(
-				sanitizedMessage, t.getStackTrace(), cause);
+			resultThrowable = new LogSanitizerException(
+				sanitizedMessage, curThrowable.getStackTrace(),
+				resultThrowable);
 		}
 
-		return cause;
+		return resultThrowable;
 	}
 
 	private static final String _SANITIZED = " [Sanitized]";
@@ -321,8 +326,9 @@ public class SanitizingLogWrapper extends LogWrapper {
 
 	private static boolean _LOG_SANITIZER_ESCAPE_HTML_ENABLED = false;
 
-	private static char _LOG_SANITIZER_REPLACEMENT_CHARACTER = CharPool.UNDERLINE;
+	private static char _LOG_SANITIZER_REPLACEMENT_CHARACTER =
+		CharPool.UNDERLINE;
 
-	private static int[] _logMessageWhitelist = new int[128];
+	private static int[] _whitelistCharacters = new int[128];
 
 }

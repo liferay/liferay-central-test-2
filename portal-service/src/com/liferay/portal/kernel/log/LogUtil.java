@@ -55,26 +55,26 @@ public class LogUtil {
 			}
 
 			throw new IllegalArgumentException(
-				"Either throwable or message must not be null");
+				"Throwable or message must be set");
 		}
 
-		Throwable cause = throwable;
+		Throwable causeThrowable = throwable;
 
-		while (cause.getCause() != null) {
-			cause = cause.getCause();
+		while (causeThrowable.getCause() != null) {
+			causeThrowable = causeThrowable.getCause();
 		}
 
-		StackTraceElement[] steArray = cause.getStackTrace();
+		StackTraceElement[] stackTraceElements = causeThrowable.getStackTrace();
 
 		// Make the stack trace more readable by limiting the number of
 		// elements.
 
-		if (steArray.length <= STACK_TRACE_LENGTH) {
+		if (stackTraceElements.length <= STACK_TRACE_LENGTH) {
 			if (Validator.isNotNull(message)) {
-				log.error(message, cause);
+				log.error(message, causeThrowable);
 			}
 			else {
-				log.error(cause);
+				log.error(causeThrowable);
 			}
 
 			return;
@@ -82,19 +82,22 @@ public class LogUtil {
 
 		int count = 0;
 
-		List<StackTraceElement> steList = new ArrayList<StackTraceElement>();
+		List<StackTraceElement> stackTraceElementsList =
+			new ArrayList<StackTraceElement>();
 
-		for (StackTraceElement ste : steArray) {
+		for (StackTraceElement stackTraceElement : stackTraceElements) {
 
 			// Make the stack trace more readable by removing elements that
 			// refer to classes with no packages, or starts with a $, or are
 			// Spring classes, or are standard reflection classes.
 
-			String className = ste.getClassName();
+			String className = stackTraceElement.getClassName();
 
 			boolean addElement = true;
 
-			if (REMOVE_UNKNOWN_SOURCE && (ste.getLineNumber() < 0)) {
+			if (REMOVE_UNKNOWN_SOURCE &&
+				(stackTraceElement.getLineNumber() < 0)) {
+
 				addElement = false;
 			}
 
@@ -107,7 +110,7 @@ public class LogUtil {
 			}
 
 			if (addElement) {
-				steList.add(ste);
+				stackTraceElementsList.add(stackTraceElement);
 
 				count++;
 			}
@@ -117,15 +120,16 @@ public class LogUtil {
 			}
 		}
 
-		steArray = steList.toArray(new StackTraceElement[steList.size()]);
+		stackTraceElements = stackTraceElementsList.toArray(
+			new StackTraceElement[stackTraceElementsList.size()]);
 
-		cause.setStackTrace(steArray);
+		causeThrowable.setStackTrace(stackTraceElements);
 
 		if (Validator.isNotNull(message)) {
-			log.error(message, cause);
+			log.error(message, causeThrowable);
 		}
 		else {
-			log.error(cause);
+			log.error(causeThrowable);
 		}
 	}
 
