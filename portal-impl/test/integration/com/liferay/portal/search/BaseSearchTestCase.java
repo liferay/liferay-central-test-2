@@ -468,28 +468,27 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchMyEntries() throws Exception {
+		User user1 = UserTestUtil.addUser(null, 0);
+
+		long initialUser1SearchGroupEntriesCount = searchGroupEntriesCount(
+			group.getGroupId(), user1.getUserId());
+
+		User user2 = UserTestUtil.addUser(null, 0);
+
+		long initialUser2SearchGroupEntriesCount = searchGroupEntriesCount(
+			group.getGroupId(), user2.getUserId());
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel1 = getParentBaseModel(
 			group, serviceContext);
-
 		BaseModel<?> parentBaseModel2 = getParentBaseModel(
 			group, serviceContext);
-
-		User user1 = UserTestUtil.addUser(null, 0);
-
-		User user2 = UserTestUtil.addUser(null, 0);
 
 		String name = PrincipalThreadLocal.getName();
 
 		long userId = serviceContext.getUserId();
-
-		long initialSearchGroupEntriesCountUser1 = searchGroupEntriesCount(
-			group.getGroupId(), user1.getUserId());
-
-		long initialSearchGroupEntriesCountUser2 = searchGroupEntriesCount(
-			group.getGroupId(), user2.getUserId());
 
 		try {
 			PrincipalThreadLocal.setName(user1.getUserId());
@@ -499,11 +498,9 @@ public abstract class BaseSearchTestCase {
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel2, true, ServiceTestUtil.randomString(),
 				serviceContext);
@@ -515,7 +512,6 @@ public abstract class BaseSearchTestCase {
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel2, true, ServiceTestUtil.randomString(),
 				serviceContext);
@@ -527,21 +523,19 @@ public abstract class BaseSearchTestCase {
 		}
 
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser1 + 3,
+			initialUser1SearchGroupEntriesCount + 3,
 			searchGroupEntriesCount(group.getGroupId(), user1.getUserId()));
-
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser2 + 2,
+			initialUser2SearchGroupEntriesCount + 2,
 			searchGroupEntriesCount(group.getGroupId(), user2.getUserId()));
 
 		moveParentBaseModelToTrash((Long)parentBaseModel2.getPrimaryKeyObj());
 
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser1 + 2,
+			initialUser1SearchGroupEntriesCount + 2,
 			searchGroupEntriesCount(group.getGroupId(), user1.getUserId()));
-
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser2 + 1,
+			initialUser2SearchGroupEntriesCount + 1,
 			searchGroupEntriesCount(group.getGroupId(), user2.getUserId()));
 
 		TrashHandler parentTrashHandler =
@@ -552,28 +546,26 @@ public abstract class BaseSearchTestCase {
 			user1.getUserId(), (Long)parentBaseModel2.getPrimaryKeyObj());
 
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser1 + 3,
+			initialUser1SearchGroupEntriesCount + 3,
 			searchGroupEntriesCount(group.getGroupId(), user1.getUserId()));
-
 		Assert.assertEquals(
-			initialSearchGroupEntriesCountUser2 + 2,
+			initialUser2SearchGroupEntriesCount + 2,
 			searchGroupEntriesCount(group.getGroupId(), user2.getUserId()));
 	}
 
 	protected void searchRecentEntries() throws Exception {
+		long initialSearchGroupEntriesCount = searchGroupEntriesCount(
+			group.getGroupId(), 0);
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel1 = getParentBaseModel(
 			group, serviceContext);
-
 		BaseModel<?> parentBaseModel2 = getParentBaseModel(
 			group, serviceContext);
 
 		String name = PrincipalThreadLocal.getName();
-
-		long initialSearchGroupEntriesCount = searchGroupEntriesCount(
-			group.getGroupId(), 0);
 
 		try {
 			User user1 = UserTestUtil.addUser(null, 0);
@@ -583,11 +575,9 @@ public abstract class BaseSearchTestCase {
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel2, true, ServiceTestUtil.randomString(),
 				serviceContext);
@@ -599,7 +589,6 @@ public abstract class BaseSearchTestCase {
 			baseModel = addBaseModel(
 				parentBaseModel1, true, ServiceTestUtil.randomString(),
 				serviceContext);
-
 			baseModel = addBaseModel(
 				parentBaseModel2, true, ServiceTestUtil.randomString(),
 				serviceContext);
