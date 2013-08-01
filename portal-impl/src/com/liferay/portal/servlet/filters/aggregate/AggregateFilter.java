@@ -138,33 +138,31 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 					importContent = StringPool.BLANK;
 				}
 
-				String importDir = StringPool.BLANK;
+				String importDirName = StringPool.BLANK;
 
 				int slashPos = importFileName.lastIndexOf(CharPool.SLASH);
 
 				if (slashPos != -1) {
-					importDir = importFileName.substring(0, slashPos + 1);
+					importDirName = importFileName.substring(0, slashPos + 1);
 				}
 
-				aggregateContext.pushPath(importDir);
+				aggregateContext.pushPath(importDirName);
 
 				importContent = aggregateCss(aggregateContext, importContent);
 
-				if (Validator.isNotNull(importDir)) {
+				if (Validator.isNotNull(importDirName)) {
 					aggregateContext.popPath();
 				}
 
 				// LEP-7540
 
-				StringBundler baseURL = new StringBundler(3);
+				String baseURL = _BASE_URL;
 
-				baseURL.append("@portal_ctx@");
-				baseURL.append(
+				baseURL = baseURL.concat(
 					aggregateContext.getResourcePath(StringPool.BLANK));
-				baseURL.append(importDir);
+				baseURL = baseURL.concat(importDirName);
 
-				importContent = updateCssRelativeUrls(
-					importContent, baseURL.toString());
+				importContent = updateCssRelativeUrls(importContent, baseURL);
 
 				if (Validator.isNotNull(mediaQuery)) {
 					sb.append(_CSS_MEDIA_QUERY);
@@ -272,10 +270,10 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 			return null;
 		}
 
-		String bundleDir = PropsUtil.get(
+		String bundleDirName = PropsUtil.get(
 			PropsKeys.JAVASCRIPT_BUNDLE_DIR, new Filter(bundleId));
 
-		URL bundleDirURL = _servletContext.getResource(bundleDir);
+		URL bundleDirURL = _servletContext.getResource(bundleDirName);
 
 		if (bundleDirURL == null) {
 			return null;
@@ -296,7 +294,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 			for (String fileName : fileNames) {
 				URL resourceURL = _servletContext.getResource(
-					bundleDir.concat(StringPool.SLASH).concat(fileName));
+					bundleDirName.concat(StringPool.SLASH).concat(fileName));
 
 				if (resourceURL == null) {
 					continue;
@@ -333,7 +331,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 			AggregateContext aggregateContext = new ServletAggregateContext(
 				_servletContext, StringPool.SLASH);
 
-			aggregateContext.pushPath(bundleDir);
+			aggregateContext.pushPath(bundleDirName);
 
 			content = aggregateJavaScript(aggregateContext, fileNames);
 		}
@@ -369,12 +367,12 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		String minifierType = ParamUtil.getString(request, "minifierType");
 		String minifierBundleId = ParamUtil.getString(
 			request, "minifierBundleId");
-		String minifierBundleDir = ParamUtil.getString(
+		String minifierBundleDirName = ParamUtil.getString(
 			request, "minifierBundleDir");
 
 		if (Validator.isNull(minifierType) ||
 			Validator.isNotNull(minifierBundleId) ||
-			Validator.isNotNull(minifierBundleDir)) {
+			Validator.isNotNull(minifierBundleDirName)) {
 
 			return null;
 		}
@@ -599,6 +597,8 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 	private static final String _TEMP_DIR = "aggregate";
 
 	private static Log _log = LogFactoryUtil.getLog(AggregateFilter.class);
+
+	private static String _BASE_URL = "@portal_ctx@";
 
 	private static Pattern _pattern = Pattern.compile(
 		"^(\\.ie|\\.js\\.ie)([^}]*)}", Pattern.MULTILINE);
