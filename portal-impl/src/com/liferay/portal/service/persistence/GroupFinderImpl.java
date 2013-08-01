@@ -667,10 +667,6 @@ public class GroupFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
-		if (obc == null) {
-			obc = new GroupNameComparator(true);
-		}
-
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 = null;
@@ -699,6 +695,10 @@ public class GroupFinderImpl
 
 			params4.remove("usersGroups");
 			params4.put("groupsUserGroups", userId);
+		}
+
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
 		}
 
 		String sql = null;
