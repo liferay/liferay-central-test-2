@@ -14,7 +14,8 @@
 
 package com.liferay.portal.kernel.log;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -32,11 +33,12 @@ public class LogUtil {
 
 	public static void debug(Log log, Properties props) {
 		if (log.isDebugEnabled()) {
-			for (String key : props.stringPropertyNames()) {
-				String value = props.getProperty(key);
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter(
+				props.size() + 1);
 
-				log.debug(key + StringPool.EQUAL + value);
-			}
+			props.list(UnsyncPrintWriterPool.borrow(unsyncStringWriter));
+
+			log.debug(unsyncStringWriter.toString());
 		}
 	}
 
