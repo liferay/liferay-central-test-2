@@ -27,14 +27,14 @@ import java.io.IOException;
  */
 public class FileAggregateContext extends BaseAggregateContext {
 
-	public FileAggregateContext(String docroot, String resourcePath) {
+	public FileAggregateContext(String docrootPath, String resourcePath) {
 		int pos = resourcePath.lastIndexOf(StringPool.SLASH);
 
 		if (pos > -1) {
 			resourcePath = resourcePath.substring(0, pos + 1);
 		}
 
-		pushPath(docroot);
+		pushPath(docrootPath);
 		pushPath(resourcePath);
 	}
 
@@ -43,11 +43,11 @@ public class FileAggregateContext extends BaseAggregateContext {
 		try {
 			pushPath(path);
 
-			String listPath = getFullPath(StringPool.BLANK);
+			String fullPath = getFullPath(StringPool.BLANK);
 
 			popPath();
 
-			return FileUtil.read(listPath);
+			return FileUtil.read(fullPath);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -58,13 +58,13 @@ public class FileAggregateContext extends BaseAggregateContext {
 
 	@Override
 	public String getResourcePath(String path) {
-		String docroot = shiftPath();
+		String docrootPath = shiftPath();
 
-		String listPath = getFullPath(StringPool.BLANK);
+		String fullPath = getFullPath(StringPool.BLANK);
 
-		unshiftPath(docroot);
+		unshiftPath(docrootPath);
 
-		return listPath.concat(path);
+		return fullPath.concat(path);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FileAggregateContext.class);

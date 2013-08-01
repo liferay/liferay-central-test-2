@@ -64,7 +64,7 @@ public class ServletAggregateContext extends BaseAggregateContext {
 	@Override
 	public String getContent(String path) {
 		try {
-			String listPath = getFullPath(StringPool.BLANK);
+			String fullPath = getFullPath(StringPool.BLANK);
 
 			URL resourceURL = null;
 
@@ -73,7 +73,7 @@ public class ServletAggregateContext extends BaseAggregateContext {
 			}
 			else {
 				resourceURL = _servletContext.getResource(
-					listPath.concat(path));
+					fullPath.concat(path));
 			}
 
 			if (resourceURL == null) {
