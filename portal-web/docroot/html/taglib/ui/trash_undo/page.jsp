@@ -58,10 +58,10 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 							}
 							%>
 
-							<aui:a href="<%= trashURLString %>" label="the-recycle-bin" />
+							<aui:a href="<%= trashURLString %>" label="recycle-bin" />
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:message key="the-recycle-bin" />
+							<liferay-ui:message key="recycle-bin" />
 						</c:otherwise>
 					</c:choose>
 				</liferay-util:buffer>
