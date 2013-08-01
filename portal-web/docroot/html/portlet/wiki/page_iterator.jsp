@@ -385,13 +385,13 @@ for (int i = 0; i < results.size(); i++) {
 	%>
 
 	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
+		<aui:input name="tabs3" type="hidden" value="versions" />
 		<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 		<aui:input name="title" type="hidden" value="<%= wikiPage.getTitle() %>" />
 		<aui:input name="sourceVersion" type="hidden" value="<%= latestWikiPage.getVersion() %>" />
 		<aui:input name="targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
 		<aui:input name="type" type="hidden" value="html" />
-		<aui:input name="tabs3" type="hidden" value="versions" />
 
 		<aui:button-row>
 			<aui:button name="submitButton" type="submit" value="compare-versions" />
