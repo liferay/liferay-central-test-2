@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LoggingEvent;
+import org.apache.log4j.spi.ThrowableInformation;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -39,30 +40,31 @@ public class SanitizingLogWrapperTest {
 
 	@BeforeClass
 	public static void setUpClass() {
-		char[] _messageChars = new char[128];
+		char[] _chars = new char[128];
 
-		for (int i = 0; i < _messageChars.length; i++) {
-			_messageChars[i] = (char)i;
+		for (int i = 0; i < _chars.length; i++) {
+			_chars[i] = (char)i;
 		}
 
-		_message = new String(_messageChars);
+		_message = new String(_chars);
 
-		String sanitized = " [Sanitized]";
+		String sanitizedMessageSuffix = " [Sanitized]";
 
-		_expectedChars = new char[_messageChars.length + sanitized.length()];
+		_expectedMessageChars =
+			new char[_chars.length + sanitizedMessageSuffix.length()];
 
-		for (int i = 0; i < _messageChars.length; i++) {
+		for (int i = 0; i < _chars.length; i++) {
 			if ((i == 9) || ((i >= 32) && (i != 127))) {
-				_expectedChars[i] = (char)i;
+				_expectedMessageChars[i] = (char)i;
 			}
 			else {
-				_expectedChars[i] = CharPool.UNDERLINE;
+				_expectedMessageChars[i] = CharPool.UNDERLINE;
 			}
 		}
 
 		System.arraycopy(
-			sanitized.toCharArray(), 0, _expectedChars, _messageChars.length,
-			sanitized.length());
+			sanitizedMessageSuffix.toCharArray(), 0, _expectedMessageChars,
+			_chars.length, sanitizedMessageSuffix.length());
 	}
 
 	@Before
@@ -103,29 +105,30 @@ public class SanitizingLogWrapperTest {
 			_log.warn(exception);
 			_log.warn(null, exception);
 
-			List<LoggingEvent> events = _captureAppender.getLoggingEvents();
+			List<LoggingEvent> loggingEvents =
+				_captureAppender.getLoggingEvents();
 
-			Assert.assertNotNull(events);
-			Assert.assertEquals(12, events.size());
+			Assert.assertNotNull(loggingEvents);
+			Assert.assertEquals(12, loggingEvents.size());
 
-			for (LoggingEvent event : events) {
-				String stackTraceFirstLine =
-					event.getThrowableInformation().getThrowableStrRep()[0];
+			for (LoggingEvent loggingEvent : loggingEvents) {
+				ThrowableInformation throwableInformation =
+					loggingEvent.getThrowableInformation();
 
-				Assert.assertTrue(
-					stackTraceFirstLine.startsWith(exceptionPrefix));
+				String line = throwableInformation.getThrowableStrRep()[0];
+
+				Assert.assertTrue(line.startsWith(exceptionPrefix));
 
 				char[] sanitizedMessageChars =
-					new char[stackTraceFirstLine.length() -
-						exceptionPrefix.length()];
+					new char[line.length() - exceptionPrefix.length()];
 
-				stackTraceFirstLine.getChars(
-					exceptionPrefix.length(), stackTraceFirstLine.length(),
+				line.getChars(
+					exceptionPrefix.length(), line.length(),
 					sanitizedMessageChars, 0);
 
-				Assert.assertArrayEquals(_expectedChars, sanitizedMessageChars);
+				Assert.assertArrayEquals(
+					_expectedMessageChars, sanitizedMessageChars);
 			}
-
 		}
 		finally {
 			_captureAppender.close();
@@ -150,16 +153,19 @@ public class SanitizingLogWrapperTest {
 			_log.warn(_message);
 			_log.warn(_message, exception);
 
-			List<LoggingEvent> events = _captureAppender.getLoggingEvents();
+			List<LoggingEvent> loggingEvents =
+				_captureAppender.getLoggingEvents();
 
-			Assert.assertNotNull(events);
-			Assert.assertEquals(12, events.size());
+			Assert.assertNotNull(loggingEvents);
+			Assert.assertEquals(12, loggingEvents.size());
 
-			for (LoggingEvent event : events) {
-				char[] sanitizedMessageChars =
-					event.getRenderedMessage().toString().toCharArray();
+			for (LoggingEvent loggingEvent : loggingEvents) {
+				String message = loggingEvent.getRenderedMessage();
 
-				Assert.assertArrayEquals(_expectedChars, sanitizedMessageChars);
+				char[] sanitizedMessageChars = message.toCharArray();
+
+				Assert.assertArrayEquals(
+					_expectedMessageChars, sanitizedMessageChars);
 			}
 		}
 		finally {
@@ -169,7 +175,7 @@ public class SanitizingLogWrapperTest {
 
 	private static Log _log;
 
-	private static char[] _expectedChars;
+	private static char[] _expectedMessageChars;
 	private static String _message;
 
 	private CaptureAppender _captureAppender;
