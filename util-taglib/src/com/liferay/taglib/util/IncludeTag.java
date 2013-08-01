@@ -196,7 +196,7 @@ public class IncludeTag extends AttributesTagSupport {
 				WebKeys.CURRENT_URL);
 
 			String message =
-				"Current URL " + currentURL +" generates exception: " +
+				"Current URL " + currentURL + " generates exception: " +
 					e.getMessage();
 
 			LogUtil.log(_log, e, message);
