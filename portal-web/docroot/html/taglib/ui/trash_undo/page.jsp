@@ -73,11 +73,11 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 					<c:otherwise>
 
 						<%
-						String type = "selected-item";
-
 						String[] classNames = data.get("deleteEntryClassName");
 
 						String className = null;
+
+						String type = "selected-item";
 
 						if ((classNames != null) && (classNames.length > 0)) {
 							className = classNames[0];
