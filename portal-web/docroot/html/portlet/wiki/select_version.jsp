@@ -19,17 +19,8 @@
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectVersion");
-
 double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
-
-WikiNode node = wikiPage.getNode();
-
-PortletURL redirect = renderResponse.createRenderURL();
-
-redirect.setParameter("struts_action", "/wiki/view_page_history");
-redirect.setParameter("nodeId", String.valueOf(node.getNodeId()));
-redirect.setParameter("title", wikiPage.getTitle());
+String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectVersion");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
