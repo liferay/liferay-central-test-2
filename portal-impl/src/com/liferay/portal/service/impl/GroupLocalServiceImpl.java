@@ -2108,8 +2108,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId,
-			keywords, params, start, end, null);
+			companyId, getClassNameIds(), parentGroupId, keywords, params,
+			start, end, null);
 	}
 
 	/**
@@ -2154,8 +2154,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId,
-			keywords, params, start, end, obc);
+			companyId, getClassNameIds(), parentGroupId, keywords, params,
+			start, end, obc);
 	}
 
 	/**
@@ -2201,8 +2201,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId, name,
-			description, params, andOperator, start, end, null);
+			companyId, getClassNameIds(), parentGroupId, name, description,
+			params, andOperator, start, end, null);
 	}
 
 	/**
@@ -2250,8 +2250,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId, name,
-			description, params, andOperator, start, end, obc);
+			companyId, getClassNameIds(), parentGroupId, name, description,
+			params, andOperator, start, end, obc);
 	}
 
 	/**
@@ -2353,14 +2353,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		keywords = getRealName(companyId, keywords);
 
-		boolean andOperator = false;
-
 		String[] keywordsArray = null;
 
 		if (Validator.isNotNull(keywords)) {
 			keywordsArray = CustomSQLUtil.keywords(keywords);
 		}
-		else {
+
+		boolean andOperator = false;
+
+		if (Validator.isNull(keywords)) {
 			andOperator = true;
 		}
 
@@ -2479,15 +2480,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			parentGroupIdComparator = StringPool.NOT_EQUAL;
 		}
 
-		if (obc == null) {
-			obc = new GroupNameComparator(true);
-		}
+		String[] names = CustomSQLUtil.keywords(name);
 
 		String realName = getRealName(companyId, name);
 
-		String[] names = CustomSQLUtil.keywords(name);
 		String[] realNames = CustomSQLUtil.keywords(realName);
+
 		String[] descriptions = CustomSQLUtil.keywords(description);
+
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
+		}
 
 		return groupFinder.findByC_C_PG_N_D(
 			companyId, classNameIds, parentGroupId, parentGroupIdComparator,
@@ -2724,9 +2727,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, keywords, params, start, end,
-			null);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			keywords, params, start, end, null);
 	}
 
 	/**
@@ -2769,9 +2771,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, keywords, params, start, end,
-			obc);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			keywords, params, start, end, obc);
 	}
 
 	/**
@@ -2816,9 +2817,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, name, description, params,
-			andOperator, start, end, null);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			name, description, params, andOperator, start, end, null);
 	}
 
 	/**
@@ -2865,9 +2865,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, name, description, params,
-			andOperator, start, end, obc);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			name, description, params, andOperator, start, end, obc);
 	}
 
 	/**
@@ -2896,8 +2895,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return searchCount(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId,
-			keywords, params);
+			companyId, getClassNameIds(), parentGroupId, keywords, params);
 	}
 
 	/**
@@ -2930,8 +2928,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return searchCount(
-			companyId, getGroupOrganizationClassNameIds(), parentGroupId, name,
-			description, params, andOperator);
+			companyId, getClassNameIds(), parentGroupId, name, description,
+			params, andOperator);
 	}
 
 	/**
@@ -2970,14 +2968,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		keywords = getRealName(companyId, keywords);
 
-		boolean andOperator = false;
-
 		String[] keywordsArray = null;
 
 		if (Validator.isNotNull(keywords)) {
 			keywordsArray = CustomSQLUtil.keywords(keywords);
 		}
-		else {
+
+		boolean andOperator = false;
+
+		if (Validator.isNull(keywords)) {
 			andOperator = true;
 		}
 
@@ -3024,10 +3023,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			parentGroupIdComparator = StringPool.NOT_EQUAL;
 		}
 
+		String[] names = CustomSQLUtil.keywords(name);
+
 		String realName = getRealName(companyId, name);
 
-		String[] names = CustomSQLUtil.keywords(name);
 		String[] realNames = CustomSQLUtil.keywords(realName);
+
 		String[] descriptions = CustomSQLUtil.keywords(description);
 
 		return groupFinder.countByC_C_PG_N_D(
@@ -3126,8 +3127,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return searchCount(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, keywords, params);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			keywords, params);
 	}
 
 	/**
@@ -3159,9 +3160,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		return searchCount(
-			companyId, getGroupOrganizationClassNameIds(),
-			GroupConstants.ANY_PARENT_GROUP_ID, name, description, params,
-			andOperator);
+			companyId, getClassNameIds(), GroupConstants.ANY_PARENT_GROUP_ID,
+			name, description, params, andOperator);
 	}
 
 	/**
@@ -3656,6 +3656,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
+	protected long[] getClassNameIds() {
+		if (_classNameIds == null) {
+			_classNameIds = new long[] {
+				classNameLocalService.getClassNameId(Group.class),
+				classNameLocalService.getClassNameId(Organization.class)
+			};
+		}
+
+		return _classNameIds;
+	}
+
 	protected String getFriendlyURL(
 			long companyId, long groupId, long classNameId, long classPK,
 			String friendlyName, String friendlyURL)
@@ -3697,17 +3708,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	protected String getFriendlyURL(String friendlyURL) {
 		return FriendlyURLNormalizerUtil.normalize(friendlyURL);
-	}
-
-	protected long[] getGroupOrganizationClassNameIds() {
-		if (_groupOrganizationClassNameIds == null) {
-			_groupOrganizationClassNameIds = new long[] {
-				classNameLocalService.getClassNameId(Group.class),
-				classNameLocalService.getClassNameId(Organization.class)
-			};
-		}
-
-		return _groupOrganizationClassNameIds;
 	}
 
 	protected String getOrgGroupName(String name) {
@@ -4117,7 +4117,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	private static Log _log = LogFactoryUtil.getLog(
 		GroupLocalServiceImpl.class);
 
-	private volatile long[] _groupOrganizationClassNameIds;
+	private volatile long[] _classNameIds;
 	private Map<String, Group> _systemGroupsMap = new HashMap<String, Group>();
 
 }
