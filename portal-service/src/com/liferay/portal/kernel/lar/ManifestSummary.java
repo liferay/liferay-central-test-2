@@ -163,24 +163,25 @@ public class ManifestSummary implements Serializable {
 	}
 
 	public long getModelDeletionCount() {
-		long totalModelDeletionCount = -1;
+		long modelDeletionCount = -1;
 
 		for (String manifestSummaryKey : _manifestSummaryKeys) {
-			long modelDeletionCount = getModelDeletionCount(manifestSummaryKey);
+			long manifestSummaryKeyModelDeletionCount = getModelDeletionCount(
+				manifestSummaryKey);
 
-			if (modelDeletionCount == -1) {
+			if (manifestSummaryKeyModelDeletionCount == -1) {
 				continue;
 			}
 
-			if (totalModelDeletionCount == -1) {
-				totalModelDeletionCount = modelDeletionCount;
+			if (modelDeletionCount == -1) {
+				modelDeletionCount = manifestSummaryKeyModelDeletionCount;
 			}
 			else {
-				totalModelDeletionCount += modelDeletionCount;
+				modelDeletionCount += manifestSummaryKeyModelDeletionCount;
 			}
 		}
 
-		return totalModelDeletionCount;
+		return modelDeletionCount;
 	}
 
 	public long getModelDeletionCount(Class<? extends ClassedModel> clazz) {
@@ -192,25 +193,25 @@ public class ManifestSummary implements Serializable {
 			return 0;
 		}
 
-		long totalModelDeletionCount = -1;
+		long modelDeletionCount = -1;
 
 		for (StagedModelType stagedModelType : stagedModelTypes) {
-			long modelDeletionCount = getModelDeletionCount(
+			long stagedModelTypeModelDeletionCount = getModelDeletionCount(
 				stagedModelType.toString());
 
-			if (modelDeletionCount == -1) {
+			if (stagedModelTypeModelDeletionCount == -1) {
 				continue;
 			}
 
-			if (totalModelDeletionCount == -1) {
-				totalModelDeletionCount = modelDeletionCount;
+			if (modelDeletionCount == -1) {
+				modelDeletionCount = stagedModelTypeModelDeletionCount;
 			}
 			else {
-				totalModelDeletionCount += modelDeletionCount;
+				modelDeletionCount += stagedModelTypeModelDeletionCount;
 			}
 		}
 
-		return totalModelDeletionCount;
+		return modelDeletionCount;
 	}
 
 	public long getModelDeletionCount(String modelName) {
