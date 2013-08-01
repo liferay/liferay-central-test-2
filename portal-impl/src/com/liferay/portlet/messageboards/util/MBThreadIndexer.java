@@ -161,7 +161,6 @@ public class MBThreadIndexer extends BaseIndexer {
 			if (thread.isInTrashContainer()) {
 				MBCategory category = thread.getTrashContainer();
 
-				className = MBCategory.class.getName();
 				classPK = category.getCategoryId();
 			}
 
