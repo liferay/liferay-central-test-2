@@ -1431,9 +1431,9 @@ public interface PropsKeys {
 
 	public static final String LOG_SANITIZER_ESCAPE_HTML_ENABLED = "log.sanitizer.escape.html.enabled";
 
-	public static final String LOG_SANITIZER_REPLACEMENT = "log.sanitizer.replacement";
+	public static final String LOG_SANITIZER_REPLACEMENT_CHARACTER = "log.sanitizer.replacement.character";
 
-	public static final String LOG_SANITIZER_WHITELIST = "log.sanitizer.whitelist";
+	public static final String LOG_SANITIZER_WHITELIST_CHARACTERS = "log.sanitizer.whitelist.characters";
 
 	public static final String LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD = "login.create.account.allow.custom.password";
 

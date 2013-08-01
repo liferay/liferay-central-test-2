@@ -40,11 +40,11 @@ public class SanitizingLogWrapper extends LogWrapper {
 		_LOG_SANITIZER_ESCAPE_HTML_ENABLED = GetterUtil.getBoolean(
 				PropsUtil.get(PropsKeys.LOG_SANITIZER_ESCAPE_HTML_ENABLED));
 
-		_LOG_SANITIZER_REPLACEMENT = (char)GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.LOG_SANITIZER_REPLACEMENT));
+		_LOG_SANITIZER_REPLACEMENT_CHARACTER = (char)GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.LOG_SANITIZER_REPLACEMENT_CHARACTER));
 
 		int[] whitelist = GetterUtil.getIntegerValues(
-			PropsUtil.getArray(PropsKeys.LOG_SANITIZER_WHITELIST));
+			PropsUtil.getArray(PropsKeys.LOG_SANITIZER_WHITELIST_CHARACTERS));
 
 		for (int codePoint : whitelist) {
 			if ((codePoint >= 0) && (codePoint < _logMessageWhitelist.length)) {
@@ -250,7 +250,7 @@ public class SanitizingLogWrapper extends LogWrapper {
 			if ((codePoint >= 0) && (codePoint < _logMessageWhitelist.length) &&
 				(_logMessageWhitelist[codePoint] == 0)) {
 
-				characters[i] = _LOG_SANITIZER_REPLACEMENT;
+				characters[i] = _LOG_SANITIZER_REPLACEMENT_CHARACTER;
 				sanitized = true;
 			}
 		}
@@ -321,7 +321,7 @@ public class SanitizingLogWrapper extends LogWrapper {
 
 	private static boolean _LOG_SANITIZER_ESCAPE_HTML_ENABLED = false;
 
-	private static char _LOG_SANITIZER_REPLACEMENT = CharPool.UNDERLINE;
+	private static char _LOG_SANITIZER_REPLACEMENT_CHARACTER = CharPool.UNDERLINE;
 
 	private static int[] _logMessageWhitelist = new int[128];
 
