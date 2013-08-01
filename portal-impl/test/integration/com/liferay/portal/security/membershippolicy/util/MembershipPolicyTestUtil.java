@@ -78,7 +78,7 @@ public class MembershipPolicyTestUtil {
 			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, "This is a test group",
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, true,
-			true, populateServiceContext(Group.class.getName(), true));
+			true, populateServiceContext(Group.class, true));
 	}
 
 	public static Organization addOrganization() throws Exception {
@@ -88,7 +88,7 @@ public class MembershipPolicyTestUtil {
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, name,
 			OrganizationConstants.TYPE_REGULAR_ORGANIZATION, 0, 0,
 			ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
-			false, populateServiceContext(Organization.class.getName(), true));
+			false, populateServiceContext(Organization.class, true));
 	}
 
 	public static Role addRole(int type) throws Exception {
@@ -98,7 +98,7 @@ public class MembershipPolicyTestUtil {
 			null, 0, name, ServiceTestUtil.randomLocaleStringMap(),
 			ServiceTestUtil.randomLocaleStringMap(), type,
 			ServiceTestUtil.randomString(),
-			populateServiceContext(Role.class.getName(), false));
+			populateServiceContext(Role.class, false));
 	}
 
 	public static User addUser(
@@ -143,8 +143,7 @@ public class MembershipPolicyTestUtil {
 		String description = ServiceTestUtil.randomString(50);
 
 		return UserGroupServiceUtil.addUserGroup(
-			name, description, populateServiceContext(
-				UserGroup.class.getName(), false));
+			name, description, populateServiceContext(UserGroup.class, false));
 	}
 
 	public static void updateUser(
@@ -215,19 +214,19 @@ public class MembershipPolicyTestUtil {
 			announcementsDelivers, serviceContext);
 	}
 
-	protected static Map<String, Serializable> addExpandoMap(String className)
+	protected static Map<String, Serializable> addExpandoMap(Class<?> clazz)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> expandoMap =
-			new HashMap<String, Serializable>();
-
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			TestPropsValues.getCompanyId(), className);
+			TestPropsValues.getCompanyId(), clazz.getName());
 
 		expandoBridge.addAttribute("key1", false);
 		expandoBridge.addAttribute("key2", false);
 		expandoBridge.addAttribute("key3", false);
 		expandoBridge.addAttribute("key4", false);
+
+		Map<String, Serializable> expandoMap =
+			new HashMap<String, Serializable>();
 
 		expandoMap.put("key1", "value1");
 		expandoMap.put("key2", "value2");
@@ -238,7 +237,7 @@ public class MembershipPolicyTestUtil {
 	}
 
 	protected static ServiceContext populateServiceContext(
-			String className, boolean includeCategorization)
+			Class<?> clazz, boolean includeCategorization)
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
@@ -266,7 +265,7 @@ public class MembershipPolicyTestUtil {
 				new long[]{category.getCategoryId()});
 		}
 
-		serviceContext.setExpandoBridgeAttributes(addExpandoMap(className));
+		serviceContext.setExpandoBridgeAttributes(addExpandoMap(clazz));
 
 		return serviceContext;
 	}
