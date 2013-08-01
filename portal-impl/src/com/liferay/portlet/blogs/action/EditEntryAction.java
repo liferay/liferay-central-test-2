@@ -329,14 +329,15 @@ public class EditEntryAction extends PortletAction {
 			Map<String, String[]> data = new HashMap<String, String[]>();
 
 			data.put(
-				"restoreEntryIds", ArrayUtil.toStringArray(deleteEntryIds));
-			data.put(
 				"deleteEntryClassName",
 				new String[] {BlogsEntry.class.getName()});
 
 			if (Validator.isNotNull(deleteEntryTitle)) {
 				data.put("deleteEntryTitle", new String[] {deleteEntryTitle});
 			}
+
+			data.put(
+				"restoreEntryIds", ArrayUtil.toStringArray(deleteEntryIds));
 
 			SessionMessages.add(
 				actionRequest,
