@@ -378,7 +378,7 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the user's group &quot;places&quot; associated with the group
+	* Returns the user's groups &quot;sites&quot; associated with the group
 	* entity class names, including the Control Panel group if the user is
 	* permitted to view the Control Panel.
 	*
@@ -407,7 +407,7 @@ public interface GroupService extends BaseService {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups(long,
@@ -431,7 +431,7 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the guest or current user's group &quot;places&quot; associated
+	* Returns the guest or current user's groups &quot;sites&quot; associated
 	* with the group entity class names, including the Control Panel group if
 	* the user is permitted to view the Control Panel.
 	*
@@ -459,7 +459,7 @@ public interface GroupService extends BaseService {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(String[], int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups(
@@ -472,18 +472,33 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of the guest or current user's group
-	* &quot;places&quot; associated with the group entity class names,
-	* including the Control Panel group if the user is permitted to view the
-	* Control Panel.
+	* Returns the number of the guest or current user's groups
+	* &quot;sites&quot; associated with the group entity class names, including
+	* the Control Panel group if the user is permitted to view the Control
+	* Panel.
 	*
-	* @return the number of user's group &quot;places&quot;
+	* @return the number of user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroupsCount()}
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserPlacesCount()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the guest or current user's layout set group, organization
+	* groups, inherited organization groups, and site groups.
+	*
+	* @return the user's layout set group, organization groups, and
+	inherited organization groups, and site groups
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Group> getUserSites()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -500,7 +515,7 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the user's group &quot;places&quot; associated with the group
+	* Returns the user's groups &quot;sites&quot; associated with the group
 	* entity class names, including the Control Panel group if the user is
 	* permitted to view the Control Panel.
 	*
@@ -529,7 +544,7 @@ public interface GroupService extends BaseService {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], boolean, int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -547,7 +562,7 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the guest or current user's group &quot;places&quot; associated
+	* Returns the guest or current user's groups &quot;sites&quot; associated
 	* with the group entity class names, including the Control Panel group if
 	* the user is permitted to view the Control Panel.
 	*
@@ -575,7 +590,7 @@ public interface GroupService extends BaseService {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], boolean, int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -586,32 +601,17 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of the guest or current user's group
-	* &quot;places&quot; associated with the group entity class names,
-	* including the Control Panel group if the user is permitted to view the
-	* Control Panel.
+	* Returns the number of the guest or current user's groups
+	* &quot;sites&quot; associated with the group entity class names, including
+	* the Control Panel group if the user is permitted to view the Control
+	* Panel.
 	*
-	* @return the number of user's group &quot;places&quot;
+	* @return the number of user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserSitesGroupsCount()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the guest or current user's layout set group, organization
-	* groups, inherited organization groups, and site groups.
-	*
-	* @return the user's layout set group, organization groups, and
-	inherited organization groups, and site groups
-	* @throws PortalException if a portal exception occurred
-	* @throws SystemException if a system exception occurred
-	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups()}
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Group> getUserSites()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

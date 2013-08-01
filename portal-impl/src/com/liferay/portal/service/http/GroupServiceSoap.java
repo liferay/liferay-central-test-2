@@ -559,7 +559,7 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the user's group &quot;places&quot; associated with the group
+	* Returns the user's groups &quot;sites&quot; associated with the group
 	* entity class names, including the Control Panel group if the user is
 	* permitted to view the Control Panel.
 	*
@@ -588,7 +588,7 @@ public class GroupServiceSoap {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups(long,
@@ -632,7 +632,7 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the guest or current user's group &quot;places&quot; associated
+	* Returns the guest or current user's groups &quot;sites&quot; associated
 	* with the group entity class names, including the Control Panel group if
 	* the user is permitted to view the Control Panel.
 	*
@@ -660,7 +660,7 @@ public class GroupServiceSoap {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(String[], int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups(
@@ -682,12 +682,12 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the number of the guest or current user's group
-	* &quot;places&quot; associated with the group entity class names,
-	* including the Control Panel group if the user is permitted to view the
-	* Control Panel.
+	* Returns the number of the guest or current user's groups
+	* &quot;sites&quot; associated with the group entity class names, including
+	* the Control Panel group if the user is permitted to view the Control
+	* Panel.
 	*
-	* @return the number of user's group &quot;places&quot;
+	* @return the number of user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroupsCount()}
@@ -697,6 +697,30 @@ public class GroupServiceSoap {
 			int returnValue = GroupServiceUtil.getUserPlacesCount();
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* Returns the guest or current user's layout set group, organization
+	* groups, inherited organization groups, and site groups.
+	*
+	* @return the user's layout set group, organization groups, and
+	inherited organization groups, and site groups
+	* @throws PortalException if a portal exception occurred
+	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups}
+	*/
+	public static com.liferay.portal.model.GroupSoap[] getUserSites()
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserSites();
+
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -736,7 +760,7 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the user's group &quot;places&quot; associated with the group
+	* Returns the user's groups &quot;sites&quot; associated with the group
 	* entity class names, including the Control Panel group if the user is
 	* permitted to view the Control Panel.
 	*
@@ -765,7 +789,7 @@ public class GroupServiceSoap {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], boolean, int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -803,7 +827,7 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the guest or current user's group &quot;places&quot; associated
+	* Returns the guest or current user's groups &quot;sites&quot; associated
 	* with the group entity class names, including the Control Panel group if
 	* the user is permitted to view the Control Panel.
 	*
@@ -831,7 +855,7 @@ public class GroupServiceSoap {
 	<code>null</code>). For more information see {@link
 	#getUserSitesGroups(long, String[], boolean, int)}
 	* @param max the maximum number of groups to return
-	* @return the user's group &quot;places&quot;
+	* @return the user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -851,12 +875,12 @@ public class GroupServiceSoap {
 	}
 
 	/**
-	* Returns the number of the guest or current user's group
-	* &quot;places&quot; associated with the group entity class names,
-	* including the Control Panel group if the user is permitted to view the
-	* Control Panel.
+	* Returns the number of the guest or current user's groups
+	* &quot;sites&quot; associated with the group entity class names, including
+	* the Control Panel group if the user is permitted to view the Control
+	* Panel.
 	*
-	* @return the number of user's group &quot;places&quot;
+	* @return the number of user's groups &quot;sites&quot;
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
@@ -865,30 +889,6 @@ public class GroupServiceSoap {
 			int returnValue = GroupServiceUtil.getUserSitesGroupsCount();
 
 			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	/**
-	* Returns the guest or current user's layout set group, organization
-	* groups, inherited organization groups, and site groups.
-	*
-	* @return the user's layout set group, organization groups, and
-	inherited organization groups, and site groups
-	* @throws PortalException if a portal exception occurred
-	* @throws SystemException if a system exception occurred
-	* @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups()}
-	*/
-	public static com.liferay.portal.model.GroupSoap[] getUserSites()
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserSites();
-
-			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
