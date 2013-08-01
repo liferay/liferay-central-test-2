@@ -927,10 +927,6 @@ AUI.add(
 							selectedContentOptions.push(Liferay.Language.get('comments'));
 						}
 
-						if (instance._isChecked('ratingsNode')) {
-							selectedContentOptions.push(Liferay.Language.get('ratings'));
-						}
-
 						if (instance._isChecked('deletionsNode')) {
 							var deletionsNode = instance.get('deletionsNode');
 
@@ -948,6 +944,10 @@ AUI.add(
 									item.hide();
 								}
 							);
+						}
+
+						if (instance._isChecked('ratingsNode')) {
+							selectedContentOptions.push(Liferay.Language.get('ratings'));
 						}
 
 						instance._setLabels('contentOptionsLink', 'selectedContentOptions', selectedContentOptions.join(', '));
