@@ -110,6 +110,10 @@ public class InitUtil {
 			e.printStackTrace();
 		}
 
+		// Log sanitizer
+
+		SanitizingLogWrapper.init();
+
 		// Security manager
 
 		SecurityManagerUtil.init();
@@ -122,10 +126,6 @@ public class InitUtil {
 			LogFactoryUtil.setLogFactory(
 				DoPrivilegedUtil.wrap(LogFactoryUtil.getLogFactory()));
 		}
-
-		// Log Sanitizing
-
-		SanitizingLogWrapper.init();
 
 		// Cache registry
 
