@@ -41,7 +41,7 @@ public class LogFactoryUtil {
 		LogWrapper logWrapper = _logWrappers.get(name);
 
 		if (logWrapper == null) {
-			logWrapper = new SanitizingLogWrapper(_logFactory.getLog(name));
+			logWrapper = new SanitizerLogWrapper(_logFactory.getLog(name));
 
 			LogWrapper previousLogWrapper = _logWrappers.putIfAbsent(
 				name, logWrapper);

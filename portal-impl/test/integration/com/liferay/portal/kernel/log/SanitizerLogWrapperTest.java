@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
  * @author Tomas Polesovsky
  */
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class SanitizingLogWrapperTest {
+public class SanitizerLogWrapperTest {
 
 	@BeforeClass
 	public static void setUpClass() {

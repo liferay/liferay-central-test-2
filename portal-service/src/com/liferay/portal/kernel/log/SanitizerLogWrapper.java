@@ -27,7 +27,7 @@ import java.util.List;
  * @author Tomas Polesovsky
  * @author Raymond Augé
  */
-public class SanitizingLogWrapper extends LogWrapper {
+public class SanitizerLogWrapper extends LogWrapper {
 
 	public static void init() {
 		_LOG_SANITIZER_ENABLED = GetterUtil.getBoolean(
@@ -60,7 +60,7 @@ public class SanitizingLogWrapper extends LogWrapper {
 		}
 	}
 
-	public SanitizingLogWrapper(Log log) {
+	public SanitizerLogWrapper(Log log) {
 		super(log);
 	}
 
