@@ -657,7 +657,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *             inherited organization groups, and site groups
 	 * @throws     PortalException if a portal exception occurred
 	 * @throws     SystemException if a system exception occurred
-	 * @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups()}
+	 * @deprecated As of 6.2.0, replaced by {@link #getUserSitesGroups}
 	 */
 	@Override
 	public List<Group> getUserSites() throws PortalException, SystemException {
