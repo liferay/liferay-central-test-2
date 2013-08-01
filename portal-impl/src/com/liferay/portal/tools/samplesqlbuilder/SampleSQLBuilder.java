@@ -232,6 +232,7 @@ public class SampleSQLBuilder {
 
 	protected CharPipe generateSQL() {
 		final CharPipe charPipe = new CharPipe(_PIPE_BUFFER_SIZE);
+
 		final Writer writer = createUnsyncBufferedWriter(charPipe.getWriter());
 
 		Thread thread = new Thread() {
