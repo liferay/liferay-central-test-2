@@ -105,6 +105,7 @@ else {
 </liferay-ui:error>
 
 <aui:fieldset>
+
 	<!-- LPS-38289 -->
 
 	<input class="hide" />
